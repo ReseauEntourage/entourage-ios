@@ -36,7 +36,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9y5-kR-TIO">
-                                <rect key="frame" x="16" y="139" width="343" height="390"/>
+                                <rect key="frame" x="16" y="142.5" width="343" height="383"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qfb-vd-Qft">
                                         <rect key="frame" x="10" y="10" width="30" height="30"/>
@@ -56,7 +56,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUT-tg-Gu5">
-                                        <rect key="frame" x="0.0" y="325" width="343" height="57"/>
+                                        <rect key="frame" x="0.0" y="327" width="343" height="57"/>
                                         <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="0SE-Yr-6ub"/>
@@ -79,10 +79,10 @@
                                         </variation>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KD5-hk-7Tx" customClass="OTTextWithCount">
-                                        <rect key="frame" x="0.0" y="121" width="343" height="204"/>
+                                        <rect key="frame" x="0.0" y="121" width="343" height="206"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="204" id="io9-Dj-vcd"/>
+                                            <constraint firstAttribute="height" constant="206" id="io9-Dj-vcd"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -93,7 +93,7 @@
                                     <constraint firstItem="d10-JS-Nat" firstAttribute="leading" secondItem="Qfb-vd-Qft" secondAttribute="leading" constant="5" id="Dx0-LH-lyO"/>
                                     <constraint firstItem="KD5-hk-7Tx" firstAttribute="leading" secondItem="9y5-kR-TIO" secondAttribute="leading" id="JQg-le-Jmt"/>
                                     <constraint firstItem="KD5-hk-7Tx" firstAttribute="top" secondItem="d10-JS-Nat" secondAttribute="bottom" constant="30" id="NhC-oO-zYe"/>
-                                    <constraint firstItem="zUT-tg-Gu5" firstAttribute="bottom" secondItem="9y5-kR-TIO" secondAttribute="bottomMargin" id="SD4-0K-x30"/>
+                                    <constraint firstItem="zUT-tg-Gu5" firstAttribute="bottom" secondItem="9y5-kR-TIO" secondAttribute="bottomMargin" constant="9" id="SD4-0K-x30"/>
                                     <constraint firstItem="zUT-tg-Gu5" firstAttribute="leading" secondItem="9y5-kR-TIO" secondAttribute="leading" id="T9n-2g-xCj"/>
                                     <constraint firstAttribute="trailing" secondItem="zUT-tg-Gu5" secondAttribute="trailing" id="gI5-3P-9mx"/>
                                     <constraint firstAttribute="trailing" secondItem="d10-JS-Nat" secondAttribute="trailing" constant="20" id="mBd-3G-U1f"/>
@@ -121,6 +121,7 @@
                         <viewLayoutGuide key="safeArea" id="OYG-GD-U5P"/>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="Qfb-vd-Qft" id="aYb-OX-glr"/>
                         <outlet property="closeKeyboardBehavior" destination="PJF-TK-XD5" id="Vck-tA-yOa"/>
                         <outlet property="completionButton" destination="zUT-tg-Gu5" id="YEu-qQ-O7T"/>
                         <outlet property="descriptionLabel" destination="d10-JS-Nat" id="bep-Zn-BhI"/>
@@ -136,7 +137,7 @@
                 </customObject>
                 <customObject id="PJF-TK-XD5" customClass="OTCloseKeyboardOnTapBehavior"/>
             </objects>
-            <point key="canvasLocation" x="5890" y="130"/>
+            <point key="canvasLocation" x="5888.8000000000002" y="129.98500749625188"/>
         </scene>
     </scenes>
     <resources>

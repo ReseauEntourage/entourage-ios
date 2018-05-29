@@ -29,8 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
+
     [self.navigationController presentTransparentNavigationBar];
     
     self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
@@ -56,7 +55,7 @@
         
         self.bgImage.hidden = YES;
         self.logoTitle.hidden = YES;
-        self.logo.image = [ApplicationTheme applicationLogo];
+        self.logo.image = [OTAppAppearance applicationLogo];
     }
 }
 

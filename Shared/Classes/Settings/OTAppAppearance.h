@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface OTAppAppearance : NSObject
-+ (NSString*)aboutUrlString;
++ (NSString *)aboutUrlString;
 + (NSString *)welcomeDescription;
-+ (UIImage*)welcomeLogo;
++ (UIImage *)welcomeLogo;
++ (UIImage *)applicationLogo;
 + (NSString *)userProfileNameDescription;
 + (NSString *)userProfileEmailDescription;
 + (NSString *)notificationsRightsDescription;
@@ -21,4 +22,11 @@
 + (NSString *)noMapFeedsDescription;
 + (NSString *)extendSearchParameterDescription;
 + (NSString *)extendMapSearchParameterDescription;
++ (NSString*)userPhoneNumberNotFoundMessage;
++ (NSString *)userActionsTitle;
++ (NSString*)numberOfUserActionsTitle;
++ (NSString*)numberOfUserActionsValueTitle:(OTUser *)user;
++ (NSString*)userPrivateCirclesSectionTitle:(OTUser*)user;
++ (UIColor *)leftTagColor:(OTUser*)user;
++ (UIColor *)rightTagColor:(OTUser*)user;
 @end

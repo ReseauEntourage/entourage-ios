@@ -15,6 +15,7 @@ import Foundation
     @IBOutlet weak var completionButton: UIButton!
     @IBOutlet weak var tapBehavior: OTTapViewBehavior!
     @IBOutlet weak var closeKeyboardBehavior: OTCloseKeyboardOnTapBehavior!
+    @IBOutlet weak var closeButton: UIButton!
     
     @objc lazy var labelString: NSMutableAttributedString = {
         return NSMutableAttributedString.init(string: "")
@@ -38,7 +39,7 @@ import Foundation
     override func viewDidLoad() {
         super.viewDidLoad()
         IQKeyboardManager.shared().isEnableAutoToolbar = false
-        closeKeyboardBehavior.inputViews = [textWithCount.textView]
+        closeKeyboardBehavior.inputViews = [textWithCount.textView!]
         textWithCount.maxLength = 200
         
         setupUI()
@@ -63,6 +64,11 @@ import Foundation
         textWithCount.placeholderLargeColor = UIColor.appGreyish()
         textWithCount.placeholder = textFieldPlaceholder
         completionButton.addTarget(self, action: #selector(sendMail), for: .touchUpInside)
+        completionButton.backgroundColor = ApplicationTheme.shared().backgroundThemeColor
+        closeButton.tintColor = ApplicationTheme.shared().secondaryNavigationBarTintColor
+        let closeImage = closeButton.image(for: UIControlState.normal)
+        let tintImage = closeImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        closeButton.setImage(tintImage, for: UIControlState.normal)
     }
     
     @objc private func sendMail() {

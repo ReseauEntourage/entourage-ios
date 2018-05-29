@@ -23,13 +23,16 @@
 #import "OTUserTableConfigurator.h"
 #import "OTMailSenderBehavior.h"
 #import "OTAssociationDetailsViewController.h"
+#import "OTMembersCell.h"
+#import "OTPrivateCircleCell.h"
 #import "entourage-Swift.h"
 
 typedef NS_ENUM(NSInteger) {
     SectionTypeSummary,
     SectionTypeAssociations,
     SectionTypeVerification,
-    SectionTypeEntourages
+    SectionTypeEntourages,
+    SectionTypePrivateCircles
 } SectionType;
 
 @interface OTUserViewController ()
@@ -57,8 +60,8 @@ typedef NS_ENUM(NSInteger) {
     self.mailSender.successMessage = OTLocalizedString(@"user_reported");
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 1000;
-    NSNumber *userId = self.userId;
     
+    NSNumber *userId = self.userId;
     if (!userId) {
         userId = self.user.sid;
     }
@@ -115,7 +118,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)showReportButton {
-    UIBarButtonItem *reportButton = [UIBarButtonItem createWithImageNamed:@"flag" withTarget:self andAction:@selector(sendReportMail)];
+    UIBarButtonItem *reportButton = [UIBarButtonItem createWithImageNamed:@"flag" withTarget:self andAction:@selector(sendReportMail) changeTintColor:YES];
     [self.navigationItem setRightBarButtonItem:reportButton];
 }
 
@@ -160,8 +163,10 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if(self.user == nil)
+    if (self.user == nil) {
         return 0;
+    }
+    
     return self.sections.count;
 }
 
@@ -175,6 +180,9 @@ typedef NS_ENUM(NSInteger) {
             return 1;
         case SectionTypeAssociations:
             return self.associationRows.count;
+        case SectionTypePrivateCircles: {
+            return self.user.privateCircles.count > 0 ? self.user.privateCircles.count + 1 : 0;
+        }
         default:
             return 0;
     }
@@ -223,9 +231,14 @@ typedef NS_ENUM(NSInteger) {
             cellID = indexPath.row == 0 ? @"TitleProfileCell" : @"AssociationProfileCell";
             break;
         }
+        case SectionTypePrivateCircles: {
+            cellID = indexPath.row == 0 ? @"TitleProfileCell" : @"OTPrivateCircleCell";
+            break;
+        }
         default:
             break;
     }
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     switch ([self.sections[indexPath.section] intValue]) {
         case SectionTypeSummary: {
@@ -263,20 +276,39 @@ typedef NS_ENUM(NSInteger) {
             }
             break;
         }
+        case SectionTypePrivateCircles: {
+            if (indexPath.row == 0) {
+                [self setupTitleProfileCell:cell withTitle:[OTAppAppearance userPrivateCirclesSectionTitle:self.user]];
+                break;
+            } else {
+                OTUserMembershipListItem *privateCircleItem = [self.user.privateCircles objectAtIndex:indexPath.row - 1];
+                OTPrivateCircleCell *privateCircleCell = (OTPrivateCircleCell*)cell;
+                [privateCircleCell configureWithItem:privateCircleItem];
+                return privateCircleCell;
+            };
+        }
     }
     return cell;
 }
 
 #define SUMMARY_AVATAR 1
 #define SUMMARY_AVATAR_SHADOW 10
+
+#define SUMMARY_RIGHT_CONTAINER_TAG 11
+#define SUMMARY_RIGHT_TAG 12
+#define SUMMARY_LEFT_CONTAINER_TAG 13
+#define SUMMARY_LEFT_TAG 14
+
 #define SUMMARY_NAME 2
 #define SUMMARY_DESCRIPTION 3
 #define SUMMARY_TITLE 6
+#define HEADER_BG_VIEW 20
 
 #define VERIFICATION_LABEL 1
 #define VERIFICATION_STATUS 2
 
 #define NOENTOURAGES 1
+#define NOENTOURAGESTITLE 2
 
 #define ASSOCIATION_TITLE 1
 #define ASSOCIATION_IMAGE 2
@@ -302,7 +334,19 @@ typedef NS_ENUM(NSInteger) {
     UILabel *aboutMeLabel = [cell viewWithTag:SUMMARY_DESCRIPTION];
     aboutMeLabel.text = self.user.about;
     
-    UIView *headerBgView = [cell viewWithTag:20];
+    UIView *rightTagContainer = [cell viewWithTag:SUMMARY_RIGHT_CONTAINER_TAG];
+    rightTagContainer.backgroundColor = [OTAppAppearance rightTagColor:self.user];
+    
+    UIView *leftTagContainer = [cell viewWithTag:SUMMARY_LEFT_CONTAINER_TAG];
+    leftTagContainer.backgroundColor = [OTAppAppearance leftTagColor:self.user];
+    
+    UILabel *rightTagLabel = [cell viewWithTag:SUMMARY_RIGHT_TAG];
+    rightTagLabel.text = self.user.rightTag;
+    
+    UILabel *leftTagLabel = [cell viewWithTag:SUMMARY_LEFT_TAG];
+    leftTagLabel.text = self.user.leftTag;
+    
+    UIView *headerBgView = [cell viewWithTag:HEADER_BG_VIEW];
     headerBgView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
@@ -325,12 +369,9 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)setupEntouragesProfileCell:(UITableViewCell *)cell {
     UILabel *noEntouragesLabel = [cell viewWithTag:NOENTOURAGES];
-    if ([self.user isPro]) {
-        noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.tourCount.intValue];
-    }
-    else {
-        noEntouragesLabel.text = [NSString stringWithFormat:@"%d", self.user.entourageCount.intValue];
-    }
+    UILabel *noEntouragesTitleLabel = [cell viewWithTag:NOENTOURAGESTITLE];
+    noEntouragesTitleLabel.text = [OTAppAppearance numberOfUserActionsTitle];
+    noEntouragesLabel.text = [OTAppAppearance numberOfUserActionsValueTitle:self.user];
 }
 
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell
@@ -369,19 +410,31 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)configureSections {
     NSMutableArray *mSections = [NSMutableArray arrayWithObject:@(SectionTypeSummary)];
-    if((self.user.organization && [self.user.type isEqualToString:USER_TYPE_PRO]) || self.user.partner)
-       [mSections addObject:@(SectionTypeAssociations)];
+    
+    if ([OTAppConfiguration shouldShowNumberOfUserAssociationsSection:self.user]) {
+        [mSections addObject:@(SectionTypeAssociations)];
+    }
+    
     [mSections addObject:@(SectionTypeVerification)];
-    if([self.user.type isEqualToString:USER_TYPE_PRO])
+    
+    if ([OTAppConfiguration shouldShowNumberOfUserPrivateCirclesSection:self.user]) {
+        [mSections addObject:@(SectionTypePrivateCircles)];
+    }
+    
+    if ([OTAppConfiguration shouldShowNumberOfUserActionsSection:self.user]) {
         [mSections addObject:@(SectionTypeEntourages)];
+    }
+    
     self.sections = mSections;
 }
 
 - (void)showPartnerDetails {
-    if(self.user.sid.intValue == self.currentUser.sid.intValue)
+    if (self.user.sid.intValue == self.currentUser.sid.intValue) {
         [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
-    else
+    }
+    else {
         [self performSegueWithIdentifier:@"AssociationDetails" sender:self];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

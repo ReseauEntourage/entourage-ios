@@ -72,6 +72,7 @@
 "menu_application_usage" = "Questions fréquentes";
 "menu_atd_partner" = "Agir avec Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
+"menu_donnation" = "Donnez vos retours rapides";
 
 // AboutItems
 "about_tutorial" = "Voir le tutoriel";
@@ -212,6 +213,7 @@ Proposez une structure";
 
 // Entourage
 "entourages" = "Entourages";
+"numberOfUserActions" = "Nombre d'entourages";
 "myLocation" = "Ma position";
 "category" = "Catégorie";
 "searchLocationPlaceholder" = "Chercher ou déplacer la carte";
@@ -288,16 +290,11 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "user_profile_error" = "Erreur lors de la récupération du profil";
 "user_edit_email" = "E-mail";
 "user_edit_quartier" = "Quartier";
-"profile" = "Profil";
-"lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit: créez un compte
 
-Membres d'une association utilisatrice d'Entourage, contactez associations@entourage.social";
-"report_user_title" = "
-Vous allez signaler cet utilisateur à nos administrateurs.
- 
-";
-"report_user_attributed_title" = "Merci de préciser pourquoi
-vous signalez cette personne :";
+"profile" = "Profil";
+"lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit: créez un compte\n\nMembres d'une association utilisatrice d'Entourage, contactez associations@entourage.social";
+"report_user_title" = "Vous allez signaler cet utilisateur à nos administrateurs.\n";
+"report_user_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cette personne :";
 "report_user_button" = "Envoyer";
 "report_user_placeholder" = "Ecrivez quelque chose…";
 
@@ -389,6 +386,12 @@ vous signalez cette personne :";
 "mail_sent" = "Mail envoyé";
 "mail_send_failure" = "Le mail n’a pu être envoyé";
 "mail_signal_subject" = "Signalement d’un activité qui pose problème: \"%@\" créé par %@";
+
+// Tags
+"not_validated" = "En attente";
+"visitor" = "Voisineur";
+"visited" = "Voisiné";
+"coordinator" = "Animateur";
 
 // associations
 "select_association_title" = "SOUTENIR";

@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "OTOrganization.h"
 #import "OTAssociation.h"
+#import "OTUserMembership.h"
 
 extern NSString *const kKeyToken;
+extern NSString *const kCoordinatorUserTag;
+extern NSString *const kNotValidatedUserTag;
+extern NSString *const kVisitorUserTag;
+extern NSString *const kVisitedUserTag;
 
 #define USER_TYPE_PRO       @"pro"
 #define USER_TYPE_PUBLIC    @"public"
@@ -34,6 +39,8 @@ extern NSString *const kKeyToken;
 @property (strong, nonatomic) NSString *about;
 @property (strong, nonatomic) OTOrganization *organization;
 @property (strong, nonatomic) OTAssociation *partner;
+@property (strong, nonatomic) NSArray *roles;
+@property (nonatomic, readonly) NSArray *memberships;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;
@@ -42,5 +49,18 @@ extern NSString *const kKeyToken;
  * Returns true if it's a pro user
  */
 - (BOOL)isPro;
+
+/*
+ * Returns the name of the role to be displayed in the left side of the user's fullname
+ */
+- (NSString*)leftTag;
+
+/*
+ * Returns the name of the role to be displayed in the rigt side of the user's fullname
+ */
+- (NSString*)rightTag;
+
+- (NSArray <OTUserMembershipListItem*>*)privateCircles;
+- (NSArray <OTUserMembershipListItem*>*)neighborhoods;
 
 @end

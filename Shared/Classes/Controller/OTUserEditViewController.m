@@ -67,7 +67,9 @@ typedef NS_ENUM(NSInteger) {
     [self setupCloseModalWithTintColor];
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+    
     self.sections = @[@(SectionTypeSummary), @(SectionTypeAbout), @(SectionTypeAssociations), @(SectionTypeInfoPrivate), @(SectionTypeDelete)];
+    
     self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:@kNotificationAboutMeUpdated object:nil];

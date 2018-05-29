@@ -149,6 +149,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="CA0-nS-LA9" id="Mbs-Lj-mAL"/>
                         <outlet property="nextStatusBehavior" destination="6Py-dS-mI1" id="dXj-05-i95"/>
                         <outlet property="shareBtn" destination="W4U-7V-yKD" id="Qmy-IW-wYb"/>
                         <outlet property="shareItem" destination="RWJ-VL-kwf" id="4oZ-bK-Ots"/>

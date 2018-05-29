@@ -18,6 +18,10 @@
                            andAction:(SEL)action
                              andFont:(NSString *)font
                              colored:(UIColor *)color;
++ (UIBarButtonItem *)createWithImageNamed:(NSString *)imageName
+                               withTarget:(id)target
+                                andAction:(SEL)action
+                          changeTintColor:(BOOL)changeTintColor;
 - (void)changeEnabled:(BOOL)enabled;
 
 @end
