@@ -73,6 +73,7 @@
     self.cellProvider.feedItem = self.feedItem;
 
     self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
+//    [self configureTitleView];
     [self setupToolbarButtons];
     [self reloadMessages];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
@@ -92,6 +93,18 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+}
+
+- (void)configureTitleView {
+    UIView *titleView = [[UIView alloc] init];
+    id iconName = [[[OTFeedItemFactory createFor:self.feedItem] getUI] categoryIconSource];
+    id titleString = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
+    UIImageView *icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:iconName]];
+    UILabel *title = [[UILabel alloc] init];
+    title.text = titleString;
+    [titleView addSubview:icon];
+    [titleView addSubview:title];
+    self.navigationItem.titleView = titleView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
