@@ -128,6 +128,14 @@
     return OTLocalizedString(@"no_map_feeds_increase_radius");
 }
 
++ (NSString*)userPhoneNumberNotFoundMessage {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_lost_code_phone_does_not_exist");
+    }
+    
+    return OTLocalizedString(@"lost_code_phone_does_not_exist");
+}
+
 + (NSString*)userActionsTitle {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_entourages");

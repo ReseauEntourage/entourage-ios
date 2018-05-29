@@ -10,7 +10,7 @@
 
 "pfp_userNameDescriptionText" = "Si vous êtes voisiné(e), seuls votre prénom et la première lettre de votre nom apparaitront.";
 "pfp_userEmailDescriptionText" = "Nous vous enverrons uniquement des informations de votre voisinage";
-"pfp_userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\n Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
+"pfp_userNotificationsDescriptionText" = "Pour vous coordonner entre voisineurs et voisinés, soyez notifié(e) des nouveaux messages reçus et de sorties à côté de chez vous.";
 
 "pfp_geolocalisationDescriptionText" = "Voisin-Age, c’est utile parce que c’est local!\nParticipez à la vie du réseau dans votre quartier. Pour découvrir les nouvelles sorties de votre voisinage, activez la géolocalisation.";
 
@@ -28,3 +28,5 @@
 
 "pfp_visitedPrivateCirclesSectionTitle" = "Je suis voisiné(e) par";
 "pfp_visitorPrivateCirclesSectionTitle" = "Je voisine";
+
+"pfp_lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit : contactez voisinage-test@petitsfreresdespauvres.fr";

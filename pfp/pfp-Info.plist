@@ -90,13 +90,13 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Pour envoyer des invitations au réseau Voisin-Age</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Pour afficher les POIs, vos rencontres, etc....</string>
+	<string>Pour vous montrer les voisinages à proximité</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Pour afficher les POIs, vos rencontres, etc....</string>
+	<string>Pour vous montrer les voisinages à proximité</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Pour afficher les POIs, vos rencontres, etc....</string>
+	<string>Pour vous montrer les voisinages à proximité</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Pour afficher les POIs à proximité</string>
+	<string>Pour vous montrer les voisinages à proximité</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Pour saisir la description des POIs</string>
 	<key>NSPhotoLibraryUsageDescription</key>

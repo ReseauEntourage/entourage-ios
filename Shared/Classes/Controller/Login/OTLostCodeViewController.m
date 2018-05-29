@@ -103,9 +103,10 @@
         NSString *alertTitle = OTLocalizedString(@"error");
         NSString *alertMessage = OTLocalizedString(@"requestNotSent");
         NSString *status = [error readErrorStatus];
+        
         if ([status isEqualToString:@"404"]) {
             alertTitle = @"";
-            alertMessage = OTLocalizedString(@"lost_code_phone_does_not_exist");
+            alertMessage = [OTAppAppearance userPhoneNumberNotFoundMessage];
         }
         [[[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
     }];
