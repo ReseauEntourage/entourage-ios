@@ -64,6 +64,14 @@
     [OTLogger logEvent:@"UserProfileClick"];
     [self.userProfileBehavior showProfile:self.feedItem.author.uID];
 }
+- (IBAction)invite:(id)sender {
+    id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
+    if(![stateInfo canChangeEditState])
+        return;
+     if ([stateInfo canInvite]) {
+         [self.inviteBehavior startInvite];
+     }
+}
 
 #pragma mark - navigation
 

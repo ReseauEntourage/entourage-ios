@@ -11,6 +11,7 @@
 #import "OTFeedItemJoiner.h"
 #import "OTMemberCountCell.h"
 #import "OTMembersCell.h"
+#import "OTFeedItemFactory.h"
 
 #define DEFAULT_LEFT_INSET 65
 
@@ -46,6 +47,14 @@
     if([item isKindOfClass:[OTFeedItemJoiner class]]) {
         OTFeedItemJoiner *joiner = (OTFeedItemJoiner *)item;
         [self.userProfileBehavior showProfile:joiner.uID];
+    }
+    else if(indexPath.row == 3) {
+        id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:item] getStateInfo];
+        if(![stateInfo canChangeEditState])
+            return;
+        if ([stateInfo canInvite]) {
+            [self.inviteBehavior startInvite];
+        }
     }
 }
 

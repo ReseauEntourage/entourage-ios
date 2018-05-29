@@ -1077,8 +1077,52 @@
                                             <outlet property="lblCount" destination="uUY-PA-X6Q" id="xmz-sK-jlw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberCell" rowHeight="54" id="5MT-In-DTi" customClass="OTMembersCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InviteCell" rowHeight="54" id="jbp-9q-c2b">
                                         <rect key="frame" x="0.0" y="239" width="414" height="54"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jbp-9q-c2b" id="hMv-WP-ecH">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="53.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vbu-ce-ztZ">
+                                                    <rect key="frame" x="16" y="9.6666666666666643" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="0rP-gN-h7D"/>
+                                                        <constraint firstAttribute="width" constant="35" id="HpH-qc-LmB"/>
+                                                    </constraints>
+                                                    <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" image="inviteplus"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="17"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="invite:" destination="9Ay-63-LSU" eventType="touchUpInside" id="iYs-7O-8pm"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="inviter un ami" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZH2-PB-6F3">
+                                                    <rect key="frame" x="66" y="0.0" width="313" height="54"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="53.5" id="R8o-8e-0Fg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
+                                                    <color key="textColor" red="0.94901960784313721" green="0.396078431372549" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZH2-PB-6F3" firstAttribute="leading" secondItem="Vbu-ce-ztZ" secondAttribute="trailing" constant="15" id="ELZ-vP-cSF"/>
+                                                <constraint firstItem="Vbu-ce-ztZ" firstAttribute="leading" secondItem="hMv-WP-ecH" secondAttribute="leading" constant="16" id="Fhz-TH-Cn5"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ZH2-PB-6F3" secondAttribute="trailing" constant="15" id="V9o-pw-OLc"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZH2-PB-6F3" secondAttribute="bottom" id="Y99-Fv-VKp"/>
+                                                <constraint firstItem="ZH2-PB-6F3" firstAttribute="top" secondItem="hMv-WP-ecH" secondAttribute="top" id="eql-YZ-txN"/>
+                                                <constraint firstItem="Vbu-ce-ztZ" firstAttribute="centerY" secondItem="hMv-WP-ecH" secondAttribute="centerY" id="pvE-5j-dzr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberCell" rowHeight="54" id="5MT-In-DTi" customClass="OTMembersCell">
+                                        <rect key="frame" x="0.0" y="293" width="414" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5MT-In-DTi" id="MFx-C1-E6n">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="53.666666666666664"/>
@@ -1212,6 +1256,7 @@
                     <connections>
                         <outlet property="cellProvider" destination="qjW-nh-nZJ" id="ttK-OL-tjs"/>
                         <outlet property="dataSource" destination="1ju-xM-ggw" id="QGF-8g-O4D"/>
+                        <outlet property="inviteBehavior" destination="Wa5-cU-lsc" id="dBr-rV-BMU"/>
                         <outlet property="userProfileBehavior" destination="2Hm-sV-es8" id="b2N-Ru-5bw"/>
                     </connections>
                 </customObject>
@@ -1803,6 +1848,7 @@
         <image name="addressBookSquare" width="22" height="22"/>
         <image name="botEntourage" width="36" height="36"/>
         <image name="invitationSquare" width="56" height="56"/>
+        <image name="inviteplus" width="64" height="64"/>
         <image name="phoneSquare" width="22" height="22"/>
         <image name="share_native" width="22" height="22"/>
         <image name="user" width="100" height="100"/>
@@ -1810,12 +1856,12 @@
         <image name="whiteClose" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TAD-d7-tmZ"/>
-        <segue reference="zFK-Fj-hWR"/>
-        <segue reference="nan-zV-dem"/>
-        <segue reference="ffc-Pt-QuG"/>
-        <segue reference="8gM-o4-A6h"/>
-        <segue reference="r9m-eb-lob"/>
-        <segue reference="5BX-au-xTN"/>
+        <segue reference="fUf-PJ-SgA"/>
+        <segue reference="qbj-7b-m5F"/>
+        <segue reference="TWk-BX-Lb1"/>
+        <segue reference="Cgj-Wq-qez"/>
+        <segue reference="DLP-On-QzP"/>
+        <segue reference="0Fj-Nh-lj4"/>
+        <segue reference="Rwq-4K-0sd"/>
     </inferredMetricsTieBreakers>
 </document>
