@@ -38,6 +38,9 @@ final class OTMenuHeaderView: UIView {
         addSubview(editLabel)
         addSubview(nameLabel)
         
+        profileBtn.layer.cornerRadius = 50
+        profileBtn.clipsToBounds = true
+        
         self.backgroundColor = .white
         profileBtn.snp.makeConstraints {
             

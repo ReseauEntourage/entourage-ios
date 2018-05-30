@@ -77,7 +77,7 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.firstNameTextField becomeFirstResponder];
     
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

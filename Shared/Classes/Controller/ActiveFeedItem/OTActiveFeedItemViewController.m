@@ -72,7 +72,7 @@
     self.dataSource.tableView.estimatedRowHeight = 1000;
     self.cellProvider.feedItem = self.feedItem;
 
-    self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
+    [self configureTitleView];
     [self setupToolbarButtons];
     [self reloadMessages];
     [[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
@@ -92,6 +92,24 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+}
+
+- (void)configureTitleView {
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+    id iconName = [[[OTFeedItemFactory createFor:self.feedItem] getUI] categoryIconSource];
+    id titleString = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle];
+    UIButton *iconButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    iconButton.backgroundColor = UIColor.whiteColor;
+    iconButton.layer.cornerRadius = 20;
+    [iconButton setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
+    iconButton.userInteractionEnabled = NO;
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 130, 40)];
+    title.text = titleString;
+    title.textColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    [titleView addSubview:iconButton];
+    [titleView addSubview:title];
+    self.navigationItem.titleView = titleView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -144,37 +162,20 @@
     NSMutableArray *rightButtons = [NSMutableArray new];
     
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
-    [more setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-          forState:UIControlStateNormal];
-    more.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    [more addTarget:self.statusChangedBehavior
-             action:@selector(startChangeStatus) forControlEvents:UIControlEventTouchUpInside];
     [more setFrame:CGRectMake(0, 0, 30, 30)];
+    [more setImage:[UIImage imageNamed:@"info"]
+          forState:UIControlStateNormal];
+    [more addTarget:self
+             action:@selector(showMap)
+   forControlEvents:UIControlEventTouchUpInside];
     
-    OTBarButtonView *moreBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
-    [moreBarBtnView setPosition:BarButtonViewPositionRight];
-    [moreBarBtnView addSubview:more];
+    OTBarButtonView *infoBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
+    [infoBarBtnView setPosition:BarButtonViewPositionRight];
+    [infoBarBtnView addSubview:more];
     
-    UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:moreBarBtnView];
+    UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:infoBarBtnView];
+    [rightButtons addObject:infoButton];
     
-    [rightButtons addObject:optionsButton];
-    
-    if ([stateInfo canInvite]) {
-        UIButton *plus = [UIButton buttonWithType:UIButtonTypeCustom];
-        [plus setImage:[[UIImage imageNamed:@"userPlus"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-              forState:UIControlStateNormal];
-        plus.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-        [plus addTarget:self.inviteBehavior
-                 action:@selector(startInvite) forControlEvents:UIControlEventTouchUpInside];
-        [plus setFrame:CGRectMake(0, 0, 30, 30)];
-        
-        OTBarButtonView *plusBarBtnView = [[OTBarButtonView alloc] initWithFrame:plus.frame];
-        [plusBarBtnView setPosition:BarButtonViewPositionRight];
-        [plusBarBtnView addSubview:plus];
-        
-        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plusBarBtnView];
-        [rightButtons addObject:plusButton];
-    }
     [self setRightBarButtonView:rightButtons];
 }
 

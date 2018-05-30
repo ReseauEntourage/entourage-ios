@@ -103,13 +103,13 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)showSaveButton {
 
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     
     UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save")
                                                         withTarget:self
                                                          andAction:@selector(updateUser)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[ApplicationTheme shared].backgroundThemeColor];
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:saveButton];
 }
 
@@ -432,7 +432,7 @@ typedef NS_ENUM(NSInteger) {
     titleLabel.text = title;
     UITextField *nameTextField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
     nameTextField.text = text;
-    nameTextField.tintColor = [UIColor appOrangeColor];
+    nameTextField.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
 }
 
 - (NSString *)editedTextAtIndexPath:(NSIndexPath *)indexPath withDefault:(NSString *)defaultValue {

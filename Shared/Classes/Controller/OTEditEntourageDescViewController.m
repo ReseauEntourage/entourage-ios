@@ -39,7 +39,7 @@
                                                         withTarget:self
                                                          andAction:@selector(doneEdit)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[UIColor appOrangeColor]];
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
     self.txtDescription.textView.text = self.currentDescription;
 }
