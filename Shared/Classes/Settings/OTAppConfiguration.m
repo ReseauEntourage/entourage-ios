@@ -265,21 +265,21 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
     menuNavController.tabBarItem.title = @"menu";
-    menuNavController.tabBarItem.image = [UIImage imageNamed:@"menu_tab"];
+    menuNavController.tabBarItem.image = [[UIImage imageNamed:@"menu_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     menuNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"menu_tab_selected"];
     
     // Proximity Map Tab
     OTMainViewController *mainMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
     UINavigationController *mainMapNavController = [[UINavigationController alloc] initWithRootViewController:mainMapViewController];
     mainMapNavController.tabBarItem.title = @"à proximité";
-    mainMapNavController.tabBarItem.image = [UIImage imageNamed:@"map_tab"];
+    mainMapNavController.tabBarItem.image = [[UIImage imageNamed:@"map_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     mainMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"map_tab_selected"];
     
     // Messages Tab
     OTMyEntouragesViewController *messagesViewController = [[UIStoryboard myEntouragesStoryboard] instantiateViewControllerWithIdentifier:@"OTMyEntouragesViewController"];
     UINavigationController *messagesNavController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
     messagesNavController.tabBarItem.title = @"messagerie";
-    messagesNavController.tabBarItem.image = [UIImage imageNamed:@"messages_tab"];
+    messagesNavController.tabBarItem.image = [[UIImage imageNamed:@"messages_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     messagesNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"messages_tab_selected"];
     
     NSArray *controllers = @[];
