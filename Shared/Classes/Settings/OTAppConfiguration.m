@@ -297,8 +297,11 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)configureApplicationAppearance
 {
-    UIColor *primaryNavigationBarTintColor = [UIColor whiteColor];
-    UIColor *secondaryNavigationBarTintColor = [UIColor appOrangeColor];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    
+    UIColor *primaryNavigationBarTintColor = [UIColor appOrangeColor];
+    UIColor *secondaryNavigationBarTintColor = [UIColor whiteColor];
     UIColor *backgroundThemeColor = [UIColor appOrangeColor];
     UIColor *titleColor = [UIColor appGreyishBrownColor];
     UIColor *subtitleColor = [UIColor appGreyishColor];
@@ -306,8 +309,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         backgroundThemeColor = [UIColor pfpBlueColor];
-        primaryNavigationBarTintColor = [UIColor whiteColor];
-        secondaryNavigationBarTintColor = [UIColor pfpBlueColor];
+        primaryNavigationBarTintColor = [UIColor pfpBlueColor];
+        secondaryNavigationBarTintColor = [UIColor whiteColor];
         titleColor = [UIColor pfpGrayTextColor];
         tableViewBgColor = [UIColor pfpTableBackgroundColor];
         subtitleColor = [UIColor pfpSubtitleBlueColor];
@@ -325,11 +328,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[ApplicationTheme shared] setSubtitleLabelColor: subtitleColor];
     
     UINavigationBar.appearance.backgroundColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.barTintColor = primaryNavigationBarTintColor;
     UINavigationBar.appearance.tintColor = secondaryNavigationBarTintColor;
     
     UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
-    UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : titleColor };
-    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : titleColor,
+    UIColor *navigationBarTextColor = [UIColor whiteColor];
+    UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : navigationBarTextColor };
+    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : navigationBarTextColor,
                                                           NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
     
     UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
@@ -345,13 +350,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UITabBar *currentTabBar = tabBarController.tabBar;
     CGSize size = CGSizeMake(currentTabBar.frame.size.width / currentTabBar.items.count, currentTabBar.frame.size.height);
     currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
-    currentTabBar.unselectedItemTintColor = [UIColor whiteColor];
 }
 
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
 {
+    navigationController.automaticallyAdjustsScrollViewInsets = NO;
     navigationController.navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
     navigationController.navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
+    navigationController.navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
     
     UIFont *selectedTabBarFont = [UIFont fontWithName:@"SFUIText-Bold" size:12];
     NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],

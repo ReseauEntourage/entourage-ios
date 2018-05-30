@@ -72,6 +72,7 @@
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 130, 40)];
     title.text = titleString;
+    title.textColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [titleView addSubview:iconButton];
     [titleView addSubview:title];
     self.navigationItem.titleView = titleView;

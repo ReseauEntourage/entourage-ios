@@ -62,13 +62,13 @@
         [self.navigationController.navigationBar addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         [self.navigationItem setRightBarButtonItem:menuButton];
         
-        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     }
     return menuButton;
 }
 
 - (UIBarButtonItem *)setupChatsButtonWithTarget:(id)target andSelector:(SEL)selector {
-    UIImage *chatsImage = [[UIImage imageNamed:@"discussion"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *chatsImage = [[UIImage imageNamed:@"discussion"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0,0,chatsImage.size.width, chatsImage.size.height);
     [button setBackgroundImage:chatsImage forState:UIControlStateNormal];
@@ -89,7 +89,7 @@
         [menuButton setAction:@selector(dismissModal)];
         
         [self.navigationItem setLeftBarButtonItem:menuButton];
-        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
         
         return  menuButton;
     }
@@ -98,20 +98,21 @@
 }
 
 - (UIBarButtonItem*)setupCloseModalWithImageNamed:(NSString *)imageName {
-    UIImage *menuImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *menuImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
     menuButton.image = menuImage;
+    menuButton.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [menuButton setTarget:self];
     [menuButton setAction:@selector(dismissModal)];
     
     [self.navigationItem setLeftBarButtonItem:menuButton];
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     
     return  menuButton;
 }
 
 - (UIBarButtonItem*)setupCloseModal {
-    return [self setupCloseModalWithImageNamed:@"close.png"];
+    return [self setupCloseModalWithImageNamed:@"close.png" applyTintColor:YES];
 }
 
 - (UIBarButtonItem*)setupCloseModalWithTintColor {

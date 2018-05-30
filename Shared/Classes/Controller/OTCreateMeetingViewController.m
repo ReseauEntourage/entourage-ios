@@ -75,13 +75,13 @@
 - (void)setupUI {
     [self setupCloseModal];
 
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                             withTarget:self
                                                              andAction:@selector(sendEncounter:)
                                                                andFont:@"SFUIText-Bold"
-                                                               colored:[UIColor appOrangeColor]];
+                                                               colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
         [self.navigationItem setRightBarButtonItem:menuButton];
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];

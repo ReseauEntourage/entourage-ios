@@ -161,16 +161,20 @@
 
 - (void)configureUIBarButtonItems {
     UIImage *backImage = [[UIImage imageNamed:@"back.png"]
-                          imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                          imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
     [backButton setImage:backImage];
     [backButton setTarget:self];
     [backButton setAction:@selector(closeWebview)];
+    backButton.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
     [self.navigationItem setLeftBarButtonItem:backButton];
     
     NSMutableArray *rightButtons = [NSMutableArray new];
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
-    [more setImage:[UIImage imageNamed:@"more"]
+    more.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
+    UIImage *moreImage = [[UIImage imageNamed:@"more"]
+                          imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [more setImage:moreImage
           forState:UIControlStateNormal];
     [more addTarget:self
              action:@selector(showOptions)

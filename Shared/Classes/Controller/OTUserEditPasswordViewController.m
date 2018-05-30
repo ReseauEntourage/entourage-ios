@@ -43,13 +43,13 @@
 - (void)setupToolbarButtons {
     [self setupCloseModalWithTintColor];
 
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
                                                         withTarget:self
                                                          andAction:@selector(doValidate:)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[ApplicationTheme shared].backgroundThemeColor];
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
 }
 

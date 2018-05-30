@@ -14,7 +14,7 @@
 + (UIBarButtonItem *)createWithImageNamed:(NSString *)imageName
                                withTarget:(id)target
                                 andAction:(SEL)action {
-    return [UIBarButtonItem createWithImageNamed:imageName withTarget:target andAction:action changeTintColor:NO];
+    return [UIBarButtonItem createWithImageNamed:imageName withTarget:target andAction:action changeTintColor:YES];
 }
 
 + (UIBarButtonItem *)createWithImageNamed:(NSString *)imageName
