@@ -4018,7 +4018,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ./Scripts/count_commit.sh;
+			shellScript = "./Scripts/count_commit.sh pfp/pfp-Info.plist";
 		};
 		A296B8DC20871CFC00F6AFBD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4134,7 +4134,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ./Scripts/count_commit.sh;
+			shellScript = "./Scripts/count_commit.sh entourage/entourage-Info.plist";
 		};
 /* End PBXShellScriptBuildPhase section */
 
