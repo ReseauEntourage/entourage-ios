@@ -23,6 +23,7 @@
     if([description length] > 0)
         [newItems addObject:description];
     [newItems addObject:feedItem];
+    [newItems addObject:feedItem];
     [self refreshTable:newItems];
     [[[OTFeedItemFactory createFor:feedItem] getMessaging] getFeedItemUsersWithStatus:JOIN_ACCEPTED success:^(NSArray *items) {
         [newItems addObjectsFromArray:items];

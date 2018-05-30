@@ -18,6 +18,8 @@
     id item = [self.tableDataSource getItemAtIndexPath:indexPath];
     NSString *identifier = [self cellIdentifierAtPath:indexPath forItem:item];
     OTBaseInfoCell *cell = (OTBaseInfoCell *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:identifier];
+    if([identifier isEqualToString:@"InviteCell"])
+        return cell;
     [cell configureWith:item];
     return cell;
 }
@@ -29,6 +31,8 @@
         return @"DescriptionCell";
     else if([item isKindOfClass:[OTFeedItemJoiner class]])
         return @"MemberCell";
+    else if(indexPath.row == 3)
+        return @"InviteCell";
     else
         return indexPath.row == 0 ? @"MapCell" : @"MemberCountCell";
 }
