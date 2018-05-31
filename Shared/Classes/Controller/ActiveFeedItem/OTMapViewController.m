@@ -72,6 +72,7 @@
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 130, 40)];
     title.text = titleString;
+    title.textColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [titleView addSubview:iconButton];
     [titleView addSubview:title];
     self.navigationItem.titleView = titleView;
@@ -106,7 +107,7 @@
     UIButton *options = [UIButton buttonWithType:UIButtonTypeCustom];
     [options setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
           forState:UIControlStateNormal];
-    options.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    options.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     [options addTarget:self.statusChangedBehavior
                 action:@selector(startChangeStatus)
       forControlEvents:UIControlEventTouchUpInside];

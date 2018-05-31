@@ -41,13 +41,13 @@
     [super viewDidLoad];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
 
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(saveNewLocation)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[UIColor appOrangeColor]];
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
 
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LocationSelection" bundle:nil];
@@ -83,7 +83,7 @@
     [self zoomToCurrentLocation:nil];
     UIBarButtonItem *cancelBtn = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
     [cancelBtn setTitle:OTLocalizedString(@"cancel")];
-    [cancelBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"SFUItext-Bold" size:17], NSFontAttributeName, nil] forState:UIControlStateNormal];
+    [cancelBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [ApplicationTheme shared].secondaryNavigationBarTintColor, NSForegroundColorAttributeName, [UIFont fontWithName:@"SFUItext-Bold" size:17], NSFontAttributeName, nil] forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
 }
 

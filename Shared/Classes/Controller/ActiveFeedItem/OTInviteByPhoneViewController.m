@@ -35,7 +35,7 @@
                                          withTarget:self
                                           andAction:@selector(save)
                                             andFont:@"SFUIText-Bold"
-                                            colored:[ApplicationTheme shared].backgroundThemeColor];
+                                            colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.btnSave changeEnabled:NO];
     [self.navigationItem setRightBarButtonItem:self.btnSave];
     [self.txtPhone setupWithPlaceholderColor:[UIColor appGreyishColor] andFont:[UIFont systemFontOfSize:17 weight:UIFontWeightLight]];

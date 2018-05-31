@@ -20,8 +20,8 @@
     }
     
     UIImage *image = [self.plusButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.inviteLabel setTextColor:[ApplicationTheme shared].secondaryNavigationBarTintColor];
-    [self.plusButton.imageView setTintColor:[ApplicationTheme shared].secondaryNavigationBarTintColor];
+    [self.inviteLabel setTextColor:[ApplicationTheme shared].primaryNavigationBarTintColor];
+    [self.plusButton.imageView setTintColor:[ApplicationTheme shared].primaryNavigationBarTintColor];
     self.plusButton.imageView.image = image;
 }
 @end

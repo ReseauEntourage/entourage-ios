@@ -28,7 +28,6 @@
 #pragma mark - private methods
 
 - (NSString *)cellIdentifierAtPath:(NSIndexPath *)indexPath forItem:(id)item {
-    int inviteCellIndex = [OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge ? 2 : 3;
     if([item isKindOfClass:[NSString class]])
         return @"DescriptionCell";
     else if([item isKindOfClass:[OTFeedItemJoiner class]])
