@@ -10,6 +10,7 @@ import Foundation
 
 enum LabelStyles {
     case boldGray
+    case mediumGray
 }
 
 extension LabelStyles: ComponentStylable {
@@ -17,19 +18,21 @@ extension LabelStyles: ComponentStylable {
         switch self {
         case .boldGray:
             return UIFont.SFUIText(size: 16, type: .bold)
+        case .mediumGray:
+            return UIFont.SFUIText(size: 16, type: .medium)
         }
     }
     
     var textColor: UIColor {
         switch self {
-        case .boldGray:
+        case .boldGray, .mediumGray:
             return UIColor.pfpGrayText()
         }
     }
     
     var backgroundColor: UIColor {
         switch self {
-        case .boldGray:
+        case .boldGray, .mediumGray:
             return UIColor.pfpTableBackground()
         }
     }
