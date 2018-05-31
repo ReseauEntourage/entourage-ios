@@ -144,8 +144,7 @@ extension OTPfpMenuViewController: UITableViewDelegate {
             contactPFP()
         }
         else if indexPath.row == 1 {
-            let url = URL(string: "https://entourage-asso.typeform.com/to/Imi9sX?user_id="+"\(self.currentUser?.sid!.intValue ?? 0)")
-            OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
+            OTSafariService.launchFeedbackForm(in: self.navigationController)
         }
         else if indexPath.row == 2 {
             let url = URL(string: "http://bit.ly/charteethiquevoisin-age")

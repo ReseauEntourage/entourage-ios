@@ -9,9 +9,13 @@
 #import "OTSafariService.h"
 #import <SafariServices/SFSafariViewController.h>
 #import "OTAppDelegate.h"
+#import "OTHTTPRequestManager.h"
 #import "OTSWRevealViewController.h"
 #import "UIColor+entourage.h"
 #import "OTAppConfiguration.h"
+#import "NSUserDefaults+OT.h"
+#import "OTConsts.h"
+#import "OTAPIConsts.h"
 #import "entourage-Swift.h"
 
 @implementation OTSafariService
@@ -49,6 +53,18 @@
 
 + (void)launchInAppBrowserWithUrl:(NSURL*)url {
     [OTSafariService launchInAppBrowserWithUrl:url viewController:nil];
+}
+
++ (void)launchFeedbackFormInController:(UIViewController*)controller {
+    NSURL *feedbackUrl = [OTSafariService redirectUrlWithIdentifier:SUGGESTION_LINK_ID];
+    [OTSafariService launchInAppBrowserWithUrl:feedbackUrl viewController:controller];
+}
+
++ (NSURL*)redirectUrlWithIdentifier:(NSString*)identifier {
+    NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, identifier, TOKEN];
+    NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+    
+    return [NSURL URLWithString:urlString];
 }
 
 @end
