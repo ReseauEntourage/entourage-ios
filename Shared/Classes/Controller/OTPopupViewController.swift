@@ -68,6 +68,7 @@ import Foundation
         closeButton.tintColor = ApplicationTheme.shared().secondaryNavigationBarTintColor
         let closeImage = closeButton.image(for: UIControlState.normal)
         let tintImage = closeImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        closeButton.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
         closeButton.setImage(tintImage, for: UIControlState.normal)
     }
     
