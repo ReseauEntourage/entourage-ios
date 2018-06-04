@@ -46,7 +46,6 @@
 #import "UIColor+entourage.h"
 #import "UILabel+entourage.h"
 #import "MKMapView+entourage.h"
-#import <WYPopoverController/WYPopoverController.h>
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioServices.h>
 #import "NSUserDefaults+OT.h"
@@ -134,7 +133,6 @@
 @property (nonatomic, strong) OTGuideMapDelegate                    *guideMapDelegate;
 @property (nonatomic, strong) NSString                              *entourageType;
 @property (nonatomic, strong) NSMutableArray                        *encounters;
-@property (nonatomic, strong) WYPopoverController                   *popover;
 @property (nonatomic) BOOL                                          isRegionSetted;
 @property (nonatomic, assign) CGPoint                               mapPoint;
 @property (nonatomic, strong) CLLocation                            *tappedLocation;
@@ -934,12 +932,6 @@
             }
         }
     }
-}
-
-#pragma mark - OTCalloutViewControllerDelegate
-
-- (void)dismissPopover {
-    [self.popover dismissPopoverAnimated:YES];
 }
 
 #pragma mark - OTOptionsDelegate

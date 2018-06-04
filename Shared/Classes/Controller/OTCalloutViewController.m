@@ -53,10 +53,6 @@
 
 - (IBAction)closeMe:(id)sender
 {
-	if ([self.delegate respondsToSelector:@selector(dismissPopover)])
-	{
-		[self.delegate dismissPopover];
-	}
 }
 
 @end
