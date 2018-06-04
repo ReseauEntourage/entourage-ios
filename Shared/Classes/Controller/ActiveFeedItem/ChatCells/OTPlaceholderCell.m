@@ -11,7 +11,7 @@
 @implementation OTPlaceholderCell
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
-    self.textLabel.text = @"Invalid";
+    self.textLabel.text = OTLocalizedString(@"Invalid");
 }
 
 @end

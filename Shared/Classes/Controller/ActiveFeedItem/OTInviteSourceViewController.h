@@ -10,7 +10,7 @@
 
 @protocol InviteSourceDelegate <NSObject>
 
-- (void)inviteContacts;
+- (void)inviteContactsFromViewController:(UIViewController*)viewController;
 - (void)inviteByPhone;
 - (void)share;
 

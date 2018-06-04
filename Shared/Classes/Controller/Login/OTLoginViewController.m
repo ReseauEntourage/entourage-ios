@@ -186,7 +186,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    [OTLogger logEvent:@"TelephoneSubmitFail"];
                                    NSString *alertTitle = OTLocalizedString(@"error");
                                    NSString *alertText = OTLocalizedString(@"connection_error");
-                                   NSString *buttonTitle = @"ok";
+                                   NSString *buttonTitle = OTLocalizedString(@"ok");
                                    NSString *errorCode = [error readErrorCode];
                                    if ([errorCode isEqualToString:UNAUTHORIZED]) {
                                        alertTitle = OTLocalizedString(@"tryAgain");

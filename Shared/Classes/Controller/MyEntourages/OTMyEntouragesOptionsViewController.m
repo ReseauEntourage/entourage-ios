@@ -45,7 +45,7 @@
     }
     __weak typeof(self) weakSelf = self;
     [OTAlertViewBehavior setupOngoingCreateEntourageWithAction:self.actionAlert];
-    [self.actionAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
+    [self.actionAlert addAction:OTLocalizedString(@"encounter") handler: ^(UIAlertAction *action){
         if ([weakSelf.delegate respondsToSelector:@selector(createEncounter)])
             [weakSelf.delegate performSelector:@selector(createEncounter) withObject:nil];
     }];
@@ -56,7 +56,7 @@
 }
 - (IBAction)createAction {
     if ([OTOngoingTourService sharedInstance].isOngoing)
-           [self.actionAlert show];
+           [self.actionAlert presentOnViewController:self];
        else
            [self dismissViewControllerAnimated:YES completion:^() {
                [self.delegate createAction];

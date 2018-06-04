@@ -97,7 +97,7 @@
                    setFocusAt:(UITextField *)focusTextField
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
                                                               [focusTextField becomeFirstResponder];
                                                           }];

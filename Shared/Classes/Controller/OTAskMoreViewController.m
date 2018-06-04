@@ -84,13 +84,9 @@
                                                         NSLog(@"%@", error);
                                                     }];
     } else {
-        [[[UIAlertView alloc]
-          initWithTitle:OTLocalizedString(@"requestImposible")
-          message:OTLocalizedString(@"needValidEmail")
-          delegate:nil
-          cancelButtonTitle:nil
-          otherButtonTitles:@"Ok",
-          nil] show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"requestImposible") message:OTLocalizedString(@"needValidEmail") preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 

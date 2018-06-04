@@ -7,6 +7,7 @@
 //
 
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 #import <Social/Social.h>
 
 #import "OTCreateMeetingViewController.h"
@@ -21,7 +22,6 @@
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
 #import "UIBarButtonItem+factory.h"
-#import <MBProgressHUD/MBProgressHUD.h>
 #import "OTEncounterDisclaimerBehavior.h"
 #import "OTTextWithCount.h"
 #import "OTLocationSelectorViewController.h"
@@ -128,11 +128,19 @@
 - (IBAction)sendEncounter:(UIBarButtonItem*)sender {
     [OTLogger logEvent:@"ValidateEncounterClick"];
     if(self.nameTextField.text.length == 0) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_enter_name_of_met_person") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@""
+                                                                            message:OTLocalizedString(@"encounter_enter_name_of_met_person")
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:controller animated:YES completion:nil];
         return;
     }
     else if(self.messageTextView.textView.text.length == 0) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_fill_all_fields") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@""
+                                                                            message:OTLocalizedString(@"encounter_fill_all_fields")
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:controller animated:YES completion:nil];
         return;
     }
     if(!self.encounter)

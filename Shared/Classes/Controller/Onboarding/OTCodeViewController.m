@@ -91,7 +91,11 @@
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
     } failure:^(NSError *error) {
         [SVProgressHUD dismiss];
-        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"requestNotSent") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error")
+                                                                            message:OTLocalizedString(@"requestNotSent")
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:controller animated:YES completion:nil];
     }];
 }
 

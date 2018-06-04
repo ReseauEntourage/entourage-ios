@@ -34,7 +34,7 @@ NSString *const kKeyMyEntouragesShowIncludingClosed = @"showIncludingClosed";
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
-    if ([super init]) {
+    if ((self = [super init]) != nil) {
         self.showTours = [decoder decodeObjectForKey:kKeyMyEntouragesShowTours];
         self.showDemand = [decoder decodeObjectForKey:kKeyMyEntouragesShowDemand];
         self.showContribution = [decoder decodeObjectForKey:kKeyMyEntouragesShowContribution];
