@@ -21,12 +21,15 @@
 @implementation OTDisclaimerBaseBehavior
 
 - (void)showDisclaimer {
+    UINavigationController *navigationViewController = self.owner.navigationController;
+    [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController];
     [self.owner performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
 }
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
     if([segue.identifier isEqualToString:@"DisclaimerSegue"]) {
         UINavigationController *navigationViewController = segue.destinationViewController;
+        [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController];
         UIViewController *destinationViewController = navigationViewController.topViewController;
         if ([destinationViewController isKindOfClass:[OTDisclaimerViewController class]]) {
             OTDisclaimerViewController *disclaimerViewController = (OTDisclaimerViewController *)destinationViewController;

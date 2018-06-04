@@ -9,7 +9,7 @@
 #import "OTManageInvitationBehavior.h"
 #import "OTFeedItem.h"
 #import "OTFeedItemFactory.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTManageInvitationViewController.h"
 #import "OTInvitationsCollectionSource.h"
 #import "OTPendingInvitationsChangedDelegate.h"

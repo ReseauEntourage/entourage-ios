@@ -7,7 +7,6 @@
 //
 
 #import "OTToursMapDelegate.h"
-#import "JSBadgeView.h"
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
 #import "OTTour.h"

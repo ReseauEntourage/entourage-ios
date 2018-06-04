@@ -21,5 +21,6 @@ extension UIFont {
         case bold = "-Bold"
         case regular = "-Regular"
         case semibold = "-Semibold"
+        case medium = "-Medium"
     }
 }

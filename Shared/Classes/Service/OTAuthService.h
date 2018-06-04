@@ -26,10 +26,10 @@ extern NSString *const kKeychainPassword;
                   failure:(void (^)(NSError *))failure;
 
 - (void)deleteAccountForUser:(NSNumber *)userID
-                  success:(void (^)())success
+                  success:(void (^)(void))success
                   failure:(void (^)(NSError *))failure;
 
-- (void)sendAppInfoWithSuccess:(void (^)())success
+- (void)sendAppInfoWithSuccess:(void (^)(void))success
                        failure:(void (^)(NSError *))failure;
 
 - (void)regenerateSecretCode:(NSString *)phone

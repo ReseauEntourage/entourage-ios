@@ -6,13 +6,17 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <UserNotifications/UserNotifications.h>
+#import <SWRevealViewController/SWRevealViewController.h>
+#import <Mixpanel/Mixpanel.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTPushNotificationsService.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTAuthService.h"
 #import "OTConsts.h"
 #import "OTActiveFeedItemViewController.h"
-#import "SWRevealViewController.h"
 #import "OTMainViewController.h"
 #import "UIStoryboard+entourage.h"
 #import "OTFeedItemJoiner.h"
@@ -21,12 +25,9 @@
 #import "OTDeepLinkService.h"
 #import "OTEntourageInvitation.h"
 #import "OTInvitationsService.h"
-#import "SVProgressHUD.h"
 #import "OTUnreadMessagesService.h"
-#import "Mixpanel/Mixpanel.h"
 #import "OTAppState.h"
 
-#import <UserNotifications/UserNotifications.h>
 
 @implementation OTPushNotificationsService
 
@@ -44,7 +45,7 @@
     [mixpanel.people addPushDeviceToken:tokenData];
 }
 
-- (void)clearTokenWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)clearTokenWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self sendAppInfoWithSuccess:success orFailure:failure];
@@ -239,7 +240,7 @@
     }
 }
 
-- (void)sendAppInfoWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)sendAppInfoWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     [[OTAuthService new] sendAppInfoWithSuccess:^() {
         NSLog(@"Application info sent!");
         if(success)

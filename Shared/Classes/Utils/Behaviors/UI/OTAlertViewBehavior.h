@@ -13,8 +13,8 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *content;
 
-- (void)addAction:(NSString *)title delegate:(void (^)())delegate;
-- (void)show;
+- (void)addAction:(NSString *)title handler:(void (^)(UIAlertAction*))handler;
+- (void)presentOnViewController:(UIViewController*)viewController;
 
 + (void)setupOngoingCreateEntourageWithAction:(OTAlertViewBehavior *)action;
 

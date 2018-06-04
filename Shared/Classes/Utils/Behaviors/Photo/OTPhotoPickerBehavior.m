@@ -7,7 +7,7 @@
 //
 
 #import "OTPhotoPickerBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface OTPhotoPickerBehavior () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 

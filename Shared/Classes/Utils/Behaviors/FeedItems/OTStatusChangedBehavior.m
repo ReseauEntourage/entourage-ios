@@ -7,7 +7,7 @@
 //
 
 #import "OTStatusChangedBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTConsts.h"
 #import "OTChangeStateViewController.h"
 #import "OTMainViewController.h"

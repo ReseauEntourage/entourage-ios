@@ -24,7 +24,7 @@
 #import "OTAuthService.h"
 
 // Loader
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @implementation OTSWRevealViewController
 

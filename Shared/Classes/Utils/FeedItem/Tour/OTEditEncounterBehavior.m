@@ -17,7 +17,6 @@
 @property (nonatomic, strong) NSNumber *tourId;
 @property (nonatomic, assign) CLLocationCoordinate2D location;
 @property (nonatomic) BOOL tourChanged;
-@property (nonatomic, weak) id<OTMeetingCalloutViewControllerDelegate> delegate;
 
 @end
 
@@ -49,7 +48,6 @@
             UIViewController *destinationViewController = segue.destinationViewController;
             OTMeetingCalloutViewController *controller = (OTMeetingCalloutViewController *)destinationViewController;
             controller.encounter = self.encounter;
-            controller.delegate = self.delegate;
         }
     else
         return NO;

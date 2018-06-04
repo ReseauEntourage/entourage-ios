@@ -28,7 +28,7 @@
     }];
 }
 
-- (void)invitePhones:(NSArray *)phones withSuccess:(void (^)())success orFailure:(void (^)(NSError *, NSArray *))failure {
+- (void)invitePhones:(NSArray *)phones withSuccess:(void (^)(void))success orFailure:(void (^)(NSError *, NSArray *))failure {
     [[OTInvitationsService new] inviteNumbers:phones toEntourage:self.entourage success:^() {
         NSLog(@"INVITE BY PHONES");
         if(success)
@@ -74,7 +74,7 @@
         success([NSArray new]);
 }
 
-- (void)setMessagesAsRead:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)setMessagesAsRead:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     [[OTEntourageService new] readEntourageMessages:self.entourage.uid success:^() {
         if(success){
             success();

@@ -14,16 +14,16 @@
 
 - (void)inviteNumbers:(NSArray *)phoneNumbers
           toEntourage:(OTEntourage *)entourage
-              success:(void (^)())success
+              success:(void (^)(void))success
               failure:(void (^)(NSError *error, NSArray *failedNumbers))failure;
 - (void)getInvitationsWithStatus:(NSString *)status
                          success:(void (^)(NSArray *))success
                          failure:(void (^)(NSError *))failure;
 - (void)acceptInvitation:(OTEntourageInvitation *)invitation
-             withSuccess:(void (^)())success
+             withSuccess:(void (^)(void))success
                  failure:(void (^)(NSError *))failure;
 - (void)rejectInvitation:(OTEntourageInvitation *)invitation
-             withSuccess:(void (^)())success
+             withSuccess:(void (^)(void))success
                  failure:(void (^)(NSError *))failure;
 
 @end

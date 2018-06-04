@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import IQKeyboardManager
+import SVProgressHUD
 
 @objc final class OTPopupViewController: UIViewController {
     
@@ -65,7 +67,7 @@ import Foundation
         textWithCount.placeholder = textFieldPlaceholder
         completionButton.addTarget(self, action: #selector(sendMail), for: .touchUpInside)
         completionButton.backgroundColor = ApplicationTheme.shared().backgroundThemeColor
-        closeButton.tintColor = ApplicationTheme.shared().secondaryNavigationBarTintColor
+        closeButton.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
         let closeImage = closeButton.image(for: UIControlState.normal)
         let tintImage = closeImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         closeButton.setImage(tintImage, for: UIControlState.normal)

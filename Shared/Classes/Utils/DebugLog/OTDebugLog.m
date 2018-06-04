@@ -7,7 +7,7 @@
 //
 
 #import "OTDebugLog.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTDeepLinkService.h"
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"

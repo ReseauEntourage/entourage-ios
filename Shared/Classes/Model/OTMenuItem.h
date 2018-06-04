@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *iconName;
 @property (nonatomic, strong) NSString *segueIdentifier;
 @property (nonatomic, strong) NSString *identifier;
+@property (nonatomic, readwrite) NSInteger tag;
 
 - (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName segueIdentifier:(NSString *)segueIdentifier;
 - (instancetype)initWithTitle:(NSString *)title iconName:(NSString *)iconName identifier:(NSString *)identifier;

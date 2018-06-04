@@ -10,7 +10,7 @@
 #import "OTAppDelegate.h"
 #import "OTActiveFeedItemViewController.h"
 #import "OTSWRevealViewController.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTFeedItemFactory.h"
 #import "OTUserViewController.h"
 #import "OTPublicFeedItemViewController.h"

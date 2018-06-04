@@ -9,7 +9,7 @@
 #import "OTOptionsViewController.h"
 #import "OTOngoingTourService.h"
 #import "OTAlertViewBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "entourage-Swift.h"
 
 @interface OTOptionsViewController ()
@@ -31,11 +31,11 @@
     }
     __weak typeof(self) weakSelf = self;
     [OTAlertViewBehavior setupOngoingCreateEntourageWithAction:self.actionAlert];
-    [self.actionAlert addAction:OTLocalizedString(@"action") delegate: ^(){
+    [self.actionAlert addAction:OTLocalizedString(@"action") handler:^(UIAlertAction *action){
         if ([weakSelf.optionsDelegate respondsToSelector:@selector(createAction)])
             [weakSelf.optionsDelegate performSelector:@selector(createAction) withObject:nil];
     }];
-    [self.actionAlert addAction:OTLocalizedString(@"encounter") delegate: ^(){
+    [self.actionAlert addAction:OTLocalizedString(@"encounter") handler:^(UIAlertAction *action){
         if ([weakSelf.optionsDelegate respondsToSelector:@selector(createEncounter)])
             [weakSelf.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
     }];
@@ -115,7 +115,7 @@
 - (IBAction)doCreateAction:(id)sender {
     [OTLogger logEvent:@"CreateActionClick"];
     if ([OTOngoingTourService sharedInstance].isOngoing)
-        [self.actionAlert show];
+        [self.actionAlert presentOnViewController:self];
     else
         if ([self.optionsDelegate respondsToSelector:@selector(createAction)])
             [self.optionsDelegate performSelector:@selector(createAction) withObject:nil];

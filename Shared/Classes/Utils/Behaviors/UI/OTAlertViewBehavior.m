@@ -9,10 +9,9 @@
 #import "OTAlertViewBehavior.h"
 #import "OTConsts.h"
 
-@interface OTAlertViewBehavior () <UIAlertViewDelegate>
+@interface OTAlertViewBehavior ()
 
-@property (nonatomic, strong) NSMutableArray *buttonTitles;
-@property (nonatomic, strong) NSMutableArray *buttonActions;
+@property (nonatomic, strong) NSMutableArray<UIAlertAction *> *alertActions;
 
 @end
 
@@ -20,38 +19,29 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.buttonTitles = [NSMutableArray new];
-    self.buttonActions = [NSMutableArray new];
+    self.alertActions = [NSMutableArray new];
 }
 
-- (void)addAction:(NSString *)title delegate:(void (^)())delegate {
-    [self.buttonTitles addObject:title];
-    [self.buttonActions addObject:delegate];
+- (void)addAction:(NSString *)title handler:(void (^)(UIAlertAction*))handler {
+    [self.alertActions addObject:[UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:handler]];
 }
 
-- (void)show {
-    if(self.buttonTitles.count == 0)
+- (void)presentOnViewController:(UIViewController*)viewController {
+    if(self.alertActions.count == 0)
         return;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.title
-                                                    message:self.content
-                                                   delegate:self
-                                          cancelButtonTitle:nil
-                                          otherButtonTitles: nil];
-    for (int i = 0; i< self.buttonTitles.count; i++)
-        [alert addButtonWithTitle:self.buttonTitles[i]];
-    [alert show];
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:self.title
+                                                                        message:self.content
+                                                                 preferredStyle:UIAlertControllerStyleAlert];
+    for (UIAlertAction *action in self.alertActions) {
+        [controller addAction:action];
+    }
+
+    [viewController presentViewController:controller animated:YES completion:nil];
 }
 
 + (void)setupOngoingCreateEntourageWithAction:(OTAlertViewBehavior *)action {
     action.title = OTLocalizedString(@"tour_ongoing");
     action.content = [NSString stringWithFormat:OTLocalizedString(@"confirm_entourage_create"), [OTLocalizedString(@"action") lowercaseString]];
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    void (^action)() = self.buttonActions[buttonIndex];
-    action();
 }
 
 @end

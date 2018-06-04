@@ -11,7 +11,7 @@
 @interface OTMixpanelService : NSObject
 
 - (void)sendTokenDataWithDictionary:(NSDictionary *)dictionary
-                            success:(void (^)())success
+                            success:(void (^)(void))success
                             failure:(void (^)(NSError *))failure;
 
 @end

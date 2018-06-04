@@ -13,7 +13,7 @@
 #import "OTAssociationsSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTAssociation.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTAssociationDetailsViewController.h"
 #import "entourage-Swift.h"
 
