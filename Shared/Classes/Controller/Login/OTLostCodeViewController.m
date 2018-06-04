@@ -6,10 +6,12 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
 #import "OTLostCodeViewController.h"
 #import "OTConsts.h"
 #import "OTAuthService.h"
-#import "IQKeyboardManager.h"
 #import "OTScrollPinBehavior.h"
 #import "UIViewController+menu.h"
 #import "NSUserDefaults+OT.h"
@@ -19,10 +21,8 @@
 #import "UIView+entourage.h"
 #import "UIColor+entourage.h"
 #import "OTUser.h"
-#import "SVProgressHUD.h"
 #import "NSError+OTErrorData.h"
 #import "OTCountryCodePickerViewDataSource.h"
-#import "JVFloatLabeledTextField.h"
 #import "entourage-Swift.h"
 
 @interface OTLostCodeViewController () <UIPickerViewDelegate, UIPickerViewDataSource>

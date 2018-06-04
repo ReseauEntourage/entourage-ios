@@ -11,7 +11,7 @@
 #import "UIColor+entourage.h"
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTActivityProvider.h"
 #import "entourage-Swift.h"
 

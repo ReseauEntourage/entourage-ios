@@ -13,7 +13,7 @@
 #import "OTMyEntouragesDataSource.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTInvitationsService.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 #import "OTFeedItemFiltersViewController.h"

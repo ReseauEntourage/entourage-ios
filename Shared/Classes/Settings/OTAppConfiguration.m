@@ -6,15 +6,17 @@
 //  Copyright © 2018 OCTO Technology. All rights reserved.
 //
 
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <SimpleKeychain/A0SimpleKeychain.h>
+
 #import "OTAppConfiguration.h"
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
 #import "OTVersionInfo.h"
 #import "OTDeepLinkService.h"
-#import "FBSDKCoreKit.h"
 #import "OTLocationManager.h"
 #import "OTUser.h"
-#import "IQKeyboardManager.h"
 #import "NSUserDefaults+OT.h"
 #import "UIStoryboard+entourage.h"
 #import "OTPushNotificationsService.h"
@@ -23,7 +25,7 @@
 #import "OTDeepLinkService.h"
 #import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "UIColor+entourage.h"
 #import "OTUnreadMessagesService.h"
 #import "OTLoginViewController.h"
@@ -31,7 +33,6 @@
 #import "OTPhoneViewController.h"
 #import "OTCodeViewController.h"
 #import "OTAppDelegate.h"
-#import "A0SimpleKeychain.h"
 #import "UIStoryboard+entourage.h"
 #import "OTMenuViewController.h"
 #import "OTAppState.h"

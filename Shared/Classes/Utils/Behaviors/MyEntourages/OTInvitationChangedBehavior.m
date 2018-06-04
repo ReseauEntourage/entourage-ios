@@ -8,7 +8,7 @@
 
 #import "OTInvitationChangedBehavior.h"
 #import "OTInvitationsService.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTConsts.h"
 
 @implementation OTInvitationChangedBehavior

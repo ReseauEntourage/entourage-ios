@@ -8,7 +8,7 @@
 
 #import "OTTourCreatorBehavior.h"
 #import "OTTour.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTConsts.h"
 #import "OTTourService.h"
 #import "OTLocationManager.h"

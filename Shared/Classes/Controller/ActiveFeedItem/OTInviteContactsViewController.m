@@ -6,8 +6,9 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTInviteContactsViewController.h"
-#import "SVProgressHUD.h"
 #import "OTAddressBookPhone.h"
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"

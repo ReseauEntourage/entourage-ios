@@ -10,7 +10,7 @@
 
 // Pods
 #import <AFNetworking/AFNetworking.h>
-#import "SimpleKeychain.h"
+#import <SimpleKeychain/SimpleKeychain.h>
 
 // Manager
 #import "OTHTTPRequestManager.h"

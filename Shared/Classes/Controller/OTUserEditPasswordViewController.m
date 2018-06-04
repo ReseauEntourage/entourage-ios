@@ -10,7 +10,7 @@
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
 #import "OTAuthService.h"
-#import "A0SimpleKeychain.h"
+#import <SimpleKeychain/A0SimpleKeychain.h>
 #import "UIColor+entourage.h"
 #import "UIBarButtonItem+factory.h"
 #import "entourage-Swift.h"

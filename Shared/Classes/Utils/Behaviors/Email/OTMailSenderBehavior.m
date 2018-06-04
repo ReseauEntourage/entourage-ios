@@ -8,7 +8,7 @@
 
 #import "OTSignalEntourageBehavior.h"
 #import "OTMailSenderBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTConsts.h"
 #import <MessageUI/MessageUI.h>
 #import "OTMainViewController.h"

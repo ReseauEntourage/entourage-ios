@@ -14,7 +14,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTLocationManager.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTStartupViewController.h"
 #import "OTLoginViewController.h"
 #import "OTWelcomeViewController.h"

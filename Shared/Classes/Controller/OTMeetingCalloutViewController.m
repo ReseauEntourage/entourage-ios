@@ -6,15 +6,16 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import <MapKit/MKMapView.h>
+#import <Social/Social.h>
+
 #import "OTMeetingCalloutViewController.h"
 #import "OTConsts.h"
-#import <MapKit/MKMapView.h>
 #import "OTUser.h"
 #import "OTEncounter.h"
 #import "NSUserDefaults+OT.h"
 #import "UIViewController+menu.h"
-#import "MBProgressHUD.h"
-#import <Social/Social.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "UIColor+entourage.h"
 #import "entourage-Swift.h"
 

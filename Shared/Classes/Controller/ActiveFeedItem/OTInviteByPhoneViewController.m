@@ -6,6 +6,9 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
 #import "OTInviteByPhoneViewController.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
@@ -13,8 +16,6 @@
 #import "UITextField+indentation.h"
 #import "NSString+Validators.h"
 #import "OTFeedItemFactory.h"
-#import "SVProgressHUD.h"
-#import "IQKeyboardManager.h"
 #import "UIScrollView+entourage.h"
 #import "entourage-Swift.h"
 

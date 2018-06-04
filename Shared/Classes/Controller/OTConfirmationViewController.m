@@ -6,6 +6,8 @@
 //  Copyright © 2015 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+
 // Controller
 #import "OTConfirmationViewController.h"
 #import "OTMainViewController.h"
@@ -17,9 +19,6 @@
 
 // Model
 #import "OTTour.h"
-
-// View
-#import "SVProgressHUD.h"
 
 /*************************************************************************************************/
 #pragma mark - OTConfirmationViewController

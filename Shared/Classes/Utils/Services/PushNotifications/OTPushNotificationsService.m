@@ -6,13 +6,17 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <UserNotifications/UserNotifications.h>
+#import <SWRevealViewController/SWRevealViewController.h>
+#import <Mixpanel/Mixpanel.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTPushNotificationsService.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTAuthService.h"
 #import "OTConsts.h"
 #import "OTActiveFeedItemViewController.h"
-#import "SWRevealViewController.h"
 #import "OTMainViewController.h"
 #import "UIStoryboard+entourage.h"
 #import "OTFeedItemJoiner.h"
@@ -21,12 +25,9 @@
 #import "OTDeepLinkService.h"
 #import "OTEntourageInvitation.h"
 #import "OTInvitationsService.h"
-#import "SVProgressHUD.h"
 #import "OTUnreadMessagesService.h"
-#import "Mixpanel/Mixpanel.h"
 #import "OTAppState.h"
 
-#import <UserNotifications/UserNotifications.h>
 
 @implementation OTPushNotificationsService
 
