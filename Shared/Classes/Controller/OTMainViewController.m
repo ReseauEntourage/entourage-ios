@@ -24,7 +24,6 @@
 #import "OTMyEntouragesViewController.h"
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
-#import "JSBadgeView.h"
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
 #import "OTConsts.h"
