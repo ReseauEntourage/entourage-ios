@@ -400,6 +400,7 @@
     if (self.isTourListDisplayed) {
         [self showToursList:YES];
     }
+    [self configureNavigationBar];
 }
 
 - (void)switchToGuide {
@@ -417,6 +418,7 @@
     [self showToursMap];
     [self reloadPois];
     [OTAppState switchMapToSolidarityGuide];
+    [self configureNavigationBar];
 }
 
 - (IBAction)goToTourOptions:(id)sender {
@@ -502,12 +504,15 @@
     }}
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
-    if(self.isTourListDisplayed)
+    if (self.isTourListDisplayed) {
         return;
-    if(!IS_PRO_USER && !self.guideMapDelegate.isActive) {
+    }
+    
+    if (!IS_PRO_USER && !self.guideMapDelegate.isActive) {
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
         return;
     }
+    
     CGPoint touchPoint = [longPressGesture locationInView:self.mapView];
     if (self.presentedViewController)
         return;
@@ -528,6 +533,7 @@
         if (touchPoint.y + LONGPRESS_DELTA > [UIScreen mainScreen].bounds.size.height )
             self.mapPoint = CGPointMake(touchPoint.x, touchPoint.y - LONGPRESS_DELTA - 10);
         [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+        
     } else {
         if (touchPoint.x - LONGPRESS_DELTA < 0)
             self.mapPoint = CGPointMake(touchPoint.x + LONGPRESS_DELTA, touchPoint.y);
@@ -931,6 +937,8 @@
                 [self.toggleCollectionView toggle:NO animated:YES];
             }
         }
+        
+        [self configureNavigationBar];
     }
 }
 
@@ -1184,6 +1192,8 @@
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }
+    
+    [self configureNavigationBar];
 }
 
 - (void)showToursMap {
@@ -1214,6 +1224,8 @@
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     }];
+    
+    [self configureNavigationBar];
 }
 
 #pragma mark 15.2 New Tour - on going
@@ -1231,6 +1243,8 @@
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
+    
+    [self configureNavigationBar];
 }
 
 - (void)showTourConfirmation {

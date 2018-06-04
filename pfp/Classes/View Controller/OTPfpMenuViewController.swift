@@ -140,6 +140,13 @@ final class OTPfpMenuViewController: UIViewController {
         let profileNavController:UINavigationController = UINavigationController.init(rootViewController: vc)
         self.present(profileNavController, animated: true, completion: nil)
     }
+    
+    private func loadUserCircles () {
+        let storyboard:UIStoryboard = UIStoryboard.init(name: "PfpUserVoisinage", bundle: nil)
+        let vc:UIViewController = storyboard.instantiateViewController(withIdentifier: "PfpUserVoisinageViewController")
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension OTPfpMenuViewController: UITableViewDelegate {
@@ -190,7 +197,7 @@ extension OTPfpMenuViewController: UITableViewDelegate {
             OTSafariService.launchFeedbackForm(in: self.navigationController)
             break
         case menuItemIndexType.addHours.rawValue:
-            // TODO: 
+            self.loadUserCircles()
             break
         default:
             NotificationCenter.default.post(name: Notification.Name("loginFailureNotification"),

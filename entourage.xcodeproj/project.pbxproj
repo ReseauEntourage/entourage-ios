@@ -753,6 +753,11 @@
 		A21E8F2920B7F3AE00433606 /* OTUserMembership.m in Sources */ = {isa = PBXBuildFile; fileRef = A21E8F2720B7F3AE00433606 /* OTUserMembership.m */; };
 		A2306A4120BE7F7C0094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306A4020BE7F7C0094370E /* AppConfigurations.plist */; };
 		A2306A4220BE7F7C0094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306A4020BE7F7C0094370E /* AppConfigurations.plist */; };
+		A2306AA320C5491E0094370E /* PfpUserVoisinage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */; };
+		A2306AA520C54C490094370E /* PfpUserVoisinageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */; };
+		A2306AA820C54EB00094370E /* PfpUserVoisinage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */; };
+		A2306AA920C54EB90094370E /* PfpUserVoisinageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */; };
+		A2306AAB20C551690094370E /* PfpUserCircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAA20C551690094370E /* PfpUserCircleCell.swift */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
@@ -1938,6 +1943,9 @@
 		A21E8F2620B7F3AE00433606 /* OTUserMembership.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTUserMembership.h; sourceTree = "<group>"; };
 		A21E8F2720B7F3AE00433606 /* OTUserMembership.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTUserMembership.m; sourceTree = "<group>"; };
 		A2306A4020BE7F7C0094370E /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
+		A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PfpUserVoisinage.storyboard; sourceTree = "<group>"; };
+		A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpUserVoisinageViewController.swift; sourceTree = "<group>"; };
+		A2306AAA20C551690094370E /* PfpUserCircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpUserCircleCell.swift; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -3549,6 +3557,7 @@
 			isa = PBXGroup;
 			children = (
 				A296B92C208A08E800F6AFBD /* PfpLaunchScreen.storyboard */,
+				A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -3558,6 +3567,7 @@
 			children = (
 				A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */,
 				A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */,
+				A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -3567,6 +3577,7 @@
 			children = (
 				A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */,
 				A2FCF5C820AD502F004604AC /* PFPAboutView.xib */,
+				A2306AAA20C551690094370E /* PfpUserCircleCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3749,6 +3760,7 @@
 				A202E7E92085CFC40058F32C /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A202E7DB2085CFC40058F32C /* InfoPlist.strings in Resources */,
 				A21D65BD2085FDAA00EF8E0E /* ActiveFeedItem.storyboard in Resources */,
+				A2306AA820C54EB00094370E /* PfpUserVoisinage.storyboard in Resources */,
 				A21D65B82085FDAA00EF8E0E /* UserProfileEditor.storyboard in Resources */,
 				A21D65A82085FDAA00EF8E0E /* Disclaimer.storyboard in Resources */,
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
@@ -3860,6 +3872,7 @@
 				A296B8BD20871CFC00F6AFBD /* SF-UI-Text-Semibold.otf in Resources */,
 				A296B8BE20871CFC00F6AFBD /* UserProfile.storyboard in Resources */,
 				A296B8BF20871CFC00F6AFBD /* SF-UI-Text-RegularItalic.otf in Resources */,
+				A2306AA320C5491E0094370E /* PfpUserVoisinage.storyboard in Resources */,
 				A296B8C020871CFC00F6AFBD /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A296B8C120871CFC00F6AFBD /* InfoPlist.strings in Resources */,
 				A296B8C220871CFC00F6AFBD /* ActiveFeedItem.storyboard in Resources */,
@@ -4357,6 +4370,7 @@
 				A202EBA32085D2C80058F32C /* OTSocialViewController.m in Sources */,
 				A202EB932085D2C80058F32C /* OTFeedItemJoinMessageController.m in Sources */,
 				A202EBE72085D2C80058F32C /* OTEntourageEditItemImageCell.m in Sources */,
+				A2306AA920C54EB90094370E /* PfpUserVoisinageViewController.swift in Sources */,
 				A202EC492085D2C80058F32C /* OTInvitationChangedBehavior.m in Sources */,
 				A202ED212085D2C80058F32C /* NSDate+OTFormatter.m in Sources */,
 				A202ECD92085D2C80058F32C /* UIButton+entourage.m in Sources */,
@@ -4888,6 +4902,7 @@
 				A296B7A820871CFC00F6AFBD /* OTFeedItemsFilterCellBase.m in Sources */,
 				A296B7A920871CFC00F6AFBD /* OTFeedItemsTableView.m in Sources */,
 				A296B7AA20871CFC00F6AFBD /* OTCategoryViewController.m in Sources */,
+				A2306AA520C54C490094370E /* PfpUserVoisinageViewController.swift in Sources */,
 				A296B7AB20871CFC00F6AFBD /* OTMemberCountCell.m in Sources */,
 				A296B7AC20871CFC00F6AFBD /* OTAddressBookItem.m in Sources */,
 				A296B7AD20871CFC00F6AFBD /* OTAssociationsCellProviderBehavior.m in Sources */,
@@ -4997,6 +5012,7 @@
 				A296B81120871CFC00F6AFBD /* OTDisclaimerBaseBehavior.m in Sources */,
 				A296B81220871CFC00F6AFBD /* OTTextView.m in Sources */,
 				A296B81320871CFC00F6AFBD /* OTFeedItemDetailsBehavior.m in Sources */,
+				A2306AAB20C551690094370E /* PfpUserCircleCell.swift in Sources */,
 				A296B81420871CFC00F6AFBD /* OTDisclaimerViewController.m in Sources */,
 				A296B81520871CFC00F6AFBD /* OTCustomSegmentedBehavior.m in Sources */,
 				A296B81620871CFC00F6AFBD /* OTUser.m in Sources */,
