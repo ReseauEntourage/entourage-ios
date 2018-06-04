@@ -16,11 +16,11 @@
 #import "OTUser.h"
 #import "OTEntourageInvitation.h"
 #import "OTOnboardingJoinService.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsService.h"
 #import "OTLocationManager.h"
-#import "Mixpanel/Mixpanel.h"
+#import <Mixpanel/Mixpanel.h>
 #import "OTAppState.h"
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"

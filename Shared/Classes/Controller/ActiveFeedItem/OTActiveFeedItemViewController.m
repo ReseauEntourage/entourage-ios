@@ -6,6 +6,9 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
 #import "OTActiveFeedItemViewController.h"
 #import "OTFeedItemFactory.h"
 #import "UIBarButtonItem+factory.h"
@@ -21,10 +24,8 @@
 #import "OTEditEntourageBehavior.h"
 #import "OTFeedItemMessage.h"
 #import "OTConsts.h"
-#import "SVProgressHUD.h"
 #import "OTMapViewController.h"
 #import "OTMessagingService.h"
-#import "IQKeyboardManager.h"
 #import "OTBottomScrollBehavior.h"
 #import "OTUnreadMessagesService.h"
 #import "OTShareFeedItemBehavior.h"

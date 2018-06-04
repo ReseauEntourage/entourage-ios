@@ -6,15 +6,16 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
 #import "OTFeedItemJoinOptionsViewController.h"
 #import "UIView+entourage.h"
 #import "OTFeedItemFactory.h"
-#import "SVProgressHUD.h"
 #import "OTEntourage.h"
 #import "OTConsts.h"
 #import "OTTextView.h"
 #import "OTTapViewBehavior.h"
-#import "IQKeyboardManager.h"
 
 @interface OTFeedItemJoinOptionsViewController () <UITextViewDelegate>
 

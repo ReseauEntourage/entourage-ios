@@ -9,7 +9,7 @@
 #import "OTSignalEntourageBehavior.h"
 #import <MessageUI/MessageUI.h>
 #import "OTConsts.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 #define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"
 

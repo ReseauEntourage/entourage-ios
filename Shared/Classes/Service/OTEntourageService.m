@@ -69,7 +69,7 @@ extern NSString *kUsers;
           withSuccess:(void(^)(OTEntourage *))success
               failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, entourageId, TOKEN];
+    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, entourageId];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     
     [[OTHTTPRequestManager sharedInstance]
@@ -220,7 +220,7 @@ extern NSString *kUsers;
 - (void)updateEntourageJoinRequestStatus:(NSString *)status
                                  forUser:(NSNumber*)userID
                             forEntourage:(NSNumber*)entourageID
-                             withSuccess:(void (^)())success
+                             withSuccess:(void (^)(void))success
                                  failure:(void (^)(NSError *))failure
 {
     
@@ -249,7 +249,7 @@ extern NSString *kUsers;
 
 - (void)rejectEntourageJoinRequestForUser:(NSNumber *)userID
                              forEntourage:(NSNumber *)entourageID
-                              withSuccess:(void (^)())success
+                              withSuccess:(void (^)(void))success
                                   failure:(void (^)(NSError *))failure
 {
     
@@ -338,7 +338,7 @@ extern NSString *kUsers;
 }
 
 - (void)quitEntourage:(OTEntourage *)entourage
-         success:(void (^)())success
+         success:(void (^)(void))success
          failure:(void (^)(NSError *error))failure {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_QUIT, entourage.uid, USER_ID, TOKEN];
     [[OTHTTPRequestManager sharedInstance]
@@ -378,7 +378,7 @@ extern NSString *kUsers;
 }
 
 - (void)readEntourageMessages:(NSNumber *)entourageID
-                 success:(void (^)())success
+                 success:(void (^)(void))success
                  failure:(void (^)(NSError *))failure {
     NSString *url = [NSString stringWithFormat: @API_URL_ENTOURAGE_SET_READ_MESSAGES, entourageID, TOKEN];
     
@@ -404,7 +404,7 @@ extern NSString *kUsers;
 
 - (void)retrieveEntourage:(OTEntourage *)entourage
                  fromRank:(NSNumber *)rank
-                  success:(void (^)())success
+                  success:(void (^)(void))success
                   failure:(void (^)(NSError *))failure {
     CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
     CLLocationDistance distance = [currentLocation distanceFromLocation:entourage.location];

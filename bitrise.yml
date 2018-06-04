@@ -2,40 +2,114 @@
 format_version: 1.2.0
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 trigger_map:
-- push_branch: v2.2
-  workflow: beta
-- pull_request_source_branch: "*"
-  workflow: beta
+- push_branch: develop
+  workflow: Entourage-Beta
 workflows:
-  beta:
+  testflightFull:
     steps:
-    - activate-ssh-key@3.1.1:
+    - activate-ssh-key:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@3.4.0: {}
-    - certificate-and-profile-installer@1.8.1: {}
-    - script@1.1.3:
+    - git-clone:
+        inputs:
+        - commit: ''
+        - tag: ''
+    - certificate-and-profile-installer: {}
+    - script:
         inputs:
         - content: |-
             #!/bin/bash
             # fail if any commands fails
             set -e
             # debug log
-            set -x
-
-            echo "Download Amazon credentials"
-
-            staging_file_local_path=$BITRISE_SOURCE_DIR/staging.plist
-            prod_file_local_path=$BITRISE_SOURCE_DIR/prod.plist
-
-            # download the file
-            #wget -O "$staging_file_local_path" "$BITRISEIO_STAGING_PLIST_URL"
-            #wget -O "$prod_file_local_path" "$BITRISEIO_PROD_PLIST_URL"
-
-            gem install badge
-    - fastlane@2.2.0:
+            #set -x
+    - fastlane:
         inputs:
-        - lane: beta appaloosa_api_key:$APPALOOSA_API_KEY appaloosa_store_id:$APPALOOSA_STORE_ID
-    - deploy-to-bitrise-io@1.2.5: {}
+        - lane: deploy_to_TestFlight
+    - fastlane:
+        inputs:
+        - lane: refresh_dsyms api_token:$CRASHLYTICS_API_TOKEN
+    - deploy-to-bitrise-io:
+        inputs:
+        - notify_email_list: gregoire@entourage.social,  vaite@entourage.social
+  testflightNocache:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone:
+        inputs:
+        - commit: ''
+        - tag: ''
+    - certificate-and-profile-installer: {}
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            #set -x
+
+    - fastlane:
+        inputs:
+        - lane: deploy_to_TestFlight
+    - deploy-to-bitrise-io:
+        inputs:
+        - notify_email_list: gregoire@entourage.social, vaite@entourage.social
+  Entourage-Beta:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone:
+        inputs:
+        - commit: ''
+        - tag: ''
+    - certificate-and-profile-installer: {}
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            #set -x
+
+            echo "Download App credentials"
+
+            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
+
+            # download the fileS
+            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            #set -x
+
+            echo "Install dependencies"
+
+            #brew install librsvg
+            #brew upgrade imagemagick
+            gem install badge
+    - fastlane:
+        inputs:
+        - lane: beta
+    - deploy-to-bitrise-io: {}
+    - slack:
+        inputs:
+        - channel: "#androiddev"
+        - from_username: Entourage-Beta
+        - from_username_on_error: Entourage-Beta
+        - message: |-
+            New *Entourage-Beta DEV* iOS build is available: $BITRISE_BUILD_NUMBER  here:
+            $BITRISE_APP_URL
+        - message_on_error: Oups, build has failed for Entourage iOS... @francoispellissier
+            @veronicagliga @Lazar
+        - pretext: "*Entourage-Beta Build Succeeded!*"
+        - pretext_on_error: "*Build Failed for Entourage Beta!*"
+        - webhook_url: https://hooks.slack.com/services/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
 app:
   envs:
   - opts:
@@ -43,13 +117,8 @@ app:
     BITRISE_PROJECT_PATH: entourage.xcworkspace
   - opts:
       is_expand: false
-    BITRISE_SCHEME: entourage
-  - opts:
-      is_expand: true
-    APPALOOSA_STORE_ID: '3949'
-  - opts:
-      is_expand: true
-    APPALOOSA_API_KEY: fhyk78ldv01r2yazk1h91949wvhopo
+    BITRISE_SCHEME: Entourage-ios
   - opts:
       is_expand: true
     FASTLANE_PASSWORD: Entourage95
+  - CRASHLYTICS_API_TOKEN: 2eca3faf46139913c216b9ee9cf8bee49e70fe20

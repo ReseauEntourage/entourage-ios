@@ -6,11 +6,11 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <kingpin/KPClusteringController.h>
+#import <kingpin/KPAnnotation.h>
+
 #import "OTGuideMapDelegate.h"
 #import "OTCustomAnnotation.h"
-#import "KPClusteringController.h"
-#import "KPAnnotation.h"
-
 
 @implementation OTGuideMapDelegate
 

@@ -9,7 +9,7 @@
 #import "OTPicturePreviewViewController.h"
 #import "OTUserEditViewController.h"
 #import "UIStoryboard+entourage.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "UIView+entourage.h"
 #import "OTPictureUploadService.h"
 #import "UIColor+entourage.h"

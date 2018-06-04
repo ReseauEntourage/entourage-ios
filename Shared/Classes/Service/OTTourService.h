@@ -50,12 +50,12 @@ extern NSString *const kAPITourRoute;
 - (void)updateTourJoinRequestStatus:(NSString *)status
                             forUser:(NSNumber*)userID
                             forTour:(NSNumber*)tourID
-                        withSuccess:(void (^)())success
+                        withSuccess:(void (^)(void))success
                             failure:(void (^)(NSError *))failure;
 
 - (void)rejectTourJoinRequestForUser:(NSNumber *)userID
                               forTour:(NSNumber *)tourID
-                          withSuccess:(void (^)())success
+                          withSuccess:(void (^)(void))success
                               failure:(void (^)(NSError *))failure;
 
 - (void)tourUsers:(OTTour *)tour
@@ -63,7 +63,7 @@ extern NSString *const kAPITourRoute;
                failure:(void (^)(NSError *))failure;
 
 - (void)quitTour:(OTTour *)tour
-         success:(void (^)())success
+         success:(void (^)(void))success
          failure:(void (^)(NSError *error))failure;
 
 
@@ -94,6 +94,6 @@ extern NSString *const kAPITourRoute;
               failure:(void (^)(NSError *error))failure;
 
 - (void)readTourMessages:(NSNumber *)tourID
-                 success:(void (^)())success
+                 success:(void (^)(void))success
                  failure:(void (^)(NSError *))failure;
 @end

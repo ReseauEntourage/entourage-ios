@@ -20,7 +20,7 @@
     self.topView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     self.headerView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Pour renseigner votre description, accédez à votre profil depuis le bouton menu en haut à gauche : "];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:OTLocalizedString(@"Pour renseigner votre description, accédez à votre profil depuis le bouton menu en haut à gauche : ")];
     [attributedString addAttributes:@{
                                       NSFontAttributeName: self.descriptionLabel.font,
                                       NSForegroundColorAttributeName: [UIColor appOrangeColor]

@@ -27,7 +27,7 @@
     self.headerView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     [self.addButton setBackgroundColor:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Faites appel à vos voisins afin d’entourer une personne sans-abri. Créez une action avec le bouton :"];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:OTLocalizedString(@"Faites appel à vos voisins afin d’entourer une personne sans-abri. Créez une action avec le bouton :")];
     [attributedString addAttributes:@{
                                 NSForegroundColorAttributeName: [ApplicationTheme shared].secondaryNavigationBarTintColor
                                       } range:NSMakeRange(67, 33)];

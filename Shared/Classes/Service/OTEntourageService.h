@@ -43,12 +43,12 @@
 - (void)updateEntourageJoinRequestStatus:(NSString *)status
                                  forUser:(NSNumber*)userID
                             forEntourage:(NSNumber*)entourageID
-                             withSuccess:(void (^)())success
+                             withSuccess:(void (^)(void))success
                                  failure:(void (^)(NSError *))failure;
 
 - (void)rejectEntourageJoinRequestForUser:(NSNumber*)userID
                              forEntourage:(NSNumber*)entourageID
-                              withSuccess:(void (^)())success
+                              withSuccess:(void (^)(void))success
                                   failure:(void (^)(NSError *))failure;
 
 - (void)sendMessage:(NSString *)message
@@ -61,7 +61,7 @@
                               failure:(void (^)(NSError *)) failure;
 
 - (void)quitEntourage:(OTEntourage *)entourage
-         success:(void (^)())success
+         success:(void (^)(void))success
          failure:(void (^)(NSError *error))failure;
 
 - (void)entourageUsers:(OTEntourage *)entourage
@@ -69,11 +69,11 @@
                failure:(void (^)(NSError *))failure;
 
 - (void)readEntourageMessages:(NSNumber *)entourageID
-                      success:(void (^)())success
+                      success:(void (^)(void))success
                       failure:(void (^)(NSError *))failure;
 
 - (void)retrieveEntourage:(OTEntourage *)entourage
                  fromRank:(NSNumber *)rank
-                  success:(void (^)())success
+                  success:(void (^)(void))success
                   failure:(void (^)(NSError *))failure;
 @end

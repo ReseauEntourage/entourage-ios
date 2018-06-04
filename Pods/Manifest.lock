@@ -40,6 +40,7 @@ PODS:
     - nanopb (~> 0.3)
   - FirebaseCore (5.0.2):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+<<<<<<< HEAD
   - FirebaseInstanceID (3.0.0):
     - FirebaseCore (~> 5.0)
   - FormatterKit (1.8.2):
@@ -75,8 +76,14 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
+=======
+  - FirebaseInstanceID (2.0.10):
+    - FirebaseCore (~> 4.0)
+  - GoogleToolboxForMac/Defines (2.1.3)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+>>>>>>> 5cbed77f2f31e019ada95e41116d4c9fa3b0ff57
   - IQKeyboardManager (3.3.4)
-  - JSBadgeView (1.4.1)
   - JVFloatLabeledTextField (1.2.1)
   - kingpin (0.3.1)
   - libPhoneNumber-iOS (0.9.13)
@@ -92,7 +99,6 @@ PODS:
   - SnapKit (4.0.0)
   - SVProgressHUD (2.2.5)
   - SWRevealViewController (2.3.0)
-  - WYPopoverController (0.3.8)
 
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
@@ -101,9 +107,7 @@ DEPENDENCIES:
   - Fabric
   - FBSDKCoreKit
   - Firebase/Core
-  - FormatterKit
   - IQKeyboardManager (= 3.3.4)
-  - JSBadgeView (= 1.4.1)
   - JVFloatLabeledTextField
   - kingpin (= 0.3.1)
   - libPhoneNumber-iOS
@@ -114,7 +118,6 @@ DEPENDENCIES:
   - SnapKit (~> 4.0.0)
   - SVProgressHUD
   - SWRevealViewController (= 2.3.0)
-  - WYPopoverController (= 0.3.8)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -129,10 +132,8 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseInstanceID
-    - FormatterKit
     - GoogleToolboxForMac
     - IQKeyboardManager
-    - JSBadgeView
     - JVFloatLabeledTextField
     - kingpin
     - libPhoneNumber-iOS
@@ -144,13 +145,13 @@ SPEC REPOS:
     - SnapKit
     - SVProgressHUD
     - SWRevealViewController
-    - WYPopoverController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AWSCore: dd4d3d4fcafdce68a42025c3e9e45b026cf1f33b
   AWSS3: 69589dec1883cdca872b4ddd1ea2ef814b0846fe
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+<<<<<<< HEAD
   Crashlytics: 0360624eea1c978a743feddb2fb1ef8b37fb7a0d
   Fabric: bda89e242bce1b7b8ab264248cf3407774ce0095
   FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
@@ -160,8 +161,17 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 83e0040351565df711a5db3d8ebe5ea21aca998a
   FormatterKit: 4b8f29acc9b872d5d12a63efb560661e8f2e1b98
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
+=======
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  FBSDKCoreKit: 55d7f2ac45d9c4b9b6119f4e43900fe84b9b7b1b
+  Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
+  FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
+  FirebaseCore: 90cb1c53d69b556f112a1bf72b5fcfaad7650790
+  FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
+  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+>>>>>>> 5cbed77f2f31e019ada95e41116d4c9fa3b0ff57
   IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
-  JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
   JVFloatLabeledTextField: cfc44e3c4d493b2ed92ede8035e8e89c2912ba64
   kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
   libPhoneNumber-iOS: e444379ac18bbfbdefad571da735b2cd7e096caa
@@ -173,8 +183,11 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
-  WYPopoverController: dda54780e1bef186464ae5a10ab9b4998c279e89
 
-PODFILE CHECKSUM: ccc25f233ddd3ddfbf2fd8632834df6899535111
+PODFILE CHECKSUM: e68ab008a64302b72463a004930aa784e627e64a
 
+<<<<<<< HEAD
 COCOAPODS: 1.5.2
+=======
+COCOAPODS: 1.5.3
+>>>>>>> 5cbed77f2f31e019ada95e41116d4c9fa3b0ff57

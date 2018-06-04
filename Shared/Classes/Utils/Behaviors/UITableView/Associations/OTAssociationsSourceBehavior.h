@@ -10,6 +10,6 @@
 
 @interface OTAssociationsSourceBehavior : OTFilteredDataSourceBehavior
 
-- (void)updateAssociation:(void (^)())success;
+- (void)updateAssociation:(void (^)(void))success;
 
 @end

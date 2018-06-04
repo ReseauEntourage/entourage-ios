@@ -263,7 +263,7 @@
 
 - (NSArray *)groupUniquement {
     OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-    NSArray *uniquement = [[NSArray alloc] init];
+    NSArray *uniquement = nil;
     if(user.partner == nil)
         uniquement = @[
                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages

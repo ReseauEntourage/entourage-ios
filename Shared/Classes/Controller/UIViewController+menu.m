@@ -6,11 +6,12 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import <SWRevealViewController/SWRevealViewController.h>
+
 #import "UIViewController+menu.h"
 #import "UIBarButtonItem+Badge.h"
 #import "OTUnreadMessagesService.h"
 #import "OTConsts.h"
-#import "SWRevealViewController.h"
 #import "entourage-Swift.h"
 
 @implementation UIViewController (menu)
