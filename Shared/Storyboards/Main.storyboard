@@ -1078,7 +1078,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JfD-Ou-63N">
-                                <rect key="frame" x="18" y="561" width="173" height="48"/>
+                                <rect key="frame" x="18" y="550" width="173" height="48"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPinWhite" translatesAutoresizingMaskIntoConstraints="NO" id="9mv-KH-vwy">
                                         <rect key="frame" x="8" y="8" width="32" height="32"/>
@@ -1324,10 +1324,10 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Kc9-kH-YQ7" secondAttribute="bottom" constant="13" id="DuD-zc-Fd5"/>
                             <constraint firstItem="8zL-iD-eto" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="H3B-oV-EPp"/>
                             <constraint firstItem="fyj-qg-Gvf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="JEK-w9-aoe"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="JfD-Ou-63N" secondAttribute="bottom" constant="9" id="KDw-A2-wky"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="leading" secondItem="Kc9-kH-YQ7" secondAttribute="trailing" constant="-62" id="Kq0-ZY-fSh"/>
                             <constraint firstItem="Lzp-RD-PWj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="T4w-9f-t1L"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uRg-cj-T9Q" secondAttribute="bottom" constant="12" id="TDA-nJ-u0d"/>
+                            <constraint firstItem="Kc9-kH-YQ7" firstAttribute="centerY" secondItem="Iek-sh-67W" secondAttribute="centerY" id="TYm-Ke-Xh1"/>
                             <constraint firstAttribute="trailing" secondItem="Bt3-Uv-XrN" secondAttribute="trailing" id="UJE-o2-0dd"/>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="UhE-G3-aXJ"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="VLV-3h-yeI"/>
