@@ -5308,6 +5308,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "2eb40226-8524-487b-b862-d70368a4f534";
@@ -5318,7 +5319,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
-				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -5355,6 +5355,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = Entourage;
 				PROVISIONING_PROFILE = "3cee3cd3-1044-4f02-aafc-212692b18297";
@@ -5364,7 +5365,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
-				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Store;
@@ -5672,6 +5672,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
 				PROVISIONING_PROFILE = "2eb40226-8524-487b-b862-d70368a4f534";
@@ -5681,7 +5682,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
-				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Beta;
