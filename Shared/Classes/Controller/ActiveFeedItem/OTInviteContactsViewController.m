@@ -82,7 +82,7 @@
     } orFailure:^(NSError *error, NSArray *failedNUmbers) {
         [SVProgressHUD dismiss];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"inviteByPhoneFailed") preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
 }

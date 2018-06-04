@@ -75,9 +75,6 @@ double const kOTMapViewBaseZoom = 2;
     CGFloat deltaYPoint = newLocation.y - prevLocation.y;
     
     if (fabs(deltaYPoint) > kOTMapViewTouchSensitivity) {
-        
-        double velocity = (newLocation.y - prevLocation.y) / touch.timestamp;
-        velocity = pow(velocity, 2);
         if (deltaYPoint < 0) {
             [self applyZoom:YES withVelocity:0.05];
         }

@@ -57,6 +57,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
             NSDictionary *userInfo = @{NSLocalizedDescriptionKey: OTLocalizedString(@"generic_error")};
             failure([NSError errorWithDomain:@"entourageError" code:-1 userInfo:userInfo]);
         }
+        return;
     }
     NSDictionary *parameters = @{@"user": @{@"phone": phone, @"sms_code": password}};
     OTRequestOperationManager *requestManager = [OTHTTPRequestManager sharedInstance];

@@ -121,13 +121,13 @@
     if (phone.length == 0) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"requestImposible")
                                                                                  message:OTLocalizedString(@"retryPhone") preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alertController animated:YES completion:nil];
     }
     else if (![phone isValidPhoneNumber]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"requestImposible")
                                                                                  message:OTLocalizedString(@"invalidPhoneNumber") preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alertController animated:YES completion:nil];
     }
     else {

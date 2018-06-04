@@ -72,7 +72,7 @@
     UIButton *sectionButton = [headerCell viewWithTag:SECTION_BUTTON_TAG];
     sectionButton.tag = section;
     NSString *buttonTitle = [categoryType.type isEqualToString:@"ask_for_help"] ?
-                                @"JE CHERCHE..." : @"JE ME PROPOSE DE…";
+                                OTLocalizedString(@"JE CHERCHE...") : OTLocalizedString(@"JE ME PROPOSE DE…");
     [sectionButton setTitle:buttonTitle
                    forState:UIControlStateNormal];
     [sectionButton addTarget:self

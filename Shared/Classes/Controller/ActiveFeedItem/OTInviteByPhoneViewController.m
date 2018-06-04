@@ -66,7 +66,7 @@
         UIAlertController *controller = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error")
                                                                             message:OTLocalizedString(@"inviteByPhoneFailed")
                                                                      preferredStyle:UIAlertControllerStyleAlert];
-        [controller addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:controller animated:YES completion:nil];
     }];
 }
