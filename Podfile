@@ -14,7 +14,6 @@ def sharedPods
     pod 'IQKeyboardManager', '3.3.4'
     pod 'SVProgressHUD'
     pod 'SimpleKeychain', '~> 0.7'
-    pod 'FormatterKit'
     pod 'AWSS3', '~> 2.4'
     pod 'Fabric'
     pod 'Crashlytics', '~>  3.9'
