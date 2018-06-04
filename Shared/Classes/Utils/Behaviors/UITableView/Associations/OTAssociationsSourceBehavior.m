@@ -51,7 +51,7 @@
     }];
 }
 
-- (void)updateAssociation:(void (^)())success {
+- (void)updateAssociation:(void (^)(void))success {
     OTAssociation *currentAssociation = [self getCurrentAssociation];
     if(currentAssociation == self.originalAssociation) {
         if(success)

@@ -23,7 +23,7 @@
     }];
 }
 
-- (void)accept:(OTFeedItemJoiner *)joiner success:(void (^)())success failure:(void (^)(NSError *))failure {
+- (void)accept:(OTFeedItemJoiner *)joiner success:(void (^)(void))success failure:(void (^)(NSError *))failure {
     [[OTEntourageService new] updateEntourageJoinRequestStatus:JOIN_ACCEPTED forUser:joiner.uID forEntourage:self.entourage.uid withSuccess:^() {
         NSLog(@"JOIN ACCEPT");
         if(success)
@@ -35,7 +35,7 @@
     }];
 }
 
-- (void)reject:(OTFeedItemJoiner *)joiner success:(void (^)())success failure:(void (^)(NSError *))failure {
+- (void)reject:(OTFeedItemJoiner *)joiner success:(void (^)(void))success failure:(void (^)(NSError *))failure {
     [[OTEntourageService new] rejectEntourageJoinRequestForUser:joiner.uID forEntourage:self.entourage.uid withSuccess:^() {
         NSLog(@"JOIN REJECT");
         if(success)

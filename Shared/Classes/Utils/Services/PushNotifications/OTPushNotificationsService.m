@@ -45,7 +45,7 @@
     [mixpanel.people addPushDeviceToken:tokenData];
 }
 
-- (void)clearTokenWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)clearTokenWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self sendAppInfoWithSuccess:success orFailure:failure];
@@ -240,7 +240,7 @@
     }
 }
 
-- (void)sendAppInfoWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)sendAppInfoWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     [[OTAuthService new] sendAppInfoWithSuccess:^() {
         NSLog(@"Application info sent!");
         if(success)

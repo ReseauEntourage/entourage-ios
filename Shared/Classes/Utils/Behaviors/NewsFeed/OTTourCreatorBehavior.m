@@ -143,7 +143,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)sendTourPointsWithSuccess:(void(^)())success orFailure:(void(^)(NSError *))failure {
+- (void)sendTourPointsWithSuccess:(void(^)(void))success orFailure:(void(^)(NSError *))failure {
     NSArray *sentPoints = [NSArray arrayWithArray:self.tourPointsToSend];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[OTTourService new] sendTourPoint:self.tourPointsToSend

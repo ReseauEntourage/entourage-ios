@@ -147,7 +147,7 @@
     
     NSString *buttonTitle = OTLocalizedString(@"all_messages_nav_title").uppercaseString;
     UIFont *buttonFont = [UIFont fontWithName:@"SFUIText-Medium" size:17];
-    CGFloat buttonWidth = [buttonTitle sizeWithFont:buttonFont].width;
+    CGFloat buttonWidth = [buttonTitle sizeWithAttributes:@{NSFontAttributeName:buttonFont}].width;
     UIColor *buttonSelectedColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     CGFloat underlineHeight = 3.0f;
     CGFloat marginOffset = 20.0f;
@@ -174,7 +174,7 @@
     [leftButton addSubview:self.leftLineView];
     
     buttonTitle = OTLocalizedString(@"unread_messages_nav_title").uppercaseString;
-    buttonWidth = [buttonTitle sizeWithFont:buttonFont].width;
+    buttonWidth = [buttonTitle sizeWithAttributes:@{NSFontAttributeName:buttonFont}].width;
     UIButton *rightButton = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, buttonWidth , self.navigationController.navigationBar.frame.size.height)];
     [rightButton setTitle: buttonTitle forState: UIControlStateNormal];
     rightButton.titleLabel.font = buttonFont;

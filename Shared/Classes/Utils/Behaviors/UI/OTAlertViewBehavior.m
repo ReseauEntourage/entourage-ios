@@ -24,7 +24,7 @@
     self.buttonActions = [NSMutableArray new];
 }
 
-- (void)addAction:(NSString *)title delegate:(void (^)())delegate {
+- (void)addAction:(NSString *)title delegate:(void (^)(void))delegate {
     [self.buttonTitles addObject:title];
     [self.buttonActions addObject:delegate];
 }
@@ -50,7 +50,7 @@
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    void (^action)() = self.buttonActions[buttonIndex];
+    void (^action)(void) = self.buttonActions[buttonIndex];
     action();
 }
 

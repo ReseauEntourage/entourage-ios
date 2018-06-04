@@ -120,11 +120,10 @@ class NBTextField: JVFloatLabeledTextField, Validable {
   // MARK: UITextField input managing
 
   override open func deleteBackward() {
-    if text?.last == " " {
-      if let indexNumberWithWhiteSpace = text?.index((text?.endIndex)!, offsetBy: -1) {
-        text = text?.substring(to: indexNumberWithWhiteSpace)
-      }
-      return
+    if let myText=text, myText.last == " " {
+        let indexNumberWithWhiteSpace = myText.index(myText.endIndex, offsetBy: -1)
+        text = String(myText[..<indexNumberWithWhiteSpace])
+        return
     }
     super.deleteBackward()
   }
@@ -138,11 +137,11 @@ class NBTextField: JVFloatLabeledTextField, Validable {
   }
 
   @objc func numberTextDidChange() {
-    let numbersOnly:Bool = phoneNumberUtility.isViablePhoneNumber(text)
+    //let numbersOnly:Bool = phoneNumberUtility.isViablePhoneNumber(text)
     //text = phoneNumberFormatter.inputStringAndRememberPosition(numbersOnly)
 
     //var isValid = inputIsValid(numbersOnly)
-    var isValid:Bool = true
+    let isValid:Bool = true
     inputValidationChanged?(isValid)
   }
 
