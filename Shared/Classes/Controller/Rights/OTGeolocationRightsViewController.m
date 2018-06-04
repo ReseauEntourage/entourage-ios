@@ -13,7 +13,7 @@
 #import "NSNotification+entourage.h"
 #import "UINavigationController+entourage.h"
 #import "UIBarButtonItem+factory.h"
-#import "Mixpanel/Mixpanel.h"
+#import <Mixpanel/Mixpanel.h>
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"
 

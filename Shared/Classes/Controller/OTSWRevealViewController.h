@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SWRevealViewController.h"
+#import <SWRevealViewController/SWRevealViewController.h>
 
 @interface OTSWRevealViewController : SWRevealViewController
 

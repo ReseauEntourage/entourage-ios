@@ -9,7 +9,7 @@
 #import "OTOptionsViewController.h"
 #import "OTOngoingTourService.h"
 #import "OTAlertViewBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "entourage-Swift.h"
 
 @interface OTOptionsViewController ()

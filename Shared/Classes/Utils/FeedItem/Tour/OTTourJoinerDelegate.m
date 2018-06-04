@@ -23,7 +23,7 @@
     }];
 }
 
-- (void)accept:(OTFeedItemJoiner *)joiner success:(void (^)())success failure:(void (^)(NSError *))failure {
+- (void)accept:(OTFeedItemJoiner *)joiner success:(void (^)(void))success failure:(void (^)(NSError *))failure {
     [[OTTourService new] updateTourJoinRequestStatus:JOIN_ACCEPTED forUser:joiner.uID forTour:self.tour.uid withSuccess:^() {
         NSLog(@"JOIN ACCEPT");
         if(success)
@@ -35,7 +35,7 @@
     }];
 }
 
-- (void)reject:(OTFeedItemJoiner *)joiner success:(void (^)())success failure:(void (^)(NSError *))failure {
+- (void)reject:(OTFeedItemJoiner *)joiner success:(void (^)(void))success failure:(void (^)(NSError *))failure {
     [[OTTourService new] rejectTourJoinRequestForUser:joiner.uID forTour:self.tour.uid withSuccess:^() {
         NSLog(@"JOIN REJECT");
         if(success)

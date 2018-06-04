@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTLoginViewController.h"
 #import "OTLostCodeViewController.h"
 #import "OTConsts.h"
-#import "IQKeyboardManager.h"
 #import "OTUserEmailViewController.h"
 #import "OTAuthService.h"
 #import "UITextField+indentation.h"
@@ -22,7 +24,6 @@
 #import "UITextField+indentation.h"
 #import "OTUser.h"
 #import "UIColor+entourage.h"
-#import "SVProgressHUD.h"
 #import "OTOnboardingNavigationBehavior.h"
 #import "OTPushNotificationsService.h"
 #import "OTAskMoreViewController.h"
@@ -32,7 +33,7 @@
 #import "entourage-Swift.h"
 #import "OTCountryCodePickerViewDataSource.h"
 #import "UIColor+entourage.h"
-#import "Mixpanel/Mixpanel.h"
+#import <Mixpanel/Mixpanel.h>
 #import "OTDeepLinkService.h"
 #import "OTAppState.h"
 

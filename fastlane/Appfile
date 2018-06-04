@@ -4,4 +4,4 @@ apple_id "apple@entourage.social" # Your Apple email address
 team_id "RT7X9LLTN6"  # Developer Portal Team ID
 
 # you can even provide different app identifiers, Apple IDs and team names per lane:
-# More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md
+# More information: https://docs.fastlane.tools/advanced/#appfile

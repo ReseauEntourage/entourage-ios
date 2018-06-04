@@ -6,8 +6,9 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <AFNetworking/UIButton+AFNetworking.h>
+
 #import "UIButton+entourage.h"
-#import "UIButton+AFNetworking.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "OTFeedItemFactory.h"

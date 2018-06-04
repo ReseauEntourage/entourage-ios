@@ -6,6 +6,8 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTFeedItemJoinMessageController.h"
 #import "OTTourService.h"
 #import "OTEntourageService.h"
@@ -13,7 +15,6 @@
 #import "OTEntourage.h"
 #import "OTFeedItemFactory.h"
 
-#import "SVProgressHUD.h"
 #import "OTConsts.h"
 
 @interface OTFeedItemJoinMessageController () <UITextViewDelegate>

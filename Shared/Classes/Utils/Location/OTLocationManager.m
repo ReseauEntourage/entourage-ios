@@ -12,7 +12,7 @@
 #import "OTAPIConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
-#import "Mixpanel.h"
+#import <Mixpanel/Mixpanel.h>
 
 @import Firebase;
 

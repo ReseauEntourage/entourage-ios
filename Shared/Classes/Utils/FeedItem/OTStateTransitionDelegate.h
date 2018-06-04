@@ -12,9 +12,9 @@
 
 @protocol OTStateTransitionDelegate <NSObject>
 
-- (void)stopWithSuccess:(void (^)())success orFailure:(void (^)(NSError*))failure;
+- (void)stopWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError*))failure;
 - (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure;
-- (void)quitWithSuccess:(void (^)())success orFailure:(void (^)(NSError*))failure;
+- (void)quitWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError*))failure;
 - (void)sendJoinRequest:(void (^)(OTFeedItemJoiner*))success orFailure:(void (^)(NSError*, BOOL))failure;
 
 @end

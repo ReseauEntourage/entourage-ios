@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <Social/Social.h>
+
 #import "OTCreateMeetingViewController.h"
 #import "OTMainViewController.h"
 #import "OTEncounter.h"
@@ -18,9 +21,7 @@
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
 #import "UIBarButtonItem+factory.h"
-#import "MBProgressHUD.h"
-#import "SVProgressHUD.h"
-#import <Social/Social.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 #import "OTEncounterDisclaimerBehavior.h"
 #import "OTTextWithCount.h"
 #import "OTLocationSelectorViewController.h"

@@ -10,7 +10,7 @@
 
 // Pods
 #import <AFNetworking/AFNetworking.h>
-#import "SimpleKeychain.h"
+#import <SimpleKeychain/SimpleKeychain.h>
 
 // Manager
 #import "OTHTTPRequestManager.h"
@@ -91,7 +91,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
 }
 
 - (void)deleteAccountForUser:(NSNumber *)userID
-                     success:(void (^)())success
+                     success:(void (^)(void))success
                      failure:(void (^)(NSError *))failure
 {
     NSString *url = [NSString stringWithFormat:API_URL_DELETE_ACCOUNT, TOKEN];
@@ -142,7 +142,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
          }];
 }
 
-- (void)sendAppInfoWithSuccess:(void (^)())success
+- (void)sendAppInfoWithSuccess:(void (^)(void))success
                        failure:(void (^)(NSError *))failure
 {
     NSString *pushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];

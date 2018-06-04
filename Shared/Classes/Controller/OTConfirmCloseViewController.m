@@ -6,10 +6,11 @@
 //  Copyright © 2017 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTConfirmCloseViewController.h"
 #import "OTNextStatusButtonBehavior.h"
 #import "OTFeedItemFactory.h"
-#import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "OTMailSenderBehavior.h"
 #import "OTCloseReason.h"

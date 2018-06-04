@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 // Controller
 #import "OTMainViewController.h"
 #import "UIViewController+menu.h"
@@ -24,12 +27,10 @@
 #import "OTMyEntouragesViewController.h"
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
-#import "JSBadgeView.h"
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
 #import "OTConsts.h"
 #import "OTAPIConsts.h"
-#import "SVProgressHUD.h"
 #import "OTFeedItemsTableView.h"
 #import "OTUser.h"
 #import "OTTour.h"
@@ -45,11 +46,7 @@
 #import "UIColor+entourage.h"
 #import "UILabel+entourage.h"
 #import "MKMapView+entourage.h"
-#import <UIKit/UIKit.h>
-#import <WYPopoverController/WYPopoverController.h>
 #import <QuartzCore/QuartzCore.h>
-#import "TTTTimeIntervalFormatter.h"
-#import "TTTLocationFormatter.h"
 #import <AudioToolbox/AudioServices.h>
 #import "NSUserDefaults+OT.h"
 #import "NSDictionary+Parsing.h"
@@ -83,8 +80,8 @@
 #import "OTToggleVisibleBehavior.h"
 #import "OTCollectionSourceBehavior.h"
 #import "OTHeatzonesCollectionSource.h"
-#import "KPClusteringController.h"
-#import "KPAnnotation.h"
+#import <Kingpin/KPClusteringController.h>
+#import <Kingpin/KPAnnotation.h>
 #import "OTAnnouncement.h"
 #import "OTMapView.h"
 #import "entourage-Swift.h"
@@ -136,7 +133,6 @@
 @property (nonatomic, strong) OTGuideMapDelegate                    *guideMapDelegate;
 @property (nonatomic, strong) NSString                              *entourageType;
 @property (nonatomic, strong) NSMutableArray                        *encounters;
-@property (nonatomic, strong) WYPopoverController                   *popover;
 @property (nonatomic) BOOL                                          isRegionSetted;
 @property (nonatomic, assign) CGPoint                               mapPoint;
 @property (nonatomic, strong) CLLocation                            *tappedLocation;
@@ -936,12 +932,6 @@
             }
         }
     }
-}
-
-#pragma mark - OTCalloutViewControllerDelegate
-
-- (void)dismissPopover {
-    [self.popover dismissPopoverAnimated:YES];
 }
 
 #pragma mark - OTOptionsDelegate

@@ -6,6 +6,10 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <AFNetworking/UIButton+AFNetworking.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <SimpleKeychain/A0SimpleKeychain.h>
+
 #import "OTAppDelegate.h"
 #import "OTConsts.h"
 #import "OTUserEditViewController.h"
@@ -16,9 +20,6 @@
 #import "OTAuthService.h"
 #import "UIColor+entourage.h"
 #import "NSUserDefaults+OT.h"
-#import "UIButton+AFNetworking.h"
-#import "SVProgressHUD.h"
-#import "A0SimpleKeychain.h"
 #import "NSString+Validators.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTMailTextCheckBehavior.h"

@@ -1,6 +1,5 @@
-# Customise this file, documentation can be found here:
-# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
-# All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
+# Customise this file, documentation can be found here: https://docs.fastlane.tools
+# All available actions: https://docs.fastlane.tools/actions/
 # can also be listed using the `fastlane actions` command
 
 # Change the syntax highlighting to Ruby
@@ -39,15 +38,9 @@ platform :ios do
       scheme: "EntourageBeta",
       output_directory: ENV["BITRISE_DEPLOY_DIR"]
       )
-    appaloosa(
-      api_token: options[:appaloosa_api_key],
-      store_id: options[:appaloosa_store_id],
-      screenshots: "",
-      group_ids: "13446"
-      )
   end
 
-  desc "Submit a new Pfp-Beta Build to appaloosa"
+  desc "Build a new Pfp-Beta"
   desc "This will also make sure the profile is up to date"
   lane :pfp_beta do |options|
     sigh(
@@ -64,22 +57,31 @@ platform :ios do
       scheme: "PfpBeta",
       output_directory: ENV["BITRISE_DEPLOY_DIR"]
       )
-    appaloosa(
-      api_token: options[:appaloosa_api_key],
-      store_id: options[:appaloosa_store_id],
-      screenshots: "",
-      group_ids: "13446"
+  end
+
+  desc "Submit a new Entourage Build to TestFlight"
+  desc "This will also make sure the profile is up to date"
+  lane :deploy_to_TestFlight do |options|
+    sigh(
+     app_identifier: "social.entourage.entourageios",
+     username: "apple@entourage.social",
+     adhoc: false,
+     force: true
+    )
+    gym(
+      clean: true,
+      scheme: "EntourageStore"
+      )
+    pilot(
+      skip_waiting_for_build_processing: true
       )
   end
 
-  desc "Submit a new Beta Build to appaloosa"
+  desc "Submit a new PFP Build to TestFlight"
   desc "This will also make sure the profile is up to date"
-  lane :deploy_to_TestFlight do |options|
-    #cert(
-    # username: "apple@entourage.social"
-    #)
+  lane :deploy_PFP_to_TestFlight do |options|
     sigh(
-     app_identifier: "social.entourage.entourageios",
+     app_identifier: "social.entourage.entourageios.pfp",
      username: "apple@entourage.social",
      adhoc: false,
      force: true

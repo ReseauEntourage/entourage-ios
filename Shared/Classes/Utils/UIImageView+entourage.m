@@ -6,8 +6,8 @@
 //  Copyright © 2017 OCTO Technology. All rights reserved.
 //
 
+#import <AFNetworking/UIImageView+AFNetworking.h>
 #import "UIImageView+entourage.h"
-#import "UIImageView+AFNetworking.h"
 
 @implementation UIImageView (entourage)
 

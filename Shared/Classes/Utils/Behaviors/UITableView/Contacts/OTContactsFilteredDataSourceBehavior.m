@@ -9,7 +9,7 @@
 #import "OTContactsFilteredDataSourceBehavior.h"
 #import "OTAddressBookItem.h"
 #import "OTTableDataSourceBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTAddressBookService.h"
 
 @interface OTContactsFilteredDataSourceBehavior ()

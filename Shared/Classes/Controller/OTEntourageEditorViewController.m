@@ -6,6 +6,8 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTEntourageEditorViewController.h"
 #import "OTTextWithCount.h"
 #import "OTConsts.h"
@@ -16,7 +18,6 @@
 #import "UIViewController+menu.h"
 #import "UITextField+indentation.h"
 #import "UIBarButtonItem+factory.h"
-#import "SVProgressHUD.h"
 #import "OTEntourageDisclaimerBehavior.h"
 #import "OTEditEntourageTableSource.h"
 #import "OTEditEntourageNavigationBehavior.h"

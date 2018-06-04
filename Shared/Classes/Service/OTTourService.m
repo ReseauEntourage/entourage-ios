@@ -250,7 +250,7 @@ NSString *const kTourPoints = @"tour_points";
 - (void)updateTourJoinRequestStatus:(NSString *)status
                             forUser:(NSNumber *)userID
                             forTour:(NSNumber *)tourID
-                        withSuccess:(void (^)())success
+                        withSuccess:(void (^)(void))success
                             failure:(void (^)(NSError *))failure
 {
     
@@ -279,7 +279,7 @@ NSString *const kTourPoints = @"tour_points";
 
 - (void)rejectTourJoinRequestForUser:(NSNumber*)userID
                               forTour:(NSNumber*)tourID
-                          withSuccess:(void (^)())success
+                          withSuccess:(void (^)(void))success
                               failure:(void (^)(NSError *))failure
 {
     
@@ -429,7 +429,7 @@ NSString *const kTourPoints = @"tour_points";
 
 
 - (void)quitTour:(OTTour *)tour
-         success:(void (^)())success
+         success:(void (^)(void))success
          failure:(void (^)(NSError *error))failure {
    
     NSString *url = [NSString stringWithFormat:API_URL_TOUR_QUIT, kTours, tour.uid, USER_ID, TOKEN];
@@ -502,7 +502,7 @@ NSString *const kTourPoints = @"tour_points";
 }
 
 - (void)readTourMessages:(NSNumber *)tourID
-                 success:(void (^)())success
+                 success:(void (^)(void))success
                  failure:(void (^)(NSError *))failure {
       NSString *url = [NSString stringWithFormat: @API_URL_TOUR_SET_READ_MESSAGES, tourID, TOKEN];
     

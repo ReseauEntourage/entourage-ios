@@ -13,7 +13,7 @@
 
 @implementation OTEntourageStateTransition
 
-- (void)stopWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)stopWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     success();
 }
 
@@ -32,7 +32,7 @@
                                  }];
 }
 
-- (void)quitWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)quitWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     NSString *oldJoinState = self.entourage.joinStatus;
     self.entourage.joinStatus = JOIN_NOT_REQUESTED;
     [[OTEntourageService new] quitEntourage:self.entourage
