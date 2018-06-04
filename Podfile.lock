@@ -14,32 +14,34 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AWSCore (2.6.16)
-  - AWSS3 (2.6.16):
-    - AWSCore (= 2.6.16)
+  - AWSCore (2.6.20)
+  - AWSS3 (2.6.20):
+    - AWSCore (= 2.6.20)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
-  - Fabric (1.7.6)
-  - FBSDKCoreKit (4.32.0):
+  - Crashlytics (3.10.2):
+    - Fabric (~> 1.7.7)
+  - Fabric (1.7.7)
+  - FBSDKCoreKit (4.33.0):
     - Bolts (~> 1.7)
-  - Firebase/Core (4.13.0):
-    - FirebaseAnalytics (= 4.2.0)
-    - FirebaseCore (= 4.0.20)
-  - FirebaseAnalytics (4.2.0):
-    - FirebaseCore (~> 4.0)
-    - FirebaseInstanceID (~> 2.0)
+  - Firebase/Core (5.1.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.0.1)
+  - Firebase/CoreOnly (5.1.0):
+    - FirebaseCore (= 5.0.2)
+  - FirebaseAnalytics (5.0.1):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.20):
+  - FirebaseCore (5.0.2):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseInstanceID (2.0.10):
-    - FirebaseCore (~> 4.0)
+  - FirebaseInstanceID (3.0.0):
+    - FirebaseCore (~> 5.0)
   - FormatterKit (1.8.2):
     - FormatterKit/AddressFormatter (= 1.8.2)
     - FormatterKit/ArrayFormatter (= 1.8.2)
@@ -70,23 +72,23 @@ PODS:
     - FormatterKit/Resources
   - FormatterKit/URLRequestFormatter (1.8.2):
     - FormatterKit/Resources
-  - GoogleToolboxForMac/Defines (2.1.3)
-  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
-    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/Defines (2.1.4)
+  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+    - GoogleToolboxForMac/Defines (= 2.1.4)
   - IQKeyboardManager (3.3.4)
   - JSBadgeView (1.4.1)
   - JVFloatLabeledTextField (1.2.1)
   - kingpin (0.3.1)
   - libPhoneNumber-iOS (0.9.13)
   - MBProgressHUD (0.8)
-  - Mixpanel (3.2.9)
+  - Mixpanel (3.3.2)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - OCMock (3.1)
-  - SimpleKeychain (0.8.0)
+  - SimpleKeychain (0.8.1)
   - SnapKit (4.0.0)
   - SVProgressHUD (2.2.5)
   - SWRevealViewController (2.3.0)
@@ -115,7 +117,7 @@ DEPENDENCIES:
   - WYPopoverController (= 0.3.8)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - AFNetworking
     - AWSCore
     - AWSS3
@@ -146,28 +148,28 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AWSCore: 314df68684e338310409c6a3b050e28932deb6ff
-  AWSS3: 218b24bc68387f0c715fd37168f9db6cbec9d0a7
+  AWSCore: dd4d3d4fcafdce68a42025c3e9e45b026cf1f33b
+  AWSS3: 69589dec1883cdca872b4ddd1ea2ef814b0846fe
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
-  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
-  FBSDKCoreKit: 55d7f2ac45d9c4b9b6119f4e43900fe84b9b7b1b
-  Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
-  FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
-  FirebaseCore: 90cb1c53d69b556f112a1bf72b5fcfaad7650790
-  FirebaseInstanceID: 8d20d890d65c917f9f7d9950b6e10a760ad34321
+  Crashlytics: 0360624eea1c978a743feddb2fb1ef8b37fb7a0d
+  Fabric: bda89e242bce1b7b8ab264248cf3407774ce0095
+  FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
+  Firebase: e08fb0795f35707aeb1d8a715c731c45bdf6fd56
+  FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
+  FirebaseCore: b81044df1044c0857a0737c6324678b72d4f7f00
+  FirebaseInstanceID: 83e0040351565df711a5db3d8ebe5ea21aca998a
   FormatterKit: 4b8f29acc9b872d5d12a63efb560661e8f2e1b98
-  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
   JSBadgeView: 3861ddee41094284d9468e6d0af5107f703aaac5
   JVFloatLabeledTextField: cfc44e3c4d493b2ed92ede8035e8e89c2912ba64
   kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
   libPhoneNumber-iOS: e444379ac18bbfbdefad571da735b2cd7e096caa
   MBProgressHUD: 8688c331cb64702283be37ab8d7d329cdd25f251
-  Mixpanel: 85cd02171dc84a8b0295bbe3db65604e2934b920
+  Mixpanel: be4de218d0ffaaae59b498078b2ecf2db1f8072c
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   OCMock: 721c11680ae2d65d67f40932777194daf7002781
-  SimpleKeychain: 84c748463eec601dfee5e7990f55cc82edc5488d
+  SimpleKeychain: e2485c28d82fcece35e9e41faeac42ebfe614815
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
@@ -175,4 +177,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: ccc25f233ddd3ddfbf2fd8632834df6899535111
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2

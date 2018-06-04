@@ -1261,6 +1261,7 @@
     }
     if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
+    
     UIViewController *destinationViewController = segue.destinationViewController;
     if([segue.identifier isEqualToString:@"UserProfileSegue"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;
