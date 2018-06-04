@@ -18,6 +18,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblDisplayName;
 @property (nonatomic, weak) IBOutlet UIImageView *imgAssociation;
 
-- (void)configureWithTitle:(NSString*)title url:(NSString*)url;
+- (void)configureWith:(OTFeedItemJoiner *)item;
 
 @end

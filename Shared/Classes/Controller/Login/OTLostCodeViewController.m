@@ -108,7 +108,9 @@
             alertTitle = @"";
             alertMessage = [OTAppAppearance userPhoneNumberNotFoundMessage];
         }
-        [[[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
 }
 
@@ -117,22 +119,16 @@
 - (IBAction)regenerateButtonDidTap:(id)sender {
     NSString *phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
     if (phone.length == 0) {
-        [[[UIAlertView alloc]
-          initWithTitle: OTLocalizedString(@"requestImposible")
-          message:OTLocalizedString(@"retryPhone")
-          delegate:nil
-          cancelButtonTitle:nil
-          otherButtonTitles:@"Ok",
-          nil] show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"requestImposible")
+                                                                                 message:OTLocalizedString(@"retryPhone") preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     else if (![phone isValidPhoneNumber]) {
-        [[[UIAlertView alloc]
-          initWithTitle:OTLocalizedString(@"requestImposible")
-          message:OTLocalizedString(@"invalidPhoneNumber")//@"Numéro de téléphone invalide"
-          delegate:nil
-          cancelButtonTitle:nil
-          otherButtonTitles:@"Ok",
-          nil] show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"requestImposible")
+                                                                                 message:OTLocalizedString(@"invalidPhoneNumber") preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     else {
         [self.phoneTextField setSelected:NO];
