@@ -759,6 +759,8 @@
 		A2306AA820C54EB00094370E /* PfpUserVoisinage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */; };
 		A2306AA920C54EB90094370E /* PfpUserVoisinageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */; };
 		A2306AAB20C551690094370E /* PfpUserCircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAA20C551690094370E /* PfpUserCircleCell.swift */; };
+		A2306AAD20C663660094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306AAC20C663660094370E /* AppConfigurations.plist */; };
+		A2306AAE20C663660094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306AAC20C663660094370E /* AppConfigurations.plist */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
@@ -1234,7 +1236,6 @@
 		96B658BD209A689200EB0398 /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 		96F30D6220BE956100229BB8 /* OTInviteCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTInviteCell.h; sourceTree = "<group>"; };
 		96F30D6320BE956100229BB8 /* OTInviteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTInviteCell.m; sourceTree = "<group>"; };
-		96F30D6620BEA13400229BB8 /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = "<group>"; };
 		A19BDADC422EDAB56B022976 /* Pods-pfp.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.store.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.store.xcconfig"; sourceTree = "<group>"; };
 		A202E79F2085CFC20058F32C /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		A202E7A22085CFC20058F32C /* logo_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black.png; sourceTree = "<group>"; };
@@ -1949,6 +1950,7 @@
 		A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PfpUserVoisinage.storyboard; sourceTree = "<group>"; };
 		A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpUserVoisinageViewController.swift; sourceTree = "<group>"; };
 		A2306AAA20C551690094370E /* PfpUserCircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpUserCircleCell.swift; sourceTree = "<group>"; };
+		A2306AAC20C663660094370E /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -3472,9 +3474,9 @@
 		A24199B52084F87100BC7466 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				96F30D6620BEA13400229BB8 /* AppConfigurations.plist */,
 				A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */,
 				A202E80A2085D0FE0058F32C /* OTAppDelegate.h */,
+				A2306AAC20C663660094370E /* AppConfigurations.plist */,
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
 				A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */,
 				A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */,
@@ -3736,6 +3738,7 @@
 				A202E7E32085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
 				A21D65BB2085FDAA00EF8E0E /* MapOptions.storyboard in Resources */,
 				A21D65AB2085FDAA00EF8E0E /* LocationSelection.storyboard in Resources */,
+				A2306AAD20C663660094370E /* AppConfigurations.plist in Resources */,
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
 				A21D65AA2085FDAA00EF8E0E /* Onboarding.storyboard in Resources */,
@@ -3850,6 +3853,7 @@
 				A296B8A420871CFC00F6AFBD /* LocationSelection.storyboard in Resources */,
 				A296B8A520871CFC00F6AFBD /* TourConfirmation.storyboard in Resources */,
 				A296B8A620871CFC00F6AFBD /* QuitFeedItem.storyboard in Resources */,
+				A2306AAE20C663660094370E /* AppConfigurations.plist in Resources */,
 				A296B8A720871CFC00F6AFBD /* Onboarding.storyboard in Resources */,
 				A296B8A820871CFC00F6AFBD /* Paris.gpx in Resources */,
 				A296B8A920871CFC00F6AFBD /* MyEntourages.storyboard in Resources */,
