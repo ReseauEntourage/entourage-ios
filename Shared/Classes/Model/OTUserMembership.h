@@ -18,6 +18,8 @@ extern NSString *const kUserMembershipListItemPeople;
 @property (nonatomic) NSNumber *id;
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSNumber *noOfPeople;
+
+@property (nonatomic) BOOL isSelected;
 @end
 
 @interface OTUserMembership : NSObject

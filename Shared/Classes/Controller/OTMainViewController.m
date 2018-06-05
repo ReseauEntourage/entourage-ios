@@ -183,6 +183,8 @@
 
 - (void)setup {
     self.solidarityGuideLabel.text = OTLocalizedString(@"map_options_show_guide");
+    self.solidarityGuideLabel.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    self.tapViewBehavior.tapView.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     self.isFirstLoad = YES;
     self.heatzonesCollectionDataSource.heatzonesDelegate = self;
     [self.heatzonesCollectionDataSource initialize];
@@ -244,6 +246,7 @@
     self.launcherButton.hidden = YES;
     self.createEncounterButton.hidden = NO;
     self.stopButton.hidden = NO;
+    
     [[OTTourService new] tourEncounters:self.tourCreatorBehavior.tour success:^(NSArray *items) {
         self.encounters = [NSMutableArray arrayWithArray:items];
     } failure:^(NSError *error) {
@@ -400,6 +403,7 @@
     if (self.isTourListDisplayed) {
         [self showToursList:YES];
     }
+    [self configureNavigationBar];
 }
 
 - (void)switchToGuide {
@@ -417,6 +421,7 @@
     [self showToursMap];
     [self reloadPois];
     [OTAppState switchMapToSolidarityGuide];
+    [self configureNavigationBar];
 }
 
 - (IBAction)goToTourOptions:(id)sender {
@@ -437,6 +442,7 @@
    	self.mapView.showsUserLocation = YES;
     self.mapView.pitchEnabled = NO;
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
+    
     MKCoordinateRegion region;
     if([OTLocationManager sharedInstance].currentLocation)
         region = MKCoordinateRegionMakeWithDistance([OTLocationManager sharedInstance].currentLocation.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
@@ -445,11 +451,13 @@
     [self.mapView setRegion:region animated:NO];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
+    
     for(UIView *view in self.mapView.subviews)
         for(UIGestureRecognizer *recognizer in view.gestureRecognizers)
             if([recognizer class] == [UILongPressGestureRecognizer class])
                 [view removeGestureRecognizer:recognizer];
     UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
+    
     [self.mapView addGestureRecognizer:longPressMapGesture];
 }
 
@@ -502,12 +510,15 @@
     }}
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
-    if(self.isTourListDisplayed)
+    if (self.isTourListDisplayed) {
         return;
-    if(!IS_PRO_USER && !self.guideMapDelegate.isActive) {
+    }
+    
+    if (!IS_PRO_USER && !self.guideMapDelegate.isActive) {
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
         return;
     }
+    
     CGPoint touchPoint = [longPressGesture locationInView:self.mapView];
     if (self.presentedViewController)
         return;
@@ -528,6 +539,7 @@
         if (touchPoint.y + LONGPRESS_DELTA > [UIScreen mainScreen].bounds.size.height )
             self.mapPoint = CGPointMake(touchPoint.x, touchPoint.y - LONGPRESS_DELTA - 10);
         [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+        
     } else {
         if (touchPoint.x - LONGPRESS_DELTA < 0)
             self.mapPoint = CGPointMake(touchPoint.x + LONGPRESS_DELTA, touchPoint.y);
@@ -931,6 +943,8 @@
                 [self.toggleCollectionView toggle:NO animated:YES];
             }
         }
+        
+        [self configureNavigationBar];
     }
 }
 
@@ -1184,22 +1198,29 @@
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }
+    
+    [self configureNavigationBar];
 }
 
 - (void)showToursMap {
     self.tableView.scrollEnabled = NO;
-    if(self.guideMapDelegate.isActive) {
+    
+    if (self.guideMapDelegate.isActive) {
         [self.showSolidarityGuideView setHidden: YES];
         [self.toggleCollectionView toggle:NO animated:NO];
-    }else {
+    } else {
         [OTLogger logEvent:@"Screen06_2MapView"];
         [self.showSolidarityGuideView setHidden: !OTAppConfiguration.supportsSolidarityGuideFunctionality];
     }
-    if(self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0)
+    if (self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0) {
         [self.noDataBehavior showNoData];
+    }
     self.nouveauxFeedItemsButton.hidden = YES;
-    if (self.toursMapDelegate.isActive)
+    
+    if (self.toursMapDelegate.isActive) {
         self.isTourListDisplayed = NO;
+    }
+    
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
 
@@ -1214,6 +1235,8 @@
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     }];
+    
+    [self configureNavigationBar];
 }
 
 #pragma mark 15.2 New Tour - on going
@@ -1231,6 +1254,8 @@
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
+    
+    [self configureNavigationBar];
 }
 
 - (void)showTourConfirmation {

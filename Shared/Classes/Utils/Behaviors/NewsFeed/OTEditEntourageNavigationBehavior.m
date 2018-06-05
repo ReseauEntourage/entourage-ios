@@ -29,6 +29,8 @@
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
     UIViewController *destinationViewController = segue.destinationViewController;
+    [OTAppConfiguration configureNavigationControllerAppearance:destinationViewController.navigationController];
+    
     if([segue.identifier isEqualToString:@"CategoryEditSegue"]) {
         OTCategoryViewController* controller = (OTCategoryViewController *)destinationViewController;
         controller.categorySelectionDelegate = self;

@@ -637,15 +637,15 @@
                         <viewControllerLayoutGuide type="top" id="Re0-Ci-zyV"/>
                         <viewControllerLayoutGuide type="bottom" id="NK3-DY-Z6P"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="FkK-0X-a3z">
+                    <view key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" id="FkK-0X-a3z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tqp-Pu-7oC" customClass="OTTextWithCount">
-                                <rect key="frame" x="0.0" y="80" width="320" height="215"/>
+                                <rect key="frame" x="0.0" y="80" width="320" height="107"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="215" id="voJ-ys-moh"/>
+                                    <constraint firstAttribute="height" constant="107" id="voJ-ys-moh"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderLargeColor">
@@ -661,7 +661,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BN2-2Z-VOT">
-                                <rect key="frame" x="15" y="305" width="290" height="72"/>
+                                <rect key="frame" x="15" y="195" width="290" height="72"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tip" translatesAutoresizingMaskIntoConstraints="NO" id="vh0-0E-hZY">
                                         <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -693,7 +693,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                             <constraint firstAttribute="trailing" secondItem="Tqp-Pu-7oC" secondAttribute="trailing" id="86v-Lg-hxl"/>
                             <constraint firstItem="BN2-2Z-VOT" firstAttribute="leading" secondItem="FkK-0X-a3z" secondAttribute="leading" constant="15" id="SUf-jK-vws"/>
                             <constraint firstItem="Tqp-Pu-7oC" firstAttribute="leading" secondItem="FkK-0X-a3z" secondAttribute="leading" id="YX4-nS-C1i"/>
-                            <constraint firstItem="BN2-2Z-VOT" firstAttribute="top" secondItem="Tqp-Pu-7oC" secondAttribute="bottom" constant="10" id="am2-Uu-6YD"/>
+                            <constraint firstItem="BN2-2Z-VOT" firstAttribute="top" secondItem="Tqp-Pu-7oC" secondAttribute="bottom" constant="8" id="am2-Uu-6YD"/>
                             <constraint firstAttribute="trailing" secondItem="BN2-2Z-VOT" secondAttribute="trailing" constant="15" id="gxq-X4-qYw"/>
                             <constraint firstItem="Tqp-Pu-7oC" firstAttribute="top" secondItem="Re0-Ci-zyV" secondAttribute="bottom" constant="16" id="vIT-B7-dc8"/>
                         </constraints>
@@ -705,7 +705,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQR-bb-f0o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="689.5" y="560.5"/>
+            <point key="canvasLocation" x="689" y="560"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZVz-al-EeJ">

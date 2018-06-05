@@ -70,6 +70,7 @@ import SVProgressHUD
         closeButton.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
         let closeImage = closeButton.image(for: UIControlState.normal)
         let tintImage = closeImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        closeButton.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
         closeButton.setImage(tintImage, for: UIControlState.normal)
     }
     

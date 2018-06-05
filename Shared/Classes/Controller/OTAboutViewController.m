@@ -145,7 +145,8 @@
         [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
     }
     else if (indexPath.row == TUTORIAL_INDEXPATH) {
-        [self performSegueWithIdentifier:item.segueIdentifier sender:nil];
+        //TODO: uncomment this regarding the onboarding tutorial after screen is ready
+       // [self performSegueWithIdentifier:item.segueIdentifier sender:nil];
         [OTLogger logEvent:@"OpenTutorialFromMenu"];
     }
     else {
@@ -161,7 +162,7 @@
     NSMutableArray *aboutItems = [NSMutableArray array];
     
     OTAboutItem *itemTutorial = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_tutorial")
-                                                   segueIdentifier:@"TutorialSegueIdentifier"];
+                                                   segueIdentifier:@"TutorialSegueIdentifier"]; //TODO: add TutorialSegueIdentifier segue identifier
     itemTutorial.type = Tutorial;
     [aboutItems addObject:itemTutorial];
     
