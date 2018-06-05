@@ -25,6 +25,7 @@
     [super viewDidLoad];
 
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
+    
     if(self.currentEntourage.categoryObject.description_example != nil) {
         self.txtDescription.placeholder = self.currentEntourage.categoryObject.description_example;
     } else {
@@ -33,8 +34,7 @@
         else
             self.txtDescription.placeholder = OTLocalizedString(@"edit_contribution_desc");
     }
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
-    
+
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(doneEdit)

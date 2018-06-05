@@ -288,6 +288,12 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         tabBarController.selectedIndex = 1;
     }
+    
+    // Add top shadow above tab bar
+    tabBarController.tabBar.layer.shadowOffset = CGSizeMake(0, 0);
+    tabBarController.tabBar.layer.shadowRadius = 3;
+    tabBarController.tabBar.layer.shadowColor = [UIColor darkTextColor].CGColor;
+    tabBarController.tabBar.layer.shadowOpacity = 0.3;
 
     return tabBarController;
 }
