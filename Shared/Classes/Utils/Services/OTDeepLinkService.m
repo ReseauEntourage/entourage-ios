@@ -146,10 +146,10 @@
         [mainViewController switchToGuide];
     }
     else if ([key isEqualToString:@"tutorial"]) {
-        OTMainViewController *mainViewController = [self popToMainViewController];
-        UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
-        UIViewController *tutorialController = [tutorialStoryboard instantiateInitialViewController];
-        [mainViewController presentViewController:tutorialController animated:YES completion:nil];
+//        OTMainViewController *mainViewController = [self popToMainViewController];
+//        UIStoryboard *tutorialStoryboard = [UIStoryboard storyboardWithName:@"Tutorial" bundle:nil];
+//        UIViewController *tutorialController = [tutorialStoryboard instantiateInitialViewController];
+//        [mainViewController presentViewController:tutorialController animated:YES completion:nil];
     }
     else if([key isEqualToString:@"phone-settings"]) {
         dispatch_async(dispatch_get_main_queue(), ^() {

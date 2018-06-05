@@ -11,6 +11,9 @@
 #import "OTDataSourceBehavior.h"
 #import "OTBaseInfoCell.h"
 #import "OTFeedItemJoiner.h"
+#import "entourage-Swift.h"
+
+#define INVITE_CELL_INDEX ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge ? 2 : 3)
 
 @implementation OTMembersCellProvider
 
@@ -18,8 +21,6 @@
     id item = [self.tableDataSource getItemAtIndexPath:indexPath];
     NSString *identifier = [self cellIdentifierAtPath:indexPath forItem:item];
     OTBaseInfoCell *cell = (OTBaseInfoCell *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:identifier];
-    if([identifier isEqualToString:@"InviteCell"])
-        return cell;
     [cell configureWith:item];
     return cell;
 }
@@ -31,7 +32,7 @@
         return @"DescriptionCell";
     else if([item isKindOfClass:[OTFeedItemJoiner class]])
         return @"MemberCell";
-    else if(indexPath.row == 3)
+    else if(indexPath.row == INVITE_CELL_INDEX)
         return @"InviteCell";
     else
         return indexPath.row == 0 ? @"MapCell" : @"MemberCountCell";

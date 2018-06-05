@@ -44,7 +44,6 @@ static bool entourageClosed = NO;
 
 - (void)switchedToGuide {
     self.isGuide = YES;
-    self.
     self.txtNoData.attributedText = self.noDataGuideText;
 }
 
