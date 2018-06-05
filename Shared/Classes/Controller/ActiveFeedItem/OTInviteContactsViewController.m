@@ -6,8 +6,9 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTInviteContactsViewController.h"
-#import "SVProgressHUD.h"
 #import "OTAddressBookPhone.h"
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
@@ -80,7 +81,9 @@
             [self.delegate didInviteWithSuccess];
     } orFailure:^(NSError *error, NSArray *failedNUmbers) {
         [SVProgressHUD dismiss];
-        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"inviteByPhoneFailed") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"inviteByPhoneFailed") preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
 }
 

@@ -9,7 +9,7 @@
 #import "OTNextStatusButtonBehavior.h"
 #import "OTFeedItemFactory.h"
 #import "OTConsts.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTTour.h"
 #import "OTConfirmCloseViewController.h"
 #import "OTCloseReason.h"

@@ -121,7 +121,7 @@
                                                                     preferredStyle:UIAlertControllerStyleAlert];
             [self presentViewController:alert animated:YES completion:nil];
             
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK")
                                                                     style:UIAlertActionStyleDefault
                                                                   handler:^(UIAlertAction * _Nonnull action) {}];
             

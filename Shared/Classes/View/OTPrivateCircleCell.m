@@ -17,7 +17,7 @@
     self.lblDisplayName.text = membershipItem.title;
     
     self.lblCount.font = [UIFont fontWithName:@"SFUIText-Medium" size:15];
-    self.lblCount.text = [NSString stringWithFormat:@"%ld", membershipItem.noOfPeople.integerValue];
+    self.lblCount.text = [NSString stringWithFormat:@"%ld", membershipItem.noOfPeople.longValue];
 }
 
 @end

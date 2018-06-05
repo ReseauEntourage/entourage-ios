@@ -6,6 +6,9 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
 #import "OTInviteByPhoneViewController.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
@@ -13,8 +16,6 @@
 #import "UITextField+indentation.h"
 #import "NSString+Validators.h"
 #import "OTFeedItemFactory.h"
-#import "SVProgressHUD.h"
-#import "IQKeyboardManager.h"
 #import "UIScrollView+entourage.h"
 #import "entourage-Swift.h"
 
@@ -62,7 +63,11 @@
             [self.delegate didInviteWithSuccess];
     } orFailure:^(NSError *error, NSArray *failedNumbers) {
         [SVProgressHUD dismiss];
-        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"inviteByPhoneFailed") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error")
+                                                                            message:OTLocalizedString(@"inviteByPhoneFailed")
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:controller animated:YES completion:nil];
     }];
 }
 

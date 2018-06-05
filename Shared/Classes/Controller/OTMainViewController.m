@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 // Controller
 #import "OTMainViewController.h"
 #import "UIViewController+menu.h"
@@ -24,12 +27,10 @@
 #import "OTMyEntouragesViewController.h"
 #import "OTToursMapDelegate.h"
 #import "OTGuideMapDelegate.h"
-#import "JSBadgeView.h"
 #import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
 #import "OTConsts.h"
 #import "OTAPIConsts.h"
-#import "SVProgressHUD.h"
 #import "OTFeedItemsTableView.h"
 #import "OTUser.h"
 #import "OTTour.h"
@@ -45,11 +46,7 @@
 #import "UIColor+entourage.h"
 #import "UILabel+entourage.h"
 #import "MKMapView+entourage.h"
-#import <UIKit/UIKit.h>
-#import <WYPopoverController/WYPopoverController.h>
 #import <QuartzCore/QuartzCore.h>
-#import "TTTTimeIntervalFormatter.h"
-#import "TTTLocationFormatter.h"
 #import <AudioToolbox/AudioServices.h>
 #import "NSUserDefaults+OT.h"
 #import "NSDictionary+Parsing.h"
@@ -83,8 +80,8 @@
 #import "OTToggleVisibleBehavior.h"
 #import "OTCollectionSourceBehavior.h"
 #import "OTHeatzonesCollectionSource.h"
-#import "KPClusteringController.h"
-#import "KPAnnotation.h"
+#import <Kingpin/KPClusteringController.h>
+#import <Kingpin/KPAnnotation.h>
 #import "OTAnnouncement.h"
 #import "OTMapView.h"
 #import "entourage-Swift.h"
@@ -136,7 +133,6 @@
 @property (nonatomic, strong) OTGuideMapDelegate                    *guideMapDelegate;
 @property (nonatomic, strong) NSString                              *entourageType;
 @property (nonatomic, strong) NSMutableArray                        *encounters;
-@property (nonatomic, strong) WYPopoverController                   *popover;
 @property (nonatomic) BOOL                                          isRegionSetted;
 @property (nonatomic, assign) CGPoint                               mapPoint;
 @property (nonatomic, strong) CLLocation                            *tappedLocation;
@@ -406,6 +402,7 @@
     if (self.isTourListDisplayed) {
         [self showToursList:YES];
     }
+    [self configureNavigationBar];
 }
 
 - (void)switchToGuide {
@@ -423,6 +420,7 @@
     [self showToursMap];
     [self reloadPois];
     [OTAppState switchMapToSolidarityGuide];
+    [self configureNavigationBar];
 }
 
 - (IBAction)goToTourOptions:(id)sender {
@@ -508,12 +506,15 @@
     }}
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
-    if(self.isTourListDisplayed)
+    if (self.isTourListDisplayed) {
         return;
-    if(!IS_PRO_USER && !self.guideMapDelegate.isActive) {
+    }
+    
+    if (!IS_PRO_USER && !self.guideMapDelegate.isActive) {
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
         return;
     }
+    
     CGPoint touchPoint = [longPressGesture locationInView:self.mapView];
     if (self.presentedViewController)
         return;
@@ -534,6 +535,7 @@
         if (touchPoint.y + LONGPRESS_DELTA > [UIScreen mainScreen].bounds.size.height )
             self.mapPoint = CGPointMake(touchPoint.x, touchPoint.y - LONGPRESS_DELTA - 10);
         [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+        
     } else {
         if (touchPoint.x - LONGPRESS_DELTA < 0)
             self.mapPoint = CGPointMake(touchPoint.x + LONGPRESS_DELTA, touchPoint.y);
@@ -853,7 +855,7 @@
 
 - (void)failedToStopTour {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:OTLocalizedString(@"failed_send_tour_points_to_server") preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
@@ -937,13 +939,9 @@
                 [self.toggleCollectionView toggle:NO animated:YES];
             }
         }
+        
+        [self configureNavigationBar];
     }
-}
-
-#pragma mark - OTCalloutViewControllerDelegate
-
-- (void)dismissPopover {
-    [self.popover dismissPopoverAnimated:YES];
 }
 
 #pragma mark - OTOptionsDelegate
@@ -1196,6 +1194,8 @@
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }
+    
+    [self configureNavigationBar];
 }
 
 - (void)showToursMap {
@@ -1226,6 +1226,8 @@
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     }];
+    
+    [self configureNavigationBar];
 }
 
 #pragma mark 15.2 New Tour - on going
@@ -1243,6 +1245,8 @@
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
     }];
+    
+    [self configureNavigationBar];
 }
 
 - (void)showTourConfirmation {
@@ -1263,6 +1267,7 @@
     }
     if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
+    
     UIViewController *destinationViewController = segue.destinationViewController;
     if([segue.identifier isEqualToString:@"UserProfileSegue"]) {
         UINavigationController *navController = (UINavigationController*)destinationViewController;

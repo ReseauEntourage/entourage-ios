@@ -9,7 +9,7 @@
 #import "OTLogger.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
-#import "Mixpanel/Mixpanel.h"
+#import <Mixpanel/Mixpanel.h>
 #import "OTMixpanelService.h"
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"

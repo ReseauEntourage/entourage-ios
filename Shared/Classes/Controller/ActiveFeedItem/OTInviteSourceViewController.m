@@ -38,10 +38,11 @@
 }
 
 - (IBAction)inviteContacts:(id)sender {
+    UIViewController *presentingViewController = self.presentingViewController;
     [OTLogger logEvent:@"InviteContacts"];
     [self dismissViewControllerAnimated:YES completion:nil];
     if(self.delegate)
-        [self.delegate inviteContacts];
+        [self.delegate inviteContactsFromViewController:presentingViewController];
 }
 
 - (IBAction)inviteByPhone:(id)sender {

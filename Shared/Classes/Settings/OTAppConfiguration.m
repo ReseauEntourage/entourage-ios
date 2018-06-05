@@ -6,15 +6,17 @@
 //  Copyright © 2018 OCTO Technology. All rights reserved.
 //
 
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <SimpleKeychain/A0SimpleKeychain.h>
+
 #import "OTAppConfiguration.h"
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
 #import "OTVersionInfo.h"
 #import "OTDeepLinkService.h"
-#import "FBSDKCoreKit.h"
 #import "OTLocationManager.h"
 #import "OTUser.h"
-#import "IQKeyboardManager.h"
 #import "NSUserDefaults+OT.h"
 #import "UIStoryboard+entourage.h"
 #import "OTPushNotificationsService.h"
@@ -23,7 +25,7 @@
 #import "OTDeepLinkService.h"
 #import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "UIColor+entourage.h"
 #import "OTUnreadMessagesService.h"
 #import "OTLoginViewController.h"
@@ -31,7 +33,6 @@
 #import "OTPhoneViewController.h"
 #import "OTCodeViewController.h"
 #import "OTAppDelegate.h"
-#import "A0SimpleKeychain.h"
 #import "UIStoryboard+entourage.h"
 #import "OTMenuViewController.h"
 #import "OTAppState.h"
@@ -264,25 +265,25 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         menuViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMenuViewControllerIdentifier"];
     }
     UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
-    menuNavController.tabBarItem.title = @"menu";
+    menuNavController.tabBarItem.title = OTLocalizedString(@"menu");
     menuNavController.tabBarItem.image = [[UIImage imageNamed:@"menu_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     menuNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"menu_tab_selected"];
     
     // Proximity Map Tab
     OTMainViewController *mainMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
     UINavigationController *mainMapNavController = [[UINavigationController alloc] initWithRootViewController:mainMapViewController];
-    mainMapNavController.tabBarItem.title = @"à proximité";
+    mainMapNavController.tabBarItem.title = OTLocalizedString(@"à proximité");
     mainMapNavController.tabBarItem.image = [[UIImage imageNamed:@"map_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     mainMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"map_tab_selected"];
     
     // Messages Tab
     OTMyEntouragesViewController *messagesViewController = [[UIStoryboard myEntouragesStoryboard] instantiateViewControllerWithIdentifier:@"OTMyEntouragesViewController"];
     UINavigationController *messagesNavController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
-    messagesNavController.tabBarItem.title = @"messagerie";
+    messagesNavController.tabBarItem.title = OTLocalizedString(@"messagerie");
     messagesNavController.tabBarItem.image = [[UIImage imageNamed:@"messages_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     messagesNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"messages_tab_selected"];
     
-    NSArray *controllers = @[];
+    NSArray *controllers = nil;
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeEntourage) {
         controllers = @[mainMapNavController, messagesNavController, menuNavController];

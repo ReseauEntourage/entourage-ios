@@ -13,7 +13,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "OTStatusBehavior.h"
 #import "OTJoinBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTUserProfileBehavior.h"
 #import "OTPublicInfoDataSource.h"
 #import "OTTableDataSourceBehavior.h"

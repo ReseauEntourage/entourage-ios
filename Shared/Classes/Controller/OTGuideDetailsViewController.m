@@ -110,9 +110,10 @@
 }
 
 - (IBAction)showPhone:(id)sender {
-    NSString *phone = [self.poi.phone stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", phone]];
-    [[UIApplication sharedApplication] openURL:phoneURL];
+    NSURLComponents *components = [[NSURLComponents alloc] init];
+    components.path = self.poi.phone;
+    components.scheme = @"tel";
+    [[UIApplication sharedApplication] openURL:components.URL];
 }
 
 - (IBAction)showEmail:(id)sender {

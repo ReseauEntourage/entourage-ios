@@ -6,6 +6,8 @@
 //  Copyright © 2015 OCTO Technology. All rights reserved.
 //
 
+#import <AFNetworking/UIButton+AFNetworking.h>
+
 #import "OTUserViewController.h"
 #import "OTConsts.h"
 
@@ -16,8 +18,7 @@
 #import "UIColor+entourage.h"
 #import "UIButton+entourage.h"
 #import "UIBarButtonItem+factory.h"
-#import "SVProgressHUD.h"
-#import "UIButton+AFNetworking.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTTapViewBehavior.h"
 #import "UIImageView+entourage.h"
 #import "OTUserTableConfigurator.h"

@@ -9,7 +9,7 @@
 #import "OTMailTextCheckBehavior.h"
 #import <MessageUI/MessageUI.h>
 #import "OTConsts.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface OTMailTextCheckBehavior () <UITextViewDelegate, MFMailComposeViewControllerDelegate>
 

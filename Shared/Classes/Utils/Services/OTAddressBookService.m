@@ -6,6 +6,8 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <Contacts/Contacts.h>
+
 #import "OTAddressBookService.h"
 #import "OTAddressBookItem.h"
 #import "OTAddressBookPhone.h"
@@ -25,69 +27,47 @@
 }
 
 - (NSArray *)readContacts {
-    CFErrorRef error = NULL;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-    if(error) {
-        if(addressBook != nil)
-            CFRelease(addressBook);
+    CNContactStore *contactStore = [[CNContactStore alloc] init];
+    if(contactStore == nil) {
         return @[];
     }
-    NSArray *allAddressBookItems = [self mapContacts:addressBook];
-    if(addressBook != nil)
-        CFRelease(addressBook);
+    NSArray *allAddressBookItems = [self mapContacts:contactStore];
     return [allAddressBookItems sortedArrayUsingComparator:^(OTAddressBookItem *first, OTAddressBookItem *second) {
         return [first.fullName localizedCaseInsensitiveCompare:second.fullName];
     }];
 }
 
-- (NSArray *)mapContacts:(ABAddressBookRef)addressBook {
+- (NSArray *)mapContacts:(CNContactStore*)contactStore {
     NSMutableArray *allAddressBookItems = [NSMutableArray new];
+    CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:@[[CNContactFormatter descriptorForRequiredKeysForStyle:CNContactFormatterStyleFullName], CNContactPhoneNumbersKey]];
     @autoreleasepool {
-        NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
-        for (int index = 0; index < [allContacts count]; index++) {
-            ABRecordRef record = (__bridge ABRecordRef)allContacts[index];
-            OTAddressBookItem *addressBookItem = [self mapRecordToItem:record];
+        [contactStore enumerateContactsWithFetchRequest:fetchRequest error:NULL usingBlock:^(CNContact *contact, BOOL *stop){
+            OTAddressBookItem *addressBookItem = [self mapRecordToItem:contact];
             if(addressBookItem)
                 [allAddressBookItems addObject:addressBookItem];
-        }
+        }];
     }
     return allAddressBookItems;
 }
 
-- (OTAddressBookItem *)mapRecordToItem:(ABRecordRef)record {
+- (OTAddressBookItem *)mapRecordToItem:(CNContact*)record {
     OTAddressBookItem *addressBookItem = [OTAddressBookItem new];
     addressBookItem.phoneNumbers = [self readPhones:record];
     if(addressBookItem.phoneNumbers.count == 0)
         return nil;
-    addressBookItem.fullName = [self readFullName:record];
+    addressBookItem.fullName = [CNContactFormatter stringFromContact:record style:CNContactFormatterStyleFullName];
     if(!addressBookItem.fullName || addressBookItem.fullName.length == 0)
         return nil;
     return addressBookItem;
 }
 
-- (NSString *)readFullName:(ABRecordRef)record {
-    NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(record, kABPersonFirstNameProperty);
-    NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(record, kABPersonLastNameProperty);
-    NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName ? firstName : @"", lastName ? lastName : @""];
-    if(!fullName || [fullName stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]].length == 0)
-        return nil;
-    return fullName;
-}
-
-- (NSArray *)readPhones:(ABRecordRef)record {
+- (NSArray *)readPhones:(CNContact*)record {
     NSMutableArray *result = [NSMutableArray new];
-    ABMultiValueRef phones =(__bridge ABMultiValueRef)((__bridge NSString*)ABRecordCopyValue(record, kABPersonPhoneProperty));
-    NSString *readPhone = nil;
-    for(CFIndex phoneIndex = 0; phoneIndex < ABMultiValueGetCount(phones); phoneIndex++) {
-        CFTypeRef ref = ABMultiValueCopyValueAtIndex(phones, phoneIndex);
-        readPhone = (__bridge NSString*)ref;
+    for (CNLabeledValue<CNPhoneNumber*>* labeledPhone in record.phoneNumbers) {
         OTAddressBookPhone *phoneItem = [OTAddressBookPhone new];
-        phoneItem.telephone = readPhone;
+        phoneItem.telephone = labeledPhone.value.stringValue;
         [result addObject:phoneItem];
-        if(ref != nil)
-            CFRelease(ref);
     }
-    CFRelease(phones);
     return result;
 }
 

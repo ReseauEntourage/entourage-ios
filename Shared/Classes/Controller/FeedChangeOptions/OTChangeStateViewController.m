@@ -6,6 +6,8 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTChangeStateViewController.h"
 #import "OTToggleVisibleBehavior.h"
 #import "OTFeedItemFactory.h"
@@ -15,7 +17,6 @@
 #import "OTSignalEntourageBehavior.h"
 #import "OTEntourage.h"
 #import "OTConfirmCloseViewController.h"
-#import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "OTAPIConsts.h"
 #import "OTShareFeedItemBehavior.h"

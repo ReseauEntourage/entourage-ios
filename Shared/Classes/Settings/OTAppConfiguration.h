@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Mixpanel/Mixpanel.h"
-#import "OTDeepLinkService.h"
-#import "FBSDKCoreKit.h"
 #import <UserNotifications/UserNotifications.h>
-#import "OTPushNotificationsService.h"
-#import "OTDebugLog.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Mixpanel/Mixpanel.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-#import "Mixpanel/Mixpanel.h"
+
+#import "OTDeepLinkService.h"
+#import "OTPushNotificationsService.h"
+#import "OTDebugLog.h"
 #import "OTConsts.h"
 #import "OTAppAppearance.h"
 

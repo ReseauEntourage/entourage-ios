@@ -8,6 +8,16 @@
 
 import Foundation
 
+enum menuItemIndexType: NSInteger {
+    case addHours = 0
+    case contactTeam
+    case makeDonnation
+    case howTo
+    case ethicalChart
+    case about
+    case logout
+}
+
 final class OTPfpMenuViewController: UIViewController {
     var tableView = UITableView()
     var headerView = OTMenuHeaderView()
@@ -79,28 +89,42 @@ final class OTPfpMenuViewController: UIViewController {
     }
     
     private func createMenuItems() {
-        let contactItem = OTMenuItem(title: "Contacter l'équipe Voisin-Age", iconName:"question_chat")
-        let howIsUsedItem = OTMenuItem(title: "Mode d'emploi de l'application", iconName: "howIsUsed")
-        let ethicalChartItem = OTMenuItem(title: "Charte éthique de Voisin-Age", iconName: "ethicalChart")
-        let aboutItem = OTMenuItem(title: String.localized("aboutTitle"), iconName:"contact")
-        let donnationItem = OTMenuItem(title: String.localized("menu_donnation"), iconName:"star")
-        let logoutItem = OTMenuItem(title: String.localized("menu_disconnect_title"), iconName: "")
         
-        guard let item1 = contactItem,
-            let item2 = howIsUsedItem,
-            let item3 = ethicalChartItem,
-            let item4 = aboutItem,
-            let item5 = logoutItem,
-            let item6 = donnationItem else {
-            return
-        }
+        let addHoursItem = OTMenuItem(title: String.localized("pfp_menu_add_visitor_hours"),
+                                     iconName:"menu-heart")
+        addHoursItem?.tag = menuItemIndexType.addHours.rawValue
         
-        menuItems.append(item1)
-        menuItems.append(item6)
-        menuItems.append(item2)
-        menuItems.append(item3)
-        menuItems.append(item4)
-        menuItems.append(item5)
+        let contactItem = OTMenuItem(title: String.localized("pfp_menu_contact"),
+                                     iconName:"question_chat")
+        contactItem?.tag = menuItemIndexType.contactTeam.rawValue
+        
+        let howIsUsedItem = OTMenuItem(title: String.localized("pfp_menu_how_to"),
+                                       iconName: "howIsUsed")
+        howIsUsedItem?.tag = menuItemIndexType.howTo.rawValue
+        
+        let ethicalChartItem = OTMenuItem(title: String.localized("pfp_menu_chart_etique"),
+                                          iconName: "ethicalChart")
+        ethicalChartItem?.tag = menuItemIndexType.ethicalChart.rawValue
+        
+        let aboutItem = OTMenuItem(title: String.localized("aboutTitle"),
+                                   iconName:"contact")
+        aboutItem?.tag = menuItemIndexType.about.rawValue
+        
+        let donnationItem = OTMenuItem(title: String.localized("menu_donnation"),
+                                       iconName:"star")
+        donnationItem?.tag = menuItemIndexType.makeDonnation.rawValue
+        
+        let logoutItem = OTMenuItem(title: String.localized("menu_disconnect_title"),
+                                    iconName: "")
+        logoutItem?.tag = menuItemIndexType.logout.rawValue
+        
+        menuItems.append(addHoursItem!)
+        menuItems.append(contactItem!)
+        menuItems.append(donnationItem!)
+        menuItems.append(howIsUsedItem!)
+        menuItems.append(ethicalChartItem!)
+        menuItems.append(aboutItem!)
+        menuItems.append(logoutItem!)
     }
     
     private func loadAbout () {
@@ -116,21 +140,35 @@ final class OTPfpMenuViewController: UIViewController {
         let profileNavController:UINavigationController = UINavigationController.init(rootViewController: vc)
         self.present(profileNavController, animated: true, completion: nil)
     }
+    
+    private func loadUserCircles () {
+        let storyboard:UIStoryboard = UIStoryboard.init(name: "PfpUserVoisinage", bundle: nil)
+        let vc:UIViewController = storyboard.instantiateViewController(withIdentifier: "PfpUserVoisinageViewController")
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension OTPfpMenuViewController: UITableViewDelegate {
    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        headerView.editLabel.isHidden = true
-        return headerView
+        if section == 0 {
+            headerView.editLabel.isHidden = true
+            return headerView
+        }
+        
+        return nil
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 170
+        if section == 0 {
+            return 170
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 51;
+        return 51
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -138,28 +176,33 @@ extension OTPfpMenuViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: Refactor musai!!
-        
-        if indexPath.row == 0 {
-            contactPFP()
-        }
-        else if indexPath.row == 1 {
-            let url = URL(string: "https://entourage-asso.typeform.com/to/Imi9sX?user_id="+"\(self.currentUser?.sid!.intValue ?? 0)")
-            OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
-        }
-        else if indexPath.row == 2 {
+
+        let menuItem: OTMenuItem = menuItems[indexPath.section]
+        switch menuItem.tag {
+        case menuItemIndexType.contactTeam.rawValue:
+            self.contactPFP()
+            break
+        case menuItemIndexType.about.rawValue:
+            self.loadAbout()
+            break
+        case menuItemIndexType.ethicalChart.rawValue:
             let url = URL(string: "http://bit.ly/charteethiquevoisin-age")
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
-        }
-        else if indexPath.row == 3 {
+            break
+        case menuItemIndexType.howTo.rawValue:
             let url = URL(string: "http://bit.ly/faqapplivoisin-age")
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
-        }
-        else if indexPath.row == 4 {
-            self.loadAbout()
-        }
-        else {
-            NotificationCenter.default.post(name: Notification.Name("loginFailureNotification"), object: self)
+            break
+        case menuItemIndexType.makeDonnation.rawValue:
+            OTSafariService.launchFeedbackForm(in: self.navigationController)
+            break
+        case menuItemIndexType.addHours.rawValue:
+            self.loadUserCircles()
+            break
+        default:
+            NotificationCenter.default.post(name: Notification.Name("loginFailureNotification"),
+                                            object: self)
+            break
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -167,25 +210,35 @@ extension OTPfpMenuViewController: UITableViewDelegate {
 }
 
 extension OTPfpMenuViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return menuItems.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 5
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row != menuItems.count - 1 {
+        let menuItem: OTMenuItem = menuItems[indexPath.section]
+        if menuItem.tag != menuItemIndexType.logout.rawValue {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCellIdentifier") as! OTItemTableViewCell
-            let icon:UIImage = UIImage(named: menuItems[indexPath.row].iconName)!
+            let icon:UIImage = UIImage(named: menuItem.iconName)!
             cell.view.iconImageView.image = icon.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             cell.view.iconImageView.tintColor = UIColor.pfpBlue()
             cell.view.iconImageView.contentMode = UIViewContentMode.scaleAspectFit
-            cell.view.itemLabel.text = menuItems[indexPath.row].title
+            cell.view.itemLabel.text = menuItem.title
             cell.backgroundColor = UIColor.pfpTableBackground()
             
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LogoutItemCellIdentifier") as! OTLogoutViewCell
-            cell.logoutButton.setTitle(menuItems[indexPath.row].title.uppercased(), for: .normal)
+            cell.logoutButton.setTitle(menuItem.title.uppercased(), for: .normal)
             return cell
         }
     }

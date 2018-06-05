@@ -6,6 +6,8 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTEntourageEditorViewController.h"
 #import "OTTextWithCount.h"
 #import "OTConsts.h"
@@ -16,7 +18,6 @@
 #import "UIViewController+menu.h"
 #import "UITextField+indentation.h"
 #import "UIBarButtonItem+factory.h"
-#import "SVProgressHUD.h"
 #import "OTEntourageDisclaimerBehavior.h"
 #import "OTEditEntourageTableSource.h"
 #import "OTEditEntourageNavigationBehavior.h"
@@ -79,7 +80,7 @@
     NSString* nospacestring = [words componentsJoinedByString:@""];
     if (!nospacestring.length) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"invalidTitle") message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:defaultAction];
         [self presentViewController:alert animated:YES completion:nil];
         return NO;
@@ -92,7 +93,7 @@
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"categoryNotSelected")
                                                                        message:nil
                                                                 preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK")
                                                                     style:UIAlertActionStyleDefault
                                                                   handler:^(UIAlertAction * _Nonnull action) {}];
             [alert addAction:defaultAction];

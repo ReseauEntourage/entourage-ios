@@ -6,13 +6,14 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
 #import "OTCodeViewController.h"
-#import "IQKeyboardManager.h"
 #import "NSUserDefaults+OT.h"
 #import "UITextField+indentation.h"
 #import "UIView+entourage.h"
 #import "OTOnboardingService.h"
-#import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 #import "OTAuthService.h"
@@ -90,7 +91,11 @@
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
     } failure:^(NSError *error) {
         [SVProgressHUD dismiss];
-        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"requestNotSent") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error")
+                                                                            message:OTLocalizedString(@"requestNotSent")
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:controller animated:YES completion:nil];
     }];
 }
 

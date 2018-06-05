@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import <SWRevealViewController/SWRevealViewController.h>
+
 #import "OTAppDelegate.h"
 #import "OTMenuViewController.h"
 #import "OTConsts.h"
-#import "SWRevealViewController.h"
 #import "OTLoginViewController.h"
 #import "UIViewController+menu.h"
 #import "OTSettingsViewController.h"
@@ -18,7 +19,7 @@
 #import "OTMenuItem.h"
 #import "OTUser.h"
 #import "OTMenuTableViewCell.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "UIButton+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "NSBundle+entourage.h"
