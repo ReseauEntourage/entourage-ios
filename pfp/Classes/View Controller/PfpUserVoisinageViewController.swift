@@ -36,6 +36,25 @@ class PfpUserVoisinageViewController: UITableViewController {
             }
         }
     }
+    
+    @objc private func continueAction () {
+        let storyboard:UIStoryboard = UIStoryboard.init(name: "PfpUserVoisinage", bundle: nil)
+        let vc:UIViewController = storyboard.instantiateViewController(withIdentifier: "PfpSelectVisitDateViewController")
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func updateNavigationItems () {
+        let continueButton:UIBarButtonItem = UIBarButtonItem.init(title: String.localized("continue"),
+                                                                  style: UIBarButtonItemStyle.plain,
+                                                                  target: self,
+                                                                  action: #selector(continueAction))
+        
+        if let _:OTUserMembershipListItem = (self.userCircles.filter {$0.isSelected == true}).first {
+            self.navigationItem.rightBarButtonItem = continueButton
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -58,5 +77,6 @@ class PfpUserVoisinageViewController: UITableViewController {
         let circle:OTUserMembershipListItem = self.userCircles[indexPath.row]
         self.selectCircle(circle, isSelected: !circle.isSelected)
         tableView.reloadData()
+        self.updateNavigationItems()
     }
 }

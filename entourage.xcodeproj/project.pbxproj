@@ -761,6 +761,8 @@
 		A2306AAB20C551690094370E /* PfpUserCircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAA20C551690094370E /* PfpUserCircleCell.swift */; };
 		A2306AAD20C663660094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306AAC20C663660094370E /* AppConfigurations.plist */; };
 		A2306AAE20C663660094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306AAC20C663660094370E /* AppConfigurations.plist */; };
+		A2306AB020C69DDD0094370E /* PfpSelectVisitDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAF20C69DDD0094370E /* PfpSelectVisitDateViewController.swift */; };
+		A2306AB220C69F050094370E /* PfpSelectDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AB120C69F050094370E /* PfpSelectDateCell.swift */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
@@ -1951,6 +1953,8 @@
 		A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpUserVoisinageViewController.swift; sourceTree = "<group>"; };
 		A2306AAA20C551690094370E /* PfpUserCircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpUserCircleCell.swift; sourceTree = "<group>"; };
 		A2306AAC20C663660094370E /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
+		A2306AAF20C69DDD0094370E /* PfpSelectVisitDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpSelectVisitDateViewController.swift; sourceTree = "<group>"; };
+		A2306AB120C69F050094370E /* PfpSelectDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpSelectDateCell.swift; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -3575,6 +3579,7 @@
 				A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */,
 				A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */,
 				A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */,
+				A2306AAF20C69DDD0094370E /* PfpSelectVisitDateViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -3585,6 +3590,7 @@
 				A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */,
 				A2FCF5C820AD502F004604AC /* PFPAboutView.xib */,
 				A2306AAA20C551690094370E /* PfpUserCircleCell.swift */,
+				A2306AB120C69F050094370E /* PfpSelectDateCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4840,6 +4846,7 @@
 				A296B76620871CFC00F6AFBD /* OTJoinAcceptedCell.m in Sources */,
 				A296B76720871CFC00F6AFBD /* OTMyEntouragesFilter.m in Sources */,
 				A296B76820871CFC00F6AFBD /* OTMixpanelService.m in Sources */,
+				A2306AB020C69DDD0094370E /* PfpSelectVisitDateViewController.swift in Sources */,
 				A296B76920871CFC00F6AFBD /* OTLocationSelectorViewController.m in Sources */,
 				A296B76A20871CFC00F6AFBD /* OTLocationManager.m in Sources */,
 				A296B76B20871CFC00F6AFBD /* OTPushNotificationsData.m in Sources */,
@@ -5018,6 +5025,7 @@
 				A296B80D20871CFC00F6AFBD /* OTCollectionViewDataSourceBehavior.m in Sources */,
 				A296B80E20871CFC00F6AFBD /* UIImage+processing.m in Sources */,
 				A296B80F20871CFC00F6AFBD /* OTAlertViewBehavior.m in Sources */,
+				A2306AB220C69F050094370E /* PfpSelectDateCell.swift in Sources */,
 				A296B81020871CFC00F6AFBD /* OTOnboardingService.m in Sources */,
 				A296B81120871CFC00F6AFBD /* OTDisclaimerBaseBehavior.m in Sources */,
 				A296B81220871CFC00F6AFBD /* OTTextView.m in Sources */,
