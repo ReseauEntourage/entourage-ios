@@ -91,8 +91,15 @@
     
     CGFloat buttonSize = 42;
     CGFloat marginOffset = 20;
-    CGFloat x = self.bounds.size.width - buttonSize;
-    UIButton *showCurrentLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(x, marginOffset, buttonSize, buttonSize)];
+    CGFloat y = marginOffset + 64;
+    
+    if (@available(iOS 11.0, *)) {
+        y = self.safeAreaInsets.top + marginOffset;
+    }
+    
+    CGFloat x = UIScreen.mainScreen.bounds.size.width - buttonSize - marginOffset;
+    UIButton *showCurrentLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, buttonSize, buttonSize)];
+    
     [showCurrentLocationButton setImage:[UIImage imageNamed:@"geoloc"] forState:UIControlStateNormal];
     showCurrentLocationButton.backgroundColor = [UIColor whiteColor];
     showCurrentLocationButton.clipsToBounds = YES;
@@ -105,7 +112,7 @@
     [headerView addSubview:mapView];
     [headerView addSubview:showCurrentLocationButton];
     [headerView sendSubviewToBack:mapView];
-    //[self configureMapView];
+    [headerView bringSubviewToFront:showCurrentLocationButton];
     
     UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156.0f , headerView.frame.size.width + 130.0f, 4.0f)];
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -131,6 +138,7 @@
     [shadowView addConstraints:constraint_height];
     [headerView addConstraints:constraint_pos_horizontal];
     [headerView addConstraints:constraint_pos_bottom];
+    
     mapView.center = headerView.center;
         
     self.tableHeaderView = headerView;

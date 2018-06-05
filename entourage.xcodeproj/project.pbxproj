@@ -3476,8 +3476,8 @@
 			children = (
 				A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */,
 				A202E80A2085D0FE0058F32C /* OTAppDelegate.h */,
-				A2306AAC20C663660094370E /* AppConfigurations.plist */,
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
+				A2306AAC20C663660094370E /* AppConfigurations.plist */,
 				A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */,
 				A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */,
 				A296B8EB20871FD800F6AFBD /* main.m */,
