@@ -33,6 +33,20 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.updateNavigationItems()
+    }
+    
+    private func updateNavigationItems () {
+        let continueButton:UIBarButtonItem = UIBarButtonItem.init(title: String.localized("continue"),
+                                                                  style: UIBarButtonItemStyle.plain,
+                                                                  target: self,
+                                                                  action: #selector(continueAction))
+        
+        if self.selectedDate != nil {
+            self.navigationItem.rightBarButtonItem = continueButton
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
+        }
     }
     
     private func selectDateType (_ type: DateSelectionType, date:Date?) {
@@ -40,6 +54,16 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
         self.selectedDate = date
         self.tableView.reloadData()
         self.datePicker.isHidden = self.selectedCellType != .custom
+        self.datePicker.date = Date()
+    }
+    
+    @IBAction func selectColorAction(_ sender: UIDatePicker) {
+        self.selectedDate = sender.date
+        self.tableView.reloadData()
+    }
+    
+    @objc private func continueAction () {
+        // TODO
     }
     
     //MARK:-  Table View Delegate & DataSource -
@@ -48,8 +72,15 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
         return 3
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "scsdc"
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.size.width, height: 40))
+        header.backgroundColor = UIColor.clear
+        
+        return header
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,7 +88,8 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
         let currentType:DateSelectionType = DateSelectionType(rawValue: indexPath.row)!
         let isSelected = self.selectedCellType == currentType
         cell.type = currentType
-        cell.updateWithType(currentType, selected: isSelected, date: self.selectedDate)
+        cell.updateWithType(currentType, isSelected: isSelected,
+                            selectedType: self.selectedCellType, date: self.selectedDate)
         
         return cell
     }

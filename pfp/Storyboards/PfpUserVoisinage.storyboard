@@ -119,7 +119,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="68" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="0fh-0k-KpQ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="431"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -178,20 +178,23 @@
                             </tableView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="GQW-bb-taF">
                                 <rect key="frame" x="0.0" y="451" width="375" height="216"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="0mu-CW-klS"/>
                                 </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="549887280.26059794">
                                     <!--2018-06-05 10:28:00 +0000-->
                                 </date>
+                                <connections>
+                                    <action selector="selectColorAction:" destination="DSH-bU-iUr" eventType="valueChanged" id="7la-pH-dgm"/>
+                                </connections>
                             </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="0fh-0k-KpQ" firstAttribute="trailing" secondItem="AP6-a0-XQN" secondAttribute="trailing" id="9D1-q7-HNt"/>
                             <constraint firstItem="0fh-0k-KpQ" firstAttribute="leading" secondItem="AP6-a0-XQN" secondAttribute="leading" id="Is3-3f-h8Z"/>
-                            <constraint firstItem="GQW-bb-taF" firstAttribute="top" secondItem="0fh-0k-KpQ" secondAttribute="bottom" id="P8l-RX-quH"/>
+                            <constraint firstItem="0fh-0k-KpQ" firstAttribute="bottom" secondItem="AP6-a0-XQN" secondAttribute="bottom" id="QdB-lq-D3g"/>
                             <constraint firstItem="0fh-0k-KpQ" firstAttribute="top" secondItem="AP6-a0-XQN" secondAttribute="top" id="Zjv-qa-Gxd"/>
                             <constraint firstItem="GQW-bb-taF" firstAttribute="leading" secondItem="AP6-a0-XQN" secondAttribute="leading" id="cch-XW-yFs"/>
                             <constraint firstItem="GQW-bb-taF" firstAttribute="bottom" secondItem="AP6-a0-XQN" secondAttribute="bottom" id="maA-8P-o8r"/>

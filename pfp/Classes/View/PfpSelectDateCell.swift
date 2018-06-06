@@ -36,16 +36,17 @@ class PfpSelectDateCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func updateWithType (_ type:DateSelectionType, selected: Bool, date:Date?) {
+    func updateWithType (_ type:DateSelectionType, isSelected:Bool, selectedType: DateSelectionType, date:Date?) {
         self.accView.image = UIImage.init(named: "verified")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
         self.accView.tintColor = UIColor.white
+        self.type = type
+        self.accView.layer.cornerRadius = 11
         
-        if selected && self.type == type {
+        if isSelected {
             self.accView.layer.borderWidth = 0
             self.accView.backgroundColor = ApplicationTheme.shared().primaryNavigationBarTintColor
         } else {
             self.accView.layer.borderColor = UIColor.groupTableViewBackground.cgColor
-            self.accView.layer.cornerRadius = 11
             self.accView.layer.borderWidth = 2
             self.accView.backgroundColor = UIColor.white
         }
@@ -56,7 +57,7 @@ class PfpSelectDateCell: UITableViewCell {
         case .yesterday:
             self.nameLabel.text = String.localized("yesterday").capitalized
         default:
-            if date != nil {
+            if selectedType == type && isSelected {
                 self.nameLabel.text = "le \(dateFormatter.string(from: date!).capitalized)"
             } else {
                 self.nameLabel.text = String.localized("pfp_date_title").capitalized
