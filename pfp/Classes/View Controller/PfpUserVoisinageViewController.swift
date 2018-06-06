@@ -11,6 +11,7 @@ import UIKit
 class PfpUserVoisinageViewController: UITableViewController {
     
     var userCircles:[OTUserMembershipListItem] = [OTUserMembershipListItem]()
+    var selectedCircle:OTUserMembershipListItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +34,19 @@ class PfpUserVoisinageViewController: UITableViewController {
             item.isSelected = false
             if item === circle {
                 item.isSelected = isSelected
+                if isSelected {
+                    self.selectedCircle = circle
+                } else {
+                    self.selectedCircle = nil
+                }
             }
         }
     }
     
     @objc private func continueAction () {
         let storyboard:UIStoryboard = UIStoryboard.init(name: "PfpUserVoisinage", bundle: nil)
-        let vc:UIViewController = storyboard.instantiateViewController(withIdentifier: "PfpSelectVisitDateViewController")
+        let vc:PfpSelectVisitDateViewController = storyboard.instantiateViewController(withIdentifier: "PfpSelectVisitDateViewController") as! PfpSelectVisitDateViewController
+        vc.privateCircle = self.selectedCircle
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

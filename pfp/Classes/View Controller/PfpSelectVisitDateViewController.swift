@@ -15,6 +15,7 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
     
     var selectedCellType: DateSelectionType = .today
     var selectedDate:Date?
+    var privateCircle:OTUserMembershipListItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +64,13 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
     }
     
     @objc private func continueAction () {
-        // TODO
+        SVProgressHUD.show()
+        PfpApiService.sendLastVisit(self.selectedDate, privateCircle: self.privateCircle!) { (error: Error?) in
+            if error == nil {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+            SVProgressHUD.dismiss()
+        }
     }
     
     //MARK:-  Table View Delegate & DataSource -
