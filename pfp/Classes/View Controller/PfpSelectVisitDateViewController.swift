@@ -66,10 +66,10 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
     @objc private func continueAction () {
         SVProgressHUD.show()
         PfpApiService.sendLastVisit(self.selectedDate, privateCircle: self.privateCircle!) { (error: Error?) in
+            SVProgressHUD.dismiss()
             if error == nil {
                 self.navigationController?.popToRootViewController(animated: true)
             }
-            SVProgressHUD.dismiss()
         }
     }
     
