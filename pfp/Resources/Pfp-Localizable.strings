@@ -37,3 +37,5 @@
 "pfp_menu_add_visitor_hours" = "Mettre à jour une info sur une personne que je voisine";
 
 "pfp_user_voisinage_title" = "VOISINAGE";
+"pfp_date_title" = "Date";
+"pfp_last_visit_title" = "J’ai voisiné cette personne le…";

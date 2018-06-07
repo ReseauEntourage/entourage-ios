@@ -292,7 +292,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     // Add top shadow above tab bar
     tabBarController.tabBar.layer.shadowOffset = CGSizeMake(0, 0);
     tabBarController.tabBar.layer.shadowRadius = 3;
-    tabBarController.tabBar.layer.shadowColor = [UIColor darkTextColor].CGColor;
+    tabBarController.tabBar.layer.shadowColor = [UIColor darkGrayColor].CGColor;
     tabBarController.tabBar.layer.shadowOpacity = 0.3;
 
     return tabBarController;
@@ -346,9 +346,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)configureTabBarAppearance:(UITabBarController*)tabBarController
 {
-    UITabBar.appearance.backgroundColor = [[ApplicationTheme shared] backgroundThemeColor];
+    //UITabBar.appearance.backgroundColor = [[ApplicationTheme shared] backgroundThemeColor];
     UITabBar.appearance.tintColor = [[ApplicationTheme shared] backgroundThemeColor];
     UITabBar.appearance.barTintColor = [[ApplicationTheme shared] backgroundThemeColor];
+    UITabBar.appearance.translucent = NO;
     
     UITabBar *currentTabBar = tabBarController.tabBar;
     CGSize size = CGSizeMake(currentTabBar.frame.size.width / currentTabBar.items.count, currentTabBar.frame.size.height);
