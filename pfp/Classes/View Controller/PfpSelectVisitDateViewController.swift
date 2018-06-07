@@ -16,6 +16,8 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
     var selectedCellType: DateSelectionType = .today
     var selectedDate:Date?
     var privateCircle:OTUserMembershipListItem?
+    
+    let tableHeaderSectionHeight: CGFloat = 40
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,12 +82,18 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return tableHeaderSectionHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.size.width, height: 40))
+        let header = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.size.width, height: tableHeaderSectionHeight))
         header.backgroundColor = UIColor.clear
+        
+        let label:UILabel = UILabel.init(frame: CGRect.init(x: 15, y: 0, width: tableView.bounds.size.width, height: tableHeaderSectionHeight))
+        label.text = String.localized("pfp_last_visit_title")
+        label.font = UIFont.SFUIText(size: 15, type: .semibold)
+        label.textColor = ApplicationTheme.shared().titleLabelColor
+        header.addSubview(label)
         
         return header
     }

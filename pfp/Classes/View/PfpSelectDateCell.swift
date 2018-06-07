@@ -53,14 +53,14 @@ class PfpSelectDateCell: UITableViewCell {
         
         switch type {
         case .today:
-            self.nameLabel.text = String.localized("today").capitalized
+            self.nameLabel.text = String.localized("today").lowercased()
         case .yesterday:
-            self.nameLabel.text = String.localized("yesterday").capitalized
+            self.nameLabel.text = String.localized("yesterday").lowercased()
         default:
             if selectedType == type && isSelected {
-                self.nameLabel.text = "le \(dateFormatter.string(from: date!).capitalized)"
+                self.nameLabel.text = "le \(dateFormatter.string(from: date!).lowercased())"
             } else {
-                self.nameLabel.text = String.localized("pfp_date_title").capitalized
+                self.nameLabel.text = String.localized("pfp_date_title").lowercased()
             }
         }
     }

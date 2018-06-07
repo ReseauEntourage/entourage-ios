@@ -18,6 +18,10 @@
     
     self.lblCount.font = [UIFont fontWithName:@"SFUIText-Medium" size:15];
     self.lblCount.text = [NSString stringWithFormat:@"%ld", membershipItem.noOfPeople.longValue];
+    
+    self.btnProfile.layer.cornerRadius = 25;
+    self.btnProfile.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
+    self.btnProfile.layer.borderWidth = 2;
 }
 
 @end
