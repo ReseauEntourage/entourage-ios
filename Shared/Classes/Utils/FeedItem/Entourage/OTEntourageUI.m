@@ -15,11 +15,7 @@
 @implementation OTEntourageUI
 
 - (NSAttributedString *)descriptionWithSize:(CGFloat)size {
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formater_by"), OTLocalizedString(self.entourage.entourage_type).capitalizedString] attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.entourage.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_BOLD_DESCRIPTION size:size]}];
-    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-    [typeByNameAttrString appendAttributedString:nameAttrString];
-    return typeByNameAttrString;
+    return [OTAppAppearance formattedDescriptionForMessageItem:self.entourage size:size];
 }
 
 - (NSString *)summary {

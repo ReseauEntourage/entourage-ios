@@ -97,3 +97,8 @@
 
 #define PROPOSE_STRUCTURE_URL_GOOGLE_DOCS @"https://docs.google.com/forms/d/e/1FAIpQLSdcpYpAWz9zllF2TUS4USDQzu4T4ywu_XjXaD-ovsTS5eo1YA/viewform"
 #define PROPOSE_STRUCTURE_URL @"%@links/propose-poi/redirect?token=%@"
+
+#define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"
+#define CLOSE_EMAIL_RECIPIENT @"contact@entourage.social"
+#define STRUCTURE_EMAIL_RECIPIENT @"contact@entourage.social"
+#define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.fr"
