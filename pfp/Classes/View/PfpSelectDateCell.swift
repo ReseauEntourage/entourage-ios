@@ -27,7 +27,6 @@ class PfpSelectDateCell: UITableViewCell {
         // Initialization code
         self.dateFormatter = DateFormatter()
         self.dateFormatter.dateFormat = "d MMMM"
-        self.dateFormatter.locale = Locale.init(identifier: "fr_FR")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,22 +44,24 @@ class PfpSelectDateCell: UITableViewCell {
         if isSelected {
             self.accView.layer.borderWidth = 0
             self.accView.backgroundColor = ApplicationTheme.shared().primaryNavigationBarTintColor
+            self.nameLabel.font = UIFont.SFUIText(size: 15, type: UIFont.SFUITextFontType.bold)
         } else {
             self.accView.layer.borderColor = UIColor.groupTableViewBackground.cgColor
             self.accView.layer.borderWidth = 2
             self.accView.backgroundColor = UIColor.white
+            self.nameLabel.font = UIFont.SFUIText(size: 15, type: UIFont.SFUITextFontType.semibold)
         }
         
         switch type {
         case .today:
-            self.nameLabel.text = String.localized("today").lowercased()
+            self.nameLabel.text = String.localized("today").capitalized
         case .yesterday:
-            self.nameLabel.text = String.localized("yesterday").lowercased()
+            self.nameLabel.text = String.localized("yesterday").capitalized
         default:
             if selectedType == type && isSelected {
-                self.nameLabel.text = "le \(dateFormatter.string(from: date!).lowercased())"
+                self.nameLabel.text = "\(dateFormatter.string(from: date!).capitalized)"
             } else {
-                self.nameLabel.text = String.localized("pfp_date_title").lowercased()
+                self.nameLabel.text = String.localized("pfp_date_title").capitalized
             }
         }
     }

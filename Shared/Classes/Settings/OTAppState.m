@@ -128,6 +128,12 @@
     tabBarController.selectedIndex = 0;
 }
 
++ (void)hideTabBar:(BOOL)hide {
+    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
+    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
+    [tabBarController.tabBar setHidden:hide];
+}
+
 + (void)continueFromStartupScreen
 {
     OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];

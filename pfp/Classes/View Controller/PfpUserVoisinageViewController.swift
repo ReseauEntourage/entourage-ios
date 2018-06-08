@@ -25,8 +25,17 @@ class PfpUserVoisinageViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.userCircles = UserDefaults.standard.currentUser.privateCircles()
-        self.tableView.reloadData()
+        
+        if let firstCircle = self.userCircles.first {
+            self.selectCircle(firstCircle, isSelected:true)
+        } else {
+            self.tableView.reloadData()
+        }
     }
     
     private func selectCircle (_ circle: OTUserMembershipListItem, isSelected:Bool) {
@@ -41,6 +50,9 @@ class PfpUserVoisinageViewController: UITableViewController {
                 }
             }
         }
+        
+        self.tableView.reloadData()
+        self.updateNavigationItems()
     }
     
     @objc private func continueAction () {
@@ -83,7 +95,5 @@ class PfpUserVoisinageViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let circle:OTUserMembershipListItem = self.userCircles[indexPath.row]
         self.selectCircle(circle, isSelected: !circle.isSelected)
-        tableView.reloadData()
-        self.updateNavigationItems()
     }
 }

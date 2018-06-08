@@ -22,6 +22,7 @@
 + (void)continueFromLoginScreen;
 + (void)continueFromUserEmailScreen;
 + (void)continueFromUserNameScreen;
++ (void)hideTabBar:(BOOL)hide;
 
 + (void)navigateToUserEmail:(UIViewController*)viewController;
 + (void)navigateToUserName:(UIViewController*)viewController;
