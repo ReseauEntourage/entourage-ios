@@ -114,8 +114,9 @@
     [more setFrame:CGRectMake(0, 0, 30, 30)];
     
     if([self.feedItem isKindOfClass:[OTEntourage class]]) {
-        [more setImage:[UIImage imageNamed:@"more"]
+        [more setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
               forState:UIControlStateNormal];
+        more.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
         [more addTarget:self.statusChangedBehavior
                  action:@selector(startChangeStatus)
          forControlEvents:UIControlEventTouchUpInside];

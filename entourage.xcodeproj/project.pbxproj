@@ -757,7 +757,6 @@
 		A2306AA320C5491E0094370E /* PfpUserVoisinage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */; };
 		A2306AA520C54C490094370E /* PfpUserVoisinageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */; };
 		A2306AA820C54EB00094370E /* PfpUserVoisinage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */; };
-		A2306AA920C54EB90094370E /* PfpUserVoisinageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */; };
 		A2306AAB20C551690094370E /* PfpUserCircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAA20C551690094370E /* PfpUserCircleCell.swift */; };
 		A2306AAD20C663660094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306AAC20C663660094370E /* AppConfigurations.plist */; };
 		A2306AAE20C663660094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306AAC20C663660094370E /* AppConfigurations.plist */; };
@@ -4405,7 +4404,6 @@
 				A202EBA32085D2C80058F32C /* OTSocialViewController.m in Sources */,
 				A202EB932085D2C80058F32C /* OTFeedItemJoinMessageController.m in Sources */,
 				A202EBE72085D2C80058F32C /* OTEntourageEditItemImageCell.m in Sources */,
-				A2306AA920C54EB90094370E /* PfpUserVoisinageViewController.swift in Sources */,
 				A202EC492085D2C80058F32C /* OTInvitationChangedBehavior.m in Sources */,
 				A202ED212085D2C80058F32C /* NSDate+OTFormatter.m in Sources */,
 				A202ECD92085D2C80058F32C /* UIButton+entourage.m in Sources */,

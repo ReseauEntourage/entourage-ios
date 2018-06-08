@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger) {
                                                         withTarget:self
                                                          andAction:@selector(showEditView)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[[ApplicationTheme shared] backgroundThemeColor]];
+                                                           colored:[[ApplicationTheme shared] secondaryNavigationBarTintColor]];
     [self.navigationItem setRightBarButtonItem:chatButton];
 }
 
