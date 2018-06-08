@@ -42,15 +42,16 @@
 #pragma mark - private methods
 
 - (void)sendMailWithSubject:(NSString *)subject {
-    if([MFMailComposeViewController canSendMail]) {
+    if ([MFMailComposeViewController canSendMail]) {
         self.mailController = [MFMailComposeViewController new];
         [self.mailController setToRecipients:@[SIGNAL_ENTOURAGE_TO]];
         [self.mailController setSubject:subject];
         self.mailController.mailComposeDelegate = self;
         [self.owner showViewController:self.mailController sender:self];
     }
-    else
+    else {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"mail_not_configured")];
+    }
 }
 
 @end

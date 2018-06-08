@@ -107,7 +107,7 @@
     UIButton *options = [UIButton buttonWithType:UIButtonTypeCustom];
     [options setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
           forState:UIControlStateNormal];
-    options.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    options.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [options addTarget:self.statusChangedBehavior
                 action:@selector(startChangeStatus)
       forControlEvents:UIControlEventTouchUpInside];
