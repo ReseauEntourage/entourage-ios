@@ -8,6 +8,8 @@
 
 #import "OTAppAppearance.h"
 #import "OTAppConfiguration.h"
+#import "OTEntourage.h"
+#import "OTAPIConsts.h"
 #import "entourage-Swift.h"
 
 @implementation OTAppAppearance
@@ -183,6 +185,14 @@
     }
 }
 
++ (NSString *)reportActionSubject {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_mail_signal_subject");
+    }
+    
+    return OTLocalizedString(@"mail_signal_subject");
+}
+
 + (UIColor*)leftTagColor:(OTUser*)user {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return (user.leftTag) ? [UIColor pfpPurpleColor] : [UIColor clearColor];
@@ -200,6 +210,21 @@
     }
     
     return [UIColor clearColor];
+}
+
++ (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
+    NSString *itemType = OTLocalizedString(item.entourage_type);
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        itemType = @"Voisinage";
+    }
+    
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formater_by"), itemType.capitalizedString] attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_BOLD_DESCRIPTION size:size]}];
+    
+    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:nameAttrString];
+    
+    return typeByNameAttrString;
 }
 
 @end

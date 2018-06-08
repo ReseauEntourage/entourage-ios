@@ -7,10 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#define FONT_NORMAL_DESCRIPTION @"SFUIText-Light"
-#define FONT_BOLD_DESCRIPTION @"SFUIText-Bold"
-#define DEFAULT_DESCRIPTION_SIZE 15.0
+#import "OTAPIConsts.h"
 
 @protocol OTUIDelegate <NSObject>
 

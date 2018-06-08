@@ -171,7 +171,8 @@ NSString *const kVisitedUserTag = @"visited";
 - (NSArray <OTUserMembershipListItem*>*)privateCircles {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %@", @"private_circle"];
     OTUserMembership *group = [self.memberships filteredArrayUsingPredicate:predicate].firstObject;
-    return group ? group.list : @[];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    return group ? [group.list sortedArrayUsingDescriptors:@[sortDescriptor]] : @[];
 }
 
 - (NSArray <OTUserMembershipListItem*>*)neighborhoods {

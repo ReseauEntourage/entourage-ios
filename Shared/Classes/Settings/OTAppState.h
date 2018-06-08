@@ -15,6 +15,8 @@
 + (void)navigateToAuthenticatedLandingScreen;
 + (void)navigateToUserProfile;
 + (void)switchMapToSolidarityGuide;
++ (void)switchToMessagesScreen;
+
 + (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;
 + (void)continueFromStartupScreen;
@@ -22,6 +24,8 @@
 + (void)continueFromLoginScreen;
 + (void)continueFromUserEmailScreen;
 + (void)continueFromUserNameScreen;
++ (void)continueEditingEntourage:(OTEntourage*)entourage fromController:(UIViewController*)controller;
+
 + (void)hideTabBar:(BOOL)hide;
 
 + (void)navigateToUserEmail:(UIViewController*)viewController;

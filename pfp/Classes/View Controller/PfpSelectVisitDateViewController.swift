@@ -71,7 +71,9 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
 
             if error == nil {
                 SVProgressHUD.showSuccess(withStatus: String.localized("pfp_last_visit_sent"))
-                self.navigationController?.popToRootViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: false)
+                OTAppState.switchToMessagesScreen()
+                
             } else {
                 SVProgressHUD.showError(withStatus: String.localized("requestNotSent"))
             }

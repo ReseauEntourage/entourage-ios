@@ -14,6 +14,7 @@
 #import "OTCategoryType.h"
 #import "OTCategory.h"
 #import "OTLocationManager.h"
+#import "entourage-Swift.h"
 
 @interface OTEditEntourageBehavior () <EntourageEditorDelegate>
 
@@ -25,7 +26,7 @@
 
 - (void)doEdit:(OTEntourage *)entourage {
     self.entourage = entourage;
-    [self.owner performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
+    [OTAppState continueEditingEntourage:entourage fromController:self.owner];
 }
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
