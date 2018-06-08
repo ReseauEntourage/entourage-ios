@@ -22,7 +22,7 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.datePicker.datePickerMode = UIDatePickerMode.dateAndTime
+        self.datePicker.datePickerMode = UIDatePickerMode.date
         self.title = String.localized("pfp_date_title").uppercased()
         self.tableView.backgroundColor = UIColor.pfpTableBackground()
         
@@ -68,9 +68,12 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
     @objc private func continueAction () {
         SVProgressHUD.show()
         PfpApiService.sendLastVisit(self.selectedDate, privateCircle: self.privateCircle!) { (error: Error?) in
-            SVProgressHUD.dismiss()
+
             if error == nil {
+                SVProgressHUD.showSuccess(withStatus: String.localized("pfp_last_visit_sent"))
                 self.navigationController?.popToRootViewController(animated: true)
+            } else {
+                SVProgressHUD.showError(withStatus: String.localized("requestNotSent"))
             }
         }
     }

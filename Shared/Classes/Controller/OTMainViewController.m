@@ -190,7 +190,9 @@
     [self.heatzonesCollectionDataSource initialize];
     [self.toggleCollectionView initialize];
     [self.toggleCollectionView toggle:NO animated:NO];
+    
     [self.noDataBehavior initialize];
+    [self.guideInfoBehavior initialize];
     [self.newsFeedsSourceBehavior initialize];
     [self.tapViewBehavior initialize];
     
@@ -409,7 +411,7 @@
 - (void)switchToGuide {
     [self.tableView switchToGuide];
     [self.tableView updateItems:self.pois];
-    [self.noDataBehavior switchedToGuide];
+
     self.toursMapDelegate.isActive = NO;
     self.guideMapDelegate.isActive = YES;
     self.backToNewsFeedsButton.hidden = NO;
@@ -419,8 +421,10 @@
 
     [self clearMap];
     [self showToursMap];
-    [self reloadPois];
+    
     [OTAppState switchMapToSolidarityGuide];
+    [self.noDataBehavior switchedToGuide];
+    [self reloadPois];
     [self configureNavigationBar];
 }
 
@@ -601,20 +605,22 @@
 - (void)getPOIList {
     [self.noDataBehavior hideNoData];
     [SVProgressHUD show];
+    
     [[OTPoiService new] poisWithParameters:[self.solidarityFilter toDictionaryWithDistance:[self mapHeight] Location:self.mapView.centerCoordinate] success:^(NSArray *categories, NSArray *pois)
         {
             self.categories = categories;
             self.pois = pois;
             [self.tableView updateItems:pois];
             [self feedMapViewWithPoiArray:pois];
-            if(self.pois.count == 0) {
-                if(!self.noDataDisplayed) {
+            
+            if (self.pois.count == 0) {
+                if (!self.noDataDisplayed) {
                     [self.noDataBehavior showNoData];
                     self.noDataDisplayed = YES;
                 }
             }
             else {
-                if(!self.poisDisplayed) {
+                if (!self.poisDisplayed) {
                     [self.guideInfoBehavior show];
                     self.poisDisplayed = YES;
                 }
