@@ -13,8 +13,11 @@
 
 #define ENTOURAGE_DEMANDE @"ask_for_help"
 #define ENTOURAGE_CONTRIBUTION @"contribution"
-
 #define ENTOURAGE_STATUS_OPEN @"open"
+
+#define ENTOURAGE_GROUP_TYPE_ACTION @"action"
+#define ENTOURAGE_GROUP_TYPE_NEIGHBORHOOD @"neighborhood"
+#define ENTOURAGE_GROUP_TYPE_PRIVATE_CIRCLE @"private_circle"
 
 @interface OTEntourage : OTFeedItem
 
@@ -23,6 +26,7 @@
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSString *entourage_type;
+@property (nonatomic, strong) NSString *group_type;
 @property (nonatomic, strong) OTCategory *categoryObject;
 
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary;

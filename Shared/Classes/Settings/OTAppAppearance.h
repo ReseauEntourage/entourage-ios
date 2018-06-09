@@ -34,4 +34,5 @@
 + (UIColor *)leftTagColor:(OTUser*)user;
 + (UIColor *)rightTagColor:(OTUser*)user;
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
++ (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
 @end

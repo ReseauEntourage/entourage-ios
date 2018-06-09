@@ -23,7 +23,7 @@
 }
 
 - (NSString *)categoryIconSource {
-    return [NSString stringWithFormat:@"%@_%@", self.entourage.entourage_type, self.entourage.category];
+    return [OTAppAppearance iconNameForEntourageItem:self.entourage];
 }
 
 - (NSString *)feedItemDescription {
