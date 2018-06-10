@@ -22,6 +22,8 @@
 		6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
 		96343AF820C6110D00E4D867 /* PfpUserCircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAA20C551690094370E /* PfpUserCircleCell.swift */; };
+		96343AF920CBF84800E4D867 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96F30D6620BEA13400229BB8 /* AppConfigurations.plist */; };
+		96343AFA20CBF84900E4D867 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96F30D6620BEA13400229BB8 /* AppConfigurations.plist */; };
 		9647D514208F8709003CA4FD /* OTEntMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D513208F8709003CA4FD /* OTEntMenuViewController.swift */; };
 		9647D516208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
 		9647D517208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
@@ -3736,6 +3738,7 @@
 				A202E7E32085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
 				A21D65BB2085FDAA00EF8E0E /* MapOptions.storyboard in Resources */,
 				A21D65AB2085FDAA00EF8E0E /* LocationSelection.storyboard in Resources */,
+				96343AF920CBF84800E4D867 /* AppConfigurations.plist in Resources */,
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
 				A21D65AA2085FDAA00EF8E0E /* Onboarding.storyboard in Resources */,
@@ -3850,6 +3853,7 @@
 				A296B8A420871CFC00F6AFBD /* LocationSelection.storyboard in Resources */,
 				A296B8A520871CFC00F6AFBD /* TourConfirmation.storyboard in Resources */,
 				A296B8A620871CFC00F6AFBD /* QuitFeedItem.storyboard in Resources */,
+				96343AFA20CBF84900E4D867 /* AppConfigurations.plist in Resources */,
 				A296B8A720871CFC00F6AFBD /* Onboarding.storyboard in Resources */,
 				A296B8A820871CFC00F6AFBD /* Paris.gpx in Resources */,
 				A296B8A920871CFC00F6AFBD /* MyEntourages.storyboard in Resources */,

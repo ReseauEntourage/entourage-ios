@@ -78,6 +78,7 @@
     self.lblEmptyTableReason.font = [UIFont fontWithName:@"SFUItext-Semibold" size:17];
     self.lblEmptyTableReason.textAlignment = NSTextAlignmentCenter;
     self.lblEmptyTableReason.numberOfLines = 0;
+    self.infoLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (void)layoutSubviews {
