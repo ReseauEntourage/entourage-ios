@@ -33,7 +33,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxU-kb-rBX">
-                                        <rect key="frame" x="16" y="73" width="343" height="500"/>
+                                        <rect key="frame" x="16" y="77" width="343" height="492"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKu-4R-ztc">
                                                 <rect key="frame" x="10" y="10" width="30" height="30"/>
@@ -46,27 +46,27 @@
                                                     <action selector="close:" destination="Et1-lq-jQo" eventType="touchUpInside" id="rbs-nd-fqX"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhiteEntourage" translatesAutoresizingMaskIntoConstraints="NO" id="ywH-iH-lax">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logoWhiteEntourage" translatesAutoresizingMaskIntoConstraints="NO" id="ywH-iH-lax">
                                                 <rect key="frame" x="10" y="55" width="56" height="56"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="56" id="69Z-N3-oSX"/>
                                                     <constraint firstAttribute="height" constant="56" id="JvZ-HG-LpG"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" ambiguous="YES" text="Votre demande est transmise" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="6gx-OQ-FAY">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Votre demande est transmise" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="6gx-OQ-FAY">
                                                 <rect key="frame" x="10" y="126" width="328" height="72"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="30"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" ambiguous="YES" text="Merci pour votre chaleur humaine ! Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="TzB-NC-pwc">
-                                                <rect key="frame" x="10" y="208" width="328" height="62"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="Merci pour votre chaleur humaine ! Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="TzB-NC-pwc">
+                                                <rect key="frame" x="10" y="208" width="328" height="54"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMi-oc-27z">
-                                                <rect key="frame" x="10" y="450" width="323" height="50"/>
+                                                <rect key="frame" x="10" y="442" width="323" height="50"/>
                                                 <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="296" id="0NR-0y-u5a"/>
@@ -97,7 +97,7 @@
                                                 </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9u1-of-5of" customClass="OTTextView">
-                                                <rect key="frame" x="3" y="278" width="337" height="160"/>
+                                                <rect key="frame" x="3" y="270" width="337" height="160"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -123,7 +123,6 @@
                                             <constraint firstItem="6gx-OQ-FAY" firstAttribute="leading" secondItem="cKu-4R-ztc" secondAttribute="leading" id="aL1-wB-M3l"/>
                                             <constraint firstItem="TzB-NC-pwc" firstAttribute="top" secondItem="6gx-OQ-FAY" secondAttribute="bottom" constant="10" id="e06-hW-5HT"/>
                                             <constraint firstItem="bMi-oc-27z" firstAttribute="leading" secondItem="IxU-kb-rBX" secondAttribute="leading" constant="10" id="ef1-wA-KT9"/>
-                                            <constraint firstAttribute="height" constant="500" id="i9R-YC-yJe"/>
                                             <constraint firstAttribute="trailing" secondItem="TzB-NC-pwc" secondAttribute="trailing" constant="5" id="iR9-cJ-PAt"/>
                                             <constraint firstItem="cKu-4R-ztc" firstAttribute="leading" secondItem="IxU-kb-rBX" secondAttribute="leading" constant="10" id="nR9-j7-0tm"/>
                                             <constraint firstItem="bMi-oc-27z" firstAttribute="top" secondItem="9u1-of-5of" secondAttribute="bottom" constant="12" id="ony-kC-aSY"/>
@@ -141,13 +140,11 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="IxU-kb-rBX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QNu-jZ-sM8" secondAttribute="top" constant="10" id="GQP-Vz-DV4"/>
+                                    <constraint firstAttribute="bottom" secondItem="IxU-kb-rBX" secondAttribute="bottom" constant="74" id="8wl-mT-zWA"/>
                                     <constraint firstItem="IxU-kb-rBX" firstAttribute="centerY" secondItem="QNu-jZ-sM8" secondAttribute="centerY" id="Jo3-ju-Est"/>
                                     <constraint firstItem="IxU-kb-rBX" firstAttribute="centerX" secondItem="QNu-jZ-sM8" secondAttribute="centerX" id="UJe-6o-SJB"/>
                                     <constraint firstAttribute="trailing" secondItem="IxU-kb-rBX" secondAttribute="trailing" constant="16" id="jxi-m0-Plg"/>
-                                    <constraint firstItem="IxU-kb-rBX" firstAttribute="top" relation="lessThanOrEqual" secondItem="QNu-jZ-sM8" secondAttribute="top" constant="73" id="oMH-UK-UaD"/>
                                     <constraint firstItem="IxU-kb-rBX" firstAttribute="leading" secondItem="QNu-jZ-sM8" secondAttribute="leading" constant="16" id="rSW-Sk-Nqh"/>
-                                    <constraint firstAttribute="bottom" secondItem="IxU-kb-rBX" secondAttribute="bottom" constant="74" id="rnx-QE-H5v"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
