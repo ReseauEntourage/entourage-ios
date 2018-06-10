@@ -97,7 +97,8 @@
 
 - (void)configureTitleView {
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    id iconName = [[[OTFeedItemFactory createFor:self.feedItem] getUI] categoryIconSource];
+    BOOL isPrivateCircle = [NSUserDefaults standardUserDefaults].currentUser.privateCircles.count > 0;
+    id iconName = isPrivateCircle ? @"private-circle" : [[[OTFeedItemFactory createFor:self.feedItem] getUI] categoryIconSource];
     id titleString = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle];
     UIButton *iconButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     iconButton.backgroundColor = UIColor.whiteColor;
