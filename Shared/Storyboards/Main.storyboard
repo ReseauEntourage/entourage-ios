@@ -541,22 +541,22 @@
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="qvk-JK-pAd">
-                                    <rect key="frame" x="0.0" y="430" width="383" height="126"/>
+                                    <rect key="frame" x="0.0" y="430" width="383" height="300"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="RJW-gt-yID">
-                                            <rect key="frame" x="173" y="44.5" width="37" height="37"/>
+                                            <rect key="frame" x="173" y="131.5" width="37" height="37"/>
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </activityIndicatorView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C'est tout pour les activités dans ce rayon autour de vous !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="hTq-Rc-zQl">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="C'est tout pour les activités dans ce rayon autour de vous !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="hTq-Rc-zQl">
                                             <rect key="frame" x="15" y="16" width="268" height="41"/>
                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FW8-fN-vdh">
-                                            <rect key="frame" x="15" y="73" width="268" height="37"/>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FW8-fN-vdh">
+                                            <rect key="frame" x="15" y="73" width="268" height="211"/>
                                             <state key="normal">
                                                 <attributedString key="attributedTitle">
                                                     <fragment content="Rechercher plus loin">
@@ -579,7 +579,7 @@
                                         <constraint firstItem="FW8-fN-vdh" firstAttribute="leading" secondItem="qvk-JK-pAd" secondAttribute="leading" constant="15" id="84g-qW-tuz"/>
                                         <constraint firstAttribute="bottom" secondItem="FW8-fN-vdh" secondAttribute="bottom" constant="16" id="Dcu-Cw-Uz1"/>
                                         <constraint firstItem="RJW-gt-yID" firstAttribute="centerY" secondItem="qvk-JK-pAd" secondAttribute="centerY" id="DvZ-tv-Gju"/>
-                                        <constraint firstItem="hTq-Rc-zQl" firstAttribute="top" relation="lessThanOrEqual" secondItem="qvk-JK-pAd" secondAttribute="top" constant="16" id="GLm-ka-rnf"/>
+                                        <constraint firstItem="hTq-Rc-zQl" firstAttribute="top" secondItem="qvk-JK-pAd" secondAttribute="top" constant="16" id="GLm-ka-rnf"/>
                                         <constraint firstItem="FW8-fN-vdh" firstAttribute="top" secondItem="hTq-Rc-zQl" secondAttribute="bottom" constant="16" id="N0Q-QM-2WC"/>
                                         <constraint firstItem="hTq-Rc-zQl" firstAttribute="leading" secondItem="qvk-JK-pAd" secondAttribute="leading" constant="15" id="nMz-oX-Tqu"/>
                                         <constraint firstAttribute="trailing" secondItem="hTq-Rc-zQl" secondAttribute="trailing" constant="100" id="uGV-Up-kXr"/>
