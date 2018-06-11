@@ -150,10 +150,12 @@
 
 - (void)setUpUIForClosedItem {
     BOOL isClosed = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isClosed];
-    if(isClosed)
+    if (isClosed) {
         self.view.backgroundColor = self.tblChat.backgroundColor = CLOSED_ITEM_BACKGROUND_COLOR;
+    }
     self.txtChat.hidden = self.btnSend.hidden = isClosed;
     self.txtChat.delegate = self;
+    [self.btnSend setTitleColor:[ApplicationTheme shared].primaryNavigationBarTintColor forState:UIControlStateNormal];
 }
 
 - (void)setupToolbarButtons {
