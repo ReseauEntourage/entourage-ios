@@ -26,6 +26,11 @@
 #import "OTAssociationDetailsViewController.h"
 #import "OTMembersCell.h"
 #import "OTUserGroupCell.h"
+#import "UIStoryboard+entourage.h"
+#import "OTActiveFeedItemViewController.h"
+#import "OTEntourageService.h"
+#import "OTMapViewController.h"
+
 #import "entourage-Swift.h"
 
 #define SUMMARY_AVATAR 1
@@ -325,8 +330,82 @@ typedef NS_ENUM(NSInteger) {
     }
 }
 
-- (void)loadNeighborhoodsConversations {
-    // TODO: 
+- (void)loadEntourageItemWithGropupId:(NSNumber*)groupId
+                           completion:(void(^)(OTEntourage *entourage, NSError *error))completion {
+    [[OTEntourageService new] getEntourageWithId:groupId
+                                     withSuccess:^(OTEntourage *entourage) {
+                                         [SVProgressHUD dismiss];
+                                         dispatch_async(dispatch_get_main_queue(), ^() {
+                                             completion(entourage, nil);
+                                         });
+    } failure:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            completion(nil, error);
+        });
+    }];
+}
+
+- (void)loadEntourageGroupMembers:(OTEntourage*)entourage
+                       completion:(void(^)(NSArray *members, NSError *error))completion{
+
+    [[OTEntourageService new] entourageUsers:entourage
+                                     success:^(NSArray *items) {
+        NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
+            return [item.status isEqualToString:JOIN_ACCEPTED];
+        }]];
+                                         dispatch_async(dispatch_get_main_queue(), ^() {
+                                             completion(filteredItems, nil);
+                                         });
+    } failure:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            completion(nil, error);
+        });
+    }];
+}
+
+- (void)loadEntourageGroupMessages:(OTEntourage*)entourage
+           withCurrentUserAsMember:(BOOL)isMember {
+    
+    if (isMember) {
+        OTActiveFeedItemViewController *activeFeedItemViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTActiveFeedItemViewController"];
+        activeFeedItemViewController.feedItem = entourage;
+        [self.navigationController pushViewController:activeFeedItemViewController animated:YES];
+        
+    } else {
+        OTMapViewController *feedMapViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTMapViewController"];
+        feedMapViewController.feedItem = entourage;
+        [self.navigationController pushViewController:feedMapViewController animated:YES];
+    }
+}
+
+- (void)loadGroupConversations:(NSNumber*)groupId {
+    
+    [SVProgressHUD show];
+    
+    [self loadEntourageItemWithGropupId:groupId
+                             completion:^(OTEntourage *entourage, NSError *error) {
+                                 
+                                 if (entourage) {
+                                     if (self.user.sid.intValue == self.currentUser.sid.intValue) {
+                                        [SVProgressHUD dismiss];
+                                        [self loadEntourageGroupMessages:entourage withCurrentUserAsMember:YES];
+                                     } else {
+                                         [self loadEntourageGroupMembers:entourage
+                                                              completion:^(NSArray *members, NSError *error) {
+                                                                  [SVProgressHUD dismiss];
+                                                                  if (members) {
+                                                                      NSArray *memberIds = [members valueForKey:@"uID"];
+                                                                      BOOL isMember = [memberIds containsObject:self.currentUser.sid];
+                                                                      [self loadEntourageGroupMessages:entourage withCurrentUserAsMember:isMember];
+                                                                  }
+                                                              }];
+                                     }
+                                 }
+                                else {
+                                    [SVProgressHUD dismiss];
+                                    NSLog(@"%@", error.localizedDescription);
+                                 }
+                             }];
 }
 
 #pragma mark - Table View
@@ -477,8 +556,14 @@ typedef NS_ENUM(NSInteger) {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     switch ([self.sections[indexPath.section] intValue]) {
+        case SectionTypePrivateCircles: {
+            OTUserMembershipListItem *privateCircle = [self.user.privateCircles objectAtIndex:indexPath.row - 1];
+            [self loadGroupConversations:privateCircle.id];
+            break;
+        }
         case SectionTypeNeighborhoods: {
-            [self loadNeighborhoodsConversations];
+            OTUserMembershipListItem *neighborhood = [self.user.neighborhoods objectAtIndex:indexPath.row - 1];
+            [self loadGroupConversations:neighborhood.id];
             break;
         }
         default:

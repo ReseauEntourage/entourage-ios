@@ -45,6 +45,11 @@
     return [UIStoryboard storyboardWithName:@"MyEntourages" bundle:nil];
 }
 
++ (UIStoryboard *)activeFeedsStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
+}
+
 + (UIStoryboard*)entourageEditorStoryboard {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"EntourageEditor" bundle:nil];
     return storyboard;
