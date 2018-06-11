@@ -392,6 +392,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "visitor" = "Voisineur";
 "visited" = "Voisiné";
 "coordinator" = "Animateur";
+"neighborhoodsSectionTitle" = "Neighborhoods";
 
 // associations
 "select_association_title" = "SOUTENIR";

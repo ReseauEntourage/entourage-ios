@@ -166,6 +166,14 @@
     return nil;
 }
 
++ (NSString*)userNeighborhoodsSectionTitle:(OTUser*)user {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_neighborhoodsSectionTitle");
+    }
+    
+    return OTLocalizedString(@"neighborhoodsSectionTitle");
+}
+
 + (NSString*)numberOfUserActionsValueTitle:(OTUser *)user {
     /*
      https://jira.mytkw.com/browse/EMA-1949

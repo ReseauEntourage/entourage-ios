@@ -28,6 +28,7 @@
 
 "pfp_visitedPrivateCirclesSectionTitle" = "Je suis voisiné(e) par";
 "pfp_visitorPrivateCirclesSectionTitle" = "Je voisine";
+"pfp_neighborhoodsSectionTitle" = "Membre des voisinages";
 
 "pfp_lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit : contactez voisinage-test@petitsfreresdespauvres.fr";
 
