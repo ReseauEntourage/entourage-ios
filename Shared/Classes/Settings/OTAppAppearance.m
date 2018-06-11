@@ -213,18 +213,30 @@
 }
 
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
-    NSString *itemType = OTLocalizedString(item.entourage_type);
+    NSString *itemType = OTLocalizedString(item.entourage_type).capitalizedString;
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        itemType = @"Voisinage";
+        itemType = @"Voisinage animé";
     }
     
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formater_by"), itemType.capitalizedString] attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formater_by"), itemType] attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_BOLD_DESCRIPTION size:size]}];
     
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:nameAttrString];
     
     return typeByNameAttrString;
+}
+
++ (NSString*)iconNameForEntourageItem:(OTEntourage*)item {
+    NSString *icon = [NSString stringWithFormat:@"%@_%@", item.entourage_type, item.category];
+    
+    if ([item.group_type isEqualToString:ENTOURAGE_GROUP_TYPE_PRIVATE_CIRCLE]) {
+        icon = @"private-circle";
+    } else if ([item.group_type isEqualToString:ENTOURAGE_GROUP_TYPE_NEIGHBORHOOD]){
+        icon = @"neighborhood";
+    }
+    
+    return icon;
 }
 
 @end

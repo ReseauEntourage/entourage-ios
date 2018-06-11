@@ -517,13 +517,13 @@
                             <constraint firstItem="zC8-Kg-Hs3" firstAttribute="centerX" secondItem="ufj-T9-kGS" secondAttribute="centerX" id="BLD-Lg-yuG"/>
                             <constraint firstItem="yE5-7O-s3J" firstAttribute="centerY" secondItem="zC8-Kg-Hs3" secondAttribute="centerY" id="Bsy-eW-Rsf"/>
                             <constraint firstItem="zC8-Kg-Hs3" firstAttribute="leading" secondItem="yE5-7O-s3J" secondAttribute="trailing" constant="10" id="O5h-s9-gvr"/>
-                            <constraint firstItem="d1I-T4-DjN" firstAttribute="top" secondItem="ufj-T9-kGS" secondAttribute="bottom" constant="62" id="QSo-Yq-T9o"/>
                             <constraint firstItem="SlE-io-2Jv" firstAttribute="top" secondItem="zC8-Kg-Hs3" secondAttribute="bottom" constant="8" id="TMx-Y7-7sR"/>
                             <constraint firstItem="7gF-10-F2g" firstAttribute="centerX" secondItem="ufj-T9-kGS" secondAttribute="centerX" id="YDo-0e-VJp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ufj-T9-kGS" secondAttribute="trailing" constant="8" id="gLj-Nd-Thz"/>
                             <constraint firstItem="7gF-10-F2g" firstAttribute="top" secondItem="SlE-io-2Jv" secondAttribute="bottom" constant="8" id="gZB-gY-Zev"/>
                             <constraint firstItem="SlE-io-2Jv" firstAttribute="centerX" secondItem="ufj-T9-kGS" secondAttribute="centerX" id="kJq-aw-rMm"/>
                             <constraint firstItem="naa-IB-UaO" firstAttribute="centerY" secondItem="7gF-10-F2g" secondAttribute="centerY" id="rrO-Fm-86d"/>
+                            <constraint firstItem="d1I-T4-DjN" firstAttribute="top" secondItem="ufj-T9-kGS" secondAttribute="bottom" constant="62" id="wHW-Iv-fbK"/>
                         </constraints>
                     </view>
                     <connections>
@@ -796,7 +796,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="closeShadow" width="62" height="62"/>
+        <image name="closeShadow" width="64" height="64"/>
         <image name="create" width="64" height="64"/>
         <image name="createMaraude" width="48" height="48"/>
         <image name="heart" width="48" height="48"/>

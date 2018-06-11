@@ -100,9 +100,9 @@
     id iconName = [[[OTFeedItemFactory createFor:self.feedItem] getUI] categoryIconSource];
     id titleString = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle];
     
-    UIButton *iconButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    UIButton *iconButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
     iconButton.backgroundColor = UIColor.whiteColor;
-    iconButton.layer.cornerRadius = 20;
+    iconButton.layer.cornerRadius = 18;
     [iconButton setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
     iconButton.userInteractionEnabled = NO;
     
@@ -150,10 +150,12 @@
 
 - (void)setUpUIForClosedItem {
     BOOL isClosed = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isClosed];
-    if(isClosed)
+    if (isClosed) {
         self.view.backgroundColor = self.tblChat.backgroundColor = CLOSED_ITEM_BACKGROUND_COLOR;
+    }
     self.txtChat.hidden = self.btnSend.hidden = isClosed;
     self.txtChat.delegate = self;
+    [self.btnSend setTitleColor:[ApplicationTheme shared].primaryNavigationBarTintColor forState:UIControlStateNormal];
 }
 
 - (void)setupToolbarButtons {

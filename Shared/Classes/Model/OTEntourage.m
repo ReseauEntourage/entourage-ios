@@ -34,6 +34,7 @@
         self.entourage_type = [dictionary stringForKey:kWSKeyEntourageType];
         self.noPeople = [dictionary numberForKey:kWSNoPeople];
         self.category = [dictionary stringForKey:kWSKeyCategory];
+        self.group_type = [dictionary stringForKey:kWSKeyEntourageGroupType];
         
         if ([self.category isEqualToString:@""]) {
             self.category = @"other";
@@ -47,6 +48,7 @@
     return @{
         kWSKeyTitle: self.title,
         kWSKeyEntourageType: self.entourage_type,
+        kWSKeyEntourageGroupType: self.group_type,
         kWSDescription: self.desc ? self.desc : @"",
         kWSKeyStatus: self.status,
         kWSKeyCategory: self.category,
