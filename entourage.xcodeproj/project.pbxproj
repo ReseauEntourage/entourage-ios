@@ -758,8 +758,6 @@
 		A2306AA520C54C490094370E /* PfpUserVoisinageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */; };
 		A2306AA820C54EB00094370E /* PfpUserVoisinage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */; };
 		A2306AAB20C551690094370E /* PfpUserCircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAA20C551690094370E /* PfpUserCircleCell.swift */; };
-		A2306AAD20C663660094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306AAC20C663660094370E /* AppConfigurations.plist */; };
-		A2306AAE20C663660094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306AAC20C663660094370E /* AppConfigurations.plist */; };
 		A2306AB020C69DDD0094370E /* PfpSelectVisitDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAF20C69DDD0094370E /* PfpSelectVisitDateViewController.swift */; };
 		A2306AB220C69F050094370E /* PfpSelectDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AB120C69F050094370E /* PfpSelectDateCell.swift */; };
 		A2306AB620C81C360094370E /* PfpApiService.m in Sources */ = {isa = PBXBuildFile; fileRef = A2306AB520C81C360094370E /* PfpApiService.m */; };
@@ -1229,6 +1227,7 @@
 		6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourageTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79016BE7EDCE7EC3FA1F7032 /* Pods-entourageTests.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.store.xcconfig"; sourceTree = "<group>"; };
 		792CA159C4CE913520D77D5E /* Pods-pfp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.debug.xcconfig"; sourceTree = "<group>"; };
+		96343AFB20CF994D00E4D867 /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = "<group>"; };
 		9647D513208F8709003CA4FD /* OTEntMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEntMenuViewController.swift; sourceTree = "<group>"; };
 		9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuHeaderView.swift; sourceTree = "<group>"; };
 		96B658A9209A380000EB0398 /* OTMenuCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuCellView.swift; sourceTree = "<group>"; };
@@ -1954,7 +1953,6 @@
 		A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PfpUserVoisinage.storyboard; sourceTree = "<group>"; };
 		A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpUserVoisinageViewController.swift; sourceTree = "<group>"; };
 		A2306AAA20C551690094370E /* PfpUserCircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpUserCircleCell.swift; sourceTree = "<group>"; };
-		A2306AAC20C663660094370E /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
 		A2306AAF20C69DDD0094370E /* PfpSelectVisitDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpSelectVisitDateViewController.swift; sourceTree = "<group>"; };
 		A2306AB120C69F050094370E /* PfpSelectDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpSelectDateCell.swift; sourceTree = "<group>"; };
 		A2306AB420C81C360094370E /* PfpApiService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PfpApiService.h; sourceTree = "<group>"; };
@@ -3495,10 +3493,10 @@
 		A24199B52084F87100BC7466 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				96343AFB20CF994D00E4D867 /* AppConfigurations.plist */,
 				A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */,
 				A202E80A2085D0FE0058F32C /* OTAppDelegate.h */,
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
-				A2306AAC20C663660094370E /* AppConfigurations.plist */,
 				A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */,
 				A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */,
 				A296B8EB20871FD800F6AFBD /* main.m */,
@@ -3762,7 +3760,6 @@
 				A202E7E32085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
 				A21D65BB2085FDAA00EF8E0E /* MapOptions.storyboard in Resources */,
 				A21D65AB2085FDAA00EF8E0E /* LocationSelection.storyboard in Resources */,
-				A2306AAD20C663660094370E /* AppConfigurations.plist in Resources */,
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
 				A21D65AA2085FDAA00EF8E0E /* Onboarding.storyboard in Resources */,
@@ -3817,6 +3814,7 @@
 				A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */,
 				A202E7D52085CFC40058F32C /* Localizable.strings in Resources */,
 				A202E7D92085CFC40058F32C /* categoryJson.json in Resources */,
+				96343AFC20CF994D00E4D867 /* AppConfigurations.plist in Resources */,
 				A21D64AA2085E8B400EF8E0E /* Platinia.gpx in Resources */,
 				A202E7CD2085CFC40058F32C /* categories.json in Resources */,
 				A21D64AD2085E8B400EF8E0E /* Nowhere.gpx in Resources */,
@@ -3867,6 +3865,7 @@
 				A296B89C20871CFC00F6AFBD /* CountryList.csv in Resources */,
 				A296B91A2087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist in Resources */,
 				A296B89D20871CFC00F6AFBD /* Main.storyboard in Resources */,
+				96343AFD20CF994D00E4D867 /* AppConfigurations.plist in Resources */,
 				A296B89E20871CFC00F6AFBD /* PublicFeedItem.storyboard in Resources */,
 				A296B89F20871CFC00F6AFBD /* Rights.storyboard in Resources */,
 				A296B8A020871CFC00F6AFBD /* EncounterEditor.storyboard in Resources */,
@@ -3877,7 +3876,6 @@
 				A296B8A420871CFC00F6AFBD /* LocationSelection.storyboard in Resources */,
 				A296B8A520871CFC00F6AFBD /* TourConfirmation.storyboard in Resources */,
 				A296B8A620871CFC00F6AFBD /* QuitFeedItem.storyboard in Resources */,
-				A2306AAE20C663660094370E /* AppConfigurations.plist in Resources */,
 				A296B8A720871CFC00F6AFBD /* Onboarding.storyboard in Resources */,
 				A296B8A820871CFC00F6AFBD /* Paris.gpx in Resources */,
 				A296B8A920871CFC00F6AFBD /* MyEntourages.storyboard in Resources */,
