@@ -408,6 +408,19 @@ typedef NS_ENUM(NSInteger) {
                              }];
 }
 
+- (BOOL)shouldShowStartChatConversationOnSection:(NSInteger)section {
+    if (section == self.sections.count - 1 &&
+        self.currentUser.sid.integerValue != self.user.sid.integerValue) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)startChatWithSelectedUser {
+    
+}
+
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -444,7 +457,38 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if ([self shouldShowStartChatConversationOnSection:section]) {
+        return 64.0f;
+    }
     return .5f;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (![self shouldShowStartChatConversationOnSection:section]) {
+        return [UIView new];
+    }
+    
+    UIView *footer  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 64)];
+    footer.backgroundColor = [UIColor whiteColor];
+    
+    UIButton *footerButton = [[UIButton alloc] initWithFrame:footer.frame];
+    footerButton.backgroundColor = [UIColor clearColor];
+    [footerButton addTarget:self action:@selector(startChatWithSelectedUser) forControlEvents:UIControlEventTouchUpInside];
+    [footer addSubview:footerButton];
+    [footerButton setExclusiveTouch:YES];
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 166, 38)];
+    button.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    button.center = footer.center;
+    button.layer.cornerRadius = 19;
+    [button setTitle:OTLocalizedString(@"start_chat_conversation") forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont fontWithName:@"SFUIText-Bold" size:14]];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(startChatWithSelectedUser) forControlEvents:UIControlEventTouchUpInside];
+    [footer addSubview:button];
+    [button setExclusiveTouch:YES];
+    
+    return footer;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

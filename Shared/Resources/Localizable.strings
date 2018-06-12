@@ -386,6 +386,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "mail_sent" = "Mail envoyé";
 "mail_send_failure" = "Le mail n’a pu être envoyé";
 "mail_signal_subject" = "Signalement d'un problème dans l'entourage: \"%@\" créé par %@";
+"start_chat_conversation" = "LUI ÉCRIRE";
 
 // Tags
 "not_validated" = "En attente";
