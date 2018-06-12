@@ -35,6 +35,7 @@
 #import "OTMessageTableCellProviderBehavior.h"
 #import "OTBarButtonView.h"
 #import "entourage-Swift.h"
+#import "UIImage+processing.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -155,7 +156,6 @@
     }
     self.txtChat.hidden = self.btnSend.hidden = isClosed;
     self.txtChat.delegate = self;
-    [self.btnSend setTitleColor:[ApplicationTheme shared].primaryNavigationBarTintColor forState:UIControlStateNormal];
 }
 
 - (void)setupToolbarButtons {
