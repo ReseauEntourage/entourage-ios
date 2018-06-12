@@ -8,6 +8,7 @@
 
 #import "OTUserMembership.h"
 #import "NSDictionary+Parsing.h"
+#import "OTConsts.h"
 
 NSString *const kUserMembershipType = @"type";
 NSString *const kUserMembershipList = @"list";
@@ -42,6 +43,7 @@ NSString *const kUserMembershipListItemPeople = @"number_of_people";
     [encoder encodeObject:self.id forKey:kUserMembershipListItemId];
     [encoder encodeObject:self.title forKey:kUserMembershipListItemTitle];
     [encoder encodeObject:self.noOfPeople forKey:kUserMembershipListItemPeople];
+    [encoder encodeObject:self.type forKey:kUserMembershipType];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -50,9 +52,22 @@ NSString *const kUserMembershipListItemPeople = @"number_of_people";
         self.id = [decoder decodeObjectForKey:kUserMembershipListItemId];
         self.title = [decoder decodeObjectForKey:kUserMembershipListItemTitle];
         self.noOfPeople = [decoder decodeObjectForKey:kUserMembershipListItemPeople];
+        self.type = [decoder decodeObjectForKey:kUserMembershipType];
     }
     return self;
 }
+
+- (NSString*)membershipIconName {
+    if ([self.type isEqualToString:ENTOURAGE_GROUP_TYPE_NEIGHBORHOOD]) {
+        return @"neighborhood";
+        
+    } else if ([self.type isEqualToString:ENTOURAGE_GROUP_TYPE_PRIVATE_CIRCLE]) {
+        return @"private-circle";
+    }
+    
+    return @"other";
+}
+
 @end
 
 @implementation OTUserMembership
@@ -70,6 +85,7 @@ NSString *const kUserMembershipListItemPeople = @"number_of_people";
             NSArray *listDictArray = [dictionary objectForKey:kUserMembershipList];
             for (NSDictionary *listDict in listDictArray) {
                 OTUserMembershipListItem *item = [[OTUserMembershipListItem alloc] initWithDictionary:listDict];
+                item.type = self.type;
                 [self.list addObject:item];
             }
         }
@@ -83,11 +99,11 @@ NSString *const kUserMembershipListItemPeople = @"number_of_people";
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
-    if ((self = [super init]))
-    {
+    if ((self = [super init])) {
         self.type = [decoder decodeObjectForKey:kUserMembershipType];
         self.list = [decoder decodeObjectForKey:kUserMembershipList];
     }
     return self;
 }
+
 @end

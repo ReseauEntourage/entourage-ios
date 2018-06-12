@@ -21,6 +21,8 @@
 #import "OTConsts.h"
 #import "OTBarButtonView.h"
 #import "entourage-Swift.h"
+#import "NSUserDefaults+OT.h"
+#import "UIImage+processing.h"
 
 @interface OTMapViewController ()
 

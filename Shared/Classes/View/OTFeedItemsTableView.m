@@ -78,6 +78,7 @@
     self.lblEmptyTableReason.font = [UIFont fontWithName:@"SFUItext-Semibold" size:17];
     self.lblEmptyTableReason.textAlignment = NSTextAlignmentCenter;
     self.lblEmptyTableReason.numberOfLines = 0;
+    self.infoLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (void)layoutSubviews {
@@ -321,7 +322,7 @@
     self.infoLabel.hidden = NO;
     BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
     self.furtherEntouragesBtn.hidden = isMaxRadius;
-    self.loadingView.frame = CGRectMake(0, 0, 1, SMALL_FOOTER_HEIGHT);
+    self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
     
     if(self.items.count > 0)
         self.infoLabel.text = isMaxRadius ? [OTAppAppearance noFeedsDescription] : [OTAppAppearance extendSearchParameterDescription];

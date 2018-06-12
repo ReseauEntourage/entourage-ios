@@ -24,5 +24,6 @@
 + (UIStoryboard *)myEntouragesStoryboard;
 + (UIStoryboard *)aboutStoryboard;
 + (UIStoryboard *)userProfileStoryboard;
++ (UIStoryboard *)activeFeedsStoryboard;
 
 @end

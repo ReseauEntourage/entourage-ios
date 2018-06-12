@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "OTUserMembership.h"
 
-@interface OTPrivateCircleCell : UITableViewCell
+@interface OTUserGroupCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UIButton *btnProfile;
 @property (nonatomic, weak) IBOutlet UILabel *lblDisplayName;
 @property (nonatomic, weak) IBOutlet UILabel *lblCount;

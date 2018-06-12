@@ -30,6 +30,7 @@
 + (NSString*)numberOfUserActionsTitle;
 + (NSString*)numberOfUserActionsValueTitle:(OTUser *)user;
 + (NSString*)userPrivateCirclesSectionTitle:(OTUser*)user;
++ (NSString*)userNeighborhoodsSectionTitle:(OTUser*)user;
 
 + (UIColor *)leftTagColor:(OTUser*)user;
 + (UIColor *)rightTagColor:(OTUser*)user;

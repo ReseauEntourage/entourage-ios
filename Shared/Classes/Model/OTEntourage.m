@@ -10,7 +10,6 @@
 #import "OTConsts.h"
 #import "OTTour.h"
 
-
 @implementation OTEntourage
 
 - (instancetype)init {
