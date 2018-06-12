@@ -797,7 +797,7 @@
     </scenes>
     <resources>
         <image name="closeShadow" width="64" height="64"/>
-        <image name="create" width="64" height="64"/>
+        <image name="create" width="62" height="62"/>
         <image name="createMaraude" width="48" height="48"/>
         <image name="heart" width="48" height="48"/>
         <image name="invitationSquare" width="56" height="56"/>

@@ -22,6 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addCloseButton];
+    
     // Do any additional setup after loading the view.
     if (!CGPointEqualToPoint(self.fingerPoint, CGPointZero)) {
         [self setupOptionsAtFingerPoint];
@@ -45,6 +47,19 @@
     [OTAppState hideTabBar:YES];
 }
 
+- (void)addCloseButton {
+    CGFloat buttonSize = 62.0f;
+    CGFloat buttomOffset = 102.0f;
+    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGFloat x = [UIScreen mainScreen].bounds.size.width - PADDING_HORIZONTAL / 2 - buttonSize;
+    CGFloat y = [UIScreen mainScreen].bounds.size.height - (PADDING_VERTICAL + buttonSize) - buttomOffset + buttonSize;
+    
+    closeButton.frame = CGRectMake(x, y, buttonSize, buttonSize);
+    [closeButton setImage:[UIImage imageNamed:@"closeShadow"] forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(doDismiss:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:closeButton];
+}
+
 /*******************************************************************************/
 
 #pragma mark - Show options at fingerPoint
@@ -65,15 +80,6 @@
 - (void)setupOptionsAsList {
     self.buttonIndex = 1;
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)addOption:(NSString *)optionName
           atIndex:(int)index
@@ -148,7 +154,10 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *image = [UIImage imageNamed:optionIcon];
     
-    button.frame = CGRectMake(self.fingerPoint.x - image.size.width/2 + translationPoint.x, self.fingerPoint.y+10 + translationPoint.y, image.size.width, image.size.height);
+    button.frame = CGRectMake(self.fingerPoint.x - image.size.width/2 + translationPoint.x,
+                              self.fingerPoint.y+10 + translationPoint.y,
+                              image.size.width,
+                              image.size.height);
     [button setImage:[UIImage imageNamed:optionIcon] forState:UIControlStateNormal];
     [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
