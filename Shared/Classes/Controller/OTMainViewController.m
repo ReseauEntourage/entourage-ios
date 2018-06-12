@@ -190,7 +190,9 @@
     [self.heatzonesCollectionDataSource initialize];
     [self.toggleCollectionView initialize];
     [self.toggleCollectionView toggle:NO animated:NO];
+    
     [self.noDataBehavior initialize];
+    [self.guideInfoBehavior initialize];
     [self.newsFeedsSourceBehavior initialize];
     [self.tapViewBehavior initialize];
     
@@ -246,6 +248,7 @@
     self.launcherButton.hidden = YES;
     self.createEncounterButton.hidden = NO;
     self.stopButton.hidden = NO;
+    
     [[OTTourService new] tourEncounters:self.tourCreatorBehavior.tour success:^(NSArray *items) {
         self.encounters = [NSMutableArray arrayWithArray:items];
     } failure:^(NSError *error) {
@@ -408,7 +411,7 @@
 - (void)switchToGuide {
     [self.tableView switchToGuide];
     [self.tableView updateItems:self.pois];
-    [self.noDataBehavior switchedToGuide];
+
     self.toursMapDelegate.isActive = NO;
     self.guideMapDelegate.isActive = YES;
     self.backToNewsFeedsButton.hidden = NO;
@@ -418,8 +421,10 @@
 
     [self clearMap];
     [self showToursMap];
-    [self reloadPois];
+    
     [OTAppState switchMapToSolidarityGuide];
+    [self.noDataBehavior switchedToGuide];
+    [self reloadPois];
     [self configureNavigationBar];
 }
 
@@ -441,6 +446,7 @@
    	self.mapView.showsUserLocation = YES;
     self.mapView.pitchEnabled = NO;
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
+    
     MKCoordinateRegion region;
     if([OTLocationManager sharedInstance].currentLocation)
         region = MKCoordinateRegionMakeWithDistance([OTLocationManager sharedInstance].currentLocation.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
@@ -449,11 +455,13 @@
     [self.mapView setRegion:region animated:NO];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
+    
     for(UIView *view in self.mapView.subviews)
         for(UIGestureRecognizer *recognizer in view.gestureRecognizers)
             if([recognizer class] == [UILongPressGestureRecognizer class])
                 [view removeGestureRecognizer:recognizer];
     UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
+    
     [self.mapView addGestureRecognizer:longPressMapGesture];
 }
 
@@ -597,20 +605,22 @@
 - (void)getPOIList {
     [self.noDataBehavior hideNoData];
     [SVProgressHUD show];
+    
     [[OTPoiService new] poisWithParameters:[self.solidarityFilter toDictionaryWithDistance:[self mapHeight] Location:self.mapView.centerCoordinate] success:^(NSArray *categories, NSArray *pois)
         {
             self.categories = categories;
             self.pois = pois;
             [self.tableView updateItems:pois];
             [self feedMapViewWithPoiArray:pois];
-            if(self.pois.count == 0) {
-                if(!self.noDataDisplayed) {
+            
+            if (self.pois.count == 0) {
+                if (!self.noDataDisplayed) {
                     [self.noDataBehavior showNoData];
                     self.noDataDisplayed = YES;
                 }
             }
             else {
-                if(!self.poisDisplayed) {
+                if (!self.poisDisplayed) {
                     [self.guideInfoBehavior show];
                     self.poisDisplayed = YES;
                 }
@@ -1200,18 +1210,23 @@
 
 - (void)showToursMap {
     self.tableView.scrollEnabled = NO;
-    if(self.guideMapDelegate.isActive) {
+    
+    if (self.guideMapDelegate.isActive) {
         [self.showSolidarityGuideView setHidden: YES];
         [self.toggleCollectionView toggle:NO animated:NO];
-    }else {
+    } else {
         [OTLogger logEvent:@"Screen06_2MapView"];
         [self.showSolidarityGuideView setHidden: !OTAppConfiguration.supportsSolidarityGuideFunctionality];
     }
-    if(self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0)
+    if (self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0) {
         [self.noDataBehavior showNoData];
+    }
     self.nouveauxFeedItemsButton.hidden = YES;
-    if (self.toursMapDelegate.isActive)
+    
+    if (self.toursMapDelegate.isActive) {
         self.isTourListDisplayed = NO;
+    }
+    
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
 

@@ -11,8 +11,6 @@
 #import "OTConsts.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
-#define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"
-
 @interface OTSignalEntourageBehavior () <MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) MFMailComposeViewController *mailController;
@@ -22,7 +20,9 @@
 @implementation OTSignalEntourageBehavior
 
 - (void)sendMailFor:(OTEntourage *)entourage {
-    NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"mail_signal_subject"), entourage.title, entourage.author.displayName];
+    NSString *subject = [NSString stringWithFormat:[OTAppAppearance reportActionSubject],
+                         entourage.title,
+                         entourage.author.displayName];
     [self sendMailWithSubject:subject];
 }
 
@@ -42,15 +42,16 @@
 #pragma mark - private methods
 
 - (void)sendMailWithSubject:(NSString *)subject {
-    if([MFMailComposeViewController canSendMail]) {
+    if ([MFMailComposeViewController canSendMail]) {
         self.mailController = [MFMailComposeViewController new];
         [self.mailController setToRecipients:@[SIGNAL_ENTOURAGE_TO]];
         [self.mailController setSubject:subject];
         self.mailController.mailComposeDelegate = self;
         [self.owner showViewController:self.mailController sender:self];
     }
-    else
+    else {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"mail_not_configured")];
+    }
 }
 
 @end

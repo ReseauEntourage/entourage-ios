@@ -31,6 +31,7 @@
 #define kWSKeyEntourage @"entourage"
 #define kWSKeyCreateDate @"created_at"
 #define kWSKeyEntourageType @"entourage_type"
+#define kWSKeyEntourageGroupType @"group_type"
 
 #define kWSKeyTitle @"title"
 #define kWSKeyName @"name"

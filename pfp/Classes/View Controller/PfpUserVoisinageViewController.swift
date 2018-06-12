@@ -11,6 +11,7 @@ import UIKit
 class PfpUserVoisinageViewController: UITableViewController {
     
     var userCircles:[OTUserMembershipListItem] = [OTUserMembershipListItem]()
+    var selectedCircle:OTUserMembershipListItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +25,17 @@ class PfpUserVoisinageViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.userCircles = UserDefaults.standard.currentUser.privateCircles()
-        self.tableView.reloadData()
+        
+        if let firstCircle = self.userCircles.first {
+            self.selectCircle(firstCircle, isSelected:true)
+        } else {
+            self.tableView.reloadData()
+        }
     }
     
     private func selectCircle (_ circle: OTUserMembershipListItem, isSelected:Bool) {
@@ -33,7 +43,35 @@ class PfpUserVoisinageViewController: UITableViewController {
             item.isSelected = false
             if item === circle {
                 item.isSelected = isSelected
+                if isSelected {
+                    self.selectedCircle = circle
+                } else {
+                    self.selectedCircle = nil
+                }
             }
+        }
+        
+        self.tableView.reloadData()
+        self.updateNavigationItems()
+    }
+    
+    @objc private func continueAction () {
+        let storyboard:UIStoryboard = UIStoryboard.init(name: "PfpUserVoisinage", bundle: nil)
+        let vc:PfpSelectVisitDateViewController = storyboard.instantiateViewController(withIdentifier: "PfpSelectVisitDateViewController") as! PfpSelectVisitDateViewController
+        vc.privateCircle = self.selectedCircle
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func updateNavigationItems () {
+        let continueButton:UIBarButtonItem = UIBarButtonItem.init(title: String.localized("continue"),
+                                                                  style: UIBarButtonItemStyle.plain,
+                                                                  target: self,
+                                                                  action: #selector(continueAction))
+        
+        if let _:OTUserMembershipListItem = (self.userCircles.filter {$0.isSelected == true}).first {
+            self.navigationItem.rightBarButtonItem = continueButton
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
         }
     }
 
@@ -57,6 +95,5 @@ class PfpUserVoisinageViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let circle:OTUserMembershipListItem = self.userCircles[indexPath.row]
         self.selectCircle(circle, isSelected: !circle.isSelected)
-        tableView.reloadData()
     }
 }

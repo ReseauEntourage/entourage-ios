@@ -41,6 +41,8 @@
     }];
     
     self.togglePOILabel.textColor = [ApplicationTheme shared].backgroundThemeColor;
+    
+    [OTAppState hideTabBar:YES];
 }
 
 /*******************************************************************************/
@@ -101,18 +103,21 @@
 
 - (IBAction)doCreateTour:(id)sender {
     [OTLogger logEvent:@"TourCreateClick"];
+    [OTAppState hideTabBar:NO];
     if ([self.optionsDelegate respondsToSelector:@selector(createTour)]) {
         [self.optionsDelegate performSelector:@selector(createTour) withObject:nil];
     }
 }
 
 - (IBAction)doCreateEncounter:(id)sender {
+    [OTAppState hideTabBar:NO];
     [OTLogger logEvent:@"CreateEncounterClick"];
     if ([self.optionsDelegate respondsToSelector:@selector(createEncounter)])
         [self.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
 }
 
 - (IBAction)doCreateAction:(id)sender {
+    [OTAppState hideTabBar:NO];
     [OTLogger logEvent:@"CreateActionClick"];
     if ([OTOngoingTourService sharedInstance].isOngoing)
         [self.actionAlert presentOnViewController:self];
@@ -122,12 +127,14 @@
 }
 
 - (IBAction)doTogglePOI:(id)sender {
+    [OTAppState hideTabBar:NO];
     if ([self.optionsDelegate respondsToSelector:@selector(togglePOI)]) {
         [self.optionsDelegate performSelector:@selector(togglePOI) withObject:nil];
     }
 }
 
 - (IBAction)proposeStructure:(id)sender {
+    [OTAppState hideTabBar:NO];
     if ([self.optionsDelegate respondsToSelector:@selector(proposeStructure)]) {
         [self.optionsDelegate performSelector:@selector(proposeStructure) withObject:nil];
     }
@@ -147,6 +154,7 @@
     [self.view addSubview:button];
 }
 - (IBAction)doDismiss:(id)sender {
+    [OTAppState hideTabBar:NO];
     if ([self.optionsDelegate respondsToSelector:@selector(dismissOptions)]) {
         [self.optionsDelegate performSelector:@selector(dismissOptions) withObject:nil];
     }

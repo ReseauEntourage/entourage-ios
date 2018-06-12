@@ -22,8 +22,6 @@
 		6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
 		96343AF820C6110D00E4D867 /* PfpUserCircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAA20C551690094370E /* PfpUserCircleCell.swift */; };
-		96343AF920CBF84800E4D867 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96F30D6620BEA13400229BB8 /* AppConfigurations.plist */; };
-		96343AFA20CBF84900E4D867 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96F30D6620BEA13400229BB8 /* AppConfigurations.plist */; };
 		9647D514208F8709003CA4FD /* OTEntMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D513208F8709003CA4FD /* OTEntMenuViewController.swift */; };
 		9647D516208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
 		9647D517208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
@@ -759,8 +757,14 @@
 		A2306AA320C5491E0094370E /* PfpUserVoisinage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */; };
 		A2306AA520C54C490094370E /* PfpUserVoisinageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */; };
 		A2306AA820C54EB00094370E /* PfpUserVoisinage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */; };
-		A2306AA920C54EB90094370E /* PfpUserVoisinageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */; };
 		A2306AAB20C551690094370E /* PfpUserCircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAA20C551690094370E /* PfpUserCircleCell.swift */; };
+		A2306AAD20C663660094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306AAC20C663660094370E /* AppConfigurations.plist */; };
+		A2306AAE20C663660094370E /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2306AAC20C663660094370E /* AppConfigurations.plist */; };
+		A2306AB020C69DDD0094370E /* PfpSelectVisitDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAF20C69DDD0094370E /* PfpSelectVisitDateViewController.swift */; };
+		A2306AB220C69F050094370E /* PfpSelectDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AB120C69F050094370E /* PfpSelectDateCell.swift */; };
+		A2306AB620C81C360094370E /* PfpApiService.m in Sources */ = {isa = PBXBuildFile; fileRef = A2306AB520C81C360094370E /* PfpApiService.m */; };
+		A2306AB920C81F730094370E /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A2306AB720C81F720094370E /* ISO8601DateFormatter.m */; };
+		A2306ABA20C81F730094370E /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A2306AB720C81F720094370E /* ISO8601DateFormatter.m */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
@@ -1236,7 +1240,6 @@
 		96B658BD209A689200EB0398 /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 		96F30D6220BE956100229BB8 /* OTInviteCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTInviteCell.h; sourceTree = "<group>"; };
 		96F30D6320BE956100229BB8 /* OTInviteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTInviteCell.m; sourceTree = "<group>"; };
-		96F30D6620BEA13400229BB8 /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = "<group>"; };
 		A19BDADC422EDAB56B022976 /* Pods-pfp.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.store.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.store.xcconfig"; sourceTree = "<group>"; };
 		A202E79F2085CFC20058F32C /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		A202E7A22085CFC20058F32C /* logo_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black.png; sourceTree = "<group>"; };
@@ -1951,6 +1954,13 @@
 		A2306AA220C5491E0094370E /* PfpUserVoisinage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PfpUserVoisinage.storyboard; sourceTree = "<group>"; };
 		A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpUserVoisinageViewController.swift; sourceTree = "<group>"; };
 		A2306AAA20C551690094370E /* PfpUserCircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpUserCircleCell.swift; sourceTree = "<group>"; };
+		A2306AAC20C663660094370E /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
+		A2306AAF20C69DDD0094370E /* PfpSelectVisitDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpSelectVisitDateViewController.swift; sourceTree = "<group>"; };
+		A2306AB120C69F050094370E /* PfpSelectDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpSelectDateCell.swift; sourceTree = "<group>"; };
+		A2306AB420C81C360094370E /* PfpApiService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PfpApiService.h; sourceTree = "<group>"; };
+		A2306AB520C81C360094370E /* PfpApiService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PfpApiService.m; sourceTree = "<group>"; };
+		A2306AB720C81F720094370E /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ISO8601DateFormatter.m; path = Shared/Classes/Utils/ISO8601DateFormatter.m; sourceTree = SOURCE_ROOT; };
+		A2306AB820C81F730094370E /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISO8601DateFormatter.h; path = Shared/Classes/Utils/ISO8601DateFormatter.h; sourceTree = SOURCE_ROOT; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -3263,6 +3273,8 @@
 			children = (
 				A202EA6A2085D2C60058F32C /* OTDeepLinkService.h */,
 				A202EA6B2085D2C60058F32C /* OTOnboardingJoinService.m */,
+				A2306AB820C81F730094370E /* ISO8601DateFormatter.h */,
+				A2306AB720C81F720094370E /* ISO8601DateFormatter.m */,
 				A202EA6C2085D2C60058F32C /* OTMessagingService.h */,
 				A202EA6D2085D2C60058F32C /* OTOngoingTourService.h */,
 				A202EA6E2085D2C60058F32C /* OTUnreadMessagesService.m */,
@@ -3453,6 +3465,15 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		A2306AB320C81C1B0094370E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A2306AB420C81C360094370E /* PfpApiService.h */,
+				A2306AB520C81C360094370E /* PfpApiService.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		A23D40132086253600E32F45 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -3474,10 +3495,10 @@
 		A24199B52084F87100BC7466 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				96F30D6620BEA13400229BB8 /* AppConfigurations.plist */,
 				A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */,
 				A202E80A2085D0FE0058F32C /* OTAppDelegate.h */,
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
+				A2306AAC20C663660094370E /* AppConfigurations.plist */,
 				A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */,
 				A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */,
 				A296B8EB20871FD800F6AFBD /* main.m */,
@@ -3536,6 +3557,7 @@
 		A296B9142087225200F6AFBD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A2306AB320C81C1B0094370E /* Services */,
 				A2A2BC91209AF57A00AA4FC8 /* View */,
 				A2A2BC8F209AF57A00AA4FC8 /* View Controller */,
 			);
@@ -3575,6 +3597,7 @@
 				A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */,
 				A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */,
 				A2306AA420C54C490094370E /* PfpUserVoisinageViewController.swift */,
+				A2306AAF20C69DDD0094370E /* PfpSelectVisitDateViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -3585,6 +3608,7 @@
 				A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */,
 				A2FCF5C820AD502F004604AC /* PFPAboutView.xib */,
 				A2306AAA20C551690094370E /* PfpUserCircleCell.swift */,
+				A2306AB120C69F050094370E /* PfpSelectDateCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3738,7 +3762,7 @@
 				A202E7E32085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
 				A21D65BB2085FDAA00EF8E0E /* MapOptions.storyboard in Resources */,
 				A21D65AB2085FDAA00EF8E0E /* LocationSelection.storyboard in Resources */,
-				96343AF920CBF84800E4D867 /* AppConfigurations.plist in Resources */,
+				A2306AAD20C663660094370E /* AppConfigurations.plist in Resources */,
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
 				A21D65AA2085FDAA00EF8E0E /* Onboarding.storyboard in Resources */,
@@ -3853,7 +3877,7 @@
 				A296B8A420871CFC00F6AFBD /* LocationSelection.storyboard in Resources */,
 				A296B8A520871CFC00F6AFBD /* TourConfirmation.storyboard in Resources */,
 				A296B8A620871CFC00F6AFBD /* QuitFeedItem.storyboard in Resources */,
-				96343AFA20CBF84900E4D867 /* AppConfigurations.plist in Resources */,
+				A2306AAE20C663660094370E /* AppConfigurations.plist in Resources */,
 				A296B8A720871CFC00F6AFBD /* Onboarding.storyboard in Resources */,
 				A296B8A820871CFC00F6AFBD /* Paris.gpx in Resources */,
 				A296B8A920871CFC00F6AFBD /* MyEntourages.storyboard in Resources */,
@@ -4260,6 +4284,7 @@
 				A202EBFB2085D2C80058F32C /* OTHTTPRequestManager.m in Sources */,
 				A202EBA92085D2C80058F32C /* OTLoginViewController.m in Sources */,
 				A202EB2B2085D2C70058F32C /* OTMapViewController.m in Sources */,
+				A2306AB920C81F730094370E /* ISO8601DateFormatter.m in Sources */,
 				A202EC692085D2C80058F32C /* OTCollectionCellProviderBehavior.m in Sources */,
 				A202EB7D2085D2C80058F32C /* OTUserViewController.m in Sources */,
 				A202EAF72085D2C70058F32C /* OTAddressBookPhone.m in Sources */,
@@ -4379,7 +4404,6 @@
 				A202EBA32085D2C80058F32C /* OTSocialViewController.m in Sources */,
 				A202EB932085D2C80058F32C /* OTFeedItemJoinMessageController.m in Sources */,
 				A202EBE72085D2C80058F32C /* OTEntourageEditItemImageCell.m in Sources */,
-				A2306AA920C54EB90094370E /* PfpUserVoisinageViewController.swift in Sources */,
 				A202EC492085D2C80058F32C /* OTInvitationChangedBehavior.m in Sources */,
 				A202ED212085D2C80058F32C /* NSDate+OTFormatter.m in Sources */,
 				A202ECD92085D2C80058F32C /* UIButton+entourage.m in Sources */,
@@ -4840,6 +4864,7 @@
 				A296B76620871CFC00F6AFBD /* OTJoinAcceptedCell.m in Sources */,
 				A296B76720871CFC00F6AFBD /* OTMyEntouragesFilter.m in Sources */,
 				A296B76820871CFC00F6AFBD /* OTMixpanelService.m in Sources */,
+				A2306AB020C69DDD0094370E /* PfpSelectVisitDateViewController.swift in Sources */,
 				A296B76920871CFC00F6AFBD /* OTLocationSelectorViewController.m in Sources */,
 				A296B76A20871CFC00F6AFBD /* OTLocationManager.m in Sources */,
 				A296B76B20871CFC00F6AFBD /* OTPushNotificationsData.m in Sources */,
@@ -4847,6 +4872,7 @@
 				A296B76D20871CFC00F6AFBD /* OTMyEntouragesViewController.m in Sources */,
 				A296B76E20871CFC00F6AFBD /* OTNextStatusButtonBehavior.m in Sources */,
 				A296B76F20871CFC00F6AFBD /* OTConfirmationViewController.m in Sources */,
+				A2306AB620C81C360094370E /* PfpApiService.m in Sources */,
 				A296B77020871CFC00F6AFBD /* OTMessageSentCell.m in Sources */,
 				A296B77120871CFC00F6AFBD /* UILabel+entourage.m in Sources */,
 				A296B77220871CFC00F6AFBD /* OTStatusBehavior.m in Sources */,
@@ -4864,6 +4890,7 @@
 				A296B77E20871CFC00F6AFBD /* NSError+OTErrorData.m in Sources */,
 				A296B77F20871CFC00F6AFBD /* EnvironmentConfigurationManager.swift in Sources */,
 				A296B78020871CFC00F6AFBD /* OTEntourageStateInfo.m in Sources */,
+				A2306ABA20C81F730094370E /* ISO8601DateFormatter.m in Sources */,
 				A296B78120871CFC00F6AFBD /* OTBarButtonView.m in Sources */,
 				A296B8ED20871FD900F6AFBD /* main.m in Sources */,
 				A296B78220871CFC00F6AFBD /* OTOrganization.m in Sources */,
@@ -5018,6 +5045,7 @@
 				A296B80D20871CFC00F6AFBD /* OTCollectionViewDataSourceBehavior.m in Sources */,
 				A296B80E20871CFC00F6AFBD /* UIImage+processing.m in Sources */,
 				A296B80F20871CFC00F6AFBD /* OTAlertViewBehavior.m in Sources */,
+				A2306AB220C69F050094370E /* PfpSelectDateCell.swift in Sources */,
 				A296B81020871CFC00F6AFBD /* OTOnboardingService.m in Sources */,
 				A296B81120871CFC00F6AFBD /* OTDisclaimerBaseBehavior.m in Sources */,
 				A296B81220871CFC00F6AFBD /* OTTextView.m in Sources */,

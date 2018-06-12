@@ -53,7 +53,7 @@
                                     <constraint firstAttribute="height" constant="44" id="gPI-1F-BbF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
-                                <state key="normal" title="Signaler l'entourage">
+                                <state key="normal" title="Signaler un problème">
                                     <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>

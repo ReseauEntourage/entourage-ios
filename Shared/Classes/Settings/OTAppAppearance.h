@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class OTEntourage;
+
 @interface OTAppAppearance : NSObject
 + (NSString *)aboutUrlString;
 + (NSString *)welcomeDescription;
@@ -22,11 +24,15 @@
 + (NSString *)noMapFeedsDescription;
 + (NSString *)extendSearchParameterDescription;
 + (NSString *)extendMapSearchParameterDescription;
++ (NSString *)reportActionSubject;
 + (NSString*)userPhoneNumberNotFoundMessage;
 + (NSString *)userActionsTitle;
 + (NSString*)numberOfUserActionsTitle;
 + (NSString*)numberOfUserActionsValueTitle:(OTUser *)user;
 + (NSString*)userPrivateCirclesSectionTitle:(OTUser*)user;
+
 + (UIColor *)leftTagColor:(OTUser*)user;
 + (UIColor *)rightTagColor:(OTUser*)user;
++ (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
++ (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
 @end

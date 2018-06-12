@@ -113,31 +113,35 @@
             break;
     }
     [OTLogger logEvent:message];
+    
     if (indexPath.row == [self.aboutItems count]-1) {
         //Email
         if (![MFMailComposeViewController canSendMail]) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
                                                                            message:OTLocalizedString(@"about_email_notavailable")
                                                                     preferredStyle:UIAlertControllerStyleAlert];
-            [self presentViewController:alert animated:YES completion:nil];
-            
             UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK")
                                                                     style:UIAlertActionStyleDefault
                                                                   handler:^(UIAlertAction * _Nonnull action) {}];
             
             [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+            
             return nil;
+            
+        } else {
+        
+            MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
+            composeVC.mailComposeDelegate = self;
+            
+            // Configure the fields of the interface.
+            [composeVC setToRecipients:@[item.url]];
+            [composeVC setSubject:@""];
+            [composeVC setMessageBody:@"" isHTML:NO];
+            
+            // Present the view controller modally.
+            [self presentViewController:composeVC animated:YES completion:nil];
         }
-        MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
-        composeVC.mailComposeDelegate = self;
-        
-        // Configure the fields of the interface.
-        [composeVC setToRecipients:@[item.url]];
-        [composeVC setSubject:@""];
-        [composeVC setMessageBody:@"" isHTML:NO];
-        
-        // Present the view controller modally.
-        [self presentViewController:composeVC animated:YES completion:nil];
     }
     else if (indexPath.row == FAQ_INDEXPATH) {
         NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];

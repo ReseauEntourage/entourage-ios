@@ -20,6 +20,7 @@
 #import "OTWelcomeViewController.h"
 #import "OTPhoneViewController.h"
 #import "OTAPIConsts.h"
+#import "OTMailSenderBehavior.h"
 
 #define TUTORIAL_DELAY 15
 
@@ -128,6 +129,18 @@
     tabBarController.selectedIndex = 0;
 }
 
++ (void)switchToMessagesScreen {
+    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
+    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
+    tabBarController.selectedIndex = 1;
+}
+
++ (void)hideTabBar:(BOOL)hide {
+    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
+    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
+    [tabBarController.tabBar setHidden:hide];
+}
+
 + (void)continueFromStartupScreen
 {
     OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
@@ -203,6 +216,18 @@
     }
     else {
         [OTAppState navigateToUserEmail:[OTAppState getTopViewController]];
+    }
+}
+
++ (void)continueEditingEntourage:(OTEntourage*)entourage fromController:(UIViewController*)controller {
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeEntourage) {
+        [controller performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
+    } else {
+        OTMailSenderBehavior *emailSender = [[OTMailSenderBehavior alloc] init];
+        emailSender.owner = controller;
+        NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"pfp_edit_voisinage_mail_subject"), entourage.title];
+        NSString *body = [NSString stringWithFormat:OTLocalizedString(@"pfp_edit_voisinage_mail_content"), entourage.desc];
+        [emailSender sendMailWithSubject:subject andRecipient:CONTACT_PFP_TO body:body];
     }
 }
 

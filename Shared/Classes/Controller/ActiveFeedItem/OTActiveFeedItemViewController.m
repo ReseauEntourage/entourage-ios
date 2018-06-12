@@ -100,9 +100,10 @@
     BOOL isPrivateCircle = [NSUserDefaults standardUserDefaults].currentUser.privateCircles.count > 0;
     id iconName = isPrivateCircle ? @"private-circle" : [[[OTFeedItemFactory createFor:self.feedItem] getUI] categoryIconSource];
     id titleString = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle];
-    UIButton *iconButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    
+    UIButton *iconButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
     iconButton.backgroundColor = UIColor.whiteColor;
-    iconButton.layer.cornerRadius = 20;
+    iconButton.layer.cornerRadius = 18;
     [iconButton setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
     iconButton.userInteractionEnabled = NO;
     

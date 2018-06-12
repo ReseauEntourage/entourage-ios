@@ -22,6 +22,10 @@ class PfpUserCircleCell: UITableViewCell {
         iconImageView.layer.cornerRadius = iconCornerRadius
         iconImageView.layer.borderColor = UIColor.groupTableViewBackground.cgColor
         iconImageView.layer.borderWidth = iconBorderWidth
+        
+        self.accView.image = UIImage.init(named: "verified")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        self.accView.tintColor = UIColor.white
+        self.accView.layer.cornerRadius = 11
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,8 +35,6 @@ class PfpUserCircleCell: UITableViewCell {
     }
     
     func updateWithUserCircle (_ circle:OTUserMembershipListItem) {
-        self.accView.image = UIImage.init(named: "verified")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        self.accView.tintColor = UIColor.white
         
         if circle.isSelected {
             self.accView.layer.borderWidth = 0

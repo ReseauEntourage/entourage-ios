@@ -113,23 +113,23 @@
 }
 
 - (UIBarButtonItem*)setupCloseModal {
-    return [self setupCloseModalWithImageNamed:@"close.png" applyTintColor:YES];
+    return [self setupCloseModalWithImageNamed:@"close" applyTintColor:YES];
 }
 
 - (UIBarButtonItem*)setupCloseModalWithTintColor {
-    return [self setupCloseModalWithImageNamed:@"close.png" applyTintColor:YES];
+    return [self setupCloseModalWithImageNamed:@"close" applyTintColor:YES];
 }
 
 - (UIBarButtonItem *)setupCloseModalWithTarget:(id)target andSelector:(SEL)action {
-    return [self setupCloseModalWithImageNamed:@"close.png" target:target andSelector:action];
+    return [self setupCloseModalWithImageNamed:@"close" target:target andSelector:action];
 }
 
 - (UIBarButtonItem *)setupCloseModalWithTintColorAndTarget:(id)target andSelector:(SEL)action {
-    return [self setupCloseModalWithTitnColorAndImageNamed:@"close.png" target:target andSelector:action];
+    return [self setupCloseModalWithTitnColorAndImageNamed:@"close" target:target andSelector:action];
 }
 
 - (UIBarButtonItem *)setupCloseModalTransparent {
-    return [self setupCloseModalWithImageNamed:@"whiteClose.png"];
+    return [self setupCloseModalWithImageNamed:@"whiteClose"];
 }
 
 - (void)setupLogoImageWithTarget:(id)target andSelector:(SEL)action {

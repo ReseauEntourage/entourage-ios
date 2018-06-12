@@ -385,7 +385,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "mail_not_configured" = "Vous devez configurer votre messagerie email";
 "mail_sent" = "Mail envoyé";
 "mail_send_failure" = "Le mail n’a pu être envoyé";
-"mail_signal_subject" = "Signalement d’un activité qui pose problème: \"%@\" créé par %@";
+"mail_signal_subject" = "Signalement d'un problème dans l'entourage: \"%@\" créé par %@";
 
 // Tags
 "not_validated" = "En attente";

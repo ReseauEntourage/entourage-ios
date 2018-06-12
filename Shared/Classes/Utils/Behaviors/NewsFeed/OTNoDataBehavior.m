@@ -48,10 +48,14 @@ static bool entourageClosed = NO;
 }
 
 - (void)showNoData {
-    if(self.isGuide && guideClosed)
+    if (self.isGuide && guideClosed) {
         return;
-    if(!self.isGuide && entourageClosed)
+    }
+    
+    if (!self.isGuide && entourageClosed) {
         return;
+    }
+    
     [self togglePopupOpen:YES];
 }
 
@@ -66,8 +70,11 @@ static bool entourageClosed = NO;
 }
 
 - (void)loadNoDataTexts {
-    self.noDataEntourageText = [NSAttributedString buildLinkForTextView:self.txtNoData withText:OTLocalizedString(@"no_data_entourages") toLinkText:@"" withLink:@""];
-    self.noDataGuideText = [NSAttributedString buildLinkForTextView:self.txtNoData withText:OTLocalizedString(@"no_data_guide") toLinkText:OTLocalizedString(@"no_data_guide_link") withLink:NO_GIUDE_DATA_LINK];
+    self.noDataEntourageText = [NSAttributedString buildLinkForTextView:self.txtNoData withText:OTLocalizedString(@"no_data_entourages") toLinkText:@""
+                                                               withLink:@""];
+    
+    self.noDataGuideText = [NSAttributedString buildLinkForTextView:self.txtNoData withText:OTLocalizedString(@"no_data_guide")
+                                                         toLinkText:OTLocalizedString(@"no_data_guide_link") withLink:NO_GIUDE_DATA_LINK];
 }
 
 @end
