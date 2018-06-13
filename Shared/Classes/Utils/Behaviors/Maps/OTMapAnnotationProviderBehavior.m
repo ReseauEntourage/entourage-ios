@@ -30,16 +30,18 @@
         return;
     }
     id<MKAnnotation> startAnnotation = [mapHandler annotationFor:startPoint];
-    if(startAnnotation)
+    if (startAnnotation) {
         [self.map addAnnotation:[mapHandler annotationFor:startPoint]];
+    }
     [self.map setRegion:MKCoordinateRegionMakeWithDistance(startPoint, 1000, 1000)];
 }
 
 - (void)drawData {
     id<OTMapHandlerDelegate> mapHandler = [[OTFeedItemFactory createFor:self.feedItem] getMapHandler];
     id<MKOverlay> overlay = [mapHandler newsFeedOverlayData];
-    if(overlay)
+    if (overlay) {
         [self.map addOverlay:overlay];
+    }
 }
 
 #pragma mark - MKMapViewDelegate

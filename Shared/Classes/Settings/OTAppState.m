@@ -23,6 +23,8 @@
 #import "OTMailSenderBehavior.h"
 
 #define TUTORIAL_DELAY 15
+#define MAP_TAB_INDEX 0
+#define MESSAGES_TAB_INDEX 1
 
 @implementation OTAppState
 
@@ -126,13 +128,30 @@
 + (void)switchMapToSolidarityGuide {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
-    tabBarController.selectedIndex = 0;
+    tabBarController.selectedIndex = MAP_TAB_INDEX;
 }
 
 + (void)switchToMessagesScreen {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
-    tabBarController.selectedIndex = 1;
+    tabBarController.selectedIndex = MESSAGES_TAB_INDEX;
+}
+
++ (void)updateMessagesTabBadgeWithValue:(NSString*)value {
+    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
+    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
+    UITabBarItem *item = tabBarController.tabBar.items[MESSAGES_TAB_INDEX];
+    item.badgeColor = [UIColor redColor];
+    
+    NSString *badgeValue = value;
+    
+    if (!value ||
+        [value isEqualToString:@""] ||
+        ([value isEqualToString:@"0"])) {
+        badgeValue = nil;
+    }
+    
+    item.badgeValue = badgeValue;
 }
 
 + (void)hideTabBar:(BOOL)hide {

@@ -66,7 +66,6 @@
 #define ABOUT_CGU_URL @"http://www.entourage.social/cgu/index.html"
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
-#define REPORT_EMAIL_ADDRESS @"contact@entourage.social"
 
 #define SNAPSHOT_START "snapshot_start_%d.png"
 #define SNAPSHOT_STOP "snapshot_end_%d.png"
@@ -109,6 +108,4 @@
 
 // Email addresses
 #define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"
-#define CLOSE_EMAIL_RECIPIENT @"contact@entourage.social"
-#define STRUCTURE_EMAIL_RECIPIENT @"contact@entourage.social"
-#define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.fr"
+#define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.org"

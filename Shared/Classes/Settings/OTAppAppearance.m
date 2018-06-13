@@ -201,6 +201,14 @@
     return OTLocalizedString(@"mail_signal_subject");
 }
 
++ (NSString *)reportActionToRecepient {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return CONTACT_PFP_TO;
+    }
+    
+    return SIGNAL_ENTOURAGE_TO;
+}
+
 + (UIColor*)leftTagColor:(OTUser*)user {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return (user.leftTag) ? [UIColor pfpPurpleColor] : [UIColor clearColor];

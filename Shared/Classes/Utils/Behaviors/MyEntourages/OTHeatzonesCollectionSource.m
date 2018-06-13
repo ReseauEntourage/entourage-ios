@@ -29,6 +29,7 @@
     id entourage = [self getItemAtIndexPath:indexPath];
     if (self.heatzonesDelegate != nil && [self.heatzonesDelegate respondsToSelector:@selector(showFeedInfo:)])
         [self.heatzonesDelegate showFeedInfo:entourage];
+    
     if([entourage isKindOfClass:[OTEntourage class]]
        && [[entourage joinStatus] isEqualToString:@"not_requested"])  {
         NSNumber *rank = @(indexPath.section);

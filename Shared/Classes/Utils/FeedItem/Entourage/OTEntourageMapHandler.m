@@ -25,8 +25,10 @@
 }
 
 - (MKOverlayRenderer *)newsFeedOverlayRenderer:(id<MKOverlay>)overlay {
-    if(![overlay isKindOfClass:[MKCircle class]])
+    if (![overlay isKindOfClass:[MKCircle class]]) {
         return nil;
+    }
+    
     return [[OTEntourageRenderer alloc] initWithOverlay:overlay];
 }
 @end

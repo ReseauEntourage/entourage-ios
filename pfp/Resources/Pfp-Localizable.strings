@@ -30,7 +30,7 @@
 "pfp_visitorPrivateCirclesSectionTitle" = "Je voisine";
 "pfp_neighborhoodsSectionTitle" = "Membre des voisinages";
 
-"pfp_lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit : contactez voisinage-test@petitsfreresdespauvres.fr";
+"pfp_lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit : contactez voisinage-test@petitsfreresdespauvres.org";
 
 "pfp_menu_contact" = "Contacter l'équipe Voisin-Age";
 "pfp_menu_how_to" = "Mode d'emploi de l'application";
