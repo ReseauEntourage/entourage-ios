@@ -1078,7 +1078,7 @@
 }
 
 - (void)pushReceived {
-    self.navigationItem.rightBarButtonItem.badgeValue = [OTUnreadMessagesService sharedInstance].totalCount.stringValue;
+    [OTAppState updateMessagesTabBadgeWithValue:[OTUnreadMessagesService sharedInstance].totalCount.stringValue];
 }
 
 #pragma mark - Feeds Table View Delegate
@@ -1382,7 +1382,7 @@
 }
 
 - (void)updateBadge:(NSNotification *) notification {
-    self.navigationItem.rightBarButtonItem.badgeValue = [OTUnreadMessagesService sharedInstance].totalCount.stringValue;
+    [OTAppState updateMessagesTabBadgeWithValue:[OTUnreadMessagesService sharedInstance].totalCount.stringValue];
     [self forceGetNewData];
 }
 

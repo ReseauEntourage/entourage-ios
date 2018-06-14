@@ -31,7 +31,7 @@
 - (void)toggle:(BOOL)visible animated:(BOOL)animated {
     self.heightConstraint.constant = visible ? self.originalHeight : 0;
     self.marginConstraint.constant = visible ? self.originalMargin : 0;
-    if(animated)
+    if (animated)
         [UIView animateWithDuration:self.animationDuration.doubleValue animations:^{
             [self.toggleView.superview layoutIfNeeded];
         }];

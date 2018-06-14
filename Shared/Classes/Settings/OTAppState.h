@@ -27,6 +27,7 @@
 + (void)continueEditingEntourage:(OTEntourage*)entourage fromController:(UIViewController*)controller;
 
 + (void)hideTabBar:(BOOL)hide;
++ (void)updateMessagesTabBadgeWithValue:(NSString*)value;
 
 + (void)navigateToUserEmail:(UIViewController*)viewController;
 + (void)navigateToUserName:(UIViewController*)viewController;

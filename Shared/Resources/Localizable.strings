@@ -202,7 +202,7 @@ Proposez une structure";
 "formater_meetEncounter" = "se sont rencontrés ici le %@";
 "formatter_encounter_and_user_meet" = " et %@ se sont rencontrés ici.";
 "user_joined_tour" = " est entré(e) en contact avec %@";
-"user_joined_entourage" = " a rejoint l’entourage.";
+"user_joined_entourage" = " a rejoint le groupe.";
 "user_join_reject" = " a reçu une notification du rejet de sa demande.";
 "meetingCreated" = "Rencontre créée";
 "meetingNotCreated" = "Echec de la création de rencontre";

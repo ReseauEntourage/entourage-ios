@@ -201,6 +201,14 @@
     return OTLocalizedString(@"mail_signal_subject");
 }
 
++ (NSString *)reportActionToRecepient {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return CONTACT_PFP_TO;
+    }
+    
+    return SIGNAL_ENTOURAGE_TO;
+}
+
 + (UIColor*)leftTagColor:(OTUser*)user {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return (user.leftTag) ? [UIColor pfpPurpleColor] : [UIColor clearColor];
@@ -238,9 +246,9 @@
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item {
     NSString *icon = [NSString stringWithFormat:@"%@_%@", item.entourage_type, item.category];
     
-    if ([item.group_type isEqualToString:ENTOURAGE_GROUP_TYPE_PRIVATE_CIRCLE]) {
+    if ([item.group_type isEqualToString:GROUP_TYPE_PRIVATE_CIRCLE]) {
         icon = @"private-circle";
-    } else if ([item.group_type isEqualToString:ENTOURAGE_GROUP_TYPE_NEIGHBORHOOD]){
+    } else if ([item.group_type isEqualToString:GROUP_TYPE_NEIGHBORHOOD]){
         icon = @"neighborhood";
     }
     

@@ -13,7 +13,7 @@
 #import "OTFeedItemJoiner.h"
 #import "entourage-Swift.h"
 
-#define INVITE_CELL_INDEX ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge ? 2 : 3)
+#define INVITE_CELL_INDEX 3
 
 @implementation OTMembersCellProvider
 
@@ -28,14 +28,18 @@
 #pragma mark - private methods
 
 - (NSString *)cellIdentifierAtPath:(NSIndexPath *)indexPath forItem:(id)item {
-    if([item isKindOfClass:[NSString class]])
+    if ([item isKindOfClass:[NSString class]]) {
         return @"DescriptionCell";
-    else if([item isKindOfClass:[OTFeedItemJoiner class]])
+    }
+    else if ([item isKindOfClass:[OTFeedItemJoiner class]]) {
         return @"MemberCell";
-    else if(indexPath.row == INVITE_CELL_INDEX)
+    }
+    else if(indexPath.row == INVITE_CELL_INDEX) {
         return @"InviteCell";
-    else
+    }
+    else {
         return indexPath.row == 0 ? @"MapCell" : @"MemberCountCell";
+    }
 }
 
 @end

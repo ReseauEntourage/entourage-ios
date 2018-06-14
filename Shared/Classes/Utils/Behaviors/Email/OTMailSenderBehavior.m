@@ -77,14 +77,14 @@
             default:
                 break;
         }
-        [self sendMailWithSubject:subject andRecipient:CLOSE_EMAIL_RECIPIENT];
+        [self sendMailWithSubject:subject andRecipient:[OTAppAppearance reportActionToRecepient]];
     }
     return NO;
 }
 
 - (BOOL)sendStructureMail:(NSString *)subject {
     if([self checkCanSend]) {
-        [self sendMailWithSubject:subject andRecipient:STRUCTURE_EMAIL_RECIPIENT];
+        [self sendMailWithSubject:subject andRecipient:[OTAppAppearance reportActionToRecepient]];
     }
     return NO;
 }
