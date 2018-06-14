@@ -34,8 +34,9 @@
 #import "OTEditEncounterBehavior.h"
 #import "OTMessageTableCellProviderBehavior.h"
 #import "OTBarButtonView.h"
-#import "entourage-Swift.h"
 #import "UIImage+processing.h"
+#import "OTUserViewController.h"
+#import "entourage-Swift.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -195,8 +196,11 @@
 }
 
 - (void)showUserProfile {
-    NSLog(@"Show user profile");
-    [SVProgressHUD showInfoWithStatus:@"Not implemented"];
+    UIStoryboard *userProfileStoryboard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
+    OTUserViewController *userController = [userProfileStoryboard instantiateViewControllerWithIdentifier:@"UserProfile"];
+    userController.userId = self.feedItem.author.uID;
+    UINavigationController *rootUserProfileController = [[UINavigationController alloc] initWithRootViewController:userController];
+    [self.navigationController presentViewController:rootUserProfileController animated:YES completion:nil];
 }
 
 - (IBAction)scrollToBottomWhileEditing {
