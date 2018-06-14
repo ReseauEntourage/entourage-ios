@@ -11,6 +11,7 @@
 
 // General
 #define kWSKeyID @"id"
+#define kWSKeyUUID @"uuid"
 #define kWSKeyData @"data"
 #define kWSKeyType @"type"
 #define kWSKeyFeeds @"feeds"
@@ -26,12 +27,12 @@
 #define kWSKeyLastMessage @"last_message"
 #define kWSKeyShareUrl @"share_url"
 #define kWSKeyCategoryObject @"categoryObject"
+#define kWSKeyGroupType @"group_type"
 
 //Entourage
 #define kWSKeyEntourage @"entourage"
 #define kWSKeyCreateDate @"created_at"
 #define kWSKeyEntourageType @"entourage_type"
-#define kWSKeyEntourageGroupType @"group_type"
 
 #define kWSKeyTitle @"title"
 #define kWSKeyName @"name"

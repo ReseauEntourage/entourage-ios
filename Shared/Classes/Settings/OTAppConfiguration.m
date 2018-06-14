@@ -583,4 +583,37 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return NO;
 }
 
++ (BOOL)shouldShowMapHeatzoneForEntourage:(OTEntourage*)entourage {
+    // EMA-2034
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+
+
++ (BOOL)supportsClosingEntourageGroups {
+    // EMA-2052
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+
+    return YES;
+}
+
++ (BOOL)supportsClosingFeedAction:(OTFeedItem*)item {
+    // EMA-2052
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([item.group_type isEqualToString:GROUP_TYPE_NEIGHBORHOOD] ||
+            [item.group_type isEqualToString:GROUP_TYPE_PRIVATE_CIRCLE] ||
+            [item.group_type isEqualToString:GROUP_TYPE_CONVERSATION]) {
+            return NO;
+        }
+    }
+
+    return YES;
+}
+
 @end

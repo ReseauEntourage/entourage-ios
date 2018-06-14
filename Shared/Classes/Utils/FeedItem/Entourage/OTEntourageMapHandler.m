@@ -9,6 +9,9 @@
 #import "OTEntourageMapHandler.h"
 #import "OTEntourageRenderer.h"
 #import "OTConsts.h"
+#import "OTAppConfiguration.h"
+#import "OTEntourageAnnotation.h"
+#import "entourage-Swift.h"
 
 @implementation OTEntourageMapHandler
 
@@ -17,11 +20,22 @@
 }
 
 - (id<MKAnnotation>)annotationFor:(CLLocationCoordinate2D)coordinate {
-    return nil;
+    
+    if ([OTAppConfiguration shouldShowMapHeatzoneForEntourage:self.entourage]) {
+        return nil;
+    }
+    
+    OTEntourageAnnotation *annotation = [[OTEntourageAnnotation alloc] initWithEntourage:self.entourage];
+    return annotation;
 }
 
 - (id<MKOverlay>)newsFeedOverlayData {
-    return [MKCircle circleWithCenterCoordinate:self.entourage.location.coordinate radius:ENTOURAGE_RADIUS * ENTOURAGE_RADIUS_FACTOR];
+    if ([OTAppConfiguration shouldShowMapHeatzoneForEntourage:self.entourage]) {
+        return [MKCircle circleWithCenterCoordinate:self.entourage.location.coordinate
+                                             radius:ENTOURAGE_RADIUS * ENTOURAGE_RADIUS_FACTOR];
+    }
+
+    return nil;
 }
 
 - (MKOverlayRenderer *)newsFeedOverlayRenderer:(id<MKOverlay>)overlay {

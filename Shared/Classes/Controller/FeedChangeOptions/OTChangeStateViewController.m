@@ -43,14 +43,20 @@
     [self.shareItem configureWith:self.feedItem];
     [self changeBorderColors];
     [self.toggleEditBehavior initialize];
+    
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
+    
     BOOL canCancelJoin = [stateInfo canCancelJoinRequest];
     [self.toggleEditBehavior toggle:[stateInfo canEdit] animated:NO];
     [self.toggleSignalEntourageBehavior initialize];
     [self.toggleShareEntourageBehavior initialize];
+    
     [self.toggleSignalEntourageBehavior toggle:[self.feedItem isKindOfClass:[OTEntourage class]] && ![USER_ID isEqualToNumber:self.feedItem.author.uID] && !canCancelJoin animated:NO];
+    
     [self.toggleShareEntourageBehavior toggle:![self.feedItem.joinStatus isEqualToString:JOIN_ACCEPTED] animated:NO];
+    
     [self.shareBtn addTarget:self.shareItem action:@selector(sharePublic:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
 }
 
@@ -72,8 +78,9 @@
 }
 
 - (IBAction)signalEntourage:(id)sender {
-    if([self.feedItem isKindOfClass:[OTEntourage class]])
+    if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
         [self.singalEntourageBehavior sendMailFor:(OTEntourage *)self.feedItem];
+    }
 }
 
 #pragma mark - navigation

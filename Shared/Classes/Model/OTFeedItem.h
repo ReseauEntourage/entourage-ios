@@ -25,6 +25,7 @@
 
 @interface OTFeedItem : NSObject
 
+@property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSNumber *uid;
 @property (nonatomic, strong) NSString *fid;
 @property (nonatomic, strong) OTFeedItemAuthor *author;
@@ -37,6 +38,7 @@
 @property (nonatomic, strong) OTMyFeedMessage *lastMessage;
 @property (nonatomic, assign) NSNumber *unreadMessageCount;
 @property (nonatomic, strong) NSString *shareUrl;
+@property (nonatomic, strong) NSString *group_type;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

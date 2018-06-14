@@ -58,10 +58,10 @@ NSString *const kUserMembershipListItemPeople = @"number_of_people";
 }
 
 - (NSString*)membershipIconName {
-    if ([self.type isEqualToString:ENTOURAGE_GROUP_TYPE_NEIGHBORHOOD]) {
+    if ([self.type isEqualToString:GROUP_TYPE_NEIGHBORHOOD]) {
         return @"neighborhood";
         
-    } else if ([self.type isEqualToString:ENTOURAGE_GROUP_TYPE_PRIVATE_CIRCLE]) {
+    } else if ([self.type isEqualToString:GROUP_TYPE_PRIVATE_CIRCLE]) {
         return @"private-circle";
     }
     

@@ -88,13 +88,13 @@
 #pragma mark - navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.inviteBehavior prepareSegueForInvite:segue])
+    if ([self.inviteBehavior prepareSegueForInvite:segue])
         return;
-    if([self.userProfileBehavior prepareSegueForUserProfile:segue])
+    if ([self.userProfileBehavior prepareSegueForUserProfile:segue])
         return;
-    if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
+    if ([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
-    if([self.editEntourageBehavior prepareSegue:segue])
+    if ([self.editEntourageBehavior prepareSegue:segue])
         return;
 }
 

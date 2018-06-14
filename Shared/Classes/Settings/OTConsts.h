@@ -102,9 +102,10 @@
 #define ENTOURAGE_CONTRIBUTION @"contribution"
 #define ENTOURAGE_STATUS_OPEN @"open"
 
-#define ENTOURAGE_GROUP_TYPE_ACTION @"action"
-#define ENTOURAGE_GROUP_TYPE_NEIGHBORHOOD @"neighborhood"
-#define ENTOURAGE_GROUP_TYPE_PRIVATE_CIRCLE @"private_circle"
+#define GROUP_TYPE_ACTION @"action"
+#define GROUP_TYPE_NEIGHBORHOOD @"neighborhood"
+#define GROUP_TYPE_PRIVATE_CIRCLE @"private_circle"
+#define GROUP_TYPE_CONVERSATION @"conversation"
 
 // Email addresses
 #define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"

@@ -18,6 +18,7 @@
 #import "OTDebugLog.h"
 #import "OTConsts.h"
 #import "OTAppAppearance.h"
+#import "OTEntourage.h"
 
 @class EnvironmentConfigurationManager;
 
@@ -62,5 +63,7 @@
 + (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user;
 + (BOOL)shouldShowNumberOfUserAssociationsSection:(OTUser*)user;
 + (BOOL)shouldShowNumberOfUserPrivateCirclesSection:(OTUser*)user;
++ (BOOL)shouldShowMapHeatzoneForEntourage:(OTEntourage*)entourage;
++ (BOOL)supportsClosingFeedAction:(OTFeedItem*)item;
 
 @end

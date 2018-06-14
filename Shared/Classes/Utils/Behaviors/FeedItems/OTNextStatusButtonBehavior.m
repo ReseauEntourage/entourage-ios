@@ -38,42 +38,46 @@
     NSString *title = nil;
     SEL selector = nil;
     self.btnNextState.hidden = YES;
-    switch (currentState) {
-        case FeedItemStateOngoing:
-            title = OTLocalizedString(@"item_option_close");
-            selector = @selector(doStopFeedItem);
-            self.btnNextState.hidden = NO;
-            break;
-        case FeedItemStateOpen:
-            title = OTLocalizedString(@"item_option_freeze");
-            selector = @selector(doCloseFeedItemWithReason:);
-            self.btnNextState.hidden = NO;
-            break;
-        case FeedItemStateClosed:
-            if ([self.feedItem isKindOfClass:[OTTour class]]) {
+    
+    if ([OTAppConfiguration supportsClosingFeedAction:self.feedItem]) {
+        switch (currentState) {
+            case FeedItemStateOngoing:
+                title = OTLocalizedString(@"item_option_close");
+                selector = @selector(doStopFeedItem);
+                self.btnNextState.hidden = NO;
+                break;
+            case FeedItemStateOpen:
                 title = OTLocalizedString(@"item_option_freeze");
                 selector = @selector(doCloseFeedItemWithReason:);
                 self.btnNextState.hidden = NO;
-            }
-            break;
-        case FeedItemStateJoinAccepted:
-            title = OTLocalizedString(@"item_option_quit");
-            selector = @selector(doQuitFeedItem);
-            self.btnNextState.hidden = NO;
-            break;
-        case FeedItemStateJoinNotRequested:
-            title = OTLocalizedString(@"join");
-            selector = @selector(doJoinFeedItem);
-            self.btnNextState.hidden = NO;
-            break;
-        case FeedItemStateJoinPending:
-            title = OTLocalizedString(@"item_cancel_join");
-            selector = @selector(doCancelJoinRequest);
-            self.btnNextState.hidden = NO;
-            break;
-        default:
-            break;
-    }
+                break;
+            case FeedItemStateClosed:
+                if ([self.feedItem isKindOfClass:[OTTour class]]) {
+                    title = OTLocalizedString(@"item_option_freeze");
+                    selector = @selector(doCloseFeedItemWithReason:);
+                    self.btnNextState.hidden = NO;
+                }
+                break;
+            case FeedItemStateJoinAccepted:
+                title = OTLocalizedString(@"item_option_quit");
+                selector = @selector(doQuitFeedItem);
+                self.btnNextState.hidden = NO;
+                break;
+            case FeedItemStateJoinNotRequested:
+                title = OTLocalizedString(@"join");
+                selector = @selector(doJoinFeedItem);
+                self.btnNextState.hidden = NO;
+                break;
+            case FeedItemStateJoinPending:
+                title = OTLocalizedString(@"item_cancel_join");
+                selector = @selector(doCancelJoinRequest);
+                self.btnNextState.hidden = NO;
+                break;
+            default:
+                break;
+        }
+    } 
+    
     [self.btnNextState addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
     [self.btnNextState setTitle:title forState:UIControlStateNormal];
 }
@@ -106,10 +110,12 @@
 }
 
 - (void)doCloseFeedItemWithReason: (OTCloseReason)reason {
-    if([self.feedItem isKindOfClass:[OTTour class]])
+    if ([self.feedItem isKindOfClass:[OTTour class]]) {
         [self feedItemClosedWithReason:reason];
-    else
+    }
+    else {
         [self.owner performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
+    }
 }
 
 - (void)doQuitFeedItem {

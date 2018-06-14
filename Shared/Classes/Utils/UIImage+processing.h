@@ -12,5 +12,10 @@
 
 - (UIImage *)toSquare;
 - (UIImage *)resizeTo:(CGSize)size;
+- (UIImage *)drawImage:(UIImage *)inputImage inRect:(CGRect)frame;
+
++ (UIImage *)imageFromView:(UIView *)theView withSize:(CGSize)size;
++ (UIImage *)blurredImageInView:(UIView *)view withRadius:(CGFloat)radius;
++ (UIImage *)imageWithColor:(UIColor *)color andSize:(CGSize)size;
 
 @end

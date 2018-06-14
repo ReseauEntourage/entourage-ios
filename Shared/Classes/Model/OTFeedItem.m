@@ -24,7 +24,10 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
     if (self) {
+        self.uuid = [dictionary stringForKey:kWSKeyUUID];
         self.uid = [dictionary numberForKey:kWSKeyID];
+        self.group_type = [dictionary stringForKey:kWSKeyGroupType];
+        
         //self.unreadMessageCount = @(0);
         NSDictionary *authorDictionary = [dictionary objectForKey:kWSKeyAuthor];
         if ([authorDictionary class] != [NSNull class])
@@ -36,8 +39,9 @@
         self.updatedDate = [dictionary dateForKey:kWSUpdatedDate];
         self.shareUrl = [dictionary stringForKey:kWSKeyShareUrl];
         NSDictionary *lastMessageDictionary = [dictionary objectForKey:kWSKeyLastMessage];
-        if([lastMessageDictionary class] != [NSNull class])
+        if ([lastMessageDictionary class] != [NSNull class]) {
             self.lastMessage = [[OTMyFeedMessage alloc] initWithDictionary:lastMessageDictionary];
+        }
     }
     return self;
 }
@@ -45,8 +49,8 @@
 - (BOOL)isEqual:(id)object {
     if ([object isKindOfClass:[self class]]) {
         OTFeedItem *otherItem = (OTFeedItem*)object;
-        if (otherItem.uid != nil) {
-            return [self.uid isEqualToValue:otherItem.uid] && [self.type isEqualToString:otherItem.type];
+        if (otherItem.uuid != nil) {
+            return [self.uuid isEqualToString:otherItem.uuid] && [self.type isEqualToString:otherItem.type];
         }
     }
     return false;

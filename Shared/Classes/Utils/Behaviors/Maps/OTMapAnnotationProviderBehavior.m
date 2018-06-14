@@ -9,6 +9,7 @@
 #import "OTMapAnnotationProviderBehavior.h"
 #import "OTFeedItemFactory.h"
 #import "OTMapHandlerDelegate.h"
+#import "OTEntourageAnnotation.h"
 
 @interface OTMapAnnotationProviderBehavior () <MKMapViewDelegate>
 
@@ -48,6 +49,14 @@
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
     return [[[OTFeedItemFactory createFor:self.feedItem] getMapHandler] newsFeedOverlayRenderer:overlay];
+}
+
+- (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[OTEntourageAnnotation class]]) {
+        return [(OTEntourageAnnotation*)annotation annotationView];
+    }
+    
+    return nil;
 }
 
 @end

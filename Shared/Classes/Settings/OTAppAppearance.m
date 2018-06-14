@@ -246,9 +246,9 @@
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item {
     NSString *icon = [NSString stringWithFormat:@"%@_%@", item.entourage_type, item.category];
     
-    if ([item.group_type isEqualToString:ENTOURAGE_GROUP_TYPE_PRIVATE_CIRCLE]) {
+    if ([item.group_type isEqualToString:GROUP_TYPE_PRIVATE_CIRCLE]) {
         icon = @"private-circle";
-    } else if ([item.group_type isEqualToString:ENTOURAGE_GROUP_TYPE_NEIGHBORHOOD]){
+    } else if ([item.group_type isEqualToString:GROUP_TYPE_NEIGHBORHOOD]){
         icon = @"neighborhood";
     }
     
