@@ -34,8 +34,9 @@
 #import "OTEditEncounterBehavior.h"
 #import "OTMessageTableCellProviderBehavior.h"
 #import "OTBarButtonView.h"
-#import "entourage-Swift.h"
 #import "UIImage+processing.h"
+#import "OTUserViewController.h"
+#import "entourage-Swift.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -97,22 +98,7 @@
 }
 
 - (void)configureTitleView {
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    id iconName = [[[OTFeedItemFactory createFor:self.feedItem] getUI] categoryIconSource];
-    id titleString = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle];
-    
-    UIButton *iconButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
-    iconButton.backgroundColor = UIColor.whiteColor;
-    iconButton.layer.cornerRadius = 18;
-    [iconButton setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
-    iconButton.userInteractionEnabled = NO;
-    
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 130, 40)];
-    title.text = titleString;
-    title.textColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    [titleView addSubview:iconButton];
-    [titleView addSubview:title];
-    self.navigationItem.titleView = titleView;
+    self.navigationItem.titleView = [OTAppAppearance navigationTitleViewForFeedItem:self.feedItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -160,53 +146,34 @@
 
 - (void)setupToolbarButtons {
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
-    if(![stateInfo canChangeEditState])
+    if (![stateInfo canChangeEditState]) {
         return;
-    
-    NSMutableArray *rightButtons = [NSMutableArray new];
+    }
     
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
     [more setFrame:CGRectMake(0, 0, 30, 30)];
-    [more setImage:[UIImage imageNamed:@"info"]
+    [more setBackgroundImage:[[UIImage imageNamed:@"info"] resizeTo:CGSizeMake(25, 25)]
           forState:UIControlStateNormal];
-    [more addTarget:self
-             action:@selector(showMap)
-   forControlEvents:UIControlEventTouchUpInside];
+    [more addTarget:self action:@selector(infoAction) forControlEvents:UIControlEventTouchUpInside];
     
-    OTBarButtonView *infoBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
-    [infoBarBtnView setPosition:BarButtonViewPositionRight];
-    [infoBarBtnView addSubview:more];
-    
-    UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:infoBarBtnView];
-    [rightButtons addObject:infoButton];
-    
-    [self setRightBarButtonView:rightButtons];
-}
-
-- (void)setRightBarButtonView:(NSMutableArray *)views
-{
-    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 11)
-    {
-        [self.navigationItem setRightBarButtonItems:views];
-    }
-    else
-    {
-        UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
-        [space setWidth:-13];
-        
-        NSArray *items = @[space];
-        
-        [self.navigationItem setRightBarButtonItems:[items arrayByAddingObjectsFromArray:views]];
-    }
+    UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:more];
+    [self.navigationItem setRightBarButtonItem:infoButton];
 }
 
 - (IBAction)sendMessage {
     NSString *message = [self.txtChat.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if(message.length == 0)
+    
+    if (message.length == 0) {
         return;
+    }
+    
     [OTLogger logEvent:@"AddContentToMessage"];
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:message withSuccess:^(OTFeedItemMessage *message) {
+    
+    id<OTFeedItemFactoryDelegate> itemFactory = [OTFeedItemFactory createFor:self.feedItem];
+    id<OTMessagingDelegate> messagingDelegate = [itemFactory getMessaging];
+    
+    [messagingDelegate send:message withSuccess:^(OTFeedItemMessage *responseMessage) {
         [SVProgressHUD dismiss];
         self.txtChat.text = @"";
         [[OTMessagingService new] readFor:self.feedItem onDataSource:self.dataSource];
@@ -218,6 +185,22 @@
 - (IBAction)showMap {
     [OTLogger logEvent:@"EntouragePublicPageViewFromMessages"];
     [self performSegueWithIdentifier:@"SegueMap" sender:self];
+}
+
+- (IBAction)infoAction {
+    if ([self.feedItem isConversation]) {
+        [self showUserProfile];
+    } else {
+        [self showMap];
+    }
+}
+
+- (void)showUserProfile {
+    UIStoryboard *userProfileStoryboard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
+    OTUserViewController *userController = [userProfileStoryboard instantiateViewControllerWithIdentifier:@"UserProfile"];
+    userController.userId = self.feedItem.author.uID;
+    UINavigationController *rootUserProfileController = [[UINavigationController alloc] initWithRootViewController:userController];
+    [self.navigationController presentViewController:rootUserProfileController animated:YES completion:nil];
 }
 
 - (IBAction)scrollToBottomWhileEditing {

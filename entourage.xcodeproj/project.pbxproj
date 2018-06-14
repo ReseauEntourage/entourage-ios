@@ -767,6 +767,8 @@
 		A24D968120CFA30C00C21FCC /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A24D967F20CFA30C00C21FCC /* AppConfigurations.plist */; };
 		A24D969E20D1B0EC00C21FCC /* OTEntourageAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A24D969D20D1B0EC00C21FCC /* OTEntourageAnnotation.m */; };
 		A24D969F20D1B0EC00C21FCC /* OTEntourageAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A24D969D20D1B0EC00C21FCC /* OTEntourageAnnotation.m */; };
+		A24D96A520D2A14800C21FCC /* OTConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = A24D96A420D2A14800C21FCC /* OTConversation.m */; };
+		A24D96A620D2AAF800C21FCC /* OTConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = A24D96A420D2A14800C21FCC /* OTConversation.m */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
@@ -1965,6 +1967,8 @@
 		A24D967F20CFA30C00C21FCC /* AppConfigurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfigurations.plist; sourceTree = SOURCE_ROOT; };
 		A24D969C20D1B0EC00C21FCC /* OTEntourageAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTEntourageAnnotation.h; sourceTree = "<group>"; };
 		A24D969D20D1B0EC00C21FCC /* OTEntourageAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEntourageAnnotation.m; sourceTree = "<group>"; };
+		A24D96A320D2A14800C21FCC /* OTConversation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTConversation.h; sourceTree = "<group>"; };
+		A24D96A420D2A14800C21FCC /* OTConversation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTConversation.m; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2283,6 +2287,8 @@
 				A202E8492085D2C40058F32C /* OTAnnouncement.m */,
 				A202E81D2085D2C40058F32C /* OTAssociation.h */,
 				A202E84D2085D2C40058F32C /* OTAssociation.m */,
+				A24D96A320D2A14800C21FCC /* OTConversation.h */,
+				A24D96A420D2A14800C21FCC /* OTConversation.m */,
 				A21E8F2620B7F3AE00433606 /* OTUserMembership.h */,
 				A21E8F2720B7F3AE00433606 /* OTUserMembership.m */,
 				A202E81A2085D2C40058F32C /* OTEncounter.h */,
@@ -4252,6 +4258,7 @@
 				A202EB5B2085D2C80058F32C /* OTTutorial1ViewController.m in Sources */,
 				A202ECEB2085D2C80058F32C /* OTOngoingTourService.m in Sources */,
 				A202EB7B2085D2C80058F32C /* OTChangeStateViewController.m in Sources */,
+				A24D96A520D2A14800C21FCC /* OTConversation.m in Sources */,
 				A202EB992085D2C80058F32C /* OTNotificationsRightsViewController.m in Sources */,
 				A202ECF52085D2C80058F32C /* OTCategoryFromJsonService.m in Sources */,
 				A202ED312085D2C80058F32C /* OTVersionInfo.m in Sources */,
@@ -5129,6 +5136,7 @@
 				96B658BC209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */,
 				A296B85420871CFC00F6AFBD /* OTJoinBehavior.m in Sources */,
 				A296B85520871CFC00F6AFBD /* OTSettingsViewController.m in Sources */,
+				A24D96A620D2AAF800C21FCC /* OTConversation.m in Sources */,
 				A2FCF5C520AD4FF8004604AC /* PFPAboutViewController.swift in Sources */,
 				A296B85620871CFC00F6AFBD /* OTCategory.m in Sources */,
 				A296B85720871CFC00F6AFBD /* OTCollectionSourceBehavior.m in Sources */,

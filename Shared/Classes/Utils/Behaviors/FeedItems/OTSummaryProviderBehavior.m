@@ -37,30 +37,37 @@
 - (void)configureWith:(OTFeedItem *)feedItem {
     self.feedItem = feedItem;
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:feedItem] getUI];
-    if(self.lblTitle)
+    if (self.lblTitle)
         self.lblTitle.text = [uiDelegate summary];
-    if(self.lblUserCount)
+    if (self.lblUserCount)
         self.lblUserCount.text = [feedItem.noPeople stringValue];
-    if(self.btnAvatar)
+    if (self.btnAvatar)
         [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
-    if(self.lblDescription)
+    if (self.lblDescription)
         [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
-    if(self.txtFeedItemDescription)
+    if (self.txtFeedItemDescription)
         self.txtFeedItemDescription.text = [uiDelegate feedItemDescription];
-    if(self.lblTimeDistance) {
+    
+    if (self.lblTimeDistance) {
         double distance = [uiDelegate distance];
         self.lblTimeDistance.text = [OTLocalizedString(@"feed_item_time_distance") stringByAppendingString: [self getDistance:distance with:feedItem.creationDate]];
     }
     self.imgAssociation.hidden = feedItem.author.partner == nil;
     [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
+    
     NSString *source = [uiDelegate categoryIconSource];
     if ([feedItem isKindOfClass:[OTAnnouncement class]]) {
         NSURL *urlSource = [[NSURL alloc] initWithString:source];
         NSData *imageData = [NSData dataWithContentsOfURL:urlSource];
          [self.imgCategory setImage:[UIImage imageWithData:imageData]];
     }
-    else
-        [self.imgCategory setImage:[UIImage imageNamed:source]];
+    else {
+        if ([feedItem isConversation]) {
+            [self.imgCategory setupFromUrl:self.feedItem.author.avatarUrl withPlaceholder:@"user"];
+        } else {
+            [self.imgCategory setImage:[UIImage imageNamed:source]];
+        }
+    }
 }
 
 - (void)clearConfiguration {

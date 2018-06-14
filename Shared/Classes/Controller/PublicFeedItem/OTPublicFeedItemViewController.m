@@ -64,21 +64,7 @@
 }
 
 - (void)configureTitleView {
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    id iconName = [[[OTFeedItemFactory createFor:self.feedItem] getUI] categoryIconSource];
-    id titleString = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle];
-    UIButton *iconButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
-    iconButton.backgroundColor = UIColor.whiteColor;
-    iconButton.layer.cornerRadius = 18;
-    [iconButton setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
-    iconButton.userInteractionEnabled = NO;
-    
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 130, 40)];
-    title.text = titleString;
-    title.textColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    [titleView addSubview:iconButton];
-    [titleView addSubview:title];
-    self.navigationItem.titleView = titleView;
+    self.navigationItem.titleView = [OTAppAppearance navigationTitleViewForFeedItem:self.feedItem];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -110,18 +96,20 @@
 #pragma mark - private methods
 
 - (void)setupToolbarButtons {
-    NSMutableArray *rightButtons = [NSMutableArray new];
-    
-    UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
-    [more setFrame:CGRectMake(0, 0, 30, 30)];
-    
-    if([self.feedItem isKindOfClass:[OTEntourage class]]) {
+
+    if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
+        
+        NSMutableArray *rightButtons = [NSMutableArray new];
+        UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
+        [more setFrame:CGRectMake(0, 0, 30, 30)];
+        
         [more setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
               forState:UIControlStateNormal];
         more.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
         [more addTarget:self.statusChangedBehavior
                  action:@selector(startChangeStatus)
          forControlEvents:UIControlEventTouchUpInside];
+        
         OTBarButtonView *moreBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
         [moreBarBtnView setPosition:BarButtonViewPositionRight];
         [moreBarBtnView addSubview:more];
@@ -142,24 +130,19 @@
         [shareBarBtnView addSubview:share];
         
         UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:shareBarBtnView];
-        
         [rightButtons addObject:shareButton];
+        [self setRightBarButtonView:rightButtons];
     }
     else {
-        [more setImage:[UIImage imageNamed:@"info"]
-              forState:UIControlStateNormal];
-        [more addTarget:self.statusChangedBehavior
-                 action:@selector(startChangeStatus)
-       forControlEvents:UIControlEventTouchUpInside];
+        UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
+        [more setFrame:CGRectMake(0, 0, 30, 30)];
+        [more setBackgroundImage:[[UIImage imageNamed:@"info"] resizeTo:CGSizeMake(25, 25)]
+                        forState:UIControlStateNormal];
+        [more addTarget:self.statusChangedBehavior action:@selector(startChangeStatus) forControlEvents:UIControlEventTouchUpInside];
         
-        OTBarButtonView *infoBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
-        [infoBarBtnView setPosition:BarButtonViewPositionRight];
-        [infoBarBtnView addSubview:more];
-        
-        UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:infoBarBtnView];
-        [rightButtons addObject:infoButton];
+        UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:more];
+        [self.navigationItem setRightBarButtonItem:infoButton];
     }
-    [self setRightBarButtonView:rightButtons];
 }
 
 - (void)setRightBarButtonView:(NSMutableArray *)views

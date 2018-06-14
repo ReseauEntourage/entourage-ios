@@ -29,7 +29,7 @@
 }
 
 - (UIImage *)resizeTo:(CGSize)size {
-    UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContextWithOptions(size, NO, UIScreen.mainScreen.scale);
     [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

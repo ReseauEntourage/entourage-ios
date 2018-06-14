@@ -606,9 +606,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (BOOL)supportsClosingFeedAction:(OTFeedItem*)item {
     // EMA-2052
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([item.group_type isEqualToString:GROUP_TYPE_NEIGHBORHOOD] ||
-            [item.group_type isEqualToString:GROUP_TYPE_PRIVATE_CIRCLE] ||
-            [item.group_type isEqualToString:GROUP_TYPE_CONVERSATION]) {
+        if ([item isPrivateCircle] || [item isConversation] ||  [item isNeighborhood]) {
             return NO;
         }
     }

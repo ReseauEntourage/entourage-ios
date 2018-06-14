@@ -34,7 +34,7 @@
 + (id<OTFeedItemFactoryDelegate>)createFor:(OTFeedItem *)item {
     BOOL isEntourage = [item class] == [OTEntourage class];
     BOOL isAnnouncement = [item class] == [OTAnnouncement class];
-    if(isEntourage)
+    if (isEntourage)
         return [[OTEntourageFactory alloc] initWithEntourage:(OTEntourage *)item];
     else if (isAnnouncement)
         return [[OTAnnouncementFactory alloc] initWithAnnouncement:(OTAnnouncement *)item];

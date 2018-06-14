@@ -61,5 +61,4 @@
         return [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED] && [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN];
     return NO;
 }
-
 @end

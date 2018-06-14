@@ -10,6 +10,7 @@
 #import "OTOrganization.h"
 #import "OTAssociation.h"
 #import "OTUserMembership.h"
+#import "OTConversation.h"
 
 extern NSString *const kKeyToken;
 extern NSString *const kCoordinatorUserTag;
@@ -39,6 +40,7 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic) NSString *about;
 @property (strong, nonatomic) OTOrganization *organization;
 @property (strong, nonatomic) OTAssociation *partner;
+@property (strong, nonatomic) OTConversation *conversation;
 @property (strong, nonatomic) NSArray *roles;
 @property (nonatomic, readonly) NSArray *memberships;
 

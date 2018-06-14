@@ -42,4 +42,8 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
+- (BOOL)isPrivateCircle;
+- (BOOL)isNeighborhood;
+- (BOOL)isConversation;
+
 @end
