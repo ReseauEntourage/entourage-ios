@@ -24,6 +24,7 @@ NSString *const kKeyTourCount = @"tour_count";
 NSString *const kKeyEntourageCount = @"entourage_count";
 NSString *const kKeyEncounterCount = @"encounter_count";
 NSString *const kKeyOrganization = @"organization";
+NSString *const kKeyConversation = @"conversation";
 NSString *const kKeyPartner = @"partner";
 NSString *const kKeyRoles = @"roles";
 NSString *const kMemberships = @"memberships";
@@ -59,6 +60,7 @@ NSString *const kVisitedUserTag = @"visited";
         _encounterCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEncounterCount];
         _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
         _partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kKeyPartner]];
+        _conversation = [[OTConversation alloc] initWithDictionary:[dictionary objectForKey:kKeyConversation]];
         
         if ([[dictionary allKeys] containsObject:kKeyRoles]) {
             _roles = [dictionary arrayWithObjectsOfClass:[NSString class] forKey:kKeyRoles];
@@ -117,6 +119,7 @@ NSString *const kVisitedUserTag = @"visited";
     [encoder encodeObject:self.encounterCount forKey:kKeyEncounterCount];
     [encoder encodeObject:self.organization forKey:kKeyOrganization];
     [encoder encodeObject:self.partner forKey:kKeyPartner];
+    [encoder encodeObject:self.conversation forKey:kKeyConversation];
     [encoder encodeObject:self.roles forKey:kKeyRoles];
     [encoder encodeObject:self.memberships forKey:kMemberships];
 }
@@ -140,6 +143,7 @@ NSString *const kVisitedUserTag = @"visited";
         self.encounterCount = [decoder decodeObjectForKey:kKeyEncounterCount];
         self.organization = [decoder decodeObjectForKey:kKeyOrganization];
         self.partner = [decoder decodeObjectForKey:kKeyPartner];
+        self.conversation = [decoder decodeObjectForKey:kKeyConversation];
         self.roles = [decoder decodeObjectForKey:kKeyRoles];
         self.memberships = [decoder decodeObjectForKey:kMemberships];
     }

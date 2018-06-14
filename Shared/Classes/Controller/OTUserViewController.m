@@ -330,7 +330,7 @@ typedef NS_ENUM(NSInteger) {
     }
 }
 
-- (void)loadEntourageItemWithGropupId:(NSNumber*)groupId
+- (void)loadEntourageItemWithGropupId:(NSString*)groupId
                            completion:(void(^)(OTEntourage *entourage, NSError *error))completion {
     [[OTEntourageService new] getEntourageWithId:groupId
                                      withSuccess:^(OTEntourage *entourage) {
@@ -378,7 +378,7 @@ typedef NS_ENUM(NSInteger) {
     }
 }
 
-- (void)loadGroupConversations:(NSNumber*)groupId {
+- (void)loadGroupConversations:(NSString*)groupId {
     
     [SVProgressHUD show];
     
@@ -418,7 +418,21 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)startChatWithSelectedUser {
+    [SVProgressHUD show];
     
+    [self loadEntourageItemWithGropupId:self.user.conversation.uuid
+                             completion:^(OTEntourage *entourage, NSError *error) {
+                                 [SVProgressHUD dismiss];
+                                 if (entourage) {
+                                     OTActiveFeedItemViewController *vc = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTActiveFeedItemViewController"];
+                                     vc.feedItem = entourage;
+                                     [self.navigationController pushViewController:vc animated:YES];
+                                 }
+                                 else {
+                                     [SVProgressHUD dismiss];
+                                     NSLog(@"%@", error.localizedDescription);
+                                 }
+                             }];
 }
 
 #pragma mark - Table View

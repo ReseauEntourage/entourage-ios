@@ -56,4 +56,16 @@
     return false;
 }
 
+- (BOOL)isPrivateCircle {
+    return [self.group_type isEqualToString:GROUP_TYPE_PRIVATE_CIRCLE];
+}
+
+- (BOOL)isNeighborhood {
+    return [self.group_type isEqualToString:GROUP_TYPE_NEIGHBORHOOD];
+}
+
+- (BOOL)isConversation {
+    return [self.group_type isEqualToString:GROUP_TYPE_CONVERSATION];
+}
+
 @end

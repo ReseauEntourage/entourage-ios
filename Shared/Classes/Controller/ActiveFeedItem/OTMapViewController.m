@@ -63,21 +63,7 @@
     self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;}
 
 - (void)configureTitleView {
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    id iconName = [[[OTFeedItemFactory createFor:self.feedItem] getUI] categoryIconSource];
-    id titleString = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle];
-    UIButton *iconButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
-    iconButton.backgroundColor = UIColor.whiteColor;
-    iconButton.layer.cornerRadius = 18;
-    [iconButton setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
-    iconButton.userInteractionEnabled = NO;
-    
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, 130, 40)];
-    title.text = titleString;
-    title.textColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    [titleView addSubview:iconButton];
-    [titleView addSubview:title];
-    self.navigationItem.titleView = titleView;
+    self.navigationItem.titleView = [OTAppAppearance navigationTitleViewForFeedItem:self.feedItem];
 }
 
 - (IBAction)showProfile {

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class OTEntourage;
+@class OTFeedItem;
 
 @interface OTAppAppearance : NSObject
 + (NSString *)aboutUrlString;
@@ -37,4 +38,5 @@
 + (UIColor *)rightTagColor:(OTUser*)user;
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
++ (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem;
 @end
