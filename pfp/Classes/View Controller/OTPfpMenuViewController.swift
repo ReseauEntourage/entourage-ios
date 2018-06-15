@@ -82,13 +82,15 @@ final class OTPfpMenuViewController: UIViewController {
     }
     
     private func customizeHeader() {
-        let editText:String = "modifier mon profil"
+        let editText:String = "Modifier mon profil"
         let normalAttributedText = NSAttributedString(string: editText, attributes:
             [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
-             .foregroundColor: ApplicationTheme.shared().backgroundThemeColor])
+             .foregroundColor: ApplicationTheme.shared().backgroundThemeColor,
+             .font:UIFont.SFUIText(size: 14, type: UIFont.SFUITextFontType.regular)])
         let selectedAttributedText = NSAttributedString(string: editText, attributes:
             [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
-             .foregroundColor: ApplicationTheme.shared().titleLabelColor])
+             .foregroundColor: ApplicationTheme.shared().titleLabelColor,
+             .font:UIFont.SFUIText(size: 14, type: UIFont.SFUITextFontType.regular)])
         headerView.editLabel.setAttributedTitle(normalAttributedText, for: UIControlState.normal)
         headerView.editLabel.setAttributedTitle(selectedAttributedText, for: UIControlState.highlighted)
         headerView.editLabel.setAttributedTitle(selectedAttributedText, for: UIControlState.selected)

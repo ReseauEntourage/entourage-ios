@@ -281,6 +281,7 @@
     iconView.backgroundColor = UIColor.whiteColor;
     iconView.layer.cornerRadius = 18;
     iconView.userInteractionEnabled = NO;
+    iconView.clipsToBounds = YES;
     
     UIImage *placeholder = [UIImage imageNamed:@"user"];
     
