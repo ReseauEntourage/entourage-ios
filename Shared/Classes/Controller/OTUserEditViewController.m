@@ -69,11 +69,15 @@ typedef NS_ENUM(NSInteger) {
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
     
-    self.sections = @[@(SectionTypeSummary),
-                      @(SectionTypeAbout),
-                      @(SectionTypeAssociations),
-                      @(SectionTypeInfoPrivate),
-                      @(SectionTypeDelete)];
+    NSMutableArray *profileSections = [NSMutableArray new];
+    [profileSections addObjectsFromArray:@[@(SectionTypeSummary), @(SectionTypeAbout)]];
+    
+    if ([OTAppConfiguration shouldShowAssociationsOnUserProfile]) {
+        [profileSections addObject:@(SectionTypeAssociations)];
+    }
+    [profileSections addObjectsFromArray:@[@(SectionTypeInfoPrivate), @(SectionTypeDelete)]];
+
+    self.sections = profileSections;
     
     self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
     

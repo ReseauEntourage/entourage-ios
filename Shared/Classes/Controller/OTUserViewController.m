@@ -101,11 +101,11 @@ typedef NS_ENUM(NSInteger) {
         userId = self.user.sid;
     }
     
-    if ([OTAppConfiguration supportsProfileEditing]) {
-        if (userId.intValue == self.currentUser.sid.intValue) {
-            [self.tapToEditBehavior initialize];
-        }
-    }
+//    if ([OTAppConfiguration supportsProfileEditing]) {
+//        if (userId.intValue == self.currentUser.sid.intValue) {
+//            [self.tapToEditBehavior initialize];
+//        }
+//    }
     
     self.tableView.delegate = self;
 }
@@ -378,7 +378,7 @@ typedef NS_ENUM(NSInteger) {
     }
 }
 
-- (void)loadGroupConversations:(NSString*)groupId {
+- (void)loadGroupConversations:(id)groupId {
     
     [SVProgressHUD show];
     
@@ -409,6 +409,10 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (BOOL)shouldShowStartChatConversationOnSection:(NSInteger)section {
+    if (self.shouldHideSendMessageButton) {
+        return NO;
+    }
+    
     if (section == self.sections.count - 1 &&
         self.currentUser.sid.integerValue != self.user.sid.integerValue) {
         return YES;
@@ -622,6 +626,10 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeNeighborhoods: {
             OTUserMembershipListItem *neighborhood = [self.user.neighborhoods objectAtIndex:indexPath.row - 1];
             [self loadGroupConversations:neighborhood.id];
+            break;
+        }
+        case SectionTypeSummary: {
+            [self showEditView];
             break;
         }
         default:

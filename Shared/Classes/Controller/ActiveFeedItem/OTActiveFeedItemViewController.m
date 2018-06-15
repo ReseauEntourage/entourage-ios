@@ -199,6 +199,7 @@
     UIStoryboard *userProfileStoryboard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
     OTUserViewController *userController = [userProfileStoryboard instantiateViewControllerWithIdentifier:@"UserProfile"];
     userController.userId = self.feedItem.author.uID;
+    userController.shouldHideSendMessageButton = YES;
     UINavigationController *rootUserProfileController = [[UINavigationController alloc] initWithRootViewController:userController];
     [self.navigationController presentViewController:rootUserProfileController animated:YES completion:nil];
 }

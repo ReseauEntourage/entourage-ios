@@ -588,7 +588,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
-
++ (BOOL)shouldShowAssociationsOnUserProfile {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
 
 + (BOOL)supportsClosingEntourageGroups {
     // EMA-2052
