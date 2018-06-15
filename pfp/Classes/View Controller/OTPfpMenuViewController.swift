@@ -82,8 +82,20 @@ final class OTPfpMenuViewController: UIViewController {
     }
     
     private func customizeHeader() {
-        headerView.editLabel.text = "Modifier mon profil"
+        let editText:String = "modifier mon profil"
+        let normalAttributedText = NSAttributedString(string: editText, attributes:
+            [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+             .foregroundColor: ApplicationTheme.shared().backgroundThemeColor])
+        let selectedAttributedText = NSAttributedString(string: editText, attributes:
+            [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+             .foregroundColor: ApplicationTheme.shared().titleLabelColor])
+        headerView.editLabel.setAttributedTitle(normalAttributedText, for: UIControlState.normal)
+        headerView.editLabel.setAttributedTitle(selectedAttributedText, for: UIControlState.highlighted)
+        headerView.editLabel.setAttributedTitle(selectedAttributedText, for: UIControlState.selected)
+        headerView.editLabel.addTarget(self, action: #selector(editProfile), for: UIControlEvents.touchUpInside)
+        
         headerView.nameLabel.text = currentUser?.displayName
+        
         headerView.profileBtn.setupAsProfilePicture(fromUrl: currentUser?.avatarURL, withPlaceholder: "user")
         headerView.profileBtn.addTarget(self, action: #selector(loadProfile), for: UIControlEvents.touchUpInside)
     }
@@ -141,6 +153,13 @@ final class OTPfpMenuViewController: UIViewController {
         self.present(profileNavController, animated: true, completion: nil)
     }
     
+    @objc private func editProfile () {
+        let vc: OTUserEditViewController = UIStoryboard.editUserProfile().instantiateViewController(withIdentifier: "OTUserEditViewController") as! OTUserEditViewController
+        vc.hidesBottomBarWhenPushed = true
+        let editProfileNavController:UINavigationController = UINavigationController.init(rootViewController: vc)
+        self.present(editProfileNavController, animated: true, completion: nil)
+    }
+    
     private func loadUserCircles () {
         let storyboard:UIStoryboard = UIStoryboard.init(name: "PfpUserVoisinage", bundle: nil)
         let vc:UIViewController = storyboard.instantiateViewController(withIdentifier: "PfpUserVoisinageViewController")
@@ -153,7 +172,7 @@ extension OTPfpMenuViewController: UITableViewDelegate {
    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            headerView.editLabel.isHidden = true
+            headerView.editLabel.isHidden = OTAppConfiguration.supportsProfileEditing() == false
             return headerView
         }
         
@@ -162,7 +181,7 @@ extension OTPfpMenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 170
+            return 180
         }
         return 0
     }

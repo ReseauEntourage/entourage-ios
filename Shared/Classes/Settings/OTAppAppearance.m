@@ -150,6 +150,14 @@
     return OTLocalizedString(@"entourages");
 }
 
++ (NSString*)editUserDescriptionTitle {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_edit_user_description");
+    }
+    
+    return OTLocalizedString(@"edit_user_description");
+}
+
 + (NSString*)numberOfUserActionsTitle {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_numberOfUserActions");

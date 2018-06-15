@@ -44,3 +44,4 @@
 "pfp_mail_signal_subject" = "Signalement d'un problème dans le voisinage : \"%@\" créé par %@";
 "pfp_edit_voisinage_mail_subject" = "Veuillez modifier la description du voisinage \"%@\"";
 "pfp_edit_voisinage_mail_content" = "Bonjour,\n\nVeuillez mettre à jour la description ainsi:\n%@\n\nMerci!";
+"pfp_edit_user_description" = "Présentez-vous, le réseau Voisin-Age a hâte de faire votre connaissance!";

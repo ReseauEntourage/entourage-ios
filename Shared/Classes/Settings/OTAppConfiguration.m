@@ -489,10 +489,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (BOOL)supportsProfileEditing {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 

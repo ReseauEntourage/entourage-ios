@@ -18,6 +18,7 @@
 + (UIImage *)applicationLogo;
 + (NSString *)userProfileNameDescription;
 + (NSString *)userProfileEmailDescription;
++ (NSString *)editUserDescriptionTitle;
 + (NSString *)notificationsRightsDescription;
 + (NSString *)geolocalisationRightsDescription;
 + (NSString *)notificationsNeedDescription;

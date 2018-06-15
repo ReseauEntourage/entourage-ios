@@ -65,6 +65,10 @@
     return [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
 }
 
++ (UIStoryboard *)editUserProfileStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
+}
 
 + (void)showTabBarControllerFromStoryboardNamed:(NSString *)storyboardName {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
