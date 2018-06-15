@@ -15,5 +15,6 @@
 
 @property (nonatomic, strong) OTUser *user;
 @property (nonatomic, strong) NSNumber *userId;
+@property (nonatomic) BOOL shouldHideSendMessageButton;
 
 @end

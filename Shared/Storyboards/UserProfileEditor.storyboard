@@ -40,7 +40,7 @@
         <!--User Edit-->
         <scene sceneID="rwg-Y3-hn9">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="aOS-K6-p4c" userLabel="User Edit" customClass="OTUserEditViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTUserEditViewController" automaticallyAdjustsScrollViewInsets="NO" id="aOS-K6-p4c" userLabel="User Edit" customClass="OTUserEditViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="l7Q-dU-ek7"/>
                         <viewControllerLayoutGuide type="bottom" id="wMR-MM-gFN"/>
@@ -192,7 +192,7 @@
                                                     <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Changer" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAN-DJ-Y68">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Changer" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAN-DJ-Y68">
                                                     <rect key="frame" x="308" y="13" width="60" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -995,8 +995,11 @@ pour nous demander de l’ajouter !</string>
                     </view>
                     <connections>
                         <outlet property="aboutMeTextWithCount" destination="dhT-c2-ena" id="pCG-3u-DJ0"/>
+                        <outlet property="closeButton" destination="NbY-DB-wcE" id="XOP-Px-vhN"/>
                         <outlet property="closeKeyboardBehavior" destination="CMF-pf-7D4" id="re0-IB-kcI"/>
+                        <outlet property="sendButton" destination="Bjc-vZ-xJF" id="5vK-f2-GzV"/>
                         <outlet property="tapBehavior" destination="CEc-R2-NVH" id="qmk-TA-bzs"/>
+                        <outlet property="titleLabel" destination="dYm-P6-zTZ" id="GfL-2S-E0z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Stg-wS-tWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

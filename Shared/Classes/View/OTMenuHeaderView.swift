@@ -13,7 +13,7 @@ import SnapKit
 final class OTMenuHeaderView: UIView {
     var profileBtn = UIButton()
     var imgAssociation = UIImageView()
-    var editLabel = UILabel()
+    var editLabel:UIButton = UIButton()
     var nameLabel = UILabel()
     
     // MARK: - Init
@@ -57,12 +57,14 @@ final class OTMenuHeaderView: UIView {
         
         nameLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(20)
+            $0.height.equalTo(25)
             $0.top.equalTo(profileBtn.snp.bottom)
         }
         
+        nameLabel.font = UIFont.SFUIText(size: 15, type: UIFont.SFUITextFontType.bold)
+        
         editLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-10)
             $0.top.equalTo(nameLabel.snp.bottom)
             $0.centerX.equalToSuperview()
         }

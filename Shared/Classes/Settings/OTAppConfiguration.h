@@ -59,6 +59,7 @@
 + (BOOL)shouldAllowLoginFromWelcomeScreen;
 + (BOOL)shouldAlwaysRequestUserToUploadPicture;
 + (BOOL)shouldAlwaysRequestUserLocation;
++ (BOOL)shouldShowAssociationsOnUserProfile;
 + (BOOL)shouldHideFeedsAndMap;
 + (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user;
 + (BOOL)shouldShowNumberOfUserAssociationsSection:(OTUser*)user;

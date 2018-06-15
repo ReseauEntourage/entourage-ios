@@ -150,6 +150,14 @@
     return OTLocalizedString(@"entourages");
 }
 
++ (NSString*)editUserDescriptionTitle {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_edit_user_description");
+    }
+    
+    return OTLocalizedString(@"edit_user_description");
+}
+
 + (NSString*)numberOfUserActionsTitle {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_numberOfUserActions");
@@ -273,6 +281,7 @@
     iconView.backgroundColor = UIColor.whiteColor;
     iconView.layer.cornerRadius = 18;
     iconView.userInteractionEnabled = NO;
+    iconView.clipsToBounds = YES;
     
     UIImage *placeholder = [UIImage imageNamed:@"user"];
     

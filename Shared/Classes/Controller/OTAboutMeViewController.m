@@ -16,6 +16,7 @@
 #import "OTAuthService.h"
 #import "OTConsts.h"
 #import "OTCloseKeyboardOnTapBehavior.h"
+#import "entourage-Swift.h"
 
 @interface OTAboutMeViewController () <UITextViewDelegate>
 
@@ -32,6 +33,13 @@
     self.closeKeyboardBehavior.inputViews = [NSArray arrayWithObjects:self.aboutMeTextWithCount.textView, nil];
     self.aboutMeTextWithCount.placeholder = @"";
     self.aboutMeTextWithCount.maxLength = 200;
+    
+    UIColor *appColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.sendButton setBackgroundColor:appColor];
+    [self.closeButton setTintColor:appColor];
+    UIImage *image = [[self.closeButton imageForState:UIControlStateNormal] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.closeButton setImage:image forState:UIControlStateNormal];
+    self.titleLabel.text = [OTAppAppearance editUserDescriptionTitle];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
