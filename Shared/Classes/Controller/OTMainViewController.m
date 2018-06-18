@@ -1105,7 +1105,12 @@
 }
 
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedItem.url]];
+    NSString *url = feedItem.url;
+//    if (![url containsString:@"http"]) {
+//        url = [NSString stringWithFormat:@"http://%@", url];
+//    }
+    url = [NSString stringWithFormat:@"http://%@", url];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 - (void)showUserProfile:(NSNumber*)userId {

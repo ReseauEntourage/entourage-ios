@@ -24,7 +24,8 @@
 }
 
 - (void)accept:(OTFeedItemJoiner *)joiner success:(void (^)(void))success failure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] updateEntourageJoinRequestStatus:JOIN_ACCEPTED forUser:joiner.uID forEntourage:self.entourage.uid withSuccess:^() {
+    [[OTEntourageService new] updateEntourageJoinRequestStatus:JOIN_ACCEPTED
+                                                       forUser:joiner.uID forEntourage:self.entourage.uuid withSuccess:^() {
         NSLog(@"JOIN ACCEPT");
         if(success)
             success();
@@ -36,7 +37,7 @@
 }
 
 - (void)reject:(OTFeedItemJoiner *)joiner success:(void (^)(void))success failure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] rejectEntourageJoinRequestForUser:joiner.uID forEntourage:self.entourage.uid withSuccess:^() {
+    [[OTEntourageService new] rejectEntourageJoinRequestForUser:joiner.uID forEntourage:self.entourage.uuid withSuccess:^() {
         NSLog(@"JOIN REJECT");
         if(success)
             success();

@@ -88,8 +88,12 @@
     } orFailure:^(NSError *error) {
         [SVProgressHUD dismiss];
     }];
-    if (self.inviteBehaviorTriggered)
+    
+    if (self.inviteBehaviorTriggered) {
         [self performSegueWithIdentifier:@"SegueInviteSource" sender:self];
+    }
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -173,10 +177,11 @@
     id<OTFeedItemFactoryDelegate> itemFactory = [OTFeedItemFactory createFor:self.feedItem];
     id<OTMessagingDelegate> messagingDelegate = [itemFactory getMessaging];
     
-    [messagingDelegate send:message withSuccess:^(OTFeedItemMessage *responseMessage) {
-        [SVProgressHUD dismiss];
-        self.txtChat.text = @"";
-        [[OTMessagingService new] readFor:self.feedItem onDataSource:self.dataSource];
+    [messagingDelegate send:message
+                withSuccess:^(OTFeedItemMessage *responseMessage) {
+                    [SVProgressHUD dismiss];
+                    self.txtChat.text = @"";
+                    [self reloadMessages];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];

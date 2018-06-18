@@ -65,9 +65,6 @@
                                              selector:@selector(updateBadge:)
                                                  name:kUpdateBadgeCountNotification
                                                object:nil];
-    
-    [self loadInvitations];
-    [self.entouragesDataSource loadData];
 }
 
 - (void)dealloc {
@@ -76,6 +73,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self loadInvitations];
+    [self.entouragesDataSource loadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

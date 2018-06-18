@@ -47,6 +47,10 @@
 }
 
 - (void)removeUnreadMessages:(NSNumber *)feedId {
+    if (!feedId) {
+        return;
+    }
+    
     NSMutableArray *unreadMessages = [self getUnreadMessages];
     OTUnreadMessageCount *unreadMessageFound = [self findIn:unreadMessages byFeedId:feedId];
     if( unreadMessageFound != nil) {

@@ -13,7 +13,6 @@
 
 #define BUTTON_SIDE 48.0f
 #define PADDING_VERTICAL 8.0f
-#define PADDING_HORIZONTAL 16.0f
 
 #define ACTION_LABEL_FRAME CGRectMake(0.0f, 0.0f, 230.0f, 21.0f)
 

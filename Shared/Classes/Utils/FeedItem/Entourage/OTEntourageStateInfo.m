@@ -75,7 +75,7 @@
 }
 
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
-    [[OTEntourageService new] getEntourageWithId:self.entourage.uid withSuccess:^(OTEntourage *entourage) {
+    [[OTEntourageService new] getEntourageWithId:self.entourage.uuid withSuccess:^(OTEntourage *entourage) {
        if(success)
            success(entourage);
     } failure:^(NSError *error) {
