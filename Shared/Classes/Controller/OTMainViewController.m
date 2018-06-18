@@ -1106,10 +1106,6 @@
 
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem {
     NSString *url = feedItem.url;
-//    if (![url containsString:@"http"]) {
-//        url = [NSString stringWithFormat:@"http://%@", url];
-//    }
-    url = [NSString stringWithFormat:@"http://%@", url];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
