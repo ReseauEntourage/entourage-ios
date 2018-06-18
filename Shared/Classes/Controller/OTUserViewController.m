@@ -141,6 +141,8 @@ typedef NS_ENUM(NSInteger) {
     else {
         [OTLogger logEvent:@"Screen09_1MyProfileViewAsPublicView"];
     }
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 #pragma mark - Private
@@ -179,6 +181,11 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (IBAction)showEditView {
+    // Don't show this for the current logged in user
+    if (self.currentUser.sid.integerValue != self.user.sid.integerValue) {
+        return;
+    }
+    
     [OTLogger logEvent:@"EditPhoto"];
     [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
 }
@@ -409,10 +416,18 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (BOOL)shouldShowStartChatConversationOnSection:(NSInteger)section {
+    
+    // Don't show this, if the conversation entry is missing from the user api response
+    if (!self.user.conversation) {
+        return NO;
+    }
+    
+    // Allow disabling the feature when initialising the control
     if (self.shouldHideSendMessageButton) {
         return NO;
     }
     
+    // Don't show this for the current logged in user
     if (section == self.sections.count - 1 &&
         self.currentUser.sid.integerValue != self.user.sid.integerValue) {
         return YES;
@@ -505,6 +520,11 @@ typedef NS_ENUM(NSInteger) {
     [button addTarget:self action:@selector(startChatWithSelectedUser) forControlEvents:UIControlEventTouchUpInside];
     [footer addSubview:button];
     [button setExclusiveTouch:YES];
+    
+    [button.layer setShadowColor:[UIColor blackColor].CGColor];
+    [button.layer setShadowOpacity:0.5];
+    [button.layer setShadowRadius:4.0];
+    [button.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
     
     return footer;
 }

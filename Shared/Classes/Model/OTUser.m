@@ -60,7 +60,10 @@ NSString *const kVisitedUserTag = @"visited";
         _encounterCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEncounterCount];
         _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
         _partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kKeyPartner]];
-        _conversation = [[OTConversation alloc] initWithDictionary:[dictionary objectForKey:kKeyConversation]];
+        
+        if ([[dictionary allKeys] containsObject:kKeyConversation]) {
+            _conversation = [[OTConversation alloc] initWithDictionary:[dictionary objectForKey:kKeyConversation]];
+        }
         
         if ([[dictionary allKeys] containsObject:kKeyRoles]) {
             _roles = [dictionary arrayWithObjectsOfClass:[NSString class] forKey:kKeyRoles];

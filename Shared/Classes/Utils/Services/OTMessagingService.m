@@ -16,8 +16,9 @@
 @implementation OTMessagingService
 
 - (void)readFor:(OTFeedItem *)feedItem onDataSource:(OTDataSourceBehavior *)dataSource {
-    if(!dataSource)
+    if (!dataSource) {
         return;
+    }
     
     id<OTMessagingDelegate> messaging = [[OTFeedItemFactory createFor:feedItem] getMessaging];
 
@@ -44,8 +45,9 @@
         dispatch_group_leave(group);
     }];
 
-    if([[[OTFeedItemFactory createFor: feedItem] getStateInfo] isClosed])
+    if ([[[OTFeedItemFactory createFor: feedItem] getStateInfo] isClosed]) {
         dispatch_group_leave(group);
+    }
     else {
         [messaging getFeedItemUsersWithStatus:nil success:^(NSArray *items) {
             if([items count] > 0)

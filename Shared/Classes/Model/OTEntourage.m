@@ -46,7 +46,6 @@
     return @{
         kWSKeyTitle: self.title,
         kWSKeyEntourageType: self.entourage_type,
-        kWSKeyGroupType: self.group_type,
         kWSDescription: self.desc ? self.desc : @"",
         kWSKeyStatus: self.status,
         kWSKeyCategory: self.category,

@@ -41,7 +41,7 @@
 }
 
 - (void)getMessagesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] entourageMessagesForEntourage:self.entourage.uid WithSuccess:^(NSArray *items) {
+    [[OTEntourageService new] entourageMessagesForEntourage:self.entourage.uuid WithSuccess:^(NSArray *items) {
         NSLog(@"GET ENTOURAGE MESSAGES");
         if(success)
             success(items);
@@ -75,7 +75,7 @@
 }
 
 - (void)setMessagesAsRead:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] readEntourageMessages:self.entourage.uid success:^() {
+    [[OTEntourageService new] readEntourageMessages:self.entourage.uuid success:^() {
         if(success){
             success();
         }

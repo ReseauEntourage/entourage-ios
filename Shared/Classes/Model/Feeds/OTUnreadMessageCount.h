@@ -11,6 +11,7 @@
 @interface OTUnreadMessageCount : NSObject
 
 @property (nonatomic, strong) NSNumber *feedId;
+@property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSNumber *unreadMessagesCount;
 
 @end

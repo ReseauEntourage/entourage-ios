@@ -247,7 +247,7 @@
         if ([item isNeighborhood] || [item isPrivateCircle]) {
             itemType = @"Voisinage animé";
         } else if  ([item isConversation]) {
-            itemType = item.group_type.capitalizedString;
+            return [[NSAttributedString alloc] initWithString:@""];
         }
     }
     

@@ -64,6 +64,8 @@
     else {
         if ([feedItem isConversation]) {
             [self.imgCategory setupFromUrl:self.feedItem.author.avatarUrl withPlaceholder:@"user"];
+            self.imgCategory.layer.cornerRadius = self.imgCategory.bounds.size.width / 2;
+            self.imgCategory.clipsToBounds = YES;
         } else {
             [self.imgCategory setImage:[UIImage imageNamed:source]];
         }

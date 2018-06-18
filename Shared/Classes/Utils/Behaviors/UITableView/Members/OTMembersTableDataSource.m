@@ -31,27 +31,33 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     UIEdgeInsets insets = UIEdgeInsetsMake(0, cell.bounds.size.width, 0, 0);
-    if([cell isKindOfClass:[OTMemberCountCell class]])
+    
+    if ([cell isKindOfClass:[OTMemberCountCell class]]) {
         insets = UIEdgeInsetsMake(0, 0, 0, 0);
-    else if([cell isKindOfClass:[OTMembersCell class]]) {
-        if(indexPath.row == self.dataSource.items.count - 1)
+    }
+    else if ([cell isKindOfClass:[OTMembersCell class]]) {
+        if (indexPath.row == self.dataSource.items.count - 1) {
             insets = UIEdgeInsetsMake(0, cell.bounds.size.width, 0, 0);
-        else
+        }
+        else {
             insets = UIEdgeInsetsMake(0, DEFAULT_LEFT_INSET, 0, 0);
+        }
     }
     cell.separatorInset = insets;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id item = [self getItemAtIndexPath:indexPath];
-    if([item isKindOfClass:[OTFeedItemJoiner class]]) {
+    if ([item isKindOfClass:[OTFeedItemJoiner class]]) {
         OTFeedItemJoiner *joiner = (OTFeedItemJoiner *)item;
         [self.userProfileBehavior showProfile:joiner.uID];
     }
-    else if(indexPath.row == 3) {
+    else if (indexPath.row == 3) {
         id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:item] getStateInfo];
-        if(![stateInfo canChangeEditState])
+        if (![stateInfo canChangeEditState]) {
             return;
+        }
+        
         if ([stateInfo canInvite]) {
             [self.inviteBehavior startInvite];
         }

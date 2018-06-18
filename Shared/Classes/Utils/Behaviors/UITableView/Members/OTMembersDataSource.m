@@ -19,16 +19,21 @@
     [SVProgressHUD show];
     NSMutableArray *newItems = [NSMutableArray new];
     [newItems addObject:feedItem];
+    
     NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
-    if([description length] > 0)
+    if ([description length] > 0) {
         [newItems addObject:description];
+    }
     [newItems addObject:feedItem];
     [newItems addObject:feedItem];
+    
     [self refreshTable:newItems];
+    
     [[[OTFeedItemFactory createFor:feedItem] getMessaging] getFeedItemUsersWithStatus:JOIN_ACCEPTED success:^(NSArray *items) {
         [newItems addObjectsFromArray:items];
         [self refreshTable:newItems];
         [SVProgressHUD dismiss];
+        
     } failure:^(NSError *failure) {
         [SVProgressHUD dismiss];
     }];
@@ -51,7 +56,7 @@
 - (void)entourageUpdated:(NSNotification *)notification {
     OTFeedItem *feedItem = (OTFeedItem *)[notification.userInfo objectForKey:kNotificationEntourageChangedEntourageKey];
     NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
-    if([description length] > 0) {
+    if ([description length] > 0) {
         if ([self.items count] >= 2) {
             [self.items replaceObjectAtIndex:1 withObject:description];
             [self.tableDataSource refresh];
