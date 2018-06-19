@@ -63,6 +63,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    
     [self setUpUIForClosedItem];
     [self.shareBehavior configureWith:self.feedItem];
     [self.scrollBottomBehavior initialize];
@@ -90,10 +92,8 @@
     }];
     
     if (self.inviteBehaviorTriggered) {
-        [self performSegueWithIdentifier:@"SegueInviteSource" sender:self];
+        [self.inviteBehavior startInvite];
     }
-    
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewDidAppear:(BOOL)animated

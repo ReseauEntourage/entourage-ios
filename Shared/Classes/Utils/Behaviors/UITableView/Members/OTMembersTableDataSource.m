@@ -46,13 +46,24 @@
     cell.separatorInset = insets;
 }
 
+- (NSInteger)inviteCellIndex {
+    BOOL hasFoundDescriptionItem = NO;
+    for (id item in self.dataSource.items) {
+        if ([item isKindOfClass:[NSString class]]) {
+            hasFoundDescriptionItem = YES;
+            break;
+        }
+    }
+    return hasFoundDescriptionItem ? 3 : 2;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id item = [self getItemAtIndexPath:indexPath];
     if ([item isKindOfClass:[OTFeedItemJoiner class]]) {
         OTFeedItemJoiner *joiner = (OTFeedItemJoiner *)item;
         [self.userProfileBehavior showProfile:joiner.uID];
     }
-    else if (indexPath.row == 3) {
+    else if (indexPath.row == [self inviteCellIndex]) {
         id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:item] getStateInfo];
         if (![stateInfo canChangeEditState]) {
             return;

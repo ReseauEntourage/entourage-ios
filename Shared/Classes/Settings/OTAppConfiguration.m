@@ -513,7 +513,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
     }
-    return YES;
+    
+    // EMA-1991
+    return NO;
 }
 
 + (BOOL)shouldAllowLoginFromWelcomeScreen
