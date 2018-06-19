@@ -21,6 +21,9 @@
 #import "OTPhoneViewController.h"
 #import "OTAPIConsts.h"
 #import "OTMailSenderBehavior.h"
+#import "OTInviteSourceViewController.h"
+#import <UIKit/UIActivity.h>
+#import "OTActivityProvider.h"
 
 #define TUTORIAL_DELAY 15
 #define MAP_TAB_INDEX 0
@@ -247,6 +250,30 @@
         NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"pfp_edit_voisinage_mail_subject"), entourage.title];
         NSString *body = [NSString stringWithFormat:OTLocalizedString(@"pfp_edit_voisinage_mail_content"), entourage.desc];
         [emailSender sendMailWithSubject:subject andRecipient:CONTACT_PFP_TO body:body];
+    }
+}
+
++ (void)launchInviteActionForFeedItem:(OTFeedItem*)item
+                       fromController:(UIViewController*)controller
+                             delegate:(id<InviteSourceDelegate>)delegate {
+    
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeEntourage) {
+        UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
+        OTInviteSourceViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OTInviteSourceViewController"];
+        vc.delegate = delegate;
+        [controller presentViewController:vc animated:YES completion:nil];
+
+    } else if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        
+        NSString *message = OTLocalizedString(@"pfp_share_message");
+        NSURL *url = [NSURL URLWithString:item.shareUrl];
+        OTActivityProvider *activity = [[OTActivityProvider alloc] initWithPlaceholderItem:@{@"body":message, @"url": url}];
+        activity.emailBody = message;
+        activity.emailSubject = @"";
+        activity.url = url;
+        NSArray *objectsToShare = @[activity];
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+        [controller presentViewController:activityVC animated:YES completion:nil];
     }
 }
 

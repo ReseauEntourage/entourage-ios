@@ -22,7 +22,14 @@
 
 + (void)launchInAppBrowserWithUrlString:(NSString*)urlString viewController:(UIViewController*)viewController
 {
-    [OTSafariService launchInAppBrowserWithUrl:[NSURL URLWithString:urlString] viewController:viewController];
+    NSString *urlPath = urlString;
+    NSString *httpPrefix = @"http";
+    if ([urlString containsString:httpPrefix]) {
+        NSRange httpRange = [urlString rangeOfString:httpPrefix];
+        urlPath = [urlString substringFromIndex:httpRange.location];
+    }
+    [OTSafariService launchInAppBrowserWithUrl:[NSURL URLWithString:urlPath]
+                                viewController:viewController];
 }
 
 + (void)launchInAppBrowserWithUrl:(NSURL*)url viewController:(UIViewController*)viewController

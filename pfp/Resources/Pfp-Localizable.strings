@@ -45,3 +45,4 @@
 "pfp_edit_voisinage_mail_subject" = "Veuillez modifier la description du voisinage \"%@\"";
 "pfp_edit_voisinage_mail_content" = "Bonjour,\n\nVeuillez mettre à jour la description ainsi:\n%@\n\nMerci!";
 "pfp_edit_user_description" = "Présentez-vous, le réseau Voisin-Age a hâte de faire votre connaissance!";
+"pfp_share_message" = "Le réseau Voisin-Age est une communauté de voisins qui créent des liens intergénérationnels. Pour rejoindre le réseau, contactez voisin-age@petitsfreresdespauvres.org.";

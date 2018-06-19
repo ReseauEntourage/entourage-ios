@@ -25,7 +25,12 @@
         [newItems addObject:description];
     }
     [newItems addObject:feedItem];
-    [newItems addObject:feedItem];
+    
+    id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:feedItem] getStateInfo];
+    if ([stateInfo canChangeEditState] && [stateInfo canInvite]) {
+        // Invite item
+        [newItems addObject:feedItem];
+    }
     
     [self refreshTable:newItems];
     

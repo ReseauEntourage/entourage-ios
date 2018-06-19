@@ -79,7 +79,8 @@ NSString *const kKeyFailedNumbers = @"failed_numbers";
 }
 
 - (void)acceptInvitation:(OTEntourageInvitation *)invitation withSuccess:(void (^)(void))success failure:(void (^)(NSError *))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_HANDLE_INVITE, invitation.iid, TOKEN];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_HANDLE_INVITE,
+                     invitation.iid, TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      PUTWithUrl:url
      andParameters:nil

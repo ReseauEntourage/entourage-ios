@@ -15,7 +15,8 @@
 
 - (void)accept:(OTEntourageInvitation *)invitation {
     [SVProgressHUD show];
-    [[OTInvitationsService new] acceptInvitation:invitation withSuccess:^() {
+    [[OTInvitationsService new] acceptInvitation:invitation
+                                     withSuccess:^() {
         [SVProgressHUD dismiss];
         [self.pendingInvitationChangedDelegate noLongerPending:invitation];
     } failure:^(NSError *error) {

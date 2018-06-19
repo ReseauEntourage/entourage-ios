@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol InviteSourceDelegate;
+
 @interface OTAppState : NSObject
 + (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions;
 + (void)returnToLogin;
@@ -25,6 +27,9 @@
 + (void)continueFromUserEmailScreen;
 + (void)continueFromUserNameScreen;
 + (void)continueEditingEntourage:(OTEntourage*)entourage fromController:(UIViewController*)controller;
++ (void)launchInviteActionForFeedItem:(OTFeedItem*)item
+                       fromController:(UIViewController*)controller
+                             delegate:(id<InviteSourceDelegate>)delegate;
 
 + (void)hideTabBar:(BOOL)hide;
 + (void)updateMessagesTabBadgeWithValue:(NSString*)value;

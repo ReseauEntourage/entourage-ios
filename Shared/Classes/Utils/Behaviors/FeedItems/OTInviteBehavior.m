@@ -26,7 +26,10 @@
 
 - (void)startInvite {
     [OTLogger logEvent:@"InviteFriendsClick"];
-    [self.owner performSegueWithIdentifier:@"SegueInviteSource" sender:nil];
+    
+    [OTAppState launchInviteActionForFeedItem:self.feedItem
+                               fromController:self.owner
+                                     delegate:self];
 }
 
 - (BOOL)prepareSegueForInvite:(UIStoryboardSegue *)segue {

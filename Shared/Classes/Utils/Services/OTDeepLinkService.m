@@ -125,18 +125,23 @@
     } else if ([key isEqualToString:@"badge"]) {
         OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
         [self showController:selectAssociationController];
+        
     } else if ([key isEqualToString:@"webview"]) {
         NSArray *elts = [query componentsSeparatedByString:@"="];
         NSURL *url = [NSURL URLWithString:elts[1]];
         [self openWithWebView:url];
+        
     } else if ([key isEqualToString:@"profile"]) {
         [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].sid];
+        
     } else if ([key isEqualToString:@"messages"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
         [mainViewController performSegueWithIdentifier:@"MyEntouragesSegue" sender:nil];
+        
     } else if ([key isEqualToString:@"create-action"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
         [mainViewController performSegueWithIdentifier:@"EntourageEditorSegue" sender:nil];
+        
     } else if ([key isEqualToString:@"entourage"] || [key isEqualToString:@"entourages"]) {
         if (pathComponents != nil && pathComponents.count >= 2) {
             [self navigateTo:pathComponents[1]];

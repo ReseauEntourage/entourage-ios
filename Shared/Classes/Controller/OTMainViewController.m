@@ -183,8 +183,7 @@
 
 - (void)setup {
     self.solidarityGuideLabel.text = OTLocalizedString(@"map_options_show_guide");
-    self.solidarityGuideLabel.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
-    self.tapViewBehavior.tapView.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    
     self.isFirstLoad = YES;
     self.heatzonesCollectionDataSource.heatzonesDelegate = self;
     [self.heatzonesCollectionDataSource initialize];
@@ -1105,8 +1104,7 @@
 }
 
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem {
-    NSString *url = feedItem.url;
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    [OTSafariService launchInAppBrowserWithUrlString:feedItem.url viewController:nil];
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
