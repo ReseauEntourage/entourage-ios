@@ -59,6 +59,32 @@ platform :ios do
       )
   end
 
+  private_lane :store do |options|
+    get_provisioning_profile(
+      app_identifier: options[:app_identifier],
+      username: "apple@entourage.social"
+    )
+
+    build_app(
+      scheme: options[:scheme],
+      output_directory: ENV["BITRISE_DEPLOY_DIR"]
+    )
+
+    upload_to_testflight(
+      app_identifier: options[:app_identifier],
+      skip_waiting_for_build_processing: true
+    ) if options[:upload]&.to_sym == :testflight
+  end
+
+  desc "Build Entourage for store release"
+  desc "This will also make sure the profile is up to date"
+  lane :entourage_store do |options|
+    store({
+      app_identifier: "social.entourage.entourageios",
+      scheme: "EntourageStore"
+    }.merge(options))
+  end
+
   desc "Submit a new Entourage Build to TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :deploy_to_TestFlight do |options|
@@ -77,22 +103,19 @@ platform :ios do
       )
   end
 
+  desc "Build Voisin-Age for store release"
+  desc "This will also make sure the profile is up to date"
+  lane :pfp_store do |options|
+    store({
+      app_identifier: "social.entourage.entourageios.pfp",
+      scheme: "PfpStore"
+    }.merge(options))
+  end
+
   desc "Submit a new PFP Build to TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :deploy_PFP_to_TestFlight do |options|
-    sigh(
-     app_identifier: "social.entourage.entourageios.pfp",
-     username: "apple@entourage.social",
-     adhoc: false,
-     force: true
-    )
-    gym(
-      clean: true,
-      scheme: "EntourageStore"
-      )
-    pilot(
-      skip_waiting_for_build_processing: true
-      )
+    pfp_store upload: :testflight
   end
 
   desc "Submit dSYMs to Crashlytics"
