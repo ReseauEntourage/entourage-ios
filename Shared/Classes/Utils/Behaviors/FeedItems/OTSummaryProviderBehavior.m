@@ -17,10 +17,12 @@
 #import "NSDate+ui.h"
 #import "UIImageView+entourage.h"
 #import "OTAnnouncement.h"
+#import "NSDate+OTFormatter.h"
 
 @interface OTSummaryProviderBehavior ()
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
+@property (nonatomic) NSDateFormatter *dateFormatter;
 
 @end
 
@@ -32,17 +34,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageUpdated:) name:kNotificationEntourageChanged object:nil];
     if(!self.fontSize)
         self.fontSize = [NSNumber numberWithFloat:DEFAULT_DESCRIPTION_SIZE];
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    self.dateFormatter.dateFormat = @"dd MMM";
 }
 
 - (void)configureWith:(OTFeedItem *)feedItem {
     self.feedItem = feedItem;
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:feedItem] getUI];
+    
     if (self.lblTitle)
         self.lblTitle.text = [uiDelegate summary];
     if (self.lblUserCount)
         self.lblUserCount.text = [feedItem.noPeople stringValue];
     if (self.btnAvatar)
         [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
+    
     if (self.lblDescription)
         [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
     if (self.txtFeedItemDescription)
@@ -50,7 +56,8 @@
     
     if (self.lblTimeDistance) {
         double distance = [uiDelegate distance];
-        self.lblTimeDistance.text = [OTLocalizedString(@"feed_item_time_distance") stringByAppendingString: [self getDistance:distance with:feedItem.creationDate]];
+//        self.lblTimeDistance.text = [OTLocalizedString(@"feed_item_time_distance") stringByAppendingString: [self getDistance:distance with:feedItem.creationDate]];
+        self.lblTimeDistance.text = [self formattedMessageTimeForFeedItem:feedItem distance:distance];
     }
     self.imgAssociation.hidden = feedItem.author.partner == nil;
     [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
@@ -92,6 +99,17 @@
     int distanceAmount = [self getDistance:distance];
     NSString *distanceQualifier = [self getDistanceQualifier:distance];
     return [NSString stringWithFormat:@"%d%@", distanceAmount, distanceQualifier];
+}
+
+- (NSString *)formattedMessageTimeForFeedItem:(OTFeedItem*)feedItem distance:(CGFloat)distance {
+    if ([feedItem.creationDate isToday]) {
+        return [feedItem.creationDate toTimeString];
+        
+    } else if ([feedItem.creationDate isYesterday]) {
+        return OTLocalizedString(@"yesterday");
+    } else {
+        return [self.dateFormatter stringFromDate:feedItem.creationDate];
+    }
 }
 
 #pragma mark - private methods

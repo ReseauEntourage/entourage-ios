@@ -12,4 +12,8 @@
 
 - (NSString *)toTimeString;
 
+- (BOOL)isEqualToDateIgnoringTime:(NSDate *)aDate;
+- (BOOL)isToday;
+- (BOOL)isYesterday;
+
 @end

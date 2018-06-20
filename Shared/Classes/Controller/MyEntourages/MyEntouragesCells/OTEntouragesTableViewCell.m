@@ -14,30 +14,53 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.lblNumberOfUsers.layer.borderColor = [UIColor appGreyishColor].CGColor;
 }
 
 - (void)configureWith:(OTFeedItem *)item {
+    UIFont *readFontLarge = [UIFont fontWithName:@"SFUIText-Regular" size:16];
+    UIFont *unReadFontLarge = [UIFont fontWithName:@"SFUIText-Bold" size:16];
+    UIFont *readFontSmall = [UIFont fontWithName:@"SFUIText-Regular" size:14];
+    UIFont *unReadFontSmall = [UIFont fontWithName:@"SFUIText-Bold" size:14];
+    
+    UIColor *readColor = [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1];
+    
+    UIFont *lightFont = [UIFont fontWithName:@"SFUIText-Light" size:14];
+    
+    NSString *lastMessage = [self getAuthorTextFor:item.lastMessage];
+    
+    if ([self.lblLastMessage.text length] > 0) {
+        self.lblLastMessage.text = lastMessage;
+    } else {
+        self.summaryProvider.lblDescription = self.lblLastMessage;
+    }
+    
     self.summaryProvider.lblTitle = self.lblTitle;
-    self.summaryProvider.lblDescription = self.lblDescription;
-    self.summaryProvider.lblUserCount = self.lblNumberOfUsers;
-    self.summaryProvider.btnAvatar = self.btnProfilePicture;
     self.summaryProvider.lblTimeDistance = self.lblTimeDistance;
-    self.summaryProvider.imgAssociation = self.imgAssociation;
     self.summaryProvider.imgCategory = self.imgCategory;
+    
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
-    if(item.unreadMessageCount.intValue > 0) {
-       self.lblLastMessage.font = [UIFont fontWithName:@"SFUIText-Medium" size:self.lblLastMessage.font.pointSize];
-       self.lblLastMessage.textColor = [UIColor blackColor];
+    
+    if (item.unreadMessageCount.intValue > 0) {
+        self.lblTitle.font = unReadFontLarge;
+        self.lblTitle.textColor = [UIColor blackColor];
+        
+        self.lblLastMessage.font = unReadFontSmall;
+        self.lblLastMessage.textColor = [UIColor blackColor];
+        
+        self.lblTimeDistance.font = unReadFontSmall;
+        self.lblTimeDistance.textColor = [UIColor blackColor];
     }
     else {
-        self.lblLastMessage.font = [UIFont fontWithName:@"SFUIText-Light" size:self.lblLastMessage.font.pointSize];
+        self.lblTitle.font = readFontLarge;
+        self.lblTitle.textColor = readColor;
+        
+        self.lblLastMessage.font = readFontSmall;
         self.lblLastMessage.textColor = [UIColor appGreyishColor];
+        
+        self.lblTimeDistance.font = lightFont;
+        self.lblTimeDistance.textColor = readColor;
     }
-    self.lblLastMessage.text = [self getAuthorTextFor:item.lastMessage];
-    self.txtUnreadCount.hidden = item.unreadMessageCount.intValue == 0;
-    self.txtUnreadCount.text = item.unreadMessageCount.stringValue;
 }
 
 - (IBAction)showUserDetails:(id)sender {
