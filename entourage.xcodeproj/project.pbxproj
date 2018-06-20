@@ -5420,7 +5420,7 @@
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = Entourage;
-				PROVISIONING_PROFILE = "3cee3cd3-1044-4f02-aafc-212692b18297";
+				PROVISIONING_PROFILE = "46331488-2a5e-4e9a-9447-39466c9fc3b9";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
@@ -5626,7 +5626,7 @@
 				OTHER_SWIFT_FLAGS = "-DPFP";
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.pfp;
 				PRODUCT_NAME = "Voisin-Age";
-				PROVISIONING_PROFILE = "6593fc12-d912-4782-b987-0320de26b5fe";
+				PROVISIONING_PROFILE = "c814393f-48dc-4fdf-8c58-aea54de29646";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp AppStore";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PFP;
 				SWIFT_OBJC_BRIDGING_HEADER = "pfp/Settings/Environment/pfp-Bridging-Header.h";
