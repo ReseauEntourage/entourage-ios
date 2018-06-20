@@ -78,7 +78,7 @@ struct UserStorageKey {
     }
     
     @objc var runsOnProduction: Bool {
-        return self.environmentName as String == stagingEnvironmentName
+        return self.environmentName as String == prodEnvironmentName
     }
     
     @objc var runsOnStaging: Bool {

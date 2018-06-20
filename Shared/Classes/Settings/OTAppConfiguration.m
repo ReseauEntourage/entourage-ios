@@ -319,10 +319,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         subtitleColor = [UIColor pfpSubtitleBlueColor];
     }
     
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
-        primaryNavigationBarTintColor = [UIColor redColor];
-    }
-    
     [[ApplicationTheme shared] setPrimaryNavigationBarTintColor:primaryNavigationBarTintColor];
     [[ApplicationTheme shared] setSecondaryNavigationBarTintColor:secondaryNavigationBarTintColor];
     [[ApplicationTheme shared] setBackgroundThemeColor:backgroundThemeColor];

@@ -18,4 +18,34 @@
     return [NSString stringWithFormat:@"%ldh%ld", (long)hour, (long)minute];
 }
 
+- (BOOL)isEqualToDateIgnoringTime:(NSDate *)aDate
+{
+    NSDateComponents *components1 = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:self];
+    NSDateComponents *components2 = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:aDate];
+    return ((components1.year == components2.year) && (components1.month == components2.month) && (components1.day == components2.day));
+}
+
+- (BOOL)isToday
+{
+    return [self isEqualToDateIgnoringTime:[NSDate date]];
+}
+
+- (BOOL)isYesterday
+{
+    return [self isEqualToDateIgnoringTime:[self dateYesterday]];
+}
+
+- (NSDate *)dateYesterday
+{
+    return [self dateByAddingDays:-1];
+}
+
+- (NSDate *)dateByAddingDays:(NSInteger)dDays
+{
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setDay:dDays];
+    NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:self options:0];
+    return newDate;
+}
+
 @end
