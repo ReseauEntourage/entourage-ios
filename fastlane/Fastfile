@@ -27,8 +27,7 @@ platform :ios do
     sigh(
      app_identifier: "social.entourage.entourageios.beta",
      username: "apple@entourage.social",
-     adhoc: true,
-     force: true
+     adhoc: true
     )
     badge(
       dark: true
@@ -46,8 +45,7 @@ platform :ios do
     sigh(
      app_identifier: "social.entourage.entourageios.pfp.beta",
      username: "apple@entourage.social",
-     adhoc: true,
-     force: true
+     adhoc: true
     )
     badge(
       dark: true
