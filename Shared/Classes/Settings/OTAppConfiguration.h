@@ -49,22 +49,55 @@
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;
 
 + (NSInteger)applicationType;
+
+// Configures if the geolcation is always requested
 + (BOOL)isGeolocationMandatory;
+
+// Configures if the tour functionality is enabled/shown
 + (BOOL)supportsTourFunctionality;
+
+// Configures if the solidarity guide is enabled/shown
 + (BOOL)supportsSolidarityGuideFunctionality;
+
 + (BOOL)supportsFacebookIntegration;
+
+// Configures if the users are allowed to edit their profile
 + (BOOL)supportsProfileEditing;
-+ (BOOL)isMVP;
+
+// Configures if the intro tutorial is enabled/shown
 + (BOOL)shouldShowIntroTutorial;
+
+// Configure if the user is allowed to login from the welcome page
 + (BOOL)shouldAllowLoginFromWelcomeScreen;
+
+// Configures if the user is requested to upload a picture
 + (BOOL)shouldAlwaysRequestUserToUploadPicture;
+
+// Configure if the user location is always requested
 + (BOOL)shouldAlwaysRequestUserLocation;
+
+// Configures if the associtations section is displayed under user profile
 + (BOOL)shouldShowAssociationsOnUserProfile;
+
+// Configures if the "+" button is displayed over feeds map
++ (BOOL)allowsAddingActionsFromMap;
+
+// Configures if the feeds/map is visible or not
 + (BOOL)shouldHideFeedsAndMap;
+
+// Configures if the numbers of user actions is displayed in the user profile
 + (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user;
+
+// Configures if the numbers of user associations is displayed in the user profile
 + (BOOL)shouldShowNumberOfUserAssociationsSection:(OTUser*)user;
+
+// Configures if the number of private circles are shown in the user profile
 + (BOOL)shouldShowNumberOfUserPrivateCirclesSection:(OTUser*)user;
+
+// Configires if the map heatzone overlay is added on map for a specific antourage/feed item description
 + (BOOL)shouldShowMapHeatzoneForEntourage:(OTEntourage*)entourage;
+
+// Configures if the user can close a specific feed item/group
 + (BOOL)supportsClosingFeedAction:(OTFeedItem*)item;
 
 @end

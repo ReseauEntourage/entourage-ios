@@ -496,14 +496,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
-+ (BOOL)isMVP {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
-    return NO;
-}
-
 + (BOOL)shouldShowIntroTutorial
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
@@ -543,11 +535,16 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (BOOL)shouldHideFeedsAndMap
 {
+    return NO;
+}
+
++ (BOOL)allowsAddingActionsFromMap
+{
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
+        return NO;
     }
     
-    return NO;
+    return IS_PRO_USER ? NO : YES;
 }
 
 + (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user
