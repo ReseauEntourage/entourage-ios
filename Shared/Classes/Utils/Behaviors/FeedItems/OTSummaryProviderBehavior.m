@@ -18,6 +18,7 @@
 #import "UIImageView+entourage.h"
 #import "OTAnnouncement.h"
 #import "NSDate+OTFormatter.h"
+#import "UIImage+processing.h"
 
 @interface OTSummaryProviderBehavior ()
 
@@ -51,6 +52,7 @@
     
     if (self.lblDescription)
         [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+    
     if (self.txtFeedItemDescription)
         self.txtFeedItemDescription.text = [uiDelegate feedItemDescription];
     
@@ -63,20 +65,31 @@
     [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     
     NSString *source = [uiDelegate categoryIconSource];
+    UIImage *image = nil;
+    
     if ([feedItem isKindOfClass:[OTAnnouncement class]]) {
         NSURL *urlSource = [[NSURL alloc] initWithString:source];
         NSData *imageData = [NSData dataWithContentsOfURL:urlSource];
-         [self.imgCategory setImage:[UIImage imageWithData:imageData]];
+        image = [UIImage imageWithData:imageData];
     }
     else {
         if ([feedItem isConversation]) {
             [self.imgCategory setupFromUrl:self.feedItem.author.avatarUrl withPlaceholder:@"user"];
-            self.imgCategory.layer.cornerRadius = self.imgCategory.bounds.size.width / 2;
-            self.imgCategory.clipsToBounds = YES;
         } else {
-            [self.imgCategory setImage:[UIImage imageNamed:source]];
+            image = [UIImage imageNamed:source];
         }
     }
+    
+    if (image) {
+        UIImage *resizedImage = [image resizeTo:CGSizeMake(25, 25)];
+        [self.imgCategory setImage:resizedImage];
+        self.imgCategory.contentMode = UIViewContentModeCenter;
+    }
+    
+    self.imgCategory.clipsToBounds = YES;
+    self.imgCategory.layer.cornerRadius = self.imgCategory.bounds.size.width / 2;
+    self.imgCategory.layer.borderColor = UIColor.groupTableViewBackgroundColor.CGColor;
+    self.imgCategory.layer.borderWidth = 1;
 }
 
 - (void)clearConfiguration {
