@@ -7,7 +7,9 @@ platform :ios, '9.0'
 def sharedPods
     platform :ios, '9.0'
     
-    pod 'AFNetworking', '3.1.0'
+    #pod 'AFNetworking', '3.1.0'
+    
+    pod 'AFNetworking'
     pod 'SWRevealViewController', '2.3.0'
     pod 'MBProgressHUD', '0.8'
     pod 'IQKeyboardManager', '3.3.4'

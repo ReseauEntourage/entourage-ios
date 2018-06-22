@@ -1,22 +1,22 @@
 PODS:
-  - AFNetworking (3.1.0):
-    - AFNetworking/NSURLSession (= 3.1.0)
-    - AFNetworking/Reachability (= 3.1.0)
-    - AFNetworking/Security (= 3.1.0)
-    - AFNetworking/Serialization (= 3.1.0)
-    - AFNetworking/UIKit (= 3.1.0)
-  - AFNetworking/NSURLSession (3.1.0):
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.1.0)
-  - AFNetworking/Security (3.1.0)
-  - AFNetworking/Serialization (3.1.0)
-  - AFNetworking/UIKit (3.1.0):
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AWSCore (2.6.20)
-  - AWSS3 (2.6.20):
-    - AWSCore (= 2.6.20)
+  - AWSCore (2.6.22)
+  - AWSS3 (2.6.22):
+    - AWSCore (= 2.6.22)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -26,21 +26,21 @@ PODS:
   - Crashlytics (3.10.2):
     - Fabric (~> 1.7.7)
   - Fabric (1.7.7)
-  - FBSDKCoreKit (4.33.0):
+  - FBSDKCoreKit (4.34.0):
     - Bolts (~> 1.7)
-  - Firebase/Core (5.1.0):
+  - Firebase/Core (5.3.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.0.1)
-  - Firebase/CoreOnly (5.1.0):
-    - FirebaseCore (= 5.0.2)
+  - Firebase/CoreOnly (5.3.0):
+    - FirebaseCore (= 5.0.4)
   - FirebaseAnalytics (5.0.1):
     - FirebaseCore (~> 5.0)
     - FirebaseInstanceID (~> 3.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
-  - FirebaseCore (5.0.2):
+  - FirebaseCore (5.0.4):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseInstanceID (3.0.0):
+  - FirebaseInstanceID (3.1.1):
     - FirebaseCore (~> 5.0)
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
@@ -50,7 +50,7 @@ PODS:
   - kingpin (0.3.1)
   - libPhoneNumber-iOS (0.9.13)
   - MBProgressHUD (0.8)
-  - Mixpanel (3.3.2)
+  - Mixpanel (3.3.3)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -63,7 +63,7 @@ PODS:
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
-  - AFNetworking (= 3.1.0)
+  - AFNetworking
   - AWSS3 (~> 2.4)
   - Crashlytics (~> 3.9)
   - Fabric
@@ -109,24 +109,24 @@ SPEC REPOS:
     - SWRevealViewController
 
 SPEC CHECKSUMS:
-  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AWSCore: dd4d3d4fcafdce68a42025c3e9e45b026cf1f33b
-  AWSS3: 69589dec1883cdca872b4ddd1ea2ef814b0846fe
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AWSCore: faae134779f0f6e46a8d426c0ccc02e34466b785
+  AWSS3: 2b70463225a455ba26494f06346bddb74dedf73d
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Crashlytics: 0360624eea1c978a743feddb2fb1ef8b37fb7a0d
   Fabric: bda89e242bce1b7b8ab264248cf3407774ce0095
-  FBSDKCoreKit: 572b047a7e029bc44542bcf8a59414e7ff2b543e
-  Firebase: e08fb0795f35707aeb1d8a715c731c45bdf6fd56
+  FBSDKCoreKit: 0ff57f093b85c8c9d5aba697d3edf68a8960ce78
+  Firebase: 68afeeb05461db02d7c9e3215cda28068670f4aa
   FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
-  FirebaseCore: b81044df1044c0857a0737c6324678b72d4f7f00
-  FirebaseInstanceID: 83e0040351565df711a5db3d8ebe5ea21aca998a
+  FirebaseCore: 62f1b792a49bb9e8b4073f24606d2c93ffc352f0
+  FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
   JVFloatLabeledTextField: cfc44e3c4d493b2ed92ede8035e8e89c2912ba64
   kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
   libPhoneNumber-iOS: e444379ac18bbfbdefad571da735b2cd7e096caa
   MBProgressHUD: 8688c331cb64702283be37ab8d7d329cdd25f251
-  Mixpanel: be4de218d0ffaaae59b498078b2ecf2db1f8072c
+  Mixpanel: 3c3925c27f7a321d5978319a72f53f8f0885afc5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   OCMock: 721c11680ae2d65d67f40932777194daf7002781
   SimpleKeychain: e2485c28d82fcece35e9e41faeac42ebfe614815
@@ -134,6 +134,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: e68ab008a64302b72463a004930aa784e627e64a
+PODFILE CHECKSUM: a7b5dc757d12db65183b3ecb8c62bb0b457fef35
 
 COCOAPODS: 1.5.2

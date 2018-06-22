@@ -179,6 +179,10 @@
     if ([OTAppConfiguration shouldShowIntroTutorial]) {
         [OTAppState presentTutorialScreen];
     }
+    
+    if (![OTAppConfiguration allowsAddingActionsFromMap]) {
+        self.launcherButton.hidden = YES;
+    }
 }
 
 - (void)setup {

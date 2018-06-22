@@ -18,6 +18,7 @@
     self.summaryProvider.imgCategory = self.imgCategory;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
+    
 }
 
 @end
