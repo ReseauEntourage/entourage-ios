@@ -78,6 +78,7 @@ typedef NS_ENUM(NSInteger) {
 @property (nonatomic, strong) NSArray *associationRows;
 @property (nonatomic, strong) OTUser *currentUser;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior *mailSender;
+@property (nonatomic) UIView *startConversationView;
 
 @end
 
@@ -100,12 +101,6 @@ typedef NS_ENUM(NSInteger) {
     if (!userId) {
         userId = self.user.sid;
     }
-    
-//    if ([OTAppConfiguration supportsProfileEditing]) {
-//        if (userId.intValue == self.currentUser.sid.intValue) {
-//            [self.tapToEditBehavior initialize];
-//        }
-//    }
     
     self.tableView.delegate = self;
 }
@@ -198,6 +193,11 @@ typedef NS_ENUM(NSInteger) {
             self.user = user;
             [self configureTableSource];
             [self.tableView reloadData];
+            
+            if ([self shouldShowStartChatConversation]) {
+                [self setupConversationView];
+            }
+            
         } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_profile_error")];
         }];
@@ -415,7 +415,7 @@ typedef NS_ENUM(NSInteger) {
                              }];
 }
 
-- (BOOL)shouldShowStartChatConversationOnSection:(NSInteger)section {
+- (BOOL)shouldShowStartChatConversation {
     
     // Don't show this, if the conversation entry is missing from the user api response
     if (!self.user.conversation) {
@@ -428,12 +428,11 @@ typedef NS_ENUM(NSInteger) {
     }
     
     // Don't show this for the current logged in user
-    if (section == self.sections.count - 1 &&
-        self.currentUser.sid.integerValue != self.user.sid.integerValue) {
-        return YES;
+    if (self.currentUser.sid.integerValue == self.user.sid.integerValue) {
+        return NO;
     }
     
-    return NO;
+    return YES;
 }
 
 - (void)startChatWithSelectedUser {
@@ -452,6 +451,46 @@ typedef NS_ENUM(NSInteger) {
                                      NSLog(@"%@", error.localizedDescription);
                                  }
                              }];
+}
+
+- (void)setupConversationView {
+    CGFloat footerHeight = 64;
+    UIView *footer  = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - footerHeight,
+                                                               self.view.bounds.size.width, footerHeight)];
+    footer.backgroundColor = [UIColor whiteColor];
+    
+    UIButton *footerButton = [[UIButton alloc] initWithFrame:footer.frame];
+    footerButton.backgroundColor = [UIColor clearColor];
+    [footerButton addTarget:self action:@selector(startChatWithSelectedUser) forControlEvents:UIControlEventTouchUpInside];
+    [footer addSubview:footerButton];
+    [footerButton setExclusiveTouch:YES];
+    
+    CGFloat buttonWidth = 166;
+    CGFloat buttonHeight = 38;
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake((self.view.bounds.size.width - buttonWidth) / 2,
+                                                                  (footerHeight - buttonHeight) / 2,
+                                                                  buttonWidth, buttonHeight)];
+    button.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    button.layer.cornerRadius = 19;
+    [button setTitle:OTLocalizedString(@"start_chat_conversation") forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont fontWithName:@"SFUIText-Bold" size:14]];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(startChatWithSelectedUser) forControlEvents:UIControlEventTouchUpInside];
+    [footer addSubview:button];
+    [button setExclusiveTouch:YES];
+    
+    [footer.layer setShadowColor:[UIColor blackColor].CGColor];
+    [footer.layer setShadowOpacity:0.5];
+    [footer.layer setShadowRadius:4.0];
+    [footer.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+    
+    if (self.startConversationView) {
+        [self.startConversationView removeFromSuperview];
+    } else {
+        self.startConversationView = footer;
+    }
+    
+    [self.view addSubview:self.startConversationView];
 }
 
 #pragma mark - Table View
@@ -490,43 +529,14 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if ([self shouldShowStartChatConversationOnSection:section]) {
-        return 64.0f;
+    if ([self shouldShowStartChatConversation] && section == self.sections.count - 1) {
+        return 64;
     }
     return .5f;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (![self shouldShowStartChatConversationOnSection:section]) {
-        return [UIView new];
-    }
-    
-    UIView *footer  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 64)];
-    footer.backgroundColor = [UIColor whiteColor];
-    
-    UIButton *footerButton = [[UIButton alloc] initWithFrame:footer.frame];
-    footerButton.backgroundColor = [UIColor clearColor];
-    [footerButton addTarget:self action:@selector(startChatWithSelectedUser) forControlEvents:UIControlEventTouchUpInside];
-    [footer addSubview:footerButton];
-    [footerButton setExclusiveTouch:YES];
-    
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 166, 38)];
-    button.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
-    button.center = footer.center;
-    button.layer.cornerRadius = 19;
-    [button setTitle:OTLocalizedString(@"start_chat_conversation") forState:UIControlStateNormal];
-    [button.titleLabel setFont:[UIFont fontWithName:@"SFUIText-Bold" size:14]];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(startChatWithSelectedUser) forControlEvents:UIControlEventTouchUpInside];
-    [footer addSubview:button];
-    [button setExclusiveTouch:YES];
-    
-    [button.layer setShadowColor:[UIColor blackColor].CGColor];
-    [button.layer setShadowOpacity:0.5];
-    [button.layer setShadowRadius:4.0];
-    [button.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
-    
-    return footer;
+    return [UIView new];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

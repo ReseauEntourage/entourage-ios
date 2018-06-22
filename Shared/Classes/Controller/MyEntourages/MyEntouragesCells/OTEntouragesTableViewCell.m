@@ -37,6 +37,9 @@
     self.summaryProvider.lblTitle = self.lblTitle;
     self.summaryProvider.lblTimeDistance = self.lblTimeDistance;
     self.summaryProvider.imgCategory = self.imgCategory;
+    self.summaryProvider.showRoundedBorder = YES;
+    self.summaryProvider.showTimeAsUpdatedDate = YES;
+    self.summaryProvider.imgCategorySize = CGSizeMake(25, 25);
     
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];

@@ -144,8 +144,11 @@
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
     UITabBarItem *item = tabBarController.tabBar.items[MESSAGES_TAB_INDEX];
-    item.badgeColor = [UIColor redColor];
     
+    if (@available(iOS 10.0, *)) {
+        item.badgeColor = [UIColor redColor];
+    }
+
     NSString *badgeValue = value;
     
     if (!value ||

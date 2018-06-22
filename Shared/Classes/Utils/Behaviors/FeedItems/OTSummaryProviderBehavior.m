@@ -29,14 +29,31 @@
 
 @implementation OTSummaryProviderBehavior
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    [self setup];
+}
+
+- (void)setup {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageUpdated:) name:kNotificationEntourageChanged object:nil];
-    if(!self.fontSize)
+    
+    if (!self.fontSize) {
         self.fontSize = [NSNumber numberWithFloat:DEFAULT_DESCRIPTION_SIZE];
+    }
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"dd MMM";
+    self.imgCategorySize = CGSizeMake(20, 20);
 }
 
 - (void)configureWith:(OTFeedItem *)feedItem {
@@ -58,8 +75,12 @@
     
     if (self.lblTimeDistance) {
         double distance = [uiDelegate distance];
-//        self.lblTimeDistance.text = [OTLocalizedString(@"feed_item_time_distance") stringByAppendingString: [self getDistance:distance with:feedItem.creationDate]];
-        self.lblTimeDistance.text = [self formattedMessageTimeForFeedItem:feedItem distance:distance];
+        if (self.showTimeAsUpdatedDate) {
+            self.lblTimeDistance.text = [self formattedMessageTimeForFeedItem:feedItem distance:distance];
+        } else {
+            self.lblTimeDistance.text = [OTLocalizedString(@"feed_item_time_distance") stringByAppendingString:
+                                         [self getDistance:distance with:feedItem.creationDate]];
+        }
     }
     self.imgAssociation.hidden = feedItem.author.partner == nil;
     [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
@@ -71,9 +92,15 @@
         NSURL *urlSource = [[NSURL alloc] initWithString:source];
         NSData *imageData = [NSData dataWithContentsOfURL:urlSource];
         image = [UIImage imageWithData:imageData];
+        
+        if (!image) {
+            self.imgCategory.contentMode = UIViewContentModeCenter;
+            [self.imgCategory setupFromUrl:source withPlaceholder:nil];
+        }
     }
     else {
         if ([feedItem isConversation]) {
+            self.imgCategory.contentMode = UIViewContentModeCenter;
             [self.imgCategory setupFromUrl:self.feedItem.author.avatarUrl withPlaceholder:@"user"];
         } else {
             image = [UIImage imageNamed:source];
@@ -81,15 +108,19 @@
     }
     
     if (image) {
-        UIImage *resizedImage = [image resizeTo:CGSizeMake(25, 25)];
+        UIImage *resizedImage = [image resizeTo:self.imgCategorySize];
         [self.imgCategory setImage:resizedImage];
         self.imgCategory.contentMode = UIViewContentModeCenter;
     }
     
     self.imgCategory.clipsToBounds = YES;
     self.imgCategory.layer.cornerRadius = self.imgCategory.bounds.size.width / 2;
-    self.imgCategory.layer.borderColor = UIColor.groupTableViewBackgroundColor.CGColor;
-    self.imgCategory.layer.borderWidth = 1;
+    self.imgCategory.backgroundColor = [UIColor whiteColor];
+    
+    if (self.showRoundedBorder) {
+        self.imgCategory.layer.borderColor = UIColor.groupTableViewBackgroundColor.CGColor;
+        self.imgCategory.layer.borderWidth = 1;
+    }
 }
 
 - (void)clearConfiguration {
@@ -115,13 +146,13 @@
 }
 
 - (NSString *)formattedMessageTimeForFeedItem:(OTFeedItem*)feedItem distance:(CGFloat)distance {
-    if ([feedItem.creationDate isToday]) {
-        return [feedItem.creationDate toTimeString];
+    if ([feedItem.updatedDate isToday]) {
+        return [feedItem.updatedDate toTimeString];
         
-    } else if ([feedItem.creationDate isYesterday]) {
+    } else if ([feedItem.updatedDate isYesterday]) {
         return OTLocalizedString(@"yesterday");
     } else {
-        return [self.dateFormatter stringFromDate:feedItem.creationDate];
+        return [self.dateFormatter stringFromDate:feedItem.updatedDate];
     }
 }
 

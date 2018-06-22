@@ -544,7 +544,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         return NO;
     }
     
-    return IS_PRO_USER ? NO : YES;
+    return YES;
 }
 
 + (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user
