@@ -32,7 +32,14 @@ NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIde
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
     self.typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
     self.organizationLabel.text = [uiDelegate summary];
-    [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
+    
+    if ([OTAppConfiguration shouldShowCreatorImagesForNewsFeedItems]) {
+        [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
+    } else {
+        self.userProfileImageButton.hidden = YES;
+        self.imgAssociation.hidden = YES;
+    }
+    
     self.noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];
     [self.statusButton setupAsStatusButtonForFeedItem:item];
     

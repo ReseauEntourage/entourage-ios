@@ -56,42 +56,38 @@
     BOOL isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
     self.enabled = NO;
     NSString *title = @"";
+    UIColor *color = [OTAppAppearance iconColorForFeedItem:feedItem];
     
     if (isActive) {
         OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
         if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
             self.enabled = YES;
-            if([feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
+            if ([feedItem.status isEqualToString:TOUR_STATUS_ONGOING]) {
                 title = OTLocalizedString(@"ongoing");
-            else
+            }
+            else {
                 title = OTLocalizedString(@"join_active");
-            [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
+            }
         } else {
             if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
-                 self.enabled = YES;
+                self.enabled = YES;
                 title = OTLocalizedString(@"join_active");
-                [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
             } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
                 self.enabled = YES;
                 title = OTLocalizedString(@"join_pending");
-                [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
             } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
                 title = OTLocalizedString(@"join_rejected");
-                [self setTitleColor:[UIColor appTomatoColor] forState:UIControlStateNormal];
             } else {
-                title = OTLocalizedString(@"join_to_join");
-                [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
+                title = [NSString stringWithFormat:@"+ %@", OTLocalizedString(@"join_to_join")].uppercaseString;
             }
         }
     }
     else {
         title = OTLocalizedString(@"item_closed");
-        [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
     }
     
-    title = [NSString stringWithFormat:@"+ %@", title];
-    [self setTitle:[title uppercaseString] forState:UIControlStateNormal];
-    [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
+    [self setTitle:title forState:UIControlStateNormal];
+    [self setTitleColor:color forState:UIControlStateNormal];
 }
 
 #pragma mark - private methods

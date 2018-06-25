@@ -12,6 +12,8 @@
 + (UIColor*)pfpBlueColor;
 + (UIColor*)pfpGreenColor;
 + (UIColor*)pfpPurpleColor;
++ (UIColor*)pfpNeighborhoodColor;
++ (UIColor*)pfpPrivateCircleColor;
 
 + (UIColor*)pfpTableBackgroundColor;
 + (UIColor*)pfpGrayTextColor;

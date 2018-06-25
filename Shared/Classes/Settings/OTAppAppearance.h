@@ -37,6 +37,7 @@
 
 + (UIColor *)leftTagColor:(OTUser*)user;
 + (UIColor *)rightTagColor:(OTUser*)user;
++ (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem;
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem;

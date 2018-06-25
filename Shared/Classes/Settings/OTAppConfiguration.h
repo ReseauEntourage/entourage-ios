@@ -85,6 +85,9 @@
 // Configures if the feeds/map is visible or not
 + (BOOL)shouldHideFeedsAndMap;
 
+// Configures if the user profile image is displayed on right of the newws feed item rows
++ (BOOL)shouldShowCreatorImagesForNewsFeedItems;
+
 // Configures if the numbers of user actions is displayed in the user profile
 + (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user;
 
