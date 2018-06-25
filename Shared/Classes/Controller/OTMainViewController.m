@@ -61,7 +61,7 @@
 #import "OTNewsFeedsFilter.h"
 #import "OTStatusChangedBehavior.h"
 #import "OTEditEntourageBehavior.h"
-#import "UIBarButtonItem+Badge.h"
+//#import "UIBarButtonItem+Badge.h"
 #import "OTNewsFeedsSourceDelegate.h"
 #import "OTNewsFeedsSourceBehavior.h"
 #import "OTTourCreatorBehavior.h"
@@ -857,7 +857,7 @@
     [self showToursList:YES];
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotEndFilename];
-    [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:self];
+    [self performSegueWithIdentifier:@"x`x`" sender:self];
 }
 
 - (void)failedToStopTour {

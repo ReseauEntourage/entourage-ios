@@ -106,13 +106,13 @@ CGFloat const BadgePadding = 6;
 
 -(UILabel*) badge {
     UILabel* lbl = objc_getAssociatedObject(self, &UIBarButtonItem_badgeKey);
-    if(lbl==nil) {
-        lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        [self setBadge:lbl];
-        [self badgeInit];
-        [self.customView addSubview:lbl];
-        lbl.textAlignment = NSTextAlignmentCenter;
-    }
+//    if(lbl==nil) {
+//        lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+//        [self setBadge:lbl];
+//        [self badgeInit];
+//        [self.customView addSubview:lbl];
+//        lbl.textAlignment = NSTextAlignmentCenter;
+//    }
     return lbl;
 }
 

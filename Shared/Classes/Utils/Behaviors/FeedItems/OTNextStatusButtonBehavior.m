@@ -135,6 +135,7 @@
 - (void)doCancelJoinRequest {
     [OTLogger logEvent:@"ExitEntourageConfirm"];
     [SVProgressHUD show];
+    [OTAppState hideTabBar:NO];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [SVProgressHUD dismiss];
         [OTLogger logEvent:@"CancelJoinRequest"];
