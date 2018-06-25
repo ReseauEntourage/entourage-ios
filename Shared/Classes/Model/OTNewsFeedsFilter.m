@@ -82,7 +82,7 @@
             self.showContributionInfo = YES;
             self.showContributionSkill = YES;
             self.showContributionOther = YES;
-            self.timeframeInHours = 8 * 24;
+            self.timeframeInHours = 30 * 24;
         }
     }
     return self;
