@@ -13,8 +13,15 @@
 #import "OTFeedItemFactory.h"
 #import "OTFeedItem.h"
 #import "UIImage+processing.h"
-#import "entourage-Swift.h"
 #import <AFNetworking/UIButton+AFNetworking.h>
+#import "OTTour.h"
+#import "OTTourPoint.h"
+#import "OTUser.h"
+#import "OTConsts.h"
+#import "NSUserDefaults+OT.h"
+#import "UIColor+entourage.h"
+
+#import "entourage-Swift.h"
 
 @implementation OTAppAppearance
 
@@ -241,20 +248,26 @@
 }
 
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
-    NSString *itemType = OTLocalizedString(item.entourage_type).capitalizedString;
     
+    UIColor *typeColor = [OTAppAppearance iconColorForFeedItem:item];
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         if ([item isNeighborhood] || [item isPrivateCircle]) {
-            itemType = @"Voisinage animé";
+            return [[NSAttributedString alloc] initWithString:@"Voisinage"];
         } else if  ([item isConversation]) {
             return [[NSAttributedString alloc] initWithString:@""];
         }
     }
     
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formater_by"), itemType] attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
+    NSString *itemType = OTLocalizedString(item.entourage_type);
+    NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
+                                   NSForegroundColorAttributeName:typeColor};
+    
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString: itemType attributes:atttributtes];
+    NSAttributedString *byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_BOLD_DESCRIPTION size:size]}];
     
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
+    [typeByNameAttrString appendAttributedString:byAttrString];
     [typeByNameAttrString appendAttributedString:nameAttrString];
     
     return typeByNameAttrString;
@@ -270,6 +283,38 @@
     }
     
     return icon;
+}
+
++ (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem {
+    UIColor *color = [ApplicationTheme shared].backgroundThemeColor;
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([feedItem isNeighborhood] || [feedItem isPrivateCircle]) {
+            color = [UIColor pfpNeighborhoodColor];
+        } else if ([feedItem isPrivateCircle]) {
+            color = [UIColor pfpPrivateCircleColor];
+        }
+        return color;
+    }
+    
+    BOOL isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
+    color = [UIColor appGreyishColor];
+    if (isActive) {
+        OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+        if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
+            color = [UIColor appOrangeColor];
+        } else {
+            if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus] ||
+                [JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
+                color = [UIColor appOrangeColor];
+            } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
+                color = [UIColor appTomatoColor];
+            } else {
+                color = [UIColor appGreyishColor];
+            }
+        }
+    }
+    
+    return color;
 }
 
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem {

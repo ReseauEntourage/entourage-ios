@@ -60,8 +60,10 @@
     self.feedItem = feedItem;
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:feedItem] getUI];
     
-    if (self.lblTitle)
+    if (self.lblTitle) {
         self.lblTitle.text = [uiDelegate summary];
+    }
+    
     if (self.lblUserCount)
         self.lblUserCount.text = [feedItem.noPeople stringValue];
     if (self.btnAvatar)
@@ -78,8 +80,8 @@
         if (self.showTimeAsUpdatedDate) {
             self.lblTimeDistance.text = [self formattedMessageTimeForFeedItem:feedItem distance:distance];
         } else {
-            self.lblTimeDistance.text = [OTLocalizedString(@"feed_item_time_distance") stringByAppendingString:
-                                         [self getDistance:distance with:feedItem.creationDate]];
+            self.lblTimeDistance.text = [self formattedItemDistance:distance
+                                                       creationDate:feedItem.creationDate];
         }
     }
     self.imgAssociation.hidden = feedItem.author.partner == nil;
@@ -177,6 +179,15 @@
         return fromDate;
     NSString *distanceString = [OTSummaryProviderBehavior toDistance:distance];
     return [NSString stringWithFormat:OTLocalizedString(@"entourage_time_data"), fromDate, distanceString];
+}
+
+- (NSString *)formattedItemDistance:(double)distance creationDate:(NSDate *)creationDate {
+    NSString *fromDate = [creationDate sinceNow];
+    if (distance < 0) {
+        return fromDate;
+    }
+    NSString *distanceString = [OTSummaryProviderBehavior toDistance:distance];
+    return [NSString stringWithFormat:OTLocalizedString(@"entourage_distance"), distanceString];
 }
 
 + (int)getDistance:(double)from {

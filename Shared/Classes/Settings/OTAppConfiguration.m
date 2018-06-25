@@ -556,6 +556,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return [user.type isEqualToString:USER_TYPE_PRO];
 }
 
++ (BOOL)shouldShowCreatorImagesForNewsFeedItems {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 + (BOOL)shouldShowNumberOfUserAssociationsSection:(OTUser*)user
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {

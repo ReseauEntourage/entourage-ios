@@ -34,8 +34,8 @@ NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableVie
     self.descriptionLabel.text = [uiDelegate feedItemDescription];
     [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
     
-    NSString *statusTitle = [NSString stringWithFormat:@"+ %@", [uiDelegate feedItemActionButton]];
-    [self.statusTextButton setTitle:[statusTitle uppercaseString] forState:UIControlStateNormal];
+    NSString *statusTitle = [NSString stringWithFormat:@"%@", [uiDelegate feedItemActionButton]];
+    [self.statusTextButton setTitle:statusTitle forState:UIControlStateNormal];
     self.containerView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
