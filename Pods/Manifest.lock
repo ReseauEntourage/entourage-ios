@@ -45,7 +45,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
-  - IQKeyboardManager (3.3.4)
+  - IQKeyboardManager (6.0.4)
   - JVFloatLabeledTextField (1.2.1)
   - kingpin (0.3.1)
   - libPhoneNumber-iOS (0.9.13)
@@ -69,7 +69,7 @@ DEPENDENCIES:
   - Fabric
   - FBSDKCoreKit
   - Firebase/Core
-  - IQKeyboardManager (= 3.3.4)
+  - IQKeyboardManager
   - JVFloatLabeledTextField
   - kingpin (= 0.3.1)
   - libPhoneNumber-iOS
@@ -121,7 +121,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 62f1b792a49bb9e8b4073f24606d2c93ffc352f0
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
-  IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
+  IQKeyboardManager: 29514134ef0334a6fa33cf4eee11c36c064baeaf
   JVFloatLabeledTextField: cfc44e3c4d493b2ed92ede8035e8e89c2912ba64
   kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
   libPhoneNumber-iOS: e444379ac18bbfbdefad571da735b2cd7e096caa
@@ -134,6 +134,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: a7b5dc757d12db65183b3ecb8c62bb0b457fef35
+PODFILE CHECKSUM: 65b2cad50ac559eb08d0d8d543b1f6f864d1b9ec
 
 COCOAPODS: 1.5.2

@@ -28,8 +28,6 @@
 #import "OTAnnouncementCell.h"
 #import "entourage-Swift.h"
 
-#define TABLEVIEW_FOOTER_HEIGHT 15.0f
-
 #define LOAD_MORE_DRAG_OFFSET 50
 
 #define MAPVIEW_HEIGHT 224.f
@@ -38,7 +36,7 @@
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define FEEDS_REQUEST_DISTANCE_KM 10
 
-#define TABLEVIEW_FOOTER_HEIGHT 15.0f
+#define FEEDS_TABLEVIEW_FOOTER_HEIGHT 4.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
 #define SMALL_FOOTER_HEIGHT 126
 #define BIG_FOOTER_HEIGHT 300
@@ -187,11 +185,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return TABLEVIEW_FOOTER_HEIGHT;
+    return FEEDS_TABLEVIEW_FOOTER_HEIGHT;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, TABLEVIEW_FOOTER_HEIGHT)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, FEEDS_TABLEVIEW_FOOTER_HEIGHT)];
     footerView.backgroundColor = [UIColor clearColor];
     return footerView;
 }

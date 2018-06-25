@@ -123,6 +123,11 @@ typedef NS_ENUM(NSInteger) {
         else {
             [self showReportButton];
         }
+        
+        if ([self shouldShowStartChatConversation]) {
+            [self setupConversationView];
+        }
+        
         [self.tableView reloadData];
     }
     else {

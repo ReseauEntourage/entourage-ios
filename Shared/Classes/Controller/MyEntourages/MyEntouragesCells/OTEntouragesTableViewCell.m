@@ -23,16 +23,7 @@
     UIFont *unReadFontSmall = [UIFont fontWithName:@"SFUIText-Bold" size:14];
     
     UIColor *readColor = [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1];
-    
     UIFont *lightFont = [UIFont fontWithName:@"SFUIText-Light" size:14];
-    
-    NSString *lastMessage = [self getAuthorTextFor:item.lastMessage];
-    
-    if ([self.lblLastMessage.text length] > 0) {
-        self.lblLastMessage.text = lastMessage;
-    } else {
-        self.summaryProvider.lblDescription = self.lblLastMessage;
-    }
     
     self.summaryProvider.lblTitle = self.lblTitle;
     self.summaryProvider.lblTimeDistance = self.lblTimeDistance;
@@ -40,6 +31,13 @@
     self.summaryProvider.showRoundedBorder = YES;
     self.summaryProvider.showTimeAsUpdatedDate = YES;
     self.summaryProvider.imgCategorySize = CGSizeMake(25, 25);
+    
+    NSString *lastMessage = [self getAuthorTextFor:item.lastMessage];
+    if ([self.lblLastMessage.text length] > 0) {
+        self.lblLastMessage.text = lastMessage;
+    } else {
+        self.summaryProvider.lblDescription = self.lblLastMessage;
+    }
     
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
@@ -63,6 +61,12 @@
         
         self.lblTimeDistance.font = lightFont;
         self.lblTimeDistance.textColor = readColor;
+    }
+
+    if ([self.lblLastMessage.text length] > 0) {
+        self.lblLastMessage.text = lastMessage;
+    } else {
+        self.summaryProvider.lblDescription = self.lblLastMessage;
     }
 }
 

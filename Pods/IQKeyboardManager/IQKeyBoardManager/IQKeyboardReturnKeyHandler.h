@@ -1,7 +1,7 @@
 //
-//  IQKeyboardReturnKeyHandler.h
+// IQKeyboardReturnKeyHandler.h
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,14 +26,10 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSObjCRuntime.h>
 
-#import <UIKit/UITextField.h>
-#import <UIKit/UITextView.h>
+#import <UIKit/UITextInputTraits.h>
 
-#if !(__has_feature(objc_instancetype))
-    #define instancetype id
-#endif
-
-@class UITextField,UIView, UIViewController;
+@class UITextField, UIView, UIViewController;
+@protocol UITextFieldDelegate, UITextViewDelegate;
 
 /**
  Manages the return key to work like next/done in a view hierarchy.
@@ -73,14 +69,14 @@
 ///----------------------------------------------
 
 /**
- Should pass UITextField/UITextView intance. Assign textFieldView delegate to self, change it's returnKeyType.
+ Should pass UITextField/UITextView instance. Assign textFieldView delegate to self, change it's returnKeyType.
  
  @param textFieldView UITextField/UITextView object to register.
  */
 -(void)addTextFieldView:(nonnull UIView*)textFieldView;
 
 /**
- Should pass UITextField/UITextView intance. Restore it's textFieldView delegate and it's returnKeyType.
+ Should pass UITextField/UITextView instance. Restore it's textFieldView delegate and it's returnKeyType.
 
  @param textFieldView UITextField/UITextView object to unregister.
  */
@@ -89,14 +85,14 @@
 /**
  Add all the UITextField/UITextView responderView's.
  
- @param UIView object to register all it's responder subviews.
+ @param view object to register all it's responder subviews.
  */
 -(void)addResponderFromView:(nonnull UIView*)view;
 
 /**
  Remove all the UITextField/UITextView responderView's.
  
- @param UIView object to unregister all it's responder subviews.
+ @param view object to unregister all it's responder subviews.
  */
 -(void)removeResponderFromView:(nonnull UIView*)view;
 

@@ -35,8 +35,8 @@ NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIde
     [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
     self.noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];
     [self.statusButton setupAsStatusButtonForFeedItem:item];
+    
     [self.statusTextButton setupAsStatusTextButtonForFeedItem:item];
-    [self.statusLineMarker setBackgroundColor:self.statusTextButton.currentTitleColor];
     self.unreadCountText.hidden = item.unreadMessageCount.intValue == 0;
     self.unreadCountText.text = item.unreadMessageCount.stringValue;
 }

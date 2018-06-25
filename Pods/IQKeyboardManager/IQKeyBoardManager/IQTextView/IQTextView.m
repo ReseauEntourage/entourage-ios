@@ -1,7 +1,7 @@
 //
-//  IQTextView.m
+// IQTextView.m
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,30 +23,21 @@
 
 #import "IQTextView.h"
 
+#import <UIKit/NSTextContainer.h>
 #import <UIKit/UILabel.h>
 #import <UIKit/UINibLoading.h>
 
-#if !(__has_feature(objc_instancetype))
-    #define instancetype id
-#endif
-
-//Xcode 4.5 compatibility check
-#ifndef NSFoundationVersionNumber_iOS_5_1
-    #define NSLineBreakByWordWrapping UILineBreakModeWordWrap
-#endif
-
 @interface IQTextView ()
 
--(void)refreshPlaceholder;
+@property(nonatomic, strong) UILabel *placeholderLabel;
 
 @end
 
 @implementation IQTextView
-{
-    UILabel *placeHolderLabel;
-}
 
 @synthesize placeholder = _placeholder;
+@synthesize placeholderLabel = _placeholderLabel;
+@synthesize placeholderTextColor = _placeholderTextColor;
 
 -(void)initialize
 {
@@ -55,6 +46,8 @@
 
 -(void)dealloc
 {
+    [_placeholderLabel removeFromSuperview];
+    _placeholderLabel = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -77,11 +70,11 @@
 {
     if([[self text] length])
     {
-        [placeHolderLabel setAlpha:0];
+        [_placeholderLabel setAlpha:0];
     }
     else
     {
-        [placeHolderLabel setAlpha:1];
+        [_placeholderLabel setAlpha:1];
     }
     
     [self setNeedsLayout];
@@ -97,7 +90,16 @@
 -(void)setFont:(UIFont *)font
 {
     [super setFont:font];
-    placeHolderLabel.font = self.font;
+    self.placeholderLabel.font = self.font;
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
+
+-(void)setTextAlignment:(NSTextAlignment)textAlignment
+{
+    [super setTextAlignment:textAlignment];
+    self.placeholderLabel.textAlignment = textAlignment;
     
     [self setNeedsLayout];
     [self layoutIfNeeded];
@@ -107,29 +109,46 @@
 {
     [super layoutSubviews];
 
-    [placeHolderLabel sizeToFit];
-    placeHolderLabel.frame = CGRectMake(8, 8, CGRectGetWidth(self.frame)-16, CGRectGetHeight(placeHolderLabel.frame));
+    CGFloat offsetLeft = self.textContainerInset.left + self.textContainer.lineFragmentPadding;
+    CGFloat offsetRight = self.textContainerInset.right + self.textContainer.lineFragmentPadding;
+    CGFloat offsetTop = self.textContainerInset.top;
+    CGFloat offsetBottom = self.textContainerInset.bottom;
+
+    CGSize expectedSize = [self.placeholderLabel sizeThatFits:CGSizeMake(CGRectGetWidth(self.frame)-offsetLeft-offsetRight, CGRectGetHeight(self.frame)-offsetTop-offsetBottom)];
+    self.placeholderLabel.frame = CGRectMake(offsetLeft, offsetTop, expectedSize.width, expectedSize.height);
 }
 
 -(void)setPlaceholder:(NSString *)placeholder
 {
     _placeholder = placeholder;
     
-    if ( placeHolderLabel == nil )
+    self.placeholderLabel.text = placeholder;
+    [self refreshPlaceholder];
+}
+
+-(void)setPlaceholderTextColor:(UIColor*)placeholderTextColor
+{
+    _placeholderTextColor = placeholderTextColor;
+    self.placeholderLabel.textColor = placeholderTextColor;
+}
+
+-(UILabel*)placeholderLabel
+{
+    if (_placeholderLabel == nil)
     {
-        placeHolderLabel = [[UILabel alloc] init];
-        placeHolderLabel.autoresizingMask = (UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight);
-        placeHolderLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        placeHolderLabel.numberOfLines = 0;
-        placeHolderLabel.font = self.font;
-        placeHolderLabel.backgroundColor = [UIColor clearColor];
-        placeHolderLabel.textColor = [UIColor colorWithWhite:0.7 alpha:1.0];
-        placeHolderLabel.alpha = 0;
-        [self addSubview:placeHolderLabel];
+        _placeholderLabel = [[UILabel alloc] init];
+        _placeholderLabel.autoresizingMask = (UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight);
+        _placeholderLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        _placeholderLabel.numberOfLines = 0;
+        _placeholderLabel.font = self.font;
+        _placeholderLabel.textAlignment = self.textAlignment;
+        _placeholderLabel.backgroundColor = [UIColor clearColor];
+        _placeholderLabel.textColor = [UIColor colorWithWhite:0.7 alpha:1.0];
+        _placeholderLabel.alpha = 0;
+        [self addSubview:_placeholderLabel];
     }
     
-    placeHolderLabel.text = self.placeholder;
-    [self refreshPlaceholder];
+    return _placeholderLabel;
 }
 
 //When any text changes on textField, the delegate getter is called. At this time we refresh the textView's placeholder

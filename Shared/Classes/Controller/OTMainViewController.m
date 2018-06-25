@@ -405,9 +405,7 @@
     [self feedMapWithFeedItems];
     self.showSolidarityGuideView.hidden = !OTAppConfiguration.supportsSolidarityGuideFunctionality;
     
-    if (self.isTourListDisplayed) {
-        [self showToursList:YES];
-    }
+    [self showToursList:YES];
     [self configureNavigationBar];
 }
 
@@ -474,10 +472,6 @@
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:[self rightBarButtonTitle] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction)];
     self.navigationItem.rightBarButtonItem = rightButton;
-    
-    //[self createMenuButton];
-    //[self setupChatsButtonWithTarget:self andSelector:@selector(showEntourages)];
-    //[self setupLogoImageWithTarget:self andSelector:@selector(logoTapped)];
 }
 
 - (void)rightBarButtonAction
@@ -1190,8 +1184,6 @@
     
     self.isTourListDisplayed = YES;
     
-    //self.customSegmentedBehavior.selectedIndex = 1;
-    
     if (animated) {
         [UIView animateWithDuration:0.2 animations:^(void) {
             CGRect mapFrame = self.mapView.frame;
@@ -1221,12 +1213,13 @@
         [OTLogger logEvent:@"Screen06_2MapView"];
         [self.showSolidarityGuideView setHidden: !OTAppConfiguration.supportsSolidarityGuideFunctionality];
     }
+    
     if (self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0) {
         [self.noDataBehavior showNoData];
     }
     self.nouveauxFeedItemsButton.hidden = YES;
     
-    if (self.toursMapDelegate.isActive) {
+    if (self.toursMapDelegate.isActive || self.guideMapDelegate.isActive) {
         self.isTourListDisplayed = NO;
     }
     
@@ -1255,6 +1248,7 @@
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
 
     self.isTourListDisplayed = NO;
+    
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.5 animations:^(void) {
         self.launcherButton.hidden = YES;

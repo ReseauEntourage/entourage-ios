@@ -1,7 +1,7 @@
 //
-//  IQUIViewController+Additions.m
+// IQUIViewController+Additions.m
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "IQUIViewController+Additions.h"
+#import <UIKit/NSLayoutConstraint.h>
 #import <objc/runtime.h>
 
 @implementation UIViewController (Additions)

@@ -80,7 +80,8 @@
     [self configureTitleView];
     [self setupToolbarButtons];
     [self reloadMessages];
-    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
+    
+    //[[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
     
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem]
