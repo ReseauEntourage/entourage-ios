@@ -68,6 +68,7 @@
 - (void)closeTour {
     self.tour.status = FEEDITEM_STATUS_CLOSED;
     self.tour.endTime = [NSDate date];
+    
     [[OTTourService new]
         closeTour:self.tour
         withSuccess:^(OTTour *closedTour) {
@@ -76,12 +77,14 @@
                 [self.delegate tourSent:self.tour];
             [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
             [[NSUserDefaults standardUserDefaults] setTourPoints:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
+
+            [self dismissAction];
         } failure:^(NSError *error) {
             [SVProgressHUD showErrorWithStatus: OTLocalizedString(@"tour_close_error")];
             if ([self.delegate respondsToSelector:@selector(tourCloseError)])
                 [self.delegate tourCloseError];
-            [self dismissViewControllerAnimated:YES completion:nil];
+
+            [self dismissAction];
             NSLog(@"%@",[error localizedDescription]);
         }];
 }
@@ -89,12 +92,17 @@
 /**************************************************************************************************/
 #pragma mark - Actions
 
+- (void)dismissAction {
+    [OTAppState hideTabBar:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)resumeTour:(id)sender {
     [OTLogger logEvent:@"TourRestart"];
     if ([self.delegate respondsToSelector:@selector(resumeTour)]) {
         [self.delegate resumeTour];
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissAction];
 }
 
 - (IBAction)finishTour:(id)sender {

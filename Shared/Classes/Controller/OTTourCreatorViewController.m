@@ -78,13 +78,16 @@
 }
 
 - (IBAction)dismissTourCreatpr:(id)sender {
+    [OTAppState hideTabBar:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)viewDidTap:(UITapGestureRecognizer *)recognizer {
     CGPoint point = [recognizer locationInView:self.view];
-    if(point.y < self.contentView.frame.origin.y)
+    if (point.y < self.contentView.frame.origin.y) {
+        [OTAppState hideTabBar:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end

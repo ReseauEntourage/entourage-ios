@@ -103,7 +103,7 @@
     else {
         if ([feedItem isConversation]) {
             self.imgCategory.contentMode = UIViewContentModeCenter;
-            [self.imgCategory setupFromUrl:self.feedItem.author.avatarUrl withPlaceholder:@"user"];
+            [self.imgCategory setupFromUrl:self.feedItem.author.avatarUrl withPlaceholder:@"userSmall"];
         } else {
             image = [UIImage imageNamed:source];
         }
