@@ -1,7 +1,7 @@
 //
-//  UIWindow+Hierarchy.h
+// IQUIScrollView+Additions.h
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,28 +21,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIWindow.h>
+#import <UIKit/UIScrollView.h>
 
-@class UIViewController;
 
-/**
- UIWindow hierarchy category.
- */
-@interface UIWindow (IQ_UIWindow_Hierarchy)
-
-///----------------------
-/// @name viewControllers
-///----------------------
+@interface UIScrollView (Additions)
 
 /**
- Returns the current Top Most ViewController in hierarchy.
+ If YES, then scrollview will ignore scrolling (simply not scroll it) for adjusting textfield position. Default is NO.
  */
-@property (nullable, nonatomic, readonly, strong) UIViewController *topMostController;
+@property(nonatomic, assign) BOOL shouldIgnoreScrollingAdjustment;
 
 /**
- Returns the topViewController in stack of topMostController.
+ Restore scrollViewContentOffset when resigning from scrollView. Default is NO.
  */
-@property (nullable, nonatomic, readonly, strong) UIViewController *currentViewController;
+@property(nonatomic, assign) BOOL shouldRestoreScrollViewContentOffset;
 
 
 @end

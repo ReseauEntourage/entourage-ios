@@ -53,39 +53,45 @@
 }
 
 - (void)setupAsStatusTextButtonForFeedItem:(OTFeedItem *)feedItem {
-    bool isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
+    BOOL isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
     self.enabled = NO;
-    if(isActive) {
+    NSString *title = @"";
+    
+    if (isActive) {
         OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
         if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
             self.enabled = YES;
             if([feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
-                [self setTitle:OTLocalizedString(@"ongoing") forState:UIControlStateNormal];
+                title = OTLocalizedString(@"ongoing");
             else
-                [self setTitle:OTLocalizedString(@"join_active") forState:UIControlStateNormal];
+                title = OTLocalizedString(@"join_active");
             [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
         } else {
             if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
                  self.enabled = YES;
-                [self setTitle:OTLocalizedString(@"join_active") forState:UIControlStateNormal];
+                title = OTLocalizedString(@"join_active");
                 [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
             } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
                 self.enabled = YES;
-                [self setTitle:OTLocalizedString(@"join_pending") forState:UIControlStateNormal];
+                title = OTLocalizedString(@"join_pending");
                 [self setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
             } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
-                [self setTitle:OTLocalizedString(@"join_rejected") forState:UIControlStateNormal];
+                title = OTLocalizedString(@"join_rejected");
                 [self setTitleColor:[UIColor appTomatoColor] forState:UIControlStateNormal];
             } else {
-                [self setTitle:OTLocalizedString(@"join_to_join") forState:UIControlStateNormal];
+                title = OTLocalizedString(@"join_to_join");
                 [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
             }
         }
     }
     else {
-        [self setTitle:OTLocalizedString(@"item_closed") forState:UIControlStateNormal];
+        title = OTLocalizedString(@"item_closed");
         [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
     }
+    
+    title = [NSString stringWithFormat:@"+ %@", title];
+    [self setTitle:[title uppercaseString] forState:UIControlStateNormal];
+    [self setTitleColor:[UIColor appGreyishColor] forState:UIControlStateNormal];
 }
 
 #pragma mark - private methods

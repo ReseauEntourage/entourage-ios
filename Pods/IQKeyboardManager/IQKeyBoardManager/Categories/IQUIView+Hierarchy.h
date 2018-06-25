@@ -1,7 +1,7 @@
 //
-//  UIView+Hierarchy.h
+// IQUIView+Hierarchy.h
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,12 @@
 #import <UIKit/UIView.h>
 #import "IQKeyboardManagerConstants.h"
 
-@class UICollectionView, UIScrollView, UITableView, NSArray;
+@class UICollectionView, UIScrollView, UITableView, UISearchBar, NSArray;
 
 /**
  UIView hierarchy category.
  */
 @interface UIView (IQ_UIView_Hierarchy)
-
-///------------------------------
-/// @name canBecomeFirstResponder
-///------------------------------
-
-/**
- Returns YES if IQKeyboardManager asking for `canBecomeFirstResponder. Useful when doing custom work in `textFieldShouldBeginEditing:` delegate.
- */
-@property (nonatomic, readonly) BOOL isAskingCanBecomeFirstResponder;
 
 ///----------------------
 /// @name viewControllers
@@ -47,12 +38,17 @@
 /**
  Returns the UIViewController object that manages the receiver.
  */
-@property (nullable, nonatomic, readonly, strong) UIViewController *viewController;
+@property (nullable, nonatomic, readonly, strong) UIViewController *viewContainingController;
 
 /**
  Returns the topMost UIViewController object in hierarchy.
  */
 @property (nullable, nonatomic, readonly, strong) UIViewController *topMostController;
+
+/**
+ Returns the UIViewController object that is actually the parent of this object. Most of the time it's the viewController object which actually contains it, but result may be different if it's viewController is added as childViewController of another viewController.
+ */
+@property (nullable, nonatomic, readonly, strong) UIViewController *parentContainerViewController;
 
 ///-----------------------------------
 /// @name Superviews/Subviews/Siglings
@@ -78,9 +74,9 @@
 ///-------------------------
 
 /**
- Returns YES if the receiver object is UISearchBarTextField, otherwise return NO.
+ Returns searchBar if receiver object is UISearchBarTextField, otherwise return nil.
  */
-@property (nonatomic, getter=isSearchBarTextField, readonly) BOOL searchBarTextField;
+@property (nullable, nonatomic, readonly) UISearchBar *searchBar;
 
 /**
  Returns YES if the receiver object is UIAlertSheetTextField, otherwise return NO.

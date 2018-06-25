@@ -53,7 +53,7 @@
     }
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"dd MMM";
-    self.imgCategorySize = CGSizeMake(20, 20);
+    self.imgCategorySize = CGSizeMake(18, 18);
 }
 
 - (void)configureWith:(OTFeedItem *)feedItem {

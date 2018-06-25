@@ -300,6 +300,7 @@ typedef NS_ENUM(NSInteger) {
                 NSString *title = indexPath.row == 1 ? OTLocalizedString(@"firstName") : OTLocalizedString(@"lastName");
                 NSString *text = indexPath.row == 1 ? self.user.firstName : self.user.lastName;
                 UITextField *textField = indexPath.row == 1 ? self.firstNameTextField : self.lastNameTextField;
+                textField.tintColor = [UIColor grayColor];
                 [self setupInfoCell:cell withTitle:title withTextField:textField andText:text];
             }
             break;
@@ -455,7 +456,7 @@ typedef NS_ENUM(NSInteger) {
     UITextField *nameTextField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
     nameTextField.text = text;
     nameTextField.textColor = [ApplicationTheme shared].backgroundThemeColor;
-    nameTextField.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    nameTextField.tintColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
 - (void)setupPasswordCell:(UITableViewCell *)cell {

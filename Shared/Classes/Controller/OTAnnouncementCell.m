@@ -28,11 +28,14 @@ NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableVie
     summaryBehavior.imgAssociation = self.imgAssociation;
     summaryBehavior.imgCategory = self.iconImage;
     [summaryBehavior configureWith:item];
+    
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
     self.titleLabel.text = [uiDelegate summary];
     self.descriptionLabel.text = [uiDelegate feedItemDescription];
     [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
-    [self.statusTextButton setTitle:[uiDelegate feedItemActionButton] forState:UIControlStateNormal];
+    
+    NSString *statusTitle = [NSString stringWithFormat:@"+ %@", [uiDelegate feedItemActionButton]];
+    [self.statusTextButton setTitle:[statusTitle uppercaseString] forState:UIControlStateNormal];
     self.containerView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 

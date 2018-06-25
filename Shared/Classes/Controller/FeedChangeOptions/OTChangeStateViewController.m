@@ -58,26 +58,32 @@
     [self.shareBtn addTarget:self.shareItem action:@selector(sharePublic:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
+    
+    [OTAppState hideTabBar:YES];
 }
 
 - (IBAction)doQuitter {
+    [OTAppState hideTabBar:NO];
     [OTLogger logEvent:@"CloseEntourageConfirm"];
     [SVProgressHUD show];
     [self performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
 }
 
 - (IBAction)close:(id)sender {
+    [OTAppState hideTabBar:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)edit:(id)sender {
     [OTLogger logEvent:@"EditEntourageConfirm"];
+    [OTAppState hideTabBar:NO];
     [self dismissViewControllerAnimated:YES completion:^{
         [self.editEntourageBehavior doEdit:(OTEntourage *)self.feedItem];
     }];
 }
 
 - (IBAction)signalEntourage:(id)sender {
+    [OTAppState hideTabBar:NO];
     if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
         [self.singalEntourageBehavior sendMailFor:(OTEntourage *)self.feedItem];
     }
