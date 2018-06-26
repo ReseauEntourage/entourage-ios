@@ -883,6 +883,7 @@
 #pragma mark - OTTourCreatorDelegate
 
 - (void)createTour:(NSString*)tourType {
+    [OTAppState hideTabBar:NO];
     [self dismissViewControllerAnimated:NO completion:nil];
     [self zoomToCurrentLocation:nil];
     self.launcherButton.enabled = NO;
@@ -1290,6 +1291,7 @@
         OTConfirmationViewController *controller = (OTConfirmationViewController *)destinationViewController;
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.view.backgroundColor = [UIColor appModalBackgroundColor];
+        [OTAppState hideTabBar:YES];
         controller.delegate = self;
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [controller configureWithTour:self.tourCreatorBehavior.tour andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]];
@@ -1318,6 +1320,7 @@
         OTQuitFeedItemViewController *controller = (OTQuitFeedItemViewController *)destinationViewController;
         controller.view.backgroundColor = [UIColor appModalBackgroundColor];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        git[OTAppState hideTabBar:YES];
         controller.feedItem = self.selectedFeedItem;
         controller.feedItemQuitDelegate = self;
     }
@@ -1328,6 +1331,7 @@
         controller.category = [self categoryById:controller.poi.categoryId];
     }
     else if([segue.identifier isEqualToString:@"TourCreatorSegue"]) {
+        [OTAppState hideTabBar:YES];
         OTTourCreatorViewController *controller = (OTTourCreatorViewController *)destinationViewController;
         controller.view.backgroundColor = [UIColor clearColor];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];

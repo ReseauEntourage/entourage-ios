@@ -23,6 +23,7 @@
 }
 
 - (IBAction)dismissViewController {
+    [OTAppState hideTabBar:NO];
     [self dismissViewControllerAnimated:YES completion:^{
         NSLog(@"dismissed quit tour view controller");
     }];
