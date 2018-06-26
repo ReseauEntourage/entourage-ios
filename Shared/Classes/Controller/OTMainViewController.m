@@ -1320,7 +1320,7 @@
         OTQuitFeedItemViewController *controller = (OTQuitFeedItemViewController *)destinationViewController;
         controller.view.backgroundColor = [UIColor appModalBackgroundColor];
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        git[OTAppState hideTabBar:YES];
+        [OTAppState hideTabBar:YES];
         controller.feedItem = self.selectedFeedItem;
         controller.feedItemQuitDelegate = self;
     }
