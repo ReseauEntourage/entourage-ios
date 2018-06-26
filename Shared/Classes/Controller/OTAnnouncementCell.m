@@ -36,7 +36,8 @@ NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableVie
     
     NSString *statusTitle = [NSString stringWithFormat:@"%@", [uiDelegate feedItemActionButton]];
     [self.statusTextButton setTitle:statusTitle forState:UIControlStateNormal];
-    self.containerView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
+    self.containerView.backgroundColor = [OTAppAppearance announcementFeedContainerColor];
 }
 
 - (IBAction)doShowProfile {
