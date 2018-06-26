@@ -285,6 +285,14 @@
     return icon;
 }
 
++ (UIColor*)announcementFeedContainerColor {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return [UIColor pfpNeighborhoodColor];
+    }
+    
+    return [ApplicationTheme shared].backgroundThemeColor;
+}
+
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem {
     UIColor *color = [ApplicationTheme shared].backgroundThemeColor;
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {

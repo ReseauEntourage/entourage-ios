@@ -34,7 +34,7 @@
 + (NSString*)numberOfUserActionsValueTitle:(OTUser *)user;
 + (NSString*)userPrivateCirclesSectionTitle:(OTUser*)user;
 + (NSString*)userNeighborhoodsSectionTitle:(OTUser*)user;
-
++ (UIColor*)announcementFeedContainerColor;
 + (UIColor *)leftTagColor:(OTUser*)user;
 + (UIColor *)rightTagColor:(OTUser*)user;
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem;

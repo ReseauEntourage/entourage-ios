@@ -90,10 +90,12 @@
     NSString *source = [uiDelegate categoryIconSource];
     UIImage *image = nil;
     
+    BOOL isAnnouncement = NO;
     if ([feedItem isKindOfClass:[OTAnnouncement class]]) {
         NSURL *urlSource = [[NSURL alloc] initWithString:source];
         NSData *imageData = [NSData dataWithContentsOfURL:urlSource];
         image = [UIImage imageWithData:imageData];
+        isAnnouncement = YES;
         
         if (!image) {
             self.imgCategory.contentMode = UIViewContentModeCenter;
@@ -117,7 +119,12 @@
     
     self.imgCategory.clipsToBounds = YES;
     self.imgCategory.layer.cornerRadius = self.imgCategory.bounds.size.width / 2;
-    self.imgCategory.backgroundColor = [UIColor whiteColor];
+    
+    if (isAnnouncement) {
+        self.imgCategory.backgroundColor = [UIColor clearColor];
+    } else {
+        self.imgCategory.backgroundColor = [UIColor whiteColor];
+    }
     
     if (self.showRoundedBorder) {
         self.imgCategory.layer.borderColor = UIColor.groupTableViewBackgroundColor.CGColor;
