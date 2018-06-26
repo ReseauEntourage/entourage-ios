@@ -377,7 +377,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [UIBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
     
     UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].delegate.window.rootViewController;
-
+    
     if (tabBarController.tabBar) {
         UITabBar *currentTabBar = tabBarController.tabBar;
         for (UITabBarItem *item in currentTabBar.items) {

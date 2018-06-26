@@ -172,10 +172,18 @@
 }
 
 - (void)showController: (UIViewController *)controller {
-    OTSWRevealViewController *revealController = [self setupRevealController];
-    UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
-    [mainController setViewControllers:@[mainController.topViewController, controller]];
-    [self updateAppWindow:revealController];
+//    OTSWRevealViewController *revealController = [self setupRevealController];
+//    UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
+//    [mainController setViewControllers:@[mainController.topViewController, controller]];
+    
+    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBar];
+    UINavigationController *navigationController = (UINavigationController *)tabViewController.viewControllers[0];
+    
+    NSMutableArray *childViewControllers = [[NSMutableArray alloc] initWithArray:navigationController.viewControllers];
+    [childViewControllers addObject:controller];
+    
+    navigationController.viewControllers = childViewControllers;
+    [self updateAppWindow:tabViewController];
 }
 
 - (void)showControllerFromAnywhere:(UIViewController *)controller {
