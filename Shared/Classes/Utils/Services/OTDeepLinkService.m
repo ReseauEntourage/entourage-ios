@@ -172,10 +172,14 @@
 }
 
 - (void)showController: (UIViewController *)controller {
-    OTSWRevealViewController *revealController = [self setupRevealController];
-    UINavigationController *mainController = (UINavigationController *)revealController.frontViewController;
-    [mainController setViewControllers:@[mainController.topViewController, controller]];
-    [self updateAppWindow:revealController];
+    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBar];
+    UINavigationController *navigationController = (UINavigationController *)tabViewController.viewControllers[0];
+    
+    NSMutableArray *childViewControllers = [[NSMutableArray alloc] initWithArray:navigationController.viewControllers];
+    [childViewControllers addObject:controller];
+    
+    navigationController.viewControllers = childViewControllers;
+    [self updateAppWindow:tabViewController];
 }
 
 - (void)showControllerFromAnywhere:(UIViewController *)controller {
@@ -220,20 +224,10 @@
     }
 }
 
-- (OTSWRevealViewController *)setupRevealController {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    OTSWRevealViewController *revealController = [mainStoryboard instantiateInitialViewController];
-    UIViewController *menuController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MenuNavController"];
-    UINavigationController *mainController = [mainStoryboard instantiateViewControllerWithIdentifier:@"MainNavController"];
-    revealController.frontViewController = mainController;
-    revealController.rearViewController = menuController;
-    return revealController;
-}
-
-- (void)updateAppWindow:(UIViewController *)revealController {
+- (void)updateAppWindow:(UIViewController *)tabBarController {
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIWindow *window = [appDelegate window];
-    window.rootViewController = revealController;
+    window.rootViewController = tabBarController;
     [window makeKeyAndVisible];
 }
 
