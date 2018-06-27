@@ -94,6 +94,10 @@
 		A202E80C2085D0FE0058F32C /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8092085D0FD0058F32C /* OTAppDelegate.m */; };
 		A202E91120E2313200992C09 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A202E91020E2313200992C09 /* AppConfigurations.plist */; };
 		A202E91220E2313200992C09 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A202E91020E2313200992C09 /* AppConfigurations.plist */; };
+		A202E91820E3818D00992C09 /* OTPrivateCircleAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91720E3818D00992C09 /* OTPrivateCircleAnnotation.m */; };
+		A202E91920E3818D00992C09 /* OTPrivateCircleAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91720E3818D00992C09 /* OTPrivateCircleAnnotation.m */; };
+		A202E91C20E381D200992C09 /* OTNeighborhoodAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91B20E381D200992C09 /* OTNeighborhoodAnnotation.m */; };
+		A202E91D20E381D200992C09 /* OTNeighborhoodAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91B20E381D200992C09 /* OTNeighborhoodAnnotation.m */; };
 		A202EAC72085D2C70058F32C /* OTFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E80E2085D2C40058F32C /* OTFeedItem.m */; };
 		A202EAC82085D2C70058F32C /* OTFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E80E2085D2C40058F32C /* OTFeedItem.m */; };
 		A202EAC92085D2C70058F32C /* OTFeedItemFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E80F2085D2C40058F32C /* OTFeedItemFilter.m */; };
@@ -1523,11 +1527,15 @@
 		A202E9142085D2C50058F32C /* OTAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutViewController.m; sourceTree = "<group>"; };
 		A202E9152085D2C50058F32C /* OTCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCategoryViewController.h; sourceTree = "<group>"; };
 		A202E9162085D2C50058F32C /* OTUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUserViewController.h; sourceTree = "<group>"; };
+		A202E91620E3818D00992C09 /* OTPrivateCircleAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPrivateCircleAnnotation.h; sourceTree = "<group>"; };
 		A202E9172085D2C50058F32C /* UIViewController+menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+menu.m"; sourceTree = "<group>"; };
+		A202E91720E3818D00992C09 /* OTPrivateCircleAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPrivateCircleAnnotation.m; sourceTree = "<group>"; };
 		A202E9182085D2C50058F32C /* OTMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMessageViewController.m; sourceTree = "<group>"; };
 		A202E9192085D2C50058F32C /* OTAboutMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutMeViewController.m; sourceTree = "<group>"; };
 		A202E91A2085D2C50058F32C /* OTMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapView.m; sourceTree = "<group>"; };
+		A202E91A20E381D200992C09 /* OTNeighborhoodAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTNeighborhoodAnnotation.h; sourceTree = "<group>"; };
 		A202E91B2085D2C50058F32C /* OTSolidarityGuideFiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFiltersViewController.m; sourceTree = "<group>"; };
+		A202E91B20E381D200992C09 /* OTNeighborhoodAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTNeighborhoodAnnotation.m; sourceTree = "<group>"; };
 		A202E91C2085D2C50058F32C /* OTActivityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTActivityProvider.m; sourceTree = "<group>"; };
 		A202E91D2085D2C50058F32C /* OTBaseMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTBaseMapDelegate.m; sourceTree = "<group>"; };
 		A202E91E2085D2C50058F32C /* OTMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMainViewController.m; sourceTree = "<group>"; };
@@ -2974,6 +2982,10 @@
 				A202E9A52085D2C60058F32C /* OTCustomAnnotation.m */,
 				A24D969C20D1B0EC00C21FCC /* OTEntourageAnnotation.h */,
 				A24D969D20D1B0EC00C21FCC /* OTEntourageAnnotation.m */,
+				A202E91620E3818D00992C09 /* OTPrivateCircleAnnotation.h */,
+				A202E91720E3818D00992C09 /* OTPrivateCircleAnnotation.m */,
+				A202E91A20E381D200992C09 /* OTNeighborhoodAnnotation.h */,
+				A202E91B20E381D200992C09 /* OTNeighborhoodAnnotation.m */,
 				A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */,
 				A202E9A32085D2C60058F32C /* OTStartTourAnnotation.h */,
 				A202E9A42085D2C60058F32C /* OTStartTourAnnotationView.m */,
@@ -4352,6 +4364,7 @@
 				A202ED2F2085D2C80058F32C /* NSDate+ui.m in Sources */,
 				A202EADB2085D2C70058F32C /* OTSolidarityGuideFilterItem.m in Sources */,
 				A202EBF12085D2C80058F32C /* OTFilterCellTableViewCell.m in Sources */,
+				A202E91C20E381D200992C09 /* OTNeighborhoodAnnotation.m in Sources */,
 				A202E80B2085D0FE0058F32C /* OTAppDelegate.m in Sources */,
 				A202ED152085D2C80058F32C /* OTEditEncounterBehavior.m in Sources */,
 				A202EACD2085D2C70058F32C /* OTMenuItem.m in Sources */,
@@ -4400,6 +4413,7 @@
 				A202ECC92085D2C80058F32C /* OTFeedItemDetailsBehavior.m in Sources */,
 				A202EB692085D2C80058F32C /* OTDisclaimerViewController.m in Sources */,
 				A202EC512085D2C80058F32C /* OTCustomSegmentedBehavior.m in Sources */,
+				A202E91820E3818D00992C09 /* OTPrivateCircleAnnotation.m in Sources */,
 				A202EAEF2085D2C70058F32C /* OTUser.m in Sources */,
 				A296B92A2089DE4300F6AFBD /* main.m in Sources */,
 				96B658BE209A689200EB0398 /* LabelStyles.swift in Sources */,
@@ -4897,6 +4911,7 @@
 				A296B77720871CFC00F6AFBD /* OTEntourageDisclaimerViewController.m in Sources */,
 				A296B77820871CFC00F6AFBD /* OTCategoryEditCell.m in Sources */,
 				A296B77920871CFC00F6AFBD /* OTFeedsService.m in Sources */,
+				A202E91920E3818D00992C09 /* OTPrivateCircleAnnotation.m in Sources */,
 				A296B77A20871CFC00F6AFBD /* NSNotification+entourage.m in Sources */,
 				A296B77B20871CFC00F6AFBD /* OTFeedItemsFiltersTableDataSource.m in Sources */,
 				A296B77C20871CFC00F6AFBD /* UIStoryboard+entourage.m in Sources */,
@@ -5123,6 +5138,7 @@
 				A296B84920871CFC00F6AFBD /* OTInvitationsCollectionSource.m in Sources */,
 				A296B84A20871CFC00F6AFBD /* OTMainViewController.m in Sources */,
 				A296B84B20871CFC00F6AFBD /* OTFeedItemMessage.m in Sources */,
+				A202E91D20E381D200992C09 /* OTNeighborhoodAnnotation.m in Sources */,
 				A296B84C20871CFC00F6AFBD /* OTFeedItemTimeframeFilter.m in Sources */,
 				A296B84D20871CFC00F6AFBD /* OTEditEntourageDescViewController.m in Sources */,
 				A296B84E20871CFC00F6AFBD /* OTAssociationsSourceBehavior.m in Sources */,

@@ -599,6 +599,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
++ (BOOL)shouldShowPOIsOnFeedsMap {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 + (BOOL)supportsClosingEntourageGroups {
     // EMA-2052
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
