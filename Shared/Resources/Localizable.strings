@@ -87,6 +87,7 @@
 "about_suggestions" = "Suggérer des améliorations";
 "about_join" = "Devenir bénévole - ambassadeur";
 "about_appVersion" = "Version de l'application";
+"about_privacy_policy" = "Politique de Confidentialité";
 
 // Map Options
 "create_tour" = "Créer une maraude";

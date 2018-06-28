@@ -43,7 +43,7 @@ class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -89,6 +89,9 @@ class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableView
         case 1:
             cell.textLabel?.text = OTLocalisationService.getLocalizedValue(forKey: "about_cgu")
             break
+        case 2:
+            cell.textLabel?.text = OTLocalisationService.getLocalizedValue(forKey: "about_privacy_policy")
+            break
             
         default:
             break
@@ -102,11 +105,14 @@ class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableView
         
         switch indexPath.section {
         case 0:
-            self.openStoreProductWithiTunesItemIdentifier(identifier: "1388843838");
+            self.openStoreProductWithiTunesItemIdentifier(identifier: ITUNES_APP_ID);
             break
         case 1:
             let url = URL(string: "http://bit.ly/cgu_applivoisin-age")
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
+            break
+        case 2:
+            OTSafariService.launchPrivacyPolicyForm(in: self.navigationController)
             break
             
         default:
