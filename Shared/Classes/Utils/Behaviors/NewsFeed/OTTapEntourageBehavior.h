@@ -8,12 +8,15 @@
 
 #import "OTBehavior.h"
 #import <MapKit/MapKit.h>
+#import "OTEntourageAnnotation.h"
 
 @interface OTTapEntourageBehavior : OTBehavior
 
-@property (nonatomic, strong) IBOutlet MKMapView *mapView;
-@property (nonatomic, strong) MKCircle *tappedEntourage;
+@property (nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic) MKCircle *tappedEntourage;
+@property (nonatomic) OTEntourageAnnotation *tappedEntourageAnnotation;
 
-- (NSMutableArray *)hasTappedEntourage:(UITapGestureRecognizer *)recognizer;
+- (NSMutableArray *)hasTappedEntourageOverlay:(UITapGestureRecognizer *)recognizer;
+- (NSMutableArray *)hasTappedEntourageAnnotation:(UITapGestureRecognizer *)recognizer;
 
 @end

@@ -249,7 +249,7 @@
 
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
     
-    UIColor *typeColor = [OTAppAppearance iconColorForFeedItem:item];
+    UIColor *typeColor = [ApplicationTheme shared].backgroundThemeColor;
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         if ([item isNeighborhood] || [item isPrivateCircle]) {
             return [[NSAttributedString alloc] initWithString:@"Voisinage"];
@@ -357,6 +357,32 @@
     [titleView addSubview:title];
     
     return titleView;
+}
+
++ (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_join_group_title");
+    }
+    
+    if ([feedItem isKindOfClass:[OTEntourage class]]) {
+        return OTLocalizedString(@"join_entourage_lbl");
+    }
+    else {
+        return OTLocalizedString(@"join_tour_lbl");
+    }
+}
+
++ (NSString *)joinEntourageButtonTitleForFeedItem:(OTFeedItem*)feedItem {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_join_group_button");
+    }
+    
+    if ([feedItem isKindOfClass:[OTEntourage class]]) {
+        return OTLocalizedString(@"join_entourage_btn");
+    }
+    else {
+        return OTLocalizedString(@"join_tour_btn");
+    }
 }
 
 @end

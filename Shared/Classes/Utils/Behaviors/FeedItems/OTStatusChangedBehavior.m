@@ -36,6 +36,7 @@
         OTChangeStateViewController *controller = (OTChangeStateViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
         controller.delegate = self;
+        controller.shouldShowTabBarOnClose = self.shouldShowTabBarWhenFinished;
         controller.editEntourageBehavior = self.editEntourageBehavior;
     } else
         return NO;

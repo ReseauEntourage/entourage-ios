@@ -355,6 +355,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    [OTAppState hideTabBar:NO];
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     
     if (self.webview) {
@@ -363,6 +365,7 @@
     
     [self configureNavigationBar];
     [self checkIfShouldDisableFeedsAndMap];
+    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -378,19 +381,23 @@
     [self.tableView reloadData];
 }
 
-- (void)loadHeatzonesWithItems: (NSMutableArray *) itemsTapped {
+- (void)loadHeatzonesCollectionViewWithItems: (NSMutableArray *)itemsTapped {
     NSMutableArray *feeds = [[NSMutableArray alloc] init];
     for (CLLocation *coordinates in itemsTapped) {
         for (OTEntourage *item in self.newsFeedsSourceBehavior.feedItems) {
-            if([item isKindOfClass:[OTEntourage class]])
-                if(item.location.coordinate.latitude == coordinates.coordinate.latitude &&
-                   item.location.coordinate.longitude == coordinates.coordinate.longitude)
+            if ([item isKindOfClass:[OTEntourage class]])
+                if (item.location.coordinate.latitude == coordinates.coordinate.latitude &&
+                    item.location.coordinate.longitude == coordinates.coordinate.longitude) {
                         [feeds addObject:item];
+                }
         }
     }
+    
     [self.toggleCollectionView toggle:[feeds count] > 0 animated:YES];
-    if(feeds.count > 0)
+    
+    if (feeds.count > 0) {
         [self.heatzonesDataSource updateItems:feeds];
+    }
     [self.heatzonesCollectionDataSource refresh];
 }
 
@@ -846,7 +853,7 @@
 }
 
 - (void)itemsUpdated {
-    if ([OTAppConfiguration shouldShowPOIsOnFeedsMap]) {
+    if (![OTAppConfiguration shouldShowPOIsOnFeedsMap] && !self.isFirstLoad) {
         return;
     }
     
@@ -1000,12 +1007,17 @@
             [self showToursMap];
         }
         else {
-            if ([self.tapEntourage hasTappedEntourage:sender].count > 0) {
+            if ([self.tapEntourage hasTappedEntourageOverlay:sender].count > 0) {
                 [OTLogger logEvent:@"HeatzoneMapClick"];
                 [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.tapEntourage.tappedEntourage.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
                 if (!self.poisMapDelegate.isActive) {
-                    [self loadHeatzonesWithItems:[self.tapEntourage hasTappedEntourage:sender]];
+                    [self loadHeatzonesCollectionViewWithItems:[self.tapEntourage hasTappedEntourageOverlay:sender]];
                 }
+            }
+            else if ([self.tapEntourage hasTappedEntourageAnnotation:sender].count > 0) {
+                [OTLogger logEvent:@"AnnotationMapClick"];
+                [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.tapEntourage.tappedEntourageAnnotation.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
+                [self loadHeatzonesCollectionViewWithItems:[self.tapEntourage hasTappedEntourageAnnotation:sender]];
             }
             else {
                 [self.toggleCollectionView toggle:NO animated:YES];
@@ -1194,6 +1206,7 @@
         case FeedItemStateJoinPending:
             [OTLogger logEvent:@"PendingRequestOverlay"];
             [self.statusChangedBehavior configureWith:feedItem];
+            self.statusChangedBehavior.shouldShowTabBarWhenFinished = YES;
             [self.statusChangedBehavior startChangeStatus];
             break;
         case FeedItemStateOngoing:
@@ -1206,6 +1219,7 @@
         case FeedItemStateClosed:
             [OTLogger logEvent:@"OpenActiveCloseOverlay"];
             [self.statusChangedBehavior configureWith:feedItem];
+            self.statusChangedBehavior.shouldShowTabBarWhenFinished = YES;
             [self.statusChangedBehavior startChangeStatus];
             break;
         default:

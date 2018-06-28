@@ -17,6 +17,7 @@
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 @property (nonatomic, weak) IBOutlet OTEditEntourageBehavior *editEntourageBehavior;
 @property (nonatomic, weak) IBOutlet OTJoinBehavior *joinBehavior;
+@property (nonatomic) BOOL shouldShowTabBarWhenFinished;
 
 - (void)configureWith:(OTFeedItem *)feedItem;
 - (IBAction)startChangeStatus;
