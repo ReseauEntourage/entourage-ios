@@ -67,6 +67,11 @@
     [OTSafariService launchInAppBrowserWithUrl:feedbackUrl viewController:controller];
 }
 
++ (void)launchPrivacyPolicyFormInController:(UIViewController*)controller {
+    NSURL *url = [OTSafariService redirectUrlWithIdentifier:PFP_API_URL_PRIVACY_POLICY];
+    [OTSafariService launchInAppBrowserWithUrl:url viewController:controller];
+}
+
 + (NSURL*)redirectUrlWithIdentifier:(NSString*)identifier {
     NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, identifier, TOKEN];
     NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];

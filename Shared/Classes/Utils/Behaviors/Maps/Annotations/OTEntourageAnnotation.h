@@ -15,4 +15,6 @@ extern NSString *const kEntourageAnnotationIdentifier;
 @interface OTEntourageAnnotation : NSObject <MKAnnotation>
 - (id)initWithEntourage:(OTEntourage *)entourage;
 - (MKAnnotationView *)annotationView;
+- (UIImage*)annotationImage;
+- (UIImage*)annotationImageWithName:(NSString*)iconName;
 @end

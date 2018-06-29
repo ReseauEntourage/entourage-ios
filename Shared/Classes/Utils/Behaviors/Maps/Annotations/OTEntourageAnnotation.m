@@ -67,11 +67,15 @@ NSString *const kEntourageAnnotationIdentifier = @"OTEntourageAnnotationIdentifi
 }
 
 - (UIImage*)annotationImage {
-    CGSize imageSize = {40, 40};
     NSString *iconName = [OTAppAppearance iconNameForEntourageItem:self.entourage];
+    return [self annotationImageWithName:iconName];
+}
+
+- (UIImage*)annotationImageWithName:(NSString*)iconName {
+    CGSize imageSize = {40, 40};
     UIImage *icon = [UIImage imageNamed:iconName];
     UIImage *container = [UIImage imageWithColor:[UIColor whiteColor] andSize:imageSize];
-
+    
     CGFloat offset = (imageSize.width - icon.size.width) / 2;
     UIImage *image = [container drawImage:icon
                                    inRect:CGRectMake(offset, offset, icon.size.width, icon.size.height)];

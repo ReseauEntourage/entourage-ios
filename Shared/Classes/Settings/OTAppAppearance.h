@@ -41,4 +41,6 @@
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem;
++ (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem;
++ (NSString *)joinEntourageButtonTitleForFeedItem:(OTFeedItem*)feedItem;
 @end

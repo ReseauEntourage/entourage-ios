@@ -62,28 +62,34 @@
     [OTAppState hideTabBar:YES];
 }
 
+- (void)prepareForClosing {
+    if (self.shouldShowTabBarOnClose) {
+        [OTAppState hideTabBar:NO];
+    }
+}
+
 - (IBAction)doQuitter {
-    [OTAppState hideTabBar:NO];
+    [self prepareForClosing];
     [OTLogger logEvent:@"CloseEntourageConfirm"];
     [SVProgressHUD show];
     [self performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
 }
 
 - (IBAction)close:(id)sender {
-    [OTAppState hideTabBar:NO];
+    [self prepareForClosing];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)edit:(id)sender {
     [OTLogger logEvent:@"EditEntourageConfirm"];
-    [OTAppState hideTabBar:NO];
+    [self prepareForClosing];
     [self dismissViewControllerAnimated:YES completion:^{
         [self.editEntourageBehavior doEdit:(OTEntourage *)self.feedItem];
     }];
 }
 
 - (IBAction)signalEntourage:(id)sender {
-    [OTAppState hideTabBar:NO];
+    [self prepareForClosing];
     if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
         [self.singalEntourageBehavior sendMailFor:(OTEntourage *)self.feedItem];
     }

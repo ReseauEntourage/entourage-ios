@@ -56,6 +56,11 @@
     [self.toggleJoinViewBehavior toggle:self.statusBehavior.isJoinPossible];
     self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.dataSource.tableView.estimatedRowHeight = 1000;
+    
+    [self.toggleJoinViewBehavior.toggledView.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.toggleJoinViewBehavior.toggledView.layer setShadowOpacity:0.5];
+    [self.toggleJoinViewBehavior.toggledView.layer setShadowRadius:4.0];
+    [self.toggleJoinViewBehavior.toggledView.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
 
     [self configureTitleView];
     [self setupToolbarButtons];
@@ -75,6 +80,11 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTAppState hideTabBar:YES];
 }
 
 - (IBAction)showUserProfile:(id)sender {
@@ -181,14 +191,12 @@
 }
 
 - (void)setJoinLabelAndButtonForItem: (OTFeedItem *)feedItem {
-    if([feedItem isKindOfClass:[OTEntourage class]]) {
-        [self.lblJoin setText: OTLocalizedString(@"join_entourage_lbl")];
-        [self.btnJoin setTitle: OTLocalizedString(@"join_entourage_btn") forState:UIControlStateNormal];
-    }
-    else {
-        [self.lblJoin setText: OTLocalizedString(@"join_tour_lbl")];
-        [self.btnJoin setTitle: OTLocalizedString(@"join_tour_btn") forState:UIControlStateNormal];
-    }
+    
+    self.lblJoin.textColor = [ApplicationTheme shared].backgroundThemeColor;
+    self.btnJoin.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.btnJoin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.lblJoin setText: [OTAppAppearance joinEntourageLabelTitleForFeedItem:feedItem]];
+    [self.btnJoin setTitle: [OTAppAppearance joinEntourageButtonTitleForFeedItem:feedItem] forState:UIControlStateNormal];
 }
 
 @end

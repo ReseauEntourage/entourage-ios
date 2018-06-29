@@ -34,12 +34,16 @@
 + (id<OTFeedItemFactoryDelegate>)createFor:(OTFeedItem *)item {
     BOOL isEntourage = [item class] == [OTEntourage class];
     BOOL isAnnouncement = [item class] == [OTAnnouncement class];
-    if (isEntourage)
+   
+    if (isEntourage) {
         return [[OTEntourageFactory alloc] initWithEntourage:(OTEntourage *)item];
-    else if (isAnnouncement)
+    }
+    else if (isAnnouncement) {
         return [[OTAnnouncementFactory alloc] initWithAnnouncement:(OTAnnouncement *)item];
-    else
+    }
+    else {
         return [[OTTourFactory alloc] initWithTour:(OTTour *)item];
+    }
 }
 
 + (id<OTFeedItemFactoryDelegate>)createForType:(NSString *)feedItemType andId:(NSNumber *)feedItemId {

@@ -13,6 +13,7 @@
 + (void)launchInAppBrowserWithUrl:(NSURL*)url viewController:(UIViewController*)viewController;
 + (void)launchInAppBrowserWithUrlString:(NSString*)urlString viewController:(UIViewController*)viewController;
 + (void)launchFeedbackFormInController:(UIViewController*)controller;
++ (void)launchPrivacyPolicyFormInController:(UIViewController*)controller;
 
 + (NSURL*)redirectUrlWithIdentifier:(NSString*)identifier;
 @end

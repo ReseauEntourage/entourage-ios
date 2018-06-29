@@ -79,6 +79,8 @@ final class OTPfpMenuViewController: UIViewController {
         createMenuItems()
         tableView.register(OTItemTableViewCell.self, forCellReuseIdentifier: "ItemCellIdentifier")
         tableView.register(OTLogoutViewCell.self, forCellReuseIdentifier: "LogoutItemCellIdentifier")
+        
+        OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
     }
     
     private func customizeHeader() {

@@ -359,7 +359,9 @@ extern NSString *kUsers;
 - (void)entourageUsers:(OTEntourage *)entourage
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_TOUR_FEED_ITEM_USERS, kEntourages, entourage.uuid,  TOKEN];
+    NSString *format = @"%@/%@/users.json?context=group_feed&token=%@";
+    NSString *url = [NSString stringWithFormat:format, kEntourages, entourage.uuid, TOKEN];
+    
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
      andParameters:nil
@@ -367,8 +369,9 @@ extern NSString *kUsers;
      {
          NSDictionary *data = responseObject;
          NSArray *joiners = [data objectForKey:kUsers];
-         if (success)
+         if (success) {
              success([OTFeedItemJoiner arrayForWebservice:joiners]);
+         }
      }
      andFailure:^(NSError *error)
      {

@@ -19,6 +19,7 @@
 #import "OTAnnouncement.h"
 #import "NSDate+OTFormatter.h"
 #import "UIImage+processing.h"
+#import "UIImage+Fitting.h"
 
 @interface OTSummaryProviderBehavior ()
 
@@ -90,17 +91,12 @@
     NSString *source = [uiDelegate categoryIconSource];
     UIImage *image = nil;
     
-    BOOL isAnnouncement = NO;
     if ([feedItem isKindOfClass:[OTAnnouncement class]]) {
         NSURL *urlSource = [[NSURL alloc] initWithString:source];
         NSData *imageData = [NSData dataWithContentsOfURL:urlSource];
         image = [UIImage imageWithData:imageData];
-        isAnnouncement = YES;
-        
-        if (!image) {
-            self.imgCategory.contentMode = UIViewContentModeCenter;
-            [self.imgCategory setupFromUrl:source withPlaceholder:nil];
-        }
+        self.imgCategory.contentMode = UIViewContentModeScaleAspectFit;
+        self.imgCategory.backgroundColor = [UIColor clearColor];
     }
     else {
         if ([feedItem isConversation]) {
@@ -109,26 +105,19 @@
         } else {
             image = [UIImage imageNamed:source];
         }
+        self.imgCategory.backgroundColor = [UIColor whiteColor];
     }
     
     if (image) {
-        UIImage *resizedImage = [image resizeTo:self.imgCategorySize];
-        [self.imgCategory setImage:resizedImage];
-        self.imgCategory.contentMode = UIViewContentModeCenter;
-    }
-    
-    self.imgCategory.clipsToBounds = YES;
-    self.imgCategory.layer.cornerRadius = self.imgCategory.bounds.size.width / 2;
-    
-    if (isAnnouncement) {
-        self.imgCategory.backgroundColor = [UIColor clearColor];
-    } else {
-        self.imgCategory.backgroundColor = [UIColor whiteColor];
+        [self.imgCategory setImage:image];
     }
     
     if (self.showRoundedBorder) {
         self.imgCategory.layer.borderColor = UIColor.groupTableViewBackgroundColor.CGColor;
         self.imgCategory.layer.borderWidth = 1;
+        self.imgCategory.clipsToBounds = YES;
+        self.imgCategory.layer.cornerRadius = self.imgCategory.bounds.size.width / 2;
+        self.imgCategory.contentMode = UIViewContentModeCenter;
     }
 }
 

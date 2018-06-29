@@ -85,6 +85,11 @@
 // Configures if the feeds/map is visible or not
 + (BOOL)shouldHideFeedsAndMap;
 
+// Configures if the feed pois are displayed on feeds map
+// For Entourage app, the pois (solidarity guide items) are displayed only when the solidarity guide map is shown
+// For PFP app, the pois (private circles and neighbourhoods) are displayed always
++ (BOOL)shouldShowPOIsOnFeedsMap;
+
 // Configures if the user profile image is displayed on right of the newws feed item rows
 + (BOOL)shouldShowCreatorImagesForNewsFeedItems;
 
