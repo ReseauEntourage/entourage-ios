@@ -194,11 +194,14 @@
     return footerView;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     id item = self.items[indexPath.section];
     NSString *identifier = [self getCellIdentifier:item];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     [self configureCell:cell withItem:item];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 

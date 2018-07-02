@@ -178,7 +178,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pZ8-nN-6Oe">
-                                        <rect key="frame" x="8" y="15" width="367" height="36"/>
+                                        <rect key="frame" x="0.0" y="15" width="383" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="bGw-a7-UQh"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="jFI-kd-dpD"/>
@@ -195,11 +195,11 @@ Un mail récapitulatif te sera envoyé.</string>
                                     <constraint firstAttribute="trailing" secondItem="TOp-eS-Isc" secondAttribute="trailing" constant="64" id="20h-DS-5uX"/>
                                     <constraint firstAttribute="bottom" secondItem="36A-RS-KXm" secondAttribute="bottom" constant="41" id="EwY-TW-GNk"/>
                                     <constraint firstAttribute="height" constant="449" id="Juf-Bz-rUX"/>
-                                    <constraint firstItem="pZ8-nN-6Oe" firstAttribute="leading" secondItem="bbq-3L-gMS" secondAttribute="leading" constant="8" id="L9u-sI-mF2"/>
+                                    <constraint firstItem="pZ8-nN-6Oe" firstAttribute="leading" secondItem="bbq-3L-gMS" secondAttribute="leading" id="L9u-sI-mF2"/>
                                     <constraint firstItem="TOp-eS-Isc" firstAttribute="centerX" secondItem="kSd-1h-nk2" secondAttribute="centerX" id="VQj-DI-L78"/>
                                     <constraint firstItem="36A-RS-KXm" firstAttribute="leading" secondItem="bbq-3L-gMS" secondAttribute="leading" constant="64" id="VR7-q0-Suc"/>
                                     <constraint firstItem="0bc-tc-OS4" firstAttribute="top" secondItem="bbq-3L-gMS" secondAttribute="top" id="aLl-71-KIl"/>
-                                    <constraint firstAttribute="trailing" secondItem="pZ8-nN-6Oe" secondAttribute="trailing" constant="8" id="gRV-Y3-MDE"/>
+                                    <constraint firstAttribute="trailing" secondItem="pZ8-nN-6Oe" secondAttribute="trailing" id="gRV-Y3-MDE"/>
                                     <constraint firstItem="36A-RS-KXm" firstAttribute="centerX" secondItem="JYh-Fx-qS5" secondAttribute="centerX" id="igP-RA-2Du"/>
                                     <constraint firstItem="0bc-tc-OS4" firstAttribute="leading" secondItem="bbq-3L-gMS" secondAttribute="leading" id="jJI-pL-osN"/>
                                     <constraint firstAttribute="bottom" secondItem="TOp-eS-Isc" secondAttribute="bottom" constant="41" id="odd-wj-Ss6"/>
@@ -233,7 +233,7 @@ Un mail récapitulatif te sera envoyé.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zS4-YZ-2A0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="364" y="793"/>
+            <point key="canvasLocation" x="363.5" y="792.5"/>
         </scene>
     </scenes>
     <resources>

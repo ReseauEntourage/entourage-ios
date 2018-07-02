@@ -124,7 +124,8 @@
 - (void)updateBadge: (NSNotification *) notification {
     NSNumber *unreadCount = (NSNumber *)[notification.object objectForKey:kNotificationUpdateBadgeCountKey];
     NSNumber *feedId = (NSNumber *)[notification.object objectForKey:kNotificationUpdateBadgeFeedIdKey];
-    for(int i = 0; i<self.entouragesDataSource.items.count; i++){
+    
+    for (int i = 0; i<self.entouragesDataSource.items.count; i++){
         OTFeedItem *item = self.entouragesDataSource.items[i];
         if([item.uid isEqual:feedId]){
             item.unreadMessageCount = unreadCount;

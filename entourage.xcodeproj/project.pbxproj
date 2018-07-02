@@ -1192,6 +1192,8 @@
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
+		A2F50A1720EA295F009AB222 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F50A1620EA295F009AB222 /* UIColor+Expanded.m */; };
+		A2F50A1820EA295F009AB222 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F50A1620EA295F009AB222 /* UIColor+Expanded.m */; };
 		A2FCF5B620AC8563004604AC /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
 		A2FCF5C420AD4FF8004604AC /* PFPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */; };
 		A2FCF5C520AD4FF8004604AC /* PFPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */; };
@@ -2011,6 +2013,8 @@
 		A2E5FA0E20862E780099B989 /* UINavigationBar+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Appearance.h"; sourceTree = "<group>"; };
 		A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Appearance.m"; sourceTree = "<group>"; };
 		A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
+		A2F50A1520EA295E009AB222 /* UIColor+Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
+		A2F50A1620EA295F009AB222 /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
 		A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PFPAboutViewController.swift; sourceTree = "<group>"; };
 		A2FCF5C820AD502F004604AC /* PFPAboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFPAboutView.xib; sourceTree = "<group>"; };
 		A2FE6D4F20A0783C0025842D /* OTAppAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppAppearance.h; sourceTree = "<group>"; };
@@ -2880,6 +2884,8 @@
 				A202EA5E2085D2C60058F32C /* UIImage+processing.m */,
 				A202E92620E4BF6100992C09 /* UIImage+Fitting.h */,
 				A202E92720E4BF6100992C09 /* UIImage+Fitting.m */,
+				A2F50A1520EA295E009AB222 /* UIColor+Expanded.h */,
+				A2F50A1620EA295F009AB222 /* UIColor+Expanded.m */,
 				A202E9922085D2C60058F32C /* UIImageView+entourage.h */,
 				A202EA682085D2C60058F32C /* UIImageView+entourage.m */,
 				A202EA632085D2C60058F32C /* UILabel+entourage.h */,
@@ -4244,6 +4250,7 @@
 				A202ED092085D2C80058F32C /* OTTourMessaging.m in Sources */,
 				A202EB552085D2C80058F32C /* OTEntourageDisclaimerViewController.m in Sources */,
 				A202EB832085D2C80058F32C /* OTCategoryEditCell.m in Sources */,
+				A2F50A1720EA295F009AB222 /* UIColor+Expanded.m in Sources */,
 				A202EC032085D2C80058F32C /* OTFeedsService.m in Sources */,
 				A202EC1F2085D2C80058F32C /* NSNotification+entourage.m in Sources */,
 				96343AF820C6110D00E4D867 /* PfpUserCircleCell.swift in Sources */,
@@ -5074,6 +5081,7 @@
 				A296B80620871CFC00F6AFBD /* OTBottomScrollBehavior.m in Sources */,
 				A296B80720871CFC00F6AFBD /* UINavigationController+entourage.m in Sources */,
 				A296B80820871CFC00F6AFBD /* OTMapCell.m in Sources */,
+				A2F50A1820EA295F009AB222 /* UIColor+Expanded.m in Sources */,
 				A296B80920871CFC00F6AFBD /* OTEntourageStateTransition.m in Sources */,
 				A296B80A20871CFC00F6AFBD /* OTMembersCellProvider.m in Sources */,
 				A296B80B20871CFC00F6AFBD /* OTPhotoPickerBehavior.m in Sources */,

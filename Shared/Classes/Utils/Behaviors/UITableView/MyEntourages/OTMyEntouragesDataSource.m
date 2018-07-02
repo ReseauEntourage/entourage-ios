@@ -15,11 +15,14 @@
 #import "OTFeedItem.h"
 #import "OTSavedMyEntouragesFilter.h"
 #import "NSUserDefaults+OT.h"
+#import "OTAppAppearance.h"
+#import "entourage-Swift.h"
 
 @interface OTMyEntouragesDataSource ()
 
 @property (nonatomic) int pageNumber;
 @property (nonatomic, strong) OTMyEntouragesFilter *currentFilter;
+
 
 @end
 
@@ -102,8 +105,12 @@
             }]];
         }
         [self.items addObjectsFromArray:items];
+        
+        [self configureNoDataView];
+        
         [SVProgressHUD dismiss];
         success(items);
+        
     } failure:^(NSError *error) {
         [SVProgressHUD dismiss];
         if(failure)
@@ -113,6 +120,22 @@
 
 - (void)entourageUpdated:(NSNotification *)notification {
     [self.tableDataSource refresh];
+}
+
+- (void)configureNoDataView {
+    if (self.items.count == 0) {
+        self.noDataView.hidden = NO;
+        [self.tableView.superview bringSubviewToFront:self.noDataView];
+    } else {
+        self.noDataView.hidden = YES;
+        [self.tableView.superview sendSubviewToBack:self.noDataView];
+    }
+    
+    UIImage *image = [self.noDataRoundedBackground.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.noDataRoundedBackground.image = image;
+    self.noDataRoundedBackground.tintColor = [OTAppAppearance colorForNoDataPlacholderImage];
+    self.noDataTitle.textColor = [ApplicationTheme shared].titleLabelColor;
+    self.noDataSubtitle.textColor = [OTAppAppearance colorForNoDataPlacholderText];
 }
 
 @end

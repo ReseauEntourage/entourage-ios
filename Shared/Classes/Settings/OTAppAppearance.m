@@ -20,6 +20,7 @@
 #import "OTConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
+#import "UIColor+Expanded.h"
 
 #import "entourage-Swift.h"
 
@@ -383,6 +384,22 @@
     else {
         return OTLocalizedString(@"join_tour_btn");
     }
+}
+
++ (UIColor*)colorForNoDataPlacholderImage {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return [[UIColor pfpBlueColor] colorWithAlphaComponent:0.1];
+    }
+    
+    return [UIColor colorWithHexString:@"e9f1f4"];
+}
+
++ (UIColor*)colorForNoDataPlacholderText {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return [UIColor colorWithHexString:@"025e7f"];
+    }
+    
+    return [UIColor colorWithHexString:@"4a4a4a"];
 }
 
 @end
