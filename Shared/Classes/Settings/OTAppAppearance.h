@@ -43,4 +43,6 @@
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem;
 + (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem;
 + (NSString *)joinEntourageButtonTitleForFeedItem:(OTFeedItem*)feedItem;
++ (UIColor*)colorForNoDataPlacholderImage;
++ (UIColor*)colorForNoDataPlacholderText;
 @end

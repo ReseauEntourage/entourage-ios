@@ -115,7 +115,7 @@ final class OTPfpMenuViewController: UIViewController {
         contactItem?.tag = menuItemIndexType.contactTeam.rawValue
         
         let howIsUsedItem = OTMenuItem(title: String.localized("pfp_menu_how_to"),
-                                       iconName: "howIsUsed")
+                                       iconName: "menu_phone")
         howIsUsedItem?.tag = menuItemIndexType.howTo.rawValue
         
         let ethicalChartItem = OTMenuItem(title: String.localized("pfp_menu_chart_etique"),
