@@ -315,7 +315,7 @@
 }
 
 - (void)finishUpdatingFeeds:(BOOL)withFeeds {
-    if(withFeeds){
+    if (withFeeds){
         self.tableFooterView = self.emptyFooterView;
         return;
     }
@@ -325,11 +325,12 @@
     self.furtherEntouragesBtn.hidden = isMaxRadius;
     self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
     
-    if(self.items.count > 0)
+    if (self.items.count > 0)
         self.infoLabel.text = isMaxRadius ? [OTAppAppearance noFeedsDescription] : [OTAppAppearance extendSearchParameterDescription];
     else {
-        if (!isMaxRadius)
+        if (!isMaxRadius) {
             self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
+        }
         self.infoLabel.text = isMaxRadius ? [OTAppAppearance noMapFeedsDescription] : [OTAppAppearance extendMapSearchParameterDescription];
     }
     self.tableFooterView = self.loadingView;

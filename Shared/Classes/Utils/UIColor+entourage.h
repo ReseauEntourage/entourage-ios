@@ -13,6 +13,7 @@
 + (UIColor *)appOrangeColor;
 + (UIColor *)appTomatoColor;
 + (UIColor *)appGreyishColor;
++ (UIColor *)brightBlue;
 + (UIColor *)appGreyishBrownColor;
 + (UIColor *)appPaleGreyColor;
 + (UIColor *)appModalBackgroundColor;

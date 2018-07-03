@@ -251,12 +251,19 @@
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
     
     UIColor *typeColor = [ApplicationTheme shared].backgroundThemeColor;
+    
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         if ([item isNeighborhood] || [item isPrivateCircle]) {
             return [[NSAttributedString alloc] initWithString:@"Voisinage"];
         } else if  ([item isConversation]) {
             return [[NSAttributedString alloc] initWithString:@""];
         }
+    }
+    
+    if ([item.entourage_type isEqualToString:@"contribution"]) {
+        typeColor = [UIColor brightBlue];
+    } else if ([item.entourage_type isEqualToString:@"ask_for_help"]) {
+        typeColor = [UIColor appOrangeColor];
     }
     
     NSString *itemType = OTLocalizedString(item.entourage_type);

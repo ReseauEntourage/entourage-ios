@@ -4,8 +4,6 @@
 
 #import "UIImage+Fitting.h"
 
-static inline double radians (double degrees) {return degrees * M_PI/180;}
-
 @implementation UIImage(Fitting)
 
 - (CGSize)sizeForHeight:(CGFloat)height;
