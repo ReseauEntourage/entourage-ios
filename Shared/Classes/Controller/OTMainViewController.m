@@ -153,6 +153,7 @@
 @property (nonatomic) BOOL                                          wasLoadedOnce;
 @property (nonatomic) BOOL                                          noDataDisplayed;
 @property (nonatomic) BOOL                                          poisDisplayed;
+@property (nonatomic) BOOL                                          solidarityGuidePoisDisplayed;
 @property (nonatomic) BOOL                                          inviteBehaviorTriggered;
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior               *noDataBehavior;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior           *mailSender;
@@ -191,6 +192,7 @@
     self.solidarityGuideLabel.text = OTLocalizedString(@"map_options_show_guide");
     
     self.isFirstLoad = YES;
+    self.solidarityGuidePoisDisplayed = NO;
     self.heatzonesCollectionDataSource.heatzonesDelegate = self;
     [self.heatzonesCollectionDataSource initialize];
     [self.toggleCollectionView initialize];
@@ -369,10 +371,13 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (self.toursMapDelegate.isActive)
+    if (self.toursMapDelegate.isActive) {
         [self reloadFeeds];
-    else
+    }
+    else {
         [self reloadPois];
+    }
+    
     [[NSUserDefaults standardUserDefaults] removeObserver:self
                                                forKeyPath:NSLocalizedString(@"CURRENT_USER", @"")];
 }
@@ -408,6 +413,7 @@
     [self.noDataBehavior switchedToNewsfeeds];
     [self.guideInfoBehavior hide];
     self.toursMapDelegate.isActive = YES;
+    self.solidarityGuidePoisDisplayed = NO;
     self.poisMapDelegate.isActive = [OTAppConfiguration shouldShowPOIsOnFeedsMap];
     self.backToNewsFeedsButton.hidden = YES;
     
@@ -434,6 +440,7 @@
 
     self.toursMapDelegate.isActive = NO;
     self.poisMapDelegate.isActive = YES;
+    self.solidarityGuidePoisDisplayed = YES;
     self.backToNewsFeedsButton.hidden = NO;
     
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
@@ -767,7 +774,9 @@
             *stop = YES;
         }
     }];
-    if (annotation == nil) return;
+    if (annotation == nil) {
+        return;
+    }
     [OTLogger logEvent:@"POIView"];
     [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation.poi];
 }
@@ -797,7 +806,10 @@
 }
 
 - (OTPoiCategory*)categoryById:(NSNumber*)sid {
-    if (sid == nil) return nil;
+    if (sid == nil) {
+        return nil;
+    }
+    
     for (OTPoiCategory* category in self.categories) {
         if (category.sid != nil) {
             if ([category.sid isEqualToNumber:sid]) {
@@ -853,8 +865,13 @@
 }
 
 - (void)itemsUpdated {
-    if (![OTAppConfiguration shouldShowPOIsOnFeedsMap] && !self.isFirstLoad) {
+//    if (![OTAppConfiguration shouldShowPOIsOnFeedsMap] && !self.isFirstLoad) {
+//        return;
+//    }
+    
+    if (self.solidarityGuidePoisDisplayed) {
         return;
+        
     }
     
     self.wasLoadedOnce = YES;
@@ -1285,6 +1302,7 @@
 
 - (void)showToursMap {
     self.tableView.scrollEnabled = NO;
+    self.solidarityGuidePoisDisplayed = NO;
     
     if (self.poisMapDelegate.isActive) {
         [self.showSolidarityGuideView setHidden: YES];
@@ -1330,6 +1348,7 @@
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
 
     self.isTourListDisplayed = NO;
+    self.solidarityGuidePoisDisplayed = NO;
     
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.5 animations:^(void) {

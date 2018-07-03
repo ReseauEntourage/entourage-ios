@@ -46,8 +46,8 @@
     NSArray *categorySource = [OTCategoryFromJsonService getData];
     OTCategoryType *categoryType;
     NSDictionary *categoryDict = [OTCategory createDictionary];
-    if([self.entourage.entourage_type isEqualToString:@"contribution"]) {
-        for(OTCategoryType *type in categorySource)
+    if ([self.entourage.entourage_type isEqualToString:@"contribution"]) {
+        for (OTCategoryType *type in categorySource)
             if ([type.type isEqualToString:@"contribution"])
                 categoryType = type;
     } else {

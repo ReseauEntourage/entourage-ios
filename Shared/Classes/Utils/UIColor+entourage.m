@@ -46,6 +46,10 @@
     return [UIColor blackColor];
 }
 
++ (UIColor *)brightBlue {
+    return [UIColor colorWithRed:0 green:122.0f/255.0f blue:255.0f/255.0f alpha:1.0f];
+}
+
 + (UIColor *)poiCategory1 {
     return [UIColor colorWithRed:255.0f/255.0f green:197.0f/255.0f blue:127.0f/255.0f alpha:1.0f];
 }
