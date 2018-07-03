@@ -92,11 +92,9 @@
     UIImage *image = nil;
     
     if ([feedItem isKindOfClass:[OTAnnouncement class]]) {
-        NSURL *urlSource = [[NSURL alloc] initWithString:source];
-        NSData *imageData = [NSData dataWithContentsOfURL:urlSource];
-        image = [UIImage imageWithData:imageData];
-        self.imgCategory.contentMode = UIViewContentModeScaleAspectFit;
         self.imgCategory.backgroundColor = [UIColor clearColor];
+        self.imgCategory.contentMode = UIViewContentModeScaleAspectFit;
+        [self.imgCategory setupFromUrl:source withPlaceholder:nil];
     }
     else {
         if ([feedItem isConversation]) {
