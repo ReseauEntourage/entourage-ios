@@ -49,8 +49,9 @@
 
 - (void)closeFeedItemWithReason: (OTCloseReason) reason {
     [self dismissViewControllerAnimated:NO completion:^{
-        if (self.closeDelegate)
+        if (self.closeDelegate) {
             [self.closeDelegate feedItemClosedWithReason: reason];
+        }
     }];
 }
 

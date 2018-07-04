@@ -155,16 +155,23 @@
 
 #pragma mark - OTConfirmCloseProtocol
 
-- (void)feedItemClosedWithReason: (OTCloseReason) reason{
+- (void)feedItemClosedWithReason:(OTCloseReason)reason {
     [OTLogger logEvent:@"CloseEntourageConfirm"];
-    if(reason == OTCloseReasonHelpClose) {
+    
+    if (reason == OTCloseReasonHelpClose) {
         [self dismissOnClose:reason];
         return;
     }
+    
+    BOOL outcome = (reason == OTCloseReasonSuccesClose) ? YES : NO;
+    
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
-        [SVProgressHUD dismiss];
-        [self dismissOnClose:reason];
+    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition]
+        closeWithOutcome:outcome
+        success:^(BOOL isTour) {
+            [SVProgressHUD dismiss];
+            [self dismissOnClose:reason];
+        
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];

@@ -619,7 +619,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (BOOL)supportsClosingFeedAction:(OTFeedItem*)item {
     // EMA-2052
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([item isPrivateCircle] || [item isConversation] ||  [item isNeighborhood]) {
+        if ([item isPrivateCircle] || [item isConversation] || [item isNeighborhood]) {
             return NO;
         }
     }
