@@ -47,7 +47,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCa-JH-ipu" userLabel="Change State Feed Item Button">
-                                <rect key="frame" x="6" y="561" width="363" height="44"/>
+                                <rect key="frame" x="6" y="507" width="363" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="gPI-1F-BbF"/>
@@ -69,7 +69,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xzs-5T-W8m" userLabel="Change State Feed Item Button">
-                                <rect key="frame" x="6" y="453" width="363" height="44"/>
+                                <rect key="frame" x="6" y="399" width="363" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="dZA-Tf-4QY"/>
@@ -91,7 +91,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o29-6E-Xay" userLabel="Change State Feed Item Button">
-                                <rect key="frame" x="6" y="399" width="363" height="44"/>
+                                <rect key="frame" x="6" y="345" width="363" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="fum-Tk-VPE"/>
@@ -110,7 +110,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4U-7V-yKD" userLabel="Change State Feed Item Button">
-                                <rect key="frame" x="6" y="507" width="363" height="44"/>
+                                <rect key="frame" x="6" y="453" width="363" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="UNs-Db-ADo"/>
@@ -128,15 +128,39 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jT2-90-H8l" userLabel="Change State Feed Item Button">
+                                <rect key="frame" x="6" y="561" width="363" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="kNS-HO-mG0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                <state key="normal" title="Promouvoir la sortie">
+                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="promoteEntourage:" destination="HRX-sY-Prk" eventType="touchUpInside" id="U0R-a3-NyL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.87" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="CA0-nS-LA9" firstAttribute="top" secondItem="jT2-90-H8l" secondAttribute="bottom" constant="10" id="Brh-ur-Iq7"/>
                             <constraint firstItem="Xzs-5T-W8m" firstAttribute="top" secondItem="o29-6E-Xay" secondAttribute="bottom" constant="10" id="Fx9-Cp-Zy7"/>
+                            <constraint firstItem="jT2-90-H8l" firstAttribute="top" secondItem="cCa-JH-ipu" secondAttribute="bottom" constant="10" id="IOt-cf-T8s"/>
                             <constraint firstItem="cCa-JH-ipu" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="Ky8-cY-aoJ"/>
                             <constraint firstItem="Xzs-5T-W8m" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="S7U-Wp-alb"/>
-                            <constraint firstItem="CA0-nS-LA9" firstAttribute="top" secondItem="cCa-JH-ipu" secondAttribute="bottom" constant="10" id="ViY-NN-prt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="W4U-7V-yKD" secondAttribute="trailing" constant="-10" id="Wt0-Kg-2RI"/>
                             <constraint firstItem="W4U-7V-yKD" firstAttribute="top" secondItem="Xzs-5T-W8m" secondAttribute="bottom" constant="10" id="YC8-jD-Zjx"/>
+                            <constraint firstItem="jT2-90-H8l" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leading" constant="6" id="dPU-Yo-0Kr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cCa-JH-ipu" secondAttribute="trailing" constant="-10" id="ecl-xb-gMj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="o29-6E-Xay" secondAttribute="trailing" constant="-10" id="gqS-3j-U9r"/>
                             <constraint firstItem="o29-6E-Xay" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="m3B-EB-Yxy"/>
@@ -144,6 +168,7 @@
                             <constraint firstItem="CA0-nS-LA9" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="nwf-hh-pY1"/>
                             <constraint firstItem="W4U-7V-yKD" firstAttribute="leading" secondItem="vMo-fp-eFQ" secondAttribute="leadingMargin" constant="-10" id="o1H-aj-yYu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Xzs-5T-W8m" secondAttribute="trailing" constant="-10" id="pZX-Li-hUl"/>
+                            <constraint firstAttribute="trailing" secondItem="jT2-90-H8l" secondAttribute="trailing" constant="6" id="sD1-9B-Z4V"/>
                             <constraint firstItem="cCa-JH-ipu" firstAttribute="top" secondItem="W4U-7V-yKD" secondAttribute="bottom" constant="10" id="sO7-zs-Vmn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CA0-nS-LA9" secondAttribute="trailing" constant="-10" id="yxo-Kh-KYa"/>
                         </constraints>
@@ -151,16 +176,19 @@
                     <connections>
                         <outlet property="cancelButton" destination="CA0-nS-LA9" id="Mbs-Lj-mAL"/>
                         <outlet property="nextStatusBehavior" destination="6Py-dS-mI1" id="dXj-05-i95"/>
+                        <outlet property="promoteEntourageBehavior" destination="l0g-7J-BWB" id="Unx-nK-Cy2"/>
                         <outlet property="shareBtn" destination="W4U-7V-yKD" id="Qmy-IW-wYb"/>
                         <outlet property="shareItem" destination="RWJ-VL-kwf" id="4oZ-bK-Ots"/>
                         <outlet property="singalEntourageBehavior" destination="XjL-XT-NEm" id="0eA-6D-2AG"/>
                         <outlet property="toggleEditBehavior" destination="W7b-U8-i9L" id="eIO-NN-gN5"/>
+                        <outlet property="togglePromoteEntourageBehavior" destination="cL6-2V-Oru" id="C7j-kL-xJs"/>
                         <outlet property="toggleShareEntourageBehavior" destination="Jgg-JJ-HfA" id="Bj1-tZ-NgK"/>
                         <outlet property="toggleSignalEntourageBehavior" destination="QOJ-Nb-eoQ" id="ai6-I5-2sO"/>
                         <outletCollection property="buttonsWithBorder" destination="Xzs-5T-W8m" id="6e5-SB-jXV"/>
                         <outletCollection property="buttonsWithBorder" destination="o29-6E-Xay" id="hQI-LN-OAQ"/>
                         <outletCollection property="buttonsWithBorder" destination="cCa-JH-ipu" id="jiM-M6-tpc"/>
                         <outletCollection property="buttonsWithBorder" destination="W4U-7V-yKD" id="Cnv-Fy-ovb"/>
+                        <outletCollection property="buttonsWithBorder" destination="jT2-90-H8l" id="2n3-XJ-gnN"/>
                         <segue destination="eaO-Ez-K7B" kind="presentation" identifier="ConfirmCloseSegue" id="63d-oL-Tss"/>
                     </connections>
                 </viewController>
@@ -181,7 +209,6 @@
                 <customObject id="QOJ-Nb-eoQ" userLabel="Toggle Visible Signal Entourage" customClass="OTToggleVisibleBehavior">
                     <connections>
                         <outlet property="heightConstraint" destination="gPI-1F-BbF" id="XLy-he-wmT"/>
-                        <outlet property="marginConstraint" destination="ViY-NN-prt" id="lFq-z5-dk4"/>
                         <outlet property="toggleView" destination="cCa-JH-ipu" id="lkJ-Hd-K7D"/>
                     </connections>
                 </customObject>
@@ -199,11 +226,19 @@
                         <outlet property="toggleView" destination="W4U-7V-yKD" id="MJv-vK-hUG"/>
                     </connections>
                 </customObject>
+                <customObject id="cL6-2V-Oru" customClass="OTToggleVisibleBehavior">
+                    <connections>
+                        <outlet property="heightConstraint" destination="kNS-HO-mG0" id="K5L-Mi-7B7"/>
+                        <outlet property="marginConstraint" destination="Brh-ur-Iq7" id="4rj-Fy-rdH"/>
+                        <outlet property="toggleView" destination="jT2-90-H8l" id="C4s-HF-zmV"/>
+                    </connections>
+                </customObject>
                 <customObject id="XjL-XT-NEm" userLabel="Signal Entourage" customClass="OTSignalEntourageBehavior">
                     <connections>
                         <outlet property="owner" destination="HRX-sY-Prk" id="MzZ-4r-XUj"/>
                     </connections>
                 </customObject>
+                <customObject id="l0g-7J-BWB" customClass="OTSignalEntourageBehavior"/>
                 <customObject id="RWJ-VL-kwf" customClass="OTShareFeedItemBehavior">
                     <connections>
                         <outlet property="owner" destination="HRX-sY-Prk" id="DdR-bb-g5T"/>

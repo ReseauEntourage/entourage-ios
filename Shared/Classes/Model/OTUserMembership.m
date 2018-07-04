@@ -63,6 +63,9 @@ NSString *const kUserMembershipListItemPeople = @"number_of_people";
         
     } else if ([self.type isEqualToString:GROUP_TYPE_PRIVATE_CIRCLE]) {
         return @"private-circle";
+        
+    } else if ([self.type isEqualToString:GROUP_TYPE_OUTING]) {
+        return @"outing";
     }
     
     return @"other";

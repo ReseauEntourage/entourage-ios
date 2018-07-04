@@ -90,6 +90,7 @@
 #import "OTEntourageAnnotation.h"
 #import "OTNeighborhoodAnnotation.h"
 #import "OTPrivateCircleAnnotation.h"
+#import "OTOutingAnnotation.h"
 
 #define MAPVIEW_HEIGHT 224.f
 
@@ -710,6 +711,11 @@
                             }
                         } else if ([item isPrivateCircle]) {
                             OTPrivateCircleAnnotation *entFeedAnnotation = [[OTPrivateCircleAnnotation alloc] initWithEntourage:(OTEntourage*)item];
+                            if (entFeedAnnotation) {
+                                [annotations addObject:entFeedAnnotation];
+                            }
+                        } else if ([item isOuting]) {
+                            OTOutingAnnotation *entFeedAnnotation = [[OTOutingAnnotation alloc] initWithEntourage:(OTEntourage*)item];
                             if (entFeedAnnotation) {
                                 [annotations addObject:entFeedAnnotation];
                             }

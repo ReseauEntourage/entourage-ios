@@ -68,4 +68,8 @@
     return [self.group_type isEqualToString:GROUP_TYPE_CONVERSATION];
 }
 
+- (BOOL)isOuting {
+    return [self.group_type isEqualToString:GROUP_TYPE_OUTING];
+}
+
 @end

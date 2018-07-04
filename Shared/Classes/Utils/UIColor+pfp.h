@@ -13,6 +13,7 @@
 + (UIColor*)pfpGreenColor;
 + (UIColor*)pfpPurpleColor;
 + (UIColor*)pfpNeighborhoodColor;
++ (UIColor*)pfpOutingCircleColor;
 + (UIColor*)pfpPrivateCircleColor;
 
 + (UIColor*)pfpTableBackgroundColor;

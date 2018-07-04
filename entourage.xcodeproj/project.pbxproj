@@ -1194,6 +1194,8 @@
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
 		A2F50A1720EA295F009AB222 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F50A1620EA295F009AB222 /* UIColor+Expanded.m */; };
 		A2F50A1820EA295F009AB222 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F50A1620EA295F009AB222 /* UIColor+Expanded.m */; };
+		A2F50A8A20ECFCCC009AB222 /* OTOutingAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F50A8920ECFCCC009AB222 /* OTOutingAnnotation.m */; };
+		A2F50A8B20ECFCCC009AB222 /* OTOutingAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F50A8920ECFCCC009AB222 /* OTOutingAnnotation.m */; };
 		A2FCF5B620AC8563004604AC /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
 		A2FCF5C420AD4FF8004604AC /* PFPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */; };
 		A2FCF5C520AD4FF8004604AC /* PFPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */; };
@@ -2015,6 +2017,8 @@
 		A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
 		A2F50A1520EA295E009AB222 /* UIColor+Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
 		A2F50A1620EA295F009AB222 /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
+		A2F50A8820ECFCCC009AB222 /* OTOutingAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTOutingAnnotation.h; sourceTree = "<group>"; };
+		A2F50A8920ECFCCC009AB222 /* OTOutingAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTOutingAnnotation.m; sourceTree = "<group>"; };
 		A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PFPAboutViewController.swift; sourceTree = "<group>"; };
 		A2FCF5C820AD502F004604AC /* PFPAboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFPAboutView.xib; sourceTree = "<group>"; };
 		A2FE6D4F20A0783C0025842D /* OTAppAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppAppearance.h; sourceTree = "<group>"; };
@@ -2988,6 +2992,7 @@
 			isa = PBXGroup;
 			children = (
 				A202E99E2085D2C60058F32C /* OTEncounterAnnotation.h */,
+				A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */,
 				A202E99F2085D2C60058F32C /* OTStartTourAnnotation.m */,
 				A202E9A02085D2C60058F32C /* OTStartTourAnnotationView.h */,
 				A202E9A12085D2C60058F32C /* OTCustomAnnotation.h */,
@@ -2998,7 +3003,8 @@
 				A202E91720E3818D00992C09 /* OTPrivateCircleAnnotation.m */,
 				A202E91A20E381D200992C09 /* OTNeighborhoodAnnotation.h */,
 				A202E91B20E381D200992C09 /* OTNeighborhoodAnnotation.m */,
-				A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */,
+				A2F50A8820ECFCCC009AB222 /* OTOutingAnnotation.h */,
+				A2F50A8920ECFCCC009AB222 /* OTOutingAnnotation.m */,
 				A202E9A32085D2C60058F32C /* OTStartTourAnnotation.h */,
 				A202E9A42085D2C60058F32C /* OTStartTourAnnotationView.m */,
 			);
@@ -3533,8 +3539,8 @@
 			children = (
 				A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */,
 				A202E80A2085D0FE0058F32C /* OTAppDelegate.h */,
-				A202E91020E2313200992C09 /* AppConfigurations.plist */,
 				A202E8092085D0FD0058F32C /* OTAppDelegate.m */,
+				A202E91020E2313200992C09 /* AppConfigurations.plist */,
 				A202E7BC2085CFC20058F32C /* Shared-Bridging-Header.h */,
 				A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */,
 				A296B8EB20871FD800F6AFBD /* main.m */,
@@ -4538,6 +4544,7 @@
 				A202ECCF2085D2C80058F32C /* OTTapEntourageBehavior.m in Sources */,
 				A202EB1B2085D2C70058F32C /* OTCreateMeetingViewController.m in Sources */,
 				A202EAE52085D2C70058F32C /* OTFeedItemFilters.m in Sources */,
+				A2F50A8A20ECFCCC009AB222 /* OTOutingAnnotation.m in Sources */,
 				A202EAF32085D2C70058F32C /* OTEncounter.m in Sources */,
 				A202EB092085D2C70058F32C /* OTAboutItem.m in Sources */,
 				A202EBDB2085D2C80058F32C /* OTPublicFeedItemViewController.m in Sources */,
@@ -4994,6 +5001,7 @@
 				A296B7B420871CFC00F6AFBD /* OTEntourageFactory.m in Sources */,
 				A296B7B520871CFC00F6AFBD /* OTSavedFilter.m in Sources */,
 				A296B7B620871CFC00F6AFBD /* OTHTTPRequestManager.m in Sources */,
+				A2F50A8B20ECFCCC009AB222 /* OTOutingAnnotation.m in Sources */,
 				A296B7B720871CFC00F6AFBD /* OTLoginViewController.m in Sources */,
 				A296B7B820871CFC00F6AFBD /* OTMapViewController.m in Sources */,
 				A296B7B920871CFC00F6AFBD /* OTCollectionCellProviderBehavior.m in Sources */,

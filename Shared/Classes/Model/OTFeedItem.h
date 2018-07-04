@@ -45,5 +45,6 @@
 - (BOOL)isPrivateCircle;
 - (BOOL)isNeighborhood;
 - (BOOL)isConversation;
+- (BOOL)isOuting;
 
 @end

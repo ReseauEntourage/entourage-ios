@@ -160,6 +160,15 @@ NSString *const kVisitedUserTag = @"visited";
     return [USER_TYPE_PRO isEqualToString:self.type];
 }
 
+- (BOOL)isCoordinator {
+    if ([self.roles containsObject:kVisitorUserTag] ||
+        [self.roles containsObject:kCoordinatorUserTag]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (NSString*)leftTag {
     // Not used for now
     return nil;
@@ -176,14 +185,21 @@ NSString *const kVisitedUserTag = @"visited";
 }
 
 - (NSArray <OTUserMembershipListItem*>*)privateCircles {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %@", @"private_circle"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %@", GROUP_TYPE_PRIVATE_CIRCLE];
+    OTUserMembership *group = [self.memberships filteredArrayUsingPredicate:predicate].firstObject;
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    return group ? [group.list sortedArrayUsingDescriptors:@[sortDescriptor]] : @[];
+}
+
+- (NSArray <OTUserMembershipListItem*>*)outings {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %@", GROUP_TYPE_OUTING];
     OTUserMembership *group = [self.memberships filteredArrayUsingPredicate:predicate].firstObject;
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
     return group ? [group.list sortedArrayUsingDescriptors:@[sortDescriptor]] : @[];
 }
 
 - (NSArray <OTUserMembershipListItem*>*)neighborhoods {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %@", @"neighborhood"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %@", GROUP_TYPE_NEIGHBORHOOD];
     OTUserMembership *group = [self.memberships filteredArrayUsingPredicate:predicate].firstObject;
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
     return group ? [group.list sortedArrayUsingDescriptors:@[sortDescriptor]] : @[];

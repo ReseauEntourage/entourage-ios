@@ -176,7 +176,7 @@
 
 + (NSString*)userPrivateCirclesSectionTitle:(OTUser*)user {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([user.roles containsObject:kVisitorUserTag] || [user.roles containsObject:kCoordinatorUserTag]) {
+        if ([user isCoordinator]) {
             return OTLocalizedString(@"pfp_visitorPrivateCirclesSectionTitle");
         } else {
             return OTLocalizedString(@"pfp_visitedPrivateCirclesSectionTitle");
@@ -253,10 +253,15 @@
     UIColor *typeColor = [ApplicationTheme shared].backgroundThemeColor;
     
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([item isNeighborhood] || [item isPrivateCircle]) {
+        if ([item isNeighborhood] ||
+            [item isPrivateCircle]) {
             return [[NSAttributedString alloc] initWithString:@"Voisinage"];
-        } else if  ([item isConversation]) {
+            
+        } else if ([item isConversation]) {
             return [[NSAttributedString alloc] initWithString:@""];
+            
+        } else if ([item isOuting]) {
+            return [[NSAttributedString alloc] initWithString:item.desc];
         }
     }
     
@@ -286,8 +291,10 @@
     
     if ([item isPrivateCircle]) {
         icon = @"private-circle";
-    } else if ([item isNeighborhood]){
+    } else if ([item isNeighborhood]) {
         icon = @"neighborhood";
+    } else if ([item isOuting]) {
+        icon = @"outing";
     }
     
     return icon;
@@ -303,11 +310,14 @@
 
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem {
     UIColor *color = [ApplicationTheme shared].backgroundThemeColor;
+    
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([feedItem isNeighborhood] || [feedItem isPrivateCircle]) {
+        if ([feedItem isNeighborhood]) {
             color = [UIColor pfpNeighborhoodColor];
         } else if ([feedItem isPrivateCircle]) {
             color = [UIColor pfpPrivateCircleColor];
+        } else if ([feedItem isOuting]) {
+            color = [UIColor pfpOutingCircleColor];
         }
         return color;
     }
