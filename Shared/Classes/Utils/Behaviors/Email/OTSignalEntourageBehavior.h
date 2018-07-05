@@ -14,5 +14,6 @@
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 
 - (void)sendMailFor:(OTEntourage *)entourage;
+- (void)sendPromoteEventMailFor:(OTEntourage *)entourage;
 
 @end

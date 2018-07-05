@@ -59,7 +59,7 @@
         ![USER_ID isEqualToNumber:self.feedItem.author.uID] &&
         !canCancelJoin;
     BOOL canShare = ![self.feedItem.joinStatus isEqualToString:JOIN_ACCEPTED];
-    BOOL canPromote = [currentUser isCoordinator];
+    BOOL canPromote = [currentUser isCoordinator] && [self.feedItem isOuting];
     
     [self.toggleEditBehavior toggle:canEdit animated:NO];
     [self.toggleSignalEntourageBehavior toggle:canReport animated:NO];
@@ -113,7 +113,7 @@
     [self prepareForClosing];
     
     if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
-        [self.promoteEntourageBehavior sendMailFor:(OTEntourage *)self.feedItem];
+        [self.promoteEntourageBehavior sendPromoteEventMailFor:(OTEntourage *)self.feedItem];
     }
 }
 

@@ -221,6 +221,29 @@
     return OTLocalizedString(@"mail_signal_subject");
 }
 
++ (NSString *)promoteEventActionSubject:(NSString*)eventName {
+    NSString *eventType = OTLocalizedString(@"event");
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        eventType = OTLocalizedString(@"pfp_event");
+    }
+    
+    NSString *eventDetails = [NSString stringWithFormat:@"%@ %@", eventType, eventName];
+    NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"promote_event_subject_format"), eventDetails];
+    return subject;
+}
+
++ (NSString *)promoteEventActionEmailBody:(NSString*)eventName {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        NSString *body = [NSString stringWithFormat:OTLocalizedString(@"pfp_promote_event_mail_body_format"), eventName];
+        return body;
+    }
+    
+    NSString *body = [NSString stringWithFormat:OTLocalizedString(@"promote_event_mail_body_format"), eventName];
+    return body;
+}
+
+
+
 + (NSString *)reportActionToRecepient {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return CONTACT_PFP_TO;
@@ -250,8 +273,8 @@
 
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
     
+    // Pfp items
     UIColor *typeColor = [ApplicationTheme shared].backgroundThemeColor;
-    
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         if ([item isNeighborhood] ||
             [item isPrivateCircle]) {
@@ -261,10 +284,24 @@
             return [[NSAttributedString alloc] initWithString:@""];
             
         } else if ([item isOuting]) {
-            return [[NSAttributedString alloc] initWithString:item.desc];
+            typeColor = [UIColor pfpOutingCircleColor];
+            NSString *eventName = OTLocalizedString(@"pfp_event").capitalizedString;
+            NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
+                                           NSForegroundColorAttributeName:typeColor};
+            return [[NSAttributedString alloc] initWithString:eventName attributes:atttributtes];
         }
     }
     
+    // Entourage Outing items
+    if ([item.category isEqualToString:@"event"] || [item isOuting]) {
+        typeColor = [UIColor appGreyishColor];
+        NSString *eventName = OTLocalizedString(@"event").capitalizedString;
+        NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
+                                       NSForegroundColorAttributeName:typeColor};
+        return [[NSAttributedString alloc] initWithString:eventName attributes:atttributtes];
+    }
+    
+    // The rest of items
     if ([item.entourage_type isEqualToString:@"contribution"]) {
         typeColor = [UIColor brightBlue];
     } else if ([item.entourage_type isEqualToString:@"ask_for_help"]) {

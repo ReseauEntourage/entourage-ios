@@ -30,11 +30,11 @@
 
 - (instancetype)init {
     self = [super init];
-    if(self) {
+    if (self) {
         self.isPro = IS_PRO_USER;
         OTSavedFilter *savedFilter = [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter;
         self.showOnlyMyEntourages = NO;
-        if(savedFilter) {
+        if (savedFilter) {
             self.showTours = savedFilter.showTours.boolValue;
             
             self.showMedical = !self.showTours ? self.showTours : savedFilter.showMedical.boolValue;
@@ -149,12 +149,15 @@
     }
     OTCategoryType *contribution;
     OTCategoryType *demande;
-    for(OTCategoryType *type in data) {
-        if ([type.type isEqualToString:@"contribution"])
+    for (OTCategoryType *type in data) {
+        if ([type.type isEqualToString:@"contribution"]) {
             contribution = type;
-        else if ([type.type isEqualToString:@"ask_for_help"])
+        }
+        else if ([type.type isEqualToString:@"ask_for_help"]) {
             demande = type;
+        }
     }
+    
     NSArray *contributionArray = [self contributionCategory:contribution];
     [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                                  active:self.showContribution
@@ -210,7 +213,7 @@
 - (NSArray *)demandCategory: (OTCategoryType *)demande {
     NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
     int index = 7;
-    for(OTCategory *category in demande.categories) {
+    for (OTCategory *category in demande.categories) {
         NSString *value = [NSString stringWithFormat:@"%@_%@", demande.type, category.category];
         [categoryArray addObject:[OTFeedItemFilter createFor:index
                                                       active:[[self.categoryDictionary valueForKey:value] boolValue]
@@ -240,7 +243,7 @@
     NSMutableArray *action = [[NSMutableArray alloc] init];
     OTCategoryType *contribution;
     OTCategoryType *demande;
-    for(OTCategoryType *type in data) {
+    for (OTCategoryType *type in data) {
         if ([type.type isEqualToString:@"contribution"])
             contribution = type;
         else if ([type.type isEqualToString:@"ask_for_help"])
@@ -395,49 +398,48 @@
 
 - (NSString *)getTypes {
     NSMutableArray *types = [NSMutableArray new];
-    if(self.showMedical)
+    if (self.showMedical)
         [types addObject:@"tm"];
-    if(self.showSocial)
+    if (self.showSocial)
         [types addObject:@"tb"];
-    if(self.showDistributive)
+    if (self.showDistributive)
         [types addObject:@"ta"];
-    if(self.showDemandeSocial)
+    if (self.showDemandeSocial)
         [types addObject:@"as"];
-    if(self.showDemandeEvent)
+    if (self.showDemandeEvent)
         [types addObject:@"ae"];
-    if(self.showDemandeHelp)
+    if (self.showDemandeHelp)
         [types addObject:@"am"];
-    if(self.showDemandeResource)
+    if (self.showDemandeResource)
         [types addObject:@"ar"];
-    if(self.showDemandeInfo)
+    if (self.showDemandeInfo)
         [types addObject:@"ai"];
-    if(self.showDemandeSkill)
+    if (self.showDemandeSkill)
         [types addObject:@"ak"];
-    if(self.showDemandeOther)
+    if (self.showDemandeOther)
         [types addObject:@"ao"];
-    if(self.showContributionSocial)
+    if (self.showContributionSocial)
         [types addObject:@"cs"];
-    if(self.showContributionEvent)
+    if (self.showContributionEvent)
         [types addObject:@"ce"];
-    if(self.showContributionHelp)
+    if (self.showContributionHelp)
         [types addObject:@"cm"];
-    if(self.showContributionResource)
+    if (self.showContributionResource)
         [types addObject:@"cr"];
-    if(self.showContributionInfo)
+    if (self.showContributionInfo)
         [types addObject:@"ci"];
-    if(self.showContributionSkill)
+    if (self.showContributionSkill)
         [types addObject:@"ck"];
-    if(self.showContributionOther)
+    if (self.showContributionOther)
         [types addObject:@"co"];
     return [types componentsJoinedByString:@","];
-    return @"";
 }
 
 - (NSString *)getEntourageTypes {
     NSMutableArray *types = [NSMutableArray new];
-    if(self.showDemand)
+    if (self.showDemand)
         [types addObject:ENTOURAGE_DEMANDE];
-    if(self.showContribution)
+    if (self.showContribution)
         [types addObject:ENTOURAGE_CONTRIBUTION];
     return [types componentsJoinedByString:@","];
 }
