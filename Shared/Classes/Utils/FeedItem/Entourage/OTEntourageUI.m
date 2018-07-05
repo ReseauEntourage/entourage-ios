@@ -30,6 +30,13 @@
     return self.entourage.desc;
 }
 
+- (NSAttributedString *)eventAuthorFormattedDescription {
+    NSString *authorText = [NSString stringWithFormat:@"\nOrganisé par %@", self.entourage.author.displayName];
+    NSMutableAttributedString *authorAttributedText = [[NSMutableAttributedString alloc] initWithString:authorText];
+    
+    return authorAttributedText;
+}
+
 - (NSString *)navigationTitle {
     return self.entourage.title;
 }

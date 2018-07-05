@@ -22,5 +22,6 @@
 - (double)distance;
 - (BOOL)isStatusBtnVisible;
 - (NSString *)feedItemActionButton;
+- (NSAttributedString *)eventAuthorFormattedDescription;
 
 @end
