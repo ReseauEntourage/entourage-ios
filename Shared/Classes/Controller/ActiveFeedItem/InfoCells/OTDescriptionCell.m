@@ -9,6 +9,7 @@
 #import "OTDescriptionCell.h"
 #import "OTFeedItem.h"
 #import "UIColor+entourage.h"
+#import "OTFeedItemFactory.h"
 
 @implementation OTDescriptionCell
 
@@ -17,8 +18,16 @@
     self.txtDescription.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appGreyishBrownColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
 }
 
-- (void)configureWith:(NSString *)item {
-    self.txtDescription.text = item;
+- (void)configureWith:(OTFeedItem *)item {
+    
+    if ([item isOuting] && [item.identifierTag isEqualToString:@"eventAuthorInfo"]) {
+        NSAttributedString *description = [[[OTFeedItemFactory createFor:item] getUI] eventAuthorFormattedDescription];
+        self.txtDescription.attributedText = description;
+        return;
+    }
+    
+    NSString *description = [[[OTFeedItemFactory createFor:item] getUI] feedItemDescription];
+    self.txtDescription.text = description;
 }
 
 @end

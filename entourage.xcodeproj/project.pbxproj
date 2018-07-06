@@ -1196,6 +1196,8 @@
 		A2F50A1820EA295F009AB222 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F50A1620EA295F009AB222 /* UIColor+Expanded.m */; };
 		A2F50A8A20ECFCCC009AB222 /* OTOutingAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F50A8920ECFCCC009AB222 /* OTOutingAnnotation.m */; };
 		A2F50A8B20ECFCCC009AB222 /* OTOutingAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F50A8920ECFCCC009AB222 /* OTOutingAnnotation.m */; };
+		A2F5182820EF5A0F009AB222 /* OTEventInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F5182620EF5A0E009AB222 /* OTEventInfoCell.m */; };
+		A2F5182920EF5A0F009AB222 /* OTEventInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F5182620EF5A0E009AB222 /* OTEventInfoCell.m */; };
 		A2FCF5B620AC8563004604AC /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
 		A2FCF5C420AD4FF8004604AC /* PFPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */; };
 		A2FCF5C520AD4FF8004604AC /* PFPAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */; };
@@ -2019,6 +2021,8 @@
 		A2F50A1620EA295F009AB222 /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
 		A2F50A8820ECFCCC009AB222 /* OTOutingAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTOutingAnnotation.h; sourceTree = "<group>"; };
 		A2F50A8920ECFCCC009AB222 /* OTOutingAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTOutingAnnotation.m; sourceTree = "<group>"; };
+		A2F5182620EF5A0E009AB222 /* OTEventInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEventInfoCell.m; sourceTree = "<group>"; };
+		A2F5182720EF5A0E009AB222 /* OTEventInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEventInfoCell.h; sourceTree = "<group>"; };
 		A2FCF5C220AD4FF8004604AC /* PFPAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PFPAboutViewController.swift; sourceTree = "<group>"; };
 		A2FCF5C820AD502F004604AC /* PFPAboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PFPAboutView.xib; sourceTree = "<group>"; };
 		A2FE6D4F20A0783C0025842D /* OTAppAppearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppAppearance.h; sourceTree = "<group>"; };
@@ -2560,6 +2564,8 @@
 		A202E86E2085D2C40058F32C /* InfoCells */ = {
 			isa = PBXGroup;
 			children = (
+				A2F5182720EF5A0E009AB222 /* OTEventInfoCell.h */,
+				A2F5182620EF5A0E009AB222 /* OTEventInfoCell.m */,
 				A202E86F2085D2C40058F32C /* OTDescriptionCell.m */,
 				A202E8702085D2C40058F32C /* OTBaseInfoCell.m */,
 				A202E8712085D2C40058F32C /* OTMembersCell.m */,
@@ -4315,6 +4321,7 @@
 				96B658B8209A5AF000EB0398 /* UIFont+Extensions.swift in Sources */,
 				A202EB7F2085D2C80058F32C /* OTCategoryViewController.m in Sources */,
 				A202EB252085D2C70058F32C /* OTMemberCountCell.m in Sources */,
+				A2F5182820EF5A0F009AB222 /* OTEventInfoCell.m in Sources */,
 				A202EAF52085D2C70058F32C /* OTAddressBookItem.m in Sources */,
 				A202EC7F2085D2C80058F32C /* OTAssociationsCellProviderBehavior.m in Sources */,
 				A202EB2D2085D2C70058F32C /* OTContactInfoCell.m in Sources */,
@@ -5091,6 +5098,7 @@
 				A296B80820871CFC00F6AFBD /* OTMapCell.m in Sources */,
 				A2F50A1820EA295F009AB222 /* UIColor+Expanded.m in Sources */,
 				A296B80920871CFC00F6AFBD /* OTEntourageStateTransition.m in Sources */,
+				A2F5182920EF5A0F009AB222 /* OTEventInfoCell.m in Sources */,
 				A296B80A20871CFC00F6AFBD /* OTMembersCellProvider.m in Sources */,
 				A296B80B20871CFC00F6AFBD /* OTPhotoPickerBehavior.m in Sources */,
 				A296B80C20871CFC00F6AFBD /* OTAboutTableViewCell.m in Sources */,

@@ -44,24 +44,33 @@
 }
 
 - (NSString *)cellIdentifierAtPath:(NSIndexPath *)indexPath forItem:(id)item {
-    NSInteger inviteCellIndex = [self inviteCellIndex];
-    if ([item isKindOfClass:[NSString class]]) {
-        return @"DescriptionCell";
+    
+    if ([item isKindOfClass:[OTFeedItem class]]) {
+        OTFeedItem *feedItem = (OTFeedItem*)item;
+        if ([feedItem.identifierTag isEqualToString:@"feedDescription"]) {
+            return @"DescriptionCell";
+        }
+        else if ([feedItem.identifierTag isEqualToString:@"eventAuthorInfo"]) {
+            return @"DescriptionCell";
+        }
+        else if ([feedItem.identifierTag isEqualToString:@"inviteFriend"]) {
+            return @"InviteCell";
+        }
+        else if ([feedItem.identifierTag isEqualToString:@"feedLocation"]) {
+            return  @"MapCell";
+            
+        } else if ([feedItem.identifierTag isEqualToString:@"membersCount"]) {
+            return  @"MemberCountCell";
+            
+        } else if ([feedItem.identifierTag isEqualToString:@"eventInfo"]) {
+            return  @"EventInfoCell";
+        }
     }
     else if ([item isKindOfClass:[OTFeedItemJoiner class]]) {
         return @"MemberCell";
     }
-    else if (indexPath.row == inviteCellIndex) {
-        return @"InviteCell";
-    }
-    else if (indexPath.row == 0) {
-        return  @"MapCell";
-        
-    } else if (indexPath.row == inviteCellIndex - 1) {
-        return  @"MemberCountCell";
-    }
-    
-    return @"MemberCountCell";;
+
+    return @"MemberCountCell";
 }
 
 @end

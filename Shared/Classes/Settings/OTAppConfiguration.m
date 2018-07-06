@@ -588,6 +588,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         return NO;
     }
     
+    if ([entourage isOuting]) {
+        return NO;
+    }
+    
     return YES;
 }
 

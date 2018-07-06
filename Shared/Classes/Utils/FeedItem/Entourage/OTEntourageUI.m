@@ -11,6 +11,8 @@
 #import "OTLocationManager.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "UIColor+entourage.h"
+#import "NSDate+OTFormatter.h"
 
 @implementation OTEntourageUI
 
@@ -31,10 +33,40 @@
 }
 
 - (NSAttributedString *)eventAuthorFormattedDescription {
-    NSString *authorText = [NSString stringWithFormat:@"\nOrganisé par %@", self.entourage.author.displayName];
-    NSMutableAttributedString *authorAttributedText = [[NSMutableAttributedString alloc] initWithString:authorText];
     
-    return authorAttributedText;
+    UIColor *textColor = [OTAppAppearance iconColorForFeedItem:self.entourage];
+    NSString *organizerText = @"\nOrganisé";
+    NSString *fontName = @"SFUIText-Medium";
+    CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
+    
+    NSDictionary *atttributtes = @{NSFontAttributeName :
+                                       [UIFont fontWithName:fontName size:fontSize],
+                            NSForegroundColorAttributeName:textColor};
+    NSMutableAttributedString *organizerAttributedText = [[NSMutableAttributedString alloc] initWithString:organizerText attributes:atttributtes];
+    
+    NSAttributedString *byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.entourage.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    
+    NSMutableAttributedString *orgByNameAttrString = organizerAttributedText.mutableCopy;
+    [orgByNameAttrString appendAttributedString:byAttrString];
+    [orgByNameAttrString appendAttributedString:nameAttrString];
+
+    return orgByNameAttrString;
+}
+
+- (NSAttributedString *)eventInfoFormattedDescription {
+    
+    NSString *prefix = @"rendez-vous";
+    NSString *fontName = @"SFUIText-Medium";
+    CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
+    
+    NSString *startDateInfo = [self.entourage.startDate asStringWithFormat:@"EEEE dd MMMM yyyy"];
+    NSString *dateInfo = [NSString stringWithFormat:@"%@ %@", prefix, startDateInfo];
+    
+    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:dateInfo attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    
+    return infoAttrString;
 }
 
 - (NSString *)navigationTitle {

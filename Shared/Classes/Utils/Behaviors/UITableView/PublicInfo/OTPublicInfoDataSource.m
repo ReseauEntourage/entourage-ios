@@ -14,8 +14,12 @@
 - (void)loadDataFor:(OTFeedItem *)feedItem {
     NSMutableArray *items = [NSMutableArray arrayWithArray:@[feedItem, feedItem]];
     NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
-    if([description length] > 0)
-        [items addObject:description];
+    
+    if ([description length] > 0) {
+        feedItem.identifierTag = @"feedDescription";
+        [items addObject:feedItem.copy];
+    }
+    
     [self updateItems:items];
 }
 

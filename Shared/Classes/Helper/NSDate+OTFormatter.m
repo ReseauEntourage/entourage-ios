@@ -48,4 +48,10 @@
     return newDate;
 }
 
+- (NSString*)asStringWithFormat:(NSString*)format {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = format;
+    return [formatter stringFromDate:self];
+}
+
 @end

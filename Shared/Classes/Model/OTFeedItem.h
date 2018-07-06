@@ -23,7 +23,7 @@
 
 #define TOUR_TYPE_NAME @"Tour"
 
-@interface OTFeedItem : NSObject
+@interface OTFeedItem : NSObject <NSCopying>
 
 @property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSNumber *uid;
@@ -31,6 +31,7 @@
 @property (nonatomic, strong) OTFeedItemAuthor *author;
 @property (nonatomic, strong) NSDate *creationDate;
 @property (nonatomic, strong) NSDate *updatedDate;
+@property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSString *joinStatus;
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSString *type;
@@ -39,6 +40,8 @@
 @property (nonatomic, assign) NSNumber *unreadMessageCount;
 @property (nonatomic, strong) NSString *shareUrl;
 @property (nonatomic, strong) NSString *group_type;
+
+@property (nonatomic) NSString *identifierTag;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
