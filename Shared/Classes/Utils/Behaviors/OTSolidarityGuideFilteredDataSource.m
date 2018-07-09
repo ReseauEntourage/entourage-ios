@@ -21,13 +21,13 @@
 @synthesize items;
 
 - (void) filterItemsByString:(NSString *)searchString {
-    if([searchString length] == 0) {
+    if ([searchString length] == 0) {
         self.items = [NSMutableArray arrayWithObject:[self.allItems objectAtIndex:0]];
     }
     else {
         NSMutableArray *filtered = [NSMutableArray new];
         for(NSArray *header in self.allItems) {
-            for(OTSolidarityGuideFilterItem* filter in header) {
+            for (OTSolidarityGuideFilterItem* filter in header) {
                 NSRange rangeValue = [filter.title rangeOfString:searchString options:NSCaseInsensitiveSearch];
                 if(rangeValue.length > 0)
                    [filtered addObject:filter];

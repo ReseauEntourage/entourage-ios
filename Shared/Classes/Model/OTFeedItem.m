@@ -40,6 +40,7 @@
     copy->_shareUrl = [_shareUrl copyWithZone:zone];
     copy->_group_type = [_group_type copyWithZone:zone];
     copy->_identifierTag = [_identifierTag copyWithZone:zone];
+    copy->_displayAddress = [_displayAddress copyWithZone:zone];
     
     return copy;
 }
@@ -70,6 +71,7 @@
         NSDictionary *metadataDictionary = [dictionary objectForKey:kWSKeyMetadata];
         if ([metadataDictionary class] != [NSNull class] && metadataDictionary) {
             self.startDate = [metadataDictionary dateForKey:kWSKeyStartsAt];
+            self.displayAddress = [metadataDictionary stringForKey:kWSKeyDisplayAddress];
         }
     }
     return self;

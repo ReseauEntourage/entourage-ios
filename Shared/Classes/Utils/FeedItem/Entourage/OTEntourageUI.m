@@ -63,8 +63,13 @@
     
     NSString *startDateInfo = [self.entourage.startDate asStringWithFormat:@"EEEE dd MMMM yyyy"];
     NSString *dateInfo = [NSString stringWithFormat:@"%@ %@", prefix, startDateInfo];
+    NSString *addressInfo = [NSString stringWithFormat:@"\n%@", self.entourage.displayAddress];
     
-    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:dateInfo attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:dateInfo attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    
+    NSAttributedString *addressAttrString = [[NSAttributedString alloc] initWithString:addressInfo attributes:@{NSFontAttributeName : [UIFont fontWithName:@"SFUIText-Bold" size:fontSize]}];
+    
+    [infoAttrString appendAttributedString:addressAttrString];
     
     return infoAttrString;
 }

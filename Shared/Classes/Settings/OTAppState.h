@@ -33,7 +33,10 @@
 + (void)launchFeedsFilteringFromController:(UIViewController*)controller
                              withDelegate:(id<OTFeedItemsFilterDelegate>)delegate;
 
-+ (void)launchMapPIOsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)delegate;
++ (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)delegate;
+
++ (void)showFilteringOptionsFromController:(UIViewController*)controller
+                        withFullMapVisible:(BOOL)isFullMapVisible;
 
 + (void)launchInviteActionForFeedItem:(OTFeedItem*)item
                        fromController:(UIViewController*)controller

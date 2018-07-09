@@ -335,7 +335,9 @@
     NSDictionary *dateAtttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size], NSForegroundColorAttributeName:[UIColor appGreyishColor]};
     NSMutableAttributedString *dateAttrString = [[NSMutableAttributedString alloc] initWithString:dateString attributes:dateAtttributtes];
     
-    [eventAttrDescString appendAttributedString:dateAttrString];
+    if (item.startDate) {
+        [eventAttrDescString appendAttributedString:dateAttrString];
+    }
     
     return eventAttrDescString;
 }

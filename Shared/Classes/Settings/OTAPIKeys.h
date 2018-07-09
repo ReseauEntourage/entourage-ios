@@ -80,5 +80,6 @@
 // Event
 #define kWSKeyMetadata @"metadata"
 #define kWSKeyStartsAt @"starts_at"
+#define kWSKeyDisplayAddress @"display_address"
 
 #endif /* OTAPIKeys_h */

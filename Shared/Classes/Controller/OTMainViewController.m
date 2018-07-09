@@ -871,9 +871,6 @@
 }
 
 - (void)itemsUpdated {
-//    if (![OTAppConfiguration shouldShowPOIsOnFeedsMap] && !self.isFirstLoad) {
-//        return;
-//    }
     
     if (self.solidarityGuidePoisDisplayed) {
         return;
@@ -1254,11 +1251,8 @@
 
 - (IBAction)showFilters {
     [OTLogger logEvent:@"FeedFiltersPress"];
-    if (self.poisMapDelegate.isActive)
-        [OTAppState launchMapPIOsFilteringFromController:self withDelegate:self];
-    else {
-        [OTAppState launchFeedsFilteringFromController:self withDelegate:self];
-    }
+    
+    [OTAppState showFilteringOptionsFromController:self withFullMapVisible:self.poisMapDelegate.isActive];
 }
 
 - (IBAction)showCurrentLocation {

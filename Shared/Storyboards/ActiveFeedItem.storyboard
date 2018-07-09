@@ -1188,10 +1188,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrk-FD-0Q4">
-                                                    <rect key="frame" x="49" y="0.0" width="330" height="54"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="53.5" id="EMo-oQ-rks"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="49" y="0.0" width="345" height="44"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1206,8 +1203,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="MVI-Sj-QGm" firstAttribute="leading" secondItem="4bc-Q3-Q7n" secondAttribute="leading" constant="16" id="7Ei-BC-oer"/>
-                                                <constraint firstAttribute="bottom" secondItem="Rrk-FD-0Q4" secondAttribute="bottom" id="T6R-I5-Fif"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Rrk-FD-0Q4" secondAttribute="trailing" constant="15" id="YGi-ft-2yc"/>
+                                                <constraint firstAttribute="bottom" secondItem="Rrk-FD-0Q4" secondAttribute="bottom" constant="10" id="T6R-I5-Fif"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Rrk-FD-0Q4" secondAttribute="trailing" id="YGi-ft-2yc"/>
                                                 <constraint firstItem="Rrk-FD-0Q4" firstAttribute="top" secondItem="4bc-Q3-Q7n" secondAttribute="top" id="YRx-bo-z4b"/>
                                                 <constraint firstItem="Rrk-FD-0Q4" firstAttribute="leading" secondItem="MVI-Sj-QGm" secondAttribute="trailing" constant="8" id="oOK-xP-wPK"/>
                                                 <constraint firstItem="MVI-Sj-QGm" firstAttribute="top" secondItem="4bc-Q3-Q7n" secondAttribute="top" constant="15.999999999999943" id="tTY-D9-hrh"/>

@@ -26,15 +26,19 @@
     
     self.currentFilter = filter;
     self.dataSource.tableView.delegate = self;
+    
     self.groupHeaders = [filter groupHeaders];
     self.groupedSource = [filter toGroupedArray];
     self.parentArray = [filter parentArray];
 }
 
 - (OTFeedItemFilters *)readCurrentFilter {
-    for(NSArray *values in self.groupedSource)
-        for(OTFeedItemFilter *item in values)
+    for (NSArray *values in self.groupedSource) {
+        for (OTFeedItemFilter *item in values) {
             [self.currentFilter updateValue:item];
+        }
+    }
+    
     return self.currentFilter;
 }
 
@@ -51,11 +55,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     OTFeedItemFilter *item = (OTFeedItemFilter *)[self getItemAtIndexPath:indexPath];
     CGFloat size = 44;
+    
     [self readCurrentFilter];
+    
     OTFeedItemFilter *contribution;
     OTFeedItemFilter *demande;
     NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];
-    if(parents.count > 0) {
+    if (parents.count > 0) {
         if (IS_PRO_USER) {
             contribution = parents[1];
             demande = parents[2];
@@ -149,10 +155,13 @@
     return item.key == FeedItemFilterKeyTimeframe ? 90 : size;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView
+    willDisplayCell:(UITableViewCell *)cell
+    forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *itemsAtSection = (NSArray *)self.groupedSource[indexPath.section];
-    if(itemsAtSection.count > 10 && indexPath.row == itemsAtSection.count / 2 - 1)
+    if (itemsAtSection.count > 10 && indexPath.row == itemsAtSection.count / 2 - 1) {
         cell.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0);
+    }
 }
 
 @end

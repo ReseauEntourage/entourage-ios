@@ -40,6 +40,7 @@
 @property (nonatomic, assign) NSNumber *unreadMessageCount;
 @property (nonatomic, strong) NSString *shareUrl;
 @property (nonatomic, strong) NSString *group_type;
+@property (nonatomic, strong) NSString *displayAddress;
 
 @property (nonatomic) NSString *identifierTag;
 

@@ -295,7 +295,7 @@
 //    [controller presentViewController:navController animated:YES completion:nil];
 }
 
-+ (void)launchMapPIOsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)delegate {
++ (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)delegate {
     
     [controller performSegueWithIdentifier:@"SolidarityGuideSegue" sender:nil];
     
@@ -306,6 +306,22 @@
 //    navController.modalPresentationStyle = UIModalPresentationFullScreen;
 //
 //    [controller presentViewController:navController animated:YES completion:nil];
+}
+
++ (void)showFilteringOptionsFromController:(UIViewController*)controller
+                        withFullMapVisible:(BOOL)isFullMapVisible {
+    
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        [OTAppState launchFeedsFilteringFromController:controller withDelegate:(id<OTFeedItemsFilterDelegate>)controller];
+        return;
+    }
+    
+    if (isFullMapVisible) {
+        [OTAppState launchMapPOIsFilteringFromController:controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)controller];
+    }
+    else {
+        [OTAppState launchFeedsFilteringFromController:controller withDelegate:(id<OTFeedItemsFilterDelegate>)controller];
+    }
 }
 
 + (UIViewController *)getTopViewController {
