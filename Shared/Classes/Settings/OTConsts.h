@@ -106,6 +106,7 @@
 #define GROUP_TYPE_NEIGHBORHOOD @"neighborhood"
 #define GROUP_TYPE_PRIVATE_CIRCLE @"private_circle"
 #define GROUP_TYPE_CONVERSATION @"conversation"
+#define GROUP_TYPE_OUTING @"outing"
 
 // Email addresses
 #define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"

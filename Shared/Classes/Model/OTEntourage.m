@@ -20,6 +20,19 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    OTEntourage *copy = [super copyWithZone:zone];
+    copy.title = self.title;
+    copy.desc = self.desc;
+    copy.location = self.location;
+    copy.category = self.category;
+    copy.entourage_type = self.entourage_type;
+    copy.categoryObject = self.categoryObject;
+
+    return copy;
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super initWithDictionary:dictionary];
     if (self) {

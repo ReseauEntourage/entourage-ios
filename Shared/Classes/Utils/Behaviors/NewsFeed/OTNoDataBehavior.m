@@ -9,6 +9,7 @@
 #import "OTNoDataBehavior.h"
 #import "OTConsts.h"
 #import "NSAttributedString+OTBuilder.h"
+#import "entourage-Swift.h"
 
 @interface OTNoDataBehavior ()
 
@@ -27,6 +28,7 @@ static bool entourageClosed = NO;
     self.isGuide = NO;
     [self loadNoDataTexts];
     self.txtNoData.attributedText = self.noDataEntourageText;
+    self.noDataPopup.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
 - (void)closePopup:(id)sender {

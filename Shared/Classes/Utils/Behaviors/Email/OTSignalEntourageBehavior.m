@@ -23,7 +23,13 @@
     NSString *subject = [NSString stringWithFormat:[OTAppAppearance reportActionSubject],
                          entourage.title,
                          entourage.author.displayName];
-    [self sendMailWithSubject:subject];
+    [self sendMailWithSubject:subject body:nil];
+}
+
+- (void)sendPromoteEventMailFor:(OTEntourage *)entourage {
+    NSString *subject = [OTAppAppearance promoteEventActionSubject:entourage.title];
+    NSString *body = [OTAppAppearance promoteEventActionEmailBody:entourage.title];
+    [self sendMailWithSubject:subject body:body];
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate
@@ -41,11 +47,14 @@
 
 #pragma mark - private methods
 
-- (void)sendMailWithSubject:(NSString *)subject {
+- (void)sendMailWithSubject:(NSString *)subject body:(NSString*)body {
     if ([MFMailComposeViewController canSendMail]) {
         self.mailController = [MFMailComposeViewController new];
         [self.mailController setToRecipients:@[[OTAppAppearance reportActionToRecepient]]];
         [self.mailController setSubject:subject];
+        if (body) {
+            [self.mailController setMessageBody:body isHTML:NO];
+        }
         self.mailController.mailComposeDelegate = self;
         [self.owner showViewController:self.mailController sender:self];
     }

@@ -65,16 +65,20 @@
         self.lblTitle.text = [uiDelegate summary];
     }
     
-    if (self.lblUserCount)
+    if (self.lblUserCount) {
         self.lblUserCount.text = [feedItem.noPeople stringValue];
-    if (self.btnAvatar)
+    }
+    if (self.btnAvatar) {
         [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
+    }
     
-    if (self.lblDescription)
+    if (self.lblDescription) {
         [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+    }
     
-    if (self.txtFeedItemDescription)
+    if (self.txtFeedItemDescription) {
         self.txtFeedItemDescription.text = [uiDelegate feedItemDescription];
+    }
     
     if (self.lblTimeDistance) {
         double distance = [uiDelegate distance];
@@ -85,6 +89,7 @@
                                                        creationDate:feedItem.creationDate];
         }
     }
+    
     self.imgAssociation.hidden = feedItem.author.partner == nil;
     [self.imgAssociation setupFromUrl:feedItem.author.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     
@@ -92,15 +97,21 @@
     UIImage *image = nil;
     
     if ([feedItem isKindOfClass:[OTAnnouncement class]]) {
-        NSURL *urlSource = [[NSURL alloc] initWithString:source];
-        NSData *imageData = [NSData dataWithContentsOfURL:urlSource];
-        image = [UIImage imageWithData:imageData];
-        self.imgCategory.contentMode = UIViewContentModeScaleAspectFit;
         self.imgCategory.backgroundColor = [UIColor clearColor];
+        self.imgCategory.contentMode = UIViewContentModeScaleAspectFit;
+        [self.imgCategory setupFromUrl:source withPlaceholder:nil];
     }
     else {
-        if ([feedItem isConversation]) {
-            self.imgCategory.contentMode = UIViewContentModeCenter;
+        if ([feedItem isOuting]) {
+            image = [[UIImage imageNamed:source] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            self.imgCategory.tintColor = [OTAppAppearance iconColorForFeedItem:feedItem];
+            
+        } else if ([feedItem isConversation]) {
+            if (self.feedItem.author.avatarUrl) {
+                self.imgCategory.contentMode = UIViewContentModeScaleAspectFit;
+            } else {
+                self.imgCategory.contentMode = UIViewContentModeCenter;
+            }
             [self.imgCategory setupFromUrl:self.feedItem.author.avatarUrl withPlaceholder:@"userSmall"];
         } else {
             image = [UIImage imageNamed:source];

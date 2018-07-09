@@ -588,6 +588,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         return NO;
     }
     
+    if ([entourage isOuting]) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -607,20 +611,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return NO;
 }
 
-+ (BOOL)supportsClosingEntourageGroups {
-    // EMA-2052
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-
-    return YES;
-}
-
 + (BOOL)supportsClosingFeedAction:(OTFeedItem*)item {
-    // EMA-2052
+    // EMA-2052, EMA-2124
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([item isPrivateCircle] || [item isConversation] ||  [item isNeighborhood]) {
+        if ([item isPrivateCircle] || [item isConversation] || [item isNeighborhood]) {
             return NO;
+        }
+        
+        if ([item isOuting]) {
+            return YES;
         }
     }
 

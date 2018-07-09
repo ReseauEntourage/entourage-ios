@@ -21,6 +21,8 @@
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
 #import "UIColor+Expanded.h"
+#import "NSDate+OTFormatter.h"
+#import "NSDate+ui.h"
 
 #import "entourage-Swift.h"
 
@@ -176,7 +178,7 @@
 
 + (NSString*)userPrivateCirclesSectionTitle:(OTUser*)user {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([user.roles containsObject:kVisitorUserTag] || [user.roles containsObject:kCoordinatorUserTag]) {
+        if ([user isCoordinator]) {
             return OTLocalizedString(@"pfp_visitorPrivateCirclesSectionTitle");
         } else {
             return OTLocalizedString(@"pfp_visitedPrivateCirclesSectionTitle");
@@ -221,6 +223,29 @@
     return OTLocalizedString(@"mail_signal_subject");
 }
 
++ (NSString *)promoteEventActionSubject:(NSString*)eventName {
+    NSString *eventType = OTLocalizedString(@"event");
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        eventType = OTLocalizedString(@"pfp_event");
+    }
+    
+    NSString *eventDetails = [NSString stringWithFormat:@"%@ %@", eventType, eventName];
+    NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"promote_event_subject_format"), eventDetails];
+    return subject;
+}
+
++ (NSString *)promoteEventActionEmailBody:(NSString*)eventName {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        NSString *body = [NSString stringWithFormat:OTLocalizedString(@"pfp_promote_event_mail_body_format"), eventName];
+        return body;
+    }
+    
+    NSString *body = [NSString stringWithFormat:OTLocalizedString(@"promote_event_mail_body_format"), eventName];
+    return body;
+}
+
+
+
 + (NSString *)reportActionToRecepient {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return CONTACT_PFP_TO;
@@ -250,16 +275,27 @@
 
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
     
+    // Pfp items
     UIColor *typeColor = [ApplicationTheme shared].backgroundThemeColor;
-    
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([item isNeighborhood] || [item isPrivateCircle]) {
+        if ([item isNeighborhood] ||
+            [item isPrivateCircle]) {
             return [[NSAttributedString alloc] initWithString:@"Voisinage"];
-        } else if  ([item isConversation]) {
+            
+        } else if ([item isConversation]) {
             return [[NSAttributedString alloc] initWithString:@""];
+            
+        } else if ([item isOuting]) {
+            return [self formattedEventDateDescriptionForMessageItem:item size:size];
         }
     }
     
+    // Entourage Outing items
+    if ([item.category isEqualToString:@"event"] || [item isOuting]) {
+        return [self formattedEventDateDescriptionForMessageItem:item size:size];;
+    }
+    
+    // The rest of items
     if ([item.entourage_type isEqualToString:@"contribution"]) {
         typeColor = [UIColor brightBlue];
     } else if ([item.entourage_type isEqualToString:@"ask_for_help"]) {
@@ -281,13 +317,40 @@
     return typeByNameAttrString;
 }
 
++ (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
+    
+    UIColor *typeColor = [UIColor appGreyishColor];
+    NSString *eventName = OTLocalizedString(@"event").capitalizedString;
+    
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        typeColor = [UIColor pfpOutingCircleColor];
+        eventName = OTLocalizedString(@"pfp_event").capitalizedString;
+    }
+    
+    NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
+                                   NSForegroundColorAttributeName:typeColor};
+    NSMutableAttributedString *eventAttrDescString = [[NSMutableAttributedString alloc] initWithString:eventName attributes:atttributtes];
+    
+    NSString *dateString = [NSString stringWithFormat:@" le %@", [item.startDate asStringWithFormat:@"EEEE dd/MM"]];
+    NSDictionary *dateAtttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size], NSForegroundColorAttributeName:[UIColor appGreyishColor]};
+    NSMutableAttributedString *dateAttrString = [[NSMutableAttributedString alloc] initWithString:dateString attributes:dateAtttributtes];
+    
+    if (item.startDate) {
+        [eventAttrDescString appendAttributedString:dateAttrString];
+    }
+    
+    return eventAttrDescString;
+}
+
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item {
     NSString *icon = [NSString stringWithFormat:@"%@_%@", item.entourage_type, item.category];
     
     if ([item isPrivateCircle]) {
         icon = @"private-circle";
-    } else if ([item isNeighborhood]){
+    } else if ([item isNeighborhood]) {
         icon = @"neighborhood";
+    } else if ([item isOuting]) {
+        icon = @"outing";
     }
     
     return icon;
@@ -303,11 +366,14 @@
 
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem {
     UIColor *color = [ApplicationTheme shared].backgroundThemeColor;
+    
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([feedItem isNeighborhood] || [feedItem isPrivateCircle]) {
+        if ([feedItem isNeighborhood]) {
             color = [UIColor pfpNeighborhoodColor];
         } else if ([feedItem isPrivateCircle]) {
             color = [UIColor pfpPrivateCircleColor];
+        } else if ([feedItem isOuting]) {
+            color = [UIColor pfpOutingCircleColor];
         }
         return color;
     }

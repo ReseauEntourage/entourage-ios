@@ -18,6 +18,7 @@
 #import "OTEntourageAnnotation.h"
 #import "OTNeighborhoodAnnotation.h"
 #import "OTPrivateCircleAnnotation.h"
+#import "OTOutingAnnotation.h"
 
 @implementation OTToursMapDelegate
 
@@ -52,6 +53,14 @@
         annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kNeighborhoodAnnotationIdentifier];
         if (!annotationView) {
             annotationView = ((OTNeighborhoodAnnotation *)annotation).annotationView;
+        }
+        annotationView.annotation = annotation;
+        annotationView.canShowCallout = NO;
+    }
+    else if ([annotation isKindOfClass:[OTOutingAnnotation class]]) {
+        annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:kOutingAnnotationIdentifier];
+        if (!annotationView) {
+            annotationView = ((OTOutingAnnotation *)annotation).annotationView;
         }
         annotationView.annotation = annotation;
         annotationView.canShowCallout = NO;

@@ -52,6 +52,8 @@ extern NSString *const kVisitedUserTag;
  */
 - (BOOL)isPro;
 
+- (BOOL)isCoordinator;
+
 /*
  * Returns the name of the role to be displayed in the left side of the user's fullname
  */
@@ -64,5 +66,6 @@ extern NSString *const kVisitedUserTag;
 
 - (NSArray <OTUserMembershipListItem*>*)privateCircles;
 - (NSArray <OTUserMembershipListItem*>*)neighborhoods;
+- (NSArray <OTUserMembershipListItem*>*)outings;
 
 @end

@@ -27,6 +27,8 @@
 + (NSString *)extendSearchParameterDescription;
 + (NSString *)extendMapSearchParameterDescription;
 + (NSString *)reportActionSubject;
++ (NSString *)promoteEventActionSubject:(NSString*)eventName;
++ (NSString *)promoteEventActionEmailBody:(NSString*)eventName;
 + (NSString *)reportActionToRecepient;
 + (NSString*)userPhoneNumberNotFoundMessage;
 + (NSString *)userActionsTitle;
@@ -39,6 +41,7 @@
 + (UIColor *)rightTagColor:(OTUser*)user;
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem;
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
++ (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem;
 + (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem;

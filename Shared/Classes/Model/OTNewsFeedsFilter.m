@@ -30,11 +30,17 @@
 
 - (instancetype)init {
     self = [super init];
-    if(self) {
+    if (self) {
         self.isPro = IS_PRO_USER;
         OTSavedFilter *savedFilter = [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter;
         self.showOnlyMyEntourages = NO;
-        if(savedFilter) {
+        
+        if (savedFilter) {
+            
+            self.showOuting = savedFilter.showOuting.boolValue;
+            self.showNeighborhood = savedFilter.showNeighborhood.boolValue;
+            self.showPrivateCircle = savedFilter.showPrivateCircle.boolValue;
+            
             self.showTours = savedFilter.showTours.boolValue;
             
             self.showMedical = !self.showTours ? self.showTours : savedFilter.showMedical.boolValue;
@@ -46,6 +52,7 @@
             self.timeframeInHours = savedFilter.timeframeInHours.intValue;
             self.showFromOrganisation = savedFilter.showFromOrganisation.boolValue;
             self.showOnlyMyEntourages = savedFilter.showOnlyMyEntourages.boolValue;
+            
             self.showDemandeSocial = !self.showDemand ? self.showDemand : savedFilter.showDemandeSocial.boolValue;
             self.showDemandeEvent = !self.showDemand ? self.showDemand : savedFilter.showDemandeEvent.boolValue;
             self.showDemandeHelp = !self.showDemand ? self.showDemand : savedFilter.showDemandeHelp.boolValue;
@@ -62,6 +69,10 @@
             self.showContributionOther = !self.showContribution ? self.showContribution : savedFilter.showContributionOther.boolValue;
         }
         else {
+            self.showNeighborhood = YES;
+            self.showPrivateCircle = YES;
+            self.showOuting = YES;
+            
             self.showMedical = self.isPro;
             self.showSocial = self.isPro;
             self.showDistributive = self.isPro;
@@ -89,7 +100,7 @@
 }
 
 - (NSArray *)groupHeaders {
-    if(IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality)
+    if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality)
         return @[
                  OTLocalizedString(@"filter_maraudes_title"),
                  OTLocalizedString(@"filter_entourages_title"),
@@ -124,10 +135,12 @@
                                  @"ask_for_help" : [NSNumber numberWithBool:self.showDemand],
                                  @"contribution" : [NSNumber numberWithBool:self.showContribution]
                                  };
-    if(IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality)
+    if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         return [self groupForPro];
-    else
+    }
+    else {
         return [self groupForPublic];
+    }
 }
 
 - (NSArray *)parentArray {
@@ -147,14 +160,18 @@
                                                     active:self.showTours
                                                   children:tourChildren]];
     }
+    
     OTCategoryType *contribution;
     OTCategoryType *demande;
-    for(OTCategoryType *type in data) {
-        if ([type.type isEqualToString:@"contribution"])
+    for (OTCategoryType *type in data) {
+        if ([type.type isEqualToString:@"contribution"]) {
             contribution = type;
-        else if ([type.type isEqualToString:@"ask_for_help"])
+        }
+        else if ([type.type isEqualToString:@"ask_for_help"]) {
             demande = type;
+        }
     }
+    
     NSArray *contributionArray = [self contributionCategory:contribution];
     [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
                                                  active:self.showContribution
@@ -210,7 +227,7 @@
 - (NSArray *)demandCategory: (OTCategoryType *)demande {
     NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
     int index = 7;
-    for(OTCategory *category in demande.categories) {
+    for (OTCategory *category in demande.categories) {
         NSString *value = [NSString stringWithFormat:@"%@_%@", demande.type, category.category];
         [categoryArray addObject:[OTFeedItemFilter createFor:index
                                                       active:[[self.categoryDictionary valueForKey:value] boolValue]
@@ -224,7 +241,7 @@
 - (NSArray *)contributionCategory: (OTCategoryType *)contribution {
     NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
     int index = 0;
-    for(OTCategory *category in contribution.categories) {
+    for (OTCategory *category in contribution.categories) {
         NSString *value = [NSString stringWithFormat:@"%@_%@", contribution.type, category.category];
         [categoryArray addObject:[OTFeedItemFilter createFor:index
                                                       active:[[self.categoryDictionary valueForKey:value] boolValue]
@@ -240,11 +257,13 @@
     NSMutableArray *action = [[NSMutableArray alloc] init];
     OTCategoryType *contribution;
     OTCategoryType *demande;
-    for(OTCategoryType *type in data) {
-        if ([type.type isEqualToString:@"contribution"])
+    for (OTCategoryType *type in data) {
+        if ([type.type isEqualToString:@"contribution"]) {
             contribution = type;
-        else if ([type.type isEqualToString:@"ask_for_help"])
+        }
+        else if ([type.type isEqualToString:@"ask_for_help"]) {
             demande = type;
+        }
     }
     NSArray *contributionArray = [self contributionCategory:contribution];
     NSArray *demandeArray = [self demandCategory:demande];
@@ -264,7 +283,7 @@
 - (NSArray *)groupUniquement {
     OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
     NSArray *uniquement = nil;
-    if(user.partner == nil)
+    if (user.partner == nil)
         uniquement = @[
                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
                                             active:self.showOnlyMyEntourages
@@ -382,62 +401,69 @@
 
 - (NSString *)getTourTypes {
     NSMutableArray *types = [NSMutableArray new];
-    if(self.showMedical)
+    if (self.showMedical)
         [types addObject:OTLocalizedString(@"tour_type_medical")];
-    if(self.showSocial)
+    if (self.showSocial)
         [types addObject:OTLocalizedString(@"tour_type_bare_hands")];
-    if(self.showDistributive)
+    if (self.showDistributive)
         [types addObject:OTLocalizedString(@"tour_type_alimentary")];
-    if(self.showTours && IS_PRO_USER)
+    if (self.showTours && IS_PRO_USER)
         return [types componentsJoinedByString:@","];
     return @"";
 }
 
 - (NSString *)getTypes {
     NSMutableArray *types = [NSMutableArray new];
-    if(self.showMedical)
+    if (self.showMedical)
         [types addObject:@"tm"];
-    if(self.showSocial)
+    if (self.showSocial)
         [types addObject:@"tb"];
-    if(self.showDistributive)
+    if (self.showDistributive)
         [types addObject:@"ta"];
-    if(self.showDemandeSocial)
+    if (self.showDemandeSocial)
         [types addObject:@"as"];
-    if(self.showDemandeEvent)
+    if (self.showDemandeEvent)
         [types addObject:@"ae"];
-    if(self.showDemandeHelp)
+    if (self.showDemandeHelp)
         [types addObject:@"am"];
-    if(self.showDemandeResource)
+    if (self.showDemandeResource)
         [types addObject:@"ar"];
-    if(self.showDemandeInfo)
+    if (self.showDemandeInfo)
         [types addObject:@"ai"];
-    if(self.showDemandeSkill)
+    if (self.showDemandeSkill)
         [types addObject:@"ak"];
-    if(self.showDemandeOther)
+    if (self.showDemandeOther)
         [types addObject:@"ao"];
-    if(self.showContributionSocial)
+    if (self.showContributionSocial)
         [types addObject:@"cs"];
-    if(self.showContributionEvent)
+    if (self.showContributionEvent)
         [types addObject:@"ce"];
-    if(self.showContributionHelp)
+    if (self.showContributionHelp)
         [types addObject:@"cm"];
-    if(self.showContributionResource)
+    if (self.showContributionResource)
         [types addObject:@"cr"];
-    if(self.showContributionInfo)
+    if (self.showContributionInfo)
         [types addObject:@"ci"];
-    if(self.showContributionSkill)
+    if (self.showContributionSkill)
         [types addObject:@"ck"];
-    if(self.showContributionOther)
+    if (self.showContributionOther)
         [types addObject:@"co"];
+    
+    if (self.showPrivateCircle)
+        [types addObject:@"pc"];
+    if (self.showNeighborhood)
+        [types addObject:@"nh"];
+    if (self.showOuting)
+        [types addObject:@"ou"];
+    
     return [types componentsJoinedByString:@","];
-    return @"";
 }
 
 - (NSString *)getEntourageTypes {
     NSMutableArray *types = [NSMutableArray new];
-    if(self.showDemand)
+    if (self.showDemand)
         [types addObject:ENTOURAGE_DEMANDE];
-    if(self.showContribution)
+    if (self.showContribution)
         [types addObject:ENTOURAGE_CONTRIBUTION];
     return [types componentsJoinedByString:@","];
 }
@@ -456,6 +482,11 @@
     copy.distance = self.distance;
     copy.showOnlyMyEntourages = self.showOnlyMyEntourages;
     copy.showFromOrganisation = self.showFromOrganisation;
+    
+    copy.showNeighborhood = self.showNeighborhood;
+    copy.showPrivateCircle = self.showPrivateCircle;
+    copy.showOuting = self.showOuting;
+    
     return copy;
 }
 

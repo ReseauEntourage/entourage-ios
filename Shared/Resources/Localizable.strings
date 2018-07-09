@@ -194,6 +194,7 @@ Proposez une structure";
 "title" = "Titre";
 "demande" = "Demandes: je cherche...";
 "ask_for_help" = "Demande";
+"event" = "évènement";
 "contribution" = "Contribution";
 "contribution_filter" = "Contributions: je me propose de...";
 "detailedDescription" = "Description détaillée";
@@ -235,6 +236,8 @@ Proposez une structure";
 "join_entourage_btn" = "Rejoindre";
 "join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !
 Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
+"promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
+"promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
 
 // Feed Item details
 "item_option_close" = "Arrêter";

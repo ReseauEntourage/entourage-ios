@@ -48,8 +48,8 @@
 
 - (NSInteger)inviteCellIndex {
     BOOL hasFoundDescriptionItem = NO;
-    for (id item in self.dataSource.items) {
-        if ([item isKindOfClass:[NSString class]]) {
+    for (OTFeedItem *item in self.dataSource.items) {
+        if ([item.identifierTag isEqualToString:@"feedDescription"]) {
             hasFoundDescriptionItem = YES;
             break;
         }
@@ -59,18 +59,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id item = [self getItemAtIndexPath:indexPath];
+    
     if ([item isKindOfClass:[OTFeedItemJoiner class]]) {
         OTFeedItemJoiner *joiner = (OTFeedItemJoiner *)item;
         [self.userProfileBehavior showProfile:joiner.uID];
     }
-    else if (indexPath.row == [self inviteCellIndex]) {
-        id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:item] getStateInfo];
-        if (![stateInfo canChangeEditState]) {
-            return;
-        }
-        
-        if ([stateInfo canInvite]) {
-            [self.inviteBehavior startInvite];
+    else if ([item isKindOfClass:[OTFeedItem class]]) {
+        OTFeedItem *feedItem = (OTFeedItem*)item;
+        if ([feedItem.identifierTag isEqualToString:@"inviteFriend"]) {
+            id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:item] getStateInfo];
+            if (![stateInfo canChangeEditState]) {
+                return;
+            }
+            
+            if ([stateInfo canInvite]) {
+                [self.inviteBehavior startInvite];
+            }
         }
     }
 }

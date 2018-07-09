@@ -18,19 +18,27 @@
     id item = [self.tableDataSource getItemAtIndexPath:indexPath];
     NSString *identifier = [self cellIdentifierAtPath:indexPath forItem:item];
     OTBaseInfoCell *cell = (OTBaseInfoCell *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:identifier];
+    
     [cell configureWith:item];
+    
     return cell;
 }
 
 #pragma mark - private methods
 
 - (NSString *)cellIdentifierAtPath:(NSIndexPath *)indexPath forItem:(id)item {
-    if(indexPath.row == 0)
-        return @"SummaryCell";
-    else if(indexPath.row == 1)
-        return @"MapCell";
-    else
-        return @"DescriptionCell";
+    
+    if ([item isKindOfClass:[OTFeedItem class]]) {
+        OTFeedItem *feedItem = (OTFeedItem*)item;
+        if (indexPath.row == 0) {
+            return @"SummaryCell";
+        }
+        else if ([feedItem.identifierTag isEqualToString:@"feedLocation"]) {
+            return  @"MapCell";
+        }
+    }
+    
+    return @"DescriptionCell";
 }
 
 @end

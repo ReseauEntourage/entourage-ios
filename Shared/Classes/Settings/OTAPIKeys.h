@@ -77,6 +77,9 @@
 #define kWSKeyLastname @"last_name"
 #define kWSKeyAboutMe @"about"
 
-
+// Event
+#define kWSKeyMetadata @"metadata"
+#define kWSKeyStartsAt @"starts_at"
+#define kWSKeyDisplayAddress @"display_address"
 
 #endif /* OTAPIKeys_h */

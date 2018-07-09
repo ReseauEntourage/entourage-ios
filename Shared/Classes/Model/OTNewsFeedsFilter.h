@@ -19,6 +19,11 @@
 @property (nonatomic) BOOL showDemand;
 @property (nonatomic) BOOL showContribution;
 @property (nonatomic) BOOL showTours;
+
+@property (nonatomic) BOOL showOuting;
+@property (nonatomic) BOOL showNeighborhood;
+@property (nonatomic) BOOL showPrivateCircle;
+
 @property (nonatomic) BOOL showOnlyMyEntourages;
 @property (nonatomic) BOOL showFromOrganisation;
 

@@ -28,7 +28,9 @@
 @property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *toggleEditBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *toggleSignalEntourageBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *toggleShareEntourageBehavior;
+@property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior *togglePromoteEntourageBehavior;
 @property (nonatomic, strong) IBOutlet OTSignalEntourageBehavior* singalEntourageBehavior;
+@property (nonatomic, strong) IBOutlet OTSignalEntourageBehavior* promoteEntourageBehavior;
 @property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareItem;
 @property (nonatomic, weak) IBOutlet UIButton *shareBtn;
 @property (nonatomic, weak) IBOutlet UIButton *cancelButton;
@@ -42,20 +44,31 @@
     
     [self.shareItem configureWith:self.feedItem];
     [self changeBorderColors];
+    
     [self.toggleEditBehavior initialize];
-    
-    id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
-    
-    BOOL canCancelJoin = [stateInfo canCancelJoinRequest];
-    [self.toggleEditBehavior toggle:[stateInfo canEdit] animated:NO];
     [self.toggleSignalEntourageBehavior initialize];
     [self.toggleShareEntourageBehavior initialize];
+    [self.togglePromoteEntourageBehavior initialize];
     
-    [self.toggleSignalEntourageBehavior toggle:[self.feedItem isKindOfClass:[OTEntourage class]] && ![USER_ID isEqualToNumber:self.feedItem.author.uID] && !canCancelJoin animated:NO];
+    id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     
-    [self.toggleShareEntourageBehavior toggle:![self.feedItem.joinStatus isEqualToString:JOIN_ACCEPTED] animated:NO];
+    BOOL canEdit = [stateInfo canEdit];
+    BOOL canCancelJoin = [stateInfo canCancelJoinRequest];
+    BOOL canReport = [self.feedItem isKindOfClass:[OTEntourage class]] &&
+        ![USER_ID isEqualToNumber:self.feedItem.author.uID] &&
+        !canCancelJoin;
+    BOOL canShare = ![self.feedItem.joinStatus isEqualToString:JOIN_ACCEPTED];
+    BOOL canPromote = [currentUser isCoordinator] && [self.feedItem isOuting];
     
-    [self.shareBtn addTarget:self.shareItem action:@selector(sharePublic:) forControlEvents:UIControlEventTouchUpInside];
+    [self.toggleEditBehavior toggle:canEdit animated:NO];
+    [self.toggleSignalEntourageBehavior toggle:canReport animated:NO];
+    [self.toggleShareEntourageBehavior toggle:canShare animated:NO];
+    [self.togglePromoteEntourageBehavior toggle:canPromote animated:NO];
+    
+    [self.shareBtn addTarget:self.shareItem
+                      action:@selector(sharePublic:)
+            forControlEvents:UIControlEventTouchUpInside];
     
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
     
@@ -90,8 +103,17 @@
 
 - (IBAction)signalEntourage:(id)sender {
     [self prepareForClosing];
+    
     if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
         [self.singalEntourageBehavior sendMailFor:(OTEntourage *)self.feedItem];
+    }
+}
+
+- (IBAction)promoteEntourage:(id)sender {
+    [self prepareForClosing];
+    
+    if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
+        [self.promoteEntourageBehavior sendPromoteEventMailFor:(OTEntourage *)self.feedItem];
     }
 }
 

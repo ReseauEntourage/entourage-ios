@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @protocol InviteSourceDelegate;
+@protocol OTFeedItemsFilterDelegate;
+@protocol OTSolidarityGuideFilterDelegate;
 
 @interface OTAppState : NSObject
 + (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions;
@@ -27,6 +29,15 @@
 + (void)continueFromUserEmailScreen;
 + (void)continueFromUserNameScreen;
 + (void)continueEditingEntourage:(OTEntourage*)entourage fromController:(UIViewController*)controller;
+
++ (void)launchFeedsFilteringFromController:(UIViewController*)controller
+                             withDelegate:(id<OTFeedItemsFilterDelegate>)delegate;
+
++ (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)delegate;
+
++ (void)showFilteringOptionsFromController:(UIViewController*)controller
+                        withFullMapVisible:(BOOL)isFullMapVisible;
+
 + (void)launchInviteActionForFeedItem:(OTFeedItem*)item
                        fromController:(UIViewController*)controller
                              delegate:(id<InviteSourceDelegate>)delegate;

@@ -37,7 +37,8 @@
                      failure:(void (^)(NSError *)) failure;
 
 - (void)closeEntourage:(OTEntourage *)entourage
-           withSuccess:(void (^)(OTEntourage *))success
+           withOutcome:(BOOL)outcome
+               success:(void (^)(OTEntourage *))success
                failure:(void (^)(NSError *))failure;
 
 - (void)updateEntourageJoinRequestStatus:(NSString *)status

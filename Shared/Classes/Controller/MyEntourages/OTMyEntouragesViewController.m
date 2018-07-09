@@ -103,11 +103,13 @@
         [OTLogger logEvent:@"DiscussionMembersListView"];
         return;
     }
-    if([self.manageInvitation prepareSegueForManage:segue])
+    if ([self.manageInvitation prepareSegueForManage:segue])
         return;
-    if ([self.userProfileBehavior prepareSegueForUserProfile:segue])
+    if ([self.userProfileBehavior prepareSegueForUserProfile:segue]) {
         return;
-    if([segue.identifier isEqualToString:@"FiltersSegue"]) {
+    }
+    
+    if ([segue.identifier isEqualToString:@"FiltersSegue"]) {
         [OTLogger logEvent:@"MessagesFilterClick"];
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTFeedItemFiltersViewController *filtersController = (OTFeedItemFiltersViewController *)controller.topViewController;

@@ -30,6 +30,11 @@
     return [UIColor colorWithRed: 255.0/255.0 green: 33.0/255.0 blue: 89.0/255.0 alpha: 1];
 }
 
++ (UIColor*)pfpOutingCircleColor
+{
+    return [UIColor colorWithRed: 120.0/255.0 green: 16.0/255.0 blue: 74.0/255.0 alpha: 1];
+}
+
 + (UIColor*)pfpPurpleColor
 {
     return [UIColor colorWithRed: 177.0/255.0 green: 15.0/255.0 blue: 105.0/255.0 alpha: 1];

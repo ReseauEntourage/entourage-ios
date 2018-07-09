@@ -256,6 +256,7 @@
 }
 
 #define kMapHeaderOffsetY 0.0
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.tableHeaderView == nil) return;
     [UIView animateWithDuration:0.5 animations:^() {

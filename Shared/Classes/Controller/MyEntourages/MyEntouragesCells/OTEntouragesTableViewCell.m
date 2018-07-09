@@ -32,12 +32,7 @@
     self.summaryProvider.showTimeAsUpdatedDate = YES;
     self.summaryProvider.imgCategorySize = CGSizeMake(25, 25);
     
-    NSString *lastMessage = [self getAuthorTextFor:item.lastMessage];
-    if ([self.lblLastMessage.text length] > 0) {
-        self.lblLastMessage.text = lastMessage;
-    } else {
-        self.summaryProvider.lblDescription = self.lblLastMessage;
-    }
+    [self setupSubtitleLabelWithItem:item];
     
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
@@ -63,7 +58,13 @@
         self.lblTimeDistance.textColor = readColor;
     }
 
-    if ([self.lblLastMessage.text length] > 0) {
+    [self setupSubtitleLabelWithItem:item];
+}
+
+- (void)setupSubtitleLabelWithItem:(OTFeedItem*)item {
+    NSString *lastMessage = [self getAuthorTextFor:item.lastMessage];
+    if ([lastMessage length] > 0) {
+        self.summaryProvider.lblDescription = self.lblLastMessage;
         self.lblLastMessage.text = lastMessage;
     } else {
         self.summaryProvider.lblDescription = self.lblLastMessage;

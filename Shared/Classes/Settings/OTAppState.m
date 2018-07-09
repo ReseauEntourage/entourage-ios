@@ -24,6 +24,8 @@
 #import "OTInviteSourceViewController.h"
 #import <UIKit/UIActivity.h>
 #import "OTActivityProvider.h"
+#import "OTFeedItemFiltersViewController.h"
+#import "OTSolidarityGuideFiltersViewController.h"
 
 #define TUTORIAL_DELAY 15
 #define MAP_TAB_INDEX 0
@@ -277,6 +279,48 @@
         NSArray *objectsToShare = @[activity];
         UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
         [controller presentViewController:activityVC animated:YES completion:nil];
+    }
+}
+
++ (void)launchFeedsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTFeedItemsFilterDelegate>)delegate {
+    
+    [controller performSegueWithIdentifier:@"FiltersSegue" sender:nil];
+    
+//    UIStoryboard *filtersStoryboard = [UIStoryboard storyboardWithName:@"FiltersSegue" bundle:nil];
+//    OTFeedItemFiltersViewController *viewController = [filtersStoryboard instantiateViewControllerWithIdentifier:@"OTFeedItemFiltersViewController"];
+//    viewController.filterDelegate = delegate;
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+//    navController.modalPresentationStyle = UIModalPresentationFullScreen;
+//
+//    [controller presentViewController:navController animated:YES completion:nil];
+}
+
++ (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)delegate {
+    
+    [controller performSegueWithIdentifier:@"SolidarityGuideSegue" sender:nil];
+    
+//    UIStoryboard *filtersStoryboard = [UIStoryboard storyboardWithName:@"SolidarityGuideSegue" bundle:nil];
+//    OTSolidarityGuideFiltersViewController *viewController = [filtersStoryboard instantiateViewControllerWithIdentifier:@"OTSolidarityGuideFiltersViewController"];
+//    viewController.filterDelegate = delegate;
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+//    navController.modalPresentationStyle = UIModalPresentationFullScreen;
+//
+//    [controller presentViewController:navController animated:YES completion:nil];
+}
+
++ (void)showFilteringOptionsFromController:(UIViewController*)controller
+                        withFullMapVisible:(BOOL)isFullMapVisible {
+    
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        [OTAppState launchFeedsFilteringFromController:controller withDelegate:(id<OTFeedItemsFilterDelegate>)controller];
+        return;
+    }
+    
+    if (isFullMapVisible) {
+        [OTAppState launchMapPOIsFilteringFromController:controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)controller];
+    }
+    else {
+        [OTAppState launchFeedsFilteringFromController:controller withDelegate:(id<OTFeedItemsFilterDelegate>)controller];
     }
 }
 

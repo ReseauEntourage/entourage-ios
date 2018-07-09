@@ -90,6 +90,7 @@
 #import "OTEntourageAnnotation.h"
 #import "OTNeighborhoodAnnotation.h"
 #import "OTPrivateCircleAnnotation.h"
+#import "OTOutingAnnotation.h"
 
 #define MAPVIEW_HEIGHT 224.f
 
@@ -713,6 +714,11 @@
                             if (entFeedAnnotation) {
                                 [annotations addObject:entFeedAnnotation];
                             }
+                        } else if ([item isOuting]) {
+                            OTOutingAnnotation *entFeedAnnotation = [[OTOutingAnnotation alloc] initWithEntourage:(OTEntourage*)item];
+                            if (entFeedAnnotation) {
+                                [annotations addObject:entFeedAnnotation];
+                            }
                         }
                     }
                 }
@@ -865,9 +871,6 @@
 }
 
 - (void)itemsUpdated {
-//    if (![OTAppConfiguration shouldShowPOIsOnFeedsMap] && !self.isFirstLoad) {
-//        return;
-//    }
     
     if (self.solidarityGuidePoisDisplayed) {
         return;
@@ -1248,10 +1251,8 @@
 
 - (IBAction)showFilters {
     [OTLogger logEvent:@"FeedFiltersPress"];
-    if (self.poisMapDelegate.isActive)
-        [self performSegueWithIdentifier:@"SolidarityGuideSegue" sender:self];
-    else
-        [self performSegueWithIdentifier:@"FiltersSegue" sender:self];
+    
+    [OTAppState showFilteringOptionsFromController:self withFullMapVisible:self.poisMapDelegate.isActive];
 }
 
 - (IBAction)showCurrentLocation {
@@ -1445,14 +1446,14 @@
         controller.location = currentLocation;
         controller.entourageEditorDelegate = self;
     }
-    else if([segue.identifier isEqualToString:@"FiltersSegue"]) {
-        UINavigationController *navController = (UINavigationController*)destinationViewController;
-        OTFeedItemFiltersViewController *controller = (OTFeedItemFiltersViewController*)navController.topViewController;
-        controller.filterDelegate = self;
-    }
     else if ([segue.identifier isEqualToString:@"SolidarityGuideSegue"]) {
         UINavigationController *navController = (UINavigationController *)destinationViewController;
         OTSolidarityGuideFiltersViewController *controller = (OTSolidarityGuideFiltersViewController *)navController.topViewController;
+        controller.filterDelegate = self;
+    }
+    else if([segue.identifier isEqualToString:@"FiltersSegue"]) {
+        UINavigationController *navController = (UINavigationController*)destinationViewController;
+        OTFeedItemFiltersViewController *controller = (OTFeedItemFiltersViewController*)navController.topViewController;
         controller.filterDelegate = self;
     }
     else if([segue.identifier isEqualToString:@"PublicFeedItemDetailsSegue"]) {

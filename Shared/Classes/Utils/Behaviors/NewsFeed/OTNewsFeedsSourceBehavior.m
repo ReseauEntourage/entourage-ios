@@ -85,11 +85,13 @@
 
 - (void)loadMoreItems {
     NSDate *beforeDate = [NSDate date];
-    if(self.feedItems.count > 0)
+    if (self.feedItems.count > 0) {
         beforeDate = [self.feedItems.lastObject updatedDate] ? [self.feedItems.lastObject updatedDate] : [self.feedItems objectAtIndex:self.feedItems.count - 2];
+    }
+    
     [self.tableDelegate beginUpdatingFeeds];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        if(items.count > 0) {
+        if (items.count > 0) {
             [self.feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
         }
@@ -143,10 +145,11 @@
             orError:(void(^)(NSError *))failure {
     self.currentFilter.distance = self.radius;
     NSString *loadFilterString = self.currentFilter.description;
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     self.indicatorView.hidden = NO;
-    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:beforeDate andLocation:self.currentCoordinate]
-    ;
+    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:beforeDate andLocation:self.currentCoordinate];
+    
     NSLog(@"ALA_BALA - Calling with %@", filterDictionary);
 
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
@@ -154,10 +157,12 @@
         self.lastOkCoordinate = self.currentCoordinate;
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.indicatorView.hidden = YES;
-        if(![self.currentFilter.description isEqualToString:loadFilterString])
-            return;
-        if(success)
-            success(feeds);
+                                                if (![self.currentFilter.description isEqualToString:loadFilterString]) {
+                                                    return;
+                                                }
+                                                if (success) {
+                                                    success(feeds);
+                                                }
     } failure:^(NSError *error) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.indicatorView.hidden = YES;
