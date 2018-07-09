@@ -1255,9 +1255,10 @@
 - (IBAction)showFilters {
     [OTLogger logEvent:@"FeedFiltersPress"];
     if (self.poisMapDelegate.isActive)
-        [self performSegueWithIdentifier:@"SolidarityGuideSegue" sender:self];
-    else
-        [self performSegueWithIdentifier:@"FiltersSegue" sender:self];
+        [OTAppState launchMapPIOsFilteringFromController:self withDelegate:self];
+    else {
+        [OTAppState launchFeedsFilteringFromController:self withDelegate:self];
+    }
 }
 
 - (IBAction)showCurrentLocation {
@@ -1451,14 +1452,14 @@
         controller.location = currentLocation;
         controller.entourageEditorDelegate = self;
     }
-    else if([segue.identifier isEqualToString:@"FiltersSegue"]) {
-        UINavigationController *navController = (UINavigationController*)destinationViewController;
-        OTFeedItemFiltersViewController *controller = (OTFeedItemFiltersViewController*)navController.topViewController;
-        controller.filterDelegate = self;
-    }
     else if ([segue.identifier isEqualToString:@"SolidarityGuideSegue"]) {
         UINavigationController *navController = (UINavigationController *)destinationViewController;
         OTSolidarityGuideFiltersViewController *controller = (OTSolidarityGuideFiltersViewController *)navController.topViewController;
+        controller.filterDelegate = self;
+    }
+    else if([segue.identifier isEqualToString:@"FiltersSegue"]) {
+        UINavigationController *navController = (UINavigationController*)destinationViewController;
+        OTFeedItemFiltersViewController *controller = (OTFeedItemFiltersViewController*)navController.topViewController;
         controller.filterDelegate = self;
     }
     else if([segue.identifier isEqualToString:@"PublicFeedItemDetailsSegue"]) {

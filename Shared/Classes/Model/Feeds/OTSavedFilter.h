@@ -21,6 +21,10 @@
 @property (nonatomic) NSNumber *showOnlyMyEntourages;
 @property (nonatomic) NSNumber *showFromOrganisation;
 
+@property (nonatomic) NSNumber *showOuting;
+@property (nonatomic) NSNumber *showNeighborhood;
+@property (nonatomic) NSNumber *showPrivateCircle;
+
 @property (nonatomic) NSNumber *showDemandeSocial;
 @property (nonatomic) NSNumber *showDemandeEvent;
 @property (nonatomic) NSNumber *showDemandeHelp;

@@ -21,6 +21,8 @@
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
 #import "UIColor+Expanded.h"
+#import "NSDate+OTFormatter.h"
+#import "NSDate+ui.h"
 
 #import "entourage-Swift.h"
 
@@ -284,21 +286,13 @@
             return [[NSAttributedString alloc] initWithString:@""];
             
         } else if ([item isOuting]) {
-            typeColor = [UIColor pfpOutingCircleColor];
-            NSString *eventName = OTLocalizedString(@"pfp_event").capitalizedString;
-            NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
-                                           NSForegroundColorAttributeName:typeColor};
-            return [[NSAttributedString alloc] initWithString:eventName attributes:atttributtes];
+            return [self formattedEventDateDescriptionForMessageItem:item size:size];
         }
     }
     
     // Entourage Outing items
     if ([item.category isEqualToString:@"event"] || [item isOuting]) {
-        typeColor = [UIColor appGreyishColor];
-        NSString *eventName = OTLocalizedString(@"event").capitalizedString;
-        NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
-                                       NSForegroundColorAttributeName:typeColor};
-        return [[NSAttributedString alloc] initWithString:eventName attributes:atttributtes];
+        return [self formattedEventDateDescriptionForMessageItem:item size:size];;
     }
     
     // The rest of items
@@ -321,6 +315,29 @@
     [typeByNameAttrString appendAttributedString:nameAttrString];
     
     return typeByNameAttrString;
+}
+
++ (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
+    
+    UIColor *typeColor = [UIColor appGreyishColor];
+    NSString *eventName = OTLocalizedString(@"event").capitalizedString;
+    
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        typeColor = [UIColor pfpOutingCircleColor];
+        eventName = OTLocalizedString(@"pfp_event").capitalizedString;
+    }
+    
+    NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
+                                   NSForegroundColorAttributeName:typeColor};
+    NSMutableAttributedString *eventAttrDescString = [[NSMutableAttributedString alloc] initWithString:eventName attributes:atttributtes];
+    
+    NSString *dateString = [NSString stringWithFormat:@" le %@", [item.startDate asStringWithFormat:@"EEEE dd/MM"]];
+    NSDictionary *dateAtttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size], NSForegroundColorAttributeName:[UIColor appGreyishColor]};
+    NSMutableAttributedString *dateAttrString = [[NSMutableAttributedString alloc] initWithString:dateString attributes:dateAtttributtes];
+    
+    [eventAttrDescString appendAttributedString:dateAttrString];
+    
+    return eventAttrDescString;
 }
 
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item {

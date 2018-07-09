@@ -22,6 +22,10 @@
         self.showOrientation = YES;
         self.showCaring = YES;
         self.showReinsertion = YES;
+        
+        self.showOuting = YES;
+        self.showPrivateCircle = YES;
+        self.showNeighborhood = YES;
     }
     return self;
 }
@@ -44,13 +48,19 @@
             ];
 }
 
-- (NSMutableDictionary *)toDictionaryWithDistance:(CLLocationDistance)distance Location:(CLLocationCoordinate2D)location {
+- (NSMutableDictionary *)toDictionaryWithDistance:(CLLocationDistance)distance
+                                         Location:(CLLocationCoordinate2D)location {
     NSMutableArray *categoryIds = [NSMutableArray new];
-    for(NSArray *values in self.toGroupedArray)
-        for(OTSolidarityGuideFilterItem *item in values)
-            if(item.active)
+    for (NSArray *values in self.toGroupedArray) {
+        for(OTSolidarityGuideFilterItem *item in values) {
+            if (item.active) {
                 [categoryIds addObject:[NSNumber numberWithInt:item.key]];
+            }
+        }
+    }
+    
     NSString *catValue = [categoryIds componentsJoinedByString: @","];
+    
     return [NSMutableDictionary dictionaryWithDictionary: @{
                                                             @"latitude": @(location.latitude),
                                                             @"longitude": @(location.longitude),

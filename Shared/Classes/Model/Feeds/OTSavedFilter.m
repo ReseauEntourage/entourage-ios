@@ -35,9 +35,18 @@ NSString *const kKeyContributionInfo = @"showContributionInfo";
 NSString *const kKeyContributionSkill = @"showContributionSkill";
 NSString *const kKeyContributionOther = @"showContributionOther";
 
+NSString *const kKeyShowOuting = @"showOuting";
+NSString *const kKeyShowPrivateCircle = @"showPrivateCircle";
+NSString *const kKeyShowNeighborhood = @"showNeighborhood";
+
 @implementation OTSavedFilter
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
+    
+    [encoder encodeObject:self.showOuting forKey:kKeyShowOuting];
+    [encoder encodeObject:self.showPrivateCircle forKey:kKeyShowPrivateCircle];
+    [encoder encodeObject:self.showNeighborhood forKey:kKeyShowNeighborhood];
+    
     [encoder encodeObject:self.showMedical forKey:kKeyShowMedical];
     [encoder encodeObject:self.showSocial forKey:kKeyShowSocial];
     [encoder encodeObject:self.showDistributive forKey:kKeyShowDistributive];
@@ -66,6 +75,11 @@ NSString *const kKeyContributionOther = @"showContributionOther";
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if ((self = [super init])) {
+        
+        self.showOuting = [decoder decodeObjectForKey:kKeyShowOuting];
+        self.showNeighborhood = [decoder decodeObjectForKey:kKeyShowNeighborhood];
+        self.showPrivateCircle = [decoder decodeObjectForKey:kKeyShowPrivateCircle];
+        
         self.showMedical = [decoder decodeObjectForKey:kKeyShowMedical];
         self.showSocial = [decoder decodeObjectForKey:kKeyShowSocial];
         self.showDistributive = [decoder decodeObjectForKey:kKeyShowDistributive];
@@ -97,6 +111,11 @@ NSString *const kKeyContributionOther = @"showContributionOther";
 
 + (OTSavedFilter *)fromNewsFeedsFilter:(OTNewsFeedsFilter *)filter {
     OTSavedFilter *new = [OTSavedFilter new];
+    
+    new.showNeighborhood = @(filter.showNeighborhood);
+    new.showPrivateCircle = @(filter.showPrivateCircle);
+    new.showOuting = @(filter.showOuting);
+    
     new.showMedical = @(filter.showMedical);
     new.showSocial = @(filter.showSocial);
     new.showDistributive = @(filter.showDistributive);
@@ -120,6 +139,7 @@ NSString *const kKeyContributionOther = @"showContributionOther";
     new.showContributionInfo = @(filter.showContributionInfo);
     new.showContributionSkill = @(filter.showContributionSkill);
     new.showContributionOther = @(filter.showContributionOther);
+    
     return new;
 }
 
