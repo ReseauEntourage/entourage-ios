@@ -402,6 +402,7 @@
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem {
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
     id iconName = [[[OTFeedItemFactory createFor:feedItem] getUI] categoryIconSource];
+    
     id titleString = [[[OTFeedItemFactory createFor:feedItem] getUI] navigationTitle];
     
     UIButton *iconView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
@@ -431,6 +432,43 @@
     [titleView addSubview:title];
     
     return titleView;
+}
+    
++ (UILabel*)navigationTitleLabelForFeedItem:(OTFeedItem*)feedItem {
+    id titleString = [[[OTFeedItemFactory createFor:feedItem] getUI] navigationTitle];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 60)];
+    titleLabel.text = titleString;
+    titleLabel.textColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    titleLabel.numberOfLines = 2;
+    
+    return titleLabel;
+}
+    
++ (UIBarButtonItem *)leftNavigationBarButtonItemForFeedItem:(OTFeedItem*)feedItem
+{
+    id iconName = [[[OTFeedItemFactory createFor:feedItem] getUI] categoryIconSource];
+    UIButton *iconView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
+    iconView.backgroundColor = UIColor.whiteColor;
+    iconView.layer.cornerRadius = 18;
+    iconView.userInteractionEnabled = NO;
+    iconView.clipsToBounds = YES;
+    
+    UIImage *placeholder = [UIImage imageNamed:@"user"];
+    
+    if ([feedItem isConversation]) {
+        NSString *urlPath = feedItem.author.avatarUrl;
+        if (urlPath != nil && [urlPath class] != [NSNull class] && urlPath.length > 0) {
+            NSURL *url = [NSURL URLWithString:urlPath];
+            [iconView setImageForState:UIControlStateNormal withURL:url placeholderImage:placeholder];
+        } else {
+            [iconView setImage:placeholder forState:UIControlStateNormal];
+        }
+    } else {
+        [iconView setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
+    }
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:iconView];
+    return barButtonItem;
 }
 
 + (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem {
