@@ -30,11 +30,14 @@
     
     if ([item isKindOfClass:[OTFeedItem class]]) {
         OTFeedItem *feedItem = (OTFeedItem*)item;
-        if (indexPath.row == 0) {
+        if ([feedItem.identifierTag isEqualToString:@"summary"]) {
             return @"SummaryCell";
         }
         else if ([feedItem.identifierTag isEqualToString:@"feedLocation"]) {
             return  @"MapCell";
+        }
+        else if ([feedItem.identifierTag isEqualToString:@"feedDescription"]) {
+            return  @"DescriptionCell";
         }
     }
     

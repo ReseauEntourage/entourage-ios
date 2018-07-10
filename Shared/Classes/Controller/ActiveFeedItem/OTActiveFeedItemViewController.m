@@ -103,7 +103,13 @@
 }
 
 - (void)configureTitleView {
-    self.navigationItem.titleView = [OTAppAppearance navigationTitleViewForFeedItem:self.feedItem];
+    self.navigationItem.titleView = [OTAppAppearance navigationTitleLabelForFeedItem:self.feedItem];
+    NSMutableArray *leftButtons = @[].mutableCopy;
+    UIBarButtonItem *backItem = [UIBarButtonItem createWithImageNamed:@"backItem"
+                                                           withTarget:self.navigationController andAction:@selector(popViewControllerAnimated:) changeTintColor:YES];
+    [leftButtons addObject:backItem];
+    [leftButtons addObject:[OTAppAppearance leftNavigationBarButtonItemForFeedItem:self.feedItem]];
+    self.navigationItem.leftBarButtonItems = leftButtons;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -122,17 +128,17 @@
 #pragma mark - navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.inviteBehavior prepareSegueForInvite:segue])
+    if ([self.inviteBehavior prepareSegueForInvite:segue])
         return;
-    if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
+    if ([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
-    if([self.userProfileBehavior prepareSegueForUserProfile:segue])
+    if ([self.userProfileBehavior prepareSegueForUserProfile:segue])
         return;
-    if([self.editEntourageBehavior prepareSegue:segue])
+    if ([self.editEntourageBehavior prepareSegue:segue])
         return;
-    if([self.editEncounterBehavior prepareSegue:segue])
+    if ([self.editEncounterBehavior prepareSegue:segue])
         return;
-    if([segue.identifier isEqualToString:@"SegueMap"]) {
+    if ([segue.identifier isEqualToString:@"SegueMap"]) {
         OTMapViewController *controller = (OTMapViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
     }
@@ -211,8 +217,9 @@
 }
 
 - (IBAction)scrollToBottomWhileEditing {
-    if(self.dataSource.items.count > 0)
+    if (self.dataSource.items.count > 0) {
         [self.dataSource.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.items.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 - (IBAction)encounterChanged {

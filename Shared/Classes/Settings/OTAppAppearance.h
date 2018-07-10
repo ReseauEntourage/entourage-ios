@@ -44,6 +44,8 @@
 + (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem;
++ (UILabel*)navigationTitleLabelForFeedItem:(OTFeedItem*)feedItem;
++ (UIBarButtonItem *)leftNavigationBarButtonItemForFeedItem:(OTFeedItem*)feedItem;
 + (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem;
 + (NSString *)joinEntourageButtonTitleForFeedItem:(OTFeedItem*)feedItem;
 + (UIColor*)colorForNoDataPlacholderImage;

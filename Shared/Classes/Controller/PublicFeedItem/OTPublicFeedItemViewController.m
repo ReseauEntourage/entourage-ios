@@ -69,7 +69,13 @@
 }
 
 - (void)configureTitleView {
-    self.navigationItem.titleView = [OTAppAppearance navigationTitleViewForFeedItem:self.feedItem];
+    self.navigationItem.titleView = [OTAppAppearance navigationTitleLabelForFeedItem:self.feedItem];
+    NSMutableArray *leftButtons = @[].mutableCopy;
+    UIBarButtonItem *backItem = [UIBarButtonItem createWithImageNamed:@"backItem"
+                                                           withTarget:self.navigationController andAction:@selector(popViewControllerAnimated:) changeTintColor:YES];
+    [leftButtons addObject:backItem];
+    [leftButtons addObject:[OTAppAppearance leftNavigationBarButtonItemForFeedItem:self.feedItem]];
+    self.navigationItem.leftBarButtonItems = leftButtons;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -95,18 +101,35 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.joinBehavior prepareSegueForMessage:segue])
+    if ([self.joinBehavior prepareSegueForMessage:segue]) {
         return;
-    if([self.userProfileBehavior prepareSegueForUserProfile:segue])
+    }
+    
+    if ([self.userProfileBehavior prepareSegueForUserProfile:segue]) {
         return;
-    if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
+    }
+    
+    if ([self.statusChangedBehavior prepareSegueForNextStatus:segue]) {
         return;
+    }
 }
 
 #pragma mark - private methods
 
 - (void)setupToolbarButtons {
 
+    UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
+    [more setFrame:CGRectMake(0, 0, 30, 30)];
+    [more setBackgroundImage:[[UIImage imageNamed:@"info"] resizeTo:CGSizeMake(25, 25)]
+                    forState:UIControlStateNormal];
+    [more addTarget:self.statusChangedBehavior action:@selector(startChangeStatus) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:more];
+    [self.navigationItem setRightBarButtonItem:infoButton];
+    
+    // https://jira.mytkw.com/browse/EMA-2128
+    return;
+    
     if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
         
         NSMutableArray *rightButtons = [NSMutableArray new];
@@ -143,16 +166,6 @@
         [rightButtons addObject:shareButton];
         [self setRightBarButtonView:rightButtons];
     }
-    else {
-        UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
-        [more setFrame:CGRectMake(0, 0, 30, 30)];
-        [more setBackgroundImage:[[UIImage imageNamed:@"info"] resizeTo:CGSizeMake(25, 25)]
-                        forState:UIControlStateNormal];
-        [more addTarget:self.statusChangedBehavior action:@selector(startChangeStatus) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:more];
-        [self.navigationItem setRightBarButtonItem:infoButton];
-    }
 }
 
 - (void)setRightBarButtonView:(NSMutableArray *)views
@@ -175,8 +188,10 @@
 
 - (IBAction)joinFeedItem:(id)sender {
     [OTLogger logEvent:@"AskJoinFromPublicPage"];
-    if(![self.joinBehavior join:self.feedItem])
+    
+    if (![self.joinBehavior join:self.feedItem]) {
        [self.statusChangedBehavior startChangeStatus];
+    }
 }
 
 - (IBAction)updateStatusToPending {

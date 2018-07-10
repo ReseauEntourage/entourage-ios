@@ -12,9 +12,19 @@
 @implementation OTPublicInfoDataSource
 
 - (void)loadDataFor:(OTFeedItem *)feedItem {
-    NSMutableArray *items = [NSMutableArray arrayWithArray:@[feedItem, feedItem]];
-    NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
     
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    
+    // Summary row
+    feedItem.identifierTag = @"summary";
+    [items addObject:feedItem.copy];
+    
+    // Map row
+    feedItem.identifierTag = @"feedLocation";
+    [items addObject:feedItem.copy];
+    
+    // Description row
+    NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
     if ([description length] > 0) {
         feedItem.identifierTag = @"feedDescription";
         [items addObject:feedItem.copy];
