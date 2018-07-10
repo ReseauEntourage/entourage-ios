@@ -276,12 +276,14 @@ extension OTPfpMenuViewController: MFMailComposeViewControllerDelegate {
             alert.addAction(defaultAction)
             return
         }
-        
+    
         let composeViewController = MFMailComposeViewController()
         composeViewController.mailComposeDelegate = self
         composeViewController.setToRecipients(["voisin-age@petitsfreresdespauvres.fr"])
         composeViewController.setSubject("")
         composeViewController.setMessageBody("", isHTML: false)
+        
+        OTAppConfiguration.configureNavigationControllerAppearance(composeViewController)
         present(composeViewController, animated: true, completion: nil)
     }
 }
