@@ -21,6 +21,7 @@
 #import "OTEntourageDisclaimerBehavior.h"
 #import "OTEditEntourageTableSource.h"
 #import "OTEditEntourageNavigationBehavior.h"
+#import "OTCategoryFromJsonService.h"
 #import "entourage-Swift.h"
 
 @interface OTEntourageEditorViewController()
@@ -50,6 +51,19 @@
     [self.navigationItem setRightBarButtonItem:menuButton];
     [self.disclaimer showDisclaimer];
 }
+    
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // EMA-2140
+    // Select by default the category: "Partager un repas, un café":
+    // "entourage_type": "contribution",
+    // "display_category": "social",
+    if (![self isCategorySelected]) {
+        self.editTableSource.entourage.categoryObject = [OTCategoryFromJsonService categoryWithType:@"contribution" subcategory:@"social"];
+        [self.editTableSource.tblEditEntourage reloadData];
+    }
+}
 
 #pragma mark - Private
 
@@ -67,8 +81,9 @@
 
 - (void)sendEntourage:(UIButton*)sender {
     [OTLogger logEvent:@"ConfirmCreateEntourage"];
-    if(![self isCategorySelected] || ![self isTitleValid])
+    if (![self isCategorySelected] || ![self isTitleValid]) {
             return;
+    }
     if(self.entourage.uid)
         [self updateEntourage:sender];
     else

@@ -101,7 +101,7 @@
     UIImageView *categoryIcon = [cell viewWithTag:CATEGORY_ICON_TAG];
     OTCategoryType * categoryType = self.dataSource[indexPath.section];
     OTCategory *category = categoryType.categories[indexPath.row];
-    if(self.selectedCategory != nil) {
+    if (self.selectedCategory != nil) {
         category.isSelected = [self.selectedCategory.title isEqualToString:category.title];
     }
     [titleLabel setText:category.title];
@@ -111,19 +111,45 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    OTCategoryType *item = self.dataSource[indexPath.section];
-    OTCategory *itemCategory = item.categories[indexPath.row];
-    itemCategory.isSelected = !itemCategory.isSelected;
-    for(OTCategoryType *categoryType in self.dataSource)
-        for(OTCategory *category in categoryType.categories)
-            if(category != itemCategory) {
-                category.isSelected = NO;
-            }
-    self.selectedCategory = itemCategory;
-    [tableView reloadData];
+    [self selectCategoryAtIndex:indexPath];
 }
 
 #pragma mark - private methods
+    
+- (void)selectCategoryAtIndex:(NSIndexPath*)indexPath {
+    OTCategoryType *item = self.dataSource[indexPath.section];
+    OTCategory *itemCategory = item.categories[indexPath.row];
+    itemCategory.isSelected = !itemCategory.isSelected;
+    
+    for (OTCategoryType *categoryType in self.dataSource) {
+        for (OTCategory *category in categoryType.categories) {
+            if (category != itemCategory) {
+                category.isSelected = NO;
+            }
+        }
+    }
+    
+    self.selectedCategory = itemCategory;
+    [self.categoryTableView reloadData];
+}
+    
+- (NSIndexPath*)indexPathForCategoryWithType:(NSString*)type subcategory:(NSString*)subCat {
+    NSInteger section = 0;
+    NSInteger row = 0;
+    for (OTCategoryType *categoryType in self.dataSource) {
+        for (OTCategory *category in categoryType.categories) {
+            if ([category.entourage_type isEqualToString:type] &&
+                [category.category isEqualToString:subCat]) {
+                    return [NSIndexPath indexPathForRow:row inSection:section];
+            }
+            row++;
+        }
+        row = 0;
+        section++;
+    }
+    
+    return [NSIndexPath indexPathForRow:row inSection:section];
+}
 
 - (void)tapCategory:(UIButton *)sender {
     NSInteger section = sender.tag;

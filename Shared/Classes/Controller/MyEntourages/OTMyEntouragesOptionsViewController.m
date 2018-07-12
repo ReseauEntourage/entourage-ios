@@ -36,20 +36,28 @@
     [self.toggleMaraude toggle:NO];
     [self.toggleEncounter toggle:NO];
     [self.toggleAction toggle:NO];
+    
     if(IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         [self.toggleAction toggle:YES];
-        if([OTOngoingTourService sharedInstance].isOngoing)
+        if ([OTOngoingTourService sharedInstance].isOngoing) {
             [self.toggleEncounter toggle:YES];
-        else
+        }
+        else {
             [self.toggleMaraude toggle:YES];
+        }
     }
+    
     __weak typeof(self) weakSelf = self;
     [OTAlertViewBehavior setupOngoingCreateEntourageWithAction:self.actionAlert];
-    [self.actionAlert addAction:OTLocalizedString(@"encounter") handler: ^(UIAlertAction *action){
-        if ([weakSelf.delegate respondsToSelector:@selector(createEncounter)])
+    
+    [self.actionAlert addAction:OTLocalizedString(@"encounter")
+                        handler: ^(UIAlertAction *action) {
+                            if ([weakSelf.delegate respondsToSelector:@selector(createEncounter)]) {
             [weakSelf.delegate performSelector:@selector(createEncounter) withObject:nil];
+                            }
     }];
-    if(!IS_PRO_USER) {
+    
+    if (!IS_PRO_USER) {
         [self.delegate createAction];
         [self dismissViewControllerAnimated:YES completion:nil];
     }

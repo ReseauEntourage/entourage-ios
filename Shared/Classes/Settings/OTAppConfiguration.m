@@ -309,6 +309,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UIColor *titleColor = [UIColor appGreyishBrownColor];
     UIColor *subtitleColor = [UIColor appGreyishColor];
     UIColor *tableViewBgColor = [UIColor groupTableViewBackgroundColor];
+    UIColor *addActionButtonColor = [UIColor appOrangeColor];
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         backgroundThemeColor = [UIColor pfpBlueColor];
@@ -317,6 +318,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         titleColor = [UIColor pfpGrayTextColor];
         tableViewBgColor = [UIColor pfpTableBackgroundColor];
         subtitleColor = [UIColor pfpSubtitleBlueColor];
+        addActionButtonColor = [UIColor pfpGreenColor];
     }
     
     [[ApplicationTheme shared] setPrimaryNavigationBarTintColor:primaryNavigationBarTintColor];
@@ -325,6 +327,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[ApplicationTheme shared] setTableViewBackgroundColor: tableViewBgColor];
     [[ApplicationTheme shared] setTitleLabelColor: titleColor];
     [[ApplicationTheme shared] setSubtitleLabelColor: subtitleColor];
+    [[ApplicationTheme shared] setAddActionButtonColor: addActionButtonColor];
     
     UINavigationBar.appearance.backgroundColor = primaryNavigationBarTintColor;
     UINavigationBar.appearance.barTintColor = primaryNavigationBarTintColor;
@@ -538,8 +541,12 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return NO;
 }
 
-+ (BOOL)allowsAddingActionsFromMap
++ (BOOL)supportsAddingActionsFromMap
 {
+    return YES;
+}
+    
++ (BOOL)supportsAddingActionsFromMapOnLongPress {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
     }

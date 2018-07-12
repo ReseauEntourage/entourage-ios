@@ -95,6 +95,7 @@
 "create_demande" = "Créer une demande";
 "create_contribution" = "Créer une contribution";
 "create_action" = "Créer une action";
+"create_event" = "Créer un évènement  ";
 "map_options_hide_poi" = "Masquer le guide de solidarité";
 "map_options_show_poi" = "Afficher le guide de solidarité";
 "map_options_show_guide" = "Voir les lieux solidaires";
@@ -128,6 +129,8 @@ Proposez une structure";
 "no_data_guide_link" = "Proposez une structure";
 "want_to_join_tour" = "veut entrer en contact avec vous.";
 "want_to_join_entourage" = "veut rejoindre votre entourage.";
+"no_messages_title" = "Vous n'avez pas encore de messages…";
+"no_unread_messages_title" = "Vous n'avez pas de messages non lus…";
 
 // Disclaimer
 "encounter_disclaimer" = "Bonjour,\n\nNous vous rappelons que conformément à la charte d'Entourage, vous devez avertir le bénéficiaire qu’un compte-rendu sera réalisé sur vos échanges et pourra être stocké par vous ou par votre association.";

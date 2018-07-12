@@ -31,27 +31,27 @@
     UIViewController *destinationViewController = segue.destinationViewController;
     [OTAppConfiguration configureNavigationControllerAppearance:destinationViewController.navigationController];
     
-    if([segue.identifier isEqualToString:@"CategoryEditSegue"]) {
+    if ([segue.identifier isEqualToString:@"CategoryEditSegue"]) {
         OTCategoryViewController* controller = (OTCategoryViewController *)destinationViewController;
         controller.categorySelectionDelegate = self;
         controller.selectedCategory = self.entourage.categoryObject;
         return YES;
     }
-    if([segue.identifier isEqualToString:@"EditLocation"]) {
+    if ([segue.identifier isEqualToString:@"EditLocation"]) {
         [OTLogger logEvent:@"ChangeLocationClick"];
         OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
         controller.locationSelectionDelegate = self;
         controller.selectedLocation = self.entourage.location;
         return YES;
     }
-    if([segue.identifier isEqualToString:@"TitleEditSegue"]) {
+    if ([segue.identifier isEqualToString:@"TitleEditSegue"]) {
         OTEditEntourageTitleViewController* controller = (OTEditEntourageTitleViewController *)destinationViewController;
         controller.delegate = self;
         controller.currentTitle = self.entourage.title;
         controller.currentEntourage = self.entourage;
         return YES;
     }
-    if([segue.identifier isEqualToString:@"DescriptionEditSegue"]) {
+    if ([segue.identifier isEqualToString:@"DescriptionEditSegue"]) {
         OTEditEntourageDescViewController* controller = (OTEditEntourageDescViewController *)destinationViewController;
         controller.delegate = self;
         controller.currentDescription = self.entourage.desc;
@@ -109,6 +109,18 @@
     self.entourage.category = category.category;
     self.entourage.entourage_type = category.entourage_type;
     [self.editEntourageSource updateTexts];
+}
+    
+- (void)selectDefaultCategory {
+    OTCategory *defaultCategory = nil;
+    [self didSelectCategory:defaultCategory];
+        // EMA-2140
+        // Select by default the category: "Partager un repas, un café":
+        // "entourage_type": "contribution",
+        // "display_category": "social",
+//        if (!self.selectedCategory) {
+//            [self selectCategoryAtIndex:[self indexPathForCategoryWithType:@"contribution" subcategory:@"social"]];
+//        }
 }
 
 @end

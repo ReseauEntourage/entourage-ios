@@ -184,7 +184,24 @@
         [OTAppState presentTutorialScreen];
     }
     
-    if (![OTAppConfiguration allowsAddingActionsFromMap]) {
+    [self configureActionsButton];
+}
+    
+- (void)configureActionsButton {
+    UIImage *closeImage = [[UIImage imageNamed:@"closeOptionWithNoShadow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    [self.launcherButton.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.launcherButton.layer setShadowOpacity:0.5];
+    [self.launcherButton.layer setShadowRadius:4.0];
+    self.launcherButton.layer.masksToBounds = NO;
+    [self.launcherButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+    self.launcherButton.layer.cornerRadius = 29;
+    
+    self.launcherButton.backgroundColor = [ApplicationTheme shared].addActionButtonColor;
+    [self.launcherButton setImage:closeImage forState:UIControlStateHighlighted];
+    [self.launcherButton setImage:closeImage forState:UIControlStateSelected];
+    
+    if (![OTAppConfiguration supportsAddingActionsFromMap]) {
         self.launcherButton.hidden = YES;
     }
 }
@@ -460,7 +477,7 @@
 
 - (IBAction)goToTourOptions:(id)sender {
     [OTLogger logEvent:@"PlusOnTourClick"];
-    [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+    [self createQuickEncounter];
 }
 
 #pragma mark - Private methods
@@ -540,11 +557,13 @@
     }}
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
+    
     if (self.isTourListDisplayed) {
         return;
     }
     
-    if (!IS_PRO_USER && !self.poisMapDelegate.isActive) {
+    if (!IS_PRO_USER && !self.poisMapDelegate.isActive &&
+        [OTAppConfiguration supportsAddingActionsFromMapOnLongPress]) {
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
         return;
     }
@@ -553,6 +572,7 @@
     if (self.presentedViewController) {
         return;
     }
+    
     self.mapPoint = touchPoint;
     CLLocationCoordinate2D whereTap = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
     self.tappedLocation = [[CLLocation alloc] initWithLatitude:whereTap.latitude longitude:whereTap.longitude];
@@ -570,7 +590,8 @@
             self.mapPoint = CGPointMake(touchPoint.x, touchPoint.y + LONGPRESS_DELTA + 10);
         if (touchPoint.y + LONGPRESS_DELTA > [UIScreen mainScreen].bounds.size.height )
             self.mapPoint = CGPointMake(touchPoint.x, touchPoint.y - LONGPRESS_DELTA - 10);
-        [self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+        
+        [self createQuickEncounter];
         
     } else {
         if (touchPoint.x - LONGPRESS_DELTA < 0)
@@ -583,7 +604,7 @@
             self.mapPoint = CGPointMake(touchPoint.x, touchPoint.y - LONGPRESS_DELTA - 10);
         self.launcherButton.hidden = NO;
         
-        if ([OTAppConfiguration allowsAddingActionsFromMap]) {
+        if ([OTAppConfiguration supportsAddingActionsFromMap]) {
             [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
         }
     }
@@ -600,6 +621,16 @@
 - (void)showEntourages {
     [OTLogger logEvent:@"GoToMessages"];
     [self performSegueWithIdentifier:@"MyEntouragesSegue" sender:self];
+}
+    
+- (void)createQuickEncounter {
+    // EMA-2138
+    //[self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
+    
+    [self switchToNewsfeed];
+    [self.editEncounterBehavior doEdit:nil
+                               forTour:self.tourCreatorBehavior.tour.uid
+                           andLocation:self.encounterLocation];
 }
 
 - (void)registerObserver {
@@ -962,12 +993,8 @@
     }
     [OTLogger logEvent:eventName];
     
-    if (!IS_PRO_USER && !self.poisMapDelegate.isActive) {
-        [self performSegueWithIdentifier:@"EntourageEditor" sender:self];
-    }
-    else {
-        [self performSegueWithIdentifier:@"OTMapOptionsSegue" sender:nil];
-    }
+    BOOL showEditEntourageOptions = !IS_PRO_USER && !self.poisMapDelegate.isActive;
+    [OTAppState showFeedAndMapActionsFromController:self showEditingOptions:showEditEntourageOptions];
 }
 
 #pragma mark - OTTourCreatorDelegate
@@ -1072,6 +1099,10 @@
 
 - (void)createAction {
     [self createEntouragewithAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
+}
+    
+- (void)createEvent {
+    [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
 }
 
 - (void) createEntouragewithAlertMessage:(NSString *)message {
@@ -1412,8 +1443,9 @@
             controller.fingerPoint = self.mapPoint;
             self.mapPoint = CGPointZero;
         }
-        else
+        else {
             self.tappedLocation = nil;
+        }
         controller.optionsDelegate = self;
         [controller setIsPOIVisible:self.poisMapDelegate.isActive];
     }

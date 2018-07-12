@@ -3474,6 +3474,7 @@
 		A21D65822085FDAA00EF8E0E /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				A21D65942085FDAA00EF8E0E /* Main.storyboard */,
 				A21D65832085FDAA00EF8E0E /* SolidarityGuideFilters.storyboard */,
 				A21D65842085FDAA00EF8E0E /* Social.storyboard */,
 				A21D65852085FDAA00EF8E0E /* UserPicture.storyboard */,
@@ -3490,7 +3491,6 @@
 				A21D65902085FDAA00EF8E0E /* AssociationDetails.storyboard */,
 				A21D65912085FDAA00EF8E0E /* JoinFeedItem.storyboard */,
 				A21D65922085FDAA00EF8E0E /* Intro.storyboard */,
-				A21D65942085FDAA00EF8E0E /* Main.storyboard */,
 				A21D65952085FDAA00EF8E0E /* Popup.storyboard */,
 				A21D65962085FDAA00EF8E0E /* TourOptions.storyboard */,
 				A21D65972085FDAA00EF8E0E /* UserProfileEditor.storyboard */,
