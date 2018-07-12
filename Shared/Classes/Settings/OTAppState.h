@@ -37,6 +37,9 @@
 
 + (void)showFilteringOptionsFromController:(UIViewController*)controller
                         withFullMapVisible:(BOOL)isFullMapVisible;
+    
++ (void)showFeedAndMapActionsFromController:(UIViewController*)controller
+                         showEditingOptions:(BOOL)showEditingOptions;
 
 + (void)launchInviteActionForFeedItem:(OTFeedItem*)item
                        fromController:(UIViewController*)controller

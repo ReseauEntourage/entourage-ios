@@ -502,7 +502,7 @@
         return [[UIColor pfpBlueColor] colorWithAlphaComponent:0.1];
     }
     
-    return [UIColor colorWithHexString:@"e9f1f4"];
+    return [UIColor colorWithHexString:@"efeff4"];
 }
 
 + (UIColor*)colorForNoDataPlacholderText {

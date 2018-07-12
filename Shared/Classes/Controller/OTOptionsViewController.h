@@ -22,12 +22,14 @@
 #define NORTH_WEST CGPointMake(-50.f, -30.f)
 #define NORTH      CGPointMake(  0.f, -65.f)
 #define NORTH_EAST CGPointMake(+50.f, -30.f)
+#define SOUTH_EAST CGPointMake(-50.f, +65.f)
 
 @protocol OTOptionsDelegate <NSObject>
 
 - (void)createTour;
 - (void)createEncounter;
 - (void)createAction;
+- (void)createEvent;
 
 - (void)togglePOI;
 - (void)dismissOptions;
@@ -61,10 +63,27 @@
 - (void)addOptionWithIcon:(NSString *)optionIcon
                 andAction:(SEL)selector
           withTranslation:(CGPoint)point;
+    
+- (void)addOptionWithIcon:(NSString *)optionIcon
+               applyTintColor:(BOOL)applyTintColor
+                    andAction:(SEL)selector
+              withTranslation:(CGPoint)translationPoint;
+    
+- (void)addOptionWithIcon:(NSString *)optionIcon
+                tintColor:(UIColor*)tintColor
+                andAction:(SEL)selector
+          withTranslation:(CGPoint)translationPoint;
+    
+- (void)addOption:(NSString *)optionName
+          atIndex:(int)index
+         withIcon:(NSString *)optionIcon
+   applyTintColor:(BOOL)applyTintColor
+        andAction:(SEL)selector;
 
 - (IBAction)doCreateTour:(id)sender;
 - (IBAction)doCreateEncounter:(id)sender;
 - (IBAction)doCreateAction:(id)sender;
+- (IBAction)doCreateEvent:(id)sender;
 - (IBAction)doTogglePOI:(id)sender;
 - (IBAction)proposeStructure:(id)sender;
 

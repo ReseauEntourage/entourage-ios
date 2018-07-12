@@ -307,6 +307,21 @@
 //
 //    [controller presentViewController:navController animated:YES completion:nil];
 }
+    
++ (void)showFeedAndMapActionsFromController:(UIViewController*)controller
+                          showEditingOptions:(BOOL)showEditingOptions {
+    
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return;
+    }
+    
+    if (showEditingOptions) {
+        [controller performSegueWithIdentifier:@"EntourageEditor" sender:controller];
+    }
+    else {
+        [controller performSegueWithIdentifier:@"OTMapOptionsSegue" sender:controller];
+    }
+}
 
 + (void)showFilteringOptionsFromController:(UIViewController*)controller
                         withFullMapVisible:(BOOL)isFullMapVisible {

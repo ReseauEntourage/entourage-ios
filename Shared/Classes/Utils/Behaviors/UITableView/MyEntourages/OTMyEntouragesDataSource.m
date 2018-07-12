@@ -98,7 +98,7 @@
     [SVProgressHUD show];
     NSMutableDictionary *parameters = [self.currentFilter toDictionaryWithPageNumber:self.pageNumber andSize:DATA_PAGE_SIZE];
     [[OTFeedsService new] getMyFeedsWithParameters:parameters success:^(NSArray *items) {
-        if(self.currentFilter.isUnread) {
+        if (self.currentFilter.isUnread) {
            items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(OTFeedItem *item, NSDictionary * bindings) {
                BOOL hasUnread = item.unreadMessageCount.intValue > 0;
                return hasUnread;
@@ -136,6 +136,14 @@
     self.noDataRoundedBackground.tintColor = [OTAppAppearance colorForNoDataPlacholderImage];
     self.noDataTitle.textColor = [ApplicationTheme shared].titleLabelColor;
     self.noDataSubtitle.textColor = [OTAppAppearance colorForNoDataPlacholderText];
+    
+    if (self.currentFilter.isUnread) {
+        self.noDataTitle.text = OTLocalizedString(@"no_unread_messages_title");
+        self.noDataSubtitle.hidden = YES;
+    } else {
+        self.noDataTitle.text = OTLocalizedString(@"no_messages_title");
+        self.noDataSubtitle.hidden = NO;
+    }
 }
 
 @end

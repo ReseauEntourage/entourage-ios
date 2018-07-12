@@ -80,8 +80,13 @@
            withIcon:@"heart"
           andAction:@selector(doCreateAction:)];
     
-    if(self.isPOIVisible)
-        [self addOption:OTLocalizedString(@"propose_structure") atIndex:self.buttonIndex++ withIcon:@"house" andAction:@selector(proposeStructure:)];
+    if (self.isPOIVisible) {
+        [self addOption:OTLocalizedString(@"propose_structure")
+                atIndex:self.buttonIndex++
+               withIcon:@"house"
+         applyTintColor:NO
+              andAction:@selector(proposeStructure:)];
+    }
 }
 
 @end

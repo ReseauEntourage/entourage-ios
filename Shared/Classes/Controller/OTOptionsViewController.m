@@ -55,7 +55,8 @@
     CGFloat y = [UIScreen mainScreen].bounds.size.height - (PADDING_VERTICAL + buttonSize) - buttomOffset + buttonSize;
     
     closeButton.frame = CGRectMake(x, y, buttonSize, buttonSize);
-    [closeButton setImage:[UIImage imageNamed:@"closeShadow"] forState:UIControlStateNormal];
+    [closeButton setImage:[[UIImage imageNamed:@"closeOptionWithShadow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    closeButton.tintColor = [ApplicationTheme shared].backgroundThemeColor;
     [closeButton addTarget:self action:@selector(doDismiss:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
 }
@@ -80,10 +81,11 @@
 - (void)setupOptionsAsList {
     self.buttonIndex = 1;
 }
-
+    
 - (void)addOption:(NSString *)optionName
           atIndex:(int)index
          withIcon:(NSString *)optionIcon
+   applyTintColor:(BOOL)applyTintColor
         andAction:(SEL)selector
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -94,6 +96,13 @@
     [button setImage:[UIImage imageNamed:optionIcon] forState:UIControlStateNormal];
     [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    button.clipsToBounds = YES;
+    
+    if (applyTintColor) {
+        UIImage *tintImage = [[UIImage imageNamed:optionIcon] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        [button setImage:tintImage forState:UIControlStateNormal];
+        button.tintColor = [ApplicationTheme shared].backgroundThemeColor;
+    }
     
     UILabel *actionLabel = [[UILabel alloc] init];
     actionLabel.frame = ACTION_LABEL_FRAME;
@@ -103,6 +112,14 @@
     actionLabel.textAlignment = NSTextAlignmentRight;
     actionLabel.text = optionName;
     [self.view addSubview: actionLabel];
+}
+
+- (void)addOption:(NSString *)optionName
+          atIndex:(int)index
+         withIcon:(NSString *)optionIcon
+        andAction:(SEL)selector
+{
+    return [self addOption:optionName atIndex:index withIcon:optionIcon applyTintColor:NO andAction:selector];
 }
 
 #pragma mark - Actions
@@ -131,6 +148,12 @@
         if ([self.optionsDelegate respondsToSelector:@selector(createAction)])
             [self.optionsDelegate performSelector:@selector(createAction) withObject:nil];
 }
+    
+- (IBAction)doCreateEvent:(id)sender {
+    [OTAppState hideTabBar:NO];
+    [OTLogger logEvent:@"CreateEventClick"];
+    [self.optionsDelegate performSelector:@selector(createEvent) withObject:nil];
+}
 
 - (IBAction)doTogglePOI:(id)sender {
     [OTAppState hideTabBar:NO];
@@ -151,8 +174,36 @@
           withTranslation:(CGPoint)translationPoint
 
 {
+    return [self addOptionWithIcon:optionIcon applyTintColor:NO
+                         andAction:selector withTranslation:translationPoint];
+}
+    
+- (void)addOptionWithIcon:(NSString *)optionIcon
+           applyTintColor:(BOOL)applyTintColor
+                andAction:(SEL)selector
+          withTranslation:(CGPoint)translationPoint
+
+{
+    return [self addOptionWithIcon:optionIcon
+                         tintColor:[ApplicationTheme shared].backgroundThemeColor
+                         andAction:selector
+                   withTranslation:translationPoint];
+}
+    
+- (void)addOptionWithIcon:(NSString *)optionIcon
+           tintColor:(UIColor*)tintColor
+                andAction:(SEL)selector
+          withTranslation:(CGPoint)translationPoint
+
+{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *image = [UIImage imageNamed:optionIcon];
+    button.clipsToBounds = YES;
+    
+    if (tintColor) {
+        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        button.tintColor = tintColor;
+    }
     
     button.frame = CGRectMake(self.fingerPoint.x - image.size.width/2 + translationPoint.x,
                               self.fingerPoint.y+10 + translationPoint.y,
@@ -162,6 +213,7 @@
     [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
 }
+    
 - (IBAction)doDismiss:(id)sender {
     [OTAppState hideTabBar:NO];
     if ([self.optionsDelegate respondsToSelector:@selector(dismissOptions)]) {

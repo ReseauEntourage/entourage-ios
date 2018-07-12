@@ -32,6 +32,7 @@
         OTCategoryType *categoryType = [[OTCategoryType alloc] init];
         categoryType.isExpanded = YES;
         categoryType.categories = [[NSMutableArray alloc] init];
+        
         for (int i = 0; i < groupNames.count; i++)
         {
             id object = [groupNames objectAtIndex:i];
@@ -46,9 +47,25 @@
         }
         [resultArray addObject:categoryType];
     }
+    
     NSSortDescriptor *valueDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"type" ascending:YES];
     resultArray = (NSMutableArray *)[resultArray sortedArrayUsingDescriptors:@[valueDescriptor]];
+    
     return resultArray;
+}
+    
++ (OTCategory*)categoryWithType:(NSString*)type subcategory:(NSString*)subCat {
+    NSArray *data = [OTCategoryFromJsonService getData];
+    for (OTCategoryType *categoryType in data) {
+        for (OTCategory *category in categoryType.categories) {
+            if ([category.entourage_type isEqualToString:type] &&
+                [category.category isEqualToString:subCat]) {
+                return category;
+            }
+        }
+    }
+    
+    return nil;
 }
 
 @end

@@ -245,7 +245,7 @@
                                     <constraint firstAttribute="width" constant="62" id="9Wx-Yq-He0"/>
                                     <constraint firstAttribute="height" constant="62" id="sTC-W7-ikv"/>
                                 </constraints>
-                                <state key="normal" image="create"/>
+                                <state key="normal" image="addOptionWithShadow"/>
                                 <connections>
                                     <segue destination="AHM-70-RwU" kind="modal" identifier="OptionsSegue" animates="NO" id="kyH-GS-ona"/>
                                 </connections>
@@ -398,13 +398,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufj-T9-kGS">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufj-T9-kGS">
                                 <rect key="frame" x="234" y="356" width="62" height="62"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="62" id="Fg3-9E-dcV"/>
                                     <constraint firstAttribute="height" constant="62" id="J2Z-Mg-kIA"/>
                                 </constraints>
-                                <state key="normal" image="closeShadow"/>
+                                <state key="normal" image="closeOptionWithShadow"/>
                                 <connections>
                                     <action selector="close" destination="AHM-70-RwU" eventType="touchUpInside" id="l1o-wa-Roc"/>
                                 </connections>
@@ -749,8 +749,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="closeShadow" width="62" height="62"/>
-        <image name="create" width="64" height="64"/>
+        <image name="addOptionWithShadow" width="68" height="68"/>
+        <image name="closeOptionWithShadow" width="61" height="61"/>
         <image name="createMaraude" width="48" height="48"/>
         <image name="heart" width="48" height="48"/>
         <image name="invitationSquare" width="56" height="56"/>

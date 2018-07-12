@@ -80,7 +80,10 @@
 + (BOOL)shouldShowAssociationsOnUserProfile;
 
 // Configures if the "+" button is displayed over feeds map
-+ (BOOL)allowsAddingActionsFromMap;
++ (BOOL)supportsAddingActionsFromMap;
+    
+// Configures if the options are displeyed on finger press over map
++ (BOOL)supportsAddingActionsFromMapOnLongPress;
 
 // Configures if the feeds/map is visible or not
 + (BOOL)shouldHideFeedsAndMap;
