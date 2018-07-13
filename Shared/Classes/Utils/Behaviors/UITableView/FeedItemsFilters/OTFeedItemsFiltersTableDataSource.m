@@ -63,19 +63,15 @@
     NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];
     if (parents.count > 0) {
         if (IS_PRO_USER) {
+            contribution = parents[2];
+            demande = parents[3];
+        }
+        else {
             contribution = parents[1];
             demande = parents[2];
         }
-        else {
-            contribution = parents[0];
-            demande = parents[1];
-        }
         switch (item.key) {
             case FeedItemFilterKeyDemandeSocial:
-                if (!demande.active)
-                    size = 0;
-                break;
-            case FeedItemFilterKeyDemandeEvent:
                 if (!demande.active)
                     size = 0;
                 break;
@@ -100,10 +96,6 @@
                     size = 0;
                 break;
             case FeedItemFilterKeyContributionSocial:
-                if (!contribution.active)
-                    size = 0;
-                break;
-            case FeedItemFilterKeyContributionEvent:
                 if (!contribution.active)
                     size = 0;
                 break;
@@ -137,6 +129,10 @@
                 break;
             case FeedItemFilterKeyDistributive:
                 if (!parents[0].active)
+                    size = 0;
+                break;
+            case FeedItemFilterKeyEventsPast:
+                if (!parents[1].active)
                     size = 0;
                 break;
             case FeedItemFilterKeyTimeframe:

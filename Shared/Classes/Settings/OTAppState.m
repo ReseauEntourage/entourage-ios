@@ -26,6 +26,7 @@
 #import "OTActivityProvider.h"
 #import "OTFeedItemFiltersViewController.h"
 #import "OTSolidarityGuideFiltersViewController.h"
+#import "OTEntourageEditorViewController.h"
 
 #define TUTORIAL_DELAY 15
 #define MAP_TAB_INDEX 0
@@ -307,15 +308,32 @@
 //
 //    [controller presentViewController:navController animated:YES completion:nil];
 }
+
++ (void)createEntourageFromController:(UIViewController*)viewController
+                         withDelegate:(id<EntourageEditorDelegate>)delegate asEvent:(BOOL)isEvent {
+    UIStoryboard *editEntourageStoryboard = [UIStoryboard storyboardWithName:@"EntourageEditor" bundle:nil];
+    UINavigationController *navController = (UINavigationController*)[editEntourageStoryboard instantiateInitialViewController];
+    OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.childViewControllers[0];
+    controller.entourageEditorDelegate = delegate;
+    controller.isEditingEvent = YES;
+    
+    [viewController presentViewController:navController animated:YES completion:nil];
+}
     
 + (void)showFeedAndMapActionsFromController:(UIViewController*)controller
-                          showEditingOptions:(BOOL)showEditingOptions {
+                          showMapOptions:(BOOL)showMapOptions
+                               withDelegate:(id<EntourageEditorDelegate>)delegate
+                                    isEditingEvent:(BOOL)isEditingEvent {
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+
+        [OTAppState createEntourageFromController:controller
+                                     withDelegate:delegate
+                                          asEvent:isEditingEvent];
         return;
     }
     
-    if (showEditingOptions) {
+    if (!showMapOptions) {
         [controller performSegueWithIdentifier:@"EntourageEditor" sender:controller];
     }
     else {

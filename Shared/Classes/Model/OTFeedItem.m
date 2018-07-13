@@ -14,11 +14,25 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.creationDate = [NSDate date];
-        self.updatedDate = [NSDate date];
-        self.unreadMessageCount = @(0);
+        [self setupDefaults];
     }
     return self;
+}
+
+- (instancetype)initWithGroupType:(NSString*)groupType
+{
+    self = [super init];
+    if (self) {
+        [self setupDefaults];
+        self.group_type = groupType;
+    }
+    return self;
+}
+
+- (void)setupDefaults {
+    self.creationDate = [NSDate date];
+    self.updatedDate = [NSDate date];
+    self.unreadMessageCount = @(0);
 }
 
 - (id)copyWithZone:(NSZone *)zone

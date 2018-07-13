@@ -18,6 +18,7 @@ struct UserStorageKey {
     static let mixpanelToken = "MixpanelToken"
     static let awsPictureBucket = "AwsPictureBucket"
     static let environmentTypeKey = "EnvironmentType"
+    static let googlePlaceApiKey = "GooglePlaceApiKey"
 }
 
 @objc enum ApplicationType:Int {
@@ -71,6 +72,10 @@ struct UserStorageKey {
     
     @objc var AwsPictureBucket : NSString {
         return configuration(forKey: UserStorageKey.awsPictureBucket)
+    }
+    
+    @objc var GooglePlaceApiKey : NSString {
+        return configuration(forKey: UserStorageKey.googlePlaceApiKey)
     }
     
     @objc var environmentName : NSString {

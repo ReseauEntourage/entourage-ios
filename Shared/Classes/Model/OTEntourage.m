@@ -20,6 +20,15 @@
     return self;
 }
 
+- (instancetype)initWithGroupType:(NSString*)groupType
+{
+    self = [super initWithGroupType:groupType];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (id)copyWithZone:(NSZone *)zone
 {
     OTEntourage *copy = [super copyWithZone:zone];
@@ -29,6 +38,7 @@
     copy.category = self.category;
     copy.entourage_type = self.entourage_type;
     copy.categoryObject = self.categoryObject;
+    copy.entourage_type = self.entourage_type;
 
     return copy;
 }

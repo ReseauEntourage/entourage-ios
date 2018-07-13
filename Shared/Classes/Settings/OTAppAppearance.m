@@ -223,12 +223,16 @@
     return OTLocalizedString(@"mail_signal_subject");
 }
 
-+ (NSString *)promoteEventActionSubject:(NSString*)eventName {
-    NSString *eventType = OTLocalizedString(@"event");
++ (NSString *)eventTitle {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        eventType = OTLocalizedString(@"pfp_event");
+        return OTLocalizedString(@"pfp_event");
     }
     
+    return OTLocalizedString(@"event");
+}
+
++ (NSString *)promoteEventActionSubject:(NSString*)eventName {
+    NSString *eventType = [OTAppAppearance eventTitle];
     NSString *eventDetails = [NSString stringWithFormat:@"%@ %@", eventType, eventName];
     NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"promote_event_subject_format"), eventDetails];
     return subject;

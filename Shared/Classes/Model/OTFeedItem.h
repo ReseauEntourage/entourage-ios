@@ -44,6 +44,8 @@
 
 @property (nonatomic) NSString *identifierTag;
 
+- (instancetype)initWithGroupType:(NSString*)groupType;
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 - (BOOL)isPrivateCircle;

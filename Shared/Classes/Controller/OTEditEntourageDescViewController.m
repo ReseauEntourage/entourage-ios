@@ -16,6 +16,7 @@
 @interface OTEditEntourageDescViewController ()
 
 @property (nonatomic, weak) IBOutlet OTTextWithCount *txtDescription;
+@property (nonatomic, weak) IBOutlet UIImageView *hintIcon;
 
 @end
 
@@ -25,14 +26,18 @@
     [super viewDidLoad];
 
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
+    self.hintIcon.tintColor = [ApplicationTheme shared].backgroundThemeColor;
+    self.hintIcon.image = [self.hintIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+
     
     if(self.currentEntourage.categoryObject.description_example != nil) {
         self.txtDescription.placeholder = self.currentEntourage.categoryObject.description_example;
     } else {
-        if([self.currentEntourage.type isEqualToString:@"ask_for_help"])
+        if ([self.currentEntourage.type isEqualToString:@"ask_for_help"])
             self.txtDescription.placeholder = OTLocalizedString(@"edit_demand_desc");
-        else
+        else {
             self.txtDescription.placeholder = OTLocalizedString(@"edit_contribution_desc");
+        }
     }
 
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")

@@ -11,6 +11,7 @@
 @protocol InviteSourceDelegate;
 @protocol OTFeedItemsFilterDelegate;
 @protocol OTSolidarityGuideFilterDelegate;
+@protocol EntourageEditorDelegate;
 
 @interface OTAppState : NSObject
 + (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions;
@@ -39,7 +40,9 @@
                         withFullMapVisible:(BOOL)isFullMapVisible;
     
 + (void)showFeedAndMapActionsFromController:(UIViewController*)controller
-                         showEditingOptions:(BOOL)showEditingOptions;
+                             showMapOptions:(BOOL)showMapOptions
+                               withDelegate:(id<EntourageEditorDelegate>)delegate
+                             isEditingEvent:(BOOL)isEditingEvent;
 
 + (void)launchInviteActionForFeedItem:(OTFeedItem*)item
                        fromController:(UIViewController*)controller

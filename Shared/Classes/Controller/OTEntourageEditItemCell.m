@@ -7,12 +7,14 @@
 //
 
 #import "OTEntourageEditItemCell.h"
+#import "entourage-Swift.h"
 
 @implementation OTEntourageEditItemCell
 
 - (void)configureWith:(NSString *)title andText:(NSString *)description {
     self.lblTitle.text = title;
     self.lblDescription.text = description;
+    self.lblDescription.textColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
 @end

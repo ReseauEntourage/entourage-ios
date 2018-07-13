@@ -18,6 +18,8 @@
 
 - (void)configureWith:(OTEntourage *)entourage;
 - (void)updateLocationTitle;
+- (void)updateLocationAddress:(NSString*)address;
 - (void)updateTexts;
+- (void)updateEventStartDate:(NSDate*)date;
 
 @end

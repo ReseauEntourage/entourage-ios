@@ -36,20 +36,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = OTLocalizedString(@"action").uppercaseString;
-    [self setupData];
-    [self.editTableSource configureWith:self.entourage];
-    [self setupCloseModal];
-
+    
     self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     
-    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
-                                                        withTarget:self
-                                                         andAction:@selector(sendEntourage:)
-                                                           andFont:@"SFUIText-Bold"
-                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
-    [self.navigationItem setRightBarButtonItem:menuButton];
-    [self.disclaimer showDisclaimer];
+    [self setupCloseModal];
+    
+    [self setupData];
 }
     
 - (void)viewDidAppear:(BOOL)animated {
@@ -59,7 +51,7 @@
     // Select by default the category: "Partager un repas, un café":
     // "entourage_type": "contribution",
     // "display_category": "social",
-    if (![self isCategorySelected]) {
+    if (![self isCategorySelected] && !self.isEditingEvent) {
         self.editTableSource.entourage.categoryObject = [OTCategoryFromJsonService categoryWithType:@"contribution" subcategory:@"social"];
         [self.editTableSource.tblEditEntourage reloadData];
     }
@@ -68,26 +60,65 @@
 #pragma mark - Private
 
 - (void)setupData {
-    if(self.entourage) {
-        self.type = self.entourage.type;
-        self.location = self.entourage.location;
-    } else {
-        self.entourage = [OTEntourage new];
-        self.entourage.status = ENTOURAGE_STATUS_OPEN;
-        self.entourage.type = self.type;
-        self.entourage.location = self.location;
+    NSString *menuButtonTitle = OTLocalizedString(@"validate");
+    
+    if (self.isEditingEvent) {
+        
+        self.title = [OTAppAppearance eventTitle].uppercaseString;
+        if (self.entourage) {
+            self.location = self.entourage.location;
+        } else {
+            [self setupEmptyEvent];
+        }
+    } else  {
+    
+        self.title = OTLocalizedString(@"action").uppercaseString;
+        if (self.entourage) {
+            self.type = self.entourage.type;
+            self.location = self.entourage.location;
+        } else {
+            [self setupEmptyEntourage];
+        }
+        
+        [self.disclaimer showDisclaimer];
     }
+    
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:menuButtonTitle.capitalizedString
+                                                        withTarget:self
+                                                         andAction:@selector(sendEntourage:)
+                                                           andFont:@"SFUIText-Bold"
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
+    [self.navigationItem setRightBarButtonItem:menuButton];
+    
+    [self.editTableSource configureWith:self.entourage];
+}
+
+- (void)setupEmptyEntourage {
+    self.entourage = [OTEntourage new];
+    self.entourage.status = ENTOURAGE_STATUS_OPEN;
+    self.entourage.type = self.type;
+    self.entourage.location = self.location;
+}
+
+- (void)setupEmptyEvent {
+    self.entourage = [[OTEntourage alloc] initWithGroupType:GROUP_TYPE_OUTING];
+    self.entourage.categoryObject = [OTCategoryFromJsonService
+                                     categoryWithType:@"contribution" subcategory:@"event"];
 }
 
 - (void)sendEntourage:(UIButton*)sender {
     [OTLogger logEvent:@"ConfirmCreateEntourage"];
+    
     if (![self isCategorySelected] || ![self isTitleValid]) {
-            return;
+        return;
     }
-    if(self.entourage.uid)
+    
+    if (self.entourage.uid) {
         [self updateEntourage:sender];
-    else
+    }
+    else {
         [self createEntourage:sender];
+    }
 }
 
 - (BOOL)isTitleValid {
@@ -115,6 +146,7 @@
             [self presentViewController:alert animated:YES completion:nil];
         return NO;
     }
+    
     return YES;
 }
 
@@ -122,14 +154,14 @@
     sender.enabled = NO;
     [SVProgressHUD show];
     [[OTEncounterService new] sendEntourage:self.editTableSource.entourage
-                                withSuccess:^(OTEntourage *sentEntourage)
-     {
+                                withSuccess:^(OTEntourage *sentEntourage) {
         self.entourage = sentEntourage;
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageCreated object:nil];
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
         [OTLogger logEvent:@"CreateEntourageSuccess"];
-        if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)])
+         if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {
             [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
+         }
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotCreated")];
         sender.enabled = YES;
@@ -139,11 +171,13 @@
 - (void)updateEntourage:(UIButton *)sender {
     sender.enabled = NO;
     [SVProgressHUD show];
-    [[OTEncounterService new] updateEntourage:self.editTableSource.entourage withSuccess:^(OTEntourage *sentEntourage) {
+    [[OTEncounterService new] updateEntourage:self.editTableSource.entourage
+                                  withSuccess:^(OTEntourage *sentEntourage) {
         self.entourage = sentEntourage;
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageUpdated")];
-        if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)])
-            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject: self.editTableSource.entourage];
+                                      if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {
+                                          [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject: self.editTableSource.entourage];
+                                      }
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotUpdated")];
         sender.enabled = YES;
@@ -153,10 +187,13 @@
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.disclaimer prepareSegue:segue])
+    if ([self.disclaimer prepareSegue:segue]) {
         return;
-    if([self.editNavBehavior prepareSegue:segue])
+    }
+    
+    if ([self.editNavBehavior prepareSegue:segue]) {
         return;
+    }
 }
 
 @end

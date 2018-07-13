@@ -156,6 +156,7 @@
 @property (nonatomic) BOOL                                          poisDisplayed;
 @property (nonatomic) BOOL                                          solidarityGuidePoisDisplayed;
 @property (nonatomic) BOOL                                          inviteBehaviorTriggered;
+@property (nonatomic) BOOL                                          addEditEvent;
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior               *noDataBehavior;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior           *mailSender;
 @property (nonatomic, weak) IBOutlet OTGuideInfoBehavior            *guideInfoBehavior;
@@ -993,8 +994,11 @@
     }
     [OTLogger logEvent:eventName];
     
-    BOOL showEditEntourageOptions = !IS_PRO_USER && !self.poisMapDelegate.isActive;
-    [OTAppState showFeedAndMapActionsFromController:self showEditingOptions:showEditEntourageOptions];
+    BOOL showMapOptions = !IS_PRO_USER && !self.poisMapDelegate.isActive;
+    [OTAppState showFeedAndMapActionsFromController:self
+                                     showMapOptions:showMapOptions
+                                       withDelegate:self
+                                     isEditingEvent:self.addEditEvent];
 }
 
 #pragma mark - OTTourCreatorDelegate
@@ -1098,16 +1102,19 @@
 }
 
 - (void)createAction {
+    self.addEditEvent = NO;
     [self createEntouragewithAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
 }
     
 - (void)createEvent {
+    self.addEditEvent = YES;
     [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
 }
 
 - (void) createEntouragewithAlertMessage:(NSString *)message {
     [self dismissViewControllerAnimated:NO completion:^{
         //[self switchToNewsfeed];
+        self.addEditEvent = NO;
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
     }];
 }
@@ -1133,6 +1140,7 @@
 }
 
 - (void)dismissOptions:(BOOL)animated {
+    self.addEditEvent = NO;
     [self dismissViewControllerAnimated:animated completion:nil];
 }
 
@@ -1477,6 +1485,7 @@
         CLLocation *currentLocation = self.tappedLocation ? self.tappedLocation : [OTLocationManager sharedInstance].currentLocation;
         controller.location = currentLocation;
         controller.entourageEditorDelegate = self;
+        controller.isEditingEvent = self.addEditEvent;
     }
     else if ([segue.identifier isEqualToString:@"SolidarityGuideSegue"]) {
         UINavigationController *navController = (UINavigationController *)destinationViewController;

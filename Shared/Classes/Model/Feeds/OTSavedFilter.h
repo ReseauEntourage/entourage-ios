@@ -22,6 +22,7 @@
 @property (nonatomic) NSNumber *showFromOrganisation;
 
 @property (nonatomic) NSNumber *showOuting;
+@property (nonatomic) NSNumber *showPastOuting;
 @property (nonatomic) NSNumber *showNeighborhood;
 @property (nonatomic) NSNumber *showPrivateCircle;
 

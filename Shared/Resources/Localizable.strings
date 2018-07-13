@@ -332,6 +332,9 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "filter_entourage_from_sympathisants_title" = "Montrer uniquement";
 "filter_entourage_from_sympathisants" = "Crées par les sympathisants de l'association que je soutiens";
 
+"filter_events_title" = "Évènements";
+"filter_events_include_past_events_title" = "Inclure passés";
+
 "filter_solidarity_guide_categories" = "Catégories";
 
 "filter_timeframe_title" = "Affichage des entourages";
@@ -345,6 +348,9 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 // Titles
 "aboutTitle" = "À propos";
 "socialTitle" = "AGIR AVEC ENTOURAGE";
+"addEventAddress" = "Adresse *";
+"addEventTitle" = "Titre *";
+"addEventDate" = "Date *";
 "descriptionTitle" = "Description";
 "discoverEntourage" = "Découvrez Entourage";
 "guideviewcontroller_title" = "GUIDE";
@@ -354,6 +360,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "meetingTitle" = "Compte-rendu de rencontre";
 "myEntouragesTitle" = "Mes entourages";
 "userviewcontroller_title" = "PROFIL";
+"searchForAddress" = "Rechercher une adresse";
 
 // Alerts
 "acceptAlert" = "Accepter";
@@ -378,6 +385,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 
 // Navigation Bar Buttons
 "validate" = "Valider";
+"create" = "Créer";
 "edit" = "Editer";
 "modify" = "Modifier";
 

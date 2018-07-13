@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QW3-Z2-faC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QW3-Z2-faC">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -620,6 +620,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="1Vh-8u-ebC"/>
                     <connections>
+                        <outlet property="hintIcon" destination="QAF-Ty-4QX" id="WSD-Dy-fxe"/>
                         <outlet property="hintView" destination="fSI-Pb-YgF" id="mtM-ao-dV1"/>
                         <outlet property="maxLenghtReachedView" destination="Kuy-ys-seh" id="Y8D-PI-O4f"/>
                         <outlet property="txtTitle" destination="Cop-uM-gXN" id="1ZX-3G-P9o"/>
@@ -700,6 +701,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                     </view>
                     <navigationItem key="navigationItem" id="qiX-QD-WFt"/>
                     <connections>
+                        <outlet property="hintIcon" destination="vh0-0E-hZY" id="tl6-hK-7Ev"/>
                         <outlet property="txtDescription" destination="Tqp-Pu-7oC" id="imm-Pf-4jD"/>
                     </connections>
                 </viewController>

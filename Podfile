@@ -26,6 +26,9 @@ def sharedPods
     pod 'FBSDKCoreKit'
     pod 'Firebase/Core'
     pod 'SnapKit', '~> 4.0.0'
+    pod 'GooglePlaces'
+    pod 'GooglePlacePicker'
+    pod 'GoogleMaps'
 end
 
 target "entourage" do

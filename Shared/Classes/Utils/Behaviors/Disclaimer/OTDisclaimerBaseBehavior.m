@@ -27,7 +27,7 @@
 }
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
-    if([segue.identifier isEqualToString:@"DisclaimerSegue"]) {
+    if ([segue.identifier isEqualToString:@"DisclaimerSegue"]) {
         UINavigationController *navigationViewController = segue.destinationViewController;
         [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController];
         UIViewController *destinationViewController = navigationViewController.topViewController;
