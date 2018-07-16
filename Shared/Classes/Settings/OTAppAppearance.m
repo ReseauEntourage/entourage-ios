@@ -23,6 +23,9 @@
 #import "UIColor+Expanded.h"
 #import "NSDate+OTFormatter.h"
 #import "NSDate+ui.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIImage+Fitting.h"
 
 #import "entourage-Swift.h"
 
@@ -451,24 +454,26 @@
 + (UIBarButtonItem *)leftNavigationBarButtonItemForFeedItem:(OTFeedItem*)feedItem
 {
     id iconName = [[[OTFeedItemFactory createFor:feedItem] getUI] categoryIconSource];
-    UIButton *iconView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
+    
+    UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
     iconView.backgroundColor = UIColor.whiteColor;
     iconView.layer.cornerRadius = 18;
     iconView.userInteractionEnabled = NO;
     iconView.clipsToBounds = YES;
-    
-    UIImage *placeholder = [UIImage imageNamed:@"user"];
-    
+    iconView.layer.masksToBounds = YES;
+    iconView.contentMode = UIViewContentModeScaleAspectFit;
+
+    UIImage *placeholder = [[UIImage imageNamed:@"user"] resizeTo:iconView.frame.size];
     if ([feedItem isConversation]) {
         NSString *urlPath = feedItem.author.avatarUrl;
         if (urlPath != nil && [urlPath class] != [NSNull class] && urlPath.length > 0) {
             NSURL *url = [NSURL URLWithString:urlPath];
-            [iconView setImageForState:UIControlStateNormal withURL:url placeholderImage:placeholder];
+            [iconView sd_setImageWithURL:url placeholderImage:placeholder];
         } else {
-            [iconView setImage:placeholder forState:UIControlStateNormal];
+            [iconView setImage:placeholder];
         }
     } else {
-        [iconView setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
+        [iconView setImage:[UIImage imageNamed:iconName]];
     }
     
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:iconView];

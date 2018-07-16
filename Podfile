@@ -6,10 +6,7 @@ platform :ios, '9.0'
 
 def sharedPods
     platform :ios, '9.0'
-    
-    #pod 'AFNetworking', '3.1.0'
-    #pod 'IQKeyboardManager', '3.3.4'
-    
+        
     pod 'AFNetworking'
     pod 'SWRevealViewController', '2.3.0'
     pod 'MBProgressHUD', '0.8'
@@ -29,6 +26,7 @@ def sharedPods
     pod 'GooglePlaces'
     pod 'GooglePlacePicker'
     pod 'GoogleMaps'
+    pod 'SDWebImage'
 end
 
 target "entourage" do

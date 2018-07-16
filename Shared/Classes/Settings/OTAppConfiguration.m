@@ -516,6 +516,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return NO;
 }
 
++ (BOOL)shouldShowAddEventDisclaimer
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return NO;
+}
+
 + (BOOL)shouldAllowLoginFromWelcomeScreen
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {

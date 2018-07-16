@@ -45,6 +45,7 @@
                                                            colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
     self.dataSource = [OTCategoryFromJsonService getData];
+    
     self.categoryTableView.tableFooterView = [UIView new];
     self.categoryTableView.rowHeight = UITableViewAutomaticDimension;
     self.categoryTableView.estimatedRowHeight = 140;

@@ -17,4 +17,13 @@
     self.lblDescription.textColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
+- (void)configureWithTitle:(NSString *)title
+               description:(NSString*)description
+                 isPrivate:(BOOL)isPrivate {
+    self.lblTitle.text = title;
+    self.lblDescription.text = description;
+    [self.privacySwitch setOn:isPrivate];
+    self.privacySwitch.enabled = NO;
+}
+
 @end

@@ -9,6 +9,7 @@
 #import "OTEntourage.h"
 #import "OTConsts.h"
 #import "OTTour.h"
+#import "ISO8601DateFormatter.h"
 
 @implementation OTEntourage
 
@@ -66,17 +67,29 @@
 
 - (NSDictionary *)dictionaryForWebService {
     
-    return @{
-        kWSKeyTitle: self.title,
-        kWSKeyEntourageType: self.entourage_type,
-        kWSDescription: self.desc ? self.desc : @"",
-        kWSKeyStatus: self.status,
-        kWSKeyCategory: self.category,
-        kWSKeyLocation: @{
-            kWSKeyLatitude: @(self.location.coordinate.latitude),
-            kWSKeyLongitude: @(self.location.coordinate.longitude)
-        }
-     };
+    NSDictionary *entourageInfo = @{
+                                    kWSKeyTitle: self.title,
+                                    kWSKeyEntourageType: self.entourage_type,
+                                    kWSDescription: self.desc ? self.desc : @"",
+                                    kWSKeyStatus: self.status,
+                                    kWSKeyCategory: self.category,
+                                    kWSKeyLocation: @{
+                                            kWSKeyLatitude: @(self.location.coordinate.latitude),
+                                            kWSKeyLongitude: @(self.location.coordinate.longitude)
+                                            }
+                                    };
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:entourageInfo];
+    
+    if ([self isOuting]) {
+        ISO8601DateFormatter *formatter = [[ISO8601DateFormatter alloc] init];
+        formatter.includeTime = YES;
+        NSString *dateString = [formatter stringFromDate:self.startDate];
+        NSDictionary *eventInfo  = @{kWSKeyStartsAt: dateString, kWSKeyDisplayAddress: self.displayAddress};
+        [params setObject:eventInfo forKey:kWSKeyMetadata];
+    }
+    
+    return params;
 }
 
 @end

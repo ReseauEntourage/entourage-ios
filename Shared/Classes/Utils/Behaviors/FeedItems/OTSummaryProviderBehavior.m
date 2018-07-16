@@ -169,9 +169,11 @@
 
 - (void)profilePictureUpdated:(NSNotification *)notification {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if(self.feedItem.author.uID != nil)
-        if([currentUser.sid isEqualToNumber:self.feedItem.author.uID])
+    if (self.feedItem.author.uID != nil) {
+        if ([currentUser.sid isEqualToNumber:self.feedItem.author.uID]) {
             [self.btnAvatar setupAsProfilePictureFromUrl:currentUser.avatarURL withPlaceholder:@"user"];
+        }
+    }
 }
 
 - (void)entourageUpdated:(NSNotification *)notification {
@@ -182,30 +184,37 @@
 
 - (NSString *)getDistance:(double)distance with:(NSDate *)creationDate {
     NSString *fromDate = [creationDate sinceNow];
-    if(distance < 0)
+    if (distance < 0) {
         return fromDate;
+    }
     NSString *distanceString = [OTSummaryProviderBehavior toDistance:distance];
     return [NSString stringWithFormat:OTLocalizedString(@"entourage_time_data"), fromDate, distanceString];
 }
 
 - (NSString *)formattedItemDistance:(double)distance creationDate:(NSDate *)creationDate {
-    NSString *fromDate = [creationDate sinceNow];
+    //NSString *fromDate = [creationDate sinceNow];
     if (distance < 0) {
-        return fromDate;
+        // If negative distance, means no location for the entourage item/feed/action
+        //return fromDate;
+        return @"";
     }
     NSString *distanceString = [OTSummaryProviderBehavior toDistance:distance];
     return [NSString stringWithFormat:OTLocalizedString(@"entourage_distance"), distanceString];
 }
 
 + (int)getDistance:(double)from {
-    if(from < 1000)
+    if (from < 1000) {
         return round(from);
+    }
+    
     return round(from / 1000);
 }
 
 + (NSString *)getDistanceQualifier:(double)from {
-    if(from < 1000)
+    if (from < 1000) {
         return @"m";
+    }
+    
     return @"km";
 }
 

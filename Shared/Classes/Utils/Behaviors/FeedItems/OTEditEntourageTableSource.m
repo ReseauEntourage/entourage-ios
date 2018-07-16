@@ -76,6 +76,10 @@
     return [OTAddEditEntourageDataSource tableView:tableView heightForHeaderInSection:section];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [OTAddEditEntourageDataSource tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
 #pragma mark -  OTAddEditEntourageDelegate -
 
 - (void)editEntourageCategory

@@ -281,10 +281,12 @@
     int index = 7;
     for (OTCategory *category in demande.categories) {
         NSString *value = [NSString stringWithFormat:@"%@_%@", demande.type, category.category];
-        [categoryArray addObject:[OTFeedItemFilter createFor:index
-                                                      active:[[self.categoryDictionary valueForKey:value] boolValue]
-                                                   withImage:value
-                                                       title:category.title]];
+        if (![category.category isEqualToString:@"event"]) {
+            [categoryArray addObject:[OTFeedItemFilter createFor:index
+                                                          active:[[self.categoryDictionary valueForKey:value] boolValue]
+                                                       withImage:value
+                                                           title:category.title]];
+        }
         index++;
     }
     return categoryArray;
@@ -295,10 +297,12 @@
     int index = 0;
     for (OTCategory *category in contribution.categories) {
         NSString *value = [NSString stringWithFormat:@"%@_%@", contribution.type, category.category];
-        [categoryArray addObject:[OTFeedItemFilter createFor:index
+        if (![category.category isEqualToString:@"event"]) {
+            [categoryArray addObject:[OTFeedItemFilter createFor:index
                                                       active:[[self.categoryDictionary valueForKey:value] boolValue]
                                                    withImage:value
                                                        title:category.title]];
+        }
         index++;
     }
     return categoryArray;
@@ -375,7 +379,7 @@
                [OTFeedItemFilter createFor:FeedItemFilterKeyEvents
                                     active:self.showOuting
                                   children:@[]
-                                     image:@"ask_for_help_event"
+                                     image:@"outing"
                               showBoldText:YES],
                [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
                                     active:self.showPastOuting

@@ -975,7 +975,7 @@
     
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotEndFilename];
-    [self performSegueWithIdentifier:@"x`x`" sender:self];
+    [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:self];
 }
 
 - (void)failedToStopTour {
@@ -994,9 +994,9 @@
     }
     [OTLogger logEvent:eventName];
     
-    BOOL showMapOptions = !IS_PRO_USER && !self.poisMapDelegate.isActive;
+    BOOL options = !IS_PRO_USER && !self.poisMapDelegate.isActive;
     [OTAppState showFeedAndMapActionsFromController:self
-                                     showMapOptions:showMapOptions
+                                     options:options
                                        withDelegate:self
                                      isEditingEvent:self.addEditEvent];
 }

@@ -96,6 +96,9 @@
 // Configures if the user profile image is displayed on right of the newws feed item rows
 + (BOOL)shouldShowCreatorImagesForNewsFeedItems;
 
+// Configures if the event disclaimer is shown before creating a new event
++ (BOOL)shouldShowAddEventDisclaimer;
+
 // Configures if the numbers of user actions is displayed in the user profile
 + (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user;
 

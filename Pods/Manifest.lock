@@ -14,9 +14,9 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AWSCore (2.6.23)
-  - AWSS3 (2.6.23):
-    - AWSCore (= 2.6.23)
+  - AWSCore (2.6.24)
+  - AWSS3 (2.6.24):
+    - AWSCore (= 2.6.24)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -67,6 +67,9 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - OCMock (3.1)
+  - SDWebImage (4.4.1):
+    - SDWebImage/Core (= 4.4.1)
+  - SDWebImage/Core (4.4.1)
   - SimpleKeychain (0.8.1)
   - SnapKit (4.0.0)
   - SVProgressHUD (2.2.5)
@@ -89,6 +92,7 @@ DEPENDENCIES:
   - MBProgressHUD (= 0.8)
   - Mixpanel
   - OCMock (= 3.1)
+  - SDWebImage
   - SimpleKeychain (~> 0.7)
   - SnapKit (~> 4.0.0)
   - SVProgressHUD
@@ -119,6 +123,7 @@ SPEC REPOS:
     - Mixpanel
     - nanopb
     - OCMock
+    - SDWebImage
     - SimpleKeychain
     - SnapKit
     - SVProgressHUD
@@ -126,8 +131,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AWSCore: d56f69d7312e652e51c70f3b25e1687a5c2d06ca
-  AWSS3: 198942f234628f1ad1c373725d65c33ebfe87af6
+  AWSCore: 43358e747642c26c249c2e3debde690e226656bd
+  AWSS3: 1ad08124a768351bb8e1cc3cc6449199a1fe1394
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
@@ -148,11 +153,12 @@ SPEC CHECKSUMS:
   Mixpanel: 3c3925c27f7a321d5978319a72f53f8f0885afc5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   OCMock: 721c11680ae2d65d67f40932777194daf7002781
+  SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   SimpleKeychain: e2485c28d82fcece35e9e41faeac42ebfe614815
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: 5c71fa0caa5e9b6c124ec15759c93b044ea3f6f5
+PODFILE CHECKSUM: 1a88074c1762c5eb78a847e210550c2ae27a1ba0
 
 COCOAPODS: 1.5.2

@@ -107,11 +107,24 @@
 }
 
 - (void)editAddress:(OTEntourage *)entourage {
+    [self showGooglePlacesAutocompleteAddressController];
+}
+
+- (void)showGooglePlacesAutocompleteAddressController {
     GMSAutocompleteViewController *acController = [[GMSAutocompleteViewController alloc] init];
     acController.delegate = self;
     acController.primaryTextHighlightColor = [ApplicationTheme shared].backgroundThemeColor;
     acController.primaryTextColor = acController.secondaryTextColor;
     acController.tintColor = [ApplicationTheme shared].backgroundThemeColor;
+    acController.autocompleteBoundsMode = kGMSAutocompleteBoundsModeRestrict;
+    
+    /*
+     * if we have the device location: 20km radius around the user (so 40x40km square)
+     * else: North-East lat=51,lng=9 to South-West lat=42,lng=-5 (a rectangle roughly around France)
+     The other parameters are left to their default ("bounds mode" set to "bias", no "type" filtering).
+     */
+    acController.autocompleteBounds = [[GMSCoordinateBounds alloc] initWithCoordinate:(CLLocationCoordinate2DMake(51, 9))
+                                                                           coordinate:CLLocationCoordinate2DMake(42, -5)];
     
     // Color of typed text in the search bar.
     NSDictionary *searchBarTextAttributes = @{
@@ -126,7 +139,7 @@
                                             NSForegroundColorAttributeName: [UIColor whiteColor],
                                             NSFontAttributeName : [UIFont systemFontOfSize:[UIFont systemFontSize]]
                                             };
-
+    
     // Color of the default search text.
     NSAttributedString *attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:OTLocalizedString(@"searchForAddress")

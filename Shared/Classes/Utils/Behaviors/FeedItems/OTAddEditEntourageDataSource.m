@@ -21,7 +21,7 @@
 + (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
                                entourage:(OTEntourage*)entourage {
     if ([entourage isOuting]) {
-        return 4;
+        return 5;
     }
     return 4;
 }
@@ -57,6 +57,10 @@
                 [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"addEventDate")
                                                         andText:startDateInfo];
             }
+                break;
+            case 4:
+                cell = [tableView dequeueReusableCellWithIdentifier:@"EntouragePrivacyCell"];
+                [((OTEntourageEditItemCell*)cell) configureWithTitle:@"Privé" description:@"Cette option sera bientôt disponible. En attendant, communiquez directement dans une conversation avec les personnes que vous souhaitez inviter." isPrivate:NO];
                 break;
             default:
                 break;
@@ -137,6 +141,14 @@
 
 + (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 16.0f;
+}
+
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
+    if (indexPath.section == 4) {
+        return 100.0f;
+    }
+    
+    return 50.0f;
 }
 
 @end

@@ -321,7 +321,7 @@
 }
     
 + (void)showFeedAndMapActionsFromController:(UIViewController*)controller
-                          showMapOptions:(BOOL)showMapOptions
+                          options:(BOOL)options
                                withDelegate:(id<EntourageEditorDelegate>)delegate
                                     isEditingEvent:(BOOL)isEditingEvent {
     
@@ -333,7 +333,7 @@
         return;
     }
     
-    if (!showMapOptions) {
+    if (options) {
         [controller performSegueWithIdentifier:@"EntourageEditor" sender:controller];
     }
     else {

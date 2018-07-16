@@ -29,4 +29,5 @@
 + (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
      withDelegate:(id<OTAddEditEntourageDelegate>)delegate
         entourage:(OTEntourage*)entourage;
++ (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath;
 @end

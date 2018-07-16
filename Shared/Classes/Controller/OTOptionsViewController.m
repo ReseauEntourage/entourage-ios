@@ -49,9 +49,9 @@
 
 - (void)addCloseButton {
     CGFloat buttonSize = 62.0f;
-    CGFloat buttomOffset = 102.0f;
+    CGFloat buttomOffset = 112.0f;
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGFloat x = [UIScreen mainScreen].bounds.size.width - PADDING_HORIZONTAL / 2 - buttonSize;
+    CGFloat x = [UIScreen mainScreen].bounds.size.width - PADDING_HORIZONTAL / 2 - buttonSize - 2;
     CGFloat y = [UIScreen mainScreen].bounds.size.height - (PADDING_VERTICAL + buttonSize) - buttomOffset + buttonSize;
     
     closeButton.frame = CGRectMake(x, y, buttonSize, buttonSize);

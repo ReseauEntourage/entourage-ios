@@ -83,12 +83,14 @@
 }
 
 - (double)distance {
-    if(!self.entourage.location)
+    if (!self.entourage.location) {
         return -1;
+    }
 
     CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
-    if(!currentLocation)
+    if (!currentLocation) {
         return -1;
+    }
     
     return [currentLocation distanceFromLocation:self.entourage.location];
 }

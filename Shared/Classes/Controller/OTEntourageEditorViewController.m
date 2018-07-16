@@ -42,10 +42,6 @@
     [self setupCloseModal];
     
     [self setupData];
-}
-    
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
     
     // EMA-2140
     // Select by default the category: "Partager un repas, un café":
@@ -54,6 +50,21 @@
     if (![self isCategorySelected] && !self.isEditingEvent) {
         self.editTableSource.entourage.categoryObject = [OTCategoryFromJsonService categoryWithType:@"contribution" subcategory:@"social"];
         [self.editTableSource.tblEditEntourage reloadData];
+    }
+}
+    
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (![self isCategorySelected] && !self.isEditingEvent) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"categoryNotSelected")
+                                                                       message:nil
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK")
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -70,8 +81,8 @@
         } else {
             [self setupEmptyEvent];
         }
+        
     } else  {
-    
         self.title = OTLocalizedString(@"action").uppercaseString;
         if (self.entourage) {
             self.type = self.entourage.type;
@@ -79,8 +90,10 @@
         } else {
             [self setupEmptyEntourage];
         }
-        
-        [self.disclaimer showDisclaimer];
+    }
+    
+    if ([OTAppConfiguration shouldShowAddEventDisclaimer]) {
+        [self.disclaimer showCreateEventDisclaimer];
     }
     
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:menuButtonTitle.capitalizedString
@@ -102,14 +115,18 @@
 
 - (void)setupEmptyEvent {
     self.entourage = [[OTEntourage alloc] initWithGroupType:GROUP_TYPE_OUTING];
-    self.entourage.categoryObject = [OTCategoryFromJsonService
-                                     categoryWithType:@"contribution" subcategory:@"event"];
+    self.entourage.categoryObject = [OTCategoryFromJsonService sampleEntourageEventCategory];
 }
 
 - (void)sendEntourage:(UIButton*)sender {
     [OTLogger logEvent:@"ConfirmCreateEntourage"];
     
-    if (![self isCategorySelected] || ![self isTitleValid]) {
+    if ([self.entourage isOuting]) {
+        if (![self isTitleValid] || ![self isAddressValid] || ![self isEventDateValid]) {
+            return;
+        }
+    }
+    else if (![self isCategorySelected] || ![self isTitleValid]) {
         return;
     }
     
@@ -134,16 +151,33 @@
     return YES;
 }
 
+- (BOOL)isAddressValid {
+    NSArray* words = [self.editTableSource.entourage.displayAddress componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *nospacestring = [words componentsJoinedByString:@""];
+    if (!nospacestring.length) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"invalidAddress") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)isEventDateValid {
+    if (!self.editTableSource.entourage.startDate) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"invalidDate") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (BOOL)isCategorySelected {
     if (!self.editTableSource.entourage.categoryObject.category.length) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"categoryNotSelected")
-                                                                       message:nil
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK")
-                                                                    style:UIAlertActionStyleDefault
-                                                                  handler:^(UIAlertAction * _Nonnull action) {}];
-            [alert addAction:defaultAction];
-            [self presentViewController:alert animated:YES completion:nil];
         return NO;
     }
     

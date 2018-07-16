@@ -79,11 +79,13 @@
 //        return;
 //    }
     OTTourPoint *lastTourPoint = self.tour.tourPoints.lastObject;
-    if(self.tourPointsToSend.count > 0)
+    if (self.tourPointsToSend.count > 0) {
         lastTourPoint = self.tourPointsToSend.lastObject;
+    }
     CLLocation *lastLocationToSend = [self locationFromTourPoint:lastTourPoint];
     OTTourPoint *lastPoint = [self addTourPointFromLocation:self.lastLocation toLastLocation:lastLocationToSend];
     [self updateTourPointsToSendIfNeeded:lastPoint];
+    
     [SVProgressHUD show];
     [self sendTourPointsWithSuccess:^() {
         [SVProgressHUD dismiss];
@@ -134,6 +136,7 @@
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour: self.tour];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.delegate tourDataUpdated];
+    
     return tourPoint;
 }
 

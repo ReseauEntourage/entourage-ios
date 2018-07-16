@@ -8,13 +8,6 @@
   },
   {
   "entourage_type": "ask_for_help",
-  "display_category": "event",
-  "display_category_title": "Des bénévoles pour un évènement",
-  "title_example": "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017",
-  "description_example": "Besoin de bénévoles pour la collecte nationale des Restos du Coeur dans notre équipe locale.\nSamedi de 17h à 21h ➜ 5 bénévoles \nDimanche de 10h à 13h ➜ 2 bénévoles \nEnsemble aidons ceux qui en ont vraiment besoin ! Merci d'avance"
-  },
-  {
-  "entourage_type": "ask_for_help",
   "display_category": "mat_help",
   "display_category_title": "Un don matériel",
   "title_example": "Gilles a besoin d'une paire de gants",
@@ -54,13 +47,6 @@
   "display_category_title": "Partager un repas ou un café",
   "title_example": "Qui peut me faire rencontrer une personne de la rue dans le quartier ? ",
   "description_example": "Je ne suis jamais allé à la rencontre de personnes sans-abri. Qui peut me présenter à une personne qu'il connait bien ?"
-  },
-  {
-  "entourage_type": "contribution",
-  "display_category": "event",
-  "display_category_title": "Inviter à un évènement solidaire",
-  "title_example": "Notre association vous invite à ses Portes ouvertes samedi 20 mars !",
-  "description_example": "Venez tous, voisins avec ou sans abri, à nos Portes ouvertes le 20 mars de 12h à 18h. \n- Rencontrez les membres de la communauté\n- Participez à nos ateliers \n- Trouvez la forme de bénévolat qui vous convient"
   },
   {
   "entourage_type": "contribution",
