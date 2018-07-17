@@ -199,9 +199,14 @@
     NSLog(@"Place address %@", place.formattedAddress);
     NSLog(@"Place attributions %@", place.attributions.string);
     
-    self.entourage.displayAddress = place.formattedAddress;
+    self.entourage.streetAddress = place.formattedAddress;
     self.entourage.location = [[CLLocation alloc] initWithLatitude:place.coordinate.latitude longitude:place.coordinate.longitude];
-    [self.editEntourageSource updateLocationAddress:place.formattedAddress];
+    self.entourage.googlePlaceId = place.placeID;
+    self.entourage.placeName = place.name;
+    
+    [self.editEntourageSource updateLocationAddress:place.formattedAddress
+                                          placeName:place.name
+                                            placeId:place.placeID];
 }
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(NSError *)error {

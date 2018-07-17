@@ -49,11 +49,11 @@
                 break;
             case 2:
                 [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"addEventAddress")
-                                                        andText:entourage.displayAddress];
+                                                        andText:entourage.streetAddress];
                 break;
             case 3: {
-                NSString *startDateInfo = entourage.startDate ?
-                    [entourage.startDate asStringWithFormat:@"EEEE dd MMMM yyyy"] : @"";
+                NSString *startDateInfo = entourage.startsAt ?
+                    [entourage.startsAt asStringWithFormat:@"EEEE dd MMMM yyyy"] : @"";
                 [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"addEventDate")
                                                         andText:startDateInfo];
             }

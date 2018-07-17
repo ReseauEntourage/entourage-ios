@@ -39,6 +39,8 @@ typedef enum {
     FeedItemFilterKeyMyEntouragesOnly,
     FeedItemFilterKeyMyOrganisationOnly,
     
+    FeedItemFilterKeyNeighborhoods,
+    FeedItemFilterKeyPrivateCircles,
     FeedItemFilterKeyEvents,
     FeedItemFilterKeyEventsPast,
 } FeedItemFilterKey;

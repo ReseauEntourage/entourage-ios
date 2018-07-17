@@ -61,7 +61,7 @@
     NSString *fontName = @"SFUIText-Medium";
     CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
     
-    NSString *startDateInfo = [self.entourage.startDate asStringWithFormat:@"EEEE dd MMMM yyyy"];
+    NSString *startDateInfo = [self.entourage.startsAt asStringWithFormat:@"EEEE dd MMMM yyyy"];
     NSString *dateInfo = [NSString stringWithFormat:@"%@ %@", prefix, startDateInfo];
     NSString *addressInfo = [NSString stringWithFormat:@"\n%@", self.entourage.displayAddress];
     

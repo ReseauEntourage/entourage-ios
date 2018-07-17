@@ -105,6 +105,7 @@
         if ([feedItem isOuting]) {
             image = [[UIImage imageNamed:source] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             self.imgCategory.tintColor = [OTAppAppearance iconColorForFeedItem:feedItem];
+            self.imgCategory.contentMode = UIViewContentModeCenter;
             
         } else if ([feedItem isConversation]) {
             if (self.feedItem.author.avatarUrl) {
@@ -115,6 +116,7 @@
             [self.imgCategory setupFromUrl:self.feedItem.author.avatarUrl withPlaceholder:@"userSmall"];
         } else {
             image = [UIImage imageNamed:source];
+            self.imgCategory.contentMode = UIViewContentModeCenter;
         }
         self.imgCategory.backgroundColor = [UIColor whiteColor];
     }
@@ -128,7 +130,6 @@
         self.imgCategory.layer.borderWidth = 1;
         self.imgCategory.clipsToBounds = YES;
         self.imgCategory.layer.cornerRadius = self.imgCategory.bounds.size.width / 2;
-        self.imgCategory.contentMode = UIViewContentModeCenter;
     }
 }
 

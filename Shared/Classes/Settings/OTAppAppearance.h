@@ -45,6 +45,7 @@
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem;
 + (NSString *)eventTitle;
++ (NSString *)eventsFilterTitle;
 + (UILabel*)navigationTitleLabelForFeedItem:(OTFeedItem*)feedItem;
 + (UIBarButtonItem *)leftNavigationBarButtonItemForFeedItem:(OTFeedItem*)feedItem;
 + (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem;

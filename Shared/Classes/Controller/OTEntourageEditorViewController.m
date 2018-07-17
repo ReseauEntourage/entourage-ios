@@ -152,7 +152,7 @@
 }
 
 - (BOOL)isAddressValid {
-    NSArray* words = [self.editTableSource.entourage.displayAddress componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray* words = [self.editTableSource.entourage.streetAddress componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *nospacestring = [words componentsJoinedByString:@""];
     if (!nospacestring.length) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"invalidAddress") message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -165,7 +165,7 @@
 }
 
 - (BOOL)isEventDateValid {
-    if (!self.editTableSource.entourage.startDate) {
+    if (!self.editTableSource.entourage.startsAt) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"invalidDate") message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:defaultAction];

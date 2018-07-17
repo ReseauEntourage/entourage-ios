@@ -32,11 +32,13 @@
     self.entourage.status = entourage.status;
     self.entourage.category = entourage.category;
     self.entourage.categoryObject = entourage.categoryObject;
-    self.entourage.displayAddress = entourage.displayAddress;
-    self.entourage.startDate = entourage.startDate;
+    self.entourage.streetAddress = entourage.streetAddress;
+    self.entourage.startsAt = entourage.startsAt;
     
     if ([entourage isOuting]) {
-        [self updateLocationAddress:entourage.displayAddress];
+        [self updateLocationAddress:entourage.streetAddress
+                          placeName:entourage.placeName
+                            placeId:entourage.googlePlaceId];
     } else {
         [self updateLocationTitle];
     }
@@ -133,14 +135,19 @@
                    }];
 }
 
-- (void)updateLocationAddress:(NSString*)address {
-    self.entourage.displayAddress = address;
-    self.locationText = self.entourage.displayAddress;
+- (void)updateLocationAddress:(NSString*)streetAddress
+                    placeName:(NSString*)placeName
+                      placeId:(NSString*)placeId {
+    self.entourage.streetAddress = streetAddress;
+    self.entourage.placeName = placeName;
+    self.entourage.googlePlaceId = placeId;
+    
+    self.locationText = self.entourage.streetAddress;
     [self updateTexts];
 }
 
 - (void)updateEventStartDate:(NSDate*)date {
-    self.entourage.startDate = date;
+    self.entourage.startsAt = date;
     [self updateTexts];
 }
 

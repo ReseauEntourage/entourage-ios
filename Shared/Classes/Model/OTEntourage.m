@@ -25,7 +25,7 @@
 {
     self = [super initWithGroupType:groupType];
     if (self) {
-        
+        self.status = ENTOURAGE_STATUS_OPEN;
     }
     return self;
 }
@@ -69,24 +69,34 @@
     
     NSDictionary *entourageInfo = @{
                                     kWSKeyTitle: self.title,
-                                    kWSKeyEntourageType: self.entourage_type,
                                     kWSDescription: self.desc ? self.desc : @"",
                                     kWSKeyStatus: self.status,
-                                    kWSKeyCategory: self.category,
                                     kWSKeyLocation: @{
                                             kWSKeyLatitude: @(self.location.coordinate.latitude),
                                             kWSKeyLongitude: @(self.location.coordinate.longitude)
-                                            }
+                                        }
                                     };
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:entourageInfo];
+    if (self.entourage_type) {
+        [params setObject:self.entourage_type forKey:kWSKeyEntourageType];
+    }
+    
+    if (self.category) {
+        [params setObject:self.category forKey:kWSKeyCategory];
+    }
     
     if ([self isOuting]) {
         ISO8601DateFormatter *formatter = [[ISO8601DateFormatter alloc] init];
         formatter.includeTime = YES;
-        NSString *dateString = [formatter stringFromDate:self.startDate];
-        NSDictionary *eventInfo  = @{kWSKeyStartsAt: dateString, kWSKeyDisplayAddress: self.displayAddress};
+        NSString *dateString = [formatter stringFromDate:self.startsAt];
+        NSDictionary *eventInfo  = @{kWSKeyStartsAt: dateString,
+                                     kWSKeyStreetAddress: self.streetAddress ?: @"",
+                                     kWSKeyPlaceName: self.placeName ?: @"",
+                                     kWSKeyGooglePlaceId: self.googlePlaceId ?: @"",
+                                     };
         [params setObject:eventInfo forKey:kWSKeyMetadata];
+        [params setObject:self.groupType forKey:kWSKeyGroupType];
     }
     
     return params;
