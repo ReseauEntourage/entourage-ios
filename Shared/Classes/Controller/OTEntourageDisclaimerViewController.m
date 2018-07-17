@@ -18,6 +18,14 @@
 @property (nonatomic, weak) IBOutlet UISwitch *switchAccept;
 @property (nonatomic, strong) UIBarButtonItem *rejectDisclaimerButton;
 
+@property (nonatomic, weak) IBOutlet UILabel *firstTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *secondTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *thirdsTitleLabel;
+
+@property (nonatomic, weak) IBOutlet UILabel *firstDescriptionLabel;
+@property (nonatomic, weak) IBOutlet UILabel *secondDescriptionLabel;
+@property (nonatomic, weak) IBOutlet UILabel *thirdsDescriptionLabel;
+
 @end
 
 @implementation OTEntourageDisclaimerViewController
@@ -27,8 +35,23 @@
 
     self.rejectDisclaimerButton = [self setupCloseModal];
     [self.rejectDisclaimerButton setAction:@selector(doRejectDisclaimer)];
+    
+    [self setupContent];
 }
 
+- (void)setupContent {
+    
+    if (self.isForCreatingEvent) {
+        self.navigationItem.title = OTLocalizedString(@"addActionDisclaimerTitle");
+        self.firstTitleLabel.text = OTLocalizedString(@"addEventDisclaimerFirstTitle");
+        self.secondTitleLabel.text = OTLocalizedString(@"addEventDisclaimerSecondTitle");
+        self.thirdsTitleLabel.text = OTLocalizedString(@"addEventDisclaimerThirdTitle");
+        
+        self.firstDescriptionLabel.text = OTLocalizedString(@"addEventDisclaimerFirstDescription");
+        self.secondDescriptionLabel.text = OTLocalizedString(@"addEventDisclaimerSecondDescription");
+        self.thirdsDescriptionLabel.text = OTLocalizedString(@"addEventDisclaimerThirdDescription");
+    }
+}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

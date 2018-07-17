@@ -13,6 +13,7 @@
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 
 - (void)showDisclaimer;
+- (void)showCreateEventDisclaimer;
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue;
 - (NSAttributedString *)disclaimerText;
 - (NSAttributedString *)buildDisclaimerWithLink:(NSString *)originalString;

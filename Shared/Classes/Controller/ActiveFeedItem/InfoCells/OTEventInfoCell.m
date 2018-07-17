@@ -19,7 +19,7 @@
 }
 
 - (void)configureWith:(OTFeedItem *)item {
-    if (item.startDate) {
+    if (item.startsAt) {
         NSAttributedString *description = [[[OTFeedItemFactory createFor:item] getUI] eventInfoFormattedDescription];
         self.lblInfo.attributedText = description;
     }

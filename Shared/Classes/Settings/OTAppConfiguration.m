@@ -39,6 +39,8 @@
 #import "OTMyEntouragesViewController.h"
 #import "UIImage+processing.h"
 #import "OTAPIConsts.h"
+#import <GooglePlaces/GooglePlaces.h>
+#import <GooglePlaces/GMSPlacesClient.h>
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -84,6 +86,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [self configurePushNotifcations];
     [self configureAnalyticsWithOptions:launchOptions];
     [self configurePhotoUploadingService];
+    [self configureGooglePlacesClient];
     
     [OTAppConfiguration configureApplicationAppearance];
     [OTAppState launchApplicatioWithOptions:launchOptions];
@@ -200,6 +203,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 - (void)configureCrashReporting
 {
     [Fabric with:@[[Crashlytics class]]];
+}
+
+- (void)configureGooglePlacesClient {
+    [GMSPlacesClient provideAPIKey:[self.environmentConfiguration GooglePlaceApiKey]];
 }
 
 - (void)configureFirebase
@@ -506,6 +513,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     // EMA-1991
+    return NO;
+}
+
++ (BOOL)shouldShowAddEventDisclaimer
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
     return NO;
 }
 

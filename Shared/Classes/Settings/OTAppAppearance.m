@@ -23,6 +23,9 @@
 #import "UIColor+Expanded.h"
 #import "NSDate+OTFormatter.h"
 #import "NSDate+ui.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIImage+Fitting.h"
 
 #import "entourage-Swift.h"
 
@@ -223,12 +226,24 @@
     return OTLocalizedString(@"mail_signal_subject");
 }
 
-+ (NSString *)promoteEventActionSubject:(NSString*)eventName {
-    NSString *eventType = OTLocalizedString(@"event");
++ (NSString *)eventTitle {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        eventType = OTLocalizedString(@"pfp_event");
+        return OTLocalizedString(@"pfp_event");
     }
     
+    return OTLocalizedString(@"event");
+}
+
++ (NSString *)eventsFilterTitle {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_filter_events_title");
+    }
+    
+    return OTLocalizedString(@"filter_events_title");
+}
+
++ (NSString *)promoteEventActionSubject:(NSString*)eventName {
+    NSString *eventType = [OTAppAppearance eventTitle];
     NSString *eventDetails = [NSString stringWithFormat:@"%@ %@", eventType, eventName];
     NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"promote_event_subject_format"), eventDetails];
     return subject;
@@ -331,11 +346,11 @@
                                    NSForegroundColorAttributeName:typeColor};
     NSMutableAttributedString *eventAttrDescString = [[NSMutableAttributedString alloc] initWithString:eventName attributes:atttributtes];
     
-    NSString *dateString = [NSString stringWithFormat:@" le %@", [item.startDate asStringWithFormat:@"EEEE dd/MM"]];
+    NSString *dateString = [NSString stringWithFormat:@" le %@", [item.startsAt asStringWithFormat:@"EEEE dd/MM"]];
     NSDictionary *dateAtttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size], NSForegroundColorAttributeName:[UIColor appGreyishColor]};
     NSMutableAttributedString *dateAttrString = [[NSMutableAttributedString alloc] initWithString:dateString attributes:dateAtttributtes];
     
-    if (item.startDate) {
+    if (item.startsAt) {
         [eventAttrDescString appendAttributedString:dateAttrString];
     }
     
@@ -446,26 +461,37 @@
     
 + (UIBarButtonItem *)leftNavigationBarButtonItemForFeedItem:(OTFeedItem*)feedItem
 {
-    id iconName = [[[OTFeedItemFactory createFor:feedItem] getUI] categoryIconSource];
-    UIButton *iconView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
-    iconView.backgroundColor = UIColor.whiteColor;
-    iconView.layer.cornerRadius = 18;
-    iconView.userInteractionEnabled = NO;
-    iconView.clipsToBounds = YES;
-    
-    UIImage *placeholder = [UIImage imageNamed:@"user"];
+    CGFloat iconSize = 36.0f;
     
     if ([feedItem isConversation]) {
+        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
+        iconView.backgroundColor = UIColor.whiteColor;
+        iconView.layer.cornerRadius = iconSize / 2;
+        iconView.userInteractionEnabled = NO;
+        iconView.clipsToBounds = YES;
+        iconView.layer.masksToBounds = YES;
+        iconView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        UIImage *placeholder = [[UIImage imageNamed:@"user"] resizeTo:iconView.frame.size];
         NSString *urlPath = feedItem.author.avatarUrl;
         if (urlPath != nil && [urlPath class] != [NSNull class] && urlPath.length > 0) {
             NSURL *url = [NSURL URLWithString:urlPath];
-            [iconView setImageForState:UIControlStateNormal withURL:url placeholderImage:placeholder];
+            [iconView sd_setImageWithURL:url placeholderImage:placeholder];
         } else {
-            [iconView setImage:placeholder forState:UIControlStateNormal];
+            [iconView setImage:placeholder];
         }
-    } else {
-        [iconView setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
+        
+        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:iconView];
+        return barButtonItem;
     }
+    
+    id iconName = [[[OTFeedItemFactory createFor:feedItem] getUI] categoryIconSource];
+    UIButton *iconView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
+    iconView.backgroundColor = UIColor.whiteColor;
+    iconView.layer.cornerRadius = iconSize / 2;
+    iconView.userInteractionEnabled = NO;
+    iconView.clipsToBounds = YES;
+    [iconView setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
     
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:iconView];
     return barButtonItem;

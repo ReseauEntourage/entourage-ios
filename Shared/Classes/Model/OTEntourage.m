@@ -9,11 +9,21 @@
 #import "OTEntourage.h"
 #import "OTConsts.h"
 #import "OTTour.h"
+#import "ISO8601DateFormatter.h"
 
 @implementation OTEntourage
 
 - (instancetype)init {
     self = [super init];
+    if (self) {
+        self.status = ENTOURAGE_STATUS_OPEN;
+    }
+    return self;
+}
+
+- (instancetype)initWithGroupType:(NSString*)groupType
+{
+    self = [super initWithGroupType:groupType];
     if (self) {
         self.status = ENTOURAGE_STATUS_OPEN;
     }
@@ -29,6 +39,7 @@
     copy.category = self.category;
     copy.entourage_type = self.entourage_type;
     copy.categoryObject = self.categoryObject;
+    copy.entourage_type = self.entourage_type;
 
     return copy;
 }
@@ -56,17 +67,39 @@
 
 - (NSDictionary *)dictionaryForWebService {
     
-    return @{
-        kWSKeyTitle: self.title,
-        kWSKeyEntourageType: self.entourage_type,
-        kWSDescription: self.desc ? self.desc : @"",
-        kWSKeyStatus: self.status,
-        kWSKeyCategory: self.category,
-        kWSKeyLocation: @{
-            kWSKeyLatitude: @(self.location.coordinate.latitude),
-            kWSKeyLongitude: @(self.location.coordinate.longitude)
-        }
-     };
+    NSDictionary *entourageInfo = @{
+                                    kWSKeyTitle: self.title,
+                                    kWSDescription: self.desc ? self.desc : @"",
+                                    kWSKeyStatus: self.status,
+                                    kWSKeyLocation: @{
+                                            kWSKeyLatitude: @(self.location.coordinate.latitude),
+                                            kWSKeyLongitude: @(self.location.coordinate.longitude)
+                                        }
+                                    };
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary:entourageInfo];
+    if (self.entourage_type) {
+        [params setObject:self.entourage_type forKey:kWSKeyEntourageType];
+    }
+    
+    if (self.category) {
+        [params setObject:self.category forKey:kWSKeyCategory];
+    }
+    
+    if ([self isOuting]) {
+        ISO8601DateFormatter *formatter = [[ISO8601DateFormatter alloc] init];
+        formatter.includeTime = YES;
+        NSString *dateString = [formatter stringFromDate:self.startsAt];
+        NSDictionary *eventInfo  = @{kWSKeyStartsAt: dateString,
+                                     kWSKeyStreetAddress: self.streetAddress ?: @"",
+                                     kWSKeyPlaceName: self.placeName ?: @"",
+                                     kWSKeyGooglePlaceId: self.googlePlaceId ?: @"",
+                                     };
+        [params setObject:eventInfo forKey:kWSKeyMetadata];
+        [params setObject:self.groupType forKey:kWSKeyGroupType];
+    }
+    
+    return params;
 }
 
 @end

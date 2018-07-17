@@ -14,11 +14,25 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.creationDate = [NSDate date];
-        self.updatedDate = [NSDate date];
-        self.unreadMessageCount = @(0);
+        [self setupDefaults];
     }
     return self;
+}
+
+- (instancetype)initWithGroupType:(NSString*)groupType
+{
+    self = [super init];
+    if (self) {
+        [self setupDefaults];
+        self.groupType = groupType;
+    }
+    return self;
+}
+
+- (void)setupDefaults {
+    self.creationDate = [NSDate date];
+    self.updatedDate = [NSDate date];
+    self.unreadMessageCount = @(0);
 }
 
 - (id)copyWithZone:(NSZone *)zone
@@ -30,7 +44,6 @@
     copy->_author = _author;
     copy->_creationDate = [_creationDate copyWithZone:zone];
     copy->_updatedDate = [_updatedDate copyWithZone:zone];
-    copy->_startDate = [_startDate copyWithZone:zone];
     copy->_joinStatus = [_joinStatus copyWithZone:zone];
     copy->_status = [_status copyWithZone:zone];
     copy->_type = [_type copyWithZone:zone];
@@ -38,9 +51,14 @@
     copy->_lastMessage = _lastMessage;
     copy->_unreadMessageCount = _unreadMessageCount;
     copy->_shareUrl = [_shareUrl copyWithZone:zone];
-    copy->_group_type = [_group_type copyWithZone:zone];
+    copy->_groupType = [_groupType copyWithZone:zone];
     copy->_identifierTag = [_identifierTag copyWithZone:zone];
+    
+    copy->_startsAt = [_startsAt copyWithZone:zone];
     copy->_displayAddress = [_displayAddress copyWithZone:zone];
+    copy->_streetAddress = [_streetAddress copyWithZone:zone];
+    copy->_placeName = [_placeName copyWithZone:zone];
+    copy->_googlePlaceId = [_googlePlaceId copyWithZone:zone];
     
     return copy;
 }
@@ -50,7 +68,7 @@
     if (self) {
         self.uuid = [dictionary stringForKey:kWSKeyUUID];
         self.uid = [dictionary numberForKey:kWSKeyID];
-        self.group_type = [dictionary stringForKey:kWSKeyGroupType];
+        self.groupType = [dictionary stringForKey:kWSKeyGroupType];
         self.status = [dictionary stringForKey:kWSKeyStatus];
         self.joinStatus = [dictionary stringForKey:kWSKeyJoinStatus];
         self.noPeople = [dictionary numberForKey:kWSKeyNoPeople];
@@ -70,8 +88,10 @@
         
         NSDictionary *metadataDictionary = [dictionary objectForKey:kWSKeyMetadata];
         if ([metadataDictionary class] != [NSNull class] && metadataDictionary) {
-            self.startDate = [metadataDictionary dateForKey:kWSKeyStartsAt];
+            self.startsAt = [metadataDictionary dateForKey:kWSKeyStartsAt];
             self.displayAddress = [metadataDictionary stringForKey:kWSKeyDisplayAddress];
+            self.placeName = [metadataDictionary stringForKey:kWSKeyPlaceName];
+            self.googlePlaceId = [metadataDictionary stringForKey:kWSKeyGooglePlaceId];
         }
     }
     return self;
@@ -88,19 +108,19 @@
 }
 
 - (BOOL)isPrivateCircle {
-    return [self.group_type isEqualToString:GROUP_TYPE_PRIVATE_CIRCLE];
+    return [self.groupType isEqualToString:GROUP_TYPE_PRIVATE_CIRCLE];
 }
 
 - (BOOL)isNeighborhood {
-    return [self.group_type isEqualToString:GROUP_TYPE_NEIGHBORHOOD];
+    return [self.groupType isEqualToString:GROUP_TYPE_NEIGHBORHOOD];
 }
 
 - (BOOL)isConversation {
-    return [self.group_type isEqualToString:GROUP_TYPE_CONVERSATION];
+    return [self.groupType isEqualToString:GROUP_TYPE_CONVERSATION];
 }
 
 - (BOOL)isOuting {
-    return [self.group_type isEqualToString:GROUP_TYPE_OUTING];
+    return [self.groupType isEqualToString:GROUP_TYPE_OUTING];
 }
 
 @end

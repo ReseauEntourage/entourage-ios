@@ -61,7 +61,7 @@
     NSString *fontName = @"SFUIText-Medium";
     CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
     
-    NSString *startDateInfo = [self.entourage.startDate asStringWithFormat:@"EEEE dd MMMM yyyy"];
+    NSString *startDateInfo = [self.entourage.startsAt asStringWithFormat:@"EEEE dd MMMM yyyy"];
     NSString *dateInfo = [NSString stringWithFormat:@"%@ %@", prefix, startDateInfo];
     NSString *addressInfo = [NSString stringWithFormat:@"\n%@", self.entourage.displayAddress];
     
@@ -83,12 +83,14 @@
 }
 
 - (double)distance {
-    if(!self.entourage.location)
+    if (!self.entourage.location) {
         return -1;
+    }
 
     CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
-    if(!currentLocation)
+    if (!currentLocation) {
         return -1;
+    }
     
     return [currentLocation distanceFromLocation:self.entourage.location];
 }

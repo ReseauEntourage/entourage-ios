@@ -31,7 +31,6 @@
 @property (nonatomic, strong) OTFeedItemAuthor *author;
 @property (nonatomic, strong) NSDate *creationDate;
 @property (nonatomic, strong) NSDate *updatedDate;
-@property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSString *joinStatus;
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSString *type;
@@ -39,10 +38,17 @@
 @property (nonatomic, strong) OTMyFeedMessage *lastMessage;
 @property (nonatomic, assign) NSNumber *unreadMessageCount;
 @property (nonatomic, strong) NSString *shareUrl;
-@property (nonatomic, strong) NSString *group_type;
+
+@property (nonatomic, strong) NSDate *startsAt;
+@property (nonatomic, strong) NSString *groupType;
 @property (nonatomic, strong) NSString *displayAddress;
+@property (nonatomic, strong) NSString *streetAddress;
+@property (nonatomic, strong) NSString *placeName;
+@property (nonatomic, strong) NSString *googlePlaceId;
 
 @property (nonatomic) NSString *identifierTag;
+
+- (instancetype)initWithGroupType:(NSString*)groupType;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

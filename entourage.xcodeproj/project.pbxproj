@@ -774,6 +774,10 @@
 		A24D969F20D1B0EC00C21FCC /* OTEntourageAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A24D969D20D1B0EC00C21FCC /* OTEntourageAnnotation.m */; };
 		A24D96A520D2A14800C21FCC /* OTConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = A24D96A420D2A14800C21FCC /* OTConversation.m */; };
 		A24D96A620D2AAF800C21FCC /* OTConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = A24D96A420D2A14800C21FCC /* OTConversation.m */; };
+		A24EA37B20F8C6A60027AB8B /* LSLDatePickerDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA37920F8C6A50027AB8B /* LSLDatePickerDialog.m */; };
+		A24EA37C20F8C6A60027AB8B /* LSLDatePickerDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA37920F8C6A50027AB8B /* LSLDatePickerDialog.m */; };
+		A285C35C20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
+		A285C35D20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
@@ -1985,6 +1989,10 @@
 		A24D969D20D1B0EC00C21FCC /* OTEntourageAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEntourageAnnotation.m; sourceTree = "<group>"; };
 		A24D96A320D2A14800C21FCC /* OTConversation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTConversation.h; sourceTree = "<group>"; };
 		A24D96A420D2A14800C21FCC /* OTConversation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTConversation.m; sourceTree = "<group>"; };
+		A24EA37920F8C6A50027AB8B /* LSLDatePickerDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSLDatePickerDialog.m; sourceTree = "<group>"; };
+		A24EA37A20F8C6A50027AB8B /* LSLDatePickerDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSLDatePickerDialog.h; sourceTree = "<group>"; };
+		A285C35A20F7787600D6625E /* OTAddEditEntourageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddEditEntourageDataSource.h; sourceTree = "<group>"; };
+		A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddEditEntourageDataSource.m; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2865,6 +2873,7 @@
 		A202E97B2085D2C60058F32C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A24EA37820F8C6A50027AB8B /* DatePicker */,
 				A202E9812085D2C60058F32C /* Amazon */,
 				A202E9952085D2C60058F32C /* Behaviors */,
 				A202E98F2085D2C60058F32C /* DebugLog */,
@@ -3224,25 +3233,27 @@
 		A202EA242085D2C60058F32C /* FeedItems */ = {
 			isa = PBXGroup;
 			children = (
-				A202EA252085D2C60058F32C /* OTNextStatusButtonBehavior.h */,
-				A202EA262085D2C60058F32C /* OTEditEntourageTableSource.h */,
-				A202EA272085D2C60058F32C /* OTEditEntourageBehavior.m */,
-				A202EA282085D2C60058F32C /* OTStatusBehavior.h */,
-				A202EA292085D2C60058F32C /* OTSummaryProviderBehavior.m */,
-				A202EA2A2085D2C60058F32C /* OTInviteBehavior.h */,
-				A202EA2B2085D2C60058F32C /* OTUserProfileBehavior.m */,
-				A202EA2C2085D2C60058F32C /* OTStatusChangedBehavior.m */,
-				A202EA2D2085D2C60058F32C /* OTJoinBehavior.h */,
-				A202EA2E2085D2C60058F32C /* OTStatusChangedProtocol.h */,
-				A202EA2F2085D2C60058F32C /* OTEditEntourageTableSource.m */,
-				A202EA302085D2C60058F32C /* OTNextStatusButtonBehavior.m */,
-				A202EA312085D2C60058F32C /* OTSummaryProviderBehavior.h */,
-				A202EA322085D2C60058F32C /* OTStatusBehavior.m */,
 				A202EA332085D2C60058F32C /* OTEditEntourageBehavior.h */,
-				A202EA342085D2C60058F32C /* OTUserProfileBehavior.h */,
+				A202EA272085D2C60058F32C /* OTEditEntourageBehavior.m */,
+				A202EA262085D2C60058F32C /* OTEditEntourageTableSource.h */,
+				A202EA2F2085D2C60058F32C /* OTEditEntourageTableSource.m */,
+				A285C35A20F7787600D6625E /* OTAddEditEntourageDataSource.h */,
+				A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */,
+				A202EA2A2085D2C60058F32C /* OTInviteBehavior.h */,
 				A202EA352085D2C60058F32C /* OTInviteBehavior.m */,
+				A202EA2D2085D2C60058F32C /* OTJoinBehavior.h */,
 				A202EA362085D2C60058F32C /* OTJoinBehavior.m */,
+				A202EA252085D2C60058F32C /* OTNextStatusButtonBehavior.h */,
+				A202EA302085D2C60058F32C /* OTNextStatusButtonBehavior.m */,
+				A202EA282085D2C60058F32C /* OTStatusBehavior.h */,
+				A202EA322085D2C60058F32C /* OTStatusBehavior.m */,
 				A202EA372085D2C60058F32C /* OTStatusChangedBehavior.h */,
+				A202EA2C2085D2C60058F32C /* OTStatusChangedBehavior.m */,
+				A202EA2E2085D2C60058F32C /* OTStatusChangedProtocol.h */,
+				A202EA312085D2C60058F32C /* OTSummaryProviderBehavior.h */,
+				A202EA292085D2C60058F32C /* OTSummaryProviderBehavior.m */,
+				A202EA342085D2C60058F32C /* OTUserProfileBehavior.h */,
+				A202EA2B2085D2C60058F32C /* OTUserProfileBehavior.m */,
 			);
 			path = FeedItems;
 			sourceTree = "<group>";
@@ -3554,6 +3565,15 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		A24EA37820F8C6A50027AB8B /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				A24EA37920F8C6A50027AB8B /* LSLDatePickerDialog.m */,
+				A24EA37A20F8C6A50027AB8B /* LSLDatePickerDialog.h */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
 		A296B8E520871E0900F6AFBD /* pfp */ = {
 			isa = PBXGroup;
 			children = (
@@ -3680,6 +3700,7 @@
 				6B92CA9C19A7461C004E8C9B /* Resources */,
 				34A63FBA43859415DF1BB474 /* [CP] Embed Pods Frameworks */,
 				A816301D1DDF1C9D0087E716 /* Fabric */,
+				138DF35D7A1740ED67839CC6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3721,6 +3742,7 @@
 				A296B89B20871CFC00F6AFBD /* Resources */,
 				A296B8DC20871CFC00F6AFBD /* [CP] Embed Pods Frameworks */,
 				A296B8DE20871CFC00F6AFBD /* Fabric */,
+				05D9293C4BFB6D73AF5957AD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3985,6 +4007,50 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		05D9293C4BFB6D73AF5957AD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-pfp/Pods-pfp-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pfp/Pods-pfp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		138DF35D7A1740ED67839CC6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		34A63FBA43859415DF1BB474 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4002,6 +4068,7 @@
 				"${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SWRevealViewController/SWRevealViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
@@ -4022,6 +4089,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JVFloatLabeledTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWRevealViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
@@ -4120,6 +4188,7 @@
 				"${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SWRevealViewController/SWRevealViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
@@ -4140,6 +4209,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JVFloatLabeledTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWRevealViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
@@ -4239,6 +4309,7 @@
 				A202ECE72085D2C80058F32C /* OTDeepLinkService.m in Sources */,
 				A202EC292085D2C80058F32C /* UIBarButtonItem+Badge.m in Sources */,
 				A21D64A32085D6D200EF8E0E /* OTAppConfiguration.m in Sources */,
+				A285C35C20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */,
 				A296B931208DFE8A00F6AFBD /* OTAppState.m in Sources */,
 				A202EB3B2085D2C80058F32C /* OTJoinAcceptedCell.m in Sources */,
 				A202EAF92085D2C70058F32C /* OTMyEntouragesFilter.m in Sources */,
@@ -4346,6 +4417,7 @@
 				A202EC5F2085D2C80058F32C /* OTEntourageDisclaimerBehavior.m in Sources */,
 				A202EB612085D2C80058F32C /* OTTutorial2ViewController.m in Sources */,
 				A24D969E20D1B0EC00C21FCC /* OTEntourageAnnotation.m in Sources */,
+				A24EA37B20F8C6A60027AB8B /* LSLDatePickerDialog.m in Sources */,
 				A202EBB72085D2C80058F32C /* UIViewController+menu.m in Sources */,
 				A202EB572085D2C80058F32C /* OTAskMoreViewController.m in Sources */,
 				A202EC412085D2C80058F32C /* OTHeatzonesCellProviderBehavior.m in Sources */,
@@ -5156,6 +5228,7 @@
 				A296B84020871CFC00F6AFBD /* OTTourCreatorViewController.m in Sources */,
 				A296B84120871CFC00F6AFBD /* OnBoardingTextField.swift in Sources */,
 				A296B84220871CFC00F6AFBD /* OTEntourageEditorViewController.m in Sources */,
+				A24EA37C20F8C6A60027AB8B /* LSLDatePickerDialog.m in Sources */,
 				A296B84320871CFC00F6AFBD /* OTFeedItemsTimeframeCell.m in Sources */,
 				A296B84420871CFC00F6AFBD /* OTStatusCell.m in Sources */,
 				A296B84520871CFC00F6AFBD /* OTFeedItemFilter.m in Sources */,
@@ -5201,6 +5274,7 @@
 				A296B86620871CFC00F6AFBD /* OTCalloutViewController.m in Sources */,
 				A296B86720871CFC00F6AFBD /* OTOnboardingJoinService.m in Sources */,
 				A296B86820871CFC00F6AFBD /* OTTourService.m in Sources */,
+				A285C35D20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */,
 				A296B86920871CFC00F6AFBD /* OTGroupedTableDataSourceBehavior.m in Sources */,
 				A296B86A20871CFC00F6AFBD /* OTJoinRequestedCell.m in Sources */,
 				A296B86B20871CFC00F6AFBD /* OTMyEntouragesDataSource.m in Sources */,

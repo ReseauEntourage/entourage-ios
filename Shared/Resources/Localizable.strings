@@ -193,6 +193,8 @@ Proposez une structure";
 "edit_contribution_desc" = "Je suis ancien employé de mairie et je peux aider dans des démarches administratives.
 (Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes.)";
 "invalidTitle" = "Titre invalide";
+"invalidAddress" = "Adresse invalide";
+"invalidDate" = "Date invalide";
 "categoryNotSelected" = "Renseignez une catégorie pour votre action";
 "title" = "Titre";
 "demande" = "Demandes: je cherche...";
@@ -332,6 +334,9 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "filter_entourage_from_sympathisants_title" = "Montrer uniquement";
 "filter_entourage_from_sympathisants" = "Crées par les sympathisants de l'association que je soutiens";
 
+"filter_events_title" = "Évènements";
+"filter_events_include_past_events_title" = "Inclure passés";
+
 "filter_solidarity_guide_categories" = "Catégories";
 
 "filter_timeframe_title" = "Affichage des entourages";
@@ -345,6 +350,9 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 // Titles
 "aboutTitle" = "À propos";
 "socialTitle" = "AGIR AVEC ENTOURAGE";
+"addEventAddress" = "Adresse *";
+"addEventTitle" = "Titre *";
+"addEventDate" = "Date *";
 "descriptionTitle" = "Description";
 "discoverEntourage" = "Découvrez Entourage";
 "guideviewcontroller_title" = "GUIDE";
@@ -354,6 +362,16 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "meetingTitle" = "Compte-rendu de rencontre";
 "myEntouragesTitle" = "Mes entourages";
 "userviewcontroller_title" = "PROFIL";
+"searchForAddress" = "Rechercher une adresse";
+
+// Disclaimer
+"addActionDisclaimerTitle" = "AVANT DE COMMENCER";
+"addEventDisclaimerFirstTitle" = "Recueillir l’accord";
+"addEventDisclaimerSecondTitle" = "Sécurité";
+"addEventDisclaimerThirdTitle" = "Localisation ?";
+"addEventDisclaimerFirstDescription" = "Je demande le consentement d’une personne avant de mentionner de ses informations personnelles";
+"addEventDisclaimerSecondDescription" = "Je veille à ce qu’on ne puisse pas identifier ni localiser des personnes en me lisant";
+"addEventDisclaimerThirdDescription" = "L’adresse précise des évènements est montrée";
 
 // Alerts
 "acceptAlert" = "Accepter";
@@ -378,6 +396,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 
 // Navigation Bar Buttons
 "validate" = "Valider";
+"create" = "Créer";
 "edit" = "Editer";
 "modify" = "Modifier";
 

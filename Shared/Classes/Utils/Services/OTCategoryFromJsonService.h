@@ -13,4 +13,6 @@
 + (NSMutableArray *)getData;
 + (OTCategory*)categoryWithType:(NSString*)type subcategory:(NSString*)subCat;
 
++ (OTCategory*)sampleEntourageEventCategory;
+
 @end

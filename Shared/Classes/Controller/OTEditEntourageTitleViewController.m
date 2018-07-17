@@ -17,6 +17,7 @@
 
 @property (nonatomic, weak) IBOutlet OTTextWithCount *txtTitle;
 @property (nonatomic, weak) IBOutlet UIView *hintView;
+@property (nonatomic, weak) IBOutlet UIImageView *hintIcon;
 @property (nonatomic, weak) IBOutlet UIView *maxLenghtReachedView;
 
 @end
@@ -27,8 +28,13 @@
     [super viewDidLoad];
 
     self.title = OTLocalizedString(@"title").uppercaseString;
+    
+    self.hintIcon.tintColor = [ApplicationTheme shared].backgroundThemeColor;
+    self.hintIcon.image = [self.hintIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
     if(self.currentEntourage.categoryObject.title_example != nil) {
         self.txtTitle.placeholder = self.currentEntourage.categoryObject.title_example;
+        
     } else {
         if([self.currentEntourage.type isEqualToString:@"ask_for_help"])
             self.txtTitle.placeholder = OTLocalizedString(@"edit_demand_title");

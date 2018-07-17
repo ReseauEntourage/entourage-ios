@@ -12,5 +12,6 @@
 @interface OTEntourageDisclaimerViewController : UIViewController
 
 @property (nonatomic, weak) id<DisclaimerDelegate> disclaimerDelegate;
+@property (nonatomic) BOOL isForCreatingEvent;
 
 @end

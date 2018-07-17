@@ -74,6 +74,12 @@
         case FeedItemFilterKeyIncludingClosed:
             message = @"PastFilter";
             break;
+        case FeedItemFilterKeyEvents:
+            message = @"EventsFilter";
+            break;
+        case FeedItemFilterKeyEventsPast:
+            message = @"PastEventsFilter";
+            break;
         default:
             break;
     }

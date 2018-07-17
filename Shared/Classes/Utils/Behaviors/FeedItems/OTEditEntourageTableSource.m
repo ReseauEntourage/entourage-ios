@@ -10,15 +10,10 @@
 #import "OTEntourageEditItemCell.h"
 #import "OTEntourageEditItemImageCell.h"
 #import "OTConsts.h"
+#import "OTAddEditEntourageDataSource.h"
+#import "entourage-Swift.h"
 
-typedef enum {
-    EditEntourageItemTypeCategory,
-    EditEntourageItemTypeLocation = 1,
-    EditEntourageItemTypetitle,
-    EditEntourageItemTypeDescription
-} EditEntourageItemType;
-
-@interface OTEditEntourageTableSource () <UITableViewDataSource, UITableViewDelegate>
+@interface OTEditEntourageTableSource () <UITableViewDataSource, UITableViewDelegate, OTAddEditEntourageDelegate>
 
 @property (nonatomic, strong, readwrite) OTEntourage *entourage;
 @property (nonatomic, strong) NSString *locationText;
@@ -28,7 +23,7 @@ typedef enum {
 @implementation OTEditEntourageTableSource
 
 - (void)configureWith:(OTEntourage *)entourage {
-    self.entourage = [OTEntourage new];
+    self.entourage = entourage ? entourage : [OTEntourage new];
     self.entourage.title = entourage.title;
     self.entourage.desc = entourage.desc == nil ? @"" : entourage.desc;
     self.entourage.location = entourage.location;
@@ -37,7 +32,17 @@ typedef enum {
     self.entourage.status = entourage.status;
     self.entourage.category = entourage.category;
     self.entourage.categoryObject = entourage.categoryObject;
-    [self updateLocationTitle];
+    self.entourage.streetAddress = entourage.streetAddress;
+    self.entourage.startsAt = entourage.startsAt;
+    
+    if ([entourage isOuting]) {
+        [self updateLocationAddress:entourage.streetAddress
+                          placeName:entourage.placeName
+                            placeId:entourage.googlePlaceId];
+    } else {
+        [self updateLocationTitle];
+    }
+    
     self.tblEditEntourage.dataSource = self;
     self.tblEditEntourage.delegate = self;
 }
@@ -45,83 +50,105 @@ typedef enum {
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return [OTAddEditEntourageDataSource
+            numberOfSectionsInTableView:tableView entourage:self.entourage];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [OTAddEditEntourageDataSource tableView:tableView numberOfRowsInSection:section];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *identifier = indexPath.section != 1  ? @"EntourageCell" : @"EntourageImageCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    switch (indexPath.section) {
-        case 0:
-            [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"category")
-                                                    andText:self.entourage.categoryObject.title];
-            break;
-        case 1:
-            [((OTEntourageEditItemImageCell*)cell) configureWith:OTLocalizedString(@"myLocation")
-                                                         andText:self.locationText
-                                                    andImageName:@"location"];
-            break;
-        case 2:
-            [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"title")
-                                                    andText:self.entourage.title];
-            break;
-        case 3:
-            [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"descriptionTitle")
-                                                    andText:self.entourage.desc];
-            break;
-        default:
-            break;
-    }
-    return cell;
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [OTAddEditEntourageDataSource tableView:tableView
+                             cellForRowAtIndexPath:indexPath
+                                         entourage:self.entourage
+                                      locationText:self.locationText];
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 0:
-            [self.editEntourageNavigation editCategory:self.entourage];
-            break;
-        case 1:
-            [self.editEntourageNavigation editLocation:self.entourage];
-            break;
-        case 2:
-            [self.editEntourageNavigation editTitle:self.entourage];
-            break;
-        case 3:
-            [self.editEntourageNavigation editDescription:self.entourage];
-            break;
-        default:
-            break;
-    }
+    [OTAddEditEntourageDataSource tableView:tableView
+                    didSelectRowAtIndexPath:indexPath
+                               withDelegate:self entourage:self.entourage];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 16.0f;
+    return [OTAddEditEntourageDataSource tableView:tableView heightForHeaderInSection:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [OTAddEditEntourageDataSource tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
+#pragma mark -  OTAddEditEntourageDelegate -
+
+- (void)editEntourageCategory
+{
+    [self.editEntourageNavigation editCategory:self.entourage];
+}
+
+- (void)editEntourageLocation
+{
+    [self.editEntourageNavigation editLocation:self.entourage];
+}
+
+- (void)editEntourageTitle
+{
+    [self.editEntourageNavigation editTitle:self.entourage];
+}
+
+- (void)editEntourageDescription
+{
+    [self.editEntourageNavigation editDescription:self.entourage];
+}
+
+- (void)editEntourageAddress
+{
+    [self.editEntourageNavigation editAddress:self.entourage];
+}
+
+- (void)editEntourageDate
+{
+    [self.editEntourageNavigation editDate:self.entourage];
+}
+
+- (void)updateTexts {
+    [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [OTAddEditEntourageDataSource numberOfSectionsInTableView:self.tblEditEntourage entourage:self.entourage])] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark - geolocation
 
 - (void)updateLocationTitle {
     CLGeocoder *geocoder = [CLGeocoder new];
-    [geocoder reverseGeocodeLocation:self.entourage.location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (error)
-            NSLog(@"error: %@", error.description);
-        CLPlacemark *placemark = placemarks.firstObject;
-        if (placemark.thoroughfare !=  nil)
-            self.locationText = placemark.thoroughfare;
-        else
-            self.locationText = placemark.locality;
-        [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
-    }];
+    [geocoder reverseGeocodeLocation:self.entourage.location
+                   completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+                       if (error)
+                           NSLog(@"error: %@", error.description);
+                       CLPlacemark *placemark = placemarks.firstObject;
+                       if (placemark.thoroughfare !=  nil)
+                           self.locationText = placemark.thoroughfare;
+                       else
+                           self.locationText = placemark.locality;
+                       [self updateTexts];
+                   }];
 }
 
-- (void)updateTexts {
-    [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 4)] withRowAnimation:UITableViewRowAnimationFade];
+- (void)updateLocationAddress:(NSString*)streetAddress
+                    placeName:(NSString*)placeName
+                      placeId:(NSString*)placeId {
+    self.entourage.streetAddress = streetAddress;
+    self.entourage.placeName = placeName;
+    self.entourage.googlePlaceId = placeId;
+    
+    self.locationText = self.entourage.streetAddress;
+    [self updateTexts];
+}
+
+- (void)updateEventStartDate:(NSDate*)date {
+    self.entourage.startsAt = date;
+    [self updateTexts];
 }
 
 @end

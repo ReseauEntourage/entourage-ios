@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSString *entourage_type;
 @property (nonatomic, strong) OTCategory *categoryObject;
 
+- (instancetype)initWithGroupType:(NSString*)groupType;
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebService;
 

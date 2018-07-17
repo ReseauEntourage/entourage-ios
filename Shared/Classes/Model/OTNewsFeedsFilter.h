@@ -21,6 +21,7 @@
 @property (nonatomic) BOOL showTours;
 
 @property (nonatomic) BOOL showOuting;
+@property (nonatomic) BOOL showPastOuting;
 @property (nonatomic) BOOL showNeighborhood;
 @property (nonatomic) BOOL showPrivateCircle;
 

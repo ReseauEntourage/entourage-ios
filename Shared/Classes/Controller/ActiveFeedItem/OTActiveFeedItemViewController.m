@@ -81,8 +81,6 @@
     [self setupToolbarButtons];
     [self reloadMessages];
     
-    //[[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
-    
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem]
       getMessaging] setMessagesAsRead:^{
@@ -95,6 +93,23 @@
     if (self.inviteBehaviorTriggered) {
         [self.inviteBehavior startInvite];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    //[[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
+    
+    [OTLogger logEvent:@"OTActiveFeedItemViewController"];
+    
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    
+    [self reloadMessages];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -110,15 +125,6 @@
     [leftButtons addObject:backItem];
     [leftButtons addObject:[OTAppAppearance leftNavigationBarButtonItemForFeedItem:self.feedItem]];
     self.navigationItem.leftBarButtonItems = leftButtons;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [OTLogger logEvent:@"OTActiveFeedItemViewController"];
-    
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    
-    [self reloadMessages];
 }
 
 - (void)reloadMessages {

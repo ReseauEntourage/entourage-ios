@@ -29,6 +29,21 @@
     result.showBoldText = showBoldText;
     return result;
 }
+    
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                       children:(NSArray *)children
+                          image:(NSString*)image
+                   showBoldText:(BOOL)showBoldText {
+    OTFeedItemFilter *result = [OTFeedItemFilter new];
+    result.key = key;
+    result.active = active;
+    result.title = [OTFeedItemFilter stringForKey:key];
+    result.subItems = children;
+    result.image = image;
+    result.showBoldText = showBoldText;
+    return result;
+}
 
 + (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
                          active:(BOOL)active
@@ -88,6 +103,16 @@
             return OTLocalizedString(@"filter_entourage_only_my_entourages");
         case FeedItemFilterKeyMyOrganisationOnly:
             return OTLocalizedString(@"filter_entourage_only_my_organisation");
+        
+        case FeedItemFilterKeyNeighborhoods:
+            return OTLocalizedString(@"pfp_filter_neighborhoods_title");
+        case FeedItemFilterKeyPrivateCircles:
+            return OTLocalizedString(@"pfp_filter_private_circles_title");
+        case FeedItemFilterKeyEvents:
+            return [OTAppAppearance eventsFilterTitle];
+        case FeedItemFilterKeyEventsPast:
+            return OTLocalizedString(@"filter_events_include_past_events_title");
+        
         default:
             return @"";
     }

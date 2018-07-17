@@ -36,6 +36,7 @@ NSString *const kKeyContributionSkill = @"showContributionSkill";
 NSString *const kKeyContributionOther = @"showContributionOther";
 
 NSString *const kKeyShowOuting = @"showOuting";
+NSString *const kKeyShowPastOuting = @"showPastOuting";
 NSString *const kKeyShowPrivateCircle = @"showPrivateCircle";
 NSString *const kKeyShowNeighborhood = @"showNeighborhood";
 
@@ -44,6 +45,7 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
 - (void)encodeWithCoder:(NSCoder *)encoder {
     
     [encoder encodeObject:self.showOuting forKey:kKeyShowOuting];
+    [encoder encodeObject:self.showPastOuting forKey:kKeyShowPastOuting];
     [encoder encodeObject:self.showPrivateCircle forKey:kKeyShowPrivateCircle];
     [encoder encodeObject:self.showNeighborhood forKey:kKeyShowNeighborhood];
     
@@ -77,6 +79,7 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
     if ((self = [super init])) {
         
         self.showOuting = [decoder decodeObjectForKey:kKeyShowOuting];
+        self.showPastOuting = [decoder decodeObjectForKey:kKeyShowPastOuting];
         self.showNeighborhood = [decoder decodeObjectForKey:kKeyShowNeighborhood];
         self.showPrivateCircle = [decoder decodeObjectForKey:kKeyShowPrivateCircle];
         
@@ -115,6 +118,7 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
     new.showNeighborhood = @(filter.showNeighborhood);
     new.showPrivateCircle = @(filter.showPrivateCircle);
     new.showOuting = @(filter.showOuting);
+    new.showPastOuting = @(filter.showPastOuting);
     
     new.showMedical = @(filter.showMedical);
     new.showSocial = @(filter.showSocial);
