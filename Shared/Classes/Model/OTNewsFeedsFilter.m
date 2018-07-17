@@ -175,57 +175,73 @@
         [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyPrivateCircles
                                                     active:self.showPrivateCircle
                                                   children:@[]]];
-    }
-    
-    if (IS_PRO_USER) {
-        NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
-                                                       active:self.showMedical
-                                                    withImage:@"filter_heal"],
-                                  [OTFeedItemFilter createFor:FeedItemFilterKeySocial
-                                                       active:self.showSocial
-                                                    withImage:@"filter_social"],
-                                  [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
-                                                       active:self.showDistributive
-                                                    withImage:@"filter_eat"]];
         
-        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyTour
-                                                    active:self.showTours
-                                                  children:tourChildren]];
-    }
-    
-    NSArray *eventChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
-                                                   active:self.showOuting
-                                                withImage:@"ask_for_help_event"
-                                                     title:[OTAppAppearance eventsFilterTitle]],
-                              [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
-                                                   active:self.showPastOuting title:@"filter_events_include_past_events_title"]];
-    
-    [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
-                                                active:self.showOuting
-                                              children:eventChildren
-                                                 image:@"ask_for_help_event"
-                                          showBoldText:YES]];
-    
-    OTCategoryType *contribution = nil;
-    OTCategoryType *demande = nil;
-    for (OTCategoryType *type in data) {
-        if ([type.type isEqualToString:@"contribution"]) {
-            contribution = type;
+        NSArray *eventChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                        active:self.showOuting
+                                                     withImage:@"ask_for_help_event"
+                                                         title:[OTAppAppearance eventsFilterTitle]],
+                                   [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
+                                                        active:self.showPastOuting title:@"filter_events_include_past_events_title"]];
+        
+        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                    active:self.showOuting
+                                                  children:eventChildren
+                                                     image:@"ask_for_help_event"
+                                              showBoldText:YES]];
+        
+        return parentArray;
+        
+    } else {
+        if (IS_PRO_USER) {
+            NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
+                                                           active:self.showMedical
+                                                        withImage:@"filter_heal"],
+                                      [OTFeedItemFilter createFor:FeedItemFilterKeySocial
+                                                           active:self.showSocial
+                                                        withImage:@"filter_social"],
+                                      [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
+                                                           active:self.showDistributive
+                                                        withImage:@"filter_eat"]];
+            
+            [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                                        active:self.showTours
+                                                      children:tourChildren]];
         }
-        else if ([type.type isEqualToString:@"ask_for_help"]) {
-            demande = type;
+        
+        NSArray *eventChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                        active:self.showOuting
+                                                     withImage:@"ask_for_help_event"
+                                                         title:[OTAppAppearance eventsFilterTitle]],
+                                   [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
+                                                        active:self.showPastOuting title:@"filter_events_include_past_events_title"]];
+        
+        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                    active:self.showOuting
+                                                  children:eventChildren
+                                                     image:@"ask_for_help_event"
+                                              showBoldText:YES]];
+        
+        OTCategoryType *contribution = nil;
+        OTCategoryType *demande = nil;
+        for (OTCategoryType *type in data) {
+            if ([type.type isEqualToString:@"contribution"]) {
+                contribution = type;
+            }
+            else if ([type.type isEqualToString:@"ask_for_help"]) {
+                demande = type;
+            }
         }
+        
+        NSArray *contributionArray = [self contributionCategory:contribution];
+        [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                                     active:self.showContribution
+                                                   children:contributionArray]];
+        
+        NSArray *demandeArray = [self demandCategory:demande];
+        [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                                     active:self.showDemand
+                                                   children:demandeArray]];
     }
-    
-    NSArray *contributionArray = [self contributionCategory:contribution];
-    [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                                 active:self.showContribution
-                                               children:contributionArray]];
-    
-    NSArray *demandeArray = [self demandCategory:demande];
-    [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
-                                                 active:self.showDemand
-                                               children:demandeArray]];
     
     return parentArray;
 }
@@ -247,7 +263,6 @@
     
 - (NSArray *)groupForPfp {
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    NSMutableArray *voisinages = [[NSMutableArray alloc] init];
     
     // Neighborhoods section
     OTFeedItemFilter *neigborhoodFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyNeighborhoods
@@ -262,11 +277,18 @@
                                                                 image:@"private-circle"
                                                          showBoldText:NO];
     
-    [voisinages addObject:@[neigborhoodFilter, privateCircleFilter]];
-    
     // Events section
-    //[array addObject:voisinages];
-    [array addObject:[self groupPfpEvents]];
+    OTFeedItemFilter *eventFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                                 active:self.showOuting
+                                                               children:@[]
+                                                                  image:@"outing"
+                                                           showBoldText:YES];
+    
+    OTFeedItemFilter *eventPastFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
+                                                         active:self.showPastOuting
+                                                       children:@[]];
+    
+    [array addObject:@[neigborhoodFilter, privateCircleFilter, eventFilter, eventPastFilter]];
 
     return array;
 }
@@ -530,7 +552,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|", self.showMedical, self.showSocial, self.showDistributive,
+    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|", self.showMedical, self.showSocial, self.showDistributive,
             self.showDemand, self.showContribution, self.showTours,
             self.showOnlyMyEntourages, self.timeframeInHours,
             
@@ -539,7 +561,7 @@
             
             self.showContributionSocial, self.showContributionEvent, self.showContributionHelp, self.showContributionResource, self.showContributionInfo, self.showContributionSkill, self.showContributionOther,
             
-            self.showOuting];
+            self.showOuting, self.showPrivateCircle, self.showNeighborhood];
 }
 
 - (NSString *)getTourTypes {

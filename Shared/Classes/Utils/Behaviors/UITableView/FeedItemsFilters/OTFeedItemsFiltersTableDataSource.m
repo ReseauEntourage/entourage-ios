@@ -14,6 +14,7 @@
 #import "UIColor+entourage.h"
 #import "OTAPIConsts.h"
 #import "NSUserDefaults+OT.h"
+#import "entourage-Swift.h"
 
 @interface OTFeedItemsFiltersTableDataSource () <UITableViewDelegate>
 
@@ -58,9 +59,25 @@
     
     [self readCurrentFilter];
     
+    NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];
+    
+    if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        switch (item.key) {
+            case FeedItemFilterKeyEventsPast:
+                // if events is off, don't show past events filter
+                if (!parents[2].subItems[0].active) {
+                    size = 0;
+                }
+                break;
+            default:
+                break;
+        }
+        return size;
+    }
+    
     OTFeedItemFilter *contribution;
     OTFeedItemFilter *demande;
-    NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];
+    
     if (parents.count > 0) {
         if (IS_PRO_USER) {
             contribution = parents[2];
