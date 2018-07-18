@@ -209,6 +209,7 @@
                 <customObject id="QOJ-Nb-eoQ" userLabel="Toggle Visible Signal Entourage" customClass="OTToggleVisibleBehavior">
                     <connections>
                         <outlet property="heightConstraint" destination="gPI-1F-BbF" id="XLy-he-wmT"/>
+                        <outlet property="marginConstraint" destination="IOt-cf-T8s" id="hXb-Vg-aGB"/>
                         <outlet property="toggleView" destination="cCa-JH-ipu" id="lkJ-Hd-K7D"/>
                     </connections>
                 </customObject>

@@ -64,6 +64,8 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent: @"Screen30_5InputNameView"];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -77,8 +79,6 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.firstNameTextField becomeFirstResponder];
-    
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

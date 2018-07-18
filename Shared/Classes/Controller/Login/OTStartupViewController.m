@@ -29,11 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.navigationController presentTransparentNavigationBar];
     
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     [self.loginButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     [self.registerButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
@@ -57,6 +54,8 @@
         self.logoTitle.hidden = YES;
         self.logo.image = [OTAppAppearance applicationLogo];
     }
+    
+    [self.navigationController presentTransparentNavigationBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

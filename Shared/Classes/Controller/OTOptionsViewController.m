@@ -45,6 +45,7 @@
     self.togglePOILabel.textColor = [ApplicationTheme shared].backgroundThemeColor;
     
     [OTAppState hideTabBar:YES];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)addCloseButton {

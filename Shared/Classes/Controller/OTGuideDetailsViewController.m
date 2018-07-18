@@ -39,6 +39,7 @@
     [self setupCloseModal];
     
     [self setupUI];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)didReceiveMemoryWarning {

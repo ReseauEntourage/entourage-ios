@@ -386,14 +386,17 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [UIBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
     [UIBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
     
-    UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].delegate.window.rootViewController;
-
-    if (tabBarController.tabBar) {
-        UITabBar *currentTabBar = tabBarController.tabBar;
-        for (UITabBarItem *item in currentTabBar.items) {
-            [item setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+    id rootController = [UIApplication sharedApplication].delegate.window.rootViewController;
+    if ([rootController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController*)rootController;
+        
+        if (tabBarController.tabBar) {
+            UITabBar *currentTabBar = tabBarController.tabBar;
+            for (UITabBarItem *item in currentTabBar.items) {
+                [item setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+            }
+            [currentTabBar.selectedItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateNormal];
         }
-        [currentTabBar.selectedItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateNormal];
     }
 }
 

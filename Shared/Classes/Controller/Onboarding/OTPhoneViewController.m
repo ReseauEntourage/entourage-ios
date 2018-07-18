@@ -68,8 +68,8 @@
     [super viewDidAppear:animated];
     [OTLogger logEvent:@"Screen30_2InputPhoneView"];
     self.countryCodeTxtField.inputView = self.pickerView;
-    
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+   
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -58,17 +58,26 @@
     [UIImagePNGRepresentation(finalImage) writeToFile:filePath atomically:YES];
 
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    [[OTPictureUploadService new] uploadPicture:finalImage withSuccess:^(NSString *pictureName) {
+    [[OTPictureUploadService new] uploadPicture:finalImage
+                                    withSuccess:^(NSString *pictureName) {
         currentUser.avatarKey = pictureName;
         [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {
+            
             // TODO phone is not in response so need to restore it manually
             user.phone = currentUser.phone;
             [NSUserDefaults standardUserDefaults].currentUser = user;
             self.scrollView.delegate = nil;
-            if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
+            
+            if ([OTAppConfiguration shouldShowIntroTutorial] && [NSUserDefaults standardUserDefaults].isTutorialCompleted) {
                 [self popToProfile];
-            else
+                
+            } else if (self.isEditingPictureForCurrentUser) {
+                [self popToProfile];
+                
+            } else {
                 [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
+            }
+                
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationProfilePictureUpdated object:self];
             [SVProgressHUD dismiss];
         }
@@ -76,6 +85,7 @@
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];
             NSLog(@"ERR: something went wrong on user picture: %@", error.localizedDescription);
         }];
+                                        
     } orError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];
     }];

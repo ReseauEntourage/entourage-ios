@@ -192,7 +192,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (IBAction)showEditView {
-    // Don't show this for the current logged in user
+    // Don't show if not logged user
     if (self.currentUser.sid.integerValue != self.user.sid.integerValue) {
         return;
     }
@@ -346,7 +346,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"AssociationDetails"]) {
+    if ([segue.identifier isEqualToString:@"AssociationDetails"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTAssociationDetailsViewController *associationController = (OTAssociationDetailsViewController *)controller.topViewController;
         associationController.association = self.user.partner;

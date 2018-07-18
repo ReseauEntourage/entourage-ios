@@ -202,6 +202,17 @@
     [self.launcherButton setImage:closeImage forState:UIControlStateHighlighted];
     [self.launcherButton setImage:closeImage forState:UIControlStateSelected];
     
+    [self.createEncounterButton.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.createEncounterButton.layer setShadowOpacity:0.5];
+    [self.createEncounterButton.layer setShadowRadius:4.0];
+    self.createEncounterButton.layer.masksToBounds = NO;
+    [self.createEncounterButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+    self.createEncounterButton.layer.cornerRadius = 29;
+    
+    self.createEncounterButton.backgroundColor = [ApplicationTheme shared].addActionButtonColor;
+    [self.createEncounterButton setImage:closeImage forState:UIControlStateHighlighted];
+    [self.createEncounterButton setImage:closeImage forState:UIControlStateSelected];
+    
     if (![OTAppConfiguration supportsAddingActionsFromMap]) {
         self.launcherButton.hidden = YES;
     }

@@ -43,7 +43,7 @@
     [self.navigationController setNavigationBarHidden:NO];
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 #pragma mark - Associations table view delegate implementation
@@ -60,8 +60,6 @@
 #pragma mark - private methods
 
 - (void)setupToolbarButtons {
-
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     
     UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
                                                         withTarget:self

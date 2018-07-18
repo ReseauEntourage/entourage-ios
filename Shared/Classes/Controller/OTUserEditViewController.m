@@ -115,8 +115,7 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)showSaveButton {
 
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save")
                                                         withTarget:self
                                                          andAction:@selector(updateUser)
@@ -458,7 +457,6 @@ typedef NS_ENUM(NSInteger) {
     UITextField *nameTextField = [cell viewWithTag:CELL_TEXTFIELD_TAG];
     nameTextField.text = text;
     nameTextField.textColor = [ApplicationTheme shared].backgroundThemeColor;
-    nameTextField.tintColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
 - (void)setupPasswordCell:(UITableViewCell *)cell {
@@ -574,6 +572,12 @@ typedef NS_ENUM(NSInteger) {
         OTAboutMeViewController *controller = (OTAboutMeViewController*)segue.destinationViewController;
         controller.delegate = self;
         controller.aboutMeMessage = self.aboutMeTextView.text;
+    } else {
+        UIViewController *viewController = (UIViewController *)segue.destinationViewController;
+        if ([viewController isKindOfClass:[OTUserPictureViewController class]]) {
+            OTUserPictureViewController *userPictureViewController = (OTUserPictureViewController*)viewController;
+            userPictureViewController.isEditingPictureForCurrentUser = YES;
+        }
     }
 }
 

@@ -376,7 +376,7 @@
         return [UIColor pfpNeighborhoodColor];
     }
     
-    return [ApplicationTheme shared].backgroundThemeColor;
+    return [UIColor colorWithHexString:@"ffc57f"];
 }
 
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem {
