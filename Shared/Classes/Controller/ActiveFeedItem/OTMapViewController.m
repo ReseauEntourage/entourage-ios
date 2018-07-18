@@ -60,7 +60,8 @@
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"Screen14_2PublicPageViewAsMemberOrCreator"];
     
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;}
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+}
 
 - (void)configureTitleView {
     self.navigationItem.titleView = [OTAppAppearance navigationTitleLabelForFeedItem:self.feedItem];

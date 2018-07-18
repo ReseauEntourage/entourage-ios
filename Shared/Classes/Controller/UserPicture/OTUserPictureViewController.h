@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OTUserPictureViewController : UIViewController
-
+@property (nonatomic) BOOL isEditingPictureForCurrentUser;
 @end

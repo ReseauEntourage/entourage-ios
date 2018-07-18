@@ -48,7 +48,7 @@
     [super viewWillAppear:animated];
     [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:self.feedItem.uid];
     
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (IBAction)showProfile {

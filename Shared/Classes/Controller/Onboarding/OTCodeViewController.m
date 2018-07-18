@@ -52,8 +52,7 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     //[self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     if([NSUserDefaults standardUserDefaults].currentUser) {

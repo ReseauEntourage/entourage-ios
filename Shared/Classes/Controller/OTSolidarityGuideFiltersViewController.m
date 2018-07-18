@@ -36,8 +36,7 @@
 
 - (void)setupToolbarButtons {
     [self setupCloseModalWithTarget:self andSelector:@selector(close)];
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
                                                         withTarget:self
                                                          andAction:@selector(saveFilters)

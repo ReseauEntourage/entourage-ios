@@ -41,7 +41,8 @@
         if (![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [self addIgnoreButton];
         }
-    } else {
+    }
+    else if (!self.isEditingPictureForCurrentUser) {
         [self addIgnoreButton];
     }
 }
@@ -50,18 +51,15 @@
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"Screen09_6ChoosePhotoView"];
     
-    if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
-        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    }
-    else {
-        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    }
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if(self.isMovingFromParentViewController)
+    
+    if (self.isMovingFromParentViewController) {
         [OTLogger logEvent:@"BackFromPhoto1"];
+    }
 }
 
 - (IBAction)pictureSelected:(id)sender {
@@ -75,6 +73,7 @@
     if ([segue.identifier isEqualToString:PREVIEW_PICTURE_SEGUE]) {
         OTPicturePreviewViewController *controller = (OTPicturePreviewViewController*)[segue destinationViewController];
         controller.image = self.image;
+        controller.isEditingPictureForCurrentUser = self.isEditingPictureForCurrentUser;
     }
 }
 

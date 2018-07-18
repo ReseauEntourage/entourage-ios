@@ -82,7 +82,7 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.emailTextField becomeFirstResponder];
     
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

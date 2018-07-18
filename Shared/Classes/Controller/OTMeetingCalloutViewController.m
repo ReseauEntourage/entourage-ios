@@ -42,8 +42,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+
     self.navigationController.navigationBarHidden = NO;
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 /********************************************************************************/

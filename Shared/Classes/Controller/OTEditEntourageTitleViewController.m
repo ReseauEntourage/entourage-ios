@@ -40,8 +40,7 @@
             self.txtTitle.placeholder = OTLocalizedString(@"edit_demand_title");
     }
 
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(doneEdit)

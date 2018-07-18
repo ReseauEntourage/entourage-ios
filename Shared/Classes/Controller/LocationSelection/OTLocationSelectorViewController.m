@@ -41,8 +41,7 @@
     [super viewDidLoad];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
 
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    
+        
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(saveNewLocation)

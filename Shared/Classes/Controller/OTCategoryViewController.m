@@ -37,7 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(saveNewCategory)
@@ -50,6 +50,8 @@
     self.categoryTableView.rowHeight = UITableViewAutomaticDimension;
     self.categoryTableView.estimatedRowHeight = 140;
     [self.categoryTableView reloadData];
+
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

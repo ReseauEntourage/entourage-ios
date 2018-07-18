@@ -76,7 +76,7 @@
 - (void)setupUI {
     [self setupCloseModal];
 
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                             withTarget:self

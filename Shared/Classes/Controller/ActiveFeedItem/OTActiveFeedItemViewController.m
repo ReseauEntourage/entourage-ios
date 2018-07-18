@@ -102,7 +102,7 @@
     
     [OTLogger logEvent:@"OTActiveFeedItemViewController"];
     
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     
     [self reloadMessages];
 }

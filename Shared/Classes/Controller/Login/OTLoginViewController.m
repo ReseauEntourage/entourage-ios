@@ -81,7 +81,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         self.continueButton.enabled = [self validateForm];
     };
     
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    
     self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     self.countryCodePicker.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;

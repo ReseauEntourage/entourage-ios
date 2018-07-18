@@ -63,8 +63,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    
     [self configureUIBarButtonItems];
     [self loadUrlWithString:self.urlString];
     
@@ -74,6 +72,8 @@
         NSURL *url = [NSURL URLWithString:self.urlString];
         [self updateTitle:url];
     }
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (UINavigationItem*)navigationItem {
