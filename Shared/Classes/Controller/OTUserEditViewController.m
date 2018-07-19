@@ -16,6 +16,7 @@
 #import "UIViewController+menu.h"
 #import "OTUserEditPasswordViewController.h"
 #import "OTUserPictureViewController.h"
+#import "OTGeolocationRightsViewController.h"
 #import "UIButton+entourage.h"
 #import "OTAuthService.h"
 #import "UIColor+entourage.h"
@@ -27,6 +28,7 @@
 #import "OTUserTableConfigurator.h"
 #import "OTTextWithCount.h"
 #import "OTAboutMeViewController.h"
+#import "UINavigationController+entourage.h"
 #import "entourage-Swift.h"
 
 typedef NS_ENUM(NSInteger) {
@@ -34,6 +36,7 @@ typedef NS_ENUM(NSInteger) {
     SectionTypeAbout,
     SectionTypeAssociations,
     SectionTypeInfoPrivate,
+    SectionTypeInfoDefineActionZone,
     SectionTypeDelete,
     SectionTypeInfoPublic
 } SectionType;
@@ -69,23 +72,18 @@ typedef NS_ENUM(NSInteger) {
     [self showSaveButton];
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
     
-    NSMutableArray *profileSections = [NSMutableArray new];
-    [profileSections addObjectsFromArray:@[@(SectionTypeSummary), @(SectionTypeAbout)]];
-    
-    if ([OTAppConfiguration shouldShowAssociationsOnUserProfile]) {
-        [profileSections addObject:@(SectionTypeAssociations)];
-    }
-    [profileSections addObjectsFromArray:@[@(SectionTypeInfoPrivate), @(SectionTypeDelete)]];
-
-    self.sections = profileSections;
-    
-    self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:@kNotificationAboutMeUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     
+    [self setupSections];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -103,6 +101,22 @@ typedef NS_ENUM(NSInteger) {
 
 #pragma mark - Private
 
+- (void)setupSections {
+    NSMutableArray *profileSections = [NSMutableArray new];
+    [profileSections addObjectsFromArray:@[@(SectionTypeSummary), @(SectionTypeAbout)]];
+    
+    if ([OTAppConfiguration shouldShowAssociationsOnUserProfile]) {
+        [profileSections addObject:@(SectionTypeAssociations)];
+    }
+    
+    [profileSections addObject:@(SectionTypeInfoDefineActionZone)];
+    [profileSections addObjectsFromArray:@[@(SectionTypeInfoPrivate), @(SectionTypeDelete)]];
+    
+    self.sections = profileSections;
+    
+    self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
+}
+
 - (void)profilePictureUpdated:(NSNotification *)notification {
     self.user.avatarURL = [[[NSUserDefaults standardUserDefaults] currentUser] avatarURL];
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
@@ -111,6 +125,13 @@ typedef NS_ENUM(NSInteger) {
 - (IBAction)showAssociations:(id)sender {
     [OTLogger logEvent:@"ToBadgePageFromProfile"];
     [self performSegueWithIdentifier:@"SelectAssociationSegue" sender:nil];
+}
+
+- (IBAction)defineActionZone:(id)sender {
+    UIStoryboard *rightsStoryboard = [UIStoryboard storyboardWithName:@"Rights" bundle:nil];
+    OTGeolocationRightsViewController *controller = (OTGeolocationRightsViewController*)[rightsStoryboard instantiateViewControllerWithIdentifier:@"OTGeolocationRightsViewController"];
+    controller.isShownOnStartup = NO;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)showSaveButton {
@@ -189,10 +210,8 @@ typedef NS_ENUM(NSInteger) {
     switch (mappedSection) {
         case SectionTypeInfoPrivate:
         case SectionTypeInfoPublic:
-        case SectionTypeAbout:
-            height = 46.0f;
-            break;
         case SectionTypeAssociations:
+        case SectionTypeInfoDefineActionZone:
             height = 46.0f;
             break;
         case SectionTypeDelete:
@@ -227,6 +246,10 @@ typedef NS_ENUM(NSInteger) {
         }
         case SectionTypeAbout: {
             title = OTLocalizedString(@"about");
+            break;
+        }
+        case SectionTypeInfoDefineActionZone: {
+            title = OTLocalizedString(@"defineActionZone");
             break;
         }
         default:
@@ -269,6 +292,9 @@ typedef NS_ENUM(NSInteger) {
             break;
         case SectionTypeInfoPublic:
             cellID = @"EditProfileCell";
+            break;
+        case SectionTypeInfoDefineActionZone:
+            cellID = @"DefineActionZoneCell";
             break;
         case SectionTypeAssociations:
             switch ([self.associationRows[indexPath.row] intValue]) {

@@ -34,13 +34,20 @@
     [super viewDidLoad];
     self.notificationEnabled = @"NO";
     self.title = @"";
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationAuthorizationChanged:) name:kNotificationPushStatusChanged object:nil];
     
-    [self addIgnoreButton];
-    self.descLabel.text = [OTAppAppearance notificationsRightsDescription];
+    [self setupUI];
+}
+
+- (void)setupUI {
     self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
+    self.descLabel.text = [OTAppAppearance notificationsRightsDescription];
+    
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationAuthorizationChanged:) name:kNotificationPushStatusChanged object:nil];
+    [self addIgnoreButton];
 }
 
 - (void)addIgnoreButton {

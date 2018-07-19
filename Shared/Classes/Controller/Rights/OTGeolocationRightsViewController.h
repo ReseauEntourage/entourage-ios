@@ -12,4 +12,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *rightsTitleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *rightsDescLabel;
 @property (nonatomic, weak) IBOutlet UIButton *continueButton;
+@property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (nonatomic) BOOL isShownOnStartup;
 @end

@@ -321,8 +321,6 @@ typedef NS_ENUM(NSInteger) {
         [mSections addObject:@(SectionTypeAssociations)];
     }
     
-    [mSections addObject:@(SectionTypeVerification)];
-    
     if ([OTAppConfiguration shouldShowNumberOfUserPrivateCirclesSection:self.user]) {
         [mSections addObject:@(SectionTypePrivateCircles)];
     }
@@ -332,6 +330,8 @@ typedef NS_ENUM(NSInteger) {
     if ([OTAppConfiguration shouldShowNumberOfUserActionsSection:self.user]) {
         [mSections addObject:@(SectionTypeEntourages)];
     }
+    
+    [mSections addObject:@(SectionTypeVerification)];
     
     self.sections = mSections;
 }

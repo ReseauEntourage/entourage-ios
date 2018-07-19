@@ -26,8 +26,8 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+Fitting.h"
-
 #import "entourage-Swift.h"
+
 
 @implementation OTAppAppearance
 
@@ -93,6 +93,15 @@
     return OTLocalizedString(@"userNotificationsDescriptionText");
 }
 
++ (NSString *)defineActionZoneTitle {
+    
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_defineActionZoneTitle");
+    }
+    
+    return OTLocalizedString(@"defineActionZoneTitle");
+}
+
 + (NSString *)geolocalisationRightsDescription
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
@@ -100,6 +109,48 @@
     }
     
     return OTLocalizedString(@"geolocalisationDescriptionText");
+}
+
++ (NSString *)defineActionZoneSampleAddress {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_defineActionZoneSampleAddress");
+    }
+    
+    return OTLocalizedString(@"defineActionZoneSampleAddress");
+}
+
++ (NSAttributedString *)defineActionZoneFormattedDescription {
+    UIFont *regularFont = [UIFont fontWithName:@"SFUIText-Regular" size:15];
+    UIFont *highlightedFont = [UIFont fontWithName:@"SFUIText-Semibold" size:15];
+    UIFont *lightFont = [UIFont fontWithName:@"SFUIText-Light" size:15];
+    
+    NSDictionary *regAtttributtes = @{NSFontAttributeName : regularFont,
+                                   NSForegroundColorAttributeName:[UIColor whiteColor]};
+    NSDictionary *highlightedAtttributtes = @{NSFontAttributeName : highlightedFont,
+                                      NSForegroundColorAttributeName:[UIColor whiteColor]};
+    NSDictionary *lightAtttributtes = @{NSFontAttributeName : lightFont,
+                                              NSForegroundColorAttributeName:[UIColor whiteColor]};
+    
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        NSString *subtitle1 = OTLocalizedString(@"pfp_defineZoneSubtitle1");
+        NSString *subtitle2 = OTLocalizedString(@"pfp_defineZoneSubtitle2");
+        
+        NSMutableAttributedString *descAttString = [[NSMutableAttributedString alloc] initWithString:subtitle1 attributes:regAtttributtes];
+        [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:highlightedAtttributtes]];
+        
+        return descAttString;
+    }
+    
+    NSString *subtitle1 = OTLocalizedString(@"defineZoneSubtitle1");
+    NSString *subtitle2 = OTLocalizedString(@"defineZoneSubtitle2");
+    NSString *subtitle3 = OTLocalizedString(@"defineZoneSubtitle3");
+    NSString *subtitle4 = OTLocalizedString(@"defineZoneSubtitle4");
+    NSMutableAttributedString *descAttString = [[NSMutableAttributedString alloc] initWithString:subtitle1 attributes:regAtttributtes];
+    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:highlightedAtttributtes]];
+    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle3 attributes:regAtttributtes]];
+    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle4 attributes:lightAtttributtes]];
+    
+    return descAttString;
 }
 
 + (NSString *)notificationsNeedDescription
