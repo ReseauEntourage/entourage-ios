@@ -11,6 +11,7 @@
 #import "OTAssociation.h"
 #import "OTUserMembership.h"
 #import "OTConversation.h"
+#import "OTAddress.h"
 
 extern NSString *const kKeyToken;
 extern NSString *const kCoordinatorUserTag;
@@ -41,6 +42,7 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic) OTOrganization *organization;
 @property (strong, nonatomic) OTAssociation *partner;
 @property (strong, nonatomic) OTConversation *conversation;
+@property (strong, nonatomic) OTAddress *address;
 @property (strong, nonatomic) NSArray *roles;
 @property (nonatomic, readonly) NSArray *memberships;
 
@@ -51,6 +53,8 @@ extern NSString *const kVisitedUserTag;
  * Returns true if it's a pro user
  */
 - (BOOL)isPro;
+
+- (BOOL)hasActionZoneDefined;
 
 - (BOOL)isCoordinator;
 
@@ -67,5 +71,7 @@ extern NSString *const kVisitedUserTag;
 - (NSArray <OTUserMembershipListItem*>*)privateCircles;
 - (NSArray <OTUserMembershipListItem*>*)neighborhoods;
 - (NSArray <OTUserMembershipListItem*>*)outings;
+
+- (NSString *)formattedActionZoneAddress;
 
 @end

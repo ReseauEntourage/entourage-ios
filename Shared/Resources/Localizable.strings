@@ -292,6 +292,8 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "user_phone_number" = "Numéro de téléphone";
 "defineActionZone" = "Ma zone d'action";
 "defineActionZoneTitle" = "Définissez votre zone d'action";
+"defineActionZoneDescription" = "Où souhaitez-vous agir ?\nSoyez notifié des actualités importantes.";
+"modifyActionZoneTitle" = "Modifier ma zone";
 "defineActionZoneSampleAddress" = "avenue Jean Jaurès, Paris";
 "defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nIndiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.";
 "defineZoneSubtitle2" = "\n\nCette information n’est pas affichée.";

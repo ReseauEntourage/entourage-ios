@@ -570,12 +570,15 @@
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
     
+    if (![OTAppConfiguration supportsAddingActionsFromMapOnLongPress]) {
+        return;
+    }
+    
     if (self.isTourListDisplayed) {
         return;
     }
     
-    if (!IS_PRO_USER && !self.poisMapDelegate.isActive &&
-        [OTAppConfiguration supportsAddingActionsFromMapOnLongPress]) {
+    if (!IS_PRO_USER && !self.poisMapDelegate.isActive) {
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
         return;
     }
@@ -1493,7 +1496,9 @@
         UINavigationController *navController = (UINavigationController*)destinationViewController;
         OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.childViewControllers[0];
         controller.type = self.entourageType;
-        CLLocation *currentLocation = self.tappedLocation ? self.tappedLocation : [OTLocationManager sharedInstance].currentLocation;
+        CLLocation *currentLocation = self.tappedLocation ?
+            self.tappedLocation :
+            [[OTLocationManager sharedInstance] defaultLocationForNewActions];
         controller.location = currentLocation;
         controller.entourageEditorDelegate = self;
         controller.isEditingEvent = self.addEditEvent;

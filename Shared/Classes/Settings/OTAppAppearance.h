@@ -22,7 +22,7 @@
 + (NSString *)notificationsRightsDescription;
 + (NSString *)geolocalisationRightsDescription;
 + (NSString *)notificationsNeedDescription;
-+ (NSString *)defineActionZoneTitle;
++ (NSString *)defineActionZoneTitleForUser:(OTUser*)user;
 + (NSString *)defineActionZoneSampleAddress;
 + (NSAttributedString *)defineActionZoneFormattedDescription;
 + (NSString *)noFeedsDescription;

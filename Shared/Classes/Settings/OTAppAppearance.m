@@ -93,10 +93,19 @@
     return OTLocalizedString(@"userNotificationsDescriptionText");
 }
 
-+ (NSString *)defineActionZoneTitle {
++ (NSString *)defineActionZoneTitleForUser:(OTUser*)user {
     
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        
+        if (user && [user hasActionZoneDefined]) {
+            return OTLocalizedString(@"pfp_modifyActionZoneTitle");
+        }
+            
         return OTLocalizedString(@"pfp_defineActionZoneTitle");
+    }
+    
+    if (user && [user hasActionZoneDefined]) {
+        return OTLocalizedString(@"modifyActionZoneTitle");
     }
     
     return OTLocalizedString(@"defineActionZoneTitle");

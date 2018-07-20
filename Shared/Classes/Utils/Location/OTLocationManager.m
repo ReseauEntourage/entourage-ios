@@ -130,4 +130,12 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationAuthorizationChanged object:nil userInfo:info];
 }
 
+- (CLLocation*)defaultLocationForNewActions {
+    if ([[NSUserDefaults standardUserDefaults].currentUser hasActionZoneDefined]) {
+        return [NSUserDefaults standardUserDefaults].currentUser.address.location;
+    }
+    
+    return  self.currentLocation;
+}
+
 @end

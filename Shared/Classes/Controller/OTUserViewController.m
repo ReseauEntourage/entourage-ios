@@ -10,6 +10,7 @@
 
 #import "OTUserViewController.h"
 #import "OTConsts.h"
+#import "OTAPIConsts.h"
 
 #import "UIViewController+menu.h"
 #import "OTAuthService.h"
@@ -68,7 +69,8 @@ typedef NS_ENUM(NSInteger) {
     SectionTypeVerification,
     SectionTypeEntourages,
     SectionTypePrivateCircles,
-    SectionTypeNeighborhoods
+    SectionTypeNeighborhoods,
+    SectionTypeActionZone,
 } SectionType;
 
 @interface OTUserViewController () <UITableViewDelegate>
@@ -262,6 +264,12 @@ typedef NS_ENUM(NSInteger) {
     cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
 }
 
+- (void)setupActionZoneCell:(UITableViewCell *)cell withText:(NSString *)text {
+    UILabel *titleLabel = [cell viewWithTag:SUMMARY_TITLE];
+    titleLabel.text = text;
+    cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
+}
+
 - (void)setupVerificationProfileCell:(UITableViewCell *)cell
                            withCheck:(NSString *)checkString
                            andStatus:(BOOL)isChecked
@@ -327,8 +335,15 @@ typedef NS_ENUM(NSInteger) {
     
     [mSections addObject:@(SectionTypeNeighborhoods)];
     
-    if ([OTAppConfiguration shouldShowNumberOfUserActionsSection:self.user]) {
+    // Show only for logged user
+    if ([OTAppConfiguration shouldShowNumberOfUserActionsSection:self.user] &&
+        self.currentUser.sid.integerValue == self.user.sid.integerValue) {
         [mSections addObject:@(SectionTypeEntourages)];
+    }
+    
+    if (self.currentUser.sid.integerValue == self.user.sid.integerValue &&
+        [self.currentUser hasActionZoneDefined]) {
+        [mSections addObject:@(SectionTypeActionZone)];
     }
     
     [mSections addObject:@(SectionTypeVerification)];
@@ -535,6 +550,9 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeNeighborhoods: {
             return self.user.neighborhoods.count > 0 ? self.user.neighborhoods.count + 1 : 0;
         }
+        case SectionTypeActionZone: {
+            return 1;
+        }
         default:
             return 0;
     }
@@ -593,6 +611,10 @@ typedef NS_ENUM(NSInteger) {
             cellID = indexPath.row == 0 ? @"TitleProfileCell" : @"OTUserGroupCell";
             break;
         }
+        case SectionTypeActionZone: {
+            cellID = @"ActionZoneCell";
+            break;
+        }
         default:
             break;
     }
@@ -604,12 +626,15 @@ typedef NS_ENUM(NSInteger) {
             break;
         }
         case SectionTypeVerification: {
-            if (indexPath.row == 0)
+            if (indexPath.row == 0) {
                 [self setupTitleProfileCell:cell withTitle:OTLocalizedString(@"user_verified")];
-            else if (indexPath.row == 1)
+            }
+            else if (indexPath.row == 1) {
                 [self setupVerificationProfileCell:cell withCheck:OTLocalizedString(@"user_email_address") andStatus:YES];
-            else
+            }
+            else {
                 [self setupVerificationProfileCell:cell withCheck:OTLocalizedString(@"user_phone_number") andStatus:YES];
+            }
             break;
         }
         case SectionTypeEntourages: {
@@ -647,7 +672,8 @@ typedef NS_ENUM(NSInteger) {
         }
         case SectionTypeNeighborhoods: {
             if (indexPath.row == 0) {
-                [self setupTitleProfileCell:cell withTitle:[OTAppAppearance userNeighborhoodsSectionTitle:self.user]];
+                [self setupTitleProfileCell:cell
+                                  withTitle:[OTAppAppearance userNeighborhoodsSectionTitle:self.user]];
                 break;
             } else {
                 OTUserMembershipListItem *neighborhood = [self.user.neighborhoods objectAtIndex:indexPath.row - 1];
@@ -655,6 +681,10 @@ typedef NS_ENUM(NSInteger) {
                 [neighborhoodCell configureWithItem:neighborhood];
                 return neighborhoodCell;
             };
+        }
+        case SectionTypeActionZone: {
+            [self setupActionZoneCell:cell withText:[self.currentUser formattedActionZoneAddress]];
+            break;
         }
     }
     return cell;

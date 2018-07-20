@@ -36,7 +36,6 @@ typedef NS_ENUM(NSInteger) {
     SectionTypeAbout,
     SectionTypeAssociations,
     SectionTypeInfoPrivate,
-    SectionTypeInfoDefineActionZone,
     SectionTypeDelete,
     SectionTypeInfoPublic
 } SectionType;
@@ -108,8 +107,7 @@ typedef NS_ENUM(NSInteger) {
     if ([OTAppConfiguration shouldShowAssociationsOnUserProfile]) {
         [profileSections addObject:@(SectionTypeAssociations)];
     }
-    
-    [profileSections addObject:@(SectionTypeInfoDefineActionZone)];
+
     [profileSections addObjectsFromArray:@[@(SectionTypeInfoPrivate), @(SectionTypeDelete)]];
     
     self.sections = profileSections;
@@ -196,7 +194,7 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeSummary:
             return 3;
         case SectionTypeInfoPrivate:
-            return 4;
+            return 5;
         case SectionTypeAssociations:
             return self.associationRows.count;
         default:
@@ -211,7 +209,6 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeInfoPrivate:
         case SectionTypeInfoPublic:
         case SectionTypeAssociations:
-        case SectionTypeInfoDefineActionZone:
             height = 46.0f;
             break;
         case SectionTypeDelete:
@@ -248,10 +245,6 @@ typedef NS_ENUM(NSInteger) {
             title = OTLocalizedString(@"about");
             break;
         }
-        case SectionTypeInfoDefineActionZone: {
-            title = OTLocalizedString(@"defineActionZone");
-            break;
-        }
         default:
             title = @"";
     }
@@ -275,15 +268,18 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeInfoPrivate:
             switch (indexPath.row) {
                 case 0:
-                    cellID = @"EditProfileCell";
+                    cellID = @"DefineActionZoneCell";
                     break;
                 case 1:
-                    cellID = @"EditPasswordCell";
+                    cellID = @"EditProfileCell";
                     break;
                 case 2:
-                    cellID = @"PhoneCell";
+                    cellID = @"EditPasswordCell";
                     break;
                 case 3:
+                    cellID = @"PhoneCell";
+                    break;
+                case 4:
                     cellID = @"NotificationsCell";
                     break;
                 default:
@@ -292,9 +288,6 @@ typedef NS_ENUM(NSInteger) {
             break;
         case SectionTypeInfoPublic:
             cellID = @"EditProfileCell";
-            break;
-        case SectionTypeInfoDefineActionZone:
-            cellID = @"DefineActionZoneCell";
             break;
         case SectionTypeAssociations:
             switch ([self.associationRows[indexPath.row] intValue]) {
@@ -335,15 +328,18 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeInfoPrivate: {
             switch (indexPath.row) {
                 case 0:
-                    [self setupInfoCell:cell withTitle:OTLocalizedString(@"user_edit_email") withTextField:nil andText:self.user.email];
+                    [self setupDefineActionZonceCell:cell];
                     break;
                 case 1:
-                    [self setupPasswordCell:cell];
+                    [self setupInfoCell:cell withTitle:OTLocalizedString(@"user_edit_email") withTextField:nil andText:self.user.email];
                     break;
                 case 2:
-                    [self setupPhoneCell:cell withPhone:self.user.phone];
+                    [self setupPasswordCell:cell];
                     break;
                 case 3:
+                    [self setupPhoneCell:cell withPhone:self.user.phone];
+                    break;
+                case 4:
                     [self setupNotificationCell:cell];
                     break;
                 default:
@@ -362,7 +358,8 @@ typedef NS_ENUM(NSInteger) {
                     [self setupAssociationPartnerCell:cell withPartner:self.user.partner];
                     break;
                 case AssociationRowTypeOrganisation:
-                    [self setupAssociationProfileCell:cell withAssociationTitle:self.user.organization.name andAssociationImage:self.user.organization.logoUrl];
+                    [self setupAssociationProfileCell:cell
+                                 withAssociationTitle:self.user.organization.name andAssociationImage:self.user.organization.logoUrl];
                     break;
                 default:
                     [self setupNoAssociationsCell:cell];
@@ -517,24 +514,32 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationImage:(NSString *)imageURL {
-    UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
-    titleLabel.text = title;
+    
+    UIButton *titleBtn = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
+    [titleBtn setTitle:title forState:UIControlStateNormal];
+    
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
-    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0)
+    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
+    }
+    
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
     lblSupportType.text = OTLocalizedString(@"marauder");
 }
 
 - (void)setupAssociationPartnerCell:(UITableViewCell *)cell withPartner:(OTAssociation *)partner {
-    UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
-    titleLabel.text = partner.name;
+
+    UIButton *titleBtn = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
+    [titleBtn setTitle:partner.name forState:UIControlStateNormal];
+    
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
     [associationImageButton setImage:nil forState:UIControlStateNormal];
 
     NSString *imageUrl = partner.largeLogoUrl;
-    if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0)
+    if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageUrl]];
+    }
+    
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
     lblSupportType.text = OTLocalizedString(@"sympathizant");
 }
@@ -557,11 +562,21 @@ typedef NS_ENUM(NSInteger) {
     [button setBackgroundColor:[ApplicationTheme shared].backgroundThemeColor];
 }
 
+- (void)setupDefineActionZonceCell:(UITableViewCell *)cell {
+    UIButton *button = [cell viewWithTag:1];
+    [button setBackgroundColor:[ApplicationTheme shared].backgroundThemeColor];
+    [button setTitle:[OTAppAppearance defineActionZoneTitleForUser:self.user] forState:UIControlStateNormal];
+    
+    UILabel *addressLabel = [cell viewWithTag:2];
+    addressLabel.text = [self.user formattedActionZoneAddress];
+}
+
 - (void)setupPhoneCell:(UITableViewCell *)cell withPhone:(NSString *)phone {
     UILabel *phoneLabel = [cell viewWithTag:PHONE_LABEL_TAG];
     phoneLabel.textColor = [ApplicationTheme shared].backgroundThemeColor;
-    if (phoneLabel != nil)
+    if (phoneLabel != nil) {
         phoneLabel.text = phone;
+    }
 }
 
 - (void)setupNotificationCell:(UITableViewCell *)cell {

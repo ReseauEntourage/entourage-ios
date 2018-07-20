@@ -25,6 +25,7 @@
 #import "OTOrganization.h"
 #import "OTConsts.h"
 #import "OTAPIConsts.h"
+#import "OTAddress.h"
 
 #import <Crashlytics/Crashlytics.h>
 
@@ -240,6 +241,35 @@ NSString *const kKeychainPassword = @"entourage_user_password";
              failure(error);
          }
      }];
+}
+
++ (void)updateUserAddressWithPlaceId:(NSString *)placeId
+                               completion:(void (^)(NSError *))completion
+{
+    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_ADDRESS, TOKEN];
+
+    NSMutableDictionary *address = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    address[kWSKeyGooglePlaceId] = placeId;
+    parameters[@"address"] = address;
+    
+    [[OTHTTPRequestManager sharedInstance] POSTWithUrl:url
+                                         andParameters:parameters
+                                            andSuccess:^(id responseObject) {
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    if (completion) {
+                                                        completion(nil);
+                                                    }
+                                                });
+                                            }
+                                            andFailure:^(NSError *error) {
+                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                    if (completion) {
+                                                        completion(error);
+                                                    }
+                                                });
+                                            }
+     ];
 }
 
 - (void)updateUserInformationWithUser:(OTUser *)user

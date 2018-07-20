@@ -28,6 +28,7 @@ NSString *const kKeyConversation = @"conversation";
 NSString *const kKeyPartner = @"partner";
 NSString *const kKeyRoles = @"roles";
 NSString *const kMemberships = @"memberships";
+NSString *const kAddress = @"address";
 
 NSString *const kCoordinatorUserTag = @"coordinator";
 NSString *const kNotValidatedUserTag = @"not_validated";
@@ -67,6 +68,10 @@ NSString *const kVisitedUserTag = @"visited";
         
         if ([[dictionary allKeys] containsObject:kKeyRoles]) {
             _roles = [dictionary arrayWithObjectsOfClass:[NSString class] forKey:kKeyRoles];
+        }
+        
+        if ([[dictionary allKeys] containsObject:kAddress]) {
+            _address = [[OTAddress alloc] initWithDictionary:[dictionary objectForKey:kAddress]];
         }
         
         NSArray *membershipArray = [dictionary objectForKey:kMemberships];
@@ -125,6 +130,7 @@ NSString *const kVisitedUserTag = @"visited";
     [encoder encodeObject:self.conversation forKey:kKeyConversation];
     [encoder encodeObject:self.roles forKey:kKeyRoles];
     [encoder encodeObject:self.memberships forKey:kMemberships];
+    [encoder encodeObject:self.address forKey:kAddress];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -149,11 +155,16 @@ NSString *const kVisitedUserTag = @"visited";
         self.conversation = [decoder decodeObjectForKey:kKeyConversation];
         self.roles = [decoder decodeObjectForKey:kKeyRoles];
         self.memberships = [decoder decodeObjectForKey:kMemberships];
+        self.address = [decoder decodeObjectForKey:kAddress];
     }
     return self;
 }
 
 #pragma mark - Helper functions
+
+- (BOOL)hasActionZoneDefined {
+    return self.address != nil;
+}
 
 - (BOOL)isPro
 {
@@ -203,6 +214,15 @@ NSString *const kVisitedUserTag = @"visited";
     OTUserMembership *group = [self.memberships filteredArrayUsingPredicate:predicate].firstObject;
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
     return group ? [group.list sortedArrayUsingDescriptors:@[sortDescriptor]] : @[];
+}
+
+- (NSString *)formattedActionZoneAddress {
+    if ([self hasActionZoneDefined]) {
+        NSString *descText = [NSString stringWithFormat:@"Vous recevez les notifications pour les actions autour de : %@", self.address.displayAddress];
+        return descText;
+    }
+    
+    return OTLocalizedString(@"defineActionZoneDescription");
 }
 
 @end
