@@ -18,6 +18,9 @@
 #import "UITextField+AutoSuggestion.h"
 #import <GooglePlaces/GooglePlaces.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import "OTAuthService.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import "NSUserDefaults+OT.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -27,6 +30,7 @@
     UITextFieldDelegate>
 
 @property (nonatomic) GMSAutocompleteFetcher *googlePlaceFetcher;
+@property (nonatomic) GMSAutocompletePrediction *selectedAddress;
 @property (nonatomic, readwrite) NSArray<GMSAutocompletePrediction*> *googlePlacePredictions;
 
 @end
@@ -45,16 +49,30 @@
     self.continueButton.tintColor = [ApplicationTheme shared].backgroundThemeColor;;
 
     self.rightsDescLabel.attributedText = [OTAppAppearance defineActionZoneFormattedDescription];
-    self.rightsTitleLabel.text = [OTAppAppearance defineActionZoneTitle];
+    self.rightsTitleLabel.text = [OTAppAppearance defineActionZoneTitleForUser:nil];
     self.textField.placeholder = [OTAppAppearance defineActionZoneSampleAddress];
+    
+    [self setupGoogleAutocompleteFetcher];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     if (self.isShownOnStartup) {
         self.title = @"";
         [self.navigationController presentTransparentNavigationBar];
-        [self addIgnoreButton];
+        
+        if (![OTAppConfiguration shouldAlwaysRequestUserToAddActionZone]) {
+            [self addIgnoreButton];
+        }
     }
     
-    [self setupGoogleAutocompleteFetcher];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(locationAuthorizationChanged:)
+                                                 name: kNotificationLocationAuthorizationChanged
+                                               object:nil];
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
 - (void)setupGoogleAutocompleteFetcher {
@@ -82,16 +100,6 @@
     self.googlePlaceFetcher = [[GMSAutocompleteFetcher alloc] initWithBounds:bounds
                                                        filter:filter];
     self.googlePlaceFetcher.delegate = self;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(locationAuthorizationChanged:)
-                                                 name: kNotificationLocationAuthorizationChanged
-                                               object:nil];
-    [[IQKeyboardManager sharedManager] setEnable:NO];
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -124,8 +132,6 @@
         [self goToNotifications];
     }
     else {
-        OTAppConfiguration.isGeolocationMandatory ?
-        [self goToNotifications] :
         [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
     }
 }
@@ -142,16 +148,38 @@
 
 - (IBAction)doContinue {
     
-    // TODO: Update user with action zone
-    
-    [OTLogger logEvent:@"AcceptGeoloc"];
-    
-    if ([OTLocationManager sharedInstance].isAuthorized) {
-        [self goToNotifications];
+    if (!self.selectedAddress.placeID) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"invalidAddress") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
     }
-    else {
-        [[OTLocationManager sharedInstance] startLocationUpdates];
-    }
+    
+    [self.textField resignFirstResponder];
+    
+    [SVProgressHUD show];
+    [OTAuthService updateUserAddressWithPlaceId:self.selectedAddress.placeID completion:^(NSError *error) {
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
+        } else {
+            [SVProgressHUD dismiss];
+            
+            if (self.isShownOnStartup) {
+                [OTLogger logEvent:@"AcceptGeoloc"];
+                BOOL pushNotificationsEnabled = [[[NSUserDefaults standardUserDefaults] currentUser] isRegisteredForPushNotifications];
+                if ([OTLocationManager sharedInstance].isAuthorized &&
+                    pushNotificationsEnabled) {
+                    [[OTLocationManager sharedInstance] startLocationUpdates];
+                }
+                else if (!pushNotificationsEnabled) {
+                    [self goToNotifications];
+                }
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+    }];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -213,6 +241,8 @@
     NSLog(@"Selected suggestion at index row - %ld", (long)indexPath.row);
     GMSAutocompletePrediction *prediction = self.googlePlacePredictions[indexPath.row];
     self.textField.text = [prediction attributedPrimaryText].string;
+    self.selectedAddress = prediction;
+    [self.textField resignFirstResponder];
 }
 
 @end

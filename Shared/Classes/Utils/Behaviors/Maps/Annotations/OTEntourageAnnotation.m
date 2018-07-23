@@ -9,6 +9,7 @@
 #import "OTEntourageAnnotation.h"
 #import "OTAppAppearance.h"
 #import "UIImage+processing.h"
+#import "entourage-Swift.h"
 
 NSString *const kEntourageAnnotationIdentifier = @"OTEntourageAnnotationIdentifier";
 
@@ -74,6 +75,7 @@ NSString *const kEntourageAnnotationIdentifier = @"OTEntourageAnnotationIdentifi
 - (UIImage*)annotationImageWithName:(NSString*)iconName {
     CGSize imageSize = {40, 40};
     UIImage *icon = [UIImage imageNamed:iconName];
+    
     UIImage *container = [UIImage imageWithColor:[UIColor whiteColor] andSize:imageSize];
     
     CGFloat offset = (imageSize.width - icon.size.width) / 2;

@@ -60,7 +60,7 @@
                 break;
             case 4:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EntouragePrivacyCell"];
-                [((OTEntourageEditItemCell*)cell) configureWithTitle:@"Privé" description:@"Cette option sera bientôt disponible. En attendant, communiquez directement dans une conversation avec les personnes que vous souhaitez inviter." isPrivate:NO];
+                [((OTEntourageEditItemCell*)cell) configureWithSwitchPublicState:YES];
                 break;
             default:
                 break;

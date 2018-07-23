@@ -161,7 +161,7 @@ Indiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.</s
         <!--Notifications Rights View Controller-->
         <scene sceneID="hcv-mY-dvN">
             <objects>
-                <viewController id="gUz-vW-h1c" customClass="OTNotificationsRightsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTNotificationsRightsViewController" id="gUz-vW-h1c" customClass="OTNotificationsRightsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RFo-jt-ATk"/>
                         <viewControllerLayoutGuide type="bottom" id="z2F-Et-Dbc"/>
@@ -429,6 +429,6 @@ votre position.</string>
         <image name="notificationsSquare" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="X8W-6a-Kl5"/>
+        <segue reference="c2y-uN-gYU"/>
     </inferredMetricsTieBreakers>
 </document>

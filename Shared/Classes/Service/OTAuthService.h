@@ -53,4 +53,7 @@ extern NSString *const kKeychainPassword;
 - (void)checkVersionWithSuccess:(void (^)(BOOL))success
                         failure:(void (^)(NSError *))failure;
 
++ (void)updateUserAddressWithPlaceId:(NSString *)placeId
+                          completion:(void (^)(NSError *))completion;
+
 @end

@@ -27,6 +27,9 @@
 #import "OTFeedItemFiltersViewController.h"
 #import "OTSolidarityGuideFiltersViewController.h"
 #import "OTEntourageEditorViewController.h"
+#import "OTGeolocationRightsViewController.h"
+#import "OTPushNotificationsService.h"
+#import "OTNotificationsRightsViewController.h"
 
 #define TUTORIAL_DELAY 15
 #define MAP_TAB_INDEX 0
@@ -39,26 +42,28 @@
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
         
-        if ([OTAppConfiguration shouldShowIntroTutorial]) {
-            if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
-                [[OTLocationManager sharedInstance] startLocationUpdates];
-                NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-                if (pnData) {
-                    [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
-                } else {
-                    [OTAppState navigateToAuthenticatedLandingScreen];
-                }
-            }
-            else {
-                [OTAppState continueFromLoginScreen];
-            }
-        }
-        else {
+        if ([OTAppConfiguration shouldShowIntroTutorial] &&
+            ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [OTAppState continueFromLoginScreen];
+
+        } else {
+            [[OTLocationManager sharedInstance] startLocationUpdates];
+            NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+            if (pnData) {
+                [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
+            } else {
+                
+                [OTAppState navigateToAuthenticatedLandingScreen];
+                
+                if (![currentUser hasActionZoneDefined]) {
+                    
+                } 
+            }
         }
     }
     else
     {
+        // Show intro screens
         [OTAppState navigateToStartupScreen];
     }
 }
@@ -212,27 +217,54 @@
     BOOL isFirstLogin = [[NSUserDefaults standardUserDefaults] isFirstLogin];
     UIViewController *currentViewController = [OTAppState getTopViewController];
     
-    if ([OTAppConfiguration shouldAlwaysRequestUserToUploadPicture] || isFirstLogin) {
-        if (currentUser.avatarURL.length > 0) {
-            if (currentViewController) {
-                [OTAppState navigateToRightsScreen:currentViewController];
-            } else {
-                [OTAppState navigateToAuthenticatedLandingScreen];
-            }
-        }
-        else {
-            if (currentViewController) {
-                [OTAppState navigateToUserPicture:currentViewController];
-            } else {
-                [OTAppState navigateToAuthenticatedLandingScreen];
-            }
+    if (isFirstLogin) {
+        if (currentUser.avatarURL.length == 0) {
+            // If no picture yet, navigate to picture editor, add rights screens (action zone, notifications)
+            [OTAppState navigateToUserPicture:currentViewController];
+        } else {
+            // Else: navigate to add rights screens (action zone, notifications)
+            [OTAppState navigateToLocationRightsScreen:currentViewController];
         }
     } else {
-        if (currentViewController) {
-            [OTAppState navigateToRightsScreen:currentViewController];
+        
+         [OTAppState navigateToAuthenticatedLandingScreen];
+        
+        // For all next logins
+        // If user is forced to set picture
+        if ([OTAppConfiguration shouldAlwaysRequestUserToUploadPicture]) {
+            if (currentUser.avatarURL.length == 0) {
+                [OTAppState navigateToUserPicture:currentViewController];
+            }
+            else {
+                [OTAppState navigateToPermissionsScreens];
+            }
         } else {
-            [OTAppState navigateToAuthenticatedLandingScreen];
-        }        
+            [OTAppState navigateToPermissionsScreens];
+        }
+    }
+}
+
++ (void)navigateToPermissionsScreens {
+    UIViewController *currentViewController = [OTAppState getTopViewController];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    
+    if ([currentUser hasActionZoneDefined] &&
+        [currentUser isRegisteredForPushNotifications]) {
+        
+        [OTAppState navigateToAuthenticatedLandingScreen];
+        
+        if ([OTAppConfiguration shouldShowIntroTutorial] &&
+            ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+            [OTAppState presentTutorialScreen];
+        }
+        
+    } else if (![currentUser hasActionZoneDefined]) {
+        // Navigate to add rights screens (action zone, notifications)
+        [OTAppState navigateToLocationRightsScreen:currentViewController];
+        
+    } else if (![currentUser isRegisteredForPushNotifications]) {
+        // Navigate to notifications screen
+        [OTAppState navigateToNotificationsRightsScreen:currentViewController];
     }
 }
 
@@ -381,13 +413,45 @@
 + (void)navigateToUserPicture:(UIViewController*)viewController {
     UIStoryboard *userPictureStoryboard = [UIStoryboard storyboardWithName:@"UserPicture" bundle:nil];
     UIViewController *pictureViewController = [userPictureStoryboard instantiateInitialViewController];
-    [viewController.navigationController pushViewController:pictureViewController animated:YES];
+    
+    if (viewController) {
+        [viewController.navigationController pushViewController:pictureViewController animated:YES];
+    } else {
+        [OTAppState navigateToRootController:pictureViewController];
+    }
 }
 
-+ (void)navigateToRightsScreen:(UIViewController*)viewController {
++ (void)navigateToLocationRightsScreen:(UIViewController*)viewController {
     UIStoryboard *rightsStoryboard = [UIStoryboard storyboardWithName:@"Rights" bundle:nil];
-    UIViewController *rightsViewController = [rightsStoryboard instantiateInitialViewController];
-    [viewController.navigationController pushViewController:rightsViewController animated:YES];
+    OTGeolocationRightsViewController *rightsViewController = (OTGeolocationRightsViewController*)[rightsStoryboard instantiateInitialViewController];
+    rightsViewController.isShownOnStartup = YES;
+    
+    if (viewController) {
+        [viewController.navigationController pushViewController:rightsViewController animated:YES];
+    } else {
+        [OTAppState navigateToRootController:rightsViewController];
+    }
+}
+
++ (void)navigateToNotificationsRightsScreen:(UIViewController*)viewController {
+    UIStoryboard *rightsStoryboard = [UIStoryboard storyboardWithName:@"Rights" bundle:nil];
+    OTNotificationsRightsViewController *rightsViewController = [rightsStoryboard instantiateViewControllerWithIdentifier:@"OTNotificationsRightsViewController"];
+    
+    if (viewController) {
+        [viewController.navigationController pushViewController:rightsViewController animated:YES];
+    } else {
+        [OTAppState navigateToRootController:rightsViewController];
+    }
+}
+
++ (void)navigateToRootController:(UIViewController*)viewController {
+    OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIWindow *window = [appDelegate window];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    window.rootViewController = navController;
+    [window makeKeyAndVisible];
 }
 
 @end

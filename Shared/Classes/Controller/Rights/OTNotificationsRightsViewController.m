@@ -23,8 +23,9 @@
 #import <Mixpanel/Mixpanel.h>
 #import "OTAppState.h"
 #import "OTAppConfiguration.h"
-#import "entourage-Swift.h"
+#import "NSUserDefaults+OT.h"
 #import "OTAppAppearance.h"
+#import "entourage-Swift.h"
 
 @import Firebase;
 
@@ -106,11 +107,13 @@
     [[OTOnboardingJoinService new] checkForJoins:^(OTEntourageInvitation *joinedInvitation) {
         [SVProgressHUD dismiss];
         
-        if(joinedInvitation) {
+        if (joinedInvitation) {
             [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
             [[OTDeepLinkService new] navigateTo:joinedInvitation.entourageId withType:nil];
             
-            if ([OTAppConfiguration shouldShowIntroTutorial]) {
+            if ([OTAppConfiguration shouldShowIntroTutorial] &&
+                ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+                [OTAppState navigateToAuthenticatedLandingScreen];
                 [OTAppState presentTutorialScreen];
             }
         }

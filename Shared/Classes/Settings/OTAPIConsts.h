@@ -78,5 +78,6 @@
 #define API_URL_UPDATE_USER @"%@/%@.json?token=%@"
 #define API_URL_DELETE_ACCOUNT @"users/me?token=%@"
 #define API_URL_REGENERATE_CODE @"%@/%@/%@.json"
+#define API_URL_UPDATE_ADDRESS @"users/me/address?token=%@"
 
 #endif /* OTAPIConsts_h */

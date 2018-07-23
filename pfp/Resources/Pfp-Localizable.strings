@@ -57,7 +57,8 @@
 
 "pfp_promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la sortie %@ grâce à une notification envoyée aux téléphones des personnes membres des voisinages suivants :\nMerci";
 
-"pfp_defineActionZoneTitle" = "Quelle est votre adresse ?";
+"pfp_defineActionZoneTitle" = "Définir mon adresse";
+"pfp_modifyActionZoneTitle" = "Modifier mon adresse";
 "pfp_defineActionZoneSampleAddress" = "15 avenue Jean Jaurès...";
 "pfp_defineZoneSubtitle1" = "Voisin-Age, c’est utile parce que c’est local !\nIndiquez votre adresse pour rencontrer les membres de Voisin-Age les plus proches.";
 "pfp_defineZoneSubtitle2" = "\n\nCette information n’est pas affichée sur votre profil.";

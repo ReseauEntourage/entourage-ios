@@ -19,6 +19,16 @@
     feedItem.identifierTag = @"summary";
     [items addObject:feedItem.copy];
     
+    if ([feedItem isOuting]) {
+        // Event creator row
+        feedItem.identifierTag = @"eventAuthorInfo";
+        [items addObject:feedItem.copy];
+        
+        // Event info row
+        feedItem.identifierTag = @"eventInfo";
+        [items addObject:feedItem.copy];
+    }
+    
     // Map row
     feedItem.identifierTag = @"feedLocation";
     [items addObject:feedItem.copy];
