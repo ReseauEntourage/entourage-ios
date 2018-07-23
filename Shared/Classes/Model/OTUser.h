@@ -58,6 +58,8 @@ extern NSString *const kVisitedUserTag;
 
 - (BOOL)isCoordinator;
 
+- (BOOL)isRegisteredForPushNotifications;
+
 /*
  * Returns the name of the role to be displayed in the left side of the user's fullname
  */

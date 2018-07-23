@@ -20,6 +20,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "OTAuthService.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "NSUserDefaults+OT.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -51,13 +52,27 @@
     self.rightsTitleLabel.text = [OTAppAppearance defineActionZoneTitleForUser:nil];
     self.textField.placeholder = [OTAppAppearance defineActionZoneSampleAddress];
     
+    [self setupGoogleAutocompleteFetcher];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     if (self.isShownOnStartup) {
         self.title = @"";
         [self.navigationController presentTransparentNavigationBar];
-        [self addIgnoreButton];
+        
+        if (![OTAppConfiguration shouldAlwaysRequestUserToAddActionZone]) {
+            [self addIgnoreButton];
+        }
     }
     
-    [self setupGoogleAutocompleteFetcher];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(locationAuthorizationChanged:)
+                                                 name: kNotificationLocationAuthorizationChanged
+                                               object:nil];
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
 - (void)setupGoogleAutocompleteFetcher {
@@ -85,16 +100,6 @@
     self.googlePlaceFetcher = [[GMSAutocompleteFetcher alloc] initWithBounds:bounds
                                                        filter:filter];
     self.googlePlaceFetcher.delegate = self;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(locationAuthorizationChanged:)
-                                                 name: kNotificationLocationAuthorizationChanged
-                                               object:nil];
-    [[IQKeyboardManager sharedManager] setEnable:NO];
-    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -127,8 +132,6 @@
         [self goToNotifications];
     }
     else {
-        OTAppConfiguration.isGeolocationMandatory ?
-        [self goToNotifications] :
         [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
     }
 }
@@ -161,14 +164,16 @@
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
         } else {
             [SVProgressHUD dismiss];
+            
             if (self.isShownOnStartup) {
                 [OTLogger logEvent:@"AcceptGeoloc"];
-                
-                if ([OTLocationManager sharedInstance].isAuthorized) {
-                    [self goToNotifications];
-                }
-                else {
+                BOOL pushNotificationsEnabled = [[[NSUserDefaults standardUserDefaults] currentUser] isRegisteredForPushNotifications];
+                if ([OTLocationManager sharedInstance].isAuthorized &&
+                    pushNotificationsEnabled) {
                     [[OTLocationManager sharedInstance] startLocationUpdates];
+                }
+                else if (!pushNotificationsEnabled) {
+                    [self goToNotifications];
                 }
             } else {
                 [self.navigationController popViewControllerAnimated:YES];

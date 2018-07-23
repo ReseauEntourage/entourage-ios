@@ -69,13 +69,10 @@ typedef NS_ENUM(NSInteger) {
     self.tableView.estimatedRowHeight = 1000;
     [self setupCloseModalWithTintColor];
     [self showSaveButton];
-    self.user = [[NSUserDefaults standardUserDefaults] currentUser];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:@kNotificationAboutMeUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-    
-    [self setupSections];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,6 +80,10 @@ typedef NS_ENUM(NSInteger) {
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
+    self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+    [self setupSections];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

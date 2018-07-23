@@ -111,12 +111,13 @@ typedef NS_ENUM(NSInteger) {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    
     if (self.user != nil) {
         self.userId = self.user.sid;
         [self configureTableSource];
         
         if (self.user.sid.intValue == self.currentUser.sid.intValue) {
-            self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
             self.user = self.currentUser;
             
             if ([OTAppConfiguration supportsProfileEditing]) {

@@ -420,12 +420,20 @@
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item {
     NSString *icon = [NSString stringWithFormat:@"%@_%@", item.entourage_type, item.category];
     
-    if ([item isPrivateCircle]) {
-        icon = @"private-circle";
-    } else if ([item isNeighborhood]) {
-        icon = @"neighborhood";
-    } else if ([item isOuting]) {
-        icon = @"outing";
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([item isPrivateCircle]) {
+            icon = @"private-circle";
+        } else if ([item isNeighborhood]) {
+            icon = @"neighborhood";
+        } else if ([item isOuting]) {
+            icon = @"outing";
+        }
+        
+        return icon;
+    }
+    
+    if ([item isOuting]) {
+        icon = @"ask_for_help_event";
     }
     
     return icon;
@@ -551,9 +559,20 @@
     iconView.layer.cornerRadius = iconSize / 2;
     iconView.userInteractionEnabled = NO;
     iconView.clipsToBounds = YES;
-    [iconView setImage:[UIImage imageNamed:iconName] forState:UIControlStateNormal];
+    UIImage *iconImage = [UIImage imageNamed:iconName];
+    [iconView setImage:iconImage forState:UIControlStateNormal];
+    iconView.contentMode = UIViewContentModeScaleAspectFit;
     
+    if ([OTAppConfiguration applicationType] == ApplicationTypeEntourage) {
+        if ([feedItem isOuting]) {
+            iconView.tintColor = [ApplicationTheme shared].backgroundThemeColor;
+            [iconView setImage:[[UIImage imageNamed:iconName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                      forState:UIControlStateNormal];
+        }
+    }
+
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:iconView];
+
     return barButtonItem;
 }
 

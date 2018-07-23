@@ -166,6 +166,16 @@ NSString *const kVisitedUserTag = @"visited";
     return self.address != nil;
 }
 
+- (BOOL)isRegisteredForPushNotifications {
+    UIUserNotificationType type = [UIApplication sharedApplication].currentUserNotificationSettings.types;
+    
+    if (type != UIUserNotificationTypeNone) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (BOOL)isPro
 {
     return [USER_TYPE_PRO isEqualToString:self.type];

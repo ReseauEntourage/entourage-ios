@@ -1169,7 +1169,10 @@
 #pragma mark - EntourageEditorDelegate
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
-    [self dismissViewControllerAnimated:YES completion:^{
+
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    [self.editEntourgeBehavior.owner dismissViewControllerAnimated:YES completion:^{
         [self forceGetNewData];
         self.inviteBehaviorTriggered = YES;
         [self showFeedInfo:entourage];

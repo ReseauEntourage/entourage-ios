@@ -39,6 +39,12 @@
         else if ([feedItem.identifierTag isEqualToString:@"feedDescription"]) {
             return  @"DescriptionCell";
         }
+        else if ([feedItem.identifierTag isEqualToString:@"eventAuthorInfo"]) {
+            return @"DescriptionCell";
+            
+        } else if ([feedItem.identifierTag isEqualToString:@"eventInfo"]) {
+            return  @"EventInfoCell";
+        }
     }
     
     return @"DescriptionCell";

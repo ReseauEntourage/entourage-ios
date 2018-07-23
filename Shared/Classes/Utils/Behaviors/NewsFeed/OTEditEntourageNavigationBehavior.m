@@ -34,7 +34,9 @@
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
     UIViewController *destinationViewController = segue.destinationViewController;
-    [OTAppConfiguration configureNavigationControllerAppearance:destinationViewController.navigationController];
+    if (destinationViewController.navigationController) {
+        [OTAppConfiguration configureNavigationControllerAppearance:destinationViewController.navigationController];
+    }
     
     if ([segue.identifier isEqualToString:@"CategoryEditSegue"]) {
         OTCategoryViewController* controller = (OTCategoryViewController *)destinationViewController;
@@ -97,7 +99,7 @@
                 minimumDate:nil
                 maximumDate:nil
            buttonTitleColor:[ApplicationTheme shared].backgroundThemeColor
-             datePickerMode:UIDatePickerModeDate
+             datePickerMode:UIDatePickerModeDateAndTime
                    callback:^(NSDate * _Nullable date) {
                        if (date) {
                            [self.editEntourageSource updateEventStartDate:date];
@@ -117,6 +119,8 @@
     acController.primaryTextColor = acController.secondaryTextColor;
     acController.tintColor = [ApplicationTheme shared].backgroundThemeColor;
     acController.autocompleteBoundsMode = kGMSAutocompleteBoundsModeRestrict;
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:acController.navigationController];
     
     /*
      * if we have the device location: 20km radius around the user (so 40x40km square)
