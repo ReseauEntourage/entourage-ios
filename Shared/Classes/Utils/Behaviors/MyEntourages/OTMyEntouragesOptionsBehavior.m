@@ -32,7 +32,7 @@
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTEntourageEditorViewController *creatorController = (OTEntourageEditorViewController *)controller.topViewController;
         creatorController.type = self.entourageType;
-        creatorController.location = [OTLocationManager sharedInstance].currentLocation;
+        creatorController.location = [[OTLocationManager sharedInstance] defaultLocationForNewActions];
         creatorController.entourageEditorDelegate = self;
     }
     else if([segue.identifier isEqualToString:@"OptionsSegue"]) {

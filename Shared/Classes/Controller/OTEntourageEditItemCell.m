@@ -17,12 +17,19 @@
     self.lblDescription.textColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
-- (void)configureWithTitle:(NSString *)title
-               description:(NSString*)description
-                 isPrivate:(BOOL)isPrivate {
-    self.lblTitle.text = title;
-    self.lblDescription.text = description;
-    [self.privacySwitch setOn:isPrivate];
+- (void)configureWithSwitchPublicState:(BOOL)public {
+    if (!public) {
+        self.lblTitle.text = @"Privé";
+        self.lblDescription.text = @"Cette option sera bientôt disponible. En attendant, communiquez directement dans une conversation avec les personnes que vous souhaitez inviter.";
+        [self.privacySwitch setOn:NO];
+        
+    } else {
+        self.lblTitle.text = @"Public";
+        self.lblDescription.text = @"Tous peuvent trouver la sortie dans le fil d'actualités, mais seuls les membres de mon voisinage sont notifiés.";
+        [self.privacySwitch setOn:YES];
+        [self.lblTitle setTextColor:[ApplicationTheme shared].titleLabelColor];
+    }
+    
     self.privacySwitch.enabled = NO;
 }
 

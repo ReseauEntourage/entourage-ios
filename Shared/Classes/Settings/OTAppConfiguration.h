@@ -50,9 +50,6 @@
 
 + (NSInteger)applicationType;
 
-// Configures if the geolcation is always requested
-+ (BOOL)isGeolocationMandatory;
-
 // Configures if the tour functionality is enabled/shown
 + (BOOL)supportsTourFunctionality;
 
@@ -72,6 +69,9 @@
 
 // Configures if the user is requested to upload a picture
 + (BOOL)shouldAlwaysRequestUserToUploadPicture;
+
+// Configures if the user is requested (forced) to add/edit action zone
++ (BOOL)shouldAlwaysRequestUserToAddActionZone;
 
 // Configure if the user location is always requested
 + (BOOL)shouldAlwaysRequestUserLocation;

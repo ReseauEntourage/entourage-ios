@@ -8,6 +8,7 @@
 
 #import "OTOutingAnnotation.h"
 #import "UIImage+processing.h"
+#import "entourage-Swift.h"
 
 NSString *const kOutingAnnotationIdentifier = @"OTOutingAnnotationIdentifier";
 

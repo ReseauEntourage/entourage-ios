@@ -18,6 +18,7 @@
 #import "NSUserDefaults+OT.h"
 #import "NSUserDefaults+OT.h"
 #import "UIImage+processing.h"
+#import "OTGeolocationRightsViewController.h"
 #import "entourage-Swift.h"
 
 #define MaxImageSize 300
@@ -68,14 +69,18 @@
             [NSUserDefaults standardUserDefaults].currentUser = user;
             self.scrollView.delegate = nil;
             
-            if ([OTAppConfiguration shouldShowIntroTutorial] && [NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+            if (([OTAppConfiguration shouldShowIntroTutorial] &&
+                [NSUserDefaults standardUserDefaults].isTutorialCompleted &&
+                 [currentUser hasActionZoneDefined]) ||
+                self.isEditingPictureForCurrentUser) {
                 [self popToProfile];
                 
-            } else if (self.isEditingPictureForCurrentUser) {
-                [self popToProfile];
+            } else if (![currentUser hasActionZoneDefined]) {
+                [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
                 
             } else {
-                [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
+                // fallback
+                [self popToProfile];
             }
                 
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationProfilePictureUpdated object:self];
@@ -89,6 +94,12 @@
     } orError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"PreviewToGeoSegue"]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+    }
 }
 
 - (void)popToProfile {

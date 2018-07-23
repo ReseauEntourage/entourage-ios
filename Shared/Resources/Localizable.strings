@@ -14,6 +14,7 @@
 "geolocalisationDescriptionText" = "Entourage, c’est utile parce que c’est local!\nParticipez à la solidarité de votre quartier : pour voir les actions de vos voisins, qu’ils soient avec ou sans-abri, activez la géolocalisation.";
 "notificationNeedDescription" = "Pour vous faire découvrir les actions solidaires autour de vous, Entourage doit connaître votre position.";
 
+
 // User prompted
 "microphoneNotEnabled" = "Accès refusé au micro";
 "promptForMicrophone" = "L'application demande l'accès à votre microphone.\n\nSVP Activez l'accès au micro pour cette app dans Réglages > Confidentialité > Micro";
@@ -289,6 +290,15 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "user_verified" = "Identification vérifiée";
 "user_email_address" = "Adresse e-mail";
 "user_phone_number" = "Numéro de téléphone";
+"defineActionZone" = "Ma zone d'action";
+"defineActionZoneTitle" = "Définissez votre zone d'action";
+"defineActionZoneDescription" = "Où souhaitez-vous agir ?\nSoyez notifié des actualités importantes.";
+"modifyActionZoneTitle" = "Modifier ma zone";
+"defineActionZoneSampleAddress" = "avenue Jean Jaurès, Paris";
+"defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nIndiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.";
+"defineZoneSubtitle2" = "\n\nCette information n’est pas affichée.";
+"defineZoneSubtitle3" = " Vous pouvez la modifier dans vos réglages.";
+"defineZoneSubtitle4" = "\n\nAdresse - peut être approximative.";
 
 "user_edit_password_invalid_current" = "Le mot de passe ne correspond pas";
 "user_edit_password_invalid_length_too_short" = "Le mot de passe doit contenir au moins %d caractères";

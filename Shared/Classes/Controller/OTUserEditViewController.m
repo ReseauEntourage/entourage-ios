@@ -16,6 +16,7 @@
 #import "UIViewController+menu.h"
 #import "OTUserEditPasswordViewController.h"
 #import "OTUserPictureViewController.h"
+#import "OTGeolocationRightsViewController.h"
 #import "UIButton+entourage.h"
 #import "OTAuthService.h"
 #import "UIColor+entourage.h"
@@ -27,6 +28,7 @@
 #import "OTUserTableConfigurator.h"
 #import "OTTextWithCount.h"
 #import "OTAboutMeViewController.h"
+#import "UINavigationController+entourage.h"
 #import "entourage-Swift.h"
 
 typedef NS_ENUM(NSInteger) {
@@ -67,25 +69,21 @@ typedef NS_ENUM(NSInteger) {
     self.tableView.estimatedRowHeight = 1000;
     [self setupCloseModalWithTintColor];
     [self showSaveButton];
-    self.user = [[NSUserDefaults standardUserDefaults] currentUser];
-    
-    NSMutableArray *profileSections = [NSMutableArray new];
-    [profileSections addObjectsFromArray:@[@(SectionTypeSummary), @(SectionTypeAbout)]];
-    
-    if ([OTAppConfiguration shouldShowAssociationsOnUserProfile]) {
-        [profileSections addObject:@(SectionTypeAssociations)];
-    }
-    [profileSections addObjectsFromArray:@[@(SectionTypeInfoPrivate), @(SectionTypeDelete)]];
-
-    self.sections = profileSections;
-    
-    self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:@kNotificationAboutMeUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
+    self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+    [self setupSections];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -103,6 +101,21 @@ typedef NS_ENUM(NSInteger) {
 
 #pragma mark - Private
 
+- (void)setupSections {
+    NSMutableArray *profileSections = [NSMutableArray new];
+    [profileSections addObjectsFromArray:@[@(SectionTypeSummary), @(SectionTypeAbout)]];
+    
+    if ([OTAppConfiguration shouldShowAssociationsOnUserProfile]) {
+        [profileSections addObject:@(SectionTypeAssociations)];
+    }
+
+    [profileSections addObjectsFromArray:@[@(SectionTypeInfoPrivate), @(SectionTypeDelete)]];
+    
+    self.sections = profileSections;
+    
+    self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
+}
+
 - (void)profilePictureUpdated:(NSNotification *)notification {
     self.user.avatarURL = [[[NSUserDefaults standardUserDefaults] currentUser] avatarURL];
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
@@ -111,6 +124,13 @@ typedef NS_ENUM(NSInteger) {
 - (IBAction)showAssociations:(id)sender {
     [OTLogger logEvent:@"ToBadgePageFromProfile"];
     [self performSegueWithIdentifier:@"SelectAssociationSegue" sender:nil];
+}
+
+- (IBAction)defineActionZone:(id)sender {
+    UIStoryboard *rightsStoryboard = [UIStoryboard storyboardWithName:@"Rights" bundle:nil];
+    OTGeolocationRightsViewController *controller = (OTGeolocationRightsViewController*)[rightsStoryboard instantiateViewControllerWithIdentifier:@"OTGeolocationRightsViewController"];
+    controller.isShownOnStartup = NO;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)showSaveButton {
@@ -175,7 +195,7 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeSummary:
             return 3;
         case SectionTypeInfoPrivate:
-            return 4;
+            return 5;
         case SectionTypeAssociations:
             return self.associationRows.count;
         default:
@@ -189,9 +209,6 @@ typedef NS_ENUM(NSInteger) {
     switch (mappedSection) {
         case SectionTypeInfoPrivate:
         case SectionTypeInfoPublic:
-        case SectionTypeAbout:
-            height = 46.0f;
-            break;
         case SectionTypeAssociations:
             height = 46.0f;
             break;
@@ -252,15 +269,18 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeInfoPrivate:
             switch (indexPath.row) {
                 case 0:
-                    cellID = @"EditProfileCell";
+                    cellID = @"DefineActionZoneCell";
                     break;
                 case 1:
-                    cellID = @"EditPasswordCell";
+                    cellID = @"EditProfileCell";
                     break;
                 case 2:
-                    cellID = @"PhoneCell";
+                    cellID = @"EditPasswordCell";
                     break;
                 case 3:
+                    cellID = @"PhoneCell";
+                    break;
+                case 4:
                     cellID = @"NotificationsCell";
                     break;
                 default:
@@ -309,15 +329,18 @@ typedef NS_ENUM(NSInteger) {
         case SectionTypeInfoPrivate: {
             switch (indexPath.row) {
                 case 0:
-                    [self setupInfoCell:cell withTitle:OTLocalizedString(@"user_edit_email") withTextField:nil andText:self.user.email];
+                    [self setupDefineActionZonceCell:cell];
                     break;
                 case 1:
-                    [self setupPasswordCell:cell];
+                    [self setupInfoCell:cell withTitle:OTLocalizedString(@"user_edit_email") withTextField:nil andText:self.user.email];
                     break;
                 case 2:
-                    [self setupPhoneCell:cell withPhone:self.user.phone];
+                    [self setupPasswordCell:cell];
                     break;
                 case 3:
+                    [self setupPhoneCell:cell withPhone:self.user.phone];
+                    break;
+                case 4:
                     [self setupNotificationCell:cell];
                     break;
                 default:
@@ -336,7 +359,8 @@ typedef NS_ENUM(NSInteger) {
                     [self setupAssociationPartnerCell:cell withPartner:self.user.partner];
                     break;
                 case AssociationRowTypeOrganisation:
-                    [self setupAssociationProfileCell:cell withAssociationTitle:self.user.organization.name andAssociationImage:self.user.organization.logoUrl];
+                    [self setupAssociationProfileCell:cell
+                                 withAssociationTitle:self.user.organization.name andAssociationImage:self.user.organization.logoUrl];
                     break;
                 default:
                     [self setupNoAssociationsCell:cell];
@@ -491,24 +515,32 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)setupAssociationProfileCell:(UITableViewCell *)cell withAssociationTitle:(NSString *)title andAssociationImage:(NSString *)imageURL {
-    UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
-    titleLabel.text = title;
+    
+    UIButton *titleBtn = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
+    [titleBtn setTitle:title forState:UIControlStateNormal];
+    
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
-    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0)
+    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
+    }
+    
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
     lblSupportType.text = OTLocalizedString(@"marauder");
 }
 
 - (void)setupAssociationPartnerCell:(UITableViewCell *)cell withPartner:(OTAssociation *)partner {
-    UILabel *titleLabel = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
-    titleLabel.text = partner.name;
+
+    UIButton *titleBtn = [cell viewWithTag:ASSOCIATION_TITLE_TAG];
+    [titleBtn setTitle:partner.name forState:UIControlStateNormal];
+    
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
     [associationImageButton setImage:nil forState:UIControlStateNormal];
 
     NSString *imageUrl = partner.largeLogoUrl;
-    if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0)
+    if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageUrl]];
+    }
+    
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
     lblSupportType.text = OTLocalizedString(@"sympathizant");
 }
@@ -531,11 +563,21 @@ typedef NS_ENUM(NSInteger) {
     [button setBackgroundColor:[ApplicationTheme shared].backgroundThemeColor];
 }
 
+- (void)setupDefineActionZonceCell:(UITableViewCell *)cell {
+    UIButton *button = [cell viewWithTag:1];
+    [button setBackgroundColor:[ApplicationTheme shared].backgroundThemeColor];
+    [button setTitle:[OTAppAppearance defineActionZoneTitleForUser:self.user] forState:UIControlStateNormal];
+    
+    UILabel *addressLabel = [cell viewWithTag:2];
+    addressLabel.text = [self.user formattedActionZoneAddress];
+}
+
 - (void)setupPhoneCell:(UITableViewCell *)cell withPhone:(NSString *)phone {
     UILabel *phoneLabel = [cell viewWithTag:PHONE_LABEL_TAG];
     phoneLabel.textColor = [ApplicationTheme shared].backgroundThemeColor;
-    if (phoneLabel != nil)
+    if (phoneLabel != nil) {
         phoneLabel.text = phone;
+    }
 }
 
 - (void)setupNotificationCell:(UITableViewCell *)cell {

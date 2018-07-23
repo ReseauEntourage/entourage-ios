@@ -776,6 +776,11 @@
 		A24D96A620D2AAF800C21FCC /* OTConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = A24D96A420D2A14800C21FCC /* OTConversation.m */; };
 		A24EA37B20F8C6A60027AB8B /* LSLDatePickerDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA37920F8C6A50027AB8B /* LSLDatePickerDialog.m */; };
 		A24EA37C20F8C6A60027AB8B /* LSLDatePickerDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA37920F8C6A50027AB8B /* LSLDatePickerDialog.m */; };
+		A24EA3822100A7780027AB8B /* UITextField+AutoSuggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3812100A7780027AB8B /* UITextField+AutoSuggestion.m */; };
+		A24EA3832100A7780027AB8B /* UITextField+AutoSuggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3812100A7780027AB8B /* UITextField+AutoSuggestion.m */; };
+		A24EA3862101D7A10027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
+		A24EA3872101D7A10027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
+		A24EA3882101D7A50027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
 		A285C35C20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
 		A285C35D20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
@@ -1991,6 +1996,10 @@
 		A24D96A420D2A14800C21FCC /* OTConversation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTConversation.m; sourceTree = "<group>"; };
 		A24EA37920F8C6A50027AB8B /* LSLDatePickerDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSLDatePickerDialog.m; sourceTree = "<group>"; };
 		A24EA37A20F8C6A50027AB8B /* LSLDatePickerDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSLDatePickerDialog.h; sourceTree = "<group>"; };
+		A24EA3802100A7780027AB8B /* UITextField+AutoSuggestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+AutoSuggestion.h"; sourceTree = "<group>"; };
+		A24EA3812100A7780027AB8B /* UITextField+AutoSuggestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+AutoSuggestion.m"; sourceTree = "<group>"; };
+		A24EA3842101D7A10027AB8B /* OTAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddress.h; sourceTree = "<group>"; };
+		A24EA3852101D7A10027AB8B /* OTAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddress.m; sourceTree = "<group>"; };
 		A285C35A20F7787600D6625E /* OTAddEditEntourageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddEditEntourageDataSource.h; sourceTree = "<group>"; };
 		A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddEditEntourageDataSource.m; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2312,6 +2321,8 @@
 				A202E8272085D2C40058F32C /* Feeds */,
 				A202E8222085D2C40058F32C /* OTAboutItem.h */,
 				A202E8532085D2C40058F32C /* OTAboutItem.m */,
+				A24EA3842101D7A10027AB8B /* OTAddress.h */,
+				A24EA3852101D7A10027AB8B /* OTAddress.m */,
 				A202E8172085D2C40058F32C /* OTAnnouncement.h */,
 				A202E8492085D2C40058F32C /* OTAnnouncement.m */,
 				A202E81D2085D2C40058F32C /* OTAssociation.h */,
@@ -3460,6 +3471,8 @@
 				A202EABD2085D2C70058F32C /* NSUserDefaults+OT.m */,
 				A202EABC2085D2C70058F32C /* OTVersionInfo.h */,
 				A202EAC52085D2C70058F32C /* OTVersionInfo.m */,
+				A24EA3802100A7780027AB8B /* UITextField+AutoSuggestion.h */,
+				A24EA3812100A7780027AB8B /* UITextField+AutoSuggestion.m */,
 				A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */,
 				A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */,
 				A2E5FA0E20862E780099B989 /* UINavigationBar+Appearance.h */,
@@ -4384,6 +4397,7 @@
 				A202EACB2085D2C70058F32C /* OTFeedItemAuthor.m in Sources */,
 				A202EC2B2085D2C80058F32C /* OTDebugLog.m in Sources */,
 				A202EBCF2085D2C80058F32C /* OTUserNameViewController.m in Sources */,
+				A24EA3822100A7780027AB8B /* UITextField+AutoSuggestion.m in Sources */,
 				A202EBB32085D2C80058F32C /* OTFeedItemsFilterCellBase.m in Sources */,
 				A202EBF92085D2C80058F32C /* OTFeedItemsTableView.m in Sources */,
 				96B658B8209A5AF000EB0398 /* UIFont+Extensions.swift in Sources */,
@@ -4404,6 +4418,7 @@
 				A202EBA92085D2C80058F32C /* OTLoginViewController.m in Sources */,
 				A202EB2B2085D2C70058F32C /* OTMapViewController.m in Sources */,
 				A2306AB920C81F730094370E /* ISO8601DateFormatter.m in Sources */,
+				A24EA3862101D7A10027AB8B /* OTAddress.m in Sources */,
 				A202EC692085D2C80058F32C /* OTCollectionCellProviderBehavior.m in Sources */,
 				A202EB7D2085D2C80058F32C /* OTUserViewController.m in Sources */,
 				A202EAF72085D2C70058F32C /* OTAddressBookPhone.m in Sources */,
@@ -4846,6 +4861,7 @@
 				A202EAD62085D2C70058F32C /* OTEntourage.m in Sources */,
 				A202EC5C2085D2C80058F32C /* OTEncounterDisclaimerBehavior.m in Sources */,
 				A202EBA82085D2C80058F32C /* OTPopupViewController.swift in Sources */,
+				A24EA3882101D7A50027AB8B /* OTAddress.m in Sources */,
 				A202EAF62085D2C70058F32C /* OTAddressBookItem.m in Sources */,
 				A202ECB82085D2C80058F32C /* OTInviteBehavior.m in Sources */,
 				A202ED202085D2C80058F32C /* UIScrollView+entourage.m in Sources */,
@@ -5040,6 +5056,7 @@
 				A296B79420871CFC00F6AFBD /* OTTutorial1ViewController.m in Sources */,
 				A296B79520871CFC00F6AFBD /* OTOngoingTourService.m in Sources */,
 				A296B79620871CFC00F6AFBD /* OTChangeStateViewController.m in Sources */,
+				A24EA3872101D7A10027AB8B /* OTAddress.m in Sources */,
 				A296B79720871CFC00F6AFBD /* OTNotificationsRightsViewController.m in Sources */,
 				A296B79820871CFC00F6AFBD /* OTCategoryFromJsonService.m in Sources */,
 				A296B79920871CFC00F6AFBD /* OTVersionInfo.m in Sources */,
@@ -5220,6 +5237,7 @@
 				A296B83720871CFC00F6AFBD /* OTSavedMyEntouragesFilter.m in Sources */,
 				A296B83820871CFC00F6AFBD /* OTFeedItemJoinOptionsViewController.m in Sources */,
 				A296B83920871CFC00F6AFBD /* OTMyEntouragesTableDataSource.m in Sources */,
+				A24EA3832100A7780027AB8B /* UITextField+AutoSuggestion.m in Sources */,
 				A296B83A20871CFC00F6AFBD /* OTCustomAnnotation.m in Sources */,
 				A296B83C20871CFC00F6AFBD /* OTGuideMapDelegate.m in Sources */,
 				A296B83D20871CFC00F6AFBD /* UIView+entourage.m in Sources */,

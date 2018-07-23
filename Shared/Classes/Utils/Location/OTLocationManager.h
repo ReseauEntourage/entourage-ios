@@ -26,5 +26,6 @@
 - (void)stopLocationUpdates;
 - (void)showGeoLocationNotAllowedMessage:(NSString *)message;
 - (void)showLocationNotFoundMessage:(NSString *)message;
+- (CLLocation*)defaultLocationForNewActions;
 
 @end

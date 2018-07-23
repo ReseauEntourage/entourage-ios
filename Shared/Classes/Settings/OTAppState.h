@@ -54,5 +54,6 @@
 + (void)navigateToUserEmail:(UIViewController*)viewController;
 + (void)navigateToUserName:(UIViewController*)viewController;
 + (void)navigateToUserPicture:(UIViewController*)viewController;
-+ (void)navigateToRightsScreen:(UIViewController*)viewController;
++ (void)navigateToLocationRightsScreen:(UIViewController*)viewController;
++ (void)navigateToNotificationsRightsScreen:(UIViewController*)viewController;
 @end

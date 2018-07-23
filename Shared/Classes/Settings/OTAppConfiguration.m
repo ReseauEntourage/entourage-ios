@@ -501,14 +501,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
-+ (BOOL)isGeolocationMandatory {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
-    return YES;
-}
-
 + (BOOL)shouldShowIntroTutorial
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
@@ -525,7 +517,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         return NO;
     }
     
-    return NO;
+    return YES;
 }
 
 + (BOOL)shouldAllowLoginFromWelcomeScreen
@@ -544,6 +536,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     return YES;
+}
+
++ (BOOL)shouldAlwaysRequestUserToAddActionZone
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 + (BOOL)shouldAlwaysRequestUserLocation
