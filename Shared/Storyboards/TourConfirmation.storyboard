@@ -214,13 +214,21 @@ Un mail récapitulatif te sera envoyé.</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ntb-Rt-aGV">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="219"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Ntb-Rt-aGV" firstAttribute="top" secondItem="nnQ-wC-K4b" secondAttribute="top" id="1DA-nF-FWy"/>
+                            <constraint firstItem="Ntb-Rt-aGV" firstAttribute="leading" secondItem="nnQ-wC-K4b" secondAttribute="leading" id="3sT-xJ-c7b"/>
                             <constraint firstItem="bbq-3L-gMS" firstAttribute="centerX" secondItem="nnQ-wC-K4b" secondAttribute="centerX" id="4oo-M9-3Oo"/>
+                            <constraint firstItem="PdR-du-DSI" firstAttribute="top" secondItem="Ntb-Rt-aGV" secondAttribute="bottom" constant="448" id="51O-Z9-dzD"/>
                             <constraint firstItem="PdR-du-DSI" firstAttribute="top" secondItem="bbq-3L-gMS" secondAttribute="bottom" id="ADV-sd-rKd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bbq-3L-gMS" secondAttribute="trailing" constant="-20" id="dAs-wZ-5Re"/>
                             <constraint firstItem="bbq-3L-gMS" firstAttribute="leading" secondItem="nnQ-wC-K4b" secondAttribute="leadingMargin" constant="-20" id="gzW-mI-MSQ"/>
+                            <constraint firstAttribute="trailing" secondItem="Ntb-Rt-aGV" secondAttribute="trailing" id="qBd-Ma-Tlm"/>
                         </constraints>
                     </view>
                     <connections>

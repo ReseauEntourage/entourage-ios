@@ -47,17 +47,20 @@
             [OTAppState continueFromLoginScreen];
 
         } else {
-            [[OTLocationManager sharedInstance] startLocationUpdates];
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
             if (pnData) {
+                [[OTLocationManager sharedInstance] startLocationUpdates];
                 [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
             } else {
                 
-                [OTAppState navigateToAuthenticatedLandingScreen];
-                
                 if (![currentUser hasActionZoneDefined]) {
-                    
-                } 
+                    // Force the users to define action zone
+                    // The Entourage app gas Ignore button, while the pfp does not have it
+                    [OTAppState navigateToLocationRightsScreen:nil];
+                } else {
+                    [[OTLocationManager sharedInstance] startLocationUpdates];
+                    [OTAppState navigateToAuthenticatedLandingScreen];
+                }
             }
         }
     }

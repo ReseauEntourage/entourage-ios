@@ -256,27 +256,22 @@ NSString *const kKeychainPassword = @"entourage_user_password";
     [[OTHTTPRequestManager sharedInstance] POSTWithUrl:url
                                          andParameters:parameters
                                             andSuccess:^(id responseObject) {
+                                                NSDictionary *responseDict = responseObject;
+                                                NSLog(@"Authentication service response : %@", responseDict);
+                                                NSDictionary *responseAddress = responseDict[@"address"];
+                                                OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
+                                                OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+                                                user.address = address;
+                                                [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                                 
-                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                    NSDictionary *responseDict = responseObject;
-                                                    NSLog(@"Authentication service response : %@", responseDict);
-                                                    NSDictionary *responseAddress = responseDict[@"address"];
-                                                    OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
-                                                    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-                                                    user.address = address;
-                                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                                    
-                                                    if (completion) {
-                                                        completion(nil);
-                                                    }
-                                                });
+                                                if (completion) {
+                                                    completion(nil);
+                                                }
                                             }
                                             andFailure:^(NSError *error) {
-                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                    if (completion) {
-                                                        completion(error);
-                                                    }
-                                                });
+                                                if (completion) {
+                                                    completion(error);
+                                                }
                                             }
      ];
 }
