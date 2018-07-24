@@ -52,8 +52,14 @@
                                                         andText:entourage.streetAddress];
                 break;
             case 3: {
-                NSString *startDateInfo = entourage.startsAt ?
-                    [entourage.startsAt asStringWithFormat:@"EEEE dd MMMM yyyy"] : @"";
+                NSString *startDateInfo = @"";
+                if (entourage.startsAt) {
+                    startDateInfo = [NSString stringWithFormat:@"%@%@%@",
+                                     [entourage.startsAt asStringWithFormat:@"EEEE dd MMMM yyyy"],
+                                     OTLocalizedString(@"at_hour"),
+                                     entourage.startsAt.toTimeString];
+                    
+                }
                 [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"addEventDate")
                                                         andText:startDateInfo];
             }

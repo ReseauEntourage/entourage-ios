@@ -18,7 +18,7 @@ enum menuItemIndexType: NSInteger {
     case logout
 }
 
-final class OTPfpMenuViewController: UIViewController {
+final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
     var tableView = UITableView()
     var headerView = OTMenuHeaderView()
     private var menuItems = [OTMenuItem]()
@@ -170,6 +170,31 @@ final class OTPfpMenuViewController: UIViewController {
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    private func contactPFP() {
+        guard MFMailComposeViewController.canSendMail() else {
+            let alert = UIAlertController(title: "", message: "Email not available", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            return
+        }
+        
+        let composeViewController = MFMailComposeViewController()
+        composeViewController.mailComposeDelegate = self
+        composeViewController.setToRecipients(["voisin-age@petitsfreresdespauvres.fr"])
+        composeViewController.setSubject("")
+        composeViewController.setMessageBody("", isHTML: false)
+        
+        OTAppConfiguration.configureNavigationControllerAppearance(composeViewController)
+        present(composeViewController, animated: true, completion: nil)
+    }
+    
+    //MARK:- MFMailComposerDelegate
+    public func mailComposeController(_ controller: MFMailComposeViewController,
+                                      didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension OTPfpMenuViewController: UITableViewDelegate {
@@ -264,26 +289,5 @@ extension OTPfpMenuViewController: UITableViewDataSource {
             cell.logoutButton.setTitle(menuItem.title.uppercased(), for: .normal)
             return cell
         }
-    }
-}
-
-extension OTPfpMenuViewController: MFMailComposeViewControllerDelegate {
-    private func contactPFP() {
-        guard MFMailComposeViewController.canSendMail() else {
-            let alert = UIAlertController(title: "", message: "email not available", preferredStyle: .alert)
-            self.present(alert, animated: true, completion: nil)
-            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(defaultAction)
-            return
-        }
-    
-        let composeViewController = MFMailComposeViewController()
-        composeViewController.mailComposeDelegate = self
-        composeViewController.setToRecipients(["voisin-age@petitsfreresdespauvres.fr"])
-        composeViewController.setSubject("")
-        composeViewController.setMessageBody("", isHTML: false)
-        
-        OTAppConfiguration.configureNavigationControllerAppearance(composeViewController)
-        present(composeViewController, animated: true, completion: nil)
     }
 }

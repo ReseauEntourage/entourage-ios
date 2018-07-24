@@ -124,14 +124,20 @@
 
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    BOOL allowed = [notification readAllowedLocation];
-    [mixpanel.people set:@{@"EntourageGeolocEnable": allowed ? @"YES" : @"NO"}];
-    [FIRAnalytics setUserPropertyString:(allowed ? @"YES" : @"NO") forName:@"EntourageGeolocEnable"];
+    BOOL locationAllowed = [notification readAllowedLocation];
+    [mixpanel.people set:@{@"EntourageGeolocEnable": locationAllowed ? @"YES" : @"NO"}];
+    [FIRAnalytics setUserPropertyString:(locationAllowed ? @"YES" : @"NO") forName:@"EntourageGeolocEnable"];
     
-    if (allowed) {
-        [self goToNotifications];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    
+    if ([currentUser hasActionZoneDefined]) {
+        if (![currentUser isRegisteredForPushNotifications]) {
+            [self goToNotifications];
+        } else {
+            [OTAppState navigateToAuthenticatedLandingScreen];
+        }
     }
-    else {
+    else if (!locationAllowed) {
         [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
     }
 }
@@ -163,17 +169,26 @@
         if (error) {
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
         } else {
-            [SVProgressHUD dismiss];
+            [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"addressSaved")];
             
             if (self.isShownOnStartup) {
+                OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
                 [OTLogger logEvent:@"AcceptGeoloc"];
-                BOOL pushNotificationsEnabled = [[[NSUserDefaults standardUserDefaults] currentUser] isRegisteredForPushNotifications];
+                BOOL pushNotificationsEnabled = [currentUser isRegisteredForPushNotifications];
+                
                 if ([OTLocationManager sharedInstance].isAuthorized &&
-                    pushNotificationsEnabled) {
-                    [[OTLocationManager sharedInstance] startLocationUpdates];
+                    pushNotificationsEnabled &&
+                    [currentUser hasActionZoneDefined]) {
+                    [OTAppState navigateToAuthenticatedLandingScreen];
                 }
                 else if (!pushNotificationsEnabled) {
                     [self goToNotifications];
+                }
+                else if (![OTLocationManager sharedInstance].isAuthorized ) {
+                    [[OTLocationManager sharedInstance] startLocationUpdates];
+                    
+                } else {
+                    [OTAppState navigateToAuthenticatedLandingScreen];
                 }
             } else {
                 [self.navigationController popViewControllerAnimated:YES];

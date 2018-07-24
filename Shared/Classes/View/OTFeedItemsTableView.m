@@ -166,7 +166,7 @@
 }
 
 - (void)setNoFeeds {
-    self.lblEmptyTableReason.text = [OTAppAppearance noFeedsDescription];
+    self.lblEmptyTableReason.text = [OTAppAppearance noMoreFeedsDescription];
 }
 
 /********************************************************************************/
@@ -316,7 +316,7 @@
 }
 
 - (void)finishUpdatingFeeds:(BOOL)withFeeds {
-    if (withFeeds){
+    if (withFeeds) {
         self.tableFooterView = self.emptyFooterView;
         return;
     }
@@ -327,7 +327,7 @@
     self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
     
     if (self.items.count > 0)
-        self.infoLabel.text = isMaxRadius ? [OTAppAppearance noFeedsDescription] : [OTAppAppearance extendSearchParameterDescription];
+        self.infoLabel.text = isMaxRadius ? [OTAppAppearance noMoreFeedsDescription] : [OTAppAppearance extendSearchParameterDescription];
     else {
         if (!isMaxRadius) {
             self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);

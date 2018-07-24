@@ -171,7 +171,7 @@
     return OTLocalizedString(@"notificationNeedDescription");
 }
 
-+ (NSString *)noFeedsDescription
++ (NSString *)noMoreFeedsDescription
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_no_more_feeds");

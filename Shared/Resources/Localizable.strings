@@ -23,6 +23,7 @@
 "generic_error" = "Une erreur s'est produite. Vérifiez votre connexion réseau et réessayez.";
 "connection_error" = "Echec de la connexion";
 "connection_imposible" = "Connexion impossible";
+"addressSaved" = "Adresse enregistrée";
 
 "distance_250" = "La rencontre est trop éloignée de la maraude";
 "yes" = "Oui";
@@ -363,6 +364,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "addEventAddress" = "Adresse *";
 "addEventTitle" = "Titre *";
 "addEventDate" = "Date *";
+"at_hour" = " à ";
 "descriptionTitle" = "Description";
 "discoverEntourage" = "Découvrez Entourage";
 "guideviewcontroller_title" = "GUIDE";

@@ -25,7 +25,7 @@
 + (NSString *)defineActionZoneTitleForUser:(OTUser*)user;
 + (NSString *)defineActionZoneSampleAddress;
 + (NSAttributedString *)defineActionZoneFormattedDescription;
-+ (NSString *)noFeedsDescription;
++ (NSString *)noMoreFeedsDescription;
 + (NSString *)noMapFeedsDescription;
 + (NSString *)extendSearchParameterDescription;
 + (NSString *)extendMapSearchParameterDescription;

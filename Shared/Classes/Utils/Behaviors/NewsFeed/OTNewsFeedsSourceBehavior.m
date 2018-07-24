@@ -39,7 +39,7 @@
 
 - (IBAction)increaseRadius {
     int sizeOfArray = (int)RADIUS_ARRAY.count;
-    if(self.radiusIndex < sizeOfArray - 1) {
+    if (self.radiusIndex < sizeOfArray - 1) {
         self.radiusIndex++;
         [self.feedItems removeAllObjects];
         [self.delegate itemsRemoved];
@@ -57,7 +57,6 @@
         [self.delegate itemsUpdated];
         [self.tableDelegate finishUpdatingFeeds:NO];
     }
-
 }
 
 - (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
