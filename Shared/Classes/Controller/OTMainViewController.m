@@ -1211,11 +1211,16 @@
 
 - (void)zoomToCurrentLocation:(id)sender {
     CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
-    if (currentLocation) {
-        CLLocationDistance distance = MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.mapView.centerCoordinate), MKMapPointForCoordinate(currentLocation.coordinate));
+    [self zoomMapToLocation:currentLocation];
+}
+
+- (void)zoomMapToLocation:(CLLocation*)location {
+    if (location) {
+        CLLocationDistance distance = MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.mapView.centerCoordinate), MKMapPointForCoordinate(location.coordinate));
         BOOL animatedSetCenter = (distance < MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS);
-        [self.mapView setCenterCoordinate:currentLocation.coordinate animated:animatedSetCenter];
-        if(self.toursMapDelegate.isActive && !self.isRegionSetted) {
+        [self.mapView setCenterCoordinate:location.coordinate animated:animatedSetCenter];
+        
+        if (self.toursMapDelegate.isActive && !self.isRegionSetted) {
             self.isRegionSetted = YES;
             [self reloadFeeds];
         }

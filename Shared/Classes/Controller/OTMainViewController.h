@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSString *webview;
 
 - (void)zoomToCurrentLocation:(id)sender;
+- (void)zoomMapToLocation:(CLLocation*)location;
 - (void)willChangePosition;
 - (void)didChangePosition;
 - (void)reloadPois;
