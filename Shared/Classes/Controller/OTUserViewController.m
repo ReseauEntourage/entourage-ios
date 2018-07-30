@@ -341,11 +341,11 @@ typedef NS_ENUM(NSInteger) {
         self.currentUser.sid.integerValue == self.user.sid.integerValue) {
         [mSections addObject:@(SectionTypeEntourages)];
     }
-    
-    if (self.currentUser.sid.integerValue == self.user.sid.integerValue &&
-        [self.currentUser hasActionZoneDefined]) {
-        [mSections addObject:@(SectionTypeActionZone)];
-    }
+    // https://jira.mytkw.com/browse/EMA-1847
+//    if (self.currentUser.sid.integerValue == self.user.sid.integerValue &&
+//        [self.currentUser hasActionZoneDefined]) {
+//        [mSections addObject:@(SectionTypeActionZone)];
+//    }
     
     [mSections addObject:@(SectionTypeVerification)];
     

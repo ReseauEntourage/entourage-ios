@@ -79,8 +79,7 @@
                 [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
                 
             } else {
-                // fallback
-                [self popToProfile];
+                [OTAppState navigateToPermissionsScreens];
             }
                 
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationProfilePictureUpdated object:self];
@@ -98,16 +97,23 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"PreviewToGeoSegue"]) {
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        OTGeolocationRightsViewController *controller = (OTGeolocationRightsViewController *)segue.destinationViewController;
+        controller.isShownOnStartup = YES;
     }
 }
 
 - (void)popToProfile {
+    BOOL profileFound = NO;
     for (UIViewController* viewController in self.navigationController.viewControllers) {
         if ([viewController isKindOfClass:[OTUserEditViewController class]]) {
             [self.navigationController popToViewController:viewController animated:YES];
+            profileFound = YES;
             break;
         }
+    }
+    
+    if (!profileFound) {
+        [OTAppState navigateToAuthenticatedLandingScreen];
     }
 }
 - (UIImage*)cropVisibleArea {

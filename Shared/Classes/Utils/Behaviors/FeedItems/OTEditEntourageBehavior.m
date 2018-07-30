@@ -44,7 +44,7 @@
 
 - (void)setupCategory {
     NSArray *categorySource = [OTCategoryFromJsonService getData];
-    OTCategoryType *categoryType;
+    OTCategoryType *categoryType = nil;
     NSDictionary *categoryDict = [OTCategory createDictionary];
     if ([self.entourage.entourage_type isEqualToString:@"contribution"]) {
         for (OTCategoryType *type in categorySource)
@@ -55,8 +55,16 @@
             if ([type.type isEqualToString:@"ask_for_help"])
                 categoryType = type;
     }
-    NSNumber *indexNumber = [categoryDict valueForKey:self.entourage.category];
-    self.entourage.categoryObject = categoryType.categories[indexNumber.intValue];
+    
+    if (categoryType) {
+        NSNumber *indexNumber = [categoryDict valueForKey:self.entourage.category];
+        if (indexNumber.intValue < categoryType.categories.count) {
+            self.entourage.categoryObject = categoryType.categories[indexNumber.intValue];
+        } else {
+            // it means we are editing an outing
+            self.entourage.categoryObject = [OTCategoryFromJsonService sampleEntourageEventCategory];
+        }
+    }
 }
 
 #pragma mark - EntourageEditorDelegate
@@ -65,7 +73,7 @@
     [[[OTFeedItemFactory createFor:self.entourage] getChangedHandler] updateWith:entourage];
     NSDictionary* notificationInfo = @{ kNotificationEntourageChangedEntourageKey: entourage };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageChanged object:nil userInfo:notificationInfo];
-    [self.owner dismissViewControllerAnimated:NO completion:nil];
+    [self.owner dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

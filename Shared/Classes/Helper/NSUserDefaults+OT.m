@@ -13,6 +13,7 @@ static NSString *const kMyEntouragesFilter = @"kMyEntouragesFilter_";
 static NSString *const kTourOngoing = @"kTour";
 static NSString *const kTourPoints = @"kTourPoints";
 static NSString *const kIsFirstLogin = @"kIsFirstLogin";
+static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 @implementation NSUserDefaults (OT)
 
@@ -127,6 +128,21 @@ static NSString *const kIsFirstLogin = @"kIsFirstLogin";
 - (void)setCompleteFirstLogin
 {
     [[NSUserDefaults standardUserDefaults] setObject:@(0) forKey:kIsFirstLogin];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)arePushNotificationsRefused {
+    
+    if ([[[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys] containsObject:kPushNotificationRefused]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)setArePushNotificationsRefused:(BOOL)arePushNotificationsRefused
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(arePushNotificationsRefused) forKey:kPushNotificationRefused];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

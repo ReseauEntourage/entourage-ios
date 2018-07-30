@@ -55,6 +55,10 @@
         if (body) {
             [self.mailController setMessageBody:body isHTML:NO];
         }
+        
+        [OTAppConfiguration configureNavigationControllerAppearance:self.owner.navigationController];
+        [OTAppConfiguration configureMailControllerAppearance:self.mailController];
+        
         [self.owner showViewController:self.mailController sender:self];
         return YES;
     }

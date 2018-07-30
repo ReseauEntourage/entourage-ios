@@ -1008,9 +1008,8 @@
     }
     [OTLogger logEvent:eventName];
     
-    BOOL options = !IS_PRO_USER && !self.poisMapDelegate.isActive;
     [OTAppState showFeedAndMapActionsFromController:self
-                                     options:options
+                                        showOptions:YES
                                        withDelegate:self
                                      isEditingEvent:self.addEditEvent];
 }

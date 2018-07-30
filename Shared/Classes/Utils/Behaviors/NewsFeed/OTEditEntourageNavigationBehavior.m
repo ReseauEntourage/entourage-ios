@@ -210,7 +210,8 @@
     
     [self.editEntourageSource updateLocationAddress:place.formattedAddress
                                           placeName:place.name
-                                            placeId:place.placeID];
+                                            placeId:place.placeID
+                                     displayAddress:place.formattedAddress];
 }
 
 - (void)viewController:(GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(NSError *)error {

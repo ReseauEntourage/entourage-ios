@@ -362,6 +362,12 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
 }
 
++ (void)configureMailControllerAppearance:(MFMailComposeViewController *)mailController {
+    mailController.navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    mailController.navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
+    mailController.navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+}
+
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
 {
     navigationController.automaticallyAdjustsScrollViewInsets = NO;
@@ -415,6 +421,21 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    
+    if ([NSUserDefaults standardUserDefaults].arePushNotificationsRefused) {
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
+            NSString *urlString = [NSString stringWithFormat:@"App-Prefs:root=NOTIFICATIONS_ID&path=%@", [OTAppConfiguration iTunesAppId]];
+            NSURL *url = [NSURL URLWithString:urlString];
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        } else {
+            // ios 9.x
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setArePushNotificationsRefused:YES];
+    
     NSLog(@"Push registration failure : %@", [error localizedDescription]);
     NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:NO] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
@@ -651,6 +672,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
 
     return YES;
+}
+
++ (NSString*)iTunesAppId {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return @"1388843838";
+    }
+    
+    return @"1072244410";
 }
 
 @end

@@ -155,7 +155,8 @@
 }
 
 - (BOOL)isAddressValid {
-    NSArray* words = [self.editTableSource.entourage.streetAddress componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *address = self.editTableSource.entourage ? self.self.editTableSource.entourage.displayAddress : self.editTableSource.entourage.streetAddress;
+    NSArray *words = [address componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *nospacestring = [words componentsJoinedByString:@""];
     if (!nospacestring.length) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"invalidAddress") message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -214,15 +215,18 @@
     [SVProgressHUD show];
     [[OTEncounterService new] updateEntourage:self.editTableSource.entourage
                                   withSuccess:^(OTEntourage *sentEntourage) {
-        self.entourage = sentEntourage;
-        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageUpdated")];
-          if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {
-              [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject: self.editTableSource.entourage];
-          }
-    } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotUpdated")];
-        sender.enabled = YES;
-    }];
+                                      self.entourage = sentEntourage;
+                                      
+                                      dispatch_async(dispatch_get_main_queue(), ^{
+                                          [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageUpdated")];
+                                          if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {
+                                              [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject: self.entourage];
+                                          }
+                                      });
+                                  } failure:^(NSError *error) {
+                                      [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotUpdated")];
+                                      sender.enabled = YES;
+                                  }];
 }
 
 #pragma mark - Segue

@@ -12,6 +12,7 @@
 #import <Mixpanel/Mixpanel.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <MessageUI/MessageUI.h>
 
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsService.h"
@@ -32,6 +33,7 @@
 + (UITabBarController*)configureMainTabBar;
 + (void)configureTabBarAppearance:(UITabBarController*)tabBarController;
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController;
++ (void)configureMailControllerAppearance:(MFMailComposeViewController *)mailController;
 
 + (void)applicationDidBecomeActive:(UIApplication *)application;
 + (void)applicationWillEnterForeground:(UIApplication *)application;
@@ -113,5 +115,8 @@
 
 // Configures if the user can close a specific feed item/group
 + (BOOL)supportsClosingFeedAction:(OTFeedItem*)item;
+
+// Itunes app id (currently only for prod version there is an app created in iTunes)
++ (NSString*)iTunesAppId;
 
 @end

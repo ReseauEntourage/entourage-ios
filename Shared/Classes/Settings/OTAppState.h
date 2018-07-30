@@ -24,6 +24,7 @@
 
 + (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;
++ (void)navigateToPermissionsScreens;
 + (void)continueFromStartupScreen;
 + (void)continueFromWelcomeScreen;
 + (void)continueFromLoginScreen;
@@ -40,7 +41,7 @@
                         withFullMapVisible:(BOOL)isFullMapVisible;
     
 + (void)showFeedAndMapActionsFromController:(UIViewController*)controller
-                             options:(BOOL)options
+                                showOptions:(BOOL)showOptions
                                withDelegate:(id<EntourageEditorDelegate>)delegate
                              isEditingEvent:(BOOL)isEditingEvent;
 

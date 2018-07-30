@@ -23,6 +23,10 @@
 @implementation OTEditEntourageTableSource
 
 - (void)configureWith:(OTEntourage *)entourage {
+    
+    self.tblEditEntourage.dataSource = self;
+    self.tblEditEntourage.delegate = self;
+    
     self.entourage = entourage ? entourage : [OTEntourage new];
     self.entourage.title = entourage.title;
     self.entourage.desc = entourage.desc == nil ? @"" : entourage.desc;
@@ -34,17 +38,20 @@
     self.entourage.categoryObject = entourage.categoryObject;
     self.entourage.streetAddress = entourage.streetAddress;
     self.entourage.startsAt = entourage.startsAt;
+    self.entourage.displayAddress = entourage.displayAddress;
+    self.entourage.googlePlaceId = entourage.googlePlaceId;
+    self.entourage.placeName = entourage.placeName;
     
     if ([entourage isOuting]) {
         [self updateLocationAddress:entourage.streetAddress
                           placeName:entourage.placeName
-                            placeId:entourage.googlePlaceId];
+                            placeId:entourage.googlePlaceId
+                     displayAddress:entourage.displayAddress];
     } else {
         [self updateLocationTitle];
     }
     
-    self.tblEditEntourage.dataSource = self;
-    self.tblEditEntourage.delegate = self;
+    [self.tblEditEntourage reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -137,12 +144,13 @@
 
 - (void)updateLocationAddress:(NSString*)streetAddress
                     placeName:(NSString*)placeName
-                      placeId:(NSString*)placeId {
+                      placeId:(NSString*)placeId
+               displayAddress:(NSString*)displayAddress {
     self.entourage.streetAddress = streetAddress;
     self.entourage.placeName = placeName;
     self.entourage.googlePlaceId = placeId;
     
-    self.locationText = self.entourage.streetAddress;
+    self.locationText = self.entourage.streetAddress ?: self.entourage.displayAddress;
     [self updateTexts];
 }
 

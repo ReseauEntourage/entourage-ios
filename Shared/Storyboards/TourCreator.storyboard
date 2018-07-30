@@ -193,6 +193,7 @@
                     </view>
                     <connections>
                         <outlet property="contentView" destination="91T-5H-P5K" id="85L-gz-ZdC"/>
+                        <outlet property="selectTypeTitleLabel" destination="xfG-Cn-2wT" id="2Ac-Uk-CuL"/>
                         <outletCollection property="typeButtons" destination="sXS-gy-T2w" id="ZbT-Mg-bfH"/>
                         <outletCollection property="typeButtons" destination="abA-o7-WJR" id="RfJ-z9-Hv7"/>
                         <outletCollection property="typeButtons" destination="pWk-zO-UZk" id="2Hk-ui-Smg"/>

@@ -15,6 +15,7 @@
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *typeButtons;
 @property (nonatomic, strong) NSString *currentTourType;
 @property (nonatomic, strong) IBOutlet UIView *contentView;
+@property (nonatomic, strong) IBOutlet UILabel *selectTypeTitleLabel;
 
 @end
 
@@ -92,7 +93,7 @@
 
 - (IBAction)viewDidTap:(UITapGestureRecognizer *)recognizer {
     CGPoint point = [recognizer locationInView:self.view];
-    if (point.y < self.contentView.frame.origin.y) {
+    if (point.y < self.selectTypeTitleLabel.frame.origin.y) {
         [OTAppState hideTabBar:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
