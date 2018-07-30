@@ -32,24 +32,32 @@
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [self.owner.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-    if(result == MFMailComposeResultSent)
+    
+    if (result == MFMailComposeResultSent) {
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"mail_sent")];
-    else if(result != MFMailComposeResultCancelled)
+    }
+    else if (result != MFMailComposeResultCancelled) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"mail_send_failure")];
+    }
 }
 
 #pragma mark - private methods
 
 - (void)sendMail:(UITextView *)textView range:(NSRange)range {
-    if([MFMailComposeViewController canSendMail]) {
+    if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *mailer = [MFMailComposeViewController new];
         NSString *to = [textView.text substringWithRange:range];
         [mailer setToRecipients:@[to]];
         mailer.mailComposeDelegate = self;
+        
+        [OTAppConfiguration configureNavigationControllerAppearance:self.owner.navigationController];
+        [OTAppConfiguration configureMailControllerAppearance:mailer];
+        
         [self.owner showViewController:mailer sender:self];
     }
-    else
+    else {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"mail_not_configured")];
+    }
 }
 
 @end

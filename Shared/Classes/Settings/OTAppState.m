@@ -55,11 +55,11 @@
                 
                 if (![currentUser hasActionZoneDefined]) {
                     // Force the users to define action zone
-                    // The Entourage app gas Ignore button, while the pfp does not have it
+                    // The Entourage app has Ignore button, while the pfp does not have it
                     [OTAppState navigateToLocationRightsScreen:nil];
                 } else {
                     [[OTLocationManager sharedInstance] startLocationUpdates];
-                    [OTAppState navigateToAuthenticatedLandingScreen];
+                    [OTAppState navigateToPermissionsScreens];
                 }
             }
         }
@@ -230,8 +230,6 @@
         }
     } else {
         
-         [OTAppState navigateToAuthenticatedLandingScreen];
-        
         // For all next logins
         // If user is forced to set picture
         if ([OTAppConfiguration shouldAlwaysRequestUserToUploadPicture]) {
@@ -263,6 +261,8 @@
         
     } else if (![currentUser hasActionZoneDefined]) {
         // Navigate to add rights screens (action zone, notifications)
+        // Force the users to define action zone
+        // The Entourage app has Ignore button, while the pfp does not have it
         [OTAppState navigateToLocationRightsScreen:currentViewController];
         
     } else if (![currentUser isRegisteredForPushNotifications]) {
@@ -356,9 +356,9 @@
 }
     
 + (void)showFeedAndMapActionsFromController:(UIViewController*)controller
-                          options:(BOOL)options
+                                showOptions:(BOOL)showOptions
                                withDelegate:(id<EntourageEditorDelegate>)delegate
-                                    isEditingEvent:(BOOL)isEditingEvent {
+                             isEditingEvent:(BOOL)isEditingEvent {
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
 
@@ -368,11 +368,11 @@
         return;
     }
     
-    if (options) {
-        [controller performSegueWithIdentifier:@"EntourageEditor" sender:controller];
+    if (showOptions) {
+        [controller performSegueWithIdentifier:@"OTMapOptionsSegue" sender:controller];
     }
     else {
-        [controller performSegueWithIdentifier:@"OTMapOptionsSegue" sender:controller];
+        [controller performSegueWithIdentifier:@"EntourageEditor" sender:controller];
     }
 }
 

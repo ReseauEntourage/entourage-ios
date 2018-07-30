@@ -105,7 +105,7 @@ class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableView
         
         switch indexPath.section {
         case 0:
-            self.openStoreProductWithiTunesItemIdentifier(identifier: ITUNES_APP_ID);
+            self.openStoreProductWithiTunesItemIdentifier(identifier: OTAppConfiguration.iTunesAppId());
             break
         case 1:
             let url = URL(string: "http://bit.ly/cgu_applivoisin-age")

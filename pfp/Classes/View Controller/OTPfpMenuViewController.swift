@@ -186,7 +186,8 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
         composeViewController.setSubject("")
         composeViewController.setMessageBody("", isHTML: false)
         
-        OTAppConfiguration.configureNavigationControllerAppearance(composeViewController)
+        OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
+        OTAppConfiguration.configureMailControllerAppearance(composeViewController)
         present(composeViewController, animated: true, completion: nil)
     }
     

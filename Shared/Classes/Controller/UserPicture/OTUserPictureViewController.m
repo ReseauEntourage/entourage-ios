@@ -15,6 +15,7 @@
 #import "OTPhotoPickerBehavior.h"
 #import "UIBarButtonItem+factory.h"
 #import "NSUserDefaults+OT.h"
+#import "OTGeolocationRightsViewController.h"
 #import "entourage-Swift.h"
 
 #define PREVIEW_PICTURE_SEGUE @"PreviewPictureSegue"
@@ -74,6 +75,10 @@
         OTPicturePreviewViewController *controller = (OTPicturePreviewViewController*)[segue destinationViewController];
         controller.image = self.image;
         controller.isEditingPictureForCurrentUser = self.isEditingPictureForCurrentUser;
+        
+    } else if ([segue.identifier isEqualToString:@"SkipPreviewSegue"]) {
+        OTGeolocationRightsViewController *actionZoneController = (OTGeolocationRightsViewController*)[segue destinationViewController];
+        actionZoneController.isShownOnStartup = !self.isEditingPictureForCurrentUser;
     }
 }
 

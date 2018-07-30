@@ -133,6 +133,9 @@
     [composeVC setSubject:@""];
     [composeVC setMessageBody:@"" isHTML:NO];
     
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    [OTAppConfiguration configureMailControllerAppearance:composeVC];
+    
     // Present the view controller modally.
     [self presentViewController:composeVC animated:YES completion:nil];
 }

@@ -178,6 +178,7 @@ static char keyboardFrameBeginRectKey;
         height = MIN(height, maxHeight); // set height = `maxHeight` if it's smaller than current `height`
         
         frame.origin.y -= height;
+        frame.origin.y -= 20;
     }
     
     frame.size.height = height;

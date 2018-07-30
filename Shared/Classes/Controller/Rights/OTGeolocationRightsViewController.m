@@ -21,6 +21,7 @@
 #import "OTAuthService.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "NSUserDefaults+OT.h"
+#import "OTUser.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -71,7 +72,6 @@
                                              selector:@selector(locationAuthorizationChanged:)
                                                  name: kNotificationLocationAuthorizationChanged
                                                object:nil];
-    [[IQKeyboardManager sharedManager] setEnable:NO];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
@@ -105,7 +105,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
 }
 
@@ -232,11 +231,24 @@
     }
     
     GMSAutocompletePrediction *prediction = self.googlePlacePredictions[indexPath.row];
-    cell.textLabel.attributedText = prediction.attributedPrimaryText;
     cell.contentView.backgroundColor = UIColor.clearColor;
     cell.backgroundColor = [[ApplicationTheme shared].backgroundThemeColor colorWithAlphaComponent:0.8];
     cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont fontWithName:@"SFUIText-Light" size:15];
+    
+    UIFont *regularFont = [UIFont fontWithName:@"SFUIText-Light" size:15];
+    UIFont *boldFont = [UIFont fontWithName:@"SFUIText-Bold" size:15];
+    
+    NSMutableAttributedString *bolded = [prediction.attributedFullText mutableCopy];
+    [bolded enumerateAttribute:kGMSAutocompleteMatchAttribute
+                               inRange:NSMakeRange(0, bolded.length)
+                               options:0
+                            usingBlock:^(id value, NSRange range, BOOL *stop) {
+                                  UIFont *font = (value == nil) ? regularFont : boldFont;
+                                 [bolded addAttribute:NSFontAttributeName value:font range:range];
+                                }];
+    
+    cell.textLabel.attributedText = bolded;
+    cell.textLabel.numberOfLines = 2;
     
     return cell;
 }
@@ -255,7 +267,7 @@
 - (void)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
     NSLog(@"Selected suggestion at index row - %ld", (long)indexPath.row);
     GMSAutocompletePrediction *prediction = self.googlePlacePredictions[indexPath.row];
-    self.textField.text = [prediction attributedPrimaryText].string;
+    self.textField.text = [prediction attributedFullText].string;
     self.selectedAddress = prediction;
     [self.textField resignFirstResponder];
 }
