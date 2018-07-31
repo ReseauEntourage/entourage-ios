@@ -113,10 +113,16 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     [OTLogger logEvent:@"OpenMenu"];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

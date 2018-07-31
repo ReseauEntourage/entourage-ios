@@ -68,6 +68,7 @@ static char keyboardFrameBeginRectKey;
         
         if ([self.autoSuggestionDataSource respondsToSelector:@selector(autoSuggestionField:textChanged:)]) {
             [self.autoSuggestionDataSource autoSuggestionField:self textChanged:self.text];
+            [self.tableView flashScrollIndicators];
         }
     } else {
         [self hideAutoSuggestion];
@@ -176,6 +177,8 @@ static char keyboardFrameBeginRectKey;
     } else {
         CGFloat maxHeight = frame.origin.y - INSET;  // max possible height
         height = MIN(height, maxHeight); // set height = `maxHeight` if it's smaller than current `height`
+        
+        height += cellHeight / 2; // in order to show the list is scrollable
         
         frame.origin.y -= height;
         frame.origin.y -= 20;

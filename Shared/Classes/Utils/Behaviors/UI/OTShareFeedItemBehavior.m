@@ -34,18 +34,18 @@
     [OTLogger logEvent:@"OpenNativeShare"];
     [OTLogger logEvent:@"ShareLinkAsNonMember"];
     NSString *content = [NSString stringWithFormat:OTLocalizedString(@"share_public"), self.feedItem.shareUrl];
-    [self share:content];
+    [self share:content excludedActivities:@[UIActivityTypeCopyToPasteboard]];
 }
 
 - (void)shareMember:(id)sender {
     NSString *content = [self.currentUser.sid isEqualToNumber:self.feedItem.author.uID] ? @"share_creator" : @"share_joiner";
     content = [NSString stringWithFormat:OTLocalizedString(content), self.feedItem.shareUrl];
-    [self share:content];
+    [self share:content excludedActivities:nil];
 }
 
 #pragma mark - private methods
 
-- (void)share:(NSString *)content {
+- (void)share:(NSString *)content excludedActivities:(NSArray*)excludedActivities {
     NSURL *url = [NSURL URLWithString:self.feedItem.shareUrl];
     OTActivityProvider *activity = [[OTActivityProvider alloc] initWithPlaceholderItem:@{@"body":content, @"url": url}];
     activity.emailBody = content;
@@ -53,6 +53,7 @@
     activity.url = url;
     NSArray *objectsToShare = @[activity];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    activityVC.excludedActivityTypes = excludedActivities;
     [self.owner presentViewController:activityVC animated:YES completion:nil];
 }
 
