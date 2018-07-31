@@ -119,4 +119,7 @@
 // Itunes app id (currently only for prod version there is an app created in iTunes)
 + (NSString*)iTunesAppId;
 
+// Specify if the action of "plus button" shows options or directly launches the entourage editor
++ (BOOL)shouldAutoLaunchEditorOnAddAction;
+
 @end

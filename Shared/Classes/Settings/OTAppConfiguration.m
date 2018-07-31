@@ -604,6 +604,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return [user.type isEqualToString:USER_TYPE_PRO];
 }
 
++ (BOOL)shouldAutoLaunchEditorOnAddAction
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 + (BOOL)shouldShowCreatorImagesForNewsFeedItems {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;

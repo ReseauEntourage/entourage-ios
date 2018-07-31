@@ -1168,12 +1168,16 @@
 #pragma mark - EntourageEditorDelegate
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
-
-    [self dismissViewControllerAnimated:NO completion:nil];
+    if ([entourage isOuting] && ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction]) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
     
     [self.editEntourgeBehavior.owner dismissViewControllerAnimated:YES completion:^{
         [self forceGetNewData];
-        self.inviteBehaviorTriggered = YES;
+        
+        // Auto show the share popup only for entourage, not also for pfp, where a native popover is displayed
+        self.inviteBehaviorTriggered = ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction];
+        
         [self showFeedInfo:entourage];
     }];
 }
