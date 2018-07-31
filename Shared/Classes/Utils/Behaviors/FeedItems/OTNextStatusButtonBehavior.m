@@ -114,7 +114,9 @@
         [self feedItemClosedWithReason:reason];
     }
     else {
-        [self.owner performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
+        [OTAppState showClosingConfirmationForFeedItem:self.feedItem
+                                        fromController:self.owner
+                                                sender:self];
     }
 }
 

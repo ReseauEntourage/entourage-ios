@@ -45,6 +45,10 @@
                                withDelegate:(id<EntourageEditorDelegate>)delegate
                              isEditingEvent:(BOOL)isEditingEvent;
 
++ (void)showClosingConfirmationForFeedItem:(OTFeedItem*)feedItem
+                            fromController:(UIViewController*)controller
+                                    sender:(id)sender;
+
 + (void)launchInviteActionForFeedItem:(OTFeedItem*)item
                        fromController:(UIViewController*)controller
                              delegate:(id<InviteSourceDelegate>)delegate;

@@ -45,6 +45,7 @@
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem;
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
++ (NSAttributedString*)formattedAuthorDescriptionForMessageItem:(OTEntourage*)item;
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem;
 + (NSString *)eventTitle;
