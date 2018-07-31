@@ -901,6 +901,7 @@
         [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
         [self reloadFeeds];
     }
+
 }
 
 - (void)clearMap {
