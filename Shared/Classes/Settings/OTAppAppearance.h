@@ -55,4 +55,6 @@
 + (NSString *)joinEntourageButtonTitleForFeedItem:(OTFeedItem*)feedItem;
 + (UIColor*)colorForNoDataPlacholderImage;
 + (UIColor*)colorForNoDataPlacholderText;
++ (NSString*)sampleTitleForNewEvent;
++ (NSString*)sampleDescriptionForNewEvent;
 @end

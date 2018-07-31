@@ -286,11 +286,15 @@
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeEntourage) {
         [controller performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
     } else {
-        OTMailSenderBehavior *emailSender = [[OTMailSenderBehavior alloc] init];
-        emailSender.owner = controller;
-        NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"pfp_edit_voisinage_mail_subject"), entourage.title];
-        NSString *body = [NSString stringWithFormat:OTLocalizedString(@"pfp_edit_voisinage_mail_content"), entourage.desc];
-        [emailSender sendMailWithSubject:subject andRecipient:CONTACT_PFP_TO body:body];
+        if ([entourage isOuting]) {
+            [controller performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
+        } else {
+            OTMailSenderBehavior *emailSender = [[OTMailSenderBehavior alloc] init];
+            emailSender.owner = controller;
+            NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"pfp_edit_voisinage_mail_subject"), entourage.title];
+            NSString *body = [NSString stringWithFormat:OTLocalizedString(@"pfp_edit_voisinage_mail_content"), entourage.desc];
+            [emailSender sendMailWithSubject:subject andRecipient:CONTACT_PFP_TO body:body];
+        }
     }
 }
 
@@ -314,6 +318,7 @@
         activity.url = url;
         NSArray *objectsToShare = @[activity];
         UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+        activityVC.excludedActivityTypes = @[UIActivityTypeCopyToPasteboard];
         [controller presentViewController:activityVC animated:YES completion:nil];
     }
 }

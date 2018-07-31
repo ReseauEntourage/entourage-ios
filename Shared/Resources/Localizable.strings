@@ -231,7 +231,9 @@ Proposez une structure";
 "entourageCreated" = "Entourage créé";
 "entourageNotCreated" = "Echec de la création de l’entourage";
 "entourageUpdated" = "Entourage mis à jour";
+"eventUpdated" = "Événement mis à jour";
 "entourageNotUpdated" = "Impossible de mettre à jour l’entourage";
+"eventNotUpdated" = "Impossible de mettre à jour l’événement";
 "entourageQuitted" = "Entourage clôturé.";
 "addressBookDenied" = "Impossible d’accéder au carnet d’adresses. Vous devez activer la permission depuis les paramètres.";
 "inviteByPhoneFailed" = "Impossible d’inviter ce numéro de téléphone.";
@@ -245,6 +247,8 @@ Proposez une structure";
 Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
 "promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
+"event_title_example" = "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017";
+"event_desc_example" = "Besoin de bénévoles pour la collecte nationale des Restos du Coeur dans notre équipe locale.\nSamedi de 17h à 21h ➜ 5 bénévoles \nDimanche de 10h à 13h ➜ 2 bénévoles \nEnsemble aidons ceux qui en ont vraiment besoin ! Merci d'avance";
 
 // Feed Item details
 "item_option_close" = "Arrêter";
