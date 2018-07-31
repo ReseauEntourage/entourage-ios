@@ -1168,8 +1168,9 @@
 #pragma mark - EntourageEditorDelegate
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
-
-    [self dismissViewControllerAnimated:NO completion:nil];
+    if ([entourage isOuting]) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }
     
     [self.editEntourgeBehavior.owner dismissViewControllerAnimated:YES completion:^{
         [self forceGetNewData];
