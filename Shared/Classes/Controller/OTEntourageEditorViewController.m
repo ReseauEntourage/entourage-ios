@@ -155,7 +155,7 @@
 }
 
 - (BOOL)isAddressValid {
-    NSString *address = self.editTableSource.entourage ? self.self.editTableSource.entourage.displayAddress : self.editTableSource.entourage.streetAddress;
+    NSString *address = self.editTableSource.entourage.streetAddress ?: self.editTableSource.entourage.displayAddress;
     NSArray *words = [address componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *nospacestring = [words componentsJoinedByString:@""];
     if (!nospacestring.length) {
