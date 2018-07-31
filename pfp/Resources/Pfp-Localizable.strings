@@ -54,6 +54,8 @@
 "pfp_filter_events_title" = "Sorties";
 "pfp_filter_private_circles_title" = "Voisinages d’une personne";
 "pfp_filter_neighborhoods_title" = "Voisinages de quartier";
+"pfp_event_title_example" = "Atelier de créativité";
+"pfp_event_desc_example" = "Je vous propose de nous retrouver pour un atelier de créativité (peinture, collage, ...) ce vendredi.";
 
 "pfp_promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la sortie %@ grâce à une notification envoyée aux téléphones des personnes membres des voisinages suivants :\nMerci";
 

@@ -10,6 +10,7 @@
 #import "OTCategoryType.h"
 #import "OTCategory.h"
 #import "OTAPIKeys.h"
+#import "OTAppAppearance.h"
 
 @implementation OTCategoryFromJsonService
 
@@ -73,8 +74,8 @@
     category.entourage_type = @"ask_for_help";
     category.category = @"event";
     category.title = @"Si on se rencontrait ?";
-    category.title_example = @"Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017";
-    category.description_example = @"Besoin de bénévoles pour la collecte nationale des Restos du Coeur dans notre équipe locale.\nSamedi de 17h à 21h ➜ 5 bénévoles \nDimanche de 10h à 13h ➜ 2 bénévoles \nEnsemble aidons ceux qui en ont vraiment besoin ! Merci d'avance";
+    category.title_example = [OTAppAppearance sampleTitleForNewEvent];
+    category.description_example = [OTAppAppearance sampleDescriptionForNewEvent];
     
     return category;
 }

@@ -213,20 +213,27 @@
 - (void)updateEntourage:(UIButton *)sender {
     sender.enabled = NO;
     [SVProgressHUD show];
-    [[OTEncounterService new] updateEntourage:self.editTableSource.entourage
-                                  withSuccess:^(OTEntourage *sentEntourage) {
-                                      self.entourage = sentEntourage;
-                                      
-                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                          [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageUpdated")];
-                                          if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {
-                                              [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject: self.entourage];
-                                          }
-                                      });
-                                  } failure:^(NSError *error) {
-                                      [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotUpdated")];
-                                      sender.enabled = YES;
-                                  }];
+    [[OTEncounterService new]
+     updateEntourage:self.editTableSource.entourage
+     withSuccess:^(OTEntourage *sentEntourage) {
+         self.entourage = sentEntourage;
+         NSString *successTitle = [sentEntourage isOuting] ?
+            OTLocalizedString(@"eventUpdated") :
+            OTLocalizedString(@"entourageUpdated");
+         
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [SVProgressHUD showSuccessWithStatus:successTitle];
+             if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {
+                 [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject: self.entourage];
+             }
+         });
+     } failure:^(NSError *error) {
+         NSString *errorTitle = [self.entourage isOuting] ?
+            OTLocalizedString(@"eventNotUpdated") :
+            OTLocalizedString(@"entourageNotUpdated");
+         [SVProgressHUD showErrorWithStatus:errorTitle];
+         sender.enabled = YES;
+     }];
 }
 
 #pragma mark - Segue

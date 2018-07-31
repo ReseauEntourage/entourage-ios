@@ -618,4 +618,20 @@
     return [UIColor colorWithHexString:@"4a4a4a"];
 }
 
++ (NSString*)sampleTitleForNewEvent {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_event_title_example");
+    }
+    
+    return OTLocalizedString(@"event_title_example");
+}
+
++ (NSString*)sampleDescriptionForNewEvent {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_event_desc_example");
+    }
+    
+    return OTLocalizedString(@"event_desc_example");
+}
+
 @end

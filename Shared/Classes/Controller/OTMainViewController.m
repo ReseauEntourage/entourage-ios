@@ -895,7 +895,7 @@
 }
 
 - (void)entourageCreated:(NSNotification *)notification {
-    if(self.currentFilter.isPro) {
+    if (self.currentFilter.isPro) {
         self.currentFilter.showDemand = YES;
         self.currentFilter.showContribution = YES;
         [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];

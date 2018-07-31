@@ -70,10 +70,11 @@
 #pragma mark - EntourageEditorDelegate
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
-    [[[OTFeedItemFactory createFor:self.entourage] getChangedHandler] updateWith:entourage];
-    NSDictionary* notificationInfo = @{ kNotificationEntourageChangedEntourageKey: entourage };
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageChanged object:nil userInfo:notificationInfo];
-    [self.owner dismissViewControllerAnimated:YES completion:nil];
+    [self.owner dismissViewControllerAnimated:YES completion:^{
+        [[[OTFeedItemFactory createFor:self.entourage] getChangedHandler] updateWith:entourage];
+        NSDictionary* notificationInfo = @{ kNotificationEntourageChangedEntourageKey: entourage };
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageChanged object:nil userInfo:notificationInfo];
+    }];
 }
 
 @end
