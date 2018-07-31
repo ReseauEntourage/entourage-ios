@@ -30,6 +30,7 @@
 #import "OTGeolocationRightsViewController.h"
 #import "OTPushNotificationsService.h"
 #import "OTNotificationsRightsViewController.h"
+#import "OTFeedItemFactory.h"
 
 #define TUTORIAL_DELAY 15
 #define MAP_TAB_INDEX 0
@@ -394,6 +395,39 @@
     }
     else {
         [OTAppState launchFeedsFilteringFromController:controller withDelegate:(id<OTFeedItemsFilterDelegate>)controller];
+    }
+}
+
++ (void)showClosingConfirmationForFeedItem:(OTFeedItem*)feedItem
+                            fromController:(UIViewController*)controller
+                                    sender:(id)sender {
+    
+    
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Supprimer la sortie ?"
+                                                                       message:@""
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [SVProgressHUD show];
+            [[[OTFeedItemFactory createFor:feedItem] getStateTransition]
+             closeWithOutcome:YES
+             success:^(BOOL isTour) {
+                 [SVProgressHUD dismiss];
+                 [controller dismissViewControllerAnimated:YES completion:nil];
+                 
+             } orFailure:^(NSError *error) {
+                 [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
+             }];
+        }]];
+        UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"Non"                                                                    style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [controller dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:noAction];
+        [controller presentViewController:alert animated:YES completion:nil];
+        
+    } else {
+        [controller performSegueWithIdentifier:@"ConfirmCloseSegue" sender:sender];
     }
 }
 

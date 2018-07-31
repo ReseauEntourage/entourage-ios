@@ -392,9 +392,38 @@
     return typeByNameAttrString;
 }
 
-+ (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
++ (NSAttributedString*)formattedAuthorDescriptionForMessageItem:(OTEntourage*)item {
     
-    UIColor *typeColor = [UIColor appGreyishColor];
+    UIColor *textColor = [UIColor colorWithHexString:@"4a4a4a"];
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        textColor = [OTAppAppearance iconColorForFeedItem:item];
+    }
+
+    NSString *organizerText = @"\nOrganisé";
+    NSString *fontName = @"SFUIText-Medium";
+    CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
+    
+    NSDictionary *atttributtes = @{NSFontAttributeName :
+                                       [UIFont fontWithName:fontName size:fontSize],
+                                   NSForegroundColorAttributeName:textColor};
+    NSMutableAttributedString *organizerAttributedText = [[NSMutableAttributedString alloc] initWithString:organizerText attributes:atttributtes];
+    
+    NSAttributedString *byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    
+    NSMutableAttributedString *orgByNameAttrString = organizerAttributedText.mutableCopy;
+    [orgByNameAttrString appendAttributedString:byAttrString];
+    [orgByNameAttrString appendAttributedString:nameAttrString];
+    
+    return orgByNameAttrString;
+}
+
++ (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item
+                                                              size:(CGFloat)size {
+    
+    UIColor *textColor = [UIColor colorWithHexString:@"4a4a4a"];
+    UIColor *typeColor = textColor;
     NSString *eventName = OTLocalizedString(@"event").capitalizedString;
     
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
@@ -407,7 +436,7 @@
     NSMutableAttributedString *eventAttrDescString = [[NSMutableAttributedString alloc] initWithString:eventName attributes:atttributtes];
     
     NSString *dateString = [NSString stringWithFormat:@" le %@", [item.startsAt asStringWithFormat:@"EEEE dd/MM"]];
-    NSDictionary *dateAtttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size], NSForegroundColorAttributeName:[UIColor appGreyishColor]};
+    NSDictionary *dateAtttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size], NSForegroundColorAttributeName:textColor};
     NSMutableAttributedString *dateAttrString = [[NSMutableAttributedString alloc] initWithString:dateString attributes:dateAtttributtes];
     
     if (item.startsAt) {

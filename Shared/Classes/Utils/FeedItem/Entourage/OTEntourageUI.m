@@ -33,26 +33,7 @@
 }
 
 - (NSAttributedString *)eventAuthorFormattedDescription {
-    
-    UIColor *textColor = [OTAppAppearance iconColorForFeedItem:self.entourage];
-    NSString *organizerText = @"\nOrganisé";
-    NSString *fontName = @"SFUIText-Medium";
-    CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
-    
-    NSDictionary *atttributtes = @{NSFontAttributeName :
-                                       [UIFont fontWithName:fontName size:fontSize],
-                            NSForegroundColorAttributeName:textColor};
-    NSMutableAttributedString *organizerAttributedText = [[NSMutableAttributedString alloc] initWithString:organizerText attributes:atttributtes];
-    
-    NSAttributedString *byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
-    
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.entourage.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
-    
-    NSMutableAttributedString *orgByNameAttrString = organizerAttributedText.mutableCopy;
-    [orgByNameAttrString appendAttributedString:byAttrString];
-    [orgByNameAttrString appendAttributedString:nameAttrString];
-
-    return orgByNameAttrString;
+    return [OTAppAppearance formattedAuthorDescriptionForMessageItem:self.entourage];
 }
 
 - (NSAttributedString *)eventInfoFormattedDescription {
