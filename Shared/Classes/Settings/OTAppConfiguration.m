@@ -366,6 +366,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     mailController.navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
     mailController.navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
     mailController.navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    mailController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [[ApplicationTheme shared] secondaryNavigationBarTintColor]};
+    [mailController.navigationBar setTranslucent:NO];
+    [mailController.navigationBar setOpaque:NO];
 }
 
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController

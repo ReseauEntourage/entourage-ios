@@ -148,15 +148,25 @@ typedef NS_ENUM(NSInteger) {
     [OTLogger logEvent:@"SaveProfileEdits"];
     NSString *firstName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeSummary] withDefault:self.user.firstName];
     NSString *lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary] withDefault:self.user.lastName];
-    NSString *email = [[self editedTextAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeInfoPrivate] withDefault:self.user.email] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    NSString *email = [[self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeInfoPrivate] withDefault:self.user.email] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
     NSString *about = [self editedTextViewAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeAbout] withDefault:self.user.about];
+    
     NSString *warning = nil;
-    if (![email isValidEmail])
+    
+    if (![email isValidEmail]) {
         warning = OTLocalizedString(@"invalidEmail");
-    if (lastName.length < 2)
+    }
+    
+    if (lastName.length < 2) {
         warning =  OTLocalizedString(@"invalidLastName");
-    if (firstName.length < 2)
+    }
+    
+    if (firstName.length < 2) {
         warning =  OTLocalizedString(@"invalidFirstName");
+    }
+    
     if (warning != nil) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:warning preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
@@ -164,6 +174,7 @@ typedef NS_ENUM(NSInteger) {
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
+    
     self.user.firstName = firstName;
     self.user.lastName = lastName;
     self.user.email = email;

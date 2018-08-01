@@ -67,7 +67,7 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMi-oc-27z">
                                                 <rect key="frame" x="10" y="442" width="323" height="50"/>
-                                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="296" id="0NR-0y-u5a"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="V4b-Rw-72H"/>
