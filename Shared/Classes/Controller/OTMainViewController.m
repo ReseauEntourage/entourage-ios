@@ -469,8 +469,6 @@
     [self.tableView updateItems:self.pois];
 
     self.toursMapDelegate.isActive = NO;
-    self.poisMapDelegate.isActive = YES;
-    self.solidarityGuidePoisDisplayed = YES;
     self.backToNewsFeedsButton.hidden = NO;
     
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
@@ -480,6 +478,9 @@
 
     [self clearMap];
     [self showToursMap];
+    
+    self.poisMapDelegate.isActive = YES;
+    self.solidarityGuidePoisDisplayed = YES;
     
     [OTAppState switchMapToSolidarityGuide];
     [self.noDataBehavior switchedToGuide];
@@ -1368,13 +1369,14 @@
 
 - (void)showToursMap {
     self.tableView.scrollEnabled = NO;
-    self.solidarityGuidePoisDisplayed = NO;
+    //self.solidarityGuidePoisDisplayed = NO;
     
     if (self.poisMapDelegate.isActive) {
         [self.showSolidarityGuideView setHidden: YES];
         [self.toggleCollectionView toggle:NO animated:NO];
     } else {
         [OTLogger logEvent:@"Screen06_2MapView"];
+        self.solidarityGuidePoisDisplayed = NO;
         
         // hide the show solidarity guides overlay if not enabled
         [self.showSolidarityGuideView setHidden: !OTAppConfiguration.supportsSolidarityGuideFunctionality];

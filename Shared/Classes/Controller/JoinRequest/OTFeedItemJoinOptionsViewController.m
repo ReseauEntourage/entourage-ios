@@ -16,6 +16,7 @@
 #import "OTConsts.h"
 #import "OTTextView.h"
 #import "OTTapViewBehavior.h"
+#import "entourage-Swift.h"
 
 @interface OTFeedItemJoinOptionsViewController () <UITextViewDelegate>
 
@@ -33,6 +34,7 @@
     self.greetingMessage.placeholderLargeColor = UIColor.grayColor;
     
     self.greetingMessage.forwardDelegate = self;
+    self.tapBehavior.tapView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

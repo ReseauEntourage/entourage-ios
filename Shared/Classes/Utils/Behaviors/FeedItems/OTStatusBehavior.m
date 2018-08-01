@@ -14,6 +14,7 @@
 #import "UIColor+entourage.h"
 #import "OTTour.h"
 #import "OTStatusChangedBehavior.h"
+#import "entourage-Swift.h"
 
 #define BUTTON_NOTREQUESTED @"joinButton"
 #define BUTTON_PENDING      @"pendingRequestButton"
@@ -46,17 +47,18 @@
 
 - (void)updateTextButtonAndJoin {
     self.isJoinPossible = NO;
+    UIColor *color = [ApplicationTheme shared].backgroundThemeColor;
     if(self.isActive) {
         if (self.feedItem.author.uID.intValue == self.currentUser.sid.intValue)
             if([self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
-                [self updateTextButtonWithText:OTLocalizedString(@"ongoing") andColor:[UIColor appOrangeColor]];
+                [self updateTextButtonWithText:OTLocalizedString(@"ongoing") andColor:color];
             else
-                [self updateTextButtonWithText:OTLocalizedString(@"join_active") andColor:[UIColor appOrangeColor]];
+                [self updateTextButtonWithText:OTLocalizedString(@"join_active") andColor:color];
         else {
             if ([JOIN_ACCEPTED isEqualToString:self.feedItem.joinStatus])
-                [self updateTextButtonWithText:OTLocalizedString(@"join_active") andColor:[UIColor appOrangeColor]];
+                [self updateTextButtonWithText:OTLocalizedString(@"join_active") andColor:color];
             else if ([JOIN_PENDING isEqualToString:self.feedItem.joinStatus])
-                [self updateTextButtonWithText:OTLocalizedString(@"join_pending") andColor:[UIColor appOrangeColor]];
+                [self updateTextButtonWithText:OTLocalizedString(@"join_pending") andColor:color];
             else if ([JOIN_REJECTED isEqualToString:self.feedItem.joinStatus])
                 [self updateTextButtonWithText:OTLocalizedString(@"join_rejected") andColor:[UIColor appTomatoColor]];
             else {

@@ -607,6 +607,9 @@
 
 + (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([feedItem isOuting]) {
+            return OTLocalizedString(@"pfp_join_event_title");
+        }
         return OTLocalizedString(@"pfp_join_group_title");
     }
     
@@ -620,6 +623,9 @@
 
 + (NSString *)joinEntourageButtonTitleForFeedItem:(OTFeedItem*)feedItem {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([feedItem isOuting]) {
+            return OTLocalizedString(@"pfp_join_event_button");
+        }
         return OTLocalizedString(@"pfp_join_group_button");
     }
     

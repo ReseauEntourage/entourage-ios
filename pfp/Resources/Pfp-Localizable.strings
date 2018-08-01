@@ -49,6 +49,8 @@
 
 "pfp_join_group_title" = "Vous souhaitez rejoindre ce voisinage ?";
 "pfp_join_group_button" = "Contacter l’animateur";
+"pfp_join_event_title" = "Vous souhaitez rejoindre cette sortie ?";
+"pfp_join_event_button" = "Participer";
 
 "pfp_event" = "sortie";
 "pfp_filter_events_title" = "Sorties";
