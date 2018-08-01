@@ -5509,7 +5509,7 @@
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "6162d93a-3990-4ffd-9a6c-0d90cb684eaa";
+				PROVISIONING_PROFILE = "cebe3765-064e-4a3d-a019-4127824a394f";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
@@ -5653,7 +5653,7 @@
 				OTHER_SWIFT_FLAGS = "-DBETA -DPFP";
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.pfp.beta;
 				PRODUCT_NAME = "Voi-Beta";
-				PROVISIONING_PROFILE = "5c388a43-ad84-40dd-a131-8d5b99703d7b";
+				PROVISIONING_PROFILE = "1ba31230-89a8-499a-89bc-b2490227e67b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BETA PFP";
 				SWIFT_OBJC_BRIDGING_HEADER = "pfp/Settings/Environment/pfp-Bridging-Header.h";
@@ -5706,7 +5706,7 @@
 				OTHER_SWIFT_FLAGS = "-DBETA -DPFP";
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.pfp.beta;
 				PRODUCT_NAME = "Voi-Beta";
-				PROVISIONING_PROFILE = "84b4c338-bfc6-4eed-9e75-434f8dc2f1e8";
+				PROVISIONING_PROFILE = "1ba31230-89a8-499a-89bc-b2490227e67b";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.pfp.beta AdHoc";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = PFP;
 				SWIFT_OBJC_BRIDGING_HEADER = "pfp/Settings/Environment/pfp-Bridging-Header.h";
@@ -5873,7 +5873,7 @@
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE = "6162d93a-3990-4ffd-9a6c-0d90cb684eaa";
+				PROVISIONING_PROFILE = "cebe3765-064e-4a3d-a019-4127824a394f";
 				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
