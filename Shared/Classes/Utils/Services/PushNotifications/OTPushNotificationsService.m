@@ -69,7 +69,7 @@
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_REQUEST_ACCEPTED])
         [self handleAcceptJoinNotification:pnData];
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE]) {
-        if([self canHandleChatNotificationInPlace:pnData])
+        if ([self canHandleChatNotificationInPlace:pnData])
             return;
         else
             [self handleChatNotification:pnData];

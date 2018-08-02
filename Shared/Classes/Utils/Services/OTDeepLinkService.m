@@ -58,16 +58,9 @@
 }
 
 - (UIViewController *)getTopViewController {
-    UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if ([result isKindOfClass:[SWRevealViewController class]]) {
-        SWRevealViewController *revealController = (SWRevealViewController*)result;
-        result = revealController.frontViewController;
-    }
-    if([result isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *navController = (UINavigationController*)result;
-        result = navController.topViewController;
-    }
-    return result;
+    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:0];
+    UINavigationController *navController = (UINavigationController*)tabViewController.viewControllers.firstObject;
+    return navController.topViewController;
 }
 
 - (void)showProfileFromAnywhereForUser:(NSNumber *)userId {
@@ -172,7 +165,8 @@
 }
 
 - (void)showController: (UIViewController *)controller {
-    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBar];
+    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:0];
+    [self updateAppWindow:tabViewController];
     UINavigationController *navigationController = (UINavigationController *)tabViewController.viewControllers[0];
     
     NSMutableArray *childViewControllers = [[NSMutableArray alloc] initWithArray:navigationController.viewControllers];
@@ -184,42 +178,53 @@
 
 - (void)showControllerFromAnywhere:(UIViewController *)controller {
     UIViewController *currentController = [self getTopViewController];
-    while(currentController.presentedViewController)
+    
+    while (currentController.presentedViewController) {
         currentController = currentController.presentedViewController;
+    }
     [currentController presentViewController:controller animated:YES completion:nil];
 }
 
 - (OTMainViewController *)popToMainViewController {
-    UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if ([result isKindOfClass:[SWRevealViewController class]]) {
-        SWRevealViewController *revealController = (SWRevealViewController*)result;
-        [revealController setFrontViewPosition:FrontViewPositionLeft];
-        result = revealController.frontViewController;
-    }
-    if([result isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *navController = (UINavigationController*)result;
-        [navController popToRootViewControllerAnimated:NO];
-        if ([navController.childViewControllers count] > 0) {
-            if ([navController.childViewControllers[0] isKindOfClass:[OTMainViewController class]]) {
-                [navController.childViewControllers[0] dismissViewControllerAnimated:NO completion:nil];
-                return navController.childViewControllers[0];
-            }
-        }
-    }
+    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:0];
+    [self updateAppWindow:tabViewController];
+    UINavigationController *navController = (UINavigationController*)tabViewController.viewControllers.firstObject;
+    return (OTMainViewController*)navController.topViewController;
+    
+//    UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
+//    if ([result isKindOfClass:[SWRevealViewController class]]) {
+//        SWRevealViewController *revealController = (SWRevealViewController*)result;
+//        [revealController setFrontViewPosition:FrontViewPositionLeft];
+//        result = revealController.frontViewController;
+//    }
+//
+//    if ([result isKindOfClass:[UINavigationController class]]) {
+//        UINavigationController *navController = (UINavigationController*)result;
+//        [navController popToRootViewControllerAnimated:NO];
+//        if ([navController.childViewControllers count] > 0) {
+//            if ([navController.childViewControllers[0] isKindOfClass:[OTMainViewController class]]) {
+//                [navController.childViewControllers[0] dismissViewControllerAnimated:NO completion:nil];
+//                return navController.childViewControllers[0];
+//            }
+//        }
+//    }
+    
     return nil;
 }
 
 - (void)prepareControllers:(OTFeedItem *)feedItem {
-    if([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
+    if ([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
         UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
         OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
         publicFeedItemController.feedItem = feedItem;
+        
         [self showController:publicFeedItemController];
     }
     else {
         UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
         OTActiveFeedItemViewController *activeFeedItemController = (OTActiveFeedItemViewController *)[activeFeedItemStorybard instantiateInitialViewController];
         activeFeedItemController.feedItem = feedItem;
+        
         [self showController:activeFeedItemController];
     }
 }

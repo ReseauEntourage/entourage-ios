@@ -31,6 +31,7 @@
 + (OTAppConfiguration*)sharedInstance;
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions;
 + (UITabBarController*)configureMainTabBar;
++ (UITabBarController*)configureMainTabBarWithDefaultSelectedIndex:(NSInteger)selectedIndex;
 + (void)configureTabBarAppearance:(UITabBarController*)tabBarController;
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController;
 + (void)configureMailControllerAppearance:(MFMailComposeViewController *)mailController;
