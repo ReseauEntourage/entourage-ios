@@ -72,6 +72,7 @@
     result.active = active;
     result.title = title;
     result.image = image;
+    
     return result;
 }
 
@@ -83,6 +84,7 @@
             return OTLocalizedString(@"filter_entourage_unread");
         case FeedItemFilterKeyIncludingClosed:
             return OTLocalizedString(@"filter_entourage_include_closed");
+            
         case FeedItemFilterKeyDemand:
             return OTLocalizedString(@"demande");
         case FeedItemFilterKeyContribution:

@@ -1602,7 +1602,8 @@
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if(currentUser.partner == nil) {
         self.currentFilter.showFromOrganisation = NO;
-        [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        defaults.savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
     }
     [self reloadFeeds];
 }

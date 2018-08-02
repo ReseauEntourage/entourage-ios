@@ -166,7 +166,7 @@
 }
 
 - (void)setNoFeeds {
-    self.lblEmptyTableReason.text = [OTAppAppearance noMoreFeedsDescription];
+    self.lblEmptyTableReason.text = [OTAppAppearance noMoreFeedsDescription];// no_feeds_received
 }
 
 /********************************************************************************/

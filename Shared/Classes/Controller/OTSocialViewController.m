@@ -41,6 +41,11 @@
     self.aboutItems = [OTSocialViewController createItems];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+}
+
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 

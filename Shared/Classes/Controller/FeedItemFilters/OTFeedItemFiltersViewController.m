@@ -29,8 +29,13 @@
     [self.tableDataSource initializeWith:self.filterDelegate.currentFilter];
     self.title =  OTLocalizedString(@"filters").uppercaseString;
     self.tableView.tableFooterView = [UIView new];
-    self.parentArray = self.tableDataSource.parentArray;
     [self setupToolbarButtons];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.parentArray = self.tableDataSource.parentArray;
+    [self.tableView reloadData];
 }
 
 #pragma mark - private methods
@@ -51,15 +56,20 @@
 - (void)saveFilters {
     [OTLogger logEvent:@"SubmitFilterPreferences"];
     OTFeedItemFilters *currentFilter = [self.tableDataSource readCurrentFilter];
+    
     [self dismissViewControllerAnimated:YES completion:^() {
-        [self.filterDelegate filterChanged:currentFilter];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.filterDelegate filterChanged:currentFilter];
+        });
     }];
 }
 
 - (void)close {
     [OTLogger logEvent:@"CloseFilter"];
     [self dismissViewControllerAnimated:YES completion:^{
-        [self.filterDelegate filterChanged:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.filterDelegate filterChanged:nil];
+        });
     }];
 }
 

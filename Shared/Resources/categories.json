@@ -8,13 +8,6 @@
   },
   {
   "entourage_type": "ask_for_help",
-  "category": "event",
-  "title": "Des bénévoles pour un évènement",
-  "title_example": "Appel aux bonnes volontÃ©s ðŸ˜ŠðŸ‘ðŸ»  pour la Collecte nationale des Restos du Coeur Ã  Ternes 75017",
-  "description_example": "Besoin de bÃ©nÃ©voles pour la collecte nationale des Restos du Coeur pour l'Ã©quipe d'un Carrefour du quartier des Ternes \nSamedi  17h00 âž 21h00 âžœ 5 bÃ©nÃ©voles \nDimanche  10h30 âž 13h00 âžœ 2 bÃ©nÃ©voles \nNous avons besoin de vous pour faire de cette collecte un succÃ¨s pour aider ceux qui en ont vraiment besoin! Merci d'avance"
-  },
-  {
-  "entourage_type": "ask_for_help",
   "category": "mat_help",
   "title": "Un don matériel",
   "title_example": "Gilles a besoin d'une paire de gants",
@@ -54,13 +47,6 @@
   "title": "Partager un repas ou un café",
   "title_example": "Qui peut me faire rencontrer une personne de la rue dans le quartier ? ",
   "description_example": "Je ne suis jamais encore allÃ© Ã  la rencontre des personnes sans-abri du quartier. Qui peut me prÃ©senter Ã  une personne qu'il connait bien ?"
-  },
-  {
-  "entourage_type": "contribution",
-  "category": "event",
-  "title": "Inviter à un évènement solidaire",
-  "title_example": "L'association \"Entourage\" vous invite tous Ã  sa journÃ©e portes ouvertes samedi 20 mars !",
-  "description_example": "Venez tous, voisins avec ou sans abri, Ã  nos Portes ouvertes le 20 mars de 12h Ã  18h. \nAu programme : \n- rencontrez les membres de la communautÃ© Entourage autour d'un buffet \n- contribuez Ã  nos ateliers de sensibilisation et d'Ã©changes sur le projet d'Entourage\n- rencontrez notre Ã©quipe pour trouver la forme de bÃ©nÃ©volat pour Entourage qui vous convient\n\nPas nÃ©cessaire de s'inscrire Ã  l'avance, mais vous pouvez rejoindre cette action pour nous informer de votre venue! "
   },
   {
   "entourage_type": "contribution",

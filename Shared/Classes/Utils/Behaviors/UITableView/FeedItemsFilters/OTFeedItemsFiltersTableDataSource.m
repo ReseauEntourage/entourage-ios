@@ -56,6 +56,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     OTFeedItemFilter *item = (OTFeedItemFilter *)[self getItemAtIndexPath:indexPath];
     CGFloat size = 44;
+    BOOL isToursFeatureEnabled = IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality;
     
     [self readCurrentFilter];
     
@@ -75,11 +76,11 @@
         return size;
     }
     
-    OTFeedItemFilter *contribution;
-    OTFeedItemFilter *demande;
+    OTFeedItemFilter *contribution = nil;
+    OTFeedItemFilter *demande = nil;
     
     if (parents.count > 0) {
-        if (IS_PRO_USER) {
+        if (isToursFeatureEnabled) {
             contribution = parents[2];
             demande = parents[3];
         }
@@ -116,6 +117,7 @@
                 if (!contribution.active)
                     size = 0;
                 break;
+                
             case FeedItemFilterKeyContributionHelp:
                 if (!contribution.active)
                     size = 0;
@@ -136,6 +138,7 @@
                 if (!contribution.active)
                     size = 0;
                 break;
+                
             case FeedItemFilterKeyMedical:
                 if (!parents[0].active)
                     size = 0;
@@ -148,16 +151,20 @@
                 if (!parents[0].active)
                     size = 0;
                 break;
-            case FeedItemFilterKeyEventsPast:
-                if (!parents[1].active)
+                
+            case FeedItemFilterKeyEventsPast: {
+                NSInteger eventsSectionIndex = (isToursFeatureEnabled) ? 1 : 0;
+                if (!parents[eventsSectionIndex].active) {
                     size = 0;
+                }
+            }
                 break;
             case FeedItemFilterKeyTimeframe:
                 return 90;
-                break;
+                
             default:
                 return 44;
-                break;
+                
         }//switch(item.key)
     }//if(parents.count > 0)
     else {
@@ -172,6 +179,7 @@
     willDisplayCell:(UITableViewCell *)cell
     forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *itemsAtSection = (NSArray *)self.groupedSource[indexPath.section];
+    
     if (itemsAtSection.count > 10 && indexPath.row == itemsAtSection.count / 2 - 1) {
         cell.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0);
     }

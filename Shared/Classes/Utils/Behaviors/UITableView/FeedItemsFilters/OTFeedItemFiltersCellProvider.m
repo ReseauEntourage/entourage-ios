@@ -11,14 +11,19 @@
 #import "OTFeedItemsFilterCellBase.h"
 #import "OTFeedItemFilter.h"
 #import "OTFeedItemTimeframeFilter.h"
+#import "OTFeedItemsTimeframeCell.h"
+#import "OTImageFeedItemsFilterCell.h"
+#import "OTFeedItemsFilterCell.h"
 
 @implementation OTFeedItemFiltersCellProvider
 
 - (UITableViewCell *)getTableViewCellForPath:(NSIndexPath *)indexPath {
     OTFeedItemFilter *filterItem = [self.tableDataSource getItemAtIndexPath:indexPath];
     NSString *identifier = [self getIdentifierForFilter:filterItem];
+    
     OTFeedItemsFilterCellBase *cell = (OTFeedItemsFilterCellBase *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:identifier];
     [cell configureWith:filterItem];
+    
     return cell;
 }
 

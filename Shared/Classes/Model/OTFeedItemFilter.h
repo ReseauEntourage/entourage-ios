@@ -10,25 +10,23 @@
 
 typedef enum {
     FeedItemFilterKeyContributionSocial,
-    FeedItemFilterKeyContributionEvent,
     FeedItemFilterKeyContributionHelp,
     FeedItemFilterKeyContributionResource,
     FeedItemFilterKeyContributionInfo,
     FeedItemFilterKeyContributionSkill,
     FeedItemFilterKeyContributionOther,
-    
+
     FeedItemFilterKeyDemandeSocial,
-    FeedItemFilterKeyDemandeEvent,
     FeedItemFilterKeyDemandeHelp,
     FeedItemFilterKeyDemandeResource,
     FeedItemFilterKeyDemandeInfo,
     FeedItemFilterKeyDemandeSkill,
     FeedItemFilterKeyDemandeOther,
-    
+
     FeedItemFilterKeyUnread,
     FeedItemFilterKeyIncludingClosed,
-    FeedItemFilterKeyContribution = 17,
-    FeedItemFilterKeyDemand = 18,
+    FeedItemFilterKeyContribution,
+    FeedItemFilterKeyDemand,
     FeedItemFilterKeyTour,
     FeedItemFilterKeyTimeframe,
     FeedItemFilterKeyMedical,
@@ -38,7 +36,7 @@ typedef enum {
     FeedItemFilterKeyMyEntourages,
     FeedItemFilterKeyMyEntouragesOnly,
     FeedItemFilterKeyMyOrganisationOnly,
-    
+
     FeedItemFilterKeyNeighborhoods,
     FeedItemFilterKeyPrivateCircles,
     FeedItemFilterKeyEvents,
