@@ -371,7 +371,7 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)loadEntourageItemWithGropupId:(NSString*)groupId
                            completion:(void(^)(OTEntourage *entourage, NSError *error))completion {
-    [[OTEntourageService new] getEntourageWithId:groupId
+    [[OTEntourageService new] getEntourageWithStringId:groupId
                                      withSuccess:^(OTEntourage *entourage) {
                                          [SVProgressHUD dismiss];
                                          dispatch_async(dispatch_get_main_queue(), ^() {

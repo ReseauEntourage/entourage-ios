@@ -33,7 +33,7 @@
 
 - (void)navigateTo:(NSNumber *)feedItemId withType:(NSString *)feedItemType {
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getStateInfo] loadWithSuccess:^(OTFeedItem *feedItem) {
+    [[[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getStateInfo] loadWithSuccess3:^(OTFeedItem *feedItem) {
         [SVProgressHUD dismiss];
         [self prepareControllers:feedItem];
     } error:^(NSError *error) {

@@ -75,7 +75,7 @@
 }
 
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
-    [[OTEntourageService new] getEntourageWithId:self.entourage.uuid withSuccess:^(OTEntourage *entourage) {
+    [[OTEntourageService new] getEntourageWithStringId:self.entourage.uuid withSuccess:^(OTEntourage *entourage) {
        if(success)
            success(entourage);
     } failure:^(NSError *error) {
@@ -86,6 +86,16 @@
 
 - (void)loadWithSuccess2:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
     [[OTEntourageService new] getEntourageWithStringId:self.entourage.fid withSuccess:^(OTEntourage *entourage) {
+        if(success)
+            success(entourage);
+    } failure:^(NSError *error) {
+        if(failure)
+            failure(error);
+    }];
+}
+
+- (void)loadWithSuccess3:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
+    [[OTEntourageService new] getEntourageWithId:self.entourage.uid withSuccess:^(OTEntourage *entourage) {
         if(success)
             success(entourage);
     } failure:^(NSError *error) {
