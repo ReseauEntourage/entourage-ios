@@ -397,12 +397,11 @@ typedef NS_ENUM(NSInteger) {
     switch (mappedSection) {
         case SectionTypeInfoPrivate:
             switch (indexPath.row) {
-                case 1:
+                case 2:
                     [self performSegueWithIdentifier:EDIT_PASSWORD_SEGUE sender:nil];
                     break;
-                case 3:
-                    [OTLogger logEvent:@"ToNotifications"];
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                case 4:
+                    [OTAppState navigateToNativeNotificationsPreferences];
                     break;
                 default:
                     break;

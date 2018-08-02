@@ -61,4 +61,5 @@
 + (void)navigateToUserPicture:(UIViewController*)viewController;
 + (void)navigateToLocationRightsScreen:(UIViewController*)viewController;
 + (void)navigateToNotificationsRightsScreen:(UIViewController*)viewController;
++ (void)navigateToNativeNotificationsPreferences;
 @end

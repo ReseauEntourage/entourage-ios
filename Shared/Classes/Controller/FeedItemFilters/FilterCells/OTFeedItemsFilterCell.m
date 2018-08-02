@@ -20,6 +20,7 @@
     }
     self.lblTitle.attributedText = title;
     [self.swtActive setOn:filter.active animated:NO];
+    self.swtActive.tag = filter.key;
 }
 
 - (NSMutableAttributedString *) attributedTitle: (NSString *)title
@@ -38,14 +39,17 @@
 
 - (IBAction)changeActive:(id)sender {
     NSIndexPath *indexPath = [self.tableDataSource.dataSource.tableView indexPathForCell:self];
+    
     OTFeedItemFilter *item = (OTFeedItemFilter *)[self.tableDataSource getItemAtIndexPath:indexPath];
     UISwitch *swtControl = (UISwitch *)sender;
     item.active = swtControl.isOn;
+    
     for (OTFeedItemFilter *child in item.subItems) {
         child.active = swtControl.isOn;
     }
     [self.tableDataSource.dataSource.tableView reloadData];
     NSString *message = @"";
+    
     switch (item.key) {
         case FeedItemFilterKeyMedical:
             message = @"ShowOnlyMedicalToursClick";
@@ -60,6 +64,7 @@
             [OTLogger logEvent:@"AskMessagesFilter"];
             message = @"ShowOnlyAsksClick";
             break;
+            
         case FeedItemFilterKeyContribution:
             [OTLogger logEvent:@"OfferMessagesFilter"];
             message = @"ShowOnlyOffersClick";

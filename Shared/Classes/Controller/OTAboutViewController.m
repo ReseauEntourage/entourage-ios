@@ -51,6 +51,7 @@
 {
     [super viewWillAppear:animated];
     self.title = OTLocalizedString(@"aboutTitle").uppercaseString;//@"À PROPOS";
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource

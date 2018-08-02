@@ -37,6 +37,8 @@
     SFSafariViewController *safariController = [[SFSafariViewController alloc] initWithURL:url];
     safariController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     
+    [OTAppConfiguration configureNavigationControllerAppearance:viewController.navigationController];
+    
     double iOSVersion = [[[UIDevice currentDevice] systemVersion] doubleValue];
     if (iOSVersion >= 10) {
         safariController.preferredBarTintColor = [ApplicationTheme shared].backgroundThemeColor;

@@ -496,4 +496,20 @@
     [window makeKeyAndVisible];
 }
 
++ (void)navigateToNativeNotificationsPreferences {
+    [OTLogger logEvent:@"ToNotifications"];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
+        NSString *urlString = [NSString stringWithFormat:@"App-Prefs:root=NOTIFICATIONS_ID&path=%@", [OTAppConfiguration iTunesAppId]];
+        NSURL *url = [NSURL URLWithString:urlString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        } else {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }
+    } else {
+        // ios 9.x
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }
+}
+
 @end

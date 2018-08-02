@@ -426,15 +426,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     
     if ([NSUserDefaults standardUserDefaults].arePushNotificationsRefused) {
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
-            NSString *urlString = [NSString stringWithFormat:@"App-Prefs:root=NOTIFICATIONS_ID&path=%@", [OTAppConfiguration iTunesAppId]];
-            NSURL *url = [NSURL URLWithString:urlString];
-            if ([[UIApplication sharedApplication] canOpenURL:url]) {
-                [[UIApplication sharedApplication] openURL:url];
-            }
-        } else {
-            // ios 9.x
-        }
+        [OTAppState navigateToNativeNotificationsPreferences];
     }
     
     [[NSUserDefaults standardUserDefaults] setArePushNotificationsRefused:YES];

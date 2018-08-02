@@ -20,7 +20,6 @@ NSString *const kKeyShowMyEntourages = @"showOnlyMyEntourages";
 NSString *const kKeyOrganisation = @"showFromOrganisation";
 
 NSString *const kKeyDemandeSocial = @"showDemandeSocial";
-NSString *const kKeyDemandeEvent = @"showDemandeEvent";
 NSString *const kKeyDemandeHelp = @"showDemandeHelp";
 NSString *const kKeyDemandeResource = @"showDemandeResource";
 NSString *const kKeyDemandeInfo = @"showDemandeInfo";
@@ -28,7 +27,6 @@ NSString *const kKeyDemandeSkill = @"showDemandeSkill";
 NSString *const kKeyDemandeOther = @"showDemandeOther";
 
 NSString *const kKeyContributionSocial = @"showContributionSocial";
-NSString *const kKeyContributionEvent = @"showContributionEvent";
 NSString *const kKeyContributionHelp = @"showContributionHelp";
 NSString *const kKeyContributionResource = @"showContributionResource";
 NSString *const kKeyContributionInfo = @"showContributionInfo";
@@ -59,7 +57,6 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
     [encoder encodeObject:self.showOnlyMyEntourages forKey:kKeyShowMyEntourages];
     
     [encoder encodeObject:self.showDemandeSocial forKey:kKeyDemandeSocial];
-    [encoder encodeObject:self.showDemandeEvent forKey:kKeyDemandeEvent];
     [encoder encodeObject:self.showDemandeHelp forKey:kKeyDemandeHelp];
     [encoder encodeObject:self.showDemandeResource forKey:kKeyDemandeResource];
     [encoder encodeObject:self.showDemandeInfo forKey:kKeyDemandeInfo];
@@ -67,7 +64,6 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
     [encoder encodeObject:self.showDemandeOther forKey:kKeyDemandeOther];
     
     [encoder encodeObject:self.showContributionSocial forKey:kKeyContributionSocial];
-    [encoder encodeObject:self.showContributionEvent forKey:kKeyContributionEvent];
     [encoder encodeObject:self.showContributionHelp forKey:kKeyContributionHelp];
     [encoder encodeObject:self.showContributionResource forKey:kKeyContributionResource];
     [encoder encodeObject:self.showContributionInfo forKey:kKeyContributionInfo];
@@ -94,7 +90,6 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
         self.showFromOrganisation = [decoder decodeObjectForKey:kKeyOrganisation];
         
         self.showDemandeSocial = [decoder decodeObjectForKey:kKeyDemandeSocial];
-        self.showDemandeEvent = [decoder decodeObjectForKey:kKeyDemandeEvent];
         self.showDemandeHelp = [decoder decodeObjectForKey:kKeyDemandeHelp];
         self.showDemandeResource = [decoder decodeObjectForKey:kKeyDemandeResource];
         self.showDemandeInfo = [decoder decodeObjectForKey:kKeyDemandeInfo];
@@ -102,7 +97,6 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
         self.showDemandeOther = [decoder decodeObjectForKey:kKeyDemandeOther];
         
         self.showContributionSocial = [decoder decodeObjectForKey:kKeyContributionSocial];
-        self.showContributionEvent = [decoder decodeObjectForKey:kKeyContributionEvent];
         self.showContributionHelp = [decoder decodeObjectForKey:kKeyContributionHelp];
         self.showContributionResource = [decoder decodeObjectForKey:kKeyContributionResource];
         self.showContributionInfo = [decoder decodeObjectForKey:kKeyContributionInfo];
@@ -129,15 +123,15 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
     new.timeframeInHours = @(filter.timeframeInHours);
     new.showOnlyMyEntourages = @(filter.showOnlyMyEntourages);
     new.showFromOrganisation = @(filter.showFromOrganisation);
+    
     new.showDemandeSocial = @(filter.showDemandeSocial);
-    new.showDemandeEvent =  @(filter.showDemandeEvent);
     new.showDemandeHelp = @(filter.showDemandeHelp);
     new.showDemandeResource = @(filter.showDemandeResource);
     new.showDemandeInfo = @(filter.showDemandeInfo);
     new.showDemandeSkill = @(filter.showDemandeSkill);
     new.showDemandeOther = @(filter.showDemandeOther);
+    
     new.showContributionSocial = @(filter.showContributionSocial);
-    new.showContributionEvent = @(filter.showContributionEvent);
     new.showContributionHelp = @(filter.showContributionHelp);
     new.showContributionResource = @(filter.showContributionResource);
     new.showContributionInfo = @(filter.showContributionInfo);

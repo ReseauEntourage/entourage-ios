@@ -27,7 +27,6 @@
 @property (nonatomic) NSNumber *showPrivateCircle;
 
 @property (nonatomic) NSNumber *showDemandeSocial;
-@property (nonatomic) NSNumber *showDemandeEvent;
 @property (nonatomic) NSNumber *showDemandeHelp;
 @property (nonatomic) NSNumber *showDemandeResource;
 @property (nonatomic) NSNumber *showDemandeInfo;
@@ -35,7 +34,6 @@
 @property (nonatomic) NSNumber *showDemandeOther;
 
 @property (nonatomic) NSNumber *showContributionSocial;
-@property (nonatomic) NSNumber *showContributionEvent;
 @property (nonatomic) NSNumber *showContributionHelp;
 @property (nonatomic) NSNumber *showContributionResource;
 @property (nonatomic) NSNumber *showContributionInfo;
