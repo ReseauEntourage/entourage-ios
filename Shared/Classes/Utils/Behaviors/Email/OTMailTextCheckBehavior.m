@@ -45,12 +45,13 @@
 
 - (void)sendMail:(UITextView *)textView range:(NSRange)range {
     if ([MFMailComposeViewController canSendMail]) {
+        
+        [OTAppConfiguration configureNavigationControllerAppearance:self.owner.navigationController];
         MFMailComposeViewController *mailer = [MFMailComposeViewController new];
         NSString *to = [textView.text substringWithRange:range];
         [mailer setToRecipients:@[to]];
         mailer.mailComposeDelegate = self;
         
-        [OTAppConfiguration configureNavigationControllerAppearance:self.owner.navigationController];
         [OTAppConfiguration configureMailControllerAppearance:mailer];
         
         [self.owner showViewController:mailer sender:self];

@@ -35,6 +35,7 @@
     
     self.greetingMessage.forwardDelegate = self;
     self.tapBehavior.tapView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    self.logo.image = [OTAppAppearance JoinFeedItemConfirmationLogo];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -58,4 +58,5 @@
 + (UIColor*)colorForNoDataPlacholderText;
 + (NSString*)sampleTitleForNewEvent;
 + (NSString*)sampleDescriptionForNewEvent;
++ (UIImage*)JoinFeedItemConfirmationLogo;
 @end

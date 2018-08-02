@@ -22,6 +22,11 @@ class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.backgroundColor = UIColor.white
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

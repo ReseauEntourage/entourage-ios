@@ -49,10 +49,10 @@
 
 - (void)sendMailWithSubject:(NSString *)subject body:(NSString*)body {
     if ([MFMailComposeViewController canSendMail]) {
+        [OTAppConfiguration configureNavigationControllerAppearance:self.owner.navigationController];
         self.mailController = [MFMailComposeViewController new];
         [self.mailController setToRecipients:@[[OTAppAppearance reportActionToRecepient]]];
         [self.mailController setSubject:subject];
-        [OTAppConfiguration configureNavigationControllerAppearance:self.owner.navigationController];
         [OTAppConfiguration configureMailControllerAppearance:self.mailController];
         if (body) {
             [self.mailController setMessageBody:body isHTML:NO];

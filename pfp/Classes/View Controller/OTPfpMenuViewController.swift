@@ -180,15 +180,15 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
             return
         }
         
+        OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
         let composeViewController = MFMailComposeViewController()
         composeViewController.mailComposeDelegate = self
         composeViewController.setToRecipients(["voisin-age@petitsfreresdespauvres.fr"])
         composeViewController.setSubject("")
         composeViewController.setMessageBody("", isHTML: false)
         
-        OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
         OTAppConfiguration.configureMailControllerAppearance(composeViewController)
-        present(composeViewController, animated: true, completion: nil)
+        self.present(composeViewController, animated: true, completion: nil)
     }
     
     //MARK:- MFMailComposerDelegate

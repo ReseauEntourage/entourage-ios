@@ -14,11 +14,6 @@ NSString *const kOutingAnnotationIdentifier = @"OTOutingAnnotationIdentifier";
 
 @implementation OTOutingAnnotation
 
-- (UIImage*)annotationImage {
-    NSString *iconName = @"outing";
-    return [self annotationImageWithName:iconName];
-}
-
 - (MKAnnotationView *)annotationView
 {
     MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:self

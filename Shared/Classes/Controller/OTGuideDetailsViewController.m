@@ -125,6 +125,8 @@
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
     composeVC.mailComposeDelegate = self;
     
@@ -133,7 +135,6 @@
     [composeVC setSubject:@""];
     [composeVC setMessageBody:@"" isHTML:NO];
     
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     [OTAppConfiguration configureMailControllerAppearance:composeVC];
     
     // Present the view controller modally.
