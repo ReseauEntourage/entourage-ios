@@ -368,6 +368,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UITabBar *currentTabBar = tabBarController.tabBar;
     CGSize size = CGSizeMake(currentTabBar.frame.size.width / currentTabBar.items.count, currentTabBar.frame.size.height);
     currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
+    
+    for (UINavigationController *navController in tabBarController.viewControllers) {
+        [OTAppConfiguration configureNavigationControllerAppearance:navController];
+    }
 }
 
 + (void)configureMailControllerAppearance:(MFMailComposeViewController *)mailController {
@@ -381,6 +385,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
 {
+    [OTAppConfiguration configureApplicationAppearance];
+    
     navigationController.automaticallyAdjustsScrollViewInsets = NO;
     navigationController.navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
     navigationController.navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];

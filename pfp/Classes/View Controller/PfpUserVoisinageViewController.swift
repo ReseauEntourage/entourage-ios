@@ -29,6 +29,8 @@ class PfpUserVoisinageViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
         self.userCircles = UserDefaults.standard.currentUser.privateCircles()
         
         if let firstCircle = self.userCircles.first {

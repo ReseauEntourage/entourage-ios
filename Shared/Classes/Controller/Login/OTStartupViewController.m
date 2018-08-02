@@ -30,7 +30,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     [self.loginButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     [self.registerButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
@@ -70,6 +69,11 @@
     self.betaButton.titleLabel.numberOfLines = 2;
     [self.betaButton setTitle:title forState:UIControlStateNormal];
     self.betaButton.hidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 -(IBAction)showSignUp:(id)sender {

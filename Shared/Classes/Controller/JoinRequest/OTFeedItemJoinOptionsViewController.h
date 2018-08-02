@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *logo;
 @property (nonatomic, weak) IBOutlet OTTextView *greetingMessage;
 
 @end

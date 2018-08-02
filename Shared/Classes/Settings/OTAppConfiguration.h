@@ -35,6 +35,7 @@
 + (void)configureTabBarAppearance:(UITabBarController*)tabBarController;
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController;
 + (void)configureMailControllerAppearance:(MFMailComposeViewController *)mailController;
++ (void)configureApplicationAppearance;
 
 + (void)applicationDidBecomeActive:(UIApplication *)application;
 + (void)applicationWillEnterForeground:(UIApplication *)application;

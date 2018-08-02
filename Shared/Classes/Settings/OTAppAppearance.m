@@ -669,4 +669,11 @@
     return OTLocalizedString(@"event_desc_example");
 }
 
++ (UIImage*)JoinFeedItemConfirmationLogo {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return nil;
+    }
+    return [UIImage imageNamed:@"logoWhiteEntourage"];
+}
+
 @end

@@ -54,13 +54,13 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Votre demande est transmise" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="6gx-OQ-FAY">
-                                                <rect key="frame" x="10" y="126" width="328" height="72"/>
+                                                <rect key="frame" x="10" y="126" width="328" height="70"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="30"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="Merci pour votre chaleur humaine ! Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="TzB-NC-pwc">
-                                                <rect key="frame" x="10" y="208" width="328" height="54"/>
+                                                <rect key="frame" x="10" y="206" width="328" height="56"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -114,8 +114,8 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="6gx-OQ-FAY" firstAttribute="top" secondItem="ywH-iH-lax" secondAttribute="bottom" constant="15" id="4Zx-17-FNK"/>
                                             <constraint firstItem="ywH-iH-lax" firstAttribute="leading" secondItem="cKu-4R-ztc" secondAttribute="leading" id="9qk-EH-bQA"/>
+                                            <constraint firstItem="6gx-OQ-FAY" firstAttribute="top" secondItem="cKu-4R-ztc" secondAttribute="bottom" constant="86" id="HKi-8B-Ush"/>
                                             <constraint firstItem="TzB-NC-pwc" firstAttribute="leading" secondItem="cKu-4R-ztc" secondAttribute="leading" id="NJg-YL-ZK7"/>
                                             <constraint firstItem="9u1-of-5of" firstAttribute="leading" secondItem="IxU-kb-rBX" secondAttribute="leading" constant="3" id="R7X-vY-CqN"/>
                                             <constraint firstItem="cKu-4R-ztc" firstAttribute="top" secondItem="IxU-kb-rBX" secondAttribute="top" constant="10" id="S2q-51-bHT"/>
@@ -140,7 +140,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="IxU-kb-rBX" secondAttribute="bottom" constant="74" id="8wl-mT-zWA"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="IxU-kb-rBX" secondAttribute="bottom" constant="74" id="8wl-mT-zWA"/>
                                     <constraint firstItem="IxU-kb-rBX" firstAttribute="centerY" secondItem="QNu-jZ-sM8" secondAttribute="centerY" id="Jo3-ju-Est"/>
                                     <constraint firstItem="IxU-kb-rBX" firstAttribute="top" relation="lessThanOrEqual" secondItem="QNu-jZ-sM8" secondAttribute="top" constant="77" id="PgM-04-2hh"/>
                                     <constraint firstItem="IxU-kb-rBX" firstAttribute="centerX" secondItem="QNu-jZ-sM8" secondAttribute="centerX" id="UJe-6o-SJB"/>
@@ -162,6 +162,7 @@
                     <connections>
                         <outlet property="greetingLabel" destination="TzB-NC-pwc" id="QMO-zt-sDT"/>
                         <outlet property="greetingMessage" destination="9u1-of-5of" id="sAu-4P-X0Y"/>
+                        <outlet property="logo" destination="ywH-iH-lax" id="Rr1-MJ-mrh"/>
                         <outlet property="tapBehavior" destination="crv-ss-J7c" id="rNq-Eb-B6B"/>
                     </connections>
                 </viewController>

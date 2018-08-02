@@ -65,6 +65,11 @@
     [[OTLocationManager sharedInstance] startLocationUpdates];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+}
+
 #pragma mark - Private
 
 - (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {

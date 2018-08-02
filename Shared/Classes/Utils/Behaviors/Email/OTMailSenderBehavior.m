@@ -47,6 +47,7 @@
 
 - (BOOL)sendMailWithSubject:(NSString *)subject andRecipient:(NSString *)recipient body:(NSString*)body { 
     if ([self checkCanSend]) {
+        [OTAppConfiguration configureNavigationControllerAppearance:self.owner.navigationController];
         self.mailController = [MFMailComposeViewController new];
         [self.mailController setToRecipients:@[recipient]];
         [self.mailController setSubject:subject];
@@ -56,7 +57,6 @@
             [self.mailController setMessageBody:body isHTML:NO];
         }
         
-        [OTAppConfiguration configureNavigationControllerAppearance:self.owner.navigationController];
         [OTAppConfiguration configureMailControllerAppearance:self.mailController];
         
         [self.owner showViewController:self.mailController sender:self];

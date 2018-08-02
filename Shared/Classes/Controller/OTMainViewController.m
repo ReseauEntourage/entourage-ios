@@ -420,11 +420,15 @@
     NSMutableArray *feeds = [[NSMutableArray alloc] init];
     for (CLLocation *coordinates in itemsTapped) {
         for (OTEntourage *item in self.newsFeedsSourceBehavior.feedItems) {
-            if ([item isKindOfClass:[OTEntourage class]])
+            if ([item isKindOfClass:[OTEntourage class]]) {
                 if (item.location.coordinate.latitude == coordinates.coordinate.latitude &&
                     item.location.coordinate.longitude == coordinates.coordinate.longitude) {
                         [feeds addObject:item];
                 }
+                else {
+                    NSLog(@"Invalide location for event: %@", item.title);
+                }
+            }
         }
     }
     
@@ -761,11 +765,12 @@
                             if (entFeedAnnotation) {
                                 [annotations addObject:entFeedAnnotation];
                             }
-                        } else if ([item isOuting]) {
-                            OTOutingAnnotation *entFeedAnnotation = [[OTOutingAnnotation alloc] initWithEntourage:(OTEntourage*)item];
-                            if (entFeedAnnotation) {
-                                [annotations addObject:entFeedAnnotation];
-                            }
+                        }
+                    }
+                    if ([item isOuting]) {
+                        OTOutingAnnotation *entFeedAnnotation = [[OTOutingAnnotation alloc] initWithEntourage:(OTEntourage*)item];
+                        if (entFeedAnnotation) {
+                            [annotations addObject:entFeedAnnotation];
                         }
                     }
                 }
