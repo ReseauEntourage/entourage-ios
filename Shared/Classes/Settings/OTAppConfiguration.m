@@ -258,7 +258,18 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
 }
 
-+ (UITabBarController*)configureMainTabBar
++ (UITabBarController*)configureMainTabBar {
+    NSInteger selectedIndex = 0;
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        selectedIndex = 1;
+    }
+    
+    UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:selectedIndex];
+    
+    return tabBarController;
+}
+
++ (UITabBarController*)configureMainTabBarWithDefaultSelectedIndex:(NSInteger)selectedIndex
 {
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     UIStoryboard *mainStoryboard = [UIStoryboard mainStoryboard];
@@ -291,10 +302,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     messagesNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"messages_tab_selected"];
     
     tabBarController.viewControllers = @[mainMapNavController, messagesNavController, menuNavController];
-    
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        tabBarController.selectedIndex = 1;
-    }
+    tabBarController.selectedIndex = selectedIndex;
     
     // Add top shadow above tab bar
     tabBarController.tabBar.layer.shadowOffset = CGSizeMake(0, 0);
