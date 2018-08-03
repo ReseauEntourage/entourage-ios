@@ -65,11 +65,11 @@ extern NSString *kUsers;
      ];
 }
 
-- (void)getEntourageWithId:(NSString *)uuid
+- (void)getEntourageWithId:(NSNumber *)uid
           withSuccess:(void(^)(OTEntourage *))success
               failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, uuid];
+    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, uid];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     
     [[OTHTTPRequestManager sharedInstance]

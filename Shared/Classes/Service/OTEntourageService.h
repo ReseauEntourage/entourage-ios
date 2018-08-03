@@ -19,11 +19,11 @@
                            success:(void (^)(NSArray *))success
                            failure:(void (^)(NSError *))failure;
 
-- (void)getEntourageWithId:(NSString *)uuid
-          withSuccess:(void(^)(OTEntourage *))success
-              failure:(void (^)(NSError *))failure;
+- (void)getEntourageWithId:(NSNumber *)uid
+               withSuccess:(void(^)(OTEntourage *))success
+                   failure:(void (^)(NSError *))failure;
 
-- (void)getEntourageWithStringId:(NSString *)entourageId
+- (void)getEntourageWithStringId:(NSString *)uuid
                      withSuccess:(void(^)(OTEntourage *))success
                          failure:(void (^)(NSError *))failure;
 

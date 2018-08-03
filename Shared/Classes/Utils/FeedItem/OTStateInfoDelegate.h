@@ -34,5 +34,6 @@ typedef enum {
 
 @optional
 - (void)loadWithSuccess2:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure;
+- (void)loadWithSuccess3:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure;
 
 @end

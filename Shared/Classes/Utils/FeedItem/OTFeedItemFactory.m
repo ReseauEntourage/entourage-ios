@@ -51,7 +51,7 @@
 
 + (id<OTFeedItemFactoryDelegate>)createForType:(NSString *)feedItemType andId:(NSNumber *)feedItemId {
     BOOL isTour = [feedItemType isEqualToString:TOUR_TYPE_NAME];
-    if(isTour) {
+    if (isTour) {
         OTTour *tour = [OTTour new];
         tour.uid = feedItemId;
         return [[OTTourFactory alloc] initWithTour:tour];

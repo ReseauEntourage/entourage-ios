@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController presentTransparentNavigationBar];
     [self.loginButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     [self.registerButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
@@ -53,12 +54,13 @@
         self.logoTitle.hidden = YES;
         self.logo.image = [OTAppAppearance applicationLogo];
     }
-    
-    [self.navigationController presentTransparentNavigationBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self.navigationController hideTransparentNavigationBar];
+    
     [OTLogger logEvent:@"Screen01SplashView"];
     [NSUserDefaults standardUserDefaults].temporaryUser = nil;
     
@@ -69,6 +71,11 @@
     self.betaButton.titleLabel.numberOfLines = 2;
     [self.betaButton setTitle:title forState:UIControlStateNormal];
     self.betaButton.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController presentTransparentNavigationBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
