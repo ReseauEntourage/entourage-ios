@@ -30,12 +30,15 @@
 #import "OTUnreadMessagesService.h"
 #import "OTShareFeedItemBehavior.h"
 #import "OTUser.h"
+#import "OTConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTEditEncounterBehavior.h"
 #import "OTMessageTableCellProviderBehavior.h"
 #import "OTBarButtonView.h"
 #import "UIImage+processing.h"
 #import "OTUserViewController.h"
+#import "UIStoryboard+entourage.h"
+#import "OTEntourageService.h"
 #import "entourage-Swift.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
@@ -93,6 +96,11 @@
     if (self.inviteBehaviorTriggered) {
         [self.inviteBehavior startInvite];
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFeedItemDetails:) name:kNotificationShowEventDetails object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -230,6 +238,32 @@
 
 - (IBAction)encounterChanged {
     [self reloadMessages];
+}
+
+- (IBAction)showFeedItemDetails:(NSNotification*)notification {
+    OTFeedItemMessage *messageItem = [notification.userInfo objectForKey:@kNotificationFeedItemKey];
+    [self loadEntourageItemWithStringId:messageItem.itemUuid completion:^(OTEntourage *entourage, NSError *error) {
+        if (!error) {
+            OTMapViewController *feedMapViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTMapViewController"];
+            feedMapViewController.feedItem = entourage;
+            [self.navigationController pushViewController:feedMapViewController animated:YES];
+        }
+    }];
+}
+
+- (void)loadEntourageItemWithStringId:(NSString*)uuid
+                           completion:(void(^)(OTEntourage *entourage, NSError *error))completion {
+    [[OTEntourageService new] getEntourageWithStringId:uuid
+                                           withSuccess:^(OTEntourage *entourage) {
+                                               [SVProgressHUD dismiss];
+                                               dispatch_async(dispatch_get_main_queue(), ^() {
+                                                   completion(entourage, nil);
+                                               });
+                                           } failure:^(NSError *error) {
+                                               dispatch_async(dispatch_get_main_queue(), ^() {
+                                                   completion(nil, error);
+                                               });
+                                           }];
 }
 
 #pragma mark - UITextViewDelegate

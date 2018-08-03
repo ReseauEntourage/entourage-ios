@@ -22,7 +22,8 @@
     OTFeedItemTimelinePoint *timelinePoint = [self.tableDataSource getItemAtIndexPath:indexPath];
     NSString *reuseIdentifier = [self getReuseIdentifier:timelinePoint];
     OTChatCellBase *cell = (OTChatCellBase *)[self.tableDataSource.dataSource.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if([cell isKindOfClass:[OTEncounterCell class]]) {
+    
+    if ([cell isKindOfClass:[OTEncounterCell class]]) {
         ((OTEncounterCell *)cell).feedItem = self.feedItem;
     }
     [cell configureWithTimelinePoint:timelinePoint];
@@ -52,6 +53,8 @@
             return @"EncounterCell";
         case MessageCellTypeChatDate:
             return @"ChatDateCell";
+        case MessageCellTypeEventCreated:
+            return @"EventCreatedCell";
         default:
             return @"PlaceholderCell";
     }

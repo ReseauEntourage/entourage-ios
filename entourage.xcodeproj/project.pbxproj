@@ -781,6 +781,8 @@
 		A24EA3862101D7A10027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
 		A24EA3872101D7A10027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
 		A24EA3882101D7A50027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
+		A2658BFC21144DF200B6B15C /* OTEventCreatedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */; };
+		A2658BFD21144DF200B6B15C /* OTEventCreatedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */; };
 		A285C35C20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
 		A285C35D20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
@@ -2000,6 +2002,8 @@
 		A24EA3812100A7780027AB8B /* UITextField+AutoSuggestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+AutoSuggestion.m"; sourceTree = "<group>"; };
 		A24EA3842101D7A10027AB8B /* OTAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddress.h; sourceTree = "<group>"; };
 		A24EA3852101D7A10027AB8B /* OTAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddress.m; sourceTree = "<group>"; };
+		A2658BFA21144DF200B6B15C /* OTEventCreatedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTEventCreatedCell.h; sourceTree = "<group>"; };
+		A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEventCreatedCell.m; sourceTree = "<group>"; };
 		A285C35A20F7787600D6625E /* OTAddEditEntourageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddEditEntourageDataSource.h; sourceTree = "<group>"; };
 		A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddEditEntourageDataSource.m; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2558,21 +2562,21 @@
 		A202E86A2085D2C40058F32C /* ActiveFeedItem */ = {
 			isa = PBXGroup;
 			children = (
+				A202E87C2085D2C40058F32C /* AddressBookCells */,
+				A202E8842085D2C40058F32C /* ChatCells */,
+				A202E86E2085D2C40058F32C /* InfoCells */,
+				A202E89C2085D2C40058F32C /* OTActiveFeedItemViewController.h */,
+				A202E87A2085D2C40058F32C /* OTActiveFeedItemViewController.m */,
 				A202E86B2085D2C40058F32C /* OTInviteByPhoneViewController.h */,
+				A202E8812085D2C40058F32C /* OTInviteByPhoneViewController.m */,
+				A202E8792085D2C40058F32C /* OTInviteContactsViewController.h */,
+				A202E89D2085D2C40058F32C /* OTInviteContactsViewController.m */,
+				A202E8832085D2C40058F32C /* OTInviteSourceViewController.h */,
 				A202E86C2085D2C40058F32C /* OTInviteSourceViewController.m */,
 				A202E86D2085D2C40058F32C /* OTInviteSuccessViewController.h */,
-				A202E86E2085D2C40058F32C /* InfoCells */,
-				A202E8792085D2C40058F32C /* OTInviteContactsViewController.h */,
-				A202E87A2085D2C40058F32C /* OTActiveFeedItemViewController.m */,
-				A202E87B2085D2C40058F32C /* OTMapViewController.m */,
-				A202E87C2085D2C40058F32C /* AddressBookCells */,
-				A202E8812085D2C40058F32C /* OTInviteByPhoneViewController.m */,
 				A202E8822085D2C40058F32C /* OTInviteSuccessViewController.m */,
-				A202E8832085D2C40058F32C /* OTInviteSourceViewController.h */,
-				A202E8842085D2C40058F32C /* ChatCells */,
 				A202E89B2085D2C40058F32C /* OTMapViewController.h */,
-				A202E89C2085D2C40058F32C /* OTActiveFeedItemViewController.h */,
-				A202E89D2085D2C40058F32C /* OTInviteContactsViewController.m */,
+				A202E87B2085D2C40058F32C /* OTMapViewController.m */,
 			);
 			path = ActiveFeedItem;
 			sourceTree = "<group>";
@@ -2612,28 +2616,30 @@
 		A202E8842085D2C40058F32C /* ChatCells */ = {
 			isa = PBXGroup;
 			children = (
-				A202E8852085D2C40058F32C /* OTMessageReceivedCell.h */,
-				A202E8862085D2C40058F32C /* OTStatusCell.m */,
-				A202E8872085D2C40058F32C /* OTJoinRequestedCell.h */,
-				A202E8882085D2C40058F32C /* OTJoinRejectedCell.h */,
-				A202E8892085D2C40058F32C /* OTPlaceholderCell.h */,
 				A202E88A2085D2C40058F32C /* OTChatCellBase.h */,
-				A202E88B2085D2C40058F32C /* OTEncounterCell.h */,
-				A202E88C2085D2C40058F32C /* OTMessageSentCell.m */,
-				A202E88D2085D2C40058F32C /* OTJoinRequestedNotOwnerCell.h */,
-				A202E88E2085D2C40058F32C /* OTChatDateCell.m */,
-				A202E88F2085D2C40058F32C /* OTJoinAcceptedCell.m */,
-				A202E8902085D2C40058F32C /* OTStatusCell.h */,
-				A202E8912085D2C40058F32C /* OTMessageReceivedCell.m */,
-				A202E8922085D2C40058F32C /* OTPlaceholderCell.m */,
-				A202E8932085D2C40058F32C /* OTJoinRejectedCell.m */,
-				A202E8942085D2C40058F32C /* OTJoinRequestedCell.m */,
-				A202E8952085D2C40058F32C /* OTChatDateCell.h */,
-				A202E8962085D2C40058F32C /* OTJoinRequestedNotOwnerCell.m */,
-				A202E8972085D2C40058F32C /* OTMessageSentCell.h */,
-				A202E8982085D2C40058F32C /* OTEncounterCell.m */,
 				A202E8992085D2C40058F32C /* OTChatCellBase.m */,
+				A202E8952085D2C40058F32C /* OTChatDateCell.h */,
+				A202E88E2085D2C40058F32C /* OTChatDateCell.m */,
+				A202E88B2085D2C40058F32C /* OTEncounterCell.h */,
+				A202E8982085D2C40058F32C /* OTEncounterCell.m */,
 				A202E89A2085D2C40058F32C /* OTJoinAcceptedCell.h */,
+				A202E88F2085D2C40058F32C /* OTJoinAcceptedCell.m */,
+				A202E8882085D2C40058F32C /* OTJoinRejectedCell.h */,
+				A202E8932085D2C40058F32C /* OTJoinRejectedCell.m */,
+				A202E8872085D2C40058F32C /* OTJoinRequestedCell.h */,
+				A202E8942085D2C40058F32C /* OTJoinRequestedCell.m */,
+				A2658BFA21144DF200B6B15C /* OTEventCreatedCell.h */,
+				A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */,
+				A202E88D2085D2C40058F32C /* OTJoinRequestedNotOwnerCell.h */,
+				A202E8962085D2C40058F32C /* OTJoinRequestedNotOwnerCell.m */,
+				A202E8852085D2C40058F32C /* OTMessageReceivedCell.h */,
+				A202E8912085D2C40058F32C /* OTMessageReceivedCell.m */,
+				A202E8972085D2C40058F32C /* OTMessageSentCell.h */,
+				A202E88C2085D2C40058F32C /* OTMessageSentCell.m */,
+				A202E8892085D2C40058F32C /* OTPlaceholderCell.h */,
+				A202E8922085D2C40058F32C /* OTPlaceholderCell.m */,
+				A202E8902085D2C40058F32C /* OTStatusCell.h */,
+				A202E8862085D2C40058F32C /* OTStatusCell.m */,
 			);
 			path = ChatCells;
 			sourceTree = "<group>";
@@ -4409,6 +4415,7 @@
 				A202EB2D2085D2C70058F32C /* OTContactInfoCell.m in Sources */,
 				A202ECED2085D2C80058F32C /* OTAddressBookService.m in Sources */,
 				A202EC112085D2C80058F32C /* OTAssociationsService.m in Sources */,
+				A2658BFC21144DF200B6B15C /* OTEventCreatedCell.m in Sources */,
 				A202ECB12085D2C80058F32C /* OTEditEntourageTableSource.m in Sources */,
 				A202EC732085D2C80058F32C /* OTBehavior.m in Sources */,
 				A202EB632085D2C80058F32C /* OTOptionsViewController.m in Sources */,
@@ -5020,6 +5027,7 @@
 				A296B77420871CFC00F6AFBD /* OTAboutMeViewController.m in Sources */,
 				A296B77520871CFC00F6AFBD /* OTMembersTableDataSource.m in Sources */,
 				A296B77620871CFC00F6AFBD /* OTTourMessaging.m in Sources */,
+				A2658BFD21144DF200B6B15C /* OTEventCreatedCell.m in Sources */,
 				A296B77720871CFC00F6AFBD /* OTEntourageDisclaimerViewController.m in Sources */,
 				A296B77820871CFC00F6AFBD /* OTCategoryEditCell.m in Sources */,
 				A296B77920871CFC00F6AFBD /* OTFeedsService.m in Sources */,

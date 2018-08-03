@@ -18,6 +18,13 @@
 @property (nonatomic, strong) NSNumber *uID;
 @property (nonatomic, strong) OTAssociation *partner;
 
+// Outing
+@property (nonatomic, strong) NSString *messageType;
+@property (nonatomic, strong) NSString *displayAddress;
+@property (nonatomic, strong) NSDate *startsAt;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *itemUuid;
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

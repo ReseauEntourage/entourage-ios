@@ -48,6 +48,7 @@
 
 #define kNotificationShowCurrentLocation "NotificationCurrentLocation"
 #define kNotificationShowFeedsMapCurrentLocation "NotificationFeedsMapCurrentLocation"
+#define kNotificationShowEventDetails @"NotificationShowEventDetails"
 
 #define kNotificationProfilePictureUpdated "NotificationProfilePictureUpdated"
 #define kNotificationAboutMeUpdated "NotificationAboutMeUpdated"

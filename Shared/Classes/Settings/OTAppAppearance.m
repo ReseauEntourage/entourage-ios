@@ -26,6 +26,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+Fitting.h"
+#import "OTFeedItemMessage.h"
 #import "entourage-Swift.h"
 
 
@@ -674,6 +675,29 @@
         return nil;
     }
     return [UIImage imageNamed:@"logoWhiteEntourage"];
+}
+
++ (NSAttributedString*)formattedEventCreatedMessageInfo:(OTFeedItemMessage*)messageItem {
+    UIFont *regularFont = [UIFont fontWithName:@"SFUIText-Regular" size:15.0];
+    UIFont *boldFont = [UIFont fontWithName:@"SFUIText-Bold" size:15.0];
+    UIFont *semiboldFont = [UIFont fontWithName:@"SFUIText-Semibold" size:15.0];
+    UIColor *regularColor = [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1];
+    NSString *authorAndAction = [NSString stringWithFormat:@"%@ a créé une", messageItem.userName];
+    NSString *event = [OTAppAppearance eventTitle];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"EEEE dd/MM à HH:mm"];
+    NSString *date = [formatter stringFromDate:messageItem.startsAt];
+    
+    NSString *fullText = [NSString stringWithFormat:@"%@ %@:\n%@\n\n%@", authorAndAction, event, messageItem.title, date];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:fullText attributes:@{NSFontAttributeName: regularFont,                                                                               NSForegroundColorAttributeName: regularColor}];
+    
+    NSRange eventRange = NSMakeRange(authorAndAction.length + 1, event.length);
+    NSRange titleRange = NSMakeRange(authorAndAction.length + event.length + 3, messageItem.title.length);
+    [attributedString addAttributes:@{NSFontAttributeName: semiboldFont,                                                                               NSForegroundColorAttributeName: [UIColor pfpOutingCircleColor]} range:eventRange];
+    [attributedString addAttributes:@{NSFontAttributeName: boldFont,                                                                               NSForegroundColorAttributeName: regularColor} range:titleRange];
+    
+    return attributedString;
 }
 
 @end

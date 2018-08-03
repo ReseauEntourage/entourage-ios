@@ -12,7 +12,6 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTConsts.h"
 #import "UIImageView+entourage.h"
-#import "OTConsts.h"
 
 // Sergiu : again apologies for magic numbers (i hate ios tables with autolayout)
 #define BUTTON_MARGIN 144
