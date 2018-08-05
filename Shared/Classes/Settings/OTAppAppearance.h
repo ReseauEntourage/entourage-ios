@@ -10,6 +10,7 @@
 
 @class OTEntourage;
 @class OTFeedItem;
+@class OTFeedItemMessage;
 
 @interface OTAppAppearance : NSObject
 + (NSString *)aboutUrlString;
@@ -59,4 +60,5 @@
 + (NSString*)sampleTitleForNewEvent;
 + (NSString*)sampleDescriptionForNewEvent;
 + (UIImage*)JoinFeedItemConfirmationLogo;
++ (NSAttributedString*)formattedEventCreatedMessageInfo:(OTFeedItemMessage*)messageItem;
 @end

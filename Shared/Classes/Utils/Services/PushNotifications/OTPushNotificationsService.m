@@ -122,8 +122,8 @@
 {
     [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getMessaging] getFeedItemUsersWithStatus:JOIN_PENDING success:^(NSArray *items){
         NSNumber *userId = [pnData.extra numberForKey:@"user_id"];
-        for(OTFeedItemJoiner *item in items) {
-            if([item.uID isEqualToNumber:userId] && [item.status isEqualToString:JOIN_PENDING]) {
+        for (OTFeedItemJoiner *item in items) {
+            if ([item.uID isEqualToNumber:userId] && [item.status isEqualToString:JOIN_PENDING]) {
                 [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
                 OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
 
@@ -135,7 +135,7 @@
                     [OTLogger logEvent:@"RejectJoinRequest"];
                     [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getJoiner] reject:joiner success:^(){
                         [self refreshMessages:pnData];
-                    }failure:nil];
+                    } failure:nil];
                 }];
                 UIAlertAction *acceptJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"acceptAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [OTLogger logEvent:@"AcceptJoinRequest"];

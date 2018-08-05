@@ -450,7 +450,7 @@
              @"types" : [self getTypes],
              @"show_my_entourages_only" : self.showOnlyMyEntourages ? @"true" : @"false",
              @"show_my_partner_only" : self.showFromOrganisation ? @"true" : @"false",
-             @"show_past_events" : self.showPastOuting ? @"true" : @"false",
+             @"show_past_events" : (self.showPastOuting && self.showOuting) ? @"true" : @"false",
              @"time_range" : @(self.timeframeInHours),
              @"announcements" : @"v1"
     }.mutableCopy;
