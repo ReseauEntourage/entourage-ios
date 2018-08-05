@@ -351,7 +351,8 @@
 }
 
 + (void)createEntourageFromController:(UIViewController*)viewController
-                         withDelegate:(id<EntourageEditorDelegate>)delegate asEvent:(BOOL)isEvent {
+                         withDelegate:(id<EntourageEditorDelegate>)delegate
+                              asEvent:(BOOL)isEvent {
     UIStoryboard *editEntourageStoryboard = [UIStoryboard storyboardWithName:@"EntourageEditor" bundle:nil];
     UINavigationController *navController = (UINavigationController*)[editEntourageStoryboard instantiateInitialViewController];
     OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.childViewControllers[0];

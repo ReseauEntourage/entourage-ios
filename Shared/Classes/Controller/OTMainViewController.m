@@ -20,7 +20,6 @@
 #import "OTUserViewController.h"
 #import "OTGuideDetailsViewController.h"
 #import "OTTourCreatorViewController.h"
-#import "OTEntourageEditorViewController.h"
 #import "OTFeedItemFiltersViewController.h"
 #import "OTPublicFeedItemViewController.h"
 #import "OTActiveFeedItemViewController.h"
@@ -108,7 +107,6 @@
     OTFeedItemsTableViewDelegate,
     OTTourCreatorDelegate,
     OTFeedItemQuitDelegate,
-    EntourageEditorDelegate,
     OTFeedItemsFilterDelegate,
     OTSolidarityGuideFilterDelegate,
     OTNewsFeedsSourceDelegate,
@@ -1436,8 +1434,9 @@
 }
 
 - (void)showTourConfirmation {
-    if([OTOngoingTourService sharedInstance].isOngoing)
+    if ([OTOngoingTourService sharedInstance].isOngoing) {
         [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
+    }
 }
 
 #pragma mark - Segue
