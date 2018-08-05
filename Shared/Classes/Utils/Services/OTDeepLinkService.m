@@ -176,13 +176,18 @@
     [self updateAppWindow:tabViewController];
 }
 
+//- (void)showControllerFromAnywhere:(UIViewController *)controller {
+//    UIViewController *currentController = [self getTopViewController];
+//
+//    while (currentController.presentedViewController) {
+//        currentController = currentController.presentedViewController;
+//    }
+//    [currentController presentViewController:controller animated:YES completion:nil];
+//}
+
 - (void)showControllerFromAnywhere:(UIViewController *)controller {
-    UIViewController *currentController = [self getTopViewController];
-    
-    while (currentController.presentedViewController) {
-        currentController = currentController.presentedViewController;
-    }
-    [currentController presentViewController:controller animated:YES completion:nil];
+    OTMainViewController *mainViewController = [self popToMainViewController];
+    [mainViewController presentViewController:controller animated:YES completion:nil];
 }
 
 - (OTMainViewController *)popToMainViewController {
@@ -212,20 +217,39 @@
     return nil;
 }
 
+//- (void)prepareControllers:(OTFeedItem *)feedItem {
+//    if ([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
+//        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
+//        OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+//        publicFeedItemController.feedItem = feedItem;
+//
+//        [self showController:publicFeedItemController];
+//    }
+//    else {
+//        UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
+//        OTActiveFeedItemViewController *activeFeedItemController = (OTActiveFeedItemViewController *)[activeFeedItemStorybard instantiateInitialViewController];
+//        activeFeedItemController.feedItem = feedItem;
+//
+//        [self showController:activeFeedItemController];
+//    }
+//}
+
 - (void)prepareControllers:(OTFeedItem *)feedItem {
+    OTMainViewController *mainViewController = [self popToMainViewController];
+    
     if ([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
         UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
         OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
         publicFeedItemController.feedItem = feedItem;
         
-        [self showController:publicFeedItemController];
+        [mainViewController.navigationController pushViewController:publicFeedItemController animated:NO];
     }
     else {
         UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
         OTActiveFeedItemViewController *activeFeedItemController = (OTActiveFeedItemViewController *)[activeFeedItemStorybard instantiateInitialViewController];
         activeFeedItemController.feedItem = feedItem;
         
-        [self showController:activeFeedItemController];
+        [mainViewController.navigationController pushViewController:activeFeedItemController animated:NO];
     }
 }
 
