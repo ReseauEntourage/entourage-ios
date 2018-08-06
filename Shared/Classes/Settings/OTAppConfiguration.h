@@ -21,6 +21,10 @@
 #import "OTAppAppearance.h"
 #import "OTEntourage.h"
 
+#define MAP_TAB_INDEX 0
+#define MESSAGES_TAB_INDEX 1
+#define MENU_TAB_INDEX 2
+
 @class EnvironmentConfigurationManager;
 
 @interface OTAppConfiguration : NSObject

@@ -17,7 +17,6 @@
 #import "OTAPIConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTLoginViewController.h"
-#import "OTMainViewController.h"
 #import "OTSelectAssociationViewController.h"
 #import "OTEntourageEditorViewController.h"
 #import "OTTutorialViewController.h"
@@ -58,9 +57,8 @@
 }
 
 - (UIViewController *)getTopViewController {
-    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:0];
-    UINavigationController *navController = (UINavigationController*)tabViewController.viewControllers.firstObject;
-    return navController.topViewController;
+    OTMainViewController *mainController = [self popToMainViewController];
+    return mainController;
 }
 
 - (void)showProfileFromAnywhereForUser:(NSNumber *)userId {
@@ -68,6 +66,7 @@
     UINavigationController *rootUserProfileController = (UINavigationController *)[userProfileStorybard instantiateInitialViewController];
     OTUserViewController *userController = (OTUserViewController *)rootUserProfileController.topViewController;
     userController.userId = userId;
+    
     [self showControllerFromAnywhere:rootUserProfileController];
 }
 
@@ -85,8 +84,10 @@
 - (void)handleUniversalLink:(NSURL *)url {
     if (url.pathComponents == nil || url.pathComponents.count < 2) return;
     NSMutableArray *pathComponents = [NSMutableArray arrayWithArray:url.pathComponents];
+    
     // remove the leading '/'
     [pathComponents removeObjectAtIndex:0];
+    
     // handle the 'entourages/<extra>'
     NSString *key = [pathComponents objectAtIndex:0];
     if ([key isEqualToString:@"entourages"]) {
@@ -96,6 +97,7 @@
         // handle the 'deeplink/<key>/<extra>?<query>'
         // remove the 'deeplink'
         [pathComponents removeObjectAtIndex:0];
+        
         // handle the deep link
         key = [pathComponents objectAtIndex:0];
         [self handleDeepLinkWithKey:key pathComponents:pathComponents andQuery:url.query];
@@ -106,9 +108,7 @@
     if ([key isEqualToString:@"feed"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
         [mainViewController leaveGuide];
-        //            UIStoryboard *mainStorybard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        //            OTMainViewController *mainController = (OTMainViewController *)[mainStorybard instantiateInitialViewController];
-        //            [self updateAppWindow:mainController];
+
         // "feed/filters"
         if (pathComponents != nil && pathComponents.count >= 2) {
             if ([pathComponents[1] isEqualToString:@"filters"]) {
@@ -117,6 +117,7 @@
         }
     } else if ([key isEqualToString:@"badge"]) {
         OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
+        
         [self showController:selectAssociationController];
         
     } else if ([key isEqualToString:@"webview"]) {
@@ -128,12 +129,15 @@
         [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].sid];
         
     } else if ([key isEqualToString:@"messages"]) {
-        OTMainViewController *mainViewController = [self popToMainViewController];
-        [mainViewController performSegueWithIdentifier:@"MyEntouragesSegue" sender:nil];
+        UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:MESSAGES_TAB_INDEX];
+        [self updateAppWindow:tabViewController];
         
     } else if ([key isEqualToString:@"create-action"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
-        [mainViewController performSegueWithIdentifier:@"EntourageEditorSegue" sender:nil];
+        [OTAppState showFeedAndMapActionsFromController:mainViewController
+                                            showOptions:NO
+                                           withDelegate:mainViewController
+                                         isEditingEvent:YES];
         
     } else if ([key isEqualToString:@"entourage"] || [key isEqualToString:@"entourages"]) {
         if (pathComponents != nil && pathComponents.count >= 2) {
@@ -165,25 +169,13 @@
 }
 
 - (void)showController: (UIViewController *)controller {
-    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:0];
+    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:MAP_TAB_INDEX];
     [self updateAppWindow:tabViewController];
+    
     UINavigationController *navigationController = (UINavigationController *)tabViewController.viewControllers[0];
     
-    NSMutableArray *childViewControllers = [[NSMutableArray alloc] initWithArray:navigationController.viewControllers];
-    [childViewControllers addObject:controller];
-    
-    navigationController.viewControllers = childViewControllers;
-    [self updateAppWindow:tabViewController];
+    [navigationController pushViewController:controller animated:NO];
 }
-
-//- (void)showControllerFromAnywhere:(UIViewController *)controller {
-//    UIViewController *currentController = [self getTopViewController];
-//
-//    while (currentController.presentedViewController) {
-//        currentController = currentController.presentedViewController;
-//    }
-//    [currentController presentViewController:controller animated:YES completion:nil];
-//}
 
 - (void)showControllerFromAnywhere:(UIViewController *)controller {
     OTMainViewController *mainViewController = [self popToMainViewController];
@@ -191,48 +183,12 @@
 }
 
 - (OTMainViewController *)popToMainViewController {
-    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:0];
+    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:MAP_TAB_INDEX];
     [self updateAppWindow:tabViewController];
+    
     UINavigationController *navController = (UINavigationController*)tabViewController.viewControllers.firstObject;
     return (OTMainViewController*)navController.topViewController;
-    
-//    UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
-//    if ([result isKindOfClass:[SWRevealViewController class]]) {
-//        SWRevealViewController *revealController = (SWRevealViewController*)result;
-//        [revealController setFrontViewPosition:FrontViewPositionLeft];
-//        result = revealController.frontViewController;
-//    }
-//
-//    if ([result isKindOfClass:[UINavigationController class]]) {
-//        UINavigationController *navController = (UINavigationController*)result;
-//        [navController popToRootViewControllerAnimated:NO];
-//        if ([navController.childViewControllers count] > 0) {
-//            if ([navController.childViewControllers[0] isKindOfClass:[OTMainViewController class]]) {
-//                [navController.childViewControllers[0] dismissViewControllerAnimated:NO completion:nil];
-//                return navController.childViewControllers[0];
-//            }
-//        }
-//    }
-    
-    return nil;
 }
-
-//- (void)prepareControllers:(OTFeedItem *)feedItem {
-//    if ([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
-//        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
-//        OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
-//        publicFeedItemController.feedItem = feedItem;
-//
-//        [self showController:publicFeedItemController];
-//    }
-//    else {
-//        UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
-//        OTActiveFeedItemViewController *activeFeedItemController = (OTActiveFeedItemViewController *)[activeFeedItemStorybard instantiateInitialViewController];
-//        activeFeedItemController.feedItem = feedItem;
-//
-//        [self showController:activeFeedItemController];
-//    }
-//}
 
 - (void)prepareControllers:(OTFeedItem *)feedItem {
     OTMainViewController *mainViewController = [self popToMainViewController];

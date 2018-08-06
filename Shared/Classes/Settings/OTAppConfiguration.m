@@ -180,9 +180,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         NSURL *url = userActivity.webpageURL;
-        //NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
-        //NSString *entourageId = arrayWithStrings.lastObject;
-        //[[OTDeepLinkService new] navigateTo:entourageId];
+
         [[OTDeepLinkService new] handleUniversalLink:url];
     }
     return true;
@@ -259,9 +257,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (UITabBarController*)configureMainTabBar {
-    NSInteger selectedIndex = 0;
+    NSInteger selectedIndex = MAP_TAB_INDEX;
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        selectedIndex = 1;
+        selectedIndex = MESSAGES_TAB_INDEX;
     }
     
     UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:selectedIndex];
@@ -471,6 +469,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     NSDictionary *userInfo = notification.request.content.userInfo;
     OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
+    
     if ([pnService isMixpanelDeepLinkNotification:userInfo]) {
         //for mixpanel deeplinks, shows the push notification
         completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);

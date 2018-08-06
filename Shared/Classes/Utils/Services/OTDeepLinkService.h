@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTMainViewController.h"
 
 @interface OTDeepLinkService : NSObject
 
 - (void)navigateTo:(NSNumber *)feedItemId withType:(NSString *)feedItemType;
 - (void)navigateTo:(NSString *)feedItemId;
 - (UIViewController *)getTopViewController;
+- (OTMainViewController *)popToMainViewController;
 - (void)showProfileFromAnywhereForUser:(NSNumber *)userId;
 - (void)handleDeepLink:(NSURL *)url;
 - (void)handleUniversalLink:(NSURL *)url;
