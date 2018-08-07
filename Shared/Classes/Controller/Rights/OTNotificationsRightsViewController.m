@@ -114,7 +114,7 @@
         
         if (joinedInvitation) {
             [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
-            [[OTDeepLinkService new] navigateTo:joinedInvitation.entourageId withType:nil];
+            [[OTDeepLinkService new] navigateToFeedWithNumberId:joinedInvitation.entourageId withType:nil];
             
             if ([OTAppConfiguration shouldShowIntroTutorial] &&
                 ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {

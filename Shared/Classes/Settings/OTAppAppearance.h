@@ -17,6 +17,7 @@
 + (NSString *)welcomeDescription;
 + (UIImage *)welcomeLogo;
 + (UIImage *)applicationLogo;
++ (NSString *)applicationTitle;
 + (NSString *)userProfileNameDescription;
 + (NSString *)userProfileEmailDescription;
 + (NSString *)editUserDescriptionTitle;
@@ -61,4 +62,7 @@
 + (NSString*)sampleDescriptionForNewEvent;
 + (UIImage*)JoinFeedItemConfirmationLogo;
 + (NSAttributedString*)formattedEventCreatedMessageInfo:(OTFeedItemMessage*)messageItem;
++ (NSString*)requestToJoinTitleForFeedItem:(OTFeedItem*)feedItem;
++ (NSString*)quitFeedItemConformationTitle:(OTFeedItem*)feedItem;
++ (NSString*)closeFeedItemConformationTitle:(OTFeedItem *)feedItem;
 @end

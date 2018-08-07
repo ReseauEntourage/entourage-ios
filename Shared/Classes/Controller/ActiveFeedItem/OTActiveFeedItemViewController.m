@@ -242,13 +242,51 @@
 
 - (IBAction)showFeedItemDetails:(NSNotification*)notification {
     OTFeedItemMessage *messageItem = [notification.userInfo objectForKey:@kNotificationFeedItemKey];
+    [SVProgressHUD show];
+    
     [self loadEntourageItemWithStringId:messageItem.itemUuid completion:^(OTEntourage *entourage, NSError *error) {
         if (!error) {
-            OTMapViewController *feedMapViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTMapViewController"];
-            feedMapViewController.feedItem = entourage;
-            [self.navigationController pushViewController:feedMapViewController animated:YES];
+            [self loadEntourageGroupMembers:entourage completion:^(NSArray *members, NSError *error) {
+                BOOL isMember = NO;
+                if (members) {
+                    NSArray *memberIds = [members valueForKey:@"uID"];
+                    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+                    isMember = [memberIds containsObject:currentUser.sid];
+                }
+                
+                if (isMember) {
+                    OTActiveFeedItemViewController *activeFeedItemViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTActiveFeedItemViewController"];
+                    activeFeedItemViewController.feedItem = entourage;
+                    [self.navigationController pushViewController:activeFeedItemViewController animated:YES];
+                    
+                } else {
+                    OTMapViewController *feedMapViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTMapViewController"];
+                    feedMapViewController.feedItem = entourage;
+                    [self.navigationController pushViewController:feedMapViewController animated:YES];
+                }
+            }];
+        } else {
+            [SVProgressHUD dismiss];
         }
     }];
+}
+
+- (void)loadEntourageGroupMembers:(OTEntourage*)entourage
+                       completion:(void(^)(NSArray *members, NSError *error))completion{
+    
+    [[OTEntourageService new] entourageUsers:entourage
+                                     success:^(NSArray *items) {
+                                         NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
+                                             return [item.status isEqualToString:JOIN_ACCEPTED];
+                                         }]];
+                                         dispatch_async(dispatch_get_main_queue(), ^() {
+                                             completion(filteredItems, nil);
+                                         });
+                                     } failure:^(NSError *error) {
+                                         dispatch_async(dispatch_get_main_queue(), ^() {
+                                             completion(nil, error);
+                                         });
+                                     }];
 }
 
 - (void)loadEntourageItemWithStringId:(NSString*)uuid
@@ -260,6 +298,7 @@
                                                    completion(entourage, nil);
                                                });
                                            } failure:^(NSError *error) {
+                                               [SVProgressHUD dismiss];
                                                dispatch_async(dispatch_get_main_queue(), ^() {
                                                    completion(nil, error);
                                                });

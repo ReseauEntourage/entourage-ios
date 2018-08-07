@@ -172,7 +172,7 @@ extern NSString *kUsers;
          {
              NSDictionary *data = responseObject;
              NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-             OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc ]initWithDictionary:joinerDictionary];
+             OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc] initWithDictionary:joinerDictionary];
              
              if (success)
              {

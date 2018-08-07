@@ -30,7 +30,7 @@
 
 @implementation OTDeepLinkService
 
-- (void)navigateTo:(NSNumber *)feedItemId withType:(NSString *)feedItemType {
+- (void)navigateToFeedWithNumberId:(NSNumber *)feedItemId withType:(NSString *)feedItemType {
     [SVProgressHUD show];
     [[[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getStateInfo] loadWithSuccess3:^(OTFeedItem *feedItem) {
         [SVProgressHUD dismiss];
@@ -40,7 +40,7 @@
     }];
 }
 
-- (void)navigateTo: (NSString *)feedItemId {
+- (void)navigateToFeedWithStringId: (NSString *)feedItemId {
     [SVProgressHUD show];
     if (TOKEN) {
         [[[OTFeedItemFactory createForId:feedItemId] getStateInfo] loadWithSuccess2:^(OTFeedItem *feedItem) {
@@ -104,7 +104,9 @@
     }
 }
 
-- (void)handleDeepLinkWithKey:(NSString *)key pathComponents:(NSArray *)pathComponents andQuery:(NSString *)query {
+- (void)handleDeepLinkWithKey:(NSString *)key
+               pathComponents:(NSArray *)pathComponents
+                     andQuery:(NSString *)query {
     if ([key isEqualToString:@"feed"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
         [mainViewController leaveGuide];
@@ -141,7 +143,7 @@
         
     } else if ([key isEqualToString:@"entourage"] || [key isEqualToString:@"entourages"]) {
         if (pathComponents != nil && pathComponents.count >= 2) {
-            [self navigateTo:pathComponents[1]];
+            [self navigateToFeedWithStringId:pathComponents[1]];
         }
     } else if ([key isEqualToString:@"guide"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];

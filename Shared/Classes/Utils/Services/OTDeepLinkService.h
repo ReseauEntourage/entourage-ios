@@ -11,8 +11,9 @@
 
 @interface OTDeepLinkService : NSObject
 
-- (void)navigateTo:(NSNumber *)feedItemId withType:(NSString *)feedItemType;
-- (void)navigateTo:(NSString *)feedItemId;
+- (void)navigateToFeedWithNumberId:(NSNumber *)feedItemId withType:(NSString *)feedItemType;
+- (void)navigateToFeedWithStringId:(NSString *)feedItemId;
+
 - (UIViewController *)getTopViewController;
 - (OTMainViewController *)popToMainViewController;
 - (void)showProfileFromAnywhereForUser:(NSNumber *)userId;

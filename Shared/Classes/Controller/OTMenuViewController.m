@@ -118,6 +118,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [OTLogger logEvent:@"OpenMenu"];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
+    [OTAppConfiguration updateAppearanceForMainTabBar];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

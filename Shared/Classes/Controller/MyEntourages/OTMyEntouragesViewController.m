@@ -76,6 +76,7 @@
     
     [self loadInvitations];
     [self.entouragesDataSource loadData];
+    [OTAppConfiguration updateAppearanceForMainTabBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
