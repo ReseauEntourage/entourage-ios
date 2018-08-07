@@ -75,10 +75,8 @@ extern NSString *kUsers;
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
      andParameters:parameters
-     andSuccess:^(id responseObject)
-     {
-         if (success)
-         {
+     andSuccess:^(id responseObject) {
+         if (success) {
              NSDictionary *entDictionary = [(NSDictionary*)responseObject objectForKey:@"entourage"];
              OTEntourage *ent = [[OTEntourage alloc] initWithDictionary:entDictionary];
              success(ent);

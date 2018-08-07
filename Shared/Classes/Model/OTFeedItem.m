@@ -65,7 +65,7 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super init];
-    if (self) {
+    if (self && dictionary) {
         self.uuid = [dictionary stringForKey:kWSKeyUUID];
         self.uid = [dictionary numberForKey:kWSKeyID];
         self.groupType = [dictionary stringForKey:kWSKeyGroupType];
