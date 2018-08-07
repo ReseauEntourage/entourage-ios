@@ -50,9 +50,10 @@
         
     } else {
         OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
-        UINavigationController *rootController = (UINavigationController*)appDelegate.window.rootViewController;
-        if (rootController.navigationController.topViewController) {
-            [rootController.navigationController.topViewController presentViewController:safariController animated:YES completion:nil];
+        UITabBarController *rootController = (UITabBarController*)appDelegate.window.rootViewController;
+        UINavigationController *navController = [rootController viewControllers].firstObject;
+        if (navController.topViewController) {
+            [navController presentViewController:safariController animated:YES completion:nil];
         }
         else {
             [rootController presentViewController:safariController animated:YES completion:nil];

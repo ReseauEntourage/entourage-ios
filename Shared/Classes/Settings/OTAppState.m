@@ -152,6 +152,18 @@
     tabBarController.selectedIndex = MESSAGES_TAB_INDEX;
 }
 
++ (void)switchToMainScreenAndResetAppWindow:(BOOL)reset {
+    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
+    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
+    tabBarController.selectedIndex = MAP_TAB_INDEX;
+    
+    if (reset) {
+        UIWindow *window = [appDelegate window];
+        window.rootViewController = tabBarController;
+        [window makeKeyAndVisible];
+    }
+}
+
 + (void)updateMessagesTabBadgeWithValue:(NSString*)value {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;

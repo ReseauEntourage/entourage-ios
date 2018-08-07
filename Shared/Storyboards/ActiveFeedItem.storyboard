@@ -311,7 +311,7 @@
                                                             <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                                         </textView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5xs-93-LcN">
-                                                            <rect key="frame" x="138.66666666666666" y="37" width="31" height="14"/>
+                                                            <rect key="frame" x="138.66666666666666" y="41.333333333333329" width="31" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                                                             <color key="textColor" red="0.46274509803921571" green="0.46274509803921571" blue="0.46274509803921571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -596,10 +596,16 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="bgView" destination="ehS-pG-Yas" id="cHC-ZF-xzi"/>
+                                            <outlet property="btnAccept" destination="h3e-X4-SM1" id="WyO-E1-vwA"/>
                                             <outlet property="btnAvatar" destination="LTG-yP-khP" id="T9A-rL-jb0"/>
+                                            <outlet property="btnIgnore" destination="AIs-Hp-qgV" id="b0h-U1-flp"/>
                                             <outlet property="btnLast" destination="BIq-iK-EkW" id="ARz-HU-M0r"/>
+                                            <outlet property="btnViewProfile" destination="BIq-iK-EkW" id="QcM-mB-bXS"/>
                                             <outlet property="dataSource" destination="1dX-UW-k7J" id="pAp-7R-3PH"/>
+                                            <outlet property="imgAppLogo" destination="xNq-yy-q2G" id="ukW-AE-pYQ"/>
                                             <outlet property="imgAssociation" destination="mhz-AM-d5t" id="KEF-E1-cOi"/>
+                                            <outlet property="lblAppName" destination="Cvh-Sq-5tA" id="t3x-lm-UXp"/>
                                             <outlet property="lblJoinType" destination="gDf-jH-qfI" id="82h-cR-Z6j"/>
                                             <outlet property="lblMessage" destination="j8e-Uc-J4v" id="IOi-IY-ukZ"/>
                                             <outlet property="lblUserName" destination="R7L-pV-Coz" id="X1x-R5-MGk"/>
@@ -617,7 +623,7 @@
                                                     <rect key="frame" x="70" y="10" width="274" height="311.33333333333331"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MR2-K2-I9K">
-                                                            <rect key="frame" x="0.0" y="1" width="274" height="275"/>
+                                                            <rect key="frame" x="0.0" y="1" width="274" height="276.33333333333331"/>
                                                             <subviews>
                                                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VzI-2d-bQ8">
                                                                     <rect key="frame" x="107.66666666666666" y="15" width="60" height="60"/>
@@ -862,10 +868,13 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="bgView" destination="5yS-cP-bxd" id="7re-2m-Tv2"/>
                                             <outlet property="btnAvatar" destination="Srk-7v-gFL" id="cTy-zg-Dkr"/>
                                             <outlet property="btnLast" destination="TpO-4a-lZv" id="aKH-3k-cDs"/>
                                             <outlet property="dataSource" destination="1dX-UW-k7J" id="sVQ-Kj-cbW"/>
+                                            <outlet property="imgAppLogo" destination="nFw-NM-9ux" id="Cbr-qi-eQt"/>
                                             <outlet property="imgAssociation" destination="uzh-gg-k5n" id="U3s-wc-rAz"/>
+                                            <outlet property="lblAppName" destination="bkb-b2-8Eo" id="1Ra-Bf-lBv"/>
                                             <outlet property="lblJoinType" destination="npE-Su-q4O" id="e2O-4g-1Wh"/>
                                             <outlet property="lblMessage" destination="1B7-Yr-mEz" id="K2c-29-upH"/>
                                             <outlet property="lblUserName" destination="gES-5W-eoJ" id="ago-8E-Sfx"/>
@@ -876,7 +885,7 @@
                                         <rect key="frame" x="0.0" y="1398" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G2p-zP-CoV" id="gkp-1r-kpf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZn-9Q-IvZ">

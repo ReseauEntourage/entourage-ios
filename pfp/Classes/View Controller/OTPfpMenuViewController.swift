@@ -49,6 +49,7 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tableView.reloadData()
+        OTAppConfiguration.updateAppearanceForMainTabBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {

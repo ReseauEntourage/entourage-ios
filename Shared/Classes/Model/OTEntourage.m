@@ -58,8 +58,10 @@
         self.noPeople = [dictionary numberForKey:kWSNoPeople];
         self.category = [dictionary stringForKey:kWSKeyCategory];
         
-        if ([self.category isEqualToString:@""]) {
-            self.category = @"other";
+        if (self.category) {
+            if ([self.category isEqualToString:@""]) {
+                self.category = @"other";
+            }
         }
     }
     return self;

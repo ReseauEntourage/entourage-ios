@@ -21,6 +21,7 @@
 + (void)navigateToUserProfile;
 + (void)switchMapToSolidarityGuide;
 + (void)switchToMessagesScreen;
++ (void)switchToMainScreenAndResetAppWindow:(BOOL)reset;
 
 + (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;

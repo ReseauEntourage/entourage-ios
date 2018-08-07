@@ -126,8 +126,9 @@
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [SVProgressHUD dismiss];
         [self.owner dismissViewControllerAnimated:NO completion:^{
-            if(self.delegate)
+            if (self.delegate) {
                 [self.delegate quitedFeedItem];
+            }
         }];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];

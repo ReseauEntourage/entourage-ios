@@ -303,6 +303,14 @@
     return OTLocalizedString(@"filter_events_title");
 }
 
++ (NSString *)applicationTitle {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return @"Voisin-Age";
+    }
+    
+    return @"Entourage";
+}
+
 + (NSString *)promoteEventActionSubject:(NSString*)eventName {
     NSString *eventType = [OTAppAppearance eventTitle];
     NSString *eventDetails = [NSString stringWithFormat:@"%@ %@", eventType, eventName];
@@ -698,6 +706,46 @@
     [attributedString addAttributes:@{NSFontAttributeName: boldFont,                                                                               NSForegroundColorAttributeName: regularColor} range:titleRange];
     
     return attributedString;
+}
+
++ (NSString*)requestToJoinTitleForFeedItem:(OTFeedItem*)feedItem {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([feedItem isOuting]) {
+            return OTLocalizedString(@"pfp_want_to_join_event");
+        } else {
+            return OTLocalizedString(@"pfp_want_to_join_entourage");
+        }
+    }
+    
+    if ([feedItem isKindOfClass:[OTTour class]]) {
+        return OTLocalizedString(@"want_to_join_tour");
+    }
+    
+    return OTLocalizedString(@"want_to_join_entourage");
+}
+
++ (NSString*)quitFeedItemConformationTitle:(OTFeedItem *)feedItem {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([feedItem isOuting]) {
+            return OTLocalizedString(@"pfp_quitted_event");
+        } else {
+            return OTLocalizedString(@"pfp_quitted_item");
+        }
+    }
+    
+    return OTLocalizedString(@"quitted_item");
+}
+
++ (NSString*)closeFeedItemConformationTitle:(OTFeedItem *)feedItem {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([feedItem isOuting]) {
+            return OTLocalizedString(@"pfp_closed_event");
+        } else {
+            return OTLocalizedString(@"pfp_quitted_item");
+        }
+    }
+    
+    return OTLocalizedString(@"closed_item");
 }
 
 @end

@@ -52,13 +52,13 @@
     self.membersDataSource.tableView.estimatedRowHeight = 1000;
 
     [self configureTitleView];
-    [self setupToolbarButtons];
     [self.membersDataSource loadDataFor:self.feedItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"Screen14_2PublicPageViewAsMemberOrCreator"];
+    [self setupToolbarButtons];
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
@@ -95,8 +95,9 @@
 
 - (void)setupToolbarButtons {
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
-    if(![stateInfo canChangeEditState])
+    if (![stateInfo canChangeEditState]) {
         return;
+    }
     
     NSMutableArray *rightButtons = [NSMutableArray new];
     UIButton *options = [UIButton buttonWithType:UIButtonTypeCustom];

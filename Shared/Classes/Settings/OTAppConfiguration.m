@@ -151,7 +151,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)handleAppLaunchFromNotificationCenter:(NSDictionary *)userInfo {
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
     if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST]) {
-        [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
+        [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
     }
 }
 
@@ -265,6 +265,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:selectedIndex];
     
     return tabBarController;
+}
+
++ (void)updateAppearanceForMainTabBar {
+
+    UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].delegate.window.rootViewController;
+    
+    [OTAppConfiguration configureTabBarAppearance:tabBarController];
 }
 
 + (UITabBarController*)configureMainTabBarWithDefaultSelectedIndex:(NSInteger)selectedIndex
@@ -451,7 +458,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
     UIApplicationState state = [application applicationState];
     OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
-    if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive) {
+    if (state == UIApplicationStateActive ||
+        state == UIApplicationStateBackground ||
+        state == UIApplicationStateInactive) {
         [pnService handleRemoteNotification:userInfo];
     }
 }
@@ -460,7 +469,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     NSDictionary *userInfo = notification.userInfo;
     UIApplicationState state = [application applicationState];
     OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
-    if (state == UIApplicationStateActive || state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
+    
+    if (state == UIApplicationStateActive ||
+        state == UIApplicationStateBackground ||
+        state == UIApplicationStateInactive) {
         [pnService handleLocalNotification:userInfo];
     }
 }

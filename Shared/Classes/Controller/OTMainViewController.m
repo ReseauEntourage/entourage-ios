@@ -376,6 +376,7 @@
     [super viewWillAppear:animated];
     [self.newsFeedsSourceBehavior resume];
     [self.heatzonesCollectionDataSource refresh];
+    [OTAppConfiguration updateAppearanceForMainTabBar];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -247,12 +247,14 @@
 
 - (void)displayAlertWithActions:(NSArray<UIAlertAction*> *)actions {
     UIAlertController *alert = [[UIAlertController alloc] init];
-    for(UIAlertAction *action in actions)
+    for (UIAlertAction *action in actions) {
         [alert addAction:action];
+    }
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert")
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:defaultAction];
+    
     [self presentViewController:alert animated:NO completion:nil];
 }
 

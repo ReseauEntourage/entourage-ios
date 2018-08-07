@@ -52,6 +52,14 @@
 "pfp_join_event_title" = "Vous souhaitez rejoindre cette sortie ?";
 "pfp_join_event_button" = "Participer";
 
+"pfp_want_to_join_entourage" = "veut rejoindre votre voisinage.";
+"pfp_want_to_join_event" = "veut rejoindre votre sortie.";
+
+"pfp_closed_item" = "Voisinage clôturé";
+"pfp_quitted_item" = "Voisinage quitté";
+"pfp_quitted_event" = "Sortie quitté";
+"pfp_closed_event" = "Sortie clôturé";
+
 "pfp_event" = "sortie";
 "pfp_filter_events_title" = "Sorties";
 "pfp_filter_private_circles_title" = "Voisinages d’une personne";

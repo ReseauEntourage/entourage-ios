@@ -12,7 +12,9 @@
 @implementation OTEntourageJoinerDelegate
 
 - (void)sendJoinMessage:(NSString *)message success:(void (^)(OTFeedItemJoiner *))success failure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] joinMessageEntourage:self.entourage message:message success:^(OTFeedItemJoiner *joiner) {
+    [[OTEntourageService new] joinMessageEntourage:self.entourage
+                                           message:message
+                                           success:^(OTFeedItemJoiner *joiner) {
         NSLog(@"JOIN MESSAGE %@", message);
         if(success)
             success(joiner);
