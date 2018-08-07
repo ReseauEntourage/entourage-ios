@@ -46,7 +46,7 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super initWithDictionary:dictionary];
-    if (self) {
+    if (self && dictionary) {
         self.creationDate = [dictionary dateForKey:kWSKeyCreateDate];
         self.title = [dictionary stringForKey:kWSKeyTitle];
         self.location = [dictionary locationForKey:kWSKeyLocation

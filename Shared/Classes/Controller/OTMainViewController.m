@@ -1206,6 +1206,7 @@
     }
     self.currentFilter = filter;
     [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
+    
     [self reloadFeeds];
 }
 

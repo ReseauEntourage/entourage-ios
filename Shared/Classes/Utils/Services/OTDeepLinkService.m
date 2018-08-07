@@ -195,6 +195,10 @@
 - (void)prepareControllers:(OTFeedItem *)feedItem {
     OTMainViewController *mainViewController = [self popToMainViewController];
     
+    if (!feedItem) {
+        return;
+    }
+    
     if ([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
         UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
         OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
