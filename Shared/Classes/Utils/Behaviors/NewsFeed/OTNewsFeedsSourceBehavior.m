@@ -63,13 +63,19 @@
     self.radiusIndex = 0;
     filter.distance = self.radius;
     filter.location = coordinate;
-    if([self.currentFilter.description isEqualToString:filter.description])
+    
+    if ([self.currentFilter.description isEqualToString:filter.description] &&
+        filter.showPastOuting == self.currentFilter.showPastOuting) {
         return;
+    }
+    
     self.currentCoordinate = coordinate;
     self.currentFilter = [filter copy];
     self.currentFilter.location = coordinate;
+    
     [self.feedItems removeAllObjects];
     [self.delegate itemsRemoved];
+    
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         if(items.count > 0) {
@@ -77,6 +83,7 @@
             [self.delegate itemsUpdated];
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
+        
     } orError:^(NSError *error) {
         [self.delegate errorLoadingFeedItems:error];
     }];
