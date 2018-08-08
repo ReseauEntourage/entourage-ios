@@ -22,7 +22,7 @@
 - (void)saveToken:(NSData *)tokenData;
 - (void)promptUserForPushNotifications;
 - (void)clearTokenWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError*))failure;
-- (void)handleRemoteNotification:(NSDictionary *)userInfo;
+- (void)handleRemoteNotification:(NSDictionary *)userInfo applicationState:(UIApplicationState)appState;
 - (void)handleLocalNotification:(NSDictionary *)userInfo applicationState:(UIApplicationState)appState;
 
 - (BOOL)isMixpanelDeepLinkNotification:(NSDictionary *)userInfo;

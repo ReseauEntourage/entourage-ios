@@ -61,7 +61,9 @@
     [[UIApplication sharedApplication] registerForRemoteNotifications];
 }
 
-- (void)handleRemoteNotification:(NSDictionary *)userInfo {
+- (void)handleRemoteNotification:(NSDictionary *)userInfo
+                applicationState:(UIApplicationState)appState {
+    
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
     if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST]) {
         [self handleJoinRequestNotification:pnData];
@@ -70,14 +72,14 @@
         [self handleCancelJoinNotification:pnData];
     }
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_REQUEST_ACCEPTED]) {
-        [self handleAcceptJoinNotification:pnData];
+        [self handleAcceptJoinNotification:pnData applicationState:appState];
     }
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_CHAT_MESSAGE]) {
         if ([self canHandleChatNotificationInPlace:pnData]) {
             return;
         }
         else {
-            [self handleChatNotification:pnData];
+            [self handleChatNotification:pnData applicationState:appState];
         }
     }
     else if ([pnData.notificationType isEqualToString:@APNOTIFICATION_INVITE_REQUEST]) {
@@ -104,28 +106,27 @@
         [OTAppState switchToMainScreenAndResetAppWindow:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationLocalTourConfirmation object:nil];
         
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:pnData.sender
+                                                                       message:pnData.message
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+
+        UIAlertAction *openAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+            [OTAppState switchToMainScreenAndResetAppWindow:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationLocalTourConfirmation object:nil];
+        }];
+
+        [alert addAction:defaultAction];
+        [alert addAction:openAction];
+
+        [self showAlert:alert withPresentingBlock:^(UIViewController *topController, UIViewController *presentedViewController) {
+            if (![topController isKindOfClass:[OTCreateMeetingViewController class]])
+                [presentedViewController presentViewController:alert animated:YES completion:nil];
+        }];
     }
-//    else {
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:pnData.sender
-//                                                                       message:pnData.message
-//                                                                preferredStyle:UIAlertControllerStyleAlert];
-//
-//        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-//
-//        UIAlertAction *openAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//
-//            [OTAppState switchToMainScreenAndResetAppWindow:YES];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationLocalTourConfirmation object:nil];
-//        }];
-//
-//        [alert addAction:defaultAction];
-//        [alert addAction:openAction];
-//
-//        [self showAlert:alert withPresentingBlock:^(UIViewController *topController, UIViewController *presentedViewController) {
-//            if (![topController isKindOfClass:[OTCreateMeetingViewController class]])
-//                [presentedViewController presentViewController:alert animated:YES completion:nil];
-//        }];
-//    }
 }
 
 - (BOOL)isMixpanelDeepLinkNotification:(NSDictionary *)userInfo {
@@ -184,16 +185,20 @@
 }
 
 - (void)handleAcceptJoinNotification:(OTPushNotificationsData *)pnData
+                    applicationState:(UIApplicationState)state
 {
-    // https://jira.mytkw.com/browse/EMA-2229
-    [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
+    if (state != UIApplicationStateActive) {
+        // https://jira.mytkw.com/browse/EMA-2229
+        [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
+        
+    } else {
+        UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * _Nonnull action) {
+            [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
+        }];
     
-    
-//    UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
-//    }];
-//
-//    [self displayAlertWithActions:@[openAction] forPushData:pnData];
+        [self displayAlertWithActions:@[openAction] forPushData:pnData];
+    }
 }
 
 - (BOOL)canHandleChatNotificationInPlace:(OTPushNotificationsData *)pnData {
@@ -211,17 +216,22 @@
 }
 
 - (void)handleChatNotification:(OTPushNotificationsData *)pnData
+              applicationState:(UIApplicationState)state
 {
     [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
     
-    [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
-    
-    // https://jira.mytkw.com/browse/EMA-2229
-//    UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
-//    }];
-//
-//    [self displayAlertWithActions:@[openAction] forPushData:pnData];
+    if (state != UIApplicationStateActive) {
+        [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
+        
+    } else {
+        // https://jira.mytkw.com/browse/EMA-2229
+        UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert") style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * _Nonnull action) {
+            [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
+        }];
+        
+        [self displayAlertWithActions:@[openAction] forPushData:pnData];
+    }
 }
 
 - (void)handleInviteRequestNotification:(OTPushNotificationsData *)pnData

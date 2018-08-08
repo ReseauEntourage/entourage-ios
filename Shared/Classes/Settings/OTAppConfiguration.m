@@ -458,10 +458,11 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
     UIApplicationState state = [application applicationState];
     OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
+    
     if (state == UIApplicationStateActive ||
         state == UIApplicationStateBackground ||
         state == UIApplicationStateInactive) {
-        [pnService handleRemoteNotification:userInfo];
+        [pnService handleRemoteNotification:userInfo applicationState:state];
     }
 }
 
@@ -486,7 +487,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         //for mixpanel deeplinks, shows the push notification
         completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
     } else {
-        [pnService handleRemoteNotification:userInfo];
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        [pnService handleRemoteNotification:userInfo applicationState:state];
     }
 }
 
