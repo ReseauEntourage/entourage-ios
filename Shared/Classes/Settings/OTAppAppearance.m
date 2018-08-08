@@ -748,4 +748,35 @@
     return OTLocalizedString(@"closed_item");
 }
 
++ (NSString*)joinFeedItemConformationDescription:(OTFeedItem *)feedItem {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_join_entourage_greeting_lbl");
+    }
+    
+    if ([feedItem isKindOfClass:[OTEntourage class]]) {
+        return OTLocalizedString(@"join_entourage_greeting_lbl");
+    }
+    else {
+        return OTLocalizedString(@"join_tour_greeting_lbl");
+    }
+}
+
+
+
++ (NSString*)addActionTitleHintMessage {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_add_title_hint");
+    }
+    
+    return OTLocalizedString(@"add_title_hint");
+}
+
++ (NSString*)addActionDescriptionHintMessage {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_add_description_hint");
+    }
+    
+    return OTLocalizedString(@"add_description_hint");
+}
+
 @end

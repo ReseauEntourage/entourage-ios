@@ -695,6 +695,7 @@
                     <navigationItem key="navigationItem" id="1Vh-8u-ebC"/>
                     <connections>
                         <outlet property="hintIcon" destination="QAF-Ty-4QX" id="WSD-Dy-fxe"/>
+                        <outlet property="hintLabel" destination="lbe-Bf-cSr" id="xgd-pr-NtV"/>
                         <outlet property="hintView" destination="fSI-Pb-YgF" id="mtM-ao-dV1"/>
                         <outlet property="maxLenghtReachedView" destination="Kuy-ys-seh" id="Y8D-PI-O4f"/>
                         <outlet property="txtTitle" destination="Cop-uM-gXN" id="1ZX-3G-P9o"/>
@@ -776,6 +777,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                     <navigationItem key="navigationItem" id="qiX-QD-WFt"/>
                     <connections>
                         <outlet property="hintIcon" destination="vh0-0E-hZY" id="tl6-hK-7Ev"/>
+                        <outlet property="hintLabel" destination="sek-5Z-dfE" id="cSE-SF-4Jb"/>
                         <outlet property="txtDescription" destination="Tqp-Pu-7oC" id="imm-Pf-4jD"/>
                     </connections>
                 </viewController>

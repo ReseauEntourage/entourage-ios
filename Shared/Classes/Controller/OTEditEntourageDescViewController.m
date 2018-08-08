@@ -16,6 +16,7 @@
 @interface OTEditEntourageDescViewController ()
 
 @property (nonatomic, weak) IBOutlet OTTextWithCount *txtDescription;
+@property (nonatomic, weak) IBOutlet UILabel *hintLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *hintIcon;
 
 @end
@@ -28,7 +29,8 @@
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     self.hintIcon.tintColor = [ApplicationTheme shared].backgroundThemeColor;
     self.hintIcon.image = [self.hintIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-
+    
+    self.hintLabel.text = [OTAppAppearance addActionDescriptionHintMessage];
     
     if(self.currentEntourage.categoryObject.description_example != nil) {
         self.txtDescription.placeholder = self.currentEntourage.categoryObject.description_example;

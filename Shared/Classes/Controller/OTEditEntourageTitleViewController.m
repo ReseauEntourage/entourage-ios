@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UIView *hintView;
 @property (nonatomic, weak) IBOutlet UIImageView *hintIcon;
 @property (nonatomic, weak) IBOutlet UIView *maxLenghtReachedView;
+@property (nonatomic, weak) IBOutlet UILabel *hintLabel;
 
 @end
 
@@ -28,6 +29,8 @@
     [super viewDidLoad];
 
     self.title = OTLocalizedString(@"title").uppercaseString;
+    
+    self.hintLabel.text = [OTAppAppearance addActionTitleHintMessage];
     
     self.hintIcon.tintColor = [ApplicationTheme shared].backgroundThemeColor;
     self.hintIcon.image = [self.hintIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];

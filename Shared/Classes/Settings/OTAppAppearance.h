@@ -65,4 +65,7 @@
 + (NSString*)requestToJoinTitleForFeedItem:(OTFeedItem*)feedItem;
 + (NSString*)quitFeedItemConformationTitle:(OTFeedItem*)feedItem;
 + (NSString*)closeFeedItemConformationTitle:(OTFeedItem *)feedItem;
++ (NSString*)joinFeedItemConformationDescription:(OTFeedItem *)feedItem;
++ (NSString*)addActionTitleHintMessage;
++ (NSString*)addActionDescriptionHintMessage;
 @end

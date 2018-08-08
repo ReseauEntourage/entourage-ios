@@ -51,13 +51,14 @@
 "pfp_join_group_button" = "Contacter l’animateur";
 "pfp_join_event_title" = "Vous souhaitez rejoindre cette sortie ?";
 "pfp_join_event_button" = "Participer";
+"pfp_join_entourage_greeting_lbl" = "Merci pour votre participation !\nAjoutez un petit mot pour l'organisateur et les participants !";
 
 "pfp_want_to_join_entourage" = "veut rejoindre votre voisinage.";
 "pfp_want_to_join_event" = "veut rejoindre votre sortie.";
 
 "pfp_closed_item" = "Voisinage clôturé";
-"pfp_quitted_item" = "Voisinage quitté";
-"pfp_quitted_event" = "Sortie quitté";
+"pfp_quitted_item" = "Voisinage quittée";
+"pfp_quitted_event" = "Sortie quittée";
 "pfp_closed_event" = "Sortie clôturé";
 
 "pfp_event" = "sortie";
@@ -74,3 +75,7 @@
 "pfp_defineActionZoneSampleAddress" = "15 avenue Jean Jaurès...";
 "pfp_defineZoneSubtitle1" = "Voisin-Age, c’est utile parce que c’est local !\nIndiquez votre adresse pour rencontrer les membres de Voisin-Age les plus proches.";
 "pfp_defineZoneSubtitle2" = "\n\nCette information n’est pas affichée sur votre profil.";
+
+"pfp_add_title_hint" = "Donnez un titre clair et chaleureux à votre sortie pour attirer plus de participants !";
+"pfp_add_description_hint" = "Donnez une description claire à votre sortie";
+
