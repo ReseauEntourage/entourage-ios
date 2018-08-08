@@ -58,6 +58,7 @@
     [self popToMainController];
     
     [self sendActionsForControlEvents:UIControlEventValueChanged];
+    [OTAppState hideTabBar:NO];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if(![self.feedItem isKindOfClass:[OTTour class]]) {
@@ -75,6 +76,7 @@
 
 - (void)quitedFeedItem {
     [self popToMainController];
+    [OTAppState hideTabBar:NO];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:[OTAppAppearance quitFeedItemConformationTitle:self.feedItem]];
@@ -98,14 +100,14 @@
 }
 
 - (void)popToMainController {
-//    for (UIViewController* viewController in self.owner.navigationController.viewControllers) {
-//        if ([viewController isKindOfClass:[OTMainViewController class]]) {
-//            [self.owner.navigationController popToViewController:viewController animated:YES];
-//            break;
-//        }
-//    }
+    for (UIViewController* viewController in self.owner.navigationController.viewControllers) {
+        if ([viewController isKindOfClass:[OTMainViewController class]]) {
+            [self.owner.navigationController popToViewController:viewController animated:NO];
+            break;
+        }
+    }
     
-    [OTAppState switchToMainScreenAndResetAppWindow:YES];
+    //[OTAppState switchToMainScreenAndResetAppWindow:YES];
 }
 
 @end

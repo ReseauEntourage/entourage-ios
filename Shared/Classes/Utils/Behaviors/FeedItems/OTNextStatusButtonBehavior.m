@@ -13,6 +13,7 @@
 #import "OTTour.h"
 #import "OTConfirmCloseViewController.h"
 #import "OTCloseReason.h"
+#import "OTTourStateTransition.h"
 
 @interface OTNextStatusButtonBehavior () <OTConfirmCloseProtocol>
 
@@ -169,8 +170,9 @@
     BOOL outcome = (reason == OTCloseReasonSuccesClose) ? YES : NO;
     
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition]
-        closeWithOutcome:outcome
+
+    id stateTransition = [[OTFeedItemFactory createFor:self.feedItem] getStateTransition];
+    [stateTransition closeWithOutcome:outcome
         success:^(BOOL isTour) {
             [SVProgressHUD dismiss];
             [self dismissOnClose:reason];
@@ -182,8 +184,9 @@
 
 - (void)dismissOnClose:(OTCloseReason) reason {
     [self.owner dismissViewControllerAnimated:NO completion:^{
-        if(self.delegate)
+        if (self.delegate) {
             [self.delegate closedFeedItemWithReason: reason];
+        }
     }];
 }
 

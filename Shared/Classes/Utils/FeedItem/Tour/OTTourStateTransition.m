@@ -24,7 +24,10 @@
                        }];
 }
 
-- (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure {
+- (void)closeWithOutcome:(BOOL)outcome
+                 success:(void (^)(BOOL))success
+               orFailure:(void (^)(NSError *))failure
+{
     NSString *oldStatus = self.tour.status;
     self.tour.status = TOUR_STATUS_FREEZED;
     [[OTTourService new] closeTour:self.tour
