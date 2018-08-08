@@ -71,11 +71,7 @@
 #pragma mark - private methods
 
 - (void)setupGreetingLabelForItem {
-    if([self.feedItem isKindOfClass:[OTEntourage class]]){
-        [self.greetingLabel setText:OTLocalizedString(@"join_entourage_greeting_lbl")];
-    }
-    else
-        [self.greetingLabel setText:OTLocalizedString(@"join_tour_greeting_lbl")];
+    self.greetingLabel.text = [OTAppAppearance joinFeedItemConformationDescription:self.feedItem];
 }
 
 #pragma mark - - UITextViewDelegate

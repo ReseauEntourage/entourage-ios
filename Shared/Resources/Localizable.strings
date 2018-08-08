@@ -491,3 +491,5 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "user_reported" = "Utilisateur signalé";
 
 "action" = "Action";
+"add_title_hint" = "Les actions avec un titre clair attirent plus de membres et ont plus de chances d’aboutir !";
+"add_description_hint" = "Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d’aboutir !";
