@@ -473,7 +473,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     if (state == UIApplicationStateActive ||
         state == UIApplicationStateBackground ||
         state == UIApplicationStateInactive) {
-        [pnService handleLocalNotification:userInfo];
+        [pnService handleLocalNotification:userInfo applicationState:state];
     }
 }
 
