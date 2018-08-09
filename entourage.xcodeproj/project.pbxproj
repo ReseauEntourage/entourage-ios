@@ -1199,6 +1199,8 @@
 		A2A777EE20AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
 		A2A777EF20AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
 		A2A777F020AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
+		A2E293AA211B1FA900D44249 /* PfpStartupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E293A9211B1FA900D44249 /* PfpStartupView.xib */; };
+		A2E293AB211B1FA900D44249 /* PfpStartupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E293A9211B1FA900D44249 /* PfpStartupView.xib */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA1120862F7A0099B989 /* ApplicationTheme.swift */; };
@@ -2030,6 +2032,7 @@
 		A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLogoutViewCell.swift; sourceTree = "<group>"; };
 		A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = SOURCE_ROOT; };
 		A2A777ED20AF06EC006D2772 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		A2E293A9211B1FA900D44249 /* PfpStartupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PfpStartupView.xib; sourceTree = "<group>"; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
 		A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Appearance.m"; sourceTree = "<group>"; };
@@ -3693,6 +3696,7 @@
 				A2FCF5C820AD502F004604AC /* PFPAboutView.xib */,
 				A2306AAA20C551690094370E /* PfpUserCircleCell.swift */,
 				A2306AB120C69F050094370E /* PfpSelectDateCell.swift */,
+				A2E293A9211B1FA900D44249 /* PfpStartupView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3852,6 +3856,7 @@
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
 				A21D65AA2085FDAA00EF8E0E /* Onboarding.storyboard in Resources */,
+				A2E293AA211B1FA900D44249 /* PfpStartupView.xib in Resources */,
 				A21D64AE2085E8B400EF8E0E /* Paris.gpx in Resources */,
 				A21D65AE2085FDAA00EF8E0E /* MyEntourages.storyboard in Resources */,
 				A202E7EF2085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
@@ -3992,6 +3997,7 @@
 				A296B8BF20871CFC00F6AFBD /* SF-UI-Text-RegularItalic.otf in Resources */,
 				A2306AA320C5491E0094370E /* PfpUserVoisinage.storyboard in Resources */,
 				A296B8C020871CFC00F6AFBD /* SF-UI-Text-BoldItalic.otf in Resources */,
+				A2E293AB211B1FA900D44249 /* PfpStartupView.xib in Resources */,
 				A296B8C120871CFC00F6AFBD /* InfoPlist.strings in Resources */,
 				A296B8C220871CFC00F6AFBD /* ActiveFeedItem.storyboard in Resources */,
 				A296B8C320871CFC00F6AFBD /* UserProfileEditor.storyboard in Resources */,

@@ -118,6 +118,7 @@
 
 - (void)setupEmptyEvent {
     self.entourage = [[OTEntourage alloc] initWithGroupType:GROUP_TYPE_OUTING];
+    self.entourage.status = ENTOURAGE_STATUS_OPEN;
     self.entourage.categoryObject = [OTCategoryFromJsonService sampleEntourageEventCategory];
 }
 

@@ -41,6 +41,7 @@
     self.btnNextState.hidden = YES;
     
     if ([OTAppConfiguration supportsClosingFeedAction:self.feedItem]) {
+                
         switch (currentState) {
             case FeedItemStateOngoing:
                 title = OTLocalizedString(@"item_option_close");
