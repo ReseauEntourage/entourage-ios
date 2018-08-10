@@ -23,6 +23,7 @@
 + (void)switchToMessagesScreen;
 + (void)switchToMainScreenAndResetAppWindow:(BOOL)reset;
 + (UIViewController *)getTopViewController;
++ (UIViewController *)getTopRootViewController;
 
 + (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;

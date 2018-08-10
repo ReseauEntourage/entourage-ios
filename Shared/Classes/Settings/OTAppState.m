@@ -97,7 +97,6 @@
 {
     OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
     loginController.fromLink = link;
-    [OTAppState returnToLogin];
     [[OTAppState getTopViewController] showViewController:loginController sender:self];
 }
 
@@ -213,7 +212,7 @@
     } else {
         [OTLogger logEvent:@"WelcomeScreenContinue"];
         OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
-        [[OTAppState getTopViewController].navigationController pushViewController:onboardingViewController animated:YES];
+        [[OTAppState getTopRootViewController].navigationController pushViewController:onboardingViewController animated:YES];
     }
 }
 
@@ -445,16 +444,30 @@
     }
 }
 
-+ (UIViewController *)getTopViewController {   
++ (UIViewController *)getToRootViewController {
+    UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([result isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController*)result;
+        result = navController.topViewController;
+    }
+    return result;
+}
+
++ (UIViewController *)getTopViewController {
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIWindow *window = [appDelegate window];
-    
+
     if ([window.rootViewController isKindOfClass:[UITabBarController class]]) {
         UITabBarController *tabController = (UITabBarController*)window.rootViewController;
         UINavigationController *navController = (UINavigationController*)[tabController selectedViewController];
         return navController.topViewController;
     }
     
+    if ([window.rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController*)window.rootViewController;
+        return navController.topViewController;
+    }
+
     return window.rootViewController;
 }
 
