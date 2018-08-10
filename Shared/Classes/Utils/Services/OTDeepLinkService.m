@@ -57,8 +57,7 @@
 }
 
 - (UIViewController *)getTopViewController {
-    OTMainViewController *mainController = [self popToMainViewController];
-    return mainController;
+    return [OTAppState getTopViewController];
 }
 
 - (void)showProfileFromAnywhereForUser:(NSNumber *)userId {

@@ -208,7 +208,7 @@
     if ([topController isKindOfClass:[OTActiveFeedItemViewController class]]) {
         OTActiveFeedItemViewController *feedItemVC = (OTActiveFeedItemViewController*)topController;
         
-        if ([feedItemVC.feedItem.uid isEqual:pnData.joinableId]) {
+        if (feedItemVC.feedItem.uid.integerValue == pnData.joinableId.integerValue) {
             [feedItemVC reloadMessages];
             return YES;
         }

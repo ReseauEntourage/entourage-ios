@@ -323,16 +323,27 @@
     self.activityIndicator.hidden = YES;
     self.infoLabel.hidden = NO;
     BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
-    self.furtherEntouragesBtn.hidden = isMaxRadius;
     self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
     
-    if (self.items.count > 0)
-        self.infoLabel.text = isMaxRadius ? [OTAppAppearance noMoreFeedsDescription] : [OTAppAppearance extendSearchParameterDescription];
-    else {
-        if (!isMaxRadius) {
+    self.furtherEntouragesBtn.hidden = isMaxRadius;
+    
+    if (self.items.count > 0) {
+        if (isMaxRadius) {
+            self.infoLabel.text = [OTAppAppearance noMoreFeedsDescription];
+        } else {
+            self.infoLabel.text = [OTAppAppearance extendSearchParameterDescription];
+        }
+    }
+    else if (self.items.count == 0) {
+        if (isMaxRadius) {
+            self.furtherEntouragesBtn.hidden = YES;
+            self.infoLabel.text = [OTAppAppearance noMapFeedsDescription];
+        }
+        else {
+            self.furtherEntouragesBtn.hidden = NO;
+            self.infoLabel.text = [OTAppAppearance extendMapSearchParameterDescription];
             self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
         }
-        self.infoLabel.text = isMaxRadius ? [OTAppAppearance noMapFeedsDescription] : [OTAppAppearance extendMapSearchParameterDescription];
     }
     self.tableFooterView = self.loadingView;
 }
