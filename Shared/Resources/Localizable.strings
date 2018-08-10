@@ -117,18 +117,12 @@
 "ongoing" = "En cours";
 "cancelled_join_request" = "Demande annulée";
 
-"no_data_entourages" = "On dirait que c'est calme ici!
+"no_data_entourages" = "C'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant ! \n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur + en bas à droite";
 
-Déplacez la carte pour trouver des entourages crées par le réseau.
+"no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure";
 
-Vous aussi, vous pouvez créer un entourage: appuyez sur +";
-"no_data_guide" = "On dirait que c'est calme ici!
-
-Déplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…
-
-Une structure manque sur la carte ?
-Proposez une structure";
 "no_data_guide_link" = "Proposez une structure";
+
 "want_to_join_tour" = "veut entrer en contact avec vous.";
 "want_to_join_entourage" = "veut rejoindre votre entourage.";
 "no_messages_title" = "Vous n'avez pas encore de messages…";
@@ -420,10 +414,10 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
 
 "increase_radius" = "C'est tout pour les activités dans ce rayon autour de vous !";
-"no_map_feeds_increase_radius" = "\nOn dirait que c'est calme ici !\n\nDéplacez la carte pour trouver des activités du réseau.\n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur\n + en bas à droite";
-"no_feeds_increase_radius" = "C’est plutôt calme par ici !\n\nOn dirait bien qu’il n’y a aucune action à proximité… pour l’instant !\n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur\n + en bas à droite";
+"no_map_feeds_increase_radius" = "\nC'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant !";
+"no_feeds_increase_radius" = "\nC'est tout pour les activités dans ce rayon !";
 "no_feeds_received" = "Aucune action près de cette position";
-"no_more_feeds" = "Aucune action près de cette position";
+"no_more_feeds" = "C'est tout pour les activités dans ce rayon autour de vous";
 "no_more_map_feeds" = "Aucune action près de cette position";
 
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";

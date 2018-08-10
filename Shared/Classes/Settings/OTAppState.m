@@ -97,6 +97,7 @@
 {
     OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
     loginController.fromLink = link;
+    [OTAppState returnToLogin];
     [[OTAppState getTopViewController] showViewController:loginController sender:self];
 }
 
@@ -444,13 +445,17 @@
     }
 }
 
-+ (UIViewController *)getTopViewController {
-    UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if ([result isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *navController = (UINavigationController*)result;
-        result = navController.topViewController;
++ (UIViewController *)getTopViewController {   
+    OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIWindow *window = [appDelegate window];
+    
+    if ([window.rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabController = (UITabBarController*)window.rootViewController;
+        UINavigationController *navController = (UINavigationController*)[tabController selectedViewController];
+        return navController.topViewController;
     }
-    return result;
+    
+    return window.rootViewController;
 }
 
 + (void)navigateToUserEmail:(UIViewController*)viewController {

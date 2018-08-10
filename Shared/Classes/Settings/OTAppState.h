@@ -22,6 +22,7 @@
 + (void)switchMapToSolidarityGuide;
 + (void)switchToMessagesScreen;
 + (void)switchToMainScreenAndResetAppWindow:(BOOL)reset;
++ (UIViewController *)getTopViewController;
 
 + (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;
