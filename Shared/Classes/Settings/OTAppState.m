@@ -448,10 +448,14 @@
 + (UIViewController *)getTopViewController {   
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIWindow *window = [appDelegate window];
-    UITabBarController *tabController = (UITabBarController*)window.rootViewController;
-    UINavigationController *navController = (UINavigationController*)[tabController selectedViewController];
     
-    return navController.topViewController;
+    if ([window.rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabController = (UITabBarController*)window.rootViewController;
+        UINavigationController *navController = (UINavigationController*)[tabController selectedViewController];
+        return navController.topViewController;
+    }
+    
+    return window.rootViewController;
 }
 
 + (void)navigateToUserEmail:(UIViewController*)viewController {
