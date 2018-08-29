@@ -8,13 +8,10 @@
 
 #import "OTSignalEntourageBehavior.h"
 #import "OTMailSenderBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTConsts.h"
 #import <MessageUI/MessageUI.h>
 #import "OTMainViewController.h"
-
-#define CLOSE_EMAIL_RECIPIENT @"contact@entourage.social"
-#define STRUCTURE_EMAIL_RECIPIENT @"contact@entourage.social"
 
 @interface OTMailSenderBehavior () <MFMailComposeViewControllerDelegate>
 
@@ -24,19 +21,44 @@
 
 @implementation OTMailSenderBehavior
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    if(!self.successMessage)
+    [self setup];
+}
+
+- (void)setup {
+    if(!self.successMessage) {
         self.successMessage = OTLocalizedString(@"mail_sent");
+    }
 }
 
 - (BOOL)sendMailWithSubject:(NSString *)subject andRecipient:(NSString *)recipient {
-    if([self checkCanSend]) {
+    return [self sendMailWithSubject:subject andRecipient:recipient body:nil];
+}
+
+- (BOOL)sendMailWithSubject:(NSString *)subject andRecipient:(NSString *)recipient body:(NSString*)body { 
+    if ([self checkCanSend]) {
+        [OTAppConfiguration configureNavigationControllerAppearance:self.owner.navigationController];
         self.mailController = [MFMailComposeViewController new];
         [self.mailController setToRecipients:@[recipient]];
         [self.mailController setSubject:subject];
         self.mailController.mailComposeDelegate = self;
+        
+        if (body) {
+            [self.mailController setMessageBody:body isHTML:NO];
+        }
+        
+        [OTAppConfiguration configureMailControllerAppearance:self.mailController];
+        
         [self.owner showViewController:self.mailController sender:self];
         return YES;
     }
@@ -59,14 +81,14 @@
             default:
                 break;
         }
-        [self sendMailWithSubject:subject andRecipient:CLOSE_EMAIL_RECIPIENT];
+        [self sendMailWithSubject:subject andRecipient:[OTAppAppearance reportActionToRecepient]];
     }
     return NO;
 }
 
 - (BOOL)sendStructureMail:(NSString *)subject {
     if([self checkCanSend]) {
-        [self sendMailWithSubject:subject andRecipient:STRUCTURE_EMAIL_RECIPIENT];
+        [self sendMailWithSubject:subject andRecipient:[OTAppAppearance reportActionToRecepient]];
     }
     return NO;
 }

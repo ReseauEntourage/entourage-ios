@@ -13,15 +13,18 @@
 
 @implementation OTEntourageStateTransition
 
-- (void)stopWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)stopWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     success();
 }
 
-- (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError *))failure {
+- (void)closeWithOutcome:(BOOL)outcome
+                 success:(void (^)(BOOL))success
+               orFailure:(void (^)(NSError *))failure {
     NSString *oldState = self.entourage.status;
     self.entourage.status = FEEDITEM_STATUS_CLOSED;
     [[OTEntourageService new] closeEntourage:self.entourage
-                                 withSuccess:^(OTEntourage *updatedEntourage) {
+                                 withOutcome:outcome
+                                 success:^(OTEntourage *updatedEntourage) {
                                      NSLog(@"Closed entourage: %@", updatedEntourage.uid);
                                      success(NO);
                                  } failure:^(NSError *error) {
@@ -32,7 +35,7 @@
                                  }];
 }
 
-- (void)quitWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)quitWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     NSString *oldJoinState = self.entourage.joinStatus;
     self.entourage.joinStatus = JOIN_NOT_REQUESTED;
     [[OTEntourageService new] quitEntourage:self.entourage

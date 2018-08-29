@@ -9,8 +9,6 @@
 #import "UILabel+entourage.h"
 #import "OTFeedItemAuthor.h"
 #import "OTTourPoint.h"
-#import "TTTTimeIntervalFormatter.h"
-#import "TTTLocationFormatter.h"
 #import "UIColor+entourage.h"
 #import "OTConsts.h"
 #import "OTUser.h"

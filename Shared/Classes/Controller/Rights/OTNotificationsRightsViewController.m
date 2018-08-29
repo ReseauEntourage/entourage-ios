@@ -16,12 +16,16 @@
 #import "OTUser.h"
 #import "OTEntourageInvitation.h"
 #import "OTOnboardingJoinService.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsService.h"
-#import "OTTutorialService.h"
 #import "OTLocationManager.h"
-#import "Mixpanel/Mixpanel.h"
+#import <Mixpanel/Mixpanel.h>
+#import "OTAppState.h"
+#import "OTAppConfiguration.h"
+#import "NSUserDefaults+OT.h"
+#import "OTAppAppearance.h"
+#import "entourage-Swift.h"
 
 @import Firebase;
 
@@ -31,9 +35,20 @@
     [super viewDidLoad];
     self.notificationEnabled = @"NO";
     self.title = @"";
-    [self addIgnoreButton];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationAuthorizationChanged:) name:kNotificationPushStatusChanged object:nil];
+    
+    [self setupUI];
+}
+
+- (void)setupUI {
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
+    self.descLabel.text = [OTAppAppearance notificationsRightsDescription];
+    
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
+    [self addIgnoreButton];
 }
 
 - (void)addIgnoreButton {
@@ -50,6 +65,11 @@
     [[OTLocationManager sharedInstance] startLocationUpdates];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+}
+
 #pragma mark - Private
 
 - (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
@@ -64,7 +84,10 @@
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people set:@{@"EntourageNotifEnable": self.notificationEnabled}];
     [FIRAnalytics setUserPropertyString:self.notificationEnabled forName:@"EntourageGeolocEnable"];
-    [self setTutorialCompleted];
+    
+    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+        [self setTutorialCompleted];
+    }
     [self checkInvitationsToJoin];
 }
 
@@ -88,16 +111,23 @@
     [SVProgressHUD show];
     [[OTOnboardingJoinService new] checkForJoins:^(OTEntourageInvitation *joinedInvitation) {
         [SVProgressHUD dismiss];
-        if(joinedInvitation) {
+        
+        if (joinedInvitation) {
             [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
-            [[OTDeepLinkService new] navigateTo:joinedInvitation.entourageId withType:nil];
-            [[OTTutorialService new] showTutorial];
+            [[OTDeepLinkService new] navigateToFeedWithNumberId:joinedInvitation.entourageId withType:nil];
+            
+            if ([OTAppConfiguration shouldShowIntroTutorial] &&
+                ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+                [OTAppState navigateToAuthenticatedLandingScreen];
+                [OTAppState presentTutorialScreen];
+            }
         }
-        else
-            [UIStoryboard showSWRevealController];
+        else {
+            [OTAppState navigateToAuthenticatedLandingScreen];
+        }
     } withError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"automaticJoinFailedMessage")];
-        [UIStoryboard showSWRevealController];
+        [OTAppState navigateToAuthenticatedLandingScreen];
     }];
 }
 

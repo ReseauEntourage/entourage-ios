@@ -14,6 +14,7 @@
 #import "OTFeedItemFactory.h"
 #import "OTInvitationChangedBehavior.h"
 #import "OTUnreadMessagesService.h"
+#import "entourage-Swift.h"
 
 @interface OTManageInvitationViewController ()
 
@@ -46,7 +47,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:self.feedItem.uid];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (IBAction)showProfile {

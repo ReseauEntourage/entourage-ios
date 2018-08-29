@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <Social/Social.h>
+
 #import "OTCreateMeetingViewController.h"
 #import "OTMainViewController.h"
 #import "OTEncounter.h"
@@ -18,9 +22,6 @@
 #import "UIViewController+menu.h"
 #import "UIColor+entourage.h"
 #import "UIBarButtonItem+factory.h"
-#import "MBProgressHUD.h"
-#import "SVProgressHUD.h"
-#import <Social/Social.h>
 #import "OTEncounterDisclaimerBehavior.h"
 #import "OTTextWithCount.h"
 #import "OTLocationSelectorViewController.h"
@@ -28,6 +29,7 @@
 #import "OTJSONResponseSerializer.h"
 #import "OTFeedItemFactory.h"
 #import "OTOngoingTourService.h"
+#import "entourage-Swift.h"
 
 #define PADDING 20.0f
 
@@ -48,8 +50,10 @@
 @implementation OTCreateMeetingViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
+    
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     [self setupUI];
     if(!self.encounter && self.displayedOnceForTour) {
@@ -71,14 +75,14 @@
 
 - (void)setupUI {
     [self setupCloseModal];
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
-        UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
+
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    
+    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                             withTarget:self
                                                              andAction:@selector(sendEncounter:)
                                                                andFont:@"SFUIText-Bold"
-                                                               colored:[UIColor appOrangeColor]];
+                                                               colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
         [self.navigationItem setRightBarButtonItem:menuButton];
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
@@ -124,11 +128,19 @@
 - (IBAction)sendEncounter:(UIBarButtonItem*)sender {
     [OTLogger logEvent:@"ValidateEncounterClick"];
     if(self.nameTextField.text.length == 0) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_enter_name_of_met_person") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@""
+                                                                            message:OTLocalizedString(@"encounter_enter_name_of_met_person")
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:controller animated:YES completion:nil];
         return;
     }
     else if(self.messageTextView.textView.text.length == 0) {
-        [[[UIAlertView alloc] initWithTitle:@"" message:OTLocalizedString(@"encounter_fill_all_fields") delegate:nil cancelButtonTitle:nil otherButtonTitles:OTLocalizedString(@"tryAgain_short"), nil] show];
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@""
+                                                                            message:OTLocalizedString(@"encounter_fill_all_fields")
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:controller animated:YES completion:nil];
         return;
     }
     if(!self.encounter)

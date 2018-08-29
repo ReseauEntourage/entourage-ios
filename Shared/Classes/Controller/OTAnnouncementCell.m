@@ -10,6 +10,7 @@
 #import "OTFeedItemFactory.h"
 #import "UIButton+entourage.h"
 #import "OTSummaryProviderBehavior.h"
+#import "entourage-Swift.h"
 
 NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableViewCellIdentifier";
 
@@ -27,11 +28,16 @@ NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableVie
     summaryBehavior.imgAssociation = self.imgAssociation;
     summaryBehavior.imgCategory = self.iconImage;
     [summaryBehavior configureWith:item];
+    
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
     self.titleLabel.text = [uiDelegate summary];
     self.descriptionLabel.text = [uiDelegate feedItemDescription];
     [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
-    [self.statusTextButton setTitle:[uiDelegate feedItemActionButton] forState:UIControlStateNormal];
+    
+    NSString *statusTitle = [NSString stringWithFormat:@"%@", [uiDelegate feedItemActionButton]];
+    [self.statusTextButton setTitle:statusTitle forState:UIControlStateNormal];
+    
+    self.containerView.backgroundColor = [OTAppAppearance announcementFeedContainerColor];
 }
 
 - (IBAction)doShowProfile {

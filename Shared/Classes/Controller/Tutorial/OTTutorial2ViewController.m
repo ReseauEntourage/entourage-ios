@@ -8,6 +8,7 @@
 
 #import "OTTutorial2ViewController.h"
 #import "UIColor+entourage.h"
+#import "entourage-Swift.h"
 
 @interface OTTutorial2ViewController ()
 
@@ -20,7 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Consultez les actions créées par vos voisins et rejoignez celles qui vous intéressent depuis la carte : "];
+    self.topView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:OTLocalizedString(@"Consultez les actions créées par vos voisins et rejoignez celles qui vous intéressent depuis la carte : ")];
     [attributedString addAttributes:@{
                                       NSForegroundColorAttributeName: [UIColor appGreyishBrownColor]
                                       } range:NSMakeRange(0, 47)];

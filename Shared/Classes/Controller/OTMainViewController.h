@@ -10,19 +10,21 @@
 #import "OTMeetingCalloutViewController.h"
 #import "OTCreateMeetingViewController.h"
 #import "OTConfirmationViewController.h"
+#import "OTEntourageEditorViewController.h"
 
 @class MKMapView;
 @class KPClusteringController;
 @class OTEncounterAnnotation;
 @class OTFeedItem;
 
-@interface OTMainViewController : UIViewController <OTMeetingCalloutViewControllerDelegate, OTConfirmationViewControllerDelegate>
+@interface OTMainViewController : UIViewController <OTConfirmationViewControllerDelegate, EntourageEditorDelegate>
 
 // tour properties
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;
 @property (nonatomic, strong) NSString *webview;
 
 - (void)zoomToCurrentLocation:(id)sender;
+- (void)zoomMapToLocation:(CLLocation*)location;
 - (void)willChangePosition;
 - (void)didChangePosition;
 - (void)reloadPois;

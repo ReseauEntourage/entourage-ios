@@ -27,7 +27,7 @@
     }];
 }
 
-- (void)invitePhones:(NSArray *)phones withSuccess:(void (^)())success orFailure:(void (^)(NSError *, NSArray *))failure {
+- (void)invitePhones:(NSArray *)phones withSuccess:(void (^)(void))success orFailure:(void (^)(NSError *, NSArray *))failure {
     // NOT IN THS VERSION (maybe 2.0)
 }
 
@@ -72,10 +72,12 @@
     }];
 }
 
-- (void)setMessagesAsRead:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)setMessagesAsRead:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     [[OTTourService new] readTourMessages:self.tour.uid success:^(){
+        
         if(success)
             success();
+    
     } failure:^(NSError *error) {
         if (failure)
             failure(error);

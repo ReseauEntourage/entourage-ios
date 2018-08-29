@@ -19,6 +19,9 @@
 @property (nonatomic, weak) IBOutlet UITextView *txtFeedItemDescription;
 @property (nonatomic, weak) IBOutlet UIImageView *imgAssociation;
 @property (nonatomic, weak) IBOutlet UIImageView *imgCategory;
+@property (nonatomic) BOOL showRoundedBorder;
+@property (nonatomic) BOOL showTimeAsUpdatedDate;
+@property (nonatomic) CGSize imgCategorySize;
 
 - (void)configureWith:(OTFeedItem *)feedItem;
 - (void)clearConfiguration;

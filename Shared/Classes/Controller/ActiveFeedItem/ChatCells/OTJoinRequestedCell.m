@@ -12,7 +12,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "OTConsts.h"
 #import "UIImageView+entourage.h"
-#import "OTConsts.h"
+#import "entourage-Swift.h"
 
 // Sergiu : again apologies for magic numbers (i hate ios tables with autolayout)
 #define BUTTON_MARGIN 144
@@ -23,11 +23,21 @@
     [super awakeFromNib];
     
     [self layoutIfNeeded];
+    
     CAShapeLayer * maskLayer = [CAShapeLayer layer];
     CGRect bounds = CGRectMake(0, 0, self.dataSource.tableView.contentSize.width - BUTTON_MARGIN, self.btnLast.bounds.size.height);
     maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: bounds byRoundingCorners: UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii: (CGSize){7.0, 7.0}].CGPath;
     self.btnLast.layer.mask = maskLayer;
     self.btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    UIColor *color = [ApplicationTheme shared].backgroundThemeColor;
+    [self.btnAccept setTitleColor:color forState:UIControlStateNormal];
+    [self.btnIgnore setTitleColor:color forState:UIControlStateNormal];
+    [self.btnViewProfile setTitleColor:color forState:UIControlStateNormal];
+    
+    self.imgAppLogo.image = [OTAppAppearance applicationLogo];
+    self.lblAppName.text = [OTAppAppearance applicationTitle];
+    self.bgView.backgroundColor = color;
 }
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
@@ -37,10 +47,12 @@
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl withPlaceholder:@"user"];
     self.lblUserName.text = joiner.displayName;
     self.lblMessage.text = @"";
-    if(joiner.message.length > 0)
+    
+    if (joiner.message.length > 0) {
         self.lblMessage.text = [NSString stringWithFormat:@"\"%@\"", joiner.message];
-    NSString *joinType = [joiner.feedItem isKindOfClass:[OTTour class]] ? @"want_to_join_tour" : @"want_to_join_entourage";
-    self.lblJoinType.text = OTLocalizedString(joinType);
+    }
+    
+    self.lblJoinType.text = [OTAppAppearance requestToJoinTitleForFeedItem:joiner.feedItem];
 }
 
 - (IBAction)showUserDetails:(id)sender {

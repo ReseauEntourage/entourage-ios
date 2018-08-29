@@ -6,13 +6,14 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTUserNameViewController.h"
 
-#import "IQKeyboardManager.h"
 #import "UITextField+indentation.h"
 #import "UIView+entourage.h"
 #import "OTOnboardingService.h"
-#import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 #import "NSUserDefaults+OT.h"
@@ -29,6 +30,7 @@
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
 @property (weak, nonatomic) IBOutlet OnBoardingButton *continueButton;
+@property (weak, nonatomic) IBOutlet UILabel *nameDescLabel;
 
 @end
 
@@ -36,10 +38,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 
     self.title = @"";
     [self.firstNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.lastNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self loadCurrentData];
 
@@ -50,11 +55,17 @@
     self.lastNameTextField.inputValidationChanged = ^(BOOL isValid) {
         self.continueButton.enabled = [self formIsValid];
     };
+    
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
+    self.nameDescLabel.text = [OTAppAppearance userProfileNameDescription];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent: @"Screen30_5InputNameView"];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -68,7 +79,6 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.firstNameTextField becomeFirstResponder];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

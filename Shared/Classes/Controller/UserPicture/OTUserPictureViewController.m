@@ -15,6 +15,8 @@
 #import "OTPhotoPickerBehavior.h"
 #import "UIBarButtonItem+factory.h"
 #import "NSUserDefaults+OT.h"
+#import "OTGeolocationRightsViewController.h"
+#import "entourage-Swift.h"
 
 #define PREVIEW_PICTURE_SEGUE @"PreviewPictureSegue"
 
@@ -22,7 +24,8 @@
 
 @property (nonatomic, strong) UIImage *image;
 @property (strong, nonatomic) IBOutlet OTPhotoPickerBehavior *photoPickerBehavior;
-
+@property (weak, nonatomic) IBOutlet UIButton *takePictureButton;
+@property (weak, nonatomic) IBOutlet UIButton *choosePictureButton;
 @end
 
 @implementation OTUserPictureViewController
@@ -30,23 +33,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    if (![NSUserDefaults standardUserDefaults].isTutorialCompleted)
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.choosePictureButton setTitleColor:self.view.backgroundColor forState:UIControlStateNormal];
+    [self.takePictureButton setTitleColor:self.view.backgroundColor forState:UIControlStateNormal];
+    
+    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+        if (![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+            [self addIgnoreButton];
+        }
+    }
+    else if (!self.isEditingPictureForCurrentUser) {
         [self addIgnoreButton];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"Screen09_6ChoosePhotoView"];
-    if ([NSUserDefaults standardUserDefaults].isTutorialCompleted)
-        self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-    else
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    if(self.isMovingFromParentViewController)
+    
+    if (self.isMovingFromParentViewController) {
         [OTLogger logEvent:@"BackFromPhoto1"];
+    }
 }
 
 - (IBAction)pictureSelected:(id)sender {
@@ -60,6 +74,11 @@
     if ([segue.identifier isEqualToString:PREVIEW_PICTURE_SEGUE]) {
         OTPicturePreviewViewController *controller = (OTPicturePreviewViewController*)[segue destinationViewController];
         controller.image = self.image;
+        controller.isEditingPictureForCurrentUser = self.isEditingPictureForCurrentUser;
+        
+    } else if ([segue.identifier isEqualToString:@"SkipPreviewSegue"]) {
+        OTGeolocationRightsViewController *actionZoneController = (OTGeolocationRightsViewController*)[segue destinationViewController];
+        actionZoneController.isShownOnStartup = !self.isEditingPictureForCurrentUser;
     }
 }
 

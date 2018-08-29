@@ -12,6 +12,8 @@ static NSString *const kNewsfeedsFilter = @"kNewsfeedsFilter_";
 static NSString *const kMyEntouragesFilter = @"kMyEntouragesFilter_";
 static NSString *const kTourOngoing = @"kTour";
 static NSString *const kTourPoints = @"kTourPoints";
+static NSString *const kIsFirstLogin = @"kIsFirstLogin";
+static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 @implementation NSUserDefaults (OT)
 
@@ -29,6 +31,8 @@ static NSString *const kTourPoints = @"kTourPoints";
 	{
 		[self removeObjectForKey:kUser];
 	}
+    
+    [self setCompleteFirstLogin];
 	[self synchronize];
 }
 
@@ -99,9 +103,9 @@ static NSString *const kTourPoints = @"kTourPoints";
 - (void)setAutoTutorialShown:(BOOL)autoTutorialShown {
     NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kAutoTutorialComplete]];
     BOOL hasPhoneInNumbers = [loggedNumbers containsObject:self.currentUser.phone];
-    if(hasPhoneInNumbers && !autoTutorialShown)
+    if (hasPhoneInNumbers && !autoTutorialShown)
        [loggedNumbers removeObject:self.currentUser.phone];
-    if(!hasPhoneInNumbers && autoTutorialShown)
+    if (!hasPhoneInNumbers && autoTutorialShown)
         [loggedNumbers addObject:self.currentUser.phone];
     [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kAutoTutorialComplete];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -110,6 +114,36 @@ static NSString *const kTourPoints = @"kTourPoints";
 - (BOOL)autoTutorialShown {
     NSMutableArray *numbersWithTutorial = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kAutoTutorialComplete]];
     return [numbersWithTutorial containsObject:self.currentUser.phone];
+}
+
+- (BOOL)isFirstLogin {
+
+    if ([[[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys] containsObject:kIsFirstLogin]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)setCompleteFirstLogin
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(0) forKey:kIsFirstLogin];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)arePushNotificationsRefused {
+    
+    if ([[[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys] containsObject:kPushNotificationRefused]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)setArePushNotificationsRefused:(BOOL)arePushNotificationsRefused
+{
+    [[NSUserDefaults standardUserDefaults] setObject:@(arePushNotificationsRefused) forKey:kPushNotificationRefused];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (OTSavedFilter *)savedNewsfeedsFilter {

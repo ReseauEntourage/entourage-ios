@@ -20,6 +20,9 @@
 #import "UIImageView+entourage.h"
 #import "OTConsts.h"
 #import "OTBarButtonView.h"
+#import "entourage-Swift.h"
+#import "NSUserDefaults+OT.h"
+#import "UIImage+processing.h"
 
 @interface OTMapViewController ()
 
@@ -48,15 +51,26 @@
     self.membersDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.membersDataSource.tableView.estimatedRowHeight = 1000;
 
-    self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
-    [self setupToolbarButtons];
+    [self configureTitleView];
     [self.membersDataSource loadDataFor:self.feedItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [OTLogger logEvent:@"Screen14_2PublicPageViewAsMemberOrCreator"];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    [self setupToolbarButtons];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+}
+
+- (void)configureTitleView {
+    self.navigationItem.titleView = [OTAppAppearance navigationTitleLabelForFeedItem:self.feedItem];
+    NSMutableArray *leftButtons = @[].mutableCopy;
+    UIBarButtonItem *backItem = [UIBarButtonItem createWithImageNamed:@"backItem"
+                                                           withTarget:self.navigationController andAction:@selector(popViewControllerAnimated:) changeTintColor:YES];
+    [leftButtons addObject:backItem];
+    [leftButtons addObject:[OTAppAppearance leftNavigationBarButtonItemForFeedItem:self.feedItem]];
+    self.navigationItem.leftBarButtonItems = leftButtons;
 }
 
 - (IBAction)showProfile {
@@ -67,13 +81,13 @@
 #pragma mark - navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.inviteBehavior prepareSegueForInvite:segue])
+    if ([self.inviteBehavior prepareSegueForInvite:segue])
         return;
-    if([self.userProfileBehavior prepareSegueForUserProfile:segue])
+    if ([self.userProfileBehavior prepareSegueForUserProfile:segue])
         return;
-    if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
+    if ([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
-    if([self.editEntourageBehavior prepareSegue:segue])
+    if ([self.editEntourageBehavior prepareSegue:segue])
         return;
 }
 
@@ -81,13 +95,15 @@
 
 - (void)setupToolbarButtons {
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
-    if(![stateInfo canChangeEditState])
+    if (![stateInfo canChangeEditState]) {
         return;
+    }
     
     NSMutableArray *rightButtons = [NSMutableArray new];
     UIButton *options = [UIButton buttonWithType:UIButtonTypeCustom];
-    [options setImage:[UIImage imageNamed:@"more"]
-             forState:UIControlStateNormal];
+    [options setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+          forState:UIControlStateNormal];
+    options.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [options addTarget:self.statusChangedBehavior
                 action:@selector(startChangeStatus)
       forControlEvents:UIControlEventTouchUpInside];
@@ -99,23 +115,7 @@
     
     UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:optionsBarBtnView];
     [rightButtons addObject:optionsButton];
-    if([stateInfo canInvite]) {
-        UIButton *plus = [UIButton buttonWithType:UIButtonTypeCustom];
-        [plus setImage:[UIImage imageNamed:@"userPlus"]
-                 forState:UIControlStateNormal];
-        [plus addTarget:self.inviteBehavior
-                    action:@selector(startInvite)
-          forControlEvents:UIControlEventTouchUpInside];
-        [plus setFrame:CGRectMake(0, 0, 30, 30)];
-        
-        OTBarButtonView *plusBarBtnView = [[OTBarButtonView alloc] initWithFrame:plus.frame];
-        [plusBarBtnView setPosition:BarButtonViewPositionRight];
-        [plusBarBtnView addSubview:plus];
-        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plusBarBtnView];
-        [rightButtons addObject:plusButton];
-    }
     [self setRightBarButtonView:rightButtons];
-    //[self.navigationItem setRightBarButtonItems:rightButtons];
 }
 
 - (void)setRightBarButtonView:(NSMutableArray *)views

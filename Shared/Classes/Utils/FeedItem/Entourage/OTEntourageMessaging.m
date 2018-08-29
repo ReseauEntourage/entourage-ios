@@ -28,7 +28,7 @@
     }];
 }
 
-- (void)invitePhones:(NSArray *)phones withSuccess:(void (^)())success orFailure:(void (^)(NSError *, NSArray *))failure {
+- (void)invitePhones:(NSArray *)phones withSuccess:(void (^)(void))success orFailure:(void (^)(NSError *, NSArray *))failure {
     [[OTInvitationsService new] inviteNumbers:phones toEntourage:self.entourage success:^() {
         NSLog(@"INVITE BY PHONES");
         if(success)
@@ -41,7 +41,7 @@
 }
 
 - (void)getMessagesWithSuccess:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] entourageMessagesForEntourage:self.entourage.uid WithSuccess:^(NSArray *items) {
+    [[OTEntourageService new] entourageMessagesForEntourage:self.entourage.uuid WithSuccess:^(NSArray *items) {
         NSLog(@"GET ENTOURAGE MESSAGES");
         if(success)
             success(items);
@@ -74,8 +74,8 @@
         success([NSArray new]);
 }
 
-- (void)setMessagesAsRead:(void (^)())success orFailure:(void (^)(NSError *))failure {
-    [[OTEntourageService new] readEntourageMessages:self.entourage.uid success:^() {
+- (void)setMessagesAsRead:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
+    [[OTEntourageService new] readEntourageMessages:self.entourage.uuid success:^() {
         if(success){
             success();
         }

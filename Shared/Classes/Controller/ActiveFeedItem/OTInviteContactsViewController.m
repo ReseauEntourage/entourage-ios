@@ -6,8 +6,9 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTInviteContactsViewController.h"
-#import "SVProgressHUD.h"
 #import "OTAddressBookPhone.h"
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
@@ -17,6 +18,7 @@
 #import "OTContactsFilteredDataSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTContactPhoneCell.h"
+#import "entourage-Swift.h"
 
 @interface OTInviteContactsViewController () <UITableViewDelegate>
 
@@ -38,7 +40,7 @@
                                          withTarget:self
                                           andAction:@selector(save)
                                             andFont:@"SFUIText-Bold"
-                                            colored:[UIColor appOrangeColor]];
+                                            colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.btnSave changeEnabled:NO];
     [self.navigationItem setRightBarButtonItem:self.btnSave];
     self.tblContacts.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -48,7 +50,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 #pragma mark - Contacts table view delegate implementation
@@ -78,7 +81,9 @@
             [self.delegate didInviteWithSuccess];
     } orFailure:^(NSError *error, NSArray *failedNUmbers) {
         [SVProgressHUD dismiss];
-        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"inviteByPhoneFailed") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"inviteByPhoneFailed") preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
 }
 

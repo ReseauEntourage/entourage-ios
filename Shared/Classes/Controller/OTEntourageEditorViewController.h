@@ -21,5 +21,6 @@
 @property (nonatomic, weak) id<EntourageEditorDelegate> entourageEditorDelegate;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) CLLocation *location;
+@property (nonatomic) BOOL isEditingEvent;
 
 @end

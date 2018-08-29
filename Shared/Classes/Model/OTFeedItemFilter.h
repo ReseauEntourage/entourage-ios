@@ -10,25 +10,23 @@
 
 typedef enum {
     FeedItemFilterKeyContributionSocial,
-    FeedItemFilterKeyContributionEvent,
     FeedItemFilterKeyContributionHelp,
     FeedItemFilterKeyContributionResource,
     FeedItemFilterKeyContributionInfo,
     FeedItemFilterKeyContributionSkill,
     FeedItemFilterKeyContributionOther,
-    
+
     FeedItemFilterKeyDemandeSocial,
-    FeedItemFilterKeyDemandeEvent,
     FeedItemFilterKeyDemandeHelp,
     FeedItemFilterKeyDemandeResource,
     FeedItemFilterKeyDemandeInfo,
     FeedItemFilterKeyDemandeSkill,
     FeedItemFilterKeyDemandeOther,
-    
+
     FeedItemFilterKeyUnread,
     FeedItemFilterKeyIncludingClosed,
-    FeedItemFilterKeyContribution = 17,
-    FeedItemFilterKeyDemand = 18,
+    FeedItemFilterKeyContribution,
+    FeedItemFilterKeyDemand,
     FeedItemFilterKeyTour,
     FeedItemFilterKeyTimeframe,
     FeedItemFilterKeyMedical,
@@ -37,7 +35,12 @@ typedef enum {
     FeedItemFilterKeyOrganisation,
     FeedItemFilterKeyMyEntourages,
     FeedItemFilterKeyMyEntouragesOnly,
-    FeedItemFilterKeyMyOrganisationOnly
+    FeedItemFilterKeyMyOrganisationOnly,
+
+    FeedItemFilterKeyNeighborhoods,
+    FeedItemFilterKeyPrivateCircles,
+    FeedItemFilterKeyEvents,
+    FeedItemFilterKeyEventsPast,
 } FeedItemFilterKey;
 
 @interface OTFeedItemFilter : NSObject
@@ -66,5 +69,11 @@ typedef enum {
                          active:(BOOL)active
                       withImage:(NSString *)image
                           title:(NSString *)title;
+    
++ (OTFeedItemFilter *)createFor:(FeedItemFilterKey)key
+                         active:(BOOL)active
+                       children:(NSArray *)children
+                          image:(NSString*)image
+                   showBoldText:(BOOL)showBoldText;
 
 @end

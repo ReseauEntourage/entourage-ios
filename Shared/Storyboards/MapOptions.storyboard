@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="KRS-0L-Lvt">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KRS-0L-Lvt">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,22 +19,22 @@
                         <viewControllerLayoutGuide type="bottom" id="Bki-Tw-5Yw"/>
                     </layoutGuides>
                     <view key="view" alpha="0.88" contentMode="scaleToFill" id="b4u-bP-vhy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHe-Ul-0Ho" userLabel="Close Button">
-                                <rect key="frame" x="305" y="593" width="62" height="62"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button hidden="YES" opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHe-Ul-0Ho" userLabel="Close Button">
+                                <rect key="frame" x="694" y="828" width="62" height="62"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="OUt-a8-QPS"/>
                                     <constraint firstAttribute="width" constant="62" id="dWo-33-41x"/>
                                 </constraints>
-                                <state key="normal" image="closeShadow">
+                                <state key="normal" image="closeOptionWithShadow">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <state key="selected" image="closeShadow"/>
-                                <state key="highlighted" image="closeNoShadow"/>
+                                <state key="selected" image="closeOptionWithShadow"/>
+                                <state key="highlighted" image="closeOptionNoShadow"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="5"/>
@@ -47,7 +46,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une maraude" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVl-d3-s2f">
-                                <rect key="frame" x="93" y="550.5" width="210" height="21"/>
+                                <rect key="frame" x="482" y="785.5" width="210" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="iPF-wK-KJe"/>
                                     <constraint firstAttribute="height" constant="21" id="n1v-bC-fs4"/>
@@ -57,20 +56,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0k-nN-D8h" userLabel="POI Button">
-                                <rect key="frame" x="311" y="481" width="48" height="48"/>
+                                <rect key="frame" x="700" y="716" width="48" height="48"/>
                                 <state key="normal" image="solidarity"/>
                                 <connections>
                                     <action selector="doTogglePOI:" destination="KRS-0L-Lvt" eventType="touchUpInside" id="tcZ-Dm-1X2"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Afficher le guide de solidarité" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tym-1e-o0T" userLabel="POI Label">
-                                <rect key="frame" x="97" y="496" width="206" height="18"/>
+                                <rect key="frame" x="486" y="731" width="206" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0f-Bh-fVG" userLabel="Maraude Button">
-                                <rect key="frame" x="311" y="537" width="48" height="48"/>
+                                <rect key="frame" x="700" y="772" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="C5A-HR-p5p"/>
                                     <constraint firstAttribute="height" constant="48" id="wS4-pg-UpG"/>
@@ -81,20 +80,34 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="EHe-Ul-0Ho" firstAttribute="trailing" secondItem="b4u-bP-vhy" secondAttribute="trailingMargin" constant="8" id="2ae-hg-Vjn"/>
                             <constraint firstItem="EHe-Ul-0Ho" firstAttribute="top" secondItem="X0f-Bh-fVG" secondAttribute="bottom" constant="8" id="Bg4-Th-oKi"/>
                             <constraint firstItem="tym-1e-o0T" firstAttribute="centerY" secondItem="e0k-nN-D8h" secondAttribute="centerY" id="FPE-ih-BSB"/>
                             <constraint firstItem="tym-1e-o0T" firstAttribute="trailing" secondItem="e0k-nN-D8h" secondAttribute="leading" constant="-8" id="Fhe-i8-3Mx"/>
-                            <constraint firstItem="Bki-Tw-5Yw" firstAttribute="top" secondItem="EHe-Ul-0Ho" secondAttribute="bottomMargin" constant="20" id="IIg-qF-V1k"/>
                             <constraint firstItem="X0f-Bh-fVG" firstAttribute="trailing" secondItem="b4u-bP-vhy" secondAttribute="trailingMargin" id="ZzN-PJ-CJX"/>
+                            <constraint firstItem="Bki-Tw-5Yw" firstAttribute="top" secondItem="EHe-Ul-0Ho" secondAttribute="bottom" constant="13" id="a70-NF-Mem">
+                                <variation key="heightClass=regular-widthClass=regular" constant="134"/>
+                            </constraint>
                             <constraint firstItem="pVl-d3-s2f" firstAttribute="trailing" secondItem="X0f-Bh-fVG" secondAttribute="leading" constant="-8" id="bvU-Aa-f6c"/>
+                            <constraint firstItem="Bki-Tw-5Yw" firstAttribute="top" secondItem="EHe-Ul-0Ho" secondAttribute="bottom" constant="62" id="cUY-x1-YvA"/>
                             <constraint firstItem="e0k-nN-D8h" firstAttribute="bottom" secondItem="X0f-Bh-fVG" secondAttribute="top" constant="-8" id="mdm-Og-oPb"/>
                             <constraint firstItem="pVl-d3-s2f" firstAttribute="centerY" secondItem="X0f-Bh-fVG" secondAttribute="centerY" id="r78-Pq-z1u"/>
                             <constraint firstItem="e0k-nN-D8h" firstAttribute="leading" secondItem="X0f-Bh-fVG" secondAttribute="leading" id="wBm-Gh-Dle"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cUY-x1-YvA"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <exclude reference="cUY-x1-YvA"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="createTourButton" destination="X0f-Bh-fVG" id="CgQ-b6-ccC"/>
                         <outlet property="createTourLabel" destination="pVl-d3-s2f" id="sId-Va-G6O"/>
@@ -104,12 +117,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1CF-ti-veT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="245.86666666666667" y="543.38666666666666"/>
+            <point key="canvasLocation" x="393.38666666666671" y="488.80359820089961"/>
         </scene>
     </scenes>
     <resources>
-        <image name="closeNoShadow" width="62" height="62"/>
-        <image name="closeShadow" width="62" height="62"/>
+        <image name="closeOptionNoShadow" width="61" height="61"/>
+        <image name="closeOptionWithShadow" width="61" height="61"/>
         <image name="createMaraude" width="48" height="48"/>
         <image name="solidarity" width="48" height="48"/>
     </resources>

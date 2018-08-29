@@ -15,17 +15,13 @@
 @interface OTEntouragesTableViewCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
-@property (nonatomic, weak) IBOutlet UILabel *lblDescription;
 @property (nonatomic, weak) IBOutlet UILabel *lblTimeDistance;
-@property (nonatomic, weak) IBOutlet UILabel *lblNumberOfUsers;
-@property (nonatomic, weak) IBOutlet UIButton *btnProfilePicture;
 @property (nonatomic, weak) IBOutlet UILabel *lblLastMessage;
-@property (nonatomic, weak) IBOutlet UITextField *txtUnreadCount;
-@property (nonatomic, weak) IBOutlet UIImageView *imgAssociation;
+@property (nonatomic, weak) IBOutlet UIImageView *imgCategory;
+
 @property (nonatomic, weak) IBOutlet OTSummaryProviderBehavior *summaryProvider;
 @property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
 @property (nonatomic, weak) IBOutlet OTDataSourceBehavior *dataSource;
-@property (nonatomic, weak) IBOutlet UIImageView *imgCategory;
 
 - (void)configureWith:(OTFeedItem *)item;
 

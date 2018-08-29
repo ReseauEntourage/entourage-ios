@@ -21,4 +21,8 @@
 @property (nonatomic, weak) IBOutlet OTMessageDataSourceBehavior *dataSource;
 @property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
 
+@property (nonatomic, weak) IBOutlet UILabel *lblAppName;
+@property (nonatomic, weak) IBOutlet UIImageView *imgAppLogo;
+@property (nonatomic, weak) IBOutlet UIView *bgView;
+
 @end

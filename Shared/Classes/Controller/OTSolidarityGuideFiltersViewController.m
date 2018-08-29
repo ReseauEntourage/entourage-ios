@@ -13,6 +13,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "UIColor+entourage.h"
 #import "OTFeedItemsFiltersTableDataSource.h"
+#import "entourage-Swift.h"
 
 @interface OTSolidarityGuideFiltersViewController ()
 
@@ -35,14 +36,12 @@
 
 - (void)setupToolbarButtons {
     [self setupCloseModalWithTarget:self andSelector:@selector(close)];
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
                                                         withTarget:self
                                                          andAction:@selector(saveFilters)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[UIColor appOrangeColor]];
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
 }
 

@@ -14,6 +14,7 @@
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTSafariService.h"
+#import "entourage-Swift.h"
 
 //#define SECTION_HEIGHT 44.f
 #define CATEGORY_TITLE_TAG 1
@@ -36,20 +37,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+    
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(saveNewCategory)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[UIColor appOrangeColor]];
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
     self.dataSource = [OTCategoryFromJsonService getData];
+    
     self.categoryTableView.tableFooterView = [UIView new];
     self.categoryTableView.rowHeight = UITableViewAutomaticDimension;
     self.categoryTableView.estimatedRowHeight = 140;
     [self.categoryTableView reloadData];
+
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -73,7 +75,7 @@
     UIButton *sectionButton = [headerCell viewWithTag:SECTION_BUTTON_TAG];
     sectionButton.tag = section;
     NSString *buttonTitle = [categoryType.type isEqualToString:@"ask_for_help"] ?
-                                @"JE CHERCHE..." : @"JE ME PROPOSE DE…";
+                                OTLocalizedString(@"JE CHERCHE...") : OTLocalizedString(@"JE ME PROPOSE DE…");
     [sectionButton setTitle:buttonTitle
                    forState:UIControlStateNormal];
     [sectionButton addTarget:self
@@ -102,7 +104,7 @@
     UIImageView *categoryIcon = [cell viewWithTag:CATEGORY_ICON_TAG];
     OTCategoryType * categoryType = self.dataSource[indexPath.section];
     OTCategory *category = categoryType.categories[indexPath.row];
-    if(self.selectedCategory != nil) {
+    if (self.selectedCategory != nil) {
         category.isSelected = [self.selectedCategory.title isEqualToString:category.title];
     }
     [titleLabel setText:category.title];
@@ -112,19 +114,45 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    OTCategoryType *item = self.dataSource[indexPath.section];
-    OTCategory *itemCategory = item.categories[indexPath.row];
-    itemCategory.isSelected = !itemCategory.isSelected;
-    for(OTCategoryType *categoryType in self.dataSource)
-        for(OTCategory *category in categoryType.categories)
-            if(category != itemCategory) {
-                category.isSelected = NO;
-            }
-    self.selectedCategory = itemCategory;
-    [tableView reloadData];
+    [self selectCategoryAtIndex:indexPath];
 }
 
 #pragma mark - private methods
+    
+- (void)selectCategoryAtIndex:(NSIndexPath*)indexPath {
+    OTCategoryType *item = self.dataSource[indexPath.section];
+    OTCategory *itemCategory = item.categories[indexPath.row];
+    itemCategory.isSelected = !itemCategory.isSelected;
+    
+    for (OTCategoryType *categoryType in self.dataSource) {
+        for (OTCategory *category in categoryType.categories) {
+            if (category != itemCategory) {
+                category.isSelected = NO;
+            }
+        }
+    }
+    
+    self.selectedCategory = itemCategory;
+    [self.categoryTableView reloadData];
+}
+    
+- (NSIndexPath*)indexPathForCategoryWithType:(NSString*)type subcategory:(NSString*)subCat {
+    NSInteger section = 0;
+    NSInteger row = 0;
+    for (OTCategoryType *categoryType in self.dataSource) {
+        for (OTCategory *category in categoryType.categories) {
+            if ([category.entourage_type isEqualToString:type] &&
+                [category.category isEqualToString:subCat]) {
+                    return [NSIndexPath indexPathForRow:row inSection:section];
+            }
+            row++;
+        }
+        row = 0;
+        section++;
+    }
+    
+    return [NSIndexPath indexPathForRow:row inSection:section];
+}
 
 - (void)tapCategory:(UIButton *)sender {
     NSInteger section = sender.tag;

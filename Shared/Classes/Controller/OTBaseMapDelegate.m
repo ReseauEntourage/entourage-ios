@@ -9,6 +9,7 @@
 #import "OTBaseMapDelegate.h"
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTBaseMapDelegate ()
 
@@ -22,7 +23,10 @@
     self = [super init];
     if (self) {
         self.mapController = mapController;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationUpdated:) name:kNotificationLocationUpdated object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(locationUpdated:)
+                                                     name:kNotificationLocationUpdated
+                                                   object:nil];
     }
     return self;
 }
@@ -35,10 +39,17 @@
 
 - (void)locationUpdated:(NSNotification *)notification {
     if (!self.mapWasCenteredOnUserLocation) {
-        NSArray *locations = [notification readLocations];
-        if(locations.count > 0) {
+        
+        OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+        if ([currentUser hasActionZoneDefined] && currentUser.address.location) {
             self.mapWasCenteredOnUserLocation = YES;
-            [self.mapController zoomToCurrentLocation:nil];
+            [self.mapController zoomMapToLocation:currentUser.address.location];
+        } else {
+            NSArray *locations = [notification readLocations];
+            if (locations.count > 0) {
+                self.mapWasCenteredOnUserLocation = YES;
+                [self.mapController zoomToCurrentLocation:nil];
+            }
         }
     }
 }

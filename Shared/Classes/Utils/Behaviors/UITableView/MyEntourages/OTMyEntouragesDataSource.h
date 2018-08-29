@@ -10,6 +10,10 @@
 #import "OTFeedItemsFilterDelegate.h"
 
 @interface OTMyEntouragesDataSource : OTDataSourceBehavior <OTFeedItemsFilterDelegate>
+@property (strong, nonatomic) IBOutlet UIView *noDataView;
+@property (strong, nonatomic) IBOutlet UIImageView *noDataRoundedBackground;
+@property (strong, nonatomic) IBOutlet UILabel *noDataTitle;
+@property (strong, nonatomic) IBOutlet UILabel *noDataSubtitle;
 
 - (void)loadNextPage;
 

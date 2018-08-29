@@ -6,7 +6,7 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-@import AddressBook;
+@import Contacts;
 #import "OTInviteBehavior.h"
 #import "OTConsts.h"
 #import "OTInviteContactsViewController.h"
@@ -26,7 +26,10 @@
 
 - (void)startInvite {
     [OTLogger logEvent:@"InviteFriendsClick"];
-    [self.owner performSegueWithIdentifier:@"SegueInviteSource" sender:nil];
+    
+    [OTAppState launchInviteActionForFeedItem:self.feedItem
+                               fromController:self.owner
+                                     delegate:self];
 }
 
 - (BOOL)prepareSegueForInvite:(UIStoryboardSegue *)segue {
@@ -50,19 +53,26 @@
 
 #pragma mark - InviteSourceDelegate implementation
 
-- (void)inviteContacts {
-    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied || ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusRestricted) {
-        [[[UIAlertView alloc] initWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"addressBookDenied") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
-    } else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+- (void)inviteContactsFromViewController:(UIViewController *)viewController {
+    CNAuthorizationStatus authorizationStatus = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    if (authorizationStatus == CNAuthorizationStatusDenied || authorizationStatus == CNAuthorizationStatusRestricted) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error")
+                                                                                 message:OTLocalizedString(@"addressBookDenied")
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+
+        [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
+        [viewController presentViewController:alertController animated:YES completion:nil];
+    } else if (authorizationStatus == CNAuthorizationStatusAuthorized) {
         [self.owner performSegueWithIdentifier:@"SegueInviteFromAddressBook" sender:nil];
     } else {
-        ABAddressBookRequestAccessWithCompletion(ABAddressBookCreateWithOptions(NULL, nil), ^(bool granted, CFErrorRef error) {
+        CNContactStore *store = [[CNContactStore alloc] init];
+        [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError *__nullable error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (!granted)
                     return;
                 [self.owner performSegueWithIdentifier:@"SegueInviteFromAddressBook" sender:nil];
             });
-        });
+        }];
     }
 }
 

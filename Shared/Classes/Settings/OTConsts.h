@@ -6,6 +6,15 @@
 //  Copyright (c) 2015 OCTO Technology. All rights reserved.
 //
 
+#import "PFPConsts.h"
+
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+
 #define DEVICE_TOKEN_KEY "device_token"
 
 #define PARIS_LAT 48.856578
@@ -38,6 +47,8 @@
 #define kNotificationLocalTourConfirmation "NotificationShowTourConfirmation"
 
 #define kNotificationShowCurrentLocation "NotificationCurrentLocation"
+#define kNotificationShowFeedsMapCurrentLocation "NotificationFeedsMapCurrentLocation"
+#define kNotificationShowEventDetails @"NotificationShowEventDetails"
 
 #define kNotificationProfilePictureUpdated "NotificationProfilePictureUpdated"
 #define kNotificationAboutMeUpdated "NotificationAboutMeUpdated"
@@ -57,19 +68,12 @@
 #define kNotificationUpdateBadge @"NotificationUpdateBadge"
 #define kSolidarityGuideNotification @"NotificationSolidarityGuide"
 
-#define kLoginFailureNotification @"loginFailureNotification"
-#define kUpdateBadgeCountNotification @"updateBadgeCountNotification"
-
-
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
 #define ABOUT_TWITTER_URL @"https://twitter.com/r_entourage"
 #define ABOUT_CGU_URL @"http://www.entourage.social/cgu/index.html"
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
-#define REPORT_EMAIL_ADDRESS @"contact@entourage.social"
-
-#define OTLocalizedString(key) [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]
 
 #define SNAPSHOT_START "snapshot_start_%d.png"
 #define SNAPSHOT_STOP "snapshot_end_%d.png"
@@ -100,3 +104,18 @@
 
 #define PROPOSE_STRUCTURE_URL_GOOGLE_DOCS @"https://docs.google.com/forms/d/e/1FAIpQLSdcpYpAWz9zllF2TUS4USDQzu4T4ywu_XjXaD-ovsTS5eo1YA/viewform"
 #define PROPOSE_STRUCTURE_URL @"%@links/propose-poi/redirect?token=%@"
+
+// Entourages
+#define ENTOURAGE_DEMANDE @"ask_for_help"
+#define ENTOURAGE_CONTRIBUTION @"contribution"
+#define ENTOURAGE_STATUS_OPEN @"open"
+
+#define GROUP_TYPE_ACTION @"action"
+#define GROUP_TYPE_NEIGHBORHOOD @"neighborhood"
+#define GROUP_TYPE_PRIVATE_CIRCLE @"private_circle"
+#define GROUP_TYPE_CONVERSATION @"conversation"
+#define GROUP_TYPE_OUTING @"outing"
+
+// Email addresses
+#define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"
+#define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.org"

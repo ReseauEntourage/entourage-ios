@@ -16,11 +16,14 @@ extern NSString *const kTutorialDone;
 @property (nonatomic, strong) OTUser *temporaryUser;
 @property (nonatomic, strong) OTTour *currentOngoingTour;
 @property (nonatomic, assign) BOOL autoTutorialShown;
+@property (nonatomic, assign) BOOL arePushNotificationsRefused;
 @property (nonatomic, strong) OTSavedFilter *savedNewsfeedsFilter;
 @property (nonatomic, strong) OTSavedMyEntouragesFilter *savedMyEntouragesFilter;
 @property (nonatomic, strong) NSArray *tourPoints;
 
 - (BOOL)isTutorialCompleted;
 - (BOOL)isTourOngoing;
+- (void)setCompleteFirstLogin;
+- (BOOL)isFirstLogin;
 
 @end

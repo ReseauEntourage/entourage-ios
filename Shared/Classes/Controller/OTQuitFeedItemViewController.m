@@ -9,7 +9,7 @@
 #import "OTQuitFeedItemViewController.h"
 #import "OTTourService.h"
 #import "OTFeedItemFactory.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTConsts.h"
 
 @implementation OTQuitFeedItemViewController
@@ -23,6 +23,7 @@
 }
 
 - (IBAction)dismissViewController {
+    [OTAppState hideTabBar:NO];
     [self dismissViewControllerAnimated:YES completion:^{
         NSLog(@"dismissed quit tour view controller");
     }];

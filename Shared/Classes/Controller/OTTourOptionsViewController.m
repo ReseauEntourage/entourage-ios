@@ -13,8 +13,6 @@
 
 #define BUTTON_SIDE 48.0f
 #define PADDING_VERTICAL 8.0f
-#define PADDING_HORIZONTAL 16.0f
-#define INITIAL_BOTTOM 82.0f
 
 #define ACTION_LABEL_FRAME CGRectMake(0.0f, 0.0f, 230.0f, 21.0f)
 
@@ -82,8 +80,13 @@
            withIcon:@"heart"
           andAction:@selector(doCreateAction:)];
     
-    if(self.isPOIVisible)
-        [self addOption:OTLocalizedString(@"propose_structure") atIndex:self.buttonIndex++ withIcon:@"house" andAction:@selector(proposeStructure:)];
+    if (self.isPOIVisible) {
+        [self addOption:OTLocalizedString(@"propose_structure")
+                atIndex:self.buttonIndex++
+               withIcon:@"house"
+         applyTintColor:NO
+              andAction:@selector(proposeStructure:)];
+    }
 }
 
 @end

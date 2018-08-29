@@ -14,5 +14,4 @@
 @property (nonatomic, assign) BOOL inviteBehaviorTriggered;
 @property (nonatomic, strong) OTFeedItem *feedItem;
 - (void)reloadMessages;
-
 @end

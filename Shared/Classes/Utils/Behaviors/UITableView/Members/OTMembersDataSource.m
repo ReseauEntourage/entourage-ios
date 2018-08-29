@@ -8,7 +8,7 @@
 
 #import "OTMembersDataSource.h"
 #import "OTFeedItemFactory.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTTableDataSourceBehavior.h"
 #import "OTConsts.h"
 #import "OTFeedItemFactory.h"
@@ -18,21 +18,56 @@
 - (void)loadDataFor:(OTFeedItem *)feedItem {
     [SVProgressHUD show];
     NSMutableArray *newItems = [NSMutableArray new];
-    [newItems addObject:feedItem];
+    
+    if ([feedItem isOuting]) {
+        // Event creator row
+        feedItem.identifierTag = @"eventAuthorInfo";
+        [newItems addObject:feedItem.copy];
+        
+        // Event info row
+        feedItem.identifierTag = @"eventInfo";
+        [newItems addObject:feedItem.copy];
+    }
+    
+    // Map row
+    feedItem.identifierTag = @"feedLocation";
+    [newItems addObject:feedItem.copy];
+    
+    // Description row
     NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
-    if([description length] > 0)
-        [newItems addObject:description];
-    [newItems addObject:feedItem];
+    if ([description length] > 0) {
+        feedItem.identifierTag = @"feedDescription";
+        [newItems addObject:feedItem.copy];
+    }
+    
+    // Members count row
+    feedItem.identifierTag = @"membersCount";
+    [newItems addObject:feedItem.copy];
+    
+    // Invite friend row
+    id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:feedItem] getStateInfo];
+    if ([stateInfo canChangeEditState] && [stateInfo canInvite]) {
+        // Invite item
+        feedItem.identifierTag = @"inviteFriend";
+        [newItems addObject:feedItem.copy];
+    }
+    
     [self refreshTable:newItems];
+    
+    // Member/user rows
     [[[OTFeedItemFactory createFor:feedItem] getMessaging] getFeedItemUsersWithStatus:JOIN_ACCEPTED success:^(NSArray *items) {
+        
         [newItems addObjectsFromArray:items];
         [self refreshTable:newItems];
         [SVProgressHUD dismiss];
+        
     } failure:^(NSError *failure) {
         [SVProgressHUD dismiss];
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(entourageUpdated:) name:kNotificationEntourageChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(entourageUpdated:) name:kNotificationEntourageChanged
+                                               object:nil];
 }
 
 - (void)dealloc {
@@ -50,9 +85,11 @@
 - (void)entourageUpdated:(NSNotification *)notification {
     OTFeedItem *feedItem = (OTFeedItem *)[notification.userInfo objectForKey:kNotificationEntourageChangedEntourageKey];
     NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
-    if([description length] > 0) {
+    
+    if ([description length] > 0) {
         if ([self.items count] >= 2) {
-            [self.items replaceObjectAtIndex:1 withObject:description];
+            feedItem.identifierTag = @"feedDescription";
+            [self.items replaceObjectAtIndex:1 withObject:feedItem.copy];
             [self.tableDataSource refresh];
         }
     }

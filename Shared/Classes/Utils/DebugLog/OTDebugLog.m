@@ -7,9 +7,11 @@
 //
 
 #import "OTDebugLog.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTDeepLinkService.h"
+#import "OTAppConfiguration.h"
 #import "entourage-Swift.h"
+
 @import MessageUI;
 
 @interface OTDebugLog () <MFMailComposeViewControllerDelegate>
@@ -44,20 +46,24 @@
 }
 
 - (void)setConsoleOutput {
-    if([[ConfigurationManager shared].environment isEqualToString:@"staging"])
+
+    if (![[OTAppConfiguration sharedInstance].environmentConfiguration runsOnProduction]) {
         freopen([self.logPath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stderr);
+    }
 }
 
 - (void)sendEmail {
-    if(![[ConfigurationManager shared].environment isEqualToString:@"staging"])
+    
+    if ([[OTAppConfiguration sharedInstance].environmentConfiguration runsOnProduction]) {
         return;
+    }
 
     if(![MFMailComposeViewController canSendMail]) {
         [SVProgressHUD showErrorWithStatus:@"No mail client to send mail with"];
         return;
     }
     
-    NSArray *toRecipents = [NSArray arrayWithObject:@"sergiu.buceac@tecknoworks.com"];
+    NSArray *toRecipents = [NSArray arrayWithObject:@"lazar.sidor@tecknoworks.com"];
     
     MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
     mailer.mailComposeDelegate = self;

@@ -17,7 +17,8 @@
     CGRect theRect = [self rectForMapRect:theMapRect];
     CGContextScaleCTM(context, 1.0, -1.0);
     CGContextTranslateCTM(context, 0.0, -theRect.size.height);
-    CGImageRef imageReference = [UIImage imageNamed:EntourageCircleImage].CGImage;
+    UIImage *image = [UIImage imageNamed:EntourageCircleImage];
+    CGImageRef imageReference = image.CGImage;
     CGContextDrawImage(context, theRect, imageReference);
 }
 @end

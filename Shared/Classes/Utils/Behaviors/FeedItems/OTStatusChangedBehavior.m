@@ -7,7 +7,7 @@
 //
 
 #import "OTStatusChangedBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTConsts.h"
 #import "OTChangeStateViewController.h"
 #import "OTMainViewController.h"
@@ -36,6 +36,7 @@
         OTChangeStateViewController *controller = (OTChangeStateViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
         controller.delegate = self;
+        controller.shouldShowTabBarOnClose = self.shouldShowTabBarWhenFinished;
         controller.editEntourageBehavior = self.editEntourageBehavior;
     } else
         return NO;
@@ -47,6 +48,7 @@
 - (void)stoppedFeedItem {
     [self popToMainController];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"stopped_item")];
     });
@@ -54,24 +56,30 @@
 
 - (void)closedFeedItemWithReason: (OTCloseReason) reason {
     [self popToMainController];
+    
     [self sendActionsForControlEvents:UIControlEventValueChanged];
+    [OTAppState hideTabBar:NO];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if(![self.feedItem isKindOfClass:[OTTour class]]) {
             NSDictionary *userInfo =  @{ @kNotificationSendReasonKey: @(reason), @kNotificationFeedItemKey: self.feedItem};
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationSendCloseMail object:nil userInfo:userInfo];
         }
-        if(reason == OTCloseReasonHelpClose)
+        if (reason == OTCloseReasonHelpClose) {
             return;
-        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"closed_item")];
+        }
+        
+        [SVProgressHUD showSuccessWithStatus:[OTAppAppearance closeFeedItemConformationTitle:self.feedItem]];
         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
     });
 }
 
 - (void)quitedFeedItem {
     [self popToMainController];
+    [OTAppState hideTabBar:NO];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"quitted_item")];
+        [SVProgressHUD showSuccessWithStatus:[OTAppAppearance quitFeedItemConformationTitle:self.feedItem]];
         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
     });
 }
@@ -94,10 +102,12 @@
 - (void)popToMainController {
     for (UIViewController* viewController in self.owner.navigationController.viewControllers) {
         if ([viewController isKindOfClass:[OTMainViewController class]]) {
-            [self.owner.navigationController popToViewController:viewController animated:YES];
+            [self.owner.navigationController popToViewController:viewController animated:NO];
             break;
         }
     }
+    
+    //[OTAppState switchToMainScreenAndResetAppWindow:YES];
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import "OTJoinBehavior.h"
 #import "OTFeedItemFactory.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTConsts.h"
 #import "OTFeedItemJoinOptionsViewController.h"
 

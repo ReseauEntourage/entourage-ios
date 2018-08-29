@@ -26,8 +26,7 @@
 #import "OTEntourageService.h"
 #import "OTAnnouncement.h"
 #import "OTAnnouncementCell.h"
-
-#define TABLEVIEW_FOOTER_HEIGHT 15.0f
+#import "entourage-Swift.h"
 
 #define LOAD_MORE_DRAG_OFFSET 50
 
@@ -37,7 +36,7 @@
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define FEEDS_REQUEST_DISTANCE_KM 10
 
-#define TABLEVIEW_FOOTER_HEIGHT 15.0f
+#define FEEDS_TABLEVIEW_FOOTER_HEIGHT 4.0f
 #define TABLEVIEW_BOTTOM_INSET 86.0f
 #define SMALL_FOOTER_HEIGHT 126
 #define BIG_FOOTER_HEIGHT 300
@@ -77,6 +76,7 @@
     self.lblEmptyTableReason.font = [UIFont fontWithName:@"SFUItext-Semibold" size:17];
     self.lblEmptyTableReason.textAlignment = NSTextAlignmentCenter;
     self.lblEmptyTableReason.numberOfLines = 0;
+    self.infoLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (void)layoutSubviews {
@@ -88,12 +88,30 @@
     self.emptyFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
     self.tableFooterView = self.emptyFooterView;
     
+    CGFloat buttonSize = 42;
+    CGFloat marginOffset = 20;
+    CGFloat y = marginOffset + 64;
+    
+    if (@available(iOS 11.0, *)) {
+        y = self.safeAreaInsets.top + marginOffset;
+    }
+    
+    CGFloat x = UIScreen.mainScreen.bounds.size.width - buttonSize - marginOffset;
+    UIButton *showCurrentLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, buttonSize, buttonSize)];
+    
+    [showCurrentLocationButton setImage:[UIImage imageNamed:@"geoloc"] forState:UIControlStateNormal];
+    showCurrentLocationButton.backgroundColor = [UIColor whiteColor];
+    showCurrentLocationButton.clipsToBounds = YES;
+    showCurrentLocationButton.layer.cornerRadius = buttonSize / 2;
+    [showCurrentLocationButton addTarget:self action:@selector(requestCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
+    
     //show map on table header
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, MAPVIEW_HEIGHT)];
     mapView.frame = headerView.bounds;
     [headerView addSubview:mapView];
+    [headerView addSubview:showCurrentLocationButton];
     [headerView sendSubviewToBack:mapView];
-    //[self configureMapView];
+    [headerView bringSubviewToFront:showCurrentLocationButton];
     
     UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156.0f , headerView.frame.size.width + 130.0f, 4.0f)];
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -119,9 +137,19 @@
     [shadowView addConstraints:constraint_height];
     [headerView addConstraints:constraint_pos_horizontal];
     [headerView addConstraints:constraint_pos_bottom];
+    
     mapView.center = headerView.center;
         
     self.tableHeaderView = headerView;
+    
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithAttributedString:[self.furtherEntouragesBtn attributedTitleForState:UIControlStateNormal]];
+    [title setAttributes:@{NSForegroundColorAttributeName:[ApplicationTheme shared].backgroundThemeColor, NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)} range:NSMakeRange(0, title.length)];
+    [self.furtherEntouragesBtn setAttributedTitle:title forState:UIControlStateNormal];
+}
+
+- (void)requestCurrentLocation
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationShowFeedsMapCurrentLocation object:nil];
 }
 
 - (void)updateItems:(NSArray *)items {
@@ -138,7 +166,7 @@
 }
 
 - (void)setNoFeeds {
-    self.lblEmptyTableReason.text = OTLocalizedString(@"no_feeds_received");
+    self.lblEmptyTableReason.text = [OTAppAppearance noMoreFeedsDescription];// no_feeds_received
 }
 
 /********************************************************************************/
@@ -157,20 +185,23 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return TABLEVIEW_FOOTER_HEIGHT;
+    return FEEDS_TABLEVIEW_FOOTER_HEIGHT;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, TABLEVIEW_FOOTER_HEIGHT)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, FEEDS_TABLEVIEW_FOOTER_HEIGHT)];
     footerView.backgroundColor = [UIColor clearColor];
     return footerView;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     id item = self.items[indexPath.section];
     NSString *identifier = [self getCellIdentifier:item];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     [self configureCell:cell withItem:item];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
@@ -225,6 +256,7 @@
 }
 
 #define kMapHeaderOffsetY 0.0
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.tableHeaderView == nil) return;
     [UIView animateWithDuration:0.5 animations:^() {
@@ -284,21 +316,34 @@
 }
 
 - (void)finishUpdatingFeeds:(BOOL)withFeeds {
-    if(withFeeds){
+    if (withFeeds) {
         self.tableFooterView = self.emptyFooterView;
         return;
     }
     self.activityIndicator.hidden = YES;
     self.infoLabel.hidden = NO;
     BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
+    self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
+    
     self.furtherEntouragesBtn.hidden = isMaxRadius;
-    self.loadingView.frame = CGRectMake(0, 0, 1, SMALL_FOOTER_HEIGHT);
-    if(self.items.count > 0)
-        self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_more_feeds" : @"increase_radius");
-    else {
-        if(!isMaxRadius)
+    
+    if (self.items.count > 0) {
+        if (isMaxRadius) {
+            self.infoLabel.text = [OTAppAppearance noMoreFeedsDescription];
+        } else {
+            self.infoLabel.text = [OTAppAppearance extendSearchParameterDescription];
+        }
+    }
+    else if (self.items.count == 0) {
+        if (isMaxRadius) {
+            self.furtherEntouragesBtn.hidden = YES;
+            self.infoLabel.text = [OTAppAppearance noMapFeedsDescription];
+        }
+        else {
+            self.furtherEntouragesBtn.hidden = NO;
+            self.infoLabel.text = [OTAppAppearance extendMapSearchParameterDescription];
             self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
-        self.infoLabel.text = OTLocalizedString(isMaxRadius ? @"no_feeds_received" : @"no_feeds_increase_radius");
+        }
     }
     self.tableFooterView = self.loadingView;
 }

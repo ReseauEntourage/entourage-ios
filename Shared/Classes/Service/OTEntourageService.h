@@ -19,11 +19,11 @@
                            success:(void (^)(NSArray *))success
                            failure:(void (^)(NSError *))failure;
 
-- (void)getEntourageWithId:(NSNumber *)entourageId
-          withSuccess:(void(^)(OTEntourage *))success
-              failure:(void (^)(NSError *))failure;
+- (void)getEntourageWithId:(NSNumber *)uid
+               withSuccess:(void(^)(OTEntourage *))success
+                   failure:(void (^)(NSError *))failure;
 
-- (void)getEntourageWithStringId:(NSString *)entourageId
+- (void)getEntourageWithStringId:(NSString *)uuid
                      withSuccess:(void(^)(OTEntourage *))success
                          failure:(void (^)(NSError *))failure;
 
@@ -37,18 +37,19 @@
                      failure:(void (^)(NSError *)) failure;
 
 - (void)closeEntourage:(OTEntourage *)entourage
-           withSuccess:(void (^)(OTEntourage *))success
+           withOutcome:(BOOL)outcome
+               success:(void (^)(OTEntourage *))success
                failure:(void (^)(NSError *))failure;
 
 - (void)updateEntourageJoinRequestStatus:(NSString *)status
                                  forUser:(NSNumber*)userID
-                            forEntourage:(NSNumber*)entourageID
-                             withSuccess:(void (^)())success
+                            forEntourage:(NSString *)uuid
+                             withSuccess:(void (^)(void))success
                                  failure:(void (^)(NSError *))failure;
 
 - (void)rejectEntourageJoinRequestForUser:(NSNumber*)userID
-                             forEntourage:(NSNumber*)entourageID
-                              withSuccess:(void (^)())success
+                             forEntourage:(NSString *)uuid
+                              withSuccess:(void (^)(void))success
                                   failure:(void (^)(NSError *))failure;
 
 - (void)sendMessage:(NSString *)message
@@ -56,24 +57,24 @@
             success:(void(^)(OTFeedItemMessage *))success
             failure:(void (^)(NSError *)) failure;
 
-- (void)entourageMessagesForEntourage:(NSNumber *)entourageID
+- (void)entourageMessagesForEntourage:(NSString *)uuid
                           WithSuccess:(void(^)(NSArray *entourageMessages))success
                               failure:(void (^)(NSError *)) failure;
 
 - (void)quitEntourage:(OTEntourage *)entourage
-         success:(void (^)())success
+         success:(void (^)(void))success
          failure:(void (^)(NSError *error))failure;
 
 - (void)entourageUsers:(OTEntourage *)entourage
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure;
 
-- (void)readEntourageMessages:(NSNumber *)entourageID
-                      success:(void (^)())success
+- (void)readEntourageMessages:(NSString *)uuid
+                      success:(void (^)(void))success
                       failure:(void (^)(NSError *))failure;
 
 - (void)retrieveEntourage:(OTEntourage *)entourage
                  fromRank:(NSNumber *)rank
-                  success:(void (^)())success
+                  success:(void (^)(void))success
                   failure:(void (^)(NSError *))failure;
 @end

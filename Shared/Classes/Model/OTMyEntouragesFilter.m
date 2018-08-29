@@ -62,7 +62,7 @@
 }
 
 - (NSArray *)toGroupedArray {
-    if(IS_PRO_USER)
+    if(IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality)
         return [self groupForPro];
     else
         return [self groupForPublic];
@@ -182,13 +182,19 @@
     [result setObject:[self getEntourageTypes] forKey:@"entourage_types"];
     [result setObject:@(pageNumber) forKey:@"page"];
     [result setObject:@(pageSize) forKey:@"per"];
-    if(self.showMyEntouragesOnly)
+    
+    if (self.showMyEntouragesOnly) {
         [result setObject:@"true" forKey:@"created_by_me"];
-    if (self.showFromOrganisationOnly)
+    }
+    if (self.showFromOrganisationOnly) {
         [result setObject:@"true" forKey:@"show_my_partner_only"];
+    }
+    
     NSString *status = [self getStatus];
-    if(status)
+    if (status) {
         [result setObject:[self getStatus] forKey:@"status"];
+    }
+    
     return result;
 }
 

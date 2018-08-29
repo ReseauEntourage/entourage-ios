@@ -72,7 +72,7 @@
 }
 
 - (void)setTextForTimeframe:(NSNumber *)timeframe andButton:(UIButton *)button {
-    NSString *title = @"24H";
+    NSString *title = OTLocalizedString(@"24H");
     if(timeframe.intValue > 24)
         title = [NSString stringWithFormat:@"%dJ", timeframe.intValue / 24];
     [button setTitle:title forState:UIControlStateNormal];

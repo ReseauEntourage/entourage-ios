@@ -21,5 +21,8 @@
 @property (nonatomic, weak) id<OTUserEditAboutProtocol> delegate;
 @property (nonatomic, weak) IBOutlet OTTextWithCount *aboutMeTextWithCount;
 @property (nonatomic, strong) NSString *aboutMeMessage;
+@property (nonatomic, weak) IBOutlet UIButton *closeButton;
+@property (nonatomic, weak) IBOutlet UIButton *sendButton;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
 @end

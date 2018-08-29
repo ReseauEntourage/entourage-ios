@@ -7,7 +7,7 @@
 //
 
 #import "OTAssociationsSourceBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTAssociationsService.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTAssociation.h"
@@ -51,7 +51,7 @@
     }];
 }
 
-- (void)updateAssociation:(void (^)())success {
+- (void)updateAssociation:(void (^)(void))success {
     OTAssociation *currentAssociation = [self getCurrentAssociation];
     if(currentAssociation == self.originalAssociation) {
         if(success)

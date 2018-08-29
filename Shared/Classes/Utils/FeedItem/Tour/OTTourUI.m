@@ -44,7 +44,7 @@
 }
 
 - (NSString *)navigationTitle {
-    return OTLocalizedString(@"tour");
+    return self.tour.organizationName;
 }
 
 - (NSString *)joinAcceptedText {

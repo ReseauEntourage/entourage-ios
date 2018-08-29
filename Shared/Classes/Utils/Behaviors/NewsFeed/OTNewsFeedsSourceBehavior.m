@@ -39,7 +39,7 @@
 
 - (IBAction)increaseRadius {
     int sizeOfArray = (int)RADIUS_ARRAY.count;
-    if(self.radiusIndex < sizeOfArray - 1) {
+    if (self.radiusIndex < sizeOfArray - 1) {
         self.radiusIndex++;
         [self.feedItems removeAllObjects];
         [self.delegate itemsRemoved];
@@ -57,20 +57,25 @@
         [self.delegate itemsUpdated];
         [self.tableDelegate finishUpdatingFeeds:NO];
     }
-
 }
 
 - (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
     self.radiusIndex = 0;
     filter.distance = self.radius;
     filter.location = coordinate;
-    if([self.currentFilter.description isEqualToString:filter.description])
+    
+    if ([self.currentFilter.description isEqualToString:filter.description] &&
+        filter.showPastOuting == self.currentFilter.showPastOuting) {
         return;
+    }
+    
     self.currentCoordinate = coordinate;
     self.currentFilter = [filter copy];
     self.currentFilter.location = coordinate;
+    
     [self.feedItems removeAllObjects];
     [self.delegate itemsRemoved];
+    
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         if(items.count > 0) {
@@ -78,6 +83,7 @@
             [self.delegate itemsUpdated];
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
+        
     } orError:^(NSError *error) {
         [self.delegate errorLoadingFeedItems:error];
     }];
@@ -85,11 +91,13 @@
 
 - (void)loadMoreItems {
     NSDate *beforeDate = [NSDate date];
-    if(self.feedItems.count > 0)
+    if (self.feedItems.count > 0) {
         beforeDate = [self.feedItems.lastObject updatedDate] ? [self.feedItems.lastObject updatedDate] : [self.feedItems objectAtIndex:self.feedItems.count - 2];
+    }
+    
     [self.tableDelegate beginUpdatingFeeds];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        if(items.count > 0) {
+        if (items.count > 0) {
             [self.feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
         }
@@ -143,10 +151,11 @@
             orError:(void(^)(NSError *))failure {
     self.currentFilter.distance = self.radius;
     NSString *loadFilterString = self.currentFilter.description;
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     self.indicatorView.hidden = NO;
-    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:beforeDate andLocation:self.currentCoordinate]
-    ;
+    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:beforeDate andLocation:self.currentCoordinate];
+    
     NSLog(@"ALA_BALA - Calling with %@", filterDictionary);
 
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
@@ -154,10 +163,12 @@
         self.lastOkCoordinate = self.currentCoordinate;
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.indicatorView.hidden = YES;
-        if(![self.currentFilter.description isEqualToString:loadFilterString])
-            return;
-        if(success)
-            success(feeds);
+                                                if (![self.currentFilter.description isEqualToString:loadFilterString]) {
+                                                    return;
+                                                }
+                                                if (success) {
+                                                    success(feeds);
+                                                }
     } failure:^(NSError *error) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.indicatorView.hidden = YES;

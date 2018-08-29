@@ -34,7 +34,8 @@
     return [NSString stringWithFormat:@"<MixpanelPeople: %p %@>", (void *)self, (strongMixpanel ? strongMixpanel.apiToken : @"")];
 }
 
-- (NSString *)deviceSystemVersion {
+- (NSString *)deviceSystemVersion
+{
 #if defined(MIXPANEL_WATCHOS)
     return [MixpanelWatchProperties systemVersion];
 #elif defined(MIXPANEL_MACOS)
@@ -74,6 +75,9 @@
 
 - (void)addPeopleRecordToQueueWithAction:(NSString *)action andProperties:(NSDictionary *)properties
 {
+    if ([self.mixpanel hasOptedOutTracking]) {
+        return;
+    }
     NSNumber *epochMilliseconds = @(round([[NSDate date] timeIntervalSince1970] * 1000));
     __strong Mixpanel *strongMixpanel = self.mixpanel;
     if (strongMixpanel) {
@@ -104,7 +108,7 @@
                 r[action] = [NSDictionary dictionaryWithDictionary:p];
             }
 
-            [r addEntriesFromDictionary:[self.mixpanel.sessionMetadata toDictionaryForEvent:NO]];
+            [r addEntriesFromDictionary:[strongMixpanel.sessionMetadata toDictionaryForEvent:NO]];
 
             if (self.distinctId) {
                 r[@"$distinct_id"] = self.distinctId;
@@ -116,7 +120,7 @@
                     }
                 }
             } else {
-                MPLogInfo(@"%@ queueing unidentified people record: %@", self.mixpanel, r);
+                MPLogInfo(@"%@ queueing unidentified people record: %@", strongMixpanel, r);
                 [self.unidentifiedQueue addObject:r];
                 if (self.unidentifiedQueue.count > 500) {
                     [self.unidentifiedQueue removeObjectAtIndex:0];

@@ -9,14 +9,27 @@
 #import "OTSafariService.h"
 #import <SafariServices/SFSafariViewController.h>
 #import "OTAppDelegate.h"
+#import "OTHTTPRequestManager.h"
 #import "OTSWRevealViewController.h"
 #import "UIColor+entourage.h"
+#import "OTAppConfiguration.h"
+#import "NSUserDefaults+OT.h"
+#import "OTConsts.h"
+#import "OTAPIConsts.h"
+#import "entourage-Swift.h"
 
 @implementation OTSafariService
 
 + (void)launchInAppBrowserWithUrlString:(NSString*)urlString viewController:(UIViewController*)viewController
 {
-    [OTSafariService launchInAppBrowserWithUrl:[NSURL URLWithString:urlString] viewController:viewController];
+    NSString *urlPath = urlString;
+    NSString *httpPrefix = @"http";
+    if ([urlString containsString:httpPrefix]) {
+        NSRange httpRange = [urlString rangeOfString:httpPrefix];
+        urlPath = [urlString substringFromIndex:httpRange.location];
+    }
+    [OTSafariService launchInAppBrowserWithUrl:[NSURL URLWithString:urlPath]
+                                viewController:viewController];
 }
 
 + (void)launchInAppBrowserWithUrl:(NSURL*)url viewController:(UIViewController*)viewController
@@ -24,9 +37,11 @@
     SFSafariViewController *safariController = [[SFSafariViewController alloc] initWithURL:url];
     safariController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     
+    [OTAppConfiguration configureNavigationControllerAppearance:viewController.navigationController];
+    
     double iOSVersion = [[[UIDevice currentDevice] systemVersion] doubleValue];
     if (iOSVersion >= 10) {
-        safariController.preferredBarTintColor = [UIColor appOrangeColor];
+        safariController.preferredBarTintColor = [ApplicationTheme shared].backgroundThemeColor;
         safariController.preferredControlTintColor = [UIColor whiteColor];
     }
     
@@ -35,23 +50,10 @@
         
     } else {
         OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
-        UINavigationController *rootController = (UINavigationController*)appDelegate.window.rootViewController;
-        if (rootController.navigationController.topViewController) {
-            [rootController.navigationController.topViewController presentViewController:safariController animated:YES completion:nil];
-            
-        } else if ([rootController isKindOfClass:[OTSWRevealViewController class]]) {
-            OTSWRevealViewController *menuController = (OTSWRevealViewController*)rootController;
-            UIViewController *activeController = menuController.frontViewController;
-            if ([activeController isKindOfClass:[UINavigationController class]]) {
-                UINavigationController *activeNavController = (UINavigationController*)menuController.frontViewController;
-                if (activeNavController.topViewController) {
-                     [activeNavController.topViewController.navigationController presentViewController:safariController animated:YES completion:nil];
-                } else {
-                    [activeNavController presentViewController:safariController animated:YES completion:nil];
-                }
-            } else {
-                [activeController.navigationController presentViewController:safariController animated:YES completion:nil];
-            }
+        UITabBarController *rootController = (UITabBarController*)appDelegate.window.rootViewController;
+        UINavigationController *navController = [rootController viewControllers].firstObject;
+        if (navController.topViewController) {
+            [navController presentViewController:safariController animated:YES completion:nil];
         }
         else {
             [rootController presentViewController:safariController animated:YES completion:nil];
@@ -61,6 +63,23 @@
 
 + (void)launchInAppBrowserWithUrl:(NSURL*)url {
     [OTSafariService launchInAppBrowserWithUrl:url viewController:nil];
+}
+
++ (void)launchFeedbackFormInController:(UIViewController*)controller {
+    NSURL *feedbackUrl = [OTSafariService redirectUrlWithIdentifier:SUGGESTION_LINK_ID];
+    [OTSafariService launchInAppBrowserWithUrl:feedbackUrl viewController:controller];
+}
+
++ (void)launchPrivacyPolicyFormInController:(UIViewController*)controller {
+    NSURL *url = [OTSafariService redirectUrlWithIdentifier:PFP_API_URL_PRIVACY_POLICY];
+    [OTSafariService launchInAppBrowserWithUrl:url viewController:controller];
+}
+
++ (NSURL*)redirectUrlWithIdentifier:(NSString*)identifier {
+    NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, identifier, TOKEN];
+    NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+    
+    return [NSURL URLWithString:urlString];
 }
 
 @end

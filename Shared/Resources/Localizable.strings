@@ -9,6 +9,12 @@
 // Keys
 "CURRENT_USER" = "currentUser";
 
+// Welcome
+"welcomeText" = "Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale! En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.";
+"geolocalisationDescriptionText" = "Entourage, c’est utile parce que c’est local!\nParticipez à la solidarité de votre quartier : pour voir les actions de vos voisins, qu’ils soient avec ou sans-abri, activez la géolocalisation.";
+"notificationNeedDescription" = "Pour vous faire découvrir les actions solidaires autour de vous, Entourage doit connaître votre position.";
+
+
 // User prompted
 "microphoneNotEnabled" = "Accès refusé au micro";
 "promptForMicrophone" = "L'application demande l'accès à votre microphone.\n\nSVP Activez l'accès au micro pour cette app dans Réglages > Confidentialité > Micro";
@@ -17,6 +23,7 @@
 "generic_error" = "Une erreur s'est produite. Vérifiez votre connexion réseau et réessayez.";
 "connection_error" = "Echec de la connexion";
 "connection_imposible" = "Connexion impossible";
+"addressSaved" = "Adresse enregistrée";
 
 "distance_250" = "La rencontre est trop éloignée de la maraude";
 "yes" = "Oui";
@@ -67,6 +74,7 @@
 "menu_application_usage" = "Questions fréquentes";
 "menu_atd_partner" = "Agir avec Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
+"menu_donnation" = "Donnez vos retours rapides";
 
 // AboutItems
 "about_tutorial" = "Voir le tutoriel";
@@ -80,6 +88,8 @@
 "about_twitter" = "Suivez-nous sur Twitter";
 "about_suggestions" = "Suggérer des améliorations";
 "about_join" = "Devenir bénévole - ambassadeur";
+"about_appVersion" = "Version de l'application";
+"about_privacy_policy" = "Politique de Confidentialité";
 
 // Map Options
 "create_tour" = "Créer une maraude";
@@ -87,9 +97,12 @@
 "create_demande" = "Créer une demande";
 "create_contribution" = "Créer une contribution";
 "create_action" = "Créer une action";
+"create_event" = "Créer un évènement  ";
 "map_options_hide_poi" = "Masquer le guide de solidarité";
 "map_options_show_poi" = "Afficher le guide de solidarité";
 "map_options_show_guide" = "Voir les lieux solidaires";
+"view_map_nav_title" = "Voir la carte";
+"view_list_nav_title" = "Voir la liste";
 
 
 // Feed item
@@ -104,20 +117,16 @@
 "ongoing" = "En cours";
 "cancelled_join_request" = "Demande annulée";
 
-"no_data_entourages" = "On dirait que c'est calme ici!
+"no_data_entourages" = "C'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant ! \n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur + en bas à droite";
 
-Déplacez la carte pour trouver des entourages crées par le réseau.
+"no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure";
 
-Vous aussi, vous pouvez créer un entourage: appuyez sur +";
-"no_data_guide" = "On dirait que c'est calme ici!
-
-Déplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…
-
-Une structure manque sur la carte ?
-Proposez une structure";
 "no_data_guide_link" = "Proposez une structure";
+
 "want_to_join_tour" = "veut entrer en contact avec vous.";
 "want_to_join_entourage" = "veut rejoindre votre entourage.";
+"no_messages_title" = "Vous n'avez pas encore de messages…";
+"no_unread_messages_title" = "Vous n'avez pas de messages non lus…";
 
 // Disclaimer
 "encounter_disclaimer" = "Bonjour,\n\nNous vous rappelons que conformément à la charte d'Entourage, vous devez avertir le bénéficiaire qu’un compte-rendu sera réalisé sur vos échanges et pourra être stocké par vous ou par votre association.";
@@ -180,10 +189,13 @@ Proposez une structure";
 "edit_contribution_desc" = "Je suis ancien employé de mairie et je peux aider dans des démarches administratives.
 (Attention: n'incluez pas de données permettant d'identifier ou localiser des personnes.)";
 "invalidTitle" = "Titre invalide";
+"invalidAddress" = "Adresse invalide";
+"invalidDate" = "Date invalide";
 "categoryNotSelected" = "Renseignez une catégorie pour votre action";
 "title" = "Titre";
 "demande" = "Demandes: je cherche...";
 "ask_for_help" = "Demande";
+"event" = "évènement";
 "contribution" = "Contribution";
 "contribution_filter" = "Contributions: je me propose de...";
 "detailedDescription" = "Description détaillée";
@@ -193,7 +205,7 @@ Proposez une structure";
 "formater_meetEncounter" = "se sont rencontrés ici le %@";
 "formatter_encounter_and_user_meet" = " et %@ se sont rencontrés ici.";
 "user_joined_tour" = " est entré(e) en contact avec %@";
-"user_joined_entourage" = " a rejoint l’entourage.";
+"user_joined_entourage" = " a rejoint le groupe.";
 "user_join_reject" = " a reçu une notification du rejet de sa demande.";
 "meetingCreated" = "Rencontre créée";
 "meetingNotCreated" = "Echec de la création de rencontre";
@@ -204,14 +216,18 @@ Proposez une structure";
 
 // Entourage
 "entourages" = "Entourages";
+"numberOfUserActions" = "Nombre d'entourages";
 "myLocation" = "Ma position";
 "category" = "Catégorie";
 "searchLocationPlaceholder" = "Chercher ou déplacer la carte";
 "formater_by" = "%@ par ";
+"by" = " par ";
 "entourageCreated" = "Entourage créé";
 "entourageNotCreated" = "Echec de la création de l’entourage";
 "entourageUpdated" = "Entourage mis à jour";
+"eventUpdated" = "Événement mis à jour";
 "entourageNotUpdated" = "Impossible de mettre à jour l’entourage";
+"eventNotUpdated" = "Impossible de mettre à jour l’événement";
 "entourageQuitted" = "Entourage clôturé.";
 "addressBookDenied" = "Impossible d’accéder au carnet d’adresses. Vous devez activer la permission depuis les paramètres.";
 "inviteByPhoneFailed" = "Impossible d’inviter ce numéro de téléphone.";
@@ -223,12 +239,17 @@ Proposez une structure";
 "join_entourage_btn" = "Rejoindre";
 "join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !
 Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
+"promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
+"promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
+"event_title_example" = "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017";
+"event_desc_example" = "Besoin de bénévoles pour la collecte nationale des Restos du Coeur dans notre équipe locale.\nSamedi de 17h à 21h ➜ 5 bénévoles \nDimanche de 10h à 13h ➜ 2 bénévoles \nEnsemble aidons ceux qui en ont vraiment besoin ! Merci d'avance";
 
 // Feed Item details
 "item_option_close" = "Arrêter";
 "item_option_freeze" = "Clôturer";
 "item_option_quit" = "Quitter";
 "entourage_time_data" = "%@ - à %@";
+"entourage_distance" = "à %@";
 "member_count" = "Membres (%d)";
 "item_closed" = "Clôturé";
 "item_cancel_join" = "Retirer ma demande";
@@ -254,6 +275,10 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "invalidPhoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
 "mustAddCode" = "Veuillez renseigner un code de vérification";
 "invalidPhoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
+"userNameDescriptionText" = "Seuls le prénom et la première lettre du nom apparaitront aux autres utilisateurs.";
+"userEmailDescriptionText" = "Nous ne l’utiliserons que pour vous envoyer notre newsletter et les dernières actualités d’Entourage";
+"userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\n Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
+"edit_user_description" = "Présentez-vous, le réseau Entourage a hâte de faire votre connaissance!";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
 "close" = "Fermer";
@@ -264,6 +289,15 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "user_verified" = "Identification vérifiée";
 "user_email_address" = "Adresse e-mail";
 "user_phone_number" = "Numéro de téléphone";
+"defineActionZone" = "Ma zone d'action";
+"defineActionZoneTitle" = "Définissez votre zone d'action";
+"defineActionZoneDescription" = "Où souhaitez-vous agir ?\nSoyez notifié des actualités importantes.";
+"modifyActionZoneTitle" = "Modifier ma zone";
+"defineActionZoneSampleAddress" = "avenue Jean Jaurès, Paris";
+"defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nIndiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.";
+"defineZoneSubtitle2" = "\n\nCette information n’est pas affichée.";
+"defineZoneSubtitle3" = " Vous pouvez la modifier dans vos réglages.";
+"defineZoneSubtitle4" = "\n\nAdresse - peut être approximative.";
 
 "user_edit_password_invalid_current" = "Le mot de passe ne correspond pas";
 "user_edit_password_invalid_length_too_short" = "Le mot de passe doit contenir au moins %d caractères";
@@ -277,20 +311,20 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "user_profile_error" = "Erreur lors de la récupération du profil";
 "user_edit_email" = "E-mail";
 "user_edit_quartier" = "Quartier";
-"profile" = "Profil";
-"lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit: créez un compte
 
-Membres d'une association utilisatrice d'Entourage, contactez associations@entourage.social";
-"report_user_title" = "
-Vous allez signaler cet utilisateur à nos administrateurs.
- 
-";
-"report_user_attributed_title" = "Merci de préciser pourquoi
-vous signalez cette personne :";
+"profile" = "Profil";
+"lost_code_phone_does_not_exist" = "Ce numéro ne semble pas inscrit: créez un compte\n\nMembres d'une association utilisatrice d'Entourage, contactez associations@entourage.social";
+"report_user_title" = "Vous allez signaler cet utilisateur à nos administrateurs.\n";
+"report_user_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cette personne :";
 "report_user_button" = "Envoyer";
 "report_user_placeholder" = "Ecrivez quelque chose…";
 
+// My Entourages
+"all_messages_nav_title" = "tous les messages";
+"unread_messages_nav_title" = "non lus";
+
 // Filter
+"filter_nav_title" = "Filtrer";
 "filter_maraudes_title" = "Types de maraude";
 "filter_maraude_medical" = "Médicale";
 "filter_maraude_bare_hands" = "Sociale";
@@ -309,6 +343,9 @@ vous signalez cette personne :";
 "filter_entourage_from_sympathisants_title" = "Montrer uniquement";
 "filter_entourage_from_sympathisants" = "Crées par les sympathisants de l'association que je soutiens";
 
+"filter_events_title" = "Évènements";
+"filter_events_include_past_events_title" = "Inclure passés";
+
 "filter_solidarity_guide_categories" = "Catégories";
 
 "filter_timeframe_title" = "Affichage des entourages";
@@ -322,6 +359,10 @@ vous signalez cette personne :";
 // Titles
 "aboutTitle" = "À propos";
 "socialTitle" = "AGIR AVEC ENTOURAGE";
+"addEventAddress" = "Adresse *";
+"addEventTitle" = "Titre *";
+"addEventDate" = "Date *";
+"at_hour" = " à ";
 "descriptionTitle" = "Description";
 "discoverEntourage" = "Découvrez Entourage";
 "guideviewcontroller_title" = "GUIDE";
@@ -331,6 +372,16 @@ vous signalez cette personne :";
 "meetingTitle" = "Compte-rendu de rencontre";
 "myEntouragesTitle" = "Mes entourages";
 "userviewcontroller_title" = "PROFIL";
+"searchForAddress" = "Rechercher une adresse";
+
+// Disclaimer
+"addActionDisclaimerTitle" = "AVANT DE COMMENCER";
+"addEventDisclaimerFirstTitle" = "Recueillir l’accord";
+"addEventDisclaimerSecondTitle" = "Sécurité";
+"addEventDisclaimerThirdTitle" = "Localisation ?";
+"addEventDisclaimerFirstDescription" = "Je demande le consentement d’une personne avant de mentionner de ses informations personnelles";
+"addEventDisclaimerSecondDescription" = "Je veille à ce qu’on ne puisse pas identifier ni localiser des personnes en me lisant";
+"addEventDisclaimerThirdDescription" = "L’adresse précise des évènements est montrée";
 
 // Alerts
 "acceptAlert" = "Accepter";
@@ -355,30 +406,35 @@ vous signalez cette personne :";
 
 // Navigation Bar Buttons
 "validate" = "Valider";
+"create" = "Créer";
 "edit" = "Editer";
 "modify" = "Modifier";
 
 // User profile
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
 
-"increase_radius" = "C’est tout pour les actions dans ce rayon autour de vous ! ";
-"no_feeds_increase_radius" = "
-C’est plutôt calme par ici !
-
-On dirait bien qu’il n’y a aucun entourage à proximité… pour l’instant !
-
-Vous pouvez créer votre propre entourage en cliquant sur
-le + en bas à droite.
-";
+"increase_radius" = "C'est tout pour les activités dans ce rayon autour de vous !";
+"no_map_feeds_increase_radius" = "\nC'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant !";
+"no_feeds_increase_radius" = "\nC'est tout pour les activités dans ce rayon !";
 "no_feeds_received" = "Aucune action près de cette position";
-"no_more_feeds" = "Aucune action près de cette position";
+"no_more_feeds" = "C'est tout pour les activités dans ce rayon autour de vous";
+"no_more_map_feeds" = "Aucune action près de cette position";
+
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
 "ok" = "OK";
 
 "mail_not_configured" = "Vous devez configurer votre messagerie email";
 "mail_sent" = "Mail envoyé";
 "mail_send_failure" = "Le mail n’a pu être envoyé";
-"mail_signal_subject" = "Signalement d’un entourage qui pose problème: \"%@\" créé par %@";
+"mail_signal_subject" = "Signalement d'un problème dans l'entourage: \"%@\" créé par %@";
+"start_chat_conversation" = "LUI ÉCRIRE";
+
+// Tags
+"not_validated" = "En attente";
+"visitor" = "Voisineur";
+"visited" = "Voisiné";
+"coordinator" = "Animateur";
+"neighborhoodsSectionTitle" = "Neighborhoods";
 
 // associations
 "select_association_title" = "SOUTENIR";
@@ -429,3 +485,5 @@ le + en bas à droite.
 "user_reported" = "Utilisateur signalé";
 
 "action" = "Action";
+"add_title_hint" = "Les actions avec un titre clair attirent plus de membres et ont plus de chances d’aboutir !";
+"add_description_hint" = "Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d’aboutir !";

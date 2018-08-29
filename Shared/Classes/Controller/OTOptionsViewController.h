@@ -14,20 +14,22 @@
 
 #define BUTTON_SIDE 48.0f
 #define PADDING_VERTICAL 8.0f
-#define PADDING_HORIZONTAL 16.0f
-#define INITIAL_BOTTOM 82.0f
+#define PADDING_HORIZONTAL 18.0f
+#define INITIAL_BOTTOM 122.0f
 
 #define ACTION_LABEL_FRAME CGRectMake(0.0f, 0.0f, 230.0f, 21.0f)
 
 #define NORTH_WEST CGPointMake(-50.f, -30.f)
 #define NORTH      CGPointMake(  0.f, -65.f)
 #define NORTH_EAST CGPointMake(+50.f, -30.f)
+#define SOUTH_EAST CGPointMake(-50.f, +65.f)
 
 @protocol OTOptionsDelegate <NSObject>
 
 - (void)createTour;
 - (void)createEncounter;
 - (void)createAction;
+- (void)createEvent;
 
 - (void)togglePOI;
 - (void)dismissOptions;
@@ -61,10 +63,27 @@
 - (void)addOptionWithIcon:(NSString *)optionIcon
                 andAction:(SEL)selector
           withTranslation:(CGPoint)point;
+    
+- (void)addOptionWithIcon:(NSString *)optionIcon
+               applyTintColor:(BOOL)applyTintColor
+                    andAction:(SEL)selector
+              withTranslation:(CGPoint)translationPoint;
+    
+- (void)addOptionWithIcon:(NSString *)optionIcon
+                tintColor:(UIColor*)tintColor
+                andAction:(SEL)selector
+          withTranslation:(CGPoint)translationPoint;
+    
+- (void)addOption:(NSString *)optionName
+          atIndex:(int)index
+         withIcon:(NSString *)optionIcon
+   applyTintColor:(BOOL)applyTintColor
+        andAction:(SEL)selector;
 
 - (IBAction)doCreateTour:(id)sender;
 - (IBAction)doCreateEncounter:(id)sender;
 - (IBAction)doCreateAction:(id)sender;
+- (IBAction)doCreateEvent:(id)sender;
 - (IBAction)doTogglePOI:(id)sender;
 - (IBAction)proposeStructure:(id)sender;
 

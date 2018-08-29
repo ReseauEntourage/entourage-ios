@@ -62,4 +62,6 @@ typedef NS_ENUM (NSInteger, NSDictionaryParsingNumberOptions)
                withLatitudeKey:(NSString *)latitudeKey
                andLongitudeKey:(NSString *)longitudeKey;
 
+- (CLLocationDegrees)degreesForKey:(NSString *)key;
+
 @end

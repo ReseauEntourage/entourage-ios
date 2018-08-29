@@ -17,6 +17,7 @@
     result.active = active;
     result.title = [self categoryStringForKey:key];
     result.image = image;
+    
     return result;
 }
 
@@ -24,6 +25,7 @@
     OTSolidarityGuideFilterItem *result = [OTSolidarityGuideFilterItem new];
     result.key = key;
     result.title = [self categoryStringForKey:key];
+    
     return result;
 }
 
@@ -43,6 +45,14 @@
             return OTLocalizedString(@"guide_display_caring");
         case SolidarityGuideKeyReinsertion:
             return OTLocalizedString(@"guide_display_reinsertion");
+            
+        case SolidarityGuideKeyOuting:
+            return [OTAppAppearance eventsFilterTitle];
+        case SolidarityGuideKeyPrivateCircle:
+            return OTLocalizedString(@"pfp_filter_private_circles_title");
+        case SolidarityGuideKeyNeighborhood:
+            return OTLocalizedString(@"pfp_filter_neighborhoods_title");
+            
         default:
             return @"";
     }

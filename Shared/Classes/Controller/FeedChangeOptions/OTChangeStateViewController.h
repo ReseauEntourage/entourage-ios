@@ -17,5 +17,6 @@
 @property (nonatomic, strong) OTEditEntourageBehavior *editEntourageBehavior;
 @property (nonatomic, weak) id<OTStatusChangedProtocol> delegate;
 @property (nonatomic, strong) IBOutletCollection(UIView) NSArray *buttonsWithBorder;
+@property (nonatomic) BOOL shouldShowTabBarOnClose;
 
 @end

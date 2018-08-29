@@ -17,6 +17,7 @@
 #import "OTAPIConsts.h"
 #import "OTCategoryFromJsonService.h"
 #import "OTCategoryType.h"
+#import "entourage-Swift.h"
 
 #define FEEDS_REQUEST_DISTANCE_KM 10
 
@@ -30,11 +31,19 @@
 
 - (instancetype)init {
     self = [super init];
-    if(self) {
+    if (self) {
         self.isPro = IS_PRO_USER;
         OTSavedFilter *savedFilter = [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter;
         self.showOnlyMyEntourages = NO;
-        if(savedFilter) {
+        
+        if (savedFilter) {
+            
+            self.showOuting = savedFilter.showOuting.boolValue;
+            self.showPastOuting = !self.showOuting ? self.showOuting : savedFilter.showPastOuting.boolValue;
+            
+            self.showNeighborhood = savedFilter.showNeighborhood.boolValue;
+            self.showPrivateCircle = savedFilter.showPrivateCircle.boolValue;
+            
             self.showTours = savedFilter.showTours.boolValue;
             
             self.showMedical = !self.showTours ? self.showTours : savedFilter.showMedical.boolValue;
@@ -46,15 +55,15 @@
             self.timeframeInHours = savedFilter.timeframeInHours.intValue;
             self.showFromOrganisation = savedFilter.showFromOrganisation.boolValue;
             self.showOnlyMyEntourages = savedFilter.showOnlyMyEntourages.boolValue;
+            
             self.showDemandeSocial = !self.showDemand ? self.showDemand : savedFilter.showDemandeSocial.boolValue;
-            self.showDemandeEvent = !self.showDemand ? self.showDemand : savedFilter.showDemandeEvent.boolValue;
             self.showDemandeHelp = !self.showDemand ? self.showDemand : savedFilter.showDemandeHelp.boolValue;
             self.showDemandeResource = !self.showDemand ? self.showDemand : savedFilter.showDemandeResource.boolValue;
             self.showDemandeInfo = !self.showDemand ? self.showDemand : savedFilter.showDemandeInfo.boolValue;
             self.showDemandeSkill = !self.showDemand ? self.showDemand : savedFilter.showDemandeSkill.boolValue;
             self.showDemandeOther = !self.showDemand ? self.showDemand : savedFilter.showDemandeOther.boolValue;
+            
             self.showContributionSocial = !self.showContribution ? self.showContribution : savedFilter.showContributionSocial.boolValue;
-            self.showContributionEvent = !self.showContribution ? self.showContribution : savedFilter.showContributionEvent.boolValue;
             self.showContributionHelp = !self.showContribution ? self.showContribution : savedFilter.showContributionHelp.boolValue;
             self.showContributionResource = !self.showContribution ? self.showContribution : savedFilter.showContributionResource.boolValue;
             self.showContributionInfo = !self.showContribution ? self.showContribution : savedFilter.showContributionInfo.boolValue;
@@ -62,51 +71,66 @@
             self.showContributionOther = !self.showContribution ? self.showContribution : savedFilter.showContributionOther.boolValue;
         }
         else {
+            self.showNeighborhood = YES;
+            self.showPrivateCircle = YES;
+            self.showOuting = YES;
+            self.showPastOuting = NO;
+            
             self.showMedical = self.isPro;
             self.showSocial = self.isPro;
             self.showDistributive = self.isPro;
             self.showDemand = YES;
             self.showContribution = YES;
             self.showTours = self.isPro;
+            
             self.showDemandeSocial = YES;
-            self.showDemandeEvent = YES;
             self.showDemandeHelp = YES;
             self.showDemandeResource = YES;
             self.showDemandeInfo = YES;
             self.showDemandeSkill = YES;
             self.showDemandeOther = YES;
+            
             self.showContributionSocial = YES;
-            self.showContributionEvent = YES;
             self.showContributionHelp = YES;
             self.showContributionResource = YES;
             self.showContributionInfo = YES;
             self.showContributionSkill = YES;
             self.showContributionOther = YES;
-            self.timeframeInHours = 8 * 24;
+            
+            self.timeframeInHours = 30 * 24;
         }
     }
     return self;
 }
 
 - (NSArray *)groupHeaders {
-    if(IS_PRO_USER)
+    
+    if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return @[
+                 @"Types de voisinage",
+                 ];
+    }
+    
+    if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         return @[
                  OTLocalizedString(@"filter_maraudes_title"),
+                 [OTAppAppearance eventsFilterTitle],
                  OTLocalizedString(@"filter_entourages_title"),
                  OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
-    else
+    } else {
         return @[
+                 [OTAppAppearance eventsFilterTitle],
                  OTLocalizedString(@"filter_entourages_title"),
                  OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
+    }
 }
 
 - (NSArray *)toGroupedArray {
     self.categoryDictionary = @{ @"ask_for_help_social": [NSNumber numberWithBool: self.showDemandeSocial],
-                                 @"ask_for_help_event": [NSNumber numberWithBool:self.showDemandeEvent],
                                  @"ask_for_help_mat_help": [NSNumber numberWithBool:self.showDemandeHelp],
                                  @"ask_for_help_resource": [NSNumber numberWithBool:self.showDemandeResource],
                                  @"ask_for_help_info": [NSNumber numberWithBool:self.showDemandeInfo],
@@ -114,7 +138,6 @@
                                  @"ask_for_help_other": [NSNumber numberWithBool:self.showDemandeOther],
                                  
                                  @"contribution_social": [NSNumber numberWithBool:self.showContributionSocial],
-                                 @"contribution_event": [NSNumber numberWithBool:self.showContributionEvent],
                                  @"contribution_mat_help": [NSNumber numberWithBool:self.showContributionHelp],
                                  @"contribution_resource": [NSNumber numberWithBool:self.showContributionResource],
                                  @"contribution_info": [NSNumber numberWithBool:self.showContributionInfo],
@@ -122,53 +145,115 @@
                                  @"contribution_other": [NSNumber numberWithBool:self.showContributionOther],
                                  
                                  @"ask_for_help" : [NSNumber numberWithBool:self.showDemand],
-                                 @"contribution" : [NSNumber numberWithBool:self.showContribution]
+                                 @"contribution" : [NSNumber numberWithBool:self.showContribution],
+                                 
+                                 @"pfp_filter_neighborhoods_title" : [NSNumber numberWithBool:self.showNeighborhood],
+                                 @"private-pfp_filter_private_circles_title" : [NSNumber numberWithBool:self.showPrivateCircle],
+                                 @"ask_for_help_event" : [NSNumber numberWithBool:self.showOuting],
                                  };
-    if(IS_PRO_USER)
+    
+    if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        return [self groupForPfp];
+    }
+    
+    if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         return [self groupForPro];
-    else
+    }
+    else {
         return [self groupForPublic];
+    }
 }
 
 - (NSArray *)parentArray {
     NSArray *data = [OTCategoryFromJsonService getData];
     NSMutableArray *parentArray = [[NSMutableArray alloc] init];
-    if(IS_PRO_USER) {
-        NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
-                                                       active:self.showMedical
-                                                    withImage:@"filter_heal"],
-                                  [OTFeedItemFilter createFor:FeedItemFilterKeySocial
-                                                       active:self.showSocial
-                                                    withImage:@"filter_social"],
-                                  [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
-                                                       active:self.showDistributive
-                                                    withImage:@"filter_eat"]];
-        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyTour
-                                                    active:self.showTours
-                                                  children:tourChildren]];
+    
+    if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyNeighborhoods
+                                                    active:self.showNeighborhood
+                                                  children:@[]]];
+        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyPrivateCircles
+                                                    active:self.showPrivateCircle
+                                                  children:@[]]];
+        
+        NSArray *eventChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                        active:self.showOuting
+                                                     withImage:@"ask_for_help_event"
+                                                         title:[OTAppAppearance eventsFilterTitle]],
+                                   [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
+                                                        active:self.showPastOuting
+                                                         title:@"filter_events_include_past_events_title"]];
+        
+        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                    active:self.showOuting
+                                                  children:eventChildren
+                                                     image:@"ask_for_help_event"
+                                              showBoldText:YES]];
+        
+        return parentArray;
+        
+    } else {
+        if (IS_PRO_USER) {
+            NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
+                                                           active:self.showMedical
+                                                        withImage:@"filter_heal"],
+                                      [OTFeedItemFilter createFor:FeedItemFilterKeySocial
+                                                           active:self.showSocial
+                                                        withImage:@"filter_social"],
+                                      [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
+                                                           active:self.showDistributive
+                                                        withImage:@"filter_eat"]];
+            
+            [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                                        active:self.showTours
+                                                      children:tourChildren]];
+        }
+        
+        NSArray *eventChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                        active:self.showOuting
+                                                     withImage:@"ask_for_help_event"
+                                                         title:[OTAppAppearance eventsFilterTitle]],
+                                   [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
+                                                        active:self.showPastOuting
+                                                         title:@"filter_events_include_past_events_title"]];
+        
+        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                    active:self.showOuting
+                                                  children:eventChildren
+                                                     image:@"ask_for_help_event"
+                                              showBoldText:YES]];
+        
+        OTCategoryType *contribution = nil;
+        OTCategoryType *demande = nil;
+        
+        for (OTCategoryType *type in data) {
+            if ([type.type isEqualToString:@"contribution"]) {
+                contribution = type;
+            }
+            else if ([type.type isEqualToString:@"ask_for_help"]) {
+                demande = type;
+            }
+        }
+        
+        NSArray *contributionArray = [self contributionCategory:contribution];
+        [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                                     active:self.showContribution
+                                                   children:contributionArray]];
+        
+        NSArray *demandeArray = [self demandCategory:demande];
+        [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                                     active:self.showDemand
+                                                   children:demandeArray]];
     }
-    OTCategoryType *contribution;
-    OTCategoryType *demande;
-    for(OTCategoryType *type in data) {
-        if ([type.type isEqualToString:@"contribution"])
-            contribution = type;
-        else if ([type.type isEqualToString:@"ask_for_help"])
-            demande = type;
-    }
-    NSArray *contributionArray = [self contributionCategory:contribution];
-    [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                                 active:self.showContribution
-                                               children:contributionArray]];
-    NSArray *demandeArray = [self demandCategory:demande];
-    [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
-                                                 active:self.showDemand
-                                               children:demandeArray]];
     
     return parentArray;
 }
 
 - (NSArray *)groupForPublic {
     NSMutableArray *array = [[NSMutableArray alloc] init];
+    // Events section
+    [array addObject:[self groupEntourageEvents]];
+    
     [array addObject:[self groupActions]];
     [array addObject:[self groupUniquement]];
     NSArray *timeframe =  @[
@@ -178,8 +263,41 @@
     [array addObject:timeframe];
     return array;
 }
+    
+- (NSArray *)groupForPfp {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    
+    // Neighborhoods section
+    OTFeedItemFilter *neigborhoodFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyNeighborhoods
+                                                               active:self.showNeighborhood
+                                                             children:@[]
+                                                                image:@"neighborhood"
+                                                         showBoldText:NO];
+    // PrivateCircles section
+    OTFeedItemFilter *privateCircleFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyPrivateCircles
+                                                               active:self.showPrivateCircle
+                                                             children:@[]
+                                                                image:@"private-circle"
+                                                         showBoldText:NO];
+    
+    // Events section
+    OTFeedItemFilter *eventFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                                 active:self.showOuting
+                                                               children:@[]
+                                                                  image:@"outing"
+                                                           showBoldText:YES];
+    
+    OTFeedItemFilter *eventPastFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
+                                                         active:self.showPastOuting
+                                                       children:@[]];
+    
+    [array addObject:@[neigborhoodFilter, privateCircleFilter, eventFilter, eventPastFilter]];
+
+    return array;
+}
 
 - (NSArray *)groupForPro {
+    // Tours section
     NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
                                                    active:self.showMedical
                                                 withImage:@"filter_heal"],
@@ -197,6 +315,11 @@
                                             showBoldText:YES], nil];
     [tours addObjectsFromArray:tourChildren];
     [array addObject:tours];
+    
+    // Events section
+    [array addObject:[self groupEntourageEvents]];
+    
+    // Actions section
     [array addObject:[self groupActions]];
     [array addObject:[self groupUniquement]];
     NSArray *timeframe =  @[
@@ -209,8 +332,8 @@
 
 - (NSArray *)demandCategory: (OTCategoryType *)demande {
     NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
-    int index = 7;
-    for(OTCategory *category in demande.categories) {
+    int index = 6;
+    for (OTCategory *category in demande.categories) {
         NSString *value = [NSString stringWithFormat:@"%@_%@", demande.type, category.category];
         [categoryArray addObject:[OTFeedItemFilter createFor:index
                                                       active:[[self.categoryDictionary valueForKey:value] boolValue]
@@ -224,7 +347,7 @@
 - (NSArray *)contributionCategory: (OTCategoryType *)contribution {
     NSMutableArray *categoryArray = [[NSMutableArray alloc] init];
     int index = 0;
-    for(OTCategory *category in contribution.categories) {
+    for (OTCategory *category in contribution.categories) {
         NSString *value = [NSString stringWithFormat:@"%@_%@", contribution.type, category.category];
         [categoryArray addObject:[OTFeedItemFilter createFor:index
                                                       active:[[self.categoryDictionary valueForKey:value] boolValue]
@@ -238,13 +361,16 @@
 - (NSArray *)groupActions {
     NSArray *data = [OTCategoryFromJsonService getData];
     NSMutableArray *action = [[NSMutableArray alloc] init];
-    OTCategoryType *contribution;
-    OTCategoryType *demande;
-    for(OTCategoryType *type in data) {
-        if ([type.type isEqualToString:@"contribution"])
+    OTCategoryType *contribution = nil;
+    OTCategoryType *demande = nil;
+    
+    for (OTCategoryType *type in data) {
+        if ([type.type isEqualToString:@"contribution"]) {
             contribution = type;
-        else if ([type.type isEqualToString:@"ask_for_help"])
+        }
+        else if ([type.type isEqualToString:@"ask_for_help"]) {
             demande = type;
+        }
     }
     NSArray *contributionArray = [self contributionCategory:contribution];
     NSArray *demandeArray = [self demandCategory:demande];
@@ -263,8 +389,8 @@
 
 - (NSArray *)groupUniquement {
     OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-    NSArray *uniquement = [[NSArray alloc] init];
-    if(user.partner == nil)
+    NSArray *uniquement = nil;
+    if (user.partner == nil)
         uniquement = @[
                        [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
                                             active:self.showOnlyMyEntourages
@@ -282,27 +408,58 @@
     return uniquement;
 }
 
-- (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before andLocation:(CLLocationCoordinate2D)location {
-    return [NSMutableDictionary dictionaryWithDictionary: @{
-                                                            @"before" : before,
-                                                            @"latitude": @(location.latitude),
-                                                            @"longitude": @(location.longitude),
-                                                            @"distance": @(self.distance),
-                                                            @"types" : [self getTypes],
-                                                            @"show_my_entourages_only" : self.showOnlyMyEntourages ? @"true" : @"false",
-                                                            @"show_my_partner_only" : self.showFromOrganisation ? @"true" : @"false",
-                                                            @"time_range" : @(self.timeframeInHours),
-                                                            @"announcements" : @"v1"
-                                                            }];
+- (NSArray *)groupEntourageEvents {
+    NSArray *events = nil;
+    events = @[
+               [OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                     active:self.showOuting
+                                   children:@[]
+                                      image:@"ask_for_help_event"
+                               showBoldText:YES],
+               [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
+                                    active:self.showPastOuting
+                                  children:@[]],
+               ];
+
+    return events;
+}
+    
+- (NSArray *)groupPfpEvents {
+    NSArray *events = nil;
+    events = @[
+               [OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                    active:self.showOuting
+                                  children:@[]
+                                     image:@"outing"
+                              showBoldText:YES],
+               [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
+                                    active:self.showPastOuting
+                                  children:@[]],
+               ];
+    
+    return events;
+}
+    
+- (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before
+                                    andLocation:(CLLocationCoordinate2D)location {
+    return @{
+             @"before" : before,
+             @"latitude": @(location.latitude),
+             @"longitude": @(location.longitude),
+             @"distance": @(self.distance),
+             @"types" : [self getTypes],
+             @"show_my_entourages_only" : self.showOnlyMyEntourages ? @"true" : @"false",
+             @"show_my_partner_only" : self.showFromOrganisation ? @"true" : @"false",
+             @"show_past_events" : (self.showPastOuting && self.showOuting) ? @"true" : @"false",
+             @"time_range" : @(self.timeframeInHours),
+             @"announcements" : @"v1"
+    }.mutableCopy;
 }
 
 - (void)updateValue:(OTFeedItemFilter *)filter {
     switch (filter.key) {
         case FeedItemFilterKeyDemandeSocial:
             self.showDemandeSocial = filter.active;
-            break;
-        case FeedItemFilterKeyDemandeEvent:
-            self.showDemandeEvent = filter.active;
             break;
         case FeedItemFilterKeyDemandeHelp:
             self.showDemandeHelp = filter.active;
@@ -319,20 +476,18 @@
         case FeedItemFilterKeyDemandeOther:
             self.showDemandeOther = filter.active;
             break;
+            
         case FeedItemFilterKeyContributionSocial:
             self.showContributionSocial = filter.active;
             break;
-        case FeedItemFilterKeyContributionEvent:
-            self.showContributionEvent = filter.active;
-            break;
-        case FeedItemFilterKeyContributionHelp:
-            self.showContributionHelp = filter.active;
+        case FeedItemFilterKeyContributionResource:
+            self.showContributionResource = filter.active;
             break;
         case FeedItemFilterKeyContributionInfo:
             self.showContributionInfo = filter.active;
             break;
-        case FeedItemFilterKeyContributionResource:
-            self.showContributionResource = filter.active;
+        case FeedItemFilterKeyContributionHelp:
+            self.showContributionHelp = filter.active;
             break;
         case FeedItemFilterKeyContributionSkill:
             self.showContributionSkill = filter.active;
@@ -340,6 +495,7 @@
         case FeedItemFilterKeyContributionOther:
             self.showContributionOther = filter.active;
             break;
+            
         case FeedItemFilterKeyMedical:
             self.showMedical = filter.active;
             break;
@@ -367,6 +523,21 @@
         case FeedItemFilterKeyOrganisation:
             self.showFromOrganisation = filter.active;
             break;
+            
+        case FeedItemFilterKeyNeighborhoods:
+            self.showNeighborhood = filter.active;
+            break;
+        case FeedItemFilterKeyPrivateCircles:
+            self.showPrivateCircle = filter.active;
+            break;
+        
+        case FeedItemFilterKeyEvents:
+            self.showOuting = filter.active;
+            break;
+        case FeedItemFilterKeyEventsPast:
+            self.showPastOuting = filter.active;
+            break;
+        
         default:
             break;
     }
@@ -377,68 +548,84 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|", self.showMedical, self.showSocial, self.showDistributive, self.showDemand, self.showContribution, self.showTours, self.showOnlyMyEntourages, self.timeframeInHours, self.location.latitude, self.location.longitude, self.distance, self.showFromOrganisation, self.showDemandeSocial, self.showDemandeEvent, self.showDemandeHelp, self.showDemandeResource, self.showDemandeInfo, self.showDemandeSkill, self.showDemandeOther, self.showContributionSocial, self.showContributionEvent, self.showContributionHelp, self.showContributionResource, self.showContributionInfo, self.showContributionSkill, self.showContributionOther];
+    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|", self.showMedical, self.showSocial, self.showDistributive,
+            self.showDemand, self.showContribution, self.showTours,
+            self.showOnlyMyEntourages, self.timeframeInHours,
+            
+            self.location.latitude, self.location.longitude, self.distance, self.showFromOrganisation,
+            self.showDemandeSocial, self.showDemandeHelp, self.showDemandeResource, self.showDemandeInfo, self.showDemandeSkill, self.showDemandeOther,
+            
+            self.showContributionSocial, self.showContributionHelp, self.showContributionResource, self.showContributionInfo, self.showContributionSkill, self.showContributionOther,
+            
+            self.showOuting, self.showPrivateCircle, self.showNeighborhood];
 }
 
 - (NSString *)getTourTypes {
     NSMutableArray *types = [NSMutableArray new];
-    if(self.showMedical)
+    if (self.showMedical)
         [types addObject:OTLocalizedString(@"tour_type_medical")];
-    if(self.showSocial)
+    if (self.showSocial)
         [types addObject:OTLocalizedString(@"tour_type_bare_hands")];
-    if(self.showDistributive)
+    if (self.showDistributive)
         [types addObject:OTLocalizedString(@"tour_type_alimentary")];
-    if(self.showTours && IS_PRO_USER)
+    if (self.showTours && IS_PRO_USER)
         return [types componentsJoinedByString:@","];
     return @"";
 }
 
 - (NSString *)getTypes {
     NSMutableArray *types = [NSMutableArray new];
-    if(self.showMedical)
+    if (self.showMedical)
         [types addObject:@"tm"];
-    if(self.showSocial)
+    if (self.showSocial)
         [types addObject:@"tb"];
-    if(self.showDistributive)
+    if (self.showDistributive)
         [types addObject:@"ta"];
-    if(self.showDemandeSocial)
+    if (self.showDemandeSocial)
         [types addObject:@"as"];
-    if(self.showDemandeEvent)
-        [types addObject:@"ae"];
-    if(self.showDemandeHelp)
+    if (self.showDemandeHelp)
         [types addObject:@"am"];
-    if(self.showDemandeResource)
+    if (self.showDemandeResource)
         [types addObject:@"ar"];
-    if(self.showDemandeInfo)
+    if (self.showDemandeInfo)
         [types addObject:@"ai"];
-    if(self.showDemandeSkill)
+    if (self.showDemandeSkill)
         [types addObject:@"ak"];
-    if(self.showDemandeOther)
+    if (self.showDemandeOther)
         [types addObject:@"ao"];
-    if(self.showContributionSocial)
+    if (self.showContributionSocial)
         [types addObject:@"cs"];
-    if(self.showContributionEvent)
-        [types addObject:@"ce"];
-    if(self.showContributionHelp)
+    if (self.showContributionHelp)
         [types addObject:@"cm"];
-    if(self.showContributionResource)
+    if (self.showContributionResource)
         [types addObject:@"cr"];
-    if(self.showContributionInfo)
+    if (self.showContributionInfo)
         [types addObject:@"ci"];
-    if(self.showContributionSkill)
+    if (self.showContributionSkill)
         [types addObject:@"ck"];
-    if(self.showContributionOther)
+    if (self.showContributionOther)
         [types addObject:@"co"];
+    
+    if (self.showPrivateCircle)
+        [types addObject:@"pc"];
+    if (self.showNeighborhood)
+        [types addObject:@"nh"];
+    if (self.showOuting)
+        [types addObject:@"ou"];
+    
     return [types componentsJoinedByString:@","];
-    return @"";
 }
 
 - (NSString *)getEntourageTypes {
     NSMutableArray *types = [NSMutableArray new];
-    if(self.showDemand)
+    if (self.showDemand) {
         [types addObject:ENTOURAGE_DEMANDE];
-    if(self.showContribution)
+    }
+    
+    if (self.showContribution) {
         [types addObject:ENTOURAGE_CONTRIBUTION];
+    }
+    
     return [types componentsJoinedByString:@","];
 }
 
@@ -456,6 +643,12 @@
     copy.distance = self.distance;
     copy.showOnlyMyEntourages = self.showOnlyMyEntourages;
     copy.showFromOrganisation = self.showFromOrganisation;
+    
+    copy.showNeighborhood = self.showNeighborhood;
+    copy.showPrivateCircle = self.showPrivateCircle;
+    copy.showOuting = self.showOuting;
+    copy.showPastOuting = self.showPastOuting;
+    
     return copy;
 }
 

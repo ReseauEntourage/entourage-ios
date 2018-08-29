@@ -13,7 +13,7 @@
 #import "UIBarButtonItem+factory.h"
 #import "OTStatusBehavior.h"
 #import "OTJoinBehavior.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTUserProfileBehavior.h"
 #import "OTPublicInfoDataSource.h"
 #import "OTTableDataSourceBehavior.h"
@@ -23,6 +23,9 @@
 #import "OTConsts.h"
 #import "OTEntourage.h"
 #import "OTBarButtonView.h"
+#import "entourage-Swift.h"
+#import "NSUserDefaults+OT.h"
+#import "UIImage+processing.h"
 
 @interface OTPublicFeedItemViewController ()
 
@@ -53,11 +56,26 @@
     [self.toggleJoinViewBehavior toggle:self.statusBehavior.isJoinPossible];
     self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.dataSource.tableView.estimatedRowHeight = 1000;
+    
+    [self.toggleJoinViewBehavior.toggledView.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.toggleJoinViewBehavior.toggledView.layer setShadowOpacity:0.5];
+    [self.toggleJoinViewBehavior.toggledView.layer setShadowRadius:4.0];
+    [self.toggleJoinViewBehavior.toggledView.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
 
-    self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
+    [self configureTitleView];
     [self setupToolbarButtons];
     [self setJoinLabelAndButtonForItem:self.feedItem];
     [self.dataSource loadDataFor:self.feedItem];
+}
+
+- (void)configureTitleView {
+    self.navigationItem.titleView = [OTAppAppearance navigationTitleLabelForFeedItem:self.feedItem];
+    NSMutableArray *leftButtons = @[].mutableCopy;
+    UIBarButtonItem *backItem = [UIBarButtonItem createWithImageNamed:@"backItem"
+                                                           withTarget:self.navigationController andAction:@selector(popViewControllerAnimated:) changeTintColor:YES];
+    [leftButtons addObject:backItem];
+    [leftButtons addObject:[OTAppAppearance leftNavigationBarButtonItemForFeedItem:self.feedItem]];
+    self.navigationItem.leftBarButtonItems = leftButtons;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -66,7 +84,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTAppState hideTabBar:YES];
 }
 
 - (IBAction)showUserProfile:(id)sender {
@@ -77,34 +101,55 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.joinBehavior prepareSegueForMessage:segue])
+    if ([self.joinBehavior prepareSegueForMessage:segue]) {
         return;
-    if([self.userProfileBehavior prepareSegueForUserProfile:segue])
+    }
+    
+    if ([self.userProfileBehavior prepareSegueForUserProfile:segue]) {
         return;
-    if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
+    }
+    
+    if ([self.statusChangedBehavior prepareSegueForNextStatus:segue]) {
         return;
+    }
 }
 
 #pragma mark - private methods
 
 - (void)setupToolbarButtons {
-    NSMutableArray *rightButtons = [NSMutableArray new];
-    
+
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
-    [more setImage:[UIImage imageNamed:@"more"]
-          forState:UIControlStateNormal];
-    [more addTarget:self.statusChangedBehavior
-             action:@selector(startChangeStatus)
-   forControlEvents:UIControlEventTouchUpInside];
     [more setFrame:CGRectMake(0, 0, 30, 30)];
+    [more setBackgroundImage:[[UIImage imageNamed:@"info"] resizeTo:CGSizeMake(25, 25)]
+                    forState:UIControlStateNormal];
+    [more addTarget:self.statusChangedBehavior action:@selector(startChangeStatus) forControlEvents:UIControlEventTouchUpInside];
     
-    OTBarButtonView *moreBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
-    [moreBarBtnView setPosition:BarButtonViewPositionRight];
-    [moreBarBtnView addSubview:more];
+    UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:more];
+    [self.navigationItem setRightBarButtonItem:infoButton];
     
-    UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] initWithCustomView:moreBarBtnView];
-    [rightButtons addObject:moreButton];
-    if([self.feedItem isKindOfClass:[OTEntourage class]]) {
+    // https://jira.mytkw.com/browse/EMA-2128
+    return;
+    
+    if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
+        
+        NSMutableArray *rightButtons = [NSMutableArray new];
+        UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
+        [more setFrame:CGRectMake(0, 0, 30, 30)];
+        
+        [more setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+              forState:UIControlStateNormal];
+        more.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+        [more addTarget:self.statusChangedBehavior
+                 action:@selector(startChangeStatus)
+         forControlEvents:UIControlEventTouchUpInside];
+        
+        OTBarButtonView *moreBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
+        [moreBarBtnView setPosition:BarButtonViewPositionRight];
+        [moreBarBtnView addSubview:more];
+        
+        UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] initWithCustomView:moreBarBtnView];
+        [rightButtons addObject:moreButton];
+        
         UIButton *share = [UIButton buttonWithType:UIButtonTypeCustom];
         [share setImage:[UIImage imageNamed:@"share_native"]
                forState:UIControlStateNormal];
@@ -118,10 +163,9 @@
         [shareBarBtnView addSubview:share];
         
         UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:shareBarBtnView];
-        
         [rightButtons addObject:shareButton];
+        [self setRightBarButtonView:rightButtons];
     }
-    [self setRightBarButtonView:rightButtons];
 }
 
 - (void)setRightBarButtonView:(NSMutableArray *)views
@@ -144,8 +188,10 @@
 
 - (IBAction)joinFeedItem:(id)sender {
     [OTLogger logEvent:@"AskJoinFromPublicPage"];
-    if(![self.joinBehavior join:self.feedItem])
+    
+    if (![self.joinBehavior join:self.feedItem]) {
        [self.statusChangedBehavior startChangeStatus];
+    }
 }
 
 - (IBAction)updateStatusToPending {
@@ -160,14 +206,12 @@
 }
 
 - (void)setJoinLabelAndButtonForItem: (OTFeedItem *)feedItem {
-    if([feedItem isKindOfClass:[OTEntourage class]]) {
-        [self.lblJoin setText: OTLocalizedString(@"join_entourage_lbl")];
-        [self.btnJoin setTitle: OTLocalizedString(@"join_entourage_btn") forState:UIControlStateNormal];
-    }
-    else {
-        [self.lblJoin setText: OTLocalizedString(@"join_tour_lbl")];
-        [self.btnJoin setTitle: OTLocalizedString(@"join_tour_btn") forState:UIControlStateNormal];
-    }
+    
+    self.lblJoin.textColor = [ApplicationTheme shared].backgroundThemeColor;
+    self.btnJoin.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.btnJoin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.lblJoin setText: [OTAppAppearance joinEntourageLabelTitleForFeedItem:feedItem]];
+    [self.btnJoin setTitle: [OTAppAppearance joinEntourageButtonTitleForFeedItem:feedItem] forState:UIControlStateNormal];
 }
 
 @end

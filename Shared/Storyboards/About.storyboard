@@ -30,7 +30,7 @@
         <!--About View Controller-->
         <scene sceneID="F1O-Hg-56q">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="VsB-B6-tbc" customClass="OTAboutViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTAboutViewController" automaticallyAdjustsScrollViewInsets="NO" id="VsB-B6-tbc" customClass="OTAboutViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WAr-s6-kII"/>
                         <viewControllerLayoutGuide type="bottom" id="8p6-28-L2T"/>

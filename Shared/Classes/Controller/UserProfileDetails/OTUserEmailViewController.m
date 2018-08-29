@@ -6,14 +6,15 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTUserEmailViewController.h"
 #import "OTUserNameViewController.h"
 
-#import "IQKeyboardManager.h"
 #import "UITextField+indentation.h"
 #import "UIView+entourage.h"
 #import "OTOnboardingService.h"
-#import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 #import "UIScrollView+entourage.h"
@@ -24,6 +25,7 @@
 #import "entourage-Swift.h"
 #import "NSString+Validators.h"
 #import "OTScrollPinBehavior.h"
+#import "entourage-Swift.h"
 
 @interface OTUserEmailViewController ()
 
@@ -32,6 +34,7 @@
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *continueButton;
 @property (weak, nonatomic) IBOutlet OTScrollPinBehavior *scrollBehavior;
+@property (weak, nonatomic) IBOutlet UILabel *emailDescLabel;
 
 @end
 
@@ -41,11 +44,18 @@
     [super viewDidLoad];
 
     self.title = @"";
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
     [self.emailTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    
     self.emailTextField.inputValidationChanged = ^(BOOL isValid) {
         self.continueButton.enabled = [self.emailTextField.text isValidEmail];
     };
+    [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
+    self.emailDescLabel.text = [OTAppAppearance userProfileEmailDescription];
+    
     [self loadCurrentData];
     [self addIgnoreButton];
 }
@@ -71,7 +81,8 @@
     [[IQKeyboardManager sharedManager] setEnable:YES];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self.emailTextField becomeFirstResponder];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

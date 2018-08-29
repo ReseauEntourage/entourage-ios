@@ -10,9 +10,10 @@
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
 #import "OTAuthService.h"
-#import "A0SimpleKeychain.h"
+#import <SimpleKeychain/A0SimpleKeychain.h>
 #import "UIColor+entourage.h"
 #import "UIBarButtonItem+factory.h"
+#import "entourage-Swift.h"
 
 #define MIN_PASSWORD_LENGTH 6
 #define MAX_PASSWORD_LENGTH 6
@@ -40,15 +41,14 @@
 }
 
 - (void)setupToolbarButtons {
-    [self setupCloseModal];
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+    [self setupCloseModalWithTintColor];
+
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
                                                         withTarget:self
                                                          andAction:@selector(doValidate:)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[UIColor appOrangeColor]];
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
 }
 
@@ -96,7 +96,7 @@
                    setFocusAt:(UITextField *)focusTextField
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
                                                               [focusTextField becomeFirstResponder];
                                                           }];

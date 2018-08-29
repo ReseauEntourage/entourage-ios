@@ -18,7 +18,7 @@ NSString *const kKeyFailedNumbers = @"failed_numbers";
 
 @implementation OTInvitationsService
 
-- (void)inviteNumbers:(NSArray *)phoneNumbers toEntourage:(OTEntourage *)entourage success:(void (^)())success failure:(void (^)(NSError *, NSArray *))failure {
+- (void)inviteNumbers:(NSArray *)phoneNumbers toEntourage:(OTEntourage *)entourage success:(void (^)(void))success failure:(void (^)(NSError *, NSArray *))failure {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_INVITE, entourage.uid, TOKEN];
 
     NSMutableArray *phonesArray = [NSMutableArray array];
@@ -78,8 +78,9 @@ NSString *const kKeyFailedNumbers = @"failed_numbers";
      }];
 }
 
-- (void)acceptInvitation:(OTEntourageInvitation *)invitation withSuccess:(void (^)())success failure:(void (^)(NSError *))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_HANDLE_INVITE, invitation.iid, TOKEN];
+- (void)acceptInvitation:(OTEntourageInvitation *)invitation withSuccess:(void (^)(void))success failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_HANDLE_INVITE,
+                     invitation.iid, TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      PUTWithUrl:url
      andParameters:nil
@@ -95,7 +96,7 @@ NSString *const kKeyFailedNumbers = @"failed_numbers";
      }];
 }
 
-- (void)rejectInvitation:(OTEntourageInvitation *)invitation withSuccess:(void (^)())success failure:(void (^)(NSError *))failure {
+- (void)rejectInvitation:(OTEntourageInvitation *)invitation withSuccess:(void (^)(void))success failure:(void (^)(NSError *))failure {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_HANDLE_INVITE, invitation.iid, TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      DELETEWithUrl:url

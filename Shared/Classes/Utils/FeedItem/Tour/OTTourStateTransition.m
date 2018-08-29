@@ -12,7 +12,7 @@
 
 @implementation OTTourStateTransition
 
-- (void)stopWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)stopWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     [[OTTourService new] closeTour:self.tour
                        withSuccess:^(OTTour *updatedTour) {
                            NSLog(@"Closed tour: %@", updatedTour.uid);
@@ -24,7 +24,10 @@
                        }];
 }
 
-- (void)closeWithSuccess:(void (^)(BOOL))success orFailure:(void (^)(NSError*))failure {
+- (void)closeWithOutcome:(BOOL)outcome
+                 success:(void (^)(BOOL))success
+               orFailure:(void (^)(NSError *))failure
+{
     NSString *oldStatus = self.tour.status;
     self.tour.status = TOUR_STATUS_FREEZED;
     [[OTTourService new] closeTour:self.tour
@@ -39,7 +42,7 @@
                        }];
 }
 
-- (void)quitWithSuccess:(void (^)())success orFailure:(void (^)(NSError *))failure {
+- (void)quitWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
     NSString *oldJoinState = self.tour.joinStatus;
     self.tour.joinStatus = JOIN_NOT_REQUESTED;
     [[OTTourService new] quitTour:self.tour

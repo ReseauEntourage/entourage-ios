@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import <SWRevealViewController/SWRevealViewController.h>
+
 #import "OTAppDelegate.h"
 #import "OTMenuViewController.h"
 #import "OTConsts.h"
-#import "SWRevealViewController.h"
 #import "OTLoginViewController.h"
 #import "UIViewController+menu.h"
 #import "OTSettingsViewController.h"
@@ -18,7 +19,7 @@
 #import "OTMenuItem.h"
 #import "OTUser.h"
 #import "OTMenuTableViewCell.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "UIButton+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "NSBundle+entourage.h"
@@ -32,11 +33,13 @@
 #import "OTDeepLinkService.h"
 #import "OTAboutViewController.h"
 #import "OTSafariService.h"
+#import "OTAppConfiguration.h"
+#import "entourage-Swift.h"
 
-#define HEADER_CELL_INDEX 7
-#define LOG_OUT_CELL_INDEX 8
+#define HEADER_CELL_INDEX 7 //OTAppConfiguration.supportsSolidarityGuideFunctionality ? 7 : 6
+#define LOG_OUT_CELL_INDEX 8 //OTAppConfiguration.supportsSolidarityGuideFunctionality ? 8 : 7
 #define SOLIDARITY_GUIDE_INDEX 2
-#define DONATION_CELL_INDEX 3
+#define DONATION_CELL_INDEX 3 //OTAppConfiguration.supportsSolidarityGuideFunctionality ? 3 : 2
 
 @import MessageUI;
 
@@ -79,6 +82,8 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+     self.navigationItem.title = OTLocalizedString(@"myProfile");
 
     [self.tapNameBehavior initialize];
     [self.tapModifyBehavior initialize];
@@ -87,13 +92,12 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 	self.menuItems = [self createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
-    self.title = OTLocalizedString(@"myProfile");
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
+   
     [self createBackFrontMenuButton];
     [self.modifyLabel underline];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableHeaderView = self.headerView;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSupportedPartner:) name:@kNotificationSupportedPartnerUpdated object:nil];
 }
@@ -109,10 +113,22 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     [OTLogger logEvent:@"OpenMenu"];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
+    [OTAppConfiguration updateAppearanceForMainTabBar];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 /**************************************************************************************************/
@@ -132,8 +148,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
         cellID = OTMenuLogoutTableViewCellIdentifier;
     else
         cellID = OTMenuTableViewCellIdentifier;
-    
-        
     OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
     if (menuItem.iconName != nil)
@@ -142,7 +156,9 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
         cell.itemLabel.text = menuItem.title;
     else
         cell.contentView.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
-    if (indexPath.row == HEADER_CELL_INDEX || indexPath.row == HEADER_CELL_INDEX - 1 || indexPath.row == LOG_OUT_CELL_INDEX || indexPath.row == DONATION_CELL_INDEX || indexPath.row == DONATION_CELL_INDEX - 1)
+    if ((indexPath.row == HEADER_CELL_INDEX || indexPath.row == HEADER_CELL_INDEX - 1) ||
+        (indexPath.row == LOG_OUT_CELL_INDEX || indexPath.row == DONATION_CELL_INDEX ||
+        indexPath.row == DONATION_CELL_INDEX - 1))
         cell.separatorInset = UIEdgeInsetsZero;
     if (indexPath.row == DONATION_CELL_INDEX)
         cell.contentView.backgroundColor = [UIColor colorWithRed:242 green:101 blue:33 alpha:1];
@@ -161,7 +177,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
-    else if (indexPath.row == SOLIDARITY_GUIDE_INDEX) {
+    else if(indexPath.row == SOLIDARITY_GUIDE_INDEX) {
         [OTLogger logEvent:@"SolidarityGuideFrom07Menu"];
         [self.revealViewController revealToggle:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:kSolidarityGuideNotification object:self];
@@ -292,7 +308,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                                                  segueIdentifier:OTMenuViewControllerSegueMenuSocialIdentifier];
     [menuItems addObject:itemAtd];
     
-   // NSString *chartUrl = IS_PRO_USER ? PRO_MENU_CHART_URL : PUBLIC_MENU_CHART_URL;
     OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart")
                                                      iconName: @"chart"
                                                    identifier:CHARTE_LINK_ID];

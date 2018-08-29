@@ -6,15 +6,17 @@
 //  Copyright © 2017 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
 #import "OTAboutMeViewController.h"
 #import "OTTapViewBehavior.h"
-#import "SVProgressHUD.h"
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTAuthService.h"
 #import "OTConsts.h"
-#import "IQKeyboardManager.h"
 #import "OTCloseKeyboardOnTapBehavior.h"
+#import "entourage-Swift.h"
 
 @interface OTAboutMeViewController () <UITextViewDelegate>
 
@@ -31,6 +33,13 @@
     self.closeKeyboardBehavior.inputViews = [NSArray arrayWithObjects:self.aboutMeTextWithCount.textView, nil];
     self.aboutMeTextWithCount.placeholder = @"";
     self.aboutMeTextWithCount.maxLength = 200;
+    
+    UIColor *appColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.sendButton setBackgroundColor:appColor];
+    [self.closeButton setTintColor:appColor];
+    UIImage *image = [[self.closeButton imageForState:UIControlStateNormal] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.closeButton setImage:image forState:UIControlStateNormal];
+    self.titleLabel.text = [OTAppAppearance editUserDescriptionTitle];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

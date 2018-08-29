@@ -15,27 +15,41 @@
 #import "OTAPIConsts.h"
 
 @interface OTDisclaimerBaseBehavior () <DisclaimerDelegate>
-
+@property (nonatomic) BOOL createsEvent;
 @end
 
 @implementation OTDisclaimerBaseBehavior
 
 - (void)showDisclaimer {
+    UINavigationController *navigationViewController = self.owner.navigationController;
+    [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController];
+    self.createsEvent = NO;
+    [self.owner performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
+}
+
+- (void)showCreateEventDisclaimer {
+    UINavigationController *navigationViewController = self.owner.navigationController;
+    [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController];
+    self.createsEvent = YES;
     [self.owner performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
 }
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
-    if([segue.identifier isEqualToString:@"DisclaimerSegue"]) {
+    if ([segue.identifier isEqualToString:@"DisclaimerSegue"]) {
         UINavigationController *navigationViewController = segue.destinationViewController;
+        [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController];
         UIViewController *destinationViewController = navigationViewController.topViewController;
+        
         if ([destinationViewController isKindOfClass:[OTDisclaimerViewController class]]) {
             OTDisclaimerViewController *disclaimerViewController = (OTDisclaimerViewController *)destinationViewController;
             disclaimerViewController.disclaimerDelegate = self;
             disclaimerViewController.disclaimerText = self.disclaimerText;
         }
+        
         if ([destinationViewController isKindOfClass:[OTEntourageDisclaimerViewController class]]) {
             OTEntourageDisclaimerViewController *disclaimerViewController = (OTEntourageDisclaimerViewController *)destinationViewController;
             disclaimerViewController.disclaimerDelegate = self;
+            disclaimerViewController.isForCreatingEvent = self.createsEvent;
         }
     }
     else
@@ -70,7 +84,7 @@
 - (void)disclaimerWasRejected {
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.owner dismissViewControllerAnimated:YES completion:^{
-        [self.owner dismissViewControllerAnimated:YES completion:nil];
+        [self.owner dismissViewControllerAnimated:NO completion:nil];
     }];
 }
 

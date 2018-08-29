@@ -56,7 +56,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 15;
+    return 1;
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -77,6 +77,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [OTLogger logEvent:@"MessageOpen"];
     OTFeedItem *feedItem = (OTFeedItem *)[self getItemAtIndexPath:indexPath];
+    //Mself.detailsBehavior.owner.hidesBottomBarWhenPushed = YES;
     [self.detailsBehavior showDetails:feedItem];
 }
 

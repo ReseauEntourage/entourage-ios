@@ -11,6 +11,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "UIImageView+entourage.h"
 #import "OTConsts.h"
+#import "entourage-Swift.h"
 
 #define BUTTON_MARGIN 144
 
@@ -25,6 +26,12 @@
     maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: bounds byRoundingCorners: UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii: (CGSize){7.0, 7.0}].CGPath;
     self.btnLast.layer.mask = maskLayer;
     self.btnAvatar.layer.borderColor = [UIColor whiteColor].CGColor;
+    
+    UIColor *color = [ApplicationTheme shared].backgroundThemeColor;
+    [self.btnLast setTitleColor:color forState:UIControlStateNormal];
+    self.imgAppLogo.image = [OTAppAppearance applicationLogo];
+    self.lblAppName.text = [OTAppAppearance applicationTitle];
+    self.bgView.backgroundColor = color;
 }
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {

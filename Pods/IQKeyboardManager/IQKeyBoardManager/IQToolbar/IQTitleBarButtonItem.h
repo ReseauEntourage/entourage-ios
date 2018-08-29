@@ -1,7 +1,7 @@
 //
-//  IQTitleBarButtonItem.h
+// IQTitleBarButtonItem.h
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,14 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/NSObjCRuntime.h>
 #import "IQKeyboardManagerConstants.h"
 #import "IQBarButtonItem.h"
 
-#if !(__has_feature(objc_instancetype))
-    #define instancetype id
-#endif
-
+#import <Foundation/NSObjCRuntime.h>
 
 /**
  BarButtonItem with title text.
@@ -38,15 +34,24 @@
 /**
  Font to be used in bar button. Default is (system font 12.0 bold).
  */
-@property(nullable, nonatomic, strong) UIFont *font;
+@property(nullable, nonatomic, strong) UIFont *titleFont;
+
+/**
+ titleColor to be used for displaying button text when displaying title (disabled state).
+ */
+@property(nullable, nonatomic, strong) UIColor *titleColor;
+
+/**
+ selectableTitleColor to be used for displaying button text when button is enabled.
+ */
+@property(nullable, nonatomic, strong) UIColor *selectableTitleColor;
 
 /**
  Initialize with frame and title.
  
- @param frame Initial frame of barButtonItem
  @param title Title of barButtonItem.
  */
--(nonnull instancetype)initWithFrame:(CGRect)frame title:(nullable NSString *)title NS_DESIGNATED_INITIALIZER;
+-(nonnull instancetype)initWithTitle:(nullable NSString *)title NS_DESIGNATED_INITIALIZER;
 
 /**
  Unavailable. Please use initWithFrame:title: method

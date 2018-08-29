@@ -21,9 +21,9 @@
 - (void)sendAppInfo;
 - (void)saveToken:(NSData *)tokenData;
 - (void)promptUserForPushNotifications;
-- (void)clearTokenWithSuccess:(void (^)())success orFailure:(void (^)(NSError*))failure;
-- (void)handleRemoteNotification:(NSDictionary *)userInfo;
-- (void)handleLocalNotification:(NSDictionary *)userInfo;
+- (void)clearTokenWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError*))failure;
+- (void)handleRemoteNotification:(NSDictionary *)userInfo applicationState:(UIApplicationState)appState;
+- (void)handleLocalNotification:(NSDictionary *)userInfo applicationState:(UIApplicationState)appState;
 
 - (BOOL)isMixpanelDeepLinkNotification:(NSDictionary *)userInfo;
 

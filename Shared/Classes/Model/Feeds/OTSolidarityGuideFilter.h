@@ -24,6 +24,10 @@
 @property (nonatomic) BOOL showCaring;
 @property (nonatomic) BOOL showReinsertion;
 
+@property (nonatomic) BOOL showOuting;
+@property (nonatomic) BOOL showPrivateCircle;
+@property (nonatomic) BOOL showNeighborhood;
+
 - (NSArray *)groupHeaders;
 - (NSArray *)toGroupedArray;
 - (void)updateValue:(OTSolidarityGuideFilter *)filter;

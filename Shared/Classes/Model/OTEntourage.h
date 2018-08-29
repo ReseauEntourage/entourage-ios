@@ -10,11 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "OTFeedItem.h"
 #import "OTCategory.h"
-
-#define ENTOURAGE_DEMANDE @"ask_for_help"
-#define ENTOURAGE_CONTRIBUTION @"contribution"
-
-#define ENTOURAGE_STATUS_OPEN @"open"
+#import "OTConsts.h"
 
 @interface OTEntourage : OTFeedItem
 
@@ -25,7 +21,8 @@
 @property (nonatomic, strong) NSString *entourage_type;
 @property (nonatomic, strong) OTCategory *categoryObject;
 
+- (instancetype)initWithGroupType:(NSString*)groupType;
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary;
-- (NSDictionary *) dictionaryForWebService;
+- (NSDictionary *)dictionaryForWebService;
 
 @end

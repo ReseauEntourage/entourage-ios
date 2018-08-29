@@ -28,14 +28,22 @@ NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIde
     summaryBehavior.imgAssociation = self.imgAssociation;
     summaryBehavior.imgCategory = self.imgCategory;
     [summaryBehavior configureWith:item];
+    
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
     self.typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
     self.organizationLabel.text = [uiDelegate summary];
-    [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
+    
+    if ([OTAppConfiguration shouldShowCreatorImagesForNewsFeedItems]) {
+        [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
+    } else {
+        self.userProfileImageButton.hidden = YES;
+        self.imgAssociation.hidden = YES;
+    }
+    
     self.noPeopleLabel.text = [NSString stringWithFormat:@"%d", item.noPeople.intValue];
     [self.statusButton setupAsStatusButtonForFeedItem:item];
+    
     [self.statusTextButton setupAsStatusTextButtonForFeedItem:item];
-    [self.statusLineMarker setBackgroundColor:self.statusTextButton.currentTitleColor];
     self.unreadCountText.hidden = item.unreadMessageCount.intValue == 0;
     self.unreadCountText.text = item.unreadMessageCount.stringValue;
 }

@@ -6,12 +6,14 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SimpleKeychain/SimpleKeychain.h>
+
 #import "OTAppDelegate.h"
 #import "OTConsts.h"
 #import "OTJSONResponseSerializer.h"
-#import "SimpleKeychain.h"
 #import "OTRequestOperationManager.h"
 #import "OTAuthService.h"
+#import "OTAppConfiguration.h"
 
 @implementation OTRequestOperationManager
 

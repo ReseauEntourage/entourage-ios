@@ -12,6 +12,7 @@
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
 #import "OTAPIConsts.h"
+#import "OTAppConfiguration.h"
 
 @interface OTMapOptionsViewController ()
 
@@ -26,12 +27,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (!CGPointEqualToPoint(self.fingerPoint, CGPointZero)) {
+    if (!CGPointEqualToPoint(self.fingerPoint, CGPointZero) &&
+        [OTAppConfiguration supportsAddingActionsFromMapOnLongPress]) {
         [self setupOptionsAtFingerPoint];
     } else {
         [self setupOptionsAsList];
     }
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,12 +50,17 @@
     self.createTourLabel.hidden = YES;
     self.createTourButton.hidden = YES;
 
-    if (IS_PRO_USER) {
+    if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         [self addOptionWithIcon:@"createMaraude" andAction:@selector(doCreateTour:) withTranslation:NORTH_WEST];
         [self addOptionWithIcon:@"heart" andAction:@selector(doCreateAction:) withTranslation:NORTH_EAST];
+        [self addOptionWithIcon:@"addEvent" andAction:@selector(doCreateEvent:) withTranslation:SOUTH_EAST];
     } else {
         [self addOptionWithIcon:@"heart" andAction:@selector(doCreateAction:) withTranslation:NORTH_WEST];
-        [self addOptionWithIcon:@"house" andAction:@selector(proposeStructure:) withTranslation:NORTH_EAST];
+        [self addOptionWithIcon:@"addEvent" andAction:@selector(doCreateEvent:) withTranslation:SOUTH_EAST];
+        [self addOptionWithIcon:@"house"
+                 applyTintColor:NO
+                      andAction:@selector(proposeStructure:)
+                withTranslation:NORTH_EAST];
     }
 }
 
@@ -65,7 +71,7 @@
 - (void)setupOptionsAsList {
     [super setupOptionsAsList];
     
-    if (IS_PRO_USER) {
+    if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         [self setupForProUser];
     } else {
         [self setupForPublicUser];
@@ -73,15 +79,27 @@
 }
 
 - (void)setupForProUser {
-    [self addOption:OTLocalizedString(@"create_tour") atIndex:self.buttonIndex++ withIcon:@"createMaraude" andAction:@selector(doCreateTour:)];
+    [self addOption:OTLocalizedString(@"create_tour")
+            atIndex:self.buttonIndex++ withIcon:@"createMaraude"
+          andAction:@selector(doCreateTour:)];
     [self setupForPublicUser];
 }
 
 - (void)setupForPublicUser {
-    [self addOption:OTLocalizedString(@"create_action") atIndex:self.buttonIndex++ withIcon:@"heart" andAction:@selector(doCreateAction:)];
+    [self addOption:OTLocalizedString(@"create_event")
+            atIndex:self.buttonIndex++ withIcon:@"addEvent"
+          andAction:@selector(doCreateEvent:)];
     
-    if(self.isPOIVisible)
-        [self addOption:OTLocalizedString(@"propose_structure") atIndex:self.buttonIndex++ withIcon:@"house" andAction:@selector(proposeStructure:)];
+    [self addOption:OTLocalizedString(@"create_action")
+            atIndex:self.buttonIndex++ withIcon:@"heart"
+          andAction:@selector(doCreateAction:)];
+    
+    if (self.isPOIVisible) {
+        [self addOption:OTLocalizedString(@"propose_structure")
+                atIndex:self.buttonIndex++ withIcon:@"house"
+         applyTintColor:NO
+              andAction:@selector(proposeStructure:)];
+    }
 }
 
 @end

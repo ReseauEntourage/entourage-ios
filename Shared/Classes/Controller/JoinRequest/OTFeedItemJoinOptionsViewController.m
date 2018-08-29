@@ -6,15 +6,17 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
 #import "OTFeedItemJoinOptionsViewController.h"
 #import "UIView+entourage.h"
 #import "OTFeedItemFactory.h"
-#import "SVProgressHUD.h"
 #import "OTEntourage.h"
 #import "OTConsts.h"
 #import "OTTextView.h"
 #import "OTTapViewBehavior.h"
-#import "IQKeyboardManager.h"
+#import "entourage-Swift.h"
 
 @interface OTFeedItemJoinOptionsViewController () <UITextViewDelegate>
 
@@ -32,6 +34,8 @@
     self.greetingMessage.placeholderLargeColor = UIColor.grayColor;
     
     self.greetingMessage.forwardDelegate = self;
+    self.tapBehavior.tapView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    self.logo.image = [OTAppAppearance JoinFeedItemConfirmationLogo];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -67,11 +71,7 @@
 #pragma mark - private methods
 
 - (void)setupGreetingLabelForItem {
-    if([self.feedItem isKindOfClass:[OTEntourage class]]){
-        [self.greetingLabel setText:OTLocalizedString(@"join_entourage_greeting_lbl")];
-    }
-    else
-        [self.greetingLabel setText:OTLocalizedString(@"join_tour_greeting_lbl")];
+    self.greetingLabel.text = [OTAppAppearance joinFeedItemConformationDescription:self.feedItem];
 }
 
 #pragma mark - - UITextViewDelegate

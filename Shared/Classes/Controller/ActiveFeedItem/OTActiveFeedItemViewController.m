@@ -6,6 +6,9 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
 #import "OTActiveFeedItemViewController.h"
 #import "OTFeedItemFactory.h"
 #import "UIBarButtonItem+factory.h"
@@ -21,18 +24,22 @@
 #import "OTEditEntourageBehavior.h"
 #import "OTFeedItemMessage.h"
 #import "OTConsts.h"
-#import "SVProgressHUD.h"
 #import "OTMapViewController.h"
 #import "OTMessagingService.h"
-#import "IQKeyboardManager.h"
 #import "OTBottomScrollBehavior.h"
 #import "OTUnreadMessagesService.h"
 #import "OTShareFeedItemBehavior.h"
 #import "OTUser.h"
+#import "OTConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTEditEncounterBehavior.h"
 #import "OTMessageTableCellProviderBehavior.h"
 #import "OTBarButtonView.h"
+#import "UIImage+processing.h"
+#import "OTUserViewController.h"
+#import "UIStoryboard+entourage.h"
+#import "OTEntourageService.h"
+#import "entourage-Swift.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -59,6 +66,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    
     [self setUpUIForClosedItem];
     [self.shareBehavior configureWith:self.feedItem];
     [self.scrollBottomBehavior initialize];
@@ -71,10 +80,9 @@
     self.dataSource.tableView.estimatedRowHeight = 1000;
     self.cellProvider.feedItem = self.feedItem;
 
-    self.title = [[[OTFeedItemFactory createFor:self.feedItem] getUI] navigationTitle].uppercaseString;
+    [self configureTitleView];
     [self setupToolbarButtons];
     [self reloadMessages];
-    [[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
     
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem]
@@ -84,15 +92,47 @@
     } orFailure:^(NSError *error) {
         [SVProgressHUD dismiss];
     }];
-    if(self.inviteBehaviorTriggered)
-        [self performSegueWithIdentifier:@"SegueInviteSource" sender:self];
+    
+    if (self.inviteBehaviorTriggered) {
+        [self.inviteBehavior startInvite];
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFeedItemDetails:) name:kNotificationShowEventDetails object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    //[[IQKeyboardManager sharedManager] disableInViewControllerClass:[OTActiveFeedItemViewController class]];
+    
     [OTLogger logEvent:@"OTActiveFeedItemViewController"];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    
     [self reloadMessages];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
+- (void)configureTitleView {
+    self.navigationItem.titleView = [OTAppAppearance navigationTitleLabelForFeedItem:self.feedItem];
+    NSMutableArray *leftButtons = @[].mutableCopy;
+    UIBarButtonItem *backItem = [UIBarButtonItem createWithImageNamed:@"backItem"
+                                                           withTarget:self.navigationController andAction:@selector(popViewControllerAnimated:) changeTintColor:YES];
+    [leftButtons addObject:backItem];
+    [leftButtons addObject:[OTAppAppearance leftNavigationBarButtonItemForFeedItem:self.feedItem]];
+    self.navigationItem.leftBarButtonItems = leftButtons;
 }
 
 - (void)reloadMessages {
@@ -102,17 +142,17 @@
 #pragma mark - navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.inviteBehavior prepareSegueForInvite:segue])
+    if ([self.inviteBehavior prepareSegueForInvite:segue])
         return;
-    if([self.statusChangedBehavior prepareSegueForNextStatus:segue])
+    if ([self.statusChangedBehavior prepareSegueForNextStatus:segue])
         return;
-    if([self.userProfileBehavior prepareSegueForUserProfile:segue])
+    if ([self.userProfileBehavior prepareSegueForUserProfile:segue])
         return;
-    if([self.editEntourageBehavior prepareSegue:segue])
+    if ([self.editEntourageBehavior prepareSegue:segue])
         return;
-    if([self.editEncounterBehavior prepareSegue:segue])
+    if ([self.editEncounterBehavior prepareSegue:segue])
         return;
-    if([segue.identifier isEqualToString:@"SegueMap"]) {
+    if ([segue.identifier isEqualToString:@"SegueMap"]) {
         OTMapViewController *controller = (OTMapViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
     }
@@ -122,81 +162,47 @@
 
 - (void)setUpUIForClosedItem {
     BOOL isClosed = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isClosed];
-    if(isClosed)
+    if (isClosed) {
         self.view.backgroundColor = self.tblChat.backgroundColor = CLOSED_ITEM_BACKGROUND_COLOR;
+    }
     self.txtChat.hidden = self.btnSend.hidden = isClosed;
     self.txtChat.delegate = self;
 }
 
 - (void)setupToolbarButtons {
     id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:self.feedItem] getStateInfo];
-    if(![stateInfo canChangeEditState])
+    if (![stateInfo canChangeEditState]) {
         return;
-    
-    NSMutableArray *rightButtons = [NSMutableArray new];
+    }
     
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
-    [more setImage:[UIImage imageNamed:@"more"]
-          forState:UIControlStateNormal];
-    [more addTarget:self.statusChangedBehavior
-             action:@selector(startChangeStatus)
-   forControlEvents:UIControlEventTouchUpInside];
     [more setFrame:CGRectMake(0, 0, 30, 30)];
+    [more setBackgroundImage:[[UIImage imageNamed:@"info"] resizeTo:CGSizeMake(25, 25)]
+          forState:UIControlStateNormal];
+    [more addTarget:self action:@selector(infoAction) forControlEvents:UIControlEventTouchUpInside];
     
-    OTBarButtonView *moreBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
-    [moreBarBtnView setPosition:BarButtonViewPositionRight];
-    [moreBarBtnView addSubview:more];
-    
-    UIBarButtonItem *optionsButton = [[UIBarButtonItem alloc] initWithCustomView:moreBarBtnView];
-    
-    [rightButtons addObject:optionsButton];
-    
-    if([stateInfo canInvite]) {
-        UIButton *plus = [UIButton buttonWithType:UIButtonTypeCustom];
-        [plus setImage:[UIImage imageNamed:@"userPlus"]
-               forState:UIControlStateNormal];
-        [plus addTarget:self.inviteBehavior
-                 action:@selector(startInvite)
-       forControlEvents:UIControlEventTouchUpInside];
-        [plus setFrame:CGRectMake(0, 0, 30, 30)];
-        
-        OTBarButtonView *plusBarBtnView = [[OTBarButtonView alloc] initWithFrame:plus.frame];
-        [plusBarBtnView setPosition:BarButtonViewPositionRight];
-        [plusBarBtnView addSubview:plus];
-        
-        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithCustomView:plusBarBtnView];
-        [rightButtons addObject:plusButton];
-    }
-    [self setRightBarButtonView:rightButtons];
-}
-
-- (void)setRightBarButtonView:(NSMutableArray *)views
-{
-    if ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 11)
-    {
-        [self.navigationItem setRightBarButtonItems:views];
-    }
-    else
-    {
-        UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
-        [space setWidth:-13];
-        
-        NSArray *items = @[space];
-        
-        [self.navigationItem setRightBarButtonItems:[items arrayByAddingObjectsFromArray:views]];
-    }
+    UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:more];
+    [self.navigationItem setRightBarButtonItem:infoButton];
 }
 
 - (IBAction)sendMessage {
     NSString *message = [self.txtChat.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if(message.length == 0)
+    
+    if (message.length == 0) {
         return;
+    }
+    
     [OTLogger logEvent:@"AddContentToMessage"];
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getMessaging] send:message withSuccess:^(OTFeedItemMessage *message) {
-        [SVProgressHUD dismiss];
-        self.txtChat.text = @"";
-        [[OTMessagingService new] readFor:self.feedItem onDataSource:self.dataSource];
+    
+    id<OTFeedItemFactoryDelegate> itemFactory = [OTFeedItemFactory createFor:self.feedItem];
+    id<OTMessagingDelegate> messagingDelegate = [itemFactory getMessaging];
+    
+    [messagingDelegate send:message
+                withSuccess:^(OTFeedItemMessage *responseMessage) {
+                    [SVProgressHUD dismiss];
+                    self.txtChat.text = @"";
+                    [self reloadMessages];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];
@@ -207,13 +213,96 @@
     [self performSegueWithIdentifier:@"SegueMap" sender:self];
 }
 
+- (IBAction)infoAction {
+    if ([self.feedItem isConversation]) {
+        [self showUserProfile];
+    } else {
+        [self showMap];
+    }
+}
+
+- (void)showUserProfile {
+    UIStoryboard *userProfileStoryboard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
+    OTUserViewController *userController = [userProfileStoryboard instantiateViewControllerWithIdentifier:@"UserProfile"];
+    userController.userId = self.feedItem.author.uID;
+    userController.shouldHideSendMessageButton = YES;
+    UINavigationController *rootUserProfileController = [[UINavigationController alloc] initWithRootViewController:userController];
+    [self.navigationController presentViewController:rootUserProfileController animated:YES completion:nil];
+}
+
 - (IBAction)scrollToBottomWhileEditing {
-    if(self.dataSource.items.count > 0)
+    if (self.dataSource.items.count > 0) {
         [self.dataSource.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.items.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 - (IBAction)encounterChanged {
     [self reloadMessages];
+}
+
+- (IBAction)showFeedItemDetails:(NSNotification*)notification {
+    OTFeedItemMessage *messageItem = [notification.userInfo objectForKey:@kNotificationFeedItemKey];
+    [SVProgressHUD show];
+    
+    [self loadEntourageItemWithStringId:messageItem.itemUuid completion:^(OTEntourage *entourage, NSError *error) {
+        if (!error) {
+            [self loadEntourageGroupMembers:entourage completion:^(NSArray *members, NSError *error) {
+                BOOL isMember = NO;
+                if (members) {
+                    NSArray *memberIds = [members valueForKey:@"uID"];
+                    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+                    isMember = [memberIds containsObject:currentUser.sid];
+                }
+                
+                if (isMember) {
+                    OTActiveFeedItemViewController *activeFeedItemViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTActiveFeedItemViewController"];
+                    activeFeedItemViewController.feedItem = entourage;
+                    [self.navigationController pushViewController:activeFeedItemViewController animated:YES];
+                    
+                } else {
+                    OTMapViewController *feedMapViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTMapViewController"];
+                    feedMapViewController.feedItem = entourage;
+                    [self.navigationController pushViewController:feedMapViewController animated:YES];
+                }
+            }];
+        } else {
+            [SVProgressHUD dismiss];
+        }
+    }];
+}
+
+- (void)loadEntourageGroupMembers:(OTEntourage*)entourage
+                       completion:(void(^)(NSArray *members, NSError *error))completion{
+    
+    [[OTEntourageService new] entourageUsers:entourage
+                                     success:^(NSArray *items) {
+                                         NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
+                                             return [item.status isEqualToString:JOIN_ACCEPTED];
+                                         }]];
+                                         dispatch_async(dispatch_get_main_queue(), ^() {
+                                             completion(filteredItems, nil);
+                                         });
+                                     } failure:^(NSError *error) {
+                                         dispatch_async(dispatch_get_main_queue(), ^() {
+                                             completion(nil, error);
+                                         });
+                                     }];
+}
+
+- (void)loadEntourageItemWithStringId:(NSString*)uuid
+                           completion:(void(^)(OTEntourage *entourage, NSError *error))completion {
+    [[OTEntourageService new] getEntourageWithStringId:uuid
+                                           withSuccess:^(OTEntourage *entourage) {
+                                               [SVProgressHUD dismiss];
+                                               dispatch_async(dispatch_get_main_queue(), ^() {
+                                                   completion(entourage, nil);
+                                               });
+                                           } failure:^(NSError *error) {
+                                               [SVProgressHUD dismiss];
+                                               dispatch_async(dispatch_get_main_queue(), ^() {
+                                                   completion(nil, error);
+                                               });
+                                           }];
 }
 
 #pragma mark - UITextViewDelegate

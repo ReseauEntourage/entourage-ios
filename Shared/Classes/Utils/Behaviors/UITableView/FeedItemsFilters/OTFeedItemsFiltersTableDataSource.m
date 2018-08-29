@@ -14,6 +14,7 @@
 #import "UIColor+entourage.h"
 #import "OTAPIConsts.h"
 #import "NSUserDefaults+OT.h"
+#import "entourage-Swift.h"
 
 @interface OTFeedItemsFiltersTableDataSource () <UITableViewDelegate>
 
@@ -26,15 +27,19 @@
     
     self.currentFilter = filter;
     self.dataSource.tableView.delegate = self;
+    
     self.groupHeaders = [filter groupHeaders];
     self.groupedSource = [filter toGroupedArray];
     self.parentArray = [filter parentArray];
 }
 
 - (OTFeedItemFilters *)readCurrentFilter {
-    for(NSArray *values in self.groupedSource)
-        for(OTFeedItemFilter *item in values)
+    for (NSArray *values in self.groupedSource) {
+        for (OTFeedItemFilter *item in values) {
             [self.currentFilter updateValue:item];
+        }
+    }
+    
     return self.currentFilter;
 }
 
@@ -51,25 +56,40 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     OTFeedItemFilter *item = (OTFeedItemFilter *)[self getItemAtIndexPath:indexPath];
     CGFloat size = 44;
+    BOOL isToursFeatureEnabled = IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality;
+    
     [self readCurrentFilter];
-    OTFeedItemFilter *contribution;
-    OTFeedItemFilter *demande;
+    
     NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];
-    if(parents.count > 0) {
-        if (IS_PRO_USER) {
+    
+    if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        switch (item.key) {
+            case FeedItemFilterKeyEventsPast:
+                // if events is off, don't show past events filter
+                if (!parents[2].subItems[0].active) {
+                    size = 0;
+                }
+                break;
+            default:
+                break;
+        }
+        return size;
+    }
+    
+    OTFeedItemFilter *contribution = nil;
+    OTFeedItemFilter *demande = nil;
+    
+    if (parents.count > 0) {
+        if (isToursFeatureEnabled) {
+            contribution = parents[2];
+            demande = parents[3];
+        }
+        else {
             contribution = parents[1];
             demande = parents[2];
         }
-        else {
-            contribution = parents[0];
-            demande = parents[1];
-        }
         switch (item.key) {
             case FeedItemFilterKeyDemandeSocial:
-                if (!demande.active)
-                    size = 0;
-                break;
-            case FeedItemFilterKeyDemandeEvent:
                 if (!demande.active)
                     size = 0;
                 break;
@@ -97,10 +117,7 @@
                 if (!contribution.active)
                     size = 0;
                 break;
-            case FeedItemFilterKeyContributionEvent:
-                if (!contribution.active)
-                    size = 0;
-                break;
+                
             case FeedItemFilterKeyContributionHelp:
                 if (!contribution.active)
                     size = 0;
@@ -121,6 +138,7 @@
                 if (!contribution.active)
                     size = 0;
                 break;
+                
             case FeedItemFilterKeyMedical:
                 if (!parents[0].active)
                     size = 0;
@@ -133,12 +151,20 @@
                 if (!parents[0].active)
                     size = 0;
                 break;
+                
+            case FeedItemFilterKeyEventsPast: {
+                NSInteger eventsSectionIndex = (isToursFeatureEnabled) ? 1 : 0;
+                if (!parents[eventsSectionIndex].active) {
+                    size = 0;
+                }
+            }
+                break;
             case FeedItemFilterKeyTimeframe:
                 return 90;
-                break;
+                
             default:
                 return 44;
-                break;
+                
         }//switch(item.key)
     }//if(parents.count > 0)
     else {
@@ -149,10 +175,14 @@
     return item.key == FeedItemFilterKeyTimeframe ? 90 : size;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView
+    willDisplayCell:(UITableViewCell *)cell
+    forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *itemsAtSection = (NSArray *)self.groupedSource[indexPath.section];
-    if(itemsAtSection.count > 10 && indexPath.row == itemsAtSection.count / 2 - 1)
+    
+    if (itemsAtSection.count > 10 && indexPath.row == itemsAtSection.count / 2 - 1) {
         cell.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0);
+    }
 }
 
 @end

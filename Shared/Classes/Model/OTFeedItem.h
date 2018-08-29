@@ -23,8 +23,9 @@
 
 #define TOUR_TYPE_NAME @"Tour"
 
-@interface OTFeedItem : NSObject
+@interface OTFeedItem : NSObject <NSCopying>
 
+@property (nonatomic, strong) NSString *uuid;
 @property (nonatomic, strong) NSNumber *uid;
 @property (nonatomic, strong) NSString *fid;
 @property (nonatomic, strong) OTFeedItemAuthor *author;
@@ -38,6 +39,22 @@
 @property (nonatomic, assign) NSNumber *unreadMessageCount;
 @property (nonatomic, strong) NSString *shareUrl;
 
+@property (nonatomic, strong) NSDate *startsAt;
+@property (nonatomic, strong) NSString *groupType;
+@property (nonatomic, strong) NSString *displayAddress;
+@property (nonatomic, strong) NSString *streetAddress;
+@property (nonatomic, strong) NSString *placeName;
+@property (nonatomic, strong) NSString *googlePlaceId;
+
+@property (nonatomic) NSString *identifierTag;
+
+- (instancetype)initWithGroupType:(NSString*)groupType;
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+- (BOOL)isPrivateCircle;
+- (BOOL)isNeighborhood;
+- (BOOL)isConversation;
+- (BOOL)isOuting;
 
 @end

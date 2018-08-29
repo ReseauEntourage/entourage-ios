@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import IQKeyboardManager
+import SVProgressHUD
 
 @objc final class OTPopupViewController: UIViewController {
     
@@ -15,16 +17,17 @@ import Foundation
     @IBOutlet weak var completionButton: UIButton!
     @IBOutlet weak var tapBehavior: OTTapViewBehavior!
     @IBOutlet weak var closeKeyboardBehavior: OTCloseKeyboardOnTapBehavior!
+    @IBOutlet weak var closeButton: UIButton!
     
-    lazy var labelString: NSMutableAttributedString = {
+    @objc lazy var labelString: NSMutableAttributedString = {
         return NSMutableAttributedString.init(string: "")
     }()
-    lazy var textFieldPlaceholder = ""
-    lazy var buttonTitle = ""
-    lazy var message = ""
-    lazy var reportedUserId = ""
+    @objc lazy var textFieldPlaceholder = ""
+    @objc lazy var buttonTitle = ""
+    @objc lazy var message = ""
+    @objc lazy var reportedUserId = ""
     
-    init(labelString: NSMutableAttributedString, textFieldPlaceholder: String, buttonTitle: String) {
+    @objc init(labelString: NSMutableAttributedString, textFieldPlaceholder: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
         self.labelString = labelString
         self.textFieldPlaceholder = textFieldPlaceholder
@@ -38,7 +41,7 @@ import Foundation
     override func viewDidLoad() {
         super.viewDidLoad()
         IQKeyboardManager.shared().isEnableAutoToolbar = false
-        closeKeyboardBehavior.inputViews = [textWithCount.textView]
+        closeKeyboardBehavior.inputViews = [textWithCount.textView!]
         textWithCount.maxLength = 200
         
         setupUI()
@@ -63,6 +66,12 @@ import Foundation
         textWithCount.placeholderLargeColor = UIColor.appGreyish()
         textWithCount.placeholder = textFieldPlaceholder
         completionButton.addTarget(self, action: #selector(sendMail), for: .touchUpInside)
+        completionButton.backgroundColor = ApplicationTheme.shared().backgroundThemeColor
+        closeButton.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
+        let closeImage = closeButton.image(for: UIControlState.normal)
+        let tintImage = closeImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        closeButton.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
+        closeButton.setImage(tintImage, for: UIControlState.normal)
     }
     
     @objc private func sendMail() {

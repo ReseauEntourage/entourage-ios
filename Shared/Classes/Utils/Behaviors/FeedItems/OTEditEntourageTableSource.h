@@ -18,6 +18,11 @@
 
 - (void)configureWith:(OTEntourage *)entourage;
 - (void)updateLocationTitle;
+- (void)updateLocationAddress:(NSString*)streetAddress
+                    placeName:(NSString*)placeName
+                      placeId:(NSString*)placeId
+               displayAddress:(NSString*)displayAddress;
 - (void)updateTexts;
+- (void)updateEventStartDate:(NSDate*)date;
 
 @end

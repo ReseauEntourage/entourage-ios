@@ -39,6 +39,7 @@
     [self setupCloseModal];
     
     [self setupUI];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,9 +111,10 @@
 }
 
 - (IBAction)showPhone:(id)sender {
-    NSString *phone = [self.poi.phone stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL *phoneURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", phone]];
-    [[UIApplication sharedApplication] openURL:phoneURL];
+    NSURLComponents *components = [[NSURLComponents alloc] init];
+    components.path = self.poi.phone;
+    components.scheme = @"tel";
+    [[UIApplication sharedApplication] openURL:components.URL];
 }
 
 - (IBAction)showEmail:(id)sender {
@@ -123,6 +125,8 @@
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
     composeVC.mailComposeDelegate = self;
     
@@ -130,6 +134,8 @@
     [composeVC setToRecipients:@[self.poi.email]];
     [composeVC setSubject:@""];
     [composeVC setMessageBody:@"" isHTML:NO];
+    
+    [OTAppConfiguration configureMailControllerAppearance:composeVC];
     
     // Present the view controller modally.
     [self presentViewController:composeVC animated:YES completion:nil];

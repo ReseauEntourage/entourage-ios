@@ -17,6 +17,7 @@
 #import "NSNotification+entourage.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTMapView.h"
+#import "entourage-Swift.h"
 
 #define SEARCHBAR_FRAME CGRectMake(16, 80, [UIScreen mainScreen].bounds.size.width-32, 48)
 #define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
@@ -39,14 +40,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = OTLocalizedString(@"myLocation").uppercaseString;
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+
+        
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(saveNewLocation)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[UIColor appOrangeColor]];
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
 
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LocationSelection" bundle:nil];
@@ -80,9 +80,9 @@
     self.locationSearchTable.mapView = self.mapView;
     self.locationSearchTable.pinDelegate = self;
     [self zoomToCurrentLocation:nil];
-    UIBarButtonItem *cancelBtn = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    UIBarButtonItem *cancelBtn = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]];
     [cancelBtn setTitle:OTLocalizedString(@"cancel")];
-    [cancelBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [UIColor appOrangeColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"SFUItext-Bold" size:17], NSFontAttributeName, nil] forState:UIControlStateNormal];
+    [cancelBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [ApplicationTheme shared].secondaryNavigationBarTintColor, NSForegroundColorAttributeName, [UIFont fontWithName:@"SFUItext-Bold" size:17], NSFontAttributeName, nil] forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
 }
 

@@ -12,8 +12,8 @@ class OnBoardingTextField: JVFloatLabeledTextField, Validable {
     super.awakeFromNib()
 
     if let placeholder = placeholder {
-      let attributes = [NSForegroundColorAttributeName: UIColor.appTextFieldPlaceholder(),
-                        NSFontAttributeName: UIColor.appTextFieldPlaceholderFont()] as [String : Any]
+      let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appTextFieldPlaceholder(),
+                        NSAttributedStringKey.font: UIColor.appTextFieldPlaceholderFont()] as [NSAttributedStringKey : Any]
       attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
     registerForNotifications()
@@ -31,7 +31,7 @@ class OnBoardingTextField: JVFloatLabeledTextField, Validable {
                                            name: NSNotification.Name.UITextFieldTextDidChange, object: self)
   }
 
-  func textDidChange() {
+  @objc func textDidChange() {
     let isValid = inputIsValid(text)
     inputValidationChanged?(isValid)
   }
@@ -51,8 +51,8 @@ class OnBoardingNumberTextField: NBTextField {
     super.awakeFromNib()
 
     if let placeholder = placeholder {
-      let attributes = [NSForegroundColorAttributeName: UIColor.appTextFieldPlaceholder(),
-                        NSFontAttributeName: UIColor.appTextFieldPlaceholderFont()] as [String : Any]
+      let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appTextFieldPlaceholder(),
+                        NSAttributedStringKey.font: UIColor.appTextFieldPlaceholderFont()] as [NSAttributedStringKey : Any]
       attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
   }
@@ -62,6 +62,13 @@ class OnBoardingButton: UIButton {
 
   override func awakeFromNib() {
     super.awakeFromNib()
+
+    if let customImage = self.image(for: UIControlState.normal) {
+        let customImageWithTint = customImage.withRenderingMode(.alwaysTemplate)
+        self.setImage(customImageWithTint, for: .normal)
+        self.backgroundColor = UIColor.white
+        self.tintColor = ApplicationTheme.shared().backgroundThemeColor
+    }
   }
 
   override var isEnabled: Bool {
@@ -113,11 +120,10 @@ class NBTextField: JVFloatLabeledTextField, Validable {
   // MARK: UITextField input managing
 
   override open func deleteBackward() {
-    if text?.last == " " {
-      if let indexNumberWithWhiteSpace = text?.index((text?.endIndex)!, offsetBy: -1) {
-        text = text?.substring(to: indexNumberWithWhiteSpace)
-      }
-      return
+    if let myText=text, myText.last == " " {
+        let indexNumberWithWhiteSpace = myText.index(myText.endIndex, offsetBy: -1)
+        text = String(myText[..<indexNumberWithWhiteSpace])
+        return
     }
     super.deleteBackward()
   }
@@ -130,12 +136,12 @@ class NBTextField: JVFloatLabeledTextField, Validable {
                                            name: NSNotification.Name.UITextFieldTextDidChange, object: self)
   }
 
-  func numberTextDidChange() {
-    let numbersOnly:Bool = phoneNumberUtility.isViablePhoneNumber(text)
+  @objc func numberTextDidChange() {
+    //let numbersOnly:Bool = phoneNumberUtility.isViablePhoneNumber(text)
     //text = phoneNumberFormatter.inputStringAndRememberPosition(numbersOnly)
 
     //var isValid = inputIsValid(numbersOnly)
-    var isValid:Bool = true
+    let isValid:Bool = true
     inputValidationChanged?(isValid)
   }
 

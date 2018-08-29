@@ -9,10 +9,12 @@
 #import "OTTutorial4ViewController.h"
 #import "OTTutorialViewController.h"
 #import "UIColor+entourage.h"
+#import "entourage-Swift.h"
 
 @interface OTTutorial4ViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *addButton;
 
 @end
 
@@ -21,9 +23,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Faites appel à vos voisins afin d’entourer une personne sans-abri. Créez une action avec le bouton :"];
+    self.topView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    self.headerView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.addButton setBackgroundColor:[ApplicationTheme shared].secondaryNavigationBarTintColor];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:OTLocalizedString(@"Faites appel à vos voisins afin d’entourer une personne sans-abri. Créez une action avec le bouton :")];
     [attributedString addAttributes:@{
-                                NSForegroundColorAttributeName: [UIColor appOrangeColor]
+                                NSForegroundColorAttributeName: [ApplicationTheme shared].secondaryNavigationBarTintColor
                                       } range:NSMakeRange(67, 33)];
     self.descriptionLabel.attributedText = attributedString;
     

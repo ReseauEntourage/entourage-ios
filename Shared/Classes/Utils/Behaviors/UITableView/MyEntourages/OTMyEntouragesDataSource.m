@@ -8,18 +8,21 @@
 
 #import "OTMyEntouragesDataSource.h"
 #import "OTFeedsService.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTTableDataSourceBehavior.h"
 #import "OTConsts.h"
 #import "OTMyEntouragesFilter.h"
 #import "OTFeedItem.h"
 #import "OTSavedMyEntouragesFilter.h"
 #import "NSUserDefaults+OT.h"
+#import "OTAppAppearance.h"
+#import "entourage-Swift.h"
 
 @interface OTMyEntouragesDataSource ()
 
 @property (nonatomic) int pageNumber;
 @property (nonatomic, strong) OTMyEntouragesFilter *currentFilter;
+
 
 @end
 
@@ -91,19 +94,23 @@
 
 #pragma mark - private methods
 
-- (void)requestDataWithSuccess:(void(^)(NSArray *items))success orFailure:(void(^)())failure {
+- (void)requestDataWithSuccess:(void(^)(NSArray *items))success orFailure:(void(^)(void))failure {
     [SVProgressHUD show];
     NSMutableDictionary *parameters = [self.currentFilter toDictionaryWithPageNumber:self.pageNumber andSize:DATA_PAGE_SIZE];
     [[OTFeedsService new] getMyFeedsWithParameters:parameters success:^(NSArray *items) {
-        if(self.currentFilter.isUnread) {
+        if (self.currentFilter.isUnread) {
            items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(OTFeedItem *item, NSDictionary * bindings) {
                BOOL hasUnread = item.unreadMessageCount.intValue > 0;
                return hasUnread;
             }]];
         }
         [self.items addObjectsFromArray:items];
+        
+        [self configureNoDataView];
+        
         [SVProgressHUD dismiss];
         success(items);
+        
     } failure:^(NSError *error) {
         [SVProgressHUD dismiss];
         if(failure)
@@ -113,6 +120,30 @@
 
 - (void)entourageUpdated:(NSNotification *)notification {
     [self.tableDataSource refresh];
+}
+
+- (void)configureNoDataView {
+    if (self.items.count == 0) {
+        self.noDataView.hidden = NO;
+        [self.tableView.superview bringSubviewToFront:self.noDataView];
+    } else {
+        self.noDataView.hidden = YES;
+        [self.tableView.superview sendSubviewToBack:self.noDataView];
+    }
+    
+    UIImage *image = [self.noDataRoundedBackground.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.noDataRoundedBackground.image = image;
+    self.noDataRoundedBackground.tintColor = [OTAppAppearance colorForNoDataPlacholderImage];
+    self.noDataTitle.textColor = [ApplicationTheme shared].titleLabelColor;
+    self.noDataSubtitle.textColor = [OTAppAppearance colorForNoDataPlacholderText];
+    
+    if (self.currentFilter.isUnread) {
+        self.noDataTitle.text = OTLocalizedString(@"no_unread_messages_title");
+        self.noDataSubtitle.hidden = YES;
+    } else {
+        self.noDataTitle.text = OTLocalizedString(@"no_messages_title");
+        self.noDataSubtitle.hidden = NO;
+    }
 }
 
 @end

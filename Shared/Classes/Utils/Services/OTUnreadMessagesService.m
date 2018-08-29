@@ -47,6 +47,10 @@
 }
 
 - (void)removeUnreadMessages:(NSNumber *)feedId {
+    if (!feedId) {
+        return;
+    }
+    
     NSMutableArray *unreadMessages = [self getUnreadMessages];
     OTUnreadMessageCount *unreadMessageFound = [self findIn:unreadMessages byFeedId:feedId];
     if( unreadMessageFound != nil) {
@@ -54,6 +58,7 @@
         [self saveUnreadMessages:unreadMessages];
     }
     NSDictionary* notificationInfo = @{ kNotificationUpdateBadgeCountKey: @(unreadMessages.count), kNotificationUpdateBadgeFeedIdKey:feedId};
+
     [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:notificationInfo];
 }
 

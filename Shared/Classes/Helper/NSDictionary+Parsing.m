@@ -229,6 +229,7 @@ static NSDateFormatter * dateFormatter;
 
 /********************************************************************************/
 #pragma mark - NSURL
+
 - (CLLocation *)locationForKey:(NSString *)key
                withLatitudeKey:(NSString *)latitudeKey
                andLongitudeKey:(NSString *)longitudeKey

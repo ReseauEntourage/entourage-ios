@@ -9,13 +9,26 @@
 #import "OTGeolocationDeniedViewController.h"
 #import "OTLocationManager.h"
 #import "NSNotification+entourage.h"
+#import "entourage-Swift.h"
 
 @implementation OTGeolocationDeniedViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.activateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    [self.ignoreButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    self.titleLabel.text = [OTAppAppearance notificationsNeedDescription];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationAuthorizationChanged:) name: kNotificationLocationAuthorizationChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(locationAuthorizationChanged:)
+                                                 name: kNotificationLocationAuthorizationChanged
+                                               object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -29,11 +42,15 @@
     [self performSegueWithIdentifier:@"GrantedGeoSegue" sender:self];
 }
 
+- (IBAction)ignoreGeolocation {
+    [self performSegueWithIdentifier:@"GrantedGeoSegue" sender:self];
+}
+
 #pragma mark - private methods
 
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
     BOOL allowed = [notification readAllowedLocation];
-    if(allowed) {
+    if (allowed) {
         [OTLogger logEvent:@"Screen04_GoEnableGeolocView"];
         [self performSegueWithIdentifier:@"GrantedGeoSegue" sender:self];
     }

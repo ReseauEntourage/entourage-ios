@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
+#import <SWRevealViewController/SWRevealViewController.h>
+
 #import "UIViewController+menu.h"
 #import "UIBarButtonItem+Badge.h"
 #import "OTUnreadMessagesService.h"
 #import "OTConsts.h"
-
-// Controller
-#import "SWRevealViewController.h"
+#import "entourage-Swift.h"
 
 @implementation UIViewController (menu)
 
@@ -62,13 +62,14 @@
         
         [self.navigationController.navigationBar addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         [self.navigationItem setRightBarButtonItem:menuButton];
-        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        
+        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     }
     return menuButton;
 }
 
 - (UIBarButtonItem *)setupChatsButtonWithTarget:(id)target andSelector:(SEL)selector {
-    UIImage *chatsImage = [[UIImage imageNamed:@"discussion"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *chatsImage = [[UIImage imageNamed:@"discussion"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0,0,chatsImage.size.width, chatsImage.size.height);
     [button setBackgroundImage:chatsImage forState:UIControlStateNormal];
@@ -79,35 +80,63 @@
     return chatButton;
 }
 
+- (UIBarButtonItem*)setupCloseModalWithImageNamed:(NSString *)imageName applyTintColor:(BOOL)useTintColor {
+    if (useTintColor) {        
+        UIImage *menuImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
+        menuButton.image = menuImage;
+        menuButton.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+        [menuButton setTarget:self];
+        [menuButton setAction:@selector(dismissModal)];
+        
+        [self.navigationItem setLeftBarButtonItem:menuButton];
+        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+        
+        return  menuButton;
+    }
+    
+    return  [self setupCloseModalWithImageNamed:imageName];
+}
+
 - (UIBarButtonItem*)setupCloseModalWithImageNamed:(NSString *)imageName {
-    UIImage *menuImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *menuImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
-    [menuButton setImage:menuImage];
+    menuButton.image = menuImage;
+    menuButton.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     [menuButton setTarget:self];
     [menuButton setAction:@selector(dismissModal)];
     
     [self.navigationItem setLeftBarButtonItem:menuButton];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+    
     return  menuButton;
 }
 
 - (UIBarButtonItem*)setupCloseModal {
-    return [self setupCloseModalWithImageNamed:@"close.png"];
+    return [self setupCloseModalWithImageNamed:@"close" applyTintColor:YES];
+}
+
+- (UIBarButtonItem*)setupCloseModalWithTintColor {
+    return [self setupCloseModalWithImageNamed:@"close" applyTintColor:YES];
 }
 
 - (UIBarButtonItem *)setupCloseModalWithTarget:(id)target andSelector:(SEL)action {
-    return [self setupCloseModalWithImageNamed:@"close.png" target:target andSelector:action];
+    return [self setupCloseModalWithImageNamed:@"close" target:target andSelector:action];
+}
+
+- (UIBarButtonItem *)setupCloseModalWithTintColorAndTarget:(id)target andSelector:(SEL)action {
+    return [self setupCloseModalWithTitnColorAndImageNamed:@"close" target:target andSelector:action];
 }
 
 - (UIBarButtonItem *)setupCloseModalTransparent {
-    return [self setupCloseModalWithImageNamed:@"whiteClose.png"];
+    return [self setupCloseModalWithImageNamed:@"whiteClose"];
 }
 
 - (void)setupLogoImageWithTarget:(id)target andSelector:(SEL)action {
-    UIImage *image = [UIImage imageNamed:@"logo"];
+    UIImage *image = [OTAppAppearance applicationLogo];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0,0,image.size.width, image.size.height);
-    [button setBackgroundImage:image forState:UIControlStateNormal];
+    [button setImage:image forState:UIControlStateNormal];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = button;
 }
@@ -120,6 +149,15 @@
                                             target:(id)target
                                        andSelector:(SEL)action {
     UIBarButtonItem *menuButton = [self setupCloseModalWithImageNamed:imageName];
+    [menuButton setTarget:target];
+    [menuButton setAction:action];
+    return  menuButton;
+}
+
+- (UIBarButtonItem *)setupCloseModalWithTitnColorAndImageNamed:(NSString *)imageName
+                                            target:(id)target
+                                       andSelector:(SEL)action {
+    UIBarButtonItem *menuButton = [self setupCloseModalWithImageNamed:imageName applyTintColor:YES];
     [menuButton setTarget:target];
     [menuButton setAction:action];
     return  menuButton;

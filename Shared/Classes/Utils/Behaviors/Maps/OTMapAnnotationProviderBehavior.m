@@ -9,6 +9,7 @@
 #import "OTMapAnnotationProviderBehavior.h"
 #import "OTFeedItemFactory.h"
 #import "OTMapHandlerDelegate.h"
+#import "OTEntourageAnnotation.h"
 
 @interface OTMapAnnotationProviderBehavior () <MKMapViewDelegate>
 
@@ -30,22 +31,32 @@
         return;
     }
     id<MKAnnotation> startAnnotation = [mapHandler annotationFor:startPoint];
-    if(startAnnotation)
+    if (startAnnotation) {
         [self.map addAnnotation:[mapHandler annotationFor:startPoint]];
+    }
     [self.map setRegion:MKCoordinateRegionMakeWithDistance(startPoint, 1000, 1000)];
 }
 
 - (void)drawData {
     id<OTMapHandlerDelegate> mapHandler = [[OTFeedItemFactory createFor:self.feedItem] getMapHandler];
     id<MKOverlay> overlay = [mapHandler newsFeedOverlayData];
-    if(overlay)
+    if (overlay) {
         [self.map addOverlay:overlay];
+    }
 }
 
 #pragma mark - MKMapViewDelegate
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
     return [[[OTFeedItemFactory createFor:self.feedItem] getMapHandler] newsFeedOverlayRenderer:overlay];
+}
+
+- (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[OTEntourageAnnotation class]]) {
+        return [(OTEntourageAnnotation*)annotation annotationView];
+    }
+    
+    return nil;
 }
 
 @end

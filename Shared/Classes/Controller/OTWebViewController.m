@@ -11,8 +11,9 @@
 #import "UIColor+entourage.h"
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTActivityProvider.h"
+#import "entourage-Swift.h"
 
 #define DISTANCE_ABOVE_NAVIGATION_BAR 65
 
@@ -61,7 +62,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
     
     [self configureUIBarButtonItems];
     [self loadUrlWithString:self.urlString];
@@ -72,6 +72,8 @@
         NSURL *url = [NSURL URLWithString:self.urlString];
         [self updateTitle:url];
     }
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (UINavigationItem*)navigationItem {
@@ -159,16 +161,20 @@
 
 - (void)configureUIBarButtonItems {
     UIImage *backImage = [[UIImage imageNamed:@"back.png"]
-                          imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                          imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] init];
     [backButton setImage:backImage];
     [backButton setTarget:self];
     [backButton setAction:@selector(closeWebview)];
+    backButton.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
     [self.navigationItem setLeftBarButtonItem:backButton];
     
     NSMutableArray *rightButtons = [NSMutableArray new];
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
-    [more setImage:[UIImage imageNamed:@"more"]
+    more.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
+    UIImage *moreImage = [[UIImage imageNamed:@"more"]
+                          imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [more setImage:moreImage
           forState:UIControlStateNormal];
     [more addTarget:self
              action:@selector(showOptions)
@@ -241,12 +247,14 @@
 
 - (void)displayAlertWithActions:(NSArray<UIAlertAction*> *)actions {
     UIAlertController *alert = [[UIAlertController alloc] init];
-    for(UIAlertAction *action in actions)
+    for (UIAlertAction *action in actions) {
         [alert addAction:action];
+    }
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"closeAlert")
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:defaultAction];
+    
     [self presentViewController:alert animated:NO completion:nil];
 }
 

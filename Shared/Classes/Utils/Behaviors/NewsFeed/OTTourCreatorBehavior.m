@@ -8,7 +8,7 @@
 
 #import "OTTourCreatorBehavior.h"
 #import "OTTour.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTConsts.h"
 #import "OTTourService.h"
 #import "OTLocationManager.h"
@@ -79,11 +79,13 @@
 //        return;
 //    }
     OTTourPoint *lastTourPoint = self.tour.tourPoints.lastObject;
-    if(self.tourPointsToSend.count > 0)
+    if (self.tourPointsToSend.count > 0) {
         lastTourPoint = self.tourPointsToSend.lastObject;
+    }
     CLLocation *lastLocationToSend = [self locationFromTourPoint:lastTourPoint];
     OTTourPoint *lastPoint = [self addTourPointFromLocation:self.lastLocation toLastLocation:lastLocationToSend];
     [self updateTourPointsToSendIfNeeded:lastPoint];
+    
     [SVProgressHUD show];
     [self sendTourPointsWithSuccess:^() {
         [SVProgressHUD dismiss];
@@ -134,6 +136,7 @@
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour: self.tour];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.delegate tourDataUpdated];
+    
     return tourPoint;
 }
 
@@ -143,7 +146,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)sendTourPointsWithSuccess:(void(^)())success orFailure:(void(^)(NSError *))failure {
+- (void)sendTourPointsWithSuccess:(void(^)(void))success orFailure:(void(^)(NSError *))failure {
     NSArray *sentPoints = [NSArray arrayWithArray:self.tourPointsToSend];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[OTTourService new] sendTourPoint:self.tourPointsToSend

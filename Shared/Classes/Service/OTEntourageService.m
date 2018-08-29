@@ -65,20 +65,18 @@ extern NSString *kUsers;
      ];
 }
 
-- (void)getEntourageWithId:(NSNumber *)entourageId
+- (void)getEntourageWithId:(NSNumber *)uid
           withSuccess:(void(^)(OTEntourage *))success
               failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, entourageId, TOKEN];
+    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, uid];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
      andParameters:parameters
-     andSuccess:^(id responseObject)
-     {
-         if (success)
-         {
+     andSuccess:^(id responseObject) {
+         if (success) {
              NSDictionary *entDictionary = [(NSDictionary*)responseObject objectForKey:@"entourage"];
              OTEntourage *ent = [[OTEntourage alloc] initWithDictionary:entDictionary];
              success(ent);
@@ -93,11 +91,11 @@ extern NSString *kUsers;
      }];
 }
 
-- (void)getEntourageWithStringId:(NSString *)entourageId
+- (void)getEntourageWithStringId:(NSString *)uuid
                withSuccess:(void(^)(OTEntourage *))success
                    failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, entourageId];
+    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_BY_ID, uuid];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     
     [[OTHTTPRequestManager sharedInstance]
@@ -125,7 +123,7 @@ extern NSString *kUsers;
               success:(void(^)(OTFeedItemJoiner *))success
               failure:(void (^)(NSError *)) failure
 {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_REQUEST, entourage.uid, TOKEN];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_REQUEST, entourage.uuid, TOKEN];
     NSLog(@"Join entourage request: %@", url);
     CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
     CLLocationDistance distance = [currentLocation distanceFromLocation:entourage.location];
@@ -161,7 +159,7 @@ extern NSString *kUsers;
               failure:(void (^)(NSError *)) failure
 {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourage.uid, currentUser.sid, TOKEN];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourage.uuid, currentUser.sid, TOKEN];
     NSDictionary *parameters = @{@"request": @{@"message":message}};
     NSLog(@"JoinMessage entourage request: %@", url);
     
@@ -172,7 +170,7 @@ extern NSString *kUsers;
          {
              NSDictionary *data = responseObject;
              NSDictionary *joinerDictionary = [data objectForKey:@"user"];
-             OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc ]initWithDictionary:joinerDictionary];
+             OTFeedItemJoiner *joiner = [[OTFeedItemJoiner alloc] initWithDictionary:joinerDictionary];
              
              if (success)
              {
@@ -190,12 +188,17 @@ extern NSString *kUsers;
 }
 
 - (void)closeEntourage:(OTEntourage *)entourage
-      withSuccess:(void (^)(OTEntourage *))success
+           withOutcome:(BOOL)outcome
+      success:(void (^)(OTEntourage *))success
           failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_UPDATE, entourage.uid, TOKEN];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_UPDATE, entourage.uuid, TOKEN];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    parameters[@"entourage"] = [entourage dictionaryForWebService];
+    NSMutableDictionary *entourageDictionary = [[NSMutableDictionary alloc] initWithDictionary:[entourage dictionaryForWebService]];
+    
+    entourageDictionary[@"outcome"] = @{@"success": @(outcome)};
+    parameters[@"entourage"] = entourageDictionary;
+    
     [[OTHTTPRequestManager sharedInstance]
          PUTWithUrl:url
          andParameters:parameters
@@ -219,12 +222,12 @@ extern NSString *kUsers;
 
 - (void)updateEntourageJoinRequestStatus:(NSString *)status
                                  forUser:(NSNumber*)userID
-                            forEntourage:(NSNumber*)entourageID
-                             withSuccess:(void (^)())success
+                            forEntourage:(NSString *)uuid
+                             withSuccess:(void (^)(void))success
                                  failure:(void (^)(NSError *))failure
 {
     
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourageID, userID, TOKEN];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, uuid, userID, TOKEN];
     NSDictionary *parameters = @{@"user":@{@"status":status}};
     
     [[OTHTTPRequestManager sharedInstance]
@@ -248,12 +251,12 @@ extern NSString *kUsers;
 }
 
 - (void)rejectEntourageJoinRequestForUser:(NSNumber *)userID
-                             forEntourage:(NSNumber *)entourageID
-                              withSuccess:(void (^)())success
+                             forEntourage:(NSString *)uuid
+                              withSuccess:(void (^)(void))success
                                   failure:(void (^)(NSError *))failure
 {
     
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, entourageID, userID, TOKEN];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, uuid, userID, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
      DELETEWithUrl:url
@@ -275,11 +278,11 @@ extern NSString *kUsers;
      ];
 }
 
-- (void)entourageMessagesForEntourage:(NSNumber *)entourageID
+- (void)entourageMessagesForEntourage:(NSString *)uuid
                           WithSuccess:(void(^)(NSArray *entourageMessages))success
                               failure:(void (^)(NSError *)) failure
 {
-    NSString *url = [NSString stringWithFormat:@API_URL_ENTOURAGE_GET_MESSAGES, entourageID, TOKEN];
+    NSString *url = [NSString stringWithFormat:@API_URL_ENTOURAGE_GET_MESSAGES, uuid, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
@@ -308,7 +311,7 @@ extern NSString *kUsers;
             failure:(void (^)(NSError *)) failure
 {
     
-    NSString *url = [NSString stringWithFormat:@API_URL_ENTOURAGE_SEND_MESSAGE, entourage.uid, TOKEN];
+    NSString *url = [NSString stringWithFormat:@API_URL_ENTOURAGE_SEND_MESSAGE, entourage.uuid, TOKEN];
     
     NSDictionary *messageDictionary = @{@"chat_message" : @{@"content": message}};
     
@@ -338,9 +341,9 @@ extern NSString *kUsers;
 }
 
 - (void)quitEntourage:(OTEntourage *)entourage
-         success:(void (^)())success
+         success:(void (^)(void))success
          failure:(void (^)(NSError *error))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_QUIT, entourage.uid, USER_ID, TOKEN];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_QUIT, entourage.uuid, USER_ID, TOKEN];
     [[OTHTTPRequestManager sharedInstance]
      DELETEWithUrl:url
      andParameters:nil
@@ -359,7 +362,9 @@ extern NSString *kUsers;
 - (void)entourageUsers:(OTEntourage *)entourage
                success:(void (^)(NSArray *))success
                failure:(void (^)(NSError *))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_TOUR_FEED_ITEM_USERS, kEntourages, entourage.uid,  TOKEN];
+    NSString *format = @"%@/%@/users.json?context=group_feed&token=%@";
+    NSString *url = [NSString stringWithFormat:format, kEntourages, entourage.uuid, TOKEN];
+    
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
      andParameters:nil
@@ -367,8 +372,9 @@ extern NSString *kUsers;
      {
          NSDictionary *data = responseObject;
          NSArray *joiners = [data objectForKey:kUsers];
-         if (success)
+         if (success) {
              success([OTFeedItemJoiner arrayForWebservice:joiners]);
+         }
      }
      andFailure:^(NSError *error)
      {
@@ -377,10 +383,10 @@ extern NSString *kUsers;
      }];    
 }
 
-- (void)readEntourageMessages:(NSNumber *)entourageID
-                 success:(void (^)())success
+- (void)readEntourageMessages:(NSString *)uuid
+                 success:(void (^)(void))success
                  failure:(void (^)(NSError *))failure {
-    NSString *url = [NSString stringWithFormat: @API_URL_ENTOURAGE_SET_READ_MESSAGES, entourageID, TOKEN];
+    NSString *url = [NSString stringWithFormat: @API_URL_ENTOURAGE_SET_READ_MESSAGES, uuid, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
      PUTWithUrl:url
@@ -404,11 +410,11 @@ extern NSString *kUsers;
 
 - (void)retrieveEntourage:(OTEntourage *)entourage
                  fromRank:(NSNumber *)rank
-                  success:(void (^)())success
+                  success:(void (^)(void))success
                   failure:(void (^)(NSError *))failure {
     CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
     CLLocationDistance distance = [currentLocation distanceFromLocation:entourage.location];
-    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_RETRIEVE, entourage.uid, (int)distance/1000, [rank stringValue], TOKEN];
+    NSString *url = [NSString stringWithFormat: API_URL_ENTOURAGE_RETRIEVE, entourage.uuid, (int)distance/1000, [rank stringValue], TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url

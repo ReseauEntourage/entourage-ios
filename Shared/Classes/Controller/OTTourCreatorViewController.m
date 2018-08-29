@@ -15,11 +15,20 @@
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *typeButtons;
 @property (nonatomic, strong) NSString *currentTourType;
 @property (nonatomic, strong) IBOutlet UIView *contentView;
+@property (nonatomic, strong) IBOutlet UILabel *selectTypeTitleLabel;
 
 @end
 
 @implementation OTTourCreatorViewController
 #pragma mark - Private
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.contentView.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.contentView.layer setShadowOpacity:0.5];
+    [self.contentView.layer setShadowRadius:4.0];
+    [self.contentView.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+}
 
 #pragma mark - Utils
 
@@ -78,13 +87,16 @@
 }
 
 - (IBAction)dismissTourCreatpr:(id)sender {
+    [OTAppState hideTabBar:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)viewDidTap:(UITapGestureRecognizer *)recognizer {
     CGPoint point = [recognizer locationInView:self.view];
-    if(point.y < self.contentView.frame.origin.y)
+    if (point.y < self.selectTypeTitleLabel.frame.origin.y) {
+        [OTAppState hideTabBar:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end

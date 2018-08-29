@@ -9,10 +9,11 @@
 #import "OTNextStatusButtonBehavior.h"
 #import "OTFeedItemFactory.h"
 #import "OTConsts.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTTour.h"
 #import "OTConfirmCloseViewController.h"
 #import "OTCloseReason.h"
+#import "OTTourStateTransition.h"
 
 @interface OTNextStatusButtonBehavior () <OTConfirmCloseProtocol>
 
@@ -38,42 +39,47 @@
     NSString *title = nil;
     SEL selector = nil;
     self.btnNextState.hidden = YES;
-    switch (currentState) {
-        case FeedItemStateOngoing:
-            title = OTLocalizedString(@"item_option_close");
-            selector = @selector(doStopFeedItem);
-            self.btnNextState.hidden = NO;
-            break;
-        case FeedItemStateOpen:
-            title = OTLocalizedString(@"item_option_freeze");
-            selector = @selector(doCloseFeedItemWithReason:);
-            self.btnNextState.hidden = NO;
-            break;
-        case FeedItemStateClosed:
-            if ([self.feedItem isKindOfClass:[OTTour class]]) {
+    
+    if ([OTAppConfiguration supportsClosingFeedAction:self.feedItem]) {
+                
+        switch (currentState) {
+            case FeedItemStateOngoing:
+                title = OTLocalizedString(@"item_option_close");
+                selector = @selector(doStopFeedItem);
+                self.btnNextState.hidden = NO;
+                break;
+            case FeedItemStateOpen:
                 title = OTLocalizedString(@"item_option_freeze");
                 selector = @selector(doCloseFeedItemWithReason:);
                 self.btnNextState.hidden = NO;
-            }
-            break;
-        case FeedItemStateJoinAccepted:
-            title = OTLocalizedString(@"item_option_quit");
-            selector = @selector(doQuitFeedItem);
-            self.btnNextState.hidden = NO;
-            break;
-        case FeedItemStateJoinNotRequested:
-            title = OTLocalizedString(@"join");
-            selector = @selector(doJoinFeedItem);
-            self.btnNextState.hidden = NO;
-            break;
-        case FeedItemStateJoinPending:
-            title = OTLocalizedString(@"item_cancel_join");
-            selector = @selector(doCancelJoinRequest);
-            self.btnNextState.hidden = NO;
-            break;
-        default:
-            break;
-    }
+                break;
+            case FeedItemStateClosed:
+                if ([self.feedItem isKindOfClass:[OTTour class]]) {
+                    title = OTLocalizedString(@"item_option_freeze");
+                    selector = @selector(doCloseFeedItemWithReason:);
+                    self.btnNextState.hidden = NO;
+                }
+                break;
+            case FeedItemStateJoinAccepted:
+                title = OTLocalizedString(@"item_option_quit");
+                selector = @selector(doQuitFeedItem);
+                self.btnNextState.hidden = NO;
+                break;
+            case FeedItemStateJoinNotRequested:
+                title = OTLocalizedString(@"join");
+                selector = @selector(doJoinFeedItem);
+                self.btnNextState.hidden = NO;
+                break;
+            case FeedItemStateJoinPending:
+                title = OTLocalizedString(@"item_cancel_join");
+                selector = @selector(doCancelJoinRequest);
+                self.btnNextState.hidden = NO;
+                break;
+            default:
+                break;
+        }
+    } 
+    
     [self.btnNextState addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
     [self.btnNextState setTitle:title forState:UIControlStateNormal];
 }
@@ -106,10 +112,14 @@
 }
 
 - (void)doCloseFeedItemWithReason: (OTCloseReason)reason {
-    if([self.feedItem isKindOfClass:[OTTour class]])
+    if ([self.feedItem isKindOfClass:[OTTour class]]) {
         [self feedItemClosedWithReason:reason];
-    else
-        [self.owner performSegueWithIdentifier:@"ConfirmCloseSegue" sender:self];
+    }
+    else {
+        [OTAppState showClosingConfirmationForFeedItem:self.feedItem
+                                        fromController:self.owner
+                                                sender:self];
+    }
 }
 
 - (void)doQuitFeedItem {
@@ -118,8 +128,9 @@
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [SVProgressHUD dismiss];
         [self.owner dismissViewControllerAnimated:NO completion:^{
-            if(self.delegate)
+            if (self.delegate) {
                 [self.delegate quitedFeedItem];
+            }
         }];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
@@ -129,6 +140,7 @@
 - (void)doCancelJoinRequest {
     [OTLogger logEvent:@"ExitEntourageConfirm"];
     [SVProgressHUD show];
+    [OTAppState hideTabBar:NO];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] quitWithSuccess:^() {
         [SVProgressHUD dismiss];
         [OTLogger logEvent:@"CancelJoinRequest"];
@@ -148,16 +160,24 @@
 
 #pragma mark - OTConfirmCloseProtocol
 
-- (void)feedItemClosedWithReason: (OTCloseReason) reason{
+- (void)feedItemClosedWithReason:(OTCloseReason)reason {
     [OTLogger logEvent:@"CloseEntourageConfirm"];
-    if(reason == OTCloseReasonHelpClose) {
+    
+    if (reason == OTCloseReasonHelpClose) {
         [self dismissOnClose:reason];
         return;
     }
+    
+    BOOL outcome = (reason == OTCloseReasonSuccesClose) ? YES : NO;
+    
     [SVProgressHUD show];
-    [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] closeWithSuccess:^(BOOL isTour) {
-        [SVProgressHUD dismiss];
-        [self dismissOnClose:reason];
+
+    id stateTransition = [[OTFeedItemFactory createFor:self.feedItem] getStateTransition];
+    [stateTransition closeWithOutcome:outcome
+        success:^(BOOL isTour) {
+            [SVProgressHUD dismiss];
+            [self dismissOnClose:reason];
+        
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];
@@ -165,8 +185,9 @@
 
 - (void)dismissOnClose:(OTCloseReason) reason {
     [self.owner dismissViewControllerAnimated:NO completion:^{
-        if(self.delegate)
+        if (self.delegate) {
             [self.delegate closedFeedItemWithReason: reason];
+        }
     }];
 }
 

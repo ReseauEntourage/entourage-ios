@@ -6,12 +6,13 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
 #import "OTPhoneViewController.h"
-#import "IQKeyboardManager.h"
 #import "UITextField+indentation.h"
 #import "UIView+entourage.h"
 #import "OTOnboardingService.h"
-#import "SVProgressHUD.h"
 #import "OTConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "UIScrollView+entourage.h"
@@ -57,13 +58,18 @@
     self.countryCodeTxtField.floatingLabelActiveTextColor = [UIColor clearColor];
     self.pickerDataSource = [OTCountryCodePickerViewDataSource sharedInstance];
     self.codeCountry = @"+33";
+    
+    self.countryCodePicker.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
+    [self.validateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [OTLogger logEvent:@"Screen30_2InputPhoneView"];
     self.countryCodeTxtField.inputView = self.pickerView;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+   
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -98,7 +104,7 @@
                 UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
                 [alert addAction:defaultAction];
                 UIAlertAction *openLoginAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"already_subscribed") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    [[OTDeepLinkService new] navigateToLogin];
+                    [OTAppState navigateToLoginScreen:nil];
                 }];
                 [alert addAction:openLoginAction];
                 [self presentViewController:alert animated:YES completion:nil];

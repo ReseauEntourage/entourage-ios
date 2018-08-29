@@ -24,7 +24,7 @@
 #import "OTAuthService.h"
 
 // Loader
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @implementation OTSWRevealViewController
 
@@ -32,9 +32,10 @@
 {
 	[super viewDidAppear:animated];
     [self customizeSlideOutMenu];
+    
 	if (![[NSUserDefaults standardUserDefaults] currentUser])
 	{
-		[UIStoryboard showStartup];
+        [OTAppState navigateToStartupScreen];
 	}
 }
 

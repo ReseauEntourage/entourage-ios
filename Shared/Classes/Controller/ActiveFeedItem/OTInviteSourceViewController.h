@@ -10,7 +10,7 @@
 
 @protocol InviteSourceDelegate <NSObject>
 
-- (void)inviteContacts;
+- (void)inviteContactsFromViewController:(UIViewController*)viewController;
 - (void)inviteByPhone;
 - (void)share;
 
@@ -24,6 +24,9 @@
 
 @interface OTInviteSourceViewController : UIViewController
 
+@property(nonatomic, weak) IBOutlet UIView *popupContainerView;
+@property(nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
+@property(nonatomic) IBOutletCollection(UIImageView) NSArray *icons;
 @property(nonatomic, weak) id<InviteSourceDelegate> delegate;
 
 @end

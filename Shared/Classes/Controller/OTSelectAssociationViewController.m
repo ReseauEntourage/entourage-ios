@@ -13,8 +13,9 @@
 #import "OTAssociationsSourceBehavior.h"
 #import "OTTableDataSourceBehavior.h"
 #import "OTAssociation.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "OTAssociationDetailsViewController.h"
+#import "entourage-Swift.h"
 
 @interface OTSelectAssociationViewController ()
 
@@ -41,7 +42,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO];
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 #pragma mark - Associations table view delegate implementation
@@ -58,14 +60,12 @@
 #pragma mark - private methods
 
 - (void)setupToolbarButtons {
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+    
     UIBarButtonItem *saveButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"save").capitalizedString
                                                         withTarget:self
                                                          andAction:@selector(saveAssociation)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[UIColor appOrangeColor]];
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:saveButton];
 }
 

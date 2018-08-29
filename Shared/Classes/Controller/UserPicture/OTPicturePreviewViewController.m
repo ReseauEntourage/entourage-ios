@@ -9,7 +9,7 @@
 #import "OTPicturePreviewViewController.h"
 #import "OTUserEditViewController.h"
 #import "UIStoryboard+entourage.h"
-#import "SVProgressHUD.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "UIView+entourage.h"
 #import "OTPictureUploadService.h"
 #import "UIColor+entourage.h"
@@ -18,6 +18,8 @@
 #import "NSUserDefaults+OT.h"
 #import "NSUserDefaults+OT.h"
 #import "UIImage+processing.h"
+#import "OTGeolocationRightsViewController.h"
+#import "entourage-Swift.h"
 
 #define MaxImageSize 300
 
@@ -33,6 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 
     self.image = [self.image toSquare];
     [self.imageView setImage:self.image];
@@ -55,17 +59,29 @@
     [UIImagePNGRepresentation(finalImage) writeToFile:filePath atomically:YES];
 
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    [[OTPictureUploadService new] uploadPicture:finalImage withSuccess:^(NSString *pictureName) {
+    [[OTPictureUploadService new] uploadPicture:finalImage
+                                    withSuccess:^(NSString *pictureName) {
         currentUser.avatarKey = pictureName;
         [[OTAuthService new] updateUserInformationWithUser:currentUser success:^(OTUser *user) {
+            
             // TODO phone is not in response so need to restore it manually
             user.phone = currentUser.phone;
             [NSUserDefaults standardUserDefaults].currentUser = user;
             self.scrollView.delegate = nil;
-            if([NSUserDefaults standardUserDefaults].isTutorialCompleted)
+            
+            if (([OTAppConfiguration shouldShowIntroTutorial] &&
+                [NSUserDefaults standardUserDefaults].isTutorialCompleted &&
+                 [currentUser hasActionZoneDefined]) ||
+                self.isEditingPictureForCurrentUser) {
                 [self popToProfile];
-            else
+                
+            } else if (![currentUser hasActionZoneDefined]) {
                 [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
+                
+            } else {
+                [OTAppState navigateToPermissionsScreens];
+            }
+                
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationProfilePictureUpdated object:self];
             [SVProgressHUD dismiss];
         }
@@ -73,17 +89,31 @@
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];
             NSLog(@"ERR: something went wrong on user picture: %@", error.localizedDescription);
         }];
+                                        
     } orError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_photo_change_error")];
     }];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"PreviewToGeoSegue"]) {
+        OTGeolocationRightsViewController *controller = (OTGeolocationRightsViewController *)segue.destinationViewController;
+        controller.isShownOnStartup = YES;
+    }
+}
+
 - (void)popToProfile {
+    BOOL profileFound = NO;
     for (UIViewController* viewController in self.navigationController.viewControllers) {
         if ([viewController isKindOfClass:[OTUserEditViewController class]]) {
             [self.navigationController popToViewController:viewController animated:YES];
+            profileFound = YES;
             break;
         }
+    }
+    
+    if (!profileFound) {
+        [OTAppState navigateToAuthenticatedLandingScreen];
     }
 }
 - (UIImage*)cropVisibleArea {

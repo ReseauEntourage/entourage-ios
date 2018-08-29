@@ -6,17 +6,48 @@
 //  Copyright © 2018 OCTO Technology. All rights reserved.
 //
 
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <SimpleKeychain/A0SimpleKeychain.h>
+
 #import "OTAppConfiguration.h"
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
+#import "OTVersionInfo.h"
+#import "OTDeepLinkService.h"
+#import "OTLocationManager.h"
+#import "OTUser.h"
+#import "NSUserDefaults+OT.h"
+#import "UIStoryboard+entourage.h"
+#import "OTPushNotificationsService.h"
+#import "OTPictureUploadService.h"
+#import "OTAuthService.h"
+#import "OTDeepLinkService.h"
+#import "OTMainViewController.h"
+#import "OTOngoingTourService.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import "UIColor+entourage.h"
+#import "OTUnreadMessagesService.h"
+#import "OTLoginViewController.h"
+#import "OTLostCodeViewController.h"
+#import "OTPhoneViewController.h"
+#import "OTCodeViewController.h"
 #import "OTAppDelegate.h"
+#import "UIStoryboard+entourage.h"
+#import "OTMenuViewController.h"
+#import "OTAppState.h"
+#import "OTMyEntouragesViewController.h"
+#import "UIImage+processing.h"
+#import "OTAPIConsts.h"
+#import <GooglePlaces/GooglePlaces.h>
+#import <GooglePlaces/GMSPlacesClient.h>
+#import "entourage-Swift.h"
 
 @import Firebase;
 
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 @interface OTAppConfiguration ()
-@property (nonatomic) OTPushNotificationsService *pushNotificationService;
 @end
 
 @implementation OTAppConfiguration
@@ -30,69 +61,48 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return sharedInstance;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.pushNotificationService = [OTPushNotificationsService new];
+        self.environmentConfiguration = [[EnvironmentConfigurationManager alloc] initWithBundleId:[[NSBundle mainBundle] bundleIdentifier]];
+    }
+    return self;
+}
+
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions {
 
+    [[OTDebugLog sharedInstance] setConsoleOutput];
+    
+#if !DEBUG
+    [self configureCrashReporting];
+    [self configureFirebase];
+#endif
+    
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    
     [self configurePushNotifcations];
+    [self configureAnalyticsWithOptions:launchOptions];
+    [self configurePhotoUploadingService];
+    [self configureGooglePlacesClient];
     
-    [OTAppConfiguration configureUIAppearance];
-    [OTAppConfiguration configureAnalyticsWithOptions:launchOptions];
-    [OTAppConfiguration configurePhotoUploadingService];
-    
-    [self launchApplicatioWithOptions:launchOptions];
+    [OTAppConfiguration configureApplicationAppearance];
+    [OTAppState launchApplicatioWithOptions:launchOptions];
     
     return YES;
 }
 
-- (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions
-{
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if (currentUser) {
-        if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
-            [[OTLocationManager sharedInstance] startLocationUpdates];
-            NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-            if(pnData) {
-                [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
-            }
-        }
-        else {
-            [self showUserProfile];
-        }
-    }
-    else
-    {
-        [self showStartup];
-    }
-}
-
 - (void)popToLogin {
-    OTPushNotificationsService *pnService = [OTPushNotificationsService new];
-    [SVProgressHUD show];
-    [pnService clearTokenWithSuccess:^() {
-        [SVProgressHUD dismiss];
-        [self clearUserData];
-    } orFailure:^(NSError *error) {
-        [SVProgressHUD dismiss];
-        [self clearUserData];
-    }];
+    [OTAppState returnToLogin];
 }
 
-- (void)showUserProfile
-{
-    [UIStoryboard showUserProfileDetails];
-}
-
-- (void)showStartup
-{
-    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
-    appDelegate.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [UIStoryboard showStartup];
-}
-
-- (void)updateBadge {
+- (void)updateBadge: (NSNotification *) notification {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[OTUnreadMessagesService new] totalCount].integerValue];
 }
 
-- (void)clearUserData {
++ (void)clearUserData {
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
     [[NSUserDefaults standardUserDefaults] setTourPoints:nil];
@@ -101,8 +111,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPassword];
-    
-    [UIStoryboard showStartup];
 }
 
 #pragma mark - Application State
@@ -143,23 +151,27 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)handleAppLaunchFromNotificationCenter:(NSDictionary *)userInfo {
     OTPushNotificationsData *pnData = [OTPushNotificationsData createFrom:userInfo];
     if ([pnData.notificationType isEqualToString:@APNOTIFICATION_JOIN_REQUEST]) {
-        [[OTDeepLinkService new] navigateTo:pnData.joinableId withType:pnData.joinableType];
+        [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
     }
 }
 
 + (BOOL)handleApplication:(UIApplication *)application openURL:(NSURL *)url
 {
-#if BETA
-    if ([[url scheme] isEqualToString:@"entourage-staging"]) {
-        [[OTDeepLinkService new] handleDeepLink:url];
-        return YES;
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
+        
+        if ([[url scheme] isEqualToString:@"entourage-preprod"] ||
+            [[url scheme] isEqualToString:@"pfp-preprod"]) {
+            [[OTDeepLinkService new] handleDeepLink:url];
+            return YES;
+        }
+    } else {
+        if ([[url scheme] isEqualToString:@"entourage"] ||
+            [[url scheme] isEqualToString:@"pfp-prod"]) {
+            [[OTDeepLinkService new] handleDeepLink:url];
+            return YES;
+        }
     }
-#else
-    if ([[url scheme] isEqualToString:@"entourage"]) {
-        [[OTDeepLinkService new] handleDeepLink:url];
-        return YES;
-    }
-#endif
+
     return NO;
 }
 
@@ -168,9 +180,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         NSURL *url = userActivity.webpageURL;
-        //NSArray *arrayWithStrings = [url.absoluteString componentsSeparatedByString:@"/"];
-        //NSString *entourageId = arrayWithStrings.lastObject;
-        //[[OTDeepLinkService new] navigateTo:entourageId];
+
         [[OTDeepLinkService new] handleUniversalLink:url];
     }
     return true;
@@ -178,22 +188,59 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 #pragma mark - App Configurations
 
-+ (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions
+- (void)configurePushNotifcations
 {
-    [[OTDebugLog sharedInstance] setConsoleOutput];
-    
-#if !DEBUG
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin) name:[kLoginFailureNotification copy] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
+}
+
+- (void)configurePhotoUploadingService {
+    [OTPictureUploadService configure];
+}
+
+- (void)configureCrashReporting
+{
     [Fabric with:@[[Crashlytics class]]];
-    [FIRApp configure];
-#endif
+}
+
+- (void)configureGooglePlacesClient {
+    [GMSPlacesClient provideAPIKey:[self.environmentConfiguration GooglePlaceApiKey]];
+}
+
+- (void)configureFirebase
+{
+    NSString *firebaseConfigFileName = nil;
     
-    NSString *mixpanelToken = [ConfigurationManager shared].MixpanelToken;
+    switch ([OTAppConfiguration applicationType]) {
+        case ApplicationTypeVoisinAge:
+            firebaseConfigFileName = [self.environmentConfiguration runsOnStaging] ?
+            @"GoogleService-Info-social.entourage.pfpios.beta" :
+            @"GoogleService-Info-social.entourage.pfpios";
+            break;
+            
+        default:
+            firebaseConfigFileName = [self.environmentConfiguration runsOnStaging] ?
+            @"GoogleService-Info-social.entourage.ios.beta" :
+            @"GoogleService-Info";
+            break;
+    }
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:firebaseConfigFileName ofType:@"plist"];
+    FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:filePath];
+    
+    if (options) {
+        [FIRApp configureWithOptions:options];
+    }
+}
+
+- (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions
+{
+    NSString *mixpanelToken = self.environmentConfiguration.MixpanelToken;
+    
     [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
     [Mixpanel sharedInstance].enableLogging = YES;
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     mixpanel.minimumSessionDuration = 0;
-    [IQKeyboardManager sharedManager].enable = YES;
-    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
@@ -209,35 +256,176 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
 }
 
-- (void)configurePushNotifcations
-{
-    self.pushNotificationService = [OTPushNotificationsService new];
++ (UITabBarController*)configureMainTabBar {
+    NSInteger selectedIndex = MAP_TAB_INDEX;
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        selectedIndex = MESSAGES_TAB_INDEX;
+    }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin) name:[kLoginFailureNotification copy] object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge) name:[kUpdateBadgeCountNotification copy] object:nil];
+    UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:selectedIndex];
+    
+    return tabBarController;
 }
 
-+ (void)configureUIAppearance {
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleLightContent;
-    UINavigationBar.appearance.barTintColor = [UIColor whiteColor];
-    UINavigationBar.appearance.backgroundColor = [UIColor whiteColor];
++ (void)updateAppearanceForMainTabBar {
+
+    UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].delegate.window.rootViewController;
+    
+    [OTAppConfiguration configureTabBarAppearance:tabBarController];
+}
+
++ (UITabBarController*)configureMainTabBarWithDefaultSelectedIndex:(NSInteger)selectedIndex
+{
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    UIStoryboard *mainStoryboard = [UIStoryboard mainStoryboard];
+    
+    // Menu tab
+    id menuViewController;
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        menuViewController = [[OTPfpMenuViewController alloc] init];
+    }
+    else {
+        menuViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMenuViewControllerIdentifier"];
+    }
+    UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
+    menuNavController.tabBarItem.title = OTLocalizedString(@"menu");
+    menuNavController.tabBarItem.image = [[UIImage imageNamed:@"menu_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    menuNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"menu_tab_selected"];
+    
+    // Proximity Map Tab
+    OTMainViewController *mainMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
+    UINavigationController *mainMapNavController = [[UINavigationController alloc] initWithRootViewController:mainMapViewController];
+    mainMapNavController.tabBarItem.title = OTLocalizedString(@"à proximité");
+    mainMapNavController.tabBarItem.image = [[UIImage imageNamed:@"map_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    mainMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"map_tab_selected"];
+    
+    // Messages Tab
+    OTMyEntouragesViewController *messagesViewController = [[UIStoryboard myEntouragesStoryboard] instantiateViewControllerWithIdentifier:@"OTMyEntouragesViewController"];
+    UINavigationController *messagesNavController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
+    messagesNavController.tabBarItem.title = OTLocalizedString(@"messagerie");
+    messagesNavController.tabBarItem.image = [[UIImage imageNamed:@"messages_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    messagesNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"messages_tab_selected"];
+    
+    tabBarController.viewControllers = @[mainMapNavController, messagesNavController, menuNavController];
+    tabBarController.selectedIndex = selectedIndex;
+    
+    // Add top shadow above tab bar
+    tabBarController.tabBar.layer.shadowOffset = CGSizeMake(0, 0);
+    tabBarController.tabBar.layer.shadowRadius = 3;
+    tabBarController.tabBar.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    tabBarController.tabBar.layer.shadowOpacity = 0.3;
+
+    return tabBarController;
+}
+
++ (void)configureApplicationAppearance
+{
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
+    [[UINavigationBar appearance] setTranslucent:NO];
+    
+    UIColor *primaryNavigationBarTintColor = [UIColor appOrangeColor];
+    UIColor *secondaryNavigationBarTintColor = [UIColor whiteColor];
+    UIColor *backgroundThemeColor = [UIColor appOrangeColor];
+    UIColor *titleColor = [UIColor appGreyishBrownColor];
+    UIColor *subtitleColor = [UIColor appGreyishColor];
+    UIColor *tableViewBgColor = [UIColor groupTableViewBackgroundColor];
+    UIColor *addActionButtonColor = [UIColor appOrangeColor];
+    
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        backgroundThemeColor = [UIColor pfpBlueColor];
+        primaryNavigationBarTintColor = [UIColor pfpBlueColor];
+        secondaryNavigationBarTintColor = [UIColor whiteColor];
+        titleColor = [UIColor pfpGrayTextColor];
+        tableViewBgColor = [UIColor pfpTableBackgroundColor];
+        subtitleColor = [UIColor pfpSubtitleBlueColor];
+        addActionButtonColor = [UIColor pfpGreenColor];
+    }
+    
+    [[ApplicationTheme shared] setPrimaryNavigationBarTintColor:primaryNavigationBarTintColor];
+    [[ApplicationTheme shared] setSecondaryNavigationBarTintColor:secondaryNavigationBarTintColor];
+    [[ApplicationTheme shared] setBackgroundThemeColor:backgroundThemeColor];
+    [[ApplicationTheme shared] setTableViewBackgroundColor: tableViewBgColor];
+    [[ApplicationTheme shared] setTitleLabelColor: titleColor];
+    [[ApplicationTheme shared] setSubtitleLabelColor: subtitleColor];
+    [[ApplicationTheme shared] setAddActionButtonColor: addActionButtonColor];
+    
+    UINavigationBar.appearance.backgroundColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.barTintColor = primaryNavigationBarTintColor;
+    UINavigationBar.appearance.tintColor = secondaryNavigationBarTintColor;
+    
     UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
-    UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor grayColor] };
-    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0],
+    UIColor *navigationBarTextColor = [UIColor whiteColor];
+    UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : navigationBarTextColor };
+    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : navigationBarTextColor,
                                                           NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
     
     UIPageControl.appearance.backgroundColor = [UIColor whiteColor];
     UIPageControl.appearance.currentPageIndicatorTintColor = [UIColor appGreyishBrownColor];
-    
-#if BETA
-    UINavigationBar.appearance.barTintColor = [UIColor redColor];
-    UINavigationBar.appearance.tintColor = [UIColor redColor];
-    UINavigationBar.appearance.backgroundColor = [UIColor redColor];
-#endif
 }
 
-+ (void)configurePhotoUploadingService {
-    [OTPictureUploadService configure];
++ (void)configureTabBarAppearance:(UITabBarController*)tabBarController
+{
+    //UITabBar.appearance.backgroundColor = [[ApplicationTheme shared] backgroundThemeColor];
+    UITabBar.appearance.tintColor = [[ApplicationTheme shared] backgroundThemeColor];
+    UITabBar.appearance.barTintColor = [[ApplicationTheme shared] backgroundThemeColor];
+    UITabBar.appearance.translucent = NO;
+    
+    UITabBar *currentTabBar = tabBarController.tabBar;
+    CGSize size = CGSizeMake(currentTabBar.frame.size.width / currentTabBar.items.count, currentTabBar.frame.size.height);
+    currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
+    
+    for (UINavigationController *navController in tabBarController.viewControllers) {
+        [OTAppConfiguration configureNavigationControllerAppearance:navController];
+    }
+}
+
++ (void)configureMailControllerAppearance:(MFMailComposeViewController *)mailController {
+    mailController.navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    mailController.navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
+    mailController.navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    mailController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [[ApplicationTheme shared] secondaryNavigationBarTintColor]};
+    [mailController.navigationBar setTranslucent:NO];
+    [mailController.navigationBar setOpaque:NO];
+}
+
++ (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
+{
+    [OTAppConfiguration configureApplicationAppearance];
+    
+    navigationController.automaticallyAdjustsScrollViewInsets = NO;
+    navigationController.navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    navigationController.navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
+    navigationController.navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    
+    UIFont *selectedTabBarFont = [UIFont fontWithName:@"SFUIText-Bold" size:12];
+    NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],
+                                              NSFontAttributeName:selectedTabBarFont};
+    UIFont *regularTabBarFont = [UIFont fontWithName:@"SFUIText-Regular" size:12];
+    NSDictionary *normalTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                                           NSFontAttributeName:regularTabBarFont};
+    
+    UIViewController *topViewController = navigationController.topViewController;
+    [topViewController.tabBarItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    [topViewController.tabBarItem setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+
+    [UITabBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    [UITabBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+
+    [UIBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
+    [UIBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+    
+    id rootController = [UIApplication sharedApplication].delegate.window.rootViewController;
+    if ([rootController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController*)rootController;
+        
+        if (tabBarController.tabBar) {
+            UITabBar *currentTabBar = tabBarController.tabBar;
+            for (UITabBarItem *item in currentTabBar.items) {
+                [item setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
+            }
+            [currentTabBar.selectedItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateNormal];
+        }
+    }
 }
 
 #pragma mark - Push notifications
@@ -255,6 +443,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    
+    if ([NSUserDefaults standardUserDefaults].arePushNotificationsRefused) {
+        [OTAppState navigateToNativeNotificationsPreferences];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setArePushNotificationsRefused:YES];
+    
     NSLog(@"Push registration failure : %@", [error localizedDescription]);
     NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:NO] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
@@ -263,8 +458,11 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
     UIApplicationState state = [application applicationState];
     OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
-    if (state == UIApplicationStateActive || state == UIApplicationStateBackground ||  state == UIApplicationStateInactive) {
-        [pnService handleRemoteNotification:userInfo];
+    
+    if (state == UIApplicationStateActive ||
+        state == UIApplicationStateBackground ||
+        state == UIApplicationStateInactive) {
+        [pnService handleRemoteNotification:userInfo applicationState:state];
     }
 }
 
@@ -272,8 +470,11 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     NSDictionary *userInfo = notification.userInfo;
     UIApplicationState state = [application applicationState];
     OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
-    if (state == UIApplicationStateActive || state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
-        [pnService handleLocalNotification:userInfo];
+    
+    if (state == UIApplicationStateActive ||
+        state == UIApplicationStateBackground ||
+        state == UIApplicationStateInactive) {
+        [pnService handleLocalNotification:userInfo applicationState:state];
     }
 }
 
@@ -281,12 +482,235 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     NSDictionary *userInfo = notification.request.content.userInfo;
     OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
+    
     if ([pnService isMixpanelDeepLinkNotification:userInfo]) {
         //for mixpanel deeplinks, shows the push notification
         completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
     } else {
-        [pnService handleRemoteNotification:userInfo];
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        [pnService handleRemoteNotification:userInfo applicationState:state];
     }
+}
+
+#pragma - Appearance
+
++ (UIImage *)tabSelectionIndicatorImage:(UIColor *)color size:(CGSize)size {
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    [color setFill];
+    CGFloat marginOffset = 5;
+    
+    UIRectFill(CGRectMake(marginOffset, 0, size.width - 2*marginOffset, size.height));
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+#pragma mark - Application features/options
+
++ (NSInteger)applicationType
+{
+    return [OTAppConfiguration sharedInstance].environmentConfiguration.applicationType;
+}
+
++ (BOOL)supportsTourFunctionality
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)supportsSolidarityGuideFunctionality
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)supportsFacebookIntegration
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)supportsProfileEditing {
+    return YES;
+}
+
++ (BOOL)shouldShowIntroTutorial
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    // EMA-1991
+    return NO;
+}
+
++ (BOOL)shouldShowAddEventDisclaimer
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)shouldAllowLoginFromWelcomeScreen
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)shouldAlwaysRequestUserToUploadPicture
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)shouldAlwaysRequestUserToAddActionZone
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)shouldAlwaysRequestUserLocation
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return IS_PRO_USER ? NO : YES;
+}
+
++ (BOOL)shouldHideFeedsAndMap
+{
+    return NO;
+}
+
++ (BOOL)supportsAddingActionsFromMap
+{
+    return YES;
+}
+    
++ (BOOL)supportsAddingActionsFromMapOnLongPress {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return [user.type isEqualToString:USER_TYPE_PRO];
+}
+
++ (BOOL)shouldAutoLaunchEditorOnAddAction
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)shouldShowCreatorImagesForNewsFeedItems {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)shouldShowNumberOfUserAssociationsSection:(OTUser*)user
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return ((user.organization && [user.type isEqualToString:USER_TYPE_PRO]) || user.partner);
+}
+
++ (BOOL)shouldShowNumberOfUserPrivateCirclesSection:(OTUser*)user
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)shouldShowMapHeatzoneForEntourage:(OTEntourage*)entourage {
+    // EMA-2034
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    if ([entourage isOuting]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)shouldShowAssociationsOnUserProfile {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)shouldShowPOIsOnFeedsMap {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)supportsClosingFeedAction:(OTFeedItem*)item {
+    // EMA-2052, EMA-2124
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([item isPrivateCircle] || [item isConversation] || [item isNeighborhood]) {
+            return NO;
+        }
+        
+        if ([item isOuting]) {
+            return YES;
+        }
+    }
+
+    return YES;
+}
+
++ (NSString*)iTunesAppId {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return @"1388843838";
+    }
+    
+    return @"1072244410";
 }
 
 @end

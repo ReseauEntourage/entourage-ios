@@ -11,15 +11,13 @@
 #import "OTLocationManager.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
+#import "UIColor+entourage.h"
+#import "NSDate+OTFormatter.h"
 
 @implementation OTEntourageUI
 
 - (NSAttributedString *)descriptionWithSize:(CGFloat)size {
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formater_by"), OTLocalizedString(self.entourage.entourage_type).capitalizedString] attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.entourage.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_BOLD_DESCRIPTION size:size]}];
-    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-    [typeByNameAttrString appendAttributedString:nameAttrString];
-    return typeByNameAttrString;
+    return [OTAppAppearance formattedDescriptionForMessageItem:self.entourage size:size];
 }
 
 - (NSString *)summary {
@@ -27,15 +25,38 @@
 }
 
 - (NSString *)categoryIconSource {
-    return [NSString stringWithFormat:@"%@_%@", self.entourage.entourage_type, self.entourage.category];
+    return [OTAppAppearance iconNameForEntourageItem:self.entourage];
 }
 
 - (NSString *)feedItemDescription {
     return self.entourage.desc;
 }
 
+- (NSAttributedString *)eventAuthorFormattedDescription {
+    return [OTAppAppearance formattedAuthorDescriptionForMessageItem:self.entourage];
+}
+
+- (NSAttributedString *)eventInfoFormattedDescription {
+    
+    NSString *prefix = @"rendez-vous";
+    NSString *fontName = @"SFUIText-Medium";
+    CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
+    
+    NSString *startDateInfo = [self.entourage.startsAt asStringWithFormat:@"EEEE dd MMMM yyyy"];
+    NSString *dateInfo = [NSString stringWithFormat:@"%@ %@", prefix, startDateInfo];
+    NSString *addressInfo = [NSString stringWithFormat:@"\n%@", self.entourage.displayAddress];
+    
+    NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:dateInfo attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    
+    NSAttributedString *addressAttrString = [[NSAttributedString alloc] initWithString:addressInfo attributes:@{NSFontAttributeName : [UIFont fontWithName:@"SFUIText-Bold" size:fontSize]}];
+    
+    [infoAttrString appendAttributedString:addressAttrString];
+    
+    return infoAttrString;
+}
+
 - (NSString *)navigationTitle {
-    return OTLocalizedString([self displayType]);
+    return self.entourage.title;
 }
 
 - (NSString *)joinAcceptedText {
@@ -43,12 +64,14 @@
 }
 
 - (double)distance {
-    if(!self.entourage.location)
+    if (!self.entourage.location) {
         return -1;
+    }
 
     CLLocation *currentLocation = [OTLocationManager sharedInstance].currentLocation;
-    if(!currentLocation)
+    if (!currentLocation) {
         return -1;
+    }
     
     return [currentLocation distanceFromLocation:self.entourage.location];
 }
@@ -65,5 +88,4 @@
         return [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED] && [self.entourage.status isEqualToString:ENTOURAGE_STATUS_OPEN];
     return NO;
 }
-
 @end

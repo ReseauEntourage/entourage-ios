@@ -6,18 +6,15 @@
 //  Copyright © 2015 OCTO Technology. All rights reserved.
 //
 
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTAskMoreViewController.h"
 #import "OTConsts.h"
-// Service
 #import "OTAuthService.h"
-
-// Helper
 #import "NSString+Validators.h"
 #import "NSDictionary+Parsing.h"
 #import "UIViewController+menu.h"
-
-// View
-#import "SVProgressHUD.h"
+#import "entourage-Swift.h"
 
 /********************************************************************************/
 #pragma mark - OTMapViewController
@@ -41,6 +38,7 @@
     [super viewDidLoad];
     self.title = OTLocalizedString(@"discoverEntourage");
     self.navigationController.navigationBarHidden = NO;
+    self.subscribeButton.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     [self setupCloseModal];
 }
 
@@ -86,13 +84,9 @@
                                                         NSLog(@"%@", error);
                                                     }];
     } else {
-        [[[UIAlertView alloc]
-          initWithTitle:OTLocalizedString(@"requestImposible")
-          message:OTLocalizedString(@"needValidEmail")
-          delegate:nil
-          cancelButtonTitle:nil
-          otherButtonTitles:@"Ok",
-          nil] show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"requestImposible") message:OTLocalizedString(@"needValidEmail") preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 

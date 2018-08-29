@@ -29,6 +29,7 @@
 
 // UI
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UIImageView *logo;
 
 // Data
 @property (nonatomic, strong) NSArray *aboutItems;
@@ -50,6 +51,7 @@
 {
     [super viewWillAppear:animated];
     self.title = OTLocalizedString(@"aboutTitle").uppercaseString;//@"À PROPOS";
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -112,31 +114,38 @@
             break;
     }
     [OTLogger logEvent:message];
+    
     if (indexPath.row == [self.aboutItems count]-1) {
         //Email
         if (![MFMailComposeViewController canSendMail]) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
                                                                            message:OTLocalizedString(@"about_email_notavailable")
                                                                     preferredStyle:UIAlertControllerStyleAlert];
-            [self presentViewController:alert animated:YES completion:nil];
-            
-            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK"
+            UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK")
                                                                     style:UIAlertActionStyleDefault
                                                                   handler:^(UIAlertAction * _Nonnull action) {}];
             
             [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+            
             return nil;
+            
+        } else {
+        
+            [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+            MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
+            composeVC.mailComposeDelegate = self;
+            
+            // Configure the fields of the interface.
+            [composeVC setToRecipients:@[item.url]];
+            [composeVC setSubject:@""];
+            [composeVC setMessageBody:@"" isHTML:NO];
+            
+            [OTAppConfiguration configureMailControllerAppearance:composeVC];
+            
+            // Present the view controller modally.
+            [self presentViewController:composeVC animated:YES completion:nil];
         }
-        MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
-        composeVC.mailComposeDelegate = self;
-        
-        // Configure the fields of the interface.
-        [composeVC setToRecipients:@[item.url]];
-        [composeVC setSubject:@""];
-        [composeVC setMessageBody:@"" isHTML:NO];
-        
-        // Present the view controller modally.
-        [self presentViewController:composeVC animated:YES completion:nil];
     }
     else if (indexPath.row == FAQ_INDEXPATH) {
         NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];
@@ -144,7 +153,8 @@
         [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
     }
     else if (indexPath.row == TUTORIAL_INDEXPATH) {
-        [self performSegueWithIdentifier:item.segueIdentifier sender:nil];
+        //TODO: uncomment this regarding the onboarding tutorial after screen is ready
+       // [self performSegueWithIdentifier:item.segueIdentifier sender:nil];
         [OTLogger logEvent:@"OpenTutorialFromMenu"];
     }
     else {
@@ -160,7 +170,7 @@
     NSMutableArray *aboutItems = [NSMutableArray array];
     
     OTAboutItem *itemTutorial = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_tutorial")
-                                                   segueIdentifier:@"TutorialSegueIdentifier"];
+                                                   segueIdentifier:@"TutorialSegueIdentifier"]; //TODO: add TutorialSegueIdentifier segue identifier
     itemTutorial.type = Tutorial;
     [aboutItems addObject:itemTutorial];
     

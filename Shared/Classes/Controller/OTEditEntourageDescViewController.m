@@ -11,10 +11,13 @@
 #import "OTConsts.h"
 #import "UIBarButtonItem+factory.h"
 #import "OTTextWithCount.h"
+#import "entourage-Swift.h"
 
 @interface OTEditEntourageDescViewController ()
 
 @property (nonatomic, weak) IBOutlet OTTextWithCount *txtDescription;
+@property (nonatomic, weak) IBOutlet UILabel *hintLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *hintIcon;
 
 @end
 
@@ -24,22 +27,26 @@
     [super viewDidLoad];
 
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
+    self.hintIcon.tintColor = [ApplicationTheme shared].backgroundThemeColor;
+    self.hintIcon.image = [self.hintIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    self.hintLabel.text = [OTAppAppearance addActionDescriptionHintMessage];
+    
     if(self.currentEntourage.categoryObject.description_example != nil) {
         self.txtDescription.placeholder = self.currentEntourage.categoryObject.description_example;
     } else {
-        if([self.currentEntourage.type isEqualToString:@"ask_for_help"])
+        if ([self.currentEntourage.type isEqualToString:@"ask_for_help"])
             self.txtDescription.placeholder = OTLocalizedString(@"edit_demand_desc");
-        else
+        else {
             self.txtDescription.placeholder = OTLocalizedString(@"edit_contribution_desc");
+        }
     }
-#if BETA
-    self.navigationController.navigationBar.tintColor = [UIColor appOrangeColor];
-#endif
+
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(doneEdit)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[UIColor appOrangeColor]];
+                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
     self.txtDescription.textView.text = self.currentDescription;
 }

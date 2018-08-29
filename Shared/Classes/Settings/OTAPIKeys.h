@@ -11,6 +11,7 @@
 
 // General
 #define kWSKeyID @"id"
+#define kWSKeyUUID @"uuid"
 #define kWSKeyData @"data"
 #define kWSKeyType @"type"
 #define kWSKeyFeeds @"feeds"
@@ -26,6 +27,7 @@
 #define kWSKeyLastMessage @"last_message"
 #define kWSKeyShareUrl @"share_url"
 #define kWSKeyCategoryObject @"categoryObject"
+#define kWSKeyGroupType @"group_type"
 
 //Entourage
 #define kWSKeyEntourage @"entourage"
@@ -75,6 +77,12 @@
 #define kWSKeyLastname @"last_name"
 #define kWSKeyAboutMe @"about"
 
-
+// Event
+#define kWSKeyMetadata @"metadata"
+#define kWSKeyStartsAt @"starts_at"
+#define kWSKeyDisplayAddress @"display_address"
+#define kWSKeyStreetAddress @"street_address"
+#define kWSKeyGooglePlaceId @"google_place_id"
+#define kWSKeyPlaceName @"place_name"
 
 #endif /* OTAPIKeys_h */

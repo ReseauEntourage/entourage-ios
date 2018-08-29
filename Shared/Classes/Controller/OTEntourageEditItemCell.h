@@ -12,7 +12,9 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UILabel *lblDescription;
+@property (nonatomic, weak) IBOutlet UISwitch *privacySwitch;
 
 - (void)configureWith:(NSString *)title andText:(NSString *)description;
+- (void)configureWithSwitchPublicState:(BOOL)public;
 
 @end

@@ -9,6 +9,9 @@
 #import "OTAppDelegate.h"
 #import "OTAppConfiguration.h"
 
+NSString * const kLoginFailureNotification = @"loginFailureNotification";
+NSString * const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
+
 @interface OTAppDelegate () <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 @end
 
@@ -46,12 +49,9 @@ continueUserActivity:(NSUserActivity *)userActivity
     return [OTAppConfiguration application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-    return [OTAppConfiguration handleApplication:application openURL:url];
+    return [OTAppConfiguration handleApplication:app openURL:url];
 }
 
 #pragma mark - Configure push notifications
