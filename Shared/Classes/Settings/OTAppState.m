@@ -212,7 +212,7 @@
     } else {
         [OTLogger logEvent:@"WelcomeScreenContinue"];
         OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
-        [[OTAppState getTopRootViewController].navigationController pushViewController:onboardingViewController animated:YES];
+        [[OTAppState getTopViewController].navigationController pushViewController:onboardingViewController animated:YES];
     }
 }
 
