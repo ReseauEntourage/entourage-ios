@@ -182,7 +182,7 @@
                                                          title:[OTAppAppearance eventsFilterTitle]],
                                    [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
                                                         active:self.showPastOuting
-                                                         title:@"filter_events_include_past_events_title"]];
+                                                         title:[OTAppAppearance includePastEventsFilterTitleKey]]];
         
         [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
                                                     active:self.showOuting
@@ -215,7 +215,7 @@
                                                          title:[OTAppAppearance eventsFilterTitle]],
                                    [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
                                                         active:self.showPastOuting
-                                                         title:@"filter_events_include_past_events_title"]];
+                                                         title:[OTAppAppearance includePastEventsFilterTitleKey]]];
         
         [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
                                                     active:self.showOuting

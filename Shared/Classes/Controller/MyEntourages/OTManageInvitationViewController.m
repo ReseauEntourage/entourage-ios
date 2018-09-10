@@ -46,7 +46,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:self.feedItem.uid];
+    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:self.feedItem.uid stringId:self.feedItem.uuid];
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }

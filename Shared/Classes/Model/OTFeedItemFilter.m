@@ -113,7 +113,7 @@
         case FeedItemFilterKeyEvents:
             return [OTAppAppearance eventsFilterTitle];
         case FeedItemFilterKeyEventsPast:
-            return OTLocalizedString(@"filter_events_include_past_events_title");
+            return [OTAppAppearance includePastEventsFilterTitle];
         
         default:
             return @"";

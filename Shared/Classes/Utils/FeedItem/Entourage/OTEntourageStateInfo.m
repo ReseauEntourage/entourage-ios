@@ -78,13 +78,25 @@
 }
 
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
-    [[OTEntourageService new] getEntourageWithStringId:self.entourage.uuid withSuccess:^(OTEntourage *entourage) {
-       if(success)
-           success(entourage);
-    } failure:^(NSError *error) {
-        if(failure)
-            failure(error);
-    }];
+    if (self.entourage.uuid) {
+        [[OTEntourageService new] getEntourageWithStringId:self.entourage.uuid withSuccess:^(OTEntourage *entourage) {
+            if(success)
+                success(entourage);
+        } failure:^(NSError *error) {
+            if(failure)
+                failure(error);
+        }];
+    } else if (self.entourage.uid) {
+        [[OTEntourageService new] getEntourageWithId:self.entourage.uid withSuccess:^(OTEntourage *entourage) {
+            if(success)
+                success(entourage);
+        } failure:^(NSError *error) {
+            if(failure)
+                failure(error);
+        }];
+    } else {
+        NSLog(@"Invalid entourage id!");
+    }
 }
 
 - (void)loadWithSuccess2:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {

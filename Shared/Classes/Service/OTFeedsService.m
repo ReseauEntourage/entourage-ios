@@ -91,8 +91,9 @@
 }
 
 - (void)updateUnreadCount:(NSArray *)feeds {
-    for(OTFeedItem *item in feeds)
-        item.unreadMessageCount = [[OTUnreadMessagesService sharedInstance] countUnreadMessages:item.uid];
+    for (OTFeedItem *item in feeds) {
+        item.unreadMessageCount = [[OTUnreadMessagesService sharedInstance] countUnreadMessages:item.uid stringId:item.uuid];
+    }
 }
 
 @end

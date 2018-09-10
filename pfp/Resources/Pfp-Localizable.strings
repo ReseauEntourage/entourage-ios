@@ -79,4 +79,5 @@
 
 "pfp_add_title_hint" = "Donnez un titre clair et chaleureux à votre sortie pour attirer plus de participants !";
 "pfp_add_description_hint" = "Donnez une description claire à votre sortie";
+"pfp_filter_events_include_past_events_title" = "Inclure sorties passées";
 

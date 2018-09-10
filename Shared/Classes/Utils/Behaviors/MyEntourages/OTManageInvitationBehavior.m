@@ -45,14 +45,17 @@
 }
 
 - (BOOL)prepareSegueForManage:(UIStoryboardSegue *)segue {
-    if([segue.identifier isEqualToString:@"ManageInvitationSegue"]) {
+    if ([segue.identifier isEqualToString:@"ManageInvitationSegue"]) {
         OTManageInvitationViewController *controller = (OTManageInvitationViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
         controller.invitation = self.invitation;
         controller.pendingInvitationsChangedDelegate = self;
+        controller.hidesBottomBarWhenPushed = YES;
     }
-    else
+    else {
         return NO;
+    }
+    
     return YES;
 }
 

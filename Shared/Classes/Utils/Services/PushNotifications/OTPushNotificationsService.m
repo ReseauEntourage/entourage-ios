@@ -144,7 +144,7 @@
         
         for (OTFeedItemJoiner *item in items) {
             if ([item.uID isEqualToNumber:userId] && [item.status isEqualToString:JOIN_PENDING]) {
-                [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
+                [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId stringId:nil];
                 OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
 
                 UIAlertAction *viewProfileAction = [UIAlertAction   actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -180,7 +180,7 @@
 }
 
 - (void)handleCancelJoinNotification:(OTPushNotificationsData *)pnData {
-    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:pnData.joinableId];
+    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:pnData.joinableId stringId:nil];
 
     [OTAppState switchToMainScreenAndResetAppWindow:YES];
 }
@@ -220,7 +220,7 @@
 - (void)handleChatNotification:(OTPushNotificationsData *)pnData
               applicationState:(UIApplicationState)state
 {
-    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId stringId:nil];
     
     if (state != UIApplicationStateActive) {
         [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
@@ -239,7 +239,7 @@
 
 - (void)handleInviteRequestNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.entourageId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.entourageId stringId:nil];
     OTEntourageInvitation *invitation = [OTEntourageInvitation fromPushNotifiationsData:pnData];
     
     UIAlertAction *refuseInviteRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -267,7 +267,7 @@
 
 - (void)handleInviteStatusNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.feedId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.feedId stringId:nil];
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert")
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
