@@ -779,4 +779,17 @@
     return OTLocalizedString(@"add_description_hint");
 }
 
++ (NSString*)includePastEventsFilterTitle {    
+    return OTLocalizedString([OTAppAppearance includePastEventsFilterTitleKey]);
+}
+
++ (NSString*)includePastEventsFilterTitleKey {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return @"pfp_filter_events_include_past_events_title";
+    }
+    
+    return @"filter_events_include_past_events_title";
+}
+
+
 @end

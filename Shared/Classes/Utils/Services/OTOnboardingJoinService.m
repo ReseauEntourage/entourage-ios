@@ -43,7 +43,7 @@
         });
 
         OTInvitationsService *service = [OTInvitationsService new];
-        for(OTEntourageInvitation *invitation in invitations) {
+        for (OTEntourageInvitation *invitation in invitations) {
             dispatch_group_enter(group);
             [service acceptInvitation:invitation withSuccess:^() {
                 @synchronized (successfulInvitations) {

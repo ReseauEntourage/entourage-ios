@@ -68,4 +68,6 @@
 + (NSString*)joinFeedItemConformationDescription:(OTFeedItem *)feedItem;
 + (NSString*)addActionTitleHintMessage;
 + (NSString*)addActionDescriptionHintMessage;
++ (NSString*)includePastEventsFilterTitle;
++ (NSString*)includePastEventsFilterTitleKey;
 @end
