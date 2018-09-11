@@ -24,6 +24,7 @@
 + (void)switchToMainScreenAndResetAppWindow:(BOOL)reset;
 + (UIViewController *)getTopViewController;
 + (UIViewController *)getTopRootViewController;
++ (void)popToRootCurrentTab;
 
 + (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;
