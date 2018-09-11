@@ -46,7 +46,7 @@
 #pragma mark - OTNextStatusProtocol
 
 - (void)stoppedFeedItem {
-    [self popToMainController];
+    [self popToRootController];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -55,7 +55,7 @@
 }
 
 - (void)closedFeedItemWithReason: (OTCloseReason) reason {
-    [self popToMainController];
+    [self popToRootController];
     
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [OTAppState hideTabBar:NO];
@@ -75,7 +75,7 @@
 }
 
 - (void)quitedFeedItem {
-    [self popToMainController];
+    [self popToRootController];
     [OTAppState hideTabBar:NO];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -85,7 +85,7 @@
 }
 
 - (void)cancelledJoinRequest {
-    [self popToMainController];
+    [self popToRootController];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"cancelled_join_request")];
@@ -99,15 +99,8 @@
     }];
 }
 
-- (void)popToMainController {
-    for (UIViewController* viewController in self.owner.navigationController.viewControllers) {
-        if ([viewController isKindOfClass:[OTMainViewController class]]) {
-            [self.owner.navigationController popToViewController:viewController animated:NO];
-            break;
-        }
-    }
-    
-    //[OTAppState switchToMainScreenAndResetAppWindow:YES];
+- (void)popToRootController {
+    [OTAppState popToRootCurrentTab];
 }
 
 @end

@@ -152,6 +152,13 @@
     tabBarController.selectedIndex = MESSAGES_TAB_INDEX;
 }
 
++ (void)popToRootCurrentTab {
+    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
+    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
+    UINavigationController *navController = (UINavigationController*)tabBarController.selectedViewController;
+    [navController popToRootViewControllerAnimated:NO];
+}
+
 + (void)switchToMainScreenAndResetAppWindow:(BOOL)reset {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
