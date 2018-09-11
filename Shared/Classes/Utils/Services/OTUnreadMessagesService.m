@@ -93,7 +93,11 @@
 #pragma mark - private methods
 
 - (NSString *)getUserKey {
-    return [UserKey stringByAppendingString:USER_ID.stringValue];
+    if (USER_ID) {
+        return [UserKey stringByAppendingString:USER_ID.stringValue];
+    }
+    
+    return UserKey;
 }
 
 - (OTUnreadMessageCount *)findIn:(NSArray *)array
