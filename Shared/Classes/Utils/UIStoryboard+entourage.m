@@ -87,7 +87,7 @@
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIWindow *window = [appDelegate window];
     UIViewController *viewController = [storyboard instantiateInitialViewController];
-    if(addNavigation) {
+    if (addNavigation) {
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
         [navController presentTransparentNavigationBar];
         viewController = navController;

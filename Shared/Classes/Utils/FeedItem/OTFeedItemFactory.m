@@ -49,7 +49,8 @@
     return nil;
 }
 
-+ (id<OTFeedItemFactoryDelegate>)createForType:(NSString *)feedItemType andId:(NSNumber *)feedItemId {
++ (id<OTFeedItemFactoryDelegate>)createForType:(NSString *)feedItemType
+                                         andId:(NSNumber *)feedItemId {
     BOOL isTour = [feedItemType isEqualToString:TOUR_TYPE_NAME];
     if (isTour) {
         OTTour *tour = [OTTour new];
@@ -61,6 +62,14 @@
         entourage.uid = feedItemId;
         return [[OTEntourageFactory alloc] initWithEntourage:entourage];
     }
+}
+
++ (id<OTFeedItemFactoryDelegate>)createEntourageForGroupType:(NSString *)groupType
+                                         andId:(NSNumber *)feedItemId {
+    OTEntourage *entourage = [OTEntourage new];
+    entourage.uid = feedItemId;
+    entourage.groupType = groupType;
+    return [[OTEntourageFactory alloc] initWithEntourage:entourage];
 }
 
 + (id<OTFeedItemFactoryDelegate>)createForId:(NSString *)feedItemId {

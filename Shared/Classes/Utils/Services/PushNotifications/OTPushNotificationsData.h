@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSNumber *feedId;
 @property (nonatomic, strong) NSString *feedType;
 @property (nonatomic, strong) NSNumber *invitationAccepted;
+@property (nonatomic, strong) NSString *groupType;
 
 @property (nonatomic, strong) NSDictionary *content;
 @property (nonatomic, strong) NSDictionary *extra;

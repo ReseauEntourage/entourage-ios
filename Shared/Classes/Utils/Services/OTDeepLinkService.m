@@ -30,9 +30,31 @@
 
 @implementation OTDeepLinkService
 
-- (void)navigateToFeedWithNumberId:(NSNumber *)feedItemId withType:(NSString *)feedItemType {
+- (void)navigateToFeedWithNumberId:(NSNumber *)feedItemId
+                          withType:(NSString *)feedItemType {
     [SVProgressHUD show];
     [[[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getStateInfo] loadWithSuccess3:^(OTFeedItem *feedItem) {
+        [SVProgressHUD dismiss];
+        [self prepareControllers:feedItem];
+    } error:^(NSError *error) {
+        [SVProgressHUD dismiss];
+    }];
+}
+                     
+- (void)navigateToFeedWithNumberId:(NSNumber *)feedItemId
+                          withType:(NSString *)feedItemType
+                         groupType:(NSString*)groupType {
+    [SVProgressHUD show];
+    
+    BOOL isTour = [feedItemType isEqualToString:TOUR_TYPE_NAME];
+    id stateInfo = nil;
+    if (isTour) {
+        stateInfo = [[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getStateInfo];
+    } else {
+        stateInfo = [OTFeedItemFactory createEntourageForGroupType:groupType andId:feedItemId];
+    }
+    
+    [stateInfo loadWithSuccess3:^(OTFeedItem *feedItem) {
         [SVProgressHUD dismiss];
         [self prepareControllers:feedItem];
     } error:^(NSError *error) {

@@ -347,23 +347,23 @@ extern NSString *kUsers;
     [[OTHTTPRequestManager sharedInstance]
      DELETEWithUrl:url
      andParameters:nil
-     andSuccess:^(id responseObject)
-     {
+     andSuccess:^(id responseObject) {
          if (success)
              success();
      }
-     andFailure:^(NSError *error)
-     {
+     andFailure:^(NSError *error) {
          if (failure)
              failure(error);
      }];
 }
 
-- (void)entourageUsers:(OTEntourage *)entourage
-               success:(void (^)(NSArray *))success
-               failure:(void (^)(NSError *))failure {
+- (void)getUsersForEntourageWithId:(NSString *)uuid
+                               uid:(NSNumber*)uid
+                           success:(void (^)(NSArray *))success
+                           failure:(void (^)(NSError *))failure {
     NSString *format = @"%@/%@/users.json?context=group_feed&token=%@";
-    NSString *url = [NSString stringWithFormat:format, kEntourages, entourage.uuid, TOKEN];
+    id entourageId = uuid ? uuid : uid;
+    NSString *url = [NSString stringWithFormat:format, kEntourages, entourageId, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url

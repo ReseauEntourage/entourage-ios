@@ -39,21 +39,6 @@
     
     self.loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.loginButton.layer.borderWidth = 1.5f;
-    
-    // TODO: temporary - find a better approach
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        self.registerButton.hidden = YES;
-        
-        self.loginButton.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
-        [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
-        self.registerButton.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
-        [self.registerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
-        self.bgImage.hidden = YES;
-        self.logoTitle.hidden = YES;
-        self.logo.image = [OTAppAppearance applicationLogo];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

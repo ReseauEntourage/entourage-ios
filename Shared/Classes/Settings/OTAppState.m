@@ -137,7 +137,16 @@
 {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     appDelegate.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [UIStoryboard showStartup];
+    
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        UIStoryboard *introStoryboard = [UIStoryboard storyboardWithName:@"PfpIntro" bundle:nil];
+        PfpStartupViewController *startupVC = [introStoryboard instantiateViewControllerWithIdentifier:@"PfpStartupViewController"];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:startupVC];
+        appDelegate.window.rootViewController = navController;
+        [appDelegate.window makeKeyAndVisible];
+    } else {
+        [UIStoryboard showInitialViewControllerFromStoryboardNamed:@"Intro" addingNavigation:NO];
+    }
 }
 
 + (void)switchMapToSolidarityGuide {
@@ -451,7 +460,7 @@
     }
 }
 
-+ (UIViewController *)getToRootViewController {
++ (UIViewController *)getTopRootViewController {
     UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
     if ([result isKindOfClass:[UINavigationController class]]) {
         UINavigationController *navController = (UINavigationController*)result;

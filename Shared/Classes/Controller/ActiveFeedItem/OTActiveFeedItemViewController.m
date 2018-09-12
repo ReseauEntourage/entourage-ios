@@ -274,7 +274,8 @@
 - (void)loadEntourageGroupMembers:(OTEntourage*)entourage
                        completion:(void(^)(NSArray *members, NSError *error))completion{
     
-    [[OTEntourageService new] entourageUsers:entourage
+    [[OTEntourageService new] getUsersForEntourageWithId:entourage.uuid
+                                                     uid:entourage.uid
                                      success:^(NSArray *items) {
                                          NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
                                              return [item.status isEqualToString:JOIN_ACCEPTED];
