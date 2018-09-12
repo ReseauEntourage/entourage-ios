@@ -59,9 +59,18 @@
 
 - (BOOL)isPublic {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if([self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED])
-        return !([currentUser.sid intValue] == [self.entourage.author.uID intValue] ||
-                 [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED]);
+    if ([self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED]) {
+        if ([self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED]) {
+            return NO;
+        } else if (self.entourage.author) {
+            if ([currentUser.sid intValue] == [self.entourage.author.uID intValue]) {
+                return NO;
+            }
+        }
+        
+        return YES;
+    }
+        
     return ![self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 

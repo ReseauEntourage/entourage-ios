@@ -139,11 +139,13 @@
 
 - (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData
 {
-    [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getMessaging] getFeedItemUsersWithStatus:JOIN_PENDING success:^(NSArray *items){
+    [[[OTFeedItemFactory createForType:pnData.joinableType
+                                 andId:pnData.joinableId] getMessaging] getFeedItemUsersWithStatus:JOIN_PENDING                                                  success:^(NSArray *items) {
         NSNumber *userId = [pnData.extra numberForKey:@"user_id"];
         
         for (OTFeedItemJoiner *item in items) {
-            if ([item.uID isEqualToNumber:userId] && [item.status isEqualToString:JOIN_PENDING]) {
+            if ([item.uID isEqualToNumber:userId] &&
+                [item.status isEqualToString:JOIN_PENDING]) {
                 [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId stringId:nil];
                 OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
 
@@ -180,7 +182,8 @@
 }
 
 - (void)handleCancelJoinNotification:(OTPushNotificationsData *)pnData {
-    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:pnData.joinableId stringId:nil];
+    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:pnData.joinableId
+                                                          stringId:nil];
 
     [OTAppState switchToMainScreenAndResetAppWindow:YES];
 }
@@ -190,7 +193,8 @@
 {
     if (state != UIApplicationStateActive) {
         // https://jira.mytkw.com/browse/EMA-2229
-        [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
+        [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId
+                                                   withType:pnData.joinableType groupType:pnData.groupType];
         
     }
 //    else {

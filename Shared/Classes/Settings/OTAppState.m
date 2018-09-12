@@ -460,7 +460,7 @@
     }
 }
 
-+ (UIViewController *)getToRootViewController {
++ (UIViewController *)getTopRootViewController {
     UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
     if ([result isKindOfClass:[UINavigationController class]]) {
         UINavigationController *navController = (UINavigationController*)result;
