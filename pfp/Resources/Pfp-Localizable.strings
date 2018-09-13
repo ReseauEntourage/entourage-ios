@@ -54,7 +54,7 @@
 "pfp_join_event_button" = "Participer";
 "pfp_join_entourage_greeting_lbl" = "Merci pour votre participation !\nAjoutez un petit mot pour l'organisateur et les participants !";
 
-"pfp_want_to_join_entourage" = "veut rejoindre votre voisinage.";
+"pfp_want_to_join_entourage" = "veut rejoindre votre sortie.";
 "pfp_want_to_join_event" = "veut rejoindre votre sortie.";
 
 "pfp_closed_item" = "Voisinage clôturé";
@@ -80,4 +80,6 @@
 "pfp_add_title_hint" = "Donnez un titre clair et chaleureux à votre sortie pour attirer plus de participants !";
 "pfp_add_description_hint" = "Donnez une description claire à votre sortie";
 "pfp_filter_events_include_past_events_title" = "Inclure sorties passées";
+"pfp_invite_event_subtitle" = "à participer à cette sortie";
+"pfp_invite_action_subtitle" = "à rejoindre cette action";
 

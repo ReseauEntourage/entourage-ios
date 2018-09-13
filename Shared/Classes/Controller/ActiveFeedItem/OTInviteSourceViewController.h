@@ -25,8 +25,10 @@
 @interface OTInviteSourceViewController : UIViewController
 
 @property(nonatomic, weak) IBOutlet UIView *popupContainerView;
+@property(nonatomic, weak) IBOutlet UILabel *inviteSubtitleLabel;
 @property(nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 @property(nonatomic) IBOutletCollection(UIImageView) NSArray *icons;
 @property(nonatomic, weak) id<InviteSourceDelegate> delegate;
+@property(nonatomic) OTFeedItem *feedItem;
 
 @end

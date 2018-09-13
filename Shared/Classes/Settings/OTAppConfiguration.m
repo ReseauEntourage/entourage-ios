@@ -705,6 +705,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
++ (BOOL)shouldShowEventPrivacyDisclaimerOnCreation {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 + (NSString*)iTunesAppId {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return @"1388843838";
