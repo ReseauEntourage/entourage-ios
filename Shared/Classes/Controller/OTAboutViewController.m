@@ -96,7 +96,7 @@
             message = @"FacebookPageClick";
             break;
         case Tutorial:
-            message = @"";
+            message = @"OpenTutorialFromMenu";
             break;
         case GeneralConditions:
             message = @"CGUClick";
@@ -108,11 +108,12 @@
             message = @"WebsiteVisitClick";
             break;
         case PolitiqueDeConfidenatialite:
-            message = @"PolitiqueDeConfidenatialiteClick";
+            message = @"PolitiqueDeConfidentialiteClick";
             break;
         default:
             break;
     }
+    
     [OTLogger logEvent:message];
     
     if (indexPath.row == [self.aboutItems count]-1) {
@@ -148,7 +149,6 @@
         }
     }
     if (item.type == Tutorial) {
-        [OTLogger logEvent:@"OpenTutorialFromMenu"];
         [self.navigationController dismissViewControllerAnimated:NO completion:^{
             [OTAppState loadTutorialScreen];
         }];
