@@ -17,6 +17,7 @@
 + (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions;
 + (void)returnToLogin;
 + (void)presentTutorialScreen;
++ (void)loadTutorialScreen;
 + (void)navigateToAuthenticatedLandingScreen;
 + (void)navigateToUserProfile;
 + (void)switchMapToSolidarityGuide;

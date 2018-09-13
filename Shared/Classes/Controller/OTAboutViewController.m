@@ -22,9 +22,6 @@
 
 @import MessageUI;
 
-#define TUTORIAL_INDEXPATH 0
-#define FAQ_INDEXPATH 1
-
 @interface OTAboutViewController () <UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
 
 // UI
@@ -110,6 +107,9 @@
         case Website:
             message = @"WebsiteVisitClick";
             break;
+        case PolitiqueDeConfidenatialite:
+            message = @"PolitiqueDeConfidenatialiteClick";
+            break;
         default:
             break;
     }
@@ -147,15 +147,20 @@
             [self presentViewController:composeVC animated:YES completion:nil];
         }
     }
-    else if (indexPath.row == FAQ_INDEXPATH) {
+    if (item.type == Tutorial) {
+        [OTLogger logEvent:@"OpenTutorialFromMenu"];
+        [self.navigationController dismissViewControllerAnimated:NO completion:^{
+            [OTAppState loadTutorialScreen];
+        }];
+    }
+    else if (item.type == FAQ) {
         NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];
         NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
         [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
     }
-    else if (indexPath.row == TUTORIAL_INDEXPATH) {
-        //TODO: uncomment this regarding the onboarding tutorial after screen is ready
-       // [self performSegueWithIdentifier:item.segueIdentifier sender:nil];
-        [OTLogger logEvent:@"OpenTutorialFromMenu"];
+    else if (item.type == PolitiqueDeConfidenatialite) {
+        NSString *url = [NSString stringWithFormat: ABOUT_POLITIQUE_DE_CONF_FORMAT, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
+        [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
     }
     else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];
@@ -170,7 +175,7 @@
     NSMutableArray *aboutItems = [NSMutableArray array];
     
     OTAboutItem *itemTutorial = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_tutorial")
-                                                   segueIdentifier:@"TutorialSegueIdentifier"]; //TODO: add TutorialSegueIdentifier segue identifier
+                                                   segueIdentifier:@"TutorialSegueIdentifier"];
     itemTutorial.type = Tutorial;
     [aboutItems addObject:itemTutorial];
     
@@ -183,6 +188,11 @@
                                                           url:ABOUT_CGU_URL];
     itemCGU.type = GeneralConditions;
     [aboutItems addObject:itemCGU];
+    
+    OTAboutItem *confItem = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_politique_conf")
+                                                           url:ABOUT_POLITIQUE_DE_CONF_FORMAT];
+    confItem.type = PolitiqueDeConfidenatialite;
+    [aboutItems addObject:confItem];
     
     OTAboutItem *itemWebsite = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_website")
                                                               url:ABOUT_WEBSITE_URL];

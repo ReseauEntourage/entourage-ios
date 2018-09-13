@@ -15,6 +15,7 @@ typedef enum {
     GeneralConditions,
     FAQ,
     Website,
+    PolitiqueDeConfidenatialite,
     Twitter,
     Suggestions,
     Join
