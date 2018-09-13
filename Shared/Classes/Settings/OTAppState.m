@@ -335,6 +335,7 @@
         UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
         OTInviteSourceViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OTInviteSourceViewController"];
         vc.delegate = delegate;
+        vc.feedItem = item;
         [controller presentViewController:vc animated:YES completion:nil];
 
     } else if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {

@@ -236,7 +236,7 @@ extension OTPfpMenuViewController: UITableViewDelegate {
             self.loadAbout()
             break
         case menuItemIndexType.ethicalChart.rawValue:
-            let url = URL(string: "http://bit.ly/charteethiquevoisin-age")
+            let url = URL(string: "https://entourage-asso.typeform.com/to/uBxsHI?user_id=" + UserDefaults.standard.currentUser.sid.stringValue)
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
             break
         case menuItemIndexType.howTo.rawValue:

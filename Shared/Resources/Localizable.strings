@@ -354,6 +354,8 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "encounter_enter_message" = "Vous devez donner une description à votre rencontre";
 
 "encounter_fill_all_fields" = "Veuillez remplir ce champ";
+"invite_event_subtitle" = "à participer à cet évènement";
+"invite_action_subtitle" = "à rejoindre cette action";
 
 
 // Titles

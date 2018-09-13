@@ -30,6 +30,8 @@
         iconImageView.tintColor = color;
         iconImageView.image = image;
     }
+    
+    self.inviteSubtitleLabel.text = [OTAppAppearance inviteSubtitleText:self.feedItem];
 }
 
 - (IBAction)close:(id)sender {

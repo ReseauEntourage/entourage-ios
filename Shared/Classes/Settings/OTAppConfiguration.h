@@ -129,4 +129,7 @@
 // Specify if the action of "plus button" shows options or directly launches the entourage editor
 + (BOOL)shouldAutoLaunchEditorOnAddAction;
 
+// EMA-2286
++ (BOOL)shouldShowEventPrivacyDisclaimerOnCreation;
+
 @end

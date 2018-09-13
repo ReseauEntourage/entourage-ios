@@ -791,5 +791,21 @@
     return @"filter_events_include_past_events_title";
 }
 
++ (NSString*)inviteSubtitleText:(OTFeedItem*)feedItem {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([feedItem isOuting]) {
+            return OTLocalizedString(@"pfp_invite_event_subtitle");
+        }
+        
+        return OTLocalizedString(@"pfp_invite_action_subtitle");
+    }
+    
+    if ([feedItem isOuting]) {
+        return OTLocalizedString(@"invite_event_subtitle");
+    }
+    
+    return OTLocalizedString(@"invite_action_subtitle");
+}
+
 
 @end
