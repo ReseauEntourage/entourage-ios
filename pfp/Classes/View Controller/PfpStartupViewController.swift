@@ -11,6 +11,7 @@ import UIKit
 class PfpStartupViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -22,9 +23,15 @@ class PfpStartupViewController: UIViewController, UIScrollViewDelegate {
 
         self.title = ""
         self.navigationController?.presentTransparentNavigationBar()
+        
         self.loginButton.setTitleColor(ApplicationTheme.shared().backgroundThemeColor, for: UIControlState.normal)
         self.loginButton.layer.borderColor = ApplicationTheme.shared().backgroundThemeColor.cgColor
         self.loginButton.layer.borderWidth = 1.5
+        
+        self.signupButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        self.signupButton.backgroundColor = ApplicationTheme.shared().backgroundThemeColor
+        self.signupButton.layer.borderColor = ApplicationTheme.shared().backgroundThemeColor.cgColor
+        self.signupButton.layer.borderWidth = 1.5
         
         self.setupScrollView()
     }
@@ -54,6 +61,10 @@ class PfpStartupViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func showLogin() {
         OTAppState.continueFromStartupScreen()
+    }
+    
+    @IBAction func signupLogin() {
+        OTAppState.continueFromStartupScreenForOnboarding()
     }
     
     func setupScrollView () {

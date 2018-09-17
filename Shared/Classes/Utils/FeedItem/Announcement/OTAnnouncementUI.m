@@ -31,4 +31,8 @@
     return self.announcement.action;
 }
 
+- (NSString *)contentImageUrl {
+    return self.announcement.image_url;
+}
+
 @end

@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *action;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *icon_url;
+@property (nonatomic, strong) NSString *image_url;
 
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary;
 

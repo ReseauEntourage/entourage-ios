@@ -11,6 +11,7 @@
 @interface NSDate (OTFormatter)
 
 - (NSString *)toTimeString;
+- (NSString *)toRoundedQuarterTimeString;
 - (NSString*)asStringWithFormat:(NSString*)format;
 
 - (BOOL)isEqualToDateIgnoringTime:(NSDate *)aDate;

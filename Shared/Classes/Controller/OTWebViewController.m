@@ -267,6 +267,7 @@
     NSArray *objectsToShare = @[activity];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare
                                                                              applicationActivities:nil];
+    [OTAppConfiguration configureActiviteControllerAppearance:activityVC];
     [self presentViewController:activityVC animated:YES completion:nil];
 }
 

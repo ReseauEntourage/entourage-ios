@@ -17,6 +17,7 @@
 + (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions;
 + (void)returnToLogin;
 + (void)presentTutorialScreen;
++ (void)loadTutorialScreen;
 + (void)navigateToAuthenticatedLandingScreen;
 + (void)navigateToUserProfile;
 + (void)switchMapToSolidarityGuide;
@@ -28,8 +29,10 @@
 
 + (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;
++ (void)continueFromStartupScreenForOnboarding;
 + (void)navigateToPermissionsScreens;
 + (void)continueFromStartupScreen;
++ (void)continueFromWelcomeScreenForOnboarding;
 + (void)continueFromWelcomeScreen;
 + (void)continueFromLoginScreen;
 + (void)continueFromUserEmailScreen;

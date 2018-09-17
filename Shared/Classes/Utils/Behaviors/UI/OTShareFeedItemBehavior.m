@@ -54,6 +54,7 @@
     NSArray *objectsToShare = @[activity];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
     activityVC.excludedActivityTypes = excludedActivities;
+    [OTAppConfiguration configureActiviteControllerAppearance:activityVC];
     [self.owner presentViewController:activityVC animated:YES completion:nil];
 }
 

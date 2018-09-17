@@ -193,6 +193,7 @@ numéro de portable? </string>
                         <outlet property="phoneTextField" destination="8h5-LL-TYs" id="Yfa-sb-k8C"/>
                         <outlet property="pickerView" destination="olv-Dv-uW1" id="5Uw-di-XFF"/>
                         <outlet property="scrollView" destination="ZKP-h6-GEA" id="0nk-qH-HWC"/>
+                        <outlet property="subtitleLabel" destination="iyk-fh-2ns" id="0ZJ-sx-uiJ"/>
                         <outlet property="validateButton" destination="Bpk-JJ-QTl" id="a49-hZ-U5R"/>
                         <segue destination="ay8-4Z-lNJ" kind="show" identifier="PhoneToCodeSegue" id="CzJ-t3-xN5"/>
                     </connections>
