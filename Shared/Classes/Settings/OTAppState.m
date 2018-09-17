@@ -208,27 +208,54 @@
 
 + (void)continueFromStartupScreen
 {
+    return [OTAppState continueFromStartupScreenCreatingUser:NO];
+}
+
++ (void)continueFromStartupScreenForOnboarding
+{
+    return [OTAppState continueFromStartupScreenCreatingUser:YES];
+}
+
++ (void)continueFromStartupScreenCreatingUser:(BOOL)createUser {
     OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
     OTWelcomeViewController *welcomeViewController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTWelcomeViewController"];
+    welcomeViewController.signupNewUser = createUser;
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         [[OTAppState getTopViewController].navigationController pushViewController:welcomeViewController animated:YES];
-    } else {
+    }
+    else {
         [OTLogger logEvent:@"SplashLogIn"];
         [[OTAppState getTopViewController].navigationController pushViewController:loginController animated:YES];
     }
 }
 
-+ (void)continueFromWelcomeScreen
++ (void)continueFromWelcomeScreen {
+    return [OTAppState continueFromWelcomeScreenCreatingUser:NO];
+}
+
++ (void)continueFromWelcomeScreenForOnboarding {
+    return [OTAppState continueFromWelcomeScreenCreatingUser:YES];
+}
+
++ (void)continueFromWelcomeScreenCreatingUser:(BOOL)createUser
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
-        [OTLogger logEvent:@"SplashLogIn"];
-        [[OTAppState getTopViewController].navigationController pushViewController:loginController animated:YES];
-    } else {
+    if (createUser) {
         [OTLogger logEvent:@"WelcomeScreenContinue"];
         OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
         [[OTAppState getTopViewController].navigationController pushViewController:onboardingViewController animated:YES];
+    } else {
+        if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+            OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
+            [OTLogger logEvent:@"SplashLogIn"];
+            [[OTAppState getTopViewController].navigationController pushViewController:loginController animated:YES];
+        }
+        else
+        {
+            [OTLogger logEvent:@"WelcomeScreenContinue"];
+            OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
+            [[OTAppState getTopViewController].navigationController pushViewController:onboardingViewController animated:YES];
+        }
     }
 }
 

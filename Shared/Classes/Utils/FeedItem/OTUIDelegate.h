@@ -18,6 +18,7 @@
 
 @optional
 - (NSString *)navigationTitle;
+- (NSString *)contentImageUrl;
 - (NSString *)joinAcceptedText;
 - (double)distance;
 - (BOOL)isStatusBtnVisible;

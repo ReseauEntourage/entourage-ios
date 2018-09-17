@@ -508,6 +508,9 @@
     self.mapView.showsPointsOfInterest = NO;
    	self.mapView.showsUserLocation = YES;
     self.mapView.pitchEnabled = NO;
+    self.mapView.showsBuildings = NO;
+    self.mapView.showsTraffic = NO;
+    
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     
     MKCoordinateRegion region;

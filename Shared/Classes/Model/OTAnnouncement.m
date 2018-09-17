@@ -23,6 +23,7 @@
         self.action = [dictionary stringForKey:kWSKeyAction];
         self.url = [dictionary stringForKey:kWSKeyUrl];
         self.icon_url = [dictionary stringForKey:kWSKeyIconUrl];
+        self.image_url = [dictionary stringForKey:kWSKeyImageUrl];
     }
     return self;
 }

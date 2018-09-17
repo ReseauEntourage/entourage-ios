@@ -388,6 +388,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [mailController.navigationBar setOpaque:NO];
 }
 
++ (void)configureActiviteControllerAppearance:(UIActivityViewController *)controller {
+    controller.navigationController.navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    controller.navigationController.navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
+    controller.navigationController.navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    controller.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [[ApplicationTheme shared] secondaryNavigationBarTintColor]};
+    [controller.navigationController.navigationBar setTranslucent:NO];
+    [controller.navigationController.navigationBar setOpaque:NO];
+}
+
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
 {
     [OTAppConfiguration configureApplicationAppearance];

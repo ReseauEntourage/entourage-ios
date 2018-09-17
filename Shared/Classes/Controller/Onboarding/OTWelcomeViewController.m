@@ -77,7 +77,11 @@
 }
 
 - (IBAction)continueOnboarding:(id)sender {
-    [OTAppState continueFromWelcomeScreen];
+    if (self.signupNewUser) {
+        [OTAppState continueFromWelcomeScreenForOnboarding];
+    } else {
+        [OTAppState continueFromWelcomeScreen];
+    }
 }
 
 @end

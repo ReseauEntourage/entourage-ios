@@ -75,10 +75,10 @@
                                         </connections>
                                     </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99g-bl-Xlx" userLabel="footerContainer">
-                                        <rect key="frame" x="0.0" y="586" width="375" height="81"/>
+                                        <rect key="frame" x="0.0" y="521" width="375" height="146"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="81" id="mV5-yX-E5d"/>
+                                            <constraint firstAttribute="height" constant="146" id="mV5-yX-E5d"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -102,7 +102,7 @@
                                     <constraint firstItem="RH9-u7-BWa" firstAttribute="leading" secondItem="i3K-Bo-vbH" secondAttribute="leading" constant="120" id="S9s-bK-odw"/>
                                     <constraint firstItem="5mc-qM-wVC" firstAttribute="top" secondItem="i3K-Bo-vbH" secondAttribute="top" constant="39" id="Upc-5F-n2e"/>
                                     <constraint firstItem="pgT-XZ-jUI" firstAttribute="top" secondItem="wNT-01-HIT" secondAttribute="bottom" constant="45" id="XY9-cI-LWd"/>
-                                    <constraint firstItem="99g-bl-Xlx" firstAttribute="top" secondItem="wsn-PA-onb" secondAttribute="bottom" constant="-81" id="bOg-SA-ogn"/>
+                                    <constraint firstItem="99g-bl-Xlx" firstAttribute="top" secondItem="wsn-PA-onb" secondAttribute="bottom" constant="-146" id="bOg-SA-ogn"/>
                                     <constraint firstAttribute="trailing" secondItem="99g-bl-Xlx" secondAttribute="trailing" id="d76-kx-NuR"/>
                                     <constraint firstAttribute="trailing" secondItem="lki-hr-FPi" secondAttribute="trailing" constant="16" id="oAN-5K-0Cn"/>
                                     <constraint firstItem="lki-hr-FPi" firstAttribute="top" secondItem="wNT-01-HIT" secondAttribute="bottom" constant="1" id="oEH-T3-AZN"/>
@@ -135,16 +135,43 @@
                                     <action selector="showLogin" destination="d0v-Fd-fA9" eventType="touchUpInside" id="uJg-o1-lXp"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gkg-m5-cwx">
+                                <rect key="frame" x="12" y="537" width="351" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="92" id="3gp-0r-TwE"/>
+                                    <constraint firstAttribute="height" constant="50" id="jDI-qG-bX6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="S'inscrire sur Voisin-Age">
+                                    <color key="titleColor" red="0.22003445029999999" green="0.6036320329" blue="0.84068751340000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3gp-0r-TwE"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="signupLogin" destination="d0v-Fd-fA9" eventType="touchUpInside" id="SdW-2b-m2G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="i3K-Bo-vbH" secondAttribute="trailing" id="3bf-cW-SeW"/>
                             <constraint firstItem="i3K-Bo-vbH" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="top" id="6Ww-AT-V1y"/>
                             <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="i3K-Bo-vbH" secondAttribute="bottom" id="Eak-VW-MBj"/>
+                            <constraint firstItem="Gkg-m5-cwx" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leading" constant="12" id="Ndo-3Y-Tzh"/>
+                            <constraint firstItem="mwv-HX-aYM" firstAttribute="top" secondItem="Gkg-m5-cwx" secondAttribute="bottom" constant="15" id="O8W-st-apT"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="Q4k-a2-1L2"/>
                             <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="mwv-HX-aYM" secondAttribute="bottom" constant="15" id="WGz-P9-g6X"/>
                             <constraint firstItem="i3K-Bo-vbH" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leading" id="iOT-Zv-Sk8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwv-HX-aYM" secondAttribute="trailing" constant="-4" id="jBT-Ve-tb9"/>
+                            <constraint firstAttribute="trailing" secondItem="Gkg-m5-cwx" secondAttribute="trailing" constant="12" id="jJV-ka-6zx"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="xue-aD-E7N"/>
                         </constraints>
                     </view>
@@ -154,6 +181,7 @@
                         <outlet property="loginButton" destination="mwv-HX-aYM" id="qbZ-St-EEE"/>
                         <outlet property="pageControl" destination="pgT-XZ-jUI" id="GUL-FL-cVq"/>
                         <outlet property="scrollView" destination="wsn-PA-onb" id="taW-Lw-G56"/>
+                        <outlet property="signupButton" destination="Gkg-m5-cwx" id="JXG-e8-Y4N"/>
                         <outlet property="subtitleLabel" destination="lki-hr-FPi" id="vKh-rZ-gPd"/>
                         <outlet property="titleLabel" destination="wNT-01-HIT" id="HHE-UK-5on"/>
                     </connections>

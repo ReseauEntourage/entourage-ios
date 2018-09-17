@@ -39,18 +39,17 @@
 - (NSAttributedString *)eventInfoFormattedDescription {
     
     NSString *prefix = @"rendez-vous";
-    NSString *fontName = @"SFUIText-Medium";
     CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
     
-    NSString *startDateInfo = [self.entourage.startsAt asStringWithFormat:@"EEEE dd MMMM yyyy"];
-    NSString *dateInfo = [NSString stringWithFormat:@"%@ %@", prefix, startDateInfo];
+    NSString *startDateInfo = [self.entourage.startsAt asStringWithFormat:@"EEEE dd MMMM"];
+    NSString *startTimeInfo = [self.entourage.startsAt toRoundedQuarterTimeString];
+    NSString *dateInfo = [NSString stringWithFormat:@"%@ le %@", prefix, startDateInfo];
+    NSString *timeInfo = [NSString stringWithFormat:@"\nà %@", startTimeInfo];
     NSString *addressInfo = [NSString stringWithFormat:@"\n%@", self.entourage.displayAddress];
     
-    NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:dateInfo attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    NSString *fullInfoText = [NSString stringWithFormat:@"%@%@%@", dateInfo, timeInfo, addressInfo];
     
-    NSAttributedString *addressAttrString = [[NSAttributedString alloc] initWithString:addressInfo attributes:@{NSFontAttributeName : [UIFont fontWithName:@"SFUIText-Bold" size:fontSize]}];
-    
-    [infoAttrString appendAttributedString:addressAttrString];
+    NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:fullInfoText attributes:@{NSFontAttributeName : [UIFont fontWithName:@"SFUIText-Bold" size:fontSize]}];
     
     return infoAttrString;
 }

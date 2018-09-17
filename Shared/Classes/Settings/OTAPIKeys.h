@@ -43,6 +43,7 @@
 #define kWSKeyAction @"action"
 #define kWSKeyUrl @"url"
 #define kWSKeyIconUrl @"icon_url"
+#define kWSKeyImageUrl @"image_url"
 
 //Category
 #define kWSKeyEntourageCategory @"display_category"

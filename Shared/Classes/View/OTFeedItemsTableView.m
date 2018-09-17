@@ -199,7 +199,7 @@
     id item = self.items[indexPath.section];
     NSString *identifier = [self getCellIdentifier:item];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    [self configureCell:cell withItem:item];
+    [self configureCell:cell withItem:item reloadAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -378,15 +378,17 @@
         return OTAnnouncementTableViewCellIdentifier;
     return OTNewsFeedTableViewCellIdentifier;
 }
-     
-- (void)configureCell:(UITableViewCell *)cell withItem:(id)item {
+
+- (void)configureCell:(UITableViewCell *)cell withItem:(id)item reloadAtIndexPath:(NSIndexPath*)indexPath {
     if([self isGuideItem:item]) {
         OTSolidarityGuideCell *guideCell = (OTSolidarityGuideCell *)cell;
         [guideCell configureWith:(OTPoi *) item];
     }
     else if ([self isAnnouncementItem:item]) {
         OTAnnouncementCell *announcementCell = (OTAnnouncementCell *)cell;
-        [announcementCell configureWith:(OTAnnouncement *)item];
+        [announcementCell configureWith:(OTAnnouncement *)item completion:^{
+            [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
     }
     else {
         OTNewsFeedCell *feedCell = (OTNewsFeedCell *)cell;

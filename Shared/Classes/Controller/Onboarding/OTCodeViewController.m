@@ -40,6 +40,9 @@
     [super viewDidLoad];
 
     self.title = @"";
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
     [self addRegenerateBarButton];
     self.codeTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
@@ -53,7 +56,7 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
-    //[self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    [self.validateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     if([NSUserDefaults standardUserDefaults].currentUser) {
         [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;

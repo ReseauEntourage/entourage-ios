@@ -29,8 +29,10 @@
 
 + (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;
++ (void)continueFromStartupScreenForOnboarding;
 + (void)navigateToPermissionsScreens;
 + (void)continueFromStartupScreen;
++ (void)continueFromWelcomeScreenForOnboarding;
 + (void)continueFromWelcomeScreen;
 + (void)continueFromLoginScreen;
 + (void)continueFromUserEmailScreen;

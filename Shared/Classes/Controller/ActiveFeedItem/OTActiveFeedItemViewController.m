@@ -39,6 +39,7 @@
 #import "OTUserViewController.h"
 #import "UIStoryboard+entourage.h"
 #import "OTEntourageService.h"
+#import "OTPublicFeedItemViewController.h"
 #import "entourage-Swift.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
@@ -213,11 +214,21 @@
     [self performSegueWithIdentifier:@"SegueMap" sender:self];
 }
 
+- (IBAction)showItemDetails {
+    [OTLogger logEvent:@"EntouragePublicPageViewFromMessages"];
+
+    UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
+    OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+    publicFeedItemController.feedItem = self.feedItem;
+    
+    [self.navigationController pushViewController:publicFeedItemController animated:NO];
+}
+
 - (IBAction)infoAction {
     if ([self.feedItem isConversation]) {
         [self showUserProfile];
     } else {
-        [self showMap];
+        [self showItemDetails];
     }
 }
 
