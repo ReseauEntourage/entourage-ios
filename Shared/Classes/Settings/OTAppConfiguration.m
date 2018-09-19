@@ -269,9 +269,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)updateAppearanceForMainTabBar {
 
-    UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].delegate.window.rootViewController;
+    id rootController = [UIApplication sharedApplication].delegate.window.rootViewController;
     
-    [OTAppConfiguration configureTabBarAppearance:tabBarController];
+    if ([rootController isKindOfClass:[UITabBarController class]]) {
+        [OTAppConfiguration configureTabBarAppearance:(UITabBarController*)rootController];
+    } else if ([rootController isKindOfClass:[UINavigationController class]]) {
+        [OTAppConfiguration configureNavigationControllerAppearance:(UINavigationController*)rootController];
+    }
 }
 
 + (UITabBarController*)configureMainTabBarWithDefaultSelectedIndex:(NSInteger)selectedIndex
@@ -365,7 +369,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)configureTabBarAppearance:(UITabBarController*)tabBarController
 {
-    //UITabBar.appearance.backgroundColor = [[ApplicationTheme shared] backgroundThemeColor];
     UITabBar.appearance.tintColor = [[ApplicationTheme shared] backgroundThemeColor];
     UITabBar.appearance.barTintColor = [[ApplicationTheme shared] backgroundThemeColor];
     UITabBar.appearance.translucent = NO;
