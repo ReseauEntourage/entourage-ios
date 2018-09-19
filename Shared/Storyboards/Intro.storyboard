@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -189,27 +188,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="tPf-h7-A0x">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SdK-fN-W2L" userLabel="scrollContainer">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un peu de chaleur humaine." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPF-Wr-lQ0">
-                                <rect key="frame" x="48" y="267" width="280" height="58"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIi-nZ-utS">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="fz7-U9-CWf"/>
-                                    <constraint firstAttribute="width" constant="280" id="xZd-ZE-XbC"/>
+                                    <constraint firstItem="mIi-nZ-utS" firstAttribute="top" secondItem="SdK-fN-W2L" secondAttribute="top" id="HZw-7S-OvE"/>
+                                    <constraint firstItem="mIi-nZ-utS" firstAttribute="leading" secondItem="SdK-fN-W2L" secondAttribute="leading" id="Y3z-U4-9Ca"/>
+                                    <constraint firstAttribute="bottom" secondItem="mIi-nZ-utS" secondAttribute="bottom" id="vpa-v9-fUl"/>
+                                    <constraint firstAttribute="trailing" secondItem="mIi-nZ-utS" secondAttribute="trailing" id="wXQ-8c-Ewe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="21"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entourageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Yl-vAI">
-                                <rect key="frame" x="150" y="166" width="75" height="75"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="KGI-mV-QW1"/>
-                                    <constraint firstAttribute="height" constant="75" id="SVb-Of-boK"/>
-                                </constraints>
-                            </imageView>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oI-JN-xF6">
                                 <rect key="frame" x="12" y="536" width="351" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -276,37 +270,42 @@
                                     </mask>
                                 </variation>
                             </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="lg1-xB-vLI">
+                                <rect key="frame" x="160" y="493" width="55" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="plu-6B-fRH"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" red="0.8862745098" green="0.61960784310000006" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.94117647059999998" green="0.39607843139999999" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="top" secondItem="H1V-0f-AM4" secondAttribute="bottom" constant="16" id="3UX-Fi-EuG"/>
                             <constraint firstItem="H1V-0f-AM4" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="8s3-HQ-c36"/>
-                            <constraint firstAttribute="bottom" secondItem="tPf-h7-A0x" secondAttribute="bottom" id="9s4-4M-lZ7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="H1V-0f-AM4" secondAttribute="trailing" constant="-4" id="Csv-YN-Mdp"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="D3N-XI-gkf"/>
-                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="bottom" secondItem="60w-tv-tKx" secondAttribute="centerY" constant="-8.5" id="Hxe-we-Y2Z"/>
                             <constraint firstItem="1oI-JN-xF6" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="I3C-ND-duB"/>
-                            <constraint firstItem="tPf-h7-A0x" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leading" id="KX8-Cv-XdY"/>
-                            <constraint firstItem="bPF-Wr-lQ0" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="Myk-g9-Wav"/>
+                            <constraint firstItem="lg1-xB-vLI" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="NrW-yF-g9w"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="top" secondItem="1oI-JN-xF6" secondAttribute="bottom" constant="16" id="Pvi-NW-Ow3"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leadingMargin" constant="-4" id="Q4k-a2-1L2"/>
+                            <constraint firstItem="1oI-JN-xF6" firstAttribute="top" secondItem="lg1-xB-vLI" secondAttribute="bottom" constant="6" id="Tx9-IL-h3L"/>
                             <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="mwv-HX-aYM" secondAttribute="bottom" constant="15" id="WGz-P9-g6X"/>
-                            <constraint firstItem="tPf-h7-A0x" firstAttribute="width" secondItem="60w-tv-tKx" secondAttribute="width" id="XX3-wq-WT3"/>
-                            <constraint firstItem="gln-Yl-vAI" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="bZY-KF-103"/>
-                            <constraint firstItem="tPf-h7-A0x" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="top" id="gvD-Pn-zhi"/>
+                            <constraint firstAttribute="trailing" secondItem="SdK-fN-W2L" secondAttribute="trailing" id="ZJ8-ju-YYS"/>
+                            <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="SdK-fN-W2L" secondAttribute="bottom" id="hiH-VS-m8Y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwv-HX-aYM" secondAttribute="trailing" constant="-4" id="jBT-Ve-tb9"/>
+                            <constraint firstItem="SdK-fN-W2L" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="top" id="rQU-5b-Sa9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1oI-JN-xF6" secondAttribute="trailing" constant="-4" id="tml-dp-994"/>
-                            <constraint firstItem="gln-Yl-vAI" firstAttribute="top" secondItem="qgm-QM-88m" secondAttribute="bottom" constant="146" id="v5l-yk-G0f"/>
+                            <constraint firstItem="SdK-fN-W2L" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leading" id="xow-J5-w0c"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="xue-aD-E7N"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oc7-iw-O1J"/>
                     <connections>
-                        <outlet property="bgImage" destination="tPf-h7-A0x" id="frX-Tq-tlu"/>
                         <outlet property="loginButton" destination="mwv-HX-aYM" id="nPa-jz-z55"/>
-                        <outlet property="logo" destination="gln-Yl-vAI" id="bCA-he-IZR"/>
-                        <outlet property="logoTitle" destination="bPF-Wr-lQ0" id="88W-aM-vrb"/>
+                        <outlet property="pageControl" destination="lg1-xB-vLI" id="v1F-6r-pIg"/>
                         <outlet property="registerButton" destination="1oI-JN-xF6" id="YRW-Zx-IdR"/>
+                        <outlet property="scrollView" destination="mIi-nZ-utS" id="oPz-ai-z63"/>
                         <segue destination="8Pa-2W-O1j" kind="show" identifier="SignUpSegue" id="UUz-OA-utW"/>
                         <segue destination="Gt1-cc-4DI" kind="show" identifier="LoginSegue" id="usp-d3-u4q"/>
                     </connections>
@@ -911,12 +910,10 @@ En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez
         </scene>
     </scenes>
     <resources>
-        <image name="bg" width="166" height="296"/>
-        <image name="entourageLogo" width="75" height="75"/>
         <image name="logoWhiteEntourage" width="56" height="56"/>
         <image name="whitePhone" width="56" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GFk-L8-2yS"/>
+        <segue reference="usp-d3-u4q"/>
     </inferredMetricsTieBreakers>
 </document>

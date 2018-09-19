@@ -14,6 +14,7 @@
 #import "OTFeedItemFactory.h"
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
+#import "entourage-Swift.h"
 
 #define DEFAULT_IMAGE @"userSmall"
 
@@ -84,6 +85,10 @@
     }
     else {
         title = OTLocalizedString(@"item_closed");
+        if (![feedItem isOuting] && [feedItem.outcomeStatus boolValue]) {
+            title = @"Succès ! Lire l’histoire";
+            color = [ApplicationTheme shared].backgroundThemeColor;
+        }
     }
     
     [self setTitle:title forState:UIControlStateNormal];

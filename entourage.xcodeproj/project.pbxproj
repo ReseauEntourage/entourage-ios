@@ -716,6 +716,10 @@
 		A202ED302085D2C80058F32C /* NSDate+ui.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC12085D2C70058F32C /* NSDate+ui.m */; };
 		A202ED312085D2C80058F32C /* OTVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC52085D2C70058F32C /* OTVersionInfo.m */; };
 		A202ED322085D2C80058F32C /* OTVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC52085D2C70058F32C /* OTVersionInfo.m */; };
+		A20489FB2151328D00064EB0 /* IntroPage1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20489FA2151328D00064EB0 /* IntroPage1.xib */; };
+		A20489FF2151421500064EB0 /* IntroPage3.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20489FC2151421400064EB0 /* IntroPage3.xib */; };
+		A2048A002151421500064EB0 /* IntroPage4.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20489FD2151421400064EB0 /* IntroPage4.xib */; };
+		A2048A012151421500064EB0 /* IntroPage2.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20489FE2151421500064EB0 /* IntroPage2.xib */; };
 		A21D64A02085D6A400EF8E0E /* EnvironmentConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21D649F2085D6A400EF8E0E /* EnvironmentConfigurationManager.swift */; };
 		A21D64A32085D6D200EF8E0E /* OTAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A21D64A22085D6D200EF8E0E /* OTAppConfiguration.m */; };
 		A21D64AA2085E8B400EF8E0E /* Platinia.gpx in Resources */ = {isa = PBXBuildFile; fileRef = A21D64A52085E8B400EF8E0E /* Platinia.gpx */; };
@@ -1943,6 +1947,10 @@
 		A202EAC42085D2C70058F32C /* NSUserDefaults+OT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+OT.h"; sourceTree = "<group>"; };
 		A202EAC52085D2C70058F32C /* OTVersionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTVersionInfo.m; sourceTree = "<group>"; };
 		A202EAC62085D2C70058F32C /* NSError+OTErrorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+OTErrorData.h"; sourceTree = "<group>"; };
+		A20489FA2151328D00064EB0 /* IntroPage1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroPage1.xib; sourceTree = "<group>"; };
+		A20489FC2151421400064EB0 /* IntroPage3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroPage3.xib; sourceTree = "<group>"; };
+		A20489FD2151421400064EB0 /* IntroPage4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroPage4.xib; sourceTree = "<group>"; };
+		A20489FE2151421500064EB0 /* IntroPage2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroPage2.xib; sourceTree = "<group>"; };
 		A21D649F2085D6A400EF8E0E /* EnvironmentConfigurationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnvironmentConfigurationManager.swift; sourceTree = "<group>"; };
 		A21D64A12085D6D200EF8E0E /* OTAppConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppConfiguration.h; sourceTree = "<group>"; };
 		A21D64A22085D6D200EF8E0E /* OTAppConfiguration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppConfiguration.m; sourceTree = "<group>"; };
@@ -2846,6 +2854,10 @@
 				96B658AC209A417900EB0398 /* OTItemTableViewCell.swift */,
 				A21E8F1D20B5BA8400433606 /* OTUserGroupCell.h */,
 				A21E8F1E20B5BA8400433606 /* OTUserGroupCell.m */,
+				A20489FA2151328D00064EB0 /* IntroPage1.xib */,
+				A20489FE2151421500064EB0 /* IntroPage2.xib */,
+				A20489FC2151421400064EB0 /* IntroPage3.xib */,
+				A20489FD2151421400064EB0 /* IntroPage4.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3856,6 +3868,7 @@
 				A21D65B92085FDAA00EF8E0E /* PublicFeedItem.storyboard in Resources */,
 				A21D65BA2085FDAA00EF8E0E /* Rights.storyboard in Resources */,
 				A21D65C22085FDAA00EF8E0E /* EncounterEditor.storyboard in Resources */,
+				A20489FB2151328D00064EB0 /* IntroPage1.xib in Resources */,
 				A21D65B12085FDAA00EF8E0E /* AssociationDetails.storyboard in Resources */,
 				A202E7E32085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
 				A21D65BB2085FDAA00EF8E0E /* MapOptions.storyboard in Resources */,
@@ -3872,6 +3885,7 @@
 				A202E7D32085CFC40058F32C /* Entourage.clr in Resources */,
 				A21D65C02085FDAA00EF8E0E /* FeedChangeOptions.storyboard in Resources */,
 				A202E7DF2085CFC40058F32C /* SF-UI-Text-Ultrathin.otf in Resources */,
+				A2048A012151421500064EB0 /* IntroPage2.xib in Resources */,
 				A202E7F92085CFC40058F32C /* DINMittelschrift-Regular.ttf in Resources */,
 				A21D65B72085FDAA00EF8E0E /* TourOptions.storyboard in Resources */,
 				A202E7DD2085CFC40058F32C /* SF-UI-Text-SemiboldItalic.otf in Resources */,
@@ -3892,6 +3906,7 @@
 				A202E7DB2085CFC40058F32C /* InfoPlist.strings in Resources */,
 				A21D65BD2085FDAA00EF8E0E /* ActiveFeedItem.storyboard in Resources */,
 				A2306AA820C54EB00094370E /* PfpUserVoisinage.storyboard in Resources */,
+				A2048A002151421500064EB0 /* IntroPage4.xib in Resources */,
 				A21D65B82085FDAA00EF8E0E /* UserProfileEditor.storyboard in Resources */,
 				A21D65A82085FDAA00EF8E0E /* Disclaimer.storyboard in Resources */,
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
@@ -3917,6 +3932,7 @@
 				A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */,
 				A202E7D52085CFC40058F32C /* Localizable.strings in Resources */,
 				A202E7D92085CFC40058F32C /* categoryJson.json in Resources */,
+				A20489FF2151421500064EB0 /* IntroPage3.xib in Resources */,
 				A21D64AA2085E8B400EF8E0E /* Platinia.gpx in Resources */,
 				A202E7CD2085CFC40058F32C /* categories.json in Resources */,
 				A21D64AD2085E8B400EF8E0E /* Nowhere.gpx in Resources */,

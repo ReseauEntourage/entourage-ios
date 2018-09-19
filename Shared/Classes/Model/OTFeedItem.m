@@ -53,6 +53,7 @@
     copy->_shareUrl = [_shareUrl copyWithZone:zone];
     copy->_groupType = [_groupType copyWithZone:zone];
     copy->_identifierTag = [_identifierTag copyWithZone:zone];
+    copy->_outcomeStatus = [_outcomeStatus copyWithZone:zone];
     
     copy->_startsAt = [_startsAt copyWithZone:zone];
     copy->_displayAddress = [_displayAddress copyWithZone:zone];
@@ -75,6 +76,10 @@
         self.type = [dictionary stringForKey:kWSKeyType];
         self.updatedDate = [dictionary dateForKey:kWSUpdatedDate];
         self.shareUrl = [dictionary stringForKey:kWSKeyShareUrl];
+        NSDictionary *outcomeDictionary = [dictionary objectForKey:kWSKeyOutcome];
+        if (outcomeDictionary) {
+            self.outcomeStatus = [outcomeDictionary objectForKey:@"success"];
+        }
         
         NSDictionary *authorDictionary = [dictionary objectForKey:kWSKeyAuthor];
         if ([authorDictionary class] != [NSNull class]) {
