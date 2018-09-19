@@ -67,8 +67,15 @@
             }
         }
     }
-    else
-        [self updateTextButtonWithText:OTLocalizedString(@"item_closed") andColor:[UIColor appGreyishColor]];
+    else {
+        NSString *title = OTLocalizedString(@"item_closed");
+        if (![self.feedItem isOuting] && [self.feedItem.outcomeStatus boolValue]) {
+            title = @"Succès !";
+            [self updateTextButtonWithText:title andColor:[UIColor appGreyishColor]];
+        } else {
+            [self updateTextButtonWithText:title andColor:color];
+        }
+    }
 }
 
 - (void)updateTextButtonWithText:(NSString *)text andColor:(UIColor *)color {

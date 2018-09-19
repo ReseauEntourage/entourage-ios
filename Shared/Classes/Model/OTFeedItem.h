@@ -45,6 +45,7 @@
 @property (nonatomic, strong) NSString *streetAddress;
 @property (nonatomic, strong) NSString *placeName;
 @property (nonatomic, strong) NSString *googlePlaceId;
+@property (nonatomic, strong) NSNumber *outcomeStatus;
 
 @property (nonatomic) NSString *identifierTag;
 
