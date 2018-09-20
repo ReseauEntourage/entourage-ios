@@ -79,40 +79,40 @@
     self.lblEmptyTableReason.numberOfLines = 0;
     self.infoLabel.adjustsFontSizeToFitWidth = YES;
     
-    UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [self addGestureRecognizer:pgr];
+    //UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    //[self addGestureRecognizer:pgr];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
 
-- (void)handlePan:(UIPanGestureRecognizer*)pan {
-    if (pan.state == UIGestureRecognizerStateEnded) {
-        CGPoint translation = [pan translationInView:self];
-        if (fabs(translation.y) <= fabs(translation.x)) {
-            pan.enabled = NO;
-        }
-        
-        if ([pan velocityInView:self].y > 0) {
-            self.shadowView.hidden = YES;
-            __block CGRect headerFrame = self.tableHeaderView.frame;
-            [UIView animateWithDuration:0.2 animations:^() {
-                headerFrame.origin.y = 0;
-                headerFrame.size.height = self.frame.size.height;
-                self.tableHeaderView.subviews[0].frame = headerFrame;
-                
-            } completion:^(BOOL finished) {
-                if (finished) {
-                    headerFrame.origin.y = 0;
-                    self.tableHeaderView.subviews[0].frame = headerFrame;
-                    self.shadowView.hidden = NO;
-                }
-            }];
-
-        }
-    }
-}
+//- (void)handlePan:(UIPanGestureRecognizer*)pan {
+//    if (pan.state == UIGestureRecognizerStateEnded) {
+//        CGPoint translation = [pan translationInView:self];
+//        if (fabs(translation.y) <= fabs(translation.x)) {
+//            pan.enabled = NO;
+//        }
+//        
+//        if ([pan velocityInView:self].y > 0) {
+//            self.shadowView.hidden = YES;
+//            __block CGRect headerFrame = self.tableHeaderView.frame;
+//            [UIView animateWithDuration:0.2 animations:^() {
+//                headerFrame.origin.y = 0;
+//                headerFrame.size.height = self.frame.size.height;
+//                self.tableHeaderView.subviews[0].frame = headerFrame;
+//                
+//            } completion:^(BOOL finished) {
+//                if (finished) {
+//                    headerFrame.origin.y = 0;
+//                    self.tableHeaderView.subviews[0].frame = headerFrame;
+//                    self.shadowView.hidden = NO;
+//                }
+//            }];
+//
+//        }
+//    }
+//}
 
 //- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
 //    CGPoint translation = [(UIPanGestureRecognizer*)gestureRecognizer translationInView:self];

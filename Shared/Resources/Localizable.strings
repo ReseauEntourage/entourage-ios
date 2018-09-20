@@ -88,7 +88,7 @@
 "about_email_notavailable" = "Email introuvable";
 "terms_and_conditions_for_onboarding" = "conditions d’utilisation";
 "about_twitter" = "Suivez-nous sur Twitter";
-"about_suggestions" = "Suggérer des améliorations";
+"about_suggestions" = "Suggérez des améliorations";
 "about_appVersion" = "Version de l'application";
 "about_privacy_policy" = "Politique de Confidentialité";
 
@@ -278,7 +278,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "invalidPhoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
 "userNameDescriptionText" = "Seuls le prénom et la première lettre du nom apparaitront aux autres utilisateurs.";
 "userEmailDescriptionText" = "Nous ne l’utiliserons que pour vous envoyer notre newsletter et les dernières actualités d’Entourage";
-"userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\n Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
+"userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\nActiver les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
 "edit_user_description" = "Présentez-vous, le réseau Entourage a hâte de faire votre connaissance!";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
@@ -488,5 +488,5 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "user_reported" = "Utilisateur signalé";
 
 "action" = "Action";
-"add_title_hint" = "Les actions avec un titre clair attirent plus de membres et ont plus de chances d’aboutir !";
-"add_description_hint" = "Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d’aboutir !";
+"add_title_hint" = "Les évènements avec un titre clair attirent plus de participants.";
+"add_description_hint" = "Vous pourrez modifier cette description et la date de votre évènement à tout moment.";
