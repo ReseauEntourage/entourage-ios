@@ -72,8 +72,9 @@
 "menu_entourage_actions" = "Idées d'actions dans l'appli";
 "menu_make_donation" = "Faire un don";
 "menu_application_usage" = "Questions fréquentes";
-"menu_atd_partner" = "Agir avec Entourage";
+"menu_atd_partner" = "Suivre Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
+"menu_join" = "Devenir Ambassadeur Entourage";
 "menu_donnation" = "Donnez vos retours rapides";
 
 // AboutItems
@@ -88,7 +89,6 @@
 "terms_and_conditions_for_onboarding" = "conditions d’utilisation";
 "about_twitter" = "Suivez-nous sur Twitter";
 "about_suggestions" = "Suggérer des améliorations";
-"about_join" = "Devenir bénévole - ambassadeur";
 "about_appVersion" = "Version de l'application";
 "about_privacy_policy" = "Politique de Confidentialité";
 
@@ -361,7 +361,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 
 // Titles
 "aboutTitle" = "À propos";
-"socialTitle" = "AGIR AVEC ENTOURAGE";
+"socialTitle" = "SUIVRE ENTOURAGE";
 "addEventAddress" = "Adresse *";
 "addEventTitle" = "Titre *";
 "addEventDate" = "Date *";

@@ -230,25 +230,27 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    GMSAutocompletePrediction *prediction = self.googlePlacePredictions[indexPath.row];
     cell.contentView.backgroundColor = UIColor.clearColor;
     cell.backgroundColor = [[ApplicationTheme shared].backgroundThemeColor colorWithAlphaComponent:0.8];
     cell.textLabel.textColor = [UIColor whiteColor];
-    
+    cell.textLabel.numberOfLines = 2;
     UIFont *regularFont = [UIFont fontWithName:@"SFUIText-Light" size:15];
     UIFont *boldFont = [UIFont fontWithName:@"SFUIText-Bold" size:15];
     
-    NSMutableAttributedString *bolded = [prediction.attributedFullText mutableCopy];
-    [bolded enumerateAttribute:kGMSAutocompleteMatchAttribute
-                               inRange:NSMakeRange(0, bolded.length)
-                               options:0
-                            usingBlock:^(id value, NSRange range, BOOL *stop) {
-                                  UIFont *font = (value == nil) ? regularFont : boldFont;
-                                 [bolded addAttribute:NSFontAttributeName value:font range:range];
-                                }];
-    
-    cell.textLabel.attributedText = bolded;
-    cell.textLabel.numberOfLines = 2;
+    if (self.googlePlacePredictions.count > indexPath.row) {
+        GMSAutocompletePrediction *prediction = self.googlePlacePredictions[indexPath.row];
+        
+        NSMutableAttributedString *bolded = [prediction.attributedFullText mutableCopy];
+        [bolded enumerateAttribute:kGMSAutocompleteMatchAttribute
+                                   inRange:NSMakeRange(0, bolded.length)
+                                   options:0
+                                usingBlock:^(id value, NSRange range, BOOL *stop) {
+                                        UIFont *font = (value == nil) ? regularFont : boldFont;
+                                        [bolded addAttribute:NSFontAttributeName value:font range:range];
+                                    }];
+        
+        cell.textLabel.attributedText = bolded;
+    }
     
     return cell;
 }
@@ -258,6 +260,7 @@
 }
 
 - (void)autoSuggestionField:(UITextField *)field textChanged:(NSString *)text {
+    [self.googlePlaceFetcher sourceTextHasChanged:text];
 }
 
 - (CGFloat)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {

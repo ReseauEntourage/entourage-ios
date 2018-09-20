@@ -18,7 +18,6 @@ typedef enum {
     PolitiqueDeConfidenatialite,
     Twitter,
     Suggestions,
-    Join
 } AboutItems;
 
 @interface OTAboutItem : NSObject

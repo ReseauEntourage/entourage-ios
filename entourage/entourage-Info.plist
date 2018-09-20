@@ -102,11 +102,11 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Pour envoyer des invitations au réseau Entourage</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Pour afficher les POIs, vos rencontres, etc....</string>
+	<string>Pour afficher les initiatives solidaires à proximité</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Pour afficher les POIs, vos rencontres, etc....</string>
+	<string>Pour afficher les initiatives solidaires à proximité</string>
 	<key>NSLocationUsageDescription</key>
-	<string>Pour afficher les POIs, vos rencontres, etc....</string>
+	<string>Pour afficher les initiatives solidaires à proximité</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Pour vous montrer les actions de solidarité à proximité</string>
 	<key>NSMicrophoneUsageDescription</key>

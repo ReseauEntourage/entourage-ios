@@ -36,10 +36,23 @@
 #import "OTAppConfiguration.h"
 #import "entourage-Swift.h"
 
-#define HEADER_CELL_INDEX 7 //OTAppConfiguration.supportsSolidarityGuideFunctionality ? 7 : 6
-#define LOG_OUT_CELL_INDEX 8 //OTAppConfiguration.supportsSolidarityGuideFunctionality ? 8 : 7
 #define SOLIDARITY_GUIDE_INDEX 2
-#define DONATION_CELL_INDEX 3 //OTAppConfiguration.supportsSolidarityGuideFunctionality ? 3 : 2
+#define DONATION_CELL_INDEX 4
+#define HEADER_CELL_INDEX 8
+#define LOG_OUT_CELL_INDEX 9
+
+typedef NS_ENUM(NSInteger, OTEntourageMenuIndexType) {
+    OTEntourageMenuIndexTypeBlog = 0,
+    OTEntourageMenuIndexTypeActions,
+    OTEntourageMenuIndexTypeSolidarityGuide,
+    OTEntourageMenuIndexTypeJoin,
+    OTEntourageMenuIndexTypeDonation,
+    OTEntourageMenuIndexTypeAtd,
+    OTEntourageMenuIndexTypeChart,
+    OTEntourageMenuIndexTypeAbout,
+    OTEntourageMenuIndexTypeNil,
+    OTEntourageMenuIndexTypeLogout
+};
 
 @import MessageUI;
 
@@ -140,7 +153,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellID;
-    if(indexPath.row == DONATION_CELL_INDEX)
+    if (indexPath.row == DONATION_CELL_INDEX)
         cellID = OTMenuMakeDonationTableViewCellIdentifier;
     else if (indexPath.row == HEADER_CELL_INDEX)
         cellID = @"HeaderViewCell";
@@ -148,20 +161,33 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
         cellID = OTMenuLogoutTableViewCellIdentifier;
     else
         cellID = OTMenuTableViewCellIdentifier;
+    
     OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
-    if (menuItem.iconName != nil)
+    if (menuItem.iconName != nil) {
         cell.itemIcon.image = [UIImage imageNamed:menuItem.iconName];
-    if (menuItem.title != nil)
+    }
+    if (menuItem.title != nil) {
         cell.itemLabel.text = menuItem.title;
-    else
+    }
+    else {
         cell.contentView.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
-    if ((indexPath.row == HEADER_CELL_INDEX || indexPath.row == HEADER_CELL_INDEX - 1) ||
-        (indexPath.row == LOG_OUT_CELL_INDEX || indexPath.row == DONATION_CELL_INDEX ||
+    }
+    
+    if ((indexPath.row == HEADER_CELL_INDEX ||
+         indexPath.row == HEADER_CELL_INDEX - 1) ||
+        (indexPath.row == LOG_OUT_CELL_INDEX ||
+         indexPath.row == DONATION_CELL_INDEX ||
         indexPath.row == DONATION_CELL_INDEX - 1))
         cell.separatorInset = UIEdgeInsetsZero;
-    if (indexPath.row == DONATION_CELL_INDEX)
-        cell.contentView.backgroundColor = [UIColor colorWithRed:242 green:101 blue:33 alpha:1];
+    
+    if (indexPath.row == DONATION_CELL_INDEX) {
+        cell.contentView.backgroundColor = [UIColor colorWithRed:242
+                                                           green:101
+                                                            blue:33
+                                                           alpha:1];
+    }
+    
 	return cell;
 }
 
@@ -209,6 +235,8 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                 [OTLogger logEvent:@"ViewEthicsChartClick"];
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_atd_partner")])
                 [OTLogger logEvent:@"ATDPartnershipView"];
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_join")])
+                [OTLogger logEvent:@"AmbassadorProgramClick"];
             
             NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, menuItem.identifier, TOKEN];
             NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
@@ -217,6 +245,9 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                  ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")]) ||
                 [menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")] ) {
                 [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
+            }
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_join")]) {
+                [OTSafariService launchInAppBrowserWithUrlString:JOIN_URL viewController:self.navigationController];
             }
             else {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
@@ -258,7 +289,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 #pragma mark - Storyboard
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuAboutIdentifier]) {
+    if ([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuAboutIdentifier]) {
         [OTLogger logEvent:@"AboutClick"];
     } else if([segue.identifier isEqualToString:OTMenuViewControllerSegueMenuDisconnectIdentifier]) {
         [OTLogger logEvent:@"LogOut"];
@@ -298,6 +329,11 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                                                                iconName:@"mapPin"];
     [menuItems addObject:itemSolidarityGuide];
     
+    OTMenuItem *itemJoin = [[OTMenuItem alloc]    initWithTitle:OTLocalizedString(@"menu_join")
+                                                               iconName:@"menu_ba"];
+    itemJoin.tag = OTEntourageMenuIndexTypeJoin;
+    [menuItems addObject:itemJoin];
+    
     OTMenuItem *itemDon = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_make_donation")
                                                    iconName:@"heartNofillWhite"
                                                  identifier:DONATE_LINK_ID];
@@ -332,8 +368,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 	OTMenuItem *menuItem = nil;
 	if (indexPath && (indexPath.row < self.menuItems.count))
 		menuItem = [self.menuItems objectAtIndex:indexPath.row];
-//    if (indexPath.section == 1)
-//        menuItem = [self.menuItems lastObject];
 	return menuItem;
 }
 
@@ -349,7 +383,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 }
 
 - (void)testDeepLink:(NSString *)deepLink {
-    //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"entourage://create-action"]];
     [[OTDeepLinkService new] handleUniversalLink:[NSURL URLWithString:deepLink]];
 }
 

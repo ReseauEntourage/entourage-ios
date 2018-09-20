@@ -95,6 +95,7 @@
 #define FAQ_LINK_ID @"faq"
 #define SUGGESTION_LINK_ID @"feedback"
 #define JOIN_LINK_ID @"volunteering"
+#define JOIN_URL @"https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
 
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
 #define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
