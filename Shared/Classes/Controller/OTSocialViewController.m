@@ -129,11 +129,6 @@
     itemSuggestions.type = Suggestions;
     [aboutItems addObject:itemSuggestions];
     
-    OTAboutItem *itemJoin = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_join")
-                                                    identifier:JOIN_LINK_ID];
-    itemJoin.type = Join;
-    [aboutItems addObject:itemJoin];
-    
     return aboutItems;
 }
 

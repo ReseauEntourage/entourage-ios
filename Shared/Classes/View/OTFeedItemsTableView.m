@@ -42,7 +42,7 @@
 #define BIG_FOOTER_HEIGHT 300
 
 
-@interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate>
+@interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UILabel *lblEmptyTableReason;
 @property (nonatomic, strong) NSArray *items;
@@ -52,7 +52,8 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, weak) IBOutlet UIButton *tourOptionsBtn;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior *sourceBehavior;
-@property (nonatomic, strong) UIView *currentNewsfeedFooter;;
+@property (nonatomic, strong) UIView *currentNewsfeedFooter;
+@property (nonatomic) UIView *shadowView;
 
 @end
 
@@ -77,7 +78,50 @@
     self.lblEmptyTableReason.textAlignment = NSTextAlignmentCenter;
     self.lblEmptyTableReason.numberOfLines = 0;
     self.infoLabel.adjustsFontSizeToFitWidth = YES;
+    
+    UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [self addGestureRecognizer:pgr];
 }
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)handlePan:(UIPanGestureRecognizer*)pan {
+    if (pan.state == UIGestureRecognizerStateEnded) {
+        CGPoint translation = [pan translationInView:self];
+        if (fabs(translation.y) <= fabs(translation.x)) {
+            pan.enabled = NO;
+        }
+        
+        if ([pan velocityInView:self].y > 0) {
+            self.shadowView.hidden = YES;
+            __block CGRect headerFrame = self.tableHeaderView.frame;
+            [UIView animateWithDuration:0.2 animations:^() {
+                headerFrame.origin.y = 0;
+                headerFrame.size.height = self.frame.size.height;
+                self.tableHeaderView.subviews[0].frame = headerFrame;
+                
+            } completion:^(BOOL finished) {
+                if (finished) {
+                    headerFrame.origin.y = 0;
+                    self.tableHeaderView.subviews[0].frame = headerFrame;
+                    self.shadowView.hidden = NO;
+                }
+            }];
+
+        }
+    }
+}
+
+//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+//    CGPoint translation = [(UIPanGestureRecognizer*)gestureRecognizer translationInView:self];
+//    if (fabs(translation.y) > fabs(translation.x)) {
+//        return YES;
+//    }
+//
+//    return NO;
+//}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -113,14 +157,14 @@
     [headerView sendSubviewToBack:mapView];
     [headerView bringSubviewToFront:showCurrentLocationButton];
     
-    UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156.0f , headerView.frame.size.width + 130.0f, 4.0f)];
+    self.shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156.0f , headerView.frame.size.width + 130.0f, 4.0f)];
     CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = shadowView.bounds;
+    gradient.frame = self.shadowView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.2].CGColor),  nil];
-    [shadowView.layer insertSublayer:gradient atIndex:1];
-    [headerView addSubview:shadowView];
+    [self.shadowView.layer insertSublayer:gradient atIndex:1];
+    [headerView addSubview:self.shadowView];
     
-    NSDictionary *viewsDictionary = @{@"shadow":shadowView};
+    NSDictionary *viewsDictionary = @{@"shadow":self.shadowView};
     NSArray *constraint_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow(4)]"
                                                                          options:0
                                                                          metrics:nil
@@ -133,8 +177,8 @@
                                                                              options:0
                                                                              metrics:nil
                                                                                views:viewsDictionary];
-    shadowView.translatesAutoresizingMaskIntoConstraints = NO;
-    [shadowView addConstraints:constraint_height];
+    self.shadowView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.shadowView addConstraints:constraint_height];
     [headerView addConstraints:constraint_pos_horizontal];
     [headerView addConstraints:constraint_pos_bottom];
     
@@ -166,17 +210,20 @@
 }
 
 - (void)setNoFeeds {
-    self.lblEmptyTableReason.text = [OTAppAppearance noMoreFeedsDescription];// no_feeds_received
+    self.lblEmptyTableReason.text = [OTAppAppearance noMoreFeedsDescription];
 }
 
 /********************************************************************************/
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if(self.items.count == 0)
+    if (self.items.count == 0) {
         self.backgroundView = self.lblEmptyTableReason;
-    else
+    }
+    else {
         self.backgroundView = nil;
+    }
+    
     return self.items.count;
 }
 
@@ -207,9 +254,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id selectedItem = self.items[indexPath.section];
-    if([self isGuideItem:selectedItem]) {
-        if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showPoiDetails:)])
+    if ([self isGuideItem:selectedItem]) {
+        if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showPoiDetails:)]) {
             [self.feedItemsDelegate showPoiDetails:selectedItem];
+        }
     }
     else if([self isAnnouncementItem:selectedItem])
     {
@@ -236,10 +284,14 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
                   willDecelerate:(BOOL)decelerate {
-    if([[self.items firstObject] isKindOfClass:[OTPoi class]])
+    if ([[self.items firstObject] isKindOfClass:[OTPoi class]]) {
         return;
-    if(self.tableFooterView != self.emptyFooterView)
+    }
+    
+    if (self.tableFooterView != self.emptyFooterView) {
         return;
+    }
+    
     CGPoint offset = scrollView.contentOffset;
     CGRect bounds = scrollView.bounds;
     CGSize size = scrollView.contentSize;
@@ -247,10 +299,14 @@
     float y = offset.y + bounds.size.height - inset.bottom;
     float h = size.height;
     float reload_distance = LOAD_MORE_DRAG_OFFSET;
-    if(y > h + reload_distance) {
+    
+    if (y > h + reload_distance) {
         dispatch_async(dispatch_get_main_queue(), ^() {
-            if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)])
+            if (self.feedItemsDelegate &&
+                [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
+             
                 [self.feedItemsDelegate loadMoreData];
+            }
         });
     }
 }
@@ -258,26 +314,31 @@
 #define kMapHeaderOffsetY 0.0
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (self.tableHeaderView == nil) return;
+    if (self.tableHeaderView == nil) {
+        return;
+    }
+    
     [UIView animateWithDuration:0.5 animations:^() {
-        if(self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height && self.tableFooterView != self.emptyFooterView && self.contentSize.height > self.frame.size.height)
-        [self.superview layoutIfNeeded];
+        if (self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height &&
+            self.tableFooterView != self.emptyFooterView &&
+            self.contentSize.height > self.frame.size.height) {
+            
+            [self.superview layoutIfNeeded];
+        }
     }];
 
     CGFloat scrollOffset = scrollView.contentOffset.y;
-    CGRect headerFrame = self.tableHeaderView.frame;//self.mapView.frame;
+    __block CGRect headerFrame = self.tableHeaderView.frame;//self.mapView.frame;
 
-    if (scrollOffset < 0)
-    {
+    if (scrollOffset < 0) {
         headerFrame.origin.y = scrollOffset;// MIN(kMapHeaderOffsetY - ((scrollOffset / 3)), 0);
         headerFrame.size.height = MAPVIEW_HEIGHT - scrollOffset;
-
     }
     else //scrolling up
     {
-        headerFrame.origin.y = kMapHeaderOffsetY ;//- scrollOffset;
+        headerFrame.origin.y = kMapHeaderOffsetY;//- scrollOffset;
     }
-
+    
     self.tableHeaderView.subviews[0].frame = headerFrame;
 }
 

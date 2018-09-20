@@ -34,7 +34,15 @@
 
 + (void)launchInAppBrowserWithUrl:(NSURL*)url viewController:(UIViewController*)viewController
 {
-    SFSafariViewController *safariController = [[SFSafariViewController alloc] initWithURL:url];
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"/"];
+    NSString *urlPath = [[url absoluteString] stringByTrimmingCharactersInSet:set];
+    
+    if (![urlPath containsString:@"http"]) {
+        urlPath = [NSString stringWithFormat:@"http://%@", urlPath];
+    }
+    
+    NSURL *launchUrl = [NSURL URLWithString:urlPath];
+    SFSafariViewController *safariController = [[SFSafariViewController alloc] initWithURL:launchUrl];
     safariController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     
     [OTAppConfiguration configureNavigationControllerAppearance:viewController.navigationController];

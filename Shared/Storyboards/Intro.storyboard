@@ -179,7 +179,7 @@
         <!--Startup View Controller-->
         <scene sceneID="6VV-8c-dP7">
             <objects>
-                <viewController storyboardIdentifier="OTStartupViewController" id="d0v-Fd-fA9" customClass="OTStartupViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTStartupViewController" wantsFullScreenLayout="YES" extendedLayoutIncludesOpaqueBars="YES" id="d0v-Fd-fA9" customClass="OTStartupViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qgm-QM-88m"/>
                         <viewControllerLayoutGuide type="bottom" id="W7p-IX-DwJ"/>
@@ -189,10 +189,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SdK-fN-W2L" userLabel="scrollContainer">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="-20" width="375" height="687"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIi-nZ-utS">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="687"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </scrollView>
                                 </subviews>
@@ -294,7 +294,7 @@
                             <constraint firstAttribute="trailing" secondItem="SdK-fN-W2L" secondAttribute="trailing" id="ZJ8-ju-YYS"/>
                             <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="SdK-fN-W2L" secondAttribute="bottom" id="hiH-VS-m8Y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwv-HX-aYM" secondAttribute="trailing" constant="-4" id="jBT-Ve-tb9"/>
-                            <constraint firstItem="SdK-fN-W2L" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="top" id="rQU-5b-Sa9"/>
+                            <constraint firstItem="SdK-fN-W2L" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="top" constant="-20" id="rQU-5b-Sa9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1oI-JN-xF6" secondAttribute="trailing" constant="-4" id="tml-dp-994"/>
                             <constraint firstItem="SdK-fN-W2L" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leading" id="xow-J5-w0c"/>
                             <constraint firstItem="mwv-HX-aYM" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="xue-aD-E7N"/>

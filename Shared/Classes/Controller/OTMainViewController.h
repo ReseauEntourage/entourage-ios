@@ -17,7 +17,7 @@
 @class OTEncounterAnnotation;
 @class OTFeedItem;
 
-@interface OTMainViewController : UIViewController <OTConfirmationViewControllerDelegate, EntourageEditorDelegate>
+@interface OTMainViewController : UIViewController <OTConfirmationViewControllerDelegate, EntourageEditorDelegate, UIGestureRecognizerDelegate>
 
 // tour properties
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;

@@ -480,10 +480,11 @@
     }
 
     [self clearMap];
-    [self showToursMap];
     
     self.poisMapDelegate.isActive = YES;
     self.solidarityGuidePoisDisplayed = YES;
+    
+    [self showToursMap];
     
     [OTAppState switchMapToSolidarityGuide];
     [self.noDataBehavior switchedToGuide];
@@ -1387,7 +1388,11 @@
         self.solidarityGuidePoisDisplayed = NO;
         
         // hide the show solidarity guides overlay if not enabled
-        [self.showSolidarityGuideView setHidden: !OTAppConfiguration.supportsSolidarityGuideFunctionality];
+        if (!OTAppConfiguration.supportsSolidarityGuideFunctionality) {
+            [self.showSolidarityGuideView setHidden:YES];
+        } else {
+            [self.showSolidarityGuideView setHidden:NO];
+        }
     }
     
     if (self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0) {
