@@ -96,6 +96,7 @@
 - (IBAction)edit:(id)sender {
     [OTLogger logEvent:@"EditEntourageConfirm"];
     [self prepareForClosing];
+    
     [self dismissViewControllerAnimated:YES completion:^{
         [self.editEntourageBehavior doEdit:(OTEntourage *)self.feedItem];
     }];

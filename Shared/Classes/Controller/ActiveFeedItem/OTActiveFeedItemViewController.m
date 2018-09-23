@@ -220,6 +220,7 @@
     UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
     OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
     publicFeedItemController.feedItem = self.feedItem;
+    publicFeedItemController.statusChangedBehavior.editEntourageBehavior = self.editEntourageBehavior;
     
     [self.navigationController pushViewController:publicFeedItemController animated:NO];
 }

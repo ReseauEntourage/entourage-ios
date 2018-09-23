@@ -17,7 +17,6 @@
 #import "OTUserProfileBehavior.h"
 #import "OTPublicInfoDataSource.h"
 #import "OTTableDataSourceBehavior.h"
-#import "OTStatusChangedBehavior.h"
 #import "OTToggleVisibleWithConstraintsBehavior.h"
 #import "OTShareFeedItemBehavior.h"
 #import "OTConsts.h"
@@ -35,7 +34,6 @@
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 @property (strong, nonatomic) IBOutlet OTPublicInfoDataSource *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
-@property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleWithConstraintsBehavior *toggleJoinViewBehavior;
 @property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareFeedItem;
 @property (nonatomic, weak) IBOutlet UILabel *lblJoin;

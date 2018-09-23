@@ -91,8 +91,6 @@
 #import "OTPrivateCircleAnnotation.h"
 #import "OTOutingAnnotation.h"
 
-#define MAPVIEW_HEIGHT 224.f
-
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define FEEDS_REQUEST_DISTANCE_KM 10
 
@@ -463,7 +461,7 @@
     
     self.showSolidarityGuideView.hidden = !OTAppConfiguration.supportsSolidarityGuideFunctionality;
     
-    [self showToursList:YES];
+    [self showFeedsList];
     [self configureNavigationBar];
 }
 
@@ -890,7 +888,7 @@
 - (void)showToursListAction
 {
     [OTLogger logEvent:@"ListViewClick"];
-    [self showToursList:YES];
+    [self showFeedsList];
 }
 
 #pragma mark - Location updates
@@ -936,7 +934,7 @@
     self.wasLoadedOnce = YES;
     if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
         self.isFirstLoad = NO;
-        [self showToursList:YES];
+        [self showFeedsList];
     }
     
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
@@ -995,7 +993,7 @@
 - (void)stoppedTour {
     self.launcherButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
-    [self showToursList:YES];
+    [self showFeedsList];
     
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotEndFilename];
@@ -1322,6 +1320,10 @@
     }
 }
 
+- (void)didPanHeaderDown {
+    [self showToursMapAction];
+}
+
 #pragma mark - Geo and filter buttons
 
 - (IBAction)showFilters {
@@ -1346,7 +1348,7 @@
 
 #pragma mark - "Screens"
 
-- (void)showToursList:(BOOL)animated {
+- (void)showFeedsList {
     self.tableView.scrollEnabled = YES;
     
     [OTLogger logEvent:@"Screen06_1FeedView"];
@@ -1356,22 +1358,18 @@
     [self.guideInfoBehavior hide];
     
     self.isTourListDisplayed = YES;
-    
-    if (animated) {
-        [UIView animateWithDuration:0.2 animations:^(void) {
-            CGRect mapFrame = self.mapView.frame;
-            mapFrame.size.height = MAPVIEW_HEIGHT;
-            self.tableView.tableHeaderView.frame = mapFrame;
-            self.mapView.frame = mapFrame;
-            [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-        }];
-    } else {
+    [UIView animateWithDuration:0.2 animations:^{
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
-        self.tableView.tableHeaderView.frame = mapFrame;
+        //self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
-        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-    }
+        //[self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+
+    } completion:^(BOOL finished) {
+        [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
+                                                                   mapHeight:MAPVIEW_HEIGHT
+                                                                  showFilter:NO]];
+    }];
     
     [self configureNavigationBar];
 }
@@ -1409,13 +1407,16 @@
 
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.25 animations:^(void) {
-        self.tableView.tableHeaderView.frame = mapFrame;
+        //self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         
         MKCoordinateRegion region;
         region = MKCoordinateRegionMakeWithDistance(self.mapView.centerCoordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
         [self.mapView setRegion:region animated:YES];
-        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+        //[self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+        [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
+                                                                   mapHeight:[UIScreen mainScreen].bounds.size.height
+                                                                  showFilter:NO]];
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     }];
     
