@@ -12,6 +12,8 @@
 #import "OTNewsFeedTableDelegate.h"
 #import "OTAnnouncement.h"
 
+#define MAPVIEW_HEIGHT 224.f
+
 @class OTFeedItem;
 
 @protocol OTFeedItemsTableViewDelegate <NSObject>
@@ -21,8 +23,10 @@
 - (void)showUserProfile:(NSNumber*)userId;
 - (void)doJoinRequest:(OTFeedItem*)feedItem;
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem;
+
 @optional
 - (void)loadMoreData;
+- (void)didPanHeaderDown;
 
 @end
 
@@ -39,5 +43,10 @@
 - (void)setNoFeeds;
 - (void)switchToGuide;
 - (void)switchToFeeds;
+
+- (CGFloat)feedsFilterHeaderHeight;
+- (UIView*)headerViewWithMap:(MKMapView*)mapView
+                   mapHeight:(CGFloat)mapHeight
+                  showFilter:(BOOL)showFilter;
 
 @end

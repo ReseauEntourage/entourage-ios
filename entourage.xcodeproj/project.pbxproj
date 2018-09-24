@@ -785,6 +785,7 @@
 		A24EA3862101D7A10027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
 		A24EA3872101D7A10027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
 		A24EA3882101D7A50027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
+		A2607686215577BC0068F65E /* OTFeedsTableFilterHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */; };
 		A2658BFC21144DF200B6B15C /* OTEventCreatedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */; };
 		A2658BFD21144DF200B6B15C /* OTEventCreatedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */; };
 		A285C35C20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
@@ -2016,6 +2017,7 @@
 		A24EA3812100A7780027AB8B /* UITextField+AutoSuggestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+AutoSuggestion.m"; sourceTree = "<group>"; };
 		A24EA3842101D7A10027AB8B /* OTAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddress.h; sourceTree = "<group>"; };
 		A24EA3852101D7A10027AB8B /* OTAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddress.m; sourceTree = "<group>"; };
+		A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTFeedsTableFilterHeader.xib; sourceTree = "<group>"; };
 		A2658BFA21144DF200B6B15C /* OTEventCreatedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTEventCreatedCell.h; sourceTree = "<group>"; };
 		A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEventCreatedCell.m; sourceTree = "<group>"; };
 		A285C35A20F7787600D6625E /* OTAddEditEntourageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddEditEntourageDataSource.h; sourceTree = "<group>"; };
@@ -2858,6 +2860,7 @@
 				A20489FE2151421500064EB0 /* IntroPage2.xib */,
 				A20489FC2151421400064EB0 /* IntroPage3.xib */,
 				A20489FD2151421400064EB0 /* IntroPage4.xib */,
+				A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3927,6 +3930,7 @@
 				A21D65B02085FDAA00EF8E0E /* EntourageEditor.storyboard in Resources */,
 				A202E7F12085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */,
 				A202E7D72085CFC40058F32C /* SharedImages.xcassets in Resources */,
+				A2607686215577BC0068F65E /* OTFeedsTableFilterHeader.xib in Resources */,
 				A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
 				A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */,

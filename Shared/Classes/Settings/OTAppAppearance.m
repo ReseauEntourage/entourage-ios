@@ -753,7 +753,10 @@
         return OTLocalizedString(@"pfp_join_entourage_greeting_lbl");
     }
     
-    if ([feedItem isKindOfClass:[OTEntourage class]]) {
+    if ([feedItem isOuting]) {
+        return OTLocalizedString(@"join_event_greeting_lbl");
+    }
+    else if ([feedItem isKindOfClass:[OTEntourage class]]) {
         return OTLocalizedString(@"join_entourage_greeting_lbl");
     }
     else {

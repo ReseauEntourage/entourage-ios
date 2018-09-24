@@ -57,10 +57,12 @@
     activityVC.excludedActivityTypes = excludedActivities;
     [OTAppConfiguration configureActivityControllerAppearance:activityVC
                                                         color:[[ApplicationTheme shared] primaryNavigationBarTintColor]];
-     [self.owner presentViewController:activityVC animated:YES completion:^{
-        [OTAppConfiguration configureActivityControllerAppearance:activityVC
+    __weak id weakActivityVC = activityVC;
+    activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+        [OTAppConfiguration configureActivityControllerAppearance:weakActivityVC
                                                             color:[[ApplicationTheme shared] secondaryNavigationBarTintColor]];
-    }];
+    };
+    [self.owner presentViewController:activityVC animated:YES completion:nil];
 }
 
 @end

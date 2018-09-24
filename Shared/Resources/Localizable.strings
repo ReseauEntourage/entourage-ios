@@ -238,8 +238,8 @@
 "unique_unread" = "Uniquement non lus";
 "join_entourage_lbl" = "Participez à cet évènement";
 "join_entourage_btn" = "REJOINDRE";
-"join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !
-Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
+"join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !\nPourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
+"join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nAjoutez un petit mot si vous le souhaitez !";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
 "promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
 "event_title_example" = "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017";
