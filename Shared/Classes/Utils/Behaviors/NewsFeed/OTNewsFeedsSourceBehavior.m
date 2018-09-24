@@ -10,6 +10,7 @@
 #import "OTFeedsService.h"
 #import "OTFeedItem.h"
 #import "OTConsts.h"
+#import "OTSafariService.h"
 
 @interface OTNewsFeedsSourceBehavior ()
 
@@ -35,6 +36,19 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (IBAction)searchFurtherAction {
+    if (self.showEventsOnly) {
+        [self searchMoreEvents];
+    } else {
+        [self increaseRadius];
+    }
+}
+
+- (IBAction)searchMoreEvents {
+    NSString *urlPath = @"https://www.facebook.com/EntourageReseauCivique/events";
+    [OTSafariService launchInAppBrowserWithUrlString:urlPath viewController:self.tableDelegate];
 }
 
 - (IBAction)increaseRadius {
@@ -65,7 +79,8 @@
     filter.location = coordinate;
     
     if ([self.currentFilter.description isEqualToString:filter.description] &&
-        filter.showPastOuting == self.currentFilter.showPastOuting) {
+        filter.showPastOuting == self.currentFilter.showPastOuting &&
+        !self.showEventsOnly) {
         return;
     }
     
@@ -84,6 +99,25 @@
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
         
+    } orError:^(NSError *error) {
+        [self.delegate errorLoadingFeedItems:error];
+    }];
+}
+
+- (void)loadEventsAt:(CLLocationCoordinate2D)coordinate startingAfter:(NSString *)eventUuid {
+    self.radiusIndex = 0;
+    self.currentCoordinate = coordinate;
+    self.currentFilter.location = coordinate;
+    
+    [self.feedItems removeAllObjects];
+    [self.delegate itemsRemoved];
+    
+    [self requestEventsStartingWith:eventUuid withSuccess:^(NSArray *items) {
+        if(items.count > 0) {
+            [self.feedItems addObjectsFromArray:items];
+            [self.delegate itemsUpdated];
+        }
+        [self.tableDelegate finishUpdatingFeeds:items.count];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingFeedItems:error];
     }];
@@ -111,9 +145,11 @@
 - (void)getNewItems {
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        if(items.count > 0) {
-            for(OTFeedItem *item in items)
+        if (items.count > 0) {
+            for (OTFeedItem *item in items) {
                 [self addFeedItem:item];
+            }
+            
             [self.delegate itemsUpdated];
         }
     } orError:^(NSError *error) {
@@ -172,10 +208,50 @@
     } failure:^(NSError *error) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.indicatorView.hidden = YES;
-        if(![self.currentFilter.description isEqualToString:loadFilterString])
+        
+        if (![self.currentFilter.description isEqualToString:loadFilterString]) {
             return;
-        if(failure)
+        }
+        
+        if (failure) {
             failure(error);
+        }
+    }];
+}
+
+- (void)requestEventsStartingWith:(NSString *)lastEventUuid
+                      withSuccess:(void(^)(NSArray *items))success
+                          orError:(void(^)(NSError *))failure {
+    self.currentFilter.distance = self.radius;
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    self.indicatorView.hidden = NO;
+    
+    NSMutableDictionary *params = @{
+             @"latitude": @(self.currentCoordinate.latitude),
+             @"longitude": @(self.currentCoordinate.longitude),
+             }.mutableCopy;
+    if (lastEventUuid) {
+        [params setObject:lastEventUuid forKey:@"starting_after"];
+    }
+    
+    NSLog(@"Filter Events - Calling with %@", params);
+    
+    [[OTFeedsService new] getEventsWithParameters:params
+                                          success:^(NSMutableArray *feeds) {
+        self.lastOkCoordinate = self.currentCoordinate;
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        self.indicatorView.hidden = YES;
+        if (success) {
+            success(feeds);
+        }
+    } failure:^(NSError *error) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        self.indicatorView.hidden = YES;
+        
+        if (failure) {
+            failure(error);
+        }
     }];
 }
 

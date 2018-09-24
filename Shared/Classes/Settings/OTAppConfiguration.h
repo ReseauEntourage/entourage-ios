@@ -131,6 +131,9 @@
 // Specify if the action of "plus button" shows options or directly launches the entourage editor
 + (BOOL)shouldAutoLaunchEditorOnAddAction;
 
+// Configures if the user can filter events only in the main feed list
++ (BOOL)supportsFilteringEvents;
+
 // EMA-2286
 + (BOOL)shouldShowEventPrivacyDisclaimerOnCreation;
 

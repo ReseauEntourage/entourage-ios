@@ -662,6 +662,7 @@
     [self.tableView loadBegun];
     [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter];
     [self.toggleCollectionView toggle:NO animated:NO];
+    self.newsFeedsSourceBehavior.showEventsOnly = NO;
 }
 
 - (void)reloadPois {
@@ -1324,6 +1325,19 @@
     [self showToursMapAction];
 }
 
+- (void)showEventsOnly
+{
+    self.newsFeedsSourceBehavior.showEventsOnly = YES;
+    [self.tableView loadBegun];
+    [self.newsFeedsSourceBehavior loadEventsAt:self.mapView.centerCoordinate startingAfter:nil];
+    [self.toggleCollectionView toggle:NO animated:NO];
+}
+
+- (void)showAllFeedItems
+{
+    [self reloadFeeds];
+}
+
 #pragma mark - Geo and filter buttons
 
 - (IBAction)showFilters {
@@ -1368,7 +1382,7 @@
     } completion:^(BOOL finished) {
         [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
                                                                    mapHeight:MAPVIEW_HEIGHT
-                                                                  showFilter:NO]];
+                                                                  showFilter:[OTAppConfiguration supportsFilteringEvents]]];
     }];
     
     [self configureNavigationBar];

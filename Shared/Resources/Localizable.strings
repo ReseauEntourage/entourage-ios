@@ -422,6 +422,8 @@
 "no_feeds_received" = "Aucune action près de cette position";
 "no_more_feeds" = "C'est tout pour les activités dans ce rayon autour de vous";
 "no_more_map_feeds" = "Aucune action près de cette position";
+"search_more_further_feeds" = "Rechercher plus loin";
+"search_more_further_events" = "Retrouvez plus d'évènements d'Entourage ici";
 
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
 "ok" = "OK";

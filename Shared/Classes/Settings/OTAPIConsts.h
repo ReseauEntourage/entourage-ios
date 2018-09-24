@@ -30,6 +30,7 @@
 // Feeds
 #define API_URL_FEEDS    @"feeds?token=%@"
 #define API_URL_MYFEEDS  @"myfeeds?token=%@"
+#define API_URL_EVENTS    @"feeds/outings?token=%@"
 
 // Tours
 #define API_URL_TOUR_JOIN_REQUEST @"tours/%@/users?token=%@"
