@@ -786,6 +786,7 @@
 		A24EA3872101D7A10027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
 		A24EA3882101D7A50027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
 		A2607686215577BC0068F65E /* OTFeedsTableFilterHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */; };
+		A26076872158CF060068F65E /* OTFeedsTableFilterHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */; };
 		A2658BFC21144DF200B6B15C /* OTEventCreatedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */; };
 		A2658BFD21144DF200B6B15C /* OTEventCreatedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */; };
 		A285C35C20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
@@ -4052,6 +4053,7 @@
 				A2A2BC8A2099E0C500AA4FC8 /* Pfp-Localizable.strings in Resources */,
 				A296B8D820871CFC00F6AFBD /* Platinia.gpx in Resources */,
 				A296B8D920871CFC00F6AFBD /* categories.json in Resources */,
+				A26076872158CF060068F65E /* OTFeedsTableFilterHeader.xib in Resources */,
 				A2C9EFD72147FB7700357FD9 /* PfpIntro.storyboard in Resources */,
 				A296B8DA20871CFC00F6AFBD /* Nowhere.gpx in Resources */,
 				A296B92D208A08E800F6AFBD /* PfpLaunchScreen.storyboard in Resources */,
