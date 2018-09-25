@@ -165,12 +165,12 @@
 
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 @property (nonatomic) double entourageScale;
+@property (nonatomic) BOOL encounterFromTap;
+@property (nonatomic) BOOL forceReloadingFeeds;
 
 @end
 
 @implementation OTMainViewController
-    BOOL encounterFromTap;
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -530,9 +530,9 @@
     [self.mapView addGestureRecognizer:longPressMapGesture];
 }
 
-- (void)configureNavigationBar {    
+- (void)configureNavigationBar {
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"filter_nav_title").uppercaseString style:UIBarButtonItemStylePlain target:self action:@selector(showFilters)];
-    self.navigationItem.leftBarButtonItem = leftButton;
+    self.navigationItem.leftBarButtonItem = self.newsFeedsSourceBehavior.showEventsOnly ? nil : leftButton;
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:[self rightBarButtonTitle] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction)];
     self.navigationItem.rightBarButtonItem = rightButton;
@@ -599,7 +599,7 @@
     self.tappedLocation = [[CLLocation alloc] initWithLatitude:whereTap.latitude longitude:whereTap.longitude];
 
     if ([OTOngoingTourService sharedInstance].isOngoing) {
-        encounterFromTap = YES;
+        self.encounterFromTap = YES;
         self.encounterLocation = whereTap;
         [OTLogger logEvent:@"HiddenButtonsOverlayPress"];
         
@@ -660,9 +660,12 @@
 
 - (void)reloadFeeds {
     [self.tableView loadBegun];
-    [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter];
+    if (self.newsFeedsSourceBehavior.showEventsOnly) {
+        [self.newsFeedsSourceBehavior loadEventsAt:self.mapView.centerCoordinate];
+    } else {
+        [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter forceReload:self.forceReloadingFeeds];
+    }
     [self.toggleCollectionView toggle:NO animated:NO];
-    self.newsFeedsSourceBehavior.showEventsOnly = NO;
 }
 
 - (void)reloadPois {
@@ -883,6 +886,10 @@
 - (void)showToursMapAction
 {
     [OTLogger logEvent:@"MapViewClick"];
+    if (self.newsFeedsSourceBehavior.showEventsOnly) {
+        
+    }
+    
     [self showToursMap];
 }
 
@@ -897,7 +904,7 @@
 - (void)locationUpdated:(NSNotification *)notification {
     NSArray *locations = [notification readLocations];
     for (CLLocation *newLocation in locations) {
-        if (!encounterFromTap)
+        if (!self.encounterFromTap)
             self.encounterLocation = newLocation.coordinate;
     }
 }
@@ -909,7 +916,6 @@
         [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
         [self reloadFeeds];
     }
-
 }
 
 - (void)clearMap {
@@ -929,7 +935,6 @@
     
     if (self.solidarityGuidePoisDisplayed) {
         return;
-        
     }
     
     self.wasLoadedOnce = YES;
@@ -1207,6 +1212,7 @@
         self.currentFilter = [OTNewsFeedsFilter new];
         return;
     }
+    self.forceReloadingFeeds = NO;
     self.currentFilter = filter;
     [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
     
@@ -1327,14 +1333,21 @@
 
 - (void)showEventsOnly
 {
+    [OTLogger logEvent:@"ShowEventFeed"];
     self.newsFeedsSourceBehavior.showEventsOnly = YES;
-    [self.tableView loadBegun];
-    [self.newsFeedsSourceBehavior loadEventsAt:self.mapView.centerCoordinate startingAfter:nil];
-    [self.toggleCollectionView toggle:NO animated:NO];
+    self.forceReloadingFeeds = NO;
+    [self.noDataBehavior switchedToEvents];
+    [self configureNavigationBar];
+    [self reloadFeeds];
 }
 
 - (void)showAllFeedItems
 {
+    [OTLogger logEvent:@"ShowAllFeed"];
+    self.newsFeedsSourceBehavior.showEventsOnly = NO;
+    self.forceReloadingFeeds = YES;
+    [self.noDataBehavior switchedToNewsfeeds];
+    [self configureNavigationBar];
     [self reloadFeeds];
 }
 
@@ -1390,6 +1403,7 @@
 
 - (void)showToursMap {
     self.tableView.scrollEnabled = NO;
+    self.forceReloadingFeeds = NO;
     //self.solidarityGuidePoisDisplayed = NO;
     
     if (self.poisMapDelegate.isActive) {
@@ -1472,7 +1486,7 @@
     if([self.editEntourgeBehavior prepareSegue:segue])
         return;
     if([self.editEncounterBehavior prepareSegue:segue]) {
-        encounterFromTap = NO;
+        self.encounterFromTap = NO;
         return;
     }
     if([self.statusChangedBehavior prepareSegueForNextStatus:segue])

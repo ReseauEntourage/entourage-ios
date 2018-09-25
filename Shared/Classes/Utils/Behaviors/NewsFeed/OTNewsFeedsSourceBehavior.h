@@ -26,9 +26,12 @@
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
 @property (nonatomic) BOOL showEventsOnly;
 @property (nonatomic, assign, readonly) int radius;
+@property (nonatomic, strong) NSString *lastEventGuid;
 
-- (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter;
-- (void)loadEventsAt:(CLLocationCoordinate2D)coordinate startingAfter:(NSString *)eventUuid;
+- (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate
+          withFilters:(OTNewsFeedsFilter *)filter
+          forceReload:(BOOL)forceReload;
+- (void)loadEventsAt:(CLLocationCoordinate2D)coordinate;
 - (void)loadMoreItems;
 - (void)getNewItems;
 - (void)pause;

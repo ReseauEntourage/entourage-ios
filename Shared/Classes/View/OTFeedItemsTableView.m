@@ -131,14 +131,6 @@
 - (void)configureWithMapView:(MKMapView *)mapView {
     self.emptyFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
     self.tableFooterView = self.emptyFooterView;
-    
-    NSString *searchMoreTitle = self.showEventsOnly ?
-        OTLocalizedString(@"search_more_further_events") :
-        OTLocalizedString(@"search_more_further_feeds");
-    
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:searchMoreTitle];
-    [title setAttributes:@{NSForegroundColorAttributeName:[ApplicationTheme shared].backgroundThemeColor, NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)} range:NSMakeRange(0, title.length)];
-    [self.furtherEntouragesBtn setAttributedTitle:title forState:UIControlStateNormal];
         
     self.tableHeaderView = [self headerViewWithMap:mapView mapHeight:MAPVIEW_HEIGHT showFilter:NO];
     CGPoint center = self.tableHeaderView.center;
@@ -241,7 +233,11 @@
 }
 
 - (void)setNoFeeds {
-    self.lblEmptyTableReason.text = [OTAppAppearance noMoreFeedsDescription];
+    if (self.showEventsOnly) {
+        self.lblEmptyTableReason.text = @"cascdsc";
+    } else {
+        self.lblEmptyTableReason.text = [OTAppAppearance noMoreFeedsDescription];
+    }
 }
 
 /********************************************************************************/
@@ -412,29 +408,38 @@
     }
     self.activityIndicator.hidden = YES;
     self.infoLabel.hidden = NO;
-    BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
     self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
     
-    self.furtherEntouragesBtn.hidden = isMaxRadius;
+    if (self.showEventsOnly) {
+        if (self.items.count == 0) {
+            self.infoLabel.text = OTLocalizedString(@"no_data_events");
+        }
+        self.furtherEntouragesBtn.hidden = NO;
+        
+    } else {
+        BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
+        self.furtherEntouragesBtn.hidden = isMaxRadius;
+        
+        if (self.items.count > 0) {
+            if (isMaxRadius) {
+                self.infoLabel.text = [OTAppAppearance noMoreFeedsDescription];
+            } else {
+                self.infoLabel.text = [OTAppAppearance extendSearchParameterDescription];
+            }
+        }
+        else if (self.items.count == 0) {
+            if (isMaxRadius) {
+                self.furtherEntouragesBtn.hidden = YES;
+                self.infoLabel.text = [OTAppAppearance noMapFeedsDescription];
+            }
+            else {
+                self.furtherEntouragesBtn.hidden = NO;
+                self.infoLabel.text = [OTAppAppearance extendMapSearchParameterDescription];
+                self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
+            }
+        }
+    }
     
-    if (self.items.count > 0) {
-        if (isMaxRadius) {
-            self.infoLabel.text = [OTAppAppearance noMoreFeedsDescription];
-        } else {
-            self.infoLabel.text = [OTAppAppearance extendSearchParameterDescription];
-        }
-    }
-    else if (self.items.count == 0) {
-        if (isMaxRadius) {
-            self.furtherEntouragesBtn.hidden = YES;
-            self.infoLabel.text = [OTAppAppearance noMapFeedsDescription];
-        }
-        else {
-            self.furtherEntouragesBtn.hidden = NO;
-            self.infoLabel.text = [OTAppAppearance extendMapSearchParameterDescription];
-            self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
-        }
-    }
     self.tableFooterView = self.loadingView;
 }
 
@@ -517,7 +522,7 @@
 
 - (void)setupFilteringHeaderView:(CGFloat)mapHeight {
     self.filterView = (UIView*)[[NSBundle mainBundle] loadNibNamed:@"OTFeedsTableFilterHeader" owner:nil options:nil].firstObject;
-    self.filterView.frame = CGRectMake(0, mapHeight, self.frame.size.width, [self feedsFilterHeaderHeight]);
+    self.filterView.frame = CGRectMake(0, mapHeight, UIScreen.mainScreen.bounds.size.width + 8, [self feedsFilterHeaderHeight]);
     self.filterView.clipsToBounds = YES;
     self.filterView.layer.cornerRadius = 12;
     
@@ -551,6 +556,14 @@
     
     self.showEventsOnlyButton.userInteractionEnabled = !self.showEventsOnly;
     self.showAllFeedItemsButton.userInteractionEnabled = self.showEventsOnly;
+    
+    NSString *searchMoreTitle = self.showEventsOnly ?
+    OTLocalizedString(@"search_more_further_events") :
+    OTLocalizedString(@"search_more_further_feeds");
+    
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:searchMoreTitle];
+    [title setAttributes:@{NSForegroundColorAttributeName:[ApplicationTheme shared].backgroundThemeColor, NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)} range:NSMakeRange(0, title.length)];
+    [self.furtherEntouragesBtn setAttributedTitle:title forState:UIControlStateNormal];
 }
 
 - (void)showEventsOnlyAction {

@@ -14,6 +14,7 @@
 @interface OTNoDataBehavior ()
 
 @property (nonatomic, strong) NSAttributedString *noDataGuideText;
+@property (nonatomic, strong) NSAttributedString *noEventsText;
 @property (nonatomic, strong) NSAttributedString *noDataEntourageText;
 @property (nonatomic, assign) BOOL isGuide;
 
@@ -49,6 +50,11 @@ static bool entourageClosed = NO;
     self.txtNoData.attributedText = self.noDataGuideText;
 }
 
+- (void)switchedToEvents {
+    self.isGuide = NO;
+    self.txtNoData.attributedText = self.noEventsText;
+}
+
 - (void)showNoData {
     if (self.isGuide && guideClosed) {
         return;
@@ -72,11 +78,19 @@ static bool entourageClosed = NO;
 }
 
 - (void)loadNoDataTexts {
-    self.noDataEntourageText = [NSAttributedString buildLinkForTextView:self.txtNoData withText:OTLocalizedString(@"no_data_entourages") toLinkText:@""
+    self.noDataEntourageText = [NSAttributedString buildLinkForTextView:self.txtNoData
+                                                               withText:OTLocalizedString(@"no_data_entourages")
+                                                             toLinkText:@""
                                                                withLink:@""];
     
-    self.noDataGuideText = [NSAttributedString buildLinkForTextView:self.txtNoData withText:OTLocalizedString(@"no_data_guide")
+    self.noDataGuideText = [NSAttributedString buildLinkForTextView:self.txtNoData
+                                                           withText:OTLocalizedString(@"no_data_guide")
                                                          toLinkText:OTLocalizedString(@"no_data_guide_link") withLink:NO_GIUDE_DATA_LINK];
+    
+    self.noEventsText = [NSAttributedString buildLinkForTextView:self.txtNoData
+                                                        withText:OTLocalizedString(@"no_data_events")
+                                                      toLinkText:@""
+                                                        withLink:@""];
 }
 
 @end

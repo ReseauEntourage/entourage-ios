@@ -101,6 +101,7 @@
 #define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
 #define PRO_MENU_CHART_URL @"https://blog.entourage.social/charte-ethique/"
 #define PUBLIC_MENU_CHART_URL @"http://www.entourage.social/chartes/grand-public.html"
+#define VIEW_MORE_EVENTS_URL @"https://www.facebook.com/EntourageReseauCivique/events"
 
 #define NO_GIUDE_DATA_LINK @"https://goo.gl/jD5uIQ"
 

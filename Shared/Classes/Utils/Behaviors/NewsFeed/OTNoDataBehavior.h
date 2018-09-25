@@ -16,6 +16,7 @@
 - (IBAction)closePopup:(id)sender;
 - (void)switchedToNewsfeeds;
 - (void)switchedToGuide;
+- (void)switchedToEvents;
 - (void)showNoData;
 - (void)hideNoData;
 

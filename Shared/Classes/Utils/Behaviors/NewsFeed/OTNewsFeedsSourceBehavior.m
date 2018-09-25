@@ -47,8 +47,10 @@
 }
 
 - (IBAction)searchMoreEvents {
-    NSString *urlPath = @"https://www.facebook.com/EntourageReseauCivique/events";
-    [OTSafariService launchInAppBrowserWithUrlString:urlPath viewController:self.tableDelegate];
+    UIViewController *viewController = [OTAppState getTopViewController];
+    if (viewController) {
+        [OTSafariService launchInAppBrowserWithUrlString:VIEW_MORE_EVENTS_URL viewController:viewController];
+    }
 }
 
 - (IBAction)increaseRadius {
@@ -67,20 +69,22 @@
             [self.delegate errorLoadingFeedItems:error];
         }];
     }
-    else{
+    else {
         [self.delegate itemsUpdated];
         [self.tableDelegate finishUpdatingFeeds:NO];
     }
 }
 
-- (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate withFilters:(OTNewsFeedsFilter *)filter {
+- (void)reloadItemsAt:(CLLocationCoordinate2D)coordinate
+          withFilters:(OTNewsFeedsFilter *)filter
+          forceReload:(BOOL)forceReload {
     self.radiusIndex = 0;
     filter.distance = self.radius;
     filter.location = coordinate;
     
     if ([self.currentFilter.description isEqualToString:filter.description] &&
         filter.showPastOuting == self.currentFilter.showPastOuting &&
-        !self.showEventsOnly) {
+        !forceReload) {
         return;
     }
     
@@ -104,7 +108,7 @@
     }];
 }
 
-- (void)loadEventsAt:(CLLocationCoordinate2D)coordinate startingAfter:(NSString *)eventUuid {
+- (void)loadEventsAt:(CLLocationCoordinate2D)coordinate {
     self.radiusIndex = 0;
     self.currentCoordinate = coordinate;
     self.currentFilter.location = coordinate;
@@ -112,7 +116,7 @@
     [self.feedItems removeAllObjects];
     [self.delegate itemsRemoved];
     
-    [self requestEventsStartingWith:eventUuid withSuccess:^(NSArray *items) {
+    [self requestEventsStartingWithSuccess:^(NSArray *items) {
         if(items.count > 0) {
             [self.feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
@@ -124,25 +128,18 @@
 }
 
 - (void)loadMoreItems {
-    NSDate *beforeDate = [NSDate date];
-    if (self.feedItems.count > 0) {
-        beforeDate = [self.feedItems.lastObject updatedDate] ? [self.feedItems.lastObject updatedDate] : [self.feedItems objectAtIndex:self.feedItems.count - 2];
+    if (self.showEventsOnly) {
+        [self loadMoreEvents];
+    } else {
+        [self loadMoreFeeds];
     }
-    
-    [self.tableDelegate beginUpdatingFeeds];
-    [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        if (items.count > 0) {
-            [self.feedItems addObjectsFromArray:items];
-            [self.delegate itemsUpdated];
-        }
-        [self.tableDelegate finishUpdatingFeeds:items.count];
-    } orError:^(NSError *error) {
-        [self.delegate errorLoadingFeedItems:error];
-        [self.tableDelegate errorUpdatingFeeds];
-    }];
 }
 
 - (void)getNewItems {
+    if (self.showEventsOnly) {
+        return;
+    }
+    
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         if (items.count > 0) {
@@ -182,6 +179,41 @@
 
 #pragma mark - private methods
 
+- (void)loadMoreFeeds {
+    NSDate *beforeDate = [NSDate date];
+    if (self.feedItems.count > 0) {
+        beforeDate = [self.feedItems.lastObject updatedDate] ? [self.feedItems.lastObject updatedDate] : [self.feedItems objectAtIndex:self.feedItems.count - 2];
+    }
+    
+    [self.tableDelegate beginUpdatingFeeds];
+    [self requestData:beforeDate withSuccess:^(NSArray *items) {
+        if (items.count > 0) {
+            [self.feedItems addObjectsFromArray:items];
+            [self.delegate itemsUpdated];
+        }
+        [self.tableDelegate finishUpdatingFeeds:items.count];
+    } orError:^(NSError *error) {
+        [self.delegate errorLoadingFeedItems:error];
+        [self.tableDelegate errorUpdatingFeeds];
+    }];
+}
+
+- (void)loadMoreEvents {
+    self.lastEventGuid = [self.feedItems.lastObject uuid];
+    [self.tableDelegate beginUpdatingFeeds];
+    
+    [self requestEventsStartingWithSuccess:^(NSArray *items) {
+        if(items.count > 0) {
+            [self.feedItems addObjectsFromArray:items];
+            [self.delegate itemsUpdated];
+        }
+        [self.tableDelegate finishUpdatingFeeds:items.count];
+    } orError:^(NSError *error) {
+        [self.delegate errorLoadingFeedItems:error];
+        [self.tableDelegate errorUpdatingFeeds];
+    }];
+}
+
 - (void)requestData:(NSDate *)beforeDate
         withSuccess:(void(^)(NSArray *items))success
             orError:(void(^)(NSError *))failure {
@@ -219,11 +251,9 @@
     }];
 }
 
-- (void)requestEventsStartingWith:(NSString *)lastEventUuid
-                      withSuccess:(void(^)(NSArray *items))success
-                          orError:(void(^)(NSError *))failure {
-    self.currentFilter.distance = self.radius;
-    
+- (void)requestEventsStartingWithSuccess:(void(^)(NSArray *items))success
+                                 orError:(void(^)(NSError *))failure {
+
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     self.indicatorView.hidden = NO;
     
@@ -231,8 +261,8 @@
              @"latitude": @(self.currentCoordinate.latitude),
              @"longitude": @(self.currentCoordinate.longitude),
              }.mutableCopy;
-    if (lastEventUuid) {
-        [params setObject:lastEventUuid forKey:@"starting_after"];
+    if (self.lastEventGuid) {
+        [params setObject:self.lastEventGuid forKey:@"starting_after"];
     }
     
     NSLog(@"Filter Events - Calling with %@", params);
