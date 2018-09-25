@@ -570,7 +570,7 @@
                                                 </attributedString>
                                             </state>
                                             <connections>
-                                                <action selector="increaseRadius" destination="atf-P9-vVx" eventType="touchUpInside" id="Fm7-3O-C7h"/>
+                                                <action selector="searchFurtherAction" destination="atf-P9-vVx" eventType="touchUpInside" id="31c-1E-0Yx"/>
                                             </connections>
                                         </button>
                                     </subviews>

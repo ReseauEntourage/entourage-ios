@@ -120,6 +120,8 @@
 
 "no_data_entourages" = "C'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant ! \n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur + en bas à droite";
 
+"no_data_events" = "Aucun évènement à proximité.";
+
 "no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure";
 
 "no_data_guide_link" = "Proposez une structure";
@@ -422,6 +424,8 @@
 "no_feeds_received" = "Aucune action près de cette position";
 "no_more_feeds" = "C'est tout pour les activités dans ce rayon autour de vous";
 "no_more_map_feeds" = "Aucune action près de cette position";
+"search_more_further_feeds" = "Rechercher plus loin";
+"search_more_further_events" = "Retrouvez plus d'évènements d'Entourage ici";
 
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
 "ok" = "OK";

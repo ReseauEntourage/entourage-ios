@@ -48,6 +48,34 @@
      ];
 }
 
+- (void)getEventsWithParameters:(NSDictionary*)parameters
+                        success:(void (^)(NSMutableArray *feeds))success
+                        failure:(void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:API_URL_EVENTS, TOKEN];
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         NSDictionary *data = responseObject;
+         NSMutableArray *feeds = [self feedItemsFromDictionary:data];
+         [self updateUnreadCount:feeds];
+         if (success)
+         {
+             success(feeds);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }
+     ];
+}
+
 - (void)getMyFeedsWithParameters:(NSDictionary*)parameters success:(void (^)(NSArray *entourages))success failure:(void (^)(NSError *error))failure
 {
     NSString *url = [NSString stringWithFormat:API_URL_MYFEEDS, TOKEN];

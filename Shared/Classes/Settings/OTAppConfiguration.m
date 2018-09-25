@@ -713,6 +713,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
++ (BOOL)supportsFilteringEvents {
+    // EMA-2303
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 + (BOOL)shouldShowEventPrivacyDisclaimerOnCreation {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return YES;

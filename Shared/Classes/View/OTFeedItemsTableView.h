@@ -24,6 +24,10 @@
 - (void)doJoinRequest:(OTFeedItem*)feedItem;
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem;
 
+// Filtering
+- (void)showEventsOnly;
+- (void)showAllFeedItems;
+
 @optional
 - (void)loadMoreData;
 - (void)didPanHeaderDown;
@@ -33,8 +37,8 @@
 @interface OTFeedItemsTableView : UITableView <OTNewsFeedTableDelegate>
 
 @property (nonatomic, weak) id<OTFeedItemsTableViewDelegate> feedItemsDelegate;
-
 @property (nonatomic, strong) IBOutlet UIView *loadingView;
+@property (nonatomic) BOOL showEventsOnly;
 
 - (void)configureWithMapView:(MKMapView *)mapView;
 - (void)updateItems:(NSArray *)items;
