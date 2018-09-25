@@ -5,56 +5,6 @@ trigger_map:
 - push_branch: develop
   workflow: Entourage-Beta
 workflows:
-  testflightFull:
-    steps:
-    - activate-ssh-key:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone:
-        inputs:
-        - commit: ''
-        - tag: ''
-    - certificate-and-profile-installer: {}
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-    - fastlane:
-        inputs:
-        - lane: deploy_to_TestFlight
-    - fastlane:
-        inputs:
-        - lane: refresh_dsyms api_token:$CRASHLYTICS_API_TOKEN
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_email_list: gregoire@entourage.social,  vaite@entourage.social
-  testflightNocache:
-    steps:
-    - activate-ssh-key:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone:
-        inputs:
-        - commit: ''
-        - tag: ''
-    - certificate-and-profile-installer: {}
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-    - fastlane:
-        inputs:
-        - lane: deploy_to_TestFlight
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_email_list: gregoire@entourage.social, vaite@entourage.social
   Entourage-Beta:
     steps:
     - activate-ssh-key:
@@ -92,14 +42,21 @@ workflows:
 
             #brew install librsvg
             #brew upgrade imagemagick
-            gem install badge
+            #gem install badge
+
+            curl https://codeload.github.com/ReseauEntourage/badge/tar.gz/master | tar xz
+            pushd badge-master/
+            gem build badge.gemspec
+            gem install badge-0.9.1.gem
+            popd
+            rm -r badge-master/
     - fastlane:
         inputs:
         - lane: beta
     - deploy-to-bitrise-io: {}
     - slack:
         inputs:
-        - channel: "#androiddev"
+        - channel: "#iosdev"
         - from_username: Entourage-Beta
         - from_username_on_error: Entourage-Beta
         - message: |-
@@ -110,6 +67,90 @@ workflows:
         - pretext: "*Entourage-Beta Build Succeeded!*"
         - pretext_on_error: "*Build Failed for Entourage Beta!*"
         - webhook_url: https://hooks.slack.com/services/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
+  testflight:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone:
+        inputs:
+        - commit: ''
+        - tag: ''
+    - certificate-and-profile-installer: {}
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            #set -x
+
+            echo "Download App credentials"
+
+            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
+
+            # download the fileS
+            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
+    - fastlane:
+        inputs:
+        - lane: deploy_to_TestFlight
+    - fastlane:
+        inputs:
+        - lane: refresh_dsyms api_token:$CRASHLYTICS_API_TOKEN
+    - deploy-to-bitrise-io:
+        inputs:
+        - notify_email_list: gregoire@entourage.social,  vaite@entourage.social
+  BetaXCODE:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone:
+        inputs:
+        - commit: ''
+        - tag: ''
+    - certificate-and-profile-installer: {}
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            #set -x
+
+            echo "Download App credentials"
+
+            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
+
+            # download the files
+            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
+    - xcode-archive:
+        inputs:
+        - export_method: app-store
+    - deploy-to-itunesconnect-application-loader:
+        inputs:
+        - password: "$FASTLANE_PASSWORD"
+        - itunescon_user: "$APPLE_ID"
+    - fabric-crashlytics-beta-deploy:
+        inputs:
+        - build_secret: "$CRASHLYTICS_SECRET"
+        - api_key: "$CRASHLYTICS_API_TOKEN"
+    - deploy-to-bitrise-io:
+        is_always_run: false
+        inputs:
+        - notify_user_groups: none
+    - slack:
+        inputs:
+        - channel: "@francoispellissier"
+        - from_username: Entourage-Beta
+        - from_username_on_error: Entourage-Beta
+        - message: |-
+            New *Entourage TestFlight* iOS build is available: $BITRISE_BUILD_NUMBER  here:
+            $BITRISE_APP_URL
+        - message_on_error: Oups, build has failed for Entourage iOS... @francoispellissier
+        - pretext: "*Entourage TestFlight Build Succeeded!*"
+        - pretext_on_error: "*Build Failed for Entourage TestFlight!*"
+        - webhook_url: https://hooks.slack.com/services/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
 app:
   envs:
   - opts:
@@ -118,7 +159,3 @@ app:
   - opts:
       is_expand: false
     BITRISE_SCHEME: Entourage-ios
-  - opts:
-      is_expand: true
-    FASTLANE_PASSWORD: Entourage95
-  - CRASHLYTICS_API_TOKEN: 2eca3faf46139913c216b9ee9cf8bee49e70fe20
