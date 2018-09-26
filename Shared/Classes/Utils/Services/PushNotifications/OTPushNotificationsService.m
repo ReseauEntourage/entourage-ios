@@ -370,17 +370,30 @@
 
 - (void)showAlert:(UIAlertController *)alert withPresentingBlock:(void(^)(UIViewController *, UIViewController *))presentingBlock {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
-    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
-    UINavigationController *navController = [tabBarController viewControllers].firstObject;
-    UIViewController *rootVC = [navController topViewController];
+    id rootViewController = appDelegate.window.rootViewController;
+    UIViewController *topVC = nil;
     
-    if (rootVC.presentedViewController) {
-        if (presentingBlock) {
-            presentingBlock(rootVC, rootVC.presentedViewController);
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController*)rootViewController;
+        id firstControlller = [tabBarController viewControllers].firstObject;
+        if ([firstControlller isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navController = (UINavigationController *)firstControlller;
+            topVC = [navController topViewController];
+        } else {
+            topVC = (UIViewController*)firstControlller;
         }
-    } else {
+    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController *)rootViewController;
+        topVC = [navController topViewController];
+    }
+    
+    if (topVC.presentedViewController) {
+        if (presentingBlock) {
+            presentingBlock(topVC, topVC.presentedViewController);
+        }
+    } else if (topVC) {
         [OTAppState hideTabBar:YES];
-        [rootVC presentViewController:alert animated:YES completion:nil];
+        [topVC presentViewController:alert animated:YES completion:nil];
     }
 }
 
