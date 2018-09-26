@@ -7,7 +7,12 @@
 //
 
 #import "OTTableDataSourceBehavior.h"
+#import "OTUserProfileBehavior.h"
+#import "OTInviteBehavior.h"
+#import "OTStatusChangedBehavior.h"
 
 @interface OTPublicInfoTableDataSource : OTTableDataSourceBehavior
-
+@property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfileBehavior;
+@property (nonatomic, weak) IBOutlet OTInviteBehavior *inviteBehavior;
+@property (nonatomic, weak) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
 @end

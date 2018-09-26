@@ -8,12 +8,48 @@
 
 #import "OTPublicInfoTableDataSource.h"
 #import "OTDataSourceBehavior.h"
+#import "OTFeedItemJoiner.h"
+#import "OTMemberCountCell.h"
+#import "OTMembersCell.h"
+#import "OTFeedItemFactory.h"
+
+@interface OTPublicInfoTableDataSource () <UITableViewDelegate>
+
+@end
 
 @implementation OTPublicInfoTableDataSource
 
 - (void)initialize {
     [super initialize];
     self.dataSource.tableView.tableFooterView = [UIView new];
+    self.dataSource.tableView.delegate = self;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    id item = [self getItemAtIndexPath:indexPath];
+    
+    if ([item isKindOfClass:[OTFeedItemJoiner class]]) {
+        OTFeedItemJoiner *joiner = (OTFeedItemJoiner *)item;
+        [self.userProfileBehavior showProfile:joiner.uID];
+    }
+    else if ([item isKindOfClass:[OTFeedItem class]]) {
+        OTFeedItem *feedItem = (OTFeedItem*)item;
+        if ([feedItem.identifierTag isEqualToString:@"changeStatus"]) {
+            [self.statusChangedBehavior startChangeStatus];
+        }
+        else if ([feedItem.identifierTag isEqualToString:@"inviteFriend"]) {
+//            id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:item] getStateInfo];
+//            if (![stateInfo canChangeEditState]) {
+//                return;
+//            }
+//
+//            if ([stateInfo canInvite]) {
+//                [self.inviteBehavior startInvite];
+//            }
+            
+            // EMA-2348
+            [self.inviteBehavior startInvite];
+        }
+    }
 }
 
 @end

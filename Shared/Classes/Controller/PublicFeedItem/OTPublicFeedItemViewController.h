@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "OTFeedItem.h"
 #import "OTStatusChangedBehavior.h"
+#import "OTInviteBehavior.h"
 
 @interface OTPublicFeedItemViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
+@property (strong, nonatomic) IBOutlet OTInviteBehavior *inviteBehavior;
 @property (nonatomic, strong) OTFeedItem *feedItem;
 
 @end

@@ -30,7 +30,7 @@
 
     self.title = OTLocalizedString(@"title").uppercaseString;
     
-    self.hintLabel.text = [OTAppAppearance addActionTitleHintMessage];
+    self.hintLabel.text = [OTAppAppearance addActionTitleHintMessage:self.currentEntourage.isOuting];
     
     self.hintIcon.tintColor = [ApplicationTheme shared].backgroundThemeColor;
     self.hintIcon.image = [self.hintIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];

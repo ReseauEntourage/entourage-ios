@@ -38,6 +38,7 @@
 @property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareFeedItem;
 @property (nonatomic, weak) IBOutlet UILabel *lblJoin;
 @property (nonatomic, weak) IBOutlet UIButton *btnJoin;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *actionFooterHeight;
 
 @end
 
@@ -49,9 +50,12 @@
     [self.shareFeedItem configureWith:self.feedItem];
     [self.tableDataSource initialize];
     [self.statusBehavior initialize];
+    [self.inviteBehavior initialize];
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.statusBehavior updateWith:self.feedItem];
+    [self.inviteBehavior configureWith:self.feedItem];
     [self.toggleJoinViewBehavior toggle:self.statusBehavior.isJoinPossible];
+    
     self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.dataSource.tableView.estimatedRowHeight = 1000;
     
@@ -210,6 +214,12 @@
     [self.btnJoin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.lblJoin setText: [OTAppAppearance joinEntourageLabelTitleForFeedItem:feedItem]];
     [self.btnJoin setTitle: [OTAppAppearance joinEntourageButtonTitleForFeedItem:feedItem] forState:UIControlStateNormal];
+    
+    BOOL hideFooter = ![self.feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED];
+    self.toggleJoinViewBehavior.toggledView.hidden = hideFooter;
+    self.statusBehavior.statusLineMarker.hidden = hideFooter;
+    self.statusBehavior.btnStatus.hidden = hideFooter;
+    self.actionFooterHeight.constant = hideFooter ? 0 : 88;
 }
 
 @end

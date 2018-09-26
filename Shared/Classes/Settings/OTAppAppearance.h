@@ -66,8 +66,8 @@
 + (NSString*)quitFeedItemConformationTitle:(OTFeedItem*)feedItem;
 + (NSString*)closeFeedItemConformationTitle:(OTFeedItem *)feedItem;
 + (NSString*)joinFeedItemConformationDescription:(OTFeedItem *)feedItem;
-+ (NSString*)addActionTitleHintMessage;
-+ (NSString*)addActionDescriptionHintMessage;
++ (NSString*)addActionTitleHintMessage:(BOOL)isEvent;
++ (NSString*)addActionDescriptionHintMessage:(BOOL)isEvent;
 + (NSString*)includePastEventsFilterTitle;
 + (NSString*)includePastEventsFilterTitleKey;
 + (NSString*)inviteSubtitleText:(OTFeedItem*)feedItem;

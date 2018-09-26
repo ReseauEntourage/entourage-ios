@@ -1194,6 +1194,8 @@
 		A296B933208E06AB00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
 		A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A296B93C2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
+		A2A0AAD4215ACE6A000AE5EF /* OTChangeStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A0AAD3215ACE6A000AE5EF /* OTChangeStatusCell.m */; };
+		A2A0AAD5215ACE6A000AE5EF /* OTChangeStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A0AAD3215ACE6A000AE5EF /* OTChangeStatusCell.m */; };
 		A2A2BC8A2099E0C500AA4FC8 /* Pfp-Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC892099E0C500AA4FC8 /* Pfp-Localizable.strings */; };
 		A2A2BC94209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
 		A2A2BC96209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */; };
@@ -2042,6 +2044,8 @@
 		A296B9392091ABDD00F6AFBD /* OTLocalisationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTLocalisationService.h; sourceTree = "<group>"; };
 		A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTLocalisationService.m; sourceTree = "<group>"; };
 		A29BAAC42091D0BB0003800D /* Pfp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pfp-Bridging-Header.h"; sourceTree = "<group>"; };
+		A2A0AAD2215ACE6A000AE5EF /* OTChangeStatusCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTChangeStatusCell.h; sourceTree = "<group>"; };
+		A2A0AAD3215ACE6A000AE5EF /* OTChangeStatusCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTChangeStatusCell.m; sourceTree = "<group>"; };
 		A2A2BC892099E0C500AA4FC8 /* Pfp-Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Pfp-Localizable.strings"; sourceTree = "<group>"; };
 		A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPfpMenuViewController.swift; sourceTree = "<group>"; };
 		A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLogoutViewCell.swift; sourceTree = "<group>"; };
@@ -2604,20 +2608,22 @@
 		A202E86E2085D2C40058F32C /* InfoCells */ = {
 			isa = PBXGroup;
 			children = (
+				A202E8752085D2C40058F32C /* OTBaseInfoCell.h */,
+				A202E8702085D2C40058F32C /* OTBaseInfoCell.m */,
+				A2A0AAD2215ACE6A000AE5EF /* OTChangeStatusCell.h */,
+				A2A0AAD3215ACE6A000AE5EF /* OTChangeStatusCell.m */,
+				A202E8742085D2C40058F32C /* OTDescriptionCell.h */,
+				A202E86F2085D2C40058F32C /* OTDescriptionCell.m */,
 				A2F5182720EF5A0E009AB222 /* OTEventInfoCell.h */,
 				A2F5182620EF5A0E009AB222 /* OTEventInfoCell.m */,
-				A202E86F2085D2C40058F32C /* OTDescriptionCell.m */,
-				A202E8702085D2C40058F32C /* OTBaseInfoCell.m */,
-				A202E8712085D2C40058F32C /* OTMembersCell.m */,
-				A202E8722085D2C40058F32C /* OTMapCell.h */,
-				A202E8732085D2C40058F32C /* OTMemberCountCell.m */,
-				A202E8742085D2C40058F32C /* OTDescriptionCell.h */,
-				A202E8752085D2C40058F32C /* OTBaseInfoCell.h */,
-				A202E8762085D2C40058F32C /* OTMembersCell.h */,
-				A202E8772085D2C40058F32C /* OTMapCell.m */,
-				A202E8782085D2C40058F32C /* OTMemberCountCell.h */,
 				96F30D6220BE956100229BB8 /* OTInviteCell.h */,
 				96F30D6320BE956100229BB8 /* OTInviteCell.m */,
+				A202E8722085D2C40058F32C /* OTMapCell.h */,
+				A202E8772085D2C40058F32C /* OTMapCell.m */,
+				A202E8782085D2C40058F32C /* OTMemberCountCell.h */,
+				A202E8732085D2C40058F32C /* OTMemberCountCell.m */,
+				A202E8762085D2C40058F32C /* OTMembersCell.h */,
+				A202E8712085D2C40058F32C /* OTMembersCell.m */,
 			);
 			path = InfoCells;
 			sourceTree = "<group>";
@@ -4496,6 +4502,7 @@
 				A202EC552085D2C80058F32C /* OTToggleVisibleWithConstraintsBehavior.m in Sources */,
 				A202ED112085D2C80058F32C /* OTTourJoinerDelegate.m in Sources */,
 				A202ECC32085D2C80058F32C /* OTOnboardingNavigationBehavior.m in Sources */,
+				A2A0AAD4215ACE6A000AE5EF /* OTChangeStatusCell.m in Sources */,
 				A202ED2B2085D2C80058F32C /* NSAttributedString+OTBuilder.m in Sources */,
 				A202EBA52085D2C80058F32C /* OTLostCodeViewController.m in Sources */,
 				A202EB6D2085D2C80058F32C /* OTPicturePreviewViewController.m in Sources */,
@@ -5146,6 +5153,7 @@
 				A296B7B920871CFC00F6AFBD /* OTCollectionCellProviderBehavior.m in Sources */,
 				A296B7BA20871CFC00F6AFBD /* OTUserViewController.m in Sources */,
 				A296B7BB20871CFC00F6AFBD /* OTAddressBookPhone.m in Sources */,
+				A2A0AAD5215ACE6A000AE5EF /* OTChangeStatusCell.m in Sources */,
 				A296B7BC20871CFC00F6AFBD /* OTPublicInfoCellProvider.m in Sources */,
 				A296B7BD20871CFC00F6AFBD /* OTSolidarityGuideFiltersCellProvider.m in Sources */,
 				A296B7BE20871CFC00F6AFBD /* UINavigationController+Appearance.m in Sources */,

@@ -492,5 +492,8 @@
 "user_reported" = "Utilisateur signalé";
 
 "action" = "Action";
-"add_title_hint" = "Les évènements avec un titre clair attirent plus de participants.";
-"add_description_hint" = "Vous pourrez modifier cette description et la date de votre évènement à tout moment.";
+"add_title_hint" = "Les actions avec un titre clair attirent plus de membres et ont plus de chances d'aboutir !";
+"add_description_hint" = "Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d'aboutir ! ";
+
+"add_event_title_hint" = "Les évènements avec un titre clair attirent plus de participants.";
+"add_event_description_hint" = "Vous pourrez modifier cette description et la date de votre évènement à tout moment.";
