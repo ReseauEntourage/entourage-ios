@@ -82,14 +82,24 @@
     [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
+- (NSInteger)indexOfDescriptionItem {
+    for (OTFeedItem *item in self.items) {
+        if ([item.identifierTag isEqualToString:@"feedDescription"]) {
+            return [self.items indexOfObject:item];
+        }
+    }
+    
+    return -1;
+}
+
 - (void)entourageUpdated:(NSNotification *)notification {
     OTFeedItem *feedItem = (OTFeedItem *)[notification.userInfo objectForKey:kNotificationEntourageChangedEntourageKey];
     NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
     
     if ([description length] > 0) {
-        if ([self.items count] >= 2) {
+        if ([self indexOfDescriptionItem] > 0) {
             feedItem.identifierTag = @"feedDescription";
-            [self.items replaceObjectAtIndex:1 withObject:feedItem.copy];
+            [self.items replaceObjectAtIndex:[self indexOfDescriptionItem] withObject:feedItem.copy];
             [self.tableDataSource refresh];
         }
     }

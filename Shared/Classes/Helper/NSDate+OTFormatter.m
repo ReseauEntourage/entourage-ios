@@ -23,11 +23,7 @@
     NSInteger hour = [components hour];
     NSInteger minute = [components minute];
     NSInteger roundMin = minute % 15;
-    NSInteger min = minute + labs(15 - roundMin);
-    if (min == 60) {
-        min = 0;
-        hour = hour + 1;
-    }
+    NSInteger min = minute - roundMin;
     
     if (min == 0) {
         return [NSString stringWithFormat:@"%ldh", (long)hour];

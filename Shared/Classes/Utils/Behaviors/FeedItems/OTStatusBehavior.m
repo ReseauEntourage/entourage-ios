@@ -43,34 +43,66 @@
     [self updateTextButtonAndJoin];
 }
 
++ (NSString *)statusTitleForItem:(OTFeedItem*)feedItem {
+    OTUser*currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    BOOL isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
+    NSString *title = nil;
+    if (isActive) {
+        if (feedItem.author.uID.intValue == currentUser.sid.intValue)
+            if ([feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
+                title = OTLocalizedString(@"ongoing");
+            else
+                title = OTLocalizedString(@"join_active");
+            else {
+                if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus])
+                    title = OTLocalizedString(@"join_active");
+                else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus])
+                    title = OTLocalizedString(@"join_pending");
+                else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus])
+                    title = OTLocalizedString(@"join_rejected");
+                else {
+                    title = OTLocalizedString(@"join_to_join");
+                }
+            }
+    }
+    else {
+        title = OTLocalizedString(@"item_closed");
+        if (![feedItem isOuting] && [feedItem.outcomeStatus boolValue]) {
+            title = @"Succès !";
+        }
+    }
+    
+    return title;
+}
+
 #pragma mark - private methods
 
 - (void)updateTextButtonAndJoin {
     self.isJoinPossible = NO;
     UIColor *color = [ApplicationTheme shared].backgroundThemeColor;
-    if(self.isActive) {
+    NSString *title = [OTStatusBehavior statusTitleForItem:self.feedItem];
+    
+    if (self.isActive) {
         if (self.feedItem.author.uID.intValue == self.currentUser.sid.intValue)
             if([self.feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
-                [self updateTextButtonWithText:OTLocalizedString(@"ongoing") andColor:color];
+                [self updateTextButtonWithText:title andColor:color];
             else
-                [self updateTextButtonWithText:OTLocalizedString(@"join_active") andColor:color];
+                [self updateTextButtonWithText:title andColor:color];
         else {
             if ([JOIN_ACCEPTED isEqualToString:self.feedItem.joinStatus])
-                [self updateTextButtonWithText:OTLocalizedString(@"join_active") andColor:color];
+                [self updateTextButtonWithText:title andColor:color];
             else if ([JOIN_PENDING isEqualToString:self.feedItem.joinStatus])
-                [self updateTextButtonWithText:OTLocalizedString(@"join_pending") andColor:color];
+                [self updateTextButtonWithText:title andColor:color];
             else if ([JOIN_REJECTED isEqualToString:self.feedItem.joinStatus])
-                [self updateTextButtonWithText:OTLocalizedString(@"join_rejected") andColor:[UIColor appTomatoColor]];
+                [self updateTextButtonWithText:title andColor:[UIColor appTomatoColor]];
             else {
-                [self updateTextButtonWithText:OTLocalizedString(@"join_to_join") andColor:[UIColor appGreyishColor]];
+                [self updateTextButtonWithText:title andColor:[UIColor appGreyishColor]];
                 self.isJoinPossible = YES;
             }
         }
     }
     else {
-        NSString *title = OTLocalizedString(@"item_closed");
         if (![self.feedItem isOuting] && [self.feedItem.outcomeStatus boolValue]) {
-            title = @"Succès !";
             [self updateTextButtonWithText:title andColor:[UIColor appGreyishColor]];
         } else {
             [self updateTextButtonWithText:title andColor:color];

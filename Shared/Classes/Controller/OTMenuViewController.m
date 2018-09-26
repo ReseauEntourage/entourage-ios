@@ -166,6 +166,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
     if (menuItem.iconName != nil) {
         cell.itemIcon.image = [UIImage imageNamed:menuItem.iconName];
+        cell.itemIcon.contentMode = UIViewContentModeScaleAspectFit;
     }
     if (menuItem.title != nil) {
         cell.itemLabel.text = menuItem.title;

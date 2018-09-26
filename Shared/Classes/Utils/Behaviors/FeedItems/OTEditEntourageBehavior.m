@@ -36,6 +36,7 @@
         [self setupCategory];
         controller.entourage = self.entourage;
         controller.entourageEditorDelegate = self;
+        controller.isEditingEvent = [self.entourage isOuting];
     }
     else
         return NO;

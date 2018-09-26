@@ -62,6 +62,7 @@
         [OTAppConfiguration configureActivityControllerAppearance:weakActivityVC
                                                             color:[[ApplicationTheme shared] secondaryNavigationBarTintColor]];
     };
+    activityVC.navigationController.navigationBar.tintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
     [self.owner presentViewController:activityVC animated:YES completion:nil];
 }
 

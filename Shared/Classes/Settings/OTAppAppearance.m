@@ -500,7 +500,7 @@
     }
     
     BOOL isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
-    color = [UIColor appGreyishColor];
+    color = [UIColor appOrangeColor];
     if (isActive) {
         OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
         if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
@@ -512,7 +512,7 @@
             } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
                 color = [UIColor appTomatoColor];
             } else {
-                color = [UIColor appGreyishColor];
+                color = [UIColor appOrangeColor];
             }
         }
     }
@@ -766,17 +766,24 @@
 
 
 
-+ (NSString*)addActionTitleHintMessage {
++ (NSString*)addActionTitleHintMessage:(BOOL)isEvent {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_add_title_hint");
     }
     
+    if (isEvent) {
+        return OTLocalizedString(@"add_event_title_hint");
+    }
     return OTLocalizedString(@"add_title_hint");
 }
 
-+ (NSString*)addActionDescriptionHintMessage {
++ (NSString*)addActionDescriptionHintMessage:(BOOL)isEvent {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_add_description_hint");
+    }
+    
+    if (isEvent) {
+        return OTLocalizedString(@"add_event_description_hint");
     }
     
     return OTLocalizedString(@"add_description_hint");
