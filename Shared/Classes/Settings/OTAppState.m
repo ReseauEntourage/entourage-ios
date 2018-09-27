@@ -31,6 +31,8 @@
 #import "OTPushNotificationsService.h"
 #import "OTNotificationsRightsViewController.h"
 #import "OTFeedItemFactory.h"
+#import "OTActiveFeedItemViewController.h"
+#import "OTMapViewController.h"
 
 #define TUTORIAL_DELAY 15
 #define MAP_TAB_INDEX 0

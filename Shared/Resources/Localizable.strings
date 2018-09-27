@@ -75,7 +75,7 @@
 "menu_atd_partner" = "Suivre Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
 "menu_join" = "Devenir Ambassadeur Entourage";
-"menu_donnation" = "Donnez vos retours rapides";
+"menu_donnation" = "Donner mes retours rapides";
 
 // AboutItems
 "about_tutorial" = "Voir le tutoriel";
@@ -297,7 +297,7 @@
 "defineActionZoneDescription" = "Où souhaitez-vous agir ?\nSoyez notifié des actualités importantes.";
 "modifyActionZoneTitle" = "Modifier ma zone";
 "defineActionZoneSampleAddress" = "avenue Jean Jaurès, Paris";
-"defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nIndiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.";
+"defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nPour recevoir des recommandations personnalisées à proximité, indiquez le lieu autour duquel vous souhaitez agir. ";
 "defineZoneSubtitle2" = "\n\nCette information n’est pas affichée.";
 "defineZoneSubtitle3" = " Vous pouvez la modifier dans vos réglages.";
 "defineZoneSubtitle4" = "\n\nAdresse - peut être approximative.";
