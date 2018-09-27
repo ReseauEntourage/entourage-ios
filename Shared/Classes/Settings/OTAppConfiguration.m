@@ -394,6 +394,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)configureActivityControllerAppearance:(UIActivityViewController *)controller
                                         color:(UIColor*)color {
     [UIApplication sharedApplication].keyWindow.tintColor = color;
+    UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : color };
+    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : color} forState:UIControlStateNormal];
 }
 
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController

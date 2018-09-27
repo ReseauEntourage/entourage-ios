@@ -39,8 +39,14 @@
 @property (nonatomic, weak) id<OTFeedItemsTableViewDelegate> feedItemsDelegate;
 @property (nonatomic, strong) IBOutlet UIView *loadingView;
 @property (nonatomic) BOOL showEventsOnly;
+@property (nonatomic) BOOL showSolidarityGuidePOIs;
 
 - (void)configureWithMapView:(MKMapView *)mapView;
+
+- (void)updateWithMapView:(MKMapView*)mapView
+                mapHeight:(CGFloat)mapHeight
+               showFilter:(BOOL)showFilter;
+
 - (void)updateItems:(NSArray *)items;
 - (void)loadBegun;
 - (void)setNoConnection;

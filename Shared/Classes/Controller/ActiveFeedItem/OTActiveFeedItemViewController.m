@@ -215,11 +215,15 @@
 }
 
 - (IBAction)showItemDetails {
-    [OTLogger logEvent:@"EntouragePublicPageViewFromMessages"];
+    [self loadPublicFeedDetails:self.feedItem];
+}
 
+- (void)loadPublicFeedDetails:(OTFeedItem*)item {
+    [OTLogger logEvent:@"EntouragePublicPageViewFromMessages"];
+    
     UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
     OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
-    publicFeedItemController.feedItem = self.feedItem;
+    publicFeedItemController.feedItem = item;
     publicFeedItemController.statusChangedBehavior.editEntourageBehavior = self.editEntourageBehavior;
     
     [self.navigationController pushViewController:publicFeedItemController animated:NO];
@@ -259,7 +263,7 @@
     [self loadEntourageItemWithStringId:messageItem.itemUuid completion:^(OTEntourage *entourage, NSError *error) {
         if (!error) {
             [self loadEntourageGroupMembers:entourage completion:^(NSArray *members, NSError *error) {
-                BOOL isMember = NO;
+               BOOL isMember = NO;
                 if (members) {
                     NSArray *memberIds = [members valueForKey:@"uID"];
                     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
@@ -272,9 +276,7 @@
                     [self.navigationController pushViewController:activeFeedItemViewController animated:YES];
                     
                 } else {
-                    OTMapViewController *feedMapViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTMapViewController"];
-                    feedMapViewController.feedItem = entourage;
-                    [self.navigationController pushViewController:feedMapViewController animated:YES];
+                    [self loadPublicFeedDetails:entourage];
                 }
             }];
         } else {

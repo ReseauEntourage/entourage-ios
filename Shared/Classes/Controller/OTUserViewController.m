@@ -32,6 +32,7 @@
 #import "OTEntourageService.h"
 #import "OTMapViewController.h"
 #import "UIColor+Expanded.h"
+#import "OTPublicFeedItemViewController.h"
 
 #import "entourage-Swift.h"
 
@@ -411,10 +412,13 @@ typedef NS_ENUM(NSInteger) {
         activeFeedItemViewController.feedItem = entourage;
         [self.navigationController pushViewController:activeFeedItemViewController animated:YES];
         
-    } else {
-        OTMapViewController *feedMapViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTMapViewController"];
-        feedMapViewController.feedItem = entourage;
-        [self.navigationController pushViewController:feedMapViewController animated:YES];
+    } else {        
+        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
+        OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+        publicFeedItemController.feedItem = entourage;
+        //publicFeedItemController.statusChangedBehavior.editEntourageBehavior = self.editEntourageBehavior;
+        
+        [self.navigationController pushViewController:publicFeedItemController animated:NO];
     }
 }
 

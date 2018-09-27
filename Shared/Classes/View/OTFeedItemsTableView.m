@@ -62,6 +62,7 @@
 @property (nonatomic, strong) UIView *currentNewsfeedFooter;
 @property (nonatomic, strong) UILabel *lblEmptyTableReason;
 @property (nonatomic, weak) IBOutlet UILabel *infoLabel;
+@property (nonatomic) CGFloat headerMapViewHeight;
 
 @end
 
@@ -137,13 +138,21 @@
     mapView.center = center;
 }
 
+- (void)updateWithMapView:(MKMapView*)mapView
+                mapHeight:(CGFloat)mapHeight
+                 showFilter:(BOOL)showFilter {
+    self.tableHeaderView = [self headerViewWithMap:mapView mapHeight:mapHeight showFilter:showFilter];
+    CGPoint center = self.tableHeaderView.center;
+    mapView.center = center;
+}
+
 - (UIView*)headerViewWithMap:(MKMapView*)mapView
                    mapHeight:(CGFloat)mapHeight
                   showFilter:(BOOL)showFilter {
     //show map on table header
     CGFloat panViewHeight = 15;
     CGFloat h = mapHeight;
-    if (showFilter) {
+    if (showFilter && !self.showSolidarityGuidePOIs) {
         h += [self feedsFilterHeaderHeight];
     } else {
         h += panViewHeight;
@@ -185,7 +194,7 @@
     
     // Add filter view if supported
     [self setupFilteringHeaderView:mapHeight];
-    if (showFilter) {
+    if (showFilter && !self.showSolidarityGuidePOIs) {
         [headerView addSubview:self.filterView];
     }
     
@@ -450,10 +459,12 @@
 - (void)switchToGuide {
     self.currentNewsfeedFooter = self.tableFooterView;
     self.tableFooterView = self.emptyFooterView;
+    self.showSolidarityGuidePOIs = YES;
 }
 
 - (void)switchToFeeds {
     self.tableFooterView = self.currentNewsfeedFooter;
+    self.showSolidarityGuidePOIs = NO;
 }
 
 #pragma mark - private methods

@@ -1467,6 +1467,7 @@
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+        [self.tableView updateWithMapView:self.mapView mapHeight:mapFrame.size.height showFilter:NO];
     }];
     
     [self configureNavigationBar];
