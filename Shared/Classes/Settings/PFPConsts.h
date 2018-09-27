@@ -7,5 +7,5 @@
 //
 
 
-#define PFP_ABOUT_CGU_URL @"http://www.entourage.social/cgu/index.html"
+#define PFP_ABOUT_CGU_URL @"http://bit.ly/cgu_applivoisin-age"
 #define PFP_API_URL_PRIVACY_POLICY  @"privacy-policy"

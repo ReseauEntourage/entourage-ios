@@ -114,6 +114,10 @@
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     
     [self reloadMessages];
+    
+    UIColor *color = [[ApplicationTheme shared] backgroundThemeColor];
+    [self.btnSend setTintColor:color];
+    [self.btnSend setTitleColor:color forState:UIControlStateNormal];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

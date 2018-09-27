@@ -27,6 +27,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+Fitting.h"
 #import "OTFeedItemMessage.h"
+#import "OTHTTPRequestManager.h"
 #import "entourage-Swift.h"
 
 
@@ -49,16 +50,35 @@
     return ABOUT_CGU_URL;
 }
 
-+ (NSString *)welcomeDescription
++ (NSString*)policyUrlString
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_welcomeText");
+        NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, PFP_API_URL_PRIVACY_POLICY, TOKEN];
+        NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+        return urlString;
+    }
+    return ABOUT_POLICY_URL;
+}
+
++ (NSString *)welcomeTopDescription
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_welcomeTopText");
     }
     
-    return OTLocalizedString(@"welcomeText");
+    return OTLocalizedString(@"welcomeTopText");
 }
 
 + (UIImage*)welcomeLogo
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return nil;
+    }
+    
+    return [UIImage imageNamed:@"logoWhiteEntourage"];
+}
+
++ (UIImage*)welcomeImage
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return nil;
@@ -131,14 +151,11 @@
 
 + (NSAttributedString *)defineActionZoneFormattedDescription {
     UIFont *regularFont = [UIFont fontWithName:@"SFUIText-Regular" size:15];
-    UIFont *highlightedFont = [UIFont fontWithName:@"SFUIText-Semibold" size:15];
-    UIFont *lightFont = [UIFont fontWithName:@"SFUIText-Light" size:15];
+    UIFont *lightSmallFont = [UIFont fontWithName:@"SFUIText-Light" size:12];
     
     NSDictionary *regAtttributtes = @{NSFontAttributeName : regularFont,
                                    NSForegroundColorAttributeName:[UIColor whiteColor]};
-    NSDictionary *highlightedAtttributtes = @{NSFontAttributeName : highlightedFont,
-                                      NSForegroundColorAttributeName:[UIColor whiteColor]};
-    NSDictionary *lightAtttributtes = @{NSFontAttributeName : lightFont,
+    NSDictionary *lightAtttributtes = @{NSFontAttributeName : lightSmallFont,
                                               NSForegroundColorAttributeName:[UIColor whiteColor]};
     
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
@@ -146,19 +163,15 @@
         NSString *subtitle2 = OTLocalizedString(@"pfp_defineZoneSubtitle2");
         
         NSMutableAttributedString *descAttString = [[NSMutableAttributedString alloc] initWithString:subtitle1 attributes:regAtttributtes];
-        [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:highlightedAtttributtes]];
+        [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:lightAtttributtes]];
         
         return descAttString;
     }
     
     NSString *subtitle1 = OTLocalizedString(@"defineZoneSubtitle1");
     NSString *subtitle2 = OTLocalizedString(@"defineZoneSubtitle2");
-    NSString *subtitle3 = OTLocalizedString(@"defineZoneSubtitle3");
-    NSString *subtitle4 = OTLocalizedString(@"defineZoneSubtitle4");
     NSMutableAttributedString *descAttString = [[NSMutableAttributedString alloc] initWithString:subtitle1 attributes:regAtttributtes];
-    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:highlightedAtttributtes]];
-    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle3 attributes:regAtttributtes]];
-    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle4 attributes:lightAtttributtes]];
+    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:lightAtttributtes]];
     
     return descAttString;
 }

@@ -47,7 +47,9 @@
     self.continueButton.layer.cornerRadius = self.continueButton.frame.size.width / 2;
     UIImage *image = [self.continueButton imageForState:UIControlStateNormal];
     [self.continueButton setImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    self.continueButton.tintColor = [ApplicationTheme shared].backgroundThemeColor;;
+    self.continueButton.tintColor = [ApplicationTheme shared].backgroundThemeColor;
+    self.privacyIconImage.image = [self.privacyIconImage.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.privacyIconImage.tintColor = [UIColor whiteColor];
 
     self.rightsDescLabel.attributedText = [OTAppAppearance defineActionZoneFormattedDescription];
     self.rightsTitleLabel.text = [OTAppAppearance defineActionZoneTitleForUser:nil];

@@ -41,6 +41,10 @@
         urlPath = [NSString stringWithFormat:@"http://%@", urlPath];
     }
     
+    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlPath]]) {
+        return;
+    }
+    
     NSURL *launchUrl = [NSURL URLWithString:urlPath];
     SFSafariViewController *safariController = [[SFSafariViewController alloc] initWithURL:launchUrl];
     safariController.modalPresentationStyle = UIModalPresentationOverFullScreen;
