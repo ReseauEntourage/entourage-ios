@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ent-intro-bg3" translatesAutoresizingMaskIntoConstraints="NO" id="Ymm-fW-VvL">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ent-intro-bg3" translatesAutoresizingMaskIntoConstraints="NO" id="Ymm-fW-VvL">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -32,7 +31,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="chaleureux du réseau Entourage et des associations partenaires, entre voisins avec et sans abri" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="no7-w6-Ogj">
-                    <rect key="frame" x="16" y="134" width="343" height="61"/>
+                    <rect key="frame" x="31" y="134" width="312" height="61"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -48,23 +47,23 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="no7-w6-Ogj" firstAttribute="leading" secondItem="GS9-BY-5ay" secondAttribute="leadingMargin" id="0j2-7t-9G3"/>
+                <constraint firstItem="no7-w6-Ogj" firstAttribute="leading" secondItem="GS9-BY-5ay" secondAttribute="leadingMargin" constant="15" id="0j2-7t-9G3"/>
                 <constraint firstItem="ZLc-X1-t1U" firstAttribute="centerX" secondItem="GS9-BY-5ay" secondAttribute="centerX" id="5wY-gq-wmC"/>
                 <constraint firstItem="4lm-9H-EsQ" firstAttribute="leading" secondItem="GS9-BY-5ay" secondAttribute="leading" id="9U9-Ej-ThA"/>
                 <constraint firstItem="4lm-9H-EsQ" firstAttribute="bottom" secondItem="v67-zF-aiC" secondAttribute="bottom" id="H46-xJ-vUx"/>
                 <constraint firstAttribute="trailing" secondItem="4lm-9H-EsQ" secondAttribute="trailing" id="KVg-Un-IWT"/>
                 <constraint firstItem="ZLc-X1-t1U" firstAttribute="top" secondItem="v67-zF-aiC" secondAttribute="top" constant="39" id="U15-06-AK8"/>
                 <constraint firstItem="4lm-9H-EsQ" firstAttribute="top" secondItem="no7-w6-Ogj" secondAttribute="bottom" constant="34" id="UsM-0s-eqx"/>
-                <constraint firstAttribute="trailingMargin" secondItem="no7-w6-Ogj" secondAttribute="trailing" id="oZ9-mW-vvz"/>
+                <constraint firstAttribute="trailingMargin" secondItem="no7-w6-Ogj" secondAttribute="trailing" constant="16" id="oZ9-mW-vvz"/>
                 <constraint firstItem="no7-w6-Ogj" firstAttribute="top" secondItem="ZLc-X1-t1U" secondAttribute="bottom" constant="6" id="x3V-GO-oKn"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="v67-zF-aiC"/>
-            <point key="canvasLocation" x="81.5" y="53.5"/>
+            <point key="canvasLocation" x="80.799999999999997" y="52.623688155922046"/>
         </view>
     </objects>
     <resources>
-        <image name="ent-intro-bg3" width="375" height="478"/>
-        <image name="intro-large-img3" width="375" height="244"/>
-        <image name="intro-small-img3" width="167" height="64"/>
+        <image name="ent-intro-bg3" width="375" height="478.5"/>
+        <image name="intro-large-img3" width="375" height="455.5"/>
+        <image name="intro-small-img3" width="167.5" height="64"/>
     </resources>
 </document>

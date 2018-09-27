@@ -14,8 +14,10 @@
 
 @interface OTAppAppearance : NSObject
 + (NSString *)aboutUrlString;
-+ (NSString *)welcomeDescription;
++ (NSString*)policyUrlString;
++ (NSString *)welcomeTopDescription;
 + (UIImage *)welcomeLogo;
++ (UIImage*)welcomeImage;
 + (UIImage *)applicationLogo;
 + (NSString *)applicationTitle;
 + (NSString *)userProfileNameDescription;

@@ -10,7 +10,7 @@
 "CURRENT_USER" = "currentUser";
 
 // Welcome
-"welcomeText" = "Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale! En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.";
+"welcomeTopText" = "Vous allez rejoindre une communauté de voisins avec et sans abris qui se rassemblent et luttent contre l’exclusion !";
 "geolocalisationDescriptionText" = "Entourage, c’est utile parce que c’est local!\nParticipez à la solidarité de votre quartier : pour voir les actions de vos voisins, qu’ils soient avec ou sans-abri, activez la géolocalisation.";
 "notificationNeedDescription" = "Pour vous faire découvrir les actions solidaires autour de vous, Entourage doit connaître votre position.";
 
@@ -87,6 +87,7 @@
 "about_email" = "Contactez Entourage";
 "about_email_notavailable" = "Email introuvable";
 "terms_and_conditions_for_onboarding" = "conditions d’utilisation";
+"policy_for_onboarding" = "politique de confidentialité";
 "about_twitter" = "Suivez-nous sur Twitter";
 "about_suggestions" = "Suggérez des améliorations";
 "about_appVersion" = "Version de l'application";
@@ -296,11 +297,9 @@
 "defineActionZoneTitle" = "Définissez votre zone d'action";
 "defineActionZoneDescription" = "Où souhaitez-vous agir ?\nSoyez notifié des actualités importantes.";
 "modifyActionZoneTitle" = "Modifier ma zone";
-"defineActionZoneSampleAddress" = "avenue Jean Jaurès, Paris";
+"defineActionZoneSampleAddress" = "14 rue de Thionville 75019...";
 "defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nPour recevoir des recommandations personnalisées à proximité, indiquez le lieu autour duquel vous souhaitez agir. ";
-"defineZoneSubtitle2" = "\n\nCette information n’est pas affichée.";
-"defineZoneSubtitle3" = " Vous pouvez la modifier dans vos réglages.";
-"defineZoneSubtitle4" = "\n\nAdresse - peut être approximative.";
+"defineZoneSubtitle2" = "\n\nAdresse - peut être approximative.";
 
 "user_edit_password_invalid_current" = "Le mot de passe ne correspond pas";
 "user_edit_password_invalid_length_too_short" = "Le mot de passe doit contenir au moins %d caractères";

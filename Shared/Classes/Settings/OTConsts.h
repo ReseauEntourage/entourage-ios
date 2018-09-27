@@ -73,6 +73,7 @@
 #define ABOUT_TWITTER_URL @"https://twitter.com/r_entourage"
 #define ABOUT_CGU_URL @"http://www.entourage.social/cgu/index.html"
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
+#define ABOUT_POLICY_URL @"https://www.entourage.social/politique-de-confidentialite"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
 #define ABOUT_POLITIQUE_DE_CONF_FORMAT @"%@links/privacy-policy/redirect?token=%@"
 
