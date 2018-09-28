@@ -26,6 +26,7 @@
 
 //Menu
 #define API_URL_MENU_OPTIONS @"links/%@/redirect?token=%@"
+#define API_URL_MENU_OPTIONS_NO_TOKEN @"links/%@/redirect"
 
 // Feeds
 #define API_URL_FEEDS    @"feeds?token=%@"

@@ -286,7 +286,7 @@
 }
 
 - (void)addFeedItem:(OTFeedItem *)feedItem {
-    NSUInteger oldFeedIndex = [self.feedItems indexOfObject:feedItem];
+    NSUInteger oldFeedIndex = [self indexOfExistingLoadedFeedItem:feedItem];
     if (oldFeedIndex != NSNotFound) {
         [self.feedItems replaceObjectAtIndex:oldFeedIndex withObject:feedItem];
         return;
@@ -299,6 +299,16 @@
         }
     }
     [self.feedItems addObject:feedItem];
+}
+
+- (NSUInteger)indexOfExistingLoadedFeedItem:(OTFeedItem*)feedItem {
+    for (OTFeedItem *item in self.feedItems) {
+        if (item.uid.integerValue == feedItem.uid.integerValue) {
+            return [self.feedItems indexOfObject:item];
+        }
+    }
+    
+    return NSNotFound;
 }
 
 @end

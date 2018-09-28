@@ -95,7 +95,18 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"tryAgain") message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"ok") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:defaultAction];
-    [rootController presentViewController:alert animated:YES completion:nil];
+    
+    UIViewController *topVC = rootController;
+    if ([rootController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController *)rootController;
+        topVC = [navController topViewController];
+    }
+    
+    if (topVC.presentedViewController) {
+        [topVC.presentedViewController presentViewController:alert animated:YES completion:nil];
+    } else if (topVC) {
+        [topVC presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 #pragma mark - CLLocationManagerDelegate

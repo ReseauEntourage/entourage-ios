@@ -45,7 +45,9 @@
 + (NSString*)aboutUrlString
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return PFP_ABOUT_CGU_URL;
+        NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS_NO_TOKEN, PFP_API_URL_TERMS_REDIRECT];
+        NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+        return urlString;
     }
     return ABOUT_CGU_URL;
 }
@@ -53,10 +55,11 @@
 + (NSString*)policyUrlString
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, PFP_API_URL_PRIVACY_POLICY, TOKEN];
+        NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS_NO_TOKEN, PFP_API_URL_PRIVACY_POLICY_REDIRECT];
         NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
         return urlString;
     }
+    
     return ABOUT_POLICY_URL;
 }
 
@@ -84,7 +87,7 @@
         return nil;
     }
     
-    return [UIImage imageNamed:@"logoWhiteEntourage"];
+    return [UIImage imageNamed:@"welcome"];
 }
 
 + (NSString *)userProfileNameDescription

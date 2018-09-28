@@ -83,7 +83,7 @@
 }
 
 + (void)launchPrivacyPolicyFormInController:(UIViewController*)controller {
-    NSURL *url = [OTSafariService redirectUrlWithIdentifier:PFP_API_URL_PRIVACY_POLICY];
+    NSURL *url = [OTSafariService redirectUrlWithIdentifier:PFP_API_URL_PRIVACY_POLICY_REDIRECT];
     [OTSafariService launchInAppBrowserWithUrl:url viewController:controller];
 }
 
