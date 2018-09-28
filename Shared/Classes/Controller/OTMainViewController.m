@@ -886,9 +886,6 @@
 - (void)showToursMapAction
 {
     [OTLogger logEvent:@"MapViewClick"];
-    if (self.newsFeedsSourceBehavior.showEventsOnly) {
-        
-    }
     
     [self showToursMap];
 }
@@ -1082,7 +1079,7 @@
     if (sender.state == UIGestureRecognizerStateEnded) {
         if (self.isTourListDisplayed) {
             [OTLogger logEvent:@"MapClick"];
-            [self showToursMap];
+            [self showToursMapAction];
         }
         else {
             if ([self.tapEntourage hasTappedEntourageOverlay:sender].count > 0) {
@@ -1328,7 +1325,7 @@
 }
 
 - (void)didPanHeaderDown {
-    [self showToursMapAction];
+    [self showMapAnimated:NO];
 }
 
 - (void)showEventsOnly
@@ -1401,7 +1398,7 @@
     [self configureNavigationBar];
 }
 
-- (void)showToursMap {
+- (void)showMapAnimated:(BOOL)animated {
     self.tableView.scrollEnabled = NO;
     self.forceReloadingFeeds = NO;
     //self.solidarityGuidePoisDisplayed = NO;
@@ -1432,23 +1429,28 @@
     
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
-
+    
     [OTLogger logEvent:@"MapViewClick"];
-    [UIView animateWithDuration:0.25 animations:^(void) {
+    
+    NSTimeInterval duration = animated ? 0.25 : 0.0;
+    [UIView animateWithDuration:duration animations:^(void) {
         //self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         
         MKCoordinateRegion region;
         region = MKCoordinateRegionMakeWithDistance(self.mapView.centerCoordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
-        [self.mapView setRegion:region animated:YES];
-        //[self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+        [self.mapView setRegion:region animated:animated];
         [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
                                                                    mapHeight:[UIScreen mainScreen].bounds.size.height
                                                                   showFilter:NO]];
-        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:animated];
     }];
     
     [self configureNavigationBar];
+}
+
+- (void)showToursMap {
+    [self showMapAnimated:YES];
 }
 
 #pragma mark 15.2 New Tour - on going
