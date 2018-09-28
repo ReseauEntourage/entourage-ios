@@ -1082,17 +1082,35 @@
             [self showToursMapAction];
         }
         else {
-            if ([self.tapEntourage hasTappedEntourageOverlay:sender].count > 0) {
+            NSMutableArray *closeTapHeatzones = [self.tapEntourage hasTappedEntourageOverlay:sender];
+            NSMutableArray *closeTapEntourages = [self.tapEntourage hasTappedEntourageAnnotation:sender];
+
+            if (closeTapHeatzones.count > 0 && closeTapEntourages.count > 0) {
+                [OTLogger logEvent:@"HeatzoneMapClick"];
+                CLLocationCoordinate2D coordinate;
+                if (self.tapEntourage.tappedEntourage) {
+                    coordinate = self.tapEntourage.tappedEntourage.coordinate;
+                } else {
+                    coordinate = self.tapEntourage.tappedEntourageAnnotation.coordinate;
+                }
+                [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
+                if (!self.poisMapDelegate.isActive) {
+                    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:closeTapHeatzones];
+                    [items addObjectsFromArray:closeTapEntourages];
+                    [self loadHeatzonesCollectionViewWithItems:items];
+                }
+            }
+            else if (closeTapHeatzones.count > 0) {
                 [OTLogger logEvent:@"HeatzoneMapClick"];
                 [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.tapEntourage.tappedEntourage.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
                 if (!self.poisMapDelegate.isActive) {
-                    [self loadHeatzonesCollectionViewWithItems:[self.tapEntourage hasTappedEntourageOverlay:sender]];
+                    [self loadHeatzonesCollectionViewWithItems:closeTapHeatzones];
                 }
             }
-            else if ([self.tapEntourage hasTappedEntourageAnnotation:sender].count > 0) {
+            else if (closeTapEntourages.count > 0) {
                 [OTLogger logEvent:@"AnnotationMapClick"];
                 [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.tapEntourage.tappedEntourageAnnotation.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
-                [self loadHeatzonesCollectionViewWithItems:[self.tapEntourage hasTappedEntourageAnnotation:sender]];
+                [self loadHeatzonesCollectionViewWithItems:closeTapEntourages];
             }
             else {
                 [self.toggleCollectionView toggle:NO animated:YES];

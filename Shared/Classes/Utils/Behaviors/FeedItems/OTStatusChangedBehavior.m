@@ -14,6 +14,8 @@
 #import "OTCloseReason.h"
 #import "OTTour.h"
 
+#define ACTION_DELAY 0.3f
+
 @interface OTStatusChangedBehavior ()
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
@@ -49,7 +51,7 @@
     [self popToRootController];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, ACTION_DELAY * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"stopped_item")];
     });
 }
@@ -60,7 +62,7 @@
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [OTAppState hideTabBar:NO];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, ACTION_DELAY * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if(![self.feedItem isKindOfClass:[OTTour class]]) {
             NSDictionary *userInfo =  @{ @kNotificationSendReasonKey: @(reason), @kNotificationFeedItemKey: self.feedItem};
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationSendCloseMail object:nil userInfo:userInfo];
@@ -78,7 +80,7 @@
     [self popToRootController];
     [OTAppState hideTabBar:NO];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, ACTION_DELAY * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:[OTAppAppearance quitFeedItemConformationTitle:self.feedItem]];
         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
     });
@@ -87,7 +89,7 @@
 - (void)cancelledJoinRequest {
     [self popToRootController];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, ACTION_DELAY * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"cancelled_join_request")];
         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
     });

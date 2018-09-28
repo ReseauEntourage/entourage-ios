@@ -8,4 +8,5 @@
 
 
 #define PFP_ABOUT_CGU_URL @"http://bit.ly/cgu_applivoisin-age"
-#define PFP_API_URL_PRIVACY_POLICY  @"privacy-policy"
+#define PFP_API_URL_PRIVACY_POLICY_REDIRECT  @"privacy-policy"
+#define PFP_API_URL_TERMS_REDIRECT  @"terms"
