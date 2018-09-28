@@ -67,7 +67,7 @@
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(setNewAboutMe:)]) {
         [self.delegate setNewAboutMe:aboutMessage];
     }
-    [self close:self];
+    //[self close:self];
 }
 
 @end

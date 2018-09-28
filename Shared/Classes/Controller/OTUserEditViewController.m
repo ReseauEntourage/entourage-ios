@@ -608,6 +608,7 @@ typedef NS_ENUM(NSInteger) {
 - (void)setNewAboutMe:(NSString *)aboutMe {
     self.user.about = aboutMe;
     [self appActive];
+    [self updateUser];
 }
 
 - (IBAction)addAboutMeDescription:(id)sender {
