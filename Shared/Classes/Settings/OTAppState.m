@@ -34,7 +34,7 @@
 #import "OTActiveFeedItemViewController.h"
 #import "OTMapViewController.h"
 
-#define TUTORIAL_DELAY 15
+#define TUTORIAL_DELAY 2
 #define MAP_TAB_INDEX 0
 #define MESSAGES_TAB_INDEX 1
 
@@ -79,11 +79,11 @@
     if (IS_PRO_USER) {
         return;
     }
-    
+
     if ([NSUserDefaults standardUserDefaults].autoTutorialShown) {
         return;
     }
-    
+
     [NSUserDefaults standardUserDefaults].autoTutorialShown = YES;
     
     [OTAppState performSelector:@selector(loadTutorialScreen) withObject:nil afterDelay:TUTORIAL_DELAY];
