@@ -560,8 +560,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         return NO;
     }
     
-    // EMA-1991
-    return NO;
+    // EMA-1991, EMA-2351
+    return YES;
 }
 
 + (BOOL)shouldShowAddEventDisclaimer

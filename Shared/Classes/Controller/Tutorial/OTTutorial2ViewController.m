@@ -23,10 +23,12 @@
     
     self.topView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:OTLocalizedString(@"Consultez les actions créées par vos voisins et rejoignez celles qui vous intéressent depuis la carte : ")];
-    [attributedString addAttributes:@{
-                                      NSForegroundColorAttributeName: [UIColor appGreyishBrownColor]
-                                      } range:NSMakeRange(0, 47)];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Consultez les actions et les évènements solidaires créés par vos voisins et rejoignez ceux qui vous intéressent sur la carte" attributes:@{
+                                                                                                                                                                                                                                                 NSFontAttributeName: [UIFont systemFontOfSize:17.0f weight:UIFontWeightSemibold],
+                                                                                                                                                                                                                                                 NSForegroundColorAttributeName: [UIColor colorWithWhite:74.0f / 255.0f alpha:1.0f],
+                                                                                                                                                                                                                                                 NSKernAttributeName: @(0.0)
+                                                                                                                                                                                                                                                 }];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor appOrangeColor] range:NSMakeRange(76, 48)];
     
     self.lblDetails.attributedText = attributedString;
 }
