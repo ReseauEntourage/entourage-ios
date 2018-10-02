@@ -8,6 +8,9 @@
 
 "pfp_welcomeTopText" = "Voisin-Age est la communauté de voisins qui tissent des liens intergénérationnels.\nProximité, Liberté, Réciprocité : rencontrez des personnes âgées près de chez vous et créez des liens de voisinage et d’amitié.";
 
+"pfp_lostCodeMessage1" = "Si vous ne l’avez pas reçu, redemandez un code.";
+"pfp_lostCodeMessage2" = "Si vous ne l’avez pas reçu, redemandez un code.\n\nLe problème persiste ? Écrivez à voisin-age@petitsfreresdespauvres.fr et nous en génèrerons un pour vous.";
+
 "pfp_userNameDescriptionText" = "Si vous êtes voisiné(e), seuls votre prénom et la première lettre de votre nom apparaitront.";
 "pfp_userEmailDescriptionText" = "Nous vous enverrons uniquement des informations de votre voisinage";
 "pfp_userNotificationsDescriptionText" = "Pour vous coordonner entre voisineurs et voisinés, soyez notifié(e) des nouveaux messages reçus et de sorties à côté de chez vous.";

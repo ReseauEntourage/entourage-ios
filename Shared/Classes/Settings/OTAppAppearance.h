@@ -16,6 +16,8 @@
 + (NSString *)aboutUrlString;
 + (NSString*)policyUrlString;
 + (NSString *)welcomeTopDescription;
++ (NSString*)lostCodeSimpleDescription;
++ (NSString*)lostCodeFullDescription;
 + (UIImage *)welcomeLogo;
 + (UIImage*)welcomeImage;
 + (UIImage *)applicationLogo;
