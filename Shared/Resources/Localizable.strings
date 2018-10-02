@@ -47,7 +47,7 @@
 "phoneAlreadyExits" = "Ce téléphone n'est pas disponible";
 "already_subscribed" = "Déjà inscrit";
 "lostCodeMessage1" = "Si vous ne l’avez pas reçu, redemandez un code.";
-"lostCodeMessage2" = "Si vous ne l’avez pas reçu, redemandez un code.\n\nLe problème persiste ? écrivez à contact@entourage.social et nous en génèrerons un pour vous.";
+"lostCodeMessage2" = "Le problème persiste ? écrivez à contact@entourage.social et nous en génèrerons un pour vous.";
 
 // MenuItems
 "menu_amis" = "Amis";
