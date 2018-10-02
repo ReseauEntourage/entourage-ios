@@ -106,7 +106,7 @@
             NSString *errorMessage = error.localizedDescription;
             NSString *errorCode = [error readErrorCode];
             BOOL showErrorHUD = YES;
-            if([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
+            if ([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:OTLocalizedString(@"invalidPhoneNumberFormat") preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
                 [alert addAction:defaultAction];

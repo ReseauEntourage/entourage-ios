@@ -204,8 +204,13 @@
 
 + (void)hideTabBar:(BOOL)hide {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
-    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
-    [tabBarController.tabBar setHidden:hide];
+    id root = appDelegate.window.rootViewController;
+    if ([root isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController*)root;
+        [tabBarController.tabBar setHidden:hide];
+    } else {
+        [OTAppState navigateToAuthenticatedLandingScreen];
+    }
 }
 
 + (void)continueFromStartupScreen
@@ -526,6 +531,10 @@
 + (void)navigateToUserName:(UIViewController*)viewController {
     UIStoryboard *profileDetailsStoryboard = [UIStoryboard storyboardWithName:@"UserProfileDetails" bundle:nil];
     UIViewController *nameController = [profileDetailsStoryboard instantiateViewControllerWithIdentifier:@"NameScene"];
+    if ([viewController isKindOfClass:[nameController class]]) {
+        [OTAppState navigateToRootController:viewController];
+        return;
+    }
     [viewController.navigationController pushViewController:nameController animated:YES];
 }
 
@@ -534,6 +543,10 @@
     UIViewController *pictureViewController = [userPictureStoryboard instantiateInitialViewController];
     
     if (viewController) {
+        if ([viewController isKindOfClass:[pictureViewController class]]) {
+            [OTAppState navigateToRootController:viewController];
+            return;
+        }
         [viewController.navigationController pushViewController:pictureViewController animated:YES];
     } else {
         [OTAppState navigateToRootController:pictureViewController];
@@ -546,6 +559,10 @@
     rightsViewController.isShownOnStartup = YES;
     
     if (viewController) {
+        if ([viewController isKindOfClass:[rightsViewController class]]) {
+            [OTAppState navigateToRootController:viewController];
+            return;
+        }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];
     } else {
         [OTAppState navigateToRootController:rightsViewController];
@@ -557,6 +574,10 @@
     OTNotificationsRightsViewController *rightsViewController = [rightsStoryboard instantiateViewControllerWithIdentifier:@"OTNotificationsRightsViewController"];
     
     if (viewController) {
+        if ([viewController isKindOfClass:[rightsViewController class]]) {
+            [OTAppState navigateToRootController:viewController];
+            return;
+        }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];
     } else {
         [OTAppState navigateToRootController:rightsViewController];

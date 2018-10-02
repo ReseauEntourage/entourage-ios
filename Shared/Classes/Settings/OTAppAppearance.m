@@ -833,5 +833,21 @@
     return OTLocalizedString(@"invite_action_subtitle");
 }
 
++ (NSString*)lostCodeSimpleDescription {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_lostCodeMessage1");
+    }
+    
+    return OTLocalizedString(@"lostCodeMessage1");
+}
+
++ (NSString*)lostCodeFullDescription {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_lostCodeMessage2");
+    }
+    
+    return OTLocalizedString(@"lostCodeMessage2");
+}
+
 
 @end

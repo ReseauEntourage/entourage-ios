@@ -763,6 +763,7 @@ saisissez votre numéro de portable.</string>
                         <outlet property="phoneTextField" destination="9pu-ww-5CV" id="aHD-Ur-6bi"/>
                         <outlet property="pickerView" destination="irv-Vs-U9a" id="gA9-0M-vtg"/>
                         <outlet property="scrollBehavior" destination="Owz-Rl-UwJ" id="ufj-1N-Ywr"/>
+                        <segue destination="Jee-VG-6qS" kind="show" identifier="CodeVerificationSegue" id="jHa-oG-YMM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YH3-fG-8i6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -802,6 +803,14 @@ saisissez votre numéro de portable.</string>
                 </customObject>
             </objects>
             <point key="canvasLocation" x="2095.1999999999998" y="-2446.3268365817094"/>
+        </scene>
+        <!--Onboarding-->
+        <scene sceneID="1Iv-En-aZh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Onboarding" id="Jee-VG-6qS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eG5-ga-eLd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2746" y="-2447"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="Jxm-X1-QSd">
@@ -976,6 +985,6 @@ sur Entourage.</string>
         <image name="whitePhone" width="56" height="56.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="usp-d3-u4q"/>
+        <segue reference="GFk-L8-2yS"/>
     </inferredMetricsTieBreakers>
 </document>

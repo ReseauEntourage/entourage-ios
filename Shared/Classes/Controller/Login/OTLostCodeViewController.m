@@ -23,6 +23,7 @@
 #import "OTUser.h"
 #import "NSError+OTErrorData.h"
 #import "OTCountryCodePickerViewDataSource.h"
+#import "OTCodeViewController.h"
 #import "entourage-Swift.h"
 
 @interface OTLostCodeViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
@@ -92,11 +93,8 @@
     [[OTAuthService new] regenerateSecretCode:phone
                                       success:^(OTUser *user)
     {
-        if (self.codeDelegate != nil && [self.codeDelegate respondsToSelector:@selector(loginWithCountryCode:andPhoneNumber:)]) {
-            [self.codeDelegate loginWithCountryCode:[self.countryPicker selectedRowInComponent:0]
-                                     andPhoneNumber:self.phoneTextField.text];
-        }
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
+        [self continueOnSuccess:user phone:phone];
     }
     failure:^(NSError *error) {
         [SVProgressHUD dismiss];
@@ -112,6 +110,20 @@
         [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
+}
+
+- (void)continueOnSuccess:(OTUser*)user phone:(NSString*)phone {
+//    if (self.codeDelegate != nil && [self.codeDelegate respondsToSelector:@selector(loginWithCountryCode:andPhoneNumber:)]) {
+//        [self.codeDelegate loginWithCountryCode:[self.countryPicker selectedRowInComponent:0]
+//                                 andPhoneNumber:self.phoneTextField.text];
+//    }
+    
+    
+    user.phone = phone;
+    [NSUserDefaults standardUserDefaults].temporaryUser = user;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:nil];
+    OTCodeViewController *codeViewController = (OTCodeViewController*)[storyboard instantiateViewControllerWithIdentifier:@"OTCodeViewController"];
+    [self.navigationController pushViewController:codeViewController animated:YES];
 }
 
 #pragma mark - Actions
