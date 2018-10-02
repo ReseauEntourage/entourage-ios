@@ -544,7 +544,7 @@
     
     if (viewController) {
         if ([viewController isKindOfClass:[pictureViewController class]]) {
-            [OTAppState navigateToRootController:viewController];
+            [OTAppState navigateToRootController:pictureViewController];
             return;
         }
         [viewController.navigationController pushViewController:pictureViewController animated:YES];
@@ -560,7 +560,7 @@
     
     if (viewController) {
         if ([viewController isKindOfClass:[rightsViewController class]]) {
-            [OTAppState navigateToRootController:viewController];
+            [OTAppState navigateToRootController:rightsViewController];
             return;
         }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];
@@ -575,7 +575,7 @@
     
     if (viewController) {
         if ([viewController isKindOfClass:[rightsViewController class]]) {
-            [OTAppState navigateToRootController:viewController];
+            [OTAppState navigateToRootController:rightsViewController];
             return;
         }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];

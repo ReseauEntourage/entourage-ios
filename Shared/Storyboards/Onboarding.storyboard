@@ -328,28 +328,25 @@ numéro de portable? </string>
                                             <constraint firstAttribute="height" constant="1" id="p38-L1-X0Q"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wo3-RT-UKL">
-                                        <rect key="frame" x="15" y="281" width="345" height="84"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="84" id="CWD-md-Tts"/>
-                                        </constraints>
-                                        <string key="text">Si vous ne l’avez pas reçu, redemandez un code. Le problème persiste ? écrivez à contact@entourage.social et nous en génèrerons un pour vous.</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Si vous ne l’avez pas reçu, redemandez un code." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wo3-RT-UKL">
+                                        <rect key="frame" x="15" y="281" width="345" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIF-kq-zRi">
-                                        <rect key="frame" x="122" y="281" width="238" height="49"/>
+                                        <rect key="frame" x="15" y="281" width="345" height="28"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="49" id="PuH-Mk-fQ4"/>
+                                            <constraint firstAttribute="height" constant="28" id="5MO-nb-bFy"/>
                                         </constraints>
                                         <connections>
                                             <action selector="doRegenerateCode" destination="ay8-4Z-lNJ" eventType="touchUpInside" id="maZ-hc-kZQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH7-Ij-WiF" customClass="OnBoardingButton" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="300" y="365" width="50" height="50"/>
+                                        <rect key="frame" x="300" y="369" width="50" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="GcX-1m-hTj"/>
@@ -366,34 +363,43 @@ numéro de portable? </string>
                                             <action selector="doContinue" destination="ay8-4Z-lNJ" eventType="touchUpInside" id="i4j-bq-eR0"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le problème persiste ? écrivez à contact@entourage.social et nous en génèrerons un pour vous." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hta-Lz-w6m">
+                                        <rect key="frame" x="15" y="308" width="345" height="59"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="59" id="wsd-gU-zUu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="m2V-xB-zfa" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="3DH-Ef-S2z"/>
                                     <constraint firstItem="ZH7-Ij-WiF" firstAttribute="centerX" secondItem="GL7-KN-5la" secondAttribute="centerX" constant="137.5" id="4W4-WK-7gr"/>
+                                    <constraint firstAttribute="trailing" secondItem="hta-Lz-w6m" secondAttribute="trailing" constant="15" id="78u-Wc-ecD"/>
                                     <constraint firstAttribute="trailing" secondItem="ZH7-Ij-WiF" secondAttribute="trailing" constant="25" id="8CM-Jb-Z5F"/>
                                     <constraint firstItem="m2V-xB-zfa" firstAttribute="top" secondItem="sCt-6F-DVv" secondAttribute="bottom" constant="8" id="8Wr-PY-L9v"/>
                                     <constraint firstItem="pvY-e5-lmP" firstAttribute="top" secondItem="m2V-xB-zfa" secondAttribute="bottom" id="98s-sS-FuG"/>
+                                    <constraint firstItem="hta-Lz-w6m" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="ArK-qw-pUw"/>
                                     <constraint firstItem="sCt-6F-DVv" firstAttribute="top" secondItem="GL7-KN-5la" secondAttribute="top" constant="95" id="Cg3-4Z-nb9"/>
-                                    <constraint firstAttribute="trailing" secondItem="wo3-RT-UKL" secondAttribute="trailing" constant="15" id="GBq-Ka-AsU"/>
-                                    <constraint firstAttribute="trailing" secondItem="YIF-kq-zRi" secondAttribute="trailing" constant="15" id="IrQ-Bw-ZSD"/>
                                     <constraint firstAttribute="trailing" secondItem="M8f-fn-OPr" secondAttribute="trailing" constant="15" id="Mr0-0c-V6A"/>
-                                    <constraint firstItem="wo3-RT-UKL" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="PWP-Sw-6fE"/>
-                                    <constraint firstItem="ZH7-Ij-WiF" firstAttribute="top" secondItem="M8f-fn-OPr" secondAttribute="bottom" constant="92" id="Smg-CV-5qR"/>
                                     <constraint firstItem="pvY-e5-lmP" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="Xmj-0m-6bq"/>
                                     <constraint firstItem="sCt-6F-DVv" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="Xok-9d-AIm"/>
+                                    <constraint firstItem="YIF-kq-zRi" firstAttribute="top" secondItem="pvY-e5-lmP" secondAttribute="bottom" constant="8" id="YIT-hc-xzI"/>
                                     <constraint firstItem="qwn-6G-LEa" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" id="YRo-ty-dhG"/>
                                     <constraint firstItem="ZH7-Ij-WiF" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="300" id="aFe-Zl-3UG"/>
                                     <constraint firstAttribute="height" constant="481" id="apC-Kc-icw"/>
                                     <constraint firstAttribute="trailing" secondItem="qwn-6G-LEa" secondAttribute="trailing" id="b1D-BI-fDV"/>
-                                    <constraint firstItem="YIF-kq-zRi" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="122" id="bVA-UZ-fjR"/>
                                     <constraint firstAttribute="trailing" secondItem="pvY-e5-lmP" secondAttribute="trailing" constant="15" id="cQS-7h-Sfw"/>
                                     <constraint firstItem="qwn-6G-LEa" firstAttribute="top" secondItem="GL7-KN-5la" secondAttribute="top" id="fgj-TV-DuS"/>
                                     <constraint firstItem="M8f-fn-OPr" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="gh9-1d-BDZ"/>
+                                    <constraint firstItem="hta-Lz-w6m" firstAttribute="top" secondItem="pvY-e5-lmP" secondAttribute="bottom" constant="35" id="hDJ-IR-AdI"/>
+                                    <constraint firstAttribute="trailing" secondItem="YIF-kq-zRi" secondAttribute="trailing" constant="15" id="hw7-Ma-Gtf"/>
                                     <constraint firstItem="M8f-fn-OPr" firstAttribute="top" secondItem="pvY-e5-lmP" secondAttribute="baseline" constant="17.5" id="ioH-nK-s9l"/>
-                                    <constraint firstItem="wo3-RT-UKL" firstAttribute="top" secondItem="pvY-e5-lmP" secondAttribute="bottom" constant="8" id="kea-nO-lsR"/>
-                                    <constraint firstItem="YIF-kq-zRi" firstAttribute="top" secondItem="wo3-RT-UKL" secondAttribute="top" id="lNG-2m-ncQ"/>
+                                    <constraint firstItem="YIF-kq-zRi" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="maL-iw-xwY"/>
                                     <constraint firstAttribute="bottom" secondItem="ZH7-Ij-WiF" secondAttribute="bottom" constant="66" id="pml-u7-Fsz"/>
+                                    <constraint firstItem="ZH7-Ij-WiF" firstAttribute="top" secondItem="YIF-kq-zRi" secondAttribute="bottom" constant="60" id="s2F-hn-wXh"/>
                                     <constraint firstItem="sCt-6F-DVv" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="uoj-k6-UCg"/>
                                 </constraints>
                             </scrollView>
@@ -438,10 +444,11 @@ numéro de portable? </string>
                     <navigationItem key="navigationItem" id="A1c-OM-a9i"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="actionLabel" destination="wo3-RT-UKL" id="bV9-D8-2UV"/>
                         <outlet property="backButton" destination="GRq-fy-6BN" id="ASJ-td-4Ep"/>
                         <outlet property="bottomContainer" destination="DjW-Ii-bDU" id="Bbh-mE-diu"/>
                         <outlet property="codeTextField" destination="pvY-e5-lmP" id="jpA-hJ-ZDP"/>
-                        <outlet property="descriptionLabel" destination="wo3-RT-UKL" id="faR-qO-Haa"/>
+                        <outlet property="descriptionLabel" destination="hta-Lz-w6m" id="Wav-vb-1L0"/>
                         <outlet property="heightContraint" destination="apC-Kc-icw" id="h6e-pA-KVC"/>
                         <outlet property="onboardingNavigation" destination="13E-al-jIm" id="bin-ft-ga6"/>
                         <outlet property="privacyIcon" destination="7hI-Gq-Hiw" id="3KQ-ze-UYD"/>

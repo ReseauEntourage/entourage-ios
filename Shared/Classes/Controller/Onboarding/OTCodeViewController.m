@@ -28,6 +28,7 @@
 
 @property (nonatomic, weak) IBOutlet OnBoardingCodeTextField *codeTextField;
 @property (nonatomic, weak) IBOutlet UILabel *topTitle;
+@property (nonatomic, weak) IBOutlet UILabel *actionLabel;
 @property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *privacyIcon;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
@@ -73,7 +74,7 @@
 }
 
 - (void)updateSubtitleLabel {
-    NSString *text = self.showFullDescription ? [OTAppAppearance lostCodeFullDescription] : [OTAppAppearance lostCodeSimpleDescription];
+    NSString *text = [OTAppAppearance lostCodeSimpleDescription];
     
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"SFUIText-Light" size:14]}];
     NSRange range1 = [text.lowercaseString rangeOfString:OTLocalizedString(@"doRegenerateCode").lowercaseString];
@@ -82,7 +83,12 @@
     [attributedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:range1];
     [attributedText addAttribute:NSUnderlineColorAttributeName value:[UIColor whiteColor] range:range1];
     
+    self.actionLabel.attributedText = attributedText;
+    
+    text = [OTAppAppearance lostCodeFullDescription];
+    attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"SFUIText-Light" size:14]}];
     self.descriptionLabel.attributedText = attributedText;
+    self.descriptionLabel.hidden = !self.showFullDescription;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -95,7 +101,6 @@
     [self.validateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     if ([NSUserDefaults standardUserDefaults].currentUser) {
-        [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;
         [NSUserDefaults standardUserDefaults].currentUser = nil;
     }
     
@@ -131,7 +136,6 @@
     [self updateSubtitleLabel];
     
     if ([NSUserDefaults standardUserDefaults].currentUser) {
-        [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;
         [NSUserDefaults standardUserDefaults].currentUser = nil;
     }
     
@@ -166,8 +170,8 @@
         
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;
+        [[NSUserDefaults standardUserDefaults] setFirstLoginState:NO];
         
-
         if ([OTAppConfiguration shouldShowIntroTutorial]) {
             if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
                 [OTAppState navigateToAuthenticatedLandingScreen];
