@@ -27,10 +27,19 @@
 @interface OTCodeViewController ()
 
 @property (nonatomic, weak) IBOutlet OnBoardingCodeTextField *codeTextField;
+@property (nonatomic, weak) IBOutlet UILabel *topTitle;
+@property (nonatomic, weak) IBOutlet UILabel *actionLabel;
+@property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *privacyIcon;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
+@property (nonatomic, weak) IBOutlet UIButton *regenerateCodeButton;
+@property (nonatomic, weak) IBOutlet UIButton *backButton;
+@property (nonatomic, weak) IBOutlet UIView *bottomContainer;
+
+@property (nonatomic) BOOL showFullDescription;
 
 @end
 
@@ -40,10 +49,46 @@
     [super viewDidLoad];
 
     self.title = @"";
-    [self addRegenerateBarButton];
+    self.showFullDescription = NO;
+    
+    self.bottomContainer.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    [self.backButton setImage:[[self.backButton imageForState:UIControlStateNormal] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    self.backButton.tintColor = [ApplicationTheme shared].backgroundThemeColor;
+    
     self.codeTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
     };
+    
+    self.privacyIcon.image = [self.privacyIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.privacyIcon.tintColor = [UIColor whiteColor];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Vous avez reçu un code (normalement)" attributes:@{
+                                                                                                                                                         NSFontAttributeName: [UIFont systemFontOfSize:22.0f weight:UIFontWeightSemibold],
+                                                                                                                                                         NSForegroundColorAttributeName: [ApplicationTheme shared].backgroundThemeColor,
+                                                                                                                                                         NSKernAttributeName: @(0.0)
+                                                                                                                                                         }];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17.0f weight:UIFontWeightRegular] range:NSMakeRange(23, 13)];
+    
+    self.topTitle.attributedText = attributedString;
+    [self updateSubtitleLabel];
+}
+
+- (void)updateSubtitleLabel {
+    NSString *text = [OTAppAppearance lostCodeSimpleDescription];
+    
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"SFUIText-Light" size:14]}];
+    NSRange range1 = [text.lowercaseString rangeOfString:OTLocalizedString(@"doRegenerateCode").lowercaseString];
+    
+    [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:range1];
+    [attributedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:range1];
+    [attributedText addAttribute:NSUnderlineColorAttributeName value:[UIColor whiteColor] range:range1];
+    
+    self.actionLabel.attributedText = attributedText;
+    
+    text = [OTAppAppearance lostCodeFullDescription];
+    attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"SFUIText-Light" size:14]}];
+    self.descriptionLabel.attributedText = attributedText;
+    self.descriptionLabel.hidden = !self.showFullDescription;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,12 +98,13 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
-    //[self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    [self.validateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
-    if([NSUserDefaults standardUserDefaults].currentUser) {
-        [NSUserDefaults standardUserDefaults].temporaryUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if ([NSUserDefaults standardUserDefaults].currentUser) {
         [NSUserDefaults standardUserDefaults].currentUser = nil;
     }
+    
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -69,6 +115,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
     [[IQKeyboardManager sharedManager] setEnable:YES];
 }
 
@@ -83,7 +130,15 @@
     [self.navigationItem setRightBarButtonItem:regenerateButton];
 }
 
-- (void)doRegenerateCode {
+- (IBAction)doRegenerateCode {
+    
+    self.showFullDescription = YES;
+    [self updateSubtitleLabel];
+    
+    if ([NSUserDefaults standardUserDefaults].currentUser) {
+        [NSUserDefaults standardUserDefaults].currentUser = nil;
+    }
+    
     NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     [SVProgressHUD show];
     [[OTAuthService new] regenerateSecretCode:phone success:^(OTUser *user) {
@@ -96,6 +151,10 @@
         [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:controller animated:YES completion:nil];
     }];
+}
+
+- (IBAction)backAction {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)doContinue {
@@ -111,8 +170,8 @@
         
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;
+        [[NSUserDefaults standardUserDefaults] setFirstLoginState:NO];
         
-
         if ([OTAppConfiguration shouldShowIntroTutorial]) {
             if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
                 [OTAppState navigateToAuthenticatedLandingScreen];

@@ -32,6 +32,7 @@
 #import "OTEntourageService.h"
 #import "OTMapViewController.h"
 #import "UIColor+Expanded.h"
+#import "OTPublicFeedItemViewController.h"
 
 #import "entourage-Swift.h"
 
@@ -385,10 +386,11 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)loadEntourageGroupMembers:(OTEntourage*)entourage
-                       completion:(void(^)(NSArray *members, NSError *error))completion{
+                       completion:(void(^)(NSArray *members, NSError *error))completion {
 
-    [[OTEntourageService new] entourageUsers:entourage
-                                     success:^(NSArray *items) {
+    [[OTEntourageService new] getUsersForEntourageWithId:entourage.uuid
+                                                     uid:entourage.uid
+                                        success:^(NSArray *items) {
         NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
             return [item.status isEqualToString:JOIN_ACCEPTED];
         }]];
@@ -410,10 +412,13 @@ typedef NS_ENUM(NSInteger) {
         activeFeedItemViewController.feedItem = entourage;
         [self.navigationController pushViewController:activeFeedItemViewController animated:YES];
         
-    } else {
-        OTMapViewController *feedMapViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTMapViewController"];
-        feedMapViewController.feedItem = entourage;
-        [self.navigationController pushViewController:feedMapViewController animated:YES];
+    } else {        
+        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
+        OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+        publicFeedItemController.feedItem = entourage;
+        //publicFeedItemController.statusChangedBehavior.editEntourageBehavior = self.editEntourageBehavior;
+        
+        [self.navigationController pushViewController:publicFeedItemController animated:NO];
     }
 }
 

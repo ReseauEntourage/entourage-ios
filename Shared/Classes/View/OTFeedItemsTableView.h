@@ -12,6 +12,8 @@
 #import "OTNewsFeedTableDelegate.h"
 #import "OTAnnouncement.h"
 
+#define MAPVIEW_HEIGHT 224.f
+
 @class OTFeedItem;
 
 @protocol OTFeedItemsTableViewDelegate <NSObject>
@@ -21,23 +23,40 @@
 - (void)showUserProfile:(NSNumber*)userId;
 - (void)doJoinRequest:(OTFeedItem*)feedItem;
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem;
+
+// Filtering
+- (void)showEventsOnly;
+- (void)showAllFeedItems;
+
 @optional
 - (void)loadMoreData;
+- (void)didPanHeaderDown;
 
 @end
 
 @interface OTFeedItemsTableView : UITableView <OTNewsFeedTableDelegate>
 
 @property (nonatomic, weak) id<OTFeedItemsTableViewDelegate> feedItemsDelegate;
-
 @property (nonatomic, strong) IBOutlet UIView *loadingView;
+@property (nonatomic) BOOL showEventsOnly;
+@property (nonatomic) BOOL showSolidarityGuidePOIs;
 
 - (void)configureWithMapView:(MKMapView *)mapView;
+
+- (void)updateWithMapView:(MKMapView*)mapView
+                mapHeight:(CGFloat)mapHeight
+               showFilter:(BOOL)showFilter;
+
 - (void)updateItems:(NSArray *)items;
 - (void)loadBegun;
 - (void)setNoConnection;
 - (void)setNoFeeds;
 - (void)switchToGuide;
 - (void)switchToFeeds;
+
+- (CGFloat)feedsFilterHeaderHeight;
+- (UIView*)headerViewWithMap:(MKMapView*)mapView
+                   mapHeight:(CGFloat)mapHeight
+                  showFilter:(BOOL)showFilter;
 
 @end

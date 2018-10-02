@@ -18,4 +18,8 @@
                      success:(void (^)(NSArray *feeds))success
                      failure:(void (^)(NSError *error))failure;
 
+- (void)getEventsWithParameters:(NSDictionary*)parameters
+                        success:(void (^)(NSMutableArray *feeds))success
+                        failure:(void (^)(NSError *error))failure;
+
 @end

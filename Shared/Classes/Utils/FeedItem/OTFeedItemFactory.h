@@ -15,7 +15,10 @@
 - (id)initWithFeedItem:(OTFeedItem *)feedItem;
 
 + (id<OTFeedItemFactoryDelegate>)createFor:(OTFeedItem *)item;
-+ (id<OTFeedItemFactoryDelegate>)createForType:(NSString *)feedItemType andId:(NSNumber *)feedItemId;
++ (id<OTFeedItemFactoryDelegate>)createForType:(NSString *)feedItemType
+                                         andId:(NSNumber *)feedItemId;
++ (id<OTFeedItemFactoryDelegate>)createEntourageForGroupType:(NSString *)groupType
+                                                       andId:(NSNumber *)feedItemId;
 + (id<OTFeedItemFactoryDelegate>)createForId:(NSString *)feedItemId;
 
 @end

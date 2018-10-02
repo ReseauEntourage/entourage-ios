@@ -65,9 +65,10 @@
          success:(void (^)(void))success
          failure:(void (^)(NSError *error))failure;
 
-- (void)entourageUsers:(OTEntourage *)entourage
-               success:(void (^)(NSArray *))success
-               failure:(void (^)(NSError *))failure;
+- (void)getUsersForEntourageWithId:(NSString *)uuid
+                               uid:(NSNumber*)uid
+                           success:(void (^)(NSArray *))success
+                           failure:(void (^)(NSError *))failure;
 
 - (void)readEntourageMessages:(NSString *)uuid
                       success:(void (^)(void))success

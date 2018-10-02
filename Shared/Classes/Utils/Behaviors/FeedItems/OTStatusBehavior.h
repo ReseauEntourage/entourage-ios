@@ -18,5 +18,6 @@
 @property (nonatomic, assign) BOOL isJoinPossible;
 
 - (void)updateWith:(OTFeedItem *)feedItem;
++ (NSString *)statusTitleForItem:(OTFeedItem*)feedItem;
 
 @end

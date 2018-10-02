@@ -104,6 +104,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)clearUserData {
     [[NSUserDefaults standardUserDefaults] setCurrentUser:nil];
+    [[NSUserDefaults standardUserDefaults] setTemporaryUser:nil];
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
     [[NSUserDefaults standardUserDefaults] setTourPoints:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
@@ -269,9 +270,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)updateAppearanceForMainTabBar {
 
-    UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].delegate.window.rootViewController;
+    id rootController = [UIApplication sharedApplication].delegate.window.rootViewController;
     
-    [OTAppConfiguration configureTabBarAppearance:tabBarController];
+    if ([rootController isKindOfClass:[UITabBarController class]]) {
+        [OTAppConfiguration configureTabBarAppearance:(UITabBarController*)rootController];
+    } else if ([rootController isKindOfClass:[UINavigationController class]]) {
+        [OTAppConfiguration configureNavigationControllerAppearance:(UINavigationController*)rootController];
+    }
 }
 
 + (UITabBarController*)configureMainTabBarWithDefaultSelectedIndex:(NSInteger)selectedIndex
@@ -365,7 +370,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)configureTabBarAppearance:(UITabBarController*)tabBarController
 {
-    //UITabBar.appearance.backgroundColor = [[ApplicationTheme shared] backgroundThemeColor];
     UITabBar.appearance.tintColor = [[ApplicationTheme shared] backgroundThemeColor];
     UITabBar.appearance.barTintColor = [[ApplicationTheme shared] backgroundThemeColor];
     UITabBar.appearance.translucent = NO;
@@ -386,6 +390,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     mailController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [[ApplicationTheme shared] secondaryNavigationBarTintColor]};
     [mailController.navigationBar setTranslucent:NO];
     [mailController.navigationBar setOpaque:NO];
+}
+
++ (void)configureActivityControllerAppearance:(UIActivityViewController *)controller
+                                        color:(UIColor*)color {
+    [UIApplication sharedApplication].keyWindow.tintColor = color;
+    UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : color };
+    [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : color} forState:UIControlStateNormal];
 }
 
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController
@@ -550,8 +561,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         return NO;
     }
     
-    // EMA-1991
-    return NO;
+    // EMA-1991, EMA-2351
+    return YES;
 }
 
 + (BOOL)shouldShowAddEventDisclaimer
@@ -703,6 +714,23 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
 
     return YES;
+}
+
++ (BOOL)supportsFilteringEvents {
+    // EMA-2303
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    return YES;
+}
+
++ (BOOL)shouldShowEventPrivacyDisclaimerOnCreation {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 + (NSString*)iTunesAppId {

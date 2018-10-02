@@ -75,10 +75,10 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.phoneTextField.floatingLabelTextColor = [UIColor whiteColor];
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.phoneIsValid = YES;
-        self.continueButton.enabled = [self validateForm];
+        [self validateForm];
     };
     self.passwordTextField.inputValidationChanged = ^(BOOL isValid) {
-        self.continueButton.enabled = [self validateForm];
+        [self validateForm];
     };
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
@@ -113,6 +113,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.countryCodeTxtField.inputView = self.pickerView;
+    [self validateForm];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -130,7 +131,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 #pragma mark - Public Methods
 
 - (BOOL)validateForm {
-    return self.phoneIsValid && (self.passwordTextField.text.length == 6);
+    BOOL status = self.phoneIsValid && (self.passwordTextField.text.length == 6);
+    self.continueButton.enabled = status;
+    return status;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -247,6 +250,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)loginWithNewCode:(NSString *)code {
     [self dismissViewControllerAnimated:YES completion:^() {
         self.passwordTextField.text = code;
+        [self validateForm];
         [self validateButtonDidTap];
     }];
 }
@@ -256,6 +260,8 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         self.countryCodeTxtField.text = [self.pickerDataSource getCountryShortNameForRow:code];
         self.codeCountry = [self.pickerDataSource getCountryCodeForRow:code];
         self.phoneTextField.text = phone;
+        self.phoneIsValid = YES;
+        [self validateForm];
     }];
 }
 

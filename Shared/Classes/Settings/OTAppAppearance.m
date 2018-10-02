@@ -27,6 +27,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+Fitting.h"
 #import "OTFeedItemMessage.h"
+#import "OTHTTPRequestManager.h"
 #import "entourage-Swift.h"
 
 
@@ -44,18 +45,31 @@
 + (NSString*)aboutUrlString
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return PFP_ABOUT_CGU_URL;
+        NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS_NO_TOKEN, PFP_API_URL_TERMS_REDIRECT];
+        NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+        return urlString;
     }
     return ABOUT_CGU_URL;
 }
 
-+ (NSString *)welcomeDescription
++ (NSString*)policyUrlString
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_welcomeText");
+        NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS_NO_TOKEN, PFP_API_URL_PRIVACY_POLICY_REDIRECT];
+        NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+        return urlString;
     }
     
-    return OTLocalizedString(@"welcomeText");
+    return ABOUT_POLICY_URL;
+}
+
++ (NSString *)welcomeTopDescription
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_welcomeTopText");
+    }
+    
+    return OTLocalizedString(@"welcomeTopText");
 }
 
 + (UIImage*)welcomeLogo
@@ -65,6 +79,15 @@
     }
     
     return [UIImage imageNamed:@"logoWhiteEntourage"];
+}
+
++ (UIImage*)welcomeImage
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return nil;
+    }
+    
+    return [UIImage imageNamed:@"welcome"];
 }
 
 + (NSString *)userProfileNameDescription
@@ -131,14 +154,11 @@
 
 + (NSAttributedString *)defineActionZoneFormattedDescription {
     UIFont *regularFont = [UIFont fontWithName:@"SFUIText-Regular" size:15];
-    UIFont *highlightedFont = [UIFont fontWithName:@"SFUIText-Semibold" size:15];
-    UIFont *lightFont = [UIFont fontWithName:@"SFUIText-Light" size:15];
+    UIFont *lightSmallFont = [UIFont fontWithName:@"SFUIText-Light" size:12];
     
     NSDictionary *regAtttributtes = @{NSFontAttributeName : regularFont,
                                    NSForegroundColorAttributeName:[UIColor whiteColor]};
-    NSDictionary *highlightedAtttributtes = @{NSFontAttributeName : highlightedFont,
-                                      NSForegroundColorAttributeName:[UIColor whiteColor]};
-    NSDictionary *lightAtttributtes = @{NSFontAttributeName : lightFont,
+    NSDictionary *lightAtttributtes = @{NSFontAttributeName : lightSmallFont,
                                               NSForegroundColorAttributeName:[UIColor whiteColor]};
     
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
@@ -146,19 +166,15 @@
         NSString *subtitle2 = OTLocalizedString(@"pfp_defineZoneSubtitle2");
         
         NSMutableAttributedString *descAttString = [[NSMutableAttributedString alloc] initWithString:subtitle1 attributes:regAtttributtes];
-        [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:highlightedAtttributtes]];
+        [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:lightAtttributtes]];
         
         return descAttString;
     }
     
     NSString *subtitle1 = OTLocalizedString(@"defineZoneSubtitle1");
     NSString *subtitle2 = OTLocalizedString(@"defineZoneSubtitle2");
-    NSString *subtitle3 = OTLocalizedString(@"defineZoneSubtitle3");
-    NSString *subtitle4 = OTLocalizedString(@"defineZoneSubtitle4");
     NSMutableAttributedString *descAttString = [[NSMutableAttributedString alloc] initWithString:subtitle1 attributes:regAtttributtes];
-    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:highlightedAtttributtes]];
-    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle3 attributes:regAtttributtes]];
-    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle4 attributes:lightAtttributtes]];
+    [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:lightAtttributtes]];
     
     return descAttString;
 }
@@ -500,7 +516,7 @@
     }
     
     BOOL isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
-    color = [UIColor appGreyishColor];
+    color = [UIColor appOrangeColor];
     if (isActive) {
         OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
         if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
@@ -512,7 +528,7 @@
             } else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus]) {
                 color = [UIColor appTomatoColor];
             } else {
-                color = [UIColor appGreyishColor];
+                color = [UIColor appOrangeColor];
             }
         }
     }
@@ -753,7 +769,10 @@
         return OTLocalizedString(@"pfp_join_entourage_greeting_lbl");
     }
     
-    if ([feedItem isKindOfClass:[OTEntourage class]]) {
+    if ([feedItem isOuting]) {
+        return OTLocalizedString(@"join_event_greeting_lbl");
+    }
+    else if ([feedItem isKindOfClass:[OTEntourage class]]) {
         return OTLocalizedString(@"join_entourage_greeting_lbl");
     }
     else {
@@ -763,20 +782,72 @@
 
 
 
-+ (NSString*)addActionTitleHintMessage {
++ (NSString*)addActionTitleHintMessage:(BOOL)isEvent {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_add_title_hint");
     }
     
+    if (isEvent) {
+        return OTLocalizedString(@"add_event_title_hint");
+    }
     return OTLocalizedString(@"add_title_hint");
 }
 
-+ (NSString*)addActionDescriptionHintMessage {
++ (NSString*)addActionDescriptionHintMessage:(BOOL)isEvent {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return OTLocalizedString(@"pfp_add_description_hint");
     }
     
+    if (isEvent) {
+        return OTLocalizedString(@"add_event_description_hint");
+    }
+    
     return OTLocalizedString(@"add_description_hint");
 }
+
++ (NSString*)includePastEventsFilterTitle {    
+    return OTLocalizedString([OTAppAppearance includePastEventsFilterTitleKey]);
+}
+
++ (NSString*)includePastEventsFilterTitleKey {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return @"pfp_filter_events_include_past_events_title";
+    }
+    
+    return @"filter_events_include_past_events_title";
+}
+
++ (NSString*)inviteSubtitleText:(OTFeedItem*)feedItem {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if ([feedItem isOuting]) {
+            return OTLocalizedString(@"pfp_invite_event_subtitle");
+        }
+        
+        return OTLocalizedString(@"pfp_invite_action_subtitle");
+    }
+    
+    if ([feedItem isOuting]) {
+        return OTLocalizedString(@"invite_event_subtitle");
+    }
+    
+    return OTLocalizedString(@"invite_action_subtitle");
+}
+
++ (NSString*)lostCodeSimpleDescription {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_lostCodeMessage1");
+    }
+    
+    return OTLocalizedString(@"lostCodeMessage1");
+}
+
++ (NSString*)lostCodeFullDescription {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_lostCodeMessage2");
+    }
+    
+    return OTLocalizedString(@"lostCodeMessage2");
+}
+
 
 @end

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OTWelcomeViewController : UIViewController
-
+@property (nonatomic) BOOL signupNewUser;
 @end

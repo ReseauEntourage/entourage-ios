@@ -73,7 +73,9 @@
 #define ABOUT_TWITTER_URL @"https://twitter.com/r_entourage"
 #define ABOUT_CGU_URL @"http://www.entourage.social/cgu/index.html"
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
+#define ABOUT_POLICY_URL @"https://www.entourage.social/politique-de-confidentialite"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
+#define ABOUT_POLITIQUE_DE_CONF_FORMAT @"%@links/privacy-policy/redirect?token=%@"
 
 #define SNAPSHOT_START "snapshot_start_%d.png"
 #define SNAPSHOT_STOP "snapshot_end_%d.png"
@@ -94,11 +96,13 @@
 #define FAQ_LINK_ID @"faq"
 #define SUGGESTION_LINK_ID @"feedback"
 #define JOIN_LINK_ID @"volunteering"
+#define JOIN_URL @"https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
 
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
 #define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
 #define PRO_MENU_CHART_URL @"https://blog.entourage.social/charte-ethique/"
 #define PUBLIC_MENU_CHART_URL @"http://www.entourage.social/chartes/grand-public.html"
+#define VIEW_MORE_EVENTS_URL @"https://www.facebook.com/EntourageReseauCivique/events"
 
 #define NO_GIUDE_DATA_LINK @"https://goo.gl/jD5uIQ"
 

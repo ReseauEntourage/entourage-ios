@@ -30,7 +30,6 @@
 
 #define LOAD_MORE_DRAG_OFFSET 50
 
-#define MAPVIEW_HEIGHT 224.f
 #define MAPVIEW_REGION_SPAN_X_METERS 500
 #define MAPVIEW_REGION_SPAN_Y_METERS 500
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
@@ -41,18 +40,29 @@
 #define SMALL_FOOTER_HEIGHT 126
 #define BIG_FOOTER_HEIGHT 300
 
+#define kMapHeaderOffsetY 0.0
 
-@interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate>
+#define FEEDS_FILTER_HEIGHT 98.f
 
-@property (nonatomic, strong) UILabel *lblEmptyTableReason;
+@interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
+
 @property (nonatomic, strong) NSArray *items;
-@property (nonatomic, strong) UIView *emptyFooterView;
-@property (nonatomic, weak) IBOutlet UILabel *infoLabel;
+@property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior *sourceBehavior;
+
+@property (nonatomic) UIView *panToShowMapView;
+@property (nonatomic) UIView *filterView;
+@property (nonatomic) UIButton *showEventsOnlyButton;
+@property (nonatomic) UIButton *showAllFeedItemsButton;
+
 @property (nonatomic, weak) IBOutlet UIButton *furtherEntouragesBtn;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, weak) IBOutlet UIButton *tourOptionsBtn;
-@property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior *sourceBehavior;
-@property (nonatomic, strong) UIView *currentNewsfeedFooter;;
+
+@property (nonatomic, strong) UIView *emptyFooterView;
+@property (nonatomic, strong) UIView *currentNewsfeedFooter;
+@property (nonatomic, strong) UILabel *lblEmptyTableReason;
+@property (nonatomic, weak) IBOutlet UILabel *infoLabel;
+@property (nonatomic) CGFloat headerMapViewHeight;
 
 @end
 
@@ -79,6 +89,41 @@
     self.infoLabel.adjustsFontSizeToFitWidth = YES;
 }
 
+- (CGFloat)feedsFilterHeaderHeight {
+    return FEEDS_FILTER_HEIGHT;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)handleFilterPan:(UIPanGestureRecognizer*)pan {
+    if (pan.view != self.filterView && pan.view != self.panToShowMapView) {
+        return;
+    }
+    
+    if (pan.state == UIGestureRecognizerStateEnded) {
+        if ([pan velocityInView:self].y > 0) {
+            if ([self.feedItemsDelegate respondsToSelector:@selector(didPanHeaderDown)]) {
+                [self.feedItemsDelegate didPanHeaderDown];
+            }
+        }
+    }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.view == self.filterView || gestureRecognizer.view == self.panToShowMapView) {
+        CGPoint translation = [(UIPanGestureRecognizer*)gestureRecognizer translationInView:self];
+        if (fabs(translation.y) > fabs(translation.x)) {
+            return YES;
+        }
+
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.lblEmptyTableReason.frame = self.frame;
@@ -87,6 +132,34 @@
 - (void)configureWithMapView:(MKMapView *)mapView {
     self.emptyFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.bounds.size.width, TABLEVIEW_BOTTOM_INSET)];
     self.tableFooterView = self.emptyFooterView;
+        
+    self.tableHeaderView = [self headerViewWithMap:mapView mapHeight:MAPVIEW_HEIGHT showFilter:NO];
+    CGPoint center = self.tableHeaderView.center;
+    mapView.center = center;
+}
+
+- (void)updateWithMapView:(MKMapView*)mapView
+                mapHeight:(CGFloat)mapHeight
+                 showFilter:(BOOL)showFilter {
+    self.tableHeaderView = [self headerViewWithMap:mapView mapHeight:mapHeight showFilter:showFilter];
+    CGPoint center = self.tableHeaderView.center;
+    mapView.center = center;
+}
+
+- (UIView*)headerViewWithMap:(MKMapView*)mapView
+                   mapHeight:(CGFloat)mapHeight
+                  showFilter:(BOOL)showFilter {
+    //show map on table header
+    CGFloat panViewHeight = 15;
+    CGFloat h = mapHeight;
+    if (showFilter && !self.showSolidarityGuidePOIs) {
+        h += [self feedsFilterHeaderHeight];
+    } else {
+        h += panViewHeight;
+    }
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, h)];
+    mapView.frame = headerView.bounds;
     
     CGFloat buttonSize = 42;
     CGFloat marginOffset = 20;
@@ -104,47 +177,48 @@
     showCurrentLocationButton.clipsToBounds = YES;
     showCurrentLocationButton.layer.cornerRadius = buttonSize / 2;
     [showCurrentLocationButton addTarget:self action:@selector(requestCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
-    
-    //show map on table header
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, MAPVIEW_HEIGHT)];
-    mapView.frame = headerView.bounds;
     [headerView addSubview:mapView];
     [headerView addSubview:showCurrentLocationButton];
     [headerView sendSubviewToBack:mapView];
     [headerView bringSubviewToFront:showCurrentLocationButton];
     
-    UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156.0f , headerView.frame.size.width + 130.0f, 4.0f)];
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = shadowView.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.2].CGColor),  nil];
-    [shadowView.layer insertSublayer:gradient atIndex:1];
-    [headerView addSubview:shadowView];
+    //    self.shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156.0f , headerView.frame.size.width + 130.0f, 0.0f)];
+    //    CAGradientLayer *gradient = [CAGradientLayer layer];
+    //    gradient.frame = self.shadowView.bounds;
+    //    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.2].CGColor),  nil];
+    //    [self.shadowView.layer insertSublayer:gradient atIndex:1];
+    //    [headerView addSubview:self.shadowView];
     
-    NSDictionary *viewsDictionary = @{@"shadow":shadowView};
-    NSArray *constraint_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow(4)]"
-                                                                         options:0
-                                                                         metrics:nil
-                                                                           views:viewsDictionary];
-    NSArray *constraint_pos_horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-8)-[shadow]-(-8)-|"
-                                                                                 options:0
-                                                                                 metrics:nil
-                                                                                   views:viewsDictionary];
-    NSArray *constraint_pos_bottom = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow]-0-|"
-                                                                             options:0
-                                                                             metrics:nil
-                                                                               views:viewsDictionary];
-    shadowView.translatesAutoresizingMaskIntoConstraints = NO;
-    [shadowView addConstraints:constraint_height];
-    [headerView addConstraints:constraint_pos_horizontal];
-    [headerView addConstraints:constraint_pos_bottom];
+    // Add pan view used to drag to show map
+    [self setupPanToShowMapView:panViewHeight mapHeight:mapHeight];
     
-    mapView.center = headerView.center;
-        
-    self.tableHeaderView = headerView;
+    // Add filter view if supported
+    [self setupFilteringHeaderView:mapHeight];
+    if (showFilter && !self.showSolidarityGuidePOIs) {
+        [headerView addSubview:self.filterView];
+    }
     
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithAttributedString:[self.furtherEntouragesBtn attributedTitleForState:UIControlStateNormal]];
-    [title setAttributes:@{NSForegroundColorAttributeName:[ApplicationTheme shared].backgroundThemeColor, NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)} range:NSMakeRange(0, title.length)];
-    [self.furtherEntouragesBtn setAttributedTitle:title forState:UIControlStateNormal];
+    [headerView addSubview:self.panToShowMapView];
+    
+    //    NSDictionary *viewsDictionary = @{@"shadow":self.shadowView};
+    //    NSArray *constraint_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow(4)]"
+    //                                                                         options:0
+    //                                                                         metrics:nil
+    //                                                                           views:viewsDictionary];
+    //    NSArray *constraint_pos_horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-8)-[shadow]-(-8)-|"
+    //                                                                                 options:0
+    //                                                                                 metrics:nil
+    //                                                                                   views:viewsDictionary];
+    //    NSArray *constraint_pos_bottom = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow]-0-|"
+    //                                                                             options:0
+    //                                                                             metrics:nil
+    //                                                                               views:viewsDictionary];
+    //    self.shadowView.translatesAutoresizingMaskIntoConstraints = NO;
+    //    [self.shadowView addConstraints:constraint_height];
+    //    [headerView addConstraints:constraint_pos_horizontal];
+    //    [headerView addConstraints:constraint_pos_bottom];
+    
+    return headerView;
 }
 
 - (void)requestCurrentLocation
@@ -154,10 +228,12 @@
 
 - (void)updateItems:(NSArray *)items {
     self.items = items;
+    self.panToShowMapView.hidden = items.count == 0;
     [self reloadData];
 }
 
 - (void)loadBegun {
+    self.panToShowMapView.hidden = YES;
     self.lblEmptyTableReason.text = @"";
 }
 
@@ -166,17 +242,24 @@
 }
 
 - (void)setNoFeeds {
-    self.lblEmptyTableReason.text = [OTAppAppearance noMoreFeedsDescription];// no_feeds_received
+    if (self.showEventsOnly) {
+        self.lblEmptyTableReason.text = @"cascdsc";
+    } else {
+        self.lblEmptyTableReason.text = [OTAppAppearance noMoreFeedsDescription];
+    }
 }
 
 /********************************************************************************/
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if(self.items.count == 0)
+    if (self.items.count == 0) {
         self.backgroundView = self.lblEmptyTableReason;
-    else
+    }
+    else {
         self.backgroundView = nil;
+    }
+    
     return self.items.count;
 }
 
@@ -199,7 +282,7 @@
     id item = self.items[indexPath.section];
     NSString *identifier = [self getCellIdentifier:item];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    [self configureCell:cell withItem:item];
+    [self configureCell:cell withItem:item reloadAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -207,9 +290,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id selectedItem = self.items[indexPath.section];
-    if([self isGuideItem:selectedItem]) {
-        if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showPoiDetails:)])
+    if ([self isGuideItem:selectedItem]) {
+        if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showPoiDetails:)]) {
             [self.feedItemsDelegate showPoiDetails:selectedItem];
+        }
     }
     else if([self isAnnouncementItem:selectedItem])
     {
@@ -236,10 +320,14 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
                   willDecelerate:(BOOL)decelerate {
-    if([[self.items firstObject] isKindOfClass:[OTPoi class]])
+    if ([[self.items firstObject] isKindOfClass:[OTPoi class]]) {
         return;
-    if(self.tableFooterView != self.emptyFooterView)
+    }
+    
+    if (self.tableFooterView != self.emptyFooterView) {
         return;
+    }
+    
     CGPoint offset = scrollView.contentOffset;
     CGRect bounds = scrollView.bounds;
     CGSize size = scrollView.contentSize;
@@ -247,37 +335,44 @@
     float y = offset.y + bounds.size.height - inset.bottom;
     float h = size.height;
     float reload_distance = LOAD_MORE_DRAG_OFFSET;
-    if(y > h + reload_distance) {
+    
+    if (y > h + reload_distance) {
         dispatch_async(dispatch_get_main_queue(), ^() {
-            if (self.feedItemsDelegate && [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)])
+            if (self.feedItemsDelegate &&
+                [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
+             
                 [self.feedItemsDelegate loadMoreData];
+            }
         });
     }
 }
 
-#define kMapHeaderOffsetY 0.0
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (self.tableHeaderView == nil) return;
+    if (self.tableHeaderView == nil) {
+        return;
+    }
+    
     [UIView animateWithDuration:0.5 animations:^() {
-        if(self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height && self.tableFooterView != self.emptyFooterView && self.contentSize.height > self.frame.size.height)
-        [self.superview layoutIfNeeded];
+        if (self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height &&
+            self.tableFooterView != self.emptyFooterView &&
+            self.contentSize.height > self.frame.size.height) {
+            
+            [self.superview layoutIfNeeded];
+        }
     }];
 
     CGFloat scrollOffset = scrollView.contentOffset.y;
-    CGRect headerFrame = self.tableHeaderView.frame;//self.mapView.frame;
+    __block CGRect headerFrame = self.tableHeaderView.frame;
 
-    if (scrollOffset < 0)
-    {
+    if (scrollOffset < 0) {
         headerFrame.origin.y = scrollOffset;// MIN(kMapHeaderOffsetY - ((scrollOffset / 3)), 0);
-        headerFrame.size.height = MAPVIEW_HEIGHT - scrollOffset;
-
+        headerFrame.size.height = MAPVIEW_HEIGHT /*+ [self feedsFilterHeaderHeight]*/ - scrollOffset;
     }
     else //scrolling up
     {
-        headerFrame.origin.y = kMapHeaderOffsetY ;//- scrollOffset;
+        headerFrame.origin.y = kMapHeaderOffsetY;//- scrollOffset;
     }
-
+    
     self.tableHeaderView.subviews[0].frame = headerFrame;
 }
 
@@ -322,29 +417,38 @@
     }
     self.activityIndicator.hidden = YES;
     self.infoLabel.hidden = NO;
-    BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
     self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
     
-    self.furtherEntouragesBtn.hidden = isMaxRadius;
+    if (self.showEventsOnly) {
+        if (self.items.count == 0) {
+            self.infoLabel.text = OTLocalizedString(@"no_data_events");
+        }
+        self.furtherEntouragesBtn.hidden = NO;
+        
+    } else {
+        BOOL isMaxRadius = self.sourceBehavior.radius == [RADIUS_ARRAY[RADIUS_ARRAY.count - 1] intValue];
+        self.furtherEntouragesBtn.hidden = isMaxRadius;
+        
+        if (self.items.count > 0) {
+            if (isMaxRadius) {
+                self.infoLabel.text = [OTAppAppearance noMoreFeedsDescription];
+            } else {
+                self.infoLabel.text = [OTAppAppearance extendSearchParameterDescription];
+            }
+        }
+        else if (self.items.count == 0) {
+            if (isMaxRadius) {
+                self.furtherEntouragesBtn.hidden = YES;
+                self.infoLabel.text = [OTAppAppearance noMapFeedsDescription];
+            }
+            else {
+                self.furtherEntouragesBtn.hidden = NO;
+                self.infoLabel.text = [OTAppAppearance extendMapSearchParameterDescription];
+                self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
+            }
+        }
+    }
     
-    if (self.items.count > 0) {
-        if (isMaxRadius) {
-            self.infoLabel.text = [OTAppAppearance noMoreFeedsDescription];
-        } else {
-            self.infoLabel.text = [OTAppAppearance extendSearchParameterDescription];
-        }
-    }
-    else if (self.items.count == 0) {
-        if (isMaxRadius) {
-            self.furtherEntouragesBtn.hidden = YES;
-            self.infoLabel.text = [OTAppAppearance noMapFeedsDescription];
-        }
-        else {
-            self.furtherEntouragesBtn.hidden = NO;
-            self.infoLabel.text = [OTAppAppearance extendMapSearchParameterDescription];
-            self.loadingView.frame = CGRectMake(0, 0, 1, BIG_FOOTER_HEIGHT);
-        }
-    }
     self.tableFooterView = self.loadingView;
 }
 
@@ -355,10 +459,12 @@
 - (void)switchToGuide {
     self.currentNewsfeedFooter = self.tableFooterView;
     self.tableFooterView = self.emptyFooterView;
+    self.showSolidarityGuidePOIs = YES;
 }
 
 - (void)switchToFeeds {
     self.tableFooterView = self.currentNewsfeedFooter;
+    self.showSolidarityGuidePOIs = NO;
 }
 
 #pragma mark - private methods
@@ -378,20 +484,109 @@
         return OTAnnouncementTableViewCellIdentifier;
     return OTNewsFeedTableViewCellIdentifier;
 }
-     
-- (void)configureCell:(UITableViewCell *)cell withItem:(id)item {
+
+- (void)configureCell:(UITableViewCell *)cell withItem:(id)item reloadAtIndexPath:(NSIndexPath*)indexPath {
     if([self isGuideItem:item]) {
         OTSolidarityGuideCell *guideCell = (OTSolidarityGuideCell *)cell;
         [guideCell configureWith:(OTPoi *) item];
     }
     else if ([self isAnnouncementItem:item]) {
         OTAnnouncementCell *announcementCell = (OTAnnouncementCell *)cell;
-        [announcementCell configureWith:(OTAnnouncement *)item];
+        [announcementCell configureWith:(OTAnnouncement *)item completion:^{
+            [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
     }
     else {
         OTNewsFeedCell *feedCell = (OTNewsFeedCell *)cell;
         [feedCell configureWith:(OTFeedItem *)item];
     }
+}
+
+- (void)setupPanToShowMapView:(CGFloat)height mapHeight:(CGFloat)mapHeight {
+    self.panToShowMapView = [[UIView alloc] initWithFrame:CGRectMake(0, mapHeight, self.frame.size.width, height)];
+    self.panToShowMapView.backgroundColor = [UIColor whiteColor];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.path = [UIBezierPath bezierPathWithRoundedRect: self.panToShowMapView.bounds
+                                           byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii: (CGSize){15.0, 15.0}].CGPath;
+    
+    self.panToShowMapView.layer.mask = maskLayer;
+    
+    UIView *topShadow = [[UIView alloc] initWithFrame:CGRectMake(7.0f, mapHeight, self.frame.size.width - 14, 0.5)];
+    topShadow.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+    topShadow.layer.masksToBounds = NO;
+    [topShadow.layer setShadowColor:[UIColor blackColor].CGColor];
+    [topShadow.layer setShadowOpacity:0.5];
+    [topShadow.layer setShadowRadius:4.0];
+    [topShadow.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+    [self.panToShowMapView addSubview:topShadow];
+    
+    UIView *panIndicator = [[UIView alloc] initWithFrame:CGRectMake((self.frame.size.width - 30) / 2, 3, 30, 3)];
+    panIndicator.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+    panIndicator.layer.cornerRadius = 3;
+    [self.panToShowMapView addSubview:panIndicator];
+    
+    UIPanGestureRecognizer *pgr1 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleFilterPan:)];
+    [self.panToShowMapView addGestureRecognizer:pgr1];
+}
+
+#pragma mark - Filtering
+
+- (void)setupFilteringHeaderView:(CGFloat)mapHeight {
+    self.filterView = (UIView*)[[NSBundle mainBundle] loadNibNamed:@"OTFeedsTableFilterHeader" owner:nil options:nil].firstObject;
+    self.filterView.frame = CGRectMake(0, mapHeight, UIScreen.mainScreen.bounds.size.width + 8, [self feedsFilterHeaderHeight]);
+    self.filterView.clipsToBounds = YES;
+    self.filterView.layer.cornerRadius = 12;
+    
+    self.showAllFeedItemsButton = [self.filterView viewWithTag:1];
+    [self.showAllFeedItemsButton setImage:[[UIImage imageNamed:@"handshake"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    self.showAllFeedItemsButton.tintColor = [UIColor whiteColor];
+    [self.showAllFeedItemsButton addTarget:self action:@selector(showAllFeedItemsAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.showEventsOnlyButton = [self.filterView viewWithTag:2];
+    [self.showEventsOnlyButton setImage:[[UIImage imageNamed:@"ask_for_help_event"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    self.showEventsOnlyButton.tintColor = [UIColor whiteColor];
+    [self.showEventsOnlyButton addTarget:self action:@selector(showEventsOnlyAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self updateFilterButtons];
+    
+    UIPanGestureRecognizer *pgr2 = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleFilterPan:)];
+    [self.filterView addGestureRecognizer:pgr2];
+}
+
+- (void)updateFilterButtons {
+    UIColor *buttonSelectedColor = [ApplicationTheme shared].backgroundThemeColor;
+    UIColor *buttonDisabledColor = [UIColor appGreyishColor];
+    [self.showAllFeedItemsButton setBackgroundColor:self.showEventsOnly ? buttonDisabledColor : buttonSelectedColor];
+    [self.showEventsOnlyButton setBackgroundColor:self.showEventsOnly ? buttonSelectedColor: buttonDisabledColor];
+    
+    UILabel *showAllLabel = [self.filterView viewWithTag:3];
+    showAllLabel.textColor = self.showAllFeedItemsButton.backgroundColor;
+    
+    UILabel *showEventsLabel = [self.filterView viewWithTag:4];
+    showEventsLabel.textColor = self.showEventsOnlyButton.backgroundColor;
+    
+    self.showEventsOnlyButton.userInteractionEnabled = !self.showEventsOnly;
+    self.showAllFeedItemsButton.userInteractionEnabled = self.showEventsOnly;
+    
+    NSString *searchMoreTitle = self.showEventsOnly ?
+    OTLocalizedString(@"search_more_further_events") :
+    OTLocalizedString(@"search_more_further_feeds");
+    
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:searchMoreTitle];
+    [title setAttributes:@{NSForegroundColorAttributeName:[ApplicationTheme shared].backgroundThemeColor, NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)} range:NSMakeRange(0, title.length)];
+    [self.furtherEntouragesBtn setAttributedTitle:title forState:UIControlStateNormal];
+}
+
+- (void)showEventsOnlyAction {
+    self.showEventsOnly = YES;
+    [self updateFilterButtons];
+    [self.feedItemsDelegate showEventsOnly];
+}
+
+- (void)showAllFeedItemsAction {
+    self.showEventsOnly = NO;
+    [self updateFilterButtons];
+    [self.feedItemsDelegate showAllFeedItems];
 }
 
 @end

@@ -71,7 +71,7 @@
             if (![stateInfo canChangeEditState]) {
                 return;
             }
-            
+
             if ([stateInfo canInvite]) {
                 [self.inviteBehavior startInvite];
             }

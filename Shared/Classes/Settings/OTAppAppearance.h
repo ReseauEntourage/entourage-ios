@@ -14,8 +14,12 @@
 
 @interface OTAppAppearance : NSObject
 + (NSString *)aboutUrlString;
-+ (NSString *)welcomeDescription;
++ (NSString*)policyUrlString;
++ (NSString *)welcomeTopDescription;
++ (NSString*)lostCodeSimpleDescription;
++ (NSString*)lostCodeFullDescription;
 + (UIImage *)welcomeLogo;
++ (UIImage*)welcomeImage;
 + (UIImage *)applicationLogo;
 + (NSString *)applicationTitle;
 + (NSString *)userProfileNameDescription;
@@ -66,6 +70,9 @@
 + (NSString*)quitFeedItemConformationTitle:(OTFeedItem*)feedItem;
 + (NSString*)closeFeedItemConformationTitle:(OTFeedItem *)feedItem;
 + (NSString*)joinFeedItemConformationDescription:(OTFeedItem *)feedItem;
-+ (NSString*)addActionTitleHintMessage;
-+ (NSString*)addActionDescriptionHintMessage;
++ (NSString*)addActionTitleHintMessage:(BOOL)isEvent;
++ (NSString*)addActionDescriptionHintMessage:(BOOL)isEvent;
++ (NSString*)includePastEventsFilterTitle;
++ (NSString*)includePastEventsFilterTitleKey;
++ (NSString*)inviteSubtitleText:(OTFeedItem*)feedItem;
 @end

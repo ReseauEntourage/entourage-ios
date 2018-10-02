@@ -59,9 +59,18 @@
 
 - (BOOL)isPublic {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if([self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED])
-        return !([currentUser.sid intValue] == [self.entourage.author.uID intValue] ||
-                 [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED]);
+    if ([self.entourage.status isEqualToString:FEEDITEM_STATUS_CLOSED]) {
+        if ([self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED]) {
+            return NO;
+        } else if (self.entourage.author) {
+            if ([currentUser.sid intValue] == [self.entourage.author.uID intValue]) {
+                return NO;
+            }
+        }
+        
+        return YES;
+    }
+        
     return ![self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 
@@ -78,13 +87,25 @@
 }
 
 - (void)loadWithSuccess:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
-    [[OTEntourageService new] getEntourageWithStringId:self.entourage.uuid withSuccess:^(OTEntourage *entourage) {
-       if(success)
-           success(entourage);
-    } failure:^(NSError *error) {
-        if(failure)
-            failure(error);
-    }];
+    if (self.entourage.uuid) {
+        [[OTEntourageService new] getEntourageWithStringId:self.entourage.uuid withSuccess:^(OTEntourage *entourage) {
+            if(success)
+                success(entourage);
+        } failure:^(NSError *error) {
+            if(failure)
+                failure(error);
+        }];
+    } else if (self.entourage.uid) {
+        [[OTEntourageService new] getEntourageWithId:self.entourage.uid withSuccess:^(OTEntourage *entourage) {
+            if(success)
+                success(entourage);
+        } failure:^(NSError *error) {
+            if(failure)
+                failure(error);
+        }];
+    } else {
+        NSLog(@"Invalid entourage id!");
+    }
 }
 
 - (void)loadWithSuccess2:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {

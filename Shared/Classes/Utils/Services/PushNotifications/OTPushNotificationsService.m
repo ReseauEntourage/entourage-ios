@@ -139,12 +139,14 @@
 
 - (void)handleJoinRequestNotification:(OTPushNotificationsData *)pnData
 {
-    [[[OTFeedItemFactory createForType:pnData.joinableType andId:pnData.joinableId] getMessaging] getFeedItemUsersWithStatus:JOIN_PENDING success:^(NSArray *items){
+    [[[OTFeedItemFactory createForType:pnData.joinableType
+                                 andId:pnData.joinableId] getMessaging] getFeedItemUsersWithStatus:JOIN_PENDING                                                  success:^(NSArray *items) {
         NSNumber *userId = [pnData.extra numberForKey:@"user_id"];
         
         for (OTFeedItemJoiner *item in items) {
-            if ([item.uID isEqualToNumber:userId] && [item.status isEqualToString:JOIN_PENDING]) {
-                [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
+            if ([item.uID isEqualToNumber:userId] &&
+                [item.status isEqualToString:JOIN_PENDING]) {
+                [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId stringId:nil];
                 OTFeedItemJoiner *joiner = [OTFeedItemJoiner fromPushNotifiationsData:pnData.extra];
 
                 UIAlertAction *viewProfileAction = [UIAlertAction   actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -180,7 +182,8 @@
 }
 
 - (void)handleCancelJoinNotification:(OTPushNotificationsData *)pnData {
-    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:pnData.joinableId];
+    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:pnData.joinableId
+                                                          stringId:nil];
 
     [OTAppState switchToMainScreenAndResetAppWindow:YES];
 }
@@ -190,7 +193,8 @@
 {
     if (state != UIApplicationStateActive) {
         // https://jira.mytkw.com/browse/EMA-2229
-        [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
+        [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId
+                                                   withType:pnData.joinableType groupType:pnData.groupType];
         
     }
 //    else {
@@ -220,7 +224,7 @@
 - (void)handleChatNotification:(OTPushNotificationsData *)pnData
               applicationState:(UIApplicationState)state
 {
-    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.joinableId stringId:nil];
     
     if (state != UIApplicationStateActive) {
         [[OTDeepLinkService new] navigateToFeedWithNumberId:pnData.joinableId withType:pnData.joinableType];
@@ -239,7 +243,7 @@
 
 - (void)handleInviteRequestNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.entourageId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.entourageId stringId:nil];
     OTEntourageInvitation *invitation = [OTEntourageInvitation fromPushNotifiationsData:pnData];
     
     UIAlertAction *refuseInviteRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -267,7 +271,7 @@
 
 - (void)handleInviteStatusNotification:(OTPushNotificationsData *)pnData
 {
-    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.feedId];
+    [[OTUnreadMessagesService sharedInstance] addUnreadMessage:pnData.feedId stringId:nil];
     UIAlertAction *openAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"showAlert")
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
@@ -366,17 +370,30 @@
 
 - (void)showAlert:(UIAlertController *)alert withPresentingBlock:(void(^)(UIViewController *, UIViewController *))presentingBlock {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
-    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
-    UINavigationController *navController = [tabBarController viewControllers].firstObject;
-    UIViewController *rootVC = [navController topViewController];
+    id rootViewController = appDelegate.window.rootViewController;
+    UIViewController *topVC = nil;
     
-    if (rootVC.presentedViewController) {
-        if (presentingBlock) {
-            presentingBlock(rootVC, rootVC.presentedViewController);
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController*)rootViewController;
+        id firstControlller = [tabBarController viewControllers].firstObject;
+        if ([firstControlller isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navController = (UINavigationController *)firstControlller;
+            topVC = [navController topViewController];
+        } else {
+            topVC = (UIViewController*)firstControlller;
         }
-    } else {
+    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController *)rootViewController;
+        topVC = [navController topViewController];
+    }
+    
+    if (topVC.presentedViewController) {
+        if (presentingBlock) {
+            presentingBlock(topVC, topVC.presentedViewController);
+        }
+    } else if (topVC) {
         [OTAppState hideTabBar:YES];
-        [rootVC presentViewController:alert animated:YES completion:nil];
+        [topVC presentViewController:alert animated:YES completion:nil];
     }
 }
 

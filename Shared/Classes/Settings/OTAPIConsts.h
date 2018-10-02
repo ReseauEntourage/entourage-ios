@@ -26,10 +26,12 @@
 
 //Menu
 #define API_URL_MENU_OPTIONS @"links/%@/redirect?token=%@"
+#define API_URL_MENU_OPTIONS_NO_TOKEN @"links/%@/redirect"
 
 // Feeds
 #define API_URL_FEEDS    @"feeds?token=%@"
 #define API_URL_MYFEEDS  @"myfeeds?token=%@"
+#define API_URL_EVENTS    @"feeds/outings?token=%@"
 
 // Tours
 #define API_URL_TOUR_JOIN_REQUEST @"tours/%@/users?token=%@"

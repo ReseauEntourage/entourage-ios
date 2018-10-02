@@ -36,6 +36,7 @@
     if ([segue.identifier isEqualToString:@"SegueInviteSource"]) {
         OTInviteSourceViewController *controller = (OTInviteSourceViewController *)segue.destinationViewController;
         controller.delegate = self;
+        controller.feedItem = self.feedItem;
     }
     else if ([segue.identifier isEqualToString:@"SegueInviteFromAddressBook"]) {
         OTInviteContactsViewController *controller = (OTInviteContactsViewController *)segue.destinationViewController;

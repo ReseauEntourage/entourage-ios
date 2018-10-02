@@ -39,6 +39,7 @@
 #import "OTUserViewController.h"
 #import "UIStoryboard+entourage.h"
 #import "OTEntourageService.h"
+#import "OTPublicFeedItemViewController.h"
 #import "entourage-Swift.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
@@ -88,7 +89,7 @@
     [[[OTFeedItemFactory createFor:self.feedItem]
       getMessaging] setMessagesAsRead:^{
         [SVProgressHUD dismiss];
-        [[OTUnreadMessagesService new] removeUnreadMessages:self.feedItem.uid];
+        [[OTUnreadMessagesService new] removeUnreadMessages:self.feedItem.uid stringId:self.feedItem.uuid];
     } orFailure:^(NSError *error) {
         [SVProgressHUD dismiss];
     }];
@@ -113,6 +114,10 @@
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     
     [self reloadMessages];
+    
+    UIColor *color = [[ApplicationTheme shared] backgroundThemeColor];
+    [self.btnSend setTintColor:color];
+    [self.btnSend setTitleColor:color forState:UIControlStateNormal];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -213,11 +218,26 @@
     [self performSegueWithIdentifier:@"SegueMap" sender:self];
 }
 
+- (IBAction)showItemDetails {
+    [self loadPublicFeedDetails:self.feedItem];
+}
+
+- (void)loadPublicFeedDetails:(OTFeedItem*)item {
+    [OTLogger logEvent:@"EntouragePublicPageViewFromMessages"];
+    
+    UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
+    OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+    publicFeedItemController.feedItem = item;
+    publicFeedItemController.statusChangedBehavior.editEntourageBehavior = self.editEntourageBehavior;
+    
+    [self.navigationController pushViewController:publicFeedItemController animated:NO];
+}
+
 - (IBAction)infoAction {
     if ([self.feedItem isConversation]) {
         [self showUserProfile];
     } else {
-        [self showMap];
+        [self showItemDetails];
     }
 }
 
@@ -247,7 +267,7 @@
     [self loadEntourageItemWithStringId:messageItem.itemUuid completion:^(OTEntourage *entourage, NSError *error) {
         if (!error) {
             [self loadEntourageGroupMembers:entourage completion:^(NSArray *members, NSError *error) {
-                BOOL isMember = NO;
+               BOOL isMember = NO;
                 if (members) {
                     NSArray *memberIds = [members valueForKey:@"uID"];
                     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
@@ -260,9 +280,7 @@
                     [self.navigationController pushViewController:activeFeedItemViewController animated:YES];
                     
                 } else {
-                    OTMapViewController *feedMapViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTMapViewController"];
-                    feedMapViewController.feedItem = entourage;
-                    [self.navigationController pushViewController:feedMapViewController animated:YES];
+                    [self loadPublicFeedDetails:entourage];
                 }
             }];
         } else {
@@ -274,7 +292,8 @@
 - (void)loadEntourageGroupMembers:(OTEntourage*)entourage
                        completion:(void(^)(NSArray *members, NSError *error))completion{
     
-    [[OTEntourageService new] entourageUsers:entourage
+    [[OTEntourageService new] getUsersForEntourageWithId:entourage.uuid
+                                                     uid:entourage.uid
                                      success:^(NSArray *items) {
                                          NSArray *filteredItems = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(OTFeedItemJoiner *item, NSDictionary *bindings) {
                                              return [item.status isEqualToString:JOIN_ACCEPTED];

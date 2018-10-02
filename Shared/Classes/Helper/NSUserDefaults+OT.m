@@ -26,13 +26,14 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 	{
 		NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:user];
 		[self setObject:encodedObject forKey:kUser];
+        [self setCompleteFirstLogin];
 	}
 	else
 	{
 		[self removeObjectForKey:kUser];
+        [self removeObjectForKey:kIsFirstLogin];
 	}
     
-    [self setCompleteFirstLogin];
 	[self synchronize];
 }
 
@@ -127,8 +128,18 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 - (void)setCompleteFirstLogin
 {
-    [[NSUserDefaults standardUserDefaults] setObject:@(0) forKey:kIsFirstLogin];
+    [self setFirstLoginState:YES];
+}
+
+- (void)setFirstLoginState:(BOOL)state
+{
+    if (state) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:kIsFirstLogin];
+    } else {
+        [self removeObjectForKey:kIsFirstLogin];
+    }
     [[NSUserDefaults standardUserDefaults] synchronize];
+        
 }
 
 - (BOOL)arePushNotificationsRefused {

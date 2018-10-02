@@ -78,9 +78,10 @@ NSString *const kEntourageAnnotationIdentifier = @"OTEntourageAnnotationIdentifi
     
     UIImage *container = [UIImage imageWithColor:[UIColor whiteColor] andSize:imageSize];
     
-    CGFloat offset = (imageSize.width - icon.size.width) / 2;
+    CGFloat offseY = (imageSize.height - icon.size.height) / 2;
+    CGFloat offseX = (imageSize.width - icon.size.width) / 2;
     UIImage *image = [container drawImage:icon
-                                   inRect:CGRectMake(offset, offset, icon.size.width, icon.size.height)];
+                                   inRect:CGRectMake(offseX, offseY, icon.size.width, icon.size.height)];
     return image;
 }
 

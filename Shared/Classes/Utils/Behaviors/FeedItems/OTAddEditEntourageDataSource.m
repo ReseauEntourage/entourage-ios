@@ -20,9 +20,10 @@
 
 + (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
                                entourage:(OTEntourage*)entourage {
-    if ([entourage isOuting]) {
+    if ([entourage isOuting] && [OTAppConfiguration shouldShowEventPrivacyDisclaimerOnCreation]) {
         return 5;
     }
+    
     return 4;
 }
 

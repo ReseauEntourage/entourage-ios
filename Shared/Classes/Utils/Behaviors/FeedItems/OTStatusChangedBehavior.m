@@ -14,6 +14,8 @@
 #import "OTCloseReason.h"
 #import "OTTour.h"
 
+#define ACTION_DELAY 0.3f
+
 @interface OTStatusChangedBehavior ()
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
@@ -46,21 +48,21 @@
 #pragma mark - OTNextStatusProtocol
 
 - (void)stoppedFeedItem {
-    [self popToMainController];
+    [self popToRootController];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, ACTION_DELAY * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"stopped_item")];
     });
 }
 
 - (void)closedFeedItemWithReason: (OTCloseReason) reason {
-    [self popToMainController];
+    [self popToRootController];
     
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [OTAppState hideTabBar:NO];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, ACTION_DELAY * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if(![self.feedItem isKindOfClass:[OTTour class]]) {
             NSDictionary *userInfo =  @{ @kNotificationSendReasonKey: @(reason), @kNotificationFeedItemKey: self.feedItem};
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationSendCloseMail object:nil userInfo:userInfo];
@@ -75,19 +77,19 @@
 }
 
 - (void)quitedFeedItem {
-    [self popToMainController];
+    [self popToRootController];
     [OTAppState hideTabBar:NO];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, ACTION_DELAY * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:[OTAppAppearance quitFeedItemConformationTitle:self.feedItem]];
         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
     });
 }
 
 - (void)cancelledJoinRequest {
-    [self popToMainController];
+    [self popToRootController];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, ACTION_DELAY * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"cancelled_join_request")];
         [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
     });
@@ -99,15 +101,8 @@
     }];
 }
 
-- (void)popToMainController {
-    for (UIViewController* viewController in self.owner.navigationController.viewControllers) {
-        if ([viewController isKindOfClass:[OTMainViewController class]]) {
-            [self.owner.navigationController popToViewController:viewController animated:NO];
-            break;
-        }
-    }
-    
-    //[OTAppState switchToMainScreenAndResetAppWindow:YES];
+- (void)popToRootController {
+    [OTAppState popToRootCurrentTab];
 }
 
 @end

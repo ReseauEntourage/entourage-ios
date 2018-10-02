@@ -39,6 +39,8 @@
 + (void)configureTabBarAppearance:(UITabBarController*)tabBarController;
 + (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController;
 + (void)configureMailControllerAppearance:(MFMailComposeViewController *)mailController;
++ (void)configureActivityControllerAppearance:(UIActivityViewController *)controller
+                                        color:(UIColor*)color;
 + (void)configureApplicationAppearance;
 + (void)updateAppearanceForMainTabBar;
 
@@ -128,5 +130,11 @@
 
 // Specify if the action of "plus button" shows options or directly launches the entourage editor
 + (BOOL)shouldAutoLaunchEditorOnAddAction;
+
+// Configures if the user can filter events only in the main feed list
++ (BOOL)supportsFilteringEvents;
+
+// EMA-2286
++ (BOOL)shouldShowEventPrivacyDisclaimerOnCreation;
 
 @end

@@ -22,9 +22,11 @@
 @interface OTWelcomeViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *welcomeTitleLabel;
-@property (nonatomic, weak) IBOutlet UITextView *txtTerms;
+@property (nonatomic, weak) IBOutlet UITextView *txtTermsTop;
+@property (nonatomic, weak) IBOutlet UITextView *txtTermsBottom;
 @property (nonatomic, weak) IBOutlet UIButton *continueButton;
 @property (nonatomic, weak) IBOutlet UIImageView *welcomeLogo;
+@property (nonatomic, weak) IBOutlet UIImageView *welcomeImage;
 
 @end
 
@@ -40,13 +42,26 @@
         
         NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
         self.welcomeTitleLabel.text = [NSString stringWithFormat:@"Bienvenue sur %@", appName];
-        self.txtTerms.text = [OTAppAppearance welcomeDescription];
+        self.txtTermsTop.text = [OTAppAppearance welcomeTopDescription];
         self.welcomeLogo.image = [OTAppAppearance welcomeLogo];
+        self.welcomeImage.image = [OTAppAppearance welcomeImage];
         
-        [NSAttributedString applyLinkOnTextView:self.txtTerms 
-            withText:self.txtTerms.text 
-            toLinkText:OTLocalizedString(@"terms_and_conditions_for_onboarding") 
-            withLink:[OTAppAppearance aboutUrlString]];
+        NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.txtTermsBottom.attributedText];
+        NSRange range1 = [self.txtTermsBottom.text rangeOfString:OTLocalizedString(@"terms_and_conditions_for_onboarding")];
+        NSRange range2 = [self.txtTermsBottom.text rangeOfString:OTLocalizedString(@"policy_for_onboarding")];
+        
+        [attributedText addAttribute:NSLinkAttributeName value:[OTAppAppearance aboutUrlString] range:range1];
+        [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:range1];
+        [attributedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:range1];
+        [attributedText addAttribute:NSUnderlineColorAttributeName value:[UIColor whiteColor] range:range1];
+        
+        [attributedText addAttribute:NSLinkAttributeName value:[OTAppAppearance policyUrlString] range:range2];
+        [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:range2];
+        [attributedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:range2];
+        [attributedText addAttribute:NSUnderlineColorAttributeName value:[UIColor whiteColor] range:range2];
+        
+        self.txtTermsBottom.attributedText = attributedText;
+        self.txtTermsBottom.linkTextAttributes = @{NSForegroundColorAttributeName: self.txtTermsBottom.textColor, NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
     }
     
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
@@ -77,7 +92,11 @@
 }
 
 - (IBAction)continueOnboarding:(id)sender {
-    [OTAppState continueFromWelcomeScreen];
+    if (self.signupNewUser) {
+        [OTAppState continueFromWelcomeScreenForOnboarding];
+    } else {
+        [OTAppState continueFromWelcomeScreen];
+    }
 }
 
 @end

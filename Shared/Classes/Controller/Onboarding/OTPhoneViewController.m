@@ -31,6 +31,7 @@
 @property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
 @property (weak, nonatomic) IBOutlet JVFloatLabeledTextField *countryCodeTxtField;
 @property (weak, nonatomic) IBOutlet UIPickerView *countryCodePicker;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 
 @property (nonatomic, strong) NSArray *array;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
@@ -44,6 +45,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
+    
+    self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
+    
+    NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+    self.subtitleLabel.text = [NSString stringWithFormat:@"%@ vous envoie un SMS afin de vérifier votre numéro de portable.", appName];
+    
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
@@ -99,7 +106,7 @@
             NSString *errorMessage = error.localizedDescription;
             NSString *errorCode = [error readErrorCode];
             BOOL showErrorHUD = YES;
-            if([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
+            if ([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:OTLocalizedString(@"invalidPhoneNumberFormat") preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *defaultAction = [UIAlertAction actionWithTitle: OTLocalizedString(@"close") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
                 [alert addAction:defaultAction];

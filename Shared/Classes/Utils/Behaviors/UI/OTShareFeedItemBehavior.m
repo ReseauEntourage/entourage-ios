@@ -11,6 +11,7 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "OTActivityProvider.h"
+#import "entourage-Swift.h"
 
 @interface OTShareFeedItemBehavior ()
 
@@ -54,6 +55,14 @@
     NSArray *objectsToShare = @[activity];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
     activityVC.excludedActivityTypes = excludedActivities;
+    [OTAppConfiguration configureActivityControllerAppearance:activityVC
+                                                        color:[[ApplicationTheme shared] primaryNavigationBarTintColor]];
+    __weak id weakActivityVC = activityVC;
+    activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+        [OTAppConfiguration configureActivityControllerAppearance:weakActivityVC
+                                                            color:[[ApplicationTheme shared] secondaryNavigationBarTintColor]];
+    };
+    activityVC.navigationController.navigationBar.tintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
     [self.owner presentViewController:activityVC animated:YES completion:nil];
 }
 

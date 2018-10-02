@@ -17,7 +17,6 @@
 #import "OTUserProfileBehavior.h"
 #import "OTPublicInfoDataSource.h"
 #import "OTTableDataSourceBehavior.h"
-#import "OTStatusChangedBehavior.h"
 #import "OTToggleVisibleWithConstraintsBehavior.h"
 #import "OTShareFeedItemBehavior.h"
 #import "OTConsts.h"
@@ -35,11 +34,11 @@
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 @property (strong, nonatomic) IBOutlet OTPublicInfoDataSource *dataSource;
 @property (nonatomic, weak) IBOutlet OTTableDataSourceBehavior *tableDataSource;
-@property (strong, nonatomic) IBOutlet OTStatusChangedBehavior *statusChangedBehavior;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleWithConstraintsBehavior *toggleJoinViewBehavior;
 @property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareFeedItem;
 @property (nonatomic, weak) IBOutlet UILabel *lblJoin;
 @property (nonatomic, weak) IBOutlet UIButton *btnJoin;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *actionFooterHeight;
 
 @end
 
@@ -51,9 +50,12 @@
     [self.shareFeedItem configureWith:self.feedItem];
     [self.tableDataSource initialize];
     [self.statusBehavior initialize];
+    [self.inviteBehavior initialize];
     [self.statusChangedBehavior configureWith:self.feedItem];
     [self.statusBehavior updateWith:self.feedItem];
+    [self.inviteBehavior configureWith:self.feedItem];
     [self.toggleJoinViewBehavior toggle:self.statusBehavior.isJoinPossible];
+    
     self.dataSource.tableView.rowHeight = UITableViewAutomaticDimension;
     self.dataSource.tableView.estimatedRowHeight = 1000;
     
@@ -212,6 +214,12 @@
     [self.btnJoin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.lblJoin setText: [OTAppAppearance joinEntourageLabelTitleForFeedItem:feedItem]];
     [self.btnJoin setTitle: [OTAppAppearance joinEntourageButtonTitleForFeedItem:feedItem] forState:UIControlStateNormal];
+    
+    BOOL hideFooter = ![self.feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED];
+    self.toggleJoinViewBehavior.toggledView.hidden = hideFooter;
+    self.statusBehavior.statusLineMarker.hidden = hideFooter;
+    self.statusBehavior.btnStatus.hidden = hideFooter;
+    self.actionFooterHeight.constant = hideFooter ? 0 : 88;
 }
 
 @end

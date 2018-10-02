@@ -90,16 +90,31 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (IBAction)zoomToCurrentLocation:(id)sender {
-    if(!self.selectedLocation)
+- (IBAction)showCurrentLocation {
+    [OTLogger logEvent:@"RecenterMapClick"];
+    
+    if (![OTLocationManager sharedInstance].isAuthorized) {
+        [[OTLocationManager sharedInstance] showGeoLocationNotAllowedMessage:OTLocalizedString(@"ask_permission_location_recenter_map")];
+    }
+    else if(![OTLocationManager sharedInstance].currentLocation) {
+        [[OTLocationManager sharedInstance] showLocationNotFoundMessage:OTLocalizedString(@"no_location_recenter_map")];
+    }
+    else {
         self.selectedLocation = [OTLocationManager sharedInstance].currentLocation;
-    if (self.selectedLocation) {
-        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.selectedLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
-        [self.mapView setRegion:region animated:NO];
-        [self updateSelectedLocation:self.selectedLocation];
-        [self.activityIndicator stopAnimating];
+        
+        if (self.selectedLocation) {
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.selectedLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+            [self.mapView setRegion:region animated:YES];
+            [self updateSelectedLocation:self.selectedLocation];
+            [self.activityIndicator stopAnimating];
+        }
     }
 }
+
+- (IBAction)zoomToCurrentLocation:(id)sender {
+    [self showCurrentLocation];
+}
+
 
 #pragma mark - HandleMapSearch
 

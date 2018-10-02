@@ -30,7 +30,7 @@
     self.hintIcon.tintColor = [ApplicationTheme shared].backgroundThemeColor;
     self.hintIcon.image = [self.hintIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
-    self.hintLabel.text = [OTAppAppearance addActionDescriptionHintMessage];
+    self.hintLabel.text = [OTAppAppearance addActionDescriptionHintMessage:self.currentEntourage.isOuting];
     
     if(self.currentEntourage.categoryObject.description_example != nil) {
         self.txtDescription.placeholder = self.currentEntourage.categoryObject.description_example;

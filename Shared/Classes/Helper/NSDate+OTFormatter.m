@@ -18,6 +18,20 @@
     return [NSString stringWithFormat:@"%ldh%ld", (long)hour, (long)minute];
 }
 
+- (NSString *)toRoundedQuarterTimeString {
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute fromDate:self];
+    NSInteger hour = [components hour];
+    NSInteger minute = [components minute];
+    NSInteger roundMin = minute % 15;
+    NSInteger min = minute - roundMin;
+    
+    if (min == 0) {
+        return [NSString stringWithFormat:@"%ldh", (long)hour];
+    }
+    
+    return [NSString stringWithFormat:@"%ldh%ld", (long)hour, (long)(min)];
+}
+
 - (BOOL)isEqualToDateIgnoringTime:(NSDate *)aDate
 {
     NSDateComponents *components1 = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:self];

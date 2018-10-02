@@ -6,7 +6,10 @@
   Copyright (c) 2014 OCTO Technology. All rights reserved.
 */
 
-"pfp_welcomeText" = "Voisin-Age est la communauté de voisins qui tissent des liens intergénérationnels. \nEn vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.";
+"pfp_welcomeTopText" = "Voisin-Age est la communauté de voisins qui tissent des liens intergénérationnels.\nProximité, Liberté, Réciprocité : rencontrez des personnes âgées près de chez vous et créez des liens de voisinage et d’amitié.";
+
+"pfp_lostCodeMessage1" = "Si vous ne l’avez pas reçu, redemandez un code.";
+"pfp_lostCodeMessage2" = "Le problème persiste ? Écrivez à voisin-age@petitsfreresdespauvres.fr et nous en génèrerons un pour vous.";
 
 "pfp_userNameDescriptionText" = "Si vous êtes voisiné(e), seuls votre prénom et la première lettre de votre nom apparaitront.";
 "pfp_userEmailDescriptionText" = "Nous vous enverrons uniquement des informations de votre voisinage";
@@ -54,7 +57,7 @@
 "pfp_join_event_button" = "Participer";
 "pfp_join_entourage_greeting_lbl" = "Merci pour votre participation !\nAjoutez un petit mot pour l'organisateur et les participants !";
 
-"pfp_want_to_join_entourage" = "veut rejoindre votre voisinage.";
+"pfp_want_to_join_entourage" = "veut rejoindre votre sortie.";
 "pfp_want_to_join_event" = "veut rejoindre votre sortie.";
 
 "pfp_closed_item" = "Voisinage clôturé";
@@ -73,10 +76,13 @@
 
 "pfp_defineActionZoneTitle" = "Définir mon adresse";
 "pfp_modifyActionZoneTitle" = "Modifier mon adresse";
-"pfp_defineActionZoneSampleAddress" = "15 avenue Jean Jaurès...";
-"pfp_defineZoneSubtitle1" = "Voisin-Age, c’est utile parce que c’est local !\nIndiquez votre adresse pour rencontrer les membres de Voisin-Age les plus proches.";
-"pfp_defineZoneSubtitle2" = "\n\nCette information n’est pas affichée sur votre profil.";
+"pfp_defineActionZoneSampleAddress" = "14 rue de Thionville 75019...";
+"pfp_defineZoneSubtitle1" = "Voisin-Age, c’est utile parce que c’est local !\nPour rejoindre la communauté et rencontrer les membres de Voisin-Age les plus proches de chez vous, indiquez votre adresse.";
+"pfp_defineZoneSubtitle2" = "\n\nAdresse";
 
 "pfp_add_title_hint" = "Donnez un titre clair et chaleureux à votre sortie pour attirer plus de participants !";
 "pfp_add_description_hint" = "Donnez une description claire à votre sortie";
+"pfp_filter_events_include_past_events_title" = "Inclure sorties passées";
+"pfp_invite_event_subtitle" = "à participer à cette sortie";
+"pfp_invite_action_subtitle" = "à rejoindre cette action";
 

@@ -40,7 +40,7 @@ import SVProgressHUD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        IQKeyboardManager.shared().isEnableAutoToolbar = false
+        IQKeyboardManager.shared().isEnableAutoToolbar = true
         closeKeyboardBehavior.inputViews = [textWithCount.textView!]
         textWithCount.maxLength = 200
         

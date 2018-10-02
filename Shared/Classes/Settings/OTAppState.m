@@ -31,8 +31,10 @@
 #import "OTPushNotificationsService.h"
 #import "OTNotificationsRightsViewController.h"
 #import "OTFeedItemFactory.h"
+#import "OTActiveFeedItemViewController.h"
+#import "OTMapViewController.h"
 
-#define TUTORIAL_DELAY 15
+#define TUTORIAL_DELAY 2
 #define MAP_TAB_INDEX 0
 #define MESSAGES_TAB_INDEX 1
 
@@ -77,11 +79,11 @@
     if (IS_PRO_USER) {
         return;
     }
-    
+
     if ([NSUserDefaults standardUserDefaults].autoTutorialShown) {
         return;
     }
-    
+
     [NSUserDefaults standardUserDefaults].autoTutorialShown = YES;
     
     [OTAppState performSelector:@selector(loadTutorialScreen) withObject:nil afterDelay:TUTORIAL_DELAY];
@@ -137,7 +139,16 @@
 {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     appDelegate.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [UIStoryboard showStartup];
+    
+    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        UIStoryboard *introStoryboard = [UIStoryboard storyboardWithName:@"PfpIntro" bundle:nil];
+        PfpStartupViewController *startupVC = [introStoryboard instantiateViewControllerWithIdentifier:@"PfpStartupViewController"];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:startupVC];
+        appDelegate.window.rootViewController = navController;
+        [appDelegate.window makeKeyAndVisible];
+    } else {
+        [UIStoryboard showInitialViewControllerFromStoryboardNamed:@"Intro" addingNavigation:NO];
+    }
 }
 
 + (void)switchMapToSolidarityGuide {
@@ -150,6 +161,13 @@
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
     tabBarController.selectedIndex = MESSAGES_TAB_INDEX;
+}
+
++ (void)popToRootCurrentTab {
+    OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
+    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
+    UINavigationController *navController = (UINavigationController*)tabBarController.selectedViewController;
+    [navController popToRootViewControllerAnimated:NO];
 }
 
 + (void)switchToMainScreenAndResetAppWindow:(BOOL)reset {
@@ -186,33 +204,65 @@
 
 + (void)hideTabBar:(BOOL)hide {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
-    UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
-    [tabBarController.tabBar setHidden:hide];
+    id root = appDelegate.window.rootViewController;
+    if ([root isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController*)root;
+        [tabBarController.tabBar setHidden:hide];
+    } else {
+        [OTAppState navigateToAuthenticatedLandingScreen];
+    }
 }
 
 + (void)continueFromStartupScreen
 {
+    return [OTAppState continueFromStartupScreenCreatingUser:NO];
+}
+
++ (void)continueFromStartupScreenForOnboarding
+{
+    return [OTAppState continueFromStartupScreenCreatingUser:YES];
+}
+
++ (void)continueFromStartupScreenCreatingUser:(BOOL)createUser {
     OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
     OTWelcomeViewController *welcomeViewController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTWelcomeViewController"];
+    welcomeViewController.signupNewUser = createUser;
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         [[OTAppState getTopViewController].navigationController pushViewController:welcomeViewController animated:YES];
-    } else {
+    }
+    else {
         [OTLogger logEvent:@"SplashLogIn"];
         [[OTAppState getTopViewController].navigationController pushViewController:loginController animated:YES];
     }
 }
 
-+ (void)continueFromWelcomeScreen
++ (void)continueFromWelcomeScreen {
+    return [OTAppState continueFromWelcomeScreenCreatingUser:NO];
+}
+
++ (void)continueFromWelcomeScreenForOnboarding {
+    return [OTAppState continueFromWelcomeScreenCreatingUser:YES];
+}
+
++ (void)continueFromWelcomeScreenCreatingUser:(BOOL)createUser
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
-        [OTLogger logEvent:@"SplashLogIn"];
-        [[OTAppState getTopViewController].navigationController pushViewController:loginController animated:YES];
-    } else {
+    if (createUser) {
         [OTLogger logEvent:@"WelcomeScreenContinue"];
         OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
         [[OTAppState getTopViewController].navigationController pushViewController:onboardingViewController animated:YES];
+    } else {
+        if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+            OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
+            [OTLogger logEvent:@"SplashLogIn"];
+            [[OTAppState getTopViewController].navigationController pushViewController:loginController animated:YES];
+        }
+        else
+        {
+            [OTLogger logEvent:@"WelcomeScreenContinue"];
+            OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
+            [[OTAppState getTopViewController].navigationController pushViewController:onboardingViewController animated:YES];
+        }
     }
 }
 
@@ -319,6 +369,7 @@
         UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
         OTInviteSourceViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OTInviteSourceViewController"];
         vc.delegate = delegate;
+        vc.feedItem = item;
         [controller presentViewController:vc animated:YES completion:nil];
 
     } else if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
@@ -444,7 +495,7 @@
     }
 }
 
-+ (UIViewController *)getToRootViewController {
++ (UIViewController *)getTopRootViewController {
     UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
     if ([result isKindOfClass:[UINavigationController class]]) {
         UINavigationController *navController = (UINavigationController*)result;
@@ -480,6 +531,10 @@
 + (void)navigateToUserName:(UIViewController*)viewController {
     UIStoryboard *profileDetailsStoryboard = [UIStoryboard storyboardWithName:@"UserProfileDetails" bundle:nil];
     UIViewController *nameController = [profileDetailsStoryboard instantiateViewControllerWithIdentifier:@"NameScene"];
+    if ([viewController isKindOfClass:[nameController class]]) {
+        [OTAppState navigateToRootController:viewController];
+        return;
+    }
     [viewController.navigationController pushViewController:nameController animated:YES];
 }
 
@@ -488,6 +543,10 @@
     UIViewController *pictureViewController = [userPictureStoryboard instantiateInitialViewController];
     
     if (viewController) {
+        if ([viewController isKindOfClass:[pictureViewController class]]) {
+            [OTAppState navigateToRootController:pictureViewController];
+            return;
+        }
         [viewController.navigationController pushViewController:pictureViewController animated:YES];
     } else {
         [OTAppState navigateToRootController:pictureViewController];
@@ -500,6 +559,10 @@
     rightsViewController.isShownOnStartup = YES;
     
     if (viewController) {
+        if ([viewController isKindOfClass:[rightsViewController class]]) {
+            [OTAppState navigateToRootController:rightsViewController];
+            return;
+        }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];
     } else {
         [OTAppState navigateToRootController:rightsViewController];
@@ -511,6 +574,10 @@
     OTNotificationsRightsViewController *rightsViewController = [rightsStoryboard instantiateViewControllerWithIdentifier:@"OTNotificationsRightsViewController"];
     
     if (viewController) {
+        if ([viewController isKindOfClass:[rightsViewController class]]) {
+            [OTAppState navigateToRootController:rightsViewController];
+            return;
+        }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];
     } else {
         [OTAppState navigateToRootController:rightsViewController];

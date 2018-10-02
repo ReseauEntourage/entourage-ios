@@ -10,7 +10,7 @@
 "CURRENT_USER" = "currentUser";
 
 // Welcome
-"welcomeText" = "Vous allez rejoindre une communauté de citoyens qui collaborent pour lutter contre l’exclusion sociale! En vous inscrivant, vous acceptez nos conditions d’utilisation, vous confirmez avoir plus de 16 ans et avoir lu notre politique de confidentialité.";
+"welcomeTopText" = "Vous allez rejoindre une communauté de voisins avec et sans abris qui se rassemblent et luttent contre l’exclusion !";
 "geolocalisationDescriptionText" = "Entourage, c’est utile parce que c’est local!\nParticipez à la solidarité de votre quartier : pour voir les actions de vos voisins, qu’ils soient avec ou sans-abri, activez la géolocalisation.";
 "notificationNeedDescription" = "Pour vous faire découvrir les actions solidaires autour de vous, Entourage doit connaître votre position.";
 
@@ -36,7 +36,7 @@
 
 // Onboarding
 "doLogin" = "Se connecter";
-"doRegenerateCode" = "Redemander un code";
+"doRegenerateCode" = "Redemandez un code";
 "doIgnore" = "Ignorer";
 "alreadyRegisteredMessage" = "Le numéro est déjà enregistré. Vous avez dû recevoir le code pas SMS.";
 "alreadyRegisteredShortMessage" = "Le numéro est déjà enregistré";
@@ -46,6 +46,8 @@
 "ignoreJoinFailed" = "Impossible de refuser l’invitation.";
 "phoneAlreadyExits" = "Ce téléphone n'est pas disponible";
 "already_subscribed" = "Déjà inscrit";
+"lostCodeMessage1" = "Si vous ne l’avez pas reçu, redemandez un code.";
+"lostCodeMessage2" = "Le problème persiste ? écrivez à contact@entourage.social et nous en génèrerons un pour vous.";
 
 // MenuItems
 "menu_amis" = "Amis";
@@ -72,22 +74,24 @@
 "menu_entourage_actions" = "Idées d'actions dans l'appli";
 "menu_make_donation" = "Faire un don";
 "menu_application_usage" = "Questions fréquentes";
-"menu_atd_partner" = "Agir avec Entourage";
+"menu_atd_partner" = "Suivre Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
-"menu_donnation" = "Donnez vos retours rapides";
+"menu_join" = "Devenir Ambassadeur Entourage";
+"menu_donnation" = "Donner mes retours rapides";
 
 // AboutItems
 "about_tutorial" = "Voir le tutoriel";
 "about_rateus" = "Notez-nous dans l’App Store";
 "about_facebook" = "Aimez notre page Facebook";
 "about_cgu" = "Conditions générales d’utilisation";
+"about_politique_conf" = "Politique de Confidentialité";
 "about_website" = "Site web d'Entourage";
 "about_email" = "Contactez Entourage";
 "about_email_notavailable" = "Email introuvable";
 "terms_and_conditions_for_onboarding" = "conditions d’utilisation";
+"policy_for_onboarding" = "politique de confidentialité";
 "about_twitter" = "Suivez-nous sur Twitter";
-"about_suggestions" = "Suggérer des améliorations";
-"about_join" = "Devenir bénévole - ambassadeur";
+"about_suggestions" = "Suggérez des améliorations";
 "about_appVersion" = "Version de l'application";
 "about_privacy_policy" = "Politique de Confidentialité";
 
@@ -118,6 +122,8 @@
 "cancelled_join_request" = "Demande annulée";
 
 "no_data_entourages" = "C'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant ! \n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur + en bas à droite";
+
+"no_data_events" = "Aucun évènement à proximité.";
 
 "no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure";
 
@@ -235,10 +241,10 @@
 "organiser" = "Organisateur";
 "closed" = "Inclure entourages clôturés";
 "unique_unread" = "Uniquement non lus";
-"join_entourage_lbl" = "On a besoin de vous !";
-"join_entourage_btn" = "Rejoindre";
-"join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !
-Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
+"join_entourage_lbl" = "Participez à cet évènement";
+"join_entourage_btn" = "REJOINDRE";
+"join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !\nPourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
+"join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nAjoutez un petit mot si vous le souhaitez !";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
 "promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
 "event_title_example" = "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017";
@@ -277,7 +283,7 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "invalidPhoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
 "userNameDescriptionText" = "Seuls le prénom et la première lettre du nom apparaitront aux autres utilisateurs.";
 "userEmailDescriptionText" = "Nous ne l’utiliserons que pour vous envoyer notre newsletter et les dernières actualités d’Entourage";
-"userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\n Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
+"userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\nActiver les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
 "edit_user_description" = "Présentez-vous, le réseau Entourage a hâte de faire votre connaissance!";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
@@ -293,11 +299,9 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "defineActionZoneTitle" = "Définissez votre zone d'action";
 "defineActionZoneDescription" = "Où souhaitez-vous agir ?\nSoyez notifié des actualités importantes.";
 "modifyActionZoneTitle" = "Modifier ma zone";
-"defineActionZoneSampleAddress" = "avenue Jean Jaurès, Paris";
-"defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nIndiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.";
-"defineZoneSubtitle2" = "\n\nCette information n’est pas affichée.";
-"defineZoneSubtitle3" = " Vous pouvez la modifier dans vos réglages.";
-"defineZoneSubtitle4" = "\n\nAdresse - peut être approximative.";
+"defineActionZoneSampleAddress" = "14 rue de Thionville 75019...";
+"defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nPour recevoir des recommandations personnalisées à proximité, indiquez le lieu autour duquel vous souhaitez agir. ";
+"defineZoneSubtitle2" = "\n\nAdresse - peut être approximative.";
 
 "user_edit_password_invalid_current" = "Le mot de passe ne correspond pas";
 "user_edit_password_invalid_length_too_short" = "Le mot de passe doit contenir au moins %d caractères";
@@ -354,11 +358,13 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "encounter_enter_message" = "Vous devez donner une description à votre rencontre";
 
 "encounter_fill_all_fields" = "Veuillez remplir ce champ";
+"invite_event_subtitle" = "à participer à cet évènement";
+"invite_action_subtitle" = "à rejoindre cette action";
 
 
 // Titles
 "aboutTitle" = "À propos";
-"socialTitle" = "AGIR AVEC ENTOURAGE";
+"socialTitle" = "SUIVRE ENTOURAGE";
 "addEventAddress" = "Adresse *";
 "addEventTitle" = "Titre *";
 "addEventDate" = "Date *";
@@ -419,6 +425,8 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "no_feeds_received" = "Aucune action près de cette position";
 "no_more_feeds" = "C'est tout pour les activités dans ce rayon autour de vous";
 "no_more_map_feeds" = "Aucune action près de cette position";
+"search_more_further_feeds" = "Rechercher plus loin";
+"search_more_further_events" = "Retrouvez plus d'évènements d'Entourage ici";
 
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
 "ok" = "OK";
@@ -485,5 +493,8 @@ Pourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "user_reported" = "Utilisateur signalé";
 
 "action" = "Action";
-"add_title_hint" = "Les actions avec un titre clair attirent plus de membres et ont plus de chances d’aboutir !";
-"add_description_hint" = "Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d’aboutir !";
+"add_title_hint" = "Les actions avec un titre clair attirent plus de membres et ont plus de chances d'aboutir !";
+"add_description_hint" = "Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d'aboutir ! ";
+
+"add_event_title_hint" = "Les évènements avec un titre clair attirent plus de participants.";
+"add_event_description_hint" = "Vous pourrez modifier cette description et la date de votre évènement à tout moment.";

@@ -2,6 +2,8 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
+@import MessageUI;
+
 #import "UIColor+entourage.h"
 #import "OTTextWithCount.h"
 #import "OTTapViewBehavior.h"
@@ -13,7 +15,6 @@
 #import "OTMenuItem.h"
 #import "OTApiConsts.h"
 #import "OTSafariService.h"
-@import MessageUI;
 #import "OTAppConfiguration.h"
 #import "OTAppAppearance.h"
 #import "UIButton+entourage.h"
@@ -24,3 +25,4 @@
 #import "OTUnderlinedButton.h"
 #import "OTAppState.h"
 #import "OTUserEditViewController.h"
+#import "UINavigationController+entourage.h"

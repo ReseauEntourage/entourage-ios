@@ -34,7 +34,19 @@
 
 + (void)launchInAppBrowserWithUrl:(NSURL*)url viewController:(UIViewController*)viewController
 {
-    SFSafariViewController *safariController = [[SFSafariViewController alloc] initWithURL:url];
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"/"];
+    NSString *urlPath = [[url absoluteString] stringByTrimmingCharactersInSet:set];
+    
+    if (![urlPath containsString:@"http"]) {
+        urlPath = [NSString stringWithFormat:@"http://%@", urlPath];
+    }
+    
+    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:urlPath]]) {
+        return;
+    }
+    
+    NSURL *launchUrl = [NSURL URLWithString:urlPath];
+    SFSafariViewController *safariController = [[SFSafariViewController alloc] initWithURL:launchUrl];
     safariController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     
     [OTAppConfiguration configureNavigationControllerAppearance:viewController.navigationController];
@@ -71,7 +83,7 @@
 }
 
 + (void)launchPrivacyPolicyFormInController:(UIViewController*)controller {
-    NSURL *url = [OTSafariService redirectUrlWithIdentifier:PFP_API_URL_PRIVACY_POLICY];
+    NSURL *url = [OTSafariService redirectUrlWithIdentifier:PFP_API_URL_PRIVACY_POLICY_REDIRECT];
     [OTSafariService launchInAppBrowserWithUrl:url viewController:controller];
 }
 

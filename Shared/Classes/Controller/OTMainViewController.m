@@ -91,8 +91,6 @@
 #import "OTPrivateCircleAnnotation.h"
 #import "OTOutingAnnotation.h"
 
-#define MAPVIEW_HEIGHT 224.f
-
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define FEEDS_REQUEST_DISTANCE_KM 10
 
@@ -167,12 +165,12 @@
 
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 @property (nonatomic) double entourageScale;
+@property (nonatomic) BOOL encounterFromTap;
+@property (nonatomic) BOOL forceReloadingFeeds;
 
 @end
 
 @implementation OTMainViewController
-    BOOL encounterFromTap;
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -463,7 +461,7 @@
     
     self.showSolidarityGuideView.hidden = !OTAppConfiguration.supportsSolidarityGuideFunctionality;
     
-    [self showToursList:YES];
+    [self showFeedsList];
     [self configureNavigationBar];
 }
 
@@ -480,10 +478,11 @@
     }
 
     [self clearMap];
-    [self showToursMap];
     
     self.poisMapDelegate.isActive = YES;
     self.solidarityGuidePoisDisplayed = YES;
+    
+    [self showToursMap];
     
     [OTAppState switchMapToSolidarityGuide];
     [self.noDataBehavior switchedToGuide];
@@ -508,6 +507,9 @@
     self.mapView.showsPointsOfInterest = NO;
    	self.mapView.showsUserLocation = YES;
     self.mapView.pitchEnabled = NO;
+    self.mapView.showsBuildings = NO;
+    self.mapView.showsTraffic = NO;
+    
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     
     MKCoordinateRegion region;
@@ -528,9 +530,9 @@
     [self.mapView addGestureRecognizer:longPressMapGesture];
 }
 
-- (void)configureNavigationBar {    
+- (void)configureNavigationBar {
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"filter_nav_title").uppercaseString style:UIBarButtonItemStylePlain target:self action:@selector(showFilters)];
-    self.navigationItem.leftBarButtonItem = leftButton;
+    self.navigationItem.leftBarButtonItem = self.newsFeedsSourceBehavior.showEventsOnly ? nil : leftButton;
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:[self rightBarButtonTitle] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction)];
     self.navigationItem.rightBarButtonItem = rightButton;
@@ -597,7 +599,7 @@
     self.tappedLocation = [[CLLocation alloc] initWithLatitude:whereTap.latitude longitude:whereTap.longitude];
 
     if ([OTOngoingTourService sharedInstance].isOngoing) {
-        encounterFromTap = YES;
+        self.encounterFromTap = YES;
         self.encounterLocation = whereTap;
         [OTLogger logEvent:@"HiddenButtonsOverlayPress"];
         
@@ -658,7 +660,11 @@
 
 - (void)reloadFeeds {
     [self.tableView loadBegun];
-    [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter];
+    if (self.newsFeedsSourceBehavior.showEventsOnly) {
+        [self.newsFeedsSourceBehavior loadEventsAt:self.mapView.centerCoordinate];
+    } else {
+        [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter forceReload:self.forceReloadingFeeds];
+    }
     [self.toggleCollectionView toggle:NO animated:NO];
 }
 
@@ -880,13 +886,14 @@
 - (void)showToursMapAction
 {
     [OTLogger logEvent:@"MapViewClick"];
+    
     [self showToursMap];
 }
 
 - (void)showToursListAction
 {
     [OTLogger logEvent:@"ListViewClick"];
-    [self showToursList:YES];
+    [self showFeedsList];
 }
 
 #pragma mark - Location updates
@@ -894,7 +901,7 @@
 - (void)locationUpdated:(NSNotification *)notification {
     NSArray *locations = [notification readLocations];
     for (CLLocation *newLocation in locations) {
-        if (!encounterFromTap)
+        if (!self.encounterFromTap)
             self.encounterLocation = newLocation.coordinate;
     }
 }
@@ -906,7 +913,6 @@
         [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
         [self reloadFeeds];
     }
-
 }
 
 - (void)clearMap {
@@ -926,13 +932,12 @@
     
     if (self.solidarityGuidePoisDisplayed) {
         return;
-        
     }
     
     self.wasLoadedOnce = YES;
     if (self.newsFeedsSourceBehavior.feedItems.count && self.isFirstLoad) {
         self.isFirstLoad = NO;
-        [self showToursList:YES];
+        [self showFeedsList];
     }
     
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
@@ -991,7 +996,7 @@
 - (void)stoppedTour {
     self.launcherButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
-    [self showToursList:YES];
+    [self showFeedsList];
     
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotEndFilename];
@@ -1074,20 +1079,38 @@
     if (sender.state == UIGestureRecognizerStateEnded) {
         if (self.isTourListDisplayed) {
             [OTLogger logEvent:@"MapClick"];
-            [self showToursMap];
+            [self showToursMapAction];
         }
         else {
-            if ([self.tapEntourage hasTappedEntourageOverlay:sender].count > 0) {
+            NSMutableArray *closeTapHeatzones = [self.tapEntourage hasTappedEntourageOverlay:sender];
+            NSMutableArray *closeTapEntourages = [self.tapEntourage hasTappedEntourageAnnotation:sender];
+
+            if (closeTapHeatzones.count > 0 && closeTapEntourages.count > 0) {
+                [OTLogger logEvent:@"HeatzoneMapClick"];
+                CLLocationCoordinate2D coordinate;
+                if (self.tapEntourage.tappedEntourage) {
+                    coordinate = self.tapEntourage.tappedEntourage.coordinate;
+                } else {
+                    coordinate = self.tapEntourage.tappedEntourageAnnotation.coordinate;
+                }
+                [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
+                if (!self.poisMapDelegate.isActive) {
+                    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:closeTapHeatzones];
+                    [items addObjectsFromArray:closeTapEntourages];
+                    [self loadHeatzonesCollectionViewWithItems:items];
+                }
+            }
+            else if (closeTapHeatzones.count > 0) {
                 [OTLogger logEvent:@"HeatzoneMapClick"];
                 [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.tapEntourage.tappedEntourage.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
                 if (!self.poisMapDelegate.isActive) {
-                    [self loadHeatzonesCollectionViewWithItems:[self.tapEntourage hasTappedEntourageOverlay:sender]];
+                    [self loadHeatzonesCollectionViewWithItems:closeTapHeatzones];
                 }
             }
-            else if ([self.tapEntourage hasTappedEntourageAnnotation:sender].count > 0) {
+            else if (closeTapEntourages.count > 0) {
                 [OTLogger logEvent:@"AnnotationMapClick"];
                 [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.tapEntourage.tappedEntourageAnnotation.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
-                [self loadHeatzonesCollectionViewWithItems:[self.tapEntourage hasTappedEntourageAnnotation:sender]];
+                [self loadHeatzonesCollectionViewWithItems:closeTapEntourages];
             }
             else {
                 [self.toggleCollectionView toggle:NO animated:YES];
@@ -1204,6 +1227,7 @@
         self.currentFilter = [OTNewsFeedsFilter new];
         return;
     }
+    self.forceReloadingFeeds = NO;
     self.currentFilter = filter;
     [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
     
@@ -1318,6 +1342,30 @@
     }
 }
 
+- (void)didPanHeaderDown {
+    [self showMapAnimated:NO];
+}
+
+- (void)showEventsOnly
+{
+    [OTLogger logEvent:@"ShowEventFeed"];
+    self.newsFeedsSourceBehavior.showEventsOnly = YES;
+    self.forceReloadingFeeds = NO;
+    [self.noDataBehavior switchedToEvents];
+    [self configureNavigationBar];
+    [self reloadFeeds];
+}
+
+- (void)showAllFeedItems
+{
+    [OTLogger logEvent:@"ShowAllFeed"];
+    self.newsFeedsSourceBehavior.showEventsOnly = NO;
+    self.forceReloadingFeeds = YES;
+    [self.noDataBehavior switchedToNewsfeeds];
+    [self configureNavigationBar];
+    [self reloadFeeds];
+}
+
 #pragma mark - Geo and filter buttons
 
 - (IBAction)showFilters {
@@ -1342,7 +1390,7 @@
 
 #pragma mark - "Screens"
 
-- (void)showToursList:(BOOL)animated {
+- (void)showFeedsList {
     self.tableView.scrollEnabled = YES;
     
     [OTLogger logEvent:@"Screen06_1FeedView"];
@@ -1352,28 +1400,25 @@
     [self.guideInfoBehavior hide];
     
     self.isTourListDisplayed = YES;
-    
-    if (animated) {
-        [UIView animateWithDuration:0.2 animations:^(void) {
-            CGRect mapFrame = self.mapView.frame;
-            mapFrame.size.height = MAPVIEW_HEIGHT;
-            self.tableView.tableHeaderView.frame = mapFrame;
-            self.mapView.frame = mapFrame;
-            [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-        }];
-    } else {
+    [UIView animateWithDuration:0.2 animations:^{
         CGRect mapFrame = self.mapView.frame;
         mapFrame.size.height = MAPVIEW_HEIGHT;
-        self.tableView.tableHeaderView.frame = mapFrame;
+        //self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
-        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-    }
+        //[self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+
+    } completion:^(BOOL finished) {
+        [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
+                                                                   mapHeight:MAPVIEW_HEIGHT
+                                                                  showFilter:[OTAppConfiguration supportsFilteringEvents]]];
+    }];
     
     [self configureNavigationBar];
 }
 
-- (void)showToursMap {
+- (void)showMapAnimated:(BOOL)animated {
     self.tableView.scrollEnabled = NO;
+    self.forceReloadingFeeds = NO;
     //self.solidarityGuidePoisDisplayed = NO;
     
     if (self.poisMapDelegate.isActive) {
@@ -1384,7 +1429,11 @@
         self.solidarityGuidePoisDisplayed = NO;
         
         // hide the show solidarity guides overlay if not enabled
-        [self.showSolidarityGuideView setHidden: !OTAppConfiguration.supportsSolidarityGuideFunctionality];
+        if (!OTAppConfiguration.supportsSolidarityGuideFunctionality) {
+            [self.showSolidarityGuideView setHidden:YES];
+        } else {
+            [self.showSolidarityGuideView setHidden:NO];
+        }
     }
     
     if (self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0) {
@@ -1398,20 +1447,28 @@
     
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
-
+    
     [OTLogger logEvent:@"MapViewClick"];
-    [UIView animateWithDuration:0.25 animations:^(void) {
-        self.tableView.tableHeaderView.frame = mapFrame;
+    
+    NSTimeInterval duration = animated ? 0.25 : 0.0;
+    [UIView animateWithDuration:duration animations:^(void) {
+        //self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         
         MKCoordinateRegion region;
         region = MKCoordinateRegionMakeWithDistance(self.mapView.centerCoordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
-        [self.mapView setRegion:region animated:YES];
-        [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
-        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+        [self.mapView setRegion:region animated:animated];
+        [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
+                                                                   mapHeight:[UIScreen mainScreen].bounds.size.height
+                                                                  showFilter:NO]];
+        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:animated];
     }];
     
     [self configureNavigationBar];
+}
+
+- (void)showToursMap {
+    [self showMapAnimated:YES];
 }
 
 #pragma mark 15.2 New Tour - on going
@@ -1430,6 +1487,7 @@
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];
+        [self.tableView updateWithMapView:self.mapView mapHeight:mapFrame.size.height showFilter:NO];
     }];
     
     [self configureNavigationBar];
@@ -1449,7 +1507,7 @@
     if([self.editEntourgeBehavior prepareSegue:segue])
         return;
     if([self.editEncounterBehavior prepareSegue:segue]) {
-        encounterFromTap = NO;
+        self.encounterFromTap = NO;
         return;
     }
     if([self.statusChangedBehavior prepareSegueForNextStatus:segue])

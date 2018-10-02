@@ -14,14 +14,13 @@
 #import "OTAppState.h"
 #import "entourage-Swift.h"
 
-@interface OTStartupViewController ()
+@interface OTStartupViewController () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *betaButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
-@property (weak, nonatomic) IBOutlet UIImageView *logo;
-@property (weak, nonatomic) IBOutlet UIImageView *bgImage;
-@property (weak, nonatomic) IBOutlet UILabel *logoTitle;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @end
 
@@ -31,29 +30,23 @@
     [super viewDidLoad];
     
     [self.navigationController presentTransparentNavigationBar];
-    [self.loginButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
+    [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.loginButton setBackgroundColor:[ApplicationTheme shared].backgroundThemeColor];
+    self.loginButton.layer.borderColor = [ApplicationTheme shared].backgroundThemeColor.CGColor;
+    self.loginButton.layer.borderWidth = 1.5f;
     
     [self.registerButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    self.registerButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.registerButton.layer.borderWidth = 1.5f;
+    
+    self.pageControl.backgroundColor = [UIColor clearColor];
+    self.pageControl.currentPageIndicatorTintColor = [ApplicationTheme shared].backgroundThemeColor;
     
     self.title = @"";
     
-    self.loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.loginButton.layer.borderWidth = 1.5f;
     
-    // TODO: temporary - find a better approach
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        self.registerButton.hidden = YES;
-        
-        self.loginButton.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
-        [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
-        self.registerButton.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
-        [self.registerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
-        self.bgImage.hidden = YES;
-        self.logoTitle.hidden = YES;
-        self.logo.image = [OTAppAppearance applicationLogo];
-    }
+    [self setupScrollView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,13 +57,13 @@
     [OTLogger logEvent:@"Screen01SplashView"];
     [NSUserDefaults standardUserDefaults].temporaryUser = nil;
     
-    self.betaButton.hidden = NO;
-    
-    NSString *title = [NSString stringWithFormat:@"Vous êtes sur %@.\n(Tapez pour changer)", [[OTAppConfiguration sharedInstance] environmentConfiguration].environmentName];
-    self.betaButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.betaButton.titleLabel.numberOfLines = 2;
-    [self.betaButton setTitle:title forState:UIControlStateNormal];
-    self.betaButton.hidden = YES;
+//    self.betaButton.hidden = NO;
+//    
+//    NSString *title = [NSString stringWithFormat:@"Vous êtes sur %@.\n(Tapez pour changer)", [[OTAppConfiguration sharedInstance] environmentConfiguration].environmentName];
+//    self.betaButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    self.betaButton.titleLabel.numberOfLines = 2;
+//    [self.betaButton setTitle:title forState:UIControlStateNormal];
+//    self.betaButton.hidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -90,6 +83,38 @@
 
 -(IBAction)showLogin:(id)sender {
     [OTAppState continueFromStartupScreen];
+}
+
+- (void)setupScrollView {
+    CGFloat width = self.view.frame.size.width;
+    CGFloat height = self.view.frame.size.height;
+    self.scrollView.contentSize = CGSizeMake(4*width, height - 84);
+    self.scrollView.delegate = self;
+    
+    UIView *page1 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage1" owner:nil options:nil] firstObject];
+    page1.frame = CGRectMake(0, 0, width, height);
+    page1.backgroundColor = [UIColor clearColor];
+    [self.scrollView addSubview:page1];
+    
+    UIView *page2 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage2" owner:nil options:nil] firstObject];
+    page2.frame = CGRectMake(width, 0, width, height);
+    page2.backgroundColor = [UIColor clearColor];
+    [self.scrollView addSubview:page2];
+    
+    UIView *page3 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage3" owner:nil options:nil] firstObject];
+    page3.frame = CGRectMake(2*width, 0, width, height);
+    page3.backgroundColor = [UIColor clearColor];
+    [self.scrollView addSubview:page3];
+    
+    UIView *page4 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage4" owner:nil options:nil] firstObject];
+    page4.frame = CGRectMake(3*width, 0, width, height);
+    page4.backgroundColor = [UIColor clearColor];
+    [self.scrollView addSubview:page4];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width;
+    self.pageControl.currentPage = index;
 }
 
 @end

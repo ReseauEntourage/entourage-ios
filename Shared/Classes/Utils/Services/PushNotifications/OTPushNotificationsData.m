@@ -22,6 +22,7 @@
 #define kAPNInviterId @"inviter_id"
 #define kAPNFeedId @"feed_id"
 #define kAPNFeedType @"feed_type"
+#define kAPNGroupType @"group_type"
 #define kAPNInvitationAccepted @"accepted"
 
 #define kMixpanelCTA @"mp_cta"
@@ -53,6 +54,7 @@
     result.inviterId = [result.extra numberForKey:kAPNInviterId];
     result.feedId = [result.extra numberForKey:kAPNFeedId];
     result.feedType = [result.extra stringForKey:kAPNFeedType];
+    result.groupType = [result.extra stringForKey:kAPNGroupType];
     result.invitationAccepted = [result.extra numberForKey:kAPNInvitationAccepted];
     
     return result;
