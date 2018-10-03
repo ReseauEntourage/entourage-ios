@@ -849,5 +849,13 @@
     return OTLocalizedString(@"lostCodeMessage2");
 }
 
++ (NSString*)noMessagesDescription {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_no_messages_description");
+    }
+    
+    return OTLocalizedString(@"no_messages_description");
+}
+
 
 @end

@@ -568,6 +568,8 @@
 }
 
 - (void)leaveGuide {
+    [OTLogger logEvent:@"MaskGDSXClick"];
+    
     if(self.toursMapDelegate.isActive)
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     else {

@@ -75,4 +75,5 @@
 + (NSString*)includePastEventsFilterTitle;
 + (NSString*)includePastEventsFilterTitleKey;
 + (NSString*)inviteSubtitleText:(OTFeedItem*)feedItem;
++ (NSString*)noMessagesDescription;
 @end
