@@ -326,6 +326,7 @@
 // My Entourages
 "all_messages_nav_title" = "tous les messages";
 "unread_messages_nav_title" = "non lus";
+"no_messages_description" = "Demandez à rejoindre des actions, contactez des membres et vous retrouverez vos conversations avec les membres du réseau ici.";
 
 // Filter
 "filter_nav_title" = "Filtrer";
@@ -379,6 +380,7 @@
 "myEntouragesTitle" = "Mes entourages";
 "userviewcontroller_title" = "PROFIL";
 "searchForAddress" = "Rechercher une adresse";
+"other_date" = "Autre date";
 
 // Disclaimer
 "addActionDisclaimerTitle" = "AVANT DE COMMENCER";

@@ -65,6 +65,8 @@
                                              selector:@selector(updateBadge:)
                                                  name:kUpdateBadgeCountNotification
                                                object:nil];
+    
+    self.entouragesDataSource.noDataSubtitle.text = [OTAppAppearance noMessagesDescription];
 }
 
 - (void)dealloc {

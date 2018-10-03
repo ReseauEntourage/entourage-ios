@@ -135,7 +135,9 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
                                     iconName: "")
         logoutItem?.tag = menuItemIndexType.logout.rawValue
         
-        menuItems.append(addHoursItem!)
+        if self.currentUser?.privateCircles()?.count ?? 0 > 0 {
+            menuItems.append(addHoursItem!)
+        }
         menuItems.append(contactItem!)
         menuItems.append(donnationItem!)
         menuItems.append(howIsUsedItem!)

@@ -61,7 +61,7 @@ class PfpSelectDateCell: UITableViewCell {
             if selectedType == type && isSelected {
                 self.nameLabel.text = "\(dateFormatter.string(from: date!).capitalized)"
             } else {
-                self.nameLabel.text = String.localized("pfp_date_title").capitalized
+                self.nameLabel.text = String.localized("other_date").capitalized
             }
         }
     }
