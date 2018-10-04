@@ -215,7 +215,9 @@
     [self.lblJoin setText: [OTAppAppearance joinEntourageLabelTitleForFeedItem:feedItem]];
     [self.btnJoin setTitle: [OTAppAppearance joinEntourageButtonTitleForFeedItem:feedItem] forState:UIControlStateNormal];
     
-    BOOL hideFooter = ![self.feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED];
+    BOOL hideFooter = ![self.feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED] ||
+        [self.feedItem.status isEqualToString:FEEDITEM_STATUS_CLOSED];
+    
     self.toggleJoinViewBehavior.toggledView.hidden = hideFooter;
     self.statusBehavior.statusLineMarker.hidden = hideFooter;
     self.statusBehavior.btnStatus.hidden = hideFooter;

@@ -76,4 +76,5 @@
 + (NSString*)includePastEventsFilterTitleKey;
 + (NSString*)inviteSubtitleText:(OTFeedItem*)feedItem;
 + (NSString*)noMessagesDescription;
++ (NSAttributedString*)closedFeedChatItemMessageFormattedText:(OTFeedItemMessage*)message;
 @end

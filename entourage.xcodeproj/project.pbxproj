@@ -1211,6 +1211,8 @@
 		A2C9EFD72147FB7700357FD9 /* PfpIntro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2C9EFD52147FB7700357FD9 /* PfpIntro.storyboard */; };
 		A2C9EFD92147FD7400357FD9 /* PfpStartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9EFD82147FD7400357FD9 /* PfpStartupViewController.swift */; };
 		A2C9EFDA2147FD7400357FD9 /* PfpStartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9EFD82147FD7400357FD9 /* PfpStartupViewController.swift */; };
+		A2CCF2E5216610CE00AD6237 /* OTFeedClosedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CCF2E4216610CE00AD6237 /* OTFeedClosedCell.m */; };
+		A2CCF2E6216610CE00AD6237 /* OTFeedClosedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CCF2E4216610CE00AD6237 /* OTFeedClosedCell.m */; };
 		A2E293AA211B1FA900D44249 /* PfpStartupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E293A9211B1FA900D44249 /* PfpStartupView.xib */; };
 		A2E293AB211B1FA900D44249 /* PfpStartupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E293A9211B1FA900D44249 /* PfpStartupView.xib */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
@@ -2053,6 +2055,8 @@
 		A2A777ED20AF06EC006D2772 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		A2C9EFD52147FB7700357FD9 /* PfpIntro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PfpIntro.storyboard; sourceTree = "<group>"; };
 		A2C9EFD82147FD7400357FD9 /* PfpStartupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpStartupViewController.swift; sourceTree = "<group>"; };
+		A2CCF2E3216610CE00AD6237 /* OTFeedClosedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTFeedClosedCell.h; sourceTree = "<group>"; };
+		A2CCF2E4216610CE00AD6237 /* OTFeedClosedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTFeedClosedCell.m; sourceTree = "<group>"; };
 		A2E293A9211B1FA900D44249 /* PfpStartupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PfpStartupView.xib; sourceTree = "<group>"; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
@@ -2664,6 +2668,8 @@
 				A202E88C2085D2C40058F32C /* OTMessageSentCell.m */,
 				A202E8892085D2C40058F32C /* OTPlaceholderCell.h */,
 				A202E8922085D2C40058F32C /* OTPlaceholderCell.m */,
+				A2CCF2E3216610CE00AD6237 /* OTFeedClosedCell.h */,
+				A2CCF2E4216610CE00AD6237 /* OTFeedClosedCell.m */,
 				A202E8902085D2C40058F32C /* OTStatusCell.h */,
 				A202E8862085D2C40058F32C /* OTStatusCell.m */,
 			);
@@ -4431,6 +4437,7 @@
 				A202EB992085D2C80058F32C /* OTNotificationsRightsViewController.m in Sources */,
 				A202ECF52085D2C80058F32C /* OTCategoryFromJsonService.m in Sources */,
 				A202ED312085D2C80058F32C /* OTVersionInfo.m in Sources */,
+				A2CCF2E5216610CE00AD6237 /* OTFeedClosedCell.m in Sources */,
 				A202EB8F2085D2C80058F32C /* OTMapOptionsViewController.m in Sources */,
 				A202EB292085D2C70058F32C /* OTActiveFeedItemViewController.m in Sources */,
 				A202EAEB2085D2C70058F32C /* OTSolidarityGuideFilter.m in Sources */,
@@ -5066,6 +5073,7 @@
 				A296B76E20871CFC00F6AFBD /* OTNextStatusButtonBehavior.m in Sources */,
 				A296B76F20871CFC00F6AFBD /* OTConfirmationViewController.m in Sources */,
 				A2306AB620C81C360094370E /* PfpApiService.m in Sources */,
+				A2CCF2E6216610CE00AD6237 /* OTFeedClosedCell.m in Sources */,
 				A296B77020871CFC00F6AFBD /* OTMessageSentCell.m in Sources */,
 				A296B77120871CFC00F6AFBD /* UILabel+entourage.m in Sources */,
 				A296B77220871CFC00F6AFBD /* OTStatusBehavior.m in Sources */,

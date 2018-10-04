@@ -493,7 +493,9 @@
     else if ([self isAnnouncementItem:item]) {
         OTAnnouncementCell *announcementCell = (OTAnnouncementCell *)cell;
         [announcementCell configureWith:(OTAnnouncement *)item completion:^{
-            [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            if (self.items.count > indexPath.row && [self.visibleCells containsObject:announcementCell]) {
+                [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
         }];
     }
     else {
