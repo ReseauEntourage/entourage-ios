@@ -857,5 +857,13 @@
     return OTLocalizedString(@"no_messages_description");
 }
 
++ (NSAttributedString*)closedFeedChatItemMessageFormattedText:(OTFeedItemMessage*)message {
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:message.userName attributes:@{NSForegroundColorAttributeName: [ApplicationTheme shared].backgroundThemeColor}];
+    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", message.text] attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
+    NSMutableAttributedString *nameInfoAttrString = nameAttrString.mutableCopy;
+    [nameInfoAttrString appendAttributedString:infoAttrString];
+    
+    return nameInfoAttrString;
+}
 
 @end

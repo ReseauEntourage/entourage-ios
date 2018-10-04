@@ -161,9 +161,17 @@
     NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     NSString *code = self.codeTextField.text;
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
+    
+    if (![NSUserDefaults standardUserDefaults].temporaryUser) {
+        phone = [NSUserDefaults standardUserDefaults].currentUser.phone;
+    }
+
     [SVProgressHUD show];
     
-    [[OTAuthService new] authWithPhone:phone password:code deviceId:deviceAPNSid success: ^(OTUser *user) {
+    [[OTAuthService new] authWithPhone:phone
+                              password:code
+                              deviceId:deviceAPNSid
+                               success: ^(OTUser *user) {
         NSLog(@"User : %@ authenticated successfully", user.email);
         user.phone = phone;
         [SVProgressHUD dismiss];

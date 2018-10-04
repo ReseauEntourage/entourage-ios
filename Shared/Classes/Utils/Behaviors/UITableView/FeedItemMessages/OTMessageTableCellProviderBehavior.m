@@ -26,7 +26,9 @@
     if ([cell isKindOfClass:[OTEncounterCell class]]) {
         ((OTEncounterCell *)cell).feedItem = self.feedItem;
     }
+    
     [cell configureWithTimelinePoint:timelinePoint];
+    
     return cell;
 }
 
@@ -55,6 +57,8 @@
             return @"ChatDateCell";
         case MessageCellTypeEventCreated:
             return @"EventCreatedCell";
+        case MessageCellTypeItemClosed:
+            return @"FeedClosedCell";
         default:
             return @"PlaceholderCell";
     }
