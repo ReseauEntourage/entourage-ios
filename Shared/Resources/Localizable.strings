@@ -249,6 +249,9 @@
 "promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
 "event_title_example" = "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017";
 "event_desc_example" = "Besoin de bénévoles pour la collecte nationale des Restos du Coeur dans notre équipe locale.\nSamedi de 17h à 21h ➜ 5 bénévoles \nDimanche de 10h à 13h ➜ 2 bénévoles \nEnsemble aidons ceux qui en ont vraiment besoin ! Merci d'avance";
+"final_question" = "DERNIÈRE QUESTION";
+"add_action_guide_text" = "La Charte éthique d’Entourage vous explique pourquoi le consentement est indispensable.";
+"add_action_guide_url" = "La Charte éthique d’Entourage";
 
 // Feed Item details
 "item_option_close" = "Arrêter";
@@ -299,7 +302,7 @@
 "defineActionZoneTitle" = "Définissez votre zone d'action";
 "defineActionZoneDescription" = "Où souhaitez-vous agir ?\nSoyez notifié des actualités importantes.";
 "modifyActionZoneTitle" = "Modifier ma zone";
-"defineActionZoneSampleAddress" = "14 rue de Thionville 75019...";
+"defineActionZoneSampleAddress" = "avenue Jean Jaurès...";
 "defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nPour recevoir des recommandations personnalisées à proximité, indiquez le lieu autour duquel vous souhaitez agir. ";
 "defineZoneSubtitle2" = "\n\nAdresse - peut être approximative.";
 

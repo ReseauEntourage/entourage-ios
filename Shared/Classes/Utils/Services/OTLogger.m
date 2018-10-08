@@ -32,8 +32,11 @@
     [FIRAnalytics setUserPropertyString:(user.email != nil ? user.email : @"") forName:@"$email"];
     [mixpanel.people set:@{@"EntouragePartner": user.partner != nil ? user.partner.name : @""}];
     [FIRAnalytics setUserPropertyString:(user.partner != nil ? user.partner.name : @"") forName:@"EntouragePartner"];
-    [mixpanel.people set:@{@"EntourageUserType": user.type}];
-    [FIRAnalytics setUserPropertyString:user.type forName:@"EntourageUserType"];
+    if (user.type) {
+        [mixpanel.people set:@{@"EntourageUserType": user.type}];
+        [FIRAnalytics setUserPropertyString:user.type forName:@"EntourageUserType"];
+    }
+  
     NSString *language = [[NSLocale preferredLanguages] firstObject];
     [mixpanel.people set:@{@"Language": language}];
     [FIRAnalytics setUserPropertyString:language forName:@"Language"];

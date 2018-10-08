@@ -741,4 +741,18 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return @"1072244410";
 }
 
++ (BOOL)shouldAskForConsentWhenCreatingEntourage:(OTEntourage*)entourage {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    // EMA-2378
+    if ([entourage isOuting] ||
+        [entourage.entourage_type isEqualToString:ENTOURAGE_CONTRIBUTION]) {
+        return NO;
+    }
+    
+    return NO;
+}
+
 @end

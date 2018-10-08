@@ -137,4 +137,12 @@
 // EMA-2286
 + (BOOL)shouldShowEventPrivacyDisclaimerOnCreation;
 
+/* Configures if the user has to accept some additional consent questions when creating new actions
+*** EMA-2378
+*** when a user creates an event, no change
+*** - when a user creating an action has inputted all the information on Screen19.1, and the type is a "contribution", and the user clicks "Valider", no change
+*** - when a user creating an action has inputted all the information on Screen19.1, and the type is an "ask for help", and the user clicks "Valider", add a series of questions that will help assess if the user has obtained the contribution.
+ */
++ (BOOL)shouldAskForConsentWhenCreatingEntourage:(OTEntourage*)entourage;
+
 @end
