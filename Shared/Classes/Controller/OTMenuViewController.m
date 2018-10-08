@@ -21,7 +21,6 @@
 #import "OTMenuTableViewCell.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "UIButton+entourage.h"
-#import "NSUserDefaults+OT.h"
 #import "NSBundle+entourage.h"
 #import "OTOngoingTourService.h"
 #import "UILabel+entourage.h"

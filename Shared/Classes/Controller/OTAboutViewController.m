@@ -162,6 +162,10 @@
         NSString *url = [NSString stringWithFormat: ABOUT_POLITIQUE_DE_CONF_FORMAT, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
         [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
     }
+    else if (item.type == GeneralConditions) {
+        NSString *url = [NSString stringWithFormat: ABOUT_CGU_REDIRECT_FORMAT, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
+        [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
+    }
     else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];
     }

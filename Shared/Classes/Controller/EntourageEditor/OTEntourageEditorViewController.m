@@ -22,6 +22,8 @@
 #import "OTEditEntourageTableSource.h"
 #import "OTEditEntourageNavigationBehavior.h"
 #import "OTCategoryFromJsonService.h"
+#import "UIStoryboard+entourage.h"
+#import "OTAddActionFirstConsentViewController.h"
 #import "entourage-Swift.h"
 
 @interface OTEntourageEditorViewController()
@@ -138,8 +140,43 @@
         [self updateEntourage:sender];
     }
     else {
-        [self createEntourage:sender];
+        if ([OTAppConfiguration shouldAskForConsentWhenCreatingEntourage:self.entourage]) {
+            [self showAddActionUserConsentView:sender];
+        } else {
+            [self createEntourage:sender];
+        }
     }
+}
+
+- (void)showAddActionUserConsentView:(UIButton*)sender {
+    UIStoryboard *storyboard = [UIStoryboard entourageEditorStoryboard];
+    OTAddActionFirstConsentViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OTAddActionFirstConsentViewController"];
+    __weak typeof(vc) weakVC = vc;
+    vc.completionBlock = ^(OTAddActionConsentAnswerType answer) {
+        switch (answer) {
+                 //Case 1) When: on step 1, the user clicks on one of the 2 following answers : "Non, pour une association" and "Non, pour moi"
+            case OTAddActionConsentAnswerTypeAddForMe:
+            case OTAddActionConsentAnswerTypeAddForOtherOrganisation:
+                // Case 2.a) When on step 2, the user clicks on : "Oui, j'ai son accord"
+            case OTAddActionConsentAnswerTypeAcceptActionDistribution: {
+                [weakVC.navigationController popToViewController:self animated:NO];
+                /*
+                 If Case 1, or Case 2.a) then: create the action (with status = open as usual). As usual, show the minipopup "Entourage créé", and redirect the user to the Screen14.1 Discussion of this new action.
+                 */
+                [self createEntourage:sender];
+            }
+                break;
+                
+            case OTAddActionConsentAnswerTypeRequestModeration:
+                // TODO: set pending status to self.entourage
+                //[self createEntourage:sender];
+                [weakVC.navigationController popToViewController:self animated:NO];
+                
+            default:
+                break;
+        }
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (BOOL)isTitleValid {
