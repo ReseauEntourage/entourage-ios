@@ -242,8 +242,15 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
             NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
             
             if  ( ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")]) ||
-                 ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")]) ||
                 [menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")] ) {
+                [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
+            }
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")]) {
+                NSString *userId = self.currentUser.sid.stringValue;
+                NSString *url = [NSString stringWithFormat:CHARTE_LINK_FORMAT_PUBLIC, userId];
+                if ([self.currentUser isPro]) {
+                    url = [NSString stringWithFormat:CHARTE_LINK_FORMAT_PRO, userId];
+                }
                 [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
             }
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_join")]) {
