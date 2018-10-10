@@ -93,11 +93,16 @@
 #define GOAL_LINK_ID @"action-examples"
 #define DONATE_LINK_ID @"donation"
 #define ATD_LINK_ID @"atd-partnership"
-#define CHARTE_LINK_ID @"ethics-charter"
 #define FAQ_LINK_ID @"faq"
 #define SUGGESTION_LINK_ID @"feedback"
 #define JOIN_LINK_ID @"volunteering"
 #define JOIN_URL @"https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
+
+// Chart Ethique
+#define CHARTE_LINK_ID @"ethics-charter"
+#define CHARTE_LINK_FORMAT_PUBLIC @"https://entourage-asso.typeform.com/to/whN9kq?user_id=%@"
+#define CHARTE_LINK_FORMAT_PRO @"https://entourage-asso.typeform.com/to/LI7viw?user_id=%@"
+#define CHARTE_LINK_FORMAT_PFP @"https://entourage-asso.typeform.com/to/uBxsHI?user_id="
 
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
 #define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
