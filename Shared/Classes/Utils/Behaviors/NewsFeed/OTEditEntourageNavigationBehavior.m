@@ -88,6 +88,10 @@
     [self.owner performSegueWithIdentifier:@"CategoryEditSegue" sender:self];
 }
 
+- (void)editEventConfidentiality:(OTEntourage *)entourage {
+    self.entourage = entourage;
+}
+
 - (void)editDate:(OTEntourage *)entourage {
     self.entourage = entourage;
     

@@ -993,6 +993,26 @@
                                     <outlet property="tourOptionsBtn" destination="Kc9-kH-YQ7" id="Mpa-Fn-ehk"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vdn-dq-D5K" userLabel="showCurrentLocationButton">
+                                <rect key="frame" x="313" y="75" width="42" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="4zY-li-c5A"/>
+                                    <constraint firstAttribute="width" constant="42" id="TtS-YJ-tjr"/>
+                                </constraints>
+                                <state key="normal" image="geoloc">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="21"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="showCurrentLocation" destination="vXZ-lx-hvc" eventType="touchUpInside" id="CFF-4a-fCo"/>
+                                </connections>
+                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FLr-cF-t8Z">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
@@ -1304,6 +1324,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstAttribute="trailing" secondItem="Lzp-RD-PWj" secondAttribute="trailing" constant="20" id="1ny-vO-dCZ"/>
                             <constraint firstAttribute="trailing" secondItem="oVf-Bh-vdD" secondAttribute="trailing" constant="5" id="6vv-1S-kTv"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Bt3-Uv-XrN" secondAttribute="bottom" constant="-49" id="8IV-sw-OZs"/>
+                            <constraint firstItem="Vdn-dq-D5K" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="11" id="8fr-xl-te5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oHF-Vi-LCk" secondAttribute="trailing" constant="-16" id="9ho-oj-3FF"/>
                             <constraint firstItem="JfD-Ou-63N" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="18" id="B7L-MV-tsW"/>
                             <constraint firstAttribute="trailing" secondItem="Bt3-Uv-XrN" secondAttribute="trailing" id="BJw-Pb-he4"/>
@@ -1327,6 +1348,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="Kc9-kH-YQ7" firstAttribute="centerX" secondItem="oVf-Bh-vdD" secondAttribute="centerX" id="kpM-YF-Qzn"/>
                             <constraint firstItem="fyj-qg-Gvf" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" constant="-29.75" id="n1b-SP-eBD"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="9" id="puD-5n-gle"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Vdn-dq-D5K" secondAttribute="trailing" constant="4" id="qTF-kI-d4D"/>
                             <constraint firstItem="xgS-MI-aio" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="rPg-81-wEO"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="sQA-pi-JcK"/>
                             <constraint firstAttribute="trailing" secondItem="fyj-qg-Gvf" secondAttribute="trailing" constant="20" id="saG-lm-Sc3"/>
@@ -1356,6 +1378,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                         <outlet property="noDataBehavior" destination="oGT-t2-iTg" id="RLs-ni-gcZ"/>
                         <outlet property="nouveauxFeedItemsButton" destination="ONo-TH-dyX" id="PCe-XJ-apW"/>
                         <outlet property="overlayFeeder" destination="hnO-wK-gKw" id="DRj-hp-QRc"/>
+                        <outlet property="showCurrentLocationButton" destination="Vdn-dq-D5K" id="GWc-X6-dd1"/>
                         <outlet property="showSolidarityGuideView" destination="JfD-Ou-63N" id="EXP-dw-KZ6"/>
                         <outlet property="solidarityGuideLabel" destination="Iek-sh-67W" id="b1x-7Q-caw"/>
                         <outlet property="statusChangedBehavior" destination="rYj-lX-rXg" id="dJG-9t-lQH"/>
@@ -1837,6 +1860,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <image name="back" width="8" height="13.5"/>
         <image name="closeOptionNoShadow" width="61.5" height="61.5"/>
         <image name="closeOptionWithShadow" width="61.5" height="61.5"/>
+        <image name="geoloc" width="20" height="20"/>
         <image name="leaveGuideButton" width="58.5" height="58"/>
         <image name="map-placeholder-bg" width="560" height="847"/>
         <image name="mapPinWhite" width="32" height="32"/>

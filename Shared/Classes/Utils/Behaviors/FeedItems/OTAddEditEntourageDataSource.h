@@ -15,6 +15,7 @@
 - (void)editEntourageDescription;
 - (void)editEntourageAddress;
 - (void)editEntourageDate;
+- (void)editEntourageEventConfidentiality:(UISwitch*)sender;
 @end
 
 @interface OTAddEditEntourageDataSource : NSObject
@@ -22,10 +23,13 @@
                                entourage:(OTEntourage*)entourage;
 + (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 + (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+
 + (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                      entourage:(OTEntourage*)entourage
-                  locationText:(NSString*)locationText;
+                  locationText:(NSString*)locationText
+                      delegate:(id<OTAddEditEntourageDelegate>)delegate;
+
 + (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
      withDelegate:(id<OTAddEditEntourageDelegate>)delegate
         entourage:(OTEntourage*)entourage;

@@ -24,6 +24,7 @@
 #import "OTCategoryFromJsonService.h"
 #import "UIStoryboard+entourage.h"
 #import "OTAddActionFirstConsentViewController.h"
+#import "OTAddActionConfidentialityViewController.h"
 #import "entourage-Swift.h"
 
 @interface OTEntourageEditorViewController()
@@ -136,22 +137,35 @@
         return;
     }
     
-    if (self.entourage.uid) {
-        [self updateEntourage:sender];
+    if ([OTAppConfiguration shouldAskForConfidentialityWhenCreatingEntourage:self.entourage]) {
+        [self showAddActionConfidentialityView:sender];
     }
-    else {
-        if ([OTAppConfiguration shouldAskForConsentWhenCreatingEntourage:self.entourage]) {
-            [self showAddActionUserConsentView:sender];
-        } else {
-            [self createEntourage:sender];
-        }
+    else if ([OTAppConfiguration shouldAskForConsentWhenCreatingEntourage:self.entourage]) {
+        [self showAddActionUserConsentView:sender];
+    } else {
+        [self createOrUpdateEntourage:sender];
     }
+}
+
+- (void)showAddActionConfidentialityView:(UIButton*)sender {
+    UIStoryboard *storyboard = [UIStoryboard entourageEditorStoryboard];
+    OTAddActionConfidentialityViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OTAddActionConfidentialityViewController"];
+    __weak typeof(vc) weakVC = vc;
+    
+    vc.completionBlock = ^(BOOL requiresValidation) {
+        self.entourage.isPublic = @(!requiresValidation);
+        [weakVC.navigationController popToViewController:self animated:NO];
+        [self createOrUpdateEntourage:sender];
+    };
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)showAddActionUserConsentView:(UIButton*)sender {
     UIStoryboard *storyboard = [UIStoryboard entourageEditorStoryboard];
     OTAddActionFirstConsentViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OTAddActionFirstConsentViewController"];
     __weak typeof(vc) weakVC = vc;
+    
     vc.completionBlock = ^(OTAddActionConsentAnswerType answer) {
         switch (answer) {
                  //Case 1) When: on step 1, the user clicks on one of the 2 following answers : "Non, pour une association" and "Non, pour moi"
@@ -159,17 +173,17 @@
             case OTAddActionConsentAnswerTypeAddForOtherOrganisation:
                 // Case 2.a) When on step 2, the user clicks on : "Oui, j'ai son accord"
             case OTAddActionConsentAnswerTypeAcceptActionDistribution: {
-                [weakVC.navigationController popToViewController:self animated:NO];
                 /*
                  If Case 1, or Case 2.a) then: create the action (with status = open as usual). As usual, show the minipopup "Entourage créé", and redirect the user to the Screen14.1 Discussion of this new action.
                  */
-                [self createEntourage:sender];
+                [weakVC.navigationController popToViewController:self animated:NO];
+                [self createOrUpdateEntourage:sender];
             }
                 break;
                 
             case OTAddActionConsentAnswerTypeRequestModeration:
                 // TODO: set pending status to self.entourage
-                //[self createEntourage:sender];
+                [self createOrUpdateEntourage:sender];
                 [weakVC.navigationController popToViewController:self animated:NO];
                 
             default:
@@ -177,6 +191,14 @@
         }
     };
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)createOrUpdateEntourage:(UIButton*)sender {
+    if (self.entourage.uid) {
+        [self updateEntourage:sender];
+    } else {
+        [self createEntourage:sender];
+    }
 }
 
 - (BOOL)isTitleValid {

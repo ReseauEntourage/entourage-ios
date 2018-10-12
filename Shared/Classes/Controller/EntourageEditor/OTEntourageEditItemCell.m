@@ -17,20 +17,20 @@
     self.lblDescription.textColor = [ApplicationTheme shared].backgroundThemeColor;
 }
 
-- (void)configureWithSwitchPublicState:(BOOL)public {
-    if (!public) {
-        self.lblTitle.text = @"Privé";
-        self.lblDescription.text = @"Cette option sera bientôt disponible. En attendant, communiquez directement dans une conversation avec les personnes que vous souhaitez inviter.";
-        [self.privacySwitch setOn:NO];
+- (void)configureWithSwitchPublicState:(BOOL)isPublic entourage:(OTEntourage*)entourage {
+    if (isPublic) {
+        self.lblTitle.text = @"Public";
+        [self.privacySwitch setOn:YES];
         
     } else {
-        self.lblTitle.text = @"Public";
-        self.lblDescription.text = @"Tous peuvent trouver la sortie dans le fil d'actualités, mais seuls les membres de mon voisinage sont notifiés.";
-        [self.privacySwitch setOn:YES];
-        [self.lblTitle setTextColor:[ApplicationTheme shared].titleLabelColor];
+        self.lblTitle.text = @"Privé";
+        [self.privacySwitch setOn:NO];
     }
     
-    self.privacySwitch.enabled = NO;
+    [self.lblTitle setTextColor:[ApplicationTheme shared].titleLabelColor];
+    self.lblDescription.text = [OTAppAppearance entourageConfidentialityDescription:entourage isPublic:isPublic];
+    
+    self.privacySwitch.enabled = YES;
 }
 
 @end

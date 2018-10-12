@@ -338,8 +338,7 @@ typedef NS_ENUM(NSInteger) {
     [mSections addObject:@(SectionTypeNeighborhoods)];
     
     // Show only for logged user
-    if ([OTAppConfiguration shouldShowNumberOfUserActionsSection:self.user] &&
-        self.currentUser.sid.integerValue == self.user.sid.integerValue) {
+    if ([OTAppConfiguration shouldShowNumberOfUserActionsSection:self.currentUser]) {
         [mSections addObject:@(SectionTypeEntourages)];
     }
     // https://jira.mytkw.com/browse/EMA-1847
@@ -565,12 +564,26 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return (section == 0) ? 0.0f : 15.0f;
+    CGFloat height = 15.0f;
+    switch ([self.sections[section] intValue]) {
+        case 0:
+            return 0;
+        case SectionTypeAssociations:
+            return self.associationRows.count > 0 ? height : 0;
+        case SectionTypePrivateCircles:
+            return self.user.privateCircles.count > 0 ? height : 0;
+        case SectionTypeNeighborhoods:
+            return self.user.neighborhoods.count > 0 ? height : 0;
+        default:
+            return height;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if ([self shouldShowStartChatConversation] && section == self.sections.count - 1) {
         return 64;
+    } else if (section == self.sections.count - 1) {
+        return 15.0;
     }
     return .5f;
 }

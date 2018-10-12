@@ -54,11 +54,17 @@
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] sendJoinRequest:^(OTFeedItemJoiner *joiner) {
         [self sendActionsForControlEvents:UIControlEventValueChanged];
+        [self sendJoinRequestCompleteNotification:joiner.status];
         [SVProgressHUD dismiss];
         [self.owner performSegueWithIdentifier:@"JoinRequestSegue" sender:self];
     } orFailure:^(NSError *error, BOOL isTour) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
     }];
+}
+
+- (void)sendJoinRequestCompleteNotification:(NSString*)status {
+    NSDictionary *userInfo = @{kWSStatus:status};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationJoinRequestSent object:nil userInfo:userInfo];
 }
 
 @end
