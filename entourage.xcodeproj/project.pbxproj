@@ -791,6 +791,8 @@
 		A2658BFD21144DF200B6B15C /* OTEventCreatedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */; };
 		A285C35C20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
 		A285C35D20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
+		A28F4362216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */; };
+		A28F4363216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
@@ -2033,6 +2035,8 @@
 		A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEventCreatedCell.m; sourceTree = "<group>"; };
 		A285C35A20F7787600D6625E /* OTAddEditEntourageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddEditEntourageDataSource.h; sourceTree = "<group>"; };
 		A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddEditEntourageDataSource.m; sourceTree = "<group>"; };
+		A28F4360216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddActionConfidentialityViewController.h; sourceTree = "<group>"; };
+		A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddActionConfidentialityViewController.m; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -3791,6 +3795,8 @@
 				A2CCF2F92167444B00AD6237 /* OTAddActionSecondConsentViewController.m */,
 				A2CCF2FC2167445F00AD6237 /* OTAddActionThirdConsentViewController.h */,
 				A2CCF2FD2167445F00AD6237 /* OTAddActionThirdConsentViewController.m */,
+				A28F4360216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.h */,
+				A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */,
 			);
 			path = EntourageEditor;
 			sourceTree = "<group>";
@@ -4565,6 +4571,7 @@
 				A202EBA52085D2C80058F32C /* OTLostCodeViewController.m in Sources */,
 				A202EB6D2085D2C80058F32C /* OTPicturePreviewViewController.m in Sources */,
 				A21E8F2820B7F3AE00433606 /* OTUserMembership.m in Sources */,
+				A28F4362216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m in Sources */,
 				A202EC8B2085D2C80058F32C /* OTContactsFilteredDataSourceBehavior.m in Sources */,
 				A202ED0D2085D2C80058F32C /* OTTourStateTransition.m in Sources */,
 				A202EBAB2085D2C80058F32C /* OTFeedItemFiltersViewController.m in Sources */,
@@ -5276,6 +5283,7 @@
 				A296B7F120871CFC00F6AFBD /* OTFilteredDataSourceBehavior.m in Sources */,
 				A296B7F220871CFC00F6AFBD /* OTUserService.m in Sources */,
 				A296B7F320871CFC00F6AFBD /* OTEditEntourageTitleViewController.m in Sources */,
+				A28F4363216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m in Sources */,
 				A296B7F420871CFC00F6AFBD /* OTEntourageService.m in Sources */,
 				A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */,
 				A296B7F520871CFC00F6AFBD /* OTEditEntourageBehavior.m in Sources */,

@@ -135,7 +135,7 @@
 + (BOOL)supportsFilteringEvents;
 
 // EMA-2286
-+ (BOOL)shouldShowEventPrivacyDisclaimerOnCreation;
++ (BOOL)shouldShowEntouragePrivacyDisclaimerOnCreation:(OTEntourage*)entourage;
 
 /* Configures if the user has to accept some additional consent questions when creating new actions
 *** EMA-2378
@@ -144,5 +144,9 @@
 *** - when a user creating an action has inputted all the information on Screen19.1, and the type is an "ask for help", and the user clicks "Valider", add a series of questions that will help assess if the user has obtained the contribution.
  */
 + (BOOL)shouldAskForConsentWhenCreatingEntourage:(OTEntourage*)entourage;
+
+/* Configures if the user has to accept some additional confindentiality questions when creating new actions: How the user will to choose to set Join requests on or off will work similarly, but it will only be possible for "Contribution" types of actions, not for "demandes" (Asks for help) for now. (EMA-2384)
+ */
++ (BOOL)shouldAskForConfidentialityWhenCreatingEntourage:(OTEntourage*)entourage;
 
 @end

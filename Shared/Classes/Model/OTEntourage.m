@@ -40,6 +40,7 @@
     copy.entourage_type = self.entourage_type;
     copy.categoryObject = self.categoryObject;
     copy.entourage_type = self.entourage_type;
+    copy.isPublic = self.isPublic;
 
     return copy;
 }
@@ -57,6 +58,7 @@
         self.entourage_type = [dictionary stringForKey:kWSKeyEntourageType];
         self.noPeople = [dictionary numberForKey:kWSNoPeople];
         self.category = [dictionary stringForKey:kWSKeyCategory];
+        self.isPublic = [dictionary numberForKey:kWSKeyPublic];
         
         if (self.category) {
             if ([self.category isEqualToString:@""]) {
@@ -73,6 +75,7 @@
                                     kWSKeyTitle: self.title,
                                     kWSDescription: self.desc ? self.desc : @"",
                                     kWSKeyStatus: self.status,
+                                    kWSKeyPublic: self.isPublic,
                                     kWSKeyLocation: @{
                                             kWSKeyLatitude: @(self.location.coordinate.latitude),
                                             kWSKeyLongitude: @(self.location.coordinate.longitude)
@@ -102,6 +105,14 @@
     }
     
     return params;
+}
+
+- (BOOL)isContribution {
+    return [self.entourage_type isEqualToString:ENTOURAGE_CONTRIBUTION];
+}
+
+- (BOOL)isAskForHelp {
+    return [self.entourage_type isEqualToString:ENTOURAGE_DEMANDE];
 }
 
 @end

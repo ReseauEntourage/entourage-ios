@@ -53,15 +53,18 @@
 - (IBAction)doSendRequest {
     [OTLogger logEvent:@"SubmitJoinMessage"];
     NSString *message = self.greetingMessage.text;
-    if (!message)
+    if (!message) {
         message = @"";
+    }
+    
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getJoiner] sendJoinMessage:message success:^(OTFeedItemJoiner *joiner) {
         [SVProgressHUD dismiss];
+        [self close:self];
     } failure:^(NSError *error) {
         [SVProgressHUD dismiss];
+        [self close:self];
     }];
-    [self close:self];
 }
 
 - (IBAction)popupTapped:(id)sender {

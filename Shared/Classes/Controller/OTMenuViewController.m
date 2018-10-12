@@ -33,6 +33,7 @@
 #import "OTAboutViewController.h"
 #import "OTSafariService.h"
 #import "OTAppConfiguration.h"
+#import "OTAuthService.h"
 #import "entourage-Swift.h"
 
 #define SOLIDARITY_GUIDE_INDEX 2
@@ -101,7 +102,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self.tapModifyBehavior initialize];
     [self.tapAssociation initialize];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-	self.menuItems = [self createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
    
@@ -128,6 +128,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     [OTLogger logEvent:@"OpenMenu"];
+    [self loadUser];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
     [OTAppConfiguration updateAppearanceForMainTabBar];
@@ -141,6 +142,21 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+}
+
+- (void)loadUser {
+    [SVProgressHUD show];
+    [[OTAuthService new] getDetailsForUser:self.currentUser.sid success:^(OTUser *user) {
+        [SVProgressHUD dismiss];
+        self.currentUser = user;
+        self.menuItems = [self createMenuItems];
+        [self.tableView reloadData];
+        
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_profile_error")];
+        self.menuItems = [self createMenuItems];
+        [self.tableView reloadData];
+    }];
 }
 
 /**************************************************************************************************/
@@ -351,7 +367,8 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                                                  segueIdentifier:OTMenuViewControllerSegueMenuSocialIdentifier];
     [menuItems addObject:itemAtd];
     
-    OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart")
+    NSString *chartTitle = [self.currentUser hasSignedEthicsChart] ? OTLocalizedString(@"menu_read_chart") : OTLocalizedString(@"menu_sign_chart");
+    OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:chartTitle
                                                      iconName: @"chart"
                                                    identifier:CHARTE_LINK_ID];
     [menuItems addObject:itemChart];

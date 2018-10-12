@@ -140,6 +140,7 @@
 @property (nonatomic, weak) IBOutlet UIButton                       *stopButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *createEncounterButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *backToNewsFeedsButton;
+@property (nonatomic, weak) IBOutlet UIButton                       *showCurrentLocationButton;
 @property (nonatomic, strong) NSArray                               *categories;
 @property (nonatomic, strong) NSArray                               *pois;
 @property (nonatomic, strong) NSMutableArray                        *markers;
@@ -212,6 +213,11 @@
     if (![OTAppConfiguration supportsAddingActionsFromMap]) {
         self.launcherButton.hidden = YES;
     }
+    
+    [self.showCurrentLocationButton.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.showCurrentLocationButton.layer setShadowOpacity:0.5];
+    [self.showCurrentLocationButton.layer setShadowRadius:4.0];
+    [self.showCurrentLocationButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
 }
 
 - (void)setup {
@@ -1366,6 +1372,10 @@
     [self.noDataBehavior switchedToNewsfeeds];
     [self configureNavigationBar];
     [self reloadFeeds];
+}
+
+- (void)mapDidBecomeVisible:(BOOL)visible {
+    self.showCurrentLocationButton.hidden = !visible;
 }
 
 #pragma mark - Geo and filter buttons

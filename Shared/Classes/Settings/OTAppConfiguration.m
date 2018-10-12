@@ -725,8 +725,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
-+ (BOOL)shouldShowEventPrivacyDisclaimerOnCreation {
++ (BOOL)shouldShowEntouragePrivacyDisclaimerOnCreation:(OTEntourage*)entourage {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    // EMA-2383
+    if ([entourage isOuting]) {
         return YES;
     }
     
@@ -748,8 +753,21 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
     // EMA-2378
     if ([entourage isOuting] ||
-        [entourage.entourage_type isEqualToString:ENTOURAGE_CONTRIBUTION]) {
+        [entourage isContribution]) {
         return NO;
+    }
+    
+    return NO; //[entourage isAskForHelp]; // uncomment this once ready on backend
+}
+
++ (BOOL)shouldAskForConfidentialityWhenCreatingEntourage:(OTEntourage*)entourage {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    // EMA-2384
+    if ([entourage isContribution]) {
+        return YES;
     }
     
     return NO;

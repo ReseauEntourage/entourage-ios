@@ -15,6 +15,6 @@
 @property (nonatomic, weak) IBOutlet UISwitch *privacySwitch;
 
 - (void)configureWith:(NSString *)title andText:(NSString *)description;
-- (void)configureWithSwitchPublicState:(BOOL)public;
+- (void)configureWithSwitchPublicState:(BOOL)isPublic entourage:(OTEntourage*)entourage;
 
 @end

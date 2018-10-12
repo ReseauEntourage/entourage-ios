@@ -53,6 +53,7 @@
 #define kNotificationProfilePictureUpdated "NotificationProfilePictureUpdated"
 #define kNotificationAboutMeUpdated "NotificationAboutMeUpdated"
 #define kNotificationSupportedPartnerUpdated "NotificationSupportedPartnerUpdated"
+#define kNotificationJoinRequestSent @"NotificationJoinRequestSent"
 #define kNotificationEntourageCreated @"NotificationEntourageCreated"
 #define kNotificationEntourageChanged @"NotificationEntourageChanged"
 #define kNotificationEntourageChangedEntourageKey @"NotificationEntourageChangedEntourageKey"
@@ -119,6 +120,7 @@
 #define ENTOURAGE_DEMANDE @"ask_for_help"
 #define ENTOURAGE_CONTRIBUTION @"contribution"
 #define ENTOURAGE_STATUS_OPEN @"open"
+#define ENTOURAGE_TYPE_PUBLIC @"public"
 
 #define GROUP_TYPE_ACTION @"action"
 #define GROUP_TYPE_NEIGHBORHOOD @"neighborhood"
