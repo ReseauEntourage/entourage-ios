@@ -757,7 +757,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         return NO;
     }
     
-    return NO; //[entourage isAskForHelp]; // uncomment this once ready on backend
+    return [entourage isAskForHelp];
 }
 
 + (BOOL)shouldAskForConfidentialityWhenCreatingEntourage:(OTEntourage*)entourage {

@@ -365,6 +365,11 @@
                        fromController:(UIViewController*)controller
                              delegate:(id<InviteSourceDelegate>)delegate {
     
+    if ([item.status isEqualToString:ENTOURAGE_STATUS_SUSPENDED]) {
+        [SVProgressHUD showErrorWithStatus:@"Invitation impossible"];
+        return;
+    }
+    
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeEntourage) {
         UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
         OTInviteSourceViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OTInviteSourceViewController"];

@@ -17,6 +17,7 @@
     self = [super init];
     if (self) {
         self.status = ENTOURAGE_STATUS_OPEN;
+        self.consentObtained = @(NO);
     }
     return self;
 }
@@ -26,6 +27,7 @@
     self = [super initWithGroupType:groupType];
     if (self) {
         self.status = ENTOURAGE_STATUS_OPEN;
+        self.consentObtained = @(NO);
     }
     return self;
 }
@@ -41,6 +43,7 @@
     copy.categoryObject = self.categoryObject;
     copy.entourage_type = self.entourage_type;
     copy.isPublic = self.isPublic;
+    copy.consentObtained = self.consentObtained;
 
     return copy;
 }
@@ -59,6 +62,7 @@
         self.noPeople = [dictionary numberForKey:kWSNoPeople];
         self.category = [dictionary stringForKey:kWSKeyCategory];
         self.isPublic = [dictionary numberForKey:kWSKeyPublic];
+        self.consentObtained = [dictionary numberForKey:kWSKeyConsentObtained];
         
         if (self.category) {
             if ([self.category isEqualToString:@""]) {
@@ -74,8 +78,6 @@
     NSDictionary *entourageInfo = @{
                                     kWSKeyTitle: self.title,
                                     kWSDescription: self.desc ? self.desc : @"",
-                                    kWSKeyStatus: self.status,
-                                    kWSKeyPublic: self.isPublic,
                                     kWSKeyLocation: @{
                                             kWSKeyLatitude: @(self.location.coordinate.latitude),
                                             kWSKeyLongitude: @(self.location.coordinate.longitude)
@@ -89,6 +91,18 @@
     
     if (self.category) {
         [params setObject:self.category forKey:kWSKeyCategory];
+    }
+    
+    if (self.consentObtained) {
+        [params setObject:self.consentObtained forKey:kWSKeyConsentObtained];
+    }
+    
+    if (self.isPublic) {
+        [params setObject:self.isPublic forKey:kWSKeyPublic];
+    }
+    
+    if (self.status) {
+        [params setObject:self.status forKey:kWSKeyStatus];
     }
     
     if ([self isOuting]) {

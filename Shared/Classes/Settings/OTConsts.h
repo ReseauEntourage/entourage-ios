@@ -120,6 +120,7 @@
 #define ENTOURAGE_DEMANDE @"ask_for_help"
 #define ENTOURAGE_CONTRIBUTION @"contribution"
 #define ENTOURAGE_STATUS_OPEN @"open"
+#define ENTOURAGE_STATUS_SUSPENDED @"suspended"
 #define ENTOURAGE_TYPE_PUBLIC @"public"
 
 #define GROUP_TYPE_ACTION @"action"

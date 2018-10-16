@@ -1210,12 +1210,18 @@
     }
     
     [self.editEntourgeBehavior.owner dismissViewControllerAnimated:YES completion:^{
-        [self forceGetNewData];
-        
-        // Auto show the share popup only for entourage, not also for pfp, where a native popover is displayed
-        self.inviteBehaviorTriggered = ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction];
-        
-        [self showFeedInfo:entourage];
+        if (![entourage.status isEqualToString:ENTOURAGE_STATUS_SUSPENDED]) {
+            [self forceGetNewData];
+            
+            if (entourage.isPublic.boolValue) {
+                self.inviteBehaviorTriggered = NO;
+            } else {
+                // Auto show the share popup only for entourage, not also for pfp, where a native popover is displayed
+                self.inviteBehaviorTriggered = ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction];
+            }
+            
+            [self showFeedInfo:entourage];
+        }
     }];
 }
 
