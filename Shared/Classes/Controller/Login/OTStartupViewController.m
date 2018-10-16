@@ -94,21 +94,25 @@
     UIView *page1 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage1" owner:nil options:nil] firstObject];
     page1.frame = CGRectMake(0, 0, width, height);
     page1.backgroundColor = [UIColor clearColor];
+    page1.clipsToBounds = YES;
     [self.scrollView addSubview:page1];
     
     UIView *page2 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage2" owner:nil options:nil] firstObject];
     page2.frame = CGRectMake(width, 0, width, height);
     page2.backgroundColor = [UIColor clearColor];
+    page2.clipsToBounds = YES;
     [self.scrollView addSubview:page2];
     
     UIView *page3 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage3" owner:nil options:nil] firstObject];
     page3.frame = CGRectMake(2*width, 0, width, height);
     page3.backgroundColor = [UIColor clearColor];
+    page3.clipsToBounds = YES;
     [self.scrollView addSubview:page3];
     
     UIView *page4 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage4" owner:nil options:nil] firstObject];
     page4.frame = CGRectMake(3*width, 0, width, height);
     page4.backgroundColor = [UIColor clearColor];
+    page4.clipsToBounds = YES;
     [self.scrollView addSubview:page4];
 }
 

@@ -1162,7 +1162,7 @@ Votre action est actuellement en suspens. Un modérateur va vous répondre très
                                     <constraint firstAttribute="height" constant="50" id="32D-Da-V5z"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
-                                <state key="normal" title="J'échange avec le modérateur">
+                                <state key="normal" title="Continuer">
                                     <color key="titleColor" red="0.94117647059999998" green="0.39607843139999999" blue="0.1843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>

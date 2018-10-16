@@ -56,21 +56,23 @@
 
 - (void)inviteContactsFromViewController:(UIViewController *)viewController {
     CNAuthorizationStatus authorizationStatus = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
-    if (authorizationStatus == CNAuthorizationStatusDenied || authorizationStatus == CNAuthorizationStatusRestricted) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error")
-                                                                                 message:OTLocalizedString(@"addressBookDenied")
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
+    if (authorizationStatus == CNAuthorizationStatusDenied ||
+        authorizationStatus == CNAuthorizationStatusRestricted) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error") message:OTLocalizedString(@"addressBookDenied") preferredStyle:UIAlertControllerStyleAlert];
 
         [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
         [viewController presentViewController:alertController animated:YES completion:nil];
+        
     } else if (authorizationStatus == CNAuthorizationStatusAuthorized) {
         [self.owner performSegueWithIdentifier:@"SegueInviteFromAddressBook" sender:nil];
     } else {
         CNContactStore *store = [[CNContactStore alloc] init];
-        [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError *__nullable error) {
+        [store requestAccessForEntityType:CNEntityTypeContacts
+                        completionHandler:^(BOOL granted, NSError *__nullable error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (!granted)
+                if (!granted) {
                     return;
+                }
                 [self.owner performSegueWithIdentifier:@"SegueInviteFromAddressBook" sender:nil];
             });
         }];

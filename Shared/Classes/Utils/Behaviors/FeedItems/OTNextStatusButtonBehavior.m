@@ -41,7 +41,6 @@
     self.btnNextState.hidden = YES;
     
     if ([OTAppConfiguration supportsClosingFeedAction:self.feedItem]) {
-                
         switch (currentState) {
             case FeedItemStateOngoing:
                 title = OTLocalizedString(@"item_option_close");
@@ -78,7 +77,27 @@
             default:
                 break;
         }
-    } 
+    } else {
+        switch (currentState) {
+            case FeedItemStateJoinAccepted:
+                title = OTLocalizedString(@"item_option_quit");
+                selector = @selector(doQuitFeedItem);
+                self.btnNextState.hidden = NO;
+                break;
+            case FeedItemStateJoinNotRequested:
+                title = OTLocalizedString(@"join");
+                selector = @selector(doJoinFeedItem);
+                self.btnNextState.hidden = NO;
+                break;
+            case FeedItemStateJoinPending:
+                title = OTLocalizedString(@"item_cancel_join");
+                selector = @selector(doCancelJoinRequest);
+                self.btnNextState.hidden = NO;
+                break;
+            default:
+                break;
+        }
+    }
     
     [self.btnNextState addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
     [self.btnNextState setTitle:title forState:UIControlStateNormal];

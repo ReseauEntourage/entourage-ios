@@ -143,7 +143,7 @@
     else if ([OTAppConfiguration shouldAskForConsentWhenCreatingEntourage:self.entourage]) {
         [self showAddActionUserConsentView:sender];
     } else {
-        [self createOrUpdateEntourage:sender];
+        [self createOrUpdateEntourage:sender completion:nil];
     }
 }
 
@@ -154,8 +154,10 @@
     
     vc.completionBlock = ^(BOOL requiresValidation) {
         self.entourage.isPublic = @(!requiresValidation);
-        [weakVC.navigationController popToViewController:self animated:NO];
-        [self createOrUpdateEntourage:sender];
+        self.editTableSource.entourage.isPublic = self.entourage.isPublic;
+        [self createOrUpdateEntourage:sender completion:^{
+            [weakVC.navigationController popToViewController:self animated:NO];
+        }];
     };
     
     [self.navigationController pushViewController:vc animated:YES];
@@ -176,16 +178,21 @@
                 /*
                  If Case 1, or Case 2.a) then: create the action (with status = open as usual). As usual, show the minipopup "Entourage créé", and redirect the user to the Screen14.1 Discussion of this new action.
                  */
-                [weakVC.navigationController popToViewController:self animated:NO];
-                [self createOrUpdateEntourage:sender];
+                self.entourage.consentObtained = @(YES);
+                self.editTableSource.entourage.consentObtained = self.entourage.consentObtained;
+                [self createOrUpdateEntourage:sender
+                                   completion:^{
+                    [weakVC.navigationController popToViewController:self animated:NO];
+                }];
             }
                 break;
                 
-            case OTAddActionConsentAnswerTypeRequestModeration:
-                // TODO: set pending status to self.entourage
-                [self createOrUpdateEntourage:sender];
-                [weakVC.navigationController popToViewController:self animated:NO];
-                
+            case OTAddActionConsentAnswerTypeRequestModeration:{
+                [self createOrUpdateEntourage:sender completion:^{
+                    [weakVC.navigationController popToViewController:self animated:NO];
+                }];
+            }
+                break;
             default:
                 break;
         }
@@ -193,11 +200,12 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)createOrUpdateEntourage:(UIButton*)sender {
+- (void)createOrUpdateEntourage:(UIButton*)sender
+                     completion:(void(^)(void))completion {
     if (self.entourage.uid) {
-        [self updateEntourage:sender];
+        [self updateEntourage:sender completion:completion];
     } else {
-        [self createEntourage:sender];
+        [self createEntourage:sender completion:completion];
     }
 }
 
@@ -248,7 +256,7 @@
     return YES;
 }
 
-- (void)createEntourage:(UIButton *)sender {
+- (void)createEntourage:(UIButton *)sender completion:(void(^)(void))completion {
     sender.enabled = NO;
     [SVProgressHUD show];
     [[OTEncounterService new] sendEntourage:self.editTableSource.entourage
@@ -262,15 +270,21 @@
                                         
                                         if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {
                                             [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
+                                            if (completion) {
+                                                completion();
+                                            }
                                         }
                                     });
                                 } failure:^(NSError *error) {
                                     [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotCreated")];
                                     sender.enabled = YES;
+                                    if (completion) {
+                                        completion();
+                                    }
                                 }];
 }
 
-- (void)updateEntourage:(UIButton *)sender {
+- (void)updateEntourage:(UIButton *)sender completion:(void(^)(void))completion {
     sender.enabled = NO;
     [SVProgressHUD show];
     [[OTEncounterService new]
@@ -284,7 +298,11 @@
          dispatch_async(dispatch_get_main_queue(), ^{
              [SVProgressHUD showSuccessWithStatus:successTitle];
              if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {
-                 [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject: self.entourage];
+                 [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:)
+                                                    withObject: self.entourage];
+                 if (completion) {
+                     completion();
+                 }
              }
          });
      } failure:^(NSError *error) {
@@ -293,6 +311,9 @@
             OTLocalizedString(@"entourageNotUpdated");
          [SVProgressHUD showErrorWithStatus:errorTitle];
          sender.enabled = YES;
+         if (completion) {
+             completion();
+         }
      }];
 }
 
