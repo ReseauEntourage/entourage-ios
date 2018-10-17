@@ -2033,6 +2033,7 @@
 		A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTFeedsTableFilterHeader.xib; sourceTree = "<group>"; };
 		A2658BFA21144DF200B6B15C /* OTEventCreatedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTEventCreatedCell.h; sourceTree = "<group>"; };
 		A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEventCreatedCell.m; sourceTree = "<group>"; };
+		A2707BD02175EDA9006E5985 /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		A285C35A20F7787600D6625E /* OTAddEditEntourageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddEditEntourageDataSource.h; sourceTree = "<group>"; };
 		A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddEditEntourageDataSource.m; sourceTree = "<group>"; };
 		A28F4360216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddActionConfidentialityViewController.h; sourceTree = "<group>"; };
@@ -2176,6 +2177,7 @@
 		6B92CA9519A7461C004E8C9B = {
 			isa = PBXGroup;
 			children = (
+				A2707BD02175EDA9006E5985 /* readme.txt */,
 				A24199B52084F87100BC7466 /* Shared */,
 				6B92CAA719A7461C004E8C9B /* entourage */,
 				A296B8E520871E0900F6AFBD /* pfp */,

@@ -11,6 +11,8 @@
 #import "OTConsts.h"
 #import "OTInviteContactsViewController.h"
 #import "OTInviteByPhoneViewController.h"
+#import "OTInviteSuccessViewController.h"
+#import "UIStoryboard+entourage.h"
 
 @interface OTInviteBehavior ()
 
@@ -64,7 +66,7 @@
         [viewController presentViewController:alertController animated:YES completion:nil];
         
     } else if (authorizationStatus == CNAuthorizationStatusAuthorized) {
-        [self.owner performSegueWithIdentifier:@"SegueInviteFromAddressBook" sender:nil];
+        [self inviteFromAddressBook];
     } else {
         CNContactStore *store = [[CNContactStore alloc] init];
         [store requestAccessForEntityType:CNEntityTypeContacts
@@ -73,14 +75,30 @@
                 if (!granted) {
                     return;
                 }
-                [self.owner performSegueWithIdentifier:@"SegueInviteFromAddressBook" sender:nil];
+                [self inviteFromAddressBook];
             });
         }];
     }
 }
 
 - (void)inviteByPhone {
-    [self.owner performSegueWithIdentifier:@"SegueInvitePhoneNumber" sender:nil];
+    //[self.owner performSegueWithIdentifier:@"SegueInvitePhoneNumber" sender:nil];
+    
+    UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
+    OTInviteByPhoneViewController *controller = (OTInviteByPhoneViewController *)[storyboard instantiateViewControllerWithIdentifier:@"OTInviteByPhoneViewController"];
+    controller.feedItem = self.feedItem;
+    controller.delegate = self;
+    [self.owner.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)inviteFromAddressBook {
+    //[self.owner performSegueWithIdentifier:@"SegueInviteFromAddressBook" sender:nil];
+    
+    UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
+    OTInviteContactsViewController *controller = (OTInviteContactsViewController *)[storyboard instantiateViewControllerWithIdentifier:@"OTInviteContactsViewController"];
+    controller.feedItem = self.feedItem;
+    controller.delegate = self;
+    [self.owner.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)share {
@@ -91,7 +109,11 @@
 #pragma mark - InviteSuccessDelegate implementation
 
 - (void)didInviteWithSuccess {
-    [self.owner performSegueWithIdentifier:@"SegueInviteSuccess" sender:nil];
+    //[self.owner performSegueWithIdentifier:@"SegueInviteSuccess" sender:nil];
+    
+    UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
+    OTInviteSuccessViewController *controller = (OTInviteSuccessViewController *)[storyboard instantiateViewControllerWithIdentifier:@"OTInviteSuccessViewController"];
+    [self.owner presentViewController:controller animated:YES completion:nil];
 }
 
 @end
