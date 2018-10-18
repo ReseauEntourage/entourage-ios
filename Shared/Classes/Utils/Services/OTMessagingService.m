@@ -45,10 +45,12 @@
         dispatch_group_leave(group);
     }];
 
-    if ([[[OTFeedItemFactory createFor: feedItem] getStateInfo] isClosed]) {
-        dispatch_group_leave(group);
-    }
-    else {
+    // EMA-2425
+//    if ([[[OTFeedItemFactory createFor: feedItem] getStateInfo] isClosed]) {
+//        dispatch_group_leave(group);
+//    }
+//    else
+    {
         [messaging getFeedItemUsersWithStatus:nil success:^(NSArray *items) {
             if([items count] > 0)
                 @synchronized (allItems) {

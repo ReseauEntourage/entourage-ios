@@ -140,6 +140,7 @@
 @property (nonatomic, weak) IBOutlet UIButton                       *stopButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *createEncounterButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *backToNewsFeedsButton;
+@property (nonatomic, weak) IBOutlet UIButton                       *showCurrentLocationButton;
 @property (nonatomic, strong) NSArray                               *categories;
 @property (nonatomic, strong) NSArray                               *pois;
 @property (nonatomic, strong) NSMutableArray                        *markers;
@@ -212,6 +213,11 @@
     if (![OTAppConfiguration supportsAddingActionsFromMap]) {
         self.launcherButton.hidden = YES;
     }
+    
+    [self.showCurrentLocationButton.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.showCurrentLocationButton.layer setShadowOpacity:0.5];
+    [self.showCurrentLocationButton.layer setShadowRadius:4.0];
+    [self.showCurrentLocationButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
 }
 
 - (void)setup {
@@ -568,6 +574,8 @@
 }
 
 - (void)leaveGuide {
+    [OTLogger logEvent:@"MaskGDSXClick"];
+    
     if(self.toursMapDelegate.isActive)
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     else {
@@ -1202,12 +1210,18 @@
     }
     
     [self.editEntourgeBehavior.owner dismissViewControllerAnimated:YES completion:^{
-        [self forceGetNewData];
-        
-        // Auto show the share popup only for entourage, not also for pfp, where a native popover is displayed
-        self.inviteBehaviorTriggered = ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction];
-        
-        [self showFeedInfo:entourage];
+        if (![entourage.status isEqualToString:ENTOURAGE_STATUS_SUSPENDED]) {
+            [self forceGetNewData];
+            
+            if (entourage.isPublic.boolValue) {
+                self.inviteBehaviorTriggered = NO;
+            } else {
+                // Auto show the share popup only for entourage, not also for pfp, where a native popover is displayed
+                self.inviteBehaviorTriggered = ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction];
+            }
+            
+            [self showFeedInfo:entourage];
+        }
     }];
 }
 
@@ -1364,6 +1378,10 @@
     [self.noDataBehavior switchedToNewsfeeds];
     [self configureNavigationBar];
     [self reloadFeeds];
+}
+
+- (void)mapDidBecomeVisible:(BOOL)visible {
+    self.showCurrentLocationButton.hidden = !visible;
 }
 
 #pragma mark - Geo and filter buttons

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="UcL-62-xea">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="UcL-62-xea">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -50,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nhR-Um-Vdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-264" y="45"/>
+            <point key="canvasLocation" x="-422.39999999999998" y="40.479760119940032"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="nYF-ko-kf1">
@@ -235,7 +234,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hU9-Dq-Xg8">
-                            <rect key="frame" x="137" y="32" width="100" height="100"/>
+                            <rect key="frame" x="137.5" y="32" width="100" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="DIh-w5-3LX"/>
                                 <constraint firstAttribute="height" constant="100" id="aUK-yF-lLd"/>
@@ -251,7 +250,7 @@
                             </connections>
                         </button>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HU2-ql-0PL">
-                            <rect key="frame" x="189" y="84" width="48" height="48"/>
+                            <rect key="frame" x="189.5" y="84" width="48" height="48"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="doy-2p-8dZ"/>
@@ -273,7 +272,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prenom Nom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZg-OL-qCe">
-                            <rect key="frame" x="47" y="140" width="280" height="21"/>
+                            <rect key="frame" x="47.5" y="140" width="280" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="0t1-aN-am2"/>
                                 <constraint firstAttribute="width" constant="280" id="tSZ-2p-xVi"/>
@@ -315,7 +314,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="791.5" y="-768.5"/>
+            <point key="canvasLocation" x="1266.4000000000001" y="-691.304347826087"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lst-Gh-Xmp">
@@ -332,7 +331,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhl-lw-MRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="270" y="-767"/>
+            <point key="canvasLocation" x="432" y="-689.95502248875573"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Uum-1n-6o1">
@@ -348,7 +347,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ija-p7-iwf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="270" y="45"/>
+            <point key="canvasLocation" x="432" y="40.479760119940032"/>
         </scene>
         <!--FeedChangeOptions-->
         <scene sceneID="3Yl-X6-YNn">
@@ -356,7 +355,7 @@
                 <viewControllerPlaceholder storyboardName="FeedChangeOptions" id="BuG-7M-jBg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osO-mj-V4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1271.5" y="-152"/>
+            <point key="canvasLocation" x="2034.4000000000001" y="-136.73163418290855"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="H9m-pk-iGX">
@@ -467,7 +466,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WNn-77-d8m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2051.5" y="-15.5"/>
+            <point key="canvasLocation" x="3282.4000000000001" y="-13.943028485757123"/>
         </scene>
         <!--ActiveFeedItem-->
         <scene sceneID="19F-zf-hvr">
@@ -477,7 +476,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FuL-C2-u9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1277.5" y="-81"/>
+            <point key="canvasLocation" x="2044" y="-72.863568215892059"/>
         </scene>
         <!--PublicFeedItem-->
         <scene sceneID="R5i-fD-RJi">
@@ -487,7 +486,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJ8-7h-blf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1294" y="-15"/>
+            <point key="canvasLocation" x="2070.4000000000001" y="-13.493253373313344"/>
         </scene>
         <!--Main-->
         <scene sceneID="ufC-wZ-h7g">
@@ -595,7 +594,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Organization name multiline on two lines" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zk3-TU-RZt">
-                                                    <rect key="frame" x="45" y="11" width="271.5" height="42"/>
+                                                    <rect key="frame" x="45" y="11" width="263" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="42" id="x6K-X3-3bs"/>
                                                     </constraints>
@@ -653,10 +652,11 @@
                                                     <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0LW-Iw-vb2">
-                                                    <rect key="frame" x="346.5" y="13" width="9.5" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0LW-Iw-vb2">
+                                                    <rect key="frame" x="345" y="13" width="22" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="2ql-YB-uK4"/>
+                                                        <constraint firstAttribute="width" constant="22" id="T6k-qt-u87"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -728,21 +728,21 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="N3C-ev-en1" firstAttribute="leading" secondItem="Zk3-TU-RZt" secondAttribute="trailing" constant="6" id="0YR-ni-Irn"/>
+                                                <constraint firstItem="N3C-ev-en1" firstAttribute="leading" secondItem="Zk3-TU-RZt" secondAttribute="trailing" constant="14.5" id="0YR-ni-Irn"/>
                                                 <constraint firstItem="U4n-wk-MkE" firstAttribute="top" secondItem="MPQ-e4-Pbw" secondAttribute="bottom" constant="8" id="1DY-xe-aPd"/>
                                                 <constraint firstItem="yhd-jj-PWR" firstAttribute="top" secondItem="U4n-wk-MkE" secondAttribute="bottom" constant="-1" id="3Y9-Fu-A8h"/>
                                                 <constraint firstItem="N3C-ev-en1" firstAttribute="top" secondItem="pSt-IB-Y9T" secondAttribute="topMargin" id="5a4-ct-nCS"/>
                                                 <constraint firstAttribute="trailing" secondItem="MZv-9L-8Xu" secondAttribute="trailing" constant="17" id="6Bg-xX-acY"/>
                                                 <constraint firstItem="dDA-4F-GY6" firstAttribute="leading" secondItem="U4n-wk-MkE" secondAttribute="trailing" constant="-1" id="984-eH-jIU"/>
-                                                <constraint firstAttribute="trailing" secondItem="0LW-Iw-vb2" secondAttribute="trailing" constant="19" id="D7H-X2-m3j"/>
+                                                <constraint firstAttribute="trailing" secondItem="0LW-Iw-vb2" secondAttribute="trailing" constant="8" id="D7H-X2-m3j"/>
                                                 <constraint firstItem="MPQ-e4-Pbw" firstAttribute="leading" secondItem="pSt-IB-Y9T" secondAttribute="leadingMargin" id="EZn-th-Rg3"/>
                                                 <constraint firstItem="yhd-jj-PWR" firstAttribute="centerX" secondItem="pSt-IB-Y9T" secondAttribute="centerX" constant="-16" id="Ed8-Ks-sxo"/>
                                                 <constraint firstItem="XLj-Cz-NrH" firstAttribute="leading" secondItem="pSt-IB-Y9T" secondAttribute="leadingMargin" id="HCS-3c-2PC"/>
                                                 <constraint firstItem="Zk3-TU-RZt" firstAttribute="leading" secondItem="MPQ-e4-Pbw" secondAttribute="trailing" constant="8" id="IK3-8M-f2v"/>
-                                                <constraint firstItem="N3C-ev-en1" firstAttribute="leading" secondItem="Zk3-TU-RZt" secondAttribute="trailing" constant="6" id="MYp-FQ-rI7"/>
+                                                <constraint firstItem="N3C-ev-en1" firstAttribute="leading" secondItem="Zk3-TU-RZt" secondAttribute="trailing" constant="14.5" id="MYp-FQ-rI7"/>
                                                 <constraint firstItem="dDA-4F-GY6" firstAttribute="top" secondItem="0LW-Iw-vb2" secondAttribute="bottom" constant="20" id="N4R-22-bPh"/>
                                                 <constraint firstItem="XLj-Cz-NrH" firstAttribute="top" secondItem="U4n-wk-MkE" secondAttribute="bottom" constant="14" id="PLg-e4-nnl"/>
-                                                <constraint firstItem="0LW-Iw-vb2" firstAttribute="leading" secondItem="N3C-ev-en1" secondAttribute="trailing" constant="2" id="W4t-m9-xiM"/>
+                                                <constraint firstItem="0LW-Iw-vb2" firstAttribute="leading" secondItem="N3C-ev-en1" secondAttribute="trailing" constant="0.5" id="W4t-m9-xiM"/>
                                                 <constraint firstItem="yhd-jj-PWR" firstAttribute="top" secondItem="U4n-wk-MkE" secondAttribute="bottom" constant="-1" id="WW9-y3-PA6"/>
                                                 <constraint firstItem="MPQ-e4-Pbw" firstAttribute="top" secondItem="pSt-IB-Y9T" secondAttribute="topMargin" constant="10" id="Zrb-AG-GD7"/>
                                                 <constraint firstItem="dDA-4F-GY6" firstAttribute="top" secondItem="N3C-ev-en1" secondAttribute="bottom" constant="18" id="eB2-4B-eBx"/>
@@ -809,7 +809,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Organization name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TFV-Eg-f6o">
-                                                    <rect key="frame" x="45" y="11" width="256" height="20.5"/>
+                                                    <rect key="frame" x="45" y="11" width="252" height="20.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -827,7 +827,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b25-sm-eBt">
-                                                    <rect key="frame" x="327" y="16" width="35" height="35"/>
+                                                    <rect key="frame" x="320" y="16" width="35" height="35"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="35" id="PUB-MJ-JNf"/>
@@ -844,7 +844,7 @@
                                                     </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lXB-G4-l9x">
-                                                    <rect key="frame" x="346" y="36" width="20" height="20"/>
+                                                    <rect key="frame" x="342" y="36" width="20" height="20"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="OWn-ld-jAq"/>
@@ -867,19 +867,18 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="aOJ-8N-3xc" secondAttribute="trailing" id="1hP-Ha-dgL"/>
-                                                <constraint firstItem="lXB-G4-l9x" firstAttribute="trailing" secondItem="b25-sm-eBt" secondAttribute="trailing" constant="4" id="26o-rX-dg3"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="b25-sm-eBt" secondAttribute="bottom" constant="15" id="3DX-Tq-JE4"/>
+                                                <constraint firstItem="lXB-G4-l9x" firstAttribute="trailing" secondItem="b25-sm-eBt" secondAttribute="trailing" constant="7" id="26o-rX-dg3"/>
                                                 <constraint firstItem="aOJ-8N-3xc" firstAttribute="leading" secondItem="0Yc-Ce-Ysu" secondAttribute="leading" id="Bhx-vt-2qo"/>
                                                 <constraint firstItem="TFV-Eg-f6o" firstAttribute="centerY" secondItem="Zyi-ay-1yL" secondAttribute="centerY" id="Cxu-Ra-fHY"/>
                                                 <constraint firstItem="TFV-Eg-f6o" firstAttribute="leading" secondItem="Zyi-ay-1yL" secondAttribute="trailing" constant="8" id="JPV-zQ-Zym"/>
-                                                <constraint firstItem="b25-sm-eBt" firstAttribute="leading" secondItem="TFV-Eg-f6o" secondAttribute="trailing" constant="26" id="LCR-QC-Y85"/>
+                                                <constraint firstItem="b25-sm-eBt" firstAttribute="leading" secondItem="TFV-Eg-f6o" secondAttribute="trailing" constant="23" id="LCR-QC-Y85"/>
                                                 <constraint firstItem="aOJ-8N-3xc" firstAttribute="top" secondItem="0Yc-Ce-Ysu" secondAttribute="top" id="Vkg-UD-fQN"/>
                                                 <constraint firstItem="lXB-G4-l9x" firstAttribute="bottom" secondItem="b25-sm-eBt" secondAttribute="bottom" constant="5" id="XNA-up-WzZ"/>
                                                 <constraint firstItem="M4G-mA-6Wd" firstAttribute="top" secondItem="qoy-rq-3kl" secondAttribute="bottom" constant="5" id="XNd-gt-i8E"/>
                                                 <constraint firstItem="b25-sm-eBt" firstAttribute="top" secondItem="0Yc-Ce-Ysu" secondAttribute="topMargin" constant="5" id="YQg-cx-0AC"/>
                                                 <constraint firstItem="M4G-mA-6Wd" firstAttribute="leading" secondItem="0Yc-Ce-Ysu" secondAttribute="leading" id="Yo1-X2-0qu"/>
                                                 <constraint firstAttribute="trailing" secondItem="qoy-rq-3kl" secondAttribute="trailing" constant="15" id="ciM-yz-CKx"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="b25-sm-eBt" secondAttribute="trailing" constant="-2" id="j5J-AN-80u"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="b25-sm-eBt" secondAttribute="trailing" constant="5" id="j5J-AN-80u"/>
                                                 <constraint firstItem="Zyi-ay-1yL" firstAttribute="leading" secondItem="0Yc-Ce-Ysu" secondAttribute="leadingMargin" id="lPT-pW-fBR"/>
                                                 <constraint firstItem="qoy-rq-3kl" firstAttribute="leading" secondItem="0Yc-Ce-Ysu" secondAttribute="leadingMargin" id="nfa-58-MNq"/>
                                                 <constraint firstItem="sQS-Yo-QkA" firstAttribute="top" secondItem="M4G-mA-6Wd" secondAttribute="bottom" constant="10" id="oMg-pQ-MnM"/>
@@ -924,7 +923,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Street" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFF-lI-a6R">
-                                                    <rect key="frame" x="129" y="28" width="146" height="18"/>
+                                                    <rect key="frame" x="128.5" y="28" width="146.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -936,7 +935,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqF-aU-DDi">
-                                                    <rect key="frame" x="116" y="28" width="8" height="18"/>
+                                                    <rect key="frame" x="115.5" y="28" width="8" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -994,6 +993,26 @@
                                     <outlet property="tourOptionsBtn" destination="Kc9-kH-YQ7" id="Mpa-Fn-ehk"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vdn-dq-D5K" userLabel="showCurrentLocationButton">
+                                <rect key="frame" x="313" y="75" width="42" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="4zY-li-c5A"/>
+                                    <constraint firstAttribute="width" constant="42" id="TtS-YJ-tjr"/>
+                                </constraints>
+                                <state key="normal" image="geoloc">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="21"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="showCurrentLocation" destination="vXZ-lx-hvc" eventType="touchUpInside" id="CFF-4a-fCo"/>
+                                </connections>
+                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FLr-cF-t8Z">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
@@ -1064,7 +1083,7 @@
                                 <rect key="frame" x="18" y="513" width="173" height="43"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPinWhite" translatesAutoresizingMaskIntoConstraints="NO" id="9mv-KH-vwy">
-                                        <rect key="frame" x="8" y="6" width="32" height="32"/>
+                                        <rect key="frame" x="8" y="5.5" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="WTm-75-u6m"/>
                                             <constraint firstAttribute="width" constant="32" id="avS-oA-tiV"/>
@@ -1077,7 +1096,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowForMenu" translatesAutoresizingMaskIntoConstraints="NO" id="OUn-iw-fN0">
-                                        <rect key="frame" x="152" y="15.5" width="8" height="13"/>
+                                        <rect key="frame" x="152" y="15" width="8" height="13"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="13" id="adG-9M-AKK"/>
                                             <constraint firstAttribute="width" constant="8" id="bho-bp-dXO"/>
@@ -1305,6 +1324,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstAttribute="trailing" secondItem="Lzp-RD-PWj" secondAttribute="trailing" constant="20" id="1ny-vO-dCZ"/>
                             <constraint firstAttribute="trailing" secondItem="oVf-Bh-vdD" secondAttribute="trailing" constant="5" id="6vv-1S-kTv"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Bt3-Uv-XrN" secondAttribute="bottom" constant="-49" id="8IV-sw-OZs"/>
+                            <constraint firstItem="Vdn-dq-D5K" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="11" id="8fr-xl-te5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oHF-Vi-LCk" secondAttribute="trailing" constant="-16" id="9ho-oj-3FF"/>
                             <constraint firstItem="JfD-Ou-63N" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="18" id="B7L-MV-tsW"/>
                             <constraint firstAttribute="trailing" secondItem="Bt3-Uv-XrN" secondAttribute="trailing" id="BJw-Pb-he4"/>
@@ -1328,6 +1348,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="Kc9-kH-YQ7" firstAttribute="centerX" secondItem="oVf-Bh-vdD" secondAttribute="centerX" id="kpM-YF-Qzn"/>
                             <constraint firstItem="fyj-qg-Gvf" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" constant="-29.75" id="n1b-SP-eBD"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="9" id="puD-5n-gle"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Vdn-dq-D5K" secondAttribute="trailing" constant="4" id="qTF-kI-d4D"/>
                             <constraint firstItem="xgS-MI-aio" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="rPg-81-wEO"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="sQA-pi-JcK"/>
                             <constraint firstAttribute="trailing" secondItem="fyj-qg-Gvf" secondAttribute="trailing" constant="20" id="saG-lm-Sc3"/>
@@ -1357,6 +1378,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                         <outlet property="noDataBehavior" destination="oGT-t2-iTg" id="RLs-ni-gcZ"/>
                         <outlet property="nouveauxFeedItemsButton" destination="ONo-TH-dyX" id="PCe-XJ-apW"/>
                         <outlet property="overlayFeeder" destination="hnO-wK-gKw" id="DRj-hp-QRc"/>
+                        <outlet property="showCurrentLocationButton" destination="Vdn-dq-D5K" id="GWc-X6-dd1"/>
                         <outlet property="showSolidarityGuideView" destination="JfD-Ou-63N" id="EXP-dw-KZ6"/>
                         <outlet property="solidarityGuideLabel" destination="Iek-sh-67W" id="b1x-7Q-caw"/>
                         <outlet property="statusChangedBehavior" destination="rYj-lX-rXg" id="dJG-9t-lQH"/>
@@ -1470,7 +1492,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="790.5" y="43.5"/>
+            <point key="canvasLocation" x="1264.8" y="39.130434782608695"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="CD4-Ww-qZf">
@@ -1611,7 +1633,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RG-xb-8oS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-828" y="989"/>
+            <point key="canvasLocation" x="-1324.8" y="889.65517241379314"/>
         </scene>
         <!--Callout View Controller-->
         <scene sceneID="Xvu-Ok-e3n">
@@ -1674,7 +1696,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZ5-dp-z89" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-402" y="939"/>
+            <point key="canvasLocation" x="-643.20000000000005" y="844.67766116941539"/>
         </scene>
         <!--UserProfile-->
         <scene sceneID="3wX-ro-rCQ">
@@ -1682,7 +1704,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="UserProfile" id="cEE-ZD-h1d" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GQc-Cn-XSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1151.5" y="-482"/>
+            <point key="canvasLocation" x="1842.4000000000001" y="-433.58320839580216"/>
         </scene>
         <!--Social-->
         <scene sceneID="fK0-Cb-xwN">
@@ -1690,7 +1712,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="Social" id="IdJ-o7-C8S" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="71P-pO-jf9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1219" y="-692"/>
+            <point key="canvasLocation" x="1950.4000000000001" y="-622.48875562218893"/>
         </scene>
         <!--Settings-->
         <scene sceneID="fPx-Ql-9QZ">
@@ -1698,7 +1720,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="Settings" id="pnd-2e-8CK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCX-aO-hQ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1211.5" y="-863"/>
+            <point key="canvasLocation" x="1938.4000000000001" y="-776.31184407796104"/>
         </scene>
         <!--About-->
         <scene sceneID="Uk4-cL-jvE">
@@ -1706,7 +1728,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="About" id="vTa-22-9U0" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I5w-SE-tsq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1218.5" y="-766"/>
+            <point key="canvasLocation" x="1949.5999999999999" y="-689.05547226386807"/>
         </scene>
         <!--UserProfileEditor-->
         <scene sceneID="Z6r-zn-ztw">
@@ -1714,7 +1736,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="UserProfileEditor" id="UAH-w8-fk1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAn-9W-qGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1252" y="-621"/>
+            <point key="canvasLocation" x="2003.2" y="-558.62068965517244"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zBr-fw-9rC">
@@ -1727,7 +1749,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rbx-kT-TnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1612" y="829"/>
+            <point key="canvasLocation" x="2579.1999999999998" y="745.72713643178417"/>
         </scene>
         <!--QuitFeedItem-->
         <scene sceneID="BFl-vb-SXz">
@@ -1735,7 +1757,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="QuitFeedItem" id="R63-9E-dkT" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSm-UU-MOh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1049" y="523"/>
+            <point key="canvasLocation" x="1678.4000000000001" y="470.46476761619192"/>
         </scene>
         <!--TourOptions-->
         <scene sceneID="ciU-xC-Yox">
@@ -1743,7 +1765,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="TourOptions" id="odF-HL-m84" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Na-ZL-zg3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1160.5" y="481"/>
+            <point key="canvasLocation" x="1856.8" y="432.68365817091455"/>
         </scene>
         <!--MyEntourages-->
         <scene sceneID="IjM-Me-8VV">
@@ -1753,7 +1775,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dmb-Mg-GeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1277" y="74"/>
+            <point key="canvasLocation" x="2043.2" y="66.566716641679164"/>
         </scene>
         <!--GuideSolidarity-->
         <scene sceneID="xOp-2g-pfi">
@@ -1763,7 +1785,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1g-iK-4ez" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1266" y="162"/>
+            <point key="canvasLocation" x="2025.5999999999999" y="145.72713643178412"/>
         </scene>
         <!--MapOptions-->
         <scene sceneID="z5A-ht-Zxe">
@@ -1771,7 +1793,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="MapOptions" id="IB2-iq-b6s" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ic-Nb-Z9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1218" y="234"/>
+            <point key="canvasLocation" x="1948.8" y="210.49475262368819"/>
         </scene>
         <!--TourConfirmation-->
         <scene sceneID="sBV-v5-LFD">
@@ -1779,7 +1801,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="TourConfirmation" id="cVp-EA-m5M" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j4z-UC-U37" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="941.5" y="569"/>
+            <point key="canvasLocation" x="1506.4000000000001" y="511.84407796101954"/>
         </scene>
         <!--TourCreator-->
         <scene sceneID="kKI-xW-1CW">
@@ -1787,7 +1809,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="TourCreator" id="cUF-7c-FT1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zj4-HN-Fub" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1182" y="315"/>
+            <point key="canvasLocation" x="1891.2" y="283.35832083958024"/>
         </scene>
         <!--JoinFeedItem-->
         <scene sceneID="JPP-j5-gm1">
@@ -1795,7 +1817,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="JoinFeedItem" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ny-Mu-RyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="798" y="569"/>
+            <point key="canvasLocation" x="1276.8" y="511.84407796101954"/>
         </scene>
         <!--EntourageEditor-->
         <scene sceneID="zTc-vn-arv">
@@ -1805,7 +1827,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1y-5B-KU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="455" y="509"/>
+            <point key="canvasLocation" x="728" y="457.87106446776613"/>
         </scene>
         <!--EncounterEditor-->
         <scene sceneID="ROz-4P-QUY">
@@ -1813,7 +1835,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="EncounterEditor" id="Ry3-hZ-KaJ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iTy-XQ-KqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="297" y="669"/>
+            <point key="canvasLocation" x="475.19999999999999" y="601.79910044977521"/>
         </scene>
         <!--SolidarityGuideFilters-->
         <scene sceneID="oY9-4S-Sbq">
@@ -1821,7 +1843,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="SolidarityGuideFilters" id="UzR-b4-49u" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQ4-qQ-tSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="513" y="644"/>
+            <point key="canvasLocation" x="820.79999999999995" y="579.31034482758628"/>
         </scene>
         <!--FeedItemFilters-->
         <scene sceneID="N4j-rM-ZJb">
@@ -1829,20 +1851,21 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                 <viewControllerPlaceholder storyboardName="FeedItemFilters" id="0av-Qe-fFs" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f44-Ea-6he" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="675" y="622"/>
+            <point key="canvasLocation" x="1080" y="559.52023988005999"/>
         </scene>
     </scenes>
     <resources>
-        <image name="arrowForMenu" width="7" height="13"/>
+        <image name="arrowForMenu" width="7.5" height="13"/>
         <image name="arrowNewEntourages" width="12" height="22"/>
-        <image name="back" width="8" height="13"/>
-        <image name="closeOptionNoShadow" width="61" height="61"/>
-        <image name="closeOptionWithShadow" width="61" height="61"/>
-        <image name="leaveGuideButton" width="58" height="58"/>
-        <image name="map-placeholder-bg" width="1120" height="1694"/>
+        <image name="back" width="8" height="13.5"/>
+        <image name="closeOptionNoShadow" width="61.5" height="61.5"/>
+        <image name="closeOptionWithShadow" width="61.5" height="61.5"/>
+        <image name="geoloc" width="20" height="20"/>
+        <image name="leaveGuideButton" width="58.5" height="58"/>
+        <image name="map-placeholder-bg" width="560" height="847"/>
         <image name="mapPinWhite" width="32" height="32"/>
         <image name="newEntourages" width="180" height="39"/>
-        <image name="next" width="8" height="13"/>
+        <image name="next" width="8" height="13.5"/>
         <image name="pause" width="62" height="62"/>
         <image name="tel" width="25" height="25"/>
         <image name="user" width="100" height="100"/>

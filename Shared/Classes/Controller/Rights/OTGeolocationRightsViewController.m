@@ -242,16 +242,18 @@
     if (self.googlePlacePredictions.count > indexPath.row) {
         GMSAutocompletePrediction *prediction = self.googlePlacePredictions[indexPath.row];
         
-        NSMutableAttributedString *bolded = [prediction.attributedFullText mutableCopy];
-        [bolded enumerateAttribute:kGMSAutocompleteMatchAttribute
-                                   inRange:NSMakeRange(0, bolded.length)
-                                   options:0
-                                usingBlock:^(id value, NSRange range, BOOL *stop) {
-                                        UIFont *font = (value == nil) ? regularFont : boldFont;
-                                        [bolded addAttribute:NSFontAttributeName value:font range:range];
-                                    }];
-        
-        cell.textLabel.attributedText = bolded;
+        if (prediction) {
+            NSMutableAttributedString *bolded = [prediction.attributedFullText mutableCopy];
+            [bolded enumerateAttribute:kGMSAutocompleteMatchAttribute
+                                       inRange:NSMakeRange(0, bolded.length)
+                                       options:0
+                                    usingBlock:^(id value, NSRange range, BOOL *stop) {
+                                            UIFont *font = (value == nil) ? regularFont : boldFont;
+                                            [bolded addAttribute:NSFontAttributeName value:font range:range];
+                                        }];
+            
+            cell.textLabel.attributedText = bolded;
+        }
     }
     
     return cell;
@@ -272,9 +274,11 @@
 - (void)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
     NSLog(@"Selected suggestion at index row - %ld", (long)indexPath.row);
     GMSAutocompletePrediction *prediction = self.googlePlacePredictions[indexPath.row];
-    self.textField.text = [prediction attributedFullText].string;
-    self.selectedAddress = prediction;
-    [self.textField resignFirstResponder];
+    if (prediction) {
+        self.textField.text = [prediction attributedFullText].string;
+        self.selectedAddress = prediction;
+        [self.textField resignFirstResponder];
+    }
 }
 
 @end

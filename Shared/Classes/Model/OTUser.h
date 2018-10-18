@@ -60,6 +60,8 @@ extern NSString *const kVisitedUserTag;
 
 - (BOOL)isRegisteredForPushNotifications;
 
+- (BOOL)hasSignedEthicsChart;
+
 /*
  * Returns the name of the role to be displayed in the left side of the user's fullname
  */

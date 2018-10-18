@@ -80,9 +80,17 @@
 }
 
 - (BOOL)canCancelJoinRequest {
+    
+    if ([self.entourage isPrivateCircle] || [self.entourage isNeighborhood]) {
+        //EMA-2439
+        return [self.entourage.joinStatus isEqualToString:JOIN_PENDING];;
+    }
+    
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if ([currentUser.sid intValue] != [self.entourage.author.uID intValue])
+    if ([currentUser.sid intValue] != [self.entourage.author.uID intValue]) {
         return [self.entourage.joinStatus isEqualToString:JOIN_PENDING];
+    }
+    
     return NO;
 }
 

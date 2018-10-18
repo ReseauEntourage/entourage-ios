@@ -725,8 +725,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
-+ (BOOL)shouldShowEventPrivacyDisclaimerOnCreation {
++ (BOOL)shouldShowEntouragePrivacyDisclaimerOnCreation:(OTEntourage*)entourage {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    // EMA-2383
+    if ([entourage isOuting]) {
         return YES;
     }
     
@@ -739,6 +744,33 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     return @"1072244410";
+}
+
++ (BOOL)shouldAskForConsentWhenCreatingEntourage:(OTEntourage*)entourage {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    // EMA-2378
+    if ([entourage isOuting] ||
+        [entourage isContribution]) {
+        return NO;
+    }
+    
+    return [entourage isAskForHelp];
+}
+
++ (BOOL)shouldAskForConfidentialityWhenCreatingEntourage:(OTEntourage*)entourage {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return NO;
+    }
+    
+    // EMA-2384
+    if ([entourage isContribution]) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

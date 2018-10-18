@@ -34,6 +34,7 @@ NSString *const kCoordinatorUserTag = @"coordinator";
 NSString *const kNotValidatedUserTag = @"not_validated";
 NSString *const kVisitorUserTag = @"visitor";
 NSString *const kVisitedUserTag = @"visited";
+NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 
 @interface OTUser ()
 @property (nonatomic, readwrite) NSArray *memberships;
@@ -190,6 +191,10 @@ NSString *const kVisitedUserTag = @"visited";
     return NO;
 }
 
+- (BOOL)hasSignedEthicsChart {
+    return [self.roles containsObject:kEthicsCharterSignedTag];
+}
+
 - (NSString*)leftTag {
     // Not used for now
     return nil;
@@ -198,7 +203,7 @@ NSString *const kVisitedUserTag = @"visited";
 - (NSString*)rightTag {
     if (self.roles) {
         NSString *key = self.roles.firstObject;
-        if (key) {
+        if (key && ![key isEqualToString:kEthicsCharterSignedTag]) {
             return OTLocalizedString(key);
         }
     }

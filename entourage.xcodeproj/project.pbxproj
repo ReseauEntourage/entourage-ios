@@ -791,6 +791,8 @@
 		A2658BFD21144DF200B6B15C /* OTEventCreatedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */; };
 		A285C35C20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
 		A285C35D20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */; };
+		A28F4362216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */; };
+		A28F4363216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */; };
 		A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
@@ -1211,6 +1213,14 @@
 		A2C9EFD72147FB7700357FD9 /* PfpIntro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2C9EFD52147FB7700357FD9 /* PfpIntro.storyboard */; };
 		A2C9EFD92147FD7400357FD9 /* PfpStartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9EFD82147FD7400357FD9 /* PfpStartupViewController.swift */; };
 		A2C9EFDA2147FD7400357FD9 /* PfpStartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9EFD82147FD7400357FD9 /* PfpStartupViewController.swift */; };
+		A2CCF2E5216610CE00AD6237 /* OTFeedClosedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CCF2E4216610CE00AD6237 /* OTFeedClosedCell.m */; };
+		A2CCF2E6216610CE00AD6237 /* OTFeedClosedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CCF2E4216610CE00AD6237 /* OTFeedClosedCell.m */; };
+		A2CCF2F62167428D00AD6237 /* OTAddActionFirstConsentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CCF2F52167428D00AD6237 /* OTAddActionFirstConsentViewController.m */; };
+		A2CCF2F72167428D00AD6237 /* OTAddActionFirstConsentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CCF2F52167428D00AD6237 /* OTAddActionFirstConsentViewController.m */; };
+		A2CCF2FA2167444B00AD6237 /* OTAddActionSecondConsentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CCF2F92167444B00AD6237 /* OTAddActionSecondConsentViewController.m */; };
+		A2CCF2FB2167444B00AD6237 /* OTAddActionSecondConsentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CCF2F92167444B00AD6237 /* OTAddActionSecondConsentViewController.m */; };
+		A2CCF2FE2167445F00AD6237 /* OTAddActionThirdConsentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CCF2FD2167445F00AD6237 /* OTAddActionThirdConsentViewController.m */; };
+		A2CCF2FF2167445F00AD6237 /* OTAddActionThirdConsentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2CCF2FD2167445F00AD6237 /* OTAddActionThirdConsentViewController.m */; };
 		A2E293AA211B1FA900D44249 /* PfpStartupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E293A9211B1FA900D44249 /* PfpStartupView.xib */; };
 		A2E293AB211B1FA900D44249 /* PfpStartupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E293A9211B1FA900D44249 /* PfpStartupView.xib */; };
 		A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
@@ -2023,8 +2033,11 @@
 		A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTFeedsTableFilterHeader.xib; sourceTree = "<group>"; };
 		A2658BFA21144DF200B6B15C /* OTEventCreatedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTEventCreatedCell.h; sourceTree = "<group>"; };
 		A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEventCreatedCell.m; sourceTree = "<group>"; };
+		A2707BD02175EDA9006E5985 /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		A285C35A20F7787600D6625E /* OTAddEditEntourageDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddEditEntourageDataSource.h; sourceTree = "<group>"; };
 		A285C35B20F7787600D6625E /* OTAddEditEntourageDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddEditEntourageDataSource.m; sourceTree = "<group>"; };
+		A28F4360216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddActionConfidentialityViewController.h; sourceTree = "<group>"; };
+		A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddActionConfidentialityViewController.m; sourceTree = "<group>"; };
 		A296B8E320871CFC00F6AFBD /* Voi-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voi-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "entourage-Prefix.pch"; sourceTree = "<group>"; };
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2053,6 +2066,14 @@
 		A2A777ED20AF06EC006D2772 /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		A2C9EFD52147FB7700357FD9 /* PfpIntro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PfpIntro.storyboard; sourceTree = "<group>"; };
 		A2C9EFD82147FD7400357FD9 /* PfpStartupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PfpStartupViewController.swift; sourceTree = "<group>"; };
+		A2CCF2E3216610CE00AD6237 /* OTFeedClosedCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTFeedClosedCell.h; sourceTree = "<group>"; };
+		A2CCF2E4216610CE00AD6237 /* OTFeedClosedCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTFeedClosedCell.m; sourceTree = "<group>"; };
+		A2CCF2F42167428D00AD6237 /* OTAddActionFirstConsentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddActionFirstConsentViewController.h; sourceTree = "<group>"; };
+		A2CCF2F52167428D00AD6237 /* OTAddActionFirstConsentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddActionFirstConsentViewController.m; sourceTree = "<group>"; };
+		A2CCF2F82167444B00AD6237 /* OTAddActionSecondConsentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddActionSecondConsentViewController.h; sourceTree = "<group>"; };
+		A2CCF2F92167444B00AD6237 /* OTAddActionSecondConsentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddActionSecondConsentViewController.m; sourceTree = "<group>"; };
+		A2CCF2FC2167445F00AD6237 /* OTAddActionThirdConsentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAddActionThirdConsentViewController.h; sourceTree = "<group>"; };
+		A2CCF2FD2167445F00AD6237 /* OTAddActionThirdConsentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAddActionThirdConsentViewController.m; sourceTree = "<group>"; };
 		A2E293A9211B1FA900D44249 /* PfpStartupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PfpStartupView.xib; sourceTree = "<group>"; };
 		A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E5FA0B20862E180099B989 /* UINavigationController+Appearance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Appearance.h"; sourceTree = "<group>"; };
@@ -2156,6 +2177,7 @@
 		6B92CA9519A7461C004E8C9B = {
 			isa = PBXGroup;
 			children = (
+				A2707BD02175EDA9006E5985 /* readme.txt */,
 				A24199B52084F87100BC7466 /* Shared */,
 				6B92CAA719A7461C004E8C9B /* entourage */,
 				A296B8E520871E0900F6AFBD /* pfp */,
@@ -2478,18 +2500,7 @@
 				A202E8DB2085D2C40058F32C /* OTConfirmCloseViewController.m */,
 				A202E8EA2085D2C40058F32C /* OTCreateMeetingViewController.h */,
 				A202E8682085D2C40058F32C /* OTCreateMeetingViewController.m */,
-				A202E8CA2085D2C40058F32C /* OTEditEntourageDescViewController.h */,
-				A202E91F2085D2C50058F32C /* OTEditEntourageDescViewController.m */,
-				A202E8FE2085D2C40058F32C /* OTEditEntourageTitleViewController.h */,
-				A202E8C32085D2C40058F32C /* OTEditEntourageTitleViewController.m */,
-				A202E8E82085D2C40058F32C /* OTEntourageDisclaimerViewController.h */,
-				A202E8A62085D2C40058F32C /* OTEntourageDisclaimerViewController.m */,
-				A202E8C92085D2C40058F32C /* OTEntourageEditItemCell.h */,
-				A202E9202085D2C50058F32C /* OTEntourageEditItemCell.m */,
-				A202E8DA2085D2C40058F32C /* OTEntourageEditItemImageCell.h */,
-				A202E9452085D2C50058F32C /* OTEntourageEditItemImageCell.m */,
-				A202E8FB2085D2C40058F32C /* OTEntourageEditorViewController.h */,
-				A202E8562085D2C40058F32C /* OTEntourageEditorViewController.m */,
+				A2CCF2F32167418800AD6237 /* EntourageEditor */,
 				A202E8B92085D2C40058F32C /* OTGuideDetailsViewController.h */,
 				A202E9002085D2C40058F32C /* OTGuideDetailsViewController.m */,
 				A202E9272085D2C50058F32C /* OTGuideMapDelegate.h */,
@@ -2529,27 +2540,12 @@
 				A202E91B2085D2C50058F32C /* OTSolidarityGuideFiltersViewController.m */,
 				A202E9232085D2C50058F32C /* OTSummaryInfoCell.h */,
 				A202E8C72085D2C40058F32C /* OTSummaryInfoCell.m */,
-				A202E8CB2085D2C40058F32C /* OTSWRevealViewController.h */,
-				A202E9212085D2C50058F32C /* OTSWRevealViewController.m */,
-				A202E8A42085D2C40058F32C /* OTTourCreatorViewController.h */,
-				A202E8E62085D2C40058F32C /* OTTourCreatorViewController.m */,
-				A202E8E72085D2C40058F32C /* OTTourOptionsViewController.h */,
-				A202E8A32085D2C40058F32C /* OTTourOptionsViewController.m */,
-				A202E8DD2085D2C40058F32C /* OTToursMapDelegate.h */,
-				A202E9432085D2C50058F32C /* OTToursMapDelegate.m */,
-				A202E8E22085D2C40058F32C /* OTUserEditPasswordViewController.h */,
-				A202E9292085D2C50058F32C /* OTUserEditPasswordViewController.m */,
-				A202E8662085D2C40058F32C /* OTUserEditViewController.h */,
-				A202E8EC2085D2C40058F32C /* OTUserEditViewController.m */,
-				A202E9162085D2C50058F32C /* OTUserViewController.h */,
-				A202E8D62085D2C40058F32C /* OTUserViewController.m */,
-				A202E9242085D2C50058F32C /* OTWebViewController.h */,
-				A202E8C62085D2C40058F32C /* OTWebViewController.m */,
+				A2CCF2F12167413B00AD6237 /* Deprecated */,
+				A2CCF2F22167415500AD6237 /* Tour */,
+				A2CCF2F02167412500AD6237 /* User */,
 				A202E9392085D2C50058F32C /* PublicFeedItem */,
 				A202E8F32085D2C40058F32C /* Rights */,
 				A202E8A82085D2C40058F32C /* Tutorial */,
-				A202E8D72085D2C40058F32C /* UIViewController+menu.h */,
-				A202E9172085D2C50058F32C /* UIViewController+menu.m */,
 				A202E8BE2085D2C40058F32C /* UserPicture */,
 				A202E92B2085D2C50058F32C /* UserProfileDetails */,
 			);
@@ -2664,6 +2660,8 @@
 				A202E88C2085D2C40058F32C /* OTMessageSentCell.m */,
 				A202E8892085D2C40058F32C /* OTPlaceholderCell.h */,
 				A202E8922085D2C40058F32C /* OTPlaceholderCell.m */,
+				A2CCF2E3216610CE00AD6237 /* OTFeedClosedCell.h */,
+				A2CCF2E4216610CE00AD6237 /* OTFeedClosedCell.m */,
 				A202E8902085D2C40058F32C /* OTStatusCell.h */,
 				A202E8862085D2C40058F32C /* OTStatusCell.m */,
 			);
@@ -3498,6 +3496,8 @@
 				A202EAB72085D2C70058F32C /* NSDate+OTFormatter.m */,
 				A202EAB82085D2C70058F32C /* NSDate+ui.h */,
 				A202EAC12085D2C70058F32C /* NSDate+ui.m */,
+				A202E8D72085D2C40058F32C /* UIViewController+menu.h */,
+				A202E9172085D2C50058F32C /* UIViewController+menu.m */,
 				A202EAB52085D2C70058F32C /* NSDictionary+Parsing.h */,
 				A202EAC02085D2C70058F32C /* NSDictionary+Parsing.m */,
 				A202EAC62085D2C70058F32C /* NSError+OTErrorData.h */,
@@ -3737,6 +3737,70 @@
 				A2A777ED20AF06EC006D2772 /* String+Localization.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A2CCF2F02167412500AD6237 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				A202E8E22085D2C40058F32C /* OTUserEditPasswordViewController.h */,
+				A202E9292085D2C50058F32C /* OTUserEditPasswordViewController.m */,
+				A202E8662085D2C40058F32C /* OTUserEditViewController.h */,
+				A202E8EC2085D2C40058F32C /* OTUserEditViewController.m */,
+				A202E9162085D2C50058F32C /* OTUserViewController.h */,
+				A202E8D62085D2C40058F32C /* OTUserViewController.m */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		A2CCF2F12167413B00AD6237 /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				A202E8CB2085D2C40058F32C /* OTSWRevealViewController.h */,
+				A202E9212085D2C50058F32C /* OTSWRevealViewController.m */,
+				A202E9242085D2C50058F32C /* OTWebViewController.h */,
+				A202E8C62085D2C40058F32C /* OTWebViewController.m */,
+			);
+			path = Deprecated;
+			sourceTree = "<group>";
+		};
+		A2CCF2F22167415500AD6237 /* Tour */ = {
+			isa = PBXGroup;
+			children = (
+				A202E8A42085D2C40058F32C /* OTTourCreatorViewController.h */,
+				A202E8E62085D2C40058F32C /* OTTourCreatorViewController.m */,
+				A202E8E72085D2C40058F32C /* OTTourOptionsViewController.h */,
+				A202E8A32085D2C40058F32C /* OTTourOptionsViewController.m */,
+				A202E8DD2085D2C40058F32C /* OTToursMapDelegate.h */,
+				A202E9432085D2C50058F32C /* OTToursMapDelegate.m */,
+			);
+			path = Tour;
+			sourceTree = "<group>";
+		};
+		A2CCF2F32167418800AD6237 /* EntourageEditor */ = {
+			isa = PBXGroup;
+			children = (
+				A202E8CA2085D2C40058F32C /* OTEditEntourageDescViewController.h */,
+				A202E91F2085D2C50058F32C /* OTEditEntourageDescViewController.m */,
+				A202E8FE2085D2C40058F32C /* OTEditEntourageTitleViewController.h */,
+				A202E8C32085D2C40058F32C /* OTEditEntourageTitleViewController.m */,
+				A202E8E82085D2C40058F32C /* OTEntourageDisclaimerViewController.h */,
+				A202E8A62085D2C40058F32C /* OTEntourageDisclaimerViewController.m */,
+				A202E8C92085D2C40058F32C /* OTEntourageEditItemCell.h */,
+				A202E9202085D2C50058F32C /* OTEntourageEditItemCell.m */,
+				A202E8DA2085D2C40058F32C /* OTEntourageEditItemImageCell.h */,
+				A202E9452085D2C50058F32C /* OTEntourageEditItemImageCell.m */,
+				A202E8FB2085D2C40058F32C /* OTEntourageEditorViewController.h */,
+				A202E8562085D2C40058F32C /* OTEntourageEditorViewController.m */,
+				A2CCF2F42167428D00AD6237 /* OTAddActionFirstConsentViewController.h */,
+				A2CCF2F52167428D00AD6237 /* OTAddActionFirstConsentViewController.m */,
+				A2CCF2F82167444B00AD6237 /* OTAddActionSecondConsentViewController.h */,
+				A2CCF2F92167444B00AD6237 /* OTAddActionSecondConsentViewController.m */,
+				A2CCF2FC2167445F00AD6237 /* OTAddActionThirdConsentViewController.h */,
+				A2CCF2FD2167445F00AD6237 /* OTAddActionThirdConsentViewController.m */,
+				A28F4360216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.h */,
+				A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */,
+			);
+			path = EntourageEditor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4431,6 +4495,7 @@
 				A202EB992085D2C80058F32C /* OTNotificationsRightsViewController.m in Sources */,
 				A202ECF52085D2C80058F32C /* OTCategoryFromJsonService.m in Sources */,
 				A202ED312085D2C80058F32C /* OTVersionInfo.m in Sources */,
+				A2CCF2E5216610CE00AD6237 /* OTFeedClosedCell.m in Sources */,
 				A202EB8F2085D2C80058F32C /* OTMapOptionsViewController.m in Sources */,
 				A202EB292085D2C70058F32C /* OTActiveFeedItemViewController.m in Sources */,
 				A202EAEB2085D2C70058F32C /* OTSolidarityGuideFilter.m in Sources */,
@@ -4467,6 +4532,7 @@
 				A202ECFD2085D2C80058F32C /* OTEntourageFactory.m in Sources */,
 				A202EAE92085D2C70058F32C /* OTSavedFilter.m in Sources */,
 				A202EBFB2085D2C80058F32C /* OTHTTPRequestManager.m in Sources */,
+				A2CCF2F62167428D00AD6237 /* OTAddActionFirstConsentViewController.m in Sources */,
 				A202EBA92085D2C80058F32C /* OTLoginViewController.m in Sources */,
 				A202EB2B2085D2C70058F32C /* OTMapViewController.m in Sources */,
 				A2306AB920C81F730094370E /* ISO8601DateFormatter.m in Sources */,
@@ -4507,6 +4573,7 @@
 				A202EBA52085D2C80058F32C /* OTLostCodeViewController.m in Sources */,
 				A202EB6D2085D2C80058F32C /* OTPicturePreviewViewController.m in Sources */,
 				A21E8F2820B7F3AE00433606 /* OTUserMembership.m in Sources */,
+				A28F4362216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m in Sources */,
 				A202EC8B2085D2C80058F32C /* OTContactsFilteredDataSourceBehavior.m in Sources */,
 				A202ED0D2085D2C80058F32C /* OTTourStateTransition.m in Sources */,
 				A202EBAB2085D2C80058F32C /* OTFeedItemFiltersViewController.m in Sources */,
@@ -4542,6 +4609,7 @@
 				A202EC172085D2C80058F32C /* OTUserService.m in Sources */,
 				A202EB712085D2C80058F32C /* OTEditEntourageTitleViewController.m in Sources */,
 				A202EC092085D2C80058F32C /* OTEntourageService.m in Sources */,
+				A2CCF2FE2167445F00AD6237 /* OTAddActionThirdConsentViewController.m in Sources */,
 				A202ECA92085D2C80058F32C /* OTEditEntourageBehavior.m in Sources */,
 				A202EC3B2085D2C80058F32C /* OTStartTourAnnotationView.m in Sources */,
 				A202EBC32085D2C80058F32C /* OTBaseMapDelegate.m in Sources */,
@@ -4657,6 +4725,7 @@
 				A202EC852085D2C80058F32C /* OTFeedItemFiltersCellProvider.m in Sources */,
 				A202EBFD2085D2C80058F32C /* OTRequestOperationManager.m in Sources */,
 				A202ED192085D2C80058F32C /* OTTourMapHandler.m in Sources */,
+				A2CCF2FA2167444B00AD6237 /* OTAddActionSecondConsentViewController.m in Sources */,
 				A202EB2F2085D2C70058F32C /* OTContactPhoneCell.m in Sources */,
 				A202EC532085D2C80058F32C /* OTToggleGroupViewBehavior.m in Sources */,
 				A202EC332085D2C80058F32C /* OTEntourageRenderer.m in Sources */,
@@ -5060,12 +5129,14 @@
 				A2306AB020C69DDD0094370E /* PfpSelectVisitDateViewController.swift in Sources */,
 				A296B76920871CFC00F6AFBD /* OTLocationSelectorViewController.m in Sources */,
 				A296B76A20871CFC00F6AFBD /* OTLocationManager.m in Sources */,
+				A2CCF2FB2167444B00AD6237 /* OTAddActionSecondConsentViewController.m in Sources */,
 				A296B76B20871CFC00F6AFBD /* OTPushNotificationsData.m in Sources */,
 				A296B76C20871CFC00F6AFBD /* OTAssociationTableViewCell.m in Sources */,
 				A296B76D20871CFC00F6AFBD /* OTMyEntouragesViewController.m in Sources */,
 				A296B76E20871CFC00F6AFBD /* OTNextStatusButtonBehavior.m in Sources */,
 				A296B76F20871CFC00F6AFBD /* OTConfirmationViewController.m in Sources */,
 				A2306AB620C81C360094370E /* PfpApiService.m in Sources */,
+				A2CCF2E6216610CE00AD6237 /* OTFeedClosedCell.m in Sources */,
 				A296B77020871CFC00F6AFBD /* OTMessageSentCell.m in Sources */,
 				A296B77120871CFC00F6AFBD /* UILabel+entourage.m in Sources */,
 				A296B77220871CFC00F6AFBD /* OTStatusBehavior.m in Sources */,
@@ -5179,6 +5250,7 @@
 				A296B7D020871CFC00F6AFBD /* OTEncounterDisclaimerBehavior.m in Sources */,
 				A296B7D120871CFC00F6AFBD /* OTMailSenderBehavior.m in Sources */,
 				A296B7D220871CFC00F6AFBD /* OTFeedItem.m in Sources */,
+				A2CCF2F72167428D00AD6237 /* OTAddActionFirstConsentViewController.m in Sources */,
 				A296B7D320871CFC00F6AFBD /* OTToggleVisibleWithConstraintsBehavior.m in Sources */,
 				A296B7D420871CFC00F6AFBD /* OTTourJoinerDelegate.m in Sources */,
 				A296B7D520871CFC00F6AFBD /* OTOnboardingNavigationBehavior.m in Sources */,
@@ -5213,6 +5285,7 @@
 				A296B7F120871CFC00F6AFBD /* OTFilteredDataSourceBehavior.m in Sources */,
 				A296B7F220871CFC00F6AFBD /* OTUserService.m in Sources */,
 				A296B7F320871CFC00F6AFBD /* OTEditEntourageTitleViewController.m in Sources */,
+				A28F4363216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m in Sources */,
 				A296B7F420871CFC00F6AFBD /* OTEntourageService.m in Sources */,
 				A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */,
 				A296B7F520871CFC00F6AFBD /* OTEditEntourageBehavior.m in Sources */,
@@ -5335,6 +5408,7 @@
 				A296B85A20871CFC00F6AFBD /* OTFilterRadioButton.m in Sources */,
 				A296B85B20871CFC00F6AFBD /* OTOverlayFeederBehavior.m in Sources */,
 				A296B85C20871CFC00F6AFBD /* OTMessageReceivedCell.m in Sources */,
+				A2CCF2FF2167445F00AD6237 /* OTAddActionThirdConsentViewController.m in Sources */,
 				A296B85D20871CFC00F6AFBD /* OTHeatzonesCollectionSource.m in Sources */,
 				A296B85E20871CFC00F6AFBD /* OTNewsFeedCell.m in Sources */,
 				A296B85F20871CFC00F6AFBD /* OTManageInvitationBehavior.m in Sources */,

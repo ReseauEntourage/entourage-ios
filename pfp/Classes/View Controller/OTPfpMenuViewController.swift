@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SVProgressHUD
 
 enum menuItemIndexType: NSInteger {
     case addHours = 0
@@ -48,7 +49,7 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.tableView.reloadData()
+        self.loadUser()
         OTAppConfiguration.updateAppearanceForMainTabBar()
     }
     
@@ -76,12 +77,27 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         tableView.backgroundColor = UIColor.white
         tableView.separatorColor = .white
-        customizeHeader()
-        createMenuItems()
         tableView.register(OTItemTableViewCell.self, forCellReuseIdentifier: "ItemCellIdentifier")
         tableView.register(OTLogoutViewCell.self, forCellReuseIdentifier: "LogoutItemCellIdentifier")
         
         OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
+    }
+    
+    private func loadUser() {
+        SVProgressHUD.show()
+        let authService:OTAuthService = OTAuthService()
+        authService.getDetailsForUser(self.currentUser?.sid, success: { (user:OTUser?) in
+            SVProgressHUD.dismiss()
+            self.currentUser = user
+            self.customizeHeader()
+            self.createMenuItems()
+            self.tableView.reloadData()
+        }) { (error:Error?) in
+            SVProgressHUD.dismiss()
+            self.customizeHeader()
+            self.createMenuItems()
+            self.tableView.reloadData()
+        }
     }
     
     private func customizeHeader() {
@@ -107,6 +123,7 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
     
     private func createMenuItems() {
         
+        menuItems = [OTMenuItem]()
         let addHoursItem = OTMenuItem(title: String.localized("pfp_menu_add_visitor_hours"),
                                      iconName:"menu-heart")
         addHoursItem?.tag = menuItemIndexType.addHours.rawValue
@@ -119,7 +136,8 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
                                        iconName: "menu_phone")
         howIsUsedItem?.tag = menuItemIndexType.howTo.rawValue
         
-        let ethicalChartItem = OTMenuItem(title: String.localized("pfp_menu_chart_etique"),
+        let chartTitle:String = self.currentUser?.hasSignedEthicsChart() == true ? String.localized("menu_read_chart") : String.localized("menu_sign_chart");
+        let ethicalChartItem = OTMenuItem(title: chartTitle,
                                           iconName: "ethicalChart")
         ethicalChartItem?.tag = menuItemIndexType.ethicalChart.rawValue
         
@@ -135,7 +153,9 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
                                     iconName: "")
         logoutItem?.tag = menuItemIndexType.logout.rawValue
         
-        menuItems.append(addHoursItem!)
+        if self.currentUser?.privateCircles()?.count ?? 0 > 0 {
+            menuItems.append(addHoursItem!)
+        }
         menuItems.append(contactItem!)
         menuItems.append(donnationItem!)
         menuItems.append(howIsUsedItem!)
@@ -236,7 +256,7 @@ extension OTPfpMenuViewController: UITableViewDelegate {
             self.loadAbout()
             break
         case menuItemIndexType.ethicalChart.rawValue:
-            let url = URL(string: "https://entourage-asso.typeform.com/to/uBxsHI?user_id=" + UserDefaults.standard.currentUser.sid.stringValue)
+            let url = URL(string: CHARTE_LINK_FORMAT_PFP + UserDefaults.standard.currentUser.sid.stringValue)
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
             break
         case menuItemIndexType.howTo.rawValue:

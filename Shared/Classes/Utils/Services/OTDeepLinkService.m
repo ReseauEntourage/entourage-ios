@@ -54,12 +54,14 @@
         stateInfo = [OTFeedItemFactory createEntourageForGroupType:groupType andId:feedItemId];
     }
     
-    [stateInfo loadWithSuccess3:^(OTFeedItem *feedItem) {
-        [SVProgressHUD dismiss];
-        [self prepareControllers:feedItem];
-    } error:^(NSError *error) {
-        [SVProgressHUD dismiss];
-    }];
+    if (stateInfo && feedItemId) {
+        [stateInfo loadWithSuccess3:^(OTFeedItem *feedItem) {
+            [SVProgressHUD dismiss];
+            [self prepareControllers:feedItem];
+        } error:^(NSError *error) {
+            [SVProgressHUD dismiss];
+        }];
+    }
 }
 
 - (void)navigateToFeedWithStringId: (NSString *)feedItemId {

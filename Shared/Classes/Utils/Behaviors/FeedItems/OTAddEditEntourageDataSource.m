@@ -20,7 +20,7 @@
 
 + (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
                                entourage:(OTEntourage*)entourage {
-    if ([entourage isOuting] && [OTAppConfiguration shouldShowEventPrivacyDisclaimerOnCreation]) {
+    if ([entourage isOuting] && [OTAppConfiguration shouldShowEntouragePrivacyDisclaimerOnCreation:entourage]) {
         return 5;
     }
     
@@ -34,7 +34,8 @@
 + (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                      entourage:(OTEntourage*)entourage
-                  locationText:(NSString*)locationText {
+                  locationText:(NSString*)locationText
+                      delegate:(id<OTAddEditEntourageDelegate>)delegate {
     
     if ([entourage isOuting]) {
         NSString *identifier = @"EntourageCell";
@@ -69,7 +70,10 @@
                 break;
             case 4:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EntouragePrivacyCell"];
-                [((OTEntourageEditItemCell*)cell) configureWithSwitchPublicState:YES];
+                [((OTEntourageEditItemCell*)cell) configureWithSwitchPublicState:entourage.isPublic.boolValue entourage:entourage];
+                [((OTEntourageEditItemCell*)cell).privacySwitch
+                 addTarget:delegate
+                 action:@selector(editEntourageEventConfidentiality:) forControlEvents:UIControlEventValueChanged];
                 break;
             default:
                 break;

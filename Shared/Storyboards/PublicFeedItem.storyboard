@@ -203,7 +203,7 @@
                                                     <outlet property="lblDisplayName" destination="I3B-dM-6Ut" id="K4B-lD-XvP"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SummaryCell" rowHeight="91" id="Xwd-MU-j54" customClass="OTSummaryInfoCell">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SummaryCell" rowHeight="91" id="Xwd-MU-j54" customClass="OTSummaryInfoCell">
                                                 <rect key="frame" x="0.0" y="200" width="383" height="91"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xwd-MU-j54" id="A2q-7C-D6N">
@@ -270,6 +270,16 @@
                                                                 <constraint firstAttribute="height" constant="19" id="azt-gf-rtm"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2l-7S-QCe">
+                                                            <rect key="frame" x="327" y="49" width="46" height="39"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="46" id="Pm4-Xc-bCW"/>
+                                                                <constraint firstAttribute="height" constant="39" id="ZWk-eN-fer"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <action selector="scrollToMembers:" destination="fid-Iu-R1a" eventType="touchUpInside" id="ABA-Ic-ECd"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="KaD-Co-GmI" firstAttribute="top" secondItem="A2q-7C-D6N" secondAttribute="top" constant="11" id="2ye-0y-TQB"/>
@@ -290,6 +300,8 @@
                                                         <constraint firstItem="ZOB-K8-3My" firstAttribute="leading" secondItem="KaD-Co-GmI" secondAttribute="leading" id="i7C-bD-Uhz"/>
                                                         <constraint firstItem="Q8P-B0-Gly" firstAttribute="centerY" secondItem="4QV-vH-V9y" secondAttribute="centerY" id="lYW-Wz-Ghn"/>
                                                         <constraint firstItem="xDt-dA-Asj" firstAttribute="leading" secondItem="ZOB-K8-3My" secondAttribute="leading" id="m2o-3Y-Ktm"/>
+                                                        <constraint firstAttribute="bottom" secondItem="F2l-7S-QCe" secondAttribute="bottom" constant="3" id="mQV-t3-lQt"/>
+                                                        <constraint firstAttribute="trailing" secondItem="F2l-7S-QCe" secondAttribute="trailing" constant="10" id="nUG-gn-0BJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="RcA-br-gXo" secondAttribute="trailing" constant="15" id="nX9-QU-SFg"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -510,7 +522,6 @@
                 </customObject>
                 <customObject id="3hI-5m-VDv" customClass="OTJoinBehavior">
                     <connections>
-                        <action selector="updateStatusToPending" destination="fid-Iu-R1a" eventType="valueChanged" id="dDc-Km-KRO"/>
                         <outlet property="owner" destination="fid-Iu-R1a" id="402-lY-Prx"/>
                     </connections>
                 </customObject>

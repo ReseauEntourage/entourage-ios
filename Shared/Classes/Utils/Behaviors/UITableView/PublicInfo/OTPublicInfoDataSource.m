@@ -105,8 +105,16 @@
 }
 
 - (void)updateItems:(NSMutableArray *)items withStatusCellForItem:(OTFeedItem*)feedItem {
+    
+    if ([feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED] &&
+        [feedItem.status isEqualToString:FEEDITEM_STATUS_CLOSED]) {
+        return;
+        
+    }
+    
     // EMA-2348
-    if (![feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED]) {
+    if (![feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED] ||
+        [feedItem.status isEqualToString:FEEDITEM_STATUS_CLOSED]) {
         // Change status item
         OTFeedItem *changeStatus = feedItem.copy;
         changeStatus.identifierTag = @"changeStatus";

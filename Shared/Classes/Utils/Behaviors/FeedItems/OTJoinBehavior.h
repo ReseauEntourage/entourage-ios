@@ -14,6 +14,7 @@
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 
 - (BOOL)join:(OTFeedItem *)item;
+- (void)startJoin;
 - (BOOL)prepareSegueForMessage:(UIStoryboardSegue *)segue;
 
 @end

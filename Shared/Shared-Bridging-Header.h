@@ -9,6 +9,7 @@
 #import "OTTapViewBehavior.h"
 #import "OTCloseKeyboardOnTapBehavior.h"
 #import "OTUserService.h"
+#import "OTAuthService.h"
 #import "NSUserDefaults+OT.h"
 #import "OTConsts.h"
 #import "UIColor+pfp.h"

@@ -37,6 +37,9 @@
         if ([[tMessage messageType] isEqualToString:@"outing"]) {
             return MessageCellTypeEventCreated;
         }
+        else if ([[tMessage messageType] isEqualToString:@"status_update"]) {
+            return MessageCellTypeItemClosed;
+        }
         
         return [self.currentUser.sid isEqual:tMessage.uID] ? MessageCellTypeSent : MessageCellTypeReceived;
         

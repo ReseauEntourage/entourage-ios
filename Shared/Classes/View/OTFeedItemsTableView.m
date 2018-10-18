@@ -63,6 +63,7 @@
 @property (nonatomic, strong) UILabel *lblEmptyTableReason;
 @property (nonatomic, weak) IBOutlet UILabel *infoLabel;
 @property (nonatomic) CGFloat headerMapViewHeight;
+@property (nonatomic) BOOL showFilteringHeader;
 
 @end
 
@@ -158,6 +159,8 @@
         h += panViewHeight;
     }
     
+    self.showFilteringHeader = showFilter;
+    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, h)];
     mapView.frame = headerView.bounds;
     
@@ -178,16 +181,9 @@
     showCurrentLocationButton.layer.cornerRadius = buttonSize / 2;
     [showCurrentLocationButton addTarget:self action:@selector(requestCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:mapView];
-    [headerView addSubview:showCurrentLocationButton];
+    //[headerView addSubview:showCurrentLocationButton];
     [headerView sendSubviewToBack:mapView];
-    [headerView bringSubviewToFront:showCurrentLocationButton];
-    
-    //    self.shadowView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 156.0f , headerView.frame.size.width + 130.0f, 0.0f)];
-    //    CAGradientLayer *gradient = [CAGradientLayer layer];
-    //    gradient.frame = self.shadowView.bounds;
-    //    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)([UIColor colorWithRed:0 green:0 blue:0 alpha:.2].CGColor),  nil];
-    //    [self.shadowView.layer insertSublayer:gradient atIndex:1];
-    //    [headerView addSubview:self.shadowView];
+    //[headerView bringSubviewToFront:showCurrentLocationButton];
     
     // Add pan view used to drag to show map
     [self setupPanToShowMapView:panViewHeight mapHeight:mapHeight];
@@ -199,24 +195,6 @@
     }
     
     [headerView addSubview:self.panToShowMapView];
-    
-    //    NSDictionary *viewsDictionary = @{@"shadow":self.shadowView};
-    //    NSArray *constraint_height = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow(4)]"
-    //                                                                         options:0
-    //                                                                         metrics:nil
-    //                                                                           views:viewsDictionary];
-    //    NSArray *constraint_pos_horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(-8)-[shadow]-(-8)-|"
-    //                                                                                 options:0
-    //                                                                                 metrics:nil
-    //                                                                                   views:viewsDictionary];
-    //    NSArray *constraint_pos_bottom = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[shadow]-0-|"
-    //                                                                             options:0
-    //                                                                             metrics:nil
-    //                                                                               views:viewsDictionary];
-    //    self.shadowView.translatesAutoresizingMaskIntoConstraints = NO;
-    //    [self.shadowView addConstraints:constraint_height];
-    //    [headerView addConstraints:constraint_pos_horizontal];
-    //    [headerView addConstraints:constraint_pos_bottom];
     
     return headerView;
 }
@@ -349,6 +327,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.tableHeaderView == nil) {
+        [self.feedItemsDelegate mapDidBecomeVisible:NO];
         return;
     }
     
@@ -365,8 +344,8 @@
     __block CGRect headerFrame = self.tableHeaderView.frame;
 
     if (scrollOffset < 0) {
-        headerFrame.origin.y = scrollOffset;// MIN(kMapHeaderOffsetY - ((scrollOffset / 3)), 0);
-        headerFrame.size.height = MAPVIEW_HEIGHT /*+ [self feedsFilterHeaderHeight]*/ - scrollOffset;
+        headerFrame.origin.y = scrollOffset;
+        headerFrame.size.height = MAPVIEW_HEIGHT - scrollOffset;
     }
     else //scrolling up
     {
@@ -374,6 +353,17 @@
     }
     
     self.tableHeaderView.subviews[0].frame = headerFrame;
+    
+    CGFloat topOffset = 84;
+    if (@available(iOS 11.0, *)) {
+        topOffset += self.safeAreaInsets.top;
+    }
+    if (self.showFilteringHeader) {
+        topOffset += [self feedsFilterHeaderHeight];
+    }
+    BOOL mapVisible = headerFrame.size.height > 0 &&
+        self.contentOffset.y < headerFrame.size.height - topOffset;
+    [self.feedItemsDelegate mapDidBecomeVisible: mapVisible];
 }
 
 /********************************************************************************/
@@ -493,7 +483,9 @@
     else if ([self isAnnouncementItem:item]) {
         OTAnnouncementCell *announcementCell = (OTAnnouncementCell *)cell;
         [announcementCell configureWith:(OTAnnouncement *)item completion:^{
-            [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            if (self.items.count > indexPath.row && [self.visibleCells containsObject:announcementCell]) {
+                [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
         }];
     }
     else {

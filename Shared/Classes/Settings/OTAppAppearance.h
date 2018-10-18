@@ -75,4 +75,8 @@
 + (NSString*)includePastEventsFilterTitle;
 + (NSString*)includePastEventsFilterTitleKey;
 + (NSString*)inviteSubtitleText:(OTFeedItem*)feedItem;
++ (NSString*)noMessagesDescription;
++ (NSAttributedString*)closedFeedChatItemMessageFormattedText:(OTFeedItemMessage*)message;
++ (NSString*)entourageConfidentialityDescription:(OTEntourage*)entourage
+                                        isPublic:(BOOL)isPublic;
 @end

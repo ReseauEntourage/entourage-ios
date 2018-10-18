@@ -23,5 +23,6 @@
 - (void)editCategory:(OTEntourage *)entourage;
 - (void)editAddress:(OTEntourage *)entourage;
 - (void)editDate:(OTEntourage *)entourage;
+- (void)editEventConfidentiality:(OTEntourage *)entourage;
 
 @end
