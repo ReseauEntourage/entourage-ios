@@ -23,6 +23,7 @@
 - (void)showUserProfile:(NSNumber*)userId;
 - (void)doJoinRequest:(OTFeedItem*)feedItem;
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem;
+- (void)mapDidBecomeVisible:(BOOL)visible;
 
 // Filtering
 - (void)showEventsOnly;

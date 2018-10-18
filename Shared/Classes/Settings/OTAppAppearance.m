@@ -639,6 +639,9 @@
     }
     
     if ([feedItem isKindOfClass:[OTEntourage class]]) {
+        if ([feedItem isOuting]) {
+            return OTLocalizedString(@"join_event_lbl");
+        }
         return OTLocalizedString(@"join_entourage_lbl");
     }
     else {
@@ -849,5 +852,37 @@
     return OTLocalizedString(@"lostCodeMessage2");
 }
 
++ (NSString*)noMessagesDescription {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return OTLocalizedString(@"pfp_no_messages_description");
+    }
+    
+    return OTLocalizedString(@"no_messages_description");
+}
+
++ (NSAttributedString*)closedFeedChatItemMessageFormattedText:(OTFeedItemMessage*)message {
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:message.userName attributes:@{NSForegroundColorAttributeName: [ApplicationTheme shared].backgroundThemeColor}];
+    NSAttributedString *infoAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@", message.text] attributes:@{NSForegroundColorAttributeName: [UIColor appGreyishColor]}];
+    NSMutableAttributedString *nameInfoAttrString = nameAttrString.mutableCopy;
+    [nameInfoAttrString appendAttributedString:infoAttrString];
+    
+    return nameInfoAttrString;
+}
+
++ (NSString*)entourageConfidentialityDescription:(OTEntourage*)entourage
+                                        isPublic:(BOOL)isPublic {
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        if (isPublic) {
+            return OTLocalizedString(@"pfp_event_confidentiality_description_public");
+        }
+        return OTLocalizedString(@"pfp_event_confidentiality_description_private");
+    } else {
+        if (isPublic) {
+            return OTLocalizedString(@"event_confidentiality_description_public");
+        }
+        
+        return OTLocalizedString(@"event_confidentiality_description_private");
+    }
+}
 
 @end

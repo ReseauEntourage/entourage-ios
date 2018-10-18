@@ -24,6 +24,7 @@
     self.dataSource.tableView.tableFooterView = [UIView new];
     self.dataSource.tableView.delegate = self;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id item = [self getItemAtIndexPath:indexPath];
     

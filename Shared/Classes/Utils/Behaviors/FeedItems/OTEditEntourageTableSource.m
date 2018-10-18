@@ -70,7 +70,8 @@
     return [OTAddEditEntourageDataSource tableView:tableView
                              cellForRowAtIndexPath:indexPath
                                          entourage:self.entourage
-                                      locationText:self.locationText];
+                                      locationText:self.locationText
+                                          delegate:self];
 }
 
 #pragma mark - UITableViewDelegate
@@ -119,6 +120,12 @@
 - (void)editEntourageDate
 {
     [self.editEntourageNavigation editDate:self.entourage];
+}
+
+- (void)editEntourageEventConfidentiality:(UISwitch*)sender {
+    self.entourage.isPublic = @(sender.on);
+    [self.editEntourageNavigation editEventConfidentiality:self.entourage];
+    [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [OTAddEditEntourageDataSource numberOfSectionsInTableView:self.tblEditEntourage entourage:self.entourage])] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)updateTexts {

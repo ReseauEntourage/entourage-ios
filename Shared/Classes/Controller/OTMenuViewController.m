@@ -21,7 +21,6 @@
 #import "OTMenuTableViewCell.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "UIButton+entourage.h"
-#import "NSUserDefaults+OT.h"
 #import "NSBundle+entourage.h"
 #import "OTOngoingTourService.h"
 #import "UILabel+entourage.h"
@@ -34,6 +33,7 @@
 #import "OTAboutViewController.h"
 #import "OTSafariService.h"
 #import "OTAppConfiguration.h"
+#import "OTAuthService.h"
 #import "entourage-Swift.h"
 
 #define SOLIDARITY_GUIDE_INDEX 2
@@ -102,7 +102,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self.tapModifyBehavior initialize];
     [self.tapAssociation initialize];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-	self.menuItems = [self createMenuItems];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
    
@@ -129,6 +128,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     [OTLogger logEvent:@"OpenMenu"];
+    [self loadUser];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
     [OTAppConfiguration updateAppearanceForMainTabBar];
@@ -142,6 +142,21 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+}
+
+- (void)loadUser {
+    [SVProgressHUD show];
+    [[OTAuthService new] getDetailsForUser:self.currentUser.sid success:^(OTUser *user) {
+        [SVProgressHUD dismiss];
+        self.currentUser = user;
+        self.menuItems = [self createMenuItems];
+        [self.tableView reloadData];
+        
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"user_profile_error")];
+        self.menuItems = [self createMenuItems];
+        [self.tableView reloadData];
+    }];
 }
 
 /**************************************************************************************************/
@@ -243,8 +258,15 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
             NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
             
             if  ( ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")]) ||
-                 ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")]) ||
                 [menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")] ) {
+                [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
+            }
+            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")]) {
+                NSString *userId = self.currentUser.sid.stringValue;
+                NSString *url = [NSString stringWithFormat:CHARTE_LINK_FORMAT_PUBLIC, userId];
+                if ([self.currentUser isPro]) {
+                    url = [NSString stringWithFormat:CHARTE_LINK_FORMAT_PRO, userId];
+                }
                 [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
             }
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_join")]) {
@@ -345,7 +367,8 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                                                  segueIdentifier:OTMenuViewControllerSegueMenuSocialIdentifier];
     [menuItems addObject:itemAtd];
     
-    OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_chart")
+    NSString *chartTitle = [self.currentUser hasSignedEthicsChart] ? OTLocalizedString(@"menu_read_chart") : OTLocalizedString(@"menu_sign_chart");
+    OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:chartTitle
                                                      iconName: @"chart"
                                                    identifier:CHARTE_LINK_ID];
     [menuItems addObject:itemChart];

@@ -20,9 +20,14 @@
 @property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSString *entourage_type;
 @property (nonatomic, strong) OTCategory *categoryObject;
+@property (nonatomic, strong) NSNumber *isPublic;
+@property (nonatomic, strong) NSNumber *consentObtained;
 
 - (instancetype)initWithGroupType:(NSString*)groupType;
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebService;
+
+- (BOOL)isContribution;
+- (BOOL)isAskForHelp;
 
 @end

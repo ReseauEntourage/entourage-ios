@@ -38,6 +38,8 @@
 #define kWSKeyName @"name"
 #define kWSKeyDescription @"description"
 #define kWSKeyCategory @"display_category"
+#define kWSKeyPublic @"public"
+#define kWSKeyConsentObtained @"recipient_consent_obtained"
 
 #define kWSKeyBody @"body"
 #define kWSKeyAction @"action"

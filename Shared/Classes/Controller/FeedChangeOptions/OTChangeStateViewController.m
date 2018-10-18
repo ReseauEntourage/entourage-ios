@@ -55,10 +55,17 @@
     
     BOOL canEdit = [stateInfo canEdit];
     BOOL canCancelJoin = [stateInfo canCancelJoinRequest];
+    
     BOOL canReport = [self.feedItem isKindOfClass:[OTEntourage class]] &&
         ![USER_ID isEqualToNumber:self.feedItem.author.uID] &&
         !canCancelJoin;
+    
     BOOL canShare = ![self.feedItem.joinStatus isEqualToString:JOIN_ACCEPTED];
+    if ([self.feedItem.status isEqualToString:ENTOURAGE_STATUS_SUSPENDED]) {
+        // EMA-2422
+        canShare = NO;
+    }
+    
     BOOL canPromote = [currentUser isCoordinator] && [self.feedItem isOuting];
     
     [self.toggleEditBehavior toggle:canEdit animated:NO];
@@ -90,14 +97,14 @@
 
 - (IBAction)close:(id)sender {
     [self prepareForClosing];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (IBAction)edit:(id)sender {
     [OTLogger logEvent:@"EditEntourageConfirm"];
     [self prepareForClosing];
     
-    [self dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:NO completion:^{
         [self.editEntourageBehavior doEdit:(OTEntourage *)self.feedItem];
     }];
 }

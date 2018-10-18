@@ -62,13 +62,25 @@
         
     } else {
         OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
-        UITabBarController *rootController = (UITabBarController*)appDelegate.window.rootViewController;
-        UINavigationController *navController = [rootController viewControllers].firstObject;
-        if (navController.topViewController) {
-            [navController presentViewController:safariController animated:YES completion:nil];
-        }
-        else {
-            [rootController presentViewController:safariController animated:YES completion:nil];
+        id root = appDelegate.window.rootViewController;
+        if ([root isKindOfClass:[UITabBarController class]]) {
+            UITabBarController *tabBarController = (UITabBarController*)root;
+            UINavigationController *navController = [tabBarController viewControllers].firstObject;
+            
+            if (navController.topViewController) {
+                [navController presentViewController:safariController animated:YES completion:nil];
+            }
+            else {
+                [navController presentViewController:safariController animated:YES completion:nil];
+            }
+        } else if ([root isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navController = (UINavigationController*)root;
+            if (navController.topViewController) {
+                [navController presentViewController:safariController animated:YES completion:nil];
+            }
+            else {
+                [navController presentViewController:safariController animated:YES completion:nil];
+            }
         }
     }
 }

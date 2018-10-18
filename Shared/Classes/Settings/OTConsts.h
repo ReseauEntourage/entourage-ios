@@ -53,6 +53,7 @@
 #define kNotificationProfilePictureUpdated "NotificationProfilePictureUpdated"
 #define kNotificationAboutMeUpdated "NotificationAboutMeUpdated"
 #define kNotificationSupportedPartnerUpdated "NotificationSupportedPartnerUpdated"
+#define kNotificationJoinRequestSent @"NotificationJoinRequestSent"
 #define kNotificationEntourageCreated @"NotificationEntourageCreated"
 #define kNotificationEntourageChanged @"NotificationEntourageChanged"
 #define kNotificationEntourageChangedEntourageKey @"NotificationEntourageChangedEntourageKey"
@@ -72,6 +73,7 @@
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
 #define ABOUT_TWITTER_URL @"https://twitter.com/r_entourage"
 #define ABOUT_CGU_URL @"http://www.entourage.social/cgu/index.html"
+#define ABOUT_CGU_REDIRECT_FORMAT @"%@links/terms/redirect?token=%@"
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
 #define ABOUT_POLICY_URL @"https://www.entourage.social/politique-de-confidentialite"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
@@ -92,11 +94,16 @@
 #define GOAL_LINK_ID @"action-examples"
 #define DONATE_LINK_ID @"donation"
 #define ATD_LINK_ID @"atd-partnership"
-#define CHARTE_LINK_ID @"ethics-charter"
 #define FAQ_LINK_ID @"faq"
 #define SUGGESTION_LINK_ID @"feedback"
 #define JOIN_LINK_ID @"volunteering"
 #define JOIN_URL @"https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
+
+// Chart Ethique
+#define CHARTE_LINK_ID @"ethics-charter"
+#define CHARTE_LINK_FORMAT_PUBLIC @"https://entourage-asso.typeform.com/to/whN9kq?user_id=%@"
+#define CHARTE_LINK_FORMAT_PRO @"https://entourage-asso.typeform.com/to/LI7viw?user_id=%@"
+#define CHARTE_LINK_FORMAT_PFP @"https://entourage-asso.typeform.com/to/uBxsHI?user_id="
 
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
 #define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
@@ -113,6 +120,8 @@
 #define ENTOURAGE_DEMANDE @"ask_for_help"
 #define ENTOURAGE_CONTRIBUTION @"contribution"
 #define ENTOURAGE_STATUS_OPEN @"open"
+#define ENTOURAGE_STATUS_SUSPENDED @"suspended"
+#define ENTOURAGE_TYPE_PUBLIC @"public"
 
 #define GROUP_TYPE_ACTION @"action"
 #define GROUP_TYPE_NEIGHBORHOOD @"neighborhood"

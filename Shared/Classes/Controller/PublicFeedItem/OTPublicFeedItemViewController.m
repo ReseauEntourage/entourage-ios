@@ -25,6 +25,8 @@
 #import "entourage-Swift.h"
 #import "NSUserDefaults+OT.h"
 #import "UIImage+processing.h"
+#import "OTActiveFeedItemViewController.h"
+#import "UIStoryboard+entourage.h"
 
 @interface OTPublicFeedItemViewController ()
 
@@ -68,6 +70,9 @@
     [self setupToolbarButtons];
     [self setJoinLabelAndButtonForItem:self.feedItem];
     [self.dataSource loadDataFor:self.feedItem];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateStatus:) name:kNotificationJoinRequestSent object:nil];
 }
 
 - (void)configureTitleView {
@@ -98,6 +103,19 @@
 - (IBAction)showUserProfile:(id)sender {
     [OTLogger logEvent:@"UserProfileClick"];
     [self.userProfileBehavior showProfile:self.feedItem.author.uID];
+}
+
+- (void)showDiscussionPage {
+    OTActiveFeedItemViewController *activeFeedItemViewController = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTActiveFeedItemViewController"];
+    activeFeedItemViewController.feedItem = self.feedItem;
+    [self.navigationController pushViewController:activeFeedItemViewController animated:YES];
+}
+
+- (IBAction)scrollToMembers:(id)sender {
+    [OTLogger logEvent:@"ScrolltoMembersList"];
+    
+    CGRect frame = [self.dataSource.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    [self.dataSource.tableView setContentOffset:CGPointMake(0, frame.origin.y) animated:YES];
 }
 
 #pragma mark - Navigation
@@ -200,7 +218,26 @@
     self.feedItem.joinStatus = JOIN_PENDING;
     [self.statusBehavior updateWith:self.feedItem];
     [self.toggleJoinViewBehavior toggle:NO];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
+}
+
+- (IBAction)updateStatusToAccepted {
+    self.feedItem.joinStatus = JOIN_ACCEPTED;
+    [self.statusBehavior updateWith:self.feedItem];
+    [self.toggleJoinViewBehavior toggle:NO];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationReloadData object:nil];
+    [self showDiscussionPage];
+}
+
+- (void)updateStatus:(NSNotification*)notification {
+    NSString *status = [notification.userInfo valueForKey:kWSStatus];
+    if ([status isEqualToString:JOIN_PENDING]) {
+        [self updateStatusToPending];
+    } else if ([status isEqualToString:JOIN_ACCEPTED]) {
+        [self updateStatusToAccepted];
+    }
 }
 
 - (IBAction)feedItemStateChanged {
@@ -213,9 +250,11 @@
     self.btnJoin.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     [self.btnJoin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.lblJoin setText: [OTAppAppearance joinEntourageLabelTitleForFeedItem:feedItem]];
-    [self.btnJoin setTitle: [OTAppAppearance joinEntourageButtonTitleForFeedItem:feedItem] forState:UIControlStateNormal];
+    [self.btnJoin setTitle: [OTAppAppearance joinEntourageButtonTitleForFeedItem:feedItem].uppercaseString forState:UIControlStateNormal];
     
-    BOOL hideFooter = ![self.feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED];
+    BOOL hideFooter = ![self.feedItem.joinStatus isEqualToString:JOIN_NOT_REQUESTED] ||
+        [self.feedItem.status isEqualToString:FEEDITEM_STATUS_CLOSED];
+    
     self.toggleJoinViewBehavior.toggledView.hidden = hideFooter;
     self.statusBehavior.statusLineMarker.hidden = hideFooter;
     self.statusBehavior.btnStatus.hidden = hideFooter;
