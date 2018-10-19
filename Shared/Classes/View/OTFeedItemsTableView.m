@@ -28,7 +28,7 @@
 #import "OTAnnouncementCell.h"
 #import "entourage-Swift.h"
 
-#define LOAD_MORE_DRAG_OFFSET 50
+#define LOAD_MORE_DRAG_OFFSET 100
 
 #define MAPVIEW_REGION_SPAN_X_METERS 500
 #define MAPVIEW_REGION_SPAN_Y_METERS 500
@@ -314,7 +314,12 @@
     float h = size.height;
     float reload_distance = LOAD_MORE_DRAG_OFFSET;
     
-    if (y > h + reload_distance) {
+    CGFloat topOffset = 84;
+    if (@available(iOS 11.0, *)) {
+        topOffset += self.safeAreaInsets.top;
+    }
+    
+    if (y > h - reload_distance - topOffset) {
         dispatch_async(dispatch_get_main_queue(), ^() {
             if (self.feedItemsDelegate &&
                 [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {

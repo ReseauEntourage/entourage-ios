@@ -251,7 +251,7 @@ numéro de portable? </string>
                                 <color key="backgroundColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GL7-KN-5la">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="481"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwn-6G-LEa">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="176"/>
@@ -363,7 +363,7 @@ numéro de portable? </string>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="top" secondItem="pvY-e5-lmP" secondAttribute="bottom" constant="8" id="E3B-b7-DrO"/>
                                     <constraint firstItem="m2V-xB-zfa" firstAttribute="top" secondItem="sCt-6F-DVv" secondAttribute="bottom" constant="8" id="JVm-ht-njX"/>
                                     <constraint firstItem="pvY-e5-lmP" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="Khu-ZV-bdM"/>
-                                    <constraint firstAttribute="height" constant="481" id="L4X-iB-2rw"/>
+                                    <constraint firstAttribute="height" constant="379" id="L4X-iB-2rw"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="leading" secondItem="M8f-fn-OPr" secondAttribute="leading" id="N8u-Bz-Fxe"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="top" secondItem="wo3-RT-UKL" secondAttribute="top" id="Qxg-Jq-CSr"/>
                                     <constraint firstAttribute="trailing" secondItem="hta-Lz-w6m" secondAttribute="trailing" constant="51" id="Xw3-Dl-LFl"/>
@@ -373,7 +373,7 @@ numéro de portable? </string>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="top" secondItem="M8f-fn-OPr" secondAttribute="bottom" constant="8" symbolic="YES" id="fNY-1Z-aZc"/>
                                     <constraint firstItem="M8f-fn-OPr" firstAttribute="trailing" secondItem="m2V-xB-zfa" secondAttribute="trailing" id="j31-N6-JaM"/>
                                     <constraint firstAttribute="trailing" secondItem="YIF-kq-zRi" secondAttribute="trailing" constant="51" id="k9U-g7-J2j"/>
-                                    <constraint firstAttribute="bottom" secondItem="hta-Lz-w6m" secondAttribute="bottom" constant="104" id="lWR-7o-Z08"/>
+                                    <constraint firstAttribute="bottom" secondItem="hta-Lz-w6m" secondAttribute="bottom" constant="2" id="lWR-7o-Z08"/>
                                     <constraint firstItem="hta-Lz-w6m" firstAttribute="top" secondItem="YIF-kq-zRi" secondAttribute="bottom" id="mpX-it-1bU"/>
                                     <constraint firstItem="qwn-6G-LEa" firstAttribute="top" secondItem="GL7-KN-5la" secondAttribute="top" id="oPp-0U-tnU"/>
                                     <constraint firstItem="qwn-6G-LEa" firstAttribute="centerX" secondItem="wo3-RT-UKL" secondAttribute="centerX" constant="18" id="sOs-ck-x7i"/>
@@ -385,7 +385,7 @@ numéro de portable? </string>
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH7-Ij-WiF" customClass="OnBoardingButton" customModule="Ent_Beta" customModuleProvider="target">
-                                <rect key="frame" x="301" y="489" width="50" height="50"/>
+                                <rect key="frame" x="301" y="387" width="50" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="GcX-1m-hTj"/>
