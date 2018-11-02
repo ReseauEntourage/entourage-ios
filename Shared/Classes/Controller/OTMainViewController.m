@@ -101,6 +101,7 @@
 <
     UIGestureRecognizerDelegate,
     UIScrollViewDelegate,
+    UITabBarControllerDelegate,
     OTOptionsDelegate,
     OTFeedItemsTableViewDelegate,
     OTTourCreatorDelegate,
@@ -168,6 +169,7 @@
 @property (nonatomic) double entourageScale;
 @property (nonatomic) BOOL encounterFromTap;
 @property (nonatomic) BOOL forceReloadingFeeds;
+@property (nonatomic) BOOL mustBeSwitchedToGuide;
 
 @end
 
@@ -183,6 +185,19 @@
     }
     
     [self configureActionsButton];
+    UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].keyWindow.rootViewController ;
+    
+    [tabBarController setDelegate:self];
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController
+ didSelectViewController:(UIViewController *)viewController;
+{
+    printf("Select row");
+    if (tabBarController.selectedIndex == 1) {
+        OTMainViewController *guideMapViewController = viewController.childViewControllers[0];
+        guideMapViewController.mustBeSwitchedToGuide = YES;
+    }
 }
     
 - (void)configureActionsButton {
@@ -256,8 +271,12 @@
     self.tableView.feedItemsDelegate = self;
     [self configureMapView];
     
-    [self switchToNewsfeed];
-    [self reloadFeeds];
+    if (self.mustBeSwitchedToGuide) {
+        [self switchToGuide];
+    } else {
+        [self switchToNewsfeed];
+        [self reloadFeeds];
+    }
     
     self.backToNewsFeedsButton.hidden = YES;
     [self.backToNewsFeedsButton addTarget:self
