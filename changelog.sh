@@ -23,7 +23,8 @@ else
     previous_tag="Ent_5.3.971"
     previous_tag="Ent_5.4.974"
     previous_tag="Ent_5.4.1.990"
-    #previous_tag="Ent_5.7.1015"
+    previous_tag="Ent_5.5.1002"
+    previous_tag="Ent_5.7.1015"
 
     filename="GITCHANGELOG-FROM-$previous_tag-TO-$latest_tag.md"
     echo "#Changelog" > $filename
