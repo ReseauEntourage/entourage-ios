@@ -124,8 +124,6 @@
 @property (nonatomic, weak) IBOutlet OTEditEncounterBehavior        *editEncounterBehavior;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior      *newsFeedsSourceBehavior;
 @property (nonatomic, weak) IBOutlet OTTourCreatorBehavior          *tourCreatorBehavior;
-@property (nonatomic, weak) IBOutlet UIView                         *showSolidarityGuideView;
-@property (nonatomic, weak) IBOutlet UILabel                        *solidarityGuideLabel;
 @property (nonatomic, strong) OTMapView                             *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer                *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D                        encounterLocation;
@@ -236,8 +234,6 @@
 }
 
 - (void)setup {
-    self.solidarityGuideLabel.text = OTLocalizedString(@"map_options_show_guide");
-    
     self.isFirstLoad = YES;
     self.solidarityGuidePoisDisplayed = NO;
     self.heatzonesCollectionDataSource.heatzonesDelegate = self;
@@ -483,8 +479,6 @@
 
     [self clearMap];
     [self feedMapWithFeedItems];
-    
-    self.showSolidarityGuideView.hidden = !OTAppConfiguration.supportsSolidarityGuideFunctionality;
     
     [self showFeedsList];
     [self configureNavigationBar];
@@ -1434,7 +1428,6 @@
     
     [OTLogger logEvent:@"Screen06_1FeedView"];
     [self.toggleCollectionView toggle:NO animated:NO];
-    self.showSolidarityGuideView.hidden = YES;
     [self.noDataBehavior hideNoData];
     [self.guideInfoBehavior hide];
     
@@ -1461,18 +1454,10 @@
     //self.solidarityGuidePoisDisplayed = NO;
     
     if (self.poisMapDelegate.isActive) {
-        [self.showSolidarityGuideView setHidden: YES];
         [self.toggleCollectionView toggle:NO animated:NO];
     } else {
         [OTLogger logEvent:@"Screen06_2MapView"];
         self.solidarityGuidePoisDisplayed = NO;
-        
-        // hide the show solidarity guides overlay if not enabled
-        if (!OTAppConfiguration.supportsSolidarityGuideFunctionality) {
-            [self.showSolidarityGuideView setHidden:YES];
-        } else {
-            [self.showSolidarityGuideView setHidden:NO];
-        }
     }
     
     if (self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0) {
