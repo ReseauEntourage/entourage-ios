@@ -5,22 +5,22 @@
 	<key>social.entourage.entourageios</key>
 	<dict>
 		<key>ApiKey</key>
-		<string>0755d181cdeaacecfd042676</string>
+		<string>991ad6dcc3fa6804a58fe24b</string>
 	</dict>
 	<key>social.entourage.entourageios.beta</key>
 	<dict>
 		<key>ApiKey</key>
-		<string>0755d181cdeaacecfd042676</string>
+		<string>991ad6dcc3fa6804a58fe24b</string>
 	</dict>
 	<key>social.entourage.entourageios.pfp</key>
 	<dict>
 		<key>ApiKey</key>
-		<string>01c4a4deacf9db7d25058dda</string>
+		<string>9d52326aa7d9fe73aa1b3d0f</string>
 	</dict>
 	<key>social.entourage.entourageios.pfp.beta</key>
 	<dict>
 		<key>ApiKey</key>
-		<string>01c4a4deacf9db7d25058dda</string>
+		<string>9d52326aa7d9fe73aa1b3d0f</string>
 	</dict>
 </dict>
 </plist>
