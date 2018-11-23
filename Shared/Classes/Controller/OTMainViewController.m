@@ -138,7 +138,6 @@
 @property (nonatomic, weak) IBOutlet UIButton                       *launcherButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *stopButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *createEncounterButton;
-@property (nonatomic, weak) IBOutlet UIButton                       *backToNewsFeedsButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *showCurrentLocationButton;
 @property (nonatomic, strong) NSArray                               *categories;
 @property (nonatomic, strong) NSArray                               *pois;
@@ -273,11 +272,6 @@
         [self switchToNewsfeed];
         [self reloadFeeds];
     }
-    
-    self.backToNewsFeedsButton.hidden = YES;
-    [self.backToNewsFeedsButton addTarget:self
-                                   action:@selector(leaveGuide)
-                         forControlEvents:UIControlEventTouchUpInside];
     
     if (OTSharedOngoingTour.isOngoing ||
         [NSUserDefaults standardUserDefaults].currentOngoingTour != nil) {
@@ -467,7 +461,6 @@
     self.toursMapDelegate.isActive = YES;
     self.solidarityGuidePoisDisplayed = NO;
     self.poisMapDelegate.isActive = [OTAppConfiguration shouldShowPOIsOnFeedsMap];
-    self.backToNewsFeedsButton.hidden = YES;
     
     if (self.toursMapDelegate) {
         [self.mapDelegateProxy.delegates addObject:self.toursMapDelegate];
@@ -489,7 +482,6 @@
     [self.tableView updateItems:self.pois];
 
     self.toursMapDelegate.isActive = NO;
-    self.backToNewsFeedsButton.hidden = NO;
     
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
     if (self.poisMapDelegate) {
