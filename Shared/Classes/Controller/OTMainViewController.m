@@ -101,7 +101,6 @@
 <
     UIGestureRecognizerDelegate,
     UIScrollViewDelegate,
-    UITabBarControllerDelegate,
     OTOptionsDelegate,
     OTFeedItemsTableViewDelegate,
     OTTourCreatorDelegate,
@@ -166,7 +165,6 @@
 @property (nonatomic) double entourageScale;
 @property (nonatomic) BOOL encounterFromTap;
 @property (nonatomic) BOOL forceReloadingFeeds;
-@property (nonatomic) BOOL mustBeSwitchedToGuide;
 
 @end
 
@@ -182,21 +180,9 @@
     }
     
     [self configureActionsButton];
-    UITabBarController *tabBarController = (UITabBarController*)[UIApplication sharedApplication].keyWindow.rootViewController ;
     
-    [tabBarController setDelegate:self];
 }
 
-- (void)tabBarController:(UITabBarController *)tabBarController
- didSelectViewController:(UIViewController *)viewController;
-{
-    printf("Select row");
-    if (tabBarController.selectedIndex == 1) {
-        OTMainViewController *guideMapViewController = viewController.childViewControllers[0];
-        guideMapViewController.mustBeSwitchedToGuide = YES;
-    }
-}
-    
 - (void)configureActionsButton {
     UIImage *closeImage = [[UIImage imageNamed:@"closeOptionWithNoShadow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
@@ -266,13 +252,6 @@
     self.tableView.feedItemsDelegate = self;
     [self configureMapView];
     
-    if (self.mustBeSwitchedToGuide) {
-        [self switchToGuide];
-    } else {
-        [self switchToNewsfeed];
-        [self reloadFeeds];
-    }
-    
     if (OTSharedOngoingTour.isOngoing ||
         [NSUserDefaults standardUserDefaults].currentOngoingTour != nil) {
         [self setupUIForTourOngoing];
@@ -283,6 +262,9 @@
         self.stopButton.hidden = YES;
         self.createEncounterButton.hidden = YES;
     }
+    
+    [self switchToNewsfeed];
+    [self reloadFeeds];
     
     [self.mapDelegateProxy.delegates addObject:self];
     self.entourageScale = 1.0;
@@ -387,9 +369,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.newsFeedsSourceBehavior resume];
     [self.heatzonesCollectionDataSource refresh];
     [OTAppConfiguration updateAppearanceForMainTabBar];
+    
+    if (self.mustBeSwitchedToGuide == YES) {
+        [self switchToGuide];
+    } else {
+        [self.newsFeedsSourceBehavior resume];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
