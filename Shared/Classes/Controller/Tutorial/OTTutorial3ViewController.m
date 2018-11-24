@@ -18,7 +18,7 @@
     self.topView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     self.headerView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:OTLocalizedString(@"Découvrez les conseils pratiques du guide Simple Comme Bonjour depuis le menu en haut à gauche :")];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:OTLocalizedString(@"Découvrez les conseils pratiques du guide Simple Comme Bonjour depuis le menu en bas à droite :")];
     [attributedString addAttributes:@{
                                       NSForegroundColorAttributeName: [ApplicationTheme shared].backgroundThemeColor
                                       } range:NSMakeRange(0, 32)];

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nst-ed-x0I">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nst-ed-x0I">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -62,7 +62,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3A7-3w-D7c">
-                                        <rect key="frame" x="246" y="30" width="54" height="32"/>
+                                        <rect key="frame" x="241" y="30" width="59" height="33"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                         <state key="normal" title="Fermer">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -89,7 +89,7 @@
                                                 <rect key="frame" x="123" y="8" width="74" height="74"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bonjour ! Je viens de rejoindre le réseau et je voudrais rencontrer des voisins bienveillants." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5D-Ko-WbP">
-                                                <rect key="frame" x="20" y="90" width="280" height="49"/>
+                                                <rect key="frame" x="20" y="90" width="280" height="50.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -108,14 +108,14 @@
                                     <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="XiS-Y9-YO4">
                                         <rect key="frame" x="0.0" y="164.5" width="320" height="404.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Présentez-vous aux membres du réseau" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-R3-XMU">
-                                                <rect key="frame" x="20" y="30" width="280" height="56"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Présentez-vous aux membres du réseau" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-R3-XMU">
+                                                <rect key="frame" x="20" y="30" width="280" height="57.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="24"/>
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEX-uO-THw">
-                                                <rect key="frame" x="20" y="104" width="280" height="52.5"/>
+                                                <rect key="frame" x="20" y="105.5" width="280" height="54"/>
                                                 <string key="text">Pour renseigner votre description, 
 accédez à votre profil depuis le menu en bas à droite </string>
                                                 <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
@@ -123,7 +123,7 @@ accédez à votre profil depuis le menu en bas à droite </string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial-menu" translatesAutoresizingMaskIntoConstraints="NO" id="jIi-5v-KyY">
-                                                <rect key="frame" x="124.5" y="174.5" width="71" height="70"/>
+                                                <rect key="frame" x="124.5" y="177.5" width="71" height="70"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -188,7 +188,7 @@ accédez à votre profil depuis le menu en bas à droite </string>
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gy-L8-WBK">
-                                        <rect key="frame" x="246" y="30" width="54" height="32"/>
+                                        <rect key="frame" x="241" y="30" width="59" height="33"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                         <state key="normal" title="Fermer">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -228,13 +228,13 @@ accédez à votre profil depuis le menu en bas à droite </string>
                                         <rect key="frame" x="16" y="165" width="288" height="403"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Explorez les actions autour de vous" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1z-YS-BWf">
-                                                <rect key="frame" x="20" y="30" width="248" height="56"/>
+                                                <rect key="frame" x="20" y="30" width="248" height="57.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="24"/>
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consultez les actions créées par vos voisins et rejoignez celles qui vous intéressent depuis la carte : " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxM-WP-ofF">
-                                                <rect key="frame" x="20" y="104" width="248" height="79.5"/>
+                                                <rect key="frame" x="20" y="105.5" width="248" height="81.5"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
                                                 <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="deviceRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -344,7 +344,7 @@ accédez à votre profil depuis le menu en bas à droite </string>
                                         <rect key="frame" x="0.0" y="74" width="320" height="164.5"/>
                                         <subviews>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="regardsCroiseSRachidEtMarie" translatesAutoresizingMaskIntoConstraints="NO" id="qT6-wu-pqu">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="161"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="p3_group" translatesAutoresizingMaskIntoConstraints="NO" id="3rP-xw-J2r">
@@ -529,11 +529,11 @@ accédez à votre profil depuis le menu en bas à droite </string>
         </scene>
     </scenes>
     <resources>
-        <image name="p2_group" width="375" height="143.5"/>
-        <image name="p3_group" width="217.5" height="149.5"/>
-        <image name="p4_group" width="335.5" height="78.5"/>
-        <image name="plusWithCircle" width="68.5" height="68.5"/>
-        <image name="regardsCroiseSRachidEtMarie" width="374.5" height="260"/>
+        <image name="p2_group" width="375" height="143"/>
+        <image name="p3_group" width="217" height="149"/>
+        <image name="p4_group" width="335" height="78"/>
+        <image name="plusWithCircle" width="68" height="68"/>
+        <image name="regardsCroiseSRachidEtMarie" width="374" height="260"/>
         <image name="tutorial-menu" width="71" height="70"/>
         <image name="user3" width="74" height="74"/>
     </resources>

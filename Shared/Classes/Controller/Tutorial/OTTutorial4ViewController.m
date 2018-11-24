@@ -29,7 +29,7 @@
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:OTLocalizedString(@"Faites appel à vos voisins afin d’entourer une personne sans-abri. Créez une action avec le bouton :")];
     [attributedString addAttributes:@{
-                                NSForegroundColorAttributeName: [ApplicationTheme shared].secondaryNavigationBarTintColor
+                                NSForegroundColorAttributeName: [ApplicationTheme shared].backgroundThemeColor
                                       } range:NSMakeRange(67, 33)];
     self.descriptionLabel.attributedText = attributedString;
     
