@@ -110,7 +110,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [OTLogger logEvent:@"Screen30_3InputPasscodeView"];
-    [self.codeTextField becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
