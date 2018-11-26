@@ -218,6 +218,7 @@
 
 - (void)didAutocompleteWithPredictions:(NSArray *)predictions {
     self.googlePlacePredictions = predictions;
+    [self.textField reloadContents];
 }
 
 - (void)didFailAutocompleteWithError:(NSError *)error {
