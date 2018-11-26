@@ -34,7 +34,6 @@
 - (void)editEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view;
 - (void)displayPoiDetails:(MKAnnotationView *)view;
 
-- (void)leaveGuide;
 - (void)switchToGuide;
 - (IBAction)showFilters;
 
