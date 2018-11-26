@@ -91,15 +91,19 @@
                    action:@selector(textFieldDidChange:)
          forControlEvents:UIControlEventEditingChanged];
     
-    // Set bounds to France.
-    CLLocationCoordinate2D neBoundsCorner = CLLocationCoordinate2DMake(51, 9);
-    CLLocationCoordinate2D swBoundsCorner = CLLocationCoordinate2DMake(42, -5);
+    // Set bounds to France, non comprehensive but including Lille, Rennes, Grenoble, Lyon, Paris
+    CLLocationCoordinate2D neBoundsCorner = CLLocationCoordinate2DMake(50.77, 6.04);
+    CLLocationCoordinate2D swBoundsCorner = CLLocationCoordinate2DMake(43.57, -1.97);
     GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:neBoundsCorner
                                                                        coordinate:swBoundsCorner];
     
     // Set up the autocomplete filter.
     GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
-    filter.type = kGMSPlacesAutocompleteTypeFilterRegion;
+    if ([OTAppConfiguration isApplicationTypeEntourage]) {
+        filter.type = kGMSPlacesAutocompleteTypeFilterGeocode;
+    } else if ([OTAppConfiguration isApplicationTypeVoisinAge]) {
+        filter.type = kGMSPlacesAutocompleteTypeFilterAddress;
+    }
     
     // Create the fetcher.
     self.googlePlaceFetcher = [[GMSAutocompleteFetcher alloc] initWithBounds:bounds

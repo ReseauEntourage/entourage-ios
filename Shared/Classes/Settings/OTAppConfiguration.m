@@ -523,6 +523,25 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     return [OTAppConfiguration sharedInstance].environmentConfiguration.applicationType;
 }
+    
++ (BOOL)isApplicationTypeEntourage
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeEntourage) {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (BOOL)isApplicationTypeVoisinAge
+{
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 
 + (BOOL)supportsTourFunctionality
 {
