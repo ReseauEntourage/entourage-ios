@@ -26,9 +26,12 @@
 
 @import Firebase;
 
-@interface OTGeolocationRightsViewController () <GMSAutocompleteFetcherDelegate,
-    UITextFieldAutoSuggestionDataSource,
-    UITextFieldDelegate>
+@interface OTGeolocationRightsViewController ()
+<
+    UITextFieldDelegate,
+    GMSAutocompleteFetcherDelegate,
+    UITextFieldAutoSuggestionDataSource
+>
 
 @property (nonatomic) GMSAutocompleteFetcher *googlePlaceFetcher;
 @property (nonatomic) GMSAutocompletePrediction *selectedAddress;
@@ -96,7 +99,7 @@
     
     // Set up the autocomplete filter.
     GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
-    filter.type = kGMSPlacesAutocompleteTypeFilterAddress;
+    filter.type = kGMSPlacesAutocompleteTypeFilterRegion;
     
     // Create the fetcher.
     self.googlePlaceFetcher = [[GMSAutocompleteFetcher alloc] initWithBounds:bounds
