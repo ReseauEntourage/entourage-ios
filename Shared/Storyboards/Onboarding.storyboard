@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbA-ED-vfm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbA-ED-vfm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -251,7 +251,7 @@ numéro de portable? </string>
                                 <color key="backgroundColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GL7-KN-5la">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="380"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwn-6G-LEa">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="176"/>
@@ -343,15 +343,30 @@ numéro de portable? </string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le problème persiste ? écrivez à contact@entourage.social et nous en génèrerons un pour vous." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hta-Lz-w6m">
-                                        <rect key="frame" x="15" y="318" width="309" height="59"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="59" id="4Jj-H8-2Cf"/>
-                                            <constraint firstAttribute="width" constant="309" id="5jl-fX-tez"/>
-                                        </constraints>
+                                        <rect key="frame" x="15" y="318" width="276" height="50.5"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH7-Ij-WiF" customClass="OnBoardingButton" customModule="Ent_Beta" customModuleProvider="target">
+                                        <rect key="frame" x="301" y="318" width="50" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="GcX-1m-hTj"/>
+                                            <constraint firstAttribute="width" constant="50" id="pXY-sB-QyU"/>
+                                        </constraints>
+                                        <state key="normal" image="next">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="doContinue" destination="ay8-4Z-lNJ" eventType="touchUpInside" id="i4j-bq-eR0"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -363,46 +378,28 @@ numéro de portable? </string>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="top" secondItem="pvY-e5-lmP" secondAttribute="bottom" constant="8" id="E3B-b7-DrO"/>
                                     <constraint firstItem="m2V-xB-zfa" firstAttribute="top" secondItem="sCt-6F-DVv" secondAttribute="bottom" constant="8" id="JVm-ht-njX"/>
                                     <constraint firstItem="pvY-e5-lmP" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="Khu-ZV-bdM"/>
-                                    <constraint firstAttribute="height" constant="379" id="L4X-iB-2rw"/>
+                                    <constraint firstAttribute="height" constant="380" id="L4X-iB-2rw"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="leading" secondItem="M8f-fn-OPr" secondAttribute="leading" id="N8u-Bz-Fxe"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="top" secondItem="wo3-RT-UKL" secondAttribute="top" id="Qxg-Jq-CSr"/>
-                                    <constraint firstAttribute="trailing" secondItem="hta-Lz-w6m" secondAttribute="trailing" constant="51" id="Xw3-Dl-LFl"/>
+                                    <constraint firstItem="hta-Lz-w6m" firstAttribute="top" secondItem="YIF-kq-zRi" secondAttribute="bottom" id="Wx5-U6-P8Q"/>
                                     <constraint firstItem="M8f-fn-OPr" firstAttribute="top" secondItem="m2V-xB-zfa" secondAttribute="bottom" constant="52" id="a8l-M5-mUE"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZH7-Ij-WiF" secondAttribute="bottom" constant="72" id="bct-3O-rmV"/>
+                                    <constraint firstItem="ZH7-Ij-WiF" firstAttribute="top" secondItem="YIF-kq-zRi" secondAttribute="bottom" id="cVv-1y-dcc"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="leading" secondItem="wo3-RT-UKL" secondAttribute="leading" id="dwV-Lp-qpj"/>
                                     <constraint firstItem="m2V-xB-zfa" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="evR-lB-E2c"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="top" secondItem="M8f-fn-OPr" secondAttribute="bottom" constant="8" symbolic="YES" id="fNY-1Z-aZc"/>
                                     <constraint firstItem="M8f-fn-OPr" firstAttribute="trailing" secondItem="m2V-xB-zfa" secondAttribute="trailing" id="j31-N6-JaM"/>
                                     <constraint firstAttribute="trailing" secondItem="YIF-kq-zRi" secondAttribute="trailing" constant="51" id="k9U-g7-J2j"/>
-                                    <constraint firstAttribute="bottom" secondItem="hta-Lz-w6m" secondAttribute="bottom" constant="2" id="lWR-7o-Z08"/>
-                                    <constraint firstItem="hta-Lz-w6m" firstAttribute="top" secondItem="YIF-kq-zRi" secondAttribute="bottom" id="mpX-it-1bU"/>
                                     <constraint firstItem="qwn-6G-LEa" firstAttribute="top" secondItem="GL7-KN-5la" secondAttribute="top" id="oPp-0U-tnU"/>
                                     <constraint firstItem="qwn-6G-LEa" firstAttribute="centerX" secondItem="wo3-RT-UKL" secondAttribute="centerX" constant="18" id="sOs-ck-x7i"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="trailing" secondItem="wo3-RT-UKL" secondAttribute="trailing" id="t43-ZQ-pR9"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="bottom" secondItem="wo3-RT-UKL" secondAttribute="bottom" id="thP-U5-gjY"/>
+                                    <constraint firstItem="hta-Lz-w6m" firstAttribute="trailing" secondItem="ZH7-Ij-WiF" secondAttribute="leading" constant="-10" id="u13-F3-ut7"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="uwE-0T-K8p"/>
                                     <constraint firstItem="m2V-xB-zfa" firstAttribute="top" secondItem="qwn-6G-LEa" secondAttribute="bottom" constant="8" id="wHL-HI-ORL"/>
                                     <constraint firstItem="pvY-e5-lmP" firstAttribute="top" secondItem="m2V-xB-zfa" secondAttribute="bottom" id="yld-nb-HhT"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH7-Ij-WiF" customClass="OnBoardingButton" customModule="Ent_Beta" customModuleProvider="target">
-                                <rect key="frame" x="301" y="387" width="50" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="GcX-1m-hTj"/>
-                                    <constraint firstAttribute="width" constant="50" id="pXY-sB-QyU"/>
-                                </constraints>
-                                <state key="normal" image="next">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="doContinue" destination="ay8-4Z-lNJ" eventType="touchUpInside" id="i4j-bq-eR0"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votre code est crypté : seul.e vous le connaissez. Vous pouvez le modifier dans votre Profil." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocE-G0-FSl">
                                 <rect key="frame" x="67" y="603" width="292" height="56"/>
                                 <constraints>
@@ -424,14 +421,13 @@ numéro de portable? </string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="GL7-KN-5la" firstAttribute="top" secondItem="oIj-1W-a8G" secondAttribute="top" id="0TY-7y-3Bd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZH7-Ij-WiF" secondAttribute="trailing" constant="8" id="1Jb-an-UGq"/>
                             <constraint firstItem="ocE-G0-FSl" firstAttribute="leading" secondItem="7hI-Gq-Hiw" secondAttribute="trailing" constant="8" id="8nd-7J-Ehu"/>
                             <constraint firstItem="GL7-KN-5la" firstAttribute="leading" secondItem="oIj-1W-a8G" secondAttribute="leading" id="9HT-1C-cCK"/>
                             <constraint firstItem="yeR-N2-sFF" firstAttribute="top" secondItem="7hI-Gq-Hiw" secondAttribute="bottom" constant="17" id="JDY-Vb-KhT"/>
                             <constraint firstAttribute="trailing" secondItem="GL7-KN-5la" secondAttribute="trailing" id="Lfc-0V-FfO"/>
-                            <constraint firstItem="ZH7-Ij-WiF" firstAttribute="top" secondItem="GL7-KN-5la" secondAttribute="bottom" constant="8" id="O3t-g2-xHR"/>
                             <constraint firstItem="yeR-N2-sFF" firstAttribute="top" secondItem="ocE-G0-FSl" secondAttribute="bottom" constant="8" id="aGc-jq-vE1"/>
                             <constraint firstItem="DjW-Ii-bDU" firstAttribute="leading" secondItem="oIj-1W-a8G" secondAttribute="leading" id="bm2-Da-xXx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZH7-Ij-WiF" secondAttribute="trailing" constant="8" id="fN7-aR-10I"/>
                             <constraint firstItem="ocE-G0-FSl" firstAttribute="trailing" secondItem="oIj-1W-a8G" secondAttribute="trailingMargin" id="hFG-Cr-iAB"/>
                             <constraint firstItem="7hI-Gq-Hiw" firstAttribute="leading" secondItem="oIj-1W-a8G" secondAttribute="leadingMargin" id="jk3-FJ-uL2"/>
                             <constraint firstItem="DjW-Ii-bDU" firstAttribute="top" secondItem="ZQ0-HI-xvJ" secondAttribute="bottom" constant="155" id="mWg-sZ-eNs"/>
