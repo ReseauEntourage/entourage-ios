@@ -369,13 +369,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.heatzonesCollectionDataSource refresh];
     [OTAppConfiguration updateAppearanceForMainTabBar];
     
     if (self.mustBeSwitchedToGuide == YES) {
         [self switchToGuide];
     } else {
         [self.newsFeedsSourceBehavior resume];
+        [self.heatzonesCollectionDataSource refresh];
     }
 }
 

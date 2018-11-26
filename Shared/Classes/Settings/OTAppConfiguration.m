@@ -311,11 +311,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     messagesNavController.tabBarItem.image = [[UIImage imageNamed:@"messages_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     messagesNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"messages_tab_selected"];
 
-    // Check if Entourage add solidarity guide map to tab bar
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        tabBarController.viewControllers = @[mainMapNavController, messagesNavController, menuNavController];
-    }
-    else {
+    // Check if solidarity guide map is supported
+    if (OTAppConfiguration.supportsSolidarityGuideFunctionality) {
         // Solidarity Guide Map Tab
         OTMainViewController *guideMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
         guideMapViewController.mustBeSwitchedToGuide = YES;
@@ -323,8 +320,11 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         guideMapNavController.tabBarItem.title = OTLocalizedString(@"annuaire");
         guideMapNavController.tabBarItem.image = [[UIImage imageNamed:@"ic_navigation_guide"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         guideMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_navigation_guide"];
-
+        
         tabBarController.viewControllers = @[mainMapNavController, guideMapNavController, messagesNavController, menuNavController];
+    }
+    else {
+        tabBarController.viewControllers = @[mainMapNavController, messagesNavController, menuNavController];
     }
 
     tabBarController.selectedIndex = selectedIndex;
