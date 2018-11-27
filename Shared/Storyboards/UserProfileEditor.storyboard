@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jda-ko-U9T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jda-ko-U9T">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -156,7 +155,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="David" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T3k-5u-MjI">
-                                                    <rect key="frame" x="107" y="10" width="280" height="30"/>
+                                                    <rect key="frame" x="107" y="10.333333333333336" width="280" height="30"/>
                                                     <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="ZXA-uu-A4C"/>
@@ -348,14 +347,14 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQR-O5-GIl">
-                                                    <rect key="frame" x="116" y="114.66666666666669" width="182" height="33"/>
+                                                    <rect key="frame" x="108" y="114.66666666666669" width="198" height="33"/>
                                                     <color key="backgroundColor" red="0.94509803920000002" green="0.4039215686" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="33" id="4Ia-u1-Dlr"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                                    <state key="normal" title="Écrire ma présentation">
+                                                    <state key="normal" title="Modifier ma présentation">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
@@ -566,7 +565,7 @@ Soyez notifié des actualités importantes.</string>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DeleteProfileCell" rowHeight="51" id="0cO-w9-0sc">
                                         <rect key="frame" x="0.0" y="1120" width="414" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0cO-w9-0sc" id="u0O-8b-zzL">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="0cO-w9-0sc" id="u0O-8b-zzL">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -837,7 +836,7 @@ Soyez notifié des actualités importantes.</string>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Org name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOa-se-8fg">
-                                                    <rect key="frame" x="76" y="13" width="253" height="18"/>
+                                                    <rect key="frame" x="76" y="13.333333333333336" width="253" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -957,7 +956,7 @@ pour nous demander de l’ajouter !</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDx-wc-7rF">
-                                <rect key="frame" x="20" y="173" width="374" height="390"/>
+                                <rect key="frame" x="20" y="173.33333333333334" width="374" height="389.66666666666663"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NbY-DB-wcE">
                                         <rect key="frame" x="10" y="10" width="30" height="30"/>
@@ -977,7 +976,7 @@ pour nous demander de l’ajouter !</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bjc-vZ-xJF">
-                                        <rect key="frame" x="0.0" y="333" width="374" height="57"/>
+                                        <rect key="frame" x="0.0" y="332.66666666666663" width="374" height="57"/>
                                         <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Gcd-6s-2U2"/>
@@ -1003,7 +1002,7 @@ pour nous demander de l’ajouter !</string>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dhT-c2-ena" customClass="OTTextWithCount">
-                                        <rect key="frame" x="0.0" y="121" width="374" height="212"/>
+                                        <rect key="frame" x="0.0" y="120.66666666666666" width="374" height="211.99999999999997"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="212" id="GEt-aT-CTC"/>
@@ -1069,7 +1068,7 @@ pour nous demander de l’ajouter !</string>
     </scenes>
     <resources>
         <image name="24HInactive" width="48" height="48"/>
-        <image name="badgeDefault" width="20" height="20"/>
+        <image name="badgeDefault" width="20.666666030883789" height="20.666666030883789"/>
         <image name="cameraSquare" width="56" height="56"/>
         <image name="close" width="22" height="22"/>
         <image name="password" width="100" height="100"/>
