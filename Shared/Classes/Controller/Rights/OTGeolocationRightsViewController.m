@@ -16,7 +16,7 @@
 #import <Mixpanel/Mixpanel.h>
 #import "OTAppConfiguration.h"
 #import "UITextField+AutoSuggestion.h"
-#import <GooglePlaces/GooglePlaces.h>
+#import "OTGMSAutoCompleteViewController.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "OTAuthService.h"
 #import <SVProgressHUD/SVProgressHUD.h>
@@ -29,11 +29,11 @@
 
 @interface OTGeolocationRightsViewController ()
 <
-    GMSAutocompleteViewControllerDelegate,
+    OTGMSAutoCompleteViewControllerProtocol,
     UITextFieldDelegate
 >
 
-@property (nonatomic) GMSAutocompleteViewController *googlePlaceViewController;
+@property (nonatomic) OTGMSAutoCompleteViewController *googlePlaceViewController;
 @property (nonatomic) GMSPlace *selectedAddress;
 
 @end
@@ -57,7 +57,7 @@
     self.rightsTitleLabel.text = [OTAppAppearance defineActionZoneTitleForUser:nil];
     self.textField.placeholder = [OTAppAppearance defineActionZoneSampleAddress];
     
-    [self setupGoogleAutocompleteFetcher];
+    [self setupGoogleAutocompleteViewController];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,37 +79,9 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 
-- (void)setupGoogleAutocompleteFetcher {
-    
-    self.textField.minCharsToShow = 2;
-    self.textField.maxNumberOfRows = 3;
-    [self.textField observeTextFieldChanges];
-    
-    [self.textField addTarget:self
-                   action:@selector(textFieldDidChange:)
-         forControlEvents:UIControlEventEditingChanged];
-    
-    // Set bounds to France, non comprehensive but including Lille, Rennes, Grenoble, Lyon, Paris
-    CLLocationCoordinate2D neBoundsCorner = CLLocationCoordinate2DMake(50.77, 6.04);
-    CLLocationCoordinate2D swBoundsCorner = CLLocationCoordinate2DMake(43.57, -1.97);
-    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:neBoundsCorner
-                                                                       coordinate:swBoundsCorner];
-    
-    // Set up the autocomplete filter.
-    GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
-    if ([OTAppConfiguration isApplicationTypeEntourage]) {
-        filter.type = kGMSPlacesAutocompleteTypeFilterGeocode;
-    } else if ([OTAppConfiguration isApplicationTypeVoisinAge]) {
-        filter.type = kGMSPlacesAutocompleteTypeFilterAddress;
-    }
-    
-    // Create and set Autocomplete VC
-    self.googlePlaceViewController = [[GMSAutocompleteViewController alloc] init];
-    [self.googlePlaceViewController setAutocompleteBounds:bounds];
-    [self.googlePlaceViewController setAutocompleteFilter:filter];
-    
-    self.googlePlaceViewController.primaryTextHighlightColor = UIColor.appOrangeColor;
-    
+- (void)setupGoogleAutocompleteViewController {
+    self.googlePlaceViewController = [[OTGMSAutoCompleteViewController alloc] init];
+    [self.googlePlaceViewController setup:kGMSPlacesAutocompleteTypeFilterAddress];
     self.googlePlaceViewController.delegate = self;
 }
 
@@ -208,16 +180,6 @@
 }
 
 #pragma mark - UITextFieldDelegate
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    
-    return YES;
-}
-
-- (void)textFieldDidChange:(UITextField *)textField {
-    NSLog(@"%@", textField.text);
-}
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     [self presentViewController:self.googlePlaceViewController animated:YES completion:nil];

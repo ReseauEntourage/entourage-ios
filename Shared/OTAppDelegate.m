@@ -20,41 +20,6 @@ NSString * const kUpdateBadgeCountNotification = @"updateBadgeCountNotification"
 #pragma mark - Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    // Color of typed text in the search bar.
-    NSDictionary *searchBarTextAttributes = @{
-                                              NSForegroundColorAttributeName: UIColor.whiteColor,
-                                              NSFontAttributeName : [UIFont systemFontOfSize:[UIFont systemFontSize]]
-                                              };
-    [UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]]
-    .defaultTextAttributes = searchBarTextAttributes;
-    
-    // Color of the placeholder text in the search bar prior to text entry.
-    NSDictionary *placeholderAttributes = @{
-                                            NSForegroundColorAttributeName: UIColor.whiteColor,
-                                            NSFontAttributeName : [UIFont systemFontOfSize:[UIFont systemFontSize]]
-                                            };
-    
-    // Color of the default search text.
-    // NOTE: In a production scenario, "Search" would be a localized string.
-    NSAttributedString *attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:@"Avenue Jean Jaurès..." // 
-                                    attributes:placeholderAttributes];
-    [UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]]
-    .attributedPlaceholder = attributedPlaceholder;
-
-    // To style the two image icons in the search bar (the magnifying glass
-    // icon and the 'clear text' icon), replace them with different images.
-//    [[UISearchBar appearance] setImage:[UIImage imageNamed:@"custom_clear_x_high"]
-//                      forSearchBarIcon:UISearchBarIconClear
-//                                 state:UIControlStateHighlighted];
-//    [[UISearchBar appearance] setImage:[UIImage imageNamed:@"custom_clear_x"]
-//                      forSearchBarIcon:UISearchBarIconClear
-//                                 state:UIControlStateNormal];
-//    [[UISearchBar appearance] setImage:[UIImage imageNamed:@"custom_search"]
-//                      forSearchBarIcon:UISearchBarIconSearch
-//                                 state:UIControlStateNormal];
-
 
     if (@available(iOS 10.0, *)) {
         [UNUserNotificationCenter currentNotificationCenter].delegate = self;
