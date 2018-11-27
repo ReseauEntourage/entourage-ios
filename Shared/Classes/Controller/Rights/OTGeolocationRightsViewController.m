@@ -23,19 +23,18 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "entourage-Swift.h"
+#import "UIColor+entourage.h"
 
 @import Firebase;
 
 @interface OTGeolocationRightsViewController ()
 <
-    UITextFieldDelegate,
-    GMSAutocompleteFetcherDelegate,
-    UITextFieldAutoSuggestionDataSource
+    GMSAutocompleteViewControllerDelegate,
+    UITextFieldDelegate
 >
 
-@property (nonatomic) GMSAutocompleteFetcher *googlePlaceFetcher;
-@property (nonatomic) GMSAutocompletePrediction *selectedAddress;
-@property (nonatomic, readwrite) NSArray<GMSAutocompletePrediction*> *googlePlacePredictions;
+@property (nonatomic) GMSAutocompleteViewController *googlePlaceViewController;
+@property (nonatomic) GMSPlace *selectedAddress;
 
 @end
 
@@ -82,7 +81,6 @@
 
 - (void)setupGoogleAutocompleteFetcher {
     
-    self.textField.autoSuggestionDataSource = self;
     self.textField.minCharsToShow = 2;
     self.textField.maxNumberOfRows = 3;
     [self.textField observeTextFieldChanges];
@@ -105,10 +103,14 @@
         filter.type = kGMSPlacesAutocompleteTypeFilterAddress;
     }
     
-    // Create the fetcher.
-    self.googlePlaceFetcher = [[GMSAutocompleteFetcher alloc] initWithBounds:bounds
-                                                       filter:filter];
-    self.googlePlaceFetcher.delegate = self;
+    // Create and set Autocomplete VC
+    self.googlePlaceViewController = [[GMSAutocompleteViewController alloc] init];
+    [self.googlePlaceViewController setAutocompleteBounds:bounds];
+    [self.googlePlaceViewController setAutocompleteFilter:filter];
+    
+    self.googlePlaceViewController.primaryTextHighlightColor = UIColor.appOrangeColor;
+    
+    self.googlePlaceViewController.delegate = self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -215,78 +217,29 @@
 
 - (void)textFieldDidChange:(UITextField *)textField {
     NSLog(@"%@", textField.text);
-    [self.googlePlaceFetcher sourceTextHasChanged:textField.text];
 }
 
-#pragma mark - GMSAutocompleteFetcherDelegate -
-
-- (void)didAutocompleteWithPredictions:(NSArray *)predictions {
-    self.googlePlacePredictions = predictions;
-    [self.textField reloadContents];
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self presentViewController:self.googlePlaceViewController animated:YES completion:nil];
 }
 
-- (void)didFailAutocompleteWithError:(NSError *)error {
-    self.googlePlacePredictions = @[];
+#pragma mark - GMSAutocompleteViewControllerDelegate
+
+- (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(nonnull GMSPlace *)place {
+    [self.textField setText:place.formattedAddress];
+    self.selectedAddress = place;
+
+    [self doContinue];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - UITextFieldAutoSuggestionDataSource
-
-- (UITableViewCell *)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
-
-    static NSString *cellIdentifier = @"PlaceAutoSuggestionCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    
-    cell.contentView.backgroundColor = UIColor.clearColor;
-    cell.backgroundColor = [[ApplicationTheme shared].backgroundThemeColor colorWithAlphaComponent:0.8];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.numberOfLines = 2;
-    UIFont *regularFont = [UIFont fontWithName:@"SFUIText-Light" size:15];
-    UIFont *boldFont = [UIFont fontWithName:@"SFUIText-Bold" size:15];
-    
-    if (self.googlePlacePredictions.count > indexPath.row) {
-        GMSAutocompletePrediction *prediction = self.googlePlacePredictions[indexPath.row];
-        
-        if (prediction) {
-            NSMutableAttributedString *bolded = [prediction.attributedFullText mutableCopy];
-            [bolded enumerateAttribute:kGMSAutocompleteMatchAttribute
-                                       inRange:NSMakeRange(0, bolded.length)
-                                       options:0
-                                    usingBlock:^(id value, NSRange range, BOOL *stop) {
-                                            UIFont *font = (value == nil) ? regularFont : boldFont;
-                                            [bolded addAttribute:NSFontAttributeName value:font range:range];
-                                        }];
-            
-            cell.textLabel.attributedText = bolded;
-        }
-    }
-    
-    return cell;
+- (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(nonnull NSError *)error {
+    NSLog(@"%@", error);
+    // TODO : Deal with error
 }
 
-- (NSInteger)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section forText:(NSString *)text {
-    return self.googlePlacePredictions.count;
-}
-
-- (void)autoSuggestionField:(UITextField *)field textChanged:(NSString *)text {
-    [self.googlePlaceFetcher sourceTextHasChanged:text];
-}
-
-- (CGFloat)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
-    return 44;
-}
-
-- (void)autoSuggestionField:(UITextField *)field tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath forText:(NSString *)text {
-    NSLog(@"Selected suggestion at index row - %ld", (long)indexPath.row);
-    GMSAutocompletePrediction *prediction = self.googlePlacePredictions[indexPath.row];
-    if (prediction) {
-        self.textField.text = [prediction attributedFullText].string;
-        self.selectedAddress = prediction;
-        [self.textField resignFirstResponder];
-    }
+- (void)wasCancelled:(nonnull GMSAutocompleteViewController *)viewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
