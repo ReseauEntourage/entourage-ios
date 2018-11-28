@@ -13,17 +13,26 @@
 #import "OTAppConfiguration.h"
 #import "OTAppState.h"
 #import "entourage-Swift.h"
+#import "OTHTTPRequestManager.h"
+#import "OTSafariService.h"
+#import "OTAPIConsts.h"
+#import "OTMainViewController.h"
+#import "UIStoryboard+entourage.h"
+
 
 @interface OTStartupViewController () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *betaButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIButton *continueWithoutConnexionButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (nonatomic) NSMutableDictionary *pagesDict;
 @property (nonatomic) NSMutableArray *pages;
+
+@property (nonatomic, strong) UIAlertController *alertController;
 
 @end
 
@@ -79,6 +88,59 @@
 
 -(IBAction)showLogin:(id)sender {
     [OTAppState continueFromStartupScreen];
+}
+
+- (IBAction)showPolicyPopUp:(id)sender {
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@""
+                                 message:nil
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:@"Pour continuer, acceptez les CGU et la Politique de confidentialité d'Entourage"];
+    [attributedTitle addAttribute:NSFontAttributeName
+                            value:[UIFont fontWithName:@"SFUIText-Regular"
+                                                  size:15]
+                  range:NSMakeRange(0, attributedTitle.length)];
+    [alert setValue:attributedTitle forKey:@"attributedTitle"];
+
+    [alert view].tintColor = UIColor.blackColor;
+    
+    //Set Action Buttons
+
+    UIAlertAction* read = [UIAlertAction
+                               actionWithTitle:@"Lire"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   NSString *url = [NSString stringWithFormat: ABOUT_POLITIQUE_DE_CONF_FORMAT, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
+                                   [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
+                               }];
+    
+    UIAlertAction* agree = [UIAlertAction
+                               actionWithTitle:@"J'accepte"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   UIStoryboard *mainStoryboard = [UIStoryboard mainStoryboard];
+                                   OTMainViewController *mainViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
+
+                                   [self presentViewController:mainViewController animated:YES completion:nil];
+                               }];
+    
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"Annuler"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action) {
+                                 // Cancel
+                             }];
+
+    //Add your buttons to alert controller
+    
+    [alert addAction:agree];
+    [alert addAction:read];
+    [alert addAction:cancel];
+
+    [self presentViewController:alert animated:YES completion:nil];
+
 }
 
 - (void)setupScrollView {

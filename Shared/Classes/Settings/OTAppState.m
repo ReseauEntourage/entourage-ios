@@ -83,11 +83,9 @@
 
 + (void)presentTutorialScreen
 {
-    if (IS_PRO_USER) {
-        return;
-    }
-
-    if ([NSUserDefaults standardUserDefaults].autoTutorialShown) {
+    if ((IS_PRO_USER) ||
+        ([NSUserDefaults standardUserDefaults].autoTutorialShown) ||
+        ([NSUserDefaults standardUserDefaults].currentUser == nil)) {
         return;
     }
 

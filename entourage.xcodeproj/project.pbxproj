@@ -21,6 +21,8 @@
 		6B92CAC119A7461C004E8C9B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAC019A7461C004E8C9B /* XCTest.framework */; };
 		6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
+		929789B9217A2F39004F9983 /* IdentificationOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 929789B8217A2F39004F9983 /* IdentificationOverlay.xib */; };
+		929789BB217A34AC004F9983 /* OTIdentificationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929789BA217A34AC004F9983 /* OTIdentificationOverlay.swift */; };
 		96343AF820C6110D00E4D867 /* PfpUserCircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAA20C551690094370E /* PfpUserCircleCell.swift */; };
 		9647D516208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
 		9647D517208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
@@ -1279,6 +1281,8 @@
 		6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourageTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79016BE7EDCE7EC3FA1F7032 /* Pods-entourageTests.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.store.xcconfig"; sourceTree = "<group>"; };
 		792CA159C4CE913520D77D5E /* Pods-pfp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.debug.xcconfig"; sourceTree = "<group>"; };
+		929789B8217A2F39004F9983 /* IdentificationOverlay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IdentificationOverlay.xib; sourceTree = "<group>"; };
+		929789BA217A34AC004F9983 /* OTIdentificationOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTIdentificationOverlay.swift; sourceTree = "<group>"; };
 		9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuHeaderView.swift; sourceTree = "<group>"; };
 		96B658A9209A380000EB0398 /* OTMenuCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuCellView.swift; sourceTree = "<group>"; };
 		96B658AC209A417900EB0398 /* OTItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -2848,6 +2852,7 @@
 				A202E94D2085D2C50058F32C /* OTFilterCellTableViewCell.m */,
 				A202E9552085D2C50058F32C /* OTFilterRadioButton.h */,
 				A202E94E2085D2C50058F32C /* OTFilterRadioButton.m */,
+				929789BA217A34AC004F9983 /* OTIdentificationOverlay.swift */,
 				A202E9512085D2C50058F32C /* OTMenuTableViewCell.h */,
 				A202E94C2085D2C50058F32C /* OTMenuTableViewCell.m */,
 				A202E9542085D2C50058F32C /* OTTextView.h */,
@@ -2866,6 +2871,7 @@
 				A20489FC2151421400064EB0 /* IntroPage3.xib */,
 				A20489FD2151421400064EB0 /* IntroPage4.xib */,
 				A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */,
+				929789B8217A2F39004F9983 /* IdentificationOverlay.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3943,6 +3949,7 @@
 				A21D65BA2085FDAA00EF8E0E /* Rights.storyboard in Resources */,
 				A21D65C22085FDAA00EF8E0E /* EncounterEditor.storyboard in Resources */,
 				A20489FB2151328D00064EB0 /* IntroPage1.xib in Resources */,
+				929789B9217A2F39004F9983 /* IdentificationOverlay.xib in Resources */,
 				A21D65B12085FDAA00EF8E0E /* AssociationDetails.storyboard in Resources */,
 				A202E7E32085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
 				A21D65BB2085FDAA00EF8E0E /* MapOptions.storyboard in Resources */,
@@ -4631,6 +4638,7 @@
 				A202EC592085D2C80058F32C /* OTBottomScrollBehavior.m in Sources */,
 				A202ED252085D2C80058F32C /* UINavigationController+entourage.m in Sources */,
 				A2FE6D5120A0783C0025842D /* OTAppAppearance.m in Sources */,
+				929789BB217A34AC004F9983 /* OTIdentificationOverlay.swift in Sources */,
 				A202EB272085D2C70058F32C /* OTMapCell.m in Sources */,
 				A202ECFB2085D2C80058F32C /* OTEntourageStateTransition.m in Sources */,
 				A202ECA72085D2C80058F32C /* OTMembersCellProvider.m in Sources */,
