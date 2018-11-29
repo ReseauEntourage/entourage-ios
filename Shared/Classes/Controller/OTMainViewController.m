@@ -123,8 +123,6 @@
 @property (nonatomic, weak) IBOutlet OTEditEncounterBehavior        *editEncounterBehavior;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior      *newsFeedsSourceBehavior;
 @property (nonatomic, weak) IBOutlet OTTourCreatorBehavior          *tourCreatorBehavior;
-@property (nonatomic, weak) IBOutlet UIView                         *showSolidarityGuideView;
-@property (nonatomic, weak) IBOutlet UILabel                        *solidarityGuideLabel;
 @property (nonatomic, strong) OTMapView                             *mapView;
 @property (nonatomic, strong) UITapGestureRecognizer                *tapGestureRecognizer;
 @property (nonatomic) CLLocationCoordinate2D                        encounterLocation;
@@ -139,7 +137,6 @@
 @property (nonatomic, weak) IBOutlet UIButton                       *launcherButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *stopButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *createEncounterButton;
-@property (nonatomic, weak) IBOutlet UIButton                       *backToNewsFeedsButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *showCurrentLocationButton;
 @property (nonatomic, strong) NSArray                               *categories;
 @property (nonatomic, strong) NSArray                               *pois;
@@ -183,8 +180,9 @@
     }
     
     [self configureActionsButton];
-}
     
+}
+
 - (void)configureActionsButton {
     UIImage *closeImage = [[UIImage imageNamed:@"closeOptionWithNoShadow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
@@ -221,8 +219,6 @@
 }
 
 - (void)setup {
-    self.solidarityGuideLabel.text = OTLocalizedString(@"map_options_show_guide");
-    
     self.isFirstLoad = YES;
     self.solidarityGuidePoisDisplayed = NO;
     self.heatzonesCollectionDataSource.heatzonesDelegate = self;
@@ -256,14 +252,6 @@
     self.tableView.feedItemsDelegate = self;
     [self configureMapView];
     
-    [self switchToNewsfeed];
-    [self reloadFeeds];
-    
-    self.backToNewsFeedsButton.hidden = YES;
-    [self.backToNewsFeedsButton addTarget:self
-                                   action:@selector(leaveGuide)
-                         forControlEvents:UIControlEventTouchUpInside];
-    
     if (OTSharedOngoingTour.isOngoing ||
         [NSUserDefaults standardUserDefaults].currentOngoingTour != nil) {
         [self setupUIForTourOngoing];
@@ -274,6 +262,9 @@
         self.stopButton.hidden = YES;
         self.createEncounterButton.hidden = YES;
     }
+    
+    [self switchToNewsfeed];
+    [self reloadFeeds];
     
     [self.mapDelegateProxy.delegates addObject:self];
     self.entourageScale = 1.0;
@@ -378,9 +369,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.newsFeedsSourceBehavior resume];
-    [self.heatzonesCollectionDataSource refresh];
     [OTAppConfiguration updateAppearanceForMainTabBar];
+    
+    if (self.mustBeSwitchedToGuide == YES) {
+        [self switchToGuide];
+    } else {
+        [self.newsFeedsSourceBehavior resume];
+        [self.heatzonesCollectionDataSource refresh];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -452,7 +448,6 @@
     self.toursMapDelegate.isActive = YES;
     self.solidarityGuidePoisDisplayed = NO;
     self.poisMapDelegate.isActive = [OTAppConfiguration shouldShowPOIsOnFeedsMap];
-    self.backToNewsFeedsButton.hidden = YES;
     
     if (self.toursMapDelegate) {
         [self.mapDelegateProxy.delegates addObject:self.toursMapDelegate];
@@ -465,8 +460,6 @@
     [self clearMap];
     [self feedMapWithFeedItems];
     
-    self.showSolidarityGuideView.hidden = !OTAppConfiguration.supportsSolidarityGuideFunctionality;
-    
     [self showFeedsList];
     [self configureNavigationBar];
 }
@@ -476,7 +469,6 @@
     [self.tableView updateItems:self.pois];
 
     self.toursMapDelegate.isActive = NO;
-    self.backToNewsFeedsButton.hidden = NO;
     
     [self.mapDelegateProxy.delegates removeObject:self.toursMapDelegate];
     if (self.poisMapDelegate) {
@@ -572,15 +564,6 @@
         [self switchToNewsfeed];
     }
 }
-
-- (void)leaveGuide {
-    [OTLogger logEvent:@"MaskGDSXClick"];
-    
-    if(self.toursMapDelegate.isActive)
-        [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
-    else {
-        [self switchToNewsfeed];
-    }}
 
 - (void)showMapOverlay:(UILongPressGestureRecognizer *)longPressGesture {
     
@@ -1415,7 +1398,6 @@
     
     [OTLogger logEvent:@"Screen06_1FeedView"];
     [self.toggleCollectionView toggle:NO animated:NO];
-    self.showSolidarityGuideView.hidden = YES;
     [self.noDataBehavior hideNoData];
     [self.guideInfoBehavior hide];
     
@@ -1442,18 +1424,10 @@
     //self.solidarityGuidePoisDisplayed = NO;
     
     if (self.poisMapDelegate.isActive) {
-        [self.showSolidarityGuideView setHidden: YES];
         [self.toggleCollectionView toggle:NO animated:NO];
     } else {
         [OTLogger logEvent:@"Screen06_2MapView"];
         self.solidarityGuidePoisDisplayed = NO;
-        
-        // hide the show solidarity guides overlay if not enabled
-        if (!OTAppConfiguration.supportsSolidarityGuideFunctionality) {
-            [self.showSolidarityGuideView setHidden:YES];
-        } else {
-            [self.showSolidarityGuideView setHidden:NO];
-        }
     }
     
     if (self.wasLoadedOnce && self.newsFeedsSourceBehavior.feedItems.count == 0) {

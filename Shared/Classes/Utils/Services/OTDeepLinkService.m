@@ -132,7 +132,6 @@
                      andQuery:(NSString *)query {
     if ([key isEqualToString:@"feed"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
-        [mainViewController leaveGuide];
 
         // "feed/filters"
         if (pathComponents != nil && pathComponents.count >= 2) {

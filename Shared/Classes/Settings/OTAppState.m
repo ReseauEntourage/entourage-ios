@@ -35,8 +35,15 @@
 #import "OTMapViewController.h"
 
 #define TUTORIAL_DELAY 2
+
 #define MAP_TAB_INDEX 0
-#define MESSAGES_TAB_INDEX 1
+#if !PFP
+    #define SOLIDARITY_MAP_INDEX 1
+    #define MESSAGES_TAB_INDEX 2
+#else
+    #define SOLIDARITY_MAP_INDEX 0
+    #define MESSAGES_TAB_INDEX 1
+#endif
 
 @implementation OTAppState
 
@@ -154,7 +161,7 @@
 + (void)switchMapToSolidarityGuide {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
-    tabBarController.selectedIndex = MAP_TAB_INDEX;
+    tabBarController.selectedIndex = SOLIDARITY_MAP_INDEX;
 }
 
 + (void)switchToMessagesScreen {

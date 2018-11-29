@@ -303,15 +303,30 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     mainMapNavController.tabBarItem.title = OTLocalizedString(@"à proximité");
     mainMapNavController.tabBarItem.image = [[UIImage imageNamed:@"map_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     mainMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"map_tab_selected"];
-    
+
     // Messages Tab
     OTMyEntouragesViewController *messagesViewController = [[UIStoryboard myEntouragesStoryboard] instantiateViewControllerWithIdentifier:@"OTMyEntouragesViewController"];
     UINavigationController *messagesNavController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
     messagesNavController.tabBarItem.title = OTLocalizedString(@"messagerie");
     messagesNavController.tabBarItem.image = [[UIImage imageNamed:@"messages_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     messagesNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"messages_tab_selected"];
-    
-    tabBarController.viewControllers = @[mainMapNavController, messagesNavController, menuNavController];
+
+    // Check if solidarity guide map is supported
+    if (OTAppConfiguration.supportsSolidarityGuideFunctionality) {
+        // Solidarity Guide Map Tab
+        OTMainViewController *guideMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
+        guideMapViewController.mustBeSwitchedToGuide = YES;
+        UINavigationController *guideMapNavController = [[UINavigationController alloc] initWithRootViewController:guideMapViewController];
+        guideMapNavController.tabBarItem.title = OTLocalizedString(@"annuaire");
+        guideMapNavController.tabBarItem.image = [[UIImage imageNamed:@"ic_navigation_guide"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        guideMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_navigation_guide"];
+        
+        tabBarController.viewControllers = @[mainMapNavController, guideMapNavController, messagesNavController, menuNavController];
+    }
+    else {
+        tabBarController.viewControllers = @[mainMapNavController, messagesNavController, menuNavController];
+    }
+
     tabBarController.selectedIndex = selectedIndex;
     
     // Add top shadow above tab bar

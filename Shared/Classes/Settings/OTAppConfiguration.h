@@ -22,8 +22,13 @@
 #import "OTEntourage.h"
 
 #define MAP_TAB_INDEX 0
-#define MESSAGES_TAB_INDEX 1
-#define MENU_TAB_INDEX 2
+#if !PFP
+    #define MESSAGES_TAB_INDEX 2
+    #define MENU_TAB_INDEX 3
+#else
+    #define MESSAGES_TAB_INDEX 1
+    #define MENU_TAB_INDEX 2
+#endif
 
 @class EnvironmentConfigurationManager;
 
