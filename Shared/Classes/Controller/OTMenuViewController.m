@@ -80,11 +80,13 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapAssociation;
 @property (weak, nonatomic) IBOutlet UIImageView *imgAssociation;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet OTIdentificationOverlayView *identificationOverlayView;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, strong) NSMutableDictionary *controllersDictionary;
 @property (nonatomic, strong) OTUser *currentUser;
+@property (nonatomic) BOOL isUserConnected;
 
 @end
 
@@ -102,10 +104,14 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self.tapModifyBehavior initialize];
     [self.tapAssociation initialize];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    self.isUserConnected = self.currentUser == nil ? FALSE : TRUE;
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
    
     [self createBackFrontMenuButton];
+    if (!self.isUserConnected) {
+        self.modifyLabel.text = @"login / sign up";
+    }
     [self.modifyLabel underline];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableHeaderView = self.headerView;
@@ -128,9 +134,16 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     [OTLogger logEvent:@"OpenMenu"];
-    [self loadUser];
-    self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    self.nameLabel.text = [self.currentUser displayName];
+    if (self.isUserConnected) {
+        [self loadUser];
+        self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+        self.nameLabel.text = [self.currentUser displayName];
+    } else {
+        // show login/sign up button under picture
+        self.nameLabel.text = @"";
+        self.modifyLabel.text = @"login / sign up";
+        self.menuItems = [self createMenuItems];
+    }
     [OTAppConfiguration updateAppearanceForMainTabBar];
 }
 
@@ -285,11 +298,17 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (IBAction)showProfile {
     [OTLogger logEvent:@"TapMyProfilePhoto"];
-    [self performSegueWithIdentifier:OTMenuViewControllerSegueMenuProfileIdentifier sender:self];
+    if (self.isUserConnected) {
+        [self performSegueWithIdentifier:OTMenuViewControllerSegueMenuProfileIdentifier sender:self];
+    }
 }
 
 - (IBAction)editProfile {
-    [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
+    if (self.isUserConnected) {
+        [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
+    } else {
+        self.identificationOverlayView.alpha = 1;
+    }
 }
 
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier {
@@ -367,7 +386,12 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                                                  segueIdentifier:OTMenuViewControllerSegueMenuSocialIdentifier];
     [menuItems addObject:itemAtd];
     
-    NSString *chartTitle = [self.currentUser hasSignedEthicsChart] ? OTLocalizedString(@"menu_read_chart") : OTLocalizedString(@"menu_sign_chart");
+    NSString *chartTitle;
+    if (self.isUserConnected) {
+        chartTitle = [self.currentUser hasSignedEthicsChart] ? OTLocalizedString(@"menu_read_chart") : OTLocalizedString(@"menu_sign_chart");
+    } else {
+        chartTitle =  OTLocalizedString(@"menu_read_chart");
+    }
     OTMenuItem *itemChart = [[OTMenuItem alloc] initWithTitle:chartTitle
                                                      iconName: @"chart"
                                                    identifier:CHARTE_LINK_ID];
@@ -378,13 +402,17 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                                               segueIdentifier:OTMenuViewControllerSegueMenuAboutIdentifier];
     [menuItems addObject:itemAbout];
     
-    OTMenuItem *itemNil = [[OTMenuItem alloc] initWithTitle:nil iconName: nil ];
-    [menuItems addObject:itemNil];
+    if (self.isUserConnected) {
+        OTMenuItem *itemNil = [[OTMenuItem alloc] initWithTitle:nil iconName: nil ];
+        [menuItems addObject:itemNil];
+        
+        OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
+                                                              iconName: nil
+                                                       segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
+        [menuItems addObject:itemDisconnect];
+
+    }
     
-    OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
-                                                          iconName: nil
-                                                   segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
-    [menuItems addObject:itemDisconnect];
 	return menuItems;
 }
 

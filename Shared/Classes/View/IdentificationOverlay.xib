@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +18,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTIdentificationOverlayView" customModule="Ent_Beta" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="dj3-gS-GaK" id="Krr-Qi-dhY"/>
-                <outlet property="contentView" destination="9yu-JJ-lGS" id="LfT-9Z-eg7"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="dBf-uX-ay4"/>
+                <outlet property="popUpContainer" destination="9yu-JJ-lGS" id="cPs-ml-Q7S"/>
                 <outlet property="signInButton" destination="FRd-Fx-HXR" id="BFt-qc-l7I"/>
                 <outlet property="signUpButton" destination="dE9-6M-fOA" id="Km6-Ma-Ufy"/>
             </connections>
@@ -39,22 +40,22 @@
                             </constraints>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button" image="ic_close"/>
+                            <connections>
+                                <action selector="closeActionButton:" destination="-1" eventType="touchUpInside" id="2L6-nh-xgM"/>
+                            </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Xw-l8-e7l">
-                            <rect key="frame" x="8" y="62" width="36" height="54"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="logoWhiteEntourage" translatesAutoresizingMaskIntoConstraints="NO" id="7Xw-l8-e7l">
+                            <rect key="frame" x="8" y="52" width="56" height="56"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="36" id="Vdg-BA-2IE"/>
-                            </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identifiez vous pour continuer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ga2-Xc-5IJ">
-                            <rect key="frame" x="10" y="146" width="305" height="53"/>
+                            <rect key="frame" x="10" y="128" width="305" height="71"/>
                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="22"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dE9-6M-fOA">
-                            <rect key="frame" x="20" y="229" width="285" height="50"/>
+                            <rect key="frame" x="20" y="219" width="285" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="knU-SF-ueI"/>
@@ -67,7 +68,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRd-Fx-HXR">
-                            <rect key="frame" x="20" y="299" width="285" height="30"/>
+                            <rect key="frame" x="20" y="279" width="285" height="50"/>
                             <state key="normal" title="Déjà membre"/>
                             <connections>
                                 <action selector="signInActionButton:" destination="-1" eventType="touchUpInside" id="vLF-uA-pH0"/>
@@ -81,16 +82,17 @@
                         <constraint firstItem="7Xw-l8-e7l" firstAttribute="leading" secondItem="9yu-JJ-lGS" secondAttribute="leadingMargin" id="BS8-5E-TD5"/>
                         <constraint firstItem="dj3-gS-GaK" firstAttribute="top" secondItem="9yu-JJ-lGS" secondAttribute="top" constant="10" id="DuI-Dy-TZs"/>
                         <constraint firstItem="dj3-gS-GaK" firstAttribute="leading" secondItem="9yu-JJ-lGS" secondAttribute="leading" constant="10" id="Qos-Yo-VPE"/>
-                        <constraint firstItem="dE9-6M-fOA" firstAttribute="bottom" secondItem="FRd-Fx-HXR" secondAttribute="top" constant="-20" id="S5E-rU-eye"/>
+                        <constraint firstItem="dE9-6M-fOA" firstAttribute="bottom" secondItem="FRd-Fx-HXR" secondAttribute="top" constant="-10" id="S5E-rU-eye"/>
                         <constraint firstItem="dE9-6M-fOA" firstAttribute="leading" secondItem="FRd-Fx-HXR" secondAttribute="leading" id="TNZ-pE-qKU"/>
                         <constraint firstAttribute="trailing" secondItem="ga2-Xc-5IJ" secondAttribute="trailing" constant="10" id="Tpc-Mj-vKQ"/>
+                        <constraint firstItem="FRd-Fx-HXR" firstAttribute="height" secondItem="dE9-6M-fOA" secondAttribute="height" id="axL-pc-K9b"/>
                         <constraint firstItem="ga2-Xc-5IJ" firstAttribute="leading" secondItem="9yu-JJ-lGS" secondAttribute="leading" constant="10" id="b4g-k3-6o0"/>
                         <constraint firstAttribute="bottom" secondItem="FRd-Fx-HXR" secondAttribute="bottom" constant="26" id="cho-6s-utk"/>
                         <constraint firstAttribute="trailing" secondItem="FRd-Fx-HXR" secondAttribute="trailing" constant="20" id="dfy-Ey-a9w"/>
-                        <constraint firstItem="7Xw-l8-e7l" firstAttribute="top" secondItem="dj3-gS-GaK" secondAttribute="bottom" constant="30" id="ga4-B8-Qvl"/>
-                        <constraint firstItem="7Xw-l8-e7l" firstAttribute="bottom" secondItem="ga2-Xc-5IJ" secondAttribute="top" constant="-30" id="l5U-Q8-Wqr"/>
+                        <constraint firstItem="7Xw-l8-e7l" firstAttribute="top" secondItem="dj3-gS-GaK" secondAttribute="bottom" constant="20" id="ga4-B8-Qvl"/>
+                        <constraint firstItem="7Xw-l8-e7l" firstAttribute="bottom" secondItem="ga2-Xc-5IJ" secondAttribute="top" constant="-20" id="l5U-Q8-Wqr"/>
                         <constraint firstItem="dE9-6M-fOA" firstAttribute="trailing" secondItem="FRd-Fx-HXR" secondAttribute="trailing" id="mcG-1u-w6w"/>
-                        <constraint firstItem="ga2-Xc-5IJ" firstAttribute="bottom" secondItem="dE9-6M-fOA" secondAttribute="top" constant="-30" id="s4P-es-FyS"/>
+                        <constraint firstItem="ga2-Xc-5IJ" firstAttribute="bottom" secondItem="dE9-6M-fOA" secondAttribute="top" constant="-20" id="s4P-es-FyS"/>
                         <constraint firstItem="FRd-Fx-HXR" firstAttribute="leading" secondItem="9yu-JJ-lGS" secondAttribute="leading" constant="20" id="tvz-EY-6Or"/>
                         <constraint firstAttribute="width" constant="325" id="upj-bu-gAL"/>
                     </constraints>
@@ -98,8 +100,8 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.24761879280821919" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
-                <constraint firstItem="9yu-JJ-lGS" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="jUE-GK-aDA"/>
-                <constraint firstItem="9yu-JJ-lGS" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="y0h-gi-YlN"/>
+                <constraint firstItem="9yu-JJ-lGS" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Ny4-vG-rO2"/>
+                <constraint firstItem="9yu-JJ-lGS" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="qKB-8D-ofy"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="138.40000000000001" y="130.88455772113943"/>
@@ -107,5 +109,6 @@
     </objects>
     <resources>
         <image name="ic_close" width="108" height="108"/>
+        <image name="logoWhiteEntourage" width="56" height="56"/>
     </resources>
 </document>

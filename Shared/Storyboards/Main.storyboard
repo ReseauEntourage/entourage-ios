@@ -199,19 +199,28 @@
                                     <outlet property="delegate" destination="0J6-b7-p0H" id="8IY-4K-OLz"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6E9-KU-wZ4" customClass="OTIdentificationOverlayView" customModule="Ent_Beta" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2Xh-aG-0Ck" firstAttribute="top" secondItem="EiD-PN-iyE" secondAttribute="bottom" id="2e0-d5-PwJ"/>
                             <constraint firstAttribute="trailing" secondItem="EiD-PN-iyE" secondAttribute="trailing" id="585-kS-lyA"/>
+                            <constraint firstItem="6E9-KU-wZ4" firstAttribute="height" secondItem="ljo-QP-YxJ" secondAttribute="height" id="BK5-bB-xjR"/>
+                            <constraint firstItem="6E9-KU-wZ4" firstAttribute="centerX" secondItem="ljo-QP-YxJ" secondAttribute="centerX" id="EZl-EF-qZC"/>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="leading" secondItem="ljo-QP-YxJ" secondAttribute="leading" id="HSe-Sd-ZSw"/>
                             <constraint firstItem="EiD-PN-iyE" firstAttribute="top" secondItem="slD-Bf-Od0" secondAttribute="bottom" id="LTL-JW-Ybz"/>
+                            <constraint firstItem="6E9-KU-wZ4" firstAttribute="centerY" secondItem="ljo-QP-YxJ" secondAttribute="centerY" id="NGv-i3-wW1"/>
+                            <constraint firstItem="6E9-KU-wZ4" firstAttribute="width" secondItem="ljo-QP-YxJ" secondAttribute="width" id="ijO-at-ls7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="a9Y-2c-snz"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="headerView" destination="809-vB-Ibw" id="Rrc-z4-hAO"/>
+                        <outlet property="identificationOverlayView" destination="6E9-KU-wZ4" id="TRg-X2-Tui"/>
                         <outlet property="imgAssociation" destination="HU2-ql-0PL" id="mP3-DC-2uK"/>
                         <outlet property="modifyLabel" destination="tvQ-n3-1AQ" id="4lt-vt-6VX"/>
                         <outlet property="nameLabel" destination="gZg-OL-qCe" id="zeh-G7-D9m"/>
@@ -1810,7 +1819,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dno-Ju-GCg"/>
-        <segue reference="b42-UE-vP1"/>
-        <segue reference="Dfo-uz-6se"/>
+        <segue reference="ZNZ-ec-dR4"/>
+        <segue reference="xSV-rR-wZy"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -101,6 +101,7 @@
 <
     UIGestureRecognizerDelegate,
     UIScrollViewDelegate,
+    UITabBarControllerDelegate,
     OTOptionsDelegate,
     OTFeedItemsTableViewDelegate,
     OTTourCreatorDelegate,
@@ -174,6 +175,7 @@
     [super viewDidLoad];
     
     [self setup];
+    self.tabBarController.delegate = self;
     
     if ([OTAppConfiguration shouldShowIntroTutorial]) {
         [OTAppState presentTutorialScreen];
@@ -396,7 +398,16 @@
     
     [self configureNavigationBar];
     [self checkIfShouldDisableFeedsAndMap];
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     
+    if (viewController == [tabBarController.viewControllers objectAtIndex:MESSAGES_TAB_INDEX] && currentUser == nil) {
+        // show pop up login/sign up
+        return NO;
+    }
+    return YES;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
