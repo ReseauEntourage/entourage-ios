@@ -23,7 +23,6 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "entourage-Swift.h"
-#import "UIColor+entourage.h"
 
 @import Firebase;
 
