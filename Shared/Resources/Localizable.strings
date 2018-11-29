@@ -362,7 +362,7 @@
 
 "filter_solidarity_guide_categories" = "Catégories";
 
-"filter_timeframe_title" = "Mis à jour il y a moins de ";
+"filter_timeframe_title" = "Mis à jour il y a moins de";
 
 "encounter_enter_name_of_met_person" = "Vous devez donner un titre à votre rencontre";
 "encounter_enter_message" = "Vous devez donner une description à votre rencontre";
