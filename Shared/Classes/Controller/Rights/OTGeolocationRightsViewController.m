@@ -138,15 +138,10 @@
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     
-    if ([currentUser hasActionZoneDefined]) {
-        if (![currentUser isRegisteredForPushNotifications]) {
-            [self goToNotifications];
-        } else {
-            [OTAppState navigateToAuthenticatedLandingScreen];
-        }
-    }
-    else if (!locationAllowed) {
-        [self performSegueWithIdentifier:@"NoLocationRightsSegue" sender:self];
+    if (![currentUser isRegisteredForPushNotifications]) {
+        [self goToNotifications];
+    } else {
+        [OTAppState navigateToAuthenticatedLandingScreen];
     }
 }
 
