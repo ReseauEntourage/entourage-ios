@@ -79,8 +79,17 @@
 }
 
 - (void)setupGoogleAutocompleteViewController {
+    GMSPlacesAutocompleteTypeFilter filterType;
+    if ([OTAppConfiguration isApplicationTypeEntourage]) {
+        filterType = kGMSPlacesAutocompleteTypeFilterGeocode;
+    } else if ([OTAppConfiguration isApplicationTypeVoisinAge]) {
+        filterType = kGMSPlacesAutocompleteTypeFilterAddress;
+    } else {
+        filterType = kGMSPlacesAutocompleteTypeFilterNoFilter;
+    }
+
     self.googlePlaceViewController = [[OTGMSAutoCompleteViewController alloc] init];
-    [self.googlePlaceViewController setup:kGMSPlacesAutocompleteTypeFilterAddress];
+    [self.googlePlaceViewController setup:filterType];
     self.googlePlaceViewController.delegate = self;
 }
 
