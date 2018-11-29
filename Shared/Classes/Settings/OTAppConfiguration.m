@@ -10,6 +10,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <SimpleKeychain/A0SimpleKeychain.h>
 
+#import "OTConsts.h"
 #import "OTAppConfiguration.h"
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"

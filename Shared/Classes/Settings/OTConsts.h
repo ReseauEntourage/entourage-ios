@@ -132,3 +132,9 @@
 // Email addresses
 #define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"
 #define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.org"
+
+// Tabbar Indexes
+#define MAP_TAB_INDEX 0
+#define MESSAGES_TAB_INDEX 1
+#define MENU_TAB_INDEX 2
+
