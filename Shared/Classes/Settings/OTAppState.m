@@ -219,54 +219,59 @@
     }
 }
 
-+ (void)continueFromStartupScreen
++ (void)continueFromStartupScreen:(BOOL)keepTabBarVisible
 {
-    return [OTAppState continueFromStartupScreenCreatingUser:NO];
+    return [OTAppState continueFromStartupScreenCreatingUser:NO :keepTabBarVisible];
 }
 
-+ (void)continueFromStartupScreenForOnboarding
++ (void)continueFromStartupScreenForOnboarding:(BOOL)keepTabBarVisible
 {
-    return [OTAppState continueFromStartupScreenCreatingUser:YES];
+    return [OTAppState continueFromStartupScreenCreatingUser:YES :keepTabBarVisible];
 }
 
-+ (void)continueFromStartupScreenCreatingUser:(BOOL)createUser {
++ (void)continueFromStartupScreenCreatingUser:(BOOL)createUser :(BOOL)keepTabBarVisible {
     OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
     OTWelcomeViewController *welcomeViewController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTWelcomeViewController"];
     welcomeViewController.signupNewUser = createUser;
     
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
+        welcomeViewController.hidesBottomBarWhenPushed = keepTabBarVisible;
         [[OTAppState getTopViewController].navigationController pushViewController:welcomeViewController animated:YES];
     }
     else {
         [OTLogger logEvent:@"SplashLogIn"];
+        loginController.hidesBottomBarWhenPushed = keepTabBarVisible;
         [[OTAppState getTopViewController].navigationController pushViewController:loginController animated:YES];
     }
 }
 
-+ (void)continueFromWelcomeScreen {
-    return [OTAppState continueFromWelcomeScreenCreatingUser:NO];
++ (void)continueFromWelcomeScreen:(BOOL)keepTabBarVisible {
+    return [OTAppState continueFromWelcomeScreenCreatingUser:NO :keepTabBarVisible];
 }
 
-+ (void)continueFromWelcomeScreenForOnboarding {
-    return [OTAppState continueFromWelcomeScreenCreatingUser:YES];
++ (void)continueFromWelcomeScreenForOnboarding:(BOOL)keepTabBarVisible {
+    return [OTAppState continueFromWelcomeScreenCreatingUser:YES :keepTabBarVisible];
 }
 
-+ (void)continueFromWelcomeScreenCreatingUser:(BOOL)createUser
++ (void)continueFromWelcomeScreenCreatingUser:(BOOL)createUser :(BOOL)keepTabBarVisible
 {
     if (createUser) {
         [OTLogger logEvent:@"WelcomeScreenContinue"];
         OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
+        onboardingViewController.hidesBottomBarWhenPushed = keepTabBarVisible;
         [[OTAppState getTopViewController].navigationController pushViewController:onboardingViewController animated:YES];
     } else {
         if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
             OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
             [OTLogger logEvent:@"SplashLogIn"];
+            loginController.hidesBottomBarWhenPushed = keepTabBarVisible;
             [[OTAppState getTopViewController].navigationController pushViewController:loginController animated:YES];
         }
         else
         {
             [OTLogger logEvent:@"WelcomeScreenContinue"];
             OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
+            onboardingViewController.hidesBottomBarWhenPushed = keepTabBarVisible;
             [[OTAppState getTopViewController].navigationController pushViewController:onboardingViewController animated:YES];
         }
     }

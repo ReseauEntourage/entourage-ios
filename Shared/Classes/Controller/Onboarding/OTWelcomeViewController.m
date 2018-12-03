@@ -93,9 +93,9 @@
 
 - (IBAction)continueOnboarding:(id)sender {
     if (self.signupNewUser) {
-        [OTAppState continueFromWelcomeScreenForOnboarding];
+        [OTAppState continueFromWelcomeScreenForOnboarding: YES];
     } else {
-        [OTAppState continueFromWelcomeScreen];
+        [OTAppState continueFromWelcomeScreen: YES];
     }
 }
 

@@ -60,11 +60,11 @@ class PfpStartupViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func showLogin() {
-        OTAppState.continueFromStartupScreen()
+        OTAppState.continue(fromStartupScreen: false)
     }
     
     @IBAction func signupLogin() {
-        OTAppState.continueFromStartupScreenForOnboarding()
+        OTAppState.continueFromStartupScreen(forOnboarding: false)
     }
     
     func setupScrollView () {

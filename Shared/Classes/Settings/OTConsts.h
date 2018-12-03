@@ -134,7 +134,14 @@
 #define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.org"
 
 // Tabbar Indexes
-#define MAP_TAB_INDEX 0
-#define MESSAGES_TAB_INDEX 1
-#define MENU_TAB_INDEX 2
-
+#if PFP
+    #define MAP_TAB_INDEX 0
+    #define SOLIDARITY_MAP_INDEX 0
+    #define MESSAGES_TAB_INDEX 1
+    #define MENU_TAB_INDEX 2
+# else
+    #define MAP_TAB_INDEX 0
+    #define SOLIDARITY_MAP_INDEX 1
+    #define MESSAGES_TAB_INDEX 2
+    #define MENU_TAB_INDEX 3
+#endif

@@ -87,7 +87,7 @@
 }
 
 -(IBAction)showLogin:(id)sender {
-    [OTAppState continueFromStartupScreen];
+    [OTAppState continueFromStartupScreen:NO];
 }
 
 - (IBAction)showPolicyPopUp:(id)sender {
@@ -120,10 +120,7 @@
                                actionWithTitle:@"J'accepte"
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action) {
-                                   UIStoryboard *mainStoryboard = [UIStoryboard mainStoryboard];
-                                   OTMainViewController *mainViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
-
-                                   [self presentViewController:mainViewController animated:YES completion:nil];
+                                   [OTAppState navigateToAuthenticatedLandingScreen];
                                }];
     
     UIAlertAction* cancel = [UIAlertAction

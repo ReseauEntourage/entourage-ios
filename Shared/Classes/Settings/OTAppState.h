@@ -31,11 +31,11 @@
 
 + (void)navigateToLoginScreen:(NSURL*)link;
 + (void)navigateToStartupScreen;
-+ (void)continueFromStartupScreenForOnboarding;
 + (void)navigateToPermissionsScreens;
-+ (void)continueFromStartupScreen;
-+ (void)continueFromWelcomeScreenForOnboarding;
-+ (void)continueFromWelcomeScreen;
++ (void)continueFromStartupScreen:(BOOL)keepTabBarVisible;
++ (void)continueFromStartupScreenForOnboarding:(BOOL)keepTabBarVisible;
++ (void)continueFromWelcomeScreen:(BOOL)keepTabBarVisible;
++ (void)continueFromWelcomeScreenForOnboarding:(BOOL)keepTabBarVisible;
 + (void)continueFromLoginScreen;
 + (void)continueFromUserEmailScreen;
 + (void)continueFromUserNameScreen;

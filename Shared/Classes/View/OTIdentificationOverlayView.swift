@@ -17,11 +17,11 @@ class OTIdentificationOverlayView: UIView {
     @IBOutlet weak var signInButton: UIButton!
     
     @IBAction func signUpActionButton(_ sender: Any) {
-        OTAppState.continueFromWelcomeScreenForOnboarding()
+        OTAppState.continueFromWelcomeScreen(forOnboarding: true)
     }
     
     @IBAction func signInActionButton(_ sender: Any) {
-        OTAppState.continueFromStartupScreenForOnboarding()
+        OTAppState.continueFromStartupScreen(forOnboarding: true)
     }
     
     @IBAction func closeActionButton(_ sender: Any) {
