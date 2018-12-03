@@ -83,6 +83,7 @@ typedef NS_ENUM(NSInteger) {
 @property (nonatomic, strong) OTUser *currentUser;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior *mailSender;
 @property (nonatomic) UIView *startConversationView;
+@property (weak, nonatomic) IBOutlet OTIdentificationOverlayView *identificationOverlayView;
 
 @end
 
@@ -472,21 +473,25 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)startChatWithSelectedUser {
-    [SVProgressHUD show];
-    
-    [self loadEntourageItemWithGropupId:self.user.conversation.uuid
-                             completion:^(OTEntourage *entourage, NSError *error) {
-                                 [SVProgressHUD dismiss];
-                                 if (entourage) {
-                                     OTActiveFeedItemViewController *vc = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTActiveFeedItemViewController"];
-                                     vc.feedItem = entourage;
-                                     [self.navigationController pushViewController:vc animated:YES];
-                                 }
-                                 else {
+    if ([OTAppState isUserLogged]) {
+        [SVProgressHUD show];
+        
+        [self loadEntourageItemWithGropupId:self.user.conversation.uuid
+                                 completion:^(OTEntourage *entourage, NSError *error) {
                                      [SVProgressHUD dismiss];
-                                     NSLog(@"%@", error.localizedDescription);
-                                 }
-                             }];
+                                     if (entourage) {
+                                         OTActiveFeedItemViewController *vc = [[UIStoryboard activeFeedsStoryboard] instantiateViewControllerWithIdentifier:@"OTActiveFeedItemViewController"];
+                                         vc.feedItem = entourage;
+                                         [self.navigationController pushViewController:vc animated:YES];
+                                     }
+                                     else {
+                                         [SVProgressHUD dismiss];
+                                         NSLog(@"%@", error.localizedDescription);
+                                     }
+                                 }];
+    } else {
+        [self.identificationOverlayView show];
+    }
 }
 
 - (void)setupConversationView {

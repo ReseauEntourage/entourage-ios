@@ -1272,6 +1272,10 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                     <action selector="goToTourOptions:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZeW-Yf-grz"/>
                                 </connections>
                             </button>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QNE-rf-28c" customClass="OTIdentificationOverlayView" customModule="Ent_Beta" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1282,6 +1286,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="Vdn-dq-D5K" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="11" id="8fr-xl-te5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oHF-Vi-LCk" secondAttribute="trailing" constant="-16" id="9ho-oj-3FF"/>
                             <constraint firstAttribute="trailing" secondItem="Bt3-Uv-XrN" secondAttribute="trailing" id="BJw-Pb-he4"/>
+                            <constraint firstItem="QNE-rf-28c" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" id="BXf-j5-R1n"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="oHF-Vi-LCk" secondAttribute="bottom" id="CoI-BK-C8y"/>
                             <constraint firstItem="Lzp-RD-PWj" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" constant="-15" id="DHf-kj-GXw"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Kc9-kH-YQ7" secondAttribute="bottom" constant="62" id="DuD-zc-Fd5"/>
@@ -1294,8 +1299,11 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="Bt3-Uv-XrN" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="WW1-rz-M45"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uRg-cj-T9Q" secondAttribute="trailing" constant="-6" id="ZT2-9H-lNi"/>
                             <constraint firstItem="ONo-TH-dyX" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="11" id="aiz-r6-FV1"/>
+                            <constraint firstItem="QNE-rf-28c" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="bRy-ip-xCZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xgS-MI-aio" secondAttribute="trailing" id="cyH-Bv-Elr"/>
                             <constraint firstItem="ONo-TH-dyX" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="fBr-Xx-Gff"/>
+                            <constraint firstItem="QNE-rf-28c" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="jq3-0g-JYi"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="8zL-iD-eto" secondAttribute="bottom" constant="62" id="kYQ-7P-wpY"/>
                             <constraint firstItem="Kc9-kH-YQ7" firstAttribute="centerX" secondItem="oVf-Bh-vdD" secondAttribute="centerX" id="kpM-YF-Qzn"/>
                             <constraint firstItem="fyj-qg-Gvf" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" constant="-29.75" id="n1b-SP-eBD"/>
                             <constraint firstItem="uRg-cj-T9Q" firstAttribute="top" secondItem="oVf-Bh-vdD" secondAttribute="bottom" constant="9" id="puD-5n-gle"/>
@@ -1303,6 +1311,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="xgS-MI-aio" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="rPg-81-wEO"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="sQA-pi-JcK"/>
                             <constraint firstAttribute="trailing" secondItem="fyj-qg-Gvf" secondAttribute="trailing" constant="20" id="saG-lm-Sc3"/>
+                            <constraint firstItem="QNE-rf-28c" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="u7e-Uz-yBK"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="xgS-MI-aio" secondAttribute="bottom" constant="131" id="yCq-nS-3fQ"/>
                             <constraint firstItem="Bt3-Uv-XrN" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-64" id="za5-Af-WaO"/>
                         </constraints>
@@ -1320,6 +1329,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                         <outlet property="hideScreenPlaceholder" destination="Bt3-Uv-XrN" id="61u-Cv-WHA"/>
                         <outlet property="hideScreenPlaceholderSubtitle" destination="gWr-EL-qgm" id="67s-gO-Now"/>
                         <outlet property="hideScreenPlaceholderTitle" destination="QHN-P3-Oj3" id="sJK-Bg-WuE"/>
+                        <outlet property="identificationOverlayView" destination="QNE-rf-28c" id="yQo-qV-6fb"/>
                         <outlet property="joinBehavior" destination="0l0-bs-S95" id="eTw-ea-fNI"/>
                         <outlet property="launcherButton" destination="uRg-cj-T9Q" id="oSp-ac-Y8Q"/>
                         <outlet property="mailSender" destination="dw9-WQ-EOn" id="riz-kQ-jLk"/>

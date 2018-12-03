@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "entourage-Swift.h"
 
 // Controller
 #import "OTMainViewController.h"
@@ -161,6 +162,8 @@
 @property (nonatomic, strong) IBOutlet UIView  *hideScreenPlaceholder;
 @property (nonatomic, strong) IBOutlet UILabel  *hideScreenPlaceholderTitle;
 @property (nonatomic, strong) IBOutlet UILabel  *hideScreenPlaceholderSubtitle;
+@property (weak, nonatomic) IBOutlet OTIdentificationOverlayView *identificationOverlayView;
+@property (nonatomic) BOOL isUserConnected;
 
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 @property (nonatomic) double entourageScale;
@@ -188,6 +191,8 @@
 - (void)configureActionsButton {
     UIImage *closeImage = [[UIImage imageNamed:@"closeOptionWithNoShadow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
+    self.isUserConnected = [OTAppState isUserLogged];
+
     [self.launcherButton.layer setShadowColor:[UIColor blackColor].CGColor];
     [self.launcherButton.layer setShadowOpacity:0.5];
     [self.launcherButton.layer setShadowRadius:4.0];
@@ -401,10 +406,9 @@
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     
-    if (viewController == [tabBarController.viewControllers objectAtIndex:MESSAGES_TAB_INDEX] && currentUser == nil) {
-        // show pop up login/sign up
+    if (viewController == [tabBarController.viewControllers objectAtIndex:MESSAGES_TAB_INDEX] && !self.isUserConnected) {
+        [self.identificationOverlayView show];
         return NO;
     }
     return YES;
@@ -1148,13 +1152,25 @@
 }
 
 - (void)createAction {
-    self.addEditEvent = NO;
-    [self createEntouragewithAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
+    if (self.isUserConnected) {
+        self.addEditEvent = NO;
+        [self createEntouragewithAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
+    } else {
+        if ([self.presentedViewController isKindOfClass:[OTMapOptionsViewController class]])
+            [self dismissViewControllerAnimated:YES completion:nil];
+        [self.identificationOverlayView show];
+    }
 }
     
 - (void)createEvent {
-    self.addEditEvent = YES;
-    [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
+    if (self.isUserConnected) {
+        self.addEditEvent = YES;
+        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
+    } else {
+        if ([self.presentedViewController isKindOfClass:[OTMapOptionsViewController class]])
+            [self dismissViewControllerAnimated:YES completion:nil];
+        [self.identificationOverlayView show];
+    }
 }
 
 - (void) createEntouragewithAlertMessage:(NSString *)message {

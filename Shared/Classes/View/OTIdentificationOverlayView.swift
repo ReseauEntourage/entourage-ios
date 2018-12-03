@@ -25,7 +25,7 @@ class OTIdentificationOverlayView: UIView {
     }
     
     @IBAction func closeActionButton(_ sender: Any) {
-        self.alpha = 0
+        hide()
     }
     
     override init(frame: CGRect) {
@@ -50,8 +50,22 @@ class OTIdentificationOverlayView: UIView {
         setup()
     }
     
-    func setup() {
+    @objc func setup() {
         popUpContainer.layer.cornerRadius = 8
         signUpButton.layer.cornerRadius = 25
+    }
+    
+    @objc func show() {
+        UIView.animate(withDuration: 0.3,
+                       animations: { [unowned self] in
+                        self.alpha = 1
+                        self.transform = CGAffineTransform(scaleX: 1, y: 1) })
+    }
+    
+    @objc func hide() {
+        UIView.animate(withDuration: 0.3,
+                       animations: { [unowned self] in
+                        self.alpha = 0
+                        self.transform = CGAffineTransform(scaleX: 1.3, y: 1.3) })
     }
 }

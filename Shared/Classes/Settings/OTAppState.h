@@ -14,6 +14,8 @@
 @protocol EntourageEditorDelegate;
 
 @interface OTAppState : NSObject
++ (BOOL)isUserLogged;
+
 + (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions;
 + (void)returnToLogin;
 + (void)presentTutorialScreen;

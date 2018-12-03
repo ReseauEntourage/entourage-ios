@@ -39,6 +39,15 @@
 
 @implementation OTAppState
 
++ (BOOL)isUserLogged {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (currentUser == nil) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
 + (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions
 {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;

@@ -104,13 +104,13 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self.tapModifyBehavior initialize];
     [self.tapAssociation initialize];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    self.isUserConnected = self.currentUser == nil ? FALSE : TRUE;
+    self.isUserConnected = [OTAppState isUserLogged];
 	self.controllersDictionary = [NSMutableDictionary dictionary];
 	[self configureControllersDictionary];
    
     [self createBackFrontMenuButton];
     if (!self.isUserConnected) {
-        self.modifyLabel.text = @"login / sign up";
+        self.modifyLabel.text = @"Login / Sign up";
     }
     [self.modifyLabel underline];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -141,7 +141,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     } else {
         // show login/sign up button under picture
         self.nameLabel.text = @"";
-        self.modifyLabel.text = @"login / sign up";
+        self.modifyLabel.text = @"Login / Sign up";
         self.menuItems = [self createMenuItems];
     }
     [OTAppConfiguration updateAppearanceForMainTabBar];
@@ -307,7 +307,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     if (self.isUserConnected) {
         [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
     } else {
-        self.identificationOverlayView.alpha = 1;
+        [self.identificationOverlayView show];
     }
 }
 
