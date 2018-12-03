@@ -12,19 +12,14 @@
 #import "entourage-Swift.h"
 
 @interface OTGMSAutoCompleteViewController () < GMSAutocompleteViewControllerDelegate >
-
-- (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didAutocompleteWithPlace:(nonnull GMSPlace *)place;
-- (void)viewController:(nonnull GMSAutocompleteViewController *)viewController didFailAutocompleteWithError:(nonnull NSError *)error;
-- (void)wasCancelled:(nonnull GMSAutocompleteViewController *)viewController;
-
 @end
 
 @implementation OTGMSAutoCompleteViewController
 
 - (void)setup:(GMSPlacesAutocompleteTypeFilter)filterType {
     // Set bounds to France.
-    CLLocationCoordinate2D neBoundsCorner = CLLocationCoordinate2DMake(51, 9);
-    CLLocationCoordinate2D swBoundsCorner = CLLocationCoordinate2DMake(42, -5);
+    CLLocationCoordinate2D neBoundsCorner = CLLocationCoordinate2DMake(50.77, 6.04);
+    CLLocationCoordinate2D swBoundsCorner = CLLocationCoordinate2DMake(43.57, -1.97);
     GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:neBoundsCorner
                                                                        coordinate:swBoundsCorner];
     

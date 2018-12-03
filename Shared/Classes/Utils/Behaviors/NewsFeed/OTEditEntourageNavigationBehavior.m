@@ -121,18 +121,6 @@
     [acController setup:kGMSPlacesAutocompleteTypeFilterNoFilter];
     acController.delegate = self;
 
-    acController.autocompleteBoundsMode = kGMSAutocompleteBoundsModeRestrict;
-    
-    [OTAppConfiguration configureNavigationControllerAppearance:acController.navigationController]; // ?
-    
-    /*
-     * if we have the device location: 20km radius around the user (so 40x40km square)
-     * else: North-East lat=51,lng=9 to South-West lat=42,lng=-5 (a rectangle roughly around France)
-     The other parameters are left to their default ("bounds mode" set to "bias", no "type" filtering).
-     */
-    acController.autocompleteBounds = [[GMSCoordinateBounds alloc] initWithCoordinate:(CLLocationCoordinate2DMake(51, 9))
-                                                                           coordinate:CLLocationCoordinate2DMake(42, -5)];
-    
     [self.owner presentViewController:acController animated:YES completion:nil];
 }
 
