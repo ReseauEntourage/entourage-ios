@@ -308,8 +308,6 @@
 		A202EB942085D2C80058F32C /* OTFeedItemJoinMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8EF2085D2C40058F32C /* OTFeedItemJoinMessageController.m */; };
 		A202EB952085D2C80058F32C /* OTFeedItemJoinOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F02085D2C40058F32C /* OTFeedItemJoinOptionsViewController.m */; };
 		A202EB962085D2C80058F32C /* OTFeedItemJoinOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F02085D2C40058F32C /* OTFeedItemJoinOptionsViewController.m */; };
-		A202EB972085D2C80058F32C /* OTGeolocationDeniedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F62085D2C40058F32C /* OTGeolocationDeniedViewController.m */; };
-		A202EB982085D2C80058F32C /* OTGeolocationDeniedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F62085D2C40058F32C /* OTGeolocationDeniedViewController.m */; };
 		A202EB992085D2C80058F32C /* OTNotificationsRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F72085D2C40058F32C /* OTNotificationsRightsViewController.m */; };
 		A202EB9A2085D2C80058F32C /* OTNotificationsRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F72085D2C40058F32C /* OTNotificationsRightsViewController.m */; };
 		A202EB9B2085D2C80058F32C /* OTGeolocationRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F82085D2C40058F32C /* OTGeolocationRightsViewController.m */; };
@@ -1098,7 +1096,6 @@
 		A296B88120871CFC00F6AFBD /* OTTourCreatorBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA4B2085D2C60058F32C /* OTTourCreatorBehavior.m */; };
 		A296B88220871CFC00F6AFBD /* OTEditEntourageNavigationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA572085D2C60058F32C /* OTEditEntourageNavigationBehavior.m */; };
 		A296B88320871CFC00F6AFBD /* OTEntourageMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA8D2085D2C60058F32C /* OTEntourageMapHandler.m */; };
-		A296B88420871CFC00F6AFBD /* OTGeolocationDeniedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F62085D2C40058F32C /* OTGeolocationDeniedViewController.m */; };
 		A296B88520871CFC00F6AFBD /* OTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91A2085D2C50058F32C /* OTMapView.m */; };
 		A296B88620871CFC00F6AFBD /* OTInviteSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E86C2085D2C40058F32C /* OTInviteSourceViewController.m */; };
 		A296B88720871CFC00F6AFBD /* OTTourOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A32085D2C40058F32C /* OTTourOptionsViewController.m */; };
@@ -1540,10 +1537,8 @@
 		A202E8F22085D2C40058F32C /* OTFeedItemJoinMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemJoinMessageController.h; sourceTree = "<group>"; };
 		A202E8F42085D2C40058F32C /* OTNotificationsRightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNotificationsRightsViewController.h; sourceTree = "<group>"; };
 		A202E8F52085D2C40058F32C /* OTGeolocationRightsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGeolocationRightsViewController.h; sourceTree = "<group>"; };
-		A202E8F62085D2C40058F32C /* OTGeolocationDeniedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGeolocationDeniedViewController.m; sourceTree = "<group>"; };
 		A202E8F72085D2C40058F32C /* OTNotificationsRightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTNotificationsRightsViewController.m; sourceTree = "<group>"; };
 		A202E8F82085D2C40058F32C /* OTGeolocationRightsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGeolocationRightsViewController.m; sourceTree = "<group>"; };
-		A202E8F92085D2C40058F32C /* OTGeolocationDeniedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGeolocationDeniedViewController.h; sourceTree = "<group>"; };
 		A202E8FA2085D2C40058F32C /* OTConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTConfirmationViewController.m; sourceTree = "<group>"; };
 		A202E8FB2085D2C40058F32C /* OTEntourageEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageEditorViewController.h; sourceTree = "<group>"; };
 		A202E8FC2085D2C40058F32C /* OTSelectAssociationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSelectAssociationViewController.h; sourceTree = "<group>"; };
@@ -2744,11 +2739,10 @@
 			isa = PBXGroup;
 			children = (
 				A202E8F42085D2C40058F32C /* OTNotificationsRightsViewController.h */,
-				A202E8F62085D2C40058F32C /* OTGeolocationDeniedViewController.m */,
+				A202E8F52085D2C40058F32C /* OTGeolocationRightsViewController.h */,
 				A202E8F72085D2C40058F32C /* OTNotificationsRightsViewController.m */,
 				A202E8F52085D2C40058F32C /* OTGeolocationRightsViewController.h */,
 				A202E8F82085D2C40058F32C /* OTGeolocationRightsViewController.m */,
-				A202E8F92085D2C40058F32C /* OTGeolocationDeniedViewController.h */,
 			);
 			path = Rights;
 			sourceTree = "<group>";
@@ -4770,7 +4764,6 @@
 				A202ECC72085D2C80058F32C /* OTTourCreatorBehavior.m in Sources */,
 				A202ECD32085D2C80058F32C /* OTEditEntourageNavigationBehavior.m in Sources */,
 				A202ED012085D2C80058F32C /* OTEntourageMapHandler.m in Sources */,
-				A202EB972085D2C80058F32C /* OTGeolocationDeniedViewController.m in Sources */,
 				A202EBBD2085D2C80058F32C /* OTMapView.m in Sources */,
 				A202EB1D2085D2C70058F32C /* OTInviteSourceViewController.m in Sources */,
 				A202EB512085D2C80058F32C /* OTTourOptionsViewController.m in Sources */,
@@ -4951,7 +4944,6 @@
 				A202EC542085D2C80058F32C /* OTToggleGroupViewBehavior.m in Sources */,
 				A202EC7E2085D2C80058F32C /* OTAssociationsSourceBehavior.m in Sources */,
 				A202EB662085D2C80058F32C /* OTSettingsViewController.m in Sources */,
-				A202EB982085D2C80058F32C /* OTGeolocationDeniedViewController.m in Sources */,
 				A202EBF22085D2C80058F32C /* OTFilterCellTableViewCell.m in Sources */,
 				A202ED222085D2C80058F32C /* NSDate+OTFormatter.m in Sources */,
 				A202EB1C2085D2C70058F32C /* OTCreateMeetingViewController.m in Sources */,
@@ -5460,7 +5452,6 @@
 				A296B88120871CFC00F6AFBD /* OTTourCreatorBehavior.m in Sources */,
 				A296B88220871CFC00F6AFBD /* OTEditEntourageNavigationBehavior.m in Sources */,
 				A296B88320871CFC00F6AFBD /* OTEntourageMapHandler.m in Sources */,
-				A296B88420871CFC00F6AFBD /* OTGeolocationDeniedViewController.m in Sources */,
 				A296B88520871CFC00F6AFBD /* OTMapView.m in Sources */,
 				A296B88620871CFC00F6AFBD /* OTInviteSourceViewController.m in Sources */,
 				A296B88720871CFC00F6AFBD /* OTTourOptionsViewController.m in Sources */,
