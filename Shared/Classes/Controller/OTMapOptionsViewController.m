@@ -94,7 +94,7 @@
             atIndex:self.buttonIndex++ withIcon:@"heart"
           andAction:@selector(doCreateAction:)];
     
-    if (self.isPOIVisible) {
+    if (self.isPOIVisible) { // what is POI ?
         [self addOption:OTLocalizedString(@"propose_structure")
                 atIndex:self.buttonIndex++ withIcon:@"house"
          applyTintColor:NO

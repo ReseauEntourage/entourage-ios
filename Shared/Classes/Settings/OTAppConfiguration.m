@@ -315,7 +315,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     if (OTAppConfiguration.supportsSolidarityGuideFunctionality) {
         // Solidarity Guide Map Tab
         OTMainViewController *guideMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
-        guideMapViewController.mustBeSwitchedToGuide = YES;
+        guideMapViewController.isSolidarityGuide = YES;
         UINavigationController *guideMapNavController = [[UINavigationController alloc] initWithRootViewController:guideMapViewController];
         guideMapNavController.tabBarItem.title = OTLocalizedString(@"annuaire");
         guideMapNavController.tabBarItem.image = [[UIImage imageNamed:@"ic_navigation_guide"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
