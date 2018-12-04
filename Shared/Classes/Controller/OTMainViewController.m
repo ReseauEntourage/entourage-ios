@@ -371,7 +371,7 @@
     [super viewWillAppear:animated];
     [OTAppConfiguration updateAppearanceForMainTabBar];
     
-    if (self.mustBeSwitchedToGuide == YES) {
+    if (self.isSolidarityGuide == YES) {
         [self switchToGuide];
     } else {
         [self.newsFeedsSourceBehavior resume];
@@ -1011,11 +1011,15 @@
         eventName = self.toursMapDelegate.isActive ? @"PlusFromFeedClick" : @"PlusFromGDSClick";
     }
     [OTLogger logEvent:eventName];
-    
-    [OTAppState showFeedAndMapActionsFromController:self
-                                        showOptions:YES
-                                       withDelegate:self
-                                     isEditingEvent:self.addEditEvent];
+
+    if (self.isSolidarityGuide) {
+        [self proposeStructure];
+    } else {
+        [OTAppState showFeedAndMapActionsFromController:self
+                                            showOptions:YES
+                                           withDelegate:self
+                                         isEditingEvent:self.addEditEvent];
+    }
 }
 
 #pragma mark - OTTourCreatorDelegate
