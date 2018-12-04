@@ -487,6 +487,10 @@
 "help_close_mail" = "Aide pour l'entourage %@";
 "structure_subject" = "Information sur la structure '%@'";
 
+"contact_email_adress" = "contact@entourage.social";
+"email_subject_new_sms" = "Demande de code SMS";
+"email_body_new_sms" = "Bonjour,\nMon numéro :\n\nMerci";
+
 // Share
 "share_public" = "Ce projet solidaire sur Entourage a besoin de toi. Rejoins-le en téléchargeant l'app ici %@";
 "share_creator" = "J'ai créé ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";

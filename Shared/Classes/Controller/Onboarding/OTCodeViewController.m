@@ -135,9 +135,9 @@
         composeVC.mailComposeDelegate = self;
         
         // Configure the fields of the interface.
-        [composeVC setToRecipients:@[@"contact@entourage.social"]];
-        [composeVC setSubject:@"Demande de code SMS"];
-        [composeVC setMessageBody:@"" isHTML:NO];
+        [composeVC setToRecipients:@[@"contact_email_adress"]];
+        [composeVC setSubject:@"email_subject_new_sms"];
+        [composeVC setMessageBody:@"email_body_new_sms" isHTML:NO];
         
         // Present the view controller modally.
         [self presentViewController:composeVC animated:YES completion:nil];
