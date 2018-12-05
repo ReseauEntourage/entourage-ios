@@ -18,10 +18,12 @@ class OTIdentificationOverlayView: UIView {
     
     @IBAction func signUpActionButton(_ sender: Any) {
         OTAppState.continueFromWelcomeScreen(forOnboarding: true)
+        hide()
     }
     
     @IBAction func signInActionButton(_ sender: Any) {
         OTAppState.continueFromStartupScreen(forOnboarding: true)
+        hide()
     }
     
     @IBAction func closeActionButton(_ sender: Any) {
