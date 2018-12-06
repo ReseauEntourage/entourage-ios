@@ -110,7 +110,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
    
     [self createBackFrontMenuButton];
     if (!self.isUserConnected) {
-        self.modifyLabel.text = @"Login / Sign up";
+        self.modifyLabel.text = OTLocalizedString(@"unlogged_menu_login_signup");
     }
     [self.modifyLabel underline];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -141,7 +141,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     } else {
         // show login/sign up button under picture
         self.nameLabel.text = @"";
-        self.modifyLabel.text = @"Login / Sign up";
+        self.modifyLabel.text = OTLocalizedString(@"unlogged_menu_login_signup");
         self.menuItems = [self createMenuItems];
     }
     [OTAppConfiguration updateAppearanceForMainTabBar];
@@ -270,8 +270,9 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
             NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, menuItem.identifier, TOKEN];
             NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
             
-            if  ( ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")]) ||
-                [menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")] ) {
+            if  ([menuItem.title isEqualToString:OTLocalizedString(@"menu_scb")] ||
+                 [menuItem.title isEqualToString:OTLocalizedString(@"menu_entourage_actions")] ||
+                 [menuItem.title isEqualToString:OTLocalizedString(@"menu_join")] ) {
                 [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
             }
             else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_chart")]) {
@@ -281,9 +282,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                     url = [NSString stringWithFormat:CHARTE_LINK_FORMAT_PRO, userId];
                 }
                 [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
-            }
-            else if ([menuItem.title isEqualToString:OTLocalizedString(@"menu_join")]) {
-                [OTSafariService launchInAppBrowserWithUrlString:JOIN_URL viewController:self.navigationController];
             }
             else {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
@@ -300,6 +298,8 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [OTLogger logEvent:@"TapMyProfilePhoto"];
     if (self.isUserConnected) {
         [self performSegueWithIdentifier:OTMenuViewControllerSegueMenuProfileIdentifier sender:self];
+    } else {
+        [self.identificationOverlayView show];
     }
 }
 
@@ -372,7 +372,8 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [menuItems addObject:itemSolidarityGuide];
     
     OTMenuItem *itemJoin = [[OTMenuItem alloc]    initWithTitle:OTLocalizedString(@"menu_join")
-                                                               iconName:@"menu_ba"];
+                                                       iconName:@"menu_ba"
+                                                     identifier:JOIN_LINK_ID];
     itemJoin.tag = OTEntourageMenuIndexTypeJoin;
     [menuItems addObject:itemJoin];
     

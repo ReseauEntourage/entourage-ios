@@ -52,6 +52,7 @@
 // MenuItems
 "menu_amis" = "Amis";
 "myProfile" = "MON COMPTE";
+"unlogged_menu_login_signup" = "Login / Sign up";
 "parameters" = "Parameters";
 "menu_scb" = "Conseils pour oser la rencontre";
 "menu_chart" = "Charte éthique";

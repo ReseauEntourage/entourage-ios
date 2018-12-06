@@ -97,7 +97,6 @@
 #define FAQ_LINK_ID @"faq"
 #define SUGGESTION_LINK_ID @"feedback"
 #define JOIN_LINK_ID @"volunteering"
-#define JOIN_URL @"https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
 
 // Chart Ethique
 #define CHARTE_LINK_ID @"ethics-charter"
