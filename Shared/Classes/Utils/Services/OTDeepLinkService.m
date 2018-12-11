@@ -17,7 +17,6 @@
 #import "OTAPIConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTLoginViewController.h"
-#import "OTSelectAssociationViewController.h"
 #import "OTEntourageEditorViewController.h"
 #import "OTTutorialViewController.h"
 #import "OTSafariService.h"
@@ -139,11 +138,6 @@
                 [mainViewController showFilters];
             }
         }
-    } else if ([key isEqualToString:@"badge"]) {
-        OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
-        
-        [self showController:selectAssociationController];
-        
     } else if ([key isEqualToString:@"webview"]) {
         NSArray *elts = [query componentsSeparatedByString:@"="];
         NSURL *url = [NSURL URLWithString:elts[1]];

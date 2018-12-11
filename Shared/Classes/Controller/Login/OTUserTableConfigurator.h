@@ -13,7 +13,6 @@ typedef NS_ENUM(NSInteger) {
     AssociationRowTypeTitle,
     AssociationRowTypePartner,
     AssociationRowTypeOrganisation,
-    AssociationRowTypePartnerSelect
 } AssociationRowType;
 
 @interface OTUserTableConfigurator : NSObject
