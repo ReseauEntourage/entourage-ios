@@ -143,6 +143,25 @@
         [self presentViewController:composeVC animated:YES completion:nil];
     } else {
         NSLog(@"Mail services are not available.");
+        NSArray* sharedObjects = [NSArray arrayWithObjects:@"sharecontent",  nil]; // A tester pour voir quels données passer et comment
+        
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:sharedObjects applicationActivities:nil];
+        
+        activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook,
+                                                         UIActivityTypePostToTwitter,
+                                                         UIActivityTypePostToFlickr,
+                                                         UIActivityTypePostToVimeo,
+                                                         UIActivityTypeMessage,
+                                                         UIActivityTypePrint,
+                                                         UIActivityTypeCopyToPasteboard,
+                                                         UIActivityTypeAssignToContact,
+                                                         UIActivityTypeSaveToCameraRoll,
+                                                         UIActivityTypeAddToReadingList,
+                                                         UIActivityTypeAirDrop];
+
+        activityViewController.popoverPresentationController.sourceView = self.view;
+        [self presentViewController:activityViewController animated:YES completion:nil];
+
         return;
     }
 }
