@@ -102,28 +102,23 @@ typedef NS_ENUM(NSInteger) {
 #pragma mark - Private
 
 - (void)setupSections {
+    self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
+
     NSMutableArray *profileSections = [NSMutableArray new];
     [profileSections addObjectsFromArray:@[@(SectionTypeSummary), @(SectionTypeAbout)]];
     
-    if ([OTAppConfiguration shouldShowAssociationsOnUserProfile]) {
+    if ([OTAppConfiguration shouldShowAssociationsOnUserProfile] && self.associationRows != nil) {
         [profileSections addObject:@(SectionTypeAssociations)];
     }
 
     [profileSections addObjectsFromArray:@[@(SectionTypeInfoPrivate), @(SectionTypeDelete)]];
     
     self.sections = profileSections;
-    
-    self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
 }
 
 - (void)profilePictureUpdated:(NSNotification *)notification {
     self.user.avatarURL = [[[NSUserDefaults standardUserDefaults] currentUser] avatarURL];
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-}
-
-- (IBAction)showAssociations:(id)sender {
-    [OTLogger logEvent:@"ToBadgePageFromProfile"];
-    [self performSegueWithIdentifier:@"SelectAssociationSegue" sender:nil];
 }
 
 - (IBAction)defineActionZone:(id)sender {
@@ -302,14 +297,7 @@ typedef NS_ENUM(NSInteger) {
             cellID = @"EditProfileCell";
             break;
         case SectionTypeAssociations:
-            switch ([self.associationRows[indexPath.row] intValue]) {
-                case AssociationRowTypePartnerSelect:
-                    cellID = @"SupportAssociationCell";
-                    break;
-                default:
-                    cellID = @"AssociationProfileCell";
-                    break;
-            }
+            cellID = @"AssociationProfileCell";
             break;
         case SectionTypeAbout :
             if([self.user.about isEqualToString: @""])
