@@ -354,19 +354,15 @@
     return SIGNAL_ENTOURAGE_TO;
 }
 
-+ (UIColor*)leftTagColor:(OTUser*)user {
++ (UIColor*)tagColor:(OTUser*)user {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return (user.leftTag) ? [UIColor pfpPurpleColor] : [UIColor clearColor];
-    }
-    
-    return [UIColor clearColor];
-}
-
-+ (UIColor*)rightTagColor:(OTUser*)user {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if (user.rightTag) {
+        if (user.roleTag) {
             return ([user.roles containsObject:kCoordinatorUserTag]) ?
             [UIColor pfpGreenColor] : [UIColor pfpPurpleColor];
+        }
+    } else {
+        if (user.roleTag) {
+            return [UIColor appOrangeColor];
         }
     }
     
