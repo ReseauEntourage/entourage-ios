@@ -452,6 +452,7 @@
 "visitor" = "Voisineur";
 "visited" = "Voisiné";
 "coordinator" = "Animateur";
+"ambassador" = "Ambassadeur";
 "neighborhoodsSectionTitle" = "Neighborhoods";
 
 // associations

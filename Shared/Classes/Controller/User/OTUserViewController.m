@@ -244,18 +244,12 @@ typedef NS_ENUM(NSInteger) {
     UILabel *aboutMeLabel = [cell viewWithTag:SUMMARY_DESCRIPTION];
     aboutMeLabel.text = self.user.about;
     
-    UIView *rightTagContainer = [cell viewWithTag:SUMMARY_RIGHT_CONTAINER_TAG];
-    rightTagContainer.backgroundColor = [OTAppAppearance rightTagColor:self.user];
+    UIView *roleTagContainer = [cell viewWithTag:SUMMARY_RIGHT_CONTAINER_TAG];
+    roleTagContainer.backgroundColor = [OTAppAppearance tagColor:self.user];
     
-    UIView *leftTagContainer = [cell viewWithTag:SUMMARY_LEFT_CONTAINER_TAG];
-    leftTagContainer.backgroundColor = [OTAppAppearance leftTagColor:self.user];
-    
-    UILabel *rightTagLabel = [cell viewWithTag:SUMMARY_RIGHT_TAG];
-    rightTagLabel.text = self.user.rightTag;
-    
-    UILabel *leftTagLabel = [cell viewWithTag:SUMMARY_LEFT_TAG];
-    leftTagLabel.text = self.user.leftTag;
-    
+    UILabel *roleTagLabel = [cell viewWithTag:SUMMARY_RIGHT_TAG];
+    roleTagLabel.text = self.user.roleTag;
+
     UIView *headerBgView = [cell viewWithTag:HEADER_BG_VIEW];
     headerBgView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 }
