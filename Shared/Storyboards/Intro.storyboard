@@ -853,10 +853,10 @@ sur Entourage.</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="249" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="ufn-rN-e8V">
-                                <rect key="frame" x="8" y="284" width="359" height="256"/>
+                                <rect key="frame" x="8" y="284" width="359" height="226"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vj-nj-f39">
-                                <rect key="frame" x="8" y="540" width="359" height="50"/>
+                                <rect key="frame" x="8" y="510" width="359" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="3Rr-Dv-wJQ"/>
@@ -930,7 +930,7 @@ sur Entourage.</string>
                             <constraint firstAttribute="trailing" secondItem="uoA-Wf-2x5" secondAttribute="trailing" constant="12" id="8s2-UH-dgK"/>
                             <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="CSS-GK-sBy"/>
                             <constraint firstItem="3bR-VB-ndO" firstAttribute="top" secondItem="UIV-Pr-4Jl" secondAttribute="bottom" constant="15" id="H6V-od-O8V"/>
-                            <constraint firstItem="uoA-Wf-2x5" firstAttribute="top" secondItem="8vj-nj-f39" secondAttribute="bottom" constant="5" id="HGo-OC-IEW"/>
+                            <constraint firstItem="uoA-Wf-2x5" firstAttribute="top" relation="lessThanOrEqual" secondItem="8vj-nj-f39" secondAttribute="bottom" constant="35" id="HGo-OC-IEW"/>
                             <constraint firstItem="ufn-rN-e8V" firstAttribute="trailing" secondItem="8vj-nj-f39" secondAttribute="trailing" id="HoO-QT-c3m"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wF4-5f-khB" secondAttribute="trailing" constant="-8" id="JjY-YD-fdS"/>
                             <constraint firstItem="wF4-5f-khB" firstAttribute="top" secondItem="eEZ-Ma-DdB" secondAttribute="bottom" id="Mb3-qm-R0B"/>
