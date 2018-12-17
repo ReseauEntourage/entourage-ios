@@ -966,8 +966,7 @@
 #pragma mark - OTTourCreatorBehaviorDelegate
 
 - (void)tourStarted {
-    [self.newsFeedsSourceBehavior.feedItems insertObject:self.tourCreatorBehavior.tour atIndex:0];
-    [self.tableView reloadData];
+    [self.newsFeedsSourceBehavior addFeedItemToFront:self.tourCreatorBehavior.tour];
     self.stopButton.hidden = NO;
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:self.tourCreatorBehavior.tour];
     self.createEncounterButton.hidden = NO;
@@ -1649,7 +1648,7 @@
 }
 
 - (void)entourageUpdated:(NSNotification *)notification {
-    [self.newsFeedsSourceBehavior.feedItems removeAllObjects];
+    [self.newsFeedsSourceBehavior removeAllFeedItems];
     [self.newsFeedsSourceBehavior getNewItems];
     [self reloadFeeds];
     [self feedMapWithFeedItems];

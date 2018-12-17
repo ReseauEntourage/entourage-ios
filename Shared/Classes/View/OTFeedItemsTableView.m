@@ -205,9 +205,11 @@
 }
 
 - (void)updateItems:(NSArray *)items {
-    self.items = items;
-    self.panToShowMapView.hidden = items.count == 0;
-    [self reloadData];
+    if (![self.items isEqual:items]) {
+        self.items = items;
+        self.panToShowMapView.hidden = items.count == 0;
+        [self reloadData];
+    }
 }
 
 - (void)loadBegun {
