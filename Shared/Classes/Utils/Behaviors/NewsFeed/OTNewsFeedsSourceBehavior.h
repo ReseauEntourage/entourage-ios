@@ -21,7 +21,7 @@
 @property (nonatomic, weak) id<OTNewsFeedsSourceDelegate> delegate;
 @property (nonatomic, weak) id<OTNewsFeedTableDelegate> tableDelegate;
 
-@property (nonatomic, strong) NSMutableArray *feedItems;
+@property (nonatomic, strong, readonly) NSArray *feedItems;
 @property (nonatomic, assign) CLLocationCoordinate2D lastOkCoordinate;
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
 @property (nonatomic) BOOL showEventsOnly;
@@ -36,5 +36,8 @@
 - (void)getNewItems;
 - (void)pause;
 - (void)resume;
+
+- (void)addFeedItemToFront:(id)feedItem;
+- (void)removeAllFeedItems;
 
 @end
