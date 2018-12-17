@@ -85,4 +85,15 @@
     }];
 }
 
+- (void)loadWithSuccess3:(void(^)(OTFeedItem *))success error:(void(^)(NSError *))failure {
+    [[OTTourService new] getTourWithId:self.tour.uid withSuccess:^(OTTour *tour) {
+        if(success)
+            success(tour);
+    } failure:^(NSError *error) {
+        if(failure)
+            failure(error);
+    }];
+}
+
+
 @end
