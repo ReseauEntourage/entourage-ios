@@ -51,7 +51,7 @@
     if (isTour) {
         stateInfo = [[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getStateInfo];
     } else {
-        stateInfo = [OTFeedItemFactory createEntourageForGroupType:groupType andId:feedItemId];
+        stateInfo = [[OTFeedItemFactory createEntourageForGroupType:groupType andId:feedItemId] getStateInfo];
     }
     
     if (stateInfo && feedItemId) {
