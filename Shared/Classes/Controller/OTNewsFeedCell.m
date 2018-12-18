@@ -10,6 +10,7 @@
 #import "OTSummaryProviderBehavior.h"
 #import "OTFeedItemFactory.h"
 #import "UIButton+entourage.h"
+#import "entourage-Swift.h"
 
 NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIdentifier";
 
@@ -32,6 +33,9 @@ NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIde
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
     self.typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
     self.organizationLabel.text = [uiDelegate summary];
+    if ([UIDevice currentDevice].deviceSize == DeviceSizeSmall) {
+        self.organizationLabel.numberOfLines = 3;
+    }
     
     if ([OTAppConfiguration shouldShowCreatorImagesForNewsFeedItems]) {
         [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
