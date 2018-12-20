@@ -75,7 +75,6 @@ struct UserStorageKey {
     }
     
     @objc var GooglePlaceApiKey : NSString {
-        return ""
         return configuration(forKey: UserStorageKey.googlePlaceApiKey)
     }
     
