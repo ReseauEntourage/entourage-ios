@@ -56,7 +56,9 @@
         [self sendActionsForControlEvents:UIControlEventValueChanged];
         [self sendJoinRequestCompleteNotification:joiner.status];
         [SVProgressHUD dismiss];
-        [self.owner performSegueWithIdentifier:@"JoinRequestSegue" sender:self];
+        if ([joiner.status isEqualToString:JOIN_PENDING]) {
+            [self.owner performSegueWithIdentifier:@"JoinRequestSegue" sender:self];
+        }
     } orFailure:^(NSError *error, BOOL isTour) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"error")];
     }];

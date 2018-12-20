@@ -686,12 +686,14 @@
 
 - (void)didChangePosition {
     CLLocationDistance moveDistance = (MKMetersBetweenMapPoints(MKMapPointForCoordinate(self.newsFeedsSourceBehavior.lastOkCoordinate), MKMapPointForCoordinate(self.mapView.centerCoordinate))) / 1000.0f;
-    if(self.toursMapDelegate.isActive) {
-        if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4)
+    if (self.toursMapDelegate.isActive) {
+        if (moveDistance < FEEDS_REQUEST_DISTANCE_KM / 4) {
             return;
+        }
         [self reloadFeeds];
-    } else
+    } else {
         [self reloadPois];
+    }
 }
 
 - (IBAction)forceGetNewData {

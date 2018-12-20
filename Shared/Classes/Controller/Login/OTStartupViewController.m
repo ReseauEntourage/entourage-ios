@@ -22,12 +22,17 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
+@property (nonatomic) NSMutableDictionary *pagesDict;
+@property (nonatomic) NSMutableArray *pages;
+
 @end
 
 @implementation OTStartupViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.pages = @[].mutableCopy;
+    self.pagesDict = @{}.mutableCopy;
     
     [self.navigationController presentTransparentNavigationBar];
     
@@ -45,7 +50,6 @@
     
     self.title = @"";
     
-    
     [self setupScrollView];
 }
 
@@ -56,14 +60,6 @@
     
     [OTLogger logEvent:@"Screen01SplashView"];
     [NSUserDefaults standardUserDefaults].temporaryUser = nil;
-    
-//    self.betaButton.hidden = NO;
-//    
-//    NSString *title = [NSString stringWithFormat:@"Vous êtes sur %@.\n(Tapez pour changer)", [[OTAppConfiguration sharedInstance] environmentConfiguration].environmentName];
-//    self.betaButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    self.betaButton.titleLabel.numberOfLines = 2;
-//    [self.betaButton setTitle:title forState:UIControlStateNormal];
-//    self.betaButton.hidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -86,39 +82,63 @@
 }
 
 - (void)setupScrollView {
-    CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height;
-    self.scrollView.contentSize = CGSizeMake(4*width, height - 84);
     self.scrollView.delegate = self;
     
     UIView *page1 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage1" owner:nil options:nil] firstObject];
-    page1.frame = CGRectMake(0, 0, width, height);
     page1.backgroundColor = [UIColor clearColor];
+    page1.translatesAutoresizingMaskIntoConstraints = NO;
     page1.clipsToBounds = YES;
     [self.scrollView addSubview:page1];
+    [self.pages addObject:page1];
     
     UIView *page2 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage2" owner:nil options:nil] firstObject];
-    page2.frame = CGRectMake(width, 0, width, height);
+    page2.translatesAutoresizingMaskIntoConstraints = NO;
     page2.backgroundColor = [UIColor clearColor];
     page2.clipsToBounds = YES;
     [self.scrollView addSubview:page2];
+    [self.pages addObject:page2];
     
     UIView *page3 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage3" owner:nil options:nil] firstObject];
-    page3.frame = CGRectMake(2*width, 0, width, height);
+    page3.translatesAutoresizingMaskIntoConstraints = NO;
     page3.backgroundColor = [UIColor clearColor];
     page3.clipsToBounds = YES;
     [self.scrollView addSubview:page3];
+    [self.pages addObject:page3];
     
     UIView *page4 = (UIView*)[[[NSBundle mainBundle] loadNibNamed:@"IntroPage4" owner:nil options:nil] firstObject];
-    page4.frame = CGRectMake(3*width, 0, width, height);
+    page4.translatesAutoresizingMaskIntoConstraints = NO;
     page4.backgroundColor = [UIColor clearColor];
     page4.clipsToBounds = YES;
     [self.scrollView addSubview:page4];
+    [self.pages addObject:page4];
+    
+    [self.pagesDict setObject:self.scrollView forKey:@"parent"];
+    [self layoutPages];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width;
     self.pageControl.currentPage = index;
+}
+
+- (void)layoutPages {
+    NSMutableString *horizontalString = [NSMutableString string];
+    // Keep the start of the horizontal constraint
+    [horizontalString appendString:@"H:|"];
+    for (int i=0; i<self.pages.count; i++) {
+        // Here I am providing the index of the array as the view name key in the dictionary
+        [self.pagesDict setObject:self.pages[i] forKey:[NSString stringWithFormat:@"v%d",i]];
+        // Since we are having only one view vertically, then we need to add the constraint now itself. Since we need to have fullscreen, we are giving height equal to the superview.
+        NSString *verticalString = [NSString stringWithFormat:@"V:|-(-20)-[%@(==parent)]|", [NSString stringWithFormat:@"v%d",i]];
+        // add the constraint
+        [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalString options:0 metrics:nil views:self.pagesDict]];
+        // Since we need to horizontally arrange, we construct a string, with all the views in array looped and here also we have fullwidth of superview.
+        [horizontalString appendString:[NSString stringWithFormat:@"[%@(==parent)]", [NSString stringWithFormat:@"v%d",i]]];
+    }
+    // Close the string with the parent
+    [horizontalString appendString:@"|"];
+    // apply the constraint
+    [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:horizontalString options:0 metrics:nil views:self.pagesDict]];
 }
 
 @end
