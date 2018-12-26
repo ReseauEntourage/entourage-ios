@@ -242,9 +242,9 @@
 "organiser" = "Organisateur";
 "closed" = "Inclure entourages clôturés";
 "unique_unread" = "Uniquement non lus";
-"join_entourage_lbl" = "On a besoin de vous !";
+"join_entourage_lbl" = "Rejoindre la discussion";
 "join_event_lbl" = "Participez à cet évènement";
-"join_entourage_btn" = "REJOINDRE";
+"join_entourage_btn" = "PARTICIPER";
 "join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !\nPourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nAjoutez un petit mot si vous le souhaitez !";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
