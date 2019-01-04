@@ -43,7 +43,6 @@
 #import "OTEntourageService.h"
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
-#import "UILabel+entourage.h"
 #import "MKMapView+entourage.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioServices.h>

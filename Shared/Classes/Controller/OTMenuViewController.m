@@ -23,7 +23,6 @@
 #import "UIButton+entourage.h"
 #import "NSBundle+entourage.h"
 #import "OTOngoingTourService.h"
-#import "UILabel+entourage.h"
 #import "OTTapViewBehavior.h"
 #import "UIImageView+entourage.h"
 #import "OTAPIConsts.h"

@@ -26,6 +26,10 @@
 		96136FFE21C92656003C1581 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96136FFD21C92656003C1581 /* UIDevice.swift */; };
 		96136FFF21C92656003C1581 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96136FFD21C92656003C1581 /* UIDevice.swift */; };
 		96343AF820C6110D00E4D867 /* PfpUserCircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2306AAA20C551690094370E /* PfpUserCircleCell.swift */; };
+		964445D221DCC19B00060A51 /* FontMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964445D121DCC19B00060A51 /* FontMetrics.swift */; };
+		964445D421DCC8FE00060A51 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964445D321DCC8FE00060A51 /* UILabel.swift */; };
+		964445D521DCC8FE00060A51 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964445D321DCC8FE00060A51 /* UILabel.swift */; };
+		964445D621DCC8FE00060A51 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964445D321DCC8FE00060A51 /* UILabel.swift */; };
 		9647D516208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
 		9647D517208F8995003CA4FD /* OTMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */; };
 		96B658AA209A380000EB0398 /* OTMenuCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658A9209A380000EB0398 /* OTMenuCellView.swift */; };
@@ -444,8 +448,6 @@
 		A202EC202085D2C80058F32C /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9862085D2C60058F32C /* NSNotification+entourage.m */; };
 		A202EC212085D2C80058F32C /* OTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9892085D2C60058F32C /* OTLocationManager.m */; };
 		A202EC222085D2C80058F32C /* OTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9892085D2C60058F32C /* OTLocationManager.m */; };
-		A202EC232085D2C80058F32C /* UILabel+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98A2085D2C60058F32C /* UILabel+entourage.m */; };
-		A202EC242085D2C80058F32C /* UILabel+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98A2085D2C60058F32C /* UILabel+entourage.m */; };
 		A202EC252085D2C80058F32C /* UIBarButtonItem+factory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98B2085D2C60058F32C /* UIBarButtonItem+factory.m */; };
 		A202EC262085D2C80058F32C /* UIBarButtonItem+factory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98B2085D2C60058F32C /* UIBarButtonItem+factory.m */; };
 		A202EC272085D2C80058F32C /* NSBundle+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98C2085D2C60058F32C /* NSBundle+entourage.m */; };
@@ -822,7 +824,6 @@
 		A296B76E20871CFC00F6AFBD /* OTNextStatusButtonBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA302085D2C60058F32C /* OTNextStatusButtonBehavior.m */; };
 		A296B76F20871CFC00F6AFBD /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8FA2085D2C40058F32C /* OTConfirmationViewController.m */; };
 		A296B77020871CFC00F6AFBD /* OTMessageSentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E88C2085D2C40058F32C /* OTMessageSentCell.m */; };
-		A296B77120871CFC00F6AFBD /* UILabel+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98A2085D2C60058F32C /* UILabel+entourage.m */; };
 		A296B77220871CFC00F6AFBD /* OTStatusBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA322085D2C60058F32C /* OTStatusBehavior.m */; };
 		A296B77320871CFC00F6AFBD /* NSString+Validators.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB92085D2C70058F32C /* NSString+Validators.m */; };
 		A296B77420871CFC00F6AFBD /* OTAboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9192085D2C50058F32C /* OTAboutMeViewController.m */; };
@@ -1280,6 +1281,8 @@
 		96099C6521ADA099008A959B /* OTGMSAutoCompleteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGMSAutoCompleteViewController.m; sourceTree = "<group>"; };
 		96099C6821ADA0C3008A959B /* OTGMSAutoCompleteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTGMSAutoCompleteViewController.h; sourceTree = "<group>"; };
 		96136FFD21C92656003C1581 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		964445D121DCC19B00060A51 /* FontMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontMetrics.swift; sourceTree = "<group>"; };
+		964445D321DCC8FE00060A51 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		9647D515208F8995003CA4FD /* OTMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuHeaderView.swift; sourceTree = "<group>"; };
 		96B658A9209A380000EB0398 /* OTMenuCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuCellView.swift; sourceTree = "<group>"; };
 		96B658AC209A417900EB0398 /* OTItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -1673,7 +1676,6 @@
 		A202E9862085D2C60058F32C /* NSNotification+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotification+entourage.m"; sourceTree = "<group>"; };
 		A202E9882085D2C60058F32C /* OTLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTLocationManager.h; sourceTree = "<group>"; };
 		A202E9892085D2C60058F32C /* OTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTLocationManager.m; sourceTree = "<group>"; };
-		A202E98A2085D2C60058F32C /* UILabel+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+entourage.m"; sourceTree = "<group>"; };
 		A202E98B2085D2C60058F32C /* UIBarButtonItem+factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+factory.m"; sourceTree = "<group>"; };
 		A202E98C2085D2C60058F32C /* NSBundle+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+entourage.m"; sourceTree = "<group>"; };
 		A202E98D2085D2C60058F32C /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
@@ -1865,7 +1867,6 @@
 		A202EA602085D2C60058F32C /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
 		A202EA612085D2C60058F32C /* NSBundle+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+entourage.h"; sourceTree = "<group>"; };
 		A202EA622085D2C60058F32C /* UIBarButtonItem+factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+factory.h"; sourceTree = "<group>"; };
-		A202EA632085D2C60058F32C /* UILabel+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+entourage.h"; sourceTree = "<group>"; };
 		A202EA642085D2C60058F32C /* UIColor+entourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+entourage.m"; sourceTree = "<group>"; };
 		A202EA652085D2C60058F32C /* NSNotification+entourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotification+entourage.h"; sourceTree = "<group>"; };
 		A202EA662085D2C60058F32C /* UIViewController+OTEmptyBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+OTEmptyBackButton.h"; sourceTree = "<group>"; };
@@ -2944,8 +2945,6 @@
 				A2F50A1620EA295F009AB222 /* UIColor+Expanded.m */,
 				A202E9922085D2C60058F32C /* UIImageView+entourage.h */,
 				A202EA682085D2C60058F32C /* UIImageView+entourage.m */,
-				A202EA632085D2C60058F32C /* UILabel+entourage.h */,
-				A202E98A2085D2C60058F32C /* UILabel+entourage.m */,
 				A202E98E2085D2C60058F32C /* UIScrollView+entourage.h */,
 				A202EAB32085D2C60058F32C /* UIScrollView+entourage.m */,
 				A202E97C2085D2C60058F32C /* UIStoryboard+entourage.h */,
@@ -3513,6 +3512,7 @@
 				A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */,
 				A202EAC22085D2C70058F32C /* UINavigationController+entourage.h */,
 				A202EABA2085D2C70058F32C /* UINavigationController+entourage.m */,
+				964445D121DCC19B00060A51 /* FontMetrics.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -3732,6 +3732,7 @@
 			isa = PBXGroup;
 			children = (
 				A2A777ED20AF06EC006D2772 /* String+Localization.swift */,
+				964445D321DCC8FE00060A51 /* UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4447,7 +4448,6 @@
 				A202ECB32085D2C80058F32C /* OTNextStatusButtonBehavior.m in Sources */,
 				A202EB9D2085D2C80058F32C /* OTConfirmationViewController.m in Sources */,
 				A202EB372085D2C80058F32C /* OTMessageSentCell.m in Sources */,
-				A202EC232085D2C80058F32C /* UILabel+entourage.m in Sources */,
 				A202ECB52085D2C80058F32C /* OTStatusBehavior.m in Sources */,
 				A202ED232085D2C80058F32C /* NSString+Validators.m in Sources */,
 				A202EBBB2085D2C80058F32C /* OTAboutMeViewController.m in Sources */,
@@ -4724,6 +4724,7 @@
 				A202EC852085D2C80058F32C /* OTFeedItemFiltersCellProvider.m in Sources */,
 				A202EBFD2085D2C80058F32C /* OTRequestOperationManager.m in Sources */,
 				A202ED192085D2C80058F32C /* OTTourMapHandler.m in Sources */,
+				964445D421DCC8FE00060A51 /* UILabel.swift in Sources */,
 				A2CCF2FA2167444B00AD6237 /* OTAddActionSecondConsentViewController.m in Sources */,
 				A202EB2F2085D2C70058F32C /* OTContactPhoneCell.m in Sources */,
 				A202EC532085D2C80058F32C /* OTToggleGroupViewBehavior.m in Sources */,
@@ -4765,6 +4766,7 @@
 				A202EBBD2085D2C80058F32C /* OTMapView.m in Sources */,
 				A202EB1D2085D2C70058F32C /* OTInviteSourceViewController.m in Sources */,
 				A202EB512085D2C80058F32C /* OTTourOptionsViewController.m in Sources */,
+				964445D221DCC19B00060A51 /* FontMetrics.swift in Sources */,
 				A202EBA12085D2C80058F32C /* OTGuideDetailsViewController.m in Sources */,
 				A202EBFF2085D2C80058F32C /* OTJSONResponseSerializer.m in Sources */,
 				A202EBF52085D2C80058F32C /* OTTextWithCount.m in Sources */,
@@ -4986,13 +4988,13 @@
 				A202EC0C2085D2C80058F32C /* OTEncounterService.m in Sources */,
 				A202ECA42085D2C80058F32C /* OTMembersDataSource.m in Sources */,
 				A202ECA02085D2C80058F32C /* OTPublicInfoCellProvider.m in Sources */,
+				964445D621DCC8FE00060A51 /* UILabel.swift in Sources */,
 				A202EC7A2085D2C80058F32C /* OTMyEntouragesTableDataSource.m in Sources */,
 				A202EC6E2085D2C80058F32C /* OTInvitationsCollectionSource.m in Sources */,
 				A202EB1A2085D2C70058F32C /* OTSolidarityGuideCell.m in Sources */,
 				A202ECDE2085D2C80058F32C /* UITextField+indentation.m in Sources */,
 				A202EB902085D2C80058F32C /* OTMapOptionsViewController.m in Sources */,
 				A202ECEE2085D2C80058F32C /* OTAddressBookService.m in Sources */,
-				A202EC242085D2C80058F32C /* UILabel+entourage.m in Sources */,
 				A202EB7C2085D2C80058F32C /* OTChangeStateViewController.m in Sources */,
 				A202ED182085D2C80058F32C /* OTTourChangedHandler.m in Sources */,
 				A202EAE42085D2C70058F32C /* OTUnreadMessageCount.m in Sources */,
@@ -5133,7 +5135,6 @@
 				A2306AB620C81C360094370E /* PfpApiService.m in Sources */,
 				A2CCF2E6216610CE00AD6237 /* OTFeedClosedCell.m in Sources */,
 				A296B77020871CFC00F6AFBD /* OTMessageSentCell.m in Sources */,
-				A296B77120871CFC00F6AFBD /* UILabel+entourage.m in Sources */,
 				A296B77220871CFC00F6AFBD /* OTStatusBehavior.m in Sources */,
 				A296B77320871CFC00F6AFBD /* NSString+Validators.m in Sources */,
 				A296B77420871CFC00F6AFBD /* OTAboutMeViewController.m in Sources */,
@@ -5288,6 +5289,7 @@
 				A296B7F620871CFC00F6AFBD /* OTStartTourAnnotationView.m in Sources */,
 				A296B7F720871CFC00F6AFBD /* OTBaseMapDelegate.m in Sources */,
 				A296B7F820871CFC00F6AFBD /* OTTutorial3ViewController.m in Sources */,
+				964445D521DCC8FE00060A51 /* UILabel.swift in Sources */,
 				A296B7F920871CFC00F6AFBD /* UIViewController+OTEmptyBackButton.m in Sources */,
 				A296B7FA20871CFC00F6AFBD /* OTInvitationsCollectionViewCell.m in Sources */,
 				A296B7FB20871CFC00F6AFBD /* OTTourPoint.m in Sources */,

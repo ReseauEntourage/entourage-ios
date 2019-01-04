@@ -57,10 +57,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFW-Af-gIs">
-                                                    <rect key="frame" x="81" y="5.5" width="193" height="39"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="39" id="QJm-AT-KI5"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="81" y="16" width="193" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -103,10 +100,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ix-Zb-dSM">
-                                                    <rect key="frame" x="79" y="5.5" width="195" height="39"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="39" id="oPU-Xa-XSM"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="79" y="16" width="195" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -311,7 +305,6 @@
                                                 <constraint firstItem="EAu-yw-Eyh" firstAttribute="leading" secondItem="uJI-Sb-lR8" secondAttribute="leadingMargin" constant="16" id="F3a-bi-s9Z"/>
                                                 <constraint firstItem="S0R-0Y-9ue" firstAttribute="leading" secondItem="4XQ-dH-n0j" secondAttribute="trailing" constant="13" id="O0m-N1-41W"/>
                                                 <constraint firstItem="S0R-0Y-9ue" firstAttribute="centerY" secondItem="4XQ-dH-n0j" secondAttribute="centerY" id="eVc-pe-ppC"/>
-                                                <constraint firstItem="EAu-yw-Eyh" firstAttribute="centerY" secondItem="uJI-Sb-lR8" secondAttribute="centerY" id="oRS-D1-Qrc"/>
                                                 <constraint firstItem="4XQ-dH-n0j" firstAttribute="top" secondItem="uJI-Sb-lR8" secondAttribute="topMargin" constant="3" id="yX3-oa-fZp"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1029,43 +1022,156 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                                     <action selector="rejectAction" destination="1yb-3Y-hyu" eventType="touchUpInside" id="t89-pH-JEZ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fV-Ct-hap">
-                                <rect key="frame" x="16" y="515" width="288" height="45"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="uyT-mm-gfx"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="La ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="Charte éthique d’Entourage">
-                                        <attributes>
-                                            <color key="NSColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" vous explique pourquoi le consentement est indispensable.">
-                                        <attributes>
-                                            <color key="NSColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3wD-b3-GOH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3wD-b3-GOH">
                                 <rect key="frame" x="0.0" y="515" width="320" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="PMx-yo-SVH"/>
                                 </constraints>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="La ">
+                                            <attributes>
+                                                <color key="NSColor" red="0.95055999999999996" green="0.39452999999999999" blue="0.13086" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name=".SFNSText"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="28">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="56">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="84">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="112">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="140">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="168">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="196">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="224">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="252">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="280">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="308">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="Charte éthique d’Entourage">
+                                            <attributes>
+                                                <color key="NSColor" red="0.95055999999999996" green="0.39452999999999999" blue="0.13086" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name=".SFNSText"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="28">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="56">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="84">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="112">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="140">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="168">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="196">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="224">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="252">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="280">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="308">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                                <integer key="NSUnderline" value="1"/>
+                                                <color key="NSUnderlineColor" red="0.95055999999999996" green="0.39452999999999999" blue="0.13086" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" vous explique pourquoi le consentement est indispensable.">
+                                            <attributes>
+                                                <color key="NSColor" red="0.95055999999999996" green="0.39452999999999999" blue="0.13086" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name=".SFNSText"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="28">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="56">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="84">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="112">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="140">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="168">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="196">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="224">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="252">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="280">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="308">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                                <color key="NSUnderlineColor" red="0.95055999999999996" green="0.39452999999999999" blue="0.13086" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
                                 <connections>
                                     <action selector="showGuideActtion" destination="1yb-3Y-hyu" eventType="touchUpInside" id="7dt-EZ-6Sk"/>
                                 </connections>
@@ -1073,24 +1179,21 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6fV-Ct-hap" firstAttribute="trailing" secondItem="aOa-YL-38l" secondAttribute="trailingMargin" id="38d-vr-cXP"/>
                             <constraint firstItem="zxr-MY-MoC" firstAttribute="leading" secondItem="aOa-YL-38l" secondAttribute="leadingMargin" id="5KA-7n-ZKf"/>
                             <constraint firstItem="zxr-MY-MoC" firstAttribute="top" secondItem="wiC-Vk-gfA" secondAttribute="bottom" constant="6" id="AzG-HD-V4F"/>
                             <constraint firstItem="1wq-bE-Sp1" firstAttribute="leading" secondItem="aOa-YL-38l" secondAttribute="leadingMargin" id="H63-Aj-ZA5"/>
                             <constraint firstItem="wiC-Vk-gfA" firstAttribute="leading" secondItem="aOa-YL-38l" secondAttribute="leading" id="PsK-56-WKS"/>
                             <constraint firstAttribute="trailing" secondItem="wiC-Vk-gfA" secondAttribute="trailing" id="Vb1-Ad-ime"/>
-                            <constraint firstItem="vD3-yn-GvX" firstAttribute="top" secondItem="6fV-Ct-hap" secondAttribute="bottom" constant="8" id="Vow-oc-yU2"/>
                             <constraint firstItem="zxr-MY-MoC" firstAttribute="trailing" secondItem="aOa-YL-38l" secondAttribute="trailingMargin" id="WqB-pm-8st"/>
-                            <constraint firstAttribute="trailing" secondItem="3wD-b3-GOH" secondAttribute="trailing" id="XTH-pd-B8I"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3wD-b3-GOH" secondAttribute="trailing" constant="-16" id="XTH-pd-B8I"/>
                             <constraint firstItem="7BE-YJ-Y2y" firstAttribute="top" secondItem="zxr-MY-MoC" secondAttribute="bottom" constant="13.5" id="aku-81-pzV"/>
                             <constraint firstItem="1wq-bE-Sp1" firstAttribute="top" secondItem="7BE-YJ-Y2y" secondAttribute="bottom" constant="14" id="eUX-TS-0Fm"/>
                             <constraint firstItem="wiC-Vk-gfA" firstAttribute="top" secondItem="0a1-9v-Sih" secondAttribute="bottom" id="esN-74-gdy"/>
                             <constraint firstItem="7BE-YJ-Y2y" firstAttribute="trailing" secondItem="aOa-YL-38l" secondAttribute="trailingMargin" id="mN4-ge-jL2"/>
                             <constraint firstItem="1wq-bE-Sp1" firstAttribute="top" secondItem="7BE-YJ-Y2y" secondAttribute="bottom" constant="14" id="pY8-f8-tgE"/>
-                            <constraint firstItem="6fV-Ct-hap" firstAttribute="leading" secondItem="aOa-YL-38l" secondAttribute="leadingMargin" id="rIg-dl-ZI7"/>
                             <constraint firstItem="vD3-yn-GvX" firstAttribute="top" secondItem="3wD-b3-GOH" secondAttribute="bottom" constant="1" id="vtr-jU-Bxc"/>
                             <constraint firstItem="7BE-YJ-Y2y" firstAttribute="leading" secondItem="aOa-YL-38l" secondAttribute="leadingMargin" id="vuE-fD-OGV"/>
-                            <constraint firstItem="3wD-b3-GOH" firstAttribute="leading" secondItem="aOa-YL-38l" secondAttribute="leading" id="wA0-J9-2J3"/>
+                            <constraint firstItem="3wD-b3-GOH" firstAttribute="leading" secondItem="aOa-YL-38l" secondAttribute="leadingMargin" constant="-16" id="wA0-J9-2J3"/>
                             <constraint firstItem="1wq-bE-Sp1" firstAttribute="trailing" secondItem="aOa-YL-38l" secondAttribute="trailingMargin" id="xy7-fv-vWE"/>
                         </constraints>
                     </view>
@@ -1174,44 +1277,156 @@ Votre action est actuellement en suspens. Un modérateur va vous répondre très
                                     <action selector="requestModerationAction" destination="VIX-VP-P0A" eventType="touchUpInside" id="114-vi-jKz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZjM-ut-NKw">
-                                <rect key="frame" x="16" y="515" width="288" height="45"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="cSD-3T-vbg"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="tcL-Q3-MLc"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="La ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="Charte éthique d’Entourage">
-                                        <attributes>
-                                            <color key="NSColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" vous explique pourquoi le consentement est indispensable.">
-                                        <attributes>
-                                            <color key="NSColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAZ-Kg-6WK">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oAZ-Kg-6WK">
                                 <rect key="frame" x="0.0" y="515" width="320" height="52"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="65v-G1-Ijl"/>
+                                    <constraint firstAttribute="height" constant="52" id="sZN-ox-AsV"/>
                                 </constraints>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="La ">
+                                            <attributes>
+                                                <color key="NSColor" red="0.95055999999999996" green="0.39452999999999999" blue="0.13086" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name=".SFNSText"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="28">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="56">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="84">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="112">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="140">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="168">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="196">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="224">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="252">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="280">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="308">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="Charte éthique d’Entourage">
+                                            <attributes>
+                                                <color key="NSColor" red="0.95055999999999996" green="0.39452999999999999" blue="0.13086" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name=".SFNSText"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="28">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="56">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="84">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="112">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="140">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="168">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="196">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="224">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="252">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="280">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="308">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                                <integer key="NSUnderline" value="1"/>
+                                                <color key="NSUnderlineColor" red="0.95055999999999996" green="0.39452999999999999" blue="0.13086" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" vous explique pourquoi le consentement est indispensable.">
+                                            <attributes>
+                                                <color key="NSColor" red="0.95055999999999996" green="0.39452999999999999" blue="0.13086" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="14" name=".SFNSText"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="28">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="56">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="84">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="112">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="140">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="168">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="196">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="224">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="252">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="280">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="308">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                                <color key="NSUnderlineColor" red="0.95055999999999996" green="0.39452999999999999" blue="0.13086" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
                                 <connections>
                                     <action selector="showGuideActtion" destination="VIX-VP-P0A" eventType="touchUpInside" id="TjN-ta-7af"/>
                                 </connections>
@@ -1219,13 +1434,10 @@ Votre action est actuellement en suspens. Un modérateur va vous répondre très
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="oAZ-Kg-6WK" secondAttribute="trailing" id="4jG-ce-zLM"/>
-                            <constraint firstItem="ZjM-ut-NKw" firstAttribute="trailing" secondItem="df3-9w-0NU" secondAttribute="trailingMargin" id="62S-dR-wmS"/>
-                            <constraint firstItem="ZjM-ut-NKw" firstAttribute="leading" secondItem="df3-9w-0NU" secondAttribute="leadingMargin" id="9qH-0b-kTt"/>
-                            <constraint firstItem="diG-9Q-FOM" firstAttribute="top" secondItem="ZjM-ut-NKw" secondAttribute="bottom" constant="8" id="AcB-Kd-fmt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oAZ-Kg-6WK" secondAttribute="trailing" constant="-16" id="4jG-ce-zLM"/>
                             <constraint firstItem="Wdk-Ug-cv3" firstAttribute="leading" secondItem="df3-9w-0NU" secondAttribute="leading" id="GYT-T0-epQ"/>
                             <constraint firstItem="uWa-ae-ijK" firstAttribute="trailing" secondItem="df3-9w-0NU" secondAttribute="trailingMargin" id="Ou5-M7-yvL"/>
-                            <constraint firstItem="oAZ-Kg-6WK" firstAttribute="leading" secondItem="df3-9w-0NU" secondAttribute="leading" id="QYX-Ua-idV"/>
+                            <constraint firstItem="oAZ-Kg-6WK" firstAttribute="leading" secondItem="df3-9w-0NU" secondAttribute="leadingMargin" constant="-16" id="QYX-Ua-idV"/>
                             <constraint firstItem="uWa-ae-ijK" firstAttribute="top" secondItem="Wdk-Ug-cv3" secondAttribute="bottom" constant="6" id="arh-Yp-Oo5"/>
                             <constraint firstItem="sl4-AD-e4z" firstAttribute="trailing" secondItem="df3-9w-0NU" secondAttribute="trailingMargin" id="hxD-qY-emy"/>
                             <constraint firstItem="sl4-AD-e4z" firstAttribute="top" secondItem="uWa-ae-ijK" secondAttribute="bottom" constant="13.5" id="nGy-rK-pUB"/>

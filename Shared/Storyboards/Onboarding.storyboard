@@ -43,10 +43,9 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VlY-L9-3QR">
-                                                <rect key="frame" x="15" y="87" width="296" height="72"/>
+                                                <rect key="frame" x="15" y="87" width="296" height="74.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="296" id="gYy-vd-gV0"/>
-                                                    <constraint firstAttribute="height" constant="72" id="xf2-TS-pSL"/>
                                                 </constraints>
                                                 <string key="text">Quel est votre
 numéro de portable? </string>
@@ -55,9 +54,9 @@ numéro de portable? </string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entourage vous envoie un SMS afin de vérifier votre numéro de portable." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyk-fh-2ns">
-                                                <rect key="frame" x="15" y="184" width="296" height="36"/>
+                                                <rect key="frame" x="15" y="186.5" width="296" height="36"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="AwM-59-tiy"/>
+                                                    <constraint firstAttribute="height" constant="36" id="Afo-AI-lSo"/>
                                                     <constraint firstAttribute="width" constant="296" id="tuf-dD-sd1"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -106,7 +105,7 @@ numéro de portable? </string>
                                                 </constraints>
                                             </view>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Numéro de portable" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8h5-LL-TYs" customClass="OnBoardingNumberTextField" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="70" y="228" width="290" height="53"/>
+                                                <rect key="frame" x="70" y="230.5" width="290" height="53"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -122,7 +121,7 @@ numéro de portable? </string>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="FR" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vsi-Tr-rW7" customClass="JVFloatLabeledTextField">
-                                                <rect key="frame" x="15" y="228" width="44" height="53"/>
+                                                <rect key="frame" x="15" y="230.5" width="44" height="53"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
