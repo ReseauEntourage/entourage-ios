@@ -2735,7 +2735,6 @@
 			isa = PBXGroup;
 			children = (
 				A202E8F42085D2C40058F32C /* OTNotificationsRightsViewController.h */,
-				A202E8F52085D2C40058F32C /* OTGeolocationRightsViewController.h */,
 				A202E8F72085D2C40058F32C /* OTNotificationsRightsViewController.m */,
 				A202E8F52085D2C40058F32C /* OTGeolocationRightsViewController.h */,
 				A202E8F82085D2C40058F32C /* OTGeolocationRightsViewController.m */,
