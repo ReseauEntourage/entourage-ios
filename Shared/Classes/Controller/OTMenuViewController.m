@@ -36,10 +36,9 @@
 #import "OTAuthService.h"
 #import "entourage-Swift.h"
 
-#define SOLIDARITY_GUIDE_INDEX 2
-#define DONATION_CELL_INDEX 4
-#define HEADER_CELL_INDEX 8
-#define LOG_OUT_CELL_INDEX 9
+#define DONATION_CELL_INDEX 3
+#define HEADER_CELL_INDEX 7
+#define LOG_OUT_CELL_INDEX 8
 
 typedef NS_ENUM(NSInteger, OTEntourageMenuIndexType) {
     OTEntourageMenuIndexTypeBlog = 0,
@@ -58,7 +57,6 @@ typedef NS_ENUM(NSInteger, OTEntourageMenuIndexType) {
 
 /* MenuItem identifiers */
 NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuIdentifierForMap";
-NSString *const OTMenuViewControllerSegueMenuGuideIdentifier = @"segueMenuIdentifierForGuide";
 NSString *const OTMenuViewControllerSegueMenuProfileIdentifier = @"segueMenuIdentifierForProfile";
 NSString *const OTMenuViewControllerSegueMenuSettingsIdentifier = @"segueMenuIdentifierForSettings";
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
@@ -219,25 +217,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
-    else if(indexPath.row == SOLIDARITY_GUIDE_INDEX) {
-        [OTLogger logEvent:@"SolidarityGuideFrom07Menu"];
-        [self.revealViewController revealToggle:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kSolidarityGuideNotification object:self];
-//        NSArray *deepLinks = @[
-//                               @"https://www.entourage.social/deeplink/guide",
-//                               @"https://www.entourage.social/entourages/e0nEjytD9mU8",
-//                               @"https://www.entourage.social/deeplink/badge",
-//                               @"https://www.entourage.social/deeplink/feed",
-//                               @"https://www.entourage.social/deeplink/webview?url=https://www.google.ro",
-//                               @"https://www.entourage.social/deeplink/entourage/e0nEjytD9mU8"
-//                               ];
-//        NSTimeInterval delta = 10;
-//        NSTimeInterval delay = 5;
-//        for (NSString *deepLink in deepLinks) {
-//            [self performSelector:@selector(testDeepLink:) withObject:deepLink afterDelay:delay];
-//            delay += delta;
-//        }
-    }
     else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
         if(menuItem.segueIdentifier)
@@ -345,12 +324,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                                                                 iconName:@"goal"
                                                               identifier:GOAL_LINK_ID];
     [menuItems addObject:itemEntourageActions];
-    
-    
-   
-    OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide")
-                                                               iconName:@"mapPin"];
-    [menuItems addObject:itemSolidarityGuide];
     
     OTMenuItem *itemJoin = [[OTMenuItem alloc]    initWithTitle:OTLocalizedString(@"menu_join")
                                                                iconName:@"menu_ba"];
