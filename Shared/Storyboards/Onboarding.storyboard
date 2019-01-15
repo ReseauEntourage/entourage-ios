@@ -343,7 +343,7 @@ numéro de portable? </string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="k3F-V3-wOJ">
-                                        <rect key="frame" x="15" y="318" width="276" height="50"/>
+                                        <rect key="frame" x="15" y="326" width="276" height="42"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
                                         <state key="normal" title="Le problème persiste ? écrivez à contact@entourage.social et nous en génèrerons un pour vous.">
                                             <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -380,7 +380,7 @@ numéro de portable? </string>
                                     <constraint firstItem="pvY-e5-lmP" firstAttribute="trailing" secondItem="m2V-xB-zfa" secondAttribute="trailing" id="ACt-id-JEP"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="top" secondItem="pvY-e5-lmP" secondAttribute="bottom" constant="8" id="E3B-b7-DrO"/>
                                     <constraint firstItem="m2V-xB-zfa" firstAttribute="top" secondItem="sCt-6F-DVv" secondAttribute="bottom" constant="8" id="JVm-ht-njX"/>
-                                    <constraint firstItem="k3F-V3-wOJ" firstAttribute="top" secondItem="YIF-kq-zRi" secondAttribute="bottom" id="K29-55-0yO"/>
+                                    <constraint firstItem="k3F-V3-wOJ" firstAttribute="top" secondItem="YIF-kq-zRi" secondAttribute="bottom" constant="8" id="K29-55-0yO"/>
                                     <constraint firstItem="pvY-e5-lmP" firstAttribute="leading" secondItem="GL7-KN-5la" secondAttribute="leading" constant="15" id="Khu-ZV-bdM"/>
                                     <constraint firstAttribute="height" constant="380" id="L4X-iB-2rw"/>
                                     <constraint firstItem="YIF-kq-zRi" firstAttribute="leading" secondItem="M8f-fn-OPr" secondAttribute="leading" id="N8u-Bz-Fxe"/>

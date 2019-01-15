@@ -87,6 +87,9 @@
     
     text = [OTAppAppearance lostCodeFullDescription];
     attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"SFUIText-Light" size:14]}];
+	NSRange range2 = [text.lowercaseString rangeOfString:OTLocalizedString(@"contact_email_adress").lowercaseString];
+	[attributedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:range2];
+	[attributedText addAttribute:NSUnderlineColorAttributeName value:[UIColor whiteColor] range:range1];
     self.mailContactButton.titleLabel.attributedText = attributedText;
     self.mailContactButton.hidden = !self.showFullDescription;
 }
@@ -135,18 +138,21 @@
         composeVC.mailComposeDelegate = self;
         
         // Configure the fields of the interface.
-        [composeVC setToRecipients:@[@"contact_email_adress"]];
-        [composeVC setSubject:@"email_subject_new_sms"];
-        [composeVC setMessageBody:@"email_body_new_sms" isHTML:NO];
+		NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
+		NSString *messageBody = [NSString stringWithFormat:OTLocalizedString(@"email_body_new_sms"), phone];
+
+        [composeVC setToRecipients:@[OTLocalizedString(@"contact_email_adress")]];
+        [composeVC setSubject:OTLocalizedString(@"email_subject_new_sms")];
+		[composeVC setMessageBody:messageBody isHTML:NO];
         
         // Present the view controller modally.
         [self presentViewController:composeVC animated:YES completion:nil];
     } else {
         NSLog(@"Mail services are not available.");
-        NSArray* sharedObjects = [NSArray arrayWithObjects:@"sharecontent",  nil]; // A tester pour voir quels données passer et comment
+		NSArray* sharedObjects = [NSArray arrayWithObjects:OTLocalizedString(@"email_subject_new_sms"), nil];
         
         UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:sharedObjects applicationActivities:nil];
-        
+		
         activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook,
                                                          UIActivityTypePostToTwitter,
                                                          UIActivityTypePostToFlickr,
@@ -164,6 +170,26 @@
 
         return;
     }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+	switch (result)
+	{
+		case MFMailComposeResultCancelled:
+			NSLog(@"Mail cancelled");
+		case MFMailComposeResultSaved:
+			NSLog(@"Mail saved");
+		case MFMailComposeResultSent:
+			NSLog(@"Mail sent");
+		case MFMailComposeResultFailed:
+			NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+		default:
+			break;
+	}
+	
+	// Close the Mail Interface
+	[controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)doRegenerateCode {

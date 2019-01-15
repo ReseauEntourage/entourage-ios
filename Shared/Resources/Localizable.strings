@@ -489,7 +489,7 @@
 
 "contact_email_adress" = "contact@entourage.social";
 "email_subject_new_sms" = "Demande de code SMS";
-"email_body_new_sms" = "Bonjour,\nMon numéro :\n\nMerci";
+"email_body_new_sms" = "Bonjour,\nMon numéro : %@\n\nMerci";
 
 // Share
 "share_public" = "Ce projet solidaire sur Entourage a besoin de toi. Rejoins-le en téléchargeant l'app ici %@";
