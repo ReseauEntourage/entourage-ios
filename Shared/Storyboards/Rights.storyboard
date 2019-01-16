@@ -234,10 +234,9 @@ Indiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.</s
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ne manquez rien !" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LzF-gS-pCs">
-                                <rect key="frame" x="12" y="112" width="304" height="72"/>
+                                <rect key="frame" x="12" y="132" width="304" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="225" id="wRb-fX-CXJ"/>
-                                    <constraint firstAttribute="height" constant="72" id="zQm-74-dsa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -249,7 +248,7 @@ Indiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.</s
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ROi-Zv-4sG">
-                                <rect key="frame" x="8" y="192" width="304" height="107.5"/>
+                                <rect key="frame" x="8" y="198" width="304" height="107.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="VXA-rG-gcR"/>
                                     <constraint firstAttribute="width" constant="280" id="xAR-ce-kBa"/>
@@ -270,7 +269,7 @@ Activer les notifications vous permet d’être informé(e) des nouveautés dans
                         </subviews>
                         <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="LzF-gS-pCs" firstAttribute="top" secondItem="cGv-BC-RoD" secondAttribute="bottom" constant="16" id="0Oi-mQ-jZO"/>
+                            <constraint firstItem="LzF-gS-pCs" firstAttribute="top" secondItem="cGv-BC-RoD" secondAttribute="bottom" constant="36" id="0Oi-mQ-jZO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LzF-gS-pCs" secondAttribute="trailing" constant="-12" id="5Li-Ut-URG"/>
                             <constraint firstItem="cGv-BC-RoD" firstAttribute="leading" secondItem="CBl-pL-BeV" secondAttribute="leadingMargin" constant="-4" id="6BQ-2W-jhc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wEJ-eh-I02" secondAttribute="trailing" constant="-8" id="9vT-V6-0Uu"/>
@@ -284,7 +283,7 @@ Activer les notifications vous permet d’être informé(e) des nouveautés dans
                             <constraint firstAttribute="trailingMargin" secondItem="wEJ-eh-I02" secondAttribute="trailing" constant="-8" id="n13-up-iXO"/>
                             <constraint firstItem="LzF-gS-pCs" firstAttribute="leading" secondItem="CBl-pL-BeV" secondAttribute="leadingMargin" constant="-4" id="ny7-xV-aY6"/>
                             <constraint firstItem="z2F-Et-Dbc" firstAttribute="top" secondItem="wEJ-eh-I02" secondAttribute="bottom" constant="16" id="ol1-Fm-ejS"/>
-                            <constraint firstItem="ROi-Zv-4sG" firstAttribute="top" secondItem="LzF-gS-pCs" secondAttribute="bottom" constant="8" id="pJ6-qu-zFJ"/>
+                            <constraint firstItem="ROi-Zv-4sG" firstAttribute="top" secondItem="LzF-gS-pCs" secondAttribute="bottom" constant="30" id="pJ6-qu-zFJ"/>
                             <constraint firstItem="cGv-BC-RoD" firstAttribute="top" secondItem="RFo-jt-ATk" secondAttribute="bottom" constant="20" id="rk6-DY-RbB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wEJ-eh-I02" secondAttribute="trailing" constant="-8" id="t0z-fU-Lv9"/>
                         </constraints>

@@ -14,7 +14,7 @@ extension UIFont {
             assertionFailure("Missing font")
             return UIFont.systemFont(ofSize: size)
         }
-        return font
+        return FontMetrics.scaledFont(for: font)
     }
     
     enum SFUITextFontType: String {

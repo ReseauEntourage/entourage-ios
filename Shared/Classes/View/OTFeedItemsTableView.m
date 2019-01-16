@@ -11,7 +11,6 @@
 #import "OTEntourage.h"
 #import "UIButton+entourage.h"
 #import "UIColor+entourage.h"
-#import "UILabel+entourage.h"
 #import "OTTourPoint.h"
 #import "OTFeedItemFactory.h"
 #import "OTUIDelegate.h"

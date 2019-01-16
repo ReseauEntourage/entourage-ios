@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="mpV-Sz-lXL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="mpV-Sz-lXL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -34,10 +33,9 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Créer une rencontre" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhw-r6-g45">
-                                <rect key="frame" x="94" y="482.5" width="210" height="21"/>
+                                <rect key="frame" x="94" y="484" width="210" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="1fJ-JE-qCM"/>
-                                    <constraint firstAttribute="height" constant="21" id="Qzp-ey-Od6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <color key="textColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -93,11 +91,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66X-IN-NwF" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="z0P-Wa-8Xc" userLabel="Demande Alert" customClass="OTAlertViewBehavior"/>
             </objects>
-            <point key="canvasLocation" x="364" y="1538"/>
+            <point key="canvasLocation" x="582.39999999999998" y="1383.5082458770617"/>
         </scene>
     </scenes>
     <resources>
-        <image name="closeOptionWithShadow" width="61" height="61"/>
+        <image name="closeOptionWithShadow" width="61.5" height="61.5"/>
         <image name="report" width="48" height="48"/>
         <image name="solidarity" width="48" height="48"/>
     </resources>
