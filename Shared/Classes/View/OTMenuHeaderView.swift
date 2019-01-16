@@ -61,7 +61,7 @@ final class OTMenuHeaderView: UIView {
             $0.top.equalTo(profileBtn.snp.bottom)
         }
         
-        nameLabel.font = UIFont.SFUIText(size: 15, type: UIFont.SFUITextFontType.bold)
+        nameLabel.font = UIFont.SFUIText(size: 15, type: SFUITextFontType.bold)
         
         editLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-10)

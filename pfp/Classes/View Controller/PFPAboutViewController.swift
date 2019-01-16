@@ -73,9 +73,9 @@ class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableView
         cell.backgroundColor = UIColor.pfpTableBackground()
         cell.accessoryType = UITableViewCellAccessoryType.none
         cell.textLabel?.textColor = ApplicationTheme.shared().titleLabelColor
-        cell.textLabel?.font = UIFont.SFUIText(size: textSize, type: UIFont.SFUITextFontType.regular)
+        cell.textLabel?.font = UIFont.SFUIText(size: textSize, type: SFUITextFontType.regular)
         cell.detailTextLabel?.textColor = ApplicationTheme.shared().subtitleLabelColor
-        cell.detailTextLabel?.font = UIFont.SFUIText(size: textSize, type: UIFont.SFUITextFontType.bold)
+        cell.detailTextLabel?.font = UIFont.SFUIText(size: textSize, type: SFUITextFontType.bold)
         
         let arrowImage:UIImage = UIImage.init(named: "arrowForMenu")!
         let imageView:UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: textSize, height: textSize))

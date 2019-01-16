@@ -105,11 +105,11 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
         let normalAttributedText = NSAttributedString(string: editText, attributes:
             [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
              .foregroundColor: ApplicationTheme.shared().backgroundThemeColor,
-             .font:UIFont.SFUIText(size: 14, type: UIFont.SFUITextFontType.regular)])
+             .font:UIFont.SFUIText(size: 14, type: SFUITextFontType.regular)])
         let selectedAttributedText = NSAttributedString(string: editText, attributes:
             [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
              .foregroundColor: ApplicationTheme.shared().titleLabelColor,
-             .font:UIFont.SFUIText(size: 14, type: UIFont.SFUITextFontType.regular)])
+             .font:UIFont.SFUIText(size: 14, type: SFUITextFontType.regular)])
         headerView.editLabel.setAttributedTitle(normalAttributedText, for: UIControlState.normal)
         headerView.editLabel.setAttributedTitle(selectedAttributedText, for: UIControlState.highlighted)
         headerView.editLabel.setAttributedTitle(selectedAttributedText, for: UIControlState.selected)

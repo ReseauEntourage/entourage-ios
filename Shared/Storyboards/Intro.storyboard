@@ -472,6 +472,11 @@
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="dynamicStyle">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -641,6 +646,11 @@
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="dynamicStyle">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udm-8w-4iN">
                                         <rect key="frame" x="19" y="186" width="340" height="36"/>
@@ -649,6 +659,11 @@ saisissez votre numéro de portable.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="dynamicStyle">
+                                                <integer key="value" value="7"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="FR" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fMp-TQ-cvd" customClass="JVFloatLabeledTextField">
                                         <rect key="frame" x="19" y="252" width="44" height="50"/>
@@ -824,138 +839,151 @@ saisissez votre numéro de portable.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhiteEntourage" translatesAutoresizingMaskIntoConstraints="NO" id="3bR-VB-ndO">
-                                <rect key="frame" x="12" y="35" width="56" height="56"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="Gkr-wf-kKF"/>
-                                    <constraint firstAttribute="width" constant="56" id="gfc-8b-6ES"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEZ-Ma-DdB">
-                                <rect key="frame" x="12" y="106" width="225" height="72"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="225" id="aXm-Gp-NSQ"/>
-                                </constraints>
-                                <string key="text">Bienvenue
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gLS-yc-Km1">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WDy-sz-VGA">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="logoWhiteEntourage" translatesAutoresizingMaskIntoConstraints="NO" id="3bR-VB-ndO">
+                                                <rect key="frame" x="14" y="15" width="56" height="56"/>
+                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="56" id="Gkr-wf-kKF"/>
+                                                    <constraint firstAttribute="width" constant="56" id="gfc-8b-6ES"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eEZ-Ma-DdB">
+                                                <rect key="frame" x="14" y="86" width="225" height="72"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="225" id="aXm-Gp-NSQ"/>
+                                                </constraints>
+                                                <string key="text">Bienvenue
 sur Entourage.</string>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wF4-5f-khB">
-                                <rect key="frame" x="8" y="178" width="359" height="106"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Voisin-Age est la communauté de voisins qui tissent des liens intergénérationnels. Proximité, Liberté, Réciprocité : rencontrez des personnes âgées près de chez vous et créez des liens de voisinage et d’amitié. </string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="249" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="ufn-rN-e8V">
-                                <rect key="frame" x="8" y="284" width="359" height="226"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vj-nj-f39">
-                                <rect key="frame" x="8" y="510" width="359" height="50"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="dynamicStyle">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wF4-5f-khB">
+                                                <rect key="frame" x="14" y="158" width="346" height="225"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <string key="text">Voisin-Age est la communauté de voisins qui tissent des liens intergénérationnels. Proximité, Liberté, Réciprocité : rencontrez des personnes âgées près de chez vous et créez des liens de voisinage et d’amitié. </string>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <imageView userInteractionEnabled="NO" contentMode="bottom" verticalHuggingPriority="251" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="ufn-rN-e8V">
+                                                <rect key="frame" x="14" y="383" width="346" height="132"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vj-nj-f39">
+                                                <rect key="frame" x="14" y="515" width="346" height="50"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="210" id="3Rr-Dv-wJQ"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="5YA-hm-50D"/>
+                                                    <constraint firstAttribute="height" constant="50" id="gJu-o6-9Id"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                <state key="normal" title="C'est parti, je rejoins le réseau">
+                                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="3Rr-Dv-wJQ"/>
+                                                        <exclude reference="5YA-hm-50D"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="continueOnboarding:" destination="8Pa-2W-O1j" eventType="touchUpInside" id="dce-WB-sC7"/>
+                                                </connections>
+                                            </button>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="252" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uoA-Wf-2x5">
+                                                <rect key="frame" x="14" y="597" width="346" height="70"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="En vous inscrivant, vous acceptez nos ">
+                                                        <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <font key="NSFont" size="15" name=".SFNSText"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="conditions d’utilisation">
+                                                        <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <font key="NSFont" size="15" name=".SFNSText"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            <integer key="NSUnderline" value="1"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=", vous confirmez avoir plus de 16 ans et avoir lu notre ">
+                                                        <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <font key="NSFont" size="15" name=".SFNSText"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="politique de confidentialité.">
+                                                        <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <font key="NSFont" size="15" name=".SFNSText"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            <integer key="NSUnderline" value="1"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="3bR-VB-ndO" firstAttribute="top" secondItem="WDy-sz-VGA" secondAttribute="top" constant="15" id="8bj-Ld-XY7"/>
+                                            <constraint firstItem="8vj-nj-f39" firstAttribute="trailing" secondItem="ufn-rN-e8V" secondAttribute="trailing" id="B5l-z7-4t3"/>
+                                            <constraint firstItem="uoA-Wf-2x5" firstAttribute="top" relation="lessThanOrEqual" secondItem="8vj-nj-f39" secondAttribute="bottom" constant="32" id="CZK-fb-2sr"/>
+                                            <constraint firstAttribute="bottom" secondItem="uoA-Wf-2x5" secondAttribute="bottom" id="ENI-Oc-GUu"/>
+                                            <constraint firstItem="wF4-5f-khB" firstAttribute="top" secondItem="eEZ-Ma-DdB" secondAttribute="bottom" id="M5n-Cm-7w6"/>
+                                            <constraint firstItem="ufn-rN-e8V" firstAttribute="leading" secondItem="wF4-5f-khB" secondAttribute="leading" id="MZm-Wg-Nls"/>
+                                            <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="ufn-rN-e8V" secondAttribute="leading" id="TDC-vO-N7c"/>
+                                            <constraint firstItem="eEZ-Ma-DdB" firstAttribute="top" secondItem="3bR-VB-ndO" secondAttribute="bottom" constant="15" id="UZm-7t-Jle"/>
+                                            <constraint firstAttribute="trailing" secondItem="wF4-5f-khB" secondAttribute="trailing" constant="15" id="Xxm-Su-DPE"/>
+                                            <constraint firstItem="ufn-rN-e8V" firstAttribute="top" secondItem="wF4-5f-khB" secondAttribute="bottom" id="Y80-pb-Nkm"/>
+                                            <constraint firstItem="ufn-rN-e8V" firstAttribute="trailing" secondItem="wF4-5f-khB" secondAttribute="trailing" id="b8Q-zc-s1H"/>
+                                            <constraint firstItem="uoA-Wf-2x5" firstAttribute="trailing" secondItem="8vj-nj-f39" secondAttribute="trailing" id="jzI-Mo-Sl6"/>
+                                            <constraint firstItem="8vj-nj-f39" firstAttribute="top" secondItem="ufn-rN-e8V" secondAttribute="bottom" id="lHt-Kh-zp9"/>
+                                            <constraint firstItem="uoA-Wf-2x5" firstAttribute="leading" secondItem="8vj-nj-f39" secondAttribute="leading" id="lXn-wO-I46"/>
+                                            <constraint firstItem="eEZ-Ma-DdB" firstAttribute="leading" secondItem="3bR-VB-ndO" secondAttribute="leading" id="nb7-ba-Pax"/>
+                                            <constraint firstItem="wF4-5f-khB" firstAttribute="leading" secondItem="eEZ-Ma-DdB" secondAttribute="leading" id="tNM-9b-887"/>
+                                            <constraint firstItem="3bR-VB-ndO" firstAttribute="leading" secondItem="WDy-sz-VGA" secondAttribute="leading" constant="14" id="zec-cU-G9F"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="210" id="3Rr-Dv-wJQ"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="5YA-hm-50D"/>
-                                    <constraint firstAttribute="height" constant="50" id="gJu-o6-9Id"/>
+                                    <constraint firstAttribute="bottom" secondItem="WDy-sz-VGA" secondAttribute="bottom" id="A9S-yf-cba"/>
+                                    <constraint firstItem="WDy-sz-VGA" firstAttribute="top" secondItem="gLS-yc-Km1" secondAttribute="top" id="JdP-Dw-7TN"/>
+                                    <constraint firstAttribute="trailing" secondItem="WDy-sz-VGA" secondAttribute="trailing" id="lzu-My-kja"/>
+                                    <constraint firstItem="WDy-sz-VGA" firstAttribute="leading" secondItem="gLS-yc-Km1" secondAttribute="leading" id="wdF-ch-7n8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="C'est parti, je rejoins le réseau">
-                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="3Rr-Dv-wJQ"/>
-                                        <exclude reference="5YA-hm-50D"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="continueOnboarding:" destination="8Pa-2W-O1j" eventType="touchUpInside" id="dce-WB-sC7"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="252" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uoA-Wf-2x5">
-                                <rect key="frame" x="12" y="595" width="351" height="70"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="En vous inscrivant, vous acceptez nos ">
-                                        <attributes>
-                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="15" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="conditions d’utilisation">
-                                        <attributes>
-                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="15" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=", vous confirmez avoir plus de 16 ans et avoir lu notre ">
-                                        <attributes>
-                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="15" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="politique de confidentialité.">
-                                        <attributes>
-                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="15" name=".SFNSText"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            <integer key="NSUnderline" value="1"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leading" constant="8" id="22e-7S-Bz7"/>
-                            <constraint firstItem="wF4-5f-khB" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="6Tm-4Q-gvF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="6go-Mk-4bj"/>
-                            <constraint firstItem="b9i-3f-AXD" firstAttribute="top" secondItem="uoA-Wf-2x5" secondAttribute="bottom" constant="2" id="8aD-RT-vwv"/>
-                            <constraint firstAttribute="trailing" secondItem="uoA-Wf-2x5" secondAttribute="trailing" constant="12" id="8s2-UH-dgK"/>
-                            <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="CSS-GK-sBy"/>
-                            <constraint firstItem="3bR-VB-ndO" firstAttribute="top" secondItem="UIV-Pr-4Jl" secondAttribute="bottom" constant="15" id="H6V-od-O8V"/>
-                            <constraint firstItem="uoA-Wf-2x5" firstAttribute="top" relation="lessThanOrEqual" secondItem="8vj-nj-f39" secondAttribute="bottom" constant="35" id="HGo-OC-IEW"/>
-                            <constraint firstItem="ufn-rN-e8V" firstAttribute="trailing" secondItem="8vj-nj-f39" secondAttribute="trailing" id="HoO-QT-c3m"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wF4-5f-khB" secondAttribute="trailing" constant="-8" id="JjY-YD-fdS"/>
-                            <constraint firstItem="wF4-5f-khB" firstAttribute="top" secondItem="eEZ-Ma-DdB" secondAttribute="bottom" id="Mb3-qm-R0B"/>
-                            <constraint firstItem="eEZ-Ma-DdB" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-4" id="Mw2-fa-gi8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="NLy-4P-qnF"/>
-                            <constraint firstAttribute="trailing" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="8" id="Pp9-Kp-4oY"/>
-                            <constraint firstItem="eEZ-Ma-DdB" firstAttribute="top" secondItem="3bR-VB-ndO" secondAttribute="bottom" constant="15" id="UXb-Bi-SHI"/>
-                            <constraint firstItem="ufn-rN-e8V" firstAttribute="top" secondItem="wF4-5f-khB" secondAttribute="bottom" id="X4a-5L-9b0"/>
-                            <constraint firstItem="ufn-rN-e8V" firstAttribute="leading" secondItem="8vj-nj-f39" secondAttribute="leading" id="aft-Wn-nMb"/>
-                            <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="de5-df-YMd"/>
-                            <constraint firstItem="8vj-nj-f39" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-8" id="fWs-Tx-8bC"/>
-                            <constraint firstItem="uoA-Wf-2x5" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leading" constant="12" id="gSR-Eu-cR1"/>
-                            <constraint firstItem="ufn-rN-e8V" firstAttribute="bottom" secondItem="8vj-nj-f39" secondAttribute="top" id="ho4-JK-2k1"/>
-                            <constraint firstItem="3bR-VB-ndO" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leadingMargin" constant="-4" id="o5d-uy-4s9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8vj-nj-f39" secondAttribute="trailing" constant="-8" id="tLT-p6-FQf"/>
+                            <constraint firstAttribute="trailing" secondItem="gLS-yc-Km1" secondAttribute="trailing" id="4vT-65-a5S"/>
+                            <constraint firstItem="gLS-yc-Km1" firstAttribute="leading" secondItem="UBK-61-6SC" secondAttribute="leading" id="9H2-Ju-P7b"/>
+                            <constraint firstItem="b9i-3f-AXD" firstAttribute="top" secondItem="gLS-yc-Km1" secondAttribute="bottom" id="XEh-Sv-GQV"/>
+                            <constraint firstItem="WDy-sz-VGA" firstAttribute="height" secondItem="UBK-61-6SC" secondAttribute="height" id="o8n-fD-UdT"/>
+                            <constraint firstItem="WDy-sz-VGA" firstAttribute="width" secondItem="UBK-61-6SC" secondAttribute="width" id="tGa-kd-mOv"/>
+                            <constraint firstItem="gLS-yc-Km1" firstAttribute="top" secondItem="UIV-Pr-4Jl" secondAttribute="bottom" id="xLH-M4-awZ"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="6go-Mk-4bj"/>
-                                <exclude reference="CSS-GK-sBy"/>
-                                <exclude reference="NLy-4P-qnF"/>
-                                <exclude reference="de5-df-YMd"/>
-                                <exclude reference="fWs-Tx-8bC"/>
-                                <exclude reference="tLT-p6-FQf"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="3Xs-Xs-bSI"/>
                     <connections>

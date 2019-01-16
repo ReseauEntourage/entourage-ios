@@ -63,7 +63,7 @@
     self.privacyIcon.tintColor = [UIColor whiteColor];
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Vous avez reçu un code (normalement)" attributes:@{
-                                                                                                                                                         NSFontAttributeName: [UIFont systemFontOfSize:22.0f weight:UIFontWeightSemibold],
+                                                                                                                                                         NSFontAttributeName: [UIFont SFUITextWithSize:22 type:SFUITextFontTypeSemibold],
                                                                                                                                                          NSForegroundColorAttributeName: [ApplicationTheme shared].backgroundThemeColor,
                                                                                                                                                          NSKernAttributeName: @(0.0)
                                                                                                                                                          }];
@@ -76,7 +76,7 @@
 - (void)updateSubtitleLabel {
     NSString *text = [OTAppAppearance lostCodeSimpleDescription];
     
-    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"SFUIText-Light" size:14]}];
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont SFUITextWithSize:14.0 type:SFUITextFontTypeLight]}];
     NSRange range1 = [text.lowercaseString rangeOfString:OTLocalizedString(@"doRegenerateCode").lowercaseString];
     
     [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:range1];
@@ -86,7 +86,7 @@
     self.actionLabel.attributedText = attributedText;
     
     text = [OTAppAppearance lostCodeFullDescription];
-    attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"SFUIText-Light" size:14]}];
+    attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont SFUITextWithSize:14.0 type:SFUITextFontTypeLight]}];
     self.descriptionLabel.attributedText = attributedText;
     self.descriptionLabel.hidden = !self.showFullDescription;
 }
