@@ -48,6 +48,9 @@
 		96B658BF209A689200EB0398 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B658BD209A689200EB0398 /* LabelStyles.swift */; };
 		96F30D6420BE956100229BB8 /* OTInviteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F30D6320BE956100229BB8 /* OTInviteCell.m */; };
 		96F30D6520BE956400229BB8 /* OTInviteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F30D6320BE956100229BB8 /* OTInviteCell.m */; };
+		96F9EEF121F7283600926425 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9EEF021F7283600926425 /* UITextView.swift */; };
+		96F9EEF221F7283A00926425 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9EEF021F7283600926425 /* UITextView.swift */; };
+		96F9EEF321F7283A00926425 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F9EEF021F7283600926425 /* UITextView.swift */; };
 		97B688FDB2DCD2CE3094ADDF /* Pods_pfp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */; };
 		A202E7CD2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
 		A202E7CE2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
@@ -1293,6 +1296,7 @@
 		96B658BD209A689200EB0398 /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 		96F30D6220BE956100229BB8 /* OTInviteCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTInviteCell.h; sourceTree = "<group>"; };
 		96F30D6320BE956100229BB8 /* OTInviteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTInviteCell.m; sourceTree = "<group>"; };
+		96F9EEF021F7283600926425 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		A19BDADC422EDAB56B022976 /* Pods-pfp.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.store.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.store.xcconfig"; sourceTree = "<group>"; };
 		A202E79F2085CFC20058F32C /* categories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
 		A202E7A22085CFC20058F32C /* logo_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black.png; sourceTree = "<group>"; };
@@ -3733,6 +3737,7 @@
 			children = (
 				A2A777ED20AF06EC006D2772 /* String+Localization.swift */,
 				964445D321DCC8FE00060A51 /* UILabel.swift */,
+				96F9EEF021F7283600926425 /* UITextView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4752,6 +4757,7 @@
 				A202ECF72085D2C80058F32C /* OTFeedItemFactory.m in Sources */,
 				A202ED2D2085D2C80058F32C /* NSDictionary+Parsing.m in Sources */,
 				A202ECC52085D2C80058F32C /* OTCloseKeyboardOnTapBehavior.m in Sources */,
+				96F9EEF121F7283600926425 /* UITextView.swift in Sources */,
 				A202EADF2085D2C70058F32C /* OTMyFeedMessage.m in Sources */,
 				A202ECCF2085D2C80058F32C /* OTTapEntourageBehavior.m in Sources */,
 				A202EB1B2085D2C70058F32C /* OTCreateMeetingViewController.m in Sources */,
@@ -4888,6 +4894,7 @@
 				A202ECF22085D2C80058F32C /* OTPushNotificationsData.m in Sources */,
 				A202EC882085D2C80058F32C /* OTContactsTableCellProviderBehavior.m in Sources */,
 				A202EC362085D2C80058F32C /* OTMapAnnotationProviderBehavior.m in Sources */,
+				96F9EEF321F7283A00926425 /* UITextView.swift in Sources */,
 				A202EC4A2085D2C80058F32C /* OTInvitationChangedBehavior.m in Sources */,
 				A202EB5A2085D2C80058F32C /* OTTutorialViewController.m in Sources */,
 				A202EC042085D2C80058F32C /* OTFeedsService.m in Sources */,
@@ -5389,6 +5396,7 @@
 				A296B84E20871CFC00F6AFBD /* OTAssociationsSourceBehavior.m in Sources */,
 				A21E8F2020B5BA8400433606 /* OTUserGroupCell.m in Sources */,
 				96B658B9209A5AF000EB0398 /* UIFont+Extensions.swift in Sources */,
+				96F9EEF221F7283A00926425 /* UITextView.swift in Sources */,
 				A296B84F20871CFC00F6AFBD /* OTGeolocationRightsViewController.m in Sources */,
 				A296B85020871CFC00F6AFBD /* OTQuitFeedItemViewController.m in Sources */,
 				A296B85120871CFC00F6AFBD /* OTLogger.m in Sources */,

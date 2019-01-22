@@ -248,7 +248,7 @@ numéro de portable? </string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GL7-KN-5la">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="506"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RUv-mt-1hv">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -388,7 +388,6 @@ numéro de portable? </string>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.84628409147262573" green="0.44154149293899536" blue="0.24305084347724915" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="kue-ZS-4CY" firstAttribute="leading" secondItem="Lcy-6o-z9V" secondAttribute="leading" id="1tY-Tv-Qbb"/>
                                             <constraint firstItem="kue-ZS-4CY" firstAttribute="bottom" secondItem="ghR-U6-qY5" secondAttribute="top" constant="-5" id="88D-qX-NNz"/>
@@ -444,7 +443,7 @@ numéro de portable? </string>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.84628409147262573" green="0.44154149293899536" blue="0.24305084347724915" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="GL7-KN-5la" firstAttribute="top" secondItem="ZQ0-HI-xvJ" secondAttribute="bottom" constant="-20" id="0TY-7y-3Bd"/>
                             <constraint firstItem="ocE-G0-FSl" firstAttribute="leading" secondItem="7hI-Gq-Hiw" secondAttribute="trailing" constant="8" id="8nd-7J-Ehu"/>
@@ -452,10 +451,10 @@ numéro de portable? </string>
                             <constraint firstAttribute="trailing" secondItem="GL7-KN-5la" secondAttribute="trailing" id="Lfc-0V-FfO"/>
                             <constraint firstItem="RUv-mt-1hv" firstAttribute="width" secondItem="oIj-1W-a8G" secondAttribute="width" id="Qp2-PZ-rVc"/>
                             <constraint firstItem="yeR-N2-sFF" firstAttribute="top" secondItem="ocE-G0-FSl" secondAttribute="bottom" constant="8" id="aGc-jq-vE1"/>
-                            <constraint firstItem="RUv-mt-1hv" firstAttribute="height" secondItem="oIj-1W-a8G" secondAttribute="height" id="fVt-OE-0LR"/>
+                            <constraint firstItem="RUv-mt-1hv" firstAttribute="height" secondItem="oIj-1W-a8G" secondAttribute="height" priority="250" id="fVt-OE-0LR"/>
+                            <constraint firstItem="GL7-KN-5la" firstAttribute="bottom" secondItem="ocE-G0-FSl" secondAttribute="top" id="hDL-Ah-64R"/>
                             <constraint firstItem="ocE-G0-FSl" firstAttribute="trailing" secondItem="oIj-1W-a8G" secondAttribute="trailingMargin" id="hFG-Cr-iAB"/>
                             <constraint firstItem="7hI-Gq-Hiw" firstAttribute="leading" secondItem="oIj-1W-a8G" secondAttribute="leadingMargin" id="jk3-FJ-uL2"/>
-                            <constraint firstItem="yeR-N2-sFF" firstAttribute="top" secondItem="GL7-KN-5la" secondAttribute="bottom" id="lWq-fQ-reM"/>
                             <constraint firstItem="7hI-Gq-Hiw" firstAttribute="centerY" secondItem="ocE-G0-FSl" secondAttribute="centerY" id="xVH-tm-jJb"/>
                         </constraints>
                     </view>
