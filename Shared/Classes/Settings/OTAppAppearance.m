@@ -369,7 +369,7 @@
     return [UIColor clearColor];
 }
 
-+ (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
++ (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size isDynamic:(BOOL)isDynamic {
     
     // Pfp items
     UIColor *typeColor = [ApplicationTheme shared].backgroundThemeColor;
@@ -388,7 +388,7 @@
     
     // Entourage Outing items
     if ([item.category isEqualToString:@"event"] || [item isOuting]) {
-        return [self formattedEventDateDescriptionForMessageItem:item size:size];;
+        return [self formattedEventDateDescriptionForMessageItem:item size:size isDynamic:isDynamic];;
     }
     
     // The rest of items
@@ -399,13 +399,25 @@
     }
     
     NSString *itemType = OTLocalizedString(item.entourage_type);
-    NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
-                                   NSForegroundColorAttributeName:typeColor};
-    
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString: itemType attributes:atttributtes];
-    NSAttributedString *byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_BOLD_DESCRIPTION size:size]}];
-    
+	NSAttributedString *typeAttrString;
+	NSAttributedString *byAttrString;
+	NSAttributedString *nameAttrString;
+	if (isDynamic) {
+		NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont SFUITextWithSize:size type:SFUITextFontTypeRegular],
+									   NSForegroundColorAttributeName:typeColor};
+		
+		typeAttrString = [[NSAttributedString alloc] initWithString: itemType attributes:atttributtes];
+		byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont SFUITextWithSize:size type:SFUITextFontTypeBold]}];
+		nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont SFUITextWithSize:size type:SFUITextFontTypeBold]}];
+	} else {
+		NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
+									   NSForegroundColorAttributeName:typeColor};
+		
+		typeAttrString = [[NSAttributedString alloc] initWithString: itemType attributes:atttributtes];
+		byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
+		nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_BOLD_DESCRIPTION size:size]}];
+	}
+	
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:byAttrString];
     [typeByNameAttrString appendAttributedString:nameAttrString];
@@ -421,17 +433,16 @@
     }
 
     NSString *organizerText = @"\nOrganisé";
-    NSString *fontName = @"SFUIText-Medium";
     CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
     
     NSDictionary *atttributtes = @{NSFontAttributeName :
-                                       [UIFont fontWithName:fontName size:fontSize],
+                                       [UIFont SFUITextWithSize:fontSize type:SFUITextFontTypeMedium],
                                    NSForegroundColorAttributeName:textColor};
     NSMutableAttributedString *organizerAttributedText = [[NSMutableAttributedString alloc] initWithString:organizerText attributes:atttributtes];
     
-    NSAttributedString *byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    NSAttributedString *byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont SFUITextWithSize:fontSize type:SFUITextFontTypeMedium]}];
     
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:fontName size:fontSize]}];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont SFUITextWithSize:fontSize type:SFUITextFontTypeMedium]}];
     
     NSMutableAttributedString *orgByNameAttrString = organizerAttributedText.mutableCopy;
     [orgByNameAttrString appendAttributedString:byAttrString];
@@ -441,7 +452,8 @@
 }
 
 + (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item
-                                                              size:(CGFloat)size {
+                                                              size:(CGFloat)size
+														 isDynamic:(BOOL)isDynamic{
     
     UIColor *textColor = [UIColor colorWithHexString:@"4a4a4a"];
     UIColor *typeColor = textColor;
@@ -451,13 +463,20 @@
         typeColor = [UIColor pfpOutingCircleColor];
         eventName = OTLocalizedString(@"pfp_event").capitalizedString;
     }
+	
+	UIFont* font;
+	if (isDynamic) {
+		font = [UIFont SFUITextWithSize:size type:SFUITextFontTypeRegular];
+	} else {
+		font = [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size];
+	}
     
-    NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
+    NSDictionary *atttributtes = @{NSFontAttributeName : font,
                                    NSForegroundColorAttributeName:typeColor};
     NSMutableAttributedString *eventAttrDescString = [[NSMutableAttributedString alloc] initWithString:eventName attributes:atttributtes];
     
     NSString *dateString = [NSString stringWithFormat:@" le %@", [item.startsAt asStringWithFormat:@"EEEE dd/MM"]];
-    NSDictionary *dateAtttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size], NSForegroundColorAttributeName:textColor};
+    NSDictionary *dateAtttributtes = @{NSFontAttributeName : font, NSForegroundColorAttributeName:textColor};
     NSMutableAttributedString *dateAttrString = [[NSMutableAttributedString alloc] initWithString:dateString attributes:dateAtttributtes];
     
     if (item.startsAt) {

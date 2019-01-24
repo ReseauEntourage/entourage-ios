@@ -73,7 +73,7 @@
     }
     
     if (self.lblDescription) {
-        [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+        [self.lblDescription setAttributedText:[uiDelegate descriptionWithDynamicSize:self.fontSize.floatValue]];
     }
     
     if (self.txtFeedItemDescription) {

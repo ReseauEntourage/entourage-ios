@@ -12,6 +12,7 @@
 @protocol OTUIDelegate <NSObject>
 
 - (NSAttributedString *) descriptionWithSize:(CGFloat)size;
+- (NSAttributedString *) descriptionWithDynamicSize:(CGFloat)size;
 - (NSString *)summary;
 - (NSString *)categoryIconSource;
 - (NSString *)feedItemDescription;

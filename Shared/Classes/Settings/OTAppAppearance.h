@@ -48,7 +48,7 @@
 + (UIColor*)announcementFeedContainerColor;
 + (UIColor *)tagColor:(OTUser*)user;
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem;
-+ (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
++ (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size isDynamic:(BOOL)isDynamic;
 + (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSAttributedString*)formattedAuthorDescriptionForMessageItem:(OTEntourage*)item;
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item;

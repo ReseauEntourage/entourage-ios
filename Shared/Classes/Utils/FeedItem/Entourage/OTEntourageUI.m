@@ -13,11 +13,16 @@
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
 #import "NSDate+OTFormatter.h"
+#import "entourage-Swift.h"
 
 @implementation OTEntourageUI
 
 - (NSAttributedString *)descriptionWithSize:(CGFloat)size {
-    return [OTAppAppearance formattedDescriptionForMessageItem:self.entourage size:size];
+	return [OTAppAppearance formattedDescriptionForMessageItem:self.entourage size:size isDynamic:NO];
+}
+
+- (NSAttributedString *)descriptionWithDynamicSize:(CGFloat)size {
+	return [OTAppAppearance formattedDescriptionForMessageItem:self.entourage size:size isDynamic:YES];
 }
 
 - (NSString *)summary {
@@ -49,7 +54,7 @@
     
     NSString *fullInfoText = [NSString stringWithFormat:@"%@%@%@", dateInfo, timeInfo, addressInfo];
     
-    NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:fullInfoText attributes:@{NSFontAttributeName : [UIFont fontWithName:@"SFUIText-Bold" size:fontSize]}];
+    NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:fullInfoText attributes:@{NSFontAttributeName :[UIFont SFUITextWithSize:fontSize type:SFUITextFontTypeBold]}];
     
     return infoAttrString;
 }
