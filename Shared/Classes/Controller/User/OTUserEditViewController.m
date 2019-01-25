@@ -256,7 +256,7 @@ typedef NS_ENUM(NSInteger) {
             title = @"";
     }
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 15)];
-    headerView.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
+    headerView.font = [UIFont SFUITextWithSize:15 type:SFUITextFontTypeMedium];
     headerView.textColor = [UIColor appGreyishBrownColor];
     headerView.backgroundColor = [UIColor appPaleGreyColor];
     headerView.text = title;

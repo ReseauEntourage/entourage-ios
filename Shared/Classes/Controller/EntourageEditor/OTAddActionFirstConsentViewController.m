@@ -9,6 +9,7 @@
 #import "OTAddActionFirstConsentViewController.h"
 #import "OTAddActionSecondConsentViewController.h"
 #import "UIStoryboard+entourage.h"
+#import "entourage-Swift.h"
 
 @interface OTAddActionFirstConsentViewController ()
 @property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
@@ -22,8 +23,8 @@
     self.navigationItem.title = OTLocalizedString(@"final_question").uppercaseString;
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Créez-vous cette action solidaire pour une personne identifiée, autre que vous : un ami en situation précaire, une personne croisée dans la rue ?"];
-    [attributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"SFUIText-Medium" size:17] range:NSMakeRange(34, 44)];
-    [attributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"SFUIText-Semibold" size:17] range:NSMakeRange(79, 1)];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont SFUITextWithSize:17 type:SFUITextFontTypeMedium] range:NSMakeRange(34, 44)];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont SFUITextWithSize:17 type:SFUITextFontTypeSemibold] range:NSMakeRange(79, 1)];
     self.descriptionLabel.attributedText = attributedString;
 }
 
