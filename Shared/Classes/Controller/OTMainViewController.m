@@ -1297,7 +1297,7 @@
 }
 
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem {
-    [OTSafariService launchInAppBrowserWithUrlString:feedItem.url viewController:nil];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:feedItem.url]];
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
