@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="fid-Iu-R1a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="fid-Iu-R1a">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -145,7 +145,7 @@
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberCell" rowHeight="54" id="Baq-Cq-eW5" customClass="OTMembersCell">
                                                 <rect key="frame" x="0.0" y="146" width="383" height="54"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="Baq-Cq-eW5" id="dtu-P6-Yt8">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Baq-Cq-eW5" id="dtu-P6-Yt8">
                                                     <rect key="frame" x="0.0" y="0.0" width="383" height="54"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
@@ -175,32 +175,44 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3B-dM-6Ut">
-                                                            <rect key="frame" x="66" y="0.0" width="287" height="53.5"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="53.5" id="RUD-hJ-ybU"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3B-dM-6Ut">
+                                                            <rect key="frame" x="66" y="0.0" width="79" height="54"/>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
                                                             <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="infinite" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="1zD-4P-BGz">
+                                                            <rect key="frame" x="155" y="0.0" width="100" height="54"/>
+                                                        </stackView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCt-ds-cJQ" customClass="OTGradientView">
+                                                            <rect key="frame" x="368" y="0.0" width="15" height="54"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="15" id="6Zq-si-2SA"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="wCt-ds-cJQ" secondAttribute="bottom" id="2C5-Tf-QoG"/>
                                                         <constraint firstAttribute="bottom" secondItem="I3B-dM-6Ut" secondAttribute="bottom" id="5T0-eW-46g"/>
                                                         <constraint firstItem="We6-0W-3aq" firstAttribute="top" secondItem="dtu-P6-Yt8" secondAttribute="top" constant="9.5" id="Aq1-JB-OFD"/>
                                                         <constraint firstItem="I3B-dM-6Ut" firstAttribute="leading" secondItem="We6-0W-3aq" secondAttribute="trailing" constant="15" id="B4a-hJ-gpt"/>
                                                         <constraint firstItem="jtp-aE-QMj" firstAttribute="trailing" secondItem="We6-0W-3aq" secondAttribute="trailing" constant="2" id="EnL-ik-9Or"/>
+                                                        <constraint firstAttribute="bottom" secondItem="1zD-4P-BGz" secondAttribute="bottom" id="GwR-RP-zzg"/>
+                                                        <constraint firstItem="1zD-4P-BGz" firstAttribute="top" secondItem="dtu-P6-Yt8" secondAttribute="top" id="HZq-sP-9JX"/>
+                                                        <constraint firstItem="wCt-ds-cJQ" firstAttribute="top" secondItem="dtu-P6-Yt8" secondAttribute="top" id="JZC-kC-HGV"/>
                                                         <constraint firstItem="We6-0W-3aq" firstAttribute="leading" secondItem="dtu-P6-Yt8" secondAttribute="leading" constant="16" id="N4g-pE-ohq"/>
                                                         <constraint firstItem="jtp-aE-QMj" firstAttribute="bottom" secondItem="We6-0W-3aq" secondAttribute="bottom" constant="2" id="heY-Jt-xZF"/>
+                                                        <constraint firstAttribute="trailing" secondItem="wCt-ds-cJQ" secondAttribute="trailing" id="i96-jq-OJJ"/>
                                                         <constraint firstItem="We6-0W-3aq" firstAttribute="centerY" secondItem="dtu-P6-Yt8" secondAttribute="centerY" id="r8c-BC-6Fi"/>
+                                                        <constraint firstItem="1zD-4P-BGz" firstAttribute="leading" secondItem="I3B-dM-6Ut" secondAttribute="trailing" constant="10" id="rGu-LD-dm0"/>
                                                         <constraint firstItem="I3B-dM-6Ut" firstAttribute="top" secondItem="dtu-P6-Yt8" secondAttribute="top" id="rPx-4S-KwH"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="I3B-dM-6Ut" secondAttribute="trailing" constant="15" id="xXA-yb-uKU"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="btnProfile" destination="We6-0W-3aq" id="1t9-RV-7Hj"/>
                                                     <outlet property="imgAssociation" destination="jtp-aE-QMj" id="jph-ky-7XK"/>
                                                     <outlet property="lblDisplayName" destination="I3B-dM-6Ut" id="K4B-lD-XvP"/>
+                                                    <outlet property="rolesStackView" destination="1zD-4P-BGz" id="ZII-PC-hqW"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SummaryCell" rowHeight="91" id="Xwd-MU-j54" customClass="OTSummaryInfoCell">

@@ -33,16 +33,14 @@
 #import "OTMapViewController.h"
 #import "UIColor+Expanded.h"
 #import "OTPublicFeedItemViewController.h"
+#import "OTPillLabelView.h"
 
 #import "entourage-Swift.h"
 
 #define SUMMARY_AVATAR 1
 #define SUMMARY_AVATAR_SHADOW 10
 
-#define SUMMARY_RIGHT_CONTAINER_TAG 11
-#define SUMMARY_RIGHT_TAG 12
-#define SUMMARY_LEFT_CONTAINER_TAG 13
-#define SUMMARY_LEFT_TAG 14
+#define SUMMARY_TAG_CONTAINER 11
 
 #define SUMMARY_NAME 2
 #define SUMMARY_DESCRIPTION 3
@@ -244,11 +242,15 @@ typedef NS_ENUM(NSInteger) {
     UILabel *aboutMeLabel = [cell viewWithTag:SUMMARY_DESCRIPTION];
     aboutMeLabel.text = self.user.about;
     
-    UIView *roleTagContainer = [cell viewWithTag:SUMMARY_RIGHT_CONTAINER_TAG];
-    roleTagContainer.backgroundColor = [OTAppAppearance tagColor:self.user];
-    
-    UILabel *roleTagLabel = [cell viewWithTag:SUMMARY_RIGHT_TAG];
-    roleTagLabel.text = self.user.roleTag;
+    UIStackView *roleTagContainer = [cell viewWithTag:SUMMARY_TAG_CONTAINER];
+    for (NSString *role in self.user.roles) {
+        OTRoleTag *tag = [[OTRoleTag alloc] initWithName:role];
+        if (tag.visible) {
+            UIView *tagView = [OTPillLabelView createWithRoleTag:tag];
+            [roleTagContainer addArrangedSubview:tagView];
+        }
+    }
+    roleTagContainer.hidden = roleTagContainer.arrangedSubviews.count == 0;
 
     UIView *headerBgView = [cell viewWithTag:HEADER_BG_VIEW];
     headerBgView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;

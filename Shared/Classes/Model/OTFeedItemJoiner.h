@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) NSString *message;
 @property (strong, nonatomic) NSString *avatarUrl;
+@property (strong, nonatomic) NSString *groupRole;
+@property (strong, nonatomic) NSArray<NSString *> *communityRoles;
 @property (strong, nonatomic) OTFeedItem *feedItem;
 @property (strong, nonatomic) OTAssociation *partner;
 

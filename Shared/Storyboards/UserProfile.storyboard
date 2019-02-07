@@ -15,9 +15,6 @@
         <array key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
         </array>
-        <array key="SF-UI-Text-Regular.otf">
-            <string>SFUIText-Regular</string>
-        </array>
         <array key="SF-UI-Text-Semibold.otf">
             <string>SFUIText-Semibold</string>
         </array>
@@ -106,48 +103,27 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QC6-AW-9kS" userLabel="nameAndTagsContainer">
-                                                    <rect key="frame" x="153.5" y="137" width="68" height="57.5"/>
+                                                    <rect key="frame" x="154.5" y="137" width="66" height="57.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chip Do" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igZ-LQ-DoQ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="68" height="21.5"/>
-                                                            <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="66" height="20"/>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
                                                             <color key="textColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l15-Lf-r4O" userLabel="rightTagContainer">
-                                                            <rect key="frame" x="0.0" y="31.5" width="68" height="26"/>
-                                                            <subviews>
-                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="12" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tag 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfj-qy-UH8">
-                                                                    <rect key="frame" x="4" y="4" width="60" height="17"/>
-                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="14"/>
-                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <constraints>
-                                                                <constraint firstItem="lfj-qy-UH8" firstAttribute="leading" secondItem="l15-Lf-r4O" secondAttribute="leading" constant="4" id="0lY-yL-j4Y"/>
-                                                                <constraint firstAttribute="bottom" secondItem="lfj-qy-UH8" secondAttribute="bottom" constant="5" id="VcZ-T8-r1H"/>
-                                                                <constraint firstAttribute="trailing" secondItem="lfj-qy-UH8" secondAttribute="trailing" constant="4" id="WHF-Tu-Pxb"/>
-                                                                <constraint firstItem="lfj-qy-UH8" firstAttribute="top" secondItem="l15-Lf-r4O" secondAttribute="top" constant="4" id="ZUJ-sf-5XQ"/>
-                                                            </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                    <integer key="value" value="5"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </view>
+                                                        <stackView opaque="NO" tag="11" contentMode="scaleToFill" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="infinite" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="cJI-2k-6mU" userLabel="tagContainer">
+                                                            <rect key="frame" x="-17" y="30" width="100" height="27.5"/>
+                                                        </stackView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="igZ-LQ-DoQ" firstAttribute="leading" secondItem="QC6-AW-9kS" secondAttribute="leading" id="5zb-7D-m6t"/>
-                                                        <constraint firstItem="l15-Lf-r4O" firstAttribute="leading" secondItem="QC6-AW-9kS" secondAttribute="leading" id="EGZ-GD-e38"/>
-                                                        <constraint firstAttribute="trailing" secondItem="l15-Lf-r4O" secondAttribute="trailing" id="Js7-8q-Tt5"/>
+                                                        <constraint firstAttribute="bottom" secondItem="cJI-2k-6mU" secondAttribute="bottom" id="ARe-qB-Z80"/>
+                                                        <constraint firstItem="igZ-LQ-DoQ" firstAttribute="centerX" secondItem="QC6-AW-9kS" secondAttribute="centerX" id="HTd-Xh-Cuc"/>
                                                         <constraint firstAttribute="trailing" secondItem="igZ-LQ-DoQ" secondAttribute="trailing" id="OaK-gY-gV6"/>
+                                                        <constraint firstItem="cJI-2k-6mU" firstAttribute="centerX" secondItem="QC6-AW-9kS" secondAttribute="centerX" id="ThB-QP-q20"/>
                                                         <constraint firstItem="igZ-LQ-DoQ" firstAttribute="top" secondItem="QC6-AW-9kS" secondAttribute="top" id="fMG-31-NX4"/>
-                                                        <constraint firstItem="l15-Lf-r4O" firstAttribute="top" secondItem="igZ-LQ-DoQ" secondAttribute="bottom" constant="10" id="fqt-Ky-Amb"/>
-                                                        <constraint firstAttribute="bottom" secondItem="l15-Lf-r4O" secondAttribute="bottom" id="lZH-9g-4VD"/>
+                                                        <constraint firstItem="cJI-2k-6mU" firstAttribute="top" secondItem="igZ-LQ-DoQ" secondAttribute="bottom" constant="10" id="noL-ax-rXu"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emw-8X-gin">

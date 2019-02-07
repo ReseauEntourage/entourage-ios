@@ -156,4 +156,6 @@
  */
 + (BOOL)shouldAskForConfidentialityWhenCreatingEntourage:(OTEntourage*)entourage;
 
++ (NSDictionary *)community;
+
 @end

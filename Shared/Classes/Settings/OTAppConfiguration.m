@@ -807,4 +807,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return NO;
 }
 
++ (NSDictionary *)community {
+    return self.sharedInstance.environmentConfiguration.community;
+}
+
 @end

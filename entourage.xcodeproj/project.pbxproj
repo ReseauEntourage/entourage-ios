@@ -10,6 +10,16 @@
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
 		1ECCA8ADF8F11C290527E9DC /* Pods_entourageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */; };
+		37191AD6220B3A6600F789B8 /* CommunityConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37191AD5220B3A6600F789B8 /* CommunityConfig.plist */; };
+		37191AD8220B3B2200F789B8 /* CommunityConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37191AD7220B3B2200F789B8 /* CommunityConfig.plist */; };
+		37191AD9220B53E400F789B8 /* OTPillLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37339CD221FF01860048B6E1 /* OTPillLabelView.xib */; };
+		37191ADA220B53FC00F789B8 /* OTPillLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37339CD821FF037C0048B6E1 /* OTPillLabelView.m */; };
+		37191ADD220B55D700F789B8 /* OTRoleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 37191ADC220B55D700F789B8 /* OTRoleTag.m */; };
+		37339CD321FF01860048B6E1 /* OTPillLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37339CD221FF01860048B6E1 /* OTPillLabelView.xib */; };
+		37339CD921FF037C0048B6E1 /* OTPillLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37339CD821FF037C0048B6E1 /* OTPillLabelView.m */; };
+		374E0265220C2EF6000EE348 /* OTRoleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 37191ADC220B55D700F789B8 /* OTRoleTag.m */; };
+		374E0266220C8039000EE348 /* OTGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 376C247F2208A60900AA0DEB /* OTGradientView.m */; };
+		376C24802208A60900AA0DEB /* OTGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 376C247F2208A60900AA0DEB /* OTGradientView.m */; };
 		6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
@@ -1259,6 +1269,15 @@
 		1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = entourage.entitlements; sourceTree = "<group>"; };
 		2A4E5B32B53E7E30C72258C3 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
+		37191AD5220B3A6600F789B8 /* CommunityConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CommunityConfig.plist; sourceTree = "<group>"; };
+		37191AD7220B3B2200F789B8 /* CommunityConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CommunityConfig.plist; sourceTree = "<group>"; };
+		37191ADB220B55D700F789B8 /* OTRoleTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTRoleTag.h; sourceTree = "<group>"; };
+		37191ADC220B55D700F789B8 /* OTRoleTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTRoleTag.m; sourceTree = "<group>"; };
+		37339CD221FF01860048B6E1 /* OTPillLabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPillLabelView.xib; sourceTree = "<group>"; };
+		37339CD721FF037C0048B6E1 /* OTPillLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPillLabelView.h; sourceTree = "<group>"; };
+		37339CD821FF037C0048B6E1 /* OTPillLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPillLabelView.m; sourceTree = "<group>"; };
+		376C247E2208A60900AA0DEB /* OTGradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTGradientView.h; sourceTree = "<group>"; };
+		376C247F2208A60900AA0DEB /* OTGradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGradientView.m; sourceTree = "<group>"; };
 		43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pfp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B1A847819E822150020FB93 /* pois_categories_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pois_categories_mock.json; sourceTree = "<group>"; };
@@ -2420,6 +2439,8 @@
 				A202E84C2085D2C40058F32C /* OTTourPoint.m */,
 				A202E8112085D2C40058F32C /* OTUser.h */,
 				A202E83D2085D2C40058F32C /* OTUser.m */,
+				37191ADB220B55D700F789B8 /* OTRoleTag.h */,
+				37191ADC220B55D700F789B8 /* OTRoleTag.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2859,6 +2880,11 @@
 				A20489FC2151421400064EB0 /* IntroPage3.xib */,
 				A20489FD2151421400064EB0 /* IntroPage4.xib */,
 				A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */,
+				37339CD221FF01860048B6E1 /* OTPillLabelView.xib */,
+				37339CD721FF037C0048B6E1 /* OTPillLabelView.h */,
+				37339CD821FF037C0048B6E1 /* OTPillLabelView.m */,
+				376C247E2208A60900AA0DEB /* OTGradientView.h */,
+				376C247F2208A60900AA0DEB /* OTGradientView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3580,6 +3606,7 @@
 			isa = PBXGroup;
 			children = (
 				A23D40142086253600E32F45 /* Environment */,
+				37191AD5220B3A6600F789B8 /* CommunityConfig.plist */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3679,6 +3706,7 @@
 			isa = PBXGroup;
 			children = (
 				A296B9162087A6B900F6AFBD /* Environment */,
+				37191AD7220B3B2200F789B8 /* CommunityConfig.plist */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3936,6 +3964,7 @@
 				A202E7FB2085CFC40058F32C /* CountryList.csv in Resources */,
 				A21D65B52085FDAA00EF8E0E /* Main.storyboard in Resources */,
 				A21D65B92085FDAA00EF8E0E /* PublicFeedItem.storyboard in Resources */,
+				37191AD6220B3A6600F789B8 /* CommunityConfig.plist in Resources */,
 				A21D65BA2085FDAA00EF8E0E /* Rights.storyboard in Resources */,
 				A21D65C22085FDAA00EF8E0E /* EncounterEditor.storyboard in Resources */,
 				A20489FB2151328D00064EB0 /* IntroPage1.xib in Resources */,
@@ -3980,6 +4009,7 @@
 				A21D65B82085FDAA00EF8E0E /* UserProfileEditor.storyboard in Resources */,
 				A21D65A82085FDAA00EF8E0E /* Disclaimer.storyboard in Resources */,
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
+				37339CD321FF01860048B6E1 /* OTPillLabelView.xib in Resources */,
 				A2FCF5C920AD5030004604AC /* PFPAboutView.xib in Resources */,
 				A21D65A52085FDAA00EF8E0E /* Social.storyboard in Resources */,
 				A21D64AB2085E8B400EF8E0E /* Oradea.gpx in Resources */,
@@ -4051,6 +4081,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37191AD9220B53E400F789B8 /* OTPillLabelView.xib in Resources */,
 				A296B89C20871CFC00F6AFBD /* CountryList.csv in Resources */,
 				A296B91A2087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist in Resources */,
 				A296B89D20871CFC00F6AFBD /* Main.storyboard in Resources */,
@@ -4091,6 +4122,7 @@
 				A296B8BD20871CFC00F6AFBD /* SF-UI-Text-Semibold.otf in Resources */,
 				A296B8BE20871CFC00F6AFBD /* UserProfile.storyboard in Resources */,
 				A296B8BF20871CFC00F6AFBD /* SF-UI-Text-RegularItalic.otf in Resources */,
+				37191AD8220B3B2200F789B8 /* CommunityConfig.plist in Resources */,
 				A2306AA320C5491E0094370E /* PfpUserVoisinage.storyboard in Resources */,
 				A296B8C020871CFC00F6AFBD /* SF-UI-Text-BoldItalic.otf in Resources */,
 				A2E293AB211B1FA900D44249 /* PfpStartupView.xib in Resources */,
@@ -4413,6 +4445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				374E0265220C2EF6000EE348 /* OTRoleTag.m in Sources */,
 				A202ECC12085D2C80058F32C /* OTSignalEntourageBehavior.m in Sources */,
 				A202EC392085D2C80058F32C /* OTEncounterAnnotation.m in Sources */,
 				A202EC2D2085D2C80058F32C /* MKMapView+entourage.m in Sources */,
@@ -4519,6 +4552,7 @@
 				A202EAF52085D2C70058F32C /* OTAddressBookItem.m in Sources */,
 				A202EC7F2085D2C80058F32C /* OTAssociationsCellProviderBehavior.m in Sources */,
 				A202EB2D2085D2C70058F32C /* OTContactInfoCell.m in Sources */,
+				37339CD921FF037C0048B6E1 /* OTPillLabelView.m in Sources */,
 				A202ECED2085D2C80058F32C /* OTAddressBookService.m in Sources */,
 				A202EC112085D2C80058F32C /* OTAssociationsService.m in Sources */,
 				A2658BFC21144DF200B6B15C /* OTEventCreatedCell.m in Sources */,
@@ -4715,6 +4749,7 @@
 				A202EBC12085D2C80058F32C /* OTActivityProvider.m in Sources */,
 				A202EC372085D2C80058F32C /* OTStartTourAnnotation.m in Sources */,
 				A202EBF32085D2C80058F32C /* OTFilterRadioButton.m in Sources */,
+				376C24802208A60900AA0DEB /* OTGradientView.m in Sources */,
 				A202ECCD2085D2C80058F32C /* OTOverlayFeederBehavior.m in Sources */,
 				A202EB3D2085D2C80058F32C /* OTMessageReceivedCell.m in Sources */,
 				A202EC472085D2C80058F32C /* OTHeatzonesCollectionSource.m in Sources */,
@@ -5097,6 +5132,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				374E0266220C8039000EE348 /* OTGradientView.m in Sources */,
+				37191ADA220B53FC00F789B8 /* OTPillLabelView.m in Sources */,
 				A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */,
 				A296B75520871CFC00F6AFBD /* OTEncounterAnnotation.m in Sources */,
 				A296B75620871CFC00F6AFBD /* MKMapView+entourage.m in Sources */,
@@ -5343,6 +5380,7 @@
 				A296B82720871CFC00F6AFBD /* UIButton+entourage.m in Sources */,
 				A296B82820871CFC00F6AFBD /* OTMapDelegateBehavior.m in Sources */,
 				A296B82920871CFC00F6AFBD /* OTPoiCategory.m in Sources */,
+				37191ADD220B55D700F789B8 /* OTRoleTag.m in Sources */,
 				A21E8F2920B7F3AE00433606 /* OTUserMembership.m in Sources */,
 				A296B82A20871CFC00F6AFBD /* OTMessageTableCellProviderBehavior.m in Sources */,
 				A296B82B20871CFC00F6AFBD /* OTPoi.m in Sources */,
