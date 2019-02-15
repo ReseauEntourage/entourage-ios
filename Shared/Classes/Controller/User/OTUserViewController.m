@@ -243,6 +243,7 @@ typedef NS_ENUM(NSInteger) {
     aboutMeLabel.text = self.user.about;
     
     UIStackView *roleTagContainer = [cell viewWithTag:SUMMARY_TAG_CONTAINER];
+    [roleTagContainer.arrangedSubviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     for (NSString *role in self.user.roles) {
         OTRoleTag *tag = [[OTRoleTag alloc] initWithName:role];
         if (tag.visible) {
