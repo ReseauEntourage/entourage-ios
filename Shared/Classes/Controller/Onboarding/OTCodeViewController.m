@@ -229,6 +229,7 @@
     }
 
     [SVProgressHUD show];
+    [self.codeTextField resignFirstResponder];
     
     [[OTAuthService new] authWithPhone:phone
                               password:code
