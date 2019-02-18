@@ -15,7 +15,7 @@
     NSInteger hour = [components hour];
     NSInteger minute = [components minute];
     
-    return [NSString stringWithFormat:@"%ldh%ld", (long)hour, (long)minute];
+    return [NSString stringWithFormat:@"%ldh%02ld", (long)hour, (long)minute];
 }
 
 - (NSString *)toRoundedQuarterTimeString {

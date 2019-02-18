@@ -95,11 +95,18 @@
 - (void)editDate:(OTEntourage *)entourage {
     self.entourage = entourage;
     
+    NSDate *defaultDate;
+    if (entourage.startsAt != nil) {
+        defaultDate = entourage.startsAt;
+    } else {
+        defaultDate = [NSDate date];
+    }
+    
     LSLDatePickerDialog *dpDialog = [[LSLDatePickerDialog alloc] init];
     [dpDialog showWithTitle:OTLocalizedString(@"addEventDate")
             doneButtonTitle:OTLocalizedString(@"save").uppercaseString
           cancelButtonTitle:OTLocalizedString(@"cancel").uppercaseString
-                defaultDate:[NSDate date]
+                defaultDate:defaultDate
                 minimumDate:nil
                 maximumDate:nil
            buttonTitleColor:[ApplicationTheme shared].backgroundThemeColor
@@ -113,6 +120,8 @@
 }
 
 - (void)editAddress:(OTEntourage *)entourage {
+    self.entourage = entourage;
+    
     [self showGooglePlacesAutocompleteAddressController];
 }
 
