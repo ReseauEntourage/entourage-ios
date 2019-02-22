@@ -15,7 +15,7 @@ def sharedPods
     pod 'SimpleKeychain', '~> 0.7'
     pod 'AWSS3', '~> 2.4'
     pod 'Fabric'
-    pod 'Crashlytics', '~>  3.9'
+    pod 'Crashlytics'
     pod 'JVFloatLabeledTextField'
     pod 'libPhoneNumber-iOS'
     pod 'Mixpanel'
