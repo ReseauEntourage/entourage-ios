@@ -1,9 +1,9 @@
 ---
-format_version: 1.2.0
+format_version: 1.3.0
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 trigger_map:
 - push_branch: develop
-  workflow: Entourage-Beta
+  workflow: BETA
 workflows:
   Entourage-TestFlight:
     steps:
@@ -13,6 +13,10 @@ workflows:
         inputs:
         - commit: ''
         - tag: ''
+    - cache-pull: {}
+    - cocoapods-install:
+        inputs:
+        - verbose: 'false'
     - certificate-and-profile-installer: {}
     - script:
         inputs:
@@ -47,15 +51,23 @@ workflows:
     - slack:
         inputs:
         - channel: "#iosdev"
-        - from_username: Entourage-Testflight
+        - from_username: Entourage-Beta
         - from_username_on_error: Entourage-Beta
-        - message: 'New *Entourage TestFlight* iOS build is available: $BITRISE_BUILD_NUMBER  '
+        - message: |-
+            New *Entourage-Beta DEV* iOS build is available: $BITRISE_BUILD_NUMBER  here:
+            $BITRISE_APP_URL
         - message_on_error: Oups, build has failed for Entourage iOS... @francoispellissier
             @gregoire
-        - pretext: "*Entourage TestFlight Build Succeeded!*"
-        - pretext_on_error: "*Build Failed for Entourage TestFlight!*"
-        - buttons: View Build|${BITRISE_BUILD_URL}
+        - pretext: "*Entourage-Beta Build Succeeded!*"
+        - pretext_on_error: "*Build Failed for Entourage Beta!*"
+        - api_token: "$SLACK_BOT_API_TOKEN"
+        - fields: |
+            App|${BITRISE_APP_TITLE}
+            Branch|${BITRISE_GIT_BRANCH}
+            Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
+            Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
         - webhook_url: https://hooks.slack.com/services/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
+    - cache-push: {}
   Entourage-Beta:
     steps:
     - activate-ssh-key:
@@ -64,6 +76,10 @@ workflows:
         inputs:
         - commit: ''
         - tag: ''
+    - cache-pull: {}
+    - cocoapods-install:
+        inputs:
+        - verbose: 'false'
     - ruby-script:
         inputs:
         - ruby_content: |-
@@ -178,6 +194,195 @@ workflows:
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
         - webhook_url: https://hooks.slack.com/services/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
+    - cache-push: {}
+  PFP-beta:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone: {}
+    - cache-pull: {}
+    - cocoapods-install:
+        inputs:
+        - verbose: 'false'
+    - ruby-script:
+        inputs:
+        - ruby_content: |-
+            PROJECT_KEY = 'EN'
+            RESULT_ENV_VARIABLE = 'JIRA_ISSUE_KEYS'
+
+            puts "Searching issue keys in environment variables"
+
+            ISSUE_KEY_REGEXP = /#{PROJECT_KEY}-\d+/
+            issue_keys = []
+
+            [
+              :BITRISE_GIT_BRANCH,
+              :GIT_CLONE_COMMIT_MESSAGE_SUBJECT,
+              :GIT_CLONE_COMMIT_MESSAGE_BODY
+            ].each do |var|
+              print "#{var}: "
+              value = ENV[var.to_s]
+              if value.nil?
+                puts "(not set)"
+                next
+              end
+              var_issue_keys = value.scan(ISSUE_KEY_REGEXP).uniq
+              puts var_issue_keys.inspect
+              issue_keys += var_issue_keys
+            end
+
+            issue_keys.uniq!
+
+            puts
+
+
+            puts "Issue keys found:"
+            puts issue_keys.inspect
+            puts
+
+            if issue_keys.none?
+              puts "No issue key found, $#{RESULT_ENV_VARIABLE} has not been set."
+            else
+              issue_keys = issue_keys.join('|')
+              puts "Setting $#{RESULT_ENV_VARIABLE} to '#{issue_keys}'."
+              system(
+                'envman', 'add',
+                '--key', RESULT_ENV_VARIABLE.to_s,
+                '--value', issue_keys
+              )
+            end
+        - gemfile_content: ''
+    - certificate-and-profile-installer: {}
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            #set -x
+
+            echo "Download App credentials"
+
+            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
+
+            # download the fileS
+            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            #set -x
+
+            echo "Install dependencies"
+
+            #brew install librsvg
+            #brew upgrade imagemagick
+            #gem install badge
+
+            curl https://codeload.github.com/ReseauEntourage/badge/tar.gz/master | tar xz
+            pushd badge-master/
+            gem build badge.gemspec
+            gem install badge-0.9.1.gem
+            popd
+            rm -r badge-master/
+    - fastlane:
+        inputs:
+        - lane: "$FASTLANE_LANE"
+        - work_dir: "$FASTLANE_WORK_DIR"
+    - deploy-to-bitrise-io: {}
+    - post-jira-comment-with-build-details:
+        inputs:
+        - base_url: "$JIRA_BASE_URL"
+        - api_token: "$JIRA_API_TOKEN"
+        - user_name: "$JIRA_USER_EMAIL"
+        - issue_keys: "$JIRA_ISSUE_KEYS"
+    - slack:
+        inputs:
+        - channel: "#iosdev"
+        - from_username: Voisin-Age Beta
+        - from_username_on_error: Voisin-Age Beta
+        - message: |-
+            New *PFP dev* iOS build is available: $BITRISE_BUILD_NUMBER  here:
+            $BITRISE_APP_URL
+        - message_on_error: Oups, build has failed for PFP iOS... @francoispellissier
+            @gregoire
+        - pretext: "*Build Succeeded for Voisin-Age Beta!*"
+        - pretext_on_error: "*Build Failed for Voisin-Age Beta!*"
+        - color: "#00ABF0"
+        - api_token: "$SLACK_BOT_API_TOKEN"
+        - fields: |
+            App|${BITRISE_APP_TITLE}
+            Branch|${BITRISE_GIT_BRANCH}
+            Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
+            Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
+        - webhook_url: https://hooks.slack.com/services/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
+    - cache-push: {}
+    envs:
+    - opts:
+        is_expand: false
+      FASTLANE_LANE: pfp_beta
+    - opts:
+        is_expand: false
+      BITRISE_SCHEME: PfpStore
+  PFP-testflight:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone: {}
+    - cache-pull: {}
+    - cocoapods-install:
+        inputs:
+        - verbose: 'false'
+    - certificate-and-profile-installer: {}
+    - script:
+        inputs:
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            #set -x
+            echo "Download App credentials"
+            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
+            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
+    - xcode-archive:
+        inputs:
+        - export_method: app-store
+    - deploy-to-itunesconnect-application-loader:
+        inputs:
+        - password: "$FASTLANE_PASSWORD"
+        - itunescon_user: "$APPLE_ID"
+    - fabric-crashlytics-beta-deploy:
+        inputs:
+        - build_secret: "$CRASHLYTICS_SECRET"
+        - api_key: "$CRASHLYTICS_API_TOKEN"
+    - deploy-to-bitrise-io:
+        run_if: 
+        inputs:
+        - notify_user_groups: none
+        - notify_email_list: ''
+        is_always_run: false
+    envs:
+    - opts:
+        is_expand: false
+      BITRISE_SCHEME: PfpStore
+    - opts:
+        is_expand: false
+      FASTLANE_LANE: pfp_beta
+  BETA:
+    steps:
+    - trigger-bitrise-workflow:
+        inputs:
+        - api_token: "$BUILD_TRIGGER"
+        - workflow_id: Entourage-Beta
+    - trigger-bitrise-workflow@0.0.6:
+        inputs:
+        - api_token: "$BUILD_TRIGGER"
+        - workflow_id: PFP-beta
 app:
   envs:
   - opts:
