@@ -5,102 +5,6 @@ trigger_map:
 - push_branch: develop
   workflow: Entourage-Beta
 workflows:
-  Entourage-Beta-backup:
-    steps:
-    - activate-ssh-key:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone:
-        inputs:
-        - commit: ''
-        - tag: ''
-    - certificate-and-profile-installer: {}
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-            echo "Download App credentials"
-
-            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
-
-            # download the fileS
-            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-            echo "Install dependencies"
-
-            #brew install librsvg
-            #brew upgrade imagemagick
-            #gem install badge
-
-            curl https://codeload.github.com/ReseauEntourage/badge/tar.gz/master | tar xz
-            pushd badge-master/
-            gem build badge.gemspec
-            gem install badge-0.9.1.gem
-            popd
-            rm -r badge-master/
-    - fastlane:
-        inputs:
-        - lane: beta
-    - deploy-to-bitrise-io: {}
-    - slack:
-        inputs:
-        - channel: "#iosdev"
-        - from_username: Entourage-Beta
-        - from_username_on_error: Entourage-Beta
-        - message: |-
-            New *Entourage-Beta DEV* iOS build is available: $BITRISE_BUILD_NUMBER  here:
-            $BITRISE_APP_URL
-        - message_on_error: Oups, build has failed for Entourage iOS... @francoispellissier
-            @gregoire
-        - pretext: "*Entourage-Beta Build Succeeded!*"
-        - pretext_on_error: "*Build Failed for Entourage Beta!*"
-        - api_token: "$SLACK_BOT_API_TOKEN"
-        - webhook_url: https://hooks.slack.com/services/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
-  FASTLANEtestflight:
-    steps:
-    - activate-ssh-key:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone:
-        inputs:
-        - commit: ''
-        - tag: ''
-    - certificate-and-profile-installer: {}
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-            echo "Download App credentials"
-
-            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
-
-            # download the fileS
-            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
-    - fastlane:
-        inputs:
-        - lane: deploy_to_TestFlight
-    - fastlane:
-        inputs:
-        - lane: refresh_dsyms api_token:$CRASHLYTICS_API_TOKEN
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_email_list: gregoire@entourage.social,  vaite@entourage.social
   Entourage-TestFlight:
     steps:
     - activate-ssh-key:
@@ -160,7 +64,7 @@ workflows:
         inputs:
         - commit: ''
         - tag: ''
-    - ruby-script@2.1.0:
+    - ruby-script:
         inputs:
         - ruby_content: |-
             PROJECT_KEY = 'EN'
@@ -249,7 +153,7 @@ workflows:
         inputs:
         - lane: beta
     - deploy-to-bitrise-io: {}
-    - post-jira-comment-with-build-details@1.1.0:
+    - post-jira-comment-with-build-details:
         inputs:
         - base_url: "$JIRA_BASE_URL"
         - api_token: "$JIRA_API_TOKEN"

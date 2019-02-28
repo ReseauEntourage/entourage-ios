@@ -1,6 +1,6 @@
 # Entourage - iOS application
 
-[![bitrise](https://www.bitrise.io/app/cf17a1bd21f42797/status.svg?token=3wwkQuohTyC-rDiW7aXVeA)](https://www.bitrise.io/app/cf17a1bd21f42797)
+[![bitrise](https://app.bitrise.io/app/cf17a1bd21f42797/status.svg?token=3wwkQuohTyC-rDiW7aXVeA&branch=develop)](https://www.bitrise.io/app/cf17a1bd21f42797)
 
 Our goal is to create a local social network on smartphones to help the HOMELESS people fight their loneliness thru collaborative actions with neighbours.
 

@@ -21,75 +21,12 @@ app:
       is_expand: false
     BITRISE_PROJECT_PATH: entourage.xcworkspace
 workflows:
-  beta-backup:
-    steps:
-    - activate-ssh-key:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone: {}
-    - certificate-and-profile-installer: {}
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-            echo "Download App credentials"
-
-            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
-
-            # download the fileS
-            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-            echo "Install dependencies"
-
-            #brew install librsvg
-            #brew upgrade imagemagick
-            #gem install badge
-
-            curl https://codeload.github.com/ReseauEntourage/badge/tar.gz/master | tar xz
-            pushd badge-master/
-            gem build badge.gemspec
-            gem install badge-0.9.1.gem
-            popd
-            rm -r badge-master/
-    - fastlane:
-        inputs:
-        - lane: "$FASTLANE_LANE"
-        - work_dir: "$FASTLANE_WORK_DIR"
-    - deploy-to-bitrise-io: {}
-    - slack:
-        inputs:
-        - channel: "#iosdev"
-        - from_username: Voisin-Age Beta
-        - from_username_on_error: Voisin-Age Beta
-        - message: |-
-            New *PFP dev* iOS build is available: $BITRISE_BUILD_NUMBER  here:
-            $BITRISE_APP_URL
-        - message_on_error: Oups, build has failed for PFP iOS... @francoispellissier
-            @gregoire
-        - pretext: "*Build Succeeded for Voisin-Age Beta!*"
-        - pretext_on_error: "*Build Failed for Voisin-Age Beta!*"
-        - color: "#00ABF0"
-        - api_token: "$SLACK_BOT_API_TOKEN"
-        - webhook_url: https://hooks.slack.com/services/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
-    description: Prepares the Voisin-Age Beta builds pinting to preprod/staging environament
   beta:
     steps:
     - activate-ssh-key:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
     - git-clone: {}
-    - ruby-script@2.1.0:
+    - ruby-script:
         inputs:
         - ruby_content: |-
             PROJECT_KEY = 'EN'
@@ -179,7 +116,7 @@ workflows:
         - lane: "$FASTLANE_LANE"
         - work_dir: "$FASTLANE_WORK_DIR"
     - deploy-to-bitrise-io: {}
-    - post-jira-comment-with-build-details@1.1.0:
+    - post-jira-comment-with-build-details:
         inputs:
         - base_url: "$JIRA_BASE_URL"
         - api_token: "$JIRA_API_TOKEN"
@@ -206,66 +143,6 @@ workflows:
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
         - webhook_url: https://hooks.slack.com/services/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
     description: Prepares the Voisin-Age Beta builds pinting to preprod/staging environament
-  beta-greg:
-    steps:
-    - cache-pull:
-        title: Fetch cache
-    - script:
-        inputs:
-        - content: |
-            #!/bin/bash
-            set -o errexit
-            set -o pipefail
-
-            echo -e "\n# Downloading code\n"
-            curl -D headers https://codeload.github.com/ReseauEntourage/entourage-ios/tar.gz/$BITRISE_GIT_BRANCH | tar xz --strip-components=1
-
-            GIT_COMMIT=$(cat headers | grep ETag | cut -d\" -f2)
-            envman add --key GIT_COMMIT --value $GIT_COMMIT
-            echo -e "\ngit commit: $GIT_COMMIT\n"
-
-            echo -e "\n# Downloading App credentials\n"
-            curl -Lo AppConfigurations.plist "$BITRISEIO_APPCONFIGURATIONS_URL"
-            echo
-
-            echo -e "\n# Install dependencies\n"
-            #brew install librsvg
-            #brew upgrade imagemagick
-            gem install badge
-            envman add --key GEM_HOME --value "$(gem environment gemdir)"
-            echo
-        title: Download the code and dependencies
-    - cache-push:
-        is_always_run: true
-        inputs:
-        - cache_paths: "$GEM_HOME"
-        title: Cache gems
-    - certificate-and-profile-installer:
-        inputs:
-        - install_defaults: 'no'
-        title: Certificate and profile installation
-    - fastlane:
-        inputs:
-        - update_fastlane: 'false'
-        - lane: build_beta scheme:$BITRISE_SCHEME output_directory:$BITRISE_DEPLOY_DIR
-        title: Build (fastlane)
-    - deploy-to-bitrise-io: {}
-    - slack:
-        run_if: false
-        inputs:
-        - channel: "#androiddev"
-        - from_username: Voisin-Age Beta
-        - from_username_on_error: Voisin-Age Beta
-        - message: |-
-            New *PFP dev* iOS build is available: $BITRISE_BUILD_NUMBER  here:
-            $BITRISE_APP_URL
-        - message_on_error: Oups, build has failed for PFP iOS... @francoispellissier
-            @gregoire
-        - pretext: "*Build Succeeded for Voisin-Age Beta!*"
-        - pretext_on_error: "*Build Failed for Voisin-Age Beta!*"
-        - color: "#00ABF0"
-        - webhook_url: https://hooks.slack.com/services/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
-    description: Prepares the Voisin-Age Beta builds pinting to preprod/staging environament
   pfp-testflight:
     steps:
     - activate-ssh-key:
@@ -286,11 +163,11 @@ workflows:
     - xcode-archive:
         inputs:
         - export_method: app-store
-    - deploy-to-itunesconnect-application-loader@0.9.4:
+    - deploy-to-itunesconnect-application-loader:
         inputs:
         - password: "$FASTLANE_PASSWORD"
         - itunescon_user: "$APPLE_ID"
-    - fabric-crashlytics-beta-deploy@2.2.4:
+    - fabric-crashlytics-beta-deploy:
         inputs:
         - build_secret: "$CRASHLYTICS_SECRET"
         - api_key: "$CRASHLYTICS_API_TOKEN"
