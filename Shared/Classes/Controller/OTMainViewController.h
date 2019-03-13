@@ -22,6 +22,7 @@
 // tour properties
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;
 @property (nonatomic, strong) NSString *webview;
+@property (nonatomic) BOOL isSolidarityGuide;
 
 - (void)zoomToCurrentLocation:(id)sender;
 - (void)zoomMapToLocation:(CLLocation*)location;
@@ -33,7 +34,6 @@
 - (void)editEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view;
 - (void)displayPoiDetails:(MKAnnotationView *)view;
 
-- (void)leaveGuide;
 - (void)switchToGuide;
 - (IBAction)showFilters;
 

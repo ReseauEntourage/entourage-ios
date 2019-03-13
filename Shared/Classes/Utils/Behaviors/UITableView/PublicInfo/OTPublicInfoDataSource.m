@@ -122,26 +122,28 @@
     }
 }
 
-- (NSInteger)indexOfDescriptionItem {
-    for (OTFeedItem *item in self.items) {
-        if ([item.identifierTag isEqualToString:@"feedDescription"]) {
-            return [self.items indexOfObject:item];
-        }
-    }
-    
-    return -1;
-}
-
 - (void)entourageUpdated:(NSNotification *)notification {
     OTFeedItem *feedItem = (OTFeedItem *)[notification.userInfo objectForKey:kNotificationEntourageChangedEntourageKey];
-    NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
     
-    if ([description length] > 0) {
-        if ([self indexOfDescriptionItem] > 0) {
-            feedItem.identifierTag = @"feedDescription";
-            [self.items replaceObjectAtIndex:[self indexOfDescriptionItem] withObject:feedItem.copy];
-            [self.tableDataSource refresh];
+    NSArray<NSString *> *updatableItems = @[@"summary", @"feedDescription", @"eventInfo"];
+    __block NSUInteger updatedItems = 0;
+    
+    [self.items enumerateObjectsUsingBlock:^(OTFeedItem *item, NSUInteger idx, BOOL *stop) {
+        if (![item isKindOfClass:[OTFeedItem class]] || ![updatableItems containsObject:item.identifierTag]) {
+            return;
         }
+        
+        feedItem.identifierTag = item.identifierTag;
+        [self.items replaceObjectAtIndex:idx withObject:feedItem.copy];
+        
+        updatedItems = updatedItems + 1;
+        if (updatedItems >= updatableItems.count) {
+            *stop = YES;
+        }
+    }];
+    
+    if (updatedItems > 0) {
+        [self.tableDataSource refresh];
     }
 }
 

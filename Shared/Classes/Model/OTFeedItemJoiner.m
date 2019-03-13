@@ -15,6 +15,8 @@
 #define kWSKeyMessage @"message"
 #define kWSKeyAvatarUrl @"avatar_url"
 #define kWSKeyPartner @"partner"
+#define kWSKeyGroupRole @"group_role"
+#define kWSKeyCommunityRoles @"community_roles"
 
 @implementation OTFeedItemJoiner
 
@@ -39,6 +41,8 @@
             self.date = [dictionary dateForKey:kWSKeyRequestedAt format:@"yyyy-MM-dd HH:mm:ss Z"];
         }
         self.partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kWSKeyPartner]];
+        self.groupRole = [dictionary objectForKey:kWSKeyGroupRole];
+        self.communityRoles = [dictionary objectForKey:kWSKeyCommunityRoles];
     }
     return self;
 }

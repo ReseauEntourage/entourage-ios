@@ -20,7 +20,7 @@ NSString * const kUpdateBadgeCountNotification = @"updateBadgeCountNotification"
 #pragma mark - Lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
     if (@available(iOS 10.0, *)) {
         [UNUserNotificationCenter currentNotificationCenter].delegate = self;
     }

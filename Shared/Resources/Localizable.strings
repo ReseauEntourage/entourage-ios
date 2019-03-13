@@ -106,7 +106,6 @@
 "create_event" = "Créer un évènement  ";
 "map_options_hide_poi" = "Masquer le guide de solidarité";
 "map_options_show_poi" = "Afficher le guide de solidarité";
-"map_options_show_guide" = "Voir les lieux solidaires";
 "view_map_nav_title" = "Voir la carte";
 "view_list_nav_title" = "Voir la liste";
 
@@ -243,15 +242,15 @@
 "organiser" = "Organisateur";
 "closed" = "Inclure entourages clôturés";
 "unique_unread" = "Uniquement non lus";
-"join_entourage_lbl" = "On a besoin de vous !";
+"join_entourage_lbl" = "Rejoindre la discussion";
 "join_event_lbl" = "Participez à cet évènement";
-"join_entourage_btn" = "REJOINDRE";
+"join_entourage_btn" = "PARTICIPER";
 "join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !\nPourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nAjoutez un petit mot si vous le souhaitez !";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
 "promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
 "event_title_example" = "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017";
-"event_desc_example" = "Besoin de bénévoles pour la collecte nationale des Restos du Coeur dans notre équipe locale.\nSamedi de 17h à 21h ➜ 5 bénévoles \nDimanche de 10h à 13h ➜ 2 bénévoles \nEnsemble aidons ceux qui en ont vraiment besoin ! Merci d'avance";
+"event_desc_example" = "Exemple : Notre association vous invite à une soirée conviviale entre voisins avec et sans abris.\n\nNous recherchons des bénévoles pouvant être présents 1h avant pour l’installation";
 "final_question" = "DERNIÈRE QUESTION";
 "add_action_guide_text" = "La Charte éthique d’Entourage vous explique pourquoi le consentement est indispensable.";
 "add_action_guide_url" = "La Charte éthique d’Entourage";
@@ -362,7 +361,7 @@
 
 "filter_solidarity_guide_categories" = "Catégories";
 
-"filter_timeframe_title" = "Affichage des entourages";
+"filter_timeframe_title" = "Mis à jour il y a moins de";
 
 "encounter_enter_name_of_met_person" = "Vous devez donner un titre à votre rencontre";
 "encounter_enter_message" = "Vous devez donner une description à votre rencontre";
@@ -453,6 +452,7 @@
 "visitor" = "Voisineur";
 "visited" = "Voisiné";
 "coordinator" = "Animateur";
+"ambassador" = "Ambassadeur";
 "neighborhoodsSectionTitle" = "Neighborhoods";
 
 // associations
@@ -486,6 +486,10 @@
 "blocked_close_mail" = "Mes retours sur l'entourage %@ qui n'a pas abouti";
 "help_close_mail" = "Aide pour l'entourage %@";
 "structure_subject" = "Information sur la structure '%@'";
+
+"contact_email_adress" = "contact@entourage.social";
+"email_subject_new_sms" = "Demande de code SMS";
+"email_body_new_sms" = "Bonjour,\nMon numéro : %@\n\nMerci";
 
 // Share
 "share_public" = "Ce projet solidaire sur Entourage a besoin de toi. Rejoins-le en téléchargeant l'app ici %@";

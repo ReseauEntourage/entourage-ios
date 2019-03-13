@@ -46,8 +46,7 @@
 + (NSString*)userPrivateCirclesSectionTitle:(OTUser*)user;
 + (NSString*)userNeighborhoodsSectionTitle:(OTUser*)user;
 + (UIColor*)announcementFeedContainerColor;
-+ (UIColor *)leftTagColor:(OTUser*)user;
-+ (UIColor *)rightTagColor:(OTUser*)user;
++ (UIColor *)tagColor:(OTUser*)user;
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem;
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;

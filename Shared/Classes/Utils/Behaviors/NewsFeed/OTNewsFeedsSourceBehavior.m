@@ -22,9 +22,12 @@
 @end
 
 @implementation OTNewsFeedsSourceBehavior
+{
+    NSMutableArray *_feedItems;
+}
 
 - (void)initialize {
-    self.feedItems = [NSMutableArray new];
+    _feedItems = [NSMutableArray new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     self.radiusIndex = 0;
@@ -57,12 +60,12 @@
     int sizeOfArray = (int)RADIUS_ARRAY.count;
     if (self.radiusIndex < sizeOfArray - 1) {
         self.radiusIndex++;
-        [self.feedItems removeAllObjects];
+        [_feedItems removeAllObjects];
         [self.delegate itemsRemoved];
         [self.tableDelegate beginUpdatingFeeds];
         NSDate *beforeDate = [NSDate date];
         [self requestData:beforeDate withSuccess:^(NSArray *items) {
-            [self.feedItems addObjectsFromArray:items];
+            [self->_feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
             [self.tableDelegate finishUpdatingFeeds:items.count];
         } orError:^(NSError *error) {
@@ -92,13 +95,13 @@
     self.currentFilter = [filter copy];
     self.currentFilter.location = coordinate;
     
-    [self.feedItems removeAllObjects];
+    [_feedItems removeAllObjects];
     [self.delegate itemsRemoved];
     
     NSDate *beforeDate = [NSDate date];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         if(items.count > 0) {
-            [self.feedItems addObjectsFromArray:items];
+            [self->_feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
@@ -113,12 +116,12 @@
     self.currentCoordinate = coordinate;
     self.currentFilter.location = coordinate;
     
-    [self.feedItems removeAllObjects];
+    [_feedItems removeAllObjects];
     [self.delegate itemsRemoved];
     
     [self requestEventsStartingWithSuccess:^(NSArray *items) {
         if(items.count > 0) {
-            [self.feedItems addObjectsFromArray:items];
+            [self->_feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
@@ -188,7 +191,7 @@
     [self.tableDelegate beginUpdatingFeeds];
     [self requestData:beforeDate withSuccess:^(NSArray *items) {
         if (items.count > 0) {
-            [self.feedItems addObjectsFromArray:items];
+            [self->_feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
@@ -204,7 +207,7 @@
     
     [self requestEventsStartingWithSuccess:^(NSArray *items) {
         if(items.count > 0) {
-            [self.feedItems addObjectsFromArray:items];
+            [self->_feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
@@ -288,17 +291,17 @@
 - (void)addFeedItem:(OTFeedItem *)feedItem {
     NSUInteger oldFeedIndex = [self indexOfExistingLoadedFeedItem:feedItem];
     if (oldFeedIndex != NSNotFound) {
-        [self.feedItems replaceObjectAtIndex:oldFeedIndex withObject:feedItem];
+        [_feedItems replaceObjectAtIndex:oldFeedIndex withObject:feedItem];
         return;
     }
     for (NSUInteger i = 0; i < [self.feedItems count]; i++) {
         OTFeedItem* internalFeedItem = self.feedItems[i];
         if ([internalFeedItem.updatedDate compare:feedItem.updatedDate] == NSOrderedAscending) {
-            [self.feedItems insertObject:feedItem atIndex:i];
+            [_feedItems insertObject:feedItem atIndex:i];
             return;
         }
     }
-    [self.feedItems addObject:feedItem];
+    [_feedItems addObject:feedItem];
 }
 
 - (NSUInteger)indexOfExistingLoadedFeedItem:(OTFeedItem*)feedItem {
@@ -309,6 +312,20 @@
     }
     
     return NSNotFound;
+}
+
+- (NSArray *)feedItems {
+    return _feedItems.copy;
+}
+
+- (void)addFeedItemToFront:(id)feedItem {
+    [_feedItems insertObject:feedItem atIndex:0];
+    [self.delegate itemsUpdated];
+}
+
+- (void)removeAllFeedItems {
+    [_feedItems removeAllObjects];
+    [self.delegate itemsUpdated];
 }
 
 @end

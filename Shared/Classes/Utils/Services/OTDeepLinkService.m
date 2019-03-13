@@ -17,7 +17,6 @@
 #import "OTAPIConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTLoginViewController.h"
-#import "OTSelectAssociationViewController.h"
 #import "OTEntourageEditorViewController.h"
 #import "OTTutorialViewController.h"
 #import "OTSafariService.h"
@@ -51,7 +50,7 @@
     if (isTour) {
         stateInfo = [[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getStateInfo];
     } else {
-        stateInfo = [OTFeedItemFactory createEntourageForGroupType:groupType andId:feedItemId];
+        stateInfo = [[OTFeedItemFactory createEntourageForGroupType:groupType andId:feedItemId] getStateInfo];
     }
     
     if (stateInfo && feedItemId) {
@@ -132,7 +131,6 @@
                      andQuery:(NSString *)query {
     if ([key isEqualToString:@"feed"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
-        [mainViewController leaveGuide];
 
         // "feed/filters"
         if (pathComponents != nil && pathComponents.count >= 2) {
@@ -140,11 +138,6 @@
                 [mainViewController showFilters];
             }
         }
-    } else if ([key isEqualToString:@"badge"]) {
-        OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
-        
-        [self showController:selectAssociationController];
-        
     } else if ([key isEqualToString:@"webview"]) {
         NSArray *elts = [query componentsSeparatedByString:@"="];
         NSURL *url = [NSURL URLWithString:elts[1]];

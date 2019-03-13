@@ -30,6 +30,7 @@ struct UserStorageKey {
     
     private var config: NSDictionary?
     private var apiKeys: NSDictionary?
+    private var communityConfig: NSDictionary?
     private let stagingEnvironmentName: String = "staging"
     private let prodEnvironmentName: String = "prod"
     
@@ -39,11 +40,16 @@ struct UserStorageKey {
         self.init()
         self.config = EnvironmentConfigurationManager.plist(name: "AppConfigurations", bundleId: bundleId)
         self.apiKeys = EnvironmentConfigurationManager.plist(name: "ApiKeys", bundleId: bundleId)
+        self.communityConfig = EnvironmentConfigurationManager.communityPlist()
         
     #if PFP
         self.applicationType = ApplicationType.voisinAge
     #endif
         
+    }
+    
+    @objc var community: NSDictionary {
+        return self.communityConfig!
     }
     
     @objc var amazonAccessKey: NSString {
@@ -109,5 +115,14 @@ struct UserStorageKey {
         }
         
         return nil
+    }
+
+    private static func communityPlist() -> NSDictionary? {
+        guard let plistFile = Bundle.main.path(forResource: "CommunityConfig", ofType: "plist"),
+            let config:NSDictionary = NSDictionary(contentsOfFile: plistFile) else {
+                return nil
+        }
+        
+        return config
     }
 }

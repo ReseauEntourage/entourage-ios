@@ -23,19 +23,19 @@
 #import "UIStoryboard+entourage.h"
 #import "OTOnboardingNavigationBehavior.h"
 #import "entourage-Swift.h"
+#import <MessageUI/MessageUI.h>
 
-@interface OTCodeViewController ()
+@interface OTCodeViewController () <MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet OnBoardingCodeTextField *codeTextField;
 @property (nonatomic, weak) IBOutlet UILabel *topTitle;
 @property (nonatomic, weak) IBOutlet UILabel *actionLabel;
-@property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *privacyIcon;
 @property (nonatomic, weak) IBOutlet OnBoardingButton *validateButton;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) IBOutlet NSLayoutConstraint *heightContraint;
 @property (nonatomic, strong) IBOutlet OTOnboardingNavigationBehavior *onboardingNavigation;
 @property (nonatomic, weak) IBOutlet UIButton *regenerateCodeButton;
+@property (weak, nonatomic) IBOutlet UIButton *mailContactButton;
 @property (nonatomic, weak) IBOutlet UIButton *backButton;
 @property (nonatomic, weak) IBOutlet UIView *bottomContainer;
 
@@ -87,8 +87,11 @@
     
     text = [OTAppAppearance lostCodeFullDescription];
     attributedText = [[NSMutableAttributedString alloc] initWithString:text attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor], NSFontAttributeName: [UIFont fontWithName:@"SFUIText-Light" size:14]}];
-    self.descriptionLabel.attributedText = attributedText;
-    self.descriptionLabel.hidden = !self.showFullDescription;
+	NSRange range2 = [text.lowercaseString rangeOfString:OTLocalizedString(@"contact_email_adress").lowercaseString];
+	[attributedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:range2];
+	[attributedText addAttribute:NSUnderlineColorAttributeName value:[UIColor whiteColor] range:range1];
+    self.mailContactButton.titleLabel.attributedText = attributedText;
+    self.mailContactButton.hidden = !self.showFullDescription;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -110,7 +113,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [OTLogger logEvent:@"Screen30_3InputPasscodeView"];
-    [self.codeTextField becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -128,6 +130,66 @@
                                                                  andFont:@"SFUIText-Bold"
                                                                  colored:[UIColor whiteColor]];
     [self.navigationItem setRightBarButtonItem:regenerateButton];
+}
+
+- (IBAction)openEmail:(UIButton *)sender {
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController* composeVC = [[MFMailComposeViewController alloc] init];
+        composeVC.mailComposeDelegate = self;
+        
+        // Configure the fields of the interface.
+		NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
+		NSString *messageBody = [NSString stringWithFormat:OTLocalizedString(@"email_body_new_sms"), phone];
+
+        [composeVC setToRecipients:@[OTLocalizedString(@"contact_email_adress")]];
+        [composeVC setSubject:OTLocalizedString(@"email_subject_new_sms")];
+		[composeVC setMessageBody:messageBody isHTML:NO];
+        
+        // Present the view controller modally.
+        [self presentViewController:composeVC animated:YES completion:nil];
+    } else {
+        NSLog(@"Mail services are not available.");
+		NSArray* sharedObjects = [NSArray arrayWithObjects:OTLocalizedString(@"email_subject_new_sms"), nil];
+        
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:sharedObjects applicationActivities:nil];
+		
+        activityViewController.excludedActivityTypes = @[UIActivityTypePostToFacebook,
+                                                         UIActivityTypePostToTwitter,
+                                                         UIActivityTypePostToFlickr,
+                                                         UIActivityTypePostToVimeo,
+                                                         UIActivityTypeMessage,
+                                                         UIActivityTypePrint,
+                                                         UIActivityTypeCopyToPasteboard,
+                                                         UIActivityTypeAssignToContact,
+                                                         UIActivityTypeSaveToCameraRoll,
+                                                         UIActivityTypeAddToReadingList,
+                                                         UIActivityTypeAirDrop];
+
+        activityViewController.popoverPresentationController.sourceView = self.view;
+        [self presentViewController:activityViewController animated:YES completion:nil];
+
+        return;
+    }
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+	switch (result)
+	{
+		case MFMailComposeResultCancelled:
+			NSLog(@"Mail cancelled");
+		case MFMailComposeResultSaved:
+			NSLog(@"Mail saved");
+		case MFMailComposeResultSent:
+			NSLog(@"Mail sent");
+		case MFMailComposeResultFailed:
+			NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+		default:
+			break;
+	}
+	
+	// Close the Mail Interface
+	[controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)doRegenerateCode {
@@ -167,6 +229,7 @@
     }
 
     [SVProgressHUD show];
+    [self.codeTextField resignFirstResponder];
     
     [[OTAuthService new] authWithPhone:phone
                               password:code

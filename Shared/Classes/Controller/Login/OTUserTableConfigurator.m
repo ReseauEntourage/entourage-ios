@@ -23,11 +23,11 @@
 
 + (NSArray *)getAssociationRowsForUserEdit:(OTUser *)user {
     NSMutableArray *mRows = [NSMutableArray new];
+    mRows = nil;
     if(user.partner)
         [mRows addObject:@(AssociationRowTypePartner)];
     if(user.organization && [user.type isEqualToString:USER_TYPE_PRO])
         [mRows addObject:@(AssociationRowTypeOrganisation)];
-    [mRows addObject:@(AssociationRowTypePartnerSelect)];
     return mRows;
 }
 

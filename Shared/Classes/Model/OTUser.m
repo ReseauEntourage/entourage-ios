@@ -195,12 +195,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     return [self.roles containsObject:kEthicsCharterSignedTag];
 }
 
-- (NSString*)leftTag {
-    // Not used for now
-    return nil;
-}
-
-- (NSString*)rightTag {
+- (NSString*)roleTag {
     if (self.roles) {
         NSString *key = self.roles.firstObject;
         if (key && ![key isEqualToString:kEthicsCharterSignedTag]) {

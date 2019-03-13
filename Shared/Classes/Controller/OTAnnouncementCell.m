@@ -25,6 +25,8 @@ NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableVie
 @implementation OTAnnouncementCell
 
 - (void)configureWith:(OTFeedItem *) item completion:(void(^)(void))completion {
+    if (self.feedItem == item) return;
+
     self.feedItem = item;
     OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
     summaryBehavior.imgAssociation = self.imgAssociation;
