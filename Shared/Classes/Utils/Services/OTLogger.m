@@ -28,8 +28,8 @@
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel identify:[user.sid stringValue]];
     [FIRAnalytics setUserID:[user.sid stringValue]];
-    [mixpanel.people set:@{@"$email": user.email != nil ? user.email : @""}];
-    [FIRAnalytics setUserPropertyString:(user.email != nil ? user.email : @"") forName:@"$email"];
+    //[mixpanel.people set:@{@"$email": user.email != nil ? user.email : @""}];
+    //[FIRAnalytics setUserPropertyString:(user.email != nil ? user.email : @"") forName:@"$email"];
     [mixpanel.people set:@{@"EntouragePartner": user.partner != nil ? user.partner.name : @""}];
     [FIRAnalytics setUserPropertyString:(user.partner != nil ? user.partner.name : @"") forName:@"EntouragePartner"];
     if (user.type) {
