@@ -12,6 +12,7 @@
 @interface OTLogger : NSObject
 
 + (void)logEvent:(NSString *)eventName;
++ (void)storeGeolocEnableStatus:(BOOL)locationAllowed;
 + (void)setupMixpanelWithUser:(OTUser *)user;
 
 @end

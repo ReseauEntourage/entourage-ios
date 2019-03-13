@@ -24,6 +24,12 @@
     [FIRAnalytics logEventWithName:eventName parameters:nil];
 }
 
++ (void)storeGeolocEnableStatus: (BOOL)locationAllowed {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [OTLogger storeGeolocEnableStatus:: locationAllowed ? @"YES" : @"NO"}];
+    [FIRAnalytics setUserPropertyString:(locationAllowed ? @"YES" : @"NO") forName:@"EntourageGeolocEnable"];
+}
+
 + (void)setupMixpanelWithUser: (OTUser *)user {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel identify:[user.sid stringValue]];

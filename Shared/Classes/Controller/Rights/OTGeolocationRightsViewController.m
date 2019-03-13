@@ -23,6 +23,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "entourage-Swift.h"
+#import "OTLogger.h"
 
 @import Firebase;
 
@@ -113,10 +114,8 @@
 #pragma mark - App authorization notifications
 
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
     BOOL locationAllowed = [notification readAllowedLocation];
-    [mixpanel.people set:@{@"EntourageGeolocEnable": locationAllowed ? @"YES" : @"NO"}];
-    [FIRAnalytics setUserPropertyString:(locationAllowed ? @"YES" : @"NO") forName:@"EntourageGeolocEnable"];
+    [OTLogger storeGeolocEnableStatus:locationAllowed];
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     

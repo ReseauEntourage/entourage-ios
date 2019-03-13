@@ -42,6 +42,7 @@
 #import <GooglePlaces/GooglePlaces.h>
 #import <GooglePlaces/GMSPlacesClient.h>
 #import "entourage-Swift.h"
+#import "OTLogger.h"
 
 @import Firebase;
 
@@ -120,17 +121,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     // Call the 'activateApp' method to log an app event for use
     // in analytics and advertising reporting.
     [FBSDKAppEvents activateApp];
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
     if (@available(iOS 10.0, *)) {
         [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
-            if (settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
-                [mixpanel.people set:@{@"EntourageNotifEnable": @"YES"}];
-                [FIRAnalytics setUserPropertyString:@"YES" forName:@"EntourageGeolocEnable"];
-            }
-            else {
-                [mixpanel.people set:@{@"EntourageNotifEnable": @"NO"}];
-                [FIRAnalytics setUserPropertyString:@"NO" forName:@"EntourageGeolocEnable"];
-            }
+            [OTLogger storeGeolocEnableStatus:(settings.authorizationStatus == UNAuthorizationStatusAuthorized? @"YES" : @"NO")];
         }];
     }
 }

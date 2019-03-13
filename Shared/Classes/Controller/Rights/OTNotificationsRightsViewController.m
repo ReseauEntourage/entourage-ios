@@ -26,6 +26,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTAppAppearance.h"
 #import "entourage-Swift.h"
+#import "OTLogger.h"
 
 @import Firebase;
 
@@ -81,9 +82,7 @@
 #pragma mark - IBAction
 
 - (void)doShowNext {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel.people set:@{@"EntourageNotifEnable": self.notificationEnabled}];
-    [FIRAnalytics setUserPropertyString:self.notificationEnabled forName:@"EntourageGeolocEnable"];
+    [OTLogger storeGeolocEnableStatus:self.notificationEnabled}];
     
     if ([OTAppConfiguration shouldShowIntroTutorial]) {
         [self setTutorialCompleted];
