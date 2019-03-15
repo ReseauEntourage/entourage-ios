@@ -82,7 +82,7 @@
 #pragma mark - IBAction
 
 - (void)doShowNext {
-    [OTLogger storeGeolocEnableStatus:self.notificationEnabled}];
+    [OTLogger storeGeolocEnableStatus:self.notificationEnabled];
     
     if ([OTAppConfiguration shouldShowIntroTutorial]) {
         [self setTutorialCompleted];

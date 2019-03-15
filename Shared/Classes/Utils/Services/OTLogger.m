@@ -26,7 +26,7 @@
 
 + (void)storeGeolocEnableStatus: (BOOL)locationAllowed {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [OTLogger storeGeolocEnableStatus:: locationAllowed ? @"YES" : @"NO"}];
+    [mixpanel.people set:@{@"EntourageGeolocEnable": locationAllowed ? @"YES" : @"NO"}];
     [FIRAnalytics setUserPropertyString:(locationAllowed ? @"YES" : @"NO") forName:@"EntourageGeolocEnable"];
 }
 
