@@ -777,10 +777,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOJ-8N-3xc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="273"/>
                                                     <subviews>
                                                         <button opaque="NO" tag="7" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="sQS-Yo-QkA">
-                                                            <rect key="frame" x="148" y="113" width="79" height="17"/>
+                                                            <rect key="frame" x="148" y="246" width="79" height="17"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="UwB-KQ-G0b"/>
@@ -815,9 +815,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="M4G-mA-6Wd">
-                                                    <rect key="frame" x="0.0" y="76" width="375" height="27"/>
+                                                    <rect key="frame" x="0.0" y="76" width="375" height="160"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="160" id="M0u-2Q-9Zi"/>
+                                                        <constraint firstAttribute="width" secondItem="M4G-mA-6Wd" secondAttribute="height" multiplier="750:320" id="Ham-XC-CnJ"/>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b25-sm-eBt">
@@ -877,7 +877,7 @@
                                                 <constraint firstItem="qoy-rq-3kl" firstAttribute="leading" secondItem="0Yc-Ce-Ysu" secondAttribute="leadingMargin" id="nfa-58-MNq"/>
                                                 <constraint firstItem="sQS-Yo-QkA" firstAttribute="top" secondItem="M4G-mA-6Wd" secondAttribute="bottom" constant="10" id="oMg-pQ-MnM"/>
                                                 <constraint firstAttribute="trailing" secondItem="M4G-mA-6Wd" secondAttribute="trailing" id="oNq-iX-0D8"/>
-                                                <constraint firstAttribute="bottom" secondItem="aOJ-8N-3xc" secondAttribute="bottom" id="qMl-t1-feo"/>
+                                                <constraint firstAttribute="bottom" secondItem="aOJ-8N-3xc" secondAttribute="bottom" priority="251" id="qMl-t1-feo"/>
                                                 <constraint firstItem="TFV-Eg-f6o" firstAttribute="top" secondItem="0Yc-Ce-Ysu" secondAttribute="topMargin" id="vQF-do-vuR"/>
                                                 <constraint firstItem="qoy-rq-3kl" firstAttribute="top" secondItem="TFV-Eg-f6o" secondAttribute="bottom" constant="3.5" id="zGj-7T-We0"/>
                                             </constraints>
@@ -886,7 +886,6 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="containerView" destination="aOJ-8N-3xc" id="YGp-63-4ji"/>
-                                            <outlet property="contentImageHeightConstraint" destination="M0u-2Q-9Zi" id="eJJ-mx-BoO"/>
                                             <outlet property="contentImageView" destination="M4G-mA-6Wd" id="rrB-CD-kJa"/>
                                             <outlet property="descriptionLabel" destination="qoy-rq-3kl" id="8ol-Eb-Z1d"/>
                                             <outlet property="iconImage" destination="Zyi-ay-1yL" id="CFZ-te-ZiX"/>

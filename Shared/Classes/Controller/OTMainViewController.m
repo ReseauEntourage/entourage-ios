@@ -250,6 +250,8 @@
     self.poisMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 140;
     [self configureMapView];
     
     if (OTSharedOngoingTour.isOngoing ||
