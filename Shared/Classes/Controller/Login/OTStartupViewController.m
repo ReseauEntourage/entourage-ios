@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIButton *loginlessButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
@@ -43,6 +44,8 @@
     [self.registerButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     self.registerButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.registerButton.layer.borderWidth = 1.5f;
+    
+    [self.loginlessButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     self.pageControl.backgroundColor = [UIColor clearColor];
     self.pageControl.currentPageIndicatorTintColor = [ApplicationTheme shared].backgroundThemeColor;
