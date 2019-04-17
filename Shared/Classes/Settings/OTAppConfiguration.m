@@ -245,15 +245,21 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
-        [[OTAuthService new] getDetailsForUser:currentUser.sid success:^(OTUser *user) {
-            [NSUserDefaults standardUserDefaults].currentUser = user;
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        } failure:^(NSError *error) {
-            NSLog(@"@fails getting user %@", error.description);
-        }];
+        if (!currentUser.isAnonymous) {
+            [[OTAuthService new] getDetailsForUser:currentUser.sid success:^(OTUser *user) {
+                [NSUserDefaults standardUserDefaults].currentUser = user;
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            } failure:^(NSError *error) {
+                NSLog(@"@fails getting user %@", error.description);
+            }];
+        }
         
-        [OTLogger setupMixpanelWithUser:currentUser];
-        [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
+        if (!currentUser.isAnonymous) {
+          [OTLogger setupMixpanelWithUser:currentUser];
+        }
+        if (!currentUser.isAnonymous) {
+          [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
+        }
     }
 }
 
@@ -589,14 +595,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
-+ (BOOL)shouldShowIntroTutorial
++ (BOOL)shouldShowIntroTutorial:(OTUser*)user
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
     }
     
-    // EMA-1991, EMA-2351
-    return YES;
+    return !user.isAnonymous;
 }
 
 + (BOOL)shouldShowAddEventDisclaimer

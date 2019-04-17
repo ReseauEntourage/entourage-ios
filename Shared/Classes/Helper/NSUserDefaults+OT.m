@@ -172,7 +172,7 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 - (NSString *)keyForSavedFilter {
     if (self.currentUser != nil)
-        return [kNewsfeedsFilter stringByAppendingString:self.currentUser.sid.stringValue];
+        return [kNewsfeedsFilter stringByAppendingString:self.currentUser.uuid];
     return @"";
 }
 

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface OTStartupViewController : UIViewController
-
+-(void)applicationWillResign:(NSNotification*)notification;
 @end

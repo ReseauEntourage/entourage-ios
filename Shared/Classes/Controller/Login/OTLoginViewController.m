@@ -165,7 +165,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    }
                                    
-                                   if ([OTAppConfiguration shouldShowIntroTutorial]) {
+                                   if ([OTAppConfiguration shouldShowIntroTutorial:user]) {
                                        NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                        if (loggedNumbers == nil) {
                                            loggedNumbers = [NSMutableArray new];

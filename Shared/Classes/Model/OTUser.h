@@ -45,6 +45,7 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic) OTAddress *address;
 @property (strong, nonatomic) NSArray *roles;
 @property (nonatomic, readonly) NSArray *memberships;
+@property (nonatomic, readonly) BOOL anonymous;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;
@@ -62,10 +63,13 @@ extern NSString *const kVisitedUserTag;
 
 - (BOOL)hasSignedEthicsChart;
 
+- (BOOL)isAnonymous;
+
 /*
  * Returns the name of the role to be displayed under the user's fullname
  */
 - (NSString*)roleTag;
+- (NSString*)uuid;
 
 - (NSArray <OTUserMembershipListItem*>*)privateCircles;
 - (NSArray <OTUserMembershipListItem*>*)neighborhoods;

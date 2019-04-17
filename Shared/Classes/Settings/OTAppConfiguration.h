@@ -80,7 +80,7 @@
 + (BOOL)supportsProfileEditing;
 
 // Configures if the intro tutorial is enabled/shown
-+ (BOOL)shouldShowIntroTutorial;
++ (BOOL)shouldShowIntroTutorial:(OTUser * _Nonnull)user;
 
 // Configure if the user is allowed to login from the welcome page
 + (BOOL)shouldAllowLoginFromWelcomeScreen;

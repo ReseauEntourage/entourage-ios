@@ -35,6 +35,7 @@
 NSString *const kAPIApps = @"applications";
 
 NSString *const kAPILogin = @"login";
+NSString *const kAPIAnonymousLogin = @"anonymous_users";
 NSString *const kAPIUserRoute = @"users";
 NSString *const kAPIUpdateUserRoute = @"update_me";
 NSString *const kAPIMe = @"me";
@@ -350,6 +351,31 @@ NSString *const kKeychainPassword = @"entourage_user_password";
      }
      andFailure:^(NSError *error)
      {
+         if (failure) {
+             failure(error);
+         }
+     }];
+}
+
+-(void)anonymousAuthWithSuccess:(void (^)(OTUser *))success failure:(void (^)(NSError *))failure
+{
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:kAPIAnonymousLogin
+     andParameters:nil
+     andSuccess:^(id responseObject) {
+         NSDictionary *responseDict = responseObject;
+         NSLog(@"Anonymous auth response : %@", responseDict);
+         NSDictionary *responseUser = responseDict[@"user"];
+         OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+
+         if (success) {
+             success(user);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         [[Crashlytics sharedInstance] recordError:error];
+         NSLog(@"Failed with error %@", error);
          if (failure) {
              failure(error);
          }

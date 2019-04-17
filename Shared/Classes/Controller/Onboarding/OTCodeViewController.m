@@ -243,7 +243,7 @@
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;
         [[NSUserDefaults standardUserDefaults] setFirstLoginState:NO];
         
-        if ([OTAppConfiguration shouldShowIntroTutorial]) {
+        if ([OTAppConfiguration shouldShowIntroTutorial:user]) {
             if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
                 [OTAppState navigateToAuthenticatedLandingScreen];
                 return;

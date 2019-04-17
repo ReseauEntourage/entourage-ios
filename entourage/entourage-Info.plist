@@ -60,7 +60,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string></string>
+	<string>buildNumberNotSet</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

@@ -52,7 +52,7 @@
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
         
-        if ([OTAppConfiguration shouldShowIntroTutorial] &&
+        if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
             ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [OTAppState continueFromLoginScreen];
 
@@ -63,7 +63,9 @@
                 [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
             } else {
                 
-                if (![currentUser hasActionZoneDefined]) {
+                if (currentUser.isAnonymous) {
+                    // nothing for now
+                } else if (![currentUser hasActionZoneDefined]) {
                     // Force the users to define action zone
                     // The Entourage app has Ignore button, while the pfp does not have it
                     [OTAppState navigateToLocationRightsScreen:nil];
@@ -324,7 +326,7 @@
         
         [OTAppState navigateToAuthenticatedLandingScreen];
         
-        if ([OTAppConfiguration shouldShowIntroTutorial] &&
+        if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
             ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [OTAppState presentTutorialScreen];
         }

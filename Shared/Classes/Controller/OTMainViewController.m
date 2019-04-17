@@ -175,7 +175,8 @@
     
     [self setup];
     
-    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if ([OTAppConfiguration shouldShowIntroTutorial:currentUser]) {
         [OTAppState presentTutorialScreen];
     }
     

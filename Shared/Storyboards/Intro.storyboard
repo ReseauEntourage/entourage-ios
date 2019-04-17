@@ -266,6 +266,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZmN-43-o3o" userLabel="Loginless Button">
                                         <rect key="frame" x="98.5" y="136" width="178" height="30"/>
                                         <state key="normal" title="Continuer sans connexion"/>
+                                        <connections>
+                                            <action selector="showLoginlessAlert:" destination="d0v-Fd-fA9" eventType="touchUpInside" id="dd5-C9-S0L"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.84700506925582886" green="0.84710079431533813" blue="0.84694975614547729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -56,4 +56,6 @@ extern NSString *const kKeychainPassword;
 + (void)updateUserAddressWithPlaceId:(NSString *)placeId
                           completion:(void (^)(NSError *))completion;
 
+-(void)anonymousAuthWithSuccess:(void (^)(OTUser *))success
+                        failure:(void (^)(NSError *))failure;
 @end

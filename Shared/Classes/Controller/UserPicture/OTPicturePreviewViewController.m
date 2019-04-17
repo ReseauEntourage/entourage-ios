@@ -69,7 +69,7 @@
             [NSUserDefaults standardUserDefaults].currentUser = user;
             self.scrollView.delegate = nil;
             
-            if (([OTAppConfiguration shouldShowIntroTutorial] &&
+            if (([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
                 [NSUserDefaults standardUserDefaults].isTutorialCompleted &&
                  [currentUser hasActionZoneDefined]) ||
                 self.isEditingPictureForCurrentUser) {
