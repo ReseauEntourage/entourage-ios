@@ -18,7 +18,6 @@
 @property (nonatomic) NSNumber *showContribution;
 @property (nonatomic) NSNumber *showTours;
 @property (nonatomic) NSNumber *timeframeInHours;
-@property (nonatomic) NSNumber *showOnlyMyEntourages;
 @property (nonatomic) NSNumber *showFromOrganisation;
 
 @property (nonatomic) NSNumber *showOuting;

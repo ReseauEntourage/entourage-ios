@@ -16,7 +16,6 @@ NSString *const kKeyShowDemand = @"showDemand";
 NSString *const kKeyShowContribution = @"showContribution";
 NSString *const kKeyShowTours = @"showTours";
 NSString *const kKeyTimeframe = @"Timeframe";
-NSString *const kKeyShowMyEntourages = @"showOnlyMyEntourages";
 NSString *const kKeyOrganisation = @"showFromOrganisation";
 
 NSString *const kKeyDemandeSocial = @"showDemandeSocial";
@@ -54,7 +53,6 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
     [encoder encodeObject:self.showContribution forKey:kKeyShowContribution];
     [encoder encodeObject:self.showTours forKey:kKeyShowTours];
     [encoder encodeObject:self.timeframeInHours forKey:kKeyTimeframe];
-    [encoder encodeObject:self.showOnlyMyEntourages forKey:kKeyShowMyEntourages];
     
     [encoder encodeObject:self.showDemandeSocial forKey:kKeyDemandeSocial];
     [encoder encodeObject:self.showDemandeHelp forKey:kKeyDemandeHelp];
@@ -86,7 +84,6 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
         self.showContribution = [decoder decodeObjectForKey:kKeyShowContribution];
         self.showTours = [decoder decodeObjectForKey:kKeyShowTours];
         self.timeframeInHours = [decoder decodeObjectForKey:kKeyTimeframe];
-        self.showOnlyMyEntourages = [decoder decodeObjectForKey:kKeyShowMyEntourages];
         self.showFromOrganisation = [decoder decodeObjectForKey:kKeyOrganisation];
         
         self.showDemandeSocial = [decoder decodeObjectForKey:kKeyDemandeSocial];
@@ -121,7 +118,6 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
     new.showContribution = @(filter.showContribution);
     new.showTours = @(filter.showTours);
     new.timeframeInHours = @(filter.timeframeInHours);
-    new.showOnlyMyEntourages = @(filter.showOnlyMyEntourages);
     new.showFromOrganisation = @(filter.showFromOrganisation);
     
     new.showDemandeSocial = @(filter.showDemandeSocial);

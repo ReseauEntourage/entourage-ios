@@ -99,8 +99,6 @@
             return OTLocalizedString(@"filter_maraude_alimentary");
         case FeedItemFilterKeyOrganisation:
             return OTLocalizedString(@"filter_entourage_from_sympathisants");
-        case FeedItemFilterKeyMyEntourages:
-            return OTLocalizedString(@"filter_entourage_my_entourages");
         case FeedItemFilterKeyMyEntouragesOnly:
             return OTLocalizedString(@"filter_entourage_only_my_entourages");
         case FeedItemFilterKeyMyOrganisationOnly:
