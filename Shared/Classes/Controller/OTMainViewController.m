@@ -1304,7 +1304,7 @@
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
-    [[OTAuthService new] getDetailsForUser:userId success:^(OTUser *user) {
+    [[OTAuthService new] getDetailsForUser:userId.stringValue success:^(OTUser *user) {
         [self performSegueWithIdentifier:@"UserProfileSegue" sender:user];
     } failure:^(NSError *error) {
         NSLog(@"@fails getting user %@", error.description);

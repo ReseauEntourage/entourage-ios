@@ -144,7 +144,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (void)loadUser {
     [SVProgressHUD show];
-    [[OTAuthService new] getDetailsForUser:self.currentUser.sid success:^(OTUser *user) {
+    [[OTAuthService new] getDetailsForUser:self.currentUser.uuid success:^(OTUser *user) {
         [SVProgressHUD dismiss];
         self.currentUser = user;
         self.menuItems = [self createMenuItems];

@@ -116,7 +116,7 @@ typedef NS_ENUM(NSInteger) {
         self.userId = self.user.sid;
         [self configureTableSource];
         
-        if (self.user.sid.intValue == self.currentUser.sid.intValue) {
+        if (!self.currentUser.isAnonymous && self.user.sid.intValue == self.currentUser.sid.intValue) {
             self.user = self.currentUser;
             
             if ([OTAppConfiguration supportsProfileEditing]) {
@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger) {
         [self loadUser];
     }
     
-    if (![self.userId isEqualToNumber:self.currentUser.sid]) {
+    if (self.currentUser.isAnonymous || ![self.userId isEqualToNumber:self.currentUser.sid]) {
         [OTLogger logEvent:@"Screen09_1OtherUserProfileView"];
         [self showReportButton];
     }
@@ -206,7 +206,7 @@ typedef NS_ENUM(NSInteger) {
 - (void)loadUser {
     if (self.userId != nil) {
         [SVProgressHUD show];
-        [[OTAuthService new] getDetailsForUser:self.userId success:^(OTUser *user) {
+        [[OTAuthService new] getDetailsForUser:self.userId.stringValue success:^(OTUser *user) {
             [SVProgressHUD dismiss];
             self.user = user;
             [self configureTableSource];

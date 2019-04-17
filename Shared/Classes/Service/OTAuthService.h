@@ -21,7 +21,7 @@ extern NSString *const kKeychainPassword;
               success:(void (^)(OTUser *user))success
               failure:(void (^)(NSError *error))failure;
 
-- (void)getDetailsForUser:(NSNumber *)userID
+- (void)getDetailsForUser:(NSString *)userUuid
                   success:(void (^)(OTUser *))success
                   failure:(void (^)(NSError *))failure;
 

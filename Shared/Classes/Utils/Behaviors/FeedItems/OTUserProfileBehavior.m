@@ -34,7 +34,7 @@
     if([segue.identifier isEqualToString:@"UserProfileSegue"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         OTUserViewController * userController = (OTUserViewController *)controller.topViewController;
-        if([self.userId isEqualToNumber:self.currentUser.sid])
+        if(!self.currentUser.isAnonymous && [self.userId isEqualToNumber:self.currentUser.sid])
             userController.user = self.currentUser;
         else
             userController.userId = self.userId;

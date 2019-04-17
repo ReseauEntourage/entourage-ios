@@ -73,7 +73,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions {
 
-    [[OTDebugLog sharedInstance] setConsoleOutput];
+//    [[OTDebugLog sharedInstance] setConsoleOutput];
     
 #if !DEBUG
     [self configureCrashReporting];
@@ -245,14 +245,12 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
-        if (!currentUser.isAnonymous) {
-            [[OTAuthService new] getDetailsForUser:currentUser.sid success:^(OTUser *user) {
-                [NSUserDefaults standardUserDefaults].currentUser = user;
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            } failure:^(NSError *error) {
-                NSLog(@"@fails getting user %@", error.description);
-            }];
-        }
+        [[OTAuthService new] getDetailsForUser:currentUser.uuid success:^(OTUser *user) {
+            [NSUserDefaults standardUserDefaults].currentUser = user;
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        } failure:^(NSError *error) {
+            NSLog(@"@fails getting user %@", error.description);
+        }];
         
         if (!currentUser.isAnonymous) {
           [OTLogger setupMixpanelWithUser:currentUser];

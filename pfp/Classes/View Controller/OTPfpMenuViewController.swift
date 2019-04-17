@@ -86,7 +86,7 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
     private func loadUser() {
         SVProgressHUD.show()
         let authService:OTAuthService = OTAuthService()
-        authService.getDetailsForUser(self.currentUser?.sid, success: { (user:OTUser?) in
+        authService.getDetailsForUser(self.currentUser?.uuid, success: { (user:OTUser?) in
             SVProgressHUD.dismiss()
             self.currentUser = user
             self.customizeHeader()

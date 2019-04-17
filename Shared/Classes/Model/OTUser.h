@@ -25,6 +25,7 @@ extern NSString *const kVisitedUserTag;
 @interface OTUser : NSObject
 
 @property (strong, nonatomic) NSNumber *sid;
+@property (nonatomic, readonly) NSString *uuid;
 @property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *firstName;
@@ -45,7 +46,6 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic) OTAddress *address;
 @property (strong, nonatomic) NSArray *roles;
 @property (nonatomic, readonly) NSArray *memberships;
-@property (nonatomic, readonly) BOOL anonymous;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;

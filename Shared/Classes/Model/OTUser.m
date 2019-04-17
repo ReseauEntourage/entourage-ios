@@ -11,6 +11,7 @@
 #import "NSDictionary+Parsing.h"
 
 NSString *const kKeySid = @"id";
+NSString *const kKeyUuid = @"uuid";
 NSString *const kKeyType = @"user_type";
 NSString *const kKeyEmail = @"email";
 NSString *const kKeyDisplayName = @"display_name";
@@ -38,7 +39,9 @@ NSString *const kVisitedUserTag = @"visited";
 NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 
 @interface OTUser ()
+@property (nonatomic, readwrite) NSString *uuid;
 @property (nonatomic, readwrite) NSArray *memberships;
+@property (nonatomic, readwrite) BOOL anonymous;
 @end
 
 @implementation OTUser
@@ -49,6 +52,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     if (self)
     {
         _sid = [dictionary numberForKey:kKeySid];
+        _uuid = [dictionary stringForKey:kKeyUuid];
         _type = [dictionary stringForKey:kKeyType];
         _email = [dictionary stringForKey:kKeyEmail];
         _avatarURL = [dictionary stringForKey:kKeyAvatarURL];
@@ -116,6 +120,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.sid forKey:kKeySid];
+    [encoder encodeObject:self.uuid forKey:kKeyUuid];
     [encoder encodeObject:self.type forKey:kKeyType];
     [encoder encodeObject:self.email forKey:kKeyEmail];
     [encoder encodeObject:self.avatarURL forKey:kKeyAvatarURL];
@@ -142,6 +147,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     if ((self = [super init]))
     {
         self.sid = [decoder decodeObjectForKey:kKeySid];
+        self.uuid = [decoder decodeObjectForKey:kKeyUuid];
         self.type = [decoder decodeObjectForKey:kKeyType];
         self.email = [decoder decodeObjectForKey:kKeyEmail];
         self.avatarURL = [decoder decodeObjectForKey:kKeyAvatarURL];
@@ -158,7 +164,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         self.partner = [decoder decodeObjectForKey:kKeyPartner];
         self.conversation = [decoder decodeObjectForKey:kKeyConversation];
         self.roles = [decoder decodeObjectForKey:kKeyRoles];
-        _anonymous = [decoder decodeBoolForKey:kKeyAnonymous];
+        self.anonymous = [decoder decodeBoolForKey:kKeyAnonymous];
         self.memberships = [decoder decodeObjectForKey:kMemberships];
         self.address = [decoder decodeObjectForKey:kAddress];
     }
@@ -244,17 +250,13 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     return OTLocalizedString(@"defineActionZoneDescription");
 }
 
-NSString *uuid;
 - (NSString *)uuid {
-    if (uuid == nil) {
-        if (self.anonymous) {
-            uuid = [[[self.token componentsSeparatedByString:@"."] subarrayWithRange:NSMakeRange(0, 3)] componentsJoinedByString:@"."];
-        }
-        else {
-            uuid = self.sid.stringValue;
-        }
+    if (_uuid != nil) {
+        return _uuid;
     }
-    return uuid;
+
+    // fallback to legacy id
+    return self.sid.stringValue;
 }
 
 @end

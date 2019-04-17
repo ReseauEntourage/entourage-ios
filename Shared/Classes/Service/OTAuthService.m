@@ -117,12 +117,12 @@ NSString *const kKeychainPassword = @"entourage_user_password";
 
 }
 
-- (void)getDetailsForUser:(NSNumber *)userID
-              success:(void (^)(OTUser *))success
-              failure:(void (^)(NSError *))failure
+- (void)getDetailsForUser:(NSString *)userUuid
+                            success:(void (^)(OTUser *))success
+                            failure:(void (^)(NSError *))failure
 {
-    
-    NSString *url = [NSString stringWithFormat:API_URL_USER_DETAILS, userID, TOKEN];
+
+    NSString *url = [NSString stringWithFormat:API_URL_USER_DETAILS, userUuid, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
          GETWithUrl:url
