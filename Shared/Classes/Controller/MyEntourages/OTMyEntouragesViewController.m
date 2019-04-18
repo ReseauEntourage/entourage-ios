@@ -44,6 +44,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *optionsButton;
 @property (nonatomic, strong) UIView *leftLineView;
 @property (nonatomic, strong) UIView *rightLineView;
+@property (nonatomic) BOOL anonymousMode;
 @end
 
 @implementation OTMyEntouragesViewController
@@ -51,10 +52,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.anonymousMode = IS_ANONYMOUS_USER;
+
     self.optionsButton.hidden = YES;
     
-    [self.invitationsCollectionDataSource initialize];
-    [self.entouragesTableDataSource initialize];
+    if (!self.anonymousMode) {
+        [self.invitationsCollectionDataSource initialize];
+        [self.entouragesTableDataSource initialize];
+    }
     [self.toggleCollectionView initialize];
     [self.toggleCollectionView toggle:NO animated:NO];
     [self.optionsBehavior configureWith:self.optionsDelegate];
@@ -76,8 +81,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self loadInvitations];
-    [self.entouragesDataSource loadData];
+    if (!self.anonymousMode) {
+        [self loadInvitations];
+        [self.entouragesDataSource loadData];
+    }
     [OTAppConfiguration updateAppearanceForMainTabBar];
 }
 
@@ -206,15 +213,19 @@
 - (void)showAllMessages {
     self.leftLineView.hidden = NO;
     self.rightLineView.hidden = YES;
-    ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = NO;
-    [self.entouragesDataSource loadData];
+    if (!self.anonymousMode) {
+        ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = NO;
+        [self.entouragesDataSource loadData];
+    }
 }
 
 - (void)showUnread {
     self.leftLineView.hidden = YES;
     self.rightLineView.hidden = NO;
-    ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = YES;
-    [self.entouragesDataSource loadData];
+    if (!self.anonymousMode) {
+        ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = YES;
+        [self.entouragesDataSource loadData];
+    }
 }
 
 @end
