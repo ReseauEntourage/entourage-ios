@@ -59,19 +59,25 @@
     if (!self.anonymousMode) {
         [self.invitationsCollectionDataSource initialize];
         [self.entouragesTableDataSource initialize];
+        self.entouragesDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.entouragesDataSource.tableView.estimatedRowHeight = 200;
+        self.entouragesDataSource.noDataSubtitle.text = [OTAppAppearance noMessagesDescription];
+    } else {
+        UIView *anonymousPlaceholder = [[[NSBundle mainBundle]
+                                         loadNibNamed:@"MyEntouragesAnonymousPlaceholder"
+                                                owner:nil options:nil] firstObject];
+        anonymousPlaceholder.frame = self.view.frame;
+        [self.view addSubview:anonymousPlaceholder];
     }
+
     [self.toggleCollectionView initialize];
     [self.toggleCollectionView toggle:NO animated:NO];
     [self.optionsBehavior configureWith:self.optionsDelegate];
-    self.entouragesDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.entouragesDataSource.tableView.estimatedRowHeight = 200;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateBadge:)
                                                  name:kUpdateBadgeCountNotification
                                                object:nil];
-    
-    self.entouragesDataSource.noDataSubtitle.text = [OTAppAppearance noMessagesDescription];
 }
 
 - (void)dealloc {
@@ -92,7 +98,9 @@
     [OTLogger logEvent:@"Screen17_2MyMessagesView"];
     [super viewDidAppear:animated];
     [self configureNavigationBar];
-    [self.entouragesDataSource.tableView reloadRowsAtIndexPaths:[self.entouragesDataSource.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+    if (!self.anonymousMode) {
+        [self.entouragesDataSource.tableView reloadRowsAtIndexPaths:[self.entouragesDataSource.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+    }
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 

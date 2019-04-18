@@ -20,8 +20,14 @@
 		374E0265220C2EF6000EE348 /* OTRoleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 37191ADC220B55D700F789B8 /* OTRoleTag.m */; };
 		374E0266220C8039000EE348 /* OTGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 376C247F2208A60900AA0DEB /* OTGradientView.m */; };
 		376C24802208A60900AA0DEB /* OTGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 376C247F2208A60900AA0DEB /* OTGradientView.m */; };
+		37AD8D072268C6E40045FF4E /* OTPlaceholderBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8D062268C6E40045FF4E /* OTPlaceholderBackground.m */; };
+		37AD8D082268C6E40045FF4E /* OTPlaceholderBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8D062268C6E40045FF4E /* OTPlaceholderBackground.m */; };
+		37AD8D0B2268CCC20045FF4E /* OTThemedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8D0A2268CCC20045FF4E /* OTThemedLabel.m */; };
+		37AD8D0C2268CCC20045FF4E /* OTThemedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8D0A2268CCC20045FF4E /* OTThemedLabel.m */; };
 		37D5D4BB22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */; };
 		37D5D4BC22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */; };
+		37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
+		37D5D4C02268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
@@ -1280,7 +1286,13 @@
 		37339CD821FF037C0048B6E1 /* OTPillLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPillLabelView.m; sourceTree = "<group>"; };
 		376C247E2208A60900AA0DEB /* OTGradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTGradientView.h; sourceTree = "<group>"; };
 		376C247F2208A60900AA0DEB /* OTGradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGradientView.m; sourceTree = "<group>"; };
+		37AD8D052268C6E40045FF4E /* OTPlaceholderBackground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPlaceholderBackground.h; sourceTree = "<group>"; };
+		37AD8D062268C6E40045FF4E /* OTPlaceholderBackground.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPlaceholderBackground.m; sourceTree = "<group>"; };
+		37AD8D092268CCC10045FF4E /* OTThemedLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTThemedLabel.h; sourceTree = "<group>"; };
+		37AD8D0A2268CCC20045FF4E /* OTThemedLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTThemedLabel.m; sourceTree = "<group>"; };
 		37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyEntouragesAnonymousPlaceholder.xib; sourceTree = "<group>"; };
+		37D5D4BD2268AF5D009DFE1C /* OTRoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTRoundedButton.h; sourceTree = "<group>"; };
+		37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTRoundedButton.m; sourceTree = "<group>"; };
 		43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pfp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B1A847819E822150020FB93 /* pois_categories_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pois_categories_mock.json; sourceTree = "<group>"; };
@@ -2889,6 +2901,12 @@
 				376C247E2208A60900AA0DEB /* OTGradientView.h */,
 				376C247F2208A60900AA0DEB /* OTGradientView.m */,
 				37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */,
+				37D5D4BD2268AF5D009DFE1C /* OTRoundedButton.h */,
+				37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */,
+				37AD8D052268C6E40045FF4E /* OTPlaceholderBackground.h */,
+				37AD8D062268C6E40045FF4E /* OTPlaceholderBackground.m */,
+				37AD8D092268CCC10045FF4E /* OTThemedLabel.h */,
+				37AD8D0A2268CCC20045FF4E /* OTThemedLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4472,6 +4490,7 @@
 				A285C35C20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */,
 				A296B931208DFE8A00F6AFBD /* OTAppState.m in Sources */,
 				A202EB3B2085D2C80058F32C /* OTJoinAcceptedCell.m in Sources */,
+				37AD8D0B2268CCC20045FF4E /* OTThemedLabel.m in Sources */,
 				A202EAF92085D2C70058F32C /* OTMyEntouragesFilter.m in Sources */,
 				A202EC012085D2C80058F32C /* OTMixpanelService.m in Sources */,
 				A202EB4F2085D2C80058F32C /* OTLocationSelectorViewController.m in Sources */,
@@ -4706,6 +4725,7 @@
 				A202EC992085D2C80058F32C /* OTMessageTableCellProviderBehavior.m in Sources */,
 				A202EAD72085D2C70058F32C /* OTPoi.m in Sources */,
 				A202EC872085D2C80058F32C /* OTContactsTableCellProviderBehavior.m in Sources */,
+				37AD8D072268C6E40045FF4E /* OTPlaceholderBackground.m in Sources */,
 				A202EB112085D2C70058F32C /* OTHeatZoneCollectionViewCell.m in Sources */,
 				A202EB452085D2C80058F32C /* OTJoinRequestedNotOwnerCell.m in Sources */,
 				A202EC8D2085D2C80058F32C /* OTDataSourceBehavior.m in Sources */,
@@ -4792,6 +4812,7 @@
 				A202ECCF2085D2C80058F32C /* OTTapEntourageBehavior.m in Sources */,
 				A202EB1B2085D2C70058F32C /* OTCreateMeetingViewController.m in Sources */,
 				A202EAE52085D2C70058F32C /* OTFeedItemFilters.m in Sources */,
+				37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */,
 				A2F50A8A20ECFCCC009AB222 /* OTOutingAnnotation.m in Sources */,
 				A202EAF32085D2C70058F32C /* OTEncounter.m in Sources */,
 				A202EB092085D2C70058F32C /* OTAboutItem.m in Sources */,
@@ -5156,6 +5177,7 @@
 				A296B76320871CFC00F6AFBD /* OTDeepLinkService.m in Sources */,
 				A296B76420871CFC00F6AFBD /* UIBarButtonItem+Badge.m in Sources */,
 				A296B76520871CFC00F6AFBD /* OTAppConfiguration.m in Sources */,
+				37AD8D082268C6E40045FF4E /* OTPlaceholderBackground.m in Sources */,
 				A296B932208E06AA00F6AFBD /* OTAppState.m in Sources */,
 				A296B76620871CFC00F6AFBD /* OTJoinAcceptedCell.m in Sources */,
 				A296B76720871CFC00F6AFBD /* OTMyEntouragesFilter.m in Sources */,
@@ -5219,6 +5241,7 @@
 				A24EA3872101D7A10027AB8B /* OTAddress.m in Sources */,
 				A296B79720871CFC00F6AFBD /* OTNotificationsRightsViewController.m in Sources */,
 				A296B79820871CFC00F6AFBD /* OTCategoryFromJsonService.m in Sources */,
+				37D5D4C02268AF5D009DFE1C /* OTRoundedButton.m in Sources */,
 				A296B79920871CFC00F6AFBD /* OTVersionInfo.m in Sources */,
 				A296B79A20871CFC00F6AFBD /* OTMapOptionsViewController.m in Sources */,
 				A296B79B20871CFC00F6AFBD /* OTActiveFeedItemViewController.m in Sources */,
@@ -5281,6 +5304,7 @@
 				A296B7CC20871CFC00F6AFBD /* OTInviteContactsViewController.m in Sources */,
 				A296B7CD20871CFC00F6AFBD /* OTEntourageEditItemCell.m in Sources */,
 				A296B7CE20871CFC00F6AFBD /* OTFeedItemJoiner.m in Sources */,
+				37AD8D0C2268CCC20045FF4E /* OTThemedLabel.m in Sources */,
 				A296B7CF20871CFC00F6AFBD /* OTPhoneViewController.m in Sources */,
 				A296B7D020871CFC00F6AFBD /* OTEncounterDisclaimerBehavior.m in Sources */,
 				A296B7D120871CFC00F6AFBD /* OTMailSenderBehavior.m in Sources */,
