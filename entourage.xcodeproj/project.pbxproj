@@ -24,6 +24,10 @@
 		37AD8D082268C6E40045FF4E /* OTPlaceholderBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8D062268C6E40045FF4E /* OTPlaceholderBackground.m */; };
 		37AD8D0B2268CCC20045FF4E /* OTThemedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8D0A2268CCC20045FF4E /* OTThemedLabel.m */; };
 		37AD8D0C2268CCC20045FF4E /* OTThemedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AD8D0A2268CCC20045FF4E /* OTThemedLabel.m */; };
+		37BFD0A322803B1F00EBF2D9 /* OTAuthenticationOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BFD0A122803B1F00EBF2D9 /* OTAuthenticationOverlayViewController.m */; };
+		37BFD0A422803B1F00EBF2D9 /* OTAuthenticationOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BFD0A122803B1F00EBF2D9 /* OTAuthenticationOverlayViewController.m */; };
+		37BFD0A522803B1F00EBF2D9 /* AuthenticationOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BFD0A222803B1F00EBF2D9 /* AuthenticationOverlay.xib */; };
+		37BFD0A622803B1F00EBF2D9 /* AuthenticationOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BFD0A222803B1F00EBF2D9 /* AuthenticationOverlay.xib */; };
 		37D5D4BB22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */; };
 		37D5D4BC22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */; };
 		37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
@@ -1290,6 +1294,9 @@
 		37AD8D062268C6E40045FF4E /* OTPlaceholderBackground.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPlaceholderBackground.m; sourceTree = "<group>"; };
 		37AD8D092268CCC10045FF4E /* OTThemedLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTThemedLabel.h; sourceTree = "<group>"; };
 		37AD8D0A2268CCC20045FF4E /* OTThemedLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTThemedLabel.m; sourceTree = "<group>"; };
+		37BFD0A022803B1F00EBF2D9 /* OTAuthenticationOverlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAuthenticationOverlayViewController.h; sourceTree = "<group>"; };
+		37BFD0A122803B1F00EBF2D9 /* OTAuthenticationOverlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAuthenticationOverlayViewController.m; sourceTree = "<group>"; };
+		37BFD0A222803B1F00EBF2D9 /* AuthenticationOverlay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthenticationOverlay.xib; sourceTree = "<group>"; };
 		37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyEntouragesAnonymousPlaceholder.xib; sourceTree = "<group>"; };
 		37D5D4BD2268AF5D009DFE1C /* OTRoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTRoundedButton.h; sourceTree = "<group>"; };
 		37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTRoundedButton.m; sourceTree = "<group>"; };
@@ -2177,6 +2184,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37BFD0A8228040B200EBF2D9 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				37BFD0A222803B1F00EBF2D9 /* AuthenticationOverlay.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		53280EA9BCEBA15D998CCED4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2817,6 +2832,8 @@
 		A202E9302085D2C50058F32C /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				37BFD0A022803B1F00EBF2D9 /* OTAuthenticationOverlayViewController.h */,
+				37BFD0A122803B1F00EBF2D9 /* OTAuthenticationOverlayViewController.m */,
 				A202E8DE2085D2C40058F32C /* OTStartupViewController.h */,
 				A202E9382085D2C50058F32C /* OTStartupViewController.m */,
 				A202E8B42085D2C40058F32C /* OTLoginViewController.h */,
@@ -2866,6 +2883,7 @@
 		A202E9472085D2C50058F32C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				37BFD0A8228040B200EBF2D9 /* Login */,
 				A202E9482085D2C50058F32C /* OnBoardingTextField.swift */,
 				A202E9582085D2C50058F32C /* OTAboutTableViewCell.h */,
 				A202E9502085D2C50058F32C /* OTAboutTableViewCell.m */,
@@ -4029,6 +4047,7 @@
 				A202E7DB2085CFC40058F32C /* InfoPlist.strings in Resources */,
 				A21D65BD2085FDAA00EF8E0E /* ActiveFeedItem.storyboard in Resources */,
 				A2306AA820C54EB00094370E /* PfpUserVoisinage.storyboard in Resources */,
+				37BFD0A522803B1F00EBF2D9 /* AuthenticationOverlay.xib in Resources */,
 				A2048A002151421500064EB0 /* IntroPage4.xib in Resources */,
 				A21D65B82085FDAA00EF8E0E /* UserProfileEditor.storyboard in Resources */,
 				A21D65A82085FDAA00EF8E0E /* Disclaimer.storyboard in Resources */,
@@ -4135,6 +4154,7 @@
 				A296B8B120871CFC00F6AFBD /* SF-UI-Text-SemiboldItalic.otf in Resources */,
 				A296B8B220871CFC00F6AFBD /* UserPicture.storyboard in Resources */,
 				A296B8B320871CFC00F6AFBD /* TourCreator.storyboard in Resources */,
+				37BFD0A622803B1F00EBF2D9 /* AuthenticationOverlay.xib in Resources */,
 				A296B9192087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.beta.plist in Resources */,
 				A296B8B420871CFC00F6AFBD /* SF-UI-Text-Regular.otf in Resources */,
 				A296B8B620871CFC00F6AFBD /* JoinFeedItem.storyboard in Resources */,
@@ -4708,6 +4728,7 @@
 				A202EB6F2085D2C80058F32C /* OTUserPictureViewController.m in Sources */,
 				A202EB472085D2C80058F32C /* OTEncounterCell.m in Sources */,
 				A202EC8F2085D2C80058F32C /* OTTableCellProviderBehavior.m in Sources */,
+				37BFD0A322803B1F00EBF2D9 /* OTAuthenticationOverlayViewController.m in Sources */,
 				A202EB232085D2C70058F32C /* OTMembersCell.m in Sources */,
 				A202EC672085D2C80058F32C /* OTTapViewBehavior.m in Sources */,
 				A202EBB92085D2C80058F32C /* OTMessageViewController.m in Sources */,
@@ -5465,6 +5486,7 @@
 				A296B85720871CFC00F6AFBD /* OTCollectionSourceBehavior.m in Sources */,
 				A296B85820871CFC00F6AFBD /* OTActivityProvider.m in Sources */,
 				A296B85920871CFC00F6AFBD /* OTStartTourAnnotation.m in Sources */,
+				37BFD0A422803B1F00EBF2D9 /* OTAuthenticationOverlayViewController.m in Sources */,
 				A296B85A20871CFC00F6AFBD /* OTFilterRadioButton.m in Sources */,
 				A296B85B20871CFC00F6AFBD /* OTOverlayFeederBehavior.m in Sources */,
 				A296B85C20871CFC00F6AFBD /* OTMessageReceivedCell.m in Sources */,
