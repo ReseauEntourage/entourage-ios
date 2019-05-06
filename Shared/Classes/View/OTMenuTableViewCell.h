@@ -19,5 +19,6 @@ FOUNDATION_EXPORT NSString *const OTMenuMakeDonationTableViewCellIdentifier;
 
 @property (nonatomic, weak) IBOutlet UIImageView *itemIcon;
 @property (nonatomic, weak) IBOutlet UILabel *itemLabel;
+@property (nonatomic, weak) IBOutlet UIView *separator;
 
 @end

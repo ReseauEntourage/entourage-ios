@@ -165,18 +165,18 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellID;
-    if (indexPath.row == DONATION_CELL_INDEX)
-        cellID = OTMenuMakeDonationTableViewCellIdentifier;
-    else if (indexPath.row == HEADER_CELL_INDEX)
-        cellID = @"HeaderViewCell";
-    else if (indexPath.row == LOG_OUT_CELL_INDEX)
-        cellID = OTMenuLogoutTableViewCellIdentifier;
-    else
-        cellID = OTMenuTableViewCellIdentifier;
+    NSString *cellID = [self cellIdentifierForRow:indexPath.row];
     
     OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
+    if (cellID == OTMenuTableViewCellIdentifier) {
+        NSString *nextCellID = [self cellIdentifierForRow:indexPath.row + 1];
+        if (nextCellID == OTMenuTableViewCellIdentifier) {
+            cell.separator.backgroundColor = self.tableView.separatorColor;
+        } else {
+            cell.separator.hidden = YES;
+        }
+    }
     if (menuItem.iconName != nil) {
         cell.itemIcon.image = [UIImage imageNamed:menuItem.iconName];
         cell.itemIcon.contentMode = UIViewContentModeScaleAspectFit;
@@ -187,13 +187,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     else {
         cell.contentView.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
     }
-    
-    if ((indexPath.row == HEADER_CELL_INDEX ||
-         indexPath.row == HEADER_CELL_INDEX - 1) ||
-        (indexPath.row == LOG_OUT_CELL_INDEX ||
-         indexPath.row == DONATION_CELL_INDEX ||
-        indexPath.row == DONATION_CELL_INDEX - 1))
-        cell.separatorInset = UIEdgeInsetsZero;
     
     if (indexPath.row == DONATION_CELL_INDEX) {
         cell.contentView.backgroundColor = [UIColor colorWithRed:242
@@ -359,6 +352,17 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                                                    segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
     [menuItems addObject:itemDisconnect];
 	return menuItems;
+}
+
+- (NSString *)cellIdentifierForRow:(NSInteger)row {
+    if (row == DONATION_CELL_INDEX)
+        return OTMenuMakeDonationTableViewCellIdentifier;
+    else if (row == HEADER_CELL_INDEX)
+        return @"HeaderViewCell";
+    else if (row == LOG_OUT_CELL_INDEX)
+        return OTMenuLogoutTableViewCellIdentifier;
+    else
+        return OTMenuTableViewCellIdentifier;
 }
 
 - (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath {
