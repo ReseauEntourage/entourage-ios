@@ -104,7 +104,12 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 	[self configureControllersDictionary];
    
     [self createBackFrontMenuButton];
+
+    if (self.currentUser.isAnonymous) {
+        self.modifyLabel.text = OTLocalizedString(@"menu_login");
+    }
     [self.modifyLabel underline];
+
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableHeaderView = self.headerView;
     
@@ -347,10 +352,12 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     OTMenuItem *itemNil = [[OTMenuItem alloc] initWithTitle:nil iconName: nil ];
     [menuItems addObject:itemNil];
     
-    OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
-                                                          iconName: nil
-                                                   segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
-    [menuItems addObject:itemDisconnect];
+    if (!self.currentUser.isAnonymous) {
+        OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
+                                                              iconName: nil
+                                                       segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
+        [menuItems addObject:itemDisconnect];
+    }
 	return menuItems;
 }
 

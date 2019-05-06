@@ -57,6 +57,7 @@
 "menu_chart" = "Charte éthique";
 "menu_read_chart" = "Consulter la Charte éthique";
 "menu_sign_chart" = "Signer la Charte éthique";
+"menu_login" = "Me connecter";
 
 "menu_guide" = "Guide de solidarité";
 "menu_param" = "Paramètres de l'application";
