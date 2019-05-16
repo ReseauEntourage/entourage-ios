@@ -106,11 +106,11 @@
 
 -(IBAction)showSignUp:(id)sender {
     [OTLogger logEvent:@"SplashSignUp"];
-    [self performSegueWithIdentifier:@"SignUpSegue" sender:nil];
+    [OTAppState continueFromStartupScreen:self creatingUser:YES];
 }
 
 -(IBAction)showLogin:(id)sender {
-    [OTAppState continueFromStartupScreen];
+    [OTAppState continueFromStartupScreen:self creatingUser:NO];
 }
 
 #pragma mark - Loginless Alert
@@ -125,8 +125,6 @@ SFSafariViewController *loginlessSafariController;
                                                          message:@"Pour continuer, acceptez les CGU et la Politique de confidentialité d'Entourage"
                                                   preferredStyle:UIAlertControllerStyleAlert];
     
-    [loginlessAlert addAction:[UIAlertAction actionWithTitle:@"Annuler" style:UIAlertActionStyleCancel
-                                                     handler:nil]];
     [loginlessAlert addAction:[UIAlertAction actionWithTitle:@"Lire" style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * action) {
                                                          NSURL *url = [OTSafariService redirectUrlWithIdentifier:@"terms"];

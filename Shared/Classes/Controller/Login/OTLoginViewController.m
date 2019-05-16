@@ -178,7 +178,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
 
-                                   [OTAppState continueFromLoginScreen];
+                                   [OTAppState continueFromLoginScreen:self];
                                    
                                    if (self.fromLink) {
                                        [[OTDeepLinkService new] handleDeepLink:self.fromLink];

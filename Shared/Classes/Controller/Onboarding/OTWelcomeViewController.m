@@ -37,7 +37,8 @@
     self.view.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 
     self.title = @"";
-    if (![NSUserDefaults standardUserDefaults].currentUser) {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (currentUser == nil || currentUser.isAnonymous) {
         [self addLoginBarButton];
         
         NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
@@ -92,11 +93,7 @@
 }
 
 - (IBAction)continueOnboarding:(id)sender {
-    if (self.signupNewUser) {
-        [OTAppState continueFromWelcomeScreenForOnboarding];
-    } else {
-        [OTAppState continueFromWelcomeScreen];
-    }
+    [OTAppState continueFromWelcomeScreen:self];
 }
 
 @end

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTAuthenticationModalViewController"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="185" id="NWf-hE-Rfg" customClass="OTModalPopup">
+            <rect key="frame" x="0.0" y="0.0" width="325" height="385"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Identifiez-vous pour continuer" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TLe-aA-X3a" customClass="OTThemedText">
+                    <rect key="frame" x="16" y="65" width="293" height="162"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="themeStyle" value="modalTitle"/>
+                    </userDefinedRuntimeAttributes>
+                </textView>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="115" translatesAutoresizingMaskIntoConstraints="NO" id="jOu-Tg-f71">
+                    <rect key="frame" x="16" y="255" width="293" height="115"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hz4-x4-J8a" customClass="OTRoundedButton">
+                            <rect key="frame" x="0.0" y="0.0" width="293" height="50"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                            <state key="normal" title="S'inscrire"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="inverted" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="signup" destination="-1" eventType="touchUpInside" id="PNb-BH-PaK"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejw-p2-zaO" customClass="OTRoundedButton">
+                            <rect key="frame" x="0.0" y="65" width="293" height="50"/>
+                            <state key="normal" title="Déjà membre"/>
+                            <connections>
+                                <action selector="login" destination="-1" eventType="touchUpInside" id="2bA-e3-86g"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="hz4-x4-J8a" secondAttribute="trailing" id="BrE-VQ-Kvb"/>
+                        <constraint firstItem="hz4-x4-J8a" firstAttribute="leading" secondItem="jOu-Tg-f71" secondAttribute="leading" id="H8z-Tq-dpF"/>
+                        <constraint firstItem="ejw-p2-zaO" firstAttribute="top" secondItem="hz4-x4-J8a" secondAttribute="bottom" constant="15" id="JVD-qd-ksW"/>
+                        <constraint firstAttribute="trailing" secondItem="ejw-p2-zaO" secondAttribute="trailing" id="PVR-j3-vNy"/>
+                        <constraint firstItem="ejw-p2-zaO" firstAttribute="leading" secondItem="jOu-Tg-f71" secondAttribute="leading" id="XDD-NV-1Vs"/>
+                        <constraint firstAttribute="bottom" secondItem="ejw-p2-zaO" secondAttribute="bottom" id="Znt-rz-WFL"/>
+                        <constraint firstItem="hz4-x4-J8a" firstAttribute="top" secondItem="jOu-Tg-f71" secondAttribute="top" id="j04-Lj-mV1"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <point key="canvasLocation" x="44.20289855072464" y="106.13839285714285"/>
+        </stackView>
+    </objects>
+</document>

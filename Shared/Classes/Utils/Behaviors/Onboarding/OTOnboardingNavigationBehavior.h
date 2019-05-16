@@ -12,7 +12,6 @@
 
 @property (nonatomic, weak) IBOutlet UIViewController* owner;
 
-- (void)nextFromLogin;
 - (void)nextFromEmail;
 - (void)nextFromName;
 

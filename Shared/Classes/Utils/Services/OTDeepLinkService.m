@@ -74,7 +74,7 @@
         }];
     }
     else {
-        [OTAppState navigateToLoginScreen:nil];
+        [OTAppState navigateToLoginScreen:nil sender:nil];
         [SVProgressHUD dismiss];
     }
 }
@@ -97,7 +97,7 @@
     NSString *query = url.query;
     self.link = url;
     if (!TOKEN) {
-        [OTAppState navigateToLoginScreen:url];
+        [OTAppState navigateToLoginScreen:url sender:nil];
     } else {
         [self handleDeepLinkWithKey:host pathComponents:url.pathComponents andQuery:query];
     }

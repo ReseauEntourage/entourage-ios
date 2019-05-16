@@ -24,16 +24,12 @@
     self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
 }
 
-- (void)nextFromLogin {
-    [OTAppState continueFromLoginScreen];
-}
-
 - (void)nextFromEmail {
-    [OTAppState continueFromUserEmailScreen];
+    [OTAppState continueFromUserEmailScreen:self.owner];
 }
 
 - (void)nextFromName {
-    [OTAppState continueFromUserNameScreen];
+    [OTAppState continueFromUserNameScreen:self.owner];
 }
 
 @end

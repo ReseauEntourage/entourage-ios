@@ -79,7 +79,7 @@
                 [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
                 
             } else {
-                [OTAppState navigateToPermissionsScreens];
+                [OTAppState navigateToPermissionsScreens:self];
             }
                 
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationProfilePictureUpdated object:self];

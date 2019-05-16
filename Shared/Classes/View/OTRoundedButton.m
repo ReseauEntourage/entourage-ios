@@ -44,6 +44,9 @@
         self.backgroundColor = theme.secondaryNavigationBarTintColor;
         self.tintColor       = theme.primaryNavigationBarTintColor;
     }
+    
+    self.titleLabel.font = [UIFont systemFontOfSize:17 weight:UIFontWeightMedium];
+    [self.heightAnchor constraintEqualToConstant:50].active = YES;
 }
 
 @end

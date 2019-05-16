@@ -34,7 +34,7 @@
 #import "OTSafariService.h"
 #import "OTAppConfiguration.h"
 #import "OTAuthService.h"
-#import "OTAuthenticationOverlayViewController.h"
+#import "OTAuthenticationModalViewController.h"
 #import "entourage-Swift.h"
 
 #define DONATION_CELL_INDEX 3
@@ -64,7 +64,7 @@ NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuD
 NSString *const OTMenuViewControllerSegueMenuAboutIdentifier = @"segueMenuIdentifierForAbout";
 NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdentifierForSocial";
 
-@interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, AuthenticationOverlayDelegate>
+@interface OTMenuViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
 /**************************************************************************************************/
 #pragma mark - Getters and Setters
@@ -268,10 +268,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (IBAction)editProfile {
     if (self.currentUser.isAnonymous) {
-        OTAuthenticationOverlayViewController *overlay = [[OTAuthenticationOverlayViewController alloc] initWithNibName:@"AuthenticationOverlay" bundle:nil];
-        overlay.modalPresentationStyle = UIModalPresentationOverFullScreen;
-        overlay.delegate = self;
-        [self presentViewController:overlay animated:YES completion:nil];
+        [OTAppState presentAuthenticationOverlay:self];
     } else {
         [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
     }
@@ -400,13 +397,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (void)testDeepLink:(NSString *)deepLink {
     [[OTDeepLinkService new] handleUniversalLink:[NSURL URLWithString:deepLink]];
-}
-
-#pragma mark - AuthenticationOverlayDelegate
-
-
-- (void)authenticationCanceled {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

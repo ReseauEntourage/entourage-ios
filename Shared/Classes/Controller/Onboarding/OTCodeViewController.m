@@ -250,7 +250,7 @@
             }
         }
 
-        [OTAppState continueFromLoginScreen];
+        [OTAppState continueFromLoginScreen:self];
         
     } failure: ^(NSError *error) {
         [SVProgressHUD dismiss];
