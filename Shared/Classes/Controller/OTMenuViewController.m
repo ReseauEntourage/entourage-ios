@@ -262,6 +262,11 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 #pragma mark - Actions
 
 - (IBAction)showProfile {
+    if (self.currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self];
+        return;
+    }
+
     [OTLogger logEvent:@"TapMyProfilePhoto"];
     [self performSegueWithIdentifier:OTMenuViewControllerSegueMenuProfileIdentifier sender:self];
 }
@@ -269,9 +274,10 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 - (IBAction)editProfile {
     if (self.currentUser.isAnonymous) {
         [OTAppState presentAuthenticationOverlay:self];
-    } else {
-        [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
+        return;
     }
+
+    [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
 }
 
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier {

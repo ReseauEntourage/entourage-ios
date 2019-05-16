@@ -432,6 +432,11 @@
                                withDelegate:(id<EntourageEditorDelegate>)delegate
                              isEditingEvent:(BOOL)isEditingEvent {
     
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [self presentAuthenticationOverlay:controller];
+        return;
+    }
+
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
 
         [OTAppState createEntourageFromController:controller

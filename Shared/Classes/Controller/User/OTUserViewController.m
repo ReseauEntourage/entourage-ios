@@ -469,6 +469,11 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)startChatWithSelectedUser {
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self];
+        return;
+    }
+    
     [SVProgressHUD show];
     
     [self loadEntourageItemWithGropupId:self.user.conversation.uuid

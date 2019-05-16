@@ -23,6 +23,10 @@
 		37339CD921FF037C0048B6E1 /* OTPillLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37339CD821FF037C0048B6E1 /* OTPillLabelView.m */; };
 		374E0265220C2EF6000EE348 /* OTRoleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 37191ADC220B55D700F789B8 /* OTRoleTag.m */; };
 		374E0266220C8039000EE348 /* OTGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 376C247F2208A60900AA0DEB /* OTGradientView.m */; };
+		374E7360228DBBA500B36161 /* OTApiErrorDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 374E735F228DBBA500B36161 /* OTApiErrorDomain.m */; };
+		374E7361228DBBA500B36161 /* OTApiErrorDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 374E735F228DBBA500B36161 /* OTApiErrorDomain.m */; };
+		374E7365228DC92600B36161 /* OTMainTabBarAnonymousBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 374E7364228DC92500B36161 /* OTMainTabBarAnonymousBehavior.m */; };
+		374E7366228DC92600B36161 /* OTMainTabBarAnonymousBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 374E7364228DC92500B36161 /* OTMainTabBarAnonymousBehavior.m */; };
 		37614CA422896C35000A522D /* OTModalPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37614CA222896C35000A522D /* OTModalPopupViewController.m */; };
 		37614CA522896C35000A522D /* OTModalPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37614CA222896C35000A522D /* OTModalPopupViewController.m */; };
 		37614CA622896C35000A522D /* OTModalPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37614CA322896C35000A522D /* OTModalPopupViewController.xib */; };
@@ -1304,6 +1308,10 @@
 		37339CD221FF01860048B6E1 /* OTPillLabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPillLabelView.xib; sourceTree = "<group>"; };
 		37339CD721FF037C0048B6E1 /* OTPillLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPillLabelView.h; sourceTree = "<group>"; };
 		37339CD821FF037C0048B6E1 /* OTPillLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPillLabelView.m; sourceTree = "<group>"; };
+		374E735F228DBBA500B36161 /* OTApiErrorDomain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTApiErrorDomain.m; sourceTree = "<group>"; };
+		374E7362228DBBEB00B36161 /* OTApiErrorDomain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTApiErrorDomain.h; sourceTree = "<group>"; };
+		374E7363228DC92500B36161 /* OTMainTabBarAnonymousBehavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTMainTabBarAnonymousBehavior.h; sourceTree = "<group>"; };
+		374E7364228DC92500B36161 /* OTMainTabBarAnonymousBehavior.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTMainTabBarAnonymousBehavior.m; sourceTree = "<group>"; };
 		37614CA122896C35000A522D /* OTModalPopupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTModalPopupViewController.h; sourceTree = "<group>"; };
 		37614CA222896C35000A522D /* OTModalPopupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTModalPopupViewController.m; sourceTree = "<group>"; };
 		37614CA322896C35000A522D /* OTModalPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTModalPopupViewController.xib; sourceTree = "<group>"; };
@@ -2493,6 +2501,8 @@
 				A202E83D2085D2C40058F32C /* OTUser.m */,
 				37191ADB220B55D700F789B8 /* OTRoleTag.h */,
 				37191ADC220B55D700F789B8 /* OTRoleTag.m */,
+				374E735F228DBBA500B36161 /* OTApiErrorDomain.m */,
+				374E7362228DBBEB00B36161 /* OTApiErrorDomain.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3112,6 +3122,8 @@
 				A202EA422085D2C60058F32C /* Onboarding */,
 				A202EA452085D2C60058F32C /* Keyboard */,
 				A202EA482085D2C60058F32C /* NewsFeed */,
+				374E7363228DC92500B36161 /* OTMainTabBarAnonymousBehavior.h */,
+				374E7364228DC92500B36161 /* OTMainTabBarAnonymousBehavior.m */,
 			);
 			path = Behaviors;
 			sourceTree = "<group>";
@@ -4742,6 +4754,7 @@
 				A202ECB72085D2C80058F32C /* OTInviteBehavior.m in Sources */,
 				A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */,
 				A202EC592085D2C80058F32C /* OTBottomScrollBehavior.m in Sources */,
+				374E7365228DC92600B36161 /* OTMainTabBarAnonymousBehavior.m in Sources */,
 				A202ED252085D2C80058F32C /* UINavigationController+entourage.m in Sources */,
 				A2FE6D5120A0783C0025842D /* OTAppAppearance.m in Sources */,
 				A202EB272085D2C70058F32C /* OTMapCell.m in Sources */,
@@ -4814,6 +4827,7 @@
 				A202EC252085D2C80058F32C /* UIBarButtonItem+factory.m in Sources */,
 				A202EBB52085D2C80058F32C /* OTAboutViewController.m in Sources */,
 				A202EB032085D2C70058F32C /* OTAssociation.m in Sources */,
+				374E7360228DBBA500B36161 /* OTApiErrorDomain.m in Sources */,
 				A202EC6D2085D2C80058F32C /* OTInvitationsCollectionSource.m in Sources */,
 				A202EBC52085D2C80058F32C /* OTMainViewController.m in Sources */,
 				A202EAFF2085D2C70058F32C /* OTFeedItemMessage.m in Sources */,
@@ -5301,6 +5315,7 @@
 				A296B79520871CFC00F6AFBD /* OTOngoingTourService.m in Sources */,
 				A296B79620871CFC00F6AFBD /* OTChangeStateViewController.m in Sources */,
 				A24EA3872101D7A10027AB8B /* OTAddress.m in Sources */,
+				374E7361228DBBA500B36161 /* OTApiErrorDomain.m in Sources */,
 				A296B79720871CFC00F6AFBD /* OTNotificationsRightsViewController.m in Sources */,
 				A296B79820871CFC00F6AFBD /* OTCategoryFromJsonService.m in Sources */,
 				37D5D4C02268AF5D009DFE1C /* OTRoundedButton.m in Sources */,
@@ -5573,6 +5588,7 @@
 				A2A777EF20AF06EC006D2772 /* String+Localization.swift in Sources */,
 				A296B87C20871CFC00F6AFBD /* OTCreateMeetingViewController.m in Sources */,
 				A296B87D20871CFC00F6AFBD /* OTFeedItemFilters.m in Sources */,
+				374E7366228DC92600B36161 /* OTMainTabBarAnonymousBehavior.m in Sources */,
 				A296B87E20871CFC00F6AFBD /* OTEncounter.m in Sources */,
 				A296B87F20871CFC00F6AFBD /* OTAboutItem.m in Sources */,
 				A296B88020871CFC00F6AFBD /* OTPublicFeedItemViewController.m in Sources */,

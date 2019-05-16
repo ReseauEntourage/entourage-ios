@@ -20,6 +20,7 @@
 #import "OTEntourageEditorViewController.h"
 #import "OTTutorialViewController.h"
 #import "OTSafariService.h"
+#import "OTAPIErrorDomain.h"
 
 @interface OTDeepLinkService ()
 
@@ -71,6 +72,9 @@
         [self prepareControllers:feedItem];
         } error:^(NSError *error) {
             [SVProgressHUD dismiss];
+            if ([error.domain isEqual:OTApiErrorDomain] && error.code == OTApiErrorAnonymousUserAuthenticationRequired) {
+                [OTAppState presentAuthenticationOverlay:[self getTopViewController]];
+            }
         }];
     }
     else {

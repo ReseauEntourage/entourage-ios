@@ -41,6 +41,7 @@
 #import "OTAPIConsts.h"
 #import <GooglePlaces/GooglePlaces.h>
 #import <GooglePlaces/GMSPlacesClient.h>
+#import "OTMainTabBarAnonymousBehavior.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -48,6 +49,9 @@
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 @interface OTAppConfiguration ()
+
+@property (nonatomic, strong) id<UITabBarControllerDelegate> mainTabBarBehavior;
+
 @end
 
 @implementation OTAppConfiguration
@@ -239,7 +243,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     NSString *mixpanelToken = self.environmentConfiguration.MixpanelToken;
     
     [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
-    [Mixpanel sharedInstance].enableLogging = YES;
+    //[Mixpanel sharedInstance].enableLogging = YES;
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     mixpanel.minimumSessionDuration = 0;
     
@@ -338,6 +342,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     tabBarController.tabBar.layer.shadowRadius = 3;
     tabBarController.tabBar.layer.shadowColor = [UIColor darkGrayColor].CGColor;
     tabBarController.tabBar.layer.shadowOpacity = 0.3;
+
+    id<UITabBarControllerDelegate> mainTabBarBehavior = nil;
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        mainTabBarBehavior = [OTMainTabBarAnonymousBehavior new];
+        
+    }
+
+    [self sharedInstance].mainTabBarBehavior = mainTabBarBehavior;
+    tabBarController.delegate = mainTabBarBehavior;
 
     return tabBarController;
 }
