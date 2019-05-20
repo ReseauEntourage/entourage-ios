@@ -24,7 +24,6 @@ def sharedPods
     pod 'Firebase/Core'
     pod 'SnapKit', '~> 4.0.0'
     pod 'GooglePlaces'
-    pod 'GooglePlacePicker'
     pod 'GoogleMaps'
     pod 'SDWebImage'
 end

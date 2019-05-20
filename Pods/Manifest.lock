@@ -59,9 +59,6 @@ PODS:
   - GoogleMaps/Base (2.7.0)
   - GoogleMaps/Maps (2.7.0):
     - GoogleMaps/Base
-  - GooglePlacePicker (2.7.0):
-    - GoogleMaps (= 2.7.0)
-    - GooglePlaces (= 2.7.0)
   - GooglePlaces (2.7.0):
     - GoogleMaps/Base (= 2.7.0)
   - GoogleUtilities/AppDelegateSwizzler (5.3.0):
@@ -110,7 +107,6 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - Firebase/Core
   - GoogleMaps
-  - GooglePlacePicker
   - GooglePlaces
   - IQKeyboardManager
   - JVFloatLabeledTextField
@@ -140,7 +136,6 @@ SPEC REPOS:
     - FirebaseInstanceID
     - GoogleAppMeasurement
     - GoogleMaps
-    - GooglePlacePicker
     - GooglePlaces
     - GoogleUtilities
     - IQKeyboardManager
@@ -171,7 +166,6 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
   GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
-  GooglePlacePicker: 59ea44db173c58486ad6123993e81feefcbce9c3
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
   IQKeyboardManager: 79c57795f5c2408d259d37b9da2ed07efcbb5225
@@ -188,6 +182,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: cd22e3b2b7ddc7ac7414fd6dd5ef728aaed5176d
+PODFILE CHECKSUM: 62fa38924f355d8e30c074da2edb08b05c77a224
 
 COCOAPODS: 1.5.3
