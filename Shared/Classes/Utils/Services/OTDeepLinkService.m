@@ -87,11 +87,18 @@
     return [OTAppState getTopViewController];
 }
 
-- (void)showProfileFromAnywhereForUser:(NSNumber *)userId {
+- (void)showProfileFromAnywhereForUser:(NSString *)userId {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (currentUser.isAnonymous && [userId isEqualToString:currentUser.uuid]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [OTAppState presentAuthenticationOverlay:mainViewController];
+        return;
+    }
+
     UIStoryboard *userProfileStorybard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
     UINavigationController *rootUserProfileController = (UINavigationController *)[userProfileStorybard instantiateInitialViewController];
     OTUserViewController *userController = (OTUserViewController *)rootUserProfileController.topViewController;
-    userController.userId = userId;
+    userController.userId = [NSNumber numberWithInteger:userId.integerValue];
     
     [self showControllerFromAnywhere:rootUserProfileController];
 }
@@ -148,9 +155,15 @@
         [self openWithWebView:url];
         
     } else if ([key isEqualToString:@"profile"]) {
-        [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].sid];
+        [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].uuid];
         
     } else if ([key isEqualToString:@"messages"]) {
+        if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+            OTMainViewController *mainViewController = [self popToMainViewController];
+            [OTAppState presentAuthenticationOverlay:mainViewController];
+            return;
+        }
+
         UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:MESSAGES_TAB_INDEX];
         [self updateAppWindow:tabViewController];
         
