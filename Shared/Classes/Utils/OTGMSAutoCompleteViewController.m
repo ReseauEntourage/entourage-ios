@@ -27,9 +27,16 @@
     GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
     filter.type = filterType;
     
+    // Set the fields requested
+    GMSPlaceField fields = (GMSPlaceFieldName |
+                            GMSPlaceFieldPlaceID |
+                            GMSPlaceFieldFormattedAddress |
+                            GMSPlaceFieldCoordinate);
+    
     // Create and set Autocomplete VC
     [self setAutocompleteBounds:bounds];
     [self setAutocompleteFilter:filter];
+    [self setPlaceFields:fields];
 
     self.primaryTextHighlightColor = [ApplicationTheme shared].backgroundThemeColor;
     self.primaryTextColor = self.secondaryTextColor;
