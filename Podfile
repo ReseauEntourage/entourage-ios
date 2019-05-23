@@ -21,7 +21,7 @@ def sharedPods
     pod 'Mixpanel'
     pod 'kingpin', '0.3.1'
     pod 'FBSDKCoreKit'
-    pod 'Firebase/Core'
+    pod 'Firebase/Analytics'
     pod 'SnapKit', '~> 4.0.0'
     pod 'GooglePlaces'
     pod 'GoogleMaps'

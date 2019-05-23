@@ -28,31 +28,34 @@ PODS:
   - Fabric (1.7.12)
   - FBSDKCoreKit (4.36.0):
     - Bolts (~> 1.7)
-  - Firebase/Core (5.9.0):
+  - Firebase/Analytics (6.1.0):
+    - Firebase/Core
+  - Firebase/Core (6.1.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 5.2.0)
-  - Firebase/CoreOnly (5.9.0):
-    - FirebaseCore (= 5.1.4)
-  - FirebaseAnalytics (5.2.0):
-    - FirebaseCore (~> 5.1)
-    - FirebaseInstanceID (~> 3.2)
-    - GoogleAppMeasurement (~> 5.2)
-    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
-    - GoogleUtilities/MethodSwizzler (~> 5.2)
-    - GoogleUtilities/Network (~> 5.2)
-    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - FirebaseAnalytics (= 6.0.1)
+  - Firebase/CoreOnly (6.1.0):
+    - FirebaseCore (= 6.0.1)
+  - FirebaseAnalytics (6.0.1):
+    - FirebaseCore (~> 6.0)
+    - FirebaseInstanceID (~> 4.1)
+    - GoogleAppMeasurement (= 6.0.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
-  - FirebaseCore (5.1.4):
-    - GoogleUtilities/Logger (~> 5.2)
-  - FirebaseInstanceID (3.2.2):
-    - FirebaseCore (~> 5.1)
-    - GoogleUtilities/Environment (~> 5.3)
-    - GoogleUtilities/UserDefaults (~> 5.3)
-  - GoogleAppMeasurement (5.2.0):
-    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
-    - GoogleUtilities/MethodSwizzler (~> 5.2)
-    - GoogleUtilities/Network (~> 5.2)
-    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+  - FirebaseCore (6.0.1):
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/Logger (~> 6.0)
+  - FirebaseInstanceID (4.1.0):
+    - FirebaseCore (~> 6.0)
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/UserDefaults (~> 6.0)
+  - GoogleAppMeasurement (6.0.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3)
   - GoogleMaps (3.1.0):
     - GoogleMaps/Maps (= 3.1.0)
@@ -61,23 +64,23 @@ PODS:
     - GoogleMaps/Base
   - GooglePlaces (3.1.0):
     - GoogleMaps/Base (= 3.1.0)
-  - GoogleUtilities/AppDelegateSwizzler (5.3.0):
+  - GoogleUtilities/AppDelegateSwizzler (6.1.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (5.3.0)
-  - GoogleUtilities/Logger (5.3.0):
+  - GoogleUtilities/Environment (6.1.0)
+  - GoogleUtilities/Logger (6.1.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (5.3.0):
+  - GoogleUtilities/MethodSwizzler (6.1.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (5.3.0):
+  - GoogleUtilities/Network (6.1.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (5.3.0)"
-  - GoogleUtilities/Reachability (5.3.0):
+  - "GoogleUtilities/NSData+zlib (6.1.0)"
+  - GoogleUtilities/Reachability (6.1.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (5.3.0):
+  - GoogleUtilities/UserDefaults (6.1.0):
     - GoogleUtilities/Logger
   - IQKeyboardManager (6.1.1)
   - JVFloatLabeledTextField (1.2.1)
@@ -85,11 +88,11 @@ PODS:
   - libPhoneNumber-iOS (0.9.13)
   - MBProgressHUD (0.8)
   - Mixpanel (3.3.3)
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
   - OCMock (3.1)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -105,7 +108,7 @@ DEPENDENCIES:
   - Crashlytics (~> 3.9)
   - Fabric
   - FBSDKCoreKit
-  - Firebase/Core
+  - Firebase/Analytics
   - GoogleMaps
   - GooglePlaces
   - IQKeyboardManager
@@ -160,21 +163,21 @@ SPEC CHECKSUMS:
   Crashlytics: 058dc1ba579f6c100bc60a6878703779bff383c4
   Fabric: d7387db9a31aadff63b147a4b91d982c53afaa4f
   FBSDKCoreKit: 3b8e6570eedb443f9fc4af196a7bf39f18e3a3d8
-  Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
-  FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
-  FirebaseCore: 2a84b6b325792a4319ef71ee18819dcba08d2fd7
-  FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
-  GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
+  Firebase: 8d77bb33624ae9b62d745d82ec023de5f70f7e4f
+  FirebaseAnalytics: 629301c2b9925f3537d4093a17a72751ae5b7084
+  FirebaseCore: 66bdef3b310a026880e2a5bc8aa586ab62ce4543
+  FirebaseInstanceID: 27bed93a59b6685f5c3e0c028a878a764fd75c33
+  GoogleAppMeasurement: 51d8d9ea48f0ca44484d29cfbdef976fbd4fc336
   GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
   GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
-  GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
+  GoogleUtilities: 84df567c76ca84f67b7bb40e769fdd4acc746a10
   IQKeyboardManager: 79c57795f5c2408d259d37b9da2ed07efcbb5225
   JVFloatLabeledTextField: cfc44e3c4d493b2ed92ede8035e8e89c2912ba64
   kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
   libPhoneNumber-iOS: e444379ac18bbfbdefad571da735b2cd7e096caa
   MBProgressHUD: 8688c331cb64702283be37ab8d7d329cdd25f251
   Mixpanel: 3c3925c27f7a321d5978319a72f53f8f0885afc5
-  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   OCMock: 721c11680ae2d65d67f40932777194daf7002781
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SimpleKeychain: e2485c28d82fcece35e9e41faeac42ebfe614815
@@ -182,6 +185,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: 62fa38924f355d8e30c074da2edb08b05c77a224
+PODFILE CHECKSUM: a719ab5d3d6a92db5a0b1762083319999e5b7ce2
 
 COCOAPODS: 1.5.3
