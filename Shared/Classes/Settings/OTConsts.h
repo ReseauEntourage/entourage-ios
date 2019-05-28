@@ -69,6 +69,8 @@
 #define kNotificationUpdateBadge @"NotificationUpdateBadge"
 #define kSolidarityGuideNotification @"NotificationSolidarityGuide"
 
+#define kNotificationCurrentUserUpdated @"NotificationCurrentUserUpdated"
+
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
 #define ABOUT_TWITTER_URL @"https://twitter.com/r_entourage"

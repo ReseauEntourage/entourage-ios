@@ -234,10 +234,14 @@
     [[OTAuthService new] authWithPhone:phone
                               password:code
                               deviceId:deviceAPNSid
-                               success: ^(OTUser *user) {
+                               success: ^(OTUser *user, BOOL firstLogin) {
         NSLog(@"User : %@ authenticated successfully", user.email);
         user.phone = phone;
         [SVProgressHUD dismiss];
+        
+        // as the logged-out user
+        [OTLogger logEvent:@"Login_Success"
+           withParameters:@{@"first_login": [NSNumber numberWithBool:firstLogin]}];
         
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;

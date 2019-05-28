@@ -42,6 +42,7 @@
 #import <GooglePlaces/GooglePlaces.h>
 #import <GooglePlaces/GMSPlacesClient.h>
 #import "OTMainTabBarAnonymousBehavior.h"
+#import "OTAnalyticsObserver.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -82,6 +83,12 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 #if !DEBUG
     [self configureCrashReporting];
     [self configureFirebase];
+    [OTAnalyticsObserver init];
+#else
+    if ([[NSProcessInfo processInfo].arguments containsObject:@"-FIRDebugEnabled"]) {
+        [self configureFirebase];
+        [OTAnalyticsObserver init];
+    }
 #endif
     
     [IQKeyboardManager sharedManager].enable = YES;
@@ -233,9 +240,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:firebaseConfigFileName ofType:@"plist"];
     FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:filePath];
     
-    if (options) {
-        [FIRApp configureWithOptions:options];
-    }
+    if (!options) return;
+    
+    [FIRApp configureWithOptions:options];
 }
 
 - (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions

@@ -152,10 +152,14 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [[OTAuthService new] authWithPhone:[self.codeCountry stringByAppendingString: phone]
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
-                               success: ^(OTUser *user) {
+                               success: ^(OTUser *user, BOOL firstLogin) {
                                    
                                    [SVProgressHUD dismiss];
-                                   [OTLogger logEvent:@"Login_Success"];
+                                   
+                                   // as the logged-out user
+                                   [OTLogger logEvent:@"Login_Success"
+                                       withParameters:@{@"First_Login": [NSNumber numberWithBool:firstLogin]}];
+                                   
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    
                                    [OTLogger setupMixpanelWithUser:user];

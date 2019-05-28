@@ -2,6 +2,7 @@
 #import "OTUser.h"
 #import "OTTour.h"
 #import "OTTourPoint.h"
+#import "OTUserUpdate.h"
 
 #import "NSUserDefaults+OT.h"
 
@@ -22,6 +23,9 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 - (void)setCurrentUser:(OTUser *)user
 {
+    OTUserUpdate *update = [OTUserUpdate new];
+    update.previousValue = [self currentUser];
+    
     if (user)
 	{
 		NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:user];
@@ -33,8 +37,11 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 		[self removeObjectForKey:kUser];
         [self removeObjectForKey:kIsFirstLogin];
 	}
-    
+
 	[self synchronize];
+
+    update.currentValue = [self currentUser];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCurrentUserUpdated object:update];
 }
 
 - (void)setCurrentOngoingTour:(OTTour *)tour {
