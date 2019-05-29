@@ -602,6 +602,7 @@
     UINavigationController *authenticationFlow = [[UINavigationController alloc] initWithRootViewController:modalController];
     [OTAppConfiguration configureNavigationControllerAppearance:authenticationFlow];
     authenticationFlow.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    authenticationFlow.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [currentViewController presentViewController:authenticationFlow animated:YES completion:nil];
 }
 @end
