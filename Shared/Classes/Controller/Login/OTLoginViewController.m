@@ -182,6 +182,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
 
+                                   [self.view endEditing:YES];
                                    [OTAppState continueFromLoginScreen:self];
                                    
                                    if (self.fromLink) {
