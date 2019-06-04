@@ -73,6 +73,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *modifyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *loginLabel;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapNameBehavior;
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapModifyBehavior;
@@ -106,10 +107,8 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
    
     [self createBackFrontMenuButton];
 
-    if (self.currentUser.isAnonymous) {
-        self.modifyLabel.text = OTLocalizedString(@"menu_login");
-    }
     [self.modifyLabel underline];
+    [self.loginLabel underline];
 
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableHeaderView = self.headerView;
@@ -135,6 +134,12 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self loadUser];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
+    
+    BOOL anonymous = self.currentUser.isAnonymous;
+    self.nameLabel.hidden = anonymous;
+    self.modifyLabel.hidden = anonymous;
+    self.loginLabel.hidden = !anonymous;
+
     [OTAppConfiguration updateAppearanceForMainTabBar];
 }
 
@@ -272,12 +277,11 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 }
 
 - (IBAction)editProfile {
-    if (self.currentUser.isAnonymous) {
-        [OTAppState presentAuthenticationOverlay:self];
-        return;
-    }
-
     [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
+}
+
+- (IBAction)tappedLogin {
+    [OTAppState presentAuthenticationOverlay:self];
 }
 
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier {
