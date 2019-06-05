@@ -14,6 +14,7 @@
 @interface OTOnboardingNavigationBehavior ()
 
 @property (nonatomic, strong) OTUser *currentUser;
+@property (nonatomic, assign) BOOL hasPreLoginUser;
 
 @end
 
@@ -22,6 +23,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    self.preLoginUser = nil;
+    self.hasPreLoginUser = NO;
 }
 
 - (void)nextFromEmail {
@@ -30,6 +33,11 @@
 
 - (void)nextFromName {
     [OTAppState continueFromUserNameScreen:self.owner];
+}
+
+- (void)setPreLoginUser:(OTUser *)preLoginUser {
+    self.hasPreLoginUser = YES;
+    _preLoginUser = preLoginUser;
 }
 
 @end

@@ -2,7 +2,6 @@
 #import "OTUser.h"
 #import "OTTour.h"
 #import "OTTourPoint.h"
-#import "OTUserUpdate.h"
 
 #import "NSUserDefaults+OT.h"
 
@@ -23,8 +22,8 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 - (void)setCurrentUser:(OTUser *)user
 {
-    OTUserUpdate *update = [OTUserUpdate new];
-    update.previousValue = [self currentUser];
+    id previousValue = [self currentUser];
+    if (previousValue == nil) previousValue = [NSNull null];
     
     if (user)
 	{
@@ -40,8 +39,13 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 	[self synchronize];
 
-    update.currentValue = [self currentUser];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCurrentUserUpdated object:update];
+    id currentValue = [self currentUser];
+    if (currentValue == nil) currentValue = [NSNull null];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCurrentUserUpdated
+                                                        object:nil
+                                                      userInfo:@{@"previousValue": previousValue,
+                                                                 @"currentValue":  currentValue}];
 }
 
 - (void)setCurrentOngoingTour:(OTTour *)tour {

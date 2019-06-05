@@ -103,8 +103,9 @@
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     [self.validateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
-    if ([NSUserDefaults standardUserDefaults].currentUser) {
-        [NSUserDefaults standardUserDefaults].currentUser = nil;
+    // restore pre-login value of currentUser if the user is backing from the required onboarding
+    if (self.onboardingNavigation.hasPreLoginUser) {
+        [NSUserDefaults standardUserDefaults].currentUser = self.onboardingNavigation.preLoginUser;
     }
     
     [self.navigationController setNavigationBarHidden:YES];
@@ -242,6 +243,9 @@
         // as the logged-out user
         [OTLogger logEvent:@"Login_Success"
            withParameters:@{@"first_login": [NSNumber numberWithBool:firstLogin]}];
+        
+        // backup pre-login value of currentUser in case the user backs from the required onboarding
+        self.onboardingNavigation.preLoginUser = [NSUserDefaults standardUserDefaults].currentUser;
         
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;

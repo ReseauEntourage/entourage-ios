@@ -50,8 +50,6 @@
 		37D5D4BC22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */; };
 		37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37D5D4C02268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
-		37EA19AF229EF919007F1676 /* OTUserUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA19AE229EF919007F1676 /* OTUserUpdate.m */; };
-		37EA19B0229EF919007F1676 /* OTUserUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37EA19AE229EF919007F1676 /* OTUserUpdate.m */; };
 		6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */; };
 		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
@@ -1336,8 +1334,6 @@
 		37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyEntouragesAnonymousPlaceholder.xib; sourceTree = "<group>"; };
 		37D5D4BD2268AF5D009DFE1C /* OTRoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTRoundedButton.h; sourceTree = "<group>"; };
 		37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTRoundedButton.m; sourceTree = "<group>"; };
-		37EA19AD229EF919007F1676 /* OTUserUpdate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTUserUpdate.h; sourceTree = "<group>"; };
-		37EA19AE229EF919007F1676 /* OTUserUpdate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTUserUpdate.m; sourceTree = "<group>"; };
 		43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pfp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B1A847819E822150020FB93 /* pois_categories_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pois_categories_mock.json; sourceTree = "<group>"; };
@@ -3640,8 +3636,6 @@
 				A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */,
 				A202EAC22085D2C70058F32C /* UINavigationController+entourage.h */,
 				A202EABA2085D2C70058F32C /* UINavigationController+entourage.m */,
-				37EA19AD229EF919007F1676 /* OTUserUpdate.h */,
-				37EA19AE229EF919007F1676 /* OTUserUpdate.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -4897,7 +4891,6 @@
 				A202EB892085D2C80058F32C /* OTMenuViewController.m in Sources */,
 				A202EBD72085D2C80058F32C /* OTAssociationDetailsViewController.m in Sources */,
 				A202ED292085D2C80058F32C /* NSUserDefaults+OT.m in Sources */,
-				37EA19AF229EF919007F1676 /* OTUserUpdate.m in Sources */,
 				A202EB752085D2C80058F32C /* OTWebViewController.m in Sources */,
 				A202ED0B2085D2C80058F32C /* OTTourFactory.m in Sources */,
 				A202ED1B2085D2C80058F32C /* OTAnnouncementUI.m in Sources */,
@@ -5587,7 +5580,6 @@
 				A296B86720871CFC00F6AFBD /* OTOnboardingJoinService.m in Sources */,
 				A296B86820871CFC00F6AFBD /* OTTourService.m in Sources */,
 				A285C35D20F7787600D6625E /* OTAddEditEntourageDataSource.m in Sources */,
-				37EA19B0229EF919007F1676 /* OTUserUpdate.m in Sources */,
 				A296B86920871CFC00F6AFBD /* OTGroupedTableDataSourceBehavior.m in Sources */,
 				A296B86A20871CFC00F6AFBD /* OTJoinRequestedCell.m in Sources */,
 				A296B86B20871CFC00F6AFBD /* OTMyEntouragesDataSource.m in Sources */,

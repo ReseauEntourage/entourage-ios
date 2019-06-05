@@ -108,6 +108,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
+    
+    // restore pre-login value of currentUser if the user is backing from the required onboarding
+    if (self.onboardingNavigation.hasPreLoginUser) {
+        [NSUserDefaults standardUserDefaults].currentUser = self.onboardingNavigation.preLoginUser;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -179,6 +184,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                            [[OTPushNotificationsService new] promptUserForPushNotifications];
                                        }
                                    }
+                                   
+                                   // backup pre-login value of currentUser in case the user backs from the required onboarding
+                                   self.onboardingNavigation.preLoginUser = [NSUserDefaults standardUserDefaults].currentUser;
                                    
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
 

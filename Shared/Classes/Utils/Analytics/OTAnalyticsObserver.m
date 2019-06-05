@@ -8,7 +8,6 @@
 
 #import "OTAnalyticsObserver.h"
 #import "OTAuthService.h"
-#import "OTUserUpdate.h"
 
 @import FirebaseAnalytics;
 
@@ -50,9 +49,21 @@
 
 #pragma mark - Observers
 
-- (void)currentUserUpdated:(OTUserUpdate *)userUpdate {
-    OTUser *previousUser = userUpdate.previousValue;
-    OTUser *currentUser = userUpdate.currentValue;
+- (void)currentUserUpdated:(NSNotification *)userUpdate {
+    OTUser *previousUser;
+    OTUser *currentUser;
+    
+    if (userUpdate.userInfo[@"previousValue"] == [NSNull null]) {
+        previousUser = nil;
+    } else {
+        previousUser = userUpdate.userInfo[@"previousValue"];
+    }
+
+    if (userUpdate.userInfo[@"currentValue"] == [NSNull null]) {
+        currentUser = nil;
+    } else {
+        currentUser = userUpdate.userInfo[@"currentValue"];
+    }
 
     NSString *previousAuthenticationLevel = [OTAuthService authenticationLevelForUser:previousUser];
     NSString *currentAuthenticationLevel = [OTAuthService authenticationLevelForUser:currentUser];

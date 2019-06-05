@@ -243,6 +243,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     if (!options) return;
     
     [FIRApp configureWithOptions:options];
+    [FIRAnalytics setUserPropertyString:[OTAuthService currentUserAuthenticationLevel]
+                                forName:@"AuthenticationLevel"];
 }
 
 - (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions

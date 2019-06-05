@@ -11,6 +11,8 @@
 @interface OTOnboardingNavigationBehavior : OTBehavior
 
 @property (nonatomic, weak) IBOutlet UIViewController* owner;
+@property (nonatomic, strong) OTUser *preLoginUser;
+@property (nonatomic, readonly) BOOL hasPreLoginUser;
 
 - (void)nextFromEmail;
 - (void)nextFromName;
