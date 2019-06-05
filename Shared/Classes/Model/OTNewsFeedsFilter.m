@@ -34,6 +34,7 @@
     if (self) {
         self.isPro = IS_PRO_USER;
         OTSavedFilter *savedFilter = [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter;
+        self.showOnlyMyEntourages = NO;
         
         if (savedFilter) {
             
@@ -53,6 +54,7 @@
             self.showContribution = savedFilter.showContribution.boolValue;
             self.timeframeInHours = savedFilter.timeframeInHours.intValue;
             self.showFromOrganisation = savedFilter.showFromOrganisation.boolValue;
+            self.showOnlyMyEntourages = savedFilter.showOnlyMyEntourages.boolValue;
             
             self.showDemandeSocial = !self.showDemand ? self.showDemand : savedFilter.showDemandeSocial.boolValue;
             self.showDemandeHelp = !self.showDemand ? self.showDemand : savedFilter.showDemandeHelp.boolValue;
@@ -117,22 +119,19 @@
                  OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
+    } else if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        return @[
+                 [OTAppAppearance eventsFilterTitle],
+                 OTLocalizedString(@"filter_entourages_title"),
+                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                 OTLocalizedString(@"filter_timeframe_title")
+                 ];
     } else {
-        OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-        if (user.partner != nil) {
-            return @[
-                     [OTAppAppearance eventsFilterTitle],
-                     OTLocalizedString(@"filter_entourages_title"),
-                     OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
-                     OTLocalizedString(@"filter_timeframe_title")
-                     ];
-        } else {
-            return @[
-                     [OTAppAppearance eventsFilterTitle],
-                     OTLocalizedString(@"filter_entourages_title"),
-                     OTLocalizedString(@"filter_timeframe_title")
-                     ];
-        }
+        return @[
+                 [OTAppAppearance eventsFilterTitle],
+                 OTLocalizedString(@"filter_entourages_title"),
+                 OTLocalizedString(@"filter_timeframe_title")
+                 ];
     }
 }
 
@@ -262,9 +261,7 @@
     [array addObject:[self groupEntourageEvents]];
     
     [array addObject:[self groupActions]];
-    
-    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-    if (user.partner != nil) {
+    if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
         [array addObject:[self groupUniquement]];
     }
     NSArray *timeframe =  @[
@@ -402,9 +399,16 @@
     OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
     NSArray *uniquement = nil;
     if (user.partner == nil)
-        uniquement = @[];
+        uniquement = @[
+                       [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
+                                            active:self.showOnlyMyEntourages
+                                          children:@[]]
+                       ];
     else
         uniquement = @[
+                       [OTFeedItemFilter createFor:FeedItemFilterKeyMyEntourages
+                                            active:self.showOnlyMyEntourages
+                                          children:@[]],
                        [OTFeedItemFilter createFor:FeedItemFilterKeyOrganisation
                                             active:self.showFromOrganisation
                                           children:@[]],
@@ -452,6 +456,7 @@
              @"longitude": @(location.longitude),
              @"distance": @(self.distance),
              @"types" : [self getTypes],
+             @"show_my_entourages_only" : self.showOnlyMyEntourages ? @"true" : @"false",
              @"show_my_partner_only" : self.showFromOrganisation ? @"true" : @"false",
              @"show_past_events" : (self.showPastOuting && self.showOuting) ? @"true" : @"false",
              @"time_range" : @(self.timeframeInHours),
@@ -520,6 +525,9 @@
         case FeedItemFilterKeyTimeframe:
             self.timeframeInHours = ((OTFeedItemTimeframeFilter *)filter).timeframeInHours;
             break;
+        case FeedItemFilterKeyMyEntourages:
+            self.showOnlyMyEntourages = filter.active;
+            break;
         case FeedItemFilterKeyOrganisation:
             self.showFromOrganisation = filter.active;
             break;
@@ -548,9 +556,9 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|", self.showMedical, self.showSocial, self.showDistributive,
+    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|", self.showMedical, self.showSocial, self.showDistributive,
             self.showDemand, self.showContribution, self.showTours,
-            self.timeframeInHours,
+            self.showOnlyMyEntourages, self.timeframeInHours,
             
             self.location.latitude, self.location.longitude, self.distance, self.showFromOrganisation,
             self.showDemandeSocial, self.showDemandeHelp, self.showDemandeResource, self.showDemandeInfo, self.showDemandeSkill, self.showDemandeOther,
@@ -637,9 +645,11 @@
     copy.showDemand = self.showDemand;
     copy.showContribution = self.showContribution;
     copy.showTours = self.showTours;
+    copy.showOnlyMyEntourages = self.showOnlyMyEntourages;
     copy.timeframeInHours = self.timeframeInHours;
     copy.location = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude);
     copy.distance = self.distance;
+    copy.showOnlyMyEntourages = self.showOnlyMyEntourages;
     copy.showFromOrganisation = self.showFromOrganisation;
     
     copy.showNeighborhood = self.showNeighborhood;

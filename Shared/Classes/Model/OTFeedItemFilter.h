@@ -33,6 +33,7 @@ typedef enum {
     FeedItemFilterKeySocial,
     FeedItemFilterKeyDistributive,
     FeedItemFilterKeyOrganisation,
+    FeedItemFilterKeyMyEntourages,
     FeedItemFilterKeyMyEntouragesOnly,
     FeedItemFilterKeyMyOrganisationOnly,
 

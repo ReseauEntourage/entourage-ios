@@ -25,6 +25,7 @@
 @property (nonatomic) BOOL showNeighborhood;
 @property (nonatomic) BOOL showPrivateCircle;
 
+@property (nonatomic) BOOL showOnlyMyEntourages;
 @property (nonatomic) BOOL showFromOrganisation;
 
 @property (nonatomic) BOOL showDemandeSocial;
