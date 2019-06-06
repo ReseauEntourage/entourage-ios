@@ -55,7 +55,7 @@
 			<string>social.entourage.entourageios.beta</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>entourage-preprod</string>
+				<string>entourage-staging</string>
 			</array>
 		</dict>
 	</array>

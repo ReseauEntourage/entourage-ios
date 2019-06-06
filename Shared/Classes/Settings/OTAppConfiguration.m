@@ -167,8 +167,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
         
-        if ([[url scheme] isEqualToString:@"entourage-preprod"] ||
-            [[url scheme] isEqualToString:@"pfp-preprod"]) {
+        if ([[url scheme] isEqualToString:@"entourage-staging"] ||
+            [[url scheme] isEqualToString:@"pfp-staging"]) {
             [[OTDeepLinkService new] handleDeepLink:url];
             return YES;
         }

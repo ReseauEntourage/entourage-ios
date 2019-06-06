@@ -47,7 +47,7 @@
 			<string>social.entourage.entourageios.pfp.beta</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>pfp-prepod</string>
+				<string>pfp-staging</string>
 			</array>
 		</dict>
 	</array>
