@@ -418,6 +418,11 @@
 + (void)createEntourageFromController:(UIViewController*)viewController
                          withDelegate:(id<EntourageEditorDelegate>)delegate
                               asEvent:(BOOL)isEvent {
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [self presentAuthenticationOverlay:viewController];
+        return;
+    }
+
     UIStoryboard *editEntourageStoryboard = [UIStoryboard storyboardWithName:@"EntourageEditor" bundle:nil];
     UINavigationController *navController = (UINavigationController*)[editEntourageStoryboard instantiateInitialViewController];
     OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.childViewControllers[0];
@@ -432,11 +437,6 @@
                                withDelegate:(id<EntourageEditorDelegate>)delegate
                              isEditingEvent:(BOOL)isEditingEvent {
     
-    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
-        [self presentAuthenticationOverlay:controller];
-        return;
-    }
-
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
 
         [OTAppState createEntourageFromController:controller
@@ -449,6 +449,12 @@
         [controller performSegueWithIdentifier:@"OTMapOptionsSegue" sender:controller];
     }
     else {
+
+        if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+            [self presentAuthenticationOverlay:controller];
+            return;
+        }
+
         [controller performSegueWithIdentifier:@"EntourageEditor" sender:controller];
     }
 }

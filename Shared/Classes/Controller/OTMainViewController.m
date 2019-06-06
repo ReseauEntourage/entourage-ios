@@ -579,6 +579,10 @@
     }
     
     if (!IS_PRO_USER && !self.poisMapDelegate.isActive) {
+        if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+            return;
+        }
+
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
         return;
     }
@@ -1148,11 +1152,21 @@
 }
     
 - (void)createEvent {
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self];
+        return;
+    }
+
     self.addEditEvent = YES;
     [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
 }
 
 - (void) createEntouragewithAlertMessage:(NSString *)message {
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self];
+        return;
+    }
+
     [self dismissViewControllerAnimated:NO completion:^{
         //[self switchToNewsfeed];
         self.addEditEvent = NO;
