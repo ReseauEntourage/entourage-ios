@@ -82,14 +82,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
 #if !DEBUG
     [self configureCrashReporting];
+#endif
+
     [self configureFirebase];
     [OTAnalyticsObserver init];
-#else
-    if ([[NSProcessInfo processInfo].arguments containsObject:@"-FIRDebugEnabled"]) {
-        [self configureFirebase];
-        [OTAnalyticsObserver init];
-    }
-#endif
     
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
