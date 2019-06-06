@@ -1433,6 +1433,8 @@
         [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
                                                                    mapHeight:MAPVIEW_HEIGHT
                                                                   showFilter:[OTAppConfiguration supportsFilteringEvents]]];
+        self.isTourListDisplayed = YES;
+        [self configureNavigationBar];
     }];
     
     [self configureNavigationBar];
