@@ -46,7 +46,7 @@
 }
 
 - (BOOL)canInvite {
-    return YES;
+    return [self.entourage.joinStatus isEqualToString:JOIN_ACCEPTED];
 }
 
 - (BOOL)isActive {

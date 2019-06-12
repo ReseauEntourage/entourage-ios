@@ -56,11 +56,7 @@
     [self refreshTable:items];
     
     // Invite friend row
-    id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:feedItem] getStateInfo];
-    BOOL shouldShowInviteOption = [stateInfo canChangeEditState] && [stateInfo canInvite];
-    
-    //EMA-2348
-    shouldShowInviteOption = YES;
+    BOOL shouldShowInviteOption = YES;
     
     if (shouldShowInviteOption) {
         // Invite item
