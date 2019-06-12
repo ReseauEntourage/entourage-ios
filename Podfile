@@ -22,6 +22,8 @@ def sharedPods
     pod 'kingpin', '0.3.1'
     pod 'FBSDKCoreKit'
     pod 'Firebase/Analytics'
+    pod 'Firebase/Messaging'
+    pod 'Firebase/InAppMessagingDisplay'
     pod 'SnapKit', '~> 4.0.0'
     pod 'GooglePlaces'
     pod 'GoogleMaps'
