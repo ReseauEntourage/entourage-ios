@@ -49,6 +49,7 @@
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior *sourceBehavior;
 
+@property (nonatomic) UIView *mapView;
 @property (nonatomic) UIView *panToShowMapView;
 @property (nonatomic) UIView *filterView;
 @property (nonatomic) UIButton *showEventsOnlyButton;
@@ -95,6 +96,11 @@
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    
+    if ([otherGestureRecognizer.view isDescendantOfView:self.mapView]) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -181,6 +187,7 @@
     showCurrentLocationButton.layer.cornerRadius = buttonSize / 2;
     [showCurrentLocationButton addTarget:self action:@selector(requestCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:mapView];
+    self.mapView = mapView;
     //[headerView addSubview:showCurrentLocationButton];
     [headerView sendSubviewToBack:mapView];
     //[headerView bringSubviewToFront:showCurrentLocationButton];
