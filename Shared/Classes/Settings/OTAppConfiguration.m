@@ -43,6 +43,7 @@
 #import <GooglePlaces/GMSPlacesClient.h>
 #import "OTMainTabBarAnonymousBehavior.h"
 #import "OTAnalyticsObserver.h"
+#import <FirebaseInAppMessaging/FirebaseInAppMessaging.h>
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -241,6 +242,12 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [FIRApp configureWithOptions:options];
     [FIRAnalytics setUserPropertyString:[OTAuthService currentUserAuthenticationLevel]
                                 forName:@"AuthenticationLevel"];
+    if ([NSUserDefaults standardUserDefaults].currentUser) {
+        [FIRInAppMessaging inAppMessaging].messageDisplaySuppressed = NO;
+    }
+    else {
+        [FIRInAppMessaging inAppMessaging].messageDisplaySuppressed = YES;
+    }
 }
 
 - (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions
