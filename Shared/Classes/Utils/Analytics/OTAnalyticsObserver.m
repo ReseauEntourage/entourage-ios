@@ -68,9 +68,21 @@
     NSString *previousAuthenticationLevel = [OTAuthService authenticationLevelForUser:previousUser];
     NSString *currentAuthenticationLevel = [OTAuthService authenticationLevelForUser:currentUser];
 
-    if ([currentAuthenticationLevel isEqualToString:previousAuthenticationLevel]) return;
-
-    [FIRAnalytics setUserPropertyString:currentAuthenticationLevel forName:@"AuthenticationLevel"];
+    if (![currentAuthenticationLevel isEqualToString:previousAuthenticationLevel]) {
+        [FIRAnalytics setUserPropertyString:currentAuthenticationLevel forName:@"AuthenticationLevel"];
+    }
+    
+    if (currentUser == nil && previousUser != nil) {
+        for (NSString *key in previousUser.firebaseProperties) {
+            // we try to unset the user properties after a logout, but it doesn't seem to work...
+            [FIRAnalytics setUserPropertyString:nil forName:key];
+        }
+    }
+    else if (![currentUser.firebaseProperties isEqualToDictionary:previousUser.firebaseProperties]) {
+        for (NSString *key in currentUser.firebaseProperties) {
+            [FIRAnalytics setUserPropertyString:currentUser.firebaseProperties[key] forName:key];
+        }
+    }
 }
 
 @end

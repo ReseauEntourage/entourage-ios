@@ -156,8 +156,9 @@
         } else {
             [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"addressSaved")];
             
+            OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+            
             if (self.isShownOnStartup) {
-                OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
                 [OTLogger logEvent:@"AcceptGeoloc"];
                 BOOL pushNotificationsEnabled = [currentUser isRegisteredForPushNotifications];
                 
@@ -178,6 +179,14 @@
             } else {
                 [self.navigationController popViewControllerAnimated:YES];
             }
+            
+            // reload current user to get new firebase_properties...
+            [[OTAuthService new] getDetailsForUser:currentUser.uuid success:^(OTUser *user) {
+                [NSUserDefaults standardUserDefaults].currentUser = user;
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            } failure:^(NSError *error) {
+                NSLog(@"@fails getting user %@", error.description);
+            }];
         }
     }];
 }

@@ -239,9 +239,11 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
     if (!options) return;
     
+    [[FIRConfiguration sharedInstance] setLoggerLevel:FIRLoggerLevelDebug];
     [FIRApp configureWithOptions:options];
     [FIRAnalytics setUserPropertyString:[OTAuthService currentUserAuthenticationLevel]
                                 forName:@"AuthenticationLevel"];
+    [FIRMessaging messaging].delegate = (id<FIRMessagingDelegate>)[UIApplication sharedApplication].delegate;
     if ([NSUserDefaults standardUserDefaults].currentUser) {
         [FIRInAppMessaging inAppMessaging].messageDisplaySuppressed = NO;
     }
@@ -545,6 +547,16 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         UIApplicationState state = [[UIApplication sharedApplication] applicationState];
         [pnService handleRemoteNotification:userInfo applicationState:state];
     }
+}
+
+#pragma mark - Firebase Messaging
+
++ (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
+    
+}
+
++ (void)messaging:(FIRMessaging *)messaging didReceiveMessage:(FIRMessagingRemoteMessage *)remoteMessage {
+    
 }
 
 #pragma - Appearance
