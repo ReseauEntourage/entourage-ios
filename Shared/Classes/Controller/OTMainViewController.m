@@ -515,9 +515,9 @@
     
     MKCoordinateRegion region;
     if([OTLocationManager sharedInstance].currentLocation)
-        region = MKCoordinateRegionMakeWithDistance([OTLocationManager sharedInstance].currentLocation.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
+        region = MKCoordinateRegionMakeWithDistance([OTLocationManager sharedInstance].currentLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
     else
-        region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
+        region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
     [self.mapView setRegion:region animated:NO];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
@@ -1472,7 +1472,7 @@
         self.mapView.frame = mapFrame;
         
         MKCoordinateRegion region;
-        region = MKCoordinateRegionMakeWithDistance(self.mapView.centerCoordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
+        region = MKCoordinateRegionMakeWithDistance(self.mapView.centerCoordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
         [self.mapView setRegion:region animated:animated];
         [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
                                                                    mapHeight:[UIScreen mainScreen].bounds.size.height
