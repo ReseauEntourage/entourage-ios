@@ -513,11 +513,18 @@
     
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     
-    MKCoordinateRegion region;
-    if([OTLocationManager sharedInstance].currentLocation)
-        region = MKCoordinateRegionMakeWithDistance([OTLocationManager sharedInstance].currentLocation.coordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    CLLocationCoordinate2D mapCenter;
+
+    if(currentUser.hasActionZoneDefined)
+        mapCenter = currentUser.address.location.coordinate;
+    else if([OTLocationManager sharedInstance].currentLocation)
+        mapCenter = [OTLocationManager sharedInstance].currentLocation.coordinate;
     else
-        region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+        mapCenter = CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON);
+
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapCenter, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+
     [self.mapView setRegion:region animated:NO];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
