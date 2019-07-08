@@ -179,14 +179,6 @@
             } else {
                 [self.navigationController popViewControllerAnimated:YES];
             }
-            
-            // reload current user to get new firebase_properties...
-            [[OTAuthService new] getDetailsForUser:currentUser.uuid success:^(OTUser *user) {
-                [NSUserDefaults standardUserDefaults].currentUser = user;
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            } failure:^(NSError *error) {
-                NSLog(@"@fails getting user %@", error.description);
-            }];
         }
     }];
 }

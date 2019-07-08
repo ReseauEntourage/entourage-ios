@@ -42,7 +42,6 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 @interface OTUser ()
 @property (nonatomic, readwrite) NSString *uuid;
 @property (nonatomic, readwrite) NSArray *memberships;
-@property (nonatomic, readwrite) NSDictionary<NSString *, NSString *> *firebaseProperties;
 @property (nonatomic, readwrite) BOOL anonymous;
 @end
 
@@ -277,6 +276,10 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     }
     
     return [NSDictionary dictionaryWithDictionary:output];
+}
+
+- (void)setFirebaseProperties:(NSDictionary<NSString *,NSString *> *)firebaseProperties {
+    _firebaseProperties = [self sanitizeFirebaseProperties:firebaseProperties];
 }
 
 @end

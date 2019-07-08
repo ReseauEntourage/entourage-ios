@@ -65,7 +65,7 @@
             } else {
                 
                 if (currentUser.isAnonymous) {
-                    // nothing for now
+                    [OTAppState navigateToPermissionsScreens:nil];
                 } else if (![currentUser hasActionZoneDefined]) {
                     // Force the users to define action zone
                     // The Entourage app has Ignore button, while the pfp does not have it
@@ -567,6 +567,11 @@
             [OTAppState navigateToRootController:rightsViewController];
             return;
         }
+        // when coming from the startup page, prevent back navigation
+        if ([viewController isKindOfClass:[OTStartupViewController class]]) {
+            [viewController.navigationController setViewControllers:@[rightsViewController] animated:YES];
+            return;
+        }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];
     } else {
         [OTAppState navigateToRootController:rightsViewController];
@@ -580,6 +585,11 @@
     if (viewController) {
         if ([viewController isKindOfClass:[rightsViewController class]]) {
             [OTAppState navigateToRootController:rightsViewController];
+            return;
+        }
+        // when coming from the startup page, prevent back navigation
+        if ([viewController isKindOfClass:[OTStartupViewController class]]) {
+            [viewController.navigationController setViewControllers:@[rightsViewController] animated:YES];
             return;
         }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];
