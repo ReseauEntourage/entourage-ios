@@ -130,10 +130,13 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLocationUpdated object:nil userInfo:info];
 }
 
+- (void)refreshAuthorizationStatus {
+    self.status = CLLocationManager.authorizationStatus;
+    [self notifyStatus];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     self.status = status;
-    if(status == kCLAuthorizationStatusNotDetermined)
-        return;
     [self notifyStatus];
 }
 

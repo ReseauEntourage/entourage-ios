@@ -146,6 +146,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)applicationWillEnterForeground:(UIApplication *)application {
     
     if ([NSUserDefaults standardUserDefaults].currentUser) {
+        [[OTLocationManager sharedInstance] refreshAuthorizationStatus];
         [[OTLocationManager sharedInstance] startLocationUpdates];
     }
 }

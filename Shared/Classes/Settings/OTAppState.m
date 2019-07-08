@@ -64,9 +64,7 @@
                 [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
             } else {
                 
-                if (currentUser.isAnonymous) {
-                    [OTAppState navigateToPermissionsScreens:nil];
-                } else if (![currentUser hasActionZoneDefined]) {
+                if (![currentUser hasActionZoneDefined]) {
                     // Force the users to define action zone
                     // The Entourage app has Ignore button, while the pfp does not have it
                     [OTAppState navigateToLocationRightsScreen:nil];

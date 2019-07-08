@@ -29,8 +29,8 @@
 "yes" = "Oui";
 "ask_permission_location_create_tour" = "Pour créer une maraude, vous devez activer la géolocalisation";
 "ask_permission_location_recenter_map" = "Pour recentrer autour de vous, vous devez activer la géolocalisation";
-"no_location_create_tour" = "La géolocalisation  de votre maraude a recontré une erreur.";
-"no_location_recenter_map" = "La géolocalisation a recontré une erreur.";
+"no_location_create_tour" = "La géolocalisation  de votre maraude a rencontré une erreur.";
+"no_location_recenter_map" = "La géolocalisation a rencontré une erreur.";
 "activate" = "Activer";
 "join" = "Rejoindre";
 
