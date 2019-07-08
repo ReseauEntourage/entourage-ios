@@ -41,6 +41,8 @@
 #import "OTAPIConsts.h"
 #import <GooglePlaces/GooglePlaces.h>
 #import <GooglePlaces/GMSPlacesClient.h>
+#import "OTMainTabBarAnonymousBehavior.h"
+#import "OTAnalyticsObserver.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -48,6 +50,9 @@
 const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 @interface OTAppConfiguration ()
+
+@property (nonatomic, strong) id<UITabBarControllerDelegate> mainTabBarBehavior;
+
 @end
 
 @implementation OTAppConfiguration
@@ -73,12 +78,14 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 - (BOOL)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions {
 
-    [[OTDebugLog sharedInstance] setConsoleOutput];
+//    [[OTDebugLog sharedInstance] setConsoleOutput];
     
 #if !DEBUG
     [self configureCrashReporting];
-    [self configureFirebase];
 #endif
+
+    [self configureFirebase];
+    [OTAnalyticsObserver init];
     
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
@@ -160,8 +167,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
         
-        if ([[url scheme] isEqualToString:@"entourage-preprod"] ||
-            [[url scheme] isEqualToString:@"pfp-preprod"]) {
+        if ([[url scheme] isEqualToString:@"entourage-staging"] ||
+            [[url scheme] isEqualToString:@"pfp-staging"]) {
             [[OTDeepLinkService new] handleDeepLink:url];
             return YES;
         }
@@ -229,9 +236,11 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     NSString *filePath = [[NSBundle mainBundle] pathForResource:firebaseConfigFileName ofType:@"plist"];
     FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:filePath];
     
-    if (options) {
-        [FIRApp configureWithOptions:options];
-    }
+    if (!options) return;
+    
+    [FIRApp configureWithOptions:options];
+    [FIRAnalytics setUserPropertyString:[OTAuthService currentUserAuthenticationLevel]
+                                forName:@"AuthenticationLevel"];
 }
 
 - (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions
@@ -239,21 +248,25 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     NSString *mixpanelToken = self.environmentConfiguration.MixpanelToken;
     
     [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
-    [Mixpanel sharedInstance].enableLogging = YES;
+    //[Mixpanel sharedInstance].enableLogging = YES;
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     mixpanel.minimumSessionDuration = 0;
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
-        [[OTAuthService new] getDetailsForUser:currentUser.sid success:^(OTUser *user) {
+        [[OTAuthService new] getDetailsForUser:currentUser.uuid success:^(OTUser *user) {
             [NSUserDefaults standardUserDefaults].currentUser = user;
             [[NSUserDefaults standardUserDefaults] synchronize];
         } failure:^(NSError *error) {
             NSLog(@"@fails getting user %@", error.description);
         }];
         
-        [OTLogger setupMixpanelWithUser:currentUser];
-        [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
+        if (!currentUser.isAnonymous) {
+          [OTLogger setupMixpanelWithUser:currentUser];
+        }
+        if (!currentUser.isAnonymous) {
+          [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
+        }
     }
 }
 
@@ -334,6 +347,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     tabBarController.tabBar.layer.shadowRadius = 3;
     tabBarController.tabBar.layer.shadowColor = [UIColor darkGrayColor].CGColor;
     tabBarController.tabBar.layer.shadowOpacity = 0.3;
+
+    id<UITabBarControllerDelegate> mainTabBarBehavior = nil;
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        mainTabBarBehavior = [OTMainTabBarAnonymousBehavior new];
+        
+    }
+
+    [self sharedInstance].mainTabBarBehavior = mainTabBarBehavior;
+    tabBarController.delegate = mainTabBarBehavior;
 
     return tabBarController;
 }
@@ -589,14 +611,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return YES;
 }
 
-+ (BOOL)shouldShowIntroTutorial
++ (BOOL)shouldShowIntroTutorial:(OTUser*)user
 {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
     }
     
-    // EMA-1991, EMA-2351
-    return YES;
+    return !user.isAnonymous;
 }
 
 + (BOOL)shouldShowAddEventDisclaimer

@@ -11,6 +11,7 @@
 #import "NSDictionary+Parsing.h"
 
 NSString *const kKeySid = @"id";
+NSString *const kKeyUuid = @"uuid";
 NSString *const kKeyType = @"user_type";
 NSString *const kKeyEmail = @"email";
 NSString *const kKeyDisplayName = @"display_name";
@@ -27,6 +28,7 @@ NSString *const kKeyOrganization = @"organization";
 NSString *const kKeyConversation = @"conversation";
 NSString *const kKeyPartner = @"partner";
 NSString *const kKeyRoles = @"roles";
+NSString *const kKeyAnonymous = @"anonymous";
 NSString *const kMemberships = @"memberships";
 NSString *const kAddress = @"address";
 
@@ -37,7 +39,9 @@ NSString *const kVisitedUserTag = @"visited";
 NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 
 @interface OTUser ()
+@property (nonatomic, readwrite) NSString *uuid;
 @property (nonatomic, readwrite) NSArray *memberships;
+@property (nonatomic, readwrite) BOOL anonymous;
 @end
 
 @implementation OTUser
@@ -48,6 +52,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     if (self)
     {
         _sid = [dictionary numberForKey:kKeySid];
+        _uuid = [dictionary stringForKey:kKeyUuid];
         _type = [dictionary stringForKey:kKeyType];
         _email = [dictionary stringForKey:kKeyEmail];
         _avatarURL = [dictionary stringForKey:kKeyAvatarURL];
@@ -62,6 +67,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         _encounterCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEncounterCount];
         _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
         _partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kKeyPartner]];
+        _anonymous = [dictionary boolForKey:kKeyAnonymous defaultValue:NO];
         
         if ([[dictionary allKeys] containsObject:kKeyConversation]) {
             _conversation = [[OTConversation alloc] initWithDictionary:[dictionary objectForKey:kKeyConversation]];
@@ -114,6 +120,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.sid forKey:kKeySid];
+    [encoder encodeObject:self.uuid forKey:kKeyUuid];
     [encoder encodeObject:self.type forKey:kKeyType];
     [encoder encodeObject:self.email forKey:kKeyEmail];
     [encoder encodeObject:self.avatarURL forKey:kKeyAvatarURL];
@@ -130,6 +137,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     [encoder encodeObject:self.partner forKey:kKeyPartner];
     [encoder encodeObject:self.conversation forKey:kKeyConversation];
     [encoder encodeObject:self.roles forKey:kKeyRoles];
+    [encoder encodeBool:self.anonymous forKey:kKeyAnonymous];
     [encoder encodeObject:self.memberships forKey:kMemberships];
     [encoder encodeObject:self.address forKey:kAddress];
 }
@@ -139,6 +147,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     if ((self = [super init]))
     {
         self.sid = [decoder decodeObjectForKey:kKeySid];
+        self.uuid = [decoder decodeObjectForKey:kKeyUuid];
         self.type = [decoder decodeObjectForKey:kKeyType];
         self.email = [decoder decodeObjectForKey:kKeyEmail];
         self.avatarURL = [decoder decodeObjectForKey:kKeyAvatarURL];
@@ -155,6 +164,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         self.partner = [decoder decodeObjectForKey:kKeyPartner];
         self.conversation = [decoder decodeObjectForKey:kKeyConversation];
         self.roles = [decoder decodeObjectForKey:kKeyRoles];
+        self.anonymous = [decoder decodeBoolForKey:kKeyAnonymous];
         self.memberships = [decoder decodeObjectForKey:kMemberships];
         self.address = [decoder decodeObjectForKey:kAddress];
     }
@@ -195,6 +205,11 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     return [self.roles containsObject:kEthicsCharterSignedTag];
 }
 
+- (BOOL)isAnonymous
+{
+    return self.anonymous;
+}
+
 - (NSString*)roleTag {
     if (self.roles) {
         NSString *key = self.roles.firstObject;
@@ -233,6 +248,15 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     }
     
     return OTLocalizedString(@"defineActionZoneDescription");
+}
+
+- (NSString *)uuid {
+    if (_uuid != nil) {
+        return _uuid;
+    }
+
+    // fallback to legacy id
+    return self.sid.stringValue;
 }
 
 @end

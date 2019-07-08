@@ -175,7 +175,8 @@
     
     [self setup];
     
-    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if ([OTAppConfiguration shouldShowIntroTutorial:currentUser]) {
         [OTAppState presentTutorialScreen];
     }
     
@@ -250,6 +251,8 @@
     self.poisMapDelegate = [[OTGuideMapDelegate alloc] initWithMapController:self];
     [self.tableView configureWithMapView:self.mapView];
     self.tableView.feedItemsDelegate = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 140;
     [self configureMapView];
     
     if (OTSharedOngoingTour.isOngoing ||
@@ -576,6 +579,10 @@
     }
     
     if (!IS_PRO_USER && !self.poisMapDelegate.isActive) {
+        if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+            return;
+        }
+
         [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
         return;
     }
@@ -1145,11 +1152,21 @@
 }
     
 - (void)createEvent {
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self];
+        return;
+    }
+
     self.addEditEvent = YES;
     [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
 }
 
 - (void) createEntouragewithAlertMessage:(NSString *)message {
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self];
+        return;
+    }
+
     [self dismissViewControllerAnimated:NO completion:^{
         //[self switchToNewsfeed];
         self.addEditEvent = NO;
@@ -1301,7 +1318,7 @@
 }
 
 - (void)showUserProfile:(NSNumber*)userId {
-    [[OTAuthService new] getDetailsForUser:userId success:^(OTUser *user) {
+    [[OTAuthService new] getDetailsForUser:userId.stringValue success:^(OTUser *user) {
         [self performSegueWithIdentifier:@"UserProfileSegue" sender:user];
     } failure:^(NSError *error) {
         NSLog(@"@fails getting user %@", error.description);
@@ -1416,6 +1433,8 @@
         [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
                                                                    mapHeight:MAPVIEW_HEIGHT
                                                                   showFilter:[OTAppConfiguration supportsFilteringEvents]]];
+        self.isTourListDisplayed = YES;
+        [self configureNavigationBar];
     }];
     
     [self configureNavigationBar];

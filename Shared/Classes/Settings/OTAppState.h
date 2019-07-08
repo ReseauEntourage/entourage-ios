@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OTWelcomeViewController.h"
 
 @protocol InviteSourceDelegate;
 @protocol OTFeedItemsFilterDelegate;
@@ -24,19 +25,16 @@
 + (void)switchToMessagesScreen;
 + (void)switchToMainScreenAndResetAppWindow:(BOOL)reset;
 + (UIViewController *)getTopViewController;
-+ (UIViewController *)getTopRootViewController;
 + (void)popToRootCurrentTab;
 
-+ (void)navigateToLoginScreen:(NSURL*)link;
++ (void)navigateToLoginScreen:(NSURL*)link sender:(UIViewController * _Nullable)sender;
 + (void)navigateToStartupScreen;
-+ (void)continueFromStartupScreenForOnboarding;
-+ (void)navigateToPermissionsScreens;
-+ (void)continueFromStartupScreen;
-+ (void)continueFromWelcomeScreenForOnboarding;
-+ (void)continueFromWelcomeScreen;
-+ (void)continueFromLoginScreen;
-+ (void)continueFromUserEmailScreen;
-+ (void)continueFromUserNameScreen;
++ (void)navigateToPermissionsScreens:(UIViewController * _Nullable)currentViewController;
++ (void)continueFromStartupScreen:(UIViewController * _Nonnull)currentViewController creatingUser:(BOOL)createUser;
++ (void)continueFromWelcomeScreen:(OTWelcomeViewController * _Nonnull)welcomeScreen;
++ (void)continueFromLoginScreen:(UIViewController * _Nullable)currentViewController;
++ (void)continueFromUserEmailScreen:(UIViewController * _Nonnull)currentViewController;
++ (void)continueFromUserNameScreen:(UIViewController * _Nonnull)currentViewController;
 + (void)continueEditingEntourage:(OTEntourage*)entourage fromController:(UIViewController*)controller;
 
 + (void)launchFeedsFilteringFromController:(UIViewController*)controller
@@ -69,4 +67,6 @@
 + (void)navigateToLocationRightsScreen:(UIViewController*)viewController;
 + (void)navigateToNotificationsRightsScreen:(UIViewController*)viewController;
 + (void)navigateToNativeNotificationsPreferences;
+
++ (void)presentAuthenticationOverlay:(UIViewController * _Nonnull)currentViewController;
 @end

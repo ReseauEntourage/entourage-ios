@@ -44,6 +44,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *optionsButton;
 @property (nonatomic, strong) UIView *leftLineView;
 @property (nonatomic, strong) UIView *rightLineView;
+@property (nonatomic) BOOL anonymousMode;
 @end
 
 @implementation OTMyEntouragesViewController
@@ -51,22 +52,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.anonymousMode = IS_ANONYMOUS_USER;
+
     self.optionsButton.hidden = YES;
     
-    [self.invitationsCollectionDataSource initialize];
-    [self.entouragesTableDataSource initialize];
+    if (!self.anonymousMode) {
+        [self.invitationsCollectionDataSource initialize];
+        [self.entouragesTableDataSource initialize];
+        self.entouragesDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.entouragesDataSource.tableView.estimatedRowHeight = 200;
+        self.entouragesDataSource.noDataSubtitle.text = [OTAppAppearance noMessagesDescription];
+    } else {
+        UIView *anonymousPlaceholder = [[[NSBundle mainBundle]
+                                         loadNibNamed:@"MyEntouragesAnonymousPlaceholder"
+                                                owner:nil options:nil] firstObject];
+        anonymousPlaceholder.frame = self.view.frame;
+        [self.view addSubview:anonymousPlaceholder];
+    }
+
     [self.toggleCollectionView initialize];
     [self.toggleCollectionView toggle:NO animated:NO];
     [self.optionsBehavior configureWith:self.optionsDelegate];
-    self.entouragesDataSource.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.entouragesDataSource.tableView.estimatedRowHeight = 200;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateBadge:)
                                                  name:kUpdateBadgeCountNotification
                                                object:nil];
-    
-    self.entouragesDataSource.noDataSubtitle.text = [OTAppAppearance noMessagesDescription];
 }
 
 - (void)dealloc {
@@ -76,8 +87,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self loadInvitations];
-    [self.entouragesDataSource loadData];
+    if (!self.anonymousMode) {
+        [self loadInvitations];
+        [self.entouragesDataSource loadData];
+    }
     [OTAppConfiguration updateAppearanceForMainTabBar];
 }
 
@@ -85,7 +98,9 @@
     [OTLogger logEvent:@"Screen17_2MyMessagesView"];
     [super viewDidAppear:animated];
     [self configureNavigationBar];
-    [self.entouragesDataSource.tableView reloadRowsAtIndexPaths:[self.entouragesDataSource.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+    if (!self.anonymousMode) {
+        [self.entouragesDataSource.tableView reloadRowsAtIndexPaths:[self.entouragesDataSource.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+    }
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
@@ -206,15 +221,19 @@
 - (void)showAllMessages {
     self.leftLineView.hidden = NO;
     self.rightLineView.hidden = YES;
-    ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = NO;
-    [self.entouragesDataSource loadData];
+    if (!self.anonymousMode) {
+        ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = NO;
+        [self.entouragesDataSource loadData];
+    }
 }
 
 - (void)showUnread {
     self.leftLineView.hidden = YES;
     self.rightLineView.hidden = NO;
-    ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = YES;
-    [self.entouragesDataSource loadData];
+    if (!self.anonymousMode) {
+        ((OTMyEntouragesFilter *)self.entouragesDataSource.currentFilter).isUnread = YES;
+        [self.entouragesDataSource loadData];
+    }
 }
 
 @end

@@ -33,6 +33,7 @@
 #import "OTFeedItemFactory.h"
 #import "OTActiveFeedItemViewController.h"
 #import "OTMapViewController.h"
+#import "OTAuthenticationModalViewController.h"
 
 #define TUTORIAL_DELAY 2
 
@@ -52,9 +53,9 @@
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
         
-        if ([OTAppConfiguration shouldShowIntroTutorial] &&
+        if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
             ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
-            [OTAppState continueFromLoginScreen];
+            [OTAppState continueFromLoginScreen:nil];
 
         } else {
             NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -63,13 +64,15 @@
                 [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
             } else {
                 
-                if (![currentUser hasActionZoneDefined]) {
+                if (currentUser.isAnonymous) {
+                    // nothing for now
+                } else if (![currentUser hasActionZoneDefined]) {
                     // Force the users to define action zone
                     // The Entourage app has Ignore button, while the pfp does not have it
                     [OTAppState navigateToLocationRightsScreen:nil];
                 } else {
                     [[OTLocationManager sharedInstance] startLocationUpdates];
-                    [OTAppState navigateToPermissionsScreens];
+                    [OTAppState navigateToPermissionsScreens:nil];
                 }
             }
         }
@@ -102,11 +105,16 @@
     [[OTAppState getTopViewController] presentViewController:tutorialController animated:YES completion:nil];
 }
 
-+ (void)navigateToLoginScreen:(NSURL*)link
++ (void)navigateToLoginScreen:(NSURL*)link sender:(UIViewController * _Nullable)sender
 {
     OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
     loginController.fromLink = link;
-    [[OTAppState getTopViewController] showViewController:loginController sender:self];
+    if ([sender isKindOfClass:[OTPhoneViewController class]]) {
+        [sender.navigationController pushViewController:loginController animated:YES];
+    }
+    else {
+        [[OTAppState getTopViewController] showViewController:loginController sender:self];
+    }
 }
 
 + (void)returnToLogin {
@@ -220,75 +228,56 @@
     }
 }
 
-+ (void)continueFromStartupScreen
-{
-    return [OTAppState continueFromStartupScreenCreatingUser:NO];
++ (void)continueFromStartupScreen:(UIViewController * _Nonnull)currentViewController creatingUser:(BOOL)createUser; {
+    UIViewController *firstAuthenticationScreen = [self firstAuthenticationScreenCreatingUser:createUser];
+    [currentViewController.navigationController pushViewController:firstAuthenticationScreen
+                                                  animated:YES];
 }
 
-+ (void)continueFromStartupScreenForOnboarding
-{
-    return [OTAppState continueFromStartupScreenCreatingUser:YES];
-}
++ (UIViewController *)firstAuthenticationScreenCreatingUser:(BOOL)createUser {
+    BOOL pfp = [OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge;
 
-+ (void)continueFromStartupScreenCreatingUser:(BOOL)createUser {
-    OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
-    OTWelcomeViewController *welcomeViewController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTWelcomeViewController"];
-    welcomeViewController.signupNewUser = createUser;
-    
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        [[OTAppState getTopViewController].navigationController pushViewController:welcomeViewController animated:YES];
+    if (createUser || pfp) {
+        OTWelcomeViewController *welcomeViewController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTWelcomeViewController"];
+        welcomeViewController.signupNewUser = createUser;
+        return welcomeViewController;
     }
     else {
-        [OTLogger logEvent:@"SplashLogIn"];
-        [[OTAppState getTopViewController].navigationController pushViewController:loginController animated:YES];
+        OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
+        return loginController;
     }
 }
 
-+ (void)continueFromWelcomeScreen {
-    return [OTAppState continueFromWelcomeScreenCreatingUser:NO];
-}
-
-+ (void)continueFromWelcomeScreenForOnboarding {
-    return [OTAppState continueFromWelcomeScreenCreatingUser:YES];
-}
-
-+ (void)continueFromWelcomeScreenCreatingUser:(BOOL)createUser
++ (void)continueFromWelcomeScreen:(OTWelcomeViewController * _Nonnull)welcomeScreen
 {
-    if (createUser) {
+    if (welcomeScreen.signupNewUser) {
         [OTLogger logEvent:@"WelcomeScreenContinue"];
         OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
-        [[OTAppState getTopViewController].navigationController pushViewController:onboardingViewController animated:YES];
+        [welcomeScreen.navigationController pushViewController:onboardingViewController animated:YES];
     } else {
-        if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-            OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
-            [OTLogger logEvent:@"SplashLogIn"];
-            [[OTAppState getTopViewController].navigationController pushViewController:loginController animated:YES];
-        }
-        else
-        {
-            [OTLogger logEvent:@"WelcomeScreenContinue"];
-            OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
-            [[OTAppState getTopViewController].navigationController pushViewController:onboardingViewController animated:YES];
-        }
+        OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
+        [OTLogger logEvent:@"SplashLogIn"];
+        [welcomeScreen.navigationController pushViewController:loginController animated:YES];
     }
 }
 
-+ (void)continueFromLoginScreen
++ (void)continueFromLoginScreen:(UIViewController * _Nullable)currentViewController
 {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser.lastName.length > 0 && currentUser.firstName.length > 0) {
-        [OTAppState continueFromUserEmailScreen];
+        [OTAppState continueFromUserEmailScreen:currentViewController];
     }
     else {
-        [OTAppState navigateToUserName:[OTAppState getTopViewController]];
+        if (currentViewController == nil)
+            currentViewController = [OTAppState getTopViewController];
+        [OTAppState navigateToUserName:currentViewController];
     }
 }
 
-+ (void)continueFromUserEmailScreen
++ (void)continueFromUserEmailScreen:(UIViewController * _Nonnull)currentViewController
 {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     BOOL isFirstLogin = [[NSUserDefaults standardUserDefaults] isFirstLogin];
-    UIViewController *currentViewController = [OTAppState getTopViewController];
     
     if (isFirstLogin) {
         if (currentUser.avatarURL.length == 0) {
@@ -307,16 +296,17 @@
                 [OTAppState navigateToUserPicture:currentViewController];
             }
             else {
-                [OTAppState navigateToPermissionsScreens];
+                [OTAppState navigateToPermissionsScreens:currentViewController];
             }
         } else {
-            [OTAppState navigateToPermissionsScreens];
+            [OTAppState navigateToPermissionsScreens:currentViewController];
         }
     }
 }
 
-+ (void)navigateToPermissionsScreens {
-    UIViewController *currentViewController = [OTAppState getTopViewController];
++ (void)navigateToPermissionsScreens:(UIViewController * _Nullable)currentViewController {
+    if (currentViewController == nil)
+        currentViewController = [OTAppState getTopViewController];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     
     if ([currentUser hasActionZoneDefined] &&
@@ -324,7 +314,7 @@
         
         [OTAppState navigateToAuthenticatedLandingScreen];
         
-        if ([OTAppConfiguration shouldShowIntroTutorial] &&
+        if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
             ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [OTAppState presentTutorialScreen];
         }
@@ -341,14 +331,14 @@
     }
 }
 
-+ (void)continueFromUserNameScreen
++ (void)continueFromUserNameScreen:(UIViewController *)currentViewController
 {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser.email.length > 0) {
-        [OTAppState continueFromUserEmailScreen];
+        [OTAppState continueFromUserEmailScreen:currentViewController];
     }
     else {
-        [OTAppState navigateToUserEmail:[OTAppState getTopViewController]];
+        [OTAppState navigateToUserEmail:currentViewController];
     }
 }
 
@@ -428,6 +418,11 @@
 + (void)createEntourageFromController:(UIViewController*)viewController
                          withDelegate:(id<EntourageEditorDelegate>)delegate
                               asEvent:(BOOL)isEvent {
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [self presentAuthenticationOverlay:viewController];
+        return;
+    }
+
     UIStoryboard *editEntourageStoryboard = [UIStoryboard storyboardWithName:@"EntourageEditor" bundle:nil];
     UINavigationController *navController = (UINavigationController*)[editEntourageStoryboard instantiateInitialViewController];
     OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.childViewControllers[0];
@@ -454,6 +449,12 @@
         [controller performSegueWithIdentifier:@"OTMapOptionsSegue" sender:controller];
     }
     else {
+
+        if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+            [self presentAuthenticationOverlay:controller];
+            return;
+        }
+
         [controller performSegueWithIdentifier:@"EntourageEditor" sender:controller];
     }
 }
@@ -505,15 +506,6 @@
     } else {
         [controller performSegueWithIdentifier:@"ConfirmCloseSegue" sender:sender];
     }
-}
-
-+ (UIViewController *)getTopRootViewController {
-    UIViewController *result = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if ([result isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *navController = (UINavigationController*)result;
-        result = navController.topViewController;
-    }
-    return result;
 }
 
 + (UIViewController *)getTopViewController {
@@ -611,4 +603,12 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 
++ (void)presentAuthenticationOverlay:(UIViewController * _Nonnull)currentViewController {
+    OTAuthenticationModalViewController *modalController = [OTAuthenticationModalViewController new];
+    UINavigationController *authenticationFlow = [[UINavigationController alloc] initWithRootViewController:modalController];
+    [OTAppConfiguration configureNavigationControllerAppearance:authenticationFlow];
+    authenticationFlow.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    authenticationFlow.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [currentViewController presentViewController:authenticationFlow animated:YES completion:nil];
+}
 @end

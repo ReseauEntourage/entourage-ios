@@ -13,15 +13,19 @@ extern NSString *const kAPIUserRoute;
 extern NSString *const kKeychainPhone;
 extern NSString *const kKeychainPassword;
 
+extern NSString *const kUserAuthenticationLevelOutside;
+extern NSString *const kUserAuthenticationLevelAnonymous;
+extern NSString *const kUserAuthenticationLevelAuthenticated;
+
 @interface OTAuthService : NSObject
 
 - (void)authWithPhone:(NSString *)phone
              password:(NSString *)password
              deviceId:(NSString *)deviceId
-              success:(void (^)(OTUser *user))success
+              success:(void (^)(OTUser *user, BOOL firstLogin))success
               failure:(void (^)(NSError *error))failure;
 
-- (void)getDetailsForUser:(NSNumber *)userID
+- (void)getDetailsForUser:(NSString *)userUuid
                   success:(void (^)(OTUser *))success
                   failure:(void (^)(NSError *))failure;
 
@@ -56,4 +60,9 @@ extern NSString *const kKeychainPassword;
 + (void)updateUserAddressWithPlaceId:(NSString *)placeId
                           completion:(void (^)(NSError *))completion;
 
+-(void)anonymousAuthWithSuccess:(void (^)(OTUser *))success
+                        failure:(void (^)(NSError *))failure;
+
++(NSString *)authenticationLevelForUser:(OTUser *)user;
++(NSString *)currentUserAuthenticationLevel;
 @end

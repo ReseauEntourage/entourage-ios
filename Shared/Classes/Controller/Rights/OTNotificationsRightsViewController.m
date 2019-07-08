@@ -85,7 +85,8 @@
     [mixpanel.people set:@{@"EntourageNotifEnable": self.notificationEnabled}];
     [FIRAnalytics setUserPropertyString:self.notificationEnabled forName:@"EntourageGeolocEnable"];
     
-    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if ([OTAppConfiguration shouldShowIntroTutorial:currentUser]) {
         [self setTutorialCompleted];
     }
     [self checkInvitationsToJoin];
@@ -116,7 +117,8 @@
             [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
             [[OTDeepLinkService new] navigateToFeedWithNumberId:joinedInvitation.entourageId withType:nil];
             
-            if ([OTAppConfiguration shouldShowIntroTutorial] &&
+            OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+            if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
                 ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
                 [OTAppState navigateToAuthenticatedLandingScreen];
                 [OTAppState presentTutorialScreen];

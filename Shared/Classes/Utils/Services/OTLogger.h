@@ -12,6 +12,7 @@
 @interface OTLogger : NSObject
 
 + (void)logEvent:(NSString *)eventName;
++ (void)logEvent:(NSString *)eventName withParameters:(nullable NSDictionary<NSString *, id> *)parameters;
 + (void)setupMixpanelWithUser:(OTUser *)user;
 
 @end

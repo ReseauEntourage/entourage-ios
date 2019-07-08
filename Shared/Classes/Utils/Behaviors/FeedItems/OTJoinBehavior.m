@@ -11,6 +11,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "OTConsts.h"
 #import "OTFeedItemJoinOptionsViewController.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTJoinBehavior ()
 
@@ -51,6 +52,11 @@
 #pragma mark - private methods
 
 - (void)startJoin {
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self.owner];
+        return;
+    }
+
     [SVProgressHUD show];
     [[[OTFeedItemFactory createFor:self.feedItem] getStateTransition] sendJoinRequest:^(OTFeedItemJoiner *joiner) {
         [self sendActionsForControlEvents:UIControlEventValueChanged];

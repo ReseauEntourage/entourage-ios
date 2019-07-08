@@ -14,6 +14,7 @@
 #import "OTConfirmCloseViewController.h"
 #import "OTCloseReason.h"
 #import "OTTourStateTransition.h"
+#import "NSUserDefaults+OT.h"
 
 @interface OTNextStatusButtonBehavior () <OTConfirmCloseProtocol>
 
@@ -173,6 +174,11 @@
 }
 
 - (void)doJoinFeedItem {
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self.owner];
+        return;
+    }
+
     if(self.delegate)
         [self.delegate joinFeedItem];
 }

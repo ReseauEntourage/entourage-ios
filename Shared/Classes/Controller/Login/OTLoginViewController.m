@@ -108,6 +108,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
+    
+    // restore pre-login value of currentUser if the user is backing from the required onboarding
+    if (self.onboardingNavigation.hasPreLoginUser) {
+        [NSUserDefaults standardUserDefaults].currentUser = self.onboardingNavigation.preLoginUser;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -152,10 +157,14 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [[OTAuthService new] authWithPhone:[self.codeCountry stringByAppendingString: phone]
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
-                               success: ^(OTUser *user) {
+                               success: ^(OTUser *user, BOOL firstLogin) {
                                    
                                    [SVProgressHUD dismiss];
-                                   [OTLogger logEvent:@"Login_Success"];
+                                   
+                                   // as the logged-out user
+                                   [OTLogger logEvent:@"Login_Success"
+                                       withParameters:@{@"First_Login": [NSNumber numberWithBool:firstLogin]}];
+                                   
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    
                                    [OTLogger setupMixpanelWithUser:user];
@@ -165,7 +174,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    }
                                    
-                                   if ([OTAppConfiguration shouldShowIntroTutorial]) {
+                                   if ([OTAppConfiguration shouldShowIntroTutorial:user]) {
                                        NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
                                        if (loggedNumbers == nil) {
                                            loggedNumbers = [NSMutableArray new];
@@ -176,9 +185,13 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                        }
                                    }
                                    
+                                   // backup pre-login value of currentUser in case the user backs from the required onboarding
+                                   self.onboardingNavigation.preLoginUser = [NSUserDefaults standardUserDefaults].currentUser;
+                                   
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
 
-                                   [OTAppState continueFromLoginScreen];
+                                   [self.view endEditing:YES];
+                                   [OTAppState continueFromLoginScreen:self];
                                    
                                    if (self.fromLink) {
                                        [[OTDeepLinkService new] handleDeepLink:self.fromLink];

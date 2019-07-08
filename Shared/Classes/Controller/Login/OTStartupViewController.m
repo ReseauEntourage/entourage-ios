@@ -6,19 +6,24 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
+#import <SafariServices/SFSafariViewControllerConfiguration.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 #import "OTStartupViewController.h"
 #import "UIView+entourage.h"
 #import "NSUserDefaults+OT.h"
 #import "UINavigationController+entourage.h"
 #import "OTAppConfiguration.h"
 #import "OTAppState.h"
+#import "OTSafariService.h"
+#import "OTAuthService.h"
 #import "entourage-Swift.h"
 
-@interface OTStartupViewController () <UIScrollViewDelegate>
+@interface OTStartupViewController () <UIScrollViewDelegate, SFSafariViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UIButton *betaButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (weak, nonatomic) IBOutlet UIButton *loginlessButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
@@ -45,12 +50,26 @@
     self.registerButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.registerButton.layer.borderWidth = 1.5f;
     
+    [self.loginlessButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    
     self.pageControl.backgroundColor = [UIColor clearColor];
     self.pageControl.currentPageIndicatorTintColor = [ApplicationTheme shared].backgroundThemeColor;
     
     self.title = @"";
     
     [self setupScrollView];
+    [self setupObservers];
+}
+
+-(void)setupObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillResign:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,14 +91,97 @@
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
+-(void)applicationWillResign:(NSNotification*)notification {
+    // Human Interface Guidelines :
+    // "Allow people to cancel alerts by exiting to the Home screen."
+    // https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/
+    [self dismissAlert];
+}
+
+-(void)dismissAlert {
+    if ([self presentedViewController].class == UIAlertController.class) {
+      [self dismissViewControllerAnimated:NO completion:nil];
+    }
+}
+
 -(IBAction)showSignUp:(id)sender {
     [OTLogger logEvent:@"SplashSignUp"];
-    [self performSegueWithIdentifier:@"SignUpSegue" sender:nil];
+    [OTAppState continueFromStartupScreen:self creatingUser:YES];
 }
 
 -(IBAction)showLogin:(id)sender {
-    [OTAppState continueFromStartupScreen];
+    [OTAppState continueFromStartupScreen:self creatingUser:NO];
 }
+
+#pragma mark - Loginless Alert
+
+UIAlertController* loginlessAlert;
+SFSafariViewController *loginlessSafariController;
+
+-(void)initLoginlessAlert {
+    if (loginlessAlert) return;
+    
+    loginlessAlert = [UIAlertController alertControllerWithTitle:@"Conditions d'utilisation"
+                                                         message:@"Pour continuer, acceptez les CGU et la Politique de confidentialité d'Entourage"
+                                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    [loginlessAlert addAction:[UIAlertAction actionWithTitle:@"Lire" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {
+                                                         NSURL *url = [OTSafariService redirectUrlWithIdentifier:@"terms"];
+                                                         loginlessSafariController =
+                                                            [OTSafariService newSafariControllerWithUrl:url
+                                                                                entersReaderIfAvailable:YES];
+                                                         loginlessSafariController.delegate = self;
+                                                         [self presentViewController:loginlessSafariController animated:YES completion:nil];
+                                                     }]];
+    [loginlessAlert addAction:[UIAlertAction actionWithTitle:@"J'accepte" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {
+                                                         [self authenticateAnonymousUser];
+                                                     }]];
+    
+    loginlessAlert.preferredAction = loginlessAlert.actions.lastObject;
+}
+
+-(IBAction)showLoginlessAlert:(id)sender {
+    [self showLoginlessAlert];
+}
+
+-(void)showLoginlessAlert {
+    [self initLoginlessAlert];
+    [self presentViewController:loginlessAlert animated:YES completion:nil];
+    loginlessAlert = nil;
+}
+
+#pragma mark - SFSafariViewControllerDelegate
+
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
+    if ([controller isEqual:loginlessSafariController]) {
+        [self showLoginlessAlert];
+        loginlessSafariController = nil;
+    }
+}
+
+- (void)authenticateAnonymousUser {
+    [SVProgressHUD show];
+
+    [[OTAuthService new] anonymousAuthWithSuccess:^(OTUser *user) {
+        [SVProgressHUD dismiss];
+
+        [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+
+        [OTAppState navigateToAuthenticatedLandingScreen];
+    } failure:^(NSError *error) {
+        [SVProgressHUD dismiss];
+
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"error")
+                                                                       message:OTLocalizedString(@"generic_error")
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction: [UIAlertAction actionWithTitle:OTLocalizedString(@"ok")
+                                                   style:UIAlertActionStyleDefault
+                                                 handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }];
+};
 
 - (void)setupScrollView {
     self.scrollView.delegate = self;

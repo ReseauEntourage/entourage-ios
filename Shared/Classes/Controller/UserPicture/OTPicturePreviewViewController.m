@@ -69,7 +69,7 @@
             [NSUserDefaults standardUserDefaults].currentUser = user;
             self.scrollView.delegate = nil;
             
-            if (([OTAppConfiguration shouldShowIntroTutorial] &&
+            if (([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
                 [NSUserDefaults standardUserDefaults].isTutorialCompleted &&
                  [currentUser hasActionZoneDefined]) ||
                 self.isEditingPictureForCurrentUser) {
@@ -79,7 +79,7 @@
                 [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
                 
             } else {
-                [OTAppState navigateToPermissionsScreens];
+                [OTAppState navigateToPermissionsScreens:self];
             }
                 
             [[NSNotificationCenter defaultCenter] postNotificationName:@kNotificationProfilePictureUpdated object:self];

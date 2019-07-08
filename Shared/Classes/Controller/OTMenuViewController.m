@@ -34,6 +34,7 @@
 #import "OTSafariService.h"
 #import "OTAppConfiguration.h"
 #import "OTAuthService.h"
+#import "OTAuthenticationModalViewController.h"
 #import "entourage-Swift.h"
 
 #define DONATION_CELL_INDEX 3
@@ -72,6 +73,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *modifyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *loginLabel;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapNameBehavior;
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapModifyBehavior;
@@ -104,7 +106,10 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 	[self configureControllersDictionary];
    
     [self createBackFrontMenuButton];
+
     [self.modifyLabel underline];
+    [self.loginLabel underline];
+
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableHeaderView = self.headerView;
     
@@ -129,6 +134,12 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self loadUser];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
+    
+    BOOL anonymous = self.currentUser.isAnonymous;
+    self.nameLabel.hidden = anonymous;
+    self.modifyLabel.hidden = anonymous;
+    self.loginLabel.hidden = !anonymous;
+
     [OTAppConfiguration updateAppearanceForMainTabBar];
 }
 
@@ -144,7 +155,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (void)loadUser {
     [SVProgressHUD show];
-    [[OTAuthService new] getDetailsForUser:self.currentUser.sid success:^(OTUser *user) {
+    [[OTAuthService new] getDetailsForUser:self.currentUser.uuid success:^(OTUser *user) {
         [SVProgressHUD dismiss];
         self.currentUser = user;
         self.menuItems = [self createMenuItems];
@@ -165,18 +176,18 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellID;
-    if (indexPath.row == DONATION_CELL_INDEX)
-        cellID = OTMenuMakeDonationTableViewCellIdentifier;
-    else if (indexPath.row == HEADER_CELL_INDEX)
-        cellID = @"HeaderViewCell";
-    else if (indexPath.row == LOG_OUT_CELL_INDEX)
-        cellID = OTMenuLogoutTableViewCellIdentifier;
-    else
-        cellID = OTMenuTableViewCellIdentifier;
+    NSString *cellID = [self cellIdentifierForRow:indexPath.row];
     
     OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
+    if (cellID == OTMenuTableViewCellIdentifier) {
+        NSString *nextCellID = [self cellIdentifierForRow:indexPath.row + 1];
+        if (nextCellID == OTMenuTableViewCellIdentifier) {
+            cell.separator.backgroundColor = self.tableView.separatorColor;
+        } else {
+            cell.separator.hidden = YES;
+        }
+    }
     if (menuItem.iconName != nil) {
         cell.itemIcon.image = [UIImage imageNamed:menuItem.iconName];
         cell.itemIcon.contentMode = UIViewContentModeScaleAspectFit;
@@ -187,13 +198,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     else {
         cell.contentView.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
     }
-    
-    if ((indexPath.row == HEADER_CELL_INDEX ||
-         indexPath.row == HEADER_CELL_INDEX - 1) ||
-        (indexPath.row == LOG_OUT_CELL_INDEX ||
-         indexPath.row == DONATION_CELL_INDEX ||
-        indexPath.row == DONATION_CELL_INDEX - 1))
-        cell.separatorInset = UIEdgeInsetsZero;
     
     if (indexPath.row == DONATION_CELL_INDEX) {
         cell.contentView.backgroundColor = [UIColor colorWithRed:242
@@ -263,12 +267,21 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 #pragma mark - Actions
 
 - (IBAction)showProfile {
+    if (self.currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self];
+        return;
+    }
+
     [OTLogger logEvent:@"TapMyProfilePhoto"];
     [self performSegueWithIdentifier:OTMenuViewControllerSegueMenuProfileIdentifier sender:self];
 }
 
 - (IBAction)editProfile {
     [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
+}
+
+- (IBAction)tappedLogin {
+    [OTAppState presentAuthenticationOverlay:self];
 }
 
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier {
@@ -354,11 +367,24 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     OTMenuItem *itemNil = [[OTMenuItem alloc] initWithTitle:nil iconName: nil ];
     [menuItems addObject:itemNil];
     
-    OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
-                                                          iconName: nil
-                                                   segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
-    [menuItems addObject:itemDisconnect];
+    if (!self.currentUser.isAnonymous) {
+        OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
+                                                              iconName: nil
+                                                       segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
+        [menuItems addObject:itemDisconnect];
+    }
 	return menuItems;
+}
+
+- (NSString *)cellIdentifierForRow:(NSInteger)row {
+    if (row == DONATION_CELL_INDEX)
+        return OTMenuMakeDonationTableViewCellIdentifier;
+    else if (row == HEADER_CELL_INDEX)
+        return @"HeaderViewCell";
+    else if (row == LOG_OUT_CELL_INDEX)
+        return OTMenuLogoutTableViewCellIdentifier;
+    else
+        return OTMenuTableViewCellIdentifier;
 }
 
 - (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath {

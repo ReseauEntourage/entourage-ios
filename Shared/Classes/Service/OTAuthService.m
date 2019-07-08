@@ -35,12 +35,17 @@
 NSString *const kAPIApps = @"applications";
 
 NSString *const kAPILogin = @"login";
+NSString *const kAPIAnonymousLogin = @"anonymous_users";
 NSString *const kAPIUserRoute = @"users";
 NSString *const kAPIUpdateUserRoute = @"update_me";
 NSString *const kAPIMe = @"me";
 NSString *const kAPICode = @"code";
 NSString *const kKeychainPhone = @"entourage_user_phone";
 NSString *const kKeychainPassword = @"entourage_user_password";
+
+NSString *const kUserAuthenticationLevelOutside = @"outside";
+NSString *const kUserAuthenticationLevelAnonymous = @"anonymous";
+NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
 
 /**************************************************************************************************/
 #pragma mark - Public methods
@@ -50,7 +55,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
 - (void)authWithPhone:(NSString *)phone
              password:(NSString *)password
              deviceId:(NSString *)deviceId
-              success:(void (^)(OTUser *))success
+              success:(void (^)(OTUser *, BOOL))success
               failure:(void (^)(NSError *))failure
 {
     if (phone == nil || password == nil) {
@@ -65,7 +70,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
     [requestManager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
     NSLog(@"Login with user %@. DeviceID = %@", parameters, deviceId);
-    //NSLog(@"Login header: %@", requestManager.requestSerializer.HTTPRequestHeaders);
+    //NSLog(@"Login header: %@"OTApiErrorDomain, requestManager.requestSerializer.HTTPRequestHeaders);
     [requestManager
          POSTWithUrl:kAPILogin
          andParameters:parameters
@@ -74,12 +79,12 @@ NSString *const kKeychainPassword = @"entourage_user_password";
              NSLog(@"Authentication service response : %@", responseDict);
              NSDictionary *responseUser = responseDict[@"user"];
              OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
-             
+             BOOL firstLogin = [responseDict boolForKey:@"first_sign_in"];
              [[A0SimpleKeychain keychain] setString:phone forKey:kKeychainPhone];
              [[A0SimpleKeychain keychain] setString:password forKey:kKeychainPassword];
              
              if (success) {
-                 success(user);
+                 success(user, firstLogin);
              }
          }
          andFailure:^(NSError *error)
@@ -116,12 +121,12 @@ NSString *const kKeychainPassword = @"entourage_user_password";
 
 }
 
-- (void)getDetailsForUser:(NSNumber *)userID
-              success:(void (^)(OTUser *))success
-              failure:(void (^)(NSError *))failure
+- (void)getDetailsForUser:(NSString *)userUuid
+                            success:(void (^)(OTUser *))success
+                            failure:(void (^)(NSError *))failure
 {
-    
-    NSString *url = [NSString stringWithFormat:API_URL_USER_DETAILS, userID, TOKEN];
+
+    NSString *url = [NSString stringWithFormat:API_URL_USER_DETAILS, userUuid, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
          GETWithUrl:url
@@ -356,4 +361,45 @@ NSString *const kKeychainPassword = @"entourage_user_password";
      }];
 }
 
+-(void)anonymousAuthWithSuccess:(void (^)(OTUser *))success failure:(void (^)(NSError *))failure
+{
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:kAPIAnonymousLogin
+     andParameters:nil
+     andSuccess:^(id responseObject) {
+         NSDictionary *responseDict = responseObject;
+         NSLog(@"Anonymous auth response : %@", responseDict);
+         NSDictionary *responseUser = responseDict[@"user"];
+         OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+
+         if (success) {
+             success(user);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         [[Crashlytics sharedInstance] recordError:error];
+         NSLog(@"Failed with error %@", error);
+         if (failure) {
+             failure(error);
+         }
+     }];
+}
+
++(NSString *)authenticationLevelForUser:(OTUser *)user {
+    if (!user) {
+        return kUserAuthenticationLevelOutside;
+    }
+    else if (user.isAnonymous) {
+        return kUserAuthenticationLevelAnonymous;
+    }
+    else {
+        return kUserAuthenticationLevelAuthenticated;
+    }
+}
+
++(NSString *)currentUserAuthenticationLevel {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    return [self authenticationLevelForUser:currentUser];
+}
 @end

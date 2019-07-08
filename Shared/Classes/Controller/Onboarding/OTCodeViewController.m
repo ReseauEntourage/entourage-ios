@@ -103,8 +103,9 @@
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     [self.validateButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
-    if ([NSUserDefaults standardUserDefaults].currentUser) {
-        [NSUserDefaults standardUserDefaults].currentUser = nil;
+    // restore pre-login value of currentUser if the user is backing from the required onboarding
+    if (self.onboardingNavigation.hasPreLoginUser) {
+        [NSUserDefaults standardUserDefaults].currentUser = self.onboardingNavigation.preLoginUser;
     }
     
     [self.navigationController setNavigationBarHidden:YES];
@@ -234,23 +235,30 @@
     [[OTAuthService new] authWithPhone:phone
                               password:code
                               deviceId:deviceAPNSid
-                               success: ^(OTUser *user) {
+                               success: ^(OTUser *user, BOOL firstLogin) {
         NSLog(@"User : %@ authenticated successfully", user.email);
         user.phone = phone;
         [SVProgressHUD dismiss];
+        
+        // as the logged-out user
+        [OTLogger logEvent:@"Login_Success"
+           withParameters:@{@"first_login": [NSNumber numberWithBool:firstLogin]}];
+        
+        // backup pre-login value of currentUser in case the user backs from the required onboarding
+        self.onboardingNavigation.preLoginUser = [NSUserDefaults standardUserDefaults].currentUser;
         
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;
         [[NSUserDefaults standardUserDefaults] setFirstLoginState:NO];
         
-        if ([OTAppConfiguration shouldShowIntroTutorial]) {
+        if ([OTAppConfiguration shouldShowIntroTutorial:user]) {
             if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
                 [OTAppState navigateToAuthenticatedLandingScreen];
                 return;
             }
         }
 
-        [OTAppState continueFromLoginScreen];
+        [OTAppState continueFromLoginScreen:self];
         
     } failure: ^(NSError *error) {
         [SVProgressHUD dismiss];

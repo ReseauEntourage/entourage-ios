@@ -30,9 +30,16 @@
     static dispatch_once_t entourageFilterToken;
     dispatch_once(&entourageFilterToken, ^{
         sharedInstance = [self new];
-        sharedInstance.isAuthorized = NO;
     });
     return sharedInstance;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (!self) return nil;
+    self.status = CLLocationManager.authorizationStatus;
+    [self setAuthorized];
+    return self;
 }
 
 - (void)startLocationUpdates {
@@ -133,7 +140,7 @@
 - (void)notifyStatus {
     if(self.status == kCLAuthorizationStatusNotDetermined)
         return;
-    self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedWhenInUse || self.status == kCLAuthorizationStatusAuthorizedAlways;
+    [self setAuthorized];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people set:@{@"EntourageGeolocEnable": self.isAuthorized ? @"YES" : @"NO"}];
     [FIRAnalytics setUserPropertyString:(self.isAuthorized ? @"YES" : @"NO") forName:@"EntourageGeolocEnable"];
@@ -147,6 +154,10 @@
     }
     
     return  self.currentLocation;
+}
+
+- (void)setAuthorized {
+    self.isAuthorized = self.status == kCLAuthorizationStatusAuthorizedWhenInUse || self.status == kCLAuthorizationStatusAuthorizedAlways;
 }
 
 @end

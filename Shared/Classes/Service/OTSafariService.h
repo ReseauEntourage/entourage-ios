@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SafariServices/SFSafariViewController.h>
 
 @interface OTSafariService : NSObject
 + (void)launchInAppBrowserWithUrl:(NSURL*)url;
@@ -16,4 +17,7 @@
 + (void)launchPrivacyPolicyFormInController:(UIViewController*)controller;
 
 + (NSURL*)redirectUrlWithIdentifier:(NSString*)identifier;
+
++ (SFSafariViewController*)newSafariControllerWithUrl:(NSURL*)launchUrl;
++ (SFSafariViewController*)newSafariControllerWithUrl:(NSURL*)launchUrl entersReaderIfAvailable:(BOOL)entersReaderIfAvailable;
 @end

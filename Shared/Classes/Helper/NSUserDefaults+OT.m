@@ -22,6 +22,9 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 - (void)setCurrentUser:(OTUser *)user
 {
+    id previousValue = [self currentUser];
+    if (previousValue == nil) previousValue = [NSNull null];
+    
     if (user)
 	{
 		NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:user];
@@ -33,8 +36,16 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 		[self removeObjectForKey:kUser];
         [self removeObjectForKey:kIsFirstLogin];
 	}
-    
+
 	[self synchronize];
+
+    id currentValue = [self currentUser];
+    if (currentValue == nil) currentValue = [NSNull null];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCurrentUserUpdated
+                                                        object:nil
+                                                      userInfo:@{@"previousValue": previousValue,
+                                                                 @"currentValue":  currentValue}];
 }
 
 - (void)setCurrentOngoingTour:(OTTour *)tour {
@@ -172,7 +183,7 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 - (NSString *)keyForSavedFilter {
     if (self.currentUser != nil)
-        return [kNewsfeedsFilter stringByAppendingString:self.currentUser.sid.stringValue];
+        return [kNewsfeedsFilter stringByAppendingString:self.currentUser.uuid];
     return @"";
 }
 

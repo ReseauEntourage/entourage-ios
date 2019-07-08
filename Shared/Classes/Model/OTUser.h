@@ -25,6 +25,7 @@ extern NSString *const kVisitedUserTag;
 @interface OTUser : NSObject
 
 @property (strong, nonatomic) NSNumber *sid;
+@property (nonatomic, readonly) NSString *uuid;
 @property (strong, nonatomic) NSString *type;
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *firstName;
@@ -62,10 +63,13 @@ extern NSString *const kVisitedUserTag;
 
 - (BOOL)hasSignedEthicsChart;
 
+- (BOOL)isAnonymous;
+
 /*
  * Returns the name of the role to be displayed under the user's fullname
  */
 - (NSString*)roleTag;
+- (NSString*)uuid;
 
 - (NSArray <OTUserMembershipListItem*>*)privateCircles;
 - (NSArray <OTUserMembershipListItem*>*)neighborhoods;

@@ -38,7 +38,8 @@
     [self.choosePictureButton setTitleColor:self.view.backgroundColor forState:UIControlStateNormal];
     [self.takePictureButton setTitleColor:self.view.backgroundColor forState:UIControlStateNormal];
     
-    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if ([OTAppConfiguration shouldShowIntroTutorial:currentUser]) {
         if (![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
             [self addIgnoreButton];
         }

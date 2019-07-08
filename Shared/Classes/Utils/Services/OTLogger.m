@@ -19,9 +19,13 @@
 @implementation OTLogger
 
 + (void)logEvent:(NSString *)eventName {
+    [self logEvent:eventName withParameters:nil];
+}
+
++ (void)logEvent:(NSString *)eventName withParameters:(nullable NSDictionary<NSString *, id> *)parameters {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:eventName];
-    [FIRAnalytics logEventWithName:eventName parameters:nil];
+    [FIRAnalytics logEventWithName:eventName parameters:parameters];
 }
 
 + (void)setupMixpanelWithUser: (OTUser *)user {

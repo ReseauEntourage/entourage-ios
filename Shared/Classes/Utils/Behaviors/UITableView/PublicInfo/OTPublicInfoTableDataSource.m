@@ -38,17 +38,13 @@
             [self.statusChangedBehavior startChangeStatus];
         }
         else if ([feedItem.identifierTag isEqualToString:@"inviteFriend"]) {
-//            id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:item] getStateInfo];
-//            if (![stateInfo canChangeEditState]) {
-//                return;
-//            }
-//
-//            if ([stateInfo canInvite]) {
-//                [self.inviteBehavior startInvite];
-//            }
-            
-            // EMA-2348
-            [self.inviteBehavior startInvite];
+            id<OTStateInfoDelegate> stateInfo = [[OTFeedItemFactory createFor:item] getStateInfo];
+
+            if ([stateInfo canInvite]) {
+                [self.inviteBehavior startInvite];
+            } else {
+                [self.inviteBehavior.shareBehavior sharePublic:item];
+            }
         }
     }
 }

@@ -151,7 +151,7 @@
 
                 UIAlertAction *viewProfileAction = [UIAlertAction   actionWithTitle:OTLocalizedString(@"view_profile") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [OTLogger logEvent:@"UserProfileClick"];
-                    [[OTDeepLinkService new] showProfileFromAnywhereForUser:joiner.uID];
+                    [[OTDeepLinkService new] showProfileFromAnywhereForUser:joiner.uID.stringValue];
                 }];
                 
                 UIAlertAction *refuseJoinRequestAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"refuseAlert") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
