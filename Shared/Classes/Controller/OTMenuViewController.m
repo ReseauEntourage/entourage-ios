@@ -214,10 +214,10 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     }
     
     if (indexPath.row == DONATION_CELL_INDEX) {
-        cell.contentView.backgroundColor = [UIColor colorWithRed:242
-                                                           green:101
-                                                            blue:33
-                                                           alpha:1];
+        cell.contentView.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    }
+    else if (indexPath.row == LOG_OUT_CELL_INDEX) {
+        cell.itemLabel.textColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     }
     
 	return cell;
