@@ -99,7 +99,12 @@
     if ([feedItem isKindOfClass:[OTAnnouncement class]]) {
         self.imgCategory.backgroundColor = [UIColor clearColor];
         self.imgCategory.contentMode = UIViewContentModeScaleAspectFit;
-        [self.imgCategory setupFromUrl:source withPlaceholder:nil];
+        [self.imgCategory setupFromUrl:source
+                       withPlaceholder:nil
+                               success:^(id request, id response, UIImage *image) {
+                                   self.imgCategory.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                               }
+                               failure:nil];
     }
     else {
         if ([feedItem isOuting]) {

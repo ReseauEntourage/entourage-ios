@@ -494,7 +494,7 @@
         return [UIColor pfpNeighborhoodColor];
     }
     
-    return [UIColor colorWithHexString:@"ffc57f"];
+    return [UIColor whiteColor];
 }
 
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem {
