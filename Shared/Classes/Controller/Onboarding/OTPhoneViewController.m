@@ -52,6 +52,9 @@
     self.subtitleLabel.text = [NSString stringWithFormat:@"%@ vous envoie un SMS afin de vérifier votre numéro de portable.", appName];
     
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
+    
+    self.phoneTextField.textContentType = UITextContentTypeTelephoneNumber;
+    
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
     };

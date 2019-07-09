@@ -73,6 +73,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.title = @"";
     self.phoneIsValid = NO;
     self.phoneTextField.floatingLabelTextColor = [UIColor whiteColor];
+    
+    self.phoneTextField.textContentType = UITextContentTypeTelephoneNumber;
+    
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.phoneIsValid = YES;
         [self validateForm];
