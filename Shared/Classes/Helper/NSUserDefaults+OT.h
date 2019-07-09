@@ -22,6 +22,7 @@ extern NSString *const kTutorialDone;
 @property (nonatomic, strong) NSArray *tourPoints;
 
 - (BOOL)isTutorialCompleted;
+- (void)setTutorialCompleted;
 - (BOOL)isTourOngoing;
 - (void)setCompleteFirstLogin;
 - (BOOL)isFirstLogin;

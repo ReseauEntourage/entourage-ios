@@ -310,6 +310,9 @@
     if ([currentUser hasActionZoneDefined] &&
         [currentUser isRegisteredForPushNotifications]) {
         
+        [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
+        [[OTLocationManager sharedInstance] startLocationUpdates];
+        
         [OTAppState navigateToAuthenticatedLandingScreen];
         
         if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
