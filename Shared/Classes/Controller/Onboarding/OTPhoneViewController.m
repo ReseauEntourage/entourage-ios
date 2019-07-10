@@ -92,16 +92,18 @@
 - (IBAction)doContinue {
     [OTLogger logEvent:@"TelephoneSubmit"];
     OTUser *temporaryUser = [OTUser new];
-    NSString *phoneNumber = self.phoneTextField.text;
-    if([self.phoneTextField.text hasPrefix:@"0"])
-        phoneNumber = [self.phoneTextField.text substringFromIndex:1];
-    NSString *phone = [self.codeCountry stringByAppendingString:phoneNumber];
-    temporaryUser.phone = phone;
+    NSString *phoneNumber = [self.phoneTextField.text stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceCharacterSet];
+    if(![phoneNumber hasPrefix:@"+"]) {
+        if([phoneNumber hasPrefix:@"0"])
+            phoneNumber = [phoneNumber substringFromIndex:1];
+        phoneNumber = [self.codeCountry stringByAppendingString:phoneNumber];
+    }
+    temporaryUser.phone = phoneNumber;
     [SVProgressHUD show];
-    [[OTOnboardingService new] setupNewUserWithPhone:phone
+    [[OTOnboardingService new] setupNewUserWithPhone:phoneNumber
         success:^(OTUser *onboardUser) {
             [SVProgressHUD dismiss];
-            onboardUser.phone = phone;
+            onboardUser.phone = phoneNumber;
             [NSUserDefaults standardUserDefaults].temporaryUser = onboardUser;
             [self performSegueWithIdentifier:@"PhoneToCodeSegue" sender:nil];
         } failure:^(NSError *error) {
