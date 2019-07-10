@@ -169,7 +169,7 @@
     
     UIView *headerView = [[UIView alloc]
                           initWithFrame:CGRectMake(0, 0,
-                                                   mainScreenWidth+8, mapVisibleHeight + panHeaderHeight)];
+                                                   mainScreenWidth, mapVisibleHeight + panHeaderHeight)];
     
     mapView.frame = CGRectMake(0, (mapVisibleHeight - mapActualHeight) / 2,
                                headerView.bounds.size.width, mapActualHeight);
@@ -534,7 +534,7 @@
 
 - (void)setupFilteringHeaderView:(CGFloat)mapHeight {
     self.filterView = (UIView*)[[NSBundle mainBundle] loadNibNamed:@"OTFeedsTableFilterHeader" owner:nil options:nil].firstObject;
-    self.filterView.frame = CGRectMake(0, mapHeight, UIScreen.mainScreen.bounds.size.width + 8, FEEDS_FILTER_HEIGHT);
+    self.filterView.frame = CGRectMake(0, mapHeight, UIScreen.mainScreen.bounds.size.width, FEEDS_FILTER_HEIGHT);
     self.filterView.clipsToBounds = YES;
     self.filterView.layer.cornerRadius = 12;
     
