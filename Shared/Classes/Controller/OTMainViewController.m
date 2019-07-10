@@ -1460,7 +1460,7 @@
     }
     
     CGRect mapFrame = self.mapView.frame;
-    mapFrame.size.height = self.tableView.bounds.size.height - self.navigationController.tabBarController.tabBar.bounds.size.height;
+    mapFrame.size.height = self.view.bounds.size.height;
     
     [OTLogger logEvent:@"MapViewClick"];
     
