@@ -16,8 +16,6 @@ extern NSString* const OTAnnouncementTableViewCellIdentifier;
 @property (nonatomic, weak) IBOutlet UIImageView *iconImage;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
-@property (nonatomic, weak) IBOutlet UIButton *userProfileImageButton;
-@property (nonatomic, weak) IBOutlet UIImageView *imgAssociation;
 @property (nonatomic, weak) IBOutlet UIButton *statusTextButton;
 @property (nonatomic, weak) IBOutlet UIView *containerView;
 @property (nonatomic, weak) IBOutlet UIImageView *contentImageView;

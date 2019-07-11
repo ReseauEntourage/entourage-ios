@@ -29,14 +29,12 @@ NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableVie
 
     self.feedItem = item;
     OTSummaryProviderBehavior *summaryBehavior = [OTSummaryProviderBehavior new];
-    summaryBehavior.imgAssociation = self.imgAssociation;
     summaryBehavior.imgCategory = self.iconImage;
     [summaryBehavior configureWith:item];
     
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
     self.titleLabel.text = [uiDelegate summary];
     self.descriptionLabel.text = [uiDelegate feedItemDescription];
-    [self.userProfileImageButton setupAsProfilePictureFromUrl:item.author.avatarUrl];
     
     if (uiDelegate.contentImageUrl) {
         NSURL *url = [NSURL URLWithString:uiDelegate.contentImageUrl];
@@ -57,12 +55,6 @@ NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableVie
     [self.statusTextButton setTitle:statusTitle forState:UIControlStateNormal];
     
     self.containerView.backgroundColor = [OTAppAppearance announcementFeedContainerColor];
-}
-
-- (IBAction)doShowProfile {
-    [OTLogger logEvent:@"UserProfileClick"];
-    if (self.tableViewDelegate != nil && [self.tableViewDelegate respondsToSelector:@selector(showUserProfile:)])
-        [self.tableViewDelegate showUserProfile:self.feedItem.author.uID];
 }
 
 - (IBAction)callToAction {
