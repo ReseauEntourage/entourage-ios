@@ -144,7 +144,7 @@
                                                                 <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <state key="selected" title="24H" backgroundImage="24HActive">
-                                                                <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="activateButton:" destination="kAZ-Fp-9Dl" eventType="touchUpInside" id="0uz-9x-500"/>
@@ -161,7 +161,7 @@
                                                                 <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <state key="selected" title="2J" backgroundImage="24HActive">
-                                                                <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="activateButton:" destination="kAZ-Fp-9Dl" eventType="touchUpInside" id="GOf-p4-XPE"/>
@@ -178,7 +178,7 @@
                                                                 <color key="titleColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                             <state key="selected" title="3J" backgroundImage="24HActive">
-                                                                <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                             </state>
                                                             <connections>
                                                                 <action selector="activateButton:" destination="kAZ-Fp-9Dl" eventType="touchUpInside" id="244-dC-1g8"/>

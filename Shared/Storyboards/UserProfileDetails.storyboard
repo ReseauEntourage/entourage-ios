@@ -86,7 +86,7 @@
                                                             <constraint firstAttribute="width" constant="56" id="b1h-No-usB"/>
                                                         </constraints>
                                                         <state key="normal" image="nextFull">
-                                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                         </state>
                                                         <state key="disabled" image="nextOpacity70"/>
                                                         <userDefinedRuntimeAttributes>
@@ -142,7 +142,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="mg2-nQ-Co1" secondAttribute="trailing" id="62q-JM-kHi"/>
                             <constraint firstItem="Yj2-Eq-54z" firstAttribute="top" secondItem="mg2-nQ-Co1" secondAttribute="bottom" id="GhU-al-Uv2"/>
@@ -354,7 +354,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="qQ0-sR-dhc" firstAttribute="top" secondItem="Qqj-vg-96q" secondAttribute="bottom" id="OA0-fD-tVr"/>
                             <constraint firstItem="Qqj-vg-96q" firstAttribute="leading" secondItem="dD6-zk-NiL" secondAttribute="leading" id="PxX-CZ-iLC"/>

@@ -89,7 +89,7 @@
                                             <constraint firstAttribute="width" constant="56" id="s5j-IA-2Dr"/>
                                         </constraints>
                                         <state key="normal" image="backArrow">
-                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -160,7 +160,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="uQ9-PD-VPv" secondAttribute="trailing" id="Mfp-8U-1lO"/>
                             <constraint firstItem="ncD-V6-d47" firstAttribute="top" secondItem="uQ9-PD-VPv" secondAttribute="bottom" id="ehs-H2-S6Q"/>
@@ -206,7 +206,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Activer les notifications">
-                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -265,7 +265,7 @@ Activez les notifications pour être alerté de vos nouveaux messages.</string>
                                 </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="LzF-gS-pCs" firstAttribute="top" secondItem="cGv-BC-RoD" secondAttribute="bottom" constant="16" id="0Oi-mQ-jZO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LzF-gS-pCs" secondAttribute="trailing" constant="-12" id="5Li-Ut-URG"/>

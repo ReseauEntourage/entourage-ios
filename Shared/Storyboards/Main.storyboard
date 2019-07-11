@@ -139,7 +139,7 @@
                                                     <color key="highlightedColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                             <constraints>
                                                 <constraint firstItem="czo-HS-UOe" firstAttribute="trailing" secondItem="v3R-kU-bFk" secondAttribute="trailingMargin" id="2Ui-xt-fGI"/>
                                                 <constraint firstItem="czo-HS-UOe" firstAttribute="centerY" secondItem="v3R-kU-bFk" secondAttribute="centerY" id="8bY-7d-A7a"/>
@@ -189,7 +189,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzU-dN-mcx">
                                                     <rect key="frame" x="0.0" y="48" width="375" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <color key="textColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="highlightedColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                             </subviews>
@@ -437,23 +437,23 @@
                                         </constraints>
                                         <items>
                                             <barButtonItem image="back" style="plain" id="0Ev-8f-aFN">
-                                                <color key="tintColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                 <connections>
                                                     <action selector="navigateBack" destination="h0R-pH-Cwq" id="BPN-OR-m75"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Xx1-4e-LWn">
-                                                <color key="tintColor" red="1" green="0.3503308296" blue="0.37804955239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </barButtonItem>
                                             <barButtonItem image="next" style="plain" id="mOl-th-0Ep">
-                                                <color key="tintColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                 <connections>
                                                     <action selector="navigateNext" destination="h0R-pH-Cwq" id="wLW-oG-6ar"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="dkZ-as-byl"/>
                                             <barButtonItem systemItem="refresh" id="M3T-UX-XYT">
-                                                <color key="tintColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                 <connections>
                                                     <action selector="reload" destination="h0R-pH-Cwq" id="Hes-d4-Ci9"/>
                                                 </connections>
@@ -965,7 +965,7 @@
                                                     <inset key="titleEdgeInsets" minX="-20" minY="40" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="20" minY="-15" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="APPELER" image="tel">
-                                                        <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="callPhone" destination="Rkl-sM-R4N" eventType="touchUpInside" id="yOf-iC-BHD"/>
@@ -1194,7 +1194,7 @@
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="47x-yn-azj">
                                         <rect key="frame" x="11" y="53" width="313" height="141.5"/>
-                                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                         <string key="text">On dirait que c'est calme ici!
 
 Déplacez la carte pour trouver des entourages crées par le réseau.
@@ -1205,7 +1205,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="47x-yn-azj" secondAttribute="trailing" constant="11" id="BZc-Rz-X2k"/>
                                     <constraint firstItem="TgR-1n-ufy" firstAttribute="top" secondItem="fyj-qg-Gvf" secondAttribute="top" constant="8" id="C3A-R4-KEv"/>
@@ -1248,7 +1248,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstItem="d0C-od-u8x" firstAttribute="leading" secondItem="Lzp-RD-PWj" secondAttribute="leading" constant="11" id="3U6-V7-Z8M"/>
                                     <constraint firstItem="Zxu-GD-nzz" firstAttribute="top" secondItem="Lzp-RD-PWj" secondAttribute="top" constant="8" id="Ojb-Cm-q8v"/>
@@ -1265,7 +1265,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc9-kH-YQ7">
                                 <rect key="frame" x="305" y="483" width="62" height="62"/>
-                                <color key="backgroundColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="SMt-8o-SPY"/>
                                     <constraint firstAttribute="width" constant="62" id="p7h-GC-Qtf"/>
@@ -1525,7 +1525,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85f-ti-rTp">
                                 <rect key="frame" x="20" y="561" width="335" height="59"/>
-                                <color key="backgroundColor" red="0.98048996040723979" green="0.35520117885662239" blue="0.12286313796226289" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="dXT-Sa-aSZ"/>
                                 </constraints>
