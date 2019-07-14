@@ -136,6 +136,20 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
              NSDictionary *responseUser = responseDict[@"user"];
              OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
              
+             // FIXME: this is a hack to work around the fact that anonymous users' attributes
+             // are not actually persisted server side.
+             OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+             if ([user.uuid isEqualToString:currentUser.uuid] &&
+                 [responseUser[@"placeholders"] isKindOfClass:[NSArray class]]) {
+                 
+                 if ([responseUser[@"placeholders"] containsObject:@"firebase_properties"]) {
+                     user.firebaseProperties = currentUser.firebaseProperties;
+                 }
+                 if ([responseUser[@"placeholders"] containsObject:@"address"]) {
+                     user.address = currentUser.address;
+                 }
+             }
+
              if (success) {
                  success(user);
              }
@@ -265,8 +279,10 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
                                                 NSLog(@"Authentication service response : %@", responseDict);
                                                 NSDictionary *responseAddress = responseDict[@"address"];
                                                 OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
+                                                NSDictionary *responseFirebaseProperties = responseDict[@"firebase_properties"];
                                                 OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
                                                 user.address = address;
+                                                user.firebaseProperties = responseFirebaseProperties;
                                                 [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                                 
                                                 if (completion) {

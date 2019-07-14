@@ -156,8 +156,9 @@
         } else {
             [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"addressSaved")];
             
+            OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+            
             if (self.isShownOnStartup) {
-                OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
                 [OTLogger logEvent:@"AcceptGeoloc"];
                 BOOL pushNotificationsEnabled = [currentUser isRegisteredForPushNotifications];
                 

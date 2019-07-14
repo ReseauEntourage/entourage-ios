@@ -31,6 +31,7 @@ NSString *const kKeyRoles = @"roles";
 NSString *const kKeyAnonymous = @"anonymous";
 NSString *const kMemberships = @"memberships";
 NSString *const kAddress = @"address";
+NSString *const kFirebaseProperties = @"firebase_properties";
 
 NSString *const kCoordinatorUserTag = @"coordinator";
 NSString *const kNotValidatedUserTag = @"not_validated";
@@ -68,6 +69,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
         _partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kKeyPartner]];
         _anonymous = [dictionary boolForKey:kKeyAnonymous defaultValue:NO];
+        _firebaseProperties = [self sanitizeFirebaseProperties:[dictionary objectForKey:kFirebaseProperties]];
         
         if ([[dictionary allKeys] containsObject:kKeyConversation]) {
             _conversation = [[OTConversation alloc] initWithDictionary:[dictionary objectForKey:kKeyConversation]];
@@ -140,6 +142,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     [encoder encodeBool:self.anonymous forKey:kKeyAnonymous];
     [encoder encodeObject:self.memberships forKey:kMemberships];
     [encoder encodeObject:self.address forKey:kAddress];
+    [encoder encodeObject:self.firebaseProperties forKey:kFirebaseProperties];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -167,6 +170,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         self.anonymous = [decoder decodeBoolForKey:kKeyAnonymous];
         self.memberships = [decoder decodeObjectForKey:kMemberships];
         self.address = [decoder decodeObjectForKey:kAddress];
+        self.firebaseProperties = [self sanitizeFirebaseProperties:[decoder decodeObjectForKey:kFirebaseProperties]];
     }
     return self;
 }
@@ -257,6 +261,25 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 
     // fallback to legacy id
     return self.sid.stringValue;
+}
+
+- (NSDictionary<NSString *, NSString *> *)sanitizeFirebaseProperties:(NSDictionary *)input {
+    if (![input isKindOfClass:NSDictionary.class]) return @{};
+    
+    NSMutableDictionary<NSString *, NSString *> *output = [NSMutableDictionary new];
+    
+    for (NSString *key in input) {
+        if (![key isKindOfClass:NSString.class]) continue;
+        NSString *value = input[key];
+        if (![value isKindOfClass:NSString.class] && ![key isKindOfClass:NSNull.class]) continue;
+        output[key] = value;
+    }
+    
+    return [NSDictionary dictionaryWithDictionary:output];
+}
+
+- (void)setFirebaseProperties:(NSDictionary<NSString *,NSString *> *)firebaseProperties {
+    _firebaseProperties = [self sanitizeFirebaseProperties:firebaseProperties];
 }
 
 @end

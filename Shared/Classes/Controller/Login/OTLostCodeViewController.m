@@ -47,6 +47,7 @@
     self.codeCountry = @"+33";
     self.countryPicker.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
+    self.phoneTextField.textContentType = UITextContentTypeTelephoneNumber;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -86,15 +87,17 @@
 
 - (void)regenerateSecretCode {
     [SVProgressHUD show];
-    NSString *phoneNumber = self.phoneTextField.text;
-    if ([self.phoneTextField.text hasPrefix:@"0"])
-        phoneNumber = [self.phoneTextField.text substringFromIndex:1];
-    NSString *phone = [self.codeCountry stringByAppendingString:phoneNumber];
-    [[OTAuthService new] regenerateSecretCode:phone
+    NSString *phoneNumber = [self.phoneTextField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
+    if(![phoneNumber hasPrefix:@"+"]) {
+        if([phoneNumber hasPrefix:@"0"])
+            phoneNumber = [phoneNumber substringFromIndex:1];
+        phoneNumber = [self.codeCountry stringByAppendingString:phoneNumber];
+    }
+    [[OTAuthService new] regenerateSecretCode:phoneNumber
                                       success:^(OTUser *user)
     {
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"requestSent")];
-        [self continueOnSuccess:user phone:phone];
+        [self continueOnSuccess:user phone:phoneNumber];
     }
     failure:^(NSError *error) {
         [SVProgressHUD dismiss];
@@ -129,14 +132,19 @@
 #pragma mark - Actions
 
 - (IBAction)regenerateButtonDidTap:(id)sender {
-    NSString *phone = [self.codeCountry stringByAppendingString:self.phoneTextField.text];
-    if (phone.length == 0) {
+    NSString *phoneNumber = [self.phoneTextField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
+    if(![phoneNumber hasPrefix:@"+"]) {
+        if([phoneNumber hasPrefix:@"0"])
+            phoneNumber = [phoneNumber substringFromIndex:1];
+        phoneNumber = [self.codeCountry stringByAppendingString:phoneNumber];
+    }
+    if (phoneNumber.length == 0) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"requestImposible")
                                                                                  message:OTLocalizedString(@"retryPhone") preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alertController animated:YES completion:nil];
     }
-    else if (![phone isValidPhoneNumber]) {
+    else if (![phoneNumber isValidPhoneNumber]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"requestImposible")
                                                                                  message:OTLocalizedString(@"invalidPhoneNumber") preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil]];

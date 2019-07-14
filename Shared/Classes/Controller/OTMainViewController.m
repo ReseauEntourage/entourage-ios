@@ -513,11 +513,18 @@
     
     self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     
-    MKCoordinateRegion region;
-    if([OTLocationManager sharedInstance].currentLocation)
-        region = MKCoordinateRegionMakeWithDistance([OTLocationManager sharedInstance].currentLocation.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    CLLocationCoordinate2D mapCenter;
+
+    if(currentUser.hasActionZoneDefined)
+        mapCenter = currentUser.address.location.coordinate;
+    else if([OTLocationManager sharedInstance].currentLocation)
+        mapCenter = [OTLocationManager sharedInstance].currentLocation.coordinate;
     else
-        region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON), MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
+        mapCenter = CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON);
+
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(mapCenter, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
+
     [self.mapView setRegion:region animated:NO];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
@@ -1422,21 +1429,12 @@
     [self.guideInfoBehavior hide];
     
     self.isTourListDisplayed = YES;
-    [UIView animateWithDuration:0.2 animations:^{
-        CGRect mapFrame = self.mapView.frame;
-        mapFrame.size.height = MAPVIEW_HEIGHT;
-        //self.tableView.tableHeaderView.frame = mapFrame;
-        self.mapView.frame = mapFrame;
-        //[self.tableView setTableHeaderView:self.tableView.tableHeaderView];
 
-    } completion:^(BOOL finished) {
-        [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
-                                                                   mapHeight:MAPVIEW_HEIGHT
-                                                                  showFilter:[OTAppConfiguration supportsFilteringEvents]]];
-        self.isTourListDisplayed = YES;
-        [self configureNavigationBar];
-    }];
-    
+    [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
+                                                               mapHeight:MAPVIEW_HEIGHT
+                                                              showFilter:[OTAppConfiguration supportsFilteringEvents]]];
+
+    self.isTourListDisplayed = YES;
     [self configureNavigationBar];
 }
 
@@ -1462,21 +1460,18 @@
     }
     
     CGRect mapFrame = self.mapView.frame;
-    mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
+    mapFrame.size.height = self.view.bounds.size.height;
     
     [OTLogger logEvent:@"MapViewClick"];
     
     NSTimeInterval duration = animated ? 0.25 : 0.0;
     [UIView animateWithDuration:duration animations:^(void) {
-        //self.tableView.tableHeaderView.frame = mapFrame;
-        self.mapView.frame = mapFrame;
-        
         MKCoordinateRegion region;
-        region = MKCoordinateRegionMakeWithDistance(self.mapView.centerCoordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS );
+        region = MKCoordinateRegionMakeWithDistance(self.mapView.centerCoordinate, MAPVIEW_REGION_SPAN_X_METERS, MAPVIEW_REGION_SPAN_Y_METERS );
         [self.mapView setRegion:region animated:animated];
         [self.tableView setTableHeaderView:[self.tableView headerViewWithMap:self.mapView
-                                                                   mapHeight:[UIScreen mainScreen].bounds.size.height
-                                                                  showFilter:NO]];
+                                                                   mapHeight:mapFrame.size.height
+                                                                  showFilter:YES]];
         [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:animated];
     }];
     
@@ -1484,7 +1479,7 @@
 }
 
 - (void)showToursMap {
-    [self showMapAnimated:YES];
+    [self showMapAnimated:NO];
 }
 
 #pragma mark 15.2 New Tour - on going

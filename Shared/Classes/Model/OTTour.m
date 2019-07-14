@@ -48,6 +48,20 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    OTTour *copy = [super copyWithZone:zone];
+    copy.tourPoints = self.tourPoints;
+    copy.organizationName = self.organizationName;
+    copy.organizationDesc = self.organizationDesc;
+    copy.startTime = self.startTime;
+    copy.endTime = self.endTime;
+    copy.distance = self.distance;
+    copy.noMessages = self.noMessages;
+
+    return copy;
+}
+
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     self = [super initWithDictionary:dictionary];
     if (self) {

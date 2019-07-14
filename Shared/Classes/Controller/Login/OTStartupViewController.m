@@ -169,7 +169,7 @@ SFSafariViewController *loginlessSafariController;
 
         [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
 
-        [OTAppState navigateToAuthenticatedLandingScreen];
+        [OTAppState navigateToPermissionsScreens:self];
     } failure:^(NSError *error) {
         [SVProgressHUD dismiss];
 

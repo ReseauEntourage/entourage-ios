@@ -11,7 +11,7 @@
 @implementation UIColor (entourage)
 
 + (UIColor *)appOrangeColor {
-    return [UIColor colorWithRed: 242.0f/255.0f green: 101.0f/255.0f blue:   33.0f/255.0f alpha:1.0f];
+    return [UIColor colorWithRed: 245.0f/255.0f green:  95.0f/255.0f blue:   36.0f/255.0f alpha:1.0f];
 }
 
 + (UIColor *)appTomatoColor {

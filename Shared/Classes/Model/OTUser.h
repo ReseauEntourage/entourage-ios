@@ -46,6 +46,7 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic) OTAddress *address;
 @property (strong, nonatomic) NSArray *roles;
 @property (nonatomic, readonly) NSArray *memberships;
+@property (strong, nonatomic) NSDictionary<NSString *, NSString *> *firebaseProperties;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;

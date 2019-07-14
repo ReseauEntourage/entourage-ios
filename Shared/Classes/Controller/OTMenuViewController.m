@@ -35,6 +35,7 @@
 #import "OTAppConfiguration.h"
 #import "OTAuthService.h"
 #import "OTAuthenticationModalViewController.h"
+#import <FirebaseInstanceID/FirebaseInstanceID.h>
 #import "entourage-Swift.h"
 
 #define DONATION_CELL_INDEX 3
@@ -80,6 +81,8 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapAssociation;
 @property (weak, nonatomic) IBOutlet UIImageView *imgAssociation;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet UILabel *footerLabel;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -112,6 +115,17 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableHeaderView = self.headerView;
+    self.tableView.tableFooterView = self.footerView;
+    
+    if (OTAppConfiguration.sharedInstance.environmentConfiguration.runsOnStaging) {
+        [FIRInstanceID.instanceID getIDWithHandler:^(NSString * _Nullable identity, NSError * _Nullable error) {
+            if (error) identity = @"error";
+            self.footerLabel.text = [NSString stringWithFormat:@"v%@\nFIId: %@", [NSBundle fullCurrentVersion], identity];
+        }];
+    }
+    else {
+        self.footerLabel.hidden = YES;
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSupportedPartner:) name:@kNotificationSupportedPartnerUpdated object:nil];
@@ -200,10 +214,10 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     }
     
     if (indexPath.row == DONATION_CELL_INDEX) {
-        cell.contentView.backgroundColor = [UIColor colorWithRed:242
-                                                           green:101
-                                                            blue:33
-                                                           alpha:1];
+        cell.contentView.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    }
+    else if (indexPath.row == LOG_OUT_CELL_INDEX) {
+        cell.itemLabel.textColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     }
     
 	return cell;
@@ -407,6 +421,14 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (void)testDeepLink:(NSString *)deepLink {
     [[OTDeepLinkService new] handleUniversalLink:[NSURL URLWithString:deepLink]];
+}
+
+- (IBAction)longPressedFooterLabel:(id)sender {
+    [FIRInstanceID.instanceID getIDWithHandler:^(NSString * _Nullable identity, NSError * _Nullable error) {
+        if (error) identity = error.description;
+        [UIPasteboard generalPasteboard].string = identity;
+        [SVProgressHUD showInfoWithStatus:@"Information copiée dans le presse-papier"];
+    }];
 }
 
 @end

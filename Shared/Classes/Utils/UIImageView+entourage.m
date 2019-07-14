@@ -22,4 +22,22 @@
         imageView.image = placeholderImage;
 }
 
+- (void)setupFromUrl:(NSString *)url withPlaceholder:(NSString *)placeholder
+             success:(void (^)(NSURLRequest *request, NSHTTPURLResponse * _Nullable response, UIImage *image))success
+             failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse * _Nullable response, NSError *error))failure {
+
+    __weak UIImageView *imageView = self;
+    UIImage *placeholderImage = [UIImage imageNamed:placeholder];
+    if (url != nil && [url class] != [NSNull class] && url.length > 0) {
+        NSURL *imgUrl = [NSURL URLWithString:url];
+
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imgUrl];
+        [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+        
+        [self setImageWithURLRequest:request placeholderImage:placeholderImage success:success failure:failure];
+    }
+    else
+        imageView.image = placeholderImage;
+}
+
 @end

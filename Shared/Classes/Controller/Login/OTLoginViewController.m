@@ -73,6 +73,9 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.title = @"";
     self.phoneIsValid = NO;
     self.phoneTextField.floatingLabelTextColor = [UIColor whiteColor];
+    
+    self.phoneTextField.textContentType = UITextContentTypeTelephoneNumber;
+    
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.phoneIsValid = YES;
         [self validateForm];
@@ -150,11 +153,14 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [SVProgressHUD show];
     
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
-    NSString *phone = self.phoneTextField.text;
-    if ([self.phoneTextField.text hasPrefix:@"0"])
-        phone = [self.phoneTextField.text substringFromIndex:1];
-    
-    [[OTAuthService new] authWithPhone:[self.codeCountry stringByAppendingString: phone]
+    NSString *phoneNumber = [self.phoneTextField.text stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceCharacterSet];
+    if(![phoneNumber hasPrefix:@"+"]) {
+        if([phoneNumber hasPrefix:@"0"])
+            phoneNumber = [phoneNumber substringFromIndex:1];
+        phoneNumber = [self.codeCountry stringByAppendingString:phoneNumber];
+    }
+
+    [[OTAuthService new] authWithPhone:phoneNumber
                               password:self.passwordTextField.text
                               deviceId:deviceAPNSid
                                success: ^(OTUser *user, BOOL firstLogin) {
@@ -168,7 +174,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    
                                    [OTLogger setupMixpanelWithUser:user];
-                                   user.phone = [self.codeCountry stringByAppendingString:phone];
+                                   user.phone = phoneNumber;
                                    
                                    if ([OTAppConfiguration supportsTourFunctionality]) {
                                        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];

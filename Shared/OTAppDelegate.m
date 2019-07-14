@@ -8,11 +8,12 @@
 
 #import "OTAppDelegate.h"
 #import "OTAppConfiguration.h"
+#import <FirebaseMessaging/FirebaseMessaging.h>
 
 NSString * const kLoginFailureNotification = @"loginFailureNotification";
 NSString * const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
 
-@interface OTAppDelegate () <UIApplicationDelegate, UNUserNotificationCenterDelegate>
+@interface OTAppDelegate () <UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate>
 @end
 
 @implementation OTAppDelegate
@@ -76,6 +77,14 @@ continueUserActivity:(NSUserActivity *)userActivity
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
 {
     [OTAppConfiguration userNotificationCenter:center willPresentNotification:notification withCompletionHandler:completionHandler];
+}
+
+- (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
+    [OTAppConfiguration messaging:messaging didReceiveRegistrationToken:fcmToken];
+}
+
+- (void)messaging:(FIRMessaging *)messaging didReceiveMessage:(FIRMessagingRemoteMessage *)remoteMessage {
+    [OTAppConfiguration messaging:messaging didReceiveMessage:remoteMessage];
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "UIViewController+menu.h"
 #import "OTConsts.h"
 #import "OTMailSenderBehavior.h"
+#import "entourage-Swift.h"
 
 @import MessageUI;
 
@@ -57,6 +58,10 @@
         self.titleView.hidden = YES;
     }
     // POI
+    NSArray *buttons = @[self.addressButton, self.phoneButton, self.emailButton, self.webButton];
+    for (UIButton *button in buttons) {
+        [button setTitleColor:[ApplicationTheme shared].primaryNavigationBarTintColor forState:UIControlStateNormal];
+    }
     [self.nameLabel setText:self.poi.name];
     [self.detailsLabel setText:self.poi.details];
     if (self.poi.address != nil && self.poi.address.length > 0) {

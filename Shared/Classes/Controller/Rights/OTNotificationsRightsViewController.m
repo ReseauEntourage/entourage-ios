@@ -100,12 +100,7 @@
 #pragma mark - private methods
 
 - (void)setTutorialCompleted {
-    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
-    if (loggedNumbers == nil)
-        loggedNumbers = [NSMutableArray new];
-    [loggedNumbers addObject:[NSUserDefaults standardUserDefaults].currentUser.phone];
-    [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
 }
 
 - (void)checkInvitationsToJoin {

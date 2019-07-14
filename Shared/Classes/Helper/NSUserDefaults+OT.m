@@ -213,4 +213,15 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
     return [loggedNumbers containsObject:[self.currentUser phone]];
 }
 
+- (void)setTutorialCompleted {
+    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+    if ([loggedNumbers containsObject:self.currentUser.phone])
+        return;
+    if (loggedNumbers == nil)
+        loggedNumbers = [NSMutableArray new];
+    [loggedNumbers addObject:self.currentUser.phone];
+    [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 @end

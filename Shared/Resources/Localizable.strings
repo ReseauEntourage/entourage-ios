@@ -11,7 +11,7 @@
 
 // Welcome
 "welcomeTopText" = "Vous allez rejoindre une communauté de voisins avec et sans abris qui se rassemblent et luttent contre l’exclusion !";
-"geolocalisationDescriptionText" = "Entourage, c’est utile parce que c’est local!\nParticipez à la solidarité de votre quartier : pour voir les actions de vos voisins, qu’ils soient avec ou sans-abri, activez la géolocalisation.";
+"geolocalisationDescriptionText" = "Entourage est un réseau local !\nDécouvrez les initiatives solidaires de votre quartier et tissez des liens avec vos voisins en activant la géolocalisation.";
 "notificationNeedDescription" = "Pour vous faire découvrir les actions solidaires autour de vous, Entourage doit connaître votre position.";
 
 
@@ -29,8 +29,8 @@
 "yes" = "Oui";
 "ask_permission_location_create_tour" = "Pour créer une maraude, vous devez activer la géolocalisation";
 "ask_permission_location_recenter_map" = "Pour recentrer autour de vous, vous devez activer la géolocalisation";
-"no_location_create_tour" = "La géolocalisation  de votre maraude a recontré une erreur.";
-"no_location_recenter_map" = "La géolocalisation a recontré une erreur.";
+"no_location_create_tour" = "La géolocalisation  de votre maraude a rencontré une erreur.";
+"no_location_recenter_map" = "La géolocalisation a rencontré une erreur.";
 "activate" = "Activer";
 "join" = "Rejoindre";
 
@@ -291,7 +291,7 @@
 "invalidPhoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
 "userNameDescriptionText" = "Seuls le prénom et la première lettre du nom apparaitront aux autres utilisateurs.";
 "userEmailDescriptionText" = "Nous ne l’utiliserons que pour vous envoyer notre newsletter et les dernières actualités d’Entourage";
-"userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\nActiver les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
+"userNotificationsDescriptionText" = "Sur Entourage, vous allez créer des liens entre voisins solidaires.\nActivez les notifications pour être alerté de vos nouveaux messages.";
 "edit_user_description" = "Présentez-vous, le réseau Entourage a hâte de faire votre connaissance!";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
@@ -304,12 +304,12 @@
 "user_email_address" = "Adresse e-mail";
 "user_phone_number" = "Numéro de téléphone";
 "defineActionZone" = "Ma zone d'action";
-"defineActionZoneTitle" = "Définissez votre zone d'action";
+"defineActionZoneTitle" = "Où souhaitez-vous agir ?";
 "defineActionZoneDescription" = "Où souhaitez-vous agir ?\nSoyez notifié des actualités importantes.";
 "modifyActionZoneTitle" = "Modifier ma zone";
 "defineActionZoneSampleAddress" = "avenue Jean Jaurès...";
-"defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nPour recevoir des recommandations personnalisées à proximité, indiquez le lieu autour duquel vous souhaitez agir. ";
-"defineZoneSubtitle2" = "\n\nAdresse - peut être approximative.";
+"defineZoneSubtitle1" = "Entourage est un réseau local !\nDécouvrez les initiatives solidaires de votre quartier et tissez des liens avec vos voisins";
+"defineZoneSubtitle2" = "\n\nAdresse - peut être approximative";
 
 "user_edit_password_invalid_current" = "Le mot de passe ne correspond pas";
 "user_edit_password_invalid_length_too_short" = "Le mot de passe doit contenir au moins %d caractères";

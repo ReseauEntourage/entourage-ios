@@ -64,9 +64,7 @@
                 [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
             } else {
                 
-                if (currentUser.isAnonymous) {
-                    // nothing for now
-                } else if (![currentUser hasActionZoneDefined]) {
+                if (![currentUser hasActionZoneDefined]) {
                     // Force the users to define action zone
                     // The Entourage app has Ignore button, while the pfp does not have it
                     [OTAppState navigateToLocationRightsScreen:nil];
@@ -311,6 +309,9 @@
     
     if ([currentUser hasActionZoneDefined] &&
         [currentUser isRegisteredForPushNotifications]) {
+        
+        [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
+        [[OTLocationManager sharedInstance] startLocationUpdates];
         
         [OTAppState navigateToAuthenticatedLandingScreen];
         
@@ -567,6 +568,11 @@
             [OTAppState navigateToRootController:rightsViewController];
             return;
         }
+        // when coming from the startup page, prevent back navigation
+        if ([viewController isKindOfClass:[OTStartupViewController class]]) {
+            [viewController.navigationController setViewControllers:@[rightsViewController] animated:YES];
+            return;
+        }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];
     } else {
         [OTAppState navigateToRootController:rightsViewController];
@@ -580,6 +586,11 @@
     if (viewController) {
         if ([viewController isKindOfClass:[rightsViewController class]]) {
             [OTAppState navigateToRootController:rightsViewController];
+            return;
+        }
+        // when coming from the startup page, prevent back navigation
+        if ([viewController isKindOfClass:[OTStartupViewController class]]) {
+            [viewController.navigationController setViewControllers:@[rightsViewController] animated:YES];
             return;
         }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];
