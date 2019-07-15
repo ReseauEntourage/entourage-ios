@@ -902,6 +902,7 @@
                                                 <constraint firstItem="sQS-Yo-QkA" firstAttribute="top" secondItem="M4G-mA-6Wd" secondAttribute="bottom" constant="10" id="oMg-pQ-MnM"/>
                                                 <constraint firstAttribute="trailing" secondItem="M4G-mA-6Wd" secondAttribute="trailing" id="oNq-iX-0D8"/>
                                                 <constraint firstAttribute="bottom" secondItem="aOJ-8N-3xc" secondAttribute="bottom" priority="251" id="qMl-t1-feo"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TFV-Eg-f6o" secondAttribute="trailing" constant="15" id="v9H-co-Z4B"/>
                                                 <constraint firstItem="TFV-Eg-f6o" firstAttribute="top" secondItem="0Yc-Ce-Ysu" secondAttribute="topMargin" id="vQF-do-vuR"/>
                                                 <constraint firstItem="qoy-rq-3kl" firstAttribute="top" secondItem="TFV-Eg-f6o" secondAttribute="bottom" constant="3.5" id="zGj-7T-We0"/>
                                             </constraints>
