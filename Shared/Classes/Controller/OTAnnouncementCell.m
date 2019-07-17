@@ -12,6 +12,7 @@
 #import "OTSummaryProviderBehavior.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/SDImageCache.h>
 #import "entourage-Swift.h"
 
 NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableViewCellIdentifier";
@@ -39,11 +40,28 @@ NSString* const OTAnnouncementTableViewCellIdentifier = @"OTAnnouncementTableVie
     if (uiDelegate.contentImageUrl) {
         NSURL *url = [NSURL URLWithString:uiDelegate.contentImageUrl];
         self.contentImageHeightConstraint.constant = 160;
-        [self.contentImageView sd_setImageWithURL:url completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-            if (completion) {
-                completion();
+        [self.contentImageView sd_setImageWithURL:url
+                                 placeholderImage:[UIImage imageNamed:@"announcementCardPlaceholder"]
+                                          options: SDWebImageAvoidAutoSetImage
+                                        completed:
+            ^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (cacheType == SDImageCacheTypeNone) {
+                    [UIView transitionWithView:self.contentImageView
+                                      duration:0.2
+                                       options:UIViewAnimationOptionTransitionCrossDissolve
+                                    animations:^{
+                                        self.contentImageView.image = image;
+                                    }
+                                    completion:nil];
+                }
+                else {
+                    self.contentImageView.image = image;
+                }
+                if (completion) {
+                    completion();
+                }
             }
-        }];
+         ];
     } else {
         self.contentImageHeightConstraint.constant = 0;
         if (completion) {
