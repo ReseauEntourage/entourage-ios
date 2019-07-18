@@ -293,8 +293,7 @@ workflows:
             rm -r badge-master/
     - fastlane:
         inputs:
-        - lane: "$FASTLANE_LANE"
-        - work_dir: "$FASTLANE_WORK_DIR"
+        - lane: pfp_beta
     - deploy-to-bitrise-io: {}
     - post-jira-comment-with-build-details:
         inputs:
