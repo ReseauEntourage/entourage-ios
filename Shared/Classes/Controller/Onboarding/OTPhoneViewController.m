@@ -53,7 +53,9 @@
     
     [self.phoneTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     
-    self.phoneTextField.textContentType = UITextContentTypeTelephoneNumber;
+    if (@available(iOS 10.0, *)) {
+        self.phoneTextField.textContentType = UITextContentTypeTelephoneNumber;
+    }
     
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.validateButton.enabled = isValid;
