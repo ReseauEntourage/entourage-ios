@@ -171,7 +171,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    
                                    // as the logged-out user
                                    [OTLogger logEvent:@"Login_Success"
-                                       withParameters:@{@"First_Login": [NSNumber numberWithBool:firstLogin]}];
+                                       withParameters:@{@"first_login": [NSNumber numberWithBool:firstLogin]}];
                                    
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    
