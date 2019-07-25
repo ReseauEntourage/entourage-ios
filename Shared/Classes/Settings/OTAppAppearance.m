@@ -572,7 +572,7 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 60)];
     titleLabel.text = titleString;
     titleLabel.textColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    titleLabel.numberOfLines = 2;
+    titleLabel.numberOfLines = 1;
     
     return titleLabel;
 }
