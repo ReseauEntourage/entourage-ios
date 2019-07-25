@@ -5,7 +5,7 @@ NS_ASSUME_NONNULL_BEGIN
 IB_DESIGNABLE
 @interface OTThemedLabel : UILabel
 
-@property (nonatomic) IBInspectable NSString *themeColor;
+@property (nonatomic) IBInspectable NSString *themeStyle;
 
 @end
 
