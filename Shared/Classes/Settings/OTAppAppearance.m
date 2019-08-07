@@ -391,20 +391,10 @@
         return [self formattedEventDateDescriptionForMessageItem:item size:size];;
     }
     
-    // The rest of items
-    if ([item.entourage_type isEqualToString:@"contribution"]) {
-        typeColor = [UIColor brightBlue];
-    } else if ([item.entourage_type isEqualToString:@"ask_for_help"]) {
-        typeColor = [UIColor appOrangeColor];
-    }
-    
     NSString *itemType = OTLocalizedString(item.entourage_type);
-    NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
-                                   NSForegroundColorAttributeName:typeColor};
-    
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString: itemType attributes:atttributtes];
-    NSAttributedString *byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_BOLD_DESCRIPTION size:size]}];
+    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString: itemType attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]}];
+    NSAttributedString *byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]}];
+    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:size]}];
     
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
     [typeByNameAttrString appendAttributedString:byAttrString];
