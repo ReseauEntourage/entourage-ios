@@ -16,7 +16,7 @@
     self.summaryProvider.lblDescription = self.lblDescription;
     self.summaryProvider.lblUserCount = self.lblUserCount;
     self.summaryProvider.btnAvatar = self.btnAvatar;
-    self.summaryProvider.lblTimeDistance = self.lblTimeDistance;
+    self.summaryProvider.lblLocation = self.lblLocation;
     self.summaryProvider.imgAssociation = self.imgAssociation;
     self.summaryProvider.imgCategory = self.imgCategory;
     [self.summaryProvider configureWith:item];

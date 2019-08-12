@@ -80,6 +80,14 @@
         self.txtFeedItemDescription.text = [uiDelegate feedItemDescription];
     }
     
+    if (self.lblLocation) {
+        if (feedItem.displayAddress.length > 0) {
+            self.lblLocation.text = [NSString stringWithFormat:OTLocalizedString(@"entourage_location"), feedItem.displayAddress];
+        } else {
+            self.lblLocation.text = @"";
+        }
+    }
+    
     if (self.lblTimeDistance) {
         double distance = [uiDelegate distance];
         if (self.showTimeAsUpdatedDate) {
@@ -141,6 +149,7 @@
 - (void)clearConfiguration {
     self.lblTitle = nil;
     self.lblDescription = nil;
+    self.lblLocation = nil;
     self.lblUserCount = nil;
     self.btnAvatar = nil;
     self.lblTimeDistance = nil;

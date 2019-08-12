@@ -151,7 +151,7 @@
                                                     <outlet property="btnAvatar" destination="RcA-br-gXo" id="Jla-1l-pmz"/>
                                                     <outlet property="imgAssociation" destination="9v3-h8-xcy" id="iqw-bn-jW5"/>
                                                     <outlet property="lblDescription" destination="ZOB-K8-3My" id="An9-v1-JzT"/>
-                                                    <outlet property="lblTimeDistance" destination="xDt-dA-Asj" id="4pP-vT-Ozq"/>
+                                                    <outlet property="lblLocation" destination="xDt-dA-Asj" id="FsL-LD-ybt"/>
                                                     <outlet property="lblTitle" destination="KaD-Co-GmI" id="o9E-s3-19Z"/>
                                                     <outlet property="lblUserCount" destination="4QV-vH-V9y" id="eyq-Um-BtF"/>
                                                     <outlet property="summaryProvider" destination="dGI-3e-zqZ" id="9ZG-GD-Ubj"/>
