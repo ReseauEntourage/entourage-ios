@@ -35,11 +35,6 @@
         [items addObject:eventInfo];
     }
     
-    // Map row
-    OTFeedItem *map = feedItem.copy;
-    map.identifierTag = @"feedLocation";
-    [items addObject:map];
-    
     // Description row
     NSString *description = [[[OTFeedItemFactory createFor:feedItem] getUI] feedItemDescription];
     if ([description length] > 0) {
@@ -48,6 +43,11 @@
         [items addObject:desc];
     }
     
+    // Map row
+    OTFeedItem *map = feedItem.copy;
+    map.identifierTag = @"feedLocation";
+    [items addObject:map];
+
     // Members count row
     OTFeedItem *membersCount = feedItem.copy;
     membersCount.identifierTag = @"membersCount";
