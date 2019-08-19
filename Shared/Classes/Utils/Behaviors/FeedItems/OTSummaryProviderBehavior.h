@@ -13,6 +13,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UILabel *lblDescription;
+@property (nonatomic, weak) IBOutlet UILabel *lblUserName;
 @property (nonatomic, weak) IBOutlet UILabel *lblTimeDistance;
 @property (nonatomic, weak) IBOutlet UILabel *lblLocation;
 @property (nonatomic, weak) IBOutlet UIButton *btnAvatar;

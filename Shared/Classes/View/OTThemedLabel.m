@@ -48,6 +48,18 @@
         self.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
         self.textColor = [ApplicationTheme shared].titleLabelColor;
     }
+    else if ([self.themeStyle isEqualToString:@"body"]) {
+        self.font = [UIFont systemFontOfSize:15];
+        self.textColor = [ApplicationTheme shared].titleLabelColor;
+    }
+    else if ([self.themeStyle isEqualToString:@"bodySemiBold"]) {
+        self.font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+        self.textColor = [ApplicationTheme shared].titleLabelColor;
+    }
+    else if ([self.themeStyle isEqualToString:@"bodyItalic"]) {
+        self.font = [UIFont italicSystemFontOfSize:15];
+        self.textColor = [ApplicationTheme shared].titleLabelColor;
+    }
     else {
         if (!inInterfaceBuilder) return;
         self.text = [NSString stringWithFormat:@"invalid themeStyle \"%@\"", self.themeStyle];

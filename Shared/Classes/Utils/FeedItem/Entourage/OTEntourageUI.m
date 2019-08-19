@@ -20,6 +20,14 @@
     return [OTAppAppearance formattedDescriptionForMessageItem:self.entourage size:size];
 }
 
+- (NSString *)descriptionWithoutUserName {
+    return [OTAppAppearance descriptionForMessageItem:self.entourage];
+}
+
+- (NSString *)userName {
+    return self.entourage.author.displayName;
+}
+
 - (NSString *)summary {
     return self.entourage.title;
 }

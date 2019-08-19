@@ -57,5 +57,6 @@
 - (BOOL)isNeighborhood;
 - (BOOL)isConversation;
 - (BOOL)isOuting;
+- (BOOL)isAction;
 
 @end

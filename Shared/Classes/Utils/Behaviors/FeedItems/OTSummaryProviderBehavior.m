@@ -73,9 +73,17 @@
     }
     
     if (self.lblDescription) {
-        [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+        if (self.lblUserName) {
+            self.lblDescription.text = [uiDelegate descriptionWithoutUserName];
+        } else {
+            [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+        }
     }
-    
+
+    if (self.lblUserName) {
+        self.lblUserName.text = [uiDelegate userName];
+    }
+
     if (self.txtFeedItemDescription) {
         self.txtFeedItemDescription.text = [uiDelegate feedItemDescription];
     }
@@ -149,6 +157,7 @@
 - (void)clearConfiguration {
     self.lblTitle = nil;
     self.lblDescription = nil;
+    self.lblUserName = nil;
     self.lblLocation = nil;
     self.lblUserCount = nil;
     self.btnAvatar = nil;

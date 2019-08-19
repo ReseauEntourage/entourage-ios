@@ -14,6 +14,7 @@
 - (void)configureWith:(OTFeedItem *)item {
     self.summaryProvider.lblTitle = self.lblTitle;
     self.summaryProvider.lblDescription = self.lblDescription;
+    self.summaryProvider.lblUserName = self.lblUserName;
     self.summaryProvider.lblUserCount = self.lblUserCount;
     self.summaryProvider.btnAvatar = self.btnAvatar;
     self.summaryProvider.lblLocation = self.lblLocation;

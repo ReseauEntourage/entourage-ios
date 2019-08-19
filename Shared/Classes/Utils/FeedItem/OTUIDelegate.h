@@ -12,6 +12,8 @@
 @protocol OTUIDelegate <NSObject>
 
 - (NSAttributedString *) descriptionWithSize:(CGFloat)size;
+- (NSString *)descriptionWithoutUserName;
+- (NSString *)userName;
 - (NSString *)summary;
 - (NSString *)categoryIconSource;
 - (NSString *)feedItemDescription;
