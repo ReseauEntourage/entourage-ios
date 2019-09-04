@@ -10,6 +10,7 @@
 #import <SWRevealViewController/SWRevealViewController.h>
 #import <Mixpanel/Mixpanel.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <FirebaseAnalytics/FirebaseAnalytics.h>
 
 #import "OTPushNotificationsService.h"
 #import "NSUserDefaults+OT.h"
@@ -29,37 +30,280 @@
 #import "OTAppState.h"
 #import "OTAppDelegate.h"
 
+static NSString *const kLegacyDidRegisterUserNotificationSettings = @"legacyDidRegisterUserNotificationSettings";
+static NSString *const kRemoteNotificationsConfigurationDigest = @"remoteNotificationsConfigurationDigest";
 
 @implementation OTPushNotificationsService
 
-- (void)sendAppInfo {
-    [self sendAppInfoWithSuccess:nil orFailure:nil];
+- (instancetype)init
+{
+    self = [super init];
+    if (!self) return nil;
+    [self setupObservers];
+    return self;
 }
 
-- (void)saveToken:(NSData *)tokenData {
-    NSString *token = [[tokenData description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+#pragma mark - Observers
+
+- (void)setupObservers {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center removeObserver:self];
+    [center addObserver:self
+               selector:@selector(currentUserUpdated:)
+                   name:[kNotificationCurrentUserUpdated copy]
+                 object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)currentUserUpdated:(NSNotification *)userUpdate {
+    OTUser *previousUser;
+    OTUser *currentUser;
+    
+    if (userUpdate.userInfo[@"previousValue"] == [NSNull null]) {
+        previousUser = nil;
+    } else {
+        previousUser = userUpdate.userInfo[@"previousValue"];
+    }
+    
+    if (userUpdate.userInfo[@"currentValue"] == [NSNull null]) {
+        currentUser = nil;
+    } else {
+        currentUser = userUpdate.userInfo[@"currentValue"];
+    }
+    
+    if (currentUser == nil && previousUser != nil) {
+        [self clearTokenWithWithUser:previousUser];
+    }
+    else if (![currentUser.uuid isEqualToString:previousUser.uuid]) {
+        [OTPushNotificationsService refreshPushToken];
+    }
+}
+
+
+#pragma mark - Notification Options
+
++ (UNAuthorizationOptions)authorizationOptions {
+    return (UNAuthorizationOptionBadge +
+            UNAuthorizationOptionSound +
+            UNAuthorizationOptionAlert);
+}
+
+
+#pragma mark - Main methods
+
+// only request provisional authorization if iOS >= 12 and current authorization status is NotDetermined
++ (void)requestProvisionalAuthorizationsIfAdequate {
+    if (@available(iOS 12.0, *)) {
+        UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+        [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+            if (settings.authorizationStatus == UNAuthorizationStatusNotDetermined) {
+                [self requestProvisionalAuthorizations];
+            }
+        }];
+    }
+}
+
++ (void)requestProvisionalAuthorizations {
+    if (@available(iOS 12.0, *)) {
+        UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:([self authorizationOptions] + UNAuthorizationOptionProvisional)
+                              completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                                  [self authorizationRequestGranted:granted withError:error];
+                              }];
+    }
+}
+
++ (void)promptUserForAuthorizations {
+    if (@available(iOS 10.0, *)) {
+        UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:[self authorizationOptions]
+                              completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                                  [self authorizationRequestGranted:granted withError:error];
+                              }];
+    } else {
+        // iOS 9 fallback
+        UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeBadge +
+                                                        UIUserNotificationTypeSound +
+                                                        UIUserNotificationTypeAlert);
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                                 categories:nil];
+
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        // -> application:didRegisterUserNotificationSettings:
+        //    -> legacyRequestAuthorizationCompletedWithError
+    }
+}
+
+// iOS 9 fallback for promptUserForAuthorizations
++ (void)legacyAuthorizationRequestCompletedWithError:(NSError * _Nullable)error {
+    BOOL granted;
+    
+    if (error) {
+        granted = NO;
+    } else {
+        // used to differentiate NotDetermined and Denied in getAuthorizationStatusWithCompletionHandler
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kLegacyDidRegisterUserNotificationSettings];
+        
+        UIUserNotificationSettings *settings = [UIApplication sharedApplication].currentUserNotificationSettings;
+        granted = settings.types != UIUserNotificationTypeNone;
+    }
+    
+    [self authorizationRequestGranted:granted withError:error];
+}
+
++ (void)authorizationRequestGranted:(BOOL)granted withError:(NSError * _Nullable)error {
+    if (error == nil) {
+        [self refreshPushToken];
+    }
+}
+
++ (void)refreshPushToken {
+    dispatch_async(dispatch_get_main_queue(), ^() {
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    });
+    // -> applicationDidRegisterForRemoteNotificationsWithDeviceToken:
+    // or
+    // -> application:didFailToRegisterForRemoteNotificationsWithError:
+}
+
++ (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    
+}
+
++ (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    @try {
+        [self saveToken:deviceToken];
+    }
+    @catch (NSException *ex) {
+        
+    }
+}
+
++ (void)saveToken:(NSData *)tokenData {
+    NSString *token = [self hexStringForDeviceToken:tokenData];
     [[NSUserDefaults standardUserDefaults] setObject:token forKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self sendAppInfo];
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel.people addPushDeviceToken:tokenData];
+    
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (currentUser) {
+        [self sendPushToken:token];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel.people addPushDeviceToken:tokenData];
+    }
 }
 
-- (void)clearTokenWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
++ (void)sendPushToken:(NSString *)pushToken {
+    [self getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
+        [OTAuthService sendAppInfoWithPushToken:pushToken
+                            authorizationStatus:[self authorizationStatus:status]
+                                        success:^{
+                                            [self storeConfigurationDigestWithStatus:status];
+                                        }
+                                        failure:nil];
+    }];
+}
+
+- (void)clearTokenWithWithUser:(OTUser *)previousUser {
+    NSString *pushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
+    [[OTAuthService new] deletePushToken:pushToken forUser:previousUser];
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self sendAppInfoWithSuccess:success orFailure:failure];
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel.people removeAllPushDeviceTokens];
+    
+    if (!previousUser.isAnonymous) {
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        NSString *previousMixpanelId = mixpanel.distinctId;
+        [mixpanel identify:[previousUser.sid stringValue]];
+        [mixpanel.people removeAllPushDeviceTokens];
+        [mixpanel identify:previousMixpanelId];
+    }
 }
 
-- (void)promptUserForPushNotifications {
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
++ (void)getAuthorizationStatusWithCompletionHandler:(void (^)(UNAuthorizationStatus status))completionHandler {
+    if (@available(iOS 10.0, *)) {
+        UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+        [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+            completionHandler(settings.authorizationStatus);
+        }];
+    } else {
+        // iOS 9 fallback
+        UNAuthorizationStatus status;
+        UIUserNotificationSettings *settings = [UIApplication sharedApplication].currentUserNotificationSettings;
+        if (settings.types == UIUserNotificationTypeNone) {
+            // set in legacyAuthorizationRequestCompletedWithError
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:kLegacyDidRegisterUserNotificationSettings]) {
+                status = UNAuthorizationStatusDenied;
+            } else {
+                status = UNAuthorizationStatusNotDetermined;
+            }
+        } else {
+            status = UNAuthorizationStatusAuthorized;
+        }
+        completionHandler(status);
+    }
 }
+
+
+#pragma mark - Helper methods
+
++ (NSString *)hexStringForDeviceToken:(NSData *)deviceToken {
+    const unsigned char *bytes = (const unsigned char*)deviceToken.bytes;
+    NSMutableString *hexToken = [NSMutableString stringWithCapacity:(deviceToken.length * 2)];
+    
+    for (NSUInteger i = 0; i < deviceToken.length; i++) {
+        [hexToken appendFormat:@"%02x", bytes[i]];
+    }
+    
+    return [hexToken copy];
+}
+
++ (NSString *)authorizationStatus:(UNAuthorizationStatus)status {
+    NSString *string;
+    
+    if (status == UNAuthorizationStatusNotDetermined) string = @"not_determined";
+    if (status == UNAuthorizationStatusDenied)        string = @"denied";
+    if (status == UNAuthorizationStatusAuthorized)    string = @"authorized";
+    if (@available(iOS 12.0, *)) {
+        if (status == UNAuthorizationStatusProvisional) string = @"provisional";
+    }
+    
+    return string;
+}
+
++ (void)storeConfigurationDigestWithStatus:(UNAuthorizationStatus)status {
+    [[NSUserDefaults standardUserDefaults] setInteger:[self configurationDigestForStatus:status] forKey:kRemoteNotificationsConfigurationDigest];
+}
+
++ (NSUInteger)configurationDigestForStatus:(UNAuthorizationStatus)status {
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *date = [dateFormatter stringFromDate:[NSDate date]];
+    
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    NSString *uuid = currentUser.uuid;
+    if (uuid == nil) uuid = @"";
+    
+    NSString *authorizationStatus = [self authorizationStatus:status];
+    
+    return [[@[date, uuid, authorizationStatus] componentsJoinedByString:@":"] hash];
+}
+
++ (void)refreshPushTokenIfConfigurationChanged {
+    [self getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
+        NSUInteger previousConfiguration = [[NSUserDefaults standardUserDefaults] integerForKey:kRemoteNotificationsConfigurationDigest];
+        NSUInteger currentConfiguration = [self configurationDigestForStatus:status];
+        
+        if (currentConfiguration != previousConfiguration) {
+            [self refreshPushToken];
+        }
+    }];
+}
+
+
+#pragma mark - Notifications handling
 
 - (void)handleRemoteNotification:(NSDictionary *)userInfo
                 applicationState:(UIApplicationState)appState {
@@ -301,21 +545,6 @@
     }
 }
 
-- (void)sendAppInfoWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError *))failure {
-    [[OTAuthService new] sendAppInfoWithSuccess:^() {
-        NSLog(@"Application info sent!");
-        if (success) {
-            success();
-        }
-    }
-    failure:^(NSError * error) {
-        NSLog(@"ApplicationsERR: %@", error.description);
-        if (failure) {
-            failure(error);
-        }
-    }];
-}
-
 - (void)displayAlertWithActions:(NSArray<UIAlertAction*> *)actions forPushData:(OTPushNotificationsData *)pnData  {
     [self displayAlertWithActions:actions
                             title:pnData.sender
@@ -396,6 +625,7 @@
         [topVC presentViewController:alert animated:YES completion:nil];
     }
 }
+
 
 #pragma mark - private methods
 

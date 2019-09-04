@@ -129,15 +129,18 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     // in analytics and advertising reporting.
     [FBSDKAppEvents activateApp];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
+
+    [OTPushNotificationsService refreshPushTokenIfConfigurationChanged];
+    
     if (@available(iOS 10.0, *)) {
         [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
             if (settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
                 [mixpanel.people set:@{@"EntourageNotifEnable": @"YES"}];
-                [FIRAnalytics setUserPropertyString:@"YES" forName:@"EntourageGeolocEnable"];
+                [FIRAnalytics setUserPropertyString:@"YES" forName:@"EntourageNotifEnable"];
             }
             else {
                 [mixpanel.people set:@{@"EntourageNotifEnable": @"NO"}];
-                [FIRAnalytics setUserPropertyString:@"NO" forName:@"EntourageGeolocEnable"];
+                [FIRAnalytics setUserPropertyString:@"NO" forName:@"EntourageNotifEnable"];
             }
         }];
     }
@@ -202,6 +205,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin) name:[kLoginFailureNotification copy] object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
+
+    [OTPushNotificationsService refreshPushToken];
+    [OTPushNotificationsService requestProvisionalAuthorizationsIfAdequate];
 }
 
 - (void)configurePhotoUploadingService {
@@ -273,9 +279,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         
         if (!currentUser.isAnonymous) {
           [OTLogger setupMixpanelWithUser:currentUser];
-        }
-        if (!currentUser.isAnonymous) {
-          [[OTAuthService new] sendAppInfoWithSuccess:nil failure:nil];
         }
     }
 }
@@ -489,37 +492,32 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 #pragma mark - Push notifications
 
 + (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
     NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:YES] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
-    @try {
-        [pnService saveToken:deviceToken];
-    }
-    @catch (NSException *ex) {
-        
-    }
+    [OTPushNotificationsService applicationDidRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 + (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    
-    if ([NSUserDefaults standardUserDefaults].arePushNotificationsRefused) {
-        [OTAppState navigateToNativeNotificationsPreferences];
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setArePushNotificationsRefused:YES];
+    [OTPushNotificationsService applicationDidFailToRegisterForRemoteNotificationsWithError:error];
     
     NSLog(@"Push registration failure : %@", [error localizedDescription]);
     NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:NO] };
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
 }
 
++ (void)applicationDidRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    [OTPushNotificationsService legacyAuthorizationRequestCompletedWithError:nil];
+    NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:YES] };
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
+}
+
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
     UIApplicationState state = [application applicationState];
-    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
     
     if (state == UIApplicationStateActive ||
         state == UIApplicationStateBackground ||
         state == UIApplicationStateInactive) {
+        OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
         [pnService handleRemoteNotification:userInfo applicationState:state];
     }
 }
@@ -527,11 +525,11 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     UIApplicationState state = [application applicationState];
-    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
     
     if (state == UIApplicationStateActive ||
         state == UIApplicationStateBackground ||
         state == UIApplicationStateInactive) {
+        OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
         [pnService handleLocalNotification:userInfo applicationState:state];
     }
 }

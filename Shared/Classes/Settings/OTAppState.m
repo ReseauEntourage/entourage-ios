@@ -51,34 +51,24 @@
 + (void)launchApplicatioWithOptions:(NSDictionary *)launchOptions
 {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if (currentUser) {
-        
-        if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
-            ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
-            [OTAppState continueFromLoginScreen:nil];
-
-        } else {
-            NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-            if (pnData) {
-                [[OTLocationManager sharedInstance] startLocationUpdates];
-                [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
-            } else {
-                
-                if (![currentUser hasActionZoneDefined]) {
-                    // Force the users to define action zone
-                    // The Entourage app has Ignore button, while the pfp does not have it
-                    [OTAppState navigateToLocationRightsScreen:nil];
-                } else {
-                    [[OTLocationManager sharedInstance] startLocationUpdates];
-                    [OTAppState navigateToPermissionsScreens:nil];
-                }
-            }
-        }
-    }
-    else
-    {
+    if (!currentUser) {
         // Show intro screens
         [OTAppState navigateToStartupScreen];
+        return;
+    }
+    
+    if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
+        ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+        [OTAppState continueFromLoginScreen:nil];
+
+    } else {
+        NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (pnData) {
+            [[OTLocationManager sharedInstance] startLocationUpdates];
+            [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
+        } else {
+            [OTAppState navigateToPermissionsScreens:nil];
+        }
     }
 }
 
@@ -116,19 +106,8 @@
 }
 
 + (void)returnToLogin {
-    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
-    [SVProgressHUD show];
-    
-    [pnService clearTokenWithSuccess:^() {
-        [SVProgressHUD dismiss];
-        [OTAppConfiguration clearUserData];
-        [OTAppState navigateToStartupScreen];
-        
-    } orFailure:^(NSError *error) {
-        [SVProgressHUD dismiss];
-        [OTAppConfiguration clearUserData];
-        [OTAppState navigateToStartupScreen];
-    }];
+    [OTAppConfiguration clearUserData];
+    [OTAppState navigateToStartupScreen];
 }
 
 + (void)navigateToAuthenticatedLandingScreen
@@ -303,33 +282,38 @@
 }
 
 + (void)navigateToPermissionsScreens:(UIViewController * _Nullable)currentViewController {
-    if (currentViewController == nil)
-        currentViewController = [OTAppState getTopViewController];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     
-    if ([currentUser hasActionZoneDefined] &&
-        [currentUser isRegisteredForPushNotifications]) {
-        
-        [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
-        [[OTLocationManager sharedInstance] startLocationUpdates];
-        
-        [OTAppState navigateToAuthenticatedLandingScreen];
-        
-        if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
-            ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
-            [OTAppState presentTutorialScreen];
-        }
-        
-    } else if (![currentUser hasActionZoneDefined]) {
+    if (![currentUser hasActionZoneDefined]) {
         // Navigate to add rights screens (action zone, notifications)
         // Force the users to define action zone
         // The Entourage app has Ignore button, while the pfp does not have it
         [OTAppState navigateToLocationRightsScreen:currentViewController];
-        
-    } else if (![currentUser isRegisteredForPushNotifications]) {
-        // Navigate to notifications screen
-        [OTAppState navigateToNotificationsRightsScreen:currentViewController];
+        return;
     }
+
+    [OTPushNotificationsService getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
+        if (@available(iOS 12.0, *)) {
+            if (status == UNAuthorizationStatusProvisional)
+                status = UNAuthorizationStatusNotDetermined;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            if (status == UNAuthorizationStatusNotDetermined) {
+                [OTAppState navigateToNotificationsRightsScreen:currentViewController];
+            } else {
+                [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
+                [[OTLocationManager sharedInstance] startLocationUpdates];
+                
+                [OTAppState navigateToAuthenticatedLandingScreen];
+                
+                if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
+                    ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
+                    [OTAppState presentTutorialScreen];
+                }
+            }
+        });
+    }];
 }
 
 + (void)continueFromUserNameScreen:(UIViewController *)currentViewController

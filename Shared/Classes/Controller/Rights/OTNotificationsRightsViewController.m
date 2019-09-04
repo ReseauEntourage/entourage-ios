@@ -33,7 +33,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.notificationEnabled = @"NO";
     self.title = @"";
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationAuthorizationChanged:) name:kNotificationPushStatusChanged object:nil];
@@ -74,18 +73,25 @@
 
 - (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
     NSLog(@"received kNotificationPushStatusChanged");
-    self.notificationEnabled = @"YES";
     [self doShowNext];
 }
 
 #pragma mark - IBAction
 
 - (void)doShowNext {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel.people set:@{@"EntourageNotifEnable": self.notificationEnabled}];
-    [FIRAnalytics setUserPropertyString:self.notificationEnabled forName:@"EntourageGeolocEnable"];
-    
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    
+    [OTPushNotificationsService getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
+        NSString *notificationEnabled = status == UNAuthorizationStatusAuthorized ? @"YES" : @"NO";
+        if (@available(iOS 12.0, *)) {
+            if (status == UNAuthorizationStatusProvisional)
+                notificationEnabled = @"Provisional";
+        }
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel.people set:@{@"EntourageNotifEnable": notificationEnabled}];
+        [FIRAnalytics setUserPropertyString:notificationEnabled forName:@"EntourageNotifEnable"];
+    }];
+    
     if ([OTAppConfiguration shouldShowIntroTutorial:currentUser]) {
         [self setTutorialCompleted];
     }
@@ -94,7 +100,7 @@
 
 - (IBAction)doContinue {
     [OTLogger logEvent:@"AcceptNotifications"];
-    [[OTPushNotificationsService new] promptUserForPushNotifications];
+    [OTPushNotificationsService promptUserForAuthorizations];
 }
 
 #pragma mark - private methods

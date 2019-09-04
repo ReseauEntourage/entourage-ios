@@ -118,13 +118,20 @@
     [mixpanel.people set:@{@"EntourageGeolocEnable": locationAllowed ? @"YES" : @"NO"}];
     [FIRAnalytics setUserPropertyString:(locationAllowed ? @"YES" : @"NO") forName:@"EntourageGeolocEnable"];
     
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    
-    if (![currentUser isRegisteredForPushNotifications]) {
-        [self goToNotifications];
-    } else {
-        [OTAppState navigateToAuthenticatedLandingScreen];
-    }
+    [OTPushNotificationsService getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
+        if (@available(iOS 12.0, *)) {
+            if (status == UNAuthorizationStatusProvisional)
+                status = UNAuthorizationStatusNotDetermined;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            if (status == UNAuthorizationStatusNotDetermined) {
+                [self goToNotifications];
+            } else {
+                [OTAppState navigateToAuthenticatedLandingScreen];
+            }
+        });
+    }];
 }
 
 #pragma mark - IBAction
@@ -160,22 +167,32 @@
             
             if (self.isShownOnStartup) {
                 [OTLogger logEvent:@"AcceptGeoloc"];
-                BOOL pushNotificationsEnabled = [currentUser isRegisteredForPushNotifications];
                 
-                if ([OTLocationManager sharedInstance].isAuthorized &&
-                    pushNotificationsEnabled &&
-                    [currentUser hasActionZoneDefined]) {
-                    [OTAppState navigateToAuthenticatedLandingScreen];
-                }
-                else if (!pushNotificationsEnabled) {
-                    [self goToNotifications];
-                }
-                else if (![OTLocationManager sharedInstance].isAuthorized ) {
-                    [[OTLocationManager sharedInstance] startLocationUpdates];
+                [OTPushNotificationsService getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
+                    if (@available(iOS 12.0, *)) {
+                        if (status == UNAuthorizationStatusProvisional)
+                            status = UNAuthorizationStatusNotDetermined;
+                    }
+
+                    BOOL pushNotificationsEnabled = status != UNAuthorizationStatusNotDetermined;
                     
-                } else {
-                    [OTAppState navigateToAuthenticatedLandingScreen];
-                }
+                    dispatch_async(dispatch_get_main_queue(), ^() {
+                        if ([OTLocationManager sharedInstance].isAuthorized &&
+                            pushNotificationsEnabled &&
+                            [currentUser hasActionZoneDefined]) {
+                            [OTAppState navigateToAuthenticatedLandingScreen];
+                        }
+                        else if (!pushNotificationsEnabled) {
+                            [self goToNotifications];
+                        }
+                        else if (![OTLocationManager sharedInstance].isAuthorized ) {
+                            [[OTLocationManager sharedInstance] startLocationUpdates];
+                            
+                        } else {
+                            [OTAppState navigateToAuthenticatedLandingScreen];
+                        }
+                    });
+                }];
             } else {
                 [self.navigationController popViewControllerAnimated:YES];
             }

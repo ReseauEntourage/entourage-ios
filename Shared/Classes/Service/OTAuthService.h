@@ -21,7 +21,6 @@ extern NSString *const kUserAuthenticationLevelAuthenticated;
 
 - (void)authWithPhone:(NSString *)phone
              password:(NSString *)password
-             deviceId:(NSString *)deviceId
               success:(void (^)(OTUser *user, BOOL firstLogin))success
               failure:(void (^)(NSError *error))failure;
 
@@ -33,8 +32,12 @@ extern NSString *const kUserAuthenticationLevelAuthenticated;
                   success:(void (^)(void))success
                   failure:(void (^)(NSError *))failure;
 
-- (void)sendAppInfoWithSuccess:(void (^)(void))success
-                       failure:(void (^)(NSError *))failure;
++ (void)sendAppInfoWithPushToken:(NSString *)pushToken
+             authorizationStatus:(NSString *)authorizationStatus
+                         success:(void (^)(void))success
+                         failure:(void (^)(NSError *))failure;
+
+- (void)deletePushToken:(NSString *)pushToken forUser:(OTUser *)user;
 
 - (void)regenerateSecretCode:(NSString *)phone
                      success:(void (^)(OTUser *))success

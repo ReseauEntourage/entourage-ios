@@ -164,7 +164,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 
     [[OTAuthService new] authWithPhone:phoneNumber
                               password:self.passwordTextField.text
-                              deviceId:deviceAPNSid
                                success: ^(OTUser *user, BOOL firstLogin) {
                                    
                                    [SVProgressHUD dismiss];
@@ -181,23 +180,12 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    if ([OTAppConfiguration supportsTourFunctionality]) {
                                        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    }
-                                   
-                                   if ([OTAppConfiguration shouldShowIntroTutorial:user]) {
-                                       NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
-                                       if (loggedNumbers == nil) {
-                                           loggedNumbers = [NSMutableArray new];
-                                       }
-                                       
-                                       if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
-                                           [[OTPushNotificationsService new] promptUserForPushNotifications];
-                                       }
-                                   }
-                                   
+                                                                      
                                    // backup pre-login value of currentUser in case the user backs from the required onboarding
                                    self.onboardingNavigation.preLoginUser = [NSUserDefaults standardUserDefaults].currentUser;
                                    
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-
+                                   [[NSUserDefaults standardUserDefaults] setFirstLoginState:firstLogin];
                                    [self.view endEditing:YES];
                                    [OTAppState continueFromLoginScreen:self];
                                    

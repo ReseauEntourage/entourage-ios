@@ -61,6 +61,7 @@
 
 + (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 + (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
++ (void)applicationDidRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings;
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler;
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;

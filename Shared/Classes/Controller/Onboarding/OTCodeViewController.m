@@ -223,7 +223,6 @@
 - (IBAction)doContinue {
     NSString *phone = [NSUserDefaults standardUserDefaults].temporaryUser.phone;
     NSString *code = self.codeTextField.text;
-    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     
     if (![NSUserDefaults standardUserDefaults].temporaryUser) {
         phone = [NSUserDefaults standardUserDefaults].currentUser.phone;
@@ -234,7 +233,6 @@
     
     [[OTAuthService new] authWithPhone:phone
                               password:code
-                              deviceId:deviceAPNSid
                                success: ^(OTUser *user, BOOL firstLogin) {
         NSLog(@"User : %@ authenticated successfully", user.email);
         user.phone = phone;
@@ -249,15 +247,7 @@
         
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;
-        [[NSUserDefaults standardUserDefaults] setFirstLoginState:NO];
-        
-        if ([OTAppConfiguration shouldShowIntroTutorial:user]) {
-            if ([NSUserDefaults standardUserDefaults].isTutorialCompleted) {
-                [OTAppState navigateToAuthenticatedLandingScreen];
-                return;
-            }
-        }
-
+        [[NSUserDefaults standardUserDefaults] setFirstLoginState:firstLogin];
         [OTAppState continueFromLoginScreen:self];
         
     } failure: ^(NSError *error) {
