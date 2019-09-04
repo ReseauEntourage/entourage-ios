@@ -26,6 +26,8 @@
 - (BOOL)isStatusBtnVisible;
 - (NSString *)feedItemActionButton;
 - (NSAttributedString *)eventAuthorFormattedDescription;
+- (NSString *)eventInfoDescription;
 - (NSAttributedString *)eventInfoFormattedDescription;
+- (NSString *)formattedTimestamps;
 
 @end

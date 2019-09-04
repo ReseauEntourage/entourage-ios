@@ -23,6 +23,14 @@
     return typeByNameAttrString;
 }
 
+- (NSString *)descriptionWithoutUserName {
+    return [NSString stringWithFormat:OTLocalizedString(@"formatter_tour_by"), [self displayType]];
+}
+
+- (NSString *)userName {
+    return self.tour.author.displayName;
+}
+
 - (NSString *)summary {
     return self.tour.organizationName;
 }

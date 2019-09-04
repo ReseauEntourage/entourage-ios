@@ -21,7 +21,7 @@
 @implementation OTFeedsService
 
 - (void)getAllFeedsWithParameters:(NSDictionary*)parameters
-                          success:(void (^)(NSMutableArray *feeds))success
+                          success:(void (^)(NSMutableArray *feeds, NSString *pageToken))success
                           failure:(void (^)(NSError *error))failure
 {
     NSString *url = [NSString stringWithFormat:API_URL_FEEDS, TOKEN];
@@ -32,10 +32,11 @@
          {
              NSDictionary *data = responseObject;
              NSMutableArray *feeds = [self feedItemsFromDictionary:data];
+             NSString *nextPageToken = [responseObject objectForKey:kWSKeyNextPageToken];
              [self updateUnreadCount:feeds];
              if (success)
              {
-                 success(feeds);
+                 success(feeds, nextPageToken);
              }
          }
          andFailure:^(NSError *error)

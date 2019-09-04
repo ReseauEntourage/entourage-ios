@@ -38,8 +38,14 @@
     
     if (self.themeStyle == nil) {
         if (!inInterfaceBuilder) return;
-        self.text = @"themeColor must be set";
+        self.text = @"themeStyle must be set";
         self.textColor = UIColor.redColor;
+    }
+    else if ([self.themeStyle isEqualToString:@"defaultText"]) {
+        self.font = [UIFont systemFontOfSize:15];
+        self.textColor = [ApplicationTheme shared].titleLabelColor;
+        self.textContainerInset = UIEdgeInsetsZero;
+        self.textContainer.lineFragmentPadding = 0;
     }
     else if ([self.themeStyle isEqualToString:@"modalTitle"]) {
         self.textContainerInset = UIEdgeInsetsMake(0, -5, 0, 0);

@@ -24,11 +24,6 @@
     [items addObject:summary];
     
     if ([feedItem isOuting]) {
-        // Event creator row
-        OTFeedItem *eventAuthor = feedItem.copy;
-        eventAuthor.identifierTag = @"eventAuthorInfo";
-        [items addObject:eventAuthor];
-        
         // Event info row
         OTFeedItem *eventInfo = feedItem.copy;
         eventInfo.identifierTag = @"eventInfo";
@@ -43,6 +38,13 @@
         [items addObject:desc];
     }
     
+    if ([feedItem isAction]) {
+        // Timestamps row
+        OTFeedItem *timestamps = feedItem.copy;
+        timestamps.identifierTag = @"timestamps";
+        [items addObject:timestamps];
+    }
+
     // Map row
     OTFeedItem *map = feedItem.copy;
     map.identifierTag = @"feedLocation";

@@ -456,9 +456,21 @@
              @"longitude": @(location.longitude),
              @"distance": @(self.distance),
              @"types" : [self getTypes],
-             @"show_my_entourages_only" : self.showOnlyMyEntourages ? @"true" : @"false",
-             @"show_my_partner_only" : self.showFromOrganisation ? @"true" : @"false",
-             @"show_past_events" : (self.showPastOuting && self.showOuting) ? @"true" : @"false",
+             @"show_past_events" : self.showPastOuting ? @"true" : @"false",
+             @"time_range" : @(self.timeframeInHours),
+             @"announcements" : @"v1"
+    }.mutableCopy;
+}
+
+- (NSMutableDictionary *)toDictionaryWithPageToken:(NSString *)pageToken
+                                    andLocation:(CLLocationCoordinate2D)location {
+    return @{
+             @"page_token" : pageToken == nil ? @"" : pageToken,
+             @"latitude": @(location.latitude),
+             @"longitude": @(location.longitude),
+             @"distance": @(self.distance),
+             @"types" : [self getTypes],
+             @"show_past_events" : self.showPastOuting ? @"true" : @"false",
              @"time_range" : @(self.timeframeInHours),
              @"announcements" : @"v1"
     }.mutableCopy;

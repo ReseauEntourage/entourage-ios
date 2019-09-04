@@ -481,6 +481,8 @@
 "month_10" = "oct.";
 "month_11" = "nov.";
 "month_12" = "déc.";
+"formatter_time_ago" = "il y a %@";
+"days" = "jours";
 
 //email
 "successful_close_mail" = "Mes retours sur l'entourage %@ qui a été un succès";
@@ -499,6 +501,9 @@
 "share_webview" = "J'ai découvert le guide Simple Comme Bonjour pour aller à la rencontre des personnes sans-abri. C'est à découvrir ici : %@";
 
 "feed_item_time_distance" = "Créée il y a ";
+"group_timestamps_created_at" = "Créé";
+"group_timestamps_updated_at" = "mis à jour";
+"group_timestamps_separator" = " - ";
 
 "association_set" = "Badge ajouté";
 "association_reset" = "Badge enlevé";

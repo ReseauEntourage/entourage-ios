@@ -21,6 +21,8 @@
 		372174F32281BE1C00EFDF3A /* OTModalPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 372174F12281BE1C00EFDF3A /* OTModalPopup.m */; };
 		372E58DF228AF3020075FE97 /* OTAuthenticationModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 372E58DE228AF3020075FE97 /* OTAuthenticationModalViewController.m */; };
 		372E58E0228AF3020075FE97 /* OTAuthenticationModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 372E58DE228AF3020075FE97 /* OTAuthenticationModalViewController.m */; };
+		373353B4230173EF00436CAA /* OTTimestampsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 373353B3230173EF00436CAA /* OTTimestampsCell.m */; };
+		373353B5230173EF00436CAA /* OTTimestampsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 373353B3230173EF00436CAA /* OTTimestampsCell.m */; };
 		37339CD321FF01860048B6E1 /* OTPillLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37339CD221FF01860048B6E1 /* OTPillLabelView.xib */; };
 		37339CD921FF037C0048B6E1 /* OTPillLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37339CD821FF037C0048B6E1 /* OTPillLabelView.m */; };
 		374E0265220C2EF6000EE348 /* OTRoleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 37191ADC220B55D700F789B8 /* OTRoleTag.m */; };
@@ -1309,6 +1311,8 @@
 		372174F12281BE1C00EFDF3A /* OTModalPopup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTModalPopup.m; sourceTree = "<group>"; };
 		372E58DD228AF3020075FE97 /* OTAuthenticationModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAuthenticationModalViewController.h; sourceTree = "<group>"; };
 		372E58DE228AF3020075FE97 /* OTAuthenticationModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAuthenticationModalViewController.m; sourceTree = "<group>"; };
+		373353B2230173EF00436CAA /* OTTimestampsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTTimestampsCell.h; sourceTree = "<group>"; };
+		373353B3230173EF00436CAA /* OTTimestampsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTTimestampsCell.m; sourceTree = "<group>"; };
 		37339CD221FF01860048B6E1 /* OTPillLabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPillLabelView.xib; sourceTree = "<group>"; };
 		37339CD721FF037C0048B6E1 /* OTPillLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPillLabelView.h; sourceTree = "<group>"; };
 		37339CD821FF037C0048B6E1 /* OTPillLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPillLabelView.m; sourceTree = "<group>"; };
@@ -2716,6 +2720,8 @@
 				A202E8732085D2C40058F32C /* OTMemberCountCell.m */,
 				A202E8762085D2C40058F32C /* OTMembersCell.h */,
 				A202E8712085D2C40058F32C /* OTMembersCell.m */,
+				373353B2230173EF00436CAA /* OTTimestampsCell.h */,
+				373353B3230173EF00436CAA /* OTTimestampsCell.m */,
 			);
 			path = InfoCells;
 			sourceTree = "<group>";
@@ -4743,6 +4749,7 @@
 				A202EADB2085D2C70058F32C /* OTSolidarityGuideFilterItem.m in Sources */,
 				A202EBF12085D2C80058F32C /* OTFilterCellTableViewCell.m in Sources */,
 				A202E91C20E381D200992C09 /* OTNeighborhoodAnnotation.m in Sources */,
+				373353B4230173EF00436CAA /* OTTimestampsCell.m in Sources */,
 				A202E80B2085D0FE0058F32C /* OTAppDelegate.m in Sources */,
 				A202ED152085D2C80058F32C /* OTEditEncounterBehavior.m in Sources */,
 				A202EACD2085D2C70058F32C /* OTMenuItem.m in Sources */,
@@ -5255,6 +5262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				374E0266220C8039000EE348 /* OTGradientView.m in Sources */,
+				373353B5230173EF00436CAA /* OTTimestampsCell.m in Sources */,
 				372174F32281BE1C00EFDF3A /* OTModalPopup.m in Sources */,
 				37191ADA220B53FC00F789B8 /* OTPillLabelView.m in Sources */,
 				A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */,
@@ -5775,7 +5783,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
@@ -5804,7 +5812,7 @@
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";

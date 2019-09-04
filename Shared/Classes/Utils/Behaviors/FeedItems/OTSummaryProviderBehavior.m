@@ -81,7 +81,11 @@
     }
 
     if (self.lblUserName) {
-        self.lblUserName.text = [uiDelegate userName];
+        if ([feedItem isOuting]) {
+            self.lblUserName.text = nil;
+        } else {
+            self.lblUserName.text = [uiDelegate userName];
+        }
     }
 
     if (self.txtFeedItemDescription) {
@@ -89,6 +93,12 @@
     }
     
     if (self.lblLocation) {
+        if ([feedItem isOuting]) {
+            self.lblLocation.hidden = true;
+        } else {
+            self.lblLocation.hidden = false;
+        }
+        
         if (feedItem.displayAddress.length > 0) {
             self.lblLocation.text = [NSString stringWithFormat:OTLocalizedString(@"entourage_location"), feedItem.displayAddress];
         } else {

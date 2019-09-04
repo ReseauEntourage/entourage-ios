@@ -40,22 +40,54 @@
     return self.entourage.desc;
 }
 
+- (NSString *)formattedDaysIntervalFromToday:(NSDate *)date {
+    if ([[NSCalendar currentCalendar] isDateInToday:date])
+        return OTLocalizedString(@"today");
+    if ([[NSCalendar currentCalendar] isDateInYesterday:date])
+        return OTLocalizedString(@"yesterday");
+    NSInteger days = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date toDate:[NSDate date] options:0].day;
+    NSString *daysString = [NSString stringWithFormat:@"%ld %@", days, OTLocalizedString(@"days")];
+    return [NSString stringWithFormat:OTLocalizedString(@"formatter_time_ago"), daysString];
+}
+
+- (NSString *)formattedTimestamps {
+    NSString *creationDate = [self formattedDaysIntervalFromToday:self.entourage.creationDate];
+    creationDate = [NSString stringWithFormat:@"%@ %@", OTLocalizedString(@"group_timestamps_created_at"), creationDate];
+
+    if ([[NSCalendar currentCalendar] isDateInToday:self.entourage.creationDate]) {
+        return creationDate;
+    }
+    
+    NSString *updatedDate = [self formattedDaysIntervalFromToday:self.entourage.updatedDate];
+    updatedDate = [NSString stringWithFormat:@"%@ %@", OTLocalizedString(@"group_timestamps_updated_at"), updatedDate];
+
+    return [@[creationDate, updatedDate] componentsJoinedByString:OTLocalizedString(@"group_timestamps_separator")];
+}
+
 - (NSAttributedString *)eventAuthorFormattedDescription {
     return [OTAppAppearance formattedAuthorDescriptionForMessageItem:self.entourage];
 }
 
-- (NSAttributedString *)eventInfoFormattedDescription {
+- (NSString *)eventInfoDescription {
     
     NSString *prefix = @"rendez-vous";
-    CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
-    
+
     NSString *startDateInfo = [self.entourage.startsAt asStringWithFormat:@"EEEE dd MMMM"];
     NSString *startTimeInfo = [self.entourage.startsAt toRoundedQuarterTimeString];
     NSString *dateInfo = [NSString stringWithFormat:@"%@ le %@", prefix, startDateInfo];
     NSString *timeInfo = [NSString stringWithFormat:@"\nà %@", startTimeInfo];
     NSString *addressInfo = [NSString stringWithFormat:@"\n%@", self.entourage.displayAddress];
-    
+
     NSString *fullInfoText = [NSString stringWithFormat:@"%@%@%@", dateInfo, timeInfo, addressInfo];
+    
+    return fullInfoText;
+}
+
+- (NSAttributedString *)eventInfoFormattedDescription {
+    
+    CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
+    
+    NSString *fullInfoText = [self eventInfoDescription];
     
     NSMutableAttributedString *infoAttrString = [[NSMutableAttributedString alloc] initWithString:fullInfoText attributes:@{NSFontAttributeName : [UIFont fontWithName:@"SFUIText-Bold" size:fontSize]}];
     

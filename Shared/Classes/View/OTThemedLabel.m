@@ -14,18 +14,18 @@
 #pragma mark - Overrides
 
 - (void)layoutSubviews {
-    [self setupStyle];
+    [self setupColor];
     [super layoutSubviews];
 }
 
-- (void)setThemeStyle:(NSString *)themeStyle {
-    _themeStyle = themeStyle;
-    [self setupStyle];
+- (void)setThemeColor:(NSString *)themeColor {
+    _themeColor = themeColor;
+    [self setupColor];
 }
 
 #pragma mark - Customization
 
-- (void)setupStyle {
+- (void)setupColor {
 
     #if TARGET_INTERFACE_BUILDER
     BOOL inInterfaceBuilder = YES;
@@ -33,36 +33,17 @@
     BOOL inInterfaceBuilder = NO;
     #endif
 
-    if (self.themeStyle == nil) {
+    if (self.themeColor == nil) {
         if (!inInterfaceBuilder) return;
-        self.text = @"themeStyle must be set";
+        self.text = @"themeColor must be set";
         self.textColor = UIColor.redColor;
     }
-    else if ([self.themeStyle isEqualToString:@"titleColor"]) {
-        self.textColor = [ApplicationTheme shared].titleLabelColor;
-    }
-    else if ([self.themeStyle isEqualToString:@"subtitleColor"]) {
-        self.textColor = [ApplicationTheme shared].subtitleLabelColor;
-    }
-    else if ([self.themeStyle isEqualToString:@"Titre 3"]) {
-        self.font = [UIFont systemFontOfSize:20 weight:UIFontWeightSemibold];
-        self.textColor = [ApplicationTheme shared].titleLabelColor;
-    }
-    else if ([self.themeStyle isEqualToString:@"body"]) {
-        self.font = [UIFont systemFontOfSize:15];
-        self.textColor = [ApplicationTheme shared].titleLabelColor;
-    }
-    else if ([self.themeStyle isEqualToString:@"bodySemiBold"]) {
-        self.font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
-        self.textColor = [ApplicationTheme shared].titleLabelColor;
-    }
-    else if ([self.themeStyle isEqualToString:@"bodyItalic"]) {
-        self.font = [UIFont italicSystemFontOfSize:15];
+    else if ([self.themeColor isEqualToString:@"defaultTextColor"]) {
         self.textColor = [ApplicationTheme shared].titleLabelColor;
     }
     else {
         if (!inInterfaceBuilder) return;
-        self.text = [NSString stringWithFormat:@"invalid themeStyle \"%@\"", self.themeStyle];
+        self.text = [NSString stringWithFormat:@"invalid themeColor \"%@\"", self.themeColor];
         self.textColor = UIColor.redColor;
     }
 }
