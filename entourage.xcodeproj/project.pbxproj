@@ -25,6 +25,8 @@
 		373353B5230173EF00436CAA /* OTTimestampsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 373353B3230173EF00436CAA /* OTTimestampsCell.m */; };
 		37339CD321FF01860048B6E1 /* OTPillLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37339CD221FF01860048B6E1 /* OTPillLabelView.xib */; };
 		37339CD921FF037C0048B6E1 /* OTPillLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37339CD821FF037C0048B6E1 /* OTPillLabelView.m */; };
+		373AAD7E23293558001D8CF3 /* OTThemedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 373AAD7D23293558001D8CF3 /* OTThemedButton.m */; };
+		373AAD7F23293558001D8CF3 /* OTThemedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 373AAD7D23293558001D8CF3 /* OTThemedButton.m */; };
 		374E0265220C2EF6000EE348 /* OTRoleTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 37191ADC220B55D700F789B8 /* OTRoleTag.m */; };
 		374E0266220C8039000EE348 /* OTGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 376C247F2208A60900AA0DEB /* OTGradientView.m */; };
 		374E7360228DBBA500B36161 /* OTApiErrorDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 374E735F228DBBA500B36161 /* OTApiErrorDomain.m */; };
@@ -1316,6 +1318,8 @@
 		37339CD221FF01860048B6E1 /* OTPillLabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPillLabelView.xib; sourceTree = "<group>"; };
 		37339CD721FF037C0048B6E1 /* OTPillLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTPillLabelView.h; sourceTree = "<group>"; };
 		37339CD821FF037C0048B6E1 /* OTPillLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTPillLabelView.m; sourceTree = "<group>"; };
+		373AAD7C23293558001D8CF3 /* OTThemedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTThemedButton.h; sourceTree = "<group>"; };
+		373AAD7D23293558001D8CF3 /* OTThemedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTThemedButton.m; sourceTree = "<group>"; };
 		374E735F228DBBA500B36161 /* OTApiErrorDomain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTApiErrorDomain.m; sourceTree = "<group>"; };
 		374E7362228DBBEB00B36161 /* OTApiErrorDomain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTApiErrorDomain.h; sourceTree = "<group>"; };
 		374E7363228DC92500B36161 /* OTMainTabBarAnonymousBehavior.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTMainTabBarAnonymousBehavior.h; sourceTree = "<group>"; };
@@ -2986,6 +2990,8 @@
 				379DA9882281DD9600D38111 /* OTThemedView.m */,
 				379D380222848819007ED1E1 /* OTThemedText.h */,
 				379D380322848819007ED1E1 /* OTThemedText.m */,
+				373AAD7C23293558001D8CF3 /* OTThemedButton.h */,
+				373AAD7D23293558001D8CF3 /* OTThemedButton.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4753,6 +4759,7 @@
 				A202E80B2085D0FE0058F32C /* OTAppDelegate.m in Sources */,
 				A202ED152085D2C80058F32C /* OTEditEncounterBehavior.m in Sources */,
 				A202EACD2085D2C70058F32C /* OTMenuItem.m in Sources */,
+				373AAD7E23293558001D8CF3 /* OTThemedButton.m in Sources */,
 				A202EB9F2085D2C80058F32C /* OTMeetingCalloutViewController.m in Sources */,
 				A296B9232088D99700F6AFBD /* UIColor+pfp.m in Sources */,
 				A202EB312085D2C80058F32C /* OTInviteByPhoneViewController.m in Sources */,
@@ -5570,6 +5577,7 @@
 				A296B85220871CFC00F6AFBD /* OTPlaceholderCell.m in Sources */,
 				A296B85320871CFC00F6AFBD /* OTAutoGrowTextView.m in Sources */,
 				96B658BC209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */,
+				373AAD7F23293558001D8CF3 /* OTThemedButton.m in Sources */,
 				A296B85420871CFC00F6AFBD /* OTJoinBehavior.m in Sources */,
 				A296B85520871CFC00F6AFBD /* OTSettingsViewController.m in Sources */,
 				A24D96A620D2AAF800C21FCC /* OTConversation.m in Sources */,

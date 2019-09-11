@@ -23,7 +23,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
-@property (weak, nonatomic) IBOutlet UIButton *loginlessButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
@@ -49,8 +48,6 @@
     [self.registerButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     self.registerButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.registerButton.layer.borderWidth = 1.5f;
-    
-    [self.loginlessButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     
     self.pageControl.backgroundColor = [UIColor clearColor];
     self.pageControl.currentPageIndicatorTintColor = [ApplicationTheme shared].backgroundThemeColor;
@@ -231,7 +228,7 @@ SFSafariViewController *loginlessSafariController;
         // Here I am providing the index of the array as the view name key in the dictionary
         [self.pagesDict setObject:self.pages[i] forKey:[NSString stringWithFormat:@"v%d",i]];
         // Since we are having only one view vertically, then we need to add the constraint now itself. Since we need to have fullscreen, we are giving height equal to the superview.
-        NSString *verticalString = [NSString stringWithFormat:@"V:|-(-20)-[%@(==parent)]|", [NSString stringWithFormat:@"v%d",i]];
+        NSString *verticalString = [NSString stringWithFormat:@"V:|[%@(==parent)]|", [NSString stringWithFormat:@"v%d",i]];
         // add the constraint
         [self.scrollView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:verticalString options:0 metrics:nil views:self.pagesDict]];
         // Since we need to horizontally arrange, we construct a string, with all the views in array looped and here also we have fullwidth of superview.

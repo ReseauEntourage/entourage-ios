@@ -188,10 +188,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SdK-fN-W2L" userLabel="scrollContainer">
-                                <rect key="frame" x="0.0" y="-20" width="375" height="687"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIi-nZ-utS">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="687"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIi-nZ-utS">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </scrollView>
                                 </subviews>
@@ -204,7 +204,7 @@
                                 </constraints>
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="lg1-xB-vLI">
-                                <rect key="frame" x="160" y="450" width="55" height="37"/>
+                                <rect key="frame" x="160" y="490" width="55" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="plu-6B-fRH"/>
                                 </constraints>
@@ -212,7 +212,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                             </pageControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLJ-sk-uwd" userLabel="buttonsFooter">
-                                <rect key="frame" x="0.0" y="488" width="375" height="179"/>
+                                <rect key="frame" x="0.0" y="528" width="375" height="139"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oI-JN-xF6">
                                         <rect key="frame" x="12" y="7" width="351" height="50"/>
@@ -263,13 +263,6 @@
                                             <action selector="showLogin:" destination="d0v-Fd-fA9" eventType="touchUpInside" id="40K-Yy-Uvm"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZmN-43-o3o" userLabel="Loginless Button">
-                                        <rect key="frame" x="98.5" y="136" width="178" height="30"/>
-                                        <state key="normal" title="Continuer sans connexion"/>
-                                        <connections>
-                                            <action selector="showLoginlessAlert:" destination="d0v-Fd-fA9" eventType="touchUpInside" id="dd5-C9-S0L"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.84700506925582886" green="0.84710079431533813" blue="0.84694975614547729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -277,11 +270,8 @@
                                     <constraint firstItem="mwv-HX-aYM" firstAttribute="leading" secondItem="qLJ-sk-uwd" secondAttribute="leading" constant="12" id="84n-W8-TO7"/>
                                     <constraint firstItem="1oI-JN-xF6" firstAttribute="top" secondItem="qLJ-sk-uwd" secondAttribute="top" constant="7" id="DYc-N2-2eB"/>
                                     <constraint firstAttribute="trailing" secondItem="mwv-HX-aYM" secondAttribute="trailing" constant="12" id="OHK-9h-lLq"/>
-                                    <constraint firstItem="ZmN-43-o3o" firstAttribute="centerX" secondItem="qLJ-sk-uwd" secondAttribute="centerX" id="QO1-CS-JUp"/>
                                     <constraint firstItem="mwv-HX-aYM" firstAttribute="top" secondItem="1oI-JN-xF6" secondAttribute="bottom" constant="16" id="SWY-Vv-pAO"/>
                                     <constraint firstAttribute="trailing" secondItem="1oI-JN-xF6" secondAttribute="trailing" constant="12" id="Spe-Tg-WO1"/>
-                                    <constraint firstItem="ZmN-43-o3o" firstAttribute="top" secondItem="mwv-HX-aYM" secondAttribute="bottom" constant="13" id="XMr-Bc-czG"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZmN-43-o3o" secondAttribute="bottom" constant="13" id="sty-JK-N3c"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -290,19 +280,19 @@
                             <constraint firstItem="qLJ-sk-uwd" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leading" id="AYq-OS-GWm"/>
                             <constraint firstItem="qLJ-sk-uwd" firstAttribute="top" secondItem="lg1-xB-vLI" secondAttribute="bottom" constant="1" id="EPR-nZ-woy"/>
                             <constraint firstItem="lg1-xB-vLI" firstAttribute="centerX" secondItem="60w-tv-tKx" secondAttribute="centerX" id="NrW-yF-g9w"/>
+                            <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="mwv-HX-aYM" secondAttribute="bottom" constant="16" id="Sna-6b-9tv"/>
                             <constraint firstAttribute="trailing" secondItem="SdK-fN-W2L" secondAttribute="trailing" id="ZJ8-ju-YYS"/>
                             <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="qLJ-sk-uwd" secondAttribute="bottom" id="abx-6x-PR1"/>
                             <constraint firstItem="W7p-IX-DwJ" firstAttribute="top" secondItem="SdK-fN-W2L" secondAttribute="bottom" id="hiH-VS-m8Y"/>
                             <constraint firstAttribute="trailing" secondItem="qLJ-sk-uwd" secondAttribute="trailing" id="nCa-nV-YVN"/>
                             <constraint firstItem="mIi-nZ-utS" firstAttribute="width" secondItem="60w-tv-tKx" secondAttribute="width" id="qsf-15-1hb"/>
-                            <constraint firstItem="SdK-fN-W2L" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="top" constant="-20" id="rQU-5b-Sa9"/>
+                            <constraint firstItem="SdK-fN-W2L" firstAttribute="top" secondItem="60w-tv-tKx" secondAttribute="top" id="rQU-5b-Sa9"/>
                             <constraint firstItem="SdK-fN-W2L" firstAttribute="leading" secondItem="60w-tv-tKx" secondAttribute="leading" id="xow-J5-w0c"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="oc7-iw-O1J"/>
                     <connections>
                         <outlet property="loginButton" destination="mwv-HX-aYM" id="nPa-jz-z55"/>
-                        <outlet property="loginlessButton" destination="ZmN-43-o3o" id="9tt-nh-rIS"/>
                         <outlet property="pageControl" destination="lg1-xB-vLI" id="v1F-6r-pIg"/>
                         <outlet property="registerButton" destination="1oI-JN-xF6" id="YRW-Zx-IdR"/>
                         <outlet property="scrollView" destination="mIi-nZ-utS" id="oPz-ai-z63"/>
