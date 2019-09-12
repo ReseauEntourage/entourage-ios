@@ -110,6 +110,7 @@
     
     [_feedItems removeAllObjects];
     [self.delegate itemsRemoved];
+    self.lastEventGuid = nil;
     
     [self requestEventsStartingWithSuccess:^(NSArray *items) {
         if(items.count > 0) {
