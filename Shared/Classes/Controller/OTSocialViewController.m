@@ -72,9 +72,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OTAboutTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:OTAboutTableViewCellIdentifier];
     OTAboutItem *aboutItem = [self aboutItemAtIndexPath:indexPath];
+    OTAboutTableViewCell *cell;
+    
     if (aboutItem != nil) {
+        if (aboutItem.icon) {
+            cell = [tableView dequeueReusableCellWithIdentifier:OTAboutTableViewCellWithIconIdentifier];
+            cell.iconView.image = [[UIImage imageNamed:aboutItem.icon] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            cell.iconView.tintColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+        } else {
+            cell = [tableView dequeueReusableCellWithIdentifier:OTAboutTableViewCellIdentifier];
+        }
+
         cell.titleLabel.text = aboutItem.title;
         
         if (indexPath.row == 0) {
@@ -92,14 +101,7 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OTAboutItem *item = [self aboutItemAtIndexPath:indexPath];
-    if (indexPath.row == 3 || indexPath.row == 4) {
-        NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];
-        NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
-        [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
-    }
-    else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];
-    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];
     return nil;
 }
 
@@ -115,20 +117,29 @@
     [aboutItems addObject:itemRate];
     
     OTAboutItem *itemFacebook = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_facebook")
-                                                               url:ABOUT_FACEBOOK_URL];
+                                                               url:ABOUT_FACEBOOK_URL
+                                                              icon:@"menu_facebook"];
     itemFacebook.type = Facebook;
     [aboutItems addObject:itemFacebook];
     
+    OTAboutItem *itemInstagram = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_instagram")
+                                                               url:ABOUT_INSTAGRAM_URL
+                                                               icon:@"menu_instagram"];
+    itemInstagram.type = Instagram;
+    [aboutItems addObject:itemInstagram];
+
     OTAboutItem *itemTwitter = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_twitter")
-                                                              url:ABOUT_TWITTER_URL];
+                                                              url:ABOUT_TWITTER_URL
+                                                             icon:@"menu_twitter"];
     itemTwitter.type = Twitter;
     [aboutItems addObject:itemTwitter];
     
-    OTAboutItem *itemSuggestions = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_suggestions")
-                                                           identifier:SUGGESTION_LINK_ID];
-    itemSuggestions.type = Suggestions;
-    [aboutItems addObject:itemSuggestions];
-    
+    OTAboutItem *itemWebapp = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_webapp")
+                                                               url:ABOUT_WEBAPP_URL
+                                                            icon:@"menu_link"];
+    itemWebapp.type = Webapp;
+    [aboutItems addObject:itemWebapp];
+
     return aboutItems;
 }
 

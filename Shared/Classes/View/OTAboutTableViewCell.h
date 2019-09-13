@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 FOUNDATION_EXPORT NSString* const OTAboutTableViewCellIdentifier;
+FOUNDATION_EXPORT NSString* const OTAboutTableViewCellWithIconIdentifier;
 
 @interface OTAboutTableViewCell : UITableViewCell
 
 @property(nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property(nonatomic, weak) IBOutlet UILabel *extraLabel;
+@property(nonatomic, weak) IBOutlet UIImageView *iconView;
 
 @end
