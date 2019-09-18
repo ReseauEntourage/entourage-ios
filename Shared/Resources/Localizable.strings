@@ -254,8 +254,8 @@
 "join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nAjoutez un petit mot si vous le souhaitez !";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
 "promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
-"event_title_example" = "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017";
-"event_desc_example" = "Exemple : Notre association vous invite à une soirée conviviale entre voisins avec et sans abris.\n\nNous recherchons des bénévoles pouvant être présents 1h avant pour l’installation";
+"event_title_example" = "Exemple : Soirée jeux entre voisins avec et sans domicile";
+"event_desc_example" = "Exemple : Notre association vous invite à une soirée conviviale entre voisins avec et sans abris.";
 "final_question" = "DERNIÈRE QUESTION";
 "add_action_guide_text" = "La Charte éthique d’Entourage vous explique pourquoi le consentement est indispensable.";
 "add_action_guide_url" = "La Charte éthique d’Entourage";
