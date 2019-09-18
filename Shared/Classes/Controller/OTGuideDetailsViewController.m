@@ -106,7 +106,7 @@
 #pragma mark - Buttons handling
 
 - (IBAction)sendStructureMail:(id)sender {
-    [self.mailSender sendStructureMail:[NSString stringWithFormat:OTLocalizedString(@"structure_subject"), self.poi.name]];
+    [self.mailSender sendStructureMail:[NSString stringWithFormat:OTLocalizedString(@"structure_subject"), self.poi.name, self.poi.sid]];
 }
 
 - (IBAction)showAddress:(id)sender {

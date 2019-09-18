@@ -493,7 +493,7 @@
 "successful_close_mail" = "Mes retours sur l'entourage %@ qui a été un succès";
 "blocked_close_mail" = "Mes retours sur l'entourage %@ qui n'a pas abouti";
 "help_close_mail" = "Aide pour l'entourage %@";
-"structure_subject" = "Information sur la structure '%@'";
+"structure_subject" = "Information sur la structure '%@' - #%@";
 
 "contact_email_adress" = "contact@entourage.social";
 "email_subject_new_sms" = "Demande de code SMS";
