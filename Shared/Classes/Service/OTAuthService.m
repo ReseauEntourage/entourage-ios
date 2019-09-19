@@ -173,7 +173,7 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
     NSString *deviceiOS = [NSString stringWithFormat:@"iOS %@",[[NSProcessInfo processInfo] operatingSystemVersionString]];
     
     NSString *version = [NSBundle currentVersion];
-    NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken, @"device_os" : deviceiOS, @"version" : version, @"authorization_status" : authorizationStatus}};
+    NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken, @"device_os" : deviceiOS, @"version" : version, @"notifications_permissions" : authorizationStatus}};
     
     
     NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, TOKEN];
