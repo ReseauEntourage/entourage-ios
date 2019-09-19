@@ -492,8 +492,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 #pragma mark - Push notifications
 
 + (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:YES] };
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
     [OTPushNotificationsService applicationDidRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
@@ -501,14 +499,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [OTPushNotificationsService applicationDidFailToRegisterForRemoteNotificationsWithError:error];
     
     NSLog(@"Push registration failure : %@", [error localizedDescription]);
-    NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:NO] };
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
 }
 
 + (void)applicationDidRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
     [OTPushNotificationsService legacyAuthorizationRequestCompletedWithError:nil];
-    NSDictionary* notificationInfo = @{ kNotificationPushStatusChangedStatusKey: [NSNumber numberWithBool:YES] };
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPushStatusChanged object:nil userInfo:notificationInfo];
 }
 
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {

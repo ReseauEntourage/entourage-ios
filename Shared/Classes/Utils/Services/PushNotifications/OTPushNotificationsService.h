@@ -24,7 +24,7 @@
 - (BOOL)isMixpanelDeepLinkNotification:(NSDictionary *)userInfo;
 
 + (void)requestProvisionalAuthorizationsIfAdequate;
-+ (void)promptUserForAuthorizations;
++ (void)promptUserForAuthorizationsWithCompletionHandler:(void (^)(void))completionHandler;
 + (void)getAuthorizationStatusWithCompletionHandler:(void (^)(UNAuthorizationStatus status))completionHandler;
 + (void)refreshPushToken;
 + (void)refreshPushTokenIfConfigurationChanged;

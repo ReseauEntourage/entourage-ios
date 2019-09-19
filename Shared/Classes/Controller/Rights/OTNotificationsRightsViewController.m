@@ -25,6 +25,7 @@
 #import "OTAppConfiguration.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAppAppearance.h"
+#import "UINavigationController+entourage.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -34,9 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationAuthorizationChanged:) name:kNotificationPushStatusChanged object:nil];
-    
     [self setupUI];
 }
 
@@ -62,18 +60,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[OTLocationManager sharedInstance] startLocationUpdates];
+    [self.navigationController presentTransparentNavigationBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
-}
-
-#pragma mark - Private
-
-- (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
-    NSLog(@"received kNotificationPushStatusChanged");
-    [self doShowNext];
 }
 
 #pragma mark - IBAction
@@ -100,7 +92,9 @@
 
 - (IBAction)doContinue {
     [OTLogger logEvent:@"AcceptNotifications"];
-    [OTPushNotificationsService promptUserForAuthorizations];
+    [OTPushNotificationsService promptUserForAuthorizationsWithCompletionHandler:^{
+        [self doShowNext];
+    }];
 }
 
 #pragma mark - private methods

@@ -117,12 +117,15 @@ static NSString *const kRemoteNotificationsConfigurationDigest = @"remoteNotific
     }
 }
 
-+ (void)promptUserForAuthorizations {
+static void (^legacyRequestAuthorizationCompletionHandler)(void);
+
++ (void)promptUserForAuthorizationsWithCompletionHandler:(void (^)(void))completionHandler {
     if (@available(iOS 10.0, *)) {
         UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
         [center requestAuthorizationWithOptions:[self authorizationOptions]
                               completionHandler:^(BOOL granted, NSError * _Nullable error) {
                                   [self authorizationRequestGranted:granted withError:error];
+                                  completionHandler();
                               }];
     } else {
         // iOS 9 fallback
@@ -131,15 +134,20 @@ static NSString *const kRemoteNotificationsConfigurationDigest = @"remoteNotific
                                                         UIUserNotificationTypeAlert);
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
                                                                                  categories:nil];
-
+        
+        legacyRequestAuthorizationCompletionHandler = completionHandler;
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
         // -> application:didRegisterUserNotificationSettings:
         //    -> legacyRequestAuthorizationCompletedWithError
     }
 }
 
-// iOS 9 fallback for promptUserForAuthorizations
+// iOS 9 fallback for promptUserForAuthorizationsWithCompletionHandler
 + (void)legacyAuthorizationRequestCompletedWithError:(NSError * _Nullable)error {
+    if (@available(iOS 10.0, *)) {
+        return;
+    }
+    
     BOOL granted;
     
     if (error) {
@@ -153,6 +161,9 @@ static NSString *const kRemoteNotificationsConfigurationDigest = @"remoteNotific
     }
     
     [self authorizationRequestGranted:granted withError:error];
+
+    legacyRequestAuthorizationCompletionHandler();
+    legacyRequestAuthorizationCompletionHandler = nil;
 }
 
 + (void)authorizationRequestGranted:(BOOL)granted withError:(NSError * _Nullable)error {
