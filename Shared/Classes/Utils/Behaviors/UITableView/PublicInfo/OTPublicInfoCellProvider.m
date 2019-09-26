@@ -37,8 +37,8 @@
         else if ([feedItem.identifierTag isEqualToString:@"summary"]) {
             return @"SummaryCell";
         }
-        else if ([feedItem.identifierTag isEqualToString:@"eventAuthorInfo"]) {
-            return @"DescriptionCell";
+        else if ([feedItem.identifierTag isEqualToString:@"timestamps"]) {
+            return @"TimestampsCell";
         }
         else if ([feedItem.identifierTag isEqualToString:@"inviteFriend"]) {
             return @"InviteCell";

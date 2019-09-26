@@ -11,6 +11,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "UIImageView+entourage.h"
 #import "OTFeedItemFactory.h"
+#import "OTTapViewBehavior.h"
 
 @implementation OTEventInfoCell
 
@@ -19,9 +20,10 @@
 }
 
 - (void)configureWith:(OTFeedItem *)item {
+    self.lblAuthorPrefix.text = @"Organisé par ";
+    self.lblAuthorInfo.text = [[[OTFeedItemFactory createFor:item] getUI] userName];
     if (item.startsAt) {
-        NSAttributedString *description = [[[OTFeedItemFactory createFor:item] getUI] eventInfoFormattedDescription];
-        self.lblInfo.attributedText = description;
+        self.lblInfo.text = [[[OTFeedItemFactory createFor:item] getUI] eventInfoDescription];
     }
 }
 

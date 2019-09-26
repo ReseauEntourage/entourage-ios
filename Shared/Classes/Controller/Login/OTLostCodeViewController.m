@@ -47,7 +47,9 @@
     self.codeCountry = @"+33";
     self.countryPicker.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
-    self.phoneTextField.textContentType = UITextContentTypeTelephoneNumber;
+    if (@available(iOS 10.0, *)) {
+        self.phoneTextField.textContentType = UITextContentTypeTelephoneNumber;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated

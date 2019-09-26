@@ -65,6 +65,10 @@ continueUserActivity:(NSUserActivity *)userActivity
     [OTAppConfiguration applicationDidFailToRegisterForRemoteNotificationsWithError:error];
 }
 
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    [OTAppConfiguration applicationDidRegisterUserNotificationSettings:notificationSettings];
+}
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
 
     [OTAppConfiguration application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];

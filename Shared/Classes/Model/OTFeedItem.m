@@ -128,4 +128,8 @@
     return [self.groupType isEqualToString:GROUP_TYPE_OUTING];
 }
 
+- (BOOL)isAction {
+    return [self.groupType isEqualToString:GROUP_TYPE_ACTION];
+}
+
 @end

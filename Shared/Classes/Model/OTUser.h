@@ -60,8 +60,6 @@ extern NSString *const kVisitedUserTag;
 
 - (BOOL)isCoordinator;
 
-- (BOOL)isRegisteredForPushNotifications;
-
 - (BOOL)hasSignedEthicsChart;
 
 - (BOOL)isAnonymous;

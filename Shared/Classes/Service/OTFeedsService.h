@@ -11,7 +11,7 @@
 @interface OTFeedsService : NSObject
 
 - (void)getAllFeedsWithParameters:(NSDictionary*)parameters
-                          success:(void (^)(NSMutableArray *feeds))success
+                          success:(void (^)(NSMutableArray *feeds, NSString *pageToken))success
                           failure:(void (^)(NSError *error))failure;
 
 - (void)getMyFeedsWithParameters:(NSDictionary*)parameters

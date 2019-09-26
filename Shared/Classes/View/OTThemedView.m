@@ -43,6 +43,9 @@
     else if ([self.themeBackgroundColor isEqualToString:@"secondary"]) {
         self.backgroundColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     }
+    else if ([self.themeBackgroundColor isEqualToString:@"neutralLight"]) {
+        self.backgroundColor = [ApplicationTheme shared].subtitleLabelColor;
+    }
     else {
         if (!inInterfaceBuilder) return;
         self.backgroundColor = UIColor.redColor;

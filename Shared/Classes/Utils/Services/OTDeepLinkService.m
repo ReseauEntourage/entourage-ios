@@ -178,6 +178,10 @@
         if (pathComponents != nil && pathComponents.count >= 2) {
             [self navigateToFeedWithStringId:pathComponents[1]];
         }
+    } else if ([key isEqualToString:@"user"] || [key isEqualToString:@"users"]) {
+        if (pathComponents != nil && pathComponents.count >= 2) {
+            [self showProfileFromAnywhereForUser:pathComponents[1]];
+        }
     } else if ([key isEqualToString:@"guide"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
         [mainViewController switchToGuide];

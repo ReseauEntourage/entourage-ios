@@ -38,11 +38,8 @@
         self.text = @"themeColor must be set";
         self.textColor = UIColor.redColor;
     }
-    else if ([self.themeColor isEqualToString:@"title"]) {
+    else if ([self.themeColor isEqualToString:@"defaultTextColor"]) {
         self.textColor = [ApplicationTheme shared].titleLabelColor;
-    }
-    else if ([self.themeColor isEqualToString:@"subtitle"]) {
-        self.textColor = [ApplicationTheme shared].subtitleLabelColor;
     }
     else {
         if (!inInterfaceBuilder) return;

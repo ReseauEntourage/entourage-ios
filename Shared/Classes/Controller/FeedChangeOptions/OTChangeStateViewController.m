@@ -60,11 +60,8 @@
         ![USER_ID isEqualToNumber:self.feedItem.author.uID] &&
         !canCancelJoin;
     
-    BOOL canShare = ![self.feedItem.joinStatus isEqualToString:JOIN_ACCEPTED];
-    if ([self.feedItem.status isEqualToString:ENTOURAGE_STATUS_SUSPENDED]) {
-        // EMA-2422
-        canShare = NO;
-    }
+    // EMA-2422
+    BOOL canShare = ![self.feedItem.status isEqualToString:ENTOURAGE_STATUS_SUSPENDED];
     
     BOOL canPromote = [currentUser isCoordinator] && [self.feedItem isOuting];
     

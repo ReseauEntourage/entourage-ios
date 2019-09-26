@@ -75,7 +75,10 @@
 "menu_disconnect_title" = "Déconnexion";
 "menu_entourage_actions" = "Idées d'actions dans l'appli";
 "menu_make_donation" = "Faire un don";
-"menu_application_usage" = "Questions fréquentes";
+"menu_suggestions" = "Une suggestion ? Un problème ?";
+"menu_feedback" = "Donnez votre avis";
+"menu_application_usage" = "FAQ";
+"menu_jobs" = "Rejoignez-nous";
 "menu_atd_partner" = "Suivre Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
 "menu_join" = "Devenir Ambassadeur Entourage";
@@ -84,15 +87,17 @@
 // AboutItems
 "about_tutorial" = "Voir le tutoriel";
 "about_rateus" = "Notez-nous dans l’App Store";
-"about_facebook" = "Aimez notre page Facebook";
-"about_cgu" = "Conditions générales d’utilisation";
+"about_facebook" = "Aimez notre Facebook";
+"about_instagram" = "Suivez notre Instagram";
+"about_cgu" = "CGU";
 "about_politique_conf" = "Politique de Confidentialité";
 "about_website" = "Site web d'Entourage";
 "about_email" = "Contactez Entourage";
 "about_email_notavailable" = "Email introuvable";
 "terms_and_conditions_for_onboarding" = "conditions d’utilisation";
 "policy_for_onboarding" = "politique de confidentialité";
-"about_twitter" = "Suivez-nous sur Twitter";
+"about_twitter" = "Retweetez-nous";
+"about_webapp" = "Essayez notre version web";
 "about_suggestions" = "Suggérez des améliorations";
 "about_appVersion" = "Version de l'application";
 "about_privacy_policy" = "Politique de Confidentialité";
@@ -249,8 +254,8 @@
 "join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nAjoutez un petit mot si vous le souhaitez !";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
 "promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
-"event_title_example" = "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017";
-"event_desc_example" = "Exemple : Notre association vous invite à une soirée conviviale entre voisins avec et sans abris.\n\nNous recherchons des bénévoles pouvant être présents 1h avant pour l’installation";
+"event_title_example" = "Exemple : Soirée jeux entre voisins avec et sans domicile";
+"event_desc_example" = "Exemple : Notre association vous invite à une soirée conviviale entre voisins avec et sans abris.";
 "final_question" = "DERNIÈRE QUESTION";
 "add_action_guide_text" = "La Charte éthique d’Entourage vous explique pourquoi le consentement est indispensable.";
 "add_action_guide_url" = "La Charte éthique d’Entourage";
@@ -264,6 +269,7 @@
 "item_option_quit" = "Quitter";
 "entourage_time_data" = "%@ - à %@";
 "entourage_distance" = "à %@";
+"entourage_location" ="à %@";
 "member_count" = "Membres (%d)";
 "item_closed" = "Clôturé";
 "item_cancel_join" = "Retirer ma demande";
@@ -480,12 +486,14 @@
 "month_10" = "oct.";
 "month_11" = "nov.";
 "month_12" = "déc.";
+"formatter_time_ago" = "il y a %@";
+"days" = "jours";
 
 //email
 "successful_close_mail" = "Mes retours sur l'entourage %@ qui a été un succès";
 "blocked_close_mail" = "Mes retours sur l'entourage %@ qui n'a pas abouti";
 "help_close_mail" = "Aide pour l'entourage %@";
-"structure_subject" = "Information sur la structure '%@'";
+"structure_subject" = "Information sur la structure '%@' - #%@";
 
 "contact_email_adress" = "contact@entourage.social";
 "email_subject_new_sms" = "Demande de code SMS";
@@ -498,6 +506,9 @@
 "share_webview" = "J'ai découvert le guide Simple Comme Bonjour pour aller à la rencontre des personnes sans-abri. C'est à découvrir ici : %@";
 
 "feed_item_time_distance" = "Créée il y a ";
+"group_timestamps_created_at" = "Créé";
+"group_timestamps_updated_at" = "mis à jour";
+"group_timestamps_separator" = " - ";
 
 "association_set" = "Badge ajouté";
 "association_reset" = "Badge enlevé";

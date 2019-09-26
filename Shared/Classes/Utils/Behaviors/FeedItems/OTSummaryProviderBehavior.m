@@ -73,11 +73,37 @@
     }
     
     if (self.lblDescription) {
-        [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+        if (self.lblUserName) {
+            self.lblDescription.text = [uiDelegate descriptionWithoutUserName];
+        } else {
+            [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+        }
     }
-    
+
+    if (self.lblUserName) {
+        if ([feedItem isOuting]) {
+            self.lblUserName.text = nil;
+        } else {
+            self.lblUserName.text = [uiDelegate userName];
+        }
+    }
+
     if (self.txtFeedItemDescription) {
         self.txtFeedItemDescription.text = [uiDelegate feedItemDescription];
+    }
+    
+    if (self.lblLocation) {
+        if ([feedItem isOuting]) {
+            self.lblLocation.hidden = true;
+        } else {
+            self.lblLocation.hidden = false;
+        }
+        
+        if (feedItem.displayAddress.length > 0) {
+            self.lblLocation.text = [NSString stringWithFormat:OTLocalizedString(@"entourage_location"), feedItem.displayAddress];
+        } else {
+            self.lblLocation.text = @"";
+        }
     }
     
     if (self.lblTimeDistance) {
@@ -141,6 +167,8 @@
 - (void)clearConfiguration {
     self.lblTitle = nil;
     self.lblDescription = nil;
+    self.lblUserName = nil;
+    self.lblLocation = nil;
     self.lblUserCount = nil;
     self.btnAvatar = nil;
     self.lblTimeDistance = nil;

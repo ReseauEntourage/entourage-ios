@@ -54,7 +54,6 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
 
 - (void)authWithPhone:(NSString *)phone
              password:(NSString *)password
-             deviceId:(NSString *)deviceId
               success:(void (^)(OTUser *, BOOL))success
               failure:(void (^)(NSError *))failure
 {
@@ -69,7 +68,7 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
     OTRequestOperationManager *requestManager = [OTHTTPRequestManager sharedInstance];
     [requestManager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
-    NSLog(@"Login with user %@. DeviceID = %@", parameters, deviceId);
+    NSLog(@"Login with user %@", parameters);
     //NSLog(@"Login header: %@"OTApiErrorDomain, requestManager.requestSerializer.HTTPRequestHeaders);
     [requestManager
          POSTWithUrl:kAPILogin
@@ -163,37 +162,51 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
          }];
 }
 
-- (void)sendAppInfoWithSuccess:(void (^)(void))success
-                       failure:(void (^)(NSError *))failure
++ (void)sendAppInfoWithPushToken:(NSString *)pushToken
+             authorizationStatus:(NSString *)authorizationStatus
+                         success:(void (^)(void))success
+                         failure:(void (^)(NSError *))failure
 {
-    NSString *pushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     if (!pushToken)
         return;
-
+    
     NSString *deviceiOS = [NSString stringWithFormat:@"iOS %@",[[NSProcessInfo processInfo] operatingSystemVersionString]];
     
     NSString *version = [NSBundle currentVersion];
-    NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken, @"device_os" : deviceiOS, @"version" : version}};
-                                    
+    NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken, @"device_os" : deviceiOS, @"version" : version, @"notifications_permissions" : authorizationStatus}};
+    
     
     NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, TOKEN];
     NSLog(@"Applications: %@\n%@", url, parameters);
     
     [[OTHTTPRequestManager sharedInstance]
-         PUTWithUrl:url
-         andParameters:parameters
-         andSuccess:^(id responseObject) {
-             if (success) {
-                 success();
-             }
+     PUTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject) {
+         if (success) {
+             success();
          }
-         andFailure:^(NSError *error)
-         {
-             NSLog(@"Failed with error %@", error);
-             if (failure) {
-                 failure(error);
-             }
-         }];
+     }
+     andFailure:^(NSError *error)
+     {
+         NSLog(@"Failed with error %@", error);
+         if (failure) {
+             failure(error);
+         }
+     }];
+}
+
+- (void)deletePushToken:(NSString *)pushToken forUser:(OTUser *)user {
+    NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken}};
+    NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, user.token];
+
+    [[OTHTTPRequestManager sharedInstance]
+        DELETEWithUrl:url
+        andParameters:parameters
+        andSuccess:nil
+        andFailure:^(NSError *error) {
+            NSLog(@"Failed with error %@", error);
+        }];
 }
 
 - (void)regenerateSecretCode:(NSString *)phone

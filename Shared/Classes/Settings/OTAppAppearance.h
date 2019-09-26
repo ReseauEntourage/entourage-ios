@@ -48,6 +48,7 @@
 + (UIColor*)announcementFeedContainerColor;
 + (UIColor *)tagColor:(OTUser*)user;
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem;
++ (NSString *)descriptionForMessageItem:(OTEntourage *)item;
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSAttributedString*)formattedAuthorDescriptionForMessageItem:(OTEntourage*)item;

@@ -20,6 +20,17 @@
     return self;
 }
 
+- (instancetype)initWithTitle:(NSString *)title url:(NSString *)url icon:(NSString *)icon
+{
+    self = [super init];
+    if (self) {
+        self.title = title;
+        self.url = url;
+        self.icon = icon;
+    }
+    return self;
+}
+
 - (instancetype)initWithTitle:(NSString *)title identifier:(NSString *)identifier
 {
     self = [super init];

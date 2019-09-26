@@ -15,6 +15,7 @@
 #define kWSKeyData @"data"
 #define kWSKeyType @"type"
 #define kWSKeyFeeds @"feeds"
+#define kWSKeyNextPageToken @"next_page_token"
 
 // FeedItems
 #define kWSUpdatedDate @"updated_at"
