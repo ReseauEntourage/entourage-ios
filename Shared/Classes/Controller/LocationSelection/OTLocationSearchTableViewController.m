@@ -75,14 +75,4 @@
     }];
 }
 
-- (void)willPresentSearchController:(UISearchController *)searchController {
-    // do something before the search controller is presented
-    self.navigationController.navigationBar.translucent = YES;
-}
-
-- (void)willDismissSearchController:(UISearchController *)searchController
-{
-    self.navigationController.navigationBar.translucent = NO;
-}
-
 @end
