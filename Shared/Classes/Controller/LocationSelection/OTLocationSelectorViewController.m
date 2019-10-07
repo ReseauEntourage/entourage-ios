@@ -74,8 +74,6 @@
             [textField.leftView addSubview: leftImage];
         }
     }
-    self.resultSearchController.hidesNavigationBarDuringPresentation = NO;
-    self.resultSearchController.dimsBackgroundDuringPresentation = YES;
     self.definesPresentationContext = YES;
     self.locationSearchTable.mapView = self.mapView;
     self.locationSearchTable.pinDelegate = self;

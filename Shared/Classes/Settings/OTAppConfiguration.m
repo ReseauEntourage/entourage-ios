@@ -454,9 +454,24 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [OTAppConfiguration configureApplicationAppearance];
     
     navigationController.automaticallyAdjustsScrollViewInsets = NO;
-    navigationController.navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
-    navigationController.navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
-    navigationController.navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    
+    UINavigationBar *navigationBar = navigationController.navigationBar;
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance *navBarAppearance = [UINavigationBarAppearance new];
+        [navBarAppearance configureWithOpaqueBackground];
+        navBarAppearance.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+        NSDictionary *textAttributes = @{
+            NSForegroundColorAttributeName: [[ApplicationTheme shared] secondaryNavigationBarTintColor]
+        };
+        navBarAppearance.titleTextAttributes = textAttributes;
+        navBarAppearance.largeTitleTextAttributes = textAttributes;
+        navigationBar.standardAppearance = navBarAppearance;
+        navigationBar.scrollEdgeAppearance = navBarAppearance;
+    } else {
+        navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+        navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
+        navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    }
     
     UIFont *selectedTabBarFont = [UIFont fontWithName:@"SFUIText-Bold" size:12];
     NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],

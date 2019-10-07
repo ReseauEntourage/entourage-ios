@@ -63,16 +63,18 @@
 #pragma mark UISearchResultsUpdating
 
 - (void) updateSearchResultsForSearchController:(UISearchController *)searchController {
-    MKLocalSearchRequest *request = [MKLocalSearchRequest new];
-    request.naturalLanguageQuery = searchController.searchBar.text;
-    request.region = self.mapView.region;
-    
-    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
-    [search startWithCompletionHandler:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
-        self.matchingItems = response == nil ? @[] : response.mapItems;
-        if(error == nil)
+    NSString *query = searchController.searchBar.text;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.300 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        if (![query isEqualToString:searchController.searchBar.text]) return;
+        MKLocalSearchRequest *request = [MKLocalSearchRequest new];
+        request.naturalLanguageQuery = query;
+        request.region = self.mapView.region;
+        MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
+        [search startWithCompletionHandler:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
+            self.matchingItems = response == nil ? @[] : response.mapItems;
             [self.tableView reloadData];
-    }];
+        }];
+    });
 }
 
 @end
