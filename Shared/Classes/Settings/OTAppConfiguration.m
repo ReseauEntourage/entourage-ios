@@ -456,6 +456,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     navigationController.automaticallyAdjustsScrollViewInsets = NO;
     
     UINavigationBar *navigationBar = navigationController.navigationBar;
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
     if (@available(iOS 13.0, *)) {
         UINavigationBarAppearance *navBarAppearance = [UINavigationBarAppearance new];
         [navBarAppearance configureWithOpaqueBackground];
@@ -467,7 +468,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         navBarAppearance.largeTitleTextAttributes = textAttributes;
         navigationBar.standardAppearance = navBarAppearance;
         navigationBar.scrollEdgeAppearance = navBarAppearance;
-    } else {
+    } else
+    #endif
+    {
         navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
         navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
         navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
