@@ -29,6 +29,7 @@ else
     previous_tag="Ent_6.0.1124"
     previous_tag="Ent_6.0.5.1156"
     previous_tag="Ent_6.1.1207"
+    previous_tag="Ent_6.1.1.1228"
 
     filename="GITCHANGELOG-FROM-$previous_tag-TO-$latest_tag.md"
     echo "#Changelog" > $filename
