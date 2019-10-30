@@ -20,8 +20,8 @@
 #import "GooglePlacesDemos/Samples/Autocomplete/AutocompleteWithCustomColors.h"
 #import "GooglePlacesDemos/Samples/Autocomplete/AutocompleteWithSearchViewController.h"
 #import "GooglePlacesDemos/Samples/Autocomplete/AutocompleteWithTextFieldController.h"
+#import "GooglePlacesDemos/Samples/FindPlaceLikelihoodListViewController.h"
 #import "GooglePlacesDemos/Support/BaseDemoViewController.h"
-
 
 @implementation Demo {
   Class _viewControllerClass;
@@ -37,7 +37,10 @@
 
 - (UIViewController *)
     createViewControllerWithAutocompleteBoundsMode:(GMSAutocompleteBoundsMode)autocompleteBoundsMode
-                                autocompleteBounds:(GMSCoordinateBounds *)autocompleteBounds
+                 autocompleteBoundsNorthEastCorner:
+                     (CLLocationCoordinate2D)autocompleteBoundsNorthEastCorner
+                 autocompleteBoundsSouthWestCorner:
+                     (CLLocationCoordinate2D)autocompleteBoundsSouthWestCorner
                                 autocompleteFilter:(GMSAutocompleteFilter *)autocompleteFilter
                                        placeFields:(GMSPlaceField)placeFields {
   // Construct the demo view controller.
@@ -47,8 +50,9 @@
   if ([demoViewController isKindOfClass:[AutocompleteBaseViewController class]]) {
     AutocompleteBaseViewController *controller =
         (AutocompleteBaseViewController *)demoViewController;
+    controller.autocompleteBoundsNorthEastCorner = autocompleteBoundsNorthEastCorner;
+    controller.autocompleteBoundsSouthWestCorner = autocompleteBoundsSouthWestCorner;
     controller.autocompleteBoundsMode = autocompleteBoundsMode;
-    controller.autocompleteBounds = autocompleteBounds;
     controller.autocompleteFilter = autocompleteFilter;
     controller.placeFields = placeFields;
   }
@@ -82,13 +86,18 @@
       [[Demo alloc] initWithViewControllerClass:[AutocompleteWithTextFieldController class]],
     ];
 
+    NSArray<Demo *> *findPlaceLikelihoodDemos = @[ [[Demo alloc]
+        initWithViewControllerClass:[FindPlaceLikelihoodListViewController class]] ];
 
     _sections = @[
       [[DemoSection alloc]
           initWithTitle:NSLocalizedString(@"Demo.Section.Title.Autocomplete",
                                           @"Title of the autocomplete demo section")
                   demos:autocompleteDemos],
-
+      [[DemoSection alloc]
+          initWithTitle:NSLocalizedString(@"Demo.Section.Title.FindPlaceLikelihood",
+                                          @"Title of the findPlaceLikelihood demo section")
+                  demos:findPlaceLikelihoodDemos]
     ];
   }
   return self;

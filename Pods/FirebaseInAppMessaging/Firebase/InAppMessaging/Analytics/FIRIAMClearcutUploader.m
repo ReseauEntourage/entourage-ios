@@ -95,18 +95,28 @@ static NSString *FIRIAM_UserDefaultsKeyForNextValidClearcutUploadTimeInMills =
     _strategy = strategy;
     _queue = dispatch_queue_create("com.google.firebase.inappmessaging.clearcut_upload", NULL);
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(appWillEnterForeground:)
+                                             selector:@selector(scheduleNextSendFromForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
-
+#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
+    if (@available(iOS 13.0, *)) {
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(scheduleNextSendFromForeground:)
+                                                   name:UISceneWillEnterForegroundNotification
+                                                 object:nil];
+    }
+#endif  // defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
     _userDefaults = userDefaults ? userDefaults : [NSUserDefaults standardUserDefaults];
     // it would be 0 if it does not exist, which is equvilent to saying that
     // you can send now
     _nextValidSendTimeInMills = (int64_t)
         [_userDefaults doubleForKey:FIRIAM_UserDefaultsKeyForNextValidClearcutUploadTimeInMills];
 
-    // seed the first send upon SDK start-up
-    [self scheduleNextSend];
+    NSArray<FIRIAMClearcutLogRecord *> *availableLogs =
+        [logStorage popStillValidRecordsForUpTo:strategy.batchSendSize];
+    if (availableLogs.count) {
+      [self scheduleNextSend];
+    }
 
     FIRLogDebug(kFIRLoggerInAppMessaging, @"I-IAM260001",
                 @"FIRIAMClearcutUploader created with strategy as %@", self.strategy);
@@ -118,7 +128,7 @@ static NSString *FIRIAM_UserDefaultsKeyForNextValidClearcutUploadTimeInMills =
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)appWillEnterForeground:(UIApplication *)application {
+- (void)scheduleNextSendFromForeground:(NSNotification *)notification {
   FIRLogDebug(kFIRLoggerInAppMessaging, @"I-IAM260010",
               @"App foregrounded, FIRIAMClearcutUploader will seed next send");
   [self scheduleNextSend];
@@ -133,20 +143,20 @@ static NSString *FIRIAM_UserDefaultsKeyForNextValidClearcutUploadTimeInMills =
 }
 
 - (void)attemptUploading {
-  NSArray<FIRIAMClearcutLogRecord *> *availbleLogs =
+  NSArray<FIRIAMClearcutLogRecord *> *availableLogs =
       [self.logStorage popStillValidRecordsForUpTo:self.strategy.batchSendSize];
 
-  if (availbleLogs.count > 0) {
+  if (availableLogs.count > 0) {
     FIRLogDebug(kFIRLoggerInAppMessaging, @"I-IAM260011", @"Deliver %d clearcut records",
-                (int)availbleLogs.count);
+                (int)availableLogs.count);
     [self.requestSender
-        sendClearcutHttpRequestForLogs:availbleLogs
+        sendClearcutHttpRequestForLogs:availableLogs
                         withCompletion:^(BOOL success, BOOL shouldRetryLogs,
                                          int64_t waitTimeInMills) {
                           if (success) {
                             FIRLogDebug(kFIRLoggerInAppMessaging, @"I-IAM260003",
                                         @"Delivering %d clearcut records was successful",
-                                        (int)availbleLogs.count);
+                                        (int)availableLogs.count);
                             // make sure the effective wait time is between two bounds
                             // defined in strategy
                             waitTimeInMills =
@@ -159,7 +169,7 @@ static NSString *FIRIAM_UserDefaultsKeyForNextValidClearcutUploadTimeInMills =
                             FIRLogDebug(kFIRLoggerInAppMessaging, @"I-IAM260004",
                                         @"Failed to attempt the delivery of %d clearcut "
                                         @"records and should-retry for them is %@",
-                                        (int)availbleLogs.count, shouldRetryLogs ? @"YES" : @"NO");
+                                        (int)availableLogs.count, shouldRetryLogs ? @"YES" : @"NO");
                             if (shouldRetryLogs) {
                               /**
                                * Note that there is a chance that the app crashes before we can
@@ -170,7 +180,7 @@ static NSString *FIRIAM_UserDefaultsKeyForNextValidClearcutUploadTimeInMills =
                                */
                               FIRLogDebug(kFIRLoggerInAppMessaging, @"I-IAM260007",
                                           @"Push failed log records back to storage");
-                              [self.logStorage pushRecords:availbleLogs];
+                              [self.logStorage pushRecords:availableLogs];
                             }
 
                             waitTimeInMills = (int64_t)self.strategy.failureBackoffTimeInMills;
@@ -207,10 +217,7 @@ static NSString *FIRIAM_UserDefaultsKeyForNextValidClearcutUploadTimeInMills =
 - (void)scheduleNextSend {
   @synchronized(self) {
     if (_nextSendScheduled) {
-      // already scheduled next send, don't do it again
       return;
-    } else {
-      _nextSendScheduled = YES;
     }
   }
 
@@ -228,6 +235,9 @@ static NSString *FIRIAM_UserDefaultsKeyForNextValidClearcutUploadTimeInMills =
                  _queue, ^{
                    [self attemptUploading];
                  });
+  @synchronized(self) {
+    _nextSendScheduled = YES;
+  }
 }
 
 @end

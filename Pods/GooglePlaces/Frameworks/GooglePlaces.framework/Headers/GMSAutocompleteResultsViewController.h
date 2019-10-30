@@ -10,11 +10,6 @@
 
 #import <UIKit/UIKit.h>
 
-#if __has_feature(modules)
-@import GoogleMapsBase;
-#else
-#import <GoogleMapsBase/GoogleMapsBase.h>
-#endif
 #import "GMSAutocompleteBoundsMode.h"
 #import "GMSAutocompleteFilter.h"
 #import "GMSAutocompletePrediction.h"
@@ -22,6 +17,7 @@
 #import "GMSPlaceFieldMask.h"
 
 @class GMSAutocompleteResultsViewController;
+@class GMSCoordinateBounds;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -141,9 +137,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Specify individual place details to fetch for object |GMSPlace|.
- * Defaults to returning all details if not overidden.
+ * Defaults to returning all details if not overridden.
  */
 @property(nonatomic, assign) GMSPlaceField placeFields;
+
+/**
+ * Sets up the autocomplete bounds using the NE and SW corner locations.
+ */
+- (void)setAutocompleteBoundsUsingNorthEastCorner:(CLLocationCoordinate2D)NorthEastCorner
+                                  SouthWestCorner:(CLLocationCoordinate2D)SouthWestCorner;
 
 @end
 

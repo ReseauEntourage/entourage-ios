@@ -73,7 +73,13 @@
 }
 
 - (void)messageTapped:(UITapGestureRecognizer *)recognizer {
-  [self followActionURL];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+  FIRInAppMessagingAction *action =
+      [[FIRInAppMessagingAction alloc] initWithActionText:nil
+                                                actionURL:self.imageOnlyMessage.actionURL];
+#pragma clang diagnostic pop
+  [self followAction:action];
 }
 
 - (void)viewDidLoad {
@@ -107,6 +113,13 @@
   CGFloat minimalMargine = 30;  // 30 points
   CGFloat maxImageViewWidth = self.view.window.frame.size.width - minimalMargine * 2;
   CGFloat maxImageViewHeight = self.view.window.frame.size.height - minimalMargine * 2;
+
+  // Factor in space for the top notch on iPhone X*.
+#if defined(__IPHONE_11_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000
+  if (@available(iOS 11.0, *)) {
+    maxImageViewHeight -= self.view.safeAreaInsets.top;
+  }
+#endif  // defined(__IPHONE_11_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000
 
   CGFloat adjustedImageViewHeight = self.imageOriginalSize.height;
   CGFloat adjustedImageViewWidth = self.imageOriginalSize.width;

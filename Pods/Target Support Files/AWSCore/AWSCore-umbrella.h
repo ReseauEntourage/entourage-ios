@@ -30,6 +30,7 @@
 #import "AWSFMDatabaseAdditions.h"
 #import "AWSFMDatabasePool.h"
 #import "AWSFMDatabaseQueue.h"
+#import "AWSFMDB+AWSHelpers.h"
 #import "AWSFMDB.h"
 #import "AWSFMResultSet.h"
 #import "AWSGZIP.h"
@@ -63,6 +64,7 @@
 #import "NSValueTransformer+AWSMTLInversionAdditions.h"
 #import "NSValueTransformer+AWSMTLPredefinedTransformerAdditions.h"
 #import "AWSNetworking.h"
+#import "AWSNetworkingHelpers.h"
 #import "AWSURLSessionManager.h"
 #import "AWSSerialization.h"
 #import "AWSURLRequestRetryHandler.h"
@@ -86,6 +88,7 @@
 #import "AWSLogging.h"
 #import "AWSModel.h"
 #import "AWSSynchronizedMutableDictionary.h"
+#import "AWSXMLDictionary.h"
 
 FOUNDATION_EXPORT double AWSCoreVersionNumber;
 FOUNDATION_EXPORT const unsigned char AWSCoreVersionString[];

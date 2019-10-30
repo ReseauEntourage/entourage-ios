@@ -9,6 +9,7 @@
 #import "OTGMSAutoCompleteViewController.h"
 #import <Foundation/Foundation.h>
 #import <GooglePlaces/GooglePlaces.h>
+#import <GoogleMaps/GoogleMaps.h>
 #import "entourage-Swift.h"
 
 @interface OTGMSAutoCompleteViewController () < GMSAutocompleteViewControllerDelegate >

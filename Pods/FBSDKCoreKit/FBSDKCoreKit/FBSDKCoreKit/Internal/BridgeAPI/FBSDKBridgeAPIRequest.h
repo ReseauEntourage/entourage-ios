@@ -18,12 +18,19 @@
 
 #import <Foundation/Foundation.h>
 
+#if SWIFT_PACKAGE
+#import "FBSDKCopying.h"
+#else
 #import <FBSDKCoreKit/FBSDKCopying.h>
+#endif
 
 #import "FBSDKBridgeAPIProtocolType.h"
 
+NS_SWIFT_NAME(BridgeAPIRequest)
 @interface FBSDKBridgeAPIRequest : NSObject <FBSDKCopying>
 
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 + (instancetype)bridgeAPIRequestWithProtocolType:(FBSDKBridgeAPIProtocolType)protocolType
                                           scheme:(NSString *)scheme
                                       methodName:(NSString *)methodName

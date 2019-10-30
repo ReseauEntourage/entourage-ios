@@ -82,17 +82,27 @@ static NSString *const kEventExtensionJson = @"extension_js";
 }
 
 - (instancetype)initWithExpireAfterInSeconds:(NSInteger)expireInSeconds
-                             withTimeFetcher:(id<FIRIAMTimeFetcher>)timeFetcher {
+                             withTimeFetcher:(id<FIRIAMTimeFetcher>)timeFetcher
+                                   cachePath:(nullable NSString *)cachePath {
   if (self = [super init]) {
     _records = [[NSMutableArray alloc] init];
     _timeFetcher = timeFetcher;
     _recordExpiresInSeconds = expireInSeconds;
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(appWillBecomeInactive)
+                                             selector:@selector(appWillBecomeInactive:)
                                                  name:UIApplicationWillResignActiveNotification
                                                object:nil];
+#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
+    if (@available(iOS 13.0, *)) {
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(appWillBecomeInactive:)
+                                                   name:UISceneWillDeactivateNotification
+                                                 object:nil];
+    }
+#endif  // defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
+
     @try {
-      [self loadFromCachePath:nil];
+      [self loadFromCachePath:cachePath];
     } @catch (NSException *exception) {
       FIRLogWarning(kFIRLoggerInAppMessaging, @"I-IAM230004",
                     @"Non-fatal exception in loading persisted clearcut log records: %@.",
@@ -102,7 +112,14 @@ static NSString *const kEventExtensionJson = @"extension_js";
   return self;
 }
 
-- (void)appWillBecomeInactive {
+- (instancetype)initWithExpireAfterInSeconds:(NSInteger)expireInSeconds
+                             withTimeFetcher:(id<FIRIAMTimeFetcher>)timeFetcher {
+  return [self initWithExpireAfterInSeconds:expireInSeconds
+                            withTimeFetcher:timeFetcher
+                                  cachePath:nil];
+}
+
+- (void)appWillBecomeInactive:(NSNotification *)notification {
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul), ^{
     [self saveIntoCacheWithPath:nil];
   });

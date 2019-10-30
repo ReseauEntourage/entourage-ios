@@ -29,6 +29,8 @@
 "Demo.Section.Title.Autocomplete"="Autocomplete";
 // Title of the 'Programmatic' demo section
 "Demo.Section.Title.Programmatic"="Programmatic APIs";
+// Title of the findPlacesLikelihood demo section
+"Demo.Section.Title.FindPlaceLikelihood"="Likelihoods";
 
 // Button title for 'show autocomplete widget'
 "Demo.Content.Autocomplete.ShowWidgetButton"="Show Autocomplete Widget";

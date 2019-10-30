@@ -55,7 +55,7 @@ static void *fbsdkdfl_load_library_once(const char *path)
 static void *fbsdkdfl_load_framework_once(NSString *framework)
 {
   NSString *path = [NSString stringWithFormat:g_frameworkPathTemplate, framework, framework];
-  return fbsdkdfl_load_library_once([path fileSystemRepresentation]);
+  return fbsdkdfl_load_library_once(path.fileSystemRepresentation);
 }
 
 // Implements the callback for dispatch_once() that loads the handle for specified framework name
@@ -85,7 +85,7 @@ static void fbsdkdfl_load_symbol_once(void *context)
 #define _fbsdkdfl_symbol_get(LIBRARY, PREFIX, SYMBOL, TYPE, VARIABLE_NAME) \
   static TYPE VARIABLE_NAME; \
   static dispatch_once_t SYMBOL##_once; \
-  static struct FBSDKDFLLoadSymbolContext ctx = { .library = &fbsdkdfl_handle_get_##LIBRARY, .name = PREFIX #SYMBOL, .address = (void **)&VARIABLE_NAME }; \
+  static struct FBSDKDFLLoadSymbolContext ctx = { .library = &fbsdkdfl_handle_get_##LIBRARY, .name = PREFIX #SYMBOL, .address = (void *)&VARIABLE_NAME }; \
   dispatch_once_f(&SYMBOL##_once, &ctx, &fbsdkdfl_load_symbol_once)
 
 #define _fbsdkdfl_symbol_get_c(LIBRARY, SYMBOL) _fbsdkdfl_symbol_get(LIBRARY, "OBJC_CLASS_$_", SYMBOL, Class, c) // convenience symbol retrieval macro for getting an Objective-C class symbol and storing it in the local static c
@@ -184,14 +184,6 @@ _fbsdkdfl_handle_get_impl_(Security)
   _fbsdkdfl_Security_get_and_return_k(kSecClass);
 }
 
-#pragma mark - Object Lifecycle
-
-- (instancetype)init
-{
-  FBSDK_NO_DESIGNATED_INITIALIZER();
-  return nil;
-}
-
 @end
 
 #pragma mark - Security APIs
@@ -243,12 +235,12 @@ _fbsdkdfl_handle_get_impl_(Social)
 
 NSString *fbsdkdfl_SLServiceTypeFacebook(void)
 {
-  _fbsdkdfl_Social_get_and_return_constant(SLServiceTypeFacebook);
+  __weak _fbsdkdfl_Social_get_and_return_constant(SLServiceTypeFacebook);
 }
 
 NSString *fbsdkdfl_SLServiceTypeTwitter(void)
 {
-  _fbsdkdfl_Social_get_and_return_constant(SLServiceTypeTwitter);
+  __weak _fbsdkdfl_Social_get_and_return_constant(SLServiceTypeTwitter);
 }
 
 #pragma mark - Social Classes
@@ -381,12 +373,24 @@ Class fbsdkdfl_SFAuthenticationSessionClass(void)
   return c;
 }
 
+#pragma mark - Authentication Services
+_fbsdkdfl_load_framework_once_impl_(AuthenticationServices)
+_fbsdkdfl_handle_get_impl_(AuthenticationServices)
+
+#define _fbsdkdfl_AuthenticationServices_get_c(SYMBOL) _fbsdkdfl_symbol_get_c(AuthenticationServices, SYMBOL);
+
+Class fbsdkdfl_ASWebAuthenticationSessionClass(void)
+{
+  _fbsdkdfl_AuthenticationServices_get_c(ASWebAuthenticationSession);
+  return c;
+}
+
 #pragma mark - Accounts Constants
 
 _fbsdkdfl_load_framework_once_impl_(Accounts)
 _fbsdkdfl_handle_get_impl_(Accounts)
 
-#define _fbsdkdfl_Accounts_get_and_return_NSString(SYMBOL) _fbsdkdfl_get_and_return_NSString(Accounts, SYMBOL)
+#define _fbsdkdfl_Accounts_get_and_return_NSString(SYMBOL) __weak _fbsdkdfl_get_and_return_NSString(Accounts, SYMBOL)
 
 NSString *fbsdkdfl_ACFacebookAppIdKey(void)
 {
@@ -496,17 +500,17 @@ Class fbsdkdfl_CIFilterClass(void)
 
 NSString *fbsdkdfl_kCIInputImageKey(void)
 {
-  _fbsdkdfl_CoreImage_get_and_return_NSString(kCIInputImageKey);
+  __weak _fbsdkdfl_CoreImage_get_and_return_NSString(kCIInputImageKey);
 }
 
 NSString *fbsdkdfl_kCIInputRadiusKey(void)
 {
-  _fbsdkdfl_CoreImage_get_and_return_NSString(kCIInputRadiusKey);
+  __weak _fbsdkdfl_CoreImage_get_and_return_NSString(kCIInputRadiusKey);
 }
 
 NSString *fbsdkdfl_kCIOutputImageKey(void)
 {
-  _fbsdkdfl_CoreImage_get_and_return_NSString(kCIOutputImageKey);
+  __weak _fbsdkdfl_CoreImage_get_and_return_NSString(kCIOutputImageKey);
 }
 
 #pragma mark - Photos.framework

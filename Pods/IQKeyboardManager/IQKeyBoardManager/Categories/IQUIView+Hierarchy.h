@@ -57,8 +57,13 @@
 
 /**
  Returns the superView of provided class type.
+
+ @param classType class type of the object which is to be search in above hierarchy and return
+
+ @param belowView view object in upper hierarchy where method should stop searching and return nil
  */
--(nullable UIView*)superviewOfClassType:(nonnull Class)classType;
+-(nullable __kindof UIView*)superviewOfClassType:(nonnull Class)classType belowView:(nullable UIView*)belowView;
+-(nullable __kindof UIView*)superviewOfClassType:(nonnull Class)classType;
 
 /**
  Returns all siblings of the receiver which canBecomeFirstResponder.
@@ -77,7 +82,7 @@
 /**
  Returns searchBar if receiver object is UISearchBarTextField, otherwise return nil.
  */
-@property (nullable, nonatomic, readonly) UISearchBar *searchBar;
+@property (nullable, nonatomic, readonly) UISearchBar *textFieldSearchBar;
 
 /**
  Returns YES if the receiver object is UIAlertSheetTextField, otherwise return NO.
