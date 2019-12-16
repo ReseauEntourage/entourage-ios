@@ -520,6 +520,10 @@ typedef NS_ENUM(NSInteger) {
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE_TAG];
     if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
+        associationImageButton.layer.borderColor = UIColor.grayColor.CGColor;
+    }
+    else {
+        associationImageButton.layer.borderColor = nil;
     }
     
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
@@ -537,10 +541,14 @@ typedef NS_ENUM(NSInteger) {
     NSString *imageUrl = partner.largeLogoUrl;
     if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageUrl]];
+        associationImageButton.layer.borderColor = UIColor.grayColor.CGColor;
+    }
+    else {
+        associationImageButton.layer.borderColor = nil;
     }
     
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
-    lblSupportType.text = OTLocalizedString(@"sympathizant");
+    lblSupportType.text = partner.userRoleTitle;
 }
 
 - (void)setupNoAssociationsCell:(UITableViewCell *)cell {

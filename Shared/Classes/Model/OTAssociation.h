@@ -20,6 +20,7 @@
 @property (strong, nonatomic, nullable) NSString *websiteUrl;
 @property (strong, nonatomic, nullable) NSString *email;
 @property (assign, nonatomic) BOOL isDefault;
+@property (strong, nonatomic, nullable) NSString *userRoleTitle;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
