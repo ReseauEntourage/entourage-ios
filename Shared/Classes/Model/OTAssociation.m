@@ -19,6 +19,7 @@ NSString *const kKeyAssociationAddress = @"address";
 NSString *const kKeyAssociationWebsiteUrl = @"website_url";
 NSString *const kKeyAssociationEmail = @"email";
 NSString *const kKeyDefault = @"default";
+NSString *const kKeyUserAssociationRoleTitle = @"user_role_title";
 
 @implementation OTAssociation
 
@@ -44,6 +45,7 @@ NSString *const kKeyDefault = @"default";
             self.websiteUrl = [dictionary stringForKey:kKeyAssociationWebsiteUrl];
             self.email = [dictionary stringForKey:kKeyAssociationEmail];
             self.isDefault = [dictionary boolForKey:kKeyDefault];
+            self.userRoleTitle = [dictionary stringForKey:kKeyUserAssociationRoleTitle];
         }
     }
     return self;
@@ -60,6 +62,7 @@ NSString *const kKeyDefault = @"default";
     [encoder encodeObject:self.websiteUrl forKey:kKeyAssociationWebsiteUrl];
     [encoder encodeObject:self.email forKey:kKeyAssociationEmail];
     [encoder encodeBool:self.isDefault forKey:kKeyDefault];
+    [encoder encodeObject:self.userRoleTitle forKey:kKeyUserAssociationRoleTitle];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -75,6 +78,7 @@ NSString *const kKeyDefault = @"default";
         self.websiteUrl = [decoder decodeObjectForKey:kKeyAssociationWebsiteUrl];
         self.email = [decoder decodeObjectForKey:kKeyAssociationEmail];
         self.isDefault = [decoder decodeBoolForKey:kKeyDefault];
+        self.userRoleTitle = [decoder decodeObjectForKey:kKeyUserAssociationRoleTitle];
     }
     return self;
 }

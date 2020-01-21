@@ -347,10 +347,12 @@ static NSString *const kFirebaseInAppMessagingAutoDataCollectionKey =
                                              activityLogger:self.activityLogger
                                        analyticsEventLogger:analyticsEventLogger];
 
-  // Setting the display component. It's needed in case headless SDK is initialized after
-  // the display component is already set on FIRInAppMessaging.
+  // Setting the message display component and suppression. It's needed in case
+  // headless SDK is initialized after the these properties are already set on FIRInAppMessaging.
   self.displayExecutor.messageDisplayComponent =
       FIRInAppMessaging.inAppMessaging.messageDisplayComponent;
+  self.displayExecutor.suppressMessageDisplay =
+      FIRInAppMessaging.inAppMessaging.messageDisplaySuppressed;
 
   // Both display flows are created on startup. But they would only be turned on (started) based on
   // the sdk mode for the current instance
@@ -417,7 +419,8 @@ static NSString *const kFirebaseInAppMessagingAutoDataCollectionKey =
 
                                  // One-time triggering of checks for both fetch flow
                                  // upon SDK/app startup.
-                                 [self.fetchOnAppForegroundFlow checkAndFetch];
+                                 [self.fetchOnAppForegroundFlow
+                                     checkAndFetchForInitialAppLaunch:YES];
                                } else {
                                  FIRLogDebug(kFIRLoggerInAppMessaging, @"I-IAM180009",
                                              @"No FIAM SDK startup due to settings.");

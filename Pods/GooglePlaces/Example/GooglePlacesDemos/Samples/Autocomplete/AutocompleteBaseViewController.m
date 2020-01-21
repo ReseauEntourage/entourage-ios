@@ -55,12 +55,29 @@
                                               @"Button title for 'show autocomplete widget'")];
 }
 
+- (NSString *)openStatusTextFromPlace:(GMSPlace *)place {
+  GMSPlaceOpenStatus openStatus = [place isOpen];
+  switch (openStatus) {
+    case GMSPlaceOpenStatusOpen:
+      return @"Open";
+    case GMSPlaceOpenStatusClosed:
+      return @"Closed";
+    case GMSPlaceOpenStatusUnknown:
+      return @"Unknown";
+  }
+}
+
 - (void)autocompleteDidSelectPlace:(GMSPlace *)place {
   NSMutableAttributedString *text =
       [[NSMutableAttributedString alloc] initWithString:[place description]];
-  if (place.attributions) {
-    [text appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n\n"]];
-    [text appendAttributedString:place.attributions];
+  [text appendAttributedString:[[NSAttributedString alloc] initWithString:@"\nPlace status: "]];
+  NSString *openStatusText = [self openStatusTextFromPlace:place];
+  [text appendAttributedString:[[NSAttributedString alloc] initWithString:openStatusText]];
+  NSAttributedString *attributions = place.attributions;
+  if (attributions) {
+    NSAttributedString *doubleReturn = [[NSAttributedString alloc] initWithString:@"\n\n"];
+    [text appendAttributedString:doubleReturn];
+    [text appendAttributedString:attributions];
   }
   _textView.attributedText = text;
   [_textView setIsAccessibilityElement:YES];

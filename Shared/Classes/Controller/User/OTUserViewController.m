@@ -295,8 +295,14 @@ typedef NS_ENUM(NSInteger) {
     [titleBtn setTitle:title forState:UIControlStateNormal];
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE];
     [associationImageButton setImage:nil forState:UIControlStateNormal];
-    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0)
+    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
+        associationImageButton.layer.borderColor = UIColor.grayColor.CGColor;
+    }
+    else {
+        associationImageButton.layer.borderColor = nil;
+    }
+    
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
     lblSupportType.text = OTLocalizedString(@"marauder");
 }
@@ -310,10 +316,16 @@ typedef NS_ENUM(NSInteger) {
     [associationImageButton setImage:nil forState:UIControlStateNormal];
     [associationImageButton addTarget:self action:@selector(showPartnerDetails) forControlEvents:UIControlEventTouchUpInside];
     NSString *imageUrl = partner.largeLogoUrl;
-    if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0)
+    if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageUrl]];
+        associationImageButton.layer.borderColor = UIColor.grayColor.CGColor;
+    }
+    else {
+        associationImageButton.layer.borderColor = nil;
+    }
+    
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
-    lblSupportType.text = OTLocalizedString(@"sympathizant");
+    lblSupportType.text = partner.userRoleTitle;
 }
 
 - (void)configureTableSource {

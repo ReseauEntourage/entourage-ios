@@ -60,10 +60,13 @@
   // Setup the results view controller.
   _tableDataSource = [[GMSAutocompleteTableDataSource alloc] init];
   _tableDataSource.delegate = self;
+  [_tableDataSource
+      setAutocompleteBoundsUsingNorthEastCorner:self.autocompleteBoundsNorthEastCorner
+                                SouthWestCorner:self.autocompleteBoundsSouthWestCorner];
   _tableDataSource.autocompleteBoundsMode = self.autocompleteBoundsMode;
-  _tableDataSource.autocompleteBounds = self.autocompleteBounds;
   _tableDataSource.autocompleteFilter = self.autocompleteFilter;
   _tableDataSource.placeFields = self.placeFields;
+  _tableDataSource.tableCellBackgroundColor = [UIColor whiteColor];
   _resultsController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
   _resultsController.tableView.delegate = _tableDataSource;
   _resultsController.tableView.dataSource = _tableDataSource;

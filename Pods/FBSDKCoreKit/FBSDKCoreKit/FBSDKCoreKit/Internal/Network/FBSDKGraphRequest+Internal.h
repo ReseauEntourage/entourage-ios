@@ -18,7 +18,11 @@
 
 #import <Foundation/Foundation.h>
 
+#if SWIFT_PACKAGE
+#import "FBSDKGraphRequest.h"
+#else
 #import <FBSDKCoreKit/FBSDKGraphRequest.h>
+#endif
 
 typedef NS_OPTIONS(NSUInteger, FBSDKGraphRequestFlags)
 {
@@ -45,9 +49,9 @@ typedef NS_OPTIONS(NSUInteger, FBSDKGraphRequestFlags)
 // so that we don't cause a sudden change in token state or trigger recovery
 // out of context of any user action.
 @property (nonatomic, assign) FBSDKGraphRequestFlags flags;
+@property (nonatomic, readonly, getter=isGraphErrorRecoveryDisabled) BOOL graphErrorRecoveryDisabled;
+@property (nonatomic, readonly) BOOL hasAttachments;
 
-- (BOOL)isGraphErrorRecoveryDisabled;
-- (BOOL)hasAttachments;
 + (BOOL)isAttachment:(id)item;
 + (NSString *)serializeURL:(NSString *)baseUrl
                     params:(NSDictionary *)params

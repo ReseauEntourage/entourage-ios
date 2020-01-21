@@ -1039,14 +1039,14 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                                     <fragment content="La ">
                                         <attributes>
                                             <color key="NSColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="Charte éthique d’Entourage">
                                         <attributes>
                                             <color key="NSColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             <integer key="NSUnderline" value="1"/>
                                         </attributes>
@@ -1054,7 +1054,7 @@ Si vous pensez avoir besoin d’aide, nous pouvons nous retrouver dans un café 
                                     <fragment content=" vous explique pourquoi le consentement est indispensable.">
                                         <attributes>
                                             <color key="NSColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -1185,14 +1185,14 @@ Votre action est actuellement en suspens. Un modérateur va vous répondre très
                                     <fragment content="La ">
                                         <attributes>
                                             <color key="NSColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="Charte éthique d’Entourage">
                                         <attributes>
                                             <color key="NSColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             <integer key="NSUnderline" value="1"/>
                                         </attributes>
@@ -1200,7 +1200,7 @@ Votre action est actuellement en suspens. Un modérateur va vous répondre très
                                     <fragment content=" vous explique pourquoi le consentement est indispensable.">
                                         <attributes>
                                             <color key="NSColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
-                                            <font key="NSFont" size="14" name=".SFNSText"/>
+                                            <font key="NSFont" metaFont="system" size="14"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -1350,7 +1350,7 @@ ou que ce groupe soit ouvert à tous sans validation ?</string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="58" id="3Y0-lt-IC8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name=".SFNSText" family=".SF NS Text" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>

@@ -26,12 +26,17 @@
 #define kAPNInvitationAccepted @"accepted"
 
 #define kMixpanelCTA @"mp_cta"
+#define kFirebaseCTA @"entourage_cta"
 
 @implementation OTPushNotificationsData
 
 + (OTPushNotificationsData *)createFrom:(NSDictionary *)userInfo {
     OTPushNotificationsData *result = [OTPushNotificationsData new];
     
+    if ([userInfo objectForKey:kFirebaseCTA] != nil) {
+        // Firebase notification: transform to Mixpanel notification :)
+        [userInfo setValue:[userInfo objectForKey:kFirebaseCTA] forKey:kMixpanelCTA];
+    }
     if ([userInfo objectForKey:kMixpanelCTA] != nil) {
         //Mixpanel notification
         result.notificationType = kMixpanelCTA;

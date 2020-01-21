@@ -233,8 +233,6 @@
     [self.tapViewBehavior initialize];
     
     self.newsFeedsSourceBehavior.delegate = self;
-    [self.tourCreatorBehavior initialize];
-    self.tourCreatorBehavior.delegate = self;
     self.newsFeedsSourceBehavior.tableDelegate = self.tableView;
     
     self.currentFilter = [OTNewsFeedsFilter new];
@@ -1043,6 +1041,7 @@
     [self zoomToCurrentLocation:nil];
     self.launcherButton.enabled = NO;
     [self.tourCreatorBehavior initialize];
+    self.tourCreatorBehavior.delegate = self;
     [self.tourCreatorBehavior startTour:tourType];
 }
 

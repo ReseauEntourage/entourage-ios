@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, AWSRegionType) {
      */
     AWSRegionCACentral1 NS_SWIFT_NAME(CACentral1),
     /**
-     *  AWS GovCloud (US)
+     *  AWS GovCloud (US West)
      */
     AWSRegionUSGovWest1 NS_SWIFT_NAME(USGovWest1),
     /**
@@ -99,6 +99,22 @@ typedef NS_ENUM(NSInteger, AWSRegionType) {
      *  EU (Paris)
      */
     AWSRegionEUWest3 NS_SWIFT_NAME(EUWest3),
+    /**
+     *  AWS GovCloud (US East)
+     */
+    AWSRegionUSGovEast1 NS_SWIFT_NAME(USGovEast1),
+    /**
+     *  EU (Stockholm)
+     */
+    AWSRegionEUNorth1 NS_SWIFT_NAME(EUNorth1),
+    /**
+     *  Asia Pacific (Hong Kong)
+     */
+    AWSRegionAPEast1 NS_SWIFT_NAME(APEast1),
+    /**
+     *  Middle East South (Bahrain)
+     */
+    AWSRegionMESouth1 NS_SWIFT_NAME(MESouth1),
 };
 
 /**
@@ -137,6 +153,18 @@ typedef NS_ENUM(NSInteger, AWSServiceType) {
      */
     AWSServiceCognitoSync NS_SWIFT_NAME(CognitoSync),
     /**
+     *  Amazon Comprehend
+     */
+    AWSServiceComprehend NS_SWIFT_NAME(Comprehend),
+    /**
+     *  Amazon Connect
+     */
+    AWSServiceConnect NS_SWIFT_NAME(Connect),
+    /**
+     *  Amazon Connect Participant
+     */
+    AWSServiceConnectParticipant NS_SWIFT_NAME(ConnectParticipant),
+    /**
      *  Amazon DynamoDB
      */
     AWSServiceDynamoDB NS_SWIFT_NAME(DynamoDB),
@@ -164,6 +192,18 @@ typedef NS_ENUM(NSInteger, AWSServiceType) {
      *  Amazon Kinesis
      */
     AWSServiceKinesis NS_SWIFT_NAME(Kinesis),
+    /**
+     *  Amazon Kinesis Video
+     */
+    AWSServiceKinesisVideo NS_SWIFT_NAME(KinesisVideo),
+    /**
+     *  Amazon Kinesis Video Archived Media
+     */
+    AWSServiceKinesisVideoArchivedMedia NS_SWIFT_NAME(KinesisVideoArchivedMedia),
+    /**
+     *  Amazon Kinesis Video Signaling
+     */
+    AWSServiceKinesisVideoSignaling NS_SWIFT_NAME(KinesisVideoSignaling),
     /**
      *  AWS Key Management Service (KMS)
      */
@@ -205,6 +245,10 @@ typedef NS_ENUM(NSInteger, AWSServiceType) {
      */
     AWSServiceS3 NS_SWIFT_NAME(S3),
     /**
+     * Amazon SageMaker Runtime
+     */
+    AWSServiceSageMakerRuntime NS_SWIFT_NAME(SageMakerRuntime),
+    /**
      *  Amazon Simple Email Service (SES)
      */
     AWSServiceSES NS_SWIFT_NAME(SES),
@@ -225,25 +269,21 @@ typedef NS_ENUM(NSInteger, AWSServiceType) {
      */
     AWSServiceSTS NS_SWIFT_NAME(STS),
     /**
+     *  Amazon Textract
+     */
+    AWSServiceTextract NS_SWIFT_NAME(Textract),
+    /**
      *  Amazon Transcribe
      */
     AWSServiceTranscribe NS_SWIFT_NAME(Transcribe),
     /**
+     *  Amazon Transcribe Streaming
+     */
+    AWSServiceTranscribeStreaming NS_SWIFT_NAME(TranscribeStreaming),
+    /**
      *  Amazon Translate
      */
     AWSServiceTranslate NS_SWIFT_NAME(Translate),
-    /**
-     *  Amazon Comprehend
-     */
-    AWSServiceComprehend NS_SWIFT_NAME(Comprehend),
-    /**
-     *  Amazon Kinesis Video
-     */
-    AWSServiceKinesisVideo NS_SWIFT_NAME(KinesisVideo),
-    /**
-     *  Amazon Kinesis Video Archived Media
-     */
-    AWSServiceKinesisVideoArchivedMedia NS_SWIFT_NAME(KinesisVideoArchivedMedia),
     
 };
 
