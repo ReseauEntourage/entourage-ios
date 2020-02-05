@@ -69,15 +69,8 @@
             [NSUserDefaults standardUserDefaults].currentUser = user;
             self.scrollView.delegate = nil;
             
-            if (([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
-                [NSUserDefaults standardUserDefaults].isTutorialCompleted &&
-                 [currentUser hasActionZoneDefined]) ||
-                self.isEditingPictureForCurrentUser) {
+            if (self.isEditingPictureForCurrentUser) {
                 [self popToProfile];
-                
-            } else if (![currentUser hasActionZoneDefined]) {
-                [self performSegueWithIdentifier:@"PreviewToGeoSegue" sender:self];
-                
             } else {
                 [OTAppState navigateToPermissionsScreens:self];
             }

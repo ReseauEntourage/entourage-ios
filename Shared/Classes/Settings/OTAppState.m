@@ -34,6 +34,7 @@
 #import "OTActiveFeedItemViewController.h"
 #import "OTMapViewController.h"
 #import "OTAuthenticationModalViewController.h"
+#import "OTPicturePreviewViewController.h"
 
 #define TUTORIAL_DELAY 2
 
@@ -256,28 +257,10 @@
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     BOOL isFirstLogin = [[NSUserDefaults standardUserDefaults] isFirstLogin];
     
-    if (isFirstLogin) {
-        if (currentUser.avatarURL.length == 0) {
-            // If no picture yet, navigate to picture editor, add rights screens (action zone, notifications)
-            [OTAppState navigateToUserPicture:currentViewController];
-        } else {
-            // Else: navigate to add rights screens (action zone, notifications)
-            [OTAppState navigateToLocationRightsScreen:currentViewController];
-        }
+    if (currentUser.avatarURL.length == 0 && (isFirstLogin || [OTAppConfiguration shouldAlwaysRequestUserToUploadPicture])) {
+        [OTAppState navigateToUserPicture:currentViewController];
     } else {
-        
-        // For all next logins
-        // If user is forced to set picture
-        if ([OTAppConfiguration shouldAlwaysRequestUserToUploadPicture]) {
-            if (currentUser.avatarURL.length == 0) {
-                [OTAppState navigateToUserPicture:currentViewController];
-            }
-            else {
-                [OTAppState navigateToPermissionsScreens:currentViewController];
-            }
-        } else {
-            [OTAppState navigateToPermissionsScreens:currentViewController];
-        }
+        [OTAppState navigateToPermissionsScreens:currentViewController];
     }
 }
 
@@ -555,6 +538,10 @@
         // when coming from the startup page, prevent back navigation
         if ([viewController isKindOfClass:[OTStartupViewController class]]) {
             [viewController.navigationController setViewControllers:@[rightsViewController] animated:YES];
+            return;
+        }
+        if ([viewController isKindOfClass:[OTPicturePreviewViewController class]]) {
+            [viewController performSegueWithIdentifier:@"PreviewToGeoSegue" sender:viewController];
             return;
         }
         [viewController.navigationController pushViewController:rightsViewController animated:YES];
