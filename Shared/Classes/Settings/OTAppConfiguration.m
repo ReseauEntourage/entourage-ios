@@ -523,15 +523,12 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [OTPushNotificationsService legacyAuthorizationRequestCompletedWithError:nil];
 }
 
-+ (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
++ (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler
+{
     UIApplicationState state = [application applicationState];
-    
-    if (state == UIApplicationStateActive ||
-        state == UIApplicationStateBackground ||
-        state == UIApplicationStateInactive) {
-        OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
-        [pnService handleRemoteNotification:userInfo applicationState:state];
-    }
+    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
+    [pnService handleRemoteNotification:userInfo applicationState:state];
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
