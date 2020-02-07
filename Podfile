@@ -38,6 +38,6 @@ target "pfp" do
     sharedPods
 end
 
-target "entourageTests" do
-    pod 'OCMock', '3.1'
+target "UnitTests" do
+    sharedPods
 end

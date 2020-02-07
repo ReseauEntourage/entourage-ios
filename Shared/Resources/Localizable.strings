@@ -499,10 +499,16 @@
 "email_body_new_sms" = "Bonjour,\nMon numéro : %@\n\nMerci";
 
 // Share
-"share_public" = "Ce projet solidaire sur Entourage a besoin de toi. Rejoins-le en téléchargeant l'app ici %@";
-"share_creator" = "J'ai créé ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
-"share_joiner" = "J'ai rejoint ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
 "share_webview" = "J'ai découvert le guide Simple Comme Bonjour pour aller à la rencontre des personnes sans-abri. C'est à découvrir ici : %@";
+
+"share_action" = "Hello ! J'ai %1$@ une initiative solidaire sur Entourage, le réseau qui tisse des liens entre voisins avec et sans domicile : \"%2$@\". J’ai pensé que ça t'intéresserait. Clique ici : %3$@.\n\nMerci beaucoup pour ta solidarité !";
+
+"share_action_verb_creator" = "créé";
+"share_action_verb_member" = "rejoint";
+"share_action_verb_other" = "vu";
+
+"share_event" = "Hello ! Je t'invite à : \"%1$@\", le %2$@, %3$@ !\n\nSi ça te dit d'y participer, rejoins-moi ici sur Entourage, le réseau qui crée des liens entre voisins avec et sans domicile : %4$@";
+"pfp_share_event" = "Bonjour ! J’ai le plaisir de vous inviter à notre prochaine sortie conviviale Voisin-Age : %1$@.\n\nElle aura lieu le %2$@, à %3$@. Merci par avance de me confirmer votre participation !\n\nEncore plus d’informations sont ici : %4$@. Je suis aussi à votre disposition.\n\nÀ bientôt !";
 
 "feed_item_time_distance" = "Créée il y a ";
 "group_timestamps_created_at" = "Créé";

@@ -128,7 +128,6 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - OCMock (3.1)
   - Protobuf (3.11.1)
   - SDWebImage (5.4.0):
     - SDWebImage/Core (= 5.4.0)
@@ -155,7 +154,6 @@ DEPENDENCIES:
   - libPhoneNumber-iOS
   - MBProgressHUD (= 0.8)
   - Mixpanel
-  - OCMock (= 3.1)
   - SDWebImage
   - SimpleKeychain (~> 0.7)
   - SnapKit (~> 4.0.0)
@@ -193,7 +191,6 @@ SPEC REPOS:
     - MBProgressHUD
     - Mixpanel
     - nanopb
-    - OCMock
     - Protobuf
     - SDWebImage
     - SimpleKeychain
@@ -231,7 +228,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 8688c331cb64702283be37ab8d7d329cdd25f251
   Mixpanel: 399997670f5452de026449f9e9ecd52eccbb9ff7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  OCMock: 721c11680ae2d65d67f40932777194daf7002781
   Protobuf: 20d79da7f20b5928b80043b05080b816e802659e
   SDWebImage: 5bf6aec6481ae2a062bdc59f9d6c1d1e552090e0
   SimpleKeychain: 3be49072fd2d82de8fa83d847ef1e548622f8fc5
@@ -239,6 +235,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: 5d5263668a53bdd0d697d083ec67e03e6617690c
+PODFILE CHECKSUM: 89db4abd88ac557f7a3cec36fb535feca0437f01
 
 COCOAPODS: 1.5.3

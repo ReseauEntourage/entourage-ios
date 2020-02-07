@@ -11,6 +11,7 @@
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
 #import "OTActivityProvider.h"
+#import "OTGroupSharingFormatter.h"
 #import "entourage-Swift.h"
 
 @interface OTShareFeedItemBehavior ()
@@ -34,13 +35,12 @@
 - (void)sharePublic:(id)sender {
     [OTLogger logEvent:@"OpenNativeShare"];
     [OTLogger logEvent:@"ShareLinkAsNonMember"];
-    NSString *content = [NSString stringWithFormat:OTLocalizedString(@"share_public"), self.feedItem.shareUrl];
+    NSString *content = [OTGroupSharingFormatter groupShareText:(OTEntourage *)self.feedItem];
     [self share:content excludedActivities:@[UIActivityTypeCopyToPasteboard]];
 }
 
 - (void)shareMember:(id)sender {
-    NSString *content = [self.currentUser.sid isEqualToNumber:self.feedItem.author.uID] ? @"share_creator" : @"share_joiner";
-    content = [NSString stringWithFormat:OTLocalizedString(content), self.feedItem.shareUrl];
+    NSString *content = [OTGroupSharingFormatter groupShareText:(OTEntourage *)self.feedItem];
     [self share:content excludedActivities:nil];
 }
 

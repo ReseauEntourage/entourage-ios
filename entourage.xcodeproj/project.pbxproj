@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
-		1ECCA8ADF8F11C290527E9DC /* Pods_entourageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */; };
 		371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
 		371732EB2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
 		37191AD6220B3A6600F789B8 /* CommunityConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37191AD5220B3A6600F789B8 /* CommunityConfig.plist */; };
@@ -38,6 +37,12 @@
 		37614CA622896C35000A522D /* OTModalPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37614CA322896C35000A522D /* OTModalPopupViewController.xib */; };
 		37614CA722896C35000A522D /* OTModalPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37614CA322896C35000A522D /* OTModalPopupViewController.xib */; };
 		376C24802208A60900AA0DEB /* OTGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 376C247F2208A60900AA0DEB /* OTGradientView.m */; };
+		376F74D023EC6802008168DB /* OTGroupSharingFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 376F74CF23EC6802008168DB /* OTGroupSharingFormatter.m */; };
+		376F74D123EC6802008168DB /* OTGroupSharingFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 376F74CF23EC6802008168DB /* OTGroupSharingFormatter.m */; };
+		376F74E323EC6999008168DB /* OTGroupSharingFormatterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 376F74E223EC6999008168DB /* OTGroupSharingFormatterTests.m */; };
+		376F74ED23ED93F4008168DB /* OTCrashlyticsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 376F74EC23ED93F4008168DB /* OTCrashlyticsHelper.m */; };
+		376F74EE23ED93F4008168DB /* OTCrashlyticsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 376F74EC23ED93F4008168DB /* OTCrashlyticsHelper.m */; };
+		376F74EF23ED93F4008168DB /* OTCrashlyticsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 376F74EC23ED93F4008168DB /* OTCrashlyticsHelper.m */; };
 		379D380422848819007ED1E1 /* OTThemedText.m in Sources */ = {isa = PBXBuildFile; fileRef = 379D380322848819007ED1E1 /* OTThemedText.m */; };
 		379D380522848819007ED1E1 /* OTThemedText.m in Sources */ = {isa = PBXBuildFile; fileRef = 379D380322848819007ED1E1 /* OTThemedText.m */; };
 		379D380722848E50007ED1E1 /* AuthenticationModal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 379D380622848E50007ED1E1 /* AuthenticationModal.xib */; };
@@ -55,16 +60,10 @@
 		37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37D5D4C02268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */; };
-		6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B1A847819E822150020FB93 /* pois_categories_mock.json */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
-		6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B4930DA19A779F200DA7EE0 /* poi_mock.json */; };
-		6B89EF9F19E7E8B6008F2600 /* poi_category_mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B89EF9E19E7E8B6008F2600 /* poi_category_mock.json */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
 		6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
-		6B92CAC119A7461C004E8C9B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAC019A7461C004E8C9B /* XCTest.framework */; };
-		6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
-		6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
 		96099C6621ADA099008A959B /* OTGMSAutoCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96099C6521ADA099008A959B /* OTGMSAutoCompleteViewController.m */; };
 		96099C6721ADA099008A959B /* OTGMSAutoCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96099C6521ADA099008A959B /* OTGMSAutoCompleteViewController.m */; };
 		96136FFE21C92656003C1581 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96136FFD21C92656003C1581 /* UIDevice.swift */; };
@@ -90,55 +89,30 @@
 		96F30D6520BE956400229BB8 /* OTInviteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F30D6320BE956100229BB8 /* OTInviteCell.m */; };
 		97B688FDB2DCD2CE3094ADDF /* Pods_pfp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */; };
 		A202E7CD2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
-		A202E7CE2085CFC40058F32C /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E79F2085CFC20058F32C /* categories.json */; };
 		A202E7CF2085CFC40058F32C /* logo_black.png in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A22085CFC20058F32C /* logo_black.png */; };
-		A202E7D02085CFC40058F32C /* logo_black.png in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A22085CFC20058F32C /* logo_black.png */; };
 		A202E7D12085CFC40058F32C /* category.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A32085CFC20058F32C /* category.rtf */; };
-		A202E7D22085CFC40058F32C /* category.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A32085CFC20058F32C /* category.rtf */; };
 		A202E7D32085CFC40058F32C /* Entourage.clr in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A42085CFC20058F32C /* Entourage.clr */; };
-		A202E7D42085CFC40058F32C /* Entourage.clr in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A42085CFC20058F32C /* Entourage.clr */; };
 		A202E7D52085CFC40058F32C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A52085CFC20058F32C /* Localizable.strings */; };
-		A202E7D62085CFC40058F32C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A52085CFC20058F32C /* Localizable.strings */; };
 		A202E7D72085CFC40058F32C /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A62085CFC20058F32C /* SharedImages.xcassets */; };
-		A202E7D82085CFC40058F32C /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A62085CFC20058F32C /* SharedImages.xcassets */; };
 		A202E7D92085CFC40058F32C /* categoryJson.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A72085CFC20058F32C /* categoryJson.json */; };
-		A202E7DA2085CFC40058F32C /* categoryJson.json in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A72085CFC20058F32C /* categoryJson.json */; };
 		A202E7DB2085CFC40058F32C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A82085CFC20058F32C /* InfoPlist.strings */; };
-		A202E7DC2085CFC40058F32C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A202E7A82085CFC20058F32C /* InfoPlist.strings */; };
 		A202E7DD2085CFC40058F32C /* SF-UI-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7AC2085CFC20058F32C /* SF-UI-Text-SemiboldItalic.otf */; };
-		A202E7DE2085CFC40058F32C /* SF-UI-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7AC2085CFC20058F32C /* SF-UI-Text-SemiboldItalic.otf */; };
 		A202E7DF2085CFC40058F32C /* SF-UI-Text-Ultrathin.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7AD2085CFC20058F32C /* SF-UI-Text-Ultrathin.otf */; };
-		A202E7E02085CFC40058F32C /* SF-UI-Text-Ultrathin.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7AD2085CFC20058F32C /* SF-UI-Text-Ultrathin.otf */; };
 		A202E7E12085CFC40058F32C /* SF-UI-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7AE2085CFC20058F32C /* SF-UI-Text-RegularItalic.otf */; };
-		A202E7E22085CFC40058F32C /* SF-UI-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7AE2085CFC20058F32C /* SF-UI-Text-RegularItalic.otf */; };
 		A202E7E32085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7AF2085CFC20058F32C /* SF-UI-Text-Bold.otf */; };
-		A202E7E42085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7AF2085CFC20058F32C /* SF-UI-Text-Bold.otf */; };
 		A202E7E52085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B02085CFC20058F32C /* SF-UI-Text-UltrathinItalic.otf */; };
-		A202E7E62085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B02085CFC20058F32C /* SF-UI-Text-UltrathinItalic.otf */; };
 		A202E7E72085CFC40058F32C /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B12085CFC20058F32C /* SF-UI-Text-Regular.otf */; };
-		A202E7E82085CFC40058F32C /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B12085CFC20058F32C /* SF-UI-Text-Regular.otf */; };
 		A202E7E92085CFC40058F32C /* SF-UI-Text-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B22085CFC20058F32C /* SF-UI-Text-BoldItalic.otf */; };
-		A202E7EA2085CFC40058F32C /* SF-UI-Text-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B22085CFC20058F32C /* SF-UI-Text-BoldItalic.otf */; };
 		A202E7EB2085CFC40058F32C /* SF-UI-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B32085CFC20058F32C /* SF-UI-Text-Light.otf */; };
-		A202E7EC2085CFC40058F32C /* SF-UI-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B32085CFC20058F32C /* SF-UI-Text-Light.otf */; };
 		A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B42085CFC20058F32C /* SF-UI-Text-MediumItalic.otf */; };
-		A202E7EE2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B42085CFC20058F32C /* SF-UI-Text-MediumItalic.otf */; };
 		A202E7EF2085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B52085CFC20058F32C /* SF-UI-Text-HeavyItalic.otf */; };
-		A202E7F02085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B52085CFC20058F32C /* SF-UI-Text-HeavyItalic.otf */; };
 		A202E7F12085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B62085CFC20058F32C /* SF-UI-Text-LightItalic.otf */; };
-		A202E7F22085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B62085CFC20058F32C /* SF-UI-Text-LightItalic.otf */; };
 		A202E7F32085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B72085CFC20058F32C /* SF-UI-Text-Medium.otf */; };
-		A202E7F42085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B72085CFC20058F32C /* SF-UI-Text-Medium.otf */; };
 		A202E7F52085CFC40058F32C /* SF-UI-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B82085CFC20058F32C /* SF-UI-Text-Heavy.otf */; };
-		A202E7F62085CFC40058F32C /* SF-UI-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B82085CFC20058F32C /* SF-UI-Text-Heavy.otf */; };
 		A202E7F72085CFC40058F32C /* SF-UI-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B92085CFC20058F32C /* SF-UI-Text-Semibold.otf */; };
-		A202E7F82085CFC40058F32C /* SF-UI-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7B92085CFC20058F32C /* SF-UI-Text-Semibold.otf */; };
 		A202E7F92085CFC40058F32C /* DINMittelschrift-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BA2085CFC20058F32C /* DINMittelschrift-Regular.ttf */; };
-		A202E7FA2085CFC40058F32C /* DINMittelschrift-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BA2085CFC20058F32C /* DINMittelschrift-Regular.ttf */; };
 		A202E7FB2085CFC40058F32C /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BB2085CFC20058F32C /* CountryList.csv */; };
-		A202E7FC2085CFC40058F32C /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BB2085CFC20058F32C /* CountryList.csv */; };
 		A202E80B2085D0FE0058F32C /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8092085D0FD0058F32C /* OTAppDelegate.m */; };
-		A202E80C2085D0FE0058F32C /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8092085D0FD0058F32C /* OTAppDelegate.m */; };
 		A202E91120E2313200992C09 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A202E91020E2313200992C09 /* AppConfigurations.plist */; };
 		A202E91220E2313200992C09 /* AppConfigurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = A202E91020E2313200992C09 /* AppConfigurations.plist */; };
 		A202E91820E3818D00992C09 /* OTPrivateCircleAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91720E3818D00992C09 /* OTPrivateCircleAnnotation.m */; };
@@ -148,618 +122,312 @@
 		A202E92820E4BF6200992C09 /* UIImage+Fitting.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E92720E4BF6100992C09 /* UIImage+Fitting.m */; };
 		A202E92920E4BF6200992C09 /* UIImage+Fitting.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E92720E4BF6100992C09 /* UIImage+Fitting.m */; };
 		A202EAC72085D2C70058F32C /* OTFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E80E2085D2C40058F32C /* OTFeedItem.m */; };
-		A202EAC82085D2C70058F32C /* OTFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E80E2085D2C40058F32C /* OTFeedItem.m */; };
 		A202EAC92085D2C70058F32C /* OTFeedItemFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E80F2085D2C40058F32C /* OTFeedItemFilter.m */; };
-		A202EACA2085D2C70058F32C /* OTFeedItemFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E80F2085D2C40058F32C /* OTFeedItemFilter.m */; };
 		A202EACB2085D2C70058F32C /* OTFeedItemAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8122085D2C40058F32C /* OTFeedItemAuthor.m */; };
-		A202EACC2085D2C70058F32C /* OTFeedItemAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8122085D2C40058F32C /* OTFeedItemAuthor.m */; };
 		A202EACD2085D2C70058F32C /* OTMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8132085D2C40058F32C /* OTMenuItem.m */; };
-		A202EACE2085D2C70058F32C /* OTMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8132085D2C40058F32C /* OTMenuItem.m */; };
 		A202EACF2085D2C70058F32C /* OTNewsFeedsFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8142085D2C40058F32C /* OTNewsFeedsFilter.m */; };
-		A202EAD02085D2C70058F32C /* OTNewsFeedsFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8142085D2C40058F32C /* OTNewsFeedsFilter.m */; };
 		A202EAD12085D2C70058F32C /* OTEntourageInvitation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8152085D2C40058F32C /* OTEntourageInvitation.m */; };
-		A202EAD22085D2C70058F32C /* OTEntourageInvitation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8152085D2C40058F32C /* OTEntourageInvitation.m */; };
 		A202EAD32085D2C70058F32C /* OTFeedItemTimelinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8192085D2C40058F32C /* OTFeedItemTimelinePoint.m */; };
-		A202EAD42085D2C70058F32C /* OTFeedItemTimelinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8192085D2C40058F32C /* OTFeedItemTimelinePoint.m */; };
 		A202EAD52085D2C70058F32C /* OTEntourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E81C2085D2C40058F32C /* OTEntourage.m */; };
-		A202EAD62085D2C70058F32C /* OTEntourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E81C2085D2C40058F32C /* OTEntourage.m */; };
 		A202EAD72085D2C70058F32C /* OTPoi.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8212085D2C40058F32C /* OTPoi.m */; };
-		A202EAD82085D2C70058F32C /* OTPoi.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8212085D2C40058F32C /* OTPoi.m */; };
 		A202EAD92085D2C70058F32C /* OTFeedItemJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8232085D2C40058F32C /* OTFeedItemJoiner.m */; };
-		A202EADA2085D2C70058F32C /* OTFeedItemJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8232085D2C40058F32C /* OTFeedItemJoiner.m */; };
 		A202EADB2085D2C70058F32C /* OTSolidarityGuideFilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8242085D2C40058F32C /* OTSolidarityGuideFilterItem.m */; };
-		A202EADC2085D2C70058F32C /* OTSolidarityGuideFilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8242085D2C40058F32C /* OTSolidarityGuideFilterItem.m */; };
 		A202EADD2085D2C70058F32C /* OTOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8262085D2C40058F32C /* OTOrganization.m */; };
-		A202EADE2085D2C70058F32C /* OTOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8262085D2C40058F32C /* OTOrganization.m */; };
 		A202EADF2085D2C70058F32C /* OTMyFeedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8292085D2C40058F32C /* OTMyFeedMessage.m */; };
-		A202EAE02085D2C70058F32C /* OTMyFeedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8292085D2C40058F32C /* OTMyFeedMessage.m */; };
 		A202EAE12085D2C70058F32C /* OTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82A2085D2C40058F32C /* OTCategory.m */; };
-		A202EAE22085D2C70058F32C /* OTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82A2085D2C40058F32C /* OTCategory.m */; };
 		A202EAE32085D2C70058F32C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82B2085D2C40058F32C /* OTUnreadMessageCount.m */; };
-		A202EAE42085D2C70058F32C /* OTUnreadMessageCount.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82B2085D2C40058F32C /* OTUnreadMessageCount.m */; };
 		A202EAE52085D2C70058F32C /* OTFeedItemFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82C2085D2C40058F32C /* OTFeedItemFilters.m */; };
-		A202EAE62085D2C70058F32C /* OTFeedItemFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82C2085D2C40058F32C /* OTFeedItemFilters.m */; };
 		A202EAE72085D2C70058F32C /* OTCategoryType.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82E2085D2C40058F32C /* OTCategoryType.m */; };
-		A202EAE82085D2C70058F32C /* OTCategoryType.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82E2085D2C40058F32C /* OTCategoryType.m */; };
 		A202EAE92085D2C70058F32C /* OTSavedFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82F2085D2C40058F32C /* OTSavedFilter.m */; };
-		A202EAEA2085D2C70058F32C /* OTSavedFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82F2085D2C40058F32C /* OTSavedFilter.m */; };
 		A202EAEB2085D2C70058F32C /* OTSolidarityGuideFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8302085D2C40058F32C /* OTSolidarityGuideFilter.m */; };
-		A202EAEC2085D2C70058F32C /* OTSolidarityGuideFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8302085D2C40058F32C /* OTSolidarityGuideFilter.m */; };
 		A202EAED2085D2C70058F32C /* OTFeedItemTimeframeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8372085D2C40058F32C /* OTFeedItemTimeframeFilter.m */; };
-		A202EAEE2085D2C70058F32C /* OTFeedItemTimeframeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8372085D2C40058F32C /* OTFeedItemTimeframeFilter.m */; };
 		A202EAEF2085D2C70058F32C /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E83D2085D2C40058F32C /* OTUser.m */; };
-		A202EAF02085D2C70058F32C /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E83D2085D2C40058F32C /* OTUser.m */; };
 		A202EAF12085D2C70058F32C /* OTPoiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8402085D2C40058F32C /* OTPoiCategory.m */; };
-		A202EAF22085D2C70058F32C /* OTPoiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8402085D2C40058F32C /* OTPoiCategory.m */; };
 		A202EAF32085D2C70058F32C /* OTEncounter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8412085D2C40058F32C /* OTEncounter.m */; };
-		A202EAF42085D2C70058F32C /* OTEncounter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8412085D2C40058F32C /* OTEncounter.m */; };
 		A202EAF52085D2C70058F32C /* OTAddressBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8442085D2C40058F32C /* OTAddressBookItem.m */; };
-		A202EAF62085D2C70058F32C /* OTAddressBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8442085D2C40058F32C /* OTAddressBookItem.m */; };
 		A202EAF72085D2C70058F32C /* OTAddressBookPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8472085D2C40058F32C /* OTAddressBookPhone.m */; };
-		A202EAF82085D2C70058F32C /* OTAddressBookPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8472085D2C40058F32C /* OTAddressBookPhone.m */; };
 		A202EAF92085D2C70058F32C /* OTMyEntouragesFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8482085D2C40058F32C /* OTMyEntouragesFilter.m */; };
-		A202EAFA2085D2C70058F32C /* OTMyEntouragesFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8482085D2C40058F32C /* OTMyEntouragesFilter.m */; };
 		A202EAFB2085D2C70058F32C /* OTAnnouncement.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8492085D2C40058F32C /* OTAnnouncement.m */; };
-		A202EAFC2085D2C70058F32C /* OTAnnouncement.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8492085D2C40058F32C /* OTAnnouncement.m */; };
 		A202EAFD2085D2C70058F32C /* OTFeedItemStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E84A2085D2C40058F32C /* OTFeedItemStatus.m */; };
-		A202EAFE2085D2C70058F32C /* OTFeedItemStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E84A2085D2C40058F32C /* OTFeedItemStatus.m */; };
 		A202EAFF2085D2C70058F32C /* OTFeedItemMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E84B2085D2C40058F32C /* OTFeedItemMessage.m */; };
-		A202EB002085D2C70058F32C /* OTFeedItemMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E84B2085D2C40058F32C /* OTFeedItemMessage.m */; };
 		A202EB012085D2C70058F32C /* OTTourPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E84C2085D2C40058F32C /* OTTourPoint.m */; };
-		A202EB022085D2C70058F32C /* OTTourPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E84C2085D2C40058F32C /* OTTourPoint.m */; };
 		A202EB032085D2C70058F32C /* OTAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E84D2085D2C40058F32C /* OTAssociation.m */; };
-		A202EB042085D2C70058F32C /* OTAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E84D2085D2C40058F32C /* OTAssociation.m */; };
 		A202EB052085D2C70058F32C /* OTSavedMyEntouragesFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E84F2085D2C40058F32C /* OTSavedMyEntouragesFilter.m */; };
-		A202EB062085D2C70058F32C /* OTSavedMyEntouragesFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E84F2085D2C40058F32C /* OTSavedMyEntouragesFilter.m */; };
 		A202EB072085D2C70058F32C /* OTTour.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8502085D2C40058F32C /* OTTour.m */; };
-		A202EB082085D2C70058F32C /* OTTour.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8502085D2C40058F32C /* OTTour.m */; };
 		A202EB092085D2C70058F32C /* OTAboutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8532085D2C40058F32C /* OTAboutItem.m */; };
-		A202EB0A2085D2C70058F32C /* OTAboutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8532085D2C40058F32C /* OTAboutItem.m */; };
 		A202EB0B2085D2C70058F32C /* OTEntourageEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8562085D2C40058F32C /* OTEntourageEditorViewController.m */; };
-		A202EB0C2085D2C70058F32C /* OTEntourageEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8562085D2C40058F32C /* OTEntourageEditorViewController.m */; };
 		A202EB0D2085D2C70058F32C /* OTMyEntouragesOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E85A2085D2C40058F32C /* OTMyEntouragesOptionsViewController.m */; };
-		A202EB0E2085D2C70058F32C /* OTMyEntouragesOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E85A2085D2C40058F32C /* OTMyEntouragesOptionsViewController.m */; };
 		A202EB0F2085D2C70058F32C /* OTInvitationsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E85D2085D2C40058F32C /* OTInvitationsCollectionViewCell.m */; };
-		A202EB102085D2C70058F32C /* OTInvitationsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E85D2085D2C40058F32C /* OTInvitationsCollectionViewCell.m */; };
 		A202EB112085D2C70058F32C /* OTHeatZoneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8602085D2C40058F32C /* OTHeatZoneCollectionViewCell.m */; };
-		A202EB122085D2C70058F32C /* OTHeatZoneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8602085D2C40058F32C /* OTHeatZoneCollectionViewCell.m */; };
 		A202EB132085D2C70058F32C /* OTEntouragesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8622085D2C40058F32C /* OTEntouragesTableViewCell.m */; };
-		A202EB142085D2C70058F32C /* OTEntouragesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8622085D2C40058F32C /* OTEntouragesTableViewCell.m */; };
 		A202EB152085D2C70058F32C /* OTMyEntouragesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8642085D2C40058F32C /* OTMyEntouragesViewController.m */; };
-		A202EB162085D2C70058F32C /* OTMyEntouragesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8642085D2C40058F32C /* OTMyEntouragesViewController.m */; };
 		A202EB172085D2C70058F32C /* OTManageInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8652085D2C40058F32C /* OTManageInvitationViewController.m */; };
-		A202EB182085D2C70058F32C /* OTManageInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8652085D2C40058F32C /* OTManageInvitationViewController.m */; };
 		A202EB192085D2C70058F32C /* OTSolidarityGuideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8672085D2C40058F32C /* OTSolidarityGuideCell.m */; };
-		A202EB1A2085D2C70058F32C /* OTSolidarityGuideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8672085D2C40058F32C /* OTSolidarityGuideCell.m */; };
 		A202EB1B2085D2C70058F32C /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8682085D2C40058F32C /* OTCreateMeetingViewController.m */; };
-		A202EB1C2085D2C70058F32C /* OTCreateMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8682085D2C40058F32C /* OTCreateMeetingViewController.m */; };
 		A202EB1D2085D2C70058F32C /* OTInviteSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E86C2085D2C40058F32C /* OTInviteSourceViewController.m */; };
-		A202EB1E2085D2C70058F32C /* OTInviteSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E86C2085D2C40058F32C /* OTInviteSourceViewController.m */; };
 		A202EB1F2085D2C70058F32C /* OTDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E86F2085D2C40058F32C /* OTDescriptionCell.m */; };
-		A202EB202085D2C70058F32C /* OTDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E86F2085D2C40058F32C /* OTDescriptionCell.m */; };
 		A202EB212085D2C70058F32C /* OTBaseInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8702085D2C40058F32C /* OTBaseInfoCell.m */; };
-		A202EB222085D2C70058F32C /* OTBaseInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8702085D2C40058F32C /* OTBaseInfoCell.m */; };
 		A202EB232085D2C70058F32C /* OTMembersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8712085D2C40058F32C /* OTMembersCell.m */; };
-		A202EB242085D2C70058F32C /* OTMembersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8712085D2C40058F32C /* OTMembersCell.m */; };
 		A202EB252085D2C70058F32C /* OTMemberCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8732085D2C40058F32C /* OTMemberCountCell.m */; };
-		A202EB262085D2C70058F32C /* OTMemberCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8732085D2C40058F32C /* OTMemberCountCell.m */; };
 		A202EB272085D2C70058F32C /* OTMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8772085D2C40058F32C /* OTMapCell.m */; };
-		A202EB282085D2C70058F32C /* OTMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8772085D2C40058F32C /* OTMapCell.m */; };
 		A202EB292085D2C70058F32C /* OTActiveFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E87A2085D2C40058F32C /* OTActiveFeedItemViewController.m */; };
-		A202EB2A2085D2C70058F32C /* OTActiveFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E87A2085D2C40058F32C /* OTActiveFeedItemViewController.m */; };
 		A202EB2B2085D2C70058F32C /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E87B2085D2C40058F32C /* OTMapViewController.m */; };
-		A202EB2C2085D2C70058F32C /* OTMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E87B2085D2C40058F32C /* OTMapViewController.m */; };
 		A202EB2D2085D2C70058F32C /* OTContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E87D2085D2C40058F32C /* OTContactInfoCell.m */; };
-		A202EB2E2085D2C70058F32C /* OTContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E87D2085D2C40058F32C /* OTContactInfoCell.m */; };
 		A202EB2F2085D2C70058F32C /* OTContactPhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E87F2085D2C40058F32C /* OTContactPhoneCell.m */; };
-		A202EB302085D2C70058F32C /* OTContactPhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E87F2085D2C40058F32C /* OTContactPhoneCell.m */; };
 		A202EB312085D2C80058F32C /* OTInviteByPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8812085D2C40058F32C /* OTInviteByPhoneViewController.m */; };
-		A202EB322085D2C80058F32C /* OTInviteByPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8812085D2C40058F32C /* OTInviteByPhoneViewController.m */; };
 		A202EB332085D2C80058F32C /* OTInviteSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8822085D2C40058F32C /* OTInviteSuccessViewController.m */; };
-		A202EB342085D2C80058F32C /* OTInviteSuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8822085D2C40058F32C /* OTInviteSuccessViewController.m */; };
 		A202EB352085D2C80058F32C /* OTStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8862085D2C40058F32C /* OTStatusCell.m */; };
-		A202EB362085D2C80058F32C /* OTStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8862085D2C40058F32C /* OTStatusCell.m */; };
 		A202EB372085D2C80058F32C /* OTMessageSentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E88C2085D2C40058F32C /* OTMessageSentCell.m */; };
-		A202EB382085D2C80058F32C /* OTMessageSentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E88C2085D2C40058F32C /* OTMessageSentCell.m */; };
 		A202EB392085D2C80058F32C /* OTChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E88E2085D2C40058F32C /* OTChatDateCell.m */; };
-		A202EB3A2085D2C80058F32C /* OTChatDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E88E2085D2C40058F32C /* OTChatDateCell.m */; };
 		A202EB3B2085D2C80058F32C /* OTJoinAcceptedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E88F2085D2C40058F32C /* OTJoinAcceptedCell.m */; };
-		A202EB3C2085D2C80058F32C /* OTJoinAcceptedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E88F2085D2C40058F32C /* OTJoinAcceptedCell.m */; };
 		A202EB3D2085D2C80058F32C /* OTMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8912085D2C40058F32C /* OTMessageReceivedCell.m */; };
-		A202EB3E2085D2C80058F32C /* OTMessageReceivedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8912085D2C40058F32C /* OTMessageReceivedCell.m */; };
 		A202EB3F2085D2C80058F32C /* OTPlaceholderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8922085D2C40058F32C /* OTPlaceholderCell.m */; };
-		A202EB402085D2C80058F32C /* OTPlaceholderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8922085D2C40058F32C /* OTPlaceholderCell.m */; };
 		A202EB412085D2C80058F32C /* OTJoinRejectedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8932085D2C40058F32C /* OTJoinRejectedCell.m */; };
-		A202EB422085D2C80058F32C /* OTJoinRejectedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8932085D2C40058F32C /* OTJoinRejectedCell.m */; };
 		A202EB432085D2C80058F32C /* OTJoinRequestedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8942085D2C40058F32C /* OTJoinRequestedCell.m */; };
-		A202EB442085D2C80058F32C /* OTJoinRequestedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8942085D2C40058F32C /* OTJoinRequestedCell.m */; };
 		A202EB452085D2C80058F32C /* OTJoinRequestedNotOwnerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8962085D2C40058F32C /* OTJoinRequestedNotOwnerCell.m */; };
-		A202EB462085D2C80058F32C /* OTJoinRequestedNotOwnerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8962085D2C40058F32C /* OTJoinRequestedNotOwnerCell.m */; };
 		A202EB472085D2C80058F32C /* OTEncounterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8982085D2C40058F32C /* OTEncounterCell.m */; };
-		A202EB482085D2C80058F32C /* OTEncounterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8982085D2C40058F32C /* OTEncounterCell.m */; };
 		A202EB492085D2C80058F32C /* OTChatCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8992085D2C40058F32C /* OTChatCellBase.m */; };
-		A202EB4A2085D2C80058F32C /* OTChatCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8992085D2C40058F32C /* OTChatCellBase.m */; };
 		A202EB4B2085D2C80058F32C /* OTInviteContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E89D2085D2C40058F32C /* OTInviteContactsViewController.m */; };
-		A202EB4C2085D2C80058F32C /* OTInviteContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E89D2085D2C40058F32C /* OTInviteContactsViewController.m */; };
 		A202EB4D2085D2C80058F32C /* OTLocationSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A12085D2C40058F32C /* OTLocationSearchTableViewController.m */; };
-		A202EB4E2085D2C80058F32C /* OTLocationSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A12085D2C40058F32C /* OTLocationSearchTableViewController.m */; };
 		A202EB4F2085D2C80058F32C /* OTLocationSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A22085D2C40058F32C /* OTLocationSelectorViewController.m */; };
 		A202EB512085D2C80058F32C /* OTTourOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A32085D2C40058F32C /* OTTourOptionsViewController.m */; };
-		A202EB522085D2C80058F32C /* OTTourOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A32085D2C40058F32C /* OTTourOptionsViewController.m */; };
 		A202EB532085D2C80058F32C /* OTMyMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A52085D2C40058F32C /* OTMyMeetingsViewController.m */; };
-		A202EB542085D2C80058F32C /* OTMyMeetingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A52085D2C40058F32C /* OTMyMeetingsViewController.m */; };
 		A202EB552085D2C80058F32C /* OTEntourageDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A62085D2C40058F32C /* OTEntourageDisclaimerViewController.m */; };
-		A202EB562085D2C80058F32C /* OTEntourageDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A62085D2C40058F32C /* OTEntourageDisclaimerViewController.m */; };
 		A202EB572085D2C80058F32C /* OTAskMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A72085D2C40058F32C /* OTAskMoreViewController.m */; };
-		A202EB582085D2C80058F32C /* OTAskMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8A72085D2C40058F32C /* OTAskMoreViewController.m */; };
 		A202EB592085D2C80058F32C /* OTTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8AA2085D2C40058F32C /* OTTutorialViewController.m */; };
-		A202EB5A2085D2C80058F32C /* OTTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8AA2085D2C40058F32C /* OTTutorialViewController.m */; };
 		A202EB5B2085D2C80058F32C /* OTTutorial1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8AC2085D2C40058F32C /* OTTutorial1ViewController.m */; };
-		A202EB5C2085D2C80058F32C /* OTTutorial1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8AC2085D2C40058F32C /* OTTutorial1ViewController.m */; };
 		A202EB5D2085D2C80058F32C /* OTTutorial3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8AF2085D2C40058F32C /* OTTutorial3ViewController.m */; };
-		A202EB5E2085D2C80058F32C /* OTTutorial3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8AF2085D2C40058F32C /* OTTutorial3ViewController.m */; };
 		A202EB5F2085D2C80058F32C /* OTTutorial4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B02085D2C40058F32C /* OTTutorial4ViewController.m */; };
-		A202EB602085D2C80058F32C /* OTTutorial4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B02085D2C40058F32C /* OTTutorial4ViewController.m */; };
 		A202EB612085D2C80058F32C /* OTTutorial2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B22085D2C40058F32C /* OTTutorial2ViewController.m */; };
-		A202EB622085D2C80058F32C /* OTTutorial2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B22085D2C40058F32C /* OTTutorial2ViewController.m */; };
 		A202EB632085D2C80058F32C /* OTOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B32085D2C40058F32C /* OTOptionsViewController.m */; };
-		A202EB642085D2C80058F32C /* OTOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B32085D2C40058F32C /* OTOptionsViewController.m */; };
 		A202EB652085D2C80058F32C /* OTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B52085D2C40058F32C /* OTSettingsViewController.m */; };
-		A202EB662085D2C80058F32C /* OTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B52085D2C40058F32C /* OTSettingsViewController.m */; };
 		A202EB672085D2C80058F32C /* OTNewsFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B82085D2C40058F32C /* OTNewsFeedCell.m */; };
-		A202EB682085D2C80058F32C /* OTNewsFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B82085D2C40058F32C /* OTNewsFeedCell.m */; };
 		A202EB692085D2C80058F32C /* OTDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8BB2085D2C40058F32C /* OTDisclaimerViewController.m */; };
-		A202EB6A2085D2C80058F32C /* OTDisclaimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8BB2085D2C40058F32C /* OTDisclaimerViewController.m */; };
 		A202EB6B2085D2C80058F32C /* OTAnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8BD2085D2C40058F32C /* OTAnnouncementCell.m */; };
-		A202EB6C2085D2C80058F32C /* OTAnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8BD2085D2C40058F32C /* OTAnnouncementCell.m */; };
 		A202EB6D2085D2C80058F32C /* OTPicturePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8BF2085D2C40058F32C /* OTPicturePreviewViewController.m */; };
-		A202EB6E2085D2C80058F32C /* OTPicturePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8BF2085D2C40058F32C /* OTPicturePreviewViewController.m */; };
 		A202EB6F2085D2C80058F32C /* OTUserPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C02085D2C40058F32C /* OTUserPictureViewController.m */; };
-		A202EB702085D2C80058F32C /* OTUserPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C02085D2C40058F32C /* OTUserPictureViewController.m */; };
 		A202EB712085D2C80058F32C /* OTEditEntourageTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C32085D2C40058F32C /* OTEditEntourageTitleViewController.m */; };
-		A202EB722085D2C80058F32C /* OTEditEntourageTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C32085D2C40058F32C /* OTEditEntourageTitleViewController.m */; };
 		A202EB752085D2C80058F32C /* OTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C62085D2C40058F32C /* OTWebViewController.m */; };
-		A202EB762085D2C80058F32C /* OTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C62085D2C40058F32C /* OTWebViewController.m */; };
 		A202EB772085D2C80058F32C /* OTSummaryInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C72085D2C40058F32C /* OTSummaryInfoCell.m */; };
-		A202EB782085D2C80058F32C /* OTSummaryInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C72085D2C40058F32C /* OTSummaryInfoCell.m */; };
 		A202EB792085D2C80058F32C /* OTCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C82085D2C40058F32C /* OTCalloutViewController.m */; };
-		A202EB7A2085D2C80058F32C /* OTCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C82085D2C40058F32C /* OTCalloutViewController.m */; };
 		A202EB7B2085D2C80058F32C /* OTChangeStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8CE2085D2C40058F32C /* OTChangeStateViewController.m */; };
-		A202EB7C2085D2C80058F32C /* OTChangeStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8CE2085D2C40058F32C /* OTChangeStateViewController.m */; };
 		A202EB7D2085D2C80058F32C /* OTUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8D62085D2C40058F32C /* OTUserViewController.m */; };
-		A202EB7E2085D2C80058F32C /* OTUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8D62085D2C40058F32C /* OTUserViewController.m */; };
 		A202EB7F2085D2C80058F32C /* OTCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8D92085D2C40058F32C /* OTCategoryViewController.m */; };
-		A202EB802085D2C80058F32C /* OTCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8D92085D2C40058F32C /* OTCategoryViewController.m */; };
 		A202EB812085D2C80058F32C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8DB2085D2C40058F32C /* OTConfirmCloseViewController.m */; };
-		A202EB822085D2C80058F32C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8DB2085D2C40058F32C /* OTConfirmCloseViewController.m */; };
 		A202EB832085D2C80058F32C /* OTCategoryEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8DF2085D2C40058F32C /* OTCategoryEditCell.m */; };
-		A202EB842085D2C80058F32C /* OTCategoryEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8DF2085D2C40058F32C /* OTCategoryEditCell.m */; };
 		A202EB852085D2C80058F32C /* OTGuideMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E02085D2C40058F32C /* OTGuideMapDelegate.m */; };
-		A202EB862085D2C80058F32C /* OTGuideMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E02085D2C40058F32C /* OTGuideMapDelegate.m */; };
 		A202EB872085D2C80058F32C /* OTBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E12085D2C40058F32C /* OTBarButtonView.m */; };
-		A202EB882085D2C80058F32C /* OTBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E12085D2C40058F32C /* OTBarButtonView.m */; };
 		A202EB892085D2C80058F32C /* OTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E32085D2C40058F32C /* OTMenuViewController.m */; };
-		A202EB8A2085D2C80058F32C /* OTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E32085D2C40058F32C /* OTMenuViewController.m */; };
 		A202EB8B2085D2C80058F32C /* OTSolidarityGuideFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E42085D2C40058F32C /* OTSolidarityGuideFilterCell.m */; };
-		A202EB8C2085D2C80058F32C /* OTSolidarityGuideFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E42085D2C40058F32C /* OTSolidarityGuideFilterCell.m */; };
 		A202EB8D2085D2C80058F32C /* OTTourCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E62085D2C40058F32C /* OTTourCreatorViewController.m */; };
-		A202EB8E2085D2C80058F32C /* OTTourCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E62085D2C40058F32C /* OTTourCreatorViewController.m */; };
 		A202EB8F2085D2C80058F32C /* OTMapOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8EB2085D2C40058F32C /* OTMapOptionsViewController.m */; };
-		A202EB902085D2C80058F32C /* OTMapOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8EB2085D2C40058F32C /* OTMapOptionsViewController.m */; };
 		A202EB912085D2C80058F32C /* OTUserEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8EC2085D2C40058F32C /* OTUserEditViewController.m */; };
-		A202EB922085D2C80058F32C /* OTUserEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8EC2085D2C40058F32C /* OTUserEditViewController.m */; };
 		A202EB932085D2C80058F32C /* OTFeedItemJoinMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8EF2085D2C40058F32C /* OTFeedItemJoinMessageController.m */; };
-		A202EB942085D2C80058F32C /* OTFeedItemJoinMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8EF2085D2C40058F32C /* OTFeedItemJoinMessageController.m */; };
 		A202EB952085D2C80058F32C /* OTFeedItemJoinOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F02085D2C40058F32C /* OTFeedItemJoinOptionsViewController.m */; };
-		A202EB962085D2C80058F32C /* OTFeedItemJoinOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F02085D2C40058F32C /* OTFeedItemJoinOptionsViewController.m */; };
 		A202EB992085D2C80058F32C /* OTNotificationsRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F72085D2C40058F32C /* OTNotificationsRightsViewController.m */; };
-		A202EB9A2085D2C80058F32C /* OTNotificationsRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F72085D2C40058F32C /* OTNotificationsRightsViewController.m */; };
 		A202EB9B2085D2C80058F32C /* OTGeolocationRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F82085D2C40058F32C /* OTGeolocationRightsViewController.m */; };
-		A202EB9C2085D2C80058F32C /* OTGeolocationRightsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F82085D2C40058F32C /* OTGeolocationRightsViewController.m */; };
 		A202EB9D2085D2C80058F32C /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8FA2085D2C40058F32C /* OTConfirmationViewController.m */; };
-		A202EB9E2085D2C80058F32C /* OTConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8FA2085D2C40058F32C /* OTConfirmationViewController.m */; };
 		A202EB9F2085D2C80058F32C /* OTMeetingCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8FD2085D2C40058F32C /* OTMeetingCalloutViewController.m */; };
-		A202EBA02085D2C80058F32C /* OTMeetingCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8FD2085D2C40058F32C /* OTMeetingCalloutViewController.m */; };
 		A202EBA12085D2C80058F32C /* OTGuideDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9002085D2C40058F32C /* OTGuideDetailsViewController.m */; };
-		A202EBA22085D2C80058F32C /* OTGuideDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9002085D2C40058F32C /* OTGuideDetailsViewController.m */; };
 		A202EBA32085D2C80058F32C /* OTSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9022085D2C40058F32C /* OTSocialViewController.m */; };
-		A202EBA42085D2C80058F32C /* OTSocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9022085D2C40058F32C /* OTSocialViewController.m */; };
 		A202EBA52085D2C80058F32C /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9032085D2C40058F32C /* OTLostCodeViewController.m */; };
-		A202EBA62085D2C80058F32C /* OTLostCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9032085D2C40058F32C /* OTLostCodeViewController.m */; };
 		A202EBA72085D2C80058F32C /* OTPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202E9042085D2C40058F32C /* OTPopupViewController.swift */; };
-		A202EBA82085D2C80058F32C /* OTPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202E9042085D2C40058F32C /* OTPopupViewController.swift */; };
 		A202EBA92085D2C80058F32C /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9072085D2C50058F32C /* OTLoginViewController.m */; };
-		A202EBAA2085D2C80058F32C /* OTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9072085D2C50058F32C /* OTLoginViewController.m */; };
 		A202EBAB2085D2C80058F32C /* OTFeedItemFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9092085D2C50058F32C /* OTFeedItemFiltersViewController.m */; };
-		A202EBAC2085D2C80058F32C /* OTFeedItemFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9092085D2C50058F32C /* OTFeedItemFiltersViewController.m */; };
 		A202EBAD2085D2C80058F32C /* OTFeedItemsFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E90F2085D2C50058F32C /* OTFeedItemsFilterCell.m */; };
-		A202EBAE2085D2C80058F32C /* OTFeedItemsFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E90F2085D2C50058F32C /* OTFeedItemsFilterCell.m */; };
 		A202EBAF2085D2C80058F32C /* OTImageFeedItemsFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9102085D2C50058F32C /* OTImageFeedItemsFilterCell.m */; };
-		A202EBB02085D2C80058F32C /* OTImageFeedItemsFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9102085D2C50058F32C /* OTImageFeedItemsFilterCell.m */; };
 		A202EBB12085D2C80058F32C /* OTFeedItemsTimeframeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9112085D2C50058F32C /* OTFeedItemsTimeframeCell.m */; };
-		A202EBB22085D2C80058F32C /* OTFeedItemsTimeframeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9112085D2C50058F32C /* OTFeedItemsTimeframeCell.m */; };
 		A202EBB32085D2C80058F32C /* OTFeedItemsFilterCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9122085D2C50058F32C /* OTFeedItemsFilterCellBase.m */; };
-		A202EBB42085D2C80058F32C /* OTFeedItemsFilterCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9122085D2C50058F32C /* OTFeedItemsFilterCellBase.m */; };
 		A202EBB52085D2C80058F32C /* OTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9142085D2C50058F32C /* OTAboutViewController.m */; };
-		A202EBB62085D2C80058F32C /* OTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9142085D2C50058F32C /* OTAboutViewController.m */; };
 		A202EBB72085D2C80058F32C /* UIViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9172085D2C50058F32C /* UIViewController+menu.m */; };
-		A202EBB82085D2C80058F32C /* UIViewController+menu.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9172085D2C50058F32C /* UIViewController+menu.m */; };
 		A202EBB92085D2C80058F32C /* OTMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9182085D2C50058F32C /* OTMessageViewController.m */; };
-		A202EBBA2085D2C80058F32C /* OTMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9182085D2C50058F32C /* OTMessageViewController.m */; };
 		A202EBBB2085D2C80058F32C /* OTAboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9192085D2C50058F32C /* OTAboutMeViewController.m */; };
-		A202EBBC2085D2C80058F32C /* OTAboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9192085D2C50058F32C /* OTAboutMeViewController.m */; };
 		A202EBBD2085D2C80058F32C /* OTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91A2085D2C50058F32C /* OTMapView.m */; };
-		A202EBBE2085D2C80058F32C /* OTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91A2085D2C50058F32C /* OTMapView.m */; };
 		A202EBBF2085D2C80058F32C /* OTSolidarityGuideFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91B2085D2C50058F32C /* OTSolidarityGuideFiltersViewController.m */; };
-		A202EBC02085D2C80058F32C /* OTSolidarityGuideFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91B2085D2C50058F32C /* OTSolidarityGuideFiltersViewController.m */; };
 		A202EBC12085D2C80058F32C /* OTActivityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91C2085D2C50058F32C /* OTActivityProvider.m */; };
-		A202EBC22085D2C80058F32C /* OTActivityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91C2085D2C50058F32C /* OTActivityProvider.m */; };
 		A202EBC32085D2C80058F32C /* OTBaseMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91D2085D2C50058F32C /* OTBaseMapDelegate.m */; };
-		A202EBC42085D2C80058F32C /* OTBaseMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91D2085D2C50058F32C /* OTBaseMapDelegate.m */; };
 		A202EBC52085D2C80058F32C /* OTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91E2085D2C50058F32C /* OTMainViewController.m */; };
-		A202EBC62085D2C80058F32C /* OTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91E2085D2C50058F32C /* OTMainViewController.m */; };
 		A202EBC72085D2C80058F32C /* OTEditEntourageDescViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91F2085D2C50058F32C /* OTEditEntourageDescViewController.m */; };
-		A202EBC82085D2C80058F32C /* OTEditEntourageDescViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91F2085D2C50058F32C /* OTEditEntourageDescViewController.m */; };
 		A202EBC92085D2C80058F32C /* OTEntourageEditItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9202085D2C50058F32C /* OTEntourageEditItemCell.m */; };
-		A202EBCA2085D2C80058F32C /* OTEntourageEditItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9202085D2C50058F32C /* OTEntourageEditItemCell.m */; };
 		A202EBCB2085D2C80058F32C /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9212085D2C50058F32C /* OTSWRevealViewController.m */; };
-		A202EBCC2085D2C80058F32C /* OTSWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9212085D2C50058F32C /* OTSWRevealViewController.m */; };
 		A202EBCD2085D2C80058F32C /* OTUserEditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9292085D2C50058F32C /* OTUserEditPasswordViewController.m */; };
-		A202EBCE2085D2C80058F32C /* OTUserEditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9292085D2C50058F32C /* OTUserEditPasswordViewController.m */; };
 		A202EBCF2085D2C80058F32C /* OTUserNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E92D2085D2C50058F32C /* OTUserNameViewController.m */; };
-		A202EBD02085D2C80058F32C /* OTUserNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E92D2085D2C50058F32C /* OTUserNameViewController.m */; };
 		A202EBD12085D2C80058F32C /* OTUserEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E92E2085D2C50058F32C /* OTUserEmailViewController.m */; };
-		A202EBD22085D2C80058F32C /* OTUserEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E92E2085D2C50058F32C /* OTUserEmailViewController.m */; };
 		A202EBD32085D2C80058F32C /* OTAssociationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9342085D2C50058F32C /* OTAssociationTableViewCell.m */; };
-		A202EBD42085D2C80058F32C /* OTAssociationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9342085D2C50058F32C /* OTAssociationTableViewCell.m */; };
 		A202EBD52085D2C80058F32C /* OTUserTableConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9362085D2C50058F32C /* OTUserTableConfigurator.m */; };
-		A202EBD62085D2C80058F32C /* OTUserTableConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9362085D2C50058F32C /* OTUserTableConfigurator.m */; };
 		A202EBD72085D2C80058F32C /* OTAssociationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9372085D2C50058F32C /* OTAssociationDetailsViewController.m */; };
-		A202EBD82085D2C80058F32C /* OTAssociationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9372085D2C50058F32C /* OTAssociationDetailsViewController.m */; };
 		A202EBD92085D2C80058F32C /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9382085D2C50058F32C /* OTStartupViewController.m */; };
-		A202EBDA2085D2C80058F32C /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9382085D2C50058F32C /* OTStartupViewController.m */; };
 		A202EBDB2085D2C80058F32C /* OTPublicFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E93A2085D2C50058F32C /* OTPublicFeedItemViewController.m */; };
-		A202EBDC2085D2C80058F32C /* OTPublicFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E93A2085D2C50058F32C /* OTPublicFeedItemViewController.m */; };
 		A202EBDD2085D2C80058F32C /* OTWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E93D2085D2C50058F32C /* OTWelcomeViewController.m */; };
-		A202EBDE2085D2C80058F32C /* OTWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E93D2085D2C50058F32C /* OTWelcomeViewController.m */; };
 		A202EBDF2085D2C80058F32C /* OTCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E93E2085D2C50058F32C /* OTCodeViewController.m */; };
-		A202EBE02085D2C80058F32C /* OTCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E93E2085D2C50058F32C /* OTCodeViewController.m */; };
 		A202EBE12085D2C80058F32C /* OTPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9402085D2C50058F32C /* OTPhoneViewController.m */; };
-		A202EBE22085D2C80058F32C /* OTPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9402085D2C50058F32C /* OTPhoneViewController.m */; };
 		A202EBE32085D2C80058F32C /* OTToursMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9432085D2C50058F32C /* OTToursMapDelegate.m */; };
-		A202EBE42085D2C80058F32C /* OTToursMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9432085D2C50058F32C /* OTToursMapDelegate.m */; };
 		A202EBE52085D2C80058F32C /* OTQuitFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9442085D2C50058F32C /* OTQuitFeedItemViewController.m */; };
-		A202EBE62085D2C80058F32C /* OTQuitFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9442085D2C50058F32C /* OTQuitFeedItemViewController.m */; };
 		A202EBE72085D2C80058F32C /* OTEntourageEditItemImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9452085D2C50058F32C /* OTEntourageEditItemImageCell.m */; };
-		A202EBE82085D2C80058F32C /* OTEntourageEditItemImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9452085D2C50058F32C /* OTEntourageEditItemImageCell.m */; };
 		A202EBE92085D2C80058F32C /* OnBoardingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202E9482085D2C50058F32C /* OnBoardingTextField.swift */; };
-		A202EBEA2085D2C80058F32C /* OnBoardingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202E9482085D2C50058F32C /* OnBoardingTextField.swift */; };
 		A202EBEB2085D2C80058F32C /* OTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9492085D2C50058F32C /* OTTextView.m */; };
-		A202EBEC2085D2C80058F32C /* OTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9492085D2C50058F32C /* OTTextView.m */; };
 		A202EBED2085D2C80058F32C /* OTAutoGrowTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94A2085D2C50058F32C /* OTAutoGrowTextView.m */; };
-		A202EBEE2085D2C80058F32C /* OTAutoGrowTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94A2085D2C50058F32C /* OTAutoGrowTextView.m */; };
 		A202EBEF2085D2C80058F32C /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94C2085D2C50058F32C /* OTMenuTableViewCell.m */; };
-		A202EBF02085D2C80058F32C /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94C2085D2C50058F32C /* OTMenuTableViewCell.m */; };
 		A202EBF12085D2C80058F32C /* OTFilterCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94D2085D2C50058F32C /* OTFilterCellTableViewCell.m */; };
-		A202EBF22085D2C80058F32C /* OTFilterCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94D2085D2C50058F32C /* OTFilterCellTableViewCell.m */; };
 		A202EBF32085D2C80058F32C /* OTFilterRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94E2085D2C50058F32C /* OTFilterRadioButton.m */; };
-		A202EBF42085D2C80058F32C /* OTFilterRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94E2085D2C50058F32C /* OTFilterRadioButton.m */; };
 		A202EBF52085D2C80058F32C /* OTTextWithCount.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94F2085D2C50058F32C /* OTTextWithCount.m */; };
-		A202EBF62085D2C80058F32C /* OTTextWithCount.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94F2085D2C50058F32C /* OTTextWithCount.m */; };
 		A202EBF72085D2C80058F32C /* OTAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9502085D2C50058F32C /* OTAboutTableViewCell.m */; };
-		A202EBF82085D2C80058F32C /* OTAboutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9502085D2C50058F32C /* OTAboutTableViewCell.m */; };
 		A202EBF92085D2C80058F32C /* OTFeedItemsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9522085D2C50058F32C /* OTFeedItemsTableView.m */; };
-		A202EBFA2085D2C80058F32C /* OTFeedItemsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9522085D2C50058F32C /* OTFeedItemsTableView.m */; };
 		A202EBFB2085D2C80058F32C /* OTHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E95A2085D2C50058F32C /* OTHTTPRequestManager.m */; };
-		A202EBFC2085D2C80058F32C /* OTHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E95A2085D2C50058F32C /* OTHTTPRequestManager.m */; };
 		A202EBFD2085D2C80058F32C /* OTRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E95B2085D2C50058F32C /* OTRequestOperationManager.m */; };
-		A202EBFE2085D2C80058F32C /* OTRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E95B2085D2C50058F32C /* OTRequestOperationManager.m */; };
 		A202EBFF2085D2C80058F32C /* OTJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E95C2085D2C50058F32C /* OTJSONResponseSerializer.m */; };
-		A202EC002085D2C80058F32C /* OTJSONResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E95C2085D2C50058F32C /* OTJSONResponseSerializer.m */; };
 		A202EC012085D2C80058F32C /* OTMixpanelService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E96E2085D2C60058F32C /* OTMixpanelService.m */; };
-		A202EC022085D2C80058F32C /* OTMixpanelService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E96E2085D2C60058F32C /* OTMixpanelService.m */; };
 		A202EC032085D2C80058F32C /* OTFeedsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E96F2085D2C60058F32C /* OTFeedsService.m */; };
-		A202EC042085D2C80058F32C /* OTFeedsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E96F2085D2C60058F32C /* OTFeedsService.m */; };
 		A202EC072085D2C80058F32C /* OTInvitationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9712085D2C60058F32C /* OTInvitationsService.m */; };
-		A202EC082085D2C80058F32C /* OTInvitationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9712085D2C60058F32C /* OTInvitationsService.m */; };
 		A202EC092085D2C80058F32C /* OTEntourageService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9722085D2C60058F32C /* OTEntourageService.m */; };
-		A202EC0A2085D2C80058F32C /* OTEntourageService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9722085D2C60058F32C /* OTEntourageService.m */; };
 		A202EC0B2085D2C80058F32C /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9732085D2C60058F32C /* OTEncounterService.m */; };
-		A202EC0C2085D2C80058F32C /* OTEncounterService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9732085D2C60058F32C /* OTEncounterService.m */; };
 		A202EC0D2085D2C80058F32C /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9742085D2C60058F32C /* OTAuthService.m */; };
-		A202EC0E2085D2C80058F32C /* OTAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9742085D2C60058F32C /* OTAuthService.m */; };
 		A202EC0F2085D2C80058F32C /* OTOnboardingService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9752085D2C60058F32C /* OTOnboardingService.m */; };
-		A202EC102085D2C80058F32C /* OTOnboardingService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9752085D2C60058F32C /* OTOnboardingService.m */; };
 		A202EC112085D2C80058F32C /* OTAssociationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9762085D2C60058F32C /* OTAssociationsService.m */; };
-		A202EC122085D2C80058F32C /* OTAssociationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9762085D2C60058F32C /* OTAssociationsService.m */; };
 		A202EC132085D2C80058F32C /* OTSafariService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9772085D2C60058F32C /* OTSafariService.m */; };
-		A202EC142085D2C80058F32C /* OTSafariService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9772085D2C60058F32C /* OTSafariService.m */; };
 		A202EC152085D2C80058F32C /* OTTourService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9782085D2C60058F32C /* OTTourService.m */; };
-		A202EC162085D2C80058F32C /* OTTourService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9782085D2C60058F32C /* OTTourService.m */; };
 		A202EC172085D2C80058F32C /* OTUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9792085D2C60058F32C /* OTUserService.m */; };
-		A202EC182085D2C80058F32C /* OTUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9792085D2C60058F32C /* OTUserService.m */; };
 		A202EC192085D2C80058F32C /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E97A2085D2C60058F32C /* OTPoiService.m */; };
-		A202EC1A2085D2C80058F32C /* OTPoiService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E97A2085D2C60058F32C /* OTPoiService.m */; };
 		A202EC1B2085D2C80058F32C /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9822085D2C60058F32C /* OTPictureUploadService.m */; };
-		A202EC1C2085D2C80058F32C /* OTPictureUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9822085D2C60058F32C /* OTPictureUploadService.m */; };
 		A202EC1D2085D2C80058F32C /* UIViewController+OTEmptyBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9842085D2C60058F32C /* UIViewController+OTEmptyBackButton.m */; };
-		A202EC1E2085D2C80058F32C /* UIViewController+OTEmptyBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9842085D2C60058F32C /* UIViewController+OTEmptyBackButton.m */; };
 		A202EC1F2085D2C80058F32C /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9862085D2C60058F32C /* NSNotification+entourage.m */; };
-		A202EC202085D2C80058F32C /* NSNotification+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9862085D2C60058F32C /* NSNotification+entourage.m */; };
 		A202EC212085D2C80058F32C /* OTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9892085D2C60058F32C /* OTLocationManager.m */; };
-		A202EC222085D2C80058F32C /* OTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9892085D2C60058F32C /* OTLocationManager.m */; };
 		A202EC232085D2C80058F32C /* UILabel+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98A2085D2C60058F32C /* UILabel+entourage.m */; };
-		A202EC242085D2C80058F32C /* UILabel+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98A2085D2C60058F32C /* UILabel+entourage.m */; };
 		A202EC252085D2C80058F32C /* UIBarButtonItem+factory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98B2085D2C60058F32C /* UIBarButtonItem+factory.m */; };
-		A202EC262085D2C80058F32C /* UIBarButtonItem+factory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98B2085D2C60058F32C /* UIBarButtonItem+factory.m */; };
 		A202EC272085D2C80058F32C /* NSBundle+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98C2085D2C60058F32C /* NSBundle+entourage.m */; };
-		A202EC282085D2C80058F32C /* NSBundle+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98C2085D2C60058F32C /* NSBundle+entourage.m */; };
 		A202EC292085D2C80058F32C /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98D2085D2C60058F32C /* UIBarButtonItem+Badge.m */; };
-		A202EC2A2085D2C80058F32C /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E98D2085D2C60058F32C /* UIBarButtonItem+Badge.m */; };
 		A202EC2B2085D2C80058F32C /* OTDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9912085D2C60058F32C /* OTDebugLog.m */; };
-		A202EC2C2085D2C80058F32C /* OTDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9912085D2C60058F32C /* OTDebugLog.m */; };
 		A202EC2D2085D2C80058F32C /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
-		A202EC2E2085D2C80058F32C /* MKMapView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9932085D2C60058F32C /* MKMapView+entourage.m */; };
 		A202EC2F2085D2C80058F32C /* UIStoryboard+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9942085D2C60058F32C /* UIStoryboard+entourage.m */; };
-		A202EC302085D2C80058F32C /* UIStoryboard+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9942085D2C60058F32C /* UIStoryboard+entourage.m */; };
 		A202EC312085D2C80058F32C /* OTMapDelegateProxyBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9972085D2C60058F32C /* OTMapDelegateProxyBehavior.m */; };
-		A202EC322085D2C80058F32C /* OTMapDelegateProxyBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9972085D2C60058F32C /* OTMapDelegateProxyBehavior.m */; };
 		A202EC332085D2C80058F32C /* OTEntourageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9992085D2C60058F32C /* OTEntourageRenderer.m */; };
-		A202EC342085D2C80058F32C /* OTEntourageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9992085D2C60058F32C /* OTEntourageRenderer.m */; };
 		A202EC352085D2C80058F32C /* OTMapAnnotationProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E99C2085D2C60058F32C /* OTMapAnnotationProviderBehavior.m */; };
-		A202EC362085D2C80058F32C /* OTMapAnnotationProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E99C2085D2C60058F32C /* OTMapAnnotationProviderBehavior.m */; };
 		A202EC372085D2C80058F32C /* OTStartTourAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E99F2085D2C60058F32C /* OTStartTourAnnotation.m */; };
-		A202EC382085D2C80058F32C /* OTStartTourAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E99F2085D2C60058F32C /* OTStartTourAnnotation.m */; };
 		A202EC392085D2C80058F32C /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
-		A202EC3A2085D2C80058F32C /* OTEncounterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A22085D2C60058F32C /* OTEncounterAnnotation.m */; };
 		A202EC3B2085D2C80058F32C /* OTStartTourAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A42085D2C60058F32C /* OTStartTourAnnotationView.m */; };
-		A202EC3C2085D2C80058F32C /* OTStartTourAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A42085D2C60058F32C /* OTStartTourAnnotationView.m */; };
 		A202EC3D2085D2C80058F32C /* OTCustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A52085D2C60058F32C /* OTCustomAnnotation.m */; };
-		A202EC3E2085D2C80058F32C /* OTCustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A52085D2C60058F32C /* OTCustomAnnotation.m */; };
 		A202EC3F2085D2C80058F32C /* OTMapDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A72085D2C60058F32C /* OTMapDelegateBehavior.m */; };
-		A202EC402085D2C80058F32C /* OTMapDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A72085D2C60058F32C /* OTMapDelegateBehavior.m */; };
 		A202EC412085D2C80058F32C /* OTHeatzonesCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9AA2085D2C60058F32C /* OTHeatzonesCellProviderBehavior.m */; };
-		A202EC422085D2C80058F32C /* OTHeatzonesCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9AA2085D2C60058F32C /* OTHeatzonesCellProviderBehavior.m */; };
 		A202EC432085D2C80058F32C /* OTMyEntouragesOptionsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9AC2085D2C60058F32C /* OTMyEntouragesOptionsBehavior.m */; };
-		A202EC442085D2C80058F32C /* OTMyEntouragesOptionsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9AC2085D2C60058F32C /* OTMyEntouragesOptionsBehavior.m */; };
 		A202EC452085D2C80058F32C /* OTManageInvitationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B12085D2C60058F32C /* OTManageInvitationBehavior.m */; };
-		A202EC462085D2C80058F32C /* OTManageInvitationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B12085D2C60058F32C /* OTManageInvitationBehavior.m */; };
 		A202EC472085D2C80058F32C /* OTHeatzonesCollectionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B32085D2C60058F32C /* OTHeatzonesCollectionSource.m */; };
-		A202EC482085D2C80058F32C /* OTHeatzonesCollectionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B32085D2C60058F32C /* OTHeatzonesCollectionSource.m */; };
 		A202EC492085D2C80058F32C /* OTInvitationChangedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B42085D2C60058F32C /* OTInvitationChangedBehavior.m */; };
-		A202EC4A2085D2C80058F32C /* OTInvitationChangedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B42085D2C60058F32C /* OTInvitationChangedBehavior.m */; };
 		A202EC4B2085D2C80058F32C /* OTToggleVisibleBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B72085D2C60058F32C /* OTToggleVisibleBehavior.m */; };
-		A202EC4C2085D2C80058F32C /* OTToggleVisibleBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B72085D2C60058F32C /* OTToggleVisibleBehavior.m */; };
 		A202EC4D2085D2C80058F32C /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B82085D2C60058F32C /* OTAlertViewBehavior.m */; };
-		A202EC4E2085D2C80058F32C /* OTAlertViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B82085D2C60058F32C /* OTAlertViewBehavior.m */; };
 		A202EC4F2085D2C80058F32C /* OTShareFeedItemBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B92085D2C60058F32C /* OTShareFeedItemBehavior.m */; };
-		A202EC502085D2C80058F32C /* OTShareFeedItemBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9B92085D2C60058F32C /* OTShareFeedItemBehavior.m */; };
 		A202EC512085D2C80058F32C /* OTCustomSegmentedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9BA2085D2C60058F32C /* OTCustomSegmentedBehavior.m */; };
-		A202EC522085D2C80058F32C /* OTCustomSegmentedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9BA2085D2C60058F32C /* OTCustomSegmentedBehavior.m */; };
 		A202EC532085D2C80058F32C /* OTToggleGroupViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9BD2085D2C60058F32C /* OTToggleGroupViewBehavior.m */; };
-		A202EC542085D2C80058F32C /* OTToggleGroupViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9BD2085D2C60058F32C /* OTToggleGroupViewBehavior.m */; };
 		A202EC552085D2C80058F32C /* OTToggleVisibleWithConstraintsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9BE2085D2C60058F32C /* OTToggleVisibleWithConstraintsBehavior.m */; };
-		A202EC562085D2C80058F32C /* OTToggleVisibleWithConstraintsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9BE2085D2C60058F32C /* OTToggleVisibleWithConstraintsBehavior.m */; };
 		A202EC572085D2C80058F32C /* OTScrollPinBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9C32085D2C60058F32C /* OTScrollPinBehavior.m */; };
-		A202EC582085D2C80058F32C /* OTScrollPinBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9C32085D2C60058F32C /* OTScrollPinBehavior.m */; };
 		A202EC592085D2C80058F32C /* OTBottomScrollBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9C62085D2C60058F32C /* OTBottomScrollBehavior.m */; };
-		A202EC5A2085D2C80058F32C /* OTBottomScrollBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9C62085D2C60058F32C /* OTBottomScrollBehavior.m */; };
 		A202EC5B2085D2C80058F32C /* OTEncounterDisclaimerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CB2085D2C60058F32C /* OTEncounterDisclaimerBehavior.m */; };
-		A202EC5C2085D2C80058F32C /* OTEncounterDisclaimerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CB2085D2C60058F32C /* OTEncounterDisclaimerBehavior.m */; };
 		A202EC5D2085D2C80058F32C /* OTDisclaimerBaseBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CC2085D2C60058F32C /* OTDisclaimerBaseBehavior.m */; };
-		A202EC5E2085D2C80058F32C /* OTDisclaimerBaseBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CC2085D2C60058F32C /* OTDisclaimerBaseBehavior.m */; };
 		A202EC5F2085D2C80058F32C /* OTEntourageDisclaimerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CD2085D2C60058F32C /* OTEntourageDisclaimerBehavior.m */; };
-		A202EC602085D2C80058F32C /* OTEntourageDisclaimerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CD2085D2C60058F32C /* OTEntourageDisclaimerBehavior.m */; };
 		A202EC612085D2C80058F32C /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CF2085D2C60058F32C /* OTCountryCodePickerViewDataSource.m */; };
-		A202EC622085D2C80058F32C /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CF2085D2C60058F32C /* OTCountryCodePickerViewDataSource.m */; };
 		A202EC632085D2C80058F32C /* OTSolidarityGuideFilteredDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D02085D2C60058F32C /* OTSolidarityGuideFilteredDataSource.m */; };
-		A202EC642085D2C80058F32C /* OTSolidarityGuideFilteredDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D02085D2C60058F32C /* OTSolidarityGuideFilteredDataSource.m */; };
 		A202EC652085D2C80058F32C /* OTDistributedDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D12085D2C60058F32C /* OTDistributedDelegateBehavior.m */; };
-		A202EC662085D2C80058F32C /* OTDistributedDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D12085D2C60058F32C /* OTDistributedDelegateBehavior.m */; };
 		A202EC672085D2C80058F32C /* OTTapViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D32085D2C60058F32C /* OTTapViewBehavior.m */; };
-		A202EC682085D2C80058F32C /* OTTapViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D32085D2C60058F32C /* OTTapViewBehavior.m */; };
 		A202EC692085D2C80058F32C /* OTCollectionCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D62085D2C60058F32C /* OTCollectionCellProviderBehavior.m */; };
-		A202EC6A2085D2C80058F32C /* OTCollectionCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D62085D2C60058F32C /* OTCollectionCellProviderBehavior.m */; };
 		A202EC6B2085D2C80058F32C /* OTInvitationsCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D82085D2C60058F32C /* OTInvitationsCellProviderBehavior.m */; };
-		A202EC6C2085D2C80058F32C /* OTInvitationsCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D82085D2C60058F32C /* OTInvitationsCellProviderBehavior.m */; };
 		A202EC6D2085D2C80058F32C /* OTInvitationsCollectionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9DB2085D2C60058F32C /* OTInvitationsCollectionSource.m */; };
-		A202EC6E2085D2C80058F32C /* OTInvitationsCollectionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9DB2085D2C60058F32C /* OTInvitationsCollectionSource.m */; };
 		A202EC6F2085D2C80058F32C /* OTCollectionViewDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9DC2085D2C60058F32C /* OTCollectionViewDataSourceBehavior.m */; };
-		A202EC702085D2C80058F32C /* OTCollectionViewDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9DC2085D2C60058F32C /* OTCollectionViewDataSourceBehavior.m */; };
 		A202EC712085D2C80058F32C /* OTCollectionSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E02085D2C60058F32C /* OTCollectionSourceBehavior.m */; };
-		A202EC722085D2C80058F32C /* OTCollectionSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E02085D2C60058F32C /* OTCollectionSourceBehavior.m */; };
 		A202EC732085D2C80058F32C /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E12085D2C60058F32C /* OTBehavior.m */; };
-		A202EC742085D2C80058F32C /* OTBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E12085D2C60058F32C /* OTBehavior.m */; };
 		A202EC752085D2C80058F32C /* OTMyEntouragesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E42085D2C60058F32C /* OTMyEntouragesDataSource.m */; };
-		A202EC762085D2C80058F32C /* OTMyEntouragesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E42085D2C60058F32C /* OTMyEntouragesDataSource.m */; };
 		A202EC772085D2C80058F32C /* OTMyEntouragesCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E52085D2C60058F32C /* OTMyEntouragesCellProvider.m */; };
-		A202EC782085D2C80058F32C /* OTMyEntouragesCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E52085D2C60058F32C /* OTMyEntouragesCellProvider.m */; };
 		A202EC792085D2C80058F32C /* OTMyEntouragesTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E62085D2C60058F32C /* OTMyEntouragesTableDataSource.m */; };
-		A202EC7A2085D2C80058F32C /* OTMyEntouragesTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E62085D2C60058F32C /* OTMyEntouragesTableDataSource.m */; };
 		A202EC7B2085D2C80058F32C /* OTFilteredDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9EA2085D2C60058F32C /* OTFilteredDataSourceBehavior.m */; };
-		A202EC7C2085D2C80058F32C /* OTFilteredDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9EA2085D2C60058F32C /* OTFilteredDataSourceBehavior.m */; };
 		A202EC7D2085D2C80058F32C /* OTAssociationsSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9EE2085D2C60058F32C /* OTAssociationsSourceBehavior.m */; };
-		A202EC7E2085D2C80058F32C /* OTAssociationsSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9EE2085D2C60058F32C /* OTAssociationsSourceBehavior.m */; };
 		A202EC7F2085D2C80058F32C /* OTAssociationsCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9EF2085D2C60058F32C /* OTAssociationsCellProviderBehavior.m */; };
-		A202EC802085D2C80058F32C /* OTAssociationsCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9EF2085D2C60058F32C /* OTAssociationsCellProviderBehavior.m */; };
 		A202EC812085D2C80058F32C /* OTSolidarityGuideFiltersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9F12085D2C60058F32C /* OTSolidarityGuideFiltersCellProvider.m */; };
-		A202EC822085D2C80058F32C /* OTSolidarityGuideFiltersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9F12085D2C60058F32C /* OTSolidarityGuideFiltersCellProvider.m */; };
 		A202EC832085D2C80058F32C /* OTFeedItemsFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9F32085D2C60058F32C /* OTFeedItemsFiltersTableDataSource.m */; };
-		A202EC842085D2C80058F32C /* OTFeedItemsFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9F32085D2C60058F32C /* OTFeedItemsFiltersTableDataSource.m */; };
 		A202EC852085D2C80058F32C /* OTFeedItemFiltersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9F52085D2C60058F32C /* OTFeedItemFiltersCellProvider.m */; };
-		A202EC862085D2C80058F32C /* OTFeedItemFiltersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9F52085D2C60058F32C /* OTFeedItemFiltersCellProvider.m */; };
 		A202EC872085D2C80058F32C /* OTContactsTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9FA2085D2C60058F32C /* OTContactsTableCellProviderBehavior.m */; };
-		A202EC882085D2C80058F32C /* OTContactsTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9FA2085D2C60058F32C /* OTContactsTableCellProviderBehavior.m */; };
 		A202EC892085D2C80058F32C /* OTContactsGroupedTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9FE2085D2C60058F32C /* OTContactsGroupedTableDataSourceBehavior.m */; };
-		A202EC8A2085D2C80058F32C /* OTContactsGroupedTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9FE2085D2C60058F32C /* OTContactsGroupedTableDataSourceBehavior.m */; };
 		A202EC8B2085D2C80058F32C /* OTContactsFilteredDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9FF2085D2C60058F32C /* OTContactsFilteredDataSourceBehavior.m */; };
-		A202EC8C2085D2C80058F32C /* OTContactsFilteredDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9FF2085D2C60058F32C /* OTContactsFilteredDataSourceBehavior.m */; };
 		A202EC8D2085D2C80058F32C /* OTDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA002085D2C60058F32C /* OTDataSourceBehavior.m */; };
-		A202EC8E2085D2C80058F32C /* OTDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA002085D2C60058F32C /* OTDataSourceBehavior.m */; };
 		A202EC8F2085D2C80058F32C /* OTTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA012085D2C60058F32C /* OTTableCellProviderBehavior.m */; };
-		A202EC902085D2C80058F32C /* OTTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA012085D2C60058F32C /* OTTableCellProviderBehavior.m */; };
 		A202EC912085D2C80058F32C /* OTTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA022085D2C60058F32C /* OTTableDataSourceBehavior.m */; };
-		A202EC922085D2C80058F32C /* OTTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA022085D2C60058F32C /* OTTableDataSourceBehavior.m */; };
 		A202EC932085D2C80058F32C /* OTSolidarityGuideFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA032085D2C60058F32C /* OTSolidarityGuideFiltersTableDataSource.m */; };
-		A202EC942085D2C80058F32C /* OTSolidarityGuideFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA032085D2C60058F32C /* OTSolidarityGuideFiltersTableDataSource.m */; };
 		A202EC952085D2C80058F32C /* OTMessageTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0B2085D2C60058F32C /* OTMessageTableDataSourceBehavior.m */; };
-		A202EC962085D2C80058F32C /* OTMessageTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0B2085D2C60058F32C /* OTMessageTableDataSourceBehavior.m */; };
 		A202EC972085D2C80058F32C /* OTMessageDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0C2085D2C60058F32C /* OTMessageDataSourceBehavior.m */; };
-		A202EC982085D2C80058F32C /* OTMessageDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0C2085D2C60058F32C /* OTMessageDataSourceBehavior.m */; };
 		A202EC992085D2C80058F32C /* OTMessageTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0D2085D2C60058F32C /* OTMessageTableCellProviderBehavior.m */; };
-		A202EC9A2085D2C80058F32C /* OTMessageTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0D2085D2C60058F32C /* OTMessageTableCellProviderBehavior.m */; };
 		A202EC9B2085D2C80058F32C /* OTGroupedTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0E2085D2C60058F32C /* OTGroupedTableDataSourceBehavior.m */; };
-		A202EC9C2085D2C80058F32C /* OTGroupedTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0E2085D2C60058F32C /* OTGroupedTableDataSourceBehavior.m */; };
 		A202EC9D2085D2C80058F32C /* OTPublicInfoTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA132085D2C60058F32C /* OTPublicInfoTableDataSource.m */; };
-		A202EC9E2085D2C80058F32C /* OTPublicInfoTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA132085D2C60058F32C /* OTPublicInfoTableDataSource.m */; };
 		A202EC9F2085D2C80058F32C /* OTPublicInfoCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA142085D2C60058F32C /* OTPublicInfoCellProvider.m */; };
-		A202ECA02085D2C80058F32C /* OTPublicInfoCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA142085D2C60058F32C /* OTPublicInfoCellProvider.m */; };
 		A202ECA12085D2C80058F32C /* OTPublicInfoDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA152085D2C60058F32C /* OTPublicInfoDataSource.m */; };
-		A202ECA22085D2C80058F32C /* OTPublicInfoDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA152085D2C60058F32C /* OTPublicInfoDataSource.m */; };
 		A202ECA32085D2C80058F32C /* OTMembersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA172085D2C60058F32C /* OTMembersDataSource.m */; };
-		A202ECA42085D2C80058F32C /* OTMembersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA172085D2C60058F32C /* OTMembersDataSource.m */; };
 		A202ECA52085D2C80058F32C /* OTMembersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA1A2085D2C60058F32C /* OTMembersTableDataSource.m */; };
-		A202ECA62085D2C80058F32C /* OTMembersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA1A2085D2C60058F32C /* OTMembersTableDataSource.m */; };
 		A202ECA72085D2C80058F32C /* OTMembersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA1C2085D2C60058F32C /* OTMembersCellProvider.m */; };
-		A202ECA82085D2C80058F32C /* OTMembersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA1C2085D2C60058F32C /* OTMembersCellProvider.m */; };
 		A202ECA92085D2C80058F32C /* OTEditEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA272085D2C60058F32C /* OTEditEntourageBehavior.m */; };
-		A202ECAA2085D2C80058F32C /* OTEditEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA272085D2C60058F32C /* OTEditEntourageBehavior.m */; };
 		A202ECAB2085D2C80058F32C /* OTSummaryProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA292085D2C60058F32C /* OTSummaryProviderBehavior.m */; };
-		A202ECAC2085D2C80058F32C /* OTSummaryProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA292085D2C60058F32C /* OTSummaryProviderBehavior.m */; };
 		A202ECAD2085D2C80058F32C /* OTUserProfileBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA2B2085D2C60058F32C /* OTUserProfileBehavior.m */; };
-		A202ECAE2085D2C80058F32C /* OTUserProfileBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA2B2085D2C60058F32C /* OTUserProfileBehavior.m */; };
 		A202ECAF2085D2C80058F32C /* OTStatusChangedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA2C2085D2C60058F32C /* OTStatusChangedBehavior.m */; };
-		A202ECB02085D2C80058F32C /* OTStatusChangedBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA2C2085D2C60058F32C /* OTStatusChangedBehavior.m */; };
 		A202ECB12085D2C80058F32C /* OTEditEntourageTableSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA2F2085D2C60058F32C /* OTEditEntourageTableSource.m */; };
-		A202ECB22085D2C80058F32C /* OTEditEntourageTableSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA2F2085D2C60058F32C /* OTEditEntourageTableSource.m */; };
 		A202ECB32085D2C80058F32C /* OTNextStatusButtonBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA302085D2C60058F32C /* OTNextStatusButtonBehavior.m */; };
-		A202ECB42085D2C80058F32C /* OTNextStatusButtonBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA302085D2C60058F32C /* OTNextStatusButtonBehavior.m */; };
 		A202ECB52085D2C80058F32C /* OTStatusBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA322085D2C60058F32C /* OTStatusBehavior.m */; };
-		A202ECB62085D2C80058F32C /* OTStatusBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA322085D2C60058F32C /* OTStatusBehavior.m */; };
 		A202ECB72085D2C80058F32C /* OTInviteBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA352085D2C60058F32C /* OTInviteBehavior.m */; };
-		A202ECB82085D2C80058F32C /* OTInviteBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA352085D2C60058F32C /* OTInviteBehavior.m */; };
 		A202ECB92085D2C80058F32C /* OTJoinBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA362085D2C60058F32C /* OTJoinBehavior.m */; };
-		A202ECBA2085D2C80058F32C /* OTJoinBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA362085D2C60058F32C /* OTJoinBehavior.m */; };
 		A202ECBB2085D2C80058F32C /* OTPhotoPickerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA3A2085D2C60058F32C /* OTPhotoPickerBehavior.m */; };
-		A202ECBC2085D2C80058F32C /* OTPhotoPickerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA3A2085D2C60058F32C /* OTPhotoPickerBehavior.m */; };
 		A202ECBD2085D2C80058F32C /* OTMailTextCheckBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA3C2085D2C60058F32C /* OTMailTextCheckBehavior.m */; };
-		A202ECBE2085D2C80058F32C /* OTMailTextCheckBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA3C2085D2C60058F32C /* OTMailTextCheckBehavior.m */; };
 		A202ECBF2085D2C80058F32C /* OTMailSenderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA3E2085D2C60058F32C /* OTMailSenderBehavior.m */; };
-		A202ECC02085D2C80058F32C /* OTMailSenderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA3E2085D2C60058F32C /* OTMailSenderBehavior.m */; };
 		A202ECC12085D2C80058F32C /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
-		A202ECC22085D2C80058F32C /* OTSignalEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA412085D2C60058F32C /* OTSignalEntourageBehavior.m */; };
 		A202ECC32085D2C80058F32C /* OTOnboardingNavigationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA432085D2C60058F32C /* OTOnboardingNavigationBehavior.m */; };
-		A202ECC42085D2C80058F32C /* OTOnboardingNavigationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA432085D2C60058F32C /* OTOnboardingNavigationBehavior.m */; };
 		A202ECC52085D2C80058F32C /* OTCloseKeyboardOnTapBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA472085D2C60058F32C /* OTCloseKeyboardOnTapBehavior.m */; };
-		A202ECC62085D2C80058F32C /* OTCloseKeyboardOnTapBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA472085D2C60058F32C /* OTCloseKeyboardOnTapBehavior.m */; };
 		A202ECC72085D2C80058F32C /* OTTourCreatorBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA4B2085D2C60058F32C /* OTTourCreatorBehavior.m */; };
-		A202ECC82085D2C80058F32C /* OTTourCreatorBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA4B2085D2C60058F32C /* OTTourCreatorBehavior.m */; };
 		A202ECC92085D2C80058F32C /* OTFeedItemDetailsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA4D2085D2C60058F32C /* OTFeedItemDetailsBehavior.m */; };
-		A202ECCA2085D2C80058F32C /* OTFeedItemDetailsBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA4D2085D2C60058F32C /* OTFeedItemDetailsBehavior.m */; };
 		A202ECCB2085D2C80058F32C /* OTNoDataBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA4E2085D2C60058F32C /* OTNoDataBehavior.m */; };
-		A202ECCC2085D2C80058F32C /* OTNoDataBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA4E2085D2C60058F32C /* OTNoDataBehavior.m */; };
 		A202ECCD2085D2C80058F32C /* OTOverlayFeederBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA502085D2C60058F32C /* OTOverlayFeederBehavior.m */; };
-		A202ECCE2085D2C80058F32C /* OTOverlayFeederBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA502085D2C60058F32C /* OTOverlayFeederBehavior.m */; };
 		A202ECCF2085D2C80058F32C /* OTTapEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA542085D2C60058F32C /* OTTapEntourageBehavior.m */; };
-		A202ECD02085D2C80058F32C /* OTTapEntourageBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA542085D2C60058F32C /* OTTapEntourageBehavior.m */; };
 		A202ECD12085D2C80058F32C /* OTNewsFeedsSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA562085D2C60058F32C /* OTNewsFeedsSourceBehavior.m */; };
-		A202ECD22085D2C80058F32C /* OTNewsFeedsSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA562085D2C60058F32C /* OTNewsFeedsSourceBehavior.m */; };
 		A202ECD32085D2C80058F32C /* OTEditEntourageNavigationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA572085D2C60058F32C /* OTEditEntourageNavigationBehavior.m */; };
-		A202ECD42085D2C80058F32C /* OTEditEntourageNavigationBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA572085D2C60058F32C /* OTEditEntourageNavigationBehavior.m */; };
 		A202ECD52085D2C80058F32C /* OTGuideInfoBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5A2085D2C60058F32C /* OTGuideInfoBehavior.m */; };
-		A202ECD62085D2C80058F32C /* OTGuideInfoBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5A2085D2C60058F32C /* OTGuideInfoBehavior.m */; };
 		A202ECD72085D2C80058F32C /* UIView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5C2085D2C60058F32C /* UIView+entourage.m */; };
-		A202ECD82085D2C80058F32C /* UIView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5C2085D2C60058F32C /* UIView+entourage.m */; };
 		A202ECD92085D2C80058F32C /* UIButton+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5D2085D2C60058F32C /* UIButton+entourage.m */; };
-		A202ECDA2085D2C80058F32C /* UIButton+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5D2085D2C60058F32C /* UIButton+entourage.m */; };
 		A202ECDB2085D2C80058F32C /* UIImage+processing.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5E2085D2C60058F32C /* UIImage+processing.m */; };
-		A202ECDC2085D2C80058F32C /* UIImage+processing.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5E2085D2C60058F32C /* UIImage+processing.m */; };
 		A202ECDD2085D2C80058F32C /* UITextField+indentation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5F2085D2C60058F32C /* UITextField+indentation.m */; };
-		A202ECDE2085D2C80058F32C /* UITextField+indentation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5F2085D2C60058F32C /* UITextField+indentation.m */; };
 		A202ECDF2085D2C80058F32C /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA642085D2C60058F32C /* UIColor+entourage.m */; };
-		A202ECE02085D2C80058F32C /* UIColor+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA642085D2C60058F32C /* UIColor+entourage.m */; };
 		A202ECE12085D2C80058F32C /* UIImageView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA682085D2C60058F32C /* UIImageView+entourage.m */; };
-		A202ECE22085D2C80058F32C /* UIImageView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA682085D2C60058F32C /* UIImageView+entourage.m */; };
 		A202ECE32085D2C80058F32C /* OTOnboardingJoinService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA6B2085D2C60058F32C /* OTOnboardingJoinService.m */; };
-		A202ECE42085D2C80058F32C /* OTOnboardingJoinService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA6B2085D2C60058F32C /* OTOnboardingJoinService.m */; };
 		A202ECE52085D2C80058F32C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA6E2085D2C60058F32C /* OTUnreadMessagesService.m */; };
-		A202ECE62085D2C80058F32C /* OTUnreadMessagesService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA6E2085D2C60058F32C /* OTUnreadMessagesService.m */; };
 		A202ECE72085D2C80058F32C /* OTDeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA722085D2C60058F32C /* OTDeepLinkService.m */; };
-		A202ECE82085D2C80058F32C /* OTDeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA722085D2C60058F32C /* OTDeepLinkService.m */; };
 		A202ECE92085D2C80058F32C /* OTMessagingService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA732085D2C60058F32C /* OTMessagingService.m */; };
-		A202ECEA2085D2C80058F32C /* OTMessagingService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA732085D2C60058F32C /* OTMessagingService.m */; };
 		A202ECEB2085D2C80058F32C /* OTOngoingTourService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA762085D2C60058F32C /* OTOngoingTourService.m */; };
-		A202ECEC2085D2C80058F32C /* OTOngoingTourService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA762085D2C60058F32C /* OTOngoingTourService.m */; };
 		A202ECED2085D2C80058F32C /* OTAddressBookService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA772085D2C60058F32C /* OTAddressBookService.m */; };
-		A202ECEE2085D2C80058F32C /* OTAddressBookService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA772085D2C60058F32C /* OTAddressBookService.m */; };
 		A202ECEF2085D2C80058F32C /* OTLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA782085D2C60058F32C /* OTLogger.m */; };
-		A202ECF02085D2C80058F32C /* OTLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA782085D2C60058F32C /* OTLogger.m */; };
 		A202ECF12085D2C80058F32C /* OTPushNotificationsData.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA7A2085D2C60058F32C /* OTPushNotificationsData.m */; };
-		A202ECF22085D2C80058F32C /* OTPushNotificationsData.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA7A2085D2C60058F32C /* OTPushNotificationsData.m */; };
 		A202ECF32085D2C80058F32C /* OTPushNotificationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA7B2085D2C60058F32C /* OTPushNotificationsService.m */; };
-		A202ECF42085D2C80058F32C /* OTPushNotificationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA7B2085D2C60058F32C /* OTPushNotificationsService.m */; };
 		A202ECF52085D2C80058F32C /* OTCategoryFromJsonService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA7E2085D2C60058F32C /* OTCategoryFromJsonService.m */; };
-		A202ECF62085D2C80058F32C /* OTCategoryFromJsonService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA7E2085D2C60058F32C /* OTCategoryFromJsonService.m */; };
 		A202ECF72085D2C80058F32C /* OTFeedItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA822085D2C60058F32C /* OTFeedItemFactory.m */; };
-		A202ECF82085D2C80058F32C /* OTFeedItemFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA822085D2C60058F32C /* OTFeedItemFactory.m */; };
 		A202ECF92085D2C80058F32C /* OTEntourageUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA852085D2C60058F32C /* OTEntourageUI.m */; };
-		A202ECFA2085D2C80058F32C /* OTEntourageUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA852085D2C60058F32C /* OTEntourageUI.m */; };
 		A202ECFB2085D2C80058F32C /* OTEntourageStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA892085D2C60058F32C /* OTEntourageStateTransition.m */; };
-		A202ECFC2085D2C80058F32C /* OTEntourageStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA892085D2C60058F32C /* OTEntourageStateTransition.m */; };
 		A202ECFD2085D2C80058F32C /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA8A2085D2C60058F32C /* OTEntourageFactory.m */; };
-		A202ECFE2085D2C80058F32C /* OTEntourageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA8A2085D2C60058F32C /* OTEntourageFactory.m */; };
 		A202ECFF2085D2C80058F32C /* OTEntourageChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA8B2085D2C60058F32C /* OTEntourageChangedHandler.m */; };
-		A202ED002085D2C80058F32C /* OTEntourageChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA8B2085D2C60058F32C /* OTEntourageChangedHandler.m */; };
 		A202ED012085D2C80058F32C /* OTEntourageMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA8D2085D2C60058F32C /* OTEntourageMapHandler.m */; };
-		A202ED022085D2C80058F32C /* OTEntourageMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA8D2085D2C60058F32C /* OTEntourageMapHandler.m */; };
 		A202ED032085D2C80058F32C /* OTEntourageJoinerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA902085D2C60058F32C /* OTEntourageJoinerDelegate.m */; };
-		A202ED042085D2C80058F32C /* OTEntourageJoinerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA902085D2C60058F32C /* OTEntourageJoinerDelegate.m */; };
 		A202ED052085D2C80058F32C /* OTEntourageMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA912085D2C60058F32C /* OTEntourageMessaging.m */; };
-		A202ED062085D2C80058F32C /* OTEntourageMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA912085D2C60058F32C /* OTEntourageMessaging.m */; };
 		A202ED072085D2C80058F32C /* OTEntourageStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA922085D2C60058F32C /* OTEntourageStateInfo.m */; };
-		A202ED082085D2C80058F32C /* OTEntourageStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA922085D2C60058F32C /* OTEntourageStateInfo.m */; };
 		A202ED092085D2C80058F32C /* OTTourMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA9C2085D2C60058F32C /* OTTourMessaging.m */; };
-		A202ED0A2085D2C80058F32C /* OTTourMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA9C2085D2C60058F32C /* OTTourMessaging.m */; };
 		A202ED0B2085D2C80058F32C /* OTTourFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA9E2085D2C60058F32C /* OTTourFactory.m */; };
-		A202ED0C2085D2C80058F32C /* OTTourFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA9E2085D2C60058F32C /* OTTourFactory.m */; };
 		A202ED0D2085D2C80058F32C /* OTTourStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA9F2085D2C60058F32C /* OTTourStateTransition.m */; };
-		A202ED0E2085D2C80058F32C /* OTTourStateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA9F2085D2C60058F32C /* OTTourStateTransition.m */; };
 		A202ED0F2085D2C80058F32C /* OTTourStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA12085D2C60058F32C /* OTTourStateInfo.m */; };
-		A202ED102085D2C80058F32C /* OTTourStateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA12085D2C60058F32C /* OTTourStateInfo.m */; };
 		A202ED112085D2C80058F32C /* OTTourJoinerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA22085D2C60058F32C /* OTTourJoinerDelegate.m */; };
-		A202ED122085D2C80058F32C /* OTTourJoinerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA22085D2C60058F32C /* OTTourJoinerDelegate.m */; };
 		A202ED132085D2C80058F32C /* OTTourUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA32085D2C60058F32C /* OTTourUI.m */; };
-		A202ED142085D2C80058F32C /* OTTourUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA32085D2C60058F32C /* OTTourUI.m */; };
 		A202ED152085D2C80058F32C /* OTEditEncounterBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA42085D2C60058F32C /* OTEditEncounterBehavior.m */; };
-		A202ED162085D2C80058F32C /* OTEditEncounterBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA42085D2C60058F32C /* OTEditEncounterBehavior.m */; };
 		A202ED172085D2C80058F32C /* OTTourChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA62085D2C60058F32C /* OTTourChangedHandler.m */; };
-		A202ED182085D2C80058F32C /* OTTourChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA62085D2C60058F32C /* OTTourChangedHandler.m */; };
 		A202ED192085D2C80058F32C /* OTTourMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA72085D2C60058F32C /* OTTourMapHandler.m */; };
-		A202ED1A2085D2C80058F32C /* OTTourMapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA72085D2C60058F32C /* OTTourMapHandler.m */; };
 		A202ED1B2085D2C80058F32C /* OTAnnouncementUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB12085D2C60058F32C /* OTAnnouncementUI.m */; };
-		A202ED1C2085D2C80058F32C /* OTAnnouncementUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB12085D2C60058F32C /* OTAnnouncementUI.m */; };
 		A202ED1D2085D2C80058F32C /* OTAnnouncementFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB22085D2C60058F32C /* OTAnnouncementFactory.m */; };
-		A202ED1E2085D2C80058F32C /* OTAnnouncementFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB22085D2C60058F32C /* OTAnnouncementFactory.m */; };
 		A202ED1F2085D2C80058F32C /* UIScrollView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB32085D2C60058F32C /* UIScrollView+entourage.m */; };
-		A202ED202085D2C80058F32C /* UIScrollView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB32085D2C60058F32C /* UIScrollView+entourage.m */; };
 		A202ED212085D2C80058F32C /* NSDate+OTFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB72085D2C70058F32C /* NSDate+OTFormatter.m */; };
-		A202ED222085D2C80058F32C /* NSDate+OTFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB72085D2C70058F32C /* NSDate+OTFormatter.m */; };
 		A202ED232085D2C80058F32C /* NSString+Validators.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB92085D2C70058F32C /* NSString+Validators.m */; };
-		A202ED242085D2C80058F32C /* NSString+Validators.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB92085D2C70058F32C /* NSString+Validators.m */; };
 		A202ED252085D2C80058F32C /* UINavigationController+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EABA2085D2C70058F32C /* UINavigationController+entourage.m */; };
-		A202ED262085D2C80058F32C /* UINavigationController+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EABA2085D2C70058F32C /* UINavigationController+entourage.m */; };
 		A202ED272085D2C80058F32C /* NSError+OTErrorData.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EABB2085D2C70058F32C /* NSError+OTErrorData.m */; };
-		A202ED282085D2C80058F32C /* NSError+OTErrorData.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EABB2085D2C70058F32C /* NSError+OTErrorData.m */; };
 		A202ED292085D2C80058F32C /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EABD2085D2C70058F32C /* NSUserDefaults+OT.m */; };
-		A202ED2A2085D2C80058F32C /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EABD2085D2C70058F32C /* NSUserDefaults+OT.m */; };
 		A202ED2B2085D2C80058F32C /* NSAttributedString+OTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EABE2085D2C70058F32C /* NSAttributedString+OTBuilder.m */; };
-		A202ED2C2085D2C80058F32C /* NSAttributedString+OTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EABE2085D2C70058F32C /* NSAttributedString+OTBuilder.m */; };
 		A202ED2D2085D2C80058F32C /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC02085D2C70058F32C /* NSDictionary+Parsing.m */; };
-		A202ED2E2085D2C80058F32C /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC02085D2C70058F32C /* NSDictionary+Parsing.m */; };
 		A202ED2F2085D2C80058F32C /* NSDate+ui.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC12085D2C70058F32C /* NSDate+ui.m */; };
-		A202ED302085D2C80058F32C /* NSDate+ui.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC12085D2C70058F32C /* NSDate+ui.m */; };
 		A202ED312085D2C80058F32C /* OTVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC52085D2C70058F32C /* OTVersionInfo.m */; };
-		A202ED322085D2C80058F32C /* OTVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC52085D2C70058F32C /* OTVersionInfo.m */; };
 		A20489FB2151328D00064EB0 /* IntroPage1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20489FA2151328D00064EB0 /* IntroPage1.xib */; };
 		A20489FF2151421500064EB0 /* IntroPage3.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20489FC2151421400064EB0 /* IntroPage3.xib */; };
 		A2048A002151421500064EB0 /* IntroPage4.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20489FD2151421400064EB0 /* IntroPage4.xib */; };
@@ -828,7 +496,6 @@
 		A24EA3832100A7780027AB8B /* UITextField+AutoSuggestion.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3812100A7780027AB8B /* UITextField+AutoSuggestion.m */; };
 		A24EA3862101D7A10027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
 		A24EA3872101D7A10027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
-		A24EA3882101D7A50027AB8B /* OTAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = A24EA3852101D7A10027AB8B /* OTAddress.m */; };
 		A2607686215577BC0068F65E /* OTFeedsTableFilterHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */; };
 		A26076872158CF060068F65E /* OTFeedsTableFilterHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2607685215577BC0068F65E /* OTFeedsTableFilterHeader.xib */; };
 		A2658BFC21144DF200B6B15C /* OTEventCreatedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2658BFB21144DF200B6B15C /* OTEventCreatedCell.m */; };
@@ -1222,7 +889,6 @@
 		A296B8DB20871CFC00F6AFBD /* GuideSolidarity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D659E2085FDAA00EF8E0E /* GuideSolidarity.storyboard */; };
 		A296B8ED20871FD900F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
 		A296B90E2087218700F6AFBD /* Entourage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A296B90D2087218700F6AFBD /* Entourage.xcassets */; };
-		A296B90F2087218700F6AFBD /* Entourage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A296B90D2087218700F6AFBD /* Entourage.xcassets */; };
 		A296B912208721CF00F6AFBD /* Pfp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A296B911208721CF00F6AFBD /* Pfp.xcassets */; };
 		A296B9192087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B9172087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.beta.plist */; };
 		A296B91A2087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B9182087A6B900F6AFBD /* GoogleService-Info-social.entourage.pfpios.plist */; };
@@ -1231,11 +897,9 @@
 		A296B9232088D99700F6AFBD /* UIColor+pfp.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B9222088D99700F6AFBD /* UIColor+pfp.m */; };
 		A296B9242088D99700F6AFBD /* UIColor+pfp.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B9222088D99700F6AFBD /* UIColor+pfp.m */; };
 		A296B92A2089DE4300F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
-		A296B92B2089DE4400F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
 		A296B92D208A08E800F6AFBD /* PfpLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A296B92C208A08E800F6AFBD /* PfpLaunchScreen.storyboard */; };
 		A296B931208DFE8A00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
 		A296B932208E06AA00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
-		A296B933208E06AB00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
 		A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A296B93C2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
 		A2A0AAD4215ACE6A000AE5EF /* OTChangeStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A0AAD3215ACE6A000AE5EF /* OTChangeStatusCell.m */; };
@@ -1244,13 +908,10 @@
 		A2A2BC94209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC90209AF57A00AA4FC8 /* OTPfpMenuViewController.swift */; };
 		A2A2BC96209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */; };
 		A2A2BC97209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */; };
-		A2A2BC98209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A2BC92209AF57A00AA4FC8 /* OTLogoutViewCell.swift */; };
 		A2A2BC9A209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
 		A2A2BC9B209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
-		A2A2BC9C209AF5F000AA4FC8 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2A2BC99209AF5F000AA4FC8 /* ApiKeys.plist */; };
 		A2A777EE20AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
 		A2A777EF20AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
-		A2A777F020AF06EC006D2772 /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A777ED20AF06EC006D2772 /* String+Localization.swift */; };
 		A2C9EFD62147FB7700357FD9 /* PfpIntro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2C9EFD52147FB7700357FD9 /* PfpIntro.storyboard */; };
 		A2C9EFD72147FB7700357FD9 /* PfpIntro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2C9EFD52147FB7700357FD9 /* PfpIntro.storyboard */; };
 		A2C9EFD92147FD7400357FD9 /* PfpStartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C9EFD82147FD7400357FD9 /* PfpStartupViewController.swift */; };
@@ -1283,10 +944,11 @@
 		A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
+		E26723B7A7CE9F68D2D57A75 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6B92CAC419A7461C004E8C9B /* PBXContainerItemProxy */ = {
+		376F74DC23EC6905008168DB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6B92CA9619A7461C004E8C9B /* Project object */;
 			proxyType = 1;
@@ -1329,6 +991,14 @@
 		37614CA322896C35000A522D /* OTModalPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTModalPopupViewController.xib; sourceTree = "<group>"; };
 		376C247E2208A60900AA0DEB /* OTGradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTGradientView.h; sourceTree = "<group>"; };
 		376C247F2208A60900AA0DEB /* OTGradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGradientView.m; sourceTree = "<group>"; };
+		376F74CE23EC6802008168DB /* OTGroupSharingFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTGroupSharingFormatter.h; sourceTree = "<group>"; };
+		376F74CF23EC6802008168DB /* OTGroupSharingFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGroupSharingFormatter.m; sourceTree = "<group>"; };
+		376F74D723EC6904008168DB /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		376F74DB23EC6905008168DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		376F74E223EC6999008168DB /* OTGroupSharingFormatterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGroupSharingFormatterTests.m; sourceTree = "<group>"; };
+		376F74E423EC6E41008168DB /* Model */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Model; sourceTree = "<group>"; };
+		376F74EB23ED93F3008168DB /* OTCrashlyticsHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTCrashlyticsHelper.h; sourceTree = "<group>"; };
+		376F74EC23ED93F4008168DB /* OTCrashlyticsHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTCrashlyticsHelper.m; sourceTree = "<group>"; };
 		379D380222848819007ED1E1 /* OTThemedText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTThemedText.h; sourceTree = "<group>"; };
 		379D380322848819007ED1E1 /* OTThemedText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTThemedText.m; sourceTree = "<group>"; };
 		379D380622848E50007ED1E1 /* AuthenticationModal.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthenticationModal.xib; sourceTree = "<group>"; };
@@ -1343,21 +1013,18 @@
 		37D5D4BD2268AF5D009DFE1C /* OTRoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTRoundedButton.h; sourceTree = "<group>"; };
 		37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTRoundedButton.m; sourceTree = "<group>"; };
 		43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F6B6684041C4D7E0C0F97FD /* Pods-UnitTests.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.store.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.store.xcconfig"; sourceTree = "<group>"; };
 		5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pfp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B1A847819E822150020FB93 /* pois_categories_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pois_categories_mock.json; sourceTree = "<group>"; };
 		6B4930BD19A769EB00DA7EE0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		6B4930DA19A779F200DA7EE0 /* poi_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi_mock.json; sourceTree = "<group>"; };
-		6B89EF9E19E7E8B6008F2600 /* poi_category_mock.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = poi_category_mock.json; sourceTree = "<group>"; };
 		6B92CA9E19A7461C004E8C9B /* Ent-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ent-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B92CAA119A7461C004E8C9B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6B92CAA519A7461C004E8C9B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6B92CAA919A7461C004E8C9B /* entourage-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "entourage-Info.plist"; sourceTree = "<group>"; };
-		6B92CABF19A7461C004E8C9B /* entourageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = entourageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B92CAC019A7461C004E8C9B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		6B92CAC819A7461C004E8C9B /* entourageTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "entourageTests-Info.plist"; sourceTree = "<group>"; };
 		6DE4A491763D292ADECF1896 /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourageTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7749E11ECDB2466FB003823D /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		79016BE7EDCE7EC3FA1F7032 /* Pods-entourageTests.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.store.xcconfig"; sourceTree = "<group>"; };
 		792CA159C4CE913520D77D5E /* Pods-pfp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.debug.xcconfig"; sourceTree = "<group>"; };
 		96099C6521ADA099008A959B /* OTGMSAutoCompleteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTGMSAutoCompleteViewController.m; sourceTree = "<group>"; };
@@ -2174,11 +1841,21 @@
 		A466D9EB1BD55201EACF4D5A /* Pods-pfp.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pfp.beta.xcconfig"; path = "Pods/Target Support Files/Pods-pfp/Pods-pfp.beta.xcconfig"; sourceTree = "<group>"; };
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AABDEECD9EA3187207D065D2 /* Pods-UnitTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.beta.xcconfig"; sourceTree = "<group>"; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		E869ABEB0224DAD93339CB1B /* Pods-entourageTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.beta.xcconfig"; sourceTree = "<group>"; };
+		EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		376F74D423EC6904008168DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E26723B7A7CE9F68D2D57A75 /* Pods_UnitTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6B92CA9B19A7461C004E8C9B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2192,17 +1869,6 @@
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
 				6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6B92CABC19A7461C004E8C9B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6B92CAC119A7461C004E8C9B /* XCTest.framework in Frameworks */,
-				6B92CAC319A7461C004E8C9B /* UIKit.framework in Frameworks */,
-				6B92CAC219A7461C004E8C9B /* Foundation.framework in Frameworks */,
-				1ECCA8ADF8F11C290527E9DC /* Pods_entourageTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2235,6 +1901,15 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
+		376F74D823EC6904008168DB /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				376F74E223EC6999008168DB /* OTGroupSharingFormatterTests.m */,
+				376F74DB23EC6905008168DB /* Info.plist */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
 		37BFD0A8228040B200EBF2D9 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -2257,18 +1932,11 @@
 				792CA159C4CE913520D77D5E /* Pods-pfp.debug.xcconfig */,
 				A466D9EB1BD55201EACF4D5A /* Pods-pfp.beta.xcconfig */,
 				A19BDADC422EDAB56B022976 /* Pods-pfp.store.xcconfig */,
+				7749E11ECDB2466FB003823D /* Pods-UnitTests.debug.xcconfig */,
+				AABDEECD9EA3187207D065D2 /* Pods-UnitTests.beta.xcconfig */,
+				4F6B6684041C4D7E0C0F97FD /* Pods-UnitTests.store.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		6B4930CF19A773EC00DA7EE0 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				6B4930DA19A779F200DA7EE0 /* poi_mock.json */,
-				6B89EF9E19E7E8B6008F2600 /* poi_category_mock.json */,
-				6B1A847819E822150020FB93 /* pois_categories_mock.json */,
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 		6B92CA9519A7461C004E8C9B = {
@@ -2278,7 +1946,7 @@
 				A24199B52084F87100BC7466 /* Shared */,
 				6B92CAA719A7461C004E8C9B /* entourage */,
 				A296B8E520871E0900F6AFBD /* pfp */,
-				6B92CAC619A7461C004E8C9B /* entourageTests */,
+				376F74D823EC6904008168DB /* UnitTests */,
 				6B92CAA019A7461C004E8C9B /* Frameworks */,
 				6B92CA9F19A7461C004E8C9B /* Products */,
 				53280EA9BCEBA15D998CCED4 /* Pods */,
@@ -2289,8 +1957,8 @@
 			isa = PBXGroup;
 			children = (
 				6B92CA9E19A7461C004E8C9B /* Ent-Beta.app */,
-				6B92CABF19A7461C004E8C9B /* entourageTests.xctest */,
 				A296B8E320871CFC00F6AFBD /* Voi-Beta.app */,
+				376F74D723EC6904008168DB /* UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2310,6 +1978,7 @@
 				43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */,
 				6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */,
 				5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */,
+				EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2330,23 +1999,6 @@
 			children = (
 				1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */,
 				6B92CAA919A7461C004E8C9B /* entourage-Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		6B92CAC619A7461C004E8C9B /* entourageTests */ = {
-			isa = PBXGroup;
-			children = (
-				6B4930CF19A773EC00DA7EE0 /* Assets */,
-				6B92CAC719A7461C004E8C9B /* Supporting Files */,
-			);
-			path = entourageTests;
-			sourceTree = "<group>";
-		};
-		6B92CAC719A7461C004E8C9B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6B92CAC819A7461C004E8C9B /* entourageTests-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2481,6 +2133,7 @@
 				A202E81A2085D2C40058F32C /* OTEncounter.h */,
 				A202E8412085D2C40058F32C /* OTEncounter.m */,
 				A202E84E2085D2C40058F32C /* OTEntourage.h */,
+				376F74E423EC6E41008168DB /* Model */,
 				A202E81C2085D2C40058F32C /* OTEntourage.m */,
 				A202E8392085D2C40058F32C /* OTEntourageInvitation.h */,
 				A202E8152085D2C40058F32C /* OTEntourageInvitation.m */,
@@ -3093,6 +2746,10 @@
 				96099C6521ADA099008A959B /* OTGMSAutoCompleteViewController.m */,
 				96099C6821ADA0C3008A959B /* OTGMSAutoCompleteViewController.h */,
 				96136FFD21C92656003C1581 /* UIDevice.swift */,
+				376F74CE23EC6802008168DB /* OTGroupSharingFormatter.h */,
+				376F74CF23EC6802008168DB /* OTGroupSharingFormatter.m */,
+				376F74EB23ED93F3008168DB /* OTCrashlyticsHelper.h */,
+				376F74EC23ED93F4008168DB /* OTCrashlyticsHelper.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -3940,6 +3597,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		376F74D623EC6904008168DB /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 376F74DE23EC6905008168DB /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				1B651FE8E21C8BE00E3F527A /* [CP] Check Pods Manifest.lock */,
+				376F74D323EC6904008168DB /* Sources */,
+				376F74D423EC6904008168DB /* Frameworks */,
+				376F74D523EC6904008168DB /* Resources */,
+				AFF67348AEAE69FD422500C5 /* [CP] Embed Pods Frameworks */,
+				22EB38F0DC0ED6229A232C0B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				376F74DD23EC6905008168DB /* PBXTargetDependency */,
+			);
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = 376F74D723EC6904008168DB /* UnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6B92CA9D19A7461C004E8C9B /* entourage */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6B92CAD019A7461C004E8C9B /* Build configuration list for PBXNativeTarget "entourage" */;
@@ -3961,26 +3639,6 @@
 			productName = entourage;
 			productReference = 6B92CA9E19A7461C004E8C9B /* Ent-Beta.app */;
 			productType = "com.apple.product-type.application";
-		};
-		6B92CABE19A7461C004E8C9B /* entourageTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6B92CAD319A7461C004E8C9B /* Build configuration list for PBXNativeTarget "entourageTests" */;
-			buildPhases = (
-				8BB937377C51714611858F51 /* [CP] Check Pods Manifest.lock */,
-				6B92CABB19A7461C004E8C9B /* Sources */,
-				6B92CABC19A7461C004E8C9B /* Frameworks */,
-				6B92CABD19A7461C004E8C9B /* Resources */,
-				9B95D715EC2077A1D3EEB380 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6B92CAC519A7461C004E8C9B /* PBXTargetDependency */,
-			);
-			name = entourageTests;
-			productName = entourageTests;
-			productReference = 6B92CABF19A7461C004E8C9B /* entourageTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		A296B75020871CFC00F6AFBD /* pfp */ = {
 			isa = PBXNativeTarget;
@@ -4014,6 +3672,12 @@
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "OCTO Technology";
 				TargetAttributes = {
+					376F74D623EC6904008168DB = {
+						CreatedOnToolsVersion = 11.3.1;
+						DevelopmentTeam = RT7X9LLTN6;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 6B92CA9D19A7461C004E8C9B;
+					};
 					6B92CA9D19A7461C004E8C9B = {
 						DevelopmentTeam = RT7X9LLTN6;
 						LastSwiftMigration = 0920;
@@ -4033,11 +3697,6 @@
 							};
 						};
 					};
-					6B92CABE19A7461C004E8C9B = {
-						DevelopmentTeam = RT7X9LLTN6;
-						ProvisioningStyle = Manual;
-						TestTargetID = 6B92CA9D19A7461C004E8C9B;
-					};
 					A296B75020871CFC00F6AFBD = {
 						DevelopmentTeam = RT7X9LLTN6;
 						LastSwiftMigration = 0920;
@@ -4047,10 +3706,9 @@
 			};
 			buildConfigurationList = 6B92CA9919A7461C004E8C9B /* Build configuration list for PBXProject "entourage" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				fr,
@@ -4062,12 +3720,19 @@
 			targets = (
 				6B92CA9D19A7461C004E8C9B /* entourage */,
 				A296B75020871CFC00F6AFBD /* pfp */,
-				6B92CABE19A7461C004E8C9B /* entourageTests */,
+				376F74D623EC6904008168DB /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		376F74D523EC6904008168DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6B92CA9C19A7461C004E8C9B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4153,42 +3818,6 @@
 				A202E7CD2085CFC40058F32C /* categories.json in Resources */,
 				A21D64AD2085E8B400EF8E0E /* Nowhere.gpx in Resources */,
 				A21D65BF2085FDAA00EF8E0E /* GuideSolidarity.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6B92CABD19A7461C004E8C9B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A202E7F82085CFC40058F32C /* SF-UI-Text-Semibold.otf in Resources */,
-				A202E7D42085CFC40058F32C /* Entourage.clr in Resources */,
-				6B4930DB19A779F200DA7EE0 /* poi_mock.json in Resources */,
-				A202E7D22085CFC40058F32C /* category.rtf in Resources */,
-				A202E7F22085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */,
-				A202E7FA2085CFC40058F32C /* DINMittelschrift-Regular.ttf in Resources */,
-				6B89EF9F19E7E8B6008F2600 /* poi_category_mock.json in Resources */,
-				A202E7DA2085CFC40058F32C /* categoryJson.json in Resources */,
-				A202E7DE2085CFC40058F32C /* SF-UI-Text-SemiboldItalic.otf in Resources */,
-				A202E7D62085CFC40058F32C /* Localizable.strings in Resources */,
-				A202E7E62085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */,
-				A202E7D02085CFC40058F32C /* logo_black.png in Resources */,
-				A202E7F02085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
-				A202E7EC2085CFC40058F32C /* SF-UI-Text-Light.otf in Resources */,
-				A202E7EA2085CFC40058F32C /* SF-UI-Text-BoldItalic.otf in Resources */,
-				A296B90F2087218700F6AFBD /* Entourage.xcassets in Resources */,
-				A202E7F62085CFC40058F32C /* SF-UI-Text-Heavy.otf in Resources */,
-				A202E7E22085CFC40058F32C /* SF-UI-Text-RegularItalic.otf in Resources */,
-				A202E7D82085CFC40058F32C /* SharedImages.xcassets in Resources */,
-				6B1A847919E822150020FB93 /* pois_categories_mock.json in Resources */,
-				A202E7E82085CFC40058F32C /* SF-UI-Text-Regular.otf in Resources */,
-				A202E7EE2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
-				A202E7FC2085CFC40058F32C /* CountryList.csv in Resources */,
-				A202E7F42085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */,
-				A202E7CE2085CFC40058F32C /* categories.json in Resources */,
-				A202E7E42085CFC40058F32C /* SF-UI-Text-Bold.otf in Resources */,
-				A202E7DC2085CFC40058F32C /* InfoPlist.strings in Resources */,
-				A202E7E02085CFC40058F32C /* SF-UI-Text-Ultrathin.otf in Resources */,
-				A2A2BC9C209AF5F000AA4FC8 /* ApiKeys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4325,6 +3954,54 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		1B651FE8E21C8BE00E3F527A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UnitTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		22EB38F0DC0ED6229A232C0B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInAppMessagingDisplay/InAppMessagingDisplayResources.bundle",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppMessagingDisplayResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		34A63FBA43859415DF1BB474 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4375,42 +4052,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8BB937377C51714611858F51 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-entourageTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9B95D715EC2077A1D3EEB380 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/OCMock/OCMock.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A296B75120871CFC00F6AFBD /* [CP] Check Pods Manifest.lock */ = {
@@ -4525,6 +4166,62 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 2eca3faf46139913c216b9ee9cf8bee49e70fe20 1bfceded38224045396fd555bbf83b4146920c7cd7dac463bb365c70fe9c6b78";
 		};
+		AFF67348AEAE69FD422500C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Mixpanel/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SWRevealViewController/SWRevealViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/kingpin/kingpin.framework",
+				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JVFloatLabeledTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWRevealViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/kingpin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libPhoneNumber_iOS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4560,6 +4257,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		376F74D323EC6904008168DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				376F74EF23ED93F4008168DB /* OTCrashlyticsHelper.m in Sources */,
+				376F74E323EC6999008168DB /* OTGroupSharingFormatterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6B92CA9A19A7461C004E8C9B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4792,6 +4498,7 @@
 				A202EB272085D2C70058F32C /* OTMapCell.m in Sources */,
 				A202ECFB2085D2C80058F32C /* OTEntourageStateTransition.m in Sources */,
 				A202ECA72085D2C80058F32C /* OTMembersCellProvider.m in Sources */,
+				376F74ED23ED93F4008168DB /* OTCrashlyticsHelper.m in Sources */,
 				96136FFE21C92656003C1581 /* UIDevice.swift in Sources */,
 				A202ECBB2085D2C80058F32C /* OTPhotoPickerBehavior.m in Sources */,
 				A202EBF72085D2C80058F32C /* OTAboutTableViewCell.m in Sources */,
@@ -4891,6 +4598,7 @@
 				A202ED192085D2C80058F32C /* OTTourMapHandler.m in Sources */,
 				A2CCF2FA2167444B00AD6237 /* OTAddActionSecondConsentViewController.m in Sources */,
 				A202EB2F2085D2C70058F32C /* OTContactPhoneCell.m in Sources */,
+				376F74D023EC6802008168DB /* OTGroupSharingFormatter.m in Sources */,
 				A202EC532085D2C80058F32C /* OTToggleGroupViewBehavior.m in Sources */,
 				A202EC332085D2C80058F32C /* OTEntourageRenderer.m in Sources */,
 				A202EB792085D2C80058F32C /* OTCalloutViewController.m in Sources */,
@@ -4938,325 +4646,6 @@
 				A202ECAF2085D2C80058F32C /* OTStatusChangedBehavior.m in Sources */,
 				A202EB912085D2C80058F32C /* OTUserEditViewController.m in Sources */,
 				A202ECE12085D2C80058F32C /* UIImageView+entourage.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6B92CABB19A7461C004E8C9B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A202EC1E2085D2C80058F32C /* UIViewController+OTEmptyBackButton.m in Sources */,
-				A202EC6C2085D2C80058F32C /* OTInvitationsCellProviderBehavior.m in Sources */,
-				A202EC022085D2C80058F32C /* OTMixpanelService.m in Sources */,
-				A202EC842085D2C80058F32C /* OTFeedItemsFiltersTableDataSource.m in Sources */,
-				A202EC5A2085D2C80058F32C /* OTBottomScrollBehavior.m in Sources */,
-				A202EB6E2085D2C80058F32C /* OTPicturePreviewViewController.m in Sources */,
-				A202EC3C2085D2C80058F32C /* OTStartTourAnnotationView.m in Sources */,
-				A202EB9C2085D2C80058F32C /* OTGeolocationRightsViewController.m in Sources */,
-				A202EAF42085D2C70058F32C /* OTEncounter.m in Sources */,
-				A202EB8E2085D2C80058F32C /* OTTourCreatorViewController.m in Sources */,
-				A202ECDA2085D2C80058F32C /* UIButton+entourage.m in Sources */,
-				A2A2BC98209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */,
-				A202ECE42085D2C80058F32C /* OTOnboardingJoinService.m in Sources */,
-				A202ECEC2085D2C80058F32C /* OTOngoingTourService.m in Sources */,
-				A202ED2C2085D2C80058F32C /* NSAttributedString+OTBuilder.m in Sources */,
-				A202EBBE2085D2C80058F32C /* OTMapView.m in Sources */,
-				A202EB562085D2C80058F32C /* OTEntourageDisclaimerViewController.m in Sources */,
-				A202EC5E2085D2C80058F32C /* OTDisclaimerBaseBehavior.m in Sources */,
-				A202EAFC2085D2C70058F32C /* OTAnnouncement.m in Sources */,
-				A202EB9E2085D2C80058F32C /* OTConfirmationViewController.m in Sources */,
-				A202EAFA2085D2C70058F32C /* OTMyEntouragesFilter.m in Sources */,
-				A202EC162085D2C80058F32C /* OTTourService.m in Sources */,
-				A202ECF62085D2C80058F32C /* OTCategoryFromJsonService.m in Sources */,
-				A202EACE2085D2C70058F32C /* OTMenuItem.m in Sources */,
-				A202EB162085D2C70058F32C /* OTMyEntouragesViewController.m in Sources */,
-				A202ECB42085D2C80058F32C /* OTNextStatusButtonBehavior.m in Sources */,
-				A202EB4E2085D2C80058F32C /* OTLocationSearchTableViewController.m in Sources */,
-				A202ED042085D2C80058F32C /* OTEntourageJoinerDelegate.m in Sources */,
-				A202ECC62085D2C80058F32C /* OTCloseKeyboardOnTapBehavior.m in Sources */,
-				A202ED0E2085D2C80058F32C /* OTTourStateTransition.m in Sources */,
-				A202EB1E2085D2C70058F32C /* OTInviteSourceViewController.m in Sources */,
-				A202EBDA2085D2C80058F32C /* OTStartupViewController.m in Sources */,
-				A202EB942085D2C80058F32C /* OTFeedItemJoinMessageController.m in Sources */,
-				A202EB402085D2C80058F32C /* OTPlaceholderCell.m in Sources */,
-				A202EB582085D2C80058F32C /* OTAskMoreViewController.m in Sources */,
-				A202EBA22085D2C80058F32C /* OTGuideDetailsViewController.m in Sources */,
-				A202EAD82085D2C70058F32C /* OTPoi.m in Sources */,
-				A202EB422085D2C80058F32C /* OTJoinRejectedCell.m in Sources */,
-				A202ECD22085D2C80058F32C /* OTNewsFeedsSourceBehavior.m in Sources */,
-				A202EC522085D2C80058F32C /* OTCustomSegmentedBehavior.m in Sources */,
-				A202EC6A2085D2C80058F32C /* OTCollectionCellProviderBehavior.m in Sources */,
-				A202EC9A2085D2C80058F32C /* OTMessageTableCellProviderBehavior.m in Sources */,
-				A202EC502085D2C80058F32C /* OTShareFeedItemBehavior.m in Sources */,
-				A202ED282085D2C80058F32C /* NSError+OTErrorData.m in Sources */,
-				A202EC482085D2C80058F32C /* OTHeatzonesCollectionSource.m in Sources */,
-				A202EAF82085D2C70058F32C /* OTAddressBookPhone.m in Sources */,
-				A202EBAC2085D2C80058F32C /* OTFeedItemFiltersViewController.m in Sources */,
-				A202EB7A2085D2C80058F32C /* OTCalloutViewController.m in Sources */,
-				A202EC282085D2C80058F32C /* NSBundle+entourage.m in Sources */,
-				A202EAEA2085D2C70058F32C /* OTSavedFilter.m in Sources */,
-				A202ECCE2085D2C80058F32C /* OTOverlayFeederBehavior.m in Sources */,
-				A202EC7C2085D2C80058F32C /* OTFilteredDataSourceBehavior.m in Sources */,
-				A202EBD22085D2C80058F32C /* OTUserEmailViewController.m in Sources */,
-				A202EB342085D2C80058F32C /* OTInviteSuccessViewController.m in Sources */,
-				A202EB6C2085D2C80058F32C /* OTAnnouncementCell.m in Sources */,
-				A202EC3A2085D2C80058F32C /* OTEncounterAnnotation.m in Sources */,
-				A202EB642085D2C80058F32C /* OTOptionsViewController.m in Sources */,
-				A202ECCA2085D2C80058F32C /* OTFeedItemDetailsBehavior.m in Sources */,
-				A202EBD62085D2C80058F32C /* OTUserTableConfigurator.m in Sources */,
-				A202E80C2085D0FE0058F32C /* OTAppDelegate.m in Sources */,
-				A202EAEC2085D2C70058F32C /* OTSolidarityGuideFilter.m in Sources */,
-				A202EAF02085D2C70058F32C /* OTUser.m in Sources */,
-				A202EBB42085D2C80058F32C /* OTFeedItemsFilterCellBase.m in Sources */,
-				A202EAE02085D2C70058F32C /* OTMyFeedMessage.m in Sources */,
-				A202ED322085D2C80058F32C /* OTVersionInfo.m in Sources */,
-				A202ED102085D2C80058F32C /* OTTourStateInfo.m in Sources */,
-				A202ED022085D2C80058F32C /* OTEntourageMapHandler.m in Sources */,
-				A202EC222085D2C80058F32C /* OTLocationManager.m in Sources */,
-				A202EAFE2085D2C70058F32C /* OTFeedItemStatus.m in Sources */,
-				A202EC0A2085D2C80058F32C /* OTEntourageService.m in Sources */,
-				A202EACA2085D2C70058F32C /* OTFeedItemFilter.m in Sources */,
-				A202EC642085D2C80058F32C /* OTSolidarityGuideFilteredDataSource.m in Sources */,
-				A202EB6A2085D2C80058F32C /* OTDisclaimerViewController.m in Sources */,
-				A202EB8C2085D2C80058F32C /* OTSolidarityGuideFilterCell.m in Sources */,
-				A202EB542085D2C80058F32C /* OTMyMeetingsViewController.m in Sources */,
-				A202ED122085D2C80058F32C /* OTTourJoinerDelegate.m in Sources */,
-				A202EB062085D2C70058F32C /* OTSavedMyEntouragesFilter.m in Sources */,
-				A202ED0A2085D2C80058F32C /* OTTourMessaging.m in Sources */,
-				A202EC822085D2C80058F32C /* OTSolidarityGuideFiltersCellProvider.m in Sources */,
-				A202EAE62085D2C70058F32C /* OTFeedItemFilters.m in Sources */,
-				A202ECFC2085D2C80058F32C /* OTEntourageStateTransition.m in Sources */,
-				A202ED302085D2C80058F32C /* NSDate+ui.m in Sources */,
-				A202EB182085D2C70058F32C /* OTManageInvitationViewController.m in Sources */,
-				A202EB822085D2C80058F32C /* OTConfirmCloseViewController.m in Sources */,
-				A202EB8A2085D2C80058F32C /* OTMenuViewController.m in Sources */,
-				A202EB262085D2C70058F32C /* OTMemberCountCell.m in Sources */,
-				A202EB7E2085D2C80058F32C /* OTUserViewController.m in Sources */,
-				A202ECAC2085D2C80058F32C /* OTSummaryProviderBehavior.m in Sources */,
-				A202EB082085D2C70058F32C /* OTTour.m in Sources */,
-				A202ED242085D2C80058F32C /* NSString+Validators.m in Sources */,
-				A202EBAE2085D2C80058F32C /* OTFeedItemsFilterCell.m in Sources */,
-				A202EBB82085D2C80058F32C /* UIViewController+menu.m in Sources */,
-				A202EB522085D2C80058F32C /* OTTourOptionsViewController.m in Sources */,
-				A202EBD02085D2C80058F32C /* OTUserNameViewController.m in Sources */,
-				A202EC2C2085D2C80058F32C /* OTDebugLog.m in Sources */,
-				A202EC442085D2C80058F32C /* OTMyEntouragesOptionsBehavior.m in Sources */,
-				A202EB102085D2C70058F32C /* OTInvitationsCollectionViewCell.m in Sources */,
-				A202ECE22085D2C80058F32C /* UIImageView+entourage.m in Sources */,
-				A202ED2A2085D2C80058F32C /* NSUserDefaults+OT.m in Sources */,
-				A202EB682085D2C80058F32C /* OTNewsFeedCell.m in Sources */,
-				A202EC582085D2C80058F32C /* OTScrollPinBehavior.m in Sources */,
-				A202EB202085D2C70058F32C /* OTDescriptionCell.m in Sources */,
-				A202EB722085D2C80058F32C /* OTEditEntourageTitleViewController.m in Sources */,
-				A202EB242085D2C70058F32C /* OTMembersCell.m in Sources */,
-				A202ECF22085D2C80058F32C /* OTPushNotificationsData.m in Sources */,
-				A202EC882085D2C80058F32C /* OTContactsTableCellProviderBehavior.m in Sources */,
-				A202EC362085D2C80058F32C /* OTMapAnnotationProviderBehavior.m in Sources */,
-				A202EC4A2085D2C80058F32C /* OTInvitationChangedBehavior.m in Sources */,
-				A202EB5A2085D2C80058F32C /* OTTutorialViewController.m in Sources */,
-				A202EC042085D2C80058F32C /* OTFeedsService.m in Sources */,
-				A202EBC42085D2C80058F32C /* OTBaseMapDelegate.m in Sources */,
-				A202EBCE2085D2C80058F32C /* OTUserEditPasswordViewController.m in Sources */,
-				A202ECF02085D2C80058F32C /* OTLogger.m in Sources */,
-				A202ECE82085D2C80058F32C /* OTDeepLinkService.m in Sources */,
-				A202EC662085D2C80058F32C /* OTDistributedDelegateBehavior.m in Sources */,
-				A202EC802085D2C80058F32C /* OTAssociationsCellProviderBehavior.m in Sources */,
-				A202EB482085D2C80058F32C /* OTEncounterCell.m in Sources */,
-				A202EB3A2085D2C80058F32C /* OTChatDateCell.m in Sources */,
-				A202EC742085D2C80058F32C /* OTBehavior.m in Sources */,
-				A202EBE22085D2C80058F32C /* OTPhoneViewController.m in Sources */,
-				A202EC942085D2C80058F32C /* OTSolidarityGuideFiltersTableDataSource.m in Sources */,
-				A202EC9C2085D2C80058F32C /* OTGroupedTableDataSourceBehavior.m in Sources */,
-				A202EB3E2085D2C80058F32C /* OTMessageReceivedCell.m in Sources */,
-				A202EC682085D2C80058F32C /* OTTapViewBehavior.m in Sources */,
-				A202EC862085D2C80058F32C /* OTFeedItemFiltersCellProvider.m in Sources */,
-				A202EC202085D2C80058F32C /* NSNotification+entourage.m in Sources */,
-				A202EB002085D2C70058F32C /* OTFeedItemMessage.m in Sources */,
-				A202EB2C2085D2C70058F32C /* OTMapViewController.m in Sources */,
-				A202EB2A2085D2C70058F32C /* OTActiveFeedItemViewController.m in Sources */,
-				A202EC8E2085D2C80058F32C /* OTDataSourceBehavior.m in Sources */,
-				A202ED1A2085D2C80058F32C /* OTTourMapHandler.m in Sources */,
-				A202ED062085D2C80058F32C /* OTEntourageMessaging.m in Sources */,
-				A202ECBC2085D2C80058F32C /* OTPhotoPickerBehavior.m in Sources */,
-				A202ED162085D2C80058F32C /* OTEditEncounterBehavior.m in Sources */,
-				A202ECA82085D2C80058F32C /* OTMembersCellProvider.m in Sources */,
-				A202ECB02085D2C80058F32C /* OTStatusChangedBehavior.m in Sources */,
-				A202EB862085D2C80058F32C /* OTGuideMapDelegate.m in Sources */,
-				A202ECB62085D2C80058F32C /* OTStatusBehavior.m in Sources */,
-				A202EB702085D2C80058F32C /* OTUserPictureViewController.m in Sources */,
-				A202EC4C2085D2C80058F32C /* OTToggleVisibleBehavior.m in Sources */,
-				A202EC762085D2C80058F32C /* OTMyEntouragesDataSource.m in Sources */,
-				A202EBE42085D2C80058F32C /* OTToursMapDelegate.m in Sources */,
-				A202EC1C2085D2C80058F32C /* OTPictureUploadService.m in Sources */,
-				A202EC782085D2C80058F32C /* OTMyEntouragesCellProvider.m in Sources */,
-				A202ECB22085D2C80058F32C /* OTEditEntourageTableSource.m in Sources */,
-				A202EB0A2085D2C70058F32C /* OTAboutItem.m in Sources */,
-				A202EBDE2085D2C80058F32C /* OTWelcomeViewController.m in Sources */,
-				A202EBF42085D2C80058F32C /* OTFilterRadioButton.m in Sources */,
-				A202EC9E2085D2C80058F32C /* OTPublicInfoTableDataSource.m in Sources */,
-				A202EBE62085D2C80058F32C /* OTQuitFeedItemViewController.m in Sources */,
-				A202EC342085D2C80058F32C /* OTEntourageRenderer.m in Sources */,
-				A202EBE82085D2C80058F32C /* OTEntourageEditItemImageCell.m in Sources */,
-				A202ED002085D2C80058F32C /* OTEntourageChangedHandler.m in Sources */,
-				A202EAEE2085D2C70058F32C /* OTFeedItemTimeframeFilter.m in Sources */,
-				A202EB442085D2C80058F32C /* OTJoinRequestedCell.m in Sources */,
-				A202EADC2085D2C70058F32C /* OTSolidarityGuideFilterItem.m in Sources */,
-				A202ECD42085D2C80058F32C /* OTEditEntourageNavigationBehavior.m in Sources */,
-				A202EAE82085D2C70058F32C /* OTCategoryType.m in Sources */,
-				A202EC542085D2C80058F32C /* OTToggleGroupViewBehavior.m in Sources */,
-				A202EC7E2085D2C80058F32C /* OTAssociationsSourceBehavior.m in Sources */,
-				A202EB662085D2C80058F32C /* OTSettingsViewController.m in Sources */,
-				A202EBF22085D2C80058F32C /* OTFilterCellTableViewCell.m in Sources */,
-				A202ED222085D2C80058F32C /* NSDate+OTFormatter.m in Sources */,
-				A202EB1C2085D2C70058F32C /* OTCreateMeetingViewController.m in Sources */,
-				A202EBDC2085D2C80058F32C /* OTPublicFeedItemViewController.m in Sources */,
-				A202EC002085D2C80058F32C /* OTJSONResponseSerializer.m in Sources */,
-				A202EBEA2085D2C80058F32C /* OnBoardingTextField.swift in Sources */,
-				A202ECAE2085D2C80058F32C /* OTUserProfileBehavior.m in Sources */,
-				A202EC962085D2C80058F32C /* OTMessageTableDataSourceBehavior.m in Sources */,
-				A202EBBA2085D2C80058F32C /* OTMessageViewController.m in Sources */,
-				A202EC402085D2C80058F32C /* OTMapDelegateBehavior.m in Sources */,
-				A202EB322085D2C80058F32C /* OTInviteByPhoneViewController.m in Sources */,
-				A202ECC22085D2C80058F32C /* OTSignalEntourageBehavior.m in Sources */,
-				A202EB762085D2C80058F32C /* OTWebViewController.m in Sources */,
-				A202EC902085D2C80058F32C /* OTTableCellProviderBehavior.m in Sources */,
-				A202EB5E2085D2C80058F32C /* OTTutorial3ViewController.m in Sources */,
-				A202EAD42085D2C70058F32C /* OTFeedItemTimelinePoint.m in Sources */,
-				A202ED2E2085D2C80058F32C /* NSDictionary+Parsing.m in Sources */,
-				A202ED1E2085D2C80058F32C /* OTAnnouncementFactory.m in Sources */,
-				A202ECFE2085D2C80058F32C /* OTEntourageFactory.m in Sources */,
-				A202EB962085D2C80058F32C /* OTFeedItemJoinOptionsViewController.m in Sources */,
-				A202EAE22085D2C70058F32C /* OTCategory.m in Sources */,
-				A202EBF02085D2C80058F32C /* OTMenuTableViewCell.m in Sources */,
-				A202EC382085D2C80058F32C /* OTStartTourAnnotation.m in Sources */,
-				A202EAD22085D2C70058F32C /* OTEntourageInvitation.m in Sources */,
-				A202EB5C2085D2C80058F32C /* OTTutorial1ViewController.m in Sources */,
-				A202EC262085D2C80058F32C /* UIBarButtonItem+factory.m in Sources */,
-				A202ECE62085D2C80058F32C /* OTUnreadMessagesService.m in Sources */,
-				A202EBF62085D2C80058F32C /* OTTextWithCount.m in Sources */,
-				A202EB842085D2C80058F32C /* OTCategoryEditCell.m in Sources */,
-				A202EBEC2085D2C80058F32C /* OTTextView.m in Sources */,
-				A202EBBC2085D2C80058F32C /* OTAboutMeViewController.m in Sources */,
-				A202ECC42085D2C80058F32C /* OTOnboardingNavigationBehavior.m in Sources */,
-				A202EAD02085D2C70058F32C /* OTNewsFeedsFilter.m in Sources */,
-				A202EC2A2085D2C80058F32C /* UIBarButtonItem+Badge.m in Sources */,
-				A202EB382085D2C80058F32C /* OTMessageSentCell.m in Sources */,
-				A202EAD62085D2C70058F32C /* OTEntourage.m in Sources */,
-				A202EC5C2085D2C80058F32C /* OTEncounterDisclaimerBehavior.m in Sources */,
-				A202EBA82085D2C80058F32C /* OTPopupViewController.swift in Sources */,
-				A24EA3882101D7A50027AB8B /* OTAddress.m in Sources */,
-				A202EAF62085D2C70058F32C /* OTAddressBookItem.m in Sources */,
-				A202ECB82085D2C80058F32C /* OTInviteBehavior.m in Sources */,
-				A202ED202085D2C80058F32C /* UIScrollView+entourage.m in Sources */,
-				A202EBAA2085D2C80058F32C /* OTLoginViewController.m in Sources */,
-				A202EC0C2085D2C80058F32C /* OTEncounterService.m in Sources */,
-				A202ECA42085D2C80058F32C /* OTMembersDataSource.m in Sources */,
-				A202ECA02085D2C80058F32C /* OTPublicInfoCellProvider.m in Sources */,
-				A202EC7A2085D2C80058F32C /* OTMyEntouragesTableDataSource.m in Sources */,
-				A202EC6E2085D2C80058F32C /* OTInvitationsCollectionSource.m in Sources */,
-				A202EB1A2085D2C70058F32C /* OTSolidarityGuideCell.m in Sources */,
-				A202ECDE2085D2C80058F32C /* UITextField+indentation.m in Sources */,
-				A202EB902085D2C80058F32C /* OTMapOptionsViewController.m in Sources */,
-				A202ECEE2085D2C80058F32C /* OTAddressBookService.m in Sources */,
-				A202EC242085D2C80058F32C /* UILabel+entourage.m in Sources */,
-				A202EB7C2085D2C80058F32C /* OTChangeStateViewController.m in Sources */,
-				A202ED182085D2C80058F32C /* OTTourChangedHandler.m in Sources */,
-				A202EAE42085D2C70058F32C /* OTUnreadMessageCount.m in Sources */,
-				A202EC462085D2C80058F32C /* OTManageInvitationBehavior.m in Sources */,
-				A202EBE02085D2C80058F32C /* OTCodeViewController.m in Sources */,
-				A202EB782085D2C80058F32C /* OTSummaryInfoCell.m in Sources */,
-				A202EAF22085D2C70058F32C /* OTPoiCategory.m in Sources */,
-				A202ED082085D2C80058F32C /* OTEntourageStateInfo.m in Sources */,
-				A202EC562085D2C80058F32C /* OTToggleVisibleWithConstraintsBehavior.m in Sources */,
-				A202ECC02085D2C80058F32C /* OTMailSenderBehavior.m in Sources */,
-				A202EC0E2085D2C80058F32C /* OTAuthService.m in Sources */,
-				A202EC8C2085D2C80058F32C /* OTContactsFilteredDataSourceBehavior.m in Sources */,
-				A202EBEE2085D2C80058F32C /* OTAutoGrowTextView.m in Sources */,
-				A202ED262085D2C80058F32C /* UINavigationController+entourage.m in Sources */,
-				A202ECBA2085D2C80058F32C /* OTJoinBehavior.m in Sources */,
-				A202EBA62085D2C80058F32C /* OTLostCodeViewController.m in Sources */,
-				A202EB462085D2C80058F32C /* OTJoinRequestedNotOwnerCell.m in Sources */,
-				A202EB222085D2C70058F32C /* OTBaseInfoCell.m in Sources */,
-				A202EB802085D2C80058F32C /* OTCategoryViewController.m in Sources */,
-				A202EBC62085D2C80058F32C /* OTMainViewController.m in Sources */,
-				A202EBA02085D2C80058F32C /* OTMeetingCalloutViewController.m in Sources */,
-				A202EBFC2085D2C80058F32C /* OTHTTPRequestManager.m in Sources */,
-				A202EC102085D2C80058F32C /* OTOnboardingService.m in Sources */,
-				A202EB3C2085D2C80058F32C /* OTJoinAcceptedCell.m in Sources */,
-				A202EC982085D2C80058F32C /* OTMessageDataSourceBehavior.m in Sources */,
-				A202EC322085D2C80058F32C /* OTMapDelegateProxyBehavior.m in Sources */,
-				A202EC142085D2C80058F32C /* OTSafariService.m in Sources */,
-				A202EC602085D2C80058F32C /* OTEntourageDisclaimerBehavior.m in Sources */,
-				A2A777F020AF06EC006D2772 /* String+Localization.swift in Sources */,
-				A202EB602085D2C80058F32C /* OTTutorial4ViewController.m in Sources */,
-				A202EBC02085D2C80058F32C /* OTSolidarityGuideFiltersViewController.m in Sources */,
-				A202EC082085D2C80058F32C /* OTInvitationsService.m in Sources */,
-				A202ECAA2085D2C80058F32C /* OTEditEntourageBehavior.m in Sources */,
-				A202ECA62085D2C80058F32C /* OTMembersTableDataSource.m in Sources */,
-				A202EBC82085D2C80058F32C /* OTEditEntourageDescViewController.m in Sources */,
-				A202EB4A2085D2C80058F32C /* OTChatCellBase.m in Sources */,
-				A202EC922085D2C80058F32C /* OTTableDataSourceBehavior.m in Sources */,
-				A202EAC82085D2C70058F32C /* OTFeedItem.m in Sources */,
-				A202ED1C2085D2C80058F32C /* OTAnnouncementUI.m in Sources */,
-				A202ECFA2085D2C80058F32C /* OTEntourageUI.m in Sources */,
-				A202EB2E2085D2C70058F32C /* OTContactInfoCell.m in Sources */,
-				A202ECD02085D2C80058F32C /* OTTapEntourageBehavior.m in Sources */,
-				A202EC302085D2C80058F32C /* UIStoryboard+entourage.m in Sources */,
-				A202EC3E2085D2C80058F32C /* OTCustomAnnotation.m in Sources */,
-				A202EBC22085D2C80058F32C /* OTActivityProvider.m in Sources */,
-				A202EC1A2085D2C80058F32C /* OTPoiService.m in Sources */,
-				A202ECC82085D2C80058F32C /* OTTourCreatorBehavior.m in Sources */,
-				A202EBFA2085D2C80058F32C /* OTFeedItemsTableView.m in Sources */,
-				A202EC702085D2C80058F32C /* OTCollectionViewDataSourceBehavior.m in Sources */,
-				A202ECEA2085D2C80058F32C /* OTMessagingService.m in Sources */,
-				A202ECF82085D2C80058F32C /* OTFeedItemFactory.m in Sources */,
-				A202EC422085D2C80058F32C /* OTHeatzonesCellProviderBehavior.m in Sources */,
-				A202EBCA2085D2C80058F32C /* OTEntourageEditItemCell.m in Sources */,
-				A202ED142085D2C80058F32C /* OTTourUI.m in Sources */,
-				A202ED0C2085D2C80058F32C /* OTTourFactory.m in Sources */,
-				A202EC4E2085D2C80058F32C /* OTAlertViewBehavior.m in Sources */,
-				A202EB0C2085D2C70058F32C /* OTEntourageEditorViewController.m in Sources */,
-				A202EBCC2085D2C80058F32C /* OTSWRevealViewController.m in Sources */,
-				A202EC622085D2C80058F32C /* OTCountryCodePickerViewDataSource.m in Sources */,
-				A202EB122085D2C70058F32C /* OTHeatZoneCollectionViewCell.m in Sources */,
-				A202EC2E2085D2C80058F32C /* MKMapView+entourage.m in Sources */,
-				A202EBF82085D2C80058F32C /* OTAboutTableViewCell.m in Sources */,
-				A296B933208E06AB00F6AFBD /* OTAppState.m in Sources */,
-				A202EADA2085D2C70058F32C /* OTFeedItemJoiner.m in Sources */,
-				A202ECBE2085D2C80058F32C /* OTMailTextCheckBehavior.m in Sources */,
-				A202EACC2085D2C70058F32C /* OTFeedItemAuthor.m in Sources */,
-				A202EBB22085D2C80058F32C /* OTFeedItemsTimeframeCell.m in Sources */,
-				A202EC182085D2C80058F32C /* OTUserService.m in Sources */,
-				A202EBD82085D2C80058F32C /* OTAssociationDetailsViewController.m in Sources */,
-				A202ECF42085D2C80058F32C /* OTPushNotificationsService.m in Sources */,
-				A202EB922085D2C80058F32C /* OTUserEditViewController.m in Sources */,
-				A202EC122085D2C80058F32C /* OTAssociationsService.m in Sources */,
-				A202EBB02085D2C80058F32C /* OTImageFeedItemsFilterCell.m in Sources */,
-				A202EB362085D2C80058F32C /* OTStatusCell.m in Sources */,
-				A202EB9A2085D2C80058F32C /* OTNotificationsRightsViewController.m in Sources */,
-				A202ECD62085D2C80058F32C /* OTGuideInfoBehavior.m in Sources */,
-				A202EBFE2085D2C80058F32C /* OTRequestOperationManager.m in Sources */,
-				A202EB042085D2C70058F32C /* OTAssociation.m in Sources */,
-				A202ECCC2085D2C80058F32C /* OTNoDataBehavior.m in Sources */,
-				A202EB282085D2C70058F32C /* OTMapCell.m in Sources */,
-				A202EB0E2085D2C70058F32C /* OTMyEntouragesOptionsViewController.m in Sources */,
-				A202EADE2085D2C70058F32C /* OTOrganization.m in Sources */,
-				A202ECDC2085D2C80058F32C /* UIImage+processing.m in Sources */,
-				A202EB142085D2C70058F32C /* OTEntouragesTableViewCell.m in Sources */,
-				A202EC722085D2C80058F32C /* OTCollectionSourceBehavior.m in Sources */,
-				A202EB022085D2C70058F32C /* OTTourPoint.m in Sources */,
-				A202ECD82085D2C80058F32C /* UIView+entourage.m in Sources */,
-				A202EC8A2085D2C80058F32C /* OTContactsGroupedTableDataSourceBehavior.m in Sources */,
-				A202EB882085D2C80058F32C /* OTBarButtonView.m in Sources */,
-				A202EBD42085D2C80058F32C /* OTAssociationTableViewCell.m in Sources */,
-				A202EB302085D2C70058F32C /* OTContactPhoneCell.m in Sources */,
-				A202EB622085D2C80058F32C /* OTTutorial2ViewController.m in Sources */,
-				A202ECA22085D2C80058F32C /* OTPublicInfoDataSource.m in Sources */,
-				A202EBB62085D2C80058F32C /* OTAboutViewController.m in Sources */,
-				A202EB4C2085D2C80058F32C /* OTInviteContactsViewController.m in Sources */,
-				A296B92B2089DE4400F6AFBD /* main.m in Sources */,
-				A202EBA42085D2C80058F32C /* OTSocialViewController.m in Sources */,
-				A202ECE02085D2C80058F32C /* UIColor+entourage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5564,6 +4953,7 @@
 				A202E91D20E381D200992C09 /* OTNeighborhoodAnnotation.m in Sources */,
 				A296B84C20871CFC00F6AFBD /* OTFeedItemTimeframeFilter.m in Sources */,
 				A296B84D20871CFC00F6AFBD /* OTEditEntourageDescViewController.m in Sources */,
+				376F74EE23ED93F4008168DB /* OTCrashlyticsHelper.m in Sources */,
 				A296B84E20871CFC00F6AFBD /* OTAssociationsSourceBehavior.m in Sources */,
 				A21E8F2020B5BA8400433606 /* OTUserGroupCell.m in Sources */,
 				96B658B9209A5AF000EB0398 /* UIFont+Extensions.swift in Sources */,
@@ -5616,6 +5006,7 @@
 				A296B87520871CFC00F6AFBD /* OTAnnouncementUI.m in Sources */,
 				A21E8F2420B6AFC300433606 /* OTUnderlinedButton.m in Sources */,
 				A296B87620871CFC00F6AFBD /* OTNewsFeedsSourceBehavior.m in Sources */,
+				376F74D123EC6802008168DB /* OTGroupSharingFormatter.m in Sources */,
 				A296B87720871CFC00F6AFBD /* OTFeedItemFactory.m in Sources */,
 				A296B87820871CFC00F6AFBD /* NSDictionary+Parsing.m in Sources */,
 				A296B87920871CFC00F6AFBD /* OTCloseKeyboardOnTapBehavior.m in Sources */,
@@ -5648,10 +5039,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6B92CAC519A7461C004E8C9B /* PBXTargetDependency */ = {
+		376F74DD23EC6905008168DB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6B92CA9D19A7461C004E8C9B /* entourage */;
-			targetProxy = 6B92CAC419A7461C004E8C9B /* PBXContainerItemProxy */;
+			targetProxy = 376F74DC23EC6905008168DB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -5667,6 +5058,193 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		376F74DF23EC6905008168DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7749E11ECDB2466FB003823D /* Pods-UnitTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalyticsInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnosticsInterop\"",
+					"\"$(CONFIGURATION_TEMP_DIR)/$(PROJECT_NAME).build/DerivedSources\"",
+				);
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = entourage.UnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
+			};
+			name = Debug;
+		};
+		376F74E023EC6905008168DB /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AABDEECD9EA3187207D065D2 /* Pods-UnitTests.beta.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalyticsInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnosticsInterop\"",
+					"\"$(CONFIGURATION_TEMP_DIR)/$(PROJECT_NAME).build/DerivedSources\"",
+				);
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = entourage.UnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Beta;
+		};
+		376F74E123EC6905008168DB /* Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F6B6684041C4D7E0C0F97FD /* Pods-UnitTests.store.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalyticsInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnosticsInterop\"",
+					"\"$(CONFIGURATION_TEMP_DIR)/$(PROJECT_NAME).build/DerivedSources\"",
+				);
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = entourage.UnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Store;
+		};
 		6B92CACE19A7461C004E8C9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5869,52 +5447,6 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
-			};
-			name = Store;
-		};
-		6B92CAD419A7461C004E8C9B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15EC20D970ACDA904DB58803 /* Pods-entourageTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "entourageTests/entourageTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		6B92CAD519A7461C004E8C9B /* Store */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79016BE7EDCE7EC3FA1F7032 /* Pods-entourageTests.store.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
-				INFOPLIST_FILE = "entourageTests/entourageTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Store;
 		};
@@ -6185,34 +5717,19 @@
 			};
 			name = Beta;
 		};
-		A8B133031DB116F50000750B /* Beta */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E869ABEB0224DAD93339CB1B /* Pods-entourageTests.beta.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Shared/entourage-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "entourageTests/entourageTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.octo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ent-Beta.app/Ent-Beta";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Beta;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		376F74DE23EC6905008168DB /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				376F74DF23EC6905008168DB /* Debug */,
+				376F74E023EC6905008168DB /* Beta */,
+				376F74E123EC6905008168DB /* Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Store;
+		};
 		6B92CA9919A7461C004E8C9B /* Build configuration list for PBXProject "entourage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -6229,16 +5746,6 @@
 				6B92CAD119A7461C004E8C9B /* Debug */,
 				A8B133021DB116F50000750B /* Beta */,
 				6B92CAD219A7461C004E8C9B /* Store */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Store;
-		};
-		6B92CAD319A7461C004E8C9B /* Build configuration list for PBXNativeTarget "entourageTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6B92CAD419A7461C004E8C9B /* Debug */,
-				A8B133031DB116F50000750B /* Beta */,
-				6B92CAD519A7461C004E8C9B /* Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Store;
