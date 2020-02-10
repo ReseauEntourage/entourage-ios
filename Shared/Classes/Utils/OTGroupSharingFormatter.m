@@ -18,6 +18,8 @@
         return [self actionShareText:group];
     if (group.isOuting)
         return [self eventShareText:group];
+    if (group.isPrivateCircle || group.isNeighborhood)
+        return [self genericShareText:group];
 
     [OTCrashlyticsHelper
      recordError:@"OTGroupSharingFormatter: Unhandled groupType"
@@ -49,6 +51,11 @@
     return [NSString stringWithFormat:template, event.title, date, event.displayAddress, event.shareUrl];
 }
 
++ (NSString *)genericShareText:(OTEntourage *)group {
+    NSString *template_name = [NSString stringWithFormat:@"%@share_generic", self.communityPrefix];
+    NSString *template = OTLocalizedString(template_name);
+    return [NSString stringWithFormat:template, group.title, group.shareUrl];
+}
 
 NSString *const prefixEntourage = @"";
 NSString *const prefixPfp       = @"pfp_";

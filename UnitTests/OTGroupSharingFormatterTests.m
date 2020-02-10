@@ -20,6 +20,7 @@
 @property OTUser *otherUser;
 @property OTEntourage *action;
 @property OTEntourage *event;
+@property OTEntourage *neighborhood;
 
 @end
 
@@ -48,6 +49,11 @@
                 @"display_address": @"ADRESSE",
                 @"starts_at": @"2020-04-15T10:00:00.000+02:00"
         }
+    }];
+    self.neighborhood = [[OTEntourage new] initWithDictionary:@{
+        @"group_type": @"neighborhood",
+        @"title": @"TITRE",
+        @"share_url": @"SHARE_URL"
     }];
 }
 
@@ -124,6 +130,18 @@
          "disposition.\n"
          "\n"
          "À bientôt !";
+    XCTAssertEqualObjects(message, expected);
+}
+
+- (void)testPfpGeneric {
+    [OTAppConfiguration sharedInstance].environmentConfiguration
+        .applicationType = ApplicationTypeVoisinAge;
+    NSString *message = [OTGroupSharingFormatter groupShareText:self.neighborhood];
+
+    NSString *expected =
+        @"Je vous invite à me rejoindre sur Voisin-Age, le réseau d’amitiés "
+         "intergénérationnelles, pour découvrir : \"TITRE\". Pour télécharger "
+         "l’application : SHARE_URL.";
     XCTAssertEqualObjects(message, expected);
 }
 
