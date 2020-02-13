@@ -20,4 +20,8 @@ NSString *const OTNonFatalErrorDomain = @"OTNonFatalErrorDomain";
                                                 userInfo:userInfo]];
 }
 
++ (void)recordError:(NSString *)message {
+    [self recordError:message userInfo:@{}];
+}
+
 @end

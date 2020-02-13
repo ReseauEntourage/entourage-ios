@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OTCrashlyticsHelper : NSObject
 
 + (void)recordError:(NSString *)message userInfo:(NSDictionary *)userInfo;
++ (void)recordError:(NSString *)message;
 
 @end
 
