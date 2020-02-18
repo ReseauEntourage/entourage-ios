@@ -8,6 +8,7 @@
 
 #import "OTThemedView.h"
 #import "entourage-Swift.h"
+#import "UIColor+entourage.h"
 
 @implementation OTThemedView
 
@@ -44,7 +45,7 @@
         self.backgroundColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     }
     else if ([self.themeBackgroundColor isEqualToString:@"neutralLight"]) {
-        self.backgroundColor = [ApplicationTheme shared].subtitleLabelColor;
+        self.backgroundColor = [UIColor appGreyishColor];
     }
     else {
         if (!inInterfaceBuilder) return;
