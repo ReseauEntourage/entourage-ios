@@ -2,6 +2,11 @@
 
 INFO_PLIST="${1:-entourage/entourage-Info.plist}"
 
+PlistBuddy() {
+  /usr/libexec/PlistBuddy -c "$(echo $@)" $INFO_PLIST
+}
+
 buildNumber=${BITRISE_BUILD_NUMBER:-buildNumberNotSet}
-exec `/usr/libexec/PlistBuddy -c "Set CFBundleVersion $buildNumber" $INFO_PLIST`
-echo $buildNumber
+marketingVersion=$(PlistBuddy Print CFBundleShortVersionString)
+PlistBuddy Set CFBundleVersion $buildNumber
+PlistBuddy Set CFBundleShortVersionString $marketingVersion.$buildNumber
