@@ -114,6 +114,11 @@
     }
 }
 
++ (BOOL)isUniversalLink:(NSURL *)url {
+    return ([@[@"http", @"https"] containsObject:url.scheme] &&
+            [@[@"entourage.social", @"www.entourage.social"] containsObject:url.host]);
+}
+
 - (void)handleUniversalLink:(NSURL *)url {
     if (url.pathComponents == nil || url.pathComponents.count < 2) return;
     NSMutableArray *pathComponents = [NSMutableArray arrayWithArray:url.pathComponents];

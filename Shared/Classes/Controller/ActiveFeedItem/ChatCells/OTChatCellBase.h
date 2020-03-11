@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "OTFeedItemTimelinePoint.h"
 
-@interface OTChatCellBase : UITableViewCell
+@interface OTChatCellBase : UITableViewCell <UITextViewDelegate>
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint;
 

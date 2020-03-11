@@ -24,6 +24,7 @@
 - (OTMainViewController *)popToMainViewController;
 - (void)showProfileFromAnywhereForUser:(NSString *)userId;
 - (void)handleDeepLink:(NSURL *)url;
++ (BOOL)isUniversalLink:(NSURL *)url;
 - (void)handleUniversalLink:(NSURL *)url;
 - (void)openWithWebView: (NSURL *)url;
 

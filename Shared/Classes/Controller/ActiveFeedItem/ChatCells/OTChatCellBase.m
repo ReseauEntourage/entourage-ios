@@ -13,4 +13,12 @@
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
 }
 
+-(BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+    if ([OTDeepLinkService isUniversalLink:URL]) {
+        [[OTDeepLinkService new] handleUniversalLink:URL];
+        return NO;
+    }
+    return YES;
+}
+
 @end
