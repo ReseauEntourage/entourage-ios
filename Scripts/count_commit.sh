@@ -7,6 +7,6 @@ PlistBuddy() {
 }
 
 buildNumber=${BITRISE_BUILD_NUMBER:-buildNumberNotSet}
-marketingVersion=$(PlistBuddy Print CFBundleShortVersionString)
+marketingVersionMajorMinor=$(PlistBuddy Print CFBundleShortVersionString | cut -d. -f-2)
 PlistBuddy Set CFBundleVersion $buildNumber
-PlistBuddy Set CFBundleShortVersionString $marketingVersion.$buildNumber
+PlistBuddy Set CFBundleShortVersionString $marketingVersionMajorMinor.$buildNumber
