@@ -20,7 +20,7 @@ enum menuItemIndexType: NSInteger {
 }
 
 final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
-    var tableView = UITableView()
+    var tableView = UITableView(frame: .zero, style: .grouped)
     var headerView = OTMenuHeaderView()
     private var menuItems = [OTMenuItem]()
     var currentUser = UserDefaults.standard.currentUser
