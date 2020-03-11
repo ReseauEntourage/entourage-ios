@@ -281,6 +281,9 @@
         [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
         return;
     }
+
+    [self.tourCreatorBehavior initialize];
+    self.tourCreatorBehavior.delegate = self;
     [self showNewTourOnGoing];
     [self clearMap];
     self.tourCreatorBehavior.tour = [NSUserDefaults standardUserDefaults].currentOngoingTour;
