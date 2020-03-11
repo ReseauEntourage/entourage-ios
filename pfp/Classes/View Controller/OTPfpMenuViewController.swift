@@ -260,7 +260,7 @@ extension OTPfpMenuViewController: UITableViewDelegate {
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
             break
         case menuItemIndexType.howTo.rawValue:
-            let url = URL(string: "http://bit.ly/faqapplivoisin-age")
+            let url = OTSafariService.redirectUrl(withIdentifier: "faq")
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
             break
         case menuItemIndexType.makeDonnation.rawValue:
