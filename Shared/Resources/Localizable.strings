@@ -473,6 +473,7 @@
 // Chat
 "yesterday" = "hier";
 "today" = "aujourd'hui";
+"this_month" = "ce mois-ci";
 "month_1" = "jan.";
 "month_2" = "fév.";
 "month_3" = "mar.";
@@ -487,6 +488,7 @@
 "month_12" = "déc.";
 "formatter_time_ago" = "il y a %@";
 "days" = "jours";
+"months" = "mois";
 
 //email
 "successful_close_mail" = "Mes retours sur l'entourage %@ qui a été un succès";
@@ -513,7 +515,7 @@
 
 "feed_item_time_distance" = "Créée il y a ";
 "group_timestamps_created_at" = "Créé";
-"group_timestamps_updated_at" = "mis à jour";
+"group_timestamps_updated_at" = "actif";
 "group_timestamps_separator" = " - ";
 
 "association_set" = "Badge ajouté";

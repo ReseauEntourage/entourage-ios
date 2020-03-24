@@ -59,6 +59,7 @@
 		37D5D4BC22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */; };
 		37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37D5D4C02268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
+		37DC2581242A643100A2024F /* OTEntourageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC2580242A643100A2024F /* OTEntourageUITests.m */; };
 		6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
@@ -1012,6 +1013,7 @@
 		37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyEntouragesAnonymousPlaceholder.xib; sourceTree = "<group>"; };
 		37D5D4BD2268AF5D009DFE1C /* OTRoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTRoundedButton.h; sourceTree = "<group>"; };
 		37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTRoundedButton.m; sourceTree = "<group>"; };
+		37DC2580242A643100A2024F /* OTEntourageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEntourageUITests.m; sourceTree = "<group>"; };
 		43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F6B6684041C4D7E0C0F97FD /* Pods-UnitTests.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.store.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.store.xcconfig"; sourceTree = "<group>"; };
 		5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pfp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1904,6 +1906,7 @@
 		376F74D823EC6904008168DB /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				37DC2580242A643100A2024F /* OTEntourageUITests.m */,
 				376F74E223EC6999008168DB /* OTGroupSharingFormatterTests.m */,
 				376F74DB23EC6905008168DB /* Info.plist */,
 			);
@@ -4262,6 +4265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				376F74EF23ED93F4008168DB /* OTCrashlyticsHelper.m in Sources */,
+				37DC2581242A643100A2024F /* OTEntourageUITests.m in Sources */,
 				376F74E323EC6999008168DB /* OTGroupSharingFormatterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

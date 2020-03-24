@@ -45,9 +45,18 @@
         return OTLocalizedString(@"today");
     if ([[NSCalendar currentCalendar] isDateInYesterday:date])
         return OTLocalizedString(@"yesterday");
+
     NSInteger days = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date toDate:[NSDate date] options:0].day;
-    NSString *daysString = [NSString stringWithFormat:@"%ld %@", days, OTLocalizedString(@"days")];
-    return [NSString stringWithFormat:OTLocalizedString(@"formatter_time_ago"), daysString];
+    if (days < 15) {
+        NSString *daysString = [NSString stringWithFormat:@"%ld %@", days, OTLocalizedString(@"days")];
+        return [NSString stringWithFormat:OTLocalizedString(@"formatter_time_ago"), daysString];
+    }
+    if (days <= 30)
+        return OTLocalizedString(@"this_month");
+
+    NSInteger months = (days / 30.0) + 0.5;
+    NSString *monthsString = [NSString stringWithFormat:@"%ld %@", months, OTLocalizedString(@"months")];
+    return [NSString stringWithFormat:OTLocalizedString(@"formatter_time_ago"), monthsString];
 }
 
 - (NSString *)formattedTimestamps {
