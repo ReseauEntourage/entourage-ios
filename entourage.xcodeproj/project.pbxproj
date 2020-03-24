@@ -3627,6 +3627,7 @@
 			buildPhases = (
 				C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */,
 				D65701111EC1CD2C00B90327 /* Bump version */,
+				37DC2582242A820000A2024F /* Set URL Scheme */,
 				6B92CA9A19A7461C004E8C9B /* Sources */,
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
 				6B92CA9C19A7461C004E8C9B /* Resources */,
@@ -3649,6 +3650,7 @@
 			buildPhases = (
 				A296B75120871CFC00F6AFBD /* [CP] Check Pods Manifest.lock */,
 				A296B75220871CFC00F6AFBD /* Bump version */,
+				37DC2583242A837300A2024F /* Set URL Scheme */,
 				A296B75320871CFC00F6AFBD /* Sources */,
 				A296B89120871CFC00F6AFBD /* Frameworks */,
 				A296B89B20871CFC00F6AFBD /* Resources */,
@@ -4057,6 +4059,44 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		37DC2582242A820000A2024F /* Set URL Scheme */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set URL Scheme";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Scripts/set_url_scheme.sh\n";
+			showEnvVarsInLog = 0;
+		};
+		37DC2583242A837300A2024F /* Set URL Scheme */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set URL Scheme";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Scripts/set_url_scheme.sh pfp/pfp-Info.plist\n";
+			showEnvVarsInLog = 0;
+		};
 		A296B75120871CFC00F6AFBD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4087,7 +4127,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Scripts/count_commit.sh pfp/pfp-Info.plist";
+			shellScript = "./Scripts/count_commit.sh pfp/pfp-Info.plist\n";
 		};
 		A296B8DC20871CFC00F6AFBD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4255,7 +4295,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Scripts/count_commit.sh entourage/entourage-Info.plist";
+			shellScript = "./Scripts/count_commit.sh entourage/entourage-Info.plist\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

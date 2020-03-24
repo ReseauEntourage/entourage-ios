@@ -39,23 +39,13 @@
 			<string>social.entourage.entourageios</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>entourage</string>
+				<string>entourage-staging</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb276507866203529</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>social.entourage.entourageios.beta</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>entourage-staging</string>
 			</array>
 		</dict>
 	</array>

@@ -170,22 +170,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (BOOL)handleApplication:(UIApplication *)application openURL:(NSURL *)url
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
-        
-        if ([[url scheme] isEqualToString:@"entourage-staging"] ||
-            [[url scheme] isEqualToString:@"pfp-staging"]) {
-            [[OTDeepLinkService new] handleDeepLink:url];
-            return YES;
-        }
-    } else {
-        if ([[url scheme] isEqualToString:@"entourage"] ||
-            [[url scheme] isEqualToString:@"pfp-prod"]) {
-            [[OTDeepLinkService new] handleDeepLink:url];
-            return YES;
-        }
-    }
-
-    return NO;
+    [[OTDeepLinkService new] handleDeepLink:url];
+    return YES;
 }
 
 + (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity
