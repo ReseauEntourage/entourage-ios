@@ -166,6 +166,7 @@
 @property (nonatomic) double entourageScale;
 @property (nonatomic) BOOL encounterFromTap;
 @property (nonatomic) BOOL forceReloadingFeeds;
+@property (nonatomic) BOOL isAskForHelp;
 
 @end
 
@@ -1218,6 +1219,16 @@
     self.addEditEvent = NO;
     [self createEntouragewithAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
 }
+
+- (void)createActionHelp {
+    self.isAskForHelp = YES;
+    [self createAction];
+}
+
+- (void)createActionGift {
+    self.isAskForHelp = NO;
+    [self createAction];
+}
     
 - (void)createEvent {
     if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
@@ -1226,7 +1237,9 @@
     }
 
     self.addEditEvent = YES;
-    [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
+    }];
 }
 
 - (void) createEntouragewithAlertMessage:(NSString *)message {
@@ -1655,6 +1668,7 @@
             [[OTLocationManager sharedInstance] defaultLocationForNewActions];
         controller.location = currentLocation;
         controller.entourageEditorDelegate = self;
+        controller.isAskForHelp = self.isAskForHelp;
         controller.isEditingEvent = self.addEditEvent;
     }
     else if ([segue.identifier isEqualToString:@"SolidarityGuideSegue"]) {

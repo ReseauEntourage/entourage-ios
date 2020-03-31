@@ -410,8 +410,11 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UITabBar.appearance.barTintColor = [[ApplicationTheme shared] backgroundThemeColor];
     UITabBar.appearance.translucent = NO;
     
+    //Fix inset left right with white color tabbar
+    float _insetWidth = 10;
+    
     UITabBar *currentTabBar = tabBarController.tabBar;
-    CGSize size = CGSizeMake(currentTabBar.frame.size.width / currentTabBar.items.count, currentTabBar.frame.size.height);
+    CGSize size = CGSizeMake((currentTabBar.frame.size.width / currentTabBar.items.count) + _insetWidth , currentTabBar.frame.size.height);
     currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
     
     for (UINavigationController *navController in tabBarController.viewControllers) {

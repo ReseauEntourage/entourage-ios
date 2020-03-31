@@ -114,7 +114,15 @@
     // Select by default the category: "Partager un repas, un café":
     // "entourage_type": "contribution",
     // "display_category": "social",
-    self.entourage.categoryObject = [OTCategoryFromJsonService categoryWithType:@"contribution" subcategory:@"social"];;
+    
+    //New version
+    if (self.isAskForHelp) {
+        self.entourage.categoryObject = [OTCategoryFromJsonService categoryWithType:@"ask_for_help" subcategory:@"social"];
+    }
+    else {
+        self.entourage.categoryObject = [OTCategoryFromJsonService categoryWithType:@"contribution" subcategory:@"social"];
+    }
+    
     self.entourage.type = self.entourage.categoryObject.entourage_type;
     self.entourage.category = self.entourage.categoryObject.category;
 }

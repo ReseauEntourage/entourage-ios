@@ -12,10 +12,13 @@
 #import "NSUserDefaults+OT.h"
 #import "UIColor+entourage.h"
 
+#define BIG_BUTTON_SIDE 52.0f
 #define BUTTON_SIDE 48.0f
 #define PADDING_VERTICAL 8.0f
 #define PADDING_HORIZONTAL 18.0f
-#define INITIAL_BOTTOM 122.0f
+#define INITIAL_BOTTOM_SMALL 0.0f
+#define INITIAL_BOTTOM_MEDIUM 40.0f
+#define INITIAL_BOTTOM 80.0f//122.0f
 
 #define ACTION_LABEL_FRAME CGRectMake(0.0f, 0.0f, 230.0f, 21.0f)
 
@@ -30,6 +33,8 @@
 - (void)createEncounter;
 - (void)createAction;
 - (void)createEvent;
+- (void)createActionGift;
+- (void)createActionHelp;
 
 - (void)togglePOI;
 - (void)dismissOptions;
@@ -49,6 +54,8 @@
 @property (nonatomic) int buttonIndex;
 
 @property (nonatomic) BOOL isPOIVisible;
+
+@property(nonatomic) BOOL isNewOptions;
 
 //- (void)setIsPOIVisible:(BOOL)isPOIVisible;
 
@@ -87,4 +94,10 @@
 - (IBAction)doTogglePOI:(id)sender;
 - (IBAction)proposeStructure:(id)sender;
 
+- (void)addOption:(NSString *)optionName
+          atIndex:(int)index
+        withIconWithoutBG:(NSString *)optionIcon
+        andAction:(SEL)selector;
+- (IBAction)doCreateActionHelp:(id)sender;
+- (IBAction)doCreateActionGift:(id)sender;
 @end

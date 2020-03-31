@@ -74,7 +74,7 @@
 "menu_translate_title" = "TRADUIRE";
 "menu_disconnect_title" = "Déconnexion";
 "menu_entourage_actions" = "Idées d'actions dans l'appli";
-"menu_make_donation" = "Faire un don";
+"menu_make_donation" = "Faire un don à Entourage";
 "menu_suggestions" = "Une suggestion ? Un problème ?";
 "menu_feedback" = "Donnez votre avis";
 "menu_application_usage" = "FAQ";
@@ -113,7 +113,8 @@
 "map_options_show_poi" = "Afficher le guide de solidarité";
 "view_map_nav_title" = "Voir la carte";
 "view_list_nav_title" = "Voir la liste";
-
+"create_demande_aide" = "Demander de l'aide";
+"create_proposer_don" = "Proposer un don";
 
 // Feed item
 "join_active" = "Actif";
@@ -532,3 +533,6 @@
 
 "add_event_title_hint" = "Les évènements avec un titre clair attirent plus de participants.";
 "add_event_description_hint" = "Vous pourrez modifier cette description et la date de votre évènement à tout moment.";
+
+"agir_new_title" = "L'essentiel, c'est la rencontre !";
+"agir_new_button_title" = "Vous ne vous sentez pas prêt ?";

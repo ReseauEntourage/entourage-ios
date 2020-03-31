@@ -22,5 +22,6 @@
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic) BOOL isEditingEvent;
+@property (nonatomic) BOOL isAskForHelp;
 
 @end
