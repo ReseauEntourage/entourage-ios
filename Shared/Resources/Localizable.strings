@@ -536,3 +536,8 @@
 
 "agir_new_title" = "L'essentiel, c'est la rencontre !";
 "agir_new_button_title" = "Vous ne vous sentez pas prêt ?";
+"action_title_public" = "Public";
+"action_title_private" = "Privé";
+"action_description_public" = "Toute personne participe à votre action solidaire, sans vérifier son profil au préalable.";
+"action_description_private" = "Vous vérifiez le profil de chaque personne qui souhaite participer à votre action solidaire.";
+"action_title_pres_de" = "Près de";

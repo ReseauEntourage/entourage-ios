@@ -12,6 +12,7 @@
 #import "OTConsts.h"
 #import "NSDate+OTFormatter.h"
 #import "entourage-Swift.h"
+#import "OTEntouragePrivacyActionCell.h"
 
 @interface OTAddEditEntourageDataSource ()
 @end
@@ -24,7 +25,7 @@
         return 5;
     }
     
-    return 4;
+    return 5;//4;
 }
 
 + (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -83,6 +84,9 @@
     }
     
     NSString *identifier = indexPath.section != 1  ? @"EntourageCell" : @"EntourageImageCell";
+    if (indexPath.section == 4) {
+        identifier = @"EntouragePrivacyActionCell";
+    }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     switch (indexPath.section) {
         case 0:
@@ -90,7 +94,7 @@
                                                     andText:entourage.categoryObject.title];
             break;
         case 1:
-            [((OTEntourageEditItemImageCell*)cell) configureWith:OTLocalizedString(@"myLocation")
+            [((OTEntourageEditItemImageCell*)cell) configureWith:OTLocalizedString(@"action_title_pres_de")
                                                          andText:locationText
                                                     andImageName:@"location"];
             break;
@@ -102,6 +106,8 @@
             [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"descriptionTitle")
                                                     andText:entourage.desc];
             break;
+        case 4:
+            [(OTEntouragePrivacyActionCell*) cell setActionDelegate:delegate isPublic:entourage.isPublic.boolValue];
         default:
             break;
     }
@@ -158,7 +164,7 @@
 
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section == 4) {
-        return 100.0f;
+        return UITableViewAutomaticDimension;
     }
     
     return 50.0f;

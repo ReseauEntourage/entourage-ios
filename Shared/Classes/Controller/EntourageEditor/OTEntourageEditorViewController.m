@@ -122,7 +122,7 @@
     else {
         self.entourage.categoryObject = [OTCategoryFromJsonService categoryWithType:@"contribution" subcategory:@"social"];
     }
-    
+    self.entourage.isPublic = [NSNumber numberWithBool:YES];
     self.entourage.type = self.entourage.categoryObject.entourage_type;
     self.entourage.category = self.entourage.categoryObject.category;
 }

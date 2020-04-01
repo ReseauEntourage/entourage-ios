@@ -837,9 +837,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     // EMA-2384
-    if ([entourage isContribution]) {
-        return YES;
-    }
+    //Plus utilisé car on affiche le choix sur la page de création.
+//    if ([entourage isContribution]) {
+//        return YES;
+//    }
     
     return NO;
 }

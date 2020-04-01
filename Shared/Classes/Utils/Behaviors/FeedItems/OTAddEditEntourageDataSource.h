@@ -16,6 +16,7 @@
 - (void)editEntourageAddress;
 - (void)editEntourageDate;
 - (void)editEntourageEventConfidentiality:(UISwitch*)sender;
+- (void)editEntourageActionChangePrivacyPublic:(BOOL)isPublic;
 @end
 
 @interface OTAddEditEntourageDataSource : NSObject

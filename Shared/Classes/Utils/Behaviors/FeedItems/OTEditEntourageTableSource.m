@@ -132,6 +132,10 @@
     [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [OTAddEditEntourageDataSource numberOfSectionsInTableView:self.tblEditEntourage entourage:self.entourage])] withRowAnimation:UITableViewRowAnimationFade];
 }
 
+- (void) editEntourageActionChangePrivacyPublic:(BOOL)isPublic {
+    self.entourage.isPublic = [NSNumber numberWithBool:isPublic];
+}
+
 #pragma mark - geolocation
 
 - (void)updateLocationTitle {

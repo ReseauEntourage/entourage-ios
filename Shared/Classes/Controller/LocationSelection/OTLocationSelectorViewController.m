@@ -39,7 +39,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = OTLocalizedString(@"myLocation").uppercaseString;
+    self.title = OTLocalizedString(@"action_title_pres_de").uppercaseString;
 
         
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
@@ -58,7 +58,7 @@
     _searchBar.searchBarStyle = UISearchBarStyleMinimal;
     _searchBar.placeholder = OTLocalizedString(@"searchLocationPlaceholder");
     if (@available(iOS 11.0, *)) {
-        self.title = OTLocalizedString(@"myLocation").uppercaseString;
+        self.title = OTLocalizedString(@"action_title_pres_de").uppercaseString;
         self.navigationItem.searchController = self.resultSearchController;
     }
     else
