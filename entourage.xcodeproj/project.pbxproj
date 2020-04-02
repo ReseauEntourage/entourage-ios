@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
+		2B67F4092434988B00C2FB91 /* OTEntouragePrivacyActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67F4082434988B00C2FB91 /* OTEntouragePrivacyActionCell.m */; };
+		2B67F40A2434989B00C2FB91 /* OTEntouragePrivacyActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67F4082434988B00C2FB91 /* OTEntouragePrivacyActionCell.m */; };
 		371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
 		371732EB2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
 		37191AD6220B3A6600F789B8 /* CommunityConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37191AD5220B3A6600F789B8 /* CommunityConfig.plist */; };
@@ -966,6 +968,8 @@
 		1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = entourage.entitlements; sourceTree = "<group>"; };
 		2A4E5B32B53E7E30C72258C3 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
+		2B67F4072434988B00C2FB91 /* OTEntouragePrivacyActionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTEntouragePrivacyActionCell.h; sourceTree = "<group>"; };
+		2B67F4082434988B00C2FB91 /* OTEntouragePrivacyActionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEntouragePrivacyActionCell.m; sourceTree = "<group>"; };
 		371732E82297FDF10005ED71 /* OTAnalyticsObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAnalyticsObserver.h; sourceTree = "<group>"; };
 		371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAnalyticsObserver.m; sourceTree = "<group>"; };
 		37191AD5220B3A6600F789B8 /* CommunityConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CommunityConfig.plist; sourceTree = "<group>"; };
@@ -3585,6 +3589,8 @@
 				A202E9452085D2C50058F32C /* OTEntourageEditItemImageCell.m */,
 				A202E8FB2085D2C40058F32C /* OTEntourageEditorViewController.h */,
 				A202E8562085D2C40058F32C /* OTEntourageEditorViewController.m */,
+				2B67F4072434988B00C2FB91 /* OTEntouragePrivacyActionCell.h */,
+				2B67F4082434988B00C2FB91 /* OTEntouragePrivacyActionCell.m */,
 				A2CCF2F42167428D00AD6237 /* OTAddActionFirstConsentViewController.h */,
 				A2CCF2F52167428D00AD6237 /* OTAddActionFirstConsentViewController.m */,
 				A2CCF2F82167444B00AD6237 /* OTAddActionSecondConsentViewController.h */,
@@ -4322,6 +4328,7 @@
 				A202EB0D2085D2C70058F32C /* OTMyEntouragesOptionsViewController.m in Sources */,
 				A202EBAF2085D2C80058F32C /* OTImageFeedItemsFilterCell.m in Sources */,
 				A202EC132085D2C80058F32C /* OTSafariService.m in Sources */,
+				2B67F4092434988B00C2FB91 /* OTEntouragePrivacyActionCell.m in Sources */,
 				A202EC612085D2C80058F32C /* OTCountryCodePickerViewDataSource.m in Sources */,
 				A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */,
 				A202EC972085D2C80058F32C /* OTMessageDataSourceBehavior.m in Sources */,
@@ -4992,6 +4999,7 @@
 				A296B84720871CFC00F6AFBD /* OTAboutViewController.m in Sources */,
 				A296B84820871CFC00F6AFBD /* OTAssociation.m in Sources */,
 				A296B84920871CFC00F6AFBD /* OTInvitationsCollectionSource.m in Sources */,
+				2B67F40A2434989B00C2FB91 /* OTEntouragePrivacyActionCell.m in Sources */,
 				A296B84A20871CFC00F6AFBD /* OTMainViewController.m in Sources */,
 				A296B84B20871CFC00F6AFBD /* OTFeedItemMessage.m in Sources */,
 				A202E91D20E381D200992C09 /* OTNeighborhoodAnnotation.m in Sources */,
