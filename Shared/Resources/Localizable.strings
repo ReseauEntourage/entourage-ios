@@ -541,3 +541,13 @@
 "action_description_public" = "Toute personne participe à votre action solidaire, sans vérifier son profil au préalable.";
 "action_description_private" = "Vous vérifiez le profil de chaque personne qui souhaite participer à votre action solidaire.";
 "action_title_pres_de" = "Près de";
+"addEventStartDate" = "Date de début *";
+"addEventEndDate" = "Date de fin";
+
+//Dates formatées
+"le_" = "le %@";
+"du_au" = "du %@ au %@";
+"de_a" = "de %@ à %@";
+"du_a" = "du %@ à %@";
+"au_a" = "au %@ à %@";
+"rendez-vous" = "Rendez-vous";

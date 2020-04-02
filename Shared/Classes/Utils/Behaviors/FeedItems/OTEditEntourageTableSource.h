@@ -24,5 +24,6 @@
                displayAddress:(NSString*)displayAddress;
 - (void)updateTexts;
 - (void)updateEventStartDate:(NSDate*)date;
+- (void)updateEventEndDate:(NSDate*)date;
 
 @end

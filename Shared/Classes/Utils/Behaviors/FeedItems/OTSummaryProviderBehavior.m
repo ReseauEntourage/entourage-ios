@@ -81,9 +81,9 @@
         if ([feedItem isNeighborhood] || [feedItem isPrivateCircle]) {
             self.lblDescription.text = @" ";
         } else if (self.lblUserName) {
-            self.lblDescription.text = [uiDelegate descriptionWithoutUserName];
+            self.lblDescription.text = [uiDelegate descriptionWithoutUserName_hasToShowDate:NO];
         } else {
-            [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+            [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue hasToShowDate:NO]];
         }
     }
 

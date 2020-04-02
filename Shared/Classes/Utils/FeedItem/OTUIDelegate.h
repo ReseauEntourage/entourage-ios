@@ -11,8 +11,8 @@
 
 @protocol OTUIDelegate <NSObject>
 
-- (NSAttributedString *) descriptionWithSize:(CGFloat)size;
-- (NSString *)descriptionWithoutUserName;
+- (NSAttributedString *) descriptionWithSize:(CGFloat)size hasToShowDate:(BOOL)isShowDate;
+- (NSString *)descriptionWithoutUserName_hasToShowDate:(BOOL)isShowDate;
 - (NSString *)userName;
 - (NSString *)summary;
 - (NSString *)categoryIconSource;

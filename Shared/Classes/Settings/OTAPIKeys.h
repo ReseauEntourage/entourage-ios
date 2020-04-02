@@ -85,6 +85,7 @@
 // Event
 #define kWSKeyMetadata @"metadata"
 #define kWSKeyStartsAt @"starts_at"
+#define kWSKeyEndsAt @"ends_at"
 #define kWSKeyDisplayAddress @"display_address"
 #define kWSKeyStreetAddress @"street_address"
 #define kWSKeyGooglePlaceId @"google_place_id"

@@ -10,7 +10,7 @@
 
 @implementation OTAnnouncementUI
 
-- (NSAttributedString *)descriptionWithSize:(CGFloat)size {
+- (NSAttributedString *)descriptionWithSize:(CGFloat)size hasToShowDate:(BOOL)isShowDate {
     NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:self.announcement.body attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
     return typeAttrString;
 }

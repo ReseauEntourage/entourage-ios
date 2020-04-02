@@ -15,7 +15,7 @@
 
 @implementation OTTourUI
 
-- (NSAttributedString *) descriptionWithSize:(CGFloat)size {
+- (NSAttributedString *) descriptionWithSize:(CGFloat)size  hasToShowDate:(BOOL)isShowDate {
     NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:OTLocalizedString(@"formatter_tour_by"), [self displayType]] attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
     NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:self.tour.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_BOLD_DESCRIPTION size:size]}];
     NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
@@ -23,7 +23,7 @@
     return typeByNameAttrString;
 }
 
-- (NSString *)descriptionWithoutUserName {
+- (NSString *)descriptionWithoutUserName_hasToShowDate:(BOOL)isShowDate {
     return [NSString stringWithFormat:OTLocalizedString(@"formatter_tour_by"), [self displayType]];
 }
 

@@ -22,7 +22,7 @@
 - (void)editDescription:(OTEntourage *)entourage;
 - (void)editCategory:(OTEntourage *)entourage;
 - (void)editAddress:(OTEntourage *)entourage;
-- (void)editDate:(OTEntourage *)entourage;
+- (void)editDate:(OTEntourage *)entourage isStart:(BOOL)isStartDate;
 - (void)editEventConfidentiality:(OTEntourage *)entourage;
 
 @end

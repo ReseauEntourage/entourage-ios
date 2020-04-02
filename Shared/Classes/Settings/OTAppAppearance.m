@@ -369,7 +369,7 @@
     return [UIColor clearColor];
 }
 
-+ (NSString *)descriptionForMessageItem:(OTEntourage *)item {
++ (NSString *)descriptionForMessageItem:(OTEntourage *)item hasToShowDate:(BOOL)isShowDate {
 
     if ([item isNeighborhood] ||
         [item isPrivateCircle]) {
@@ -379,14 +379,14 @@
         return @"";
     }
     if ([item isOuting]) {
-        return [self eventDateDescriptionForMessageItem:item];
+        return [self eventDateDescriptionForMessageItem:item hasToShowDate:isShowDate];
     }
     
     return [NSString stringWithFormat:OTLocalizedString(@"formater_by"), OTLocalizedString(item.entourage_type)];
 }
 
-+ (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
-    NSAttributedString *formattedDescription = [[NSAttributedString alloc] initWithString: [self descriptionForMessageItem:item] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]}];
++ (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size  hasToShowDate:(BOOL)isShowDate {
+    NSAttributedString *formattedDescription = [[NSAttributedString alloc] initWithString: [self descriptionForMessageItem:item hasToShowDate:isShowDate] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]}];
     
     if ([item isNeighborhood] ||
         [item isPrivateCircle] ||
@@ -430,7 +430,7 @@
     return orgByNameAttrString;
 }
 
-+ (NSString*)eventDateDescriptionForMessageItem:(OTEntourage*)item {
++ (NSString*)eventDateDescriptionForMessageItem:(OTEntourage*)item  hasToShowDate:(BOOL)isShowDate {
     
     NSString *eventName = OTLocalizedString(@"event").capitalizedString;
     
@@ -438,8 +438,17 @@
         eventName = OTLocalizedString(@"pfp_event").capitalizedString;
     }
     
-    if (item.startsAt) {
-        return [NSString stringWithFormat:@"%@ le %@", eventName, [item.startsAt asStringWithFormat:@"EEEE dd/MM"]];
+    if (isShowDate && item.startsAt) {
+        NSString *_message = @"";
+        if ([[NSCalendar currentCalendar] isDate:item.startsAt inSameDayAsDate:item.endsAt]) {
+           _message = [NSString stringWithFormat:@"%@ %@", eventName, [NSString stringWithFormat:OTLocalizedString(@"le_"),[item.startsAt asStringWithFormat:@"EEEE dd/MM"]]];
+        }
+        else {
+            NSString *_dateStr = [NSString stringWithFormat:OTLocalizedString(@"du_au"), [item.startsAt asStringWithFormat:@"dd/MM"],[item.endsAt asStringWithFormat:@"dd/MM"]];
+            _message = [NSString stringWithFormat:@"%@ %@", eventName,_dateStr ];
+        }
+        
+        return _message;
     } else {
         return eventName;
     }

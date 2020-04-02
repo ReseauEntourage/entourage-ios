@@ -31,7 +31,7 @@ NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIde
     [summaryBehavior configureWith:item];
     
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
-    self.typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE];
+    self.typeByNameLabel.attributedText = [uiDelegate descriptionWithSize:DEFAULT_DESCRIPTION_SIZE hasToShowDate:YES];
     self.organizationLabel.text = [uiDelegate summary];
     if ([UIDevice currentDevice].deviceSize == DeviceSizeSmall) {
         self.organizationLabel.numberOfLines = 3;

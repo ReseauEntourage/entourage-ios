@@ -22,7 +22,7 @@
 + (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
                                entourage:(OTEntourage*)entourage {
     if ([entourage isOuting] && [OTAppConfiguration shouldShowEntouragePrivacyDisclaimerOnCreation:entourage]) {
-        return 5;
+        return 6;//5;
     }
     
     return 5;//4;
@@ -65,11 +65,24 @@
                                      entourage.startsAt.toTimeString];
                     
                 }
-                [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"addEventDate")
+                [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"addEventStartDate")
                                                         andText:startDateInfo];
             }
                 break;
-            case 4:
+            case 4: {
+                NSString *endDateInfo = @"";
+                if (entourage.endsAt) {
+                    endDateInfo = [NSString stringWithFormat:@"%@%@%@",
+                                     [entourage.startsAt asStringWithFormat:@"EEEE dd MMMM yyyy"],
+                                     OTLocalizedString(@"at_hour"),
+                                     entourage.endsAt.toTimeString];
+                    
+                }
+                [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"addEventEndDate")
+                                                        andText:endDateInfo];
+            }
+                break;
+            case 5:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EntouragePrivacyCell"];
                 [((OTEntourageEditItemCell*)cell) configureWithSwitchPublicState:entourage.isPublic.boolValue entourage:entourage];
                 [((OTEntourageEditItemCell*)cell).privacySwitch
@@ -131,7 +144,12 @@
                 [delegate editEntourageAddress];
                 break;
             case 3:
-                [delegate editEntourageDate];
+                [delegate editEntourageDate_isStart:YES];
+                break;
+            case 4:
+                if (entourage.startsAt != nil) {
+                    [delegate editEntourageDate_isStart:NO];
+                }
                 break;
             default:
                 break;
