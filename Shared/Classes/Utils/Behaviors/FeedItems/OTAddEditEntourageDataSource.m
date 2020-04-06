@@ -73,7 +73,7 @@
                 NSString *endDateInfo = @"";
                 if (entourage.endsAt) {
                     endDateInfo = [NSString stringWithFormat:@"%@%@%@",
-                                     [entourage.startsAt asStringWithFormat:@"EEEE dd MMMM yyyy"],
+                                     [entourage.endsAt asStringWithFormat:@"EEEE dd MMMM yyyy"],
                                      OTLocalizedString(@"at_hour"),
                                      entourage.endsAt.toTimeString];
                     
