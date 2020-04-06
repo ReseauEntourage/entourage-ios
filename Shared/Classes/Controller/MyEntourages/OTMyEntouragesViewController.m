@@ -142,6 +142,11 @@
 #pragma mark - private methods
 
 - (void)updateBadge: (NSNotification *) notification {
+    BOOL refreshFeed = [notification.object boolForKey:kNotificationUpdateBadgeRefreshFeed defaultValue:YES];
+    
+    if (refreshFeed == NO)
+        return;
+
     NSNumber *unreadCount = (NSNumber *)[notification.object objectForKey:kNotificationUpdateBadgeCountKey];
     NSNumber *feedId = (NSNumber *)[notification.object objectForKey:kNotificationUpdateBadgeFeedIdKey];
     

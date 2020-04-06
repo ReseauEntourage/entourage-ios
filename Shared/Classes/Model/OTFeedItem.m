@@ -76,6 +76,7 @@
         self.noPeople = [dictionary numberForKey:kWSKeyNoPeople];
         self.type = [dictionary stringForKey:kWSKeyType];
         self.updatedDate = [dictionary dateForKey:kWSUpdatedDate];
+        self.unreadMessageCount = [dictionary numberForKey:kWSNoUnreadMessages];
         self.shareUrl = [dictionary stringForKey:kWSKeyShareUrl];
         NSDictionary *outcomeDictionary = [dictionary objectForKey:kWSKeyOutcome];
         if (outcomeDictionary) {

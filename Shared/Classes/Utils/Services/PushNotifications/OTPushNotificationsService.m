@@ -438,7 +438,7 @@ static void (^legacyRequestAuthorizationCompletionHandler)(void);
 
 - (void)handleCancelJoinNotification:(OTPushNotificationsData *)pnData {
     [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:pnData.joinableId
-                                                          stringId:nil];
+                                                          stringId:nil refreshFeed:YES];
 
     [OTAppState switchToMainScreenAndResetAppWindow:YES];
 }

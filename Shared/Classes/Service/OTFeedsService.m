@@ -33,7 +33,7 @@
              NSDictionary *data = responseObject;
              NSMutableArray *feeds = [self feedItemsFromDictionary:data];
              NSString *nextPageToken = [responseObject objectForKey:kWSKeyNextPageToken];
-             [self updateUnreadCount:feeds];
+             // [self updateUnreadCount:feeds];
              if (success)
              {
                  success(feeds, nextPageToken);
@@ -61,7 +61,7 @@
      {
          NSDictionary *data = responseObject;
          NSMutableArray *feeds = [self feedItemsFromDictionary:data];
-         [self updateUnreadCount:feeds];
+         // [self updateUnreadCount:feeds];
          if (success)
          {
              success(feeds);
@@ -121,7 +121,7 @@
 
 - (void)updateUnreadCount:(NSArray *)feeds {
     for (OTFeedItem *item in feeds) {
-        item.unreadMessageCount = [[OTUnreadMessagesService sharedInstance] countUnreadMessages:item.uid stringId:item.uuid];
+        [[OTUnreadMessagesService sharedInstance] setUnreadMessages:item.uid stringId:item.uuid count:item.unreadMessageCount];
     }
 }
 

@@ -89,7 +89,7 @@
     [[[OTFeedItemFactory createFor:self.feedItem]
       getMessaging] setMessagesAsRead:^{
         [SVProgressHUD dismiss];
-        [[OTUnreadMessagesService new] removeUnreadMessages:self.feedItem.uid stringId:self.feedItem.uuid];
+        [[OTUnreadMessagesService new] removeUnreadMessages:self.feedItem.uid stringId:self.feedItem.uuid refreshFeed:NO];
     } orFailure:^(NSError *error) {
         [SVProgressHUD dismiss];
     }];

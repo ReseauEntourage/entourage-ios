@@ -1709,8 +1709,12 @@
 }
 
 - (void)updateBadge:(NSNotification *) notification {
+    BOOL refreshFeed = [notification.object boolForKey:kNotificationUpdateBadgeRefreshFeed defaultValue:YES];
+
     [OTAppState updateMessagesTabBadgeWithValue:[OTUnreadMessagesService sharedInstance].totalCount.stringValue];
-    [self forceGetNewData];
+    
+    if (refreshFeed == YES)
+        [self forceGetNewData];
 }
 
 - (void)encounterEdited: (NSNotification *)notification {
