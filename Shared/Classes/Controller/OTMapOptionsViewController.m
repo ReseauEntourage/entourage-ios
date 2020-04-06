@@ -23,6 +23,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *createTourLabel;
 @property (weak, nonatomic) IBOutlet UIButton *ui_button_show_web;
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_title_button;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_title_button_close;
 
 @end
 
@@ -45,6 +46,7 @@
     
     [self.ui_label_title setText:OTLocalizedString(@"agir_new_title")];
     [self.ui_label_title_button setText:OTLocalizedString(@"agir_new_button_title")];
+    [self.ui_label_title_button_close setText:OTLocalizedString(@"cancel")];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,7 +95,7 @@
 - (void)setupForProUser {
     [self addOption:OTLocalizedString(@"create_tour")
       atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_maraude"
-    andAction:@selector(doCreateEvent:)];
+    andAction:@selector(doCreateTour:)];
     [self setupForPublicUser];
 }
 

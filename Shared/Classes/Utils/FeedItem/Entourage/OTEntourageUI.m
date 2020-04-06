@@ -34,7 +34,7 @@
 }
 
 - (NSString *)categoryIconSource {
-    return [OTAppAppearance iconNameForEntourageItem:self.entourage];
+    return [OTAppAppearance iconNameForEntourageItem:self.entourage isAnnotation:NO];
 }
 
 - (NSString *)feedItemDescription {

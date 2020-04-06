@@ -481,7 +481,7 @@
     return eventAttrDescString;
 }
 
-+ (NSString*)iconNameForEntourageItem:(OTEntourage*)item {
++ (NSString*)iconNameForEntourageItem:(OTEntourage*)item isAnnotation:(BOOL) isAnnotation {
     NSString *icon = [NSString stringWithFormat:@"%@_%@", item.entourage_type, item.category];
     
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
@@ -497,7 +497,12 @@
     }
     
     if ([item isOuting]) {
-        icon = @"ask_for_help_event";
+        if (isAnnotation) {
+            icon = @"ask_for_help_event_poi";
+        }
+        else {
+            icon = @"ask_for_help_event";
+        }
     }
     
     return icon;

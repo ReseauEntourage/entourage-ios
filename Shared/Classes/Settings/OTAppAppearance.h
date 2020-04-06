@@ -52,7 +52,7 @@
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size hasToShowDate:(BOOL)isShowDate;
 + (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSAttributedString*)formattedAuthorDescriptionForMessageItem:(OTEntourage*)item;
-+ (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
++ (NSString*)iconNameForEntourageItem:(OTEntourage*)item isAnnotation:(BOOL) isAnnotation;
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem;
 + (NSString *)eventTitle;
 + (NSString *)eventsFilterTitle;
