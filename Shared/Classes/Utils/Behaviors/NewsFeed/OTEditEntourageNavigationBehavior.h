@@ -15,7 +15,7 @@
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 @property (nonatomic, weak) IBOutlet OTEditEntourageTableSource *editEntourageSource;
 
-- (BOOL)prepareSegue:(UIStoryboardSegue *)segue;
+- (BOOL)prepareSegue:(UIStoryboardSegue *)segue isAskForHelp:(BOOL) isAskForHelp;
 
 - (void)editLocation:(OTEntourage *)entourage;
 - (void)editTitle:(OTEntourage *)entourage;

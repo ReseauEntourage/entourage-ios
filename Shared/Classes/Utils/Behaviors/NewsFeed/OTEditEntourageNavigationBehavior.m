@@ -32,7 +32,7 @@
 
 @implementation OTEditEntourageNavigationBehavior
 
-- (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
+- (BOOL)prepareSegue:(UIStoryboardSegue *)segue isAskForHelp:(BOOL) isAskForHelp {
     UIViewController *destinationViewController = segue.destinationViewController;
     if (destinationViewController.navigationController) {
         [OTAppConfiguration configureNavigationControllerAppearance:destinationViewController.navigationController];
@@ -42,6 +42,7 @@
         OTCategoryViewController* controller = (OTCategoryViewController *)destinationViewController;
         controller.categorySelectionDelegate = self;
         controller.selectedCategory = self.entourage.categoryObject;
+        controller.isAskForHelp = isAskForHelp;
         return YES;
     }
     if ([segue.identifier isEqualToString:@"EditLocation"]) {
@@ -180,6 +181,7 @@
     self.entourage.categoryObject = category;
     self.entourage.category = category.category;
     self.entourage.entourage_type = category.entourage_type;
+    
     [self.editEntourageSource updateTexts];
 }
 

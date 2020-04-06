@@ -103,9 +103,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     switch (indexPath.section) {
         case 0:
+        {
+            NSString *title = @"";
+            if (entourage.categoryObject.title == nil || entourage.categoryObject.title.length <= 0) {
+                title = @"*";
+            }
+            else {
+                title = entourage.categoryObject.title;
+            }
             [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"category")
-                                                    andText:entourage.categoryObject.title];
+                                                    andText:title];
             break;
+        }
         case 1:
             [((OTEntourageEditItemImageCell*)cell) configureWith:OTLocalizedString(@"action_title_pres_de")
                                                          andText:locationText

@@ -424,9 +424,6 @@
                                    children:@[]
                                       image:@"ask_for_help_event"
                                showBoldText:YES],
-               [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
-                                    active:self.showPastOuting
-                                  children:@[]],
                ];
 
     return events;

@@ -360,7 +360,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" tag="5" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowForExpandableMenu" translatesAutoresizingMaskIntoConstraints="NO" id="gS0-tM-zX3">
+                                                <imageView hidden="YES" clipsSubviews="YES" tag="5" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowForExpandableMenu" translatesAutoresizingMaskIntoConstraints="NO" id="gS0-tM-zX3">
                                                     <rect key="frame" x="267" y="22.5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="5U7-ui-OPB"/>
