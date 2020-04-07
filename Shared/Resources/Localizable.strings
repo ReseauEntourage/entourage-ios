@@ -206,11 +206,11 @@
 "invalidDate" = "Date invalide";
 "categoryNotSelected" = "Renseignez une catégorie pour votre action";
 "title" = "Titre";
-"demande" = "Demandes: je cherche...";
+"demande" = "Voir les demandes concernant :";
 "ask_for_help" = "Demande";
 "event" = "évènement";
 "contribution" = "Contribution";
-"contribution_filter" = "Contributions: je me propose de...";
+"contribution_filter" = "Voir les contributions concernant :";
 "detailedDescription" = "Description détaillée";
 "filters" = "filtres";
 "detailEncounter" = "Détaillez votre rencontre";
