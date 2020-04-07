@@ -195,6 +195,10 @@
         [result setObject:[self getStatus] forKey:@"status"];
     }
     
+    if (self.isUnread) {
+        [result setObject:@"true" forKey:@"unread_only"];
+    }
+    
     return result;
 }
 
