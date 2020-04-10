@@ -62,7 +62,7 @@
 		37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37D5D4C02268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37DC2581242A643100A2024F /* OTEntourageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC2580242A643100A2024F /* OTEntourageUITests.m */; };
-		6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */; };
+		6002577FD1E74DC775FAB826 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
@@ -210,7 +210,6 @@
 		A202EB6D2085D2C80058F32C /* OTPicturePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8BF2085D2C40058F32C /* OTPicturePreviewViewController.m */; };
 		A202EB6F2085D2C80058F32C /* OTUserPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C02085D2C40058F32C /* OTUserPictureViewController.m */; };
 		A202EB712085D2C80058F32C /* OTEditEntourageTitleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C32085D2C40058F32C /* OTEditEntourageTitleViewController.m */; };
-		A202EB752085D2C80058F32C /* OTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C62085D2C40058F32C /* OTWebViewController.m */; };
 		A202EB772085D2C80058F32C /* OTSummaryInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C72085D2C40058F32C /* OTSummaryInfoCell.m */; };
 		A202EB792085D2C80058F32C /* OTCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C82085D2C40058F32C /* OTCalloutViewController.m */; };
 		A202EB7B2085D2C80058F32C /* OTChangeStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8CE2085D2C40058F32C /* OTChangeStateViewController.m */; };
@@ -793,7 +792,6 @@
 		A296B87020871CFC00F6AFBD /* OTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E32085D2C40058F32C /* OTMenuViewController.m */; };
 		A296B87120871CFC00F6AFBD /* OTAssociationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9372085D2C50058F32C /* OTAssociationDetailsViewController.m */; };
 		A296B87220871CFC00F6AFBD /* NSUserDefaults+OT.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EABD2085D2C70058F32C /* NSUserDefaults+OT.m */; };
-		A296B87320871CFC00F6AFBD /* OTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8C62085D2C40058F32C /* OTWebViewController.m */; };
 		A296B87420871CFC00F6AFBD /* OTTourFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA9E2085D2C60058F32C /* OTTourFactory.m */; };
 		A296B87520871CFC00F6AFBD /* OTAnnouncementUI.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAB12085D2C60058F32C /* OTAnnouncementUI.m */; };
 		A296B87620871CFC00F6AFBD /* OTNewsFeedsSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA562085D2C60058F32C /* OTNewsFeedsSourceBehavior.m */; };
@@ -828,7 +826,6 @@
 		A296B89720871CFC00F6AFBD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
 		A296B89820871CFC00F6AFBD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
 		A296B89920871CFC00F6AFBD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
-		A296B89A20871CFC00F6AFBD /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */; };
 		A296B89C20871CFC00F6AFBD /* CountryList.csv in Resources */ = {isa = PBXBuildFile; fileRef = A202E7BB2085CFC20058F32C /* CountryList.csv */; };
 		A296B89D20871CFC00F6AFBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65942085FDAA00EF8E0E /* Main.storyboard */; };
 		A296B89E20871CFC00F6AFBD /* PublicFeedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21D65982085FDAA00EF8E0E /* PublicFeedItem.storyboard */; };
@@ -947,6 +944,7 @@
 		A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
+		DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7E197ECB4BF7DC5B2EDFAC /* Pods_entourage.framework */; };
 		E26723B7A7CE9F68D2D57A75 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -965,6 +963,7 @@
 		0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		143551A9A6ED152DD5F655B3 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
 		15EC20D970ACDA904DB58803 /* Pods-entourageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1A7E197ECB4BF7DC5B2EDFAC /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = entourage.entitlements; sourceTree = "<group>"; };
 		2A4E5B32B53E7E30C72258C3 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
@@ -1018,7 +1017,6 @@
 		37D5D4BD2268AF5D009DFE1C /* OTRoundedButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTRoundedButton.h; sourceTree = "<group>"; };
 		37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTRoundedButton.m; sourceTree = "<group>"; };
 		37DC2580242A643100A2024F /* OTEntourageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEntourageUITests.m; sourceTree = "<group>"; };
-		43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F6B6684041C4D7E0C0F97FD /* Pods-UnitTests.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.store.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.store.xcconfig"; sourceTree = "<group>"; };
 		5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pfp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4930BD19A769EB00DA7EE0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -1247,7 +1245,6 @@
 		A202E8C22085D2C40058F32C /* OTPicturePreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPicturePreviewViewController.h; sourceTree = "<group>"; };
 		A202E8C32085D2C40058F32C /* OTEditEntourageTitleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEditEntourageTitleViewController.m; sourceTree = "<group>"; };
 		A202E8C42085D2C40058F32C /* OTMeetingCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMeetingCalloutViewController.h; sourceTree = "<group>"; };
-		A202E8C62085D2C40058F32C /* OTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTWebViewController.m; sourceTree = "<group>"; };
 		A202E8C72085D2C40058F32C /* OTSummaryInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSummaryInfoCell.m; sourceTree = "<group>"; };
 		A202E8C82085D2C40058F32C /* OTCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCalloutViewController.m; sourceTree = "<group>"; };
 		A202E8C92085D2C40058F32C /* OTEntourageEditItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourageEditItemCell.h; sourceTree = "<group>"; };
@@ -1338,7 +1335,6 @@
 		A202E9212085D2C50058F32C /* OTSWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSWRevealViewController.m; sourceTree = "<group>"; };
 		A202E9222085D2C50058F32C /* OTCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCalloutViewController.h; sourceTree = "<group>"; };
 		A202E9232085D2C50058F32C /* OTSummaryInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSummaryInfoCell.h; sourceTree = "<group>"; };
-		A202E9242085D2C50058F32C /* OTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTWebViewController.h; sourceTree = "<group>"; };
 		A202E9252085D2C50058F32C /* OTSolidarityGuideFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFilterCell.h; sourceTree = "<group>"; };
 		A202E9262085D2C50058F32C /* OTBarButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTBarButtonView.h; sourceTree = "<group>"; };
 		A202E92620E4BF6100992C09 /* UIImage+Fitting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Fitting.h"; sourceTree = "<group>"; };
@@ -1874,7 +1870,8 @@
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
-				6002577FD1E74DC775FAB826 /* Pods_entourage.framework in Frameworks */,
+				6002577FD1E74DC775FAB826 /* (null) in Frameworks */,
+				DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1890,7 +1887,6 @@
 				A296B89720871CFC00F6AFBD /* CoreGraphics.framework in Frameworks */,
 				A296B89820871CFC00F6AFBD /* UIKit.framework in Frameworks */,
 				A296B89920871CFC00F6AFBD /* Foundation.framework in Frameworks */,
-				A296B89A20871CFC00F6AFBD /* Pods_entourage.framework in Frameworks */,
 				97B688FDB2DCD2CE3094ADDF /* Pods_pfp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1982,10 +1978,10 @@
 				6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */,
 				6B92CAA519A7461C004E8C9B /* UIKit.framework */,
 				6B92CAC019A7461C004E8C9B /* XCTest.framework */,
-				43CD8E8ADE5C111BB11C8AD4 /* Pods_entourage.framework */,
 				6E1FE7C1E296A4FD392A8A39 /* Pods_entourageTests.framework */,
 				5E18A89D13413CDDE75A9E4B /* Pods_pfp.framework */,
 				EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */,
+				1A7E197ECB4BF7DC5B2EDFAC /* Pods_entourage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3555,8 +3551,6 @@
 			children = (
 				A202E8CB2085D2C40058F32C /* OTSWRevealViewController.h */,
 				A202E9212085D2C50058F32C /* OTSWRevealViewController.m */,
-				A202E9242085D2C50058F32C /* OTWebViewController.h */,
-				A202E8C62085D2C40058F32C /* OTWebViewController.m */,
 			);
 			path = Deprecated;
 			sourceTree = "<group>";
@@ -3927,8 +3921,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-pfp/Pods-pfp-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInAppMessagingDisplay/InAppMessagingDisplayResources.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-pfp/Pods-pfp-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInAppMessaging/InAppMessagingDisplayResources.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
@@ -3940,7 +3934,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pfp/Pods-pfp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pfp/Pods-pfp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		138DF35D7A1740ED67839CC6 /* [CP] Copy Pods Resources */ = {
@@ -3949,8 +3943,8 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInAppMessagingDisplay/InAppMessagingDisplayResources.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-entourage/Pods-entourage-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInAppMessaging/InAppMessagingDisplayResources.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
@@ -3962,7 +3956,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-entourage/Pods-entourage-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1B651FE8E21C8BE00E3F527A /* [CP] Check Pods Manifest.lock */ = {
@@ -3992,17 +3986,13 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInAppMessagingDisplay/InAppMessagingDisplayResources.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInAppMessaging/InAppMessagingDisplayResources.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppMessagingDisplayResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
@@ -4010,7 +4000,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		34A63FBA43859415DF1BB474 /* [CP] Embed Pods Frameworks */ = {
@@ -4019,7 +4009,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
@@ -4029,6 +4019,7 @@
 				"${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -4050,6 +4041,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JVFloatLabeledTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -4062,7 +4054,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-entourage/Pods-entourage-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		37DC2582242A820000A2024F /* Set URL Scheme */ = {
@@ -4141,7 +4133,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-pfp/Pods-pfp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-pfp/Pods-pfp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
@@ -4151,6 +4143,7 @@
 				"${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -4172,6 +4165,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JVFloatLabeledTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -4184,7 +4178,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pfp/Pods-pfp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pfp/Pods-pfp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A296B8DE20871CFC00F6AFBD /* Fabric */ = {
@@ -4220,10 +4214,8 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-UnitTests/Pods-UnitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
@@ -4233,6 +4225,7 @@
 				"${BUILT_PRODUCTS_DIR}/JVFloatLabeledTextField/JVFloatLabeledTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Mixpanel/Mixpanel.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -4244,8 +4237,6 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
@@ -4256,6 +4247,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JVFloatLabeledTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mixpanel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -4268,7 +4260,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UnitTests/Pods-UnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */ = {
@@ -4668,7 +4660,6 @@
 				A202EB892085D2C80058F32C /* OTMenuViewController.m in Sources */,
 				A202EBD72085D2C80058F32C /* OTAssociationDetailsViewController.m in Sources */,
 				A202ED292085D2C80058F32C /* NSUserDefaults+OT.m in Sources */,
-				A202EB752085D2C80058F32C /* OTWebViewController.m in Sources */,
 				A202ED0B2085D2C80058F32C /* OTTourFactory.m in Sources */,
 				A202ED1B2085D2C80058F32C /* OTAnnouncementUI.m in Sources */,
 				A202ECD12085D2C80058F32C /* OTNewsFeedsSourceBehavior.m in Sources */,
@@ -5053,7 +5044,6 @@
 				A296B87020871CFC00F6AFBD /* OTMenuViewController.m in Sources */,
 				A296B87120871CFC00F6AFBD /* OTAssociationDetailsViewController.m in Sources */,
 				A296B87220871CFC00F6AFBD /* NSUserDefaults+OT.m in Sources */,
-				A296B87320871CFC00F6AFBD /* OTWebViewController.m in Sources */,
 				A296B87420871CFC00F6AFBD /* OTTourFactory.m in Sources */,
 				A296B87520871CFC00F6AFBD /* OTAnnouncementUI.m in Sources */,
 				A21E8F2420B6AFC300433606 /* OTUnderlinedButton.m in Sources */,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google Inc. All rights reserved.
+ * Copyright 2016 Google LLC. All rights reserved.
  *
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -15,9 +15,9 @@
 
 #import "GoogleMapsDemos/MasterViewController.h"
 
-#import <GoogleMaps/GoogleMaps.h>
 #import "GoogleMapsDemos/DemoAppDelegate.h"
 #import "GoogleMapsDemos/Samples/Samples.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 
 @implementation MasterViewController {

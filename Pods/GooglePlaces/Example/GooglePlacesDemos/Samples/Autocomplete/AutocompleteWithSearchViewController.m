@@ -17,6 +17,8 @@
 
 #import <GooglePlaces/GooglePlaces.h>
 
+NSString *const kSearchBarAccessibilityIdentifier = @"searchBarAccessibilityIdentifier";
+
 @interface AutocompleteWithSearchViewController () <GMSAutocompleteResultsViewControllerDelegate,
                                                     UISearchBarDelegate>
 @end
@@ -38,10 +40,6 @@
   [super viewDidLoad];
 
   _acViewController = [[GMSAutocompleteResultsViewController alloc] init];
-  [_acViewController
-      setAutocompleteBoundsUsingNorthEastCorner:self.autocompleteBoundsNorthEastCorner
-                                SouthWestCorner:self.autocompleteBoundsSouthWestCorner];
-  _acViewController.autocompleteBoundsMode = self.autocompleteBoundsMode;
   _acViewController.autocompleteFilter = self.autocompleteFilter;
   _acViewController.placeFields = self.placeFields;
   _acViewController.delegate = self;
@@ -54,6 +52,7 @@
   _searchController.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
   _searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
   _searchController.searchBar.delegate = self;
+  _searchController.searchBar.accessibilityIdentifier = kSearchBarAccessibilityIdentifier;
 
   [_searchController.searchBar sizeToFit];
   self.navigationItem.titleView = _searchController.searchBar;

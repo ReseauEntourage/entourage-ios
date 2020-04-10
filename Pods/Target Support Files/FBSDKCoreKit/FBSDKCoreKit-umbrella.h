@@ -16,10 +16,8 @@
 #import "FBSDKConstants.h"
 #import "FBSDKCopying.h"
 #import "FBSDKCoreKit.h"
-#import "FBSDKGraphErrorRecoveryProcessor.h"
-#import "FBSDKGraphRequest.h"
-#import "FBSDKGraphRequestConnection.h"
-#import "FBSDKGraphRequestDataAttachment.h"
+#import "FBSDKDeviceButton.h"
+#import "FBSDKDeviceViewControllerBase.h"
 #import "FBSDKMeasurementEvent.h"
 #import "FBSDKMutableCopying.h"
 #import "FBSDKProfile.h"
@@ -38,6 +36,10 @@
 #import "FBSDKAppLinkTarget.h"
 #import "FBSDKAppLinkUtility.h"
 #import "FBSDKWebViewAppLinkResolver.h"
+#import "FBSDKGraphErrorRecoveryProcessor.h"
+#import "FBSDKGraphRequest.h"
+#import "FBSDKGraphRequestConnection.h"
+#import "FBSDKGraphRequestDataAttachment.h"
 
 FOUNDATION_EXPORT double FBSDKCoreKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char FBSDKCoreKitVersionString[];

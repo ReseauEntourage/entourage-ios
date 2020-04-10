@@ -23,7 +23,7 @@ def sharedPods
     pod 'FBSDKCoreKit'
     pod 'Firebase/Analytics'
     pod 'Firebase/Messaging'
-    pod 'Firebase/InAppMessagingDisplay'
+    pod 'Firebase/InAppMessaging'
     pod 'SnapKit', '~> 4.0.0'
     pod 'GooglePlaces'
     pod 'GoogleMaps'

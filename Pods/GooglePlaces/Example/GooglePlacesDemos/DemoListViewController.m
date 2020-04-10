@@ -19,9 +19,9 @@
 
 // The cell reuse identifier we are going to use.
 static NSString *const kCellIdentifier = @"DemoCellIdentifier";
-static CGFloat kSelectionHeight = 40;
-static CGFloat kSelectionSwitchWidth = 50;
-static CGFloat kEdgeBuffer = 8;
+static const CGFloat kSelectionHeight = 40;
+static const CGFloat kSelectionSwitchWidth = 50;
+static const CGFloat kEdgeBuffer = 8;
 
 @implementation DemoListViewController {
   UIViewController *_editSelectionsViewController;
@@ -83,33 +83,31 @@ static CGFloat kEdgeBuffer = 8;
  * @param demo The demo to show.
  */
 - (void)showDemo:(Demo *)demo {
-  GMSAutocompleteBoundsMode boundsMode = kGMSAutocompleteBoundsModeBias;
   CLLocationCoordinate2D northEast = kCLLocationCoordinate2DInvalid;
   CLLocationCoordinate2D southWest = kCLLocationCoordinate2DInvalid;
   GMSAutocompleteFilter *autocompleteFilter = [self autcompleteFilter];
 
   // Check for restriction bounds settings.
   if (_restrictionBoundsMap[@"Kansas"].on) {
-    boundsMode = kGMSAutocompleteBoundsModeRestrict;
     northEast = CLLocationCoordinate2DMake(39.0, -95.0);
     southWest = CLLocationCoordinate2DMake(37.5, -100.0);
     autocompleteFilter.origin = [[CLLocation alloc] initWithLatitude:northEast.latitude
                                                            longitude:northEast.longitude];
+    autocompleteFilter.locationRestriction =
+        GMSPlaceRectangularLocationOption(northEast, southWest);
   } else if (_restrictionBoundsMap[@"Canada"].on) {
-    boundsMode = kGMSAutocompleteBoundsModeRestrict;
     northEast = CLLocationCoordinate2DMake(70.0, -60.0);
     southWest = CLLocationCoordinate2DMake(50.0, -140.0);
     autocompleteFilter.origin = [[CLLocation alloc] initWithLatitude:northEast.latitude
                                                            longitude:northEast.longitude];
+    autocompleteFilter.locationRestriction =
+        GMSPlaceRectangularLocationOption(northEast, southWest);
   }
 
   // Create view controller with the autocomplete filters, bounds and selected place fields.
   UIViewController *viewController =
-      [demo createViewControllerWithAutocompleteBoundsMode:boundsMode
-                         autocompleteBoundsNorthEastCorner:northEast
-                         autocompleteBoundsSouthWestCorner:southWest
-                                        autocompleteFilter:autocompleteFilter
-                                               placeFields:[self selectedPlaceFields]];
+      [demo createViewControllerWithAutocompleteFilter:autocompleteFilter
+                                           placeFields:[self selectedPlaceFields]];
   [self.navigationController pushViewController:viewController animated:YES];
 }
 
