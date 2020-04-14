@@ -15,7 +15,6 @@
 #import "OTUser.h"
 #import "OTLocationManager.h"
 #import <SVProgressHUD/SVProgressHUD.h>
-#import "OTStartupViewController.h"
 #import "OTLoginViewController.h"
 #import "OTWelcomeViewController.h"
 #import "OTPhoneViewController.h"
@@ -536,7 +535,7 @@
             return;
         }
         // when coming from the startup page, prevent back navigation
-        if ([viewController isKindOfClass:[OTStartupViewController class]]) {
+        if ([viewController isKindOfClass:[OTPreOnboardingV2ViewController class]]) {
             [viewController.navigationController setViewControllers:@[rightsViewController] animated:YES];
             return;
         }
@@ -560,7 +559,7 @@
             return;
         }
         // when coming from the startup page, prevent back navigation
-        if ([viewController isKindOfClass:[OTStartupViewController class]]) {
+        if ([viewController isKindOfClass:[OTPreOnboardingV2ViewController class]]) {
             [viewController.navigationController setViewControllers:@[rightsViewController] animated:YES];
             return;
         }

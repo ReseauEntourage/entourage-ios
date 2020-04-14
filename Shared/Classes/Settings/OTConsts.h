@@ -139,3 +139,5 @@
 // Email addresses
 #define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"
 #define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.org"
+
+#define ENTOURAGE_WEB_URL @"https://www.entourage.social"
