@@ -38,7 +38,7 @@
         [items addObject:desc];
     }
     
-    if ([feedItem isAction]) {
+    if ([feedItem isAction] || [feedItem class] == OTTour.class) {
         // Timestamps row
         OTFeedItem *timestamps = feedItem.copy;
         timestamps.identifierTag = @"timestamps";
