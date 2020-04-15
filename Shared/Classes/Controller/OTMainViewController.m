@@ -188,17 +188,25 @@
 
 - (void)configureActionsButton {
     UIImage *closeImage = [[UIImage imageNamed:@"closeOptionWithNoShadow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    
     [self.launcherButton.layer setShadowColor:[UIColor blackColor].CGColor];
     [self.launcherButton.layer setShadowOpacity:0.5];
     [self.launcherButton.layer setShadowRadius:4.0];
     self.launcherButton.layer.masksToBounds = NO;
     [self.launcherButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
     self.launcherButton.layer.cornerRadius = 29;
+    if (!self.isSolidarityGuide) {
+        
+        self.launcherButton.backgroundColor = [ApplicationTheme shared].addActionButtonColor;
+        [self.launcherButton setImage:closeImage forState:UIControlStateHighlighted];
+        [self.launcherButton setImage:closeImage forState:UIControlStateSelected];
     
-    self.launcherButton.backgroundColor = [ApplicationTheme shared].addActionButtonColor;
-    [self.launcherButton setImage:closeImage forState:UIControlStateHighlighted];
-    [self.launcherButton setImage:closeImage forState:UIControlStateSelected];
+        [self.launcherButton setTitle:@"+" forState:UIControlStateNormal];
+    }
+    else {
+         UIImage *plusImage = [[UIImage imageNamed:@"icn_plus_map_solidarity"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [self.launcherButton setImage:plusImage forState:UIControlStateNormal];
+         [self.launcherButton setTitle:@"" forState:UIControlStateNormal];
+    }
     
     [self.createEncounterButton.layer setShadowColor:[UIColor blackColor].CGColor];
     [self.createEncounterButton.layer setShadowOpacity:0.5];
