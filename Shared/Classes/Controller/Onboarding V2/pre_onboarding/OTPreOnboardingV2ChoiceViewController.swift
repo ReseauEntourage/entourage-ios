@@ -30,6 +30,11 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
         ui_bt_login.setTitle(OTLocalisationService.getLocalizedValue(forKey: "preOnboard_choice_login")?.uppercased(), for: .normal)
         ui_bt_signup.setTitle(OTLocalisationService.getLocalizedValue(forKey: "preOnboard_choice_signup")?.uppercased(), for: .normal)
         
+        ui_bt_signup.layer.cornerRadius = 8
+        ui_bt_login.layer.cornerRadius = 8
+        ui_bt_login.layer.borderWidth = 2
+        ui_bt_login.layer.borderColor = UIColor.appOrange()?.cgColor
+        
         if view.frame.height == 736 {
             ui_logo_constraint_top.constant = 20
             ui_logo_constraint_height.constant = 140

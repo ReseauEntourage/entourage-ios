@@ -5,11 +5,12 @@
       "scale" : "1x"
     },
     {
+      "filename" : "Mosaïc@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Mosaïc-1.jpg",
+      "filename" : "Mosaïc@3x.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }
