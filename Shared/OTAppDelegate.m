@@ -11,7 +11,8 @@
 #import <FirebaseMessaging/FirebaseMessaging.h>
 
 NSString * const kLoginFailureNotification = @"loginFailureNotification";
-NSString * const kUpdateBadgeCountNotification = @"updateBadgeCountNotification";
+NSString * const kUpdateGroupUnreadStateNotification = @"updateGroupUnreadStateNotification";
+NSString * const kUpdateTotalUnreadCountNotification = @"updateTotalUnreadCountNotification";
 
 @interface OTAppDelegate () <UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate>
 @end

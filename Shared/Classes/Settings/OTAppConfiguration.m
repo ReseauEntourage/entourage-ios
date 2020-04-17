@@ -107,7 +107,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 - (void)updateBadge: (NSNotification *) notification {
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[OTUnreadMessagesService new] totalCount].integerValue];
+    NSNumber *totalUnreadCount = [notification.object numberForKey:kNotificationTotalUnreadCountKey];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = totalUnreadCount.integerValue;
 }
 
 + (void)clearUserData {
@@ -190,7 +191,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 - (void)configurePushNotifcations
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin) name:[kLoginFailureNotification copy] object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateTotalUnreadCountNotification copy] object:nil];
 
     [OTPushNotificationsService refreshPushToken];
     [OTPushNotificationsService requestProvisionalAuthorizationsIfAdequate];

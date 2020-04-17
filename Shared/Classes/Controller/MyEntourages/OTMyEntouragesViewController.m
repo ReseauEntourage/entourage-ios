@@ -75,8 +75,8 @@
     [self.optionsBehavior configureWith:self.optionsDelegate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateBadge:)
-                                                 name:kUpdateBadgeCountNotification
+                                             selector:@selector(updateGroupUnreadState:)
+                                                 name:kUpdateGroupUnreadStateNotification
                                                object:nil];
 }
 
@@ -141,7 +141,7 @@
 
 #pragma mark - private methods
 
-- (void)updateBadge: (NSNotification *) notification {
+- (void)updateGroupUnreadState: (NSNotification *) notification {
     BOOL refreshFeed = [notification.object boolForKey:kNotificationUpdateBadgeRefreshFeed defaultValue:YES];
     
     if (refreshFeed == NO)

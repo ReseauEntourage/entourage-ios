@@ -345,10 +345,6 @@
                                                  name:@kNotificationShowFeedsMapCurrentLocation
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(pushReceived)
-                                                 name:@kNotificationPushReceived
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(locationUpdated:)
                                                  name:kNotificationLocationUpdated
                                                object:nil];
@@ -369,8 +365,12 @@
                                                  name:kSolidarityGuideNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateBadge:)
-                                                 name:kUpdateBadgeCountNotification
+                                             selector:@selector(updateGroupUnreadState:)
+                                                 name:kUpdateGroupUnreadStateNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateTotalUnreadCountBadge:)
+                                                 name:kUpdateTotalUnreadCountNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(entourageUpdated:)
@@ -896,7 +896,6 @@
     localNotification.alertAction = OTLocalizedString(@"Stop");
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     localNotification.userInfo = @{@"tourId": tourId, @"object":OTLocalizedString(@"tour_ongoing")};
-    localNotification.applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
@@ -1375,10 +1374,6 @@
     [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
-- (void)pushReceived {
-    [OTAppState updateMessagesTabBadgeWithValue:[OTUnreadMessagesService sharedInstance].totalCount.stringValue];
-}
-
 #pragma mark - Feeds Table View Delegate
 
 - (void)loadMoreData {
@@ -1716,13 +1711,15 @@
     [self.mailSender sendCloseMail:reason forItem: feedItem];
 }
 
-- (void)updateBadge:(NSNotification *) notification {
+- (void)updateGroupUnreadState:(NSNotification *) notification {
     BOOL refreshFeed = [notification.object boolForKey:kNotificationUpdateBadgeRefreshFeed defaultValue:YES];
-
-    [OTAppState updateMessagesTabBadgeWithValue:[OTUnreadMessagesService sharedInstance].totalCount.stringValue];
-    
     if (refreshFeed == YES)
         [self forceGetNewData];
+}
+
+- (void)updateTotalUnreadCountBadge:(NSNotification *) notification {
+    NSNumber *totalUnreadCount = [notification.object numberForKey:kNotificationTotalUnreadCountKey];
+    [OTAppState updateMessagesTabBadgeWithValue:totalUnreadCount.stringValue];
 }
 
 - (void)encounterEdited: (NSNotification *)notification {

@@ -46,7 +46,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[OTUnreadMessagesService sharedInstance] removeUnreadMessages:self.feedItem.uid stringId:self.feedItem.uuid refreshFeed:NO];
+    [[OTUnreadMessagesService sharedInstance] setGroupAsRead:self.feedItem.uid stringId:self.feedItem.uuid refreshFeed:NO];
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
