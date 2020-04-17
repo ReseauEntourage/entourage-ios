@@ -78,6 +78,10 @@
                                              selector:@selector(updateGroupUnreadState:)
                                                  name:kUpdateGroupUnreadStateNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(willEnterForeground)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 }
 
 - (void)dealloc {
@@ -158,6 +162,14 @@
             [self.entouragesTableDataSource.dataSource.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
+    }
+}
+
+- (void)willEnterForeground {
+    // if view is visible
+    // https://stackoverflow.com/a/2777460/1003545
+    if (self.isViewLoaded && self.view.window) {
+        [self.entouragesDataSource loadData];
     }
 }
 
