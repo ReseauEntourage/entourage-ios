@@ -57,7 +57,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [OTLogger logEvent:@"Screen14_2PublicPageViewAsMemberOrCreator"];
+    [OTLogger logEvent:@"Screen14_2PublicPageViewAsMember"];
     [self setupToolbarButtons];
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
