@@ -108,12 +108,14 @@
     if ([self isOuting]) {
         ISO8601DateFormatter *formatter = [[ISO8601DateFormatter alloc] init];
         formatter.includeTime = YES;
-        NSString *dateString = [formatter stringFromDate:self.startsAt];
-        NSDictionary *eventInfo  = @{kWSKeyStartsAt: dateString,
+        NSString *dateStartString = [formatter stringFromDate:self.startsAt];
+        NSString *dateEndString = [formatter stringFromDate:self.endsAt];
+        NSDictionary *eventInfo  = @{kWSKeyStartsAt: dateStartString,
+                                     kWSKeyEndsAt: dateEndString,
                                      kWSKeyStreetAddress: self.streetAddress ?: @"",
                                      kWSKeyPlaceName: self.placeName ?: @"",
                                      kWSKeyGooglePlaceId: self.googlePlaceId ?: @"",
-                                     };
+        };
         [params setObject:eventInfo forKey:kWSKeyMetadata];
         [params setObject:self.groupType forKey:kWSKeyGroupType];
     }

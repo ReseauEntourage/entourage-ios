@@ -247,7 +247,7 @@
         
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;
-        [[NSUserDefaults standardUserDefaults] setFirstLoginState:firstLogin];
+        [[NSUserDefaults standardUserDefaults] setFirstLoginState:!firstLogin];
         [OTAppState continueFromLoginScreen:self];
         
     } failure: ^(NSError *error) {

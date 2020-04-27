@@ -47,10 +47,6 @@
   GMSAutocompleteViewController *autocompleteViewController =
       [[GMSAutocompleteViewController alloc] init];
   autocompleteViewController.delegate = self;
-  [autocompleteViewController
-      setAutocompleteBoundsUsingNorthEastCorner:self.autocompleteBoundsNorthEastCorner
-                                SouthWestCorner:self.autocompleteBoundsSouthWestCorner];
-  autocompleteViewController.autocompleteBoundsMode = self.autocompleteBoundsMode;
   autocompleteViewController.autocompleteFilter = self.autocompleteFilter;
   autocompleteViewController.placeFields = self.placeFields;
   [self presentViewController:autocompleteViewController animated:YES completion:nil];

@@ -40,6 +40,7 @@
 @property (nonatomic, strong) NSString *shareUrl;
 
 @property (nonatomic, strong) NSDate *startsAt;
+@property (nonatomic, strong) NSDate *endsAt;
 @property (nonatomic, strong) NSString *groupType;
 @property (nonatomic, strong) NSString *displayAddress;
 @property (nonatomic, strong) NSString *streetAddress;

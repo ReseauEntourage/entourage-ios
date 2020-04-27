@@ -11,4 +11,6 @@
 
 @interface OTEntourageUI : OTEntourageFactory<OTUIDelegate>
 
+- (NSString *)formattedDaysIntervalFromToday:(NSDate *)date;
+
 @end

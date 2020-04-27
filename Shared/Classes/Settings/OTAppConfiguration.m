@@ -107,7 +107,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 - (void)updateBadge: (NSNotification *) notification {
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[OTUnreadMessagesService new] totalCount].integerValue];
+    NSNumber *totalUnreadCount = [notification.object numberForKey:kNotificationTotalUnreadCountKey];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = totalUnreadCount.integerValue;
 }
 
 + (void)clearUserData {
@@ -170,22 +171,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (BOOL)handleApplication:(UIApplication *)application openURL:(NSURL *)url
 {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.runsOnStaging) {
-        
-        if ([[url scheme] isEqualToString:@"entourage-staging"] ||
-            [[url scheme] isEqualToString:@"pfp-staging"]) {
-            [[OTDeepLinkService new] handleDeepLink:url];
-            return YES;
-        }
-    } else {
-        if ([[url scheme] isEqualToString:@"entourage"] ||
-            [[url scheme] isEqualToString:@"pfp-prod"]) {
-            [[OTDeepLinkService new] handleDeepLink:url];
-            return YES;
-        }
-    }
-
-    return NO;
+    [[OTDeepLinkService new] handleDeepLink:url];
+    return YES;
 }
 
 + (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity
@@ -204,7 +191,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 - (void)configurePushNotifcations
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popToLogin) name:[kLoginFailureNotification copy] object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateBadgeCountNotification copy] object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBadge:) name:[kUpdateTotalUnreadCountNotification copy] object:nil];
 
     [OTPushNotificationsService refreshPushToken];
     [OTPushNotificationsService requestProvisionalAuthorizationsIfAdequate];
@@ -424,8 +411,11 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UITabBar.appearance.barTintColor = [[ApplicationTheme shared] backgroundThemeColor];
     UITabBar.appearance.translucent = NO;
     
+    //Fix inset left right with white color tabbar
+    float _insetWidth = 10;
+    
     UITabBar *currentTabBar = tabBarController.tabBar;
-    CGSize size = CGSizeMake(currentTabBar.frame.size.width / currentTabBar.items.count, currentTabBar.frame.size.height);
+    CGSize size = CGSizeMake((currentTabBar.frame.size.width / currentTabBar.items.count) + _insetWidth , currentTabBar.frame.size.height);
     currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
     
     for (UINavigationController *navController in tabBarController.viewControllers) {
@@ -523,15 +513,12 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [OTPushNotificationsService legacyAuthorizationRequestCompletedWithError:nil];
 }
 
-+ (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
++ (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler
+{
     UIApplicationState state = [application applicationState];
-    
-    if (state == UIApplicationStateActive ||
-        state == UIApplicationStateBackground ||
-        state == UIApplicationStateInactive) {
-        OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
-        [pnService handleRemoteNotification:userInfo applicationState:state];
-    }
+    OTPushNotificationsService *pnService = [OTAppConfiguration sharedInstance].pushNotificationService;
+    [pnService handleRemoteNotification:userInfo applicationState:state];
+    completionHandler(UIBackgroundFetchResultNewData);
 }
 
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
@@ -851,9 +838,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
     
     // EMA-2384
-    if ([entourage isContribution]) {
-        return YES;
-    }
+    //Plus utilisé car on affiche le choix sur la page de création.
+//    if ([entourage isContribution]) {
+//        return YES;
+//    }
     
     return NO;
 }

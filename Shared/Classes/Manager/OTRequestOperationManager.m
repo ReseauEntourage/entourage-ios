@@ -23,7 +23,7 @@
         andSuccess:(void (^)(id responseObject))success
         andFailure:(void (^)(NSError *error))failure
 {
-    [self GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject) {
+    [self GET:url parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject) {
         if (success)
             success(responseObject);
     } failure:^(NSURLSessionDataTask * _Nonnull sessionDataTask, NSError * _Nonnull error) {
@@ -45,7 +45,7 @@
          andFailure:(void (^)(NSError *error))failure
 {
     [self POST:url
-    parameters:parameters progress:nil
+    parameters:parameters headers:nil progress:nil
             success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject) {
                 if (success) {
                     success(responseObject);
@@ -80,7 +80,7 @@
         andFailure:(void (^)(NSError *error))failure
 {
     [self PUT:url
-   parameters:parameters
+   parameters:parameters headers:nil
       success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject)
         {
             if (success) {
@@ -107,7 +107,7 @@
           andSuccess:(void (^)(id responseObject))success
           andFailure:(void (^)(NSError *error))failure
 {
-    [self PATCH:url parameters:parameters
+    [self PATCH:url parameters:parameters headers:nil
     success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject)
     {
         if (success) {
@@ -135,7 +135,7 @@
            andFailure:(void (^)(NSError *error))failure
 {
     [self DELETE:url
-      parameters:parameters
+      parameters:parameters headers:nil
         success:^(NSURLSessionDataTask * _Nonnull sessionDataTask, id  _Nonnull responseObject)
          {
              if (success) {

@@ -22,21 +22,6 @@
  */
 @interface AutocompleteBaseViewController : BaseDemoViewController
 
-/**
- * Components of bounds used to bias or restrict the autocomplete results depending on the value of
- * |CLLocationCoordinate2D| values of the North East and South West corners. Defaults to
- * kCLLocationCoordinate2DInvalid to indicate bounds are not active.
- */
-@property(nonatomic, assign) CLLocationCoordinate2D autocompleteBoundsNorthEastCorner;
-@property(nonatomic, assign) CLLocationCoordinate2D autocompleteBoundsSouthWestCorner;
-
-/**
- * How to treat the |autocompleteBounds| property. Defaults to |kGMSAutocompleteBoundsModeBias|.
- *
- * Has no effect if |autocompleteBounds| is nil.
- */
-@property(nonatomic, assign) GMSAutocompleteBoundsMode autocompleteBoundsMode;
-
 /** Filter to apply to autocomplete suggestions (can be nil). */
 @property(nonatomic, strong) GMSAutocompleteFilter *autocompleteFilter;
 

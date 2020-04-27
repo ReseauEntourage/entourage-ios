@@ -16,12 +16,13 @@
 
 @implementation OTEntourageUI
 
-- (NSAttributedString *)descriptionWithSize:(CGFloat)size {
-    return [OTAppAppearance formattedDescriptionForMessageItem:self.entourage size:size];
+- (NSAttributedString *)descriptionWithSize:(CGFloat)size hasToShowDate:(BOOL)isShowDate {
+    return [OTAppAppearance formattedDescriptionForMessageItem:self.entourage size:size hasToShowDate:isShowDate];
 }
 
-- (NSString *)descriptionWithoutUserName {
-    return [OTAppAppearance descriptionForMessageItem:self.entourage];
+- (NSString *)descriptionWithoutUserName_hasToShowDate:(BOOL)isShowDate {
+    NSLog(@"Description without username : %@",self.entourage.startsAt);
+    return [OTAppAppearance descriptionForMessageItem:self.entourage hasToShowDate:isShowDate];
 }
 
 - (NSString *)userName {
@@ -33,7 +34,7 @@
 }
 
 - (NSString *)categoryIconSource {
-    return [OTAppAppearance iconNameForEntourageItem:self.entourage];
+    return [OTAppAppearance iconNameForEntourageItem:self.entourage isAnnotation:NO];
 }
 
 - (NSString *)feedItemDescription {
@@ -45,9 +46,18 @@
         return OTLocalizedString(@"today");
     if ([[NSCalendar currentCalendar] isDateInYesterday:date])
         return OTLocalizedString(@"yesterday");
+
     NSInteger days = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date toDate:[NSDate date] options:0].day;
-    NSString *daysString = [NSString stringWithFormat:@"%ld %@", days, OTLocalizedString(@"days")];
-    return [NSString stringWithFormat:OTLocalizedString(@"formatter_time_ago"), daysString];
+    if (days < 15) {
+        NSString *daysString = [NSString stringWithFormat:@"%ld %@", days, OTLocalizedString(@"days")];
+        return [NSString stringWithFormat:OTLocalizedString(@"formatter_time_ago"), daysString];
+    }
+    if (days <= 30)
+        return OTLocalizedString(@"this_month");
+
+    NSInteger months = (days / 30.0) + 0.5;
+    NSString *monthsString = [NSString stringWithFormat:@"%ld %@", months, OTLocalizedString(@"months")];
+    return [NSString stringWithFormat:OTLocalizedString(@"formatter_time_ago"), monthsString];
 }
 
 - (NSString *)formattedTimestamps {
@@ -70,15 +80,28 @@
 
 - (NSString *)eventInfoDescription {
     
-    NSString *prefix = @"rendez-vous";
-
-    NSString *startDateInfo = [self.entourage.startsAt asStringWithFormat:@"EEEE dd MMMM"];
+    NSString *startDateInfo = [self.entourage.startsAt asStringWithFormat:@"EEEE dd MMMM YYYY"];
     NSString *startTimeInfo = [self.entourage.startsAt toRoundedQuarterTimeString];
-    NSString *dateInfo = [NSString stringWithFormat:@"%@ le %@", prefix, startDateInfo];
-    NSString *timeInfo = [NSString stringWithFormat:@"\nà %@", startTimeInfo];
+    
+    NSString *endDateInfo = [self.entourage.endsAt asStringWithFormat:@"EEEE dd MMMM YYYY"];
+    NSString *endTimeInfo = [self.entourage.endsAt toRoundedQuarterTimeString];
+    
+    NSString *dateInfo = OTLocalizedString(@"rendez-vous");
+    
+    if ([[NSCalendar currentCalendar] isDate:self.entourage.startsAt inSameDayAsDate:self.entourage.endsAt]) {
+        dateInfo = [NSString stringWithFormat:@"%@ %@", dateInfo, [NSString stringWithFormat:OTLocalizedString(@"le_"),startDateInfo]];
+        NSString *_dateStr = [NSString stringWithFormat:OTLocalizedString(@"de_a"), startTimeInfo,endTimeInfo];
+        dateInfo = [NSString stringWithFormat:@"%@\n%@",dateInfo, _dateStr];
+    }
+    else {
+        NSString *_dateStartStr = [NSString stringWithFormat:OTLocalizedString(@"du_a"), startDateInfo,startTimeInfo];
+        NSString *_dateEndStr = [NSString stringWithFormat:OTLocalizedString(@"au_a"), endDateInfo,endTimeInfo];
+        dateInfo = [NSString stringWithFormat:@"%@ %@ %@",dateInfo,_dateStartStr,_dateEndStr];
+    }
+    
     NSString *addressInfo = [NSString stringWithFormat:@"\n%@", self.entourage.displayAddress];
 
-    NSString *fullInfoText = [NSString stringWithFormat:@"%@%@%@", dateInfo, timeInfo, addressInfo];
+    NSString *fullInfoText = [NSString stringWithFormat:@"%@%@", dateInfo, addressInfo];
     
     return fullInfoText;
 }

@@ -75,8 +75,12 @@
     [self.optionsBehavior configureWith:self.optionsDelegate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateBadge:)
-                                                 name:kUpdateBadgeCountNotification
+                                             selector:@selector(updateGroupUnreadState:)
+                                                 name:kUpdateGroupUnreadStateNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(willEnterForeground)
+                                                 name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
 }
 
@@ -141,7 +145,12 @@
 
 #pragma mark - private methods
 
-- (void)updateBadge: (NSNotification *) notification {
+- (void)updateGroupUnreadState: (NSNotification *) notification {
+    BOOL refreshFeed = [notification.object boolForKey:kNotificationUpdateBadgeRefreshFeed defaultValue:YES];
+    
+    if (refreshFeed == NO)
+        return;
+
     NSNumber *unreadCount = (NSNumber *)[notification.object objectForKey:kNotificationUpdateBadgeCountKey];
     NSNumber *feedId = (NSNumber *)[notification.object objectForKey:kNotificationUpdateBadgeFeedIdKey];
     
@@ -153,6 +162,14 @@
             [self.entouragesTableDataSource.dataSource.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
+    }
+}
+
+- (void)willEnterForeground {
+    // if view is visible
+    // https://stackoverflow.com/a/2777460/1003545
+    if (self.isViewLoaded && self.view.window) {
+        [self.entouragesDataSource loadData];
     }
 }
 

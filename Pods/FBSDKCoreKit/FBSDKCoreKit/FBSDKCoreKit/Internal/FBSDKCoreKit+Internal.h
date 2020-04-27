@@ -19,12 +19,12 @@
 #import <UIKit/UIKit.h>
 
 #if SWIFT_PACKAGE
-#import "../FBSDKCoreKit.h"
+#import "FBSDKCoreKit.h"
 #else
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #endif
 
-#if defined COCOAPODS || defined BUCK
+#if defined FBSDKCOCOAPODS || defined BUCK
 
 #if !TARGET_OS_TV
 #import "FBSDKViewHierarchy.h"
@@ -70,6 +70,7 @@
 #import "FBSDKInternalUtility.h"
 #import "FBSDKLogger.h"
 #import "FBSDKMath.h"
+#import "FBSDKMonitorHeaders.h"
 #import "FBSDKSettings+Internal.h"
 #import "FBSDKSwizzler.h"
 #import "FBSDKTypeUtility.h"
@@ -151,6 +152,7 @@
 #import "../Basics/Instrument/FBSDKCrashHandler.h"
 #import "../Basics/Instrument/FBSDKLibAnalyzer.h"
 #import "../Basics/Instrument/FBSDKCrashObserving.h"
+#import "Monitoring/FBSDKMonitorHeaders.h"
 #import "Network/FBSDKGraphRequest+Internal.h"
 #import "Network/FBSDKGraphRequestConnection+Internal.h"
 #import "Network/FBSDKGraphRequestMetadata.h"

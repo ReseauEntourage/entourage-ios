@@ -19,5 +19,5 @@
 
 @property (nonatomic, strong) OTCategory *selectedCategory;
 @property (nonatomic, weak) id<CategorySelectionDelegate> categorySelectionDelegate;
-
+@property (nonatomic) BOOL isAskForHelp;
 @end

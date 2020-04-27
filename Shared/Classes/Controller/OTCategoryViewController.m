@@ -30,6 +30,7 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *categoryTableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic) NSInteger sectionSelected;
 
 @end
 
@@ -37,6 +38,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (self.isAskForHelp) {
+        self.sectionSelected = 0;
+    }
+    else {
+        self.sectionSelected = 1;
+    }
     
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
@@ -55,11 +63,11 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.dataSource.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    OTCategoryType *categoryType = self.dataSource[section];
+    OTCategoryType *categoryType = self.dataSource[self.sectionSelected];
     return categoryType.isExpanded ? categoryType.categories.count : 0;
 }
 
@@ -69,32 +77,17 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    OTCategoryType * categoryType = self.dataSource[section];
+    OTCategoryType * categoryType = self.dataSource[self.sectionSelected];
     UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
     
     UIButton *sectionButton = [headerCell viewWithTag:SECTION_BUTTON_TAG];
-    sectionButton.tag = section;
+    sectionButton.tag = self.sectionSelected;
     NSString *buttonTitle = [categoryType.type isEqualToString:@"ask_for_help"] ?
                                 OTLocalizedString(@"JE CHERCHE...") : OTLocalizedString(@"JE ME PROPOSE DE…");
     [sectionButton setTitle:buttonTitle
                    forState:UIControlStateNormal];
-    [sectionButton addTarget:self
-                      action:@selector(tapCategory:)
-            forControlEvents:UIControlEventTouchUpInside];
-    
-    UIImageView *imageView = [headerCell viewWithTag:SECTION_EXPAND_TAG];
-    imageView.tag = section;
-    if (!categoryType.isExpanded) {
-        imageView.transform = CGAffineTransformMakeRotation(M_PI);
-    }
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                action:@selector(tapImageView:)];
-    singleTap.numberOfTapsRequired = 1;
-    singleTap.numberOfTouchesRequired = 1;
-    [imageView addGestureRecognizer:singleTap];
 
     return headerCell;
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -102,7 +95,7 @@
     OTCategoryEditCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryCell"];
     UILabel *titleLabel = [cell viewWithTag:SUBCATEGORY_TITLE_TAG];
     UIImageView *categoryIcon = [cell viewWithTag:CATEGORY_ICON_TAG];
-    OTCategoryType * categoryType = self.dataSource[indexPath.section];
+    OTCategoryType * categoryType = self.dataSource[self.sectionSelected];
     OTCategory *category = categoryType.categories[indexPath.row];
     if (self.selectedCategory != nil) {
         category.isSelected = [self.selectedCategory.title isEqualToString:category.title];
@@ -120,7 +113,7 @@
 #pragma mark - private methods
     
 - (void)selectCategoryAtIndex:(NSIndexPath*)indexPath {
-    OTCategoryType *item = self.dataSource[indexPath.section];
+    OTCategoryType *item = self.dataSource[self.sectionSelected];
     OTCategory *itemCategory = item.categories[indexPath.row];
     itemCategory.isSelected = !itemCategory.isSelected;
     

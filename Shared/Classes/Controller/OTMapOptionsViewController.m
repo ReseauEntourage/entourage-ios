@@ -13,17 +13,24 @@
 #import "UIColor+entourage.h"
 #import "OTAPIConsts.h"
 #import "OTAppConfiguration.h"
+#import "OTSafariService.h"
+#import "OTHTTPRequestManager.h"
 
 @interface OTMapOptionsViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_title;
 @property (nonatomic, weak) IBOutlet UIButton *createTourButton;
 @property (nonatomic, weak) IBOutlet UILabel *createTourLabel;
+@property (weak, nonatomic) IBOutlet UIButton *ui_button_show_web;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_title_button;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_title_button_close;
 
 @end
 
 @implementation OTMapOptionsViewController
 
 - (void)viewDidLoad {
+    self.isNewOptions = YES;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -33,6 +40,13 @@
     } else {
         [self setupOptionsAsList];
     }
+    
+    self.ui_button_show_web.layer.borderWidth = 1;
+    self.ui_button_show_web.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    
+    [self.ui_label_title setText:OTLocalizedString(@"agir_new_title")];
+    [self.ui_label_title_button setText:OTLocalizedString(@"agir_new_button_title")];
+    [self.ui_label_title_button_close setText:OTLocalizedString(@"cancel")];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,19 +94,37 @@
 
 - (void)setupForProUser {
     [self addOption:OTLocalizedString(@"create_tour")
-            atIndex:self.buttonIndex++ withIcon:@"createMaraude"
-          andAction:@selector(doCreateTour:)];
+      atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_maraude"
+    andAction:@selector(doCreateTour:)];
     [self setupForPublicUser];
 }
 
 - (void)setupForPublicUser {
     [self addOption:OTLocalizedString(@"create_event")
-            atIndex:self.buttonIndex++ withIcon:@"addEvent"
-          andAction:@selector(doCreateEvent:)];
+      atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_event"
+    andAction:@selector(doCreateEvent:)];
     
-    [self addOption:OTLocalizedString(@"create_action")
-            atIndex:self.buttonIndex++ withIcon:@"heart"
-          andAction:@selector(doCreateAction:)];
+    [self addOption:OTLocalizedString(@"create_proposer_don")
+      atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_don"
+    andAction:@selector(doCreateActionGift:)];
+    
+    [self addOption:OTLocalizedString(@"create_demande_aide")
+            atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_aide"
+          andAction:@selector(doCreateActionHelp:)];
+}
+
+//MARK: IBactions
+- (IBAction)action_close_pop:(id)sender {
+    [OTAppState hideTabBar:NO];
+    if ([self.optionsDelegate respondsToSelector:@selector(dismissOptions)]) {
+        [self.optionsDelegate performSelector:@selector(dismissOptions) withObject:nil];
+    }
+}
+- (IBAction)action_show_help:(id)sender {
+    
+    NSURL * url = [OTSafariService redirectUrlWithIdentifier:@"pedagogic-content"];
+    
+    [OTSafariService launchInAppBrowserWithUrl:url viewController:self.navigationController];
 }
 
 @end

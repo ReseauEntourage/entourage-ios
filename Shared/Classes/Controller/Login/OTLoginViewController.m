@@ -185,7 +185,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
                                    self.onboardingNavigation.preLoginUser = [NSUserDefaults standardUserDefaults].currentUser;
                                    
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                   [[NSUserDefaults standardUserDefaults] setFirstLoginState:firstLogin];
+                                   [[NSUserDefaults standardUserDefaults] setFirstLoginState:!firstLogin];
                                    [self.view endEditing:YES];
                                    [OTAppState continueFromLoginScreen:self];
                                    

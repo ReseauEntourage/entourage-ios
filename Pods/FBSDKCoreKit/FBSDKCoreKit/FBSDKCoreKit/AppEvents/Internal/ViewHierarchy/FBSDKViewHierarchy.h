@@ -16,7 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "TargetConditionals.h"
+
+#if !TARGET_OS_TV
+
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, FBCodelessClassBitmask) {
@@ -42,28 +45,37 @@ typedef NS_ENUM(NSUInteger, FBCodelessClassBitmask) {
     FBCodelessClassBitmaskUIViewController = 1 << 17,
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern void fb_dispatch_on_main_thread(dispatch_block_t block);
 extern void fb_dispatch_on_default_thread(dispatch_block_t block);
 
 NS_SWIFT_NAME(ViewHierarchy)
 @interface FBSDKViewHierarchy : NSObject
 
-+ (NSObject *)getParent:(NSObject *)obj;
-+ (NSArray<NSObject *> *)getChildren:(NSObject *)obj;
-+ (NSArray<NSObject *> *)getPath:(NSObject *)obj;
-+ (NSMutableDictionary<NSString *, id> *)getDetailAttributesOf:(NSObject *)obj;
++ (nullable NSObject *)getParent:(NSObject *)obj;
++ (nullable NSArray<NSObject *> *)getChildren:(NSObject *)obj;
++ (nullable NSArray<NSObject *> *)getPath:(NSObject *)obj;
++ (nullable NSMutableDictionary<NSString *, id> *)getDetailAttributesOf:(NSObject *)obj;
 
 + (NSString *)getText:(NSObject *)obj;
 + (NSString *)getHint:(NSObject *)obj;
-+ (NSIndexPath *)getIndexPath:(NSObject *)obj;
++ (nullable NSIndexPath *)getIndexPath:(NSObject *)obj;
 + (NSUInteger)getClassBitmask:(NSObject *)obj;
-+ (UITableView *)getParentTableView:(UIView *)cell;
-+ (UICollectionView *)getParentCollectionView:(UIView *)cell;
++ (nullable UITableView *)getParentTableView:(UIView *)cell;
++ (nullable UICollectionView *)getParentCollectionView:(UIView *)cell;
 + (NSInteger)getTag:(NSObject *)obj;
-+ (NSNumber *)getViewReactTag:(UIView *)view;
++ (nullable NSNumber *)getViewReactTag:(UIView *)view;
 
-+ (NSDictionary<NSString *, id> *)recursiveCaptureTree:(NSObject *)obj withObject:(NSObject *)interact;
++ (nullable NSDictionary<NSString *, id> *)recursiveCaptureTreeWithCurrentNode:(NSObject *)currentNode
+                                                                    targetNode:(nullable NSObject *)targetNode
+                                                                 objAddressSet:(nullable NSMutableSet *)objAddressSet
+                                                                          hash:(BOOL)hash;
 
 + (BOOL)isUserInputView:(NSObject *)obj;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#endif

@@ -48,11 +48,11 @@
 + (UIColor*)announcementFeedContainerColor;
 + (UIColor *)tagColor:(OTUser*)user;
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem;
-+ (NSString *)descriptionForMessageItem:(OTEntourage *)item;
-+ (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
++ (NSString *)descriptionForMessageItem:(OTEntourage *)item hasToShowDate:(BOOL)isShowDate;
++ (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size hasToShowDate:(BOOL)isShowDate;
 + (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size;
 + (NSAttributedString*)formattedAuthorDescriptionForMessageItem:(OTEntourage*)item;
-+ (NSString*)iconNameForEntourageItem:(OTEntourage*)item;
++ (NSString*)iconNameForEntourageItem:(OTEntourage*)item isAnnotation:(BOOL) isAnnotation;
 + (UIView*)navigationTitleViewForFeedItem:(OTFeedItem*)feedItem;
 + (NSString *)eventTitle;
 + (NSString *)eventsFilterTitle;

@@ -57,9 +57,10 @@
 #define kNotificationEntourageChangedEntourageKey @"NotificationEntourageChangedEntourageKey"
 #define kNotificationUpdateBadgeCountKey @"kUpdateBadgeCountKey"
 #define kNotificationUpdateBadgeFeedIdKey @"kUpdateBadgeCountFeedIdKey"
+#define kNotificationUpdateBadgeRefreshFeed @"kUpdateBadgeRefreshFeed"
 #define kNotificationAssociationUpdated @"NotificationAssociationUpdated"
+#define kNotificationTotalUnreadCountKey @"TotalUnreadCountKey"
 
-#define kNotificationPushReceived "NotificationPushReceived"
 #define kNotificationReloadData "NotificationReloadData"
 #define kNotificationSendCloseMail "NotificationSendCloseMail"
 #define kNotificationSendReasonKey "NotificationReasonKey"
@@ -138,3 +139,5 @@
 // Email addresses
 #define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"
 #define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.org"
+
+#define ENTOURAGE_WEB_URL @"https://www.entourage.social"

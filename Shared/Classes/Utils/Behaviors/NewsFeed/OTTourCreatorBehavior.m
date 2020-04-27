@@ -74,10 +74,10 @@
 }
 
 - (void)stopTour {
-//    if(self.tourPointsToSend.count == 0) {
-//        [self.delegate stoppedTour];
-//        return;
-//    }
+    if(self.tourPointsToSend.count == 0) {
+        [self.delegate stoppedTour];
+        return;
+    }
     OTTourPoint *lastTourPoint = self.tour.tourPoints.lastObject;
     if (self.tourPointsToSend.count > 0) {
         lastTourPoint = self.tourPointsToSend.lastObject;

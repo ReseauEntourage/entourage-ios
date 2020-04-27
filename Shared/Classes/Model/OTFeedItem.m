@@ -60,6 +60,7 @@
     copy->_streetAddress = [_streetAddress copyWithZone:zone];
     copy->_placeName = [_placeName copyWithZone:zone];
     copy->_googlePlaceId = [_googlePlaceId copyWithZone:zone];
+    copy->_endsAt = [_endsAt copyWithZone:zone];
     
     return copy;
 }
@@ -75,6 +76,7 @@
         self.noPeople = [dictionary numberForKey:kWSKeyNoPeople];
         self.type = [dictionary stringForKey:kWSKeyType];
         self.updatedDate = [dictionary dateForKey:kWSUpdatedDate];
+        self.unreadMessageCount = [dictionary numberForKey:kWSNoUnreadMessages];
         self.shareUrl = [dictionary stringForKey:kWSKeyShareUrl];
         NSDictionary *outcomeDictionary = [dictionary objectForKey:kWSKeyOutcome];
         if (outcomeDictionary) {
@@ -94,6 +96,7 @@
         NSDictionary *metadataDictionary = [dictionary objectForKey:kWSKeyMetadata];
         if ([metadataDictionary class] != [NSNull class] && metadataDictionary) {
             self.startsAt = [metadataDictionary dateForKey:kWSKeyStartsAt];
+            self.endsAt = [metadataDictionary dateForKey:kWSKeyEndsAt];
             self.displayAddress = [metadataDictionary stringForKey:kWSKeyDisplayAddress];
             self.placeName = [metadataDictionary stringForKey:kWSKeyPlaceName];
             self.googlePlaceId = [metadataDictionary stringForKey:kWSKeyGooglePlaceId];

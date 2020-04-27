@@ -98,12 +98,6 @@
     [SVProgressHUD show];
     NSMutableDictionary *parameters = [self.currentFilter toDictionaryWithPageNumber:self.pageNumber andSize:DATA_PAGE_SIZE];
     [[OTFeedsService new] getMyFeedsWithParameters:parameters success:^(NSArray *items) {
-        if (self.currentFilter.isUnread) {
-           items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(OTFeedItem *item, NSDictionary * bindings) {
-               BOOL hasUnread = item.unreadMessageCount.intValue > 0;
-               return hasUnread;
-            }]];
-        }
         [self.items addObjectsFromArray:items];
         
         [self configureNoDataView];

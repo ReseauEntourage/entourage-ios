@@ -85,6 +85,9 @@
         if (self.entourage) {
             self.type = self.entourage.type;
             self.location = self.entourage.location;
+            
+            self.isAskForHelp = [self.entourage.categoryObject.entourage_type isEqualToString:@"ask_for_help"];
+           
         } else {
             [self setupEmptyEntourage];
         }
@@ -102,6 +105,10 @@
     [self.navigationItem setRightBarButtonItem:menuButton];
     
     [self.editTableSource configureWith:self.entourage];
+    
+    if (!self.isEditingEvent && self.entourage.categoryObject == nil) {
+        [self.editNavBehavior editCategory:self.entourage];
+    }
 }
 
 - (void)setupEmptyEntourage {
@@ -114,7 +121,9 @@
     // Select by default the category: "Partager un repas, un café":
     // "entourage_type": "contribution",
     // "display_category": "social",
-    self.entourage.categoryObject = [OTCategoryFromJsonService categoryWithType:@"contribution" subcategory:@"social"];;
+    
+    self.entourage.categoryObject = nil;
+    self.entourage.isPublic = [NSNumber numberWithBool:YES];
     self.entourage.type = self.entourage.categoryObject.entourage_type;
     self.entourage.category = self.entourage.categoryObject.category;
 }
@@ -325,7 +334,7 @@
         return;
     }
     
-    if ([self.editNavBehavior prepareSegue:segue]) {
+    if ([self.editNavBehavior prepareSegue:segue isAskForHelp:self.isAskForHelp]) {
         return;
     }
 }

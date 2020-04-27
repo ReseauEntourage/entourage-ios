@@ -74,7 +74,7 @@
 "menu_translate_title" = "TRADUIRE";
 "menu_disconnect_title" = "Déconnexion";
 "menu_entourage_actions" = "Idées d'actions dans l'appli";
-"menu_make_donation" = "Faire un don";
+"menu_make_donation" = "Faire un don à Entourage";
 "menu_suggestions" = "Une suggestion ? Un problème ?";
 "menu_feedback" = "Donnez votre avis";
 "menu_application_usage" = "FAQ";
@@ -113,7 +113,8 @@
 "map_options_show_poi" = "Afficher le guide de solidarité";
 "view_map_nav_title" = "Voir la carte";
 "view_list_nav_title" = "Voir la liste";
-
+"create_demande_aide" = "Demander de l'aide";
+"create_proposer_don" = "Proposer un don";
 
 // Feed item
 "join_active" = "Actif";
@@ -205,11 +206,11 @@
 "invalidDate" = "Date invalide";
 "categoryNotSelected" = "Renseignez une catégorie pour votre action";
 "title" = "Titre";
-"demande" = "Demandes: je cherche...";
+"demande" = "Voir les demandes concernant :";
 "ask_for_help" = "Demande";
 "event" = "évènement";
 "contribution" = "Contribution";
-"contribution_filter" = "Contributions: je me propose de...";
+"contribution_filter" = "Voir les contributions concernant :";
 "detailedDescription" = "Description détaillée";
 "filters" = "filtres";
 "detailEncounter" = "Détaillez votre rencontre";
@@ -473,6 +474,7 @@
 // Chat
 "yesterday" = "hier";
 "today" = "aujourd'hui";
+"this_month" = "ce mois-ci";
 "month_1" = "jan.";
 "month_2" = "fév.";
 "month_3" = "mar.";
@@ -487,6 +489,7 @@
 "month_12" = "déc.";
 "formatter_time_ago" = "il y a %@";
 "days" = "jours";
+"months" = "mois";
 
 //email
 "successful_close_mail" = "Mes retours sur l'entourage %@ qui a été un succès";
@@ -499,14 +502,21 @@
 "email_body_new_sms" = "Bonjour,\nMon numéro : %@\n\nMerci";
 
 // Share
-"share_public" = "Ce projet solidaire sur Entourage a besoin de toi. Rejoins-le en téléchargeant l'app ici %@";
-"share_creator" = "J'ai créé ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
-"share_joiner" = "J'ai rejoint ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
 "share_webview" = "J'ai découvert le guide Simple Comme Bonjour pour aller à la rencontre des personnes sans-abri. C'est à découvrir ici : %@";
+
+"share_action" = "Hello ! J'ai %1$@ une initiative solidaire sur Entourage, le réseau qui tisse des liens entre voisins avec et sans domicile : \"%2$@\". J’ai pensé que ça t'intéresserait. Clique ici : %3$@.\n\nMerci beaucoup pour ta solidarité !";
+
+"share_action_verb_creator" = "créé";
+"share_action_verb_member" = "rejoint";
+"share_action_verb_other" = "vu";
+
+"share_event" = "Hello ! Je t'invite à : \"%1$@\", le %2$@, %3$@ !\n\nSi ça te dit d'y participer, rejoins-moi ici sur Entourage, le réseau qui crée des liens entre voisins avec et sans domicile : %4$@";
+"pfp_share_event" = "Bonjour ! J’ai le plaisir de vous inviter à notre prochaine sortie conviviale Voisin-Age : %1$@.\n\nElle aura lieu le %2$@, à %3$@. Merci par avance de me confirmer votre participation !\n\nEncore plus d’informations sont ici : %4$@. Je suis aussi à votre disposition.\n\nÀ bientôt !";
+"pfp_share_generic" = "Je vous invite à me rejoindre sur Voisin-Age, le réseau d’amitiés intergénérationnelles, pour découvrir : \"%1$@\". Pour télécharger l’application : %2$@.";
 
 "feed_item_time_distance" = "Créée il y a ";
 "group_timestamps_created_at" = "Créé";
-"group_timestamps_updated_at" = "mis à jour";
+"group_timestamps_updated_at" = "actif";
 "group_timestamps_separator" = " - ";
 
 "association_set" = "Badge ajouté";
@@ -523,3 +533,40 @@
 
 "add_event_title_hint" = "Les évènements avec un titre clair attirent plus de participants.";
 "add_event_description_hint" = "Vous pourrez modifier cette description et la date de votre évènement à tout moment.";
+
+"agir_new_title" = "L'essentiel, c'est la rencontre !";
+"agir_new_button_title" = "Vous ne vous sentez pas prêt ?";
+"action_title_public" = "Public";
+"action_title_private" = "Privé";
+"action_description_public" = "Toute personne participe à votre action solidaire, sans vérifier son profil au préalable.";
+"action_description_private" = "Vous vérifiez le profil de chaque personne qui souhaite participer à votre action solidaire.";
+"action_title_pres_de" = "Près de";
+"addEventStartDate" = "Date de début *";
+"addEventEndDate" = "Date de fin";
+
+//Dates formatées
+"le_" = "le %@";
+"du_au" = "du %@ au %@";
+"de_a" = "de %@ à %@";
+"du_a" = "du %@ à %@";
+"au_a" = "au %@ à %@";
+"rendez-vous" = "Rendez-vous";
+
+//PreOnboarding V2
+"next" = "Suivant";
+"connectMe" = "Me connecter";
+"preOnboard_start_title1" = "Bienvenue sur Entourage";
+"preOnboard_start_title1_colored" = "Entourage";
+"preOnboard_start_description1" = "Rejoignez la communauté solidaire Entourage, réseau d’entraide et de partage au coeur de votre quartier.";
+"preOnboard_start_title2" = "Voisins, faites un pas simple vers les autres";
+"preOnboard_start_title2_colored" = "simple";
+"preOnboard_start_description2" = "Proposez ou demandez de l’aide et rencontrez-vous entre voisins, avec et sans domicile, d’un même quartier.";
+"preOnboard_start_title3" = "Participez à des événements solidaires";
+"preOnboard_start_title3_colored" = "événements solidaires";
+"preOnboard_start_title4" = "Entourage vous accompagne";
+"preOnboard_start_title4_colored" = "accompagne";
+"preOnboard_start_description4" = "Aller vers l’autre devient plus facile : participez à des ateliers de sensibilisation ou formez-vous en ligne. L’association Entourage et ses Ambassadeurs sont là pour vous aider !";
+"preOnboard_choice_description" = "Le réseau de ceux qui n’ont pas de réseau";
+"preOnboard_choice_signup" = "Je m'inscris";
+"preOnboard_choice_login" = "J'ai déjà un compte";
+"preOnboard_choice_weblink" = "Qui est l’association Entourage ?";

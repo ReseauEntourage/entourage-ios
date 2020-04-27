@@ -69,19 +69,26 @@
         self.lblUserCount.text = [feedItem.noPeople stringValue];
     }
     if (self.btnAvatar) {
-        [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
+        if ([feedItem isNeighborhood] || [feedItem isPrivateCircle]) {
+            self.btnAvatar.hidden = true;
+        } else {
+            self.btnAvatar.hidden = false;
+            [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
+        }
     }
     
     if (self.lblDescription) {
-        if (self.lblUserName) {
-            self.lblDescription.text = [uiDelegate descriptionWithoutUserName];
+        if ([feedItem isNeighborhood] || [feedItem isPrivateCircle]) {
+            self.lblDescription.text = @" ";
+        } else if (self.lblUserName) {
+            self.lblDescription.text = [uiDelegate descriptionWithoutUserName_hasToShowDate:NO];
         } else {
-            [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+            [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue hasToShowDate:NO]];
         }
     }
 
     if (self.lblUserName) {
-        if ([feedItem isOuting]) {
+        if ([feedItem isOuting] || [feedItem isNeighborhood] || [feedItem isPrivateCircle]) {
             self.lblUserName.text = nil;
         } else {
             self.lblUserName.text = [uiDelegate userName];
@@ -102,7 +109,7 @@
         if (feedItem.displayAddress.length > 0) {
             self.lblLocation.text = [NSString stringWithFormat:OTLocalizedString(@"entourage_location"), feedItem.displayAddress];
         } else {
-            self.lblLocation.text = @"";
+            self.lblLocation.text = @" ";
         }
     }
     

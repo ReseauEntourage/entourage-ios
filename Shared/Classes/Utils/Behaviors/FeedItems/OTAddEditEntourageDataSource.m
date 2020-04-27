@@ -12,6 +12,7 @@
 #import "OTConsts.h"
 #import "NSDate+OTFormatter.h"
 #import "entourage-Swift.h"
+#import "OTEntouragePrivacyActionCell.h"
 
 @interface OTAddEditEntourageDataSource ()
 @end
@@ -21,10 +22,10 @@
 + (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
                                entourage:(OTEntourage*)entourage {
     if ([entourage isOuting] && [OTAppConfiguration shouldShowEntouragePrivacyDisclaimerOnCreation:entourage]) {
-        return 5;
+        return 6;//5;
     }
     
-    return 4;
+    return 5;//4;
 }
 
 + (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -64,11 +65,24 @@
                                      entourage.startsAt.toTimeString];
                     
                 }
-                [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"addEventDate")
+                [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"addEventStartDate")
                                                         andText:startDateInfo];
             }
                 break;
-            case 4:
+            case 4: {
+                NSString *endDateInfo = @"";
+                if (entourage.endsAt) {
+                    endDateInfo = [NSString stringWithFormat:@"%@%@%@",
+                                     [entourage.endsAt asStringWithFormat:@"EEEE dd MMMM yyyy"],
+                                     OTLocalizedString(@"at_hour"),
+                                     entourage.endsAt.toTimeString];
+                    
+                }
+                [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"addEventEndDate")
+                                                        andText:endDateInfo];
+            }
+                break;
+            case 5:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EntouragePrivacyCell"];
                 [((OTEntourageEditItemCell*)cell) configureWithSwitchPublicState:entourage.isPublic.boolValue entourage:entourage];
                 [((OTEntourageEditItemCell*)cell).privacySwitch
@@ -83,14 +97,26 @@
     }
     
     NSString *identifier = indexPath.section != 1  ? @"EntourageCell" : @"EntourageImageCell";
+    if (indexPath.section == 4) {
+        identifier = @"EntouragePrivacyActionCell";
+    }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     switch (indexPath.section) {
         case 0:
+        {
+            NSString *title = @"";
+            if (entourage.categoryObject.title == nil || entourage.categoryObject.title.length <= 0) {
+                title = @"*";
+            }
+            else {
+                title = entourage.categoryObject.title;
+            }
             [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"category")
-                                                    andText:entourage.categoryObject.title];
+                                                    andText:title];
             break;
+        }
         case 1:
-            [((OTEntourageEditItemImageCell*)cell) configureWith:OTLocalizedString(@"myLocation")
+            [((OTEntourageEditItemImageCell*)cell) configureWith:OTLocalizedString(@"action_title_pres_de")
                                                          andText:locationText
                                                     andImageName:@"location"];
             break;
@@ -102,6 +128,8 @@
             [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"descriptionTitle")
                                                     andText:entourage.desc];
             break;
+        case 4:
+            [(OTEntouragePrivacyActionCell*) cell setActionDelegate:delegate isPublic:entourage.isPublic.boolValue];
         default:
             break;
     }
@@ -125,7 +153,12 @@
                 [delegate editEntourageAddress];
                 break;
             case 3:
-                [delegate editEntourageDate];
+                [delegate editEntourageDate_isStart:YES];
+                break;
+            case 4:
+                if (entourage.startsAt != nil) {
+                    [delegate editEntourageDate_isStart:NO];
+                }
                 break;
             default:
                 break;
@@ -158,7 +191,7 @@
 
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section == 4) {
-        return 100.0f;
+        return UITableViewAutomaticDimension;
     }
     
     return 50.0f;

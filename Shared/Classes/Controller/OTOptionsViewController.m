@@ -22,7 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addCloseButton];
+    if (!self.isNewOptions) {
+        [self addCloseButton];
+    }
     
     // Do any additional setup after loading the view.
     if (!CGPointEqualToPoint(self.fingerPoint, CGPointZero)) {
@@ -123,6 +125,44 @@
     return [self addOption:optionName atIndex:index withIcon:optionIcon applyTintColor:NO andAction:selector];
 }
 
+//Custom button orange color + round
+- (void)addOption:(NSString *)optionName
+          atIndex:(int)index
+         withIconWithoutBG:(NSString *)optionIcon
+        andAction:(SEL)selector
+{
+    //Fix bottom margin for iPhone 5/5s/SE and iPhone 6/7/8
+    float initial_bottom = INITIAL_BOTTOM;
+    
+    if ([[UIScreen mainScreen] bounds].size.height == 568) {
+        initial_bottom = INITIAL_BOTTOM_SMALL;
+    }
+    else if ([[UIScreen mainScreen] bounds].size.height == 667) {
+        initial_bottom = INITIAL_BOTTOM_MEDIUM;
+    }
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGFloat x = [UIScreen mainScreen].bounds.size.width - PADDING_HORIZONTAL - BIG_BUTTON_SIDE;
+    CGFloat y = [UIScreen mainScreen].bounds.size.height - (index)*(PADDING_VERTICAL + BIG_BUTTON_SIDE) - initial_bottom;
+    
+    button.frame = CGRectMake(x, y, BIG_BUTTON_SIDE, BIG_BUTTON_SIDE);
+    button.layer.cornerRadius = button.frame.size.width / 2;
+    button.backgroundColor = [UIColor colorWithDisplayP3Red:245 / 255.0 green:95 / 255.0 blue:36 / 255.0 alpha:1.0];
+    [button setImage:[UIImage imageNamed:optionIcon] forState:UIControlStateNormal];
+    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    button.clipsToBounds = YES;
+
+    UILabel *actionLabel = [[UILabel alloc] init];
+    actionLabel.frame = ACTION_LABEL_FRAME;
+    actionLabel.center = CGPointMake(button.center.x - actionLabel.frame.size.width/2.0f - PADDING_HORIZONTAL/2.0f - button.frame.size.width/2.0f, button.center.y);
+    actionLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightBold];
+    actionLabel.textColor = [ApplicationTheme shared].backgroundThemeColor;
+    actionLabel.textAlignment = NSTextAlignmentRight;
+    actionLabel.text = optionName;
+    [self.view addSubview: actionLabel];
+}
+
 #pragma mark - Actions
 
 - (IBAction)doCreateTour:(id)sender {
@@ -148,6 +188,26 @@
     else
         if ([self.optionsDelegate respondsToSelector:@selector(createAction)])
             [self.optionsDelegate performSelector:@selector(createAction) withObject:nil];
+}
+
+- (IBAction)doCreateActionHelp:(id)sender {
+    [OTAppState hideTabBar:NO];
+    [OTLogger logEvent:@"CreateActionClick"];
+    if ([OTOngoingTourService sharedInstance].isOngoing)
+        [self.actionAlert presentOnViewController:self];
+    else
+        if ([self.optionsDelegate respondsToSelector:@selector(createActionHelp)])
+            [self.optionsDelegate performSelector:@selector(createActionHelp) withObject:nil];
+}
+
+- (IBAction)doCreateActionGift:(id)sender {
+    [OTAppState hideTabBar:NO];
+    [OTLogger logEvent:@"CreateActionClick"];
+    if ([OTOngoingTourService sharedInstance].isOngoing)
+        [self.actionAlert presentOnViewController:self];
+    else
+        if ([self.optionsDelegate respondsToSelector:@selector(createActionGift)])
+            [self.optionsDelegate performSelector:@selector(createActionGift) withObject:nil];
 }
     
 - (IBAction)doCreateEvent:(id)sender {

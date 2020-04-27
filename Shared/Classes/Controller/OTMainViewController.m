@@ -90,6 +90,7 @@
 #import "OTNeighborhoodAnnotation.h"
 #import "OTPrivateCircleAnnotation.h"
 #import "OTOutingAnnotation.h"
+#import "OTCrashlyticsHelper.h"
 
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define FEEDS_REQUEST_DISTANCE_KM 10
@@ -165,6 +166,7 @@
 @property (nonatomic) double entourageScale;
 @property (nonatomic) BOOL encounterFromTap;
 @property (nonatomic) BOOL forceReloadingFeeds;
+@property (nonatomic) BOOL isAskForHelp;
 
 @end
 
@@ -186,17 +188,25 @@
 
 - (void)configureActionsButton {
     UIImage *closeImage = [[UIImage imageNamed:@"closeOptionWithNoShadow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    
     [self.launcherButton.layer setShadowColor:[UIColor blackColor].CGColor];
     [self.launcherButton.layer setShadowOpacity:0.5];
     [self.launcherButton.layer setShadowRadius:4.0];
     self.launcherButton.layer.masksToBounds = NO;
     [self.launcherButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
     self.launcherButton.layer.cornerRadius = 29;
+    if (!self.isSolidarityGuide) {
+        
+        self.launcherButton.backgroundColor = [ApplicationTheme shared].addActionButtonColor;
+        [self.launcherButton setImage:closeImage forState:UIControlStateHighlighted];
+        [self.launcherButton setImage:closeImage forState:UIControlStateSelected];
     
-    self.launcherButton.backgroundColor = [ApplicationTheme shared].addActionButtonColor;
-    [self.launcherButton setImage:closeImage forState:UIControlStateHighlighted];
-    [self.launcherButton setImage:closeImage forState:UIControlStateSelected];
+        [self.launcherButton setTitle:@"+" forState:UIControlStateNormal];
+    }
+    else {
+         UIImage *plusImage = [[UIImage imageNamed:@"icn_plus_map_solidarity"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [self.launcherButton setImage:plusImage forState:UIControlStateNormal];
+         [self.launcherButton setTitle:@"" forState:UIControlStateNormal];
+    }
     
     [self.createEncounterButton.layer setShadowColor:[UIColor blackColor].CGColor];
     [self.createEncounterButton.layer setShadowOpacity:0.5];
@@ -253,8 +263,9 @@
     self.tableView.estimatedRowHeight = 140;
     [self configureMapView];
     
-    if (OTSharedOngoingTour.isOngoing ||
-        [NSUserDefaults standardUserDefaults].currentOngoingTour != nil) {
+    if (!self.isSolidarityGuide &&
+        (OTSharedOngoingTour.isOngoing ||
+         [NSUserDefaults standardUserDefaults].currentOngoingTour != nil)) {
         [self setupUIForTourOngoing];
     } else {
         [self showToursMap];
@@ -275,6 +286,13 @@
 }
 
 - (void)setupUIForTourOngoing {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
+
+    [self.tourCreatorBehavior initialize];
+    self.tourCreatorBehavior.delegate = self;
     [self showNewTourOnGoing];
     [self clearMap];
     self.tourCreatorBehavior.tour = [NSUserDefaults standardUserDefaults].currentOngoingTour;
@@ -327,10 +345,6 @@
                                                  name:@kNotificationShowFeedsMapCurrentLocation
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(pushReceived)
-                                                 name:@kNotificationPushReceived
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(locationUpdated:)
                                                  name:kNotificationLocationUpdated
                                                object:nil];
@@ -351,8 +365,12 @@
                                                  name:kSolidarityGuideNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateBadge:)
-                                                 name:kUpdateBadgeCountNotification
+                                             selector:@selector(updateGroupUnreadState:)
+                                                 name:kUpdateGroupUnreadStateNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateTotalUnreadCountBadge:)
+                                                 name:kUpdateTotalUnreadCountNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(entourageUpdated:)
@@ -601,7 +619,7 @@
     CLLocationCoordinate2D whereTap = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
     self.tappedLocation = [[CLLocation alloc] initWithLatitude:whereTap.latitude longitude:whereTap.longitude];
 
-    if ([OTOngoingTourService sharedInstance].isOngoing) {
+    if ([OTOngoingTourService sharedInstance].isOngoing && !self.isSolidarityGuide) {
         self.encounterFromTap = YES;
         self.encounterLocation = whereTap;
         [OTLogger logEvent:@"HiddenButtonsOverlayPress"];
@@ -637,7 +655,7 @@
 - (void)appWillEnterBackground:(NSNotification*)note {
     [self.newsFeedsSourceBehavior pause];
     
-    if ([OTOngoingTourService sharedInstance].isOngoing) {
+    if ([OTOngoingTourService sharedInstance].isOngoing && !self.isSolidarityGuide) {
         [self createLocalNotificationForTour: self.tourCreatorBehavior.tour.uid];
     }
 }
@@ -648,6 +666,11 @@
 }
     
 - (void)createQuickEncounter {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
+
     // EMA-2138
     //[self performSegueWithIdentifier:@"OTTourOptionsSegue" sender:nil];
     
@@ -860,6 +883,10 @@
 }
 
 - (void)createLocalNotificationForTour:(NSNumber*)tourId {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     if (!tourId) {
         return;
     }
@@ -869,7 +896,6 @@
     localNotification.alertAction = OTLocalizedString(@"Stop");
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     localNotification.userInfo = @{@"tourId": tourId, @"object":OTLocalizedString(@"tour_ongoing")};
-    localNotification.applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
@@ -978,6 +1004,10 @@
 #pragma mark - OTTourCreatorBehaviorDelegate
 
 - (void)tourStarted {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     [self.newsFeedsSourceBehavior addFeedItemToFront:self.tourCreatorBehavior.tour];
     self.stopButton.hidden = NO;
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:self.tourCreatorBehavior.tour];
@@ -990,6 +1020,10 @@
 }
 
 - (void)failedToStartTour {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     self.launcherButton.enabled = YES;
 }
 
@@ -998,6 +1032,10 @@
 }
 
 - (void)stoppedTour {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     self.launcherButton.hidden = YES;
     self.createEncounterButton.hidden = YES;
     [self showFeedsList];
@@ -1008,6 +1046,10 @@
 }
 
 - (void)failedToStopTour {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:OTLocalizedString(@"failed_send_tour_points_to_server") preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:OTLocalizedString(@"OK") style:UIAlertActionStyleDefault handler:nil];
     [alert addAction:defaultAction];
@@ -1036,6 +1078,10 @@
 #pragma mark - OTTourCreatorDelegate
 
 - (void)createTour:(NSString*)tourType {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     [OTAppState hideTabBar:NO];
     [self dismissViewControllerAnimated:NO completion:nil];
     [self zoomToCurrentLocation:nil];
@@ -1046,6 +1092,10 @@
 }
 
 - (IBAction)stopTour:(id)sender {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     [OTLogger logEvent:@"SuspendTourClick"];
     [self.tourCreatorBehavior stopTour];
 }
@@ -1053,6 +1103,10 @@
 #pragma mark - OTConfirmationViewControllerDelegate
 
 - (void)tourSent:(OTTour*)tour {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     if (self.tourCreatorBehavior.tour == nil)
         return;
     if (tour != nil && tour.uid != nil)
@@ -1072,11 +1126,19 @@
 }
 
 - (void)tourCloseError {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     self.launcherButton.hidden = YES;
     self.createEncounterButton.hidden = NO;
 }
 
 - (void)resumeTour {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     [OTOngoingTourService sharedInstance].isOngoing = YES;
     self.stopButton.hidden = NO;
     self.createEncounterButton.hidden = NO;
@@ -1133,6 +1195,10 @@
 #pragma mark - OTOptionsDelegate
 
 - (void)createTour {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     void(^createBlock)(void) = ^() {
         [self switchToNewsfeed];
         [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
@@ -1144,6 +1210,10 @@
 }
 
 - (void)createEncounter {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     [self dismissViewControllerAnimated:NO completion:^{
         [self switchToNewsfeed];
         [self.editEncounterBehavior doEdit:nil
@@ -1156,6 +1226,16 @@
     self.addEditEvent = NO;
     [self createEntouragewithAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
 }
+
+- (void)createActionHelp {
+    self.isAskForHelp = YES;
+    [self createAction];
+}
+
+- (void)createActionGift {
+    self.isAskForHelp = NO;
+    [self createAction];
+}
     
 - (void)createEvent {
     if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
@@ -1164,7 +1244,9 @@
     }
 
     self.addEditEvent = YES;
-    [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
+    }];
 }
 
 - (void) createEntouragewithAlertMessage:(NSString *)message {
@@ -1182,7 +1264,7 @@
 
 - (void)togglePOI {
     NSString *message = @"";
-    if([OTOngoingTourService sharedInstance].isOngoing)
+    if([OTOngoingTourService sharedInstance].isOngoing && !self.isSolidarityGuide)
         message = self.toursMapDelegate.isActive ? @"OnTourShowGuide" : @"OnTourHideGuide";
     else
         message = self.toursMapDelegate.isActive ? @"GDSViewClick" : @"MaskGDSClick";
@@ -1290,10 +1372,6 @@
     self.nouveauxFeedItemsButton.hidden = YES;
     [self.tableView reloadData];
     [self.tableView setContentOffset:CGPointZero animated:YES];
-}
-
-- (void)pushReceived {
-    [OTAppState updateMessagesTabBadgeWithValue:[OTUnreadMessagesService sharedInstance].totalCount.stringValue];
 }
 
 #pragma mark - Feeds Table View Delegate
@@ -1484,6 +1562,10 @@
 #pragma mark 15.2 New Tour - on going
 
 - (void)showNewTourOnGoing {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = [UIScreen mainScreen].bounds.size.height;
 
@@ -1504,7 +1586,7 @@
 }
 
 - (void)showTourConfirmation {
-    if ([OTOngoingTourService sharedInstance].isOngoing) {
+    if ([OTOngoingTourService sharedInstance].isOngoing && !self.isSolidarityGuide) {
         [self performSegueWithIdentifier:@"OTConfirmationPopup" sender:nil];
     }
 }
@@ -1589,6 +1671,7 @@
             [[OTLocationManager sharedInstance] defaultLocationForNewActions];
         controller.location = currentLocation;
         controller.entourageEditorDelegate = self;
+        controller.isAskForHelp = self.isAskForHelp;
         controller.isEditingEvent = self.addEditEvent;
     }
     else if ([segue.identifier isEqualToString:@"SolidarityGuideSegue"]) {
@@ -1628,9 +1711,15 @@
     [self.mailSender sendCloseMail:reason forItem: feedItem];
 }
 
-- (void)updateBadge:(NSNotification *) notification {
-    [OTAppState updateMessagesTabBadgeWithValue:[OTUnreadMessagesService sharedInstance].totalCount.stringValue];
-    [self forceGetNewData];
+- (void)updateGroupUnreadState:(NSNotification *) notification {
+    BOOL refreshFeed = [notification.object boolForKey:kNotificationUpdateBadgeRefreshFeed defaultValue:YES];
+    if (refreshFeed == YES)
+        [self forceGetNewData];
+}
+
+- (void)updateTotalUnreadCountBadge:(NSNotification *) notification {
+    NSNumber *totalUnreadCount = [notification.object numberForKey:kNotificationTotalUnreadCountKey];
+    [OTAppState updateMessagesTabBadgeWithValue:totalUnreadCount.stringValue];
 }
 
 - (void)encounterEdited: (NSNotification *)notification {

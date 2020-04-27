@@ -12,8 +12,10 @@
 
 + (OTUnreadMessagesService *)sharedInstance;
 
-- (void)addUnreadMessage:(NSNumber *)feedId stringId:(NSString*)stringId;
-- (void)removeUnreadMessages:(NSNumber *)feedId stringId:(NSString*)stringId;
+- (void)setTotalUnreadCount:(NSNumber *)count;
+- (void)setGroupUnreadMessagesCount:(NSNumber *)feedId stringId:(NSString*)stringId count:(NSNumber *)count;
+- (void)incrementGroupUnreadMessagesCount:(NSNumber *)feedId stringId:(NSString*)stringId;
+- (void)setGroupAsRead:(NSNumber *)feedId stringId:(NSString*)stringId refreshFeed:(BOOL)refreshFeed;
 - (NSNumber *)countUnreadMessages:(NSNumber *)feedId stringId:(NSString*)stringId;
 - (NSNumber *)totalCount;
 

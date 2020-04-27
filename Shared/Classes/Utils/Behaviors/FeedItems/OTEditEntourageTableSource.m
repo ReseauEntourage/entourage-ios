@@ -13,6 +13,7 @@
 #import "OTAddEditEntourageDataSource.h"
 #import "entourage-Swift.h"
 
+#define TIME_ADDED_TO_END_DATE_EVENT 60 * 60 * 3
 @interface OTEditEntourageTableSource () <UITableViewDataSource, UITableViewDelegate, OTAddEditEntourageDelegate>
 
 @property (nonatomic, strong, readwrite) OTEntourage *entourage;
@@ -38,6 +39,7 @@
     self.entourage.categoryObject = entourage.categoryObject;
     self.entourage.streetAddress = entourage.streetAddress;
     self.entourage.startsAt = entourage.startsAt;
+    self.entourage.endsAt = entourage.endsAt;
     self.entourage.displayAddress = entourage.displayAddress;
     self.entourage.googlePlaceId = entourage.googlePlaceId;
     self.entourage.placeName = entourage.placeName;
@@ -117,9 +119,9 @@
     [self.editEntourageNavigation editAddress:self.entourage];
 }
 
-- (void)editEntourageDate
+- (void)editEntourageDate_isStart:(BOOL)isStartDate
 {
-    [self.editEntourageNavigation editDate:self.entourage];
+    [self.editEntourageNavigation editDate:self.entourage isStart:isStartDate];
 }
 
 - (void)editEntourageEventConfidentiality:(UISwitch*)sender {
@@ -130,6 +132,10 @@
 
 - (void)updateTexts {
     [self.tblEditEntourage reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [OTAddEditEntourageDataSource numberOfSectionsInTableView:self.tblEditEntourage entourage:self.entourage])] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void) editEntourageActionChangePrivacyPublic:(BOOL)isPublic {
+    self.entourage.isPublic = [NSNumber numberWithBool:isPublic];
 }
 
 #pragma mark - geolocation
@@ -163,6 +169,19 @@
 
 - (void)updateEventStartDate:(NSDate*)date {
     self.entourage.startsAt = date;
+    if (self.entourage.endsAt == nil) {
+        self.entourage.endsAt = [self.entourage.startsAt dateByAddingTimeInterval:TIME_ADDED_TO_END_DATE_EVENT];
+    }
+    else {
+        if ([[self.entourage.startsAt earlierDate:self.entourage.endsAt] isEqualToDate:self.entourage.endsAt]) {
+            self.entourage.endsAt = [self.entourage.startsAt dateByAddingTimeInterval:TIME_ADDED_TO_END_DATE_EVENT];
+        }
+    }
+    [self updateTexts];
+}
+
+- (void)updateEventEndDate:(NSDate*)date {
+    self.entourage.endsAt = date;
     [self updateTexts];
 }
 

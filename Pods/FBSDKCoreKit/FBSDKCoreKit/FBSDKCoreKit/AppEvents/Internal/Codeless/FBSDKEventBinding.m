@@ -16,6 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "TargetConditionals.h"
+
+#if !TARGET_OS_TV
+
 #import "FBSDKEventBinding.h"
 
 #import "FBSDKAppEvents.h"
@@ -73,7 +77,7 @@
                                            pathType:component.pathType
                                          sourceView:sourceView];
     }
-    if (text) {
+    if (text.length > 0) {
       if ([component.name isEqualToString:PARAMETER_NAME_PRICE]) {
         NSNumber *value = [FBSDKAppEventsUtility getNumberValue:text];
         params[component.name] = value;
@@ -274,3 +278,5 @@ pathComponent:(FBSDKCodelessPathComponent *)component
 }
 
 @end
+
+#endif

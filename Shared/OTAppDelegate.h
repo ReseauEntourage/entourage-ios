@@ -10,7 +10,8 @@
 #import <UIKit/UIKit.h>
 
 extern NSString *const kLoginFailureNotification;
-extern NSString *const kUpdateBadgeCountNotification;
+extern NSString *const kUpdateGroupUnreadStateNotification;
+extern NSString *const kUpdateTotalUnreadCountNotification;
 
 
 @interface OTAppDelegate : UIResponder <UIApplicationDelegate>

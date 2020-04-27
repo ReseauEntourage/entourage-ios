@@ -23,7 +23,7 @@ def sharedPods
     pod 'FBSDKCoreKit'
     pod 'Firebase/Analytics'
     pod 'Firebase/Messaging'
-    pod 'Firebase/InAppMessagingDisplay'
+    pod 'Firebase/InAppMessaging'
     pod 'SnapKit', '~> 4.0.0'
     pod 'GooglePlaces'
     pod 'GoogleMaps'
@@ -38,6 +38,6 @@ target "pfp" do
     sharedPods
 end
 
-target "entourageTests" do
-    pod 'OCMock', '3.1'
+target "UnitTests" do
+    sharedPods
 end

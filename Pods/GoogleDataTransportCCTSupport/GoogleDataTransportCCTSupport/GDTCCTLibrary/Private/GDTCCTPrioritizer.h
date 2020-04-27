@@ -17,21 +17,32 @@
 #import <Foundation/Foundation.h>
 
 #import <GoogleDataTransport/GDTCORClock.h>
+#import <GoogleDataTransport/GDTCOREvent.h>
 #import <GoogleDataTransport/GDTCORPrioritizer.h>
+#import <GoogleDataTransport/GDTCORTargets.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /** Manages the prioritization of events from GoogleDataTransport. */
-@interface GDTCCTPrioritizer : NSObject <GDTCORPrioritizer>
+@interface GDTCCTPrioritizer : NSObject <NSSecureCoding, GDTCORPrioritizer>
 
 /** The queue on which this prioritizer operates. */
 @property(nonatomic) dispatch_queue_t queue;
 
-/** All log events that have been processed by this prioritizer. */
-@property(nonatomic) NSMutableSet<GDTCORStoredEvent *> *events;
+/** All CCT events that have been processed by this prioritizer. */
+@property(nonatomic) NSMutableSet<GDTCOREvent *> *CCTEvents;
 
-/** The most recent attempted upload of daily uploaded logs. */
-@property(nonatomic) GDTCORClock *timeOfLastDailyUpload;
+/** All FLL events that have been processed by this prioritizer. */
+@property(nonatomic) NSMutableSet<GDTCOREvent *> *FLLEvents;
+
+/** All CSH events that have been processed by this prioritizer. */
+@property(nonatomic) NSMutableSet<GDTCOREvent *> *CSHEvents;
+
+/** The most recent attempted upload of CCT daily uploaded logs. */
+@property(nonatomic) GDTCORClock *CCTTimeOfLastDailyUpload;
+
+/** The most recent attempted upload of FLL daily uploaded logs*/
+@property(nonatomic) GDTCORClock *FLLOfLastDailyUpload;
 
 /** Creates and/or returns the singleton instance of this class.
  *

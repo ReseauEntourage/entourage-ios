@@ -68,11 +68,18 @@ NSString *const kEntourageAnnotationIdentifier = @"OTEntourageAnnotationIdentifi
 }
 
 - (UIImage*)annotationImage {
-    NSString *iconName = [OTAppAppearance iconNameForEntourageItem:self.entourage];
-    return [self annotationImageWithName:iconName];
+    NSString *iconName = [OTAppAppearance iconNameForEntourageItem:self.entourage isAnnotation:YES];
+   
+    return [self annotationImageWithName:iconName isOuting:self.entourage.isOuting];
 }
 
-- (UIImage*)annotationImageWithName:(NSString*)iconName {
+- (UIImage*)annotationImageWithName:(NSString*)iconName isOuting:(BOOL) isOuting {
+    if (isOuting) {
+        UIImage *icon = [UIImage imageNamed:iconName];
+        
+        return icon;
+    }
+    
     CGSize imageSize = {40, 40};
     UIImage *icon = [UIImage imageNamed:iconName];
     

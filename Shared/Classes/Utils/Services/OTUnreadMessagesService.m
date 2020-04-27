@@ -28,7 +28,36 @@
     return sharedInstance;
 }
 
-- (void)addUnreadMessage:(NSNumber *)feedId stringId:(NSString*)stringId {
+- (void)setTotalUnreadCount:(NSNumber *)count {
+    NSDictionary* notificationInfo = @{kNotificationTotalUnreadCountKey:count};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateTotalUnreadCountNotification object:notificationInfo];
+}
+
+- (void)setGroupUnreadMessagesCount:(NSNumber *)feedId stringId:(NSString*)stringId count:(NSNumber *)count {
+    NSMutableArray *unreadMessages = [self getUnreadMessages];
+    OTUnreadMessageCount *unreadMessageFound = [self findIn:unreadMessages byFeedNumberId:feedId stringId:stringId];
+    if (unreadMessageFound == nil) {
+        unreadMessageFound = [OTUnreadMessageCount new];
+        unreadMessageFound.feedId = feedId;
+        unreadMessageFound.uuid = stringId;
+        [unreadMessages addObject:unreadMessageFound];
+    }
+
+    unreadMessageFound.unreadMessagesCount = count;
+
+    id feedUid = feedId ? feedId : stringId;
+    
+    [self saveUnreadMessages:unreadMessages];
+    NSDictionary* notificationInfo = @{
+        kNotificationUpdateBadgeCountKey:unreadMessageFound.unreadMessagesCount,
+        kNotificationUpdateBadgeFeedIdKey:feedUid,
+        kNotificationUpdateBadgeRefreshFeed:@NO
+    };
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateGroupUnreadStateNotification object:notificationInfo];
+}
+
+- (void)incrementGroupUnreadMessagesCount:(NSNumber *)feedId stringId:(NSString*)stringId {
     NSMutableArray *unreadMessages = [self getUnreadMessages];
     OTUnreadMessageCount *unreadMessageFound = [self findIn:unreadMessages byFeedNumberId:feedId stringId:stringId];
     if (unreadMessageFound == nil) {
@@ -46,12 +75,16 @@
     id feedUid = feedId ? feedId : stringId;
     
     [self saveUnreadMessages:unreadMessages];
-    NSDictionary* notificationInfo = @{ kNotificationUpdateBadgeCountKey:unreadMessageFound.unreadMessagesCount, kNotificationUpdateBadgeFeedIdKey:feedUid};
+    NSDictionary* notificationInfo = @{
+        kNotificationUpdateBadgeCountKey:unreadMessageFound.unreadMessagesCount,
+        kNotificationUpdateBadgeFeedIdKey:feedUid,
+        kNotificationUpdateBadgeRefreshFeed:@YES
+    };
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:notificationInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateGroupUnreadStateNotification object:notificationInfo];
 }
 
-- (void)removeUnreadMessages:(NSNumber *)feedId stringId:(NSString*)stringId {
+- (void)setGroupAsRead:(NSNumber *)feedId stringId:(NSString*)stringId refreshFeed:(BOOL)refreshFeed {
     if (!feedId && !stringId) {
         return;
     }
@@ -66,9 +99,14 @@
     
     id feedUid = feedId ? feedId: stringId;
     
-    NSDictionary *notificationInfo = @{ kNotificationUpdateBadgeCountKey: @(unreadMessages.count), kNotificationUpdateBadgeFeedIdKey:feedUid};
+    NSDictionary *notificationInfo = @{
+        kNotificationUpdateBadgeCountKey: @(unreadMessages.count),
+        kNotificationUpdateBadgeFeedIdKey:feedUid,
+        kNotificationUpdateBadgeRefreshFeed:@(refreshFeed)
+    };
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateBadgeCountNotification object:notificationInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateGroupUnreadStateNotification object:notificationInfo];
+    [self setTotalUnreadCount:self.totalCount];
 }
 
 - (NSNumber *)countUnreadMessages:(NSNumber *)feedId stringId:(NSString*)stringId {
@@ -84,7 +122,9 @@
     NSMutableArray *unreadMessages = [self getUnreadMessages];
     int total = 0;
     for (OTUnreadMessageCount *item in unreadMessages) {
-        total += item.unreadMessagesCount.intValue;
+        if (item.unreadMessagesCount.intValue > 0) {
+            total += 1;
+        }
     }
     
     return @(total);

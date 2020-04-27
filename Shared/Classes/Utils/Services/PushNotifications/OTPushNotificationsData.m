@@ -35,6 +35,7 @@
     
     if ([userInfo objectForKey:kFirebaseCTA] != nil) {
         // Firebase notification: transform to Mixpanel notification :)
+        userInfo = [userInfo mutableCopy];
         [userInfo setValue:[userInfo objectForKey:kFirebaseCTA] forKey:kMixpanelCTA];
     }
     if ([userInfo objectForKey:kMixpanelCTA] != nil) {

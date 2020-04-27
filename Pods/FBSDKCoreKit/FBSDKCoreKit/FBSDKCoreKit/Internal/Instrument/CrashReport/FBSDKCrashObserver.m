@@ -37,7 +37,7 @@
     frameworks = @[@"FBSDKCoreKit",
                    @"FBSDKLoginKit",
                    @"FBSDKShareKit",
-                   @"FBSDKPlacesKit",
+                   @"FBSDKGamingServicesKit",
                    @"FBSDKTVOSKit"];
   }
   return self;

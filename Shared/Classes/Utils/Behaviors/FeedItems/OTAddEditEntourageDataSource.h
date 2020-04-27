@@ -14,8 +14,9 @@
 - (void)editEntourageTitle;
 - (void)editEntourageDescription;
 - (void)editEntourageAddress;
-- (void)editEntourageDate;
+- (void)editEntourageDate_isStart:(BOOL)isStartDate;
 - (void)editEntourageEventConfidentiality:(UISwitch*)sender;
+- (void)editEntourageActionChangePrivacyPublic:(BOOL)isPublic;
 @end
 
 @interface OTAddEditEntourageDataSource : NSObject

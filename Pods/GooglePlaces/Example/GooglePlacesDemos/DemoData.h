@@ -45,23 +45,12 @@
  * Construct and return a new UIViewController instance which contains the view to present when the
  * demo is selected from the list.
  *
- * @param autocompleteBoundsMode The |GMSAutocompleteBoundsMode| to determine whether this should
- *     be biased or restricted to the coordinate bounds.
- * @param autocompleteBoundsNorthEastCorner The |CLLocationCoordinate2D| representing the
- *     autocomplete bounds north east location.
- * @param autocompleteBoundsSouthWestCorner The |CLLocationCoordinate2D| representing the
- *     autocomplete bounds south west location.
  * @param autocompleteFilter The |GMSAutocompleteFilter| that filters on types and countries.
  * @param placeField The |GMSPlaceField| to request individual fields for the |GMSPlace| result.
  */
-- (UIViewController *)
-    createViewControllerWithAutocompleteBoundsMode:(GMSAutocompleteBoundsMode)autocompleteBoundsMode
-                 autocompleteBoundsNorthEastCorner:
-                     (CLLocationCoordinate2D)autocompleteBoundsNorthEastCorner
-                 autocompleteBoundsSouthWestCorner:
-                     (CLLocationCoordinate2D)autocompleteBoundsSouthWestCorner
-                                autocompleteFilter:(GMSAutocompleteFilter *)autocompleteFilter
-                                       placeFields:(GMSPlaceField)placeField;
+- (UIViewController *)createViewControllerWithAutocompleteFilter:
+                          (GMSAutocompleteFilter *)autocompleteFilter
+                                                     placeFields:(GMSPlaceField)placeField;
 
 @end
 

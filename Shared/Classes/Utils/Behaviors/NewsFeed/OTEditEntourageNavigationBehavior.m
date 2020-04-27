@@ -32,7 +32,7 @@
 
 @implementation OTEditEntourageNavigationBehavior
 
-- (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
+- (BOOL)prepareSegue:(UIStoryboardSegue *)segue isAskForHelp:(BOOL) isAskForHelp {
     UIViewController *destinationViewController = segue.destinationViewController;
     if (destinationViewController.navigationController) {
         [OTAppConfiguration configureNavigationControllerAppearance:destinationViewController.navigationController];
@@ -42,6 +42,7 @@
         OTCategoryViewController* controller = (OTCategoryViewController *)destinationViewController;
         controller.categorySelectionDelegate = self;
         controller.selectedCategory = self.entourage.categoryObject;
+        controller.isAskForHelp = isAskForHelp;
         return YES;
     }
     if ([segue.identifier isEqualToString:@"EditLocation"]) {
@@ -92,28 +93,48 @@
     self.entourage = entourage;
 }
 
-- (void)editDate:(OTEntourage *)entourage {
+- (void)editDate:(OTEntourage *)entourage isStart:(BOOL)isStartDate {
     self.entourage = entourage;
     
     NSDate *defaultDate;
-    if (entourage.startsAt != nil) {
-        defaultDate = entourage.startsAt;
-    } else {
-        defaultDate = [NSDate date];
+    NSString * _title = @"";
+    NSDate *minimalDate = nil;
+    if (isStartDate) {
+        _title = OTLocalizedString(@"addEventStartDate");
+        if (entourage.startsAt != nil) {
+            defaultDate = entourage.startsAt;
+        } else {
+            defaultDate = [NSDate date];
+        }
     }
+    else {
+        _title = OTLocalizedString(@"addEventEndDate");
+        minimalDate = entourage.startsAt;
+        if (entourage.endsAt != nil) {
+            defaultDate = entourage.endsAt;
+        } else {
+            defaultDate = [NSDate date];
+        }
+    }
+   
     
     LSLDatePickerDialog *dpDialog = [[LSLDatePickerDialog alloc] init];
-    [dpDialog showWithTitle:OTLocalizedString(@"addEventDate")
+    [dpDialog showWithTitle:_title
             doneButtonTitle:OTLocalizedString(@"save").uppercaseString
           cancelButtonTitle:OTLocalizedString(@"cancel").uppercaseString
                 defaultDate:defaultDate
-                minimumDate:nil
+                minimumDate:minimalDate
                 maximumDate:nil
            buttonTitleColor:[ApplicationTheme shared].backgroundThemeColor
              datePickerMode:UIDatePickerModeDateAndTime
                    callback:^(NSDate * _Nullable date) {
                        if (date) {
-                           [self.editEntourageSource updateEventStartDate:date];
+                           if (isStartDate) {
+                               [self.editEntourageSource updateEventStartDate:date];
+                           }
+                           else {
+                               [self.editEntourageSource updateEventEndDate:date];
+                           }
                        }
                    }
      ];
@@ -160,6 +181,7 @@
     self.entourage.categoryObject = category;
     self.entourage.category = category.category;
     self.entourage.entourage_type = category.entourage_type;
+    
     [self.editEntourageSource updateTexts];
 }
 
