@@ -105,6 +105,8 @@ typedef NS_ENUM(NSInteger) {
     }
     
     self.tableView.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -146,6 +148,10 @@ typedef NS_ENUM(NSInteger) {
     }
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Private
@@ -191,6 +197,11 @@ typedef NS_ENUM(NSInteger) {
     [self presentViewController:popup
                        animated:YES
                      completion:nil];
+}
+
+- (void)profilePictureUpdated:(NSNotification *)notification {
+    self.user.avatarURL = [[[NSUserDefaults standardUserDefaults] currentUser] avatarURL];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (IBAction)showEditView {

@@ -645,6 +645,61 @@
     return barButtonItem;
 }
 
++ (void)leftNavigationBarButtonItemForFeedItem:(OTFeedItem*)feedItem withBarItem:(void (^)(UIBarButtonItem*))completion
+{
+    CGFloat iconSize = 36.0f;
+    
+    if ([feedItem isConversation]) {
+        UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
+        iconView.backgroundColor = UIColor.whiteColor;
+        iconView.layer.cornerRadius = iconSize / 2;
+        iconView.userInteractionEnabled = NO;
+        iconView.clipsToBounds = YES;
+        iconView.layer.masksToBounds = YES;
+        iconView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        UIImage *placeholder = [[UIImage imageNamed:@"user"] resizeTo:iconView.frame.size];
+        NSString *urlPath = feedItem.author.avatarUrl;
+        if (urlPath != nil && [urlPath class] != [NSNull class] && urlPath.length > 0) {
+            NSURL *url = [NSURL URLWithString:urlPath];
+            
+            [iconView sd_setImageWithURL:url completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                
+                [iconView setImage:[image resizeTo:iconView.frame.size]];
+                UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:iconView];
+                completion(barButtonItem);
+            }];
+        } else {
+            [iconView setImage:placeholder];
+            UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:iconView];
+            completion(barButtonItem);
+        }
+        return;
+    }
+    
+    id iconName = [[[OTFeedItemFactory createFor:feedItem] getUI] categoryIconSource];
+    UIButton *iconView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
+    iconView.backgroundColor = UIColor.whiteColor;
+    iconView.layer.cornerRadius = iconSize / 2;
+    iconView.userInteractionEnabled = NO;
+    iconView.clipsToBounds = YES;
+    UIImage *iconImage = [UIImage imageNamed:iconName];
+    [iconView setImage:iconImage forState:UIControlStateNormal];
+    iconView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    if ([OTAppConfiguration applicationType] == ApplicationTypeEntourage) {
+        if ([feedItem isOuting]) {
+            iconView.tintColor = [ApplicationTheme shared].backgroundThemeColor;
+            [iconView setImage:[[UIImage imageNamed:iconName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                      forState:UIControlStateNormal];
+        }
+    }
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:iconView];
+    
+    completion(barButtonItem);
+}
+
 + (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         if ([feedItem isOuting]) {
