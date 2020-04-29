@@ -11,7 +11,6 @@
 #import "OTAppDelegate.h"
 #import "OTMenuViewController.h"
 #import "OTConsts.h"
-#import "OTLoginViewController.h"
 #import "UIViewController+menu.h"
 #import "OTSettingsViewController.h"
 #import "OTUserViewController.h"

@@ -90,5 +90,7 @@
 #define kWSKeyStreetAddress @"street_address"
 #define kWSKeyGooglePlaceId @"google_place_id"
 #define kWSKeyPlaceName @"place_name"
+#define kWSKeyPlaceLatitude @"latitude"
+#define kWSKeyPlaceLongitude @"longitude"
 
 #endif /* OTAPIKeys_h */

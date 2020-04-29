@@ -69,4 +69,6 @@
 + (void)navigateToNativeNotificationsPreferences;
 
 + (void)presentAuthenticationOverlay:(UIViewController * _Nonnull)currentViewController;
++(void) checkNotifcationsAndGoMainScreen;
++(void)continueFromLoginVC;
 @end

@@ -79,7 +79,10 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     }
     
     @IBAction func action_signUp(_ sender: Any) {
-        OTAppState.continue(fromStartupScreen: self, creatingUser: true)
+        let _storyboard = UIStoryboard.init(name: "Onboarding_V2", bundle: nil)
+        let vc = _storyboard.instantiateViewController(withIdentifier: "startOnboardVC")
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func action_login(_ sender: Any) {

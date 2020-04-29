@@ -49,5 +49,36 @@
          }
      ];
 }
-
+- (void)setupNewUserWithUser:(OTUser*)user
+                          success:(void (^)(OTUser *onboardUser))success
+                          failure:(void (^)(NSError *error))failure
+{
+    NSDictionary *parameters = @{@"user":@{@"phone":user.phone,@"first_name":user.firstName,@"last_name":user.lastName}};
+    
+    NSString *url = [NSString stringWithFormat:API_URL_ONBOARD];
+    [[OTHTTPRequestManager sharedInstance]
+         POSTWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject) {
+             NSDictionary *data = responseObject;
+             NSDictionary *userDictionary = [data objectForKey:@"user"];
+             OTUser *onboardedUser = nil;
+             if (userDictionary)
+                 onboardedUser = [[OTUser alloc] initWithDictionary:userDictionary];
+             if (success) {
+                 success(onboardedUser);
+             }
+             // send a facebook event
+             NSDictionary *params = @{FBSDKAppEventParameterNameRegistrationMethod : @"entourage"};
+             [FBSDKAppEvents
+              logEvent:FBSDKAppEventNameCompletedRegistration
+              parameters:params];
+         }
+         andFailure:^(NSError *error) {
+             if (failure) {
+                 failure(error);
+             }
+         }
+     ];
+}
 @end

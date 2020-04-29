@@ -101,6 +101,13 @@ typedef NS_ENUM(NSInteger) {
 
 #pragma mark - Private
 
+- (IBAction)action_show_take_photo:(id)sender {
+    UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
+    OTOnboardingPhotoViewController *vc = (OTOnboardingPhotoViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_photo"];
+    vc.isFromProfile = YES;
+    [self.navigationController showViewController:vc sender:nil];
+}
+
 - (void)setupSections {
     self.associationRows = [OTUserTableConfigurator getAssociationRowsForUserEdit:self.user];
 

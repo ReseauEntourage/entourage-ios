@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jda-ko-U9T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jda-ko-U9T">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -85,7 +85,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
-                                                                <segue destination="kG9-2Z-dOR" kind="show" id="z8X-eH-Ug5"/>
+                                                                <action selector="action_show_take_photo:" destination="aOS-K6-p4c" eventType="touchUpInside" id="iYZ-2P-Khi"/>
                                                             </connections>
                                                         </button>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m4h-8p-IfR">
@@ -110,7 +110,7 @@
                                                             <inset key="contentEdgeInsets" minX="12" minY="12" maxX="12" maxY="12"/>
                                                             <state key="normal" title="Button" image="cameraSquare"/>
                                                             <connections>
-                                                                <segue destination="kG9-2Z-dOR" kind="show" id="hX5-IV-d6Q"/>
+                                                                <action selector="action_show_take_photo:" destination="aOS-K6-p4c" eventType="touchUpInside" id="biV-w9-Dd8"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -751,7 +751,7 @@ Soyez notifié des actualités importantes.</string>
             </objects>
             <point key="canvasLocation" x="4457" y="73"/>
         </scene>
-        <!--Owner-->
+        <!--About Me View Controller-->
         <scene sceneID="6vK-Pk-lei">
             <objects>
                 <viewController modalPresentationStyle="overCurrentContext" id="5Fv-1Q-446" customClass="OTAboutMeViewController" sceneMemberID="viewController">
@@ -885,7 +885,4 @@ Soyez notifié des actualités importantes.</string>
         <image name="user" width="100" height="100"/>
         <image name="verified" width="22" height="22"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="hX5-IV-d6Q"/>
-    </inferredMetricsTieBreakers>
 </document>

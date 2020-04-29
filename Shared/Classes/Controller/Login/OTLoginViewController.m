@@ -154,7 +154,6 @@ NSString *const kTutorialDone = @"has_done_tutorial";
 - (void)launchAuthentication {
     [SVProgressHUD show];
     
-    NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     NSString *phoneNumber = [self.phoneTextField.text stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceCharacterSet];
     if(![phoneNumber hasPrefix:@"+"]) {
         if([phoneNumber hasPrefix:@"0"])
@@ -165,68 +164,67 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [[OTAuthService new] authWithPhone:phoneNumber
                               password:self.passwordTextField.text
                                success: ^(OTUser *user, BOOL firstLogin) {
-                                   
-                                   [SVProgressHUD dismiss];
-                                   
-                                   // as the logged-out user
-                                   [OTLogger logEvent:@"Login_Success"
-                                       withParameters:@{@"first_login": [NSNumber numberWithBool:firstLogin]}];
-                                   
-                                   NSLog(@"User : %@ authenticated successfully", user.email);
-                                   
-                                   [OTLogger setupMixpanelWithUser:user];
-                                   user.phone = phoneNumber;
-                                   
-                                   if ([OTAppConfiguration supportsTourFunctionality]) {
-                                       [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
-                                   }
-                                                                      
-                                   // backup pre-login value of currentUser in case the user backs from the required onboarding
-                                   self.onboardingNavigation.preLoginUser = [NSUserDefaults standardUserDefaults].currentUser;
-                                   
-                                   [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                   [[NSUserDefaults standardUserDefaults] setFirstLoginState:!firstLogin];
-                                   [self.view endEditing:YES];
-                                   [OTAppState continueFromLoginScreen:self];
-                                   
-                                   if (self.fromLink) {
-                                       [[OTDeepLinkService new] handleDeepLink:self.fromLink];
-                                       self.fromLink = nil;
-                                   }
-                                   
-                               } failure: ^(NSError *error) {
-                                   [SVProgressHUD dismiss];
-                                   [OTLogger logEvent:@"TelephoneSubmitFail"];
-                                   NSString *alertTitle = OTLocalizedString(@"error");
-                                   NSString *alertText = OTLocalizedString(@"connection_error");
-                                   NSString *buttonTitle = OTLocalizedString(@"ok");
-                                   NSString *errorCode = [error readErrorCode];
-                                   if ([errorCode isEqualToString:UNAUTHORIZED]) {
-                                       alertTitle = OTLocalizedString(@"tryAgain");
-                                       alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");
-                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
-                                       [OTLogger logEvent:@"Login_Error"];
-                                       [OTLogger logEvent:@"TelephoneSubmitError"];
-                                   }
-                                   else if([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
-                                       alertTitle = OTLocalizedString(@"tryAgain");
-                                       alertText = OTLocalizedString(@"invalidPhoneNumberFormat");
-                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
-                                       [OTLogger logEvent:@"Login_Error"];
-                                       [OTLogger logEvent:@"TelephoneSubmitError"];
-                                   }
-                                   else if(error.code == NSURLErrorNotConnectedToInternet) {
-                                       alertTitle = OTLocalizedString(@"tryAgain");
-                                       buttonTitle = OTLocalizedString(@"tryAgain_short");
-                                       alertText = error.localizedDescription;
-                                       [OTLogger logEvent:@"Login_Error"];
-                                   }
-                                   UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertText preferredStyle:UIAlertControllerStyleAlert];
-                                   UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-                                   [alert addAction: defaultAction];
-                                   [self presentViewController:alert animated:YES completion:nil];
-
-                               }];
+        
+        [SVProgressHUD dismiss];
+        
+        // as the logged-out user
+        [OTLogger logEvent:@"Login_Success"
+            withParameters:@{@"first_login": [NSNumber numberWithBool:firstLogin]}];
+        
+        NSLog(@"User : %@ authenticated successfully", user.email);
+        
+        [OTLogger setupMixpanelWithUser:user];
+        user.phone = phoneNumber;
+        
+        if ([OTAppConfiguration supportsTourFunctionality]) {
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
+        }
+        
+        // backup pre-login value of currentUser in case the user backs from the required onboarding
+        self.onboardingNavigation.preLoginUser = [NSUserDefaults standardUserDefaults].currentUser;
+        
+        [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+        [[NSUserDefaults standardUserDefaults] setFirstLoginState:!firstLogin];
+        [self.view endEditing:YES];
+        [OTAppState continueFromLoginVC];
+        
+        if (self.fromLink) {
+            [[OTDeepLinkService new] handleDeepLink:self.fromLink];
+            self.fromLink = nil;
+        }
+        
+    } failure: ^(NSError *error) {
+        [SVProgressHUD dismiss];
+        [OTLogger logEvent:@"TelephoneSubmitFail"];
+        NSString *alertTitle = OTLocalizedString(@"error");
+        NSString *alertText = OTLocalizedString(@"connection_error");
+        NSString *buttonTitle = OTLocalizedString(@"ok");
+        NSString *errorCode = [error readErrorCode];
+        if ([errorCode isEqualToString:UNAUTHORIZED]) {
+            alertTitle = OTLocalizedString(@"tryAgain");
+            alertText = OTLocalizedString(@"invalidPhoneNumberOrCode");
+            buttonTitle = OTLocalizedString(@"tryAgain_short");
+            [OTLogger logEvent:@"Login_Error"];
+            [OTLogger logEvent:@"TelephoneSubmitError"];
+        }
+        else if([errorCode isEqualToString:INVALID_PHONE_FORMAT]) {
+            alertTitle = OTLocalizedString(@"tryAgain");
+            alertText = OTLocalizedString(@"invalidPhoneNumberFormat");
+            buttonTitle = OTLocalizedString(@"tryAgain_short");
+            [OTLogger logEvent:@"Login_Error"];
+            [OTLogger logEvent:@"TelephoneSubmitError"];
+        }
+        else if(error.code == NSURLErrorNotConnectedToInternet) {
+            alertTitle = OTLocalizedString(@"tryAgain");
+            buttonTitle = OTLocalizedString(@"tryAgain_short");
+            alertText = error.localizedDescription;
+            [OTLogger logEvent:@"Login_Error"];
+        }
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertText preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction: defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }];
 }
 
 #pragma mark - Segue

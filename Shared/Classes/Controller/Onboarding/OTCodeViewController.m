@@ -248,7 +248,7 @@
         [NSUserDefaults standardUserDefaults].currentUser = user;
         [NSUserDefaults standardUserDefaults].temporaryUser = nil;
         [[NSUserDefaults standardUserDefaults] setFirstLoginState:!firstLogin];
-        [OTAppState continueFromLoginScreen:self];
+        [OTAppState continueFromLoginVC];
         
     } failure: ^(NSError *error) {
         [SVProgressHUD dismiss];

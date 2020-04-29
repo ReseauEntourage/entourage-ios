@@ -483,7 +483,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHG-kK-SGg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="410.39999999999998" y="-3148.875562218891"/>
+            <point key="canvasLocation" x="532" y="-3388"/>
         </scene>
         <!--Startup View Controller-->
         <scene sceneID="6VV-8c-dP7">
@@ -643,7 +643,7 @@
                         <viewControllerLayoutGuide type="bottom" id="8IX-Sx-Dln"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="l3w-HK-BKf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddv-uC-bkv">
@@ -1272,8 +1272,8 @@ sur Entourage.</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9jr-FR-UaN"/>
-        <segue reference="TFJ-ex-WnQ"/>
+        <segue reference="UUz-OA-utW"/>
+        <segue reference="usp-d3-u4q"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Logo Entourage Verticale" width="172" height="158"/>
