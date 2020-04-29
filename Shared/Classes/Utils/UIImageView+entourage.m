@@ -5,7 +5,7 @@
 //  Created by sergiu buceac on 1/17/17.
 //  Copyright © 2017 OCTO Technology. All rights reserved.
 //
-
+#import <AFNetworking/UIImageView+AFNetworking.h>
 #import "UIImageView+entourage.h"
 #import <SDWebImage/SDWebImage.h>
 
