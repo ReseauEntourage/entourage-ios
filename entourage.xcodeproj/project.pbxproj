@@ -31,6 +31,7 @@
 		2BB3BA392440DB1E0080BBE5 /* OTPre_OnboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3BA382440DB1E0080BBE5 /* OTPre_OnboardCollectionViewCell.swift */; };
 		2BB3BA3D2440E99D0080BBE5 /* Utilitaires.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3BA3C2440E99C0080BBE5 /* Utilitaires.swift */; };
 		2BF958802451D78100C36863 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9587F2451D78100C36863 /* Extensions.swift */; };
+		2BFC5A89245AC32800AB75C4 /* OTPictureUploadS3Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC5A88245AC32800AB75C4 /* OTPictureUploadS3Service.swift */; };
 		371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
 		371732EB2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
 		37191AD6220B3A6600F789B8 /* CommunityConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37191AD5220B3A6600F789B8 /* CommunityConfig.plist */; };
@@ -1009,6 +1010,7 @@
 		2BB3BA382440DB1E0080BBE5 /* OTPre_OnboardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPre_OnboardCollectionViewCell.swift; sourceTree = "<group>"; };
 		2BB3BA3C2440E99C0080BBE5 /* Utilitaires.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilitaires.swift; sourceTree = "<group>"; };
 		2BF9587F2451D78100C36863 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		2BFC5A88245AC32800AB75C4 /* OTPictureUploadS3Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPictureUploadS3Service.swift; sourceTree = "<group>"; };
 		371732E82297FDF10005ED71 /* OTAnalyticsObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAnalyticsObserver.h; sourceTree = "<group>"; };
 		371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAnalyticsObserver.m; sourceTree = "<group>"; };
 		37191AD5220B3A6600F789B8 /* CommunityConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CommunityConfig.plist; sourceTree = "<group>"; };
@@ -2845,6 +2847,7 @@
 			children = (
 				A202E9822085D2C60058F32C /* OTPictureUploadService.m */,
 				A202E9832085D2C60058F32C /* OTPictureUploadService.h */,
+				2BFC5A88245AC32800AB75C4 /* OTPictureUploadS3Service.swift */,
 			);
 			path = Amazon;
 			sourceTree = "<group>";
@@ -4513,6 +4516,7 @@
 				A202EAF52085D2C70058F32C /* OTAddressBookItem.m in Sources */,
 				A202EC7F2085D2C80058F32C /* OTAssociationsCellProviderBehavior.m in Sources */,
 				A202EB2D2085D2C70058F32C /* OTContactInfoCell.m in Sources */,
+				2BFC5A89245AC32800AB75C4 /* OTPictureUploadS3Service.swift in Sources */,
 				2BB2E394244F33B6003011C9 /* OTProgressBar.swift in Sources */,
 				37339CD921FF037C0048B6E1 /* OTPillLabelView.m in Sources */,
 				A202ECED2085D2C80058F32C /* OTAddressBookService.m in Sources */,

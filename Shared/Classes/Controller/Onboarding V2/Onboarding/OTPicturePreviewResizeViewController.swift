@@ -78,21 +78,17 @@ class OTPicturePreviewResizeViewController: UIViewController {
     
     //MARK: - Network -
     func updateUserPhoto() {
-        let _currentUser = UserDefaults.standard.currentUser
-        SVProgressHUD.show()
-        
-        OTPictureUploadService().uploadPicture(self.processImage(), withSuccess: { (pictureName) in
-            _currentUser?.avatarKey = pictureName
-            OTAuthService().updateUserInformation(with: _currentUser, success: { (newUser) in
-                newUser?.phone = _currentUser?.phone
-                UserDefaults.standard.currentUser = newUser
-                self.popToProfile()
-                
-            }) { (error) in
-                SVProgressHUD.showError(withStatus: OTLocalisationService.getLocalizedValue(forKey: "user_photo_change_error"))
-            }
-        }) { (error) in
-            SVProgressHUD.showError(withStatus: OTLocalisationService.getLocalizedValue(forKey: "user_photo_change_error"))
+        if let _image = self.processImage() {
+             SVProgressHUD.show()
+            OTPictureUploadS3Service.prepareUploadWith(image: _image,completion: {isOk in
+                if isOk {
+                    self.popToProfile()
+                }
+                else {
+                    SVProgressHUD.showError(withStatus: OTLocalisationService.getLocalizedValue(forKey: "user_photo_change_error"))
+                }
+            })
+            return;
         }
     }
     

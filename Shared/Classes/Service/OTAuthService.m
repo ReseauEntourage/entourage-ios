@@ -451,6 +451,31 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
      }];
 }
 
++ (void)prepareUploadPhotoWithSuccess:(void (^)(NSDictionary *infos))success
+                   failure:(void (^)(NSError *error))failure {
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"content_type"] = @"image/jpeg";
+    
+    NSString *url = [NSString stringWithFormat:@"%@?token=%@", API_URL_USER_PREPARE_AVATAR_UPLOAD, TOKEN];
+    NSLog(@"Applications: %@\n%@", url, parameters);
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success) {
+             success(responseObject);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure) {
+             failure(error);
+         }
+     }];
+}
+
 +(NSString *)authenticationLevelForUser:(OTUser *)user {
     if (!user) {
         return kUserAuthenticationLevelOutside;
