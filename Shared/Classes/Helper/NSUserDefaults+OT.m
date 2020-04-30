@@ -116,7 +116,7 @@ static NSString *const kIsFirstLogin = @"kIsFirstLogin";
     BOOL hasPhoneInNumbers = [loggedNumbers containsObject:self.currentUser.phone];
     if (hasPhoneInNumbers && !autoTutorialShown)
        [loggedNumbers removeObject:self.currentUser.phone];
-    if (!hasPhoneInNumbers && autoTutorialShown)
+    if (!hasPhoneInNumbers && autoTutorialShown && self.currentUser.phone != nil)
         [loggedNumbers addObject:self.currentUser.phone];
     [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kAutoTutorialComplete];
     [[NSUserDefaults standardUserDefaults] synchronize];
