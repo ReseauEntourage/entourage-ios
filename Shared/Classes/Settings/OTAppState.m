@@ -177,6 +177,9 @@
 + (void)updateMessagesTabBadgeWithValue:(NSString*)value {
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     UITabBarController *tabBarController = (UITabBarController*)appDelegate.window.rootViewController;
+    if (![appDelegate.window.rootViewController isKindOfClass:[UITabBarController class]]) {
+        return;
+    }
     UITabBarItem *item = tabBarController.tabBar.items[MESSAGES_TAB_INDEX];
     
     if (@available(iOS 10.0, *)) {
