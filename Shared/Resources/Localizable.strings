@@ -11,7 +11,7 @@
 
 // Welcome
 "welcomeTopText" = "Vous allez rejoindre une communauté de voisins avec et sans abris qui se rassemblent et luttent contre l’exclusion !";
-"geolocalisationDescriptionText" = "Entourage, c’est utile parce que c’est local!\nParticipez à la solidarité de votre quartier : pour voir les actions de vos voisins, qu’ils soient avec ou sans-abri, activez la géolocalisation.";
+"geolocalisationDescriptionText" = "Entourage est un réseau local !\nDécouvrez les initiatives solidaires de votre quartier et tissez des liens avec vos voisins en activant la géolocalisation.";
 "notificationNeedDescription" = "Pour vous faire découvrir les actions solidaires autour de vous, Entourage doit connaître votre position.";
 
 
@@ -29,8 +29,8 @@
 "yes" = "Oui";
 "ask_permission_location_create_tour" = "Pour créer une maraude, vous devez activer la géolocalisation";
 "ask_permission_location_recenter_map" = "Pour recentrer autour de vous, vous devez activer la géolocalisation";
-"no_location_create_tour" = "La géolocalisation  de votre maraude a recontré une erreur.";
-"no_location_recenter_map" = "La géolocalisation a recontré une erreur.";
+"no_location_create_tour" = "La géolocalisation  de votre maraude a rencontré une erreur.";
+"no_location_recenter_map" = "La géolocalisation a rencontré une erreur.";
 "activate" = "Activer";
 "join" = "Rejoindre";
 
@@ -75,7 +75,10 @@
 "menu_disconnect_title" = "Déconnexion";
 "menu_entourage_actions" = "Idées d'actions dans l'appli";
 "menu_make_donation" = "Faire un don";
-"menu_application_usage" = "Questions fréquentes";
+"menu_suggestions" = "Une suggestion ? Un problème ?";
+"menu_feedback" = "Donnez votre avis";
+"menu_application_usage" = "FAQ";
+"menu_jobs" = "Rejoignez-nous";
 "menu_atd_partner" = "Suivre Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
 "menu_join" = "Devenir Ambassadeur Entourage";
@@ -84,15 +87,17 @@
 // AboutItems
 "about_tutorial" = "Voir le tutoriel";
 "about_rateus" = "Notez-nous dans l’App Store";
-"about_facebook" = "Aimez notre page Facebook";
-"about_cgu" = "Conditions générales d’utilisation";
+"about_facebook" = "Aimez notre Facebook";
+"about_instagram" = "Suivez notre Instagram";
+"about_cgu" = "CGU";
 "about_politique_conf" = "Politique de Confidentialité";
 "about_website" = "Site web d'Entourage";
 "about_email" = "Contactez Entourage";
 "about_email_notavailable" = "Email introuvable";
 "terms_and_conditions_for_onboarding" = "conditions d’utilisation";
 "policy_for_onboarding" = "politique de confidentialité";
-"about_twitter" = "Suivez-nous sur Twitter";
+"about_twitter" = "Retweetez-nous";
+"about_webapp" = "Essayez notre version web";
 "about_suggestions" = "Suggérez des améliorations";
 "about_appVersion" = "Version de l'application";
 "about_privacy_policy" = "Politique de Confidentialité";
@@ -106,7 +111,6 @@
 "create_event" = "Créer un évènement  ";
 "map_options_hide_poi" = "Masquer le guide de solidarité";
 "map_options_show_poi" = "Afficher le guide de solidarité";
-"map_options_show_guide" = "Voir les lieux solidaires";
 "view_map_nav_title" = "Voir la carte";
 "view_list_nav_title" = "Voir la liste";
 
@@ -243,15 +247,15 @@
 "organiser" = "Organisateur";
 "closed" = "Inclure entourages clôturés";
 "unique_unread" = "Uniquement non lus";
-"join_entourage_lbl" = "On a besoin de vous !";
+"join_entourage_lbl" = "Rejoindre la discussion";
 "join_event_lbl" = "Participez à cet évènement";
-"join_entourage_btn" = "REJOINDRE";
+"join_entourage_btn" = "PARTICIPER";
 "join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !\nPourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
 "join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nAjoutez un petit mot si vous le souhaitez !";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
 "promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
-"event_title_example" = "Appel aux bonnes volontés 😊👍🏻  pour la Collecte nationale des Restos du Coeur à Ternes 75017";
-"event_desc_example" = "Besoin de bénévoles pour la collecte nationale des Restos du Coeur dans notre équipe locale.\nSamedi de 17h à 21h ➜ 5 bénévoles \nDimanche de 10h à 13h ➜ 2 bénévoles \nEnsemble aidons ceux qui en ont vraiment besoin ! Merci d'avance";
+"event_title_example" = "Exemple : Soirée jeux entre voisins avec et sans domicile";
+"event_desc_example" = "Exemple : Notre association vous invite à une soirée conviviale entre voisins avec et sans abris.";
 "final_question" = "DERNIÈRE QUESTION";
 "add_action_guide_text" = "La Charte éthique d’Entourage vous explique pourquoi le consentement est indispensable.";
 "add_action_guide_url" = "La Charte éthique d’Entourage";
@@ -265,6 +269,7 @@
 "item_option_quit" = "Quitter";
 "entourage_time_data" = "%@ - à %@";
 "entourage_distance" = "à %@";
+"entourage_location" ="à %@";
 "member_count" = "Membres (%d)";
 "item_closed" = "Clôturé";
 "item_cancel_join" = "Retirer ma demande";
@@ -292,7 +297,7 @@
 "invalidPhoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
 "userNameDescriptionText" = "Seuls le prénom et la première lettre du nom apparaitront aux autres utilisateurs.";
 "userEmailDescriptionText" = "Nous ne l’utiliserons que pour vous envoyer notre newsletter et les dernières actualités d’Entourage";
-"userNotificationsDescriptionText" = "Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !\nActiver les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.";
+"userNotificationsDescriptionText" = "Sur Entourage, vous allez créer des liens entre voisins solidaires.\nActivez les notifications pour être alerté de vos nouveaux messages.";
 "edit_user_description" = "Présentez-vous, le réseau Entourage a hâte de faire votre connaissance!";
 
 "retryPhone" = "Veuillez renseigner un numéro de téléphone";
@@ -305,12 +310,12 @@
 "user_email_address" = "Adresse e-mail";
 "user_phone_number" = "Numéro de téléphone";
 "defineActionZone" = "Ma zone d'action";
-"defineActionZoneTitle" = "Définissez votre zone d'action";
+"defineActionZoneTitle" = "Où souhaitez-vous agir ?";
 "defineActionZoneDescription" = "Où souhaitez-vous agir ?\nSoyez notifié des actualités importantes.";
 "modifyActionZoneTitle" = "Modifier ma zone";
 "defineActionZoneSampleAddress" = "avenue Jean Jaurès...";
-"defineZoneSubtitle1" = "Entourage, c’est utile parce que c’est local !\nPour recevoir des recommandations personnalisées à proximité, indiquez le lieu autour duquel vous souhaitez agir. ";
-"defineZoneSubtitle2" = "\n\nAdresse - peut être approximative.";
+"defineZoneSubtitle1" = "Entourage est un réseau local !\nDécouvrez les initiatives solidaires de votre quartier et tissez des liens avec vos voisins";
+"defineZoneSubtitle2" = "\n\nAdresse - peut être approximative";
 
 "user_edit_password_invalid_current" = "Le mot de passe ne correspond pas";
 "user_edit_password_invalid_length_too_short" = "Le mot de passe doit contenir au moins %d caractères";
@@ -362,7 +367,7 @@
 
 "filter_solidarity_guide_categories" = "Catégories";
 
-"filter_timeframe_title" = "Affichage des entourages";
+"filter_timeframe_title" = "Mis à jour il y a moins de";
 
 "encounter_enter_name_of_met_person" = "Vous devez donner un titre à votre rencontre";
 "encounter_enter_message" = "Vous devez donner une description à votre rencontre";
@@ -453,13 +458,13 @@
 "visitor" = "Voisineur";
 "visited" = "Voisiné";
 "coordinator" = "Animateur";
+"ambassador" = "Ambassadeur";
 "neighborhoodsSectionTitle" = "Neighborhoods";
 
 // associations
 "select_association_title" = "SOUTENIR";
 "update_association_error" = "L’association soutenue n’a pas pu être mise à jour";
 "marauder" = "Maraudeur";
-"sympathizant" = "Sympathisant";
 
 "confirm_entourage_create" = "Souhaitez-vous créer une rencontre avec une personne de la rue, ou créer une %@ visible de tous ?";
 "continue" = "Continuer";
@@ -480,20 +485,36 @@
 "month_10" = "oct.";
 "month_11" = "nov.";
 "month_12" = "déc.";
+"formatter_time_ago" = "il y a %@";
+"days" = "jours";
 
 //email
 "successful_close_mail" = "Mes retours sur l'entourage %@ qui a été un succès";
 "blocked_close_mail" = "Mes retours sur l'entourage %@ qui n'a pas abouti";
 "help_close_mail" = "Aide pour l'entourage %@";
-"structure_subject" = "Information sur la structure '%@'";
+"structure_subject" = "Information sur la structure '%@' - #%@";
+
+"contact_email_adress" = "contact@entourage.social";
+"email_subject_new_sms" = "Demande de code SMS";
+"email_body_new_sms" = "Bonjour,\nMon numéro : %@\n\nMerci";
 
 // Share
-"share_public" = "Ce projet solidaire sur Entourage a besoin de toi. Rejoins-le en téléchargeant l'app ici %@";
-"share_creator" = "J'ai créé ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
-"share_joiner" = "J'ai rejoint ce projet solidaire sur Entourage. Rejoins-le en téléchargeant l'app ici %@";
 "share_webview" = "J'ai découvert le guide Simple Comme Bonjour pour aller à la rencontre des personnes sans-abri. C'est à découvrir ici : %@";
 
+"share_action" = "Hello ! J'ai %1$@ une initiative solidaire sur Entourage, le réseau qui tisse des liens entre voisins avec et sans domicile : \"%2$@\". J’ai pensé que ça t'intéresserait. Clique ici : %3$@.\n\nMerci beaucoup pour ta solidarité !";
+
+"share_action_verb_creator" = "créé";
+"share_action_verb_member" = "rejoint";
+"share_action_verb_other" = "vu";
+
+"share_event" = "Hello ! Je t'invite à : \"%1$@\", le %2$@, %3$@ !\n\nSi ça te dit d'y participer, rejoins-moi ici sur Entourage, le réseau qui crée des liens entre voisins avec et sans domicile : %4$@";
+"pfp_share_event" = "Bonjour ! J’ai le plaisir de vous inviter à notre prochaine sortie conviviale Voisin-Age : %1$@.\n\nElle aura lieu le %2$@, à %3$@. Merci par avance de me confirmer votre participation !\n\nEncore plus d’informations sont ici : %4$@. Je suis aussi à votre disposition.\n\nÀ bientôt !";
+"pfp_share_generic" = "Je vous invite à me rejoindre sur Voisin-Age, le réseau d’amitiés intergénérationnelles, pour découvrir : \"%1$@\". Pour télécharger l’application : %2$@.";
+
 "feed_item_time_distance" = "Créée il y a ";
+"group_timestamps_created_at" = "Créé";
+"group_timestamps_updated_at" = "mis à jour";
+"group_timestamps_separator" = " - ";
 
 "association_set" = "Badge ajouté";
 "association_reset" = "Badge enlevé";

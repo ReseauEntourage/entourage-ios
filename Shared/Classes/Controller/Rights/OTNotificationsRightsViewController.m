@@ -25,6 +25,7 @@
 #import "OTAppConfiguration.h"
 #import "NSUserDefaults+OT.h"
 #import "OTAppAppearance.h"
+#import "UINavigationController+entourage.h"
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -33,11 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.notificationEnabled = @"NO";
     self.title = @"";
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationAuthorizationChanged:) name:kNotificationPushStatusChanged object:nil];
-    
     [self setupUI];
 }
 
@@ -63,6 +60,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[OTLocationManager sharedInstance] startLocationUpdates];
+    [self.navigationController presentTransparentNavigationBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -70,22 +68,23 @@
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
 }
 
-#pragma mark - Private
-
-- (void)pushNotificationAuthorizationChanged:(NSNotification *)notification {
-    NSLog(@"received kNotificationPushStatusChanged");
-    self.notificationEnabled = @"YES";
-    [self doShowNext];
-}
-
 #pragma mark - IBAction
 
 - (void)doShowNext {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel.people set:@{@"EntourageNotifEnable": self.notificationEnabled}];
-    [FIRAnalytics setUserPropertyString:self.notificationEnabled forName:@"EntourageGeolocEnable"];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     
-    if ([OTAppConfiguration shouldShowIntroTutorial]) {
+    [OTPushNotificationsService getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
+        NSString *notificationEnabled = status == UNAuthorizationStatusAuthorized ? @"YES" : @"NO";
+        if (@available(iOS 12.0, *)) {
+            if (status == UNAuthorizationStatusProvisional)
+                notificationEnabled = @"Provisional";
+        }
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel.people set:@{@"EntourageNotifEnable": notificationEnabled}];
+        [FIRAnalytics setUserPropertyString:notificationEnabled forName:@"EntourageNotifEnable"];
+    }];
+    
+    if ([OTAppConfiguration shouldShowIntroTutorial:currentUser]) {
         [self setTutorialCompleted];
     }
     [self checkInvitationsToJoin];
@@ -93,18 +92,15 @@
 
 - (IBAction)doContinue {
     [OTLogger logEvent:@"AcceptNotifications"];
-    [[OTPushNotificationsService new] promptUserForPushNotifications];
+    [OTPushNotificationsService promptUserForAuthorizationsWithCompletionHandler:^{
+        [self doShowNext];
+    }];
 }
 
 #pragma mark - private methods
 
 - (void)setTutorialCompleted {
-    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
-    if (loggedNumbers == nil)
-        loggedNumbers = [NSMutableArray new];
-    [loggedNumbers addObject:[NSUserDefaults standardUserDefaults].currentUser.phone];
-    [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
 }
 
 - (void)checkInvitationsToJoin {
@@ -116,7 +112,8 @@
             [SVProgressHUD showWithStatus:OTLocalizedString(@"joiningEntouragesMessage")];
             [[OTDeepLinkService new] navigateToFeedWithNumberId:joinedInvitation.entourageId withType:nil];
             
-            if ([OTAppConfiguration shouldShowIntroTutorial] &&
+            OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+            if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
                 ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
                 [OTAppState navigateToAuthenticatedLandingScreen];
                 [OTAppState presentTutorialScreen];

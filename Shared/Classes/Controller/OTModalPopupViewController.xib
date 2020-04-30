@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTModalPopupViewController">
+            <connections>
+                <outlet property="modalContainer" destination="V77-qQ-yLc" id="jXK-51-OEe"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdF-gj-kgZ" userLabel="Backdrop">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="Zjo-Oq-zKK" appends="YES" id="YwF-zj-Iey"/>
+                    </connections>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="V77-qQ-yLc">
+                    <rect key="frame" x="25" y="395" width="364" height="106.5"/>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="V77-qQ-yLc" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="7ub-5K-ehp"/>
+                <constraint firstItem="bdF-gj-kgZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="B2W-fd-1l2"/>
+                <constraint firstItem="V77-qQ-yLc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="25" id="BC1-zj-X4Z"/>
+                <constraint firstAttribute="bottom" secondItem="bdF-gj-kgZ" secondAttribute="bottom" id="Ge1-NR-PPz"/>
+                <constraint firstItem="bdF-gj-kgZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="In5-KB-ieG"/>
+                <constraint firstAttribute="trailing" secondItem="bdF-gj-kgZ" secondAttribute="trailing" id="gSC-A6-bvn"/>
+                <constraint firstAttribute="trailing" secondItem="V77-qQ-yLc" secondAttribute="trailing" constant="25" id="tNw-zi-z0b"/>
+            </constraints>
+        </view>
+        <tapGestureRecognizer id="Zjo-Oq-zKK">
+            <connections>
+                <action selector="tappedBackdrop" destination="-1" id="zSV-nb-K4S"/>
+                <outlet property="delegate" destination="-1" id="rMG-WO-4Xv"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+</document>

@@ -8,6 +8,7 @@
 
 #import "OTSafariService.h"
 #import <SafariServices/SFSafariViewController.h>
+#import <SafariServices/SFSafariViewControllerConfiguration.h>
 #import "OTAppDelegate.h"
 #import "OTHTTPRequestManager.h"
 #import "OTSWRevealViewController.h"
@@ -46,20 +47,11 @@
     }
     
     NSURL *launchUrl = [NSURL URLWithString:urlPath];
-    SFSafariViewController *safariController = [[SFSafariViewController alloc] initWithURL:launchUrl];
-    safariController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    
-    [OTAppConfiguration configureNavigationControllerAppearance:viewController.navigationController];
-    
-    double iOSVersion = [[[UIDevice currentDevice] systemVersion] doubleValue];
-    if (iOSVersion >= 10) {
-        safariController.preferredBarTintColor = [ApplicationTheme shared].backgroundThemeColor;
-        safariController.preferredControlTintColor = [UIColor whiteColor];
-    }
+    SFSafariViewController *safariController = [OTSafariService newSafariControllerWithUrl:launchUrl];
     
     if (viewController) {
+        [OTAppConfiguration configureNavigationControllerAppearance:viewController.navigationController];
         [viewController presentViewController:safariController animated:YES completion:NULL];
-        
     } else {
         OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
         id root = appDelegate.window.rootViewController;
@@ -104,6 +96,36 @@
     NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
     
     return [NSURL URLWithString:urlString];
+}
+
++ (SFSafariViewController*)newSafariControllerWithUrl:(NSURL*)launchUrl
+{
+    return [OTSafariService newSafariControllerWithUrl:launchUrl entersReaderIfAvailable:NO];
+}
+
++ (SFSafariViewController*)newSafariControllerWithUrl:(NSURL*)launchUrl
+                              entersReaderIfAvailable:(BOOL)entersReaderIfAvailable
+{
+    SFSafariViewController *safariController;
+    if (@available(iOS 11, *)) {
+        SFSafariViewControllerConfiguration *config = [SFSafariViewControllerConfiguration new];
+        config.entersReaderIfAvailable = entersReaderIfAvailable;
+        safariController = [[SFSafariViewController alloc] initWithURL:(NSURL *)launchUrl
+                                                         configuration:config];
+    }
+    else {
+        safariController = [[SFSafariViewController alloc] initWithURL:(NSURL *)launchUrl
+                                               entersReaderIfAvailable:entersReaderIfAvailable];
+    }
+
+    safariController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+
+    if (@available(iOS 10, *)) {
+        safariController.preferredBarTintColor = [ApplicationTheme shared].backgroundThemeColor;
+        safariController.preferredControlTintColor = [UIColor whiteColor];
+    }
+
+    return safariController;
 }
 
 @end

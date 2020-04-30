@@ -354,67 +354,53 @@
     return SIGNAL_ENTOURAGE_TO;
 }
 
-+ (UIColor*)leftTagColor:(OTUser*)user {
++ (UIColor*)tagColor:(OTUser*)user {
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return (user.leftTag) ? [UIColor pfpPurpleColor] : [UIColor clearColor];
-    }
-    
-    return [UIColor clearColor];
-}
-
-+ (UIColor*)rightTagColor:(OTUser*)user {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if (user.rightTag) {
+        if (user.roleTag) {
             return ([user.roles containsObject:kCoordinatorUserTag]) ?
             [UIColor pfpGreenColor] : [UIColor pfpPurpleColor];
         }
+    } else {
+        if (user.roleTag) {
+            return [UIColor appOrangeColor];
+        }
     }
     
     return [UIColor clearColor];
 }
 
++ (NSString *)descriptionForMessageItem:(OTEntourage *)item {
+
+    if ([item isNeighborhood] ||
+        [item isPrivateCircle]) {
+        return @"Voisinage";
+    }
+    if ([item isConversation]) {
+        return @"";
+    }
+    if ([item isOuting]) {
+        return [self eventDateDescriptionForMessageItem:item];
+    }
+    
+    return [NSString stringWithFormat:OTLocalizedString(@"formater_by"), OTLocalizedString(item.entourage_type)];
+}
+
 + (NSAttributedString*)formattedDescriptionForMessageItem:(OTEntourage*)item size:(CGFloat)size {
+    NSAttributedString *formattedDescription = [[NSAttributedString alloc] initWithString: [self descriptionForMessageItem:item] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:size]}];
     
-    // Pfp items
-    UIColor *typeColor = [ApplicationTheme shared].backgroundThemeColor;
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([item isNeighborhood] ||
-            [item isPrivateCircle]) {
-            return [[NSAttributedString alloc] initWithString:@"Voisinage"];
-            
-        } else if ([item isConversation]) {
-            return [[NSAttributedString alloc] initWithString:@""];
-            
-        } else if ([item isOuting]) {
-            return [self formattedEventDateDescriptionForMessageItem:item size:size];
-        }
+    if ([item isNeighborhood] ||
+        [item isPrivateCircle] ||
+        [item isConversation] ||
+        [item isOuting]) {
+        return formattedDescription;
     }
+
+    NSAttributedString *formattedUserName = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:size]}];
     
-    // Entourage Outing items
-    if ([item.category isEqualToString:@"event"] || [item isOuting]) {
-        return [self formattedEventDateDescriptionForMessageItem:item size:size];;
-    }
+    NSMutableAttributedString *formattedDescriptionWithUser = formattedDescription.mutableCopy;
+    [formattedDescriptionWithUser appendAttributedString:formattedUserName];
     
-    // The rest of items
-    if ([item.entourage_type isEqualToString:@"contribution"]) {
-        typeColor = [UIColor brightBlue];
-    } else if ([item.entourage_type isEqualToString:@"ask_for_help"]) {
-        typeColor = [UIColor appOrangeColor];
-    }
-    
-    NSString *itemType = OTLocalizedString(item.entourage_type);
-    NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
-                                   NSForegroundColorAttributeName:typeColor};
-    
-    NSAttributedString *typeAttrString = [[NSAttributedString alloc] initWithString: itemType attributes:atttributtes];
-    NSAttributedString *byAttrString = [[NSAttributedString alloc] initWithString: OTLocalizedString(@"by") attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size]}];
-    NSAttributedString *nameAttrString = [[NSAttributedString alloc] initWithString:item.author.displayName attributes:@{NSFontAttributeName : [UIFont fontWithName:FONT_BOLD_DESCRIPTION size:size]}];
-    
-    NSMutableAttributedString *typeByNameAttrString = typeAttrString.mutableCopy;
-    [typeByNameAttrString appendAttributedString:byAttrString];
-    [typeByNameAttrString appendAttributedString:nameAttrString];
-    
-    return typeByNameAttrString;
+    return formattedDescriptionWithUser;
 }
 
 + (NSAttributedString*)formattedAuthorDescriptionForMessageItem:(OTEntourage*)item {
@@ -442,6 +428,21 @@
     [orgByNameAttrString appendAttributedString:nameAttrString];
     
     return orgByNameAttrString;
+}
+
++ (NSString*)eventDateDescriptionForMessageItem:(OTEntourage*)item {
+    
+    NSString *eventName = OTLocalizedString(@"event").capitalizedString;
+    
+    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
+        eventName = OTLocalizedString(@"pfp_event").capitalizedString;
+    }
+    
+    if (item.startsAt) {
+        return [NSString stringWithFormat:@"%@ le %@", eventName, [item.startsAt asStringWithFormat:@"EEEE dd/MM"]];
+    } else {
+        return eventName;
+    }
 }
 
 + (NSAttributedString*)formattedEventDateDescriptionForMessageItem:(OTEntourage*)item
@@ -498,7 +499,7 @@
         return [UIColor pfpNeighborhoodColor];
     }
     
-    return [UIColor colorWithHexString:@"ffc57f"];
+    return [UIColor whiteColor];
 }
 
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem {
@@ -576,7 +577,7 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 60)];
     titleLabel.text = titleString;
     titleLabel.textColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    titleLabel.numberOfLines = 2;
+    titleLabel.numberOfLines = 1;
     
     return titleLabel;
 }

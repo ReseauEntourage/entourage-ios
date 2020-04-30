@@ -21,9 +21,15 @@
 // Cast to turn things that are not ids into NSMapTable keys
 #define MAPTABLE_ID(x) (__bridge id)((void *)x)
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+
 typedef void (^swizzleBlock)();
 
+#pragma clang diagnostic pop
+
 // Rename to avoid duplicate symbol errors
+NS_SWIFT_NAME(Swizzler)
 @interface FBSDKSwizzler : NSObject
 
 + (void)swizzleSelector:(SEL)aSelector onClass:(Class)aClass withBlock:(swizzleBlock)block named:(NSString *)aName;

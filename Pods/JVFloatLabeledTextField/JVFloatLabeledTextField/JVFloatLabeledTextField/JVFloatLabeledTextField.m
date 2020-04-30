@@ -91,7 +91,7 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
         textFieldFont = self.font;
     }
     
-    return [UIFont fontWithName:textFieldFont.fontName size:roundf(textFieldFont.pointSize * (_floatingLabelReductionRatio/100))];
+    return [textFieldFont fontWithSize:roundf(textFieldFont.pointSize * (_floatingLabelReductionRatio/100))];
 }
 
 - (void)updateDefaultFloatingLabelFont
@@ -130,12 +130,12 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 
 - (void)showFloatingLabel:(BOOL)animated
 {
-    void (^showBlock)() = ^{
-        _floatingLabel.alpha = 1.0f;
-        _floatingLabel.frame = CGRectMake(_floatingLabel.frame.origin.x,
-                                          _floatingLabelYPadding,
-                                          _floatingLabel.frame.size.width,
-                                          _floatingLabel.frame.size.height);
+    void (^showBlock)(void) = ^{
+        self->_floatingLabel.alpha = 1.0f;
+        self->_floatingLabel.frame = CGRectMake(self->_floatingLabel.frame.origin.x,
+                                          self->_floatingLabelYPadding,
+                                          self->_floatingLabel.frame.size.width,
+                                          self->_floatingLabel.frame.size.height);
     };
     
     if (animated || 0 != _animateEvenIfNotFirstResponder) {
@@ -152,12 +152,12 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 
 - (void)hideFloatingLabel:(BOOL)animated
 {
-    void (^hideBlock)() = ^{
-        _floatingLabel.alpha = 0.0f;
-        _floatingLabel.frame = CGRectMake(_floatingLabel.frame.origin.x,
-                                          _floatingLabel.font.lineHeight + _placeholderYPadding,
-                                          _floatingLabel.frame.size.width,
-                                          _floatingLabel.frame.size.height);
+    void (^hideBlock)(void) = ^{
+        self->_floatingLabel.alpha = 0.0f;
+        self->_floatingLabel.frame = CGRectMake(self->_floatingLabel.frame.origin.x,
+                                          self->_floatingLabel.font.lineHeight + self->_placeholderYPadding,
+                                          self->_floatingLabel.frame.size.width,
+                                          self->_floatingLabel.frame.size.height);
 
     };
     

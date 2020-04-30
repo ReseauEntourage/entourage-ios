@@ -7,6 +7,7 @@
 //
 
 #import "OTGuideInfoBehavior.h"
+#import "entourage-Swift.h"
 
 @implementation OTGuideInfoBehavior
 
@@ -30,6 +31,7 @@ static bool infoClosed = NO;
 #pragma mark - private methods
 
 - (void)toggleInfoOpen:(BOOL)open {
+    self.infoPopup.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     self.infoPopup.hidden = !open;
 }
 

@@ -13,7 +13,6 @@ static NSString *const kMyEntouragesFilter = @"kMyEntouragesFilter_";
 static NSString *const kTourOngoing = @"kTour";
 static NSString *const kTourPoints = @"kTourPoints";
 static NSString *const kIsFirstLogin = @"kIsFirstLogin";
-static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 @implementation NSUserDefaults (OT)
 
@@ -22,6 +21,9 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 - (void)setCurrentUser:(OTUser *)user
 {
+    id previousValue = [self currentUser];
+    if (previousValue == nil) previousValue = [NSNull null];
+    
     if (user)
 	{
 		NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:user];
@@ -33,8 +35,16 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 		[self removeObjectForKey:kUser];
         [self removeObjectForKey:kIsFirstLogin];
 	}
-    
+
 	[self synchronize];
+
+    id currentValue = [self currentUser];
+    if (currentValue == nil) currentValue = [NSNull null];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCurrentUserUpdated
+                                                        object:nil
+                                                      userInfo:@{@"previousValue": previousValue,
+                                                                 @"currentValue":  currentValue}];
 }
 
 - (void)setCurrentOngoingTour:(OTTour *)tour {
@@ -142,21 +152,6 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
         
 }
 
-- (BOOL)arePushNotificationsRefused {
-    
-    if ([[[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys] containsObject:kPushNotificationRefused]) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (void)setArePushNotificationsRefused:(BOOL)arePushNotificationsRefused
-{
-    [[NSUserDefaults standardUserDefaults] setObject:@(arePushNotificationsRefused) forKey:kPushNotificationRefused];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 - (OTSavedFilter *)savedNewsfeedsFilter {
     NSString *key = [self keyForSavedFilter];
     NSData *encodedObject = [self objectForKey:key];
@@ -172,7 +167,7 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 
 - (NSString *)keyForSavedFilter {
     if (self.currentUser != nil)
-        return [kNewsfeedsFilter stringByAppendingString:self.currentUser.sid.stringValue];
+        return [kNewsfeedsFilter stringByAppendingString:self.currentUser.uuid];
     return @"";
 }
 
@@ -200,6 +195,17 @@ static NSString *const kPushNotificationRefused = @"kPushNotificationRefused";
 - (BOOL)isTutorialCompleted {
     NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
     return [loggedNumbers containsObject:[self.currentUser phone]];
+}
+
+- (void)setTutorialCompleted {
+    NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
+    if ([loggedNumbers containsObject:self.currentUser.phone])
+        return;
+    if (loggedNumbers == nil)
+        loggedNumbers = [NSMutableArray new];
+    [loggedNumbers addObject:self.currentUser.phone];
+    [[NSUserDefaults standardUserDefaults] setObject:loggedNumbers forKey:kTutorialDone];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

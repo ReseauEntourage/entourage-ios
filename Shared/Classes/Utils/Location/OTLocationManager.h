@@ -27,5 +27,6 @@
 - (void)showGeoLocationNotAllowedMessage:(NSString *)message;
 - (void)showLocationNotFoundMessage:(NSString *)message;
 - (CLLocation*)defaultLocationForNewActions;
+- (void)refreshAuthorizationStatus;
 
 @end

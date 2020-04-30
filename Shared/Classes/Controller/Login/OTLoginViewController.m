@@ -73,6 +73,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     self.title = @"";
     self.phoneIsValid = NO;
     self.phoneTextField.floatingLabelTextColor = [UIColor whiteColor];
+    
+    if (@available(iOS 10.0, *)) {
+        self.phoneTextField.textContentType = UITextContentTypeTelephoneNumber;
+    }
+    
     self.phoneTextField.inputValidationChanged = ^(BOOL isValid) {
         self.phoneIsValid = YES;
         [self validateForm];
@@ -107,6 +112,11 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
+    }
+    
+    // restore pre-login value of currentUser if the user is backing from the required onboarding
+    if (self.onboardingNavigation.hasPreLoginUser) {
+        [NSUserDefaults standardUserDefaults].currentUser = self.onboardingNavigation.preLoginUser;
     }
 }
 
@@ -145,40 +155,39 @@ NSString *const kTutorialDone = @"has_done_tutorial";
     [SVProgressHUD show];
     
     NSString *deviceAPNSid = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
-    NSString *phone = self.phoneTextField.text;
-    if ([self.phoneTextField.text hasPrefix:@"0"])
-        phone = [self.phoneTextField.text substringFromIndex:1];
-    
-    [[OTAuthService new] authWithPhone:[self.codeCountry stringByAppendingString: phone]
+    NSString *phoneNumber = [self.phoneTextField.text stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceCharacterSet];
+    if(![phoneNumber hasPrefix:@"+"]) {
+        if([phoneNumber hasPrefix:@"0"])
+            phoneNumber = [phoneNumber substringFromIndex:1];
+        phoneNumber = [self.codeCountry stringByAppendingString:phoneNumber];
+    }
+
+    [[OTAuthService new] authWithPhone:phoneNumber
                               password:self.passwordTextField.text
-                              deviceId:deviceAPNSid
-                               success: ^(OTUser *user) {
+                               success: ^(OTUser *user, BOOL firstLogin) {
                                    
                                    [SVProgressHUD dismiss];
-                                   [OTLogger logEvent:@"Login_Success"];
+                                   
+                                   // as the logged-out user
+                                   [OTLogger logEvent:@"Login_Success"
+                                       withParameters:@{@"first_login": [NSNumber numberWithBool:firstLogin]}];
+                                   
                                    NSLog(@"User : %@ authenticated successfully", user.email);
                                    
                                    [OTLogger setupMixpanelWithUser:user];
-                                   user.phone = [self.codeCountry stringByAppendingString:phone];
+                                   user.phone = phoneNumber;
                                    
                                    if ([OTAppConfiguration supportsTourFunctionality]) {
                                        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"user_tours_only"];
                                    }
-                                   
-                                   if ([OTAppConfiguration shouldShowIntroTutorial]) {
-                                       NSMutableArray *loggedNumbers = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:kTutorialDone]];
-                                       if (loggedNumbers == nil) {
-                                           loggedNumbers = [NSMutableArray new];
-                                       }
-                                       
-                                       if ([loggedNumbers containsObject:user.phone] && !deviceAPNSid) {
-                                           [[OTPushNotificationsService new] promptUserForPushNotifications];
-                                       }
-                                   }
+                                                                      
+                                   // backup pre-login value of currentUser in case the user backs from the required onboarding
+                                   self.onboardingNavigation.preLoginUser = [NSUserDefaults standardUserDefaults].currentUser;
                                    
                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-
-                                   [OTAppState continueFromLoginScreen];
+                                   [[NSUserDefaults standardUserDefaults] setFirstLoginState:!firstLogin];
+                                   [self.view endEditing:YES];
+                                   [OTAppState continueFromLoginScreen:self];
                                    
                                    if (self.fromLink) {
                                        [[OTDeepLinkService new] handleDeepLink:self.fromLink];

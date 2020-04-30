@@ -18,13 +18,17 @@
 @property (nonatomic, strong) NSTimer *refreshTimer;
 @property (nonatomic, assign) CLLocationCoordinate2D currentCoordinate;
 @property (nonatomic, assign) int radiusIndex;
+@property (nonatomic, strong) NSString *pageToken;
 
 @end
 
 @implementation OTNewsFeedsSourceBehavior
+{
+    NSMutableArray *_feedItems;
+}
 
 - (void)initialize {
-    self.feedItems = [NSMutableArray new];
+    _feedItems = [NSMutableArray new];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
     self.radiusIndex = 0;
@@ -57,14 +61,11 @@
     int sizeOfArray = (int)RADIUS_ARRAY.count;
     if (self.radiusIndex < sizeOfArray - 1) {
         self.radiusIndex++;
-        [self.feedItems removeAllObjects];
+        [_feedItems removeAllObjects];
         [self.delegate itemsRemoved];
         [self.tableDelegate beginUpdatingFeeds];
-        NSDate *beforeDate = [NSDate date];
-        [self requestData:beforeDate withSuccess:^(NSArray *items) {
-            [self.feedItems addObjectsFromArray:items];
-            [self.delegate itemsUpdated];
-            [self.tableDelegate finishUpdatingFeeds:items.count];
+        [self requestData:nil withSuccess:^(NSArray *items, NSString *nextPageToken) {
+            [self appendNewPage:items nextPageToken:nextPageToken];
         } orError:^(NSError *error) {
             [self.delegate errorLoadingFeedItems:error];
         }];
@@ -92,17 +93,11 @@
     self.currentFilter = [filter copy];
     self.currentFilter.location = coordinate;
     
-    [self.feedItems removeAllObjects];
+    [_feedItems removeAllObjects];
     [self.delegate itemsRemoved];
     
-    NSDate *beforeDate = [NSDate date];
-    [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        if(items.count > 0) {
-            [self.feedItems addObjectsFromArray:items];
-            [self.delegate itemsUpdated];
-        }
-        [self.tableDelegate finishUpdatingFeeds:items.count];
-        
+    [self requestData:nil withSuccess:^(NSArray *items, NSString *nextPageToken) {
+        [self appendNewPage:items nextPageToken:nextPageToken];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingFeedItems:error];
     }];
@@ -113,12 +108,13 @@
     self.currentCoordinate = coordinate;
     self.currentFilter.location = coordinate;
     
-    [self.feedItems removeAllObjects];
+    [_feedItems removeAllObjects];
     [self.delegate itemsRemoved];
+    self.lastEventGuid = nil;
     
     [self requestEventsStartingWithSuccess:^(NSArray *items) {
         if(items.count > 0) {
-            [self.feedItems addObjectsFromArray:items];
+            [self->_feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
@@ -140,18 +136,28 @@
         return;
     }
     
-    NSDate *beforeDate = [NSDate date];
-    [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        if (items.count > 0) {
-            for (OTFeedItem *item in items) {
-                [self addFeedItem:item];
-            }
-            
-            [self.delegate itemsUpdated];
-        }
+    [self requestData:nil withSuccess:^(NSArray *items, NSString *nextPageToken) {
+        [self updateItemsInPlace:items];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingNewFeedItems:error];
     }];
+}
+
+- (void)updateItemsInPlace:(NSArray *)items {
+    if (items.count == 0) {
+        return;
+    }
+    NSUInteger topItemIndex = 0;
+    for (OTFeedItem *item in items) {
+        NSUInteger oldFeedIndex = [self indexOfExistingLoadedFeedItem:item];
+        if (oldFeedIndex != NSNotFound) {
+            [_feedItems replaceObjectAtIndex:oldFeedIndex withObject:item];
+        } else {
+            [_feedItems insertObject:item atIndex:topItemIndex];
+            topItemIndex += 1;
+        }
+    }
+    [self.delegate itemsUpdated];
 }
 
 - (void)pause {
@@ -186,16 +192,24 @@
     }
     
     [self.tableDelegate beginUpdatingFeeds];
-    [self requestData:beforeDate withSuccess:^(NSArray *items) {
-        if (items.count > 0) {
-            [self.feedItems addObjectsFromArray:items];
-            [self.delegate itemsUpdated];
-        }
-        [self.tableDelegate finishUpdatingFeeds:items.count];
+    [self requestData:self.pageToken withSuccess:^(NSArray *items, NSString *nextPageToken) {
+        [self appendNewPage:items nextPageToken:nextPageToken];
     } orError:^(NSError *error) {
         [self.delegate errorLoadingFeedItems:error];
         [self.tableDelegate errorUpdatingFeeds];
     }];
+}
+
+- (void)appendNewPage:(NSArray *)items nextPageToken:(NSString *)nextPageToken {
+    self.pageToken = nextPageToken;
+    if (items.count > 0) {
+        [self->_feedItems addObjectsFromArray:items];
+        [self.delegate itemsUpdated];
+        [self.tableDelegate finishUpdatingFeeds:items.count];
+    }
+    if (nextPageToken == nil) {
+        [self.tableDelegate finishUpdatingFeeds:0];
+    }
 }
 
 - (void)loadMoreEvents {
@@ -204,7 +218,7 @@
     
     [self requestEventsStartingWithSuccess:^(NSArray *items) {
         if(items.count > 0) {
-            [self.feedItems addObjectsFromArray:items];
+            [self->_feedItems addObjectsFromArray:items];
             [self.delegate itemsUpdated];
         }
         [self.tableDelegate finishUpdatingFeeds:items.count];
@@ -214,20 +228,20 @@
     }];
 }
 
-- (void)requestData:(NSDate *)beforeDate
-        withSuccess:(void(^)(NSArray *items))success
+- (void)requestData:(NSString *)pageToken
+        withSuccess:(void(^)(NSArray *items, NSString *pageToken))success
             orError:(void(^)(NSError *))failure {
     self.currentFilter.distance = self.radius;
     NSString *loadFilterString = self.currentFilter.description;
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     self.indicatorView.hidden = NO;
-    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithBefore:beforeDate andLocation:self.currentCoordinate];
+    NSDictionary *filterDictionary = [self.currentFilter toDictionaryWithPageToken:pageToken andLocation:self.currentCoordinate];
     
     NSLog(@"ALA_BALA - Calling with %@", filterDictionary);
 
     [[OTFeedsService new] getAllFeedsWithParameters:filterDictionary
-                                            success:^(NSMutableArray *feeds) {
+                                            success:^(NSMutableArray *feeds, NSString *nextPageToken) {
         self.lastOkCoordinate = self.currentCoordinate;
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         self.indicatorView.hidden = YES;
@@ -235,7 +249,7 @@
                                                     return;
                                                 }
                                                 if (success) {
-                                                    success(feeds);
+                                                    success(feeds, nextPageToken);
                                                 }
     } failure:^(NSError *error) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -285,22 +299,6 @@
     }];
 }
 
-- (void)addFeedItem:(OTFeedItem *)feedItem {
-    NSUInteger oldFeedIndex = [self indexOfExistingLoadedFeedItem:feedItem];
-    if (oldFeedIndex != NSNotFound) {
-        [self.feedItems replaceObjectAtIndex:oldFeedIndex withObject:feedItem];
-        return;
-    }
-    for (NSUInteger i = 0; i < [self.feedItems count]; i++) {
-        OTFeedItem* internalFeedItem = self.feedItems[i];
-        if ([internalFeedItem.updatedDate compare:feedItem.updatedDate] == NSOrderedAscending) {
-            [self.feedItems insertObject:feedItem atIndex:i];
-            return;
-        }
-    }
-    [self.feedItems addObject:feedItem];
-}
-
 - (NSUInteger)indexOfExistingLoadedFeedItem:(OTFeedItem*)feedItem {
     for (OTFeedItem *item in self.feedItems) {
         if (item.uid.integerValue == feedItem.uid.integerValue) {
@@ -309,6 +307,20 @@
     }
     
     return NSNotFound;
+}
+
+- (NSArray *)feedItems {
+    return _feedItems.copy;
+}
+
+- (void)addFeedItemToFront:(id)feedItem {
+    [_feedItems insertObject:feedItem atIndex:0];
+    [self.delegate itemsUpdated];
+}
+
+- (void)removeAllFeedItems {
+    [_feedItems removeAllObjects];
+    [self.delegate itemsUpdated];
 }
 
 @end

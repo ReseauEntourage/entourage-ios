@@ -1,5 +1,5 @@
 //
-// Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2010-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License").
 // You may not use this file except in compliance with the License.
@@ -336,6 +336,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"allowQuotedRecordDelimiter" : @"AllowQuotedRecordDelimiter",
              @"comments" : @"Comments",
              @"fieldDelimiter" : @"FieldDelimiter",
              @"fileHeaderInfo" : @"FileHeaderInfo",
@@ -449,6 +450,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"s3:ObjectRemoved:DeleteMarkerCreated"] == NSOrderedSame) {
             return @(AWSS3EventS3ObjectRemovedDeleteMarkerCreated);
         }
+        if ([value caseInsensitiveCompare:@"s3:ObjectRestore:Post"] == NSOrderedSame) {
+            return @(AWSS3EventS3ObjectRestorePost);
+        }
+        if ([value caseInsensitiveCompare:@"s3:ObjectRestore:Completed"] == NSOrderedSame) {
+            return @(AWSS3EventS3ObjectRestoreCompleted);
+        }
         return @(AWSS3EventUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -470,6 +477,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"s3:ObjectRemoved:Delete";
             case AWSS3EventS3ObjectRemovedDeleteMarkerCreated:
                 return @"s3:ObjectRemoved:DeleteMarkerCreated";
+            case AWSS3EventS3ObjectRestorePost:
+                return @"s3:ObjectRestore:Post";
+            case AWSS3EventS3ObjectRestoreCompleted:
+                return @"s3:ObjectRestore:Completed";
             default:
                 return nil;
         }
@@ -703,6 +714,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"key" : @"Key",
              @"metadata" : @"Metadata",
              @"metadataDirective" : @"MetadataDirective",
+             @"objectLockLegalHoldStatus" : @"ObjectLockLegalHoldStatus",
+             @"objectLockMode" : @"ObjectLockMode",
+             @"objectLockRetainUntilDate" : @"ObjectLockRetainUntilDate",
              @"requestPayer" : @"RequestPayer",
              @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
              @"SSECustomerKey" : @"SSECustomerKey",
@@ -807,6 +821,56 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
     }];
 }
 
++ (NSValueTransformer *)objectLockLegalHoldStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"ON"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOn);
+        }
+        if ([value caseInsensitiveCompare:@"OFF"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOff);
+        }
+        return @(AWSS3ObjectLockLegalHoldStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockLegalHoldStatusOn:
+                return @"ON";
+            case AWSS3ObjectLockLegalHoldStatusOff:
+                return @"OFF";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)objectLockModeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"GOVERNANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockModeGovernance);
+        }
+        if ([value caseInsensitiveCompare:@"COMPLIANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockModeCompliance);
+        }
+        return @(AWSS3ObjectLockModeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockModeGovernance:
+                return @"GOVERNANCE";
+            case AWSS3ObjectLockModeCompliance:
+                return @"COMPLIANCE";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)objectLockRetainUntilDateJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
 + (NSValueTransformer *)requestPayerJSONTransformer {
     return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
         if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
@@ -858,6 +922,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3StorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3StorageClassIntelligentTiering);
+        }
+        if ([value caseInsensitiveCompare:@"GLACIER"] == NSOrderedSame) {
+            return @(AWSS3StorageClassGlacier);
+        }
         return @(AWSS3StorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -869,6 +939,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3StorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3StorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
+            case AWSS3StorageClassGlacier:
+                return @"GLACIER";
             default:
                 return nil;
         }
@@ -1003,6 +1077,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ca-central-1"] == NSOrderedSame) {
             return @(AWSS3BucketLocationConstraintCACentral1);
         }
+        if ([value caseInsensitiveCompare:@"us-gov-east-1"] == NSOrderedSame) {
+            return @(AWSS3BucketLocationConstraintUSGovEast1);
+        }
+        if ([value caseInsensitiveCompare:@"eu-north-1"] == NSOrderedSame) {
+            return @(AWSS3BucketLocationConstraintEUNorth1);
+        }
+        if ([value caseInsensitiveCompare:@"ap-east-1"] == NSOrderedSame) {
+            return @(AWSS3BucketLocationConstraintAPEast1);
+        }
+        if ([value caseInsensitiveCompare:@"me-south-1"] == NSOrderedSame) {
+            return @(AWSS3BucketLocationConstraintMESouth1);
+        }
         return @(AWSS3BucketLocationConstraintUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -1044,6 +1130,14 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"eu-central-1";
             case AWSS3BucketLocationConstraintCACentral1:
                 return @"ca-central-1";
+            case AWSS3BucketLocationConstraintUSGovEast1:
+                return @"us-gov-east-1";
+            case AWSS3BucketLocationConstraintEUNorth1:
+                return @"eu-north-1";
+            case AWSS3BucketLocationConstraintAPEast1:
+                return @"ap-east-1";
+            case AWSS3BucketLocationConstraintMESouth1:
+                return @"me-south-1";
             default:
                 return nil;
         }
@@ -1074,6 +1168,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"grantReadACP" : @"GrantReadACP",
              @"grantWrite" : @"GrantWrite",
              @"grantWriteACP" : @"GrantWriteACP",
+             @"objectLockEnabledForBucket" : @"ObjectLockEnabledForBucket",
              };
 }
 
@@ -1196,6 +1291,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"grantWriteACP" : @"GrantWriteACP",
              @"key" : @"Key",
              @"metadata" : @"Metadata",
+             @"objectLockLegalHoldStatus" : @"ObjectLockLegalHoldStatus",
+             @"objectLockMode" : @"ObjectLockMode",
+             @"objectLockRetainUntilDate" : @"ObjectLockRetainUntilDate",
              @"requestPayer" : @"RequestPayer",
              @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
              @"SSECustomerKey" : @"SSECustomerKey",
@@ -1262,6 +1360,56 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
     }];
 }
 
++ (NSValueTransformer *)objectLockLegalHoldStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"ON"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOn);
+        }
+        if ([value caseInsensitiveCompare:@"OFF"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOff);
+        }
+        return @(AWSS3ObjectLockLegalHoldStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockLegalHoldStatusOn:
+                return @"ON";
+            case AWSS3ObjectLockLegalHoldStatusOff:
+                return @"OFF";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)objectLockModeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"GOVERNANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockModeGovernance);
+        }
+        if ([value caseInsensitiveCompare:@"COMPLIANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockModeCompliance);
+        }
+        return @(AWSS3ObjectLockModeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockModeGovernance:
+                return @"GOVERNANCE";
+            case AWSS3ObjectLockModeCompliance:
+                return @"COMPLIANCE";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)objectLockRetainUntilDateJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
 + (NSValueTransformer *)requestPayerJSONTransformer {
     return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
         if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
@@ -1313,6 +1461,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3StorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3StorageClassIntelligentTiering);
+        }
+        if ([value caseInsensitiveCompare:@"GLACIER"] == NSOrderedSame) {
+            return @(AWSS3StorageClassGlacier);
+        }
         return @(AWSS3StorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -1324,6 +1478,43 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3StorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3StorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
+            case AWSS3StorageClassGlacier:
+                return @"GLACIER";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSS3DefaultRetention
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"days" : @"Days",
+             @"mode" : @"Mode",
+             @"years" : @"Years",
+             };
+}
+
++ (NSValueTransformer *)modeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"GOVERNANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockRetentionModeGovernance);
+        }
+        if ([value caseInsensitiveCompare:@"COMPLIANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockRetentionModeCompliance);
+        }
+        return @(AWSS3ObjectLockRetentionModeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockRetentionModeGovernance:
+                return @"GOVERNANCE";
+            case AWSS3ObjectLockRetentionModeCompliance:
+                return @"COMPLIANCE";
             default:
                 return nil;
         }
@@ -1486,6 +1677,37 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSS3DeleteMarkerReplication
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"status" : @"Status",
+             };
+}
+
++ (NSValueTransformer *)statusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"Enabled"] == NSOrderedSame) {
+            return @(AWSS3DeleteMarkerReplicationStatusEnabled);
+        }
+        if ([value caseInsensitiveCompare:@"Disabled"] == NSOrderedSame) {
+            return @(AWSS3DeleteMarkerReplicationStatusDisabled);
+        }
+        return @(AWSS3DeleteMarkerReplicationStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3DeleteMarkerReplicationStatusEnabled:
+                return @"Enabled";
+            case AWSS3DeleteMarkerReplicationStatusDisabled:
+                return @"Disabled";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
 @implementation AWSS3DeleteObjectOutput
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -1519,6 +1741,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"bucket" : @"Bucket",
+             @"bypassGovernanceRetention" : @"BypassGovernanceRetention",
              @"key" : @"Key",
              @"MFA" : @"MFA",
              @"requestPayer" : @"RequestPayer",
@@ -1607,6 +1830,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"bucket" : @"Bucket",
+             @"bypassGovernanceRetention" : @"BypassGovernanceRetention",
              @"remove" : @"Delete",
              @"MFA" : @"MFA",
              @"requestPayer" : @"RequestPayer",
@@ -1631,6 +1855,16 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return nil;
         }
     }];
+}
+
+@end
+
+@implementation AWSS3DeletePublicAccessBlockRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucket" : @"Bucket",
+             };
 }
 
 @end
@@ -1682,6 +1916,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3StorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3StorageClassIntelligentTiering);
+        }
+        if ([value caseInsensitiveCompare:@"GLACIER"] == NSOrderedSame) {
+            return @(AWSS3StorageClassGlacier);
+        }
         return @(AWSS3StorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -1693,6 +1933,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3StorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3StorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
+            case AWSS3StorageClassGlacier:
+                return @"GLACIER";
             default:
                 return nil;
         }
@@ -2086,6 +2330,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ca-central-1"] == NSOrderedSame) {
             return @(AWSS3BucketLocationConstraintCACentral1);
         }
+        if ([value caseInsensitiveCompare:@"us-gov-east-1"] == NSOrderedSame) {
+            return @(AWSS3BucketLocationConstraintUSGovEast1);
+        }
+        if ([value caseInsensitiveCompare:@"eu-north-1"] == NSOrderedSame) {
+            return @(AWSS3BucketLocationConstraintEUNorth1);
+        }
+        if ([value caseInsensitiveCompare:@"ap-east-1"] == NSOrderedSame) {
+            return @(AWSS3BucketLocationConstraintAPEast1);
+        }
+        if ([value caseInsensitiveCompare:@"me-south-1"] == NSOrderedSame) {
+            return @(AWSS3BucketLocationConstraintMESouth1);
+        }
         return @(AWSS3BucketLocationConstraintUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -2127,6 +2383,14 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"eu-central-1";
             case AWSS3BucketLocationConstraintCACentral1:
                 return @"ca-central-1";
+            case AWSS3BucketLocationConstraintUSGovEast1:
+                return @"us-gov-east-1";
+            case AWSS3BucketLocationConstraintEUNorth1:
+                return @"eu-north-1";
+            case AWSS3BucketLocationConstraintAPEast1:
+                return @"ap-east-1";
+            case AWSS3BucketLocationConstraintMESouth1:
+                return @"me-south-1";
             default:
                 return nil;
         }
@@ -2219,6 +2483,30 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 @end
 
 @implementation AWSS3GetBucketPolicyRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucket" : @"Bucket",
+             };
+}
+
+@end
+
+@implementation AWSS3GetBucketPolicyStatusOutput
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"policyStatus" : @"PolicyStatus",
+             };
+}
+
++ (NSValueTransformer *)policyStatusJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3PolicyStatus class]];
+}
+
+@end
+
+@implementation AWSS3GetBucketPolicyStatusRequest
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
@@ -2484,6 +2772,73 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSS3GetObjectLegalHoldOutput
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"legalHold" : @"LegalHold",
+             };
+}
+
++ (NSValueTransformer *)legalHoldJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3ObjectLockLegalHold class]];
+}
+
+@end
+
+@implementation AWSS3GetObjectLegalHoldRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucket" : @"Bucket",
+             @"key" : @"Key",
+             @"requestPayer" : @"RequestPayer",
+             @"versionId" : @"VersionId",
+             };
+}
+
++ (NSValueTransformer *)requestPayerJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
+            return @(AWSS3RequestPayerRequester);
+        }
+        return @(AWSS3RequestPayerUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3RequestPayerRequester:
+                return @"requester";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSS3GetObjectLockConfigurationOutput
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"objectLockConfiguration" : @"ObjectLockConfiguration",
+             };
+}
+
++ (NSValueTransformer *)objectLockConfigurationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3ObjectLockConfiguration class]];
+}
+
+@end
+
+@implementation AWSS3GetObjectLockConfigurationRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucket" : @"Bucket",
+             };
+}
+
+@end
+
 @implementation AWSS3GetObjectOutput
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -2504,6 +2859,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"lastModified" : @"LastModified",
              @"metadata" : @"Metadata",
              @"missingMeta" : @"MissingMeta",
+             @"objectLockLegalHoldStatus" : @"ObjectLockLegalHoldStatus",
+             @"objectLockMode" : @"ObjectLockMode",
+             @"objectLockRetainUntilDate" : @"ObjectLockRetainUntilDate",
              @"partsCount" : @"PartsCount",
              @"replicationStatus" : @"ReplicationStatus",
              @"requestCharged" : @"RequestCharged",
@@ -2528,6 +2886,56 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 }
 
 + (NSValueTransformer *)lastModifiedJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)objectLockLegalHoldStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"ON"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOn);
+        }
+        if ([value caseInsensitiveCompare:@"OFF"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOff);
+        }
+        return @(AWSS3ObjectLockLegalHoldStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockLegalHoldStatusOn:
+                return @"ON";
+            case AWSS3ObjectLockLegalHoldStatusOff:
+                return @"OFF";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)objectLockModeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"GOVERNANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockModeGovernance);
+        }
+        if ([value caseInsensitiveCompare:@"COMPLIANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockModeCompliance);
+        }
+        return @(AWSS3ObjectLockModeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockModeGovernance:
+                return @"GOVERNANCE";
+            case AWSS3ObjectLockModeCompliance:
+                return @"COMPLIANCE";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)objectLockRetainUntilDateJSONTransformer {
     return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
         return [NSDate aws_dateFromString:str];
     } reverseBlock:^id(NSDate *date) {
@@ -2617,6 +3025,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3StorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3StorageClassIntelligentTiering);
+        }
+        if ([value caseInsensitiveCompare:@"GLACIER"] == NSOrderedSame) {
+            return @(AWSS3StorageClassGlacier);
+        }
         return @(AWSS3StorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -2628,6 +3042,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3StorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3StorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
+            case AWSS3StorageClassGlacier:
+                return @"GLACIER";
             default:
                 return nil;
         }
@@ -2699,6 +3117,49 @@ return [date aws_stringValue:AWSDateRFC822DateFormat1];
         return [NSDate aws_dateFromString:str];
     } reverseBlock:^id(NSDate *date) {
 return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
+@end
+
+@implementation AWSS3GetObjectRetentionOutput
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"retention" : @"Retention",
+             };
+}
+
++ (NSValueTransformer *)retentionJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3ObjectLockRetention class]];
+}
+
+@end
+
+@implementation AWSS3GetObjectRetentionRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucket" : @"Bucket",
+             @"key" : @"Key",
+             @"requestPayer" : @"RequestPayer",
+             @"versionId" : @"VersionId",
+             };
+}
+
++ (NSValueTransformer *)requestPayerJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
+            return @(AWSS3RequestPayerRequester);
+        }
+        return @(AWSS3RequestPayerUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3RequestPayerRequester:
+                return @"requester";
+            default:
+                return nil;
+        }
     }];
 }
 
@@ -2782,6 +3243,30 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return nil;
         }
     }];
+}
+
+@end
+
+@implementation AWSS3GetPublicAccessBlockOutput
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"publicAccessBlockConfiguration" : @"PublicAccessBlockConfiguration",
+             };
+}
+
++ (NSValueTransformer *)publicAccessBlockConfigurationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3PublicAccessBlockConfiguration class]];
+}
+
+@end
+
+@implementation AWSS3GetPublicAccessBlockRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucket" : @"Bucket",
+             };
 }
 
 @end
@@ -2941,6 +3426,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"lastModified" : @"LastModified",
              @"metadata" : @"Metadata",
              @"missingMeta" : @"MissingMeta",
+             @"objectLockLegalHoldStatus" : @"ObjectLockLegalHoldStatus",
+             @"objectLockMode" : @"ObjectLockMode",
+             @"objectLockRetainUntilDate" : @"ObjectLockRetainUntilDate",
              @"partsCount" : @"PartsCount",
              @"replicationStatus" : @"ReplicationStatus",
              @"requestCharged" : @"RequestCharged",
@@ -2964,6 +3452,56 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 }
 
 + (NSValueTransformer *)lastModifiedJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)objectLockLegalHoldStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"ON"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOn);
+        }
+        if ([value caseInsensitiveCompare:@"OFF"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOff);
+        }
+        return @(AWSS3ObjectLockLegalHoldStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockLegalHoldStatusOn:
+                return @"ON";
+            case AWSS3ObjectLockLegalHoldStatusOff:
+                return @"OFF";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)objectLockModeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"GOVERNANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockModeGovernance);
+        }
+        if ([value caseInsensitiveCompare:@"COMPLIANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockModeCompliance);
+        }
+        return @(AWSS3ObjectLockModeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockModeGovernance:
+                return @"GOVERNANCE";
+            case AWSS3ObjectLockModeCompliance:
+                return @"COMPLIANCE";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)objectLockRetainUntilDateJSONTransformer {
     return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
         return [NSDate aws_dateFromString:str];
     } reverseBlock:^id(NSDate *date) {
@@ -3053,6 +3591,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3StorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3StorageClassIntelligentTiering);
+        }
+        if ([value caseInsensitiveCompare:@"GLACIER"] == NSOrderedSame) {
+            return @(AWSS3StorageClassGlacier);
+        }
         return @(AWSS3StorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -3064,6 +3608,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3StorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3StorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
+            case AWSS3StorageClassGlacier:
+                return @"GLACIER";
             default:
                 return nil;
         }
@@ -3154,6 +3702,7 @@ return [date aws_stringValue:AWSDateRFC822DateFormat1];
              @"CSV" : @"CSV",
              @"compressionType" : @"CompressionType",
              @"JSON" : @"JSON",
+             @"parquet" : @"Parquet",
              };
 }
 
@@ -3169,6 +3718,9 @@ return [date aws_stringValue:AWSDateRFC822DateFormat1];
         if ([value caseInsensitiveCompare:@"GZIP"] == NSOrderedSame) {
             return @(AWSS3CompressionTypeGzip);
         }
+        if ([value caseInsensitiveCompare:@"BZIP2"] == NSOrderedSame) {
+            return @(AWSS3CompressionTypeBzip2);
+        }
         return @(AWSS3CompressionTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -3176,6 +3728,8 @@ return [date aws_stringValue:AWSDateRFC822DateFormat1];
                 return @"NONE";
             case AWSS3CompressionTypeGzip:
                 return @"GZIP";
+            case AWSS3CompressionTypeBzip2:
+                return @"BZIP2";
             default:
                 return nil;
         }
@@ -3184,6 +3738,10 @@ return [date aws_stringValue:AWSDateRFC822DateFormat1];
 
 + (NSValueTransformer *)JSONJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3JSONInput class]];
+}
+
++ (NSValueTransformer *)parquetJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3ParquetInput class]];
 }
 
 @end
@@ -3304,6 +3862,9 @@ return [date aws_stringValue:AWSDateRFC822DateFormat1];
         if ([value caseInsensitiveCompare:@"ORC"] == NSOrderedSame) {
             return @(AWSS3InventoryFormatOrc);
         }
+        if ([value caseInsensitiveCompare:@"Parquet"] == NSOrderedSame) {
+            return @(AWSS3InventoryFormatParquet);
+        }
         return @(AWSS3InventoryFormatUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -3311,6 +3872,8 @@ return [date aws_stringValue:AWSDateRFC822DateFormat1];
                 return @"CSV";
             case AWSS3InventoryFormatOrc:
                 return @"ORC";
+            case AWSS3InventoryFormatParquet:
+                return @"Parquet";
             default:
                 return nil;
         }
@@ -4059,6 +4622,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3StorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3StorageClassIntelligentTiering);
+        }
+        if ([value caseInsensitiveCompare:@"GLACIER"] == NSOrderedSame) {
+            return @(AWSS3StorageClassGlacier);
+        }
         return @(AWSS3StorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -4070,6 +4639,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3StorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3StorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
+            case AWSS3StorageClassGlacier:
+                return @"GLACIER";
             default:
                 return nil;
         }
@@ -4229,6 +4802,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3StorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3StorageClassIntelligentTiering);
+        }
+        if ([value caseInsensitiveCompare:@"GLACIER"] == NSOrderedSame) {
+            return @(AWSS3StorageClassGlacier);
+        }
         return @(AWSS3StorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -4240,6 +4819,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3StorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3StorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
+            case AWSS3StorageClassGlacier:
+                return @"GLACIER";
             default:
                 return nil;
         }
@@ -4278,6 +4861,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3TransitionStorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3TransitionStorageClassIntelligentTiering);
+        }
         return @(AWSS3TransitionStorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -4287,6 +4873,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3TransitionStorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3TransitionStorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
             default:
                 return nil;
         }
@@ -4399,6 +4987,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3ObjectStorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3ObjectStorageClassIntelligentTiering);
+        }
         return @(AWSS3ObjectStorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -4412,6 +5003,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3ObjectStorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3ObjectStorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
             default:
                 return nil;
         }
@@ -4427,6 +5020,122 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"key" : @"Key",
              @"versionId" : @"VersionId",
              };
+}
+
+@end
+
+@implementation AWSS3ObjectLockConfiguration
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"objectLockEnabled" : @"ObjectLockEnabled",
+             @"rule" : @"Rule",
+             };
+}
+
++ (NSValueTransformer *)objectLockEnabledJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"Enabled"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockEnabledEnabled);
+        }
+        return @(AWSS3ObjectLockEnabledUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockEnabledEnabled:
+                return @"Enabled";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)ruleJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3ObjectLockRule class]];
+}
+
+@end
+
+@implementation AWSS3ObjectLockLegalHold
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"status" : @"Status",
+             };
+}
+
++ (NSValueTransformer *)statusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"ON"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOn);
+        }
+        if ([value caseInsensitiveCompare:@"OFF"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOff);
+        }
+        return @(AWSS3ObjectLockLegalHoldStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockLegalHoldStatusOn:
+                return @"ON";
+            case AWSS3ObjectLockLegalHoldStatusOff:
+                return @"OFF";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSS3ObjectLockRetention
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"mode" : @"Mode",
+             @"retainUntilDate" : @"RetainUntilDate",
+             };
+}
+
++ (NSValueTransformer *)modeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"GOVERNANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockRetentionModeGovernance);
+        }
+        if ([value caseInsensitiveCompare:@"COMPLIANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockRetentionModeCompliance);
+        }
+        return @(AWSS3ObjectLockRetentionModeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockRetentionModeGovernance:
+                return @"GOVERNANCE";
+            case AWSS3ObjectLockRetentionModeCompliance:
+                return @"COMPLIANCE";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)retainUntilDateJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
+@end
+
+@implementation AWSS3ObjectLockRule
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"defaultRetention" : @"DefaultRetention",
+             };
+}
+
++ (NSValueTransformer *)defaultRetentionJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3DefaultRetention class]];
 }
 
 @end
@@ -4520,6 +5229,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSS3ParquetInput
+
+@end
+
 @implementation AWSS3Part
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -4541,11 +5254,22 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSS3PolicyStatus
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"isPublic" : @"IsPublic",
+             };
+}
+
+@end
+
 @implementation AWSS3Progress
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"bytesProcessed" : @"BytesProcessed",
+             @"bytesReturned" : @"BytesReturned",
              @"bytesScanned" : @"BytesScanned",
              };
 }
@@ -4562,6 +5286,19 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)detailsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3Progress class]];
+}
+
+@end
+
+@implementation AWSS3PublicAccessBlockConfiguration
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"blockPublicAcls" : @"BlockPublicAcls",
+             @"blockPublicPolicy" : @"BlockPublicPolicy",
+             @"ignorePublicAcls" : @"IgnorePublicAcls",
+             @"restrictPublicBuckets" : @"RestrictPublicBuckets",
+             };
 }
 
 @end
@@ -5003,6 +5740,127 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSS3PutObjectLegalHoldOutput
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"requestCharged" : @"RequestCharged",
+             };
+}
+
++ (NSValueTransformer *)requestChargedJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
+            return @(AWSS3RequestChargedRequester);
+        }
+        return @(AWSS3RequestChargedUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3RequestChargedRequester:
+                return @"requester";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSS3PutObjectLegalHoldRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucket" : @"Bucket",
+             @"contentMD5" : @"ContentMD5",
+             @"key" : @"Key",
+             @"legalHold" : @"LegalHold",
+             @"requestPayer" : @"RequestPayer",
+             @"versionId" : @"VersionId",
+             };
+}
+
++ (NSValueTransformer *)legalHoldJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3ObjectLockLegalHold class]];
+}
+
++ (NSValueTransformer *)requestPayerJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
+            return @(AWSS3RequestPayerRequester);
+        }
+        return @(AWSS3RequestPayerUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3RequestPayerRequester:
+                return @"requester";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSS3PutObjectLockConfigurationOutput
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"requestCharged" : @"RequestCharged",
+             };
+}
+
++ (NSValueTransformer *)requestChargedJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
+            return @(AWSS3RequestChargedRequester);
+        }
+        return @(AWSS3RequestChargedUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3RequestChargedRequester:
+                return @"requester";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSS3PutObjectLockConfigurationRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucket" : @"Bucket",
+             @"contentMD5" : @"ContentMD5",
+             @"objectLockConfiguration" : @"ObjectLockConfiguration",
+             @"requestPayer" : @"RequestPayer",
+             @"token" : @"Token",
+             };
+}
+
++ (NSValueTransformer *)objectLockConfigurationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3ObjectLockConfiguration class]];
+}
+
++ (NSValueTransformer *)requestPayerJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
+            return @(AWSS3RequestPayerRequester);
+        }
+        return @(AWSS3RequestPayerUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3RequestPayerRequester:
+                return @"requester";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
 @implementation AWSS3PutObjectOutput
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
@@ -5078,6 +5936,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"grantWriteACP" : @"GrantWriteACP",
              @"key" : @"Key",
              @"metadata" : @"Metadata",
+             @"objectLockLegalHoldStatus" : @"ObjectLockLegalHoldStatus",
+             @"objectLockMode" : @"ObjectLockMode",
+             @"objectLockRetainUntilDate" : @"ObjectLockRetainUntilDate",
              @"requestPayer" : @"RequestPayer",
              @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
              @"SSECustomerKey" : @"SSECustomerKey",
@@ -5144,6 +6005,56 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
     }];
 }
 
++ (NSValueTransformer *)objectLockLegalHoldStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"ON"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOn);
+        }
+        if ([value caseInsensitiveCompare:@"OFF"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockLegalHoldStatusOff);
+        }
+        return @(AWSS3ObjectLockLegalHoldStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockLegalHoldStatusOn:
+                return @"ON";
+            case AWSS3ObjectLockLegalHoldStatusOff:
+                return @"OFF";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)objectLockModeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"GOVERNANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockModeGovernance);
+        }
+        if ([value caseInsensitiveCompare:@"COMPLIANCE"] == NSOrderedSame) {
+            return @(AWSS3ObjectLockModeCompliance);
+        }
+        return @(AWSS3ObjectLockModeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3ObjectLockModeGovernance:
+                return @"GOVERNANCE";
+            case AWSS3ObjectLockModeCompliance:
+                return @"COMPLIANCE";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)objectLockRetainUntilDateJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
 + (NSValueTransformer *)requestPayerJSONTransformer {
     return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
         if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
@@ -5195,6 +6106,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3StorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3StorageClassIntelligentTiering);
+        }
+        if ([value caseInsensitiveCompare:@"GLACIER"] == NSOrderedSame) {
+            return @(AWSS3StorageClassGlacier);
+        }
         return @(AWSS3StorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -5206,10 +6123,76 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3StorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3StorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
+            case AWSS3StorageClassGlacier:
+                return @"GLACIER";
             default:
                 return nil;
         }
     }];
+}
+
+@end
+
+@implementation AWSS3PutObjectRetentionOutput
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"requestCharged" : @"RequestCharged",
+             };
+}
+
++ (NSValueTransformer *)requestChargedJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
+            return @(AWSS3RequestChargedRequester);
+        }
+        return @(AWSS3RequestChargedUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3RequestChargedRequester:
+                return @"requester";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSS3PutObjectRetentionRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucket" : @"Bucket",
+             @"bypassGovernanceRetention" : @"BypassGovernanceRetention",
+             @"contentMD5" : @"ContentMD5",
+             @"key" : @"Key",
+             @"requestPayer" : @"RequestPayer",
+             @"retention" : @"Retention",
+             @"versionId" : @"VersionId",
+             };
+}
+
++ (NSValueTransformer *)requestPayerJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"requester"] == NSOrderedSame) {
+            return @(AWSS3RequestPayerRequester);
+        }
+        return @(AWSS3RequestPayerUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSS3RequestPayerRequester:
+                return @"requester";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)retentionJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3ObjectLockRetention class]];
 }
 
 @end
@@ -5238,6 +6221,22 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)taggingJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3Tagging class]];
+}
+
+@end
+
+@implementation AWSS3PutPublicAccessBlockRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucket" : @"Bucket",
+             @"contentMD5" : @"ContentMD5",
+             @"publicAccessBlockConfiguration" : @"PublicAccessBlockConfiguration",
+             };
+}
+
++ (NSValueTransformer *)publicAccessBlockConfigurationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3PublicAccessBlockConfiguration class]];
 }
 
 @end
@@ -5299,6 +6298,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"s3:ObjectRemoved:DeleteMarkerCreated"] == NSOrderedSame) {
             return @(AWSS3EventS3ObjectRemovedDeleteMarkerCreated);
         }
+        if ([value caseInsensitiveCompare:@"s3:ObjectRestore:Post"] == NSOrderedSame) {
+            return @(AWSS3EventS3ObjectRestorePost);
+        }
+        if ([value caseInsensitiveCompare:@"s3:ObjectRestore:Completed"] == NSOrderedSame) {
+            return @(AWSS3EventS3ObjectRestoreCompleted);
+        }
         return @(AWSS3EventUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -5320,6 +6325,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"s3:ObjectRemoved:Delete";
             case AWSS3EventS3ObjectRemovedDeleteMarkerCreated:
                 return @"s3:ObjectRemoved:DeleteMarkerCreated";
+            case AWSS3EventS3ObjectRestorePost:
+                return @"s3:ObjectRestore:Post";
+            case AWSS3EventS3ObjectRestoreCompleted:
+                return @"s3:ObjectRestore:Completed";
             default:
                 return nil;
         }
@@ -5424,16 +6433,27 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"deleteMarkerReplication" : @"DeleteMarkerReplication",
              @"destination" : @"Destination",
+             @"filter" : @"Filter",
              @"identifier" : @"ID",
              @"prefix" : @"Prefix",
+             @"priority" : @"Priority",
              @"sourceSelectionCriteria" : @"SourceSelectionCriteria",
              @"status" : @"Status",
              };
 }
 
++ (NSValueTransformer *)deleteMarkerReplicationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3DeleteMarkerReplication class]];
+}
+
 + (NSValueTransformer *)destinationJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3Destination class]];
+}
+
++ (NSValueTransformer *)filterJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3ReplicationRuleFilter class]];
 }
 
 + (NSValueTransformer *)sourceSelectionCriteriaJSONTransformer {
@@ -5459,6 +6479,41 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return nil;
         }
     }];
+}
+
+@end
+
+@implementation AWSS3ReplicationRuleAndOperator
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"prefix" : @"Prefix",
+             @"tags" : @"Tags",
+             };
+}
+
++ (NSValueTransformer *)tagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSS3Tag class]];
+}
+
+@end
+
+@implementation AWSS3ReplicationRuleFilter
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"AND" : @"And",
+             @"prefix" : @"Prefix",
+             @"tag" : @"Tag",
+             };
+}
+
++ (NSValueTransformer *)ANDJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3ReplicationRuleAndOperator class]];
+}
+
++ (NSValueTransformer *)tagJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSS3Tag class]];
 }
 
 @end
@@ -5809,6 +6864,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3StorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3StorageClassIntelligentTiering);
+        }
+        if ([value caseInsensitiveCompare:@"GLACIER"] == NSOrderedSame) {
+            return @(AWSS3StorageClassGlacier);
+        }
         return @(AWSS3StorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -5820,6 +6881,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3StorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3StorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
+            case AWSS3StorageClassGlacier:
+                return @"GLACIER";
             default:
                 return nil;
         }
@@ -6092,6 +7157,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"bytesProcessed" : @"BytesProcessed",
+             @"bytesReturned" : @"BytesReturned",
              @"bytesScanned" : @"BytesScanned",
              };
 }
@@ -6280,6 +7346,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"s3:ObjectRemoved:DeleteMarkerCreated"] == NSOrderedSame) {
             return @(AWSS3EventS3ObjectRemovedDeleteMarkerCreated);
         }
+        if ([value caseInsensitiveCompare:@"s3:ObjectRestore:Post"] == NSOrderedSame) {
+            return @(AWSS3EventS3ObjectRestorePost);
+        }
+        if ([value caseInsensitiveCompare:@"s3:ObjectRestore:Completed"] == NSOrderedSame) {
+            return @(AWSS3EventS3ObjectRestoreCompleted);
+        }
         return @(AWSS3EventUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -6301,6 +7373,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"s3:ObjectRemoved:Delete";
             case AWSS3EventS3ObjectRemovedDeleteMarkerCreated:
                 return @"s3:ObjectRemoved:DeleteMarkerCreated";
+            case AWSS3EventS3ObjectRestorePost:
+                return @"s3:ObjectRestore:Post";
+            case AWSS3EventS3ObjectRestoreCompleted:
+                return @"s3:ObjectRestore:Completed";
             default:
                 return nil;
         }
@@ -6338,6 +7414,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ONEZONE_IA"] == NSOrderedSame) {
             return @(AWSS3TransitionStorageClassOnezoneIa);
         }
+        if ([value caseInsensitiveCompare:@"INTELLIGENT_TIERING"] == NSOrderedSame) {
+            return @(AWSS3TransitionStorageClassIntelligentTiering);
+        }
         return @(AWSS3TransitionStorageClassUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -6347,6 +7426,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"STANDARD_IA";
             case AWSS3TransitionStorageClassOnezoneIa:
                 return @"ONEZONE_IA";
+            case AWSS3TransitionStorageClassIntelligentTiering:
+                return @"INTELLIGENT_TIERING";
             default:
                 return nil;
         }

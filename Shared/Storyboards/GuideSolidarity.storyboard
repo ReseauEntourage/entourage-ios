@@ -93,7 +93,7 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <state key="normal" title="Button">
-                                                    <color key="titleColor" red="0.94901961088180542" green="0.3960784375667572" blue="0.12941177189350128" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="showAddress:" destination="mWl-3f-MlG" eventType="touchUpInside" id="yXj-p2-yDu"/>
@@ -106,7 +106,7 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <state key="normal" title="Button">
-                                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="showPhone:" destination="mWl-3f-MlG" eventType="touchUpInside" id="Lgd-Ve-rop"/>
@@ -119,7 +119,7 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <state key="normal" title="Button">
-                                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="showEmail:" destination="mWl-3f-MlG" eventType="touchUpInside" id="atT-pz-zFU"/>
@@ -132,7 +132,7 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <state key="normal" title="Button">
-                                                    <color key="titleColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="showWebsite:" destination="mWl-3f-MlG" eventType="touchUpInside" id="aF4-nk-vPk"/>

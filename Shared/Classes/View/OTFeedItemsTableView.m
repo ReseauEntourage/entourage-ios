@@ -28,7 +28,7 @@
 #import "OTAnnouncementCell.h"
 #import "entourage-Swift.h"
 
-#define LOAD_MORE_DRAG_OFFSET 50
+#define LOAD_MORE_DRAG_OFFSET 100
 
 #define MAPVIEW_REGION_SPAN_X_METERS 500
 #define MAPVIEW_REGION_SPAN_Y_METERS 500
@@ -43,12 +43,14 @@
 #define kMapHeaderOffsetY 0.0
 
 #define FEEDS_FILTER_HEIGHT 98.f
+#define PAN_VIEW_HEIGHT 15
 
 @interface OTFeedItemsTableView () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior *sourceBehavior;
 
+@property (nonatomic) UIView *mapView;
 @property (nonatomic) UIView *panToShowMapView;
 @property (nonatomic) UIView *filterView;
 @property (nonatomic) UIButton *showEventsOnlyButton;
@@ -62,7 +64,7 @@
 @property (nonatomic, strong) UIView *currentNewsfeedFooter;
 @property (nonatomic, strong) UILabel *lblEmptyTableReason;
 @property (nonatomic, weak) IBOutlet UILabel *infoLabel;
-@property (nonatomic) CGFloat headerMapViewHeight;
+@property (nonatomic) CGFloat mapDefaultVisibleHeight;
 @property (nonatomic) BOOL showFilteringHeader;
 
 @end
@@ -90,11 +92,12 @@
     self.infoLabel.adjustsFontSizeToFitWidth = YES;
 }
 
-- (CGFloat)feedsFilterHeaderHeight {
-    return FEEDS_FILTER_HEIGHT;
-}
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    
+    if ([otherGestureRecognizer.view isDescendantOfView:self.mapView]) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -104,7 +107,7 @@
     }
     
     if (pan.state == UIGestureRecognizerStateEnded) {
-        if ([pan velocityInView:self].y > 0) {
+        if ([pan velocityInView:self].y > 0 && self.contentOffset.y <= 0) {
             if ([self.feedItemsDelegate respondsToSelector:@selector(didPanHeaderDown)]) {
                 [self.feedItemsDelegate didPanHeaderDown];
             }
@@ -148,21 +151,34 @@
 }
 
 - (UIView*)headerViewWithMap:(MKMapView*)mapView
-                   mapHeight:(CGFloat)mapHeight
+                   mapHeight:(CGFloat)mapVisibleHeight
                   showFilter:(BOOL)showFilter {
-    //show map on table header
-    CGFloat panViewHeight = 15;
-    CGFloat h = mapHeight;
-    if (showFilter && !self.showSolidarityGuidePOIs) {
-        h += [self feedsFilterHeaderHeight];
-    } else {
-        h += panViewHeight;
-    }
     
     self.showFilteringHeader = showFilter;
+    self.mapDefaultVisibleHeight = mapVisibleHeight;
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width+8, h)];
-    mapView.frame = headerView.bounds;
+    CGFloat mainScreenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat mapActualHeight  = [UIScreen mainScreen].bounds.size.height;
+    CGFloat panHeaderHeight;
+    
+    if (self.showFilteringHeader && !self.showSolidarityGuidePOIs) {
+        panHeaderHeight = FEEDS_FILTER_HEIGHT;
+    } else {
+        panHeaderHeight = PAN_VIEW_HEIGHT;
+    }
+    
+    UIView *headerView = [[UIView alloc]
+                          initWithFrame:CGRectMake(0, 0,
+                                                   mainScreenWidth, mapVisibleHeight + panHeaderHeight)];
+    
+    mapView.frame = CGRectMake(0, (mapVisibleHeight - mapActualHeight) / 2,
+                               headerView.bounds.size.width, mapActualHeight);
+    
+    CALayer *headerMapMask = [CALayer layer];
+    headerMapMask.backgroundColor = [UIColor blackColor].CGColor;
+    headerMapMask.frame = CGRectMake(0, headerView.frame.size.height - mapView.frame.size.height,
+                                     headerView.frame.size.width, mapView.frame.size.height);
+    headerView.layer.mask = headerMapMask;
     
     CGFloat buttonSize = 42;
     CGFloat marginOffset = 20;
@@ -181,15 +197,16 @@
     showCurrentLocationButton.layer.cornerRadius = buttonSize / 2;
     [showCurrentLocationButton addTarget:self action:@selector(requestCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:mapView];
+    self.mapView = mapView;
     //[headerView addSubview:showCurrentLocationButton];
     [headerView sendSubviewToBack:mapView];
     //[headerView bringSubviewToFront:showCurrentLocationButton];
     
     // Add pan view used to drag to show map
-    [self setupPanToShowMapView:panViewHeight mapHeight:mapHeight];
+    [self setupPanToShowMapView:PAN_VIEW_HEIGHT mapHeight:mapVisibleHeight];
     
     // Add filter view if supported
-    [self setupFilteringHeaderView:mapHeight];
+    [self setupFilteringHeaderView:mapVisibleHeight];
     if (showFilter && !self.showSolidarityGuidePOIs) {
         [headerView addSubview:self.filterView];
     }
@@ -205,9 +222,11 @@
 }
 
 - (void)updateItems:(NSArray *)items {
-    self.items = items;
-    self.panToShowMapView.hidden = items.count == 0;
-    [self reloadData];
+    if (![self.items isEqual:items]) {
+        self.items = items;
+        self.panToShowMapView.hidden = items.count == 0;
+        [self reloadData];
+    }
 }
 
 - (void)loadBegun {
@@ -314,7 +333,12 @@
     float h = size.height;
     float reload_distance = LOAD_MORE_DRAG_OFFSET;
     
-    if (y > h + reload_distance) {
+    CGFloat topOffset = 84;
+    if (@available(iOS 11.0, *)) {
+        topOffset += self.safeAreaInsets.top;
+    }
+    
+    if (y > h - reload_distance - topOffset) {
         dispatch_async(dispatch_get_main_queue(), ^() {
             if (self.feedItemsDelegate &&
                 [self.feedItemsDelegate respondsToSelector:@selector(loadMoreData)]) {
@@ -340,29 +364,14 @@
         }
     }];
 
-    CGFloat scrollOffset = scrollView.contentOffset.y;
-    __block CGRect headerFrame = self.tableHeaderView.frame;
+    UIView *mapView = self.tableHeaderView.subviews[0];
 
-    if (scrollOffset < 0) {
-        headerFrame.origin.y = scrollOffset;
-        headerFrame.size.height = MAPVIEW_HEIGHT - scrollOffset;
-    }
-    else //scrolling up
-    {
-        headerFrame.origin.y = kMapHeaderOffsetY;//- scrollOffset;
-    }
+    CGRect mapViewFrame = mapView.frame;
+    mapViewFrame.origin.y = (self.mapDefaultVisibleHeight - mapView.bounds.size.height + self.contentOffset.y) / 2;
+    mapView.frame = mapViewFrame;
     
-    self.tableHeaderView.subviews[0].frame = headerFrame;
-    
-    CGFloat topOffset = 84;
-    if (@available(iOS 11.0, *)) {
-        topOffset += self.safeAreaInsets.top;
-    }
-    if (self.showFilteringHeader) {
-        topOffset += [self feedsFilterHeaderHeight];
-    }
-    BOOL mapVisible = headerFrame.size.height > 0 &&
-        self.contentOffset.y < headerFrame.size.height - topOffset;
+    CGFloat topOffset = 42 + 11 * 2; // button height + margin * 2
+    BOOL mapVisible = self.mapDefaultVisibleHeight - self.contentOffset.y >= topOffset;
     [self.feedItemsDelegate mapDidBecomeVisible: mapVisible];
 }
 
@@ -483,9 +492,9 @@
     else if ([self isAnnouncementItem:item]) {
         OTAnnouncementCell *announcementCell = (OTAnnouncementCell *)cell;
         [announcementCell configureWith:(OTAnnouncement *)item completion:^{
-            if (self.items.count > indexPath.row && [self.visibleCells containsObject:announcementCell]) {
-                [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }
+//            if (self.items.count > indexPath.row && [self.visibleCells containsObject:announcementCell]) {
+//                [self reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            }
         }];
     }
     else {
@@ -525,7 +534,7 @@
 
 - (void)setupFilteringHeaderView:(CGFloat)mapHeight {
     self.filterView = (UIView*)[[NSBundle mainBundle] loadNibNamed:@"OTFeedsTableFilterHeader" owner:nil options:nil].firstObject;
-    self.filterView.frame = CGRectMake(0, mapHeight, UIScreen.mainScreen.bounds.size.width + 8, [self feedsFilterHeaderHeight]);
+    self.filterView.frame = CGRectMake(0, mapHeight, UIScreen.mainScreen.bounds.size.width, FEEDS_FILTER_HEIGHT);
     self.filterView.clipsToBounds = YES;
     self.filterView.layer.cornerRadius = 12;
     

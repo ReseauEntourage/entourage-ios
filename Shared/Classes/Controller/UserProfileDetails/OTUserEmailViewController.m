@@ -49,8 +49,12 @@
     [self.emailTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
+    if (@available(iOS 10.0, *)) {
+        self.emailTextField.textContentType = UITextContentTypeEmailAddress;
+    }
+
     self.emailTextField.inputValidationChanged = ^(BOOL isValid) {
-        self.continueButton.enabled = [self.emailTextField.text isValidEmail];
+        self.continueButton.enabled = [[self.emailTextField.text stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet] isValidEmail];
     };
     [self.continueButton setTitleColor:[ApplicationTheme shared].backgroundThemeColor forState:UIControlStateNormal];
     

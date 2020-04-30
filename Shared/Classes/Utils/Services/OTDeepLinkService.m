@@ -17,10 +17,10 @@
 #import "OTAPIConsts.h"
 #import "NSUserDefaults+OT.h"
 #import "OTLoginViewController.h"
-#import "OTSelectAssociationViewController.h"
 #import "OTEntourageEditorViewController.h"
 #import "OTTutorialViewController.h"
 #import "OTSafariService.h"
+#import "OTAPIErrorDomain.h"
 
 @interface OTDeepLinkService ()
 
@@ -51,7 +51,7 @@
     if (isTour) {
         stateInfo = [[OTFeedItemFactory createForType:feedItemType andId:feedItemId] getStateInfo];
     } else {
-        stateInfo = [OTFeedItemFactory createEntourageForGroupType:groupType andId:feedItemId];
+        stateInfo = [[OTFeedItemFactory createEntourageForGroupType:groupType andId:feedItemId] getStateInfo];
     }
     
     if (stateInfo && feedItemId) {
@@ -72,10 +72,13 @@
         [self prepareControllers:feedItem];
         } error:^(NSError *error) {
             [SVProgressHUD dismiss];
+            if ([error.domain isEqual:OTApiErrorDomain] && error.code == OTApiErrorAnonymousUserAuthenticationRequired) {
+                [OTAppState presentAuthenticationOverlay:[self getTopViewController]];
+            }
         }];
     }
     else {
-        [OTAppState navigateToLoginScreen:nil];
+        [OTAppState navigateToLoginScreen:nil sender:nil];
         [SVProgressHUD dismiss];
     }
 }
@@ -84,11 +87,18 @@
     return [OTAppState getTopViewController];
 }
 
-- (void)showProfileFromAnywhereForUser:(NSNumber *)userId {
+- (void)showProfileFromAnywhereForUser:(NSString *)userId {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    if (currentUser.isAnonymous && [userId isEqualToString:currentUser.uuid]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [OTAppState presentAuthenticationOverlay:mainViewController];
+        return;
+    }
+
     UIStoryboard *userProfileStorybard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
     UINavigationController *rootUserProfileController = (UINavigationController *)[userProfileStorybard instantiateInitialViewController];
     OTUserViewController *userController = (OTUserViewController *)rootUserProfileController.topViewController;
-    userController.userId = userId;
+    userController.userId = [NSNumber numberWithInteger:userId.integerValue];
     
     [self showControllerFromAnywhere:rootUserProfileController];
 }
@@ -98,7 +108,7 @@
     NSString *query = url.query;
     self.link = url;
     if (!TOKEN) {
-        [OTAppState navigateToLoginScreen:url];
+        [OTAppState navigateToLoginScreen:url sender:nil];
     } else {
         [self handleDeepLinkWithKey:host pathComponents:url.pathComponents andQuery:query];
     }
@@ -132,7 +142,6 @@
                      andQuery:(NSString *)query {
     if ([key isEqualToString:@"feed"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
-        [mainViewController leaveGuide];
 
         // "feed/filters"
         if (pathComponents != nil && pathComponents.count >= 2) {
@@ -140,20 +149,21 @@
                 [mainViewController showFilters];
             }
         }
-    } else if ([key isEqualToString:@"badge"]) {
-        OTSelectAssociationViewController *selectAssociationController = (OTSelectAssociationViewController *)[self instatiateControllerWithStoryboardIdentifier:@"UserProfileEditor" andControllerIdentifier:@"SelectAssociation"];
-        
-        [self showController:selectAssociationController];
-        
     } else if ([key isEqualToString:@"webview"]) {
         NSArray *elts = [query componentsSeparatedByString:@"="];
         NSURL *url = [NSURL URLWithString:elts[1]];
         [self openWithWebView:url];
         
     } else if ([key isEqualToString:@"profile"]) {
-        [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].sid];
+        [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].uuid];
         
     } else if ([key isEqualToString:@"messages"]) {
+        if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+            OTMainViewController *mainViewController = [self popToMainViewController];
+            [OTAppState presentAuthenticationOverlay:mainViewController];
+            return;
+        }
+
         UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:MESSAGES_TAB_INDEX];
         [self updateAppWindow:tabViewController];
         
@@ -167,6 +177,10 @@
     } else if ([key isEqualToString:@"entourage"] || [key isEqualToString:@"entourages"]) {
         if (pathComponents != nil && pathComponents.count >= 2) {
             [self navigateToFeedWithStringId:pathComponents[1]];
+        }
+    } else if ([key isEqualToString:@"user"] || [key isEqualToString:@"users"]) {
+        if (pathComponents != nil && pathComponents.count >= 2) {
+            [self showProfileFromAnywhereForUser:pathComponents[1]];
         }
     } else if ([key isEqualToString:@"guide"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];

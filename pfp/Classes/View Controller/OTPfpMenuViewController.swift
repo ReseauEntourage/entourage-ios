@@ -20,7 +20,7 @@ enum menuItemIndexType: NSInteger {
 }
 
 final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
-    var tableView = UITableView()
+    var tableView = UITableView(frame: .zero, style: .grouped)
     var headerView = OTMenuHeaderView()
     private var menuItems = [OTMenuItem]()
     var currentUser = UserDefaults.standard.currentUser
@@ -86,7 +86,7 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
     private func loadUser() {
         SVProgressHUD.show()
         let authService:OTAuthService = OTAuthService()
-        authService.getDetailsForUser(self.currentUser?.sid, success: { (user:OTUser?) in
+        authService.getDetailsForUser(self.currentUser?.uuid, success: { (user:OTUser?) in
             SVProgressHUD.dismiss()
             self.currentUser = user
             self.customizeHeader()
@@ -260,7 +260,7 @@ extension OTPfpMenuViewController: UITableViewDelegate {
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
             break
         case menuItemIndexType.howTo.rawValue:
-            let url = URL(string: "http://bit.ly/faqapplivoisin-age")
+            let url = OTSafariService.redirectUrl(withIdentifier: "faq")
             OTSafariService.launchInAppBrowser(with: url, viewController: self.navigationController)
             break
         case menuItemIndexType.makeDonnation.rawValue:

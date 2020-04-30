@@ -35,12 +35,17 @@
 NSString *const kAPIApps = @"applications";
 
 NSString *const kAPILogin = @"login";
+NSString *const kAPIAnonymousLogin = @"anonymous_users";
 NSString *const kAPIUserRoute = @"users";
 NSString *const kAPIUpdateUserRoute = @"update_me";
 NSString *const kAPIMe = @"me";
 NSString *const kAPICode = @"code";
 NSString *const kKeychainPhone = @"entourage_user_phone";
 NSString *const kKeychainPassword = @"entourage_user_password";
+
+NSString *const kUserAuthenticationLevelOutside = @"outside";
+NSString *const kUserAuthenticationLevelAnonymous = @"anonymous";
+NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
 
 /**************************************************************************************************/
 #pragma mark - Public methods
@@ -49,8 +54,7 @@ NSString *const kKeychainPassword = @"entourage_user_password";
 
 - (void)authWithPhone:(NSString *)phone
              password:(NSString *)password
-             deviceId:(NSString *)deviceId
-              success:(void (^)(OTUser *))success
+              success:(void (^)(OTUser *, BOOL))success
               failure:(void (^)(NSError *))failure
 {
     if (phone == nil || password == nil) {
@@ -64,8 +68,8 @@ NSString *const kKeychainPassword = @"entourage_user_password";
     OTRequestOperationManager *requestManager = [OTHTTPRequestManager sharedInstance];
     [requestManager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
-    NSLog(@"Login with user %@. DeviceID = %@", parameters, deviceId);
-    //NSLog(@"Login header: %@", requestManager.requestSerializer.HTTPRequestHeaders);
+    NSLog(@"Login with user %@", parameters);
+    //NSLog(@"Login header: %@"OTApiErrorDomain, requestManager.requestSerializer.HTTPRequestHeaders);
     [requestManager
          POSTWithUrl:kAPILogin
          andParameters:parameters
@@ -74,12 +78,12 @@ NSString *const kKeychainPassword = @"entourage_user_password";
              NSLog(@"Authentication service response : %@", responseDict);
              NSDictionary *responseUser = responseDict[@"user"];
              OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
-             
+             BOOL firstLogin = [responseDict boolForKey:@"first_sign_in"];
              [[A0SimpleKeychain keychain] setString:phone forKey:kKeychainPhone];
              [[A0SimpleKeychain keychain] setString:password forKey:kKeychainPassword];
              
              if (success) {
-                 success(user);
+                 success(user, firstLogin);
              }
          }
          andFailure:^(NSError *error)
@@ -116,12 +120,12 @@ NSString *const kKeychainPassword = @"entourage_user_password";
 
 }
 
-- (void)getDetailsForUser:(NSNumber *)userID
-              success:(void (^)(OTUser *))success
-              failure:(void (^)(NSError *))failure
+- (void)getDetailsForUser:(NSString *)userUuid
+                            success:(void (^)(OTUser *))success
+                            failure:(void (^)(NSError *))failure
 {
-    
-    NSString *url = [NSString stringWithFormat:API_URL_USER_DETAILS, userID, TOKEN];
+
+    NSString *url = [NSString stringWithFormat:API_URL_USER_DETAILS, userUuid, TOKEN];
     
     [[OTHTTPRequestManager sharedInstance]
          GETWithUrl:url
@@ -131,6 +135,20 @@ NSString *const kKeychainPassword = @"entourage_user_password";
              NSDictionary *responseUser = responseDict[@"user"];
              OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
              
+             // FIXME: this is a hack to work around the fact that anonymous users' attributes
+             // are not actually persisted server side.
+             OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+             if ([user.uuid isEqualToString:currentUser.uuid] &&
+                 [responseUser[@"placeholders"] isKindOfClass:[NSArray class]]) {
+                 
+                 if ([responseUser[@"placeholders"] containsObject:@"firebase_properties"]) {
+                     user.firebaseProperties = currentUser.firebaseProperties;
+                 }
+                 if ([responseUser[@"placeholders"] containsObject:@"address"]) {
+                     user.address = currentUser.address;
+                 }
+             }
+
              if (success) {
                  success(user);
              }
@@ -144,37 +162,51 @@ NSString *const kKeychainPassword = @"entourage_user_password";
          }];
 }
 
-- (void)sendAppInfoWithSuccess:(void (^)(void))success
-                       failure:(void (^)(NSError *))failure
++ (void)sendAppInfoWithPushToken:(NSString *)pushToken
+             authorizationStatus:(NSString *)authorizationStatus
+                         success:(void (^)(void))success
+                         failure:(void (^)(NSError *))failure
 {
-    NSString *pushToken = [[NSUserDefaults standardUserDefaults] objectForKey:@DEVICE_TOKEN_KEY];
     if (!pushToken)
         return;
-
+    
     NSString *deviceiOS = [NSString stringWithFormat:@"iOS %@",[[NSProcessInfo processInfo] operatingSystemVersionString]];
     
     NSString *version = [NSBundle currentVersion];
-    NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken, @"device_os" : deviceiOS, @"version" : version}};
-                                    
+    NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken, @"device_os" : deviceiOS, @"version" : version, @"notifications_permissions" : authorizationStatus}};
+    
     
     NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, TOKEN];
     NSLog(@"Applications: %@\n%@", url, parameters);
     
     [[OTHTTPRequestManager sharedInstance]
-         PUTWithUrl:url
-         andParameters:parameters
-         andSuccess:^(id responseObject) {
-             if (success) {
-                 success();
-             }
+     PUTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject) {
+         if (success) {
+             success();
          }
-         andFailure:^(NSError *error)
-         {
-             NSLog(@"Failed with error %@", error);
-             if (failure) {
-                 failure(error);
-             }
-         }];
+     }
+     andFailure:^(NSError *error)
+     {
+         NSLog(@"Failed with error %@", error);
+         if (failure) {
+             failure(error);
+         }
+     }];
+}
+
+- (void)deletePushToken:(NSString *)pushToken forUser:(OTUser *)user {
+    NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken}};
+    NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, user.token];
+
+    [[OTHTTPRequestManager sharedInstance]
+        DELETEWithUrl:url
+        andParameters:parameters
+        andSuccess:nil
+        andFailure:^(NSError *error) {
+            NSLog(@"Failed with error %@", error);
+        }];
 }
 
 - (void)regenerateSecretCode:(NSString *)phone
@@ -260,8 +292,10 @@ NSString *const kKeychainPassword = @"entourage_user_password";
                                                 NSLog(@"Authentication service response : %@", responseDict);
                                                 NSDictionary *responseAddress = responseDict[@"address"];
                                                 OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
+                                                NSDictionary *responseFirebaseProperties = responseDict[@"firebase_properties"];
                                                 OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
                                                 user.address = address;
+                                                user.firebaseProperties = responseFirebaseProperties;
                                                 [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                                 
                                                 if (completion) {
@@ -356,4 +390,45 @@ NSString *const kKeychainPassword = @"entourage_user_password";
      }];
 }
 
+-(void)anonymousAuthWithSuccess:(void (^)(OTUser *))success failure:(void (^)(NSError *))failure
+{
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:kAPIAnonymousLogin
+     andParameters:nil
+     andSuccess:^(id responseObject) {
+         NSDictionary *responseDict = responseObject;
+         NSLog(@"Anonymous auth response : %@", responseDict);
+         NSDictionary *responseUser = responseDict[@"user"];
+         OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+
+         if (success) {
+             success(user);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         [[Crashlytics sharedInstance] recordError:error];
+         NSLog(@"Failed with error %@", error);
+         if (failure) {
+             failure(error);
+         }
+     }];
+}
+
++(NSString *)authenticationLevelForUser:(OTUser *)user {
+    if (!user) {
+        return kUserAuthenticationLevelOutside;
+    }
+    else if (user.isAnonymous) {
+        return kUserAuthenticationLevelAnonymous;
+    }
+    else {
+        return kUserAuthenticationLevelAuthenticated;
+    }
+}
+
++(NSString *)currentUserAuthenticationLevel {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    return [self authenticationLevelForUser:currentUser];
+}
 @end

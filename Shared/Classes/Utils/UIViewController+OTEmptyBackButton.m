@@ -12,6 +12,11 @@
 @implementation UIViewController (OTEmptyBackButton)
 
 + (void)load {
+    // this swizzling seems to crash IBDesignablesAgent
+    #if TARGET_INTERFACE_BUILDER
+    return;
+    #endif
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class class = [self class];

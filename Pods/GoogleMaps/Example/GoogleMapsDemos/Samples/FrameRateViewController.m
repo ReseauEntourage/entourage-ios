@@ -82,7 +82,7 @@
 - (void)updateStatus {
   _statusTextView.text =
       [NSString stringWithFormat:@"Preferred frame rate: %@",
-                                 [self.class nameForFrameRate:_mapView.preferredFrameRate]];
+                                 [[self class] nameForFrameRate:_mapView.preferredFrameRate]];
 }
 
 @end

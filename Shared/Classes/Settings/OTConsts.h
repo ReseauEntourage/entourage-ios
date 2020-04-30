@@ -19,8 +19,8 @@
 
 #define PARIS_LAT 48.856578
 #define PARIS_LON  2.351828
-#define MAPVIEW_REGION_SPAN_X_METERS 500
-#define MAPVIEW_REGION_SPAN_Y_METERS 500
+#define MAPVIEW_REGION_SPAN_X_METERS 5000
+#define MAPVIEW_REGION_SPAN_Y_METERS 5000
 
 #define MAPVIEW_CLICK_REGION_SPAN_X_METERS 750
 #define MAPVIEW_CLICK_REGION_SPAN_Y_METERS 750
@@ -42,8 +42,6 @@
 #define MAP_TOUR_LINE_WIDTH 4.0f
 #define CLOSED_ITEM_BACKGROUND_COLOR  [UIColor colorWithRed: 0xF8 / 255.0f green: 0xF8 / 255.0f blue: 0xF8 / 255.0f alpha: 1.0f]
 
-#define kNotificationPushStatusChanged @"NotificationAPNSStatusChanged"
-#define kNotificationPushStatusChangedStatusKey @"NotificationAPNSStatusChangedStatusKey"
 #define kNotificationLocalTourConfirmation "NotificationShowTourConfirmation"
 
 #define kNotificationShowCurrentLocation "NotificationCurrentLocation"
@@ -69,9 +67,13 @@
 #define kNotificationUpdateBadge @"NotificationUpdateBadge"
 #define kSolidarityGuideNotification @"NotificationSolidarityGuide"
 
+#define kNotificationCurrentUserUpdated @"NotificationCurrentUserUpdated"
+
 #define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
+#define ABOUT_INSTAGRAM_URL @"https://www.instagram.com/reseauentourage/"
 #define ABOUT_TWITTER_URL @"https://twitter.com/r_entourage"
+#define ABOUT_WEBAPP_URL @"https://www.entourage.social/app/"
 #define ABOUT_CGU_URL @"http://www.entourage.social/cgu/index.html"
 #define ABOUT_CGU_REDIRECT_FORMAT @"%@links/terms/redirect?token=%@"
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
@@ -95,7 +97,11 @@
 #define DONATE_LINK_ID @"donation"
 #define ATD_LINK_ID @"atd-partnership"
 #define FAQ_LINK_ID @"faq"
-#define SUGGESTION_LINK_ID @"feedback"
+#define SUGGESTION_LINK_ID @"suggestion"
+#define FEEDBACK_LINK_ID @"feedback"
+#define JOBS_LINK_ID @"jobs"
+#define TERMS_LINK_ID @"terms"
+#define PRIVACY_POLICY_LINK_ID @"privacy-policy"
 #define JOIN_LINK_ID @"volunteering"
 #define JOIN_URL @"https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
 

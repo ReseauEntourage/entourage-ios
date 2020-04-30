@@ -69,15 +69,48 @@
         self.lblUserCount.text = [feedItem.noPeople stringValue];
     }
     if (self.btnAvatar) {
-        [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
+        if ([feedItem isNeighborhood] || [feedItem isPrivateCircle]) {
+            self.btnAvatar.hidden = true;
+        } else {
+            self.btnAvatar.hidden = false;
+            [self.btnAvatar setupAsProfilePictureFromUrl:feedItem.author.avatarUrl];
+        }
     }
     
     if (self.lblDescription) {
-        [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+        if ([feedItem isNeighborhood] || [feedItem isPrivateCircle]) {
+            self.lblDescription.text = @" ";
+        } else if (self.lblUserName) {
+            self.lblDescription.text = [uiDelegate descriptionWithoutUserName];
+        } else {
+            [self.lblDescription setAttributedText:[uiDelegate descriptionWithSize:self.fontSize.floatValue]];
+        }
     }
-    
+
+    if (self.lblUserName) {
+        if ([feedItem isOuting] || [feedItem isNeighborhood] || [feedItem isPrivateCircle]) {
+            self.lblUserName.text = nil;
+        } else {
+            self.lblUserName.text = [uiDelegate userName];
+        }
+    }
+
     if (self.txtFeedItemDescription) {
         self.txtFeedItemDescription.text = [uiDelegate feedItemDescription];
+    }
+    
+    if (self.lblLocation) {
+        if ([feedItem isOuting]) {
+            self.lblLocation.hidden = true;
+        } else {
+            self.lblLocation.hidden = false;
+        }
+        
+        if (feedItem.displayAddress.length > 0) {
+            self.lblLocation.text = [NSString stringWithFormat:OTLocalizedString(@"entourage_location"), feedItem.displayAddress];
+        } else {
+            self.lblLocation.text = @" ";
+        }
     }
     
     if (self.lblTimeDistance) {
@@ -99,7 +132,12 @@
     if ([feedItem isKindOfClass:[OTAnnouncement class]]) {
         self.imgCategory.backgroundColor = [UIColor clearColor];
         self.imgCategory.contentMode = UIViewContentModeScaleAspectFit;
-        [self.imgCategory setupFromUrl:source withPlaceholder:nil];
+        [self.imgCategory setupFromUrl:source
+                       withPlaceholder:nil
+                               success:^(id request, id response, UIImage *image) {
+                                   self.imgCategory.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                               }
+                               failure:nil];
     }
     else {
         if ([feedItem isOuting]) {
@@ -136,6 +174,8 @@
 - (void)clearConfiguration {
     self.lblTitle = nil;
     self.lblDescription = nil;
+    self.lblUserName = nil;
+    self.lblLocation = nil;
     self.lblUserCount = nil;
     self.btnAvatar = nil;
     self.lblTimeDistance = nil;

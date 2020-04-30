@@ -34,12 +34,13 @@
 #import "OTSafariService.h"
 #import "OTAppConfiguration.h"
 #import "OTAuthService.h"
+#import "OTAuthenticationModalViewController.h"
+#import <FirebaseInstanceID/FirebaseInstanceID.h>
 #import "entourage-Swift.h"
 
-#define SOLIDARITY_GUIDE_INDEX 2
-#define DONATION_CELL_INDEX 4
-#define HEADER_CELL_INDEX 8
-#define LOG_OUT_CELL_INDEX 9
+#define DONATION_CELL_INDEX 3
+#define HEADER_CELL_INDEX 7
+#define LOG_OUT_CELL_INDEX 8
 
 typedef NS_ENUM(NSInteger, OTEntourageMenuIndexType) {
     OTEntourageMenuIndexTypeBlog = 0,
@@ -58,7 +59,6 @@ typedef NS_ENUM(NSInteger, OTEntourageMenuIndexType) {
 
 /* MenuItem identifiers */
 NSString *const OTMenuViewControllerSegueMenuMapIdentifier = @"segueMenuIdentifierForMap";
-NSString *const OTMenuViewControllerSegueMenuGuideIdentifier = @"segueMenuIdentifierForGuide";
 NSString *const OTMenuViewControllerSegueMenuProfileIdentifier = @"segueMenuIdentifierForProfile";
 NSString *const OTMenuViewControllerSegueMenuSettingsIdentifier = @"segueMenuIdentifierForSettings";
 NSString *const OTMenuViewControllerSegueMenuDisconnectIdentifier = @"segueMenuDisconnectIdentifier";
@@ -74,12 +74,15 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *modifyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *loginLabel;
 @property (weak, nonatomic) IBOutlet UIButton *profileButton;
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapNameBehavior;
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapModifyBehavior;
 @property (weak, nonatomic) IBOutlet OTTapViewBehavior *tapAssociation;
 @property (weak, nonatomic) IBOutlet UIImageView *imgAssociation;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet UILabel *footerLabel;
 
 // Data
 @property (nonatomic, strong) NSArray *menuItems;
@@ -106,9 +109,23 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 	[self configureControllersDictionary];
    
     [self createBackFrontMenuButton];
+
     [self.modifyLabel underline];
+    [self.loginLabel underline];
+
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.tableHeaderView = self.headerView;
+    self.tableView.tableFooterView = self.footerView;
+    
+    if (OTAppConfiguration.sharedInstance.environmentConfiguration.runsOnStaging) {
+        [FIRInstanceID.instanceID getIDWithHandler:^(NSString * _Nullable identity, NSError * _Nullable error) {
+            if (error) identity = @"error";
+            self.footerLabel.text = [NSString stringWithFormat:@"v%@\nFIId: %@", [NSBundle fullCurrentVersion], identity];
+        }];
+    }
+    else {
+        self.footerLabel.hidden = YES;
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilePictureUpdated:) name:@kNotificationProfilePictureUpdated object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSupportedPartner:) name:@kNotificationSupportedPartnerUpdated object:nil];
@@ -131,6 +148,12 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     [self loadUser];
     self.currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.nameLabel.text = [self.currentUser displayName];
+    
+    BOOL anonymous = self.currentUser.isAnonymous;
+    self.nameLabel.hidden = anonymous;
+    self.modifyLabel.hidden = anonymous;
+    self.loginLabel.hidden = !anonymous;
+
     [OTAppConfiguration updateAppearanceForMainTabBar];
 }
 
@@ -146,7 +169,7 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (void)loadUser {
     [SVProgressHUD show];
-    [[OTAuthService new] getDetailsForUser:self.currentUser.sid success:^(OTUser *user) {
+    [[OTAuthService new] getDetailsForUser:self.currentUser.uuid success:^(OTUser *user) {
         [SVProgressHUD dismiss];
         self.currentUser = user;
         self.menuItems = [self createMenuItems];
@@ -167,18 +190,18 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellID;
-    if (indexPath.row == DONATION_CELL_INDEX)
-        cellID = OTMenuMakeDonationTableViewCellIdentifier;
-    else if (indexPath.row == HEADER_CELL_INDEX)
-        cellID = @"HeaderViewCell";
-    else if (indexPath.row == LOG_OUT_CELL_INDEX)
-        cellID = OTMenuLogoutTableViewCellIdentifier;
-    else
-        cellID = OTMenuTableViewCellIdentifier;
+    NSString *cellID = [self cellIdentifierForRow:indexPath.row];
     
     OTMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
 	OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
+    if (cellID == OTMenuTableViewCellIdentifier) {
+        NSString *nextCellID = [self cellIdentifierForRow:indexPath.row + 1];
+        if (nextCellID == OTMenuTableViewCellIdentifier) {
+            cell.separator.backgroundColor = self.tableView.separatorColor;
+        } else {
+            cell.separator.hidden = YES;
+        }
+    }
     if (menuItem.iconName != nil) {
         cell.itemIcon.image = [UIImage imageNamed:menuItem.iconName];
         cell.itemIcon.contentMode = UIViewContentModeScaleAspectFit;
@@ -190,18 +213,11 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
         cell.contentView.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
     }
     
-    if ((indexPath.row == HEADER_CELL_INDEX ||
-         indexPath.row == HEADER_CELL_INDEX - 1) ||
-        (indexPath.row == LOG_OUT_CELL_INDEX ||
-         indexPath.row == DONATION_CELL_INDEX ||
-        indexPath.row == DONATION_CELL_INDEX - 1))
-        cell.separatorInset = UIEdgeInsetsZero;
-    
     if (indexPath.row == DONATION_CELL_INDEX) {
-        cell.contentView.backgroundColor = [UIColor colorWithRed:242
-                                                           green:101
-                                                            blue:33
-                                                           alpha:1];
+        cell.contentView.backgroundColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
+    }
+    else if (indexPath.row == LOG_OUT_CELL_INDEX) {
+        cell.itemLabel.textColor = [ApplicationTheme shared].primaryNavigationBarTintColor;
     }
     
 	return cell;
@@ -219,25 +235,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:kLoginFailureNotification object:self];
 	}
-    else if(indexPath.row == SOLIDARITY_GUIDE_INDEX) {
-        [OTLogger logEvent:@"SolidarityGuideFrom07Menu"];
-        [self.revealViewController revealToggle:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kSolidarityGuideNotification object:self];
-//        NSArray *deepLinks = @[
-//                               @"https://www.entourage.social/deeplink/guide",
-//                               @"https://www.entourage.social/entourages/e0nEjytD9mU8",
-//                               @"https://www.entourage.social/deeplink/badge",
-//                               @"https://www.entourage.social/deeplink/feed",
-//                               @"https://www.entourage.social/deeplink/webview?url=https://www.google.ro",
-//                               @"https://www.entourage.social/deeplink/entourage/e0nEjytD9mU8"
-//                               ];
-//        NSTimeInterval delta = 10;
-//        NSTimeInterval delay = 5;
-//        for (NSString *deepLink in deepLinks) {
-//            [self performSelector:@selector(testDeepLink:) withObject:deepLink afterDelay:delay];
-//            delay += delta;
-//        }
-    }
     else {
 		OTMenuItem *menuItem = [self menuItemsAtIndexPath:indexPath];
         if(menuItem.segueIdentifier)
@@ -284,12 +281,21 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 #pragma mark - Actions
 
 - (IBAction)showProfile {
+    if (self.currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self];
+        return;
+    }
+
     [OTLogger logEvent:@"TapMyProfilePhoto"];
     [self performSegueWithIdentifier:OTMenuViewControllerSegueMenuProfileIdentifier sender:self];
 }
 
 - (IBAction)editProfile {
     [self performSegueWithIdentifier:@"EditProfileSegue" sender:self];
+}
+
+- (IBAction)tappedLogin {
+    [OTAppState presentAuthenticationOverlay:self];
 }
 
 - (void)openControllerWithSegueIdentifier:(NSString *)segueIdentifier {
@@ -346,12 +352,6 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
                                                               identifier:GOAL_LINK_ID];
     [menuItems addObject:itemEntourageActions];
     
-    
-   
-    OTMenuItem *itemSolidarityGuide = [[OTMenuItem alloc] initWithTitle:OTLocalizedString(@"menu_solidarity_guide")
-                                                               iconName:@"mapPin"];
-    [menuItems addObject:itemSolidarityGuide];
-    
     OTMenuItem *itemJoin = [[OTMenuItem alloc]    initWithTitle:OTLocalizedString(@"menu_join")
                                                                iconName:@"menu_ba"];
     itemJoin.tag = OTEntourageMenuIndexTypeJoin;
@@ -381,11 +381,24 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
     OTMenuItem *itemNil = [[OTMenuItem alloc] initWithTitle:nil iconName: nil ];
     [menuItems addObject:itemNil];
     
-    OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
-                                                          iconName: nil
-                                                   segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
-    [menuItems addObject:itemDisconnect];
+    if (!self.currentUser.isAnonymous) {
+        OTMenuItem *itemDisconnect = [[OTMenuItem alloc] initWithTitle:NSLocalizedString(@"menu_disconnect_title", @"")
+                                                              iconName: nil
+                                                       segueIdentifier:OTMenuViewControllerSegueMenuDisconnectIdentifier];
+        [menuItems addObject:itemDisconnect];
+    }
 	return menuItems;
+}
+
+- (NSString *)cellIdentifierForRow:(NSInteger)row {
+    if (row == DONATION_CELL_INDEX)
+        return OTMenuMakeDonationTableViewCellIdentifier;
+    else if (row == HEADER_CELL_INDEX)
+        return @"HeaderViewCell";
+    else if (row == LOG_OUT_CELL_INDEX)
+        return OTMenuLogoutTableViewCellIdentifier;
+    else
+        return OTMenuTableViewCellIdentifier;
 }
 
 - (OTMenuItem *)menuItemsAtIndexPath:(NSIndexPath *)indexPath {
@@ -408,6 +421,14 @@ NSString *const OTMenuViewControllerSegueMenuSocialIdentifier = @"segueMenuIdent
 
 - (void)testDeepLink:(NSString *)deepLink {
     [[OTDeepLinkService new] handleUniversalLink:[NSURL URLWithString:deepLink]];
+}
+
+- (IBAction)longPressedFooterLabel:(id)sender {
+    [FIRInstanceID.instanceID getIDWithHandler:^(NSString * _Nullable identity, NSError * _Nullable error) {
+        if (error) identity = error.description;
+        [UIPasteboard generalPasteboard].string = identity;
+        [SVProgressHUD showInfoWithStatus:@"Information copiée dans le presse-papier"];
+    }];
 }
 
 @end

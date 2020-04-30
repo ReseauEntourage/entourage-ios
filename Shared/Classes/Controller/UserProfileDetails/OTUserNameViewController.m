@@ -45,6 +45,11 @@
     [self.firstNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     [self.lastNameTextField setupWithPlaceholderColor:[UIColor appTextFieldPlaceholderColor]];
     
+    if (@available(iOS 10.0, *)) {
+        self.firstNameTextField.textContentType = UITextContentTypeGivenName;
+        self.lastNameTextField.textContentType = UITextContentTypeFamilyName;
+    }
+    
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [self loadCurrentData];
 

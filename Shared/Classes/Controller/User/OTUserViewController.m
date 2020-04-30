@@ -33,16 +33,14 @@
 #import "OTMapViewController.h"
 #import "UIColor+Expanded.h"
 #import "OTPublicFeedItemViewController.h"
+#import "OTPillLabelView.h"
 
 #import "entourage-Swift.h"
 
 #define SUMMARY_AVATAR 1
 #define SUMMARY_AVATAR_SHADOW 10
 
-#define SUMMARY_RIGHT_CONTAINER_TAG 11
-#define SUMMARY_RIGHT_TAG 12
-#define SUMMARY_LEFT_CONTAINER_TAG 13
-#define SUMMARY_LEFT_TAG 14
+#define SUMMARY_TAG_CONTAINER 11
 
 #define SUMMARY_NAME 2
 #define SUMMARY_DESCRIPTION 3
@@ -118,7 +116,7 @@ typedef NS_ENUM(NSInteger) {
         self.userId = self.user.sid;
         [self configureTableSource];
         
-        if (self.user.sid.intValue == self.currentUser.sid.intValue) {
+        if (!self.currentUser.isAnonymous && self.user.sid.intValue == self.currentUser.sid.intValue) {
             self.user = self.currentUser;
             
             if ([OTAppConfiguration supportsProfileEditing]) {
@@ -139,7 +137,7 @@ typedef NS_ENUM(NSInteger) {
         [self loadUser];
     }
     
-    if (![self.userId isEqualToNumber:self.currentUser.sid]) {
+    if (self.currentUser.isAnonymous || ![self.userId isEqualToNumber:self.currentUser.sid]) {
         [OTLogger logEvent:@"Screen09_1OtherUserProfileView"];
         [self showReportButton];
     }
@@ -208,7 +206,7 @@ typedef NS_ENUM(NSInteger) {
 - (void)loadUser {
     if (self.userId != nil) {
         [SVProgressHUD show];
-        [[OTAuthService new] getDetailsForUser:self.userId success:^(OTUser *user) {
+        [[OTAuthService new] getDetailsForUser:self.userId.stringValue success:^(OTUser *user) {
             [SVProgressHUD dismiss];
             self.user = user;
             [self configureTableSource];
@@ -244,18 +242,17 @@ typedef NS_ENUM(NSInteger) {
     UILabel *aboutMeLabel = [cell viewWithTag:SUMMARY_DESCRIPTION];
     aboutMeLabel.text = self.user.about;
     
-    UIView *rightTagContainer = [cell viewWithTag:SUMMARY_RIGHT_CONTAINER_TAG];
-    rightTagContainer.backgroundColor = [OTAppAppearance rightTagColor:self.user];
-    
-    UIView *leftTagContainer = [cell viewWithTag:SUMMARY_LEFT_CONTAINER_TAG];
-    leftTagContainer.backgroundColor = [OTAppAppearance leftTagColor:self.user];
-    
-    UILabel *rightTagLabel = [cell viewWithTag:SUMMARY_RIGHT_TAG];
-    rightTagLabel.text = self.user.rightTag;
-    
-    UILabel *leftTagLabel = [cell viewWithTag:SUMMARY_LEFT_TAG];
-    leftTagLabel.text = self.user.leftTag;
-    
+    UIStackView *roleTagContainer = [cell viewWithTag:SUMMARY_TAG_CONTAINER];
+    [roleTagContainer.arrangedSubviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    for (NSString *role in self.user.roles) {
+        OTRoleTag *tag = [[OTRoleTag alloc] initWithName:role];
+        if (tag.visible) {
+            UIView *tagView = [OTPillLabelView createWithRoleTag:tag];
+            [roleTagContainer addArrangedSubview:tagView];
+        }
+    }
+    roleTagContainer.hidden = roleTagContainer.arrangedSubviews.count == 0;
+
     UIView *headerBgView = [cell viewWithTag:HEADER_BG_VIEW];
     headerBgView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
 }
@@ -298,8 +295,14 @@ typedef NS_ENUM(NSInteger) {
     [titleBtn setTitle:title forState:UIControlStateNormal];
     UIButton *associationImageButton = [cell viewWithTag:ASSOCIATION_IMAGE];
     [associationImageButton setImage:nil forState:UIControlStateNormal];
-    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0)
+    if (associationImageButton != nil && [imageURL class] != [NSNull class] && imageURL.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageURL]];
+        associationImageButton.layer.borderColor = UIColor.grayColor.CGColor;
+    }
+    else {
+        associationImageButton.layer.borderColor = nil;
+    }
+    
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
     lblSupportType.text = OTLocalizedString(@"marauder");
 }
@@ -313,10 +316,16 @@ typedef NS_ENUM(NSInteger) {
     [associationImageButton setImage:nil forState:UIControlStateNormal];
     [associationImageButton addTarget:self action:@selector(showPartnerDetails) forControlEvents:UIControlEventTouchUpInside];
     NSString *imageUrl = partner.largeLogoUrl;
-    if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0)
+    if (associationImageButton != nil && [imageUrl class] != [NSNull class] && imageUrl.length > 0) {
         [associationImageButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:imageUrl]];
+        associationImageButton.layer.borderColor = UIColor.grayColor.CGColor;
+    }
+    else {
+        associationImageButton.layer.borderColor = nil;
+    }
+    
     UILabel *lblSupportType = [cell viewWithTag:ASSOCIATION_SUPPORT_TYPE];
-    lblSupportType.text = OTLocalizedString(@"sympathizant");
+    lblSupportType.text = partner.userRoleTitle;
 }
 
 - (void)configureTableSource {
@@ -472,6 +481,11 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)startChatWithSelectedUser {
+    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+        [OTAppState presentAuthenticationOverlay:self];
+        return;
+    }
+    
     [SVProgressHUD show];
     
     [self loadEntourageItemWithGropupId:self.user.conversation.uuid

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Cy0-zh-yFt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Cy0-zh-yFt">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -14,9 +14,6 @@
         </array>
         <array key="SF-UI-Text-Medium.otf">
             <string>SFUIText-Medium</string>
-        </array>
-        <array key="SF-UI-Text-Semibold.otf">
-            <string>SFUIText-Semibold</string>
         </array>
     </customFonts>
     <scenes>
@@ -43,7 +40,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uQ9-PD-VPv">
                                 <rect key="frame" x="0.0" y="110" width="320" height="370"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Définissez votre zone d'action" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rv-q7-YzH">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Où souhaitez-vous agir ?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rv-q7-YzH">
                                         <rect key="frame" x="12" y="8" width="300" height="72"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="225" id="brm-xY-AV0"/>
@@ -57,14 +54,12 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="dqk-c4-rFx">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Entourage est un réseau local ! Découvrez les initiatives solidaires de votre quartier et tissez des liens avec vos voisins" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="dqk-c4-rFx">
                                         <rect key="frame" x="8" y="110" width="304" height="54"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="280" id="RDP-jD-gxP"/>
                                             <constraint firstAttribute="height" constant="36" id="Rzp-Zw-W0Q"/>
                                         </constraints>
-                                        <string key="text">Entourage, c’est utile parce que c’est local !
-Indiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -94,7 +89,7 @@ Indiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.</s
                                             <constraint firstAttribute="width" constant="56" id="s5j-IA-2Dr"/>
                                         </constraints>
                                         <state key="normal" image="backArrow">
-                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -165,7 +160,7 @@ Indiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.</s
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.95056408640000001" green="0.39452844860000003" blue="0.13085669280000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="uQ9-PD-VPv" secondAttribute="trailing" id="Mfp-8U-1lO"/>
                             <constraint firstItem="ncD-V6-d47" firstAttribute="top" secondItem="uQ9-PD-VPv" secondAttribute="bottom" id="ehs-H2-S6Q"/>
@@ -183,7 +178,6 @@ Indiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.</s
                         <outlet property="rightsTitleLabel" destination="6rv-q7-YzH" id="eHV-AA-6gD"/>
                         <outlet property="textField" destination="3S6-J6-u4x" id="2bb-kc-aD8"/>
                         <segue destination="gUz-vW-h1c" kind="show" identifier="GeoToNotificationsSegue" id="X8W-6a-Kl5"/>
-                        <segue destination="evb-jd-QBs" kind="show" identifier="NoLocationRightsSegue" id="MOn-Od-XM1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZkO-Iy-APf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -212,7 +206,7 @@ Indiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.</s
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Activer les notifications">
-                                    <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -253,14 +247,13 @@ Indiquez le lieu autour duquel vous souhaitez agir avec d’autres personnes.</s
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ROi-Zv-4sG">
-                                <rect key="frame" x="8" y="192" width="304" height="107.5"/>
+                                <rect key="frame" x="8" y="192" width="304" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="VXA-rG-gcR"/>
                                     <constraint firstAttribute="width" constant="280" id="xAR-ce-kBa"/>
                                 </constraints>
-                                <string key="text">Des actions solidaires sont créées tous les jours et n’attendent que vous pour aboutir !
-
-Activer les notifications vous permet d’être informé(e) des nouveautés dans votre quartier.</string>
+                                <string key="text">Sur Entourage, vous allez créer des liens entre voisins solidaires. 
+Activez les notifications pour être alerté de vos nouveaux messages.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -272,7 +265,7 @@ Activer les notifications vous permet d’être informé(e) des nouveautés dans
                                 </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901961089999998" green="0.3960784376" blue="0.1294117719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="LzF-gS-pCs" firstAttribute="top" secondItem="cGv-BC-RoD" secondAttribute="bottom" constant="16" id="0Oi-mQ-jZO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LzF-gS-pCs" secondAttribute="trailing" constant="-12" id="5Li-Ut-URG"/>
@@ -313,147 +306,6 @@ Activer les notifications vous permet d’être informé(e) des nouveautés dans
             </objects>
             <point key="canvasLocation" x="5891.25" y="-45"/>
         </scene>
-        <!--Geolocation Denied-->
-        <scene sceneID="h0D-Sa-iJd">
-            <objects>
-                <viewController id="evb-jd-QBs" userLabel="Geolocation Denied" customClass="OTGeolocationDeniedViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kAO-nG-hah"/>
-                        <viewControllerLayoutGuide type="bottom" id="qfP-1j-fFF"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Wfa-yT-nOy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZAK-ei-4qC">
-                                <rect key="frame" x="-8" y="0.0" width="336" height="480"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DBY-cw-2gO">
-                                <rect key="frame" x="-3" y="26.5" width="336" height="427"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mapPinSquare" translatesAutoresizingMaskIntoConstraints="NO" id="6e2-gd-bHF">
-                                        <rect key="frame" x="130.5" y="2" width="75" height="75"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="75" id="JLh-ex-9R0"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="75" id="hbD-a6-WoR"/>
-                                            <constraint firstAttribute="width" constant="75" id="oXr-0C-9yf"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="zMi-h0-yrU"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y5g-nI-qNv">
-                                        <rect key="frame" x="21" y="94.5" width="284" height="125.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="58" id="k7Q-3y-7Fq"/>
-                                            <constraint firstAttribute="width" constant="280" id="oyE-Eg-eGj"/>
-                                        </constraints>
-                                        <string key="text">Pour vous faire découvrir les actions solidaires autour de vous,
-Entourage doit connaître
-votre position.</string>
-                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="21"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="k7Q-3y-7Fq"/>
-                                                <exclude reference="oyE-Eg-eGj"/>
-                                            </mask>
-                                        </variation>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cef-68-9y9">
-                                        <rect key="frame" x="19" y="241.5" width="288" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="z7B-u2-qyB"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
-                                        <state key="normal" title="Activez la géolocalisation">
-                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="activateGeolocation" destination="evb-jd-QBs" eventType="touchUpInside" id="YJU-XX-ngd"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Nous concoctons une alternative qui sera disponible prochainement !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnj-T2-BzO">
-                                        <rect key="frame" x="21" y="349.5" width="284" height="75.5"/>
-                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="21"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHz-5J-CRX">
-                                        <rect key="frame" x="19" y="299.5" width="288" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="288" id="PFP-q9-GPg"/>
-                                            <constraint firstAttribute="height" constant="50" id="XUW-0y-0SP"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
-                                        <state key="normal" title="Ignorer">
-                                            <color key="titleColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="ignoreGeolocation" destination="evb-jd-QBs" eventType="touchUpInside" id="rT8-hH-2ji"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="cef-68-9y9" firstAttribute="top" secondItem="Y5g-nI-qNv" secondAttribute="bottom" constant="21.5" id="48w-st-HYD"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="427" id="4Wt-MQ-eMc"/>
-                                    <constraint firstAttribute="bottom" secondItem="cnj-T2-BzO" secondAttribute="bottom" constant="2" id="HOl-pm-phL"/>
-                                    <constraint firstItem="6e2-gd-bHF" firstAttribute="top" secondItem="DBY-cw-2gO" secondAttribute="top" constant="2" id="Ui0-Eb-DOt"/>
-                                    <constraint firstItem="6e2-gd-bHF" firstAttribute="centerX" secondItem="DBY-cw-2gO" secondAttribute="centerX" id="X42-Ly-jtH"/>
-                                    <constraint firstAttribute="height" constant="427" id="gbJ-wc-lxx"/>
-                                    <constraint firstAttribute="trailing" secondItem="sHz-5J-CRX" secondAttribute="trailing" constant="29" id="mZ0-UI-NmZ"/>
-                                    <constraint firstItem="sHz-5J-CRX" firstAttribute="leading" secondItem="DBY-cw-2gO" secondAttribute="leading" constant="19" id="njp-H8-PHw"/>
-                                    <constraint firstItem="cef-68-9y9" firstAttribute="centerX" secondItem="DBY-cw-2gO" secondAttribute="centerX" constant="-5" id="uzR-Ta-dSe"/>
-                                    <constraint firstItem="Y5g-nI-qNv" firstAttribute="top" secondItem="6e2-gd-bHF" secondAttribute="bottom" constant="17.5" id="wkA-qq-zvY"/>
-                                    <constraint firstItem="sHz-5J-CRX" firstAttribute="top" secondItem="cef-68-9y9" secondAttribute="bottom" constant="8" id="xhu-b5-9uO"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="ZAK-ei-4qC" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" constant="-24" id="9qO-rW-Awm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="cef-68-9y9" secondAttribute="trailing" id="B5B-1b-ytl"/>
-                            <constraint firstItem="DBY-cw-2gO" firstAttribute="leading" secondItem="ZAK-ei-4qC" secondAttribute="leading" constant="5" id="Gsu-rU-YIK"/>
-                            <constraint firstItem="qfP-1j-fFF" firstAttribute="top" secondItem="ZAK-ei-4qC" secondAttribute="bottom" id="JRO-xQ-Kfi"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Y5g-nI-qNv" secondAttribute="trailing" constant="2" id="Kj1-ut-eZL"/>
-                            <constraint firstItem="cef-68-9y9" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" id="Puu-SH-tqM"/>
-                            <constraint firstItem="ZAK-ei-4qC" firstAttribute="top" secondItem="Wfa-yT-nOy" secondAttribute="top" id="RST-uE-aqp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZAK-ei-4qC" secondAttribute="trailing" constant="-24" id="Sdl-8y-v64"/>
-                            <constraint firstItem="Y5g-nI-qNv" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" constant="2" id="VeQ-0d-RbQ"/>
-                            <constraint firstItem="DBY-cw-2gO" firstAttribute="trailing" secondItem="ZAK-ei-4qC" secondAttribute="trailing" constant="5" id="Wla-Rw-sD5"/>
-                            <constraint firstItem="cnj-T2-BzO" firstAttribute="centerX" secondItem="Wfa-yT-nOy" secondAttribute="centerX" id="X1g-Fr-Dol"/>
-                            <constraint firstItem="cnj-T2-BzO" firstAttribute="leading" secondItem="Wfa-yT-nOy" secondAttribute="leadingMargin" constant="2" id="YDU-UM-rcS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="cnj-T2-BzO" secondAttribute="trailing" constant="2" id="b2o-7G-fTG"/>
-                            <constraint firstItem="DBY-cw-2gO" firstAttribute="centerY" secondItem="ZAK-ei-4qC" secondAttribute="centerY" id="nhs-uP-P3G"/>
-                            <constraint firstItem="Y5g-nI-qNv" firstAttribute="centerX" secondItem="Wfa-yT-nOy" secondAttribute="centerX" id="xep-va-CNW"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="activateButton" destination="cef-68-9y9" id="ffW-vE-Cyj"/>
-                        <outlet property="ignoreButton" destination="sHz-5J-CRX" id="pPu-Lq-ZCZ"/>
-                        <outlet property="subtitleLabel" destination="cnj-T2-BzO" id="XhE-kv-1q7"/>
-                        <outlet property="titleLabel" destination="Y5g-nI-qNv" id="0qI-59-xcl"/>
-                        <segue destination="gUz-vW-h1c" kind="show" identifier="GrantedGeoSegue" id="c2y-uN-gYU"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AWh-bJ-aSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5082.608695652174" y="680.70652173913049"/>
-        </scene>
     </scenes>
     <resources>
         <image name="backArrow" width="22" height="22"/>
@@ -461,7 +313,4 @@ votre position.</string>
         <image name="mapPinSquare" width="56" height="56"/>
         <image name="notificationsSquare" width="56" height="56"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="X8W-6a-Kl5"/>
-    </inferredMetricsTieBreakers>
 </document>

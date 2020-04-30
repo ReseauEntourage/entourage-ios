@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>5.7</string>
+	<string>6.2.buildNumberNotSet</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -55,12 +55,12 @@
 			<string>social.entourage.entourageios.beta</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>entourage-preprod</string>
+				<string>entourage-staging</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string></string>
+	<string>buildNumberNotSet</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -150,6 +150,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

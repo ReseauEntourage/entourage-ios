@@ -139,9 +139,12 @@
 - (void)setupToolbarButtons {
 
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
-    [more setFrame:CGRectMake(0, 0, 30, 30)];
-    [more setBackgroundImage:[[UIImage imageNamed:@"info"] resizeTo:CGSizeMake(25, 25)]
-                    forState:UIControlStateNormal];
+    [more setFrame:CGRectMake(0, 0, 44, 44)];
+
+    [more setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+             forState:UIControlStateNormal];
+    more.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
+
     [more addTarget:self.statusChangedBehavior action:@selector(startChangeStatus) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithCustomView:more];

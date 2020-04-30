@@ -18,6 +18,7 @@
 #import "AWSCredentialsProvider.h"
 #import "AWSServiceEnum.h"
 
+//! SDK version for AWS Core
 FOUNDATION_EXPORT NSString *const AWSiOSSDKVersion;
 
 FOUNDATION_EXPORT NSString *const AWSServiceErrorDomain;
@@ -92,6 +93,7 @@ typedef NS_ENUM(NSInteger, AWSServiceErrorType) {
 @property (nonatomic, strong, readonly) id<AWSCredentialsProvider> credentialsProvider;
 @property (nonatomic, strong, readonly) AWSEndpoint *endpoint;
 @property (nonatomic, readonly) NSString *userAgent;
+@property (nonatomic, readonly) BOOL localTestingEnabled;
 
 + (NSString *)baseUserAgent;
 
@@ -99,6 +101,11 @@ typedef NS_ENUM(NSInteger, AWSServiceErrorType) {
 
 - (instancetype)initWithRegion:(AWSRegionType)regionType
            credentialsProvider:(id<AWSCredentialsProvider>)credentialsProvider;
+
+- (instancetype)initWithRegion:(AWSRegionType)regionType
+                   serviceType:(AWSServiceType)serviceType
+           credentialsProvider:(id<AWSCredentialsProvider>)credentialsProvider
+           localTestingEnabled:(BOOL)localTestingEnabled;
 
 - (instancetype)initWithRegion:(AWSRegionType)regionType
                       endpoint:(AWSEndpoint *)endpoint
@@ -119,6 +126,9 @@ typedef NS_ENUM(NSInteger, AWSServiceErrorType) {
 @property (nonatomic, readonly) NSURL *URL;
 @property (nonatomic, readonly) NSString *hostName;
 @property (nonatomic, readonly) BOOL useUnsafeURL;
+@property (nonatomic, readonly) NSNumber *portNumber;
+
++ (NSString *)regionNameFromType:(AWSRegionType)regionType;
 
 - (instancetype)initWithRegion:(AWSRegionType)regionType
                        service:(AWSServiceType)serviceType
@@ -135,5 +145,9 @@ typedef NS_ENUM(NSInteger, AWSServiceErrorType) {
 - (instancetype)initWithURL:(NSURL *)URL;
 
 - (instancetype)initWithURLString:(NSString *)URLString;
+
+- (instancetype)initLocalEndpointWithRegion:(AWSRegionType)regionType
+                                    service:(AWSServiceType)serviceType
+                               useUnsafeURL:(BOOL)useUnsafeURL;
 
 @end

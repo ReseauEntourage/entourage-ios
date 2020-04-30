@@ -17,6 +17,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *btnProfile;
 @property (nonatomic, weak) IBOutlet UILabel *lblDisplayName;
 @property (nonatomic, weak) IBOutlet UIImageView *imgAssociation;
+@property (weak, nonatomic) IBOutlet UIStackView *rolesStackView;
 
 - (void)configureWith:(OTFeedItemJoiner *)item;
 

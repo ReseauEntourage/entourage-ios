@@ -47,5 +47,6 @@
 @property (nonatomic) CLLocationCoordinate2D location;
 
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before andLocation:(CLLocationCoordinate2D)location;
+- (NSMutableDictionary *)toDictionaryWithPageToken:(NSString *)pageToken andLocation:(CLLocationCoordinate2D)location;
 
 @end

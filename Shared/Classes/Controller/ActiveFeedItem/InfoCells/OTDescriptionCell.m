@@ -18,14 +18,7 @@
     self.txtDescription.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appGreyishBrownColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
 }
 
-- (void)configureWith:(OTFeedItem *)item {
-    
-    if ([item isOuting] && [item.identifierTag isEqualToString:@"eventAuthorInfo"]) {
-        NSAttributedString *description = [[[OTFeedItemFactory createFor:item] getUI] eventAuthorFormattedDescription];
-        self.txtDescription.attributedText = description;
-        return;
-    }
-    
+- (void)configureWith:(OTFeedItem *)item {    
     NSString *description = [[[OTFeedItemFactory createFor:item] getUI] feedItemDescription];
     self.txtDescription.text = description;
 }

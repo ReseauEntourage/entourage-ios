@@ -13,6 +13,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <MessageUI/MessageUI.h>
+#import <FirebaseMessaging/FirebaseMessaging.h>
 
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsService.h"
@@ -22,8 +23,13 @@
 #import "OTEntourage.h"
 
 #define MAP_TAB_INDEX 0
-#define MESSAGES_TAB_INDEX 1
-#define MENU_TAB_INDEX 2
+#if !PFP
+    #define MESSAGES_TAB_INDEX 2
+    #define MENU_TAB_INDEX 3
+#else
+    #define MESSAGES_TAB_INDEX 1
+    #define MENU_TAB_INDEX 2
+#endif
 
 @class EnvironmentConfigurationManager;
 
@@ -55,11 +61,17 @@
 
 + (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 + (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
++ (void)applicationDidRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings;
 + (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler;
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;
 
++ (void)messaging:(FIRMessaging * _Nonnull)messaging didReceiveRegistrationToken:(NSString * _Nonnull)fcmToken;
++ (void)messaging:(FIRMessaging * _Nonnull)messaging didReceiveMessage:(FIRMessagingRemoteMessage * _Nonnull)remoteMessage;
+
 + (NSInteger)applicationType;
++ (BOOL)isApplicationTypeEntourage;
++ (BOOL)isApplicationTypeVoisinAge;
 
 // Configures if the tour functionality is enabled/shown
 + (BOOL)supportsTourFunctionality;
@@ -73,7 +85,7 @@
 + (BOOL)supportsProfileEditing;
 
 // Configures if the intro tutorial is enabled/shown
-+ (BOOL)shouldShowIntroTutorial;
++ (BOOL)shouldShowIntroTutorial:(OTUser * _Nonnull)user;
 
 // Configure if the user is allowed to login from the welcome page
 + (BOOL)shouldAllowLoginFromWelcomeScreen;
@@ -148,5 +160,7 @@
 /* Configures if the user has to accept some additional confindentiality questions when creating new actions: How the user will to choose to set Join requests on or off will work similarly, but it will only be possible for "Contribution" types of actions, not for "demandes" (Asks for help) for now. (EMA-2384)
  */
 + (BOOL)shouldAskForConfidentialityWhenCreatingEntourage:(OTEntourage*)entourage;
+
++ (NSDictionary *)community;
 
 @end

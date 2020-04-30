@@ -9,6 +9,7 @@
 #import "OTAboutTableViewCell.h"
 
 NSString* const OTAboutTableViewCellIdentifier = @"OTAboutTableViewCellIdentifier";
+NSString* const OTAboutTableViewCellWithIconIdentifier = @"OTAboutTableViewCellWithIconIdentifier";
 
 @implementation OTAboutTableViewCell
 

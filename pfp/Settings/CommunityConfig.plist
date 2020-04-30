@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Voisin-Âge</string>
+	<key>roles</key>
+	<dict>
+		<key>not_validated</key>
+		<dict>
+			<key>title</key>
+			<string>En attente</string>
+			<key>color</key>
+			<string>pfpPurpleColor</string>
+		</dict>
+		<key>coordinator</key>
+		<dict>
+			<key>title</key>
+			<string>Animateur</string>
+			<key>color</key>
+			<string>pfpGreenColor</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

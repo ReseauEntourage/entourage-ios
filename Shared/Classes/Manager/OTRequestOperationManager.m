@@ -14,6 +14,7 @@
 #import "OTRequestOperationManager.h"
 #import "OTAuthService.h"
 #import "OTAppConfiguration.h"
+#import "OTApiErrorDomain.h"
 
 @implementation OTRequestOperationManager
 
@@ -27,10 +28,11 @@
             success(responseObject);
     } failure:^(NSURLSessionDataTask * _Nonnull sessionDataTask, NSError * _Nonnull error) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)sessionDataTask.response;
-        if ([httpResponse statusCode] == 401)
+        NSError *actualError = [self errorFromTask:sessionDataTask andError:error];
+        if ([httpResponse statusCode] == 401 && ![actualError.domain isEqual:OTApiErrorDomain]) {
             [self askForNewTokenWithMethod:@"GET" andUrl:url andParameters:parameters andSuccess:success andFailure:failure];
+        }
         else {
-            NSError *actualError = [self errorFromTask:sessionDataTask andError:error];
             if (failure)
                 failure(actualError);
         }
@@ -195,6 +197,7 @@
 
 - (NSError *)errorFromTask:(NSURLSessionDataTask *)sessionDataTask andError:(NSError *)error {
     NSError *actualError = error;
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)sessionDataTask.response;
     @synchronized (actualError) {
         NSError *mappedError = nil;
         NSString *responseString = error.userInfo[JSONResponseSerializerFullKey];
@@ -202,6 +205,16 @@
             NSError *parseError = nil;
             NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&parseError];
             if(!parseError) {
+
+                if (httpResponse.statusCode == 401) {
+                    if ([[jsonObject stringForKey:@"code"] isEqualToString:@"ANONYMOUS_USER_AUTHENTICATION_REQUIRED"]) {
+                        return [NSError errorWithDomain:OTApiErrorDomain code:OTApiErrorAnonymousUserAuthenticationRequired userInfo:nil];
+                    }
+                    else {
+                        return actualError;
+                    }
+                }
+
                 NSString *errorString = @"";
                 id errorValue = [jsonObject objectForKey:@"error"];
                 if ([errorValue isKindOfClass:[NSDictionary class]] && [errorValue objectForKey:@"message"])

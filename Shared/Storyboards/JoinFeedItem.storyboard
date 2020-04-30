@@ -99,7 +99,7 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9u1-of-5of" customClass="OTTextView">
                                                 <rect key="frame" x="3" y="270" width="337" height="160"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <color key="tintColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="160" id="m8S-JJ-OJr"/>
                                                 </constraints>
@@ -112,7 +112,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.94901960780000005" green="0.39607843139999999" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                         <constraints>
                                             <constraint firstItem="ywH-iH-lax" firstAttribute="leading" secondItem="cKu-4R-ztc" secondAttribute="leading" id="9qk-EH-bQA"/>
                                             <constraint firstItem="6gx-OQ-FAY" firstAttribute="top" secondItem="cKu-4R-ztc" secondAttribute="bottom" constant="86" id="HKi-8B-Ush"/>

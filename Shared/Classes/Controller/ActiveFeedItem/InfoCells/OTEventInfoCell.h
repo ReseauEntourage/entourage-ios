@@ -14,6 +14,8 @@
 
 @interface OTEventInfoCell : OTBaseInfoCell
 
+@property (nonatomic, weak) IBOutlet UILabel *lblAuthorPrefix;
+@property (nonatomic, weak) IBOutlet UILabel *lblAuthorInfo;
 @property (nonatomic, weak) IBOutlet UILabel *lblInfo;
 @property (nonatomic, weak) IBOutlet UIImageView *imgIcon;
 

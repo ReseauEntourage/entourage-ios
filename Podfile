@@ -21,10 +21,11 @@ def sharedPods
     pod 'Mixpanel'
     pod 'kingpin', '0.3.1'
     pod 'FBSDKCoreKit'
-    pod 'Firebase/Core'
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Messaging'
+    pod 'Firebase/InAppMessagingDisplay'
     pod 'SnapKit', '~> 4.0.0'
     pod 'GooglePlaces'
-    pod 'GooglePlacePicker'
     pod 'GoogleMaps'
     pod 'SDWebImage'
 end
@@ -37,6 +38,6 @@ target "pfp" do
     sharedPods
 end
 
-target "entourageTests" do
-    pod 'OCMock', '3.1'
+target "UnitTests" do
+    sharedPods
 end

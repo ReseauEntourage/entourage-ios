@@ -12,6 +12,8 @@
 @protocol OTUIDelegate <NSObject>
 
 - (NSAttributedString *) descriptionWithSize:(CGFloat)size;
+- (NSString *)descriptionWithoutUserName;
+- (NSString *)userName;
 - (NSString *)summary;
 - (NSString *)categoryIconSource;
 - (NSString *)feedItemDescription;
@@ -24,6 +26,8 @@
 - (BOOL)isStatusBtnVisible;
 - (NSString *)feedItemActionButton;
 - (NSAttributedString *)eventAuthorFormattedDescription;
+- (NSString *)eventInfoDescription;
 - (NSAttributedString *)eventInfoFormattedDescription;
+- (NSString *)formattedTimestamps;
 
 @end

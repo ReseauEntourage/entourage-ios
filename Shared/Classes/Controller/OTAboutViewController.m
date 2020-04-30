@@ -114,7 +114,9 @@
             break;
     }
     
-    [OTLogger logEvent:message];
+    if (message) {
+        [OTLogger logEvent:message];
+    }
     
     if (indexPath.row == [self.aboutItems count]-1) {
         //Email
@@ -153,21 +155,13 @@
             [OTAppState loadTutorialScreen];
         }];
     }
-    else if (item.type == FAQ) {
+    else if (item.identifier) {
         NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS, item.identifier, TOKEN];
         NSString *url = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
         [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
     }
-    else if (item.type == PolitiqueDeConfidenatialite) {
-        NSString *url = [NSString stringWithFormat: ABOUT_POLITIQUE_DE_CONF_FORMAT, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
-        [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
-    }
-    else if (item.type == GeneralConditions) {
-        NSString *url = [NSString stringWithFormat: ABOUT_CGU_REDIRECT_FORMAT, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
-        [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
-    }
     else {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:item.url]];
+        [OTSafariService launchInAppBrowserWithUrlString:item.url viewController:self.navigationController];
     }
     return nil;
 }
@@ -178,23 +172,38 @@
 {
     NSMutableArray *aboutItems = [NSMutableArray array];
     
-    OTAboutItem *itemTutorial = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_tutorial")
-                                                   segueIdentifier:@"TutorialSegueIdentifier"];
-    itemTutorial.type = Tutorial;
-    [aboutItems addObject:itemTutorial];
-    
+//    OTAboutItem *itemTutorial = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_tutorial")
+//                                                   segueIdentifier:@"TutorialSegueIdentifier"];
+//    itemTutorial.type = Tutorial;
+//    [aboutItems addObject:itemTutorial];
+
+    OTAboutItem *itemSuggestions = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"menu_suggestions")
+                                                                identifier:SUGGESTION_LINK_ID];
+    itemSuggestions.type = Suggestions;
+    [aboutItems addObject:itemSuggestions];
+
+    OTAboutItem *itemFeedback = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"menu_feedback")
+                                                                identifier:FEEDBACK_LINK_ID];
+    itemFeedback.type = Feedback;
+    [aboutItems addObject:itemFeedback];
+
     OTAboutItem *itemApplicationUsage = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"menu_application_usage")
                                                                 identifier:FAQ_LINK_ID];
     itemApplicationUsage.type = FAQ;
     [aboutItems addObject:itemApplicationUsage];
     
+    OTAboutItem *itemJobs = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"menu_jobs")
+                                                                identifier:JOBS_LINK_ID];
+    itemJobs.type = Jobs;
+    [aboutItems addObject:itemJobs];
+    
     OTAboutItem *itemCGU = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_cgu")
-                                                          url:ABOUT_CGU_URL];
+                                                          identifier:TERMS_LINK_ID];
     itemCGU.type = GeneralConditions;
     [aboutItems addObject:itemCGU];
     
     OTAboutItem *confItem = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_politique_conf")
-                                                           url:ABOUT_POLITIQUE_DE_CONF_FORMAT];
+                                                           identifier:PRIVACY_POLICY_LINK_ID];
     confItem.type = PolitiqueDeConfidenatialite;
     [aboutItems addObject:confItem];
     

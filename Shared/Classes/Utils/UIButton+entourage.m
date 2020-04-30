@@ -86,7 +86,7 @@
     else {
         title = OTLocalizedString(@"item_closed");
         if (![feedItem isOuting] && [feedItem.outcomeStatus boolValue]) {
-            title = @"Succès ! Lire l’histoire";
+            title = @"Succès";
             color = [ApplicationTheme shared].backgroundThemeColor;
         }
     }

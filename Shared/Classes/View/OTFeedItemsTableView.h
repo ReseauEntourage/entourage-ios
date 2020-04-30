@@ -55,7 +55,6 @@
 - (void)switchToGuide;
 - (void)switchToFeeds;
 
-- (CGFloat)feedsFilterHeaderHeight;
 - (UIView*)headerViewWithMap:(MKMapView*)mapView
                    mapHeight:(CGFloat)mapHeight
                   showFilter:(BOOL)showFilter;

@@ -13,7 +13,7 @@
 
 #import "GMSOverlayLayer.h"
 
-NS_ASSUME_NONNULL_BEGIN;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * GMSMarkerLayer is a subclass of GMSOverlayLayer, available on a per-marker basis, that allows
@@ -26,16 +26,16 @@ NS_ASSUME_NONNULL_BEGIN;
 @interface GMSMarkerLayer : GMSOverlayLayer
 
 /** Latitude, part of |position| on GMSMarker. */
-@property(nonatomic, assign) CLLocationDegrees latitude;
+@property(nonatomic) CLLocationDegrees latitude;
 
 /** Longitude, part of |position| on GMSMarker. */
-@property(nonatomic, assign) CLLocationDegrees longitude;
+@property(nonatomic) CLLocationDegrees longitude;
 
 /** Rotation, as per GMSMarker. */
-@property(nonatomic, assign) CLLocationDegrees rotation;
+@property(nonatomic) CLLocationDegrees rotation;
 
 /** Opacity, as per GMSMarker. */
-@property(atomic, assign) float opacity;
+@property(atomic) float opacity;
 
 @end
 
@@ -44,4 +44,4 @@ extern NSString *const kGMSMarkerLayerLongitude;
 extern NSString *const kGMSMarkerLayerRotation;
 extern NSString *const kGMSMarkerLayerOpacity;
 
-NS_ASSUME_NONNULL_END;
+NS_ASSUME_NONNULL_END

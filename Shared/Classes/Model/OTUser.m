@@ -11,6 +11,7 @@
 #import "NSDictionary+Parsing.h"
 
 NSString *const kKeySid = @"id";
+NSString *const kKeyUuid = @"uuid";
 NSString *const kKeyType = @"user_type";
 NSString *const kKeyEmail = @"email";
 NSString *const kKeyDisplayName = @"display_name";
@@ -27,8 +28,10 @@ NSString *const kKeyOrganization = @"organization";
 NSString *const kKeyConversation = @"conversation";
 NSString *const kKeyPartner = @"partner";
 NSString *const kKeyRoles = @"roles";
+NSString *const kKeyAnonymous = @"anonymous";
 NSString *const kMemberships = @"memberships";
 NSString *const kAddress = @"address";
+NSString *const kFirebaseProperties = @"firebase_properties";
 
 NSString *const kCoordinatorUserTag = @"coordinator";
 NSString *const kNotValidatedUserTag = @"not_validated";
@@ -37,7 +40,9 @@ NSString *const kVisitedUserTag = @"visited";
 NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 
 @interface OTUser ()
+@property (nonatomic, readwrite) NSString *uuid;
 @property (nonatomic, readwrite) NSArray *memberships;
+@property (nonatomic, readwrite) BOOL anonymous;
 @end
 
 @implementation OTUser
@@ -48,6 +53,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     if (self)
     {
         _sid = [dictionary numberForKey:kKeySid];
+        _uuid = [dictionary stringForKey:kKeyUuid];
         _type = [dictionary stringForKey:kKeyType];
         _email = [dictionary stringForKey:kKeyEmail];
         _avatarURL = [dictionary stringForKey:kKeyAvatarURL];
@@ -62,6 +68,8 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         _encounterCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEncounterCount];
         _organization = [[OTOrganization alloc] initWithDictionary:[dictionary objectForKey:kKeyOrganization]];
         _partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kKeyPartner]];
+        _anonymous = [dictionary boolForKey:kKeyAnonymous defaultValue:NO];
+        _firebaseProperties = [self sanitizeFirebaseProperties:[dictionary objectForKey:kFirebaseProperties]];
         
         if ([[dictionary allKeys] containsObject:kKeyConversation]) {
             _conversation = [[OTConversation alloc] initWithDictionary:[dictionary objectForKey:kKeyConversation]];
@@ -114,6 +122,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.sid forKey:kKeySid];
+    [encoder encodeObject:self.uuid forKey:kKeyUuid];
     [encoder encodeObject:self.type forKey:kKeyType];
     [encoder encodeObject:self.email forKey:kKeyEmail];
     [encoder encodeObject:self.avatarURL forKey:kKeyAvatarURL];
@@ -130,8 +139,10 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     [encoder encodeObject:self.partner forKey:kKeyPartner];
     [encoder encodeObject:self.conversation forKey:kKeyConversation];
     [encoder encodeObject:self.roles forKey:kKeyRoles];
+    [encoder encodeBool:self.anonymous forKey:kKeyAnonymous];
     [encoder encodeObject:self.memberships forKey:kMemberships];
     [encoder encodeObject:self.address forKey:kAddress];
+    [encoder encodeObject:self.firebaseProperties forKey:kFirebaseProperties];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -139,6 +150,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     if ((self = [super init]))
     {
         self.sid = [decoder decodeObjectForKey:kKeySid];
+        self.uuid = [decoder decodeObjectForKey:kKeyUuid];
         self.type = [decoder decodeObjectForKey:kKeyType];
         self.email = [decoder decodeObjectForKey:kKeyEmail];
         self.avatarURL = [decoder decodeObjectForKey:kKeyAvatarURL];
@@ -155,8 +167,10 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         self.partner = [decoder decodeObjectForKey:kKeyPartner];
         self.conversation = [decoder decodeObjectForKey:kKeyConversation];
         self.roles = [decoder decodeObjectForKey:kKeyRoles];
+        self.anonymous = [decoder decodeBoolForKey:kKeyAnonymous];
         self.memberships = [decoder decodeObjectForKey:kMemberships];
         self.address = [decoder decodeObjectForKey:kAddress];
+        self.firebaseProperties = [self sanitizeFirebaseProperties:[decoder decodeObjectForKey:kFirebaseProperties]];
     }
     return self;
 }
@@ -165,16 +179,6 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 
 - (BOOL)hasActionZoneDefined {
     return self.address != nil;
-}
-
-- (BOOL)isRegisteredForPushNotifications {
-    UIUserNotificationType type = [UIApplication sharedApplication].currentUserNotificationSettings.types;
-    
-    if (type != UIUserNotificationTypeNone) {
-        return YES;
-    }
-    
-    return NO;
 }
 
 - (BOOL)isPro
@@ -195,12 +199,12 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     return [self.roles containsObject:kEthicsCharterSignedTag];
 }
 
-- (NSString*)leftTag {
-    // Not used for now
-    return nil;
+- (BOOL)isAnonymous
+{
+    return self.anonymous;
 }
 
-- (NSString*)rightTag {
+- (NSString*)roleTag {
     if (self.roles) {
         NSString *key = self.roles.firstObject;
         if (key && ![key isEqualToString:kEthicsCharterSignedTag]) {
@@ -238,6 +242,34 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     }
     
     return OTLocalizedString(@"defineActionZoneDescription");
+}
+
+- (NSString *)uuid {
+    if (_uuid != nil) {
+        return _uuid;
+    }
+
+    // fallback to legacy id
+    return self.sid.stringValue;
+}
+
+- (NSDictionary<NSString *, NSString *> *)sanitizeFirebaseProperties:(NSDictionary *)input {
+    if (![input isKindOfClass:NSDictionary.class]) return @{};
+    
+    NSMutableDictionary<NSString *, NSString *> *output = [NSMutableDictionary new];
+    
+    for (NSString *key in input) {
+        if (![key isKindOfClass:NSString.class]) continue;
+        NSString *value = input[key];
+        if (![value isKindOfClass:NSString.class] && ![key isKindOfClass:NSNull.class]) continue;
+        output[key] = value;
+    }
+    
+    return [NSDictionary dictionaryWithDictionary:output];
+}
+
+- (void)setFirebaseProperties:(NSDictionary<NSString *,NSString *> *)firebaseProperties {
+    _firebaseProperties = [self sanitizeFirebaseProperties:firebaseProperties];
 }
 
 @end

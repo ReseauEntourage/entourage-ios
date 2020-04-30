@@ -1,5 +1,5 @@
 //
-// Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2010-2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License").
 // You may not use this file except in compliance with the License.
@@ -25,11 +25,22 @@ NSString *const AWSSTSErrorDomain = @"com.amazonaws.AWSSTSErrorDomain";
              @"durationSeconds" : @"DurationSeconds",
              @"externalId" : @"ExternalId",
              @"policy" : @"Policy",
+             @"policyArns" : @"PolicyArns",
              @"roleArn" : @"RoleArn",
              @"roleSessionName" : @"RoleSessionName",
              @"serialNumber" : @"SerialNumber",
+             @"tags" : @"Tags",
              @"tokenCode" : @"TokenCode",
+             @"transitiveTagKeys" : @"TransitiveTagKeys",
              };
+}
+
++ (NSValueTransformer *)policyArnsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSSTSPolicyDescriptorType class]];
+}
+
++ (NSValueTransformer *)tagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSSTSTag class]];
 }
 
 @end
@@ -60,10 +71,15 @@ NSString *const AWSSTSErrorDomain = @"com.amazonaws.AWSSTSErrorDomain";
 	return @{
              @"durationSeconds" : @"DurationSeconds",
              @"policy" : @"Policy",
+             @"policyArns" : @"PolicyArns",
              @"principalArn" : @"PrincipalArn",
              @"roleArn" : @"RoleArn",
              @"SAMLAssertion" : @"SAMLAssertion",
              };
+}
+
++ (NSValueTransformer *)policyArnsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSSTSPolicyDescriptorType class]];
 }
 
 @end
@@ -99,11 +115,16 @@ NSString *const AWSSTSErrorDomain = @"com.amazonaws.AWSSTSErrorDomain";
 	return @{
              @"durationSeconds" : @"DurationSeconds",
              @"policy" : @"Policy",
+             @"policyArns" : @"PolicyArns",
              @"providerId" : @"ProviderId",
              @"roleArn" : @"RoleArn",
              @"roleSessionName" : @"RoleSessionName",
              @"webIdentityToken" : @"WebIdentityToken",
              };
+}
+
++ (NSValueTransformer *)policyArnsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSSTSPolicyDescriptorType class]];
 }
 
 @end
@@ -194,6 +215,26 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSSTSGetAccessKeyInfoRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"accessKeyId" : @"AccessKeyId",
+             };
+}
+
+@end
+
+@implementation AWSSTSGetAccessKeyInfoResponse
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"account" : @"Account",
+             };
+}
+
+@end
+
 @implementation AWSSTSGetCallerIdentityRequest
 
 @end
@@ -217,7 +258,17 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"durationSeconds" : @"DurationSeconds",
              @"name" : @"Name",
              @"policy" : @"Policy",
+             @"policyArns" : @"PolicyArns",
+             @"tags" : @"Tags",
              };
+}
+
++ (NSValueTransformer *)policyArnsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSSTSPolicyDescriptorType class]];
+}
+
++ (NSValueTransformer *)tagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSSTSTag class]];
 }
 
 @end
@@ -264,6 +315,27 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)credentialsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSSTSCredentials class]];
+}
+
+@end
+
+@implementation AWSSTSPolicyDescriptorType
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"arn" : @"arn",
+             };
+}
+
+@end
+
+@implementation AWSSTSTag
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"key" : @"Key",
+             @"value" : @"Value",
+             };
 }
 
 @end
