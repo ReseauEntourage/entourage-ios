@@ -129,10 +129,10 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (IBAction)defineActionZone:(id)sender {
-    UIStoryboard *rightsStoryboard = [UIStoryboard storyboardWithName:@"Rights" bundle:nil];
-    OTGeolocationRightsViewController *controller = (OTGeolocationRightsViewController*)[rightsStoryboard instantiateViewControllerWithIdentifier:@"OTGeolocationRightsViewController"];
-    controller.isShownOnStartup = NO;
-    [self.navigationController pushViewController:controller animated:YES];
+    UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
+    OTOnboardingPlaceViewController *vc = (OTOnboardingPlaceViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_place"];
+    vc.isFromProfile = YES;
+    [self.navigationController showViewController:vc sender:nil];
 }
 
 - (void)showSaveButton {

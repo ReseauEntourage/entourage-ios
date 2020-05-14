@@ -29,6 +29,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     var userTypeSelected = UserType.none
     var temporaryGooglePlace:GMSPlace? = nil
     var temporaryLocation:CLLocation? = nil
+    var temporaryAddressName:String? = nil
     var temporaryEmail = ""
     var temporaryPassword = ""
     var temporaryPasswordConfirm = ""
@@ -147,7 +148,8 @@ class OTOnboardingV2StartViewController: UIViewController {
         }
         else if let _lat = self.temporaryLocation?.coordinate.latitude, let _long = self.temporaryLocation?.coordinate.longitude {
             SVProgressHUD.show()
-            OTAuthService.updateUserAddress(withName: "Default", andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long)) { (error) in
+            let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
+            OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long)) { (error) in
                 SVProgressHUD.dismiss()
                 self.goNextStep()
             }
@@ -271,7 +273,7 @@ class OTOnboardingV2StartViewController: UIViewController {
                     self.sendPasscode()
                 }
                 else {
-                    SVProgressHUD.showInfo(withStatus: "Veuillez remplir le password")
+                    SVProgressHUD.showInfo(withStatus: OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_no_pwd"))
                 }
                 return
             }
@@ -503,9 +505,10 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
         self.resendCode()
     }
     
-    func updateNewAddress(googlePlace:GMSPlace?,gpsLocation:CLLocation?) {
+    func updateNewAddress(googlePlace:GMSPlace?,gpsLocation:CLLocation?,addressName:String?) {
         self.temporaryGooglePlace = googlePlace
         self.temporaryLocation = gpsLocation
+        self.temporaryAddressName = addressName
         
         if googlePlace != nil || gpsLocation != nil {
             updateButtonNext(isValid: true)
@@ -538,7 +541,7 @@ protocol OnboardV2Delegate:class {
     func updateButtonNext(isValid:Bool)
     func validatePasscode(password:String)
     func requestNewcode()
-    func updateNewAddress(googlePlace:GMSPlace?,gpsLocation:CLLocation?)
+    func updateNewAddress(googlePlace:GMSPlace?,gpsLocation:CLLocation?,addressName:String?)
     func updateUserType(userType:UserType)
     func updateEmailPwd(email:String,pwd:String,pwdConfirm:String)
     func updateUserPhoto(image:UIImage)

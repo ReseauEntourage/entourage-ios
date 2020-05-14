@@ -887,6 +887,7 @@ Ligne 4</string>
                         <viewLayoutGuide key="safeArea" id="BCF-gW-ldK"/>
                     </view>
                     <connections>
+                        <outlet property="ui_constraint_title_top" destination="dBl-9Z-Ckt" id="q7X-TE-gHl"/>
                         <outlet property="ui_label_description" destination="jQ2-75-xfk" id="aNF-pa-NPs"/>
                         <outlet property="ui_label_info" destination="RcS-q2-O4Z" id="HKp-6V-eVx"/>
                         <outlet property="ui_label_title" destination="Zqv-Xs-i3U" id="Uhy-ln-idl"/>
