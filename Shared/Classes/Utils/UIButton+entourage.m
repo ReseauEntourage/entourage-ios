@@ -6,8 +6,6 @@
 //  Copyright © 2016 OCTO Technology. All rights reserved.
 //
 
-#import <AFNetworking/UIButton+AFNetworking.h>
-
 #import "UIButton+entourage.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
@@ -15,6 +13,7 @@
 #import "OTConsts.h"
 #import "UIColor+entourage.h"
 #import "entourage-Swift.h"
+#import <SDWebImage/SDWebImage.h>
 
 #define DEFAULT_IMAGE @"userSmall"
 
@@ -39,9 +38,7 @@
     UIImage *placeholderImage = [UIImage imageNamed:placeholder];
     if (avatarURLString != nil && [avatarURLString class] != [NSNull class] && avatarURLString.length > 0) {
         NSURL *url = [NSURL URLWithString:avatarURLString];
-        [userImageButton setImageForState:UIControlStateNormal
-                                  withURL:url
-                         placeholderImage:placeholderImage];
+        [userImageButton sd_setImageWithURL:url forState:UIControlStateNormal placeholderImage:placeholderImage];
     }
     else
         [userImageButton setImage:placeholderImage forState:UIControlStateNormal];

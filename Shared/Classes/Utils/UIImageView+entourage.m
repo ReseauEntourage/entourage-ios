@@ -5,9 +5,9 @@
 //  Created by sergiu buceac on 1/17/17.
 //  Copyright © 2017 OCTO Technology. All rights reserved.
 //
-
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "UIImageView+entourage.h"
+#import <SDWebImage/SDWebImage.h>
 
 @implementation UIImageView (entourage)
 
@@ -16,7 +16,7 @@
     UIImage *placeholderImage = [UIImage imageNamed:placeholder];
     if (url != nil && [url class] != [NSNull class] && url.length > 0) {
         NSURL *imgUrl = [NSURL URLWithString:url];
-        [imageView setImageWithURL:imgUrl placeholderImage:placeholderImage];
+        [imageView sd_setImageWithURL:imgUrl placeholderImage:placeholderImage];
     }
     else
         imageView.image = placeholderImage;

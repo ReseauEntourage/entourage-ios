@@ -238,7 +238,7 @@
     [self.toggleCollectionView toggle:NO animated:NO];
     
     [self.noDataBehavior initialize];
-    [self.guideInfoBehavior initialize];
+    //[self.guideInfoBehavior initialize];
     [self.newsFeedsSourceBehavior initialize];
     [self.tapViewBehavior initialize];
     
@@ -463,7 +463,7 @@
     [self.tableView switchToFeeds];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self.noDataBehavior switchedToNewsfeeds];
-    [self.guideInfoBehavior hide];
+//    [self.guideInfoBehavior hide];
     self.toursMapDelegate.isActive = YES;
     self.solidarityGuidePoisDisplayed = NO;
     self.poisMapDelegate.isActive = [OTAppConfiguration shouldShowPOIsOnFeedsMap];
@@ -741,7 +741,7 @@
                 }
                 else {
                     if (!self.poisDisplayed) {
-                        [self.guideInfoBehavior show];
+//                        [self.guideInfoBehavior show];
                         self.poisDisplayed = YES;
                     }
                 }
@@ -750,7 +750,10 @@
             } failure:^(NSError *error) {
                 [self registerObserver];
                 NSLog(@"Err getting POI %@", error.description);
-                self.pois.count == 0 ? [self.noDataBehavior showNoData] : [self.guideInfoBehavior show];
+                if (self.pois.count == 0) {
+                    [self.noDataBehavior showNoData];
+                }
+               // self.pois.count == 0 ? [self.noDataBehavior showNoData] : [self.guideInfoBehavior show];
                 [SVProgressHUD dismiss];
         }];
     } else {
@@ -1503,7 +1506,7 @@
     [OTLogger logEvent:@"Screen06_1FeedView"];
     [self.toggleCollectionView toggle:NO animated:NO];
     [self.noDataBehavior hideNoData];
-    [self.guideInfoBehavior hide];
+//    [self.guideInfoBehavior hide];
     
     self.isTourListDisplayed = YES;
 

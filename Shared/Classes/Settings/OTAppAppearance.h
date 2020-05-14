@@ -79,4 +79,5 @@
 + (NSAttributedString*)closedFeedChatItemMessageFormattedText:(OTFeedItemMessage*)message;
 + (NSString*)entourageConfidentialityDescription:(OTEntourage*)entourage
                                         isPublic:(BOOL)isPublic;
++ (void)leftNavigationBarButtonItemForFeedItem:(OTFeedItem*)feedItem withBarItem:(void (^)(UIBarButtonItem*))completion;
 @end

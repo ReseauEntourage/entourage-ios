@@ -57,7 +57,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [OTLogger logEvent:@"Screen14_2PublicPageViewAsMemberOrCreator"];
+    [OTLogger logEvent:@"Screen14_2PublicPageViewAsMember"];
     [self setupToolbarButtons];
     
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
@@ -69,8 +69,10 @@
     UIBarButtonItem *backItem = [UIBarButtonItem createWithImageNamed:@"backItem"
                                                            withTarget:self.navigationController andAction:@selector(popViewControllerAnimated:) changeTintColor:YES];
     [leftButtons addObject:backItem];
-    [leftButtons addObject:[OTAppAppearance leftNavigationBarButtonItemForFeedItem:self.feedItem]];
-    self.navigationItem.leftBarButtonItems = leftButtons;
+    [OTAppAppearance leftNavigationBarButtonItemForFeedItem:self.feedItem withBarItem:^(UIBarButtonItem *item) {
+        [leftButtons addObject:item];
+        self.navigationItem.leftBarButtonItems = leftButtons;
+    }];
 }
 
 - (IBAction)showProfile {
