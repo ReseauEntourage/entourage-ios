@@ -624,3 +624,15 @@
 "take_photo_description" = "Avec une photo, c’est tout de suite plus sympa.\nMontrez-nous votre sourire le plus chaleureux.";
 //Info location from profile
 "location_information_profile" = "Entourage est un réseau local ! Découvrez les initiatives solidaires de votre quartier et tissez des liens avec vos voisins";
+
+"error_login_phone_length" = "Le numéro de téléphone doit faire au minimum %d chiffres";
+"error_login_code_lenght" = "Le code doit faire 6 chiffres";
+"error_login_resendCode_unknow" = "Numéro de téléphone inconnu, veuillez ressayer.";
+"login_title" = "Connectez-vous pour continuer";
+"login_phone_placeholder" = "Numéro de téléphone";
+"login_placeholder_code" = "Saisir votre code";
+"login_button_connect" = "Je me connecte";
+"login_button_resend_code" = "Redemander un code";
+"login_label_country" = "Pays";
+"login_label_phone" = "Téléphone";
+"login_label_code" = "Code";

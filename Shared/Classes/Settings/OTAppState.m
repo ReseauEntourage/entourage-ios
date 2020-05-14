@@ -123,14 +123,10 @@
 
 + (void)navigateToLoginScreen:(NSURL*)link sender:(UIViewController * _Nullable)sender
 {
-    OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
-    loginController.fromLink = link;
-    if ([sender isKindOfClass:[OTPhoneViewController class]]) {
-        [sender.navigationController pushViewController:loginController animated:YES];
-    }
-    else {
-        [[OTAppState getTopViewController] showViewController:loginController sender:self];
-    }
+    OTLoginV2ViewController *loginVC = [[UIStoryboard introStoryboard]instantiateViewControllerWithIdentifier:@"LoginV2VC"];
+    loginVC.fromLink = link;
+    
+    [[OTAppState getTopViewController] showViewController:loginVC sender:self];
 }
 
 + (void)returnToLogin {
@@ -251,8 +247,8 @@
         return welcomeViewController;
     }
     else {
-        OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
-        return loginController;
+        OTLoginV2ViewController * loginvc = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"LoginV2VC"];
+        return loginvc;
     }
 }
 
