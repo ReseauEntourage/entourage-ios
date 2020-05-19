@@ -91,6 +91,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
     
+    //Controllers where IQKeyboardManager has to be disabled inside onboarding V2
+    [[IQKeyboardManager sharedManager].disabledDistanceHandlingClasses addObject:[OTOnboardingPhoneViewController class]];
+    [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[OTOnboardingPhoneViewController class]];
+    
     [self configurePushNotifcations];
     [self configureAnalyticsWithOptions:launchOptions];
     [self configurePhotoUploadingService];
@@ -633,8 +637,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
         return NO;
     }
-    
-    return !user.isAnonymous;
+    return NO;//Bypass intro for now
+   // return !user.isAnonymous;
 }
 
 + (BOOL)shouldShowAddEventDisclaimer

@@ -14,5 +14,8 @@
 - (void)setupNewUserWithPhone:(NSString*)phone
                       success:(void (^)(OTUser *onboardUser))success
                       failure:(void (^)(NSError *error))failure;
+- (void)setupNewUserWithUser:(OTUser*)user
+                     success:(void (^)(OTUser *onboardUser))success
+                     failure:(void (^)(NSError *error))failure;
 
 @end

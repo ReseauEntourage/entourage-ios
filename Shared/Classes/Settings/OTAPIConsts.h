@@ -84,4 +84,7 @@
 #define API_URL_REGENERATE_CODE @"%@/%@/%@.json"
 #define API_URL_UPDATE_ADDRESS @"users/me/address?token=%@"
 
+//Upload Photo
+#define API_URL_USER_PREPARE_AVATAR_UPLOAD @"users/me/presigned_avatar_upload.json"
+
 #endif /* OTAPIConsts_h */

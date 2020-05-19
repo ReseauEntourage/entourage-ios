@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bha-JG-S7n">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bha-JG-S7n">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraSquare" translatesAutoresizingMaskIntoConstraints="NO" id="VCD-Ez-jrk">
-                                <rect key="frame" x="15" y="40" width="56" height="56"/>
+                                <rect key="frame" x="15" y="20" width="56" height="56"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="FH5-J7-nFd"/>
@@ -30,13 +28,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ajouter une photo ?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="811-zf-BIU">
-                                <rect key="frame" x="15" y="116" width="345" height="36"/>
+                                <rect key="frame" x="15" y="96" width="345" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avec une photo, c’est tout de suite plus sympa. Montrez-nous votre sourire le plus chaleureux." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="vBy-8m-m47">
-                                <rect key="frame" x="15" y="167" width="345" height="36"/>
+                                <rect key="frame" x="15" y="147" width="345" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -136,17 +134,17 @@
         <!--Picture Preview View Controller-->
         <scene sceneID="hRq-c8-az9">
             <objects>
-                <viewController id="xml-Uv-sbT" customClass="OTPicturePreviewViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PicturePreviewVC" id="xml-Uv-sbT" customClass="OTPicturePreviewViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8OU-hy-Cl1"/>
                         <viewControllerLayoutGuide type="bottom" id="qzZ-lL-4Ao"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bq0-9o-4Id">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Déplacer et zoomer pour ajuster la photo de profil." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="IxH-xR-j7Q">
-                                <rect key="frame" x="8" y="40" width="359" height="36"/>
+                                <rect key="frame" x="8" y="20" width="359" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="Z8t-c4-3Ei"/>
                                     <constraint firstAttribute="height" constant="36" id="f0o-wm-uAQ"/>
@@ -165,7 +163,7 @@
                                 </variation>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29I-VR-dA4">
-                                <rect key="frame" x="11" y="157" width="353" height="353"/>
+                                <rect key="frame" x="11" y="147" width="353" height="353"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TpG-O0-eKf">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
@@ -186,13 +184,13 @@
                                 </connections>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layer" translatesAutoresizingMaskIntoConstraints="NO" id="vq9-7x-SXS">
-                                <rect key="frame" x="11" y="157" width="353" height="353"/>
+                                <rect key="frame" x="11" y="147" width="353" height="353"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vq9-7x-SXS" secondAttribute="height" multiplier="1:1" id="dxE-Cx-vP1"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fot-wr-6TS" customClass="OnBoardingButton" customModule="Ent_Beta" customModuleProvider="target">
-                                <rect key="frame" x="12" y="596" width="351" height="56"/>
+                                <rect key="frame" x="12" y="576" width="351" height="56"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="296" id="HXC-sY-0y9"/>
@@ -260,12 +258,12 @@
             <point key="canvasLocation" x="4582" y="405"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="7Aa-Ot-sEG"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="cameraSquare" width="56" height="56"/>
         <image name="layer" width="345.5" height="345"/>
         <image name="nextFull" width="56" height="56"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="k7U-3x-y4I"/>
-    </inferredMetricsTieBreakers>
 </document>

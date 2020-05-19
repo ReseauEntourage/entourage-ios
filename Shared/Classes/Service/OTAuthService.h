@@ -63,8 +63,16 @@ extern NSString *const kUserAuthenticationLevelAuthenticated;
 + (void)updateUserAddressWithPlaceId:(NSString *)placeId
                           completion:(void (^)(NSError *))completion;
 
++ (void)updateUserAddressWithName:(NSString *)addressName
+                        andLatitude:(NSNumber *) latitude
+                        andLongitude:(NSNumber *) longitude
+                        completion:(void (^)(NSError *))completion;
+
 -(void)anonymousAuthWithSuccess:(void (^)(OTUser *))success
                         failure:(void (^)(NSError *))failure;
+
++ (void)prepareUploadPhotoWithSuccess:(void (^)(NSDictionary *user))success
+                        failure:(void (^)(NSError *error))failure;
 
 +(NSString *)authenticationLevelForUser:(OTUser *)user;
 +(NSString *)currentUserAuthenticationLevel;

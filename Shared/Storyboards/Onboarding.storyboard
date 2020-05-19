@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbA-ED-vfm">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BbA-ED-vfm">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,7 +15,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Owner-->
+        <!--Phone View Controller-->
         <scene sceneID="qT4-XV-W5p">
             <objects>
                 <viewController storyboardIdentifier="OTPhoneViewController" automaticallyAdjustsScrollViewInsets="NO" id="BbA-ED-vfm" customClass="OTPhoneViewController" sceneMemberID="viewController">
@@ -30,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKP-h6-GEA">
-                                <rect key="frame" x="0.0" y="20" width="375" height="379"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="El9-5u-El5">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="379"/>
@@ -243,11 +241,11 @@ numéro de portable? </string>
                         <viewControllerLayoutGuide type="bottom" id="yeR-N2-sFF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oIj-1W-a8G">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjW-Ii-bDU">
-                                <rect key="frame" x="0.0" y="175" width="375" height="556"/>
+                                <rect key="frame" x="0.0" y="155" width="375" height="556"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GL7-KN-5la">
@@ -406,7 +404,7 @@ numéro de portable? </string>
                                 </constraints>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votre code est crypté : seul.e vous le connaissez. Vous pouvez le modifier dans votre Profil." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocE-G0-FSl">
-                                <rect key="frame" x="67" y="603" width="292" height="56"/>
+                                <rect key="frame" x="67" y="583" width="292" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="vRB-eG-1TT"/>
                                 </constraints>
@@ -415,7 +413,7 @@ numéro de portable? </string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="7hI-Gq-Hiw">
-                                <rect key="frame" x="16" y="612" width="43" height="38"/>
+                                <rect key="frame" x="16" y="592" width="43" height="38"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="43" id="9fr-R8-jhS"/>

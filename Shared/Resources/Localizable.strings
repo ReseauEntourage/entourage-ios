@@ -570,3 +570,69 @@
 "preOnboard_choice_signup" = "Je m'inscris";
 "preOnboard_choice_login" = "J'ai déjà un compte";
 "preOnboard_choice_weblink" = "Qui est l’association Entourage ?";
+
+//Onboarding V2
+"onboard_button_pass" = "Passer";
+"onboard_welcome_title" = "Bienvenue !";
+"onboard_welcome_sub" = "Tout d'abord...\nComment vous appelez-vous ?";
+"onboard_welcome_info" = "Seule la première lettre sera visible par les autres membres.";
+"onboard_welcome_placeholder_firstname" = "Votre prénom";
+"onboard_welcome_placeholder_lastname" = "Votre nom";
+"onboard_phone_title" = "Enchantés, %@.";
+"onboard_phone_sub" = "Quel est votre numéro de téléphone ?";
+"onboard_phone_info" = "Cette information restera confidentielle. Nous voulons juste vérifier que vous n’êtes pas un robot, mais un humain au grand coeur !";
+"onboard_phone_placeholder_phone" = "Téléphone";
+"onboard_sms_title" = "Entrez le code reçu par SMS";
+"onboard_sms_sub" = "Un SMS vient juste de vous être envoyé au ** ** ** ** %@";
+"onboard_sms_no_code" = "Pas de code ? Réessayez dans 1 min";
+"onboard_sms_wait_retry" = "Pas de code ? Réessayer dans 1 min";
+"onboard_sms_no_pwd" = "Veuillez remplir le password";
+"attention_pop_title" = "Attention";
+"onboard_sms_pop_alert" = "Veuillez patienter encore %d sec avant de renouveller la demande.";
+"onboard_type_title" = "Enchantés, %@.";
+"onboard_type_sub" = "Qu'est ce qui vous amène ?";
+"onboard_type_description" = "Entourage vous pose ces quelques questions pour vous accueillir et vous accompagner au mieux !\n(Cette information ne sera pas visible par les autres membres du réseau).";
+"onboard_type_description_italic" = "(Cette information ne sera pas visible par les autres membres du réseau).";
+"onboard_type_choice1" = "Je suis un voisin solidaire";
+"onboard_type_choice2" = "Je suis une personne isolée ou en précarité";
+"onboard_type_choice3" = "Je fais partie d’une association ou service public";
+"onboard_place_title" = "Quel est votre quartier ?";
+"onboard_place_description" = "Vous pourrez répondre aux demandes de personnes en difficulté et d’associations de votre quartier, et vous pourrez vous-même proposer des dons de votre temps ou matériels.";
+"onboard_place_info" = "Entourage ne communique pas cette adresse.";
+"onboard_place_placeholder" = "Ex : 35000";
+"onboard_email_pwd_title" = "Ok super !";
+"onboard_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
+"onboard_email_pwd_info_length" = "Inclure au moins 8 caractères.";
+"onboard_email_pwd_placeholder_email" = "E-mail";
+"onboard_email_pwd_placeholder_pwd" = "Mot de passe";
+"onboard_email_pwd_placeholder_confirm_pwd" = "Confirmer votre mot de passe";
+"onboard_email_pwd_error_email" = "Adresse e-mail invalide";
+"onboard_email_pwd_error_pwd_match" = "Les 2 mots de passes ne sont pas identiques";
+"onboard_photo_title" = "Merci, %@ !";
+"onboard_photo_description" = "La touche finale : vous pouvez ajouter votre photo. Les membres d’Entourage de votre quartier ont hâte de faire votre connaissance !";
+"onboard_photo_bt_take_photo" = "Prendre une photo";
+"onboard_photo_bt_take_gallery" = "Importer depuis la galerie";
+
+//Pop inform notifications
+"pop_notification_title" = "Ne manquez rien !";
+"pop_notification_description" = "Sur Entourage, vous allez créer des liens entre voisins solidaires.\nActivez les notifications pour être alerté de vos nouveaux messages.";
+"pop_notification_bt_activate" = "Activer";
+"pop_notification_bt_cancel" = "Annuler";
+
+//Pop take photo from profile
+"take_photo_title" = "Ajouter une photo ?";
+"take_photo_description" = "Avec une photo, c’est tout de suite plus sympa.\nMontrez-nous votre sourire le plus chaleureux.";
+//Info location from profile
+"location_information_profile" = "Entourage est un réseau local ! Découvrez les initiatives solidaires de votre quartier et tissez des liens avec vos voisins";
+
+"error_login_phone_length" = "Le numéro de téléphone doit faire au minimum %d chiffres";
+"error_login_code_lenght" = "Le code doit faire 6 chiffres";
+"error_login_resendCode_unknow" = "Numéro de téléphone inconnu, veuillez ressayer.";
+"login_title" = "Connectez-vous pour continuer";
+"login_phone_placeholder" = "Numéro de téléphone";
+"login_placeholder_code" = "Saisir votre code";
+"login_button_connect" = "Je me connecte";
+"login_button_resend_code" = "Redemander un code";
+"login_label_country" = "Pays";
+"login_label_phone" = "Téléphone";
+"login_label_code" = "Code";

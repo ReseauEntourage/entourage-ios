@@ -310,6 +310,42 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
      ];
 }
 
++ (void)updateUserAddressWithName:(NSString *)addressName andLatitude:(NSNumber *) latitude
+                     andLongitude:(NSNumber *) longitude completion:(void (^)(NSError *))completion {
+    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_ADDRESS, TOKEN];
+
+    NSMutableDictionary *address = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    address[kWSKeyPlaceName] = addressName;
+    address[kWSKeyPlaceLatitude] = latitude;
+    address[kWSKeyPlaceLongitude] = longitude;
+    parameters[@"address"] = address;
+    
+    [[OTHTTPRequestManager sharedInstance] POSTWithUrl:url
+                                         andParameters:parameters
+                                            andSuccess:^(id responseObject) {
+                                                NSDictionary *responseDict = responseObject;
+                                                NSLog(@"Authentication service response : %@", responseDict);
+                                                NSDictionary *responseAddress = responseDict[@"address"];
+                                                OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
+                                                NSDictionary *responseFirebaseProperties = responseDict[@"firebase_properties"];
+                                                OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+                                                user.address = address;
+                                                user.firebaseProperties = responseFirebaseProperties;
+                                                [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+                                                
+                                                if (completion) {
+                                                    completion(nil);
+                                                }
+                                            }
+                                            andFailure:^(NSError *error) {
+                                                if (completion) {
+                                                    completion(error);
+                                                }
+                                            }
+     ];
+}
+
 - (void)updateUserInformationWithUser:(OTUser *)user
                               success:(void (^)(OTUser *user))success
                               failure:(void (^)(NSError *error))failure
@@ -409,6 +445,31 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
      {
          [[Crashlytics sharedInstance] recordError:error];
          NSLog(@"Failed with error %@", error);
+         if (failure) {
+             failure(error);
+         }
+     }];
+}
+
++ (void)prepareUploadPhotoWithSuccess:(void (^)(NSDictionary *infos))success
+                   failure:(void (^)(NSError *error))failure {
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"content_type"] = @"image/jpeg";
+    
+    NSString *url = [NSString stringWithFormat:@"%@?token=%@", API_URL_USER_PREPARE_AVATAR_UPLOAD, TOKEN];
+    NSLog(@"Applications: %@\n%@", url, parameters);
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success) {
+             success(responseObject);
+         }
+     }
+     andFailure:^(NSError *error)
+     {
          if (failure) {
              failure(error);
          }

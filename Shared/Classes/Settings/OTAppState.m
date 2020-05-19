@@ -59,7 +59,7 @@
     
     if ([OTAppConfiguration shouldShowIntroTutorial:currentUser] &&
         ![NSUserDefaults standardUserDefaults].isTutorialCompleted) {
-        [OTAppState continueFromLoginScreen:nil];
+        [OTAppState continueFromLoginVC];
 
     } else {
         NSDictionary *pnData = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -67,9 +67,37 @@
             [[OTLocationManager sharedInstance] startLocationUpdates];
             [OTAppConfiguration handleAppLaunchFromNotificationCenter:pnData];
         } else {
-            [OTAppState navigateToPermissionsScreens:nil];
+            [OTAppState checkNotifcationsAndGoMainScreen];
         }
     }
+}
+
++(void) showPopNotification {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"pop_notification_title") message:OTLocalizedString(@"pop_notification_description") preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *actionValidate = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_notification_bt_activate") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [alertVC dismissViewControllerAnimated:NO completion:nil];
+        
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [OTPushNotificationsService promptUserForAuthorizationsWithCompletionHandler:^{
+            }];
+        });
+    }];
+    
+    UIAlertAction *actioncancel = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_notification_bt_cancel") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alertVC dismissViewControllerAnimated:YES completion:nil];
+    }];
+    
+    [alertVC addAction:actioncancel];
+    [alertVC addAction:actionValidate];
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        UIViewController *vc = [OTAppState getTopViewController];
+        [vc presentViewController:alertVC animated:YES completion:nil];
+    });
 }
 
 + (void)presentTutorialScreen
@@ -95,14 +123,10 @@
 
 + (void)navigateToLoginScreen:(NSURL*)link sender:(UIViewController * _Nullable)sender
 {
-    OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
-    loginController.fromLink = link;
-    if ([sender isKindOfClass:[OTPhoneViewController class]]) {
-        [sender.navigationController pushViewController:loginController animated:YES];
-    }
-    else {
-        [[OTAppState getTopViewController] showViewController:loginController sender:self];
-    }
+    OTLoginV2ViewController *loginVC = [[UIStoryboard introStoryboard]instantiateViewControllerWithIdentifier:@"LoginV2VC"];
+    loginVC.fromLink = link;
+    
+    [[OTAppState getTopViewController] showViewController:loginVC sender:self];
 }
 
 + (void)returnToLogin {
@@ -223,9 +247,34 @@
         return welcomeViewController;
     }
     else {
-        OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
-        return loginController;
+        OTLoginV2ViewController * loginvc = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"LoginV2VC"];
+        return loginvc;
     }
+}
+
++(void)continueFromLoginVC {
+    [OTAppState navigateToAuthenticatedLandingScreen];
+    [OTAppState checkNotifcationsAndGoMainScreen];
+}
+
++(void) checkNotifcationsAndGoMainScreen {
+    [OTPushNotificationsService getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
+        if (@available(iOS 12.0, *)) {
+            if (status == UNAuthorizationStatusProvisional)
+                status = UNAuthorizationStatusNotDetermined;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            if (status == UNAuthorizationStatusNotDetermined) {
+                [OTAppState showPopNotification];
+            } else {
+                [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
+                [[OTLocationManager sharedInstance] startLocationUpdates];
+                
+                [OTAppState navigateToAuthenticatedLandingScreen];
+            }
+        });
+    }];
 }
 
 + (void)continueFromWelcomeScreen:(OTWelcomeViewController * _Nonnull)welcomeScreen

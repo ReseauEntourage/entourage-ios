@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -1697,7 +1697,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="dno-Ju-GCg"/>
-        <segue reference="b42-UE-vP1"/>
+        <segue reference="ZNZ-ec-dR4"/>
         <segue reference="xSV-rR-wZy"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -16,7 +16,6 @@
 #import "OTPublicFeedItemViewController.h"
 #import "OTAPIConsts.h"
 #import "NSUserDefaults+OT.h"
-#import "OTLoginViewController.h"
 #import "OTEntourageEditorViewController.h"
 #import "OTTutorialViewController.h"
 #import "OTSafariService.h"
