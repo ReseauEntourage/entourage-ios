@@ -117,9 +117,11 @@
         double distance = [uiDelegate distance];
         if (self.showTimeAsUpdatedDate) {
             self.lblTimeDistance.text = [self formattedMessageTimeForFeedItem:feedItem distance:distance];
-        } else {
+        } else if (distance < 1000000.f) {
             self.lblTimeDistance.text = [self formattedItemDistance:distance
                                                        creationDate:feedItem.creationDate];
+        } else {
+          self.lblTimeDistance.text = @"";
         }
     }
     
