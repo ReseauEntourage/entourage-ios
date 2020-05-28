@@ -38,6 +38,7 @@ NSString *const kNotValidatedUserTag = @"not_validated";
 NSString *const kVisitorUserTag = @"visitor";
 NSString *const kVisitedUserTag = @"visited";
 NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
+NSString *const kGoal = @"goal";
 
 @interface OTUser ()
 @property (nonatomic, readwrite) NSString *uuid;
@@ -70,6 +71,8 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         _partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kKeyPartner]];
         _anonymous = [dictionary boolForKey:kKeyAnonymous defaultValue:NO];
         _firebaseProperties = [self sanitizeFirebaseProperties:[dictionary objectForKey:kFirebaseProperties]];
+        
+        _goal = [dictionary stringForKey:kGoal];
         
         if ([[dictionary allKeys] containsObject:kKeyConversation]) {
             _conversation = [[OTConversation alloc] initWithDictionary:[dictionary objectForKey:kKeyConversation]];
@@ -116,6 +119,10 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         [dictionary setObject:self.avatarKey forKey:kKeyAvatarKey];
     }
     
+    if (self.goal != nil) {
+        [dictionary setObject:self.goal forKey:kGoal];
+    }
+    
     return dictionary;
 }
 
@@ -143,6 +150,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     [encoder encodeObject:self.memberships forKey:kMemberships];
     [encoder encodeObject:self.address forKey:kAddress];
     [encoder encodeObject:self.firebaseProperties forKey:kFirebaseProperties];
+    [encoder encodeObject:self.goal forKey:kGoal];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -171,6 +179,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         self.memberships = [decoder decodeObjectForKey:kMemberships];
         self.address = [decoder decodeObjectForKey:kAddress];
         self.firebaseProperties = [self sanitizeFirebaseProperties:[decoder decodeObjectForKey:kFirebaseProperties]];
+        self.goal = [decoder decodeObjectForKey:kGoal];
     }
     return self;
 }

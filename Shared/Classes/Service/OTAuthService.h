@@ -53,6 +53,10 @@ extern NSString *const kUserAuthenticationLevelAuthenticated;
                               success:(void (^)(OTUser *user))success
                               failure:(void (^)(NSError *error))failure;
 
+- (void)updateUserInterests:(NSArray *)interests
+                            success:(void (^)(OTUser *user))success
+                            failure:(void (^)(NSError *error))failure;
+
 - (void)subscribeToNewsletterWithEmail:(NSString *)email
                                success:(void (^)(BOOL))success
                                failure:(void (^)(NSError *))failure;
@@ -76,4 +80,8 @@ extern NSString *const kUserAuthenticationLevelAuthenticated;
 
 +(NSString *)authenticationLevelForUser:(OTUser *)user;
 +(NSString *)currentUserAuthenticationLevel;
+
+- (void)updateUserAssociationInfoWithAssociation:(OTAssociation *)association
+                        success:(void (^)(Boolean isOk))success
+                        failure:(void (^)(NSError *error))failure;
 @end

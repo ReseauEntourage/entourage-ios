@@ -57,6 +57,7 @@
 #define API_URL_GET_ALL_ASSOCIATIONS @"partners?token=%@"
 #define API_URL_ADD_PARTNER @"users/%@/partners?token=%@"
 #define API_URL_DELETE_PARTNER @"users/%@/partners/%@?token=%@"
+#define API_URL_USER_UPDATE_ASSOCIATION_INFO @"partners/join_request?token=%@"
 
 // Entourages
 #define API_URL_ENTOURAGES @"entourages?token=%@"

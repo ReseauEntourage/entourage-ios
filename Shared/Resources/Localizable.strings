@@ -636,3 +636,31 @@
 "login_label_country" = "Pays";
 "login_label_phone" = "Téléphone";
 "login_label_code" = "Code";
+
+//Onboarding Assos
+"onboard_asso_start_title" = "Ça tombe bien !";
+"onboard_asso_start_description" = "Entourage est une association au service de vos activités.";
+"onboard_asso_start_description_bold" = "Entourage";
+"onboard_asso_start_description2" = "Quelques belles histoires qui montrent la valeur de la communauté Entourage.";
+"onboard_asso_info_title" = "Concrètement, dans l’app, des fonctionnalités vous sont dédiées";
+"onboard_asso_info_description" = "Soyez bien identifié.e sur le réseau et engagez votre communauté";
+"onboard_asso_info_1" = "Un profil vérifié pour chacun de vos membres: un gage de confiance pour vos voisins";
+"onboard_asso_info_1_bold" = "Un profil vérifié";
+"onboard_asso_info_2" = "Une page pour votre structure : pour informer localement de vos activités et besoins.";
+"onboard_asso_info_2_bold" = "Une page pour votre structure";
+"onboard_asso_info_3" = "L’envoi de notifications dans votre quartier et au-delà aux membres de la communauté.";
+"onboard_asso_info_3_bold" = "L’envoi de notifications";
+"onboard_asso_fill_title" = "Parlez-nous de votre structure";
+"onboard_asso_fill_description" = "Dites-nous en plus sur votre association, nous vous recontacterons pour vérifier votre profil et vous créer une page asso !";
+"onboard_asso_fill_name_placeholder" = "Nom de mon association";
+"onboard_asso_fill_cp_placeholder" = "Code postal de mon association";
+"onboard_asso_fill_function_placeholder" = "Ma fonction";
+"onboard_asso_fill_error" = "Veuillez renseigner tous les champs.\nMerci";
+"onboard_asso_search_creation" = "Création de : %@";
+"onboard_asso_activity_title" = "%@, quel est votre coeur d’activité ?";
+"onboard_asso_activity_description" = "Sélectionnez le ou les secteurs d’activité de votre structure, cela nous permettra de vous proposer la meilleure façon d’utiliser l’application et mobiliser la communauté Entourage.";
+"onboard_asso_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
+"onboard_asso_activity_choice_1" = "Aide aux\npersonnes";
+"onboard_asso_activity_choice_2" = "Initiatives culturelles\net sportives";
+"onboard_asso_activity_choice_3" = "Service\nPublic";
+"onboard_asso_activity_choice_4" = "Autres ?";

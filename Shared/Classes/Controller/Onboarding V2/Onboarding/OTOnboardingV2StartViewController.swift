@@ -19,6 +19,9 @@ class OTOnboardingV2StartViewController: UIViewController {
     @IBOutlet weak var ui_bt_previous: UIButton!
     @IBOutlet weak var ui_bt_pass: UIButton!
     var currentPosition:ControllerType = .firstLastName
+    var currentPositionAsso:ControllerAssoType = .none
+    var currentPositionAlone:ControllerAloneType = .none
+    var currentPositionNeighbour:ControllerNeighbourType = .none
     
     let nbOfSteps = 7
     
@@ -34,6 +37,8 @@ class OTOnboardingV2StartViewController: UIViewController {
     var temporaryPassword = ""
     var temporaryPasswordConfirm = ""
     var temporaryUserPicture:UIImage? = nil
+    var temporaryAssoInfo:OTAssociation? = nil
+    var temporaryAssoActivities:AssoActivities? = nil
     
     //MARK: - Lifecycle -
     override func viewDidLoad() {
@@ -121,6 +126,37 @@ class OTOnboardingV2StartViewController: UIViewController {
         }
     }
     
+    func updateGoalType(isAsso:Bool) {
+        SVProgressHUD.show()
+        let _currentUser = UserDefaults.standard.currentUser
+        _currentUser?.goal = userTypeSelected.getGoalString()
+        OTAuthService().updateUserInformation(with: _currentUser, success: { (newUser) in
+            newUser?.phone = _currentUser?.phone
+            UserDefaults.standard.currentUser = newUser
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                if isAsso {
+                    self.currentPositionAsso = ControllerAssoType(rawValue: self.currentPositionAsso.rawValue + 1)!
+                    self.moveToTunnelAsso()
+                }
+                else {
+                    self.goNextStep()
+                }
+            }
+        }) { (error) in
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                if isAsso {
+                    self.currentPositionAsso = ControllerAssoType(rawValue: self.currentPositionAsso.rawValue + 1)!
+                    self.moveToTunnelAsso()
+                }
+                else {
+                    self.goNextStep()
+                }
+            }
+        }
+    }
+    
     func resendCode() {
         SVProgressHUD.show()
         OTAuthService.init().regenerateSecretCode(self.temporaryUser.phone, success: { (user) in
@@ -139,6 +175,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     }
     
     func sendAddAddress() {
+        
         if let _place = temporaryGooglePlace {
             SVProgressHUD.show()
             OTAuthService.updateUserAddress(withPlaceId: _place.placeID) { (error) in
@@ -218,10 +255,78 @@ class OTOnboardingV2StartViewController: UIViewController {
         }
     }
     
+    //MARK: - Network Asso -
+    
+    func updateAssoInfos() {
+        if let _asso = temporaryAssoInfo,_asso.name.count > 0, _asso.postal_code?.count ?? 0 > 0, _asso.userRoleTitle?.count ?? 0 > 0 {
+            
+            SVProgressHUD.show()
+            OTAuthService().updateUserAssociationInfo(with: temporaryAssoInfo!, success: { (isOK) in
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.currentPositionAsso = ControllerAssoType(rawValue: self.currentPositionAsso.rawValue + 1)!
+                    self.moveToTunnelAsso()
+                }
+            }) { (error) in
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.currentPositionAsso = ControllerAssoType(rawValue: self.currentPositionAsso.rawValue + 1)!
+                    self.moveToTunnelAsso()
+                }
+            }
+        }
+        else {
+            let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "attention_pop_title"), message: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_fill_error"), preferredStyle: .alert)
+            
+            let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"OK"), style: .default, handler: nil)
+            alertvc.addAction(action)
+            
+            self.navigationController?.present(alertvc, animated: true, completion: nil)
+        }
+    }
+    
+    func updateAssoActivity() {
+        if let _activities = temporaryAssoActivities, _activities.hasOneSelectionMin() {
+            SVProgressHUD.show()
+            OTAuthService().updateUserInterests(_activities.getArrayForWS(),success: { (user) in
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 2)!
+                    self.changeController()
+                }
+            }) { (error) in
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 2)!
+                    self.changeController()
+                }
+            }
+        }
+        else {
+            let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "attention_pop_title"), message: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_activity_error"), preferredStyle: .alert)
+            
+            let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"OK"), style: .default, handler: nil)
+            alertvc.addAction(action)
+            
+            self.navigationController?.present(alertvc, animated: true, completion: nil)
+        }
+    }
+    
+    func updateAlone() {
+        //TODO: a faire
+        currentPosition = ControllerType(rawValue: currentPosition.rawValue + 1)!
+        changeController()
+    }
+    
+    func updateNeighbour() {
+        //TODO: a faire
+        currentPosition = ControllerType(rawValue: currentPosition.rawValue + 1)!
+        changeController()
+    }
+    
     //MARK: - Methods -
     func showPopNotification() {
         if let _currentUser = UserDefaults.standard.currentUser {
-            print("Should show : currentUser : \(_currentUser)")
             if OTAppConfiguration.shouldShowIntroTutorial(_currentUser) {
                 UserDefaults.standard.setTutorialCompleted()
             }
@@ -279,6 +384,25 @@ class OTOnboardingV2StartViewController: UIViewController {
             }
             
             if currentPosition == .place {
+                //TODO: à remettre lorsque l'on fera les tunnels riverain et sdf
+//                if self.userTypeSelected == .alone {
+//                    if currentPositionAlone == .activity {
+//                        updateAlone()
+//                        return
+//                    }
+//                    currentPositionAlone = ControllerAloneType(rawValue: currentPositionAlone.rawValue + 1)!
+//                    moveToTunnelAlone()
+//                    return
+//                }
+//                if self.userTypeSelected == .neighbour {
+//                    if currentPositionNeighbour == .activity {
+//                        updateNeighbour()
+//                        return
+//                    }
+//                    currentPositionNeighbour = ControllerNeighbourType(rawValue: currentPositionNeighbour.rawValue + 1)!
+//                    moveToTunnelNeighbour()
+//                    return
+//                }
                 self.sendAddAddress()
                 return
             }
@@ -293,6 +417,31 @@ class OTOnboardingV2StartViewController: UIViewController {
                 return
             }
             
+            if currentPosition == .type {
+                if self.userTypeSelected == .assos {
+                    if currentPositionAsso == .none {
+                        updateGoalType(isAsso: true)
+                        return
+                    }
+                    if currentPositionAsso == .activity {
+                        updateAssoActivity()
+                        return
+                    }
+                    if currentPositionAsso == .fill {
+                        updateAssoInfos()
+                        return
+                    }
+                    
+                    currentPositionAsso = ControllerAssoType(rawValue: currentPositionAsso.rawValue + 1)!
+                    moveToTunnelAsso()
+                    return
+                }
+                else {
+                    updateGoalType(isAsso: false)
+                    return
+                }
+            }
+            
             currentPosition = ControllerType(rawValue: currentPosition.rawValue + 1)!
             changeController()
         }
@@ -300,6 +449,65 @@ class OTOnboardingV2StartViewController: UIViewController {
     
     @IBAction func action_previous(_ sender: Any) {
         if currentPosition.rawValue > 0 {
+            if currentPosition == .type {
+                if self.userTypeSelected == .assos {
+                    if self.currentPositionAsso != .none {
+                        currentPositionAsso = ControllerAssoType(rawValue: currentPositionAsso.rawValue - 1)!
+                    }
+                    moveToTunnelAsso()
+                    return
+                }
+            }
+            //TODO: à remettre lorsque l'on fera les tunnels riverain et sdf
+//            if currentPosition == .place {
+//                if self.userTypeSelected == .alone {
+//                    if self.currentPositionAlone != .none {
+//                        currentPositionAlone = ControllerAloneType(rawValue: currentPositionAlone.rawValue - 1)!
+//                    }
+//                    else {
+//                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
+//                    }
+//                    moveToTunnelAlone()
+//                    return
+//                }
+//                if self.userTypeSelected == .neighbour {
+//                    if self.currentPositionNeighbour != .none {
+//                        currentPositionNeighbour = ControllerNeighbourType(rawValue: currentPositionNeighbour.rawValue - 1)!
+//                    }
+//                    else {
+//                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
+//                    }
+//                    moveToTunnelNeighbour()
+//                    return
+//                }
+//            }
+            
+            if currentPosition == .emailPwd {
+                if self.userTypeSelected == .assos {
+                    if self.currentPositionAsso != .none {
+                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 2)!
+                    }
+                    moveToTunnelAsso()
+                    return
+                }
+                //TODO: à remettre lorsque l'on fera les tunnels riverain et sdf
+                
+//                if self.userTypeSelected == .alone {
+//                    if self.currentPositionAlone != .none {
+//                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
+//                    }
+//                    moveToTunnelAlone()
+//                    return
+//                }
+//                if self.userTypeSelected == .neighbour {
+//                    if self.currentPositionNeighbour != .none {
+//                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
+//                    }
+//                    moveToTunnelNeighbour()
+//                    return
+//                }
+            }
+            
             currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
             changeController()
         }
@@ -352,6 +560,8 @@ extension OTOnboardingV2StartViewController {
                 vc.userTypeSelected = self.userTypeSelected
                 vc.firstname = self.temporaryUser.firstName
                 add(asChildViewController: vc)
+                
+                currentPositionAsso = .none
             }
             
         case .place:
@@ -360,6 +570,10 @@ extension OTOnboardingV2StartViewController {
                 vc.currentLocation = self.temporaryLocation
                 vc.selectedPlace = self.temporaryGooglePlace
                 add(asChildViewController: vc)
+                
+                
+                currentPositionAlone = .none
+                currentPositionNeighbour = .none
             }
         case .emailPwd:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_mail_pwd") as? OTOnboardingEmailPwdViewController {
@@ -384,16 +598,116 @@ extension OTOnboardingV2StartViewController {
         updatebuttons()
     }
     
+    func moveToTunnelAlone() {
+        //TODO: a finir
+        ui_bt_next.isEnabled = false
+        switch currentPositionAlone {
+        case .place:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_sdf_location") {
+                add(asChildViewController: vc)
+                ui_bt_next.isEnabled = true
+            }
+            
+        case .activity:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_sdf_activity") {
+                add(asChildViewController: vc)
+                ui_bt_next.isEnabled = true
+            }
+        case .none:
+            changeController()
+        }
+        
+        let percent = (ui_progress.bounds.size.width / CGFloat(nbOfSteps + 1)) * CGFloat(Double(currentPositionAlone.rawValue) + Double(currentPosition.rawValue) * 0.95)
+               ui_progress.progressPercent = percent
+               ui_progress.setNeedsDisplay()
+               
+               updatebuttons()
+    }
+    
+    func moveToTunnelNeighbour() {
+        //TODO: - a finir
+        ui_bt_next.isEnabled = false
+        
+        switch currentPositionNeighbour {
+        case .place:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_neighbour_location") {
+                add(asChildViewController: vc)
+                ui_bt_next.isEnabled = true
+            }
+        case .activity:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_neighbour_activity") {
+                add(asChildViewController: vc)
+                ui_bt_next.isEnabled = true
+            }
+        case .none:
+            changeController()
+        }
+        
+        let percent = (ui_progress.bounds.size.width / CGFloat(nbOfSteps + 1)) * CGFloat(Double(currentPositionNeighbour.rawValue) + Double(currentPosition.rawValue) * 0.95)
+        ui_progress.progressPercent = percent
+        ui_progress.setNeedsDisplay()
+        
+        updatebuttons()
+    }
+    
+    func moveToTunnelAsso() {
+        ui_bt_next.isEnabled = false
+        
+        switch currentPositionAsso {
+        case .start:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_asso_start") as? OTOnboardingAssoStartViewController {
+                add(asChildViewController: vc)
+                ui_bt_next.isEnabled = true
+            }
+        case .info:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_asso_info") as? OTOnboardingAssoInfoViewController {
+                add(asChildViewController: vc)
+                ui_bt_next.isEnabled = true
+            }
+        case .fill:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_asso_fill") as? OTOnboardingAssoFillViewController {
+                vc.delegate = self
+                vc.asso = temporaryAssoInfo
+                add(asChildViewController: vc)
+            }
+        case .activity:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_asso_activity") as? OTOnboardingAssoActivityViewController {
+                vc.delegate = self
+                vc.activitiesSelections = temporaryAssoActivities
+                vc.username = temporaryUser.firstName
+                add(asChildViewController: vc)
+            }
+        case .none:
+            changeController()
+            return
+        }
+        
+        let middleSize = ui_progress.bounds.size.width / 2
+        let percent = middleSize + (middleSize / CGFloat(nbOfSteps)) * CGFloat(currentPositionAsso.rawValue)
+        ui_progress.progressPercent = percent
+        ui_progress.setNeedsDisplay()
+        
+        updatebuttons()
+    }
+    
     func updatebuttons() {
         ui_bt_pass.isHidden = true
         switch currentPosition {
-        case .firstLastName,.type:
+        case .firstLastName:
             ui_bt_previous.isHidden = true
+        case .type:
+            if currentPositionAsso == .none && currentPositionAlone == .none && currentPositionNeighbour == .none {
+                ui_bt_previous.isHidden = true
+                ui_bt_pass.isHidden = false
+            }
+            else {
+                ui_bt_previous.isHidden = false
+            }
         case .phone,.passCode,.place,.emailPwd,.photo:
             ui_bt_previous.isHidden = false
         }
         
-        if currentPosition == .type  || currentPosition == .photo {
+        if currentPosition == .photo {
             ui_bt_pass.isHidden = false
         }
     }
@@ -520,6 +834,13 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
     
     func updateUserType(userType: UserType) {
         self.userTypeSelected = userType
+        //Reset infos Tunnel asso + place / email
+        temporaryAssoInfo = nil
+        temporaryAssoActivities?.reset()
+        temporaryEmail = ""
+        temporaryLocation = nil
+        temporaryAddressName = nil
+        temporaryGooglePlace = nil
     }
     
     func updateEmailPwd(email:String,pwd:String,pwdConfirm:String) {
@@ -530,6 +851,14 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
     
     func updateUserPhoto(image: UIImage) {
         self.temporaryUserPicture = image
+    }
+    
+    func updateAssoInfos(asso:OTAssociation) {
+        self.temporaryAssoInfo = asso
+    }
+    
+    func updateAssoActivities(assoActivities: AssoActivities) {
+        self.temporaryAssoActivities = assoActivities
     }
 }
 
@@ -545,6 +874,9 @@ protocol OnboardV2Delegate:class {
     func updateUserType(userType:UserType)
     func updateEmailPwd(email:String,pwd:String,pwdConfirm:String)
     func updateUserPhoto(image:UIImage)
+    
+    func updateAssoInfos(asso:OTAssociation)
+    func updateAssoActivities(assoActivities:AssoActivities)
 }
 
 //MARK: - Enums -
@@ -558,9 +890,42 @@ enum ControllerType:Int {
     case photo = 7
 }
 
+enum ControllerAssoType:Int {
+    case start = 1
+    case info = 2
+    case fill = 3
+    case activity = 4
+    case none = 0
+}
+
+enum ControllerNeighbourType:Int {
+    case place = 1
+    case activity = 2
+    case none = 0
+}
+
+enum ControllerAloneType:Int {
+    case place = 1
+    case activity = 2
+    case none = 0
+}
+
 enum UserType:Int {
     case neighbour = 1
     case alone = 2
     case assos = 3
-    case none = -1
+    case none = 0
+    
+    func getGoalString() -> String {
+        switch self {
+        case .alone:
+            return "ask_for_help"
+        case .neighbour:
+            return "offer_help"
+        case .assos:
+            return "organization"
+        case .none:
+            return ""
+        }
+    }
 }

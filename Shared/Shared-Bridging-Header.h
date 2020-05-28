@@ -34,3 +34,4 @@
 #import "OTLocationManager.h"
 #import "UIImage+processing.h"
 #import "OTPictureUploadService.h"
+#import "OTAssociationsService.h"

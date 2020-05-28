@@ -376,6 +376,40 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
          }];
 }
 
+- (void)updateUserInterests:(NSArray *)interests
+                              success:(void (^)(OTUser *user))success
+                              failure:(void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_USER, kAPIUserRoute, kAPIMe, TOKEN];
+    
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    NSMutableDictionary *dictInterests = [NSMutableDictionary new];
+    dictInterests[@"interests"] = interests;
+    parameters[@"user"] = dictInterests;
+    
+    NSLog(@"Interests dict : %@",parameters);
+    
+    [[OTHTTPRequestManager sharedInstance]
+            PATCHWithUrl:url
+            andParameters:parameters
+            andSuccess:^(id responseObject)
+         {
+             if (success) {
+                 // CHECK THIS
+                 NSDictionary *responseDict = responseObject;
+                 NSDictionary *responseUser = responseDict[@"user"];
+                 OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+                 success(user);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure) {
+                 failure(error);
+             }
+         }];
+}
+
 - (void)subscribeToNewsletterWithEmail:(NSString *)email
                                success:(void (^)(BOOL))success
                                failure:(void (^)(NSError *))failure
@@ -449,6 +483,46 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
              failure(error);
          }
      }];
+}
+
+- (void)updateUserAssociationInfoWithAssociation:(OTAssociation *)association
+                              success:(void (^)(Boolean isOk))success
+                              failure:(void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:API_URL_USER_UPDATE_ASSOCIATION_INFO, TOKEN];
+    
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    if (association.aid != nil && association.aid.intValue > 0) {
+        parameters[@"partner_id"] = association.aid;
+    }
+    
+    if (association.isCreation) {
+        parameters[@"new_partner_name"] = association.name;
+    }
+    
+    parameters[@"postal_code"] = association.postal_code;
+    parameters[@"partner_role_title"] = association.userRoleTitle;
+    
+    NSLog(@"Parameters post info assos %@",parameters);
+    
+    [[OTHTTPRequestManager sharedInstance]
+            POSTWithUrl:url
+            andParameters:parameters
+            andSuccess:^(id responseObject)
+         {
+             if (success) {
+                 success(YES);
+             }
+             else {
+                 success(NO);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure) {
+                 failure(error);
+             }
+         }];
 }
 
 + (void)prepareUploadPhotoWithSuccess:(void (^)(NSDictionary *infos))success
