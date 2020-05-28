@@ -1435,7 +1435,6 @@ Ligne 4</string>
                         <outlet property="ui_label_info_2" destination="kC8-M9-lZ0" id="xvH-iW-mqt"/>
                         <outlet property="ui_label_info_3" destination="MrN-u8-9wk" id="GF5-Df-5v2"/>
                         <outlet property="ui_label_title" destination="94X-Ft-Dr0" id="BXy-LX-ogz"/>
-                        <outlet property="ui_stackView" destination="3SS-ir-Y1h" id="mSq-5j-IvG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dOx-u9-eFK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
