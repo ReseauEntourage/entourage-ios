@@ -37,7 +37,7 @@ class OTOnboardingAssoFillViewController: UIViewController {
     }
     
     func updateDelegateButtonNext() {
-        if let _asso = asso, _asso.name.count > 0 {
+        if let name = asso?.name, name.count > 0 {
             delegate?.updateButtonNext(isValid: true)
         }
         else {
