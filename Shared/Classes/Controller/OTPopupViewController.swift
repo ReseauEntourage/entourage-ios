@@ -68,10 +68,10 @@ import SVProgressHUD
         completionButton.addTarget(self, action: #selector(sendMail), for: .touchUpInside)
         completionButton.backgroundColor = ApplicationTheme.shared().backgroundThemeColor
         closeButton.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
-        let closeImage = closeButton.image(for: UIControlState.normal)
-        let tintImage = closeImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        let closeImage = closeButton.image(for: UIControl.State.normal)
+        let tintImage = closeImage?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         closeButton.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
-        closeButton.setImage(tintImage, for: UIControlState.normal)
+        closeButton.setImage(tintImage, for: UIControl.State.normal)
     }
     
     @objc private func sendMail() {

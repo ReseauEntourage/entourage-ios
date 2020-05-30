@@ -53,7 +53,7 @@ class OTOnboardingPhotoViewController: UIViewController {
     }
     
     //MARK: - Methods -
-    func showPicker(sourceType:UIImagePickerControllerSourceType) {
+    func showPicker(sourceType:UIImagePickerController.SourceType) {
         pickerViewController = UIImagePickerController.init()
         pickerViewController?.modalPresentationStyle = .currentContext
         pickerViewController?.delegate = self
@@ -94,9 +94,12 @@ class OTOnboardingPhotoViewController: UIViewController {
 
 //MARK: - PickerVC Delegate -
 extension OTOnboardingPhotoViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
-        if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let img = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             selectedImage = rotateImage(img: img)
             self.showPhotoResize()
         }
@@ -126,4 +129,14 @@ extension OTOnboardingPhotoViewController:TakePhotoDelegate {
 //MARK: - Protocol -
 protocol TakePhotoDelegate:class {
     func updatePhoto(image:UIImage?)
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

@@ -713,42 +713,42 @@ extension OTOnboardingV2StartViewController {
     }
     
     private func add(asChildViewController viewController: UIViewController) {
-        if childViewControllers.count > 0 {
-            let oldChild = childViewControllers[0]
+        if children.count > 0 {
+            let oldChild = children[0]
             swapViewControllers(oldViewController: oldChild, toViewController: viewController)
             return;
         }
         
-        if self.childViewControllers.count > 0 {
-            while childViewControllers.count > 0 {
-                remove(asChildViewController: childViewControllers[0])
+        if self.children.count > 0 {
+            while children.count > 0 {
+                remove(asChildViewController: children[0])
             }
         }
         
-        addChildViewController(viewController)
+        addChild(viewController)
         
         ui_container.addSubview(viewController.view)
         
         viewController.view.frame = ui_container.bounds
         viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        viewController.didMove(toParentViewController: self)
+        viewController.didMove(toParent: self)
     }
     
     private func remove(asChildViewController viewController: UIViewController) {
         
-        viewController.willMove(toParentViewController: nil)
+        viewController.willMove(toParent: nil)
         
         viewController.view.removeFromSuperview()
         
-        viewController.removeFromParentViewController()
+        viewController.removeFromParent()
     }
     
     func swapViewControllers(oldViewController: UIViewController, toViewController newViewController: UIViewController) {
-        oldViewController.willMove(toParentViewController: nil)
+        oldViewController.willMove(toParent: nil)
         newViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addChildViewController(newViewController)
+        self.addChild(newViewController)
         self.addSubViewController(subView: newViewController.view, toView:self.ui_container)
         
         newViewController.view.alpha = 0

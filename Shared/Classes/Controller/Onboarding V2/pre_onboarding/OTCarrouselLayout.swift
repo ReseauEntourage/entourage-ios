@@ -47,7 +47,7 @@ class OTCarrouselLayout: UICollectionViewLayout {
         guard let collectionView = self.collectionView else { return }
         updateInsets()
         guard cachedItemsAttributes.isEmpty else { return }
-        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         let itemsCount = collectionView.numberOfItems(inSection: 0)
         for item in 0..<itemsCount {
             let indexPath = IndexPath(item: item, section: 0)

@@ -23,15 +23,15 @@ class OTCustomTextfield: UITextField {
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
+        return bounds.inset(by: padding)
     }
     
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-      return UIEdgeInsetsInsetRect(bounds, padding)
+      return bounds.inset(by: padding)
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-      return UIEdgeInsetsInsetRect(bounds, padding)
+      return bounds.inset(by: padding)
     }
 
     var hasDoneButton:Bool = false {

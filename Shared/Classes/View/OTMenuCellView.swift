@@ -38,8 +38,8 @@ final class OTMenuCellView: UIView {
         itemLabel.numberOfLines = 2
         let marginOffset: CGFloat = 17
         let iconHeight: CGFloat = 30
-        accImageView.image = UIImage.init(named: "arrowForMenu")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-        accImageView.contentMode = UIViewContentMode.scaleAspectFit
+        accImageView.image = UIImage.init(named: "arrowForMenu")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        accImageView.contentMode = UIView.ContentMode.scaleAspectFit
         accImageView.tintColor = UIColor.pfpSubtitleBlue()
         
         iconImageView.snp.makeConstraints {
