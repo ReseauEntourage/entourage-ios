@@ -27,7 +27,9 @@
 - (NSString *)feedItemActionButton;
 - (NSAttributedString *)eventAuthorFormattedDescription;
 - (NSString *)eventInfoDescription;
+- (NSString *)eventInfoLocation;
 - (NSAttributedString *)eventInfoFormattedDescription;
 - (NSString *)formattedTimestamps;
+- (NSURL*)eventOnlineURL;
 
 @end
