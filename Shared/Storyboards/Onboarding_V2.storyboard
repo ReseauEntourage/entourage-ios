@@ -109,7 +109,9 @@
                         <outlet property="ui_bt_next" destination="V3C-23-Zuu" id="vCU-Fu-MjN"/>
                         <outlet property="ui_bt_pass" destination="d0X-v8-vj0" id="8kp-7J-Hi2"/>
                         <outlet property="ui_bt_previous" destination="hZH-GD-gN2" id="ocL-AA-rB0"/>
+                        <outlet property="ui_button_back" destination="oO4-mH-9ve" id="wwM-Ju-cmo"/>
                         <outlet property="ui_container" destination="vp2-WA-I1a" id="wL3-WY-dXa"/>
+                        <outlet property="ui_image_back" destination="cB0-6h-evN" id="52W-1x-DvH"/>
                         <outlet property="ui_label_position" destination="0da-jW-EI2" id="jrb-XM-v8X"/>
                         <outlet property="ui_progress" destination="V6c-TV-Zex" id="YOR-23-UQv"/>
                     </connections>

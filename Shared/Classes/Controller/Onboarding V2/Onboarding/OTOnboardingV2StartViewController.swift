@@ -11,6 +11,8 @@ import SVProgressHUD
 
 class OTOnboardingV2StartViewController: UIViewController {
     
+    @IBOutlet weak var ui_button_back: UIButton!
+    @IBOutlet weak var ui_image_back: UIImageView!
     @IBOutlet weak var ui_label_position: UILabel!
     @IBOutlet weak var ui_container: UIView!
     @IBOutlet weak var ui_progress: OTProgressBarView!
@@ -534,6 +536,8 @@ extension OTOnboardingV2StartViewController {
     func changeController() {
         ui_bt_next.isEnabled = false
         
+        self.hideBackButton(isHidden: true)
+        
         switch currentPosition {
         case .firstLastName:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_names") as? OTOnboardingNamesViewController {
@@ -542,6 +546,7 @@ extension OTOnboardingV2StartViewController {
                 vc.userLastname = self.temporaryUser.lastName
                 add(asChildViewController: vc)
             }
+            self.hideBackButton(isHidden: false)
         case .phone:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_phone") as? OTOnboardingPhoneViewController {
                 vc.delegate = self
@@ -550,12 +555,14 @@ extension OTOnboardingV2StartViewController {
                 vc.firstname = temporaryUser.firstName
                 add(asChildViewController: vc)
             }
+            self.hideBackButton(isHidden: false)
         case .passCode:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_code") as? OTOnboardingPassCodeViewController {
                 vc.delegate = self
                 vc.tempPhone = self.temporaryUser.phone
                 add(asChildViewController: vc)
             }
+            self.hideBackButton(isHidden: false)
         case .type:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_type") as? OTOnboardingTypeViewController {
                 vc.delegate = self
@@ -598,6 +605,11 @@ extension OTOnboardingV2StartViewController {
         ui_label_position.attributedText = Utilitaires.formatString(stringMessage: "0\(currentPosition.rawValue) / 0\(nbOfSteps)", coloredTxt: "0\(nbOfSteps)", color: UIColor.appOrange(), colorHighlight: UIColor.appGrey165, fontSize: 24, fontWeight: .bold, fontColoredWeight: .bold)
         
         updatebuttons()
+    }
+    
+    func hideBackButton(isHidden:Bool) {
+        ui_button_back.isHidden = isHidden
+        ui_image_back.isHidden = isHidden
     }
     
     func moveToTunnelAlone() {
