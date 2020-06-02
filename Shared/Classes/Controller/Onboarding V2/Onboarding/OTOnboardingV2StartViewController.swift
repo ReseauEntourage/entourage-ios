@@ -346,7 +346,9 @@ class OTOnboardingV2StartViewController: UIViewController {
         alertVC.addAction(actionCancel)
         alertVC.addAction(actionValidate)
         
-        self.navigationController?.present(alertVC, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.navigationController?.present(alertVC, animated: true, completion: nil)
+        }
     }
     
     func showPopupNotificationAuth() {
