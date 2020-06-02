@@ -613,7 +613,11 @@ Comment vous appelez-vous ?</string>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1CW-9e-hj2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Gac-kS-8Wl"/>
+                <tapGestureRecognizer id="Gac-kS-8Wl">
+                    <connections>
+                        <action selector="tap_background:" destination="LpO-YT-DN9" id="8tA-9q-nIg"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="961" y="99"/>
         </scene>

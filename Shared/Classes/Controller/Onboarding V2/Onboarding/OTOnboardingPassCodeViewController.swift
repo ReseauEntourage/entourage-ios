@@ -83,6 +83,11 @@ class OTOnboardingPassCodeViewController: UIViewController {
             delegate?.requestNewcode()
         }
     }
+    
+    @IBAction func tap_background(_ sender: Any) {
+        _ = [ui_tf_number1, ui_tf_number2, ui_tf_number3,
+             ui_tf_number4, ui_tf_number5, ui_tf_number6].map() { $0.resignFirstResponder() }
+    }
 }
 
 //MARK: - UITextfieldDelegate -
