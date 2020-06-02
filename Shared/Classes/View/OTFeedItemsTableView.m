@@ -286,6 +286,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.items.count == 0) {
+        return;
+    }
+    
     id selectedItem = self.items[indexPath.section];
     if ([self isGuideItem:selectedItem]) {
         if (self.feedItemsDelegate != nil && [self.feedItemsDelegate respondsToSelector:@selector(showPoiDetails:)]) {
