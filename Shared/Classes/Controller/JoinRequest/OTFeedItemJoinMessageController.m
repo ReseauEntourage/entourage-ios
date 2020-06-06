@@ -50,7 +50,9 @@
 }
 
 - (IBAction)close {
-    [self dismissViewControllerAnimated:YES completion:nil];
+  [self dismissViewControllerAnimated:YES completion:^{
+    [OTAppState checkNotifcationsWithCompletionHandler:nil];
+  }];
 }
 
 - (IBAction)doSendRequest {
