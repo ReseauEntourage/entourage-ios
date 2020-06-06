@@ -90,11 +90,38 @@
 		37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37D5D4C02268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37DC2581242A643100A2024F /* OTEntourageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC2580242A643100A2024F /* OTEntourageUITests.m */; };
-		6002577FD1E74DC775FAB826 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		6002577FD1E74DC775FAB826 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
 		6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA519A7461C004E8C9B /* UIKit.framework */; };
+		7FC085AD248B61C200BA39AB /* OTOnboardingPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E39B244F45E2003011C9 /* OTOnboardingPlaceViewController.swift */; };
+		7FC085AE248B61DC00BA39AB /* OTCustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E39D244F4E92003011C9 /* OTCustomTextfield.swift */; };
+		7FC085AF248B635300BA39AB /* OTPreOnboardingV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3BA322440A2170080BBE5 /* OTPreOnboardingV2ViewController.swift */; };
+		7FC085B0248B635300BA39AB /* OTPreOnboardingV2ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1013F32445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift */; };
+		7FC085B1248B635300BA39AB /* OTCarrouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3BA342440B2460080BBE5 /* OTCarrouselLayout.swift */; };
+		7FC085B2248B635300BA39AB /* OTCustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3BA362440BE920080BBE5 /* OTCustomPageControl.swift */; };
+		7FC085B3248B635300BA39AB /* OTPre_OnboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3BA382440DB1E0080BBE5 /* OTPre_OnboardCollectionViewCell.swift */; };
+		7FC085B4248B635800BA39AB /* OTOnboardingAssoStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62B029247C229C00EE6D24 /* OTOnboardingAssoStartViewController.swift */; };
+		7FC085B5248B635800BA39AB /* OTOnboardingAssoInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62B02B247C22B300EE6D24 /* OTOnboardingAssoInfoViewController.swift */; };
+		7FC085B6248B635800BA39AB /* OTOnboardingAssoFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62B02D247C22BD00EE6D24 /* OTOnboardingAssoFillViewController.swift */; };
+		7FC085B7248B635800BA39AB /* OTOnboardingAssoActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62B02F247C22CA00EE6D24 /* OTOnboardingAssoActivityViewController.swift */; };
+		7FC085B8248B635800BA39AB /* OTOnboardingSearchAssoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC3397247D4631007E3E94 /* OTOnboardingSearchAssoViewController.swift */; };
+		7FC085B9248B635800BA39AB /* OTAssoSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC3399247D4A7B007E3E94 /* OTAssoSearchTableViewCell.swift */; };
+		7FC085BA248B636400BA39AB /* OTProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E393244F33B6003011C9 /* OTProgressBar.swift */; };
+		7FC085BB248B636400BA39AB /* OTOnboardingV2StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E38B244F1C07003011C9 /* OTOnboardingV2StartViewController.swift */; };
+		7FC085BC248B636400BA39AB /* OTOnboardingNamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E38D244F1FA2003011C9 /* OTOnboardingNamesViewController.swift */; };
+		7FC085BD248B636400BA39AB /* OTOnboardingPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E38F244F212D003011C9 /* OTOnboardingPhoneViewController.swift */; };
+		7FC085BE248B636400BA39AB /* OTOnboardingPassCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E391244F2139003011C9 /* OTOnboardingPassCodeViewController.swift */; };
+		7FC085BF248B636400BA39AB /* OTOnboardingTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E395244F45AA003011C9 /* OTOnboardingTypeViewController.swift */; };
+		7FC085C0248B636400BA39AB /* OTOnboardingEmailPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E397244F45B3003011C9 /* OTOnboardingEmailPwdViewController.swift */; };
+		7FC085C1248B636400BA39AB /* OTOnboardingPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E399244F45BB003011C9 /* OTOnboardingPhotoViewController.swift */; };
+		7FC085C2248B636400BA39AB /* OTPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B916BA02456E42700F048FA /* OTPicturePreviewResizeViewController.swift */; };
+		7FC085C3248B63BA00BA39AB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9587F2451D78100C36863 /* Extensions.swift */; };
+		7FC085C4248B63C800BA39AB /* Utilitaires.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3BA3C2440E99C0080BBE5 /* Utilitaires.swift */; };
+		7FC085C5248B63F100BA39AB /* OTPictureUploadS3Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC5A88245AC32800AB75C4 /* OTPictureUploadS3Service.swift */; };
+		7FC085C6248B640300BA39AB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B46005724586BC00068120F /* Logger.swift */; };
+		7FC085C7248B657100BA39AB /* OTLoginV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B930F53246D554B0058E81B /* OTLoginV2ViewController.swift */; };
 		96099C6621ADA099008A959B /* OTGMSAutoCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96099C6521ADA099008A959B /* OTGMSAutoCompleteViewController.m */; };
 		96099C6721ADA099008A959B /* OTGMSAutoCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96099C6521ADA099008A959B /* OTGMSAutoCompleteViewController.m */; };
 		96136FFE21C92656003C1581 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96136FFD21C92656003C1581 /* UIDevice.swift */; };
@@ -1926,7 +1953,7 @@
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
-				6002577FD1E74DC775FAB826 /* BuildFile in Frameworks */,
+				6002577FD1E74DC775FAB826 /* (null) in Frameworks */,
 				DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4865,14 +4892,18 @@
 				A296B76020871CFC00F6AFBD /* OTManageInvitationViewController.m in Sources */,
 				A296B76120871CFC00F6AFBD /* OTPublicInfoDataSource.m in Sources */,
 				A296B76220871CFC00F6AFBD /* OTAnnouncementCell.m in Sources */,
+				7FC085B2248B635300BA39AB /* OTCustomPageControl.swift in Sources */,
 				A296B76320871CFC00F6AFBD /* OTDeepLinkService.m in Sources */,
 				A296B76420871CFC00F6AFBD /* UIBarButtonItem+Badge.m in Sources */,
+				7FC085C2248B636400BA39AB /* OTPicturePreviewResizeViewController.swift in Sources */,
 				A296B76520871CFC00F6AFBD /* OTAppConfiguration.m in Sources */,
 				37AD8D082268C6E40045FF4E /* OTPlaceholderBackground.m in Sources */,
 				A296B932208E06AA00F6AFBD /* OTAppState.m in Sources */,
 				A296B76620871CFC00F6AFBD /* OTJoinAcceptedCell.m in Sources */,
+				7FC085C0248B636400BA39AB /* OTOnboardingEmailPwdViewController.swift in Sources */,
 				A296B76720871CFC00F6AFBD /* OTMyEntouragesFilter.m in Sources */,
 				A296B76820871CFC00F6AFBD /* OTMixpanelService.m in Sources */,
+				7FC085C4248B63C800BA39AB /* Utilitaires.swift in Sources */,
 				A2306AB020C69DDD0094370E /* PfpSelectVisitDateViewController.swift in Sources */,
 				A296B76920871CFC00F6AFBD /* OTLocationSelectorViewController.m in Sources */,
 				A296B76A20871CFC00F6AFBD /* OTLocationManager.m in Sources */,
@@ -4891,13 +4922,17 @@
 				A296B77420871CFC00F6AFBD /* OTAboutMeViewController.m in Sources */,
 				A296B77520871CFC00F6AFBD /* OTMembersTableDataSource.m in Sources */,
 				A296B77620871CFC00F6AFBD /* OTTourMessaging.m in Sources */,
+				7FC085BB248B636400BA39AB /* OTOnboardingV2StartViewController.swift in Sources */,
+				7FC085B7248B635800BA39AB /* OTOnboardingAssoActivityViewController.swift in Sources */,
 				A2658BFD21144DF200B6B15C /* OTEventCreatedCell.m in Sources */,
 				A296B77720871CFC00F6AFBD /* OTEntourageDisclaimerViewController.m in Sources */,
 				A296B77820871CFC00F6AFBD /* OTCategoryEditCell.m in Sources */,
 				A296B77920871CFC00F6AFBD /* OTFeedsService.m in Sources */,
+				7FC085AD248B61C200BA39AB /* OTOnboardingPlaceViewController.swift in Sources */,
 				A202E91920E3818D00992C09 /* OTPrivateCircleAnnotation.m in Sources */,
 				A296B77A20871CFC00F6AFBD /* NSNotification+entourage.m in Sources */,
 				A296B77B20871CFC00F6AFBD /* OTFeedItemsFiltersTableDataSource.m in Sources */,
+				7FC085BD248B636400BA39AB /* OTOnboardingPhoneViewController.swift in Sources */,
 				A296B77C20871CFC00F6AFBD /* UIStoryboard+entourage.m in Sources */,
 				96136FFF21C92656003C1581 /* UIDevice.swift in Sources */,
 				A296B77D20871CFC00F6AFBD /* OTPoiService.m in Sources */,
@@ -4908,6 +4943,7 @@
 				A296B78120871CFC00F6AFBD /* OTBarButtonView.m in Sources */,
 				A296B8ED20871FD900F6AFBD /* main.m in Sources */,
 				A296B78220871CFC00F6AFBD /* OTOrganization.m in Sources */,
+				7FC085C5248B63F100BA39AB /* OTPictureUploadS3Service.swift in Sources */,
 				A296B78320871CFC00F6AFBD /* OTUserProfileBehavior.m in Sources */,
 				A296B78420871CFC00F6AFBD /* OTSolidarityGuideFiltersViewController.m in Sources */,
 				A296B78520871CFC00F6AFBD /* UINavigationBar+Appearance.m in Sources */,
@@ -4945,10 +4981,12 @@
 				96B658AE209A424700EB0398 /* OTItemTableViewCell.swift in Sources */,
 				A296B79F20871CFC00F6AFBD /* OTTutorial4ViewController.m in Sources */,
 				A296B7A020871CFC00F6AFBD /* OTTourUI.m in Sources */,
+				7FC085B0248B635300BA39AB /* OTPreOnboardingV2ChoiceViewController.swift in Sources */,
 				96B658BF209A689200EB0398 /* LabelStyles.swift in Sources */,
 				A296B7A120871CFC00F6AFBD /* OTTourStateInfo.m in Sources */,
 				A296B7A220871CFC00F6AFBD /* OTDistributedDelegateBehavior.m in Sources */,
 				A296B7A320871CFC00F6AFBD /* OTAnnouncement.m in Sources */,
+				7FC085C3248B63BA00BA39AB /* Extensions.swift in Sources */,
 				A296B7A420871CFC00F6AFBD /* OTMessageTableDataSourceBehavior.m in Sources */,
 				A296B7A520871CFC00F6AFBD /* OTFeedItemAuthor.m in Sources */,
 				A296B7A620871CFC00F6AFBD /* OTDebugLog.m in Sources */,
@@ -4983,12 +5021,14 @@
 				A296B7C020871CFC00F6AFBD /* OTChatCellBase.m in Sources */,
 				A2A2BC97209AF57A00AA4FC8 /* OTLogoutViewCell.swift in Sources */,
 				A296B7C120871CFC00F6AFBD /* OTTour.m in Sources */,
+				7FC085B8248B635800BA39AB /* OTOnboardingSearchAssoViewController.swift in Sources */,
 				A296B7C220871CFC00F6AFBD /* UITextField+indentation.m in Sources */,
 				A296B7C320871CFC00F6AFBD /* OTEntourageDisclaimerBehavior.m in Sources */,
 				A296B7C420871CFC00F6AFBD /* OTTutorial2ViewController.m in Sources */,
 				A296B7C520871CFC00F6AFBD /* UIViewController+menu.m in Sources */,
 				A296B7C620871CFC00F6AFBD /* OTAskMoreViewController.m in Sources */,
 				A296B7C720871CFC00F6AFBD /* OTHeatzonesCellProviderBehavior.m in Sources */,
+				7FC085B6248B635800BA39AB /* OTOnboardingAssoFillViewController.swift in Sources */,
 				A296B7C820871CFC00F6AFBD /* OTWelcomeViewController.m in Sources */,
 				A2C9EFDA2147FD7400357FD9 /* PfpStartupViewController.swift in Sources */,
 				A296B7C920871CFC00F6AFBD /* OTSolidarityGuideCell.m in Sources */,
@@ -5011,6 +5051,7 @@
 				A296B7D720871CFC00F6AFBD /* OTLostCodeViewController.m in Sources */,
 				A296B7D820871CFC00F6AFBD /* OTPicturePreviewViewController.m in Sources */,
 				A296B7D920871CFC00F6AFBD /* OTContactsFilteredDataSourceBehavior.m in Sources */,
+				7FC085C6248B640300BA39AB /* Logger.swift in Sources */,
 				A296B7DA20871CFC00F6AFBD /* OTTourStateTransition.m in Sources */,
 				A296B7DB20871CFC00F6AFBD /* OTFeedItemFiltersViewController.m in Sources */,
 				A296B7DC20871CFC00F6AFBD /* OTSummaryProviderBehavior.m in Sources */,
@@ -5035,12 +5076,15 @@
 				A296B7EE20871CFC00F6AFBD /* OTSWRevealViewController.m in Sources */,
 				379DA98A2281DD9600D38111 /* OTThemedView.m in Sources */,
 				A296B7EF20871CFC00F6AFBD /* OTJoinRejectedCell.m in Sources */,
+				7FC085BC248B636400BA39AB /* OTOnboardingNamesViewController.swift in Sources */,
 				A296B7F020871CFC00F6AFBD /* OTTableDataSourceBehavior.m in Sources */,
 				A296B7F120871CFC00F6AFBD /* OTFilteredDataSourceBehavior.m in Sources */,
 				A296B7F220871CFC00F6AFBD /* OTUserService.m in Sources */,
 				A296B7F320871CFC00F6AFBD /* OTEditEntourageTitleViewController.m in Sources */,
 				A28F4363216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m in Sources */,
+				7FC085BF248B636400BA39AB /* OTOnboardingTypeViewController.swift in Sources */,
 				A296B7F420871CFC00F6AFBD /* OTEntourageService.m in Sources */,
+				7FC085C7248B657100BA39AB /* OTLoginV2ViewController.swift in Sources */,
 				371732EB2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */,
 				A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */,
 				A296B7F520871CFC00F6AFBD /* OTEditEntourageBehavior.m in Sources */,
@@ -5069,6 +5113,7 @@
 				A2F50A1820EA295F009AB222 /* UIColor+Expanded.m in Sources */,
 				A296B80920871CFC00F6AFBD /* OTEntourageStateTransition.m in Sources */,
 				A2F5182920EF5A0F009AB222 /* OTEventInfoCell.m in Sources */,
+				7FC085B5248B635800BA39AB /* OTOnboardingAssoInfoViewController.swift in Sources */,
 				A296B80A20871CFC00F6AFBD /* OTMembersCellProvider.m in Sources */,
 				A296B80B20871CFC00F6AFBD /* OTPhotoPickerBehavior.m in Sources */,
 				A296B80C20871CFC00F6AFBD /* OTAboutTableViewCell.m in Sources */,
@@ -5098,6 +5143,7 @@
 				A296B82120871CFC00F6AFBD /* OTFeedItemsFilterCell.m in Sources */,
 				A296B82220871CFC00F6AFBD /* OTSocialViewController.m in Sources */,
 				A296B82320871CFC00F6AFBD /* OTFeedItemJoinMessageController.m in Sources */,
+				7FC085AF248B635300BA39AB /* OTPreOnboardingV2ViewController.swift in Sources */,
 				A296B82420871CFC00F6AFBD /* OTEntourageEditItemImageCell.m in Sources */,
 				A296B82520871CFC00F6AFBD /* OTInvitationChangedBehavior.m in Sources */,
 				A296B82620871CFC00F6AFBD /* NSDate+OTFormatter.m in Sources */,
@@ -5114,6 +5160,7 @@
 				A296B82F20871CFC00F6AFBD /* OTDataSourceBehavior.m in Sources */,
 				A296B83020871CFC00F6AFBD /* OTEntourageMessaging.m in Sources */,
 				A296B83120871CFC00F6AFBD /* OTUnreadMessageCount.m in Sources */,
+				7FC085B9248B635800BA39AB /* OTAssoSearchTableViewCell.swift in Sources */,
 				A296B83220871CFC00F6AFBD /* OTFeedItemStatus.m in Sources */,
 				A296B83320871CFC00F6AFBD /* OTEntourageUI.m in Sources */,
 				A296B83420871CFC00F6AFBD /* OTContactsGroupedTableDataSourceBehavior.m in Sources */,
@@ -5142,6 +5189,7 @@
 				A296B84920871CFC00F6AFBD /* OTInvitationsCollectionSource.m in Sources */,
 				2B67F40A2434989B00C2FB91 /* OTEntouragePrivacyActionCell.m in Sources */,
 				A296B84A20871CFC00F6AFBD /* OTMainViewController.m in Sources */,
+				7FC085C1248B636400BA39AB /* OTOnboardingPhotoViewController.swift in Sources */,
 				A296B84B20871CFC00F6AFBD /* OTFeedItemMessage.m in Sources */,
 				A202E91D20E381D200992C09 /* OTNeighborhoodAnnotation.m in Sources */,
 				A296B84C20871CFC00F6AFBD /* OTFeedItemTimeframeFilter.m in Sources */,
@@ -5154,8 +5202,11 @@
 				A296B85020871CFC00F6AFBD /* OTQuitFeedItemViewController.m in Sources */,
 				A296B85120871CFC00F6AFBD /* OTLogger.m in Sources */,
 				A296B85220871CFC00F6AFBD /* OTPlaceholderCell.m in Sources */,
+				7FC085B4248B635800BA39AB /* OTOnboardingAssoStartViewController.swift in Sources */,
 				A296B85320871CFC00F6AFBD /* OTAutoGrowTextView.m in Sources */,
+				7FC085AE248B61DC00BA39AB /* OTCustomTextfield.swift in Sources */,
 				96B658BC209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */,
+				7FC085B3248B635300BA39AB /* OTPre_OnboardCollectionViewCell.swift in Sources */,
 				373AAD7F23293558001D8CF3 /* OTThemedButton.m in Sources */,
 				A296B85420871CFC00F6AFBD /* OTJoinBehavior.m in Sources */,
 				A296B85520871CFC00F6AFBD /* OTSettingsViewController.m in Sources */,
@@ -5177,6 +5228,7 @@
 				A296B86120871CFC00F6AFBD /* OTRequestOperationManager.m in Sources */,
 				A296B86220871CFC00F6AFBD /* OTTourMapHandler.m in Sources */,
 				A296B86320871CFC00F6AFBD /* OTContactPhoneCell.m in Sources */,
+				7FC085B1248B635300BA39AB /* OTCarrouselLayout.swift in Sources */,
 				A296B86420871CFC00F6AFBD /* OTToggleGroupViewBehavior.m in Sources */,
 				A296B86520871CFC00F6AFBD /* OTEntourageRenderer.m in Sources */,
 				A296B86620871CFC00F6AFBD /* OTCalloutViewController.m in Sources */,
@@ -5193,6 +5245,7 @@
 				A296B86F20871CFC00F6AFBD /* UIScrollView+entourage.m in Sources */,
 				A296B87020871CFC00F6AFBD /* OTMenuViewController.m in Sources */,
 				A296B87120871CFC00F6AFBD /* OTAssociationDetailsViewController.m in Sources */,
+				7FC085BE248B636400BA39AB /* OTOnboardingPassCodeViewController.swift in Sources */,
 				A296B87220871CFC00F6AFBD /* NSUserDefaults+OT.m in Sources */,
 				A296B87420871CFC00F6AFBD /* OTTourFactory.m in Sources */,
 				A296B87520871CFC00F6AFBD /* OTAnnouncementUI.m in Sources */,
@@ -5223,6 +5276,7 @@
 				96099C6721ADA099008A959B /* OTGMSAutoCompleteViewController.m in Sources */,
 				A296B88C20871CFC00F6AFBD /* OTMyMeetingsViewController.m in Sources */,
 				A296B88D20871CFC00F6AFBD /* OTStatusChangedBehavior.m in Sources */,
+				7FC085BA248B636400BA39AB /* OTProgressBar.swift in Sources */,
 				A296B88E20871CFC00F6AFBD /* OTUserEditViewController.m in Sources */,
 				A296B89020871CFC00F6AFBD /* UIImageView+entourage.m in Sources */,
 			);
@@ -5487,7 +5541,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -5536,7 +5590,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Store;
@@ -5585,7 +5639,6 @@
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -5628,7 +5681,6 @@
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Store;
@@ -5678,7 +5730,6 @@
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5729,7 +5780,6 @@
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5783,7 +5833,6 @@
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5841,7 +5890,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Beta;
 		};
@@ -5888,7 +5937,6 @@
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Beta;
