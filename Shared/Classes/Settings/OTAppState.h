@@ -70,5 +70,6 @@
 
 + (void)presentAuthenticationOverlay:(UIViewController * _Nonnull)currentViewController;
 +(void) checkNotifcationsAndGoMainScreen;
++(void)checkNotifcationsWithCompletionHandler:(void (^)(void))completionHandler;
 +(void)continueFromLoginVC;
 @end

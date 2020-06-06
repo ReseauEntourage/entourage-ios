@@ -39,7 +39,7 @@
 			<string>social.entourage.entourageios</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>entourage</string>
+				<string>entourage-staging</string>
 			</array>
 		</dict>
 		<dict>

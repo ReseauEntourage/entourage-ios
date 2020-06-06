@@ -210,6 +210,7 @@
                     [SVProgressHUD dismiss];
                     self.txtChat.text = @"";
                     [self reloadMessages];
+        [OTAppState checkNotifcationsWithCompletionHandler:nil];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];

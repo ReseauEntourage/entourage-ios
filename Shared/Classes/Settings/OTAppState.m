@@ -257,21 +257,27 @@
     [OTAppState checkNotifcationsAndGoMainScreen];
 }
 
-+(void) checkNotifcationsAndGoMainScreen {
++(void)checkNotifcationsAndGoMainScreen {
+  [self checkNotifcationsWithCompletionHandler:^{
+    [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
+    [[OTLocationManager sharedInstance] startLocationUpdates];
+
+    [OTAppState navigateToAuthenticatedLandingScreen];
+  }];
+}
+
++(void)checkNotifcationsWithCompletionHandler:(void (^)(void))completionHandler {
     [OTPushNotificationsService getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
         if (@available(iOS 12.0, *)) {
             if (status == UNAuthorizationStatusProvisional)
                 status = UNAuthorizationStatusNotDetermined;
         }
-        
+
         dispatch_async(dispatch_get_main_queue(), ^() {
             if (status == UNAuthorizationStatusNotDetermined) {
                 [OTAppState showPopNotification];
             } else {
-                [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
-                [[OTLocationManager sharedInstance] startLocationUpdates];
-                
-                [OTAppState navigateToAuthenticatedLandingScreen];
+                completionHandler();
             }
         });
     }];
