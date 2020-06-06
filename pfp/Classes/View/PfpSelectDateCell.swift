@@ -36,7 +36,7 @@ class PfpSelectDateCell: UITableViewCell {
     }
 
     func updateWithType (_ type:DateSelectionType, isSelected:Bool, selectedType: DateSelectionType, date:Date?) {
-        self.accView.image = UIImage.init(named: "verified")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        self.accView.image = UIImage.init(named: "verified")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         self.accView.tintColor = UIColor.white
         self.type = type
         self.accView.layer.cornerRadius = 11

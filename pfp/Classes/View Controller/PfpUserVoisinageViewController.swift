@@ -66,7 +66,7 @@ class PfpUserVoisinageViewController: UITableViewController {
     
     private func updateNavigationItems () {
         let continueButton:UIBarButtonItem = UIBarButtonItem.init(title: String.localized("continue"),
-                                                                  style: UIBarButtonItemStyle.plain,
+                                                                  style: UIBarButtonItem.Style.plain,
                                                                   target: self,
                                                                   action: #selector(continueAction))
         

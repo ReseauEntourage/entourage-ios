@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -22,7 +23,7 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.datePicker.datePickerMode = UIDatePickerMode.date
+        self.datePicker.datePickerMode = UIDatePicker.Mode.date
         self.title = String.localized("pfp_date_title").uppercased()
         self.tableView.backgroundColor = UIColor.pfpTableBackground()
         
@@ -41,7 +42,7 @@ class PfpSelectVisitDateViewController: UIViewController, UITableViewDelegate, U
     
     private func updateNavigationItems () {
         let continueButton:UIBarButtonItem = UIBarButtonItem.init(title: String.localized("continue"),
-                                                                  style: UIBarButtonItemStyle.plain,
+                                                                  style: UIBarButtonItem.Style.plain,
                                                                   target: self,
                                                                   action: #selector(continueAction))
         
