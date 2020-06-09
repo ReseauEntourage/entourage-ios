@@ -59,11 +59,12 @@ class OTOnboardingV2StartViewController: UIViewController {
     func callSignup() {
         
         SVProgressHUD.show()
-        
+        OTLogger.logEvent(Action_Onboarding_Phone_Submit)
         OTOnboardingService.init().setupNewUser(with: self.temporaryUser, success: { (onboardUser) in
             SVProgressHUD.dismiss()
             onboardUser?.phone =  self.temporaryUser.phone
             UserDefaults.standard.temporaryUser = onboardUser
+            OTLogger.logEvent(Action_Onboarding_Phone_Submit_Success)
             self.goNextStep()
         }) { (error) in
             SVProgressHUD.dismiss()
@@ -79,10 +80,13 @@ class OTOnboardingV2StartViewController: UIViewController {
                     alertVC.addAction(action)
                     self.navigationController?.present(alertVC, animated: true, completion: nil)
                     showErrorHud = false
+                    OTLogger.logEvent(Error_Onboarding_Phone_Submit_Error)
                 }
                 else if errorCode == PHONE_ALREADY_EXIST {
+                    OTLogger.logEvent(Error_Onboarding_Phone_Submit_Exist)
                     errorMessage = OTLocalisationService.getLocalizedValue(forKey:"alreadyRegisteredShortMessage")
                     self.goNextStep()
+                    
                 }
                 
                 if (errorMessage.count > 0) {
@@ -103,7 +107,7 @@ class OTOnboardingV2StartViewController: UIViewController {
         }
         
         SVProgressHUD.show()
-        
+        OTLogger.logEvent(Action_Onboarding_SignUp_Submit)
         OTAuthService.init().auth(withPhone: self.temporaryUser.phone, password: tempPwd, success: { (user, isFirstlogin) in
             user?.phone =  self.temporaryUser.phone
             SVProgressHUD.dismiss()
@@ -113,11 +117,11 @@ class OTOnboardingV2StartViewController: UIViewController {
             UserDefaults.standard.temporaryUser = nil
             UserDefaults.standard.setFirstLoginState(!isFirstlogin)
             
+            OTLogger.logEvent(Action_Onboarding_SignUp_Success)
             self.goNextStep()
-            
         }) { (error) in
             SVProgressHUD.dismiss()
-            
+            OTLogger.logEvent(Error_Onboarding_SignUp_Fail)
             let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "tryAgain"), message: OTLocalisationService.getLocalizedValue(forKey: "invalidPhoneNumberOrCode"), preferredStyle: .alert)
             
             let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"tryAgain_short"), style: .default, handler: nil)
@@ -132,6 +136,11 @@ class OTOnboardingV2StartViewController: UIViewController {
         SVProgressHUD.show()
         let _currentUser = UserDefaults.standard.currentUser
         _currentUser?.goal = userTypeSelected.getGoalString()
+        
+        if userTypeSelected != .none {
+            OTLogger.logEvent(Action_Onboarding_Choose_Profile_Signup)
+        }
+        
         OTAuthService().updateUserInformation(with: _currentUser, success: { (newUser) in
             newUser?.phone = _currentUser?.phone
             UserDefaults.standard.currentUser = newUser
@@ -161,6 +170,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     
     func resendCode() {
         SVProgressHUD.show()
+        OTLogger.logEvent(Action_Onboarding_SMS)
         OTAuthService.init().regenerateSecretCode(self.temporaryUser.phone, success: { (user) in
             SVProgressHUD.dismiss()
             SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "requestSent"))
@@ -177,7 +187,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     }
     
     func sendAddAddress() {
-        
+        OTLogger.logEvent(Action_Onboarding_Action_Zone_Submit)
         if let _place = temporaryGooglePlace {
             SVProgressHUD.show()
             OTAuthService.updateUserAddress(withPlaceId: _place.placeID) { (error) in
@@ -220,6 +230,7 @@ class OTOnboardingV2StartViewController: UIViewController {
         SVProgressHUD.show()
         let _currentUser = UserDefaults.standard.currentUser
         _currentUser?.email = temporaryEmail
+        OTLogger.logEvent(Action_Onboarding_Email_Submit)
         OTAuthService().updateUserInformation(with: _currentUser, success: { (newUser) in
             newUser?.phone = _currentUser?.phone
             UserDefaults.standard.currentUser = newUser
@@ -228,6 +239,7 @@ class OTOnboardingV2StartViewController: UIViewController {
                 self.goNextStep()
             }
         }) { (error) in
+            OTLogger.logEvent(Error_Onboarding_Email_Submit_Error)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
                 self.goNextStep()
@@ -238,6 +250,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     func updateUserPhoto() {
         let _currentUser = UserDefaults.standard.currentUser
         SVProgressHUD.show()
+         OTLogger.logEvent(Action_Onboarding_Photo_Submit)
         OTPictureUploadService().uploadPicture(temporaryUserPicture, withSuccess: { (pictureName) in
             _currentUser?.avatarKey = pictureName
             OTAuthService().updateUserInformation(with: _currentUser, success: { (newUser) in
@@ -263,15 +276,18 @@ class OTOnboardingV2StartViewController: UIViewController {
         if let _asso = temporaryAssoInfo,_asso.name.count > 0, _asso.postal_code?.count ?? 0 > 0, _asso.userRoleTitle?.count ?? 0 > 0 {
             
             SVProgressHUD.show()
+            OTLogger.logEvent(Action_Onboarding_Pro_SignUp_Submit)
             OTAuthService().updateUserAssociationInfo(with: temporaryAssoInfo!, success: { (isOK) in
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
+                    OTLogger.logEvent(Action_Onboarding_Pro_SignUp_Success)
                     self.currentPositionAsso = ControllerAssoType(rawValue: self.currentPositionAsso.rawValue + 1)!
                     self.moveToTunnelAsso()
                 }
             }) { (error) in
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
+                    OTLogger.logEvent(Error_Onboarding_Pro_SignUp_Error)
                     self.currentPositionAsso = ControllerAssoType(rawValue: self.currentPositionAsso.rawValue + 1)!
                     self.moveToTunnelAsso()
                 }
@@ -290,6 +306,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     func updateAssoActivity() {
         if let _activities = temporaryAssoActivities, _activities.hasOneSelectionMin() {
             SVProgressHUD.show()
+            OTLogger.logEvent(Action_Onboarding_Pro_Mosaic)
             OTAuthService().updateUserInterests(_activities.getArrayForWS(),success: { (user) in
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
@@ -372,6 +389,10 @@ class OTOnboardingV2StartViewController: UIViewController {
     
     @IBAction func action_next(_ sender: Any) {
         if currentPosition.rawValue <= nbOfSteps {
+            if currentPosition == .firstLastName {
+                 OTLogger.logEvent(Action_Onboarding_Names)
+            }
+            
             if currentPosition == .phone {
                 self.callSignup()
                 return
@@ -520,8 +541,10 @@ class OTOnboardingV2StartViewController: UIViewController {
     @IBAction func action_pass(_ sender: Any) {
         if currentPosition == .type {
             userTypeSelected = .none
+            OTLogger.logEvent(Action_Onboarding_Choose_Profile_Skip)
         }
         if currentPosition == .photo {
+            OTLogger.logEvent(Action_Onboarding_Ignore_Photo)
             showPopNotification()
             return
         }

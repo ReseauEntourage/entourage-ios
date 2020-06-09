@@ -54,6 +54,7 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
             }
             self.view.layoutIfNeeded()
         }
+        OTLogger.logEvent(View_Start_SignUpLogin)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +80,7 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     }
     
     @IBAction func action_signUp(_ sender: Any) {
+        OTLogger.logEvent(Action_Start_SignUpStart)
         let _storyboard = UIStoryboard.init(name: "Onboarding_V2", bundle: nil)
         let vc = _storyboard.instantiateViewController(withIdentifier: "startOnboardVC")
         
@@ -86,6 +88,7 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     }
     
     @IBAction func action_login(_ sender: Any) {
+        OTLogger.logEvent(Action_Start_LoginStart)
         OTAppState.continue(fromStartupScreen: self, creatingUser: false)
     }
 }

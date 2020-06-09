@@ -63,6 +63,8 @@ class OTOnboardingAssoActivityViewController: UIViewController {
         else {
             delegate?.updateButtonNext(isValid: false)
         }
+        
+        OTLogger.logEvent(View_Onboarding_Pro_Mosaic)
     }
     
     func changeSelectionViewPosition(_ position:Int) {

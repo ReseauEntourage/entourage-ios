@@ -26,5 +26,7 @@ class OTOnboardingAssoInfoViewController: UIViewController {
         ui_label_info_1.attributedText = Utilitaires.formatString(stringMessage: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_info_1"), coloredTxt: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_info_1_bold"), color: .appBlack30, colorHighlight: .appBlack30, fontSize: 14, fontWeight: .regular, fontColoredWeight: .bold)
         ui_label_info_2.attributedText = Utilitaires.formatString(stringMessage: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_info_2"), coloredTxt: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_info_2_bold"), color: .appBlack30, colorHighlight: .appBlack30, fontSize: 14, fontWeight: .regular, fontColoredWeight: .bold)
         ui_label_info_3.attributedText = Utilitaires.formatString(stringMessage: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_info_3"), coloredTxt: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_info_3_bold"), color: .appBlack30, colorHighlight: .appBlack30, fontSize: 14, fontWeight: .regular, fontColoredWeight: .bold)
+        
+        OTLogger.logEvent(View_Onboarding_Pro_Features)
     }
 }

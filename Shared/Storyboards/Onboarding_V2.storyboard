@@ -2481,7 +2481,7 @@ Ligne 4</string>
         <image name="onboard_picto_investir" width="24" height="34"/>
         <image name="onboard_picto_notification" width="50" height="50"/>
         <image name="onboard_picto_search" width="56" height="40"/>
-        <image name="profil_verfi" width="50" height="54"/>
+        <image name="profil_verfi" width="53.333332061767578" height="53.333332061767578"/>
         <image name="user" width="100" height="100"/>
     </resources>
 </document>

@@ -34,6 +34,8 @@ class OTOnboardingAssoFillViewController: UIViewController {
         updateAssoNameLabel()
         ui_tf_asso_cp.text = asso?.postal_code != nil ? asso!.postal_code! : ""
         ui_tf_function.text = asso?.userRoleTitle != nil ? asso!.userRoleTitle! : ""
+        
+        OTLogger.logEvent(View_Onboarding_Pro_SignUp)
     }
     
     func updateDelegateButtonNext() {

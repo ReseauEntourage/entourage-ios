@@ -26,7 +26,7 @@ class OTOnboardingSearchAssoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        ui_et_search.placeholder = OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_search")
         ui_tableview.tableFooterView = UIView.init(frame: .zero)
         getList()
     }

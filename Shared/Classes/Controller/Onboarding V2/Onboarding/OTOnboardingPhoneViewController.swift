@@ -51,6 +51,7 @@ class OTOnboardingPhoneViewController: UIViewController {
         }
         
         populateViews()
+        OTLogger.logEvent(View_Onboarding_Phone)
     }
     
     func populateViews() {

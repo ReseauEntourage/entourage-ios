@@ -30,6 +30,7 @@ class OTOnboardingPlaceViewController: UIViewController {
         super.viewDidLoad()
         
         if isFromProfile {
+            OTLogger.logEvent(View_Profile_Action_Zone)
            // ui_constraint_title_top.constant = ui_constraint_title_top.constant + 20
             ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "defineActionZoneTitle")
             
@@ -37,7 +38,7 @@ class OTOnboardingPlaceViewController: UIViewController {
             ui_label_info.attributedText = Utilitaires.formatStringItalicOnly(stringMessage: OTLocalisationService.getLocalizedValue(forKey: "onboard_place_info"), color: .appBlack30, fontSize: 12)
         }
         else {
-            
+            OTLogger.logEvent(View_Onboarding_Action_Zone)
             ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_place_title")
             ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_place_description")
             
@@ -76,6 +77,7 @@ class OTOnboardingPlaceViewController: UIViewController {
     
     func sendAddAddress() {
         if let _place = selectedPlace {
+            OTLogger.logEvent(Action_Profile_Action_Zone_Submit)
             SVProgressHUD.show()
             OTAuthService.updateUserAddress(withPlaceId: _place.placeID) { (error) in
                 SVProgressHUD.dismiss()
@@ -84,6 +86,7 @@ class OTOnboardingPlaceViewController: UIViewController {
         }
         else if let _lat = self.currentLocation?.coordinate.latitude, let _long = self.currentLocation?.coordinate.longitude {
             SVProgressHUD.show()
+            OTLogger.logEvent(Action_Profile_Action_Zone_Submit)
             let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
             OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long)) { (error) in
                 SVProgressHUD.dismiss()
@@ -153,6 +156,12 @@ class OTOnboardingPlaceViewController: UIViewController {
     //MARK: - IBActions -
     @IBAction func action_location(_ sender: Any) {
         OTLocationManager.sharedInstance()?.startLocationUpdates()
+        if isFromProfile {
+            OTLogger.logEvent(Action_Profile_SetAction_Zone_Geoloc)
+        }
+        else {
+          OTLogger.logEvent(Action_Onboarding_SetAction_Zone_Geoloc)
+        }
     }
 }
 
@@ -160,6 +169,13 @@ class OTOnboardingPlaceViewController: UIViewController {
 extension OTOnboardingPlaceViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if let _vc = googleplaceVC {
+            if isFromProfile {
+                OTLogger.logEvent(Action_Profile_SetAction_Zone_Search)
+            }
+            else {
+              OTLogger.logEvent(Action_Onboarding_SetAction_Zone_Search)
+            }
+            
             self.present(_vc, animated: true, completion: nil)
         }
     }

@@ -42,6 +42,7 @@ class OTOnboardingPassCodeViewController: UIViewController {
         ui_bt_nocode.setTitle(OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_wait_retry"), for: .normal)
         
         populateViews()
+        OTLogger.logEvent(View_Onboarding_Passcode)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

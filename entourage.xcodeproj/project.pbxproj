@@ -995,6 +995,7 @@
 		1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = entourage.entitlements; sourceTree = "<group>"; };
 		2A4E5B32B53E7E30C72258C3 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
+		2B09E99C248E62E8003BA7C0 /* Analytics_keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Analytics_keys.h; sourceTree = "<group>"; };
 		2B1013F32445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPreOnboardingV2ChoiceViewController.swift; sourceTree = "<group>"; };
 		2B46005724586BC00068120F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		2B62B029247C229C00EE6D24 /* OTOnboardingAssoStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingAssoStartViewController.swift; sourceTree = "<group>"; };
@@ -2220,6 +2221,7 @@
 				A296B930208DFE8A00F6AFBD /* OTAppState.m */,
 				A202E7C52085CFC30058F32C /* OTAPIConsts.h */,
 				A202E7C02085CFC30058F32C /* OTAPIKeys.h */,
+				2B09E99C248E62E8003BA7C0 /* Analytics_keys.h */,
 				A202E7BF2085CFC30058F32C /* OTConsts.h */,
 				A296B92E208DEC5400F6AFBD /* PFPConsts.h */,
 			);

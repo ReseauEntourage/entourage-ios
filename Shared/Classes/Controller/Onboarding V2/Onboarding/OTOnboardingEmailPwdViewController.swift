@@ -44,6 +44,8 @@ class OTOnboardingEmailPwdViewController: UIViewController {
         else {
             delegate?.updateButtonNext(isValid: false)
         }
+        
+        OTLogger.logEvent(View_Onboarding_Input_Email)
     }
     
     @IBAction func action_tap(_ sender: Any) {

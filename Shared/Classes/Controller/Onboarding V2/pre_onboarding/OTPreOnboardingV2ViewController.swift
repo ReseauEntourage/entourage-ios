@@ -57,6 +57,8 @@ class OTPreOnboardingV2ViewController: UIViewController {
             }
             self.view.layoutIfNeeded()
         }
+        
+        OTLogger.logEvent(View_Start_Carrousel1)
     }
     
     func updateViewsAtPosition() {
@@ -74,15 +76,18 @@ class OTPreOnboardingV2ViewController: UIViewController {
             title = OTLocalisationService.getLocalizedValue(forKey: "preOnboard_start_title2")
             titleColored = OTLocalisationService.getLocalizedValue(forKey: "preOnboard_start_title2_colored")
             description = OTLocalisationService.getLocalizedValue(forKey: "preOnboard_start_description2")
+            OTLogger.logEvent(View_Start_Carrousel2)
         case 2:
             title = OTLocalisationService.getLocalizedValue(forKey: "preOnboard_start_title3")
             titleColored = OTLocalisationService.getLocalizedValue(forKey: "preOnboard_start_title3_colored")
             description = ""
             ui_image_pre_3.isHidden = view.frame.height <= 568 ? true : false
+            OTLogger.logEvent(View_Start_Carrousel3)
         case 3:
             title = OTLocalisationService.getLocalizedValue(forKey: "preOnboard_start_title4")
             titleColored = OTLocalisationService.getLocalizedValue(forKey: "preOnboard_start_title4_colored")
             description = OTLocalisationService.getLocalizedValue(forKey: "preOnboard_start_description4")
+            OTLogger.logEvent(View_Start_Carrousel4)
         default:
             break
         }
