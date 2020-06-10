@@ -54,6 +54,17 @@ typedef NS_ENUM(NSInteger, OTEntourageMenuIndexType) {
     OTEntourageMenuIndexTypeLogout
 };
 
+typedef NS_ENUM(NSInteger, OTEntourageMenuSectionIndexType) {
+    OTEntourageMenuSectionIndexTypeFirstStep = 0,
+    OTEntourageMenuSectionIndexTypeCommitting,
+    OTEntourageMenuSectionIndexTypeShare,
+    OTEntourageMenuSectionIndexTypeHelp,
+    OTEntourageMenuSectionIndexTypeLogout,
+    OTEntourageMenuSectionIndexTypeSocialNetworks
+};
+
+
+
 @import MessageUI;
 
 /* MenuItem identifiers */

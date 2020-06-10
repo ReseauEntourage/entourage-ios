@@ -258,7 +258,7 @@
 }
 
 +(void)checkNotifcationsAndGoMainScreen {
-  [self checkNotifcationsWithCompletionHandler:^{
+  [self checkNotificationsWithCompletionHandler:^{
     [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
     [[OTLocationManager sharedInstance] startLocationUpdates];
 
@@ -266,7 +266,7 @@
   }];
 }
 
-+(void)checkNotifcationsWithCompletionHandler:(void (^)(void))completionHandler {
++(void)checkNotificationsWithCompletionHandler:(void (^)(void))completionHandler {
     [OTPushNotificationsService getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
         if (@available(iOS 12.0, *)) {
             if (status == UNAuthorizationStatusProvisional)

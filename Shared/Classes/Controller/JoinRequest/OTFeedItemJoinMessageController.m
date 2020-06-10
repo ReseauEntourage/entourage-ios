@@ -51,7 +51,7 @@
 
 - (IBAction)close {
   [self dismissViewControllerAnimated:YES completion:^{
-    [OTAppState checkNotifcationsWithCompletionHandler:nil];
+    [OTAppState checkNotificationsWithCompletionHandler:nil];
   }];
 }
 
