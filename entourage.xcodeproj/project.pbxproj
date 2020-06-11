@@ -17,6 +17,7 @@
 		2B62B030247C22CA00EE6D24 /* OTOnboardingAssoActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62B02F247C22CA00EE6D24 /* OTOnboardingAssoActivityViewController.swift */; };
 		2B67F4092434988B00C2FB91 /* OTEntouragePrivacyActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67F4082434988B00C2FB91 /* OTEntouragePrivacyActionCell.m */; };
 		2B67F40A2434989B00C2FB91 /* OTEntouragePrivacyActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67F4082434988B00C2FB91 /* OTEntouragePrivacyActionCell.m */; };
+		2B6ECD12249236BB005AAF1D /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6ECD11249236BB005AAF1D /* OTOnboardingSDFNeighbourActivityViewController.swift */; };
 		2B916BA12456E42700F048FA /* OTPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B916BA02456E42700F048FA /* OTPicturePreviewResizeViewController.swift */; };
 		2B930F54246D554B0058E81B /* OTLoginV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B930F53246D554B0058E81B /* OTLoginV2ViewController.swift */; };
 		2BB2E389244EFA84003011C9 /* Onboarding_V2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BB2E388244EFA84003011C9 /* Onboarding_V2.storyboard */; };
@@ -1004,6 +1005,7 @@
 		2B62B02F247C22CA00EE6D24 /* OTOnboardingAssoActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingAssoActivityViewController.swift; sourceTree = "<group>"; };
 		2B67F4072434988B00C2FB91 /* OTEntouragePrivacyActionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTEntouragePrivacyActionCell.h; sourceTree = "<group>"; };
 		2B67F4082434988B00C2FB91 /* OTEntouragePrivacyActionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEntouragePrivacyActionCell.m; sourceTree = "<group>"; };
+		2B6ECD11249236BB005AAF1D /* OTOnboardingSDFNeighbourActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingSDFNeighbourActivityViewController.swift; sourceTree = "<group>"; };
 		2B916BA02456E42700F048FA /* OTPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
 		2B930F53246D554B0058E81B /* OTLoginV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTLoginV2ViewController.swift; sourceTree = "<group>"; };
 		2BB2E388244EFA84003011C9 /* Onboarding_V2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding_V2.storyboard; sourceTree = "<group>"; };
@@ -1964,6 +1966,14 @@
 			path = Asso;
 			sourceTree = "<group>";
 		};
+		2B6ECD1024923670005AAF1D /* Sdf_neighbour */ = {
+			isa = PBXGroup;
+			children = (
+				2B6ECD11249236BB005AAF1D /* OTOnboardingSDFNeighbourActivityViewController.swift */,
+			);
+			path = Sdf_neighbour;
+			sourceTree = "<group>";
+		};
 		2BB2E38A244F1BE2003011C9 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -1978,6 +1988,7 @@
 				2BB2E397244F45B3003011C9 /* OTOnboardingEmailPwdViewController.swift */,
 				2BB2E399244F45BB003011C9 /* OTOnboardingPhotoViewController.swift */,
 				2B916BA02456E42700F048FA /* OTPicturePreviewResizeViewController.swift */,
+				2B6ECD1024923670005AAF1D /* Sdf_neighbour */,
 				2B62B028247C226A00EE6D24 /* Asso */,
 			);
 			path = Onboarding;
@@ -4802,6 +4813,7 @@
 				2BB3BA332440A2170080BBE5 /* OTPreOnboardingV2ViewController.swift in Sources */,
 				A202EB432085D2C80058F32C /* OTJoinRequestedCell.m in Sources */,
 				A202EC752085D2C80058F32C /* OTMyEntouragesDataSource.m in Sources */,
+				2B6ECD12249236BB005AAF1D /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */,
 				A202EB772085D2C80058F32C /* OTSummaryInfoCell.m in Sources */,
 				A202EB332085D2C80058F32C /* OTInviteSuccessViewController.m in Sources */,
 				A202ECBD2085D2C80058F32C /* OTMailTextCheckBehavior.m in Sources */,

@@ -48,11 +48,15 @@
 #define Action_Onboarding_Choose_Profile_Signup @"Action__Onboarding__ChooseProfile"
 #define Action_Onboarding_Choose_Profile_Skip @"Action__Onboarding__ChooseProfileSkip"
  //Riverain__Sdf
-#define View_Onboarding_Action_Zone @"View__Onboarding__ActionZone_Signup"
+#define View_Onboarding_Action_Zone @"View__Onboarding__ActionZone"
 #define Action_Onboarding_SetAction_Zone_Geoloc @"Action__Onboarding__SetActionZoneGeoloc"
 #define Action_Onboarding_SetAction_Zone_Search @"Action__Onboarding__SetActionZoneSearch"
 #define Action_Onboarding_Action_Zone_Submit @"Action__Onboarding__ActionZoneSubmit"
+#define View_Onboarding_Action_Zone2 @"View__Onboarding__ActionZone2"
+#define Action_Onboarding_SetAction_Zone2_Geoloc @"Action__Onboarding__SetActionZone2Geoloc"
+#define Action_Onboarding_SetAction_Zone2_Search @"Action__Onboarding__SetActionZone2Search"
 #define Action_Onboarding_Action_Zone2_Submit @"Action__Onboarding__ActionZone2Submit"
+#define Action_Onboarding_Action_Zone2_Skip @"Action__Onboarding__ActionZone2Skip"
  //Riverain__Sdf Mosaïc
 #define View_Onboarding_Neighbor_Mosaic @"View__Onboarding__NeighborMosaic"
 #define View_Onboarding_InNeed_Mosaic @"View__Onboarding__InNeedMosaic"

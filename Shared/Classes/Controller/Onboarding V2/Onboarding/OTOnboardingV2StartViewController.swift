@@ -41,6 +41,12 @@ class OTOnboardingV2StartViewController: UIViewController {
     var temporaryUserPicture:UIImage? = nil
     var temporaryAssoInfo:OTAssociation? = nil
     var temporaryAssoActivities:AssoActivities? = nil
+    var temporarySdfActivities:SdfNeighbourActivities? = nil
+    var temporaryNeighbourActivities:SdfNeighbourActivities? = nil
+    
+    var temporary2ndGooglePlace:GMSPlace? = nil
+    var temporary2ndLocation:CLLocation? = nil
+    var temporary2ndAddressName:String? = nil
     
     //MARK: - Lifecycle -
     override func viewDidLoad() {
@@ -250,7 +256,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     func updateUserPhoto() {
         let _currentUser = UserDefaults.standard.currentUser
         SVProgressHUD.show()
-         OTLogger.logEvent(Action_Onboarding_Photo_Submit)
+        OTLogger.logEvent(Action_Onboarding_Photo_Submit)
         OTPictureUploadService().uploadPicture(temporaryUserPicture, withSuccess: { (pictureName) in
             _currentUser?.avatarKey = pictureName
             OTAuthService().updateUserInformation(with: _currentUser, success: { (newUser) in
@@ -331,16 +337,81 @@ class OTOnboardingV2StartViewController: UIViewController {
         }
     }
     
+    func update2ndAddress() {
+        OTLogger.logEvent(Action_Onboarding_Action_Zone2_Submit)
+        self.goNextStepSdfNeighbour()
+        //TODO: a remettre avec le bon WS
+        //        if let _place = temporary2ndGooglePlace {
+        //            SVProgressHUD.show()
+        //            OTAuthService.updateUserAddress(withPlaceId: _place.placeID) { (error) in
+        //                SVProgressHUD.dismiss()
+        //                self.goNextStepSdfNeighbour()
+        //            }
+        //        }
+        //        else if let _lat = self.temporary2ndLocation?.coordinate.latitude, let _long = self.temporary2ndLocation?.coordinate.longitude {
+        //            SVProgressHUD.show()
+        //            let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
+        //            OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long)) { (error) in
+        //                SVProgressHUD.dismiss()
+        //                self.goNextStepSdfNeighbour()
+        //            }
+        //        }
+    }
+    
     func updateAlone() {
-        //TODO: a faire
-        currentPosition = ControllerType(rawValue: currentPosition.rawValue + 1)!
-        changeController()
+        if let _activities = temporarySdfActivities, _activities.hasOneSelectionMin() {
+            SVProgressHUD.show()
+            OTLogger.logEvent(Action_Onboarding_InNeed_Mosaic)
+            OTAuthService().updateUserInterests(_activities.getArrayForWS(),success: { (user) in
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 1)!
+                    self.changeController()
+                }
+            }) { (error) in
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 1)!
+                    self.changeController()
+                }
+            }
+        }
+        else {
+            let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "attention_pop_title"), message: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_activity_error"), preferredStyle: .alert)
+            
+            let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"OK"), style: .default, handler: nil)
+            alertvc.addAction(action)
+            
+            self.navigationController?.present(alertvc, animated: true, completion: nil)
+        }
     }
     
     func updateNeighbour() {
-        //TODO: a faire
-        currentPosition = ControllerType(rawValue: currentPosition.rawValue + 1)!
-        changeController()
+        if let _activities = temporaryNeighbourActivities, _activities.hasOneSelectionMin() {
+            SVProgressHUD.show()
+            OTLogger.logEvent(Action_Onboarding_Neighbor_Mosaic)
+            OTAuthService().updateUserInterests(_activities.getArrayForWS(),success: { (user) in
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 1)!
+                    self.changeController()
+                }
+            }) { (error) in
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 1)!
+                    self.changeController()
+                }
+            }
+        }
+        else {
+            let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "attention_pop_title"), message: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_activity_error"), preferredStyle: .alert)
+            
+            let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"OK"), style: .default, handler: nil)
+            alertvc.addAction(action)
+            
+            self.navigationController?.present(alertvc, animated: true, completion: nil)
+        }
     }
     
     //MARK: - Methods -
@@ -390,7 +461,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     @IBAction func action_next(_ sender: Any) {
         if currentPosition.rawValue <= nbOfSteps {
             if currentPosition == .firstLastName {
-                 OTLogger.logEvent(Action_Onboarding_Names)
+                OTLogger.logEvent(Action_Onboarding_Names)
             }
             
             if currentPosition == .phone {
@@ -409,25 +480,32 @@ class OTOnboardingV2StartViewController: UIViewController {
             }
             
             if currentPosition == .place {
-                //TODO: à remettre lorsque l'on fera les tunnels riverain et sdf
-//                if self.userTypeSelected == .alone {
-//                    if currentPositionAlone == .activity {
-//                        updateAlone()
-//                        return
-//                    }
-//                    currentPositionAlone = ControllerAloneType(rawValue: currentPositionAlone.rawValue + 1)!
-//                    moveToTunnelAlone()
-//                    return
-//                }
-//                if self.userTypeSelected == .neighbour {
-//                    if currentPositionNeighbour == .activity {
-//                        updateNeighbour()
-//                        return
-//                    }
-//                    currentPositionNeighbour = ControllerNeighbourType(rawValue: currentPositionNeighbour.rawValue + 1)!
-//                    moveToTunnelNeighbour()
-//                    return
-//                }
+                if self.userTypeSelected == .alone {
+                    if currentPositionAlone == .place {
+                        update2ndAddress()
+                        return
+                    }
+                    if currentPositionAlone == .activity {
+                        updateAlone()
+                        return
+                    }
+                    currentPositionAlone = ControllerAloneType(rawValue: currentPositionAlone.rawValue + 1)!
+                    moveToTunnelAlone()
+                    return
+                }
+                if self.userTypeSelected == .neighbour {
+                    if currentPositionNeighbour == .activity {
+                        updateNeighbour()
+                        return
+                    }
+                    if currentPositionNeighbour == .place {
+                        update2ndAddress()
+                        return
+                    }
+                    currentPositionNeighbour = ControllerNeighbourType(rawValue: currentPositionNeighbour.rawValue + 1)!
+                    moveToTunnelNeighbour()
+                    return
+                }
                 self.sendAddAddress()
                 return
             }
@@ -483,29 +561,28 @@ class OTOnboardingV2StartViewController: UIViewController {
                     return
                 }
             }
-            //TODO: à remettre lorsque l'on fera les tunnels riverain et sdf
-//            if currentPosition == .place {
-//                if self.userTypeSelected == .alone {
-//                    if self.currentPositionAlone != .none {
-//                        currentPositionAlone = ControllerAloneType(rawValue: currentPositionAlone.rawValue - 1)!
-//                    }
-//                    else {
-//                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
-//                    }
-//                    moveToTunnelAlone()
-//                    return
-//                }
-//                if self.userTypeSelected == .neighbour {
-//                    if self.currentPositionNeighbour != .none {
-//                        currentPositionNeighbour = ControllerNeighbourType(rawValue: currentPositionNeighbour.rawValue - 1)!
-//                    }
-//                    else {
-//                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
-//                    }
-//                    moveToTunnelNeighbour()
-//                    return
-//                }
-//            }
+            if currentPosition == .place {
+                if self.userTypeSelected == .alone {
+                    if self.currentPositionAlone != .none {
+                        currentPositionAlone = ControllerAloneType(rawValue: currentPositionAlone.rawValue - 1)!
+                    }
+                    else {
+                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
+                    }
+                    moveToTunnelAlone()
+                    return
+                }
+                if self.userTypeSelected == .neighbour {
+                    if self.currentPositionNeighbour != .none {
+                        currentPositionNeighbour = ControllerNeighbourType(rawValue: currentPositionNeighbour.rawValue - 1)!
+                    }
+                    else {
+                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
+                    }
+                    moveToTunnelNeighbour()
+                    return
+                }
+            }
             
             if currentPosition == .emailPwd {
                 if self.userTypeSelected == .assos {
@@ -515,22 +592,21 @@ class OTOnboardingV2StartViewController: UIViewController {
                     moveToTunnelAsso()
                     return
                 }
-                //TODO: à remettre lorsque l'on fera les tunnels riverain et sdf
                 
-//                if self.userTypeSelected == .alone {
-//                    if self.currentPositionAlone != .none {
-//                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
-//                    }
-//                    moveToTunnelAlone()
-//                    return
-//                }
-//                if self.userTypeSelected == .neighbour {
-//                    if self.currentPositionNeighbour != .none {
-//                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
-//                    }
-//                    moveToTunnelNeighbour()
-//                    return
-//                }
+                if self.userTypeSelected == .alone {
+                    if self.currentPositionAlone != .none {
+                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
+                    }
+                    moveToTunnelAlone()
+                    return
+                }
+                if self.userTypeSelected == .neighbour {
+                    if self.currentPositionNeighbour != .none {
+                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
+                    }
+                    moveToTunnelNeighbour()
+                    return
+                }
             }
             
             currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
@@ -539,6 +615,18 @@ class OTOnboardingV2StartViewController: UIViewController {
     }
     
     @IBAction func action_pass(_ sender: Any) {
+        
+        if currentPosition == .place {
+            if (self.userTypeSelected == .alone && currentPositionAlone == .place) || (self.userTypeSelected == .neighbour && currentPositionNeighbour == .place) {
+                self.temporary2ndLocation = nil
+                self.temporary2ndGooglePlace = nil
+                self.temporary2ndAddressName = nil
+                OTLogger.logEvent(Action_Onboarding_Action_Zone2_Skip)
+                self.goNextStepSdfNeighbour()
+                return
+            }
+        }
+        
         if currentPosition == .type {
             userTypeSelected = .none
             OTLogger.logEvent(Action_Onboarding_Choose_Profile_Skip)
@@ -601,8 +689,8 @@ extension OTOnboardingV2StartViewController {
                 vc.delegate = self
                 vc.currentLocation = self.temporaryLocation
                 vc.selectedPlace = self.temporaryGooglePlace
+                vc.isSdf = userTypeSelected == .alone ? true : false
                 add(asChildViewController: vc)
-                
                 
                 currentPositionAlone = .none
                 currentPositionNeighbour = .none
@@ -636,45 +724,59 @@ extension OTOnboardingV2StartViewController {
     }
     
     func moveToTunnelAlone() {
-        //TODO: a finir
         ui_bt_next.isEnabled = false
         switch currentPositionAlone {
         case .place:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_sdf_location") {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_place") as? OTOnboardingPlaceViewController {
+                vc.delegate = self
+                vc.currentLocation = self.temporary2ndLocation
+                vc.selectedPlace = self.temporary2ndGooglePlace
+                vc.is2ndAddress = true
+                vc.isSdf = true
                 add(asChildViewController: vc)
-                ui_bt_next.isEnabled = true
+                ui_bt_pass.isHidden = false
             }
             
         case .activity:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_sdf_activity") {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_sdf_neighbour_activity") as? OTOnboardingSDFNeighbourActivityViewController {
+                vc.isSdf = true
+                vc.activitiesSelections = temporarySdfActivities
+                vc.delegate = self
+                vc.username = self.temporaryUser.firstName
                 add(asChildViewController: vc)
-                ui_bt_next.isEnabled = true
             }
         case .none:
             changeController()
         }
         
         let percent = (ui_progress.bounds.size.width / CGFloat(nbOfSteps + 1)) * CGFloat(Double(currentPositionAlone.rawValue) + Double(currentPosition.rawValue) * 0.95)
-               ui_progress.progressPercent = percent
-               ui_progress.setNeedsDisplay()
-               
-               updatebuttons()
+        ui_progress.progressPercent = percent
+        ui_progress.setNeedsDisplay()
+        
+        updatebuttons()
     }
     
     func moveToTunnelNeighbour() {
-        //TODO: - a finir
         ui_bt_next.isEnabled = false
         
         switch currentPositionNeighbour {
         case .place:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_neighbour_location") {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_place") as? OTOnboardingPlaceViewController {
+                vc.delegate = self
+                vc.currentLocation = self.temporary2ndLocation
+                vc.selectedPlace = self.temporary2ndGooglePlace
+                vc.is2ndAddress = true
+                vc.isSdf = false
                 add(asChildViewController: vc)
-                ui_bt_next.isEnabled = true
+                ui_bt_pass.isHidden = false
             }
         case .activity:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_neighbour_activity") {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_sdf_neighbour_activity") as? OTOnboardingSDFNeighbourActivityViewController {
+                vc.isSdf = false
+                vc.activitiesSelections = temporaryNeighbourActivities
+                vc.delegate = self
+                vc.username = self.temporaryUser.firstName
                 add(asChildViewController: vc)
-                ui_bt_next.isEnabled = true
             }
         case .none:
             changeController()
@@ -740,7 +842,14 @@ extension OTOnboardingV2StartViewController {
             else {
                 ui_bt_previous.isHidden = false
             }
-        case .phone,.passCode,.place,.emailPwd,.photo:
+        case .place:
+            if userTypeSelected != .none {
+                if (userTypeSelected == .alone && currentPositionAlone == .place) || (userTypeSelected == .neighbour && currentPositionNeighbour == .place) {
+                    ui_bt_pass.isHidden = false
+                }
+            }
+            ui_bt_previous.isHidden = false
+        case .phone,.passCode,.emailPwd,.photo:
             ui_bt_previous.isHidden = false
         }
         
@@ -813,6 +922,17 @@ extension OTOnboardingV2StartViewController {
         self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 1)!
         self.changeController()
     }
+    
+    func goNextStepSdfNeighbour() {
+        if self.userTypeSelected == .alone {
+            self.currentPositionAlone = ControllerAloneType(rawValue: self.currentPositionAlone.rawValue + 1)!
+            self.moveToTunnelAlone()
+        }
+        else {
+            self.currentPositionNeighbour = ControllerNeighbourType(rawValue: self.currentPositionNeighbour.rawValue + 1)!
+            self.moveToTunnelNeighbour()
+        }
+    }
 }
 
 //MARK: - Delegate -
@@ -856,10 +976,18 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
         self.resendCode()
     }
     
-    func updateNewAddress(googlePlace:GMSPlace?,gpsLocation:CLLocation?,addressName:String?) {
-        self.temporaryGooglePlace = googlePlace
-        self.temporaryLocation = gpsLocation
-        self.temporaryAddressName = addressName
+    func updateNewAddress(googlePlace:GMSPlace?,gpsLocation:CLLocation?,addressName:String?,is2ndAddress:Bool) {
+        if is2ndAddress {
+            self.temporary2ndGooglePlace = googlePlace
+            self.temporary2ndLocation = gpsLocation
+            self.temporary2ndAddressName = addressName
+        }
+        else {
+            self.temporaryGooglePlace = googlePlace
+            self.temporaryLocation = gpsLocation
+            self.temporaryAddressName = addressName
+        }
+        
         
         if googlePlace != nil || gpsLocation != nil {
             updateButtonNext(isValid: true)
@@ -897,6 +1025,14 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
     func updateAssoActivities(assoActivities: AssoActivities) {
         self.temporaryAssoActivities = assoActivities
     }
+    
+    func updateSdfActivities(sdfActivities: SdfNeighbourActivities) {
+        self.temporarySdfActivities = sdfActivities
+    }
+    
+    func updateNeighbourActivities(neighbourActivities: SdfNeighbourActivities) {
+        self.temporaryNeighbourActivities = neighbourActivities
+    }
 }
 
 //MARK: - Protocol -
@@ -907,13 +1043,15 @@ protocol OnboardV2Delegate:class {
     func updateButtonNext(isValid:Bool)
     func validatePasscode(password:String)
     func requestNewcode()
-    func updateNewAddress(googlePlace:GMSPlace?,gpsLocation:CLLocation?,addressName:String?)
+    func updateNewAddress(googlePlace:GMSPlace?,gpsLocation:CLLocation?,addressName:String?,is2ndAddress:Bool)
     func updateUserType(userType:UserType)
     func updateEmailPwd(email:String,pwd:String,pwdConfirm:String)
     func updateUserPhoto(image:UIImage)
     
     func updateAssoInfos(asso:OTAssociation)
     func updateAssoActivities(assoActivities:AssoActivities)
+    func updateSdfActivities(sdfActivities:SdfNeighbourActivities)
+    func updateNeighbourActivities(neighbourActivities:SdfNeighbourActivities)
 }
 
 //MARK: - Enums -

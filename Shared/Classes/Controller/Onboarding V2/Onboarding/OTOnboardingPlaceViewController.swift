@@ -26,6 +26,9 @@ class OTOnboardingPlaceViewController: UIViewController {
     
     @objc var isFromProfile = false
     
+    var is2ndAddress = false
+    var isSdf = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,13 +41,28 @@ class OTOnboardingPlaceViewController: UIViewController {
             ui_label_info.attributedText = Utilitaires.formatStringItalicOnly(stringMessage: OTLocalisationService.getLocalizedValue(forKey: "onboard_place_info"), color: .appBlack30, fontSize: 12)
         }
         else {
-            OTLogger.logEvent(View_Onboarding_Action_Zone)
-            ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_place_title")
-            ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_place_description")
-            
-            ui_label_info.attributedText = Utilitaires.formatStringItalicOnly(stringMessage: OTLocalisationService.getLocalizedValue(forKey: "onboard_place_info"), color: .appBlack30, fontSize: 12)
-            
-            ui_tf_location.placeholder = OTLocalisationService.getLocalizedValue(forKey: "onboard_place_placeholder")
+            if !is2ndAddress {
+                OTLogger.logEvent(View_Onboarding_Action_Zone)
+                let _title = isSdf ? "onboard_place_title_sdf" : "onboard_place_title"
+                let _description = isSdf ? "onboard_place_description_sdf" : "onboard_place_description"
+                ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: _title)
+                ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: _description)
+                
+                ui_label_info.attributedText = Utilitaires.formatStringItalicOnly(stringMessage: OTLocalisationService.getLocalizedValue(forKey: "onboard_place_info"), color: .appBlack30, fontSize: 12)
+                
+                ui_tf_location.placeholder = OTLocalisationService.getLocalizedValue(forKey: "onboard_place_placeholder")
+            }
+            else {
+                OTLogger.logEvent(View_Onboarding_Action_Zone2)
+                let _title = isSdf ? "onboard_place_title2_sdf" : "onboard_place_title2"
+                let _description = isSdf ? "onboard_place_description2_sdf" : "onboard_place_description2"
+                ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: _title)
+                ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: _description)
+                
+                ui_label_info.attributedText = Utilitaires.formatStringItalicOnly(stringMessage: OTLocalisationService.getLocalizedValue(forKey: "onboard_place_info"), color: .appBlack30, fontSize: 12)
+                
+                ui_tf_location.placeholder = OTLocalisationService.getLocalizedValue(forKey: "onboard_place_placeholder")
+            }
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(updatePosition), name: NSNotification.Name(rawValue: kNotificationLocationUpdated), object: nil)
@@ -123,7 +141,7 @@ class OTOnboardingPlaceViewController: UIViewController {
             self.selectedPlace = nil
             
             self.updateTextfieldInfos()
-            self.delegate?.updateNewAddress(googlePlace: nil, gpsLocation: self.currentLocation,addressName: temporaryAddressName)
+            self.delegate?.updateNewAddress(googlePlace: nil, gpsLocation: self.currentLocation,addressName: temporaryAddressName,is2ndAddress: is2ndAddress)
             OTLocationManager.sharedInstance()?.stopLocationUpdates()
         }
     }
@@ -160,7 +178,12 @@ class OTOnboardingPlaceViewController: UIViewController {
             OTLogger.logEvent(Action_Profile_SetAction_Zone_Geoloc)
         }
         else {
-          OTLogger.logEvent(Action_Onboarding_SetAction_Zone_Geoloc)
+            if is2ndAddress {
+                 OTLogger.logEvent(Action_Onboarding_SetAction_Zone2_Geoloc)
+            }
+            else {
+                 OTLogger.logEvent(Action_Onboarding_SetAction_Zone_Geoloc)
+            }
         }
     }
 }
@@ -173,7 +196,12 @@ extension OTOnboardingPlaceViewController: UITextFieldDelegate {
                 OTLogger.logEvent(Action_Profile_SetAction_Zone_Search)
             }
             else {
-              OTLogger.logEvent(Action_Onboarding_SetAction_Zone_Search)
+                if is2ndAddress {
+                    OTLogger.logEvent(Action_Onboarding_SetAction_Zone2_Search)
+                }
+                else {
+                    OTLogger.logEvent(Action_Onboarding_SetAction_Zone_Search)
+                }
             }
             
             self.present(_vc, animated: true, completion: nil)
@@ -189,7 +217,7 @@ extension OTOnboardingPlaceViewController:OTGMSAutoCompleteViewControllerProtoco
         self.currentLocation = nil
         self.updateTextfieldInfos()
         self.dismiss(animated: true, completion: nil)
-        self.delegate?.updateNewAddress(googlePlace: self.selectedPlace, gpsLocation: nil,addressName: nil)
+        self.delegate?.updateNewAddress(googlePlace: self.selectedPlace, gpsLocation: nil,addressName: nil,is2ndAddress: is2ndAddress)
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -200,6 +228,6 @@ extension OTOnboardingPlaceViewController:OTGMSAutoCompleteViewControllerProtoco
         self.currentLocation = nil
         self.updateTextfieldInfos()
         self.dismiss(animated: true, completion: nil)
-        self.delegate?.updateNewAddress(googlePlace: nil, gpsLocation: nil,addressName: nil)
+        self.delegate?.updateNewAddress(googlePlace: nil, gpsLocation: nil,addressName: nil,is2ndAddress: is2ndAddress)
     }
 }

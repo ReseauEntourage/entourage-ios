@@ -598,6 +598,8 @@
 "onboard_type_choice3" = "Je fais partie d’une association ou service public";
 "onboard_place_title" = "Quel est votre quartier ?";
 "onboard_place_description" = "Vous pourrez répondre aux demandes de personnes en difficulté et d’associations de votre quartier, et vous pourrez vous-même proposer des dons de votre temps ou matériels.";
+"onboard_place_title_sdf" = "Dans quel quartier avez vous vos habitudes ?";
+"onboard_place_description_sdf" = "Vous pourrez demander de l’aide à vos voisins et rencontrer de nouvelles personnes lors d’évènements conviviaux du réseaux.";
 "onboard_place_info" = "Entourage ne communique pas cette adresse.";
 "onboard_place_placeholder" = "Ex : 35000";
 "onboard_email_pwd_title" = "Ok super !";
@@ -665,3 +667,31 @@
 "onboard_asso_activity_choice_3" = "Service\nPublic";
 "onboard_asso_activity_choice_4" = "Autres ?";
 "onboard_asso_search" = "Recherche";
+
+//Onboarding Sdf
+"onboard_sdf_activity_title" = "%@, que cherchez-vous ?";
+"onboard_sdf_activity_description" = "Plusieurs choix possibles.\nNous vous ferons des propositions adaptées.";
+"onboard_sdf_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
+"onboard_sdf_activity_choice_1" = "Me faire un\ncercle d’amis";
+"onboard_sdf_activity_choice_2" = "Participer à des\névènements";
+"onboard_sdf_activity_choice_3" = "Poser des\nquestions";
+"onboard_sdf_activity_choice_4" = "Demander\nde l’aide";
+"onboard_sdf_activity_choice_5" = "M’orienter";
+"onboard_sdf_activity_choice_6" = "Trouver des\nassociations";
+
+//Onboarding Neighbour
+"onboard_neighbour_activity_title" = "%@, que souhaitez-vous faire dans votre quartier ?";
+"onboard_neighbour_activity_description" = "Plusieurs choix possibles.\nNous vous ferons des propositions adaptées.";
+"onboard_sneighbour_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
+"onboard_neighbour_activity_choice_1" = "M’informer";
+"onboard_neighbour_activity_choice_2" = "Participer à des\névènements";
+"onboard_neighbour_activity_choice_3" = "Entourer une\npersonne isolée";
+"onboard_neighbour_activity_choice_4" = "Faire des dons\nmatériels";
+"onboard_neighbour_activity_choice_5" = "M’investir dans\nl’associatif";
+
+
+//Onboarding Place tunnel SDF / Voisins
+"onboard_place_title2_sdf" = "Super !";
+"onboard_place_description2_sdf" = "Souhaitez-vous ajouter un autre quartier ?";
+"onboard_place_title2" = "Super !";
+"onboard_place_description2" = "Vous venez de rejoindre des membres de votre quartier. Voulez-vous rajouter un autre quartier dans lequel agir ?";
