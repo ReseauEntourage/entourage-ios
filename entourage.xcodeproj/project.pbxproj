@@ -3804,7 +3804,7 @@
 			attributes = {
 				CLASSPREFIX = OT;
 				LastUpgradeCheck = 0930;
-				ORGANIZATIONNAME = "OCTO Technology";
+				ORGANIZATIONNAME = Entourage;
 				TargetAttributes = {
 					376F74D623EC6904008168DB = {
 						CreatedOnToolsVersion = 11.3.1;
