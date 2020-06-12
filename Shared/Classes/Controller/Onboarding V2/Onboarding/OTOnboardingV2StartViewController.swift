@@ -359,37 +359,23 @@ class OTOnboardingV2StartViewController: UIViewController {
     }
     
     func updateAlone() {
-        if let _activities = temporarySdfActivities, _activities.hasOneSelectionMin() {
-            SVProgressHUD.show()
-            OTLogger.logEvent(Action_Onboarding_InNeed_Mosaic)
-            OTAuthService().updateUserInterests(_activities.getArrayForWS(),success: { (user) in
-                DispatchQueue.main.async {
-                    SVProgressHUD.dismiss()
-                    self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 1)!
-                    self.changeController()
-                }
-            }) { (error) in
-                DispatchQueue.main.async {
-                    SVProgressHUD.dismiss()
-                    self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 1)!
-                    self.changeController()
-                }
-            }
-        }
-        else {
-            let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "attention_pop_title"), message: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_activity_error"), preferredStyle: .alert)
-            
-            let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"OK"), style: .default, handler: nil)
-            alertvc.addAction(action)
-            
-            self.navigationController?.present(alertvc, animated: true, completion: nil)
-        }
+        updateActivities(activities: temporarySdfActivities, isSdf: true)
     }
     
     func updateNeighbour() {
-        if let _activities = temporaryNeighbourActivities, _activities.hasOneSelectionMin() {
+        updateActivities(activities: temporaryNeighbourActivities, isSdf: false)
+    }
+    
+    func updateActivities(activities:SdfNeighbourActivities?,isSdf:Bool) {
+        if let _activities = activities, _activities.hasOneSelectionMin() {
             SVProgressHUD.show()
-            OTLogger.logEvent(Action_Onboarding_Neighbor_Mosaic)
+            if isSdf {
+                 OTLogger.logEvent(Action_Onboarding_InNeed_Mosaic)
+            }
+            else {
+                 OTLogger.logEvent(Action_Onboarding_Neighbor_Mosaic)
+            }
+           
             OTAuthService().updateUserInterests(_activities.getArrayForWS(),success: { (user) in
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
@@ -621,6 +607,8 @@ class OTOnboardingV2StartViewController: UIViewController {
                 self.temporary2ndLocation = nil
                 self.temporary2ndGooglePlace = nil
                 self.temporary2ndAddressName = nil
+                self.temporaryNeighbourActivities = nil
+                self.temporarySdfActivities = nil
                 OTLogger.logEvent(Action_Onboarding_Action_Zone2_Skip)
                 self.goNextStepSdfNeighbour()
                 return
@@ -1002,10 +990,16 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
         //Reset infos Tunnel asso + place / email
         temporaryAssoInfo = nil
         temporaryAssoActivities?.reset()
+        temporarySdfActivities?.reset()
+        temporaryNeighbourActivities?.reset()
         temporaryEmail = ""
         temporaryLocation = nil
         temporaryAddressName = nil
         temporaryGooglePlace = nil
+        temporary2ndLocation = nil
+        temporary2ndAddressName = nil
+        temporary2ndGooglePlace = nil
+
     }
     
     func updateEmailPwd(email:String,pwd:String,pwdConfirm:String) {
