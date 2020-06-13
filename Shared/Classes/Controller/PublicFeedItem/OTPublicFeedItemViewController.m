@@ -154,43 +154,6 @@
     
     // https://jira.mytkw.com/browse/EMA-2128
     return;
-    
-    if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
-        
-        NSMutableArray *rightButtons = [NSMutableArray new];
-        UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
-        [more setFrame:CGRectMake(0, 0, 30, 30)];
-        
-        [more setImage:[[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-              forState:UIControlStateNormal];
-        more.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-        [more addTarget:self.statusChangedBehavior
-                 action:@selector(startChangeStatus)
-         forControlEvents:UIControlEventTouchUpInside];
-        
-        OTBarButtonView *moreBarBtnView = [[OTBarButtonView alloc] initWithFrame:more.frame];
-        [moreBarBtnView setPosition:BarButtonViewPositionRight];
-        [moreBarBtnView addSubview:more];
-        
-        UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] initWithCustomView:moreBarBtnView];
-        [rightButtons addObject:moreButton];
-        
-        UIButton *share = [UIButton buttonWithType:UIButtonTypeCustom];
-        [share setImage:[UIImage imageNamed:@"share_native"]
-               forState:UIControlStateNormal];
-        [share addTarget:self.shareFeedItem
-                  action:@selector(sharePublic:)
-        forControlEvents:UIControlEventTouchUpInside];
-        [share setFrame:CGRectMake(0, 0, 30, 30)];
-        
-        OTBarButtonView *shareBarBtnView = [[OTBarButtonView alloc] initWithFrame:share.frame];
-        [shareBarBtnView setPosition:BarButtonViewPositionRight];
-        [shareBarBtnView addSubview:share];
-        
-        UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:shareBarBtnView];
-        [rightButtons addObject:shareButton];
-        [self setRightBarButtonView:rightButtons];
-    }
 }
 
 - (void)setRightBarButtonView:(NSMutableArray *)views
