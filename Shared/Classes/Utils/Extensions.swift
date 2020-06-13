@@ -19,6 +19,9 @@ extension UIColor {
     static var appGrey165: UIColor {
         return UIColor(red: 165 / 255.0, green: 165 / 255.0, blue: 156 / 255.0, alpha: 1.0)
     }
+    static var appGrey179: UIColor {
+        UIColor(red: 179 / 255.0, green: 179 / 255.0, blue: 179 / 255.0, alpha: 1.0)
+    }
 }
 
 //MARK: - Extensions String -
