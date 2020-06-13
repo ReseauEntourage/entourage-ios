@@ -91,7 +91,6 @@
 		37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37D5D4C02268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37DC2581242A643100A2024F /* OTEntourageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC2580242A643100A2024F /* OTEntourageUITests.m */; };
-		6002577FD1E74DC775FAB826 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
@@ -973,6 +972,10 @@
 		A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
+		CBC0A1B979528D5254545E08 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */; };
+		CBC0A3A074881010D4F1C167 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A1F46E4D0CE9AF782376 /* Functions.swift */; };
+		CBC0ABC996CD7825957FB571 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */; };
+		CBC0ADB4808CCF19328042A9 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A1F46E4D0CE9AF782376 /* Functions.swift */; };
 		DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7E197ECB4BF7DC5B2EDFAC /* Pods_entourage.framework */; };
 		E26723B7A7CE9F68D2D57A75 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */; };
 /* End PBXBuildFile section */
@@ -1903,6 +1906,8 @@
 		A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AABDEECD9EA3187207D065D2 /* Pods-UnitTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.beta.xcconfig"; sourceTree = "<group>"; };
+		CBC0A1F46E4D0CE9AF782376 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		E869ABEB0224DAD93339CB1B /* Pods-entourageTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.beta.xcconfig"; sourceTree = "<group>"; };
 		EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1929,7 +1934,6 @@
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
-				6002577FD1E74DC775FAB826 /* (null) in Frameworks */,
 				DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2880,6 +2884,7 @@
 				2BB3BA3C2440E99C0080BBE5 /* Utilitaires.swift */,
 				2BF9587F2451D78100C36863 /* Extensions.swift */,
 				2B46005724586BC00068120F /* Logger.swift */,
+				CBC0A8A9500105CDCC5D3010 /* FunctionalOperators */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -3724,6 +3729,15 @@
 				A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */,
 			);
 			path = EntourageEditor;
+			sourceTree = "<group>";
+		};
+		CBC0A8A9500105CDCC5D3010 /* FunctionalOperators */ = {
+			isa = PBXGroup;
+			children = (
+				CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */,
+				CBC0A1F46E4D0CE9AF782376 /* Functions.swift */,
+			);
+			path = FunctionalOperators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4852,6 +4866,8 @@
 				A202ECAF2085D2C80058F32C /* OTStatusChangedBehavior.m in Sources */,
 				A202EB912085D2C80058F32C /* OTUserEditViewController.m in Sources */,
 				A202ECE12085D2C80058F32C /* UIImageView+entourage.m in Sources */,
+				CBC0ABC996CD7825957FB571 /* Operators.swift in Sources */,
+				CBC0A3A074881010D4F1C167 /* Functions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5239,6 +5255,8 @@
 				A296B88D20871CFC00F6AFBD /* OTStatusChangedBehavior.m in Sources */,
 				A296B88E20871CFC00F6AFBD /* OTUserEditViewController.m in Sources */,
 				A296B89020871CFC00F6AFBD /* UIImageView+entourage.m in Sources */,
+				CBC0A1B979528D5254545E08 /* Operators.swift in Sources */,
+				CBC0ADB4808CCF19328042A9 /* Functions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
