@@ -972,10 +972,18 @@
 		A2FE6D5220A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
+		CBC0A03DFDFAEAE3B9DE1BCC /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AA27D8A8DD4212584226 /* Edge.swift */; };
+		CBC0A06D08E6BED694055C64 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AA6F131A0E7EC1688FFD /* UIView+AutoLayout.swift */; };
 		CBC0A1B979528D5254545E08 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */; };
+		CBC0A32A7CE824A1F66B0B13 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AF12B8FA90272380B384 /* UIViewExtensions.swift */; };
 		CBC0A3A074881010D4F1C167 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A1F46E4D0CE9AF782376 /* Functions.swift */; };
+		CBC0A3ADCCB9C561CE0EFE7C /* Edge+NSLayoutConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A800B8DB65F8D51DC695 /* Edge+NSLayoutConstraints.swift */; };
+		CBC0ABC53C2BB2156D4EFB55 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AF12B8FA90272380B384 /* UIViewExtensions.swift */; };
 		CBC0ABC996CD7825957FB571 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */; };
+		CBC0AD30FC02D722BBDF5B91 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AA27D8A8DD4212584226 /* Edge.swift */; };
+		CBC0AD4CD65FD98EC5AF5FD6 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AA6F131A0E7EC1688FFD /* UIView+AutoLayout.swift */; };
 		CBC0ADB4808CCF19328042A9 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A1F46E4D0CE9AF782376 /* Functions.swift */; };
+		CBC0AEE6EEBF522F33DA865E /* Edge+NSLayoutConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A800B8DB65F8D51DC695 /* Edge+NSLayoutConstraints.swift */; };
 		DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7E197ECB4BF7DC5B2EDFAC /* Pods_entourage.framework */; };
 		E26723B7A7CE9F68D2D57A75 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */; };
 /* End PBXBuildFile section */
@@ -1907,7 +1915,11 @@
 		A809BAA819E9803700A45AC9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AABDEECD9EA3187207D065D2 /* Pods-UnitTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.beta.xcconfig"; sourceTree = "<group>"; };
 		CBC0A1F46E4D0CE9AF782376 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		CBC0A800B8DB65F8D51DC695 /* Edge+NSLayoutConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Edge+NSLayoutConstraints.swift"; sourceTree = "<group>"; };
+		CBC0AA27D8A8DD4212584226 /* Edge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		CBC0AA6F131A0E7EC1688FFD /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		CBC0AF12B8FA90272380B384 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		E869ABEB0224DAD93339CB1B /* Pods-entourageTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.beta.xcconfig"; sourceTree = "<group>"; };
 		EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2885,6 +2897,7 @@
 				2BF9587F2451D78100C36863 /* Extensions.swift */,
 				2B46005724586BC00068120F /* Logger.swift */,
 				CBC0A8A9500105CDCC5D3010 /* FunctionalOperators */,
+				CBC0A6E81A1FF70710621787 /* UIKit */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -3729,6 +3742,17 @@
 				A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */,
 			);
 			path = EntourageEditor;
+			sourceTree = "<group>";
+		};
+		CBC0A6E81A1FF70710621787 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				CBC0AA6F131A0E7EC1688FFD /* UIView+AutoLayout.swift */,
+				CBC0AA27D8A8DD4212584226 /* Edge.swift */,
+				CBC0AF12B8FA90272380B384 /* UIViewExtensions.swift */,
+				CBC0A800B8DB65F8D51DC695 /* Edge+NSLayoutConstraints.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		CBC0A8A9500105CDCC5D3010 /* FunctionalOperators */ = {
@@ -4868,6 +4892,10 @@
 				A202ECE12085D2C80058F32C /* UIImageView+entourage.m in Sources */,
 				CBC0ABC996CD7825957FB571 /* Operators.swift in Sources */,
 				CBC0A3A074881010D4F1C167 /* Functions.swift in Sources */,
+				CBC0AD4CD65FD98EC5AF5FD6 /* UIView+AutoLayout.swift in Sources */,
+				CBC0AD30FC02D722BBDF5B91 /* Edge.swift in Sources */,
+				CBC0A32A7CE824A1F66B0B13 /* UIViewExtensions.swift in Sources */,
+				CBC0AEE6EEBF522F33DA865E /* Edge+NSLayoutConstraints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5257,6 +5285,10 @@
 				A296B89020871CFC00F6AFBD /* UIImageView+entourage.m in Sources */,
 				CBC0A1B979528D5254545E08 /* Operators.swift in Sources */,
 				CBC0ADB4808CCF19328042A9 /* Functions.swift in Sources */,
+				CBC0A06D08E6BED694055C64 /* UIView+AutoLayout.swift in Sources */,
+				CBC0A03DFDFAEAE3B9DE1BCC /* Edge.swift in Sources */,
+				CBC0ABC53C2BB2156D4EFB55 /* UIViewExtensions.swift in Sources */,
+				CBC0A3ADCCB9C561CE0EFE7C /* Edge+NSLayoutConstraints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
