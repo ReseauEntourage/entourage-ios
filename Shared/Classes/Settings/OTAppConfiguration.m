@@ -313,6 +313,13 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     menuNavController.tabBarItem.title = OTLocalizedString(@"menu");
     menuNavController.tabBarItem.image = [[UIImage imageNamed:@"menu_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     menuNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"menu_tab_selected"];
+
+    // New Menu
+    UIViewController *newMenu = [MenuViewController new];
+    UIViewController *newMenuNC = [[UINavigationController alloc] initWithRootViewController: newMenu];
+    newMenuNC.tabBarItem.title = OTLocalizedString(@"menu");
+    newMenuNC.tabBarItem.image = [[UIImage imageNamed:@"menu_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    newMenuNC.tabBarItem.selectedImage = [UIImage imageNamed:@"menu_tab_selected"];
     
     // Proximity Map Tab
     OTMainViewController *mainMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
@@ -338,10 +345,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         guideMapNavController.tabBarItem.image = [[UIImage imageNamed:@"ic_navigation_guide"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         guideMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_navigation_guide"];
         
-        tabBarController.viewControllers = @[mainMapNavController, guideMapNavController, messagesNavController, menuNavController];
+        tabBarController.viewControllers = @[mainMapNavController, guideMapNavController, messagesNavController, menuNavController, newMenuNC];
     }
     else {
-        tabBarController.viewControllers = @[mainMapNavController, messagesNavController, menuNavController];
+        tabBarController.viewControllers = @[mainMapNavController, messagesNavController, menuNavController, newMenuNC];
     }
 
     tabBarController.selectedIndex = selectedIndex;

@@ -978,6 +978,8 @@
 		CBC0A32A7CE824A1F66B0B13 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AF12B8FA90272380B384 /* UIViewExtensions.swift */; };
 		CBC0A3A074881010D4F1C167 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A1F46E4D0CE9AF782376 /* Functions.swift */; };
 		CBC0A3ADCCB9C561CE0EFE7C /* Edge+NSLayoutConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A800B8DB65F8D51DC695 /* Edge+NSLayoutConstraints.swift */; };
+		CBC0A829A1AFD84B851DE659 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AF5F146511E44B18EB51 /* MenuViewController.swift */; };
+		CBC0A92BAB6CB2962DA4ECBB /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AF5F146511E44B18EB51 /* MenuViewController.swift */; };
 		CBC0ABC53C2BB2156D4EFB55 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AF12B8FA90272380B384 /* UIViewExtensions.swift */; };
 		CBC0ABC996CD7825957FB571 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */; };
 		CBC0AD30FC02D722BBDF5B91 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AA27D8A8DD4212584226 /* Edge.swift */; };
@@ -1920,6 +1922,7 @@
 		CBC0AA6F131A0E7EC1688FFD /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
 		CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		CBC0AF12B8FA90272380B384 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		CBC0AF5F146511E44B18EB51 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		E869ABEB0224DAD93339CB1B /* Pods-entourageTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.beta.xcconfig"; sourceTree = "<group>"; };
 		EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3604,10 +3607,10 @@
 		A296B9132087224900F6AFBD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CBC0AAFC29538DC9BA67C507 /* ViewControllers */,
 			);
-			name = Classes;
-			path = pfp/Classes;
-			sourceTree = SOURCE_ROOT;
+			path = Classes;
+			sourceTree = "<group>";
 		};
 		A296B9142087225200F6AFBD /* Classes */ = {
 			isa = PBXGroup;
@@ -3762,6 +3765,14 @@
 				CBC0A1F46E4D0CE9AF782376 /* Functions.swift */,
 			);
 			path = FunctionalOperators;
+			sourceTree = "<group>";
+		};
+		CBC0AAFC29538DC9BA67C507 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CBC0AF5F146511E44B18EB51 /* MenuViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4890,12 +4901,14 @@
 				A202ECAF2085D2C80058F32C /* OTStatusChangedBehavior.m in Sources */,
 				A202EB912085D2C80058F32C /* OTUserEditViewController.m in Sources */,
 				A202ECE12085D2C80058F32C /* UIImageView+entourage.m in Sources */,
+				CBC0A829A1AFD84B851DE659 /* MenuViewController.swift in Sources */,
 				CBC0ABC996CD7825957FB571 /* Operators.swift in Sources */,
 				CBC0A3A074881010D4F1C167 /* Functions.swift in Sources */,
 				CBC0AD4CD65FD98EC5AF5FD6 /* UIView+AutoLayout.swift in Sources */,
 				CBC0AD30FC02D722BBDF5B91 /* Edge.swift in Sources */,
 				CBC0A32A7CE824A1F66B0B13 /* UIViewExtensions.swift in Sources */,
 				CBC0AEE6EEBF522F33DA865E /* Edge+NSLayoutConstraints.swift in Sources */,
+				CBC0A1B24D309630321CD04E /* MenuItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5289,6 +5302,8 @@
 				CBC0A03DFDFAEAE3B9DE1BCC /* Edge.swift in Sources */,
 				CBC0ABC53C2BB2156D4EFB55 /* UIViewExtensions.swift in Sources */,
 				CBC0A3ADCCB9C561CE0EFE7C /* Edge+NSLayoutConstraints.swift in Sources */,
+				CBC0A92BAB6CB2962DA4ECBB /* MenuViewController.swift in Sources */,
+				CBC0A169EC0F0B12391ED0B6 /* MenuItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
