@@ -22,7 +22,7 @@ func pinEdges<V: UIView>(_ edges: [Edge] = .all(), to otherView: UIView) -> (V) 
 }
 
 func pinEdgesToSuperview<V: UIView>(_ edges: [Edge] = .all()) -> (V) -> V {
-    { view in
+    { view in // swiftlint:disable:this opening_brace
         guard let superview = view.superview else {
             return view
         }
@@ -31,7 +31,7 @@ func pinEdgesToSuperview<V: UIView>(_ edges: [Edge] = .all()) -> (V) -> V {
 }
 
 func centerY<V: UIView>(to otherView: UIView) -> (V) -> V {
-    activateConstraints() { [$0.centerYAnchor.constraint(equalTo: otherView.centerYAnchor)] }
+    activateConstraints { [$0.centerYAnchor.constraint(equalTo: otherView.centerYAnchor)] }
 }
 
 func centerYInSuperview<V: UIView>(_ view: V) -> V {
@@ -42,9 +42,9 @@ func centerYInSuperview<V: UIView>(_ view: V) -> V {
 }
 
 func constraintHeight<V: UIView>(_ constant: CGFloat) -> (V) -> V {
-    activateConstraints() { [$0.heightAnchor.constraint(equalToConstant: constant)] }
+    activateConstraints { [$0.heightAnchor.constraint(equalToConstant: constant)] }
 }
 
 func constraintWidth<V: UIView>(toWidthOf otherView: UIView) -> (V) -> V {
-    activateConstraints() { [$0.widthAnchor.constraint(equalTo: otherView.widthAnchor)] }
+    activateConstraints { [$0.widthAnchor.constraint(equalTo: otherView.widthAnchor)] }
 }
