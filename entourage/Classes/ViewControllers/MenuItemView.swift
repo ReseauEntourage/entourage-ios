@@ -6,28 +6,51 @@ import UIKit
 
 final class MenuItemView: UIView {
 
-    var font: UIFont {
-        get { label.font }
-        set { label.font = newValue }
+    static func header(title: String) -> MenuItemView {
+        MenuItemView(withSeparator: false)
+            |> set(\MenuItemView.font, UIFont.SFUIText(size: 15, type: .medium))
+            <> set(\MenuItemView.textColor, UIColor.appGreyishBrown())
+            <> set(\MenuItemView.text, title.uppercased())
     }
 
-    var textColor: UIColor {
-        get { label.textColor }
-        set { label.textColor = newValue }
+    static func secondary(title: String, addSeparator: Bool) -> MenuItemView {
+        MenuItemView(withSeparator: addSeparator)
+            |> Style.View.whiteBackground()
+            <> set(\MenuItemView.font, UIFont.SFUIText(size: 15, type: .light))
+            <> set(\MenuItemView.textColor, UIColor.appGreyishBrown())
+            <> set(\MenuItemView.text, title)
     }
 
-    var text: String? {
-        get { label.text }
-        set { label.text = newValue }
+    static func main(title: String) -> MenuItemView {
+        MenuItemView(withSeparator: false)
+            |> Style.View.orangeBackground()
+            <> set(\MenuItemView.font, UIFont.SFUIText(size: 15, type: .light))
+            <> set(\MenuItemView.textColor, UIColor.white)
+            <> set(\MenuItemView.text, title)
     }
-
-    private let label = UILabel()
 
     private enum Constants {
         static let height: CGFloat = 45
         static let separatorHeight: CGFloat = 1
         static let padding: CGFloat = 14
     }
+
+    private var font: UIFont {
+        get { label.font }
+        set { label.font = newValue }
+    }
+
+    private var textColor: UIColor {
+        get { label.textColor }
+        set { label.textColor = newValue }
+    }
+
+    private var text: String? {
+        get { label.text }
+        set { label.text = newValue }
+    }
+
+    private let label = UILabel()
 
     convenience init(withSeparator: Bool) {
         self.init(frame: .zero)
