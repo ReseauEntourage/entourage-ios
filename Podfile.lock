@@ -143,6 +143,7 @@ PODS:
   - SimpleKeychain (0.11.1)
   - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
+  - SwiftLint (0.39.2)
   - SWRevealViewController (2.3.0)
   - TTTAttributedLabel (2.0.0)
 
@@ -167,6 +168,7 @@ DEPENDENCIES:
   - SimpleKeychain (~> 0.7)
   - SnapKit (~> 4.0.0)
   - SVProgressHUD
+  - SwiftLint
   - SWRevealViewController (= 2.3.0)
   - TTTAttributedLabel
 
@@ -208,6 +210,7 @@ SPEC REPOS:
     - SimpleKeychain
     - SnapKit
     - SVProgressHUD
+    - SwiftLint
     - SWRevealViewController
     - TTTAttributedLabel
 
@@ -248,9 +251,10 @@ SPEC CHECKSUMS:
   SimpleKeychain: 0c657949c7afff92337d2ff64052d5eb5c53823e
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 1cd6cf74ec2e379ab6a76d060bfe087f29adcc08
+PODFILE CHECKSUM: 9eb43e7def7da00257d7e6714eba2b9ceab155b0
 
 COCOAPODS: 1.9.3

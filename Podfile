@@ -29,6 +29,7 @@ def sharedPods
     pod 'GoogleMaps'
     pod 'SDWebImage'
     pod 'TTTAttributedLabel'
+    pod 'SwiftLint'
 end
 
 target "entourage" do

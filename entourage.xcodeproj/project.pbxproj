@@ -3815,6 +3815,7 @@
 				D65701111EC1CD2C00B90327 /* Bump version */,
 				37DC2582242A820000A2024F /* Set URL Scheme */,
 				6B92CA9A19A7461C004E8C9B /* Sources */,
+				FF33A19C2496997E00E49C4A /* SwiftLint */,
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
 				6B92CA9C19A7461C004E8C9B /* Resources */,
 				34A63FBA43859415DF1BB474 /* [CP] Embed Pods Frameworks */,
@@ -4487,6 +4488,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Scripts/count_commit.sh entourage/entourage-Info.plist\n";
+		};
+		FF33A19C2496997E00E49C4A /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Scripts/SwiftLint.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
