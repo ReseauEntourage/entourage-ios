@@ -276,7 +276,7 @@
         dispatch_async(dispatch_get_main_queue(), ^() {
             if (status == UNAuthorizationStatusNotDetermined) {
                 [OTAppState showPopNotification];
-            } else {
+            } else if (completionHandler) {
                 completionHandler();
             }
         });
