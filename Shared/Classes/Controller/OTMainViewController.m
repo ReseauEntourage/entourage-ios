@@ -483,6 +483,13 @@
     [self configureNavigationBar];
 }
 
+- (void)switchToEvents {
+    dispatch_async(dispatch_get_main_queue(), ^() {
+      [self.tableView showEventsOnlyAction];
+      [self configureNavigationBar];
+    });
+}
+
 - (void)switchToGuide {
     [self.tableView switchToGuide];
     [self.tableView updateItems:self.pois];

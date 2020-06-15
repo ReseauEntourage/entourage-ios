@@ -54,6 +54,7 @@
 - (void)setNoFeeds;
 - (void)switchToGuide;
 - (void)switchToFeeds;
+- (void)showEventsOnlyAction;
 
 - (UIView*)headerViewWithMap:(MKMapView*)mapView
                    mapHeight:(CGFloat)mapHeight

@@ -36,5 +36,6 @@
 
 - (void)switchToGuide;
 - (IBAction)showFilters;
+- (void)switchToEvents;
 
 @end
