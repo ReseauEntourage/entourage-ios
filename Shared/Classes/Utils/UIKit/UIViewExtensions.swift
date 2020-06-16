@@ -5,12 +5,12 @@
 import UIKit
 
 func createView(withHeight height: CGFloat) -> UIView {
-    UIView() |> constraintHeight(height)
+    applyAndReturn(
+        UIView(),
+        constraintHeight(height)
+    )
 }
 
-func addInSuperview<V: UIView>(_ superview: UIView) -> (V) -> V {
-    { view in
-        superview.addSubview(view)
-        return view
-    }
+func addInSuperview<V: UIView>(_ superview: UIView) -> (V) -> Void {
+    { superview.addSubview($0) } // swiftlint:disable:this opening_brace
 }

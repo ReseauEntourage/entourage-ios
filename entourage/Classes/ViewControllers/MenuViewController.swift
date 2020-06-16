@@ -32,12 +32,16 @@ final class MenuViewController: UIViewController {
     private let stackView = UIStackView()
 
     override func loadView() {
-        let view = UIView()
-            |> Style.View.greyBackground()
+        let view = applyAndReturn(
+            UIView(),
+            Style.View.greyBackground()
+        )
 
-        let scrollView = UIScrollView()
-            |> addInSuperview(view)
-            <> pinEdgesToSuperview()
+        let scrollView = applyAndReturn(
+            UIScrollView(),
+            addInSuperview(view)
+                <> pinEdgesToSuperview()
+        )
 
         stackView
             |> addInSuperview(scrollView)

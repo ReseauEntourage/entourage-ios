@@ -10,6 +10,15 @@ struct Edge {
 
     @objc enum Relation: Int {
         case equal, lessThanOrEqual, greaterThanOrEqual
+
+        // swiftlint:disable:next operator_whitespace
+        prefix static func !(relation: Relation) -> Relation {
+            switch relation {
+            case .equal: return .equal
+            case .lessThanOrEqual: return .greaterThanOrEqual
+            case .greaterThanOrEqual: return .lessThanOrEqual
+            }
+        }
     }
 
     static func top(_ constant: CGFloat = 0, relation: Relation = .equal) -> Edge {
@@ -39,7 +48,8 @@ extension Array where Element == Edge {
         [.top(constant), .leading(constant), .bottom(-constant), .trailing(-constant)]
     }
 
-    static func horizontal(_ constant: CGFloat = 0) -> [Edge] {
-        [.leading(constant), .trailing(-constant)]
+    static func horizontal(_ constant: CGFloat = 0, relation: Edge.Relation = .equal) -> [Edge] {
+        [.leading(constant, relation: relation),
+         .trailing(-constant, relation: !relation)]
     }
 }

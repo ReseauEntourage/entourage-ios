@@ -8,15 +8,15 @@ enum Style {
 
     enum View {
 
-        static func greyBackground<V: UIView>() -> (V) -> V {
+        static func greyBackground<V: UIView>() -> (V) -> Void {
             set(\V.backgroundColor, UIColor.appPaleGrey())
         }
 
-        static func whiteBackground<V: UIView>() -> (V) -> V {
+        static func whiteBackground<V: UIView>() -> (V) -> Void {
             set(\V.backgroundColor, UIColor.white)
         }
 
-        static func orangeBackground<V: UIView>() -> (V) -> V {
+        static func orangeBackground<V: UIView>() -> (V) -> Void {
             set(\V.backgroundColor, UIColor.appOrange())
         }
     }

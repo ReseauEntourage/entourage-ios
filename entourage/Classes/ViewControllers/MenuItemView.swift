@@ -7,26 +7,29 @@ import UIKit
 final class MenuItemView: UIView {
 
     static func header(title: String) -> MenuItemView {
-        MenuItemView(withSeparator: false)
-            |> set(\MenuItemView.label.font, UIFont.SFUIText(size: 15, type: .medium))
-            <> set(\MenuItemView.label.textColor, UIColor.appGreyishBrown())
-            <> set(\MenuItemView.label.text, title.uppercased())
+        applyAndReturn(
+            MenuItemView(withSeparator: false),
+            set(\MenuItemView.label.font, UIFont.SFUIText(size: 15, type: .medium))
+                <> set(\MenuItemView.label.textColor, UIColor.appGreyishBrown())
+                <> set(\MenuItemView.label.text, title.uppercased()))
     }
 
     static func secondary(title: String, addSeparator: Bool) -> MenuItemView {
-        MenuItemView(withSeparator: addSeparator)
-            |> Style.View.whiteBackground()
-            <> set(\MenuItemView.label.font, UIFont.SFUIText(size: 15, type: .light))
-            <> set(\MenuItemView.label.textColor, UIColor.appGreyishBrown())
-            <> set(\MenuItemView.label.text, title)
+        applyAndReturn(
+            MenuItemView(withSeparator: addSeparator),
+            Style.View.whiteBackground()
+                <> set(\MenuItemView.label.font, UIFont.SFUIText(size: 15, type: .light))
+                <> set(\MenuItemView.label.textColor, UIColor.appGreyishBrown())
+                <> set(\MenuItemView.label.text, title))
     }
 
     static func main(title: String) -> MenuItemView {
-        MenuItemView(withSeparator: false)
-            |> Style.View.orangeBackground()
-            <> set(\MenuItemView.label.font, UIFont.SFUIText(size: 15, type: .light))
-            <> set(\MenuItemView.label.textColor, UIColor.white)
-            <> set(\MenuItemView.label.text, title)
+        applyAndReturn(
+            MenuItemView(withSeparator: false),
+            Style.View.orangeBackground()
+                <> set(\MenuItemView.label.font, UIFont.SFUIText(size: 15, type: .light))
+                <> set(\MenuItemView.label.textColor, UIColor.white)
+                <> set(\MenuItemView.label.text, title))
     }
 
     private enum Constants {

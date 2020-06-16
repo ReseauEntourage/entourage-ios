@@ -4,47 +4,75 @@
 
 import UIKit
 
-func prepareForAutolayout<V: UIView>(_ view: V) -> V {
+func prepareForAutolayout<V: UIView>(_ view: V) {
     view.translatesAutoresizingMaskIntoConstraints = false
-    return view
 }
 
-func activateConstraints<V: UIView>(_ createConstraints: @escaping (V) -> [NSLayoutConstraint]) -> (V) -> V {
+func activateConstraints<V: UIView>(_ createConstraints: @escaping (V) -> [NSLayoutConstraint]) -> (V) -> Void {
     prepareForAutolayout
-        <> { view in
-        (createConstraints(view) |> NSLayoutConstraint.activate)
-        return view
+        <> { (createConstraints($0) |> NSLayoutConstraint.activate)
     }
 }
 
-func pinEdges<V: UIView>(_ edges: [Edge] = .all(), to otherView: UIView) -> (V) -> V {
+func pinEdge<V: UIView>(_ edge: Edge, to otherView: UIView) -> (V) -> Void {
+    pinEdges([edge], to: otherView)
+}
+
+func pinEdgeToSuperview<V: UIView>(_ edge: Edge) -> (V) -> Void {
+    pinEdgesToSuperview([edge])
+}
+
+func pinEdges<V: UIView>(_ edges: [Edge] = .all(), to otherView: UIView) -> (V) -> Void {
     createConstraints(to: otherView, with: edges) |> activateConstraints
 }
 
-func pinEdgesToSuperview<V: UIView>(_ edges: [Edge] = .all()) -> (V) -> V {
+func pinEdgesToSuperview<V: UIView>(_ edges: [Edge] = .all()) -> (V) -> Void {
     { view in // swiftlint:disable:this opening_brace
         guard let superview = view.superview else {
-            return view
+            return
         }
         return view |> pinEdges(edges, to: superview)
     }
 }
 
-func centerY<V: UIView>(to otherView: UIView) -> (V) -> V {
+func centerX<V: UIView>(to otherView: UIView) -> (V) -> Void {
+    activateConstraints { [$0.centerXAnchor.constraint(equalTo: otherView.centerXAnchor)] }
+}
+
+func centerY<V: UIView>(to otherView: UIView) -> (V) -> Void {
     activateConstraints { [$0.centerYAnchor.constraint(equalTo: otherView.centerYAnchor)] }
 }
 
-func centerYInSuperview<V: UIView>(_ view: V) -> V {
+func centerXInSuperview<V: UIView>(_ view: V) {
     guard let superview = view.superview else {
-        return view
+        return
+    }
+    return view |> centerX(to: superview)
+}
+
+func centerYInSuperview<V: UIView>(_ view: V) {
+    guard let superview = view.superview else {
+        return
     }
     return view |> centerY(to: superview)
 }
 
-func constraintHeight<V: UIView>(_ constant: CGFloat) -> (V) -> V {
+func constraintHeight<V: UIView>(_ constant: CGFloat) -> (V) -> Void {
     activateConstraints { [$0.heightAnchor.constraint(equalToConstant: constant)] }
 }
 
-func constraintWidth<V: UIView>(toWidthOf otherView: UIView) -> (V) -> V {
+func constraintWidth<V: UIView>(_ constant: CGFloat) -> (V) -> Void {
+    activateConstraints { [$0.widthAnchor.constraint(equalToConstant: constant)] }
+}
+
+func constraintSize<V: UIView>(width: CGFloat, height: CGFloat) -> (V) -> Void {
+    constraintWidth(width) <> constraintHeight(height)
+}
+
+func constraintWidth<V: UIView>(toWidthOf otherView: UIView) -> (V) -> Void {
     activateConstraints { [$0.widthAnchor.constraint(equalTo: otherView.widthAnchor)] }
+}
+
+func pinTopToBottom<V: UIView>(of otherView: UIView) -> (V) -> Void {
+    activateConstraints { [$0.topAnchor.constraint(equalTo: otherView.bottomAnchor)] }
 }
