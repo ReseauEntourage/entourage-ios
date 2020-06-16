@@ -977,6 +977,7 @@
 		CBC0A169EC0F0B12391ED0B6 /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A12D5CF3F61B54F5AB6B /* MenuItemView.swift */; };
 		CBC0A1B24D309630321CD04E /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A12D5CF3F61B54F5AB6B /* MenuItemView.swift */; };
 		CBC0A1B979528D5254545E08 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */; };
+		CBC0A1CDA4E15A366818ECEE /* MenuProfileItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A7001743F5C92E24C112 /* MenuProfileItemView.swift */; };
 		CBC0A32A7CE824A1F66B0B13 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AF12B8FA90272380B384 /* UIViewExtensions.swift */; };
 		CBC0A3A074881010D4F1C167 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A1F46E4D0CE9AF782376 /* Functions.swift */; };
 		CBC0A3ADCCB9C561CE0EFE7C /* Edge+NSLayoutConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A800B8DB65F8D51DC695 /* Edge+NSLayoutConstraints.swift */; };
@@ -986,6 +987,7 @@
 		CBC0AB3B13D3C9D49BE3A62E /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A1AE6042F4E68551F9D3 /* Style.swift */; };
 		CBC0ABC53C2BB2156D4EFB55 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AF12B8FA90272380B384 /* UIViewExtensions.swift */; };
 		CBC0ABC996CD7825957FB571 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AD7B9CC56C6D0DA24D36 /* Operators.swift */; };
+		CBC0AC9EDF9666BB5C04D4E3 /* MenuProfileItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A7001743F5C92E24C112 /* MenuProfileItemView.swift */; };
 		CBC0AD30FC02D722BBDF5B91 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AA27D8A8DD4212584226 /* Edge.swift */; };
 		CBC0AD4CD65FD98EC5AF5FD6 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0AA6F131A0E7EC1688FFD /* UIView+AutoLayout.swift */; };
 		CBC0ADB4808CCF19328042A9 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A1F46E4D0CE9AF782376 /* Functions.swift */; };
@@ -1923,6 +1925,7 @@
 		CBC0A12D5CF3F61B54F5AB6B /* MenuItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		CBC0A1AE6042F4E68551F9D3 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		CBC0A1F46E4D0CE9AF782376 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		CBC0A7001743F5C92E24C112 /* MenuProfileItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuProfileItemView.swift; sourceTree = "<group>"; };
 		CBC0A800B8DB65F8D51DC695 /* Edge+NSLayoutConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Edge+NSLayoutConstraints.swift"; sourceTree = "<group>"; };
 		CBC0AA27D8A8DD4212584226 /* Edge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		CBC0AA6F131A0E7EC1688FFD /* UIView+AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AutoLayout.swift"; sourceTree = "<group>"; };
@@ -3779,6 +3782,7 @@
 			children = (
 				CBC0AF5F146511E44B18EB51 /* MenuViewController.swift */,
 				CBC0A12D5CF3F61B54F5AB6B /* MenuItemView.swift */,
+				CBC0A7001743F5C92E24C112 /* MenuProfileItemView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -4937,6 +4941,7 @@
 				CBC0AEE6EEBF522F33DA865E /* Edge+NSLayoutConstraints.swift in Sources */,
 				CBC0A1B24D309630321CD04E /* MenuItemView.swift in Sources */,
 				CBC0AB3B13D3C9D49BE3A62E /* Style.swift in Sources */,
+				CBC0A1CDA4E15A366818ECEE /* MenuProfileItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5333,6 +5338,7 @@
 				CBC0A92BAB6CB2962DA4ECBB /* MenuViewController.swift in Sources */,
 				CBC0A169EC0F0B12391ED0B6 /* MenuItemView.swift in Sources */,
 				CBC0A561B7E981C25A4EBE88 /* Style.swift in Sources */,
+				CBC0AC9EDF9666BB5C04D4E3 /* MenuProfileItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

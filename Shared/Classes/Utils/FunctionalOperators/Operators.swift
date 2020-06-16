@@ -2,6 +2,8 @@
 // Copyright (c) 2020 Entourage. All rights reserved.
 //
 
+// swiftlint:disable identifier_name opening_brace
+
 precedencegroup ForwardApplication {
     associativity: left
     higherThan: AssignmentPrecedence
@@ -9,7 +11,6 @@ precedencegroup ForwardApplication {
 
 infix operator |>: ForwardApplication
 
-@discardableResult
 func |><A, B>(a: A, f: (A) -> B) -> B {
     f(a)
 }
@@ -33,6 +34,10 @@ precedencegroup SingleTypeComposition {
 
 infix operator <>: SingleTypeComposition
 
-func <><A: AnyObject>(f: @escaping (A) -> A, g: @escaping (A) -> A) -> (A) -> A {
-    f >>> g
+func <><A: AnyObject>(f: @escaping (A) -> Void, g: @escaping (A) -> Void) -> (A) -> Void {
+    {
+        f($0)
+        g($0)
+    }
 }
+// swiftlint:enable identifier_name opening_brace

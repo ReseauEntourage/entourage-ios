@@ -7,6 +7,7 @@ import UIKit
 final class MenuViewController: UIViewController {
 
     enum Item {
+        case profile(_ name: String)
         case spacing(_ value: CGFloat)
         case header(_ title: String)
         case secondary(_ title: String, addSeparator: Bool = false)
@@ -14,7 +15,7 @@ final class MenuViewController: UIViewController {
     }
 
     private let items: [Item] = [
-        .spacing(200),
+        .profile("AMS"),
         .header("👋  FAIRE LE PREMIER PAS "),
         .secondary("Notre guide pour oser la rencontre", addSeparator: true),
         .secondary("Idées d'actions dans l'appli"),
@@ -60,6 +61,8 @@ final class MenuViewController: UIViewController {
 
     private func convertItem(_ item: Item) -> UIView {
         switch item {
+        case .profile(let name):
+            return MenuProfileItemView(name: name)
         case .spacing(let value):
             return createView(withHeight: value)
         case .header(let title):
