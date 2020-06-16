@@ -1,0 +1,6 @@
+strings:
+  inputs: Shared/Resources
+  filter: .+\.strings$
+  outputs:
+    - templateName: structured-swift4
+      output: Shared/Resources/Generated/strings.swift

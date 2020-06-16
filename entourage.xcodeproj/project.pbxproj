@@ -994,6 +994,8 @@
 		CBC0AEE6EEBF522F33DA865E /* Edge+NSLayoutConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC0A800B8DB65F8D51DC695 /* Edge+NSLayoutConstraints.swift */; };
 		DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7E197ECB4BF7DC5B2EDFAC /* Pods_entourage.framework */; };
 		E26723B7A7CE9F68D2D57A75 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */; };
+		FF33A1A22499587D00E49C4A /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF33A1A12499587C00E49C4A /* strings.swift */; };
+		FF33A1A32499587D00E49C4A /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF33A1A12499587C00E49C4A /* strings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1935,6 +1937,7 @@
 		DA2BFB8497BD1865E650B075 /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		E869ABEB0224DAD93339CB1B /* Pods-entourageTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.beta.xcconfig"; sourceTree = "<group>"; };
 		EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF33A1A12499587C00E49C4A /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2172,6 +2175,7 @@
 		A202E79E2085CFC20058F32C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FF33A1A02499587C00E49C4A /* Generated */,
 				A21D64A42085E8B400EF8E0E /* gpx */,
 				A202E79F2085CFC20058F32C /* categories.json */,
 				A202E7A02085CFC20058F32C /* Design */,
@@ -3787,6 +3791,14 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		FF33A1A02499587C00E49C4A /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				FF33A1A12499587C00E49C4A /* strings.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3818,6 +3830,7 @@
 				C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */,
 				D65701111EC1CD2C00B90327 /* Bump version */,
 				37DC2582242A820000A2024F /* Set URL Scheme */,
+				FF33A19D249956DD00E49C4A /* SwiftGen */,
 				6B92CA9A19A7461C004E8C9B /* Sources */,
 				FF33A19C2496997E00E49C4A /* SwiftLint */,
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
@@ -3842,12 +3855,14 @@
 				A296B75120871CFC00F6AFBD /* [CP] Check Pods Manifest.lock */,
 				A296B75220871CFC00F6AFBD /* Bump version */,
 				37DC2583242A837300A2024F /* Set URL Scheme */,
+				FF33A19E2499570D00E49C4A /* SwiftGen */,
 				A296B75320871CFC00F6AFBD /* Sources */,
 				A296B89120871CFC00F6AFBD /* Frameworks */,
 				A296B89B20871CFC00F6AFBD /* Resources */,
 				A296B8DC20871CFC00F6AFBD /* [CP] Embed Pods Frameworks */,
 				A296B8DE20871CFC00F6AFBD /* Fabric */,
 				05D9293C4BFB6D73AF5957AD /* [CP] Copy Pods Resources */,
+				FF33A19F2499572100E49C4A /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -4511,6 +4526,60 @@
 			shellPath = /bin/sh;
 			shellScript = "./Scripts/SwiftLint.sh\n";
 		};
+		FF33A19D249956DD00E49C4A /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n./Pods/SwiftGen/bin/swiftgen\n";
+		};
+		FF33A19E2499570D00E49C4A /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n./Pods/SwiftGen/bin/swiftgen\n";
+		};
+		FF33A19F2499572100E49C4A /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n./Scripts/SwiftLint.sh\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -4841,6 +4910,7 @@
 				A202EBB12085D2C80058F32C /* OTFeedItemsTimeframeCell.m in Sources */,
 				A202EB352085D2C80058F32C /* OTStatusCell.m in Sources */,
 				A202EAC92085D2C70058F32C /* OTFeedItemFilter.m in Sources */,
+				FF33A1A22499587D00E49C4A /* strings.swift in Sources */,
 				A202EC252085D2C80058F32C /* UIBarButtonItem+factory.m in Sources */,
 				A202EBB52085D2C80058F32C /* OTAboutViewController.m in Sources */,
 				A202EB032085D2C70058F32C /* OTAssociation.m in Sources */,
@@ -5328,6 +5398,7 @@
 				A296B88C20871CFC00F6AFBD /* OTMyMeetingsViewController.m in Sources */,
 				A296B88D20871CFC00F6AFBD /* OTStatusChangedBehavior.m in Sources */,
 				A296B88E20871CFC00F6AFBD /* OTUserEditViewController.m in Sources */,
+				FF33A1A32499587D00E49C4A /* strings.swift in Sources */,
 				A296B89020871CFC00F6AFBD /* UIImageView+entourage.m in Sources */,
 				CBC0A1B979528D5254545E08 /* Operators.swift in Sources */,
 				CBC0ADB4808CCF19328042A9 /* Functions.swift in Sources */,

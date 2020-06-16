@@ -30,6 +30,7 @@ def sharedPods
     pod 'SDWebImage'
     pod 'TTTAttributedLabel'
     pod 'SwiftLint'
+    pod 'SwiftGen', '~> 6.0'
 end
 
 target "entourage" do
