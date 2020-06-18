@@ -31,6 +31,7 @@ NSString *const kKeyRoles = @"roles";
 NSString *const kKeyAnonymous = @"anonymous";
 NSString *const kMemberships = @"memberships";
 NSString *const kAddress = @"address";
+NSString *const kAddress2 = @"address_2";
 NSString *const kFirebaseProperties = @"firebase_properties";
 
 NSString *const kCoordinatorUserTag = @"coordinator";
@@ -83,7 +84,11 @@ NSString *const kGoal = @"goal";
         }
         
         if ([[dictionary allKeys] containsObject:kAddress]) {
-            _address = [[OTAddress alloc] initWithDictionary:[dictionary objectForKey:kAddress]];
+            _addressPrimary = [[OTAddress alloc] initWithDictionary:[dictionary objectForKey:kAddress]];
+        }
+        
+        if ([[dictionary allKeys] containsObject:kAddress2]) {
+            _addressSecondary = [[OTAddress alloc] initWithDictionary:[dictionary objectForKey:kAddress2]];
         }
         
         NSArray *membershipArray = [dictionary objectForKey:kMemberships];
@@ -148,9 +153,10 @@ NSString *const kGoal = @"goal";
     [encoder encodeObject:self.roles forKey:kKeyRoles];
     [encoder encodeBool:self.anonymous forKey:kKeyAnonymous];
     [encoder encodeObject:self.memberships forKey:kMemberships];
-    [encoder encodeObject:self.address forKey:kAddress];
+    [encoder encodeObject:self.addressPrimary forKey:kAddress];
     [encoder encodeObject:self.firebaseProperties forKey:kFirebaseProperties];
     [encoder encodeObject:self.goal forKey:kGoal];
+    [encoder encodeObject:self.addressSecondary forKey:kAddress2];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -177,9 +183,10 @@ NSString *const kGoal = @"goal";
         self.roles = [decoder decodeObjectForKey:kKeyRoles];
         self.anonymous = [decoder decodeBoolForKey:kKeyAnonymous];
         self.memberships = [decoder decodeObjectForKey:kMemberships];
-        self.address = [decoder decodeObjectForKey:kAddress];
+        self.addressPrimary = [decoder decodeObjectForKey:kAddress];
         self.firebaseProperties = [self sanitizeFirebaseProperties:[decoder decodeObjectForKey:kFirebaseProperties]];
         self.goal = [decoder decodeObjectForKey:kGoal];
+        self.addressSecondary = [decoder decodeObjectForKey:kAddress2];
     }
     return self;
 }
@@ -187,7 +194,7 @@ NSString *const kGoal = @"goal";
 #pragma mark - Helper functions
 
 - (BOOL)hasActionZoneDefined {
-    return self.address != nil;
+    return self.addressPrimary != nil;
 }
 
 - (BOOL)isPro
@@ -246,7 +253,7 @@ NSString *const kGoal = @"goal";
 
 - (NSString *)formattedActionZoneAddress {
     if ([self hasActionZoneDefined]) {
-        NSString *descText = [NSString stringWithFormat:@"Vous recevez les notifications pour les actions autour de : %@", self.address.displayAddress];
+        NSString *descText = [NSString stringWithFormat:@"Vous recevez les notifications pour les actions autour de : %@", self.addressPrimary.displayAddress];
         return descText;
     }
     

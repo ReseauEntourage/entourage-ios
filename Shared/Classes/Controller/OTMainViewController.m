@@ -540,7 +540,7 @@
     CLLocationCoordinate2D mapCenter;
 
     if(currentUser.hasActionZoneDefined)
-        mapCenter = currentUser.address.location.coordinate;
+        mapCenter = currentUser.addressPrimary.location.coordinate;
     else if([OTLocationManager sharedInstance].currentLocation)
         mapCenter = [OTLocationManager sharedInstance].currentLocation.coordinate;
     else

@@ -153,7 +153,7 @@
 
 - (CLLocation*)defaultLocationForNewActions {
     if ([[NSUserDefaults standardUserDefaults].currentUser hasActionZoneDefined]) {
-        return [NSUserDefaults standardUserDefaults].currentUser.address.location;
+        return [NSUserDefaults standardUserDefaults].currentUser.addressPrimary.location;
     }
     
     return  self.currentLocation;

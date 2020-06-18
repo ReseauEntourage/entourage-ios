@@ -132,6 +132,7 @@ typedef NS_ENUM(NSInteger) {
     UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
     OTOnboardingPlaceViewController *vc = (OTOnboardingPlaceViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_place"];
     vc.isFromProfile = YES;
+    vc.isSecondaryAddress = NO;
     [self.navigationController showViewController:vc sender:nil];
 }
 

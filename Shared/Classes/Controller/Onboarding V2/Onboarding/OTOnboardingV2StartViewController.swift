@@ -196,17 +196,27 @@ class OTOnboardingV2StartViewController: UIViewController {
         OTLogger.logEvent(Action_Onboarding_Action_Zone_Submit)
         if let _place = temporaryGooglePlace {
             SVProgressHUD.show()
-            OTAuthService.updateUserAddress(withPlaceId: _place.placeID) { (error) in
+            OTAuthService.updateUserAddress(withPlaceId: _place.placeID, isSecondaryAddress: false) { (error) in
                 SVProgressHUD.dismiss()
-                self.goNextStep()
+                if self.userTypeSelected == .none {
+                    self.goNextStep()
+                }
+                else {
+                    self.goNextStepSdfNeighbour()
+                }
             }
         }
         else if let _lat = self.temporaryLocation?.coordinate.latitude, let _long = self.temporaryLocation?.coordinate.longitude {
             SVProgressHUD.show()
             let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
-            OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long)) { (error) in
+            OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long), isSecondaryAddress: false) { (error) in
                 SVProgressHUD.dismiss()
-                self.goNextStep()
+                if self.userTypeSelected == .none {
+                    self.goNextStep()
+                }
+                else {
+                    self.goNextStepSdfNeighbour()
+                }
             }
         }
     }
@@ -339,23 +349,21 @@ class OTOnboardingV2StartViewController: UIViewController {
     
     func update2ndAddress() {
         OTLogger.logEvent(Action_Onboarding_Action_Zone2_Submit)
-        self.goNextStepSdfNeighbour()
-        //TODO: a remettre avec le bon WS
-        //        if let _place = temporary2ndGooglePlace {
-        //            SVProgressHUD.show()
-        //            OTAuthService.updateUserAddress(withPlaceId: _place.placeID) { (error) in
-        //                SVProgressHUD.dismiss()
-        //                self.goNextStepSdfNeighbour()
-        //            }
-        //        }
-        //        else if let _lat = self.temporary2ndLocation?.coordinate.latitude, let _long = self.temporary2ndLocation?.coordinate.longitude {
-        //            SVProgressHUD.show()
-        //            let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
-        //            OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long)) { (error) in
-        //                SVProgressHUD.dismiss()
-        //                self.goNextStepSdfNeighbour()
-        //            }
-        //        }
+        if let _place = temporary2ndGooglePlace {
+            SVProgressHUD.show()
+            OTAuthService.updateUserAddress(withPlaceId: _place.placeID, isSecondaryAddress: true) { (error) in
+                SVProgressHUD.dismiss()
+                self.goNextStepSdfNeighbour()
+            }
+        }
+        else if let _lat = self.temporary2ndLocation?.coordinate.latitude, let _long = self.temporary2ndLocation?.coordinate.longitude {
+            SVProgressHUD.show()
+            let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
+            OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long), isSecondaryAddress: true) { (error) in
+                SVProgressHUD.dismiss()
+                self.goNextStepSdfNeighbour()
+            }
+        }
     }
     
     func updateAlone() {
@@ -475,6 +483,10 @@ class OTOnboardingV2StartViewController: UIViewController {
                         updateAlone()
                         return
                     }
+                    if currentPositionAlone == .none {
+                        sendAddAddress()
+                        return
+                    }
                     currentPositionAlone = ControllerAloneType(rawValue: currentPositionAlone.rawValue + 1)!
                     moveToTunnelAlone()
                     return
@@ -486,6 +498,10 @@ class OTOnboardingV2StartViewController: UIViewController {
                     }
                     if currentPositionNeighbour == .place {
                         update2ndAddress()
+                        return
+                    }
+                    if currentPositionNeighbour == .none {
+                        sendAddAddress()
                         return
                     }
                     currentPositionNeighbour = ControllerNeighbourType(rawValue: currentPositionNeighbour.rawValue + 1)!
@@ -678,6 +694,7 @@ extension OTOnboardingV2StartViewController {
                 vc.currentLocation = self.temporaryLocation
                 vc.selectedPlace = self.temporaryGooglePlace
                 vc.isSdf = userTypeSelected == .alone ? true : false
+                vc.isSecondaryAddress = false
                 add(asChildViewController: vc)
                 
                 currentPositionAlone = .none
@@ -719,7 +736,7 @@ extension OTOnboardingV2StartViewController {
                 vc.delegate = self
                 vc.currentLocation = self.temporary2ndLocation
                 vc.selectedPlace = self.temporary2ndGooglePlace
-                vc.is2ndAddress = true
+                vc.isSecondaryAddress = true
                 vc.isSdf = true
                 add(asChildViewController: vc)
                 ui_bt_pass.isHidden = false
@@ -753,7 +770,7 @@ extension OTOnboardingV2StartViewController {
                 vc.delegate = self
                 vc.currentLocation = self.temporary2ndLocation
                 vc.selectedPlace = self.temporary2ndGooglePlace
-                vc.is2ndAddress = true
+                vc.isSecondaryAddress = true
                 vc.isSdf = false
                 add(asChildViewController: vc)
                 ui_bt_pass.isHidden = false

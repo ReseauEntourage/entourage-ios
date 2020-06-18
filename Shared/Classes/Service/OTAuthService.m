@@ -145,7 +145,7 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
                      user.firebaseProperties = currentUser.firebaseProperties;
                  }
                  if ([responseUser[@"placeholders"] containsObject:@"address"]) {
-                     user.address = currentUser.address;
+                     user.addressPrimary = currentUser.addressPrimary;
                  }
              }
 
@@ -275,10 +275,11 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
      }];
 }
 
-+ (void)updateUserAddressWithPlaceId:(NSString *)placeId
++ (void)updateUserAddressWithPlaceId:(NSString *)placeId isSecondaryAddress:(BOOL) isSecondary
                                completion:(void (^)(NSError *))completion
 {
-    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_ADDRESS, TOKEN];
+    NSString *_url = isSecondary ? API_URL_UPDATE_ADDRESS_SECONDARY : API_URL_UPDATE_ADDRESS_PRIMARY;
+    NSString *url = [NSString stringWithFormat:_url, TOKEN];
 
     NSMutableDictionary *address = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
@@ -294,7 +295,12 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
                                                 OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
                                                 NSDictionary *responseFirebaseProperties = responseDict[@"firebase_properties"];
                                                 OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-                                                user.address = address;
+                                                if (!isSecondary) {
+                                                     user.addressPrimary = address;
+                                                }
+                                                else {
+                                                    user.addressSecondary = address;
+                                                }
                                                 user.firebaseProperties = responseFirebaseProperties;
                                                 [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                                 
@@ -311,8 +317,10 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
 }
 
 + (void)updateUserAddressWithName:(NSString *)addressName andLatitude:(NSNumber *) latitude
-                     andLongitude:(NSNumber *) longitude completion:(void (^)(NSError *))completion {
-    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_ADDRESS, TOKEN];
+                     andLongitude:(NSNumber *) longitude isSecondaryAddress:(BOOL) isSecondary completion:(void (^)(NSError *))completion {
+    
+    NSString *_url = isSecondary ? API_URL_UPDATE_ADDRESS_SECONDARY : API_URL_UPDATE_ADDRESS_PRIMARY;
+    NSString *url = [NSString stringWithFormat:_url, TOKEN];
 
     NSMutableDictionary *address = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
@@ -330,7 +338,12 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
                                                 OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
                                                 NSDictionary *responseFirebaseProperties = responseDict[@"firebase_properties"];
                                                 OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-                                                user.address = address;
+                                                if (!isSecondary) {
+                                                    user.addressPrimary = address;
+                                                }
+                                                else {
+                                                    user.addressSecondary = address;
+                                                }
                                                 user.firebaseProperties = responseFirebaseProperties;
                                                 [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
                                                 

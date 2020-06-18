@@ -83,7 +83,8 @@
 #define API_URL_UPDATE_USER @"%@/%@.json?token=%@"
 #define API_URL_DELETE_ACCOUNT @"users/me?token=%@"
 #define API_URL_REGENERATE_CODE @"%@/%@/%@.json"
-#define API_URL_UPDATE_ADDRESS @"users/me/address?token=%@"
+#define API_URL_UPDATE_ADDRESS_PRIMARY @"users/me/addresses/1?token=%@"
+#define API_URL_UPDATE_ADDRESS_SECONDARY @"users/me/addresses/2?token=%@"
 
 //Upload Photo
 #define API_URL_USER_PREPARE_AVATAR_UPLOAD @"users/me/presigned_avatar_upload.json"
