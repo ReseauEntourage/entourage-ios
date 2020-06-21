@@ -1,6 +1,10 @@
 strings:
-  inputs: Shared/Resources
-  filter: .+\.strings$
+  inputs: Shared/Resources/Localizable.strings
   outputs:
-    - templateName: structured-swift4
+    - templateName: structured-swift5
       output: Shared/Resources/Generated/strings.swift
+xcassets:
+  inputs: Shared/Resources/SharedImages.xcassets
+  outputs:
+    - templateName: swift5
+      output: Shared/Resources/Generated/assets.swift

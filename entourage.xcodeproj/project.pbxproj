@@ -996,6 +996,8 @@
 		E26723B7A7CE9F68D2D57A75 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */; };
 		FF33A1A22499587D00E49C4A /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF33A1A12499587C00E49C4A /* strings.swift */; };
 		FF33A1A32499587D00E49C4A /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF33A1A12499587C00E49C4A /* strings.swift */; };
+		FF3CC3C5249FC185002F1C74 /* assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3CC3C4249FC185002F1C74 /* assets.swift */; };
+		FF3CC3C6249FC185002F1C74 /* assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3CC3C4249FC185002F1C74 /* assets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1938,6 +1940,7 @@
 		E869ABEB0224DAD93339CB1B /* Pods-entourageTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.beta.xcconfig"; sourceTree = "<group>"; };
 		EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF33A1A12499587C00E49C4A /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
+		FF3CC3C4249FC185002F1C74 /* assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3794,6 +3797,7 @@
 		FF33A1A02499587C00E49C4A /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				FF3CC3C4249FC185002F1C74 /* assets.swift */,
 				FF33A1A12499587C00E49C4A /* strings.swift */,
 			);
 			path = Generated;
@@ -4943,6 +4947,7 @@
 				A202EB3D2085D2C80058F32C /* OTMessageReceivedCell.m in Sources */,
 				A202EC472085D2C80058F32C /* OTHeatzonesCollectionSource.m in Sources */,
 				A202EB672085D2C80058F32C /* OTNewsFeedCell.m in Sources */,
+				FF3CC3C5249FC185002F1C74 /* assets.swift in Sources */,
 				A202EC452085D2C80058F32C /* OTManageInvitationBehavior.m in Sources */,
 				371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */,
 				A202EC852085D2C80058F32C /* OTFeedItemFiltersCellProvider.m in Sources */,
@@ -5021,6 +5026,7 @@
 			files = (
 				374E0266220C8039000EE348 /* OTGradientView.m in Sources */,
 				373353B5230173EF00436CAA /* OTTimestampsCell.m in Sources */,
+				FF3CC3C6249FC185002F1C74 /* assets.swift in Sources */,
 				372174F32281BE1C00EFDF3A /* OTModalPopup.m in Sources */,
 				37191ADA220B53FC00F789B8 /* OTPillLabelView.m in Sources */,
 				A296B75420871CFC00F6AFBD /* OTSignalEntourageBehavior.m in Sources */,
