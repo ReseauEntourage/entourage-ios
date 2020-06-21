@@ -592,7 +592,7 @@ internal enum L10n {
   internal static func memberCount(_ p1: Int) -> String {
     return L10n.tr("Localizable", "member_count", p1)
   }
-  /// Aide & à propos
+  /// Aide et à propos
   internal static let menuAbout = L10n.tr("Localizable", "menu_about")
   /// Amis
   internal static let menuAmis = L10n.tr("Localizable", "menu_amis")
@@ -602,6 +602,8 @@ internal enum L10n {
   internal static let menuAtdPartner = L10n.tr("Localizable", "menu_atd_partner")
   /// Charte éthique
   internal static let menuChart = L10n.tr("Localizable", "menu_chart")
+  /// ❤️  S’engager
+  internal static let menuCommit = L10n.tr("Localizable", "menu_commit")
   /// Déconnexion
   internal static let menuDisconnectTitle = L10n.tr("Localizable", "menu_disconnect_title")
   /// Donner mes retours rapides
@@ -610,6 +612,8 @@ internal enum L10n {
   internal static let menuEntourageActions = L10n.tr("Localizable", "menu_entourage_actions")
   /// Donnez votre avis
   internal static let menuFeedback = L10n.tr("Localizable", "menu_feedback")
+  /// 👋  Faire le premier pas
+  internal static let menuFirstStep = L10n.tr("Localizable", "menu_firstStep")
   /// Guide de solidarité
   internal static let menuGuide = L10n.tr("Localizable", "menu_guide")
   /// Guide
@@ -618,7 +622,7 @@ internal enum L10n {
   internal static let menuHelpTitle = L10n.tr("Localizable", "menu_help_title")
   /// Rejoignez-nous
   internal static let menuJobs = L10n.tr("Localizable", "menu_jobs")
-  /// Devenir Ambassadeur Entourage
+  /// Devenir Ambassadeur bénévole
   internal static let menuJoin = L10n.tr("Localizable", "menu_join")
   /// Faire un don à Entourage
   internal static let menuMakeDonation = L10n.tr("Localizable", "menu_make_donation")

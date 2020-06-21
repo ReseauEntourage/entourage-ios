@@ -12,5 +12,11 @@ func createView(withHeight height: CGFloat) -> UIView {
 }
 
 func addInSuperview<V: UIView>(_ superview: UIView) -> (V) -> Void {
-    { superview.addSubview($0) } // swiftlint:disable:this opening_brace
+    UIView.addSubview(superview)
 }
+
+func addInStackView<V: UIView>(_ stackView: UIStackView) -> (V) -> Void {
+    UIStackView.addArrangedSubview(stackView)
+}
+
+

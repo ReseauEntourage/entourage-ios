@@ -6,27 +6,25 @@ import UIKit
 
 final class MenuViewController: UIViewController {
 
-    enum Item {
-        case profile(_ name: String)
-        case spacing(_ value: CGFloat)
-        case header(_ title: String)
-        case secondary(_ title: String, addSeparator: Bool = false)
-        case main(_ title: String)
-    }
-
-    private let items: [Item] = [
+    private let items: [MenuItem] = [
         .profile("AMS"),
-        .header("👋  FAIRE LE PREMIER PAS "),
-        .secondary("Notre guide pour oser la rencontre", addSeparator: true),
-        .secondary("Idées d'actions dans l'appli"),
+        .header(L10n.menuFirstStep),
+        .secondary(.regular(L10n.menuScb), addSeparator: true),
+        .secondary(.regular(L10n.menuEntourageActions)),
         .spacing(50),
-        .header("❤️  S’ENGAGER"),
-        .main("Faire un don à Entourage"),
-        .secondary("Devenir Ambassadeur bénévole", addSeparator: true),
-        .secondary("Rejoindre l'équipe"),
+        .header(L10n.menuCommit),
+        .main(L10n.menuMakeDonation),
+        .secondary(.regular(L10n.menuJoin), addSeparator: true),
+        .secondary(.regular("Rejoindre l'équipe")),
         .spacing(50),
         .header("📣 PARTAGER ENTOURAGE"),
-        .secondary("Répandez la solidarité autour de vous !"),
+//        .share("Répandez la solidarité autour de vous !"),
+        .secondary(.regular("Répandez la solidarité autour de vous !")),
+        .spacing(50),
+        .secondary(.heavy(L10n.menuAbout)),
+        .spacing(50),
+        .secondary(.regular(L10n.menuDisconnectTitle), icon: Asset.logout.image),
+//        .social
         .spacing(50)
     ]
 
@@ -59,18 +57,18 @@ final class MenuViewController: UIViewController {
         items |> map(convertItem >>> { self.stackView.addArrangedSubview($0) })
     }
 
-    private func convertItem(_ item: Item) -> UIView {
+    private func convertItem(_ item: MenuItem) -> UIView {
         switch item {
         case .profile(let name):
             return MenuProfileItemView(name: name)
         case .spacing(let value):
             return createView(withHeight: value)
-        case .header(let title):
-            return MenuItemView.header(title: title)
-        case .secondary(let title, let addSeparator):
-            return MenuItemView.secondary(title: title, addSeparator: addSeparator)
-        case .main(let title):
-            return MenuItemView.main(title: title)
+        case .header(let text):
+            return MenuItemView.header(text: text)
+        case .secondary(let title, let icon, let addSeparator):
+            return MenuItemView.secondary(title: title, icon: icon, addSeparator: addSeparator)
+        case .main(let text):
+            return MenuItemView.main(text: text)
         }
     }
 }

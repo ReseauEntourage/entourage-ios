@@ -60,7 +60,7 @@
 
 "menu_guide" = "Guide de solidarité";
 "menu_param" = "Paramètres de l'application";
-"menu_about" = "Aide & à propos";
+"menu_about" = "Aide et à propos";
 "menu_map_title" = "Maraudes";
 "menu_guide_title" = "Guide";
 "menu_profile_title" = "Profil";
@@ -81,8 +81,10 @@
 "menu_jobs" = "Rejoignez-nous";
 "menu_atd_partner" = "Suivre Entourage";
 "menu_solidarity_guide" = "Carte des structures solidaires";
-"menu_join" = "Devenir Ambassadeur Entourage";
+"menu_join" = "Devenir Ambassadeur bénévole";
 "menu_donnation" = "Donner mes retours rapides";
+"menu_firstStep" = "👋  Faire le premier pas";
+"menu_commit" = "❤️  S’engager";
 
 // AboutItems
 "about_tutorial" = "Voir le tutoriel";
