@@ -25,8 +25,8 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   lane :beta do |options|
     sigh(
-     app_identifier: "social.entourage.entourageios.beta",
-     username: "apple@entourage.social",
+     app_identifier: "",
+     username: "",
      adhoc: true
     )
     badge(
@@ -44,7 +44,7 @@ platform :ios do
   lane :pfp_beta do |options|
     sigh(
      app_identifier: "social.entourage.entourageios.pfp.beta",
-     username: "apple@entourage.social",
+     username: "",
      adhoc: true
     )
     badge(
@@ -73,29 +73,6 @@ platform :ios do
       ipa: Dir[File.join(ENV["BITRISE_DEPLOY_DIR"], "*.ipa")].sort_by { |x| File.mtime(x) }.last,
       skip_waiting_for_build_processing: true
     )
-  end
-
-  desc "Build Entourage for store release"
-  desc "This will also make sure the profile is up to date"
-  lane :entourage_store do |options|
-    store(
-      app_identifier: "social.entourage.entourageios",
-      scheme: "EntourageStore"
-    )
-  end
-
-  desc "Upload Entourage to TestFlight"
-  lane :upload_entourage do |options|
-    upload(
-      app_identifier: "social.entourage.entourageios"
-    )
-  end
-
-  desc "Submit a new Entourage Build to TestFlight"
-  desc "This will also make sure the profile is up to date"
-  lane :deploy_to_TestFlight do |options|
-    entourage_store
-    upload_entourage
   end
 
   desc "Build Voisin-Age for store release"
