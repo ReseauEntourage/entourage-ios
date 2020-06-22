@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>social.entourage.entourageios.pfp</key>
+	<dict>
+		<key>EnvironmentType</key>
+		<string>prod</string>
+		<key>AmazonPictureFolder</key>
+		<string>pfp/300x300/</string>
+		<key>AmazonAccessKey</key>
+		<string></string>
+		<key>AmazonSecretKey</key>
+		<string></string>
+		<key>ApiBaseUrl</key>
+		<string>https://apiPXTGS.entourage.social/api/v1/</string>
+		<key>ApiKey</key>
+		<string>2d5771c1d7273cb1817c4aaa</string>
+		<key>MixpanelToken</key>
+		<string></string>
+		<key>AwsPictureBucket</key>
+		<string>entourage-avatars-production-thumb</string>
+		<key>GooglePlaceApiKey</key>
+		<string></string>
+		<key>URLScheme</key>
+		<string>pfp-prod</string>
+	</dict>
+	<key>social.entourage.entourageios.pfp.beta</key>
+	<dict>
+		<key>EnvironmentType</key>
+		<string>staging</string>
+		<key>AmazonPictureFolder</key>
+		<string>pfp/staging/300x300/</string>
+		<key>AmazonAccessKey</key>
+		<string></string>
+		<key>AmazonSecretKey</key>
+		<string></string>
+		<key>ApiBaseUrl</key>
+		<string>https://pfp-back-preprod.herokuapp.com/api/v1</string>
+		<key>ApiKey</key>
+		<string>2d5771c1d7273cb1817c4aaa</string>
+		<key>MixpanelToken</key>
+		<string></string>
+		<key>AwsPictureBucket</key>
+		<string>entourage-avatars-production-thumb</string>
+		<key>GooglePlaceApiKey</key>
+		<string></string>
+		<key>URLScheme</key>
+		<string>pfp-staging</string>
+	</dict>
+</dict>
+</plist>
