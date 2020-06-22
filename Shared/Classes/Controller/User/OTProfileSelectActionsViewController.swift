@@ -36,6 +36,11 @@ class OTProfileSelectActionsViewController: UIViewController {
     @IBOutlet weak var ui_label_choice_5: UILabel!
     @IBOutlet weak var ui_label_choice_6: UILabel!
     
+    @IBOutlet weak var ui_main_stackview: UIStackView!
+    @IBOutlet weak var ui_constraint_view_height: NSLayoutConstraint!
+    
+    @IBOutlet weak var ui_constraint_spacing_description: NSLayoutConstraint!
+    
     var activitiesSelections:SdfNeighbourActivities? = nil
     var activitiesAssoSelections:AssoActivities? = nil
     var username = ""
@@ -119,12 +124,26 @@ class OTProfileSelectActionsViewController: UIViewController {
             ui_view_choice_6_inside.isHidden = true
             ui_view_choice_6.backgroundColor = .white
         }
+        
+        if view.frame.height <= 568 {
+            ui_main_stackview.spacing = 10
+            if isAsso {
+                ui_constraint_view_height.constant = 107
+            }
+            else {
+                ui_constraint_view_height.constant = 90
+            }
+            
+            ui_main_stackview.spacing = 10
+            ui_constraint_spacing_description.constant = 8
+            ui_label_title.font = ui_label_title.font.withSize(15)
+        }
     }
     
     func setupTexts() {
         
         if isAsso {
-            ui_label_title.text = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_activity_title"),username)
+            ui_label_title.text = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "profile_asso_activity_title"),username)
             ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_activity_description")
             
             ui_label_choice_1.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_activity_choice_1")
@@ -135,7 +154,7 @@ class OTProfileSelectActionsViewController: UIViewController {
             return
         }
         
-        let _titleKey = isSdf ? "onboard_sdf_activity_title" : "onboard_neighbour_activity_title"
+        let _titleKey = isSdf ? "profile_sdf_activity_title" : "profile_neighbour_activity_title"
         let _descKey = isSdf ? "onboard_sdf_activity_description" : "onboard_neighbour_activity_description"
         ui_label_title.text = String.init(format: OTLocalisationService.getLocalizedValue(forKey: _titleKey),username)
         ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: _descKey)

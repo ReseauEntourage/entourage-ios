@@ -35,6 +35,11 @@ class OTOnboardingSDFNeighbourActivityViewController: UIViewController {
     @IBOutlet weak var ui_label_choice_5: UILabel!
     @IBOutlet weak var ui_label_choice_6: UILabel!
     
+    @IBOutlet weak var ui_main_stackview: UIStackView!
+    @IBOutlet weak var ui_constraint_view_height: NSLayoutConstraint!
+    
+    @IBOutlet weak var ui_constraint_spacing_description: NSLayoutConstraint!
+    
     var activitiesSelections:SdfNeighbourActivities? = nil
     var username = ""
     var isSdf = true
@@ -47,6 +52,13 @@ class OTOnboardingSDFNeighbourActivityViewController: UIViewController {
         prepareViews()
         setupTexts()
         setupImages()
+        
+        if view.frame.height <= 568 {
+            ui_constraint_view_height.constant = 90
+            ui_main_stackview.spacing = 10
+            ui_constraint_spacing_description.constant = 8
+            ui_label_title.font = ui_label_title.font.withSize(15)
+        }
         
         if let _activities = activitiesSelections, _activities.hasOneSelectionMin() {
             delegate?.updateButtonNext(isValid: true)

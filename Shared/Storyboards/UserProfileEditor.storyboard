@@ -1132,13 +1132,13 @@ quelques mots !</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bla bla bla bla......." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZX-w8-frC">
-                                <rect key="frame" x="20" y="42.333333333333336" width="168" height="26.333333333333336"/>
+                                <rect key="frame" x="20" y="16" width="168" height="26.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                 <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5JM-9a-9O4">
-                                <rect key="frame" x="20.000000000000007" y="83.666666666666671" width="114.66666666666669" height="67.000000000000014"/>
+                                <rect key="frame" x="20.000000000000007" y="57.333333333333343" width="114.66666666666669" height="67"/>
                                 <string key="text">Bla bla bla bla.......
 Ligne2
 Ligne 3
@@ -1148,7 +1148,7 @@ Ligne 4</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="L2g-SQ-zlQ">
-                                <rect key="frame" x="16" y="195.66666666666663" width="382" height="340"/>
+                                <rect key="frame" x="16" y="169.33333333333337" width="382" height="340"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="io7-Wy-rTq">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="100"/>
@@ -1161,7 +1161,7 @@ Ligne 4</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bla bla bla bla......." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Hl-7m-3jQ">
-                                                <rect key="frame" x="74" y="40.333333333333343" width="234" height="19.333333333333329"/>
+                                                <rect key="frame" x="74" y="40.333333333333314" width="234" height="19.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1181,7 +1181,7 @@ Ligne 4</string>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3j9-D5-TcK">
-                                        <rect key="frame" x="0.0" y="120.00000000000003" width="382" height="100"/>
+                                        <rect key="frame" x="0.0" y="119.99999999999997" width="382" height="100"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboard_picto_alone" translatesAutoresizingMaskIntoConstraints="NO" id="y6H-Wr-P4A">
                                                 <rect key="frame" x="8" y="27" width="46" height="46"/>
@@ -1191,7 +1191,7 @@ Ligne 4</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bla bla bla bla......." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmy-fg-QQy">
-                                                <rect key="frame" x="74" y="40.333333333333314" width="234" height="19.333333333333329"/>
+                                                <rect key="frame" x="74" y="40.333333333333371" width="234" height="19.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1221,7 +1221,7 @@ Ligne 4</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bla bla bla bla......." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXz-ZO-iOZ">
-                                                <rect key="frame" x="74" y="40.333333333333314" width="234" height="19.333333333333329"/>
+                                                <rect key="frame" x="74" y="40.333333333333371" width="234" height="19.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1255,24 +1255,25 @@ Ligne 4</string>
                             <constraint firstItem="kEh-zx-0st" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Imz-QC-mey" secondAttribute="trailing" constant="16" id="EhN-MF-wGj"/>
                             <constraint firstItem="kEh-zx-0st" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="L2g-SQ-zlQ" secondAttribute="bottom" id="FmY-Y5-AtO"/>
                             <constraint firstItem="kEh-zx-0st" firstAttribute="trailing" secondItem="L2g-SQ-zlQ" secondAttribute="trailing" constant="16" id="GU8-P7-7vx"/>
-                            <constraint firstItem="AZX-w8-frC" firstAttribute="top" secondItem="kEh-zx-0st" secondAttribute="top" constant="42.333333333333336" id="RR5-da-du6"/>
+                            <constraint firstItem="AZX-w8-frC" firstAttribute="top" secondItem="kEh-zx-0st" secondAttribute="top" constant="16" id="RR5-da-du6"/>
                             <constraint firstItem="L2g-SQ-zlQ" firstAttribute="leading" secondItem="kEh-zx-0st" secondAttribute="leading" constant="16" id="Tve-A7-zNh"/>
                             <constraint firstItem="Imz-QC-mey" firstAttribute="leading" secondItem="iZH-YF-VcQ" secondAttribute="leadingMargin" id="g1o-35-5dr"/>
                             <constraint firstItem="Imz-QC-mey" firstAttribute="top" secondItem="iZH-YF-VcQ" secondAttribute="topMargin" id="qPz-P8-IlL"/>
                             <constraint firstItem="5JM-9a-9O4" firstAttribute="leading" secondItem="AZX-w8-frC" secondAttribute="leading" id="rib-3a-uMc"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="AZX-w8-frC" secondAttribute="trailing" id="uuk-bR-Lwa"/>
                             <constraint firstItem="AZX-w8-frC" firstAttribute="leading" secondItem="iZH-YF-VcQ" secondAttribute="leadingMargin" id="uvU-7q-B02"/>
-                            <constraint firstItem="AZX-w8-frC" firstAttribute="top" secondItem="Imz-QC-mey" secondAttribute="bottom" constant="16" id="xdS-C5-AiQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kEh-zx-0st"/>
                     </view>
                     <connections>
+                        <outlet property="ui_constraint_height_space" destination="2Bt-ZQ-CaK" id="bMw-uS-bbt"/>
                         <outlet property="ui_label_description" destination="AZX-w8-frC" id="l64-92-J3l"/>
                         <outlet property="ui_label_description2" destination="5JM-9a-9O4" id="GCN-qh-M6v"/>
                         <outlet property="ui_label_title" destination="Imz-QC-mey" id="uuK-7v-ywL"/>
                         <outlet property="ui_label_view_1" destination="5Hl-7m-3jQ" id="eQC-cH-qvC"/>
                         <outlet property="ui_label_view_2" destination="nmy-fg-QQy" id="iWq-2M-TPt"/>
                         <outlet property="ui_label_view_3" destination="dXz-ZO-iOZ" id="7iP-Lf-Eod"/>
+                        <outlet property="ui_main_stackview" destination="L2g-SQ-zlQ" id="Eon-Ty-WhR"/>
                         <outlet property="ui_view_1" destination="io7-Wy-rTq" id="uGO-ij-Op6"/>
                         <outlet property="ui_view_2" destination="3j9-D5-TcK" id="gu2-JY-Ixw"/>
                         <outlet property="ui_view_3" destination="VjO-7T-BR0" id="jDC-g6-JcW"/>
@@ -1306,13 +1307,13 @@ Ligne 4</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous faites maintenant partie....." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veb-99-0lA">
-                                <rect key="frame" x="20" y="0.0" width="334" height="26.333333333333332"/>
+                                <rect key="frame" x="20" y="15.999999999999998" width="334" height="26.333333333333329"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BhB-MX-x7c">
-                                <rect key="frame" x="16.000000000000007" y="42.333333333333343" width="114.66666666666669" height="67"/>
+                                <rect key="frame" x="16.000000000000007" y="58.333333333333343" width="114.66666666666669" height="67"/>
                                 <string key="text">Bla bla bla bla.......
 Ligne2
 Ligne 3
@@ -1322,7 +1323,7 @@ Ligne 4</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zfU-gY-yEj">
-                                <rect key="frame" x="16" y="139.33333333333337" width="382" height="361"/>
+                                <rect key="frame" x="16" y="155.33333333333337" width="382" height="361"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Tu9-pa-Ihr">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="107"/>
@@ -1458,7 +1459,6 @@ Ligne 4</string>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="2BT-0h-oen" secondAttribute="trailing" constant="8" id="Tpp-hW-U5Z"/>
                                                     <constraint firstItem="2BT-0h-oen" firstAttribute="leading" secondItem="d50-ce-zlF" secondAttribute="leading" constant="8" id="ZyD-gG-Elx"/>
-                                                    <constraint firstAttribute="height" constant="107" id="ddD-iL-tMd"/>
                                                     <constraint firstItem="2BT-0h-oen" firstAttribute="centerY" secondItem="d50-ce-zlF" secondAttribute="centerY" id="hht-jn-1j6"/>
                                                     <constraint firstItem="2BT-0h-oen" firstAttribute="centerX" secondItem="d50-ce-zlF" secondAttribute="centerX" id="joa-T7-irD"/>
                                                 </constraints>
@@ -1552,7 +1552,6 @@ Ligne 4</string>
                                                 <constraints>
                                                     <constraint firstItem="J6V-Q1-fWd" firstAttribute="centerY" secondItem="Pg5-mU-MPb" secondAttribute="centerY" id="MnS-Gx-jtu"/>
                                                     <constraint firstItem="J6V-Q1-fWd" firstAttribute="centerX" secondItem="Pg5-mU-MPb" secondAttribute="centerX" id="NnY-Sc-FPm"/>
-                                                    <constraint firstAttribute="height" constant="107" id="YSI-09-Stt"/>
                                                     <constraint firstAttribute="trailing" secondItem="J6V-Q1-fWd" secondAttribute="trailing" constant="8" id="ctf-xo-BsS"/>
                                                     <constraint firstItem="J6V-Q1-fWd" firstAttribute="leading" secondItem="Pg5-mU-MPb" secondAttribute="leading" constant="8" id="xRl-l9-yGs"/>
                                                 </constraints>
@@ -1608,7 +1607,9 @@ Ligne 4</string>
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="d50-ce-zlF" firstAttribute="height" secondItem="9mh-pC-bYO" secondAttribute="height" id="71l-82-PjR"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="361" id="JSF-E7-IHL"/>
+                                    <constraint firstItem="Pg5-mU-MPb" firstAttribute="height" secondItem="9mh-pC-bYO" secondAttribute="height" id="n5h-b1-fbv"/>
                                     <constraint firstAttribute="height" priority="250" constant="360" id="yim-k8-flY"/>
                                 </constraints>
                             </stackView>
@@ -1621,7 +1622,7 @@ Ligne 4</string>
                             <constraint firstItem="BhB-MX-x7c" firstAttribute="top" secondItem="veb-99-0lA" secondAttribute="bottom" constant="16" id="VMu-QY-k6u"/>
                             <constraint firstItem="Hw7-ab-m5S" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zfU-gY-yEj" secondAttribute="bottom" id="Z2g-6W-rSB"/>
                             <constraint firstItem="veb-99-0lA" firstAttribute="leading" secondItem="QSC-Wk-R4o" secondAttribute="leadingMargin" id="eLj-ga-7ub"/>
-                            <constraint firstItem="veb-99-0lA" firstAttribute="top" secondItem="QSC-Wk-R4o" secondAttribute="topMargin" id="qQC-2f-965"/>
+                            <constraint firstItem="veb-99-0lA" firstAttribute="top" secondItem="QSC-Wk-R4o" secondAttribute="topMargin" constant="16" id="qQC-2f-965"/>
                             <constraint firstItem="Hw7-ab-m5S" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BhB-MX-x7c" secondAttribute="trailing" constant="16" id="wmg-On-Kbn"/>
                             <constraint firstItem="Hw7-ab-m5S" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="veb-99-0lA" secondAttribute="trailing" constant="16" id="yUL-Ki-x4o"/>
                             <constraint firstItem="zfU-gY-yEj" firstAttribute="top" secondItem="BhB-MX-x7c" secondAttribute="bottom" constant="30" id="yur-oZ-wuQ"/>
@@ -1629,6 +1630,8 @@ Ligne 4</string>
                         <viewLayoutGuide key="safeArea" id="Hw7-ab-m5S"/>
                     </view>
                     <connections>
+                        <outlet property="ui_constraint_spacing_description" destination="yur-oZ-wuQ" id="feb-zO-qXR"/>
+                        <outlet property="ui_constraint_view_height" destination="kCm-5P-vaq" id="92O-KP-1c4"/>
                         <outlet property="ui_iv_choice_1" destination="GUh-zE-Lyh" id="iWD-d5-j2R"/>
                         <outlet property="ui_iv_choice_2" destination="GEw-k7-GMS" id="dk5-7j-o8C"/>
                         <outlet property="ui_iv_choice_3" destination="3yI-pJ-JEM" id="g8f-De-TKE"/>
@@ -1643,6 +1646,7 @@ Ligne 4</string>
                         <outlet property="ui_label_choice_6" destination="IpJ-N3-qMD" id="A2z-bc-1m5"/>
                         <outlet property="ui_label_description" destination="BhB-MX-x7c" id="Y1N-86-rNz"/>
                         <outlet property="ui_label_title" destination="veb-99-0lA" id="ArD-RW-ndM"/>
+                        <outlet property="ui_main_stackview" destination="zfU-gY-yEj" id="993-Rx-88M"/>
                         <outlet property="ui_view_choice_1" destination="9mh-pC-bYO" id="OWe-LQ-c22"/>
                         <outlet property="ui_view_choice_2" destination="PNg-eI-Gop" id="l9N-VJ-ock"/>
                         <outlet property="ui_view_choice_3" destination="d50-ce-zlF" id="4UI-0w-nYU"/>

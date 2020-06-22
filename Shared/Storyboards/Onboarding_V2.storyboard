@@ -2070,7 +2070,6 @@ Ligne 4</string>
                                                     <constraint firstItem="NA0-cM-lda" firstAttribute="leading" secondItem="FzI-b6-8TX" secondAttribute="leading" constant="8" id="44L-1o-efm"/>
                                                     <constraint firstItem="NA0-cM-lda" firstAttribute="centerX" secondItem="FzI-b6-8TX" secondAttribute="centerX" id="5yJ-EM-GSt"/>
                                                     <constraint firstAttribute="trailing" secondItem="NA0-cM-lda" secondAttribute="trailing" constant="8" id="7nr-0t-qnr"/>
-                                                    <constraint firstAttribute="height" constant="107" id="Anq-JU-dUL"/>
                                                     <constraint firstItem="NA0-cM-lda" firstAttribute="centerY" secondItem="FzI-b6-8TX" secondAttribute="centerY" id="vjw-Yy-SLn"/>
                                                 </constraints>
                                                 <connections>
@@ -2165,7 +2164,6 @@ Ligne 4</string>
                                                     <constraint firstAttribute="trailing" secondItem="HQc-Po-R9P" secondAttribute="trailing" constant="8" id="HBA-Md-tn0"/>
                                                     <constraint firstItem="HQc-Po-R9P" firstAttribute="centerX" secondItem="y1K-Kf-4dE" secondAttribute="centerX" id="Usi-SM-5wU"/>
                                                     <constraint firstItem="HQc-Po-R9P" firstAttribute="centerY" secondItem="y1K-Kf-4dE" secondAttribute="centerY" id="ZHL-7K-VyK"/>
-                                                    <constraint firstAttribute="height" constant="107" id="c9g-xA-dGg"/>
                                                 </constraints>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="hAk-ts-YBG" appends="YES" id="TeV-fx-52D"/>
@@ -2219,7 +2217,9 @@ Ligne 4</string>
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="FzI-b6-8TX" firstAttribute="height" secondItem="UQT-ff-kBI" secondAttribute="height" id="2ah-bf-vIK"/>
                                     <constraint firstAttribute="height" priority="250" constant="360" id="A8L-SJ-2wp"/>
+                                    <constraint firstItem="y1K-Kf-4dE" firstAttribute="height" secondItem="UQT-ff-kBI" secondAttribute="height" id="ekP-GY-bod"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="361" id="qWd-2r-6PZ"/>
                                 </constraints>
                             </stackView>
@@ -2240,6 +2240,8 @@ Ligne 4</string>
                         <viewLayoutGuide key="safeArea" id="9gK-rW-G8n"/>
                     </view>
                     <connections>
+                        <outlet property="ui_constraint_spacing_description" destination="lBX-7y-Xrv" id="2ey-6u-PJ7"/>
+                        <outlet property="ui_constraint_view_height" destination="azY-B2-apq" id="HT9-l7-YYJ"/>
                         <outlet property="ui_iv_choice_1" destination="Pj7-RT-3qr" id="Jgb-pN-vIx"/>
                         <outlet property="ui_iv_choice_2" destination="LhT-lb-8yB" id="cTa-AB-9iD"/>
                         <outlet property="ui_iv_choice_3" destination="k4p-CU-bkZ" id="agc-zS-11s"/>
@@ -2254,6 +2256,7 @@ Ligne 4</string>
                         <outlet property="ui_label_choice_6" destination="yFV-Qa-PjN" id="Xkk-qe-pPi"/>
                         <outlet property="ui_label_description" destination="rX9-lw-qUw" id="prD-n7-Kpc"/>
                         <outlet property="ui_label_title" destination="f0a-E0-iEN" id="rzP-V5-omL"/>
+                        <outlet property="ui_main_stackview" destination="ohL-Z8-xvh" id="u0C-G4-amh"/>
                         <outlet property="ui_view_choice_1" destination="UQT-ff-kBI" id="raH-sg-aSE"/>
                         <outlet property="ui_view_choice_2" destination="9sD-ug-HLs" id="N2J-Nf-gfH"/>
                         <outlet property="ui_view_choice_3" destination="FzI-b6-8TX" id="Abx-ab-MeD"/>

@@ -22,6 +22,8 @@ class OTProfileSelectTypeViewController: UIViewController {
     @IBOutlet weak var ui_view_3: UIView!
     @IBOutlet weak var ui_label_view_3: UILabel!
     
+    @IBOutlet weak var ui_main_stackview: UIStackView!
+    @IBOutlet weak var ui_constraint_height_space: NSLayoutConstraint!
     weak var delegate:OnboardV2Delegate? = nil
     
     var userTypeSelected = UserType.none
@@ -46,6 +48,10 @@ class OTProfileSelectTypeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addButtonValidate()
+        
+        if userTypeSelected != .none {
+            updateButtonValidate()
+        }
     }
     
     func addButtonValidate() {
@@ -78,6 +84,10 @@ class OTProfileSelectTypeViewController: UIViewController {
         ui_label_view_1.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice1")
         ui_label_view_2.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice2")
         ui_label_view_3.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice3")
+        
+        if view.frame.height <= 568 {
+            ui_constraint_height_space.constant = 16
+        }
     }
     
     func selectInitialButtonSelected() {

@@ -97,6 +97,10 @@
 #define Action_Profile_SetAction_Zone_Geoloc @"Action__Profile__SetActionZoneGeoloc"
 #define Action_Profile_SetAction_Zone_Search @"Action__Profile__SetActionZoneSearch"
 #define Action_Profile_Action_Zone_Submit @"Action__Profile__ActionZoneSubmit"
+#define View_Profile_Action_Zone2 @"View__Profile__ActionZone2"
+#define Action_Profile_SetAction_Zone2_Geoloc @"Action__Profile__SetActionZone2Geoloc"
+#define Action_Profile_SetAction_Zone2_Search @"Action__Profile__SetActionZone2Search"
+#define Action_Profile_Action_Zone2_Submit @"Action__Profile__ActionZone2Submit"
 
 //Type
 #define View_Profile_Choose_Profile @"View__Profile__ChooseProfile"

@@ -33,7 +33,13 @@ class OTOnboardingPlaceViewController: UIViewController {
         super.viewDidLoad()
         
         if isFromProfile {
-            OTLogger.logEvent(View_Profile_Action_Zone)
+            if isSecondaryAddress {
+                OTLogger.logEvent(View_Profile_Action_Zone2)
+            }
+            else {
+                OTLogger.logEvent(View_Profile_Action_Zone)
+            }
+           
            // ui_constraint_title_top.constant = ui_constraint_title_top.constant + 20
             ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "defineActionZoneTitle")
             
@@ -95,7 +101,13 @@ class OTOnboardingPlaceViewController: UIViewController {
     
     func sendAddAddress() {
         if let _place = selectedPlace {
-            OTLogger.logEvent(Action_Profile_Action_Zone_Submit)
+            if isSecondaryAddress {
+                OTLogger.logEvent(Action_Profile_Action_Zone2_Submit)
+            }
+            else {
+                OTLogger.logEvent(Action_Profile_Action_Zone_Submit)
+            }
+            
             SVProgressHUD.show()
             OTAuthService.updateUserAddress(withPlaceId: _place.placeID, isSecondaryAddress: self.isSecondaryAddress) { (error) in
                 SVProgressHUD.dismiss()
@@ -104,7 +116,13 @@ class OTOnboardingPlaceViewController: UIViewController {
         }
         else if let _lat = self.currentLocation?.coordinate.latitude, let _long = self.currentLocation?.coordinate.longitude {
             SVProgressHUD.show()
-            OTLogger.logEvent(Action_Profile_Action_Zone_Submit)
+            if isSecondaryAddress {
+                OTLogger.logEvent(Action_Profile_Action_Zone2_Submit)
+            }
+            else {
+                OTLogger.logEvent(Action_Profile_Action_Zone_Submit)
+            }
+            
             let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
             OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long), isSecondaryAddress: self.isSecondaryAddress) { (error) in
                 SVProgressHUD.dismiss()
@@ -175,7 +193,12 @@ class OTOnboardingPlaceViewController: UIViewController {
     @IBAction func action_location(_ sender: Any) {
         OTLocationManager.sharedInstance()?.startLocationUpdates()
         if isFromProfile {
-            OTLogger.logEvent(Action_Profile_SetAction_Zone_Geoloc)
+            if isSecondaryAddress {
+                OTLogger.logEvent(Action_Profile_SetAction_Zone2_Geoloc)
+            }
+            else {
+                OTLogger.logEvent(Action_Profile_SetAction_Zone_Geoloc)
+            }
         }
         else {
             if isSecondaryAddress {
@@ -193,7 +216,12 @@ extension OTOnboardingPlaceViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if let _vc = googleplaceVC {
             if isFromProfile {
-                OTLogger.logEvent(Action_Profile_SetAction_Zone_Search)
+                if isSecondaryAddress {
+                    OTLogger.logEvent(Action_Profile_SetAction_Zone2_Search)
+                }
+                else {
+                    OTLogger.logEvent(Action_Profile_SetAction_Zone_Search)
+                }
             }
             else {
                 if isSecondaryAddress {

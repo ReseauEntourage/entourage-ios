@@ -707,6 +707,10 @@
 "profile_my_zones" = "Mes zones d'actions";
 "profile_my_zones_description" = "Soyez notifié.e des initiatives solidaires et besoins dans ces zones";
 
+"profile_asso_activity_title" = "Quel est votre coeur d’activité ?";
+"profile_sdf_activity_title" = "Que cherchez-vous ?";
+"profile_neighbour_activity_title" = "Que souhaitez-vous faire dans votre quartier ?";
+
 //Info mosaic choice from ws
 "rencontrer_sdf" = "Me faire un cercle d’amis";
 "event_sdf" = "Participer à des évènements";

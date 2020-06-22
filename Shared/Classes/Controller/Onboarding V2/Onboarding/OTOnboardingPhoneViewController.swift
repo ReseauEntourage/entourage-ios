@@ -79,6 +79,15 @@ extension OTOnboardingPhoneViewController: UITextFieldDelegate {
             delegate?.updateButtonNext(isValid: false)
             delegate?.validatePhoneNumber(prefix: countryCode, phoneNumber: nil)
         }
+        if view.frame.height <= 568 {
+            view.frame.origin.y = view.frame.origin.y + 40
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if view.frame.height <= 568 {
+            view.frame.origin.y = view.frame.origin.y - 40
+        }
     }
 }
 
