@@ -583,9 +583,11 @@
 "onboard_phone_info" = "Cette information restera confidentielle. Nous voulons juste vérifier que vous n’êtes pas un robot, mais un humain au grand coeur !";
 "onboard_phone_placeholder_phone" = "Téléphone";
 "onboard_sms_title" = "Entrez le code reçu par SMS";
-"onboard_sms_sub" = "Un SMS vient juste de vous être envoyé au ** ** ** ** %@";
+"onboard_sms_sub" = "Un SMS vient juste de vous être envoyé au :";
+"onboard_sms_modify" = "- Modifier";
 "onboard_sms_no_code" = "Pas de code ? Réessayez dans 1 min";
-"onboard_sms_wait_retry" = "Pas de code ? Réessayer dans 1 min";
+"onboard_sms_wait_retry" = "Pas de code ? Réessayez dans %@";
+"onboard_sms_wait_retry_end" = "Renvoyer un code";
 "onboard_sms_no_pwd" = "Veuillez remplir le password";
 "attention_pop_title" = "Attention";
 "onboard_sms_pop_alert" = "Veuillez patienter encore %d sec avant de renouveller la demande.";

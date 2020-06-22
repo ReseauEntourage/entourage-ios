@@ -26,6 +26,9 @@ class OTOnboardingPassCodeViewController: UIViewController {
     @IBOutlet weak var ui_tf_number5: UITextField!
     @IBOutlet weak var ui_tf_number6: UITextField!
     @IBOutlet weak var ui_bt_nocode: UIButton!
+    @IBOutlet weak var ui_label_phoneNb: UILabel!
+    @IBOutlet weak var ui_label_countdown: UILabel!
+    @IBOutlet weak var ui_bt_modify: UIButton!
     
     weak var delegate:OnboardV2Delegate? = nil
     var tempPasscode = ""
@@ -38,8 +41,6 @@ class OTOnboardingPassCodeViewController: UIViewController {
         super.viewDidLoad()
         
         countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        
-        ui_bt_nocode.setTitle(OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_wait_retry"), for: .normal)
         
         populateViews()
         OTLogger.logEvent(View_Onboarding_Passcode)
@@ -57,17 +58,37 @@ class OTOnboardingPassCodeViewController: UIViewController {
         if timeOut == 0 {
             countDownTimer?.invalidate()
             countDownTimer = nil
+            DispatchQueue.main.async {
+                UIView.performWithoutAnimation {
+                    self.ui_bt_nocode.setTitle(OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_wait_retry_end"), for: .normal)
+                }
+                self.ui_bt_modify.isHidden = false
+                self.ui_bt_nocode.isHidden = false
+                self.ui_label_countdown.isHidden = true
+            }
+        }
+        else {
+            let _time = timeOut < 10 ? "00:0\(timeOut)" : "00:\(timeOut)"
+            let _retyTxt = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_wait_retry") , _time)
+            DispatchQueue.main.async {
+                self.ui_label_countdown.text = _retyTxt
+            }
         }
     }
     
     func populateViews() {
-        ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_title")
+         
+        self.ui_bt_nocode.isHidden = true
         
-        let _nb = String(tempPhone.suffix(2))
-        let titleTxt = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_sub"), _nb)
-        let fontSize = ui_label_description.font.pointSize
-        let _txt = Utilitaires.formatString(stringMessage: titleTxt, coloredTxt: "** ** ** ** \(_nb)", color:UIColor.appBlack30 , colorHighlight: UIColor.appBlack30, fontSize: fontSize, fontWeight: .light, fontColoredWeight: .bold)
-        ui_label_description.attributedText = _txt
+        let _retyTxt = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_wait_retry") , "00:\(timeOut)")
+        ui_label_countdown.text = _retyTxt
+        
+        ui_bt_modify.setTitle(OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_modify"), for: .normal)
+        ui_bt_modify.isHidden = true
+        
+        ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_title")
+        ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_sub")
+        ui_label_phoneNb.text = tempPhone
     }
     
     //MARK: - IBActions -
@@ -88,6 +109,12 @@ class OTOnboardingPassCodeViewController: UIViewController {
     @IBAction func tap_background(_ sender: Any) {
         _ = [ui_tf_number1, ui_tf_number2, ui_tf_number3,
              ui_tf_number4, ui_tf_number5, ui_tf_number6].map() { $0.resignFirstResponder() }
+    }
+    
+    @IBAction func action_modify(_ sender: Any) {
+        //TODO: go back
+        Logger.print("Go back")
+        delegate?.goPreviousManually()
     }
 }
 

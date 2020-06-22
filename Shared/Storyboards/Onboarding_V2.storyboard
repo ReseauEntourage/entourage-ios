@@ -365,14 +365,20 @@ Comment vous appelez-vous ?</string>
                                 <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un SMS vient juste de vous être envoyé au ********56" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4l-oH-p14">
-                                <rect key="frame" x="16" y="41.5" width="307" height="38.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un SMS vient juste de vous être envoyé au :" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4l-oH-p14">
+                                <rect key="frame" x="16" y="41.5" width="311" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                 <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="********56" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMp-Na-88A">
+                                <rect key="frame" x="16" y="69" width="80.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tc4-Og-y9f">
-                                <rect key="frame" x="16" y="130" width="343" height="66"/>
+                                <rect key="frame" x="16" y="138.5" width="343" height="66"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vgS-qJ-wGa">
                                         <rect key="frame" x="0.0" y="0.0" width="50.5" height="66"/>
@@ -565,31 +571,54 @@ Comment vous appelez-vous ?</string>
                                     <constraint firstAttribute="height" constant="66" id="yq1-af-big"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ok0-z1-M4n">
-                                <rect key="frame" x="72" y="246" width="231" height="29"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ok0-z1-M4n">
+                                <rect key="frame" x="72" y="254.5" width="231" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                 <color key="tintColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Pas de code ? Réessayez dans 1 min">
-                                    <color key="titleColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="action_nocode:" destination="LpO-YT-DN9" eventType="touchUpInside" id="RKf-ws-xRq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pas de code ? Réessayez dans 00:59" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0E-Rc-C9d">
+                                <rect key="frame" x="72" y="260.5" width="236.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPr-k7-29z">
+                                <rect key="frame" x="104.5" y="64" width="68" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="- Modifier">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="action_modify:" destination="LpO-YT-DN9" eventType="touchUpInside" id="NEO-GQ-uVV"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="wPr-k7-29z" firstAttribute="leading" secondItem="hMp-Na-88A" secondAttribute="trailing" constant="8" id="4O5-Tc-h21"/>
+                            <constraint firstItem="hMp-Na-88A" firstAttribute="leading" secondItem="K4l-oH-p14" secondAttribute="leading" id="59p-Q4-po9"/>
+                            <constraint firstItem="C0E-Rc-C9d" firstAttribute="centerY" secondItem="Ok0-z1-M4n" secondAttribute="centerY" id="Bcy-HA-JAP"/>
                             <constraint firstItem="K4l-oH-p14" firstAttribute="top" secondItem="7GJ-Rd-KDQ" secondAttribute="bottom" constant="15" id="FeE-9R-pGO"/>
                             <constraint firstItem="7GJ-Rd-KDQ" firstAttribute="top" secondItem="kIi-Ec-vkp" secondAttribute="topMargin" id="Khp-kd-qv6"/>
-                            <constraint firstItem="tc4-Og-y9f" firstAttribute="top" secondItem="K4l-oH-p14" secondAttribute="bottom" constant="50" id="PcR-zT-2hr"/>
+                            <constraint firstItem="tc4-Og-y9f" firstAttribute="top" secondItem="hMp-Na-88A" secondAttribute="bottom" constant="50" id="Xm4-r8-1d1"/>
                             <constraint firstItem="tc4-Og-y9f" firstAttribute="leading" secondItem="K4l-oH-p14" secondAttribute="leading" id="aYs-ur-Ovp"/>
                             <constraint firstItem="Ok0-z1-M4n" firstAttribute="centerX" secondItem="kIi-Ec-vkp" secondAttribute="centerX" id="cGD-es-eoO"/>
+                            <constraint firstItem="C0E-Rc-C9d" firstAttribute="leading" secondItem="Ok0-z1-M4n" secondAttribute="leading" id="isJ-H0-t7W"/>
                             <constraint firstItem="K4l-oH-p14" firstAttribute="leading" secondItem="kIi-Ec-vkp" secondAttribute="leadingMargin" id="kHT-9z-og6"/>
                             <constraint firstItem="ySX-qe-Pmu" firstAttribute="trailing" secondItem="tc4-Og-y9f" secondAttribute="trailing" constant="16" id="nze-rP-Sda"/>
                             <constraint firstItem="7GJ-Rd-KDQ" firstAttribute="leading" secondItem="kIi-Ec-vkp" secondAttribute="leadingMargin" id="rzQ-TP-rOb"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="K4l-oH-p14" secondAttribute="trailing" id="v4H-eI-XS5"/>
+                            <constraint firstItem="hMp-Na-88A" firstAttribute="top" secondItem="K4l-oH-p14" secondAttribute="bottom" constant="8" id="vUb-vw-qr0"/>
                             <constraint firstItem="Ok0-z1-M4n" firstAttribute="top" secondItem="tc4-Og-y9f" secondAttribute="bottom" constant="50" id="wZu-qU-56E"/>
+                            <constraint firstItem="wPr-k7-29z" firstAttribute="centerY" secondItem="hMp-Na-88A" secondAttribute="centerY" id="z08-OF-EQd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ySX-qe-Pmu"/>
                         <connections>
@@ -597,8 +626,11 @@ Comment vous appelez-vous ?</string>
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="ui_bt_modify" destination="wPr-k7-29z" id="zER-nN-3N5"/>
                         <outlet property="ui_bt_nocode" destination="Ok0-z1-M4n" id="QlW-69-jtY"/>
+                        <outlet property="ui_label_countdown" destination="C0E-Rc-C9d" id="Ju3-Lq-kTZ"/>
                         <outlet property="ui_label_description" destination="K4l-oH-p14" id="Rlc-7K-qkq"/>
+                        <outlet property="ui_label_phoneNb" destination="hMp-Na-88A" id="2Ys-8D-cIr"/>
                         <outlet property="ui_label_title" destination="7GJ-Rd-KDQ" id="TxL-In-PwD"/>
                         <outlet property="ui_line_1" destination="ISw-w7-dDP" id="Mxs-Fi-5nd"/>
                         <outlet property="ui_line_2" destination="xY5-EX-pk4" id="sSy-XL-Req"/>

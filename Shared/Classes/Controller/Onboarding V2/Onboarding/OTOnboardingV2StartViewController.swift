@@ -677,7 +677,7 @@ extension OTOnboardingV2StartViewController {
                 vc.tempPhone = self.temporaryUser.phone
                 add(asChildViewController: vc)
             }
-            self.hideBackButton(isHidden: false)
+            self.hideBackButton(isHidden: true)
         case .type:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_type") as? OTOnboardingTypeViewController {
                 vc.delegate = self
@@ -947,6 +947,11 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
         self.action_next(self)
     }
     
+    func goPreviousManually() {
+        self.temporaryPhone = ""
+        self.action_previous(self)
+    }
+    
     func updateButtonNext(isValid:Bool) {
         ui_bt_next.isEnabled = isValid ? true : false
     }
@@ -1049,6 +1054,7 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
 //MARK: - Protocol -
 protocol OnboardV2Delegate:class {
     func goNextManually()
+    func goPreviousManually()
     func validateFirstLastname(firstName:String?,lastname:String?)
     func validatePhoneNumber(prefix:String,phoneNumber:String?)
     func updateButtonNext(isValid:Bool)
