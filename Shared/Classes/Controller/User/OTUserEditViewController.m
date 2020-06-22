@@ -132,7 +132,34 @@ typedef NS_ENUM(NSInteger) {
     UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
     OTOnboardingPlaceViewController *vc = (OTOnboardingPlaceViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_place"];
     vc.isFromProfile = YES;
-    vc.isSecondaryAddress = NO;
+    vc.isSecondaryAddress = YES;
+    [self.navigationController showViewController:vc sender:nil];
+}
+
+- (IBAction)actionModifyPrimaryZone:(id)sender {
+    UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
+       OTOnboardingPlaceViewController *vc = (OTOnboardingPlaceViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_place"];
+       vc.isFromProfile = YES;
+       vc.isSecondaryAddress = NO;
+       [self.navigationController showViewController:vc sender:nil];
+}
+
+- (IBAction)actionModifySecondaryZone:(id)sender {
+    UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
+       OTOnboardingPlaceViewController *vc = (OTOnboardingPlaceViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_place"];
+       vc.isFromProfile = YES;
+       vc.isSecondaryAddress = YES;
+       [self.navigationController showViewController:vc sender:nil];
+}
+
+- (IBAction)actionDeleteSecondaryZone:(id)sender {
+    //TODO: à faire + réafficher button + picto delete
+}
+
+- (IBAction)actionModifyType:(id)sender {
+    UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
+    OTProfileSelectActionsViewController *vc = (OTProfileSelectActionsViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Profile_typeVC"];
+    
     [self.navigationController showViewController:vc sender:nil];
 }
 
@@ -578,6 +605,13 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)setupDefineActionZonceCell:(UITableViewCell *)cell {
+    OTUserEditZoneCell *cellEdit = (OTUserEditZoneCell*) cell;
+    
+    
+    [cellEdit populateCellWithUser:self.user];
+    
+    return;
+    
     UIButton *button = [cell viewWithTag:1];
     [button setBackgroundColor:[ApplicationTheme shared].backgroundThemeColor];
     [button setTitle:[OTAppAppearance defineActionZoneTitleForUser:self.user] forState:UIControlStateNormal];

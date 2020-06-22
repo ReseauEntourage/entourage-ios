@@ -49,6 +49,7 @@ extern NSString *const kVisitedUserTag;
 @property (nonatomic, readonly) NSArray *memberships;
 @property (strong, nonatomic) NSDictionary<NSString *, NSString *> *firebaseProperties;
 @property (strong, nonatomic,nullable) NSString *goal;
+@property (nonatomic,strong) NSArray * _Nullable interests;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;
@@ -78,4 +79,5 @@ extern NSString *const kVisitedUserTag;
 
 - (NSString *)formattedActionZoneAddress;
 
+- (NSString *_Nonnull)getInterestsFormated;
 @end

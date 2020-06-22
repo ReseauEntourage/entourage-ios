@@ -695,3 +695,31 @@
 "onboard_place_description2_sdf" = "Souhaitez-vous ajouter un autre quartier ?";
 "onboard_place_title2" = "Super !";
 "onboard_place_description2" = "Vous venez de rejoindre des membres de votre quartier. Voulez-vous rajouter un autre quartier dans lequel agir ?";
+
+//Profile mod action zone / type
+"profile_action_not_selected" = "Mode d'action non sélectionné";
+"profile_title_action_mode" = "Mon mode d’action";
+"profile_activities" = "Activité(s) : %@";
+"profile_activity_not_selected" = "Activité non sélectionnée";
+
+"profile_my_zones" = "Mes zones d'actions";
+"profile_my_zones_description" = "Soyez notifié.e des initiatives solidaires et besoins dans ces zones";
+
+//Info mosaic choice from ws
+"rencontrer_sdf" = "Me faire un cercle d’amis";
+"event_sdf" = "Participer à des évènements";
+"questions_sdf" = "Poser des questions";
+"aide_sdf" = "Demander de l’aide";
+"m_orienter_sdf" = "M’orienter";
+"trouver_asso_sdf" = "Trouver des associations";
+
+"m_informer_riverain" = "M’informer";
+"event_riverain" = "Participer à des évènements";
+"entourer_riverain" = "Entourer une personne isolée";
+"dons_riverain" = "Faire des dons matériels";
+"benevolat_riverain" = "M’investir dans l’associatif";
+
+"aide_pers_asso" = "Aide aux personnes";
+"cult_sport_asso" = "Initiatives culturelles et sportives";
+"serv_pub_asso" = "Service Public";
+"autre_asso" = "Autres";

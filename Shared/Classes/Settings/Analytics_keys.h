@@ -98,5 +98,18 @@
 #define Action_Profile_SetAction_Zone_Search @"Action__Profile__SetActionZoneSearch"
 #define Action_Profile_Action_Zone_Submit @"Action__Profile__ActionZoneSubmit"
 
+//Type
+#define View_Profile_Choose_Profile @"View__Profile__ChooseProfile"
+#define Action_Profile_Choose_Profile_Signup @"Action__Profile__ChooseProfile"
+//Mosaic
+#define View_Profile_Pro_Mosaic @"View__Profile__ProMosaic"
+#define Action_Profile_Pro_Mosaic @"Action__Profile__ProMosaic"
+#define View_Profile_Neighbor_Mosaic @"View__Profile__NeighborMosaic"
+#define View_Profile_InNeed_Mosaic @"View__Profile__InNeedMosaic"
+#define Action_Profile_Neighbor_Mosaic @"Action__Profile__NeighborMosaic"
+#define Action_Profile_InNeed_Mosaic @"Action__Profile__InNeedMosaic"
+/**
+ End Profile
+*/
 
 #endif /* Analytics_keys_h */

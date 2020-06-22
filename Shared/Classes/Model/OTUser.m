@@ -9,6 +9,7 @@
 #import "OTUser.h"
 #import "OTApiKeys.h"
 #import "NSDictionary+Parsing.h"
+#import "OTLocalisationService.h"
 
 NSString *const kKeySid = @"id";
 NSString *const kKeyUuid = @"uuid";
@@ -40,6 +41,7 @@ NSString *const kVisitorUserTag = @"visitor";
 NSString *const kVisitedUserTag = @"visited";
 NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 NSString *const kGoal = @"goal";
+NSString *const kInterests = @"interests";
 
 @interface OTUser ()
 @property (nonatomic, readwrite) NSString *uuid;
@@ -98,6 +100,8 @@ NSString *const kGoal = @"goal";
             [userMemberships addObject:userMembership];
         }
         _memberships = userMemberships;
+        
+        _interests = [dictionary objectForKey:kInterests];
     }
     return self;
 }
@@ -157,6 +161,7 @@ NSString *const kGoal = @"goal";
     [encoder encodeObject:self.firebaseProperties forKey:kFirebaseProperties];
     [encoder encodeObject:self.goal forKey:kGoal];
     [encoder encodeObject:self.addressSecondary forKey:kAddress2];
+    [encoder encodeObject:self.interests forKey:kInterests];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -187,6 +192,7 @@ NSString *const kGoal = @"goal";
         self.firebaseProperties = [self sanitizeFirebaseProperties:[decoder decodeObjectForKey:kFirebaseProperties]];
         self.goal = [decoder decodeObjectForKey:kGoal];
         self.addressSecondary = [decoder decodeObjectForKey:kAddress2];
+        self.interests = [decoder decodeObjectForKey:kInterests];
     }
     return self;
 }
@@ -286,6 +292,23 @@ NSString *const kGoal = @"goal";
 
 - (void)setFirebaseProperties:(NSDictionary<NSString *,NSString *> *)firebaseProperties {
     _firebaseProperties = [self sanitizeFirebaseProperties:firebaseProperties];
+}
+
+-(NSString *)getInterestsFormated {
+    NSString * interests = @"";
+    
+    int i = 0;
+    for (NSString *interest in self.interests) {
+        if (i < self.interests.count - 1) {
+            interests = [NSString stringWithFormat:@"%@ %@,",interests,[OTLocalisationService getLocalizedValueForKey:interest]];
+        }
+        else {
+           interests = [NSString stringWithFormat:@"%@ %@",interests,[OTLocalisationService getLocalizedValueForKey:interest]];
+        }
+        i = i + 1;
+    }
+    
+    return interests;
 }
 
 @end
