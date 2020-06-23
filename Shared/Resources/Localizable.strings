@@ -706,6 +706,7 @@
 
 "profile_my_zones" = "Mes zones d'actions";
 "profile_my_zones_description" = "Soyez notifié.e des initiatives solidaires et besoins dans ces zones";
+"profile_button_add2nd_zone" = "Ajouter une zone d'action";
 
 "profile_asso_activity_title" = "Quel est votre coeur d’activité ?";
 "profile_sdf_activity_title" = "Que cherchez-vous ?";
