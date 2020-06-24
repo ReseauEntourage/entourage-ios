@@ -291,19 +291,16 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
                                             andSuccess:^(id responseObject) {
                                                 NSDictionary *responseDict = responseObject;
                                                 NSLog(@"Authentication service response : %@", responseDict);
-                                                NSDictionary *responseAddress = responseDict[@"address"];
-                                                OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
-                                                NSDictionary *responseFirebaseProperties = responseDict[@"firebase_properties"];
-                                                OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-                                                if (!isSecondary) {
-                                                     user.addressPrimary = address;
-                                                }
-                                                else {
-                                                    user.addressSecondary = address;
-                                                }
-                                                user.firebaseProperties = responseFirebaseProperties;
-                                                [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+                                                NSDictionary * dictUser = responseDict[@"user"];
+                                                OTUser *newUser = [[OTUser alloc] initWithDictionary:dictUser];
                                                 
+                                                if (newUser.uuid != nil && newUser.uuid.length > 0) {
+                                                    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+                                                    newUser.phone = user.phone;
+                                                                               
+                                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:newUser];
+                                                }
+        
                                                 if (completion) {
                                                     completion(nil);
                                                 }
@@ -334,19 +331,16 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
                                             andSuccess:^(id responseObject) {
                                                 NSDictionary *responseDict = responseObject;
                                                 NSLog(@"Authentication service response : %@", responseDict);
-                                                NSDictionary *responseAddress = responseDict[@"address"];
-                                                OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
-                                                NSDictionary *responseFirebaseProperties = responseDict[@"firebase_properties"];
-                                                OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-                                                if (!isSecondary) {
-                                                    user.addressPrimary = address;
+                                                NSDictionary * dictUser = responseDict[@"user"];
+                                                OTUser *newUser = [[OTUser alloc] initWithDictionary:dictUser];
+                                                 
+                                                if (newUser != nil) {
+                                                    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+                                                    newUser.phone = user.phone;
+                                
+                                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:newUser];
                                                 }
-                                                else {
-                                                    user.addressSecondary = address;
-                                                }
-                                                user.firebaseProperties = responseFirebaseProperties;
-                                                [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                                
+        
                                                 if (completion) {
                                                     completion(nil);
                                                 }
@@ -357,6 +351,26 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
                                                 }
                                             }
      ];
+}
+
++(void)deleteUserSecondaryAddressWithCompletion:(void (^)(NSError *))completion {
+    NSString *_url = API_URL_UPDATE_ADDRESS_SECONDARY;
+    NSString *url = [NSString stringWithFormat:_url, TOKEN];
+    [[OTHTTPRequestManager sharedInstance] DELETEWithUrl:url andParameters:nil andSuccess:^(id responseObject) {
+        
+        OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+        user.addressSecondary = nil;
+        [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+        
+        if (completion) {
+            completion(nil);
+        }
+        
+    } andFailure:^(NSError *error) {
+        if (completion) {
+            completion(error);
+        }
+    }];
 }
 
 - (void)updateUserInformationWithUser:(OTUser *)user

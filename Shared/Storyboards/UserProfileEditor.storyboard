@@ -574,13 +574,13 @@ quelques mots !</string>
                                                                         <action selector="actionModifySecondaryZone:" destination="aOS-K6-p4c" eventType="touchUpInside" id="v9b-45-lHn"/>
                                                                     </connections>
                                                                 </button>
-                                                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_trash" translatesAutoresizingMaskIntoConstraints="NO" id="cDM-dI-Nro">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_trash" translatesAutoresizingMaskIntoConstraints="NO" id="cDM-dI-Nro">
                                                                     <rect key="frame" x="289" y="11" width="18" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="18" id="J4u-yK-DI0"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KqJ-ud-xYR">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KqJ-ud-xYR">
                                                                     <rect key="frame" x="280" y="2" width="36" height="36"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="36" id="2MK-2m-BBi"/>

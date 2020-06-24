@@ -444,7 +444,20 @@ class OTOnboardingV2StartViewController: UIViewController {
     }
     
     func goMain() {
-        OTAppState.navigateToAuthenticatedLandingScreen()
+        let user = UserDefaults.standard.currentUser
+        OTAuthService.init().getDetailsForUser(user?.uuid, success: { (newUser) in
+            newUser?.phone = user?.phone
+            UserDefaults.standard.currentUser = user
+            
+            DispatchQueue.main.async {
+                OTAppState.navigateToAuthenticatedLandingScreen()
+            }
+            
+        }) { (error) in
+            DispatchQueue.main.async {
+                OTAppState.navigateToAuthenticatedLandingScreen()
+            }
+        }
     }
     
     //MARK: - IBActions -

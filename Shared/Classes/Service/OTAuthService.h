@@ -72,6 +72,7 @@ extern NSString *const kUserAuthenticationLevelAuthenticated;
                         andLongitude:(NSNumber *) longitude
                         isSecondaryAddress:(BOOL) isSecondary
                         completion:(void (^)(NSError *))completion;
++(void)deleteUserSecondaryAddressWithCompletion:(void (^)(NSError *))completion;
 
 -(void)anonymousAuthWithSuccess:(void (^)(OTUser *))success
                         failure:(void (^)(NSError *))failure;

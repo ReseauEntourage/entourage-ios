@@ -153,7 +153,17 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (IBAction)actionDeleteSecondaryZone:(id)sender {
-    //TODO: à faire + réafficher button + picto delete
+    [SVProgressHUD showWithStatus:@""];
+    [OTAuthService deleteUserSecondaryAddressWithCompletion:^(NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error == nil) {
+            dispatch_async(dispatch_get_main_queue(), ^() {
+                self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+                
+                [self.tableView reloadData];
+            });
+        }
+    }];
 }
 
 - (IBAction)actionModifyType:(id)sender {
@@ -606,18 +616,7 @@ typedef NS_ENUM(NSInteger) {
 
 - (void)setupDefineActionZonceCell:(UITableViewCell *)cell {
     OTUserEditZoneCell *cellEdit = (OTUserEditZoneCell*) cell;
-    
-    
     [cellEdit populateCellWithUser:self.user];
-    
-    return;
-    
-    UIButton *button = [cell viewWithTag:1];
-    [button setBackgroundColor:[ApplicationTheme shared].backgroundThemeColor];
-    [button setTitle:[OTAppAppearance defineActionZoneTitleForUser:self.user] forState:UIControlStateNormal];
-    
-    UILabel *addressLabel = [cell viewWithTag:2];
-    addressLabel.text = [self.user formattedActionZoneAddress];
 }
 
 - (void)setupPhoneCell:(UITableViewCell *)cell withPhone:(NSString *)phone {
