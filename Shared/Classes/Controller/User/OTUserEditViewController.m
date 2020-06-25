@@ -168,7 +168,7 @@ typedef NS_ENUM(NSInteger) {
 
 - (IBAction)actionModifyType:(id)sender {
     UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
-    OTProfileSelectActionsViewController *vc = (OTProfileSelectActionsViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Profile_typeVC"];
+    OTProfileSelectTypeViewController *vc = (OTProfileSelectTypeViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Profile_typeVC"];
     
     [self.navigationController showViewController:vc sender:nil];
 }
