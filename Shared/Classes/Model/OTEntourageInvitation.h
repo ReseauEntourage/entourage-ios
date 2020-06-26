@@ -19,6 +19,7 @@
 @property (nonatomic, strong) OTUser *inviter;
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSNumber *entourageId;
+@property (nonatomic, strong) NSString *title;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)arrayForWebservice:(NSArray *)joiners;

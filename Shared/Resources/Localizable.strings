@@ -263,6 +263,8 @@
 "event_confidentiality_description_public" = "Vous acceptez que toute personne participe à votre évènement, sans vérifier son profil au préalable.";
 "event_confidentiality_description_private" = "Vous validez chaque personne individuellement avant de  lui confirmer qu’elle peut participer.";
 "confidentiality_title" = "CONFIDENTIALITÉ";
+"invit_entourage_title" = "%@ vous invite à rejoindre";
+"invit_entourage_description_empty" = "1 nouvelle invitation à rejoindre un entourage";
 
 // Feed Item details
 "item_option_close" = "Arrêter";
