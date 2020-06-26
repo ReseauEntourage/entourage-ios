@@ -732,3 +732,11 @@
 "cult_sport_asso" = "Initiatives culturelles et sportives";
 "serv_pub_asso" = "Service Public";
 "autre_asso" = "Autres";
+
+//Report entourage
+"minChars_pop_report_entourage" = "Veuillez saisir votre message de signalement";
+"report_entourage" = "Entourage signalé";
+"report_entourage_title" = "Vous allez signaler cet Entourage à nos administrateurs.\n";
+"report_entourage_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cet Entourage :";
+"report_entourage_button" = "Envoyer";
+"report_entourage_placeholder" = "Ecrivez quelque chose…";

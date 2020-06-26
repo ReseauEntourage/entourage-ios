@@ -27,6 +27,9 @@ import SVProgressHUD
     @objc lazy var message = ""
     @objc lazy var reportedUserId = ""
     
+    @objc var isEntourageReport = false
+    @objc var entourageId:String? = nil
+    
     @objc init(labelString: NSMutableAttributedString, textFieldPlaceholder: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
         self.labelString = labelString
@@ -75,9 +78,32 @@ import SVProgressHUD
     }
     
     @objc private func sendMail() {
+        if isEntourageReport {
+            if textWithCount.textView?.text.count == 0 {
+                showErrorMinTxt()
+                return
+            }
+            sendEntourage()
+            return
+        }
         OTUserService.init().reportUser(reportedUserId, message: textWithCount.textView?.text, success: nil, failure: nil)
         SVProgressHUD.showSuccess(withStatus: "Utilisateur signalé")
         close(self)
+    }
+    
+    private func sendEntourage() {
+        OTUserService.init().reportEntourage(entourageId, message: textWithCount.textView?.text, success: nil, failure: nil)
+        SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "report_entourage"))
+               close(self)
+    }
+    
+    private func showErrorMinTxt() {
+        let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "attention_pop_title"), message: OTLocalisationService.getLocalizedValue(forKey: "minChars_pop_report_entourage"), preferredStyle: .alert)
+        alertvc.addAction(UIAlertAction.init(title: "OK", style: .default, handler: { (alert) in
+            alertvc.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alertvc, animated: true, completion: nil)
     }
     
     //MARK: - IBActions
