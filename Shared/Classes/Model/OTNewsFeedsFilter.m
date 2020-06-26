@@ -116,14 +116,14 @@
                  OTLocalizedString(@"filter_maraudes_title"),
                  [OTAppAppearance eventsFilterTitle],
                  OTLocalizedString(@"filter_entourages_title"),
-                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                // OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
     } else if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
         return @[
                  [OTAppAppearance eventsFilterTitle],
                  OTLocalizedString(@"filter_entourages_title"),
-                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                // OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
     } else {
@@ -261,9 +261,9 @@
     [array addObject:[self groupEntourageEvents]];
     
     [array addObject:[self groupActions]];
-    if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
-        [array addObject:[self groupUniquement]];
-    }
+//    if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+//        [array addObject:[self groupUniquement]];
+//    }
     NSArray *timeframe =  @[
                             [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
                                                 timeframeInHours:self.timeframeInHours]
@@ -329,7 +329,7 @@
     
     // Actions section
     [array addObject:[self groupActions]];
-    [array addObject:[self groupUniquement]];
+   // [array addObject:[self groupUniquement]];
     NSArray *timeframe =  @[
                             [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
                                                 timeframeInHours:self.timeframeInHours]
