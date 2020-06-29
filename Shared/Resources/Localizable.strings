@@ -597,7 +597,7 @@
 "onboard_type_sub" = "Qu'est ce qui vous amène ?";
 "onboard_type_description" = "Entourage vous pose ces quelques questions pour vous accueillir et vous accompagner au mieux !\n(Cette information ne sera pas visible par les autres membres du réseau).";
 "onboard_type_description_italic" = "(Cette information ne sera pas visible par les autres membres du réseau).";
-"onboard_type_choice1" = "Je suis un voisin solidaire";
+"onboard_type_choice1" = "Je suis un.e voisin.e solidaire";
 "onboard_type_choice2" = "Je suis une personne isolée ou en précarité";
 "onboard_type_choice3" = "Je fais partie d’une association ou service public";
 "onboard_place_title" = "Quel est votre quartier ?";
@@ -673,8 +673,8 @@
 "onboard_asso_search" = "Recherche";
 
 //Onboarding Sdf
-"onboard_sdf_activity_title" = "%@, que cherchez-vous ?";
-"onboard_sdf_activity_description" = "Plusieurs choix possibles.\nNous vous ferons des propositions adaptées.";
+"onboard_sdf_activity_title" = "%@, dans quel quartier avez-vous vos habitudes ?";
+"onboard_sdf_activity_description" = "Vous pourrez demander de l'aide à vos voisins et rencontrer de nouvelles personnes lors d'événements conviviaux du réseau.";
 "onboard_sdf_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
 "onboard_sdf_activity_choice_1" = "Me faire un\ncercle d’amis";
 "onboard_sdf_activity_choice_2" = "Participer à des\névènements";
@@ -711,7 +711,7 @@
 "profile_button_add2nd_zone" = "Ajouter une zone d'action";
 
 "profile_asso_activity_title" = "Quel est votre coeur d’activité ?";
-"profile_sdf_activity_title" = "Que cherchez-vous ?";
+"profile_sdf_activity_title" = "Dans quel quartier avez-vous vos habitudes ?";
 "profile_neighbour_activity_title" = "Que souhaitez-vous faire dans votre quartier ?";
 
 //Info mosaic choice from ws
