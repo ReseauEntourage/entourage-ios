@@ -21,6 +21,8 @@ NSString *const kKeyAssociationEmail = @"email";
 NSString *const kKeyDefault = @"default";
 NSString *const kKeyUserAssociationRoleTitle = @"user_role_title";
 NSString *const kKeyPostalCode = @"postal_code";
+NSString *const kVolunteers_needs = @"volunteers_needs";
+NSString *const kDonations_needs = @"donations_needs";
 
 @implementation OTAssociation
 
@@ -49,6 +51,15 @@ NSString *const kKeyPostalCode = @"postal_code";
             self.isDefault = [dictionary boolForKey:kKeyDefault];
             self.userRoleTitle = [dictionary stringForKey:kKeyUserAssociationRoleTitle];
             self.postal_code = [dictionary stringForKey:kKeyPostalCode];
+            self.donations_needs = [dictionary stringForKey:kDonations_needs];
+            self.volunteers_needs = [dictionary stringForKey:kVolunteers_needs];
+            
+            if ([self.donations_needs isEqualToString:@"<null>"]) {
+                self.donations_needs = nil;
+            }
+            if ([self.volunteers_needs isEqualToString:@"<null>"]) {
+                self.volunteers_needs = nil;
+            }
         }
     }
     return self;
@@ -67,6 +78,8 @@ NSString *const kKeyPostalCode = @"postal_code";
     [encoder encodeBool:self.isDefault forKey:kKeyDefault];
     [encoder encodeObject:self.userRoleTitle forKey:kKeyUserAssociationRoleTitle];
     [encoder encodeObject:self.postal_code forKey:kKeyPostalCode];
+    [encoder encodeObject:self.donations_needs forKey:kDonations_needs];
+    [encoder encodeObject:self.volunteers_needs forKey:kVolunteers_needs];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -84,6 +97,8 @@ NSString *const kKeyPostalCode = @"postal_code";
         self.isDefault = [decoder decodeBoolForKey:kKeyDefault];
         self.userRoleTitle = [decoder decodeObjectForKey:kKeyUserAssociationRoleTitle];
         self.postal_code = [decoder decodeObjectForKey:kKeyPostalCode];
+        self.donations_needs = [decoder decodeObjectForKey:kDonations_needs];
+        self.volunteers_needs = [decoder decodeObjectForKey:kVolunteers_needs];
     }
     return self;
 }

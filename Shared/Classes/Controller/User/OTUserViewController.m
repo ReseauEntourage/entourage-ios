@@ -24,7 +24,6 @@
 #import "UIImageView+entourage.h"
 #import "OTUserTableConfigurator.h"
 #import "OTMailSenderBehavior.h"
-#import "OTAssociationDetailsViewController.h"
 #import "OTMembersCell.h"
 #import "OTUserGroupCell.h"
 #import "UIStoryboard+entourage.h"
@@ -384,8 +383,9 @@ typedef NS_ENUM(NSInteger) {
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"AssociationDetails"]) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
-        OTAssociationDetailsViewController *associationController = (OTAssociationDetailsViewController *)controller.topViewController;
-        associationController.association = self.user.partner;
+        
+        OTAssociationDetailViewController *vc = (OTAssociationDetailViewController *) controller.topViewController;
+        vc.association = self.user.partner;
     }
 }
 

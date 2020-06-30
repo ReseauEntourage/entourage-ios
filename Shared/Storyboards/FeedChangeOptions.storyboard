@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HRX-sY-Prk">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HRX-sY-Prk">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -339,7 +336,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contacts" translatesAutoresizingMaskIntoConstraints="NO" id="6Zm-ek-3tD">
-                                        <rect key="frame" x="35" y="314.5" width="25" height="25"/>
+                                        <rect key="frame" x="35" y="314" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="etF-GN-gwY"/>
                                             <constraint firstAttribute="width" constant="25" id="fYp-fi-9Sw"/>
@@ -372,7 +369,7 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="award" translatesAutoresizingMaskIntoConstraints="NO" id="vVJ-H9-7jU">
-                                        <rect key="frame" x="35" y="254.5" width="25" height="25"/>
+                                        <rect key="frame" x="35" y="254" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="PlA-Od-WCu"/>
                                             <constraint firstAttribute="height" constant="25" id="jRv-I4-glY"/>
@@ -432,7 +429,7 @@ Dites-nous en plus avant de clôturer !</string>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rescue" translatesAutoresizingMaskIntoConstraints="NO" id="5Nc-kj-LHG">
-                                        <rect key="frame" x="35" y="405" width="25" height="25"/>
+                                        <rect key="frame" x="35" y="404.5" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="Fbe-6e-LAg"/>
                                             <constraint firstAttribute="height" constant="25" id="YG2-yP-gji"/>
@@ -495,7 +492,7 @@ Dites-nous en plus avant de clôturer !</string>
     </scenes>
     <resources>
         <image name="award" width="22" height="22"/>
-        <image name="contacts" width="22" height="22"/>
+        <image name="contacts" width="22" height="22.5"/>
         <image name="rescue" width="22" height="22"/>
         <image name="whiteClose" width="22" height="22"/>
     </resources>
