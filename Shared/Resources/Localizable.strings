@@ -711,8 +711,9 @@
 "profile_button_add2nd_zone" = "Ajouter une zone d'action";
 
 "profile_asso_activity_title" = "Quel est votre coeur d’activité ?";
-"profile_sdf_activity_title" = "Dans quel quartier avez-vous vos habitudes ?";
+"profile_sdf_activity_title" = "Que cherchez-vous ?";
 "profile_neighbour_activity_title" = "Que souhaitez-vous faire dans votre quartier ?";
+"profile_sdf_activity_description" = "Plusieurs choix possibles.\nIl y a mille manières d'être entouré et aidé.";
 
 //Info mosaic choice from ws
 "rencontrer_sdf" = "Me faire un cercle d’amis";

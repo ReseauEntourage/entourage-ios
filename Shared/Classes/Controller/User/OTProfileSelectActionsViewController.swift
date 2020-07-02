@@ -155,7 +155,7 @@ class OTProfileSelectActionsViewController: UIViewController {
         }
         
         let _titleKey = isSdf ? "profile_sdf_activity_title" : "profile_neighbour_activity_title"
-        let _descKey = isSdf ? "onboard_sdf_activity_description" : "onboard_neighbour_activity_description"
+        let _descKey = isSdf ? "profile_sdf_activity_description" : "onboard_neighbour_activity_description"
         ui_label_title.text = String.init(format: OTLocalisationService.getLocalizedValue(forKey: _titleKey),username)
         ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: _descKey)
         Logger.print("Nom de l'user ? \(username)")
