@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *ui_button_show_web;
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_title_button;
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_title_button_close;
+@property (weak, nonatomic) IBOutlet UIImageView *ui_iv_agir;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ui_constraint_image_height;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ui_constraint_image_top;
 
 @end
 
@@ -33,6 +36,7 @@
     self.isNewOptions = YES;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
     
     if (!CGPointEqualToPoint(self.fingerPoint, CGPointZero) &&
         [OTAppConfiguration supportsAddingActionsFromMapOnLongPress]) {
@@ -45,7 +49,7 @@
     self.ui_button_show_web.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     
     [self.ui_label_title setText:OTLocalizedString(@"agir_new_title")];
-    [self.ui_label_title_button setText:OTLocalizedString(@"agir_new_button_title")];
+    
     [self.ui_label_title_button_close setText:OTLocalizedString(@"cancel")];
 }
 
@@ -95,22 +99,45 @@
 - (void)setupForProUser {
     [self addOption:OTLocalizedString(@"create_tour")
       atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_maraude"
-    andAction:@selector(doCreateTour:)];
+    andAction:@selector(doCreateTour:) andSubtitle:@""];
     [self setupForPublicUser];
+    
+    if (UIScreen.mainScreen.bounds.size.height <= 568) {
+        self.ui_constraint_image_height.constant = 70;
+        self.ui_constraint_image_top.constant = 10;
+        [self.view layoutIfNeeded];
+    }
+    else if (UIScreen.mainScreen.bounds.size.height <= 667) {
+        self.ui_constraint_image_height.constant = 100;
+        self.ui_constraint_image_top.constant = 20;
+        [self.view layoutIfNeeded];
+    }
+    
 }
 
 - (void)setupForPublicUser {
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    NSString *buttonFaq = currentUser.isUserTypeAlone ? @"agir_new_button_title_alone" : @"agir_new_button_title";
+    
+    [self.ui_label_title_button setText:OTLocalizedString(buttonFaq)];
+    
     [self addOption:OTLocalizedString(@"create_event")
       atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_event"
-    andAction:@selector(doCreateEvent:)];
+    andAction:@selector(doCreateEvent:) andSubtitle:@"à une date précise"];
     
     [self addOption:OTLocalizedString(@"create_proposer_don")
       atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_don"
-    andAction:@selector(doCreateActionGift:)];
+    andAction:@selector(doCreateActionGift:) andSubtitle:@""];
     
     [self addOption:OTLocalizedString(@"create_demande_aide")
             atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_aide"
-          andAction:@selector(doCreateActionHelp:)];
+          andAction:@selector(doCreateActionHelp:) andSubtitle:@""];
+    
+    NSString *subOndes = currentUser.isUserTypeAlone ? @"agir_bonnes_ondes_alone" : @"agir_bonnes_ondes_others";
+     
+    [self addOption:OTLocalizedString(@"agir_title_bonnes_ondes")
+      atIndex:self.buttonIndex++ withIconWithoutBG:@"icn_agir_ondes"
+    andAction:@selector(doShowFormOndes:) andSubtitle:OTLocalizedString(subOndes)];
 }
 
 //MARK: IBactions
@@ -121,8 +148,9 @@
     }
 }
 - (IBAction)action_show_help:(id)sender {
-    
-    NSURL * url = [OTSafariService redirectUrlWithIdentifier:@"pedagogic-content"];
+    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    NSString *buttonFaq = currentUser.isUserTypeAlone ? @"action_faq" : @"pedagogic-content";
+    NSURL * url = [OTSafariService redirectUrlWithIdentifier:buttonFaq];
     
     [OTSafariService launchInAppBrowserWithUrl:url viewController:self.navigationController];
 }

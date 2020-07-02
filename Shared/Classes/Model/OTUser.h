@@ -67,6 +67,7 @@ extern NSString *const kVisitedUserTag;
 
 - (BOOL)isAnonymous;
 
+-(BOOL) isUserTypeAlone;
 /*
  * Returns the name of the role to be displayed under the user's fullname
  */

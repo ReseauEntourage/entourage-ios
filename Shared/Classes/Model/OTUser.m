@@ -311,4 +311,14 @@ NSString *const kInterests = @"interests";
     return interests;
 }
 
+-(BOOL) isUserTypeAlone {
+    BOOL isAlone = YES;
+    
+    if (![self.goal isEqualToString:@"ask_for_help"]) {
+        isAlone = NO;
+    }
+    
+    return isAlone;
+}
+
 @end

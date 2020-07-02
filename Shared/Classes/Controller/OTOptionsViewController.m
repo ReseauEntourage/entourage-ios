@@ -11,6 +11,7 @@
 #import "OTAlertViewBehavior.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "entourage-Swift.h"
+#import "OTHTTPRequestManager.h"
 
 @interface OTOptionsViewController ()
 
@@ -130,6 +131,7 @@
           atIndex:(int)index
          withIconWithoutBG:(NSString *)optionIcon
         andAction:(SEL)selector
+          andSubtitle:(NSString *) optionSubtitle
 {
     //Fix bottom margin for iPhone 5/5s/SE and iPhone 6/7/8
     float initial_bottom = INITIAL_BOTTOM;
@@ -153,14 +155,28 @@
     [self.view addSubview:button];
     button.clipsToBounds = YES;
 
+    float diffForSub = optionSubtitle.length > 0 ? ACTION_LABEL_HEIGHT / 2 : 0;
     UILabel *actionLabel = [[UILabel alloc] init];
     actionLabel.frame = ACTION_LABEL_FRAME;
-    actionLabel.center = CGPointMake(button.center.x - actionLabel.frame.size.width/2.0f - PADDING_HORIZONTAL/2.0f - button.frame.size.width/2.0f, button.center.y);
+    actionLabel.center = CGPointMake(button.center.x - actionLabel.frame.size.width/2.0f - PADDING_HORIZONTAL/2.0f - button.frame.size.width/2.0f, button.center.y - diffForSub);
     actionLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightBold];
     actionLabel.textColor = [ApplicationTheme shared].backgroundThemeColor;
     actionLabel.textAlignment = NSTextAlignmentRight;
     actionLabel.text = optionName;
+    
     [self.view addSubview: actionLabel];
+    
+    if (diffForSub > 0) {
+        UILabel *actionLabelSub = [[UILabel alloc] init];
+        actionLabelSub.frame = ACTION_LABEL_SUB_FRAME;
+        actionLabelSub.center = CGPointMake(button.center.x - actionLabelSub.frame.size.width/2.0f - PADDING_HORIZONTAL/2.0f - button.frame.size.width/2.0f, actionLabel.center.y + actionLabelSub.frame.size.height);
+        actionLabelSub.font = [UIFont systemFontOfSize:13 weight:UIFontWeightRegular];
+        actionLabelSub.textColor = [UIColor appGreyishBrownColor];
+        actionLabelSub.textAlignment = NSTextAlignmentRight;
+        actionLabelSub.text = optionSubtitle;
+        
+        [self.view addSubview: actionLabelSub];
+    }
 }
 
 #pragma mark - Actions
@@ -214,6 +230,15 @@
     [OTAppState hideTabBar:NO];
     [OTLogger logEvent:@"CreateEventClick"];
     [self.optionsDelegate performSelector:@selector(createEvent) withObject:nil];
+}
+
+-(IBAction)doShowFormOndes:(id)sender {
+    [OTLogger logEvent:@"ShowGoodWavesClick"];
+    NSString *slug = @"good_waves";
+    NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS,slug,TOKEN];
+       NSString *urlForm = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+    
+    [OTSafariService launchInAppBrowserWithUrlString:urlForm viewController:self.navigationController];
 }
 
 - (IBAction)doTogglePOI:(id)sender {
