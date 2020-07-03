@@ -234,8 +234,7 @@
 
 -(IBAction)doShowFormOndes:(id)sender {
     [OTLogger logEvent:Action_Plus_GoodWaves];
-    NSString *slug = @"good_waves";
-    NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS,slug,TOKEN];
+    NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS,GOOD_WAVES_LINK_ID,TOKEN];
        NSString *urlForm = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
     
     [OTSafariService launchInAppBrowserWithUrlString:urlForm viewController:self.navigationController];

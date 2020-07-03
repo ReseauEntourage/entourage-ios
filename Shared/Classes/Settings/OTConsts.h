@@ -141,3 +141,5 @@
 #define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.org"
 
 #define ENTOURAGE_WEB_URL @"https://www.entourage.social"
+
+#define GOOD_WAVES_LINK_ID @"good_waves"

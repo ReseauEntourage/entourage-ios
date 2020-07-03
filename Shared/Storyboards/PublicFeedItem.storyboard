@@ -569,13 +569,26 @@
                                                     <action selector="joinFeedItem:" destination="fid-Iu-R1a" eventType="touchUpInside" id="Ghk-lY-8zd"/>
                                                 </connections>
                                             </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_feed_faq" translatesAutoresizingMaskIntoConstraints="NO" id="B0W-sP-juX">
+                                                <rect key="frame" x="254" y="45" width="20" height="20"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L07-Nf-ryw">
+                                                <rect key="frame" x="249" y="40" width="30" height="30"/>
+                                                <connections>
+                                                    <action selector="action_show_faq:" destination="fid-Iu-R1a" eventType="touchUpInside" id="uOh-ac-08a"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="L07-Nf-ryw" firstAttribute="centerX" secondItem="B0W-sP-juX" secondAttribute="centerX" id="0ZS-LB-4ZP"/>
                                             <constraint firstAttribute="height" constant="88" id="DDf-Ds-tlf"/>
+                                            <constraint firstItem="L07-Nf-ryw" firstAttribute="centerY" secondItem="B0W-sP-juX" secondAttribute="centerY" id="DKC-1Y-aQ0"/>
                                             <constraint firstItem="vKL-T6-WyZ" firstAttribute="centerX" secondItem="8Pq-l3-WjF" secondAttribute="centerX" id="KHh-GS-o9M"/>
                                             <constraint firstItem="iBP-Jr-1A0" firstAttribute="centerX" secondItem="8Pq-l3-WjF" secondAttribute="centerX" id="eZC-rw-yqn"/>
                                             <constraint firstItem="vKL-T6-WyZ" firstAttribute="top" secondItem="8Pq-l3-WjF" secondAttribute="top" constant="10" id="oGb-Lc-nko"/>
+                                            <constraint firstItem="B0W-sP-juX" firstAttribute="leading" secondItem="iBP-Jr-1A0" secondAttribute="trailing" constant="16" id="s4u-2k-sl9"/>
+                                            <constraint firstItem="B0W-sP-juX" firstAttribute="centerY" secondItem="iBP-Jr-1A0" secondAttribute="centerY" id="st8-Bz-BBw"/>
                                             <constraint firstAttribute="bottom" secondItem="iBP-Jr-1A0" secondAttribute="bottom" constant="18" id="zpn-jk-But"/>
                                         </constraints>
                                     </view>
@@ -728,6 +741,7 @@
     </scenes>
     <resources>
         <image name="calendar" width="25" height="24"/>
+        <image name="ic_feed_faq" width="20" height="20"/>
         <image name="inviteplus" width="64" height="64"/>
         <image name="userSmall" width="35" height="35"/>
         <image name="users" width="22" height="22"/>

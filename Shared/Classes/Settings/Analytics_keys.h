@@ -118,5 +118,7 @@
 
 //Action Good waves
 #define Action_Plus_GoodWaves @"Action__Plus__GoodWaves"
+//Action feed item show FAQ
+#define Action_FeedItemInfo_FAQ @"Action__FeedItemInfo__FAQ"
 
 #endif /* Analytics_keys_h */
