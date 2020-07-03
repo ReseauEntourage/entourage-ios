@@ -116,4 +116,7 @@
  End Profile
 */
 
+//Action Good waves
+#define Action_Plus_GoodWaves @"Action__Plus__GoodWaves"
+
 #endif /* Analytics_keys_h */

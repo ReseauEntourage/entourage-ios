@@ -233,7 +233,7 @@
 }
 
 -(IBAction)doShowFormOndes:(id)sender {
-    [OTLogger logEvent:@"ShowGoodWavesClick"];
+    [OTLogger logEvent:Action_Plus_GoodWaves];
     NSString *slug = @"good_waves";
     NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS,slug,TOKEN];
        NSString *urlForm = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];

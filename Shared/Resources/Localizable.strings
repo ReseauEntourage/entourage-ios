@@ -542,6 +542,7 @@
 "agir_bonnes_ondes_others" = "soutenir en groupe une personne isolée";
 "agir_bonnes_ondes_alone" = "se créer un cercle d'amis Entourage";
 "agir_title_bonnes_ondes" = "Rejoindre les Bonnes Ondes";
+"agir_subtitle_event" = "à une date précise";
 "action_title_public" = "Public";
 "action_title_private" = "Privé";
 "action_description_public" = "Toute personne participe à votre action solidaire, sans vérifier son profil au préalable.";

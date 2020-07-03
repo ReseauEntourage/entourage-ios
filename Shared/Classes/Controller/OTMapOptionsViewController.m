@@ -123,7 +123,7 @@
     
     [self addOption:OTLocalizedString(@"create_event")
       atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_event"
-    andAction:@selector(doCreateEvent:) andSubtitle:@"à une date précise"];
+    andAction:@selector(doCreateEvent:) andSubtitle:OTLocalizedString(@"agir_subtitle_event")];
     
     [self addOption:OTLocalizedString(@"create_proposer_don")
       atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_don"
