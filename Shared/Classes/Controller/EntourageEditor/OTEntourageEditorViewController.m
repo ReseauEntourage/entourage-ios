@@ -33,6 +33,7 @@
 @property (nonatomic, weak) IBOutlet OTEntourageDisclaimerBehavior *disclaimer;
 @property (nonatomic, weak) IBOutlet OTEditEntourageNavigationBehavior *editNavBehavior;
 
+@property(nonatomic) BOOL isFirstLaunch;
 @end
 
 @implementation OTEntourageEditorViewController
@@ -40,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isFirstLaunch = YES;
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     
     [self setupCloseModal];
@@ -49,6 +51,10 @@
     
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (self.isFirstLaunch) {
+        self.isFirstLaunch = NO;
+        return;
+    }
     
     if (![self isCategorySelected] && !self.isEditingEvent) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"categoryNotSelected")

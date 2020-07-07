@@ -15,6 +15,7 @@
 #import "OTAppConfiguration.h"
 #import "OTSafariService.h"
 #import "OTHTTPRequestManager.h"
+#import "Analytics_keys.h"
 
 @interface OTMapOptionsViewController ()
 
@@ -152,7 +153,15 @@
     NSString *buttonFaq = currentUser.isUserTypeAlone ? @"action_faq" : @"pedagogic-content";
     NSURL * url = [OTSafariService redirectUrlWithIdentifier:buttonFaq];
     
-    [OTSafariService launchInAppBrowserWithUrl:url viewController:self.navigationController];
+    [OTSafariService launchInAppBrowserWithUrl:url viewController:self];
+}
+
+-(IBAction)doShowFormOndes:(id)sender {
+    [OTLogger logEvent:Action_Plus_GoodWaves];
+    NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS,GOOD_WAVES_LINK_ID,TOKEN];
+       NSString *urlForm = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+    
+    [OTSafariService launchInAppBrowserWithUrlString:urlForm viewController:self];
 }
 
 @end

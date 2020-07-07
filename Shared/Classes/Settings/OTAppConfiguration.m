@@ -275,6 +275,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (UITabBarController*)configureMainTabBar {
+    
     NSInteger selectedIndex = MAP_TAB_INDEX;
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
         selectedIndex = MESSAGES_TAB_INDEX;
@@ -288,7 +289,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)updateAppearanceForMainTabBar {
 
     id rootController = [UIApplication sharedApplication].delegate.window.rootViewController;
-    
     if ([rootController isKindOfClass:[UITabBarController class]]) {
         [OTAppConfiguration configureTabBarAppearance:(UITabBarController*)rootController];
     } else if ([rootController isKindOfClass:[UINavigationController class]]) {
@@ -298,70 +298,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (UITabBarController*)configureMainTabBarWithDefaultSelectedIndex:(NSInteger)selectedIndex
 {
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    UIStoryboard *mainStoryboard = [UIStoryboard mainStoryboard];
+    UITabBarController *newTab = [[OTMainTabbarViewController alloc]init];
     
-    // Menu tab
-    id menuViewController;
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        menuViewController = [[OTPfpMenuViewController alloc] init];
-    }
-    else {
-        menuViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMenuViewControllerIdentifier"];
-    }
-    UINavigationController *menuNavController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
-    menuNavController.tabBarItem.title = OTLocalizedString(@"menu");
-    menuNavController.tabBarItem.image = [[UIImage imageNamed:@"menu_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    menuNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"menu_tab_selected"];
-    
-    // Proximity Map Tab
-    OTMainViewController *mainMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
-    UINavigationController *mainMapNavController = [[UINavigationController alloc] initWithRootViewController:mainMapViewController];
-    mainMapNavController.tabBarItem.title = OTLocalizedString(@"à proximité");
-    mainMapNavController.tabBarItem.image = [[UIImage imageNamed:@"map_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    mainMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"map_tab_selected"];
-
-    // Messages Tab
-    OTMyEntouragesViewController *messagesViewController = [[UIStoryboard myEntouragesStoryboard] instantiateViewControllerWithIdentifier:@"OTMyEntouragesViewController"];
-    UINavigationController *messagesNavController = [[UINavigationController alloc] initWithRootViewController:messagesViewController];
-    messagesNavController.tabBarItem.title = OTLocalizedString(@"messagerie");
-    messagesNavController.tabBarItem.image = [[UIImage imageNamed:@"messages_tab"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    messagesNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"messages_tab_selected"];
-
-    // Check if solidarity guide map is supported
-    if (OTAppConfiguration.supportsSolidarityGuideFunctionality) {
-        // Solidarity Guide Map Tab
-        OTMainViewController *guideMapViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"OTMain"];
-        guideMapViewController.isSolidarityGuide = YES;
-        UINavigationController *guideMapNavController = [[UINavigationController alloc] initWithRootViewController:guideMapViewController];
-        guideMapNavController.tabBarItem.title = OTLocalizedString(@"annuaire");
-        guideMapNavController.tabBarItem.image = [[UIImage imageNamed:@"ic_navigation_guide"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        guideMapNavController.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_navigation_guide"];
-        
-        tabBarController.viewControllers = @[mainMapNavController, guideMapNavController, messagesNavController, menuNavController];
-    }
-    else {
-        tabBarController.viewControllers = @[mainMapNavController, messagesNavController, menuNavController];
-    }
-
-    tabBarController.selectedIndex = selectedIndex;
-    
-    // Add top shadow above tab bar
-    tabBarController.tabBar.layer.shadowOffset = CGSizeMake(0, 0);
-    tabBarController.tabBar.layer.shadowRadius = 3;
-    tabBarController.tabBar.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-    tabBarController.tabBar.layer.shadowOpacity = 0.3;
-
-    id<UITabBarControllerDelegate> mainTabBarBehavior = nil;
-    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
-        mainTabBarBehavior = [OTMainTabBarAnonymousBehavior new];
-        
-    }
-
-    [self sharedInstance].mainTabBarBehavior = mainTabBarBehavior;
-    tabBarController.delegate = mainTabBarBehavior;
-
-    return tabBarController;
+    newTab.selectedIndex = selectedIndex;
+    return newTab;
 }
 
 + (void)configureApplicationAppearance
@@ -411,19 +351,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (void)configureTabBarAppearance:(UITabBarController*)tabBarController
 {
-    UITabBar.appearance.tintColor = [[ApplicationTheme shared] backgroundThemeColor];
-    UITabBar.appearance.barTintColor = [[ApplicationTheme shared] backgroundThemeColor];
-    UITabBar.appearance.translucent = NO;
-    
-    //Fix inset left right with white color tabbar
-    float _insetWidth = 10;
-    
-    UITabBar *currentTabBar = tabBarController.tabBar;
-    CGSize size = CGSizeMake((currentTabBar.frame.size.width / currentTabBar.items.count) + _insetWidth , currentTabBar.frame.size.height);
-    currentTabBar.selectionIndicatorImage = [OTAppConfiguration tabSelectionIndicatorImage:[UIColor whiteColor] size:size];
-    
     for (UINavigationController *navController in tabBarController.viewControllers) {
-        [OTAppConfiguration configureNavigationControllerAppearance:navController];
+        if ([navController isKindOfClass:UINavigationController.class]) {
+            [OTAppConfiguration configureNavigationControllerAppearance:navController];
+        }
     }
 }
 
@@ -468,36 +399,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
         navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
         navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
-    }
-    
-    UIFont *selectedTabBarFont = [UIFont fontWithName:@"SFUIText-Bold" size:12];
-    NSDictionary *selectionTextAttributes = @{NSForegroundColorAttributeName:[[ApplicationTheme shared] backgroundThemeColor],
-                                              NSFontAttributeName:selectedTabBarFont};
-    UIFont *regularTabBarFont = [UIFont fontWithName:@"SFUIText-Regular" size:12];
-    NSDictionary *normalTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                                           NSFontAttributeName:regularTabBarFont};
-    
-    UIViewController *topViewController = navigationController.topViewController;
-    [topViewController.tabBarItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
-    [topViewController.tabBarItem setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
-
-    [UITabBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
-    [UITabBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
-
-    [UIBarItem.appearance setTitleTextAttributes:selectionTextAttributes forState:UIControlStateSelected];
-    [UIBarItem.appearance setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
-    
-    id rootController = [UIApplication sharedApplication].delegate.window.rootViewController;
-    if ([rootController isKindOfClass:[UITabBarController class]]) {
-        UITabBarController *tabBarController = (UITabBarController*)rootController;
-        
-        if (tabBarController.tabBar) {
-            UITabBar *currentTabBar = tabBarController.tabBar;
-            for (UITabBarItem *item in currentTabBar.items) {
-                [item setTitleTextAttributes:normalTextAttributes forState:UIControlStateNormal];
-            }
-            [currentTabBar.selectedItem setTitleTextAttributes:selectionTextAttributes forState:UIControlStateNormal];
-        }
     }
 }
 

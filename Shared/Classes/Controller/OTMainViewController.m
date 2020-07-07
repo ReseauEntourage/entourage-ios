@@ -102,7 +102,6 @@
 <
     UIGestureRecognizerDelegate,
     UIScrollViewDelegate,
-    OTOptionsDelegate,
     OTFeedItemsTableViewDelegate,
     OTTourCreatorDelegate,
     OTFeedItemQuitDelegate,
@@ -195,7 +194,7 @@
     [self.launcherButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
     self.launcherButton.layer.cornerRadius = 29;
     if (!self.isSolidarityGuide) {
-        
+        [self.launcherButton setHidden: YES];
         self.launcherButton.backgroundColor = [ApplicationTheme shared].addActionButtonColor;
         [self.launcherButton setImage:closeImage forState:UIControlStateHighlighted];
         [self.launcherButton setImage:closeImage forState:UIControlStateSelected];
@@ -517,6 +516,60 @@
 - (IBAction)goToTourOptions:(id)sender {
     [OTLogger logEvent:@"PlusOnTourClick"];
     [self createQuickEncounter];
+}
+
+#pragma mark - Methods called from nav bar (button +)
+
+- (void) showProposeFromNav {
+    self.addEditEvent = NO;
+    [self dismissViewControllerAnimated:false completion:nil];
+    
+    NSString *url = [NSString stringWithFormat: PROPOSE_STRUCTURE_URL, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
+    [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
+}
+
+- (void) createTourFromNav {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
+    void(^createBlock)(void) = ^() {
+        [self switchToNewsfeed];
+        [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
+    };
+    if ([self.presentedViewController isKindOfClass:[OTMapOptionsViewController class]])
+        [self dismissViewControllerAnimated:YES completion:createBlock];
+    else
+        createBlock();
+}
+
+- (void) createEncounterFromNav {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self switchToNewsfeed];
+        [self.editEncounterBehavior doEdit:nil
+                                   forTour:self.tourCreatorBehavior.tour.uid
+                               andLocation:self.encounterLocation];
+    }];
+}
+
+- (void) togglePoiFromNav {
+     NSString *message = @"";
+       if([OTOngoingTourService sharedInstance].isOngoing && !self.isSolidarityGuide)
+           message = self.toursMapDelegate.isActive ? @"OnTourShowGuide" : @"OnTourHideGuide";
+       else
+           message = self.toursMapDelegate.isActive ? @"GDSViewClick" : @"MaskGDSClick";
+       [OTLogger logEvent:message];
+       
+       [self dismissViewControllerAnimated:NO completion:^{
+           if (self.toursMapDelegate.isActive)
+               [self switchToGuide];
+           else
+               [self switchToNewsfeed];
+       }];
 }
 
 #pragma mark - Private methods
@@ -1069,19 +1122,10 @@
 #pragma mark - FEED ITEMS
 
 - (IBAction)doShowLaunchingOptions:(UIButton *)sender {
-    NSString *eventName = @"PlusOnTourClick";
-    if (![OTOngoingTourService sharedInstance].isOngoing) {
-        eventName = self.toursMapDelegate.isActive ? @"PlusFromFeedClick" : @"PlusFromGDSClick";
-    }
-    [OTLogger logEvent:eventName];
+    [OTLogger logEvent:Action_Plus_Structure];
 
     if (self.isSolidarityGuide) {
-        [self proposeStructure];
-    } else {
-        [OTAppState showFeedAndMapActionsFromController:self
-                                            showOptions:YES
-                                           withDelegate:self
-                                         isEditingEvent:self.addEditEvent];
+        [self showProposeFromNav];
     }
 }
 
@@ -1200,109 +1244,6 @@
         
         [self configureNavigationBar];
     }
-}
-
-#pragma mark - OTOptionsDelegate
-
-- (void)createTour {
-    if (self.isSolidarityGuide) {
-        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
-        return;
-    }
-    void(^createBlock)(void) = ^() {
-        [self switchToNewsfeed];
-        [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
-    };
-    if ([self.presentedViewController isKindOfClass:[OTMapOptionsViewController class]])
-        [self dismissViewControllerAnimated:YES completion:createBlock];
-    else
-        createBlock();
-}
-
-- (void)createEncounter {
-    if (self.isSolidarityGuide) {
-        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
-        return;
-    }
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self switchToNewsfeed];
-        [self.editEncounterBehavior doEdit:nil
-                                   forTour:self.tourCreatorBehavior.tour.uid
-                               andLocation:self.encounterLocation];
-    }];
-}
-
-- (void)createAction {
-    self.addEditEvent = NO;
-    [self createEntouragewithAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
-}
-
-- (void)createActionHelp {
-    self.isAskForHelp = YES;
-    [self createAction];
-}
-
-- (void)createActionGift {
-    self.isAskForHelp = NO;
-    [self createAction];
-}
-    
-- (void)createEvent {
-    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
-        [OTAppState presentAuthenticationOverlay:self];
-        return;
-    }
-
-    self.addEditEvent = YES;
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
-    }];
-}
-
-- (void) createEntouragewithAlertMessage:(NSString *)message {
-    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
-        [OTAppState presentAuthenticationOverlay:self];
-        return;
-    }
-
-    [self dismissViewControllerAnimated:NO completion:^{
-        //[self switchToNewsfeed];
-        self.addEditEvent = NO;
-        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
-    }];
-}
-
-- (void)togglePOI {
-    NSString *message = @"";
-    if([OTOngoingTourService sharedInstance].isOngoing && !self.isSolidarityGuide)
-        message = self.toursMapDelegate.isActive ? @"OnTourShowGuide" : @"OnTourHideGuide";
-    else
-        message = self.toursMapDelegate.isActive ? @"GDSViewClick" : @"MaskGDSClick";
-    [OTLogger logEvent:message];
-    
-    [self dismissViewControllerAnimated:NO completion:^{
-        if (self.toursMapDelegate.isActive)
-            [self switchToGuide];
-        else
-            [self switchToNewsfeed];
-    }];
-}
-
-- (void)dismissOptions {
-    [self dismissOptions:YES];
-}
-
-- (void)dismissOptions:(BOOL)animated {
-    self.addEditEvent = NO;
-    [self dismissViewControllerAnimated:animated completion:nil];
-}
-
-- (void)proposeStructure {
-
-    [self dismissOptions:NO];
-    
-    NSString *url = [NSString stringWithFormat: PROPOSE_STRUCTURE_URL, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
-    [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
 }
 
 #pragma mark - EntourageEditorDelegate

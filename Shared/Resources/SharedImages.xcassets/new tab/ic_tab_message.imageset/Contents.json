@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_tab_message.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

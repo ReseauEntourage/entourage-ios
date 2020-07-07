@@ -40,7 +40,7 @@
 #define MAP_TAB_INDEX 0
 #if !PFP
     #define SOLIDARITY_MAP_INDEX 1
-    #define MESSAGES_TAB_INDEX 2
+    #define MESSAGES_TAB_INDEX 3
 #else
     #define SOLIDARITY_MAP_INDEX 0
     #define MESSAGES_TAB_INDEX 1
@@ -139,7 +139,8 @@
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIWindow *window = [appDelegate window];
     
-    UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBar];
+     UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:MAP_TAB_INDEX];
+    
     [OTAppConfiguration configureTabBarAppearance:tabBarController];
     
     window.rootViewController = tabBarController;
@@ -469,7 +470,6 @@
                                           asEvent:isEditingEvent];
         return;
     }
-    
     if (showOptions) {
         [controller performSegueWithIdentifier:@"OTMapOptionsSegue" sender:controller];
     }

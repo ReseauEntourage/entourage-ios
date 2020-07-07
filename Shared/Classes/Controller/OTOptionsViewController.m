@@ -232,14 +232,6 @@
     [self.optionsDelegate performSelector:@selector(createEvent) withObject:nil];
 }
 
--(IBAction)doShowFormOndes:(id)sender {
-    [OTLogger logEvent:Action_Plus_GoodWaves];
-    NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS,GOOD_WAVES_LINK_ID,TOKEN];
-       NSString *urlForm = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
-    
-    [OTSafariService launchInAppBrowserWithUrlString:urlForm viewController:self.navigationController];
-}
-
 - (IBAction)doTogglePOI:(id)sender {
     [OTAppState hideTabBar:NO];
     if ([self.optionsDelegate respondsToSelector:@selector(togglePOI)]) {

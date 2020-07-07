@@ -10,7 +10,7 @@
         <!--Map Options View Controller-->
         <scene sceneID="8Am-Gf-tHL">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="KRS-0L-Lvt" customClass="OTMapOptionsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapOptions" modalPresentationStyle="overCurrentContext" id="KRS-0L-Lvt" customClass="OTMapOptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="U2U-eO-hJf"/>
                         <viewControllerLayoutGuide type="bottom" id="Bki-Tw-5Yw"/>

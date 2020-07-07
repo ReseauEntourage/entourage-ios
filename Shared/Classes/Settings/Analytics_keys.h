@@ -121,4 +121,7 @@
 //Action feed item show FAQ
 #define Action_FeedItemInfo_FAQ @"Action__FeedItemInfo__FAQ"
 
+//Action plus button agir / structure
+#define Action_Plus_Agir @"Action__Plus__Agir"
+#define Action_Plus_Structure @"Action__Plus__Structure"
 #endif /* Analytics_keys_h */

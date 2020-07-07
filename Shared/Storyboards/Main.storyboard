@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="UcL-62-xea">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -27,31 +27,138 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Reveal View Controller-->
-        <scene sceneID="Jzq-cb-ZsT">
-            <objects>
-                <viewController storyboardIdentifier="SWRevealViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="bGF-q3-B8f" customClass="OTSWRevealViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="TA1-Lc-d6N"/>
-                        <viewControllerLayoutGuide type="bottom" id="dFF-WN-VDv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="UGI-cl-plq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <connections>
-                        <segue destination="UcL-62-xea" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="Dfo-uz-6se"/>
-                        <segue destination="EYq-GT-Cxt" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="RGg-co-UNN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nhR-Um-Vdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-422.39999999999998" y="40.479760119940032"/>
-        </scene>
         <!--Menu View Controller-->
         <scene sceneID="nYF-ko-kf1">
             <objects>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="0Kh-Yg-dfo">
+                    <connections>
+                        <action selector="longPressedFooterLabel:" destination="0J6-b7-p0H" id="hNI-XA-64p"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <customObject id="mv0-mz-7N8" userLabel="Tap Association" customClass="OTTapViewBehavior">
+                    <connections>
+                        <action selector="showProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="nI9-nf-KTN"/>
+                        <outlet property="tapView" destination="HU2-ql-0PL" id="9vJ-nZ-DGG"/>
+                    </connections>
+                </customObject>
+                <customObject id="2zc-lP-Ytb" userLabel="Tap Modify" customClass="OTTapViewBehavior">
+                    <connections>
+                        <action selector="editProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="uBu-cg-fzI"/>
+                        <outlet property="tapView" destination="tvQ-n3-1AQ" id="QTp-p4-Wny"/>
+                    </connections>
+                </customObject>
+                <view contentMode="scaleToFill" id="ERU-HO-FbE">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="55"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9W-RO-tSL">
+                            <rect key="frame" x="103.5" y="19.5" width="33" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="0Kh-Yg-dfo" appends="YES" id="pTX-y3-R8f"/>
+                            </connections>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="U9W-RO-tSL" firstAttribute="centerY" secondItem="ERU-HO-FbE" secondAttribute="centerY" id="78c-bg-8Ht"/>
+                        <constraint firstItem="U9W-RO-tSL" firstAttribute="centerX" secondItem="ERU-HO-FbE" secondAttribute="centerX" id="Wc3-O3-Kld"/>
+                    </constraints>
+                </view>
+                <tapGestureRecognizer id="zbZ-Ju-erw" userLabel="Tap Login">
+                    <connections>
+                        <action selector="tappedLogin" destination="0J6-b7-p0H" id="0Ih-SZ-HLp"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tAy-vt-yhu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="809-vB-Ibw">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hU9-Dq-Xg8">
+                            <rect key="frame" x="137.5" y="32" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="DIh-w5-3LX"/>
+                                <constraint firstAttribute="height" constant="100" id="aUK-yF-lLd"/>
+                            </constraints>
+                            <state key="normal" image="user"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="50"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="showProfile" destination="0J6-b7-p0H" eventType="touchUpInside" id="ynk-Rg-oNF"/>
+                            </connections>
+                        </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HU2-ql-0PL">
+                            <rect key="frame" x="189.5" y="84" width="48" height="48"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="doy-2p-8dZ"/>
+                                <constraint firstAttribute="width" constant="48" id="rdC-wE-mEK"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="24"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </imageView>
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
+                            <rect key="frame" x="121" y="161" width="133" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="R2h-5U-huy"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prenom Nom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZg-OL-qCe">
+                            <rect key="frame" x="47.5" y="140" width="280" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="0t1-aN-am2"/>
+                                <constraint firstAttribute="width" constant="280" id="tSZ-2p-xVi"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Me connecter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lva-VN-Gmy" userLabel="Login Label">
+                            <rect key="frame" x="139" y="140" width="97.5" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="HXq-rd-4yC"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="zbZ-Ju-erw" appends="YES" id="RXc-ES-TAW"/>
+                            </connections>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="hU9-Dq-Xg8" firstAttribute="bottom" secondItem="HU2-ql-0PL" secondAttribute="bottom" id="GO8-i3-w25"/>
+                        <constraint firstItem="hU9-Dq-Xg8" firstAttribute="top" secondItem="809-vB-Ibw" secondAttribute="top" constant="32" id="Gk0-aW-KFz"/>
+                        <constraint firstItem="gZg-OL-qCe" firstAttribute="centerX" secondItem="809-vB-Ibw" secondAttribute="centerX" id="IMP-vz-A5R"/>
+                        <constraint firstItem="tvQ-n3-1AQ" firstAttribute="centerX" secondItem="809-vB-Ibw" secondAttribute="centerX" id="RT0-fM-VGm"/>
+                        <constraint firstAttribute="bottom" secondItem="tvQ-n3-1AQ" secondAttribute="bottom" constant="10" id="aPl-cs-OIg"/>
+                        <constraint firstItem="tvQ-n3-1AQ" firstAttribute="top" secondItem="gZg-OL-qCe" secondAttribute="bottom" id="ctR-jq-hBl"/>
+                        <constraint firstItem="hU9-Dq-Xg8" firstAttribute="centerX" secondItem="809-vB-Ibw" secondAttribute="centerX" id="gux-Q2-2en"/>
+                        <constraint firstItem="gZg-OL-qCe" firstAttribute="top" secondItem="hU9-Dq-Xg8" secondAttribute="bottom" constant="8" id="leW-G7-UM7"/>
+                        <constraint firstItem="Lva-VN-Gmy" firstAttribute="centerX" secondItem="809-vB-Ibw" secondAttribute="centerX" id="o1y-iD-eeE"/>
+                        <constraint firstItem="hU9-Dq-Xg8" firstAttribute="trailing" secondItem="HU2-ql-0PL" secondAttribute="trailing" id="po7-bK-HQG"/>
+                        <constraint firstItem="Lva-VN-Gmy" firstAttribute="top" secondItem="hU9-Dq-Xg8" secondAttribute="bottom" constant="8" id="rx7-QZ-RSa"/>
+                    </constraints>
+                </view>
+                <customObject id="WYy-d6-RrV" userLabel="Tap Name" customClass="OTTapViewBehavior">
+                    <connections>
+                        <action selector="showProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="NTf-l8-Dlg"/>
+                        <outlet property="tapView" destination="gZg-OL-qCe" id="QaK-n1-7IJ"/>
+                    </connections>
+                </customObject>
                 <viewController storyboardIdentifier="OTMenuViewControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="0J6-b7-p0H" customClass="OTMenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="slD-Bf-Od0"/>
@@ -232,7 +339,6 @@
                         <outlet property="tapAssociation" destination="mv0-mz-7N8" id="SLy-WD-Ks1"/>
                         <outlet property="tapModifyBehavior" destination="2zc-lP-Ytb" id="Eig-CL-5KA"/>
                         <outlet property="tapNameBehavior" destination="WYy-d6-RrV" id="W0B-9Y-URq"/>
-                        <segue destination="UcL-62-xea" kind="custom" identifier="segueMenuIdentifierForMap" customClass="SWRevealViewControllerSeguePushController" id="xSV-rR-wZy"/>
                         <segue destination="cEE-ZD-h1d" kind="modal" identifier="segueMenuIdentifierForProfile" modalTransitionStyle="coverVertical" id="ZNZ-ec-dR4"/>
                         <segue destination="pnd-2e-8CK" kind="modal" identifier="segueMenuIdentifierForSettings" id="9SM-98-Uj4"/>
                         <segue destination="vTa-22-9U0" kind="modal" identifier="segueMenuIdentifierForAbout" id="nHP-sl-eUN"/>
@@ -240,141 +346,13 @@
                         <segue destination="IdJ-o7-C8S" kind="modal" identifier="segueMenuIdentifierForSocial" id="8tc-gh-dD4"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tAy-vt-yhu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="809-vB-Ibw">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hU9-Dq-Xg8">
-                            <rect key="frame" x="137.5" y="32" width="100" height="100"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="100" id="DIh-w5-3LX"/>
-                                <constraint firstAttribute="height" constant="100" id="aUK-yF-lLd"/>
-                            </constraints>
-                            <state key="normal" image="user"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="50"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="showProfile" destination="0J6-b7-p0H" eventType="touchUpInside" id="ynk-Rg-oNF"/>
-                            </connections>
-                        </button>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HU2-ql-0PL">
-                            <rect key="frame" x="189.5" y="84" width="48" height="48"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="48" id="doy-2p-8dZ"/>
-                                <constraint firstAttribute="width" constant="48" id="rdC-wE-mEK"/>
-                            </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="24"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </imageView>
-                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modifier mon profil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvQ-n3-1AQ">
-                            <rect key="frame" x="121" y="161" width="133" height="18"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="18" id="R2h-5U-huy"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prenom Nom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZg-OL-qCe">
-                            <rect key="frame" x="47.5" y="140" width="280" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="0t1-aN-am2"/>
-                                <constraint firstAttribute="width" constant="280" id="tSZ-2p-xVi"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Me connecter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lva-VN-Gmy" userLabel="Login Label">
-                            <rect key="frame" x="139" y="140" width="97.5" height="18"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="18" id="HXq-rd-4yC"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="SFUIText-LightItalic" family="SF UI Text" pointSize="15"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                            <connections>
-                                <outletCollection property="gestureRecognizers" destination="zbZ-Ju-erw" appends="YES" id="RXc-ES-TAW"/>
-                            </connections>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="hU9-Dq-Xg8" firstAttribute="bottom" secondItem="HU2-ql-0PL" secondAttribute="bottom" id="GO8-i3-w25"/>
-                        <constraint firstItem="hU9-Dq-Xg8" firstAttribute="top" secondItem="809-vB-Ibw" secondAttribute="top" constant="32" id="Gk0-aW-KFz"/>
-                        <constraint firstItem="gZg-OL-qCe" firstAttribute="centerX" secondItem="809-vB-Ibw" secondAttribute="centerX" id="IMP-vz-A5R"/>
-                        <constraint firstItem="tvQ-n3-1AQ" firstAttribute="centerX" secondItem="809-vB-Ibw" secondAttribute="centerX" id="RT0-fM-VGm"/>
-                        <constraint firstAttribute="bottom" secondItem="tvQ-n3-1AQ" secondAttribute="bottom" constant="10" id="aPl-cs-OIg"/>
-                        <constraint firstItem="tvQ-n3-1AQ" firstAttribute="top" secondItem="gZg-OL-qCe" secondAttribute="bottom" id="ctR-jq-hBl"/>
-                        <constraint firstItem="hU9-Dq-Xg8" firstAttribute="centerX" secondItem="809-vB-Ibw" secondAttribute="centerX" id="gux-Q2-2en"/>
-                        <constraint firstItem="gZg-OL-qCe" firstAttribute="top" secondItem="hU9-Dq-Xg8" secondAttribute="bottom" constant="8" id="leW-G7-UM7"/>
-                        <constraint firstItem="Lva-VN-Gmy" firstAttribute="centerX" secondItem="809-vB-Ibw" secondAttribute="centerX" id="o1y-iD-eeE"/>
-                        <constraint firstItem="hU9-Dq-Xg8" firstAttribute="trailing" secondItem="HU2-ql-0PL" secondAttribute="trailing" id="po7-bK-HQG"/>
-                        <constraint firstItem="Lva-VN-Gmy" firstAttribute="top" secondItem="hU9-Dq-Xg8" secondAttribute="bottom" constant="8" id="rx7-QZ-RSa"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" id="ERU-HO-FbE">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="55"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9W-RO-tSL">
-                            <rect key="frame" x="103.5" y="19.5" width="33" height="16"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                            <connections>
-                                <outletCollection property="gestureRecognizers" destination="0Kh-Yg-dfo" appends="YES" id="pTX-y3-R8f"/>
-                            </connections>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="U9W-RO-tSL" firstAttribute="centerY" secondItem="ERU-HO-FbE" secondAttribute="centerY" id="78c-bg-8Ht"/>
-                        <constraint firstItem="U9W-RO-tSL" firstAttribute="centerX" secondItem="ERU-HO-FbE" secondAttribute="centerX" id="Wc3-O3-Kld"/>
-                    </constraints>
-                </view>
-                <customObject id="WYy-d6-RrV" userLabel="Tap Name" customClass="OTTapViewBehavior">
-                    <connections>
-                        <action selector="showProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="NTf-l8-Dlg"/>
-                        <outlet property="tapView" destination="gZg-OL-qCe" id="QaK-n1-7IJ"/>
-                    </connections>
-                </customObject>
-                <customObject id="2zc-lP-Ytb" userLabel="Tap Modify" customClass="OTTapViewBehavior">
-                    <connections>
-                        <action selector="editProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="uBu-cg-fzI"/>
-                        <outlet property="tapView" destination="tvQ-n3-1AQ" id="QTp-p4-Wny"/>
-                    </connections>
-                </customObject>
-                <customObject id="mv0-mz-7N8" userLabel="Tap Association" customClass="OTTapViewBehavior">
-                    <connections>
-                        <action selector="showProfile" destination="0J6-b7-p0H" eventType="valueChanged" id="nI9-nf-KTN"/>
-                        <outlet property="tapView" destination="HU2-ql-0PL" id="9vJ-nZ-DGG"/>
-                    </connections>
-                </customObject>
-                <tapGestureRecognizer id="zbZ-Ju-erw" userLabel="Tap Login">
-                    <connections>
-                        <action selector="tappedLogin" destination="0J6-b7-p0H" id="0Ih-SZ-HLp"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="0Kh-Yg-dfo">
-                    <connections>
-                        <action selector="longPressedFooterLabel:" destination="0J6-b7-p0H" id="hNI-XA-64p"/>
-                    </connections>
-                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1266.4000000000001" y="-691.304347826087"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lst-Gh-Xmp">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qhl-lw-MRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="MenuNavController" automaticallyAdjustsScrollViewInsets="NO" id="EYq-GT-Cxt" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AaL-F7-3Uz">
@@ -385,7 +363,6 @@
                         <segue destination="0J6-b7-p0H" kind="relationship" relationship="rootViewController" id="cts-RS-cpe"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qhl-lw-MRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="432" y="-689.95502248875573"/>
         </scene>
@@ -398,12 +375,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="p0O-U8-oSY"/>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="18n-Iu-3nX"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ija-p7-iwf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="432" y="40.479760119940032"/>
+            <point key="canvasLocation" x="84" y="67"/>
         </scene>
         <!--FeedChangeOptions-->
         <scene sceneID="3Yl-X6-YNn">
@@ -1697,8 +1674,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="dno-Ju-GCg"/>
-        <segue reference="ZNZ-ec-dR4"/>
-        <segue reference="xSV-rR-wZy"/>
+        <segue reference="b42-UE-vP1"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowNewEntourages" width="12" height="22"/>
