@@ -35,14 +35,14 @@ class OTMainTabbarViewController: UITabBarController {
         let  _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMain") as! OTMainViewController
         
         homeVC = UINavigationController.init(rootViewController: _homeVC)
-        homeVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"à proximité")
+        homeVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_home")
         homeVC.tabBarItem.image = UIImage.init(named: "ic_tab_home")?.withRenderingMode(.alwaysOriginal)
         homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_home_selected")
         
         let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMain") as! OTMainViewController
         _guideVC.isSolidarityGuide = true
         guideVC = UINavigationController.init(rootViewController: _guideVC)
-        guideVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"annuaire")
+        guideVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_guide")
         guideVC.tabBarItem.image = UIImage.init(named: "ic_tab_guide")?.withRenderingMode(.alwaysOriginal)
         guideVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_guide_selected")
         
@@ -53,15 +53,15 @@ class OTMainTabbarViewController: UITabBarController {
         
         let _messagesVC = UIStoryboard.myEntourages()?.instantiateViewController(withIdentifier: "OTMyEntouragesViewController") as! OTMyEntouragesViewController
         messagesVC = UINavigationController.init(rootViewController: _messagesVC)
-        messagesVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"messagerie")
+        messagesVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_message")
         messagesVC.tabBarItem.image = UIImage.init(named: "ic_tab_message")?.withRenderingMode(.alwaysOriginal)
         messagesVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_message_selected")
         
         let _menuVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMenuViewControllerIdentifier") as! OTMenuViewController
         menuVC = UINavigationController.init(rootViewController: _menuVC)
-        menuVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"menu")
+        menuVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_profil")
         menuVC.tabBarItem.image = UIImage.init(named: "ic_tab_menu")?.withRenderingMode(.alwaysTemplate)
-        //  menuVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_menu_selected")
+        menuVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_menu_selected")
         
         viewControllers = [homeVC,guideVC,plusVC,messagesVC,menuVC]
         

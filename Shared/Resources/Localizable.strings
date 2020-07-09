@@ -760,3 +760,17 @@
 "title_asso_phone_light" = "Téléphone";
 "title_asso_website" = "Site Web";
 "title_asso_address" = "Adresse";
+
+//Home new
+"tabbar_home" = "à proximité";
+"tabbar_guide" = "annuaire";
+"tabbar_message" = "messages";
+"tabbar_profil" = "profil";
+
+"home_button_map" = "Carte";
+"home_button_list" = "Liste";
+"home_button_filters" = "Filtres";
+"home_button_filters_on" = "Filtres activés";
+"home_tab_all" = "Tous";
+"home_tab_events" = "Évènements";
+"home_tab_encounter" = "Maraudes";
