@@ -599,7 +599,7 @@
 "attention_pop_title" = "Attention";
 "onboard_sms_pop_alert" = "Veuillez patienter encore %d sec avant de renouveller la demande.";
 "onboard_type_title" = "Enchantés, %@.";
-"onboard_type_sub" = "Qu'est ce qui vous amène ?";
+"onboard_type_sub" = "Qu'est-ce qui vous amène ?";
 "onboard_type_description" = "Entourage vous pose ces quelques questions pour vous accueillir et vous accompagner au mieux !\n(Cette information ne sera pas visible par les autres membres du réseau).";
 "onboard_type_description_italic" = "(Cette information ne sera pas visible par les autres membres du réseau).";
 "onboard_type_choice1" = "Je suis un.e voisin.e solidaire";
@@ -678,8 +678,8 @@
 "onboard_asso_search" = "Recherche";
 
 //Onboarding Sdf
-"onboard_sdf_activity_title" = "%@, dans quel quartier avez-vous vos habitudes ?";
-"onboard_sdf_activity_description" = "Vous pourrez demander de l'aide à vos voisins et rencontrer de nouvelles personnes lors d'événements conviviaux du réseau.";
+"onboard_sdf_activity_title" = "%@, que cherchez-vous ?";
+"onboard_sdf_activity_description" = "Plusieurs choix possibles.\nIl y a mille manières d'être entouré et aidé.";
 "onboard_sdf_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
 "onboard_sdf_activity_choice_1" = "Me faire un\ncercle d’amis";
 "onboard_sdf_activity_choice_2" = "Participer à des\névènements";

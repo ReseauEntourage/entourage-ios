@@ -33,4 +33,6 @@
 - (void)updateValue:(OTSolidarityGuideFilter *)filter;
 - (NSMutableDictionary *)toDictionaryWithDistance:(CLLocationDistance)distance Location:(CLLocationCoordinate2D)location;
 
+-(BOOL) isDefaultFilters;
+
 @end

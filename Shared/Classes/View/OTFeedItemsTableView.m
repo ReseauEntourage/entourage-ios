@@ -140,6 +140,7 @@
     self.tableHeaderView = [self headerViewWithMap:mapView mapHeight:MAPVIEW_HEIGHT showFilter:NO];
     CGPoint center = self.tableHeaderView.center;
     mapView.center = center;
+    [mapView setScrollEnabled:NO];
 }
 
 - (void)updateWithMapView:(MKMapView*)mapView
@@ -159,17 +160,10 @@
     
     CGFloat mainScreenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat mapActualHeight  = [UIScreen mainScreen].bounds.size.height;
-    CGFloat panHeaderHeight;
-    
-    if (self.showFilteringHeader && !self.showSolidarityGuidePOIs) {
-        panHeaderHeight = FEEDS_FILTER_HEIGHT;
-    } else {
-        panHeaderHeight = PAN_VIEW_HEIGHT;
-    }
-    
+
     UIView *headerView = [[UIView alloc]
                           initWithFrame:CGRectMake(0, 0,
-                                                   mainScreenWidth, mapVisibleHeight + panHeaderHeight)];
+                                                   mainScreenWidth, mapVisibleHeight)];
     
     mapView.frame = CGRectMake(0, (mapVisibleHeight - mapActualHeight) / 2,
                                headerView.bounds.size.width, mapActualHeight);
@@ -182,13 +176,13 @@
     
     CGFloat buttonSize = 42;
     CGFloat marginOffset = 20;
-    CGFloat y = marginOffset + 64;
+    CGFloat y = marginOffset + 64 + 30;
     
     if (@available(iOS 11.0, *)) {
-        y = self.safeAreaInsets.top + marginOffset;
+        y = self.safeAreaInsets.top + marginOffset * 3;
     }
     
-    CGFloat x = UIScreen.mainScreen.bounds.size.width - buttonSize - marginOffset;
+    CGFloat x = UIScreen.mainScreen.bounds.size.width - buttonSize - marginOffset - 8;
     UIButton *showCurrentLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(x, y, buttonSize, buttonSize)];
     
     [showCurrentLocationButton setImage:[UIImage imageNamed:@"geoloc"] forState:UIControlStateNormal];
@@ -196,22 +190,12 @@
     showCurrentLocationButton.clipsToBounds = YES;
     showCurrentLocationButton.layer.cornerRadius = buttonSize / 2;
     [showCurrentLocationButton addTarget:self action:@selector(requestCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
+    
     [headerView addSubview:mapView];
     self.mapView = mapView;
-    //[headerView addSubview:showCurrentLocationButton];
+    [headerView addSubview:showCurrentLocationButton];
+    [headerView bringSubviewToFront:showCurrentLocationButton];
     [headerView sendSubviewToBack:mapView];
-    //[headerView bringSubviewToFront:showCurrentLocationButton];
-    
-    // Add pan view used to drag to show map
-    [self setupPanToShowMapView:PAN_VIEW_HEIGHT mapHeight:mapVisibleHeight];
-    
-    // Add filter view if supported
-    [self setupFilteringHeaderView:mapVisibleHeight];
-    if (showFilter && !self.showSolidarityGuidePOIs) {
-        [headerView addSubview:self.filterView];
-    }
-    
-    [headerView addSubview:self.panToShowMapView];
     
     return headerView;
 }
@@ -353,30 +337,12 @@
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (self.tableHeaderView == nil) {
-        [self.feedItemsDelegate mapDidBecomeVisible:NO];
-        return;
+//TO prevent bounce on top
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y <= -20) {
+        scrollView.contentOffset = CGPointMake(scrollView.contentOffset.x, -20);
     }
-    
-    [UIView animateWithDuration:0.5 animations:^() {
-        if (self.contentSize.height - scrollView.contentOffset.y <= scrollView.frame.size.height &&
-            self.tableFooterView != self.emptyFooterView &&
-            self.contentSize.height > self.frame.size.height) {
-            
-            [self.superview layoutIfNeeded];
-        }
-    }];
-
-    UIView *mapView = self.tableHeaderView.subviews[0];
-
-    CGRect mapViewFrame = mapView.frame;
-    mapViewFrame.origin.y = (self.mapDefaultVisibleHeight - mapView.bounds.size.height + self.contentOffset.y) / 2;
-    mapView.frame = mapViewFrame;
-    
-    CGFloat topOffset = 42 + 11 * 2; // button height + margin * 2
-    BOOL mapVisible = self.mapDefaultVisibleHeight - self.contentOffset.y >= topOffset;
-    [self.feedItemsDelegate mapDidBecomeVisible: mapVisible];
 }
 
 /********************************************************************************/
@@ -584,14 +550,21 @@
 
 - (void)showEventsOnlyAction {
     self.showEventsOnly = YES;
+    self.showEncountersOnly = NO;
     [self updateFilterButtons];
     [self.feedItemsDelegate showEventsOnly];
 }
 
 - (void)showAllFeedItemsAction {
     self.showEventsOnly = NO;
+    self.showEncountersOnly = NO;
     [self updateFilterButtons];
     [self.feedItemsDelegate showAllFeedItems];
+}
+-(void) showEncountersOnlyAction {
+    self.showEncountersOnly = YES;
+    [self updateFilterButtons];
+    [self.feedItemsDelegate showEncountersOnly];
 }
 
 @end

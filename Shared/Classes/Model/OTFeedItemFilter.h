@@ -12,16 +12,16 @@ typedef enum {
     FeedItemFilterKeyContributionSocial,
     FeedItemFilterKeyContributionHelp,
     FeedItemFilterKeyContributionResource,
+    FeedItemFilterKeyContributionOther,
     FeedItemFilterKeyContributionInfo,
     FeedItemFilterKeyContributionSkill,
-    FeedItemFilterKeyContributionOther,
-
+    
     FeedItemFilterKeyDemandeSocial,
     FeedItemFilterKeyDemandeHelp,
     FeedItemFilterKeyDemandeResource,
+    FeedItemFilterKeyDemandeOther,
     FeedItemFilterKeyDemandeInfo,
     FeedItemFilterKeyDemandeSkill,
-    FeedItemFilterKeyDemandeOther,
 
     FeedItemFilterKeyUnread,
     FeedItemFilterKeyIncludingClosed,

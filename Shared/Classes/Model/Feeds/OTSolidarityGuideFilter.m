@@ -30,6 +30,16 @@
     return self;
 }
 
+-(BOOL) isDefaultFilters {
+    BOOL isDefault = YES;
+    
+    if (!_showFood || !_showHousing || !_showHeal || !_showRefresh || !_showOrientation || !_showCaring || !_showReinsertion) {
+        isDefault = NO;
+    }
+    
+    return isDefault;
+}
+
 - (NSArray *)groupHeaders {
     return @[OTLocalizedString(@"filter_solidarity_guide_categories")];
 }

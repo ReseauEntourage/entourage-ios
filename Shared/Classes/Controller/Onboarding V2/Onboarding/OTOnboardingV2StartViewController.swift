@@ -444,7 +444,12 @@ class OTOnboardingV2StartViewController: UIViewController {
     }
     
     func goMain() {
+        
+        UserDefaults.standard.set(userTypeSelected.rawValue, forKey: "userType")
+        UserDefaults.standard.set(true, forKey: "isFromOnboarding")
+        
         let user = UserDefaults.standard.currentUser
+        
         OTAuthService.init().getDetailsForUser(user?.uuid, success: { (newUser) in
             newUser?.phone = user?.phone
             UserDefaults.standard.currentUser = user
