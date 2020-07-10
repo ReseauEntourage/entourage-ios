@@ -774,3 +774,11 @@
 "home_tab_all" = "Tous";
 "home_tab_events" = "Évènements";
 "home_tab_encounter" = "Maraudes";
+
+//Tooltip
+"tooltip_desc1" = "Votre fil d’actualité a été filtré en fonction de vos préférences. Modifiez vos paramètres en cliquant sur ce bouton.";
+"tooltip_title2" = "Annuaire solidaire";
+"tooltip_desc2" = "Besoin d’informations ? Retrouvez tous les lieux solidaires autour de vous.";
+"tooltip_title3" = "Passez à l’action";
+"tooltip_desc3" = "Vous pouvez maintenant proposer ou demander de l’aide au réseau !";
+"tooltip_step_format" = "%@ sur 3";

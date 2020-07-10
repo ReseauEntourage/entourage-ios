@@ -19,6 +19,8 @@ class OTMainTabbarViewController: UITabBarController {
     var isAskForHelp = false
     var addEditEvent = false
     
+    var tooltipView:UIView? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +31,24 @@ class OTMainTabbarViewController: UITabBarController {
         delegate = self
         
        setupVCs()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showTooltip), name: NSNotification.Name(rawValue: "showToolTip"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideTooltip), name: NSNotification.Name(rawValue: "hideToolTip"), object: nil)
+    }
+    
+    @objc func showTooltip() {
+        tooltipView = OTHomeTooltipView.init(frame: view.frame)
+        
+        view.addSubview(tooltipView!)
+        view.bringSubviewToFront(tooltipView!)
+    }
+    
+    @objc func hideTooltip() {
+        if let tooltipView = tooltipView {
+            tooltipView.removeFromSuperview()
+            self.tooltipView = nil
+            NotificationCenter.default.removeObserver(self)
+        }
     }
     
     func setupVCs() {

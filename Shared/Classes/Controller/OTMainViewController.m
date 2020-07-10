@@ -321,7 +321,7 @@
     
     if (isFromOnboarding) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFromOnboarding"];
-        //TODO: show tooltype
+        
         if (userType == 1) { //Neighbour
             [self.currentFilter setNeighbourFilters];
         }
@@ -329,6 +329,9 @@
             [self.currentFilter setAloneFilters];
         }
         [self changeFilterButton];
+        
+        NSNotification *notif = [[NSNotification alloc]initWithName:@"showToolTip" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notif];
     }
     
     [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
