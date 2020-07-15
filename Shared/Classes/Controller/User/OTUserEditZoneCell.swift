@@ -72,7 +72,18 @@ import UIKit
         ui_button_add_zone.layer.cornerRadius = 8
         ui_button_add_zone.layer.borderWidth = 1
         ui_button_add_zone.layer.borderColor = UIColor.appOrange()?.cgColor
-        ui_button_add_zone.setTitle(OTLocalisationService.getLocalizedValue(forKey: "profile_button_add2nd_zone"), for: .normal)
+        
+        var buttonTxt = OTLocalisationService.getLocalizedValue(forKey: "profile_button_add2nd_zone")
+        if UIScreen.main.bounds.width <= 375 {
+            if UIScreen.main.bounds.width <= 320 {
+                buttonTxt = OTLocalisationService.getLocalizedValue(forKey: "profile_button_add2nd_zone_lite")
+            }
+            else {
+                buttonTxt = OTLocalisationService.getLocalizedValue(forKey: "profile_button_add2nd_zone_lite2")
+            }
+        }
+        
+        ui_button_add_zone.setTitle(buttonTxt, for: .normal)
         
         //Type action
         ui_type_button.layer.cornerRadius = 8
