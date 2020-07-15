@@ -578,7 +578,7 @@
     self.showNeighborhood = NO;
     self.showPrivateCircle = NO;
     self.showOuting = NO;
-    self.showPastOuting = YES;
+    self.showPastOuting = NO;
     
     self.showMedical = YES;
     self.showSocial = YES;
@@ -613,7 +613,7 @@
     self.showNeighborhood = YES;
     self.showPrivateCircle = YES;
     self.showOuting = YES;
-    self.showPastOuting = YES;
+    self.showPastOuting = NO;
     
     self.showDemand = YES;
     self.showContribution = NO;
@@ -643,7 +643,7 @@
     self.showNeighborhood = YES;
     self.showPrivateCircle = YES;
     self.showOuting = YES;
-    self.showPastOuting = YES;
+    self.showPastOuting = NO;
     
     self.showDemand = NO;
     self.showContribution = YES;
