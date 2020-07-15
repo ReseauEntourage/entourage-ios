@@ -184,12 +184,15 @@
 @property (nonatomic) BOOL forceReloadingFeeds;
 @property (nonatomic) BOOL isAskForHelp;
 
+@property (nonatomic) BOOL isFirstInitView;
 @end
 
 @implementation OTMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.isFirstInitView = YES;
     
     [self setup];
     
@@ -475,6 +478,19 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if (self.isFirstInitView) {
+        [self.ui_view_top_menu.layer setShadowColor:[UIColor blackColor].CGColor];
+        [self.ui_view_top_menu.layer setShadowOpacity:0.5];
+        [self.ui_view_top_menu.layer setShadowRadius:4.0];
+        self.ui_view_top_menu.layer.masksToBounds = NO;
+        CGRect _rect = CGRectMake(0, self.ui_view_top_menu.bounds.size.height, self.view.frame.size.width, self.ui_view_top_menu.layer.shadowRadius);
+        CGPathRef shadowPath = [[UIBezierPath bezierPathWithRect:_rect] CGPath];
+        [self.ui_view_top_menu.layer setShadowPath:shadowPath];
+        self.isFirstInitView = NO;
+    }
+    
+    
     [OTAppConfiguration updateAppearanceForMainTabBar];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
