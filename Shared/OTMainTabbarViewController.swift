@@ -103,6 +103,18 @@ class OTMainTabbarViewController: UITabBarController {
     }
     
     func showMapOption() {
+        //Check if Encounter if not show regular menu
+        let isOngoingTou = UserDefaults.standard.currentOngoingTour
+        
+        if (OTOngoingTourService.sharedInstance()?.isOngoing ?? false || isOngoingTou != nil) {
+            showHomeVC()
+            OTLogger.logEvent("PlusOnTourClick")
+            if let _vc = homeVC.topViewController as? OTMainViewController {
+                _vc.createQuickEncounter()
+                return
+            }
+        }
+        
         OTLogger.logEvent(Action_Plus_Agir)
         let storyb = UIStoryboard.init(name: "MapOptions", bundle: nil)
         if let vc = storyb.instantiateViewController(withIdentifier: "MapOptions") as? OTMapOptionsViewController {

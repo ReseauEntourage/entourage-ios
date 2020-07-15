@@ -136,7 +136,6 @@
 @property (nonatomic) BOOL                                          isTourListDisplayed;
 @property (nonatomic, weak) IBOutlet UIButton                       *launcherButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *stopButton;
-@property (nonatomic, weak) IBOutlet UIButton                       *createEncounterButton;
 
 @property (nonatomic, strong) NSArray                               *categories;
 @property (nonatomic, strong) NSArray                               *pois;
@@ -224,17 +223,6 @@
          [self.launcherButton setTitle:@"" forState:UIControlStateNormal];
     }
     
-    [self.createEncounterButton.layer setShadowColor:[UIColor blackColor].CGColor];
-    [self.createEncounterButton.layer setShadowOpacity:0.5];
-    [self.createEncounterButton.layer setShadowRadius:4.0];
-    self.createEncounterButton.layer.masksToBounds = NO;
-    [self.createEncounterButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
-    self.createEncounterButton.layer.cornerRadius = 29;
-    
-    self.createEncounterButton.backgroundColor = [ApplicationTheme shared].addActionButtonColor;
-    [self.createEncounterButton setImage:closeImage forState:UIControlStateHighlighted];
-    [self.createEncounterButton setImage:closeImage forState:UIControlStateSelected];
-    
     if (![OTAppConfiguration supportsAddingActionsFromMap]) {
         self.launcherButton.hidden = YES;
     }
@@ -297,7 +285,6 @@
         [self clearMap];
         self.launcherButton.hidden = NO;
         self.stopButton.hidden = YES;
-        self.createEncounterButton.hidden = YES;
     }
     
     [self switchToNewsfeed];
@@ -387,7 +374,6 @@
     [self clearMap];
     self.tourCreatorBehavior.tour = [NSUserDefaults standardUserDefaults].currentOngoingTour;
     self.launcherButton.hidden = YES;
-    self.createEncounterButton.hidden = NO;
     self.stopButton.hidden = NO;
     
     [[OTTourService new] tourEncounters:self.tourCreatorBehavior.tour
@@ -620,11 +606,6 @@
     [self.noDataBehavior switchedToGuide];
     [self reloadPois];
     [self configureNavigationBar];
-}
-
-- (IBAction)goToTourOptions:(id)sender {
-    [OTLogger logEvent:@"PlusOnTourClick"];
-    [self createQuickEncounter];
 }
 
 #pragma mark - Methods called from nav bar (button +)
@@ -1255,7 +1236,6 @@
     [self.newsFeedsSourceBehavior addFeedItemToFront:self.tourCreatorBehavior.tour];
     self.stopButton.hidden = NO;
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:self.tourCreatorBehavior.tour];
-    self.createEncounterButton.hidden = NO;
     NSString *snapshotStartFilename = [NSString stringWithFormat:@SNAPSHOT_START, self.tourCreatorBehavior.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotStartFilename];
     [self showNewTourOnGoing];
@@ -1281,7 +1261,6 @@
         return;
     }
     self.launcherButton.hidden = YES;
-    self.createEncounterButton.hidden = YES;
     [self showFeedsList];
     
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
@@ -1357,7 +1336,6 @@
         self.launcherButton.hidden = NO;
     }
     self.stopButton.hidden = YES;
-    self.createEncounterButton.hidden = YES;
     
     [OTOngoingTourService sharedInstance].isOngoing = NO;
     [self.tourCreatorBehavior endOngoing];
@@ -1371,7 +1349,6 @@
         return;
     }
     self.launcherButton.hidden = YES;
-    self.createEncounterButton.hidden = NO;
 }
 
 - (void)resumeTour {
@@ -1381,7 +1358,6 @@
     }
     [OTOngoingTourService sharedInstance].isOngoing = YES;
     self.stopButton.hidden = NO;
-    self.createEncounterButton.hidden = NO;
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -1737,7 +1713,6 @@
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.5 animations:^(void) {
         self.launcherButton.hidden = YES;
-        self.createEncounterButton.hidden = NO;
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];

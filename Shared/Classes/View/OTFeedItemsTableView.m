@@ -58,7 +58,6 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *furtherEntouragesBtn;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, weak) IBOutlet UIButton *tourOptionsBtn;
 
 @property (nonatomic, strong) UIView *emptyFooterView;
 @property (nonatomic, strong) UIView *currentNewsfeedFooter;
@@ -190,6 +189,12 @@
     showCurrentLocationButton.clipsToBounds = YES;
     showCurrentLocationButton.layer.cornerRadius = buttonSize / 2;
     [showCurrentLocationButton addTarget:self action:@selector(requestCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
+    
+    [showCurrentLocationButton.layer setShadowColor:[UIColor blackColor].CGColor];
+    [showCurrentLocationButton.layer setShadowOpacity:0.5];
+    [showCurrentLocationButton.layer setShadowRadius:4.0];
+    showCurrentLocationButton.layer.masksToBounds = NO;
+    [showCurrentLocationButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
     
     [headerView addSubview:mapView];
     self.mapView = mapView;

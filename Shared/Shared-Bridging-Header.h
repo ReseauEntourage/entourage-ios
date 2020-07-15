@@ -43,3 +43,4 @@
 #import "OTMyEntouragesViewController.h"
 #import "OTMapOptionsViewController.h"
 #import "OTHTTPRequestManager.h"
+#import "OTOngoingTourService.h"

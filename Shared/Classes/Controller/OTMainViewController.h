@@ -41,4 +41,5 @@
 - (void) createTourFromNav;
 - (void) createEncounterFromNav;
 - (void) togglePoiFromNav;
+- (void)createQuickEncounter;
 @end
