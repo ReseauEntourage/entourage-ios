@@ -197,6 +197,24 @@ class OTLoginV2ViewController: UIViewController {
         countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
+    func goLoginNext(user:OTUser?) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "LoginNextVC") as! OTLoginNextViewController
+        vc.currentUser = user
+        if let appDelegate = UIApplication.shared.delegate, let window = appDelegate.window {
+            window?.rootViewController = vc
+            window?.makeKeyAndVisible()
+        }
+    }
+    
+    func goalRealMain() {
+        OTAppState.continueFromLoginVC()
+        
+        if (self.fromLink != nil) {
+            OTDeepLinkService.init().handleDeepLink(self.fromLink)
+            self.fromLink = nil;
+        }
+    }
+    
     //MARK: - Network -
     func login(phone:String, code:String) {
         
@@ -216,11 +234,25 @@ class OTLoginV2ViewController: UIViewController {
                 UserDefaults.standard.set(false, forKey: "user_tours_only")
             }
             
-            OTAppState.continueFromLoginVC()
-            
-            if (self.fromLink != nil) {
-                OTDeepLinkService.init().handleDeepLink(self.fromLink)
-                self.fromLink = nil;
+            if user?.addressPrimary == nil || user?.email?.count == 0 {
+                self.goLoginNext(user:user)
+            }
+            else {
+                if user?.goal == nil || user?.goal?.count == 0 {
+                    let message = OTLocalisationService.getLocalizedValue(forKey: "login_info_pop_action")
+                    let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "login_pop_information"), message: message, preferredStyle: .alert)
+                    
+                    let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"OK"), style: .default, handler: { (action) in
+                        self.goalRealMain()
+                    })
+                    
+                    alertvc.addAction(action)
+                    
+                    self.present(alertvc, animated: true, completion: nil)
+                    return
+                }
+                
+                self.goalRealMain()
             }
             
         }) { (error) in

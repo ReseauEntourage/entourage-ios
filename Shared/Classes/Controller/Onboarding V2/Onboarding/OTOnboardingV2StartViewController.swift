@@ -48,6 +48,8 @@ class OTOnboardingV2StartViewController: UIViewController {
     var temporary2ndLocation:CLLocation? = nil
     var temporary2ndAddressName:String? = nil
     
+    weak var parentDelegate:OTPreOnboardingV2ChoiceViewController? = nil
+    
     //MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +77,7 @@ class OTOnboardingV2StartViewController: UIViewController {
         }) { (error) in
             SVProgressHUD.dismiss()
             if let _error = error as NSError? {
-                var errorMessage = _error.localizedDescription
+                let errorMessage = _error.localizedDescription
                 let errorCode = _error.readCode()
                 
                 var showErrorHud = true
@@ -90,9 +92,9 @@ class OTOnboardingV2StartViewController: UIViewController {
                 }
                 else if errorCode == PHONE_ALREADY_EXIST {
                     OTLogger.logEvent(Error_Onboarding_Phone_Submit_Exist)
-                    errorMessage = OTLocalisationService.getLocalizedValue(forKey:"alreadyRegisteredShortMessage")
-                    self.goNextStep()
                     
+                    self.showPopAlreadySigned()
+                    return
                 }
                 
                 if (errorMessage.count > 0) {
@@ -409,6 +411,18 @@ class OTOnboardingV2StartViewController: UIViewController {
     }
     
     //MARK: - Methods -
+    func showPopAlreadySigned() {
+        let alertVC = UIAlertController.init(title: nil, message: OTLocalisationService.getLocalizedValue(forKey: "alreadyRegistereMessageGoBack"), preferredStyle: .alert)
+        let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey: "OK"), style: .default, handler: { (action) in
+            self.parentDelegate?.isFromOnboarding = true
+            self.navigationController?.popViewController(animated: true)
+            
+        })
+        
+        alertVC.addAction(action)
+        self.navigationController?.present(alertVC, animated: true, completion: nil)
+    }
+    
     func showPopNotification() {
         if let _currentUser = UserDefaults.standard.currentUser {
             if OTAppConfiguration.shouldShowIntroTutorial(_currentUser) {

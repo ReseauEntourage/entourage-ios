@@ -50,6 +50,12 @@
 "lostCodeMessage2" = "Le problème persiste ? écrivez à contact@entourage.social et nous en génèrerons un pour vous.";
 "alreadyRegistereMessageGoBack" = "Le numéro est déjà enregistré, nous allons vous rediriger vers la page de connexion.";
 
+//Login next
+"login_info_pop_action" = "Vous pouvez choisir votre mode d'action dans votre profil.";
+"login_pop_information" = "Information";
+"login_email_pwd_title" = "Ok super !";
+"login_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
+
 // MenuItems
 "menu_amis" = "Amis";
 "myProfile" = "MON COMPTE";

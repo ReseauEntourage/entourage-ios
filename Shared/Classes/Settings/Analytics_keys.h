@@ -27,6 +27,12 @@
 #define Error_Login_Fail @"Error__Login__LoginFail"
 #define Error_Login_Phone @"Error__Login__TelephoneSubmitError"
 
+#define View_Login_Action_Zone @"View__Login__ActionZone"
+#define Action_Login_SetAction_Zone_Geoloc @"Action__Login__SetActionZoneGeoloc"
+#define Action_Login_SetAction_Zone_Search @"Action__Login__SetActionZoneSearch"
+#define Action_Login_Action_Zone_Submit @"Action__Login__ActionZoneSubmit"
+#define View_Login_Input_Email @"View__Login__InputEmail"
+
 //Onboarding
 #define View_Onboarding_Names @"View__Onboarding__InputNames"
 #define Action_Onboarding_Names @"Action__Onboarding__NameSubmit"
