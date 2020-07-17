@@ -89,7 +89,7 @@ class OTLoginNextViewController: UIViewController {
             sendAddAddress()
         }
         else {
-            updateUserEmailPwd()
+            updateUserEmail()
         }
     }
     
@@ -114,7 +114,7 @@ class OTLoginNextViewController: UIViewController {
         }
     }
     
-    func updateUserEmailPwd() {
+    func updateUserEmail() {
         var isValid = false
         let message = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_error_email")
         if temporaryEmail.isValidEmail {

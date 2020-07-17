@@ -25,14 +25,12 @@ class OTLoginPlaceViewController: UIViewController {
     var currentLocation:CLLocation? = nil
     var temporaryAddressName:String? = nil
     
-    var isSdf = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         OTLogger.logEvent(View_Login_Action_Zone)
-        let _title = isSdf ? "onboard_place_title_sdf" : "onboard_place_title"
-        let _description = isSdf ? "onboard_place_description_sdf" : "onboard_place_description"
+        let _title = "onboard_place_title"
+        let _description = "onboard_place_description"
         ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: _title)
         ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: _description)
         
