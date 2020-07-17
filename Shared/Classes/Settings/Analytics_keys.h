@@ -33,6 +33,9 @@
 #define Action_Login_Action_Zone_Submit @"Action__Login__ActionZoneSubmit"
 #define View_Login_Input_Email @"View__Login__InputEmail"
 
+#define Action_Login_Email_Submit @"Action__Login__EmailSubmit"
+#define Error_Login_Email_Submit_Error @"Error__Login__EmailSubmitError"
+
 //Onboarding
 #define View_Onboarding_Names @"View__Onboarding__InputNames"
 #define Action_Onboarding_Names @"Action__Onboarding__NameSubmit"

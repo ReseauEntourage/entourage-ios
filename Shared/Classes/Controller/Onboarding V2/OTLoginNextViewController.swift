@@ -96,7 +96,7 @@ class OTLoginNextViewController: UIViewController {
     //MARK: - Network
     
     func sendAddAddress() {
-        OTLogger.logEvent(Action_Onboarding_Action_Zone_Submit)
+        OTLogger.logEvent(Action_Login_Action_Zone_Submit)
         if let _place = temporaryGooglePlace {
             SVProgressHUD.show()
             OTAuthService.updateUserAddress(withPlaceId: _place.placeID, isSecondaryAddress: false) { (error) in
@@ -134,7 +134,7 @@ class OTLoginNextViewController: UIViewController {
         SVProgressHUD.show()
         let _currentUser = UserDefaults.standard.currentUser
         _currentUser?.email = temporaryEmail
-        OTLogger.logEvent(Action_Onboarding_Email_Submit)
+        OTLogger.logEvent(Action_Login_Email_Submit)
         OTAuthService().updateUserInformation(with: _currentUser, success: { (newUser) in
             newUser?.phone = _currentUser?.phone
             UserDefaults.standard.currentUser = newUser
@@ -143,7 +143,7 @@ class OTLoginNextViewController: UIViewController {
                 self.goMain()
             }
         }) { (error) in
-            OTLogger.logEvent(Error_Onboarding_Email_Submit_Error)
+            OTLogger.logEvent(Error_Login_Email_Submit_Error)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
                 self.goMain()
