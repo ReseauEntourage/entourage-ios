@@ -34,6 +34,7 @@ class OTOnboardingNamesViewController: UIViewController {
         
         ui_tf_firstname.text = userFirstname
         ui_tf_lastname.text = userLastname
+        ui_tf_lastname.returnKeyType = .continue
         
         if userFirstname?.count ?? 0 >= minimumCharacters && userLastname?.count ?? 0 >= minimumCharacters {
             delegate?.updateButtonNext(isValid: true)
@@ -73,6 +74,22 @@ extension OTOnboardingNamesViewController: UITextFieldDelegate {
                 delegate?.goNextManually()
             }
         }
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == ui_tf_lastname {
+            let inputLength = string.count > 0 ? 1 : -1
+            if ((textField.text?.count ?? 0) + inputLength) >= 2 {
+                textField.returnKeyType = .done
+            }
+            else {
+                textField.returnKeyType = .continue
+            }
+            textField.reloadInputViews()
+        }
+        
         return true
     }
     

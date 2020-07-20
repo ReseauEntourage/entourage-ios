@@ -73,6 +73,10 @@ extension OTOnboardingEmailPwdViewController: UITextFieldDelegate {
         }
         delegate?.updateEmailPwd(email: email, pwd: pwd, pwdConfirm: pwdConfirm)
         delegate?.updateButtonNext(isValid: isValid)
+        
+        if ui_tf_email.text?.isValidEmail ?? false {
+            delegate?.goNextManually()
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
