@@ -161,7 +161,9 @@
                 break;
             case FeedItemFilterKeyTimeframe:
                 return 90;
-                
+            case FeedItemFilterKeyAlls:
+            case FeedItemFilterKeyPartners:
+                return 60;
             default:
                 return 44;
                 

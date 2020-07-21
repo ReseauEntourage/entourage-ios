@@ -114,7 +114,10 @@
             return [OTAppAppearance eventsFilterTitle];
         case FeedItemFilterKeyEventsPast:
             return [OTAppAppearance includePastEventsFilterTitle];
-        
+        case FeedItemFilterKeyAlls:
+            return OTLocalizedString(@"filter_all");
+            case FeedItemFilterKeyPartners:
+            return OTLocalizedString(@"filter_partnersOnly");
         default:
             return @"";
     }

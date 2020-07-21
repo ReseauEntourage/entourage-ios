@@ -69,8 +69,13 @@
             self.showContributionInfo = !self.showContribution ? self.showContribution : savedFilter.showContributionInfo.boolValue;
             self.showContributionSkill = !self.showContribution ? self.showContribution : savedFilter.showContributionSkill.boolValue;
             self.showContributionOther = !self.showContribution ? self.showContribution : savedFilter.showContributionOther.boolValue;
+            
+            self.showPartners = savedFilter.showPartnersOnly.boolValue;
+            self.showAlls = !savedFilter.showPartnersOnly.boolValue;
         }
         else {
+            self.showPartners = NO;
+            self.showAlls = YES;
             self.showNeighborhood = YES;
             self.showPrivateCircle = YES;
             self.showOuting = YES;
@@ -130,6 +135,7 @@
                  [OTAppAppearance eventsFilterTitle],
                  OTLocalizedString(@"filter_entourages_title"),
                 // OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                 OTLocalizedString(@"filter_publish_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
     } else {
@@ -162,6 +168,8 @@
                                  @"pfp_filter_neighborhoods_title" : [NSNumber numberWithBool:self.showNeighborhood],
                                  @"private-pfp_filter_private_circles_title" : [NSNumber numberWithBool:self.showPrivateCircle],
                                  @"ask_for_help_event" : [NSNumber numberWithBool:self.showOuting],
+                                 @"showAlls" : [NSNumber numberWithBool:self.showAlls],
+                                 @"showPartners" : [NSNumber numberWithBool:self.showPartners],
                                  };
     
     if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
@@ -270,6 +278,20 @@
 //    if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
 //        [array addObject:[self groupUniquement]];
 //    }
+    
+    //TODO: add array Partners
+    
+    [array addObject:@[[OTFeedItemFilter createFor:FeedItemFilterKeyAlls
+                                            active:self.showAlls
+                                          children:@[]
+                                             image:@""
+                                      showBoldText:self.showAlls],
+                       [OTFeedItemFilter createFor:FeedItemFilterKeyPartners
+                                            active:self.showPartners
+                                          children:@[]
+                                             image:@""
+                                      showBoldText:self.showPartners]]];
+    
     NSArray *timeframe =  @[
                             [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
                                                 timeframeInHours:self.timeframeInHours]
@@ -469,7 +491,8 @@
              @"types" : [self getTypes],
              @"show_past_events" : self.showPastOuting ? @"true" : @"false",
              @"time_range" : @(self.timeframeInHours),
-             @"announcements" : @"v1"
+             @"announcements" : @"v1",
+             @"partners_only" : self.showPartners ? @"true" : @"false"
     }.mutableCopy;
 }
 
@@ -483,11 +506,13 @@
              @"types" : [self getTypes],
              @"show_past_events" : self.showPastOuting ? @"true" : @"false",
              @"time_range" : @(self.timeframeInHours),
-             @"announcements" : self.isEncouterFilter ? @"null" : @"v1"
+             @"announcements" : self.isEncouterFilter ? @"null" : @"v1",
+             @"partners_only" : self.showPartners ? @"true" : @"false"
     }.mutableCopy;
 }
 
 - (void)updateValue:(OTFeedItemFilter *)filter {
+    
     switch (filter.key) {
         case FeedItemFilterKeyDemandeSocial:
             self.showDemandeSocial = filter.active;
@@ -568,7 +593,13 @@
         case FeedItemFilterKeyEventsPast:
             self.showPastOuting = filter.active;
             break;
-        
+            
+        case FeedItemFilterKeyPartners:
+            self.showPartners = filter.active;
+            break;
+        case FeedItemFilterKeyAlls:
+            self.showAlls = filter.active;
+            break;
         default:
             break;
     }
@@ -682,6 +713,10 @@
         }
     }
     
+    if (self.showPartners) {
+        isDefault = NO;
+    }
+    
     return isDefault;
 }
 
@@ -700,7 +735,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|", self.showMedical, self.showSocial, self.showDistributive,
+    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d| --- isAlls %d - partners %d", self.showMedical, self.showSocial, self.showDistributive,
             self.showDemand, self.showContribution, self.showTours,
             self.showOnlyMyEntourages, self.timeframeInHours,
             
@@ -709,7 +744,7 @@
             
             self.showContributionSocial, self.showContributionHelp, self.showContributionResource, self.showContributionInfo, self.showContributionSkill, self.showContributionOther,
             
-            self.showOuting, self.showPrivateCircle, self.showNeighborhood];
+            self.showOuting, self.showPrivateCircle, self.showNeighborhood,self.showAlls,self.showPartners];
 }
 
 - (NSString *)getTourTypes {
@@ -816,6 +851,8 @@
     copy.showContributionOther = self.showContributionOther;
     
     copy.isEncouterFilter = self.isEncouterFilter;
+    copy.showPartners = self.showPartners;
+    copy.showAlls = self.showAlls;
     return copy;
 }
 

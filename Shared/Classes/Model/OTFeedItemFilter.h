@@ -41,6 +41,8 @@ typedef enum {
     FeedItemFilterKeyPrivateCircles,
     FeedItemFilterKeyEvents,
     FeedItemFilterKeyEventsPast,
+    FeedItemFilterKeyPartners,
+    FeedItemFilterKeyAlls,
 } FeedItemFilterKey;
 
 @interface OTFeedItemFilter : NSObject

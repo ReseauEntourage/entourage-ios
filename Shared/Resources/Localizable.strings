@@ -386,6 +386,9 @@
 "invite_event_subtitle" = "à participer à cet évènement";
 "invite_action_subtitle" = "à rejoindre cette action";
 
+"filter_publish_title" = "Publié par...";
+"filter_all" = "Tous";
+"filter_partnersOnly" = "Associations et\ninstitutions seulement";
 
 // Titles
 "aboutTitle" = "À propos";
