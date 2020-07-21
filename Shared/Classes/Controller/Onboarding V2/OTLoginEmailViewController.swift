@@ -9,49 +9,51 @@
 import UIKit
 
 class OTLoginEmailViewController: UIViewController {
-
+    
     weak var delegate:LoginDelegate? = nil
     
+    @IBOutlet weak var ui_label_info_mail: UILabel!
     @IBOutlet weak var ui_label_title: UILabel!
-        @IBOutlet weak var ui_label_description: UILabel!
+    @IBOutlet weak var ui_label_description: UILabel!
+    
+    @IBOutlet weak var ui_tf_email: OTCustomTextfield!
+    
+    let minimumCharactersForPassword = 8
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        @IBOutlet weak var ui_tf_email: OTCustomTextfield!
+         ui_label_info_mail.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_email_info")
+        ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "login_email_pwd_title")
+        ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: "login_email_pwd_description")
+        ui_tf_email.placeholder = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_placeholder_email")
         
-        let minimumCharactersForPassword = 8
+        delegate?.updateButtonNext(isValid: false)
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "login_email_pwd_title")
-            ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: "login_email_pwd_description")
-            ui_tf_email.placeholder = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_placeholder_email")
-            
-            delegate?.updateButtonNext(isValid: false)
-            
-            OTLogger.logEvent(View_Login_Input_Email)
-        }
-        
-        @IBAction func action_tap(_ sender: Any) {
-            ui_tf_email.resignFirstResponder()
-        }
+        OTLogger.logEvent(View_Login_Input_Email)
     }
+    
+    @IBAction func action_tap(_ sender: Any) {
+        ui_tf_email.resignFirstResponder()
+    }
+}
 
-    //MARK: - UITextfieldDelegate -
-    extension OTLoginEmailViewController: UITextFieldDelegate {
-        func textFieldDidEndEditing(_ textField: UITextField) {
-            var email = ""
-            var isValid = false
-            if let _email = ui_tf_email.text, _email.count > 0 {
-                isValid = true
-                email = _email
-            }
-            delegate?.updateEmail(email: email)
-            delegate?.updateButtonNext(isValid: isValid)
+//MARK: - UITextfieldDelegate -
+extension OTLoginEmailViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        var email = ""
+        var isValid = false
+        if let _email = ui_tf_email.text, _email.count > 0 {
+            isValid = true
+            email = _email
         }
-        
-        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            textField.resignFirstResponder()
-            return true
-        }
-        
+        delegate?.updateEmail(email: email)
+        delegate?.updateButtonNext(isValid: isValid)
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+}

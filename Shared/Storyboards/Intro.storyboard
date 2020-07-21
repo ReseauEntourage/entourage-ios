@@ -1141,7 +1141,7 @@ sur Entourage.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wF4-5f-khB">
-                                <rect key="frame" x="8" y="158" width="304" height="105.5"/>
+                                <rect key="frame" x="8" y="158" width="304" height="123.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Voisin-Age est la communauté de voisins qui tissent des liens intergénérationnels. Proximité, Liberté, Réciprocité : rencontrez des personnes âgées près de chez vous et créez des liens de voisinage et d’amitié. </string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1149,10 +1149,10 @@ sur Entourage.</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="249" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="ufn-rN-e8V">
-                                <rect key="frame" x="8" y="263.5" width="304" height="132.5"/>
+                                <rect key="frame" x="8" y="281.5" width="304" height="132.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vj-nj-f39">
-                                <rect key="frame" x="8" y="396" width="304" height="50"/>
+                                <rect key="frame" x="8" y="414" width="304" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="3Rr-Dv-wJQ"/>
@@ -1702,6 +1702,12 @@ sur Entourage.</string>
                                     <constraint firstAttribute="height" constant="1" id="0XT-jf-xNI"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inclure au moins 8 caractères." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lr0-5M-UGd">
+                                <rect key="frame" x="16" y="157.5" width="288" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
@@ -1709,14 +1715,17 @@ sur Entourage.</string>
                             <constraint firstItem="C0e-Zu-ejB" firstAttribute="trailing" secondItem="qZ9-1X-qvk" secondAttribute="trailing" id="3Jj-dl-KrC"/>
                             <constraint firstItem="Ngq-e5-sSg" firstAttribute="trailing" secondItem="qZ9-1X-qvk" secondAttribute="trailing" constant="16" id="7U8-zU-hpi"/>
                             <constraint firstItem="Tmf-rm-I3H" firstAttribute="leading" secondItem="VcK-h9-loH" secondAttribute="leadingMargin" id="9cn-Jd-vuj"/>
+                            <constraint firstItem="Lr0-5M-UGd" firstAttribute="trailing" secondItem="C0e-Zu-ejB" secondAttribute="trailing" id="At8-rN-87F"/>
                             <constraint firstItem="v1H-Ec-FIB" firstAttribute="leading" secondItem="VcK-h9-loH" secondAttribute="leadingMargin" id="HCd-3x-VoF"/>
                             <constraint firstItem="v1H-Ec-FIB" firstAttribute="top" secondItem="VcK-h9-loH" secondAttribute="topMargin" id="MSr-UD-oMA"/>
                             <constraint firstItem="C0e-Zu-ejB" firstAttribute="leading" secondItem="qZ9-1X-qvk" secondAttribute="leading" id="OEL-uq-vkc"/>
                             <constraint firstItem="qZ9-1X-qvk" firstAttribute="top" secondItem="Tmf-rm-I3H" secondAttribute="bottom" constant="30" id="ala-gH-cz7"/>
+                            <constraint firstItem="Lr0-5M-UGd" firstAttribute="top" secondItem="C0e-Zu-ejB" secondAttribute="bottom" constant="8" id="b1j-Bf-Eft"/>
                             <constraint firstItem="qZ9-1X-qvk" firstAttribute="leading" secondItem="Ngq-e5-sSg" secondAttribute="leading" constant="16" id="cXE-Tx-zHl"/>
                             <constraint firstItem="Tmf-rm-I3H" firstAttribute="top" secondItem="v1H-Ec-FIB" secondAttribute="bottom" constant="16" id="fef-Ez-cyJ"/>
                             <constraint firstItem="C0e-Zu-ejB" firstAttribute="bottom" secondItem="qZ9-1X-qvk" secondAttribute="bottom" id="jue-97-4cz"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Tmf-rm-I3H" secondAttribute="trailing" id="rze-xt-pQc"/>
+                            <constraint firstItem="Lr0-5M-UGd" firstAttribute="leading" secondItem="C0e-Zu-ejB" secondAttribute="leading" id="xeE-8Z-aKa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ngq-e5-sSg"/>
                         <connections>
@@ -1725,6 +1734,7 @@ sur Entourage.</string>
                     </view>
                     <connections>
                         <outlet property="ui_label_description" destination="Tmf-rm-I3H" id="je6-XS-WfI"/>
+                        <outlet property="ui_label_info_mail" destination="Lr0-5M-UGd" id="vqb-kI-aed"/>
                         <outlet property="ui_label_title" destination="v1H-Ec-FIB" id="QsP-Lt-JUh"/>
                         <outlet property="ui_tf_email" destination="qZ9-1X-qvk" id="1Zw-Ug-Q4S"/>
                     </connections>

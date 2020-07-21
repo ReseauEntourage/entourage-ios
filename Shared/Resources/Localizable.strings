@@ -622,6 +622,7 @@
 "onboard_place_info" = "Entourage ne communique pas cette adresse.";
 "onboard_place_placeholder" = "Ex : 35000";
 "onboard_email_pwd_title" = "Ok super !";
+"onboard_email_pwd_email_info" = "Laissez-nous votre mail pour recevoir des informations et des conseils de la part d'Entourage !\n(Cette information ne sera pas visible par les autres membres du réseau)";
 "onboard_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
 "onboard_email_pwd_info_length" = "Inclure au moins 8 caractères.";
 "onboard_email_pwd_placeholder_email" = "E-mail";
