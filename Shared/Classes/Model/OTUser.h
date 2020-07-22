@@ -81,4 +81,8 @@ extern NSString *const kVisitedUserTag;
 - (NSString *)formattedActionZoneAddress;
 
 - (NSString *_Nonnull)getInterestsFormated;
+
+@property (strong, nonatomic) NSNumber * _Nonnull actionsCount;
+@property (strong, nonatomic) NSNumber * _Nonnull eventsCount;
+@property (nonatomic) BOOL isGoodWavesValidated;
 @end

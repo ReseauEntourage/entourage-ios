@@ -34,6 +34,9 @@ class OTMainTabbarViewController: UITabBarController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(showTooltip), name: NSNotification.Name(rawValue: "showToolTip"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideTooltip), name: NSNotification.Name(rawValue: "hideToolTip"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(switchToHomeTab), name: NSNotification.Name(rawValue: "showAlls"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchToHomeTab), name: NSNotification.Name(rawValue: "showEvents"), object: nil)
     }
     
     @objc func showTooltip() {
@@ -49,6 +52,9 @@ class OTMainTabbarViewController: UITabBarController {
             self.tooltipView = nil
             NotificationCenter.default.removeObserver(self)
         }
+    }
+    @objc func switchToHomeTab() {
+        showHomeVC()
     }
     
     func setupVCs() {
@@ -77,12 +83,12 @@ class OTMainTabbarViewController: UITabBarController {
         messagesVC.tabBarItem.image = UIImage.init(named: "ic_tab_message")?.withRenderingMode(.alwaysOriginal)
         messagesVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_message_selected")
         
-        let _menuVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMenuViewControllerIdentifier") as! OTMenuViewController
+        let _menuVC = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "MenuProfileVC") as! OTMenuProfileViewController
         menuVC = UINavigationController.init(rootViewController: _menuVC)
         menuVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_profil")
         menuVC.tabBarItem.image = UIImage.init(named: "ic_tab_menu")?.withRenderingMode(.alwaysTemplate)
         menuVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_menu_selected")
-        
+      
         viewControllers = [homeVC,guideVC,plusVC,messagesVC,menuVC]
         
         boldSelectedItem()

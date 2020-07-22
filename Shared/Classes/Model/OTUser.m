@@ -43,6 +43,10 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 NSString *const kGoal = @"goal";
 NSString *const kInterests = @"interests";
 
+NSString *const kKeyEventsCount = @"events_count";
+NSString *const kKeyActionsCount = @"actions_count";
+NSString *const kKeyGoodWavesParticipate = @"good_waves_participation";
+
 @interface OTUser ()
 @property (nonatomic, readwrite) NSString *uuid;
 @property (nonatomic, readwrite) NSArray *memberships;
@@ -76,6 +80,10 @@ NSString *const kInterests = @"interests";
         _firebaseProperties = [self sanitizeFirebaseProperties:[dictionary objectForKey:kFirebaseProperties]];
         
         _goal = [dictionary stringForKey:kGoal];
+        
+        _eventsCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEventsCount defaultValue:0];
+        _actionsCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyActionsCount defaultValue:0];
+        _isGoodWavesValidated = [[dictionary objectForKey:kKeyStats] boolForKey:kKeyGoodWavesParticipate defaultValue:NO];
         
         if ([[dictionary allKeys] containsObject:kKeyConversation]) {
             _conversation = [[OTConversation alloc] initWithDictionary:[dictionary objectForKey:kKeyConversation]];
@@ -162,6 +170,10 @@ NSString *const kInterests = @"interests";
     [encoder encodeObject:self.goal forKey:kGoal];
     [encoder encodeObject:self.addressSecondary forKey:kAddress2];
     [encoder encodeObject:self.interests forKey:kInterests];
+    
+    [encoder encodeObject:self.eventsCount forKey:kKeyEventsCount];
+    [encoder encodeObject:self.actionsCount forKey:kKeyActionsCount];
+    [encoder encodeObject:[NSNumber numberWithBool:self.isGoodWavesValidated] forKey:kKeyGoodWavesParticipate];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -193,6 +205,10 @@ NSString *const kInterests = @"interests";
         self.goal = [decoder decodeObjectForKey:kGoal];
         self.addressSecondary = [decoder decodeObjectForKey:kAddress2];
         self.interests = [decoder decodeObjectForKey:kInterests];
+        
+        self.eventsCount = [decoder decodeObjectForKey:kKeyEventsCount];
+        self.actionsCount = [decoder decodeObjectForKey:kKeyActionsCount];
+        self.isGoodWavesValidated = [[decoder decodeObjectForKey:kKeyGoodWavesParticipate] boolValue];
     }
     return self;
 }

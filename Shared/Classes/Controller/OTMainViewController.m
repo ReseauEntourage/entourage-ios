@@ -204,6 +204,26 @@
     
     [self changeViewMenuState];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+    selector:@selector(showAllsFromNotification)
+        name:@"showAlls"
+      object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+       selector:@selector(showEventsFromNotification)
+           name:@"showEvents"
+         object:nil];
+    
+}
+
+-(void) showAllsFromNotification {
+    [self action_show_all:self];
+    [self showFeedsList];
+     [self configureNavigationBar];
+}
+-(void) showEventsFromNotification {
+    [self action_show_events:self];
+    [self showFeedsList];
+    [self configureNavigationBar];
 }
 
 - (void)configureActionsButton {
@@ -713,6 +733,7 @@
     else {
          [self.ui_view_selector_menu_encounters setHidden:YES];
         [self.ui_label_menu_encounters setTextColor:UIColor.darkGrayColor];
+        
         if (self.isEventMenuSelected) {
             [self.ui_view_selector_menu_all setHidden:TRUE];
             [self.ui_view_selector_menu_events setHidden:NO];

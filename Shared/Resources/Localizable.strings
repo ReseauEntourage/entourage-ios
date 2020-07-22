@@ -794,3 +794,11 @@
 "tooltip_title3" = "Passez à l’action";
 "tooltip_desc3" = "Vous pouvez maintenant proposer ou demander de l’aide au réseau !";
 "tooltip_step_format" = "%@ sur 3";
+
+//Profile add
+"join_good_waves" = "Rejoindre les Bonnes Ondes";
+"modMyProfile" = "Modifier mon profil";
+"event_title" = "évènements conviviaux";
+"action_title" = "actions solidaires";
+"event_button_title" = "J’en trouve →";
+"action_button_title" = "J’y vais →";

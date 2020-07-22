@@ -34,7 +34,6 @@
 #import "OTCodeViewController.h"
 #import "OTAppDelegate.h"
 #import "UIStoryboard+entourage.h"
-#import "OTMenuViewController.h"
 #import "OTAppState.h"
 #import "OTMyEntouragesViewController.h"
 #import "UIImage+processing.h"

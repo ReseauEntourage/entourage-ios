@@ -197,6 +197,9 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
 }
 
 - (void)deletePushToken:(NSString *)pushToken forUser:(OTUser *)user {
+    if (pushToken == nil) {
+        return;
+    }
     NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken}};
     NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, user.token];
 
