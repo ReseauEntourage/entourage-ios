@@ -27,6 +27,7 @@
 + (UIColor *)poiCategory5;
 + (UIColor *)poiCategory6;
 + (UIColor *)poiCategory7;
++ (UIColor *)poiCategory8;
 
 + (UIColor *)maxLenghtReachedColor;
 

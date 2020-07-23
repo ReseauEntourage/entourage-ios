@@ -62,7 +62,9 @@ NSString *const kCategoryName = @"name";
         case 7:
             return [UIColor poiCategory7];
             break;
-            
+        case 8:
+            return [UIColor poiCategory8];
+            break;
         default:
             return [UIColor poiCategory0];
             break;

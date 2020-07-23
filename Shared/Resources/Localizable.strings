@@ -161,6 +161,7 @@
 "guide_display_orientation" = "S’orienter";
 "guide_display_caring" = "S’occuper de soi";
 "guide_display_reinsertion" = "Se réinsérer";
+"guide_display_partners" = "Associations et services actifs sur Entourage";
 
 // Tour
 "tour_type_bare_hands" = "barehands";

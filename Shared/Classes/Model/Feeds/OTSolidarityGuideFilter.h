@@ -23,10 +23,7 @@
 @property (nonatomic) BOOL showOrientation;
 @property (nonatomic) BOOL showCaring;
 @property (nonatomic) BOOL showReinsertion;
-
-@property (nonatomic) BOOL showOuting;
-@property (nonatomic) BOOL showPrivateCircle;
-@property (nonatomic) BOOL showNeighborhood;
+@property (nonatomic) BOOL showPartners;
 
 - (NSArray *)groupHeaders;
 - (NSArray *)toGroupedArray;

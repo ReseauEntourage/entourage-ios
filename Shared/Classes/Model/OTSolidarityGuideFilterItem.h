@@ -16,9 +16,7 @@ typedef enum {
     SolidarityGuideKeyOrientation = 5,
     SolidarityGuideKeyCaring = 6,
     SolidarityGuideKeyReinsertion = 7,
-    SolidarityGuideKeyOuting = 8,
-    SolidarityGuideKeyPrivateCircle = 9,
-    SolidarityGuideKeyNeighborhood = 10
+    SolidarityGuideKeyPartners = 8
 } SolidarityGuideFilters;
 
 @interface OTSolidarityGuideFilterItem : NSObject

@@ -22,10 +22,7 @@
         self.showOrientation = YES;
         self.showCaring = YES;
         self.showReinsertion = YES;
-        
-        self.showOuting = YES;
-        self.showPrivateCircle = YES;
-        self.showNeighborhood = YES;
+        self.showPartners = YES;
     }
     return self;
 }
@@ -33,7 +30,7 @@
 -(BOOL) isDefaultFilters {
     BOOL isDefault = YES;
     
-    if (!_showFood || !_showHousing || !_showHeal || !_showRefresh || !_showOrientation || !_showCaring || !_showReinsertion) {
+    if (!_showFood || !_showHousing || !_showHeal || !_showRefresh || !_showOrientation || !_showCaring || !_showReinsertion || !_showPartners) {
         isDefault = NO;
     }
     
@@ -53,7 +50,8 @@
                 [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyRefresh active:self.showRefresh withImage:@"water"],
                 [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyOrientation active:self.showOrientation withImage:@"orientate"],
                 [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyCaring active:self.showCaring withImage:@"lookAfterYourself"],
-                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyReinsertion active:self.showReinsertion withImage:@"reinsertYourself"]
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyReinsertion active:self.showReinsertion withImage:@"reinsertYourself"],
+                [OTSolidarityGuideFilterItem createFor:SolidarityGuideKeyPartners active:self.showPartners withImage:@"pin_partners_without_shadow"]
               ]
             ];
 }
@@ -102,6 +100,8 @@
         case SolidarityGuideKeyReinsertion:
             self.showReinsertion = filter.active;
             break;
+        case SolidarityGuideKeyPartners:
+            self.showPartners = filter.active;
         default:
             break;
     }
