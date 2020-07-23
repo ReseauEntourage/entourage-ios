@@ -46,3 +46,5 @@
 #import "NSBundle+entourage.h"
 #import "OTAppDelegate.h"
 #import "UILabel+entourage.h"
+#import "OTRoleTag.h"
+#import "OTPillLabelView.h"

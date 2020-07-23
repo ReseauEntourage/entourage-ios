@@ -55,6 +55,7 @@
 		2BE75F3124C84C3B00D4C856 /* OTSettingsUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE75F3024C84C3A00D4C856 /* OTSettingsUserTableViewCell.swift */; };
 		2BE75F3324C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE75F3224C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift */; };
 		2BE75F3524C84C5100D4C856 /* OTSettingsDebugTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE75F3424C84C5100D4C856 /* OTSettingsDebugTableViewCell.swift */; };
+		2BF2520D24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2520C24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift */; };
 		2BF958802451D78100C36863 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9587F2451D78100C36863 /* Extensions.swift */; };
 		2BFC5A89245AC32800AB75C4 /* OTPictureUploadS3Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC5A88245AC32800AB75C4 /* OTPictureUploadS3Service.swift */; };
 		371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
@@ -1054,6 +1055,7 @@
 		2BE75F3024C84C3A00D4C856 /* OTSettingsUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSettingsUserTableViewCell.swift; sourceTree = "<group>"; };
 		2BE75F3224C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSettingsMenuTableViewCell.swift; sourceTree = "<group>"; };
 		2BE75F3424C84C5100D4C856 /* OTSettingsDebugTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSettingsDebugTableViewCell.swift; sourceTree = "<group>"; };
+		2BF2520C24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTUserDescriptionDetailTableViewCell.swift; sourceTree = "<group>"; };
 		2BF9587F2451D78100C36863 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2BFC5A88245AC32800AB75C4 /* OTPictureUploadS3Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPictureUploadS3Service.swift; sourceTree = "<group>"; };
 		371732E82297FDF10005ED71 /* OTAnalyticsObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAnalyticsObserver.h; sourceTree = "<group>"; };
@@ -3720,6 +3722,7 @@
 				2B19CF0F249CC34C00CE34BB /* OTUserEditZoneCell.swift */,
 				2B19CF11249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift */,
 				2BB6C19E24A0AFD600364E13 /* OTProfileSelectActionsViewController.swift */,
+				2BF2520C24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -4893,6 +4896,7 @@
 				A202EADF2085D2C70058F32C /* OTMyFeedMessage.m in Sources */,
 				A202ECCF2085D2C80058F32C /* OTTapEntourageBehavior.m in Sources */,
 				A202EB1B2085D2C70058F32C /* OTCreateMeetingViewController.m in Sources */,
+				2BF2520D24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift in Sources */,
 				A202EAE52085D2C70058F32C /* OTFeedItemFilters.m in Sources */,
 				37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */,
 				A2F50A8A20ECFCCC009AB222 /* OTOutingAnnotation.m in Sources */,

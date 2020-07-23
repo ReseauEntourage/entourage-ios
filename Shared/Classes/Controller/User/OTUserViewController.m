@@ -232,41 +232,6 @@ typedef NS_ENUM(NSInteger) {
     }
 }
 
-- (void)setupSummaryProfileCell:(UITableViewCell *)cell {
-    UIImageView *imgAssociation = [cell viewWithTag:99];
-    imgAssociation.hidden = self.user.partner == nil;
-    [imgAssociation setupFromUrl:self.user.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
-    
-    UIView *avatarShadow = [cell viewWithTag:SUMMARY_AVATAR_SHADOW];
-    [avatarShadow.layer setShadowColor:[UIColor blackColor].CGColor];
-    [avatarShadow.layer setShadowOpacity:0.5];
-    [avatarShadow.layer setShadowRadius:4.0];
-    [avatarShadow.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
-    UIButton *avatarButton = [cell viewWithTag:SUMMARY_AVATAR];
-    avatarButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    [avatarButton setupAsProfilePictureFromUrl:self.user.avatarURL withPlaceholder:@"user"];
-    
-    UILabel *nameLabel = [cell viewWithTag:SUMMARY_NAME];
-    nameLabel.text = self.user.displayName;
-    
-    UILabel *aboutMeLabel = [cell viewWithTag:SUMMARY_DESCRIPTION];
-    aboutMeLabel.text = self.user.about;
-    
-    UIStackView *roleTagContainer = [cell viewWithTag:SUMMARY_TAG_CONTAINER];
-    [roleTagContainer.arrangedSubviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    for (NSString *role in self.user.roles) {
-        OTRoleTag *tag = [[OTRoleTag alloc] initWithName:role];
-        if (tag.visible) {
-            UIView *tagView = [OTPillLabelView createWithRoleTag:tag];
-            [roleTagContainer addArrangedSubview:tagView];
-        }
-    }
-    roleTagContainer.hidden = roleTagContainer.arrangedSubviews.count == 0;
-
-    UIView *headerBgView = [cell viewWithTag:HEADER_BG_VIEW];
-    headerBgView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
-}
-
 - (void)setupTitleProfileCell:(UITableViewCell *)cell withTitle:(NSString *)title {
     UILabel *titleLabel = [cell viewWithTag:SUMMARY_TITLE];
     titleLabel.text = title;
@@ -666,7 +631,7 @@ typedef NS_ENUM(NSInteger) {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
     switch ([self.sections[indexPath.section] intValue]) {
         case SectionTypeSummary: {
-            [self setupSummaryProfileCell:cell];
+            [((OTUserDescriptionDetailTableViewCell*)cell) populateCellWithUser:self.user];
             break;
         }
         case SectionTypeVerification: {
