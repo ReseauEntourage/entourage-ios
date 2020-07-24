@@ -12,6 +12,7 @@ class OTLoginEmailViewController: UIViewController {
     
     weak var delegate:LoginDelegate? = nil
     
+    @IBOutlet weak var ui_label_info_mail2: UILabel!
     @IBOutlet weak var ui_label_info_mail: UILabel!
     @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_label_description: UILabel!
@@ -23,7 +24,8 @@ class OTLoginEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         ui_label_info_mail.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_email_info")
+        ui_label_info_mail.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_email_info2")
+        ui_label_info_mail2.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_email_info")
         ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "login_email_pwd_title")
         ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: "login_email_pwd_description")
         ui_tf_email.placeholder = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_placeholder_email")

@@ -957,8 +957,14 @@ Ligne 4</string>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inclure au moins 8 caractères." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMh-gT-dEC">
+                                <rect key="frame" x="16" y="89.5" width="343" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v5f-b3-zDE" customClass="OTCustomTextfield" customModule="Ent_Beta" customModuleProvider="target">
-                                <rect key="frame" x="16" y="89.5" width="343" height="60"/>
+                                <rect key="frame" x="16" y="104" width="343" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="vlD-cq-WTp"/>
                                 </constraints>
@@ -970,20 +976,20 @@ Ligne 4</string>
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wm9-xJ-ynH">
-                                <rect key="frame" x="16" y="148.5" width="343" height="1"/>
+                                <rect key="frame" x="16" y="163" width="343" height="1"/>
                                 <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Kya-U5-iFB"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inclure au moins 8 caractères." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoN-46-b3k">
-                                <rect key="frame" x="16" y="157.5" width="343" height="14.5"/>
+                                <rect key="frame" x="16" y="172" width="343" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mot de passe" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WlB-TO-MZy" customClass="OTCustomTextfield" customModule="Ent_Beta" customModuleProvider="target">
-                                <rect key="frame" x="16" y="164.5" width="343" height="60"/>
+                                <rect key="frame" x="16" y="179" width="343" height="60"/>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
@@ -992,20 +998,20 @@ Ligne 4</string>
                                 </connections>
                             </textField>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oI8-PL-yyy">
-                                <rect key="frame" x="16" y="223.5" width="343" height="1"/>
+                                <rect key="frame" x="16" y="238" width="343" height="1"/>
                                 <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="0eg-gR-pFd"/>
                                 </constraints>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inclure au moins 8 caractères." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWX-sf-if1">
-                                <rect key="frame" x="16" y="229.5" width="168" height="15"/>
+                                <rect key="frame" x="16" y="244" width="168" height="15"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirmer le mot de passe" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VCb-rY-j59" customClass="OTCustomTextfield" customModule="Ent_Beta" customModuleProvider="target">
-                                <rect key="frame" x="16" y="260.5" width="343" height="60"/>
+                                <rect key="frame" x="16" y="275" width="343" height="60"/>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES" textContentType="name"/>
@@ -1014,7 +1020,7 @@ Ligne 4</string>
                                 </connections>
                             </textField>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lil-RH-b1o">
-                                <rect key="frame" x="16" y="319.5" width="343" height="1"/>
+                                <rect key="frame" x="16" y="334" width="343" height="1"/>
                                 <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="2lC-9h-sma"/>
@@ -1025,7 +1031,6 @@ Ligne 4</string>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="VCb-rY-j59" firstAttribute="top" secondItem="WlB-TO-MZy" secondAttribute="bottom" constant="36" id="2sk-8M-nd5"/>
-                            <constraint firstItem="v5f-b3-zDE" firstAttribute="top" secondItem="uYK-7v-YWK" secondAttribute="bottom" constant="30" id="4g1-yn-MVR"/>
                             <constraint firstItem="PU6-RZ-dNo" firstAttribute="leading" secondItem="OPY-OT-YbT" secondAttribute="leadingMargin" id="59C-8O-qUh"/>
                             <constraint firstItem="Hgc-Ph-WVN" firstAttribute="trailing" secondItem="v5f-b3-zDE" secondAttribute="trailing" constant="16" id="Aw4-wJ-KtC"/>
                             <constraint firstItem="VCb-rY-j59" firstAttribute="trailing" secondItem="WlB-TO-MZy" secondAttribute="trailing" id="BVx-JR-90w"/>
@@ -1042,11 +1047,14 @@ Ligne 4</string>
                             <constraint firstItem="oI8-PL-yyy" firstAttribute="trailing" secondItem="WlB-TO-MZy" secondAttribute="trailing" id="ZVI-n7-L1K"/>
                             <constraint firstItem="hoN-46-b3k" firstAttribute="leading" secondItem="wm9-xJ-ynH" secondAttribute="leading" id="aJJ-vq-PsW"/>
                             <constraint firstItem="wm9-xJ-ynH" firstAttribute="leading" secondItem="v5f-b3-zDE" secondAttribute="leading" id="aU1-gV-hV3"/>
+                            <constraint firstItem="v5f-b3-zDE" firstAttribute="top" secondItem="EMh-gT-dEC" secondAttribute="bottom" id="dRf-d3-Xpw"/>
                             <constraint firstItem="AWX-sf-if1" firstAttribute="leading" secondItem="WlB-TO-MZy" secondAttribute="leading" id="eNA-O2-eJ9"/>
                             <constraint firstItem="oI8-PL-yyy" firstAttribute="bottom" secondItem="WlB-TO-MZy" secondAttribute="bottom" id="hzR-wk-JS1"/>
                             <constraint firstItem="WlB-TO-MZy" firstAttribute="trailing" secondItem="v5f-b3-zDE" secondAttribute="trailing" id="icu-Tr-p5S"/>
                             <constraint firstItem="lil-RH-b1o" firstAttribute="bottom" secondItem="VCb-rY-j59" secondAttribute="bottom" id="jx1-EW-tQi"/>
+                            <constraint firstItem="EMh-gT-dEC" firstAttribute="leading" secondItem="v5f-b3-zDE" secondAttribute="leading" id="kga-Va-muu"/>
                             <constraint firstItem="lil-RH-b1o" firstAttribute="leading" secondItem="VCb-rY-j59" secondAttribute="leading" id="lRI-Kv-MV0"/>
+                            <constraint firstItem="Hgc-Ph-WVN" firstAttribute="trailing" secondItem="EMh-gT-dEC" secondAttribute="trailing" constant="16" id="nFE-Jh-6Nl"/>
                             <constraint firstItem="VCb-rY-j59" firstAttribute="height" secondItem="WlB-TO-MZy" secondAttribute="height" id="o5m-BK-xbf"/>
                             <constraint firstItem="uYK-7v-YWK" firstAttribute="top" secondItem="PU6-RZ-dNo" secondAttribute="bottom" constant="16" id="om2-Kp-Z4t"/>
                             <constraint firstItem="lil-RH-b1o" firstAttribute="trailing" secondItem="VCb-rY-j59" secondAttribute="trailing" id="sFn-p4-sLM"/>
@@ -1054,6 +1062,7 @@ Ligne 4</string>
                             <constraint firstItem="hoN-46-b3k" firstAttribute="trailing" secondItem="wm9-xJ-ynH" secondAttribute="trailing" id="tRi-ZW-5IQ"/>
                             <constraint firstItem="AWX-sf-if1" firstAttribute="top" secondItem="WlB-TO-MZy" secondAttribute="bottom" constant="5" id="w1f-YT-KVt"/>
                             <constraint firstItem="hoN-46-b3k" firstAttribute="top" secondItem="wm9-xJ-ynH" secondAttribute="bottom" constant="8" id="w8v-6U-eXn"/>
+                            <constraint firstItem="EMh-gT-dEC" firstAttribute="top" secondItem="uYK-7v-YWK" secondAttribute="bottom" constant="30" id="xjm-XD-gSa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Hgc-Ph-WVN"/>
                         <connections>
@@ -1063,6 +1072,7 @@ Ligne 4</string>
                     <connections>
                         <outlet property="ui_label_description" destination="uYK-7v-YWK" id="hc1-QU-fql"/>
                         <outlet property="ui_label_info_mail" destination="hoN-46-b3k" id="QLS-OF-hIL"/>
+                        <outlet property="ui_label_info_mail2" destination="EMh-gT-dEC" id="YEK-lE-dhn"/>
                         <outlet property="ui_label_info_pwd" destination="AWX-sf-if1" id="qki-Dx-oPl"/>
                         <outlet property="ui_label_title" destination="PU6-RZ-dNo" id="LnT-bO-c84"/>
                         <outlet property="ui_tf_email" destination="v5f-b3-zDE" id="7jw-ph-rBW"/>

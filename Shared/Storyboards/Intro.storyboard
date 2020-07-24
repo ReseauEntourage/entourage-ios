@@ -1683,8 +1683,14 @@ sur Entourage.</string>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inclure au moins 8 caractères." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMw-Zy-JJ6">
+                                <rect key="frame" x="16" y="89.5" width="288" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qZ9-1X-qvk" customClass="OTCustomTextfield" customModule="Ent_Beta" customModuleProvider="target">
-                                <rect key="frame" x="16" y="89.5" width="288" height="60"/>
+                                <rect key="frame" x="16" y="104" width="288" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="XdX-GE-OqV"/>
                                 </constraints>
@@ -1696,14 +1702,14 @@ sur Entourage.</string>
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C0e-Zu-ejB">
-                                <rect key="frame" x="16" y="148.5" width="288" height="1"/>
+                                <rect key="frame" x="16" y="163" width="288" height="1"/>
                                 <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="0XT-jf-xNI"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inclure au moins 8 caractères." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lr0-5M-UGd">
-                                <rect key="frame" x="16" y="157.5" width="288" height="14.5"/>
+                                <rect key="frame" x="16" y="172" width="288" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1712,6 +1718,7 @@ sur Entourage.</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="zMw-Zy-JJ6" firstAttribute="top" secondItem="Tmf-rm-I3H" secondAttribute="bottom" constant="30" id="1bh-fF-1Ny"/>
                             <constraint firstItem="C0e-Zu-ejB" firstAttribute="trailing" secondItem="qZ9-1X-qvk" secondAttribute="trailing" id="3Jj-dl-KrC"/>
                             <constraint firstItem="Ngq-e5-sSg" firstAttribute="trailing" secondItem="qZ9-1X-qvk" secondAttribute="trailing" constant="16" id="7U8-zU-hpi"/>
                             <constraint firstItem="Tmf-rm-I3H" firstAttribute="leading" secondItem="VcK-h9-loH" secondAttribute="leadingMargin" id="9cn-Jd-vuj"/>
@@ -1719,11 +1726,13 @@ sur Entourage.</string>
                             <constraint firstItem="v1H-Ec-FIB" firstAttribute="leading" secondItem="VcK-h9-loH" secondAttribute="leadingMargin" id="HCd-3x-VoF"/>
                             <constraint firstItem="v1H-Ec-FIB" firstAttribute="top" secondItem="VcK-h9-loH" secondAttribute="topMargin" id="MSr-UD-oMA"/>
                             <constraint firstItem="C0e-Zu-ejB" firstAttribute="leading" secondItem="qZ9-1X-qvk" secondAttribute="leading" id="OEL-uq-vkc"/>
-                            <constraint firstItem="qZ9-1X-qvk" firstAttribute="top" secondItem="Tmf-rm-I3H" secondAttribute="bottom" constant="30" id="ala-gH-cz7"/>
                             <constraint firstItem="Lr0-5M-UGd" firstAttribute="top" secondItem="C0e-Zu-ejB" secondAttribute="bottom" constant="8" id="b1j-Bf-Eft"/>
+                            <constraint firstItem="Ngq-e5-sSg" firstAttribute="trailing" secondItem="zMw-Zy-JJ6" secondAttribute="trailing" constant="16" id="cVL-P1-WvL"/>
                             <constraint firstItem="qZ9-1X-qvk" firstAttribute="leading" secondItem="Ngq-e5-sSg" secondAttribute="leading" constant="16" id="cXE-Tx-zHl"/>
                             <constraint firstItem="Tmf-rm-I3H" firstAttribute="top" secondItem="v1H-Ec-FIB" secondAttribute="bottom" constant="16" id="fef-Ez-cyJ"/>
                             <constraint firstItem="C0e-Zu-ejB" firstAttribute="bottom" secondItem="qZ9-1X-qvk" secondAttribute="bottom" id="jue-97-4cz"/>
+                            <constraint firstItem="zMw-Zy-JJ6" firstAttribute="leading" secondItem="qZ9-1X-qvk" secondAttribute="leading" id="ljQ-9b-k3G"/>
+                            <constraint firstItem="qZ9-1X-qvk" firstAttribute="top" secondItem="zMw-Zy-JJ6" secondAttribute="bottom" id="rlW-JZ-xv2"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Tmf-rm-I3H" secondAttribute="trailing" id="rze-xt-pQc"/>
                             <constraint firstItem="Lr0-5M-UGd" firstAttribute="leading" secondItem="C0e-Zu-ejB" secondAttribute="leading" id="xeE-8Z-aKa"/>
                         </constraints>
@@ -1735,6 +1744,7 @@ sur Entourage.</string>
                     <connections>
                         <outlet property="ui_label_description" destination="Tmf-rm-I3H" id="je6-XS-WfI"/>
                         <outlet property="ui_label_info_mail" destination="Lr0-5M-UGd" id="vqb-kI-aed"/>
+                        <outlet property="ui_label_info_mail2" destination="zMw-Zy-JJ6" id="dFn-qF-Tl5"/>
                         <outlet property="ui_label_title" destination="v1H-Ec-FIB" id="QsP-Lt-JUh"/>
                         <outlet property="ui_tf_email" destination="qZ9-1X-qvk" id="1Zw-Ug-Q4S"/>
                     </connections>
