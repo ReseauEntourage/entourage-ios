@@ -52,7 +52,11 @@
     // Category
     if (self.category != nil) {
         self.titleView.backgroundColor = self.category.color;
-        [self.categoryButton setTitle:[@" " stringByAppendingString:self.category.name] forState:UIControlStateNormal];
+        NSString *catName = self.category.name;
+        if ([self.category.name isEqualToString:@"Partenaires"]) {
+            catName = OTLocalizedString(@"partners_entourage");
+        }
+        [self.categoryButton setTitle:[@" " stringByAppendingString:catName] forState:UIControlStateNormal];
         [self.categoryButton setImage:[UIImage imageNamed:[NSString stringWithFormat:kPOITransparentImagePrefix, self.category.sid.intValue]] forState:UIControlStateNormal];
     } else {
         self.titleView.hidden = YES;
