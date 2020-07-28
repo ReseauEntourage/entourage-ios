@@ -48,22 +48,25 @@
     BOOL isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
     NSString *title = nil;
     if (isActive) {
-        if (feedItem.author.uID.intValue == currentUser.sid.intValue)
-            if ([feedItem.status isEqualToString:TOUR_STATUS_ONGOING])
+        if (feedItem.author.uID.intValue == currentUser.sid.intValue) {
+            if ([feedItem.status isEqualToString:TOUR_STATUS_ONGOING]) {
                 title = OTLocalizedString(@"ongoing");
-            else
-                title = OTLocalizedString(@"join_active");
-            else {
-                if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus])
-                    title = OTLocalizedString(@"join_active");
-                else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus])
-                    title = OTLocalizedString(@"join_pending");
-                else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus])
-                    title = OTLocalizedString(@"join_rejected");
-                else {
-                    title = OTLocalizedString(@"join_to_join");
-                }
             }
+            else {
+                title = OTLocalizedString(@"join_active");
+            }
+        }
+        else {
+            if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus])
+                title = OTLocalizedString(@"join_active_other");
+            else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus])
+                title = OTLocalizedString(@"join_pending");
+            else if ([JOIN_REJECTED isEqualToString:feedItem.joinStatus])
+                title = OTLocalizedString(@"join_rejected");
+            else {
+                title = OTLocalizedString(@"join_to_join");
+            }
+        }
     }
     else {
         title = OTLocalizedString(@"item_closed");

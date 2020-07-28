@@ -124,6 +124,7 @@
 "create_proposer_don" = "Proposer un don";
 
 // Feed item
+"join_active_other" = "✔︎ Je participe";
 "join_active" = "Actif";
 "join_pending" = "En attente";
 "join_rejected" = "Refusé";
