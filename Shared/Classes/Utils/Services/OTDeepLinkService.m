@@ -96,6 +96,7 @@
     UIStoryboard *userProfileStorybard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
     UINavigationController *rootUserProfileController = (UINavigationController *)[userProfileStorybard instantiateInitialViewController];
     OTUserViewController *userController = (OTUserViewController *)rootUserProfileController.topViewController;
+    userController.user = currentUser;
     userController.userId = [NSNumber numberWithInteger:userId.integerValue];
     
     [self showControllerFromAnywhere:rootUserProfileController];
