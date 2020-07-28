@@ -95,6 +95,7 @@
 //Menu
 #define SCB_LINK_ID @"pedagogic-content"
 #define GOAL_LINK_ID @"action-examples"
+#define EVENT_GUIDE_ID @"events-guide"
 #define DONATE_LINK_ID @"donation"
 #define ATD_LINK_ID @"atd-partnership"
 #define FAQ_LINK_ID @"faq"

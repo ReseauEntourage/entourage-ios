@@ -32,6 +32,9 @@
 @property (nonatomic, weak) IBOutlet OTEditEntourageTableSource *editTableSource;
 @property (nonatomic, weak) IBOutlet OTEntourageDisclaimerBehavior *disclaimer;
 @property (nonatomic, weak) IBOutlet OTEditEntourageNavigationBehavior *editNavBehavior;
+@property (weak, nonatomic) IBOutlet UIView *ui_view_bottom_event_help;
+@property (weak, nonatomic) IBOutlet UIButton *ui_button_event_help;
+
 
 @property(nonatomic) BOOL isFirstLaunch;
 @end
@@ -75,6 +78,14 @@
     
     if (self.isEditingEvent) {
         
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:OTLocalizedString(@"add_event_help_button")];
+        [attributeString addAttribute:NSUnderlineStyleAttributeName
+                                value:[NSNumber numberWithInt:1]
+                                range:(NSRange){0,[attributeString length]}];
+        [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor appOrangeColor] range:(NSRange){0,[attributeString length]}];
+        
+        [self.ui_button_event_help setAttributedTitle:attributeString forState:UIControlStateNormal];
+        
         self.title = [OTAppAppearance eventTitle].uppercaseString;
         if (self.entourage) {
             self.location = self.entourage.location;
@@ -85,6 +96,8 @@
         if ([OTAppConfiguration shouldShowAddEventDisclaimer]) {
             [self.disclaimer showCreateEventDisclaimer];
         }
+        
+        [self.ui_view_bottom_event_help setHidden:NO];
         
     } else  {
         self.title = OTLocalizedString(@"action").uppercaseString;
@@ -101,6 +114,8 @@
         if ([OTAppConfiguration shouldShowAddEventDisclaimer]) {
             [self.disclaimer showDisclaimer];
         }
+        
+         [self.ui_view_bottom_event_help setHidden:YES];
     }
 
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:menuButtonTitle.capitalizedString
@@ -332,6 +347,15 @@
          }
      }];
 }
+
+- (IBAction)action_show_event_help:(id)sender {
+    
+    NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS,EVENT_GUIDE_ID,TOKEN];
+       NSString *urlForm = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+    
+    [OTSafariService launchInAppBrowserWithUrlString:urlForm viewController:self];
+}
+
 
 #pragma mark - Segue
 

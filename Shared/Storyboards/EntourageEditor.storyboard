@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QW3-Z2-faC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QW3-Z2-faC">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -294,11 +294,55 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVP-wy-TJc">
+                                <rect key="frame" x="0.0" y="506" width="320" height="62"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vay-8c-fxR">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                        <color key="backgroundColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="IJe-Ut-Vrw"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dbr-0w-jAW">
+                                        <rect key="frame" x="51" y="20" width="218" height="22"/>
+                                        <state key="normal" image="tip">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Quels évènements diffuser ?">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
+                                                        <font key="NSFont" metaFont="system" size="15"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        <integer key="NSUnderline" value="1"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="action_show_event_help:" destination="UEB-Je-c5t" eventType="touchUpInside" id="XPX-e2-cE9"/>
+                                            <action selector="openLink:" destination="mD9-Vq-A6V" eventType="touchUpInside" id="odY-cb-eRW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Vay-8c-fxR" secondAttribute="trailing" id="1z4-pp-ETm"/>
+                                    <constraint firstAttribute="bottom" secondItem="Dbr-0w-jAW" secondAttribute="bottom" constant="20" id="3QO-Rj-rd1"/>
+                                    <constraint firstItem="Vay-8c-fxR" firstAttribute="leading" secondItem="KVP-wy-TJc" secondAttribute="leading" id="I8e-MK-CeU"/>
+                                    <constraint firstItem="Dbr-0w-jAW" firstAttribute="centerX" secondItem="KVP-wy-TJc" secondAttribute="centerX" id="V6A-V0-CkA"/>
+                                    <constraint firstItem="Dbr-0w-jAW" firstAttribute="centerY" secondItem="KVP-wy-TJc" secondAttribute="centerY" id="WRn-VA-CjL"/>
+                                    <constraint firstItem="Dbr-0w-jAW" firstAttribute="top" secondItem="KVP-wy-TJc" secondAttribute="top" constant="20" id="fZ2-9d-0fY"/>
+                                    <constraint firstItem="Vay-8c-fxR" firstAttribute="top" secondItem="KVP-wy-TJc" secondAttribute="top" id="nU6-Ty-e2O"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="KVP-wy-TJc" secondAttribute="trailing" id="8Ao-vE-jrM"/>
                             <constraint firstItem="Ysa-oq-h9F" firstAttribute="top" secondItem="I8x-GX-Gpw" secondAttribute="bottom" id="8Rm-XV-3If"/>
+                            <constraint firstItem="KVP-wy-TJc" firstAttribute="leading" secondItem="RRp-DS-txs" secondAttribute="leading" id="XDM-HK-2h5"/>
                             <constraint firstItem="I8x-GX-Gpw" firstAttribute="top" secondItem="dEQ-Bo-9Bm" secondAttribute="bottom" id="a4n-hK-pWe"/>
+                            <constraint firstItem="Ysa-oq-h9F" firstAttribute="top" secondItem="KVP-wy-TJc" secondAttribute="bottom" id="dCl-KA-JsQ"/>
                             <constraint firstItem="I8x-GX-Gpw" firstAttribute="leading" secondItem="RRp-DS-txs" secondAttribute="leading" id="eyM-Vr-7rC"/>
                             <constraint firstAttribute="trailing" secondItem="I8x-GX-Gpw" secondAttribute="trailing" id="go9-cT-TSd"/>
                         </constraints>
@@ -308,6 +352,8 @@
                         <outlet property="disclaimer" destination="wTf-Kj-drU" id="QPW-FK-jXB"/>
                         <outlet property="editNavBehavior" destination="Qt2-La-Fb2" id="Auj-cy-Sfx"/>
                         <outlet property="editTableSource" destination="lA5-bm-MUk" id="qHh-vv-ur4"/>
+                        <outlet property="ui_button_event_help" destination="Dbr-0w-jAW" id="WTM-LA-Hf8"/>
+                        <outlet property="ui_view_bottom_event_help" destination="KVP-wy-TJc" id="nTW-Jf-buG"/>
                         <segue destination="fd3-Mx-0oI" kind="modal" identifier="DisclaimerSegue" id="t7x-Ui-H4l"/>
                         <segue destination="Yov-OH-fXT" kind="push" identifier="EditLocation" id="pF4-DN-1vY"/>
                         <segue destination="Xiu-q4-6Q3" kind="push" identifier="TitleEditSegue" id="dYJ-m3-v3g"/>
