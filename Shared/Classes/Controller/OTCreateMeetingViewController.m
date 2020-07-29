@@ -30,10 +30,11 @@
 #import "OTFeedItemFactory.h"
 #import "OTOngoingTourService.h"
 #import "entourage-Swift.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 #define PADDING 20.0f
 
-@interface OTCreateMeetingViewController () <LocationSelectionDelegate>
+@interface OTCreateMeetingViewController () <LocationSelectionDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) NSString *lmPath;
 @property (strong, nonatomic) NSString *dicPath;
@@ -52,6 +53,20 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    
+    UIToolbar* messageToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50)];
+    messageToolbar.barStyle = UIBarStyleBlack;
+    messageToolbar.tintColor = UIColor.whiteColor;
+    messageToolbar.barTintColor = UIColor.appOrangeColor;
+    messageToolbar.items = [NSArray arrayWithObjects:
+                                   [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                                   [[UIBarButtonItem alloc]initWithTitle:OTLocalizedString(@"close") style:UIBarButtonItemStyleDone target:self action:@selector(closeMessage)],
+                                   nil];
+    [messageToolbar sizeToFit];
+    self.messageTextView.textView.inputAccessoryView = messageToolbar;
+    
+    
     [UIApplication sharedApplication].delegate.window.backgroundColor = [UIColor colorWithRed:239 green:239 blue:244 alpha:1];
     
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
@@ -63,6 +78,10 @@
         self.nameTextField.text = self.encounter.streetPersonName;
         self.messageTextView.textView.text = self.encounter.message;
     }
+}
+
+-(void)closeMessage {
+    [self.messageTextView.textView resignFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -148,6 +167,22 @@
     else
         [self updateEncounter:sender];
 }
+
+- (IBAction)action_tap_view:(id)sender {
+    [self.nameTextField resignFirstResponder];
+    [self.messageTextView.textView resignFirstResponder];
+}
+
+#pragma mark - UITextfield delegate -
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    [self.messageTextView.textView becomeFirstResponder];
+    return TRUE;
+    
+}
+
 
 #pragma mark - LocationSelectionDelegate
 

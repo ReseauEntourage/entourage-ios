@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PBj-UU-2Rc">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PBj-UU-2Rc">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,11 +16,11 @@
                         <viewControllerLayoutGuide type="bottom" id="vZz-v8-Z56"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oe6-a0-tWf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qci-J9-QRW">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RRM-M1-LyP">
                                         <rect key="frame" x="0.0" y="15" width="375" height="48"/>
@@ -85,7 +83,10 @@
                                             <constraint firstAttribute="height" constant="48" id="SJ7-FO-iCu"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="9XR-CR-1nQ" id="Req-JF-sL0"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="## se sont rencontrés ici, le &lt;date&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QST-Yp-mfw">
                                         <rect key="frame" x="20" y="174" width="335" height="18"/>
@@ -113,6 +114,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="QST-Yp-mfw" secondAttribute="trailing" constant="20" id="5ZJ-B1-1L0"/>
                                     <constraint firstItem="i1A-KD-mHy" firstAttribute="centerX" secondItem="Qci-J9-QRW" secondAttribute="centerX" id="A0d-Y6-rYy"/>
@@ -136,6 +138,9 @@
                                     <constraint firstItem="3tf-ul-mxV" firstAttribute="centerX" secondItem="Qci-J9-QRW" secondAttribute="centerX" id="mv8-Db-Q40"/>
                                     <constraint firstItem="3tf-ul-mxV" firstAttribute="top" secondItem="RRM-M1-LyP" secondAttribute="bottom" constant="15" id="vxs-3l-RbW"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="nw4-Nj-KiA" appends="YES" id="a39-27-rsa"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -169,6 +174,11 @@
                         <outletCollection property="delegates" destination="9XR-CR-1nQ" id="mWr-aW-KF6"/>
                     </connections>
                 </customObject>
+                <tapGestureRecognizer id="nw4-Nj-KiA">
+                    <connections>
+                        <action selector="action_tap_view:" destination="9XR-CR-1nQ" id="Xa3-cF-bzi"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="738" y="1111"/>
         </scene>
@@ -196,7 +206,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PBj-UU-2Rc" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="dMz-Sy-doz">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
