@@ -88,6 +88,15 @@ class OTHomeTooltipView: UIView {
 
     @IBAction func action_close(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hideToolTip"), object: nil)
+        if stepNb == 0 {
+            OTLogger.logEvent(EVENT_ACTION_TOOLTIP_FILTER_CLOSE)
+        }
+        else if stepNb == 1 {
+            OTLogger.logEvent(EVENT_ACTION_TOOLTIP_GUIDE_CLOSE)
+        }
+        else {
+            OTLogger.logEvent(EVENT_ACTION_TOOLTIP_PLUS_CLOSE)
+        }
     }
     
     @IBAction func action_next_top(_ sender: Any) {
@@ -101,6 +110,7 @@ class OTHomeTooltipView: UIView {
         ui_iv_arrow_guide.isHidden = false
         ui_label_bottom_title.text = OTLocalisationService.getLocalizedValue(forKey: "tooltip_title2")
         ui_label_bottom_subtitle.text = OTLocalisationService.getLocalizedValue(forKey: "tooltip_desc2")
+        OTLogger.logEvent(EVENT_ACTION_TOOLTIP_FILTER_NEXT)
     }
     
     @IBAction func action_next_bottom(_ sender: Any) {
@@ -111,10 +121,12 @@ class OTHomeTooltipView: UIView {
             ui_iv_arrow_guide.isHidden = true
             ui_view_guide.isHidden = true
             ui_view_plus.isHidden = false
-                   ui_label_bottom_title.text = OTLocalisationService.getLocalizedValue(forKey: "tooltip_title3")
-                   ui_label_bottom_subtitle.text = OTLocalisationService.getLocalizedValue(forKey: "tooltip_desc3")
+            ui_label_bottom_title.text = OTLocalisationService.getLocalizedValue(forKey: "tooltip_title3")
+            ui_label_bottom_subtitle.text = OTLocalisationService.getLocalizedValue(forKey: "tooltip_desc3")
+            OTLogger.logEvent(EVENT_ACTION_TOOLTIP_GUIDE_NEXT)
         }
         else {
+            OTLogger.logEvent(EVENT_ACTION_TOOLTIP_PLUS_NEXT)
             action_close(sender)
         }
     }

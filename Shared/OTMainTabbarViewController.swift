@@ -21,6 +21,9 @@ class OTMainTabbarViewController: UITabBarController {
     
     var tooltipView:UIView? = nil
     
+    var oldItemSelected = 0
+    var currentItemSelected = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,6 +67,7 @@ class OTMainTabbarViewController: UITabBarController {
         homeVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_home")
         homeVC.tabBarItem.image = UIImage.init(named: "ic_tab_home")?.withRenderingMode(.alwaysOriginal)
         homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_home_selected")
+        homeVC.tabBarItem.tag = 0
         
         let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMain") as! OTMainViewController
         _guideVC.isSolidarityGuide = true
@@ -71,6 +75,7 @@ class OTMainTabbarViewController: UITabBarController {
         guideVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_guide")
         guideVC.tabBarItem.image = UIImage.init(named: "ic_tab_guide")?.withRenderingMode(.alwaysOriginal)
         guideVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_guide_selected")
+        guideVC.tabBarItem.tag = 1
         
         plusVC.tabBarItem.title = ""
         plusVC.tabBarItem.tag = 2
@@ -82,13 +87,14 @@ class OTMainTabbarViewController: UITabBarController {
         messagesVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_message")
         messagesVC.tabBarItem.image = UIImage.init(named: "ic_tab_message")?.withRenderingMode(.alwaysOriginal)
         messagesVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_message_selected")
+        messagesVC.tabBarItem.tag = 3
         
         let _menuVC = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "MenuProfileVC") as! OTMenuProfileViewController
         menuVC = UINavigationController.init(rootViewController: _menuVC)
         menuVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_profil")
         menuVC.tabBarItem.image = UIImage.init(named: "ic_tab_menu")?.withRenderingMode(.alwaysTemplate)
         menuVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_menu_selected")
-      
+        menuVC.tabBarItem.tag = 4
         viewControllers = [homeVC,guideVC,plusVC,messagesVC,menuVC]
         
         boldSelectedItem()
@@ -106,11 +112,34 @@ class OTMainTabbarViewController: UITabBarController {
                let selectionTextAttr:[NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor:UIColor.appOrange()!,NSAttributedString.Key.font:selectedFont!]
         
          tabBar.selectedItem?.setTitleTextAttributes(selectionTextAttr as [NSAttributedString.Key : Any], for: .normal)
+       
+       
+        //Analytics
+        if oldItemSelected == currentItemSelected {
+            return
+        }
+        
+        switch currentItemSelected {
+        case 0:
+            OTLogger.logEvent(Action_Tab_Feeds)
+        case 1:
+            OTLogger.logEvent(Action_Tab_Gds)
+        case 2:
+            OTLogger.logEvent(Action_Tab_Plus)
+        case 3:
+            OTLogger.logEvent(Action_Tab_Messages)
+        case 4:
+            OTLogger.logEvent(Action_Tab_Profil)
+        default:
+            break
+        }
     }
     
     func showMapOption() {
         //Check if Encounter if not show regular menu
         let isOngoingTou = UserDefaults.standard.currentOngoingTour
+        
+        OTLogger.logEvent(Action_Tab_Plus)
         
         if (OTOngoingTourService.sharedInstance()?.isOngoing ?? false || isOngoingTou != nil) {
             showHomeVC()
@@ -236,6 +265,8 @@ extension OTMainTabbarViewController: UITabBarControllerDelegate {
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if item.tag != 2 {
+            oldItemSelected = currentItemSelected
+            currentItemSelected = item.tag
             boldSelectedItem()
         }
     }

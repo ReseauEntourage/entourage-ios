@@ -494,6 +494,8 @@
         CGPathRef shadowPath = [[UIBezierPath bezierPathWithRect:_rect] CGPath];
         [self.ui_view_top_menu.layer setShadowPath:shadowPath];
         self.isFirstInitView = NO;
+        
+        [OTLogger logEvent:View_Start_Feeds];
     }
     
     
@@ -1162,14 +1164,25 @@
 
 - (void)showToursMapAction
 {
-    [OTLogger logEvent:@"MapViewClick"];
+    if (self.isSolidarityGuide) {
+         [OTLogger logEvent:Action_guide_showMap];
+    }
+    else {
+         [OTLogger logEvent:Action_feed_showMap];
+    }
+   
     
     [self showToursMap];
 }
 
 - (void)showToursListAction
 {
-    [OTLogger logEvent:@"ListViewClick"];
+    if (self.isSolidarityGuide) {
+         [OTLogger logEvent:Action_guide_showList];
+    }
+    else {
+         [OTLogger logEvent:Action_feed_showList];
+    }
     [self showFeedsList];
 }
 
@@ -1385,11 +1398,9 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"****** Tap end *****");
         
         if (self.isTourListDisplayed) {
-            NSLog(@"****** Tap end istour displayed *****");
-            [OTLogger logEvent:@"MapClick"];
+            [OTLogger logEvent:Action_feed_showMap];
             [self showToursMapAction];
         }
         else {
@@ -1599,7 +1610,7 @@
 
 - (void)showEventsOnly
 {
-    [OTLogger logEvent:@"ShowEventFeed"];
+    [OTLogger logEvent:Action_feed_showEvents];
     self.newsFeedsSourceBehavior.showEventsOnly = YES;
     self.newsFeedsSourceBehavior.showEncountersOnly = NO;
     self.forceReloadingFeeds = NO;
@@ -1610,7 +1621,7 @@
 
 - (void)showAllFeedItems
 {
-    [OTLogger logEvent:@"ShowAllFeed"];
+    [OTLogger logEvent:Action_feed_showAll];
     self.newsFeedsSourceBehavior.showEventsOnly = NO;
     self.newsFeedsSourceBehavior.showEncountersOnly = NO;
     self.forceReloadingFeeds = YES;
@@ -1619,7 +1630,7 @@
     [self reloadFeeds];
 }
 -(void)showEncountersOnly {
-    [OTLogger logEvent:@"ShowEncounterFeed"];
+    [OTLogger logEvent:Action_feed_showTours];
     self.newsFeedsSourceBehavior.showEncountersOnly = YES;
     self.forceReloadingFeeds = NO;
     [self.noDataBehavior switchedToEncounters];
@@ -1633,7 +1644,13 @@
 #pragma mark - Geo and filter buttons
 
 - (IBAction)showFilters {
-    [OTLogger logEvent:@"FeedFiltersPress"];
+    if (self.isSolidarityGuide) {
+        [OTLogger logEvent:Action_guide_showFilters];
+    }
+    else {
+       [OTLogger logEvent:Action_feed_showFilters];
+    }
+    
     
     [OTAppState showFilteringOptionsFromController:self withFullMapVisible:self.poisMapDelegate.isActive];
 }

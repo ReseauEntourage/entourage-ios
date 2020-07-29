@@ -21,8 +21,6 @@ class OTMenuProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        OTLogger.logEvent("OpenMenu")
-        
         currentUser = UserDefaults.standard.currentUser
         loadUser()
         
@@ -50,6 +48,7 @@ class OTMenuProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        OTLogger.logEvent("View_Profile_Menu")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,7 +83,7 @@ class OTMenuProfileViewController: UIViewController {
     
     //MARK: - IBActions -
     @IBAction func action_tap_good_waves(_ sender: Any) {
-        OTLogger.logEvent("GoodWavesClick")
+        OTLogger.logEvent(Action_Profile_goodWaves)
         
         let token = UserDefaults.standard.currentUser.token!
         let relativeUrl = String.init(format: API_URL_MENU_OPTIONS, GOOD_WAVES_LINK_ID,token)
@@ -95,7 +94,7 @@ class OTMenuProfileViewController: UIViewController {
         }
     }
     @IBAction func action_tap_conseil(_ sender: Any) {
-        OTLogger.logEvent("SimpleCommeBonjourClick")
+        OTLogger.logEvent(Action_Profile_SCBonjour)
         let token = UserDefaults.standard.currentUser.token!
         let relativeUrl = String.init(format: API_URL_MENU_OPTIONS, SCB_LINK_ID,token)
         if let _BaseUrl = OTHTTPRequestManager.sharedInstance()?.baseURL?.absoluteString {
@@ -105,7 +104,7 @@ class OTMenuProfileViewController: UIViewController {
         }
     }
     @IBAction func action_tap_ideas(_ sender: Any) {
-        OTLogger.logEvent("WhatActionsClick")
+        OTLogger.logEvent(Action_Profile_Actions)
         let token = UserDefaults.standard.currentUser.token!
         let relativeUrl = String.init(format: API_URL_MENU_OPTIONS, GOAL_LINK_ID,token)
         if let _BaseUrl = OTHTTPRequestManager.sharedInstance()?.baseURL?.absoluteString {
@@ -115,11 +114,11 @@ class OTMenuProfileViewController: UIViewController {
         }
     }
     @IBAction func action_tap_ambassador(_ sender: Any) {
-        OTLogger.logEvent("AmbassadorProgramClick")
+        OTLogger.logEvent(Action_Profile_Ambassador)
         OTSafariService.launchInAppBrowser(withUrlString: JOIN_URL, viewController: self.navigationController)
     }
     @IBAction func action_tap_gift(_ sender: Any) {
-        //  OTLogger.logEvent("LogOut")
+        OTLogger.logEvent(Action_Profile_Donate)
         let token = UserDefaults.standard.currentUser.token!
         
         let relativeUrl = String.init(format: API_URL_MENU_OPTIONS, DONATE_LINK_ID,token)
@@ -133,7 +132,7 @@ class OTMenuProfileViewController: UIViewController {
         }
     }
     @IBAction func action_tap_follow(_ sender: Any) {
-        OTLogger.logEvent("ATDPartnershipView")
+        OTLogger.logEvent(Action_Profile_Follow)
         let storyb = UIStoryboard.init(name: "Social", bundle: nil)
         if let vc = storyb.instantiateInitialViewController() {
             self.navigationController?.present(vc, animated: true, completion: nil)
@@ -141,7 +140,7 @@ class OTMenuProfileViewController: UIViewController {
         
     }
     @IBAction func action_tap_charte(_ sender: Any) {
-        OTLogger.logEvent("ViewEthicsChartClick")
+        OTLogger.logEvent(Action_Profile_Ethic)
         let userId = self.currentUser.sid.stringValue
         var url = String.init(format: CHARTE_LINK_FORMAT_PUBLIC, userId)
         if self.currentUser.isPro() {
@@ -150,14 +149,14 @@ class OTMenuProfileViewController: UIViewController {
         OTSafariService.launchInAppBrowser(withUrlString: url, viewController: self.navigationController)
     }
     @IBAction func action_tap_help(_ sender: Any) {
-        OTLogger.logEvent("AboutClick")
+        OTLogger.logEvent(Action_Profile_About)
         let storyb = UIStoryboard.init(name: "About", bundle: nil)
         if let vc = storyb.instantiateInitialViewController() {
             self.navigationController?.present(vc, animated: true, completion: nil)
         }
     }
     @IBAction func action_tap_logout(_ sender: Any) {
-        OTLogger.logEvent("LogOut")
+        OTLogger.logEvent(Action_Profile_Logout)
         OTOngoingTourService.sharedInstance()?.isOngoing = false
         NotificationCenter.default.post(name: NSNotification.Name.loginFailure, object: self)
     }
@@ -210,7 +209,7 @@ extension OTMenuProfileViewController: UITableViewDelegate, UITableViewDataSourc
 //MARK: - TapMenuProfileDelegate -
 extension OTMenuProfileViewController: TapMenuProfileDelegate {
     func showProfile() {
-        OTLogger.logEvent("TapMyProfilePhoto")
+        OTLogger.logEvent(Action_Profile_ShowProfil)
         
         let storyB = UIStoryboard.init(name: "UserProfile", bundle: nil)
         if let vc = storyB.instantiateInitialViewController() {
@@ -223,8 +222,7 @@ extension OTMenuProfileViewController: TapMenuProfileDelegate {
     }
     
     func editProfile() {
-        //TODO:
-        Logger.print("***** Edit profile")
+        OTLogger.logEvent(Action_Profile_ModProfil)
         let storyB = UIStoryboard.init(name: "UserProfileEditor", bundle: nil)
         if let vc = storyB.instantiateInitialViewController() {
             self.navigationController?.present(vc, animated: true, completion: nil)

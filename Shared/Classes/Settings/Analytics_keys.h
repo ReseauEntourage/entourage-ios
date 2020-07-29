@@ -121,6 +121,24 @@
 #define View_Profile_InNeed_Mosaic @"View__Profile__InNeedMosaic"
 #define Action_Profile_Neighbor_Mosaic @"Action__Profile__NeighborMosaic"
 #define Action_Profile_InNeed_Mosaic @"Action__Profile__InNeedMosaic"
+
+//Menu Profile
+#define Action_Profile_goodWaves @"Action__Profile__GoodWaves"
+#define Action_Profile_SCBonjour @"Action__Profile__SCBonjour"
+#define Action_Profile_Actions @"Action__Profile__Actions"
+#define Action_Profile_Ambassador @"Action__Profile__Ambassador"
+#define Action_Profile_Donate @"Action__Profile__Donate"
+#define Action_Profile_Follow @"Action__Profile__Follow"
+#define Action_Profile_Ethic @"Action__Profile__Ethic"
+#define Action_Profile_About @"Action__Profile__About"
+#define Action_Profile_Logout @"Action__Profile__LogOut"
+#define Action_Profile_ShowEvents @"Action__Profile__ShowEvents"
+#define Action_Profile_ShowActions @"Action__Profile__ShowActions"
+#define Action_Profile_ModProfil @"Action__Profile__ModProfil"
+#define Action_Profile_ShowProfil @"Action__Profile__ShowProfil"
+
+#define View_Profile_Menu @"View__Profile__Menu"
+
 /**
  End Profile
 */
@@ -133,4 +151,37 @@
 //Action plus button agir / structure
 #define Action_Plus_Agir @"Action__Plus__Agir"
 #define Action_Plus_Structure @"Action__Plus__Structure"
+
+
+//------TOOLTIP
+#define EVENT_ACTION_TOOLTIP_FILTER_NEXT @"Action__Tooltip__FilterNext"
+#define EVENT_ACTION_TOOLTIP_FILTER_CLOSE @"Action__Tooltip__FilterClose"
+#define EVENT_ACTION_TOOLTIP_GUIDE_NEXT @"Action__Tooltip__GuideNext"
+#define EVENT_ACTION_TOOLTIP_GUIDE_CLOSE @"Action__Tooltip__GuideClose"
+#define EVENT_ACTION_TOOLTIP_PLUS_NEXT @"Action__Tooltip__PlusNext"
+#define EVENT_ACTION_TOOLTIP_PLUS_CLOSE @"Action__Tooltip__PlusClose"
+
+//Home pages
+//Tabbar
+#define Action_Tab_Feeds @"Action__Tab__Feeds"
+#define Action_Tab_Gds @"Action__Tab__GDS"
+#define Action_Tab_Plus @"Action__Tab__Plus"
+#define Action_Tab_Messages @"Action__Tab__Messages"
+#define Action_Tab_Profil @"Action__Tab__Profil"
+//Feeds
+#define Action_feed_showAll @"Action__Feed__ShowAll"
+#define Action_feed_showEvents @"Action__Feed__ShowEvents"
+#define Action_feed_showTours @"Action__Feed__ShowTours"
+#define Action_feed_showMap @"Action__Feed__ShowMap"
+#define Action_feed_showList @"Action__Feed__ShowList"
+#define Action_feed_showFilters @"Action__Feed__ShowFilters"
+//Guide
+#define Action_guide_showMap @"Action__Guide__ShowMap"
+#define Action_guide_showList @"Action__Guide__ShowList"
+#define Action_guide_showFilters @"Action__Guide__ShowFilters"
+
+//Start info
+#define View_Start_Feeds @"View__Start__Feeds"
+
+
 #endif /* Analytics_keys_h */
