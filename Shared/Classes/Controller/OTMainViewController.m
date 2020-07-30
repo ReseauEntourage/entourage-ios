@@ -172,10 +172,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_menu_all;
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_menu_events;
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_menu_encounters;
+@property (weak, nonatomic) IBOutlet UIView *ui_view_top_info_gds;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_info_web_gds;
 
 @property (nonatomic) BOOL isEventMenuSelected, isEncounterSelected;
 @property (nonatomic, strong) OTNewsFeedsFilter *encounterFilter;
 
+@property(nonatomic) BOOL hasToShowTopInformationGDS;
 
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 @property (nonatomic) double entourageScale;
@@ -190,6 +193,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.hasToShowTopInformationGDS = YES;
     
     self.isFirstInitView = YES;
     
@@ -212,7 +217,6 @@
        selector:@selector(showEventsFromNotification)
            name:@"showEvents"
          object:nil];
-    
 }
 
 -(void) showAllsFromNotification {
@@ -505,9 +509,26 @@
     
     if (self.isSolidarityGuide == YES) {
         [self switchToGuide];
-        self.ui_constraint_view_menu_height.constant = 0;
+        
         [self.ui_view_top_menu setHidden:YES];
+        
+        if (self.hasToShowTopInformationGDS) {
+            
+            NSAttributedString * txt_underline = [Utilitaires formatStringUnderlineWithStringMessage:OTLocalizedString( @"Pop_info_web_alert_GDS") underlineTxt:OTLocalizedString(@"Pop_info_web_alert_GDS_underline") color: [UIColor whiteColor] colorHighlight: [UIColor whiteColor] fontSize:14 fontWeight:UIFontWeightRegular];
+            
+            self.ui_label_info_web_gds.attributedText = txt_underline;
+            
+            
+            [self.ui_view_top_info_gds setHidden:NO];
+        }
+        else {
+            self.ui_constraint_view_menu_height.constant = 0;
+            [self.ui_view_top_info_gds setHidden:YES];
+        }
+        
+        
     } else {
+        [self.ui_view_top_info_gds setHidden:YES];
         [self.newsFeedsSourceBehavior resume];
         [self.heatzonesCollectionDataSource refresh];
     }
@@ -628,6 +649,8 @@
     [self.noDataBehavior switchedToGuide];
     [self reloadPois];
     [self configureNavigationBar];
+    
+    
 }
 
 #pragma mark - Methods called from nav bar (button +)
@@ -755,6 +778,11 @@
     [self changeFilterButton];
     
     
+}
+- (IBAction)action_tap_info_web:(id)sender {
+    
+    NSURL * url = [NSURL URLWithString:GDS_INFO_ALERT_WEB_LINK];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 #pragma mark - Private methods

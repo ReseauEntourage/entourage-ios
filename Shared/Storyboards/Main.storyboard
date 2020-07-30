@@ -88,14 +88,14 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ici, vous trouverez prochainement les activités de la communauté autour de vous " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHN-P3-Oj3">
-                                        <rect key="frame" x="18" y="186" width="349" height="72"/>
+                                        <rect key="frame" x="18" y="186" width="349" height="70"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="20"/>
                                         <color key="textColor" red="0.22003445029999999" green="0.6036320329" blue="0.84068751340000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous pourrez demander à rejoindre des activités, en créer, et découvrir la communauté autour de vous" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWr-EL-qgm">
-                                        <rect key="frame" x="18" y="267" width="349" height="68.5"/>
+                                        <rect key="frame" x="18" y="265" width="349" height="66.5"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="19"/>
                                         <color key="textColor" red="0.22003445029999999" green="0.6036320329" blue="0.84068751340000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -129,13 +129,13 @@
                                             <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="C’est tout pour les activités dans ce rayon autour de vous !" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="hTq-Rc-zQl">
-                                            <rect key="frame" x="15" y="16" width="345" height="41"/>
+                                            <rect key="frame" x="15" y="16" width="345" height="40"/>
                                             <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FW8-fN-vdh">
-                                            <rect key="frame" x="8" y="57" width="359" height="200"/>
+                                            <rect key="frame" x="8" y="56" width="359" height="201"/>
                                             <state key="normal">
                                                 <attributedString key="attributedTitle">
                                                     <fragment content="Rechercher plus loin">
@@ -174,7 +174,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Organization name multiline on two lines and three lines for iphone se" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zk3-TU-RZt">
-                                                    <rect key="frame" x="45" y="11" width="263" height="41"/>
+                                                    <rect key="frame" x="45" y="11" width="263" height="40"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -212,7 +212,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="249" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4n-wk-MkE">
-                                                    <rect key="frame" x="15" y="52" width="307" height="41"/>
+                                                    <rect key="frame" x="15" y="51" width="307" height="42"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -277,7 +277,7 @@
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MPQ-e4-Pbw">
-                                                    <rect key="frame" x="15" y="20.5" width="22" height="22"/>
+                                                    <rect key="frame" x="15" y="20" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="AVM-gS-zrR"/>
                                                         <constraint firstAttribute="height" constant="22" id="KdO-N8-BxT"/>
@@ -357,10 +357,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOJ-8N-3xc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="273"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="272.5"/>
                                                     <subviews>
                                                         <button opaque="NO" tag="7" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="sQS-Yo-QkA">
-                                                            <rect key="frame" x="148" y="246" width="79" height="17"/>
+                                                            <rect key="frame" x="148" y="245.5" width="79" height="17"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="UwB-KQ-G0b"/>
@@ -383,25 +383,25 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Organization name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TFV-Eg-f6o">
-                                                    <rect key="frame" x="45" y="11" width="154.5" height="20.5"/>
+                                                    <rect key="frame" x="45" y="11" width="143" height="20"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" red="0.20392156862745098" green="0.25098039215686274" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Michel, Entourage a besoin de vous pour continuer à accompagner les sans-abri." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoy-rq-3kl">
-                                                    <rect key="frame" x="15" y="35" width="345" height="36"/>
+                                                    <rect key="frame" x="15" y="34.5" width="345" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.20392156862745098" green="0.25098039215686274" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="M4G-mA-6Wd">
-                                                    <rect key="frame" x="0.0" y="76" width="375" height="160"/>
+                                                    <rect key="frame" x="0.0" y="75.5" width="375" height="160"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="M4G-mA-6Wd" secondAttribute="height" multiplier="750:320" id="Ham-XC-CnJ"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-ay-1yL" userLabel="iconImage">
-                                                    <rect key="frame" x="15" y="10.5" width="22" height="22"/>
+                                                    <rect key="frame" x="15" y="10" width="22" height="22"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" red="0.20392156862745098" green="0.25098039215686274" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -449,31 +449,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Organization name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BkO-2p-6eq">
-                                                    <rect key="frame" x="30" y="10" width="245" height="18"/>
+                                                    <rect key="frame" x="30" y="10" width="245" height="19"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IY-Qx-72Q">
-                                                    <rect key="frame" x="30" y="28" width="80.5" height="18"/>
+                                                    <rect key="frame" x="30" y="29" width="76.5" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Street" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFF-lI-a6R">
-                                                    <rect key="frame" x="128.5" y="28" width="146.5" height="18"/>
+                                                    <rect key="frame" x="122" y="29" width="153" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Time - distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUP-yB-2hG">
-                                                    <rect key="frame" x="30" y="56" width="95" height="16"/>
+                                                    <rect key="frame" x="30" y="56.5" width="90.5" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
                                                     <color key="textColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqF-aU-DDi">
-                                                    <rect key="frame" x="115.5" y="28" width="8" height="18"/>
+                                                    <rect key="frame" x="111.5" y="29" width="5.5" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -582,26 +582,26 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="289" height="96"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTO-02-vnw">
-                                                            <rect key="frame" x="15" y="13" width="259" height="20.5"/>
+                                                            <rect key="frame" x="15" y="13" width="259" height="20"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time - Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROt-f9-zNU">
-                                                            <rect key="frame" x="15" y="67" width="96.5" height="16"/>
+                                                            <rect key="frame" x="15" y="67.5" width="92" height="15.5"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
                                                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="users" translatesAutoresizingMaskIntoConstraints="NO" id="W6f-lY-aNo">
-                                                            <rect key="frame" x="233" y="62.5" width="29" height="25"/>
+                                                            <rect key="frame" x="233" y="63" width="29" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="29" id="OVg-g4-088"/>
                                                                 <constraint firstAttribute="height" constant="25" id="Wo1-ao-1tv"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oef-Ka-s1w">
-                                                            <rect key="frame" x="264" y="66" width="10" height="18"/>
+                                                            <rect key="frame" x="264" y="66.5" width="10" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="UCX-Ek-iLa"/>
                                                                 <constraint firstAttribute="width" constant="10" id="m2T-Az-aeD"/>
@@ -611,7 +611,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Contribuitor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cW1-vi-3rp">
-                                                            <rect key="frame" x="15" y="33.5" width="259" height="18"/>
+                                                            <rect key="frame" x="15" y="33" width="259" height="17.5"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                             <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
@@ -981,6 +981,38 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                     <constraint firstItem="AGI-9n-rGo" firstAttribute="top" secondItem="1ZS-8G-emq" secondAttribute="top" id="nfm-iY-Txf"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCW-tk-m65">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ey9-DJ-0jq">
+                                        <rect key="frame" x="36" y="4" width="331" height="52"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info" translatesAutoresizingMaskIntoConstraints="NO" id="rgk-EI-LPT">
+                                        <rect key="frame" x="8" y="20" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="1ZH-Nv-ow6"/>
+                                            <constraint firstAttribute="height" constant="20" id="exa-vG-2rs"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.83921568627450982" green="0.21176470588235294" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Ey9-DJ-0jq" secondAttribute="trailing" constant="8" id="1MO-tl-6fr"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ey9-DJ-0jq" secondAttribute="bottom" constant="4" id="41f-ZE-I1y"/>
+                                    <constraint firstItem="rgk-EI-LPT" firstAttribute="leading" secondItem="RCW-tk-m65" secondAttribute="leading" constant="8" id="5Jt-rO-erV"/>
+                                    <constraint firstItem="rgk-EI-LPT" firstAttribute="centerY" secondItem="RCW-tk-m65" secondAttribute="centerY" id="T3a-Pn-3Zt"/>
+                                    <constraint firstAttribute="height" constant="60" id="Vrv-E8-YI8"/>
+                                    <constraint firstItem="Ey9-DJ-0jq" firstAttribute="top" secondItem="RCW-tk-m65" secondAttribute="top" constant="4" id="dnh-rJ-0Db"/>
+                                    <constraint firstItem="Ey9-DJ-0jq" firstAttribute="leading" secondItem="rgk-EI-LPT" secondAttribute="trailing" constant="8" id="rTs-z1-1mv"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="cBt-PO-mXv" appends="YES" id="U9a-Za-qtG"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -990,6 +1022,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstAttribute="trailing" secondItem="Lzp-RD-PWj" secondAttribute="trailing" constant="20" id="1ny-vO-dCZ"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="top" secondItem="1ZS-8G-emq" secondAttribute="bottom" id="3ws-Kh-w65"/>
                             <constraint firstAttribute="trailing" secondItem="oVf-Bh-vdD" secondAttribute="trailing" constant="5" id="6vv-1S-kTv"/>
+                            <constraint firstItem="RCW-tk-m65" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="8B9-Yt-iHh"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Bt3-Uv-XrN" secondAttribute="bottom" constant="-49" id="8IV-sw-OZs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oHF-Vi-LCk" secondAttribute="trailing" constant="-16" id="9ho-oj-3FF"/>
                             <constraint firstAttribute="trailing" secondItem="Bt3-Uv-XrN" secondAttribute="trailing" id="BJw-Pb-he4"/>
@@ -997,6 +1030,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="Lzp-RD-PWj" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" constant="-15" id="DHf-kj-GXw"/>
                             <constraint firstItem="Bw2-c9-gXe" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="4" id="EDr-uJ-wae"/>
                             <constraint firstItem="4bs-kQ-3LO" firstAttribute="height" secondItem="Bw2-c9-gXe" secondAttribute="height" id="Eu8-77-Ccs"/>
+                            <constraint firstAttribute="trailing" secondItem="RCW-tk-m65" secondAttribute="trailing" id="Fwx-qr-VIc"/>
                             <constraint firstItem="fyj-qg-Gvf" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="JEK-w9-aoe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4bs-kQ-3LO" secondAttribute="trailing" constant="4" id="LLe-jU-Cwd"/>
                             <constraint firstItem="1ZS-8G-emq" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="LQz-aa-X38"/>
@@ -1004,6 +1038,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="uRg-cj-T9Q" secondAttribute="bottom" constant="9" id="TDA-nJ-u0d"/>
                             <constraint firstAttribute="trailing" secondItem="Bt3-Uv-XrN" secondAttribute="trailing" id="UJE-o2-0dd"/>
                             <constraint firstItem="FLr-cF-t8Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="UhE-G3-aXJ"/>
+                            <constraint firstItem="RCW-tk-m65" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Ui7-XI-o6Z"/>
                             <constraint firstItem="oHF-Vi-LCk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="VLV-3h-yeI"/>
                             <constraint firstItem="Bt3-Uv-XrN" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="WW1-rz-M45"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uRg-cj-T9Q" secondAttribute="trailing" constant="-6" id="ZT2-9H-lNi"/>
@@ -1052,6 +1087,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                         <outlet property="ui_button_filters" destination="Bw2-c9-gXe" id="MYh-TA-wdg"/>
                         <outlet property="ui_button_map_list" destination="4bs-kQ-3LO" id="9Qr-vF-BF9"/>
                         <outlet property="ui_constraint_view_menu_height" destination="nYx-JD-tDH" id="aZk-JL-5nx"/>
+                        <outlet property="ui_label_info_web_gds" destination="Ey9-DJ-0jq" id="Lkq-z0-GdX"/>
                         <outlet property="ui_label_menu_all" destination="fpM-92-REH" id="jPO-Pe-s5C"/>
                         <outlet property="ui_label_menu_encounters" destination="6vl-tN-lEX" id="2FW-e6-ZKs"/>
                         <outlet property="ui_label_menu_events" destination="PnT-k8-CxQ" id="C46-qF-b6R"/>
@@ -1059,6 +1095,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                         <outlet property="ui_view_selector_menu_all" destination="H5J-6B-DTf" id="eb0-CZ-kQM"/>
                         <outlet property="ui_view_selector_menu_encounters" destination="REO-DP-FPo" id="Qa6-FR-v3w"/>
                         <outlet property="ui_view_selector_menu_events" destination="l4N-B0-MbA" id="QTn-k4-R0g"/>
+                        <outlet property="ui_view_top_info_gds" destination="RCW-tk-m65" id="lqq-vY-DgC"/>
                         <outlet property="ui_view_top_menu" destination="1ZS-8G-emq" id="87R-b9-nhG"/>
                         <segue destination="cVp-EA-m5M" kind="modal" identifier="OTConfirmationPopup" id="Qf1-vA-gd6"/>
                         <segue destination="GHS-CJ-wmd" kind="modal" identifier="JoinRequestSegue" id="a8P-lF-ebs"/>
@@ -1161,6 +1198,11 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                         <outlet property="owner" destination="vXZ-lx-hvc" id="hFE-WP-OBw"/>
                     </connections>
                 </customObject>
+                <tapGestureRecognizer id="cBt-PO-mXv">
+                    <connections>
+                        <action selector="action_tap_info_web:" destination="vXZ-lx-hvc" id="57P-1V-tQf"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1264.8" y="39.130434782608695"/>
         </scene>
@@ -1534,6 +1576,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <image name="ic_home_tab_all" width="60" height="60"/>
         <image name="ic_home_tab_events" width="24" height="24"/>
         <image name="ic_home_tab_maraude" width="24" height="24"/>
+        <image name="info" width="64" height="64"/>
         <image name="map-placeholder-bg" width="1120" height="1694"/>
         <image name="newEntourages" width="180" height="39"/>
         <image name="pause" width="62" height="62"/>

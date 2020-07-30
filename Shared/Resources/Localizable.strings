@@ -826,3 +826,6 @@
 "pop_validate_event_description" = "En clôturant l’évènement, vous fermez la discussion et retirez l’évènement du fil d’actualités. \n\nDites-nous en plus avant de clôturer !";
 "pop_validate_event_bt_validate" = "Confirmer ";
 "pop_validate_event_bt_cancel" = "Annuler";
+
+"Pop_info_web_alert_GDS" = "HORAIRES D’ÉTÉ : notre partenaire Soliguide.fr tient un annuaire à jour pour de nombreuses villes.";
+"Pop_info_web_alert_GDS_underline" = "Soliguide.fr";

@@ -144,3 +144,4 @@
 #define ENTOURAGE_WEB_URL @"https://www.entourage.social"
 
 #define GOOD_WAVES_LINK_ID @"good_waves"
+#define GDS_INFO_ALERT_WEB_LINK @"https://soliguide.fr"
