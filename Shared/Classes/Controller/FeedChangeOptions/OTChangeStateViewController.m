@@ -108,20 +108,29 @@
 }
 
 - (IBAction)signalEntourage:(id)sender {
-    [self prepareForClosing];
+  //  [self prepareForClosing];
     
     if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
          UIColor *textColor = [UIColor colorWithHexString:@"ee3e3a"];
            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Popup"
                                                                 bundle:nil];
         
+        NSString *titleStr = OTLocalizedString(@"report_action_title");
+        NSString *descriptionStr = OTLocalizedString(@"report_action_attributed_title");
+        
+        if (![self.feedItem isAction]) {
+            titleStr = OTLocalizedString(@"report_event_title");
+            descriptionStr = OTLocalizedString(@"report_event_attributed_title");
+        }
+        
+        
         OTPopupViewController *popup = [storyboard instantiateInitialViewController];
-        NSMutableAttributedString *firstString = [[NSMutableAttributedString alloc] initWithString: OTLocalizedString(@"report_entourage_title")];
+        NSMutableAttributedString *firstString = [[NSMutableAttributedString alloc] initWithString: titleStr];
         [firstString addAttribute:NSForegroundColorAttributeName
                                  value:textColor
                                  range:NSMakeRange(0, firstString.length)];
         
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: OTLocalizedString(@"report_entourage_attributed_title")];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: descriptionStr];
         [attributedString addAttribute:NSFontAttributeName
                                  value:[UIFont fontWithName:@"SFUIText-Medium" size: 17]
                                  range:NSMakeRange(0, attributedString.length)];

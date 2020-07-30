@@ -757,8 +757,10 @@
 //Report entourage
 "minChars_pop_report_entourage" = "Veuillez saisir votre message de signalement";
 "report_entourage" = "Entourage signalé";
-"report_entourage_title" = "Vous allez signaler cet Entourage à nos administrateurs.\n";
-"report_entourage_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cet Entourage :";
+"report_action_title" = "Vous allez signaler cette action solidaire à nos administrateurs.\n";
+"report_action_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cette action solidaire :";
+"report_event_title" = "Vous allez signaler cet évènement à nos administrateurs.\n";
+"report_event_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cet évènement :";
 "report_entourage_button" = "Envoyer";
 "report_entourage_placeholder" = "Ecrivez quelque chose…";
 
@@ -810,3 +812,17 @@
 
 
 "add_event_help_button" = "Quels évènements diffuser ?";
+
+//Pop cloture action/event
+"pop_validate_action_title" = "Comment cela s’est passé ?";
+"pop_validate_action_description" = "En clôturant l’action solidaire, vous fermez la discussion et retirez l’action du fil d’actualités.\n\nDites-nous en plus avant de clôturer !";
+"pop_validate_action_help" = "Mon action solidaire est bloquée.";
+"pop_validate_action_bt_validate" = "Mon action a réussi";
+"pop_validate_action_bt_fail" = "Mon action n'a pas abouti";
+"pop_validate_action_bt_help" = "Je demande de l'aide";
+"pop_validate_action_bt_cancel" = "Annuler";
+
+"pop_validate_event_title" = "Comment cela s’est passé ?";
+"pop_validate_event_description" = "En clôturant l’évènement, vous fermez la discussion et retirez l’évènement du fil d’actualités. \n\nDites-nous en plus avant de clôturer !";
+"pop_validate_event_bt_validate" = "Confirmer ";
+"pop_validate_event_bt_cancel" = "Annuler";
