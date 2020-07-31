@@ -145,3 +145,4 @@
 
 #define GOOD_WAVES_LINK_ID @"good_waves"
 #define GDS_INFO_ALERT_WEB_LINK @"https://soliguide.fr"
+#define ENTOURAGE_BITLY_LINK @"https://bit.ly/applientourage"

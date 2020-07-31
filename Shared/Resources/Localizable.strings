@@ -829,3 +829,5 @@
 
 "Pop_info_web_alert_GDS" = "HORAIRES D’ÉTÉ : notre partenaire Soliguide.fr tient un annuaire à jour pour de nombreuses villes.";
 "Pop_info_web_alert_GDS_underline" = "Soliguide.fr";
+
+"info_share_sms_poi" = "Bonjour ! Voici l’adresse de %@ qui pourrait vous intéresser.\n%@\n%@\nPour plus d’infos sur ce lieu, et pour créer des liens entre voisins solidaires, je vous donne RDV sur le réseau Entourage %@";

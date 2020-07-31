@@ -157,6 +157,33 @@
     }
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
+- (IBAction)action_share:(id)sender {
+    NSString * name = self.poi.name;
+    NSString * address = (self.poi.address == nil || self.poi.address.length == 0) ? @"" :  [@"Adresse: " stringByAppendingString:self.poi.address];
+    NSString * phone = (self.poi.phone == nil  || self.poi.phone.length == 0) ? @"" : [@"Tel: " stringByAppendingString:self.poi.phone];
+    NSString * url = ENTOURAGE_BITLY_LINK;
+    NSString * message = [NSString stringWithFormat:OTLocalizedString(@"info_share_sms_poi"),name,address,phone,url];
+   
+    
+    NSArray* sharedObjects=[NSArray arrayWithObjects:message,  nil];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:sharedObjects applicationActivities:nil];
+    if (@available(iOS 11.0, *)) {
+        activityViewController.excludedActivityTypes = @[UIActivityTypePrint,UIActivityTypeAirDrop,UIActivityTypeMarkupAsPDF,UIActivityTypePostToVimeo,UIActivityTypeOpenInIBooks,UIActivityTypePostToFlickr,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToTencentWeibo];
+    } else {
+        activityViewController.excludedActivityTypes = @[UIActivityTypePrint,UIActivityTypeAirDrop,UIActivityTypePostToVimeo,UIActivityTypeOpenInIBooks,UIActivityTypePostToFlickr,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToTencentWeibo];
+    }
+    
+    [OTAppConfiguration configureActivityControllerAppearance:nil
+                                                        color:[[ApplicationTheme shared] primaryNavigationBarTintColor]];
+    
+    activityViewController.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
+        [OTAppConfiguration configureActivityControllerAppearance:nil
+                                                            color:[[ApplicationTheme shared] secondaryNavigationBarTintColor]];
+    };
+    activityViewController.navigationController.navigationBar.tintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    
+    [self.navigationController presentViewController:activityViewController animated:true completion:nil];
+}
 
 /********************************************************************************/
 #pragma mark - MFMailComposerDelegate
