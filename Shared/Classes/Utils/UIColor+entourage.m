@@ -78,6 +78,10 @@
     return [UIColor colorWithRed:151.0f/255.0f green:215.0f/255.0f blue:145.0f/255.0f alpha:1.0f];
 }
 
++ (UIColor *)poiCategory8 {
+    return [UIColor colorWithRed:249.0f/255.0f green:159.0f/255.0f blue:124.0f/255.0f alpha:1.0f];
+}
+
 + (UIColor *)maxLenghtReachedColor {
     return [UIColor colorWithRed:208.0f/255.0f green:2.0f/255.0f blue:27.0f/255.0f alpha:1.0f];
 }

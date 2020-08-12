@@ -21,6 +21,7 @@
 #import "OTAPIConsts.h"
 #import "OTShareFeedItemBehavior.h"
 #import "entourage-Swift.h"
+#import "UIColor+Expanded.h"
 
 @interface OTChangeStateViewController ()
 
@@ -107,10 +108,46 @@
 }
 
 - (IBAction)signalEntourage:(id)sender {
-    [self prepareForClosing];
+  //  [self prepareForClosing];
     
     if ([self.feedItem isKindOfClass:[OTEntourage class]]) {
-        [self.singalEntourageBehavior sendMailFor:(OTEntourage *)self.feedItem];
+         UIColor *textColor = [UIColor colorWithHexString:@"ee3e3a"];
+           UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Popup"
+                                                                bundle:nil];
+        
+        NSString *titleStr = OTLocalizedString(@"report_action_title");
+        NSString *descriptionStr = OTLocalizedString(@"report_action_attributed_title");
+        
+        if (![self.feedItem isAction]) {
+            titleStr = OTLocalizedString(@"report_event_title");
+            descriptionStr = OTLocalizedString(@"report_event_attributed_title");
+        }
+        
+        
+        OTPopupViewController *popup = [storyboard instantiateInitialViewController];
+        NSMutableAttributedString *firstString = [[NSMutableAttributedString alloc] initWithString: titleStr];
+        [firstString addAttribute:NSForegroundColorAttributeName
+                                 value:textColor
+                                 range:NSMakeRange(0, firstString.length)];
+        
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: descriptionStr];
+        [attributedString addAttribute:NSFontAttributeName
+                                 value:[UIFont fontWithName:@"SFUIText-Medium" size: 17]
+                                 range:NSMakeRange(0, attributedString.length)];
+        [attributedString addAttribute:NSForegroundColorAttributeName
+                            value:textColor
+                            range:NSMakeRange(0, attributedString.length)];
+        [firstString appendAttributedString:attributedString];
+        
+        popup.labelString = firstString;
+        popup.textFieldPlaceholder = OTLocalizedString(@"report_entourage_placeholder");
+        popup.buttonTitle = OTLocalizedString(@"report_entourage_button");
+        popup.isEntourageReport = YES;
+        popup.entourageId = ((OTEntourage *)self.feedItem).uid.stringValue;
+        
+        [self presentViewController:popup
+                           animated:YES
+                         completion:nil];
     }
 }
 

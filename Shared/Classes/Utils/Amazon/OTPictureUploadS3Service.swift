@@ -39,7 +39,7 @@ struct OTPictureUploadS3Service {
     
     //2nd step upload to Amazon
     static func uploadtoS3(urlS3:String, avatar_key:String, image:UIImage,completion: @escaping (_ result: Bool)->()) {
-        guard let url = URL(string: urlS3), let data = UIImageJPEGRepresentation(image, 0.8) else {
+        guard let url = URL(string: urlS3), let data = image.jpegData(compressionQuality: 0.8) else {
             completion(false)
             return
         }

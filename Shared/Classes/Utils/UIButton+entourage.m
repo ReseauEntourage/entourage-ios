@@ -69,7 +69,7 @@
         } else {
             if ([JOIN_ACCEPTED isEqualToString:feedItem.joinStatus]) {
                 self.enabled = YES;
-                title = OTLocalizedString(@"join_active");
+                title = OTLocalizedString(@"join_active_other");
             } else if ([JOIN_PENDING isEqualToString:feedItem.joinStatus]) {
                 self.enabled = YES;
                 title = OTLocalizedString(@"join_pending");

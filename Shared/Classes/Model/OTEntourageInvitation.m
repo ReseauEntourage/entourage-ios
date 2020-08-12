@@ -12,6 +12,7 @@
 
 #define kInviter @"inviter"
 #define kWSKeyEntourageId @"entourage_id"
+#define kWSKeyEntourageTitle @"title"
 
 @implementation OTEntourageInvitation
 
@@ -23,6 +24,7 @@
         self.inviter = [[OTUser alloc] initWithDictionary:dictionary[kInviter]];
         self.status = [dictionary stringForKey:kWSKeyStatus];
         self.entourageId = [dictionary numberForKey:kWSKeyEntourageId];
+        self.title = [dictionary stringForKey:kWSKeyEntourageTitle];
     }
     return self;
 }

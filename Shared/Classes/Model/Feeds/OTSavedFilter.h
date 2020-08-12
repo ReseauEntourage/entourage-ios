@@ -40,6 +40,8 @@
 @property (nonatomic) NSNumber *showContributionSkill;
 @property (nonatomic) NSNumber *showContributionOther;
 
+@property (nonatomic) NSNumber *showPartnersOnly;
+
 + (OTSavedFilter *)fromNewsFeedsFilter:(OTNewsFeedsFilter *)filter;
 
 @end

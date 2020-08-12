@@ -16,4 +16,8 @@
            success:(void (^)(OTUser *onboardUser))success
            failure:(void (^)(NSError *error))failure;
 
+- (void)reportEntourage:(NSString*)idString
+                message:(NSString*)message
+                success:(void (^)(OTUser *onboardUser))success
+                failure:(void (^)(NSError *error))failure;
 @end

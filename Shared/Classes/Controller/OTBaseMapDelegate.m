@@ -41,9 +41,9 @@
     if (!self.mapWasCenteredOnUserLocation) {
         
         OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-        if ([currentUser hasActionZoneDefined] && currentUser.address.location) {
+        if ([currentUser hasActionZoneDefined] && currentUser.addressPrimary.location) {
             self.mapWasCenteredOnUserLocation = YES;
-            [self.mapController zoomMapToLocation:currentUser.address.location];
+            [self.mapController zoomMapToLocation:currentUser.addressPrimary.location];
         } else {
             NSArray *locations = [notification readLocations];
             if (locations.count > 0) {

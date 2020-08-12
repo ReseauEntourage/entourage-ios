@@ -102,7 +102,6 @@
 <
     UIGestureRecognizerDelegate,
     UIScrollViewDelegate,
-    OTOptionsDelegate,
     OTFeedItemsTableViewDelegate,
     OTTourCreatorDelegate,
     OTFeedItemQuitDelegate,
@@ -137,8 +136,7 @@
 @property (nonatomic) BOOL                                          isTourListDisplayed;
 @property (nonatomic, weak) IBOutlet UIButton                       *launcherButton;
 @property (nonatomic, weak) IBOutlet UIButton                       *stopButton;
-@property (nonatomic, weak) IBOutlet UIButton                       *createEncounterButton;
-@property (nonatomic, weak) IBOutlet UIButton                       *showCurrentLocationButton;
+
 @property (nonatomic, strong) NSArray                               *categories;
 @property (nonatomic, strong) NSArray                               *pois;
 @property (nonatomic, strong) NSMutableArray                        *markers;
@@ -162,18 +160,43 @@
 @property (nonatomic, strong) IBOutlet UILabel  *hideScreenPlaceholderTitle;
 @property (nonatomic, strong) IBOutlet UILabel  *hideScreenPlaceholderSubtitle;
 
+//New buttons
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ui_constraint_view_menu_height;
+@property (weak, nonatomic) IBOutlet UIView *ui_view_top_menu;
+@property (weak, nonatomic) IBOutlet UIButton *ui_button_filters;
+@property (weak, nonatomic) IBOutlet UIButton *ui_button_map_list;
+@property (weak, nonatomic) IBOutlet UIView *ui_view_encounter;
+@property (weak, nonatomic) IBOutlet UIView *ui_view_selector_menu_all;
+@property (weak, nonatomic) IBOutlet UIView *ui_view_selector_menu_events;
+@property (weak, nonatomic) IBOutlet UIView *ui_view_selector_menu_encounters;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_menu_all;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_menu_events;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_menu_encounters;
+@property (weak, nonatomic) IBOutlet UIView *ui_view_top_info_gds;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_info_web_gds;
+
+@property (nonatomic) BOOL isEventMenuSelected, isEncounterSelected;
+@property (nonatomic, strong) OTNewsFeedsFilter *encounterFilter;
+
+@property(nonatomic) BOOL hasToShowTopInformationGDS;
+
 @property (nonatomic, strong) KPClusteringController *clusteringController;
 @property (nonatomic) double entourageScale;
 @property (nonatomic) BOOL encounterFromTap;
 @property (nonatomic) BOOL forceReloadingFeeds;
 @property (nonatomic) BOOL isAskForHelp;
 
+@property (nonatomic) BOOL isFirstInitView;
 @end
 
 @implementation OTMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.hasToShowTopInformationGDS = YES;
+    
+    self.isFirstInitView = YES;
     
     [self setup];
     
@@ -184,6 +207,27 @@
     
     [self configureActionsButton];
     
+    [self changeViewMenuState];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+    selector:@selector(showAllsFromNotification)
+        name:@"showAlls"
+      object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+       selector:@selector(showEventsFromNotification)
+           name:@"showEvents"
+         object:nil];
+}
+
+-(void) showAllsFromNotification {
+    [self action_show_all:self];
+    [self showFeedsList];
+     [self configureNavigationBar];
+}
+-(void) showEventsFromNotification {
+    [self action_show_events:self];
+    [self showFeedsList];
+    [self configureNavigationBar];
 }
 
 - (void)configureActionsButton {
@@ -195,12 +239,7 @@
     [self.launcherButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
     self.launcherButton.layer.cornerRadius = 29;
     if (!self.isSolidarityGuide) {
-        
-        self.launcherButton.backgroundColor = [ApplicationTheme shared].addActionButtonColor;
-        [self.launcherButton setImage:closeImage forState:UIControlStateHighlighted];
-        [self.launcherButton setImage:closeImage forState:UIControlStateSelected];
-    
-        [self.launcherButton setTitle:@"+" forState:UIControlStateNormal];
+        [self.launcherButton setHidden: YES];
     }
     else {
          UIImage *plusImage = [[UIImage imageNamed:@"icn_plus_map_solidarity"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -208,25 +247,23 @@
          [self.launcherButton setTitle:@"" forState:UIControlStateNormal];
     }
     
-    [self.createEncounterButton.layer setShadowColor:[UIColor blackColor].CGColor];
-    [self.createEncounterButton.layer setShadowOpacity:0.5];
-    [self.createEncounterButton.layer setShadowRadius:4.0];
-    self.createEncounterButton.layer.masksToBounds = NO;
-    [self.createEncounterButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
-    self.createEncounterButton.layer.cornerRadius = 29;
-    
-    self.createEncounterButton.backgroundColor = [ApplicationTheme shared].addActionButtonColor;
-    [self.createEncounterButton setImage:closeImage forState:UIControlStateHighlighted];
-    [self.createEncounterButton setImage:closeImage forState:UIControlStateSelected];
-    
     if (![OTAppConfiguration supportsAddingActionsFromMap]) {
         self.launcherButton.hidden = YES;
     }
     
-    [self.showCurrentLocationButton.layer setShadowColor:[UIColor blackColor].CGColor];
-    [self.showCurrentLocationButton.layer setShadowOpacity:0.5];
-    [self.showCurrentLocationButton.layer setShadowRadius:4.0];
-    [self.showCurrentLocationButton.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+    [self.ui_button_filters.layer setCornerRadius:self.ui_button_filters.frame.size.height / 2];
+    [self.ui_button_map_list.layer setCornerRadius:self.ui_button_map_list.frame.size.height / 2];
+    
+    [self.ui_button_filters.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.ui_button_filters.layer setShadowOpacity:0.5];
+    [self.ui_button_filters.layer setShadowRadius:4.0];
+    [self.ui_button_filters.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+    
+    [self.ui_button_map_list.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.ui_button_map_list.layer setShadowOpacity:0.5];
+    [self.ui_button_map_list.layer setShadowRadius:4.0];
+    [self.ui_button_map_list.layer setShadowOffset:CGSizeMake(0.0, 1.0)];
+    
 }
 
 - (void)setup {
@@ -272,7 +309,6 @@
         [self clearMap];
         self.launcherButton.hidden = NO;
         self.stopButton.hidden = YES;
-        self.createEncounterButton.hidden = YES;
     }
     
     [self switchToNewsfeed];
@@ -283,6 +319,71 @@
     [self addObservers];
     
     [self showToursListAction];
+    
+    [self.ui_label_menu_all setText:OTLocalizedString(@"home_tab_all").uppercaseString];
+    [self.ui_label_menu_events setText:OTLocalizedString(@"home_tab_events").uppercaseString];
+    [self.ui_label_menu_encounters setText:OTLocalizedString(@"home_tab_encounter").uppercaseString];
+    
+    [self checkOnboarding];
+}
+
+-(void)checkOnboarding {
+    
+    int userType = (int) [[NSUserDefaults standardUserDefaults] integerForKey:@"userType"];
+    
+    BOOL isFromOnboarding = [[NSUserDefaults standardUserDefaults] boolForKey:@"isFromOnboarding"];
+    
+    if (isFromOnboarding) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFromOnboarding"];
+        
+        if (userType == 1) { //Neighbour
+            [self.currentFilter setNeighbourFilters];
+        }
+        else if(userType == 2) { // Alone
+            [self.currentFilter setAloneFilters];
+        }
+        [self changeFilterButton];
+        
+        NSNotification *notif = [[NSNotification alloc]initWithName:@"showToolTip" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notif];
+    }
+    
+    [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
+}
+
+-(void) changeFilterButton {
+    if (self.isEncounterSelected) {
+        NSLog(@"***** is encounter nil ? %@",self.encounterFilter);
+        if (self.encounterFilter == nil) {
+            NSLog(@"***** Encouter filter null on reload feeds");
+            self.encounterFilter = [OTNewsFeedsFilter new];
+            self.encounterFilter.isPro = YES;
+            [self.encounterFilter changeFiltersForProOnly];
+        }
+        
+        if ([self.encounterFilter isDefaultEncounterFilters]) {
+            [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters").uppercaseString forState:UIControlStateNormal];
+        }
+        else {
+            [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters_on").uppercaseString forState:UIControlStateNormal];
+        }
+    }
+    else {
+        if (self.poisMapDelegate.isActive) {
+            if ([self.solidarityFilter isDefaultFilters]) {
+                [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters").uppercaseString forState:UIControlStateNormal];
+            }
+            else {
+                [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters_on").uppercaseString forState:UIControlStateNormal];
+            }
+        }
+        else if ([self.currentFilter isDefaultFilters]) {
+            [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters").uppercaseString forState:UIControlStateNormal];
+        }
+        else {
+            [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters_on").uppercaseString forState:UIControlStateNormal];
+        }
+    }
 }
 
 - (void)setupUIForTourOngoing {
@@ -297,7 +398,6 @@
     [self clearMap];
     self.tourCreatorBehavior.tour = [NSUserDefaults standardUserDefaults].currentOngoingTour;
     self.launcherButton.hidden = YES;
-    self.createEncounterButton.hidden = NO;
     self.stopButton.hidden = NO;
     
     [[OTTourService new] tourEncounters:self.tourCreatorBehavior.tour
@@ -388,11 +488,47 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if (self.isFirstInitView) {
+        [self.ui_view_top_menu.layer setShadowColor:[UIColor blackColor].CGColor];
+        [self.ui_view_top_menu.layer setShadowOpacity:0.5];
+        [self.ui_view_top_menu.layer setShadowRadius:4.0];
+        self.ui_view_top_menu.layer.masksToBounds = NO;
+        CGRect _rect = CGRectMake(0, self.ui_view_top_menu.bounds.size.height, self.view.frame.size.width, self.ui_view_top_menu.layer.shadowRadius);
+        CGPathRef shadowPath = [[UIBezierPath bezierPathWithRect:_rect] CGPath];
+        [self.ui_view_top_menu.layer setShadowPath:shadowPath];
+        self.isFirstInitView = NO;
+        
+        [OTLogger logEvent:View_Start_Feeds];
+    }
+    
+    
     [OTAppConfiguration updateAppearanceForMainTabBar];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
     
     if (self.isSolidarityGuide == YES) {
         [self switchToGuide];
+        
+        [self.ui_view_top_menu setHidden:YES];
+        
+        if (self.hasToShowTopInformationGDS) {
+            
+            NSAttributedString * txt_underline = [Utilitaires formatStringUnderlineWithStringMessage:OTLocalizedString( @"Pop_info_web_alert_GDS") underlineTxt:OTLocalizedString(@"Pop_info_web_alert_GDS_underline") color: [UIColor whiteColor] colorHighlight: [UIColor whiteColor] fontSize:14 fontWeight:UIFontWeightRegular];
+            
+            self.ui_label_info_web_gds.attributedText = txt_underline;
+            
+            
+            [self.ui_view_top_info_gds setHidden:NO];
+        }
+        else {
+            self.ui_constraint_view_menu_height.constant = 0;
+            [self.ui_view_top_info_gds setHidden:YES];
+        }
+        
+        
     } else {
+        [self.ui_view_top_info_gds setHidden:YES];
         [self.newsFeedsSourceBehavior resume];
         [self.heatzonesCollectionDataSource refresh];
     }
@@ -401,6 +537,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.newsFeedsSourceBehavior pause];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -483,6 +620,13 @@
     [self configureNavigationBar];
 }
 
+- (void)switchToEvents {
+    dispatch_async(dispatch_get_main_queue(), ^() {
+      [self.tableView showEventsOnlyAction];
+      [self configureNavigationBar];
+    });
+}
+
 - (void)switchToGuide {
     [self.tableView switchToGuide];
     [self.tableView updateItems:self.pois];
@@ -505,11 +649,140 @@
     [self.noDataBehavior switchedToGuide];
     [self reloadPois];
     [self configureNavigationBar];
+    
+    
 }
 
-- (IBAction)goToTourOptions:(id)sender {
-    [OTLogger logEvent:@"PlusOnTourClick"];
-    [self createQuickEncounter];
+#pragma mark - Methods called from nav bar (button +)
+
+- (void) showProposeFromNav {
+    self.addEditEvent = NO;
+    [self dismissViewControllerAnimated:false completion:nil];
+    
+    NSString *url = [NSString stringWithFormat: PROPOSE_STRUCTURE_URL, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
+    [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
+}
+
+- (void) createTourFromNav {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
+    void(^createBlock)(void) = ^() {
+        [self switchToNewsfeed];
+        [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
+    };
+    if ([self.presentedViewController isKindOfClass:[OTMapOptionsViewController class]])
+        [self dismissViewControllerAnimated:YES completion:createBlock];
+    else
+        createBlock();
+}
+
+- (void) createEncounterFromNav {
+    if (self.isSolidarityGuide) {
+        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
+        return;
+    }
+    [self dismissViewControllerAnimated:NO completion:^{
+        [self switchToNewsfeed];
+        [self.editEncounterBehavior doEdit:nil
+                                   forTour:self.tourCreatorBehavior.tour.uid
+                               andLocation:self.encounterLocation];
+    }];
+}
+
+- (void) togglePoiFromNav {
+     NSString *message = @"";
+       if([OTOngoingTourService sharedInstance].isOngoing && !self.isSolidarityGuide)
+           message = self.toursMapDelegate.isActive ? @"OnTourShowGuide" : @"OnTourHideGuide";
+       else
+           message = self.toursMapDelegate.isActive ? @"GDSViewClick" : @"MaskGDSClick";
+       [OTLogger logEvent:message];
+       
+       [self dismissViewControllerAnimated:NO completion:^{
+           if (self.toursMapDelegate.isActive)
+               [self switchToGuide];
+           else
+               [self switchToNewsfeed];
+       }];
+}
+
+#pragma mark - IBActions Top bar + Menu
+
+- (IBAction)action_show_all:(id)sender {
+    [self.tableView showAllFeedItemsAction];
+    self.isEventMenuSelected = NO;
+    self.isEncounterSelected = NO;
+    [self changeViewMenuState];
+}
+- (IBAction)action_show_events:(id)sender {
+    [self.tableView showEventsOnlyAction];
+     self.isEventMenuSelected = YES;
+    self.isEncounterSelected = NO;
+    [self changeViewMenuState];
+}
+- (IBAction)action_show_encounters:(id)sender {
+    [self.tableView showEncountersOnlyAction];
+    self.isEncounterSelected = YES;
+    [self changeViewMenuState];
+}
+- (IBAction)action_filters:(id)sender {
+    [self showFilters];
+}
+- (IBAction)action_map_list:(id)sender {
+    [self rightBarButtonAction];
+}
+
+-(void)changeViewMenuState {
+    if (self.isFirstLoad) {
+        self.isEventMenuSelected = NO;
+        self.isEncounterSelected = NO;
+        
+        if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
+            [self.ui_view_encounter setHidden:NO];
+        }
+        else {
+           [self.ui_view_encounter setHidden:YES];
+        }
+    }
+    
+    if (self.isEncounterSelected) {
+        [self.ui_view_selector_menu_all setHidden:TRUE];
+        [self.ui_view_selector_menu_events setHidden:TRUE];
+        [self.ui_view_selector_menu_encounters setHidden:NO];
+        [self.ui_label_menu_all setTextColor:UIColor.darkGrayColor];
+        [self.ui_label_menu_events setTextColor:UIColor.darkGrayColor];
+        [self.ui_label_menu_encounters setTextColor:UIColor.appOrangeColor];
+        [self.ui_button_filters setHidden: NO];
+    }
+    else {
+         [self.ui_view_selector_menu_encounters setHidden:YES];
+        [self.ui_label_menu_encounters setTextColor:UIColor.darkGrayColor];
+        
+        if (self.isEventMenuSelected) {
+            [self.ui_view_selector_menu_all setHidden:TRUE];
+            [self.ui_view_selector_menu_events setHidden:NO];
+            [self.ui_label_menu_all setTextColor:UIColor.darkGrayColor];
+            [self.ui_label_menu_events setTextColor:UIColor.appOrangeColor];
+            [self.ui_button_filters setHidden: YES];
+        }
+        else {
+            [self.ui_button_filters setHidden: NO];
+            [self.ui_view_selector_menu_all setHidden:NO];
+            [self.ui_view_selector_menu_events setHidden:TRUE];
+            [self.ui_label_menu_all setTextColor:UIColor.appOrangeColor];
+            [self.ui_label_menu_events setTextColor:UIColor.darkGrayColor];
+        }
+    }
+    
+    [self changeFilterButton];
+    
+    
+}
+- (IBAction)action_tap_info_web:(id)sender {
+    
+    NSURL * url = [NSURL URLWithString:GDS_INFO_ALERT_WEB_LINK];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 #pragma mark - Private methods
@@ -533,7 +806,7 @@
     CLLocationCoordinate2D mapCenter;
 
     if(currentUser.hasActionZoneDefined)
-        mapCenter = currentUser.address.location.coordinate;
+        mapCenter = currentUser.addressPrimary.location.coordinate;
     else if([OTLocationManager sharedInstance].currentLocation)
         mapCenter = [OTLocationManager sharedInstance].currentLocation.coordinate;
     else
@@ -544,22 +817,12 @@
     [self.mapView setRegion:region animated:NO];
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.mapView addGestureRecognizer:self.tapGestureRecognizer];
-    
-    for(UIView *view in self.mapView.subviews)
-        for(UIGestureRecognizer *recognizer in view.gestureRecognizers)
-            if([recognizer class] == [UILongPressGestureRecognizer class])
-                [view removeGestureRecognizer:recognizer];
-    UIGestureRecognizer *longPressMapGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapOverlay:)];
-    
-    [self.mapView addGestureRecognizer:longPressMapGesture];
 }
 
 - (void)configureNavigationBar {
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:OTLocalizedString(@"filter_nav_title").uppercaseString style:UIBarButtonItemStylePlain target:self action:@selector(showFilters)];
-    self.navigationItem.leftBarButtonItem = self.newsFeedsSourceBehavior.showEventsOnly ? nil : leftButton;
+    [self changeFilterButton];
     
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:[self rightBarButtonTitle] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonAction)];
-    self.navigationItem.rightBarButtonItem = rightButton;
+    [self.ui_button_map_list setTitle:[self rightBarButtonTitle] forState:UIControlStateNormal];
 }
 
 - (void)rightBarButtonAction
@@ -576,9 +839,9 @@
 - (NSString*)rightBarButtonTitle
 {
     if (self.isTourListDisplayed) {
-        return OTLocalizedString(@"view_map_nav_title").uppercaseString;
+        return OTLocalizedString(@"home_button_map").uppercaseString;
     } else {
-        return OTLocalizedString(@"view_list_nav_title").uppercaseString;
+        return OTLocalizedString(@"home_button_list").uppercaseString;
     }
 }
 
@@ -686,9 +949,19 @@
 
 - (void)reloadFeeds {
     [self.tableView loadBegun];
-    if (self.newsFeedsSourceBehavior.showEventsOnly) {
+    if (self.newsFeedsSourceBehavior.showEncountersOnly) {
+        if (self.encounterFilter == nil) {
+            self.encounterFilter = [OTNewsFeedsFilter new];
+            self.encounterFilter.isPro = YES;
+            [self.encounterFilter changeFiltersForProOnly];
+        }
+        
+        [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.encounterFilter forceReload:YES];
+    }
+    else if (self.newsFeedsSourceBehavior.showEventsOnly) {
         [self.newsFeedsSourceBehavior loadEventsAt:self.mapView.centerCoordinate];
-    } else {
+    }
+    else {
         [self.newsFeedsSourceBehavior reloadItemsAt:self.mapView.centerCoordinate withFilters:self.currentFilter forceReload:self.forceReloadingFeeds];
     }
     [self.toggleCollectionView toggle:NO animated:NO];
@@ -919,14 +1192,25 @@
 
 - (void)showToursMapAction
 {
-    [OTLogger logEvent:@"MapViewClick"];
+    if (self.isSolidarityGuide) {
+         [OTLogger logEvent:Action_guide_showMap];
+    }
+    else {
+         [OTLogger logEvent:Action_feed_showMap];
+    }
+   
     
     [self showToursMap];
 }
 
 - (void)showToursListAction
 {
-    [OTLogger logEvent:@"ListViewClick"];
+    if (self.isSolidarityGuide) {
+         [OTLogger logEvent:Action_guide_showList];
+    }
+    else {
+         [OTLogger logEvent:Action_feed_showList];
+    }
     [self showFeedsList];
 }
 
@@ -1014,7 +1298,6 @@
     [self.newsFeedsSourceBehavior addFeedItemToFront:self.tourCreatorBehavior.tour];
     self.stopButton.hidden = NO;
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:self.tourCreatorBehavior.tour];
-    self.createEncounterButton.hidden = NO;
     NSString *snapshotStartFilename = [NSString stringWithFormat:@SNAPSHOT_START, self.tourCreatorBehavior.tour.uid.intValue];
     [self.mapView takeSnapshotToFile:snapshotStartFilename];
     [self showNewTourOnGoing];
@@ -1040,7 +1323,6 @@
         return;
     }
     self.launcherButton.hidden = YES;
-    self.createEncounterButton.hidden = YES;
     [self showFeedsList];
     
     NSString *snapshotEndFilename = [NSString stringWithFormat:@SNAPSHOT_STOP, self.tourCreatorBehavior.tour.uid.intValue];
@@ -1062,19 +1344,10 @@
 #pragma mark - FEED ITEMS
 
 - (IBAction)doShowLaunchingOptions:(UIButton *)sender {
-    NSString *eventName = @"PlusOnTourClick";
-    if (![OTOngoingTourService sharedInstance].isOngoing) {
-        eventName = self.toursMapDelegate.isActive ? @"PlusFromFeedClick" : @"PlusFromGDSClick";
-    }
-    [OTLogger logEvent:eventName];
+    [OTLogger logEvent:Action_Plus_Structure];
 
     if (self.isSolidarityGuide) {
-        [self proposeStructure];
-    } else {
-        [OTAppState showFeedAndMapActionsFromController:self
-                                            showOptions:YES
-                                           withDelegate:self
-                                         isEditingEvent:self.addEditEvent];
+        [self showProposeFromNav];
     }
 }
 
@@ -1118,9 +1391,13 @@
     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"tour_status_completed")];
     self.tourCreatorBehavior.tour = nil;
     [self.encounters removeAllObjects];
-    self.launcherButton.hidden = NO;
+    if (!self.isSolidarityGuide) {
+        [self.launcherButton setHidden: YES];
+    }
+    else {
+        self.launcherButton.hidden = NO;
+    }
     self.stopButton.hidden = YES;
-    self.createEncounterButton.hidden = YES;
     
     [OTOngoingTourService sharedInstance].isOngoing = NO;
     [self.tourCreatorBehavior endOngoing];
@@ -1134,7 +1411,6 @@
         return;
     }
     self.launcherButton.hidden = YES;
-    self.createEncounterButton.hidden = NO;
 }
 
 - (void)resumeTour {
@@ -1144,15 +1420,15 @@
     }
     [OTOngoingTourService sharedInstance].isOngoing = YES;
     self.stopButton.hidden = NO;
-    self.createEncounterButton.hidden = NO;
 }
 
 #pragma mark - UIGestureRecognizerDelegate
 
 - (void)handleTap:(UITapGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded) {
+        
         if (self.isTourListDisplayed) {
-            [OTLogger logEvent:@"MapClick"];
+            [OTLogger logEvent:Action_feed_showMap];
             [self showToursMapAction];
         }
         else {
@@ -1195,109 +1471,6 @@
     }
 }
 
-#pragma mark - OTOptionsDelegate
-
-- (void)createTour {
-    if (self.isSolidarityGuide) {
-        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
-        return;
-    }
-    void(^createBlock)(void) = ^() {
-        [self switchToNewsfeed];
-        [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
-    };
-    if ([self.presentedViewController isKindOfClass:[OTMapOptionsViewController class]])
-        [self dismissViewControllerAnimated:YES completion:createBlock];
-    else
-        createBlock();
-}
-
-- (void)createEncounter {
-    if (self.isSolidarityGuide) {
-        [OTCrashlyticsHelper recordError:@"Tour related method called from Solidarity guide"];
-        return;
-    }
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self switchToNewsfeed];
-        [self.editEncounterBehavior doEdit:nil
-                                   forTour:self.tourCreatorBehavior.tour.uid
-                               andLocation:self.encounterLocation];
-    }];
-}
-
-- (void)createAction {
-    self.addEditEvent = NO;
-    [self createEntouragewithAlertMessage:OTLocalizedString(@"poi_create_contribution_alert")];
-}
-
-- (void)createActionHelp {
-    self.isAskForHelp = YES;
-    [self createAction];
-}
-
-- (void)createActionGift {
-    self.isAskForHelp = NO;
-    [self createAction];
-}
-    
-- (void)createEvent {
-    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
-        [OTAppState presentAuthenticationOverlay:self];
-        return;
-    }
-
-    self.addEditEvent = YES;
-    [self dismissViewControllerAnimated:NO completion:^{
-        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
-    }];
-}
-
-- (void) createEntouragewithAlertMessage:(NSString *)message {
-    if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
-        [OTAppState presentAuthenticationOverlay:self];
-        return;
-    }
-
-    [self dismissViewControllerAnimated:NO completion:^{
-        //[self switchToNewsfeed];
-        self.addEditEvent = NO;
-        [self performSegueWithIdentifier:@"EntourageEditor" sender:nil];
-    }];
-}
-
-- (void)togglePOI {
-    NSString *message = @"";
-    if([OTOngoingTourService sharedInstance].isOngoing && !self.isSolidarityGuide)
-        message = self.toursMapDelegate.isActive ? @"OnTourShowGuide" : @"OnTourHideGuide";
-    else
-        message = self.toursMapDelegate.isActive ? @"GDSViewClick" : @"MaskGDSClick";
-    [OTLogger logEvent:message];
-    
-    [self dismissViewControllerAnimated:NO completion:^{
-        if (self.toursMapDelegate.isActive)
-            [self switchToGuide];
-        else
-            [self switchToNewsfeed];
-    }];
-}
-
-- (void)dismissOptions {
-    [self dismissOptions:YES];
-}
-
-- (void)dismissOptions:(BOOL)animated {
-    self.addEditEvent = NO;
-    [self dismissViewControllerAnimated:animated completion:nil];
-}
-
-- (void)proposeStructure {
-
-    [self dismissOptions:NO];
-    
-    NSString *url = [NSString stringWithFormat: PROPOSE_STRUCTURE_URL, [OTHTTPRequestManager sharedInstance].baseURL, TOKEN];
-    [OTSafariService launchInAppBrowserWithUrlString:url viewController:self.navigationController];
-}
-
 #pragma mark - EntourageEditorDelegate
 
 - (void)didEditEntourage:(OTEntourage *)entourage {
@@ -1334,12 +1507,22 @@
 - (void)filterChanged:(OTNewsFeedsFilter *)filter {
     if (filter == nil) {
         // discard the changes if user pressed close button
-        self.currentFilter = [OTNewsFeedsFilter new];
+        //self.currentFilter = [OTNewsFeedsFilter new];
         return;
     }
     self.forceReloadingFeeds = NO;
-    self.currentFilter = filter;
-    [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
+    if (self.isEncounterSelected) {
+        self.encounterFilter = filter;
+        NSLog(@"***** ici chane filter encounter : %@",self.encounterFilter.description);
+    }
+    else {
+        self.currentFilter = filter;
+        NSLog(@"***** ici chane filter : %d",self.currentFilter.showContributionOther);
+        [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
+    }
+    
+    
+    [self changeFilterButton];
     
     [self reloadFeeds];
 }
@@ -1348,6 +1531,7 @@
 
 - (void)solidarityFilterChanged:(OTSolidarityGuideFilter *)filter {
     self.solidarityFilter = filter;
+    [self changeFilterButton];
     [self reloadPois];
 }
 
@@ -1454,8 +1638,9 @@
 
 - (void)showEventsOnly
 {
-    [OTLogger logEvent:@"ShowEventFeed"];
+    [OTLogger logEvent:Action_feed_showEvents];
     self.newsFeedsSourceBehavior.showEventsOnly = YES;
+    self.newsFeedsSourceBehavior.showEncountersOnly = NO;
     self.forceReloadingFeeds = NO;
     [self.noDataBehavior switchedToEvents];
     [self configureNavigationBar];
@@ -1464,22 +1649,36 @@
 
 - (void)showAllFeedItems
 {
-    [OTLogger logEvent:@"ShowAllFeed"];
+    [OTLogger logEvent:Action_feed_showAll];
     self.newsFeedsSourceBehavior.showEventsOnly = NO;
+    self.newsFeedsSourceBehavior.showEncountersOnly = NO;
     self.forceReloadingFeeds = YES;
     [self.noDataBehavior switchedToNewsfeeds];
     [self configureNavigationBar];
     [self reloadFeeds];
 }
+-(void)showEncountersOnly {
+    [OTLogger logEvent:Action_feed_showTours];
+    self.newsFeedsSourceBehavior.showEncountersOnly = YES;
+    self.forceReloadingFeeds = NO;
+    [self.noDataBehavior switchedToEncounters];
+    [self configureNavigationBar];
+    [self reloadFeeds];
+}
 
 - (void)mapDidBecomeVisible:(BOOL)visible {
-    self.showCurrentLocationButton.hidden = !visible;
 }
 
 #pragma mark - Geo and filter buttons
 
 - (IBAction)showFilters {
-    [OTLogger logEvent:@"FeedFiltersPress"];
+    if (self.isSolidarityGuide) {
+        [OTLogger logEvent:Action_guide_showFilters];
+    }
+    else {
+       [OTLogger logEvent:Action_feed_showFilters];
+    }
+    
     
     [OTAppState showFilteringOptionsFromController:self withFullMapVisible:self.poisMapDelegate.isActive];
 }
@@ -1502,7 +1701,7 @@
 
 - (void)showFeedsList {
     self.tableView.scrollEnabled = YES;
-    
+    [self.mapView setScrollEnabled:NO];
     [OTLogger logEvent:@"Screen06_1FeedView"];
     [self.toggleCollectionView toggle:NO animated:NO];
     [self.noDataBehavior hideNoData];
@@ -1538,6 +1737,8 @@
     if (self.toursMapDelegate.isActive || self.poisMapDelegate.isActive) {
         self.isTourListDisplayed = NO;
     }
+    
+    [self.mapView setScrollEnabled:YES];
     
     CGRect mapFrame = self.mapView.frame;
     mapFrame.size.height = self.view.bounds.size.height;
@@ -1578,7 +1779,6 @@
     [OTLogger logEvent:@"MapViewClick"];
     [UIView animateWithDuration:0.5 animations:^(void) {
         self.launcherButton.hidden = YES;
-        self.createEncounterButton.hidden = NO;
         self.tableView.tableHeaderView.frame = mapFrame;
         self.mapView.frame = mapFrame;
         [self.tableView setTableHeaderView:self.tableView.tableHeaderView];

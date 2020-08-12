@@ -69,8 +69,13 @@
             self.showContributionInfo = !self.showContribution ? self.showContribution : savedFilter.showContributionInfo.boolValue;
             self.showContributionSkill = !self.showContribution ? self.showContribution : savedFilter.showContributionSkill.boolValue;
             self.showContributionOther = !self.showContribution ? self.showContribution : savedFilter.showContributionOther.boolValue;
+            
+            self.showPartners = savedFilter.showPartnersOnly.boolValue;
+            self.showAlls = !savedFilter.showPartnersOnly.boolValue;
         }
         else {
+            self.showPartners = NO;
+            self.showAlls = YES;
             self.showNeighborhood = YES;
             self.showPrivateCircle = YES;
             self.showOuting = YES;
@@ -112,18 +117,25 @@
     }
     
     if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
+        if (self.isEncouterFilter) {
+            return @[
+             OTLocalizedString(@"filter_maraudes_title"),
+             OTLocalizedString(@"filter_timeframe_title")
+             ];
+        }
         return @[
                  OTLocalizedString(@"filter_maraudes_title"),
                  [OTAppAppearance eventsFilterTitle],
                  OTLocalizedString(@"filter_entourages_title"),
-                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                // OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
     } else if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
         return @[
                  [OTAppAppearance eventsFilterTitle],
                  OTLocalizedString(@"filter_entourages_title"),
-                 OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                // OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                 OTLocalizedString(@"filter_publish_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
     } else {
@@ -156,6 +168,8 @@
                                  @"pfp_filter_neighborhoods_title" : [NSNumber numberWithBool:self.showNeighborhood],
                                  @"private-pfp_filter_private_circles_title" : [NSNumber numberWithBool:self.showPrivateCircle],
                                  @"ask_for_help_event" : [NSNumber numberWithBool:self.showOuting],
+                                 @"showAlls" : [NSNumber numberWithBool:self.showAlls],
+                                 @"showPartners" : [NSNumber numberWithBool:self.showPartners],
                                  };
     
     if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
@@ -261,9 +275,23 @@
     [array addObject:[self groupEntourageEvents]];
     
     [array addObject:[self groupActions]];
-    if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
-        [array addObject:[self groupUniquement]];
-    }
+//    if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
+//        [array addObject:[self groupUniquement]];
+//    }
+    
+    //TODO: add array Partners
+    
+    [array addObject:@[[OTFeedItemFilter createFor:FeedItemFilterKeyAlls
+                                            active:self.showAlls
+                                          children:@[]
+                                             image:@""
+                                      showBoldText:self.showAlls],
+                       [OTFeedItemFilter createFor:FeedItemFilterKeyPartners
+                                            active:self.showPartners
+                                          children:@[]
+                                             image:@""
+                                      showBoldText:self.showPartners]]];
+    
     NSArray *timeframe =  @[
                             [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
                                                 timeframeInHours:self.timeframeInHours]
@@ -324,12 +352,20 @@
     [tours addObjectsFromArray:tourChildren];
     [array addObject:tours];
     
+    if (self.isEncouterFilter) {
+        NSArray *timeframe =  @[
+            [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
+                                timeframeInHours:self.timeframeInHours]
+        ];
+        [array addObject:timeframe];
+        return array;
+    }
     // Events section
     [array addObject:[self groupEntourageEvents]];
     
     // Actions section
     [array addObject:[self groupActions]];
-    [array addObject:[self groupUniquement]];
+   // [array addObject:[self groupUniquement]];
     NSArray *timeframe =  @[
                             [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
                                                 timeframeInHours:self.timeframeInHours]
@@ -455,7 +491,8 @@
              @"types" : [self getTypes],
              @"show_past_events" : self.showPastOuting ? @"true" : @"false",
              @"time_range" : @(self.timeframeInHours),
-             @"announcements" : @"v1"
+             @"announcements" : @"v1",
+             @"partners_only" : self.showPartners ? @"true" : @"false"
     }.mutableCopy;
 }
 
@@ -469,11 +506,13 @@
              @"types" : [self getTypes],
              @"show_past_events" : self.showPastOuting ? @"true" : @"false",
              @"time_range" : @(self.timeframeInHours),
-             @"announcements" : @"v1"
+             @"announcements" : self.isEncouterFilter ? @"null" : @"v1",
+             @"partners_only" : self.showPartners ? @"true" : @"false"
     }.mutableCopy;
 }
 
 - (void)updateValue:(OTFeedItemFilter *)filter {
+    
     switch (filter.key) {
         case FeedItemFilterKeyDemandeSocial:
             self.showDemandeSocial = filter.active;
@@ -554,10 +593,141 @@
         case FeedItemFilterKeyEventsPast:
             self.showPastOuting = filter.active;
             break;
-        
+            
+        case FeedItemFilterKeyPartners:
+            self.showPartners = filter.active;
+            break;
+        case FeedItemFilterKeyAlls:
+            self.showAlls = filter.active;
+            break;
         default:
             break;
     }
+}
+
+- (void)changeFiltersForProOnly {
+    self.showNeighborhood = NO;
+    self.showPrivateCircle = NO;
+    self.showOuting = NO;
+    self.showPastOuting = NO;
+    
+    self.showMedical = YES;
+    self.showSocial = YES;
+    self.showDistributive = YES;
+    self.showDemand = NO;
+    self.showContribution = NO;
+    self.showTours = YES;
+    
+    self.showDemandeSocial = NO;
+    self.showDemandeHelp = NO;
+    self.showDemandeResource = NO;
+    self.showDemandeInfo = NO;
+    self.showDemandeSkill = NO;
+    self.showDemandeOther = NO;
+    
+    self.showContributionSocial = NO;
+    self.showContributionHelp = NO;
+    self.showContributionResource = NO;
+    self.showContributionInfo = NO;
+    self.showContributionSkill = NO;
+    self.showContributionOther = NO;
+    
+    self.isEncouterFilter = YES;
+}
+
+-(void)setNeighbourFilters {
+    self.isEncouterFilter = NO;
+    self.showMedical = NO;
+    self.showSocial = NO;
+    self.showDistributive = NO;
+    
+    self.showNeighborhood = YES;
+    self.showPrivateCircle = YES;
+    self.showOuting = YES;
+    self.showPastOuting = NO;
+    
+    self.showDemand = YES;
+    self.showContribution = NO;
+    self.showTours = NO;
+    
+    self.showDemandeSocial = YES;
+    self.showDemandeHelp = YES;
+    self.showDemandeResource = YES;
+    self.showDemandeInfo = YES;
+    self.showDemandeSkill = YES;
+    self.showDemandeOther = YES;
+    
+    self.showContributionSocial = NO;
+    self.showContributionHelp = NO;
+    self.showContributionResource = NO;
+    self.showContributionInfo = NO;
+    self.showContributionSkill = NO;
+    self.showContributionOther = NO;
+}
+
+-(void)setAloneFilters {
+    self.isEncouterFilter = NO;
+    self.showMedical = NO;
+    self.showSocial = NO;
+    self.showDistributive = NO;
+    
+    self.showNeighborhood = YES;
+    self.showPrivateCircle = YES;
+    self.showOuting = YES;
+    self.showPastOuting = NO;
+    
+    self.showDemand = NO;
+    self.showContribution = YES;
+    self.showTours = NO;
+    
+    self.showDemandeSocial = NO;
+    self.showDemandeHelp = NO;
+    self.showDemandeResource = NO;
+    self.showDemandeInfo = NO;
+    self.showDemandeSkill = NO;
+    self.showDemandeOther = NO;
+    
+    self.showContributionSocial = YES;
+    self.showContributionHelp = YES;
+    self.showContributionResource = YES;
+    self.showContributionInfo = YES;
+    self.showContributionSkill = YES;
+    self.showContributionOther = YES;
+}
+
+-(BOOL) isDefaultFilters {
+    BOOL isDefault = YES;
+    if (!self.showContributionSocial || !self.showContributionHelp || !self.showContributionResource || !self.showContributionOther) {
+        isDefault = NO;
+    }
+    if (!self.showDemandeSocial || !self.showDemandeHelp || !self.showDemandeResource ||  !self.showDemandeOther) {
+           isDefault = NO;
+       }
+    if (!self.showDemand || !self.showContribution || !self.showOuting || self.timeframeInHours != 30 * 24) {
+        isDefault = NO;
+    }
+    
+    if (self.isPro) {
+        if (!self.showMedical || !self.showSocial || !self.showDistributive || !self.showTours) {
+            isDefault = NO;
+        }
+    }
+    
+    if (self.showPartners) {
+        isDefault = NO;
+    }
+    
+    return isDefault;
+}
+
+-(BOOL) isDefaultEncounterFilters {
+    BOOL isDefault = YES;
+    
+    if (!self.showMedical || !self.showSocial || !self.showDistributive || !self.showTours || self.timeframeInHours != 30 * 24) {
+        isDefault = NO;
+    }
+    
+    return isDefault;
 }
 
 - (NSArray *)timeframes {
@@ -565,7 +735,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|", self.showMedical, self.showSocial, self.showDistributive,
+    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d| --- isAlls %d - partners %d", self.showMedical, self.showSocial, self.showDistributive,
             self.showDemand, self.showContribution, self.showTours,
             self.showOnlyMyEntourages, self.timeframeInHours,
             
@@ -574,7 +744,7 @@
             
             self.showContributionSocial, self.showContributionHelp, self.showContributionResource, self.showContributionInfo, self.showContributionSkill, self.showContributionOther,
             
-            self.showOuting, self.showPrivateCircle, self.showNeighborhood];
+            self.showOuting, self.showPrivateCircle, self.showNeighborhood,self.showAlls,self.showPartners];
 }
 
 - (NSString *)getTourTypes {
@@ -658,7 +828,6 @@
     copy.timeframeInHours = self.timeframeInHours;
     copy.location = CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude);
     copy.distance = self.distance;
-    copy.showOnlyMyEntourages = self.showOnlyMyEntourages;
     copy.showFromOrganisation = self.showFromOrganisation;
     
     copy.showNeighborhood = self.showNeighborhood;
@@ -666,6 +835,24 @@
     copy.showOuting = self.showOuting;
     copy.showPastOuting = self.showPastOuting;
     
+    
+    copy.showDemandeSocial = self.showDemandeSocial;
+    copy.showDemandeHelp = self.showDemandeHelp;
+    copy.showDemandeResource = self.showDemandeResource;
+    copy.showDemandeInfo = self.showDemandeInfo;
+    copy.showDemandeSkill = self.showDemandeSkill;
+    copy.showDemandeOther = self.showDemandeOther;
+    
+    copy.showContributionSocial = self.showContributionSocial;
+    copy.showContributionHelp = self.showContributionHelp;
+    copy.showContributionResource = self.showContributionResource;
+    copy.showContributionInfo = self.showContributionInfo;
+    copy.showContributionSkill = self.showContributionSkill;
+    copy.showContributionOther = self.showContributionOther;
+    
+    copy.isEncouterFilter = self.isEncouterFilter;
+    copy.showPartners = self.showPartners;
+    copy.showAlls = self.showAlls;
     return copy;
 }
 

@@ -35,8 +35,10 @@
     
     if ([userInfo objectForKey:kFirebaseCTA] != nil) {
         // Firebase notification: transform to Mixpanel notification :)
-        userInfo = [userInfo mutableCopy];
-        [userInfo setValue:[userInfo objectForKey:kFirebaseCTA] forKey:kMixpanelCTA];
+        NSMutableDictionary* _userInfo = [userInfo mutableCopy];
+        
+        [_userInfo setObject:[userInfo objectForKey:kFirebaseCTA] forKey:kMixpanelCTA];
+        userInfo = [[NSDictionary alloc]initWithDictionary:_userInfo];
     }
     if ([userInfo objectForKey:kMixpanelCTA] != nil) {
         //Mixpanel notification

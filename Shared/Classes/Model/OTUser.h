@@ -43,10 +43,13 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic) OTOrganization *organization;
 @property (strong, nonatomic) OTAssociation *partner;
 @property (strong, nonatomic) OTConversation *conversation;
-@property (strong, nonatomic) OTAddress *address;
+@property (strong, nonatomic) OTAddress *addressPrimary;
+@property (strong, nonatomic) OTAddress *addressSecondary;
 @property (strong, nonatomic) NSArray *roles;
 @property (nonatomic, readonly) NSArray *memberships;
 @property (strong, nonatomic) NSDictionary<NSString *, NSString *> *firebaseProperties;
+@property (strong, nonatomic,nullable) NSString *goal;
+@property (nonatomic,strong) NSArray * _Nullable interests;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;
@@ -64,6 +67,7 @@ extern NSString *const kVisitedUserTag;
 
 - (BOOL)isAnonymous;
 
+-(BOOL) isUserTypeAlone;
 /*
  * Returns the name of the role to be displayed under the user's fullname
  */
@@ -76,4 +80,9 @@ extern NSString *const kVisitedUserTag;
 
 - (NSString *)formattedActionZoneAddress;
 
+- (NSString *_Nonnull)getInterestsFormated;
+
+@property (strong, nonatomic) NSNumber * _Nonnull actionsCount;
+@property (strong, nonatomic) NSNumber * _Nonnull eventsCount;
+@property (nonatomic) BOOL isGoodWavesValidated;
 @end

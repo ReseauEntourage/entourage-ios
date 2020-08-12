@@ -12,7 +12,8 @@
 @protocol OTFeedItemsFilterDelegate <NSObject>
 
 @property (nonatomic, strong, readonly) OTFeedItemFilters *currentFilter;
-
+@property (nonatomic, strong, readonly) OTFeedItemFilters *encounterFilter;
+@property (nonatomic,readonly) BOOL isEncounterSelected;
 - (void)filterChanged:(OTFeedItemFilters *)filter;
 
 @end

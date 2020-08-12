@@ -21,6 +21,10 @@
 @property (strong, nonatomic, nullable) NSString *email;
 @property (assign, nonatomic) BOOL isDefault;
 @property (strong, nonatomic, nullable) NSString *userRoleTitle;
+@property(nonatomic) Boolean isCreation;
+@property (strong, nonatomic, nullable) NSString *postal_code;
+@property (strong, nonatomic, nullable) NSString *donations_needs;
+@property (strong, nonatomic, nullable) NSString *volunteers_needs;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

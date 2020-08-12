@@ -27,6 +27,7 @@
 #import "UIImage+processing.h"
 #import "OTActiveFeedItemViewController.h"
 #import "UIStoryboard+entourage.h"
+#import "OTHTTPRequestManager.h"
 
 @interface OTPublicFeedItemViewController ()
 
@@ -118,6 +119,14 @@
     
     CGRect frame = [self.dataSource.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
     [self.dataSource.tableView setContentOffset:CGPointMake(0, frame.origin.y) animated:YES];
+}
+
+- (IBAction)action_show_faq:(id)sender {
+    [OTLogger logEvent:Action_FeedItemInfo_FAQ];
+    NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS,FAQ_LINK_ID,TOKEN];
+       NSString *urlForm = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
+    
+    [OTSafariService launchInAppBrowserWithUrlString:urlForm viewController:self.navigationController];
 }
 
 #pragma mark - Navigation

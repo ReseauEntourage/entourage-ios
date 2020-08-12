@@ -132,6 +132,44 @@ typedef NS_ENUM(NSInteger) {
     UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
     OTOnboardingPlaceViewController *vc = (OTOnboardingPlaceViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_place"];
     vc.isFromProfile = YES;
+    vc.isSecondaryAddress = YES;
+    [self.navigationController showViewController:vc sender:nil];
+}
+
+- (IBAction)actionModifyPrimaryZone:(id)sender {
+    UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
+       OTOnboardingPlaceViewController *vc = (OTOnboardingPlaceViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_place"];
+       vc.isFromProfile = YES;
+       vc.isSecondaryAddress = NO;
+       [self.navigationController showViewController:vc sender:nil];
+}
+
+- (IBAction)actionModifySecondaryZone:(id)sender {
+    UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
+       OTOnboardingPlaceViewController *vc = (OTOnboardingPlaceViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_place"];
+       vc.isFromProfile = YES;
+       vc.isSecondaryAddress = YES;
+       [self.navigationController showViewController:vc sender:nil];
+}
+
+- (IBAction)actionDeleteSecondaryZone:(id)sender {
+    [SVProgressHUD showWithStatus:@""];
+    [OTAuthService deleteUserSecondaryAddressWithCompletion:^(NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error == nil) {
+            dispatch_async(dispatch_get_main_queue(), ^() {
+                self.user = [[NSUserDefaults standardUserDefaults] currentUser];
+                
+                [self.tableView reloadData];
+            });
+        }
+    }];
+}
+
+- (IBAction)actionModifyType:(id)sender {
+    UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
+    OTProfileSelectTypeViewController *vc = (OTProfileSelectTypeViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Profile_typeVC"];
+    
     [self.navigationController showViewController:vc sender:nil];
 }
 
@@ -577,12 +615,8 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)setupDefineActionZonceCell:(UITableViewCell *)cell {
-    UIButton *button = [cell viewWithTag:1];
-    [button setBackgroundColor:[ApplicationTheme shared].backgroundThemeColor];
-    [button setTitle:[OTAppAppearance defineActionZoneTitleForUser:self.user] forState:UIControlStateNormal];
-    
-    UILabel *addressLabel = [cell viewWithTag:2];
-    addressLabel.text = [self.user formattedActionZoneAddress];
+    OTUserEditZoneCell *cellEdit = (OTUserEditZoneCell*) cell;
+    [cellEdit populateCellWithUser:self.user];
 }
 
 - (void)setupPhoneCell:(UITableViewCell *)cell withPhone:(NSString *)phone {

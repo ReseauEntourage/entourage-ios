@@ -44,6 +44,20 @@
     UISwitch *swtControl = (UISwitch *)sender;
     item.active = swtControl.isOn;
     
+    //To switch from all / partnersOnly Bold + switch
+    if (item.key == FeedItemFilterKeyAlls) {
+        NSIndexPath * newIndexP = [NSIndexPath indexPathForRow:1 inSection:indexPath.section];
+        ((OTFeedItemFilter *)[self.tableDataSource getItemAtIndexPath:newIndexP]).active = !swtControl.isOn;
+        ((OTFeedItemFilter *)[self.tableDataSource getItemAtIndexPath:newIndexP]).showBoldText = !swtControl.isOn;
+        item.showBoldText = swtControl.isOn;
+    }
+    else if(item.key == FeedItemFilterKeyPartners) {
+        NSIndexPath * newIndexP = [NSIndexPath indexPathForRow:0 inSection:indexPath.section];
+        ((OTFeedItemFilter *)[self.tableDataSource getItemAtIndexPath:newIndexP]).active = !swtControl.isOn;
+        ((OTFeedItemFilter *)[self.tableDataSource getItemAtIndexPath:newIndexP]).showBoldText = !swtControl.isOn;
+        item.showBoldText = swtControl.isOn;
+    }
+    
     for (OTFeedItemFilter *child in item.subItems) {
         child.active = swtControl.isOn;
     }
@@ -84,6 +98,12 @@
             break;
         case FeedItemFilterKeyEventsPast:
             message = @"PastEventsFilter";
+            break;
+        case FeedItemFilterKeyAlls:
+            message = @"ShowAllsFilter";
+            break;
+        case FeedItemFilterKeyPartners:
+            message = @"ShowPartnersOnlyFilter";
             break;
         default:
             break;

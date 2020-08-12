@@ -45,13 +45,8 @@
             return OTLocalizedString(@"guide_display_caring");
         case SolidarityGuideKeyReinsertion:
             return OTLocalizedString(@"guide_display_reinsertion");
-            
-        case SolidarityGuideKeyOuting:
-            return [OTAppAppearance eventsFilterTitle];
-        case SolidarityGuideKeyPrivateCircle:
-            return OTLocalizedString(@"pfp_filter_private_circles_title");
-        case SolidarityGuideKeyNeighborhood:
-            return OTLocalizedString(@"pfp_filter_neighborhoods_title");
+            case SolidarityGuideKeyPartners:
+            return OTLocalizedString(@"guide_display_partners");
             
         default:
             return @"";

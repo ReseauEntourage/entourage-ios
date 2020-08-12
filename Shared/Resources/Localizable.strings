@@ -48,6 +48,13 @@
 "already_subscribed" = "Déjà inscrit";
 "lostCodeMessage1" = "Si vous ne l’avez pas reçu, redemandez un code.";
 "lostCodeMessage2" = "Le problème persiste ? écrivez à contact@entourage.social et nous en génèrerons un pour vous.";
+"alreadyRegistereMessageGoBack" = "Le numéro est déjà enregistré, nous allons vous rediriger vers la page de connexion.";
+
+//Login next
+"login_info_pop_action" = "Vous pouvez choisir votre mode d'action dans votre profil.";
+"login_pop_information" = "Information";
+"login_email_pwd_title" = "Ok super !";
+"login_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
 
 // MenuItems
 "menu_amis" = "Amis";
@@ -117,6 +124,7 @@
 "create_proposer_don" = "Proposer un don";
 
 // Feed item
+"join_active_other" = "✔︎ Je participe";
 "join_active" = "Actif";
 "join_pending" = "En attente";
 "join_rejected" = "Refusé";
@@ -154,7 +162,8 @@
 "guide_display_orientation" = "S’orienter";
 "guide_display_caring" = "S’occuper de soi";
 "guide_display_reinsertion" = "Se réinsérer";
-
+"guide_display_partners" = "Associations et services actifs sur Entourage";
+"partners_entourage" = "Organisme actif sur Entourage";
 // Tour
 "tour_type_bare_hands" = "barehands";
 "tour_type_medical" = "medical";
@@ -263,6 +272,8 @@
 "event_confidentiality_description_public" = "Vous acceptez que toute personne participe à votre évènement, sans vérifier son profil au préalable.";
 "event_confidentiality_description_private" = "Vous validez chaque personne individuellement avant de  lui confirmer qu’elle peut participer.";
 "confidentiality_title" = "CONFIDENTIALITÉ";
+"invit_entourage_title" = "%@ vous invite à rejoindre";
+"invit_entourage_description_empty" = "1 nouvelle invitation à rejoindre un entourage";
 
 // Feed Item details
 "item_option_close" = "Arrêter";
@@ -377,6 +388,9 @@
 "invite_event_subtitle" = "à participer à cet évènement";
 "invite_action_subtitle" = "à rejoindre cette action";
 
+"filter_publish_title" = "Publié par...";
+"filter_all" = "Tous";
+"filter_partnersOnly" = "Associations et\ninstitutions seulement";
 
 // Titles
 "aboutTitle" = "À propos";
@@ -536,6 +550,11 @@
 
 "agir_new_title" = "L'essentiel, c'est la rencontre !";
 "agir_new_button_title" = "Vous ne vous sentez pas prêt ?";
+"agir_new_button_title_alone" = "Voir nos conseils";
+"agir_bonnes_ondes_others" = "soutenir en groupe une personne isolée";
+"agir_bonnes_ondes_alone" = "se créer un cercle d'amis Entourage";
+"agir_title_bonnes_ondes" = "Rejoindre les Bonnes Ondes";
+"agir_subtitle_event" = "à une date précise";
 "action_title_public" = "Public";
 "action_title_private" = "Privé";
 "action_description_public" = "Toute personne participe à votre action solidaire, sans vérifier son profil au préalable.";
@@ -583,24 +602,30 @@
 "onboard_phone_info" = "Cette information restera confidentielle. Nous voulons juste vérifier que vous n’êtes pas un robot, mais un humain au grand coeur !";
 "onboard_phone_placeholder_phone" = "Téléphone";
 "onboard_sms_title" = "Entrez le code reçu par SMS";
-"onboard_sms_sub" = "Un SMS vient juste de vous être envoyé au ** ** ** ** %@";
+"onboard_sms_sub" = "Un SMS vient juste de vous être envoyé au :";
+"onboard_sms_modify" = "- Modifier";
 "onboard_sms_no_code" = "Pas de code ? Réessayez dans 1 min";
-"onboard_sms_wait_retry" = "Pas de code ? Réessayer dans 1 min";
+"onboard_sms_wait_retry" = "Pas de code ? Réessayez dans %@";
+"onboard_sms_wait_retry_end" = "Renvoyer un code";
 "onboard_sms_no_pwd" = "Veuillez remplir le password";
 "attention_pop_title" = "Attention";
 "onboard_sms_pop_alert" = "Veuillez patienter encore %d sec avant de renouveller la demande.";
 "onboard_type_title" = "Enchantés, %@.";
-"onboard_type_sub" = "Qu'est ce qui vous amène ?";
+"onboard_type_sub" = "Qu'est-ce qui vous amène ?";
 "onboard_type_description" = "Entourage vous pose ces quelques questions pour vous accueillir et vous accompagner au mieux !\n(Cette information ne sera pas visible par les autres membres du réseau).";
 "onboard_type_description_italic" = "(Cette information ne sera pas visible par les autres membres du réseau).";
-"onboard_type_choice1" = "Je suis un voisin solidaire";
+"onboard_type_choice1" = "Je suis un.e voisin.e solidaire";
 "onboard_type_choice2" = "Je suis une personne isolée ou en précarité";
 "onboard_type_choice3" = "Je fais partie d’une association ou service public";
 "onboard_place_title" = "Quel est votre quartier ?";
 "onboard_place_description" = "Vous pourrez répondre aux demandes de personnes en difficulté et d’associations de votre quartier, et vous pourrez vous-même proposer des dons de votre temps ou matériels.";
+"onboard_place_title_sdf" = "Dans quel quartier avez vous vos habitudes ?";
+"onboard_place_description_sdf" = "Vous pourrez demander de l’aide à vos voisins et rencontrer de nouvelles personnes lors d’évènements conviviaux du réseaux.";
 "onboard_place_info" = "Entourage ne communique pas cette adresse.";
 "onboard_place_placeholder" = "Ex : 35000";
 "onboard_email_pwd_title" = "Ok super !";
+"onboard_email_pwd_email_info" = "Laissez-nous votre mail pour recevoir des informations et des conseils de la part d'Entourage !";
+"onboard_email_pwd_email_info2" = "Entourage ne communique pas votre adresse e-mail.";
 "onboard_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
 "onboard_email_pwd_info_length" = "Inclure au moins 8 caractères.";
 "onboard_email_pwd_placeholder_email" = "E-mail";
@@ -636,3 +661,173 @@
 "login_label_country" = "Pays";
 "login_label_phone" = "Téléphone";
 "login_label_code" = "Code";
+
+//Onboarding Assos
+"onboard_asso_start_title" = "Ça tombe bien !";
+"onboard_asso_start_description" = "Entourage est une association au service de vos activités.";
+"onboard_asso_start_description_bold" = "Entourage";
+"onboard_asso_start_description2" = "Quelques belles histoires qui montrent la valeur de la communauté Entourage.";
+"onboard_asso_info_title" = "Concrètement, dans l’app, des fonctionnalités vous sont dédiées";
+"onboard_asso_info_description" = "Soyez bien identifié.e sur le réseau et engagez votre communauté";
+"onboard_asso_info_1" = "Un profil vérifié pour chacun de vos membres: un gage de confiance pour vos voisins";
+"onboard_asso_info_1_bold" = "Un profil vérifié";
+"onboard_asso_info_2" = "Une page pour votre structure : pour informer localement de vos activités et besoins.";
+"onboard_asso_info_2_bold" = "Une page pour votre structure";
+"onboard_asso_info_3" = "L’envoi de notifications dans votre quartier et au-delà aux membres de la communauté.";
+"onboard_asso_info_3_bold" = "L’envoi de notifications";
+"onboard_asso_fill_title" = "Parlez-nous de votre structure";
+"onboard_asso_fill_description" = "Dites-nous en plus sur votre association, nous vous recontacterons pour vérifier votre profil et vous créer une page asso !";
+"onboard_asso_fill_name_placeholder" = "Nom de mon association";
+"onboard_asso_fill_cp_placeholder" = "Code postal de mon association";
+"onboard_asso_fill_function_placeholder" = "Ma fonction";
+"onboard_asso_fill_error" = "Veuillez renseigner tous les champs.\nMerci";
+"onboard_asso_search_creation" = "Création de : %@";
+"onboard_asso_activity_title" = "%@, quel est votre coeur d’activité ?";
+"onboard_asso_activity_description" = "Sélectionnez le ou les secteurs d’activité de votre structure, cela nous permettra de vous proposer la meilleure façon d’utiliser l’application et mobiliser la communauté Entourage.";
+"onboard_asso_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
+"onboard_asso_activity_choice_1" = "Aide aux\npersonnes";
+"onboard_asso_activity_choice_2" = "Initiatives culturelles\net sportives";
+"onboard_asso_activity_choice_3" = "Service\nPublic";
+"onboard_asso_activity_choice_4" = "Autres ?";
+"onboard_asso_search" = "Recherche";
+
+//Onboarding Sdf
+"onboard_sdf_activity_title" = "%@, que cherchez-vous ?";
+"onboard_sdf_activity_description" = "Plusieurs choix possibles.\nIl y a mille manières d'être entouré et aidé.";
+"onboard_sdf_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
+"onboard_sdf_activity_choice_1" = "Me faire un\ncercle d’amis";
+"onboard_sdf_activity_choice_2" = "Participer à des\névènements";
+"onboard_sdf_activity_choice_3" = "Poser des\nquestions";
+"onboard_sdf_activity_choice_4" = "Demander\nde l’aide";
+"onboard_sdf_activity_choice_5" = "M’orienter";
+"onboard_sdf_activity_choice_6" = "Trouver des\nassociations";
+
+//Onboarding Neighbour
+"onboard_neighbour_activity_title" = "%@, que souhaitez-vous faire dans votre quartier ?";
+"onboard_neighbour_activity_description" = "Plusieurs choix possibles.\nNous vous ferons des propositions adaptées.";
+"onboard_sneighbour_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
+"onboard_neighbour_activity_choice_1" = "M’informer";
+"onboard_neighbour_activity_choice_2" = "Participer à des\névènements";
+"onboard_neighbour_activity_choice_3" = "Entourer une\npersonne isolée";
+"onboard_neighbour_activity_choice_4" = "Faire des dons\nmatériels";
+"onboard_neighbour_activity_choice_5" = "M’investir dans\nl’associatif";
+
+
+//Onboarding Place tunnel SDF / Voisins
+"onboard_place_title2_sdf" = "Super !";
+"onboard_place_description2_sdf" = "Souhaitez-vous ajouter un autre quartier ?";
+"onboard_place_title2" = "Super !";
+"onboard_place_description2" = "Vous venez de rejoindre des membres de votre quartier. Voulez-vous rajouter un autre quartier dans lequel agir ?";
+
+//Profile mod action zone / type
+"profile_action_not_selected" = "Mode d'action non sélectionné";
+"profile_title_action_mode" = "Mon mode d’action";
+"profile_activities" = "Activité(s) : %@";
+"profile_activity_not_selected" = "Activité non sélectionnée";
+
+"profile_my_zones" = "Mes zones d'actions";
+"profile_my_zones_description" = "Soyez notifié.e des initiatives solidaires et besoins dans ces zones";
+"profile_button_add2nd_zone" = "Ajouter une zone d'action";
+"profile_button_add2nd_zone_lite" = "Ajouter";
+"profile_button_add2nd_zone_lite2" = "Ajouter une zone";
+"profile_asso_activity_title" = "Quel est votre coeur d’activité ?";
+"profile_sdf_activity_title" = "Que cherchez-vous ?";
+"profile_neighbour_activity_title" = "Que souhaitez-vous faire dans votre quartier ?";
+"profile_sdf_activity_description" = "Plusieurs choix possibles.\nIl y a mille manières d'être entouré et aidé.";
+
+//Info mosaic choice from ws
+"rencontrer_sdf" = "Me faire un cercle d’amis";
+"event_sdf" = "Participer à des évènements";
+"questions_sdf" = "Poser des questions";
+"aide_sdf" = "Demander de l’aide";
+"m_orienter_sdf" = "M’orienter";
+"trouver_asso_sdf" = "Trouver des associations";
+
+"m_informer_riverain" = "M’informer";
+"event_riverain" = "Participer à des évènements";
+"entourer_riverain" = "Entourer une personne isolée";
+"dons_riverain" = "Faire des dons matériels";
+"benevolat_riverain" = "M’investir dans l’associatif";
+
+"aide_pers_asso" = "Aide aux personnes";
+"cult_sport_asso" = "Initiatives culturelles et sportives";
+"serv_pub_asso" = "Service Public";
+"autre_asso" = "Autres";
+
+//Report entourage
+"minChars_pop_report_entourage" = "Veuillez saisir votre message de signalement";
+"report_entourage" = "Entourage signalé";
+"report_action_title" = "Vous allez signaler cette action solidaire à nos administrateurs.\n";
+"report_action_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cette action solidaire :";
+"report_event_title" = "Vous allez signaler cet évènement à nos administrateurs.\n";
+"report_event_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cet évènement :";
+"report_entourage_button" = "Envoyer";
+"report_entourage_placeholder" = "Ecrivez quelque chose…";
+
+//Association detail
+"title_association" = "Association";
+"title_asso_donation" = "Accepte les dons";
+"title_asso_volunteer" = "Cherche des bénévoles";
+"title_asso_information" = "Informations";
+"title_asso_needs" = "Besoins";
+"title_asso_accept_needs" = "Accepte des dons";
+"title_asso_accept_volunteers" = "Recherche des bénévoles";
+"title_asso_contact" = "Contact";
+"title_asso_phone" = "Numéro de téléphone";
+"title_asso_phone_light" = "Téléphone";
+"title_asso_website" = "Site Web";
+"title_asso_address" = "Adresse";
+
+//Home new
+"tabbar_home" = "à proximité";
+"tabbar_guide" = "annuaire";
+"tabbar_message" = "messages";
+"tabbar_profil" = "profil";
+
+"home_button_map" = "Carte";
+"home_button_list" = "Liste";
+"home_button_filters" = "Filtres";
+"home_button_filters_on" = "Filtres activés";
+"home_tab_all" = "Tous";
+"home_tab_events" = "Évènements";
+"home_tab_encounter" = "Maraudes";
+
+//Tooltip
+"tooltip_desc1" = "Votre fil d’actualité a été filtré en fonction de vos préférences. Modifiez vos paramètres en cliquant sur ce bouton.";
+"tooltip_title2" = "Annuaire solidaire";
+"tooltip_desc2" = "Besoin d’informations ? Retrouvez tous les lieux solidaires autour de vous.";
+"tooltip_title3" = "Passez à l’action";
+"tooltip_desc3" = "Vous pouvez maintenant proposer ou demander de l’aide au réseau !";
+"tooltip_step_format" = "%@ sur 3";
+
+//Profile add
+"join_good_waves" = "Rejoindre les Bonnes Ondes";
+"modMyProfile" = "Modifier mon profil";
+"event_title" = "évènements conviviaux";
+"action_title" = "actions solidaires";
+"event_button_title" = "J’en trouve →";
+"action_button_title" = "J’y vais →";
+"good_waves_member" = "Membre des bonnes ondes";
+"activity_title" = "Activité";
+
+
+"add_event_help_button" = "Quels évènements diffuser ?";
+
+//Pop cloture action/event
+"pop_validate_action_title" = "Comment cela s’est passé ?";
+"pop_validate_action_description" = "En clôturant l’action solidaire, vous fermez la discussion et retirez l’action du fil d’actualités.\n\nDites-nous en plus avant de clôturer !";
+"pop_validate_action_help" = "Mon action solidaire est bloquée.";
+"pop_validate_action_bt_validate" = "Mon action a réussi";
+"pop_validate_action_bt_fail" = "Mon action n'a pas abouti";
+"pop_validate_action_bt_help" = "Je demande de l'aide";
+"pop_validate_action_bt_cancel" = "Annuler";
+
+"pop_validate_event_title" = "Comment cela s’est passé ?";
+"pop_validate_event_description" = "En clôturant l’évènement, vous fermez la discussion et retirez l’évènement du fil d’actualités. \n\nDites-nous en plus avant de clôturer !";
+"pop_validate_event_bt_validate" = "Confirmer ";
+"pop_validate_event_bt_cancel" = "Annuler";
+
+"Pop_info_web_alert_GDS" = "HORAIRES D’ÉTÉ : notre partenaire Soliguide.fr tient un annuaire à jour pour de nombreuses villes.";
+"Pop_info_web_alert_GDS_underline" = "Soliguide.fr";
+
+"info_share_sms_poi" = "Bonjour ! Voici l’adresse de %@ qui pourrait vous intéresser.\n%@\n%@\nPour plus d’infos sur ce lieu, et pour créer des liens entre voisins solidaires, je vous donne RDV sur le réseau Entourage %@";

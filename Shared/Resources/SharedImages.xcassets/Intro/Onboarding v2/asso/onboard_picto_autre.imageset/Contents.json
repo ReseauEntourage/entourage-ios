@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "onboard_picto_autre.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

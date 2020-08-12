@@ -25,6 +25,7 @@
 @property (nonatomic, assign) CLLocationCoordinate2D lastOkCoordinate;
 @property (nonatomic, strong) OTNewsFeedsFilter *currentFilter;
 @property (nonatomic) BOOL showEventsOnly;
+@property (nonatomic) BOOL showEncountersOnly;
 @property (nonatomic, assign, readonly) int radius;
 @property (nonatomic, strong) NSString *lastEventGuid;
 

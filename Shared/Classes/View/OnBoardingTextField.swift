@@ -12,8 +12,8 @@ class OnBoardingTextField: JVFloatLabeledTextField, Validable {
     super.awakeFromNib()
 
     if let placeholder = placeholder {
-      let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appTextFieldPlaceholder(),
-                        NSAttributedStringKey.font: UIColor.appTextFieldPlaceholderFont()] as [NSAttributedStringKey : Any]
+      let attributes = [NSAttributedString.Key.foregroundColor: UIColor.appTextFieldPlaceholder(),
+                        NSAttributedString.Key.font: UIColor.appTextFieldPlaceholderFont()] as [NSAttributedString.Key : Any]
       attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
     registerForNotifications()
@@ -28,7 +28,7 @@ class OnBoardingTextField: JVFloatLabeledTextField, Validable {
 
   private func registerForNotifications() {
     NotificationCenter.default.addObserver(self, selector: #selector(textDidChange),
-                                           name: NSNotification.Name.UITextFieldTextDidChange, object: self)
+                                           name: UITextField.textDidChangeNotification, object: self)
   }
 
   @objc func textDidChange() {
@@ -51,8 +51,8 @@ class OnBoardingNumberTextField: NBTextField {
     super.awakeFromNib()
 
     if let placeholder = placeholder {
-      let attributes = [NSAttributedStringKey.foregroundColor: UIColor.appTextFieldPlaceholder(),
-                        NSAttributedStringKey.font: UIColor.appTextFieldPlaceholderFont()] as [NSAttributedStringKey : Any]
+      let attributes = [NSAttributedString.Key.foregroundColor: UIColor.appTextFieldPlaceholder(),
+                        NSAttributedString.Key.font: UIColor.appTextFieldPlaceholderFont()] as [NSAttributedString.Key : Any]
       attributedPlaceholder = NSAttributedString(string: placeholder, attributes: attributes)
     }
   }
@@ -63,7 +63,7 @@ class OnBoardingButton: UIButton {
   override func awakeFromNib() {
     super.awakeFromNib()
 
-    if let customImage = self.image(for: UIControlState.normal) {
+    if let customImage = self.image(for: UIControl.State.normal) {
         let customImageWithTint = customImage.withRenderingMode(.alwaysTemplate)
         self.setImage(customImageWithTint, for: .normal)
         self.backgroundColor = UIColor.white
@@ -133,7 +133,7 @@ class NBTextField: JVFloatLabeledTextField, Validable {
 
   fileprivate func registerForNotifications() {
     NotificationCenter.default.addObserver(self, selector: #selector(NBTextField.numberTextDidChange),
-                                           name: NSNotification.Name.UITextFieldTextDidChange, object: self)
+                                           name: UITextField.textDidChangeNotification, object: self)
   }
 
   @objc func numberTextDidChange() {

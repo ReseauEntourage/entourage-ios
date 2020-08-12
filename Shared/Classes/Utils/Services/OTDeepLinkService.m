@@ -9,7 +9,6 @@
 #import "OTDeepLinkService.h"
 #import "OTAppDelegate.h"
 #import "OTActiveFeedItemViewController.h"
-#import "OTSWRevealViewController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "OTFeedItemFactory.h"
 #import "OTUserViewController.h"
@@ -97,6 +96,7 @@
     UIStoryboard *userProfileStorybard = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
     UINavigationController *rootUserProfileController = (UINavigationController *)[userProfileStorybard instantiateInitialViewController];
     OTUserViewController *userController = (OTUserViewController *)rootUserProfileController.topViewController;
+    userController.user = currentUser;
     userController.userId = [NSNumber numberWithInteger:userId.integerValue];
     
     [self showControllerFromAnywhere:rootUserProfileController];
@@ -189,14 +189,15 @@
     } else if ([key isEqualToString:@"guide"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
         [mainViewController switchToGuide];
-    }
-    else if ([key isEqualToString:@"tutorial"]) {
+    } else if ([key isEqualToString:@"tutorial"]) {
         [OTAppState presentTutorialScreen];
-    }
-    else if([key isEqualToString:@"phone-settings"]) {
+    } else if([key isEqualToString:@"phone-settings"]) {
         dispatch_async(dispatch_get_main_queue(), ^() {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         });
+    } else if([key isEqualToString:@"events"]) {
+        OTMainViewController *mainViewController = [self popToMainViewController];
+        [mainViewController switchToEvents];
     }
 }
 

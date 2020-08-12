@@ -15,7 +15,8 @@ public struct Logger {
     
     // MARK: - Printing functions
     public static func print(_ args: Any..., file: String = #file) {
-        #if DEBUG
+        
+        #if BETA
             var string = "[\(self.sanitizeFile(file: file))]"
             for arg in args {
                 string += " \(arg)"

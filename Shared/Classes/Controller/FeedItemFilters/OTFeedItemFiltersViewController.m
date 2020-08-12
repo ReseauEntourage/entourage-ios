@@ -13,6 +13,7 @@
 #import "UIColor+entourage.h"
 #import "OTFeedItemsFiltersTableDataSource.h"
 #import "entourage-Swift.h"
+#import "OTNewsFeedsFilter.h"
 
 @interface OTFeedItemFiltersViewController ()
 
@@ -26,7 +27,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableDataSource initializeWith:self.filterDelegate.currentFilter];
+    if ([self.filterDelegate respondsToSelector:@selector(isEncounterSelected)] && self.filterDelegate.isEncounterSelected) {
+        
+        [self.tableDataSource initializeWith:[self.filterDelegate.encounterFilter copy]];
+    }
+    else {
+        [self.tableDataSource initializeWith:[self.filterDelegate.currentFilter copy]];
+    }
     self.title =  OTLocalizedString(@"filters").uppercaseString;
     self.tableView.tableFooterView = [UIView new];
     [self setupToolbarButtons];

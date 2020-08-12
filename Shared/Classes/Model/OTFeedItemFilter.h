@@ -12,16 +12,16 @@ typedef enum {
     FeedItemFilterKeyContributionSocial,
     FeedItemFilterKeyContributionHelp,
     FeedItemFilterKeyContributionResource,
+    FeedItemFilterKeyContributionOther,
     FeedItemFilterKeyContributionInfo,
     FeedItemFilterKeyContributionSkill,
-    FeedItemFilterKeyContributionOther,
-
+    
     FeedItemFilterKeyDemandeSocial,
     FeedItemFilterKeyDemandeHelp,
     FeedItemFilterKeyDemandeResource,
+    FeedItemFilterKeyDemandeOther,
     FeedItemFilterKeyDemandeInfo,
     FeedItemFilterKeyDemandeSkill,
-    FeedItemFilterKeyDemandeOther,
 
     FeedItemFilterKeyUnread,
     FeedItemFilterKeyIncludingClosed,
@@ -41,6 +41,8 @@ typedef enum {
     FeedItemFilterKeyPrivateCircles,
     FeedItemFilterKeyEvents,
     FeedItemFilterKeyEventsPast,
+    FeedItemFilterKeyPartners,
+    FeedItemFilterKeyAlls,
 } FeedItemFilterKey;
 
 @interface OTFeedItemFilter : NSObject

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jlY-Q5-7zm">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jlY-Q5-7zm">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -20,7 +17,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jlY-Q5-7zm" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pzf-Rs-TNl">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -44,29 +41,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ntA-2H-Ywi">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="56"/>
                                 <color key="tintColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="20" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N8B-i8-k8U">
-                                <rect key="frame" x="-4" y="120" width="383" height="547"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="20" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N8B-i8-k8U">
+                                <rect key="frame" x="-4" y="100" width="383" height="567"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageFilterCell" rowHeight="44" id="LKm-aV-yBx" customClass="OTSolidarityGuideFilterCell">
                                         <rect key="frame" x="0.0" y="28" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LKm-aV-yBx" id="AQS-Ns-BTV">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLv-p0-jco">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLv-p0-jco">
                                                     <rect key="frame" x="54" y="13" width="30.5" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peb-P0-yS6">
-                                                    <rect key="frame" x="312" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="318" y="6.5" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="changeActive:" destination="LKm-aV-yBx" eventType="valueChanged" id="tde-ZY-DfL"/>
                                                     </connections>
@@ -82,11 +79,13 @@
                                             <constraints>
                                                 <constraint firstItem="peb-P0-yS6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XLv-p0-jco" secondAttribute="trailing" constant="5" id="08L-Fu-kbL"/>
                                                 <constraint firstItem="XLv-p0-jco" firstAttribute="leading" secondItem="Z8a-4i-T03" secondAttribute="trailing" constant="7" id="5HL-gG-8mH"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="peb-P0-yS6" secondAttribute="trailing" constant="7" id="5hL-nl-Hkr"/>
                                                 <constraint firstItem="Z8a-4i-T03" firstAttribute="centerY" secondItem="AQS-Ns-BTV" secondAttribute="centerY" id="DSY-P6-BeV"/>
                                                 <constraint firstItem="Z8a-4i-T03" firstAttribute="leading" secondItem="AQS-Ns-BTV" secondAttribute="leading" constant="7" id="IWs-rY-6tw"/>
                                                 <constraint firstItem="XLv-p0-jco" firstAttribute="centerY" secondItem="AQS-Ns-BTV" secondAttribute="centerY" id="SD4-JN-Dtx"/>
+                                                <constraint firstItem="XLv-p0-jco" firstAttribute="top" secondItem="AQS-Ns-BTV" secondAttribute="topMargin" constant="2" id="WBc-WK-sUw"/>
                                                 <constraint firstItem="peb-P0-yS6" firstAttribute="centerY" secondItem="AQS-Ns-BTV" secondAttribute="centerY" id="Ykm-1t-nSF"/>
+                                                <constraint firstAttribute="trailing" secondItem="peb-P0-yS6" secondAttribute="trailing" constant="16" id="d7n-Y3-qng"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="XLv-p0-jco" secondAttribute="bottom" constant="2" id="hYI-Qd-7Rr"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

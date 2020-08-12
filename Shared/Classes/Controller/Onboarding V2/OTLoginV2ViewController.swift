@@ -57,6 +57,7 @@ class OTLoginV2ViewController: UIViewController {
         }
         
         setupViews()
+        OTLogger.logEvent(View_Login_Login)
     }
     
     override func viewWillLayoutSubviews() {
@@ -196,11 +197,29 @@ class OTLoginV2ViewController: UIViewController {
         countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
+    func goLoginNext(user:OTUser?) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "LoginNextVC") as! OTLoginNextViewController
+        vc.currentUser = user
+        if let appDelegate = UIApplication.shared.delegate, let window = appDelegate.window {
+            window?.rootViewController = vc
+            window?.makeKeyAndVisible()
+        }
+    }
+    
+    func goalRealMain() {
+        OTAppState.continueFromLoginVC()
+        
+        if (self.fromLink != nil) {
+            OTDeepLinkService.init().handleDeepLink(self.fromLink)
+            self.fromLink = nil;
+        }
+    }
+    
     //MARK: - Network -
     func login(phone:String, code:String) {
         
         SVProgressHUD.show()
-        
+        OTLogger.logEvent(Action_Login_Submit)
         OTAuthService.init().auth(withPhone: phone, password: code, success: { (user, isFirstlogin) in
             SVProgressHUD.dismiss()
             self.isLoading = false
@@ -209,15 +228,31 @@ class OTLoginV2ViewController: UIViewController {
             UserDefaults.standard.temporaryUser = nil
             UserDefaults.standard.setFirstLoginState(!isFirstlogin)
             
+            OTLogger.logEvent(Action_Login_Success)
+            
             if OTAppConfiguration.supportsTourFunctionality() {
                 UserDefaults.standard.set(false, forKey: "user_tours_only")
             }
             
-            OTAppState.continueFromLoginVC()
-            
-            if (self.fromLink != nil) {
-                OTDeepLinkService.init().handleDeepLink(self.fromLink)
-                self.fromLink = nil;
+            if user?.addressPrimary == nil || user?.email?.count == 0 {
+                self.goLoginNext(user:user)
+            }
+            else {
+                if user?.goal == nil || user?.goal?.count == 0 {
+                    let message = OTLocalisationService.getLocalizedValue(forKey: "login_info_pop_action")
+                    let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "login_pop_information"), message: message, preferredStyle: .alert)
+                    
+                    let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"OK"), style: .default, handler: { (action) in
+                        self.goalRealMain()
+                    })
+                    
+                    alertvc.addAction(action)
+                    
+                    self.present(alertvc, animated: true, completion: nil)
+                    return
+                }
+                
+                self.goalRealMain()
             }
             
         }) { (error) in
@@ -237,16 +272,22 @@ class OTLoginV2ViewController: UIViewController {
                     alertTitle = OTLocalisationService.getLocalizedValue(forKey: "tryAgain")
                     alertText = OTLocalisationService.getLocalizedValue(forKey: "invalidPhoneNumberOrCode")
                     buttonTitle = OTLocalisationService.getLocalizedValue(forKey: "tryAgain_short")
+                    
+                    OTLogger.logEvent(Error_Login_Fail)
                 }
                 else if _errString.contains("INVALID_PHONE_FORMAT") {
                     alertTitle = OTLocalisationService.getLocalizedValue(forKey: "tryAgain")
                     alertText = OTLocalisationService.getLocalizedValue(forKey: "invalidPhoneNumberFormat")
                     buttonTitle = OTLocalisationService.getLocalizedValue(forKey: "tryAgain_short")
+                    
+                    OTLogger.logEvent(Error_Login_Phone)
                 }
                 else if _err.code == NSURLErrorNotConnectedToInternet {
                     alertTitle = OTLocalisationService.getLocalizedValue(forKey: "tryAgain")
                     alertText = _err.localizedDescription
                     buttonTitle = OTLocalisationService.getLocalizedValue(forKey: "tryAgain_short")
+                    
+                    OTLogger.logEvent(Error_Login_Error)
                 }
                 
                 let alertvc = UIAlertController.init(title: alertTitle, message: alertText, preferredStyle: .alert)
@@ -262,6 +303,8 @@ class OTLoginV2ViewController: UIViewController {
     
     func resendCode(phone:String) {
         SVProgressHUD.show()
+        OTLogger.logEvent(Action_Login_SMS)
+        
         OTAuthService.init().regenerateSecretCode(phone, success: { (user) in
             SVProgressHUD.dismiss()
             SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "requestSent"))

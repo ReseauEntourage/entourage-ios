@@ -6,7 +6,7 @@ platform :ios, '9.0'
 
 def sharedPods
     platform :ios, '9.0'
-        
+
     pod 'AFNetworking'
     pod 'SWRevealViewController', '2.3.0'
     pod 'MBProgressHUD', '0.8'
@@ -28,6 +28,7 @@ def sharedPods
     pod 'GooglePlaces'
     pod 'GoogleMaps'
     pod 'SDWebImage'
+    pod 'TTTAttributedLabel'
 end
 
 target "entourage" do

@@ -157,7 +157,7 @@
     [self.textField resignFirstResponder];
     
     [SVProgressHUD show];
-    [OTAuthService updateUserAddressWithPlaceId:self.selectedAddress.placeID completion:^(NSError *error) {
+    [OTAuthService updateUserAddressWithPlaceId:self.selectedAddress.placeID isSecondaryAddress:NO completion:^(NSError *error) {
         if (error) {
             [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
         } else {

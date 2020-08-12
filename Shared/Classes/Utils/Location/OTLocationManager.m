@@ -13,6 +13,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import <Mixpanel/Mixpanel.h>
+#import "OTTourCreatorViewController.h"
 
 @import Firebase;
 
@@ -109,7 +110,7 @@
         topVC = [navController topViewController];
     }
     
-    if (topVC.presentedViewController) {
+    if (topVC.presentedViewController && ![topVC.presentedViewController isKindOfClass:[OTTourCreatorViewController class]]) {
         [topVC.presentedViewController presentViewController:alert animated:YES completion:nil];
     } else if (topVC) {
         [topVC presentViewController:alert animated:YES completion:nil];
@@ -153,7 +154,7 @@
 
 - (CLLocation*)defaultLocationForNewActions {
     if ([[NSUserDefaults standardUserDefaults].currentUser hasActionZoneDefined]) {
-        return [NSUserDefaults standardUserDefaults].currentUser.address.location;
+        return [NSUserDefaults standardUserDefaults].currentUser.addressPrimary.location;
     }
     
     return  self.currentLocation;

@@ -55,6 +55,11 @@ static bool entourageClosed = NO;
     self.txtNoData.attributedText = self.noEventsText;
 }
 
+- (void)switchedToEncounters {
+    self.isGuide = NO;
+    self.txtNoData.attributedText = self.noDataEntourageText; //TODO: mettre les bons textes si vide ?
+}
+
 - (void)showNoData {
     if (self.isGuide && guideClosed) {
         return;

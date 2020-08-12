@@ -74,7 +74,7 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.rowHeight = UITableView.automaticDimension;
         tableView.backgroundColor = UIColor.white
         tableView.separatorColor = .white
         tableView.register(OTItemTableViewCell.self, forCellReuseIdentifier: "ItemCellIdentifier")
@@ -103,22 +103,22 @@ final class OTPfpMenuViewController: UIViewController, MFMailComposeViewControll
     private func customizeHeader() {
         let editText:String = "Modifier mon profil"
         let normalAttributedText = NSAttributedString(string: editText, attributes:
-            [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+            [.underlineStyle: NSUnderlineStyle.single.rawValue,
              .foregroundColor: ApplicationTheme.shared().backgroundThemeColor,
              .font:UIFont.SFUIText(size: 14, type: UIFont.SFUITextFontType.regular)])
         let selectedAttributedText = NSAttributedString(string: editText, attributes:
-            [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+            [.underlineStyle: NSUnderlineStyle.single.rawValue,
              .foregroundColor: ApplicationTheme.shared().titleLabelColor,
              .font:UIFont.SFUIText(size: 14, type: UIFont.SFUITextFontType.regular)])
-        headerView.editLabel.setAttributedTitle(normalAttributedText, for: UIControlState.normal)
-        headerView.editLabel.setAttributedTitle(selectedAttributedText, for: UIControlState.highlighted)
-        headerView.editLabel.setAttributedTitle(selectedAttributedText, for: UIControlState.selected)
-        headerView.editLabel.addTarget(self, action: #selector(editProfile), for: UIControlEvents.touchUpInside)
+        headerView.editLabel.setAttributedTitle(normalAttributedText, for: UIControl.State.normal)
+        headerView.editLabel.setAttributedTitle(selectedAttributedText, for: UIControl.State.highlighted)
+        headerView.editLabel.setAttributedTitle(selectedAttributedText, for: UIControl.State.selected)
+        headerView.editLabel.addTarget(self, action: #selector(editProfile), for: UIControl.Event.touchUpInside)
         
         headerView.nameLabel.text = currentUser?.displayName
         
         headerView.profileBtn.setupAsProfilePicture(fromUrl: currentUser?.avatarURL, withPlaceholder: "user")
-        headerView.profileBtn.addTarget(self, action: #selector(loadProfile), for: UIControlEvents.touchUpInside)
+        headerView.profileBtn.addTarget(self, action: #selector(loadProfile), for: UIControl.Event.touchUpInside)
     }
     
     private func createMenuItems() {
@@ -298,9 +298,9 @@ extension OTPfpMenuViewController: UITableViewDataSource {
         if menuItem.tag != menuItemIndexType.logout.rawValue {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCellIdentifier") as! OTItemTableViewCell
             let icon:UIImage = UIImage(named: menuItem.iconName)!
-            cell.view.iconImageView.image = icon.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            cell.view.iconImageView.image = icon.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
             cell.view.iconImageView.tintColor = UIColor.pfpBlue()
-            cell.view.iconImageView.contentMode = UIViewContentMode.scaleAspectFit
+            cell.view.iconImageView.contentMode = UIView.ContentMode.scaleAspectFit
             cell.view.itemLabel.text = menuItem.title
             cell.backgroundColor = UIColor.pfpTableBackground()
             

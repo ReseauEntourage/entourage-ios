@@ -98,12 +98,23 @@
         NSString *_dateEndStr = [NSString stringWithFormat:OTLocalizedString(@"au_a"), endDateInfo,endTimeInfo];
         dateInfo = [NSString stringWithFormat:@"%@ %@ %@",dateInfo,_dateStartStr,_dateEndStr];
     }
-    
-    NSString *addressInfo = [NSString stringWithFormat:@"\n%@", self.entourage.displayAddress];
 
-    NSString *fullInfoText = [NSString stringWithFormat:@"%@%@", dateInfo, addressInfo];
-    
-    return fullInfoText;
+    return dateInfo;
+}
+
+- (NSString *)eventInfoLocation {
+  return self.entourage.displayAddress;
+}
+
+- (NSURL*)eventOnlineURL {
+  NSError *error = nil;
+  NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"https://zoom.us/j/(\\d{9})"
+                                                                         options:NSRegularExpressionCaseInsensitive error:&error];
+  NSArray *matches = [regex matchesInString:self.entourage.desc options:0 range:NSMakeRange(0, [self.entourage.desc length])];
+
+  NSString *zoomURL = [self.entourage.desc substringWithRange:[[matches firstObject] range]];
+
+  return [NSURL URLWithString:zoomURL];
 }
 
 - (NSAttributedString *)eventInfoFormattedDescription {

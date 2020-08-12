@@ -21,6 +21,7 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     @IBOutlet weak var ui_bt_signup: UIButton!
     @IBOutlet weak var ui_label_description: UILabel!
     
+    var isFromOnboarding = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,12 +55,18 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
             }
             self.view.layoutIfNeeded()
         }
+        OTLogger.logEvent(View_Start_SignUpLogin)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.hideTransparentNavigationBar()
         UserDefaults.standard.temporaryUser = nil
+        
+        if isFromOnboarding {
+            self.isFromOnboarding = false
+            self.action_login(self)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,13 +86,16 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     }
     
     @IBAction func action_signUp(_ sender: Any) {
+        OTLogger.logEvent(Action_Start_SignUpStart)
         let _storyboard = UIStoryboard.init(name: "Onboarding_V2", bundle: nil)
-        let vc = _storyboard.instantiateViewController(withIdentifier: "startOnboardVC")
+        let vc = _storyboard.instantiateViewController(withIdentifier: "startOnboardVC") as! OTOnboardingV2StartViewController
         
+        vc.parentDelegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func action_login(_ sender: Any) {
+        OTLogger.logEvent(Action_Start_LoginStart)
         OTAppState.continue(fromStartupScreen: self, creatingUser: false)
     }
 }

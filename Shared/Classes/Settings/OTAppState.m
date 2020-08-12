@@ -40,7 +40,7 @@
 #define MAP_TAB_INDEX 0
 #if !PFP
     #define SOLIDARITY_MAP_INDEX 1
-    #define MESSAGES_TAB_INDEX 2
+    #define MESSAGES_TAB_INDEX 3
 #else
     #define SOLIDARITY_MAP_INDEX 0
     #define MESSAGES_TAB_INDEX 1
@@ -139,7 +139,8 @@
     OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIWindow *window = [appDelegate window];
     
-    UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBar];
+     UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:MAP_TAB_INDEX];
+    
     [OTAppConfiguration configureTabBarAppearance:tabBarController];
     
     window.rootViewController = tabBarController;
@@ -257,21 +258,27 @@
     [OTAppState checkNotifcationsAndGoMainScreen];
 }
 
-+(void) checkNotifcationsAndGoMainScreen {
++(void)checkNotifcationsAndGoMainScreen {
+  [self checkNotificationsWithCompletionHandler:^{
+    [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
+    [[OTLocationManager sharedInstance] startLocationUpdates];
+
+    [OTAppState navigateToAuthenticatedLandingScreen];
+  }];
+}
+
++(void)checkNotificationsWithCompletionHandler:(void (^)(void))completionHandler {
     [OTPushNotificationsService getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {
         if (@available(iOS 12.0, *)) {
             if (status == UNAuthorizationStatusProvisional)
                 status = UNAuthorizationStatusNotDetermined;
         }
-        
+
         dispatch_async(dispatch_get_main_queue(), ^() {
             if (status == UNAuthorizationStatusNotDetermined) {
                 [OTAppState showPopNotification];
-            } else {
-                [[NSUserDefaults standardUserDefaults] setTutorialCompleted];
-                [[OTLocationManager sharedInstance] startLocationUpdates];
-                
-                [OTAppState navigateToAuthenticatedLandingScreen];
+            } else if (completionHandler) {
+                completionHandler();
             }
         });
     }];
@@ -463,7 +470,6 @@
                                           asEvent:isEditingEvent];
         return;
     }
-    
     if (showOptions) {
         [controller performSegueWithIdentifier:@"OTMapOptionsSegue" sender:controller];
     }

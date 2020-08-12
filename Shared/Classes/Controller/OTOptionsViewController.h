@@ -20,7 +20,9 @@
 #define INITIAL_BOTTOM_MEDIUM 40.0f
 #define INITIAL_BOTTOM 80.0f//122.0f
 
+#define ACTION_LABEL_HEIGHT 21.0f
 #define ACTION_LABEL_FRAME CGRectMake(0.0f, 0.0f, 230.0f, 21.0f)
+#define ACTION_LABEL_SUB_FRAME CGRectMake(0.0f, 21.0f, 300.0f, 21.0f)
 
 #define NORTH_WEST CGPointMake(-50.f, -30.f)
 #define NORTH      CGPointMake(  0.f, -65.f)
@@ -93,11 +95,13 @@
 - (IBAction)doCreateEvent:(id)sender;
 - (IBAction)doTogglePOI:(id)sender;
 - (IBAction)proposeStructure:(id)sender;
+- (IBAction)doShowFormOndes:(id)sender;
 
 - (void)addOption:(NSString *)optionName
           atIndex:(int)index
         withIconWithoutBG:(NSString *)optionIcon
-        andAction:(SEL)selector;
+        andAction:(SEL)selector
+        andSubtitle:(NSString *) optionSubtitle;
 - (IBAction)doCreateActionHelp:(id)sender;
 - (IBAction)doCreateActionGift:(id)sender;
 @end

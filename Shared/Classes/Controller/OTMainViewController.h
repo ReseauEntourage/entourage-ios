@@ -36,5 +36,10 @@
 
 - (void)switchToGuide;
 - (IBAction)showFilters;
-
+- (void)switchToEvents;
+- (void) showProposeFromNav;
+- (void) createTourFromNav;
+- (void) createEncounterFromNav;
+- (void) togglePoiFromNav;
+- (void)createQuickEncounter;
 @end

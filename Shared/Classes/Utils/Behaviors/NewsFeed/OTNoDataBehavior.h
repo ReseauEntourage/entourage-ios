@@ -19,5 +19,6 @@
 - (void)switchedToEvents;
 - (void)showNoData;
 - (void)hideNoData;
+- (void)switchedToEncounters;
 
 @end

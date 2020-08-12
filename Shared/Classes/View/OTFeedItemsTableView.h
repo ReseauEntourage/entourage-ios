@@ -28,6 +28,7 @@
 // Filtering
 - (void)showEventsOnly;
 - (void)showAllFeedItems;
+- (void)showEncountersOnly;
 
 @optional
 - (void)loadMoreData;
@@ -40,6 +41,7 @@
 @property (nonatomic, weak) id<OTFeedItemsTableViewDelegate> feedItemsDelegate;
 @property (nonatomic, strong) IBOutlet UIView *loadingView;
 @property (nonatomic) BOOL showEventsOnly;
+@property (nonatomic) BOOL showEncountersOnly;
 @property (nonatomic) BOOL showSolidarityGuidePOIs;
 
 - (void)configureWithMapView:(MKMapView *)mapView;
@@ -54,6 +56,9 @@
 - (void)setNoFeeds;
 - (void)switchToGuide;
 - (void)switchToFeeds;
+- (void)showEventsOnlyAction;
+- (void)showAllFeedItemsAction;
+- (void)showEncountersOnlyAction;
 
 - (UIView*)headerViewWithMap:(MKMapView*)mapView
                    mapHeight:(CGFloat)mapHeight

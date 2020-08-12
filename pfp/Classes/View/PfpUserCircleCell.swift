@@ -23,7 +23,7 @@ class PfpUserCircleCell: UITableViewCell {
         iconImageView.layer.borderColor = UIColor.groupTableViewBackground.cgColor
         iconImageView.layer.borderWidth = iconBorderWidth
         
-        self.accView.image = UIImage.init(named: "verified")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        self.accView.image = UIImage.init(named: "verified")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         self.accView.tintColor = UIColor.white
         self.accView.layer.cornerRadius = 11
     }

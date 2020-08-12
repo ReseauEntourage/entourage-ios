@@ -79,7 +79,8 @@ class OTPicturePreviewResizeViewController: UIViewController {
     //MARK: - Network -
     func updateUserPhoto() {
         if let _image = self.processImage() {
-             SVProgressHUD.show()
+            SVProgressHUD.show()
+            OTLogger.logEvent(Action_Profile_Photo_Submit)
             OTPictureUploadS3Service.prepareUploadWith(image: _image,completion: {isOk in
                 if isOk {
                     self.popToProfile()

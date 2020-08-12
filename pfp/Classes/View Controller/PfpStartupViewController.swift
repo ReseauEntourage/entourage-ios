@@ -24,11 +24,11 @@ class PfpStartupViewController: UIViewController, UIScrollViewDelegate {
         self.title = ""
         self.navigationController?.presentTransparentNavigationBar()
         
-        self.loginButton.setTitleColor(ApplicationTheme.shared().backgroundThemeColor, for: UIControlState.normal)
+        self.loginButton.setTitleColor(ApplicationTheme.shared().backgroundThemeColor, for: UIControl.State.normal)
         self.loginButton.layer.borderColor = ApplicationTheme.shared().backgroundThemeColor.cgColor
         self.loginButton.layer.borderWidth = 1.5
         
-        self.signupButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        self.signupButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
         self.signupButton.backgroundColor = ApplicationTheme.shared().backgroundThemeColor
         self.signupButton.layer.borderColor = ApplicationTheme.shared().backgroundThemeColor.cgColor
         self.signupButton.layer.borderWidth = 1.5
@@ -77,15 +77,15 @@ class PfpStartupViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView.contentSize = CGSize.init(width: 3*width, height: height)
         
         let imageView1: UIImageView = UIImageView.init(image: UIImage.init(named: "startup1"))
-        imageView1.contentMode = UIViewContentMode.top
+        imageView1.contentMode = UIView.ContentMode.top
         imageView1.frame = CGRect.init(x: 0, y: topOffset, width: width, height: height)
         
         let imageView2: UIImageView = UIImageView.init(image: UIImage.init(named: "startup2"))
-        imageView2.contentMode = UIViewContentMode.top
+        imageView2.contentMode = UIView.ContentMode.top
         imageView2.frame = CGRect.init(x: width, y: topOffset, width: width, height: height)
         
         let imageView3: UIImageView = UIImageView.init(image: UIImage.init(named: "startup3"))
-        imageView3.contentMode = UIViewContentMode.top
+        imageView3.contentMode = UIView.ContentMode.top
         imageView3.frame = CGRect.init(x: 2*width, y: topOffset, width: width, height: height)
         
         self.scrollView.addSubview(imageView1)

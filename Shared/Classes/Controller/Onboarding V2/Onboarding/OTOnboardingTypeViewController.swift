@@ -37,6 +37,8 @@ class OTOnboardingTypeViewController: UIViewController {
         else {
             delegate?.updateButtonNext(isValid: false)
         }
+        
+        OTLogger.logEvent(View_Onboarding_Choose_Profile)
     }
     
     func prepareViews() {

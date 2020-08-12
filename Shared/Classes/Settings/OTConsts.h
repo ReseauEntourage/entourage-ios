@@ -95,6 +95,7 @@
 //Menu
 #define SCB_LINK_ID @"pedagogic-content"
 #define GOAL_LINK_ID @"action-examples"
+#define EVENT_GUIDE_ID @"events-guide"
 #define DONATE_LINK_ID @"donation"
 #define ATD_LINK_ID @"atd-partnership"
 #define FAQ_LINK_ID @"faq"
@@ -141,3 +142,7 @@
 #define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.org"
 
 #define ENTOURAGE_WEB_URL @"https://www.entourage.social"
+
+#define GOOD_WAVES_LINK_ID @"good_waves"
+#define GDS_INFO_ALERT_WEB_LINK @"https://soliguide.fr"
+#define ENTOURAGE_BITLY_LINK @"https://bit.ly/applientourage"

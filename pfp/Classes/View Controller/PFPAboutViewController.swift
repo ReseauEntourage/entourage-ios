@@ -68,10 +68,10 @@ class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = UITableViewCell.init(style: UITableViewCellStyle.value1, reuseIdentifier: "aboutCellId")
+        let cell:UITableViewCell = UITableViewCell.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "aboutCellId")
         let textSize: CGFloat = 15
         cell.backgroundColor = UIColor.pfpTableBackground()
-        cell.accessoryType = UITableViewCellAccessoryType.none
+        cell.accessoryType = UITableViewCell.AccessoryType.none
         cell.textLabel?.textColor = ApplicationTheme.shared().titleLabelColor
         cell.textLabel?.font = UIFont.SFUIText(size: textSize, type: UIFont.SFUITextFontType.regular)
         cell.detailTextLabel?.textColor = ApplicationTheme.shared().subtitleLabelColor
@@ -79,9 +79,9 @@ class PFPAboutViewController: UIViewController, UITableViewDelegate, UITableView
         
         let arrowImage:UIImage = UIImage.init(named: "arrowForMenu")!
         let imageView:UIImageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: textSize, height: textSize))
-        imageView.image = arrowImage.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        imageView.image = arrowImage.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         imageView.tintColor = ApplicationTheme.shared().subtitleLabelColor
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        imageView.contentMode = UIView.ContentMode.scaleAspectFit
         cell.accessoryView = imageView
         
         switch indexPath.section {

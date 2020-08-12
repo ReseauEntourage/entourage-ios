@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="ar7-tr-3dW">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="ar7-tr-3dW">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -20,7 +17,7 @@
             <objects>
                 <navigationController storyboardIdentifier="NavGuideDetailsViewController" id="ar7-tr-3dW" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="QDv-s5-Rca">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -29,9 +26,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y6p-QR-pX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1792" y="-593"/>
+            <point key="canvasLocation" x="2597.1014492753625" y="-397.09821428571428"/>
         </scene>
-        <!--Owner-->
+        <!--GUIDE DE SOLIDARITE-->
         <scene sceneID="LoE-Tt-veI">
             <objects>
                 <viewController storyboardIdentifier="OTGuideDetailsViewController" id="mWl-3f-MlG" customClass="OTGuideDetailsViewController" sceneMemberID="viewController">
@@ -44,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSl-o0-ITN" userLabel="Title View">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="56"/>
                                 <subviews>
                                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQw-uh-GTq" userLabel="Category Button">
                                         <rect key="frame" x="163.5" y="4" width="48" height="48"/>
@@ -62,20 +59,20 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGK-BG-AWp" userLabel="POI Name Label">
-                                <rect key="frame" x="16" y="150" width="343" height="0.0"/>
+                                <rect key="frame" x="16" y="130" width="343" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" red="0.29019609093666077" green="0.29019609093666077" blue="0.29019609093666077" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yVR-N8-kQk" userLabel="Separator View">
-                                <rect key="frame" x="16" y="166" width="343" height="1"/>
+                                <rect key="frame" x="16" y="146" width="343" height="1"/>
                                 <color key="backgroundColor" red="0.64705884456634521" green="0.64705884456634521" blue="0.61176472902297974" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="YsI-qg-SBs"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1LT-5b-EdQ">
-                                <rect key="frame" x="0.0" y="183" width="375" height="395"/>
+                                <rect key="frame" x="0.0" y="163" width="375" height="415"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CdK-Yq-AaW" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
@@ -182,7 +179,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0S-y1-Jh7">
-                                        <rect key="frame" x="127.5" y="42" width="119" height="30"/>
+                                        <rect key="frame" x="128" y="42" width="119" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="23C-5L-sK0"/>
                                         </constraints>
@@ -235,7 +232,13 @@
                             <constraint firstAttribute="leadingMargin" secondItem="SGK-BG-AWp" secondAttribute="leading" id="zBB-v0-CQa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="GUIDE DE SOLIDARITE" id="6fH-t1-8sJ"/>
+                    <navigationItem key="navigationItem" title="GUIDE DE SOLIDARITE" id="6fH-t1-8sJ">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="CsO-eo-EZS">
+                            <connections>
+                                <action selector="action_share:" destination="mWl-3f-MlG" id="UIO-4D-SjH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressButton" destination="GQR-av-iAm" id="JoR-6d-27O"/>
                         <outlet property="btnSendMail" destination="b0S-y1-Jh7" id="e4o-Yx-OIh"/>
@@ -256,7 +259,7 @@
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="2327.5" y="-594.5"/>
+            <point key="canvasLocation" x="3373.1884057971015" y="-398.10267857142856"/>
         </scene>
     </scenes>
     <resources>

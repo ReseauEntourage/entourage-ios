@@ -9,6 +9,7 @@
 #import "OTUser.h"
 #import "OTApiKeys.h"
 #import "NSDictionary+Parsing.h"
+#import "OTLocalisationService.h"
 
 NSString *const kKeySid = @"id";
 NSString *const kKeyUuid = @"uuid";
@@ -31,6 +32,7 @@ NSString *const kKeyRoles = @"roles";
 NSString *const kKeyAnonymous = @"anonymous";
 NSString *const kMemberships = @"memberships";
 NSString *const kAddress = @"address";
+NSString *const kAddress2 = @"address_2";
 NSString *const kFirebaseProperties = @"firebase_properties";
 
 NSString *const kCoordinatorUserTag = @"coordinator";
@@ -38,6 +40,12 @@ NSString *const kNotValidatedUserTag = @"not_validated";
 NSString *const kVisitorUserTag = @"visitor";
 NSString *const kVisitedUserTag = @"visited";
 NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
+NSString *const kGoal = @"goal";
+NSString *const kInterests = @"interests";
+
+NSString *const kKeyEventsCount = @"events_count";
+NSString *const kKeyActionsCount = @"actions_count";
+NSString *const kKeyGoodWavesParticipate = @"good_waves_participation";
 
 @interface OTUser ()
 @property (nonatomic, readwrite) NSString *uuid;
@@ -71,6 +79,12 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         _anonymous = [dictionary boolForKey:kKeyAnonymous defaultValue:NO];
         _firebaseProperties = [self sanitizeFirebaseProperties:[dictionary objectForKey:kFirebaseProperties]];
         
+        _goal = [dictionary stringForKey:kGoal];
+        
+        _eventsCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEventsCount defaultValue:0];
+        _actionsCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyActionsCount defaultValue:0];
+        _isGoodWavesValidated = [[dictionary objectForKey:kKeyStats] boolForKey:kKeyGoodWavesParticipate defaultValue:NO];
+        
         if ([[dictionary allKeys] containsObject:kKeyConversation]) {
             _conversation = [[OTConversation alloc] initWithDictionary:[dictionary objectForKey:kKeyConversation]];
         }
@@ -80,7 +94,11 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         }
         
         if ([[dictionary allKeys] containsObject:kAddress]) {
-            _address = [[OTAddress alloc] initWithDictionary:[dictionary objectForKey:kAddress]];
+            _addressPrimary = [[OTAddress alloc] initWithDictionary:[dictionary objectForKey:kAddress]];
+        }
+        
+        if ([[dictionary allKeys] containsObject:kAddress2]) {
+            _addressSecondary = [[OTAddress alloc] initWithDictionary:[dictionary objectForKey:kAddress2]];
         }
         
         NSArray *membershipArray = [dictionary objectForKey:kMemberships];
@@ -90,6 +108,8 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
             [userMemberships addObject:userMembership];
         }
         _memberships = userMemberships;
+        
+        _interests = [dictionary objectForKey:kInterests];
     }
     return self;
 }
@@ -114,6 +134,10 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     }
     if(self.avatarKey != nil) {
         [dictionary setObject:self.avatarKey forKey:kKeyAvatarKey];
+    }
+    
+    if (self.goal != nil) {
+        [dictionary setObject:self.goal forKey:kGoal];
     }
     
     return dictionary;
@@ -141,8 +165,15 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
     [encoder encodeObject:self.roles forKey:kKeyRoles];
     [encoder encodeBool:self.anonymous forKey:kKeyAnonymous];
     [encoder encodeObject:self.memberships forKey:kMemberships];
-    [encoder encodeObject:self.address forKey:kAddress];
+    [encoder encodeObject:self.addressPrimary forKey:kAddress];
     [encoder encodeObject:self.firebaseProperties forKey:kFirebaseProperties];
+    [encoder encodeObject:self.goal forKey:kGoal];
+    [encoder encodeObject:self.addressSecondary forKey:kAddress2];
+    [encoder encodeObject:self.interests forKey:kInterests];
+    
+    [encoder encodeObject:self.eventsCount forKey:kKeyEventsCount];
+    [encoder encodeObject:self.actionsCount forKey:kKeyActionsCount];
+    [encoder encodeObject:[NSNumber numberWithBool:self.isGoodWavesValidated] forKey:kKeyGoodWavesParticipate];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -169,8 +200,15 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
         self.roles = [decoder decodeObjectForKey:kKeyRoles];
         self.anonymous = [decoder decodeBoolForKey:kKeyAnonymous];
         self.memberships = [decoder decodeObjectForKey:kMemberships];
-        self.address = [decoder decodeObjectForKey:kAddress];
+        self.addressPrimary = [decoder decodeObjectForKey:kAddress];
         self.firebaseProperties = [self sanitizeFirebaseProperties:[decoder decodeObjectForKey:kFirebaseProperties]];
+        self.goal = [decoder decodeObjectForKey:kGoal];
+        self.addressSecondary = [decoder decodeObjectForKey:kAddress2];
+        self.interests = [decoder decodeObjectForKey:kInterests];
+        
+        self.eventsCount = [decoder decodeObjectForKey:kKeyEventsCount];
+        self.actionsCount = [decoder decodeObjectForKey:kKeyActionsCount];
+        self.isGoodWavesValidated = [[decoder decodeObjectForKey:kKeyGoodWavesParticipate] boolValue];
     }
     return self;
 }
@@ -178,7 +216,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 #pragma mark - Helper functions
 
 - (BOOL)hasActionZoneDefined {
-    return self.address != nil;
+    return self.addressPrimary != nil;
 }
 
 - (BOOL)isPro
@@ -237,7 +275,7 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 
 - (NSString *)formattedActionZoneAddress {
     if ([self hasActionZoneDefined]) {
-        NSString *descText = [NSString stringWithFormat:@"Vous recevez les notifications pour les actions autour de : %@", self.address.displayAddress];
+        NSString *descText = [NSString stringWithFormat:@"Vous recevez les notifications pour les actions autour de : %@", self.addressPrimary.displayAddress];
         return descText;
     }
     
@@ -270,6 +308,33 @@ NSString *const kEthicsCharterSignedTag = @"ethics_charter_signed";
 
 - (void)setFirebaseProperties:(NSDictionary<NSString *,NSString *> *)firebaseProperties {
     _firebaseProperties = [self sanitizeFirebaseProperties:firebaseProperties];
+}
+
+-(NSString *)getInterestsFormated {
+    NSString * interests = @"";
+    
+    int i = 0;
+    for (NSString *interest in self.interests) {
+        if (i < self.interests.count - 1) {
+            interests = [NSString stringWithFormat:@"%@ %@,",interests,[OTLocalisationService getLocalizedValueForKey:interest]];
+        }
+        else {
+           interests = [NSString stringWithFormat:@"%@ %@",interests,[OTLocalisationService getLocalizedValueForKey:interest]];
+        }
+        i = i + 1;
+    }
+    
+    return interests;
+}
+
+-(BOOL) isUserTypeAlone {
+    BOOL isAlone = YES;
+    
+    if (![self.goal isEqualToString:@"ask_for_help"]) {
+        isAlone = NO;
+    }
+    
+    return isAlone;
 }
 
 @end

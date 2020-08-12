@@ -48,5 +48,14 @@
 
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before andLocation:(CLLocationCoordinate2D)location;
 - (NSMutableDictionary *)toDictionaryWithPageToken:(NSString *)pageToken andLocation:(CLLocationCoordinate2D)location;
+- (void)changeFiltersForProOnly;
 
+-(void)setNeighbourFilters;
+-(void)setAloneFilters;
+-(BOOL) isDefaultFilters;
+-(BOOL) isDefaultEncounterFilters;
+
+@property (nonatomic) BOOL isEncouterFilter;
+@property (nonatomic) BOOL showPartners;
+@property (nonatomic) BOOL showAlls;
 @end

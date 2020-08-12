@@ -38,6 +38,7 @@ NSString *const kKeyShowPastOuting = @"showPastOuting";
 NSString *const kKeyShowPrivateCircle = @"showPrivateCircle";
 NSString *const kKeyShowNeighborhood = @"showNeighborhood";
 
+NSString *const kKeyShowPartnersOnly = @"showPartnersOnly";
 @implementation OTSavedFilter
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
@@ -69,6 +70,7 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
     [encoder encodeObject:self.showContributionInfo forKey:kKeyContributionInfo];
     [encoder encodeObject:self.showContributionSkill forKey:kKeyContributionSkill];
     [encoder encodeObject:self.showContributionOther forKey:kKeyContributionOther];
+    [encoder encodeObject:self.showPartnersOnly forKey:kKeyShowPartnersOnly];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -102,6 +104,8 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
         self.showContributionInfo = [decoder decodeObjectForKey:kKeyContributionInfo];
         self.showContributionSkill = [decoder decodeObjectForKey:kKeyContributionSkill];
         self.showContributionOther = [decoder decodeObjectForKey:kKeyContributionOther];
+        
+        self.showPartnersOnly = [decoder decodeObjectForKey:kKeyShowPartnersOnly];
     }
     return self;
 }
@@ -138,6 +142,7 @@ NSString *const kKeyShowNeighborhood = @"showNeighborhood";
     new.showContributionSkill = @(filter.showContributionSkill);
     new.showContributionOther = @(filter.showContributionOther);
     
+    new.showPartnersOnly = @(filter.showPartners);
     return new;
 }
 

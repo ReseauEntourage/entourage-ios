@@ -122,6 +122,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [[IQKeyboardManager sharedManager] setEnable:YES];
+    if ([self isMovingFromParentViewController]) {
+        [OTAppState checkNotificationsWithCompletionHandler:nil];
+    }
     [super viewWillDisappear:animated];
 }
 
@@ -210,6 +213,7 @@
                     [SVProgressHUD dismiss];
                     self.txtChat.text = @"";
                     [self reloadMessages];
+        [OTAppState checkNotificationsWithCompletionHandler:nil];
     } orFailure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
     }];

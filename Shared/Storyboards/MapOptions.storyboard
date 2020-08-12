@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KRS-0L-Lvt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KRS-0L-Lvt">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Map Options View Controller-->
         <scene sceneID="8Am-Gf-tHL">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="KRS-0L-Lvt" customClass="OTMapOptionsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapOptions" modalPresentationStyle="overCurrentContext" id="KRS-0L-Lvt" customClass="OTMapOptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="U2U-eO-hJf"/>
                         <viewControllerLayoutGuide type="bottom" id="Bki-Tw-5Yw"/>
@@ -77,10 +77,13 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="agir_image_help" translatesAutoresizingMaskIntoConstraints="NO" id="XQy-6R-j69">
-                                <rect key="frame" x="16" y="100" width="343" height="173.5"/>
+                                <rect key="frame" x="16" y="100" width="343" height="173"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="750" constant="173" id="7NL-wW-b0p"/>
+                                </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L'essentiel, c'est la rencontre !" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rsh-Yk-cLY" userLabel="POI Label">
-                                <rect key="frame" x="64" y="273.5" width="247.5" height="21"/>
+                                <rect key="frame" x="64" y="273" width="247.5" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -140,7 +143,6 @@
                             <constraint firstItem="Rsh-Yk-cLY" firstAttribute="centerX" secondItem="b4u-bP-vhy" secondAttribute="centerX" id="32P-5E-jWA"/>
                             <constraint firstItem="gL7-9X-HfF" firstAttribute="leading" secondItem="b4u-bP-vhy" secondAttribute="leadingMargin" id="BCm-fg-lJs"/>
                             <constraint firstItem="EHe-Ul-0Ho" firstAttribute="top" secondItem="X0f-Bh-fVG" secondAttribute="bottom" constant="8" id="Bg4-Th-oKi"/>
-                            <constraint firstItem="XQy-6R-j69" firstAttribute="top" secondItem="U2U-eO-hJf" secondAttribute="bottom" constant="100" id="C1w-FN-3og"/>
                             <constraint firstItem="tym-1e-o0T" firstAttribute="centerY" secondItem="e0k-nN-D8h" secondAttribute="centerY" id="FPE-ih-BSB"/>
                             <constraint firstItem="tym-1e-o0T" firstAttribute="trailing" secondItem="e0k-nN-D8h" secondAttribute="leading" constant="-8" id="Fhe-i8-3Mx"/>
                             <constraint firstItem="UgR-hb-UrK" firstAttribute="leading" secondItem="b4u-bP-vhy" secondAttribute="leading" constant="16" id="Fpo-Ci-eA3"/>
@@ -159,6 +161,7 @@
                             <constraint firstItem="XQy-6R-j69" firstAttribute="trailing" secondItem="b4u-bP-vhy" secondAttribute="trailingMargin" id="hpa-fQ-APY"/>
                             <constraint firstItem="shF-PN-TKW" firstAttribute="trailing" secondItem="4ez-Uf-z3D" secondAttribute="trailing" constant="4" id="kbc-zo-PB3"/>
                             <constraint firstItem="Mgn-b7-gAN" firstAttribute="centerY" secondItem="4ez-Uf-z3D" secondAttribute="centerY" id="lpJ-p2-LTE"/>
+                            <constraint firstItem="XQy-6R-j69" firstAttribute="top" secondItem="gL7-9X-HfF" secondAttribute="bottom" constant="28" id="lzv-3g-ieK"/>
                             <constraint firstItem="e0k-nN-D8h" firstAttribute="bottom" secondItem="X0f-Bh-fVG" secondAttribute="top" constant="-8" id="mdm-Og-oPb"/>
                             <constraint firstItem="pVl-d3-s2f" firstAttribute="centerY" secondItem="X0f-Bh-fVG" secondAttribute="centerY" id="r78-Pq-z1u"/>
                             <constraint firstItem="shF-PN-TKW" firstAttribute="centerY" secondItem="4ez-Uf-z3D" secondAttribute="centerY" id="vAZ-IT-cju"/>
@@ -183,6 +186,9 @@
                         <outlet property="togglePOIButton" destination="e0k-nN-D8h" id="7s7-gu-7yp"/>
                         <outlet property="togglePOILabel" destination="tym-1e-o0T" id="WSY-f6-XqL"/>
                         <outlet property="ui_button_show_web" destination="shF-PN-TKW" id="R3Y-Ia-ZIH"/>
+                        <outlet property="ui_constraint_image_height" destination="7NL-wW-b0p" id="Jru-Of-mJn"/>
+                        <outlet property="ui_constraint_image_top" destination="lzv-3g-ieK" id="qz9-uC-HmH"/>
+                        <outlet property="ui_iv_agir" destination="XQy-6R-j69" id="KC6-iA-UVk"/>
                         <outlet property="ui_label_title" destination="Rsh-Yk-cLY" id="peS-A7-76m"/>
                         <outlet property="ui_label_title_button" destination="Mgn-b7-gAN" id="HWe-Dd-Aph"/>
                         <outlet property="ui_label_title_button_close" destination="UgR-hb-UrK" id="5Ox-lM-chB"/>

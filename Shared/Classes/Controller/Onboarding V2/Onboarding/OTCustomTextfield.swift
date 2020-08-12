@@ -13,6 +13,8 @@ class OTCustomTextfield: UITextField {
     let padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     private var titleToolBar = OTLocalisationService.getLocalizedValue(forKey: "close")
     
+    var buttonToolBar:UIBarButtonItem? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = UIColor.appWhite246
@@ -23,15 +25,15 @@ class OTCustomTextfield: UITextField {
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
+        return bounds.inset(by: padding)
     }
     
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-      return UIEdgeInsetsInsetRect(bounds, padding)
+      return bounds.inset(by: padding)
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-      return UIEdgeInsetsInsetRect(bounds, padding)
+      return bounds.inset(by: padding)
     }
 
     var hasDoneButton:Bool = false {
@@ -53,9 +55,9 @@ class OTCustomTextfield: UITextField {
         doneToolbar.barTintColor = ApplicationTheme.shared().backgroundThemeColor
 
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: titleToolBar, style: .plain, target: self, action: #selector(self.doneButtonAction))
+        buttonToolBar = UIBarButtonItem(title: titleToolBar, style: .plain, target: self, action: #selector(self.doneButtonAction))
 
-        let items = [flexSpace, done]
+        let items = [flexSpace, buttonToolBar!]
         doneToolbar.items = items
         doneToolbar.sizeToFit()
 
@@ -63,6 +65,7 @@ class OTCustomTextfield: UITextField {
     }
     
     @objc func doneButtonAction(){
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "validate"), object: nil)
         self.resignFirstResponder()
     }
 }

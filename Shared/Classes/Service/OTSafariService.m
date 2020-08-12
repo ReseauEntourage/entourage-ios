@@ -11,7 +11,6 @@
 #import <SafariServices/SFSafariViewControllerConfiguration.h>
 #import "OTAppDelegate.h"
 #import "OTHTTPRequestManager.h"
-#import "OTSWRevealViewController.h"
 #import "UIColor+entourage.h"
 #import "OTAppConfiguration.h"
 #import "NSUserDefaults+OT.h"

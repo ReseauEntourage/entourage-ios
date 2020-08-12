@@ -11,12 +11,14 @@
 #import "OTUserProfileBehavior.h"
 #import "OTDataSourceBehavior.h"
 #import "OTBaseInfoCell.h"
+#import "TTTAttributedLabel.h"
 
-@interface OTEventInfoCell : OTBaseInfoCell
+@interface OTEventInfoCell : OTBaseInfoCell <TTTAttributedLabelDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblAuthorPrefix;
 @property (nonatomic, weak) IBOutlet UILabel *lblAuthorInfo;
 @property (nonatomic, weak) IBOutlet UILabel *lblInfo;
+@property (nonatomic, weak) IBOutlet TTTAttributedLabel *lblLocation;
 @property (nonatomic, weak) IBOutlet UIImageView *imgIcon;
 
 - (void)configureWith:(OTFeedItem *)item;

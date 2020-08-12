@@ -51,6 +51,13 @@ class OTOnboardingPhoneViewController: UIViewController {
         }
         
         populateViews()
+        OTLogger.logEvent(View_Onboarding_Phone)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(validateTf), name: NSNotification.Name(rawValue: "validate"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func populateViews() {
@@ -65,6 +72,14 @@ class OTOnboardingPhoneViewController: UIViewController {
         ui_tf_phone_prefix.resignFirstResponder()
         ui_tf_phone.resignFirstResponder()
     }
+    
+    @objc func validateTf() {
+        if ui_tf_phone.text?.count ?? 0 >= minimumCharacters  {
+            delegate?.updateButtonNext(isValid: true)
+            delegate?.validatePhoneNumber(prefix: countryCode, phoneNumber:ui_tf_phone.text)
+            delegate?.goNextManually()
+        }
+    }
 }
 
 //MARK: - UITextfieldDelegate -
@@ -78,6 +93,31 @@ extension OTOnboardingPhoneViewController: UITextFieldDelegate {
             delegate?.updateButtonNext(isValid: false)
             delegate?.validatePhoneNumber(prefix: countryCode, phoneNumber: nil)
         }
+        if view.frame.height <= 568 {
+            view.frame.origin.y = view.frame.origin.y + 40
+        }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if view.frame.height <= 568 {
+            view.frame.origin.y = view.frame.origin.y - 40
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if textField == ui_tf_phone {
+            let inputLength = string.count > 0 ? 1 : -1
+            if ((textField.text?.count ?? 0) + inputLength) >= 9 {
+                ui_tf_phone.buttonToolBar?.title = OTLocalisationService.getLocalizedValue(forKey: "next")
+            }
+            else {
+                ui_tf_phone.buttonToolBar?.title = OTLocalisationService.getLocalizedValue(forKey: "close")
+            }
+            textField.reloadInputViews()
+        }
+        
+        return true
     }
 }
 

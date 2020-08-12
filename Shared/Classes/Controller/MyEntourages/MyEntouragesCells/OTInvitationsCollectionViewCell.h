@@ -12,6 +12,7 @@
 @interface OTInvitationsCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *lblUserName;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_entourage_name;
 
 - (void)configureWith:(OTEntourageInvitation *)invitation;
 

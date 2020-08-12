@@ -35,5 +35,26 @@
      ];
 }
 
+- (void)reportEntourage:(NSString*)idString
+            message:(NSString*)message
+           success:(void (^)(OTUser *onboardUser))success
+           failure:(void (^)(NSError *error))failure
+{
+    NSDictionary *parameters = @{@"entourage_report":@{@"message":message}};
+    
+    NSString *url = [NSString stringWithFormat:API_URL_REPORT_ENTOURAGE, idString, TOKEN];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject) {
+     }
+     andFailure:^(NSError *error) {
+         if (failure) {
+             failure(error);
+         }
+     }
+     ];
+}
 
 @end

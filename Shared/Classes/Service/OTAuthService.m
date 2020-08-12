@@ -145,7 +145,7 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
                      user.firebaseProperties = currentUser.firebaseProperties;
                  }
                  if ([responseUser[@"placeholders"] containsObject:@"address"]) {
-                     user.address = currentUser.address;
+                     user.addressPrimary = currentUser.addressPrimary;
                  }
              }
 
@@ -197,6 +197,9 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
 }
 
 - (void)deletePushToken:(NSString *)pushToken forUser:(OTUser *)user {
+    if (pushToken == nil) {
+        return;
+    }
     NSDictionary *parameters =  @{@"application": @{@"push_token": pushToken}};
     NSString *url = [NSString stringWithFormat:@"%@?token=%@", kAPIApps, user.token];
 
@@ -275,10 +278,11 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
      }];
 }
 
-+ (void)updateUserAddressWithPlaceId:(NSString *)placeId
++ (void)updateUserAddressWithPlaceId:(NSString *)placeId isSecondaryAddress:(BOOL) isSecondary
                                completion:(void (^)(NSError *))completion
 {
-    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_ADDRESS, TOKEN];
+    NSString *_url = isSecondary ? API_URL_UPDATE_ADDRESS_SECONDARY : API_URL_UPDATE_ADDRESS_PRIMARY;
+    NSString *url = [NSString stringWithFormat:_url, TOKEN];
 
     NSMutableDictionary *address = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
@@ -290,14 +294,16 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
                                             andSuccess:^(id responseObject) {
                                                 NSDictionary *responseDict = responseObject;
                                                 NSLog(@"Authentication service response : %@", responseDict);
-                                                NSDictionary *responseAddress = responseDict[@"address"];
-                                                OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
-                                                NSDictionary *responseFirebaseProperties = responseDict[@"firebase_properties"];
-                                                OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-                                                user.address = address;
-                                                user.firebaseProperties = responseFirebaseProperties;
-                                                [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+                                                NSDictionary * dictUser = responseDict[@"user"];
+                                                OTUser *newUser = [[OTUser alloc] initWithDictionary:dictUser];
                                                 
+                                                if (newUser.uuid != nil && newUser.uuid.length > 0) {
+                                                    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+                                                    newUser.phone = user.phone;
+                                                                               
+                                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:newUser];
+                                                }
+        
                                                 if (completion) {
                                                     completion(nil);
                                                 }
@@ -311,8 +317,10 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
 }
 
 + (void)updateUserAddressWithName:(NSString *)addressName andLatitude:(NSNumber *) latitude
-                     andLongitude:(NSNumber *) longitude completion:(void (^)(NSError *))completion {
-    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_ADDRESS, TOKEN];
+                     andLongitude:(NSNumber *) longitude isSecondaryAddress:(BOOL) isSecondary completion:(void (^)(NSError *))completion {
+    
+    NSString *_url = isSecondary ? API_URL_UPDATE_ADDRESS_SECONDARY : API_URL_UPDATE_ADDRESS_PRIMARY;
+    NSString *url = [NSString stringWithFormat:_url, TOKEN];
 
     NSMutableDictionary *address = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
@@ -326,14 +334,16 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
                                             andSuccess:^(id responseObject) {
                                                 NSDictionary *responseDict = responseObject;
                                                 NSLog(@"Authentication service response : %@", responseDict);
-                                                NSDictionary *responseAddress = responseDict[@"address"];
-                                                OTAddress *address = [[OTAddress alloc] initWithDictionary:responseAddress];
-                                                NSDictionary *responseFirebaseProperties = responseDict[@"firebase_properties"];
-                                                OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
-                                                user.address = address;
-                                                user.firebaseProperties = responseFirebaseProperties;
-                                                [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
-                                                
+                                                NSDictionary * dictUser = responseDict[@"user"];
+                                                OTUser *newUser = [[OTUser alloc] initWithDictionary:dictUser];
+                                                 
+                                                if (newUser != nil) {
+                                                    OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+                                                    newUser.phone = user.phone;
+                                
+                                                    [[NSUserDefaults standardUserDefaults] setCurrentUser:newUser];
+                                                }
+        
                                                 if (completion) {
                                                     completion(nil);
                                                 }
@@ -346,6 +356,26 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
      ];
 }
 
++(void)deleteUserSecondaryAddressWithCompletion:(void (^)(NSError *))completion {
+    NSString *_url = API_URL_UPDATE_ADDRESS_SECONDARY;
+    NSString *url = [NSString stringWithFormat:_url, TOKEN];
+    [[OTHTTPRequestManager sharedInstance] DELETEWithUrl:url andParameters:nil andSuccess:^(id responseObject) {
+        
+        OTUser *user = [NSUserDefaults standardUserDefaults].currentUser;
+        user.addressSecondary = nil;
+        [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
+        
+        if (completion) {
+            completion(nil);
+        }
+        
+    } andFailure:^(NSError *error) {
+        if (completion) {
+            completion(error);
+        }
+    }];
+}
+
 - (void)updateUserInformationWithUser:(OTUser *)user
                               success:(void (^)(OTUser *user))success
                               failure:(void (^)(NSError *error))failure
@@ -354,6 +384,40 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
     
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     parameters[@"user"] = [user dictionaryForWebservice];
+    
+    [[OTHTTPRequestManager sharedInstance]
+            PATCHWithUrl:url
+            andParameters:parameters
+            andSuccess:^(id responseObject)
+         {
+             if (success) {
+                 // CHECK THIS
+                 NSDictionary *responseDict = responseObject;
+                 NSDictionary *responseUser = responseDict[@"user"];
+                 OTUser *user = [[OTUser alloc] initWithDictionary:responseUser];
+                 success(user);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure) {
+                 failure(error);
+             }
+         }];
+}
+
+- (void)updateUserInterests:(NSArray *)interests
+                              success:(void (^)(OTUser *user))success
+                              failure:(void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_USER, kAPIUserRoute, kAPIMe, TOKEN];
+    
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    NSMutableDictionary *dictInterests = [NSMutableDictionary new];
+    dictInterests[@"interests"] = interests;
+    parameters[@"user"] = dictInterests;
+    
+    NSLog(@"Interests dict : %@",parameters);
     
     [[OTHTTPRequestManager sharedInstance]
             PATCHWithUrl:url
@@ -449,6 +513,46 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
              failure(error);
          }
      }];
+}
+
+- (void)updateUserAssociationInfoWithAssociation:(OTAssociation *)association
+                              success:(void (^)(Boolean isOk))success
+                              failure:(void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:API_URL_USER_UPDATE_ASSOCIATION_INFO, TOKEN];
+    
+    NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    if (association.aid != nil && association.aid.intValue > 0) {
+        parameters[@"partner_id"] = association.aid;
+    }
+    
+    if (association.isCreation) {
+        parameters[@"new_partner_name"] = association.name;
+    }
+    
+    parameters[@"postal_code"] = association.postal_code;
+    parameters[@"partner_role_title"] = association.userRoleTitle;
+    
+    NSLog(@"Parameters post info assos %@",parameters);
+    
+    [[OTHTTPRequestManager sharedInstance]
+            POSTWithUrl:url
+            andParameters:parameters
+            andSuccess:^(id responseObject)
+         {
+             if (success) {
+                 success(YES);
+             }
+             else {
+                 success(NO);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure) {
+                 failure(error);
+             }
+         }];
 }
 
 + (void)prepareUploadPhotoWithSuccess:(void (^)(NSDictionary *infos))success

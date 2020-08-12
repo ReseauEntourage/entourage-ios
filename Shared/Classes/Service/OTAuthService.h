@@ -53,6 +53,10 @@ extern NSString *const kUserAuthenticationLevelAuthenticated;
                               success:(void (^)(OTUser *user))success
                               failure:(void (^)(NSError *error))failure;
 
+- (void)updateUserInterests:(NSArray *)interests
+                            success:(void (^)(OTUser *user))success
+                            failure:(void (^)(NSError *error))failure;
+
 - (void)subscribeToNewsletterWithEmail:(NSString *)email
                                success:(void (^)(BOOL))success
                                failure:(void (^)(NSError *))failure;
@@ -60,13 +64,15 @@ extern NSString *const kUserAuthenticationLevelAuthenticated;
 - (void)checkVersionWithSuccess:(void (^)(BOOL))success
                         failure:(void (^)(NSError *))failure;
 
-+ (void)updateUserAddressWithPlaceId:(NSString *)placeId
++ (void)updateUserAddressWithPlaceId:(NSString *)placeId isSecondaryAddress:(BOOL) isSecondary
                           completion:(void (^)(NSError *))completion;
 
 + (void)updateUserAddressWithName:(NSString *)addressName
                         andLatitude:(NSNumber *) latitude
                         andLongitude:(NSNumber *) longitude
+                        isSecondaryAddress:(BOOL) isSecondary
                         completion:(void (^)(NSError *))completion;
++(void)deleteUserSecondaryAddressWithCompletion:(void (^)(NSError *))completion;
 
 -(void)anonymousAuthWithSuccess:(void (^)(OTUser *))success
                         failure:(void (^)(NSError *))failure;
@@ -76,4 +82,8 @@ extern NSString *const kUserAuthenticationLevelAuthenticated;
 
 +(NSString *)authenticationLevelForUser:(OTUser *)user;
 +(NSString *)currentUserAuthenticationLevel;
+
+- (void)updateUserAssociationInfoWithAssociation:(OTAssociation *)association
+                        success:(void (^)(Boolean isOk))success
+                        failure:(void (^)(NSError *error))failure;
 @end
