@@ -995,12 +995,7 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
     
     func validatePhoneNumber(prefix: String, phoneNumber: String?) {
         if let _phone = phoneNumber {
-            var phoneNb = _phone.trimmingCharacters(in: .whitespaces)
-            if !phoneNb.hasPrefix("+") && phoneNb.hasPrefix("0") {
-                phoneNb.remove(at: .init(encodedOffset: 0))
-            }
-            phoneNb = "\(prefix)\(phoneNb)"
-            self.temporaryUser.phone = phoneNb
+            self.temporaryUser.phone = Utilitaires.validatePhoneFormat(countryCode: prefix, phone: _phone)
             self.temporaryPhone = _phone
             self.temporaryCountryCode = prefix
         }

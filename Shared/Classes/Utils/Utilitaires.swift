@@ -53,4 +53,32 @@ import Foundation
         
         return messageAttributed
     }
+    
+    static func validatePhoneFormat(countryCode:String?, phone:String) -> String {
+        var correctPhone = phone.trimmingCharacters(in: .whitespaces)
+        
+        if correctPhone.starts(with: "0") {
+            //correctPhone.remove(at: .init(encodedOffset: 0))
+            correctPhone.remove(at: .init(utf16Offset: 0, in: correctPhone))
+            if let _code = countryCode {
+                correctPhone = _code + correctPhone
+            }
+            else {
+                correctPhone = "+33\(correctPhone)"
+            }
+        }
+        else if !correctPhone.starts(with: "+") {
+            if let _code = countryCode {
+                correctPhone = _code + correctPhone
+            }
+        }
+        
+        if !correctPhone.starts(with: "+") {
+            correctPhone = "+\(correctPhone)"
+        }
+        
+        
+        
+        return correctPhone
+    }
 }
