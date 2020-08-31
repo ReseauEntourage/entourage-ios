@@ -260,8 +260,8 @@
 "join_entourage_lbl" = "Rejoindre la discussion";
 "join_event_lbl" = "Participez à cet évènement";
 "join_entourage_btn" = "PARTICIPER";
-"join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !\nPourquoi rejoignez-vous cette action ? Ajoutez un petit mot !";
-"join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nAjoutez un petit mot si vous le souhaitez !";
+"join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !\nVous pouvez envoyer un message aux participants, qui apparaîtra dans la conversation de groupe.";
+"join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nVous pouvez envoyer un message aux participants, qui apparaîtra dans la conversation de groupe.";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
 "promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
 "event_title_example" = "Exemple : Soirée jeux entre voisins avec et sans domicile";
@@ -386,7 +386,7 @@
 
 "encounter_fill_all_fields" = "Veuillez remplir ce champ";
 "invite_event_subtitle" = "à participer à cet évènement";
-"invite_action_subtitle" = "à rejoindre cette action";
+"invite_action_subtitle" = "à rejoindre cette action solidaire";
 
 "filter_publish_title" = "Publié par...";
 "filter_all" = "Tous";
@@ -419,6 +419,13 @@
 "addEventDisclaimerFirstDescription" = "Je demande le consentement d’une personne avant de mentionner de ses informations personnelles";
 "addEventDisclaimerSecondDescription" = "Je veille à ce qu’on ne puisse pas identifier ni localiser des personnes en me lisant";
 "addEventDisclaimerThirdDescription" = "L’adresse précise des évènements est montrée";
+//Disclaimer 2
+"addEventDisclaimerFirstTitleBis" = "Recueillir l’accord";
+"addEventDisclaimerSecondTitleBis" = "Sécurité";
+"addEventDisclaimerThirdTitleBis" = "Géolocalisation ?";
+"addEventDisclaimerFirstDescriptionBis" = "Si je souhaite créer une demande d’aide pour quelqu’un d’autre, je dois d’abord recueillir son consentement.";
+"addEventDisclaimerSecondDescriptionBis" = "Je veille à ce qu’on ne puisse pas identifier ni localiser des personnes en me lisant";
+"addEventDisclaimerThirdDescriptionBis" = "La position précise de votre action solidaire est masquée : elle est remplacée par une zone orangée sur la carte";
 
 // Alerts
 "acceptAlert" = "Accepter";
@@ -557,8 +564,8 @@
 "agir_subtitle_event" = "à une date précise";
 "action_title_public" = "Public";
 "action_title_private" = "Privé";
-"action_description_public" = "Toute personne participe à votre action solidaire, sans vérifier son profil au préalable.";
-"action_description_private" = "Vous vérifiez le profil de chaque personne qui souhaite participer à votre action solidaire.";
+"action_description_public" = "Votre action solidaire est ouverte à tout membre du réseau souhaitant participer.";
+"action_description_private" = "Les membres d’Entourage vous demandent votre accord avant de participer.";
 "action_title_pres_de" = "Près de";
 "addEventStartDate" = "Date de début *";
 "addEventEndDate" = "Date de fin";
