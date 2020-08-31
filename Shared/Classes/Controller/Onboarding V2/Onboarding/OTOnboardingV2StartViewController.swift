@@ -350,8 +350,9 @@ class OTOnboardingV2StartViewController: UIViewController {
     }
     
     func update2ndAddress() {
-        OTLogger.logEvent(Action_Onboarding_Action_Zone2_Submit)
+       
         if let _place = temporary2ndGooglePlace {
+             OTLogger.logEvent(Action_Onboarding_Action_Zone2_Submit)
             SVProgressHUD.show()
             OTAuthService.updateUserAddress(withPlaceId: _place.placeID, isSecondaryAddress: true) { (error) in
                 SVProgressHUD.dismiss()
@@ -359,12 +360,16 @@ class OTOnboardingV2StartViewController: UIViewController {
             }
         }
         else if let _lat = self.temporary2ndLocation?.coordinate.latitude, let _long = self.temporary2ndLocation?.coordinate.longitude {
+             OTLogger.logEvent(Action_Onboarding_Action_Zone2_Submit)
             SVProgressHUD.show()
             let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
             OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long), isSecondaryAddress: true) { (error) in
                 SVProgressHUD.dismiss()
                 self.goNextStepSdfNeighbour()
             }
+        }
+        else {
+            self.action_pass(self)
         }
     }
     
