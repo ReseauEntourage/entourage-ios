@@ -12,6 +12,7 @@ import MessageUI
 class OTAssociationDetailViewController: UIViewController {
 
     @objc var association:OTAssociation? = nil
+    @objc var associationId:Int = -1
     @IBOutlet weak var ui_tableview: UITableView!
     
     var hasNeeds = false
@@ -22,8 +23,29 @@ class OTAssociationDetailViewController: UIViewController {
         self.title = OTLocalisationService.getLocalizedValue(forKey: "title_association")
         self.setupCloseModal()
         
+        if association == nil {
+            getAssociationInfos()
+            return
+        }
+        
         if association?.donations_needs?.count != 0 || association?.volunteers_needs?.count != 0 {
             hasNeeds = true
+        }
+    }
+    
+    func getAssociationInfos() {
+        OTAssociationsService.init().getAssociationDetail(withId: Int32(associationId), withSuccess: { (asso) in
+            if asso != nil {
+                self.association = asso
+                if self.association?.donations_needs?.count != 0 || self.association?.volunteers_needs?.count != 0 {
+                    self.hasNeeds = true
+                }
+                DispatchQueue.main.async {
+                    self.ui_tableview.reloadData()
+                }
+            }
+        }) { (error) in
+            Logger.print("Erreur get asso id : \(self.associationId) err: -> \(error)")
         }
     }
 }

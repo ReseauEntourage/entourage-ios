@@ -14,6 +14,7 @@
 #import "OTAPIConsts.h"
 
 NSString *const kAssociations = @"partners";
+NSString *const kAssociation = @"partner";
 
 @implementation OTAssociationsService
 
@@ -58,6 +59,23 @@ NSString *const kAssociations = @"partners";
         if (failure)
             failure(error);
     }];
+}
+
+- (void)getAssociationDetailWithId:(int) partnerId withSuccess: (void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure {
+    NSString *url = [NSString stringWithFormat:API_URL_GET_ASSOCIATION_DETAIL,partnerId, TOKEN];
+    [[OTHTTPRequestManager sharedInstance] GETWithUrl:url andParameters:nil andSuccess:^(id responseObject) {
+        if(success) {
+            NSDictionary *data = responseObject;
+            NSDictionary *dict = data[kAssociation];
+            OTAssociation *association = [[OTAssociation alloc] initWithDictionary:dict];
+            success(association);
+        }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+             failure(error);
+     }];
 }
 
 #pragma mark - private members

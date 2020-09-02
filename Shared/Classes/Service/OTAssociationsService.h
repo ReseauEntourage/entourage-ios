@@ -20,4 +20,5 @@
               withSuccess:(void (^)(OTAssociation *))success
                   failure:(void (^)(NSError *))failure;
 
+- (void)getAssociationDetailWithId:(int) partnerId withSuccess: (void (^)(OTAssociation *))success failure:(void (^)(NSError *))failure;
 @end

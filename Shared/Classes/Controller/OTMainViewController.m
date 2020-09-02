@@ -1145,7 +1145,18 @@
         return;
     }
     [OTLogger logEvent:@"POIView"];
-    [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation.poi];
+    if (annotation.poi.partnerId != nil) {
+        UINavigationController *navVc = [[UIStoryboard storyboardWithName:@"AssociationDetails" bundle:nil] instantiateInitialViewController];
+        
+        OTAssociationDetailViewController *vc =(OTAssociationDetailViewController*) [navVc topViewController];
+        
+        vc.associationId = annotation.poi.partnerId.intValue;
+        
+        [self presentViewController:navVc animated:YES completion:nil];
+    }
+    else {
+        [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation.poi];
+    }
 }
 
 - (CLLocationDistance)mapHeight {
@@ -1581,7 +1592,18 @@
 }
 
 - (void)showPoiDetails:(OTPoi *)poi {
-    [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:poi];
+    if (poi.partnerId != nil) {
+        UINavigationController *navVc = [[UIStoryboard storyboardWithName:@"AssociationDetails" bundle:nil] instantiateInitialViewController];
+        
+        OTAssociationDetailViewController *vc =(OTAssociationDetailViewController*) [navVc topViewController];
+        
+        vc.associationId = poi.partnerId.intValue;
+        
+        [self presentViewController:navVc animated:YES completion:nil];
+    }
+    else {
+        [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:poi];
+    }
 }
 
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem {
