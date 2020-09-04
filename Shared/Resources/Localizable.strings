@@ -787,8 +787,8 @@
 "title_asso_address" = "Adresse";
 
 //Home new
-"tabbar_home" = "à proximité";
-"tabbar_guide" = "annuaire";
+"tabbar_home" = "actus";
+"tabbar_guide" = "guide";
 "tabbar_message" = "messages";
 "tabbar_profil" = "profil";
 
