@@ -78,4 +78,8 @@
                  fromRank:(NSNumber *)rank
                   success:(void (^)(void))success
                   failure:(void (^)(NSError *))failure;
+
+- (void)reopenEntourage:(OTEntourage *)entourage
+                success:(void (^)(OTEntourage *))success
+                failure:(void (^)(NSError *))failure;
 @end
