@@ -194,7 +194,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.hasToShowTopInformationGDS = YES;
+    self.hasToShowTopInformationGDS = NO;
     
     self.isFirstInitView = YES;
     
