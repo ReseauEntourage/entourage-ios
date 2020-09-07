@@ -51,8 +51,9 @@
 "alreadyRegistereMessageGoBack" = "Le numéro est déjà enregistré, nous allons vous rediriger vers la page de connexion.";
 
 //Login next
-"login_info_pop_action" = "Vous pouvez choisir votre mode d'action dans votre profil.";
-"login_pop_information" = "Information";
+"login_info_pop_action" = "Depuis votre Profil, vous pouvez personnaliser votre fil d’actus et les recommandations reçues. Choisissez en toute confidentialité si vous êtes actuellement : voisin solidaire, personne dans le besoin, association.";
+"login_pop_information" = "Nouveau ! Adaptez Entourage à vos envies et besoins !";
+"login_info_pop_validate" = "Compris !";
 "login_email_pwd_title" = "Ok super !";
 "login_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
 
@@ -286,7 +287,7 @@
 "item_closed" = "Clôturé";
 "item_cancel_join" = "Retirer ma demande";
 "request_to_join_popup_placeholder" = "Votre message…";
-"item_option_reopen" = "Rouvrir un entourage";
+"item_option_reopen" = "Rouvrir";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";

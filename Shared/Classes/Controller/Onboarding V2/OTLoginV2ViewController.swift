@@ -238,7 +238,7 @@ class OTLoginV2ViewController: UIViewController {
                     let message = OTLocalisationService.getLocalizedValue(forKey: "login_info_pop_action")
                     let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "login_pop_information"), message: message, preferredStyle: .alert)
                     
-                    let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"OK"), style: .default, handler: { (action) in
+                    let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"login_info_pop_validate"), style: .default, handler: { (action) in
                         self.goalRealMain()
                     })
                     
