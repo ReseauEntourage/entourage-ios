@@ -13,6 +13,7 @@
 #import "OTInviteByPhoneViewController.h"
 #import "OTInviteSuccessViewController.h"
 #import "UIStoryboard+entourage.h"
+#import "entourage-Swift.h"
 
 @interface OTInviteBehavior ()
 
@@ -104,6 +105,19 @@
 - (void)share {
     [self.shareBehavior configureWith:self.feedItem];
     [self.shareBehavior shareMember:nil];
+    [self.owner dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) shareEntourage {
+    UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
+    OTShareEntourageViewController *controller = (OTShareEntourageViewController *)[storyboard instantiateViewControllerWithIdentifier:@"OTShareListEntouragesVC"];
+    controller.feedItem = self.feedItem;
+    controller.delegate = self;
+    if (@available(iOS 13.0, *)) {
+        [controller setModalInPresentation:YES];
+    }
+    
+    [self.owner.navigationController presentViewController:controller animated:YES completion:nil];
 }
 
 #pragma mark - InviteSuccessDelegate implementation

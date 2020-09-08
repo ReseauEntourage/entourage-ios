@@ -187,4 +187,24 @@
     self.cancelButton.backgroundColor = color;
 }
 
+#pragma mark - InvitesourceDelegate
+-(void) shareEntourage {
+    UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
+    OTShareEntourageViewController *controller = (OTShareEntourageViewController *)[storyboard instantiateViewControllerWithIdentifier:@"OTShareListEntouragesVC"];
+    controller.feedItem = self.feedItem;
+    
+    if (@available(iOS 13.0, *)) {
+        [controller setModalInPresentation:YES];
+    }
+    [self presentViewController:controller animated:YES completion:^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+
+- (void)share {
+    [self.shareItem configureWith:self.feedItem];
+    [self.shareItem shareMember:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

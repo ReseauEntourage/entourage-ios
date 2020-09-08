@@ -54,10 +54,16 @@
         [self.delegate inviteByPhone];
 }
 
-- (IBAction)share:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (IBAction)action_share:(id)sender {
     if(self.delegate)
         [self.delegate share];
+}
+
+- (IBAction)action_share_entourage:(id)sender {
+    if(self.delegate) {
+       [self.delegate shareEntourage];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end

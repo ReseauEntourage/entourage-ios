@@ -90,4 +90,7 @@
 //Upload Photo
 #define API_URL_USER_PREPARE_AVATAR_UPLOAD @"users/me/presigned_avatar_upload.json"
 
+//Sharing Entourage
+#define API_URL_SHARINGS    @"sharing/groups?token=%@"
+
 #endif /* OTAPIConsts_h */

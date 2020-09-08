@@ -13,6 +13,8 @@
 #import "OTActivityProvider.h"
 #import "OTGroupSharingFormatter.h"
 #import "entourage-Swift.h"
+#import "OTPublicFeedItemViewController.h"
+#import "OTChangeStateViewController.h"
 
 @interface OTShareFeedItemBehavior ()
 
@@ -33,10 +35,18 @@
 }
 
 - (void)sharePublic:(id)sender {
-    [OTLogger logEvent:@"OpenNativeShare"];
-    [OTLogger logEvent:@"ShareLinkAsNonMember"];
-    NSString *content = [OTGroupSharingFormatter groupShareText:(OTEntourage *)self.feedItem];
-    [self share:content excludedActivities:@[UIActivityTypeCopyToPasteboard]];
+    UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
+    OTInviteSourceViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OTShareNew"];
+    
+    if ([self.owner isKindOfClass:[OTPublicFeedItemViewController class]]) {
+        vc.delegate = ((OTPublicFeedItemViewController*) self.owner).inviteBehavior;
+    }
+    else if([self.owner isKindOfClass:[OTChangeStateViewController class]]) {
+        vc.delegate = ((OTChangeStateViewController*)self.owner);
+    }
+    
+    vc.feedItem = self.feedItem;
+    [self.owner presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)shareMember:(id)sender {

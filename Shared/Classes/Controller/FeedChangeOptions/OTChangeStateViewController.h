@@ -10,8 +10,9 @@
 #import "OTFeedItem.h"
 #import "OTNextStatusButtonBehavior.h"
 #import "OTEditEntourageBehavior.h"
+#import "OTInviteSourceViewController.h"
 
-@interface OTChangeStateViewController : UIViewController
+@interface OTChangeStateViewController : UIViewController <InviteSourceDelegate>
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, strong) OTEditEntourageBehavior *editEntourageBehavior;
