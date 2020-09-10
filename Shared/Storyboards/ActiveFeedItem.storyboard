@@ -1498,7 +1498,7 @@
                                             <constraint firstAttribute="width" constant="210" id="iTB-M6-6hh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
-                                        <state key="normal" title="Partager sur entourage">
+                                        <state key="normal" title="Partager sur Entourage">
                                             <color key="titleColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -2153,7 +2153,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eZd-x6-aVD">
-                                <rect key="frame" x="20" y="223.66666666666663" width="374" height="289"/>
+                                <rect key="frame" x="20" y="224" width="374" height="288"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SrH-rW-t7h">
                                         <rect key="frame" x="10" y="10" width="30" height="30"/>
@@ -2167,7 +2167,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAM-v8-2yP">
-                                        <rect key="frame" x="15" y="154.00000000000003" width="344" height="50"/>
+                                        <rect key="frame" x="15" y="153" width="344" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="304" id="9lt-Nk-ywP"/>
@@ -2187,10 +2187,10 @@
                                         </userDefinedRuntimeAttributes>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="aga-9p-UN2"/>
                                                 <exclude reference="9lt-Nk-ywP"/>
-                                                <exclude reference="cMd-ui-qDW"/>
                                                 <exclude reference="KII-Dh-ShV"/>
+                                                <exclude reference="aga-9p-UN2"/>
+                                                <exclude reference="cMd-ui-qDW"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -2198,14 +2198,14 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_entourage" translatesAutoresizingMaskIntoConstraints="NO" id="XO7-ex-FXD">
-                                        <rect key="frame" x="35" y="166.33333333333334" width="25" height="25"/>
+                                        <rect key="frame" x="35" y="165.66666666666669" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="JQb-LF-rPo"/>
                                             <constraint firstAttribute="width" constant="25" id="LGx-A0-N0i"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5Y-S4-ObK">
-                                        <rect key="frame" x="15" y="219.00000000000003" width="344" height="49.999999999999972"/>
+                                        <rect key="frame" x="15" y="218" width="344" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="2El-d0-j5k"/>
@@ -2225,9 +2225,9 @@
                                         </userDefinedRuntimeAttributes>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="2El-d0-j5k"/>
                                                 <exclude reference="b2E-Cq-wRq"/>
                                                 <exclude reference="bKm-mA-l3J"/>
-                                                <exclude reference="2El-d0-j5k"/>
                                                 <exclude reference="vQC-FU-Lss"/>
                                             </mask>
                                         </variation>
@@ -2236,19 +2236,19 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invitez vos amis " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drK-gp-pc1">
-                                        <rect key="frame" x="15" y="60.000000000000028" width="344" height="36"/>
+                                        <rect key="frame" x="15" y="60" width="344" height="35"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="30"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="à rejoindre cette action !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJK-Ya-dio">
-                                        <rect key="frame" x="15" y="104.00000000000003" width="344" height="20"/>
+                                        <rect key="frame" x="15" y="103" width="344" height="20"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_native" translatesAutoresizingMaskIntoConstraints="NO" id="iTL-JL-gtc">
-                                        <rect key="frame" x="35" y="231.33333333333334" width="25" height="25.000000000000028"/>
+                                        <rect key="frame" x="35" y="230.66666666666669" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="U5r-L2-dnb"/>
                                             <constraint firstAttribute="width" constant="25" id="WWk-jI-PPb"/>
