@@ -325,6 +325,10 @@ workflows:
         inputs:
         - export_method: ad-hoc
     - deploy-to-bitrise-io: {}
+    envs:
+    - opts:
+        is_expand: false
+      BITRISE_SCHEME: EntourageBeta
   BETA:
     steps:
     - trigger-bitrise-workflow:
