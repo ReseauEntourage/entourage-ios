@@ -323,7 +323,7 @@ workflows:
             "$BITRISEIO_APPCONFIGURATIONS_URL"
     - xcode-archive:
         inputs:
-        - export_method: app-store
+        - export_method: ad-hoc
     - deploy-to-bitrise-io: {}
   BETA:
     steps:
