@@ -165,7 +165,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)showReportButton {
-    UIBarButtonItem *reportButton = [UIBarButtonItem createWithImageNamed:@"flag" withTarget:self andAction:@selector(sendReportMail) changeTintColor:YES];
+    UIBarButtonItem *reportButton = [UIBarButtonItem createWithImageNamed:@"report_user" withTarget:self andAction:@selector(sendReportMail) changeTintColor:YES];
     [self.navigationItem setRightBarButtonItem:reportButton];
 }
 
