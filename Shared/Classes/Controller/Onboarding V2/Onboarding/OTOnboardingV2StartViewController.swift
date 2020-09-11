@@ -466,6 +466,7 @@ class OTOnboardingV2StartViewController: UIViewController {
         
         UserDefaults.standard.set(userTypeSelected.rawValue, forKey: "userType")
         UserDefaults.standard.set(true, forKey: "isFromOnboarding")
+        UserDefaults.standard.set(false, forKey: "checkAfterLogin")
         
         let user = UserDefaults.standard.currentUser
         

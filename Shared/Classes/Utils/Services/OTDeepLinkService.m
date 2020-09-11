@@ -19,6 +19,7 @@
 #import "OTTutorialViewController.h"
 #import "OTSafariService.h"
 #import "OTAPIErrorDomain.h"
+#import "OTUserEditViewController.h"
 
 @interface OTDeepLinkService ()
 
@@ -85,7 +86,7 @@
     return [OTAppState getTopViewController];
 }
 
-- (void)showProfileFromAnywhereForUser:(NSString *)userId {
+- (void)showProfileFromAnywhereForUser:(NSString *)userId isFromLaunch:(BOOL)isFromLaunch {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser.isAnonymous && [userId isEqualToString:currentUser.uuid]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
@@ -95,6 +96,8 @@
 
     UIStoryboard *userProfileStorybard = [UIStoryboard storyboardWithName:@"UserProfileEditor" bundle:nil];
     UINavigationController *rootUserProfileController = (UINavigationController *)[userProfileStorybard instantiateInitialViewController];
+    
+    ((OTUserEditViewController*)rootUserProfileController.topViewController).isFromLaunch = isFromLaunch ;
     
     [self showControllerFromAnywhere:rootUserProfileController];
 }
@@ -156,7 +159,7 @@
         [self openWithWebView:url];
         
     } else if ([key isEqualToString:@"profile"]) {
-        [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].uuid];
+        [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].uuid isFromLaunch:NO];
         
     } else if ([key isEqualToString:@"messages"]) {
         if ([NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
@@ -181,7 +184,7 @@
         }
     } else if ([key isEqualToString:@"user"] || [key isEqualToString:@"users"]) {
         if (pathComponents != nil && pathComponents.count >= 2) {
-            [self showProfileFromAnywhereForUser:pathComponents[1]];
+            [self showProfileFromAnywhereForUser:pathComponents[1] isFromLaunch:NO];
         }
     } else if ([key isEqualToString:@"guide"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
@@ -195,6 +198,10 @@
     } else if([key isEqualToString:@"events"]) {
         OTMainViewController *mainViewController = [self popToMainViewController];
         [mainViewController switchToEvents];
+    }
+    else if ([key isEqualToString:@"profileAction"]) {
+        [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].uuid isFromLaunch:YES];
+        
     }
 }
 

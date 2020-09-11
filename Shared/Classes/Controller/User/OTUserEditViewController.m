@@ -84,6 +84,11 @@ typedef NS_ENUM(NSInteger) {
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
     [self setupSections];
     [self.tableView reloadData];
+    
+    if (self.isFromLaunch) {
+        self.isFromLaunch = NO;
+        [self actionModifyType:self];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

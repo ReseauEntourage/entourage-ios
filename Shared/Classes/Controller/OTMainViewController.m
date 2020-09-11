@@ -219,6 +219,33 @@
          object:nil];
 }
 
+-(void)checkProfil {
+    BOOL isAfterLogin = [[NSUserDefaults standardUserDefaults] boolForKey: @"checkAfterLogin"];
+    if (isAfterLogin) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"checkAfterLogin"];
+        
+        OTUser * currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+        
+        if (currentUser.goal == nil || currentUser.goal.length == 0) {
+            NSString *message = OTLocalizedString(@"login_info_pop_action");
+            
+            UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"login_pop_information") message:message preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *action = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_info_entourage_custom_yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                NSURL *deepL = [NSURL URLWithString:@"entourage://profileAction"];
+                [[OTDeepLinkService new] handleDeepLink:deepL];
+            }];
+            UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_info_entourage_custom_no") style:UIAlertActionStyleDefault handler:nil];
+            
+            [alertVC addAction:actionCancel];
+            [alertVC addAction:action];
+            
+            [self presentViewController:alertVC animated:YES completion:nil];
+        }
+    }
+}
+
 -(void) showAllsFromNotification {
     [self action_show_all:self];
     [self showFeedsList];
@@ -553,6 +580,9 @@
     [self configureNavigationBar];
     [self checkIfShouldDisableFeedsAndMap];
     
+    dispatch_async(dispatch_get_main_queue(), ^() {
+        [self checkProfil];
+    });
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

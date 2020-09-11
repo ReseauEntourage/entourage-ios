@@ -22,7 +22,7 @@
 
 - (UIViewController *)getTopViewController;
 - (OTMainViewController *)popToMainViewController;
-- (void)showProfileFromAnywhereForUser:(NSString *)userId;
+- (void)showProfileFromAnywhereForUser:(NSString *)userId isFromLaunch:(BOOL) isFromLaunch;
 - (void)handleDeepLink:(NSURL *)url;
 + (BOOL)isUniversalLink:(NSURL *)url;
 - (void)handleUniversalLink:(NSURL *)url;

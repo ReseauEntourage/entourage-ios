@@ -224,6 +224,8 @@ class OTLoginV2ViewController: UIViewController {
             UserDefaults.standard.temporaryUser = nil
             UserDefaults.standard.setFirstLoginState(!isFirstlogin)
             
+            UserDefaults.standard.set(true, forKey: "checkAfterLogin")
+            
             OTLogger.logEvent(Action_Login_Success)
             
             if OTAppConfiguration.supportsTourFunctionality() {
@@ -234,20 +236,6 @@ class OTLoginV2ViewController: UIViewController {
                 self.goLoginNext(user:user)
             }
             else {
-                if user?.goal == nil || user?.goal?.count == 0 {
-                    let message = OTLocalisationService.getLocalizedValue(forKey: "login_info_pop_action")
-                    let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "login_pop_information"), message: message, preferredStyle: .alert)
-                    
-                    let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"login_info_pop_validate"), style: .default, handler: { (action) in
-                        self.goalRealMain()
-                    })
-                    
-                    alertvc.addAction(action)
-                    
-                    self.present(alertvc, animated: true, completion: nil)
-                    return
-                }
-                
                 self.goalRealMain()
             }
             
