@@ -14,6 +14,7 @@
 
 #define FEEDITEM_STATUS_ACTIVE @"active"
 #define FEEDITEM_STATUS_CLOSED @"closed"
+#define FEEDITEM_STATUS_OPEN @"open"
 
 #define JOIN_ACCEPTED @"accepted"
 #define JOIN_PENDING @"pending"

@@ -71,9 +71,19 @@
     [self.toggleShareEntourageBehavior toggle:canShare animated:NO];
     [self.togglePromoteEntourageBehavior toggle:canPromote animated:NO];
     
-    [self.shareBtn addTarget:self.shareItem
-                      action:@selector(sharePublic:)
-            forControlEvents:UIControlEventTouchUpInside];
+    //Hide share / edit is entourage Closed
+    BOOL isClosed = [self.feedItem.status isEqualToString:FEEDITEM_STATUS_CLOSED];
+    
+    if (!isClosed) {
+        [self.shareBtn addTarget:self.shareItem
+                  action:@selector(sharePublic:)
+        forControlEvents:UIControlEventTouchUpInside];
+    }
+    else {
+        [self.toggleEditBehavior toggle:NO animated:NO];
+        [self.toggleShareEntourageBehavior toggle:NO animated:NO];
+    }
+    
     
     [self.nextStatusBehavior configureWith:self.feedItem andProtocol:self.delegate];
     
@@ -175,6 +185,26 @@
         [button setTitleColor:color forState:UIControlStateNormal];
     }
     self.cancelButton.backgroundColor = color;
+}
+
+#pragma mark - InvitesourceDelegate
+-(void) shareEntourage {
+    UIStoryboard *storyboard = [UIStoryboard activeFeedsStoryboard];
+    OTShareEntourageViewController *controller = (OTShareEntourageViewController *)[storyboard instantiateViewControllerWithIdentifier:@"OTShareListEntouragesVC"];
+    controller.feedItem = self.feedItem;
+    
+    if (@available(iOS 13.0, *)) {
+        [controller setModalInPresentation:YES];
+    }
+    [self presentViewController:controller animated:YES completion:^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+
+- (void)share {
+    [self.shareItem configureWith:self.feedItem];
+    [self.shareItem shareMember:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

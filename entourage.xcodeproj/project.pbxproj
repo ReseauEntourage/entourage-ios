@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
+		2B05CBCF25067F490065E8D3 /* OTShareEntourageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */; };
+		2B05CBD1250684840065E8D3 /* OTSharingEntourageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBD0250684840065E8D3 /* OTSharingEntourageTableViewCell.swift */; };
+		2B05CBD3250691AB0065E8D3 /* OTShareEntourageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBD2250691AB0065E8D3 /* OTShareEntourageService.swift */; };
 		2B1013F42445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1013F32445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift */; };
 		2B19CF10249CC34C00CE34BB /* OTUserEditZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19CF0F249CC34C00CE34BB /* OTUserEditZoneCell.swift */; };
 		2B19CF12249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19CF11249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift */; };
@@ -1008,6 +1011,9 @@
 		1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = entourage.entitlements; sourceTree = "<group>"; };
 		2A4E5B32B53E7E30C72258C3 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
+		2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTShareEntourageViewController.swift; sourceTree = "<group>"; };
+		2B05CBD0250684840065E8D3 /* OTSharingEntourageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSharingEntourageTableViewCell.swift; sourceTree = "<group>"; };
+		2B05CBD2250691AB0065E8D3 /* OTShareEntourageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTShareEntourageService.swift; sourceTree = "<group>"; };
 		2B09E99C248E62E8003BA7C0 /* Analytics_keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Analytics_keys.h; sourceTree = "<group>"; };
 		2B1013F32445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPreOnboardingV2ChoiceViewController.swift; sourceTree = "<group>"; };
 		2B19CF0F249CC34C00CE34BB /* OTUserEditZoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTUserEditZoneCell.swift; sourceTree = "<group>"; };
@@ -2528,6 +2534,8 @@
 				A202E8822085D2C40058F32C /* OTInviteSuccessViewController.m */,
 				A202E89B2085D2C40058F32C /* OTMapViewController.h */,
 				A202E87B2085D2C40058F32C /* OTMapViewController.m */,
+				2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */,
+				2B05CBD0250684840065E8D3 /* OTSharingEntourageTableViewCell.swift */,
 			);
 			path = ActiveFeedItem;
 			sourceTree = "<group>";
@@ -2865,6 +2873,7 @@
 				A202E9792085D2C60058F32C /* OTUserService.m */,
 				A296B9392091ABDD00F6AFBD /* OTLocalisationService.h */,
 				A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */,
+				2B05CBD2250691AB0065E8D3 /* OTShareEntourageService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -4506,6 +4515,7 @@
 				A202EC392085D2C80058F32C /* OTEncounterAnnotation.m in Sources */,
 				A202EC2D2085D2C80058F32C /* MKMapView+entourage.m in Sources */,
 				A202EC6B2085D2C80058F32C /* OTInvitationsCellProviderBehavior.m in Sources */,
+				2B05CBCF25067F490065E8D3 /* OTShareEntourageViewController.swift in Sources */,
 				A202EB0D2085D2C70058F32C /* OTMyEntouragesOptionsViewController.m in Sources */,
 				A202EBAF2085D2C80058F32C /* OTImageFeedItemsFilterCell.m in Sources */,
 				A202EC132085D2C80058F32C /* OTSafariService.m in Sources */,
@@ -4648,7 +4658,9 @@
 				A202EB7D2085D2C80058F32C /* OTUserViewController.m in Sources */,
 				2BE75F3524C84C5100D4C856 /* OTSettingsDebugTableViewCell.swift in Sources */,
 				A202EAF72085D2C70058F32C /* OTAddressBookPhone.m in Sources */,
+				2B05CBD1250684840065E8D3 /* OTSharingEntourageTableViewCell.swift in Sources */,
 				A202EC9F2085D2C80058F32C /* OTPublicInfoCellProvider.m in Sources */,
+				2B05CBD3250691AB0065E8D3 /* OTShareEntourageService.swift in Sources */,
 				A202EC812085D2C80058F32C /* OTSolidarityGuideFiltersCellProvider.m in Sources */,
 				A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */,
 				A202EBA72085D2C80058F32C /* OTPopupViewController.swift in Sources */,

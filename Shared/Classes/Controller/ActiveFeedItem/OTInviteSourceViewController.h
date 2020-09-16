@@ -13,6 +13,7 @@
 - (void)inviteContactsFromViewController:(UIViewController*)viewController;
 - (void)inviteByPhone;
 - (void)share;
+- (void)shareEntourage;
 
 @end
 

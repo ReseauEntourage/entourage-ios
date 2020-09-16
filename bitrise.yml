@@ -3,94 +3,17 @@
     default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
     trigger_map:
     - push_branch: develop
-      workflow: Entourage-Beta
+      workflow: dev_entourage
+    - push_branch: "*EN-*"
+      workflow: dev_entourage
     - push_branch: master_pfp
-      workflow: PFP-beta
+      workflow: dev_pfp
     workflows:
-      Entourage-TestFlight:
+      dev_entourage:
         steps:
         - activate-ssh-key:
             run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-        - git-clone:
-            inputs:
-            - commit: ''
-            - tag: ''
-        - cache-pull: {}
-        - cocoapods-install:
-            inputs:
-            - verbose: 'false'
-        - certificate-and-profile-installer: {}
-        - script:
-            inputs:
-            - content: |-
-                #!/bin/bash
-                # fail if any commands fails
-                set -e
-                # debug log
-                #set -x
-    
-                echo "Download App credentials"
-    
-                app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
-    
-                # download the files
-                wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
-        - xcode-archive:
-            inputs:
-            - export_method: app-store
-        - deploy-to-bitrise-io:
-            inputs:
-            - notify_user_groups: none
-            - deploy_path: "$BITRISE_IPA_PATH"
-        - deploy-to-itunesconnect-application-loader:
-            inputs:
-            - password: "$FASTLANE_PASSWORD"
-            - itunescon_user: "$APPLE_ID"
-        - deploy-to-bitrise-io:
-            is_always_run: false
-            inputs:
-            - notify_user_groups: none
-        - slack:
-            inputs:
-            - channel: "#iosdev"
-            - from_username: Entourage-Beta
-            - from_username_on_error: Entourage-Beta
-            - message: |-
-                New *Entourage-Beta DEV* iOS build is available: $BITRISE_BUILD_NUMBER  here:
-                $BITRISE_APP_URL
-            - message_on_error: Oups, build has failed for Entourage iOS... @francoispellissier
-                @gregoire
-            - pretext: "*Entourage-Beta Build Succeeded!*"
-            - pretext_on_error: "*Build Failed for Entourage Beta!*"
-            - api_token: "$SLACK_BOT_API_TOKEN"
-            - fields: |
-                App|${BITRISE_APP_TITLE}
-                Branch|${BITRISE_GIT_BRANCH}
-                Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
-                Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
-        - git-tag-project-version-and-build-number@1:
-            inputs:
-            - bitrise_tag_info_plist_path: entourage-Info.plist
-            - bitrise_tag_format: Ent_VERSION
-        - firebase-dsym-upload@1:
-            inputs:
-            - fdu_fabric_location: "./Pods/Fabric/upload-symbols"
-            - fdu_google_services_location: "./entourage/Settings/Environment"
-            is_always_run: true
-        - cache-push:
-            is_always_run: true
-      Entourage-Beta:
-        steps:
-        - activate-ssh-key:
-            run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-        - git-clone:
-            inputs:
-            - commit: ''
-            - tag: ''
-        - cache-pull: {}
-        - cocoapods-install:
-            inputs:
-            - verbose: 'false'
+        - git-clone: {}
         - ruby-script:
             inputs:
             - ruby_content: |-
@@ -139,46 +62,14 @@
                   )
                 end
             - gemfile_content: ''
-        - certificate-and-profile-installer: {}
-        - script:
+        - cache-pull: {}
+        - install-missing-android-tools: {}
+        - gradle-runner:
             inputs:
-            - content: |-
-                #!/bin/bash
-                # fail if any commands fails
-                set -e
-                # debug log
-                #set -x
-    
-                echo "Download App credentials"
-    
-                app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
-    
-                # download the fileS
-                wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
-        - script:
-            inputs:
-            - content: |-
-                #!/bin/bash
-                # fail if any commands fails
-                set -e
-                # debug log
-                #set -x
-    
-                echo "Install dependencies"
-    
-                #brew install librsvg
-                #brew upgrade imagemagick
-                #gem install badge
-    
-                curl https://codeload.github.com/ReseauEntourage/badge/tar.gz/master | tar xz
-                pushd badge-master/
-                gem build badge.gemspec
-                gem install badge-0.9.1.gem
-                popd
-                rm -r badge-master/
-        - fastlane:
-            inputs:
-            - lane: beta
+            - apk_file_include_filter: ''
+            - app_file_include_filter: "*.apk"
+            - gradle_options: "--stacktrace"
+            - gradle_task: "$GRADLE_TASK"
         - deploy-to-bitrise-io: {}
         - post-jira-comment-with-build-details:
             inputs:
@@ -188,32 +79,34 @@
             - issue_keys: "$JIRA_ISSUE_KEYS"
         - slack:
             inputs:
-            - channel: "#iosdev"
-            - from_username: Entourage-Beta
-            - from_username_on_error: Entourage-Beta
+            - webhook_url: ''
+            - from_username: Bitrise
+            - from_username_on_error: Bitrise
             - message: |-
-                New *Entourage-Beta DEV* iOS build is available: $BITRISE_BUILD_NUMBER  here:
+                New Entourage DEV android build is available: $BITRISE_BUILD_NUMBER  here:
                 $BITRISE_APP_URL
-            - message_on_error: Oups, build has failed for Entourage iOS... @francoispellissier
-                @gregoire
-            - pretext: "*Entourage-Beta Build Succeeded!*"
-            - pretext_on_error: "*Build Failed for Entourage Beta!*"
-            - api_token: "$SLACK_BOT_API_TOKEN"
+            - message_on_error: 'Oups, build has failed for Entourage android... @here '
+            - icon_url: ''
+            - icon_url_on_error: ''
+            - pretext_on_error: "*Entourage Build Failed!*"
+            - pretext: "*Build Succeeded!* (Entourage dev only)"
             - fields: |
                 App|${BITRISE_APP_TITLE}
                 Branch|${BITRISE_GIT_BRANCH}
                 Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
                 Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
+            - api_token: "$SLACK__BOT_API_TOKEN"
+            - channel: "#androiddev"
         - cache-push: {}
-      PFP-beta:
+        envs:
+        - opts:
+            is_expand: false
+          GRADLE_TASK: assembleEntourageProdRelease assembleEntourageStagingRelease
+      dev_pfp:
         steps:
         - activate-ssh-key:
             run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
         - git-clone: {}
-        - cache-pull: {}
-        - cocoapods-install:
-            inputs:
-            - verbose: 'false'
         - ruby-script:
             inputs:
             - ruby_content: |-
@@ -262,46 +155,13 @@
                   )
                 end
             - gemfile_content: ''
-        - certificate-and-profile-installer: {}
-        - script:
+        - cache-pull: {}
+        - install-missing-android-tools: {}
+        - gradle-runner:
             inputs:
-            - content: |-
-                #!/bin/bash
-                # fail if any commands fails
-                set -e
-                # debug log
-                #set -x
-    
-                echo "Download App credentials"
-    
-                app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
-    
-                # download the fileS
-                wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
-        - script:
-            inputs:
-            - content: |-
-                #!/bin/bash
-                # fail if any commands fails
-                set -e
-                # debug log
-                #set -x
-    
-                echo "Install dependencies"
-    
-                #brew install librsvg
-                #brew upgrade imagemagick
-                #gem install badge
-    
-                curl https://codeload.github.com/ReseauEntourage/badge/tar.gz/master | tar xz
-                pushd badge-master/
-                gem build badge.gemspec
-                gem install badge-0.9.1.gem
-                popd
-                rm -r badge-master/
-        - fastlane:
-            inputs:
-            - lane: pfp_beta
+            - apk_file_include_filter: ''
+            - app_file_include_filter: "*.apk"
+            - gradle_task: "$GRADLE_TASK"
         - deploy-to-bitrise-io: {}
         - post-jira-comment-with-build-details:
             inputs:
@@ -311,92 +171,188 @@
             - issue_keys: "$JIRA_ISSUE_KEYS"
         - slack:
             inputs:
-            - channel: "#iosdev"
-            - from_username: Voisin-Age Beta
-            - from_username_on_error: Voisin-Age Beta
+            - webhook_url: ''
+            - from_username: Bitrise
+            - from_username_on_error: Bitrise
             - message: |-
-                New *PFP dev* iOS build is available: $BITRISE_BUILD_NUMBER  here:
+                New PFP DEV android build is available: $BITRISE_BUILD_NUMBER  here:
                 $BITRISE_APP_URL
-            - message_on_error: Oups, build has failed for PFP iOS... @francoispellissier
-                @gregoire
-            - pretext: "*Build Succeeded for Voisin-Age Beta!*"
-            - pretext_on_error: "*Build Failed for Voisin-Age Beta!*"
-            - color: "#00ABF0"
-            - api_token: "$SLACK_BOT_API_TOKEN"
+            - message_on_error: 'Oups, build has failed for PFP android... @here '
+            - icon_url: ''
+            - icon_url_on_error: ''
+            - pretext_on_error: "*PFP : Build Failed!*"
+            - pretext: "*Build Succeeded!* (PFP dev only)"
             - fields: |
                 App|${BITRISE_APP_TITLE}
                 Branch|${BITRISE_GIT_BRANCH}
                 Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
                 Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
+            - api_token: "$SLACK__BOT_API_TOKEN"
+            - channel: "#androiddev"
         - cache-push: {}
         envs:
         - opts:
             is_expand: false
-          FASTLANE_LANE: pfp_beta
-        - opts:
-            is_expand: false
-          BITRISE_SCHEME: PfpStore
-      PFP-testflight:
+          GRADLE_TASK: assemblePfpProdRelease assemblePfpStagingRelease
+      develop:
+        steps:
+        - trigger-bitrise-workflow:
+            inputs:
+            - workflow_id: dev_entourage
+            - api_token: "$BUILD_TRIGGER"
+        - trigger-bitrise-workflow:
+            inputs:
+            - workflow_id: dev_pfp
+            - api_token: "$BUILD_TRIGGER"
+      prod_entourage_tag:
         steps:
         - activate-ssh-key:
             run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
         - git-clone: {}
-        - cache-pull: {}
-        - cocoapods-install:
+        - git-tag@1:
             inputs:
-            - verbose: 'false'
-        - certificate-and-profile-installer: {}
-        - script:
+            - tag_message: "Push to GooglePlay: $BITRISE_APP_TITLE from this branch: $BITRISE_GIT_BRANCH
+                \nBuild number : $BITRISE_BUILD_NUMBER"
+            - tag: BitrisePush_$BITRISE_BUILD_NUMBER
+      prod_entourage:
+        steps:
+        - activate-ssh-key:
+            run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+        - git-clone: {}
+        - install-missing-android-tools: {}
+        - gradle-runner:
             inputs:
-            - content: |-
-                #!/bin/bash
-                # fail if any commands fails
-                set -e
-                # debug log
-                #set -x
-                echo "Download App credentials"
-                app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
-                wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
-        - xcode-archive:
+            - apk_file_include_filter: ''
+            - app_file_include_filter: "*.aab"
+            - app_file_exclude_filter: |
+                *.apk
+                *intermediary_bundle*.aab
+            - mapping_file_include_filter: ''
+            - gradle_options: "--stacktrace"
+            - gradle_task: "$GRADLE_TASK"
+        - deploy-to-bitrise-io: {}
+        - google-play-deploy:
             inputs:
-            - export_method: app-store
-        - deploy-to-itunesconnect-application-loader:
+            - package_name: "$PLAYSTORE_APP_NAME"
+            - app_path: "$BITRISE_AAB_PATH"
+            - service_account_json_key_path: "$BITRISEIO_BITRISEIO_SERVICE_ACCOUNT_JSON_KEY_URL_URL"
+        - slack:
             inputs:
-            - password: "$FASTLANE_PASSWORD"
-            - itunescon_user: "$APPLE_ID"
-        - fabric-crashlytics-beta-deploy:
+            - from_username: Bitrise
+            - from_username_on_error: Bitrise
+            - message: |-
+                New PROD android build is available: $BITRISE_BUILD_NUMBER  here:
+                $BITRISE_APP_URL
+            - message_on_error: Oups, production build has failed for android... @here
+            - icon_url: ''
+            - icon_url_on_error: ''
+            - pretext_on_error: "*Build Failed!"
+            - pretext: Build Succeeded for ENTOURAGE! (*production only*)
+            - fields: |
+                App|${BITRISE_APP_TITLE}
+                Branch|${BITRISE_GIT_BRANCH}
+                Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
+            - api_token: "$SLACK__BOT_API_TOKEN"
+            - buttons: 'View App|${BITRISE_APP_URL}
+    
+    '
+            - channel: "#androiddev"
+        - git-tag@1:
             inputs:
-            - build_secret: "$CRASHLYTICS_SECRET"
-            - api_key: "$CRASHLYTICS_API_TOKEN"
-        - deploy-to-bitrise-io:
-            run_if: 
-            inputs:
-            - notify_user_groups: none
-            - notify_email_list: ''
-            is_always_run: false
+            - tag_message: "Push to GooglePlay: $BITRISE_APP_TITLE from this branch: $BITRISE_GIT_BRANCH
+                \nBuild number : $BITRISE_BUILD_NUMBER"
+            - tag: BitrisePush_$BITRISE_BUILD_NUMBER
         envs:
         - opts:
             is_expand: false
-          BITRISE_SCHEME: PfpStore
+          GRADLE_TASK: bundleEntourageProdRelease
         - opts:
             is_expand: false
-          FASTLANE_LANE: pfp_beta
-      BETA:
+          PLAYSTORE_APP_NAME: social.entourage.android
+      prod_pfp:
+        steps:
+        - activate-ssh-key:
+            run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+        - git-clone: {}
+        - install-missing-android-tools: {}
+        - gradle-runner:
+            inputs:
+            - apk_file_include_filter: ''
+            - app_file_include_filter: "*.aab"
+            - app_file_exclude_filter: |
+                *.apk
+                *intermediary_bundle*.aab
+            - mapping_file_include_filter: ''
+            - gradle_options: "--stacktrace"
+            - gradle_task: "$GRADLE_TASK"
+        - deploy-to-bitrise-io: {}
+        - google-play-deploy:
+            inputs:
+            - package_name: "$PLAYSTORE_APP_NAME"
+            - app_path: "$BITRISE_AAB_PATH"
+            - service_account_json_key_path: "$BITRISEIO_BITRISEIO_SERVICE_ACCOUNT_JSON_KEY_URL_URL"
+        - slack:
+            inputs:
+            - from_username: Bitrise
+            - from_username_on_error: Bitrise
+            - message: |-
+                New PROD android build is available: $BITRISE_BUILD_NUMBER  here:
+                $BITRISE_APP_URL
+            - message_on_error: Oups, production build has failed for android... @here
+            - icon_url: ''
+            - icon_url_on_error: ''
+            - pretext_on_error: "*Build Failed!"
+            - pretext: Build Succeeded for PFP! (*production only*)
+            - fields: |
+                App|${BITRISE_APP_TITLE}
+                Branch|${BITRISE_GIT_BRANCH}
+                Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
+            - api_token: "$SLACK__BOT_API_TOKEN"
+            - buttons: 'View App|${BITRISE_APP_URL}
+    
+    '
+            - channel: "#androiddev"
+        envs:
+        - opts:
+            is_expand: false
+          GRADLE_TASK: bundlePfpProdRelease
+        - opts:
+            is_expand: false
+          APPBUNDLE_NAME: pfpapp
+        - opts:
+            is_expand: false
+          PLAYSTORE_APP_NAME: social.entourage.android.pfp
+      prod:
         steps:
         - trigger-bitrise-workflow:
             inputs:
+            - workflow_id: prod_entourage
             - api_token: "$BUILD_TRIGGER"
-            - workflow_id: Entourage-Beta
         - trigger-bitrise-workflow:
             inputs:
+            - workflow_id: prod_pfp
             - api_token: "$BUILD_TRIGGER"
-            - workflow_id: PFP-beta
     app:
       envs:
       - opts:
           is_expand: false
-        BITRISE_PROJECT_PATH: entourage.xcworkspace
+        GRADLE_BUILD_FILE_PATH: build.gradle
       - opts:
           is_expand: false
-        BITRISE_SCHEME: Entourage-ios
+        GRADLE_TASK: assembleRelease
+      - opts:
+          is_expand: false
+        GRADLEW_PATH: "./gradlew"
+      - opts:
+          is_expand: false
+        GRADLE_TASK_TEST: 'testPreprodDebugUnitTest '
+      - opts:
+          is_expand: false
+        GRADLE_TASK_LINT: 'lintEntourageProdRelease lintPfpProdRelease '
+      - opts:
+          is_expand: false
+        JAVA_OPTS: "-Xms512m -Xmx2048m"
+      - opts:
+          is_expand: false
+        GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"
     

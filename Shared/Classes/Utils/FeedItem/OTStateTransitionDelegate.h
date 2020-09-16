@@ -18,5 +18,6 @@
                orFailure:(void (^)(NSError *))failure;
 - (void)quitWithSuccess:(void (^)(void))success orFailure:(void (^)(NSError*))failure;
 - (void)sendJoinRequest:(void (^)(OTFeedItemJoiner*))success orFailure:(void (^)(NSError*, BOOL))failure;
-
+- (void)reopenEntourageWithSuccess:(void (^)(BOOL))success
+                         orFailure:(void (^)(NSError *))failure;
 @end

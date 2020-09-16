@@ -65,4 +65,20 @@
         }];
 }
 
+- (void)reopenEntourageWithSuccess:(void (^)(BOOL))success
+               orFailure:(void (^)(NSError *))failure {
+    NSString *oldState = self.entourage.status;
+    self.entourage.status = FEEDITEM_STATUS_OPEN;
+    [[OTEntourageService new] reopenEntourage:self.entourage
+                                 success:^(OTEntourage *updatedEntourage) {
+                                     NSLog(@"Reopen entourage: %@", updatedEntourage.uid);
+                                     success(NO);
+                                 } failure:^(NSError *error) {
+                                     NSLog(@"Reopen err %@", error.description);
+                                     self.entourage.status = oldState;
+                                     if(failure)
+                                         failure(error);
+                                 }];
+}
+
 @end

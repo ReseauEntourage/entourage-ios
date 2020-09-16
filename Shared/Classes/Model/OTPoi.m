@@ -24,6 +24,7 @@ NSString *const kPOIEmail = @"email";
 NSString *const kImagePrefixName = @"poi_category-%d";
 NSString *const kPOITransparentImagePrefix = @"poi_transparent_category-%d";
 NSString *const kImageDefaultName = @"poi_category-0";
+NSString *const kPOIPartnerId = @"partner_id";
 
 @implementation OTPoi
 
@@ -49,6 +50,7 @@ NSString *const kImageDefaultName = @"poi_category-0";
 		poi.website = [dictionary stringForKey:kPOIWebsite];
 		poi.email = [dictionary stringForKey:kPOIEmail];
 		poi.categoryId = [dictionary numberForKey:kPOICategoryId];
+        poi.partnerId = [dictionary numberForKey:kPOIPartnerId];
 	}
 
 	return poi;

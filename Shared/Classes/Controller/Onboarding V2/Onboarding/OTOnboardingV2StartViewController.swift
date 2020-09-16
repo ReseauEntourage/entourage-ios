@@ -350,8 +350,9 @@ class OTOnboardingV2StartViewController: UIViewController {
     }
     
     func update2ndAddress() {
-        OTLogger.logEvent(Action_Onboarding_Action_Zone2_Submit)
+       
         if let _place = temporary2ndGooglePlace {
+             OTLogger.logEvent(Action_Onboarding_Action_Zone2_Submit)
             SVProgressHUD.show()
             OTAuthService.updateUserAddress(withPlaceId: _place.placeID, isSecondaryAddress: true) { (error) in
                 SVProgressHUD.dismiss()
@@ -359,12 +360,16 @@ class OTOnboardingV2StartViewController: UIViewController {
             }
         }
         else if let _lat = self.temporary2ndLocation?.coordinate.latitude, let _long = self.temporary2ndLocation?.coordinate.longitude {
+             OTLogger.logEvent(Action_Onboarding_Action_Zone2_Submit)
             SVProgressHUD.show()
             let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
             OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long), isSecondaryAddress: true) { (error) in
                 SVProgressHUD.dismiss()
                 self.goNextStepSdfNeighbour()
             }
+        }
+        else {
+            self.action_pass(self)
         }
     }
     
@@ -461,6 +466,7 @@ class OTOnboardingV2StartViewController: UIViewController {
         
         UserDefaults.standard.set(userTypeSelected.rawValue, forKey: "userType")
         UserDefaults.standard.set(true, forKey: "isFromOnboarding")
+        UserDefaults.standard.set(false, forKey: "checkAfterLogin")
         
         let user = UserDefaults.standard.currentUser
         
@@ -995,12 +1001,7 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
     
     func validatePhoneNumber(prefix: String, phoneNumber: String?) {
         if let _phone = phoneNumber {
-            var phoneNb = _phone.trimmingCharacters(in: .whitespaces)
-            if !phoneNb.hasPrefix("+") && phoneNb.hasPrefix("0") {
-                phoneNb.remove(at: .init(encodedOffset: 0))
-            }
-            phoneNb = "\(prefix)\(phoneNb)"
-            self.temporaryUser.phone = phoneNb
+            self.temporaryUser.phone = Utilitaires.validatePhoneFormat(countryCode: prefix, phone: _phone)
             self.temporaryPhone = _phone
             self.temporaryCountryCode = prefix
         }

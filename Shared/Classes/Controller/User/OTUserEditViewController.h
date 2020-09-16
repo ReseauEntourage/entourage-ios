@@ -11,4 +11,5 @@
 
 @interface OTUserEditViewController : UIViewController
 
+@property(nonatomic) BOOL isFromLaunch;
 @end

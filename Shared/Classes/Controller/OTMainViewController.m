@@ -194,7 +194,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.hasToShowTopInformationGDS = YES;
+    self.hasToShowTopInformationGDS = NO;
     
     self.isFirstInitView = YES;
     
@@ -217,6 +217,33 @@
        selector:@selector(showEventsFromNotification)
            name:@"showEvents"
          object:nil];
+}
+
+-(void)checkProfil {
+    BOOL isAfterLogin = [[NSUserDefaults standardUserDefaults] boolForKey: @"checkAfterLogin"];
+    if (isAfterLogin) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"checkAfterLogin"];
+        
+        OTUser * currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+        
+        if (currentUser.goal == nil || currentUser.goal.length == 0) {
+            NSString *message = OTLocalizedString(@"login_info_pop_action");
+            
+            UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"login_pop_information") message:message preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *action = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_info_entourage_custom_yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                NSURL *deepL = [NSURL URLWithString:@"entourage://profileAction"];
+                [[OTDeepLinkService new] handleDeepLink:deepL];
+            }];
+            UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_info_entourage_custom_no") style:UIAlertActionStyleDefault handler:nil];
+            
+            [alertVC addAction:actionCancel];
+            [alertVC addAction:action];
+            
+            [self presentViewController:alertVC animated:YES completion:nil];
+        }
+    }
 }
 
 -(void) showAllsFromNotification {
@@ -553,6 +580,9 @@
     [self configureNavigationBar];
     [self checkIfShouldDisableFeedsAndMap];
     
+    dispatch_async(dispatch_get_main_queue(), ^() {
+        [self checkProfil];
+    });
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -1145,7 +1175,18 @@
         return;
     }
     [OTLogger logEvent:@"POIView"];
-    [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation.poi];
+    if (annotation.poi.partnerId != nil) {
+        UINavigationController *navVc = [[UIStoryboard storyboardWithName:@"AssociationDetails" bundle:nil] instantiateInitialViewController];
+        
+        OTAssociationDetailViewController *vc =(OTAssociationDetailViewController*) [navVc topViewController];
+        
+        vc.associationId = annotation.poi.partnerId.intValue;
+        
+        [self presentViewController:navVc animated:YES completion:nil];
+    }
+    else {
+        [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:annotation.poi];
+    }
 }
 
 - (CLLocationDistance)mapHeight {
@@ -1581,7 +1622,18 @@
 }
 
 - (void)showPoiDetails:(OTPoi *)poi {
-    [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:poi];
+    if (poi.partnerId != nil) {
+        UINavigationController *navVc = [[UIStoryboard storyboardWithName:@"AssociationDetails" bundle:nil] instantiateInitialViewController];
+        
+        OTAssociationDetailViewController *vc =(OTAssociationDetailViewController*) [navVc topViewController];
+        
+        vc.associationId = poi.partnerId.intValue;
+        
+        [self presentViewController:navVc animated:YES completion:nil];
+    }
+    else {
+        [self performSegueWithIdentifier:@"OTGuideDetailsSegue" sender:poi];
+    }
 }
 
 - (void)showAnnouncementDetails:(OTAnnouncement *)feedItem {

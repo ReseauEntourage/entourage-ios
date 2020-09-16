@@ -84,6 +84,11 @@ typedef NS_ENUM(NSInteger) {
     self.user = [[NSUserDefaults standardUserDefaults] currentUser];
     [self setupSections];
     [self.tableView reloadData];
+    
+    if (self.isFromLaunch) {
+        self.isFromLaunch = NO;
+        [self actionModifyType:self];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -189,7 +194,15 @@ typedef NS_ENUM(NSInteger) {
     NSString *firstName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeSummary] withDefault:self.user.firstName];
     NSString *lastName = [self editedTextAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:SectionTypeSummary] withDefault:self.user.lastName];
     
-    NSString *email = [[self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:SectionTypeInfoPrivate] withDefault:self.user.email] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    int mappedSectionPrivate = 0;
+    for (int i=0; i<self.sections.count; i++) {
+        if ([[self.sections objectAtIndex:i]intValue] == SectionTypeInfoPrivate) {
+            mappedSectionPrivate = i;
+            break;
+        }
+    }
+    
+    NSString *email = [[self editedTextAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:mappedSectionPrivate] withDefault:self.user.email] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     NSString *about = [self editedTextViewAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:SectionTypeAbout] withDefault:self.user.about];
     
@@ -223,6 +236,7 @@ typedef NS_ENUM(NSInteger) {
     [SVProgressHUD showWithStatus:OTLocalizedString(@"user_edit_saving")];
     [[OTAuthService new] updateUserInformationWithUser:self.user success:^(OTUser *user) {
         [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"user_edit_saved_ok")];
+        user.phone = self.user.phone;
         [[NSUserDefaults standardUserDefaults] setCurrentUser:user];
         if (self.user.password != nil) {
             [[A0SimpleKeychain keychain] setString:self.user.password forKey:kKeychainPassword];

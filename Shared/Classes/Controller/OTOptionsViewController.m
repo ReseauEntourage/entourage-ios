@@ -151,9 +151,15 @@
     button.layer.cornerRadius = button.frame.size.width / 2;
     button.backgroundColor = [UIColor colorWithDisplayP3Red:245 / 255.0 green:95 / 255.0 blue:36 / 255.0 alpha:1.0];
     [button setImage:[UIImage imageNamed:optionIcon] forState:UIControlStateNormal];
-    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     button.clipsToBounds = YES;
+    
+    //Add button screen width size to action
+    UIButton *buttonBig = [UIButton buttonWithType:UIButtonTypeCustom];
+    buttonBig.frame = CGRectMake(PADDING_HORIZONTAL, y, [UIScreen mainScreen].bounds.size.width - (PADDING_HORIZONTAL * 2), BIG_BUTTON_SIDE);
+    buttonBig.backgroundColor = [UIColor colorWithDisplayP3Red:100 / 255.0 green:100 / 255.0 blue:100 / 255.0 alpha:0.0];
+    [buttonBig addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:buttonBig];
 
     float diffForSub = optionSubtitle.length > 0 ? ACTION_LABEL_HEIGHT / 2 : 0;
     UILabel *actionLabel = [[UILabel alloc] init];

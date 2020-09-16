@@ -46,12 +46,6 @@
         self.sectionSelected = 1;
     }
     
-    UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
-                                                        withTarget:self
-                                                         andAction:@selector(saveNewCategory)
-                                                           andFont:@"SFUIText-Bold"
-                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
-    [self.navigationItem setRightBarButtonItem:menuButton];
     self.dataSource = [OTCategoryFromJsonService getData];
     
     self.categoryTableView.tableFooterView = [UIView new];
@@ -127,6 +121,8 @@
     
     self.selectedCategory = itemCategory;
     [self.categoryTableView reloadData];
+    
+    [self saveNewCategory];
 }
     
 - (NSIndexPath*)indexPathForCategoryWithType:(NSString*)type subcategory:(NSString*)subCat {

@@ -25,7 +25,7 @@ extern NSString *const kPOITransparentImagePrefix;
 @property(nonatomic, strong) NSString *website;
 @property(nonatomic, strong) NSString *email;
 @property(nonatomic, strong) NSString *audience;
-@property(nonatomic, strong) NSNumber *categoryId;
+@property(nonatomic, strong) NSNumber *categoryId,*partnerId;
 
 /********************************************************************************/
 #pragma mark - Birth & Death

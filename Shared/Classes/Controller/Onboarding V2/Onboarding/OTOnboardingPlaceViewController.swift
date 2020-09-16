@@ -79,7 +79,12 @@ class OTOnboardingPlaceViewController: UIViewController {
             delegate?.updateButtonNext(isValid: true)
         }
         else {
-            delegate?.updateButtonNext(isValid: false)
+            if isSecondaryAddress {
+                delegate?.updateButtonNext(isValid: true)
+            }
+            else {
+                delegate?.updateButtonNext(isValid: false)
+            }
         }
     }
     

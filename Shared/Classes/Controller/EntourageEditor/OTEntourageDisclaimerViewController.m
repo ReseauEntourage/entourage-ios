@@ -51,6 +51,15 @@
         self.secondDescriptionLabel.text = OTLocalizedString(@"addEventDisclaimerSecondDescription");
         self.thirdsDescriptionLabel.text = OTLocalizedString(@"addEventDisclaimerThirdDescription");
     }
+    else {
+        self.firstTitleLabel.text = OTLocalizedString(@"addEventDisclaimerFirstTitleBis");
+        self.secondTitleLabel.text = OTLocalizedString(@"addEventDisclaimerSecondTitleBis");
+        self.thirdsTitleLabel.text = OTLocalizedString(@"addEventDisclaimerThirdTitleBis");
+        
+        self.firstDescriptionLabel.text = OTLocalizedString(@"addEventDisclaimerFirstDescriptionBis");
+        self.secondDescriptionLabel.text = OTLocalizedString(@"addEventDisclaimerSecondDescriptionBis");
+        self.thirdsDescriptionLabel.text = OTLocalizedString(@"addEventDisclaimerThirdDescriptionBis");
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

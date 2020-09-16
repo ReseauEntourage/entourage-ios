@@ -1141,7 +1141,7 @@ sur Entourage.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wF4-5f-khB">
-                                <rect key="frame" x="8" y="158" width="304" height="123.5"/>
+                                <rect key="frame" x="8" y="158" width="304" height="105.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Voisin-Age est la communauté de voisins qui tissent des liens intergénérationnels. Proximité, Liberté, Réciprocité : rencontrez des personnes âgées près de chez vous et créez des liens de voisinage et d’amitié. </string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1149,10 +1149,10 @@ sur Entourage.</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="249" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="ufn-rN-e8V">
-                                <rect key="frame" x="8" y="281.5" width="304" height="132.5"/>
+                                <rect key="frame" x="8" y="263.5" width="304" height="132.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vj-nj-f39">
-                                <rect key="frame" x="8" y="414" width="304" height="50"/>
+                                <rect key="frame" x="8" y="396" width="304" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="3Rr-Dv-wJQ"/>

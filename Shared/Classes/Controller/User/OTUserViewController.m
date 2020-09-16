@@ -165,7 +165,7 @@ typedef NS_ENUM(NSInteger) {
 }
 
 - (void)showReportButton {
-    UIBarButtonItem *reportButton = [UIBarButtonItem createWithImageNamed:@"flag" withTarget:self andAction:@selector(sendReportMail) changeTintColor:YES];
+    UIBarButtonItem *reportButton = [UIBarButtonItem createWithImageNamed:@"report_user" withTarget:self andAction:@selector(sendReportMail) changeTintColor:YES];
     [self.navigationItem setRightBarButtonItem:reportButton];
 }
 
@@ -321,10 +321,6 @@ typedef NS_ENUM(NSInteger) {
     
     [mSections addObject:@(SectionTypeNeighborhoods)];
     
-    // Show only for logged user
-    if ([OTAppConfiguration shouldShowNumberOfUserActionsSection:self.currentUser]) {
-        [mSections addObject:@(SectionTypeEntourages)];
-    }
     // https://jira.mytkw.com/browse/EMA-1847
 //    if (self.currentUser.sid.integerValue == self.user.sid.integerValue &&
 //        [self.currentUser hasActionZoneDefined]) {

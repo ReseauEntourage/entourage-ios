@@ -40,6 +40,7 @@
     NSString *title = nil;
     SEL selector = nil;
     self.btnNextState.hidden = YES;
+    Boolean isClosed = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isClosed];
     
     if ([OTAppConfiguration supportsClosingFeedAction:self.feedItem]) {
         switch (currentState) {
@@ -57,6 +58,11 @@
                 if ([self.feedItem isKindOfClass:[OTTour class]]) {
                     title = OTLocalizedString(@"item_option_freeze");
                     selector = @selector(doCloseFeedItemWithReason:);
+                    self.btnNextState.hidden = NO;
+                }
+                else {
+                    title = OTLocalizedString(@"item_option_reopen");
+                    selector = @selector(doReopenFeedItem);
                     self.btnNextState.hidden = NO;
                 }
                 break;
@@ -182,6 +188,21 @@
     if(self.delegate)
         [self.delegate joinFeedItem];
 }
+
+- (void)doReopenFeedItem {
+    
+    [SVProgressHUD show];
+
+    id stateTransition = [[OTFeedItemFactory createFor:self.feedItem] getStateTransition];
+    [stateTransition reopenEntourageWithSuccess:^(BOOL isOk) {
+        [SVProgressHUD dismiss];
+        [self dismissOnClose:OTCloseReasonSuccesClose];
+    } orFailure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
+    }];
+}
+
+
 
 #pragma mark - OTConfirmCloseProtocol
 
