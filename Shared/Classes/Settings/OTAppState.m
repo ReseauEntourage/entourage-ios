@@ -430,7 +430,7 @@
 
 + (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)delegate {
     
-    [controller performSegueWithIdentifier:@"SolidarityGuideSegue" sender:nil];
+    [controller performSegueWithIdentifier:@"SolidarityGuideFiltersSegue" sender:nil];
     
 //    UIStoryboard *filtersStoryboard = [UIStoryboard storyboardWithName:@"SolidarityGuideSegue" bundle:nil];
 //    OTSolidarityGuideFiltersViewController *viewController = [filtersStoryboard instantiateViewControllerWithIdentifier:@"OTSolidarityGuideFiltersViewController"];

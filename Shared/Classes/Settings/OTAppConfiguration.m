@@ -297,9 +297,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (UITabBarController*)configureMainTabBarWithDefaultSelectedIndex:(NSInteger)selectedIndex
 {
-    UITabBarController *newTab = [[OTMainTabbarViewController alloc]init];
+    OTMainTabbarViewController *newTab = [[OTMainTabbarViewController alloc]init];
     
     newTab.selectedIndex = selectedIndex;
+    [newTab boldSelectedItem];
     return newTab;
 }
 

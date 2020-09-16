@@ -69,8 +69,8 @@ class OTMainTabbarViewController: UITabBarController {
         homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_home_selected")
         homeVC.tabBarItem.tag = 0
         
-        let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMain") as! OTMainViewController
-        _guideVC.isSolidarityGuide = true
+        
+        let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMainGuide") as! OTMainGuideViewController
         guideVC = UINavigationController.init(rootViewController: _guideVC)
         guideVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_guide")
         guideVC.tabBarItem.image = UIImage.init(named: "ic_tab_guide")?.withRenderingMode(.alwaysOriginal)
@@ -100,7 +100,7 @@ class OTMainTabbarViewController: UITabBarController {
         boldSelectedItem()
     }
     
-    func boldSelectedItem() {
+    @objc func boldSelectedItem() {
         let regularFont = UIFont.init(name: "SFUIText-Regular", size: 13)
         let regularTextAttr:[NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor:UIColor.darkGray,NSAttributedString.Key.font:regularFont!]
         
