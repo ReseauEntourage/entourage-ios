@@ -67,8 +67,6 @@
 #import "OTNoDataBehavior.h"
 #import "OTUnreadMessagesService.h"
 #import "OTMailSenderBehavior.h"
-#import "OTSolidarityGuideFiltersViewController.h"
-#import "OTSolidarityGuideFilterDelegate.h"
 #import "OTAppDelegate.h"
 #import "OTSavedFilter.h"
 #import "OTEditEncounterBehavior.h"

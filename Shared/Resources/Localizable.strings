@@ -167,6 +167,8 @@
 "guide_display_reinsertion" = "Se réinsérer";
 "guide_display_partners" = "Associations et services actifs sur Entourage";
 "partners_entourage" = "Organisme actif sur Entourage";
+"guide_display_donate" = "Recherchant des dons";
+"guide_display_volunteer" = "Recherchant des bénévoles";
 // Tour
 "tour_type_bare_hands" = "barehands";
 "tour_type_medical" = "medical";

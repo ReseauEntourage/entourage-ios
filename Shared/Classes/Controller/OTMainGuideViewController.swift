@@ -29,7 +29,7 @@ class OTMainGuideViewController: UIViewController {
     
     var mapView:OTMapView!
     var clusteringController:KPClusteringController!
-    var solidarityFilter:OTSolidarityGuideFilter!
+    var solidarityFilter:OTGuideFilters!
     var emptyFooterView:UIView!
     var lblEmptyTableReason:UILabel!
     var tapGestureRecognizer:UITapGestureRecognizer!
@@ -113,7 +113,7 @@ class OTMainGuideViewController: UIViewController {
         self.lblEmptyTableReason.numberOfLines = 0
         self.lblEmptyTableReason.text = OTAppAppearance.extendMapSearchParameterDescription()
         
-        self.solidarityFilter = OTSolidarityGuideFilter()
+        self.solidarityFilter = OTGuideFilters()
         self.mapView = OTMapView()
         self.mapView.delegate = self
         
@@ -272,11 +272,12 @@ class OTMainGuideViewController: UIViewController {
         self.noDataBehavior.hideNoData()
         SVProgressHUD.show()
         
-        guard let _dict = self.solidarityFilter.toDictionary(withDistance: getMapHeight(), location: mapView.centerCoordinate) else {
+        guard let _dict = self.solidarityFilter.toDictionary(distance: getMapHeight(), location: mapView.centerCoordinate) else {
             Logger.print("***** Error get filter to dict ****")
             return
         }
-        OTPoiService().pois(withParameters: (_dict as! [AnyHashable : Any]), success: { (categories, pois) in
+        
+        OTPoiService().pois(withParameters: (_dict), success: { (categories, pois) in
             
             if let _array = categories as? [OTPoiCategory] {
                 self.categories = _array
@@ -365,6 +366,7 @@ class OTMainGuideViewController: UIViewController {
     }
     
     func changeFilterButton() {
+        Logger.print("***** change filterbutton \(self.solidarityFilter.isDefaultFilters())")
         if self.solidarityFilter.isDefaultFilters() {
             ui_button_filters.setTitle(OTLocalisationService.getLocalizedValue(forKey: "home_button_filters")?.uppercased(), for: .normal)
         }
@@ -414,7 +416,7 @@ class OTMainGuideViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SolidarityGuideFiltersSegue" {
             if let navController = segue.destination as? UINavigationController {
-                if let _controller = navController.topViewController as? OTSolidarityGuideFiltersViewController {
+                if let _controller = navController.topViewController as? OTGuideFiltersViewController {
                     _controller.filterDelegate = self
                 }
             }
@@ -636,10 +638,15 @@ extension OTMainGuideViewController: MKMapViewDelegate {
     }
 }
 
-//MARK: - OTSolidarityGuideFilterDelegate -
-extension OTMainGuideViewController : OTSolidarityGuideFilterDelegate {
-    func solidarityFilterChanged(_ filter: OTSolidarityGuideFilter!) {
+//MARK: - OTGuideFilterDelegate -
+extension OTMainGuideViewController : OTGuideFilterDelegate {
+    func getSolidarityFilter() -> OTGuideFilters {
+        return self.solidarityFilter
+    }
+    
+    func solidarityFilterChanged(_ filter: OTGuideFilters!) {
         self.solidarityFilter = filter;
+        Logger.print("***** save filters inside delegate -> \(filter.isDefaultFilters())")
         changeFilterButton()
         getPoiList()
     }

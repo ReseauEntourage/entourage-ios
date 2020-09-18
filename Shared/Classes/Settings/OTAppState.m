@@ -24,7 +24,6 @@
 #import <UIKit/UIActivity.h>
 #import "OTActivityProvider.h"
 #import "OTFeedItemFiltersViewController.h"
-#import "OTSolidarityGuideFiltersViewController.h"
 #import "OTEntourageEditorViewController.h"
 #import "OTGeolocationRightsViewController.h"
 #import "OTPushNotificationsService.h"
@@ -428,17 +427,10 @@
 //    [controller presentViewController:navController animated:YES completion:nil];
 }
 
-+ (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)delegate {
++ (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTGuideFilterDelegate>)delegate {
     
     [controller performSegueWithIdentifier:@"SolidarityGuideFiltersSegue" sender:nil];
     
-//    UIStoryboard *filtersStoryboard = [UIStoryboard storyboardWithName:@"SolidarityGuideSegue" bundle:nil];
-//    OTSolidarityGuideFiltersViewController *viewController = [filtersStoryboard instantiateViewControllerWithIdentifier:@"OTSolidarityGuideFiltersViewController"];
-//    viewController.filterDelegate = delegate;
-//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-//    navController.modalPresentationStyle = UIModalPresentationFullScreen;
-//
-//    [controller presentViewController:navController animated:YES completion:nil];
 }
 
 + (void)createEntourageFromController:(UIViewController*)viewController
@@ -493,7 +485,7 @@
     }
     
     if (isFullMapVisible) {
-        [OTAppState launchMapPOIsFilteringFromController:controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)controller];
+        [OTAppState launchMapPOIsFilteringFromController:controller withDelegate:(id<OTGuideFilterDelegate>)controller];
     }
     else {
         [OTAppState launchFeedsFilteringFromController:controller withDelegate:(id<OTFeedItemsFilterDelegate>)controller];

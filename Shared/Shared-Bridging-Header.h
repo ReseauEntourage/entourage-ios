@@ -49,7 +49,6 @@
 #import "OTRoleTag.h"
 #import "OTPillLabelView.h"
 #import "OTInviteSourceViewController.h"
-#import "OTSolidarityGuideFilter.h"
 #import "OTPoiService.h"
 #import "OTMapView.h"
 #import "OTMapDelegateProxyBehavior.h"
@@ -59,7 +58,6 @@
 #import <kingpin/KPClusteringController.h>
 #import "OTFeedItemsTableView.h"
 #import "NSNotification+entourage.h"
-#import "OTSolidarityGuideFiltersViewController.h"
 #import "OTGuideDetailsViewController.h"
 #import "OTNoDataBehavior.h"
 #import "OTSolidarityGuideCell.h"
