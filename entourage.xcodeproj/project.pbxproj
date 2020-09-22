@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
+		2B039CC1251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */; };
+		2B039CC2251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */; };
 		2B05CBCF25067F490065E8D3 /* OTShareEntourageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */; };
 		2B05CBD1250684840065E8D3 /* OTSharingEntourageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBD0250684840065E8D3 /* OTSharingEntourageTableViewCell.swift */; };
 		2B05CBD3250691AB0065E8D3 /* OTShareEntourageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBD2250691AB0065E8D3 /* OTShareEntourageService.swift */; };
@@ -1000,6 +1002,7 @@
 		1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = entourage.entitlements; sourceTree = "<group>"; };
 		2A4E5B32B53E7E30C72258C3 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
+		2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMainGuideHubViewController.swift; sourceTree = "<group>"; };
 		2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTShareEntourageViewController.swift; sourceTree = "<group>"; };
 		2B05CBD0250684840065E8D3 /* OTSharingEntourageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSharingEntourageTableViewCell.swift; sourceTree = "<group>"; };
 		2B05CBD2250691AB0065E8D3 /* OTShareEntourageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTShareEntourageService.swift; sourceTree = "<group>"; };
@@ -2430,6 +2433,7 @@
 				A202E8CF2085D2C40058F32C /* OTMainViewController.h */,
 				A202E91E2085D2C50058F32C /* OTMainViewController.m */,
 				2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */,
+				2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */,
 				A202E8692085D2C40058F32C /* OTMapOptionsViewController.h */,
 				A202E8EB2085D2C40058F32C /* OTMapOptionsViewController.m */,
 				A202E8D32085D2C40058F32C /* OTMapView.h */,
@@ -4753,6 +4757,7 @@
 				A202EB692085D2C80058F32C /* OTDisclaimerViewController.m in Sources */,
 				A202EC512085D2C80058F32C /* OTCustomSegmentedBehavior.m in Sources */,
 				A202E91820E3818D00992C09 /* OTPrivateCircleAnnotation.m in Sources */,
+				2B039CC1251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */,
 				A202EAEF2085D2C70058F32C /* OTUser.m in Sources */,
 				A296B92A2089DE4300F6AFBD /* main.m in Sources */,
 				96B658BE209A689200EB0398 /* LabelStyles.swift in Sources */,
@@ -5209,6 +5214,7 @@
 				A296B85020871CFC00F6AFBD /* OTQuitFeedItemViewController.m in Sources */,
 				A296B85120871CFC00F6AFBD /* OTLogger.m in Sources */,
 				A296B85220871CFC00F6AFBD /* OTPlaceholderCell.m in Sources */,
+				2B039CC2251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */,
 				A296B85320871CFC00F6AFBD /* OTAutoGrowTextView.m in Sources */,
 				96B658BC209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */,
 				373AAD7F23293558001D8CF3 /* OTThemedButton.m in Sources */,

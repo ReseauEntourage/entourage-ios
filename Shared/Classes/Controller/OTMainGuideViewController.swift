@@ -55,21 +55,50 @@ class OTMainGuideViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        OTAppConfiguration.updateAppearanceForMainTabBar()
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        let navigationBar = navigationController?.navigationBar
         
+        if #available(iOS 13.0, *) {
+            let navBarAppear = UINavigationBarAppearance()
+            navBarAppear.configureWithOpaqueBackground()
+            navBarAppear.backgroundColor = UIColor.white
+            navBarAppear.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.appOrange() as Any]
+           
+            navigationBar?.standardAppearance = navBarAppear
+            navigationBar?.scrollEdgeAppearance = navBarAppear
+        } else {
+            navigationBar?.backgroundColor = UIColor.white
+            navigationBar?.tintColor = UIColor.appOrange()
+            navigationBar?.barTintColor = UIColor.white
+            navigationBar?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.appOrange() as Any]
+        }
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.title = OTLocalisationService.getLocalizedValue(forKey: "title_new_gds")?.uppercased()
+        changeBackbutton()
         
         if self.hasToShowTopInformationGDS {
             let txt_underline = Utilitaires.formatStringUnderline(stringMessage: OTLocalisationService.getLocalizedValue(forKey: "Pop_info_web_alert_GDS"), underlineTxt: OTLocalisationService.getLocalizedValue(forKey: "Pop_info_web_alert_GDS_underline"), color: .white, colorHighlight: .white, fontSize: 14,fontWeight: .regular)
             
             self.ui_label_info_web_gds.attributedText = txt_underline
-            
             self.ui_view_top_info_gds.isHidden = false
         }
         else {
             self.ui_constraint_height_view_topinfo.constant = 0
             self.ui_view_top_info_gds.isHidden = true
         }
+    }
+    
+    func changeBackbutton() {
+        let btnLeftMenu: UIButton = UIButton()
+        btnLeftMenu.setImage(UIImage(named: "backItem"), for: .normal)
+        btnLeftMenu.addTarget(self, action: #selector(onBack), for: .touchUpInside)
+        btnLeftMenu.frame = CGRect(x: 0, y: 0, width: 34/2, height: 28/2)
+        let barButton = UIBarButtonItem(customView: btnLeftMenu)
+        self.navigationItem.leftBarButtonItem = barButton
+    }
+
+    @objc func onBack() {
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     deinit {

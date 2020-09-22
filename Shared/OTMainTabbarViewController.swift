@@ -70,7 +70,13 @@ class OTMainTabbarViewController: UITabBarController {
         homeVC.tabBarItem.tag = 0
         
         
-        let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMainGuide") as! OTMainGuideViewController
+//        let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMain") as! OTMainViewController
+//         _guideVC.isSolidarityGuide = true
+        
+//        let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMainGuide") as! OTMainGuideViewController
+
+        
+        let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GuideHub") as! OTMainGuideHubViewController
         guideVC = UINavigationController.init(rootViewController: _guideVC)
         guideVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_guide")
         guideVC.tabBarItem.image = UIImage.init(named: "ic_tab_guide")?.withRenderingMode(.alwaysOriginal)

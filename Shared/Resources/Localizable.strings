@@ -844,3 +844,20 @@
 "Pop_info_web_alert_GDS_underline" = "Soliguide.fr";
 
 "info_share_sms_poi" = "Bonjour ! Voici l’adresse de %@ qui pourrait vous intéresser.\n%@\n%@\nPour plus d’infos sur ce lieu, et pour créer des liens entre voisins solidaires, je vous donne RDV sur le réseau Entourage %@";
+
+//New page hub GDS
+"title_new_gds" = "Lieux solidaires";
+"hub_title_1" = "Guide solidaire";
+"hub_subtitle_1" = "Adresses utiles autour de vous";
+"hub_description_1" = "Restaurants solidaires, associations recherchant des bénévoles ou des dons...";
+"hub_button_1" = "Rechercher autour de moi →";
+
+"hub_title_2" = "Ressources au cas par cas  ";
+"hub_description_2" = "Chaque situation est différente, mais voici des clés pour s’y retrouver : numéros d’urgence, démarches conseillées, ...";
+"hub_button_2" = "Je m'oriente";
+
+"hub_title_3" = "Se préparer à la rencontre";
+"hub_description_3" = "Voisins solidaires, le Guide Simple Comme Bonjour et nos ateliers de sensibilisation vous aident à comprendre les situations et à dépasser les blocages pour créer des liens.";
+"hub_button_3" = "Découvrir le guide →";
+
+"hub_button_4" = "Trouver un atelier";
