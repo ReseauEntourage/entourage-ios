@@ -143,7 +143,7 @@
 
 "no_data_events" = "Aucun évènement à proximité.";
 
-"no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure";
+"no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure \n\nLe Centre Communal d’Action Sociale de votre commune peut vous renseigner sur toutes les associations locales et les aides sociales à disposition des habitants.";
 
 "no_data_guide_link" = "Proposez une structure";
 
