@@ -30,18 +30,14 @@ class OTMainGuideHubViewController: UIViewController {
         }
     }
     
-    func showWeb(urlString:String) {
-        /*
-         let token = UserDefaults.standard.currentUser.token!
-         let relativeUrl = String.init(format: API_URL_MENU_OPTIONS, SCB_LINK_ID,token)
-         if let _BaseUrl = OTHTTPRequestManager.sharedInstance()?.baseURL?.absoluteString {
-             let url = String.init(format: "%@%@",_BaseUrl ,relativeUrl)
-             
-             OTSafariService.launchInAppBrowser(withUrlString: url, viewController: self.navigationController)
-         }
-         */
-        let url = URL.init(string: urlString) //ENTOURAGE_WEB_URL
-        OTSafariService.launchInAppBrowser(with: url,viewController: self.navigationController)
+    func showWeb(slug:String) {
+        let token = UserDefaults.standard.currentUser.token!
+        let relativeUrl = String.init(format: API_URL_MENU_OPTIONS, slug,token)
+        if let _BaseUrl = OTHTTPRequestManager.sharedInstance()?.baseURL?.absoluteString {
+            let url = String.init(format: "%@%@",_BaseUrl ,relativeUrl)
+            
+            OTSafariService.launchInAppBrowser(withUrlString: url, viewController: self.navigationController)
+        }
     }
 }
 
@@ -81,12 +77,12 @@ extension OTMainGuideHubViewController: UITableViewDelegate,UITableViewDataSourc
         case 0:
             showGds()
         case 1:
-            showWeb(urlString: "")
+            showWeb(slug: SLUG_HUB_LINK_1)
         case 2:
-           showWeb(urlString: "")
+           showWeb(slug: SLUG_HUB_LINK_2)
             
         default:
-            showWeb(urlString: "")
+            showWeb(slug: SLUG_HUB_LINK_3)
         }
     }
 }
