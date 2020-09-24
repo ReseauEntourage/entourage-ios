@@ -57,4 +57,29 @@
      ];
 }
 
+- (void)updateUserPartner:(NSString*)partnerId
+              isFollowing:(BOOL) isFollowing
+                  success:(void (^)(BOOL isOk))success
+                  failure:(void (^)(NSError *error))failure {
+    
+    NSString *isFollow = isFollowing ? @"true" : @"false";
+    
+    NSDictionary *parameters = @{@"following":@{@"partner_id":partnerId,@"active":isFollow}};
+    
+    NSString *url = [NSString stringWithFormat:API_URL_UPDATE_ACCOUNT_PARTNER, TOKEN];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     POSTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject) {
+        success(YES);
+    }
+     andFailure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }
+     ];
+}
+
 @end

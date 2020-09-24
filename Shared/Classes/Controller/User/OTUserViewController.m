@@ -346,7 +346,7 @@ typedef NS_ENUM(NSInteger) {
         UINavigationController *controller = (UINavigationController *)segue.destinationViewController;
         
         OTAssociationDetailViewController *vc = (OTAssociationDetailViewController *) controller.topViewController;
-        vc.association = self.user.partner;
+        vc.associationId = self.user.partner.aid.intValue;
     }
 }
 

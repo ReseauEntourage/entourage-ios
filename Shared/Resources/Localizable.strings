@@ -862,3 +862,11 @@
 "hub_button_3" = "Découvrir le guide →";
 
 "hub_button_4" = "Trouver un atelier";
+
+//Pop follow/unfollow partner
+"buttonFollowOnPartner" = "Abonné.e";
+"buttonFollowOffPartner" = "S'abonner";
+"partnerFollowTitle" = "Titre";
+"partnerFollowMessage" = "Message";
+"partnerFollowButtonValid" = "Se désabonner";
+"partnerFollowButtonCancel" = "Annuler";
