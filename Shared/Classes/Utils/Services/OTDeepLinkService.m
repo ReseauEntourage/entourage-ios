@@ -187,8 +187,8 @@
             [self showProfileFromAnywhereForUser:pathComponents[1] isFromLaunch:NO];
         }
     } else if ([key isEqualToString:@"guide"]) {
-        OTMainViewController *mainViewController = [self popToMainViewController];
-        [mainViewController switchToGuide];
+        UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:GUIDES_TAB_INDEX];
+        [self updateAppWindow:tabViewController];
     } else if ([key isEqualToString:@"tutorial"]) {
         [OTAppState presentTutorialScreen];
     } else if([key isEqualToString:@"phone-settings"]) {

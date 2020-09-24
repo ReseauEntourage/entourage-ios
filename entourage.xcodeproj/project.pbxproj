@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
+		2B039CC1251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */; };
+		2B039CC2251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */; };
 		2B05CBCF25067F490065E8D3 /* OTShareEntourageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */; };
 		2B05CBD1250684840065E8D3 /* OTSharingEntourageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBD0250684840065E8D3 /* OTSharingEntourageTableViewCell.swift */; };
 		2B05CBD3250691AB0065E8D3 /* OTShareEntourageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBD2250691AB0065E8D3 /* OTShareEntourageService.swift */; };
 		2B1013F42445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1013F32445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift */; };
 		2B19CF10249CC34C00CE34BB /* OTUserEditZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19CF0F249CC34C00CE34BB /* OTUserEditZoneCell.swift */; };
 		2B19CF12249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19CF11249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift */; };
+		2B29BD94250F6CCE00663506 /* OTMainGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */; };
 		2B46005824586BC00068120F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B46005724586BC00068120F /* Logger.swift */; };
 		2B48AAFA24AB3D0100639789 /* OTAssoTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48AAF924AB3D0100639789 /* OTAssoTopTableViewCell.swift */; };
 		2B48AAFC24AB3D0B00639789 /* OTAssoNeedsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48AAFB24AB3D0B00639789 /* OTAssoNeedsTableViewCell.swift */; };
@@ -54,6 +57,10 @@
 		2BC579DD24B3751D00BB80C9 /* OTMainTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC579DC24B3751C00BB80C9 /* OTMainTabbarViewController.swift */; };
 		2BCC3398247D4631007E3E94 /* OTOnboardingSearchAssoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC3397247D4631007E3E94 /* OTOnboardingSearchAssoViewController.swift */; };
 		2BCC339A247D4A7B007E3E94 /* OTAssoSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC3399247D4A7B007E3E94 /* OTAssoSearchTableViewCell.swift */; };
+		2BDC29132513A804005C3BA5 /* OTGuideFiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDC29122513A804005C3BA5 /* OTGuideFiltersViewController.swift */; };
+		2BDD05C12514B1540054B2A1 /* OTGuideCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD05C02514B1540054B2A1 /* OTGuideCells.swift */; };
+		2BDD05C62514B2080054B2A1 /* OTGuideDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD05C52514B2080054B2A1 /* OTGuideDelegates.swift */; };
+		2BDD05CE2514B2550054B2A1 /* OTGuideModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD05CD2514B2550054B2A1 /* OTGuideModels.swift */; };
 		2BE75F2F24C834FD00D4C856 /* OTMenuProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE75F2E24C834FD00D4C856 /* OTMenuProfileViewController.swift */; };
 		2BE75F3124C84C3B00D4C856 /* OTSettingsUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE75F3024C84C3A00D4C856 /* OTSettingsUserTableViewCell.swift */; };
 		2BE75F3324C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE75F3224C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift */; };
@@ -184,7 +191,6 @@
 		A202EAD52085D2C70058F32C /* OTEntourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E81C2085D2C40058F32C /* OTEntourage.m */; };
 		A202EAD72085D2C70058F32C /* OTPoi.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8212085D2C40058F32C /* OTPoi.m */; };
 		A202EAD92085D2C70058F32C /* OTFeedItemJoiner.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8232085D2C40058F32C /* OTFeedItemJoiner.m */; };
-		A202EADB2085D2C70058F32C /* OTSolidarityGuideFilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8242085D2C40058F32C /* OTSolidarityGuideFilterItem.m */; };
 		A202EADD2085D2C70058F32C /* OTOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8262085D2C40058F32C /* OTOrganization.m */; };
 		A202EADF2085D2C70058F32C /* OTMyFeedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8292085D2C40058F32C /* OTMyFeedMessage.m */; };
 		A202EAE12085D2C70058F32C /* OTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82A2085D2C40058F32C /* OTCategory.m */; };
@@ -192,7 +198,6 @@
 		A202EAE52085D2C70058F32C /* OTFeedItemFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82C2085D2C40058F32C /* OTFeedItemFilters.m */; };
 		A202EAE72085D2C70058F32C /* OTCategoryType.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82E2085D2C40058F32C /* OTCategoryType.m */; };
 		A202EAE92085D2C70058F32C /* OTSavedFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82F2085D2C40058F32C /* OTSavedFilter.m */; };
-		A202EAEB2085D2C70058F32C /* OTSolidarityGuideFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8302085D2C40058F32C /* OTSolidarityGuideFilter.m */; };
 		A202EAED2085D2C70058F32C /* OTFeedItemTimeframeFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8372085D2C40058F32C /* OTFeedItemTimeframeFilter.m */; };
 		A202EAEF2085D2C70058F32C /* OTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E83D2085D2C40058F32C /* OTUser.m */; };
 		A202EAF12085D2C70058F32C /* OTPoiCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8402085D2C40058F32C /* OTPoiCategory.m */; };
@@ -266,9 +271,7 @@
 		A202EB7F2085D2C80058F32C /* OTCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8D92085D2C40058F32C /* OTCategoryViewController.m */; };
 		A202EB812085D2C80058F32C /* OTConfirmCloseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8DB2085D2C40058F32C /* OTConfirmCloseViewController.m */; };
 		A202EB832085D2C80058F32C /* OTCategoryEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8DF2085D2C40058F32C /* OTCategoryEditCell.m */; };
-		A202EB852085D2C80058F32C /* OTGuideMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E02085D2C40058F32C /* OTGuideMapDelegate.m */; };
 		A202EB872085D2C80058F32C /* OTBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E12085D2C40058F32C /* OTBarButtonView.m */; };
-		A202EB8B2085D2C80058F32C /* OTSolidarityGuideFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E42085D2C40058F32C /* OTSolidarityGuideFilterCell.m */; };
 		A202EB8D2085D2C80058F32C /* OTTourCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E62085D2C40058F32C /* OTTourCreatorViewController.m */; };
 		A202EB8F2085D2C80058F32C /* OTMapOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8EB2085D2C40058F32C /* OTMapOptionsViewController.m */; };
 		A202EB912085D2C80058F32C /* OTUserEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8EC2085D2C40058F32C /* OTUserEditViewController.m */; };
@@ -293,7 +296,6 @@
 		A202EBB92085D2C80058F32C /* OTMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9182085D2C50058F32C /* OTMessageViewController.m */; };
 		A202EBBB2085D2C80058F32C /* OTAboutMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9192085D2C50058F32C /* OTAboutMeViewController.m */; };
 		A202EBBD2085D2C80058F32C /* OTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91A2085D2C50058F32C /* OTMapView.m */; };
-		A202EBBF2085D2C80058F32C /* OTSolidarityGuideFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91B2085D2C50058F32C /* OTSolidarityGuideFiltersViewController.m */; };
 		A202EBC12085D2C80058F32C /* OTActivityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91C2085D2C50058F32C /* OTActivityProvider.m */; };
 		A202EBC32085D2C80058F32C /* OTBaseMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91D2085D2C50058F32C /* OTBaseMapDelegate.m */; };
 		A202EBC52085D2C80058F32C /* OTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91E2085D2C50058F32C /* OTMainViewController.m */; };
@@ -373,7 +375,6 @@
 		A202EC5D2085D2C80058F32C /* OTDisclaimerBaseBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CC2085D2C60058F32C /* OTDisclaimerBaseBehavior.m */; };
 		A202EC5F2085D2C80058F32C /* OTEntourageDisclaimerBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CD2085D2C60058F32C /* OTEntourageDisclaimerBehavior.m */; };
 		A202EC612085D2C80058F32C /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9CF2085D2C60058F32C /* OTCountryCodePickerViewDataSource.m */; };
-		A202EC632085D2C80058F32C /* OTSolidarityGuideFilteredDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D02085D2C60058F32C /* OTSolidarityGuideFilteredDataSource.m */; };
 		A202EC652085D2C80058F32C /* OTDistributedDelegateBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D12085D2C60058F32C /* OTDistributedDelegateBehavior.m */; };
 		A202EC672085D2C80058F32C /* OTTapViewBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D32085D2C60058F32C /* OTTapViewBehavior.m */; };
 		A202EC692085D2C80058F32C /* OTCollectionCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D62085D2C60058F32C /* OTCollectionCellProviderBehavior.m */; };
@@ -388,7 +389,6 @@
 		A202EC7B2085D2C80058F32C /* OTFilteredDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9EA2085D2C60058F32C /* OTFilteredDataSourceBehavior.m */; };
 		A202EC7D2085D2C80058F32C /* OTAssociationsSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9EE2085D2C60058F32C /* OTAssociationsSourceBehavior.m */; };
 		A202EC7F2085D2C80058F32C /* OTAssociationsCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9EF2085D2C60058F32C /* OTAssociationsCellProviderBehavior.m */; };
-		A202EC812085D2C80058F32C /* OTSolidarityGuideFiltersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9F12085D2C60058F32C /* OTSolidarityGuideFiltersCellProvider.m */; };
 		A202EC832085D2C80058F32C /* OTFeedItemsFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9F32085D2C60058F32C /* OTFeedItemsFiltersTableDataSource.m */; };
 		A202EC852085D2C80058F32C /* OTFeedItemFiltersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9F52085D2C60058F32C /* OTFeedItemFiltersCellProvider.m */; };
 		A202EC872085D2C80058F32C /* OTContactsTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9FA2085D2C60058F32C /* OTContactsTableCellProviderBehavior.m */; };
@@ -397,7 +397,6 @@
 		A202EC8D2085D2C80058F32C /* OTDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA002085D2C60058F32C /* OTDataSourceBehavior.m */; };
 		A202EC8F2085D2C80058F32C /* OTTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA012085D2C60058F32C /* OTTableCellProviderBehavior.m */; };
 		A202EC912085D2C80058F32C /* OTTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA022085D2C60058F32C /* OTTableDataSourceBehavior.m */; };
-		A202EC932085D2C80058F32C /* OTSolidarityGuideFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA032085D2C60058F32C /* OTSolidarityGuideFiltersTableDataSource.m */; };
 		A202EC952085D2C80058F32C /* OTMessageTableDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0B2085D2C60058F32C /* OTMessageTableDataSourceBehavior.m */; };
 		A202EC972085D2C80058F32C /* OTMessageDataSourceBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0C2085D2C60058F32C /* OTMessageDataSourceBehavior.m */; };
 		A202EC992085D2C80058F32C /* OTMessageTableCellProviderBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA0D2085D2C60058F32C /* OTMessageTableCellProviderBehavior.m */; };
@@ -601,19 +600,15 @@
 		A296B78120871CFC00F6AFBD /* OTBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E12085D2C40058F32C /* OTBarButtonView.m */; };
 		A296B78220871CFC00F6AFBD /* OTOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8262085D2C40058F32C /* OTOrganization.m */; };
 		A296B78320871CFC00F6AFBD /* OTUserProfileBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA2B2085D2C60058F32C /* OTUserProfileBehavior.m */; };
-		A296B78420871CFC00F6AFBD /* OTSolidarityGuideFiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E91B2085D2C50058F32C /* OTSolidarityGuideFiltersViewController.m */; };
 		A296B78520871CFC00F6AFBD /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0F20862E780099B989 /* UINavigationBar+Appearance.m */; };
 		A296B78620871CFC00F6AFBD /* OTEntourageChangedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA8B2085D2C60058F32C /* OTEntourageChangedHandler.m */; };
-		A296B78720871CFC00F6AFBD /* OTSolidarityGuideFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E42085D2C40058F32C /* OTSolidarityGuideFilterCell.m */; };
 		A296B78820871CFC00F6AFBD /* OTMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94C2085D2C50058F32C /* OTMenuTableViewCell.m */; };
 		A296B78920871CFC00F6AFBD /* OTUserEditPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9292085D2C50058F32C /* OTUserEditPasswordViewController.m */; };
 		A296B78A20871CFC00F6AFBD /* OTDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E86F2085D2C40058F32C /* OTDescriptionCell.m */; };
 		A296B78B20871CFC00F6AFBD /* OTMyEntouragesCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E52085D2C60058F32C /* OTMyEntouragesCellProvider.m */; };
 		A296B78C20871CFC00F6AFBD /* OTTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8AA2085D2C40058F32C /* OTTutorialViewController.m */; };
-		A296B78D20871CFC00F6AFBD /* OTSolidarityGuideFiltersTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA032085D2C60058F32C /* OTSolidarityGuideFiltersTableDataSource.m */; };
 		A296B78E20871CFC00F6AFBD /* OTToursMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9432085D2C50058F32C /* OTToursMapDelegate.m */; };
 		A296B78F20871CFC00F6AFBD /* OTPublicInfoTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA132085D2C60058F32C /* OTPublicInfoTableDataSource.m */; };
-		A296B79020871CFC00F6AFBD /* OTSolidarityGuideFilteredDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9D02085D2C60058F32C /* OTSolidarityGuideFilteredDataSource.m */; };
 		A296B79120871CFC00F6AFBD /* OTEntouragesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8622085D2C40058F32C /* OTEntouragesTableViewCell.m */; };
 		A296B79220871CFC00F6AFBD /* OTEntourageJoinerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA902085D2C60058F32C /* OTEntourageJoinerDelegate.m */; };
 		A296B79320871CFC00F6AFBD /* OTUserTableConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9362085D2C50058F32C /* OTUserTableConfigurator.m */; };
@@ -625,7 +620,6 @@
 		A296B79920871CFC00F6AFBD /* OTVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC52085D2C70058F32C /* OTVersionInfo.m */; };
 		A296B79A20871CFC00F6AFBD /* OTMapOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8EB2085D2C40058F32C /* OTMapOptionsViewController.m */; };
 		A296B79B20871CFC00F6AFBD /* OTActiveFeedItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E87A2085D2C40058F32C /* OTActiveFeedItemViewController.m */; };
-		A296B79C20871CFC00F6AFBD /* OTSolidarityGuideFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8302085D2C40058F32C /* OTSolidarityGuideFilter.m */; };
 		A296B79D20871CFC00F6AFBD /* OTUserEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E92E2085D2C50058F32C /* OTUserEmailViewController.m */; };
 		A296B79E20871CFC00F6AFBD /* OTStartupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9382085D2C50058F32C /* OTStartupViewController.m */; };
 		A296B79F20871CFC00F6AFBD /* OTTutorial4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8B02085D2C40058F32C /* OTTutorial4ViewController.m */; };
@@ -658,7 +652,6 @@
 		A296B7BA20871CFC00F6AFBD /* OTUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8D62085D2C40058F32C /* OTUserViewController.m */; };
 		A296B7BB20871CFC00F6AFBD /* OTAddressBookPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8472085D2C40058F32C /* OTAddressBookPhone.m */; };
 		A296B7BC20871CFC00F6AFBD /* OTPublicInfoCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA142085D2C60058F32C /* OTPublicInfoCellProvider.m */; };
-		A296B7BD20871CFC00F6AFBD /* OTSolidarityGuideFiltersCellProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9F12085D2C60058F32C /* OTSolidarityGuideFiltersCellProvider.m */; };
 		A296B7BE20871CFC00F6AFBD /* UINavigationController+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E5FA0C20862E180099B989 /* UINavigationController+Appearance.m */; };
 		A296B7BF20871CFC00F6AFBD /* OTPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A202E9042085D2C40058F32C /* OTPopupViewController.swift */; };
 		A296B7C020871CFC00F6AFBD /* OTChatCellBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8992085D2C40058F32C /* OTChatCellBase.m */; };
@@ -700,7 +693,6 @@
 		A296B7E420871CFC00F6AFBD /* OTMapDelegateProxyBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9972085D2C60058F32C /* OTMapDelegateProxyBehavior.m */; };
 		A296B7E520871CFC00F6AFBD /* OTInvitationsService.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9712085D2C60058F32C /* OTInvitationsService.m */; };
 		A296B7E620871CFC00F6AFBD /* NSDate+ui.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAC12085D2C70058F32C /* NSDate+ui.m */; };
-		A296B7E720871CFC00F6AFBD /* OTSolidarityGuideFilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8242085D2C40058F32C /* OTSolidarityGuideFilterItem.m */; };
 		A296B7E820871CFC00F6AFBD /* OTFilterCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E94D2085D2C50058F32C /* OTFilterCellTableViewCell.m */; };
 		A296B7E920871CFC00F6AFBD /* OTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8092085D0FD0058F32C /* OTAppDelegate.m */; };
 		A296B7EA20871CFC00F6AFBD /* OTEditEncounterBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EAA42085D2C60058F32C /* OTEditEncounterBehavior.m */; };
@@ -784,7 +776,6 @@
 		A296B83820871CFC00F6AFBD /* OTFeedItemJoinOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8F02085D2C40058F32C /* OTFeedItemJoinOptionsViewController.m */; };
 		A296B83920871CFC00F6AFBD /* OTMyEntouragesTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9E62085D2C60058F32C /* OTMyEntouragesTableDataSource.m */; };
 		A296B83A20871CFC00F6AFBD /* OTCustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E9A52085D2C60058F32C /* OTCustomAnnotation.m */; };
-		A296B83C20871CFC00F6AFBD /* OTGuideMapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8E02085D2C40058F32C /* OTGuideMapDelegate.m */; };
 		A296B83D20871CFC00F6AFBD /* UIView+entourage.m in Sources */ = {isa = PBXBuildFile; fileRef = A202EA5C2085D2C60058F32C /* UIView+entourage.m */; };
 		A296B83E20871CFC00F6AFBD /* OTBaseInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E8702085D2C40058F32C /* OTBaseInfoCell.m */; };
 		A296B83F20871CFC00F6AFBD /* OTCategoryType.m in Sources */ = {isa = PBXBuildFile; fileRef = A202E82E2085D2C40058F32C /* OTCategoryType.m */; };
@@ -1011,6 +1002,7 @@
 		1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = entourage.entitlements; sourceTree = "<group>"; };
 		2A4E5B32B53E7E30C72258C3 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
+		2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMainGuideHubViewController.swift; sourceTree = "<group>"; };
 		2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTShareEntourageViewController.swift; sourceTree = "<group>"; };
 		2B05CBD0250684840065E8D3 /* OTSharingEntourageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSharingEntourageTableViewCell.swift; sourceTree = "<group>"; };
 		2B05CBD2250691AB0065E8D3 /* OTShareEntourageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTShareEntourageService.swift; sourceTree = "<group>"; };
@@ -1018,6 +1010,7 @@
 		2B1013F32445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPreOnboardingV2ChoiceViewController.swift; sourceTree = "<group>"; };
 		2B19CF0F249CC34C00CE34BB /* OTUserEditZoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTUserEditZoneCell.swift; sourceTree = "<group>"; };
 		2B19CF11249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTProfileSelectTypeViewController.swift; sourceTree = "<group>"; };
+		2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMainGuideViewController.swift; sourceTree = "<group>"; };
 		2B46005724586BC00068120F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		2B48AAF924AB3D0100639789 /* OTAssoTopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTAssoTopTableViewCell.swift; sourceTree = "<group>"; };
 		2B48AAFB24AB3D0B00639789 /* OTAssoNeedsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTAssoNeedsTableViewCell.swift; sourceTree = "<group>"; };
@@ -1057,6 +1050,10 @@
 		2BC579DC24B3751C00BB80C9 /* OTMainTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMainTabbarViewController.swift; sourceTree = "<group>"; };
 		2BCC3397247D4631007E3E94 /* OTOnboardingSearchAssoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingSearchAssoViewController.swift; sourceTree = "<group>"; };
 		2BCC3399247D4A7B007E3E94 /* OTAssoSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTAssoSearchTableViewCell.swift; sourceTree = "<group>"; };
+		2BDC29122513A804005C3BA5 /* OTGuideFiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGuideFiltersViewController.swift; sourceTree = "<group>"; };
+		2BDD05C02514B1540054B2A1 /* OTGuideCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGuideCells.swift; sourceTree = "<group>"; };
+		2BDD05C52514B2080054B2A1 /* OTGuideDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGuideDelegates.swift; sourceTree = "<group>"; };
+		2BDD05CD2514B2550054B2A1 /* OTGuideModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGuideModels.swift; sourceTree = "<group>"; };
 		2BE75F2E24C834FD00D4C856 /* OTMenuProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMenuProfileViewController.swift; sourceTree = "<group>"; };
 		2BE75F3024C84C3A00D4C856 /* OTSettingsUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSettingsUserTableViewCell.swift; sourceTree = "<group>"; };
 		2BE75F3224C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSettingsMenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -1192,10 +1189,8 @@
 		A202E8212085D2C40058F32C /* OTPoi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPoi.m; sourceTree = "<group>"; };
 		A202E8222085D2C40058F32C /* OTAboutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAboutItem.h; sourceTree = "<group>"; };
 		A202E8232085D2C40058F32C /* OTFeedItemJoiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemJoiner.m; sourceTree = "<group>"; };
-		A202E8242085D2C40058F32C /* OTSolidarityGuideFilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFilterItem.m; sourceTree = "<group>"; };
 		A202E8252085D2C40058F32C /* OTTour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTour.h; sourceTree = "<group>"; };
 		A202E8262085D2C40058F32C /* OTOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTOrganization.m; sourceTree = "<group>"; };
-		A202E8282085D2C40058F32C /* OTSolidarityGuideFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFilter.h; sourceTree = "<group>"; };
 		A202E8292085D2C40058F32C /* OTMyFeedMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMyFeedMessage.m; sourceTree = "<group>"; };
 		A202E82A2085D2C40058F32C /* OTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCategory.m; sourceTree = "<group>"; };
 		A202E82B2085D2C40058F32C /* OTUnreadMessageCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUnreadMessageCount.m; sourceTree = "<group>"; };
@@ -1203,7 +1198,6 @@
 		A202E82D2085D2C40058F32C /* OTFeedItemTimeframeFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemTimeframeFilter.h; sourceTree = "<group>"; };
 		A202E82E2085D2C40058F32C /* OTCategoryType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCategoryType.m; sourceTree = "<group>"; };
 		A202E82F2085D2C40058F32C /* OTSavedFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSavedFilter.m; sourceTree = "<group>"; };
-		A202E8302085D2C40058F32C /* OTSolidarityGuideFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFilter.m; sourceTree = "<group>"; };
 		A202E8312085D2C40058F32C /* OTFeedItemFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemFilters.h; sourceTree = "<group>"; };
 		A202E8322085D2C40058F32C /* OTUnreadMessageCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUnreadMessageCount.h; sourceTree = "<group>"; };
 		A202E8332085D2C40058F32C /* OTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCategory.h; sourceTree = "<group>"; };
@@ -1235,7 +1229,6 @@
 		A202E84E2085D2C40058F32C /* OTEntourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEntourage.h; sourceTree = "<group>"; };
 		A202E84F2085D2C40058F32C /* OTSavedMyEntouragesFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSavedMyEntouragesFilter.m; sourceTree = "<group>"; };
 		A202E8502085D2C40058F32C /* OTTour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTour.m; sourceTree = "<group>"; };
-		A202E8512085D2C40058F32C /* OTSolidarityGuideFilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFilterItem.h; sourceTree = "<group>"; };
 		A202E8522085D2C40058F32C /* OTFeedItemJoiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemJoiner.h; sourceTree = "<group>"; };
 		A202E8532085D2C40058F32C /* OTAboutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutItem.m; sourceTree = "<group>"; };
 		A202E8542085D2C40058F32C /* OTPoi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPoi.h; sourceTree = "<group>"; };
@@ -1347,7 +1340,6 @@
 		A202E8CD2085D2C40058F32C /* OTChangeStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTChangeStateViewController.h; sourceTree = "<group>"; };
 		A202E8CE2085D2C40058F32C /* OTChangeStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTChangeStateViewController.m; sourceTree = "<group>"; };
 		A202E8CF2085D2C40058F32C /* OTMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMainViewController.h; sourceTree = "<group>"; };
-		A202E8D02085D2C40058F32C /* OTSolidarityGuideFiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFiltersViewController.h; sourceTree = "<group>"; };
 		A202E8D12085D2C40058F32C /* OTActivityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTActivityProvider.h; sourceTree = "<group>"; };
 		A202E8D22085D2C40058F32C /* OTBaseMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTBaseMapDelegate.h; sourceTree = "<group>"; };
 		A202E8D32085D2C40058F32C /* OTMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMapView.h; sourceTree = "<group>"; };
@@ -1363,10 +1355,8 @@
 		A202E8DD2085D2C40058F32C /* OTToursMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTToursMapDelegate.h; sourceTree = "<group>"; };
 		A202E8DE2085D2C40058F32C /* OTStartupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTStartupViewController.h; sourceTree = "<group>"; };
 		A202E8DF2085D2C40058F32C /* OTCategoryEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCategoryEditCell.m; sourceTree = "<group>"; };
-		A202E8E02085D2C40058F32C /* OTGuideMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTGuideMapDelegate.m; sourceTree = "<group>"; };
 		A202E8E12085D2C40058F32C /* OTBarButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTBarButtonView.m; sourceTree = "<group>"; };
 		A202E8E22085D2C40058F32C /* OTUserEditPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTUserEditPasswordViewController.h; sourceTree = "<group>"; };
-		A202E8E42085D2C40058F32C /* OTSolidarityGuideFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFilterCell.m; sourceTree = "<group>"; };
 		A202E8E52085D2C40058F32C /* OTAskMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAskMoreViewController.h; sourceTree = "<group>"; };
 		A202E8E62085D2C40058F32C /* OTTourCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTourCreatorViewController.m; sourceTree = "<group>"; };
 		A202E8E72085D2C40058F32C /* OTTourOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTourOptionsViewController.h; sourceTree = "<group>"; };
@@ -1417,7 +1407,6 @@
 		A202E9192085D2C50058F32C /* OTAboutMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAboutMeViewController.m; sourceTree = "<group>"; };
 		A202E91A2085D2C50058F32C /* OTMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMapView.m; sourceTree = "<group>"; };
 		A202E91A20E381D200992C09 /* OTNeighborhoodAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTNeighborhoodAnnotation.h; sourceTree = "<group>"; };
-		A202E91B2085D2C50058F32C /* OTSolidarityGuideFiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFiltersViewController.m; sourceTree = "<group>"; };
 		A202E91B20E381D200992C09 /* OTNeighborhoodAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTNeighborhoodAnnotation.m; sourceTree = "<group>"; };
 		A202E91C2085D2C50058F32C /* OTActivityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTActivityProvider.m; sourceTree = "<group>"; };
 		A202E91D2085D2C50058F32C /* OTBaseMapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTBaseMapDelegate.m; sourceTree = "<group>"; };
@@ -1427,10 +1416,8 @@
 		A202E9212085D2C50058F32C /* OTSWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSWRevealViewController.m; sourceTree = "<group>"; };
 		A202E9222085D2C50058F32C /* OTCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCalloutViewController.h; sourceTree = "<group>"; };
 		A202E9232085D2C50058F32C /* OTSummaryInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSummaryInfoCell.h; sourceTree = "<group>"; };
-		A202E9252085D2C50058F32C /* OTSolidarityGuideFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFilterCell.h; sourceTree = "<group>"; };
 		A202E9262085D2C50058F32C /* OTBarButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTBarButtonView.h; sourceTree = "<group>"; };
 		A202E92620E4BF6100992C09 /* UIImage+Fitting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Fitting.h"; sourceTree = "<group>"; };
-		A202E9272085D2C50058F32C /* OTGuideMapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTGuideMapDelegate.h; sourceTree = "<group>"; };
 		A202E92720E4BF6100992C09 /* UIImage+Fitting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Fitting.m"; sourceTree = "<group>"; };
 		A202E9292085D2C50058F32C /* OTUserEditPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTUserEditPasswordViewController.m; sourceTree = "<group>"; };
 		A202E92A2085D2C50058F32C /* OTCategoryEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCategoryEditCell.h; sourceTree = "<group>"; };
@@ -1576,7 +1563,6 @@
 		A202E9CD2085D2C60058F32C /* OTEntourageDisclaimerBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTEntourageDisclaimerBehavior.m; sourceTree = "<group>"; };
 		A202E9CE2085D2C60058F32C /* OTEncounterDisclaimerBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTEncounterDisclaimerBehavior.h; sourceTree = "<group>"; };
 		A202E9CF2085D2C60058F32C /* OTCountryCodePickerViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCountryCodePickerViewDataSource.m; sourceTree = "<group>"; };
-		A202E9D02085D2C60058F32C /* OTSolidarityGuideFilteredDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFilteredDataSource.m; sourceTree = "<group>"; };
 		A202E9D12085D2C60058F32C /* OTDistributedDelegateBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTDistributedDelegateBehavior.m; sourceTree = "<group>"; };
 		A202E9D32085D2C60058F32C /* OTTapViewBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTapViewBehavior.m; sourceTree = "<group>"; };
 		A202E9D42085D2C60058F32C /* OTTapViewBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTapViewBehavior.h; sourceTree = "<group>"; };
@@ -1598,12 +1584,10 @@
 		A202E9E82085D2C60058F32C /* OTMyEntouragesCellProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMyEntouragesCellProvider.h; sourceTree = "<group>"; };
 		A202E9E92085D2C60058F32C /* OTMyEntouragesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMyEntouragesDataSource.h; sourceTree = "<group>"; };
 		A202E9EA2085D2C60058F32C /* OTFilteredDataSourceBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFilteredDataSourceBehavior.m; sourceTree = "<group>"; };
-		A202E9EB2085D2C60058F32C /* OTSolidarityGuideFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFilterDelegate.h; sourceTree = "<group>"; };
 		A202E9ED2085D2C60058F32C /* OTAssociationsCellProviderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAssociationsCellProviderBehavior.h; sourceTree = "<group>"; };
 		A202E9EE2085D2C60058F32C /* OTAssociationsSourceBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAssociationsSourceBehavior.m; sourceTree = "<group>"; };
 		A202E9EF2085D2C60058F32C /* OTAssociationsCellProviderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTAssociationsCellProviderBehavior.m; sourceTree = "<group>"; };
 		A202E9F02085D2C60058F32C /* OTAssociationsSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTAssociationsSourceBehavior.h; sourceTree = "<group>"; };
-		A202E9F12085D2C60058F32C /* OTSolidarityGuideFiltersCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFiltersCellProvider.m; sourceTree = "<group>"; };
 		A202E9F32085D2C60058F32C /* OTFeedItemsFiltersTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemsFiltersTableDataSource.m; sourceTree = "<group>"; };
 		A202E9F42085D2C60058F32C /* OTFeedItemFiltersCellProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedItemFiltersCellProvider.h; sourceTree = "<group>"; };
 		A202E9F52085D2C60058F32C /* OTFeedItemFiltersCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedItemFiltersCellProvider.m; sourceTree = "<group>"; };
@@ -1619,8 +1603,6 @@
 		A202EA002085D2C60058F32C /* OTDataSourceBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTDataSourceBehavior.m; sourceTree = "<group>"; };
 		A202EA012085D2C60058F32C /* OTTableCellProviderBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTableCellProviderBehavior.m; sourceTree = "<group>"; };
 		A202EA022085D2C60058F32C /* OTTableDataSourceBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTTableDataSourceBehavior.m; sourceTree = "<group>"; };
-		A202EA032085D2C60058F32C /* OTSolidarityGuideFiltersTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTSolidarityGuideFiltersTableDataSource.m; sourceTree = "<group>"; };
-		A202EA042085D2C60058F32C /* OTSolidarityGuideFiltersCellProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFiltersCellProvider.h; sourceTree = "<group>"; };
 		A202EA052085D2C60058F32C /* OTFilteredDataSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFilteredDataSourceBehavior.h; sourceTree = "<group>"; };
 		A202EA072085D2C60058F32C /* OTMessageDataSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMessageDataSourceBehavior.h; sourceTree = "<group>"; };
 		A202EA082085D2C60058F32C /* OTMessageTableDataSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMessageTableDataSourceBehavior.h; sourceTree = "<group>"; };
@@ -1642,11 +1624,9 @@
 		A202EA1A2085D2C60058F32C /* OTMembersTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMembersTableDataSource.m; sourceTree = "<group>"; };
 		A202EA1B2085D2C60058F32C /* OTMembersDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTMembersDataSource.h; sourceTree = "<group>"; };
 		A202EA1C2085D2C60058F32C /* OTMembersCellProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTMembersCellProvider.m; sourceTree = "<group>"; };
-		A202EA1D2085D2C60058F32C /* OTSolidarityGuideFiltersTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFiltersTableDataSource.h; sourceTree = "<group>"; };
 		A202EA1E2085D2C60058F32C /* OTTableDataSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTableDataSourceBehavior.h; sourceTree = "<group>"; };
 		A202EA1F2085D2C60058F32C /* OTDataSourceBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTDataSourceBehavior.h; sourceTree = "<group>"; };
 		A202EA202085D2C60058F32C /* OTTableCellProviderBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTTableCellProviderBehavior.h; sourceTree = "<group>"; };
-		A202EA212085D2C60058F32C /* OTSolidarityGuideFilteredDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTSolidarityGuideFilteredDataSource.h; sourceTree = "<group>"; };
 		A202EA222085D2C60058F32C /* OTDistributedDelegateBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTDistributedDelegateBehavior.h; sourceTree = "<group>"; };
 		A202EA232085D2C60058F32C /* OTCountryCodePickerViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCountryCodePickerViewDataSource.h; sourceTree = "<group>"; };
 		A202EA252085D2C60058F32C /* OTNextStatusButtonBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTNextStatusButtonBehavior.h; sourceTree = "<group>"; };
@@ -2060,6 +2040,19 @@
 			path = pre_onboarding;
 			sourceTree = "<group>";
 		};
+		2BDC290E2513A7CE005C3BA5 /* guide_filters */ = {
+			isa = PBXGroup;
+			children = (
+				2BDC29122513A804005C3BA5 /* OTGuideFiltersViewController.swift */,
+				A202E8ED2085D2C40058F32C /* OTSolidarityGuideCell.h */,
+				A202E8672085D2C40058F32C /* OTSolidarityGuideCell.m */,
+				2BDD05C02514B1540054B2A1 /* OTGuideCells.swift */,
+				2BDD05C52514B2080054B2A1 /* OTGuideDelegates.swift */,
+				2BDD05CD2514B2550054B2A1 /* OTGuideModels.swift */,
+			);
+			path = guide_filters;
+			sourceTree = "<group>";
+		};
 		2BE75F2D24C834E300D4C856 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -2346,8 +2339,6 @@
 				A202E8402085D2C40058F32C /* OTPoiCategory.m */,
 				A202E81B2085D2C40058F32C /* OTSavedMyEntouragesFilter.h */,
 				A202E84F2085D2C40058F32C /* OTSavedMyEntouragesFilter.m */,
-				A202E8512085D2C40058F32C /* OTSolidarityGuideFilterItem.h */,
-				A202E8242085D2C40058F32C /* OTSolidarityGuideFilterItem.m */,
 				A202E8252085D2C40058F32C /* OTTour.h */,
 				A202E8502085D2C40058F32C /* OTTour.m */,
 				A202E81E2085D2C40058F32C /* OTTourPoint.h */,
@@ -2365,7 +2356,6 @@
 		A202E8272085D2C40058F32C /* Feeds */ = {
 			isa = PBXGroup;
 			children = (
-				A202E8282085D2C40058F32C /* OTSolidarityGuideFilter.h */,
 				A202E8292085D2C40058F32C /* OTMyFeedMessage.m */,
 				A202E82A2085D2C40058F32C /* OTCategory.m */,
 				A202E82B2085D2C40058F32C /* OTUnreadMessageCount.m */,
@@ -2373,7 +2363,6 @@
 				A202E82D2085D2C40058F32C /* OTFeedItemTimeframeFilter.h */,
 				A202E82E2085D2C40058F32C /* OTCategoryType.m */,
 				A202E82F2085D2C40058F32C /* OTSavedFilter.m */,
-				A202E8302085D2C40058F32C /* OTSolidarityGuideFilter.m */,
 				A202E8312085D2C40058F32C /* OTFeedItemFilters.h */,
 				A202E8322085D2C40058F32C /* OTUnreadMessageCount.h */,
 				A202E8332085D2C40058F32C /* OTCategory.h */,
@@ -2441,10 +2430,10 @@
 				A2CCF2F32167418800AD6237 /* EntourageEditor */,
 				A202E8B92085D2C40058F32C /* OTGuideDetailsViewController.h */,
 				A202E9002085D2C40058F32C /* OTGuideDetailsViewController.m */,
-				A202E9272085D2C50058F32C /* OTGuideMapDelegate.h */,
-				A202E8E02085D2C40058F32C /* OTGuideMapDelegate.m */,
 				A202E8CF2085D2C40058F32C /* OTMainViewController.h */,
 				A202E91E2085D2C50058F32C /* OTMainViewController.m */,
+				2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */,
+				2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */,
 				A202E8692085D2C40058F32C /* OTMapOptionsViewController.h */,
 				A202E8EB2085D2C40058F32C /* OTMapOptionsViewController.m */,
 				A202E8D32085D2C40058F32C /* OTMapView.h */,
@@ -2464,12 +2453,7 @@
 				A202E9442085D2C50058F32C /* OTQuitFeedItemViewController.m */,
 				A202E8B72085D2C40058F32C /* OTSocialViewController.h */,
 				A202E9022085D2C40058F32C /* OTSocialViewController.m */,
-				A202E8ED2085D2C40058F32C /* OTSolidarityGuideCell.h */,
-				A202E8672085D2C40058F32C /* OTSolidarityGuideCell.m */,
-				A202E9252085D2C50058F32C /* OTSolidarityGuideFilterCell.h */,
-				A202E8E42085D2C40058F32C /* OTSolidarityGuideFilterCell.m */,
-				A202E8D02085D2C40058F32C /* OTSolidarityGuideFiltersViewController.h */,
-				A202E91B2085D2C50058F32C /* OTSolidarityGuideFiltersViewController.m */,
+				2BDC290E2513A7CE005C3BA5 /* guide_filters */,
 				A202E9232085D2C50058F32C /* OTSummaryInfoCell.h */,
 				A202E8C72085D2C40058F32C /* OTSummaryInfoCell.m */,
 				A2CCF2F12167413B00AD6237 /* Deprecated */,
@@ -2977,13 +2961,11 @@
 				A202E9C72085D2C60058F32C /* OTBehavior.h */,
 				A202E9C82085D2C60058F32C /* Disclaimer */,
 				A202E9CF2085D2C60058F32C /* OTCountryCodePickerViewDataSource.m */,
-				A202E9D02085D2C60058F32C /* OTSolidarityGuideFilteredDataSource.m */,
 				A202E9D12085D2C60058F32C /* OTDistributedDelegateBehavior.m */,
 				A202E9D22085D2C60058F32C /* Touch */,
 				A202E9D52085D2C60058F32C /* UICollectionView */,
 				A202E9E12085D2C60058F32C /* OTBehavior.m */,
 				A202E9E22085D2C60058F32C /* UITableView */,
-				A202EA212085D2C60058F32C /* OTSolidarityGuideFilteredDataSource.h */,
 				A202EA222085D2C60058F32C /* OTDistributedDelegateBehavior.h */,
 				A202EA232085D2C60058F32C /* OTCountryCodePickerViewDataSource.h */,
 				A202EA242085D2C60058F32C /* FeedItems */,
@@ -3139,23 +3121,18 @@
 			children = (
 				A202E9E32085D2C60058F32C /* MyEntourages */,
 				A202E9EA2085D2C60058F32C /* OTFilteredDataSourceBehavior.m */,
-				A202E9EB2085D2C60058F32C /* OTSolidarityGuideFilterDelegate.h */,
 				A202E9EC2085D2C60058F32C /* Associations */,
-				A202E9F12085D2C60058F32C /* OTSolidarityGuideFiltersCellProvider.m */,
 				A202E9F22085D2C60058F32C /* FeedItemsFilters */,
 				A202E9F82085D2C60058F32C /* OTGroupedTableDataSourceBehavior.h */,
 				A202E9F92085D2C60058F32C /* Contacts */,
 				A202EA002085D2C60058F32C /* OTDataSourceBehavior.m */,
 				A202EA012085D2C60058F32C /* OTTableCellProviderBehavior.m */,
 				A202EA022085D2C60058F32C /* OTTableDataSourceBehavior.m */,
-				A202EA032085D2C60058F32C /* OTSolidarityGuideFiltersTableDataSource.m */,
-				A202EA042085D2C60058F32C /* OTSolidarityGuideFiltersCellProvider.h */,
 				A202EA052085D2C60058F32C /* OTFilteredDataSourceBehavior.h */,
 				A202EA062085D2C60058F32C /* FeedItemMessages */,
 				A202EA0E2085D2C60058F32C /* OTGroupedTableDataSourceBehavior.m */,
 				A202EA0F2085D2C60058F32C /* PublicInfo */,
 				A202EA162085D2C60058F32C /* Members */,
-				A202EA1D2085D2C60058F32C /* OTSolidarityGuideFiltersTableDataSource.h */,
 				A202EA1E2085D2C60058F32C /* OTTableDataSourceBehavior.h */,
 				A202EA1F2085D2C60058F32C /* OTDataSourceBehavior.h */,
 				A202EA202085D2C60058F32C /* OTTableCellProviderBehavior.h */,
@@ -4574,22 +4551,18 @@
 				A202EADD2085D2C70058F32C /* OTOrganization.m in Sources */,
 				2BA0ED5724BF3091009CFB03 /* OTLoginNextViewController.swift in Sources */,
 				A202ECAD2085D2C80058F32C /* OTUserProfileBehavior.m in Sources */,
-				A202EBBF2085D2C80058F32C /* OTSolidarityGuideFiltersViewController.m in Sources */,
 				2BB2E38C244F1C07003011C9 /* OTOnboardingV2StartViewController.swift in Sources */,
 				A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */,
 				A202ECFF2085D2C80058F32C /* OTEntourageChangedHandler.m in Sources */,
-				A202EB8B2085D2C80058F32C /* OTSolidarityGuideFilterCell.m in Sources */,
 				A202EBEF2085D2C80058F32C /* OTMenuTableViewCell.m in Sources */,
 				A202EBCD2085D2C80058F32C /* OTUserEditPasswordViewController.m in Sources */,
 				2BB2E396244F45AA003011C9 /* OTOnboardingTypeViewController.swift in Sources */,
 				A202EB1F2085D2C70058F32C /* OTDescriptionCell.m in Sources */,
 				A202EC772085D2C80058F32C /* OTMyEntouragesCellProvider.m in Sources */,
 				A202EB592085D2C80058F32C /* OTTutorialViewController.m in Sources */,
-				A202EC932085D2C80058F32C /* OTSolidarityGuideFiltersTableDataSource.m in Sources */,
 				A202EBE32085D2C80058F32C /* OTToursMapDelegate.m in Sources */,
 				A202EC9D2085D2C80058F32C /* OTPublicInfoTableDataSource.m in Sources */,
 				2BE75F2F24C834FD00D4C856 /* OTMenuProfileViewController.swift in Sources */,
-				A202EC632085D2C80058F32C /* OTSolidarityGuideFilteredDataSource.m in Sources */,
 				A202EB132085D2C70058F32C /* OTEntouragesTableViewCell.m in Sources */,
 				A202ED032085D2C80058F32C /* OTEntourageJoinerDelegate.m in Sources */,
 				A202EBD52085D2C80058F32C /* OTUserTableConfigurator.m in Sources */,
@@ -4605,7 +4578,7 @@
 				A2CCF2E5216610CE00AD6237 /* OTFeedClosedCell.m in Sources */,
 				A202EB8F2085D2C80058F32C /* OTMapOptionsViewController.m in Sources */,
 				A202EB292085D2C70058F32C /* OTActiveFeedItemViewController.m in Sources */,
-				A202EAEB2085D2C70058F32C /* OTSolidarityGuideFilter.m in Sources */,
+				2BDD05C62514B2080054B2A1 /* OTGuideDelegates.swift in Sources */,
 				A202EBD12085D2C80058F32C /* OTUserEmailViewController.m in Sources */,
 				A202EBD92085D2C80058F32C /* OTStartupViewController.m in Sources */,
 				A202EB5F2085D2C80058F32C /* OTTutorial4ViewController.m in Sources */,
@@ -4661,7 +4634,6 @@
 				2B05CBD1250684840065E8D3 /* OTSharingEntourageTableViewCell.swift in Sources */,
 				A202EC9F2085D2C80058F32C /* OTPublicInfoCellProvider.m in Sources */,
 				2B05CBD3250691AB0065E8D3 /* OTShareEntourageService.swift in Sources */,
-				A202EC812085D2C80058F32C /* OTSolidarityGuideFiltersCellProvider.m in Sources */,
 				A2E5FA0D20862E180099B989 /* UINavigationController+Appearance.m in Sources */,
 				A202EBA72085D2C80058F32C /* OTPopupViewController.swift in Sources */,
 				A202EB492085D2C80058F32C /* OTChatCellBase.m in Sources */,
@@ -4719,11 +4691,11 @@
 				A202EAD12085D2C70058F32C /* OTEntourageInvitation.m in Sources */,
 				2B930F54246D554B0058E81B /* OTLoginV2ViewController.swift in Sources */,
 				2BB2E392244F2139003011C9 /* OTOnboardingPassCodeViewController.swift in Sources */,
+				2B29BD94250F6CCE00663506 /* OTMainGuideViewController.swift in Sources */,
 				A202EC312085D2C80058F32C /* OTMapDelegateProxyBehavior.m in Sources */,
 				2B62B02E247C22BD00EE6D24 /* OTOnboardingAssoFillViewController.swift in Sources */,
 				A202EC072085D2C80058F32C /* OTInvitationsService.m in Sources */,
 				A202ED2F2085D2C80058F32C /* NSDate+ui.m in Sources */,
-				A202EADB2085D2C70058F32C /* OTSolidarityGuideFilterItem.m in Sources */,
 				A202EBF12085D2C80058F32C /* OTFilterCellTableViewCell.m in Sources */,
 				A202E91C20E381D200992C09 /* OTNeighborhoodAnnotation.m in Sources */,
 				373353B4230173EF00436CAA /* OTTimestampsCell.m in Sources */,
@@ -4757,8 +4729,10 @@
 				96B658AA209A380000EB0398 /* OTMenuCellView.swift in Sources */,
 				A202EC0D2085D2C80058F32C /* OTAuthService.m in Sources */,
 				A202ECCB2085D2C80058F32C /* OTNoDataBehavior.m in Sources */,
+				2BDD05C12514B1540054B2A1 /* OTGuideCells.swift in Sources */,
 				A202EB4D2085D2C80058F32C /* OTLocationSearchTableViewController.m in Sources */,
 				A202ECB72085D2C80058F32C /* OTInviteBehavior.m in Sources */,
+				2BDD05CE2514B2550054B2A1 /* OTGuideModels.swift in Sources */,
 				A2E5FA1220862F7A0099B989 /* ApplicationTheme.swift in Sources */,
 				A202EC592085D2C80058F32C /* OTBottomScrollBehavior.m in Sources */,
 				374E7365228DC92600B36161 /* OTMainTabBarAnonymousBehavior.m in Sources */,
@@ -4774,6 +4748,7 @@
 				A202EC6F2085D2C80058F32C /* OTCollectionViewDataSourceBehavior.m in Sources */,
 				A202ECDB2085D2C80058F32C /* UIImage+processing.m in Sources */,
 				A202EC4D2085D2C80058F32C /* OTAlertViewBehavior.m in Sources */,
+				2BDC29132513A804005C3BA5 /* OTGuideFiltersViewController.swift in Sources */,
 				A202EC0F2085D2C80058F32C /* OTOnboardingService.m in Sources */,
 				2BB2E39C244F45E2003011C9 /* OTOnboardingPlaceViewController.swift in Sources */,
 				A202EC5D2085D2C80058F32C /* OTDisclaimerBaseBehavior.m in Sources */,
@@ -4782,6 +4757,7 @@
 				A202EB692085D2C80058F32C /* OTDisclaimerViewController.m in Sources */,
 				A202EC512085D2C80058F32C /* OTCustomSegmentedBehavior.m in Sources */,
 				A202E91820E3818D00992C09 /* OTPrivateCircleAnnotation.m in Sources */,
+				2B039CC1251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */,
 				A202EAEF2085D2C70058F32C /* OTUser.m in Sources */,
 				A296B92A2089DE4300F6AFBD /* main.m in Sources */,
 				96B658BE209A689200EB0398 /* LabelStyles.swift in Sources */,
@@ -4825,7 +4801,6 @@
 				A202EB952085D2C80058F32C /* OTFeedItemJoinOptionsViewController.m in Sources */,
 				A202EC792085D2C80058F32C /* OTMyEntouragesTableDataSource.m in Sources */,
 				A202EC3D2085D2C80058F32C /* OTCustomAnnotation.m in Sources */,
-				A202EB852085D2C80058F32C /* OTGuideMapDelegate.m in Sources */,
 				A202ECD72085D2C80058F32C /* UIView+entourage.m in Sources */,
 				A202EB212085D2C70058F32C /* OTBaseInfoCell.m in Sources */,
 				379D380422848819007ED1E1 /* OTThemedText.m in Sources */,
@@ -5002,20 +4977,16 @@
 				A296B8ED20871FD900F6AFBD /* main.m in Sources */,
 				A296B78220871CFC00F6AFBD /* OTOrganization.m in Sources */,
 				A296B78320871CFC00F6AFBD /* OTUserProfileBehavior.m in Sources */,
-				A296B78420871CFC00F6AFBD /* OTSolidarityGuideFiltersViewController.m in Sources */,
 				A296B78520871CFC00F6AFBD /* UINavigationBar+Appearance.m in Sources */,
 				A296B78620871CFC00F6AFBD /* OTEntourageChangedHandler.m in Sources */,
 				A296B9242088D99700F6AFBD /* UIColor+pfp.m in Sources */,
-				A296B78720871CFC00F6AFBD /* OTSolidarityGuideFilterCell.m in Sources */,
 				A296B78820871CFC00F6AFBD /* OTMenuTableViewCell.m in Sources */,
 				A296B78920871CFC00F6AFBD /* OTUserEditPasswordViewController.m in Sources */,
 				A296B78A20871CFC00F6AFBD /* OTDescriptionCell.m in Sources */,
 				A296B78B20871CFC00F6AFBD /* OTMyEntouragesCellProvider.m in Sources */,
 				A296B78C20871CFC00F6AFBD /* OTTutorialViewController.m in Sources */,
-				A296B78D20871CFC00F6AFBD /* OTSolidarityGuideFiltersTableDataSource.m in Sources */,
 				A296B78E20871CFC00F6AFBD /* OTToursMapDelegate.m in Sources */,
 				A296B78F20871CFC00F6AFBD /* OTPublicInfoTableDataSource.m in Sources */,
-				A296B79020871CFC00F6AFBD /* OTSolidarityGuideFilteredDataSource.m in Sources */,
 				A296B79120871CFC00F6AFBD /* OTEntouragesTableViewCell.m in Sources */,
 				A296B79220871CFC00F6AFBD /* OTEntourageJoinerDelegate.m in Sources */,
 				A296B79320871CFC00F6AFBD /* OTUserTableConfigurator.m in Sources */,
@@ -5031,7 +5002,6 @@
 				379D380522848819007ED1E1 /* OTThemedText.m in Sources */,
 				A296B79A20871CFC00F6AFBD /* OTMapOptionsViewController.m in Sources */,
 				A296B79B20871CFC00F6AFBD /* OTActiveFeedItemViewController.m in Sources */,
-				A296B79C20871CFC00F6AFBD /* OTSolidarityGuideFilter.m in Sources */,
 				A2A2BC94209AF57A00AA4FC8 /* OTPfpMenuViewController.swift in Sources */,
 				A296B79D20871CFC00F6AFBD /* OTUserEmailViewController.m in Sources */,
 				A296B79E20871CFC00F6AFBD /* OTStartupViewController.m in Sources */,
@@ -5070,7 +5040,6 @@
 				A296B7BB20871CFC00F6AFBD /* OTAddressBookPhone.m in Sources */,
 				A2A0AAD5215ACE6A000AE5EF /* OTChangeStatusCell.m in Sources */,
 				A296B7BC20871CFC00F6AFBD /* OTPublicInfoCellProvider.m in Sources */,
-				A296B7BD20871CFC00F6AFBD /* OTSolidarityGuideFiltersCellProvider.m in Sources */,
 				A296B7BE20871CFC00F6AFBD /* UINavigationController+Appearance.m in Sources */,
 				A296B7BF20871CFC00F6AFBD /* OTPopupViewController.swift in Sources */,
 				A296B7C020871CFC00F6AFBD /* OTChatCellBase.m in Sources */,
@@ -5118,7 +5087,6 @@
 				A296B7E420871CFC00F6AFBD /* OTMapDelegateProxyBehavior.m in Sources */,
 				A296B7E520871CFC00F6AFBD /* OTInvitationsService.m in Sources */,
 				A296B7E620871CFC00F6AFBD /* NSDate+ui.m in Sources */,
-				A296B7E720871CFC00F6AFBD /* OTSolidarityGuideFilterItem.m in Sources */,
 				A296B7E820871CFC00F6AFBD /* OTFilterCellTableViewCell.m in Sources */,
 				A296B7E920871CFC00F6AFBD /* OTAppDelegate.m in Sources */,
 				A296B7EA20871CFC00F6AFBD /* OTEditEncounterBehavior.m in Sources */,
@@ -5218,7 +5186,6 @@
 				A296B83920871CFC00F6AFBD /* OTMyEntouragesTableDataSource.m in Sources */,
 				A24EA3832100A7780027AB8B /* UITextField+AutoSuggestion.m in Sources */,
 				A296B83A20871CFC00F6AFBD /* OTCustomAnnotation.m in Sources */,
-				A296B83C20871CFC00F6AFBD /* OTGuideMapDelegate.m in Sources */,
 				A296B83D20871CFC00F6AFBD /* UIView+entourage.m in Sources */,
 				A296B83E20871CFC00F6AFBD /* OTBaseInfoCell.m in Sources */,
 				A296B83F20871CFC00F6AFBD /* OTCategoryType.m in Sources */,
@@ -5247,6 +5214,7 @@
 				A296B85020871CFC00F6AFBD /* OTQuitFeedItemViewController.m in Sources */,
 				A296B85120871CFC00F6AFBD /* OTLogger.m in Sources */,
 				A296B85220871CFC00F6AFBD /* OTPlaceholderCell.m in Sources */,
+				2B039CC2251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */,
 				A296B85320871CFC00F6AFBD /* OTAutoGrowTextView.m in Sources */,
 				96B658BC209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */,
 				373AAD7F23293558001D8CF3 /* OTThemedButton.m in Sources */,
@@ -5635,7 +5603,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6DE4A491763D292ADECF1896 /* Pods-entourage.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = EntourageAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = EntourageAppIconDebug;
 				BUNDLE_ID_SUFFIX = .beta;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -5939,7 +5907,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A4E5B32B53E7E30C72258C3 /* Pods-entourage.beta.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = EntourageAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = EntourageAppIconDebug;
 				BUNDLE_ID_SUFFIX = .beta;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;

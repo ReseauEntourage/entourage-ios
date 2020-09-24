@@ -143,7 +143,7 @@
 
 "no_data_events" = "Aucun évènement à proximité.";
 
-"no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure";
+"no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure \n\nLe Centre Communal d’Action Sociale de votre commune peut vous renseigner sur toutes les associations locales et les aides sociales à disposition des habitants.";
 
 "no_data_guide_link" = "Proposez une structure";
 
@@ -167,6 +167,8 @@
 "guide_display_reinsertion" = "Se réinsérer";
 "guide_display_partners" = "Associations et services actifs sur Entourage";
 "partners_entourage" = "Organisme actif sur Entourage";
+"guide_display_donate" = "Recherchant des dons";
+"guide_display_volunteer" = "Recherchant des bénévoles";
 // Tour
 "tour_type_bare_hands" = "barehands";
 "tour_type_medical" = "medical";
@@ -260,9 +262,10 @@
 "organiser" = "Organisateur";
 "closed" = "Inclure entourages clôturés";
 "unique_unread" = "Uniquement non lus";
-"join_entourage_lbl" = "Rejoindre la discussion";
-"join_event_lbl" = "Participez à cet évènement";
+"join_entourage_lbl" = "Participez à la discussion";//"Rejoindre la discussion";
+"join_event_lbl" = "Répondez présent !";//"Participez à cet évènement";
 "join_entourage_btn" = "PARTICIPER";
+"join_entourage2_btn" = "REJOINDRE";
 "join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !\nVous pouvez envoyer un message aux participants, qui apparaîtra dans la conversation de groupe.";
 "join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nVous pouvez envoyer un message aux participants, qui apparaîtra dans la conversation de groupe.";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
@@ -842,3 +845,28 @@
 "Pop_info_web_alert_GDS_underline" = "Soliguide.fr";
 
 "info_share_sms_poi" = "Bonjour ! Voici l’adresse de %@ qui pourrait vous intéresser.\n%@\n%@\nPour plus d’infos sur ce lieu, et pour créer des liens entre voisins solidaires, je vous donne RDV sur le réseau Entourage %@";
+
+//New page hub GDS
+"title_new_gds" = "Lieux solidaires";
+"hub_title_1" = "Guide solidaire";
+"hub_subtitle_1" = "Adresses utiles autour de vous";
+"hub_description_1" = "Restaurants solidaires, associations recherchant des bénévoles ou des dons...";
+"hub_button_1" = "Rechercher autour de moi →";
+
+"hub_title_2" = "Ressources au cas par cas  ";
+"hub_description_2" = "Chaque situation est différente, mais voici des clés pour s’y retrouver : numéros d’urgence, démarches conseillées, ...";
+"hub_button_2" = "Je m'oriente";
+
+"hub_title_3" = "Se préparer à la rencontre";
+"hub_description_3" = "Voisins solidaires, le Guide Simple Comme Bonjour et nos ateliers de sensibilisation vous aident à comprendre les situations et à dépasser les blocages pour créer des liens.";
+"hub_button_3" = "Découvrir le guide →";
+
+"hub_button_4" = "Trouver un atelier";
+
+//Pop follow/unfollow partner
+"buttonFollowOnPartner" = "Abonné.e";
+"buttonFollowOffPartner" = "S'abonner";
+"partnerFollowTitle" = "Titre";
+"partnerFollowMessage" = "Message";
+"partnerFollowButtonValid" = "Se désabonner";
+"partnerFollowButtonCancel" = "Annuler";

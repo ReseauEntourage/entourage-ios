@@ -7,11 +7,9 @@
 //
 
 #import "OTSolidarityGuideCell.h"
-#import "OTSolidarityGuideFilterItem.h"
-#import "OTSolidarityGuideFilter.h"
-#import "OTPoi.h"
 #import "OTLocationManager.h"
 #import "OTSummaryProviderBehavior.h"
+#import "entourage-Swift.h"
 
 NSString* const OTSolidarityGuideTableViewCellIdentifier = @"OTSolidarityGuideTableViewCellIdentifier";
 
@@ -26,7 +24,7 @@ NSString* const OTSolidarityGuideTableViewCellIdentifier = @"OTSolidarityGuideTa
 - (void)configureWith:(OTPoi *)poi {
     self.poiItem = poi;
     self.titleLabel.text = poi.name;
-    self.typeLabel.text = [OTSolidarityGuideFilterItem categoryStringForKey:poi.categoryId.intValue];
+    self.typeLabel.text = [OTGuideFilterItem categoryStringForKeyWithKey:poi.categoryId.intValue];
     self.addressLabel.text = poi.address;
     self.btnAppeler.hidden = [poi.phone length] == 0;
     self.distanceLabel.text = [self getDistance:poi];

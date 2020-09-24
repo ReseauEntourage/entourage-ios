@@ -136,6 +136,12 @@ static NSInteger const kDatePickerDialogDoneButtonTag = 1;
     self.datePicker.date = self.defaultDate ? self.defaultDate : [NSDate date];
     self.datePicker.maximumDate = maximumDate;
     self.datePicker.minimumDate = minimumDate;
+    self.datePicker.minuteInterval = 15;
+    
+    if (@available(iOS 13.4, *)) {
+        [self.datePicker setPreferredDatePickerStyle: UIDatePickerStyleWheels];
+    }
+    
     if(self.locale) {
         self.datePicker.locale = self.locale;
     }

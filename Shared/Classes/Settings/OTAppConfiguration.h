@@ -24,6 +24,7 @@
 
 #define MAP_TAB_INDEX 0
 #if !PFP
+    #define GUIDES_TAB_INDEX 1
     #define MESSAGES_TAB_INDEX 3
     #define MENU_TAB_INDEX 4
     #define MENU_TAB_PLUS -1

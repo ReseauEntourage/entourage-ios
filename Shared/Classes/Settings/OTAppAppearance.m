@@ -728,7 +728,10 @@
     }
     
     if ([feedItem isKindOfClass:[OTEntourage class]]) {
-        return OTLocalizedString(@"join_entourage_btn");
+        if ([feedItem isOuting]) {
+            return OTLocalizedString(@"join_entourage_btn");
+        }
+        return OTLocalizedString(@"join_entourage2_btn");
     }
     else {
         return OTLocalizedString(@"join_tour_btn");

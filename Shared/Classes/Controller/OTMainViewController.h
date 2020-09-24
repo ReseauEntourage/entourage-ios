@@ -22,24 +22,19 @@
 // tour properties
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;
 @property (nonatomic, strong) NSString *webview;
-@property (nonatomic) BOOL isSolidarityGuide;
 
 - (void)zoomToCurrentLocation:(id)sender;
 - (void)zoomMapToLocation:(CLLocation*)location;
 - (void)willChangePosition;
 - (void)didChangePosition;
-- (void)reloadPois;
 - (void)reloadFeeds;
 
 - (void)editEncounter:(OTEncounterAnnotation *)simpleAnnontation withView:(MKAnnotationView *)view;
-- (void)displayPoiDetails:(MKAnnotationView *)view;
 
-- (void)switchToGuide;
 - (IBAction)showFilters;
 - (void)switchToEvents;
 - (void) showProposeFromNav;
 - (void) createTourFromNav;
 - (void) createEncounterFromNav;
-- (void) togglePoiFromNav;
 - (void)createQuickEncounter;
 @end

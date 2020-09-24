@@ -22,6 +22,7 @@ class OTAssoTopTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_tv_asso_description: UILabel!
     @IBOutlet weak var ui_tv_title_information: UILabel!
     
+    @IBOutlet weak var ui_title_button_follow: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +31,7 @@ class OTAssoTopTableViewCell: UITableViewCell {
         ui_tv_title_information.text = OTLocalisationService.getLocalizedValue(forKey: "title_asso_information")
     }
     
-    func populateCell(name:String?,subname:String?,assoDescription:String? ,imageUrl:String?,hasDonation:Bool,hasVolunteer:Bool) {
+    func populateCell(name:String?,subname:String?,assoDescription:String? ,imageUrl:String?,hasDonation:Bool,hasVolunteer:Bool,isFollowing:Bool) {
         
         ui_tv_subtitle_asso.isHidden = true
         ui_tv_title_asso.text = name
@@ -45,6 +46,13 @@ class OTAssoTopTableViewCell: UITableViewCell {
         }
         else {
             ui_iv_logo?.image = UIImage.init(named: "badgeDefault")
+        }
+        
+        if isFollowing {
+            ui_title_button_follow.text = OTLocalisationService.getLocalizedValue(forKey:"buttonFollowOnPartner")
+        }
+        else {
+            ui_title_button_follow.text = OTLocalisationService.getLocalizedValue(forKey:"buttonFollowOffPartner")
         }
     }
 
