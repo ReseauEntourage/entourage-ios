@@ -1544,7 +1544,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="101" width="327" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number2_bg" translatesAutoresizingMaskIntoConstraints="NO" id="rjq-dW-59d">
-                                                            <rect key="frame" x="0.0" y="0.0" width="327" height="192.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="327" height="160"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="rjq-dW-59d" secondAttribute="height" multiplier="272:160" id="QVg-27-Elb"/>
                                                             </constraints>
@@ -1691,7 +1691,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="104" width="327" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number4_bg" translatesAutoresizingMaskIntoConstraints="NO" id="S74-pi-eEJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="327" height="160"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="327" height="192.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="S74-pi-eEJ" secondAttribute="height" multiplier="272:160" id="LXb-Nt-CYh"/>
                                                             </constraints>
@@ -1770,10 +1770,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number5" translatesAutoresizingMaskIntoConstraints="NO" id="YlT-gM-k4g">
-                                                            <rect key="frame" x="118.5" y="16" width="90" height="90"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="90" id="pkd-QT-Jv3"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="118.5" y="16" width="90" height="87"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBV-Wy-Em9">
                                                             <rect key="frame" x="83.5" y="104" width="160" height="40"/>
@@ -1799,7 +1796,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                         <constraint firstItem="YlT-gM-k4g" firstAttribute="top" secondItem="tZw-Xu-EAL" secondAttribute="top" constant="16" id="SKz-M4-yWk"/>
                                                         <constraint firstAttribute="height" constant="160" id="WUd-mJ-PZP"/>
                                                         <constraint firstItem="w6Z-ue-1Lh" firstAttribute="top" secondItem="tZw-Xu-EAL" secondAttribute="top" id="YlA-j0-ljm"/>
-                                                        <constraint firstItem="uBV-Wy-Em9" firstAttribute="top" secondItem="YlT-gM-k4g" secondAttribute="bottom" constant="-2" id="aFK-Jn-50Q"/>
+                                                        <constraint firstItem="uBV-Wy-Em9" firstAttribute="top" secondItem="YlT-gM-k4g" secondAttribute="bottom" constant="1" id="aFK-Jn-50Q"/>
                                                         <constraint firstAttribute="bottom" secondItem="w6Z-ue-1Lh" secondAttribute="bottom" id="fUf-Zb-9D8"/>
                                                         <constraint firstAttribute="trailing" secondItem="w6Z-ue-1Lh" secondAttribute="trailing" id="qvl-vJ-uHf"/>
                                                         <constraint firstItem="uBV-Wy-Em9" firstAttribute="centerX" secondItem="tZw-Xu-EAL" secondAttribute="centerX" id="t0e-dN-X3Q"/>
