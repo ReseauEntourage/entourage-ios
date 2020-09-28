@@ -848,8 +848,8 @@
 
 //New page hub GDS
 "title_new_gds" = "Lieux solidaires";
-"hub_title_1" = "Guide solidaire";
-"hub_subtitle_1" = "Adresses utiles autour de vous";
+"hub_title" = "Guide solidaire";
+"hub_title_1" = "Adresses utiles autour de vous";
 "hub_description_1" = "Restaurants solidaires, associations recherchant des bénévoles ou des dons...";
 "hub_button_1" = "Rechercher autour de moi →";
 
@@ -861,7 +861,12 @@
 "hub_description_3" = "Voisins solidaires, le Guide Simple Comme Bonjour et nos ateliers de sensibilisation vous aident à comprendre les situations et à dépasser les blocages pour créer des liens.";
 "hub_button_3" = "Découvrir le guide →";
 
+"hub_description_4" = "Voisins solidaires, le Guide Simple Comme Bonjour et nos ateliers de sensibilisation vous aident à comprendre les situations et à dépasser les blocages pour créer des liens.";
 "hub_button_4" = "Trouver un atelier";
+
+"hub_title_5" = "Comment mobiliser le réseau ?";
+"hub_description_5" = "L’application Entourage vous permet de vous mobiliser, entre voisins et associations locales, pour organiser des actions et évènements solidaires. Pour tout comprendre, c’est par ici.";
+"hub_button_5" = "Aller sur la FAQ";
 
 //Pop follow/unfollow partner
 "buttonFollowOnPartner" = "Abonné.e";

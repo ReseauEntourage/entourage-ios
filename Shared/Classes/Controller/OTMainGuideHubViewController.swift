@@ -10,10 +10,13 @@ import UIKit
 
 class OTMainGuideHubViewController: UIViewController {
 
+    @IBOutlet weak var ui_view_top: UIView!
+    @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_tableview: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "hub_title")
     }
   
     override func viewWillAppear(_ animated: Bool) {
@@ -21,6 +24,16 @@ class OTMainGuideHubViewController: UIViewController {
         
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        self.ui_view_top.layer.shadowColor = UIColor.black.cgColor
+        self.ui_view_top.layer.shadowOpacity = 0.5
+        self.ui_view_top.layer.shadowRadius = 4.0
+        self.ui_view_top.layer.masksToBounds = false
+        
+        let _rect = CGRect(x: 0, y: self.ui_view_top.bounds.size.height , width: self.view.frame.size.width, height: self.ui_view_top.layer.shadowRadius)
+        let _shadowPath = UIBezierPath(rect: _rect).cgPath
+        self.ui_view_top.layer.shadowPath = _shadowPath
+        
     }
     
     func showGds() {
@@ -44,7 +57,7 @@ class OTMainGuideHubViewController: UIViewController {
 extension OTMainGuideHubViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,11 +75,14 @@ extension OTMainGuideHubViewController: UITableViewDelegate,UITableViewDataSourc
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! CellGeneric
             cell.populateCell(position: 2)
             return cell
-            
-            
-        default:
+        case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell4", for: indexPath) as! CellGeneric
             cell.populateCell(position: 3)
+            return cell
+            
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell5", for: indexPath) as! CellGeneric
+            cell.populateCell(position: 4)
             return cell
         }
     }
@@ -80,9 +96,10 @@ extension OTMainGuideHubViewController: UITableViewDelegate,UITableViewDataSourc
             showWeb(slug: SLUG_HUB_LINK_1)
         case 2:
            showWeb(slug: SLUG_HUB_LINK_2)
-            
+        case 3:
+           showWeb(slug: SLUG_HUB_LINK_3)
         default:
-            showWeb(slug: SLUG_HUB_LINK_3)
+            showWeb(slug: SLUG_HUB_LINK_FAQ)
         }
     }
 }
@@ -92,7 +109,6 @@ class CellGeneric: UITableViewCell {
     @IBOutlet weak var ui_image: UIImageView?
     
     @IBOutlet weak var ui_label_title: UILabel?
-    @IBOutlet weak var ui_label_subtitle: UILabel?
     
     @IBOutlet weak var ui_label_description: UILabel?
     @IBOutlet weak var ui_label_button: UILabel?
@@ -105,7 +121,7 @@ class CellGeneric: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         ui_view_corner?.layer.cornerRadius = 8
-        ui_image?.layer.cornerRadius = 8
+        ui_image?.layer.cornerRadius = 10
         ui_view_button?.layer.cornerRadius = 5
     }
     
@@ -113,7 +129,6 @@ class CellGeneric: UITableViewCell {
         switch position {
         case 0:
             ui_label_title?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_title_1")
-            ui_label_subtitle?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_subtitle_1")
             ui_label_description?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_description_1")
             ui_label_button?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_button_1")
         case 1:
@@ -124,8 +139,13 @@ class CellGeneric: UITableViewCell {
             ui_label_title?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_title_3")
             ui_label_description?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_description_3")
             ui_label_button?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_button_3")
-        default:
+        case 3:
+            ui_label_description?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_description_4")
             ui_label_button?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_button_4").uppercased()
+        default:
+            ui_label_title?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_title_5")
+            ui_label_description?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_description_5")
+            ui_label_button?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_button_5").uppercased()
         }
     }
 }

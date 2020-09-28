@@ -150,3 +150,4 @@
 #define SLUG_HUB_LINK_1 @"hub_1"
 #define SLUG_HUB_LINK_2 @"hub_2"
 #define SLUG_HUB_LINK_3 @"hub_3"
+#define SLUG_HUB_LINK_FAQ @"hub_faq"
