@@ -258,6 +258,7 @@
                                             <outlet property="ui_tv_title_asso" destination="ylh-dv-GkC" id="68w-pn-tZH"/>
                                             <outlet property="ui_tv_title_information" destination="RFT-LB-77j" id="Ta5-bY-4jv"/>
                                             <outlet property="ui_tv_volunteer" destination="UIW-cG-hMd" id="sXm-Kv-xjB"/>
+                                            <outlet property="ui_view_button" destination="cL8-iW-jZq" id="Frr-3e-2fk"/>
                                             <outlet property="ui_view_donation" destination="Lk1-I4-MSb" id="DPl-CU-qTF"/>
                                             <outlet property="ui_view_volunteer" destination="O4r-YF-xLS" id="Hyx-bS-CyD"/>
                                         </connections>

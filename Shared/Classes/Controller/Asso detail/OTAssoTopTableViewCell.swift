@@ -21,6 +21,7 @@ class OTAssoTopTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_view_donation: UIView!
     @IBOutlet weak var ui_tv_asso_description: UILabel!
     @IBOutlet weak var ui_tv_title_information: UILabel!
+    @IBOutlet weak var ui_view_button: UIView!
     
     @IBOutlet weak var ui_title_button_follow: UILabel!
     
@@ -50,9 +51,15 @@ class OTAssoTopTableViewCell: UITableViewCell {
         
         if isFollowing {
             ui_title_button_follow.text = OTLocalisationService.getLocalizedValue(forKey:"buttonFollowOnPartner")
+            ui_view_button.backgroundColor = UIColor.appOrange()
+            ui_title_button_follow.textColor = .white
         }
         else {
             ui_title_button_follow.text = OTLocalisationService.getLocalizedValue(forKey:"buttonFollowOffPartner")
+            ui_view_button.backgroundColor = UIColor.white
+            ui_view_button.layer.borderColor = UIColor.appOrange()?.cgColor
+            ui_view_button.layer.borderWidth = 1
+            ui_title_button_follow.textColor = UIColor.appOrange()
         }
     }
 

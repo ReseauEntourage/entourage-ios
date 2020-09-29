@@ -871,7 +871,7 @@
 //Pop follow/unfollow partner
 "buttonFollowOnPartner" = "Abonné.e";
 "buttonFollowOffPartner" = "S'abonner";
-"partnerFollowTitle" = "Titre";
-"partnerFollowMessage" = "Message";
+"partnerFollowTitle" = "Se désabonner de %@ ?";
+"partnerFollowMessage" = "Vous ne recevrez plus de notification lorsque %@ lance de nouvelles initiatives solidaires.";
 "partnerFollowButtonValid" = "Se désabonner";
 "partnerFollowButtonCancel" = "Annuler";

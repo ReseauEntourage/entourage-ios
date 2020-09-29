@@ -62,7 +62,9 @@ class OTAssociationDetailViewController: UIViewController {
     
     @IBAction func action_tap_follow(_ sender: Any) {
         if association?.isFollowing ?? false {
-            let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "partnerFollowTitle"), message: OTLocalisationService.getLocalizedValue(forKey: "partnerFollowMessage"), preferredStyle: .alert)
+            let title =  String.init(format: OTLocalisationService.getLocalizedValue(forKey: "partnerFollowTitle"), self.association!.name)
+            let message = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "partnerFollowMessage"), self.association!.name)
+            let alertvc = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
             
             let actionOK = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey: "partnerFollowButtonValid"), style: .default) { (action) in
                 self.updateFollowing(isFollowing: false)
