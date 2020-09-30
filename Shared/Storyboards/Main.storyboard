@@ -1909,7 +1909,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous pourrez demander à rejoindre des activités, en créer, et découvrir la communauté autour de vous" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i95-oq-dUX">
-                                        <rect key="frame" x="18" y="267" width="349" height="66.5"/>
+                                        <rect key="frame" x="18" y="267" width="349" height="68.5"/>
                                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="19"/>
                                         <color key="textColor" red="0.22003445029999999" green="0.6036320329" blue="0.84068751340000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1929,58 +1929,46 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                     <constraint firstItem="v59-M2-xen" firstAttribute="top" secondItem="slV-2m-jfD" secondAttribute="top" id="wIa-yy-IzK"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JA0-fo-ZVn">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JA0-fo-ZVn">
                                 <rect key="frame" x="0.0" y="60" width="375" height="514"/>
                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="OTSolidarityGuideTableViewCellIdentifier" rowHeight="90" id="VA5-5K-5gz" customClass="OTSolidarityGuideCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="OTSolidarityGuideTableViewCellIdentifier" id="VA5-5K-5gz" customClass="OTSolidarityGuideCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="84.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VA5-5K-5gz" id="8X4-sU-4dY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Organization name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-fF-qpu">
-                                                    <rect key="frame" x="31" y="10" width="243" height="18.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" verticalCompressionResistancePriority="751" text="Organization name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-fF-qpu">
+                                                    <rect key="frame" x="16" y="10" width="154.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkH-Xb-GYH">
-                                                    <rect key="frame" x="31" y="28.5" width="76.5" height="18"/>
-                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
-                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Street" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYh-Bf-N9m">
-                                                    <rect key="frame" x="125.5" y="28.5" width="148.5" height="17.5"/>
+                                                    <rect key="frame" x="16" y="30.5" width="43" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Time - distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKw-8T-u3i">
-                                                    <rect key="frame" x="31" y="56" width="90.5" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" verticalHuggingPriority="254" verticalCompressionResistancePriority="752" text="Time - distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKw-8T-u3i">
+                                                    <rect key="frame" x="16" y="58.5" width="95" height="16"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
                                                     <color key="textColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PaN-zL-Fjb">
-                                                    <rect key="frame" x="112.5" y="28.5" width="8" height="18"/>
-                                                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihB-Ze-Hbs">
-                                                    <rect key="frame" x="279" y="7" width="65" height="65"/>
+                                                    <rect key="frame" x="309" y="22.5" width="50" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="65" id="9bt-Hd-REw"/>
-                                                        <constraint firstAttribute="width" constant="65" id="elA-u3-oU7"/>
+                                                        <constraint firstAttribute="height" constant="40" id="9bt-Hd-REw"/>
+                                                        <constraint firstAttribute="width" constant="50" id="pV0-mU-lgN"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="12"/>
                                                     <inset key="titleEdgeInsets" minX="-20" minY="40" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="20" minY="-15" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="APPELER" image="tel">
+                                                    <state key="normal" title="Appeler" image="tel">
                                                         <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
                                                     </state>
                                                     <connections>
@@ -1990,20 +1978,17 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="eKw-8T-u3i" firstAttribute="leading" secondItem="v6V-fF-qpu" secondAttribute="leading" id="0xH-Gx-6hn"/>
-                                                <constraint firstItem="kkH-Xb-GYH" firstAttribute="top" secondItem="v6V-fF-qpu" secondAttribute="bottom" id="3cF-Ou-9NR"/>
-                                                <constraint firstItem="ihB-Ze-Hbs" firstAttribute="leading" secondItem="v6V-fF-qpu" secondAttribute="trailing" constant="5" id="9iO-fR-EDJ"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ihB-Ze-Hbs" secondAttribute="trailing" constant="15" id="GQJ-Q6-GVk"/>
-                                                <constraint firstItem="PaN-zL-Fjb" firstAttribute="leading" secondItem="kkH-Xb-GYH" secondAttribute="trailing" constant="5" id="IH3-jl-u2p"/>
-                                                <constraint firstItem="ihB-Ze-Hbs" firstAttribute="bottom" secondItem="eKw-8T-u3i" secondAttribute="bottom" id="Ndz-Pr-aNs"/>
-                                                <constraint firstItem="ihB-Ze-Hbs" firstAttribute="leading" secondItem="DYh-Bf-N9m" secondAttribute="trailing" constant="5" id="OuJ-ge-hZX"/>
-                                                <constraint firstItem="kkH-Xb-GYH" firstAttribute="centerY" secondItem="PaN-zL-Fjb" secondAttribute="centerY" id="Q2s-7t-TQI"/>
-                                                <constraint firstItem="DYh-Bf-N9m" firstAttribute="top" secondItem="kkH-Xb-GYH" secondAttribute="top" id="Rft-j5-i1C"/>
+                                                <constraint firstItem="ihB-Ze-Hbs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v6V-fF-qpu" secondAttribute="trailing" constant="5" id="9iO-fR-EDJ"/>
+                                                <constraint firstItem="ihB-Ze-Hbs" firstAttribute="centerY" secondItem="8X4-sU-4dY" secondAttribute="centerY" id="EKO-kZ-OyQ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ihB-Ze-Hbs" secondAttribute="trailing" id="GQJ-Q6-GVk"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eKw-8T-u3i" secondAttribute="trailing" constant="16" id="LQR-Da-7VA"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="eKw-8T-u3i" secondAttribute="bottom" constant="10" id="Lkc-vu-Tpj"/>
+                                                <constraint firstItem="ihB-Ze-Hbs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DYh-Bf-N9m" secondAttribute="trailing" constant="5" id="OuJ-ge-hZX"/>
                                                 <constraint firstItem="v6V-fF-qpu" firstAttribute="top" secondItem="8X4-sU-4dY" secondAttribute="top" constant="10" id="k16-7q-w62"/>
-                                                <constraint firstItem="DYh-Bf-N9m" firstAttribute="leading" secondItem="PaN-zL-Fjb" secondAttribute="trailing" constant="5" id="nqf-E0-dHd"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="eKw-8T-u3i" secondAttribute="bottomMargin" constant="15" id="ocN-AQ-eQg"/>
+                                                <constraint firstItem="DYh-Bf-N9m" firstAttribute="top" secondItem="v6V-fF-qpu" secondAttribute="bottom" id="upz-jh-eyF"/>
                                                 <constraint firstItem="eKw-8T-u3i" firstAttribute="top" secondItem="DYh-Bf-N9m" secondAttribute="bottom" constant="10" id="vkA-Yq-127"/>
-                                                <constraint firstItem="kkH-Xb-GYH" firstAttribute="leading" secondItem="v6V-fF-qpu" secondAttribute="leading" id="zmy-Dv-cvu"/>
-                                                <constraint firstItem="v6V-fF-qpu" firstAttribute="leading" secondItem="8X4-sU-4dY" secondAttribute="leadingMargin" constant="15" id="zwO-7x-gGj"/>
+                                                <constraint firstItem="DYh-Bf-N9m" firstAttribute="leading" secondItem="v6V-fF-qpu" secondAttribute="leading" id="zYd-22-ajq"/>
+                                                <constraint firstItem="v6V-fF-qpu" firstAttribute="leading" secondItem="8X4-sU-4dY" secondAttribute="leadingMargin" id="zwO-7x-gGj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -2011,7 +1996,6 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                             <outlet property="btnAppeler" destination="ihB-Ze-Hbs" id="Dou-zR-nrr"/>
                                             <outlet property="distanceLabel" destination="eKw-8T-u3i" id="K0W-OW-qRm"/>
                                             <outlet property="titleLabel" destination="v6V-fF-qpu" id="wmX-ew-CHF"/>
-                                            <outlet property="typeLabel" destination="kkH-Xb-GYH" id="jCc-b2-lZn"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

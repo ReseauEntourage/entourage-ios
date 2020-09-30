@@ -24,7 +24,6 @@ NSString* const OTSolidarityGuideTableViewCellIdentifier = @"OTSolidarityGuideTa
 - (void)configureWith:(OTPoi *)poi {
     self.poiItem = poi;
     self.titleLabel.text = poi.name;
-    self.typeLabel.text = [OTGuideFilterItem categoryStringForKeyWithKey:poi.categoryId.intValue];
     self.addressLabel.text = poi.address;
     self.btnAppeler.hidden = [poi.phone length] == 0;
     self.distanceLabel.text = [self getDistance:poi];
