@@ -22,14 +22,14 @@
 
 - (void)showDisclaimer {
     UINavigationController *navigationViewController = self.owner.navigationController;
-    [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController];
+    [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController withMainColor:[UIColor whiteColor] andSecondaryColor:[UIColor redColor]];
     self.createsEvent = NO;
     [self.owner performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
 }
 
 - (void)showCreateEventDisclaimer {
     UINavigationController *navigationViewController = self.owner.navigationController;
-    [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController];
+    [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController withMainColor:[UIColor whiteColor] andSecondaryColor:[UIColor redColor]];
     self.createsEvent = YES;
     [self.owner performSegueWithIdentifier:@"DisclaimerSegue" sender:self];
 }
@@ -37,7 +37,8 @@
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue {
     if ([segue.identifier isEqualToString:@"DisclaimerSegue"]) {
         UINavigationController *navigationViewController = segue.destinationViewController;
-        [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController];
+        [OTAppConfiguration configureNavigationControllerAppearance:navigationViewController withMainColor:[UIColor whiteColor] andSecondaryColor:[UIColor redColor]];
+        
         UIViewController *destinationViewController = navigationViewController.topViewController;
         
         if ([destinationViewController isKindOfClass:[OTDisclaimerViewController class]]) {

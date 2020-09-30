@@ -165,4 +165,5 @@
 
 + (NSDictionary *)community;
 
++ (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController withMainColor:(UIColor*)mainColor andSecondaryColor:(UIColor*)secondaryColor;
 @end

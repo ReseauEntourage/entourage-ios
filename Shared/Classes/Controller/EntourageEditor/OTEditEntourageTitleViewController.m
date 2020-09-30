@@ -28,6 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    UIColor *secondaryColor = [UIColor appOrangeColor];
+    UIColor *primaryColor =[UIColor whiteColor];
+    
     self.title = OTLocalizedString(@"title").uppercaseString;
     
     self.hintLabel.text = [OTAppAppearance addActionTitleHintMessage:self.currentEntourage.isOuting];
@@ -43,16 +46,34 @@
             self.txtTitle.placeholder = OTLocalizedString(@"edit_demand_title");
     }
 
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController withMainColor:primaryColor andSecondaryColor:secondaryColor];
+    
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                         withTarget:self
                                                          andAction:@selector(doneEdit)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
+                                                           colored:secondaryColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
     self.txtTitle.maxLength = 100;
     self.txtTitle.textView.text = self.currentTitle;
     self.txtTitle.delegate = self;
+    
+    [self addBackButtonItem:secondaryColor];
+}
+
+-(void)addBackButtonItem:(UIColor*) secondaryColor {
+    UIImage *menuImage = [[UIImage imageNamed:@"backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIBarButtonItem *menuButtonCancel = [[UIBarButtonItem alloc] init];
+    menuButtonCancel.image = menuImage;
+    menuButtonCancel.tintColor = secondaryColor;
+    [menuButtonCancel setTarget:self];
+    [menuButtonCancel setAction:@selector(dismissModal)];
+    
+    [self.navigationItem setLeftBarButtonItem:menuButtonCancel];
+}
+
+-(void)dismissModal {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

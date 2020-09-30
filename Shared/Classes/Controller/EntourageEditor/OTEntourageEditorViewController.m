@@ -45,9 +45,9 @@
     [super viewDidLoad];
     
     self.isFirstLaunch = YES;
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     
-    [self setupCloseModal];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController withMainColor:[UIColor whiteColor] andSecondaryColor:[UIColor appOrangeColor]];
+    [self setupCloseModalWithoutTintWithTint:[UIColor appOrangeColor]];
     
     [self setupData];
 }
@@ -122,7 +122,7 @@
                                                         withTarget:self
                                                          andAction:@selector(sendEntourage:)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
+                                                           colored:[UIColor appOrangeColor]];
     [self.navigationItem setRightBarButtonItem:menuButton];
     
     [self.editTableSource configureWith:self.entourage];

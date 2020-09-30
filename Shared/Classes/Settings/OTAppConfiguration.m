@@ -402,6 +402,38 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     }
 }
 
++ (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController withMainColor:(UIColor*)mainColor andSecondaryColor:(UIColor*)secondaryColor
+{
+    [OTAppConfiguration configureApplicationAppearance];
+    
+    UINavigationBar.appearance.backgroundColor = mainColor;
+    UINavigationBar.appearance.barTintColor = mainColor;
+    UINavigationBar.appearance.tintColor = secondaryColor;
+    
+    navigationController.automaticallyAdjustsScrollViewInsets = NO;
+    
+    UINavigationBar *navigationBar = navigationController.navigationBar;
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance *navBarAppearance = [UINavigationBarAppearance new];
+        [navBarAppearance configureWithOpaqueBackground];
+        navBarAppearance.backgroundColor = mainColor;
+        NSDictionary *textAttributes = @{
+            NSForegroundColorAttributeName: [UIColor appGreyishBrownColor]
+        };
+        navBarAppearance.titleTextAttributes = textAttributes;
+        navBarAppearance.largeTitleTextAttributes = textAttributes;
+        navigationBar.standardAppearance = navBarAppearance;
+        navigationBar.scrollEdgeAppearance = navBarAppearance;
+    } else
+    #endif
+    {
+        navigationBar.backgroundColor = mainColor;
+        navigationBar.tintColor = secondaryColor;
+        navigationBar.barTintColor = mainColor;
+    }
+}
+
 #pragma mark - Push notifications
 
 + (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {

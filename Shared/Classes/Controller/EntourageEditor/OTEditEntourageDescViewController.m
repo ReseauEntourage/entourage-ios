@@ -26,6 +26,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    UIColor *secondaryColor = [UIColor appOrangeColor];
+    UIColor *primaryColor =[UIColor whiteColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController withMainColor:primaryColor andSecondaryColor:secondaryColor];
+    
     self.title = OTLocalizedString(@"descriptionTitle").uppercaseString;
     self.hintIcon.tintColor = [ApplicationTheme shared].backgroundThemeColor;
     self.hintIcon.image = [self.hintIcon.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -46,9 +51,26 @@
                                                         withTarget:self
                                                          andAction:@selector(doneEdit)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
+                                                           colored:secondaryColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
     self.txtDescription.textView.text = self.currentDescription;
+    
+    [self addBackButtonItem:secondaryColor];
+}
+
+-(void)addBackButtonItem:(UIColor*) secondaryColor {
+    UIImage *menuImage = [[UIImage imageNamed:@"backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIBarButtonItem *menuButtonCancel = [[UIBarButtonItem alloc] init];
+    menuButtonCancel.image = menuImage;
+    menuButtonCancel.tintColor = secondaryColor;
+    [menuButtonCancel setTarget:self];
+    [menuButtonCancel setAction:@selector(dismissModal)];
+    
+    [self.navigationItem setLeftBarButtonItem:menuButtonCancel];
+}
+
+-(void)dismissModal {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

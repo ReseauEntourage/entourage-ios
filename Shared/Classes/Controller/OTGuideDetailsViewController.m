@@ -37,10 +37,11 @@
     [self.mailSender initialize];
     self.title = OTLocalizedString(@"guideTitle");
     self.navigationController.navigationBarHidden = NO;
-    [self setupCloseModal];
+    [self setupCloseModalWithoutTintWithTint:[UIColor appOrangeColor]];
     
     [self setupUI];
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+//    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController withMainColor:[UIColor whiteColor] andSecondaryColor:[UIColor appOrangeColor]];
 }
 
 - (void)didReceiveMemoryWarning {
