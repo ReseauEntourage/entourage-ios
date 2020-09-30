@@ -48,7 +48,7 @@ class OTGuideTopFilterCell: UITableViewCell {
     func populateCell(isPartnerOn:Bool, isDonatedOn:Bool, isVolunteerOn:Bool, delegate:ChangeFilterGDSDelegate) {
         
         ui_label_title_partner.text = OTLocalisationService.getLocalizedValue(forKey: "guide_display_partners")
-        ui_image_partner.image = UIImage.init(named: "pin_partners_without_shadow")
+        ui_image_partner.image = UIImage.init(named: "picto_cat_filter-8")
         ui_switch_partner.setOn(isPartnerOn, animated: true)
         ui_switch_partner.tag = 1
         

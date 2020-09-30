@@ -46,7 +46,7 @@ class OTMainGuideViewController: UIViewController {
         
         setup()
         setupButtons()
-        
+        fillCategories()
         getPoiList()
         
         NotificationCenter.default.addObserver(self, selector: #selector(showCurrentLocation), name: NSNotification.Name(rawValue:  kNotificationShowFeedsMapCurrentLocation), object: nil)
@@ -103,6 +103,28 @@ class OTMainGuideViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    func fillCategories() {
+        self.categories = [OTPoiCategory]()
+        for i in 0...8 {
+            let cat = OTPoiCategory()
+            cat.sid = NSNumber(integerLiteral: i)
+            cat.updateInfos()
+            self.categories.append(cat)
+        }
+        for i in 40...43 {
+            let cat = OTPoiCategory()
+            cat.sid = NSNumber(integerLiteral: i)
+            cat.updateInfos()
+            self.categories.append(cat)
+        }
+        for i in 60...61 {
+            let cat = OTPoiCategory()
+            cat.sid = NSNumber(integerLiteral: i)
+            cat.updateInfos()
+            self.categories.append(cat)
+        }
     }
     
     //MARK: - Notification Methods -
@@ -305,12 +327,10 @@ class OTMainGuideViewController: UIViewController {
             Logger.print("***** Error get filter to dict ****")
             return
         }
-        
-        OTPoiService().pois(withParameters: (_dict), success: { (categories, pois) in
+        var newDict = _dict
+        newDict["v"] = "2"
+        OTPoiService().pois(withParameters: (newDict), success: { (_, pois) in
             
-            if let _array = categories as? [OTPoiCategory] {
-                self.categories = _array
-            }
             if let _pois = pois as? [OTPoi] {
                 self.pois = _pois
             }

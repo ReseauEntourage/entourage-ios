@@ -31,13 +31,14 @@ struct OTGuideFilters {
     private mutating func initArrayFilters() {
         
         if arrayFilters.count == 0 {
-            arrayFilters = [OTGuideFilterItem.init(key: .SolidarityGuideKeyFood, active: showFood, image: "eat"),
-                            OTGuideFilterItem.init(key: .SolidarityGuideKeyHousing, active: showHousing, image: "housing"),
-                            OTGuideFilterItem.init(key: .SolidarityGuideKeyHeal, active: showHeal, image: "heal"),
-                            OTGuideFilterItem.init(key: .SolidarityGuideKeyRefresh, active: showRefresh, image: "water"),
-                            OTGuideFilterItem.init(key: .SolidarityGuideKeyOrientation, active: showOrientation, image: "orientate"),
-                            OTGuideFilterItem.init(key: .SolidarityGuideKeyCaring, active: showCaring, image: "lookAfterYourself"),
-                            OTGuideFilterItem.init(key: .SolidarityGuideKeyReinsertion, active: showReinsertion, image: "reinsertYourself")]
+            arrayFilters = [
+                OTGuideFilterItem.init(key: .SolidarityGuideKeyFood, active: showFood, image: "picto_cat_filter-1"),
+                OTGuideFilterItem.init(key: .SolidarityGuideKeyHousing, active: showHousing, image: "picto_cat_filter-2"),
+                OTGuideFilterItem.init(key: .SolidarityGuideKeyHeal, active: showHeal, image: "picto_cat_filter-3"),
+                OTGuideFilterItem.init(key: .SolidarityGuideKeyRefresh, active: showRefresh, image: "picto_cat_filter-41"),
+                OTGuideFilterItem.init(key: .SolidarityGuideKeyOrientation, active: showOrientation, image: "picto_cat_filter-5"),
+                OTGuideFilterItem.init(key: .SolidarityGuideKeyCaring, active: showCaring, image: "picto_cat_filter-6"),
+                OTGuideFilterItem.init(key: .SolidarityGuideKeyReinsertion, active: showReinsertion, image: "picto_cat_filter-7")]
         }
     }
     

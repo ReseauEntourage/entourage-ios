@@ -21,9 +21,9 @@ NSString *const kPOIPhone = @"phone";
 NSString *const kPOIDetails = @"description";
 NSString *const kPOIWebsite = @"website";
 NSString *const kPOIEmail = @"email";
-NSString *const kImagePrefixName = @"poi_category-%d";
+NSString *const kImagePrefixName = @"poi_category-new-%d";
 NSString *const kPOITransparentImagePrefix = @"poi_transparent_category-%d";
-NSString *const kImageDefaultName = @"poi_category-0";
+NSString *const kImageDefaultName = @"poi_category-new-0";
 NSString *const kPOIPartnerId = @"partner_id";
 
 @implementation OTPoi
@@ -61,8 +61,12 @@ NSString *const kPOIPartnerId = @"partner_id";
 
 - (UIImage *)image
 {
-	NSString *imageName = [NSString stringWithFormat:kImagePrefixName, [self.categoryId intValue]];
-
+    int catId = self.categoryId.intValue;
+    //Fix Cat 4 deprecated until WS ready
+    if (catId == 4) {
+        catId = 41;
+    }
+    NSString *imageName = [NSString stringWithFormat:kImagePrefixName, catId];
 	return [UIImage imageNamed:imageName] ? [UIImage imageNamed:imageName] : [UIImage imageNamed:kImageDefaultName];
 }
 

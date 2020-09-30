@@ -18,4 +18,5 @@ extern NSString *const kCategoryName;
 @property (strong, nonatomic) UIColor *color;
 
 + (OTPoiCategory *)categoryWithJSONDictionary:(NSDictionary *)dictionary;
+- (void)updateInfos;
 @end
