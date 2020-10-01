@@ -91,15 +91,22 @@ extension OTMainGuideHubViewController: UITableViewDelegate,UITableViewDataSourc
         
         switch indexPath.row {
         case 0:
+            OTLogger.logEvent(Action_guide_showGDS)
             showGds()
         case 1:
+            OTLogger.logEvent(Action_guide_webOrientation)
             showWeb(slug: SLUG_HUB_LINK_1)
         case 2:
+            OTLogger.logEvent(Action_guide_webGuide)
            showWeb(slug: SLUG_HUB_LINK_2)
         case 3:
+            OTLogger.logEvent(Action_guide_webAtelier)
            showWeb(slug: SLUG_HUB_LINK_3)
-        default:
+        case 4:
+            OTLogger.logEvent(Action_guide_WwebFaq)
             showWeb(slug: SLUG_HUB_LINK_FAQ)
+        default:
+            break
         }
     }
 }

@@ -180,6 +180,13 @@
 #define Action_guide_showList @"Action__Guide__ShowList"
 #define Action_guide_showFilters @"Action__Guide__ShowFilters"
 
+#define Action_guide_showGDS @"Action__HubGuide__ShowGDS"
+#define Action_guide_webOrientation @"Action__HubGuide__WebOrientation"
+#define Action_guide_webGuide @"Action__HubGuide__WebGuide"
+#define Action_guide_webAtelier @"Action__HubGuide__WebAtelier"
+#define Action_guide_WwebFaq @"Action__HubGuide__WebFaq"
+
+
 //Start info
 #define View_Start_Feeds @"View__Start__Feeds"
 
