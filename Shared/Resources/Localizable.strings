@@ -169,6 +169,18 @@
 "partners_entourage" = "Organisme actif sur Entourage";
 "guide_display_donate" = "Recherchant des dons";
 "guide_display_volunteer" = "Recherchant des bénévoles";
+
+"guide_display_toilettes" = "Toilettes";
+"guide_display_fontaines" = "Fontaines";
+"guide_display_laver" = "Se laver";
+"guide_display_laverie" = "Laveries";
+
+"guide_display_vetements" = "Vêtements & matériels";
+"guide_display_boite" = "Boites à dons/lire";
+
+"DetailPoiContact" = "Contact";
+"DetailPoiPublic" = "Public";
+
 // Tour
 "tour_type_bare_hands" = "barehands";
 "tour_type_medical" = "medical";

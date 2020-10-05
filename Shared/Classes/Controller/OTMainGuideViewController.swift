@@ -500,9 +500,8 @@ class OTMainGuideViewController: UIViewController {
             DispatchQueue.main.async {
                 let navVc = UIStoryboard.init(name: "GuideSolidarity", bundle: nil).instantiateInitialViewController() as? UINavigationController
                 
-                if let _controller = navVc?.topViewController as? OTGuideDetailsViewController {
+                if let _controller = navVc?.topViewController as? OTGuideDetailPoiViewController {
                     _controller.poi = poi
-                    _controller.category = self.categoryById(sid: _controller.poi.categoryId)
                     self.present(navVc!, animated: true, completion: nil)
                 }
             }

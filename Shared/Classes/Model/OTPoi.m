@@ -25,6 +25,7 @@ NSString *const kImagePrefixName = @"poi_category-new-%d";
 NSString *const kPOITransparentImagePrefix = @"poi_transparent_category-%d";
 NSString *const kImageDefaultName = @"poi_category-new-0";
 NSString *const kPOIPartnerId = @"partner_id";
+NSString *const kPOICategories = @"category_ids";
 
 @implementation OTPoi
 
@@ -51,6 +52,14 @@ NSString *const kPOIPartnerId = @"partner_id";
 		poi.email = [dictionary stringForKey:kPOIEmail];
 		poi.categoryId = [dictionary numberForKey:kPOICategoryId];
         poi.partnerId = [dictionary numberForKey:kPOIPartnerId];
+        
+        poi.categories_id = [NSMutableArray new];
+        NSMutableArray *catArray = [dictionary mutableArrayValueForKey:kPOICategories];
+        if ([catArray isKindOfClass:[NSMutableArray class]]) {
+            for (NSNumber *catId in catArray) {
+                [poi.categories_id addObject:catId];
+            }
+        }
 	}
 
 	return poi;
@@ -66,8 +75,10 @@ NSString *const kPOIPartnerId = @"partner_id";
     if (catId == 4) {
         catId = 41;
     }
+    
     NSString *imageName = [NSString stringWithFormat:kImagePrefixName, catId];
-	return [UIImage imageNamed:imageName] ? [UIImage imageNamed:imageName] : [UIImage imageNamed:kImageDefaultName];
+	UIImage *image = [UIImage imageNamed:imageName] ? [UIImage imageNamed:imageName] : [UIImage imageNamed:kImageDefaultName];
+    return image;
 }
 
 @end

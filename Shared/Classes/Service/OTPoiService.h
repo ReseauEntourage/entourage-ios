@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "OTPoi.h"
 
 extern NSString *const kCategories;
 extern NSString *const kPOIs;
@@ -21,6 +22,10 @@ extern NSString *const kAPIPoiRoute;
 
 - (void)poisWithParameters:(NSDictionary *)parameters
                    success:(void (^)(NSArray *categories, NSArray *pois))success
+                   failure:(void (^)(NSError *error))failure;
+
+- (void)getDateilpoiWithId:(int)poiId
+                   success:(void (^)(OTPoi *pois))success
                    failure:(void (^)(NSError *error))failure;
 
 @end

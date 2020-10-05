@@ -58,6 +58,5 @@
 #import <kingpin/KPClusteringController.h>
 #import "OTFeedItemsTableView.h"
 #import "NSNotification+entourage.h"
-#import "OTGuideDetailsViewController.h"
 #import "OTNoDataBehavior.h"
 #import "OTSolidarityGuideCell.h"

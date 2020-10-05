@@ -18,7 +18,6 @@
 #import "OTQuitFeedItemViewController.h"
 #import "UIView+entourage.h"
 #import "OTUserViewController.h"
-#import "OTGuideDetailsViewController.h"
 #import "OTTourCreatorViewController.h"
 #import "OTFeedItemFiltersViewController.h"
 #import "OTPublicFeedItemViewController.h"
