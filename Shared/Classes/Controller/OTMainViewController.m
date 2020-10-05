@@ -92,6 +92,7 @@
 
 #define LONGPRESS_DELTA 65.0f
 #define MAX_DISTANCE 250.0 //meters
+#define NUMBER_OF_LAUNCH_CHECK 4
 
 @interface OTMainViewController ()
 <
@@ -200,7 +201,20 @@ OTHeatzonesCollectionViewDelegate
 
 -(void)checkProfil {
     BOOL isAfterLogin = [[NSUserDefaults standardUserDefaults] boolForKey: @"checkAfterLogin"];
-    if (isAfterLogin) {
+    BOOL noMoreDemand = [[NSUserDefaults standardUserDefaults] boolForKey: @"noMoreDemand"];
+    NSInteger numberOfLaunch = [[NSUserDefaults standardUserDefaults] integerForKey:@"nbOfLaunch"];
+   
+    if (self.isFirstLoad) {
+        numberOfLaunch = numberOfLaunch + 1;
+        [[NSUserDefaults standardUserDefaults]setInteger:numberOfLaunch forKey:@"nbOfLaunch"];
+    }
+    
+    BOOL hasToShow = NO;
+    if (!noMoreDemand) {
+        hasToShow = (numberOfLaunch > 0 && numberOfLaunch % NUMBER_OF_LAUNCH_CHECK == 0) ? YES : NO;
+    }
+ 
+    if (isAfterLogin || hasToShow) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"checkAfterLogin"];
         
         OTUser * currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
@@ -217,6 +231,11 @@ OTHeatzonesCollectionViewDelegate
             }];
             UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_info_entourage_custom_no") style:UIAlertActionStyleDefault handler:nil];
             
+            UIAlertAction *actionNoMore = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_info_entourage_custom_no_more") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"noMoreDemand"];
+            }];
+            
+            [alertVC addAction:actionNoMore];
             [alertVC addAction:actionCancel];
             [alertVC addAction:action];
             

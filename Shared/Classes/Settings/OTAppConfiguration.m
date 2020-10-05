@@ -119,6 +119,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[NSUserDefaults standardUserDefaults] setTemporaryUser:nil];
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
     [[NSUserDefaults standardUserDefaults] setTourPoints:nil];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"noMoreDemand"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"nbOfLaunch"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

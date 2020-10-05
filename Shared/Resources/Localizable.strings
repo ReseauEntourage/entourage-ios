@@ -56,6 +56,7 @@
 "login_info_pop_validate" = "Compris !";
 "pop_info_entourage_custom_yes" = "Personnaliser";
 "pop_info_entourage_custom_no" = "Plus tard";
+"pop_info_entourage_custom_no_more" = "Ne plus me montrer";
 "login_email_pwd_title" = "Ok super !";
 "login_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
 
