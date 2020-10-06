@@ -71,7 +71,13 @@ class OTShareEntourageViewController: UIViewController {
         SVProgressHUD.show()
         
         OTShareEntourageService.postAddShare(entourageId: arraySharings[selectedIndex].uuid, uuid: feedItem!.uuid) { (isOk) in
-            SVProgressHUD.dismiss()
+            
+            DispatchQueue.main.async {
+                SVProgressHUD.dismiss()
+                
+                SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "sendShare"))
+            }
+            
             self.dismiss(animated: true, completion: nil)
         }
     }

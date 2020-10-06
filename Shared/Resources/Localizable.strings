@@ -889,3 +889,5 @@
 "partnerFollowMessage" = "Vous ne recevrez plus de notification lorsque %@ lance de nouvelles initiatives solidaires.";
 "partnerFollowButtonValid" = "Se désabonner";
 "partnerFollowButtonCancel" = "Annuler";
+
+"sendShare" = "Lien envoyé";
