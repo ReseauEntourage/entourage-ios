@@ -170,6 +170,7 @@
 "partners_entourage" = "Organisme actif sur Entourage";
 "guide_display_donate" = "Recherchant des dons";
 "guide_display_volunteer" = "Recherchant des bénévoles";
+"guide_display_info_mutli" = "Lieux proposant des services de plusieurs catégories";
 
 "guide_display_toilettes" = "Toilettes";
 "guide_display_fontaines" = "Fontaines";

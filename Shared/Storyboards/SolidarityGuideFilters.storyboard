@@ -46,14 +46,41 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FiltersTopCell" id="H6g-vo-p6k" customClass="OTGuideTopFilterCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="383" height="150.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="383" height="218.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H6g-vo-p6k" id="f5z-Ol-1vK">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="150.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="218.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mjt-y4-3o7">
+                                                    <rect key="frame" x="0.0" y="16" width="383" height="52"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="xx" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gF-kJ-nvs">
+                                                            <rect key="frame" x="54" y="17" width="15.5" height="18"/>
+                                                            <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_cat_filter-0" translatesAutoresizingMaskIntoConstraints="NO" id="chP-Pa-4EB">
+                                                            <rect key="frame" x="7" y="6" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="gtq-Lg-hgo"/>
+                                                                <constraint firstAttribute="height" constant="40" id="obf-hq-JW7"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="0.50486905809859151" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="chP-Pa-4EB" firstAttribute="centerY" secondItem="mjt-y4-3o7" secondAttribute="centerY" id="8Yl-qB-BUu"/>
+                                                        <constraint firstItem="chP-Pa-4EB" firstAttribute="leading" secondItem="mjt-y4-3o7" secondAttribute="leading" constant="7" id="LNU-jt-xJy"/>
+                                                        <constraint firstItem="6gF-kJ-nvs" firstAttribute="centerY" secondItem="mjt-y4-3o7" secondAttribute="centerY" id="VwC-xy-80D"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6gF-kJ-nvs" secondAttribute="trailing" constant="8" id="hge-Is-zL4"/>
+                                                        <constraint firstAttribute="height" constant="52" id="iAG-Cd-BbP"/>
+                                                        <constraint firstItem="6gF-kJ-nvs" firstAttribute="leading" secondItem="chP-Pa-4EB" secondAttribute="trailing" constant="7" id="mfr-nf-kpJ"/>
+                                                    </constraints>
+                                                </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="RAO-8C-FW1">
-                                                    <rect key="frame" x="0.0" y="16" width="383" height="130.5"/>
+                                                    <rect key="frame" x="0.0" y="84" width="383" height="130.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4z-wJ-VAm">
                                                             <rect key="frame" x="0.0" y="0.0" width="383" height="48"/>
@@ -164,13 +191,19 @@
                                                             </constraints>
                                                         </view>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="qKv-hs-YRg" firstAttribute="top" secondItem="nMd-Gr-VHY" secondAttribute="bottom" constant="1" id="KVt-cE-CAc"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="RAO-8C-FW1" firstAttribute="top" secondItem="f5z-Ol-1vK" secondAttribute="top" constant="16" id="LeX-VD-iTz"/>
                                                 <constraint firstItem="RAO-8C-FW1" firstAttribute="leading" secondItem="f5z-Ol-1vK" secondAttribute="leading" id="bUO-DP-aTM"/>
+                                                <constraint firstAttribute="trailing" secondItem="mjt-y4-3o7" secondAttribute="trailing" id="gg4-0R-6ZP"/>
+                                                <constraint firstItem="mjt-y4-3o7" firstAttribute="top" secondItem="f5z-Ol-1vK" secondAttribute="top" constant="16" id="hIx-jn-JkR"/>
                                                 <constraint firstAttribute="trailing" secondItem="RAO-8C-FW1" secondAttribute="trailing" id="mlN-zx-xjS"/>
+                                                <constraint firstItem="mjt-y4-3o7" firstAttribute="leading" secondItem="f5z-Ol-1vK" secondAttribute="leading" id="se9-He-rcL"/>
                                                 <constraint firstAttribute="bottom" secondItem="RAO-8C-FW1" secondAttribute="bottom" constant="4" id="xWm-F8-9Ug"/>
+                                                <constraint firstItem="RAO-8C-FW1" firstAttribute="top" secondItem="mjt-y4-3o7" secondAttribute="bottom" constant="16" id="z4z-sP-nQI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
@@ -182,12 +215,13 @@
                                             <outlet property="ui_switch_donated" destination="47z-tw-uHi" id="e2v-tq-3fZ"/>
                                             <outlet property="ui_switch_partner" destination="gVb-t4-Kf2" id="6FE-7O-Mbz"/>
                                             <outlet property="ui_switch_volunteer" destination="gXS-n5-nKf" id="hlT-0O-pAH"/>
+                                            <outlet property="ui_title_info_multi" destination="6gF-kJ-nvs" id="Zzw-re-mLm"/>
                                             <outlet property="ui_view_doante" destination="nMd-Gr-VHY" id="WB0-IW-vYr"/>
                                             <outlet property="ui_view_volunteer" destination="qKv-hs-YRg" id="L4n-A0-AD6"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageFilterCell" rowHeight="44" id="VH0-hU-bPy" customClass="OTGuideFilterCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="178.5" width="383" height="44"/>
+                                        <rect key="frame" x="0.0" y="246.5" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VH0-hU-bPy" id="hRx-gG-A7L">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
@@ -259,6 +293,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="picto_cat_filter-0" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

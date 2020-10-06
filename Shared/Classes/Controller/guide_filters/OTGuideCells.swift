@@ -32,6 +32,7 @@ class OTGuideFilterCell: UITableViewCell {
 
 class OTGuideTopFilterCell: UITableViewCell {
     
+    @IBOutlet weak var ui_title_info_multi: UILabel!
     @IBOutlet weak var ui_view_doante: UIView!
     @IBOutlet weak var ui_view_volunteer: UIView!
     @IBOutlet weak var ui_image_partner: UIImageView!
@@ -46,6 +47,8 @@ class OTGuideTopFilterCell: UITableViewCell {
     weak var delegate:ChangeFilterGDSDelegate? = nil
     
     func populateCell(isPartnerOn:Bool, isDonatedOn:Bool, isVolunteerOn:Bool, delegate:ChangeFilterGDSDelegate) {
+        
+        ui_title_info_multi.text = OTLocalisationService.getLocalizedValue(forKey: "guide_display_info_mutli")
         
         ui_label_title_partner.text = OTLocalisationService.getLocalizedValue(forKey: "guide_display_partners")
         ui_image_partner.image = UIImage.init(named: "picto_cat_filter-8")
