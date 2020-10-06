@@ -47,14 +47,13 @@ struct OTGuideFilters {
                 
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyOrientation, active: showOrientation, image: "picto_cat_filter-5"),
                 
-                OTGuideFilterItem.init(key: .SolidarityGuideKeyCaring, active: showCaring, image: "picto_cat_filter-6"),
-                
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyReinsertion, active: showReinsertion, image: "picto_cat_filter-7"),
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyToilett, active: showToilets, image: "picto_cat_filter-40"),
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyFontaines, active: showFontaines, image: "picto_cat_filter-41"),
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyDouches, active: showDouches, image: "picto_cat_filter-42"),
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyLaverLinge, active: showLaveLinges, image: "picto_cat_filter-43"),
                 
+                OTGuideFilterItem.init(key: .SolidarityGuideKeyCaring, active: showCaring, image: "picto_cat_filter-6"),
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyVetements, active: showVetements, image: "picto_cat_filter-61"),
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyBoitesDons, active: showBoitesDons, image: "picto_cat_filter-62")]
         }
