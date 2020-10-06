@@ -14,6 +14,8 @@ class OTMainGuideHubViewController: UIViewController {
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_tableview: UITableView!
     
+    var isNeedHelp = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "hub_title")
@@ -33,7 +35,15 @@ class OTMainGuideHubViewController: UIViewController {
         let _rect = CGRect(x: 0, y: self.ui_view_top.bounds.size.height , width: self.view.frame.size.width, height: self.ui_view_top.layer.shadowRadius)
         let _shadowPath = UIBezierPath(rect: _rect).cgPath
         self.ui_view_top.layer.shadowPath = _shadowPath
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
+        let user = UserDefaults.standard.currentUser
+        isNeedHelp = user?.isUserTypeAlone() ?? false
+        
+        ui_tableview?.reloadData()
     }
     
     func showGds() {
@@ -57,10 +67,30 @@ class OTMainGuideHubViewController: UIViewController {
 extension OTMainGuideHubViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isNeedHelp {
+            return 3
+        }
         return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if isNeedHelp {
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! CellGeneric
+                cell.populateCell(position: 0)
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! CellGeneric
+                cell.populateCell(position: 1)
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell5", for: indexPath) as! CellGeneric
+                cell.populateCell(position: 4)
+                return cell
+            }
+        }
         
         switch indexPath.row {
         case 0:
@@ -88,6 +118,21 @@ extension OTMainGuideHubViewController: UITableViewDelegate,UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if isNeedHelp {
+            switch indexPath.row {
+            case 0:
+                OTLogger.logEvent(Action_guide_showGDS)
+                showGds()
+            case 1:
+                OTLogger.logEvent(Action_guide_webOrientation)
+                showWeb(slug: SLUG_HUB_LINK_1)
+            default:
+                OTLogger.logEvent(Action_guide_WwebFaq)
+                showWeb(slug: SLUG_HUB_LINK_FAQ)
+            }
+            return
+        }
         
         switch indexPath.row {
         case 0:
