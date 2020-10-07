@@ -200,14 +200,16 @@ OTHeatzonesCollectionViewDelegate
 }
 
 -(void)checkProfil {
+    if (!self.isFirstLoad) {
+        return;
+    }
+    
     BOOL isAfterLogin = [[NSUserDefaults standardUserDefaults] boolForKey: @"checkAfterLogin"];
     BOOL noMoreDemand = [[NSUserDefaults standardUserDefaults] boolForKey: @"noMoreDemand"];
     NSInteger numberOfLaunch = [[NSUserDefaults standardUserDefaults] integerForKey:@"nbOfLaunch"];
    
-    if (self.isFirstLoad) {
-        numberOfLaunch = numberOfLaunch + 1;
-        [[NSUserDefaults standardUserDefaults]setInteger:numberOfLaunch forKey:@"nbOfLaunch"];
-    }
+    numberOfLaunch = numberOfLaunch + 1;
+    [[NSUserDefaults standardUserDefaults]setInteger:numberOfLaunch forKey:@"nbOfLaunch"];
     
     BOOL hasToShow = NO;
     if (!noMoreDemand) {
