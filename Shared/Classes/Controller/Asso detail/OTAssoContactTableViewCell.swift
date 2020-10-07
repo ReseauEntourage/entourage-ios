@@ -12,58 +12,69 @@ class OTAssoContactTableViewCell: UITableViewCell {
 
     let fontSizeIphoneSE:CGFloat = 13
     @IBOutlet weak var ui_tv_contact: UILabel!
-    @IBOutlet weak var ui_tv_website: UILabel!
-    @IBOutlet weak var ui_tv_phone: UILabel!
-    @IBOutlet weak var ui_tv_address: UILabel!
-    @IBOutlet weak var ui_tv_website_desc: UILabel!
-    @IBOutlet weak var ui_tv_phone_desc: UILabel!
-    @IBOutlet weak var ui_tv_address_desc: UILabel!
     
-    @IBOutlet weak var ui_view_message: UIView!
-    @IBOutlet weak var ui_view_phone: UIView!
+    @IBOutlet weak var ui_bt_phone: UIButton!
+    @IBOutlet weak var ui_bt_mail: UIButton!
+    @IBOutlet weak var ui_bt_address: UIButton!
+    @IBOutlet weak var ui_bt_web: UIButton!
+    
+    @IBOutlet weak var ui_view_main_address: UIView!
+    @IBOutlet weak var ui_view_main_phone: UIView!
+    @IBOutlet weak var ui_view_main_website: UIView!
+    @IBOutlet weak var ui_view_main_email: UIView!
+    
     weak var delegate:ShowInfoAssoDelegate? = nil
     
     var phone:String? = nil
     var address:String? = nil
     var website:String? = nil
+    var email:String? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ui_tv_contact.text = OTLocalisationService.getLocalizedValue(forKey: "title_asso_contact")
-        ui_tv_phone.text = OTLocalisationService.getLocalizedValue(forKey: "title_asso_phone")
-        ui_tv_website.text = OTLocalisationService.getLocalizedValue(forKey: "title_asso_website")
-        ui_tv_address.text = OTLocalisationService.getLocalizedValue(forKey: "title_asso_address")
-        ui_view_phone.layer.cornerRadius = 8.0
-        ui_view_message.layer.cornerRadius = 8.0
         
         if UIScreen.main.bounds.height <= 568 {
-            ui_tv_phone.text = OTLocalisationService.getLocalizedValue(forKey: "title_asso_phone_light")
-            ui_tv_phone.font = ui_tv_phone.font.withSize(fontSizeIphoneSE)
-            ui_tv_address.font = ui_tv_address.font.withSize(fontSizeIphoneSE)
-            ui_tv_website.font = ui_tv_website.font.withSize(fontSizeIphoneSE)
+            ui_bt_phone.titleLabel?.font = ui_bt_phone.titleLabel?.font.withSize(fontSizeIphoneSE)
+            ui_bt_mail.titleLabel?.font = ui_bt_mail.titleLabel?.font.withSize(fontSizeIphoneSE)
+            ui_bt_web.titleLabel?.font = ui_bt_web.titleLabel?.font.withSize(fontSizeIphoneSE)
             
-            ui_tv_website_desc.font = ui_tv_website_desc.font.withSize(fontSizeIphoneSE)
-            ui_tv_phone_desc.font = ui_tv_phone_desc.font.withSize(fontSizeIphoneSE)
-            ui_tv_address_desc.font = ui_tv_address_desc.font.withSize(fontSizeIphoneSE)
+            ui_bt_address.titleLabel?.font = ui_bt_address.titleLabel?.font.withSize(fontSizeIphoneSE)
         }
+        
+        ui_bt_mail.titleLabel?.numberOfLines = 1
+        ui_bt_phone.titleLabel?.numberOfLines = 1
+        ui_bt_web.titleLabel?.numberOfLines = 1
+        ui_bt_address.titleLabel?.numberOfLines = 2
+        ui_bt_address.titleLabel?.lineBreakMode = .byTruncatingTail
+        ui_bt_phone.titleLabel?.lineBreakMode = .byTruncatingTail
+        ui_bt_web.titleLabel?.lineBreakMode = .byTruncatingTail
+        ui_bt_mail.titleLabel?.lineBreakMode = .byTruncatingTail
     }
 
-    func populateCell(website:String?,phone:String?,address:String?,delegate:ShowInfoAssoDelegate) {
-        ui_tv_website_desc.text = website
-        ui_tv_phone_desc.text = phone
-        ui_tv_address_desc.text = address
+    func populateCell(website:String?,phone:String?,address:String?,email:String?,delegate:ShowInfoAssoDelegate) {
+        
+        ui_bt_phone.setTitle(phone, for: .normal)
+        ui_bt_mail.setTitle(email, for: .normal)
+        ui_bt_web.setTitle(website, for: .normal)
+        ui_bt_address.setTitle(address, for: .normal)
+        
+        ui_view_main_phone?.isHidden = phone?.count ?? 0 == 0
+        ui_view_main_email?.isHidden = email?.count ?? 0 == 0
+        ui_view_main_address?.isHidden = address?.count ?? 0 == 0
+        ui_view_main_website?.isHidden = website?.count ?? 0 == 0
         
         self.address = address
         self.phone = phone
         self.website = website
+        self.email = email
         self.delegate = delegate
     }
 
     @IBAction func action_send_phone(_ sender: Any) {
         delegate?.sendCall(phone: phone)
     }
-    @IBAction func action_send_message(_ sender: Any) {
-        delegate?.sendMessage(phone: phone)
+    @IBAction func action_send_email(_ sender: Any) {
+        delegate?.sendEmail(email: email)
     }
     @IBAction func action_show_website(_ sender: Any) {
         delegate?.showWebsite(website: website)
@@ -77,5 +88,5 @@ protocol ShowInfoAssoDelegate: class {
     func showAddress(address:String?)
     func showWebsite(website:String?)
     func sendCall(phone:String?)
-    func sendMessage(phone:String?)
+    func sendEmail(email:String?)
 }

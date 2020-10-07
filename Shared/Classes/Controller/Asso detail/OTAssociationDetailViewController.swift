@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import SVProgressHUD
 
 class OTAssociationDetailViewController: UIViewController {
 
@@ -113,7 +114,7 @@ extension OTAssociationDetailViewController: UITableViewDelegate,UITableViewData
         else {
            let cell = tableView.dequeueReusableCell(withIdentifier: "cellContactAsso", for: indexPath) as! OTAssoContactTableViewCell
             
-            cell.populateCell(website: association?.websiteUrl, phone: association?.phone, address: association?.address,delegate: self)
+            cell.populateCell(website: association?.websiteUrl, phone: association?.phone, address: association?.address,email: association?.email,delegate: self)
             
             return cell
         }
@@ -141,13 +142,16 @@ extension OTAssociationDetailViewController: ShowInfoAssoDelegate {
         }
     }
     
-    func sendMessage(phone: String?) {
-        if let _phone = phone, MFMessageComposeViewController.canSendText() {
-            let controller = MFMessageComposeViewController()
-            controller.body = ""
-            controller.recipients = [_phone]
-            controller.messageComposeDelegate = self
+    func sendEmail(email: String?) {
+        if let _email = email, MFMailComposeViewController.canSendMail()  {
+            let controller = MFMailComposeViewController()
+            controller.setMessageBody("", isHTML: true)
+            controller.setToRecipients([_email])
+            controller.mailComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
+        }
+        else {
+            SVProgressHUD.showError(withStatus: OTLocalisationService.getLocalizedValue(forKey: "about_email_notavailable"))
         }
     }
     
@@ -165,5 +169,11 @@ extension OTAssociationDetailViewController: MFMessageComposeViewControllerDeleg
 
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
          self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension OTAssociationDetailViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
