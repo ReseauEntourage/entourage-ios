@@ -13,16 +13,21 @@ class OTGuideFilterCell: UITableViewCell {
     
     @IBOutlet weak var ui_image: UIImageView!
     @IBOutlet weak var ui_label_title: UILabel!
-    @IBOutlet weak var ui_switch: UISwitch!
+    @IBOutlet weak var ui_switch: UISwitch?
     
     weak var delegate:ChangeFilterGDSDelegate? = nil
     
     func populateCell(item:OTGuideFilterItem,position:Int,delegate:ChangeFilterGDSDelegate) {
         ui_label_title.text = item.title
         ui_image.image = UIImage.init(named: item.image)
-        ui_switch.setOn(item.active, animated: true)
-        ui_switch.tag = position
+        ui_switch?.setOn(item.active, animated: true)
+        ui_switch?.tag = position
         self.delegate = delegate
+    }
+    
+    func populateCell(item:OTGuideFilterItem) {
+        ui_label_title.text = item.title
+        ui_image.image = UIImage.init(named: item.image)
     }
     
     @IBAction func action_change(_ sender: UISwitch) {

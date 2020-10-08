@@ -14,9 +14,14 @@ import SVProgressHUD
     @IBOutlet weak var ui_bt_sendmail: UIButton!
     @IBOutlet weak var ui_tableview: UITableView!
     
+    @IBOutlet weak var ui_view_parent_info_poi: UIView!
+    @IBOutlet weak var ui_tableview_infos_poi: UITableView!
+    
     @objc var poi:OTPoi!
     
     var hasPublicRow = false
+    
+    var filters = OTGuideFilters()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +56,7 @@ import SVProgressHUD
         else {
             hasPublicRow = false
         }
+        
         self.ui_tableview.reloadData()
     }
     
@@ -153,6 +159,30 @@ import SVProgressHUD
         activityVC.navigationController?.navigationBar.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
         self.navigationController?.present(activityVC, animated: true, completion: nil)
     }
+    
+    
+    @IBAction func action_close_legend(_ sender: Any) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.ui_view_parent_info_poi.alpha = 1
+        
+        UIView.animate(withDuration: 0.3) {
+            self.ui_view_parent_info_poi.alpha = 0
+        } completion: { (isok) in
+            self.ui_view_parent_info_poi.isHidden = true
+        }
+    }
+    @IBAction func action_show_legend(_ sender: Any) {
+        
+        self.ui_view_parent_info_poi.alpha = 0
+        self.ui_view_parent_info_poi.isHidden = false
+        
+        UIView.animate(withDuration: 0.3) {
+            self.ui_view_parent_info_poi.alpha = 1
+        } completion: { (isok) in
+            self.navigationController?.isNavigationBarHidden = true
+        }
+
+    }
 }
 
 //MARK: - MFMailComposeViewControllerDelegate -
@@ -165,6 +195,11 @@ extension OTGuideDetailPoiViewController: MFMailComposeViewControllerDelegate {
 //MARK: - UITableViewDataSource,UITableViewDelegate -
 extension OTGuideDetailPoiViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if tableView == ui_tableview_infos_poi {
+            return filters.arrayFilters.count
+        }
+        
         if hasPublicRow {
             return 3
         }
@@ -173,6 +208,14 @@ extension OTGuideDetailPoiViewController: UITableViewDataSource,UITableViewDeleg
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
+        
+        if tableView == ui_tableview_infos_poi {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellFiter", for: indexPath) as! OTGuideFilterCell
+            
+            cell.populateCell(item: filters.arrayFilters[index])
+            
+            return cell
+        }
         
         if index == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! OTGuideDetailTopTableViewCell
@@ -187,7 +230,6 @@ extension OTGuideDetailPoiViewController: UITableViewDataSource,UITableViewDeleg
             cell.populateCell(description: poi.audience)
             return cell
         }
-        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellContact", for: indexPath) as! OTGuideDetailContactTableViewCell
         

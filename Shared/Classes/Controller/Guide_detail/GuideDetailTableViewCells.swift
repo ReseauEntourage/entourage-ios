@@ -20,16 +20,26 @@ class OTGuideDetailTopTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_picto_5: UIImageView!
     @IBOutlet weak var ui_picto_6: UIImageView!
     
+    @IBOutlet weak var ui_picto_sapce_1: UIImageView!
+    @IBOutlet weak var ui_picto_sapce_2: UIImageView!
+    @IBOutlet weak var ui_picto_sapce_3: UIImageView!
+    @IBOutlet weak var ui_picto_sapce_4: UIImageView!
+    @IBOutlet weak var ui_picto_sapce_5: UIImageView!
+    @IBOutlet weak var ui_picto_sapce_6: UIImageView!
+    
+    
     func populateCell(poi:OTPoi) {
         ui_title.text = poi.name
         ui_description.text = poi.details
         
         for i in 0...5 {
             getPicto(position: i)?.isHidden = true
+            getPictoSpacer(position: i)?.isHidden = true
         }
         
         for i in 0..<poi.categories_id.count {
             getPicto(position: i)?.isHidden = false
+            getPictoSpacer(position: i)?.isHidden = false
             if let _catId = poi.categories_id[i] as? NSNumber {
                 let imageName = String.init(format: "picto_cat_filter-%d", _catId.intValue)
                 getPicto(position: i)?.image = UIImage(named: imageName)
@@ -51,6 +61,25 @@ class OTGuideDetailTopTableViewCell: UITableViewCell {
             return ui_picto_5
         case 5:
             return ui_picto_6
+        default:
+            return nil
+        }
+    }
+    
+    func getPictoSpacer(position:Int) -> UIImageView? {
+        switch position {
+        case 0:
+            return ui_picto_sapce_1
+        case 1:
+            return ui_picto_sapce_2
+        case 2:
+            return ui_picto_sapce_3
+        case 3:
+            return ui_picto_sapce_4
+        case 4:
+            return ui_picto_sapce_5
+        case 5:
+            return ui_picto_sapce_6
         default:
             return nil
         }

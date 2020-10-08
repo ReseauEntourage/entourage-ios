@@ -8,6 +8,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SF-UI-Text-Light.otf">
+            <string>SFUIText-Light</string>
+        </array>
         <array key="SF-UI-Text-Regular.otf">
             <string>SFUIText-Regular</string>
         </array>
@@ -84,6 +87,39 @@
                                                         <constraint firstAttribute="height" constant="32" id="dNH-bb-P29"/>
                                                     </constraints>
                                                 </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="lJX-gA-CYU">
+                                                    <rect key="frame" x="16" y="50.5" width="254" height="20"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_cat_filter-1" translatesAutoresizingMaskIntoConstraints="NO" id="UW3-aK-uLk">
+                                                            <rect key="frame" x="0.0" y="0.0" width="32" height="20"/>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_cat_filter-1" translatesAutoresizingMaskIntoConstraints="NO" id="Iud-Jy-2MB">
+                                                            <rect key="frame" x="37" y="0.0" width="32" height="20"/>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_cat_filter-1" translatesAutoresizingMaskIntoConstraints="NO" id="CXF-cs-Oty">
+                                                            <rect key="frame" x="74" y="0.0" width="32" height="20"/>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_cat_filter-1" translatesAutoresizingMaskIntoConstraints="NO" id="Aie-25-Z9H">
+                                                            <rect key="frame" x="111" y="0.0" width="32" height="20"/>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_cat_filter-1" translatesAutoresizingMaskIntoConstraints="NO" id="6xw-m2-QAR">
+                                                            <rect key="frame" x="148" y="0.0" width="32" height="20"/>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_cat_filter-1" translatesAutoresizingMaskIntoConstraints="NO" id="jXQ-GF-trO">
+                                                            <rect key="frame" x="185" y="0.0" width="32" height="20"/>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_help_poi" translatesAutoresizingMaskIntoConstraints="NO" id="Oz4-Zu-4GV">
+                                                            <rect key="frame" x="222" y="0.0" width="32" height="20"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <gestureRecognizers/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Kkv-Sp-fw7"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="ibH-YQ-yxz" appends="YES" id="6m8-0T-faF"/>
+                                                    </connections>
+                                                </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titre" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m02-OV-h2y" userLabel="POI Name Label">
                                                     <rect key="frame" x="16" y="92.5" width="343" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -92,6 +128,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="lJX-gA-CYU" firstAttribute="centerY" secondItem="8o9-Q2-oCj" secondAttribute="centerY" id="0R0-10-Msa"/>
                                                 <constraint firstItem="8o9-Q2-oCj" firstAttribute="top" secondItem="8Qc-RX-PcO" secondAttribute="bottom" constant="8" symbolic="YES" id="51C-aQ-jss"/>
                                                 <constraint firstItem="8Qc-RX-PcO" firstAttribute="leading" secondItem="J8f-Q3-qau" secondAttribute="leading" constant="16" id="CTf-OE-MhN"/>
                                                 <constraint firstAttribute="bottom" secondItem="m02-OV-h2y" secondAttribute="bottom" constant="20" id="Fi3-p1-sRO"/>
@@ -101,6 +138,7 @@
                                                 <constraint firstItem="8o9-Q2-oCj" firstAttribute="leading" secondItem="J8f-Q3-qau" secondAttribute="leading" constant="16" id="Uz4-jZ-dfN"/>
                                                 <constraint firstItem="m02-OV-h2y" firstAttribute="leading" secondItem="J8f-Q3-qau" secondAttribute="leading" constant="16" id="p2r-b7-m8f"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="8Qc-RX-PcO" secondAttribute="trailing" constant="16" id="plS-4X-0z4"/>
+                                                <constraint firstItem="lJX-gA-CYU" firstAttribute="leading" secondItem="8o9-Q2-oCj" secondAttribute="leading" id="tb5-dk-0FD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -111,6 +149,12 @@
                                             <outlet property="ui_picto_4" destination="zB0-1p-UeY" id="gTg-pI-nDr"/>
                                             <outlet property="ui_picto_5" destination="5FY-m2-3A2" id="wUX-ID-rFw"/>
                                             <outlet property="ui_picto_6" destination="B9J-rz-pf5" id="pzh-7E-7bf"/>
+                                            <outlet property="ui_picto_sapce_1" destination="UW3-aK-uLk" id="wF6-yD-KCs"/>
+                                            <outlet property="ui_picto_sapce_2" destination="Iud-Jy-2MB" id="PgH-uv-XsG"/>
+                                            <outlet property="ui_picto_sapce_3" destination="CXF-cs-Oty" id="gUR-sa-Fdj"/>
+                                            <outlet property="ui_picto_sapce_4" destination="Aie-25-Z9H" id="ovp-xH-EuC"/>
+                                            <outlet property="ui_picto_sapce_5" destination="6xw-m2-QAR" id="Nbq-zl-fzI"/>
+                                            <outlet property="ui_picto_sapce_6" destination="jXQ-GF-trO" id="2Gd-Xv-gLI"/>
                                             <outlet property="ui_title" destination="8Qc-RX-PcO" id="Nxx-6W-a8J"/>
                                         </connections>
                                     </tableViewCell>
@@ -367,6 +411,82 @@
                                     <constraint firstItem="wG1-EO-I6F" firstAttribute="centerX" secondItem="8zU-cV-JfB" secondAttribute="centerX" id="vYC-mm-em5"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSz-Ch-fi2">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPD-5Z-xfH">
+                                        <rect key="frame" x="20" y="20" width="335" height="627"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nUC-PS-BMQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="627"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellFiter" rowHeight="44" id="b9Q-Sc-D4m" customClass="OTGuideFilterCell" customModule="Ent_Beta" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="335" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b9Q-Sc-D4m" id="oWb-Q7-fe6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDH-O0-brj">
+                                                                    <rect key="frame" x="55" y="13" width="256" height="18"/>
+                                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rgz-IQ-KPK">
+                                                                    <rect key="frame" x="16" y="8" width="32" height="28"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="32" id="T3r-Lb-jWB"/>
+                                                                        <constraint firstAttribute="height" constant="32" id="q8N-8f-ci3"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="HDH-O0-brj" firstAttribute="top" secondItem="oWb-Q7-fe6" secondAttribute="topMargin" constant="2" id="26O-RD-DSt"/>
+                                                                <constraint firstItem="rgz-IQ-KPK" firstAttribute="centerY" secondItem="oWb-Q7-fe6" secondAttribute="centerY" id="BT6-QZ-30k"/>
+                                                                <constraint firstItem="rgz-IQ-KPK" firstAttribute="top" secondItem="oWb-Q7-fe6" secondAttribute="top" constant="8" id="Dph-eM-mH7"/>
+                                                                <constraint firstAttribute="bottomMargin" secondItem="HDH-O0-brj" secondAttribute="bottom" constant="2" id="GSN-h3-Nnp"/>
+                                                                <constraint firstItem="rgz-IQ-KPK" firstAttribute="leading" secondItem="oWb-Q7-fe6" secondAttribute="leading" constant="16" id="bLI-Yz-4uT"/>
+                                                                <constraint firstAttribute="bottom" secondItem="rgz-IQ-KPK" secondAttribute="bottom" constant="8" id="dFU-62-eri"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="HDH-O0-brj" secondAttribute="trailing" constant="8" id="iac-Sl-diO"/>
+                                                                <constraint firstItem="HDH-O0-brj" firstAttribute="centerY" secondItem="oWb-Q7-fe6" secondAttribute="centerY" id="kXH-2d-6ff"/>
+                                                                <constraint firstItem="HDH-O0-brj" firstAttribute="leading" secondItem="rgz-IQ-KPK" secondAttribute="trailing" constant="7" id="mcn-pz-tuR"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="ui_image" destination="rgz-IQ-KPK" id="nf4-Gx-EIi"/>
+                                                            <outlet property="ui_label_title" destination="HDH-O0-brj" id="2WY-fY-bhY"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="IK0-TL-br7" id="yxh-Kk-tDq"/>
+                                                    <outlet property="delegate" destination="IK0-TL-br7" id="fk9-1v-qgt"/>
+                                                </connections>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="nUC-PS-BMQ" firstAttribute="top" secondItem="UPD-5Z-xfH" secondAttribute="top" id="KVJ-gG-0XS"/>
+                                            <constraint firstAttribute="bottom" secondItem="nUC-PS-BMQ" secondAttribute="bottom" id="VMA-NX-vNE"/>
+                                            <constraint firstAttribute="trailing" secondItem="nUC-PS-BMQ" secondAttribute="trailing" id="hUS-PY-gQY"/>
+                                            <constraint firstItem="nUC-PS-BMQ" firstAttribute="leading" secondItem="UPD-5Z-xfH" secondAttribute="leading" id="n5Y-C4-PIV"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="0.69509242957746475" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="UPD-5Z-xfH" firstAttribute="leading" secondItem="RSz-Ch-fi2" secondAttribute="leading" constant="20" id="2zb-Ln-D4Z"/>
+                                    <constraint firstItem="UPD-5Z-xfH" firstAttribute="top" secondItem="RSz-Ch-fi2" secondAttribute="top" constant="20" id="cHF-rC-H6S"/>
+                                    <constraint firstAttribute="trailing" secondItem="UPD-5Z-xfH" secondAttribute="trailing" constant="20" id="irw-Hp-I3K"/>
+                                    <constraint firstAttribute="bottom" secondItem="UPD-5Z-xfH" secondAttribute="bottom" constant="20" id="qeF-oW-5ms"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="CmC-GI-qVR" appends="YES" id="kGr-1m-jL8"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -374,9 +494,13 @@
                             <constraint firstAttribute="trailing" secondItem="x17-6J-f81" secondAttribute="trailing" id="DB9-8G-Z9a"/>
                             <constraint firstItem="x17-6J-f81" firstAttribute="top" secondItem="QkU-Um-vRZ" secondAttribute="bottom" id="EdW-Av-wjx"/>
                             <constraint firstItem="x17-6J-f81" firstAttribute="leading" secondItem="rhR-Tr-SRC" secondAttribute="leading" id="Fa0-QY-fjf"/>
+                            <constraint firstItem="RSz-Ch-fi2" firstAttribute="leading" secondItem="rhR-Tr-SRC" secondAttribute="leading" id="HYo-bc-v32"/>
                             <constraint firstItem="8zU-cV-JfB" firstAttribute="top" secondItem="x17-6J-f81" secondAttribute="bottom" constant="8" symbolic="YES" id="eCa-41-Qv9"/>
                             <constraint firstAttribute="trailing" secondItem="8zU-cV-JfB" secondAttribute="trailing" id="f3i-A0-lfW"/>
+                            <constraint firstItem="RSz-Ch-fi2" firstAttribute="top" secondItem="rhR-Tr-SRC" secondAttribute="top" id="g6Q-5X-68s"/>
+                            <constraint firstAttribute="trailing" secondItem="RSz-Ch-fi2" secondAttribute="trailing" id="jWd-qM-itE"/>
                             <constraint firstItem="8zU-cV-JfB" firstAttribute="leading" secondItem="rhR-Tr-SRC" secondAttribute="leading" id="lnL-mT-g88"/>
+                            <constraint firstItem="KnA-bK-rlb" firstAttribute="top" secondItem="RSz-Ch-fi2" secondAttribute="bottom" id="ttE-fM-eLc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="GUIDE DE SOLIDARITE" id="qfg-MJ-EcD">
@@ -390,6 +514,8 @@
                     <connections>
                         <outlet property="ui_bt_sendmail" destination="WPj-bu-jIz" id="Y9j-9D-RDR"/>
                         <outlet property="ui_tableview" destination="x17-6J-f81" id="bx1-NQ-4uk"/>
+                        <outlet property="ui_tableview_infos_poi" destination="nUC-PS-BMQ" id="eeT-Kl-32g"/>
+                        <outlet property="ui_view_parent_info_poi" destination="RSz-Ch-fi2" id="vLz-Xf-c6Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAS-4w-Kaz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -398,8 +524,18 @@
                         <outlet property="owner" destination="IK0-TL-br7" id="S6J-Jc-HPJ"/>
                     </connections>
                 </customObject>
+                <tapGestureRecognizer id="CmC-GI-qVR">
+                    <connections>
+                        <action selector="action_close_legend:" destination="IK0-TL-br7" id="t0E-Ry-gRK"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="ibH-YQ-yxz">
+                    <connections>
+                        <action selector="action_show_legend:" destination="IK0-TL-br7" id="vv5-0s-kmy"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3007" y="282"/>
+            <point key="canvasLocation" x="3005.5999999999999" y="281.10944527736132"/>
         </scene>
     </scenes>
     <resources>
@@ -407,6 +543,7 @@
         <image name="ic_detail_poi_mail" width="20" height="20"/>
         <image name="ic_detail_poi_phone" width="18" height="18"/>
         <image name="ic_detail_poi_web" width="20" height="10"/>
+        <image name="ic_help_poi" width="20" height="20"/>
         <image name="picto_cat_filter-1" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
