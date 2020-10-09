@@ -33,16 +33,16 @@ class OTGuideFiltersViewController: UIViewController {
         self.navigationItem.setRightBarButton(menuButton, animated: false)
         
         self.ui_tableview.tableFooterView = UIView(frame: .zero)
+        
     }
     
     //MARK: - Actions from bar Buttons
     @objc func close() {
-        OTLogger.logEvent("CloseFilter")
         dismiss(animated: true, completion: nil)
     }
     
     @objc func saveFilters() {
-        OTLogger.logEvent("SubmitFilterPreferences")
+        OTLogger.logEvent(Action_guideMap_SubmitFilters)
         var currentFilter = self.filters
         
         for i in currentFilter.arrayFilters.indices {

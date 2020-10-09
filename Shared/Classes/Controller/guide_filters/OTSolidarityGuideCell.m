@@ -30,6 +30,7 @@ NSString* const OTSolidarityGuideTableViewCellIdentifier = @"OTSolidarityGuideTa
 }
 
 -(IBAction)callPhone {
+    [OTLogger logEvent:Action_guideMap_CallPOI];
     NSString *phone = [self.poiItem.phone stringByReplacingOccurrencesOfString:@" " withString:@""];
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString:[@"tel:" stringByAppendingString:phone]]];
 }

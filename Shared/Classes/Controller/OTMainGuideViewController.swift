@@ -441,7 +441,7 @@ class OTMainGuideViewController: UIViewController {
     }
     
     @IBAction func action_filters(_ sender:Any) {
-        //[OTLogger logEvent:Action_guide_showFilters];
+        OTLogger.logEvent(Action_guide_showFilters)
         OTAppState.showFilteringOptions(from: self, withFullMapVisible: true)
     }
     
@@ -487,6 +487,7 @@ class OTMainGuideViewController: UIViewController {
     }
     
     func showPoiDetails(_ poi: OTPoi!) {
+        OTLogger.logEvent(Action_guideMap_POI)
         if poi.partnerId != nil {
             let navVc = UIStoryboard.init(name: "AssociationDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController
             if let vc = navVc?.topViewController as? OTAssociationDetailViewController {
@@ -522,7 +523,6 @@ class OTMainGuideViewController: UIViewController {
             }
             
             self.showPoiDetails(_poi)
-            OTLogger.logEvent("POIView")
         }
     }
 }

@@ -135,6 +135,9 @@ import SVProgressHUD
     }
     
     @IBAction func action_share(_ sender: Any) {
+        
+        OTLogger.logEvent(Action_guideMap_SharePOI)
+        
         let name = self.poi.name == nil || self.poi.name.count == 0 ? "" : self.poi.name!
         let address = (self.poi.address == nil || self.poi.address.count == 0) ? "" : "Adresse: \(self.poi.address!)"
         let phone = (self.poi.phone == nil  || self.poi.phone.count == 0) ? "" : "Tel: \(self.poi.phone!)"
