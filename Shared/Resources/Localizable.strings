@@ -474,6 +474,7 @@
 "create" = "Créer";
 "edit" = "Editer";
 "modify" = "Modifier";
+"showAll" = "Voir tout";
 
 // User profile
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";

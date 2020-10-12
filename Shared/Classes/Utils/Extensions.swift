@@ -37,3 +37,25 @@ extension CLLocation {
         CLGeocoder().reverseGeocodeLocation(self, completionHandler: completion)
     }
 }
+
+//MARK: uiviewController
+extension UIViewController {
+    func addCloseButtonLeftWithWhiteColorBar() {
+        OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController, withMainColor: UIColor.white, andSecondaryColor: UIColor.appOrange())
+        var img:UIImage?
+        if #available(iOS 13.0, *) {
+            img = (UIImage.init(named: "close")?.withTintColor(UIColor.appOrange(), renderingMode: .alwaysTemplate))
+        } else {
+            img = UIImage.init(named: "close")
+            img = img?.withRenderingMode(.alwaysTemplate)
+        }
+        
+        let closeButton = UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(ClosePopDelegate.close))
+        self.navigationItem.setLeftBarButton(closeButton, animated: false)
+        closeButton.tintColor = UIColor.appOrange()
+    }
+}
+
+@objc protocol ClosePopDelegate {
+    func close()
+}

@@ -10,19 +10,26 @@ import UIKit
 import MessageUI
 import SVProgressHUD
 
-class OTAssociationDetailViewController: UIViewController {
+class OTAssociationDetailViewController: UIViewController,ClosePopDelegate {
 
     @objc var association:OTAssociation? = nil
     @objc var associationId:Int = -1
     @IBOutlet weak var ui_tableview: UITableView!
     
     var hasNeeds = false
+    var changeColor = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = OTLocalisationService.getLocalizedValue(forKey: "title_association")
-        self.setupCloseModal()
+        
+        if changeColor {
+            addCloseButtonLeftWithWhiteColorBar()
+        }
+        else {
+            self.setupCloseModal()
+        }
         
         if association == nil {
             getAssociationInfos()
@@ -80,6 +87,10 @@ class OTAssociationDetailViewController: UIViewController {
         else {
             self.updateFollowing(isFollowing: true)
         }
+    }
+    
+    @objc func close() {
+        dismiss(animated: true, completion: nil)
     }
 }
 

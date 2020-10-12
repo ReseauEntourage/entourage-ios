@@ -492,6 +492,7 @@ class OTMainGuideViewController: UIViewController {
             let navVc = UIStoryboard.init(name: "AssociationDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController
             if let vc = navVc?.topViewController as? OTAssociationDetailViewController {
                 vc.associationId = poi.partnerId.intValue
+                vc.changeColor = true
                 DispatchQueue.main.async {
                     self.present(navVc!, animated: true, completion: nil)
                 }

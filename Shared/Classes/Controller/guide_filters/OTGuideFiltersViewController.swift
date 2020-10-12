@@ -8,9 +8,10 @@
 
 import UIKit
 
-class OTGuideFiltersViewController: UIViewController {
+class OTGuideFiltersViewController: UIViewController, ClosePopDelegate {
     
     @IBOutlet weak var ui_tableview: UITableView!
+    @IBOutlet weak var ui_bt_validate: UIButton!
     
     weak var filterDelegate:OTGuideFilterDelegate? = nil
     
@@ -19,23 +20,42 @@ class OTGuideFiltersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ui_bt_validate.layer.cornerRadius = 5
+        
         if let _delegate = filterDelegate {
             filters = _delegate.getSolidarityFilter()
         }
         
         self.title = OTLocalisationService.getLocalizedValue(forKey: "filters")?.uppercased()
         
-        self.setupCloseModal(withTarget: self, andSelector: #selector(close))
-        OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
-        
-        let menuButton = UIBarButtonItem(title: OTLocalisationService.getLocalizedValue(forKey: "save")?.capitalized, style: .done, target: self , action: #selector(saveFilters))
-        
-        self.navigationItem.setRightBarButton(menuButton, animated: false)
+        addCloseButtonLeftWithWhiteColorBar()
         
         self.ui_tableview.tableFooterView = UIView(frame: .zero)
         
+        checkFilters()
     }
     
+    func checkFilters() {
+        if filters.isDefaultFiltersNew() {
+            ui_bt_validate.setTitle(OTLocalisationService.getLocalizedValue(forKey: "showAll"), for: .normal)
+        }
+        else {
+            ui_bt_validate.setTitle(OTLocalisationService.getLocalizedValue(forKey: "validate"), for: .normal)
+        }
+    }
+    
+    @IBAction func action_validate_filters(_ sender: Any) {
+        OTLogger.logEvent(Action_guideMap_SubmitFilters)
+        var currentFilter = self.filters
+        
+        for i in currentFilter.arrayFilters.indices {
+            currentFilter.updateValueFilter(position: i)
+        }
+        
+        dismiss(animated: true) {
+            self.filterDelegate?.solidarityFilterChanged(currentFilter)
+        }
+    }
     //MARK: - Actions from bar Buttons
     @objc func close() {
         dismiss(animated: true, completion: nil)
@@ -66,20 +86,22 @@ extension OTGuideFiltersViewController: UITableViewDelegate,UITableViewDataSourc
         if section == 0 {
             return 1
         }
-        
+        self.checkFilters()
         return filters.arrayFilters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FiltersTopCell", for: indexPath) as! OTGuideTopFilterCell
-            cell.populateCell(isPartnerOn: self.filters.showPartners, isDonatedOn: self.filters.showDonated, isVolunteerOn: self.filters.showVolunteer, delegate: self)
+            let isAllActive = filters.isDefaultFiltersNew()
+            cell.populateCell(isPartnerOn: self.filters.showPartners, isDonatedOn: self.filters.showDonated, isVolunteerOn: self.filters.showVolunteer, delegate: self,isAllActive: isAllActive)
             
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageFilterCell", for: indexPath) as! OTGuideFilterCell
-        cell.populateCell(item: filters.arrayFilters[indexPath.row],position: indexPath.row, delegate: self)
+        let isAllActive = filters.isDefaultFiltersNew()
+        cell.populateCell(item: filters.arrayFilters[indexPath.row],position: indexPath.row, isAllActive: isAllActive)
         
         return cell
     }
@@ -102,29 +124,51 @@ extension OTGuideFiltersViewController: UITableViewDelegate,UITableViewDataSourc
         return nil
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let isActive = self.filters.arrayFilters[indexPath.row].active
+            
+            if isActive && !filters.isDefaultFiltersNew() {
+                self.filters.setAllFiltersOn()
+            }
+            else {
+                self.filters.setAllFiltersOff(position: indexPath.row)
+            }
+            tableView.reloadData()
+        }
+    }
+    
     //MARK: - ChangeFilterGDSDelegate - 
     func changeAtPosition(_ position: Int, isActive: Bool) {
         self.filters.arrayFilters[position].active = isActive
     }
     
-    func changeTop(_ position:Int,isActive:Bool) {
+    func changeTop(_ position:Int) {
         switch position {
         case 1:
-            self.filters.showPartners = isActive
-            if isActive {
-                self.filters.showDonated = false
-                self.filters.showVolunteer = false
+            if self.filters.showPartners && !filters.isDefaultFiltersNew() {
+                self.filters.setAllFiltersOn()
+            }
+            else {
+                self.filters.setAllFiltersOff(position: -1)
             }
         case 2:
-            self.filters.showDonated = isActive
+            if self.filters.showDonated && !filters.isDefaultFiltersNew() {
+                self.filters.setAllFiltersOn()
+            }
+            else {
+                self.filters.setAllFiltersOff(position: -2)
+            }
         case 3:
-            self.filters.showVolunteer = isActive
+            if self.filters.showVolunteer && !filters.isDefaultFiltersNew()  {
+                self.filters.setAllFiltersOn()
+            }
+            else {
+                self.filters.setAllFiltersOff(position: -3)
+            }
         default:
             break
         }
-    }
-    
-    func updateTable() {
         self.ui_tableview.reloadData()
     }
 }

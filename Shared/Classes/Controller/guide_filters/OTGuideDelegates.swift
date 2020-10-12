@@ -11,8 +11,7 @@ import Foundation
 //MARK: - Delegates Guide Filters -
 protocol ChangeFilterGDSDelegate:NSObject {
     func changeAtPosition(_ position:Int,isActive:Bool)
-    func changeTop(_ position:Int,isActive:Bool)
-    func updateTable()
+    func changeTop(_ position:Int)
 }
 
 protocol OTGuideFilterDelegate: NSObject {

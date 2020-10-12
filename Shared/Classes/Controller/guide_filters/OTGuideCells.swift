@@ -15,14 +15,25 @@ class OTGuideFilterCell: UITableViewCell {
     @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_switch: UISwitch?
     
-    weak var delegate:ChangeFilterGDSDelegate? = nil
-    
-    func populateCell(item:OTGuideFilterItem,position:Int,delegate:ChangeFilterGDSDelegate) {
-        ui_label_title.text = item.title
+    func populateCell(item:OTGuideFilterItem,position:Int,isAllActive:Bool) {
+        
+        var isOnTxt = item.active ? " ✔" : ""
+        
+        if item.active {
+            ui_label_title.font = UIFont.boldSystemFont(ofSize: 15)
+        }
+        else {
+            ui_label_title.font = UIFont.systemFont(ofSize: 15)
+        }
+        
+        if isAllActive {
+            isOnTxt = ""
+            ui_label_title.font = UIFont.systemFont(ofSize: 15)
+        }
+        
+        ui_label_title.text = item.title + isOnTxt
+        
         ui_image.image = UIImage.init(named: item.image)
-        ui_switch?.setOn(item.active, animated: true)
-        ui_switch?.tag = position
-        self.delegate = delegate
     }
     
     func populateCell(item:OTGuideFilterItem) {
@@ -30,9 +41,6 @@ class OTGuideFilterCell: UITableViewCell {
         ui_image.image = UIImage.init(named: item.image)
     }
     
-    @IBAction func action_change(_ sender: UISwitch) {
-        delegate?.changeAtPosition(sender.tag, isActive: sender.isOn)
-    }
 }
 
 class OTGuideTopFilterCell: UITableViewCell {
@@ -42,50 +50,65 @@ class OTGuideTopFilterCell: UITableViewCell {
     @IBOutlet weak var ui_view_volunteer: UIView!
     @IBOutlet weak var ui_image_partner: UIImageView!
     @IBOutlet weak var ui_label_title_partner: UILabel!
-    @IBOutlet weak var ui_switch_partner: UISwitch!
     
     @IBOutlet weak var ui_label_title_donated: UILabel!
-    @IBOutlet weak var ui_switch_donated: UISwitch!
     @IBOutlet weak var ui_label_title_volunteer: UILabel!
-    @IBOutlet weak var ui_switch_volunteer: UISwitch!
     
     weak var delegate:ChangeFilterGDSDelegate? = nil
     
-    func populateCell(isPartnerOn:Bool, isDonatedOn:Bool, isVolunteerOn:Bool, delegate:ChangeFilterGDSDelegate) {
+    func populateCell(isPartnerOn:Bool, isDonatedOn:Bool, isVolunteerOn:Bool, delegate:ChangeFilterGDSDelegate,isAllActive:Bool) {
+    
+        let fontBold = UIFont.boldSystemFont(ofSize: 15)
+        let fontRegular = UIFont.systemFont(ofSize: 15)
+        let isOnTxt = isAllActive ? "" : " ✔"
+        
         
         ui_title_info_multi.text = OTLocalisationService.getLocalizedValue(forKey: "guide_display_info_mutli")
         
-        ui_label_title_partner.text = OTLocalisationService.getLocalizedValue(forKey: "guide_display_partners")
-        ui_image_partner.image = UIImage.init(named: "picto_cat_filter-8")
-        ui_switch_partner.setOn(isPartnerOn, animated: true)
-        ui_switch_partner.tag = 1
-        
-        ui_label_title_donated.text = OTLocalisationService.getLocalizedValue(forKey: "guide_display_donate")
-        ui_switch_donated.setOn(isDonatedOn, animated: true)
-        ui_switch_donated.tag = 2
-        
-        ui_label_title_volunteer.text = OTLocalisationService.getLocalizedValue(forKey: "guide_display_volunteer")
-        ui_switch_volunteer.setOn(isVolunteerOn, animated: true)
-        ui_switch_volunteer.tag = 3
-        
-        self.delegate = delegate
-        checkPartnerOn()
-    }
-    
-    func checkPartnerOn() {
-        if ui_switch_partner.isOn {
-            ui_view_doante.isHidden = false
-            ui_view_volunteer.isHidden = false
+        if isPartnerOn && !isAllActive {
+            ui_label_title_partner.font = fontBold
         }
         else {
-            ui_view_doante.isHidden = true
-            ui_view_volunteer.isHidden = true
+            ui_label_title_partner.font = fontRegular
         }
+        ui_image_partner.image = UIImage.init(named: "picto_cat_filter-8")
+        let _addTxt = isPartnerOn ? isOnTxt : ""
+        ui_label_title_partner.text = OTLocalisationService.getLocalizedValue(forKey: "guide_display_partners") + _addTxt
+        
+        
+        
+        if isDonatedOn && !isAllActive {
+            ui_label_title_donated.font = fontBold
+        }
+        else {
+            ui_label_title_donated.font = fontRegular
+        }
+        
+        let _add1Txt = isDonatedOn ? isOnTxt : ""
+        ui_label_title_donated.text = OTLocalisationService.getLocalizedValue(forKey: "guide_display_donate") + _add1Txt
+        
+        
+        
+        if isVolunteerOn && !isAllActive {
+            ui_label_title_volunteer.font = fontBold
+        }
+        else {
+            ui_label_title_volunteer.font = fontRegular
+        }
+        
+        let _add2Txt = isVolunteerOn ? isOnTxt : ""
+        ui_label_title_volunteer.text = OTLocalisationService.getLocalizedValue(forKey: "guide_display_volunteer") + _add2Txt
+        
+        self.delegate = delegate
     }
     
-    @IBAction func action_change(_ sender: UISwitch) {
-        delegate?.changeTop(sender.tag, isActive: sender.isOn)
-        checkPartnerOn()
-        delegate?.updateTable()
+    @IBAction func action_select_partners(_ sender: Any) {
+        delegate?.changeTop(1)
+    }
+    @IBAction func action_select_donate(_ sender: Any) {
+        delegate?.changeTop(2)
+    }
+    @IBAction func action_select_volunteer(_ sender: Any) {
+        delegate?.changeTop(3)
     }
 }

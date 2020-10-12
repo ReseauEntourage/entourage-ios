@@ -13,7 +13,6 @@ struct OTGuideFilters {
     var showFood = true
     var showHousing = true
     var showHeal = true
-  //  var showRefresh = true
     var showOrientation = true
     var showCaring = true
     var showReinsertion = true
@@ -43,7 +42,6 @@ struct OTGuideFilters {
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyFood, active: showFood, image: "picto_cat_filter-1"),
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyHousing, active: showHousing, image: "picto_cat_filter-2"),
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyHeal, active: showHeal, image: "picto_cat_filter-3"),
-//                OTGuideFilterItem.init(key: .SolidarityGuideKeyRefresh, active: showRefresh, image: "picto_cat_filter-41"),
                 
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyOrientation, active: showOrientation, image: "picto_cat_filter-5"),
                 
@@ -71,6 +69,62 @@ struct OTGuideFilters {
         return true
     }
     
+    func isDefaultFiltersNew() -> Bool {
+        var isDefault = true
+        for item in arrayFilters {
+            if !item.active {
+                isDefault = false
+                break
+            }
+        }
+        
+        if !showPartners || showDonated || showVolunteer {
+            isDefault = false
+        }
+        
+        return isDefault
+    }
+    
+    mutating func setAllFiltersOn() {
+        for i in 0..<self.arrayFilters.count {
+            self.arrayFilters[i].active = true
+        }
+        
+        self.showPartners = true
+        self.showDonated = false
+        self.showVolunteer = false
+        
+    }
+    
+    mutating func setAllFiltersOff(position:Int) {
+        for i in 0..<self.arrayFilters.count {
+            self.arrayFilters[i].active = false
+        }
+        
+        if position >= 0 {
+            self.arrayFilters[position].active = true
+            self.showPartners = false
+            self.showDonated = false
+            self.showVolunteer = false
+        }
+        else {
+            switch position {
+            case -1:
+                self.showPartners = true
+            case -2:
+                self.showPartners = true
+                self.showDonated = true
+                self.showVolunteer = false
+            case -3:
+                self.showDonated = false
+                self.showPartners = true
+                self.showVolunteer = true
+            default:
+                break
+            }
+        }
+    }
+    
     func toDictionary(distance:CLLocationDistance, location:CLLocationCoordinate2D) -> [AnyHashable:Any]? {
         
         let catIds = NSMutableArray()
@@ -84,13 +138,14 @@ struct OTGuideFilters {
         let catValuesString = catIds.componentsJoined(by: ",")
         
         if showPartners {
-            let catValuesModString = catValuesString + ",8"
+            var catValuesModString = ""
+            if catValuesString.count > 0 {
+                catValuesModString = catValuesString + ","
+            }
+            catValuesModString = catValuesModString + "8"
             var filters = ""
             if showDonated {
                 filters = "donations"
-                if showVolunteer {
-                    filters = filters + ",volunteers"
-                }
             }
             else if showVolunteer {
                 filters = "volunteers"
@@ -203,7 +258,6 @@ struct OTGuideFilters {
     case SolidarityGuideKeyFood = 1
     case SolidarityGuideKeyHousing = 2
     case SolidarityGuideKeyHeal = 3
-   // case SolidarityGuideKeyRefresh = 4 deprecated
     case SolidarityGuideKeyOrientation = 5
     case SolidarityGuideKeyCaring = 6
     case SolidarityGuideKeyReinsertion = 7
