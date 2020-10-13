@@ -14,6 +14,9 @@
         <array key="SF-UI-Text-Regular.otf">
             <string>SFUIText-Regular</string>
         </array>
+        <array key="SF-UI-Text-Semibold.otf">
+            <string>SFUIText-Semibold</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Navigation Controller-->
@@ -535,7 +538,152 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3005.5999999999999" y="281.10944527736132"/>
+            <point key="canvasLocation" x="2596" y="393"/>
+        </scene>
+        <!--Invite Source-->
+        <scene sceneID="Qa4-xp-ZiM">
+            <objects>
+                <viewController storyboardIdentifier="shareVC" modalPresentationStyle="overCurrentContext" id="lY2-rt-Wu4" userLabel="Invite Source" customClass="OTInviteSourceViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s1X-bY-sr7"/>
+                        <viewControllerLayoutGuide type="bottom" id="c3g-lD-Fv1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4LJ-PO-j3M">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gsb-t9-Y2c">
+                                <rect key="frame" x="16" y="241" width="343" height="185"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUA-vu-bR4">
+                                        <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="IF9-oG-A8e"/>
+                                            <constraint firstAttribute="height" constant="30" id="RKO-Kd-sFE"/>
+                                        </constraints>
+                                        <state key="normal" image="whiteClose"/>
+                                        <connections>
+                                            <action selector="close:" destination="lY2-rt-Wu4" eventType="touchUpInside" id="k4s-0N-fnj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAz-h4-kS9">
+                                        <rect key="frame" x="15" y="50" width="313" height="50"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="6jK-Jd-B6x"/>
+                                            <constraint firstAttribute="width" constant="296" id="VyD-Jk-QU1"/>
+                                            <constraint firstAttribute="width" constant="210" id="ici-Eh-cn2"/>
+                                            <constraint firstAttribute="width" constant="304" id="ry1-wO-fBC"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="wSR-Sv-Dwc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                        <state key="normal" title="Partager sur Entourage">
+                                            <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="ry1-wO-fBC"/>
+                                                <exclude reference="ici-Eh-cn2"/>
+                                                <exclude reference="VyD-Jk-QU1"/>
+                                                <exclude reference="wSR-Sv-Dwc"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="action_share_entourage:" destination="lY2-rt-Wu4" eventType="touchUpInside" id="I9p-hn-gbQ"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_entourage" translatesAutoresizingMaskIntoConstraints="NO" id="bVd-vQ-fJW">
+                                        <rect key="frame" x="35" y="62.5" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="fQ5-qc-94X"/>
+                                            <constraint firstAttribute="height" constant="25" id="mc8-mf-pbZ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgS-o4-kjv">
+                                        <rect key="frame" x="15" y="115" width="313" height="50"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="296" id="KK6-6Y-2KK"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="XFG-yp-79B"/>
+                                            <constraint firstAttribute="width" constant="210" id="mia-1b-Cmc"/>
+                                            <constraint firstAttribute="width" constant="304" id="xn4-JB-LRG"/>
+                                            <constraint firstAttribute="height" constant="50" id="zPY-9q-eCR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
+                                        <state key="normal" title="Partager le lien">
+                                            <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="XFG-yp-79B"/>
+                                                <exclude reference="KK6-6Y-2KK"/>
+                                                <exclude reference="xn4-JB-LRG"/>
+                                                <exclude reference="mia-1b-Cmc"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="action_share:" destination="lY2-rt-Wu4" eventType="touchUpInside" id="7gr-3U-ZYn"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_native" translatesAutoresizingMaskIntoConstraints="NO" id="0mI-yL-kOT">
+                                        <rect key="frame" x="35" y="127.5" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="gXN-oT-JmT"/>
+                                            <constraint firstAttribute="height" constant="25" id="sm7-Fc-4qX"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstItem="0mI-yL-kOT" firstAttribute="leading" secondItem="zgS-o4-kjv" secondAttribute="leading" constant="20" id="1Ks-mX-gNH"/>
+                                    <constraint firstAttribute="bottom" secondItem="zgS-o4-kjv" secondAttribute="bottom" constant="20" id="8nJ-8u-RaX"/>
+                                    <constraint firstAttribute="trailing" secondItem="yAz-h4-kS9" secondAttribute="trailing" constant="15" id="AY5-rr-vEe"/>
+                                    <constraint firstItem="0mI-yL-kOT" firstAttribute="centerY" secondItem="zgS-o4-kjv" secondAttribute="centerY" id="IsY-yc-jqo"/>
+                                    <constraint firstItem="sUA-vu-bR4" firstAttribute="top" secondItem="Gsb-t9-Y2c" secondAttribute="top" constant="10" id="L8l-hz-DX5"/>
+                                    <constraint firstItem="sUA-vu-bR4" firstAttribute="leading" secondItem="Gsb-t9-Y2c" secondAttribute="leading" constant="10" id="Vio-ib-GSb"/>
+                                    <constraint firstItem="bVd-vQ-fJW" firstAttribute="leading" secondItem="yAz-h4-kS9" secondAttribute="leading" constant="20" id="Wug-ic-MpB"/>
+                                    <constraint firstItem="bVd-vQ-fJW" firstAttribute="centerY" secondItem="yAz-h4-kS9" secondAttribute="centerY" id="dpP-Mr-107"/>
+                                    <constraint firstItem="zgS-o4-kjv" firstAttribute="top" secondItem="yAz-h4-kS9" secondAttribute="bottom" constant="15" id="nG7-MP-uKo"/>
+                                    <constraint firstAttribute="trailing" secondItem="zgS-o4-kjv" secondAttribute="trailing" constant="15" id="pvW-ZU-Z1T"/>
+                                    <constraint firstItem="yAz-h4-kS9" firstAttribute="top" secondItem="Gsb-t9-Y2c" secondAttribute="top" constant="50" id="uVS-aR-3KC"/>
+                                    <constraint firstItem="zgS-o4-kjv" firstAttribute="leading" secondItem="Gsb-t9-Y2c" secondAttribute="leading" constant="15" id="xRP-eJ-Z6k"/>
+                                    <constraint firstItem="yAz-h4-kS9" firstAttribute="leading" secondItem="Gsb-t9-Y2c" secondAttribute="leading" constant="15" id="yLP-zv-PjA"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Gsb-t9-Y2c" firstAttribute="leading" secondItem="4LJ-PO-j3M" secondAttribute="leadingMargin" id="CXc-rM-oVw"/>
+                            <constraint firstItem="Gsb-t9-Y2c" firstAttribute="centerY" secondItem="4LJ-PO-j3M" secondAttribute="centerY" id="H1s-ib-dO1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gsb-t9-Y2c" secondAttribute="trailing" id="JiV-N6-pG5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="0EG-A3-vV9"/>
+                    <connections>
+                        <outlet property="popupContainerView" destination="Gsb-t9-Y2c" id="tg0-il-sM8"/>
+                        <outletCollection property="buttons" destination="yAz-h4-kS9" id="R1k-sM-fFy"/>
+                        <outletCollection property="buttons" destination="zgS-o4-kjv" id="S2e-wE-DOD"/>
+                        <outletCollection property="icons" destination="bVd-vQ-fJW" id="aWO-ed-Kpp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DTa-xR-he1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3460" y="393"/>
         </scene>
     </scenes>
     <resources>
@@ -544,7 +692,10 @@
         <image name="ic_detail_poi_phone" width="18" height="18"/>
         <image name="ic_detail_poi_web" width="20" height="10"/>
         <image name="ic_help_poi" width="20" height="20"/>
+        <image name="logo_entourage" width="60" height="60"/>
         <image name="picto_cat_filter-1" width="32" height="32"/>
+        <image name="share_native" width="22" height="22"/>
+        <image name="whiteClose" width="22" height="22"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

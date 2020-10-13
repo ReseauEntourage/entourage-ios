@@ -20,6 +20,9 @@ class OTShareEntourageViewController: UIViewController {
     var selectedIndex = -1
     var arraySharings = [SharingEntourage]()
     
+    var isSharePoi = false
+    var poiId = -1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,8 +57,13 @@ class OTShareEntourageViewController: UIViewController {
         if let sharings = data["sharing"] as? [[String:Any]] {
             for share in sharings {
                 let _share = SharingEntourage.parse(data: share)
-                if _share.uuid != feedItem!.uuid {
+                if isSharePoi {
                     self.arraySharings.append(_share)
+                }
+                else {
+                    if _share.uuid != feedItem!.uuid {
+                        self.arraySharings.append(_share)
+                    }
                 }
             }
             self.ui_tableview.reloadData()
@@ -69,16 +77,17 @@ class OTShareEntourageViewController: UIViewController {
     
     @IBAction func action_validate(_ sender: Any) {
         SVProgressHUD.show()
+       
+        let _id = isSharePoi ? "\(poiId)" : feedItem!.uuid!
         
-        OTShareEntourageService.postAddShare(entourageId: arraySharings[selectedIndex].uuid, uuid: feedItem!.uuid) { (isOk) in
+        OTShareEntourageService.postAddShare(entourageId: arraySharings[selectedIndex].uuid, uuid: _id,isPoi: isSharePoi) { (isOk) in
             
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
                 
                 SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "sendShare"))
+                self.dismiss(animated: true, completion: nil)
             }
-            
-            self.dismiss(animated: true, completion: nil)
         }
     }
 }

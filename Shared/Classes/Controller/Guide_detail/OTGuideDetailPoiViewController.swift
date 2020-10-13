@@ -23,6 +23,8 @@ import SVProgressHUD
     
     var filters = OTGuideFilters()
     
+    var popupViewController:UIViewController? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,6 +137,62 @@ import SVProgressHUD
     }
     
     @IBAction func action_share(_ sender: Any) {
+        if let _vc = storyboard?.instantiateViewController(withIdentifier: "shareVC"), let vc = _vc as? OTInviteSourceViewController  {
+            vc.delegate = self
+            self.popupViewController = vc
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func action_close_legend(_ sender: Any) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.ui_view_parent_info_poi.alpha = 1
+        
+        UIView.animate(withDuration: 0.3) {
+            self.ui_view_parent_info_poi.alpha = 0
+        } completion: { (isok) in
+            self.ui_view_parent_info_poi.isHidden = true
+        }
+    }
+    
+    @IBAction func action_show_legend(_ sender: Any) {
+        
+        self.ui_view_parent_info_poi.alpha = 0
+        self.ui_view_parent_info_poi.isHidden = false
+        
+        UIView.animate(withDuration: 0.3) {
+            self.ui_view_parent_info_poi.alpha = 1
+        } completion: { (isok) in
+            self.navigationController?.isNavigationBarHidden = true
+        }
+    }
+}
+
+//MARK: - InviteSourceDelegate -
+extension OTGuideDetailPoiViewController: InviteSourceDelegate {
+    func shareEntourage() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            OTLogger.logEvent(Action_guideMap_SharePOI)
+            
+            let storyB = UIStoryboard.activeFeeds()
+            if let vc = storyB?.instantiateViewController(withIdentifier: "OTShareListEntouragesVC") as? OTShareEntourageViewController {
+                vc.feedItem = nil
+                //vc.delegate = self
+                vc.isSharePoi = true
+                vc.poiId = self.poi.sid.intValue
+                
+                if #available(iOS 13.0, *) {
+                    vc.isModalInPresentation = true
+                }
+                self.navigationController?.present(vc, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func share() {
+        popupViewController?.dismiss(animated: false, completion: {
+            self.popupViewController = nil
+        })
         
         OTLogger.logEvent(Action_guideMap_SharePOI)
         
@@ -163,29 +221,8 @@ import SVProgressHUD
         self.navigationController?.present(activityVC, animated: true, completion: nil)
     }
     
-    
-    @IBAction func action_close_legend(_ sender: Any) {
-        self.navigationController?.isNavigationBarHidden = false
-        self.ui_view_parent_info_poi.alpha = 1
-        
-        UIView.animate(withDuration: 0.3) {
-            self.ui_view_parent_info_poi.alpha = 0
-        } completion: { (isok) in
-            self.ui_view_parent_info_poi.isHidden = true
-        }
-    }
-    @IBAction func action_show_legend(_ sender: Any) {
-        
-        self.ui_view_parent_info_poi.alpha = 0
-        self.ui_view_parent_info_poi.isHidden = false
-        
-        UIView.animate(withDuration: 0.3) {
-            self.ui_view_parent_info_poi.alpha = 1
-        } completion: { (isok) in
-            self.navigationController?.isNavigationBarHidden = true
-        }
-
-    }
+    func inviteContacts(from viewController: UIViewController!) {/* not implemented */}
+    func inviteByPhone() { /* not implemented */ }
 }
 
 //MARK: - MFMailComposeViewControllerDelegate -

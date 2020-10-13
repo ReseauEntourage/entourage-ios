@@ -29,12 +29,12 @@ struct OTShareEntourageService {
         }
     }
     
-    static func postAddShare(entourageId:String,uuid:String,completion: @escaping (_ isOk: Bool)->()) {
+    static func postAddShare(entourageId:String,uuid:String, isPoi:Bool, completion: @escaping (_ isOk: Bool)->()) {
         let manager = OTHTTPRequestManager.sharedInstance()
         if let token = UserDefaults.standard.currentUser.token {
             let url = String.init(format: API_URL_ENTOURAGE_SEND_MESSAGE,entourageId, token)
-            
-            let params:[String:Any] = ["chat_message":["message_type":"share","metadata":["type":"entourage","uuid":uuid]]]
+            let type = isPoi ? "poi" : "entourage"
+            let params:[String:Any] = ["chat_message":["message_type":"share","metadata":["type":type,"uuid":uuid]]]
             
             manager?.post(withUrl: url, andParameters: params, andSuccess: { (response) in
                 completion(true)

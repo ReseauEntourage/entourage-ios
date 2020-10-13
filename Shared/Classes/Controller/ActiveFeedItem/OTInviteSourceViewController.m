@@ -62,7 +62,7 @@
 - (IBAction)action_share_entourage:(id)sender {
     if(self.delegate) {
        [self.delegate shareEntourage];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
 }
 
