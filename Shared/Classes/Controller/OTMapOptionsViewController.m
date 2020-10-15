@@ -122,9 +122,23 @@
     
     [self.ui_label_title_button setText:OTLocalizedString(buttonFaq)];
     
-    [self addOption:OTLocalizedString(@"create_event")
-      atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_event"
-    andAction:@selector(doCreateEvent:) andSubtitle:OTLocalizedString(@"agir_subtitle_event")];
+    
+    bool isUserHelp = [currentUser.goal.lowercaseString isEqualToString:@"ask_for_help"];
+    bool isUserHelp2 = [currentUser.goal.lowercaseString isEqualToString:@"offer_help"];
+    bool hasPartnerId = currentUser.partner.aid == nil ? NO : YES;
+    bool isAmbassador = [currentUser.roles containsObject:@"ambassador"];
+    
+    bool showAddEvent = YES;
+    if ((isUserHelp || isUserHelp2) && (!hasPartnerId && !isAmbassador )) {
+        showAddEvent = NO;
+    }
+    
+    if (showAddEvent) {
+        [self addOption:OTLocalizedString(@"create_event")
+          atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_event"
+        andAction:@selector(doCreateEvent:) andSubtitle:OTLocalizedString(@"agir_subtitle_event")];
+    }
+    
     
     [self addOption:OTLocalizedString(@"create_proposer_don")
       atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_don"
