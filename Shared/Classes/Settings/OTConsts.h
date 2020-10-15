@@ -109,8 +109,6 @@
 
 // Chart Ethique
 #define CHARTE_LINK_ID @"ethics-charter"
-#define CHARTE_LINK_FORMAT_PUBLIC @"https://entourage-asso.typeform.com/to/whN9kq?user_id=%@"
-#define CHARTE_LINK_FORMAT_PRO @"https://entourage-asso.typeform.com/to/LI7viw?user_id=%@"
 #define CHARTE_LINK_FORMAT_PFP @"https://entourage-asso.typeform.com/to/uBxsHI?user_id="
 
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
