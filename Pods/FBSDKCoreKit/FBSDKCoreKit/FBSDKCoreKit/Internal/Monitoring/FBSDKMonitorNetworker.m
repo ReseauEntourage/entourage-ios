@@ -16,17 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "FBSDKMonitorNetworker.h"
+
 #import <sys/utsname.h>
 
 #import "FBSDKCoreKit+Internal.h"
-#import "FBSDKMonitorNetworker.h"
 
-static NSString * const FBSDKAppIdentifierKey = @"id";
-static NSString * const FBSDKBundleIdentifierKey = @"unique_application_identifier";
-static NSString * const FBSDKDeviceModelKey = @"device_model";
-static NSString * const FBSDKMonitoringsKey = @"monitorings";
-static NSString * const FBSDKOsVersionKey = @"device_os_version";
-
+static NSString *const FBSDKAppIdentifierKey = @"id";
+static NSString *const FBSDKBundleIdentifierKey = @"unique_application_identifier";
+static NSString *const FBSDKDeviceModelKey = @"device_model";
+static NSString *const FBSDKMonitoringsKey = @"monitorings";
+static NSString *const FBSDKOsVersionKey = @"device_os_version";
 
 @interface FBSDKMonitorNetworker ()
 @end
@@ -58,11 +58,11 @@ static NSString * const FBSDKOsVersionKey = @"device_os_version";
   }
 
   NSMutableDictionary *payload = [NSMutableDictionary dictionary];
-  [FBSDKBasicUtility dictionary:payload setObject:[self JSONStringForEntries:entries] ?: @[] forKey:FBSDKMonitoringsKey];
-  [FBSDKBasicUtility dictionary:payload setObject:appID forKey:FBSDKAppIdentifierKey];
-  [FBSDKBasicUtility dictionary:payload setObject:[self deviceModel] forKey:FBSDKDeviceModelKey];
-  [FBSDKBasicUtility dictionary:payload setObject:NSBundle.mainBundle.bundleIdentifier forKey:FBSDKBundleIdentifierKey];
-  [FBSDKBasicUtility dictionary:payload setObject:UIDevice.currentDevice.systemVersion forKey:FBSDKOsVersionKey];
+  [FBSDKTypeUtility dictionary:payload setObject:[self JSONStringForEntries:entries] ?: @[] forKey:FBSDKMonitoringsKey];
+  [FBSDKTypeUtility dictionary:payload setObject:appID forKey:FBSDKAppIdentifierKey];
+  [FBSDKTypeUtility dictionary:payload setObject:[self deviceModel] forKey:FBSDKDeviceModelKey];
+  [FBSDKTypeUtility dictionary:payload setObject:NSBundle.mainBundle.bundleIdentifier forKey:FBSDKBundleIdentifierKey];
+  [FBSDKTypeUtility dictionary:payload setObject:UIDevice.currentDevice.systemVersion forKey:FBSDKOsVersionKey];
 
   return payload;
 }
@@ -72,7 +72,7 @@ static NSString * const FBSDKOsVersionKey = @"device_os_version";
   NSMutableArray *jsonEntries = [NSMutableArray array];
 
   for (id<FBSDKMonitorEntry> entry in entries) {
-    [jsonEntries addObject:entry.dictionaryRepresentation];
+    [FBSDKTypeUtility array:jsonEntries addObject:entry.dictionaryRepresentation];
   }
 
   return [FBSDKBasicUtility JSONStringForObject:jsonEntries
@@ -80,7 +80,7 @@ static NSString * const FBSDKOsVersionKey = @"device_os_version";
                            invalidObjectHandler:NULL];
 }
 
-+ (NSString * _Nonnull)deviceModel
++ (NSString *_Nonnull)deviceModel
 {
   struct utsname systemInfo;
   uname(&systemInfo);

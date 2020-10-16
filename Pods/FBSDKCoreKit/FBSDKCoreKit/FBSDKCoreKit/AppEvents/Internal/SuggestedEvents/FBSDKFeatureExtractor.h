@@ -20,7 +20,7 @@
 
 #if !TARGET_OS_TV
 
-#import <Foundation/Foundation.h>
+ #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)loadRulesForKey:(NSString *)useCaseKey;
 + (NSString *)getTextFeature:(NSString *)text
               withScreenName:(NSString *)screenName;
-+ (float *)getDenseFeatures:(NSDictionary *)viewHierarchy;
++ (nullable float *)getDenseFeatures:(NSDictionary *)viewHierarchy;
 
 @end
 

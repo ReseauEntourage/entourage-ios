@@ -26,10 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
  `FBSDKPerformanceMonitor` to record metrics with their start times
  and durations. That will create and persist an entry.
  */
-@interface FBSDKPerformanceMonitorEntry : NSObject<FBSDKMonitorEntry>
+@interface FBSDKPerformanceMonitorEntry : NSObject <FBSDKMonitorEntry>
 
 + (instancetype)new NS_UNAVAILABLE;
-+ (instancetype)entryWithName:(NSString *)name startTime:(NSDate *)startTime endTime:(NSDate *)endTime;
++ (instancetype _Nullable)entryWithName:(NSString *)name startTime:(NSDate *)startTime endTime:(NSDate *)endTime;
 
 @end
 

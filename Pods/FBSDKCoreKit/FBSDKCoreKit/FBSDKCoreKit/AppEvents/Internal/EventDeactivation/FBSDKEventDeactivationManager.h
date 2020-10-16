@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FBSDKEventDeactivationManager : NSObject
 
 + (void)enable;
-+ (void)updateDeactivatedEvents:(nullable NSDictionary<NSString *, id> *)events;
 + (void)processEvents:(NSMutableArray<NSDictionary<NSString *, id> *> *)events;
 + (nullable NSDictionary<NSString *, id> *)processParameters:(nullable NSDictionary<NSString *, id> *)parameters
                                                    eventName:(NSString *)eventName;
@@ -31,4 +30,3 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
-

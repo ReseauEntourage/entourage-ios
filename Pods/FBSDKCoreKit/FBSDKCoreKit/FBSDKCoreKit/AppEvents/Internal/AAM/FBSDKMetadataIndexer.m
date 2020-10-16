@@ -20,23 +20,23 @@
 
 #if !TARGET_OS_TV
 
-#import "FBSDKMetadataIndexer.h"
+ #import "FBSDKMetadataIndexer.h"
 
-#import <objc/runtime.h>
-#import <sys/sysctl.h>
-#import <sys/utsname.h>
+ #import <UIKit/UIKit.h>
 
-#import <UIKit/UIKit.h>
+ #import <objc/runtime.h>
+ #import <sys/sysctl.h>
+ #import <sys/utsname.h>
 
-#import "FBSDKCoreKit+Internal.h"
+ #import "FBSDKCoreKit+Internal.h"
 
-static const int FBSDKMetadataIndexerMaxTextLength              = 100;
-static const int FBSDKMetadataIndexerMaxIndicatorLength         = 100;
-static const int FBSDKMetadataIndexerMaxValue                   = 5;
+static const int FBSDKMetadataIndexerMaxTextLength = 100;
+static const int FBSDKMetadataIndexerMaxIndicatorLength = 100;
+static const int FBSDKMetadataIndexerMaxValue = 5;
 
-static NSString * const FIELD_K                                 = @"k";
-static NSString * const FIELD_V                                 = @"v";
-static NSString * const FIELD_K_DELIMITER                       = @",";
+static NSString *const FIELD_K = @"k";
+static NSString *const FIELD_V = @"v";
+static NSString *const FIELD_K_DELIMITER = @",";
 
 static NSMutableDictionary<NSString *, NSDictionary<NSString *, NSString *> *> *_rules;
 static NSMutableDictionary<NSString *, NSMutableArray<NSString *> *> *_store;
@@ -52,18 +52,21 @@ static dispatch_queue_t serialQueue;
 
 + (void)enable
 {
-  if (FBSDKAdvertisingTrackingAllowed != [FBSDKAppEventsUtility advertisingTrackingStatus]) {
-    return;
-  }
-  [FBSDKServerConfigurationManager loadServerConfigurationWithCompletionBlock:^(FBSDKServerConfiguration *serverConfiguration, NSError *error) {
-    if (error) {
+  @try {
+    if ([FBSDKAppEventsUtility shouldDropAppEvent]) {
       return;
     }
-    [FBSDKMetadataIndexer setupWithRules:serverConfiguration.AAMRules];
-  }];
+
+    NSDictionary<NSString *, id> *AAMRules = [FBSDKServerConfigurationManager cachedServerConfiguration].AAMRules;
+    if (AAMRules) {
+      [FBSDKMetadataIndexer setupWithRules:AAMRules];
+    }
+  } @catch (NSException *exception) {
+    NSLog(@"Fail to enable Automatic Advanced Matching, exception reason: %@", exception.reason);
+  }
 }
 
-+ (void)setupWithRules:(NSDictionary<NSString *, id> * _Nullable)rules
++ (void)setupWithRules:(NSDictionary<NSString *, id> *_Nullable)rules
 {
   if (0 == rules.count) {
     return;
@@ -75,17 +78,14 @@ static dispatch_queue_t serialQueue;
 
     BOOL isEnabled = NO;
     for (NSString *key in _rules) {
-      BOOL isRuleEnabled = (nil != _rules[key]);
-      if (isRuleEnabled) {
+      if (_rules[key]) {
         isEnabled = YES;
-      }
-      if (!isRuleEnabled) {
-        [_store removeObjectForKey:key];
-        [FBSDKUserDataStore setHashData:nil forType:key];
+        break;
       }
     }
 
     if (isEnabled) {
+      [FBSDKUserDataStore setEnabledRules:_rules.allKeys];
       [FBSDKMetadataIndexer setupMetadataIndexing];
     }
   });
@@ -95,25 +95,25 @@ static dispatch_queue_t serialQueue;
 {
   _store = [[NSMutableDictionary alloc] init];
   for (NSString *key in _rules) {
-    NSString *data = [FBSDKUserDataStore getHashedDataForType:key];
+    NSString *data = [FBSDKUserDataStore getInternalHashedDataForType:key];
     if (data.length > 0) {
-      _store[key] = [NSMutableArray arrayWithArray:[data componentsSeparatedByString:FIELD_K_DELIMITER]];
+      [FBSDKTypeUtility dictionary:_store setObject:[NSMutableArray arrayWithArray:[data componentsSeparatedByString:FIELD_K_DELIMITER]] forKey:key];
     }
   }
 
   for (NSString *key in _rules) {
     if (!_store[key]) {
-      _store[key] = [[NSMutableArray alloc] init];
+      [FBSDKTypeUtility dictionary:_store setObject:[[NSMutableArray alloc] init] forKey:key];
     }
   }
 }
 
-+ (void)constructRules:(NSDictionary<NSString *, id> * _Nullable)rules
++ (void)constructRules:(NSDictionary<NSString *, id> *_Nullable)rules
 {
   for (NSString *key in rules) {
     NSDictionary<NSString *, NSString *> *value = [FBSDKTypeUtility dictionaryValue:rules[key]];
     if (value[FIELD_K].length > 0 && value[FIELD_V]) {
-      _rules[key] = value;
+      [FBSDKTypeUtility dictionary:_rules setObject:value forKey:key];
     }
   }
 }
@@ -168,7 +168,7 @@ static dispatch_queue_t serialQueue;
 
   NSString *placeholder = [self normalizeField:[FBSDKViewHierarchy getHint:view]];
   if (placeholder.length > 0) {
-    [labels addObject:placeholder];
+    [FBSDKTypeUtility array:labels addObject:placeholder];
   }
 
   NSArray<id> *siblingViews = [self getSiblingViewsOfView:view];
@@ -176,7 +176,7 @@ static dispatch_queue_t serialQueue;
     if ([sibling isKindOfClass:[UILabel class]]) {
       NSString *text = [self normalizeField:[FBSDKViewHierarchy getText:sibling]];
       if (text.length > 0) {
-        [labels addObject:text];
+        [FBSDKTypeUtility array:labels addObject:text];
       }
     }
   }
@@ -215,10 +215,10 @@ static dispatch_queue_t serialQueue;
 {
   text = [self normalizeValue:text];
   placeholder = [self normalizeField:placeholder];
-  if (secureTextEntry || [placeholder containsString:@"password"] ||
-      text.length == 0 ||
-      text.length > FBSDKMetadataIndexerMaxTextLength ||
-      placeholder.length >= FBSDKMetadataIndexerMaxIndicatorLength) {
+  if (secureTextEntry || [placeholder containsString:@"password"]
+      || text.length == 0
+      || text.length > FBSDKMetadataIndexerMaxTextLength
+      || placeholder.length >= FBSDKMetadataIndexerMaxIndicatorLength) {
     return;
   }
 
@@ -243,7 +243,7 @@ static dispatch_queue_t serialQueue;
   }
 }
 
-#pragma mark - Helper Methods
+ #pragma mark - Helper Methods
 
 + (void)checkAndAppendData:(NSString *)data
                     forKey:(NSString *)key
@@ -257,9 +257,9 @@ static dispatch_queue_t serialQueue;
     while (_store[key].count >= FBSDKMetadataIndexerMaxValue) {
       [_store[key] removeObjectAtIndex:0];
     }
-    [_store[key] addObject:hashData];
-    [FBSDKUserDataStore setHashData:[_store[key] componentsJoinedByString:FIELD_K_DELIMITER]
-                            forType:key];
+    [FBSDKTypeUtility array:_store[key] addObject:hashData];
+    [FBSDKUserDataStore setInternalHashData:[_store[key] componentsJoinedByString:FIELD_K_DELIMITER]
+                                    forType:key];
   });
 }
 
@@ -336,7 +336,7 @@ static dispatch_queue_t serialQueue;
   } else if ([key isEqualToString:@"r4"] || [key isEqualToString:@"r5"]) {
     value = [[value componentsSeparatedByCharactersInSet:[[NSCharacterSet letterCharacterSet] invertedSet]] componentsJoinedByString:@""];
   } else if ([key isEqualToString:@"r6"]) {
-    value = [value componentsSeparatedByString:@"-"][0];
+    value = [FBSDKTypeUtility array:[value componentsSeparatedByString:@"-"] objectAtIndex:0];
   }
   return value;
 }

@@ -18,17 +18,22 @@
 
 #import "FBSDKMethodUsageMonitorEntry.h"
 
-static NSString * const FBSDKMethodUsageNameKey = @"event_name";
+static NSString *const FBSDKMethodUsageNameKey = @"event_name";
+static NSString *const FBSDKMethodUsageClassKey = @"method_usage_class";
 
-@implementation FBSDKMethodUsageMonitorEntry {
+@implementation FBSDKMethodUsageMonitorEntry
+{
   SEL _method;
+  Class _class;
+  NSString *_name;
 }
 
-+ (instancetype)entryWithMethod:(SEL)method
++ (instancetype)entryFromClass:(Class)clazz withMethod:(SEL)method
 {
   FBSDKMethodUsageMonitorEntry *entry = [[self alloc] init];
   if (entry) {
     entry->_method = method;
+    entry->_class = clazz;
   }
 
   return entry;
@@ -37,7 +42,10 @@ static NSString * const FBSDKMethodUsageNameKey = @"event_name";
 - (instancetype)initWithCoder:(NSCoder *)decoder
 {
   NSString *methodName = [decoder decodeObjectOfClass:[NSString class] forKey:FBSDKMethodUsageNameKey];
+  NSString *className = [decoder decodeObjectOfClass:[NSString class] forKey:FBSDKMethodUsageClassKey];
+
   _method = NSSelectorFromString(methodName);
+  _class = NSClassFromString(className);
 
   return self;
 }
@@ -45,12 +53,21 @@ static NSString * const FBSDKMethodUsageNameKey = @"event_name";
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
   NSString *methodName = NSStringFromSelector(_method);
+  NSString *className = NSStringFromClass(_class);
+
   [encoder encodeObject:methodName forKey:FBSDKMethodUsageNameKey];
+  [encoder encodeObject:className forKey:FBSDKMethodUsageClassKey];
+}
+
+- (NSString *)name
+{
+  NSString *name = [NSString stringWithFormat:@"%@::%@", NSStringFromClass(_class), NSStringFromSelector(_method)];
+  return [name copy];
 }
 
 - (NSDictionary *)dictionaryRepresentation
 {
-  return @{FBSDKMethodUsageNameKey: NSStringFromSelector(_method)};
+  return @{FBSDKMethodUsageNameKey : [self name]};
 }
 
 @end

@@ -33,7 +33,6 @@
 #import "entourage-Swift.h"
 #import "OTCountryCodePickerViewDataSource.h"
 #import "UIColor+entourage.h"
-#import <Mixpanel/Mixpanel.h>
 #import "OTDeepLinkService.h"
 #import "OTAppState.h"
 
@@ -173,7 +172,7 @@ NSString *const kTutorialDone = @"has_done_tutorial";
         
         NSLog(@"User : %@ authenticated successfully", user.email);
         
-        [OTLogger setupMixpanelWithUser:user];
+        [OTLogger setupAnalyticsWithUser:user];
         user.phone = phoneNumber;
         
         if ([OTAppConfiguration supportsTourFunctionality]) {
