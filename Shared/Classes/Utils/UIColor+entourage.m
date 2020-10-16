@@ -86,4 +86,27 @@
     return [UIColor colorWithRed:208.0f/255.0f green:2.0f/255.0f blue:27.0f/255.0f alpha:1.0f];
 }
 
++ (UIColor*)appBlueColor
+{
+    return [UIColor colorWithRed: 0 green: 171.0/255.0 blue: 240.0/255.0 alpha: 1];
+}
+
++ (UIColor*)appOutingCircleColor
+{
+    return [UIColor colorWithRed: 120.0/255.0 green: 16.0/255.0 blue: 74.0/255.0 alpha: 1];
+}
+
++ (UIColor*)appSubtitleBlueColor
+{
+    return [UIColor colorWithRed: 2.0/255.0 green: 94.0/255.0 blue: 127.0/255.0 alpha: 1];
+}
+
++ (UIColor*)appTableBackgroundColor {
+    return [UIColor colorWithRed: 233/255.0 green: 241/255.0 blue: 244/255.0 alpha: 1];
+}
+
++ (UIColor*)appGrayTextColor {
+    return [UIColor colorWithRed: 51/255.0 green: 51/255.0 blue: 51/255.0 alpha: 1];
+}
+
 @end

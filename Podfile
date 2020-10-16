@@ -33,10 +33,6 @@ target "entourage" do
     sharedPods
 end
 
-target "pfp" do
-    sharedPods
-end
-
 target "UnitTests" do
     sharedPods
 end

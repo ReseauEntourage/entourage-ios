@@ -81,8 +81,6 @@
     GMSPlacesAutocompleteTypeFilter filterType;
     if ([OTAppConfiguration isApplicationTypeEntourage]) {
         filterType = kGMSPlacesAutocompleteTypeFilterGeocode;
-    } else if ([OTAppConfiguration isApplicationTypeVoisinAge]) {
-        filterType = kGMSPlacesAutocompleteTypeFilterAddress;
     } else {
         filterType = kGMSPlacesAutocompleteTypeFilterNoFilter;
     }

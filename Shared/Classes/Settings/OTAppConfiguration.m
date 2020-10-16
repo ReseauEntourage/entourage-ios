@@ -216,19 +216,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     NSString *firebaseConfigFileName = nil;
     
-    switch ([OTAppConfiguration applicationType]) {
-        case ApplicationTypeVoisinAge:
-            firebaseConfigFileName = [self.environmentConfiguration runsOnStaging] ?
-            @"GoogleService-Info-social.entourage.pfpios.beta" :
-            @"GoogleService-Info-social.entourage.pfpios";
-            break;
-            
-        default:
-            firebaseConfigFileName = [self.environmentConfiguration runsOnStaging] ?
-            @"GoogleService-Info-social.entourage.ios.beta" :
-            @"GoogleService-Info";
-            break;
-    }
+    firebaseConfigFileName = [self.environmentConfiguration runsOnStaging] ?
+    @"GoogleService-Info-social.entourage.ios.beta" :
+    @"GoogleService-Info";
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:firebaseConfigFileName ofType:@"plist"];
     FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:filePath];
@@ -268,10 +258,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (UITabBarController*)configureMainTabBar {
     
     NSInteger selectedIndex = MAP_TAB_INDEX;
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        selectedIndex = MESSAGES_TAB_INDEX;
-    }
-    
     UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:selectedIndex];
     
     return tabBarController;
@@ -308,16 +294,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UIColor *subtitleColor = [UIColor appGreyishColor];
     UIColor *tableViewBgColor = [UIColor groupTableViewBackgroundColor];
     UIColor *addActionButtonColor = [UIColor appOrangeColor];
-    
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        backgroundThemeColor = [UIColor pfpBlueColor];
-        primaryNavigationBarTintColor = [UIColor pfpBlueColor];
-        secondaryNavigationBarTintColor = [UIColor whiteColor];
-        titleColor = [UIColor pfpGrayTextColor];
-        tableViewBgColor = [UIColor pfpTableBackgroundColor];
-        subtitleColor = [UIColor pfpSubtitleBlueColor];
-        addActionButtonColor = [UIColor pfpGreenColor];
-    }
     
     [[ApplicationTheme shared] setPrimaryNavigationBarTintColor:primaryNavigationBarTintColor];
     [[ApplicationTheme shared] setSecondaryNavigationBarTintColor:secondaryNavigationBarTintColor];
@@ -516,40 +492,18 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return NO;
 }
 
-+ (BOOL)isApplicationTypeVoisinAge
-{
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-
 + (BOOL)supportsTourFunctionality
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)supportsSolidarityGuideFunctionality
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)supportsFacebookIntegration
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
@@ -559,55 +513,32 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (BOOL)shouldShowIntroTutorial:(OTUser*)user
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
     return NO;//Bypass intro for now
    // return !user.isAnonymous;
 }
 
 + (BOOL)shouldShowAddEventDisclaimer
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldAllowLoginFromWelcomeScreen
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldAlwaysRequestUserToUploadPicture
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldAlwaysRequestUserToAddActionZone
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
     return NO;
 }
 
 + (BOOL)shouldAlwaysRequestUserLocation
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return IS_PRO_USER ? NO : YES;
 }
 
@@ -622,63 +553,34 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
     
 + (BOOL)supportsAddingActionsFromMapOnLongPress {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
     return [user.type isEqualToString:USER_TYPE_PRO];
 }
 
 + (BOOL)shouldAutoLaunchEditorOnAddAction
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
     return NO;
 }
 
 + (BOOL)shouldShowCreatorImagesForNewsFeedItems {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldShowNumberOfUserAssociationsSection:(OTUser*)user
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return ((user.organization && [user.type isEqualToString:USER_TYPE_PRO]) || user.partner);
 }
 
 + (BOOL)shouldShowNumberOfUserPrivateCirclesSection:(OTUser*)user
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
     return NO;
 }
 
 + (BOOL)shouldShowMapHeatzoneForEntourage:(OTEntourage*)entourage {
-    // EMA-2034
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     if ([entourage isOuting]) {
         return NO;
     }
@@ -687,51 +589,22 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (BOOL)shouldShowAssociationsOnUserProfile {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldShowPOIsOnFeedsMap {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
     return NO;
 }
 
 + (BOOL)supportsClosingFeedAction:(OTFeedItem*)item {
-    // EMA-2052, EMA-2124
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([item isPrivateCircle] || [item isConversation] || [item isNeighborhood]) {
-            return NO;
-        }
-        
-        if ([item isOuting]) {
-            return YES;
-        }
-    }
-
     return YES;
 }
 
 + (BOOL)supportsFilteringEvents {
-    // EMA-2303
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldShowEntouragePrivacyDisclaimerOnCreation:(OTEntourage*)entourage {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
-    // EMA-2383
     if ([entourage isOuting]) {
         return YES;
     }
@@ -740,19 +613,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (NSString*)iTunesAppId {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return @"1388843838";
-    }
-    
     return @"1072244410";
 }
 
 + (BOOL)shouldAskForConsentWhenCreatingEntourage:(OTEntourage*)entourage {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
-    // EMA-2378
     if ([entourage isOuting] ||
         [entourage isContribution]) {
         return NO;
@@ -762,16 +626,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (BOOL)shouldAskForConfidentialityWhenCreatingEntourage:(OTEntourage*)entourage {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
-    // EMA-2384
-    //Plus utilisé car on affiche le choix sur la page de création.
-//    if ([entourage isContribution]) {
-//        return YES;
-//    }
-    
     return NO;
 }
 

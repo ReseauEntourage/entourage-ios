@@ -897,7 +897,6 @@ OTHeatzonesCollectionViewDelegate
 
 - (void)feedMapWithFeedItems {
     
-    // For pfp we want to display geed items as pois on map (private circles, etc.)
     // For Entourage we display the feeds, enconters and tours only if tours map is active
     
     if (self.toursMapDelegate.isActive) {
@@ -1231,7 +1230,7 @@ OTHeatzonesCollectionViewDelegate
             if (entourage.isPublic.boolValue) {
                 self.inviteBehaviorTriggered = NO;
             } else {
-                // Auto show the share popup only for entourage, not also for pfp, where a native popover is displayed
+                // Auto show the share popup only for entourage where a native popover is displayed
                 self.inviteBehaviorTriggered = ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction];
             }
             

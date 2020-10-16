@@ -12,15 +12,5 @@
 		<key>ApiKey</key>
 		<string>13f7d4ed0009b761df1c9400</string>
 	</dict>
-	<key>social.entourage.entourageios.pfp</key>
-	<dict>
-		<key>ApiKey</key>
-		<string>11aabfa5967deb0d7a2ea16e</string>
-	</dict>
-	<key>social.entourage.entourageios.pfp.beta</key>
-	<dict>
-		<key>ApiKey</key>
-		<string>11aabfa5967deb0d7a2ea16e</string>
-	</dict>
 </dict>
 </plist>

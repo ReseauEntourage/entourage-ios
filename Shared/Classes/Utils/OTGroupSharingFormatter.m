@@ -54,13 +54,10 @@
 }
 
 NSString *const prefixEntourage = @"";
-NSString *const prefixPfp       = @"pfp_";
 
 + (NSString *)communityPrefix {
     if ([OTAppConfiguration isApplicationTypeEntourage])
         return prefixEntourage;
-    if ([OTAppConfiguration isApplicationTypeVoisinAge])
-        return prefixPfp;
     @throw @"Unknown community";
 }
 

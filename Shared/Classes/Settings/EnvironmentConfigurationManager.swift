@@ -23,7 +23,6 @@ struct UserStorageKey {
 
 @objc enum ApplicationType:Int {
     case entourage = 0
-    case voisinAge = 1
 }
 
 @objc class EnvironmentConfigurationManager: NSObject {
@@ -41,11 +40,6 @@ struct UserStorageKey {
         self.config = EnvironmentConfigurationManager.plist(name: "AppConfigurations", bundleId: bundleId)
         self.apiKeys = EnvironmentConfigurationManager.plist(name: "ApiKeys", bundleId: bundleId)
         self.communityConfig = EnvironmentConfigurationManager.communityPlist()
-        
-    #if PFP
-        self.applicationType = ApplicationType.voisinAge
-    #endif
-        
     }
     
     @objc var community: NSDictionary {
