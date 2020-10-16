@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UserNotifications/UserNotifications.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+#import <FirebaseCrashlytics/FirebaseCrashlytics.h>
 #import <MessageUI/MessageUI.h>
 #import <FirebaseMessaging/FirebaseMessaging.h>
 

@@ -205,7 +205,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 - (void)configureCrashReporting
 {
-    [Fabric with:@[[Crashlytics class]]];
+    [FIRApp configure];
 }
 
 - (void)configureGooglePlacesClient {
