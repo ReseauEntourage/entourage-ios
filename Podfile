@@ -25,7 +25,7 @@ def sharedPods
     pod 'SnapKit', '~> 4.0.0'
     pod 'GooglePlaces', '~> 3.8.0'
     pod 'GoogleMaps', '~> 3.8'
-    pod 'SDWebImage'
+    pod 'SDWebImage', '~> 5.0'
     pod 'TTTAttributedLabel'
 end
 

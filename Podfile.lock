@@ -159,7 +159,7 @@ DEPENDENCIES:
   - kingpin (= 0.3.1)
   - libPhoneNumber-iOS
   - MBProgressHUD (= 0.8)
-  - SDWebImage
+  - SDWebImage (~> 5.0)
   - SimpleKeychain (~> 0.7)
   - SnapKit (~> 4.0.0)
   - SVProgressHUD (~> 2.2)
@@ -237,6 +237,6 @@ SPEC CHECKSUMS:
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 8ed16f222904bfde739c2d3f1dddc5ca0dd04d48
+PODFILE CHECKSUM: 78699815ce5fd2ab11667115f6eb5f36ca7761e6
 
 COCOAPODS: 1.9.3
