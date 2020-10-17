@@ -312,18 +312,22 @@ workflows:
         inputs:
         - content: >-
             #!/bin/bash
+
             # fail if any commands fails
+
             set -e
-            # debug log
-            #set -x
+
             echo "Download App credentials"
+ 
             app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
+ 
             # download the fileS
+ 
             wget -O "$app_configurations_file"
             "$BITRISEIO_APPCONFIGURATIONS_URL"
     - xcode-archive:
         inputs:
-        - export_method: app-store
+        - export_method: ad-hoc
     - deploy-to-bitrise-io: {}
   BETA:
     steps:
