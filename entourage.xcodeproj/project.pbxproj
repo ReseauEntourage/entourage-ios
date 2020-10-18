@@ -68,6 +68,8 @@
 		2BF2520D24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2520C24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift */; };
 		2BF958802451D78100C36863 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9587F2451D78100C36863 /* Extensions.swift */; };
 		2BFC5A89245AC32800AB75C4 /* OTPictureUploadS3Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC5A88245AC32800AB75C4 /* OTPictureUploadS3Service.swift */; };
+		2D1E3DD0253CD5D700A7333D /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2D1E3DCF253CD5D700A7333D /* MBProgressHUD */; };
+		2DAF5DE3253CD0B600662FD3 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2DAF5DE2253CD0B600662FD3 /* SDWebImage */; };
 		371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
 		37191AD6220B3A6600F789B8 /* CommunityConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37191AD5220B3A6600F789B8 /* CommunityConfig.plist */; };
 		372174F22281BE1C00EFDF3A /* OTModalPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 372174F12281BE1C00EFDF3A /* OTModalPopup.m */; };
@@ -1446,6 +1448,8 @@
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
+				2DAF5DE3253CD0B600662FD3 /* SDWebImage in Frameworks */,
+				2D1E3DD0253CD5D700A7333D /* MBProgressHUD in Frameworks */,
 				6002577FD1E74DC775FAB826 /* (null) in Frameworks */,
 				DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */,
 			);
@@ -3199,6 +3203,10 @@
 			dependencies = (
 			);
 			name = entourage;
+			packageProductDependencies = (
+				2DAF5DE2253CD0B600662FD3 /* SDWebImage */,
+				2D1E3DCF253CD5D700A7333D /* MBProgressHUD */,
+			);
 			productName = entourage;
 			productReference = 6B92CA9E19A7461C004E8C9B /* Ent-Beta.app */;
 			productType = "com.apple.product-type.application";
@@ -3251,6 +3259,10 @@
 				fr,
 			);
 			mainGroup = 6B92CA9519A7461C004E8C9B;
+			packageReferences = (
+				2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				2D1E3DCE253CD5D700A7333D /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
+			);
 			productRefGroup = 6B92CA9F19A7461C004E8C9B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -4498,6 +4510,38 @@
 			defaultConfigurationName = Store;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2D1E3DCE253CD5D700A7333D /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jdg/MBProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+		2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2D1E3DCF253CD5D700A7333D /* MBProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D1E3DCE253CD5D700A7333D /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
+			productName = MBProgressHUD;
+		};
+		2DAF5DE2253CD0B600662FD3 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6B92CA9619A7461C004E8C9B /* Project object */;
 }

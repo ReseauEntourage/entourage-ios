@@ -127,7 +127,6 @@ PODS:
   - JVFloatLabeledTextField (1.2.2)
   - kingpin (0.3.1)
   - libPhoneNumber-iOS (0.9.15)
-  - MBProgressHUD (0.8)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -135,9 +134,6 @@ PODS:
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.11)
   - Protobuf (3.13.0)
-  - SDWebImage (5.9.3):
-    - SDWebImage/Core (= 5.9.3)
-  - SDWebImage/Core (5.9.3)
   - SimpleKeychain (0.12.0)
   - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
@@ -158,8 +154,6 @@ DEPENDENCIES:
   - JVFloatLabeledTextField (~> 1.2)
   - kingpin (= 0.3.1)
   - libPhoneNumber-iOS
-  - MBProgressHUD (= 0.8)
-  - SDWebImage (~> 5.0)
   - SimpleKeychain (~> 0.7)
   - SnapKit (~> 4.0.0)
   - SVProgressHUD (~> 2.2)
@@ -191,11 +185,9 @@ SPEC REPOS:
     - JVFloatLabeledTextField
     - kingpin
     - libPhoneNumber-iOS
-    - MBProgressHUD
     - nanopb
     - PromisesObjC
     - Protobuf
-    - SDWebImage
     - SimpleKeychain
     - SnapKit
     - SVProgressHUD
@@ -226,17 +218,15 @@ SPEC CHECKSUMS:
   JVFloatLabeledTextField: df48598472ee015701d509f43e59492a0d4ca208
   kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
-  MBProgressHUD: 8688c331cb64702283be37ab8d7d329cdd25f251
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
-  SDWebImage: a31ee8e90a97303529e03fb0c333eae0eacb88e9
   SimpleKeychain: 929c432dfd73afdc2ffcc982eca70bb4f2f2d700
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 78699815ce5fd2ab11667115f6eb5f36ca7761e6
+PODFILE CHECKSUM: 6146b2d118f8aa5c2f44881e9b74403a61a53d79
 
 COCOAPODS: 1.9.3
