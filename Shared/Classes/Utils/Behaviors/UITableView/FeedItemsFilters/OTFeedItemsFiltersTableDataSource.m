@@ -62,20 +62,6 @@
     
     NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];
     
-    if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        switch (item.key) {
-            case FeedItemFilterKeyEventsPast:
-                // if events is off, don't show past events filter
-                if (!parents[2].subItems[0].active) {
-                    size = 0;
-                }
-                break;
-            default:
-                break;
-        }
-        return size;
-    }
-    
     OTFeedItemFilter *contribution = nil;
     OTFeedItemFilter *demande = nil;
     

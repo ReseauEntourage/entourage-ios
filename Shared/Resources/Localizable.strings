@@ -554,8 +554,6 @@
 "share_action_verb_other" = "vu";
 
 "share_event" = "Hello ! Je t'invite à : \"%1$@\", le %2$@, %3$@ !\n\nSi ça te dit d'y participer, rejoins-moi ici sur Entourage, le réseau qui crée des liens entre voisins avec et sans domicile : %4$@";
-"pfp_share_event" = "Bonjour ! J’ai le plaisir de vous inviter à notre prochaine sortie conviviale Voisin-Age : %1$@.\n\nElle aura lieu le %2$@, à %3$@. Merci par avance de me confirmer votre participation !\n\nEncore plus d’informations sont ici : %4$@. Je suis aussi à votre disposition.\n\nÀ bientôt !";
-"pfp_share_generic" = "Je vous invite à me rejoindre sur Voisin-Age, le réseau d’amitiés intergénérationnelles, pour découvrir : \"%1$@\". Pour télécharger l’application : %2$@.";
 
 "feed_item_time_distance" = "Créée il y a ";
 "group_timestamps_created_at" = "Créé";

@@ -31,7 +31,7 @@ extension ButtonStyles: ComponentStylable {
     var borderColor: UIColor {
         switch self {
         case .whiteRounded, .whiteRoundedWithBorder:
-            return UIColor.pfpBlue()
+            return UIColor.appBlue()
         case .navButton:
             return .clear
         }
@@ -40,7 +40,7 @@ extension ButtonStyles: ComponentStylable {
     var textColor: UIColor {
         switch self {
         case .whiteRounded, .whiteRoundedWithBorder:
-            return UIColor.pfpBlue()
+            return UIColor.appBlue()
         case .navButton:
             return .white
         }
@@ -51,7 +51,7 @@ extension ButtonStyles: ComponentStylable {
         case .whiteRounded, .whiteRoundedWithBorder:
             return .white
         case .navButton:
-            return UIColor.pfpBlue()
+            return UIColor.appBlue()
         }
     }
 }
