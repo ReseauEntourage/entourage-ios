@@ -26,8 +26,7 @@
 #import "OTConsts.h"
 #import "OTAPIConsts.h"
 #import "OTAddress.h"
-
-#import <Crashlytics/Crashlytics.h>
+#import "OTCrashlyticsHelper.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -88,7 +87,7 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
          }
          andFailure:^(NSError *error)
          {
-             [[Crashlytics sharedInstance] recordError:error withAdditionalUserInfo:parameters];
+             [OTCrashlyticsHelper recordError:error];
              NSLog(@"Failed with error %@", error);
              if (failure) {
                  failure(error);
@@ -507,7 +506,7 @@ NSString *const kUserAuthenticationLevelAuthenticated = @"authenticated";
      }
      andFailure:^(NSError *error)
      {
-         [[Crashlytics sharedInstance] recordError:error];
+        [OTCrashlyticsHelper recordError:error];
          NSLog(@"Failed with error %@", error);
          if (failure) {
              failure(error);

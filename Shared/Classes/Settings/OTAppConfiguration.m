@@ -134,18 +134,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     // Call the 'activateApp' method to log an app event for use
     // in analytics and advertising reporting.
     [FBSDKAppEvents activateApp];
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
 
     [OTPushNotificationsService refreshPushTokenIfConfigurationChanged];
     
     if (@available(iOS 10.0, *)) {
         [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
             if (settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
-                [mixpanel.people set:@{@"EntourageNotifEnable": @"YES"}];
                 [FIRAnalytics setUserPropertyString:@"YES" forName:@"EntourageNotifEnable"];
             }
             else {
-                [mixpanel.people set:@{@"EntourageNotifEnable": @"NO"}];
                 [FIRAnalytics setUserPropertyString:@"NO" forName:@"EntourageNotifEnable"];
             }
         }];
@@ -208,7 +205,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 - (void)configureCrashReporting
 {
-    [Fabric with:@[[Crashlytics class]]];
+    [FIRApp configure];
 }
 
 - (void)configureGooglePlacesClient {
@@ -253,13 +250,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 - (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions
 {
-    NSString *mixpanelToken = self.environmentConfiguration.MixpanelToken;
-    
-    [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
-    //[Mixpanel sharedInstance].enableLogging = YES;
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    mixpanel.minimumSessionDuration = 0;
-    
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
         [[OTAuthService new] getDetailsForUser:currentUser.uuid success:^(OTUser *user) {
@@ -270,7 +260,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         }];
         
         if (!currentUser.isAnonymous) {
-          [OTLogger setupMixpanelWithUser:currentUser];
+          [OTLogger setupAnalyticsWithUser:currentUser];
         }
     }
 }

@@ -8,7 +8,6 @@
 
 #import <UserNotifications/UserNotifications.h>
 #import <SWRevealViewController/SWRevealViewController.h>
-#import <Mixpanel/Mixpanel.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <FirebaseAnalytics/FirebaseAnalytics.h>
 
@@ -202,8 +201,6 @@ static void (^legacyRequestAuthorizationCompletionHandler)(void);
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
         [self sendPushToken:token];
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel.people addPushDeviceToken:tokenData];
     }
 }
 
@@ -223,14 +220,6 @@ static void (^legacyRequestAuthorizationCompletionHandler)(void);
     [[OTAuthService new] deletePushToken:pushToken forUser:previousUser];
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    if (!previousUser.isAnonymous) {
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        NSString *previousMixpanelId = mixpanel.distinctId;
-        [mixpanel identify:[previousUser.sid stringValue]];
-        [mixpanel.people removeAllPushDeviceTokens];
-        [mixpanel identify:previousMixpanelId];
-    }
 }
 
 + (void)getAuthorizationStatusWithCompletionHandler:(void (^)(UNAuthorizationStatus status))completionHandler {
