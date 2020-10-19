@@ -41,6 +41,9 @@
             return MessageCellTypeItemClosed;
         }
         
+        if ([tMessage.itemType isEqualToString:@"poi"]) {
+            return [self.currentUser.sid isEqual:tMessage.uID] ? MessageCellTypePOISent : MessageCellTypePOIReceived;
+        }
         return [self.currentUser.sid isEqual:tMessage.uID] ? MessageCellTypeSent : MessageCellTypeReceived;
         
     } else if([timelinePoint class] == [OTFeedItemJoiner class]) {

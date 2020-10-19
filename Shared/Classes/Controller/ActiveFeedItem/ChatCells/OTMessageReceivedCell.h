@@ -20,4 +20,6 @@
 @property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
 @property (nonatomic, weak) IBOutlet UILabel *time;
 
+@property(nonatomic) BOOL isPOI;
+@property(nonatomic) NSNumber *poiId;
 @end

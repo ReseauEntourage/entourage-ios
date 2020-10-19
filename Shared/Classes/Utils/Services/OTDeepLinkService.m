@@ -20,6 +20,7 @@
 #import "OTSafariService.h"
 #import "OTAPIErrorDomain.h"
 #import "OTUserEditViewController.h"
+#import "entourage-Swift.h"
 
 @interface OTDeepLinkService ()
 
@@ -266,6 +267,28 @@
     UIWindow *window = [appDelegate window];
     window.rootViewController = tabBarController;
     [window makeKeyAndVisible];
+}
+
+#pragma mark : - Use from message only -
+-(void)showDetailPoiViewControllerWithId:(NSNumber*)poiId {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"GuideSolidarity" bundle:nil];
+
+    OTGuideDetailPoiViewController *vc = (OTGuideDetailPoiViewController *) [sb instantiateViewControllerWithIdentifier:@"OTGuideDetailsViewController"];
+    OTPoi *poi = [OTPoi new];
+    poi.sid = poiId;
+    poi.categories_id = [NSMutableArray new];
+    vc.poi = poi;
+    vc.isFromDeeplink = YES;
+    
+    OTAppDelegate *appDelegate = (OTAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIWindow *window = [appDelegate window];
+    
+    UIViewController *mainBar = window.rootViewController;
+    UINavigationController * navCont = nil;
+    if ([mainBar isKindOfClass:[OTMainTabbarViewController class]]) {
+        navCont = [[mainBar childViewControllers] objectAtIndex:3];
+        [navCont pushViewController:vc animated:YES];
+    }
 }
 
 @end

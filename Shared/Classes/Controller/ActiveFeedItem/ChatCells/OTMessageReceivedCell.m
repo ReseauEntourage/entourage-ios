@@ -15,16 +15,27 @@
 
 @implementation OTMessageReceivedCell
 
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+    self.isPOI = NO;
 }
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
     if([timelinePoint isKindOfClass:[OTFeedItemJoiner class]])
         [self configureWithJoin:(OTFeedItemJoiner *)timelinePoint];
-    else
+    else {
         [self configureWithMessage:(OTFeedItemMessage *)timelinePoint];
+        if ([((OTFeedItemMessage*)timelinePoint).itemType isEqualToString:@"poi"]) {
+            self.isPOI = YES;
+            NSString * poiIdString = ((OTFeedItemMessage*)timelinePoint).itemUuid;
+            
+            NSNumber *poiId = [NSNumber numberWithInt:[poiIdString intValue]];
+            
+            self.poiId = poiId;
+        }
+    }
 }
 
 - (IBAction)showUserDetails:(id)sender {
@@ -52,6 +63,23 @@
     [self.btnAvatar setupAsProfilePictureFromUrl:joiner.avatarUrl];
     self.txtMessage.text = joiner.message;
     self.time.text = [joiner.date toTimeString];
+}
+
+-(BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+    
+    if (self.isPOI) {
+        [[OTDeepLinkService new] showDetailPoiViewControllerWithId:self.poiId];
+        
+        return false;
+    }
+    
+    return [super textView:textView shouldInteractWithURL:URL inRange:characterRange];
+}
+
+- (IBAction)action_show_link:(id)sender {
+    if (self.isPOI) {
+        [[OTDeepLinkService new] showDetailPoiViewControllerWithId:self.poiId];
+    }
 }
 
 @end

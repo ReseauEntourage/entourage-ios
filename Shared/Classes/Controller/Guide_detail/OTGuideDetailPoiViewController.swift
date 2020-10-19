@@ -18,6 +18,7 @@ import SVProgressHUD
     @IBOutlet weak var ui_tableview_infos_poi: UITableView!
     
     @objc var poi:OTPoi!
+    @objc var isFromDeeplink = false
     
     var hasPublicRow = false
     
@@ -38,6 +39,14 @@ import SVProgressHUD
         getDetailPoi()
         
         ui_bt_sendmail.layer.borderColor = UIColor.white.cgColor
+        
+        if self.isFromDeeplink {
+            self.navigationItem.leftBarButtonItem?.action = #selector(dismissSelf)
+        }
+    }
+    
+    @objc func dismissSelf() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func getDetailPoi() {

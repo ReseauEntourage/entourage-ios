@@ -13,4 +13,6 @@
 @property (nonatomic, weak) IBOutlet UITextView *txtMessage;
 @property (nonatomic, weak) IBOutlet UILabel *time;
 
+@property(nonatomic) BOOL isPOI;
+@property(nonatomic) NSNumber *poiId;
 @end
