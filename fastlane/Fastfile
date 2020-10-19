@@ -21,7 +21,7 @@ platform :ios do
     scan
   end
 
-  desc "Submit a new Beta Build to appaloosa"
+  desc "Submit a new Beta Build"
   desc "This will also make sure the profile is up to date"
   lane :beta do |options|
     sigh(
@@ -35,24 +35,6 @@ platform :ios do
     gym(
       clean: true,
       scheme: "EntourageBeta",
-      output_directory: ENV["BITRISE_DEPLOY_DIR"]
-      )
-  end
-
-  desc "Build a new Pfp-Beta"
-  desc "This will also make sure the profile is up to date"
-  lane :pfp_beta do |options|
-    sigh(
-     app_identifier: "social.entourage.entourageios.pfp.beta",
-     username: "apple@entourage.social",
-     adhoc: true
-    )
-    badge(
-      dark: true
-    )
-    gym(
-      clean: true,
-      scheme: "PfpBeta",
       output_directory: ENV["BITRISE_DEPLOY_DIR"]
       )
   end
@@ -96,29 +78,6 @@ platform :ios do
   lane :deploy_to_TestFlight do |options|
     entourage_store
     upload_entourage
-  end
-
-  desc "Build Voisin-Age for store release"
-  desc "This will also make sure the profile is up to date"
-  lane :pfp_store do |options|
-    store(
-      app_identifier: "social.entourage.entourageios.pfp",
-      scheme: "PfpStore"
-    )
-  end
-
-  desc "Upload Voisin-Age to TestFlight"
-  lane :upload_pfp do |options|
-    upload(
-      app_identifier: "social.entourage.entourageios.pfp"
-    )
-  end
-
-  desc "Submit a new PFP Build to TestFlight"
-  desc "This will also make sure the profile is up to date"
-  lane :deploy_PFP_to_TestFlight do |options|
-    pfp_store
-    upload_pfp
   end
 
   desc "Submit dSYMs to Crashlytics"

@@ -33,14 +33,14 @@ final class OTMenuCellView: UIView {
         addSubview(iconImageView)
         addSubview(itemLabel)
         addSubview(accImageView)
-        backgroundColor = UIColor.pfpTableBackground()
+        backgroundColor = UIColor.appTableBackground()
         
         itemLabel.numberOfLines = 2
         let marginOffset: CGFloat = 17
         let iconHeight: CGFloat = 30
         accImageView.image = UIImage.init(named: "arrowForMenu")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         accImageView.contentMode = UIView.ContentMode.scaleAspectFit
-        accImageView.tintColor = UIColor.pfpSubtitleBlue()
+        accImageView.tintColor = UIColor.appSubtitleBlue()
         
         iconImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()

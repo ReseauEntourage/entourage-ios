@@ -114,35 +114,4 @@
     XCTAssertEqualObjects(message, expected);
 }
 
-- (void)testPfpEvent {
-    [OTAppConfiguration sharedInstance].environmentConfiguration
-        .applicationType = ApplicationTypeVoisinAge;
-    NSString *message = [OTGroupSharingFormatter groupShareText:self.event];
-
-    NSString *expected =
-        @"Bonjour ! J’ai le plaisir de vous inviter à notre prochaine sortie conviviale "
-         "Voisin-Age : TITRE.\n"
-         "\n"
-         "Elle aura lieu le mercredi 15 avril à 10h00, à ADRESSE. Merci par avance de me "
-         "confirmer votre participation !\n"
-         "\n"
-         "Encore plus d’informations sont ici : SHARE_URL. Je suis aussi à votre "
-         "disposition.\n"
-         "\n"
-         "À bientôt !";
-    XCTAssertEqualObjects(message, expected);
-}
-
-- (void)testPfpGeneric {
-    [OTAppConfiguration sharedInstance].environmentConfiguration
-        .applicationType = ApplicationTypeVoisinAge;
-    NSString *message = [OTGroupSharingFormatter groupShareText:self.neighborhood];
-
-    NSString *expected =
-        @"Je vous invite à me rejoindre sur Voisin-Age, le réseau d’amitiés "
-         "intergénérationnelles, pour découvrir : \"TITRE\". Pour télécharger "
-         "l’application : SHARE_URL.";
-    XCTAssertEqualObjects(message, expected);
-}
-
 @end

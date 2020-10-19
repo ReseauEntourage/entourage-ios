@@ -12,12 +12,7 @@
 @implementation OTInviteCell
 
 - (void)configureWith:(id)item {
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        [self.inviteLabel setText:@"en parler à un ami"];
-    }
-    else {
-        [self.inviteLabel setText:@"inviter un ami"];
-    }
+    [self.inviteLabel setText:@"inviter un ami"];
     
     UIImage *image = [self.plusButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.inviteLabel setTextColor:[ApplicationTheme shared].primaryNavigationBarTintColor];

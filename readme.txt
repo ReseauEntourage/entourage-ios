@@ -4,7 +4,7 @@ Project Structure:
 ---------
 
 Targets (app instances):
-- One target for each app instance: so far one for entourage and one for pfp
+- One target for each app instance: so far one for entourage and one for ...
 
 Configurations:
 - Two configurations for each target [one for staging (preprod), one for production]
@@ -13,14 +13,9 @@ Folders:
 ---------
 - Shared: this folder contains the shared code between all the apps/targets. It contains all the entourage app code (even if not all the features are reused across other targets/apps)
 - Entourage: this contain entourage only specifc code, configuration files and resources
-- Pfp: this contain pfp specific only code, configuration files and resources
 
 Entourage specific:
 - "Entourage/Resources/Entourage.xcassets" - all entourage specific images/icons
-
-Pfp specific:
-- "Pfp/Resources/Pfp.xcassets" - all pfp specific images/icons
-- "Pfp/Resources/Pfp-Localisable.strings" - all pfp specific texts (by convention all the keys are prefixed by "pfp_")
 
 Whitelabeling:
 ---------
@@ -39,7 +34,7 @@ Each (new)app instance has to be configured by updating these specific files:
 
 Rules:
 ---------
-No class/file from the Shared folder should "know" about the app type (entourage or pfp), it should read configurations from the OTAppConfiguration file/class.
+No class/file from the Shared folder should "know" about the app type (entourage or ...), it should read configurations from the OTAppConfiguration file/class.
 Each text or image which is different based on each app type should be handled through OTAppAppearance file/class
 
 

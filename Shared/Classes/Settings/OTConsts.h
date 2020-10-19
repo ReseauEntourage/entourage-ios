@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 OCTO Technology. All rights reserved.
 //
 
-#import "PFPConsts.h"
-
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -109,7 +107,6 @@
 
 // Chart Ethique
 #define CHARTE_LINK_ID @"ethics-charter"
-#define CHARTE_LINK_FORMAT_PFP @"https://entourage-asso.typeform.com/to/uBxsHI?user_id="
 
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
 #define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
@@ -137,7 +134,6 @@
 
 // Email addresses
 #define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"
-#define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.org"
 
 #define ENTOURAGE_WEB_URL @"https://www.entourage.social"
 

@@ -26,14 +26,14 @@ extension LabelStyles: ComponentStylable {
     var textColor: UIColor {
         switch self {
         case .boldGray, .mediumGray:
-            return UIColor.pfpGrayText()
+            return UIColor.appGrayText()
         }
     }
     
     var backgroundColor: UIColor {
         switch self {
         case .boldGray, .mediumGray:
-            return UIColor.pfpTableBackground()
+            return UIColor.appTableBackground()
         }
     }
     
