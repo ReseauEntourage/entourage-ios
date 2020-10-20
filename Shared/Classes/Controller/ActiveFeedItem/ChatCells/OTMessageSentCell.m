@@ -15,6 +15,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+    self.constraintWidth = self.ui_constraint_width_img_link.constant;
+    self.ui_constraint_width_img_link.constant = 0;
 }
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
@@ -29,6 +31,13 @@
         NSNumber *poiId = [NSNumber numberWithInt:[poiIdString intValue]];
         
         self.poiId = poiId;
+    }
+    
+    else if ([((OTFeedItemMessage*)timelinePoint).itemType isEqualToString:@"entourage"]) {
+        self.ui_constraint_width_img_link.constant = self.constraintWidth;
+    }
+    else {
+        self.ui_constraint_width_img_link.constant = 0;
     }
 }
 

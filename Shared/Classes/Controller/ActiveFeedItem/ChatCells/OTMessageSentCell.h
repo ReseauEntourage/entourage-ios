@@ -13,6 +13,8 @@
 @property (nonatomic, weak) IBOutlet UITextView *txtMessage;
 @property (nonatomic, weak) IBOutlet UILabel *time;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ui_constraint_width_img_link;
 @property(nonatomic) BOOL isPOI;
 @property(nonatomic) NSNumber *poiId;
+@property(nonatomic) CGFloat constraintWidth;
 @end

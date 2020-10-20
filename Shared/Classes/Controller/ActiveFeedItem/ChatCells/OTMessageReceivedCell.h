@@ -20,6 +20,8 @@
 @property (nonatomic, weak) IBOutlet OTUserProfileBehavior *userProfile;
 @property (nonatomic, weak) IBOutlet UILabel *time;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ui_constraint_width_iv_link;
 @property(nonatomic) BOOL isPOI;
 @property(nonatomic) NSNumber *poiId;
+@property(nonatomic) CGFloat widthPicto;
 @end

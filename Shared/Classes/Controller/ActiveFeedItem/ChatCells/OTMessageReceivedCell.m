@@ -12,6 +12,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "UIImageView+entourage.h"
 #import "NSDate+OTFormatter.h"
+#import "UIColor+entourage.h"
 
 @implementation OTMessageReceivedCell
 
@@ -20,6 +21,8 @@
     [super awakeFromNib];
     self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
     self.isPOI = NO;
+    self.widthPicto =  self.ui_constraint_width_iv_link.constant;
+    
 }
 
 - (void)configureWithTimelinePoint:(OTFeedItemTimelinePoint *)timelinePoint {
@@ -34,6 +37,18 @@
             NSNumber *poiId = [NSNumber numberWithInt:[poiIdString intValue]];
             
             self.poiId = poiId;
+        }
+        else if([((OTFeedItemMessage*)timelinePoint).itemType isEqualToString:@"entourage"]) {
+            self.ui_constraint_width_iv_link.constant = self.widthPicto;
+            [self.txtMessage setTextColor:[UIColor appOrangeColor]];
+            [self.time setTextColor:[UIColor appOrangeColor]];
+            self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appOrangeColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+        }
+        else {
+            self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+            [self.txtMessage setTextColor:[UIColor blackColor]];
+            [self.time setTextColor:[UIColor colorWithRed:118 / 255 green:118 / 255 blue:118 / 255 alpha:1.0]];
+            self.ui_constraint_width_iv_link.constant = 0;
         }
     }
 }
