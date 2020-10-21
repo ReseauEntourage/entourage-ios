@@ -60,6 +60,11 @@ NSString *const kPOICategories = @"category_ids";
                 [poi.categories_id addObject:catId];
             }
         }
+        
+        //TODO: a faire le check si soliguide + parsing langue + horaires + uuid + url
+//        poi.languageTxt = @"Test langue";
+//        poi.openTimeTxt = @"Test horaires\nLun : xxx\nMar: XXX";
+//        poi.isSoliguide = YES;
 	}
 
 	return poi;

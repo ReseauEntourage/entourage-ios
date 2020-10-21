@@ -26,6 +26,8 @@ import SVProgressHUD
     
     var popupViewController:UIViewController? = nil
     
+    var isSoliguide = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +55,7 @@ import SVProgressHUD
         OTPoiService.init().getDateilpoiWithId(Int32(self.poi.sid.intValue)) { (poiResponse) in
             if let _poi = poiResponse {
                 self.poi = _poi
+                self.isSoliguide = _poi.isSoliguide
                 self.setupUI()
             }
         } failure: { (error) in
@@ -72,6 +75,13 @@ import SVProgressHUD
     }
     
     //MARK: - IBACTIONS -
+    @IBAction func action_show_soliguide(_ sender: Any) {
+        //TODO: - In App ou pas ?
+        if let _url = poi.soliguideUrl, let url = URL.init(string: _url) {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
     @IBAction func action_phone(_ sender: Any) {
         var component = URLComponents.init()
         component.path = self.poi.phone
@@ -249,10 +259,15 @@ extension OTGuideDetailPoiViewController: UITableViewDataSource,UITableViewDeleg
             return filters.arrayFilters.count
         }
         
-        if hasPublicRow {
-            return 3
+        if isSoliguide {
+            return 4
         }
-        return 2
+        else {
+            if hasPublicRow {
+                return 3
+            }
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -266,11 +281,26 @@ extension OTGuideDetailPoiViewController: UITableViewDataSource,UITableViewDeleg
             return cell
         }
         
+        if isSoliguide {
+            switch index {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellTopSoliguide", for: indexPath)
+                return cell
+            case 1:
+                return setupTopCell(indexPath: indexPath)
+            case 2:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellSoliguide", for: indexPath) as! OTGuideDetailSoliguideTableViewCell
+                
+                cell.populateCell(publicTxt: poi.audience, openTimeTxt: poi.openTimeTxt, languageTxt: poi.languageTxt)
+                
+                return cell
+            default:
+                return setupContactCell(indexPath: indexPath)
+            }
+        }
+        
         if index == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! OTGuideDetailTopTableViewCell
-            
-            cell.populateCell(poi: poi)
-            return cell
+            return setupTopCell(indexPath: indexPath)
         }
         
         if index == 1 && hasPublicRow {
@@ -280,10 +310,21 @@ extension OTGuideDetailPoiViewController: UITableViewDataSource,UITableViewDeleg
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellContact", for: indexPath) as! OTGuideDetailContactTableViewCell
+        return setupContactCell(indexPath: indexPath)
+    }
+    
+    func setupContactCell(indexPath:IndexPath) -> UITableViewCell {
+        let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellContact", for: indexPath) as! OTGuideDetailContactTableViewCell
         
         cell.populateCell(poi: poi)
         
+        return cell
+    }
+    
+    func setupTopCell(indexPath:IndexPath) -> UITableViewCell {
+        let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! OTGuideDetailTopTableViewCell
+        
+        cell.populateCell(poi: poi)
         return cell
     }
 }

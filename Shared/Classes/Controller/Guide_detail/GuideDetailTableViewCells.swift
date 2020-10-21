@@ -87,6 +87,58 @@ class OTGuideDetailTopTableViewCell: UITableViewCell {
 }
 
 //MARK: - OTGuideDetailPublicTableViewCell -
+class OTGuideDetailSoliguideTopTableViewCell: UITableViewCell {
+    @IBOutlet weak var ui_info1: UILabel!
+    @IBOutlet weak var ui_info2: UILabel!
+    @IBOutlet weak var ui_info_button: UILabel!
+    @IBOutlet weak var ui_view_button: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        ui_view_button.layer.cornerRadius = 10
+        
+        ui_info1.text = OTLocalisationService.getLocalizedValue(forKey: "info_soliguide_1")
+        ui_info2.text = OTLocalisationService.getLocalizedValue(forKey: "info_soliguide_2")
+        ui_info_button.text = OTLocalisationService.getLocalizedValue(forKey: "info_button_soliguide_consult")?.uppercased()
+    }
+}
+//MARK: - OTGuideDetailSoliguideTableViewCell -
+class OTGuideDetailSoliguideTableViewCell: UITableViewCell {
+    @IBOutlet weak var ui_title_public: UILabel!
+    @IBOutlet weak var ui_description_public: UILabel!
+    @IBOutlet weak var ui_title_open_time: UILabel!
+    @IBOutlet weak var ui_description_open_time: UILabel!
+    @IBOutlet weak var ui_title_language: UILabel!
+    @IBOutlet weak var ui_description_language: UILabel!
+    
+    @IBOutlet weak var ui_view_public: UIView!
+    @IBOutlet weak var ui_view_language: UIView!
+    @IBOutlet weak var ui_view_open_time: UIView!
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        ui_title_public.text = OTLocalisationService.getLocalizedValue(forKey: "DetailPoiPublic")
+        ui_title_language.text = OTLocalisationService.getLocalizedValue(forKey: "DetailPoiLanguage")
+        ui_title_open_time.text = OTLocalisationService.getLocalizedValue(forKey: "DetailPoiOpenTime")
+    }
+    
+    func populateCell(publicTxt:String?,openTimeTxt:String?,languageTxt:String?) {
+       
+        ui_view_public.isHidden = publicTxt?.count ?? 0 > 0 ? false : true
+        ui_description_public.text = publicTxt
+        
+        ui_view_language.isHidden = languageTxt?.count ?? 0 > 0 ? false : true
+        ui_description_language.text = languageTxt
+        
+        ui_view_open_time.isHidden = openTimeTxt?.count ?? 0 > 0 ? false : true
+        ui_description_open_time.text = openTimeTxt
+    }
+}
+
+//MARK: - OTGuideDetailPublicTableViewCell -
 class OTGuideDetailPublicTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_description: UILabel!

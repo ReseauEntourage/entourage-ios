@@ -182,6 +182,12 @@
 
 "DetailPoiContact" = "Contact";
 "DetailPoiPublic" = "Public";
+"DetailPoiLanguage" = "Langues parlées";
+"DetailPoiOpenTime" = "Horaires";
+
+"info_soliguide_1" = "Les informations sur ce lieu sont fournies par Soliguide, la cartographie solidaire.";
+"info_soliguide_2" = "Pour des informations encore plus complètes et disponibles en plusieurs langues";
+"info_button_soliguide_consult" = "Consulter";
 
 // Tour
 "tour_type_bare_hands" = "barehands";
