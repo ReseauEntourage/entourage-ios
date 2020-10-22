@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
 class OTAssoTopTableViewCell: UITableViewCell {
 
@@ -15,11 +16,11 @@ class OTAssoTopTableViewCell: UITableViewCell {
     
     @IBOutlet weak var ui_tv_title_asso: UILabel!
     @IBOutlet weak var ui_tv_subtitle_asso: UILabel!
-    @IBOutlet weak var ui_tv_volunteer: UILabel!
+    @IBOutlet weak var ui_tv_volunteer: TTTAttributedLabel!
     @IBOutlet weak var ui_view_volunteer: UIView!
-    @IBOutlet weak var ui_tv_donation: UILabel!
+    @IBOutlet weak var ui_tv_donation: TTTAttributedLabel!
     @IBOutlet weak var ui_view_donation: UIView!
-    @IBOutlet weak var ui_tv_asso_description: UILabel!
+    @IBOutlet weak var ui_tv_asso_description: TTTAttributedLabel!
     @IBOutlet weak var ui_tv_title_information: UILabel!
     @IBOutlet weak var ui_view_button: UIView!
     
@@ -37,6 +38,8 @@ class OTAssoTopTableViewCell: UITableViewCell {
         ui_tv_subtitle_asso.isHidden = true
         ui_tv_title_asso.text = name
         ui_tv_subtitle_asso.text = subname
+        
+        setupLinksForLabel(_label: ui_tv_asso_description)
         ui_tv_asso_description.text = assoDescription
         
         ui_view_donation.isHidden = !hasDonation
@@ -62,5 +65,17 @@ class OTAssoTopTableViewCell: UITableViewCell {
             ui_title_button_follow.textColor = UIColor.appOrange()
         }
     }
+    
+    func setupLinksForLabel(_label: TTTAttributedLabel) {
+        _label.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
+        _label.linkAttributes = [NSAttributedString.Key.foregroundColor : UIColor.appOrange() as Any]
+        _label.delegate = self
+    }
 
+}
+
+extension OTAssoTopTableViewCell: TTTAttributedLabelDelegate {
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        UIApplication.shared.openURL(url)
+    }
 }

@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
 class OTAssoNeedsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var ui_tv_volunteers_description: UILabel!
-    @IBOutlet weak var ui_tv_needs_description: UILabel!
+    @IBOutlet weak var ui_tv_volunteers_description: TTTAttributedLabel!
+    @IBOutlet weak var ui_tv_needs_description: TTTAttributedLabel!
     @IBOutlet weak var ui_tv_accept_needs: UILabel!
     @IBOutlet weak var ui_tv_accept_volunteers: UILabel!
     @IBOutlet weak var ui_view_volunteers: UIView!
@@ -25,6 +26,9 @@ class OTAssoNeedsTableViewCell: UITableViewCell {
     }
 
     func populateCell(donationsDescription:String?,volunteersDesription:String?) {
+        
+        setupLinksForLabel(_label: ui_tv_volunteers_description)
+        setupLinksForLabel(_label: ui_tv_needs_description)
         
         if let _desc = donationsDescription {
             ui_view_needs.isHidden = false
@@ -41,7 +45,18 @@ class OTAssoNeedsTableViewCell: UITableViewCell {
         else {
             ui_view_volunteers.isHidden = true
         }
-        
+    }
+    
+    func setupLinksForLabel(_label: TTTAttributedLabel) {
+        _label.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
+        _label.linkAttributes = [NSAttributedString.Key.foregroundColor : UIColor.appOrange() as Any]
+        _label.delegate = self
     }
 
+}
+
+extension OTAssoNeedsTableViewCell: TTTAttributedLabelDelegate {
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        UIApplication.shared.openURL(url)
+    }
 }
