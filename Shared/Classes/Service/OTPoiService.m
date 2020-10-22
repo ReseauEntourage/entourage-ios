@@ -75,11 +75,11 @@ NSString *const kAPIPoiRoute = @"map.json";
      }];
 }
 
-- (void)getDateilpoiWithId:(int)poiId
+- (void)getDateilpoiWithId:(NSString *)poiUUID
                    success:(void (^)(OTPoi *pois))success
                    failure:(void (^)(NSError *error))failure {
     NSMutableDictionary *authParams = [[OTHTTPRequestManager commonParameters] mutableCopy];
-    NSString *url = [NSString stringWithFormat:@"%@/%d",kPOIs,poiId];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",kPOIs,poiUUID];
     
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url

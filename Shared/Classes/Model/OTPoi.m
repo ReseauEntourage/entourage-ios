@@ -14,7 +14,7 @@ NSString *const kPOIId = @"id";
 NSString *const kPOICategoryId = @"category_id";
 NSString *const kPOIName = @"name";
 NSString *const kPOIAudience = @"audience";
-NSString *const kPOIAddress = @"adress";
+NSString *const kPOIAddress = @"address";
 NSString *const kPOILatitude = @"latitude";
 NSString *const kPOILongitude = @"longitude";
 NSString *const kPOIPhone = @"phone";
@@ -27,6 +27,11 @@ NSString *const kImageDefaultName = @"poi_category-new-0";
 NSString *const kPOIPartnerId = @"partner_id";
 NSString *const kPOICategories = @"category_ids";
 
+NSString *const kPOIuuid = @"uuid";
+NSString *const kPOIHours = @"hours";
+NSString *const kPOILanguages = @"languages";
+NSString *const kPOISource = @"source";
+NSString *const kPOISourceUrl = @"source_url";
 @implementation OTPoi
 
 /**************************************************************************************************/
@@ -62,9 +67,12 @@ NSString *const kPOICategories = @"category_ids";
         }
         
         //TODO: a faire le check si soliguide + parsing langue + horaires + uuid + url
-//        poi.languageTxt = @"Test langue";
-//        poi.openTimeTxt = @"Test horaires\nLun : xxx\nMar: XXX";
-//        poi.isSoliguide = YES;
+        poi.uuid = [dictionary stringForKey:kPOIuuid];
+        poi.languageTxt = [dictionary stringForKey:kPOILanguages];
+        poi.openTimeTxt  = [dictionary stringForKey:kPOIHours];
+        poi.soliguideUrl = [dictionary stringForKey:kPOISourceUrl];
+        NSString *source  = [dictionary stringForKey:kPOISource];
+        poi.isSoliguide = [source isEqualToString:@"soliguide"];
 	}
 
 	return poi;

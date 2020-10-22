@@ -52,7 +52,10 @@ import SVProgressHUD
     }
     
     func getDetailPoi() {
-        OTPoiService.init().getDateilpoiWithId(Int32(self.poi.sid.intValue)) { (poiResponse) in
+        //Actually WS return id and not uuid for entourage poi 
+        let uuid = (self.poi.uuid != nil && self.poi.uuid.count > 0) ? self.poi.uuid : self.poi.sid.stringValue
+        
+        OTPoiService.init().getDateilpoiWithId(uuid) { (poiResponse) in
             if let _poi = poiResponse {
                 self.poi = _poi
                 self.isSoliguide = _poi.isSoliguide

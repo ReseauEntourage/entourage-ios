@@ -24,7 +24,7 @@ extern NSString *const kAPIPoiRoute;
                    success:(void (^)(NSArray *categories, NSArray *pois))success
                    failure:(void (^)(NSError *error))failure;
 
-- (void)getDateilpoiWithId:(int)poiId
+- (void)getDateilpoiWithId:(NSString *)poiUUID
                    success:(void (^)(OTPoi *pois))success
                    failure:(void (^)(NSError *error))failure;
 
