@@ -515,7 +515,6 @@ OTHeatzonesCollectionViewDelegate
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     [OTAppState hideTabBar:NO];
     [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
     
@@ -587,9 +586,8 @@ OTHeatzonesCollectionViewDelegate
 }
 
 - (void)switchToEvents {
-    dispatch_async(dispatch_get_main_queue(), ^() {
-        [self.tableView showEventsOnlyAction];
-        [self configureNavigationBar];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.500 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self action_show_events:self];
     });
 }
 
