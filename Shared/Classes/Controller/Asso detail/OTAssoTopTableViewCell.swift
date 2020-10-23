@@ -20,6 +20,8 @@ class OTAssoTopTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_view_volunteer: UIView!
     @IBOutlet weak var ui_tv_donation: TTTAttributedLabel!
     @IBOutlet weak var ui_view_donation: UIView!
+    
+    @IBOutlet weak var ui_view_asso_detail: UIView!
     @IBOutlet weak var ui_tv_asso_description: TTTAttributedLabel!
     @IBOutlet weak var ui_tv_title_information: UILabel!
     @IBOutlet weak var ui_view_button: UIView!
@@ -41,6 +43,8 @@ class OTAssoTopTableViewCell: UITableViewCell {
         
         setupLinksForLabel(_label: ui_tv_asso_description)
         ui_tv_asso_description.text = assoDescription
+        
+        ui_view_asso_detail.isHidden = assoDescription?.count == 0
         
         ui_view_donation.isHidden = !hasDonation
         ui_view_volunteer.isHidden = !hasVolunteer
