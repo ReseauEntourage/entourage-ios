@@ -45,7 +45,7 @@
             self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appOrangeColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
         }
         else {
-            self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
+            self.txtMessage.linkTextAttributes = @{NSForegroundColorAttributeName: [UIColor appOrangeColor], NSUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]};
             [self.txtMessage setTextColor:[UIColor blackColor]];
             [self.time setTextColor:[UIColor colorWithRed:118 / 255 green:118 / 255 blue:118 / 255 alpha:1.0]];
             self.ui_constraint_width_iv_link.constant = 0;

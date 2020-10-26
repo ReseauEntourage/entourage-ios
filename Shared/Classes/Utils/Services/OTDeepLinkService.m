@@ -173,11 +173,12 @@
         [self updateAppWindow:tabViewController];
         
     } else if ([key isEqualToString:@"create-action"]) {
-        OTMainViewController *mainViewController = [self popToMainViewController];
-        [OTAppState showFeedAndMapActionsFromController:mainViewController
-                                            showOptions:NO
-                                           withDelegate:mainViewController
-                                         isEditingEvent:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.500 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
+            OTMainTabbarViewController *tabBarController = (OTMainTabbarViewController*)appDelegate.window.rootViewController;
+            [tabBarController showMapOption];
+        });
+       
         
     } else if ([key isEqualToString:@"entourage"] || [key isEqualToString:@"entourages"]) {
         if (pathComponents != nil && pathComponents.count >= 2) {
@@ -188,8 +189,10 @@
             [self showProfileFromAnywhereForUser:pathComponents[1] isFromLaunch:NO];
         }
     } else if ([key isEqualToString:@"guide"]) {
-        UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:GUIDES_TAB_INDEX];
-        [self updateAppWindow:tabViewController];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .500 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:GUIDES_TAB_INDEX];
+            [self updateAppWindow:tabViewController];
+        });
     } else if ([key isEqualToString:@"tutorial"]) {
         [OTAppState presentTutorialScreen];
     } else if([key isEqualToString:@"phone-settings"]) {
@@ -197,8 +200,10 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         });
     } else if([key isEqualToString:@"events"]) {
-        OTMainViewController *mainViewController = [self popToMainViewController];
-        [mainViewController switchToEvents];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .500 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            OTMainViewController *mainViewController = [self popToMainViewController];
+            [mainViewController switchToEvents];
+        });
     }
     else if ([key isEqualToString:@"profileAction"]) {
         [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].uuid isFromLaunch:YES];

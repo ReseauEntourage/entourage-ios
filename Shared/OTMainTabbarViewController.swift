@@ -141,7 +141,7 @@ class OTMainTabbarViewController: UITabBarController {
         }
     }
     
-    func showMapOption() {
+   @objc func showMapOption() {
         //Check if Encounter if not show regular menu
         let isOngoingTou = UserDefaults.standard.currentOngoingTour
         

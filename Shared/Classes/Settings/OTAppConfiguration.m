@@ -14,7 +14,6 @@
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
 #import "OTVersionInfo.h"
-#import "OTDeepLinkService.h"
 #import "OTLocationManager.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
@@ -22,7 +21,6 @@
 #import "OTPushNotificationsService.h"
 #import "OTPictureUploadService.h"
 #import "OTAuthService.h"
-#import "OTDeepLinkService.h"
 #import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
 #import <SVProgressHUD/SVProgressHUD.h>
