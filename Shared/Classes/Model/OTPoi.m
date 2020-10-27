@@ -73,6 +73,17 @@ NSString *const kPOISourceUrl = @"source_url";
         poi.soliguideUrl = [dictionary stringForKey:kPOISourceUrl];
         NSString *source  = [dictionary stringForKey:kPOISource];
         poi.isSoliguide = [source isEqualToString:@"soliguide"];
+        
+        if (poi.uuid.integerValue) {
+            poi.sid = [NSNumber numberWithInteger:poi.uuid.integerValue];
+        }
+        else {
+            poi.sid = nil;
+        }
+        poi.audience = @"";
+        poi.details = @"";
+        poi.website = @"";
+        poi.email = @"";
 	}
 
 	return poi;

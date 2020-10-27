@@ -318,8 +318,13 @@ class OTMainGuideViewController: UIViewController {
         }
     }
     
+    var isAllreadyCall = false
     //MARK: - Network -
     func getPoiList() {
+        if isAllreadyCall {
+            return
+        }
+        isAllreadyCall = true
         self.noDataBehavior.hideNoData()
         SVProgressHUD.show()
         
@@ -367,6 +372,7 @@ class OTMainGuideViewController: UIViewController {
         
         self.clusteringController.setAnnotations(self.markers)
         self.clusteringController.refresh(true, force: true)
+        isAllreadyCall = false
     }
     
     func showMap(animated:Bool) {
