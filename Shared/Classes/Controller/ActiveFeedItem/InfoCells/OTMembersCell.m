@@ -18,6 +18,20 @@
     self.imgAssociation.hidden = item.partner == nil;
     [self.imgAssociation setupFromUrl:item.partner.smallLogoUrl withPlaceholder:@"badgeDefault"];
     self.lblDisplayName.text = item.displayName;
+    
+    //Check to show Role + asso
+    if (item.hasToShowRoleAndPartner) {
+        NSString *roleStr = @"";
+        if (item.partner_role_title.length > 0) {
+            roleStr = [NSString stringWithFormat:@"%@ -",item.partner_role_title];
+        }
+        self.ui_label_title_role.text = roleStr;
+        
+        [self.ui_button_asso setTitle:item.partner.name forState:UIControlStateNormal];
+        
+        [self.ui_button_asso setTag:item.partner.aid.integerValue];
+    }
+    
     [self.btnProfile setupAsProfilePictureFromUrl:item.avatarUrl];
     
     NSMutableArray<NSString *> *roles = [NSMutableArray new];

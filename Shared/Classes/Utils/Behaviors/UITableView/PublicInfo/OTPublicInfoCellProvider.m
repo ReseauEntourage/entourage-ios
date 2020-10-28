@@ -57,6 +57,9 @@
         }
     }
     else if ([item isKindOfClass:[OTFeedItemJoiner class]]) {
+        if (((OTFeedItemJoiner*)item).hasToShowRoleAndPartner ) {
+            return @"MemberCellWithRole";
+        }
         return @"MemberCell";
     }
     

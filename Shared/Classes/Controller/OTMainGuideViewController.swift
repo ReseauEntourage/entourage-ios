@@ -355,6 +355,7 @@ class OTMainGuideViewController: UIViewController {
             if self.pois.count == 0 {
                 self.noDataBehavior.showNoData()
             }
+            self.isAllreadyCall = false
             SVProgressHUD.dismiss()
         }
     }

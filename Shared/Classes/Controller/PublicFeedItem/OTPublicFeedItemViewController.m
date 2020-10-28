@@ -129,6 +129,18 @@
     [OTSafariService launchInAppBrowserWithUrlString:urlForm viewController:self.navigationController];
 }
 
+- (IBAction)action_show_asso:(UIButton *)sender {
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"AssociationDetails" bundle:nil];
+    
+    UINavigationController *controller = (UINavigationController *)sb.instantiateInitialViewController;
+    
+    OTAssociationDetailViewController *vc = (OTAssociationDetailViewController *) controller.topViewController;
+    vc.associationId = sender.tag;
+    [self.navigationController presentViewController:controller animated:YES completion:nil];
+}
+
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
