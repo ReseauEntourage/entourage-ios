@@ -164,7 +164,7 @@
 "guide_display_heal" = "Se soigner";
 "guide_display_refresh" = "Se rafraîchir";
 "guide_display_orientation" = "S’orienter";
-"guide_display_caring" = "Bien-être, activités";
+"guide_display_caring" = "Bien-être & activités";
 "guide_display_reinsertion" = "Se réinsérer";
 "guide_display_partners" = "Associations et services actifs sur Entourage";
 "partners_entourage" = "Organisme actif sur Entourage";
@@ -178,7 +178,8 @@
 "guide_display_laverie" = "Laveries";
 
 "guide_display_vetements" = "Vêtements & matériels";
-"guide_display_boite" = "Boites à dons/lire";
+"guide_display_boite" = "Boîtes à dons & lire";
+"guide_display_bagageries" = "Bagageries";
 
 "DetailPoiContact" = "Contact";
 "DetailPoiPublic" = "Public";

@@ -28,6 +28,7 @@ struct OTGuideFilters {
     var showLaveLinges = true
     var showVetements = true
     var showBoitesDons = true
+    var showBagages = true
     
     var arrayFilters = [OTGuideFilterItem]()
     
@@ -53,6 +54,7 @@ struct OTGuideFilters {
                 
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyCaring, active: showCaring, image: "picto_cat_filter-6"),
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyVetements, active: showVetements, image: "picto_cat_filter-61"),
+                OTGuideFilterItem.init(key: .SolidarityGuideKeyBagages, active: showBagages, image: "picto_cat_filter-63"),
                 OTGuideFilterItem.init(key: .SolidarityGuideKeyBoitesDons, active: showBoitesDons, image: "picto_cat_filter-62")]
         }
     }
@@ -62,7 +64,7 @@ struct OTGuideFilters {
             return false
         }
         
-        if !showFood || !showHousing || !showHeal || !showOrientation || !showCaring || !showReinsertion || !showPartners || !showToilets || !showFontaines || !showDouches || !showLaveLinges || !showVetements || !showBoitesDons {
+        if !showFood || !showHousing || !showHeal || !showOrientation || !showCaring || !showReinsertion || !showPartners || !showToilets || !showFontaines || !showDouches || !showLaveLinges || !showVetements || !showBoitesDons || !showBagages {
             return false
         }
         
@@ -198,6 +200,8 @@ struct OTGuideFilters {
             self.showVetements = isActive
         case .SolidarityGuideKeyBoitesDons:
             self.showBoitesDons = isActive
+        case .SolidarityGuideKeyBagages:
+            self.showBagages = isActive
         default:
             break
         }
@@ -247,6 +251,8 @@ struct OTGuideFilters {
             return OTLocalisationService.getLocalizedValue(forKey: "guide_display_vetements")
         case .SolidarityGuideKeyBoitesDons:
             return OTLocalisationService.getLocalizedValue(forKey: "guide_display_boite")
+        case .SolidarityGuideKeyBagages:
+            return  OTLocalisationService.getLocalizedValue(forKey: "guide_display_bagageries")
         default:
             return ""
         }
@@ -272,4 +278,5 @@ struct OTGuideFilters {
     
     case SolidarityGuideKeyVetements = 61
     case SolidarityGuideKeyBoitesDons = 62
+    case SolidarityGuideKeyBagages = 63
 }
