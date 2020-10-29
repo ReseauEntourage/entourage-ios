@@ -90,7 +90,7 @@
                                                         <outletCollection property="gestureRecognizers" destination="eT3-Yc-1Rn" appends="YES" id="613-z9-2QC"/>
                                                     </connections>
                                                 </view>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AdU-rv-Z2R">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AdU-rv-Z2R">
                                                     <rect key="frame" x="16" y="215.5" width="343" height="214.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4r-YF-xLS">
@@ -130,7 +130,7 @@
                                                                         <constraint firstAttribute="width" constant="14" id="VOm-37-UB8"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25M-xm-rx4" customClass="TTTAttributedLabel">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25M-xm-rx4" customClass="TTTAttributedLabel">
                                                                     <rect key="frame" x="22" y="0.0" width="35" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                                     <color key="textColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -151,7 +151,7 @@
                                                             <rect key="frame" x="0.0" y="44" width="343" height="170.5"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qt-Y4-K4o">
-                                                                    <rect key="frame" x="0.0" y="24" width="343" height="57"/>
+                                                                    <rect key="frame" x="0.0" y="24" width="343" height="138.5"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top_left_corner" translatesAutoresizingMaskIntoConstraints="NO" id="u6Y-48-VxE">
                                                                             <rect key="frame" x="-1" y="-1" width="20" height="20"/>
@@ -161,14 +161,14 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottom_right_corner" translatesAutoresizingMaskIntoConstraints="NO" id="3pn-00-bMd">
-                                                                            <rect key="frame" x="324" y="38" width="20" height="20"/>
+                                                                            <rect key="frame" x="324" y="119.5" width="20" height="20"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="20" id="4Ba-4o-h34"/>
                                                                                 <constraint firstAttribute="width" constant="20" id="nQ3-Jv-mia"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Texte" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWf-ok-JoJ" customClass="TTTAttributedLabel">
-                                                                            <rect key="frame" x="20" y="20" width="303" height="17"/>
+                                                                            <rect key="frame" x="20" y="20" width="303" height="98.5"/>
                                                                             <color key="tintColor" systemColor="systemOrangeColor"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                                             <color key="textColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -200,12 +200,14 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="8qt-Y4-K4o" secondAttribute="trailing" id="3mR-zr-UyQ"/>
                                                                 <constraint firstItem="8qt-Y4-K4o" firstAttribute="leading" secondItem="bYa-zu-bsO" secondAttribute="leading" id="9pz-ph-050"/>
+                                                                <constraint firstAttribute="bottom" secondItem="8qt-Y4-K4o" secondAttribute="bottom" constant="8" id="EJo-4T-I2v"/>
                                                                 <constraint firstItem="8qt-Y4-K4o" firstAttribute="top" secondItem="bYa-zu-bsO" secondAttribute="top" constant="24" id="XVQ-oG-o0W"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
+                                                        <constraint firstItem="Lk1-I4-MSb" firstAttribute="top" secondItem="O4r-YF-xLS" secondAttribute="bottom" constant="5" id="AU9-yH-WgV"/>
                                                         <constraint firstAttribute="height" priority="250" constant="1" id="zSl-yb-L9H"/>
                                                     </constraints>
                                                 </stackView>
@@ -278,7 +280,7 @@
                                             <outlet property="ui_view_volunteer" destination="O4r-YF-xLS" id="Hyx-bS-CyD"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellNeedsAsso" rowHeight="229" id="Mvh-9c-4IC" customClass="OTAssoNeedsTableViewCell" customModule="Ent_Beta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellNeedsAsso" id="Mvh-9c-4IC" customClass="OTAssoNeedsTableViewCell" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="532" width="375" height="229"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mvh-9c-4IC" id="TnP-7s-GcG">

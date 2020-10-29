@@ -30,7 +30,7 @@ class OTAssoNeedsTableViewCell: UITableViewCell {
         setupLinksForLabel(_label: ui_tv_volunteers_description)
         setupLinksForLabel(_label: ui_tv_needs_description)
         
-        if let _desc = donationsDescription {
+        if let _desc = donationsDescription, _desc.count > 0 {
             ui_view_needs.isHidden = false
             ui_tv_needs_description.text = _desc
         }
@@ -38,7 +38,7 @@ class OTAssoNeedsTableViewCell: UITableViewCell {
             ui_view_needs.isHidden = true
         }
         
-        if let _desc = volunteersDesription {
+        if let _desc = volunteersDesription, _desc.count > 0 {
             ui_view_volunteers.isHidden = false
             ui_tv_volunteers_description.text = _desc
         }
