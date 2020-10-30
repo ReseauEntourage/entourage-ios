@@ -28,7 +28,6 @@ class OTMainGuideViewController: UIViewController {
     var hasToShowTopInformationGDS = false
     
     var mapView:OTMapView!
-    var clusteringController:KPClusteringController!
     var solidarityFilter:OTGuideFilters!
     var emptyFooterView:UIView!
     var lblEmptyTableReason:UILabel!
@@ -39,6 +38,7 @@ class OTMainGuideViewController: UIViewController {
     var mapWasCenteredOnUserLocation = false
     var noDataDisplayed = false
     var isShowMap = false
+    var isFirstLaunch = true
     
     //MARK: - LifeCycle -
     override func viewDidLoad() {
@@ -47,7 +47,6 @@ class OTMainGuideViewController: UIViewController {
         setup()
         setupButtons()
         fillCategories()
-        getPoiList()
         
         NotificationCenter.default.addObserver(self, selector: #selector(showCurrentLocation), name: NSNotification.Name(rawValue:  kNotificationShowFeedsMapCurrentLocation), object: nil)
     }
@@ -86,6 +85,15 @@ class OTMainGuideViewController: UIViewController {
             self.ui_constraint_height_view_topinfo.constant = 0
             self.ui_view_top_info_gds.isHidden = true
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isFirstLaunch {
+            getPoiList()
+            isFirstLaunch = false
+        }
+        
     }
     
     func changeBackbutton() {
@@ -130,8 +138,6 @@ class OTMainGuideViewController: UIViewController {
     //MARK: - Notification Methods -
     
     @objc func showCurrentLocation() {
-        Logger.print("***** showCurrent location ***")
-        
         OTLogger.logEvent("RecenterMapClick")
         
         if let _man = OTLocationManager.sharedInstance(), !_man.isAuthorized {
@@ -278,7 +284,6 @@ class OTMainGuideViewController: UIViewController {
         self.mapView.showsBuildings = false
         self.mapView.showsTraffic = false
         
-        self.clusteringController = KPClusteringController(mapView: self.mapView)
         guard let currentUser = UserDefaults.standard.currentUser else {
             return
         }
@@ -363,6 +368,7 @@ class OTMainGuideViewController: UIViewController {
     //MARK: - Methods -
     
     func feedMap() {
+        self.mapView.removeAnnotations(self.markers)
         self.markers.removeAll()
         
         for poi in pois {
@@ -370,9 +376,7 @@ class OTMainGuideViewController: UIViewController {
                 self.markers.append(annot)
             }
         }
-        
-        self.clusteringController.setAnnotations(self.markers)
-        self.clusteringController.refresh(true, force: true)
+        self.mapView.addAnnotations(self.markers)
         isAllreadyCall = false
     }
     
@@ -392,7 +396,6 @@ class OTMainGuideViewController: UIViewController {
             self.ui_tableView.tableHeaderView = self.headerViewWithMap(mapHeight: mapFrame.size.height)
             
             self.ui_tableView?.scrollRectToVisible(.init(x: 0, y: 0, width: 1, height: 1), animated: animated)
-            
         }
         
         self.isShowMap = true
@@ -516,23 +519,6 @@ class OTMainGuideViewController: UIViewController {
             }
         }
     }
-    
-    func displayPoiDetailsFromAnnotationView(_ view:MKAnnotationView) {
-        if let kpAnnot = view.annotation as? KPAnnotation {
-            var annot:OTCustomAnnotation? = nil
-            for (_,v) in kpAnnot.annotations.enumerated() {
-                if let _annot = v as? OTCustomAnnotation {
-                    annot = _annot
-                    break
-                }
-            }
-            guard let _poi = annot?.poi else {
-                return
-            }
-            
-            self.showPoiDetails(_poi)
-        }
-    }
 }
 
 //MARK: -UitableviewDelegate / Datasource-
@@ -587,55 +573,17 @@ extension OTMainGuideViewController: UITableViewDelegate, UITableViewDataSource 
 extension OTMainGuideViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationView:MKAnnotationView? = nil
-        let currentZoomScale = mapView.bounds.size.width / CGFloat(mapView.visibleMapRect.size.width)
         
-        if let _annot = annotation as? KPAnnotation {
-            if currentZoomScale < 0.244113 && _annot.isCluster() && _annot.annotations.count > 3 {
-                if let _annotView = mapView.dequeueReusableAnnotationView(withIdentifier: "cluster") as? MKPinAnnotationView {
-                    annotationView = _annotView
-                }
-                else {
-                    _annot.title = String.init(format: "%d", _annot.annotations.count)
-                    annotationView = MKPinAnnotationView(annotation: _annot, reuseIdentifier: "cluster")
-                    annotationView?.image = UIImage.init(named: "poi_cluster")
-                }
+        if let _annot = annotation as? OTCustomAnnotation {
+            if let _annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: _annot.annotationIdentifier()) {
+                annotationView = _annotationView
             }
             else {
-                if let _customAnnot = _annot.annotations.first as? OTCustomAnnotation {
-                    if let _annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: _customAnnot.annotationIdentifier()) {
-                        annotationView = _annotationView
-                    }
-                    else {
-                        annotationView = _customAnnot.annotationView()
-                    }
-                    annotationView?.annotation = annotation
-                }
+                annotationView = _annot.annotationView()
             }
+            annotationView?.annotation = annotation
         }
         return annotationView;
-    }
-    
-    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-        
-        for view in views {
-            let annot = view.annotation
-            
-            if let _annot = annot as? KPAnnotation {
-                if _annot.isCluster() && _annot.annotations.count > 3 {
-                    if view.subviews.count != 0 {
-                        let subView = view.subviews[0]
-                        subView.removeFromSuperview()
-                    }
-                    let viewRect = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
-                    let _count = UILabel(frame: viewRect)
-                    _count.text = "\(_annot.annotations.count)"
-                    _count.textColor = UIColor.white
-                    _count.textAlignment = .center
-                    view.addSubview(_count)
-                }
-            }
-        }
-        mapView.setNeedsDisplay()
     }
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
@@ -647,31 +595,15 @@ extension OTMainGuideViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
         mapView.deselectAnnotation(view.annotation, animated: false)
         
-        let currentZoomScale:MKZoomScale = mapView.bounds.size.width / CGFloat(mapView.visibleMapRect.size.width)
         if let _ = view.annotation as? MKUserLocation {
             return
         }
-        
-        if let _annot = view.annotation as? KPAnnotation {
-            Logger.print("***** ZOom ici *****")
-            if !_annot.isCluster() {
-                DispatchQueue.main.async {
-                    self.displayPoiDetailsFromAnnotationView(view)
-                }
-            }
-            else {
-                if currentZoomScale > 0.06 {
-                    DispatchQueue.main.async {
-                        self.displayPoiDetailsFromAnnotationView(view)
-                    }
-                }
-                else {
-                    Logger.print("***** go to zoom map annot \(view)")
-                    self.mapView.zoomToLocation(location: _annot.coordinate)
-                }
+       
+        if let _annot = view.annotation as? OTCustomAnnotation, let _poi = _annot.poi {
+            DispatchQueue.main.async {
+                self.showPoiDetails(_poi)
             }
         }
     }
