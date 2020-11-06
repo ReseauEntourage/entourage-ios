@@ -62,6 +62,9 @@
     copy->_googlePlaceId = [_googlePlaceId copyWithZone:zone];
     copy->_endsAt = [_endsAt copyWithZone:zone];
     copy->_postalCode = [_postalCode copyWithZone:zone];
+    copy->_imageEventUrl = [_imageEventUrl copyWithZone:zone];
+    copy->_eventUrl = [_eventUrl copyWithZone:zone];
+    copy->_isOnline = [_isOnline copyWithZone:zone];
     return copy;
 }
 
@@ -103,6 +106,10 @@
         }
         
         self.postalCode = [dictionary stringForKey:@"postal_code"];
+        
+        self.imageEventUrl = [dictionary stringForKey:@"image_url"];
+        self.eventUrl = [dictionary stringForKey:@"event_url"];
+        self.isOnline = [NSNumber numberWithBool:[dictionary boolForKey:@"online"]];
     }
     return self;
 }
@@ -137,4 +144,11 @@
     return [self.groupType isEqualToString:GROUP_TYPE_ACTION];
 }
 
+-(BOOL) isEventOnline {
+    return self.isOnline.boolValue;
+}
+
+- (BOOL)isTour {
+    return [self.type isEqualToString:TOUR_TYPE_NAME];
+}
 @end

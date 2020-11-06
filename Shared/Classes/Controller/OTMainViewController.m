@@ -1306,7 +1306,13 @@ OTHeatzonesCollectionViewDelegate
     self.selectedFeedItem = feedItem;
     if ([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
         [OTLogger logEvent:@"OpenEntouragePublicPage"];
-        [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
+        
+        if ([feedItem isTour]) {
+            [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
+        }
+        else {
+            [self performSegueWithIdentifier:@"pushDetailFeedNew" sender:self];
+        }
     }
     else {
         [OTLogger logEvent:@"OpenEntourageActivePage"];
@@ -1592,6 +1598,10 @@ OTHeatzonesCollectionViewDelegate
     }
     else if([segue.identifier isEqualToString:@"PublicFeedItemDetailsSegue"]) {
         OTPublicFeedItemViewController *controller = (OTPublicFeedItemViewController *)destinationViewController;
+        controller.feedItem = self.selectedFeedItem;
+    }
+    else if([segue.identifier isEqualToString:@"pushDetailFeedNew"]) {
+        OTDetailActionEventViewController *controller = (OTDetailActionEventViewController *) destinationViewController;
         controller.feedItem = self.selectedFeedItem;
     }
     else if([segue.identifier isEqualToString:@"ActiveFeedItemDetailsSegue"]) {

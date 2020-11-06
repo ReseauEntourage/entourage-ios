@@ -10,6 +10,7 @@
 #import "OTFeedItemFactory.h"
 #import "OTActiveFeedItemViewController.h"
 #import "OTPublicFeedItemViewController.h"
+#import "entourage-Swift.h"
 
 @interface OTFeedItemDetailsBehavior ()
 
@@ -21,8 +22,14 @@
 
 - (void)showDetails:(OTFeedItem *)feedItem {
     self.feedItem = feedItem;
-    if([[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isPublic])
-       [self.owner performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
+    if([[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] isPublic]) {
+        if (![feedItem isAction]) {
+            [self.owner performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
+        }
+        else {
+            [self.owner performSegueWithIdentifier:@"pushDetailFeedNew" sender:self];
+        }
+    }
     else
         [self.owner performSegueWithIdentifier:@"ActiveFeedItemDetailsSegue" sender:self];
 }
@@ -30,6 +37,10 @@
 - (BOOL)prepareSegueForDetails:(UIStoryboardSegue *)segue {
     if([segue.identifier isEqualToString:@"PublicFeedItemDetailsSegue"]) {
         OTPublicFeedItemViewController *controller = (OTPublicFeedItemViewController *)segue.destinationViewController;
+        controller.feedItem = self.feedItem;
+    }
+    else if ([segue.identifier isEqualToString:@"pushDetailFeedNew"]) {
+        OTDetailActionEventViewController *controller = (OTDetailActionEventViewController *) segue.destinationViewController;
         controller.feedItem = self.feedItem;
     }
     else if([segue.identifier isEqualToString:@"ActiveFeedItemDetailsSegue"]) {

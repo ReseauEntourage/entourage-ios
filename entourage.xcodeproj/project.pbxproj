@@ -19,16 +19,19 @@
 		2B1A8F79252768FD008419E6 /* OTGuideDetailPoiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1A8F78252768FD008419E6 /* OTGuideDetailPoiViewController.swift */; };
 		2B1A8F8325278D27008419E6 /* GuideDetailTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1A8F8225278D27008419E6 /* GuideDetailTableViewCells.swift */; };
 		2B29BD94250F6CCE00663506 /* OTMainGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */; };
+		2B354584255311B900562062 /* PublicFeedDetailNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B354583255311B900562062 /* PublicFeedDetailNew.storyboard */; };
 		2B46005824586BC00068120F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B46005724586BC00068120F /* Logger.swift */; };
 		2B48AAFA24AB3D0100639789 /* OTAssoTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48AAF924AB3D0100639789 /* OTAssoTopTableViewCell.swift */; };
 		2B48AAFC24AB3D0B00639789 /* OTAssoNeedsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48AAFB24AB3D0B00639789 /* OTAssoNeedsTableViewCell.swift */; };
 		2B48AAFE24AB3D1300639789 /* OTAssoContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48AAFD24AB3D1300639789 /* OTAssoContactTableViewCell.swift */; };
+		2B5E699D25516BF800EDFA5B /* OTDetailActionEventTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5E699C25516BF800EDFA5B /* OTDetailActionEventTopCell.swift */; };
 		2B62B02A247C229C00EE6D24 /* OTOnboardingAssoStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62B029247C229C00EE6D24 /* OTOnboardingAssoStartViewController.swift */; };
 		2B62B02C247C22B300EE6D24 /* OTOnboardingAssoInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62B02B247C22B300EE6D24 /* OTOnboardingAssoInfoViewController.swift */; };
 		2B62B02E247C22BD00EE6D24 /* OTOnboardingAssoFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62B02D247C22BD00EE6D24 /* OTOnboardingAssoFillViewController.swift */; };
 		2B62B030247C22CA00EE6D24 /* OTOnboardingAssoActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62B02F247C22CA00EE6D24 /* OTOnboardingAssoActivityViewController.swift */; };
 		2B67F4092434988B00C2FB91 /* OTEntouragePrivacyActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67F4082434988B00C2FB91 /* OTEntouragePrivacyActionCell.m */; };
 		2B6ECD12249236BB005AAF1D /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6ECD11249236BB005AAF1D /* OTOnboardingSDFNeighbourActivityViewController.swift */; };
+		2B77B15A25506642000DD474 /* OTDetailActionEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B77B15925506642000DD474 /* OTDetailActionEventViewController.swift */; };
 		2B7C488224B899FA0003C854 /* HomeToolTipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B7C488124B899FA0003C854 /* HomeToolTipsView.xib */; };
 		2B7C488424B89A210003C854 /* OTHomeTooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C488324B89A210003C854 /* OTHomeTooltipView.swift */; };
 		2B916BA12456E42700F048FA /* OTPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B916BA02456E42700F048FA /* OTPicturePreviewResizeViewController.swift */; };
@@ -548,10 +551,12 @@
 		2B1A8F78252768FD008419E6 /* OTGuideDetailPoiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGuideDetailPoiViewController.swift; sourceTree = "<group>"; };
 		2B1A8F8225278D27008419E6 /* GuideDetailTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideDetailTableViewCells.swift; sourceTree = "<group>"; };
 		2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMainGuideViewController.swift; sourceTree = "<group>"; };
+		2B354583255311B900562062 /* PublicFeedDetailNew.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PublicFeedDetailNew.storyboard; sourceTree = "<group>"; };
 		2B46005724586BC00068120F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		2B48AAF924AB3D0100639789 /* OTAssoTopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTAssoTopTableViewCell.swift; sourceTree = "<group>"; };
 		2B48AAFB24AB3D0B00639789 /* OTAssoNeedsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTAssoNeedsTableViewCell.swift; sourceTree = "<group>"; };
 		2B48AAFD24AB3D1300639789 /* OTAssoContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTAssoContactTableViewCell.swift; sourceTree = "<group>"; };
+		2B5E699C25516BF800EDFA5B /* OTDetailActionEventTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTDetailActionEventTopCell.swift; sourceTree = "<group>"; };
 		2B62B029247C229C00EE6D24 /* OTOnboardingAssoStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingAssoStartViewController.swift; sourceTree = "<group>"; };
 		2B62B02B247C22B300EE6D24 /* OTOnboardingAssoInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingAssoInfoViewController.swift; sourceTree = "<group>"; };
 		2B62B02D247C22BD00EE6D24 /* OTOnboardingAssoFillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingAssoFillViewController.swift; sourceTree = "<group>"; };
@@ -559,6 +564,7 @@
 		2B67F4072434988B00C2FB91 /* OTEntouragePrivacyActionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTEntouragePrivacyActionCell.h; sourceTree = "<group>"; };
 		2B67F4082434988B00C2FB91 /* OTEntouragePrivacyActionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTEntouragePrivacyActionCell.m; sourceTree = "<group>"; };
 		2B6ECD11249236BB005AAF1D /* OTOnboardingSDFNeighbourActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingSDFNeighbourActivityViewController.swift; sourceTree = "<group>"; };
+		2B77B15925506642000DD474 /* OTDetailActionEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTDetailActionEventViewController.swift; sourceTree = "<group>"; };
 		2B7C488124B899FA0003C854 /* HomeToolTipsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeToolTipsView.xib; sourceTree = "<group>"; };
 		2B7C488324B89A210003C854 /* OTHomeTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeTooltipView.swift; sourceTree = "<group>"; };
 		2B916BA02456E42700F048FA /* OTPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
@@ -2238,6 +2244,8 @@
 			children = (
 				A202E93A2085D2C50058F32C /* OTPublicFeedItemViewController.m */,
 				A202E93B2085D2C50058F32C /* OTPublicFeedItemViewController.h */,
+				2B77B15925506642000DD474 /* OTDetailActionEventViewController.swift */,
+				2B5E699C25516BF800EDFA5B /* OTDetailActionEventTopCell.swift */,
 			);
 			path = PublicFeedItem;
 			sourceTree = "<group>";
@@ -3019,6 +3027,7 @@
 				A21D65A12085FDAA00EF8E0E /* EncounterEditor.storyboard */,
 				A21D65A22085FDAA00EF8E0E /* Tutorial.storyboard */,
 				A21D65A32085FDAA00EF8E0E /* About.storyboard */,
+				2B354583255311B900562062 /* PublicFeedDetailNew.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -3338,6 +3347,7 @@
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
 				37339CD321FF01860048B6E1 /* OTPillLabelView.xib in Resources */,
 				A21D65A52085FDAA00EF8E0E /* Social.storyboard in Resources */,
+				2B354584255311B900562062 /* PublicFeedDetailNew.storyboard in Resources */,
 				A21D64AB2085E8B400EF8E0E /* Oradea.gpx in Resources */,
 				A202E7D12085CFC40058F32C /* category.rtf in Resources */,
 				A202E7EB2085CFC40058F32C /* SF-UI-Text-Light.otf in Resources */,
@@ -3621,6 +3631,7 @@
 				A202EBD12085D2C80058F32C /* OTUserEmailViewController.m in Sources */,
 				A202EBD92085D2C80058F32C /* OTStartupViewController.m in Sources */,
 				A202EB5F2085D2C80058F32C /* OTTutorial4ViewController.m in Sources */,
+				2B77B15A25506642000DD474 /* OTDetailActionEventViewController.swift in Sources */,
 				A202ED132085D2C80058F32C /* OTTourUI.m in Sources */,
 				96B658AD209A417900EB0398 /* OTItemTableViewCell.swift in Sources */,
 				A202ED0F2085D2C80058F32C /* OTTourStateInfo.m in Sources */,
@@ -3727,6 +3738,7 @@
 				A21E8F2320B6AFC300433606 /* OTUnderlinedButton.m in Sources */,
 				A202ECE52085D2C80058F32C /* OTUnreadMessagesService.m in Sources */,
 				A202ECA32085D2C80058F32C /* OTMembersDataSource.m in Sources */,
+				2B5E699D25516BF800EDFA5B /* OTDetailActionEventTopCell.swift in Sources */,
 				A202EAD12085D2C70058F32C /* OTEntourageInvitation.m in Sources */,
 				2B930F54246D554B0058E81B /* OTLoginV2ViewController.swift in Sources */,
 				2BB2E392244F2139003011C9 /* OTOnboardingPassCodeViewController.swift in Sources */,

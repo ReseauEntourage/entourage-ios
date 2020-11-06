@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="MH3-uF-0WG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="MH3-uF-0WG">
     <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -285,6 +285,7 @@ L2</string>
                         <segue destination="su2-g2-6je" kind="push" identifier="ActiveFeedItemDetailsSegue" id="SGD-mP-pLc"/>
                         <segue destination="DIz-eG-Bls" kind="push" identifier="ManageInvitationSegue" id="wQK-gk-y6m"/>
                         <segue destination="szE-AB-kQJ" kind="modal" identifier="UserProfileSegue" id="XI1-G4-tAJ"/>
+                        <segue destination="Y0E-Bb-FrQ" kind="push" identifier="PublicFeedDetailNew" id="KgB-wf-hdN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fUU-LI-bnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -364,7 +365,7 @@ L2</string>
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="539.13043478260875" y="-31.473214285714285"/>
+            <point key="canvasLocation" x="467" y="-174"/>
         </scene>
         <!--FeedItemFilters-->
         <scene sceneID="mT5-zt-Joc">
@@ -522,6 +523,16 @@ L2</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JQ-8K-39C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="371.73913043478262" y="297.99107142857139"/>
+        </scene>
+        <!--PublicFeedDetailNew-->
+        <scene sceneID="odL-7h-htU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PublicFeedDetailNew" id="Y0E-Bb-FrQ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="gLs-qE-IMp"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Oe-qh-wOB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-192" y="165"/>
         </scene>
         <!--PublicFeedItem-->
         <scene sceneID="6gJ-Ye-SJd">

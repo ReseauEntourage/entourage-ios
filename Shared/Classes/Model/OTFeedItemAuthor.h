@@ -13,8 +13,9 @@
 
 @property (strong, nonatomic) NSNumber *uID;
 @property (strong, nonatomic) NSString *avatarUrl;
-@property (strong, nonatomic) NSString *displayName;
+@property (strong, nonatomic) NSString *displayName,*partner_role_title;
 @property (strong, nonatomic) OTAssociation *partner;
+@property(nonatomic) BOOL hasToShowRoleAndPartner;
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 

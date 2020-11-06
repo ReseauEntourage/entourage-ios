@@ -139,6 +139,7 @@
 "join_item_failed" = "Impossible de rejoindre l’entourage.";
 "ongoing" = "En cours";
 "cancelled_join_request" = "Demande annulée";
+"join_pending_new" = "Demandé";
 
 "no_data_entourages" = "C'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant ! \n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur + en bas à droite";
 

@@ -231,12 +231,23 @@
 - (void)loadPublicFeedDetails:(OTFeedItem*)item {
     [OTLogger logEvent:@"EntouragePublicPageViewFromMessages"];
     
-    UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
-    OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
-    publicFeedItemController.feedItem = item;
-    publicFeedItemController.statusChangedBehavior.editEntourageBehavior = self.editEntourageBehavior;
+    if ([item isTour]) {
+        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
+        OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+        publicFeedItemController.feedItem = item;
+        publicFeedItemController.statusChangedBehavior.editEntourageBehavior = self.editEntourageBehavior;
+        
+        [self.navigationController pushViewController:publicFeedItemController animated:NO];
+    }
+    else {
+        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedDetailNew" bundle:nil];
+        OTDetailActionEventViewController *publicFeedItemController = (OTDetailActionEventViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+        publicFeedItemController.feedItem = item;
+       // publicFeedItemController.statusChangedBehavior.editEntourageBehavior = self.editEntourageBehavior;
+        
+        [self.navigationController pushViewController:publicFeedItemController animated:NO];
+    }
     
-    [self.navigationController pushViewController:publicFeedItemController animated:NO];
 }
 
 - (IBAction)infoAction {

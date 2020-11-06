@@ -252,11 +252,18 @@
     }
     
     if ([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
-        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
-        OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
-        publicFeedItemController.feedItem = feedItem;
-        
-        [mainViewController.navigationController pushViewController:publicFeedItemController animated:NO];
+        if ([feedItem isTour]) {
+            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
+            OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+            publicFeedItemController.feedItem = feedItem;
+            
+            [mainViewController.navigationController pushViewController:publicFeedItemController animated:NO];
+        }
+        else {
+            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedDetailNew" bundle:nil];
+            OTDetailActionEventViewController *publicFeedItemController = (OTDetailActionEventViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+            publicFeedItemController.feedItem = feedItem;
+        }
     }
     else {
         UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];
