@@ -24,7 +24,6 @@
 #import <UIKit/UIActivity.h>
 #import "OTActivityProvider.h"
 #import "OTFeedItemFiltersViewController.h"
-#import "OTSolidarityGuideFiltersViewController.h"
 #import "OTEntourageEditorViewController.h"
 #import "OTGeolocationRightsViewController.h"
 #import "OTPushNotificationsService.h"
@@ -38,13 +37,8 @@
 #define TUTORIAL_DELAY 2
 
 #define MAP_TAB_INDEX 0
-#if !PFP
-    #define SOLIDARITY_MAP_INDEX 1
-    #define MESSAGES_TAB_INDEX 3
-#else
-    #define SOLIDARITY_MAP_INDEX 0
-    #define MESSAGES_TAB_INDEX 1
-#endif
+#define SOLIDARITY_MAP_INDEX 1
+#define MESSAGES_TAB_INDEX 3
 
 @implementation OTAppState
 
@@ -157,15 +151,7 @@
     OTAppDelegate *appDelegate = (OTAppDelegate*)[UIApplication sharedApplication].delegate;
     appDelegate.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        UIStoryboard *introStoryboard = [UIStoryboard storyboardWithName:@"PfpIntro" bundle:nil];
-        PfpStartupViewController *startupVC = [introStoryboard instantiateViewControllerWithIdentifier:@"PfpStartupViewController"];
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:startupVC];
-        appDelegate.window.rootViewController = navController;
-        [appDelegate.window makeKeyAndVisible];
-    } else {
-        [UIStoryboard showInitialViewControllerFromStoryboardNamed:@"Intro" addingNavigation:NO];
-    }
+    [UIStoryboard showInitialViewControllerFromStoryboardNamed:@"Intro" addingNavigation:NO];
 }
 
 + (void)switchMapToSolidarityGuide {
@@ -240,9 +226,7 @@
 }
 
 + (UIViewController *)firstAuthenticationScreenCreatingUser:(BOOL)createUser {
-    BOOL pfp = [OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge;
-
-    if (createUser || pfp) {
+    if (createUser ) {
         OTWelcomeViewController *welcomeViewController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTWelcomeViewController"];
         welcomeViewController.signupNewUser = createUser;
         return welcomeViewController;
@@ -328,7 +312,6 @@
     if (![currentUser hasActionZoneDefined]) {
         // Navigate to add rights screens (action zone, notifications)
         // Force the users to define action zone
-        // The Entourage app has Ignore button, while the pfp does not have it
         [OTAppState navigateToLocationRightsScreen:currentViewController];
         return;
     }
@@ -371,16 +354,6 @@
 + (void)continueEditingEntourage:(OTEntourage*)entourage fromController:(UIViewController*)controller {
     if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeEntourage) {
         [controller performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
-    } else {
-        if ([entourage isOuting]) {
-            [controller performSegueWithIdentifier:@"EntourageEditorSegue" sender:self];
-        } else {
-            OTMailSenderBehavior *emailSender = [[OTMailSenderBehavior alloc] init];
-            emailSender.owner = controller;
-            NSString *subject = [NSString stringWithFormat:OTLocalizedString(@"pfp_edit_voisinage_mail_subject"), entourage.title];
-            NSString *body = [NSString stringWithFormat:OTLocalizedString(@"pfp_edit_voisinage_mail_content"), entourage.desc];
-            [emailSender sendMailWithSubject:subject andRecipient:CONTACT_PFP_TO body:body];
-        }
     }
 }
 
@@ -400,18 +373,6 @@
         vc.feedItem = item;
         [controller presentViewController:vc animated:YES completion:nil];
 
-    } else if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        
-        NSString *message = OTLocalizedString(@"pfp_share_message");
-        NSURL *url = [NSURL URLWithString:item.shareUrl];
-        OTActivityProvider *activity = [[OTActivityProvider alloc] initWithPlaceholderItem:@{@"body":message, @"url": url}];
-        activity.emailBody = message;
-        activity.emailSubject = @"";
-        activity.url = url;
-        NSArray *objectsToShare = @[activity];
-        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
-        activityVC.excludedActivityTypes = @[UIActivityTypeCopyToPasteboard];
-        [controller presentViewController:activityVC animated:YES completion:nil];
     }
 }
 
@@ -428,17 +389,10 @@
 //    [controller presentViewController:navController animated:YES completion:nil];
 }
 
-+ (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)delegate {
++ (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTGuideFilterDelegate>)delegate {
     
-    [controller performSegueWithIdentifier:@"SolidarityGuideSegue" sender:nil];
+    [controller performSegueWithIdentifier:@"SolidarityGuideFiltersSegue" sender:nil];
     
-//    UIStoryboard *filtersStoryboard = [UIStoryboard storyboardWithName:@"SolidarityGuideSegue" bundle:nil];
-//    OTSolidarityGuideFiltersViewController *viewController = [filtersStoryboard instantiateViewControllerWithIdentifier:@"OTSolidarityGuideFiltersViewController"];
-//    viewController.filterDelegate = delegate;
-//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-//    navController.modalPresentationStyle = UIModalPresentationFullScreen;
-//
-//    [controller presentViewController:navController animated:YES completion:nil];
 }
 
 + (void)createEntourageFromController:(UIViewController*)viewController
@@ -463,13 +417,6 @@
                                withDelegate:(id<EntourageEditorDelegate>)delegate
                              isEditingEvent:(BOOL)isEditingEvent {
     
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-
-        [OTAppState createEntourageFromController:controller
-                                     withDelegate:delegate
-                                          asEvent:isEditingEvent];
-        return;
-    }
     if (showOptions) {
         [controller performSegueWithIdentifier:@"OTMapOptionsSegue" sender:controller];
     }
@@ -487,13 +434,8 @@
 + (void)showFilteringOptionsFromController:(UIViewController*)controller
                         withFullMapVisible:(BOOL)isFullMapVisible {
     
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        [OTAppState launchFeedsFilteringFromController:controller withDelegate:(id<OTFeedItemsFilterDelegate>)controller];
-        return;
-    }
-    
     if (isFullMapVisible) {
-        [OTAppState launchMapPOIsFilteringFromController:controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)controller];
+        [OTAppState launchMapPOIsFilteringFromController:controller withDelegate:(id<OTGuideFilterDelegate>)controller];
     }
     else {
         [OTAppState launchFeedsFilteringFromController:controller withDelegate:(id<OTFeedItemsFilterDelegate>)controller];
@@ -504,33 +446,7 @@
                             fromController:(UIViewController*)controller
                                     sender:(id)sender {
     
-    
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Supprimer la sortie ?"
-                                                                       message:@""
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [SVProgressHUD show];
-            [[[OTFeedItemFactory createFor:feedItem] getStateTransition]
-             closeWithOutcome:YES
-             success:^(BOOL isTour) {
-                 [SVProgressHUD dismiss];
-                 [controller dismissViewControllerAnimated:YES completion:nil];
-                 
-             } orFailure:^(NSError *error) {
-                 [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"generic_error")];
-             }];
-        }]];
-        UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"Non"                                                                    style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [controller dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [alert addAction:noAction];
-        [controller presentViewController:alert animated:YES completion:nil];
-        
-    } else {
-        [controller performSegueWithIdentifier:@"ConfirmCloseSegue" sender:sender];
-    }
+    [controller performSegueWithIdentifier:@"ConfirmCloseSegue" sender:sender];
 }
 
 + (UIViewController *)getTopViewController {

@@ -39,6 +39,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIColor *secondaryColor = [UIColor appOrangeColor];
+    UIColor *primaryColor =[UIColor whiteColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController withMainColor:primaryColor andSecondaryColor:secondaryColor];
+
+    
     self.title = OTLocalizedString(@"action_title_pres_de").uppercaseString;
 
         
@@ -46,7 +52,7 @@
                                                         withTarget:self
                                                          andAction:@selector(saveNewLocation)
                                                            andFont:@"SFUIText-Bold"
-                                                           colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
+                                                           colored:secondaryColor];
     [self.navigationItem setRightBarButtonItem:menuButton];
 
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LocationSelection" bundle:nil];
@@ -80,8 +86,26 @@
     [self zoomToCurrentLocation:nil];
     UIBarButtonItem *cancelBtn = [UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]];
     [cancelBtn setTitle:OTLocalizedString(@"cancel")];
-    [cancelBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: [ApplicationTheme shared].secondaryNavigationBarTintColor, NSForegroundColorAttributeName, [UIFont fontWithName:@"SFUItext-Bold" size:17], NSFontAttributeName, nil] forState:UIControlStateNormal];
+    [cancelBtn setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys: secondaryColor, NSForegroundColorAttributeName, [UIFont fontWithName:@"SFUItext-Bold" size:17], NSFontAttributeName, nil] forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(zoomToCurrentLocation:) name:@kNotificationShowCurrentLocation object:nil];
+    
+    
+    [self addBackButtonItem:secondaryColor];
+}
+
+-(void)addBackButtonItem:(UIColor*) secondaryColor {
+    UIImage *menuImage = [[UIImage imageNamed:@"backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIBarButtonItem *menuButtonCancel = [[UIBarButtonItem alloc] init];
+    menuButtonCancel.image = menuImage;
+    menuButtonCancel.tintColor = secondaryColor;
+    [menuButtonCancel setTarget:self];
+    [menuButtonCancel setAction:@selector(dismissModal)];
+    
+    [self.navigationItem setLeftBarButtonItem:menuButtonCancel];
+}
+
+-(void)dismissModal {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dealloc {

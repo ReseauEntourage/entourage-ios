@@ -23,6 +23,7 @@ NSString *const kKeyUserAssociationRoleTitle = @"user_role_title";
 NSString *const kKeyPostalCode = @"postal_code";
 NSString *const kVolunteers_needs = @"volunteers_needs";
 NSString *const kDonations_needs = @"donations_needs";
+NSString *const kFollowing = @"following";
 
 @implementation OTAssociation
 
@@ -54,6 +55,7 @@ NSString *const kDonations_needs = @"donations_needs";
             self.donations_needs = [dictionary stringForKey:kDonations_needs];
             self.volunteers_needs = [dictionary stringForKey:kVolunteers_needs];
             
+            self.isFollowing = [dictionary boolForKey:kFollowing];
             if ([self.donations_needs isEqualToString:@"<null>"]) {
                 self.donations_needs = nil;
             }
@@ -80,6 +82,7 @@ NSString *const kDonations_needs = @"donations_needs";
     [encoder encodeObject:self.postal_code forKey:kKeyPostalCode];
     [encoder encodeObject:self.donations_needs forKey:kDonations_needs];
     [encoder encodeObject:self.volunteers_needs forKey:kVolunteers_needs];
+    [encoder encodeBool:self.isFollowing forKey:kFollowing];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -99,6 +102,7 @@ NSString *const kDonations_needs = @"donations_needs";
         self.postal_code = [decoder decodeObjectForKey:kKeyPostalCode];
         self.donations_needs = [decoder decodeObjectForKey:kDonations_needs];
         self.volunteers_needs = [decoder decodeObjectForKey:kVolunteers_needs];
+        self.isFollowing = [decoder decodeBoolForKey:kFollowing];
     }
     return self;
 }

@@ -12,6 +12,7 @@
 #import "NSUserDefaults+OT.h"
 #import "OTUser.h"
 #import "OTAPIConsts.h"
+#import "UIColor+entourage.h"
 
 @interface OTEntourageDisclaimerViewController ()
 
@@ -33,7 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.rejectDisclaimerButton = [self setupCloseModal];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController withMainColor:[UIColor whiteColor] andSecondaryColor:[UIColor redColor]];
+    self.rejectDisclaimerButton = [self setupCloseModalWithoutTintWithTint:[UIColor appOrangeColor]];
     [self.rejectDisclaimerButton setAction:@selector(doRejectDisclaimer)];
     
     [self setupContent];

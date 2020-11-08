@@ -18,9 +18,12 @@
 @property (strong, nonatomic) NSString *message;
 @property (strong, nonatomic) NSString *avatarUrl;
 @property (strong, nonatomic) NSString *groupRole;
+@property (strong, nonatomic) NSString *partner_role_title;
 @property (strong, nonatomic) NSArray<NSString *> *communityRoles;
 @property (strong, nonatomic) OTFeedItem *feedItem;
 @property (strong, nonatomic) OTAssociation *partner;
+
+@property(nonatomic) BOOL hasToShowRoleAndPartner;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)arrayForWebservice:(NSArray *)joiners;

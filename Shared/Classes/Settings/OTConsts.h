@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 OCTO Technology. All rights reserved.
 //
 
-#import "PFPConsts.h"
-
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -109,9 +107,6 @@
 
 // Chart Ethique
 #define CHARTE_LINK_ID @"ethics-charter"
-#define CHARTE_LINK_FORMAT_PUBLIC @"https://entourage-asso.typeform.com/to/whN9kq?user_id=%@"
-#define CHARTE_LINK_FORMAT_PRO @"https://entourage-asso.typeform.com/to/LI7viw?user_id=%@"
-#define CHARTE_LINK_FORMAT_PFP @"https://entourage-asso.typeform.com/to/uBxsHI?user_id="
 
 #define TUTORIAL_BLOG_LINK @"https://blog.entourage.social/franchir-le-pas"
 #define MENU_BLOG_APPLICATION_USAGE_URL @"http://blog.entourage.social/comment-utiliser-l-application-entourage/"
@@ -139,10 +134,14 @@
 
 // Email addresses
 #define SIGNAL_ENTOURAGE_TO @"contact@entourage.social"
-#define CONTACT_PFP_TO @"voisinage-test@petitsfreresdespauvres.org"
 
 #define ENTOURAGE_WEB_URL @"https://www.entourage.social"
 
 #define GOOD_WAVES_LINK_ID @"good_waves"
 #define GDS_INFO_ALERT_WEB_LINK @"https://soliguide.fr"
 #define ENTOURAGE_BITLY_LINK @"https://bit.ly/applientourage"
+
+#define SLUG_HUB_LINK_1 @"hub_1"
+#define SLUG_HUB_LINK_2 @"hub_2"
+#define SLUG_HUB_LINK_3 @"hub_3"
+#define SLUG_HUB_LINK_FAQ @"hub_faq"

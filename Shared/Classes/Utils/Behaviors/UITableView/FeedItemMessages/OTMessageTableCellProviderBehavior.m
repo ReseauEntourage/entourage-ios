@@ -59,6 +59,11 @@
             return @"EventCreatedCell";
         case MessageCellTypeItemClosed:
             return @"FeedClosedCell";
+            
+        case MessageCellTypePOISent:
+            return @"MessageSentPOICell";
+        case MessageCellTypePOIReceived:
+            return @"MessageReceivedPOICell";
         default:
             return @"PlaceholderCell";
     }

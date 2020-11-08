@@ -26,7 +26,13 @@ extern NSString *const kPOITransparentImagePrefix;
 @property(nonatomic, strong) NSString *email;
 @property(nonatomic, strong) NSString *audience;
 @property(nonatomic, strong) NSNumber *categoryId,*partnerId;
+@property(nonatomic,strong) NSMutableArray *categories_id;
 
+@property(nonatomic) BOOL isSoliguide;
+@property(nonatomic, strong) NSString *openTimeTxt;
+@property(nonatomic, strong) NSString *languageTxt;
+@property(nonatomic, strong) NSString *uuid;
+@property(nonatomic, strong) NSString *soliguideUrl;
 /********************************************************************************/
 #pragma mark - Birth & Death
 

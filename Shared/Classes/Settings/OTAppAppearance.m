@@ -35,98 +35,50 @@
 
 + (UIImage*)applicationLogo
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return [UIImage imageNamed:@"pfp-logo"];
-    }
-    
     return [UIImage imageNamed:@"entourageLogo"];
 }
 
 + (NSString*)aboutUrlString
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS_NO_TOKEN, PFP_API_URL_TERMS_REDIRECT];
-        NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
-        return urlString;
-    }
     return ABOUT_CGU_URL;
 }
 
 + (NSString*)policyUrlString
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        NSString *relativeUrl = [NSString stringWithFormat:API_URL_MENU_OPTIONS_NO_TOKEN, PFP_API_URL_PRIVACY_POLICY_REDIRECT];
-        NSString *urlString = [NSString stringWithFormat: @"%@%@", [OTHTTPRequestManager sharedInstance].baseURL, relativeUrl];
-        return urlString;
-    }
-    
     return ABOUT_POLICY_URL;
 }
 
 + (NSString *)welcomeTopDescription
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_welcomeTopText");
-    }
-    
     return OTLocalizedString(@"welcomeTopText");
 }
 
 + (UIImage*)welcomeLogo
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return nil;
-    }
-    
     return [UIImage imageNamed:@"logoWhiteEntourage"];
 }
 
 + (UIImage*)welcomeImage
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return nil;
-    }
-    
     return [UIImage imageNamed:@"welcome"];
 }
 
 + (NSString *)userProfileNameDescription
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_userNameDescriptionText");
-    }
-    
     return OTLocalizedString(@"userNameDescriptionText");
 }
 
 + (NSString *)userProfileEmailDescription
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_userEmailDescriptionText");
-    }
-    
     return OTLocalizedString(@"userEmailDescriptionText");
 }
 
 + (NSString *)notificationsRightsDescription
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_userNotificationsDescriptionText");
-    }
-    
     return OTLocalizedString(@"userNotificationsDescriptionText");
 }
 
 + (NSString *)defineActionZoneTitleForUser:(OTUser*)user {
-    
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        
-        if (user && [user hasActionZoneDefined]) {
-            return OTLocalizedString(@"pfp_modifyActionZoneTitle");
-        }
-            
-        return OTLocalizedString(@"pfp_defineActionZoneTitle");
-    }
     
     if (user && [user hasActionZoneDefined]) {
         return OTLocalizedString(@"modifyActionZoneTitle");
@@ -137,18 +89,10 @@
 
 + (NSString *)geolocalisationRightsDescription
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_geolocalisationDescriptionText");
-    }
-    
     return OTLocalizedString(@"geolocalisationDescriptionText");
 }
 
 + (NSString *)defineActionZoneSampleAddress {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_defineActionZoneSampleAddress");
-    }
-    
     return OTLocalizedString(@"defineActionZoneSampleAddress");
 }
 
@@ -161,16 +105,6 @@
     NSDictionary *lightAtttributtes = @{NSFontAttributeName : lightSmallFont,
                                               NSForegroundColorAttributeName:[UIColor whiteColor]};
     
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        NSString *subtitle1 = OTLocalizedString(@"pfp_defineZoneSubtitle1");
-        NSString *subtitle2 = OTLocalizedString(@"pfp_defineZoneSubtitle2");
-        
-        NSMutableAttributedString *descAttString = [[NSMutableAttributedString alloc] initWithString:subtitle1 attributes:regAtttributtes];
-        [descAttString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:subtitle2 attributes:lightAtttributtes]];
-        
-        return descAttString;
-    }
-    
     NSString *subtitle1 = OTLocalizedString(@"defineZoneSubtitle1");
     NSString *subtitle2 = OTLocalizedString(@"defineZoneSubtitle2");
     NSMutableAttributedString *descAttString = [[NSMutableAttributedString alloc] initWithString:subtitle1 attributes:regAtttributtes];
@@ -181,111 +115,54 @@
 
 + (NSString *)notificationsNeedDescription
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_notificationNeedDescription");
-    }
-    
     return OTLocalizedString(@"notificationNeedDescription");
 }
 
 + (NSString *)noMoreFeedsDescription
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_no_more_feeds");
-    }
-    
     return OTLocalizedString(@"no_more_feeds");
 }
 
 + (NSString *)noMapFeedsDescription
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_no_more_map_feeds");
-    }
-    
     return OTLocalizedString(@"no_more_map_feeds");
 }
 
 + (NSString *)extendSearchParameterDescription
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_no_feeds_increase_radius");
-    }
-    
     return OTLocalizedString(@"no_feeds_increase_radius");
 }
 
 + (NSString *)extendMapSearchParameterDescription
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_no_map_feeds_increase_radius");
-    }
-    
     return OTLocalizedString(@"no_map_feeds_increase_radius");
 }
 
 + (NSString*)userPhoneNumberNotFoundMessage {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_lost_code_phone_does_not_exist");
-    }
-    
     return OTLocalizedString(@"lost_code_phone_does_not_exist");
 }
 
 + (NSString*)userActionsTitle {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_entourages");
-    }
-    
     return OTLocalizedString(@"entourages");
 }
 
 + (NSString*)editUserDescriptionTitle {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_edit_user_description");
-    }
-    
     return OTLocalizedString(@"edit_user_description");
 }
 
 + (NSString*)numberOfUserActionsTitle {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_numberOfUserActions");
-    }
-    
     return OTLocalizedString(@"numberOfUserActions");
 }
 
 + (NSString*)userPrivateCirclesSectionTitle:(OTUser*)user {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([user isCoordinator]) {
-            return OTLocalizedString(@"pfp_visitorPrivateCirclesSectionTitle");
-        } else {
-            return OTLocalizedString(@"pfp_visitedPrivateCirclesSectionTitle");
-        }
-    }
-    
     return nil;
 }
 
 + (NSString*)userNeighborhoodsSectionTitle:(OTUser*)user {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_neighborhoodsSectionTitle");
-    }
-    
     return OTLocalizedString(@"neighborhoodsSectionTitle");
 }
 
 + (NSString*)numberOfUserActionsValueTitle:(OTUser *)user {
-    /*
-     https://jira.mytkw.com/browse/EMA-1949
-     During the pilot phase with PFP (first 3 months) we will not try to import the number of Sorties (outings) all the users have been to since they started being members of PFP (that data is more or less available on the current website but we won't import it now). So everyone's score in "Nombre de sorties" will be 0.
-    Then when we add the feature to create and join "Sorties" in the Feed this will start to be incremented. So for now in the 5.1 version you can just hard-code 0, to be replaced by the API endpoint later.
-     */
-    
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return @"0";
-    }
     
     if ([user isPro]) {
         return [NSString stringWithFormat:@"%d", user.tourCount.intValue];
@@ -296,34 +173,18 @@
 }
 
 + (NSString *)reportActionSubject {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_mail_signal_subject");
-    }
-    
     return OTLocalizedString(@"mail_signal_subject");
 }
 
 + (NSString *)eventTitle {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_event");
-    }
-    
     return OTLocalizedString(@"event");
 }
 
 + (NSString *)eventsFilterTitle {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_filter_events_title");
-    }
-    
     return OTLocalizedString(@"filter_events_title");
 }
 
 + (NSString *)applicationTitle {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return @"Voisin-Age";
-    }
-    
     return @"Entourage";
 }
 
@@ -335,11 +196,6 @@
 }
 
 + (NSString *)promoteEventActionEmailBody:(NSString*)eventName {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        NSString *body = [NSString stringWithFormat:OTLocalizedString(@"pfp_promote_event_mail_body_format"), eventName];
-        return body;
-    }
-    
     NSString *body = [NSString stringWithFormat:OTLocalizedString(@"promote_event_mail_body_format"), eventName];
     return body;
 }
@@ -347,23 +203,12 @@
 
 
 + (NSString *)reportActionToRecepient {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return CONTACT_PFP_TO;
-    }
-    
     return SIGNAL_ENTOURAGE_TO;
 }
 
 + (UIColor*)tagColor:(OTUser*)user {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if (user.roleTag) {
-            return ([user.roles containsObject:kCoordinatorUserTag]) ?
-            [UIColor pfpGreenColor] : [UIColor pfpPurpleColor];
-        }
-    } else {
-        if (user.roleTag) {
-            return [UIColor appOrangeColor];
-        }
+    if (user.roleTag) {
+        return [UIColor appOrangeColor];
     }
     
     return [UIColor clearColor];
@@ -406,10 +251,6 @@
 + (NSAttributedString*)formattedAuthorDescriptionForMessageItem:(OTEntourage*)item {
     
     UIColor *textColor = [UIColor colorWithHexString:@"4a4a4a"];
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        textColor = [OTAppAppearance iconColorForFeedItem:item];
-    }
-
     NSString *organizerText = @"\nOrganisé";
     NSString *fontName = @"SFUIText-Medium";
     CGFloat fontSize = DEFAULT_DESCRIPTION_SIZE;
@@ -434,10 +275,6 @@
     
     NSString *eventName = OTLocalizedString(@"event").capitalizedString;
     
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        eventName = OTLocalizedString(@"pfp_event").capitalizedString;
-    }
-    
     if (isShowDate && item.startsAt) {
         NSString *_message = @"";
         if ([[NSCalendar currentCalendar] isDate:item.startsAt inSameDayAsDate:item.endsAt]) {
@@ -461,11 +298,6 @@
     UIColor *typeColor = textColor;
     NSString *eventName = OTLocalizedString(@"event").capitalizedString;
     
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        typeColor = [UIColor pfpOutingCircleColor];
-        eventName = OTLocalizedString(@"pfp_event").capitalizedString;
-    }
-    
     NSDictionary *atttributtes = @{NSFontAttributeName : [UIFont fontWithName:FONT_NORMAL_DESCRIPTION size:size],
                                    NSForegroundColorAttributeName:typeColor};
     NSMutableAttributedString *eventAttrDescString = [[NSMutableAttributedString alloc] initWithString:eventName attributes:atttributtes];
@@ -484,18 +316,6 @@
 + (NSString*)iconNameForEntourageItem:(OTEntourage*)item isAnnotation:(BOOL) isAnnotation {
     NSString *icon = [NSString stringWithFormat:@"%@_%@", item.entourage_type, item.category];
     
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([item isPrivateCircle]) {
-            icon = @"private-circle";
-        } else if ([item isNeighborhood]) {
-            icon = @"neighborhood";
-        } else if ([item isOuting]) {
-            icon = @"outing";
-        }
-        
-        return icon;
-    }
-    
     if ([item isOuting]) {
         if (isAnnotation) {
             icon = @"ask_for_help_event_poi";
@@ -509,26 +329,11 @@
 }
 
 + (UIColor*)announcementFeedContainerColor {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return [UIColor pfpNeighborhoodColor];
-    }
-    
     return [UIColor whiteColor];
 }
 
 + (UIColor*)iconColorForFeedItem:(OTFeedItem *)feedItem {
     UIColor *color = [ApplicationTheme shared].backgroundThemeColor;
-    
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([feedItem isNeighborhood]) {
-            color = [UIColor pfpNeighborhoodColor];
-        } else if ([feedItem isPrivateCircle]) {
-            color = [UIColor pfpPrivateCircleColor];
-        } else if ([feedItem isOuting]) {
-            color = [UIColor pfpOutingCircleColor];
-        }
-        return color;
-    }
     
     BOOL isActive = [[[OTFeedItemFactory createFor:feedItem] getStateInfo] isActive];
     color = [UIColor appOrangeColor];
@@ -701,13 +506,6 @@
 }
 
 + (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([feedItem isOuting]) {
-            return OTLocalizedString(@"pfp_join_event_title");
-        }
-        return OTLocalizedString(@"pfp_join_group_title");
-    }
-    
     if ([feedItem isKindOfClass:[OTEntourage class]]) {
         if ([feedItem isOuting]) {
             return OTLocalizedString(@"join_event_lbl");
@@ -720,15 +518,11 @@
 }
 
 + (NSString *)joinEntourageButtonTitleForFeedItem:(OTFeedItem*)feedItem {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([feedItem isOuting]) {
-            return OTLocalizedString(@"pfp_join_event_button");
-        }
-        return OTLocalizedString(@"pfp_join_group_button");
-    }
-    
     if ([feedItem isKindOfClass:[OTEntourage class]]) {
-        return OTLocalizedString(@"join_entourage_btn");
+        if ([feedItem isOuting]) {
+            return OTLocalizedString(@"join_entourage_btn");
+        }
+        return OTLocalizedString(@"join_entourage2_btn");
     }
     else {
         return OTLocalizedString(@"join_tour_btn");
@@ -736,41 +530,22 @@
 }
 
 + (UIColor*)colorForNoDataPlacholderImage {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return [[UIColor pfpBlueColor] colorWithAlphaComponent:0.1];
-    }
-    
     return [UIColor colorWithHexString:@"efeff4"];
 }
 
 + (UIColor*)colorForNoDataPlacholderText {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return [UIColor colorWithHexString:@"025e7f"];
-    }
-    
     return [UIColor colorWithHexString:@"4a4a4a"];
 }
 
 + (NSString*)sampleTitleForNewEvent {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_event_title_example");
-    }
-    
     return OTLocalizedString(@"event_title_example");
 }
 
 + (NSString*)sampleDescriptionForNewEvent {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_event_desc_example");
-    }
-    
     return OTLocalizedString(@"event_desc_example");
 }
 
 + (UIImage*)JoinFeedItemConfirmationLogo {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return nil;
-    }
     return [UIImage imageNamed:@"logoWhiteEntourage"];
 }
 
@@ -791,21 +566,13 @@
     
     NSRange eventRange = NSMakeRange(authorAndAction.length + 1, event.length);
     NSRange titleRange = NSMakeRange(authorAndAction.length + event.length + 3, messageItem.title.length);
-    [attributedString addAttributes:@{NSFontAttributeName: semiboldFont,                                                                               NSForegroundColorAttributeName: [UIColor pfpOutingCircleColor]} range:eventRange];
+    [attributedString addAttributes:@{NSFontAttributeName: semiboldFont,                                                                               NSForegroundColorAttributeName: [UIColor appOutingCircleColor]} range:eventRange];
     [attributedString addAttributes:@{NSFontAttributeName: boldFont,                                                                               NSForegroundColorAttributeName: regularColor} range:titleRange];
     
     return attributedString;
 }
 
 + (NSString*)requestToJoinTitleForFeedItem:(OTFeedItem*)feedItem {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([feedItem isOuting]) {
-            return OTLocalizedString(@"pfp_want_to_join_event");
-        } else {
-            return OTLocalizedString(@"pfp_want_to_join_entourage");
-        }
-    }
-    
     if ([feedItem isKindOfClass:[OTTour class]]) {
         return OTLocalizedString(@"want_to_join_tour");
     }
@@ -814,34 +581,14 @@
 }
 
 + (NSString*)quitFeedItemConformationTitle:(OTFeedItem *)feedItem {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([feedItem isOuting]) {
-            return OTLocalizedString(@"pfp_quitted_event");
-        } else {
-            return OTLocalizedString(@"pfp_quitted_item");
-        }
-    }
-    
     return OTLocalizedString(@"quitted_item");
 }
 
 + (NSString*)closeFeedItemConformationTitle:(OTFeedItem *)feedItem {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([feedItem isOuting]) {
-            return OTLocalizedString(@"pfp_closed_event");
-        } else {
-            return OTLocalizedString(@"pfp_quitted_item");
-        }
-    }
-    
     return OTLocalizedString(@"closed_item");
 }
 
 + (NSString*)joinFeedItemConformationDescription:(OTFeedItem *)feedItem {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_join_entourage_greeting_lbl");
-    }
-    
     if ([feedItem isOuting]) {
         return OTLocalizedString(@"join_event_greeting_lbl");
     }
@@ -856,10 +603,6 @@
 
 
 + (NSString*)addActionTitleHintMessage:(BOOL)isEvent {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_add_title_hint");
-    }
-    
     if (isEvent) {
         return OTLocalizedString(@"add_event_title_hint");
     }
@@ -867,10 +610,6 @@
 }
 
 + (NSString*)addActionDescriptionHintMessage:(BOOL)isEvent {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_add_description_hint");
-    }
-    
     if (isEvent) {
         return OTLocalizedString(@"add_event_description_hint");
     }
@@ -883,22 +622,10 @@
 }
 
 + (NSString*)includePastEventsFilterTitleKey {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return @"pfp_filter_events_include_past_events_title";
-    }
-    
     return @"filter_events_include_past_events_title";
 }
 
 + (NSString*)inviteSubtitleText:(OTFeedItem*)feedItem {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([feedItem isOuting]) {
-            return OTLocalizedString(@"pfp_invite_event_subtitle");
-        }
-        
-        return OTLocalizedString(@"pfp_invite_action_subtitle");
-    }
-    
     if ([feedItem isOuting]) {
         return OTLocalizedString(@"invite_event_subtitle");
     }
@@ -907,26 +634,14 @@
 }
 
 + (NSString*)lostCodeSimpleDescription {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_lostCodeMessage1");
-    }
-    
     return OTLocalizedString(@"lostCodeMessage1");
 }
 
 + (NSString*)lostCodeFullDescription {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_lostCodeMessage2");
-    }
-    
     return OTLocalizedString(@"lostCodeMessage2");
 }
 
 + (NSString*)noMessagesDescription {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return OTLocalizedString(@"pfp_no_messages_description");
-    }
-    
     return OTLocalizedString(@"no_messages_description");
 }
 
@@ -941,18 +656,11 @@
 
 + (NSString*)entourageConfidentialityDescription:(OTEntourage*)entourage
                                         isPublic:(BOOL)isPublic {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if (isPublic) {
-            return OTLocalizedString(@"pfp_event_confidentiality_description_public");
-        }
-        return OTLocalizedString(@"pfp_event_confidentiality_description_private");
-    } else {
-        if (isPublic) {
-            return OTLocalizedString(@"event_confidentiality_description_public");
-        }
+    if (isPublic) {
+        return OTLocalizedString(@"event_confidentiality_description_public");
         
-        return OTLocalizedString(@"event_confidentiality_description_private");
     }
+    return OTLocalizedString(@"event_confidentiality_description_private");
 }
 
 @end

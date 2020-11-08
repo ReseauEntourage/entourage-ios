@@ -20,7 +20,6 @@
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsService.h"
 #import "OTLocationManager.h"
-#import <Mixpanel/Mixpanel.h>
 #import "OTAppState.h"
 #import "OTAppConfiguration.h"
 #import "NSUserDefaults+OT.h"
@@ -79,8 +78,6 @@
             if (status == UNAuthorizationStatusProvisional)
                 notificationEnabled = @"Provisional";
         }
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel.people set:@{@"EntourageNotifEnable": notificationEnabled}];
         [FIRAnalytics setUserPropertyString:notificationEnabled forName:@"EntourageNotifEnable"];
     }];
     

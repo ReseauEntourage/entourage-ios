@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSDate *startsAt;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *itemUuid;
+@property (nonatomic, strong) NSString *itemType;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -13,7 +13,6 @@
 #import "NSNotification+entourage.h"
 #import "UINavigationController+entourage.h"
 #import "UIBarButtonItem+factory.h"
-#import <Mixpanel/Mixpanel.h>
 #import "OTAppConfiguration.h"
 #import "UITextField+AutoSuggestion.h"
 #import "OTGMSAutoCompleteViewController.h"
@@ -82,8 +81,6 @@
     GMSPlacesAutocompleteTypeFilter filterType;
     if ([OTAppConfiguration isApplicationTypeEntourage]) {
         filterType = kGMSPlacesAutocompleteTypeFilterGeocode;
-    } else if ([OTAppConfiguration isApplicationTypeVoisinAge]) {
-        filterType = kGMSPlacesAutocompleteTypeFilterAddress;
     } else {
         filterType = kGMSPlacesAutocompleteTypeFilterNoFilter;
     }
@@ -113,9 +110,7 @@
 #pragma mark - App authorization notifications
 
 - (void)locationAuthorizationChanged:(NSNotification *)notification {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
     BOOL locationAllowed = [notification readAllowedLocation];
-    [mixpanel.people set:@{@"EntourageGeolocEnable": locationAllowed ? @"YES" : @"NO"}];
     [FIRAnalytics setUserPropertyString:(locationAllowed ? @"YES" : @"NO") forName:@"EntourageGeolocEnable"];
     
     [OTPushNotificationsService getAuthorizationStatusWithCompletionHandler:^(UNAuthorizationStatus status) {

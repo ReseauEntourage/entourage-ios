@@ -9,7 +9,6 @@
 #import "OTPoiService.h"
 #import "OTHTTPRequestManager.h"
 #import "OTPoiCategory.h"
-#import "OTPoi.h"
 
 /**************************************************************************************************/
 #pragma mark - Constants
@@ -62,7 +61,6 @@ NSString *const kAPIPoiRoute = @"map.json";
          
          NSMutableArray *categories = [self categoriesFromDictionary:data];
          NSMutableArray *pois = [self poisFromDictionary:data];
-         
          if (success)
          {
              success(categories, pois);
@@ -72,6 +70,33 @@ NSString *const kAPIPoiRoute = @"map.json";
      {
          if (failure)
          {
+             failure(error);
+         }
+     }];
+}
+
+- (void)getDateilpoiWithId:(NSString *)poiUUID
+                   success:(void (^)(OTPoi *pois))success
+                   failure:(void (^)(NSError *error))failure {
+    NSMutableDictionary *authParams = [[OTHTTPRequestManager commonParameters] mutableCopy];
+    NSString *url = [NSString stringWithFormat:@"%@/%@",kPOIs,poiUUID];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:authParams
+     andSuccess:^(id responseObject){
+         NSDictionary *data = responseObject;
+         
+         if (success) {
+             NSDictionary *poiDict = data[@"poi"];
+            if ([poiDict isKindOfClass:[NSDictionary class]]) {
+                OTPoi *poi = [OTPoi poiWithJSONDictionary:poiDict];
+                success(poi);
+            }
+         }
+     }
+     andFailure:^(NSError *error) {
+         if (failure) {
              failure(error);
          }
      }];

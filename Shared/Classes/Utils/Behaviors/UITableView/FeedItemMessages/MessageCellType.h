@@ -18,5 +18,7 @@ typedef NS_ENUM(long) {
     MessageCellTypeStatus,
     MessageCellTypeChatDate,
     MessageCellTypeEventCreated,
-    MessageCellTypeItemClosed
+    MessageCellTypeItemClosed,
+    MessageCellTypePOISent,
+    MessageCellTypePOIReceived,
 } MessageCellType;

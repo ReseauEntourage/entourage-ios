@@ -21,11 +21,7 @@
     if (group.isPrivateCircle || group.isNeighborhood)
         return [self genericShareText:group];
 
-    [OTCrashlyticsHelper
-     recordError:@"OTGroupSharingFormatter: Unhandled groupType"
-     userInfo:@{
-         @"groupType": group.groupType
-     }];
+    [OTCrashlyticsHelper recordError:@"OTGroupSharingFormatter: Unhandled groupType" ];
 
     return group.shareUrl;
 }
@@ -58,13 +54,10 @@
 }
 
 NSString *const prefixEntourage = @"";
-NSString *const prefixPfp       = @"pfp_";
 
 + (NSString *)communityPrefix {
     if ([OTAppConfiguration isApplicationTypeEntourage])
         return prefixEntourage;
-    if ([OTAppConfiguration isApplicationTypeVoisinAge])
-        return prefixPfp;
     @throw @"Unknown community";
 }
 

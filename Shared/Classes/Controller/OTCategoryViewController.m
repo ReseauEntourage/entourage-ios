@@ -53,7 +53,21 @@
     self.categoryTableView.estimatedRowHeight = 140;
     [self.categoryTableView reloadData];
 
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController withMainColor:[UIColor whiteColor] andSecondaryColor:[UIColor appOrangeColor]];
+    
+    
+    UIImage *menuImage = [[UIImage imageNamed:@"backItem"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
+    menuButton.image = menuImage;
+    menuButton.tintColor = [UIColor appOrangeColor];
+    [menuButton setTarget:self];
+    [menuButton setAction:@selector(dismissModal)];
+    
+    [self.navigationItem setLeftBarButtonItem:menuButton];
+}
+
+-(void)dismissModal {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

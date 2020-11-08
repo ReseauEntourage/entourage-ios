@@ -106,10 +106,6 @@
         case FeedItemFilterKeyMyOrganisationOnly:
             return OTLocalizedString(@"filter_entourage_only_my_organisation");
         
-        case FeedItemFilterKeyNeighborhoods:
-            return OTLocalizedString(@"pfp_filter_neighborhoods_title");
-        case FeedItemFilterKeyPrivateCircles:
-            return OTLocalizedString(@"pfp_filter_private_circles_title");
         case FeedItemFilterKeyEvents:
             return [OTAppAppearance eventsFilterTitle];
         case FeedItemFilterKeyEventsPast:

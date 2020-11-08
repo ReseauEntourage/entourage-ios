@@ -13,6 +13,6 @@
 
 + (void)logEvent:(NSString *)eventName;
 + (void)logEvent:(NSString *)eventName withParameters:(nullable NSDictionary<NSString *, id> *)parameters;
-+ (void)setupMixpanelWithUser:(OTUser *)user;
++ (void)setupAnalyticsWithUser:(OTUser *)user;
 
 @end

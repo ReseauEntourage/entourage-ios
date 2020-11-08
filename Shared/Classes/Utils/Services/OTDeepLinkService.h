@@ -28,4 +28,5 @@
 - (void)handleUniversalLink:(NSURL *)url;
 - (void)openWithWebView: (NSURL *)url;
 
+-(void)showDetailPoiViewControllerWithId:(NSNumber*)poiId;
 @end

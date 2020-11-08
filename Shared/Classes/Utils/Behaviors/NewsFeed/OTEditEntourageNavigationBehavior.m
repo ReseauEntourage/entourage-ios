@@ -34,17 +34,23 @@
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue isAskForHelp:(BOOL) isAskForHelp {
     UIViewController *destinationViewController = segue.destinationViewController;
-    if (destinationViewController.navigationController) {
-        [OTAppConfiguration configureNavigationControllerAppearance:destinationViewController.navigationController];
-    }
     
     if ([segue.identifier isEqualToString:@"CategoryEditSegue"]) {
+        if (destinationViewController.navigationController) {
+            [OTAppConfiguration configureNavigationControllerAppearance:destinationViewController.navigationController withMainColor:[UIColor whiteColor] andSecondaryColor:[UIColor redColor]];
+        }
+        
         OTCategoryViewController* controller = (OTCategoryViewController *)destinationViewController;
         controller.categorySelectionDelegate = self;
         controller.selectedCategory = self.entourage.categoryObject;
         controller.isAskForHelp = isAskForHelp;
         return YES;
     }
+    
+    if (destinationViewController.navigationController) {
+        [OTAppConfiguration configureNavigationControllerAppearance:destinationViewController.navigationController];
+    }
+    
     if ([segue.identifier isEqualToString:@"EditLocation"]) {
         [OTLogger logEvent:@"ChangeLocationClick"];
         OTLocationSelectorViewController* controller = (OTLocationSelectorViewController *)destinationViewController;
@@ -150,7 +156,7 @@
     OTGMSAutoCompleteViewController *acController = [[OTGMSAutoCompleteViewController alloc] init];
     [acController setup:kGMSPlacesAutocompleteTypeFilterNoFilter];
     acController.delegate = self;
-
+    acController.tintColor = [UIColor appOrangeColor];
     [self.owner presentViewController:acController animated:YES completion:nil];
 }
 

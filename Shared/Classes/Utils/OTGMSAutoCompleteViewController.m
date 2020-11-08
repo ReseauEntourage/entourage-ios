@@ -45,7 +45,7 @@
     
     // Color of typed text in the search bar.
     NSDictionary *searchBarTextAttributes = @{
-                                              NSForegroundColorAttributeName: [UIColor whiteColor],
+                                              NSForegroundColorAttributeName: [UIColor appOrangeColor],
                                               NSFontAttributeName : [UIFont systemFontOfSize:[UIFont systemFontSize]]
                                               };
     [UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]]
@@ -53,7 +53,7 @@
     
     // Color of the placeholder text in the search bar prior to text entry.
     NSDictionary *placeholderAttributes = @{
-                                            NSForegroundColorAttributeName: [UIColor whiteColor],
+                                            NSForegroundColorAttributeName: [UIColor appGreyishBrownColor],
                                             NSFontAttributeName : [UIFont systemFontOfSize:[UIFont systemFontSize]]
                                             };
     
@@ -66,9 +66,9 @@
     
     // To style the two image icons in the search bar (the magnifying glass
     // icon and the 'clear text' icon), replace them with different images.
-    [[UISearchBar appearance] setImage:[UIImage imageNamed:@"whiteSearch"]
-                      forSearchBarIcon:UISearchBarIconSearch
-                                 state:UIControlStateNormal];
+//    [[UISearchBar appearance] setImage:[UIImage imageNamed:@"whiteSearch"]
+//                      forSearchBarIcon:UISearchBarIconSearch
+//                                 state:UIControlStateNormal];
     
     // Color of the in-progress spinner.
     [[UIActivityIndicatorView appearance] setColor:[ApplicationTheme shared].backgroundThemeColor];

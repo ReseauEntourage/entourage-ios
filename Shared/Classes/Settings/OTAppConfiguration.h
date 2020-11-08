@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UserNotifications/UserNotifications.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <Mixpanel/Mixpanel.h>
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+#import <FirebaseCrashlytics/FirebaseCrashlytics.h>
 #import <MessageUI/MessageUI.h>
 #import <FirebaseMessaging/FirebaseMessaging.h>
 
@@ -23,14 +21,10 @@
 #import "OTEntourage.h"
 
 #define MAP_TAB_INDEX 0
-#if !PFP
-    #define MESSAGES_TAB_INDEX 3
-    #define MENU_TAB_INDEX 4
-    #define MENU_TAB_PLUS -1
-#else
-    #define MESSAGES_TAB_INDEX 1
-    #define MENU_TAB_INDEX 2
-#endif
+#define GUIDES_TAB_INDEX 1
+#define MESSAGES_TAB_INDEX 3
+#define MENU_TAB_INDEX 4
+#define MENU_TAB_PLUS -1
 
 @class EnvironmentConfigurationManager;
 
@@ -72,7 +66,6 @@
 
 + (NSInteger)applicationType;
 + (BOOL)isApplicationTypeEntourage;
-+ (BOOL)isApplicationTypeVoisinAge;
 
 // Configures if the tour functionality is enabled/shown
 + (BOOL)supportsTourFunctionality;
@@ -114,7 +107,6 @@
 
 // Configures if the feed pois are displayed on feeds map
 // For Entourage app, the pois (solidarity guide items) are displayed only when the solidarity guide map is shown
-// For PFP app, the pois (private circles and neighbourhoods) are displayed always
 + (BOOL)shouldShowPOIsOnFeedsMap;
 
 // Configures if the user profile image is displayed on right of the newws feed item rows
@@ -164,4 +156,5 @@
 
 + (NSDictionary *)community;
 
++ (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController withMainColor:(UIColor*)mainColor andSecondaryColor:(UIColor*)secondaryColor;
 @end

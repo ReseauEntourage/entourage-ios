@@ -176,9 +176,20 @@
 #define Action_feed_showList @"Action__Feed__ShowList"
 #define Action_feed_showFilters @"Action__Feed__ShowFilters"
 //Guide
-#define Action_guide_showMap @"Action__Guide__ShowMap"
-#define Action_guide_showList @"Action__Guide__ShowList"
-#define Action_guide_showFilters @"Action__Guide__ShowFilters"
+#define Action_guide_showMap @"Action__GuideMap__ShowMap"
+#define Action_guide_showList @"Action__GuideMap__ShowList"
+#define Action_guide_showFilters @"Action__GuideMap__ShowFilters"
+
+#define Action_guide_showGDS @"Action__HubGuide__ShowGDS"
+#define Action_guide_webOrientation @"Action__HubGuide__WebOrientation"
+#define Action_guide_webGuide @"Action__HubGuide__WebGuide"
+#define Action_guide_webAtelier @"Action__HubGuide__WebAtelier"
+#define Action_guide_WwebFaq @"Action__HubGuide__WebFaq"
+
+#define Action_guideMap_POI @"Action__GuideMap__POI"
+#define Action_guideMap_SubmitFilters @"Action__GuideMap__SubmitFilters"
+#define Action_guideMap_SharePOI @"Action__GuideMap__SharePOI"
+#define Action_guideMap_CallPOI @"Action__GuideMap__CallPOI"
 
 //Start info
 #define View_Start_Feeds @"View__Start__Feeds"

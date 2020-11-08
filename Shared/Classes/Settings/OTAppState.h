@@ -11,7 +11,7 @@
 
 @protocol InviteSourceDelegate;
 @protocol OTFeedItemsFilterDelegate;
-@protocol OTSolidarityGuideFilterDelegate;
+@protocol OTGuideFilterDelegate;
 @protocol EntourageEditorDelegate;
 
 @interface OTAppState : NSObject
@@ -40,7 +40,7 @@
 + (void)launchFeedsFilteringFromController:(UIViewController*)controller
                              withDelegate:(id<OTFeedItemsFilterDelegate>)delegate;
 
-+ (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTSolidarityGuideFilterDelegate>)delegate;
++ (void)launchMapPOIsFilteringFromController:(UIViewController*)controller withDelegate:(id<OTGuideFilterDelegate>)delegate;
 
 + (void)showFilteringOptionsFromController:(UIViewController*)controller
                         withFullMapVisible:(BOOL)isFullMapVisible;

@@ -35,6 +35,10 @@ NSString *const kAnnotationIdentifier = @"OTAnnotationIdentifier";
 	return self;
 }
 
+-(void)dealloc {
+    self.poi = nil;
+}
+
 /********************************************************************************/
 #pragma mark - MKAnnotation protocol
 

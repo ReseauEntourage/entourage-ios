@@ -21,4 +21,7 @@
 
 - (void)configureWith:(OTFeedItemJoiner *)item;
 
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_title_role;
+@property (weak, nonatomic) IBOutlet UIButton *ui_button_asso;
+
 @end

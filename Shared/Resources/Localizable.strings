@@ -56,6 +56,7 @@
 "login_info_pop_validate" = "Compris !";
 "pop_info_entourage_custom_yes" = "Personnaliser";
 "pop_info_entourage_custom_no" = "Plus tard";
+"pop_info_entourage_custom_no_more" = "Ne plus me montrer";
 "login_email_pwd_title" = "Ok super !";
 "login_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
 
@@ -124,7 +125,7 @@
 "view_map_nav_title" = "Voir la carte";
 "view_list_nav_title" = "Voir la liste";
 "create_demande_aide" = "Demander de l'aide";
-"create_proposer_don" = "Proposer un don";
+"create_proposer_don" = "Proposer de l'aide";
 
 // Feed item
 "join_active_other" = "✔︎ Je participe";
@@ -143,7 +144,7 @@
 
 "no_data_events" = "Aucun évènement à proximité.";
 
-"no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure";
+"no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure \n\nLe Centre Communal d’Action Sociale de votre commune peut vous renseigner sur toutes les associations locales et les aides sociales à disposition des habitants.";
 
 "no_data_guide_link" = "Proposez une structure";
 
@@ -163,10 +164,32 @@
 "guide_display_heal" = "Se soigner";
 "guide_display_refresh" = "Se rafraîchir";
 "guide_display_orientation" = "S’orienter";
-"guide_display_caring" = "S’occuper de soi";
+"guide_display_caring" = "Bien-être & activités";
 "guide_display_reinsertion" = "Se réinsérer";
 "guide_display_partners" = "Associations et services actifs sur Entourage";
 "partners_entourage" = "Organisme actif sur Entourage";
+"guide_display_donate" = "Recherchant des dons";
+"guide_display_volunteer" = "Recherchant des bénévoles";
+"guide_display_info_mutli" = "Lieux proposant des services de plusieurs catégories";
+
+"guide_display_toilettes" = "Toilettes";
+"guide_display_fontaines" = "Fontaines";
+"guide_display_laver" = "Douches";
+"guide_display_laverie" = "Laveries";
+
+"guide_display_vetements" = "Vêtements & matériels";
+"guide_display_boite" = "Boîtes à dons & lire";
+"guide_display_bagageries" = "Bagageries";
+
+"DetailPoiContact" = "Contact";
+"DetailPoiPublic" = "Public";
+"DetailPoiLanguage" = "Langues parlées";
+"DetailPoiOpenTime" = "Horaires";
+
+"info_soliguide_1" = "Les informations sur ce lieu sont fournies par Soliguide, la cartographie solidaire.";
+"info_soliguide_2" = "Pour des informations encore plus complètes et disponibles en plusieurs langues";
+"info_button_soliguide_consult" = "Consulter";
+
 // Tour
 "tour_type_bare_hands" = "barehands";
 "tour_type_medical" = "medical";
@@ -260,9 +283,10 @@
 "organiser" = "Organisateur";
 "closed" = "Inclure entourages clôturés";
 "unique_unread" = "Uniquement non lus";
-"join_entourage_lbl" = "Rejoindre la discussion";
-"join_event_lbl" = "Participez à cet évènement";
+"join_entourage_lbl" = "Participez à la discussion";//"Rejoindre la discussion";
+"join_event_lbl" = "Répondez présent !";//"Participez à cet évènement";
 "join_entourage_btn" = "PARTICIPER";
+"join_entourage2_btn" = "REJOINDRE";
 "join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !\nVous pouvez envoyer un message aux participants, qui apparaîtra dans la conversation de groupe.";
 "join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nVous pouvez envoyer un message aux participants, qui apparaîtra dans la conversation de groupe.";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
@@ -457,6 +481,7 @@
 "create" = "Créer";
 "edit" = "Editer";
 "modify" = "Modifier";
+"showAll" = "Voir tout";
 
 // User profile
 "user_photo_change_error" = "Erreur lors de l’envoi de l’image. Veuillez réessayer plus tard.";
@@ -536,8 +561,6 @@
 "share_action_verb_other" = "vu";
 
 "share_event" = "Hello ! Je t'invite à : \"%1$@\", le %2$@, %3$@ !\n\nSi ça te dit d'y participer, rejoins-moi ici sur Entourage, le réseau qui crée des liens entre voisins avec et sans domicile : %4$@";
-"pfp_share_event" = "Bonjour ! J’ai le plaisir de vous inviter à notre prochaine sortie conviviale Voisin-Age : %1$@.\n\nElle aura lieu le %2$@, à %3$@. Merci par avance de me confirmer votre participation !\n\nEncore plus d’informations sont ici : %4$@. Je suis aussi à votre disposition.\n\nÀ bientôt !";
-"pfp_share_generic" = "Je vous invite à me rejoindre sur Voisin-Age, le réseau d’amitiés intergénérationnelles, pour découvrir : \"%1$@\". Pour télécharger l’application : %2$@.";
 
 "feed_item_time_distance" = "Créée il y a ";
 "group_timestamps_created_at" = "Créé";
@@ -842,3 +865,35 @@
 "Pop_info_web_alert_GDS_underline" = "Soliguide.fr";
 
 "info_share_sms_poi" = "Bonjour ! Voici l’adresse de %@ qui pourrait vous intéresser.\n%@\n%@\nPour plus d’infos sur ce lieu, et pour créer des liens entre voisins solidaires, je vous donne RDV sur le réseau Entourage %@";
+
+//New page hub GDS
+"title_new_gds" = "Lieux solidaires";
+"hub_title" = "Guide solidaire";
+"hub_title_1" = "Adresses utiles autour de vous";
+"hub_description_1" = "Restaurants solidaires, associations recherchant des bénévoles ou des dons...";
+"hub_button_1" = "Rechercher autour de moi →";
+
+"hub_title_2" = "Ressources au cas par cas  ";
+"hub_description_2" = "Chaque situation est différente, mais voici des clés pour s’y retrouver : numéros d’urgence, démarches conseillées, ...";
+"hub_button_2" = "Je m'oriente";
+
+"hub_title_3" = "Se préparer à la rencontre";
+"hub_description_3" = "Voisins solidaires, le Guide Simple Comme Bonjour et nos ateliers de sensibilisation vous aident à comprendre les situations et à dépasser les blocages pour créer des liens.";
+"hub_button_3" = "Découvrir le guide →";
+
+"hub_description_4" = "Nos ateliers de sensibilisation vous aident à déconstruire les préjugés sur la rue et trouver des réponses à vos questions.";
+"hub_button_4" = "Trouver un atelier";
+
+"hub_title_5" = "Comment mobiliser le réseau ?";
+"hub_description_5" = "L’application Entourage vous permet de vous mobiliser, entre voisins et associations locales, pour organiser des actions et évènements solidaires. Pour tout comprendre, c’est par ici.";
+"hub_button_5" = "Aller sur la FAQ";
+
+//Pop follow/unfollow partner
+"buttonFollowOnPartner" = "Abonné.e";
+"buttonFollowOffPartner" = "S'abonner";
+"partnerFollowTitle" = "Se désabonner de %@ ?";
+"partnerFollowMessage" = "Vous ne recevrez plus de notification lorsque %@ lance de nouvelles initiatives solidaires.";
+"partnerFollowButtonValid" = "Se désabonner";
+"partnerFollowButtonCancel" = "Annuler";
+
+"sendShare" = "Lien envoyé";

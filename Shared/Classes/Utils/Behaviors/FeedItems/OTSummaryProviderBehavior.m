@@ -115,14 +115,23 @@
     
     if (self.lblTimeDistance) {
         double distance = [uiDelegate distance];
+        NSString *distanceStr = @"";
         if (self.showTimeAsUpdatedDate) {
-            self.lblTimeDistance.text = [self formattedMessageTimeForFeedItem:feedItem distance:distance];
+            distanceStr = [self formattedMessageTimeForFeedItem:feedItem distance:distance];
+            if (distanceStr.length > 0) {
+                distanceStr = [NSString stringWithFormat:@"%@ - ",distanceStr];
+            }
         } else if (distance < 1000000.f) {
-            self.lblTimeDistance.text = [self formattedItemDistance:distance
+            distanceStr = [self formattedItemDistance:distance
                                                        creationDate:feedItem.creationDate];
+            if (distanceStr.length > 0) {
+                distanceStr = [NSString stringWithFormat:@"%@ - ",distanceStr];
+            }
         } else {
-          self.lblTimeDistance.text = @"";
+            distanceStr = @"";
         }
+        
+        self.lblTimeDistance.text = [NSString stringWithFormat:@"%@%@",distanceStr,feedItem.postalCode];
     }
     
     self.imgAssociation.hidden = feedItem.author.partner == nil;

@@ -33,4 +33,10 @@
 
 + (UIFont *)appTextFieldPlaceholderFont;
 
++ (UIColor*)appBlueColor;
++ (UIColor*)appOutingCircleColor;
++ (UIColor*)appTableBackgroundColor;
++ (UIColor*)appGrayTextColor;
++ (UIColor*)appSubtitleBlueColor;
+
 @end

@@ -20,4 +20,9 @@
                 message:(NSString*)message
                 success:(void (^)(OTUser *onboardUser))success
                 failure:(void (^)(NSError *error))failure;
+
+- (void)updateUserPartner:(NSString*)partnerId
+                isFollowing:(BOOL) isFollowing
+                success:(void (^)(BOOL isOk))success
+                failure:(void (^)(NSError *error))failure;
 @end

@@ -22,6 +22,7 @@
 #define kWSTitle @"title"
 #define kWSUuid @"uuid"
 #define kWSMetadata @"metadata"
+#define kWSMetadataType @"type"
 
 @implementation OTFeedItemMessage
 
@@ -48,6 +49,7 @@
             self.displayAddress = [metadata stringForKey:kWSDisplayAddress];
             self.itemUuid = [metadata stringForKey:kWSUuid];
             self.startsAt = [self dateFromDictionary:metadata key:kWSKeyStartsAt];
+            self.itemType = [metadata stringForKey:kWSMetadataType];
         }
     }
     return self;

@@ -14,7 +14,6 @@
 #import "OTDeepLinkService.h"
 #import "OTPushNotificationsData.h"
 #import "OTVersionInfo.h"
-#import "OTDeepLinkService.h"
 #import "OTLocationManager.h"
 #import "OTUser.h"
 #import "NSUserDefaults+OT.h"
@@ -22,7 +21,6 @@
 #import "OTPushNotificationsService.h"
 #import "OTPictureUploadService.h"
 #import "OTAuthService.h"
-#import "OTDeepLinkService.h"
 #import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
 #import <SVProgressHUD/SVProgressHUD.h>
@@ -119,6 +117,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[NSUserDefaults standardUserDefaults] setTemporaryUser:nil];
     [[NSUserDefaults standardUserDefaults] setCurrentOngoingTour:nil];
     [[NSUserDefaults standardUserDefaults] setTourPoints:nil];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"noMoreDemand"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"nbOfLaunch"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -132,18 +132,15 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     // Call the 'activateApp' method to log an app event for use
     // in analytics and advertising reporting.
     [FBSDKAppEvents activateApp];
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
 
     [OTPushNotificationsService refreshPushTokenIfConfigurationChanged];
     
     if (@available(iOS 10.0, *)) {
         [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
             if (settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
-                [mixpanel.people set:@{@"EntourageNotifEnable": @"YES"}];
                 [FIRAnalytics setUserPropertyString:@"YES" forName:@"EntourageNotifEnable"];
             }
             else {
-                [mixpanel.people set:@{@"EntourageNotifEnable": @"NO"}];
                 [FIRAnalytics setUserPropertyString:@"NO" forName:@"EntourageNotifEnable"];
             }
         }];
@@ -206,7 +203,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 - (void)configureCrashReporting
 {
-    [Fabric with:@[[Crashlytics class]]];
+    [FIRApp configure];
 }
 
 - (void)configureGooglePlacesClient {
@@ -217,19 +214,9 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 {
     NSString *firebaseConfigFileName = nil;
     
-    switch ([OTAppConfiguration applicationType]) {
-        case ApplicationTypeVoisinAge:
-            firebaseConfigFileName = [self.environmentConfiguration runsOnStaging] ?
-            @"GoogleService-Info-social.entourage.pfpios.beta" :
-            @"GoogleService-Info-social.entourage.pfpios";
-            break;
-            
-        default:
-            firebaseConfigFileName = [self.environmentConfiguration runsOnStaging] ?
-            @"GoogleService-Info-social.entourage.ios.beta" :
-            @"GoogleService-Info";
-            break;
-    }
+    firebaseConfigFileName = [self.environmentConfiguration runsOnStaging] ?
+    @"GoogleService-Info-social.entourage.ios.beta" :
+    @"GoogleService-Info";
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:firebaseConfigFileName ofType:@"plist"];
     FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:filePath];
@@ -251,13 +238,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 - (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions
 {
-    NSString *mixpanelToken = self.environmentConfiguration.MixpanelToken;
-    
-    [Mixpanel sharedInstanceWithToken:mixpanelToken launchOptions:launchOptions];
-    //[Mixpanel sharedInstance].enableLogging = YES;
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    mixpanel.minimumSessionDuration = 0;
-    
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     if (currentUser) {
         [[OTAuthService new] getDetailsForUser:currentUser.uuid success:^(OTUser *user) {
@@ -268,7 +248,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         }];
         
         if (!currentUser.isAnonymous) {
-          [OTLogger setupMixpanelWithUser:currentUser];
+          [OTLogger setupAnalyticsWithUser:currentUser];
         }
     }
 }
@@ -276,10 +256,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (UITabBarController*)configureMainTabBar {
     
     NSInteger selectedIndex = MAP_TAB_INDEX;
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        selectedIndex = MESSAGES_TAB_INDEX;
-    }
-    
     UITabBarController *tabBarController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:selectedIndex];
     
     return tabBarController;
@@ -297,9 +273,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (UITabBarController*)configureMainTabBarWithDefaultSelectedIndex:(NSInteger)selectedIndex
 {
-    UITabBarController *newTab = [[OTMainTabbarViewController alloc]init];
+    OTMainTabbarViewController *newTab = [[OTMainTabbarViewController alloc]init];
     
     newTab.selectedIndex = selectedIndex;
+    [newTab boldSelectedItem];
     return newTab;
 }
 
@@ -315,16 +292,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UIColor *subtitleColor = [UIColor appGreyishColor];
     UIColor *tableViewBgColor = [UIColor groupTableViewBackgroundColor];
     UIColor *addActionButtonColor = [UIColor appOrangeColor];
-    
-    if ([OTAppConfiguration sharedInstance].environmentConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        backgroundThemeColor = [UIColor pfpBlueColor];
-        primaryNavigationBarTintColor = [UIColor pfpBlueColor];
-        secondaryNavigationBarTintColor = [UIColor whiteColor];
-        titleColor = [UIColor pfpGrayTextColor];
-        tableViewBgColor = [UIColor pfpTableBackgroundColor];
-        subtitleColor = [UIColor pfpSubtitleBlueColor];
-        addActionButtonColor = [UIColor pfpGreenColor];
-    }
     
     [[ApplicationTheme shared] setPrimaryNavigationBarTintColor:primaryNavigationBarTintColor];
     [[ApplicationTheme shared] setSecondaryNavigationBarTintColor:secondaryNavigationBarTintColor];
@@ -398,6 +365,38 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         navigationBar.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
         navigationBar.tintColor = [[ApplicationTheme shared] secondaryNavigationBarTintColor];
         navigationBar.barTintColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
+    }
+}
+
++ (void)configureNavigationControllerAppearance:(UINavigationController*)navigationController withMainColor:(UIColor*)mainColor andSecondaryColor:(UIColor*)secondaryColor
+{
+    [OTAppConfiguration configureApplicationAppearance];
+    
+    UINavigationBar.appearance.backgroundColor = mainColor;
+    UINavigationBar.appearance.barTintColor = mainColor;
+    UINavigationBar.appearance.tintColor = secondaryColor;
+    
+    navigationController.automaticallyAdjustsScrollViewInsets = NO;
+    
+    UINavigationBar *navigationBar = navigationController.navigationBar;
+    #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance *navBarAppearance = [UINavigationBarAppearance new];
+        [navBarAppearance configureWithOpaqueBackground];
+        navBarAppearance.backgroundColor = mainColor;
+        NSDictionary *textAttributes = @{
+            NSForegroundColorAttributeName: [UIColor appGreyishBrownColor]
+        };
+        navBarAppearance.titleTextAttributes = textAttributes;
+        navBarAppearance.largeTitleTextAttributes = textAttributes;
+        navigationBar.standardAppearance = navBarAppearance;
+        navigationBar.scrollEdgeAppearance = navBarAppearance;
+    } else
+    #endif
+    {
+        navigationBar.backgroundColor = mainColor;
+        navigationBar.tintColor = secondaryColor;
+        navigationBar.barTintColor = mainColor;
     }
 }
 
@@ -491,40 +490,18 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     return NO;
 }
 
-+ (BOOL)isApplicationTypeVoisinAge
-{
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-
 + (BOOL)supportsTourFunctionality
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)supportsSolidarityGuideFunctionality
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)supportsFacebookIntegration
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
@@ -534,55 +511,32 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 + (BOOL)shouldShowIntroTutorial:(OTUser*)user
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
     return NO;//Bypass intro for now
    // return !user.isAnonymous;
 }
 
 + (BOOL)shouldShowAddEventDisclaimer
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldAllowLoginFromWelcomeScreen
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldAlwaysRequestUserToUploadPicture
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldAlwaysRequestUserToAddActionZone
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
     return NO;
 }
 
 + (BOOL)shouldAlwaysRequestUserLocation
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return IS_PRO_USER ? NO : YES;
 }
 
@@ -597,63 +551,34 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
     
 + (BOOL)supportsAddingActionsFromMapOnLongPress {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldShowNumberOfUserActionsSection:(OTUser*)user
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
     return [user.type isEqualToString:USER_TYPE_PRO];
 }
 
 + (BOOL)shouldAutoLaunchEditorOnAddAction
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
     return NO;
 }
 
 + (BOOL)shouldShowCreatorImagesForNewsFeedItems {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldShowNumberOfUserAssociationsSection:(OTUser*)user
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return ((user.organization && [user.type isEqualToString:USER_TYPE_PRO]) || user.partner);
 }
 
 + (BOOL)shouldShowNumberOfUserPrivateCirclesSection:(OTUser*)user
 {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
     return NO;
 }
 
 + (BOOL)shouldShowMapHeatzoneForEntourage:(OTEntourage*)entourage {
-    // EMA-2034
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     if ([entourage isOuting]) {
         return NO;
     }
@@ -662,51 +587,22 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (BOOL)shouldShowAssociationsOnUserProfile {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldShowPOIsOnFeedsMap {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
     return NO;
 }
 
 + (BOOL)supportsClosingFeedAction:(OTFeedItem*)item {
-    // EMA-2052, EMA-2124
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        if ([item isPrivateCircle] || [item isConversation] || [item isNeighborhood]) {
-            return NO;
-        }
-        
-        if ([item isOuting]) {
-            return YES;
-        }
-    }
-
     return YES;
 }
 
 + (BOOL)supportsFilteringEvents {
-    // EMA-2303
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
     return YES;
 }
 
 + (BOOL)shouldShowEntouragePrivacyDisclaimerOnCreation:(OTEntourage*)entourage {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return YES;
-    }
-    
-    // EMA-2383
     if ([entourage isOuting]) {
         return YES;
     }
@@ -715,19 +611,10 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (NSString*)iTunesAppId {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return @"1388843838";
-    }
-    
     return @"1072244410";
 }
 
 + (BOOL)shouldAskForConsentWhenCreatingEntourage:(OTEntourage*)entourage {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
-    // EMA-2378
     if ([entourage isOuting] ||
         [entourage isContribution]) {
         return NO;
@@ -737,16 +624,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 }
 
 + (BOOL)shouldAskForConfidentialityWhenCreatingEntourage:(OTEntourage*)entourage {
-    if ([OTAppConfiguration applicationType] == ApplicationTypeVoisinAge) {
-        return NO;
-    }
-    
-    // EMA-2384
-    //Plus utilisé car on affiche le choix sur la page de création.
-//    if ([entourage isContribution]) {
-//        return YES;
-//    }
-    
     return NO;
 }
 

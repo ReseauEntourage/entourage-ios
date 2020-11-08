@@ -61,7 +61,7 @@
     copy->_placeName = [_placeName copyWithZone:zone];
     copy->_googlePlaceId = [_googlePlaceId copyWithZone:zone];
     copy->_endsAt = [_endsAt copyWithZone:zone];
-    
+    copy->_postalCode = [_postalCode copyWithZone:zone];
     return copy;
 }
 
@@ -101,6 +101,8 @@
             self.placeName = [metadataDictionary stringForKey:kWSKeyPlaceName];
             self.googlePlaceId = [metadataDictionary stringForKey:kWSKeyGooglePlaceId];
         }
+        
+        self.postalCode = [dictionary stringForKey:@"postal_code"];
     }
     return self;
 }

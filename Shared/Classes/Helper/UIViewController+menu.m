@@ -111,9 +111,26 @@
     
     return  menuButton;
 }
+- (UIBarButtonItem*)setupCloseModalWithImageNamedOnly:(NSString *)imageName withTint:(UIColor*)tintColor {
+    UIImage *menuImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
+    menuButton.image = menuImage;
+    menuButton.tintColor = tintColor;
+    [menuButton setTarget:self];
+    [menuButton setAction:@selector(dismissModal)];
+    
+    [self.navigationItem setLeftBarButtonItem:menuButton];
+    
+    return  menuButton;
+}
 
 - (UIBarButtonItem*)setupCloseModal {
     return [self setupCloseModalWithImageNamed:@"close" applyTintColor:YES];
+}
+
+- (UIBarButtonItem*)setupCloseModalWithoutTintWithTint:(UIColor*)tintColor {
+    
+    return [self setupCloseModalWithImageNamedOnly:@"close" withTint:tintColor];
 }
 
 - (UIBarButtonItem*)setupCloseModalWithTintColor {

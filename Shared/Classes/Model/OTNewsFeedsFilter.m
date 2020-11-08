@@ -110,12 +110,6 @@
 
 - (NSArray *)groupHeaders {
     
-    if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        return @[
-                 @"Types de voisinage",
-                 ];
-    }
-    
     if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         if (self.isEncouterFilter) {
             return @[
@@ -165,16 +159,10 @@
                                  @"ask_for_help" : [NSNumber numberWithBool:self.showDemand],
                                  @"contribution" : [NSNumber numberWithBool:self.showContribution],
                                  
-                                 @"pfp_filter_neighborhoods_title" : [NSNumber numberWithBool:self.showNeighborhood],
-                                 @"private-pfp_filter_private_circles_title" : [NSNumber numberWithBool:self.showPrivateCircle],
                                  @"ask_for_help_event" : [NSNumber numberWithBool:self.showOuting],
                                  @"showAlls" : [NSNumber numberWithBool:self.showAlls],
                                  @"showPartners" : [NSNumber numberWithBool:self.showPartners],
                                  };
-    
-    if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        return [self groupForPfp];
-    }
     
     if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
         return [self groupForPro];
@@ -188,83 +176,58 @@
     NSArray *data = [OTCategoryFromJsonService getData];
     NSMutableArray *parentArray = [[NSMutableArray alloc] init];
     
-    if (OTAppConfiguration.applicationType == ApplicationTypeVoisinAge) {
-        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyNeighborhoods
-                                                    active:self.showNeighborhood
-                                                  children:@[]]];
-        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyPrivateCircles
-                                                    active:self.showPrivateCircle
-                                                  children:@[]]];
+    if (IS_PRO_USER) {
+        NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
+                                                       active:self.showMedical
+                                                    withImage:@"filter_heal"],
+                                  [OTFeedItemFilter createFor:FeedItemFilterKeySocial
+                                                       active:self.showSocial
+                                                    withImage:@"filter_social"],
+                                  [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
+                                                       active:self.showDistributive
+                                                    withImage:@"filter_eat"]];
+        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyTour
+                                                    active:self.showTours
+                                                  children:tourChildren]];
         
-        NSArray *eventChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
-                                                        active:self.showOuting
-                                                     withImage:@"ask_for_help_event"
-                                                         title:[OTAppAppearance eventsFilterTitle]],
-                                   [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
-                                                        active:self.showPastOuting
-                                                         title:[OTAppAppearance includePastEventsFilterTitleKey]]];
-        
-        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
-                                                    active:self.showOuting
-                                                  children:eventChildren
-                                                     image:@"ask_for_help_event"
-                                              showBoldText:YES]];
-        
-        return parentArray;
-        
-    } else {
-        if (IS_PRO_USER) {
-            NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
-                                                           active:self.showMedical
-                                                        withImage:@"filter_heal"],
-                                      [OTFeedItemFilter createFor:FeedItemFilterKeySocial
-                                                           active:self.showSocial
-                                                        withImage:@"filter_social"],
-                                      [OTFeedItemFilter createFor:FeedItemFilterKeyDistributive
-                                                           active:self.showDistributive
-                                                        withImage:@"filter_eat"]];
-            
-            [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyTour
-                                                        active:self.showTours
-                                                      children:tourChildren]];
-        }
-        
-        NSArray *eventChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
-                                                        active:self.showOuting
-                                                     withImage:@"ask_for_help_event"
-                                                         title:[OTAppAppearance eventsFilterTitle]],
-                                   [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
-                                                        active:self.showPastOuting
-                                                         title:[OTAppAppearance includePastEventsFilterTitleKey]]];
-        
-        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
-                                                    active:self.showOuting
-                                                  children:eventChildren
-                                                     image:@"ask_for_help_event"
-                                              showBoldText:YES]];
-        
-        OTCategoryType *contribution = nil;
-        OTCategoryType *demande = nil;
-        
-        for (OTCategoryType *type in data) {
-            if ([type.type isEqualToString:@"contribution"]) {
-                contribution = type;
-            }
-            else if ([type.type isEqualToString:@"ask_for_help"]) {
-                demande = type;
-            }
-        }
-        
-        NSArray *contributionArray = [self contributionCategory:contribution];
-        [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
-                                                     active:self.showContribution
-                                                   children:contributionArray]];
-        
-        NSArray *demandeArray = [self demandCategory:demande];
-        [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
-                                                     active:self.showDemand
-                                                   children:demandeArray]];
     }
+    
+    NSArray *eventChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                    active:self.showOuting
+                                                 withImage:@"ask_for_help_event"
+                                                     title:[OTAppAppearance eventsFilterTitle]],
+                               [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
+                                                    active:self.showPastOuting
+                                                     title:[OTAppAppearance includePastEventsFilterTitleKey]]];
+    [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                active:self.showOuting
+                                              children:eventChildren
+                                                 image:@"ask_for_help_event"
+                                          showBoldText:YES]];
+        
+    OTCategoryType *contribution = nil;
+    OTCategoryType *demande = nil;
+      
+    for (OTCategoryType *type in data) {
+        if ([type.type isEqualToString:@"contribution"]) {
+            contribution = type;
+            
+        }
+        else if ([type.type isEqualToString:@"ask_for_help"]) {
+            demande = type;
+            
+        }
+    }
+    
+    NSArray *contributionArray = [self contributionCategory:contribution];
+    [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyContribution
+                                                 active:self.showContribution
+                                               children:contributionArray]];
+        
+    NSArray *demandeArray = [self demandCategory:demande];
+    [parentArray addObject: [OTFeedItemFilter createFor:FeedItemFilterKeyDemand
+                                                 active:self.showDemand
+                                               children:demandeArray]];
     
     return parentArray;
 }
@@ -297,38 +260,6 @@
                                                 timeframeInHours:self.timeframeInHours]
                             ];
     [array addObject:timeframe];
-    return array;
-}
-    
-- (NSArray *)groupForPfp {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    
-    // Neighborhoods section
-    OTFeedItemFilter *neigborhoodFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyNeighborhoods
-                                                               active:self.showNeighborhood
-                                                             children:@[]
-                                                                image:@"neighborhood"
-                                                         showBoldText:NO];
-    // PrivateCircles section
-    OTFeedItemFilter *privateCircleFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyPrivateCircles
-                                                               active:self.showPrivateCircle
-                                                             children:@[]
-                                                                image:@"private-circle"
-                                                         showBoldText:NO];
-    
-    // Events section
-    OTFeedItemFilter *eventFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyEvents
-                                                                 active:self.showOuting
-                                                               children:@[]
-                                                                  image:@"outing"
-                                                           showBoldText:YES];
-    
-    OTFeedItemFilter *eventPastFilter = [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
-                                                         active:self.showPastOuting
-                                                       children:@[]];
-    
-    [array addObject:@[neigborhoodFilter, privateCircleFilter, eventFilter, eventPastFilter]];
-
     return array;
 }
 
@@ -465,22 +396,6 @@
     return events;
 }
     
-- (NSArray *)groupPfpEvents {
-    NSArray *events = nil;
-    events = @[
-               [OTFeedItemFilter createFor:FeedItemFilterKeyEvents
-                                    active:self.showOuting
-                                  children:@[]
-                                     image:@"outing"
-                              showBoldText:YES],
-               [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
-                                    active:self.showPastOuting
-                                  children:@[]],
-               ];
-    
-    return events;
-}
-    
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before
                                     andLocation:(CLLocationCoordinate2D)location {
     return @{
@@ -578,13 +493,6 @@
             break;
         case FeedItemFilterKeyOrganisation:
             self.showFromOrganisation = filter.active;
-            break;
-            
-        case FeedItemFilterKeyNeighborhoods:
-            self.showNeighborhood = filter.active;
-            break;
-        case FeedItemFilterKeyPrivateCircles:
-            self.showPrivateCircle = filter.active;
             break;
         
         case FeedItemFilterKeyEvents:
