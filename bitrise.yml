@@ -17,7 +17,7 @@ workflows:
     - cocoapods-install:
         inputs:
         - verbose: 'false'
-    - ios-auto-provision-appstoreconnect@0:
+    - ios-auto-provision-appstoreconnect:
         inputs:
         - distribution_type: app-store
     - script:
@@ -79,14 +79,14 @@ workflows:
             Branch|${BITRISE_GIT_BRANCH}
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
-    - firebase-dsym-upload@1:
+    - firebase-dsym-upload:
         inputs:
         - fdu_fabric_location: ./Pods/Fabric/upload-symbols
         - fdu_google_services_location: ./entourage/Settings/Environment
         is_always_run: true
     - cache-push:
         is_always_run: true
-    - git-tag-project-version-and-build-number@1:
+    - git-tag-project-version-and-build-number:
         inputs:
         - bitrise_tag_info_plist_path: entourage-Info.plist
         - bitrise_tag_format: Ent_VERSION
@@ -150,7 +150,7 @@ workflows:
               )
             end
         - gemfile_content: ''
-    - ios-auto-provision-appstoreconnect@0:
+    - ios-auto-provision-appstoreconnect:
         inputs:
         - scheme: EntourageBeta
         - distribution_type: ad-hoc
@@ -244,6 +244,10 @@ workflows:
             Branch|${BITRISE_GIT_BRANCH}
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
+    - firebase-dsym-upload:
+        inputs:
+        - fdu_google_services_location: >-
+            ./entourage/Settings/Environment/GoogleService-Info-social.entourage.ios.beta.plist
     - cache-push: {}
   Entourage-NoFastlane:
     steps:
@@ -304,7 +308,7 @@ workflows:
                 )
             end
         - gemfile_content: ''
-    - ios-auto-provision-appstoreconnect@0:
+    - ios-auto-provision-appstoreconnect:
         inputs:
         - scheme: EntourageBeta
         - distribution_type: ad-hoc
@@ -347,3 +351,6 @@ app:
   - opts:
       is_expand: false
     BITRISE_SCHEME: Entourage-ios
+  - opts:
+      is_expand: false
+    BITRISE_DSYM_PATH: Entourage.app.dSYM.zip
