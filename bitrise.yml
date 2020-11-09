@@ -351,6 +351,4 @@ app:
   - opts:
       is_expand: false
     BITRISE_SCHEME: Entourage-ios
-  - opts:
-      is_expand: false
-    BITRISE_DSYM_PATH: Entourage.app.dSYM.zip
+  - BITRISE_DSYM_PATH: $BITRISE_DEPLOY_DIR/Entourage.app.dSYM.zip
