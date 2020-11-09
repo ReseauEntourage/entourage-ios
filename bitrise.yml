@@ -244,6 +244,10 @@ workflows:
             Branch|${BITRISE_GIT_BRANCH}
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
+    - firebase-dsym-upload@2:
+        inputs:
+        - fdu_google_services_location: >-
+            ./entourage/Settings/Environment/GoogleService-Info-social.entourage.ios.beta.plist
     - cache-push: {}
   Entourage-NoFastlane:
     steps:
