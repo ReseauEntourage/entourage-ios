@@ -600,9 +600,12 @@
 
 //Dates formatées
 "le_" = "le %@";
+"Le_" = "Le %@";
 "du_au" = "du %@ au %@";
+"Du_au" = "Du %@ au %@";
 "de_a" = "de %@ à %@";
 "du_a" = "du %@ à %@";
+"Du_a" = "Du %@ à %@";
 "au_a" = "au %@ à %@";
 "rendez-vous" = "Rendez-vous";
 

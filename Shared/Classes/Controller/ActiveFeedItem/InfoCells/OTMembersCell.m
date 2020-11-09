@@ -34,6 +34,8 @@
         [self.ui_button_asso setTag:item.partner.aid.integerValue];
     }
     else {
+        self.ui_constraint_bottom_margin.constant = 0;
+        self.ui_constraint_top_margin.constant = 40;
         [self.ui_label_title_role setHidden:YES];
         [self.ui_button_asso setHidden:YES];
     }

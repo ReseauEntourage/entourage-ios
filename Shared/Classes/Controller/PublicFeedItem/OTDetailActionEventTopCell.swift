@@ -137,6 +137,9 @@ class OTDetailActionEventLocationCell: UITableViewCell, TTTAttributedLabelDelega
        
         if feedItem.isAction() {
             ui_postalCode.text = feedItem.postalCode
+            if feedItem.postalCode.count == 0 {
+                ui_postalCode.text = " - "
+            }
             ui_picto.image = UIImage.init(named: "ic_detail_poi_location")
         }
         else {
@@ -343,23 +346,23 @@ struct Utils {
         let endDateInfo = dateFormatter.string(from: endDate)
         let endTimeInfo = (startDate as NSDate).toRoundedQuarterTimeString()
         
-        var dateInfoTxt = OTLocalisationService.getLocalizedValue(forKey: "rendez-vous")
+        var dateInfoTxt = ""//OTLocalisationService.getLocalizedValue(forKey: "rendez-vous")
         
         if Calendar.current.isDate(startDate, inSameDayAs: endDate) {
-            let _str = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "le_"), startDateInfo)
-            dateInfoTxt = String.init(format: "%@ %@", dateInfoTxt!,_str)
+            let _str = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "Le_"), startDateInfo)
+            dateInfoTxt = String.init(format: "%@ %@", dateInfoTxt,_str)
             
             let _dateStr = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "de_a"), startTimeInfo!,endTimeInfo!)
-            dateInfoTxt = String.init(format: "%@\n%@", dateInfoTxt!,_dateStr)
+            dateInfoTxt = String.init(format: "%@\n%@", dateInfoTxt,_dateStr)
         }
         else {
-            let _dateStartStr = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "du_a"), startDateInfo,startTimeInfo!)
+            let _dateStartStr = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "Du_a"), startDateInfo,startTimeInfo!)
             let _dateEndStr = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "au_a"), endDateInfo,endTimeInfo!)
             
-            dateInfoTxt = String.init(format: "%@ %@ %@", dateInfoTxt!,_dateStartStr,_dateEndStr)
+            dateInfoTxt = String.init(format: "%@ %@ %@", dateInfoTxt,_dateStartStr,_dateEndStr)
         }
         
-        return dateInfoTxt!
+        return dateInfoTxt
     }
 }
 
