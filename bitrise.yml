@@ -79,10 +79,6 @@ workflows:
             Branch|${BITRISE_GIT_BRANCH}
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
-    - git-tag-project-version-and-build-number@1:
-        inputs:
-        - bitrise_tag_info_plist_path: entourage-Info.plist
-        - bitrise_tag_format: Ent_VERSION
     - firebase-dsym-upload@1:
         inputs:
         - fdu_fabric_location: ./Pods/Fabric/upload-symbols
@@ -90,6 +86,10 @@ workflows:
         is_always_run: true
     - cache-push:
         is_always_run: true
+    - git-tag-project-version-and-build-number@1:
+        inputs:
+        - bitrise_tag_info_plist_path: entourage-Info.plist
+        - bitrise_tag_format: Ent_VERSION
   Entourage-Beta:
     steps:
     - activate-ssh-key:
