@@ -343,6 +343,48 @@ workflows:
         inputs:
         - api_token: $BUILD_TRIGGER
         - workflow_id: Entourage-Beta
+  TestGitTag:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone:
+        inputs:
+        - commit: ''
+        - tag: ''
+    - cocoapods-install:
+        inputs:
+        - verbose: 'false'
+    - ios-auto-provision-appstoreconnect:
+        inputs:
+        - distribution_type: app-store
+    - script:
+        inputs:
+        - content: >-
+            #!/bin/bash
+
+            # fail if any commands fails
+
+            set -e
+
+            # debug log
+
+            #set -x
+
+
+            echo "Download App credentials"
+
+
+            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
+
+
+            # download the files
+
+            wget -O "$app_configurations_file"
+            "$BITRISEIO_APPCONFIGURATIONS_URL"
+    - git-tag-project-version-and-build-number:
+        inputs:
+        - bitrise_tag_info_plist_path: entourage-Info.plist
+        - bitrise_tag_format: Ent_$_VERSION_
 app:
   envs:
   - opts:
