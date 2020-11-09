@@ -78,9 +78,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
 //    [[OTDebugLog sharedInstance] setConsoleOutput];
     
-#if !DEBUG
-    [self configureCrashReporting];
-#endif
 
     [self configureFirebase];
     [OTAnalyticsObserver init];
