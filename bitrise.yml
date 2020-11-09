@@ -81,8 +81,8 @@ workflows:
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
     - firebase-dsym-upload:
         inputs:
-        - fdu_fabric_location: ./Pods/Fabric/upload-symbols
-        - fdu_google_services_location: ./entourage/Settings/Environment
+        - fdu_dsym_location: $BITRISE_DEPLOY_DIR/Entourage-ios.dSYM.zip
+        - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
         is_always_run: true
     - cache-push:
         is_always_run: true
@@ -244,7 +244,7 @@ workflows:
             Branch|${BITRISE_GIT_BRANCH}
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
-    - firebase-dsym-upload:
+    - firebase-dsym-upload@2:
         inputs:
         - fdu_google_services_location: >-
             ./entourage/Settings/Environment/GoogleService-Info-social.entourage.ios.beta.plist
