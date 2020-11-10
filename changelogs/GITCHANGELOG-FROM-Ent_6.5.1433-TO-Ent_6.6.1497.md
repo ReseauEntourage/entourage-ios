@@ -1,6 +1,11 @@
 #Changelog
-##Latest tag: Ent_6.6.1487
+##Latest tag: Ent_6.6.1497
 ##Previous tag: Ent_6.5.1433
+* chore: configure Bitrise dSYM upload for TestFlight builds (2020-11-09) by <gregclermont>
+* chore: fix bitrise workflow to send DSYM (2020-11-09) by <François Pellissier>
+* Fix crash init Firebase twice when build release (2020-11-09) by <François Pellissier>
+* add automatic changelog for release 6.6.1487 (2020-11-09) by <François Pellissier>
+* chore: fix bitrise workflow to send DSYM (2020-11-09) by <François Pellissier>
 * Test GDS without Clustering (2020-10-30) by <Jr>
 * [EN-3156] GDS add new category poi + fix wording (2020-10-29) by <Jr>
 * Fix detail asso information View (2020-10-29) by <Jr>
@@ -17,19 +22,16 @@
 * [EN-3096] Event/action shared UI inside message (2020-10-20) by <Jr>
 * [EN-3083] add capability to open detail poi from message (2020-10-19) by <Jr>
 * chore: moving some pods to swiftPM (2020-10-18) by <François Pellissier>
-* chore: fix podfile for bitrise (2020-10-17) by <François Pellissier>
-* chore: fix podfile for bitrise (2020-10-17) by <François Pellissier>
 * chore: fix podfile for bitrise 
 * chore: remove pfp from fastlane (2020-10-17) by <François Pellissier>
-* chore: fix bitrise config without fastlane (2020-10-17) by <François Pellissier>
 * chore: fix bitrise config without fastlane (2020-10-17) by <François Pellissier>
 * chore:update GoogleService Api Key (2020-10-17) by <François Pellissier>
 * chore: try to speed up Beta compilation on Bitrise (2020-10-17) by <François Pellissier>
 * chore: removing PFP (2020-10-16) by <François Pellissier>
 * chore: adding Pods to gitignore (2020-10-16) by <François Pellissier>
-* chore: migrating to FirebaseCrashlytics (no more Fabric) 
+* chore: migrating to FirebaseCrashlytics (no more Fabric)  
 * chore: removing Pods directory from source control + adding version to Podfile (2020-10-16) by <François Pellissier>
-* chore: removing Mixpanel 
+* chore: removing Mixpanel  
 * chore: updating libraries (except googlePlaces) (2020-10-16) by <François Pellissier>
 * chore: change copyright date to 2020 (2020-10-16) by <François izivat>
 * [EN-2982] hide "add event" if profile is offer_help or ask_for_help (2020-10-15) by <Jr>
@@ -66,4 +68,5 @@
 * [EN-2471] Add hub for "annuaire" tab (2020-09-22) by <Jr>
 * [EN-2171] Add 2 new filters on GDS view + change order (2020-09-18) by <Jr>
 * [EN-2902] split GDS from Maincontroller (2020-09-16) by <Jr>
+* add automatic changelog for release 6.5.1433 (2020-09-16) by <François Pellissier>
 * chore: bump to version 6.6 (2020-09-16) by <François Pellissier>
