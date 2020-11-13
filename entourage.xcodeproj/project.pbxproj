@@ -3199,7 +3199,6 @@
 			buildConfigurationList = 6B92CAD019A7461C004E8C9B /* Build configuration list for PBXNativeTarget "entourage" */;
 			buildPhases = (
 				C35D400466E62235DE9A01F4 /* [CP] Check Pods Manifest.lock */,
-				D65701111EC1CD2C00B90327 /* Bump version */,
 				37DC2582242A820000A2024F /* Set URL Scheme */,
 				6B92CA9A19A7461C004E8C9B /* Sources */,
 				6B92CA9B19A7461C004E8C9B /* Frameworks */,
@@ -3506,20 +3505,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D65701111EC1CD2C00B90327 /* Bump version */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bump version";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Scripts/count_commit.sh entourage/entourage-Info.plist\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
