@@ -35,6 +35,14 @@ workflows:
 
             # download the files
             wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -ex
+
+            ./Scripts/count_commit.sh
     - xcode-archive:
         inputs:
         - export_method: app-store
@@ -74,14 +82,6 @@ workflows:
         is_always_run: true
     - cache-push:
         is_always_run: true
-    - script:
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            # fail if any commands fails
-            set -ex
-
-            ./Scripts/count_commit.sh
     - xcode-build-version:
         inputs:
         - info_plist_path: "./entourage/entourage-Info.plist"
@@ -188,6 +188,14 @@ workflows:
             gem install badge-0.9.1.gem
             popd
             rm -r badge-master/
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -ex
+
+            ./Scripts/count_commit.sh
     - fastlane:
         inputs:
         - lane: beta
