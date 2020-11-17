@@ -20,6 +20,8 @@ class OTDetailActionEventViewController: UIViewController {
     @objc var feedItem = OTFeedItem()
     
     var joiner = OTJoinBehavior()
+    var editBehavor = OTEditEntourageBehavior()
+    
     var popShareVC:OTInviteSourceViewController? = nil
     
     var arrayUsers = [OTFeedItemJoiner]()
@@ -28,6 +30,8 @@ class OTDetailActionEventViewController: UIViewController {
     //MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.editBehavor.owner = self
         
         setupViewBottom()
         updateButtonsBehavior()
@@ -57,7 +61,7 @@ class OTDetailActionEventViewController: UIViewController {
             vc.feedItem = feedItem
             vc.delegate = self
             vc.shouldShowTabBarOnClose = false
-            vc.editEntourageBehavior = nil
+            vc.editEntourageBehavior = self.editBehavor
         }
         
         if segue.identifier == "UserProfileSegue" {
@@ -71,6 +75,9 @@ class OTDetailActionEventViewController: UIViewController {
                     userVC.userId = NSNumber(value: userId)
                 }
             }
+        }
+        if self.editBehavor.prepare(segue) {
+            return
         }
     }
     
@@ -196,13 +203,16 @@ class OTDetailActionEventViewController: UIViewController {
         
         if feedItem.status == FEEDITEM_STATUS_CLOSED {
             ui_view_bottom.isHidden = true
+            ui_constraint_bottomView_height.constant = 0
         }
         else {
             if feedItem.joinStatus == JOIN_ACCEPTED {
                 ui_view_bottom.isHidden = true
+                ui_constraint_bottomView_height.constant = 0
             }
             else {
                 ui_view_bottom.isHidden = false
+                ui_constraint_bottomView_height.constant = 88
             }
         }
         
@@ -402,7 +412,19 @@ extension OTDetailActionEventViewController:ActionCellTopDelegate, InviteSourceD
     
     func actionJoin() {
         if feedItem.joinStatus == JOIN_PENDING {
-            actionCancel()
+            let alertvc = UIAlertController.init(title: "Attention", message: OTLocalisationService.getLocalizedValue(forKey: "confirm_cancel_demand"), preferredStyle: .alert)
+            let action_cancel = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey: "cancel"), style: .cancel) { (action) in
+                alertvc.dismiss(animated: true, completion: nil)
+            }
+            let action_validate = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey: "pop_validate_event_bt_validate"), style: .default) { (action) in
+                alertvc.dismiss(animated: true, completion: nil)
+                self.actionCancel()
+            }
+            
+            alertvc.addAction(action_validate)
+            alertvc.addAction(action_cancel)
+            
+            self.present(alertvc, animated: true, completion: nil)
         }
         else {
             self.joiner.join(self.feedItem)

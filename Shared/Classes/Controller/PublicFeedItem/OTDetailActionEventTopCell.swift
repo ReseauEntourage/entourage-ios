@@ -184,6 +184,8 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
     @IBOutlet weak var ui_button_asso: UIButton!
     @IBOutlet weak var ui_label_information: UILabel!
     
+    @IBOutlet weak var ui_constraint_bottom_username: NSLayoutConstraint!
+    @IBOutlet weak var ui_constraint_top_username: NSLayoutConstraint!
     weak var delegate:ActionCellCreatorDelegate? = nil
     
     func populate(feedItem:OTFeedItem,delegate:ActionCellCreatorDelegate) {
@@ -211,6 +213,8 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
             self.ui_button_asso.tag = feedItem.author.partner.aid.intValue
         }
         else {
+            ui_constraint_top_username.constant = 30
+            ui_constraint_bottom_username.constant = 0
             self.ui_label_role.isHidden = true
             self.ui_button_asso.isHidden = true
         }
@@ -219,14 +223,14 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
         
         if feedItem.isAction() {
             if feedItem.type == "ask_for_help" {
-                self.ui_label_information.text = "Fait appel à la solidarité du réseau"
+                self.ui_label_information.text = OTLocalisationService.getLocalizedValue(forKey: "detail_action_creator_help")
             }
             else {
-                self.ui_label_information.text = "Propose"
+                self.ui_label_information.text = OTLocalisationService.getLocalizedValue(forKey: "detail_action_creator_gift")
             }
         }
         else {
-            self.ui_label_information.text = "Vous donne rendez-vous"
+            self.ui_label_information.text = OTLocalisationService.getLocalizedValue(forKey: "detail_action_creator_event")
         }
     }
     
@@ -346,11 +350,11 @@ struct Utils {
         let endDateInfo = dateFormatter.string(from: endDate)
         let endTimeInfo = (startDate as NSDate).toRoundedQuarterTimeString()
         
-        var dateInfoTxt = ""//OTLocalisationService.getLocalizedValue(forKey: "rendez-vous")
+        var dateInfoTxt = ""
         
         if Calendar.current.isDate(startDate, inSameDayAs: endDate) {
             let _str = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "Le_"), startDateInfo)
-            dateInfoTxt = String.init(format: "%@ %@", dateInfoTxt,_str)
+            dateInfoTxt = String.init(format: "%@",_str)
             
             let _dateStr = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "de_a"), startTimeInfo!,endTimeInfo!)
             dateInfoTxt = String.init(format: "%@\n%@", dateInfoTxt,_dateStr)
@@ -359,7 +363,7 @@ struct Utils {
             let _dateStartStr = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "Du_a"), startDateInfo,startTimeInfo!)
             let _dateEndStr = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "au_a"), endDateInfo,endTimeInfo!)
             
-            dateInfoTxt = String.init(format: "%@ %@ %@", dateInfoTxt,_dateStartStr,_dateEndStr)
+            dateInfoTxt = String.init(format: "%@ %@", _dateStartStr,_dateEndStr)
         }
         
         return dateInfoTxt

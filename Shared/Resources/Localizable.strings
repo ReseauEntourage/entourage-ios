@@ -600,7 +600,7 @@
 
 //Dates formatées
 "le_" = "le %@";
-"Le_" = "Le %@";
+"Le_" = "%@";
 "du_au" = "du %@ au %@";
 "Du_au" = "Du %@ au %@";
 "de_a" = "de %@ à %@";
@@ -901,3 +901,9 @@
 "partnerFollowButtonCancel" = "Annuler";
 
 "sendShare" = "Lien envoyé";
+
+"detail_action_creator_help" = "fait appel à la solidarité du réseau";
+"detail_action_creator_event" = "vous donne rendez-vous";
+"detail_action_creator_gift" = "propose";
+
+"confirm_cancel_demand" = "Confirmez-vous vouloir retirer votre demande ?";
