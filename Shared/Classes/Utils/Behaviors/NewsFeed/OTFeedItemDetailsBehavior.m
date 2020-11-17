@@ -27,7 +27,7 @@
             [self.owner performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
         }
         else {
-            [self.owner performSegueWithIdentifier:@"pushDetailFeedNew" sender:self];
+            [self.owner performSegueWithIdentifier:@"PublicFeedDetailNew" sender:self];
         }
     }
     else
@@ -39,7 +39,7 @@
         OTPublicFeedItemViewController *controller = (OTPublicFeedItemViewController *)segue.destinationViewController;
         controller.feedItem = self.feedItem;
     }
-    else if ([segue.identifier isEqualToString:@"pushDetailFeedNew"]) {
+    else if ([segue.identifier isEqualToString:@"PublicFeedDetailNew"]) {
         OTDetailActionEventViewController *controller = (OTDetailActionEventViewController *) segue.destinationViewController;
         controller.feedItem = self.feedItem;
     }

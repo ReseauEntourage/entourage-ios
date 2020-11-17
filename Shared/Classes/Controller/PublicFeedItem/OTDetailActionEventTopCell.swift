@@ -130,7 +130,7 @@ class OTDetailActionEventLocationCell: UITableViewCell, TTTAttributedLabelDelega
         self.ui_postalCode.linkAttributes = [NSAttributedString.Key.font:UIFont(name: "SFUIText-Bold", size: 15.0) as Any,
                                              NSAttributedString.Key.foregroundColor: ApplicationTheme.shared().addActionButtonColor,
                                              NSAttributedString.Key.underlineColor: ApplicationTheme.shared().addActionButtonColor,
-                                             NSAttributedString.Key.underlineStyle:  NSUnderlineStyle.single]
+                                             NSAttributedString.Key.underlineStyle:  NSUnderlineStyle.single.rawValue]
     }
     
     func populate(feedItem:OTFeedItem) {
