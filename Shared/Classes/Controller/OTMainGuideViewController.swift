@@ -299,7 +299,7 @@ class OTMainGuideViewController: UIViewController {
             mapCenter = CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON)
         }
         
-        let region = MKCoordinateRegion(center: mapCenter, latitudinalMeters: CLLocationDistance(MAPVIEW_REGION_SPAN_X_METERS), longitudinalMeters: CLLocationDistance(MAPVIEW_REGION_SPAN_Y_METERS))
+        let region = MKCoordinateRegion(center: mapCenter, latitudinalMeters: CLLocationDistance(MAPVIEW_REGION_LIGHT_SPAN_X_METERS), longitudinalMeters: CLLocationDistance(MAPVIEW_REGION_LIGHT_SPAN_Y_METERS))
         
         self.mapView.setRegion(region, animated: false)
         
@@ -391,7 +391,7 @@ class OTMainGuideViewController: UIViewController {
         
         let duration = animated ? TimeInterval(floatLiteral: 0.25) : TimeInterval(floatLiteral: 0.0)
         UIView.animate(withDuration: duration) {
-            let region = MKCoordinateRegion(center: self.mapView.centerCoordinate, latitudinalMeters: CLLocationDistance(MAPVIEW_REGION_SPAN_X_METERS), longitudinalMeters: CLLocationDistance(MAPVIEW_REGION_SPAN_Y_METERS))
+            let region = MKCoordinateRegion(center: self.mapView.centerCoordinate, latitudinalMeters: CLLocationDistance(MAPVIEW_REGION_LIGHT_SPAN_X_METERS), longitudinalMeters: CLLocationDistance(MAPVIEW_REGION_LIGHT_SPAN_Y_METERS))
             self.mapView.setRegion(region, animated: animated)
             self.ui_tableView.tableHeaderView = self.headerViewWithMap(mapHeight: mapFrame.size.height)
             
