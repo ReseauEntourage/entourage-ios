@@ -20,27 +20,32 @@ class OTDetailActionEventTopCell: UITableViewCell {
     
     
     @IBOutlet weak var ui_title: UILabel!
-    @IBOutlet weak var ui_view_button_join: UIView!
-    @IBOutlet weak var ui_view_button_share: UIView!
-    @IBOutlet weak var ui_label_button_action: UILabel!
-    @IBOutlet weak var ui_image_button_action: UIImageView!
+    @IBOutlet weak var ui_view_button_join: UIView?
+    @IBOutlet weak var ui_view_button_share: UIView?
+    @IBOutlet weak var ui_label_button_action: UILabel?
+    @IBOutlet weak var ui_image_button_action: UIImageView?
     
-    @IBOutlet weak var ui_label_button_joined: UILabel!
-    @IBOutlet weak var ui_view_button_joined: UIView!
+    @IBOutlet weak var ui_label_button_joined: UILabel?
+    @IBOutlet weak var ui_view_button_joined: UIView?
     weak var delegate:ActionCellTopDelegate? = nil
     var isJoinAccepted = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ui_view_button_join.layer.borderWidth = 1
-        ui_view_button_join.layer.cornerRadius = 8
-        ui_view_button_join.layer.borderColor = UIColor.appOrange()?.cgColor
-        ui_view_button_share.layer.cornerRadius = 8
-        ui_view_button_joined.layer.cornerRadius = 8
-        ui_view_button_joined.isHidden = true
+        ui_view_button_join?.layer.borderWidth = 1
+        ui_view_button_join?.layer.cornerRadius = 8
+        ui_view_button_join?.layer.borderColor = UIColor.appOrange()?.cgColor
+        ui_view_button_share?.layer.cornerRadius = 8
+        ui_view_button_joined?.layer.cornerRadius = 8
+        ui_view_button_joined?.isHidden = true
     }
     
-    func populate(feedItem:OTEntourage,delegate:ActionCellTopDelegate) {
+    @objc func populate(feedItem:OTEntourage) {
+        populate(feedItem: feedItem, delegate: nil)
+    }
+    
+    
+    func populate(feedItem:OTEntourage,delegate:ActionCellTopDelegate?) {
         self.delegate = delegate
         
         
@@ -65,8 +70,8 @@ class OTDetailActionEventTopCell: UITableViewCell {
         case JOIN_ACCEPTED:
             isJoinAccepted = true
             title = OTLocalisationService.getLocalizedValue(forKey: "join_active_other")
-            ui_label_button_joined.text = title.uppercased()
-            ui_view_button_joined.isHidden = false
+            ui_label_button_joined?.text = title.uppercased()
+            ui_view_button_joined?.isHidden = false
             
         case JOIN_PENDING:
             title = OTLocalisationService.getLocalizedValue(forKey: "join_pending_new")
@@ -77,12 +82,12 @@ class OTDetailActionEventTopCell: UITableViewCell {
                 title = OTLocalisationService.getLocalizedValue(forKey: "join_entourage_btn")
             }
         }
-        ui_label_button_action.text = title.uppercased()
+        ui_label_button_action?.text = title.uppercased()
         if feedItem.status == FEEDITEM_STATUS_CLOSED  { //|| feedItem.joinStatus == JOIN_ACCEPTED
-            ui_view_button_join.isHidden = true
+            ui_view_button_join?.isHidden = true
         }
         else {
-            ui_view_button_join.isHidden = false
+            ui_view_button_join?.isHidden = false
         }
     }
     
@@ -109,7 +114,7 @@ class OTDetailActionEventDateCell: UITableViewCell {
     @IBOutlet weak var ui_picto: UIImageView!
     @IBOutlet weak var ui_label_event: TTTAttributedLabel!
     
-    func populate(feedItem:OTFeedItem) {
+   @objc func populate(feedItem:OTFeedItem) {
         let _DateStr = Utils.eventInfoDescrioption(startDate: feedItem.startsAt, endDate: feedItem.endsAt)
         ui_label_event.text = _DateStr
     }
@@ -133,7 +138,7 @@ class OTDetailActionEventLocationCell: UITableViewCell, TTTAttributedLabelDelega
                                              NSAttributedString.Key.underlineStyle:  NSUnderlineStyle.single.rawValue]
     }
     
-    func populate(feedItem:OTFeedItem) {
+    @objc func populate(feedItem:OTFeedItem) {
        
         if feedItem.isAction() {
             ui_postalCode.text = feedItem.postalCode
@@ -188,7 +193,11 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
     @IBOutlet weak var ui_constraint_top_username: NSLayoutConstraint!
     weak var delegate:ActionCellCreatorDelegate? = nil
     
-    func populate(feedItem:OTFeedItem,delegate:ActionCellCreatorDelegate) {
+    @objc func populate(feedItem:OTFeedItem) {
+        populate(feedItem: feedItem, delegate: nil)
+    }
+    
+    @objc func populate(feedItem:OTFeedItem,delegate:ActionCellCreatorDelegate?) {
         self.delegate = delegate
         
         if feedItem.isNeighborhood() || feedItem.isPrivateCircle() {
@@ -244,7 +253,7 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
 }
 
 //MARK: - ActionCellCreatorDelegate -
-protocol ActionCellCreatorDelegate: class {
+@objc protocol ActionCellCreatorDelegate: class {
     func actionshowPartner()
     func actionShowUser()
 }
@@ -261,7 +270,7 @@ class OTDetailActionEventDescriptionCell: UITableViewCell {
         ui_view_description.layer.cornerRadius = 8
     }
     
-    func populate(feedItem:OTEntourage) {
+    @objc func populate(feedItem:OTEntourage) {
         
         if feedItem.desc == nil || feedItem.desc.count == 0 {
             ui_label_description?.removeFromSuperview()
@@ -283,7 +292,7 @@ class OTDetailActionEventMapCell: UITableViewCell {
     
     var mapProvider:OTMapAnnotationProviderBehavior? = nil
     
-    func populate(feedItem:OTFeedItem) {
+    @objc func populate(feedItem:OTFeedItem) {
         mapProvider = OTMapAnnotationProviderBehavior()
         mapProvider?.map = ui_map
         mapProvider?.configure(with: feedItem)
