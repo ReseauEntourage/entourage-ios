@@ -22,6 +22,7 @@ class OTPicturePreviewResizeViewController: UIViewController {
     let MaxImageSize:CGFloat = 300
     
     var isFromProfile = false
+    var isFromDeepLink = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +98,10 @@ class OTPicturePreviewResizeViewController: UIViewController {
         SVProgressHUD.dismiss()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationProfilePictureUpdated), object: self)
         if let _navController = self.navigationController {
+            if self.isFromDeepLink {
+                self.navigationController?.dismiss(animated: true, completion: nil)
+                return
+            }
             for vc in _navController.viewControllers {
                 if vc.isKind(of: OTUserEditViewController.classForCoder()) {
                     self.navigationController?.popToViewController(vc, animated: true)

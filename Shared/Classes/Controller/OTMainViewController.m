@@ -1232,9 +1232,36 @@ OTHeatzonesCollectionViewDelegate
                 self.inviteBehaviorTriggered = ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction];
             }
             
-            [self showFeedInfo:entourage];
+            [self checkProfileImageAfterCreate:entourage];
         }
     }];
+}
+
+-(void) checkProfileImageAfterCreate:(OTEntourage *)entourage {
+    
+    OTUser * currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    if (currentUser.avatarURL == nil || currentUser.avatarURL.length == 0) {
+        NSString *message = OTLocalizedString(@"info_photo_profile_description");
+        
+        UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"info_photo_profile_title") message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *action = [UIAlertAction actionWithTitle:OTLocalizedString(@"info_photo_profile_add") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            NSURL *deepL = [NSURL URLWithString:@"entourage://profilePhoto"];
+            [[OTDeepLinkService new] handleDeepLink:deepL];
+        }];
+        UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:OTLocalizedString(@"info_photo_profile_ignore") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self showFeedInfo:entourage];
+        }];
+        
+        [alertVC addAction:actionCancel];
+        [alertVC addAction:action];
+        
+        [self presentViewController:alertVC animated:YES completion:nil];
+    }
+    else {
+        [self showFeedInfo:entourage];
+    }
 }
 
 #pragma mark - OTFeedItemQuitDelegate

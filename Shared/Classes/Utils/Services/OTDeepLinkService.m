@@ -102,6 +102,15 @@
     
     [self showControllerFromAnywhere:rootUserProfileController];
 }
+- (void)showProfilePhotoFromAnywhere {
+    UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
+    OTOnboardingPhotoViewController *vc = (OTOnboardingPhotoViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_photo"];
+    vc.isFromProfile = YES;
+    vc.isFromDeepLink = YES;
+    UINavigationController *navVc = [UINavigationController new];
+    [navVc addChildViewController:vc];
+    [self showControllerFromAnywhere:navVc];
+}
 
 - (void) handleDeepLink: (NSURL *)url {
     NSString *host = url.host;
@@ -208,6 +217,9 @@
     else if ([key isEqualToString:@"profileAction"]) {
         [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].uuid isFromLaunch:YES];
         
+    }
+    else if([key isEqualToString:@"profilePhoto"]) {
+        [self showProfilePhotoFromAnywhere];
     }
 }
 

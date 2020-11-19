@@ -907,3 +907,9 @@
 "detail_action_creator_gift" = "propose";
 
 "confirm_cancel_demand" = "Confirmez-vous vouloir retirer votre demande ?";
+
+//Pop info photo profile
+"info_photo_profile_title" = "Ajoutez votre photo de profil et inspirez encore plus confiance";
+"info_photo_profile_description" = "Vous n’avez pas encore de photo de profil. Les personnes découvrant votre action solidaire seront plus susceptibles de la rejoindre si vous en ajoutez une.";
+"info_photo_profile_ignore" = "IGNORER";
+"info_photo_profile_add" = "AJOUTER";
