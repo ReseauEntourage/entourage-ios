@@ -231,10 +231,12 @@ extension OTMenuProfileViewController: TapMenuProfileDelegate {
     }
     
     func showEvents() {
+        OTLogger.logEvent(Action_Menu_EventsCount)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showEvents"), object: nil)
     }
     
     func showAll() {
+        OTLogger.logEvent(Action_Menu_ActionsCount)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showAlls"), object: nil)
     }
 }

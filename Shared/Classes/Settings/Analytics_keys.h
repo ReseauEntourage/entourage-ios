@@ -132,10 +132,11 @@
 #define Action_Profile_Ethic @"Action__Profile__Ethic"
 #define Action_Profile_About @"Action__Profile__About"
 #define Action_Profile_Logout @"Action__Profile__LogOut"
-#define Action_Profile_ShowEvents @"Action__Profile__ShowEvents"
-#define Action_Profile_ShowActions @"Action__Profile__ShowActions"
 #define Action_Profile_ModProfil @"Action__Profile__ModProfil"
 #define Action_Profile_ShowProfil @"Action__Profile__ShowProfil"
+
+#define Action_Menu_EventsCount @"Action__Menu__EventsCount"
+#define Action_Menu_ActionsCount @"Action__Menu__ActionsCount"
 
 #define View_Profile_Menu @"View__Profile__Menu"
 
