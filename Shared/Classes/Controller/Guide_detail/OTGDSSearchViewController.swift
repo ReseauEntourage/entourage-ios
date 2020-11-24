@@ -30,6 +30,8 @@ class OTGDSSearchViewController: UIViewController {
         super.viewDidLoad()
         self.ui_iv_clear.isHidden = true
         ui_tableview.tableFooterView = UIView(frame: CGRect.zero)
+        
+        ui_tf_search.becomeFirstResponder()
     }
     
     func sendSearch(searchTxt:String) {
