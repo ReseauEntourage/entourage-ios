@@ -904,7 +904,7 @@
 
 "detail_action_creator_help" = "fait appel à la solidarité du réseau";
 "detail_action_creator_event" = "vous donne rendez-vous";
-"detail_action_creator_gift" = "propose";
+"detail_action_creator_gift" = "propose cette aide";
 
 "confirm_cancel_demand" = "Confirmez-vous vouloir retirer votre demande ?";
 
