@@ -914,3 +914,7 @@
 "info_photo_profile_ignore" = "Ignorer";
 "info_photo_profile_add" = "Ajouter";
 "info_feed_item_event_online" = "En ligne";
+
+"input_username" = "Heureux de vous revoir !";
+"input_sub" = "Cette fois, pourriez-vous me dire comment vous vous appelez ?";
+"input_username_error" = "Veuillez remplir les 2 champs avec un minimum de %d caractères.";

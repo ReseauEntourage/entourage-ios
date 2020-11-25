@@ -168,7 +168,7 @@ OTHeatzonesCollectionViewDelegate
 @property (nonatomic) BOOL forceReloadingFeeds;
 @property (nonatomic) BOOL isAskForHelp;
 
-@property (nonatomic) BOOL isFirstInitView;
+@property (nonatomic) BOOL isFirstInitView,isFirstLaunchCheckName;
 @end
 
 @implementation OTMainViewController
@@ -176,6 +176,7 @@ OTHeatzonesCollectionViewDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isFirstLaunchCheckName = YES;
     self.isFirstInitView = YES;
     
     [self setup];
@@ -202,6 +203,20 @@ OTHeatzonesCollectionViewDelegate
 -(void)checkProfil {
     if (!self.isFirstLoad) {
         return;
+    }
+    
+    if (self.isFirstLaunchCheckName) {
+        self.isFirstLaunchCheckName = NO;
+        OTUser * currentUser = [[NSUserDefaults standardUserDefaults]currentUser];
+        
+        if (currentUser.firstName.length == 0 && currentUser.lastName.length == 0) {
+            UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
+            OTInputNamesViewController * vc = [sb instantiateViewControllerWithIdentifier:@"Onboarding_inputNames"];
+            vc.modalPresentationStyle = UIModalPresentationFullScreen;
+            
+            [self.tabBarController presentViewController:vc animated:YES completion:nil];
+            return;
+        }
     }
     
     BOOL isAfterLogin = [[NSUserDefaults standardUserDefaults] boolForKey: @"checkAfterLogin"];

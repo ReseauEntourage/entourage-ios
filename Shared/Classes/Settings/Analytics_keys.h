@@ -195,5 +195,7 @@
 //Start info
 #define View_Start_Feeds @"View__Start__Feeds"
 
+#define Action_Add_username_Submit @"Action__Add__UsernameSubmit"
+
 
 #endif /* Analytics_keys_h */
