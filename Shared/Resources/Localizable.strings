@@ -913,3 +913,4 @@
 "info_photo_profile_description" = "Vous n’avez pas encore de photo de profil. Les personnes découvrant votre action solidaire seront plus susceptibles de la rejoindre si vous en ajoutez une.";
 "info_photo_profile_ignore" = "Ignorer";
 "info_photo_profile_add" = "Ajouter";
+"info_feed_item_event_online" = "En ligne";
