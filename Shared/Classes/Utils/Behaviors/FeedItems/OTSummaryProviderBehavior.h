@@ -25,6 +25,7 @@
 @property (nonatomic) BOOL showTimeAsUpdatedDate;
 @property (nonatomic) CGSize imgCategorySize;
 
+@property(nonatomic) BOOL isFromMyEntourages;
 - (void)configureWith:(OTFeedItem *)feedItem;
 - (void)clearConfiguration;
 

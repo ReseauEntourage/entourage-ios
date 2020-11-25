@@ -134,8 +134,13 @@
             } else {
                 distanceStr = @"";
             }
-            
-            self.lblTimeDistance.text = [NSString stringWithFormat:@"%@%@",distanceStr,feedItem.postalCode];
+            if (self.isFromMyEntourages) {
+               distanceStr = [distanceStr stringByReplacingOccurrencesOfString:@" - " withString:@""];
+                self.lblTimeDistance.text = distanceStr;
+            }
+            else {
+                self.lblTimeDistance.text = [NSString stringWithFormat:@"%@%@",distanceStr,feedItem.postalCode];
+            }
         }
     }
     

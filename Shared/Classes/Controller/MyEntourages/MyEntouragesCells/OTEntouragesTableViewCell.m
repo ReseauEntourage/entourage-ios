@@ -33,7 +33,7 @@
     self.summaryProvider.imgCategorySize = CGSizeMake(25, 25);
     
     [self setupSubtitleLabelWithItem:item];
-    
+    self.summaryProvider.isFromMyEntourages = YES;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
     
