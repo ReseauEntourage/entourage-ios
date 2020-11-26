@@ -44,7 +44,6 @@ class OTInputNamesViewController: UIViewController {
         else {
             updateButton(isValid: false)
         }
-        OTLogger.logEvent(View_Onboarding_Names)
     }
     
     func updateButton(isValid:Bool) {
