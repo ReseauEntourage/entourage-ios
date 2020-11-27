@@ -27,24 +27,15 @@
 }
 
 + (NSString *)actionShareText:(OTEntourage *)action {
-    NSString *template_name = [NSString stringWithFormat:@"%@share_action", self.communityPrefix];
-    NSString *template = OTLocalizedString(template_name);
-    NSString *role = [self actionRole:action];
-    NSString *verb_name = [NSString stringWithFormat:@"share_action_verb_%@", role];
-    NSString *verb = OTLocalizedString(verb_name);
-    return [NSString stringWithFormat:template, verb, action.title, action.shareUrl];
+    NSString *tempStr = [NSString stringWithFormat:OTLocalizedString(@"share_action"), action.shareUrl];
+   
+    return tempStr;
 }
 
 + (NSString *)eventShareText:(OTEntourage *)event {
-    NSString *template_name = [NSString stringWithFormat:@"%@share_event", self.communityPrefix];
-    NSString *template = OTLocalizedString(template_name);
-    
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"fr_FR"]];
-    [dateFormatter setDateFormat:@"EEEE d MMMM à H'h'mm"];
-    NSString *date = [dateFormatter stringFromDate:event.startsAt];
-    
-    return [NSString stringWithFormat:template, event.title, date, event.displayAddress, event.shareUrl];
+    NSString *tempStr = [NSString stringWithFormat:OTLocalizedString(@"share_action"), event.shareUrl];
+   
+    return tempStr;
 }
 
 + (NSString *)genericShareText:(OTEntourage *)group {

@@ -555,7 +555,7 @@
 // Share
 "share_webview" = "J'ai découvert le guide Simple Comme Bonjour pour aller à la rencontre des personnes sans-abri. C'est à découvrir ici : %@";
 
-"share_action" = "Hello ! J'ai %1$@ une initiative solidaire sur Entourage, le réseau qui tisse des liens entre voisins avec et sans domicile : \"%2$@\". J’ai pensé que ça t'intéresserait. Clique ici : %3$@.\n\nMerci beaucoup pour ta solidarité !";
+"share_action" = "%@\n\nMerci beaucoup pour ta solidarité !";
 
 "share_action_verb_creator" = "créé";
 "share_action_verb_member" = "rejoint";
