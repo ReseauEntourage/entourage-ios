@@ -197,5 +197,8 @@
 
 #define Action_Add_username_Submit @"Action__Add__UsernameSubmit"
 
+#define Action_guide_searchStart @"Action__GuideMap__SearchStart"
+#define Action_guide_searchResults @"Action__GuideMap__SearchResults"
+
 
 #endif /* Analytics_keys_h */

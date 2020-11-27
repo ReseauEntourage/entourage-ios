@@ -32,6 +32,8 @@ class OTGDSSearchViewController: UIViewController {
         ui_tableview.tableFooterView = UIView(frame: CGRect.zero)
         
         ui_tf_search.becomeFirstResponder()
+        
+        OTLogger.logEvent(Action_guide_searchStart)
     }
     
     func sendSearch(searchTxt:String) {
@@ -53,7 +55,7 @@ class OTGDSSearchViewController: UIViewController {
                         "v" : "2"] as [String : Any]
         
         OTPoiService().pois(withParameters: (newDict), success: { (_, pois) in
-            
+            OTLogger.logEvent(Action_guide_searchResults)
             if let _pois = pois as? [OTPoi] {
                 self.pois = _pois
             }
