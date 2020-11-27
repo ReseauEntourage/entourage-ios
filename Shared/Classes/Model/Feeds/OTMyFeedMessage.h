@@ -13,6 +13,8 @@
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *displayName;
+@property (nonatomic, strong) NSNumber *authorId;
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 
