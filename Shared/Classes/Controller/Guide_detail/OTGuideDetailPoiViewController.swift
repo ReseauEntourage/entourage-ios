@@ -17,6 +17,7 @@ import SVProgressHUD
     @IBOutlet weak var ui_view_parent_info_poi: UIView!
     @IBOutlet weak var ui_tableview_infos_poi: UITableView!
     
+    @IBOutlet weak var ui_constraint_height_view_update: NSLayoutConstraint!
     @objc var poi:OTPoi!
     @objc var isFromDeeplink = false
     
@@ -72,6 +73,10 @@ import SVProgressHUD
         }
         else {
             hasPublicRow = false
+        }
+        
+        if isSoliguide {
+            ui_constraint_height_view_update.constant = 0
         }
         
         self.ui_tableview.reloadData()
