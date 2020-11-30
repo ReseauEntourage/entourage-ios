@@ -146,7 +146,8 @@ import SVProgressHUD
             return
         }
         
-        let subject = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "structure_subject"), self.poi.name!,self.poi.sid)
+        let uuid : String! = (self.poi.uuid != nil && self.poi.uuid.count > 0) ? self.poi.uuid : self.poi.sid.stringValue
+        let subject = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "structure_subject"), self.poi.name!,uuid)
         let recipeint = OTAppAppearance.reportActionToRecepient()!
         
         //  OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
