@@ -918,3 +918,4 @@
 "input_username" = "Heureux de vous revoir !";
 "input_sub" = "Cette fois, pourriez-vous me dire comment vous vous appelez ?";
 "input_username_error" = "Veuillez remplir les 2 champs avec un minimum de %d caractères.";
+"button_reset_filters" = "Annuler Filtres";

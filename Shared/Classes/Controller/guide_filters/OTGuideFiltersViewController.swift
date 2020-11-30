@@ -30,6 +30,13 @@ class OTGuideFiltersViewController: UIViewController, ClosePopDelegate {
         
         addCloseButtonLeftWithWhiteColorBar()
         
+        let resetButton = UIBarButtonItem(title: OTLocalisationService.getLocalizedValue(forKey: "button_reset_filters"), style: .plain, target: self, action: #selector(resetFilters))
+        
+        self.navigationItem.setRightBarButton(resetButton, animated: false)
+        resetButton.tintColor = UIColor.appOrange()
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.appOrange()
+        resetButton.setTitleTextAttributes([.foregroundColor: resetButton.tintColor as Any], for: .normal)
+        
         self.ui_tableview.tableFooterView = UIView(frame: .zero)
         
         checkFilters()
@@ -72,6 +79,12 @@ class OTGuideFiltersViewController: UIViewController, ClosePopDelegate {
         dismiss(animated: true) {
             self.filterDelegate?.solidarityFilterChanged(currentFilter)
         }
+    }
+    
+    @objc func resetFilters() {
+        self.filters.setAllFiltersOn()
+        checkFilters()
+        self.ui_tableview.reloadData()
     }
 }
 
