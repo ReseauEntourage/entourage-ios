@@ -146,6 +146,7 @@ extension OTGuideFiltersViewController: UITableViewDelegate,UITableViewDataSourc
     func changeTop(_ position:Int) {
         switch position {
         case 1:
+            OTLogger.logEvent(Action_guide_searchFilter_organiz)
             if self.filters.showPartners && !filters.isDefaultFiltersNew() {
                 self.filters.setAllFiltersOn()
             }
@@ -153,6 +154,7 @@ extension OTGuideFiltersViewController: UITableViewDelegate,UITableViewDataSourc
                 self.filters.setAllFiltersOff(position: -1)
             }
         case 2:
+            OTLogger.logEvent(Action_guide_searchFilter_Donat)
             if self.filters.showDonated && !filters.isDefaultFiltersNew() {
                 self.filters.setAllFiltersOn()
             }
@@ -160,6 +162,7 @@ extension OTGuideFiltersViewController: UITableViewDelegate,UITableViewDataSourc
                 self.filters.setAllFiltersOff(position: -2)
             }
         case 3:
+            OTLogger.logEvent(Action_guide_searchFilter_Volunt)
             if self.filters.showVolunteer && !filters.isDefaultFiltersNew()  {
                 self.filters.setAllFiltersOn()
             }

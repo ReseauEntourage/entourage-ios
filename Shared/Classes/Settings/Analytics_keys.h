@@ -200,5 +200,8 @@
 #define Action_guide_searchStart @"Action__GuideMap__SearchStart"
 #define Action_guide_searchResults @"Action__GuideMap__SearchResults"
 
+#define Action_guide_searchFilter_organiz @"Action__GuideMap__OrganizationsFilter"
+#define Action_guide_searchFilter_Volunt @"Action__GuideMap__Volunteers"
+#define Action_guide_searchFilter_Donat @"Action__GuideMap__Donations"
 
 #endif /* Analytics_keys_h */
