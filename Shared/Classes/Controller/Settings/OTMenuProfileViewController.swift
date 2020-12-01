@@ -113,6 +113,7 @@ class OTMenuProfileViewController: UIViewController {
             OTSafariService.launchInAppBrowser(withUrlString: url, viewController: self.navigationController)
         }
     }
+    
     @IBAction func action_tap_ambassador(_ sender: Any) {
         OTLogger.logEvent(Action_Profile_Ambassador)
         OTSafariService.launchInAppBrowser(withUrlString: JOIN_URL, viewController: self.navigationController)
@@ -171,6 +172,60 @@ class OTMenuProfileViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func action_tap_linkedout(_ sender: Any) {
+        if let url = URL(string: ABOUT_LINKEDOUT) {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    @IBAction func action_tap_share(_ sender: Any) {
+        let textShare = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "menu_info_text_share"), ENTOURAGE_BITLY_LINK)
+        
+        
+        let activityVC = UIActivityViewController.init(activityItems: [textShare], applicationActivities: nil)
+        
+        if #available(iOS 11.0, *) {
+            activityVC.excludedActivityTypes = [.print,.airDrop,.markupAsPDF,.postToVimeo,.openInIBooks,.postToFlickr,.assignToContact,.saveToCameraRoll,.postToTencentWeibo]
+        } else {
+            activityVC.excludedActivityTypes = [.print,.airDrop,.postToVimeo,.openInIBooks,.postToFlickr,.assignToContact,.saveToCameraRoll,.postToTencentWeibo]
+        }
+        
+        OTAppConfiguration.configureActivityControllerAppearance(nil, color: ApplicationTheme.shared().primaryNavigationBarTintColor)
+        
+        activityVC.completionWithItemsHandler = {
+            (activity, success, items, error) in
+            OTAppConfiguration.configureActivityControllerAppearance(nil, color: ApplicationTheme.shared().secondaryNavigationBarTintColor)
+        }
+        activityVC.navigationController?.navigationBar.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
+        self.navigationController?.present(activityVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func action_tap_blog(_ sender: Any) {
+        let token = UserDefaults.standard.currentUser.token!
+        let relativeUrl = String.init(format: API_URL_MENU_OPTIONS, BLOG_LINK_ID,token)
+        if let _BaseUrl = OTHTTPRequestManager.sharedInstance()?.baseURL?.absoluteString {
+            let url = String.init(format: "%@%@",_BaseUrl ,relativeUrl)
+            
+            OTSafariService.launchInAppBrowser(withUrlString: url, viewController: self.navigationController)
+        }
+    }
+    
+    @IBAction func action_facebook(_ sender: Any) {
+        if let url = URL(string: ABOUT_FACEBOOK_URL) {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    @IBAction func action_insta(_ sender: Any) {
+        if let url = URL(string: ABOUT_INSTAGRAM_URL) {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    @IBAction func action_twit(_ sender: Any) {
+        if let url = URL(string: ABOUT_TWITTER_URL) {
+            UIApplication.shared.openURL(url)
+        }
+    }
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource -
@@ -181,25 +236,33 @@ extension OTMenuProfileViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isStaging ? 3 : 2
+        return isStaging ? 6 : 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUser", for: indexPath) as! OTSettingsUserTableViewCell
-            
             cell.populateCell(currentUser: self.currentUser,delegate: self)
             return cell
-        }
-        else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellMenu", for: indexPath) as! OTSettingsMenuTableViewCell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellFirst", for: indexPath) as! OTSettingsMenuFirstTableViewCell
             let hasSignedChart = self.currentUser.hasSignedEthicsChart()
-            let hasGoodWaves = self.currentUser.isGoodWavesValidated
-            cell.populateCell(alreadyGoodWaves: hasGoodWaves, hasSignedChart: hasSignedChart)
+            cell.populateCell(hasSignedChart: hasSignedChart)
             return cell
-        }
-        else {
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellSecond", for: indexPath) as! OTSettingsMenuSecondTableViewCell
+            let hasGoodWaves = self.currentUser.isGoodWavesValidated
+            cell.populateCell(alreadyGoodWaves: hasGoodWaves)
+            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellThird", for: indexPath)
+            return cell
+        case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellHelpEnd", for: indexPath)
+            return cell
+        default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "footerCell", for: indexPath) as! OTSettingsDebugTableViewCell
             cell.populateCell(info: uuidInfo)
             return cell

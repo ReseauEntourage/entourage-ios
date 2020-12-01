@@ -95,6 +95,28 @@
 "menu_join" = "Devenir Ambassadeur Entourage";
 "menu_donnation" = "Donner mes retours rapides";
 
+
+//Menu new version
+"menu_info_title" = "👌  MON ACTIVITE";
+"menu_info_first_title" = "👋 FAIRE LE PREMIER PAS";
+"menu_info_first_guide" = "Notre guide pour oser la rencontre";
+"menu_info_first_prog" = "Quel programme d’Entourage est pour vous ?";
+//Second
+"menu_info_second_gift" = "Faire un don à Entourage";
+"menu_info_second_help" = "Aider à la réinsertion ";
+"menu_info_second_ambassador" = "Devenir Ambassadeur bénévole";
+"menu_info_second_good" = "Créer des liens avec les Bonnes Ondes";
+"menu_info_second_title" = "❤️  S’ENGAGER";
+//Third
+"menu_info_third_info" = "Comment en parler aux personnes isolées ?";
+"menu_info_third_share" = "Répandez la solidarité autour de vous !";
+"menu_info_third_title" = "📣 PARTAGER ENTOURAGE";
+
+"menu_info_social" = "Pour vivre encore plus de solidarité suivez Entourage sur vos réseaux !";
+"menu_info_social_bold" = "encore plus de solidarité";
+
+"menu_info_text_share" =  "Bonjour ! Grâce au réseau Entourage, je participe à des actions solidaires entre voisins avec et sans domicile. Rejoins-moi : %@";
+
 // AboutItems
 "about_tutorial" = "Voir le tutoriel";
 "about_rateus" = "Notez-nous dans l’App Store";

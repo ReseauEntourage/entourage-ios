@@ -181,6 +181,11 @@
                                                                 identifier:SUGGESTION_LINK_ID];
     itemSuggestions.type = Suggestions;
     [aboutItems addObject:itemSuggestions];
+    
+    OTAboutItem *itemRate = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"about_rateus")
+                                                           url:ABOUT_RATE_US_URL];
+    itemRate.type = Rate;
+    [aboutItems addObject:itemRate];
 
     OTAboutItem *itemFeedback = [[OTAboutItem alloc] initWithTitle:OTLocalizedString(@"menu_feedback")
                                                                 identifier:FEEDBACK_LINK_ID];

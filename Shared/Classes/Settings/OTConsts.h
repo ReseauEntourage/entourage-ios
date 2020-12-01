@@ -82,6 +82,9 @@
 #define ABOUT_POLICY_URL @"https://www.entourage.social/politique-de-confidentialite"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
 #define ABOUT_POLITIQUE_DE_CONF_FORMAT @"%@links/privacy-policy/redirect?token=%@"
+#define ABOUT_LINKEDOUT @"https://www.linkedout.fr"
+
+
 
 #define SNAPSHOT_START "snapshot_start_%d.png"
 #define SNAPSHOT_STOP "snapshot_end_%d.png"
@@ -107,7 +110,7 @@
 #define PRIVACY_POLICY_LINK_ID @"privacy-policy"
 #define JOIN_LINK_ID @"volunteering"
 #define JOIN_URL @"https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
-
+#define BLOG_LINK_ID @"how-to-present"
 // Chart Ethique
 #define CHARTE_LINK_ID @"ethics-charter"
 

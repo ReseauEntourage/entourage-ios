@@ -10,6 +10,7 @@ import UIKit
 
 class OTSettingsUserTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_image_user: UIImageView!
     @IBOutlet weak var ui_image_user_badge: UIImageView!
     @IBOutlet weak var ui_label_name: UILabel!
@@ -33,9 +34,9 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         super.awakeFromNib()
         ui_image_user.layer.cornerRadius = ui_image_user.frame.width / 2
         ui_label_mod_profile.text = OTLocalisationService.getLocalizedValue(forKey: "modMyProfile")
-        ui_label_mod_profile.underline()
+      //  ui_label_mod_profile.underline()
         
-        
+        ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "menu_info_title")
         ui_label_events_title.text = OTLocalisationService.getLocalizedValue(forKey: "event_title")
         ui_label_actions_title.text = OTLocalisationService.getLocalizedValue(forKey: "action_title")
         ui_label_button_event.text = OTLocalisationService.getLocalizedValue(forKey: "event_button_title")
@@ -46,6 +47,9 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         roundPartielView(view: ui_view_button_event, isTop: false)
         roundPartielView(view: ui_view_button_ection, isTop: false)
         
+        ui_label_mod_profile.layer.cornerRadius = 5
+        ui_label_mod_profile.layer.borderWidth = 1
+        ui_label_mod_profile.layer.borderColor = UIColor.appOrange()?.cgColor
     }
     
     func roundPartielView(view:UIView,isTop:Bool) {
