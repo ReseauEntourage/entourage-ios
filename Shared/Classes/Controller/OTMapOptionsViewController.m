@@ -118,7 +118,14 @@
 
 - (void)setupForPublicUser {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    NSString *buttonFaq = currentUser.isUserTypeAlone ? @"agir_new_button_title_alone" : @"agir_new_button_title";
+    NSString *buttonFaq = @"";
+    
+    if ([currentUser.goal isEqualToString:@"organization"]) {
+        buttonFaq = @"agir_new_button_title_asso";
+    }
+    else {
+        buttonFaq = currentUser.isUserTypeAlone ? @"agir_new_button_title_alone" : @"agir_new_button_title";
+    }
     
     [self.ui_label_title_button setText:OTLocalizedString(buttonFaq)];
     
@@ -164,7 +171,13 @@
 }
 - (IBAction)action_show_help:(id)sender {
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    NSString *buttonFaq = currentUser.isUserTypeAlone ? @"action_faq" : @"pedagogic-content";
+    NSString *buttonFaq = @"";
+    if ([currentUser.goal isEqualToString:@"organization"]) {
+        buttonFaq = SLUG_ACTION_ASSO;
+    }
+    else {
+        buttonFaq = currentUser.isUserTypeAlone ? SLUG_ACTION_FAQ : SLUG_ACTION_SCB;
+    }
     NSURL * url = [OTSafariService redirectUrlWithIdentifier:buttonFaq];
     
     [OTSafariService launchInAppBrowserWithUrl:url viewController:self];

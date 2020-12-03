@@ -151,3 +151,8 @@
 #define SLUG_HUB_LINK_2 @"hub_2"
 #define SLUG_HUB_LINK_3 @"hub_3"
 #define SLUG_HUB_LINK_FAQ @"hub_faq"
+
+#define SLUG_ACTION_FAQ @"action_faq"
+#define SLUG_ACTION_SCB @"pedagogic-content"
+#define SLUG_ACTION_ASSO @"partner_action_faq"
+

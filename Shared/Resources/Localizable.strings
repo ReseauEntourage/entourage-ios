@@ -608,6 +608,7 @@
 "agir_new_title" = "L'essentiel, c'est la rencontre !";
 "agir_new_button_title" = "Vous ne vous sentez pas prêt ?";
 "agir_new_button_title_alone" = "Voir nos conseils";
+"agir_new_button_title_asso" = "Comment mobiliser les voisins ?";
 "agir_bonnes_ondes_others" = "soutenir en groupe une personne isolée";
 "agir_bonnes_ondes_alone" = "se créer un cercle d'amis Entourage";
 "agir_title_bonnes_ondes" = "Rejoindre les Bonnes Ondes";
