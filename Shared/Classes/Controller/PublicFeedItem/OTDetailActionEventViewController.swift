@@ -463,11 +463,15 @@ extension OTDetailActionEventViewController: OTStatusChangedProtocol {
     
     func closedFeedItem(with reason: OTCloseReason) {
         OTAppState.popToRootCurrentTab()
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            if let _ = self.feedItem as? OTTour {
-                let userInfo = [kNotificationSendReasonKey:reason,kNotificationFeedItemKey:self.feedItem] as [String : Any]
-                NotificationCenter.default.post(name:Notification.Name(rawValue: kNotificationSendCloseMail),object: nil,userInfo: userInfo)
+            if let _ = self.feedItem as? OTEntourage {
+                let userInfo = [kNotificationSendReasonKey:reason.rawValue,kNotificationFeedItemKey:self.feedItem] as [String : Any]
+                if self.feedItem.isOuting() && reason == OTCloseReasonSuccesClose {
+                    NotificationCenter.default.post(name:Notification.Name(rawValue: kNotificationSendCloseMail),object: nil,userInfo: userInfo)
+                }
+                else  if reason != OTCloseReasonSuccesClose {
+                    NotificationCenter.default.post(name:Notification.Name(rawValue: kNotificationSendCloseMail),object: nil,userInfo: userInfo)
+                }
             }
             if reason == OTCloseReasonHelpClose {
                 return
