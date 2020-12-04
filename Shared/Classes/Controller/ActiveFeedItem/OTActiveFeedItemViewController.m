@@ -106,9 +106,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViewReport) name:@"updateViewReport" object:nil];
     
-    //TODO: a supprimer ;)
-    self.feedItem.display_report_prompt = @YES;
-    
     [self updateViewReport];
 }
 
@@ -216,8 +213,7 @@
 }
 
 - (IBAction)action_report_cancel:(id)sender {
-    OTUser *currentUser = [[NSUserDefaults standardUserDefaults]currentUser];
-    [[OTEntourageService new] updateEntourageRejectReportForUser:currentUser.sid forEntourage:self.feedItem.uuid withSuccess:^() {
+    [[OTEntourageService new] deleteReportUserPromptForEntourage:self.feedItem.uuid withSuccess:^() {
         [self validateReport];
     } failure:^(NSError *error) {
     }];

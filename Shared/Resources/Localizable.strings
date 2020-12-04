@@ -818,6 +818,7 @@
 //Report entourage
 "minChars_pop_report_entourage" = "Veuillez saisir votre message de signalement";
 "report_entourage" = "Entourage signalé";
+"report_user" = "Utilisateur signalé";
 "report_action_title" = "Vous allez signaler cette action solidaire à nos administrateurs.\n";
 "report_action_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cette action solidaire :";
 "report_event_title" = "Vous allez signaler cet évènement à nos administrateurs.\n";

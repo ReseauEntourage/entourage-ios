@@ -95,8 +95,13 @@ import SVProgressHUD
     
     private func sendEntourage() {
         OTUserService.init().reportEntourage(entourageId, message: textWithCount.textView?.text, success: nil, failure: nil)
-        SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "report_entourage"))
-               close(self)
+        if let _ = activeFeedVC {
+            SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "report_user"))
+        }
+        else {
+            SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "report_entourage"))
+        }
+        close(self)
         activeFeedVC?.validateReport()
     }
     

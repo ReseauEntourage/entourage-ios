@@ -75,6 +75,8 @@
 #define API_URL_ENTOURAGE_SEND @"entourages"
 #define API_URL_ENTOURAGE_RETRIEVE @"entourages/%@?distance=%d&feed_rank=%@&token=%@"
 
+#define API_URL_DISABLE_REPORT_USER @"entourages/%@/report_prompt?token=%@"
+
 //Messages
 #define API_URL_TOUR_SET_READ_MESSAGES  "tours/%@/read?token=%@"
 #define API_URL_ENTOURAGE_SET_READ_MESSAGES "entourages/%@/read?token=%@"
