@@ -106,6 +106,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViewReport) name:@"updateViewReport" object:nil];
     
+    //TODO: a supprimer ;)
+    self.feedItem.display_report_prompt = @YES;
+    
     [self updateViewReport];
 }
 
