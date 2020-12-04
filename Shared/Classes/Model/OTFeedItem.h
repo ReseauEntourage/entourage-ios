@@ -55,6 +55,7 @@
 @property (nonatomic) NSString *imageEventUrl;
 @property (nonatomic) NSString *eventUrl;
 @property (nonatomic) NSNumber *isOnline;
+@property (nonatomic) NSNumber * display_report_prompt;
 
 - (instancetype)initWithGroupType:(NSString*)groupType;
 
@@ -67,4 +68,5 @@
 - (BOOL)isAction;
 - (BOOL)isEventOnline;
 - (BOOL)isTour;
+- (BOOL) isDisplay_report_prompt;
 @end

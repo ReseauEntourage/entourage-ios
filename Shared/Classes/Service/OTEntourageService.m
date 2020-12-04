@@ -281,6 +281,35 @@ extern NSString *kUsers;
      ];
 }
 
+- (void)updateEntourageRejectReportForUser:(NSNumber*)userID
+                            forEntourage:(NSString *)uuid
+                             withSuccess:(void (^)(void))success
+                                 failure:(void (^)(NSError *))failure
+{
+    
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_JOIN_UPDATE, uuid, userID, TOKEN];
+    NSDictionary *parameters = @{@"request":@{@"display_report_prompt":@NO}};
+    
+    [[OTHTTPRequestManager sharedInstance]
+     PUTWithUrl:url
+     andParameters:parameters
+     andSuccess:^(id responseObject)
+     {
+         if (success)
+         {
+             success();
+         }
+     }
+     andFailure:^(NSError *error)
+     {
+         if (failure)
+         {
+             failure(error);
+         }
+     }
+     ];
+}
+
 - (void)rejectEntourageJoinRequestForUser:(NSNumber *)userID
                              forEntourage:(NSString *)uuid
                               withSuccess:(void (^)(void))success

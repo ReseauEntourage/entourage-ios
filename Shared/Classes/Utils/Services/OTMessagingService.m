@@ -39,6 +39,7 @@
         if([items count] > 0)
             @synchronized (allItems) {
                 [allItems addObjectsFromArray:items];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"updateViewReport" object:nil];
             }
         dispatch_group_leave(group);
     } failure:^(NSError *error) {

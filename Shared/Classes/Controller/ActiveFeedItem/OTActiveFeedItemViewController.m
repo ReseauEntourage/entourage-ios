@@ -41,6 +41,7 @@
 #import "OTEntourageService.h"
 #import "OTPublicFeedItemViewController.h"
 #import "entourage-Swift.h"
+#import "UIColor+Expanded.h"
 
 @interface OTActiveFeedItemViewController () <UITextViewDelegate>
 
@@ -59,6 +60,10 @@
 @property (strong, nonatomic) IBOutlet OTUserProfileBehavior *userProfileBehavior;
 @property (nonatomic, strong) IBOutlet OTBottomScrollBehavior *scrollBottomBehavior;
 @property (nonatomic, weak) IBOutlet OTShareFeedItemBehavior *shareBehavior;
+
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ui_constraint_view_report_top;
+@property (weak, nonatomic) IBOutlet UIView *ui_view_report;
 
 @end
 
@@ -98,6 +103,19 @@
         [self.inviteBehavior startInvite];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showFeedItemDetails:) name:kNotificationShowEventDetails object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViewReport) name:@"updateViewReport" object:nil];
+    
+    [self updateViewReport];
+}
+
+-(void) updateViewReport {
+    if (self.feedItem.isConversation && self.feedItem.isDisplay_report_prompt) {
+        self.ui_constraint_view_report_top.constant = 0;
+    }
+    else {
+        self.ui_constraint_view_report_top.constant = -self.ui_view_report.frame.size.height;
+    }
 }
 
 - (void)dealloc {
@@ -147,6 +165,59 @@
 
 - (void)reloadMessages {
     [[OTMessagingService new] readFor:self.feedItem onDataSource:self.dataSource];
+}
+
+#pragma mark - IBActions -
+
+- (IBAction)action_close_report:(id)sender {
+    [self validateReport];
+}
+
+- (IBAction)action_report:(id)sender {
+    UIColor *textColor = [UIColor colorWithHexString:@"ee3e3a"];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Popup"
+                                                         bundle:nil];
+    
+    NSString *titleStr = OTLocalizedString(@"report_contribution_title");
+    NSString *descriptionStr = OTLocalizedString(@"report_contribution_attributed_title");
+    OTPopupViewController *popup = [storyboard instantiateInitialViewController];
+    NSMutableAttributedString *firstString = [[NSMutableAttributedString alloc] initWithString: titleStr];
+    [firstString addAttribute:NSForegroundColorAttributeName
+                        value:textColor
+                        range:NSMakeRange(0, firstString.length)];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: descriptionStr];
+    [attributedString addAttribute:NSFontAttributeName
+                             value:[UIFont fontWithName:@"SFUIText-Medium" size: 17]
+                             range:NSMakeRange(0, attributedString.length)];
+    [attributedString addAttribute:NSForegroundColorAttributeName
+                             value:textColor
+                             range:NSMakeRange(0, attributedString.length)];
+    [firstString appendAttributedString:attributedString];
+    
+    popup.labelString = firstString;
+    popup.textFieldPlaceholder = OTLocalizedString(@"report_entourage_placeholder");
+    popup.buttonTitle = OTLocalizedString(@"report_entourage_button");
+    popup.isEntourageReport = YES;
+    popup.entourageId = ((OTEntourage *)self.feedItem).uid.stringValue;
+    popup.activeFeedVC = self;
+    
+    [self presentViewController:popup
+                       animated:YES
+                     completion:nil];
+}
+
+-(void) validateReport {
+    self.feedItem.display_report_prompt = @NO;
+    [self updateViewReport];
+}
+
+- (IBAction)action_report_cancel:(id)sender {
+    OTUser *currentUser = [[NSUserDefaults standardUserDefaults]currentUser];
+    [[OTEntourageService new] updateEntourageRejectReportForUser:currentUser.sid forEntourage:self.feedItem.uuid withSuccess:^() {
+        [self validateReport];
+    } failure:^(NSError *error) {
+    }];
 }
 
 #pragma mark - navigation

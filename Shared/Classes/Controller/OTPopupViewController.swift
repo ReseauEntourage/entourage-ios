@@ -30,6 +30,8 @@ import SVProgressHUD
     @objc var isEntourageReport = false
     @objc var entourageId:String? = nil
     
+    @objc var activeFeedVC:OTActiveFeedItemViewController? = nil
+    
     @objc init(labelString: NSMutableAttributedString, textFieldPlaceholder: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
         self.labelString = labelString
@@ -95,6 +97,7 @@ import SVProgressHUD
         OTUserService.init().reportEntourage(entourageId, message: textWithCount.textView?.text, success: nil, failure: nil)
         SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "report_entourage"))
                close(self)
+        activeFeedVC?.validateReport()
     }
     
     private func showErrorMinTxt() {

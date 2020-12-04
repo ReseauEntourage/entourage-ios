@@ -82,4 +82,9 @@
 - (void)reopenEntourage:(OTEntourage *)entourage
                 success:(void (^)(OTEntourage *))success
                 failure:(void (^)(NSError *))failure;
+
+- (void)updateEntourageRejectReportForUser:(NSNumber*)userID
+                            forEntourage:(NSString *)uuid
+                             withSuccess:(void (^)(void))success
+                            failure:(void (^)(NSError *))failure;
 @end

@@ -825,6 +825,9 @@
 "report_entourage_button" = "Envoyer";
 "report_entourage_placeholder" = "Ecrivez quelque chose…";
 
+"report_contribution_title" = "Vous allez signaler cet utilisateur à nos administrateurs.\n";
+"report_contribution_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cet utilisateur :";
+
 //Association detail
 "title_association" = "Association";
 "title_asso_donation" = "Accepte les dons";
