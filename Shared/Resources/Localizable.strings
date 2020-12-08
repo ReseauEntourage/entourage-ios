@@ -141,7 +141,7 @@
 "create_demande" = "Créer une demande";
 "create_contribution" = "Créer une contribution";
 "create_action" = "Créer une action";
-"create_event" = "Créer un évènement  ";
+"create_event" = "Créer un événement  ";
 "map_options_hide_poi" = "Masquer le guide de solidarité";
 "map_options_show_poi" = "Afficher le guide de solidarité";
 "view_map_nav_title" = "Voir la carte";
@@ -165,7 +165,7 @@
 
 "no_data_entourages" = "C'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant ! \n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur + en bas à droite";
 
-"no_data_events" = "Aucun évènement à proximité.";
+"no_data_events" = "Aucun événement à proximité.";
 
 "no_data_guide" = "On dirait que c'est calme ici!\n\nDéplacez la carte pour trouver des structures d’assistance: restaurants solidaires, douches publiques, centres médicaux ouverts aux personnes de la rue…\n\nUne structure manque sur la carte ?\nProposez une structure \n\nLe Centre Communal d’Action Sociale de votre commune peut vous renseigner sur toutes les associations locales et les aides sociales à disposition des habitants.";
 
@@ -266,7 +266,7 @@
 "title" = "Titre";
 "demande" = "Voir les demandes concernant :";
 "ask_for_help" = "Demande";
-"event" = "évènement";
+"event" = "événement";
 "contribution" = "Contribution";
 "contribution_filter" = "Voir les contributions concernant :";
 "detailedDescription" = "Description détaillée";
@@ -307,19 +307,19 @@
 "closed" = "Inclure entourages clôturés";
 "unique_unread" = "Uniquement non lus";
 "join_entourage_lbl" = "Participez à la discussion";//"Rejoindre la discussion";
-"join_event_lbl" = "Répondez présent !";//"Participez à cet évènement";
+"join_event_lbl" = "Répondez présent !";//"Participez à cet événement";
 "join_entourage_btn" = "PARTICIPER";
 "join_entourage2_btn" = "REJOINDRE";
 "join_entourage_greeting_lbl" = "Merci pour votre chaleur humaine !\nVous pouvez envoyer un message aux participants, qui apparaîtra dans la conversation de groupe.";
 "join_event_greeting_lbl" = "Merci pour votre chaleur humaine !\nVous pouvez envoyer un message aux participants, qui apparaîtra dans la conversation de groupe.";
 "promote_event_subject_format" = "Veuillez envoyer une notification pour la %@";
-"promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la évènement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
+"promote_event_mail_body_format" = "Bonjour,\nVeuillez promouvoir la événement %@ grâce à une notification envoyée aux téléphones des personnes membres des entourages suivants :\nMerci";
 "event_title_example" = "Exemple : Soirée jeux entre voisins avec et sans domicile";
 "event_desc_example" = "Exemple : Notre association vous invite à une soirée conviviale entre voisins avec et sans abris.";
 "final_question" = "DERNIÈRE QUESTION";
 "add_action_guide_text" = "La Charte éthique d’Entourage vous explique pourquoi le consentement est indispensable.";
 "add_action_guide_url" = "La Charte éthique d’Entourage";
-"event_confidentiality_description_public" = "Vous acceptez que toute personne participe à votre évènement, sans vérifier son profil au préalable.";
+"event_confidentiality_description_public" = "Vous acceptez que toute personne participe à votre événement, sans vérifier son profil au préalable.";
 "event_confidentiality_description_private" = "Vous validez chaque personne individuellement avant de  lui confirmer qu’elle peut participer.";
 "confidentiality_title" = "CONFIDENTIALITÉ";
 "invit_entourage_title" = "%@ vous invite à rejoindre";
@@ -425,7 +425,7 @@
 "filter_entourage_from_sympathisants_title" = "Montrer uniquement";
 "filter_entourage_from_sympathisants" = "Crées par les sympathisants de l'association que je soutiens";
 
-"filter_events_title" = "Évènements";
+"filter_events_title" = "Événements";
 "filter_events_include_past_events_title" = "Inclure passés";
 
 "filter_solidarity_guide_categories" = "Catégories";
@@ -436,7 +436,7 @@
 "encounter_enter_message" = "Vous devez donner une description à votre rencontre";
 
 "encounter_fill_all_fields" = "Veuillez remplir ce champ";
-"invite_event_subtitle" = "à participer à cet évènement";
+"invite_event_subtitle" = "à participer à cet événement";
 "invite_action_subtitle" = "à rejoindre cette action solidaire";
 
 "filter_publish_title" = "Publié par...";
@@ -469,7 +469,7 @@
 "addEventDisclaimerThirdTitle" = "Localisation ?";
 "addEventDisclaimerFirstDescription" = "Je demande le consentement d’une personne avant de mentionner de ses informations personnelles";
 "addEventDisclaimerSecondDescription" = "Je veille à ce qu’on ne puisse pas identifier ni localiser des personnes en me lisant";
-"addEventDisclaimerThirdDescription" = "L’adresse précise des évènements est montrée";
+"addEventDisclaimerThirdDescription" = "L’adresse précise des événements est montrée";
 //Disclaimer 2
 "addEventDisclaimerFirstTitleBis" = "Recueillir l’accord";
 "addEventDisclaimerSecondTitleBis" = "Sécurité";
@@ -516,7 +516,7 @@
 "no_more_feeds" = "C'est tout pour les activités dans ce rayon autour de vous";
 "no_more_map_feeds" = "Aucune action près de cette position";
 "search_more_further_feeds" = "Rechercher plus loin";
-"search_more_further_events" = "Retrouvez plus d'évènements d'Entourage ici";
+"search_more_further_events" = "Retrouvez plus d'événements d'Entourage ici";
 
 "no_internet_connexion" = "Vérifiez votre connexion Internet et recommencez";
 "ok" = "OK";
@@ -602,8 +602,8 @@
 "add_title_hint" = "Les actions avec un titre clair attirent plus de membres et ont plus de chances d'aboutir !";
 "add_description_hint" = "Racontez votre histoire. Les actions avec une description claire attirent plus de membres et ont plus de chances d'aboutir ! ";
 
-"add_event_title_hint" = "Les évènements avec un titre clair attirent plus de participants.";
-"add_event_description_hint" = "Vous pourrez modifier cette description et la date de votre évènement à tout moment.";
+"add_event_title_hint" = "Les événements avec un titre clair attirent plus de participants.";
+"add_event_description_hint" = "Vous pourrez modifier cette description et la date de votre événement à tout moment.";
 
 "agir_new_title" = "L'essentiel, c'est la rencontre !";
 "agir_new_button_title" = "Vous ne vous sentez pas prêt ?";
@@ -681,7 +681,7 @@
 "onboard_place_title" = "Quel est votre quartier ?";
 "onboard_place_description" = "Vous pourrez répondre aux demandes de personnes en difficulté et d’associations de votre quartier, et vous pourrez vous-même proposer des dons de votre temps ou matériels.";
 "onboard_place_title_sdf" = "Dans quel quartier avez vous vos habitudes ?";
-"onboard_place_description_sdf" = "Vous pourrez demander de l’aide à vos voisins et rencontrer de nouvelles personnes lors d’évènements conviviaux du réseaux.";
+"onboard_place_description_sdf" = "Vous pourrez demander de l’aide à vos voisins et rencontrer de nouvelles personnes lors d’événements conviviaux du réseaux.";
 "onboard_place_info" = "Entourage ne communique pas cette adresse.";
 "onboard_place_placeholder" = "Ex : 35000";
 "onboard_email_pwd_title" = "Ok super !";
@@ -757,7 +757,7 @@
 "onboard_sdf_activity_description" = "Plusieurs choix possibles.\nIl y a mille manières d'être entouré et aidé.";
 "onboard_sdf_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
 "onboard_sdf_activity_choice_1" = "Me faire un\ncercle d’amis";
-"onboard_sdf_activity_choice_2" = "Participer à des\névènements";
+"onboard_sdf_activity_choice_2" = "Participer à des\névénements";
 "onboard_sdf_activity_choice_3" = "Poser des\nquestions";
 "onboard_sdf_activity_choice_4" = "Demander\nde l’aide";
 "onboard_sdf_activity_choice_5" = "M’orienter";
@@ -768,7 +768,7 @@
 "onboard_neighbour_activity_description" = "Plusieurs choix possibles.\nNous vous ferons des propositions adaptées.";
 "onboard_sneighbour_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
 "onboard_neighbour_activity_choice_1" = "M’informer";
-"onboard_neighbour_activity_choice_2" = "Participer à des\névènements";
+"onboard_neighbour_activity_choice_2" = "Participer à des\névénements";
 "onboard_neighbour_activity_choice_3" = "Entourer une\npersonne isolée";
 "onboard_neighbour_activity_choice_4" = "Faire des dons\nmatériels";
 "onboard_neighbour_activity_choice_5" = "M’investir dans\nl’associatif";
@@ -798,14 +798,14 @@
 
 //Info mosaic choice from ws
 "rencontrer_sdf" = "Me faire un cercle d’amis";
-"event_sdf" = "Participer à des évènements";
+"event_sdf" = "Participer à des événements";
 "questions_sdf" = "Poser des questions";
 "aide_sdf" = "Demander de l’aide";
 "m_orienter_sdf" = "M’orienter";
 "trouver_asso_sdf" = "Trouver des associations";
 
 "m_informer_riverain" = "M’informer";
-"event_riverain" = "Participer à des évènements";
+"event_riverain" = "Participer à des événements";
 "entourer_riverain" = "Entourer une personne isolée";
 "dons_riverain" = "Faire des dons matériels";
 "benevolat_riverain" = "M’investir dans l’associatif";
@@ -821,8 +821,8 @@
 "report_user" = "Utilisateur signalé";
 "report_action_title" = "Vous allez signaler cette action solidaire à nos administrateurs.\n";
 "report_action_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cette action solidaire :";
-"report_event_title" = "Vous allez signaler cet évènement à nos administrateurs.\n";
-"report_event_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cet évènement :";
+"report_event_title" = "Vous allez signaler cet événement à nos administrateurs.\n";
+"report_event_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cet événement :";
 "report_entourage_button" = "Envoyer";
 "report_entourage_placeholder" = "Ecrivez quelque chose…";
 
@@ -854,7 +854,7 @@
 "home_button_filters" = "Filtres";
 "home_button_filters_on" = "Filtres activés";
 "home_tab_all" = "Tous";
-"home_tab_events" = "Évènements";
+"home_tab_events" = "Événements";
 "home_tab_encounter" = "Maraudes";
 
 //Tooltip
@@ -868,7 +868,7 @@
 //Profile add
 "join_good_waves" = "Rejoindre les Bonnes Ondes";
 "modMyProfile" = "Modifier mon profil";
-"event_title" = "évènements conviviaux";
+"event_title" = "événements conviviaux";
 "action_title" = "actions solidaires";
 "event_button_title" = "J’en trouve →";
 "action_button_title" = "J’y vais →";
@@ -876,7 +876,7 @@
 "activity_title" = "Activité";
 
 
-"add_event_help_button" = "Quels évènements diffuser ?";
+"add_event_help_button" = "Quels événements diffuser ?";
 
 //Pop cloture action/event
 "pop_validate_action_title" = "Comment cela s’est passé ?";
@@ -888,7 +888,7 @@
 "pop_validate_action_bt_cancel" = "Annuler";
 
 "pop_validate_event_title" = "Comment cela s’est passé ?";
-"pop_validate_event_description" = "En clôturant l’évènement, vous fermez la discussion et retirez l’évènement du fil d’actualités. \n\nDites-nous en plus avant de clôturer !";
+"pop_validate_event_description" = "En clôturant l’événement, vous fermez la discussion et retirez l’événement du fil d’actualités. \n\nDites-nous en plus avant de clôturer !";
 "pop_validate_event_bt_validate" = "Confirmer ";
 "pop_validate_event_bt_cancel" = "Annuler";
 
@@ -916,7 +916,7 @@
 "hub_button_4" = "Trouver un atelier";
 
 "hub_title_5" = "Comment mobiliser le réseau ?";
-"hub_description_5" = "L’application Entourage vous permet de vous mobiliser, entre voisins et associations locales, pour organiser des actions et évènements solidaires. Pour tout comprendre, c’est par ici.";
+"hub_description_5" = "L’application Entourage vous permet de vous mobiliser, entre voisins et associations locales, pour organiser des actions et événements solidaires. Pour tout comprendre, c’est par ici.";
 "hub_button_5" = "Aller sur la FAQ";
 
 //Pop follow/unfollow partner
