@@ -392,13 +392,21 @@ typedef NS_ENUM(NSInteger) {
         activeFeedItemViewController.feedItem = entourage;
         [self.navigationController pushViewController:activeFeedItemViewController animated:YES];
         
-    } else {        
-        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
-        OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
-        publicFeedItemController.feedItem = entourage;
-        //publicFeedItemController.statusChangedBehavior.editEntourageBehavior = self.editEntourageBehavior;
-        
-        [self.navigationController pushViewController:publicFeedItemController animated:NO];
+    } else {
+        if ([entourage isTour]) {
+            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
+            OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+            publicFeedItemController.feedItem = entourage;
+            //publicFeedItemController.statusChangedBehavior.editEntourageBehavior = self.editEntourageBehavior;
+            
+            [self.navigationController pushViewController:publicFeedItemController animated:NO];
+        }
+        else {
+            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedDetailNew" bundle:nil];
+            OTDetailActionEventViewController *publicFeedItemController = (OTDetailActionEventViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+            publicFeedItemController.feedItem = entourage;
+            [self.navigationController pushViewController:publicFeedItemController animated:NO];
+        }
     }
 }
 

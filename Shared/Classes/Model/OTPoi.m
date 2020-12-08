@@ -45,6 +45,11 @@ NSString *const kPOISourceUrl = @"source_url";
 	{
 		poi = [[OTPoi alloc] init];
 
+        poi.audience = @"";
+        poi.details = @"";
+        poi.website = @"";
+        poi.email = @"";
+        
 		poi.sid = [dictionary numberForKey:kPOIId];
 		poi.name = [dictionary stringForKey:kPOIName];
 		poi.audience = [dictionary stringForKey:kPOIAudience];
@@ -80,10 +85,7 @@ NSString *const kPOISourceUrl = @"source_url";
         else {
             poi.sid = nil;
         }
-        poi.audience = @"";
-        poi.details = @"";
-        poi.website = @"";
-        poi.email = @"";
+       
 	}
 
 	return poi;

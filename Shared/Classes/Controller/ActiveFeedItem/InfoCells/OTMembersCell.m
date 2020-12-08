@@ -21,6 +21,8 @@
     
     //Check to show Role + asso
     if (item.hasToShowRoleAndPartner) {
+        [self.ui_label_title_role setHidden:NO];
+        [self.ui_button_asso setHidden:NO];
         NSString *roleStr = @"";
         if (item.partner_role_title.length > 0) {
             roleStr = [NSString stringWithFormat:@"%@ -",item.partner_role_title];
@@ -30,6 +32,12 @@
         [self.ui_button_asso setTitle:item.partner.name forState:UIControlStateNormal];
         
         [self.ui_button_asso setTag:item.partner.aid.integerValue];
+    }
+    else {
+        self.ui_constraint_bottom_margin.constant = 0;
+        self.ui_constraint_top_margin.constant = 40;
+        [self.ui_label_title_role setHidden:YES];
+        [self.ui_button_asso setHidden:YES];
     }
     
     [self.btnProfile setupAsProfilePictureFromUrl:item.avatarUrl];

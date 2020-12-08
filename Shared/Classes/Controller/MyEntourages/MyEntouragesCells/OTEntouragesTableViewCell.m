@@ -9,6 +9,8 @@
 #import "OTEntouragesTableViewCell.h"
 #import "UIColor+entourage.h"
 #import "OTTableDataSourceBehavior.h"
+#import "NSUserDefaults+OT.h"
+#import "OTUser.h"
 
 @implementation OTEntouragesTableViewCell
 
@@ -33,7 +35,7 @@
     self.summaryProvider.imgCategorySize = CGSizeMake(25, 25);
     
     [self setupSubtitleLabelWithItem:item];
-    
+    self.summaryProvider.isFromMyEntourages = YES;
     [self.summaryProvider configureWith:item];
     [self.summaryProvider clearConfiguration];
     
@@ -81,15 +83,26 @@
 #pragma mark - private methods
 
 - (NSString *)getAuthorTextFor:(OTMyFeedMessage *)lastMessage {
+    OTUser * currentUser = [NSUserDefaults standardUserDefaults].currentUser;
+    BOOL isMe = [currentUser.sid isEqual:lastMessage.authorId];
+    
     NSMutableString *result = [NSMutableString new];
-    if(lastMessage.firstName.length > 0)
-        [result appendString:lastMessage.firstName];
-    if(lastMessage.lastName.length > 0)
-        [result appendFormat:@" %@", [lastMessage.lastName substringToIndex:1]];
-    if(result.length > 0)
-        [result appendString:@": "];
-    if(lastMessage.text)
-        [result appendString:lastMessage.text];
+    if (isMe) {
+        [result appendString:@"Vous"];
+    }
+    else {
+        if (lastMessage.displayName.length > 0) {
+            [result appendString:lastMessage.displayName];
+        }
+    }
+    
+    if(result.length > 0) {
+        [result appendString:@" : "];
+        if (lastMessage.text) {
+            [result appendString:lastMessage.text];
+        }
+    }
+    
     return result;
 }
 

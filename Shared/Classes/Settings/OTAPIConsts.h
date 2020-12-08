@@ -70,10 +70,12 @@
 #define API_URL_ENTOURAGE_SEND_MESSAGE "entourages/%@/chat_messages.json?token=%@"
 #define API_URL_ENTOURAGE_GET_MESSAGES "entourages/%@/chat_messages.json?token=%@"
 #define API_URL_ENTOURAGE_INVITE @"entourages/%@/invitations?token=%@"
-#define API_URL_ENTOURAGE_GET_INVITES @"invitations?token=%@"
+#define API_URL_ENTOURAGE_GET_INVITES @"invitations?token=%@&status=%@"
 #define API_URL_ENTOURAGE_HANDLE_INVITE @"invitations/%@?token=%@"
 #define API_URL_ENTOURAGE_SEND @"entourages"
 #define API_URL_ENTOURAGE_RETRIEVE @"entourages/%@?distance=%d&feed_rank=%@&token=%@"
+
+#define API_URL_DISABLE_REPORT_USER @"entourages/%@/report_prompt?token=%@"
 
 //Messages
 #define API_URL_TOUR_SET_READ_MESSAGES  "tours/%@/read?token=%@"

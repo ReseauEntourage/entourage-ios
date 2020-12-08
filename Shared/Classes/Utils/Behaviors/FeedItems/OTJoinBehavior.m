@@ -23,19 +23,7 @@
 
 - (BOOL)join:(OTFeedItem *)item {
     self.feedItem = item;
-    FeedItemState state = [[[OTFeedItemFactory createFor:self.feedItem] getStateInfo] getState];
-    
-    // EMA-2389
-    if ([item isNeighborhood] || [item isPrivateCircle]) {
-        [self startJoin];
-        return YES;
-    }
-    else if (state != FeedItemStateJoinNotRequested) {
-        return NO;
-    }
-    
     [self startJoin];
-    
     return YES;
 }
 

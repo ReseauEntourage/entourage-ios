@@ -32,7 +32,10 @@
         [requestManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         
         NSString *apiKey = [[OTAppConfiguration sharedInstance].environmentConfiguration APIKey];
+        NSString *versionB = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         [requestManager.requestSerializer setValue:apiKey forHTTPHeaderField:@"X-API-KEY"];
+        [requestManager.requestSerializer setValue:@"iOS" forHTTPHeaderField:@"X-Platform"];
+        [requestManager.requestSerializer setValue:versionB forHTTPHeaderField:@"X-App-Version"];
     }
     return requestManager;
 }

@@ -13,6 +13,7 @@
 #define kWDisplayName @"display_name"
 #define kWSAvatar_URL @"avatar_url"
 #define kWSPartner @"partner"
+#define kWSPartnerRoleTitle @"partner_role_title"
 
 @implementation OTFeedItemAuthor
 
@@ -24,6 +25,14 @@
         self.displayName = [dnameVal isKindOfClass:[NSNull class]] ? @"" : dnameVal;
         self.avatarUrl = [dictionary stringForKey:kWSAvatar_URL];
         self.partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kWSPartner]];
+        self.partner_role_title = [dictionary stringForKey:kWSPartnerRoleTitle];
+        
+        if (self.partner != nil || (self.partner_role_title != nil  && self.partner_role_title.length > 0)) {
+            self.hasToShowRoleAndPartner = YES;
+        }
+        else {
+            self.hasToShowRoleAndPartner = NO;
+        }
     }
     return self;
 }
@@ -34,6 +43,7 @@
     [encoder encodeObject:self.displayName forKey:kWDisplayName];
     [encoder encodeObject:self.avatarUrl forKey:kWSAvatar_URL];
     [encoder encodeObject:self.partner forKey:kWSPartner];
+    [encoder encodeObject:self.partner_role_title forKey:kWSPartnerRoleTitle];
     
 }
 
@@ -45,6 +55,7 @@
         self.displayName = [decoder decodeObjectForKey:kWDisplayName];
         self.avatarUrl = [decoder decodeObjectForKey:kWSAvatar_URL];
         self.partner = [decoder decodeObjectForKey:kWSPartner];
+        self.partner_role_title = [decoder decodeObjectForKey:kWSPartnerRoleTitle];
     }
     return self;
 }

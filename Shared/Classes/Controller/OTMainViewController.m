@@ -168,7 +168,7 @@ OTHeatzonesCollectionViewDelegate
 @property (nonatomic) BOOL forceReloadingFeeds;
 @property (nonatomic) BOOL isAskForHelp;
 
-@property (nonatomic) BOOL isFirstInitView;
+@property (nonatomic) BOOL isFirstInitView,isFirstLaunchCheckName;
 @end
 
 @implementation OTMainViewController
@@ -176,6 +176,7 @@ OTHeatzonesCollectionViewDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isFirstLaunchCheckName = YES;
     self.isFirstInitView = YES;
     
     [self setup];
@@ -202,6 +203,20 @@ OTHeatzonesCollectionViewDelegate
 -(void)checkProfil {
     if (!self.isFirstLoad) {
         return;
+    }
+    
+    if (self.isFirstLaunchCheckName) {
+        self.isFirstLaunchCheckName = NO;
+        OTUser * currentUser = [[NSUserDefaults standardUserDefaults]currentUser];
+        
+        if (currentUser.firstName.length == 0 && currentUser.lastName.length == 0) {
+            UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
+            OTInputNamesViewController * vc = [sb instantiateViewControllerWithIdentifier:@"Onboarding_inputNames"];
+            vc.modalPresentationStyle = UIModalPresentationFullScreen;
+            
+            [self.tabBarController presentViewController:vc animated:YES completion:nil];
+            return;
+        }
     }
     
     BOOL isAfterLogin = [[NSUserDefaults standardUserDefaults] boolForKey: @"checkAfterLogin"];
@@ -1232,9 +1247,36 @@ OTHeatzonesCollectionViewDelegate
                 self.inviteBehaviorTriggered = ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction];
             }
             
-            [self showFeedInfo:entourage];
+            [self checkProfileImageAfterCreate:entourage];
         }
     }];
+}
+
+-(void) checkProfileImageAfterCreate:(OTEntourage *)entourage {
+    
+    OTUser * currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
+    if (currentUser.avatarURL == nil || currentUser.avatarURL.length == 0) {
+        NSString *message = OTLocalizedString(@"info_photo_profile_description");
+        
+        UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"info_photo_profile_title") message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *action = [UIAlertAction actionWithTitle:OTLocalizedString(@"info_photo_profile_add") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            NSURL *deepL = [NSURL URLWithString:@"entourage://profilePhoto"];
+            [[OTDeepLinkService new] handleDeepLink:deepL];
+        }];
+        UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:OTLocalizedString(@"info_photo_profile_ignore") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self showFeedInfo:entourage];
+        }];
+        
+        [alertVC addAction:actionCancel];
+        [alertVC addAction:action];
+        
+        [self presentViewController:alertVC animated:YES completion:nil];
+    }
+    else {
+        [self showFeedInfo:entourage];
+    }
 }
 
 #pragma mark - OTFeedItemQuitDelegate
@@ -1306,7 +1348,13 @@ OTHeatzonesCollectionViewDelegate
     self.selectedFeedItem = feedItem;
     if ([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
         [OTLogger logEvent:@"OpenEntouragePublicPage"];
-        [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
+        
+        if ([feedItem isTour]) {
+            [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
+        }
+        else {
+            [self performSegueWithIdentifier:@"pushDetailFeedNew" sender:self];
+        }
     }
     else {
         [OTLogger logEvent:@"OpenEntourageActivePage"];
@@ -1592,6 +1640,10 @@ OTHeatzonesCollectionViewDelegate
     }
     else if([segue.identifier isEqualToString:@"PublicFeedItemDetailsSegue"]) {
         OTPublicFeedItemViewController *controller = (OTPublicFeedItemViewController *)destinationViewController;
+        controller.feedItem = self.selectedFeedItem;
+    }
+    else if([segue.identifier isEqualToString:@"pushDetailFeedNew"]) {
+        OTDetailActionEventViewController *controller = (OTDetailActionEventViewController *) destinationViewController;
         controller.feedItem = self.selectedFeedItem;
     }
     else if([segue.identifier isEqualToString:@"ActiveFeedItemDetailsSegue"]) {

@@ -191,6 +191,7 @@ class CellGeneric: UITableViewCell {
             ui_label_title?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_title_3")
             ui_label_description?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_description_3")
             ui_label_button?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_button_3")
+            ui_image?.layer.cornerRadius = 10
         case 3:
             ui_label_description?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_description_4")
             ui_label_button?.text = OTLocalisationService.getLocalizedValue(forKey: "hub_button_4").uppercased()

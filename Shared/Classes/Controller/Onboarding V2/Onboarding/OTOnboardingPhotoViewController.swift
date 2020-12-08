@@ -25,6 +25,7 @@ class OTOnboardingPhotoViewController: UIViewController {
     var currentUserFirstname = ""
     
     @objc var isFromProfile = false
+    @objc var isFromDeepLink = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,7 @@ class OTOnboardingPhotoViewController: UIViewController {
             vc.currentImage = self.selectedImage
             vc.delegate = self
             vc.isFromProfile = self.isFromProfile
+            vc.isFromDeepLink = self.isFromDeepLink
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

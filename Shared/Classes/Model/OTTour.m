@@ -162,4 +162,8 @@
     }
 }
 
+-(BOOL)isTour {
+    return true;
+}
+
 @end

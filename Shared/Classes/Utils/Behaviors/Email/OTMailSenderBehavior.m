@@ -58,8 +58,13 @@
         }
         
         [OTAppConfiguration configureMailControllerAppearance:self.mailController];
+        if ([self.owner isKindOfClass:[OTMainViewController class]]) {
+            [self.owner.tabBarController showViewController:self.mailController sender:self];
+        }
+        else {
+            [self.owner showViewController:self.mailController sender:self];
+        }
         
-        [self.owner showViewController:self.mailController sender:self];
         return YES;
     }
     return NO;

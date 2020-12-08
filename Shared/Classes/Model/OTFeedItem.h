@@ -52,6 +52,11 @@
 
 @property (nonatomic) NSString *identifierTag;
 
+@property (nonatomic) NSString *imageEventUrl;
+@property (nonatomic) NSString *eventUrl;
+@property (nonatomic) NSNumber *isOnline;
+@property (nonatomic) NSNumber * display_report_prompt;
+
 - (instancetype)initWithGroupType:(NSString*)groupType;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
@@ -61,5 +66,7 @@
 - (BOOL)isConversation;
 - (BOOL)isOuting;
 - (BOOL)isAction;
-
+- (BOOL)isEventOnline;
+- (BOOL)isTour;
+- (BOOL) isDisplay_report_prompt;
 @end

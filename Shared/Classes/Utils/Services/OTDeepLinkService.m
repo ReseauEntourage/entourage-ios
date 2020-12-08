@@ -102,6 +102,15 @@
     
     [self showControllerFromAnywhere:rootUserProfileController];
 }
+- (void)showProfilePhotoFromAnywhere {
+    UIStoryboard * _storyboard = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
+    OTOnboardingPhotoViewController *vc = (OTOnboardingPhotoViewController*) [_storyboard instantiateViewControllerWithIdentifier:@"Onboarding_photo"];
+    vc.isFromProfile = YES;
+    vc.isFromDeepLink = YES;
+    UINavigationController *navVc = [UINavigationController new];
+    [navVc addChildViewController:vc];
+    [self showControllerFromAnywhere:navVc];
+}
 
 - (void) handleDeepLink: (NSURL *)url {
     NSString *host = url.host;
@@ -209,6 +218,9 @@
         [self showProfileFromAnywhereForUser:[[NSUserDefaults standardUserDefaults] currentUser].uuid isFromLaunch:YES];
         
     }
+    else if([key isEqualToString:@"profilePhoto"]) {
+        [self showProfilePhotoFromAnywhere];
+    }
 }
 
 - (void)openWithWebView: (NSURL *)url {
@@ -252,11 +264,18 @@
     }
     
     if ([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
-        UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
-        OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
-        publicFeedItemController.feedItem = feedItem;
-        
-        [mainViewController.navigationController pushViewController:publicFeedItemController animated:NO];
+        if ([feedItem isTour]) {
+            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedItem" bundle:nil];
+            OTPublicFeedItemViewController *publicFeedItemController = (OTPublicFeedItemViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+            publicFeedItemController.feedItem = feedItem;
+            
+            [mainViewController.navigationController pushViewController:publicFeedItemController animated:NO];
+        }
+        else {
+            UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedDetailNew" bundle:nil];
+            OTDetailActionEventViewController *publicFeedItemController = (OTDetailActionEventViewController *)[publicFeedItemStorybard instantiateInitialViewController];
+            publicFeedItemController.feedItem = feedItem;
+        }
     }
     else {
         UIStoryboard *activeFeedItemStorybard = [UIStoryboard storyboardWithName:@"ActiveFeedItem" bundle:nil];

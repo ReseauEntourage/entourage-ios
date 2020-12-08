@@ -132,10 +132,11 @@
 #define Action_Profile_Ethic @"Action__Profile__Ethic"
 #define Action_Profile_About @"Action__Profile__About"
 #define Action_Profile_Logout @"Action__Profile__LogOut"
-#define Action_Profile_ShowEvents @"Action__Profile__ShowEvents"
-#define Action_Profile_ShowActions @"Action__Profile__ShowActions"
 #define Action_Profile_ModProfil @"Action__Profile__ModProfil"
 #define Action_Profile_ShowProfil @"Action__Profile__ShowProfil"
+
+#define Action_Menu_EventsCount @"Action__Menu__EventsCount"
+#define Action_Menu_ActionsCount @"Action__Menu__ActionsCount"
 
 #define View_Profile_Menu @"View__Profile__Menu"
 
@@ -194,5 +195,13 @@
 //Start info
 #define View_Start_Feeds @"View__Start__Feeds"
 
+#define Action_Add_username_Submit @"Action__Add__UsernameSubmit"
+
+#define Action_guide_searchStart @"Action__GuideMap__SearchStart"
+#define Action_guide_searchResults @"Action__GuideMap__SearchResults"
+
+#define Action_guide_searchFilter_organiz @"Action__GuideMap__OrganizationsFilter"
+#define Action_guide_searchFilter_Volunt @"Action__GuideMap__Volunteers"
+#define Action_guide_searchFilter_Donat @"Action__GuideMap__Donations"
 
 #endif /* Analytics_keys_h */

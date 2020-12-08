@@ -23,6 +23,9 @@
 #define MAPVIEW_CLICK_REGION_SPAN_X_METERS 750
 #define MAPVIEW_CLICK_REGION_SPAN_Y_METERS 750
 
+#define MAPVIEW_REGION_LIGHT_SPAN_X_METERS 800
+#define MAPVIEW_REGION_LIGHT_SPAN_Y_METERS 800
+
 #define DATA_REFRESH_RATE 60.0 //seconds
 #define LOCATION_MIN_DISTANCE 5.f
 
@@ -79,6 +82,9 @@
 #define ABOUT_POLICY_URL @"https://www.entourage.social/politique-de-confidentialite"
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
 #define ABOUT_POLITIQUE_DE_CONF_FORMAT @"%@links/privacy-policy/redirect?token=%@"
+#define ABOUT_LINKEDOUT @"https://www.linkedout.fr"
+
+
 
 #define SNAPSHOT_START "snapshot_start_%d.png"
 #define SNAPSHOT_STOP "snapshot_end_%d.png"
@@ -104,7 +110,7 @@
 #define PRIVACY_POLICY_LINK_ID @"privacy-policy"
 #define JOIN_LINK_ID @"volunteering"
 #define JOIN_URL @"https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
-
+#define BLOG_LINK_ID @"how-to-present"
 // Chart Ethique
 #define CHARTE_LINK_ID @"ethics-charter"
 
@@ -145,3 +151,8 @@
 #define SLUG_HUB_LINK_2 @"hub_2"
 #define SLUG_HUB_LINK_3 @"hub_3"
 #define SLUG_HUB_LINK_FAQ @"hub_faq"
+
+#define SLUG_ACTION_FAQ @"action_faq"
+#define SLUG_ACTION_SCB @"pedagogic-content"
+#define SLUG_ACTION_ASSO @"partner_action_faq"
+

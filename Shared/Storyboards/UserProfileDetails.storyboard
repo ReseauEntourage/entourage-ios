@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="arx-da-V22">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="arx-da-V22">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -23,11 +21,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Yj2-Eq-54z"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XnP-uf-dCh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mg2-nQ-Co1">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7HB-dM-9Y5" userLabel="View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="371"/>
@@ -196,7 +194,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qqj-vg-96q">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6F9-ol-rLc" userLabel="View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="424"/>
@@ -405,6 +403,17 @@
             <point key="canvasLocation" x="98" y="-2489"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="2Jf-Al-b2c">
+            <size key="intrinsicContentSize" width="76" height="46"/>
+        </designable>
+        <designable name="WdG-RU-kzQ">
+            <size key="intrinsicContentSize" width="47" height="46"/>
+        </designable>
+        <designable name="aSU-wJ-Ja3">
+            <size key="intrinsicContentSize" width="53" height="46"/>
+        </designable>
+    </designables>
     <resources>
         <image name="nextFull" width="56" height="56"/>
         <image name="nextOpacity70" width="56" height="56"/>

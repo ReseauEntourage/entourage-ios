@@ -281,6 +281,28 @@ extern NSString *kUsers;
      ];
 }
 
+- (void)deleteReportUserPromptForEntourage:(NSString *)uuid
+                             withSuccess:(void (^)(void))success
+                                 failure:(void (^)(NSError *))failure {
+    
+    NSString *url = [NSString stringWithFormat:API_URL_DISABLE_REPORT_USER, uuid, TOKEN];
+    
+    [[OTHTTPRequestManager sharedInstance]
+     DELETEWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject) {
+         if (success) {
+             success();
+         }
+     }
+     andFailure:^(NSError *error) {
+         if (failure) {
+             failure(error);
+         }
+     }
+     ];
+}
+
 - (void)rejectEntourageJoinRequestForUser:(NSNumber *)userID
                              forEntourage:(NSString *)uuid
                               withSuccess:(void (^)(void))success

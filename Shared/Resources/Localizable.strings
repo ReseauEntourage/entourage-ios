@@ -95,6 +95,28 @@
 "menu_join" = "Devenir Ambassadeur Entourage";
 "menu_donnation" = "Donner mes retours rapides";
 
+
+//Menu new version
+"menu_info_title" = "👌  MON ACTIVITE";
+"menu_info_first_title" = "👋 FAIRE LE PREMIER PAS";
+"menu_info_first_guide" = "Notre guide pour oser la rencontre";
+"menu_info_first_prog" = "Quel programme d’Entourage est pour vous ?";
+//Second
+"menu_info_second_gift" = "Faire un don à Entourage";
+"menu_info_second_help" = "Aider à la réinsertion ";
+"menu_info_second_ambassador" = "Devenir Ambassadeur bénévole";
+"menu_info_second_good" = "Créer des liens avec les Bonnes Ondes";
+"menu_info_second_title" = "❤️  S’ENGAGER";
+//Third
+"menu_info_third_info" = "Comment en parler aux personnes isolées ?";
+"menu_info_third_share" = "Répandez la solidarité autour de vous !";
+"menu_info_third_title" = "📣 PARTAGER ENTOURAGE";
+
+"menu_info_social" = "Pour vivre encore plus de solidarité suivez Entourage sur vos réseaux !";
+"menu_info_social_bold" = "encore plus de solidarité";
+
+"menu_info_text_share" =  "Bonjour ! Grâce au réseau Entourage, je participe à des actions solidaires entre voisins avec et sans domicile. Rejoins-moi : %@";
+
 // AboutItems
 "about_tutorial" = "Voir le tutoriel";
 "about_rateus" = "Notez-nous dans l’App Store";
@@ -139,6 +161,7 @@
 "join_item_failed" = "Impossible de rejoindre l’entourage.";
 "ongoing" = "En cours";
 "cancelled_join_request" = "Demande annulée";
+"join_pending_new" = "Demandé";
 
 "no_data_entourages" = "C'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant ! \n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur + en bas à droite";
 
@@ -545,7 +568,7 @@
 "successful_close_mail" = "Mes retours sur l'entourage %@ qui a été un succès";
 "blocked_close_mail" = "Mes retours sur l'entourage %@ qui n'a pas abouti";
 "help_close_mail" = "Aide pour l'entourage %@";
-"structure_subject" = "Information sur la structure '%@' - #%@";
+"structure_subject" = "J'ai des infos à jour concernant '%@' - #%@";
 
 "contact_email_adress" = "contact@entourage.social";
 "email_subject_new_sms" = "Demande de code SMS";
@@ -554,7 +577,7 @@
 // Share
 "share_webview" = "J'ai découvert le guide Simple Comme Bonjour pour aller à la rencontre des personnes sans-abri. C'est à découvrir ici : %@";
 
-"share_action" = "Hello ! J'ai %1$@ une initiative solidaire sur Entourage, le réseau qui tisse des liens entre voisins avec et sans domicile : \"%2$@\". J’ai pensé que ça t'intéresserait. Clique ici : %3$@.\n\nMerci beaucoup pour ta solidarité !";
+"share_action" = "%@\n\nMerci beaucoup pour ta solidarité !";
 
 "share_action_verb_creator" = "créé";
 "share_action_verb_member" = "rejoint";
@@ -585,6 +608,7 @@
 "agir_new_title" = "L'essentiel, c'est la rencontre !";
 "agir_new_button_title" = "Vous ne vous sentez pas prêt ?";
 "agir_new_button_title_alone" = "Voir nos conseils";
+"agir_new_button_title_asso" = "Comment mobiliser les voisins ?";
 "agir_bonnes_ondes_others" = "soutenir en groupe une personne isolée";
 "agir_bonnes_ondes_alone" = "se créer un cercle d'amis Entourage";
 "agir_title_bonnes_ondes" = "Rejoindre les Bonnes Ondes";
@@ -599,9 +623,12 @@
 
 //Dates formatées
 "le_" = "le %@";
+"Le_" = "%@";
 "du_au" = "du %@ au %@";
+"Du_au" = "Du %@ au %@";
 "de_a" = "de %@ à %@";
 "du_a" = "du %@ à %@";
+"Du_a" = "Du %@ à %@";
 "au_a" = "au %@ à %@";
 "rendez-vous" = "Rendez-vous";
 
@@ -791,12 +818,16 @@
 //Report entourage
 "minChars_pop_report_entourage" = "Veuillez saisir votre message de signalement";
 "report_entourage" = "Entourage signalé";
+"report_user" = "Utilisateur signalé";
 "report_action_title" = "Vous allez signaler cette action solidaire à nos administrateurs.\n";
 "report_action_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cette action solidaire :";
 "report_event_title" = "Vous allez signaler cet évènement à nos administrateurs.\n";
 "report_event_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cet évènement :";
 "report_entourage_button" = "Envoyer";
 "report_entourage_placeholder" = "Ecrivez quelque chose…";
+
+"report_contribution_title" = "Vous allez signaler cet utilisateur à nos administrateurs.\n";
+"report_contribution_attributed_title" = "\nMerci de préciser pourquoi\n vous signalez cet utilisateur :";
 
 //Association detail
 "title_association" = "Association";
@@ -897,3 +928,21 @@
 "partnerFollowButtonCancel" = "Annuler";
 
 "sendShare" = "Lien envoyé";
+
+"detail_action_creator_help" = "fait appel à la solidarité du réseau";
+"detail_action_creator_event" = "vous donne rendez-vous";
+"detail_action_creator_gift" = "propose cette aide";
+
+"confirm_cancel_demand" = "Confirmez-vous vouloir retirer votre demande ?";
+
+//Pop info photo profile
+"info_photo_profile_title" = "Ajoutez votre photo de profil et inspirez encore plus confiance";
+"info_photo_profile_description" = "Vous n’avez pas encore de photo de profil. Les personnes découvrant votre action solidaire seront plus susceptibles de la rejoindre si vous en ajoutez une.";
+"info_photo_profile_ignore" = "Ignorer";
+"info_photo_profile_add" = "Ajouter";
+"info_feed_item_event_online" = "En ligne";
+
+"input_username" = "Heureux de vous revoir !";
+"input_sub" = "Cette fois, pourriez-vous me dire comment vous vous appelez ?";
+"input_username_error" = "Veuillez remplir les 2 champs avec un minimum de %d caractères.";
+"button_reset_filters" = "Annuler Filtres";

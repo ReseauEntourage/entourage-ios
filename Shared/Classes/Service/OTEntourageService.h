@@ -82,4 +82,8 @@
 - (void)reopenEntourage:(OTEntourage *)entourage
                 success:(void (^)(OTEntourage *))success
                 failure:(void (^)(NSError *))failure;
+
+- (void)deleteReportUserPromptForEntourage:(NSString *)uuid
+                             withSuccess:(void (^)(void))success
+                            failure:(void (^)(NSError *))failure;
 @end

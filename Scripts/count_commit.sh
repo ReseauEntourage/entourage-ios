@@ -1,4 +1,5 @@
 #!/bin/sh
+#used in bitrise workflow
 
 INFO_PLIST="${1:-entourage/entourage-Info.plist}"
 

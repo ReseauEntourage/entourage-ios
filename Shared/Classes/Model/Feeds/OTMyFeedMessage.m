@@ -23,6 +23,8 @@
             NSDictionary *authorDict = author;
             self.firstName = [authorDict stringForKey:kWSKeyFirstname];
             self.lastName = [authorDict stringForKey:kWSKeyLastname];
+            self.displayName = [authorDict stringForKey:kWSKeyDisplayName];
+            self.authorId = [authorDict numberForKey:@"id"];
         }
     }
     return self;

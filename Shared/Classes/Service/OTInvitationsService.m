@@ -53,7 +53,7 @@ NSString *const kKeyFailedNumbers = @"failed_numbers";
 }
 
 - (void)getInvitationsWithStatus:(NSString *)status success:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_GET_INVITES, TOKEN];
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_GET_INVITES, TOKEN, status];
     [[OTHTTPRequestManager sharedInstance]
      GETWithUrl:url
      andParameters:nil

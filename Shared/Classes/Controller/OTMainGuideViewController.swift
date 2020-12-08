@@ -103,10 +103,27 @@ class OTMainGuideViewController: UIViewController {
         btnLeftMenu.frame = CGRect(x: 0, y: 0, width: 34/2, height: 28/2)
         let barButton = UIBarButtonItem(customView: btnLeftMenu)
         self.navigationItem.leftBarButtonItem = barButton
+        
+        let btnRightMenu: UIButton = UIButton()
+        btnRightMenu.setImage(UIImage(named: "search_new"), for: .normal)
+        btnRightMenu.addTarget(self, action: #selector(showSearch), for: .touchUpInside)
+        btnRightMenu.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
+        let barButtonRight = UIBarButtonItem(customView: btnRightMenu)
+        self.navigationItem.rightBarButtonItem = barButtonRight
     }
 
     @objc func onBack() {
         _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func showSearch() {
+        let sb = UIStoryboard.init(name: "GuideSolidarity", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "vcSearch") as! OTGDSSearchViewController
+        vc.modalPresentationStyle = .fullScreen
+        vc.distance = getMapHeight()
+        vc.location = mapView.centerCoordinate
+        
+        self.navigationController?.present(vc, animated: true, completion: nil)
     }
     
     deinit {
@@ -299,7 +316,7 @@ class OTMainGuideViewController: UIViewController {
             mapCenter = CLLocationCoordinate2DMake(PARIS_LAT, PARIS_LON)
         }
         
-        let region = MKCoordinateRegion(center: mapCenter, latitudinalMeters: CLLocationDistance(MAPVIEW_REGION_SPAN_X_METERS), longitudinalMeters: CLLocationDistance(MAPVIEW_REGION_SPAN_Y_METERS))
+        let region = MKCoordinateRegion(center: mapCenter, latitudinalMeters: CLLocationDistance(MAPVIEW_REGION_LIGHT_SPAN_X_METERS), longitudinalMeters: CLLocationDistance(MAPVIEW_REGION_LIGHT_SPAN_Y_METERS))
         
         self.mapView.setRegion(region, animated: false)
         
@@ -391,7 +408,7 @@ class OTMainGuideViewController: UIViewController {
         
         let duration = animated ? TimeInterval(floatLiteral: 0.25) : TimeInterval(floatLiteral: 0.0)
         UIView.animate(withDuration: duration) {
-            let region = MKCoordinateRegion(center: self.mapView.centerCoordinate, latitudinalMeters: CLLocationDistance(MAPVIEW_REGION_SPAN_X_METERS), longitudinalMeters: CLLocationDistance(MAPVIEW_REGION_SPAN_Y_METERS))
+            let region = MKCoordinateRegion(center: self.mapView.centerCoordinate, latitudinalMeters: CLLocationDistance(MAPVIEW_REGION_LIGHT_SPAN_X_METERS), longitudinalMeters: CLLocationDistance(MAPVIEW_REGION_LIGHT_SPAN_Y_METERS))
             self.mapView.setRegion(region, animated: animated)
             self.ui_tableView.tableHeaderView = self.headerViewWithMap(mapHeight: mapFrame.size.height)
             

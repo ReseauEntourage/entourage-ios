@@ -113,25 +113,35 @@
         }
     }
     
-    if (self.lblTimeDistance) {
-        double distance = [uiDelegate distance];
-        NSString *distanceStr = @"";
-        if (self.showTimeAsUpdatedDate) {
-            distanceStr = [self formattedMessageTimeForFeedItem:feedItem distance:distance];
-            if (distanceStr.length > 0) {
-                distanceStr = [NSString stringWithFormat:@"%@ - ",distanceStr];
+    if (feedItem.isOnline.boolValue) {
+        self.lblTimeDistance.text = [OTLocalisationService getLocalizedValueForKey:@"info_feed_item_event_online"];
+    }
+    else {
+        if (self.lblTimeDistance) {
+            double distance = [uiDelegate distance];
+            NSString *distanceStr = @"";
+            if (self.showTimeAsUpdatedDate) {
+                distanceStr = [self formattedMessageTimeForFeedItem:feedItem distance:distance];
+                if (distanceStr.length > 0) {
+                    distanceStr = [NSString stringWithFormat:@"%@ - ",distanceStr];
+                }
+            } else if (distance < 1000000.f) {
+                distanceStr = [self formattedItemDistance:distance
+                                             creationDate:feedItem.creationDate];
+                if (distanceStr.length > 0) {
+                    distanceStr = [NSString stringWithFormat:@"%@ - ",distanceStr];
+                }
+            } else {
+                distanceStr = @"";
             }
-        } else if (distance < 1000000.f) {
-            distanceStr = [self formattedItemDistance:distance
-                                                       creationDate:feedItem.creationDate];
-            if (distanceStr.length > 0) {
-                distanceStr = [NSString stringWithFormat:@"%@ - ",distanceStr];
+            if (self.isFromMyEntourages) {
+               distanceStr = [distanceStr stringByReplacingOccurrencesOfString:@" - " withString:@""];
+                self.lblTimeDistance.text = distanceStr;
             }
-        } else {
-            distanceStr = @"";
+            else {
+                self.lblTimeDistance.text = [NSString stringWithFormat:@"%@%@",distanceStr,feedItem.postalCode];
+            }
         }
-        
-        self.lblTimeDistance.text = [NSString stringWithFormat:@"%@%@",distanceStr,feedItem.postalCode];
     }
     
     self.imgAssociation.hidden = feedItem.author.partner == nil;
