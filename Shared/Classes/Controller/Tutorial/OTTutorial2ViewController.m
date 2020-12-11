@@ -23,7 +23,7 @@
     
     self.topView.backgroundColor = [ApplicationTheme shared].backgroundThemeColor;
     
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Consultez les actions et les évènements solidaires créés par vos voisins et rejoignez ceux qui vous intéressent sur la carte" attributes:@{
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Consultez les actions et les événements solidaires créés par vos voisins et rejoignez ceux qui vous intéressent sur la carte" attributes:@{
                                                                                                                                                                                                                                                  NSFontAttributeName: [UIFont systemFontOfSize:17.0f weight:UIFontWeightSemibold],
                                                                                                                                                                                                                                                  NSForegroundColorAttributeName: [UIColor colorWithWhite:74.0f / 255.0f alpha:1.0f],
                                                                                                                                                                                                                                                  NSKernAttributeName: @(0.0)
