@@ -207,7 +207,7 @@ extension OTGuideDetailPoiViewController: InviteSourceDelegate {
                 vc.feedItem = nil
                 //vc.delegate = self
                 vc.isSharePoi = true
-                vc.poiId = self.poi.sid.intValue
+                vc.poiId = (self.poi.sid != nil) ? self.poi.sid.intValue : (Int(self.poi.uuid) ?? 0)
                 
                 if #available(iOS 13.0, *) {
                     vc.isModalInPresentation = true
