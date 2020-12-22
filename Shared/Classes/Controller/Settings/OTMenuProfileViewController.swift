@@ -13,7 +13,6 @@ import SVProgressHUD
 class OTMenuProfileViewController: UIViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
-    var isStaging = false
     var uuidInfo = "*****"
     
     var currentUser:OTUser!
@@ -23,8 +22,11 @@ class OTMenuProfileViewController: UIViewController {
         
         currentUser = UserDefaults.standard.currentUser
         loadUser()
+        if let _info = Bundle.currentVersion(){
+            self.uuidInfo = "v\(_info)"
+        }
         
-        isStaging = OTAppConfiguration.sharedInstance()?.environmentConfiguration.runsOnStaging ?? false
+        let isStaging = OTAppConfiguration.sharedInstance()?.environmentConfiguration.runsOnStaging ?? false
         
         if isStaging {
             InstanceID.instanceID().getID { (token, error) in
@@ -236,7 +238,7 @@ extension OTMenuProfileViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isStaging ? 6 : 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
