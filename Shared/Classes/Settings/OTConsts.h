@@ -71,7 +71,7 @@
 
 #define kNotificationCurrentUserUpdated @"NotificationCurrentUserUpdated"
 
-#define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
+#define ABOUT_RATE_US_URL @"https://apps.apple.com/fr/app/entourage-reseau-solidaire/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
 #define ABOUT_INSTAGRAM_URL @"https://www.instagram.com/reseauentourage/"
 #define ABOUT_TWITTER_URL @"https://twitter.com/r_entourage"
@@ -83,8 +83,6 @@
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
 #define ABOUT_POLITIQUE_DE_CONF_FORMAT @"%@links/privacy-policy/redirect?token=%@"
 #define ABOUT_LINKEDOUT @"https://www.linkedout.fr"
-
-
 
 #define SNAPSHOT_START "snapshot_start_%d.png"
 #define SNAPSHOT_STOP "snapshot_end_%d.png"
