@@ -16,7 +16,6 @@ def sharedPods
     pod 'JVFloatLabeledTextField', '~> 1.2'
     pod 'libPhoneNumber-iOS'
     pod 'kingpin', '0.3.1'
-    pod 'FBSDKCoreKit', '~> 8.0'
     pod 'Firebase/Analytics', '~> 6.34'
     pod 'Firebase/Messaging', '~> 6.34'
     pod 'Firebase/InAppMessaging', '~> 6.34'

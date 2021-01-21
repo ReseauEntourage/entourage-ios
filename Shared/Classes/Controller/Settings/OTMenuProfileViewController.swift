@@ -29,9 +29,8 @@ class OTMenuProfileViewController: UIViewController {
         let isStaging = OTAppConfiguration.sharedInstance()?.environmentConfiguration.runsOnStaging ?? false
         
         if isStaging {
-            InstanceID.instanceID().getID { (token, error) in
-                if let _token = token, let _info = Bundle.fullCurrentVersion() {
-                    
+            Messaging.messaging().token { token, error in
+              if let _token = token, let _info = Bundle.fullCurrentVersion() {
                     self.uuidInfo = "v\(_info)\nFIId: \(_token)"
                     self.ui_tableview.reloadData()
                 }
@@ -166,12 +165,11 @@ class OTMenuProfileViewController: UIViewController {
     }
     @IBAction func action_tap_uuid(_ sender: Any) {
         Logger.print("uuid")
-        
-        InstanceID.instanceID().getID { (token, error) in
-            if let _token = token {
+        Messaging.messaging().token { token, error in
+           if let _token = token {
                 UIPasteboard.general.string = _token
                 SVProgressHUD.showInfo(withStatus: "Information copiée dans le presse-papier")
-            }
+           }
         }
     }
     

@@ -74,6 +74,7 @@
 		2BF958802451D78100C36863 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9587F2451D78100C36863 /* Extensions.swift */; };
 		2BFC5A89245AC32800AB75C4 /* OTPictureUploadS3Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC5A88245AC32800AB75C4 /* OTPictureUploadS3Service.swift */; };
 		2D1E3DD0253CD5D700A7333D /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2D1E3DCF253CD5D700A7333D /* MBProgressHUD */; };
+		2D902D5A25B9B7D8003157D1 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2D902D5925B9B7D8003157D1 /* FacebookCore */; };
 		2DAF5DE3253CD0B600662FD3 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2DAF5DE2253CD0B600662FD3 /* SDWebImage */; };
 		371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
 		37191AD6220B3A6600F789B8 /* CommunityConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37191AD5220B3A6600F789B8 /* CommunityConfig.plist */; };
@@ -1450,6 +1451,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D902D5A25B9B7D8003157D1 /* FacebookCore in Frameworks */,
 				0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */,
 				0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */,
 				A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */,
@@ -3220,6 +3222,7 @@
 			packageProductDependencies = (
 				2DAF5DE2253CD0B600662FD3 /* SDWebImage */,
 				2D1E3DCF253CD5D700A7333D /* MBProgressHUD */,
+				2D902D5925B9B7D8003157D1 /* FacebookCore */,
 			);
 			productName = entourage;
 			productReference = 6B92CA9E19A7461C004E8C9B /* Ent-Beta.app */;
@@ -3276,6 +3279,7 @@
 			packageReferences = (
 				2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				2D1E3DCE253CD5D700A7333D /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
+				2D902D5825B9B7D8003157D1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 6B92CA9F19A7461C004E8C9B /* Products */;
 			projectDirPath = "";
@@ -4525,6 +4529,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		2D902D5825B9B7D8003157D1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -4540,6 +4552,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2D1E3DCE253CD5D700A7333D /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
 			productName = MBProgressHUD;
+		};
+		2D902D5925B9B7D8003157D1 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D902D5825B9B7D8003157D1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
 		};
 		2DAF5DE2253CD0B600662FD3 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;

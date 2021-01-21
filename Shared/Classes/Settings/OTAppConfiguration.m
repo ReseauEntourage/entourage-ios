@@ -7,7 +7,7 @@
 //
 
 #import <IQKeyboardManager/IQKeyboardManager.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKCoreKit.h>
 #import <SimpleKeychain/A0SimpleKeychain.h>
 
 #import "OTAppConfiguration.h"
@@ -128,6 +128,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)applicationDidBecomeActive:(UIApplication *)application {
     // Call the 'activateApp' method to log an app event for use
     // in analytics and advertising reporting.
+    [FBSDKAppEvents initialize];
     [FBSDKAppEvents activateApp];
 
     [OTPushNotificationsService refreshPushTokenIfConfigurationChanged];
