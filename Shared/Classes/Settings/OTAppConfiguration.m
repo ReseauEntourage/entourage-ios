@@ -81,6 +81,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
     [self configureFirebase];
     [OTAnalyticsObserver init];
+    [FBSDKSettings initialize];
     
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
@@ -128,7 +129,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 + (void)applicationDidBecomeActive:(UIApplication *)application {
     // Call the 'activateApp' method to log an app event for use
     // in analytics and advertising reporting.
-    [FBSDKAppEvents initialize];
     [FBSDKAppEvents activateApp];
 
     [OTPushNotificationsService refreshPushTokenIfConfigurationChanged];
