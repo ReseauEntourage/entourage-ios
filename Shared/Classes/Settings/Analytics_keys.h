@@ -139,6 +139,7 @@
 #define Action_Menu_ActionsCount @"Action__Menu__ActionsCount"
 
 #define View_Profile_Menu @"View__Profile__Menu"
+#define View_Plus_Screen @"View__Plus__Screen"
 
 /**
  End Profile
@@ -146,6 +147,13 @@
 
 //Action Good waves
 #define Action_Plus_GoodWaves @"Action__Plus__GoodWaves"
+#define Action_Plus_Help @"Action__Plus__Help"
+#define Action_Plus_CreateAskForHelp @"Action__Plus__CreateAskForHelp"
+#define Action_Plus_CreateContribute @"Action__Plus__CreateContribute"
+#define Action_Plus_CreateOuting @"Action__Plus__CreateOuting"
+#define Action_Plus_StartTour @"Action__Plus__StartTour"
+#define Action_Plus_AddEncounter @"Action__Plus__AddEncounter"
+#define Action_Plus_BackPressed @"Action__Plus__BackPressed"
 //Action feed item show FAQ
 #define Action_FeedItemInfo_FAQ @"Action__FeedItemInfo__FAQ"
 
@@ -193,7 +201,7 @@
 #define Action_guideMap_CallPOI @"Action__GuideMap__CallPOI"
 
 //Start info
-#define View_Start_Feeds @"View__Start__Feeds"
+#define View_Start_Feeds @"View__Start__Home"
 
 #define Action_Add_username_Submit @"Action__Add__UsernameSubmit"
 

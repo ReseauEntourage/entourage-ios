@@ -189,6 +189,7 @@
 
 - (IBAction)doCreateTour:(id)sender {
     [OTLogger logEvent:@"TourCreateClick"];
+    [OTLogger logEvent:Action_Plus_StartTour];
     [OTAppState hideTabBar:NO];
     if ([self.optionsDelegate respondsToSelector:@selector(createTour)]) {
         [self.optionsDelegate performSelector:@selector(createTour) withObject:nil];
@@ -198,6 +199,7 @@
 - (IBAction)doCreateEncounter:(id)sender {
     [OTAppState hideTabBar:NO];
     [OTLogger logEvent:@"CreateEncounterClick"];
+    [OTLogger logEvent:Action_Plus_AddEncounter];
     if ([self.optionsDelegate respondsToSelector:@selector(createEncounter)])
         [self.optionsDelegate performSelector:@selector(createEncounter) withObject:nil];
 }
@@ -214,6 +216,7 @@
 
 - (IBAction)doCreateActionHelp:(id)sender {
     [OTAppState hideTabBar:NO];
+    [OTLogger logEvent:Action_Plus_CreateAskForHelp];
     [OTLogger logEvent:@"CreateActionClick"];
     if ([OTOngoingTourService sharedInstance].isOngoing)
         [self.actionAlert presentOnViewController:self];
@@ -224,6 +227,7 @@
 
 - (IBAction)doCreateActionGift:(id)sender {
     [OTAppState hideTabBar:NO];
+    [OTLogger logEvent:Action_Plus_CreateContribute];
     [OTLogger logEvent:@"CreateActionClick"];
     if ([OTOngoingTourService sharedInstance].isOngoing)
         [self.actionAlert presentOnViewController:self];
@@ -234,6 +238,7 @@
     
 - (IBAction)doCreateEvent:(id)sender {
     [OTAppState hideTabBar:NO];
+    [OTLogger logEvent:Action_Plus_CreateOuting];
     [OTLogger logEvent:@"CreateEventClick"];
     [self.optionsDelegate performSelector:@selector(createEvent) withObject:nil];
 }
