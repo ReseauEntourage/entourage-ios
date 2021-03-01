@@ -24,13 +24,15 @@
 @interface OTNewsFeedsFilter ()
 
 @property (nonatomic, strong) NSDictionary *categoryDictionary;
-
+@property(nonatomic) BOOL isAnnouncementOnly;
+@property (nonatomic) BOOL isVersionAlone;
 @end;
 
 @implementation OTNewsFeedsFilter
 
 - (instancetype)init {
     self = [super init];
+    self.isAnnouncementOnly = NO;
     if (self) {
         self.isPro = IS_PRO_USER;
         OTSavedFilter *savedFilter = [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter;
@@ -78,7 +80,14 @@
             self.showAlls = YES;
             self.showNeighborhood = YES;
             self.showPrivateCircle = YES;
-            self.showOuting = YES;
+           
+            if (self.isVersionAlone) {
+                self.showOuting = NO;
+            }
+            else {
+                self.showOuting = YES;
+            }
+            
             self.showPastOuting = NO;
             
             self.showMedical = self.isPro;
@@ -105,6 +114,7 @@
             self.timeframeInHours = 30 * 24;
         }
     }
+    
     return self;
 }
 
@@ -117,27 +127,66 @@
              OTLocalizedString(@"filter_timeframe_title")
              ];
         }
-        return @[
+        NSArray *array;
+        if (self.isVersionAlone) {
+            array = @[
+                 OTLocalizedString(@"filter_entourages_title"),
+                // OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                 OTLocalizedString(@"filter_timeframe_title")
+                 ];
+        }
+        else {
+            array = @[
                  OTLocalizedString(@"filter_maraudes_title"),
                  [OTAppAppearance eventsFilterTitle],
                  OTLocalizedString(@"filter_entourages_title"),
                 // OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
+        }
+        
+        return array;
     } else if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
-        return @[
-                 [OTAppAppearance eventsFilterTitle],
+        
+        NSArray *array;
+        
+        if (self.isVersionAlone) {
+            array = @[
                  OTLocalizedString(@"filter_entourages_title"),
                 // OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
                  OTLocalizedString(@"filter_publish_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
+        }
+        else {
+            array = @[
+                 OTLocalizedString(@"filter_entourages_title"),
+                // OTLocalizedString(@"filter_entourage_from_sympathisants_title"),
+                 OTLocalizedString(@"filter_publish_title"),
+                 OTLocalizedString(@"filter_timeframe_title")
+                 ];
+        }
+        
+        return array;
     } else {
-        return @[
+        
+        NSArray *array;
+        
+        if (self.isVersionAlone) {
+            array = @[
+                 OTLocalizedString(@"filter_entourages_title"),
+                 OTLocalizedString(@"filter_timeframe_title")
+                 ];
+        }
+        else {
+            array = @[
                  [OTAppAppearance eventsFilterTitle],
                  OTLocalizedString(@"filter_entourages_title"),
                  OTLocalizedString(@"filter_timeframe_title")
                  ];
+        }
+        
+        return array;
     }
 }
 
@@ -192,18 +241,21 @@
         
     }
     
-    NSArray *eventChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+    if (!self.isVersionAlone) {
+        NSArray *eventChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
+                                                        active:self.showOuting
+                                                     withImage:@"ask_for_help_event"
+                                                         title:[OTAppAppearance eventsFilterTitle]],
+                                   [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
+                                                        active:self.showPastOuting
+                                                         title:[OTAppAppearance includePastEventsFilterTitleKey]]];
+        [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
                                                     active:self.showOuting
-                                                 withImage:@"ask_for_help_event"
-                                                     title:[OTAppAppearance eventsFilterTitle]],
-                               [OTFeedItemFilter createFor:FeedItemFilterKeyEventsPast
-                                                    active:self.showPastOuting
-                                                     title:[OTAppAppearance includePastEventsFilterTitleKey]]];
-    [parentArray addObject:[OTFeedItemFilter createFor:FeedItemFilterKeyEvents
-                                                active:self.showOuting
-                                              children:eventChildren
-                                                 image:@"ask_for_help_event"
-                                          showBoldText:YES]];
+                                                  children:eventChildren
+                                                     image:@"ask_for_help_event"
+                                              showBoldText:YES]];
+    }
+    
         
     OTCategoryType *contribution = nil;
     OTCategoryType *demande = nil;
@@ -235,7 +287,9 @@
 - (NSArray *)groupForPublic {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     // Events section
-    [array addObject:[self groupEntourageEvents]];
+    if (!self.isVersionAlone) {
+        [array addObject:[self groupEntourageEvents]];
+    }
     
     [array addObject:[self groupActions]];
 //    if (![NSUserDefaults standardUserDefaults].currentUser.isAnonymous) {
@@ -260,6 +314,7 @@
                                                 timeframeInHours:self.timeframeInHours]
                             ];
     [array addObject:timeframe];
+    NSLog(@"***** return group public : %@",array);
     return array;
 }
 
@@ -281,9 +336,15 @@
                                                 children:tourChildren
                                             showBoldText:YES], nil];
     [tours addObjectsFromArray:tourChildren];
-    [array addObject:tours];
+
+    if (!self.isVersionAlone) {
+        [array addObject:tours];
+    }
     
     if (self.isEncouterFilter) {
+        if (self.isVersionAlone) {
+            [array addObject:tours];
+        }
         NSArray *timeframe =  @[
             [OTFeedItemTimeframeFilter createFor:FeedItemFilterKeyTimeframe
                                 timeframeInHours:self.timeframeInHours]
@@ -291,8 +352,12 @@
         [array addObject:timeframe];
         return array;
     }
+    
     // Events section
-    [array addObject:[self groupEntourageEvents]];
+    if (!self.isVersionAlone) {
+        [array addObject:[self groupEntourageEvents]];
+    }
+   
     
     // Actions section
     [array addObject:[self groupActions]];
@@ -359,6 +424,8 @@
                                           children:contributionArray
                                       showBoldText:YES]];
     [action addObjectsFromArray:contributionArray];
+    
+    NSLog(@"***** return group action %@",action);
     return action;
 }
 
@@ -413,6 +480,15 @@
 
 - (NSMutableDictionary *)toDictionaryWithPageToken:(NSString *)pageToken
                                     andLocation:(CLLocationCoordinate2D)location {
+    
+    if (self.isAnnouncementOnly) {
+        return @{
+                 @"latitude": @(location.latitude),
+                 @"longitude": @(location.longitude),
+                 @"types" : [self getTypes],
+                 @"announcements" : self.isEncouterFilter ? @"null" : @"v1",
+        }.mutableCopy;
+    }
     return @{
              @"page_token" : pageToken == nil ? @"" : pageToken,
              @"latitude": @(location.latitude),
@@ -551,7 +627,14 @@
     
     self.showNeighborhood = YES;
     self.showPrivateCircle = YES;
-    self.showOuting = YES;
+    
+    if (self.isVersionAlone) {
+        self.showOuting = NO;
+    }
+    else {
+        self.showOuting = YES;
+    }
+    
     self.showPastOuting = NO;
     
     self.showDemand = YES;
@@ -581,7 +664,14 @@
     
     self.showNeighborhood = YES;
     self.showPrivateCircle = YES;
-    self.showOuting = YES;
+    
+    if (self.isVersionAlone) {
+        self.showOuting = NO;
+    }
+    else {
+        self.showOuting = YES;
+    }
+    
     self.showPastOuting = NO;
     
     self.showDemand = NO;
@@ -611,11 +701,22 @@
     if (!self.showDemandeSocial || !self.showDemandeHelp || !self.showDemandeResource ||  !self.showDemandeOther) {
            isDefault = NO;
        }
-    if (!self.showDemand || !self.showContribution || !self.showOuting || self.timeframeInHours != 30 * 24) {
-        isDefault = NO;
+    NSLog(@"***** is version alone filters : ? %d --- pro ?%d",self.isVersionAlone,self.isPro);
+    
+    if (self.isVersionAlone) {
+        
+        if (!self.showDemand || !self.showContribution || self.timeframeInHours != 30 * 24) {
+            isDefault = NO;
+        }
+    }
+    else {
+        if (!self.showDemand || !self.showContribution || !self.showOuting || self.timeframeInHours != 30 * 24) {
+            isDefault = NO;
+        }
     }
     
-    if (self.isPro) {
+    
+    if (self.isPro && !self.isVersionAlone) {
         if (!self.showMedical || !self.showSocial || !self.showDistributive || !self.showTours) {
             isDefault = NO;
         }
@@ -643,7 +744,7 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d| --- isAlls %d - partners %d", self.showMedical, self.showSocial, self.showDistributive,
+    NSString *_desc = [NSString stringWithFormat:@"%d|%d|%d|%d|%d|%d|%d|%d|%f|%f|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d| --- isAlls %d - partners %d", self.showMedical, self.showSocial, self.showDistributive,
             self.showDemand, self.showContribution, self.showTours,
             self.showOnlyMyEntourages, self.timeframeInHours,
             
@@ -653,6 +754,8 @@
             self.showContributionSocial, self.showContributionHelp, self.showContributionResource, self.showContributionInfo, self.showContributionSkill, self.showContributionOther,
             
             self.showOuting, self.showPrivateCircle, self.showNeighborhood,self.showAlls,self.showPartners];
+    NSLog(@"***** filters -> %@ -- isVersionAlone %d",_desc,self.isVersionAlone);
+    return _desc;
 }
 
 - (NSString *)getTourTypes {
@@ -669,13 +772,22 @@
 }
 
 - (NSString *)getTypes {
+    if (self.isAnnouncementOnly) {
+        return @"an";
+    }
+    
+    NSLog(@"***** ici get types isalone ? %d",self.isVersionAlone);
     NSMutableArray *types = [NSMutableArray new];
-    if (self.showMedical)
-        [types addObject:@"tm"];
-    if (self.showSocial)
-        [types addObject:@"tb"];
-    if (self.showDistributive)
-        [types addObject:@"ta"];
+    if (!self.isVersionAlone) {
+        if (self.showMedical)
+            [types addObject:@"tm"];
+        if (self.showSocial)
+            [types addObject:@"tb"];
+        if (self.showDistributive)
+            [types addObject:@"ta"];
+    }
+    
+    
     if (self.showDemandeSocial)
         [types addObject:@"as"];
     if (self.showDemandeHelp)
@@ -724,6 +836,17 @@
     return [types componentsJoinedByString:@","];
 }
 
+-(void)setAnnouncementOnly {
+    self.isAnnouncementOnly = YES;
+}
+-(void)setVersionAlone {
+    self.isVersionAlone = YES;
+    NSLog(@"***** ici setversionAlone ");
+    
+    NSString *type = [self getTypes];
+    NSLog(@"***** ici setversionAlone get types %@ ",type);
+}
+
 - (id)copyWithZone:(NSZone *)zone {
     OTNewsFeedsFilter *copy = [OTNewsFeedsFilter new];
     copy.showMedical = self.showMedical;
@@ -761,6 +884,8 @@
     copy.isEncouterFilter = self.isEncouterFilter;
     copy.showPartners = self.showPartners;
     copy.showAlls = self.showAlls;
+    copy.isAnnouncementOnly = self.isAnnouncementOnly;
+    copy.isVersionAlone = self.isVersionAlone;
     return copy;
 }
 

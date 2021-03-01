@@ -16,6 +16,8 @@ class OTMainTabbarViewController: UITabBarController {
     var messagesVC:UINavigationController!
     var menuVC:UINavigationController!
     
+    var temporaryNavPop:UIViewController? = nil
+    
     var isAskForHelp = false
     var addEditEvent = false
     
@@ -61,7 +63,7 @@ class OTMainTabbarViewController: UITabBarController {
     }
     
     func setupVCs() {
-        let  _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMain") as! OTMainViewController
+        let  _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMain") as! OTHomeMainViewController//OTMainViewController
         
         homeVC = UINavigationController.init(rootViewController: _homeVC)
         homeVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_home")
@@ -148,12 +150,22 @@ class OTMainTabbarViewController: UITabBarController {
         OTLogger.logEvent(Action_Tab_Plus)
         
         if (OTOngoingTourService.sharedInstance()?.isOngoing ?? false || isOngoingTou != nil) {
-            showHomeVC()
-            OTLogger.logEvent("PlusOnTourClick")
-            if let _vc = homeVC.topViewController as? OTMainViewController {
-                _vc.createQuickEncounter()
-                return
-            }
+            Logger.print("***** ici show Ajout rencontre !!!")
+            self.createEncounter()
+//            showHomeVC()
+//            OTLogger.logEvent("PlusOnTourClick")
+//            if let _vc = homeVC.topViewController as? OTMainViewController {
+//                Logger.print("***** ici show Ajout rencontre On a le bon VC !!!")
+//                _vc.createQuickEncounter()
+//                return
+//            }
+//            else if let _vc = homeVC.topViewController as? OTFeedToursViewController {
+//                Logger.print("***** ici show Ajout rencontre On a le bon VC !!!")
+//                _vc.createQuickEncounter()
+//                return
+//            }
+//            Logger.print("***** ici show Ajout rencontre on n'a pas le bon VC !!!")
+            return
         }
         
         OTLogger.logEvent(Action_Plus_Agir)
@@ -170,21 +182,61 @@ class OTMainTabbarViewController: UITabBarController {
 extension OTMainTabbarViewController: OTOptionsDelegate {
     
     func createTour() {
-        self.showHomeVC()
+        Logger.print("***** create tour delegate start ?")
+      //  self.showHomeVC() à remettre
         if let _vc = homeVC.topViewController as? OTMainViewController {
             let delayInSeconds = 0.1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 _vc.createTourFromNav()
             }
+            return
+        }
+        else if let _vc = homeVC.topViewController as? OTFeedToursViewController {
+            let delayInSeconds = 0.1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                _vc.createTourFromNav()
+            }
+            return
+        }
+        else {
+            self.showHomeVC()
+            if let _vc = homeVC.topViewController as? OTHomeMainViewController {
+                Logger.print("***** create tour delegate start home as othomemainVC")
+                let delayInSeconds = 0.1
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                    _vc.createTourFromNav()
+                }
+            }
+            else {
+                Logger.print("***** create tour delegate start ici on n'a rien ;(")
+            }
         }
     }
     
     func createEncounter() {
-        self.showHomeVC()
+        
         if let _vc = homeVC.topViewController as? OTMainViewController {
+            Logger.print("***** ici show Ajout rencontre On a le bon VC MAINVC!!!")
             let delayInSeconds = 0.1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 _vc.createEncounterFromNav()
+            }
+        }
+        else if let _vc = homeVC.topViewController as? OTFeedToursViewController {
+            Logger.print("***** ici show Ajout rencontre On a le bon VC FEEDTOUR!!!")
+            let delayInSeconds = 0.1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                _vc.createEncounterFromNav()
+            }
+        }
+        else {
+            self.showHomeVC()
+            if let _vc = homeVC.topViewController as? OTHomeMainViewController {
+                Logger.print("***** ici show Ajout rencontre On a pas le bon VC :(!!!")
+                let delayInSeconds = 0.1
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                    _vc.createEncounterFromNav()
+                }
             }
         }
     }
@@ -234,6 +286,7 @@ extension OTMainTabbarViewController: OTOptionsDelegate {
     
     func showEntourageEditor() {
         if let navController = UIStoryboard.init(name: "EntourageEditor", bundle: nil).instantiateViewController(withIdentifier: "navEntourageEditor") as? UINavigationController {
+            temporaryNavPop = navController
             if let vc = navController.children[0] as? OTEntourageEditorViewController {
                 let location = OTLocationManager.sharedInstance()?.defaultLocationForNewActions()
                 vc.location = location
@@ -243,7 +296,7 @@ extension OTMainTabbarViewController: OTOptionsDelegate {
                 vc.type = nil
                 
                 self.show(navController, sender: nil)
-                self.showHomeVC()
+                self.showHomeVC(isEditor:true)
             }
         }
     }
@@ -252,7 +305,13 @@ extension OTMainTabbarViewController: OTOptionsDelegate {
 //MARK: - EntourageEditorDelegate -
 extension OTMainTabbarViewController: EntourageEditorDelegate {
     func didEdit(_ entourage: OTEntourage!) {
-        (self.homeVC.children[0] as! OTMainViewController).didEdit(entourage)
+        if let _vc = self.homeVC.children[0] as? OTMainViewController {
+            _vc.didEdit(entourage)
+        }
+        else {
+            temporaryNavPop?.dismiss(animated: true, completion: nil)
+            showHomeVC()
+        }
     }
 }
 
@@ -277,10 +336,15 @@ extension OTMainTabbarViewController: UITabBarControllerDelegate {
         }
     }
 
-    func showHomeVC() {
+    func showHomeVC(isEditor:Bool = false) {
         if self.selectedIndex != 0 {
             self.selectedIndex = 0
         }
+        
+        if !isEditor {
+            homeVC.popToRootViewController(animated: false)
+        }
+        //homeVC.popToRootViewController(animated: false)
         boldSelectedItem()
     }
 }

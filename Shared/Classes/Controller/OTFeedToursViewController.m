@@ -1,100 +1,46 @@
 //
-//  OTMapViewController.m
+//  OTFeedToursViewController.m
 //  entourage
 //
-//  Created by Louis Davin on 22/08/2014.
-//  Copyright (c) 2014 OCTO Technology. All rights reserved.
+//  Created by Jr on 17/02/2021.
+//  Copyright © 2021 Entourage. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "OTFeedToursViewController.h"
+
 #import <SVProgressHUD/SVProgressHUD.h>
 
-// Controller
-#import "OTMainViewController.h"
-#import "UIViewController+menu.h"
-#import "OTCalloutViewController.h"
-#import "OTMapOptionsViewController.h"
 #import "OTTourOptionsViewController.h"
 #import "OTQuitFeedItemViewController.h"
-#import "UIView+entourage.h"
-#import "OTUserViewController.h"
 #import "OTTourCreatorViewController.h"
 #import "OTFeedItemFiltersViewController.h"
 #import "OTPublicFeedItemViewController.h"
-#import "OTActiveFeedItemViewController.h"
-#import "OTMyEntouragesViewController.h"
 #import "OTToursMapDelegate.h"
-#import "OTCustomAnnotation.h"
 #import "OTEncounterAnnotation.h"
-#import "OTConsts.h"
-#import "OTAPIConsts.h"
-#import "OTFeedItemsTableView.h"
-#import "OTUser.h"
-#import "OTTour.h"
-#import "OTTourPoint.h"
-#import "OTEncounter.h"
-#import "OTPOI.h"
 #import "OTTourService.h"
-#import "OTAuthService.h"
-#import "OTPOIService.h"
-#import "OTFeedsService.h"
-#import "OTEntourageService.h"
-#import "UIButton+entourage.h"
-#import "UIColor+entourage.h"
-#import "UILabel+entourage.h"
 #import "MKMapView+entourage.h"
-#import <QuartzCore/QuartzCore.h>
-#import <AudioToolbox/AudioServices.h>
-#import "NSUserDefaults+OT.h"
-#import "NSDictionary+Parsing.h"
-#import "OTLocationManager.h"
-#import "NSNotification+entourage.h"
-#import "OTFeedItemFactory.h"
-#import "OTOngoingTourService.h"
-#import "OTMapDelegateProxyBehavior.h"
 #import "OTOverlayFeederBehavior.h"
 #import "OTTapEntourageBehavior.h"
-#import "OTJoinBehavior.h"
 #import "OTNewsFeedsFilter.h"
-#import "OTStatusChangedBehavior.h"
-#import "OTEditEntourageBehavior.h"
 #import "OTNewsFeedsSourceDelegate.h"
 #import "OTNewsFeedsSourceBehavior.h"
 #import "OTTourCreatorBehavior.h"
 #import "OTTourCreatorBehaviorDelegate.h"
 #import "OTStartTourAnnotation.h"
-#import "OTNoDataBehavior.h"
-#import "OTUnreadMessagesService.h"
-#import "OTMailSenderBehavior.h"
-#import "OTAppDelegate.h"
 #import "OTSavedFilter.h"
 #import "OTEditEncounterBehavior.h"
-#import "OTTapViewBehavior.h"
 #import "OTToggleVisibleBehavior.h"
-#import "OTCollectionSourceBehavior.h"
-#import "OTHeatzonesCollectionSource.h"
-#import <Kingpin/KPClusteringController.h>
-#import <Kingpin/KPAnnotation.h>
-#import "OTAnnouncement.h"
-#import "OTMapView.h"
 #import "entourage-Swift.h"
-#import "OTHTTPRequestManager.h"
-#import "OTSafariService.h"
-#import "OTAppConfiguration.h"
-#import "OTEntourageAnnotation.h"
 #import "OTNeighborhoodAnnotation.h"
 #import "OTPrivateCircleAnnotation.h"
 #import "OTOutingAnnotation.h"
-#import "OTCrashlyticsHelper.h"
 
 #define MAX_DISTANCE_FOR_MAP_CENTER_MOVE_ANIMATED_METERS 100
 #define FEEDS_REQUEST_DISTANCE_KM 10
 
 #define LONGPRESS_DELTA 65.0f
-#define MAX_DISTANCE 250.0 //meters
-#define NUMBER_OF_LAUNCH_CHECK 4
 
-@interface OTMainViewController ()
+@interface OTFeedToursViewController ()
 <
 UIGestureRecognizerDelegate,
 UIScrollViewDelegate,
@@ -103,8 +49,7 @@ OTTourCreatorDelegate,
 OTFeedItemQuitDelegate,
 OTFeedItemsFilterDelegate,
 OTNewsFeedsSourceDelegate,
-OTTourCreatorBehaviorDelegate,
-OTHeatzonesCollectionViewDelegate
+OTTourCreatorBehaviorDelegate
 >
 
 @property (nonatomic, weak) IBOutlet OTFeedItemsTableView           *tableView;
@@ -113,7 +58,6 @@ OTHeatzonesCollectionViewDelegate
 @property (nonatomic, weak) IBOutlet OTTapEntourageBehavior         *tapEntourage;
 @property (nonatomic, weak) IBOutlet OTJoinBehavior                 *joinBehavior;
 @property (nonatomic, weak) IBOutlet OTStatusChangedBehavior        *statusChangedBehavior;
-@property (nonatomic, weak) IBOutlet OTEditEntourageBehavior        *editEntourgeBehavior;
 @property (nonatomic, weak) IBOutlet OTEditEncounterBehavior        *editEncounterBehavior;
 @property (nonatomic, weak) IBOutlet OTNewsFeedsSourceBehavior      *newsFeedsSourceBehavior;
 @property (nonatomic, weak) IBOutlet OTTourCreatorBehavior          *tourCreatorBehavior;
@@ -140,136 +84,35 @@ OTHeatzonesCollectionViewDelegate
 @property (nonatomic, weak) IBOutlet OTNoDataBehavior               *noDataBehavior;
 @property (nonatomic, weak) IBOutlet OTMailSenderBehavior           *mailSender;
 @property (nonatomic, strong) IBOutlet OTToggleVisibleBehavior      *toggleCollectionView;
-@property (nonatomic, strong) IBOutlet OTCollectionSourceBehavior   *heatzonesDataSource;
-@property (nonatomic, strong) IBOutlet OTHeatzonesCollectionSource  *heatzonesCollectionDataSource;
 @property (nonatomic, strong) IBOutlet UIView  *hideScreenPlaceholder;
 @property (nonatomic, strong) IBOutlet UILabel  *hideScreenPlaceholderTitle;
 @property (nonatomic, strong) IBOutlet UILabel  *hideScreenPlaceholderSubtitle;
 
 //New buttons
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ui_constraint_view_menu_height;
-@property (weak, nonatomic) IBOutlet UIView *ui_view_top_menu;
 @property (weak, nonatomic) IBOutlet UIButton *ui_button_filters;
 @property (weak, nonatomic) IBOutlet UIButton *ui_button_map_list;
-@property (weak, nonatomic) IBOutlet UIView *ui_view_encounter;
-@property (weak, nonatomic) IBOutlet UIView *ui_view_selector_menu_all;
-@property (weak, nonatomic) IBOutlet UIView *ui_view_selector_menu_events;
-@property (weak, nonatomic) IBOutlet UIView *ui_view_selector_menu_encounters;
-@property (weak, nonatomic) IBOutlet UILabel *ui_label_menu_all;
-@property (weak, nonatomic) IBOutlet UILabel *ui_label_menu_events;
-@property (weak, nonatomic) IBOutlet UILabel *ui_label_menu_encounters;
 
 @property (nonatomic) BOOL isEventMenuSelected, isEncounterSelected;
 @property (nonatomic, strong) OTNewsFeedsFilter *encounterFilter;
 
-@property (nonatomic, strong) KPClusteringController *clusteringController;
-@property (nonatomic) double entourageScale;
 @property (nonatomic) BOOL encounterFromTap;
 @property (nonatomic) BOOL forceReloadingFeeds;
-@property (nonatomic) BOOL isAskForHelp;
 
-@property (nonatomic) BOOL isFirstInitView,isFirstLaunchCheckName;
 @end
 
-@implementation OTMainViewController
+@implementation OTFeedToursViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.isFirstLaunchCheckName = YES;
-    self.isFirstInitView = YES;
-    
     [self setup];
-    
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if ([OTAppConfiguration shouldShowIntroTutorial:currentUser]) {
-        [OTAppState presentTutorialScreen];
-    }
     
     [self configureActionsButton];
     
+    self.isEncounterSelected = YES;
+    
     [self changeViewMenuState];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showAllsFromNotification)
-                                                 name:@"showAlls"
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showEventsFromNotification)
-                                                 name:@"showEvents"
-                                               object:nil];
-}
-
--(void)checkProfil {
-    if (!self.isFirstLoad) {
-        return;
-    }
-    
-    if (self.isFirstLaunchCheckName) {
-        self.isFirstLaunchCheckName = NO;
-        OTUser * currentUser = [[NSUserDefaults standardUserDefaults]currentUser];
-        
-        if (currentUser.firstName.length == 0 && currentUser.lastName.length == 0) {
-            UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Onboarding_V2" bundle:nil];
-            OTInputNamesViewController * vc = [sb instantiateViewControllerWithIdentifier:@"Onboarding_inputNames"];
-            vc.modalPresentationStyle = UIModalPresentationFullScreen;
-            
-            [self.tabBarController presentViewController:vc animated:YES completion:nil];
-            return;
-        }
-    }
-    
-    BOOL isAfterLogin = [[NSUserDefaults standardUserDefaults] boolForKey: @"checkAfterLogin"];
-    BOOL noMoreDemand = [[NSUserDefaults standardUserDefaults] boolForKey: @"noMoreDemand"];
-    NSInteger numberOfLaunch = [[NSUserDefaults standardUserDefaults] integerForKey:@"nbOfLaunch"];
-   
-    numberOfLaunch = numberOfLaunch + 1;
-    [[NSUserDefaults standardUserDefaults]setInteger:numberOfLaunch forKey:@"nbOfLaunch"];
-    
-    BOOL hasToShow = NO;
-    if (!noMoreDemand) {
-        hasToShow = (numberOfLaunch > 0 && numberOfLaunch % NUMBER_OF_LAUNCH_CHECK == 0) ? YES : NO;
-    }
- 
-    if (isAfterLogin || hasToShow) {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"checkAfterLogin"];
-        
-        OTUser * currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-        
-        if (currentUser.goal == nil || currentUser.goal.length == 0) {
-            NSString *message = OTLocalizedString(@"login_info_pop_action");
-            
-            UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"login_pop_information") message:message preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *action = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_info_entourage_custom_yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-                NSURL *deepL = [NSURL URLWithString:@"entourage://profileAction"];
-                [[OTDeepLinkService new] handleDeepLink:deepL];
-            }];
-            UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_info_entourage_custom_no") style:UIAlertActionStyleDefault handler:nil];
-            
-            UIAlertAction *actionNoMore = [UIAlertAction actionWithTitle:OTLocalizedString(@"pop_info_entourage_custom_no_more") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"noMoreDemand"];
-            }];
-            
-            [alertVC addAction:actionNoMore];
-            [alertVC addAction:actionCancel];
-            [alertVC addAction:action];
-            
-            [self presentViewController:alertVC animated:YES completion:nil];
-        }
-    }
-}
-
--(void) showAllsFromNotification {
-    [self action_show_all:self];
-    [self showFeedsList];
-    [self configureNavigationBar];
-}
--(void) showEventsFromNotification {
-    [self action_show_events:self];
-    [self showFeedsList];
-    [self configureNavigationBar];
 }
 
 - (void)configureActionsButton {
@@ -281,7 +124,6 @@ OTHeatzonesCollectionViewDelegate
     self.launcherButton.layer.cornerRadius = 29;
     
     self.launcherButton.hidden = YES;
-    
     
     if (![OTAppConfiguration supportsAddingActionsFromMap]) {
         self.launcherButton.hidden = YES;
@@ -303,8 +145,6 @@ OTHeatzonesCollectionViewDelegate
 
 - (void)setup {
     self.isFirstLoad = YES;
-    self.heatzonesCollectionDataSource.heatzonesDelegate = self;
-    [self.heatzonesCollectionDataSource initialize];
     [self.toggleCollectionView initialize];
     [self.toggleCollectionView toggle:NO animated:NO];
     
@@ -339,70 +179,28 @@ OTHeatzonesCollectionViewDelegate
         self.stopButton.hidden = YES;
     }
     
-    [self switchToNewsfeed];
+    //[self switchToNewsfeed];
+    [self.tableView showEncountersOnlyAction];
     [self reloadFeeds];
     
     [self.mapDelegateProxy.delegates addObject:self];
-    self.entourageScale = 1.0;
     [self addObservers];
     
     [self showToursListAction];
-    
-    [self.ui_label_menu_all setText:OTLocalizedString(@"home_tab_all").uppercaseString];
-    [self.ui_label_menu_events setText:OTLocalizedString(@"home_tab_events").uppercaseString];
-    [self.ui_label_menu_encounters setText:OTLocalizedString(@"home_tab_encounter").uppercaseString];
-    
-    [self checkOnboarding];
-}
-
--(void)checkOnboarding {
-    
-    int userType = (int) [[NSUserDefaults standardUserDefaults] integerForKey:@"userType"];
-    
-    BOOL isFromOnboarding = [[NSUserDefaults standardUserDefaults] boolForKey:@"isFromOnboarding"];
-    
-    if (isFromOnboarding) {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFromOnboarding"];
-        
-        if (userType == 1) { //Neighbour
-            [self.currentFilter setNeighbourFilters];
-        }
-        else if(userType == 2) { // Alone
-            [self.currentFilter setAloneFilters];
-        }
-        [self changeFilterButton];
-        
-        NSNotification *notif = [[NSNotification alloc]initWithName:@"showToolTip" object:nil userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notif];
-    }
-    
-    [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
 }
 
 -(void) changeFilterButton {
-    if (self.isEncounterSelected) {
-        NSLog(@"***** is encounter nil ? %@",self.encounterFilter);
-        if (self.encounterFilter == nil) {
-            NSLog(@"***** Encouter filter null on reload feeds");
-            self.encounterFilter = [OTNewsFeedsFilter new];
-            self.encounterFilter.isPro = YES;
-            [self.encounterFilter changeFiltersForProOnly];
-        }
-        
-        if ([self.encounterFilter isDefaultEncounterFilters]) {
-            [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters").uppercaseString forState:UIControlStateNormal];
-        }
-        else {
-            [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters_on").uppercaseString forState:UIControlStateNormal];
-        }
+    if (self.encounterFilter == nil) {
+        self.encounterFilter = [OTNewsFeedsFilter new];
+        self.encounterFilter.isPro = YES;
+        [self.encounterFilter changeFiltersForProOnly];
+    }
+    
+    if ([self.encounterFilter isDefaultEncounterFilters]) {
+        [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters").uppercaseString forState:UIControlStateNormal];
     }
     else {
-        if ([self.currentFilter isDefaultFilters]) {
-            [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters").uppercaseString forState:UIControlStateNormal];
-        }
-        else {
-            [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters_on").uppercaseString forState:UIControlStateNormal];
-        }
+        [self.ui_button_filters setTitle:OTLocalizedString(@"home_button_filters_on").uppercaseString forState:UIControlStateNormal];
     }
 }
 
@@ -465,32 +263,12 @@ OTHeatzonesCollectionViewDelegate
                                                  name:kNotificationLocationUpdated
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(entourageCreated:)
-                                                 name:kNotificationEntourageCreated
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(forceGetNewData)
                                                  name:@kNotificationReloadData
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(sendCloseMail:)
                                                  name:@kNotificationSendCloseMail
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateGroupUnreadState:)
-                                                 name:kUpdateGroupUnreadStateNotification
-                                               object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(updateTotalUnreadCountBadge:)
-//                                                 name:kUpdateTotalUnreadCountNotification
-//                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(entourageUpdated:)
-                                                 name:kNotificationEntourageChanged
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(associationUpdated)
-                                                 name:kNotificationAssociationUpdated
                                                object:nil];
 }
 
@@ -501,25 +279,49 @@ OTHeatzonesCollectionViewDelegate
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (self.isFirstInitView) {
-        [self.ui_view_top_menu.layer setShadowColor:[UIColor blackColor].CGColor];
-        [self.ui_view_top_menu.layer setShadowOpacity:0.5];
-        [self.ui_view_top_menu.layer setShadowRadius:4.0];
-        self.ui_view_top_menu.layer.masksToBounds = NO;
-        CGRect _rect = CGRectMake(0, self.ui_view_top_menu.bounds.size.height, self.view.frame.size.width, self.ui_view_top_menu.layer.shadowRadius);
-        CGPathRef shadowPath = [[UIBezierPath bezierPathWithRect:_rect] CGPath];
-        [self.ui_view_top_menu.layer setShadowPath:shadowPath];
-        self.isFirstInitView = NO;
-        
-        [OTLogger logEvent:View_Start_Feeds];
-    }
-    
     [OTAppConfiguration updateAppearanceForMainTabBar];
     
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
     [self.newsFeedsSourceBehavior resume];
-    [self.heatzonesCollectionDataSource refresh];
+    
+    [self setupNavBar:animated];
+}
+
+
+-(void) setupNavBar:(BOOL)animated {
+    UINavigationBar *navBar = self.navigationController.navigationBar;
+    
+    if (@available(iOS 13.0, *)) {
+        UINavigationBarAppearance *navBarAppear = [UINavigationBarAppearance new];
+        
+        [navBarAppear configureWithOpaqueBackground];
+        [navBarAppear setBackgroundColor:[UIColor whiteColor]];
+        [navBarAppear setTitleTextAttributes:@{@"foregroundColor":[UIColor appOrangeColor]}];
+        navBar.standardAppearance = navBarAppear;
+        navBar.scrollEdgeAppearance = navBarAppear;
+    } else {
+        [navBar setBackgroundColor:[UIColor whiteColor]];
+        [navBar setTintColor:[UIColor appOrangeColor]];
+        [navBar setBarTintColor:[UIColor whiteColor]];
+        [navBar setTitleTextAttributes:@{@"foregroundColor":[UIColor appOrangeColor]}];
+    }
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
+    self.title = @"Maraudes";
+    
+    UIButton * btnLeft = [UIButton new];
+    [btnLeft setImage:[UIImage imageNamed:@"backItem"] forState:UIControlStateNormal];
+    [btnLeft addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
+    btnLeft.frame = CGRectMake(0, 0, 34/2, 28/2);
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btnLeft];
+    [self.navigationItem setLeftBarButtonItem:item];
+}
+
+-(void) onBack {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -539,10 +341,6 @@ OTHeatzonesCollectionViewDelegate
     
     [self configureNavigationBar];
     [self checkIfShouldDisableFeedsAndMap];
-    
-    dispatch_async(dispatch_get_main_queue(), ^() {
-        [self checkProfil];
-    });
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -558,33 +356,10 @@ OTHeatzonesCollectionViewDelegate
     [self.tableView reloadData];
 }
 
-- (void)loadHeatzonesCollectionViewWithItems: (NSMutableArray *)itemsTapped {
-    NSMutableArray *feeds = [[NSMutableArray alloc] init];
-    for (CLLocation *coordinates in itemsTapped) {
-        for (OTEntourage *item in self.newsFeedsSourceBehavior.feedItems) {
-            if ([item isKindOfClass:[OTEntourage class]]) {
-                if (item.location.coordinate.latitude == coordinates.coordinate.latitude &&
-                    item.location.coordinate.longitude == coordinates.coordinate.longitude) {
-                    [feeds addObject:item];
-                }
-                else {
-                    NSLog(@"Invalide location for event: %@", item.title);
-                }
-            }
-        }
-    }
-    
-    [self.toggleCollectionView toggle:[feeds count] > 0 animated:YES];
-    
-    if (feeds.count > 0) {
-        [self.heatzonesDataSource updateItems:feeds];
-    }
-    [self.heatzonesCollectionDataSource refresh];
-}
-
 - (void)switchToNewsfeed {
     [OTLogger logEvent:@"Screen06_1FeedView"];
     [self.tableView switchToFeeds];
+   // [self.tableView showEncountersOnlyAction];
     [self.tableView updateItems:self.newsFeedsSourceBehavior.feedItems];
     [self.noDataBehavior switchedToNewsfeeds];
     self.toursMapDelegate.isActive = YES;
@@ -598,12 +373,6 @@ OTHeatzonesCollectionViewDelegate
     
     [self showFeedsList];
     [self configureNavigationBar];
-}
-
-- (void)switchToEvents {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.00 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self action_show_events:self];
-    });
 }
 
 #pragma mark - Methods called from nav bar (button +)
@@ -622,6 +391,7 @@ OTHeatzonesCollectionViewDelegate
         [self switchToNewsfeed];
         [self performSegueWithIdentifier:@"TourCreatorSegue" sender:nil];
     };
+    
     if ([self.presentedViewController isKindOfClass:[OTMapOptionsViewController class]])
         [self dismissViewControllerAnimated:YES completion:createBlock];
     else
@@ -631,7 +401,7 @@ OTHeatzonesCollectionViewDelegate
 - (void) createEncounterFromNav {
     
     [self dismissViewControllerAnimated:NO completion:^{
-       // [self switchToNewsfeed];
+        [self switchToNewsfeed];
         [self.editEncounterBehavior doEdit:nil
                                    forTour:self.tourCreatorBehavior.tour.uid
                                andLocation:self.encounterLocation];
@@ -640,18 +410,6 @@ OTHeatzonesCollectionViewDelegate
 
 #pragma mark - IBActions Top bar + Menu
 
-- (IBAction)action_show_all:(id)sender {
-    [self.tableView showAllFeedItemsAction];
-    self.isEventMenuSelected = NO;
-    self.isEncounterSelected = NO;
-    [self changeViewMenuState];
-}
-- (IBAction)action_show_events:(id)sender {
-    [self.tableView showEventsOnlyAction];
-    self.isEventMenuSelected = YES;
-    self.isEncounterSelected = NO;
-    [self changeViewMenuState];
-}
 - (IBAction)action_show_encounters:(id)sender {
     [self.tableView showEncountersOnlyAction];
     self.isEncounterSelected = YES;
@@ -665,44 +423,20 @@ OTHeatzonesCollectionViewDelegate
 }
 
 -(void)changeViewMenuState {
-    if (self.isFirstLoad) {
-        self.isEventMenuSelected = NO;
-        self.isEncounterSelected = NO;
-        
-        if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
-            [self.ui_view_encounter setHidden:NO];
-        }
-        else {
-            [self.ui_view_encounter setHidden:YES];
-        }
-    }
+//    if (self.isFirstLoad) {
+//        self.isEventMenuSelected = NO;
+//        self.isEncounterSelected = NO;
+//    }
     
     if (self.isEncounterSelected) {
-        [self.ui_view_selector_menu_all setHidden:TRUE];
-        [self.ui_view_selector_menu_events setHidden:TRUE];
-        [self.ui_view_selector_menu_encounters setHidden:NO];
-        [self.ui_label_menu_all setTextColor:UIColor.darkGrayColor];
-        [self.ui_label_menu_events setTextColor:UIColor.darkGrayColor];
-        [self.ui_label_menu_encounters setTextColor:UIColor.appOrangeColor];
         [self.ui_button_filters setHidden: NO];
     }
     else {
-        [self.ui_view_selector_menu_encounters setHidden:YES];
-        [self.ui_label_menu_encounters setTextColor:UIColor.darkGrayColor];
-        
         if (self.isEventMenuSelected) {
-            [self.ui_view_selector_menu_all setHidden:TRUE];
-            [self.ui_view_selector_menu_events setHidden:NO];
-            [self.ui_label_menu_all setTextColor:UIColor.darkGrayColor];
-            [self.ui_label_menu_events setTextColor:UIColor.appOrangeColor];
             [self.ui_button_filters setHidden: YES];
         }
         else {
             [self.ui_button_filters setHidden: NO];
-            [self.ui_view_selector_menu_all setHidden:NO];
-            [self.ui_view_selector_menu_events setHidden:TRUE];
-            [self.ui_label_menu_all setTextColor:UIColor.appOrangeColor];
-            [self.ui_label_menu_events setTextColor:UIColor.darkGrayColor];
         }
     }
     
@@ -725,8 +459,6 @@ OTHeatzonesCollectionViewDelegate
     self.mapView.pitchEnabled = NO;
     self.mapView.showsBuildings = NO;
     self.mapView.showsTraffic = NO;
-    
-    self.clusteringController = [[KPClusteringController alloc] initWithMapView:self.mapView];
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     CLLocationCoordinate2D mapCenter;
@@ -847,11 +579,6 @@ OTHeatzonesCollectionViewDelegate
     if ([OTOngoingTourService sharedInstance].isOngoing) {
         [self createLocalNotificationForTour: self.tourCreatorBehavior.tour.uid];
     }
-}
-
-- (void)showEntourages {
-    [OTLogger logEvent:@"GoToMessages"];
-    [self performSegueWithIdentifier:@"MyEntouragesSegue" sender:self];
 }
 
 - (void)createQuickEncounter {
@@ -1030,15 +757,6 @@ OTHeatzonesCollectionViewDelegate
     }
 }
 
-- (void)entourageCreated:(NSNotification *)notification {
-    if (self.currentFilter.isPro) {
-        self.currentFilter.showDemand = YES;
-        self.currentFilter.showContribution = YES;
-        [NSUserDefaults standardUserDefaults].savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
-        [self reloadFeeds];
-    }
-}
-
 - (void)clearMap {
     [self.mapView removeAnnotations:[self.mapView annotations]];
     [self.mapView removeOverlays:[self.mapView overlays]];
@@ -1184,98 +902,15 @@ OTHeatzonesCollectionViewDelegate
 #pragma mark - UIGestureRecognizerDelegate
 
 - (void)handleTap:(UITapGestureRecognizer *)sender {
+    NSLog(@"********** HANDLE TAP *********");
     if (sender.state == UIGestureRecognizerStateEnded) {
         
         if (self.isTourListDisplayed) {
             [OTLogger logEvent:Action_feed_showMap];
             [self showToursMapAction];
         }
-        else {
-            NSMutableArray *closeTapHeatzones = [self.tapEntourage hasTappedEntourageOverlay:sender];
-            NSMutableArray *closeTapEntourages = [self.tapEntourage hasTappedEntourageAnnotation:sender];
-            
-            if (closeTapHeatzones.count > 0 && closeTapEntourages.count > 0) {
-                [OTLogger logEvent:@"HeatzoneMapClick"];
-                CLLocationCoordinate2D coordinate;
-                if (self.tapEntourage.tappedEntourage) {
-                    coordinate = self.tapEntourage.tappedEntourage.coordinate;
-                } else {
-                    coordinate = self.tapEntourage.tappedEntourageAnnotation.coordinate;
-                }
-                [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
-                NSMutableArray *items = [[NSMutableArray alloc] initWithArray:closeTapHeatzones];
-                [items addObjectsFromArray:closeTapEntourages];
-                [self loadHeatzonesCollectionViewWithItems:items];
-                
-            }
-            else if (closeTapHeatzones.count > 0) {
-                [OTLogger logEvent:@"HeatzoneMapClick"];
-                [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.tapEntourage.tappedEntourage.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
-                
-                [self loadHeatzonesCollectionViewWithItems:closeTapHeatzones];
-                
-            }
-            else if (closeTapEntourages.count > 0) {
-                [OTLogger logEvent:@"AnnotationMapClick"];
-                [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.tapEntourage.tappedEntourageAnnotation.coordinate, MAPVIEW_CLICK_REGION_SPAN_X_METERS, MAPVIEW_CLICK_REGION_SPAN_Y_METERS) animated:YES];
-                [self loadHeatzonesCollectionViewWithItems:closeTapEntourages];
-            }
-            else {
-                [self.toggleCollectionView toggle:NO animated:YES];
-            }
-        }
         
         [self configureNavigationBar];
-    }
-}
-
-#pragma mark - EntourageEditorDelegate
-
-- (void)didEditEntourage:(OTEntourage *)entourage {
-    if ([entourage isOuting] && ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction]) {
-        [self dismissViewControllerAnimated:NO completion:nil];
-    }
-    
-    [self.editEntourgeBehavior.owner dismissViewControllerAnimated:YES completion:^{
-        if (![entourage.status isEqualToString:ENTOURAGE_STATUS_SUSPENDED]) {
-            [self forceGetNewData];
-            
-            if (entourage.isPublic.boolValue) {
-                self.inviteBehaviorTriggered = NO;
-            } else {
-                // Auto show the share popup only for entourage where a native popover is displayed
-                self.inviteBehaviorTriggered = ![OTAppConfiguration shouldAutoLaunchEditorOnAddAction];
-            }
-            
-            [self checkProfileImageAfterCreate:entourage];
-        }
-    }];
-}
-
--(void) checkProfileImageAfterCreate:(OTEntourage *)entourage {
-    
-    OTUser * currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
-    if (currentUser.avatarURL == nil || currentUser.avatarURL.length == 0) {
-        NSString *message = OTLocalizedString(@"info_photo_profile_description");
-        
-        UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:OTLocalizedString(@"info_photo_profile_title") message:message preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *action = [UIAlertAction actionWithTitle:OTLocalizedString(@"info_photo_profile_add") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            NSURL *deepL = [NSURL URLWithString:@"entourage://profilePhoto"];
-            [[OTDeepLinkService new] handleDeepLink:deepL];
-        }];
-        UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:OTLocalizedString(@"info_photo_profile_ignore") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self showFeedInfo:entourage];
-        }];
-        
-        [alertVC addAction:actionCancel];
-        [alertVC addAction:action];
-        
-        [self presentViewController:alertVC animated:YES completion:nil];
-    }
-    else {
-        [self showFeedInfo:entourage];
     }
 }
 
@@ -1331,12 +966,6 @@ OTHeatzonesCollectionViewDelegate
     }
 }
 
-- (IBAction)doShowNewFeedItems:(UIButton*)sender {
-    self.nouveauxFeedItemsButton.hidden = YES;
-    [self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointZero animated:YES];
-}
-
 #pragma mark - Feeds Table View Delegate
 
 - (void)loadMoreData {
@@ -1347,17 +976,9 @@ OTHeatzonesCollectionViewDelegate
 - (void)showFeedInfo:(OTFeedItem *)feedItem {
     self.selectedFeedItem = feedItem;
     if ([[[OTFeedItemFactory createFor:feedItem] getStateInfo] isPublic]) {
-        [OTLogger logEvent:@"OpenEntouragePublicPage"];
-        
-        if ([feedItem isTour]) {
-            [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
-        }
-        else {
-            [self performSegueWithIdentifier:@"pushDetailFeedNew" sender:self];
-        }
+        [self performSegueWithIdentifier:@"PublicFeedItemDetailsSegue" sender:self];
     }
     else {
-        [OTLogger logEvent:@"OpenEntourageActivePage"];
         [self performSegueWithIdentifier:@"ActiveFeedItemDetailsSegue" sender:self];
     }
 }
@@ -1415,27 +1036,6 @@ OTHeatzonesCollectionViewDelegate
     [self showMapAnimated:NO];
 }
 
-- (void)showEventsOnly
-{
-    [OTLogger logEvent:Action_feed_showEvents];
-    self.newsFeedsSourceBehavior.showEventsOnly = YES;
-    self.newsFeedsSourceBehavior.showEncountersOnly = NO;
-    self.forceReloadingFeeds = NO;
-    [self.noDataBehavior switchedToEvents];
-    [self configureNavigationBar];
-    [self reloadFeeds];
-}
-
-- (void)showAllFeedItems
-{
-    [OTLogger logEvent:Action_feed_showAll];
-    self.newsFeedsSourceBehavior.showEventsOnly = NO;
-    self.newsFeedsSourceBehavior.showEncountersOnly = NO;
-    self.forceReloadingFeeds = YES;
-    [self.noDataBehavior switchedToNewsfeeds];
-    [self configureNavigationBar];
-    [self reloadFeeds];
-}
 -(void)showEncountersOnly {
     [OTLogger logEvent:Action_feed_showTours];
     self.newsFeedsSourceBehavior.showEncountersOnly = YES;
@@ -1561,8 +1161,6 @@ OTHeatzonesCollectionViewDelegate
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([self.joinBehavior prepareSegueForMessage:segue])
         return;
-    if([self.editEntourgeBehavior prepareSegue:segue])
-        return;
     if([self.editEncounterBehavior prepareSegue:segue]) {
         self.encounterFromTap = NO;
         return;
@@ -1585,6 +1183,11 @@ OTHeatzonesCollectionViewDelegate
         [OTOngoingTourService sharedInstance].isOngoing = NO;
         [controller configureWithTour:self.tourCreatorBehavior.tour andEncountersCount:[NSNumber numberWithUnsignedInteger:[self.encounters count]]];
     }
+    else if([segue.identifier isEqualToString:@"FiltersSegue"]) { //*****
+        UINavigationController *navController = (UINavigationController*)destinationViewController;
+        OTFeedItemFiltersViewController *controller = (OTFeedItemFiltersViewController*)navController.topViewController;
+        controller.filterDelegate = self;
+    }
     else if([segue.identifier isEqualToString:@"OTTourOptionsSegue"]) {
         OTTourOptionsViewController *controller = (OTTourOptionsViewController *)destinationViewController;
         controller.optionsDelegate = self;
@@ -1606,14 +1209,6 @@ OTHeatzonesCollectionViewDelegate
         controller.optionsDelegate = self;
         [controller setIsPOIVisible:NO];
     }
-    else if([segue.identifier isEqualToString:@"QuitFeedItemSegue"]) {
-        OTQuitFeedItemViewController *controller = (OTQuitFeedItemViewController *)destinationViewController;
-        controller.view.backgroundColor = [UIColor appModalBackgroundColor];
-        [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        [OTAppState hideTabBar:YES];
-        controller.feedItem = self.selectedFeedItem;
-        controller.feedItemQuitDelegate = self;
-    }
     else if([segue.identifier isEqualToString:@"TourCreatorSegue"]) {
         [OTAppState hideTabBar:YES];
         OTTourCreatorViewController *controller = (OTTourCreatorViewController *)destinationViewController;
@@ -1621,29 +1216,8 @@ OTHeatzonesCollectionViewDelegate
         [controller setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         controller.tourCreatorDelegate = self;
     }
-    else if([segue.identifier isEqualToString:@"EntourageEditor"]) {
-        UINavigationController *navController = (UINavigationController*)destinationViewController;
-        OTEntourageEditorViewController *controller = (OTEntourageEditorViewController *)navController.childViewControllers[0];
-        controller.type = self.entourageType;
-        CLLocation *currentLocation = self.tappedLocation ?
-        self.tappedLocation :
-        [[OTLocationManager sharedInstance] defaultLocationForNewActions];
-        controller.location = currentLocation;
-        controller.entourageEditorDelegate = self;
-        controller.isAskForHelp = self.isAskForHelp;
-        controller.isEditingEvent = self.addEditEvent;
-    }
-    else if([segue.identifier isEqualToString:@"FiltersSegue"]) {
-        UINavigationController *navController = (UINavigationController*)destinationViewController;
-        OTFeedItemFiltersViewController *controller = (OTFeedItemFiltersViewController*)navController.topViewController;
-        controller.filterDelegate = self;
-    }
     else if([segue.identifier isEqualToString:@"PublicFeedItemDetailsSegue"]) {
         OTPublicFeedItemViewController *controller = (OTPublicFeedItemViewController *)destinationViewController;
-        controller.feedItem = self.selectedFeedItem;
-    }
-    else if([segue.identifier isEqualToString:@"pushDetailFeedNew"]) {
-        OTDetailActionEventViewController *controller = (OTDetailActionEventViewController *) destinationViewController;
         controller.feedItem = self.selectedFeedItem;
     }
     else if([segue.identifier isEqualToString:@"ActiveFeedItemDetailsSegue"]) {
@@ -1651,10 +1225,6 @@ OTHeatzonesCollectionViewDelegate
         controller.feedItem = self.selectedFeedItem;
         controller.inviteBehaviorTriggered = self.inviteBehaviorTriggered;
         self.inviteBehaviorTriggered = NO;
-    }
-    else if([segue.identifier isEqualToString:@"MyEntouragesSegue"]) {
-        OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
-        controller.optionsDelegate = self;
     }
     else if ([segue.identifier isEqualToString:@"OTWebViewSegue"]) {
         
@@ -1668,17 +1238,6 @@ OTHeatzonesCollectionViewDelegate
     OTEntourage *feedItem = [notification.userInfo objectForKey:@kNotificationFeedItemKey];
     [self.mailSender sendCloseMail:reason forItem: feedItem];
 }
-
-- (void)updateGroupUnreadState:(NSNotification *) notification {
-    BOOL refreshFeed = [notification.object boolForKey:kNotificationUpdateBadgeRefreshFeed defaultValue:YES];
-    if (refreshFeed == YES)
-        [self forceGetNewData];
-}
-
-//- (void)updateTotalUnreadCountBadge:(NSNotification *) notification { //MARK: Ajouté dans le new VC
-//    NSNumber *totalUnreadCount = [notification.object numberForKey:kNotificationTotalUnreadCountKey];
-//    [OTAppState updateMessagesTabBadgeWithValue:totalUnreadCount.stringValue];
-//}
 
 - (void)encounterEdited: (NSNotification *)notification {
     OTEncounter *encounter = [notification readEncounter];
@@ -1705,23 +1264,6 @@ OTHeatzonesCollectionViewDelegate
 
 - (IBAction)encounterChanged {
     [self updateEncounter: self.editEncounterBehavior.encounter];
-}
-
-- (void)entourageUpdated:(NSNotification *)notification {
-    [self.newsFeedsSourceBehavior removeAllFeedItems];
-    [self.newsFeedsSourceBehavior getNewItems];
-    [self reloadFeeds];
-    [self feedMapWithFeedItems];
-}
-
-- (void)associationUpdated {
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if(currentUser.partner == nil) {
-        self.currentFilter.showFromOrganisation = NO;
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        defaults.savedNewsfeedsFilter = [OTSavedFilter fromNewsFeedsFilter:self.currentFilter];
-    }
-    [self reloadFeeds];
 }
 
 @end

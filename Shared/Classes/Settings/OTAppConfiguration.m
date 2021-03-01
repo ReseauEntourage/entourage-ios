@@ -21,7 +21,6 @@
 #import "OTPushNotificationsService.h"
 #import "OTPictureUploadService.h"
 #import "OTAuthService.h"
-#import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "UIColor+entourage.h"

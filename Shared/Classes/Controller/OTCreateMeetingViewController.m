@@ -11,7 +11,6 @@
 #import <Social/Social.h>
 
 #import "OTCreateMeetingViewController.h"
-#import "OTMainViewController.h"
 #import "OTEncounter.h"
 #import "OTUser.h"
 #import "OTConsts.h"
@@ -78,6 +77,12 @@
         self.nameTextField.text = self.encounter.streetPersonName;
         self.messageTextView.textView.text = self.encounter.message;
     }
+    
+    [self setupCloseModalWithoutTintWithTint:UIColor.whiteColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController withMainColor:UIColor.appOrangeColor andSecondaryColor:UIColor.whiteColor];
+    
+    
 }
 
 -(void)closeMessage {

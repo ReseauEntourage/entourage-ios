@@ -65,14 +65,17 @@
     OTFeedItemFilter *contribution = nil;
     OTFeedItemFilter *demande = nil;
     
+    int contribId = 0;
+    int demandId = 1;
+    
     if (parents.count > 0) {
         if (isToursFeatureEnabled) {
             contribution = parents[2];
             demande = parents[3];
         }
         else {
-            contribution = parents[1];
-            demande = parents[2];
+            contribution = parents[contribId];
+            demande = parents[demandId];
         }
         switch (item.key) {
             case FeedItemFilterKeyDemandeSocial:

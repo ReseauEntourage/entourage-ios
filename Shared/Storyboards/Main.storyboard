@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="hyj-w4-zfj">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,7 +39,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ija-p7-iwf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="84" y="67"/>
+            <point key="canvasLocation" x="1962.4000000000001" y="66.11694152923539"/>
         </scene>
         <!--FeedChangeOptions-->
         <scene sceneID="3Yl-X6-YNn">
@@ -47,7 +47,7 @@
                 <viewControllerPlaceholder storyboardName="FeedChangeOptions" id="BuG-7M-jBg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osO-mj-V4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2034.4000000000001" y="-136.73163418290855"/>
+            <point key="canvasLocation" x="3912.8000000000002" y="-136.73163418290855"/>
         </scene>
         <!--ActiveFeedItem-->
         <scene sceneID="19F-zf-hvr">
@@ -57,7 +57,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FuL-C2-u9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2044" y="-72.863568215892059"/>
+            <point key="canvasLocation" x="3922.4000000000001" y="-72.863568215892059"/>
         </scene>
         <!--PublicFeedItem-->
         <scene sceneID="R5i-fD-RJi">
@@ -67,12 +67,12 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJ8-7h-blf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2070.4000000000001" y="-13.493253373313344"/>
+            <point key="canvasLocation" x="3948" y="-13.493253373313344"/>
         </scene>
         <!--Main-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="OTMain" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" id="vXZ-lx-hvc" userLabel="Main" customClass="OTMainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTMain0" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" id="vXZ-lx-hvc" userLabel="Main" customClass="OTMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -1104,7 +1104,126 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="1264.8" y="39.130434782608695"/>
+            <point key="canvasLocation" x="2862" y="66"/>
+        </scene>
+        <!--Home Main View Controller-->
+        <scene sceneID="MCx-36-XEh">
+            <objects>
+                <viewController storyboardIdentifier="OTMain" id="hyj-w4-zfj" customClass="OTHomeMainViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R8z-IP-7Vf"/>
+                        <viewControllerLayoutGuide type="bottom" id="nu5-l5-J32"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yAV-Uq-qx2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1A8-S2-zur">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Home Page ;)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="052-lH-7A6">
+                                        <rect key="frame" x="24" y="15.5" width="105.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="052-lH-7A6" firstAttribute="centerY" secondItem="1A8-S2-zur" secondAttribute="centerY" id="Rkj-sj-WOx"/>
+                                    <constraint firstItem="052-lH-7A6" firstAttribute="leading" secondItem="1A8-S2-zur" secondAttribute="leading" constant="24" id="kib-9e-I6u"/>
+                                    <constraint firstAttribute="height" constant="52" id="rY5-ne-fA6"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEt-99-eV1">
+                                <rect key="frame" x="171.5" y="609" width="32" height="30"/>
+                                <state key="normal" title="Olds"/>
+                                <connections>
+                                    <action selector="action_show_oldMain:" destination="hyj-w4-zfj" eventType="touchUpInside" id="EAp-bp-wXa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9S-hV-P7l">
+                                <rect key="frame" x="40" y="75" width="295" height="50"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="kCD-F1-RaZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Évènements">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="action_show_feeds:" destination="hyj-w4-zfj" eventType="touchUpInside" id="mAO-gK-Cu7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SgX-zM-aWh">
+                                <rect key="frame" x="40" y="235" width="295" height="50"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Annonces">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="action_show_announcements:" destination="hyj-w4-zfj" eventType="touchUpInside" id="Ara-ZH-jvg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAR-CF-qzt">
+                                <rect key="frame" x="40" y="315" width="295" height="50"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Maraude">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="action_show_maraude:" destination="hyj-w4-zfj" eventType="touchUpInside" id="nvU-Wf-Vpr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOy-7j-log">
+                                <rect key="frame" x="40" y="155" width="295" height="50"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Actions">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="action_show_actions:" destination="hyj-w4-zfj" eventType="touchUpInside" id="8wd-dv-VeE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oOy-7j-log" firstAttribute="leading" secondItem="T9S-hV-P7l" secondAttribute="leading" id="6yO-e1-PFE"/>
+                            <constraint firstItem="SgX-zM-aWh" firstAttribute="trailing" secondItem="oOy-7j-log" secondAttribute="trailing" id="CUd-eQ-sIC"/>
+                            <constraint firstItem="1A8-S2-zur" firstAttribute="leading" secondItem="yAV-Uq-qx2" secondAttribute="leading" id="Cpv-sF-EJc"/>
+                            <constraint firstItem="T9S-hV-P7l" firstAttribute="top" secondItem="1A8-S2-zur" secondAttribute="bottom" constant="23" id="Cw7-A0-WM2"/>
+                            <constraint firstAttribute="trailing" secondItem="1A8-S2-zur" secondAttribute="trailing" id="Ffj-bQ-dM6"/>
+                            <constraint firstItem="oOy-7j-log" firstAttribute="trailing" secondItem="T9S-hV-P7l" secondAttribute="trailing" id="Mws-05-nJ8"/>
+                            <constraint firstItem="SgX-zM-aWh" firstAttribute="leading" secondItem="oOy-7j-log" secondAttribute="leading" id="PnB-5V-ehz"/>
+                            <constraint firstItem="T9S-hV-P7l" firstAttribute="leading" secondItem="yAV-Uq-qx2" secondAttribute="leading" constant="40" id="QNK-jg-yZy"/>
+                            <constraint firstItem="SgX-zM-aWh" firstAttribute="height" secondItem="oOy-7j-log" secondAttribute="height" id="XKK-wq-Ebd"/>
+                            <constraint firstItem="SgX-zM-aWh" firstAttribute="top" secondItem="oOy-7j-log" secondAttribute="bottom" constant="30" id="aH6-ad-jN1"/>
+                            <constraint firstItem="LAR-CF-qzt" firstAttribute="leading" secondItem="SgX-zM-aWh" secondAttribute="leading" id="aLz-3W-e7y"/>
+                            <constraint firstItem="LAR-CF-qzt" firstAttribute="top" secondItem="SgX-zM-aWh" secondAttribute="bottom" constant="30" id="cYc-f9-KkM"/>
+                            <constraint firstItem="LAR-CF-qzt" firstAttribute="height" secondItem="SgX-zM-aWh" secondAttribute="height" id="eZ6-CO-r3W"/>
+                            <constraint firstItem="oOy-7j-log" firstAttribute="top" secondItem="T9S-hV-P7l" secondAttribute="bottom" constant="30" id="fbf-aa-hEN"/>
+                            <constraint firstItem="LAR-CF-qzt" firstAttribute="trailing" secondItem="SgX-zM-aWh" secondAttribute="trailing" id="kOb-g2-tBl"/>
+                            <constraint firstItem="oOy-7j-log" firstAttribute="height" secondItem="T9S-hV-P7l" secondAttribute="height" id="ntb-6x-Ro3"/>
+                            <constraint firstAttribute="trailing" secondItem="T9S-hV-P7l" secondAttribute="trailing" constant="40" id="qRD-sm-Z0h"/>
+                            <constraint firstItem="1A8-S2-zur" firstAttribute="top" secondItem="R8z-IP-7Vf" secondAttribute="bottom" id="wHK-CE-Af4"/>
+                            <constraint firstItem="oEt-99-eV1" firstAttribute="centerY" secondItem="yAV-Uq-qx2" secondAttribute="centerY" constant="290.5" id="wNl-N2-yWR"/>
+                            <constraint firstItem="oEt-99-eV1" firstAttribute="centerX" secondItem="yAV-Uq-qx2" secondAttribute="centerX" id="yhb-c5-uep"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="RKb-g9-lFT"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="ui_title" destination="052-lH-7A6" id="Ig5-zh-G3Z"/>
+                        <outlet property="ui_view_top" destination="1A8-S2-zur" id="GHo-q3-9SF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dhj-KM-nXH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1239.2" y="35.532233883058474"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="CD4-Ww-qZf">
@@ -1316,7 +1435,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="UserProfile" id="cEE-ZD-h1d" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GQc-Cn-XSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1842.4000000000001" y="-433.58320839580216"/>
+            <point key="canvasLocation" x="3636" y="-251"/>
         </scene>
         <!--Social-->
         <scene sceneID="fK0-Cb-xwN">
@@ -1350,26 +1469,13 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
             </objects>
             <point key="canvasLocation" x="2004" y="-658"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="zBr-fw-9rC">
-            <objects>
-                <navigationController id="SGQ-vt-M0a" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uEb-EE-AFW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rbx-kT-TnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2579.1999999999998" y="745.72713643178417"/>
-        </scene>
         <!--QuitFeedItem-->
         <scene sceneID="BFl-vb-SXz">
             <objects>
                 <viewControllerPlaceholder storyboardName="QuitFeedItem" id="R63-9E-dkT" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSm-UU-MOh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1678.4000000000001" y="470.46476761619192"/>
+            <point key="canvasLocation" x="2203" y="490"/>
         </scene>
         <!--TourOptions-->
         <scene sceneID="ciU-xC-Yox">
@@ -1377,7 +1483,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="TourOptions" id="odF-HL-m84" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Na-ZL-zg3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856.8" y="432.68365817091455"/>
+            <point key="canvasLocation" x="2967" y="490"/>
         </scene>
         <!--MyEntourages-->
         <scene sceneID="IjM-Me-8VV">
@@ -1387,7 +1493,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dmb-Mg-GeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2043.2" y="66.566716641679164"/>
+            <point key="canvasLocation" x="3920.8000000000002" y="66.566716641679164"/>
         </scene>
         <!--PublicFeedDetailNew-->
         <scene sceneID="3p8-Vi-KOc">
@@ -1397,7 +1503,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTR-6G-a9l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2151" y="135"/>
+            <point key="canvasLocation" x="4028" y="134.93253373313345"/>
         </scene>
         <!--GuideSolidarity-->
         <scene sceneID="xOp-2g-pfi">
@@ -1407,7 +1513,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1g-iK-4ez" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1949" y="-512"/>
+            <point key="canvasLocation" x="2099" y="-474"/>
         </scene>
         <!--MapOptions-->
         <scene sceneID="z5A-ht-Zxe">
@@ -1415,7 +1521,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="MapOptions" id="IB2-iq-b6s" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ic-Nb-Z9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1948.8" y="210.49475262368819"/>
+            <point key="canvasLocation" x="3827.1999999999998" y="210.49475262368819"/>
         </scene>
         <!--TourConfirmation-->
         <scene sceneID="sBV-v5-LFD">
@@ -1423,7 +1529,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="TourConfirmation" id="cVp-EA-m5M" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j4z-UC-U37" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1506.4000000000001" y="511.84407796101954"/>
+            <point key="canvasLocation" x="2674" y="490"/>
         </scene>
         <!--TourCreator-->
         <scene sceneID="kKI-xW-1CW">
@@ -1431,7 +1537,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="TourCreator" id="cUF-7c-FT1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zj4-HN-Fub" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1891.2" y="283.35832083958024"/>
+            <point key="canvasLocation" x="3768.8000000000002" y="283.35832083958024"/>
         </scene>
         <!--JoinFeedItem-->
         <scene sceneID="JPP-j5-gm1">
@@ -1439,7 +1545,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="JoinFeedItem" id="GHS-CJ-wmd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ny-Mu-RyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1276.8" y="511.84407796101954"/>
+            <point key="canvasLocation" x="1668" y="593"/>
         </scene>
         <!--EntourageEditor-->
         <scene sceneID="zTc-vn-arv">
@@ -1449,7 +1555,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1y-5B-KU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="728" y="457.87106446776613"/>
+            <point key="canvasLocation" x="1422" y="490"/>
         </scene>
         <!--EncounterEditor-->
         <scene sceneID="ROz-4P-QUY">
@@ -1457,7 +1563,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="EncounterEditor" id="Ry3-hZ-KaJ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iTy-XQ-KqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="475.19999999999999" y="601.79910044977521"/>
+            <point key="canvasLocation" x="1938" y="490"/>
         </scene>
         <!--SolidarityGuideFilters-->
         <scene sceneID="oY9-4S-Sbq">
@@ -1473,7 +1579,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="FeedItemFilters" id="0av-Qe-fFs" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f44-Ea-6he" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1080" y="559.52023988005999"/>
+            <point key="canvasLocation" x="2402" y="490"/>
         </scene>
         <!--Main Guide Hub View Controller-->
         <scene sceneID="zXc-rU-pVB">
@@ -1702,7 +1808,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="104" width="327" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number4_bg" translatesAutoresizingMaskIntoConstraints="NO" id="S74-pi-eEJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="327" height="160"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="327" height="192.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="S74-pi-eEJ" secondAttribute="height" multiplier="272:160" id="LXb-Nt-CYh"/>
                                                             </constraints>
@@ -2234,6 +2340,24 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
             </objects>
             <point key="canvasLocation" x="1265" y="-657"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NAh-uX-5ns">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kq2-nx-VII" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jjc-rM-FBs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hyj-w4-zfj" kind="relationship" relationship="rootViewController" id="DPJ-MB-ZXZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oke-q7-SGK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2041" y="37"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="dno-Ju-GCg"/>
@@ -2261,9 +2385,6 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <image name="userSmall" width="35" height="35"/>
         <image name="users" width="22" height="22"/>
         <image name="whiteClose" width="22" height="22"/>
-        <systemColor name="groupTableViewBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
