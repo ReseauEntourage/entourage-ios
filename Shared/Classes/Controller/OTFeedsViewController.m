@@ -1152,6 +1152,7 @@ OTHeatzonesCollectionViewDelegate
         UINavigationController *navController = (UINavigationController*)destinationViewController;
         OTFeedItemFiltersViewController *controller = (OTFeedItemFiltersViewController*)navController.topViewController;
         controller.filterDelegate = self;
+        controller.isAlone = true;
     }
     else if([segue.identifier isEqualToString:@"PublicFeedItemDetailsSegue"]) {
         OTPublicFeedItemViewController *controller = (OTPublicFeedItemViewController *)destinationViewController;

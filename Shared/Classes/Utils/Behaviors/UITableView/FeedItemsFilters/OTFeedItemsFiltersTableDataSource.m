@@ -23,6 +23,10 @@
 @implementation OTFeedItemsFiltersTableDataSource
 
 - (void)initializeWith:(OTFeedItemFilters *)filter {
+    [self initializeWith:filter andIsalone:NO];
+}
+
+- (void)initializeWith:(OTFeedItemFilters *)filter andIsalone:(BOOL) isAlone {
     [super initialize];
     
     self.currentFilter = filter;
@@ -31,6 +35,7 @@
     self.groupHeaders = [filter groupHeaders];
     self.groupedSource = [filter toGroupedArray];
     self.parentArray = [filter parentArray];
+    self.isAlone = isAlone;
 }
 
 - (OTFeedItemFilters *)readCurrentFilter {
@@ -58,6 +63,9 @@
     CGFloat size = 44;
     BOOL isToursFeatureEnabled = IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality;
     
+    if (self.isAlone) {
+        isToursFeatureEnabled = false;
+    }
     [self readCurrentFilter];
     
     NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];

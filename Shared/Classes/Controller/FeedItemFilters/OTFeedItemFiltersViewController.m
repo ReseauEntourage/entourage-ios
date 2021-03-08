@@ -29,14 +29,15 @@
     [super viewDidLoad];
     if ([self.filterDelegate respondsToSelector:@selector(isEncounterSelected)] && self.filterDelegate.isEncounterSelected) {
         
-        [self.tableDataSource initializeWith:[self.filterDelegate.encounterFilter copy]];
+        [self.tableDataSource initializeWith:[self.filterDelegate.encounterFilter copy] andIsalone:YES];
     }
     else {
-        [self.tableDataSource initializeWith:[self.filterDelegate.currentFilter copy]];
+        [self.tableDataSource initializeWith:[self.filterDelegate.currentFilter copy] andIsalone:YES];
     }
     self.title =  OTLocalizedString(@"filters").uppercaseString;
     self.tableView.tableFooterView = [UIView new];
     [self setupToolbarButtons];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -213,7 +213,7 @@
                                  @"showPartners" : [NSNumber numberWithBool:self.showPartners],
                                  };
     
-    if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality) {
+    if (IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality && !self.isVersionAlone) {
         return [self groupForPro];
     }
     else {
@@ -225,7 +225,7 @@
     NSArray *data = [OTCategoryFromJsonService getData];
     NSMutableArray *parentArray = [[NSMutableArray alloc] init];
     
-    if (IS_PRO_USER) {
+    if (IS_PRO_USER && !self.isVersionAlone) {
         NSArray *tourChildren = @[[OTFeedItemFilter createFor:FeedItemFilterKeyMedical
                                                        active:self.showMedical
                                                     withImage:@"filter_heal"],

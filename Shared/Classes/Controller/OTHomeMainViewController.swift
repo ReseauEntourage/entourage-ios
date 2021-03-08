@@ -155,7 +155,7 @@ class OTHomeMainViewController: UIViewController {
         showOldMain()
     }
     
-    @IBAction func action_show_feeds(_ sender: Any) {
+   @objc @IBAction func action_show_events(_ sender: Any?) {
         let sb = UIStoryboard.init(name: "Main2", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "OTMain0")  as! OTFeedsViewController
         vc.isFromEvent = true
@@ -163,7 +163,7 @@ class OTHomeMainViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func action_show_actions(_ sender: Any) {
+    @objc @IBAction func action_show_feeds(_ sender: Any?) {
         let sb = UIStoryboard.init(name: "Main2", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "OTMain0") as! OTFeedsViewController
         vc.isFromEvent = false
