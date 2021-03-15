@@ -36,6 +36,9 @@
 #define API_URL_MYFEEDS  @"myfeeds?token=%@"
 #define API_URL_EVENTS    @"feeds/outings?token=%@"
 
+//New Feed
+#define API_URL_NEW_FEED    @"home?token=%@"
+
 // Tours
 #define API_URL_TOUR_JOIN_REQUEST @"tours/%@/users?token=%@"
 #define API_URL_TOUR_JOIN_MESSAGE @"tours/%@/users/%@?token=%@"

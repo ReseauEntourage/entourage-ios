@@ -946,3 +946,13 @@
 "input_sub" = "Cette fois, pourriez-vous me dire comment vous vous appelez ?";
 "input_username_error" = "Veuillez remplir les 2 champs avec un minimum de %d caractères.";
 "button_reset_filters" = "Annuler Filtres";
+
+//New Home
+"outing" = "Évènement";
+"participant" = "participant";
+"participants" = "participants";
+"show_more" = "Voir plus";
+"show_more_event" = "Voir l'évènement";
+"headlines_title_home" = "À la une";
+"outings_title_home" = "Évènements";
+"entourages_title_home" = "Demandes et initiatives";

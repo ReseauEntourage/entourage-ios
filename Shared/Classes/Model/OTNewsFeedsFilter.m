@@ -465,6 +465,8 @@
     
 - (NSMutableDictionary *)toDictionaryWithBefore:(NSDate *)before
                                     andLocation:(CLLocationCoordinate2D)location {
+    NSString *announces = self.isVersionAlone ? @"null" : @"v1";
+    
     return @{
              @"before" : before,
              @"latitude": @(location.latitude),
@@ -473,7 +475,7 @@
              @"types" : [self getTypes],
              @"show_past_events" : self.showPastOuting ? @"true" : @"false",
              @"time_range" : @(self.timeframeInHours),
-             @"announcements" : @"v1",
+             @"announcements" : announces,
              @"partners_only" : self.showPartners ? @"true" : @"false"
     }.mutableCopy;
 }
@@ -481,6 +483,11 @@
 - (NSMutableDictionary *)toDictionaryWithPageToken:(NSString *)pageToken
                                     andLocation:(CLLocationCoordinate2D)location {
     
+    NSString *announces = self.isEncouterFilter ? @"null" : @"v1";
+    
+    if (self.isVersionAlone) {
+        announces = @"null";
+    }
     if (self.isAnnouncementOnly) {
         return @{
                  @"latitude": @(location.latitude),
@@ -497,7 +504,7 @@
              @"types" : [self getTypes],
              @"show_past_events" : self.showPastOuting ? @"true" : @"false",
              @"time_range" : @(self.timeframeInHours),
-             @"announcements" : self.isEncouterFilter ? @"null" : @"v1",
+             @"announcements" : announces,
              @"partners_only" : self.showPartners ? @"true" : @"false"
     }.mutableCopy;
 }
@@ -817,6 +824,7 @@
         [types addObject:@"pc"];
     if (self.showNeighborhood)
         [types addObject:@"nh"];
+    
     if (self.showOuting)
         [types addObject:@"ou"];
     

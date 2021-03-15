@@ -15,6 +15,9 @@
 		2B05CBD3250691AB0065E8D3 /* OTShareEntourageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBD2250691AB0065E8D3 /* OTShareEntourageService.swift */; };
 		2B0D49E425DC0E0C00DC92A6 /* OTFeedNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0D49E325DC0E0C00DC92A6 /* OTFeedNewsViewController.swift */; };
 		2B1013F42445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1013F32445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift */; };
+		2B13BD8625FA5A7D00B0E071 /* OTHomeTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B13BD8525FA5A7D00B0E071 /* OTHomeTableViewCells.swift */; };
+		2B13BD8A25FA5A9300B0E071 /* HomeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B13BD8925FA5A9300B0E071 /* HomeCard.swift */; };
+		2B13BD8E25FA5AF900B0E071 /* OTHomeCollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B13BD8D25FA5AF900B0E071 /* OTHomeCollectionViewCells.swift */; };
 		2B19CF10249CC34C00CE34BB /* OTUserEditZoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19CF0F249CC34C00CE34BB /* OTUserEditZoneCell.swift */; };
 		2B19CF12249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19CF11249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift */; };
 		2B1A8F79252768FD008419E6 /* OTGuideDetailPoiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1A8F78252768FD008419E6 /* OTGuideDetailPoiViewController.swift */; };
@@ -37,12 +40,14 @@
 		2B77B15A25506642000DD474 /* OTDetailActionEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B77B15925506642000DD474 /* OTDetailActionEventViewController.swift */; };
 		2B7C488224B899FA0003C854 /* HomeToolTipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B7C488124B899FA0003C854 /* HomeToolTipsView.xib */; };
 		2B7C488424B89A210003C854 /* OTHomeTooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C488324B89A210003C854 /* OTHomeTooltipView.swift */; };
+		2B8DF99D25F7BA5F00504D26 /* OTHomeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DF99C25F7BA5F00504D26 /* OTHomeMainViewController.swift */; };
 		2B916BA12456E42700F048FA /* OTPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B916BA02456E42700F048FA /* OTPicturePreviewResizeViewController.swift */; };
 		2B930F54246D554B0058E81B /* OTLoginV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B930F53246D554B0058E81B /* OTLoginV2ViewController.swift */; };
 		2B93FB6724AA3C580015B47D /* OTAssociationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B93FB6624AA3C580015B47D /* OTAssociationDetailViewController.swift */; };
 		2BA0ED5724BF3091009CFB03 /* OTLoginNextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA0ED5624BF3091009CFB03 /* OTLoginNextViewController.swift */; };
 		2BA0ED5924BF3498009CFB03 /* OTLoginPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA0ED5824BF3498009CFB03 /* OTLoginPlaceViewController.swift */; };
 		2BA0ED5B24BF34AD009CFB03 /* OTLoginEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA0ED5A24BF34AD009CFB03 /* OTLoginEmailViewController.swift */; };
+		2BAD246725F8FD3700FD8E47 /* OTNewFeedsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD246625F8FD3700FD8E47 /* OTNewFeedsService.swift */; };
 		2BB2E389244EFA84003011C9 /* Onboarding_V2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BB2E388244EFA84003011C9 /* Onboarding_V2.storyboard */; };
 		2BB2E38C244F1C07003011C9 /* OTOnboardingV2StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E38B244F1C07003011C9 /* OTOnboardingV2StartViewController.swift */; };
 		2BB2E38E244F1FA2003011C9 /* OTOnboardingNamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2E38D244F1FA2003011C9 /* OTOnboardingNamesViewController.swift */; };
@@ -68,7 +73,6 @@
 		2BDD05C12514B1540054B2A1 /* OTGuideCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD05C02514B1540054B2A1 /* OTGuideCells.swift */; };
 		2BDD05C62514B2080054B2A1 /* OTGuideDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD05C52514B2080054B2A1 /* OTGuideDelegates.swift */; };
 		2BDD05CE2514B2550054B2A1 /* OTGuideModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDD05CD2514B2550054B2A1 /* OTGuideModels.swift */; };
-		2BE1F42B25DA781100CE318E /* OTHomeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1F42A25DA781100CE318E /* OTHomeMainViewController.swift */; };
 		2BE1F47825DAE16600CE318E /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE1F47725DAE16500CE318E /* Main2.storyboard */; };
 		2BE1F49E25DAE42800CE318E /* OTFeedsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE1F49C25DAE42800CE318E /* OTFeedsViewController.m */; };
 		2BE75F2F24C834FD00D4C856 /* OTMenuProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE75F2E24C834FD00D4C856 /* OTMenuProfileViewController.swift */; };
@@ -556,6 +560,9 @@
 		2B09E99C248E62E8003BA7C0 /* Analytics_keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Analytics_keys.h; sourceTree = "<group>"; };
 		2B0D49E325DC0E0C00DC92A6 /* OTFeedNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFeedNewsViewController.swift; sourceTree = "<group>"; };
 		2B1013F32445B34D008FAD55 /* OTPreOnboardingV2ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPreOnboardingV2ChoiceViewController.swift; sourceTree = "<group>"; };
+		2B13BD8525FA5A7D00B0E071 /* OTHomeTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeTableViewCells.swift; sourceTree = "<group>"; };
+		2B13BD8925FA5A9300B0E071 /* HomeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCard.swift; sourceTree = "<group>"; };
+		2B13BD8D25FA5AF900B0E071 /* OTHomeCollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeCollectionViewCells.swift; sourceTree = "<group>"; };
 		2B19CF0F249CC34C00CE34BB /* OTUserEditZoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTUserEditZoneCell.swift; sourceTree = "<group>"; };
 		2B19CF11249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTProfileSelectTypeViewController.swift; sourceTree = "<group>"; };
 		2B1A8F78252768FD008419E6 /* OTGuideDetailPoiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGuideDetailPoiViewController.swift; sourceTree = "<group>"; };
@@ -579,12 +586,14 @@
 		2B77B15925506642000DD474 /* OTDetailActionEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTDetailActionEventViewController.swift; sourceTree = "<group>"; };
 		2B7C488124B899FA0003C854 /* HomeToolTipsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeToolTipsView.xib; sourceTree = "<group>"; };
 		2B7C488324B89A210003C854 /* OTHomeTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeTooltipView.swift; sourceTree = "<group>"; };
+		2B8DF99C25F7BA5F00504D26 /* OTHomeMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeMainViewController.swift; sourceTree = "<group>"; };
 		2B916BA02456E42700F048FA /* OTPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
 		2B930F53246D554B0058E81B /* OTLoginV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTLoginV2ViewController.swift; sourceTree = "<group>"; };
 		2B93FB6624AA3C580015B47D /* OTAssociationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTAssociationDetailViewController.swift; sourceTree = "<group>"; };
 		2BA0ED5624BF3091009CFB03 /* OTLoginNextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTLoginNextViewController.swift; sourceTree = "<group>"; };
 		2BA0ED5824BF3498009CFB03 /* OTLoginPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTLoginPlaceViewController.swift; sourceTree = "<group>"; };
 		2BA0ED5A24BF34AD009CFB03 /* OTLoginEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTLoginEmailViewController.swift; sourceTree = "<group>"; };
+		2BAD246625F8FD3700FD8E47 /* OTNewFeedsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTNewFeedsService.swift; sourceTree = "<group>"; };
 		2BB2E388244EFA84003011C9 /* Onboarding_V2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding_V2.storyboard; sourceTree = "<group>"; };
 		2BB2E38B244F1C07003011C9 /* OTOnboardingV2StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingV2StartViewController.swift; sourceTree = "<group>"; };
 		2BB2E38D244F1FA2003011C9 /* OTOnboardingNamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingNamesViewController.swift; sourceTree = "<group>"; };
@@ -610,7 +619,6 @@
 		2BDD05C02514B1540054B2A1 /* OTGuideCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGuideCells.swift; sourceTree = "<group>"; };
 		2BDD05C52514B2080054B2A1 /* OTGuideDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGuideDelegates.swift; sourceTree = "<group>"; };
 		2BDD05CD2514B2550054B2A1 /* OTGuideModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGuideModels.swift; sourceTree = "<group>"; };
-		2BE1F42A25DA781100CE318E /* OTHomeMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeMainViewController.swift; sourceTree = "<group>"; };
 		2BE1F47725DAE16500CE318E /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		2BE1F49C25DAE42800CE318E /* OTFeedsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTFeedsViewController.m; sourceTree = "<group>"; };
 		2BE1F49D25DAE42800CE318E /* OTFeedsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTFeedsViewController.h; sourceTree = "<group>"; };
@@ -1484,6 +1492,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B13BD8425FA59FE00B0E071 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2BAD246625F8FD3700FD8E47 /* OTNewFeedsService.swift */,
+				2B8DF99C25F7BA5F00504D26 /* OTHomeMainViewController.swift */,
+				2B13BD8525FA5A7D00B0E071 /* OTHomeTableViewCells.swift */,
+				2B13BD8D25FA5AF900B0E071 /* OTHomeCollectionViewCells.swift */,
+				2B13BD8925FA5A9300B0E071 /* HomeCard.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		2B1A8F7E25278CEB008419E6 /* Guide_detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1930,6 +1950,7 @@
 				2BB3BA302440A1D00080BBE5 /* Onboarding V2 */,
 				A202E93C2085D2C50058F32C /* Onboarding */,
 				2BE75F2D24C834E300D4C856 /* Settings */,
+				2B13BD8425FA59FE00B0E071 /* Home */,
 				A202E8D42085D2C40058F32C /* OTAboutMeViewController.h */,
 				A202E9192085D2C50058F32C /* OTAboutMeViewController.m */,
 				A202E8D82085D2C40058F32C /* OTAboutViewController.h */,
@@ -1966,7 +1987,6 @@
 				2B0D49E325DC0E0C00DC92A6 /* OTFeedNewsViewController.swift */,
 				2BF1769F25DD5B8600B3C922 /* OTFeedToursViewController.h */,
 				2BF176A025DD5B8600B3C922 /* OTFeedToursViewController.m */,
-				2BE1F42A25DA781100CE318E /* OTHomeMainViewController.swift */,
 				2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */,
 				2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */,
 				A202E8692085D2C40058F32C /* OTMapOptionsViewController.h */,
@@ -3589,7 +3609,6 @@
 				A202EC212085D2C80058F32C /* OTLocationManager.m in Sources */,
 				A202ECF12085D2C80058F32C /* OTPushNotificationsData.m in Sources */,
 				A202EBD32085D2C80058F32C /* OTAssociationTableViewCell.m in Sources */,
-				2BE1F42B25DA781100CE318E /* OTHomeMainViewController.swift in Sources */,
 				A202EB152085D2C70058F32C /* OTMyEntouragesViewController.m in Sources */,
 				2BB2E39E244F4E92003011C9 /* OTCustomTextfield.swift in Sources */,
 				A202ECB32085D2C80058F32C /* OTNextStatusButtonBehavior.m in Sources */,
@@ -3668,6 +3687,7 @@
 				A202EBF92085D2C80058F32C /* OTFeedItemsTableView.m in Sources */,
 				96B658B8209A5AF000EB0398 /* UIFont+Extensions.swift in Sources */,
 				A202EB7F2085D2C80058F32C /* OTCategoryViewController.m in Sources */,
+				2B13BD8E25FA5AF900B0E071 /* OTHomeCollectionViewCells.swift in Sources */,
 				A202EB252085D2C70058F32C /* OTMemberCountCell.m in Sources */,
 				A2F5182820EF5A0F009AB222 /* OTEventInfoCell.m in Sources */,
 				A202EAF52085D2C70058F32C /* OTAddressBookItem.m in Sources */,
@@ -3725,6 +3745,7 @@
 				A202EC0B2085D2C80058F32C /* OTEncounterService.m in Sources */,
 				A202EB4B2085D2C80058F32C /* OTInviteContactsViewController.m in Sources */,
 				A202EBC92085D2C80058F32C /* OTEntourageEditItemCell.m in Sources */,
+				2BAD246725F8FD3700FD8E47 /* OTNewFeedsService.swift in Sources */,
 				A202EAD92085D2C70058F32C /* OTFeedItemJoiner.m in Sources */,
 				2B1A8F8325278D27008419E6 /* GuideDetailTableViewCells.swift in Sources */,
 				A202EBE12085D2C80058F32C /* OTPhoneViewController.m in Sources */,
@@ -3848,6 +3869,7 @@
 				A202ED1D2085D2C80058F32C /* OTAnnouncementFactory.m in Sources */,
 				2B1A8F79252768FD008419E6 /* OTGuideDetailPoiViewController.swift in Sources */,
 				A202EBAD2085D2C80058F32C /* OTFeedItemsFilterCell.m in Sources */,
+				2B8DF99D25F7BA5F00504D26 /* OTHomeMainViewController.swift in Sources */,
 				A202EBA32085D2C80058F32C /* OTSocialViewController.m in Sources */,
 				A202EB932085D2C80058F32C /* OTFeedItemJoinMessageController.m in Sources */,
 				A202EBE72085D2C80058F32C /* OTEntourageEditItemImageCell.m in Sources */,
@@ -3890,6 +3912,7 @@
 				A202EB032085D2C70058F32C /* OTAssociation.m in Sources */,
 				374E7360228DBBA500B36161 /* OTApiErrorDomain.m in Sources */,
 				A202EC6D2085D2C80058F32C /* OTInvitationsCollectionSource.m in Sources */,
+				2B13BD8A25FA5A9300B0E071 /* HomeCard.swift in Sources */,
 				A202EBC52085D2C80058F32C /* OTMainViewController.m in Sources */,
 				A202EAFF2085D2C70058F32C /* OTFeedItemMessage.m in Sources */,
 				2BB3BA352440B2460080BBE5 /* OTCarrouselLayout.swift in Sources */,
@@ -3905,6 +3928,7 @@
 				A202ECB92085D2C80058F32C /* OTJoinBehavior.m in Sources */,
 				A202EAE12085D2C70058F32C /* OTCategory.m in Sources */,
 				A202EC712085D2C80058F32C /* OTCollectionSourceBehavior.m in Sources */,
+				2B13BD8625FA5A7D00B0E071 /* OTHomeTableViewCells.swift in Sources */,
 				96B658BB209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */,
 				A202EBC12085D2C80058F32C /* OTActivityProvider.m in Sources */,
 				A202EC372085D2C80058F32C /* OTStartTourAnnotation.m in Sources */,

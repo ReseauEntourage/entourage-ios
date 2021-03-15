@@ -156,7 +156,7 @@
                      andQuery:(NSString *)query {
     if ([key isEqualToString:@"feed"]) {
         OTHomeMainViewController *mainVC = [self popToNewMainViewController];
-        [mainVC action_show_feeds:nil];
+        [mainVC action_show_feeds];
     } else if ([key isEqualToString:@"webview"]) {
         NSArray *elts = [query componentsSeparatedByString:@"="];
         NSURL *url = [NSURL URLWithString:elts[1]];
@@ -205,7 +205,7 @@
     } else if([key isEqualToString:@"events"]) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .500 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             OTHomeMainViewController *mainViewController = [self popToNewMainViewController];
-            [mainViewController action_show_events: nil];
+            [mainViewController action_show_events];
         });
     }
     else if ([key isEqualToString:@"profileAction"]) {

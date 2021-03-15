@@ -71,13 +71,6 @@ class OTMainTabbarViewController: UITabBarController {
         homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_home_selected")
         homeVC.tabBarItem.tag = 0
         
-        
-//        let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMain") as! OTMainViewController
-//         _guideVC.isSolidarityGuide = true
-        
-//        let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OTMainGuide") as! OTMainGuideViewController
-
-        
         let _guideVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GuideHub") as! OTMainGuideHubViewController
         guideVC = UINavigationController.init(rootViewController: _guideVC)
         guideVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_guide")
@@ -150,21 +143,7 @@ class OTMainTabbarViewController: UITabBarController {
         OTLogger.logEvent(Action_Tab_Plus)
         
         if (OTOngoingTourService.sharedInstance()?.isOngoing ?? false || isOngoingTou != nil) {
-            Logger.print("***** ici show Ajout rencontre !!!")
             self.createEncounter()
-//            showHomeVC()
-//            OTLogger.logEvent("PlusOnTourClick")
-//            if let _vc = homeVC.topViewController as? OTMainViewController {
-//                Logger.print("***** ici show Ajout rencontre On a le bon VC !!!")
-//                _vc.createQuickEncounter()
-//                return
-//            }
-//            else if let _vc = homeVC.topViewController as? OTFeedToursViewController {
-//                Logger.print("***** ici show Ajout rencontre On a le bon VC !!!")
-//                _vc.createQuickEncounter()
-//                return
-//            }
-//            Logger.print("***** ici show Ajout rencontre on n'a pas le bon VC !!!")
             return
         }
         
@@ -182,8 +161,6 @@ class OTMainTabbarViewController: UITabBarController {
 extension OTMainTabbarViewController: OTOptionsDelegate {
     
     func createTour() {
-        Logger.print("***** create tour delegate start ?")
-      //  self.showHomeVC() à remettre
         if let _vc = homeVC.topViewController as? OTMainViewController {
             let delayInSeconds = 0.1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
@@ -201,14 +178,10 @@ extension OTMainTabbarViewController: OTOptionsDelegate {
         else {
             self.showHomeVC()
             if let _vc = homeVC.topViewController as? OTHomeMainViewController {
-                Logger.print("***** create tour delegate start home as othomemainVC")
                 let delayInSeconds = 0.1
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                     _vc.createTourFromNav()
                 }
-            }
-            else {
-                Logger.print("***** create tour delegate start ici on n'a rien ;(")
             }
         }
     }
@@ -216,14 +189,12 @@ extension OTMainTabbarViewController: OTOptionsDelegate {
     func createEncounter() {
         
         if let _vc = homeVC.topViewController as? OTMainViewController {
-            Logger.print("***** ici show Ajout rencontre On a le bon VC MAINVC!!!")
             let delayInSeconds = 0.1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 _vc.createEncounterFromNav()
             }
         }
         else if let _vc = homeVC.topViewController as? OTFeedToursViewController {
-            Logger.print("***** ici show Ajout rencontre On a le bon VC FEEDTOUR!!!")
             let delayInSeconds = 0.1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                 _vc.createEncounterFromNav()
@@ -232,7 +203,6 @@ extension OTMainTabbarViewController: OTOptionsDelegate {
         else {
             self.showHomeVC()
             if let _vc = homeVC.topViewController as? OTHomeMainViewController {
-                Logger.print("***** ici show Ajout rencontre On a pas le bon VC :(!!!")
                 let delayInSeconds = 0.1
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
                     _vc.createEncounterFromNav()
@@ -319,7 +289,6 @@ extension OTMainTabbarViewController: EntourageEditorDelegate {
 extension OTMainTabbarViewController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        Logger.print("***** Should select tab : \(viewController.tabBarItem.tag) selected : \(tabBarController.selectedIndex)")
         if viewController.tabBarItem.tag == 2 {
             self.showMapOption()
             

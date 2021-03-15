@@ -145,8 +145,10 @@ OTHeatzonesCollectionViewDelegate
     
     NSLog(@"***** ici current filters init");
     self.currentFilter = [OTNewsFeedsFilter new];
-    [self.currentFilter setVersionAlone];
+    self.currentFilter.showOuting = self.isFromEvent ? YES : NO;
     self.currentFilter.isPro = NO;
+    [self.currentFilter setVersionAlone];
+    
     self.newsFeedsSourceBehavior.currentFilter = self.currentFilter;
     
     self.mapView = [OTMapView new];
