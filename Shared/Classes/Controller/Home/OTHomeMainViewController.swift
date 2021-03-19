@@ -9,9 +9,13 @@
 import UIKit
 
 class OTHomeMainViewController: UIViewController {
-
+    let CELL_HEADLINES_HEIGHT:CGFloat = 350
+    let CELL_EVENTS_HEIGHT:CGFloat = 270
+    let CELL_ACTIONS_HEIGHT:CGFloat = 288
+    
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_button_tour: UIButton!
+    @IBOutlet weak var ui_view_top: UIView!
     
     var arrayFeed = [HomeCard]()
     
@@ -54,6 +58,15 @@ class OTHomeMainViewController: UIViewController {
         
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        self.ui_view_top.layer.shadowColor = UIColor.black.cgColor
+        self.ui_view_top.layer.shadowOpacity = 0.5
+        self.ui_view_top.layer.shadowRadius = 4.0
+        self.ui_view_top.layer.masksToBounds = false
+        
+        let _rect = CGRect(x: 0, y: self.ui_view_top.bounds.size.height , width: self.view.frame.size.width, height: self.ui_view_top.layer.shadowRadius)
+        let _shadowPath = UIBezierPath(rect: _rect).cgPath
+        self.ui_view_top.layer.shadowPath = _shadowPath
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -232,12 +245,12 @@ extension OTHomeMainViewController: UITableViewDelegate, UITableViewDataSource, 
             return UITableView.automaticDimension
         }
         if arrayFeed[indexPath.row].type == .Headlines {
-            return 350
+            return CELL_HEADLINES_HEIGHT
         }
         if arrayFeed[indexPath.row].type == .Events {
-            return 300
+            return CELL_EVENTS_HEIGHT
         }
-        return 318
+        return CELL_ACTIONS_HEIGHT
     }
     
     //MARK: Delegate click Cells

@@ -40,6 +40,17 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     var cards = HomeCard()
     weak var delegate:CellClickDelegate? = nil
     
+    let cell_headline_size = CGSize(width: 200, height: 264)
+    let cell_event_size = CGSize(width: 292, height: 214)
+    let cell_action_size = CGSize(width: 200, height: 232)
+    let cell_empty_event_size = CGSize(width: 140, height: 214)
+    let cell_empty_action_size = CGSize(width: 140, height: 232)
+    let cell_spacing:CGFloat = 15.0
+    let minimumItemsToShowMore = 2
+    let spacing_coll_start:CGFloat = 25
+    let spacing_coll_end:CGFloat = 5
+    var hasShowMore = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -52,23 +63,27 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         if cards.type == .Headlines {
-            flowLayout.itemSize = CGSize(width: 200, height: 264)
+            flowLayout.itemSize = cell_headline_size
         }
         else if cards.type == .Events {
-            flowLayout.itemSize = CGSize(width: 292, height: 214)
+            flowLayout.itemSize = cell_event_size
         }
         else {
-            flowLayout.itemSize = CGSize(width: 200, height: 232)
+            flowLayout.itemSize = cell_action_size
         }
         
-        flowLayout.minimumLineSpacing = 15.0
-        flowLayout.minimumInteritemSpacing = 15.0
+        flowLayout.minimumLineSpacing = cell_spacing
+        flowLayout.minimumInteritemSpacing = cell_spacing
         self.ui_collectionview.collectionViewLayout = flowLayout
     }
     
     func populateCell(card:HomeCard,clickDelegate:CellClickDelegate) {
         self.cards = card
         self.delegate = clickDelegate
+        
+        if cards.arrayCards.count > minimumItemsToShowMore && cards.type != .Headlines{
+            self.hasShowMore = true
+        }
         ui_collectionview.reloadData()
         ui_title_section.text = card.titleSection
         changeFlowLayout()
@@ -83,7 +98,8 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
 extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cards.arrayCards.count
+        let _showMore = hasShowMore ? 1 : 0
+        return cards.arrayCards.count + _showMore
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -103,6 +119,11 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
             }
         }
         else if cards.type == .Events {
+            if indexPath.row == cards.arrayCards.count {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellEmpty", for: indexPath)
+                return cell
+            }
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellColl", for: indexPath) as! OTHomeEventCollectionViewCell
             
             let item = cards.arrayCards[indexPath.row]
@@ -110,6 +131,11 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
                 cell.updateCell(item: item)
             }
             
+            return cell
+        }
+        
+        if indexPath.row == cards.arrayCards.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellEmpty", for: indexPath)
             return cell
         }
         
@@ -123,13 +149,35 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 5)
+        return UIEdgeInsets(top: 0, left: spacing_coll_start, bottom: 0, right: spacing_coll_end)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        if indexPath.row == cards.arrayCards.count {
+            delegate?.showDetail(type: cards.type)
+            return
+        }
         let item = cards.arrayCards[indexPath.row]
         let type = cards.type
         delegate?.selectCollectionViewCell(item:item,type:type)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if cards.type == .Headlines {
+            return cell_headline_size
+        }
+        else if cards.type == .Events {
+            if indexPath.row == cards.arrayCards.count {
+                return cell_empty_event_size
+            }
+            return cell_event_size
+        }
+        else {
+            if indexPath.row == cards.arrayCards.count {
+                return cell_empty_action_size
+            }
+            return cell_action_size
+        }
+        
     }
 }

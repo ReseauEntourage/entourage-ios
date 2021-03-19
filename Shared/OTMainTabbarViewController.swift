@@ -40,8 +40,8 @@ class OTMainTabbarViewController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(showTooltip), name: NSNotification.Name(rawValue: "showToolTip"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideTooltip), name: NSNotification.Name(rawValue: "hideToolTip"), object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(switchToHomeTab), name: NSNotification.Name(rawValue: "showAlls"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(switchToHomeTab), name: NSNotification.Name(rawValue: "showEvents"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showActions), name: NSNotification.Name(rawValue: "showAlls"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showEvents), name: NSNotification.Name(rawValue: "showEvents"), object: nil)
     }
     
     @objc func showTooltip() {
@@ -153,6 +153,25 @@ class OTMainTabbarViewController: UITabBarController {
             vc.optionsDelegate = self
             
             self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func showEvents() {
+        self.showHomeVC()
+        if let _vc = homeVC.topViewController as? OTHomeMainViewController {
+            let delayInSeconds = 0.1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                _vc.showDetail(type: .Events)
+            }
+        }
+    }
+    @objc func showActions() {
+        self.showHomeVC()
+        if let _vc = homeVC.topViewController as? OTHomeMainViewController {
+            let delayInSeconds = 0.1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+                _vc.showDetail(type: .Actions)
+            }
         }
     }
 }
