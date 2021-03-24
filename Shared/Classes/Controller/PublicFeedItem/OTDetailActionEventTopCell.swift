@@ -357,7 +357,7 @@ struct Utils {
         
         
         let endDateInfo = dateFormatter.string(from: endDate)
-        let endTimeInfo = (startDate as NSDate).toRoundedQuarterTimeString()
+        let endTimeInfo = (endDate as NSDate).toRoundedQuarterTimeString()
         
         var dateInfoTxt = ""
         
