@@ -161,7 +161,7 @@ class OTMainTabbarViewController: UITabBarController {
         if let _vc = homeVC.topViewController as? OTHomeMainViewController {
             let delayInSeconds = 0.1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                _vc.showDetail(type: .Events)
+                _vc.showAllEvents()
             }
         }
     }
@@ -170,7 +170,7 @@ class OTMainTabbarViewController: UITabBarController {
         if let _vc = homeVC.topViewController as? OTHomeMainViewController {
             let delayInSeconds = 0.1
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-                _vc.showDetail(type: .Actions)
+                _vc.showAllActions()
             }
         }
     }

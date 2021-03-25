@@ -154,3 +154,4 @@
 #define SLUG_ACTION_SCB @"pedagogic-content"
 #define SLUG_ACTION_ASSO @"partner_action_faq"
 
+#define GIFT_URL @"https://entourage.iraiser.eu/jedonne/~mon-don"

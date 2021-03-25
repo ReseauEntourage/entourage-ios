@@ -8,9 +8,11 @@
 
 //MARK: - Protocol Clic from Cells -
 protocol CellClickDelegate: class {
-    func selectCollectionViewCell(item: Any,type:HomeCardType)
-    func showDetail(type:HomeCardType)
+    func selectCollectionViewCell(item: Any,type:HomeCardType,position:Int)
+    func showDetail(type:HomeCardType,isFromArrow:Bool)
     func showDetailUser(userId:NSNumber)
+    func showModifyZone()
+    func showHelpDistance()
 }
 
 //MARK: - OTHomeCellTitleView -
@@ -26,7 +28,7 @@ class OTHomeCellTitleView: UITableViewCell {
     }
     
     @IBAction func action_show_detail(_ sender: Any) {
-        delegate?.showDetail(type: card.type)
+        delegate?.showDetail(type: card.type,isFromArrow:true)
     }
 }
 
@@ -42,6 +44,7 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     
     let cell_headline_size = CGSize(width: 200, height: 264)
     let cell_event_size = CGSize(width: 292, height: 214)
+    let cell_event_zone_size = CGSize(width: 200, height: 214)
     let cell_action_size = CGSize(width: 200, height: 232)
     let cell_empty_event_size = CGSize(width: 140, height: 214)
     let cell_empty_action_size = CGSize(width: 140, height: 232)
@@ -50,6 +53,8 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     let spacing_coll_start:CGFloat = 25
     let spacing_coll_end:CGFloat = 5
     var hasShowMore = false
+    
+    var isSpecialCells = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -81,7 +86,11 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
         self.cards = card
         self.delegate = clickDelegate
         
-        if cards.arrayCards.count > minimumItemsToShowMore && cards.type != .Headlines{
+        if card.type != .Headlines {
+            self.isSpecialCells = cards.arrayCards.count <= 1
+        }
+        
+        if cards.arrayCards.count >= minimumItemsToShowMore && cards.type != .Headlines{
             self.hasShowMore = true
         }
         ui_collectionview.reloadData()
@@ -90,7 +99,7 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     }
     
     @IBAction func action_show_detail(_ sender: Any) {
-        delegate?.showDetail(type: cards.type)
+        delegate?.showDetail(type: cards.type,isFromArrow:true)
     }
 }
 
@@ -98,6 +107,15 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
 extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isSpecialCells {
+            if cards.type == .Events {
+                return cards.arrayCards.count + 1
+            }
+            else if cards.type == .Actions {
+                return cards.arrayCards.count + 1
+            }
+        }
+        
         let _showMore = hasShowMore ? 1 : 0
         return cards.arrayCards.count + _showMore
     }
@@ -119,8 +137,16 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
             }
         }
         else if cards.type == .Events {
+            
+            if isSpecialCells && indexPath.row == cards.arrayCards.count {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellOther", for: indexPath) as! OTHomeCellOther
+                cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_modZone") , isShowZone: true)
+                return cell
+            }
+            
             if indexPath.row == cards.arrayCards.count {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellEmpty", for: indexPath)
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellEmpty", for: indexPath) as! OTHomeCellOther
+                cell.ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "home_button_show_more_events")
                 return cell
             }
             
@@ -134,8 +160,15 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
             return cell
         }
         
+        if isSpecialCells && indexPath.row == cards.arrayCards.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellOther", for: indexPath) as! OTHomeCellOther
+            cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_helpEntourage"), isShowZone: true)
+            return cell
+        }
+        
         if indexPath.row == cards.arrayCards.count {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellEmpty", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellEmpty", for: indexPath) as! OTHomeCellOther
+            cell.ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "home_button_show_more_actions")
             return cell
         }
         
@@ -153,13 +186,24 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if isSpecialCells && indexPath.row == cards.arrayCards.count {
+            if cards.type == .Events {
+                delegate?.showModifyZone()
+            }
+            else {
+                delegate?.showHelpDistance()
+            }
+            return
+        }
+        
         if indexPath.row == cards.arrayCards.count {
-            delegate?.showDetail(type: cards.type)
+            delegate?.showDetail(type: cards.type,isFromArrow:false)
             return
         }
         let item = cards.arrayCards[indexPath.row]
         let type = cards.type
-        delegate?.selectCollectionViewCell(item:item,type:type)
+        delegate?.selectCollectionViewCell(item:item,type:type,position: indexPath.row)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -167,17 +211,24 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
             return cell_headline_size
         }
         else if cards.type == .Events {
+            if isSpecialCells && indexPath.row == cards.arrayCards.count {
+                return cell_event_zone_size
+            }
+            
             if indexPath.row == cards.arrayCards.count {
                 return cell_empty_event_size
             }
             return cell_event_size
         }
         else {
+            if isSpecialCells && indexPath.row == cards.arrayCards.count {
+                return cell_action_size
+            }
+            
             if indexPath.row == cards.arrayCards.count {
                 return cell_empty_action_size
             }
             return cell_action_size
         }
-        
     }
 }

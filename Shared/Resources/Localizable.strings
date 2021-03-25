@@ -956,3 +956,17 @@
 "headlines_title_home" = "À la une";
 "outings_title_home" = "Évènements";
 "entourages_title_home" = "Demandes et initiatives";
+
+"home_help_bt_1" = "Devenir reporter pour\nEntourage";
+"home_help_bt_2" = "Faire un don financier à\nEntourage";
+"home_help_bt_3" = "Parler d’Entourage";
+"home_help_bt_4" = "Devenir Ambassadeur";
+"home_help_bt_5" = "Programme LinkedOut";
+"home_help_title" = "Entourage autrement";
+"home_help_reporter_title" = "Les reporters Entourage";
+
+"home_help_reporter_desc" = "Pour aider au déploiement futur d’Entourage dans votre région, soyez nos yeux et nos oreilles !\n\nPartagez-nous ce que vous observez dans votre environnement.\n\nCe questionnaire couvre différentes thématiques, répondez-y autant que vous le pouvez. Si la situation évolue, vous pourrez le remplir à nouveau pour nous tenir informés.\n\nVotre collaboration est précieuse, nous vous en remercions chaleureusement !";
+"home_button_modZone" = "Je modifie ma zone d’action";
+"home_button_helpEntourage" = "J’aide Entourage autrement";
+"home_button_show_more_actions" = "Afficher plus d'actions";
+"home_button_show_more_events" = "Afficher plus d'évènements";

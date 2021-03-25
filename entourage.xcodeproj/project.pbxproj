@@ -25,6 +25,8 @@
 		2B26962325DEAA1200D174DF /* OTFeedsViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B26962225DEAA1200D174DF /* OTFeedsViewController2.swift */; };
 		2B29BD94250F6CCE00663506 /* OTMainGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */; };
 		2B354584255311B900562062 /* PublicFeedDetailNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B354583255311B900562062 /* PublicFeedDetailNew.storyboard */; };
+		2B3CA4DF260B4558006A87AE /* OTHomeHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA4DE260B4558006A87AE /* OTHomeHelpViewController.swift */; };
+		2B3CA4E3260B581C006A87AE /* OTHomeHelpReporterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA4E2260B581C006A87AE /* OTHomeHelpReporterViewController.swift */; };
 		2B46005824586BC00068120F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B46005724586BC00068120F /* Logger.swift */; };
 		2B48AAFA24AB3D0100639789 /* OTAssoTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48AAF924AB3D0100639789 /* OTAssoTopTableViewCell.swift */; };
 		2B48AAFC24AB3D0B00639789 /* OTAssoNeedsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B48AAFB24AB3D0B00639789 /* OTAssoNeedsTableViewCell.swift */; };
@@ -570,6 +572,8 @@
 		2B26962225DEAA1200D174DF /* OTFeedsViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFeedsViewController2.swift; sourceTree = "<group>"; };
 		2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMainGuideViewController.swift; sourceTree = "<group>"; };
 		2B354583255311B900562062 /* PublicFeedDetailNew.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PublicFeedDetailNew.storyboard; sourceTree = "<group>"; };
+		2B3CA4DE260B4558006A87AE /* OTHomeHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeHelpViewController.swift; sourceTree = "<group>"; };
+		2B3CA4E2260B581C006A87AE /* OTHomeHelpReporterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeHelpReporterViewController.swift; sourceTree = "<group>"; };
 		2B46005724586BC00068120F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		2B48AAF924AB3D0100639789 /* OTAssoTopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTAssoTopTableViewCell.swift; sourceTree = "<group>"; };
 		2B48AAFB24AB3D0B00639789 /* OTAssoNeedsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTAssoNeedsTableViewCell.swift; sourceTree = "<group>"; };
@@ -1499,6 +1503,8 @@
 				2B8DF99C25F7BA5F00504D26 /* OTHomeMainViewController.swift */,
 				2B13BD8525FA5A7D00B0E071 /* OTHomeTableViewCells.swift */,
 				2B13BD8D25FA5AF900B0E071 /* OTHomeCollectionViewCells.swift */,
+				2B3CA4DE260B4558006A87AE /* OTHomeHelpViewController.swift */,
+				2B3CA4E2260B581C006A87AE /* OTHomeHelpReporterViewController.swift */,
 				2B13BD8925FA5A9300B0E071 /* HomeCard.swift */,
 			);
 			path = Home;
@@ -3589,6 +3595,7 @@
 				2BE75F3324C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift in Sources */,
 				A202EC612085D2C80058F32C /* OTCountryCodePickerViewDataSource.m in Sources */,
 				A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */,
+				2B3CA4E3260B581C006A87AE /* OTHomeHelpReporterViewController.swift in Sources */,
 				A202EC972085D2C80058F32C /* OTMessageDataSourceBehavior.m in Sources */,
 				A202ECF32085D2C80058F32C /* OTPushNotificationsService.m in Sources */,
 				A202EC4B2085D2C80058F32C /* OTToggleVisibleBehavior.m in Sources */,
@@ -3685,6 +3692,7 @@
 				A24EA3822100A7780027AB8B /* UITextField+AutoSuggestion.m in Sources */,
 				A202EBB32085D2C80058F32C /* OTFeedItemsFilterCellBase.m in Sources */,
 				A202EBF92085D2C80058F32C /* OTFeedItemsTableView.m in Sources */,
+				2B3CA4DF260B4558006A87AE /* OTHomeHelpViewController.swift in Sources */,
 				96B658B8209A5AF000EB0398 /* UIFont+Extensions.swift in Sources */,
 				A202EB7F2085D2C80058F32C /* OTCategoryViewController.m in Sources */,
 				2B13BD8E25FA5AF900B0E071 /* OTHomeCollectionViewCells.swift in Sources */,

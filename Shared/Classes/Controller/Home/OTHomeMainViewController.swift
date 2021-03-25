@@ -24,6 +24,8 @@ class OTHomeMainViewController: UIViewController {
     var isFirstLaunchCheckName = true
     let NUMBER_OF_LAUNCH_CHECK = 4
     
+    var isFromModifyZone = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +52,8 @@ class OTHomeMainViewController: UIViewController {
             ui_tableview.addSubview(refreshControl)
         }
         
+        OTLogger.logEvent(View_Start_ExpertFeed)
+        
         getFeed()
     }
     
@@ -67,6 +71,11 @@ class OTHomeMainViewController: UIViewController {
         let _rect = CGRect(x: 0, y: self.ui_view_top.bounds.size.height , width: self.view.frame.size.width, height: self.ui_view_top.layer.shadowRadius)
         let _shadowPath = UIBezierPath(rect: _rect).cgPath
         self.ui_view_top.layer.shadowPath = _shadowPath
+        
+        if isFromModifyZone {
+            isFromModifyZone = false
+            getFeed()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -141,7 +150,13 @@ class OTHomeMainViewController: UIViewController {
     
     @objc func getFeed() {
         var params = [String:Any]()
-        if let currentLocation = OTLocationManager.sharedInstance()?.currentLocation {
+        //TODO: a remettre lorsque le back sera ok pour choisir les bonnes infos GPS à prendre
+//        if let currentLocation = OTLocationManager.sharedInstance()?.currentLocation {
+//            params["latitude"] = currentLocation.coordinate.latitude
+//            params["longitude"] = currentLocation.coordinate.longitude
+//        }
+        
+        if let currentLocation = UserDefaults.standard.currentUser.addressPrimary?.location {
             params["latitude"] = currentLocation.coordinate.latitude
             params["longitude"] = currentLocation.coordinate.longitude
         }
@@ -163,6 +178,7 @@ class OTHomeMainViewController: UIViewController {
 
     //MARK: - IBActions -
     @IBAction func action_show_tours(_ sender: Any?) {
+        OTLogger.logEvent(Action_expertFeed_Tour)
         let sb = UIStoryboard.init(name: "Main2", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "OTFeedTourVC") as! OTFeedToursViewController
         self.navigationController?.pushViewController(vc, animated: true)
@@ -216,14 +232,6 @@ extension OTHomeMainViewController: UITableViewDelegate, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if arrayFeed[indexPath.row].arrayCards.count == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellTitle", for: indexPath) as! OTHomeCellTitleView
-            
-            cell.populateCell(card: arrayFeed[indexPath.row],clickDelegate: self)
-            
-            return cell
-        }
-        
         var cell = OTHomeCellCollectionView()
 
         if arrayFeed[indexPath.row].type == .Headlines {
@@ -241,9 +249,7 @@ extension OTHomeMainViewController: UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if arrayFeed[indexPath.row].arrayCards.count == 0 {
-            return UITableView.automaticDimension
-        }
+
         if arrayFeed[indexPath.row].type == .Headlines {
             return CELL_HEADLINES_HEIGHT
         }
@@ -262,9 +268,17 @@ extension OTHomeMainViewController: UITableViewDelegate, UITableViewDataSource, 
         }
     }
     
-    func selectCollectionViewCell(item:Any,type:HomeCardType) {
+    func selectCollectionViewCell(item:Any,type:HomeCardType, position:Int) {
+        let posStr = "\(position+1)"
+        var logString = ""
         if let _item = item as? OTEntourage {
             if _item.groupType == "outing" {
+                if type == .Headlines {
+                    logString = "\(Action_expertFeed_News_Event)\(posStr)"
+                }
+                else {
+                    logString = "\(Action_expertFeed_Event)\(posStr)"
+                }
                 let sb = UIStoryboard.init(name: "PublicFeedDetailNew", bundle: nil)
                 let vc = sb.instantiateInitialViewController() as! OTDetailActionEventViewController
                 vc.feedItem = _item
@@ -272,6 +286,12 @@ extension OTHomeMainViewController: UITableViewDelegate, UITableViewDataSource, 
                 self.navigationController?.setNavigationBarHidden(false, animated: true)
             }
             else {
+                if type == .Headlines {
+                    logString = "\(Action_expertFeed_News_Action)\(posStr)"
+                }
+                else {
+                    logString = "\(Action_expertFeed_Action)\(posStr)"
+                }
                 let sb = UIStoryboard.init(name: "PublicFeedDetailNew", bundle: nil)
                 let vc = sb.instantiateInitialViewController() as! OTDetailActionEventViewController
                 
@@ -281,21 +301,38 @@ extension OTHomeMainViewController: UITableViewDelegate, UITableViewDataSource, 
             }
         }
         else if let _item = item as? OTAnnouncement {
+           logString = "\(Action_expertFeed_News_Announce)\(posStr)"
             if let url = URL.init(string: _item.url) {
                 UIApplication.shared.openURL(url)
             }
         }
+        OTLogger.logEvent(logString)
     }
     
-    func showDetail(type: HomeCardType) {
+    func showDetail(type: HomeCardType,isFromArrow:Bool) {
+        var logString = ""
         switch type {
         case .Actions:
+            if isFromArrow {
+                logString = Action_expertFeed_MoreActionArrow
+            }
+            else {
+                logString = Action_expertFeed_MoreAction
+            }
             showAllActions()
         case .Events:
+            if isFromArrow {
+                logString = Action_expertFeed_MoreEventArrow
+            }
+            else {
+                logString = Action_expertFeed_MoreEvent
+            }
             showAllEvents()
         default:
             break
         }
+        
+        OTLogger.logEvent(logString)
     }
     
     func showAllAnnounces() {
@@ -318,5 +355,22 @@ extension OTHomeMainViewController: UITableViewDelegate, UITableViewDataSource, 
         vc.isFromEvent = false
         vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: "entourages_title_home")
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func showModifyZone() {
+        OTLogger.logEvent(Event_expertFeed_ModifyActionZone)
+        let storyB = UIStoryboard.init(name: "Onboarding_V2", bundle: nil)
+        let vc = storyB.instantiateViewController(withIdentifier: "Onboarding_place") as! OTOnboardingPlaceViewController
+        vc.isFromProfile = true
+        vc.isSecondaryAddress = false
+        self.isFromModifyZone = true
+        self.navigationController?.show(vc, sender: nil)
+    }
+    
+    func showHelpDistance() {
+        OTLogger.logEvent(Action_expertFeed_HelpDifferent)
+        let storyB = UIStoryboard.init(name: "Main", bundle: nil)
+        let vc = storyB.instantiateViewController(withIdentifier: "HomeHelpVC")
+        self.navigationController?.show(vc, sender: nil)
     }
 }

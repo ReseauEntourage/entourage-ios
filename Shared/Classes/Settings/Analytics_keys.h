@@ -212,4 +212,30 @@
 #define Action_guide_searchFilter_Volunt @"Action__GuideMap__Volunteers"
 #define Action_guide_searchFilter_Donat @"Action__GuideMap__Donations"
 
+
+
+/*************
+ Feed Expert New
+ *************/
+#define View_Start_ExpertFeed @"View__Start __ExpertFeed"
+#define Action_expertFeed_Tour @"Action__ExpertFeed__Tour"
+//Feed Expert Headline
+#define Action_expertFeed_News_Announce @"Action__ExpertFeed__News_Announce"
+#define Action_expertFeed_News_Event @"Action__ExpertFeed__News_Event"
+#define Action_expertFeed_News_Action @"Action__ExpertFeed__News_Action"
+
+//Feed Expert Events
+#define Action_expertFeed_Event @"Action__ExpertFeed__Event"
+#define Action_expertFeed_MoreEvent @"Action__ExpertFeed__MoreEvents"
+#define Action_expertFeed_MoreEventArrow @"Action__ExpertFeed__MoreEventsArrow"
+#define Event_expertFeed_ModifyActionZone @"Action__ExpertFeed__ModifyActionZone"
+
+//Feed Expert Actions
+#define Action_expertFeed_Action @"Action__ExpertFeed__Action"
+#define Action_expertFeed_MoreAction @"Action__ExpertFeed__MoreActions"
+#define Action_expertFeed_MoreActionArrow @"Action__ExpertFeed__MoreActionsArrow"
+#define Action_expertFeed_HelpDifferent @"Action__ExpertFeed__HelpDifferently"
+
+
+
 #endif /* Analytics_keys_h */

@@ -173,6 +173,38 @@ class OTHomeEventCollectionViewCell: UICollectionViewCell {
 class OTHomeImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ui_image: UIImageView!
     @IBOutlet weak var ui_title: UILabel!
+    @IBOutlet weak var ui_view_trans: UIView!
+    @IBOutlet weak var ui_view_show_more: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.contentView.layer.cornerRadius = 8.0
+        self.contentView.layer.masksToBounds = true
+        
+        ui_view_trans.isHidden = true
+        ui_view_show_more.isHidden = true
+        ui_title.isHidden = true
+    }
+    
+    func updateCell(title:String, imageUrl:String) {
+        ui_image.setup(fromUrl: imageUrl, withPlaceholder: nil) { (request, response, _image) in
+            self.ui_image.image = _image
+            self.ui_view_trans.isHidden = true
+            self.ui_view_show_more.isHidden = true
+            self.ui_title.isHidden = true
+        } failure: { (request, response, error) in
+            self.ui_view_show_more.isHidden = false
+            self.ui_title.isHidden = false
+            self.ui_title.text = title
+            self.ui_image.image = UIImage()
+        }
+    }
+}
+
+//MARK: - OTHomeCellOther -
+class OTHomeCellOther: UICollectionViewCell {
+    @IBOutlet weak var ui_title: UILabel!
+    var isShowZone = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -180,9 +212,9 @@ class OTHomeImageCollectionViewCell: UICollectionViewCell {
         self.contentView.layer.masksToBounds = true
     }
     
-    func updateCell(title:String, imageUrl:String) {
-        ui_image.setup(fromUrl: imageUrl, withPlaceholder: "pre_onboard_2")
+    func populateCell(title:String,isShowZone:Bool) {
         ui_title.text = title
+        self.isShowZone = isShowZone
     }
 }
 
