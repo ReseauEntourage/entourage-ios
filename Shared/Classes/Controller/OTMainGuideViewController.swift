@@ -85,6 +85,9 @@ class OTMainGuideViewController: UIViewController {
             self.ui_constraint_height_view_topinfo.constant = 0
             self.ui_view_top_info_gds.isHidden = true
         }
+        if isFirstLaunch {
+            showMap(animated: false)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -201,7 +204,7 @@ class OTMainGuideViewController: UIViewController {
         
         configureMapView()
         
-        self.showMap(animated: false)
+       // self.showMap(animated: false)
         
         changeButtonsState()
     }

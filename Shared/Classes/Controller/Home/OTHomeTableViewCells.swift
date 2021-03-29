@@ -55,6 +55,7 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     var hasShowMore = false
     
     var isSpecialCells = false
+    let minimalCellForSpecialCell = 1
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -87,7 +88,7 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
         self.delegate = clickDelegate
         
         if card.type != .Headlines {
-            self.isSpecialCells = cards.arrayCards.count <= 1
+            self.isSpecialCells = cards.arrayCards.count <= minimalCellForSpecialCell
         }
         
         if cards.arrayCards.count >= minimumItemsToShowMore && cards.type != .Headlines{

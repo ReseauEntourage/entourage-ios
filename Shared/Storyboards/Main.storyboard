@@ -1763,7 +1763,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="116.5" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number2_bg" translatesAutoresizingMaskIntoConstraints="NO" id="w6Z-ue-1Lh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="w6Z-ue-1Lh" secondAttribute="height" multiplier="272:160" id="YTZ-PJ-bdm"/>
                                                             </constraints>
@@ -2263,7 +2263,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                         <rect key="frame" x="24" y="7.5" width="133" height="37"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Bwj-Z5-bIl" firstAttribute="leading" secondItem="1aA-cE-jaD" secondAttribute="leading" constant="24" id="4cT-n2-iY4"/>
                                     <constraint firstAttribute="trailing" secondItem="BIC-CP-rKF" secondAttribute="trailing" constant="16" id="SEP-cR-1kT"/>
@@ -3566,7 +3566,7 @@ Entourage</string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5Vl-CP-BBk" firstAttribute="centerY" secondItem="pmD-Cj-3hl" secondAttribute="centerY" id="5cd-RZ-0iB"/>
                             <constraint firstItem="zh8-tT-yeN" firstAttribute="top" secondItem="Yxh-gM-fO9" secondAttribute="bottom" constant="40" id="WTu-Qf-hju"/>
