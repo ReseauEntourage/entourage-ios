@@ -9,9 +9,9 @@
 import UIKit
 
 class OTHomeMainViewController: UIViewController {
-    let CELL_HEADLINES_HEIGHT:CGFloat = 350
-    let CELL_EVENTS_HEIGHT:CGFloat = 270
-    let CELL_ACTIONS_HEIGHT:CGFloat = 288
+    let CELL_HEADLINES_HEIGHT:CGFloat = 330
+    let CELL_EVENTS_HEIGHT:CGFloat = 280
+    let CELL_ACTIONS_HEIGHT:CGFloat = 298
     
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_button_tour: UIButton!
