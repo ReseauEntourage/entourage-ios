@@ -187,7 +187,7 @@ OTHeatzonesCollectionViewDelegate
     
     BOOL isFromOnboarding = [[NSUserDefaults standardUserDefaults] boolForKey:@"isFromOnboarding"];
     
-    if (isFromOnboarding) {
+    if (isFromOnboarding && !self.isFromEvent) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFromOnboarding"];
         
         if (userType == 1) { //Neighbour
