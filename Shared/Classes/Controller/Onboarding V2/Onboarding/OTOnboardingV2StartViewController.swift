@@ -25,7 +25,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     var currentPositionAlone:ControllerAloneType = .none
     var currentPositionNeighbour:ControllerNeighbourType = .none
     
-    let nbOfSteps = 7
+    let nbOfSteps = 6
     
     var temporaryUser:OTUser = OTUser()
     var temporaryCountryCode = "+33"
@@ -200,12 +200,7 @@ class OTOnboardingV2StartViewController: UIViewController {
             SVProgressHUD.show()
             OTAuthService.updateUserAddress(withPlaceId: _place.placeID, isSecondaryAddress: false) { (error) in
                 SVProgressHUD.dismiss()
-                if self.userTypeSelected == .none {
-                    self.goNextStep()
-                }
-                else {
-                    self.goNextStepSdfNeighbour()
-                }
+                self.goNextStep()
             }
         }
         else if let _lat = self.temporaryLocation?.coordinate.latitude, let _long = self.temporaryLocation?.coordinate.longitude {
@@ -213,12 +208,7 @@ class OTOnboardingV2StartViewController: UIViewController {
             let addressName = temporaryAddressName == nil ? "default" : temporaryAddressName!
             OTAuthService.updateUserAddress(withName: addressName, andLatitude: NSNumber.init(value: _lat), andLongitude: NSNumber.init(value: _long), isSecondaryAddress: false) { (error) in
                 SVProgressHUD.dismiss()
-                if self.userTypeSelected == .none {
-                    self.goNextStep()
-                }
-                else {
-                    self.goNextStepSdfNeighbour()
-                }
+                self.goNextStep()
             }
         }
     }
@@ -254,13 +244,13 @@ class OTOnboardingV2StartViewController: UIViewController {
             UserDefaults.standard.currentUser = newUser
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
-                self.goNextStep()
+                self.showPopNotification()
             }
         }) { (error) in
             OTLogger.logEvent(Error_Onboarding_Email_Submit_Error)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
-                self.goNextStep()
+                self.showPopNotification()
             }
         }
     }
@@ -512,51 +502,12 @@ class OTOnboardingV2StartViewController: UIViewController {
             }
             
             if currentPosition == .place {
-                if self.userTypeSelected == .alone {
-                    if currentPositionAlone == .place {
-                        update2ndAddress()
-                        return
-                    }
-                    if currentPositionAlone == .activity {
-                        updateAlone()
-                        return
-                    }
-                    if currentPositionAlone == .none {
-                        sendAddAddress()
-                        return
-                    }
-                    currentPositionAlone = ControllerAloneType(rawValue: currentPositionAlone.rawValue + 1)!
-                    moveToTunnelAlone()
-                    return
-                }
-                if self.userTypeSelected == .neighbour {
-                    if currentPositionNeighbour == .activity {
-                        updateNeighbour()
-                        return
-                    }
-                    if currentPositionNeighbour == .place {
-                        update2ndAddress()
-                        return
-                    }
-                    if currentPositionNeighbour == .none {
-                        sendAddAddress()
-                        return
-                    }
-                    currentPositionNeighbour = ControllerNeighbourType(rawValue: currentPositionNeighbour.rawValue + 1)!
-                    moveToTunnelNeighbour()
-                    return
-                }
                 self.sendAddAddress()
                 return
             }
             
             if currentPosition == .emailPwd {
                 self.updateUserEmailPwd()
-                return
-            }
-            
-            if currentPosition == .photo {
-                updateUserPhoto()
                 return
             }
             
@@ -601,28 +552,6 @@ class OTOnboardingV2StartViewController: UIViewController {
                     return
                 }
             }
-            if currentPosition == .place {
-                if self.userTypeSelected == .alone {
-                    if self.currentPositionAlone != .none {
-                        currentPositionAlone = ControllerAloneType(rawValue: currentPositionAlone.rawValue - 1)!
-                    }
-                    else {
-                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
-                    }
-                    moveToTunnelAlone()
-                    return
-                }
-                if self.userTypeSelected == .neighbour {
-                    if self.currentPositionNeighbour != .none {
-                        currentPositionNeighbour = ControllerNeighbourType(rawValue: currentPositionNeighbour.rawValue - 1)!
-                    }
-                    else {
-                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
-                    }
-                    moveToTunnelNeighbour()
-                    return
-                }
-            }
             
             if currentPosition == .emailPwd {
                 if self.userTypeSelected == .assos {
@@ -630,21 +559,6 @@ class OTOnboardingV2StartViewController: UIViewController {
                         currentPosition = ControllerType(rawValue: currentPosition.rawValue - 2)!
                     }
                     moveToTunnelAsso()
-                    return
-                }
-                
-                if self.userTypeSelected == .alone {
-                    if self.currentPositionAlone != .none {
-                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
-                    }
-                    moveToTunnelAlone()
-                    return
-                }
-                if self.userTypeSelected == .neighbour {
-                    if self.currentPositionNeighbour != .none {
-                        currentPosition = ControllerType(rawValue: currentPosition.rawValue - 1)!
-                    }
-                    moveToTunnelNeighbour()
                     return
                 }
             }
@@ -656,27 +570,9 @@ class OTOnboardingV2StartViewController: UIViewController {
     
     @IBAction func action_pass(_ sender: Any) {
         
-        if currentPosition == .place {
-            if (self.userTypeSelected == .alone && currentPositionAlone == .place) || (self.userTypeSelected == .neighbour && currentPositionNeighbour == .place) {
-                self.temporary2ndLocation = nil
-                self.temporary2ndGooglePlace = nil
-                self.temporary2ndAddressName = nil
-                self.temporaryNeighbourActivities = nil
-                self.temporarySdfActivities = nil
-                OTLogger.logEvent(Action_Onboarding_Action_Zone2_Skip)
-                self.goNextStepSdfNeighbour()
-                return
-            }
-        }
-        
         if currentPosition == .type {
             userTypeSelected = .none
             OTLogger.logEvent(Action_Onboarding_Choose_Profile_Skip)
-        }
-        if currentPosition == .photo {
-            OTLogger.logEvent(Action_Onboarding_Ignore_Photo)
-            showPopNotification()
-            return
         }
         
         action_next(sender)
@@ -744,13 +640,6 @@ extension OTOnboardingV2StartViewController {
                 vc.tempEmail = self.temporaryEmail
                 add(asChildViewController: vc)
             }
-        case .photo:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_photo") as? OTOnboardingPhotoViewController {
-                vc.delegate = self
-                vc.currentUserFirstname = self.temporaryUser.firstName
-                vc.selectedImage = self.temporaryUserPicture
-                add(asChildViewController: vc)
-            }
         }
         
         let percent = (ui_progress.bounds.size.width / CGFloat(nbOfSteps)) * CGFloat(currentPosition.rawValue)
@@ -769,25 +658,6 @@ extension OTOnboardingV2StartViewController {
     func moveToTunnelAlone() {
         ui_bt_next.isEnabled = false
         switch currentPositionAlone {
-        case .place:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_place") as? OTOnboardingPlaceViewController {
-                vc.delegate = self
-                vc.currentLocation = self.temporary2ndLocation
-                vc.selectedPlace = self.temporary2ndGooglePlace
-                vc.isSecondaryAddress = true
-                vc.isSdf = true
-                add(asChildViewController: vc)
-                ui_bt_pass.isHidden = false
-            }
-            
-        case .activity:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_sdf_neighbour_activity") as? OTOnboardingSDFNeighbourActivityViewController {
-                vc.isSdf = true
-                vc.activitiesSelections = temporarySdfActivities
-                vc.delegate = self
-                vc.username = self.temporaryUser.firstName
-                add(asChildViewController: vc)
-            }
         case .none:
             changeController()
         }
@@ -803,24 +673,6 @@ extension OTOnboardingV2StartViewController {
         ui_bt_next.isEnabled = false
         
         switch currentPositionNeighbour {
-        case .place:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_place") as? OTOnboardingPlaceViewController {
-                vc.delegate = self
-                vc.currentLocation = self.temporary2ndLocation
-                vc.selectedPlace = self.temporary2ndGooglePlace
-                vc.isSecondaryAddress = true
-                vc.isSdf = false
-                add(asChildViewController: vc)
-                ui_bt_pass.isHidden = false
-            }
-        case .activity:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Onboarding_sdf_neighbour_activity") as? OTOnboardingSDFNeighbourActivityViewController {
-                vc.isSdf = false
-                vc.activitiesSelections = temporaryNeighbourActivities
-                vc.delegate = self
-                vc.username = self.temporaryUser.firstName
-                add(asChildViewController: vc)
-            }
         case .none:
             changeController()
         }
@@ -880,24 +732,14 @@ extension OTOnboardingV2StartViewController {
         case .type:
             if currentPositionAsso == .none && currentPositionAlone == .none && currentPositionNeighbour == .none {
                 ui_bt_previous.isHidden = true
-                ui_bt_pass.isHidden = false
             }
             else {
                 ui_bt_previous.isHidden = false
             }
         case .place:
-            if userTypeSelected != .none {
-                if (userTypeSelected == .alone && currentPositionAlone == .place) || (userTypeSelected == .neighbour && currentPositionNeighbour == .place) {
-                    ui_bt_pass.isHidden = false
-                }
-            }
             ui_bt_previous.isHidden = false
-        case .phone,.passCode,.emailPwd,.photo:
+        case .phone,.passCode,.emailPwd:
             ui_bt_previous.isHidden = false
-        }
-        
-        if currentPosition == .photo {
-            ui_bt_pass.isHidden = false
         }
     }
     
@@ -1112,7 +954,6 @@ enum ControllerType:Int {
     case type = 4
     case place = 5
     case emailPwd = 6
-    case photo = 7
 }
 
 enum ControllerAssoType:Int {
@@ -1124,14 +965,10 @@ enum ControllerAssoType:Int {
 }
 
 enum ControllerNeighbourType:Int {
-    case place = 1
-    case activity = 2
     case none = 0
 }
 
 enum ControllerAloneType:Int {
-    case place = 1
-    case activity = 2
     case none = 0
 }
 
