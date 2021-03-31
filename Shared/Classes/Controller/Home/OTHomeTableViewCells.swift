@@ -127,7 +127,7 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
             let item = cards.arrayCards[indexPath.row]
             if let item = item as? OTEntourage {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellColl", for: indexPath) as! OTHomeCollectionViewCell
-                cell.updateCell(item: item,delegate: delegate)
+                cell.updateCell(item: item,delegate: delegate,isHeadline: true)
                 return cell
             }
             else if let item = item as? OTAnnouncement  {
@@ -176,7 +176,7 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellColl", for: indexPath) as! OTHomeCollectionViewCell
         
         if let _entourage = cards.arrayCards[indexPath.row] as? OTEntourage {
-            cell.updateCell(item: _entourage,delegate: delegate)
+            cell.updateCell(item: _entourage,delegate: delegate,isHeadline: false)
         }
         
         return cell

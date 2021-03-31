@@ -2246,13 +2246,13 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIC-CP-rKF">
                                         <rect key="frame" x="298" y="6" width="100" height="40"/>
-                                        <color key="backgroundColor" red="0.99607843139999996" green="0.93725490199999995" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="QH7-57-vK8"/>
                                             <constraint firstAttribute="height" constant="40" id="gJT-4n-ENd"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="Maraudes">
+                                        <state key="normal" title="MARAUDES">
                                             <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -2685,8 +2685,8 @@ L2</string>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Une demande de :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASL-ZZ-wFW">
-                                                                        <rect key="frame" x="16" y="132.5" width="124" height="17"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Une contribution de :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASL-ZZ-wFW">
+                                                                        <rect key="frame" x="16" y="132.5" width="145" height="17"/>
                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -3013,7 +3013,7 @@ de demandes</string>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bB3-IP-Gzp">
                                                                                         <rect key="frame" x="71.5" y="16.5" width="149" height="17"/>
                                                                                         <subviews>
-                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voir l'évènement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CF-Zd-ddC">
+                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voir l'événement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CF-Zd-ddC">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="117" height="17"/>
                                                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                                                 <color key="textColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
@@ -3165,7 +3165,7 @@ de demandes</string>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hh2-v2-ir2">
                                                                                         <rect key="frame" x="8" y="32" width="108" height="33.5"/>
                                                                                         <string key="text">Afficher plus 
-d’évènements</string>
+d’événements</string>
                                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                                         <color key="textColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -3665,37 +3665,28 @@ Entourage</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KL6-U6-hoz">
-                                <rect key="frame" x="16" y="420" width="382" height="55"/>
+                                <rect key="frame" x="60" y="420" width="294" height="55"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je participe" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80K-9j-XbF">
-                                        <rect key="frame" x="50" y="8" width="282" height="39"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PARTICIPER" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80K-9j-XbF">
+                                        <rect key="frame" x="50" y="8" width="194" height="39"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_show_orange" translatesAutoresizingMaskIntoConstraints="NO" id="jC0-Rp-GOS">
-                                        <rect key="frame" x="342" y="11.5" width="32" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="QdH-6Y-3mw"/>
-                                            <constraint firstAttribute="width" constant="32" id="beF-Je-5uT"/>
-                                        </constraints>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4u-RL-FSx">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="55"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="294" height="55"/>
                                         <connections>
                                             <action selector="action_show_web:" destination="9js-CP-8Ri" eventType="touchUpInside" id="Fre-U0-kO0"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.99607843137254903" green="0.93725490196078431" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="jC0-Rp-GOS" secondAttribute="trailing" constant="8" id="06g-gy-fIS"/>
                                     <constraint firstItem="80K-9j-XbF" firstAttribute="leading" secondItem="KL6-U6-hoz" secondAttribute="leading" constant="50" id="0ue-zL-D1f"/>
                                     <constraint firstAttribute="bottom" secondItem="80K-9j-XbF" secondAttribute="bottom" constant="8" id="1av-3b-fOX"/>
                                     <constraint firstItem="80K-9j-XbF" firstAttribute="top" secondItem="KL6-U6-hoz" secondAttribute="top" constant="8" id="8Sn-kr-UzH"/>
                                     <constraint firstItem="v4u-RL-FSx" firstAttribute="leading" secondItem="KL6-U6-hoz" secondAttribute="leading" id="Cfo-Cr-CGZ"/>
                                     <constraint firstAttribute="trailing" secondItem="80K-9j-XbF" secondAttribute="trailing" constant="50" id="PE8-uc-W4t"/>
-                                    <constraint firstItem="jC0-Rp-GOS" firstAttribute="centerY" secondItem="KL6-U6-hoz" secondAttribute="centerY" id="Q3b-Wi-Hlw"/>
                                     <constraint firstAttribute="height" constant="55" id="Tdj-e8-STE"/>
                                     <constraint firstAttribute="trailing" secondItem="v4u-RL-FSx" secondAttribute="trailing" id="bbY-Tx-lhx"/>
                                     <constraint firstAttribute="bottom" secondItem="v4u-RL-FSx" secondAttribute="bottom" id="gv6-LG-aoC"/>
@@ -3722,9 +3713,9 @@ Votre collaboration est précieuse, nous vous en remercions chaleureusement !</s
                         <constraints>
                             <constraint firstItem="KL6-U6-hoz" firstAttribute="top" secondItem="mZg-Fw-pcW" secondAttribute="bottom" constant="118.5" id="4N8-VE-vtO"/>
                             <constraint firstItem="mZg-Fw-pcW" firstAttribute="leading" secondItem="2O2-sW-l4z" secondAttribute="leading" constant="16" id="6Sl-Cr-jsD"/>
-                            <constraint firstAttribute="trailing" secondItem="KL6-U6-hoz" secondAttribute="trailing" constant="16" id="DYI-jh-H7t"/>
+                            <constraint firstAttribute="trailing" secondItem="KL6-U6-hoz" secondAttribute="trailing" constant="60" id="DYI-jh-H7t"/>
                             <constraint firstAttribute="trailing" secondItem="mZg-Fw-pcW" secondAttribute="trailing" constant="16" id="FPJ-1h-aLa"/>
-                            <constraint firstItem="KL6-U6-hoz" firstAttribute="leading" secondItem="2O2-sW-l4z" secondAttribute="leading" constant="16" id="Kd9-i7-I3G"/>
+                            <constraint firstItem="KL6-U6-hoz" firstAttribute="leading" secondItem="2O2-sW-l4z" secondAttribute="leading" constant="60" id="Kd9-i7-I3G"/>
                             <constraint firstItem="mZg-Fw-pcW" firstAttribute="top" secondItem="Ztb-gE-fDO" secondAttribute="bottom" constant="40" id="t2k-uX-qRU"/>
                         </constraints>
                     </view>
