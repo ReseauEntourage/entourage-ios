@@ -37,7 +37,7 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
         self.contentView.layer.masksToBounds = true
     }
     
-    func updateCell(item:OTEntourage,delegate:CellClickDelegate?, isHeadline:Bool) {
+    func updateCell(item:OTEntourage,delegate:CellClickDelegate?) {
         self.delegate = delegate
         self.item = item
         if item.groupType == "outing" {
@@ -52,18 +52,12 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
             
             if item.entourage_type == "contribution" {
                 ui_title_action.textColor = UIColor.appBlue()
+                ui_info_action_by.text = OTLocalisationService.getLocalizedValue(forKey: "home_action_contrib_info_user")
             }
             else {
                 ui_title_action.textColor = UIColor.appOrange()
-            }
-            
-            if isHeadline {
                 ui_info_action_by.text = OTLocalisationService.getLocalizedValue(forKey: "home_action_info_user")
             }
-            else {
-                ui_info_action_by.text = OTLocalisationService.getLocalizedValue(forKey: "home_action_contrib_info_user")
-            }
-            
         }
         
         ui_title_description.text = item.title
