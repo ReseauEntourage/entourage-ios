@@ -196,6 +196,14 @@ class OTHomeImageCollectionViewCell: UICollectionViewCell {
     }
     
     func updateCell(title:String, imageUrl:String) {
+        if imageUrl.count == 0 {
+            self.ui_view_show_more.isHidden = false
+            self.ui_title.isHidden = false
+            self.ui_title.text = title
+            self.ui_image.image = UIImage()
+            return
+        }
+        
         ui_image.setup(fromUrl: imageUrl, withPlaceholder: nil) { (request, response, _image) in
             self.ui_image.image = _image
             self.ui_view_trans.isHidden = true
