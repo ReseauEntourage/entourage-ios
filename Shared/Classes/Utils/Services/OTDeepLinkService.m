@@ -215,6 +215,14 @@
     else if([key isEqualToString:@"profilePhoto"]) {
         [self showProfilePhotoFromAnywhere];
     }
+    else if([key isEqualToString:@"guidemap"]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .500 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            
+            UIViewController *vc = [self instatiateControllerWithStoryboardIdentifier:@"Main" andControllerIdentifier:@"OTMainGuide"];
+            ((OTMainGuideViewController* )vc).isFromDeeplink = YES;
+            [self showController:vc animated:YES];
+        });
+    }
 }
 
 - (void)openWithWebView: (NSURL *)url {
@@ -229,12 +237,16 @@
 }
 
 - (void)showController: (UIViewController *)controller {
+    [self showController:controller animated:NO];
+}
+
+- (void)showController: (UIViewController *)controller animated:(BOOL) animated {
     UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:MAP_TAB_INDEX];
     [self updateAppWindow:tabViewController];
     
     UINavigationController *navigationController = (UINavigationController *)tabViewController.viewControllers[0];
     
-    [navigationController pushViewController:controller animated:NO];
+    [navigationController pushViewController:controller animated:animated];
 }
 
 - (void)showControllerFromAnywhere:(UIViewController *)controller {
