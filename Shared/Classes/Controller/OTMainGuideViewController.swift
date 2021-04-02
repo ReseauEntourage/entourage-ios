@@ -40,6 +40,8 @@ class OTMainGuideViewController: UIViewController {
     var isShowMap = false
     var isFirstLaunch = true
     
+    @objc var isFromDeeplink = false
+    
     //MARK: - LifeCycle -
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +99,34 @@ class OTMainGuideViewController: UIViewController {
             isFirstLaunch = false
         }
         
+        if isFromDeeplink {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                DispatchQueue.main.async {
+                    self.showMap(animated: false)
+                }
+            }
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isFromDeeplink {
+            let navigationBar = navigationController?.navigationBar
+            
+            if #available(iOS 13.0, *) {
+                let navBarAppear = UINavigationBarAppearance()
+                navBarAppear.configureWithOpaqueBackground()
+                navBarAppear.backgroundColor = UIColor.appOrange()
+                navBarAppear.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white as Any]
+                
+                navigationBar?.standardAppearance = navBarAppear
+                navigationBar?.scrollEdgeAppearance = navBarAppear
+            } else {
+                navigationBar?.backgroundColor = UIColor.appOrange()
+                navigationBar?.tintColor = UIColor.white
+                navigationBar?.barTintColor = UIColor.appOrange()
+                navigationBar?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white as Any]
+            }
+        }
     }
     
     func changeBackbutton() {
