@@ -190,12 +190,13 @@ OTHeatzonesCollectionViewDelegate
     if (isFromOnboarding && !self.isFromEvent) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFromOnboarding"];
         
-        if (userType == 1) { //Neighbour
-            [self.currentFilter setNeighbourFilters];
-        }
-        else if(userType == 2) { // Alone
-            [self.currentFilter setAloneFilters];
-        }
+//        if (userType == 1) { //Neighbour
+//            [self.currentFilter setNeighbourFilters];
+//        }
+//        else if(userType == 2) { // Alone
+//            [self.currentFilter setAloneFilters];
+//        }
+        
         [self changeFilterButton];
         
         NSNotification *notif = [[NSNotification alloc]initWithName:@"showToolTip" object:nil userInfo:nil];

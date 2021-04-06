@@ -45,10 +45,11 @@ class OTMainTabbarViewController: UITabBarController {
     }
     
     @objc func showTooltip() {
-        tooltipView = OTHomeTooltipView.init(frame: view.frame)
-        
-        view.addSubview(tooltipView!)
-        view.bringSubviewToFront(tooltipView!)
+        //TODO: a remettre ou pas ?
+//        tooltipView = OTHomeTooltipView.init(frame: view.frame)
+//
+//        view.addSubview(tooltipView!)
+//        view.bringSubviewToFront(tooltipView!)
     }
     
     @objc func hideTooltip() {
