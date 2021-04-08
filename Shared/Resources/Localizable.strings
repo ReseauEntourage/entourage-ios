@@ -291,7 +291,7 @@
 "myLocation" = "Ma position";
 "category" = "Catégorie";
 "searchLocationPlaceholder" = "Chercher ou déplacer la carte";
-"formater_by" = "%@ par ";
+"formater_by" = "%@ de ";
 "by" = " par ";
 "entourageCreated" = "Entourage créé";
 "entourageNotCreated" = "Echec de la création de l’entourage";
