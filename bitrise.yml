@@ -82,7 +82,7 @@ workflows:
         - info_plist_path: "./entourage/entourage-Info.plist"
     - git-tag:
         inputs:
-        - tag: Ent_$XBV_PROJECT_VERSION
+        - tag: Ent_TestFlight_$XBV_PROJECT_VERSION
   Entourage-Preprod:
     steps:
     - activate-ssh-key:
