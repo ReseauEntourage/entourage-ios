@@ -12,5 +12,5 @@
 @interface OTFeedItemFiltersViewController : UIViewController
 
 @property (nonatomic, weak) id<OTFeedItemsFilterDelegate> filterDelegate;
-
+@property (nonatomic) BOOL isAlone;
 @end

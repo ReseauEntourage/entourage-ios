@@ -52,6 +52,8 @@
     [self.ui_label_title setText:OTLocalizedString(@"agir_new_title")];
     
     [self.ui_label_title_button_close setText:OTLocalizedString(@"cancel")];
+    
+    [OTLogger logEvent:View_Plus_Screen];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -164,12 +166,14 @@
 
 //MARK: IBactions
 - (IBAction)action_close_pop:(id)sender {
+    [OTLogger logEvent:Action_Plus_BackPressed];
     [OTAppState hideTabBar:NO];
     if ([self.optionsDelegate respondsToSelector:@selector(dismissOptions)]) {
         [self.optionsDelegate performSelector:@selector(dismissOptions) withObject:nil];
     }
 }
 - (IBAction)action_show_help:(id)sender {
+    [OTLogger logEvent:Action_Plus_Help];
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     NSString *buttonFaq = @"";
     if ([currentUser.goal isEqualToString:@"organization"]) {

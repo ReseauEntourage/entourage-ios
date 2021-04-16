@@ -155,14 +155,8 @@
                pathComponents:(NSArray *)pathComponents
                      andQuery:(NSString *)query {
     if ([key isEqualToString:@"feed"]) {
-        OTMainViewController *mainViewController = [self popToMainViewController];
-
-        // "feed/filters"
-        if (pathComponents != nil && pathComponents.count >= 2) {
-            if ([pathComponents[1] isEqualToString:@"filters"]) {
-                [mainViewController showFilters];
-            }
-        }
+        OTHomeMainViewController *mainVC = [self popToNewMainViewController];
+        [mainVC action_show_feeds];
     } else if ([key isEqualToString:@"webview"]) {
         NSArray *elts = [query componentsSeparatedByString:@"="];
         NSURL *url = [NSURL URLWithString:elts[1]];
@@ -210,8 +204,8 @@
         });
     } else if([key isEqualToString:@"events"]) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .500 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            OTMainViewController *mainViewController = [self popToMainViewController];
-            [mainViewController switchToEvents];
+            OTHomeMainViewController *mainViewController = [self popToNewMainViewController];
+            [mainViewController action_show_events];
         });
     }
     else if ([key isEqualToString:@"profileAction"]) {
@@ -220,6 +214,14 @@
     }
     else if([key isEqualToString:@"profilePhoto"]) {
         [self showProfilePhotoFromAnywhere];
+    }
+    else if([key isEqualToString:@"guidemap"]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, .500 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            
+            UIViewController *vc = [self instatiateControllerWithStoryboardIdentifier:@"Main" andControllerIdentifier:@"OTMainGuide"];
+            ((OTMainGuideViewController* )vc).isFromDeeplink = YES;
+            [self showController:vc animated:YES];
+        });
     }
 }
 
@@ -235,12 +237,16 @@
 }
 
 - (void)showController: (UIViewController *)controller {
+    [self showController:controller animated:NO];
+}
+
+- (void)showController: (UIViewController *)controller animated:(BOOL) animated {
     UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:MAP_TAB_INDEX];
     [self updateAppWindow:tabViewController];
     
     UINavigationController *navigationController = (UINavigationController *)tabViewController.viewControllers[0];
     
-    [navigationController pushViewController:controller animated:NO];
+    [navigationController pushViewController:controller animated:animated];
 }
 
 - (void)showControllerFromAnywhere:(UIViewController *)controller {
@@ -254,6 +260,14 @@
     
     UINavigationController *navController = (UINavigationController*)tabViewController.viewControllers.firstObject;
     return (OTMainViewController*)navController.topViewController;
+}
+
+- (OTHomeMainViewController *)popToNewMainViewController {
+    UITabBarController *tabViewController = [OTAppConfiguration configureMainTabBarWithDefaultSelectedIndex:MAP_TAB_INDEX];
+    [self updateAppWindow:tabViewController];
+    
+    UINavigationController *navController = (UINavigationController*)tabViewController.viewControllers.firstObject;
+    return (OTHomeMainViewController*)navController.topViewController;
 }
 
 - (void)prepareControllers:(OTFeedItem *)feedItem {

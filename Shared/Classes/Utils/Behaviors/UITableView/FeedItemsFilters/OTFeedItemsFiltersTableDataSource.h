@@ -14,6 +14,7 @@
 @property (nonatomic, strong) OTFeedItemFilters *currentFilter;
 
 - (void)initializeWith:(OTFeedItemFilters *)filter;
+- (void)initializeWith:(OTFeedItemFilters *)filter andIsalone:(BOOL) isAlone;
 - (OTFeedItemFilters *)readCurrentFilter;
-
+@property (nonatomic) BOOL isAlone;
 @end

@@ -32,6 +32,8 @@
     
     UIBarButtonItem *rejectDisclaimerButton = [self setupCloseModal];
     [rejectDisclaimerButton setAction:@selector(doRejectDisclaimer)];
+    
+    [self setupCloseModalWithoutTintWithTint:UIColor.appOrangeColor];
 }
 
 - (IBAction)doAcceptDisclaimer {

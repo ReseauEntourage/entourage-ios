@@ -70,3 +70,18 @@
 #import "OTStatusBehavior.h"
 #import "OTShareFeedItemBehavior.h"
 #import "OTMembersCell.h"
+#import "OTFeedsViewController.h"
+
+
+#import "OTNewsFeedsFilter.h"
+#import "OTFeedsService.h"
+#import "OTAnnouncementCell.h"
+#import "OTFeedToursViewController.h"
+#import "OTNewsFeedCell.h"
+#import "OTNeighborhoodAnnotation.h"
+#import "OTPrivateCircleAnnotation.h"
+#import "OTOutingAnnotation.h"
+#import "OTOverlayFeederBehavior.h"
+#import "OTFeedItemFiltersViewController.h"
+#import "OTPublicFeedItemViewController.h"
+#import "OTTourCreatorViewController.h"

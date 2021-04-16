@@ -23,6 +23,10 @@
 @implementation OTFeedItemsFiltersTableDataSource
 
 - (void)initializeWith:(OTFeedItemFilters *)filter {
+    [self initializeWith:filter andIsalone:NO];
+}
+
+- (void)initializeWith:(OTFeedItemFilters *)filter andIsalone:(BOOL) isAlone {
     [super initialize];
     
     self.currentFilter = filter;
@@ -31,6 +35,7 @@
     self.groupHeaders = [filter groupHeaders];
     self.groupedSource = [filter toGroupedArray];
     self.parentArray = [filter parentArray];
+    self.isAlone = isAlone;
 }
 
 - (OTFeedItemFilters *)readCurrentFilter {
@@ -58,6 +63,9 @@
     CGFloat size = 44;
     BOOL isToursFeatureEnabled = IS_PRO_USER && OTAppConfiguration.supportsTourFunctionality;
     
+    if (self.isAlone) {
+        isToursFeatureEnabled = false;
+    }
     [self readCurrentFilter];
     
     NSArray<OTFeedItemFilter *> *parents = [self.currentFilter parentArray];
@@ -65,14 +73,17 @@
     OTFeedItemFilter *contribution = nil;
     OTFeedItemFilter *demande = nil;
     
+    int contribId = 0;
+    int demandId = 1;
+    
     if (parents.count > 0) {
         if (isToursFeatureEnabled) {
             contribution = parents[2];
             demande = parents[3];
         }
         else {
-            contribution = parents[1];
-            demande = parents[2];
+            contribution = parents[contribId];
+            demande = parents[demandId];
         }
         switch (item.key) {
             case FeedItemFilterKeyDemandeSocial:

@@ -56,11 +56,18 @@ NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIde
     [OTLogger logEvent:@"UserProfileClick"];
     if (self.tableViewDelegate != nil && [self.tableViewDelegate respondsToSelector:@selector(showUserProfile:)])
         [self.tableViewDelegate showUserProfile:self.feedItem.author.uID];
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showUserProfileFromFeed" object:self.feedItem.author.uID];
+    }
 }
 
 - (IBAction)doJoinRequest {
+    NSLog(@"***** do join request");
     if (self.tableViewDelegate != nil && [self.tableViewDelegate respondsToSelector:@selector(doJoinRequest:)])
         [self.tableViewDelegate doJoinRequest:self.feedItem];
+    else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showMenuFromFeed" object:self.feedItem];
+    }
 }
 
 @end

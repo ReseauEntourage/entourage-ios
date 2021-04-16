@@ -480,10 +480,10 @@ OTHeatzonesCollectionViewDelegate
                                              selector:@selector(updateGroupUnreadState:)
                                                  name:kUpdateGroupUnreadStateNotification
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateTotalUnreadCountBadge:)
-                                                 name:kUpdateTotalUnreadCountNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(updateTotalUnreadCountBadge:)
+//                                                 name:kUpdateTotalUnreadCountNotification
+//                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(entourageUpdated:)
                                                  name:kNotificationEntourageChanged
@@ -631,7 +631,7 @@ OTHeatzonesCollectionViewDelegate
 - (void) createEncounterFromNav {
     
     [self dismissViewControllerAnimated:NO completion:^{
-        [self switchToNewsfeed];
+       // [self switchToNewsfeed];
         [self.editEncounterBehavior doEdit:nil
                                    forTour:self.tourCreatorBehavior.tour.uid
                                andLocation:self.encounterLocation];
@@ -1675,10 +1675,10 @@ OTHeatzonesCollectionViewDelegate
         [self forceGetNewData];
 }
 
-- (void)updateTotalUnreadCountBadge:(NSNotification *) notification {
-    NSNumber *totalUnreadCount = [notification.object numberForKey:kNotificationTotalUnreadCountKey];
-    [OTAppState updateMessagesTabBadgeWithValue:totalUnreadCount.stringValue];
-}
+//- (void)updateTotalUnreadCountBadge:(NSNotification *) notification { //MARK: Ajouté dans le new VC
+//    NSNumber *totalUnreadCount = [notification.object numberForKey:kNotificationTotalUnreadCountKey];
+//    [OTAppState updateMessagesTabBadgeWithValue:totalUnreadCount.stringValue];
+//}
 
 - (void)encounterEdited: (NSNotification *)notification {
     OTEncounter *encounter = [notification readEncounter];

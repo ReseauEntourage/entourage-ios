@@ -71,11 +71,11 @@
 
 #define kNotificationCurrentUserUpdated @"NotificationCurrentUserUpdated"
 
-#define ABOUT_RATE_US_URL @"itms://itunes.apple.com/app/entourage-reseau-civique/id1072244410"
+#define ABOUT_RATE_US_URL @"https://apps.apple.com/fr/app/entourage-reseau-solidaire/id1072244410"
 #define ABOUT_FACEBOOK_URL @"https://www.facebook.com/EntourageReseauCivique"
 #define ABOUT_INSTAGRAM_URL @"https://www.instagram.com/reseauentourage/"
 #define ABOUT_TWITTER_URL @"https://twitter.com/r_entourage"
-#define ABOUT_WEBAPP_URL @"https://www.entourage.social/app/"
+#define ABOUT_WEBAPP_URL @"https://app.entourage.social/"
 #define ABOUT_CGU_URL @"http://www.entourage.social/cgu/index.html"
 #define ABOUT_CGU_REDIRECT_FORMAT @"%@links/terms/redirect?token=%@"
 #define ABOUT_WEBSITE_URL @"http://www.entourage.social"
@@ -83,8 +83,6 @@
 #define ABOUT_EMAIL_ADDRESS @"contact@entourage.social"
 #define ABOUT_POLITIQUE_DE_CONF_FORMAT @"%@links/privacy-policy/redirect?token=%@"
 #define ABOUT_LINKEDOUT @"https://www.linkedout.fr"
-
-
 
 #define SNAPSHOT_START "snapshot_start_%d.png"
 #define SNAPSHOT_STOP "snapshot_end_%d.png"
@@ -156,3 +154,4 @@
 #define SLUG_ACTION_SCB @"pedagogic-content"
 #define SLUG_ACTION_ASSO @"partner_action_faq"
 
+#define GIFT_URL @"https://entourage.iraiser.eu/jedonne/~mon-don"

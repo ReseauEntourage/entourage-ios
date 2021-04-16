@@ -3,7 +3,7 @@ format_version: 1.3.0
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 trigger_map:
 - push_branch: develop
-  workflow: Entourage-Beta
+  workflow: Entourage-NoFastlane
 workflows:
   Entourage-TestFlight:
     steps:
@@ -301,10 +301,46 @@ workflows:
             app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
             # download the fileS
             wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -ex
+
+            ./Scripts/count_commit.sh
     - xcode-archive:
         inputs:
         - export_method: ad-hoc
     - deploy-to-bitrise-io: {}
+    - post-jira-comment-with-build-details:
+        inputs:
+        - base_url: "$JIRA_BASE_URL"
+        - api_token: "$JIRA_API_TOKEN"
+        - user_name: "$JIRA_USER_EMAIL"
+        - issue_keys: "$JIRA_ISSUE_KEYS"
+    - slack:
+        inputs:
+        - channel: "#iosdev"
+        - from_username: Entourage-Beta
+        - from_username_on_error: Entourage-Beta
+        - message: |-
+            New *Entourage-Beta DEV* iOS build is available: $BITRISE_BUILD_NUMBER  here:
+            $BITRISE_APP_URL
+        - message_on_error: Oups, build has failed for Entourage iOS... @here
+        - pretext: "*Entourage-Beta Build Succeeded!*"
+        - pretext_on_error: "*Build Failed for Entourage Beta!*"
+        - api_token: "$SLACK_BOT_API_TOKEN"
+        - fields: |
+            App|${BITRISE_APP_TITLE}
+            Branch|${BITRISE_GIT_BRANCH}
+            Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
+            Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
+    - firebase-dsym-upload:
+        inputs:
+        - fdu_dsym_location: $BITRISE_DSYM_PATH
+        - fdu_google_services_location: "./entourage/Settings/Environment/GoogleService-Info-social.entourage.ios.beta.plist"
+    - cache-push: {}
     envs:
     - opts:
         is_expand: false
@@ -314,7 +350,7 @@ workflows:
     - trigger-bitrise-workflow:
         inputs:
         - api_token: "$BUILD_TRIGGER"
-        - workflow_id: Entourage-Beta
+        - workflow_id: Entourage-NoFastlane
 app:
   envs:
   - opts:

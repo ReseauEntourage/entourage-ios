@@ -14,15 +14,9 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - AWSCore (2.17.0)
-  - AWSS3 (2.17.0):
-    - AWSCore (= 2.17.0)
-  - FBSDKCoreKit (8.0.0):
-    - FBSDKCoreKit/Basics (= 8.0.0)
-    - FBSDKCoreKit/Core (= 8.0.0)
-  - FBSDKCoreKit/Basics (8.0.0)
-  - FBSDKCoreKit/Core (8.0.0):
-    - FBSDKCoreKit/Basics
+  - AWSCore (2.19.1)
+  - AWSS3 (2.19.1):
+    - AWSCore (= 2.19.1)
   - Firebase/Analytics (6.34.0):
     - Firebase/Core
   - Firebase/Core (6.34.0):
@@ -132,9 +126,9 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
-  - PromisesObjC (1.2.11)
-  - Protobuf (3.13.0)
-  - SimpleKeychain (0.12.0)
+  - PromisesObjC (1.2.12)
+  - Protobuf (3.14.0)
+  - SimpleKeychain (0.12.1)
   - SnapKit (4.0.1)
   - SVProgressHUD (2.2.5)
   - SWRevealViewController (2.3.0)
@@ -142,12 +136,11 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 4.0)
-  - AWSS3 (~> 2.4)
-  - FBSDKCoreKit (~> 8.0)
-  - Firebase/Analytics
-  - Firebase/Crashlytics
-  - Firebase/InAppMessaging
-  - Firebase/Messaging
+  - AWSS3 (~> 2.19.0)
+  - Firebase/Analytics (~> 6.34)
+  - Firebase/Crashlytics (~> 6.34)
+  - Firebase/InAppMessaging (~> 6.34)
+  - Firebase/Messaging (~> 6.34)
   - GoogleMaps (~> 3.8)
   - GooglePlaces (~> 3.8.0)
   - IQKeyboardManager (~> 6.5)
@@ -165,7 +158,6 @@ SPEC REPOS:
     - AFNetworking
     - AWSCore
     - AWSS3
-    - FBSDKCoreKit
     - Firebase
     - FirebaseABTesting
     - FirebaseAnalytics
@@ -196,9 +188,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  AWSCore: f20f7eb426d598ab753219e41ba524c0dc6f2b5c
-  AWSS3: 5b27ab973f0ed7fcd88ba52c98825c9984982541
-  FBSDKCoreKit: 9d27fe97a2fa2abe5eeefea8240e837623ab88e0
+  AWSCore: 55c154ae27efc5c98bdc30a0eeea5a35d10a2ab5
+  AWSS3: 2272253b098d07803af8dd20ce6ce7302bcffb47
   Firebase: c23a36d9e4cdf7877dfcba8dd0c58add66358999
   FirebaseABTesting: 8a9d8df3acc2b43f4a22014ddf9f601bca6af699
   FirebaseAnalytics: 3bb096873ee0d7fa4b6c70f5e9166b6da413cc7f
@@ -219,14 +210,14 @@ SPEC CHECKSUMS:
   kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
-  PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
-  Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
-  SimpleKeychain: 929c432dfd73afdc2ffcc982eca70bb4f2f2d700
+  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  Protobuf: 0cde852566359049847168e51bd1c690e0f70056
+  SimpleKeychain: 77443015b0f29005c16f74bf858469a9e9fb05e8
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 6146b2d118f8aa5c2f44881e9b74403a61a53d79
+PODFILE CHECKSUM: a06efee28725aab5a55a8195b3df0afe5c7ef4aa
 
 COCOAPODS: 1.9.3

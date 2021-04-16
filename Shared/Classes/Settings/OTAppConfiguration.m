@@ -7,7 +7,7 @@
 //
 
 #import <IQKeyboardManager/IQKeyboardManager.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKCoreKit.h>
 #import <SimpleKeychain/A0SimpleKeychain.h>
 
 #import "OTAppConfiguration.h"
@@ -21,7 +21,6 @@
 #import "OTPushNotificationsService.h"
 #import "OTPictureUploadService.h"
 #import "OTAuthService.h"
-#import "OTMainViewController.h"
 #import "OTOngoingTourService.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "UIColor+entourage.h"
@@ -81,6 +80,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 
     [self configureFirebase];
     [OTAnalyticsObserver init];
+    [FBSDKSettings initialize];
     
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = YES;

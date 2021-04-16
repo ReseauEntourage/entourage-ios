@@ -10,7 +10,6 @@
 
 // Controller
 #import "OTConfirmationViewController.h"
-#import "OTMainViewController.h"
 #import "OTConsts.h"
 #import "NSUserDefaults+OT.h"
 

@@ -55,6 +55,8 @@
 -(BOOL) isDefaultFilters;
 -(BOOL) isDefaultEncounterFilters;
 
+-(void)setAnnouncementOnly;
+-(void)setVersionAlone;
 @property (nonatomic) BOOL isEncouterFilter;
 @property (nonatomic) BOOL showPartners;
 @property (nonatomic) BOOL showAlls;

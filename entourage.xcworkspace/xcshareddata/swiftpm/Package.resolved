@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Facebook",
+        "repositoryURL": "https://github.com/facebook/facebook-ios-sdk",
+        "state": {
+          "branch": null,
+          "revision": "efb1705a421c85c022d45b8205e1a1f431f8ade8",
+          "version": "9.0.0"
+        }
+      },
+      {
+        "package": "MBProgressHUD",
+        "repositoryURL": "https://github.com/jdg/MBProgressHUD.git",
+        "state": {
+          "branch": null,
+          "revision": "bca42b801100b2b3a4eda0ba8dd33d858c780b0d",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "package": "SDWebImage",
+        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
+        "state": {
+          "branch": null,
+          "revision": "2c8ed9a2f3ad537dbe9e58e2ec18be361da112aa",
+          "version": "5.9.5"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
