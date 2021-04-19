@@ -242,6 +242,14 @@ class OTOnboardingV2StartViewController: UIViewController {
         OTAuthService().updateUserInformation(with: _currentUser, success: { (newUser) in
             newUser?.phone = _currentUser?.phone
             UserDefaults.standard.currentUser = newUser
+            //Set all types selected by default
+            if self.userTypeSelected == .alone {
+                self.updateAlone()
+            }
+            else if self.userTypeSelected == .neighbour {
+                self.updateNeighbour()
+            }
+            
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
                 self.showPopNotification()
@@ -364,44 +372,23 @@ class OTOnboardingV2StartViewController: UIViewController {
     }
     
     func updateAlone() {
+        temporarySdfActivities = SdfNeighbourActivities(isSdf: true)
         updateActivities(activities: temporarySdfActivities, isSdf: true)
     }
     
     func updateNeighbour() {
+        temporaryNeighbourActivities = SdfNeighbourActivities(isSdf: false)
         updateActivities(activities: temporaryNeighbourActivities, isSdf: false)
     }
     
     func updateActivities(activities:SdfNeighbourActivities?,isSdf:Bool) {
         if let _activities = activities, _activities.hasOneSelectionMin() {
-            SVProgressHUD.show()
-            if isSdf {
-                 OTLogger.logEvent(Action_Onboarding_InNeed_Mosaic)
-            }
-            else {
-                 OTLogger.logEvent(Action_Onboarding_Neighbor_Mosaic)
-            }
-           
             OTAuthService().updateUserInterests(_activities.getArrayForWS(),success: { (user) in
-                DispatchQueue.main.async {
-                    SVProgressHUD.dismiss()
-                    self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 1)!
-                    self.changeController()
-                }
+                let _currentUser = UserDefaults.standard.currentUser
+                user?.phone = _currentUser?.phone
+                UserDefaults.standard.currentUser = user
             }) { (error) in
-                DispatchQueue.main.async {
-                    SVProgressHUD.dismiss()
-                    self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 1)!
-                    self.changeController()
-                }
             }
-        }
-        else {
-            let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "attention_pop_title"), message: OTLocalisationService.getLocalizedValue(forKey: "onboard_asso_activity_error"), preferredStyle: .alert)
-            
-            let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"OK"), style: .default, handler: nil)
-            alertvc.addAction(action)
-            
-            self.navigationController?.present(alertvc, animated: true, completion: nil)
         }
     }
     

@@ -46,6 +46,7 @@ NSString *const kInterests = @"interests";
 NSString *const kKeyEventsCount = @"events_count";
 NSString *const kKeyActionsCount = @"actions_count";
 NSString *const kKeyGoodWavesParticipate = @"good_waves_participation";
+NSString *const kKeyEngaged = @"engaged";
 
 @interface OTUser ()
 @property (nonatomic, readwrite) NSString *uuid;
@@ -84,6 +85,7 @@ NSString *const kKeyGoodWavesParticipate = @"good_waves_participation";
         _eventsCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyEventsCount defaultValue:0];
         _actionsCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyActionsCount defaultValue:0];
         _isGoodWavesValidated = [[dictionary objectForKey:kKeyStats] boolForKey:kKeyGoodWavesParticipate defaultValue:NO];
+        _isEngaged = [dictionary boolForKey:kKeyEngaged defaultValue:NO];
         
         if ([[dictionary allKeys] containsObject:kKeyConversation]) {
             _conversation = [[OTConversation alloc] initWithDictionary:[dictionary objectForKey:kKeyConversation]];
@@ -174,6 +176,7 @@ NSString *const kKeyGoodWavesParticipate = @"good_waves_participation";
     [encoder encodeObject:self.eventsCount forKey:kKeyEventsCount];
     [encoder encodeObject:self.actionsCount forKey:kKeyActionsCount];
     [encoder encodeObject:[NSNumber numberWithBool:self.isGoodWavesValidated] forKey:kKeyGoodWavesParticipate];
+    [encoder encodeObject:[NSNumber numberWithBool:self.isEngaged] forKey:kKeyEngaged];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -209,6 +212,7 @@ NSString *const kKeyGoodWavesParticipate = @"good_waves_participation";
         self.eventsCount = [decoder decodeObjectForKey:kKeyEventsCount];
         self.actionsCount = [decoder decodeObjectForKey:kKeyActionsCount];
         self.isGoodWavesValidated = [[decoder decodeObjectForKey:kKeyGoodWavesParticipate] boolValue];
+        self.isEngaged = [[decoder decodeObjectForKey:kKeyEngaged] boolValue];
     }
     return self;
 }
@@ -336,5 +340,17 @@ NSString *const kKeyGoodWavesParticipate = @"good_waves_participation";
     
     return isAlone;
 }
+
+-(BOOL) isUserTypeNeighbour {
+    BOOL isNeighbour = NO;
+    
+    if ([self.goal isEqualToString:@"offer_help"]) {
+        isNeighbour = YES;
+    }
+    
+    return isNeighbour;
+}
+
+
 
 @end

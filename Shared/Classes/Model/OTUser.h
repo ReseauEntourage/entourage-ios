@@ -68,6 +68,7 @@ extern NSString *const kVisitedUserTag;
 - (BOOL)isAnonymous;
 
 -(BOOL) isUserTypeAlone;
+-(BOOL) isUserTypeNeighbour;
 /*
  * Returns the name of the role to be displayed under the user's fullname
  */
@@ -85,4 +86,5 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic) NSNumber * _Nonnull actionsCount;
 @property (strong, nonatomic) NSNumber * _Nonnull eventsCount;
 @property (nonatomic) BOOL isGoodWavesValidated;
+@property (nonatomic) BOOL isEngaged;
 @end

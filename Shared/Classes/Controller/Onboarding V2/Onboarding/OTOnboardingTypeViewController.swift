@@ -17,10 +17,13 @@ class OTOnboardingTypeViewController: UIViewController {
     
     @IBOutlet weak var ui_view_1: UIView!
     @IBOutlet weak var ui_label_view_1: UILabel!
+    @IBOutlet weak var ui_label_title_view_1: UILabel!
     @IBOutlet weak var ui_view_2: UIView!
     @IBOutlet weak var ui_label_view_2: UILabel!
+    @IBOutlet weak var ui_label_title_view_2: UILabel!
     @IBOutlet weak var ui_view_3: UIView!
     @IBOutlet weak var ui_label_view_3: UILabel!
+    @IBOutlet weak var ui_label_title_view_3: UILabel!
     
     weak var delegate:OnboardV2Delegate? = nil
     
@@ -51,14 +54,15 @@ class OTOnboardingTypeViewController: UIViewController {
         ui_label_title.text = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "onboard_type_title"), firstname)
         ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_sub")
         
-        let txt = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_description")!
-        let txtItalic = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_description_italic")!
-        
-        ui_label_description2.attributedText = Utilitaires.formatStringItalic(stringMessage: txt, italicTxt: txtItalic, color: UIColor.appBlack30, colorHighlight: UIColor.appBlack30, fontSize: 14, fontWeight: .regular)
+        ui_label_description2.text = ""
         
         ui_label_view_1.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice1")
         ui_label_view_2.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice2")
         ui_label_view_3.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice3")
+        
+        ui_label_title_view_1.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice_title1")
+        ui_label_title_view_2.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice_title2")
+        ui_label_title_view_3.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice_title3")
     }
     
     func selectInitialButtonSelected() {
