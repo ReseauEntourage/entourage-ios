@@ -675,9 +675,9 @@
 "onboard_type_sub" = "Comment voulez-vous personnaliser l’application ?";
 "onboard_type_description" = "Entourage vous pose ces quelques questions pour vous accueillir et vous accompagner au mieux !\n(Cette information ne sera pas visible par les autres membres du réseau).";
 "onboard_type_description_italic" = "(Cette information ne sera pas visible par les autres membres du réseau).";
-"onboard_type_choice1" = "Pour aider les sans-abris, créer du lien dans votre quartier et participer à des événements solidaires.";
-"onboard_type_choice2" = "Pour demander de l’aide, découvrir les lieux de solidarité et participer à des événements.";
-"onboard_type_choice3" = "Pour parler au nom de votre association sur le réseau Entourage.";
+"onboard_type_choice1" = "Pour aider les sans-abris et créer du lien dans votre quartier.";
+"onboard_type_choice2" = "Pour demander de l’aide et découvrir des lieux de solidarité.";
+"onboard_type_choice3" = "Pour parler au nom de votre structure.";
 "onboard_type_choice_title1" = "Voisin solidaire";
 "onboard_type_choice_title2" = "Personne SDF";
 "onboard_type_choice_title3" = "Association ou service public";

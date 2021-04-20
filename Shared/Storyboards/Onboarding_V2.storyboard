@@ -686,27 +686,27 @@ Ligne 4</string>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5mq-Xk-S1U">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5mq-Xk-S1U">
                                 <rect key="frame" x="16" y="196" width="343" height="380"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiO-lD-u8o">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="113.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboard_picto_help" translatesAutoresizingMaskIntoConstraints="NO" id="jjk-pf-Vob">
-                                                <rect key="frame" x="8" y="8" width="46" height="46"/>
+                                                <rect key="frame" x="8" y="16" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="Z4b-vC-gmI"/>
                                                     <constraint firstAttribute="width" constant="46" id="nrf-gS-3eh"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les sans-abris, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aH1-tb-fdM">
-                                                <rect key="frame" x="74" y="35.5" width="261" height="57.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les sans-abris et créer du lien dans votre quartier." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aH1-tb-fdM">
+                                                <rect key="frame" x="74" y="51.5" width="261" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voisin solidaire" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njy-E0-yoe">
-                                                <rect key="frame" x="74" y="8" width="111.5" height="19.5"/>
+                                                <rect key="frame" x="74" y="24" width="111.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -717,8 +717,8 @@ Ligne 4</string>
                                             <constraint firstItem="aH1-tb-fdM" firstAttribute="leading" secondItem="jjk-pf-Vob" secondAttribute="trailing" constant="20" id="6ZZ-Bq-tH8"/>
                                             <constraint firstItem="jjk-pf-Vob" firstAttribute="leading" secondItem="eiO-lD-u8o" secondAttribute="leading" constant="8" id="AT6-Mq-Rsu"/>
                                             <constraint firstItem="njy-E0-yoe" firstAttribute="leading" secondItem="jjk-pf-Vob" secondAttribute="trailing" constant="20" id="AuU-iu-478"/>
-                                            <constraint firstItem="jjk-pf-Vob" firstAttribute="top" secondItem="eiO-lD-u8o" secondAttribute="top" constant="8" id="NvY-9E-G0p"/>
-                                            <constraint firstItem="njy-E0-yoe" firstAttribute="top" secondItem="eiO-lD-u8o" secondAttribute="top" constant="8" id="fT0-yE-JhC"/>
+                                            <constraint firstItem="jjk-pf-Vob" firstAttribute="top" secondItem="eiO-lD-u8o" secondAttribute="top" constant="16" id="NvY-9E-G0p"/>
+                                            <constraint firstItem="njy-E0-yoe" firstAttribute="top" secondItem="jjk-pf-Vob" secondAttribute="top" constant="8" id="cr0-KU-zZo"/>
                                             <constraint firstItem="aH1-tb-fdM" firstAttribute="top" secondItem="njy-E0-yoe" secondAttribute="bottom" constant="8" id="pTB-GU-MNd"/>
                                             <constraint firstAttribute="trailing" secondItem="aH1-tb-fdM" secondAttribute="trailing" constant="8" id="wEE-9C-ePX"/>
                                         </constraints>
@@ -727,23 +727,23 @@ Ligne 4</string>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgN-rE-lgc">
-                                        <rect key="frame" x="0.0" y="130" width="343" height="120"/>
+                                        <rect key="frame" x="0.0" y="133.5" width="343" height="113"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboard_picto_alone" translatesAutoresizingMaskIntoConstraints="NO" id="ivb-P3-00y">
-                                                <rect key="frame" x="8" y="8" width="46" height="46"/>
+                                                <rect key="frame" x="8" y="16" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="2ar-DZ-HDe"/>
                                                     <constraint firstAttribute="width" constant="46" id="ojv-8o-m0S"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les sans-abris, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0wt-aH-VgP">
-                                                <rect key="frame" x="74" y="35.5" width="261" height="57.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour demander de l’aide et découvrir des lieux de solidarité." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0wt-aH-VgP">
+                                                <rect key="frame" x="74" y="51.5" width="261" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voisin solidaire" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMZ-rn-dLZ">
-                                                <rect key="frame" x="74" y="8" width="111.5" height="19.5"/>
+                                                <rect key="frame" x="74" y="24" width="111.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -753,34 +753,34 @@ Ligne 4</string>
                                         <constraints>
                                             <constraint firstItem="ivb-P3-00y" firstAttribute="leading" secondItem="lgN-rE-lgc" secondAttribute="leading" constant="8" id="2ro-xF-6qv"/>
                                             <constraint firstItem="lMZ-rn-dLZ" firstAttribute="leading" secondItem="ivb-P3-00y" secondAttribute="trailing" constant="20" id="D7x-mZ-4zy"/>
-                                            <constraint firstItem="lMZ-rn-dLZ" firstAttribute="top" secondItem="ivb-P3-00y" secondAttribute="top" id="IPb-wg-fiW"/>
+                                            <constraint firstItem="lMZ-rn-dLZ" firstAttribute="top" secondItem="ivb-P3-00y" secondAttribute="top" constant="8" id="IPb-wg-fiW"/>
                                             <constraint firstAttribute="trailing" secondItem="0wt-aH-VgP" secondAttribute="trailing" constant="8" id="bpT-lR-2ni"/>
                                             <constraint firstItem="0wt-aH-VgP" firstAttribute="leading" secondItem="ivb-P3-00y" secondAttribute="trailing" constant="20" id="frL-8p-zOz"/>
                                             <constraint firstItem="0wt-aH-VgP" firstAttribute="top" secondItem="lMZ-rn-dLZ" secondAttribute="bottom" constant="8" id="gmn-a9-9H4"/>
-                                            <constraint firstItem="ivb-P3-00y" firstAttribute="top" secondItem="lgN-rE-lgc" secondAttribute="top" constant="8" id="lVW-eY-loO"/>
+                                            <constraint firstItem="ivb-P3-00y" firstAttribute="top" secondItem="lgN-rE-lgc" secondAttribute="top" constant="16" id="lVW-eY-loO"/>
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="4iX-Pr-IdZ" appends="YES" id="YxM-XF-U6q"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RMr-Vf-UkM">
-                                        <rect key="frame" x="0.0" y="260" width="343" height="120"/>
+                                        <rect key="frame" x="0.0" y="266.5" width="343" height="113.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboard_picto_asso" translatesAutoresizingMaskIntoConstraints="NO" id="aM5-wB-wop">
-                                                <rect key="frame" x="8" y="8" width="46" height="46"/>
+                                                <rect key="frame" x="8" y="16" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="46" id="PCS-T3-pFp"/>
                                                     <constraint firstAttribute="height" constant="46" id="oS2-zO-HeU"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les sans-abris, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vp-3d-jFx">
-                                                <rect key="frame" x="74" y="35.5" width="261" height="57.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour demander de l’aide et découvrir des lieux de solidarité." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vp-3d-jFx">
+                                                <rect key="frame" x="74" y="51.5" width="261" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voisin solidaire" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Cs-Km-9WO">
-                                                <rect key="frame" x="74" y="8" width="111.5" height="19.5"/>
+                                                <rect key="frame" x="74" y="24" width="111.5" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -788,11 +788,11 @@ Ligne 4</string>
                                         </subviews>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstItem="0Cs-Km-9WO" firstAttribute="top" secondItem="aM5-wB-wop" secondAttribute="top" id="EjP-dp-Owd"/>
+                                            <constraint firstItem="0Cs-Km-9WO" firstAttribute="top" secondItem="aM5-wB-wop" secondAttribute="top" constant="8" id="EjP-dp-Owd"/>
                                             <constraint firstItem="aM5-wB-wop" firstAttribute="leading" secondItem="RMr-Vf-UkM" secondAttribute="leading" constant="8" id="Ltq-kV-ZzM"/>
                                             <constraint firstItem="0Cs-Km-9WO" firstAttribute="leading" secondItem="aM5-wB-wop" secondAttribute="trailing" constant="20" id="Osz-CI-E2r"/>
                                             <constraint firstItem="6Vp-3d-jFx" firstAttribute="leading" secondItem="aM5-wB-wop" secondAttribute="trailing" constant="20" id="eOA-Z0-j6N"/>
-                                            <constraint firstItem="aM5-wB-wop" firstAttribute="top" secondItem="RMr-Vf-UkM" secondAttribute="top" constant="8" id="igk-Nc-xE3"/>
+                                            <constraint firstItem="aM5-wB-wop" firstAttribute="top" secondItem="RMr-Vf-UkM" secondAttribute="top" constant="16" id="igk-Nc-xE3"/>
                                             <constraint firstAttribute="trailing" secondItem="6Vp-3d-jFx" secondAttribute="trailing" constant="8" id="mhL-HY-eA9"/>
                                             <constraint firstItem="6Vp-3d-jFx" firstAttribute="top" secondItem="0Cs-Km-9WO" secondAttribute="bottom" constant="8" id="uMa-Ds-4kS"/>
                                         </constraints>
