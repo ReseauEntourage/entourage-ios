@@ -30,6 +30,54 @@
 
 @implementation OTNewsFeedsFilter
 
+-(instancetype) initFromNewFeed {
+    self = [super init];
+    if (self) {
+        self.isAnnouncementOnly = NO;
+        self.isPro = IS_PRO_USER;
+        self.showOnlyMyEntourages = NO;
+        
+        self.showPartners = NO;
+        self.showAlls = YES;
+        self.showNeighborhood = YES;
+        self.showPrivateCircle = YES;
+       
+        if (self.isVersionAlone) {
+            self.showOuting = NO;
+        }
+        else {
+            self.showOuting = YES;
+        }
+        
+        self.showPastOuting = NO;
+        
+        self.showMedical = self.isPro;
+        self.showSocial = self.isPro;
+        self.showDistributive = self.isPro;
+        self.showDemand = YES;
+        self.showContribution = YES;
+        self.showTours = self.isPro;
+        
+        self.showDemandeSocial = YES;
+        self.showDemandeHelp = YES;
+        self.showDemandeResource = YES;
+        self.showDemandeInfo = YES;
+        self.showDemandeSkill = YES;
+        self.showDemandeOther = YES;
+        
+        self.showContributionSocial = YES;
+        self.showContributionHelp = YES;
+        self.showContributionResource = YES;
+        self.showContributionInfo = YES;
+        self.showContributionSkill = YES;
+        self.showContributionOther = YES;
+        
+        self.timeframeInHours = 30 * 24;
+    }
+    
+    return self;
+}
+
 - (instancetype)init {
     self = [super init];
     self.isAnnouncementOnly = NO;

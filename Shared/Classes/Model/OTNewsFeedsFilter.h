@@ -60,4 +60,6 @@
 @property (nonatomic) BOOL isEncouterFilter;
 @property (nonatomic) BOOL showPartners;
 @property (nonatomic) BOOL showAlls;
+
+-(instancetype) initFromNewFeed;
 @end

@@ -155,6 +155,7 @@ extension OTHomeNeoActionViewController : EntourageEditorDelegate {
         let sb = UIStoryboard.init(name: "Main2", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "OTMain0") as! OTFeedsViewController
         vc.isFromEvent = false
+        vc.isFromNeoCourse = true
         vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: "entourages_title_home")
         self.navigationController?.pushViewController(vc, animated: true)
     }

@@ -144,10 +144,15 @@ OTHeatzonesCollectionViewDelegate
     self.newsFeedsSourceBehavior.tableDelegate = self.tableView;
     
     NSLog(@"***** ici current filters init");
-    self.currentFilter = [OTNewsFeedsFilter new];
+    self.currentFilter = [[OTNewsFeedsFilter alloc]initFromNewFeed];
     self.currentFilter.showOuting = self.isFromEvent ? YES : NO;
     self.currentFilter.isPro = NO;
     [self.currentFilter setVersionAlone];
+    
+    if (self.isFromNeoCourse) {
+        [self.currentFilter setNeighbourFilters];
+    }
+    
     
     self.newsFeedsSourceBehavior.currentFilter = self.currentFilter;
     

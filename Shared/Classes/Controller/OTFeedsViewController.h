@@ -19,6 +19,8 @@
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;
 @property (nonatomic) BOOL isFromEvent;
 @property (nonatomic, strong) NSString *titleFrom;
+@property (nonatomic) BOOL isFromNeoCourse;
+
 
 - (void)zoomToCurrentLocation:(id)sender;
 - (void)zoomMapToLocation:(CLLocation*)location;
