@@ -109,4 +109,12 @@
     return [UIColor colorWithRed: 51/255.0 green: 51/255.0 blue: 51/255.0 alpha: 1];
 }
 
++ (UIColor*)appLightPink {
+    return [UIColor colorWithRed: 254/255.0 green: 239/255.0 blue: 233/255.0 alpha: 1];
+}
+
++ (UIColor*)appLightGrey246 {
+    return [UIColor colorWithRed: 246/255.0 green: 246/255.0 blue: 246/255.0 alpha: 1];
+}
+
 @end

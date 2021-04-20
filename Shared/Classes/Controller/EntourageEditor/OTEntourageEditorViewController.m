@@ -127,6 +127,10 @@
     
     [self.editTableSource configureWith:self.entourage];
     
+    if (self.isFromHomeNeo) {
+        [self.editNavBehavior setIsFromHomeNeo:YES];
+    }
+    
     if (!self.isEditingEvent && self.entourage.categoryObject == nil) {
         [self.editNavBehavior editCategory:self.entourage];
     }
@@ -158,6 +162,7 @@
 
 - (void)sendEntourage:(UIButton*)sender {
     [OTLogger logEvent:@"ConfirmCreateEntourage"];
+    
     
     if ([self.entourage isOuting]) {
         if (![self isTitleValid] || ![self isAddressValid] || ![self isEventDateValid]) {
@@ -195,6 +200,15 @@
 }
 
 - (void)showAddActionUserConsentView:(UIButton*)sender {
+    
+    if (self.isFromHomeNeo) {
+        self.entourage.consentObtained = @(YES);
+        self.editTableSource.entourage.consentObtained = self.entourage.consentObtained;
+        [self createOrUpdateEntourage:sender
+                           completion:nil];
+        return;
+    }
+    
     UIStoryboard *storyboard = [UIStoryboard entourageEditorStoryboard];
     OTAddActionFirstConsentViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OTAddActionFirstConsentViewController"];
     __weak typeof(vc) weakVC = vc;

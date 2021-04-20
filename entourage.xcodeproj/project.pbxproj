@@ -24,6 +24,9 @@
 		2B1A8F8325278D27008419E6 /* GuideDetailTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1A8F8225278D27008419E6 /* GuideDetailTableViewCells.swift */; };
 		2B26962325DEAA1200D174DF /* OTFeedsViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B26962225DEAA1200D174DF /* OTFeedsViewController2.swift */; };
 		2B29BD94250F6CCE00663506 /* OTMainGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */; };
+		2B2EED0B2624478100566A90 /* OTHomeNeoHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EED0A2624478100566A90 /* OTHomeNeoHelpViewController.swift */; };
+		2B2EED0F2624936600566A90 /* MainNeo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B2EED0E2624936600566A90 /* MainNeo.storyboard */; };
+		2B2EED172624953900566A90 /* OTHomeNeoStreetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EED162624953900566A90 /* OTHomeNeoStreetViewController.swift */; };
 		2B354584255311B900562062 /* PublicFeedDetailNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B354583255311B900562062 /* PublicFeedDetailNew.storyboard */; };
 		2B3CA4DF260B4558006A87AE /* OTHomeHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA4DE260B4558006A87AE /* OTHomeHelpViewController.swift */; };
 		2B3CA4E3260B581C006A87AE /* OTHomeHelpReporterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3CA4E2260B581C006A87AE /* OTHomeHelpReporterViewController.swift */; };
@@ -42,6 +45,9 @@
 		2B77B15A25506642000DD474 /* OTDetailActionEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B77B15925506642000DD474 /* OTDetailActionEventViewController.swift */; };
 		2B7C488224B899FA0003C854 /* HomeToolTipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B7C488124B899FA0003C854 /* HomeToolTipsView.xib */; };
 		2B7C488424B89A210003C854 /* OTHomeTooltipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C488324B89A210003C854 /* OTHomeTooltipView.swift */; };
+		2B7C62D7261E031D00B2C29F /* OTHomeNeoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C62D6261E031D00B2C29F /* OTHomeNeoViewController.swift */; };
+		2B7C62DB261E03E800B2C29F /* OTHomeExpertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7C62DA261E03E800B2C29F /* OTHomeExpertViewController.swift */; };
+		2B8026CD262719600032F8E2 /* OTHomeNeoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8026CC262719600032F8E2 /* OTHomeNeoService.swift */; };
 		2B8DF99D25F7BA5F00504D26 /* OTHomeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8DF99C25F7BA5F00504D26 /* OTHomeMainViewController.swift */; };
 		2B916BA12456E42700F048FA /* OTPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B916BA02456E42700F048FA /* OTPicturePreviewResizeViewController.swift */; };
 		2B930F54246D554B0058E81B /* OTLoginV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B930F53246D554B0058E81B /* OTLoginV2ViewController.swift */; };
@@ -68,6 +74,7 @@
 		2BB3BA3D2440E99D0080BBE5 /* Utilitaires.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB3BA3C2440E99C0080BBE5 /* Utilitaires.swift */; };
 		2BB6C19F24A0AFD600364E13 /* OTProfileSelectActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6C19E24A0AFD600364E13 /* OTProfileSelectActionsViewController.swift */; };
 		2BB79BCE256BC84700E6B3D7 /* OTGDSSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB79BCD256BC84600E6B3D7 /* OTGDSSearchViewController.swift */; };
+		2BC1BC2326209E1D0092FBF7 /* OTHomeNeoCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC1BC2226209E1D0092FBF7 /* OTHomeNeoCells.swift */; };
 		2BC579DD24B3751D00BB80C9 /* OTMainTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC579DC24B3751C00BB80C9 /* OTMainTabbarViewController.swift */; };
 		2BCC3398247D4631007E3E94 /* OTOnboardingSearchAssoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC3397247D4631007E3E94 /* OTOnboardingSearchAssoViewController.swift */; };
 		2BCC339A247D4A7B007E3E94 /* OTAssoSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC3399247D4A7B007E3E94 /* OTAssoSearchTableViewCell.swift */; };
@@ -81,6 +88,10 @@
 		2BE75F3124C84C3B00D4C856 /* OTSettingsUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE75F3024C84C3A00D4C856 /* OTSettingsUserTableViewCell.swift */; };
 		2BE75F3324C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE75F3224C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift */; };
 		2BE75F3524C84C5100D4C856 /* OTSettingsDebugTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE75F3424C84C5100D4C856 /* OTSettingsDebugTableViewCell.swift */; };
+		2BEC86F72625A4BD000BD5C3 /* OTHomeNeoTourStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC86F62625A4BD000BD5C3 /* OTHomeNeoTourStartViewController.swift */; };
+		2BEC86FF2625D317000BD5C3 /* OTHomeNeoTourListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC86FE2625D317000BD5C3 /* OTHomeNeoTourListViewController.swift */; };
+		2BEC87032625D842000BD5C3 /* OTHomeNeoTourSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC87022625D842000BD5C3 /* OTHomeNeoTourSendViewController.swift */; };
+		2BEC87072625E623000BD5C3 /* OTHomeNeoActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEC87062625E623000BD5C3 /* OTHomeNeoActionViewController.swift */; };
 		2BF176A125DD5B8600B3C922 /* OTFeedToursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF176A025DD5B8600B3C922 /* OTFeedToursViewController.m */; };
 		2BF2520D24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2520C24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift */; };
 		2BF958802451D78100C36863 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9587F2451D78100C36863 /* Extensions.swift */; };
@@ -571,6 +582,9 @@
 		2B1A8F8225278D27008419E6 /* GuideDetailTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideDetailTableViewCells.swift; sourceTree = "<group>"; };
 		2B26962225DEAA1200D174DF /* OTFeedsViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFeedsViewController2.swift; sourceTree = "<group>"; };
 		2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMainGuideViewController.swift; sourceTree = "<group>"; };
+		2B2EED0A2624478100566A90 /* OTHomeNeoHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeNeoHelpViewController.swift; sourceTree = "<group>"; };
+		2B2EED0E2624936600566A90 /* MainNeo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainNeo.storyboard; sourceTree = "<group>"; };
+		2B2EED162624953900566A90 /* OTHomeNeoStreetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeNeoStreetViewController.swift; sourceTree = "<group>"; };
 		2B354583255311B900562062 /* PublicFeedDetailNew.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PublicFeedDetailNew.storyboard; sourceTree = "<group>"; };
 		2B3CA4DE260B4558006A87AE /* OTHomeHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeHelpViewController.swift; sourceTree = "<group>"; };
 		2B3CA4E2260B581C006A87AE /* OTHomeHelpReporterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeHelpReporterViewController.swift; sourceTree = "<group>"; };
@@ -590,6 +604,9 @@
 		2B77B15925506642000DD474 /* OTDetailActionEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTDetailActionEventViewController.swift; sourceTree = "<group>"; };
 		2B7C488124B899FA0003C854 /* HomeToolTipsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeToolTipsView.xib; sourceTree = "<group>"; };
 		2B7C488324B89A210003C854 /* OTHomeTooltipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeTooltipView.swift; sourceTree = "<group>"; };
+		2B7C62D6261E031D00B2C29F /* OTHomeNeoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeNeoViewController.swift; sourceTree = "<group>"; };
+		2B7C62DA261E03E800B2C29F /* OTHomeExpertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeExpertViewController.swift; sourceTree = "<group>"; };
+		2B8026CC262719600032F8E2 /* OTHomeNeoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeNeoService.swift; sourceTree = "<group>"; };
 		2B8DF99C25F7BA5F00504D26 /* OTHomeMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeMainViewController.swift; sourceTree = "<group>"; };
 		2B916BA02456E42700F048FA /* OTPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
 		2B930F53246D554B0058E81B /* OTLoginV2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTLoginV2ViewController.swift; sourceTree = "<group>"; };
@@ -616,6 +633,7 @@
 		2BB3BA3C2440E99C0080BBE5 /* Utilitaires.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilitaires.swift; sourceTree = "<group>"; };
 		2BB6C19E24A0AFD600364E13 /* OTProfileSelectActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTProfileSelectActionsViewController.swift; sourceTree = "<group>"; };
 		2BB79BCD256BC84600E6B3D7 /* OTGDSSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGDSSearchViewController.swift; sourceTree = "<group>"; };
+		2BC1BC2226209E1D0092FBF7 /* OTHomeNeoCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeNeoCells.swift; sourceTree = "<group>"; };
 		2BC579DC24B3751C00BB80C9 /* OTMainTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMainTabbarViewController.swift; sourceTree = "<group>"; };
 		2BCC3397247D4631007E3E94 /* OTOnboardingSearchAssoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTOnboardingSearchAssoViewController.swift; sourceTree = "<group>"; };
 		2BCC3399247D4A7B007E3E94 /* OTAssoSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTAssoSearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -630,6 +648,10 @@
 		2BE75F3024C84C3A00D4C856 /* OTSettingsUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSettingsUserTableViewCell.swift; sourceTree = "<group>"; };
 		2BE75F3224C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSettingsMenuTableViewCell.swift; sourceTree = "<group>"; };
 		2BE75F3424C84C5100D4C856 /* OTSettingsDebugTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSettingsDebugTableViewCell.swift; sourceTree = "<group>"; };
+		2BEC86F62625A4BD000BD5C3 /* OTHomeNeoTourStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeNeoTourStartViewController.swift; sourceTree = "<group>"; };
+		2BEC86FE2625D317000BD5C3 /* OTHomeNeoTourListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeNeoTourListViewController.swift; sourceTree = "<group>"; };
+		2BEC87022625D842000BD5C3 /* OTHomeNeoTourSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeNeoTourSendViewController.swift; sourceTree = "<group>"; };
+		2BEC87062625E623000BD5C3 /* OTHomeNeoActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeNeoActionViewController.swift; sourceTree = "<group>"; };
 		2BF1769F25DD5B8600B3C922 /* OTFeedToursViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTFeedToursViewController.h; sourceTree = "<group>"; };
 		2BF176A025DD5B8600B3C922 /* OTFeedToursViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTFeedToursViewController.m; sourceTree = "<group>"; };
 		2BF2520C24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTUserDescriptionDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -1500,7 +1522,17 @@
 			isa = PBXGroup;
 			children = (
 				2BAD246625F8FD3700FD8E47 /* OTNewFeedsService.swift */,
+				2B8026CC262719600032F8E2 /* OTHomeNeoService.swift */,
 				2B8DF99C25F7BA5F00504D26 /* OTHomeMainViewController.swift */,
+				2B7C62D6261E031D00B2C29F /* OTHomeNeoViewController.swift */,
+				2B2EED0A2624478100566A90 /* OTHomeNeoHelpViewController.swift */,
+				2B2EED162624953900566A90 /* OTHomeNeoStreetViewController.swift */,
+				2BEC86F62625A4BD000BD5C3 /* OTHomeNeoTourStartViewController.swift */,
+				2BEC86FE2625D317000BD5C3 /* OTHomeNeoTourListViewController.swift */,
+				2BEC87022625D842000BD5C3 /* OTHomeNeoTourSendViewController.swift */,
+				2BEC87062625E623000BD5C3 /* OTHomeNeoActionViewController.swift */,
+				2BC1BC2226209E1D0092FBF7 /* OTHomeNeoCells.swift */,
+				2B7C62DA261E03E800B2C29F /* OTHomeExpertViewController.swift */,
 				2B13BD8525FA5A7D00B0E071 /* OTHomeTableViewCells.swift */,
 				2B13BD8D25FA5AF900B0E071 /* OTHomeCollectionViewCells.swift */,
 				2B3CA4DE260B4558006A87AE /* OTHomeHelpViewController.swift */,
@@ -3051,6 +3083,7 @@
 			children = (
 				2BE1F47725DAE16500CE318E /* Main2.storyboard */,
 				A21D65942085FDAA00EF8E0E /* Main.storyboard */,
+				2B2EED0E2624936600566A90 /* MainNeo.storyboard */,
 				A21D65832085FDAA00EF8E0E /* SolidarityGuideFilters.storyboard */,
 				A21D65842085FDAA00EF8E0E /* Social.storyboard */,
 				A21D65852085FDAA00EF8E0E /* UserPicture.storyboard */,
@@ -3404,6 +3437,7 @@
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
 				37339CD321FF01860048B6E1 /* OTPillLabelView.xib in Resources */,
 				2BE1F47825DAE16600CE318E /* Main2.storyboard in Resources */,
+				2B2EED0F2624936600566A90 /* MainNeo.storyboard in Resources */,
 				A21D65A52085FDAA00EF8E0E /* Social.storyboard in Resources */,
 				2B354584255311B900562062 /* PublicFeedDetailNew.storyboard in Resources */,
 				A21D64AB2085E8B400EF8E0E /* Oradea.gpx in Resources */,
@@ -3694,6 +3728,7 @@
 				A202EBF92085D2C80058F32C /* OTFeedItemsTableView.m in Sources */,
 				2B3CA4DF260B4558006A87AE /* OTHomeHelpViewController.swift in Sources */,
 				96B658B8209A5AF000EB0398 /* UIFont+Extensions.swift in Sources */,
+				2BC1BC2326209E1D0092FBF7 /* OTHomeNeoCells.swift in Sources */,
 				A202EB7F2085D2C80058F32C /* OTCategoryViewController.m in Sources */,
 				2B13BD8E25FA5AF900B0E071 /* OTHomeCollectionViewCells.swift in Sources */,
 				A202EB252085D2C70058F32C /* OTMemberCountCell.m in Sources */,
@@ -3800,6 +3835,7 @@
 				A202ED2F2085D2C80058F32C /* NSDate+ui.m in Sources */,
 				A202EBF12085D2C80058F32C /* OTFilterCellTableViewCell.m in Sources */,
 				A202E91C20E381D200992C09 /* OTNeighborhoodAnnotation.m in Sources */,
+				2BEC86FF2625D317000BD5C3 /* OTHomeNeoTourListViewController.swift in Sources */,
 				373353B4230173EF00436CAA /* OTTimestampsCell.m in Sources */,
 				A202E80B2085D0FE0058F32C /* OTAppDelegate.m in Sources */,
 				A202ED152085D2C80058F32C /* OTEditEncounterBehavior.m in Sources */,
@@ -3826,6 +3862,7 @@
 				A202EC352085D2C80058F32C /* OTMapAnnotationProviderBehavior.m in Sources */,
 				A202EC1B2085D2C80058F32C /* OTPictureUploadService.m in Sources */,
 				A202ECDF2085D2C80058F32C /* UIColor+entourage.m in Sources */,
+				2BEC87032625D842000BD5C3 /* OTHomeNeoTourSendViewController.swift in Sources */,
 				A202EAD32085D2C70058F32C /* OTFeedItemTimelinePoint.m in Sources */,
 				96B658AA209A380000EB0398 /* OTMenuCellView.swift in Sources */,
 				A202EC0D2085D2C80058F32C /* OTAuthService.m in Sources */,
@@ -3875,6 +3912,7 @@
 				A202EBB92085D2C80058F32C /* OTMessageViewController.m in Sources */,
 				A202EC4F2085D2C80058F32C /* OTShareFeedItemBehavior.m in Sources */,
 				A202ED1D2085D2C80058F32C /* OTAnnouncementFactory.m in Sources */,
+				2B2EED172624953900566A90 /* OTHomeNeoStreetViewController.swift in Sources */,
 				2B1A8F79252768FD008419E6 /* OTGuideDetailPoiViewController.swift in Sources */,
 				A202EBAD2085D2C80058F32C /* OTFeedItemsFilterCell.m in Sources */,
 				2B8DF99D25F7BA5F00504D26 /* OTHomeMainViewController.swift in Sources */,
@@ -3893,6 +3931,7 @@
 				37AD8D072268C6E40045FF4E /* OTPlaceholderBackground.m in Sources */,
 				A202EB112085D2C70058F32C /* OTHeatZoneCollectionViewCell.m in Sources */,
 				A202EB452085D2C80058F32C /* OTJoinRequestedNotOwnerCell.m in Sources */,
+				2BEC87072625E623000BD5C3 /* OTHomeNeoActionViewController.swift in Sources */,
 				A202EC8D2085D2C80058F32C /* OTDataSourceBehavior.m in Sources */,
 				A202ED052085D2C80058F32C /* OTEntourageMessaging.m in Sources */,
 				A202EAE32085D2C70058F32C /* OTUnreadMessageCount.m in Sources */,
@@ -3941,6 +3980,7 @@
 				A202EBC12085D2C80058F32C /* OTActivityProvider.m in Sources */,
 				A202EC372085D2C80058F32C /* OTStartTourAnnotation.m in Sources */,
 				2BB6C19F24A0AFD600364E13 /* OTProfileSelectActionsViewController.swift in Sources */,
+				2B2EED0B2624478100566A90 /* OTHomeNeoHelpViewController.swift in Sources */,
 				A202EBF32085D2C80058F32C /* OTFilterRadioButton.m in Sources */,
 				2B62B030247C22CA00EE6D24 /* OTOnboardingAssoActivityViewController.swift in Sources */,
 				376C24802208A60900AA0DEB /* OTGradientView.m in Sources */,
@@ -3952,6 +3992,7 @@
 				A202EB672085D2C80058F32C /* OTNewsFeedCell.m in Sources */,
 				A202EC452085D2C80058F32C /* OTManageInvitationBehavior.m in Sources */,
 				371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */,
+				2BEC86F72625A4BD000BD5C3 /* OTHomeNeoTourStartViewController.swift in Sources */,
 				A202EC852085D2C80058F32C /* OTFeedItemFiltersCellProvider.m in Sources */,
 				A202EBFD2085D2C80058F32C /* OTRequestOperationManager.m in Sources */,
 				A202ED192085D2C80058F32C /* OTTourMapHandler.m in Sources */,
@@ -3969,6 +4010,8 @@
 				2BB3BA332440A2170080BBE5 /* OTPreOnboardingV2ViewController.swift in Sources */,
 				A202EB432085D2C80058F32C /* OTJoinRequestedCell.m in Sources */,
 				A202EC752085D2C80058F32C /* OTMyEntouragesDataSource.m in Sources */,
+				2B7C62DB261E03E800B2C29F /* OTHomeExpertViewController.swift in Sources */,
+				2B8026CD262719600032F8E2 /* OTHomeNeoService.swift in Sources */,
 				2B6ECD12249236BB005AAF1D /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */,
 				A202EB772085D2C80058F32C /* OTSummaryInfoCell.m in Sources */,
 				2B48AAFE24AB3D1300639789 /* OTAssoContactTableViewCell.swift in Sources */,
@@ -3983,6 +4026,7 @@
 				2B93FB6724AA3C580015B47D /* OTAssociationDetailViewController.swift in Sources */,
 				A202ECF72085D2C80058F32C /* OTFeedItemFactory.m in Sources */,
 				2B7C488424B89A210003C854 /* OTHomeTooltipView.swift in Sources */,
+				2B7C62D7261E031D00B2C29F /* OTHomeNeoViewController.swift in Sources */,
 				A202ED2D2085D2C80058F32C /* NSDictionary+Parsing.m in Sources */,
 				A202ECC52085D2C80058F32C /* OTCloseKeyboardOnTapBehavior.m in Sources */,
 				A202EADF2085D2C70058F32C /* OTMyFeedMessage.m in Sources */,

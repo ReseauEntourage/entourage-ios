@@ -976,3 +976,77 @@
 "home_button_helpEntourage" = "J’aide Entourage autrement";
 "home_button_show_more_actions" = "Afficher plus de demandes et d’initiatives";
 "home_button_show_more_events" = "Afficher plus d'événements";
+
+//Home NEO
+"home_neo_title" = "Démarrez l’aventure humaine Entourage !";
+"home_neo_title_bold" = "Entourage !";
+"home_neo_cell1_title" = "Premiers pas chez Entourage";
+"home_neo_cell1_description" = "Vous souhaitez aider les personnes SDF mais vous ne savez pas comment ? Laissez-vous guider pour oser la rencontre";
+"home_neo_cell1_button" = "DÉCOUVRIR";
+"home_neo_cell2_title" = "Agir maintenant";
+"home_neo_cell2_description" = "Passez à l’action en rejoignant les initiatives solidaires de votre quartier.";
+"home_neo_cell2_button" = "SE LANCER";
+
+//Neo help
+"home_neo_help_title" = "Entourage vous accompagne dans votre démarche";
+"home_neo_help_title_bold" = "vous accompagne";
+"home_neo_help_cell1_title" = "Comprendre le monde de la rue";
+"home_neo_help_cell1_description" = "Faites le plein de conseils et de témoignages  pour gagner en confiance.";
+"home_neo_help_cell1_button" = "C’est parti !";
+
+"home_neo_help_cell2_title" = "Faire des rencontres dans la rue";
+"home_neo_help_cell2_description" = "Prenez part aux Rencontres Nomades avec des membres du réseau Entourage pour aller discuter avec des personnes SDF.";
+"home_neo_help_cell2_button" = "En savoir plus";
+
+"home_neo_help_cell3_title" = "Participer à un événement";
+"home_neo_help_cell3_description" = "Passez un moment entre voisins avec et sans domicile dans un cadre convivial : pique-nique, apéro, pétanque ...";
+"home_neo_help_cell3_button" = "DÉCOUVRIR";
+
+//Neo Street
+
+"home_neo_street_title" = "Comprendre le monde de la rue";
+"home_neo_street_subtitle" = "Les formats proposés :";
+"home_neo_street_cell1_title" = "Atelier en ligne hebdomadaire";
+"home_neo_street_cell1_description" = "1h de sensibilisation par l’équipe Entourage enrichie de témoignages de la rue pour poser toutes vos questions en direct.";
+"home_neo_street_cell1_button" = "S’inscrire";
+
+"home_neo_street_cell2_title" = "Simple Comme Bonjour";
+"home_neo_street_cell2_description" = "Des vidéos et un guide pédagogique pour déconstruire ses préjugés et à oser la rencontre.";
+"home_neo_street_cell2_button" = "DÉCOUVRIR";
+
+//Neo Tour
+"home_neo_tour_start_top_title" = "Maraude en groupe";
+"home_neo_tour_start_title" = "Comment ça se passe ?";
+"home_neo_tour_start_info1" = "Les maraudes sociales ont lieu dans les zones où Entourage a une communauté active";
+"home_neo_tour_start_info2" = "Avec un membre du réseau";
+"home_neo_tour_start_info3" = "Ont pour but d’aller à la rencontre des personnes SDF";
+"home_neo_tour_start_info4" = "Par groupe de 2 ou 3";
+"home_neo_tour_start_info5" = "L’organisation se fait par e-mail avec les membres des antennes locales d’Entourage";
+"home_neo_tour_start_button_title" = "Participer à une maraude";
+
+"home_neo_tour_areas_top_title" = "Maraude en groupe";
+"home_neo_tour_areas_title" = "Où voulez-vous participer à une maraude sociale ?";
+"home_neo_tour_areas_description" = "Sélectionnez une localisation parmi celles disponibles:";
+
+"home_neo_tour_send_top_title" = " Maraude à %@";
+"home_neo_tour_send_title" = "Demande de renseignements";
+"home_neo_tour_send_description" = "Envoyez un message à l’équipe d’Entourage pour en savoir plus. Vous recevrez une réponse par email.";
+"home_neo_tour_send_button" = "J’envoie ma demande";
+
+"home_neo_tour_send_email" = "Plus qu’un pas !\nRenseignez votre email pour recevoir la réponse de l’équipe Entourage :";
+"home_neo_tour_send_email_placeholder" = "Adresse email";
+"home_neo_tour_send_ok" = "Votre message\na bien été envoyé.";
+
+"home_neo_action_title" = "Les actions concrètes";
+"home_neo_action_title_top1" = "Participer";
+"home_neo_action_title1" = "Répondre à un besoin";
+"home_neo_action_title2" = "Évènements Entourage";
+"home_neo_action_title_top3" = "Proposer";
+"home_neo_action_title3" = "Proposer du matériel";
+"home_neo_action_title4" = "Proposer un service";
+"home_neo_action_title5" = "Relayer un Besoin";
+"home_neo_action_title6" = "Offrir un café solidaire";
+
+"home_neo_action_bottom_title" = "Comment franchir le pas ?";
+"home_neo_action_bottom_description" = "Des vidéos et un guide pédagogique pour déconstruire ses préjugés et se sentir prêt à oser la rencontre.";
+"home_neo_action_bottom_button" = "S’informer";

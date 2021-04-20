@@ -9,7 +9,7 @@
 import UIKit
 
 class OTHomeHelpViewController: UIViewController {
-
+    
     @IBOutlet weak var ui_title_bt_1: UILabel!
     @IBOutlet weak var ui_title_bt_2: UILabel!
     @IBOutlet weak var ui_title_bt_3: UILabel!
