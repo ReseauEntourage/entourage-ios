@@ -129,6 +129,7 @@
     
     if (self.isFromHomeNeo) {
         [self.editNavBehavior setIsFromHomeNeo:YES];
+        self.editTableSource.isHomeNeo = YES;
     }
     
     if (!self.isEditingEvent && self.entourage.categoryObject == nil) {
