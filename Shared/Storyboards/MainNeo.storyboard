@@ -451,7 +451,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_maraude" translatesAutoresizingMaskIntoConstraints="NO" id="FWs-7I-b5W" customClass="img_maraude">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_maraude" translatesAutoresizingMaskIntoConstraints="NO" id="FWs-7I-b5W">
                                 <rect key="frame" x="0.0" y="88" width="414" height="117"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="117" id="6oF-GS-Op4"/>
@@ -723,7 +723,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demande de renseignements" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyt-Ey-dRN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demande de renseignements" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyt-Ey-dRN">
                                 <rect key="frame" x="25" y="238" width="364" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -786,18 +786,18 @@ Renseignez votre email pour recevoir la réponse de l’équipe Entourage :</str
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYk-U8-YiB">
-                                <rect key="frame" x="115.5" y="419.5" width="183.5" height="57"/>
+                                <rect key="frame" x="110.5" y="419.5" width="193.5" height="57"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nc4-U3-C51">
-                                        <rect key="frame" x="38" y="8" width="137.5" height="41"/>
+                                        <rect key="frame" x="48" y="8" width="137.5" height="41"/>
                                         <string key="text">Votre message 
 a bien été envoyé.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verified" translatesAutoresizingMaskIntoConstraints="NO" id="nR5-D4-uIh">
-                                        <rect key="frame" x="8" y="17.5" width="22" height="22"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_check_green" translatesAutoresizingMaskIntoConstraints="NO" id="nR5-D4-uIh">
+                                        <rect key="frame" x="8" y="13.5" width="32" height="30"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -821,7 +821,7 @@ L’équipe vous recontactera par email.  </string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_maraude" translatesAutoresizingMaskIntoConstraints="NO" id="l5X-Fj-VB3" customClass="img_maraude">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_maraude2" translatesAutoresizingMaskIntoConstraints="NO" id="l5X-Fj-VB3">
                                 <rect key="frame" x="0.0" y="88" width="414" height="117"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="117" id="cpy-JC-3ah"/>
@@ -902,7 +902,7 @@ L’équipe vous recontactera par email.  </string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0M-K2-oBd">
-                                                    <rect key="frame" x="32" y="54" width="366" height="76"/>
+                                                    <rect key="frame" x="28" y="54" width="358" height="76"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_maraude_neo_1" translatesAutoresizingMaskIntoConstraints="NO" id="ibq-QO-gL6">
                                                             <rect key="frame" x="16" y="25.5" width="25" height="25"/>
@@ -912,13 +912,13 @@ L’équipe vous recontactera par email.  </string>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paris" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6W-AL-72j">
-                                                            <rect key="frame" x="56" y="8" width="251" height="60"/>
+                                                            <rect key="frame" x="56" y="8" width="243" height="60"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_show" translatesAutoresizingMaskIntoConstraints="NO" id="RFB-0q-Xef">
-                                                            <rect key="frame" x="325" y="25.5" width="25" height="25"/>
+                                                            <rect key="frame" x="317" y="25.5" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="XGx-QC-cpg"/>
                                                                 <constraint firstAttribute="height" constant="25" id="i3c-hh-UTQ"/>
@@ -947,12 +947,12 @@ L’équipe vous recontactera par email.  </string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="CkY-xy-LDA" secondAttribute="trailing" constant="8" id="7RL-c4-8VZ"/>
-                                                <constraint firstItem="e0M-K2-oBd" firstAttribute="leading" secondItem="c7m-Qo-xxU" secondAttribute="leading" constant="32" id="JwS-5v-RmB"/>
+                                                <constraint firstItem="e0M-K2-oBd" firstAttribute="leading" secondItem="c7m-Qo-xxU" secondAttribute="leading" constant="28" id="JwS-5v-RmB"/>
                                                 <constraint firstItem="e0M-K2-oBd" firstAttribute="top" secondItem="CkY-xy-LDA" secondAttribute="bottom" constant="10" id="XqD-Y8-9CF"/>
                                                 <constraint firstItem="CkY-xy-LDA" firstAttribute="top" secondItem="c7m-Qo-xxU" secondAttribute="top" constant="20" id="fwJ-Lp-F9i"/>
                                                 <constraint firstAttribute="bottom" secondItem="e0M-K2-oBd" secondAttribute="bottom" constant="10" id="gAw-0Q-HLE"/>
                                                 <constraint firstItem="CkY-xy-LDA" firstAttribute="leading" secondItem="c7m-Qo-xxU" secondAttribute="leading" constant="28" id="gXd-fw-Gze"/>
-                                                <constraint firstAttribute="trailing" secondItem="e0M-K2-oBd" secondAttribute="trailing" constant="16" id="ylQ-v5-C7P"/>
+                                                <constraint firstAttribute="trailing" secondItem="e0M-K2-oBd" secondAttribute="trailing" constant="28" id="ylQ-v5-C7P"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -970,7 +970,7 @@ L’équipe vous recontactera par email.  </string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlM-1k-fOY">
-                                                    <rect key="frame" x="32" y="0.0" width="366" height="76"/>
+                                                    <rect key="frame" x="28" y="0.0" width="358" height="76"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_maraude_neo_1" translatesAutoresizingMaskIntoConstraints="NO" id="cvk-qf-qgd">
                                                             <rect key="frame" x="16" y="25.5" width="25" height="25"/>
@@ -980,13 +980,13 @@ L’équipe vous recontactera par email.  </string>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paris" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8SH-WD-3DI">
-                                                            <rect key="frame" x="56" y="8" width="251" height="60"/>
+                                                            <rect key="frame" x="56" y="8" width="243" height="60"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_show" translatesAutoresizingMaskIntoConstraints="NO" id="YHf-ip-aAV">
-                                                            <rect key="frame" x="325" y="25.5" width="25" height="25"/>
+                                                            <rect key="frame" x="317" y="25.5" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="Pmd-dy-ZJw"/>
                                                                 <constraint firstAttribute="height" constant="25" id="pr0-o7-utn"/>
@@ -1008,10 +1008,10 @@ L’équipe vous recontactera par email.  </string>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="BlM-1k-fOY" firstAttribute="leading" secondItem="ccd-QQ-dgi" secondAttribute="leading" constant="32" id="HJ1-7L-6Lu"/>
+                                                <constraint firstItem="BlM-1k-fOY" firstAttribute="leading" secondItem="ccd-QQ-dgi" secondAttribute="leading" constant="28" id="HJ1-7L-6Lu"/>
                                                 <constraint firstItem="BlM-1k-fOY" firstAttribute="top" secondItem="ccd-QQ-dgi" secondAttribute="top" id="K0f-1C-mYg"/>
                                                 <constraint firstAttribute="bottom" secondItem="BlM-1k-fOY" secondAttribute="bottom" constant="10" id="NbH-9U-GBt"/>
-                                                <constraint firstAttribute="trailing" secondItem="BlM-1k-fOY" secondAttribute="trailing" constant="16" id="yEl-WN-cp8"/>
+                                                <constraint firstAttribute="trailing" secondItem="BlM-1k-fOY" secondAttribute="trailing" constant="28" id="yEl-WN-cp8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1028,16 +1028,16 @@ L’équipe vous recontactera par email.  </string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AV6-cx-xfE">
-                                                    <rect key="frame" x="32" y="16" width="366" height="159.5"/>
+                                                    <rect key="frame" x="28" y="16" width="358" height="159.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Des vidéos et un guide pédagogique pour déconstruire ses préjugés et se sentir prêt à oser la rencontre." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QtH-R1-pxh">
-                                                            <rect key="frame" x="20" y="48" width="326" height="50.5"/>
+                                                            <rect key="frame" x="20" y="48" width="318" height="50.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Comment franchir le pas ?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="To4-4z-50P">
-                                                            <rect key="frame" x="20" y="20" width="326" height="24"/>
+                                                            <rect key="frame" x="20" y="20" width="318" height="24"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                             <color key="textColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1087,8 +1087,8 @@ L’équipe vous recontactera par email.  </string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="AV6-cx-xfE" secondAttribute="bottom" constant="25" id="F1B-nc-LtG"/>
-                                                <constraint firstItem="AV6-cx-xfE" firstAttribute="leading" secondItem="OVb-Dy-GUC" secondAttribute="leading" constant="32" id="Fex-Yn-Qmi"/>
-                                                <constraint firstAttribute="trailing" secondItem="AV6-cx-xfE" secondAttribute="trailing" constant="16" id="LMF-O0-mpG"/>
+                                                <constraint firstItem="AV6-cx-xfE" firstAttribute="leading" secondItem="OVb-Dy-GUC" secondAttribute="leading" constant="28" id="Fex-Yn-Qmi"/>
+                                                <constraint firstAttribute="trailing" secondItem="AV6-cx-xfE" secondAttribute="trailing" constant="28" id="LMF-O0-mpG"/>
                                                 <constraint firstItem="AV6-cx-xfE" firstAttribute="top" secondItem="OVb-Dy-GUC" secondAttribute="top" constant="16" id="dBh-rg-D8X"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1126,10 +1126,11 @@ L’équipe vous recontactera par email.  </string>
         <image name="arrow_show" width="29" height="20"/>
         <image name="arrow_show_orange" width="24" height="14"/>
         <image name="img_maraude" width="375" height="117"/>
+        <image name="img_maraude2" width="375" height="117"/>
+        <image name="picto_check_green" width="32" height="30"/>
         <image name="picto_maraude_neo_1" width="19" height="25"/>
         <image name="picto_understand2" width="20" height="30"/>
         <image name="picture_number2_2" width="95" height="90"/>
-        <image name="verified" width="22" height="22"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

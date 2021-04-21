@@ -28,7 +28,7 @@ class OTHomeNeoTourStartViewController: UIViewController {
         self.title = OTLocalisationService.getLocalizedValue(forKey: "home_neo_tour_start_top_title")
         ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "home_neo_tour_start_title")
         
-        ui_button_title.text = OTLocalisationService.getLocalizedValue(forKey: "home_neo_tour_start_button_title")
+        ui_button_title.text = OTLocalisationService.getLocalizedValue(forKey: "home_neo_tour_start_button_title")?.uppercased()
     }
     
     @IBAction func action_next(_ sender: Any) {
@@ -42,7 +42,7 @@ class OTHomeNeoTourStartViewController: UIViewController {
 extension OTHomeNeoTourStartViewController: UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,15 +68,12 @@ class OTHomeTourCell: UITableViewCell {
             pictoTxt = "picto_maraude_neo_1"
             titleTxt = "home_neo_tour_start_info1"
         case 1:
-            pictoTxt = "picto_maraude_neo_2"
-            titleTxt = "home_neo_tour_start_info2"
-        case 2:
             pictoTxt = "picto_maraude_neo_3"
             titleTxt = "home_neo_tour_start_info3"
-        case 3:
+        case 2:
             pictoTxt = "picto_maraude_neo_4"
             titleTxt = "home_neo_tour_start_info4"
-        case 4:
+        case 3:
             pictoTxt = "picto_maraude_neo_5"
             titleTxt = "home_neo_tour_start_info5"
         default:

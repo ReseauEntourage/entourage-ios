@@ -32,6 +32,8 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_title_home_mode: UILabel!
     @IBOutlet weak var ui_view_choice_bis: UIView!
     @IBOutlet weak var ui_switch_home_mode: UISwitch!
+    @IBOutlet weak var ui_title_info_account: UILabel!
+    @IBOutlet weak var ui_description_info_account: UILabel!
     @IBOutlet weak var ui_constraint_height_view_choice_mode: NSLayoutConstraint!
     
     weak var delegate:TapMenuProfileDelegate? = nil
@@ -60,6 +62,21 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         ui_view_choice_bis.layer.cornerRadius = 5
         ui_view_choice_bis.layer.borderWidth = 1
         ui_view_choice_bis.layer.borderColor = UIColor.appOrange()?.cgColor
+
+        ui_title_info_account.text = OTLocalisationService.getLocalizedValue(forKey: "setting_home_title")
+
+        
+        let font:UIFont? = UIFont(name: "Helvetica", size:17)
+        let fontB:UIFont? = UIFont(name: "Helvetica", size:15)
+        let fontSuper:UIFont? = UIFont(name: "Helvetica", size:10)
+        
+        let attStringButton:NSMutableAttributedString = NSMutableAttributedString(string:OTLocalisationService.getLocalizedValue(forKey: "setting_home_button_type"), attributes: [.font:font!])
+        attStringButton.setAttributes([.font:fontSuper!,.baselineOffset:10], range: NSRange(location:6,length:3))
+        ui_title_home_mode.attributedText = attStringButton
+        
+        let _attStringTitle:NSMutableAttributedString = NSMutableAttributedString(string:OTLocalisationService.getLocalizedValue(forKey: "setting_home_description"), attributes: [.font:fontB!])
+        _attStringTitle.setAttributes([.font:fontSuper!,.baselineOffset:10], range: NSRange(location:9,length:3))
+        ui_description_info_account.attributedText = _attStringTitle
     }
     
     func roundPartielView(view:UIView,isTop:Bool) {
@@ -100,6 +117,7 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         ui_label_nb_events.text = "\(currentUser.eventsCount)"
         ui_label_nb_actions.text = "\(currentUser.actionsCount)"
         
+        
         var isExpertMode = false
         if let isExpertSettings = UserDefaults.standard.object(forKey: "isExpertMode") as? Bool {
             isExpertMode = isExpertSettings
@@ -113,14 +131,14 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         
         if currentUser.isUserTypeNeighbour() {
             ui_view_choice_mode.isHidden = false
-            ui_constraint_height_view_choice_mode.constant = 108
+            ui_constraint_height_view_choice_mode.constant = 188
         }
         else {
             isExpertMode = true
             ui_view_choice_mode.isHidden = true
             ui_constraint_height_view_choice_mode.constant = 0
         }
-        ui_switch_home_mode.isOn = isExpertMode
+        ui_switch_home_mode.isOn = !isExpertMode
     }
     
     //MARK: - IBActions -
@@ -141,14 +159,14 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     }
     
     @IBAction func action_change_home_mode(_ sender: UISwitch) {
-        if sender.isOn {
+        if !sender.isOn {
             OTLogger.logEvent(Action_Switch_NeoToExpert)
         }
         else {
             OTLogger.logEvent(Action_Switch_ExpertToNeo)
         }
         
-        UserDefaults.standard.setValue(sender.isOn, forKey: "isExpertMode")
+        UserDefaults.standard.setValue(!sender.isOn, forKey: "isExpertMode")
     }
 }
 

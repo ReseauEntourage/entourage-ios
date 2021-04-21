@@ -39,11 +39,11 @@ extension OTHomeNeoHelpViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! OTHomeNeoCell
         switch indexPath.row {
         case 0:
-            cell.populateCell(cellType: .Orange, title: "home_neo_help_cell1_title", description: "home_neo_help_cell1_description", imageNamed: "picto_action_1", buttonTitle: "home_neo_help_cell1_button")
+            cell.populateCell(cellType: .Orange, title: "home_neo_help_cell1_title", description: "home_neo_help_cell1_description", imageNamed: "picto_help_1", buttonTitle: "home_neo_help_cell1_button")
         case 1:
-            cell.populateCell(cellType: .White, title: "home_neo_help_cell2_title", description: "home_neo_help_cell2_description", imageNamed: "picto_action_2", buttonTitle: "home_neo_help_cell2_button")
+            cell.populateCell(cellType: .White, title: "home_neo_help_cell2_title", description: "home_neo_help_cell2_description", imageNamed: "picto_help_2", buttonTitle: "home_neo_help_cell2_button")
         case 2:
-            cell.populateCell(cellType: .White, title: "home_neo_help_cell3_title", description: "home_neo_help_cell3_description", imageNamed: "picto_action_3", buttonTitle: "home_neo_help_cell3_button")
+            cell.populateCell(cellType: .White, title: "home_neo_help_cell3_title", description: "home_neo_help_cell3_description", imageNamed: "picto_help_3", buttonTitle: "home_neo_help_cell3_button")
         default:
             break
         }
