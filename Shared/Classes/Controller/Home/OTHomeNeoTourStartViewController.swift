@@ -34,6 +34,7 @@ class OTHomeNeoTourStartViewController: UIViewController {
     @IBAction func action_next(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "HomeNeoTourList") {
             self.navigationController?.pushViewController(vc, animated: true)
+            OTLogger.logEvent(Action_NeoFeedFirst_GoTour)
         }
     }
 }

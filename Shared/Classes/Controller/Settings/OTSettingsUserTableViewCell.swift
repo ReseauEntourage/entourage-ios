@@ -141,6 +141,12 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     }
     
     @IBAction func action_change_home_mode(_ sender: UISwitch) {
+        if sender.isOn {
+            OTLogger.logEvent(Action_Switch_NeoToExpert)
+        }
+        else {
+            OTLogger.logEvent(Action_Switch_ExpertToNeo)
+        }
         
         UserDefaults.standard.setValue(sender.isOn, forKey: "isExpertMode")
     }

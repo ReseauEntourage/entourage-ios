@@ -54,12 +54,14 @@ extension OTHomeNeoHelpViewController: UITableViewDelegate, UITableViewDataSourc
         if indexPath.row == 0 {
             if let vc = storyboard?.instantiateViewController(withIdentifier: "HomeNeoStreet") {
                 self.navigationController?.pushViewController(vc, animated: true)
+                OTLogger.logEvent(Action_NeoFeedFirst_Training)
             }
         }
         
         if indexPath.row == 1 {
             if let vc = storyboard?.instantiateViewController(withIdentifier: "HomeNeoTourStart") {
                 self.navigationController?.pushViewController(vc, animated: true)
+                OTLogger.logEvent(Action_NeoFeedFirst_Tour)
             }
         }
         if indexPath.row == 2 {
@@ -68,6 +70,7 @@ extension OTHomeNeoHelpViewController: UITableViewDelegate, UITableViewDataSourc
             vc.isFromEvent = true
             vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: "outings_title_home")
             self.navigationController?.pushViewController(vc, animated: true)
+            OTLogger.logEvent(Action_NeoFeedFirst_Events)
         }
     }
 }

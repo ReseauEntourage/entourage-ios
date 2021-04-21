@@ -21,6 +21,8 @@ class OTHomeNeoViewController: UIViewController {
         let _title = Utilitaires.formatString(stringMessage: _message, coloredTxt: _mess_Orange, color: .black, colorHighlight: UIColor.appOrange(), fontSize: 30.0, fontWeight: .regular, fontColoredWeight: .regular)
         
         self.ui_title.attributedText = _title
+        
+        OTLogger.logEvent(View_Start_NeoFeed)
     }
 }
 
@@ -45,11 +47,13 @@ extension OTHomeNeoViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             if let vc = storyboard?.instantiateViewController(withIdentifier: "HomeNeoFirstHelp") {
                 self.navigationController?.pushViewController(vc, animated: true)
+                OTLogger.logEvent(Action_NeoFeed_FirstStep)
             }
         }
         else {
             if let vc = storyboard?.instantiateViewController(withIdentifier: "HomeNeoAction") {
                 self.navigationController?.pushViewController(vc, animated: true)
+                OTLogger.logEvent(Action_NeoFeed_ActNow)
             }
         }
     }

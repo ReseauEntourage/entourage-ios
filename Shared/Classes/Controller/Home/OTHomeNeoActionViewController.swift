@@ -52,42 +52,57 @@ extension OTHomeNeoActionViewController: UITableViewDataSource,UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+        
+        
         if indexPath.row == 6 {
             if let url = OTSafariService.redirectUrl(withIdentifier: SLUG_ACTION_SCB) {
                 OTSafariService.launchInAppBrowser(with: url)
+                OTLogger.logEvent(Action_NeoFeedAct_How1Step)
             }
             return
         }
         
         if indexPath.row == 0 {
             showAllActions()
+            OTLogger.logEvent(Action_NeoFeedAct_Needs)
             return
         }
         if indexPath.row == 1 {
             showAllEvents()
+            OTLogger.logEvent(Action_NeoFeedAct_Events)
             return
         }
         
         var type = ""
         var category = ""
+        var _tagAnalytic = ""
+        var tagAnalyticName = ""
         
         switch indexPath.row {
         case 2:
             type = "contribution"
             category = "mat_help"
+            _tagAnalytic = Action_NeoFeedAct_OfferMaterial
+            tagAnalyticName = Action_NeoFeedAct_NameMaterial
         case 3:
             type = "contribution"
             category = "resource"
+            _tagAnalytic = Action_NeoFeedAct_OfferService
+            tagAnalyticName = Action_NeoFeedAct_NameService
         case 4:
             type = "ask_for_help"
             category = "mat_help"
+            _tagAnalytic = Action_NeoFeedAct_RelayNeed
+            tagAnalyticName = Action_NeoFeedAct_NameNeeds
         case 5:
             type = "contribution"
             category = "social"
+            _tagAnalytic = Action_NeoFeedAct_Coffee
+            tagAnalyticName = Action_NeoFeedAct_NameCoffee
         default:
             break
         }
-        
+        OTLogger.logEvent(_tagAnalytic)
         let sb = UIStoryboard.init(name: "EntourageEditor", bundle: nil)
         if let navVC = sb.instantiateInitialViewController() as? UINavigationController, let vc = navVC.topViewController as? OTEntourageEditorViewController {
             vc.isEditingEvent = false
@@ -96,6 +111,7 @@ extension OTHomeNeoActionViewController: UITableViewDataSource,UITableViewDelega
             vc.entourage = setEmptyEntourage(cat: cat)
             vc.entourageEditorDelegate = self
             vc.isFromHomeNeo = true
+            vc.tagNameAnalytic = tagAnalyticName
             temporaryNavController = navVC
             self.navigationController?.present(temporaryNavController!, animated: true, completion: nil)
         }

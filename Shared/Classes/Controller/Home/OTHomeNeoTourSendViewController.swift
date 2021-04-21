@@ -75,6 +75,10 @@ class OTHomeNeoTourSendViewController: UIViewController {
     
     func sendTourAnswer() {
         SVProgressHUD.show()
+        
+        let _analytic = String.init(format: Action_NeoFeedFirst_Send_TourCity, area.postalCode)
+        OTLogger.logEvent(_analytic)
+        
         OTHomeNeoService.sendAnswer(withId: area.areaId) { (error) in
             SVProgressHUD.dismiss()
             if error == nil {

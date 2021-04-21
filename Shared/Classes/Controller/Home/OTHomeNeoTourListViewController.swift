@@ -57,6 +57,9 @@ extension OTHomeNeoTourListViewController: UITableViewDataSource,UITableViewDele
         if let vc = storyboard?.instantiateViewController(withIdentifier: "HomeNeoTourSend") as? OTHomeNeoTourSendViewController {
             vc.area = area
             self.navigationController?.pushViewController(vc, animated: true)
+            
+            let _analytic = String.init(format: Action_NeoFeedFirst_TourCity, area.postalCode)
+            OTLogger.logEvent(_analytic)
         }
     }
 }

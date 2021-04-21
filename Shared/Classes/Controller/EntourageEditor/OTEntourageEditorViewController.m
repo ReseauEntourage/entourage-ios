@@ -136,6 +136,14 @@
     }
 }
 
+- (void)dismissModal {
+    if (self.isFromHomeNeo) {
+        NSString * tag = [NSString stringWithFormat:Action_NeoFeedAct_Cancel_X,self.tagNameAnalytic];
+        [OTLogger logEvent:tag];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)setupEmptyEntourage {
     self.entourage = [OTEntourage new];
     self.entourage.status = ENTOURAGE_STATUS_OPEN;
@@ -309,7 +317,16 @@
                                     self.entourage = sentEntourage;
                                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageCreated object:nil];
                                     [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
-                                    [OTLogger logEvent:@"CreateEntourageSuccess"];
+                                    
+        
+        
+        if (self.isFromHomeNeo) {
+            NSString * tag = [NSString stringWithFormat:Action_NeoFeedAct_Send_X,self.tagNameAnalytic];
+            [OTLogger logEvent:tag];
+        }
+        else {
+            [OTLogger logEvent:@"CreateEntourageSuccess"];
+        }
                                     
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         

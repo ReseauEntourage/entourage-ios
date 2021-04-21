@@ -49,12 +49,14 @@ extension OTHomeNeoStreetViewController: UITableViewDelegate, UITableViewDataSou
         if indexPath.row == 0 {
             if let url = OTSafariService.redirectUrl(withIdentifier: SLUG_EVENT_BRITE) {
                 OTSafariService.launchInAppBrowser(with: url)
+                OTLogger.logEvent(Action_NeoFeedFirst_OnlineTraining)
             }
         }
         
         if indexPath.row == 1 {
             if let url = OTSafariService.redirectUrl(withIdentifier: SLUG_ACTION_SCB) {
                 OTSafariService.launchInAppBrowser(with: url)
+                OTLogger.logEvent(Action_NeoFeedFirst_SCBonjour)
             }
         }
     }
