@@ -1051,6 +1051,11 @@
 "home_neo_action_bottom_description" = "Des vidéos et un guide pédagogique pour déconstruire ses préjugés et se sentir prêt à oser la rencontre.";
 "home_neo_action_bottom_button" = "S’informer";
 
+"home_neo_pop_info_title" = "Nouveauté Entourage !";
+"home_neo_pop_info_message" = "Découvrez le mode d’affichage “Premiers pas” de l’application pour être guidé dans votre découverte des programmes Entourage.\n\nVous pouvez changer de mode depuis votre page profil.";
+"home_neo_pop_info_button_ok" = "OK";
+"home_neo_pop_info_button_profil" = "Voir profil";
+
 "setting_home_title" = "📱 MON COMPTE ENTOURAGE";
 "setting_home_description" = "Le mode 1ers pas vous guide pour découvrir Entourage progressivement. ";
 "setting_home_button_type" = "Mode 1ers pas";

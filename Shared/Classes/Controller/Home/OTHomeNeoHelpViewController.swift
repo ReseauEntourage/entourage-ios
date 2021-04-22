@@ -18,7 +18,7 @@ class OTHomeNeoHelpViewController: UIViewController {
         
         let _message:String = OTLocalisationService.getLocalizedValue(forKey: "home_neo_help_title")
         let _mess_Orange:String = OTLocalisationService.getLocalizedValue(forKey: "home_neo_help_title_bold")
-        let _title = Utilitaires.formatString(stringMessage: _message, coloredTxt: _mess_Orange, color: .black, colorHighlight: UIColor.appOrange(), fontSize: 30.0, fontWeight: .regular, fontColoredWeight: .regular)
+        let _title = Utilitaires.formatString(stringMessage: _message, coloredTxt: _mess_Orange, color: .black, colorHighlight: UIColor.appOrange(), fontSize: 24.0, fontWeight: .regular, fontColoredWeight: .regular)
         
         self.ui_title.attributedText = _title
     }

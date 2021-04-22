@@ -18,11 +18,47 @@ class OTHomeNeoViewController: UIViewController {
         
         let _message:String = OTLocalisationService.getLocalizedValue(forKey: "home_neo_title")
         let _mess_Orange:String = OTLocalisationService.getLocalizedValue(forKey: "home_neo_title_bold")
-        let _title = Utilitaires.formatString(stringMessage: _message, coloredTxt: _mess_Orange, color: .black, colorHighlight: UIColor.appOrange(), fontSize: 30.0, fontWeight: .regular, fontColoredWeight: .regular)
+        let _title = Utilitaires.formatString(stringMessage: _message, coloredTxt: _mess_Orange, color: .black, colorHighlight: UIColor.appOrange(), fontSize: 24.0, fontWeight: .regular, fontColoredWeight: .regular)
         
         self.ui_title.attributedText = _title
         
         OTLogger.logEvent(View_Start_NeoFeed)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkProfile()
+    }
+    
+    func checkProfile() {
+        
+        let isAllreadyInfoNeo:Bool = UserDefaults.standard.bool(forKey: "isAllreadyInfoNeo")
+        
+        if !isAllreadyInfoNeo {
+            UserDefaults.standard.setValue(true, forKey: "isAllreadyInfoNeo")
+            if let currentUser = UserDefaults.standard.currentUser {
+                if currentUser.isUserTypeNeighbour() && !currentUser.isEngaged {
+                    let message = OTLocalisationService.getLocalizedValue(forKey: "home_neo_pop_info_message")
+                    
+                    let alertVC = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "home_neo_pop_info_title"), message: message, preferredStyle: .alert)
+                    
+                    let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey: "home_neo_pop_info_button_profil"), style: .default) { (action) in
+                        
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "tapProfilTab"), object: nil)
+                        DispatchQueue.main.async {
+                            alertVC.dismiss(animated: false, completion: nil)
+                        }
+                    }
+                    
+                    let actionCancel = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey: "home_neo_pop_info_button_ok"), style: .default,handler: nil)
+                    
+                    alertVC.addAction(actionCancel)
+                    alertVC.addAction(action)
+                    
+                    self.present(alertVC, animated: true, completion: nil)
+                }
+            }
+        }
     }
 }
 

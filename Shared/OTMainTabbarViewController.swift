@@ -42,6 +42,7 @@ class OTMainTabbarViewController: UITabBarController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(showActions), name: NSNotification.Name(rawValue: "showAlls"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showEvents), name: NSNotification.Name(rawValue: "showEvents"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(tapProfilTab), name: NSNotification.Name(rawValue: "tapProfilTab"), object: nil)
     }
     
     @objc func showTooltip() {
@@ -61,6 +62,13 @@ class OTMainTabbarViewController: UITabBarController {
     }
     @objc func switchToHomeTab() {
         showHomeVC()
+    }
+    
+    @objc func tapProfilTab() {
+        DispatchQueue.main.async {
+            self.selectedIndex = 4
+            self.boldSelectedItem()
+        }
     }
     
     func setupVCs() {

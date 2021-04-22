@@ -2920,24 +2920,24 @@
 			isa = PBXGroup;
 			children = (
 				A202EA6A2085D2C60058F32C /* OTDeepLinkService.h */,
+				A202EA722085D2C60058F32C /* OTDeepLinkService.m */,
+				A202EA742085D2C60058F32C /* OTOnboardingJoinService.h */,
 				A202EA6B2085D2C60058F32C /* OTOnboardingJoinService.m */,
 				A2306AB820C81F730094370E /* ISO8601DateFormatter.h */,
 				A2306AB720C81F720094370E /* ISO8601DateFormatter.m */,
 				A202EA6C2085D2C60058F32C /* OTMessagingService.h */,
-				A202EA6D2085D2C60058F32C /* OTOngoingTourService.h */,
-				A202EA6E2085D2C60058F32C /* OTUnreadMessagesService.m */,
-				A202EA6F2085D2C60058F32C /* OTCategoryFromJsonService.h */,
-				A202EA702085D2C60058F32C /* OTLogger.h */,
-				A202EA712085D2C60058F32C /* OTAddressBookService.h */,
-				A202EA722085D2C60058F32C /* OTDeepLinkService.m */,
 				A202EA732085D2C60058F32C /* OTMessagingService.m */,
-				A202EA742085D2C60058F32C /* OTOnboardingJoinService.h */,
-				A202EA752085D2C60058F32C /* OTUnreadMessagesService.h */,
+				A202EA6D2085D2C60058F32C /* OTOngoingTourService.h */,
 				A202EA762085D2C60058F32C /* OTOngoingTourService.m */,
-				A202EA772085D2C60058F32C /* OTAddressBookService.m */,
+				A202EA752085D2C60058F32C /* OTUnreadMessagesService.h */,
+				A202EA6E2085D2C60058F32C /* OTUnreadMessagesService.m */,
+				A202EA702085D2C60058F32C /* OTLogger.h */,
 				A202EA782085D2C60058F32C /* OTLogger.m */,
-				A202EA792085D2C60058F32C /* PushNotifications */,
+				A202EA712085D2C60058F32C /* OTAddressBookService.h */,
+				A202EA772085D2C60058F32C /* OTAddressBookService.m */,
+				A202EA6F2085D2C60058F32C /* OTCategoryFromJsonService.h */,
 				A202EA7E2085D2C60058F32C /* OTCategoryFromJsonService.m */,
+				A202EA792085D2C60058F32C /* PushNotifications */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2945,10 +2945,10 @@
 		A202EA792085D2C60058F32C /* PushNotifications */ = {
 			isa = PBXGroup;
 			children = (
-				A202EA7A2085D2C60058F32C /* OTPushNotificationsData.m */,
-				A202EA7B2085D2C60058F32C /* OTPushNotificationsService.m */,
-				A202EA7C2085D2C60058F32C /* OTPushNotificationsService.h */,
 				A202EA7D2085D2C60058F32C /* OTPushNotificationsData.h */,
+				A202EA7A2085D2C60058F32C /* OTPushNotificationsData.m */,
+				A202EA7C2085D2C60058F32C /* OTPushNotificationsService.h */,
+				A202EA7B2085D2C60058F32C /* OTPushNotificationsService.m */,
 			);
 			path = PushNotifications;
 			sourceTree = "<group>";
