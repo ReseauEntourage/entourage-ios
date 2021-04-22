@@ -1030,7 +1030,7 @@
 
 "home_neo_tour_send_top_title" = " Maraude en groupe";
 "home_neo_tour_send_title" = "Demande de renseignements pour %@";
-"home_neo_tour_send_description" = "Envoyez un message à l’équipe Entourage de Paris pour en savoir plus sur les modalités d’inscription et les prochaines dates de maraudes.\n\nL’équipe vous recontactera par email.";
+"home_neo_tour_send_description" = "Envoyez un message à l’équipe Entourage de %@ pour en savoir plus sur les modalités d’inscription et les prochaines dates de maraudes.\n\nL’équipe vous recontactera par email.";
 "home_neo_tour_send_button" = "J’envoie ma demande";
 
 "home_neo_tour_send_email" = "Plus qu’un pas !\nRenseignez votre email pour recevoir la réponse de l’équipe Entourage :";
@@ -1044,7 +1044,7 @@
 "home_neo_action_title_top3" = "Proposer";
 "home_neo_action_title3" = "Proposer du matériel";
 "home_neo_action_title4" = "Proposer un service";
-"home_neo_action_title5" = "Relayer un Besoin";
+"home_neo_action_title5" = "Relayer un besoin";
 "home_neo_action_title6" = "Offrir un café solidaire";
 
 "home_neo_action_bottom_title" = "Comment franchir le pas ?";
@@ -1057,5 +1057,5 @@
 "home_neo_pop_info_button_profil" = "Voir profil";
 
 "setting_home_title" = "📱 MON COMPTE ENTOURAGE";
-"setting_home_description" = "Le mode 1ers pas vous guide pour découvrir Entourage progressivement. ";
-"setting_home_button_type" = "Mode 1ers pas";
+"setting_home_description" = "Le mode premiers pas vous guide pour découvrir Entourage progressivement. ";
+"setting_home_button_type" = "Mode premiers pas";

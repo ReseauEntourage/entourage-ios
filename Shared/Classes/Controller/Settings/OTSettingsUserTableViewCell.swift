@@ -64,19 +64,8 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         ui_view_choice_bis.layer.borderColor = UIColor.appOrange()?.cgColor
 
         ui_title_info_account.text = OTLocalisationService.getLocalizedValue(forKey: "setting_home_title")
-
-        
-        let font:UIFont? = UIFont(name: "Helvetica", size:17)
-        let fontB:UIFont? = UIFont(name: "Helvetica", size:15)
-        let fontSuper:UIFont? = UIFont(name: "Helvetica", size:10)
-        
-        let attStringButton:NSMutableAttributedString = NSMutableAttributedString(string:OTLocalisationService.getLocalizedValue(forKey: "setting_home_button_type"), attributes: [.font:font!])
-        attStringButton.setAttributes([.font:fontSuper!,.baselineOffset:10], range: NSRange(location:6,length:3))
-        ui_title_home_mode.attributedText = attStringButton
-        
-        let _attStringTitle:NSMutableAttributedString = NSMutableAttributedString(string:OTLocalisationService.getLocalizedValue(forKey: "setting_home_description"), attributes: [.font:fontB!])
-        _attStringTitle.setAttributes([.font:fontSuper!,.baselineOffset:10], range: NSRange(location:9,length:3))
-        ui_description_info_account.attributedText = _attStringTitle
+        ui_title_home_mode.text = OTLocalisationService.getLocalizedValue(forKey: "setting_home_button_type")
+        ui_description_info_account.text = OTLocalisationService.getLocalizedValue(forKey: "setting_home_description")
     }
     
     func roundPartielView(view:UIView,isTop:Bool) {

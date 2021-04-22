@@ -34,7 +34,7 @@ class OTHomeNeoTourSendViewController: UIViewController {
         
         self.title = OTLocalisationService.getLocalizedValue(forKey: "home_neo_tour_send_top_title")
         ui_title.text = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "home_neo_tour_send_title"), area.areaName)
-        ui_description.text = OTLocalisationService.getLocalizedValue(forKey: "home_neo_tour_send_description")
+        ui_description.text = String.init(format: OTLocalisationService.getLocalizedValue(forKey: "home_neo_tour_send_description"), area.areaName)
         ui_button_title.text = OTLocalisationService.getLocalizedValue(forKey: "home_neo_tour_send_button")?.uppercased()
         
         ui_tv_ok.text = OTLocalisationService.getLocalizedValue(forKey: "home_neo_tour_send_ok")

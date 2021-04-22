@@ -786,7 +786,7 @@ Renseignez votre email pour recevoir la réponse de l’équipe Entourage :</str
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QYk-U8-YiB">
-                                <rect key="frame" x="110.5" y="419.5" width="193.5" height="57"/>
+                                <rect key="frame" x="110.5" y="386" width="193.5" height="57"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nc4-U3-C51">
                                         <rect key="frame" x="48" y="8" width="137.5" height="41"/>
@@ -838,7 +838,6 @@ L’équipe vous recontactera par email.  </string>
                             <constraint firstItem="0gj-e0-Ky7" firstAttribute="centerX" secondItem="Coa-sF-zPp" secondAttribute="centerX" id="7aU-TR-fxv"/>
                             <constraint firstItem="89S-3Z-QTS" firstAttribute="trailing" secondItem="l5X-Fj-VB3" secondAttribute="trailing" id="Br7-3i-WEb"/>
                             <constraint firstItem="QYk-U8-YiB" firstAttribute="centerX" secondItem="Coa-sF-zPp" secondAttribute="centerX" id="DXI-P5-Cdi"/>
-                            <constraint firstItem="QYk-U8-YiB" firstAttribute="centerY" secondItem="Coa-sF-zPp" secondAttribute="centerY" id="G6F-Nr-L1L"/>
                             <constraint firstItem="89S-3Z-QTS" firstAttribute="trailing" secondItem="eyt-Ey-dRN" secondAttribute="trailing" constant="25" id="XWd-21-1bc"/>
                             <constraint firstItem="hbe-91-RGJ" firstAttribute="top" secondItem="eyt-Ey-dRN" secondAttribute="bottom" constant="8" id="YBB-fj-uj1"/>
                             <constraint firstItem="hbe-91-RGJ" firstAttribute="leading" secondItem="89S-3Z-QTS" secondAttribute="leading" constant="25" id="cjl-uU-TQW"/>
@@ -847,6 +846,7 @@ L’équipe vous recontactera par email.  </string>
                             <constraint firstItem="UQZ-ye-6X6" firstAttribute="top" secondItem="hbe-91-RGJ" secondAttribute="bottom" constant="32" id="jAt-S1-drz"/>
                             <constraint firstItem="0gj-e0-Ky7" firstAttribute="leading" secondItem="UQZ-ye-6X6" secondAttribute="leading" id="jVJ-Fh-5O2"/>
                             <constraint firstItem="l5X-Fj-VB3" firstAttribute="top" secondItem="89S-3Z-QTS" secondAttribute="top" id="jln-Bm-GK0"/>
+                            <constraint firstItem="QYk-U8-YiB" firstAttribute="top" secondItem="hbe-91-RGJ" secondAttribute="bottom" constant="32" id="kKs-du-NYE"/>
                             <constraint firstItem="eyt-Ey-dRN" firstAttribute="top" secondItem="l5X-Fj-VB3" secondAttribute="bottom" constant="33" id="mWd-MV-9Xn"/>
                             <constraint firstItem="eyt-Ey-dRN" firstAttribute="leading" secondItem="89S-3Z-QTS" secondAttribute="leading" constant="25" id="t82-9u-PfO"/>
                             <constraint firstItem="89S-3Z-QTS" firstAttribute="trailing" secondItem="hbe-91-RGJ" secondAttribute="trailing" constant="25" id="zi1-C6-29l"/>

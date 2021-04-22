@@ -1156,20 +1156,20 @@ Ligne 4</string>
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="113.33333333333333"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboard_picto_help" translatesAutoresizingMaskIntoConstraints="NO" id="fqO-Zf-D4R">
-                                                <rect key="frame" x="8" y="8" width="46" height="46"/>
+                                                <rect key="frame" x="8" y="16" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="46" id="Qwi-VV-21p"/>
                                                     <constraint firstAttribute="height" constant="46" id="j84-zQ-tCh"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les sans-abris, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5K-5D-gAq">
-                                                <rect key="frame" x="74" y="35.333333333333314" width="300" height="57.333333333333343"/>
+                                                <rect key="frame" x="74" y="43.333333333333314" width="300" height="57.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voisin solidaire" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeU-VP-inI">
-                                                <rect key="frame" x="74" y="7.9999999999999982" width="111.33333333333331" height="19.333333333333329"/>
+                                                <rect key="frame" x="74" y="15.999999999999998" width="111.33333333333331" height="19.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1179,10 +1179,10 @@ Ligne 4</string>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="z5K-5D-gAq" secondAttribute="trailing" constant="8" id="9AD-dY-5QY"/>
                                             <constraint firstItem="fqO-Zf-D4R" firstAttribute="leading" secondItem="TXB-4T-8qd" secondAttribute="leading" constant="8" id="RAW-dl-0ZY"/>
-                                            <constraint firstItem="xeU-VP-inI" firstAttribute="top" secondItem="TXB-4T-8qd" secondAttribute="top" constant="8" id="dYR-Kt-K6B"/>
+                                            <constraint firstItem="xeU-VP-inI" firstAttribute="top" secondItem="TXB-4T-8qd" secondAttribute="top" constant="16" id="dYR-Kt-K6B"/>
                                             <constraint firstItem="z5K-5D-gAq" firstAttribute="top" secondItem="xeU-VP-inI" secondAttribute="bottom" constant="8" id="et4-1d-LdG"/>
                                             <constraint firstItem="z5K-5D-gAq" firstAttribute="leading" secondItem="fqO-Zf-D4R" secondAttribute="trailing" constant="20" id="gWS-eF-zQj"/>
-                                            <constraint firstItem="fqO-Zf-D4R" firstAttribute="top" secondItem="TXB-4T-8qd" secondAttribute="top" constant="8" id="hup-X4-hfO"/>
+                                            <constraint firstItem="fqO-Zf-D4R" firstAttribute="top" secondItem="TXB-4T-8qd" secondAttribute="top" constant="16" id="hup-X4-hfO"/>
                                             <constraint firstItem="xeU-VP-inI" firstAttribute="leading" secondItem="fqO-Zf-D4R" secondAttribute="trailing" constant="20" id="vIH-WT-SKz"/>
                                         </constraints>
                                         <connections>
@@ -1193,20 +1193,20 @@ Ligne 4</string>
                                         <rect key="frame" x="0.0" y="133.33333333333334" width="382" height="113.33333333333334"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboard_picto_alone" translatesAutoresizingMaskIntoConstraints="NO" id="GUc-U3-dET">
-                                                <rect key="frame" x="8" y="8" width="46" height="46"/>
+                                                <rect key="frame" x="8" y="16" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="djV-Sa-gF7"/>
                                                     <constraint firstAttribute="width" constant="46" id="yxZ-0A-xAg"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les sans-abris, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACe-20-STX">
-                                                <rect key="frame" x="74" y="35.333333333333314" width="300" height="57.333333333333343"/>
+                                                <rect key="frame" x="74" y="43.333333333333314" width="300" height="57.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voisin solidaire" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyr-xx-aQy">
-                                                <rect key="frame" x="74" y="7.9999999999999982" width="111.33333333333331" height="19.333333333333329"/>
+                                                <rect key="frame" x="74" y="15.999999999999998" width="111.33333333333331" height="19.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1215,10 +1215,10 @@ Ligne 4</string>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="ACe-20-STX" firstAttribute="top" secondItem="fyr-xx-aQy" secondAttribute="bottom" constant="8" id="5PQ-Nn-dO8"/>
-                                            <constraint firstItem="fyr-xx-aQy" firstAttribute="top" secondItem="ptG-Qr-1bN" secondAttribute="top" constant="8" id="CW3-Jy-FeB"/>
+                                            <constraint firstItem="fyr-xx-aQy" firstAttribute="top" secondItem="ptG-Qr-1bN" secondAttribute="top" constant="16" id="CW3-Jy-FeB"/>
                                             <constraint firstAttribute="trailing" secondItem="ACe-20-STX" secondAttribute="trailing" constant="8" id="FN2-eh-f0g"/>
                                             <constraint firstItem="ACe-20-STX" firstAttribute="leading" secondItem="GUc-U3-dET" secondAttribute="trailing" constant="20" id="HCq-sn-3pT"/>
-                                            <constraint firstItem="GUc-U3-dET" firstAttribute="top" secondItem="ptG-Qr-1bN" secondAttribute="top" constant="8" id="NdT-02-3zT"/>
+                                            <constraint firstItem="GUc-U3-dET" firstAttribute="top" secondItem="ptG-Qr-1bN" secondAttribute="top" constant="16" id="NdT-02-3zT"/>
                                             <constraint firstItem="GUc-U3-dET" firstAttribute="leading" secondItem="ptG-Qr-1bN" secondAttribute="leading" constant="8" id="ZlX-Eg-SRg"/>
                                             <constraint firstItem="fyr-xx-aQy" firstAttribute="leading" secondItem="GUc-U3-dET" secondAttribute="trailing" constant="20" id="bJD-Lm-4cb"/>
                                         </constraints>
@@ -1230,20 +1230,20 @@ Ligne 4</string>
                                         <rect key="frame" x="0.0" y="266.66666666666663" width="382" height="113.33333333333331"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboard_picto_asso" translatesAutoresizingMaskIntoConstraints="NO" id="kw5-fg-kRv">
-                                                <rect key="frame" x="8" y="8" width="46" height="46"/>
+                                                <rect key="frame" x="8" y="16" width="46" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="9hx-pb-6EV"/>
                                                     <constraint firstAttribute="width" constant="46" id="MJl-h1-2US"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les sans-abris, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIX-zl-VH2">
-                                                <rect key="frame" x="74" y="35.333333333333314" width="300" height="57.333333333333343"/>
+                                                <rect key="frame" x="74" y="43.333333333333314" width="300" height="57.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voisin solidaire" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcP-b4-pNJ">
-                                                <rect key="frame" x="74" y="7.9999999999999982" width="111.33333333333331" height="19.333333333333329"/>
+                                                <rect key="frame" x="74" y="15.999999999999998" width="111.33333333333331" height="19.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1251,13 +1251,13 @@ Ligne 4</string>
                                         </subviews>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstItem="kw5-fg-kRv" firstAttribute="top" secondItem="iyV-cT-sai" secondAttribute="top" constant="8" id="30p-jw-poa"/>
+                                            <constraint firstItem="kw5-fg-kRv" firstAttribute="top" secondItem="iyV-cT-sai" secondAttribute="top" constant="16" id="30p-jw-poa"/>
                                             <constraint firstItem="RIX-zl-VH2" firstAttribute="leading" secondItem="kw5-fg-kRv" secondAttribute="trailing" constant="20" id="Lhp-XF-OF7"/>
                                             <constraint firstItem="mcP-b4-pNJ" firstAttribute="leading" secondItem="kw5-fg-kRv" secondAttribute="trailing" constant="20" id="P5J-px-897"/>
                                             <constraint firstItem="kw5-fg-kRv" firstAttribute="leading" secondItem="iyV-cT-sai" secondAttribute="leading" constant="8" id="UHI-2H-W7v"/>
                                             <constraint firstItem="RIX-zl-VH2" firstAttribute="top" secondItem="mcP-b4-pNJ" secondAttribute="bottom" constant="8" id="lg4-mH-uVM"/>
                                             <constraint firstAttribute="trailing" secondItem="RIX-zl-VH2" secondAttribute="trailing" constant="8" id="oyJ-c8-5d8"/>
-                                            <constraint firstItem="mcP-b4-pNJ" firstAttribute="top" secondItem="iyV-cT-sai" secondAttribute="top" constant="8" id="ysw-8Y-Vqi"/>
+                                            <constraint firstItem="mcP-b4-pNJ" firstAttribute="top" secondItem="iyV-cT-sai" secondAttribute="top" constant="16" id="ysw-8Y-Vqi"/>
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="Fq5-9K-s1e" appends="YES" id="8Hd-BW-wy0"/>
