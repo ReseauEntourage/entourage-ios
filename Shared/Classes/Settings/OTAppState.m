@@ -262,7 +262,9 @@
             if (status == UNAuthorizationStatusNotDetermined) {
                 [OTAppState showPopNotification];
             }
-            completionHandler();
+            if (completionHandler != nil) {
+                completionHandler();
+            }
         });
     }];
 }
