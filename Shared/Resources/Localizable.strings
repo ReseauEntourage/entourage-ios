@@ -1028,7 +1028,7 @@
 "home_neo_tour_areas_title" = "Où voulez-vous participer à une maraude sociale ?";
 "home_neo_tour_areas_description" = "Sélectionnez une localisation parmi celles disponibles :";
 
-"home_neo_tour_send_top_title" = " Maraude en groupe";
+"home_neo_tour_send_top_title" = "Maraude en groupe";
 "home_neo_tour_send_title" = "Demande de renseignements pour %@";
 "home_neo_tour_send_description" = "Envoyez un message à l’équipe Entourage de %@ pour en savoir plus sur les modalités d’inscription et les prochaines dates de maraudes.\n\nL’équipe vous recontactera par email.";
 "home_neo_tour_send_button" = "J’envoie ma demande";
@@ -1037,6 +1037,7 @@
 "home_neo_tour_send_email_placeholder" = "Adresse email";
 "home_neo_tour_send_ok" = "Votre demande \na bien été envoyée.";
 
+//Actions
 "home_neo_action_title" = "Les actions concrètes";
 "home_neo_action_title_top1" = "Participer";
 "home_neo_action_title1" = "Répondre à un besoin";
