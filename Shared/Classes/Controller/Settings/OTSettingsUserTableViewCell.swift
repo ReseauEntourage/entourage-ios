@@ -28,6 +28,14 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_view_button_ection: UIView!
     @IBOutlet weak var ui_label_button_action: UILabel!
     
+    @IBOutlet weak var ui_view_choice_mode: UIView!
+    @IBOutlet weak var ui_title_home_mode: UILabel!
+    @IBOutlet weak var ui_view_choice_bis: UIView!
+    @IBOutlet weak var ui_switch_home_mode: UISwitch!
+    @IBOutlet weak var ui_title_info_account: UILabel!
+    @IBOutlet weak var ui_description_info_account: UILabel!
+    @IBOutlet weak var ui_constraint_height_view_choice_mode: NSLayoutConstraint!
+    
     weak var delegate:TapMenuProfileDelegate? = nil
     
     override func awakeFromNib() {
@@ -50,6 +58,14 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         ui_label_mod_profile.layer.cornerRadius = 5
         ui_label_mod_profile.layer.borderWidth = 1
         ui_label_mod_profile.layer.borderColor = UIColor.appOrange()?.cgColor
+        
+        ui_view_choice_bis.layer.cornerRadius = 5
+        ui_view_choice_bis.layer.borderWidth = 1
+        ui_view_choice_bis.layer.borderColor = UIColor.appOrange()?.cgColor
+
+        ui_title_info_account.text = OTLocalisationService.getLocalizedValue(forKey: "setting_home_title")
+        ui_title_home_mode.text = OTLocalisationService.getLocalizedValue(forKey: "setting_home_button_type")
+        ui_description_info_account.text = OTLocalisationService.getLocalizedValue(forKey: "setting_home_description")
     }
     
     func roundPartielView(view:UIView,isTop:Bool) {
@@ -89,6 +105,29 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         
         ui_label_nb_events.text = "\(currentUser.eventsCount)"
         ui_label_nb_actions.text = "\(currentUser.actionsCount)"
+        
+        
+        var isExpertMode = false
+        if let isExpertSettings = UserDefaults.standard.object(forKey: "isExpertMode") as? Bool {
+            isExpertMode = isExpertSettings
+        }
+        else {
+            if currentUser.isUserTypeNeighbour() {
+                isExpertMode = currentUser.isEngaged
+            }
+            UserDefaults.standard.setValue(isExpertMode, forKey: "isExpertMode")
+        }
+        
+        if currentUser.isUserTypeNeighbour() {
+            ui_view_choice_mode.isHidden = false
+            ui_constraint_height_view_choice_mode.constant = 188
+        }
+        else {
+            isExpertMode = true
+            ui_view_choice_mode.isHidden = true
+            ui_constraint_height_view_choice_mode.constant = 0
+        }
+        ui_switch_home_mode.isOn = !isExpertMode
     }
     
     //MARK: - IBActions -
@@ -106,6 +145,17 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     
     @IBAction func action_show_events(_ sender: Any) {
         delegate?.showEvents()
+    }
+    
+    @IBAction func action_change_home_mode(_ sender: UISwitch) {
+        if !sender.isOn {
+            OTLogger.logEvent(Action_Switch_NeoToExpert)
+        }
+        else {
+            OTLogger.logEvent(Action_Switch_ExpertToNeo)
+        }
+        
+        UserDefaults.standard.setValue(!sender.isOn, forKey: "isExpertMode")
     }
 }
 

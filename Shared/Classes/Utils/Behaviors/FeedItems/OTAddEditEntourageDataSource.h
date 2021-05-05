@@ -29,7 +29,8 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                      entourage:(OTEntourage*)entourage
                   locationText:(NSString*)locationText
-                      delegate:(id<OTAddEditEntourageDelegate>)delegate;
+                      delegate:(id<OTAddEditEntourageDelegate>)delegate
+                    isHomeNeo:(BOOL) isHomeNeo;
 
 + (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
      withDelegate:(id<OTAddEditEntourageDelegate>)delegate

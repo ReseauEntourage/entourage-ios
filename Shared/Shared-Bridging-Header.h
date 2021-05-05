@@ -85,3 +85,7 @@
 #import "OTFeedItemFiltersViewController.h"
 #import "OTPublicFeedItemViewController.h"
 #import "OTTourCreatorViewController.h"
+
+#import "OTCategoryFromJsonService.h"
+#import "OTCategoryType.h"
+#import "OTEntourageEditorViewController.h"

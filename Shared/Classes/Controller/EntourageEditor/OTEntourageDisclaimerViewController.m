@@ -13,6 +13,7 @@
 #import "OTUser.h"
 #import "OTAPIConsts.h"
 #import "UIColor+entourage.h"
+#import "Analytics_keys.h"
 
 @interface OTEntourageDisclaimerViewController ()
 
@@ -76,7 +77,14 @@
 }
 
 - (IBAction)disclaimerAccepted:(id)sender {
-    [OTLogger logEvent:@"AcceptEthicsChartClick"];
+    if (self.isFromHomeNeo) {
+        NSString * tag = [NSString stringWithFormat:Action_NeoFeedAct_AcceptCGU_X,self.tagNameAnalytic];
+        [OTLogger logEvent:tag];
+    }
+    else {
+        [OTLogger logEvent:@"AcceptEthicsChartClick"];
+    }
+    
     if (self.switchAccept.isOn) {
         self.rejectDisclaimerButton.enabled = NO;
         [self performSelector:@selector(acceptDisclaimer) withObject:nil afterDelay:0.5];
@@ -84,7 +92,14 @@
 }
 
 - (void)doRejectDisclaimer {
-    [OTLogger logEvent:@"CloseEthicsPopupClick"];
+    if (self.isFromHomeNeo) {
+        NSString * tag = [NSString stringWithFormat:Action_NeoFeedAct_CancelCGU_X,self.tagNameAnalytic];
+        [OTLogger logEvent:tag];
+    }
+    else {
+        [OTLogger logEvent:@"CloseEthicsPopupClick"];
+    }
+    
     if ([self.disclaimerDelegate respondsToSelector:@selector(disclaimerWasRejected)])
         [self.disclaimerDelegate disclaimerWasRejected];
 }

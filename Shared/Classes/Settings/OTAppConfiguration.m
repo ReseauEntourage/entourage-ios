@@ -117,6 +117,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"noMoreDemand"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"nbOfLaunch"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isExpertMode"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];

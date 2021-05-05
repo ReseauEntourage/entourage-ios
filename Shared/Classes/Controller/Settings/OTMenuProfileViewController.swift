@@ -39,7 +39,6 @@ class OTMenuProfileViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUser), name: NSNotification.Name(rawValue: kNotificationProfilePictureUpdated), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateUser), name: NSNotification.Name(rawValue: kNotificationSupportedPartnerUpdated), object: nil)
-        
     }
     
     deinit {
@@ -50,6 +49,8 @@ class OTMenuProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         OTLogger.logEvent("View_Profile_Menu")
+        currentUser = UserDefaults.standard.currentUser
+        self.ui_tableview.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

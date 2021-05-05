@@ -17,10 +17,13 @@ class OTProfileSelectTypeViewController: UIViewController {
     
     @IBOutlet weak var ui_view_1: UIView!
     @IBOutlet weak var ui_label_view_1: UILabel!
+    @IBOutlet weak var ui_label_view_title_1: UILabel!
     @IBOutlet weak var ui_view_2: UIView!
     @IBOutlet weak var ui_label_view_2: UILabel!
+    @IBOutlet weak var ui_label_view_title_2: UILabel!
     @IBOutlet weak var ui_view_3: UIView!
     @IBOutlet weak var ui_label_view_3: UILabel!
+    @IBOutlet weak var ui_label_view_title_3: UILabel!
     
     @IBOutlet weak var ui_main_stackview: UIStackView!
     @IBOutlet weak var ui_constraint_height_space: NSLayoutConstraint!
@@ -84,6 +87,10 @@ class OTProfileSelectTypeViewController: UIViewController {
         ui_label_view_1.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice1")
         ui_label_view_2.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice2")
         ui_label_view_3.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice3")
+        
+        ui_label_view_title_1.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice_title1")
+        ui_label_view_title_2.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice_title2")
+        ui_label_view_title_3.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_type_choice_title3")
         
         if view.frame.height <= 568 {
             ui_constraint_height_space.constant = 16

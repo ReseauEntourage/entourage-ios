@@ -99,4 +99,9 @@
 //Sharing Entourage
 #define API_URL_SHARINGS    @"sharing/groups?token=%@"
 
+#define SLUG_EVENT_BRITE @"event-brite"
+
+#define API_URL_TOUR_AREAS @"tour_areas?token=%@"
+#define API_URL_TOUR_AREAS_ANSWER @"tour_areas/%d/request?token=%@"
+
 #endif /* OTAPIConsts_h */
