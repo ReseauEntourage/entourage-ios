@@ -239,13 +239,12 @@ extension OTGuideDetailPoiViewController: InviteSourceDelegate {
             activityVC.excludedActivityTypes = [.print,.airDrop,.postToVimeo,.openInIBooks,.postToFlickr,.assignToContact,.saveToCameraRoll,.postToTencentWeibo]
         }
         
-        OTAppConfiguration.configureActivityControllerAppearance(nil, color: ApplicationTheme.shared().primaryNavigationBarTintColor)
+        OTAppConfiguration.configureActivityControllerAppearance(nil, color: ApplicationTheme.shared().secondaryNavigationBarTintColor)
         
         activityVC.completionWithItemsHandler = {
             (activity, success, items, error) in
             OTAppConfiguration.configureActivityControllerAppearance(nil, color: ApplicationTheme.shared().secondaryNavigationBarTintColor)
         }
-        activityVC.navigationController?.navigationBar.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
         self.navigationController?.present(activityVC, animated: true, completion: nil)
     }
     

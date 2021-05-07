@@ -52,7 +52,7 @@ class OTCustomTextfield: UITextField {
    private func addDoneButtonOnKeyboard(){
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
-        doneToolbar.barTintColor = ApplicationTheme.shared().backgroundThemeColor
+        doneToolbar.barTintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
 
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         buttonToolBar = UIBarButtonItem(title: titleToolBar, style: .plain, target: self, action: #selector(self.doneButtonAction))
