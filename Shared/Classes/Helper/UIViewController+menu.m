@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 OCTO Technology. All rights reserved.
 //
 
-#import <SWRevealViewController/SWRevealViewController.h>
-
 #import "UIViewController+menu.h"
 #import "UIBarButtonItem+Badge.h"
 #import "OTUnreadMessagesService.h"
@@ -18,55 +16,6 @@
 
 /**************************************************************************************************/
 #pragma mark - Configure
-
-/**
- * Method which creates the MenuButton in navigation bar at left position
- *
- * @return UIBarButtonItem
- * The MenuButton instanciated
- */
-
-- (UIBarButtonItem *)createMenuButton {
-    UIBarButtonItem *menuButton = nil;
-    
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if (revealViewController)
-    {
-        UIImage *menuImage = [[UIImage imageNamed:@"menu.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        menuButton = [[UIBarButtonItem alloc] init];
-        [menuButton setImage:menuImage];
-        [menuButton setTarget:self.revealViewController];
-        [menuButton setAction:@selector(revealToggle:)];
-        [self.navigationController.navigationBar addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-        [self.navigationItem setLeftBarButtonItem:menuButton];
-    }
-    
-    return menuButton;
-}
-
-- (UIBarButtonItem *)createBackFrontMenuButton {
-    UIBarButtonItem *menuButton = nil;
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if (revealViewController)
-    {
-        UIImage *menuImage = [[UIImage imageNamed:@"backArrow.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-
-         UIButton *back = [UIButton buttonWithType:UIButtonTypeCustom];
-         [back setImage:menuImage
-               forState:UIControlStateNormal];
-         [back addTarget:self.revealViewController
-                  action:@selector(revealToggle:)
-        forControlEvents:UIControlEventTouchUpInside];
-         [back setFrame:CGRectMake(0, 0, 20, 20)];
-         menuButton = [[UIBarButtonItem alloc] initWithCustomView:back];
-        
-        [self.navigationController.navigationBar addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-        [self.navigationItem setRightBarButtonItem:menuButton];
-        
-        self.navigationController.navigationBar.tintColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
-    }
-    return menuButton;
-}
 
 - (UIBarButtonItem *)setupChatsButtonWithTarget:(id)target andSelector:(SEL)selector {
     UIImage *chatsImage = [[UIImage imageNamed:@"discussion"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];

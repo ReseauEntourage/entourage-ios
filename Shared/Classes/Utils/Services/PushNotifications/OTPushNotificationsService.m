@@ -7,7 +7,6 @@
 //
 
 #import <UserNotifications/UserNotifications.h>
-#import <SWRevealViewController/SWRevealViewController.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <FirebaseAnalytics/FirebaseAnalytics.h>
 
