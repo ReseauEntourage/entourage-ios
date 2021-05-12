@@ -9,7 +9,6 @@
 #import "OTGMSAutoCompleteViewController.h"
 #import <Foundation/Foundation.h>
 #import <GooglePlaces/GooglePlaces.h>
-#import <GoogleMaps/GoogleMaps.h>
 #import "entourage-Swift.h"
 
 @interface OTGMSAutoCompleteViewController () < GMSAutocompleteViewControllerDelegate >
@@ -21,12 +20,11 @@
     // Set bounds to France.
     CLLocationCoordinate2D neBoundsCorner = CLLocationCoordinate2DMake(50.77, 6.04);
     CLLocationCoordinate2D swBoundsCorner = CLLocationCoordinate2DMake(43.57, -1.97);
-    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:neBoundsCorner
-                                                                       coordinate:swBoundsCorner];
     
     // Set up the autocomplete filter.
     GMSAutocompleteFilter *filter = [[GMSAutocompleteFilter alloc] init];
     filter.type = filterType;
+    filter.locationBias = GMSPlaceRectangularLocationOption(neBoundsCorner, swBoundsCorner);
     
     // Set the fields requested
     GMSPlaceField fields = (GMSPlaceFieldName |
@@ -35,7 +33,6 @@
                             GMSPlaceFieldCoordinate);
     
     // Create and set Autocomplete VC
-    [self setAutocompleteBounds:bounds];
     [self setAutocompleteFilter:filter];
     [self setPlaceFields:fields];
 

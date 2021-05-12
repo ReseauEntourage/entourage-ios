@@ -25,10 +25,6 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "UIColor+entourage.h"
 #import "OTUnreadMessagesService.h"
-#import "OTLoginViewController.h"
-#import "OTLostCodeViewController.h"
-#import "OTPhoneViewController.h"
-#import "OTCodeViewController.h"
 #import "OTAppDelegate.h"
 #import "UIStoryboard+entourage.h"
 #import "OTAppState.h"
@@ -39,7 +35,6 @@
 #import <GooglePlaces/GMSPlacesClient.h>
 #import "OTMainTabBarAnonymousBehavior.h"
 #import "OTAnalyticsObserver.h"
-#import <FirebaseInAppMessaging/FirebaseInAppMessaging.h>
 #import "entourage-Swift.h"
 
 @import Firebase;
@@ -226,12 +221,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [FIRAnalytics setUserPropertyString:[OTAuthService currentUserAuthenticationLevel]
                                 forName:@"AuthenticationLevel"];
     [FIRMessaging messaging].delegate = (id<FIRMessagingDelegate>)[UIApplication sharedApplication].delegate;
-    if ([NSUserDefaults standardUserDefaults].currentUser) {
-        [FIRInAppMessaging inAppMessaging].messageDisplaySuppressed = NO;
-    }
-    else {
-        [FIRInAppMessaging inAppMessaging].messageDisplaySuppressed = YES;
-    }
 }
 
 - (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions
@@ -452,10 +441,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
 #pragma mark - Firebase Messaging
 
 + (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
-    
-}
-
-+ (void)messaging:(FIRMessaging *)messaging didReceiveMessage:(FIRMessagingRemoteMessage *)remoteMessage {
     
 }
 
