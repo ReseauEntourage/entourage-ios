@@ -121,6 +121,7 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
 //MARK: - OTHomeEventCollectionViewCell -
 class OTHomeEventCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ui_main_view: UIView?
+    @IBOutlet weak var ui_image_event: UIImageView!
     
     @IBOutlet weak var ui_title_description: UILabel!
     
@@ -168,6 +169,10 @@ class OTHomeEventCollectionViewCell: UICollectionViewCell {
         }
         else {
             ui_title_nb_people?.text = "\(nbPeople) \(OTLocalisationService.getLocalizedValue(forKey: "participants")!)"
+        }
+        
+        if let url = item.entourage_event_url_image_portrait {
+            ui_image_event.setup(fromUrl: url, withPlaceholder: "ic_placeholder_event_feed")
         }
     }
 }

@@ -10,6 +10,12 @@
 #import "OTEntourage.h"
 @class OTEditEntourageTableSource;
 
+@protocol EditPhotoGalleryDelegate <NSObject>
+
+- (void)editingValidated:(NSString *)smallImageUrl andBigImage:(NSString*) bigImageUrl;
+
+@end
+
 @interface OTEditEntourageNavigationBehavior : OTBehavior
 
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
@@ -25,5 +31,7 @@
 - (void)editAddress:(OTEntourage *)entourage;
 - (void)editDate:(OTEntourage *)entourage isStart:(BOOL)isStartDate;
 - (void)editEventConfidentiality:(OTEntourage *)entourage;
+
+- (void)editEntouragePhotoFromGallery:(OTEntourage *)entourage;
 
 @end

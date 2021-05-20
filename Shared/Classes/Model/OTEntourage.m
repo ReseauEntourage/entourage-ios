@@ -44,7 +44,9 @@
     copy.entourage_type = self.entourage_type;
     copy.isPublic = self.isPublic;
     copy.consentObtained = self.consentObtained;
-
+    copy.entourage_event_url_image_portrait = self.entourage_event_url_image_portrait;
+    copy.entourage_event_url_image_landscape = self.entourage_event_url_image_landscape;
+    
     return copy;
 }
 
@@ -69,6 +71,10 @@
                 self.category = @"other";
             }
         }
+        
+        NSDictionary *metad = [dictionary objectForKey:@"metadata"];
+        self.entourage_event_url_image_portrait = [metad stringForKey:KWSKeyPortrait_url];
+        self.entourage_event_url_image_landscape = [metad stringForKey:KWSKeyLandscape_url];
     }
     return self;
 }
@@ -110,11 +116,21 @@
         formatter.includeTime = YES;
         NSString *dateStartString = [formatter stringFromDate:self.startsAt];
         NSString *dateEndString = [formatter stringFromDate:self.endsAt];
+        
+        if (self.entourage_event_url_image_portrait == nil) {
+            self.entourage_event_url_image_portrait = @"";
+        }
+        if (self.entourage_event_url_image_landscape == nil) {
+            self.entourage_event_url_image_landscape = @"";
+        }
+        
         NSDictionary *eventInfo  = @{kWSKeyStartsAt: dateStartString,
                                      kWSKeyEndsAt: dateEndString,
                                      kWSKeyStreetAddress: self.streetAddress ?: @"",
                                      kWSKeyPlaceName: self.placeName ?: @"",
                                      kWSKeyGooglePlaceId: self.googlePlaceId ?: @"",
+                                     KWSKeyLandscape_url: self.entourage_event_url_image_landscape,
+                                     KWSKeyPortrait_url:self.entourage_event_url_image_portrait
         };
         [params setObject:eventInfo forKey:kWSKeyMetadata];
         [params setObject:self.groupType forKey:kWSKeyGroupType];

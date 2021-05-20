@@ -13,6 +13,7 @@
 #import "NSDate+OTFormatter.h"
 #import "entourage-Swift.h"
 #import "OTEntouragePrivacyActionCell.h"
+#import "UIImageView+entourage.h"
 
 @interface OTAddEditEntourageDataSource ()
 @end
@@ -22,7 +23,7 @@
 + (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
                                entourage:(OTEntourage*)entourage {
     if ([entourage isOuting] && [OTAppConfiguration shouldShowEntouragePrivacyDisclaimerOnCreation:entourage]) {
-        return 6;//5;
+        return 7;
     }
     
     return 5;//4;
@@ -82,7 +83,12 @@
                                                         andText:endDateInfo];
             }
                 break;
-            case 5:
+            case 5: //Add new Cell Photo
+                cell = [tableView dequeueReusableCellWithIdentifier:@"EditGallery"];
+                ((OTEntourageEditItemGalleryTableViewCell*)cell).ui_title.text = [OTLocalisationService getLocalizedValueForKey:@"add_photo_from_gallery"];
+                [((OTEntourageEditItemGalleryTableViewCell*)cell).ui_image setupFromUrl:entourage.entourage_event_url_image_landscape withPlaceholder:@""];
+                break;
+            case 6:
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EntouragePrivacyCell"];
                 [((OTEntourageEditItemCell*)cell) configureWithSwitchPublicState:entourage.isPublic.boolValue entourage:entourage];
                 [((OTEntourageEditItemCell*)cell).privacySwitch
@@ -166,6 +172,9 @@
                     [delegate editEntourageDate_isStart:NO];
                 }
                 break;
+            case 5:
+                [delegate editEntouragePhotoFromGallery];
+                break;
             default:
                 break;
         }
@@ -197,6 +206,10 @@
 
 + (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (indexPath.section == 4) {
+        return UITableViewAutomaticDimension;
+    }
+    
+    if (tableView.numberOfSections == 7 && indexPath.section == 5) {
         return UITableViewAutomaticDimension;
     }
     

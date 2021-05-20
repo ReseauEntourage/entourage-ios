@@ -49,6 +49,9 @@
 #define kWSKeyImageUrl @"image_url"
 #define kWSKeyOutcome @"outcome"
 
+#define KWSKeyLandscape_url @"landscape_url"
+#define KWSKeyPortrait_url @"portrait_url"
+
 //Category
 #define kWSKeyEntourageCategory @"display_category"
 #define kWSKeyCategoryTitle @"display_category_title"

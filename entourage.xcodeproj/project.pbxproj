@@ -10,6 +10,7 @@
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
 		2B0322092643F2A400A70007 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0322082643F2A400A70007 /* SwiftPackageProductDependency */; };
+		2B033793265524B7002ABCE6 /* OTEntourageEditorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B033792265524B7002ABCE6 /* OTEntourageEditorService.swift */; };
 		2B039CC1251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */; };
 		2B05CBCF25067F490065E8D3 /* OTShareEntourageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */; };
 		2B05CBD1250684840065E8D3 /* OTSharingEntourageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBD0250684840065E8D3 /* OTSharingEntourageTableViewCell.swift */; };
@@ -23,6 +24,8 @@
 		2B19CF12249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B19CF11249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift */; };
 		2B1A8F79252768FD008419E6 /* OTGuideDetailPoiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1A8F78252768FD008419E6 /* OTGuideDetailPoiViewController.swift */; };
 		2B1A8F8325278D27008419E6 /* GuideDetailTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1A8F8225278D27008419E6 /* GuideDetailTableViewCells.swift */; };
+		2B20B82B2653C63200B3E8F3 /* OTEntourageEditItemGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20B82A2653C63200B3E8F3 /* OTEntourageEditItemGalleryTableViewCell.swift */; };
+		2B20B82D2653D63400B3E8F3 /* OTEntourageEditPhotoGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20B82C2653D63400B3E8F3 /* OTEntourageEditPhotoGalleryViewController.swift */; };
 		2B26962325DEAA1200D174DF /* OTFeedsViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B26962225DEAA1200D174DF /* OTFeedsViewController2.swift */; };
 		2B29BD94250F6CCE00663506 /* OTMainGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */; };
 		2B2EED0B2624478100566A90 /* OTHomeNeoHelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2EED0A2624478100566A90 /* OTHomeNeoHelpViewController.swift */; };
@@ -549,6 +552,7 @@
 		1CEF53464F294EC4BFB802DB /* Pods-entourage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.release.xcconfig"; sourceTree = "<group>"; };
 		1EE4C2861D9DB34E0086F0EC /* entourage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = entourage.entitlements; sourceTree = "<group>"; };
 		2A4E5B32B53E7E30C72258C3 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Pods/Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
+		2B033792265524B7002ABCE6 /* OTEntourageEditorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEntourageEditorService.swift; sourceTree = "<group>"; };
 		2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMainGuideHubViewController.swift; sourceTree = "<group>"; };
 		2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTShareEntourageViewController.swift; sourceTree = "<group>"; };
 		2B05CBD0250684840065E8D3 /* OTSharingEntourageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSharingEntourageTableViewCell.swift; sourceTree = "<group>"; };
@@ -563,6 +567,8 @@
 		2B19CF11249D0D2200CE34BB /* OTProfileSelectTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTProfileSelectTypeViewController.swift; sourceTree = "<group>"; };
 		2B1A8F78252768FD008419E6 /* OTGuideDetailPoiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTGuideDetailPoiViewController.swift; sourceTree = "<group>"; };
 		2B1A8F8225278D27008419E6 /* GuideDetailTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideDetailTableViewCells.swift; sourceTree = "<group>"; };
+		2B20B82A2653C63200B3E8F3 /* OTEntourageEditItemGalleryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEntourageEditItemGalleryTableViewCell.swift; sourceTree = "<group>"; };
+		2B20B82C2653D63400B3E8F3 /* OTEntourageEditPhotoGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEntourageEditPhotoGalleryViewController.swift; sourceTree = "<group>"; };
 		2B26962225DEAA1200D174DF /* OTFeedsViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTFeedsViewController2.swift; sourceTree = "<group>"; };
 		2B29BD93250F6CCE00663506 /* OTMainGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMainGuideViewController.swift; sourceTree = "<group>"; };
 		2B2EED0A2624478100566A90 /* OTHomeNeoHelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTHomeNeoHelpViewController.swift; sourceTree = "<group>"; };
@@ -3136,6 +3142,9 @@
 				A2CCF2FD2167445F00AD6237 /* OTAddActionThirdConsentViewController.m */,
 				A28F4360216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.h */,
 				A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */,
+				2B20B82A2653C63200B3E8F3 /* OTEntourageEditItemGalleryTableViewCell.swift */,
+				2B20B82C2653D63400B3E8F3 /* OTEntourageEditPhotoGalleryViewController.swift */,
+				2B033792265524B7002ABCE6 /* OTEntourageEditorService.swift */,
 			);
 			path = EntourageEditor;
 			sourceTree = "<group>";
@@ -3672,6 +3681,7 @@
 				A24EA3822100A7780027AB8B /* UITextField+AutoSuggestion.m in Sources */,
 				A202EBB32085D2C80058F32C /* OTFeedItemsFilterCellBase.m in Sources */,
 				A202EBF92085D2C80058F32C /* OTFeedItemsTableView.m in Sources */,
+				2B033793265524B7002ABCE6 /* OTEntourageEditorService.swift in Sources */,
 				2B3CA4DF260B4558006A87AE /* OTHomeHelpViewController.swift in Sources */,
 				96B658B8209A5AF000EB0398 /* UIFont+Extensions.swift in Sources */,
 				2BC1BC2326209E1D0092FBF7 /* OTHomeNeoCells.swift in Sources */,
@@ -3757,6 +3767,7 @@
 				2B62B02C247C22B300EE6D24 /* OTOnboardingAssoInfoViewController.swift in Sources */,
 				37614CA422896C35000A522D /* OTModalPopupViewController.m in Sources */,
 				A202EACF2085D2C70058F32C /* OTNewsFeedsFilter.m in Sources */,
+				2B20B82D2653D63400B3E8F3 /* OTEntourageEditPhotoGalleryViewController.swift in Sources */,
 				A202ECE92085D2C80058F32C /* OTMessagingService.m in Sources */,
 				A202EC272085D2C80058F32C /* NSBundle+entourage.m in Sources */,
 				A2A777EE20AF06EC006D2772 /* String+Localization.swift in Sources */,
@@ -3969,6 +3980,7 @@
 				A202EADF2085D2C70058F32C /* OTMyFeedMessage.m in Sources */,
 				A202ECCF2085D2C80058F32C /* OTTapEntourageBehavior.m in Sources */,
 				A202EB1B2085D2C70058F32C /* OTCreateMeetingViewController.m in Sources */,
+				2B20B82B2653C63200B3E8F3 /* OTEntourageEditItemGalleryTableViewCell.swift in Sources */,
 				2BF2520D24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift in Sources */,
 				A202EAE52085D2C70058F32C /* OTFeedItemFilters.m in Sources */,
 				37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */,

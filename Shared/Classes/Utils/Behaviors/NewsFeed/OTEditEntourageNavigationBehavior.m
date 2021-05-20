@@ -23,7 +23,8 @@
     EditTitleDelegate,
     EditDescriptionDelegate,
     CategorySelectionDelegate,
-    OTGMSAutoCompleteViewControllerProtocol
+    OTGMSAutoCompleteViewControllerProtocol,
+    EditPhotoGalleryDelegate
 >
 
 @property (nonatomic, strong) OTEntourage *entourage;
@@ -70,6 +71,14 @@
         controller.delegate = self;
         controller.currentDescription = self.entourage.desc;
         controller.currentEntourage = self.entourage;
+        return YES;
+    }
+    
+    if ([segue.identifier isEqualToString:@"EditPhotoGallery"]) {
+        OTEntourageEditPhotoGalleryViewController* controller = (OTEntourageEditPhotoGalleryViewController*)destinationViewController;
+        controller.entourage = self.entourage;
+        controller.delegate = self;
+        
         return YES;
     }
     return NO;
@@ -163,6 +172,11 @@
     [self.owner presentViewController:acController animated:YES completion:nil];
 }
 
+- (void)editEntouragePhotoFromGallery:(OTEntourage *)entourage {
+    self.entourage = entourage;
+    [self.owner performSegueWithIdentifier:@"EditPhotoGallery" sender:self];
+}
+
 #pragma mark - LocationSelectionDelegate
 
 - (void)didSelectLocation:(CLLocation *)selectedLocation {
@@ -191,6 +205,13 @@
     self.entourage.category = category.category;
     self.entourage.entourage_type = category.entourage_type;
     
+    [self.editEntourageSource updateTexts];
+}
+
+#pragma mark - EditPhotoGalleryDelegate
+-(void)editingValidated:(NSString *)smallImageUrl andBigImage:(NSString *)bigImageUrl {
+    self.entourage.entourage_event_url_image_portrait = smallImageUrl;
+    self.entourage.entourage_event_url_image_landscape = bigImageUrl;
     [self.editEntourageSource updateTexts];
 }
 

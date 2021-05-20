@@ -14,11 +14,6 @@ class OTDetailActionEventTopCell: UITableViewCell {
     
     @IBOutlet weak var ui_image_top: UIImageView?
     
-    @IBOutlet weak var ui_constraint_image_height: NSLayoutConstraint!
-    
-    @IBOutlet weak var ui_constraint_image_ratio: NSLayoutConstraint!
-    
-    
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_view_button_join: UIView?
     @IBOutlet weak var ui_view_button_share: UIView?
@@ -50,15 +45,11 @@ class OTDetailActionEventTopCell: UITableViewCell {
         
         
         if feedItem.isOuting()  {
-            if feedItem.imageEventUrl != nil && feedItem.imageEventUrl.count > 0 {
-                ui_constraint_image_height.priority = .defaultLow
-                ui_constraint_image_ratio.priority = .required
-                ui_image_top?.setup(fromUrl: feedItem.imageEventUrl, withPlaceholder: "announcementCardPlaceholder")
+            if let _url = feedItem.entourage_event_url_image_landscape {
+                ui_image_top?.setup(fromUrl: _url, withPlaceholder: "ic_placeholder_event_horizontal")
             }
             else {
-                ui_constraint_image_ratio.priority = .defaultLow
-                ui_constraint_image_height.priority = .required
-                ui_constraint_image_height.constant = 0
+                ui_image_top?.image = UIImage.init(named: "ic_placeholder_event_horizontal")
             }
         }
         

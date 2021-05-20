@@ -148,7 +148,9 @@
 "view_list_nav_title" = "Voir la liste";
 "create_demande_aide" = "Demander de l'aide";
 "create_proposer_don" = "Proposer de l'aide";
-
+"add_photo_from_gallery" = "Ajouter une photo";
+"title_add_photo_gallery" = "Illustrez votre prochain événement avec une photo proposée par Entourage :";
+"title_save_button_photo_gallery" = "Valider";
 // Feed item
 "join_active_other" = "✔︎ Je participe";
 "join_active" = "Actif";
