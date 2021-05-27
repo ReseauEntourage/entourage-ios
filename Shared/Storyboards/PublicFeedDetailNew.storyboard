@@ -40,20 +40,20 @@
                                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTop" id="iHr-SE-Z9e" customClass="OTDetailActionEventTopCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="24.5" width="320" height="128"/>
+                                                <rect key="frame" x="0.0" y="24.5" width="320" height="127.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iHr-SE-Z9e" id="25e-1Y-eCj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="127.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TvV-nP-s8v">
-                                                            <rect key="frame" x="16" y="16" width="105.5" height="24"/>
+                                                            <rect key="frame" x="16" y="16" width="97.5" height="23.5"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="20"/>
                                                             <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROd-Vz-4w9">
-                                                            <rect key="frame" x="16" y="72" width="150" height="40"/>
+                                                            <rect key="frame" x="16" y="71.5" width="150" height="40"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="detail_plus" translatesAutoresizingMaskIntoConstraints="NO" id="JZe-GK-ZGZ">
                                                                     <rect key="frame" x="14" y="13" width="14" height="14"/>
@@ -94,7 +94,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgb-wM-cKb">
-                                                            <rect key="frame" x="16" y="72" width="150" height="40"/>
+                                                            <rect key="frame" x="16" y="71.5" width="150" height="40"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="JE PARTICIPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="lcW-3Y-ZSf">
                                                                     <rect key="frame" x="8" y="5" width="134" height="30"/>
@@ -116,10 +116,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAZ-RN-U30">
-                                                            <rect key="frame" x="154" y="72" width="150" height="40"/>
+                                                            <rect key="frame" x="154" y="71.5" width="150" height="40"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="PARTAGER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdP-rb-re8">
-                                                                    <rect key="frame" x="43.5" y="5" width="90.5" height="30"/>
+                                                                    <rect key="frame" x="47.5" y="5" width="86.5" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="c1f-Cu-Qvx"/>
                                                                     </constraints>
@@ -182,20 +182,20 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTopEvent" id="UbU-hS-7SU" customClass="OTDetailActionEventTopCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="152.5" width="320" height="234.5"/>
+                                                <rect key="frame" x="0.0" y="152" width="320" height="234"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UbU-hS-7SU" id="hIh-SK-vja">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="234.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="234"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmF-5X-kC8">
-                                                            <rect key="frame" x="16" y="122.5" width="105.5" height="24"/>
+                                                            <rect key="frame" x="16" y="122.5" width="97.5" height="23.5"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="20"/>
                                                             <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUT-Ma-j6V">
-                                                            <rect key="frame" x="16" y="178.5" width="150" height="40"/>
+                                                            <rect key="frame" x="16" y="178" width="150" height="40"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="detail_plus" translatesAutoresizingMaskIntoConstraints="NO" id="1yF-xK-Wct">
                                                                     <rect key="frame" x="14" y="13" width="14" height="14"/>
@@ -236,7 +236,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Baf-RN-EX5">
-                                                            <rect key="frame" x="16" y="178.5" width="150" height="40"/>
+                                                            <rect key="frame" x="16" y="178" width="150" height="40"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="JE PARTICIPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ffb-oP-t3r">
                                                                     <rect key="frame" x="8" y="5" width="134" height="30"/>
@@ -258,10 +258,10 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOO-zb-3B8">
-                                                            <rect key="frame" x="154" y="178.5" width="150" height="40"/>
+                                                            <rect key="frame" x="154" y="178" width="150" height="40"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="PARTAGER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adj-Y5-QaX">
-                                                                    <rect key="frame" x="43.5" y="5" width="90.5" height="30"/>
+                                                                    <rect key="frame" x="47.5" y="5" width="86.5" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="vpf-rv-N2s"/>
                                                                     </constraints>
@@ -297,7 +297,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="adj-Y5-QaX" secondAttribute="trailing" constant="16" id="nMH-jC-syh"/>
                                                             </constraints>
                                                         </view>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_maraude" translatesAutoresizingMaskIntoConstraints="NO" id="UEN-kx-EKU">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_event" translatesAutoresizingMaskIntoConstraints="NO" id="UEN-kx-EKU">
                                                             <rect key="frame" x="0.0" y="0.0" width="320" height="106.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="UEN-kx-EKU" secondAttribute="height" multiplier="375:125" id="K2z-Lu-2Bv"/>
@@ -334,7 +334,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellLocation" id="Aqg-yU-hz8" customClass="OTDetailActionEventLocationCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="387" width="320" height="50"/>
+                                                <rect key="frame" x="0.0" y="386" width="320" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Aqg-yU-hz8" id="Owc-EP-58m">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -348,7 +348,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="75001" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axE-KV-5Qm" customClass="TTTAttributedLabel">
-                                                            <rect key="frame" x="59" y="16" width="46" height="18"/>
+                                                            <rect key="frame" x="59" y="16" width="42" height="18"/>
                                                             <color key="tintColor" systemColor="systemOrangeColor"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
                                                             <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -373,7 +373,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellEventDate" id="2js-ya-L31" customClass="OTDetailActionEventDateCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="437" width="320" height="50"/>
+                                                <rect key="frame" x="0.0" y="436" width="320" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2js-ya-L31" id="sHN-J7-Ag9">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -387,7 +387,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="75001" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLd-4z-YJK" customClass="TTTAttributedLabel">
-                                                            <rect key="frame" x="59" y="16" width="46" height="18"/>
+                                                            <rect key="frame" x="59" y="16" width="42" height="18"/>
                                                             <color key="tintColor" systemColor="systemOrangeColor"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
                                                             <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -412,7 +412,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellCreator" id="58V-iK-Yak" customClass="OTDetailActionEventCreatorCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="487" width="320" height="106"/>
+                                                <rect key="frame" x="0.0" y="486" width="320" height="106"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="58V-iK-Yak" id="4Kc-v9-VEj">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
@@ -448,13 +448,13 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgT-3p-ba0">
-                                                            <rect key="frame" x="66" y="18" width="78" height="30"/>
+                                                            <rect key="frame" x="66" y="18" width="73" height="30"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="15"/>
                                                             <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" text="Role -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXp-jF-CL5">
-                                                            <rect key="frame" x="66" y="48" width="42.5" height="30"/>
+                                                            <rect key="frame" x="66" y="48" width="40.5" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="Dr7-fk-zbd"/>
                                                             </constraints>
@@ -463,7 +463,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugb-S4-LkL">
-                                                            <rect key="frame" x="110.5" y="48" width="50" height="30"/>
+                                                            <rect key="frame" x="108.5" y="48" width="46" height="30"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
                                                             <state key="normal" title="Button">
                                                                 <color key="titleColor" red="0.90196078430000004" green="0.35294117650000001" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -473,7 +473,7 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="752" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="Action ....." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HlA-Dp-cpO">
-                                                            <rect key="frame" x="16" y="78" width="71.5" height="20"/>
+                                                            <rect key="frame" x="16" y="78" width="68" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="PKz-i6-xm9"/>
                                                             </constraints>
@@ -482,7 +482,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asA-ga-Jlj">
-                                                            <rect key="frame" x="66" y="18" width="78" height="30"/>
+                                                            <rect key="frame" x="66" y="18" width="73" height="30"/>
                                                             <connections>
                                                                 <action selector="action_show_profile:" destination="58V-iK-Yak" eventType="touchUpInside" id="SnI-XN-hZw"/>
                                                             </connections>
@@ -524,7 +524,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDescription" id="GgB-z1-9WN" customClass="OTDetailActionEventDescriptionCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="593" width="320" height="78"/>
+                                                <rect key="frame" x="0.0" y="592" width="320" height="78"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GgB-z1-9WN" id="loR-bU-92w">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
@@ -581,7 +581,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellDescriptionEvent" id="vr3-vX-Ptb" customClass="OTDetailActionEventDescriptionCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="671" width="320" height="50"/>
+                                                <rect key="frame" x="0.0" y="670" width="320" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vr3-vX-Ptb" id="awp-6o-UCS">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -626,7 +626,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellMap" rowHeight="186" id="cEb-bg-en7" userLabel="cellMap" customClass="OTDetailActionEventMapCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="721" width="320" height="186"/>
+                                                <rect key="frame" x="0.0" y="720" width="320" height="186"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cEb-bg-en7" id="0C5-Vn-XG4">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="186"/>
@@ -653,7 +653,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellSelector" id="4Om-PV-OkR">
-                                                <rect key="frame" x="0.0" y="907" width="320" height="60"/>
+                                                <rect key="frame" x="0.0" y="906" width="320" height="60"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Om-PV-OkR" id="hqN-kd-Zzq">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
@@ -664,7 +664,7 @@
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="Participants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9UE-lG-0ux">
-                                                            <rect key="frame" x="109.5" y="8" width="101" height="20"/>
+                                                            <rect key="frame" x="115" y="8" width="90.5" height="20"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="17"/>
                                                             <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -693,7 +693,7 @@
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MemberCellWithRole" id="6nT-0X-3Kh" customClass="OTMembersCell">
-                                                <rect key="frame" x="0.0" y="967" width="320" height="76"/>
+                                                <rect key="frame" x="0.0" y="966" width="320" height="76"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6nT-0X-3Kh" id="0Xg-rJ-LAX">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="76"/>
@@ -726,7 +726,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gR1-kF-oHG">
-                                                            <rect key="frame" x="66" y="8" width="79" height="30"/>
+                                                            <rect key="frame" x="66" y="8" width="73" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="6Ty-BZ-WF3"/>
                                                             </constraints>
@@ -735,7 +735,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="infinite" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="pT8-tg-Gyq">
-                                                            <rect key="frame" x="155" y="8" width="100" height="30"/>
+                                                            <rect key="frame" x="149" y="8" width="100" height="30"/>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uuh-S3-eDh" customClass="OTGradientView">
                                                             <rect key="frame" x="305" y="0.0" width="15" height="76"/>
@@ -744,7 +744,7 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" text="Role -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6p-2D-tWv">
-                                                            <rect key="frame" x="66" y="42" width="43.5" height="30"/>
+                                                            <rect key="frame" x="66" y="42" width="40.5" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="WEi-dp-h80"/>
                                                             </constraints>
@@ -753,7 +753,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zwW-1y-4HB">
-                                                            <rect key="frame" x="111.5" y="42" width="50" height="30"/>
+                                                            <rect key="frame" x="108.5" y="42" width="46" height="30"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
                                                             <state key="normal" title="Button">
                                                                 <color key="titleColor" red="0.90196078430000004" green="0.35294117650000001" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -813,13 +813,13 @@
                                         <rect key="frame" x="0.0" y="480" width="320" height="88"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On a besoin de vous !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GxW-PW-Cxp">
-                                                <rect key="frame" x="84" y="10" width="152.5" height="18"/>
+                                                <rect key="frame" x="87" y="10" width="146.5" height="18"/>
                                                 <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blX-zY-N4M">
-                                                <rect key="frame" x="109.5" y="34" width="101" height="40"/>
+                                                <rect key="frame" x="112" y="34" width="96" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="xpV-at-P4y"/>
@@ -839,10 +839,10 @@
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_feed_faq" translatesAutoresizingMaskIntoConstraints="NO" id="Ifu-3C-Ia2">
-                                                <rect key="frame" x="226.5" y="44" width="20" height="20"/>
+                                                <rect key="frame" x="224" y="44" width="20" height="20"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tuz-3P-xZV">
-                                                <rect key="frame" x="221.5" y="39" width="30" height="30"/>
+                                                <rect key="frame" x="219" y="39" width="30" height="30"/>
                                                 <connections>
                                                     <action selector="action_show_faq:" destination="Mnn-h6-fcr" eventType="touchUpInside" id="nSj-ub-Pgd"/>
                                                 </connections>
@@ -947,10 +947,10 @@
             <size key="intrinsicContentSize" width="148.5" height="18"/>
         </designable>
         <designable name="axE-KV-5Qm">
-            <size key="intrinsicContentSize" width="46" height="18"/>
+            <size key="intrinsicContentSize" width="42" height="18"/>
         </designable>
         <designable name="gLd-4z-YJK">
-            <size key="intrinsicContentSize" width="46" height="18"/>
+            <size key="intrinsicContentSize" width="42" height="18"/>
         </designable>
     </designables>
     <resources>
@@ -959,7 +959,7 @@
         <image name="ic_detail_event" width="40" height="44"/>
         <image name="ic_detail_poi_location" width="14" height="20"/>
         <image name="ic_feed_faq" width="20" height="20"/>
-        <image name="img_maraude" width="375" height="117"/>
+        <image name="placeholder_event" width="375" height="125"/>
         <image name="userSmall" width="35" height="35"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

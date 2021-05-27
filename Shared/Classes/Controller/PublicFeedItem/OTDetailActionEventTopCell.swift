@@ -43,13 +43,16 @@ class OTDetailActionEventTopCell: UITableViewCell {
     func populate(feedItem:OTEntourage,delegate:ActionCellTopDelegate?) {
         self.delegate = delegate
         
-        
         if feedItem.isOuting()  {
-            if let _url = feedItem.entourage_event_url_image_landscape {
-                ui_image_top?.setup(fromUrl: _url, withPlaceholder: "ic_placeholder_event_horizontal")
-            }
-            else {
-                ui_image_top?.image = UIImage.init(named: "ic_placeholder_event_horizontal")
+            ui_image_top?.image = UIImage.init(named: "placeholder_event")
+            
+            ImageLoaderSwift.getImage(from: feedItem.entourage_event_url_image_landscape) { image in
+                if let _img = image {
+                    self.ui_image_top?.image = _img
+                }
+                else {
+                    self.ui_image_top?.image = UIImage.init(named: "ic_placeholder_event_horizontal")
+                }
             }
         }
         

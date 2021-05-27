@@ -82,3 +82,36 @@ import Foundation
         return correctPhone
     }
 }
+
+class ImageLoaderSwift {
+
+  private static let cache = NSCache<NSString, NSData>()
+
+  class func getImage(from urlString: String?, completionHandler: @escaping(_ image: UIImage?) -> ()) {
+
+    DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+        guard let urlString = urlString else {
+            DispatchQueue.main.async { completionHandler(nil) }
+            return
+        }
+        
+        guard let url = URL.init(string: urlString) else {
+          DispatchQueue.main.async { completionHandler(nil) }
+          return
+        }
+        
+      if let data = self.cache.object(forKey: url.absoluteString as NSString) {
+        DispatchQueue.main.async { completionHandler(UIImage(data: data as Data)) }
+        return
+      }
+
+      guard let data = NSData(contentsOf: url) else {
+        DispatchQueue.main.async { completionHandler(nil) }
+        return
+      }
+
+      self.cache.setObject(data, forKey: url.absoluteString as NSString)
+      DispatchQueue.main.async { completionHandler(UIImage(data: data as Data)) }
+    }
+  }
+}
