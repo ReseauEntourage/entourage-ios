@@ -12,6 +12,7 @@ class OTHomeMainViewController: UIViewController {
     
     var homeNeoVC:OTHomeNeoViewController? = nil
     var homeExpertVC:OTHomeExpertViewController? = nil
+    var selectedFeedItem:OTFeedItem? = nil
     
     @IBOutlet weak var ui_view_container: UIView!
     
@@ -148,4 +149,45 @@ class OTHomeMainViewController: UIViewController {
      @objc func action_show_feeds() {
         self.showAllActions()
      }
+    
+    func showFeedInfo(feedItem:OTFeedItem) {
+        self.selectedFeedItem = feedItem
+        
+        if OTFeedItemFactory.create(for: feedItem).getStateInfo?()?.isPublic() ?? false {
+            OTLogger.logEvent("OpenEntouragePublicPage")
+            
+            if feedItem.isTour() {
+                self.performSegue(withIdentifier: "PublicFeedItemDetailsSegue", sender: self)
+            }
+            else {
+                self.performSegue(withIdentifier: "pushDetailFeedNew", sender: self)
+            }
+        }
+        else {
+            OTLogger.logEvent("OpenEntourageActivePage")
+            self.performSegue(withIdentifier: "ActiveFeedItemDetailsSegue", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "ActiveFeedItemDetailsSegue" {
+            if let vc = segue.destination as? OTActiveFeedItemViewController {
+                vc.feedItem = self.selectedFeedItem
+                vc.inviteBehaviorTriggered = false
+            }
+        }
+        else if segue.identifier == "pushDetailFeedNew" {
+            if let vc = segue.destination as? OTDetailActionEventViewController {
+                if let _item = self.selectedFeedItem {
+                    vc.feedItem = _item
+                }
+            }
+        }
+        else if segue.identifier == "PublicFeedItemDetailsSegue" {
+            if let vc = segue.destination as? OTPublicFeedItemViewController {
+                vc.feedItem = self.selectedFeedItem
+            }
+        }
+    }
 }

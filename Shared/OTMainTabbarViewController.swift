@@ -303,12 +303,19 @@ extension OTMainTabbarViewController: OTOptionsDelegate {
 //MARK: - EntourageEditorDelegate -
 extension OTMainTabbarViewController: EntourageEditorDelegate {
     func didEdit(_ entourage: OTEntourage!) {
-        if let _vc = self.homeVC.children[0] as? OTMainViewController {
-            _vc.didEdit(entourage)
+        if let _vc = self.homeVC.children[0] as? OTHomeMainViewController {
+            plusVC.dismiss(animated: true) {
+                _vc.showFeedInfo(feedItem: entourage)
+            }
         }
         else {
             temporaryNavPop?.dismiss(animated: true, completion: nil)
             showHomeVC()
+            plusVC.dismiss(animated: true) {
+                if let _vc = self.homeVC.children[0] as? OTHomeMainViewController {
+                    _vc.showFeedInfo(feedItem: entourage)
+                }
+            }
         }
     }
 }

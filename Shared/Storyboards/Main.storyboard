@@ -48,7 +48,7 @@
                 <viewControllerPlaceholder storyboardName="FeedChangeOptions" id="BuG-7M-jBg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osO-mj-V4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4822.463768115942" y="-137.27678571428569"/>
+            <point key="canvasLocation" x="5417" y="-71"/>
         </scene>
         <!--ActiveFeedItem-->
         <scene sceneID="19F-zf-hvr">
@@ -58,7 +58,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FuL-C2-u9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4831.159420289855" y="-72.991071428571431"/>
+            <point key="canvasLocation" x="5437" y="-137"/>
         </scene>
         <!--PublicFeedItem-->
         <scene sceneID="R5i-fD-RJi">
@@ -68,7 +68,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJ8-7h-blf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4857.2463768115949" y="-14.0625"/>
+            <point key="canvasLocation" x="5267" y="-3"/>
         </scene>
         <!--Main-->
         <scene sceneID="ufC-wZ-h7g">
@@ -1105,7 +1105,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="4681.159420289855" y="65.625"/>
+            <point key="canvasLocation" x="4648" y="-641"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="CD4-Ww-qZf">
@@ -1375,7 +1375,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dmb-Mg-GeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4829.7101449275369" y="66.294642857142861"/>
+            <point key="canvasLocation" x="5153" y="241"/>
         </scene>
         <!--PublicFeedDetailNew-->
         <scene sceneID="3p8-Vi-KOc">
@@ -1385,7 +1385,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTR-6G-a9l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4936.9565217391309" y="134.59821428571428"/>
+            <point key="canvasLocation" x="5293" y="192"/>
         </scene>
         <!--GuideSolidarity-->
         <scene sceneID="xOp-2g-pfi">
@@ -1403,7 +1403,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="MapOptions" id="IB2-iq-b6s" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ic-Nb-Z9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4736.231884057971" y="210.26785714285714"/>
+            <point key="canvasLocation" x="4925" y="347"/>
         </scene>
         <!--TourConfirmation-->
         <scene sceneID="sBV-v5-LFD">
@@ -1690,7 +1690,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="88.5" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number4_bg" translatesAutoresizingMaskIntoConstraints="NO" id="S74-pi-eEJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="S74-pi-eEJ" secondAttribute="height" multiplier="272:160" id="LXb-Nt-CYh"/>
                                                             </constraints>
@@ -2628,7 +2628,7 @@ L2</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCellActions" rowHeight="298" id="iJz-cN-NqC" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="148.5" width="414" height="298"/>
+                                        <rect key="frame" x="0.0" y="434.5" width="414" height="298"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iJz-cN-NqC" id="GWC-So-VDm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
@@ -2983,7 +2983,7 @@ de demandes</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="collectionCellEvents" rowHeight="280" id="9Jt-00-g9x" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="446.5" width="414" height="280"/>
+                                        <rect key="frame" x="0.0" y="732.5" width="414" height="280"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Jt-00-g9x" id="S3a-Fv-F9c">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="280"/>
@@ -3668,6 +3668,9 @@ Entourage</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="ui_view_container" destination="iOr-5l-voG" id="umK-eG-Z6i"/>
+                        <segue destination="qBS-Ms-rdt" kind="push" identifier="pushDetailFeedNew" id="HND-qQ-PfB"/>
+                        <segue destination="wAo-oB-V9c" kind="push" identifier="ActiveFeedItemDetailsSegue" id="1F4-xX-mRw"/>
+                        <segue destination="GZB-Ld-pCE" kind="push" identifier="PublicFeedItemDetailsSegue" id="N4B-g8-Vu7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nDF-9T-dDc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3767,6 +3770,36 @@ Votre collaboration est précieuse, nous vous en remercions chaleureusement !</s
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRn-8G-V8I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1355.072463768116" y="-555.13392857142856"/>
+        </scene>
+        <!--PublicFeedDetailNew-->
+        <scene sceneID="d3a-HM-64L">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PublicFeedDetailNew" id="qBS-Ms-rdt" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Iuv-cA-7aP"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S4I-Wt-VJd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="179" y="-631"/>
+        </scene>
+        <!--ActiveFeedItem-->
+        <scene sceneID="buQ-uB-rIj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ActiveFeedItem" id="wAo-oB-V9c" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="lOA-0u-qfh"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P0v-1d-NHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="288" y="-520"/>
+        </scene>
+        <!--PublicFeedItem-->
+        <scene sceneID="YKW-Et-MQl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PublicFeedItem" id="GZB-Ld-pCE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Xg6-IM-exn"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mX4-r6-hdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="154" y="-454"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
