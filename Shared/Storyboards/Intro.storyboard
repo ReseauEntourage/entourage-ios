@@ -335,6 +335,199 @@
             </objects>
             <point key="canvasLocation" x="532" y="-3388"/>
         </scene>
+        <!--Login Change Phone View Controller-->
+        <scene sceneID="KfK-LK-QGB">
+            <objects>
+                <viewController storyboardIdentifier="ChangePhoneVC" id="NQi-7k-jdy" customClass="OTLoginChangePhoneViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6K9-dg-URy"/>
+                        <viewControllerLayoutGuide type="bottom" id="FDP-hC-lnT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Adx-nN-lFb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvZ-15-IRq">
+                                <rect key="frame" x="-7.5" y="8" width="69" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68.5" id="8te-br-RvY"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="action_back:" destination="NQi-7k-jdy" eventType="touchUpInside" id="H06-b7-Pxx"/>
+                                    <action selector="action_back:" destination="lhm-i5-Jcs" eventType="touchUpInside" id="npG-fA-69g"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backItem" translatesAutoresizingMaskIntoConstraints="NO" id="rbb-UR-jKL">
+                                <rect key="frame" x="16" y="12" width="22" height="22"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNU-bq-RZq">
+                                <rect key="frame" x="20" y="46" width="280" height="48"/>
+                                <string key="text">Changement de numéro
+de téléphone</string>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ancien numéro" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ysf-FM-nTh" customClass="OTCustomTextfield" customModule="Ent_Beta" customModuleProvider="target">
+                                <rect key="frame" x="20" y="151" width="280" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="rRr-7s-niC"/>
+                                </constraints>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done" smartDashesType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="NQi-7k-jdy" id="pTh-cO-k8m"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ancien numéro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6V-Pv-83M">
+                                <rect key="frame" x="20" y="129" width="104" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nouveau numéro" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rc9-PK-g50" customClass="OTCustomTextfield" customModule="Ent_Beta" customModuleProvider="target">
+                                <rect key="frame" x="20" y="241" width="280" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="HyF-Cm-Fn8"/>
+                                </constraints>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done" smartDashesType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="NQi-7k-jdy" id="ah5-Sp-2G7"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nouveau numéro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhd-NT-oIU">
+                                <rect key="frame" x="20" y="219" width="117" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ltm-sM-jhW" customClass="OTCustomTextfield" customModule="Ent_Beta" customModuleProvider="target">
+                                <rect key="frame" x="20" y="331" width="280" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="1MU-WM-x49"/>
+                                </constraints>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done" smartDashesType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="NQi-7k-jdy" id="PVE-Da-Szo"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email (optionnel)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulg-ZD-2Ki">
+                                <rect key="frame" x="20" y="309" width="117.5" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngh-vo-MiO">
+                                <rect key="frame" x="35" y="430" width="250" height="50"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="Egu-cz-95a"/>
+                                    <constraint firstAttribute="height" constant="50" id="x1n-Jw-9hj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="JE ME CONNECTE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="action_send_change:" destination="NQi-7k-jdy" eventType="touchUpInside" id="ITQ-DK-HVo"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9H-6G-sf9">
+                                <rect key="frame" x="20" y="129" width="280" height="351"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2J-b1-wp8">
+                                        <rect key="frame" x="15" y="301" width="250" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="0ZB-TR-Tdi"/>
+                                            <constraint firstAttribute="height" constant="50" id="6sf-tD-VkQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <state key="normal" title="Retour">
+                                            <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="action_back:" destination="NQi-7k-jdy" eventType="touchUpInside" id="VOI-oo-zmT"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlP-4i-qQG">
+                                        <rect key="frame" x="10" y="142" width="260" height="67"/>
+                                        <string key="text">Votre demande a bien été envoyée.
+Le support Entourage vous informera lorsque le changement de numéro 
+sera réalisé.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="mlP-4i-qQG" secondAttribute="trailing" constant="10" id="Bfc-Up-amB"/>
+                                    <constraint firstItem="mlP-4i-qQG" firstAttribute="centerY" secondItem="q9H-6G-sf9" secondAttribute="centerY" id="K4k-Sq-Wqj"/>
+                                    <constraint firstItem="T2J-b1-wp8" firstAttribute="centerX" secondItem="q9H-6G-sf9" secondAttribute="centerX" id="L4S-l3-AVU"/>
+                                    <constraint firstAttribute="bottom" secondItem="T2J-b1-wp8" secondAttribute="bottom" id="Vut-wx-cmR"/>
+                                    <constraint firstItem="mlP-4i-qQG" firstAttribute="leading" secondItem="q9H-6G-sf9" secondAttribute="leading" constant="10" id="Yrr-uZ-TOD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ulg-ZD-2Ki" firstAttribute="leading" secondItem="Ltm-sM-jhW" secondAttribute="leading" id="0DU-EG-6ld"/>
+                            <constraint firstItem="s6V-Pv-83M" firstAttribute="leading" secondItem="Ysf-FM-nTh" secondAttribute="leading" id="0yw-ny-zrS"/>
+                            <constraint firstAttribute="trailing" secondItem="XNU-bq-RZq" secondAttribute="trailing" constant="20" id="1Xn-8T-dkV"/>
+                            <constraint firstItem="q9H-6G-sf9" firstAttribute="leading" secondItem="Adx-nN-lFb" secondAttribute="leading" constant="20" id="2dZ-af-VxA"/>
+                            <constraint firstItem="mhd-NT-oIU" firstAttribute="leading" secondItem="rc9-PK-g50" secondAttribute="leading" id="4LO-AM-52b"/>
+                            <constraint firstItem="Ltm-sM-jhW" firstAttribute="top" secondItem="ulg-ZD-2Ki" secondAttribute="bottom" constant="5" id="4t1-64-mTi"/>
+                            <constraint firstItem="Ngh-vo-MiO" firstAttribute="centerX" secondItem="Adx-nN-lFb" secondAttribute="centerX" id="7la-rn-lfL"/>
+                            <constraint firstItem="rc9-PK-g50" firstAttribute="top" secondItem="mhd-NT-oIU" secondAttribute="bottom" constant="5" id="CnI-gA-AJh"/>
+                            <constraint firstItem="cvZ-15-IRq" firstAttribute="centerX" secondItem="rbb-UR-jKL" secondAttribute="centerX" id="Ez1-wW-vDv"/>
+                            <constraint firstItem="s6V-Pv-83M" firstAttribute="leading" secondItem="Adx-nN-lFb" secondAttribute="leading" constant="20" id="FFB-uY-fPb"/>
+                            <constraint firstAttribute="trailing" secondItem="rc9-PK-g50" secondAttribute="trailing" constant="20" id="JKq-93-G9m"/>
+                            <constraint firstItem="cvZ-15-IRq" firstAttribute="centerY" secondItem="rbb-UR-jKL" secondAttribute="centerY" id="KCS-bR-Y9P"/>
+                            <constraint firstAttribute="trailing" secondItem="q9H-6G-sf9" secondAttribute="trailing" constant="20" id="NQU-2N-3tA"/>
+                            <constraint firstItem="s6V-Pv-83M" firstAttribute="top" secondItem="XNU-bq-RZq" secondAttribute="bottom" constant="35" id="Ope-rw-EpV"/>
+                            <constraint firstItem="mhd-NT-oIU" firstAttribute="top" secondItem="Ysf-FM-nTh" secondAttribute="bottom" constant="20" id="PPR-s0-fBT"/>
+                            <constraint firstItem="rbb-UR-jKL" firstAttribute="leading" secondItem="Adx-nN-lFb" secondAttribute="leading" constant="16" id="Sop-Dw-tNv"/>
+                            <constraint firstAttribute="trailing" secondItem="Ysf-FM-nTh" secondAttribute="trailing" constant="20" id="VaF-FS-j4u"/>
+                            <constraint firstItem="rbb-UR-jKL" firstAttribute="top" secondItem="6K9-dg-URy" secondAttribute="bottom" constant="12" id="bWQ-Jz-x1O"/>
+                            <constraint firstItem="XNU-bq-RZq" firstAttribute="leading" secondItem="Adx-nN-lFb" secondAttribute="leading" constant="20" id="bew-Jb-bmC"/>
+                            <constraint firstItem="q9H-6G-sf9" firstAttribute="bottom" secondItem="Ngh-vo-MiO" secondAttribute="bottom" id="dmg-Ge-8qd"/>
+                            <constraint firstItem="ulg-ZD-2Ki" firstAttribute="top" secondItem="rc9-PK-g50" secondAttribute="bottom" constant="20" id="g2m-Qf-Mse"/>
+                            <constraint firstItem="FDP-hC-lnT" firstAttribute="top" secondItem="Ngh-vo-MiO" secondAttribute="bottom" constant="88" id="hPC-11-Xg7"/>
+                            <constraint firstItem="q9H-6G-sf9" firstAttribute="top" secondItem="XNU-bq-RZq" secondAttribute="bottom" constant="35" id="irT-FX-Sks"/>
+                            <constraint firstAttribute="trailing" secondItem="Ltm-sM-jhW" secondAttribute="trailing" constant="20" id="lUr-t3-zE7"/>
+                            <constraint firstItem="XNU-bq-RZq" firstAttribute="top" secondItem="6K9-dg-URy" secondAttribute="bottom" constant="46" id="leA-rX-UjX"/>
+                            <constraint firstItem="ulg-ZD-2Ki" firstAttribute="leading" secondItem="mhd-NT-oIU" secondAttribute="leading" id="llr-Yn-53I"/>
+                            <constraint firstItem="mhd-NT-oIU" firstAttribute="leading" secondItem="s6V-Pv-83M" secondAttribute="leading" id="q59-PF-7Zg"/>
+                            <constraint firstItem="Ysf-FM-nTh" firstAttribute="top" secondItem="s6V-Pv-83M" secondAttribute="bottom" constant="5" id="v9L-js-RYx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ui_button_back" destination="T2J-b1-wp8" id="nwg-mv-3eu"/>
+                        <outlet property="ui_button_validate" destination="Ngh-vo-MiO" id="4nP-Iy-TBV"/>
+                        <outlet property="ui_label_email" destination="ulg-ZD-2Ki" id="tL5-9X-Aad"/>
+                        <outlet property="ui_label_info_send" destination="mlP-4i-qQG" id="btm-TX-ImG"/>
+                        <outlet property="ui_label_new_number" destination="mhd-NT-oIU" id="2jN-G7-6vL"/>
+                        <outlet property="ui_label_old_number" destination="s6V-Pv-83M" id="bUy-XW-igN"/>
+                        <outlet property="ui_label_title" destination="XNU-bq-RZq" id="iII-73-lxB"/>
+                        <outlet property="ui_tf_email" destination="Ltm-sM-jhW" id="LO2-oB-uaI"/>
+                        <outlet property="ui_tf_new_phone" destination="rc9-PK-g50" id="J9X-yR-gPc"/>
+                        <outlet property="ui_tf_old_phone" destination="Ysf-FM-nTh" id="6gj-eD-B9g"/>
+                        <outlet property="ui_view_send_ok" destination="q9H-6G-sf9" id="Lwj-aX-cUZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CiB-yK-heH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1447.5" y="-4105.9859154929582"/>
+        </scene>
         <!--LoginV2 View Controller-->
         <scene sceneID="ad3-kb-XUU">
             <objects>
@@ -481,6 +674,16 @@
                                     <constraint firstItem="MFG-al-bgl" firstAttribute="top" secondItem="SJC-2U-rKw" secondAttribute="bottom" constant="20" id="uTr-nj-64R"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aC-kN-Pmm">
+                                <rect key="frame" x="16" y="641" width="218" height="28"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <state key="normal" title="Changer de numéro de téléphone ?">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="action_show_change_phone:" destination="lhm-i5-Jcs" eventType="touchUpInside" id="GM7-24-hKV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
@@ -493,8 +696,10 @@
                             <constraint firstItem="OPM-07-97L" firstAttribute="top" secondItem="8bG-4J-vv8" secondAttribute="bottom" constant="50" id="Vg5-sY-9ja"/>
                             <constraint firstItem="lOC-2l-yRB" firstAttribute="leading" secondItem="Af0-Ah-vDg" secondAttribute="leadingMargin" id="XrE-kV-mAM"/>
                             <constraint firstItem="OPM-07-97L" firstAttribute="centerX" secondItem="Af0-Ah-vDg" secondAttribute="centerX" id="ZHu-tp-AY6"/>
+                            <constraint firstItem="5aC-kN-Pmm" firstAttribute="leading" secondItem="lOC-2l-yRB" secondAttribute="leading" id="bmi-FR-yib"/>
                             <constraint firstItem="FdW-Dp-flx" firstAttribute="centerX" secondItem="8xl-j5-sQ6" secondAttribute="centerX" id="fE9-bi-kcS"/>
                             <constraint firstItem="SZS-3a-WwW" firstAttribute="leading" secondItem="Af0-Ah-vDg" secondAttribute="leading" constant="30" id="gw9-UF-4Dn"/>
+                            <constraint firstItem="5aC-kN-Pmm" firstAttribute="top" secondItem="lOC-2l-yRB" secondAttribute="bottom" constant="8" symbolic="YES" id="oBq-xB-R39"/>
                             <constraint firstItem="8xl-j5-sQ6" firstAttribute="leading" secondItem="Af0-Ah-vDg" secondAttribute="leading" constant="16" id="q9M-ft-qki"/>
                             <constraint firstItem="lOC-2l-yRB" firstAttribute="top" secondItem="SZS-3a-WwW" secondAttribute="bottom" constant="20" id="qGQ-uB-Fqx"/>
                         </constraints>
@@ -506,6 +711,7 @@
                     <connections>
                         <outlet property="ui_bt_demand_code" destination="8IF-8s-Akh" id="0qW-GQ-QUa"/>
                         <outlet property="ui_bt_validate" destination="SrU-TU-bCM" id="lx5-GP-idr"/>
+                        <outlet property="ui_button_change_phone" destination="5aC-kN-Pmm" id="lp1-LU-4Wz"/>
                         <outlet property="ui_constraint_height_logo" destination="z64-MK-7fd" id="gB8-M2-wlh"/>
                         <outlet property="ui_constraint_top" destination="Vg5-sY-9ja" id="ADE-sw-B62"/>
                         <outlet property="ui_label_code" destination="MFG-al-bgl" id="yFZ-g3-i9O"/>

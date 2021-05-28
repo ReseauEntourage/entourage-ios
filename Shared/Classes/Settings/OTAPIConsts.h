@@ -107,4 +107,6 @@
 #define API_URL_TOUR_AREAS @"tour_areas?token=%@"
 #define API_URL_TOUR_AREAS_ANSWER @"tour_areas/%d/request?token=%@"
 
+
+#define API_URL_SEND_CHANGE_CODE @"users/request_phone_change"
 #endif /* OTAPIConsts_h */

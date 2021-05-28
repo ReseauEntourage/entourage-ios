@@ -27,6 +27,7 @@ class OTLoginV2ViewController: UIViewController {
     @IBOutlet weak var ui_tf_code: OTCustomTextfield!
     @IBOutlet weak var ui_pickerView: UIPickerView!
     
+    @IBOutlet weak var ui_button_change_phone: UIButton!
     @objc var fromLink:URL? = nil
     
     var pickerDataSource: OTCountryCodePickerViewDataSource!
@@ -100,6 +101,8 @@ class OTLoginV2ViewController: UIViewController {
         ui_label_country.text = OTLocalisationService.getLocalizedValue(forKey: "login_label_country")
         ui_label_phone.text = OTLocalisationService.getLocalizedValue(forKey: "login_label_phone")
         ui_label_code.text = OTLocalisationService.getLocalizedValue(forKey: "login_label_code")
+        
+        ui_button_change_phone.setTitle(OTLocalisationService.getLocalizedValue(forKey: "login_button_change_phone"), for: .normal)
     }
     
     func roundView(textfield: UITextField) {
@@ -329,6 +332,13 @@ class OTLoginV2ViewController: UIViewController {
     
     @IBAction func action_back(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func action_show_change_phone(_ sender: UIButton) {
+        
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "ChangePhoneVC") {
+        self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
 }
 

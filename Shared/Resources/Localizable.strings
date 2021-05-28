@@ -727,6 +727,25 @@
 "login_label_country" = "Pays";
 "login_label_phone" = "Téléphone";
 "login_label_code" = "Code";
+"login_button_change_phone" = "Changer de numéro de téléphone";
+
+"login_change_phone_title" = "Changement de numéro\nde téléphone";
+"login_change_phone_old_number" = "Ancien numéro";
+"login_change_phone_new_number" = "Nouveau numéro";
+"login_change_phone_email" = "Email (optionnel)";
+"login_change_phone_bt_validate" = "Envoyer";
+"login_change_phone_old_number_placeholder" = "Ancien numéro";
+"login_change_phone_new_number_placeholder" = "Nouveau numéro";
+"login_change_phone_email_placeholder" = "Email";
+"login_change_send_ok" = "Votre demande a bien été envoyée.\nLe support Entourage vous informera lorsque le changement de numéro sera réalisé.";
+"login_change_bt_return" = "Retour";
+
+"login_change_warning_title" = "Attention";
+"login_change_error_phone" = "Veuillez verifier vos numéros de téléphone";
+"login_change_error_mail" = "Veuillez vérifier votre adresse Email";
+
+"login_change_error_return" = "Erreur";
+"login_change_error_return_detail" = "L'ancien numéro est inconnu ou supprimé.\nMerci de vérifier.";
 
 //Onboarding Assos
 "onboard_asso_start_title" = "Ça tombe bien !";
