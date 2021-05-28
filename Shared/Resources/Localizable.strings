@@ -148,7 +148,7 @@
 "view_list_nav_title" = "Voir la liste";
 "create_demande_aide" = "Demander de l'aide";
 "create_proposer_don" = "Proposer de l'aide";
-"add_photo_from_gallery" = "Ajouter une photo";
+"add_photo_from_gallery" = "Photo";
 "title_add_photo_gallery" = "Illustrez votre prochain événement avec une photo proposée par Entourage :";
 "title_save_button_photo_gallery" = "Valider";
 // Feed item
@@ -1008,7 +1008,7 @@
 
 "home_neo_street_title" = "Comprendre le monde de la rue";
 "home_neo_street_subtitle" = "Les formats proposés :";
-"home_neo_street_cell1_title" = "Atelier en ligne hebdomadaire";
+"home_neo_street_cell1_title" = "Atelier en ligne";
 "home_neo_street_cell1_description" = "1h de sensibilisation par l’équipe Entourage enrichie de témoignages de la rue pour poser toutes vos questions en direct.";
 "home_neo_street_cell1_button" = "S’inscrire";
 
