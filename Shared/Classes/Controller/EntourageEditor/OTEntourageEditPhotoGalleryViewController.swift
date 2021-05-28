@@ -78,7 +78,7 @@ extension OTEntourageEditPhotoGalleryViewController: UITableViewDelegate,UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath) as! CellPhotoGallery
         
         let isSelected = selectedIndex == indexPath.row
-        cell.populateCell(imageUrl: arrayPhotos[indexPath.row].url_image_landscape, isSelected: isSelected)
+        cell.populateCell(imageUrl: arrayPhotos[indexPath.row].url_image_landscape_light, isSelected: isSelected)
         
         return cell
     }
@@ -98,6 +98,7 @@ extension OTEntourageEditPhotoGalleryViewController: UITableViewDelegate,UITable
 //MARK: - PhotoGallery Obj -
 struct PhotoGallery {
     var url_image_landscape = ""
+    var url_image_landscape_light = ""
     var url_image_portrait = ""
     var image_title = ""
     
@@ -117,6 +118,10 @@ struct PhotoGallery {
                 if let _title = _item["title"] as? String {
                     photo.image_title = _title
                 }
+                if let _img = _item["landscape_small_url"] as? String {
+                    photo.url_image_landscape_light = _img
+                }
+                
                 returnGallery?.append(photo)
             }
         }
