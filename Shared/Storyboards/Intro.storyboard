@@ -461,7 +461,7 @@ de téléphone</string>
                                                     <action selector="action_back:" destination="NQi-7k-jdy" eventType="touchUpInside" id="8JQ-AR-QFF"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSX-w2-Fob">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSX-w2-Fob">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="67"/>
                                                 <string key="text">Votre demande a bien été envoyée.
 Le support Entourage vous informera lorsque le changement de numéro 
