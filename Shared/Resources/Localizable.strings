@@ -737,7 +737,7 @@
 "login_change_phone_old_number_placeholder" = "Ancien numéro";
 "login_change_phone_new_number_placeholder" = "Nouveau numéro";
 "login_change_phone_email_placeholder" = "Email";
-"login_change_send_ok" = "Votre demande a bien été envoyée.\nLe support Entourage vous informera lorsque le changement de numéro sera réalisé.";
+"login_change_send_ok" = "Votre demande a bien été envoyée.\n\n\nLe support Entourage vous informera lorsque le changement de numéro sera réalisé.";
 "login_change_bt_return" = "Retour";
 
 "login_change_warning_title" = "Attention";
@@ -745,7 +745,7 @@
 "login_change_error_mail" = "Veuillez vérifier votre adresse Email";
 
 "login_change_error_return" = "Erreur";
-"login_change_error_return_detail" = "L'ancien numéro est inconnu ou supprimé.\nMerci de vérifier.";
+"login_change_error_return_detail" = "L’ancien numéro est inconnu ou supprimé.\nVeuillez vérifier.";
 
 //Onboarding Assos
 "onboard_asso_start_title" = "Ça tombe bien !";

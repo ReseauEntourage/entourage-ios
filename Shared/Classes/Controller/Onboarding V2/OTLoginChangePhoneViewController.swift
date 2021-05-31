@@ -37,8 +37,8 @@ class OTLoginChangePhoneViewController: UIViewController {
         ui_tf_new_phone.placeholder = OTLocalisationService.getLocalizedValue(forKey: "login_change_phone_new_number_placeholder")
         ui_tf_email.placeholder = OTLocalisationService.getLocalizedValue(forKey: "login_change_phone_email_placeholder")
         
-        ui_button_validate.setTitle(OTLocalisationService.getLocalizedValue(forKey: "login_change_phone_bt_validate"), for: .normal)
-        ui_button_back.setTitle(OTLocalisationService.getLocalizedValue(forKey: "login_change_bt_return"), for: .normal)
+        ui_button_validate.setTitle(OTLocalisationService.getLocalizedValue(forKey: "login_change_phone_bt_validate").uppercased(), for: .normal)
+        ui_button_back.setTitle(OTLocalisationService.getLocalizedValue(forKey: "login_change_bt_return").uppercased(), for: .normal)
         
         
         ui_view_send_ok.isHidden = true

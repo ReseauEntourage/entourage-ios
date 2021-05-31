@@ -441,40 +441,52 @@ de téléphone</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9H-6G-sf9">
-                                <rect key="frame" x="20" y="129" width="280" height="351"/>
+                                <rect key="frame" x="20" y="94" width="280" height="386"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2J-b1-wp8">
-                                        <rect key="frame" x="15" y="301" width="250" height="50"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="250" id="0ZB-TR-Tdi"/>
-                                            <constraint firstAttribute="height" constant="50" id="6sf-tD-VkQ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="Retour">
-                                            <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="action_back:" destination="NQi-7k-jdy" eventType="touchUpInside" id="VOI-oo-zmT"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlP-4i-qQG">
-                                        <rect key="frame" x="10" y="142" width="260" height="67"/>
-                                        <string key="text">Votre demande a bien été envoyée.
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GwH-yu-zwb">
+                                        <rect key="frame" x="0.0" y="60" width="280" height="165"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09r-xF-Vbd">
+                                                <rect key="frame" x="15" y="115" width="250" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="250" id="mJZ-dD-R48"/>
+                                                    <constraint firstAttribute="height" constant="50" id="nmy-AK-cS4"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <state key="normal" title="Retour">
+                                                    <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="action_back:" destination="NQi-7k-jdy" eventType="touchUpInside" id="8JQ-AR-QFF"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSX-w2-Fob">
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="67"/>
+                                                <string key="text">Votre demande a bien été envoyée.
 Le support Entourage vous informera lorsque le changement de numéro 
 sera réalisé.</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="09r-xF-Vbd" firstAttribute="centerX" secondItem="GwH-yu-zwb" secondAttribute="centerX" id="0bu-8C-Lta"/>
+                                            <constraint firstItem="09r-xF-Vbd" firstAttribute="top" secondItem="qSX-w2-Fob" secondAttribute="bottom" constant="48" id="1jP-hM-dE5"/>
+                                            <constraint firstAttribute="bottom" secondItem="09r-xF-Vbd" secondAttribute="bottom" id="Fx6-Yg-Rn2"/>
+                                            <constraint firstAttribute="trailing" secondItem="qSX-w2-Fob" secondAttribute="trailing" id="XZQ-L0-Hoe"/>
+                                            <constraint firstItem="qSX-w2-Fob" firstAttribute="top" secondItem="GwH-yu-zwb" secondAttribute="top" id="f96-gL-tXI"/>
+                                            <constraint firstItem="qSX-w2-Fob" firstAttribute="leading" secondItem="GwH-yu-zwb" secondAttribute="leading" id="gUu-zX-JbR"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="mlP-4i-qQG" secondAttribute="trailing" constant="10" id="Bfc-Up-amB"/>
-                                    <constraint firstItem="mlP-4i-qQG" firstAttribute="centerY" secondItem="q9H-6G-sf9" secondAttribute="centerY" id="K4k-Sq-Wqj"/>
-                                    <constraint firstItem="T2J-b1-wp8" firstAttribute="centerX" secondItem="q9H-6G-sf9" secondAttribute="centerX" id="L4S-l3-AVU"/>
-                                    <constraint firstAttribute="bottom" secondItem="T2J-b1-wp8" secondAttribute="bottom" id="Vut-wx-cmR"/>
-                                    <constraint firstItem="mlP-4i-qQG" firstAttribute="leading" secondItem="q9H-6G-sf9" secondAttribute="leading" constant="10" id="Yrr-uZ-TOD"/>
+                                    <constraint firstItem="GwH-yu-zwb" firstAttribute="leading" secondItem="q9H-6G-sf9" secondAttribute="leading" id="06H-FU-pUY"/>
+                                    <constraint firstItem="GwH-yu-zwb" firstAttribute="top" secondItem="q9H-6G-sf9" secondAttribute="top" constant="60" id="bMF-dN-9Wk"/>
+                                    <constraint firstAttribute="trailing" secondItem="GwH-yu-zwb" secondAttribute="trailing" id="smh-MR-Xja"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -502,19 +514,19 @@ sera réalisé.</string>
                             <constraint firstItem="q9H-6G-sf9" firstAttribute="bottom" secondItem="Ngh-vo-MiO" secondAttribute="bottom" id="dmg-Ge-8qd"/>
                             <constraint firstItem="ulg-ZD-2Ki" firstAttribute="top" secondItem="rc9-PK-g50" secondAttribute="bottom" constant="20" id="g2m-Qf-Mse"/>
                             <constraint firstItem="FDP-hC-lnT" firstAttribute="top" secondItem="Ngh-vo-MiO" secondAttribute="bottom" constant="88" id="hPC-11-Xg7"/>
-                            <constraint firstItem="q9H-6G-sf9" firstAttribute="top" secondItem="XNU-bq-RZq" secondAttribute="bottom" constant="35" id="irT-FX-Sks"/>
                             <constraint firstAttribute="trailing" secondItem="Ltm-sM-jhW" secondAttribute="trailing" constant="20" id="lUr-t3-zE7"/>
                             <constraint firstItem="XNU-bq-RZq" firstAttribute="top" secondItem="6K9-dg-URy" secondAttribute="bottom" constant="46" id="leA-rX-UjX"/>
                             <constraint firstItem="ulg-ZD-2Ki" firstAttribute="leading" secondItem="mhd-NT-oIU" secondAttribute="leading" id="llr-Yn-53I"/>
                             <constraint firstItem="mhd-NT-oIU" firstAttribute="leading" secondItem="s6V-Pv-83M" secondAttribute="leading" id="q59-PF-7Zg"/>
+                            <constraint firstItem="q9H-6G-sf9" firstAttribute="top" secondItem="XNU-bq-RZq" secondAttribute="bottom" id="sw5-5K-5GB"/>
                             <constraint firstItem="Ysf-FM-nTh" firstAttribute="top" secondItem="s6V-Pv-83M" secondAttribute="bottom" constant="5" id="v9L-js-RYx"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="ui_button_back" destination="T2J-b1-wp8" id="nwg-mv-3eu"/>
+                        <outlet property="ui_button_back" destination="09r-xF-Vbd" id="WyE-kh-nf4"/>
                         <outlet property="ui_button_validate" destination="Ngh-vo-MiO" id="4nP-Iy-TBV"/>
                         <outlet property="ui_label_email" destination="ulg-ZD-2Ki" id="tL5-9X-Aad"/>
-                        <outlet property="ui_label_info_send" destination="mlP-4i-qQG" id="btm-TX-ImG"/>
+                        <outlet property="ui_label_info_send" destination="qSX-w2-Fob" id="XDk-Jo-8Vo"/>
                         <outlet property="ui_label_new_number" destination="mhd-NT-oIU" id="2jN-G7-6vL"/>
                         <outlet property="ui_label_old_number" destination="s6V-Pv-83M" id="bUy-XW-igN"/>
                         <outlet property="ui_label_title" destination="XNU-bq-RZq" id="iII-73-lxB"/>
