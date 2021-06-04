@@ -236,6 +236,12 @@
 #define Action_expertFeed_MoreActionArrow @"Action__ExpertFeed__MoreActionsArrow"
 #define Action_expertFeed_HelpDifferent @"Action__ExpertFeed__HelpDifferently"
 
+#define Action_expertFeed_HelpReporter @"Action__ExpertFeed__Help_Reporter"
+#define Action_expertFeed_HelpGift @"Action__ExpertFeed__Help_Gift"
+#define Action_expertFeed_HelpShare @"Action__ExpertFeed__Help_Share"
+#define Action_expertFeed_HelpAmbassador @"Action__ExpertFeed__Help_Ambassador"
+#define Action_expertFeed_HelpLinkedout @"Action__ExpertFeed__Help_Linkedout"
+
 /*************
  Feed Expert NEO
  *************/

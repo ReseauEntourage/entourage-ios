@@ -89,3 +89,4 @@
 #import "OTCategoryFromJsonService.h"
 #import "OTCategoryType.h"
 #import "OTEntourageEditorViewController.h"
+#import "OTEditEntourageNavigationBehavior.h"

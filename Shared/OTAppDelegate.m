@@ -88,8 +88,4 @@ continueUserActivity:(NSUserActivity *)userActivity
     [OTAppConfiguration messaging:messaging didReceiveRegistrationToken:fcmToken];
 }
 
-- (void)messaging:(FIRMessaging *)messaging didReceiveMessage:(FIRMessagingRemoteMessage *)remoteMessage {
-    [OTAppConfiguration messaging:messaging didReceiveMessage:remoteMessage];
-}
-
 @end

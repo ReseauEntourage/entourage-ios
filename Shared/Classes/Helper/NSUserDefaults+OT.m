@@ -14,6 +14,8 @@ static NSString *const kTourOngoing = @"kTour";
 static NSString *const kTourPoints = @"kTourPoints";
 static NSString *const kIsFirstLogin = @"kIsFirstLogin";
 
+NSString *const kTutorialDone = @"has_done_tutorial";
+
 @implementation NSUserDefaults (OT)
 
 /********************************************************************************/

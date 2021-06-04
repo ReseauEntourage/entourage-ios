@@ -80,6 +80,9 @@
 
 #define API_URL_DISABLE_REPORT_USER @"entourages/%@/report_prompt?token=%@"
 
+//Get Photo Gallery for event
+#define API_URL_ENTOURAGES_IMAGES    @"entourage_images?token=%@"
+
 //Messages
 #define API_URL_TOUR_SET_READ_MESSAGES  "tours/%@/read?token=%@"
 #define API_URL_ENTOURAGE_SET_READ_MESSAGES "entourages/%@/read?token=%@"
@@ -104,4 +107,6 @@
 #define API_URL_TOUR_AREAS @"tour_areas?token=%@"
 #define API_URL_TOUR_AREAS_ANSWER @"tour_areas/%d/request?token=%@"
 
+
+#define API_URL_SEND_CHANGE_CODE @"users/request_phone_change"
 #endif /* OTAPIConsts_h */

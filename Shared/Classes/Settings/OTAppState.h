@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OTWelcomeViewController.h"
 
 @protocol InviteSourceDelegate;
 @protocol OTFeedItemsFilterDelegate;
@@ -20,7 +19,6 @@
 + (void)presentTutorialScreen;
 + (void)loadTutorialScreen;
 + (void)navigateToAuthenticatedLandingScreen;
-+ (void)navigateToUserProfile;
 + (void)switchMapToSolidarityGuide;
 + (void)switchToMessagesScreen;
 + (void)switchToMainScreenAndResetAppWindow:(BOOL)reset;
@@ -31,10 +29,7 @@
 + (void)navigateToStartupScreen;
 + (void)navigateToPermissionsScreens:(UIViewController * _Nullable)currentViewController;
 + (void)continueFromStartupScreen:(UIViewController * _Nonnull)currentViewController creatingUser:(BOOL)createUser;
-+ (void)continueFromWelcomeScreen:(OTWelcomeViewController * _Nonnull)welcomeScreen;
-+ (void)continueFromLoginScreen:(UIViewController * _Nullable)currentViewController;
 + (void)continueFromUserEmailScreen:(UIViewController * _Nonnull)currentViewController;
-+ (void)continueFromUserNameScreen:(UIViewController * _Nonnull)currentViewController;
 + (void)continueEditingEntourage:(OTEntourage*)entourage fromController:(UIViewController*)controller;
 
 + (void)launchFeedsFilteringFromController:(UIViewController*)controller
@@ -61,8 +56,6 @@
 + (void)hideTabBar:(BOOL)hide;
 + (void)updateMessagesTabBadgeWithValue:(NSString*)value;
 
-+ (void)navigateToUserEmail:(UIViewController*)viewController;
-+ (void)navigateToUserName:(UIViewController*)viewController;
 + (void)navigateToUserPicture:(UIViewController*)viewController;
 + (void)navigateToLocationRightsScreen:(UIViewController*)viewController;
 + (void)navigateToNotificationsRightsScreen:(UIViewController*)viewController;

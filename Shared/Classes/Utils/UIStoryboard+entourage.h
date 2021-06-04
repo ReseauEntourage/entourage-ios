@@ -11,7 +11,6 @@
 @interface UIStoryboard (entourage)
 
 + (void)showStartup;
-+ (void)showUserProfileDetails;
 + (void)showSWRevealController;
 + (void)showTabBarControllerFromStoryboardNamed:(NSString *)storyboardName;
 + (UIStoryboard*)entourageEditorStoryboard;

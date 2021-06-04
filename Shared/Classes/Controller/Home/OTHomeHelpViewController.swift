@@ -41,6 +41,7 @@ class OTHomeHelpViewController: UIViewController {
     }
     
     @IBAction func action_show_reporter(_ sender: Any) {
+        OTLogger.logEvent(Action_expertFeed_HelpReporter)
         if let vc = storyboard?.instantiateViewController(withIdentifier: "HomeHelpReporter") {
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -54,21 +55,25 @@ class OTHomeHelpViewController: UIViewController {
         
         switch sender.tag {
         case 1:
+            OTLogger.logEvent(Action_expertFeed_HelpGift)
             if let url = URL.init(string: url1) {
                 OTSafariService.launchInAppBrowser(with: url)
             }
             break
         case 2:
+            OTLogger.logEvent(Action_expertFeed_HelpAmbassador)
             if let url = URL.init(string: url2) {
                 OTSafariService.launchInAppBrowser(with: url)
             }
             break
         case 3:
+            OTLogger.logEvent(Action_expertFeed_HelpShare)
             if let url = URL.init(string: url3) {
                 OTSafariService.launchInAppBrowser(with: url)
             }
             break
         case 4:
+            OTLogger.logEvent(Action_expertFeed_HelpLinkedout)
             if let url = URL.init(string: url4) {
                 OTSafariService.launchInAppBrowser(with: url)
             }

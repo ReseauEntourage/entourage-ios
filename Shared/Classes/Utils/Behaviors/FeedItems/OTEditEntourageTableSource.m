@@ -138,6 +138,10 @@
     self.entourage.isPublic = [NSNumber numberWithBool:isPublic];
 }
 
+- (void)editEntouragePhotoFromGallery {
+    [self.editEntourageNavigation editEntouragePhotoFromGallery:self.entourage];
+}
+
 #pragma mark - geolocation
 
 - (void)updateLocationTitle {

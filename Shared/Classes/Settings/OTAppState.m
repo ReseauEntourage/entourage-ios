@@ -15,9 +15,6 @@
 #import "OTUser.h"
 #import "OTLocationManager.h"
 #import <SVProgressHUD/SVProgressHUD.h>
-#import "OTLoginViewController.h"
-#import "OTWelcomeViewController.h"
-#import "OTPhoneViewController.h"
 #import "OTAPIConsts.h"
 #import "OTMailSenderBehavior.h"
 #import "OTInviteSourceViewController.h"
@@ -31,7 +28,6 @@
 #import "OTFeedItemFactory.h"
 #import "OTActiveFeedItemViewController.h"
 #import "OTMapViewController.h"
-#import "OTAuthenticationModalViewController.h"
 #import "OTPicturePreviewViewController.h"
 
 #define TUTORIAL_DELAY 2
@@ -141,10 +137,6 @@
     [window makeKeyAndVisible];
 }
 
-+ (void)navigateToUserProfile
-{
-    [UIStoryboard showUserProfileDetails];
-}
 
 + (void)navigateToStartupScreen
 {
@@ -220,21 +212,9 @@
 }
 
 + (void)continueFromStartupScreen:(UIViewController * _Nonnull)currentViewController creatingUser:(BOOL)createUser; {
-    UIViewController *firstAuthenticationScreen = [self firstAuthenticationScreenCreatingUser:createUser];
+    UIViewController *firstAuthenticationScreen = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"LoginV2VC"];
     [currentViewController.navigationController pushViewController:firstAuthenticationScreen
                                                   animated:YES];
-}
-
-+ (UIViewController *)firstAuthenticationScreenCreatingUser:(BOOL)createUser {
-    if (createUser ) {
-        OTWelcomeViewController *welcomeViewController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTWelcomeViewController"];
-        welcomeViewController.signupNewUser = createUser;
-        return welcomeViewController;
-    }
-    else {
-        OTLoginV2ViewController * loginvc = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"LoginV2VC"];
-        return loginvc;
-    }
 }
 
 +(void)continueFromLoginVC {
@@ -269,31 +249,6 @@
     }];
 }
 
-+ (void)continueFromWelcomeScreen:(OTWelcomeViewController * _Nonnull)welcomeScreen
-{
-    if (welcomeScreen.signupNewUser) {
-        [OTLogger logEvent:@"WelcomeScreenContinue"];
-        OTPhoneViewController *onboardingViewController = [[UIStoryboard onboardingStoryboard] instantiateViewControllerWithIdentifier:@"OTPhoneViewController"];
-        [welcomeScreen.navigationController pushViewController:onboardingViewController animated:YES];
-    } else {
-        OTLoginViewController *loginController = [[UIStoryboard introStoryboard] instantiateViewControllerWithIdentifier:@"OTLoginViewController"];
-        [OTLogger logEvent:@"SplashLogIn"];
-        [welcomeScreen.navigationController pushViewController:loginController animated:YES];
-    }
-}
-
-+ (void)continueFromLoginScreen:(UIViewController * _Nullable)currentViewController
-{
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if (currentUser.lastName.length > 0 && currentUser.firstName.length > 0) {
-        [OTAppState continueFromUserEmailScreen:currentViewController];
-    }
-    else {
-        if (currentViewController == nil)
-            currentViewController = [OTAppState getTopViewController];
-        [OTAppState navigateToUserName:currentViewController];
-    }
-}
 
 + (void)continueFromUserEmailScreen:(UIViewController * _Nonnull)currentViewController
 {
@@ -339,17 +294,6 @@
             }
         });
     }];
-}
-
-+ (void)continueFromUserNameScreen:(UIViewController *)currentViewController
-{
-    OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
-    if (currentUser.email.length > 0) {
-        [OTAppState continueFromUserEmailScreen:currentViewController];
-    }
-    else {
-        [OTAppState navigateToUserEmail:currentViewController];
-    }
 }
 
 + (void)continueEditingEntourage:(OTEntourage*)entourage fromController:(UIViewController*)controller {
@@ -468,22 +412,6 @@
     return window.rootViewController;
 }
 
-+ (void)navigateToUserEmail:(UIViewController*)viewController {
-    UIStoryboard *profileDetailsStoryboard = [UIStoryboard storyboardWithName:@"UserProfileDetails" bundle:nil];
-    UIViewController *emailViewController = [profileDetailsStoryboard instantiateViewControllerWithIdentifier:@"EmailScene"];
-    [viewController.navigationController pushViewController:emailViewController animated:YES];
-}
-
-+ (void)navigateToUserName:(UIViewController*)viewController {
-    UIStoryboard *profileDetailsStoryboard = [UIStoryboard storyboardWithName:@"UserProfileDetails" bundle:nil];
-    UIViewController *nameController = [profileDetailsStoryboard instantiateViewControllerWithIdentifier:@"NameScene"];
-    if ([viewController isKindOfClass:[nameController class]]) {
-        [OTAppState navigateToRootController:viewController];
-        return;
-    }
-    [viewController.navigationController pushViewController:nameController animated:YES];
-}
-
 + (void)navigateToUserPicture:(UIViewController*)viewController {
     UIStoryboard *userPictureStoryboard = [UIStoryboard storyboardWithName:@"UserPicture" bundle:nil];
     UIViewController *pictureViewController = [userPictureStoryboard instantiateInitialViewController];
@@ -560,11 +488,6 @@
 }
 
 + (void)presentAuthenticationOverlay:(UIViewController * _Nonnull)currentViewController {
-    OTAuthenticationModalViewController *modalController = [OTAuthenticationModalViewController new];
-    UINavigationController *authenticationFlow = [[UINavigationController alloc] initWithRootViewController:modalController];
-    [OTAppConfiguration configureNavigationControllerAppearance:authenticationFlow];
-    authenticationFlow.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    authenticationFlow.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [currentViewController presentViewController:authenticationFlow animated:YES completion:nil];
+    // Not used anymore but called
 }
 @end

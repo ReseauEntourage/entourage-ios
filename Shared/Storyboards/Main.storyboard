@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="FkR-sv-GpE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="FkR-sv-GpE">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -48,7 +48,7 @@
                 <viewControllerPlaceholder storyboardName="FeedChangeOptions" id="BuG-7M-jBg" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="osO-mj-V4w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4822.463768115942" y="-137.27678571428569"/>
+            <point key="canvasLocation" x="5417" y="-71"/>
         </scene>
         <!--ActiveFeedItem-->
         <scene sceneID="19F-zf-hvr">
@@ -58,7 +58,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FuL-C2-u9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4831.159420289855" y="-72.991071428571431"/>
+            <point key="canvasLocation" x="5437" y="-137"/>
         </scene>
         <!--PublicFeedItem-->
         <scene sceneID="R5i-fD-RJi">
@@ -68,7 +68,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xJ8-7h-blf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4857.2463768115949" y="-14.0625"/>
+            <point key="canvasLocation" x="5267" y="-3"/>
         </scene>
         <!--Main-->
         <scene sceneID="ufC-wZ-h7g">
@@ -122,7 +122,7 @@
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="qvk-JK-pAd">
-                                    <rect key="frame" x="0.0" y="426" width="406" height="300"/>
+                                    <rect key="frame" x="0.0" y="419.00000034679067" width="406" height="300"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="RJW-gt-yID">
@@ -169,7 +169,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OTNewsFeedTableViewCellIdentifier" rowHeight="140" id="KgN-kr-NT6" customClass="OTNewsFeedCell">
-                                        <rect key="frame" x="0.0" y="28" width="406" height="140"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="406" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KgN-kr-NT6" id="pSt-IB-Y9T">
                                             <rect key="frame" x="0.0" y="0.0" width="406" height="140"/>
@@ -352,7 +352,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OTAnnouncementTableViewCellIdentifier" rowHeight="140" id="jhF-vm-O4y" customClass="OTAnnouncementCell">
-                                        <rect key="frame" x="0.0" y="168" width="406" height="140"/>
+                                        <rect key="frame" x="0.0" y="164.5" width="406" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jhF-vm-O4y" id="0Yc-Ce-Ysu">
                                             <rect key="frame" x="0.0" y="0.0" width="406" height="140"/>
@@ -444,7 +444,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="OTSolidarityGuideTableViewCellIdentifier" rowHeight="90" id="Rkl-sM-R4N" customClass="OTSolidarityGuideCell">
-                                        <rect key="frame" x="0.0" y="308" width="406" height="90"/>
+                                        <rect key="frame" x="0.0" y="304.5" width="406" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rkl-sM-R4N" id="PG3-14-YDK">
                                             <rect key="frame" x="0.0" y="0.0" width="406" height="90"/>
@@ -1105,7 +1105,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="4681.159420289855" y="65.625"/>
+            <point key="canvasLocation" x="4648" y="-641"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="CD4-Ww-qZf">
@@ -1375,7 +1375,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dmb-Mg-GeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4829.7101449275369" y="66.294642857142861"/>
+            <point key="canvasLocation" x="5153" y="241"/>
         </scene>
         <!--PublicFeedDetailNew-->
         <scene sceneID="3p8-Vi-KOc">
@@ -1385,7 +1385,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTR-6G-a9l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4936.9565217391309" y="134.59821428571428"/>
+            <point key="canvasLocation" x="5293" y="192"/>
         </scene>
         <!--GuideSolidarity-->
         <scene sceneID="xOp-2g-pfi">
@@ -1403,7 +1403,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="MapOptions" id="IB2-iq-b6s" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Ic-Nb-Z9Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4736.231884057971" y="210.26785714285714"/>
+            <point key="canvasLocation" x="4925" y="347"/>
         </scene>
         <!--TourConfirmation-->
         <scene sceneID="sBV-v5-LFD">
@@ -1480,7 +1480,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell1" id="gRu-ww-8wI" customClass="CellGeneric" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="339"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="339"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gRu-ww-8wI" id="rPQ-4J-bGG">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="339"/>
@@ -1533,7 +1533,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell2" id="Spd-kK-c40" customClass="CellGeneric" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="367" width="414" height="257.5"/>
+                                        <rect key="frame" x="0.0" y="363.5" width="414" height="257.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Spd-kK-c40" id="srm-io-Gik">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="257.5"/>
@@ -1543,7 +1543,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="85.5" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number2_bg" translatesAutoresizingMaskIntoConstraints="NO" id="rjq-dW-59d">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="rjq-dW-59d" secondAttribute="height" multiplier="272:160" id="QVg-27-Elb"/>
                                                             </constraints>
@@ -1619,7 +1619,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell3" id="G2r-1c-gY7" customClass="CellGeneric" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="624.5" width="414" height="343"/>
+                                        <rect key="frame" x="0.0" y="621" width="414" height="343"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G2r-1c-gY7" id="SI9-5Q-1dz">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="343"/>
@@ -1673,7 +1673,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell4" id="8MR-dO-fd4" customClass="CellGeneric" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="967.5" width="414" height="260.5"/>
+                                        <rect key="frame" x="0.0" y="964" width="414" height="260.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8MR-dO-fd4" id="szX-bG-l1k">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="260.5"/>
@@ -1690,7 +1690,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="88.5" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number4_bg" translatesAutoresizingMaskIntoConstraints="NO" id="S74-pi-eEJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="S74-pi-eEJ" secondAttribute="height" multiplier="272:160" id="LXb-Nt-CYh"/>
                                                             </constraints>
@@ -1753,7 +1753,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell5" id="uPK-bw-mJ3" customClass="CellGeneric" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1228" width="414" height="288.5"/>
+                                        <rect key="frame" x="0.0" y="1224.5" width="414" height="288.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uPK-bw-mJ3" id="113-6c-hcT">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="288.5"/>
@@ -1934,7 +1934,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="OTSolidarityGuideTableViewCellIdentifier" id="VA5-5K-5gz" customClass="OTSolidarityGuideCell">
-                                        <rect key="frame" x="0.0" y="28" width="406" height="84.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="406" height="84.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VA5-5K-5gz" id="8X4-sU-4dY">
                                             <rect key="frame" x="0.0" y="0.0" width="406" height="84.5"/>
@@ -2277,7 +2277,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTitle" id="Grb-Bw-DJB" customClass="OTHomeCellTitleView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Grb-Bw-DJB" id="9vH-WP-LXs">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -2329,7 +2329,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCellAnnounces" rowHeight="330" id="xDk-mS-U6x" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="108" width="414" height="330"/>
+                                        <rect key="frame" x="0.0" y="104.5" width="414" height="330"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xDk-mS-U6x" id="iHJ-lp-XH4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="330"/>
@@ -2628,7 +2628,7 @@ L2</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCellActions" rowHeight="298" id="iJz-cN-NqC" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="438" width="414" height="298"/>
+                                        <rect key="frame" x="0.0" y="434.5" width="414" height="298"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iJz-cN-NqC" id="GWC-So-VDm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
@@ -2983,7 +2983,7 @@ de demandes</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="collectionCellEvents" rowHeight="280" id="9Jt-00-g9x" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="736" width="414" height="280"/>
+                                        <rect key="frame" x="0.0" y="732.5" width="414" height="280"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Jt-00-g9x" id="S3a-Fv-F9c">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="280"/>
@@ -3066,7 +3066,7 @@ de demandes</string>
                                                                                     <constraint firstAttribute="width" constant="24" id="e5x-Eo-eQX"/>
                                                                                 </constraints>
                                                                             </imageView>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholder_event_feed" translatesAutoresizingMaskIntoConstraints="NO" id="GOp-Bc-4uN">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_placeholder_event_feed" translatesAutoresizingMaskIntoConstraints="NO" id="GOp-Bc-4uN">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="164"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="100" id="w2a-V6-Oyn"/>
@@ -3138,6 +3138,7 @@ de demandes</string>
                                                             </collectionViewCellContentView>
                                                             <size key="customSize" width="292" height="214"/>
                                                             <connections>
+                                                                <outlet property="ui_image_event" destination="GOp-Bc-4uN" id="emB-mW-4zh"/>
                                                                 <outlet property="ui_info_show_more" destination="0CF-Zd-ddC" id="TtB-9e-wgx"/>
                                                                 <outlet property="ui_main_view" destination="FUE-eT-eu7" id="WLM-29-NpI"/>
                                                                 <outlet property="ui_picto_location" destination="DeD-8o-N0x" id="PiM-bS-ekf"/>
@@ -3667,6 +3668,9 @@ Entourage</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="ui_view_container" destination="iOr-5l-voG" id="umK-eG-Z6i"/>
+                        <segue destination="qBS-Ms-rdt" kind="push" identifier="pushDetailFeedNew" id="HND-qQ-PfB"/>
+                        <segue destination="wAo-oB-V9c" kind="push" identifier="ActiveFeedItemDetailsSegue" id="1F4-xX-mRw"/>
+                        <segue destination="GZB-Ld-pCE" kind="push" identifier="PublicFeedItemDetailsSegue" id="N4B-g8-Vu7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nDF-9T-dDc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3766,6 +3770,36 @@ Votre collaboration est précieuse, nous vous en remercions chaleureusement !</s
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRn-8G-V8I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1355.072463768116" y="-555.13392857142856"/>
+        </scene>
+        <!--PublicFeedDetailNew-->
+        <scene sceneID="d3a-HM-64L">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PublicFeedDetailNew" id="qBS-Ms-rdt" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Iuv-cA-7aP"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S4I-Wt-VJd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="179" y="-631"/>
+        </scene>
+        <!--ActiveFeedItem-->
+        <scene sceneID="buQ-uB-rIj">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ActiveFeedItem" id="wAo-oB-V9c" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="lOA-0u-qfh"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P0v-1d-NHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="288" y="-520"/>
+        </scene>
+        <!--PublicFeedItem-->
+        <scene sceneID="YKW-Et-MQl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PublicFeedItem" id="GZB-Ld-pCE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Xg6-IM-exn"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mX4-r6-hdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="154" y="-454"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

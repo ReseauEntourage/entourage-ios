@@ -148,7 +148,9 @@
 "view_list_nav_title" = "Voir la liste";
 "create_demande_aide" = "Demander de l'aide";
 "create_proposer_don" = "Proposer de l'aide";
-
+"add_photo_from_gallery" = "Photo";
+"title_add_photo_gallery" = "Illustrez votre prochain événement avec une photo proposée par Entourage :";
+"title_save_button_photo_gallery" = "Valider";
 // Feed item
 "join_active_other" = "✔︎ Je participe";
 "join_active" = "Actif";
@@ -725,6 +727,25 @@
 "login_label_country" = "Pays";
 "login_label_phone" = "Téléphone";
 "login_label_code" = "Code";
+"login_button_change_phone" = "Changer de numéro de téléphone";
+
+"login_change_phone_title" = "Changement de numéro\nde téléphone";
+"login_change_phone_old_number" = "Ancien numéro";
+"login_change_phone_new_number" = "Nouveau numéro";
+"login_change_phone_email" = "Email (optionnel)";
+"login_change_phone_bt_validate" = "Envoyer";
+"login_change_phone_old_number_placeholder" = "Ancien numéro";
+"login_change_phone_new_number_placeholder" = "Nouveau numéro";
+"login_change_phone_email_placeholder" = "Email";
+"login_change_send_ok" = "Votre demande a bien été envoyée.\n\n\nLe support Entourage vous informera lorsque le changement de numéro sera réalisé.";
+"login_change_bt_return" = "Retour";
+
+"login_change_warning_title" = "Attention";
+"login_change_error_phone" = "Veuillez verifier vos numéros de téléphone";
+"login_change_error_mail" = "Veuillez vérifier votre adresse Email";
+
+"login_change_error_return" = "Erreur";
+"login_change_error_return_detail" = "L’ancien numéro est inconnu ou supprimé.\nVeuillez vérifier.";
 
 //Onboarding Assos
 "onboard_asso_start_title" = "Ça tombe bien !";
@@ -1006,7 +1027,7 @@
 
 "home_neo_street_title" = "Comprendre le monde de la rue";
 "home_neo_street_subtitle" = "Les formats proposés :";
-"home_neo_street_cell1_title" = "Atelier en ligne hebdomadaire";
+"home_neo_street_cell1_title" = "Atelier en ligne";
 "home_neo_street_cell1_description" = "1h de sensibilisation par l’équipe Entourage enrichie de témoignages de la rue pour poser toutes vos questions en direct.";
 "home_neo_street_cell1_button" = "S’inscrire";
 

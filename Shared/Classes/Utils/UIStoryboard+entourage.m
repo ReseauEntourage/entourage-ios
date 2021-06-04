@@ -8,17 +8,12 @@
 
 #import "UIStoryboard+entourage.h"
 #import "OTAppDelegate.h"
-#import "OTStartupViewController.h"
 #import "UINavigationController+entourage.h"
 
 @implementation UIStoryboard (entourage)
 
 + (void)showStartup {
     [self showInitialViewControllerFromStoryboardNamed:@"Intro" addingNavigation:NO];
-}
-
-+ (void)showUserProfileDetails {
-    [self showInitialViewControllerFromStoryboardNamed:@"UserProfileDetails" addingNavigation:YES];
 }
 
 + (void)showSWRevealController {
