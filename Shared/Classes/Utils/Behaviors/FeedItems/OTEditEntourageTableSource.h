@@ -25,5 +25,5 @@
 - (void)updateTexts;
 - (void)updateEventStartDate:(NSDate*)date;
 - (void)updateEventEndDate:(NSDate*)date;
-
+@property (nonatomic) BOOL isHomeNeo;
 @end

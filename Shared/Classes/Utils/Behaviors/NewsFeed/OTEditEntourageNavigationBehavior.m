@@ -91,6 +91,9 @@
 }
 
 - (void)editCategory:(OTEntourage *)entourage {
+    if (self.isFromHomeNeo) {
+        return;
+    }
     self.entourage = entourage;
     [self.owner performSegueWithIdentifier:@"CategoryEditSegue" sender:self];
 }

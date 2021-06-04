@@ -144,10 +144,15 @@ OTHeatzonesCollectionViewDelegate
     self.newsFeedsSourceBehavior.tableDelegate = self.tableView;
     
     NSLog(@"***** ici current filters init");
-    self.currentFilter = [OTNewsFeedsFilter new];
+    self.currentFilter = [[OTNewsFeedsFilter alloc]initFromNewFeed];
     self.currentFilter.showOuting = self.isFromEvent ? YES : NO;
     self.currentFilter.isPro = NO;
     [self.currentFilter setVersionAlone];
+    
+    if (self.isFromNeoCourse) {
+        [self.currentFilter setNeighbourFilters];
+    }
+    
     
     self.newsFeedsSourceBehavior.currentFilter = self.currentFilter;
     
@@ -190,12 +195,13 @@ OTHeatzonesCollectionViewDelegate
     if (isFromOnboarding && !self.isFromEvent) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isFromOnboarding"];
         
-        if (userType == 1) { //Neighbour
-            [self.currentFilter setNeighbourFilters];
-        }
-        else if(userType == 2) { // Alone
-            [self.currentFilter setAloneFilters];
-        }
+//        if (userType == 1) { //Neighbour
+//            [self.currentFilter setNeighbourFilters];
+//        }
+//        else if(userType == 2) { // Alone
+//            [self.currentFilter setAloneFilters];
+//        }
+        
         [self changeFilterButton];
         
         NSNotification *notif = [[NSNotification alloc]initWithName:@"showToolTip" object:nil userInfo:nil];

@@ -163,7 +163,11 @@ class OTDetailActionEventLocationCell: UITableViewCell, TTTAttributedLabelDelega
     }
     
     //MARK: - TTTAttributedLabelDelegate
-    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWithAddress addressComponents: [AnyHashable : Any]!) {
+    func attributedLabel(_ label: TTTAttributedLabel, didSelectLinkWithAddress addressComponents: [AnyHashable : Any]?) {
+        
+        guard let addressComponents = addressComponents  else {
+            return
+        }
         
         let strAddress = String.init(format: "http://maps.apple.com/?address=1,%@ %@ %@", addressComponents[NSTextCheckingKey.street] as! CVarArg,addressComponents[NSTextCheckingKey.zip] as! CVarArg,
                                      addressComponents[NSTextCheckingKey.city] as! CVarArg)

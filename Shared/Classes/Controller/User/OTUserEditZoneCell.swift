@@ -46,16 +46,12 @@ import UIKit
         if let zonePri = user.addressPrimary {
             ui_zone_primary_title.text = zonePri.displayAddress
         }
-        
-        if let zoneSec = user.addressSecondary {
-            ui_zone_secondary_title.text = zoneSec.displayAddress
-            ui_view_button_add.isHidden = true
-            ui_view_zone_secondary.isHidden = false
-        }
         else {
-            ui_view_button_add.isHidden = false
-            ui_view_zone_secondary.isHidden = true
+            ui_zone_primary_title.text = " - "
         }
+        
+        ui_view_button_add.isHidden = true
+        ui_view_zone_secondary.isHidden = true
         
         ui_zone_primary_button_edit.layer.cornerRadius = 8
         ui_zone_primary_button_edit.layer.borderWidth = 1

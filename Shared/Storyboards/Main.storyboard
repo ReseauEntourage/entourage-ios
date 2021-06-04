@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8Ze-Ds-ar7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="FkR-sv-GpE">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -40,7 +40,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ija-p7-iwf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2872.4637681159425" y="65.625"/>
+            <point key="canvasLocation" x="3782.608695652174" y="65.625"/>
         </scene>
         <!--FeedChangeOptions-->
         <scene sceneID="3Yl-X6-YNn">
@@ -1105,7 +1105,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="3771.0144927536235" y="65.625"/>
+            <point key="canvasLocation" x="4681.159420289855" y="65.625"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="CD4-Ww-qZf">
@@ -1317,7 +1317,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="UserProfile" id="cEE-ZD-h1d" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GQc-Cn-XSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4545.652173913044" y="-251.11607142857142"/>
+            <point key="canvasLocation" x="5455.7971014492759" y="-251.11607142857142"/>
         </scene>
         <!--Social-->
         <scene sceneID="fK0-Cb-xwN">
@@ -1325,7 +1325,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="Social" id="IdJ-o7-C8S" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="71P-pO-jf9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1950" y="-695"/>
+            <point key="canvasLocation" x="2860.144927536232" y="-695.08928571428567"/>
         </scene>
         <!--Settings-->
         <scene sceneID="fPx-Ql-9QZ">
@@ -1333,7 +1333,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="Settings" id="pnd-2e-8CK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCX-aO-hQ7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1938.4000000000001" y="-776.31184407796104"/>
+            <point key="canvasLocation" x="2847.1014492753625" y="-776.78571428571422"/>
         </scene>
         <!--About-->
         <scene sceneID="Uk4-cL-jvE">
@@ -1341,7 +1341,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="About" id="vTa-22-9U0" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I5w-SE-tsq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1950" y="-734"/>
+            <point key="canvasLocation" x="2860.144927536232" y="-734.59821428571422"/>
         </scene>
         <!--UserProfileEditor-->
         <scene sceneID="Z6r-zn-ztw">
@@ -1349,7 +1349,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="UserProfileEditor" id="UAH-w8-fk1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAn-9W-qGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2004" y="-658"/>
+            <point key="canvasLocation" x="2913.768115942029" y="-658.25892857142856"/>
         </scene>
         <!--QuitFeedItem-->
         <scene sceneID="BFl-vb-SXz">
@@ -1395,7 +1395,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1g-iK-4ez" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2099" y="-474"/>
+            <point key="canvasLocation" x="3008.6956521739135" y="-474.10714285714283"/>
         </scene>
         <!--MapOptions-->
         <scene sceneID="z5A-ht-Zxe">
@@ -1453,7 +1453,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 <viewControllerPlaceholder storyboardName="SolidarityGuideFilters" id="UzR-b4-49u" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nQ4-qQ-tSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1811" y="-598"/>
+            <point key="canvasLocation" x="2720.289855072464" y="-598.66071428571422"/>
         </scene>
         <!--FeedItemFilters-->
         <scene sceneID="N4j-rM-ZJb">
@@ -1763,7 +1763,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="116.5" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number2_bg" translatesAutoresizingMaskIntoConstraints="NO" id="w6Z-ue-1Lh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="w6Z-ue-1Lh" secondAttribute="height" multiplier="272:160" id="YTZ-PJ-bdm"/>
                                                             </constraints>
@@ -1879,7 +1879,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YHd-kX-mDh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1342.0289855072465" y="-665.625"/>
+            <point key="canvasLocation" x="2252.1739130434785" y="-665.625"/>
         </scene>
         <!--Main-->
         <scene sceneID="Loe-1r-5eD">
@@ -2220,12 +2220,12 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2173.913043478261" y="-657.58928571428567"/>
+            <point key="canvasLocation" x="3084.057971014493" y="-657.58928571428567"/>
         </scene>
-        <!--Home Main View Controller-->
+        <!--Home Expert View Controller-->
         <scene sceneID="47q-nT-1Zc">
             <objects>
-                <viewController storyboardIdentifier="OTMain" id="8Ze-Ds-ar7" customClass="OTHomeMainViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeExpert" id="8Ze-Ds-ar7" customClass="OTHomeExpertViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="a6v-dJ-XH4"/>
                         <viewControllerLayoutGuide type="bottom" id="fJg-09-dfd"/>
@@ -3639,23 +3639,39 @@ Entourage</string>
             </objects>
             <point key="canvasLocation" x="286.95652173913044" y="107.8125"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="O5l-Dl-guq">
+        <!--Home Main View Controller-->
+        <scene sceneID="j4o-F6-i5Y">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pn9-P3-efu" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XOa-pz-x0Q">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
+                <viewController storyboardIdentifier="OTMain" id="FkR-sv-GpE" customClass="OTHomeMainViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mBc-jS-UE4"/>
+                        <viewControllerLayoutGuide type="bottom" id="plo-ae-EkM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="p8q-K1-lLm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iOr-5l-voG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="iOr-5l-voG" secondAttribute="bottom" id="LZg-lD-lcO"/>
+                            <constraint firstItem="iOr-5l-voG" firstAttribute="top" secondItem="p8q-K1-lLm" secondAttribute="top" id="aAQ-VB-NiW"/>
+                            <constraint firstAttribute="trailing" secondItem="iOr-5l-voG" secondAttribute="trailing" id="coP-EA-XZV"/>
+                            <constraint firstItem="iOr-5l-voG" firstAttribute="leading" secondItem="p8q-K1-lLm" secondAttribute="leading" id="mY6-zP-qyo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Nnt-D8-PFa"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <segue destination="8Ze-Ds-ar7" kind="relationship" relationship="rootViewController" id="q7h-H5-VTF"/>
+                        <outlet property="ui_view_container" destination="iOr-5l-voG" id="umK-eG-Z6i"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L9t-kG-Hxp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nDF-9T-dDc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1326" y="108"/>
+            <point key="canvasLocation" x="-444.92753623188412" y="-555.13392857142856"/>
         </scene>
         <!--Home Help Reporter View Controller-->
         <scene sceneID="jbn-Lk-Psn">
@@ -3732,6 +3748,24 @@ Votre collaboration est précieuse, nous vous en remercions chaleureusement !</s
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdS-RG-T14" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="983" y="108"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="K1e-TL-QhA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PRd-iV-bar" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RDl-2L-pr9">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FkR-sv-GpE" kind="relationship" relationship="rootViewController" id="j3I-rV-oeL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fRn-8G-V8I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1355.072463768116" y="-555.13392857142856"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

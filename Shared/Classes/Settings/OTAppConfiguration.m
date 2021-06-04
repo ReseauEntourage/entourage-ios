@@ -117,6 +117,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"noMoreDemand"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"nbOfLaunch"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@DEVICE_TOKEN_KEY];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isExpertMode"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[A0SimpleKeychain keychain] deleteEntryForKey:kKeychainPhone];
@@ -282,8 +283,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [[UINavigationBar appearance] setBarStyle:UIBarStyleDefault];
     [[UINavigationBar appearance] setTranslucent:NO];
     
-    UIColor *primaryNavigationBarTintColor = [UIColor appOrangeColor];
-    UIColor *secondaryNavigationBarTintColor = [UIColor whiteColor];
+    UIColor *primaryNavigationBarTintColor = [UIColor whiteColor];
+    UIColor *secondaryNavigationBarTintColor = [UIColor appOrangeColor];
     UIColor *backgroundThemeColor = [UIColor appOrangeColor];
     UIColor *titleColor = [UIColor appGreyishBrownColor];
     UIColor *subtitleColor = [UIColor appGreyishColor];
@@ -303,7 +304,8 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     UINavigationBar.appearance.tintColor = secondaryNavigationBarTintColor;
     
     UIFont *navigationBarFont = [UIFont systemFontOfSize:OTNavigationBarDefaultFontSize weight:UIFontWeightRegular];
-    UIColor *navigationBarTextColor = [UIColor whiteColor];
+    UIColor *navigationBarTextColor = [UIColor appOrangeColor];
+    
     UINavigationBar.appearance.titleTextAttributes = @{ NSForegroundColorAttributeName : navigationBarTextColor };
     [UIBarButtonItem.appearance setTitleTextAttributes:@{ NSForegroundColorAttributeName : navigationBarTextColor,
                                                           NSFontAttributeName : navigationBarFont } forState:UIControlStateNormal];
@@ -350,7 +352,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
         [navBarAppearance configureWithOpaqueBackground];
         navBarAppearance.backgroundColor = [[ApplicationTheme shared] primaryNavigationBarTintColor];
         NSDictionary *textAttributes = @{
-            NSForegroundColorAttributeName: [[ApplicationTheme shared] secondaryNavigationBarTintColor]
+            NSForegroundColorAttributeName: [[ApplicationTheme shared] topTilteNavBarColor]
         };
         navBarAppearance.titleTextAttributes = textAttributes;
         navBarAppearance.largeTitleTextAttributes = textAttributes;

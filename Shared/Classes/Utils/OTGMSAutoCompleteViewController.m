@@ -45,7 +45,7 @@
     
     // Color of typed text in the search bar.
     NSDictionary *searchBarTextAttributes = @{
-                                              NSForegroundColorAttributeName: [UIColor whiteColor],
+                                              NSForegroundColorAttributeName: [ApplicationTheme shared].labelNavBarColor,
                                               NSFontAttributeName : [UIFont systemFontOfSize:[UIFont systemFontSize]]
                                               };
     [UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]]

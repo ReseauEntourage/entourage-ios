@@ -47,6 +47,7 @@ class OTDetailActionEventViewController: UIViewController {
         super.viewWillAppear(animated)
         OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
     }
     
     override func viewDidAppear(_ animated: Bool) {

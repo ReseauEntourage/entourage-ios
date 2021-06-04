@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/facebook/facebook-ios-sdk",
         "state": {
           "branch": null,
-          "revision": "efb1705a421c85c022d45b8205e1a1f431f8ade8",
-          "version": "9.0.0"
+          "revision": "c3d367656ae8ced1149c2c6a5e6b5dd91ecad63c",
+          "version": "9.3.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
           "branch": null,
-          "revision": "2c8ed9a2f3ad537dbe9e58e2ec18be361da112aa",
-          "version": "5.9.5"
+          "revision": "76dd4b49110b8624317fc128e7fa0d8a252018bc",
+          "version": "5.11.1"
         }
       }
     ]

@@ -257,7 +257,7 @@
     
     UIButton *more = [UIButton buttonWithType:UIButtonTypeCustom];
     [more setFrame:CGRectMake(0, 0, 30, 30)];
-    [more setBackgroundImage:[[UIImage imageNamed:@"info"] resizeTo:CGSizeMake(25, 25)]
+    [more setBackgroundImage:[[UIImage imageNamed:@"info_orange"] resizeTo:CGSizeMake(25, 25)]
           forState:UIControlStateNormal];
     [more addTarget:self action:@selector(infoAction) forControlEvents:UIControlEventTouchUpInside];
     

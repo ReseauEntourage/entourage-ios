@@ -168,7 +168,7 @@ class OTGuideDetailContactTableViewCell: UITableViewCell {
         let buttons = [ui_button_mail,ui_button_phone,ui_button_web,ui_button_location]
         
         for button in buttons {
-            button?.setTitleColor(ApplicationTheme.shared().primaryNavigationBarTintColor, for: .normal)
+            button?.setTitleColor(ApplicationTheme.shared().secondaryNavigationBarTintColor, for: .normal)
         }
     }
     

@@ -100,7 +100,7 @@ class OTMainGuideViewController: UIViewController {
         }
         
         if isFromDeeplink {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
                 DispatchQueue.main.async {
                     self.showMap(animated: false)
                 }

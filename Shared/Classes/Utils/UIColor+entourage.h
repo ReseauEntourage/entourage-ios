@@ -39,4 +39,7 @@
 + (UIColor*)appGrayTextColor;
 + (UIColor*)appSubtitleBlueColor;
 
++ (UIColor*)appLightPink;
++ (UIColor*)appLightGrey246;
+
 @end

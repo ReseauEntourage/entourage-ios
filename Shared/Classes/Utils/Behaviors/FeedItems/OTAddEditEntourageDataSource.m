@@ -36,7 +36,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                      entourage:(OTEntourage*)entourage
                   locationText:(NSString*)locationText
-                      delegate:(id<OTAddEditEntourageDelegate>)delegate {
+                      delegate:(id<OTAddEditEntourageDelegate>)delegate isHomeNeo:(BOOL) isHomeNeo {
     
     if ([entourage isOuting]) {
         NSString *identifier = @"EntourageCell";
@@ -113,6 +113,12 @@
             }
             [((OTEntourageEditItemCell*)cell) configureWith:OTLocalizedString(@"category")
                                                     andText:title];
+            if (isHomeNeo) {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            else {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
             break;
         }
         case 1:

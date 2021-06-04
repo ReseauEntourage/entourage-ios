@@ -356,6 +356,9 @@ class OTProfileSelectActionsViewController: UIViewController {
     }
     
     func popToProfile() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationSupportedPartnerUpdated), object: nil)
+       
+        
         if let _navController = self.navigationController {
             for vc in _navController.viewControllers {
                 if vc.isKind(of: OTUserEditViewController.classForCoder()) {

@@ -242,6 +242,28 @@ struct SdfNeighbourActivities {
     
     var isSdf = true
     
+    init() {
+        choice1Selected = false
+        choice2Selected = false
+        choice3Selected = false
+        choice4Selected = false
+        choice5Selected = false
+        choice6Selected = false
+    }
+    
+    init(isSdf:Bool) {
+        self.isSdf = isSdf
+        choice1Selected = true
+        choice2Selected = true
+        choice3Selected = true
+        choice4Selected = true
+        choice5Selected = true
+        
+        if self.isSdf {
+            choice6Selected = true
+        }
+    }
+    
     func hasOneSelectionMin() -> Bool {
         if isSdf {
             if choice1Selected || choice2Selected || choice3Selected || choice4Selected || choice5Selected || choice6Selected {

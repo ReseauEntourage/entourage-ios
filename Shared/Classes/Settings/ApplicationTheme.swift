@@ -19,11 +19,17 @@ class ApplicationTheme: NSObject {
         return sharedInstance
     }
     
-    @objc var primaryNavigationBarTintColor: UIColor = UIColor.appOrange()
-    @objc var secondaryNavigationBarTintColor: UIColor = UIColor.white
+    @objc var primaryNavigationBarTintColor: UIColor = UIColor.white
+    @objc var secondaryNavigationBarTintColor: UIColor = UIColor.appOrange()
+    
     @objc var backgroundThemeColor: UIColor = UIColor.appOrange()
     @objc var addActionButtonColor: UIColor = UIColor.appOrange()
     @objc var tableViewBackgroundColor: UIColor = UIColor.groupTableViewBackground
     @objc var titleLabelColor: UIColor = UIColor.appGreyishBrown()
     @objc var subtitleLabelColor: UIColor = UIColor.appPaleGrey()
+    
+    @objc var labelNavBarColor: UIColor = UIColor.appGreyishBrown()
+    @objc var topTilteNavBarColor: UIColor = UIColor.black
+    @objc var topButtonColor: UIColor = UIColor.appOrange()
+
 }

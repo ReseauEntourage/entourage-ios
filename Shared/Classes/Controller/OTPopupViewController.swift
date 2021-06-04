@@ -72,10 +72,10 @@ import SVProgressHUD
         textWithCount.placeholder = textFieldPlaceholder
         completionButton.addTarget(self, action: #selector(sendMail), for: .touchUpInside)
         completionButton.backgroundColor = ApplicationTheme.shared().backgroundThemeColor
-        closeButton.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
+        closeButton.tintColor = ApplicationTheme.shared().topButtonColor
         let closeImage = closeButton.image(for: UIControl.State.normal)
         let tintImage = closeImage?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        closeButton.tintColor = ApplicationTheme.shared().primaryNavigationBarTintColor
+        closeButton.tintColor = ApplicationTheme.shared().topButtonColor
         closeButton.setImage(tintImage, for: UIControl.State.normal)
     }
     
