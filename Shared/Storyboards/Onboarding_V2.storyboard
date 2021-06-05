@@ -755,6 +755,7 @@ Ligne 4</string>
                                             <constraint firstItem="lMZ-rn-dLZ" firstAttribute="leading" secondItem="ivb-P3-00y" secondAttribute="trailing" constant="20" id="D7x-mZ-4zy"/>
                                             <constraint firstItem="lMZ-rn-dLZ" firstAttribute="top" secondItem="ivb-P3-00y" secondAttribute="top" constant="8" id="IPb-wg-fiW"/>
                                             <constraint firstAttribute="trailing" secondItem="0wt-aH-VgP" secondAttribute="trailing" constant="8" id="bpT-lR-2ni"/>
+                                            <constraint firstAttribute="trailing" secondItem="lMZ-rn-dLZ" secondAttribute="trailing" constant="8" id="bwT-lR-2ni"/>
                                             <constraint firstItem="0wt-aH-VgP" firstAttribute="leading" secondItem="ivb-P3-00y" secondAttribute="trailing" constant="20" id="frL-8p-zOz"/>
                                             <constraint firstItem="0wt-aH-VgP" firstAttribute="top" secondItem="lMZ-rn-dLZ" secondAttribute="bottom" constant="8" id="gmn-a9-9H4"/>
                                             <constraint firstItem="ivb-P3-00y" firstAttribute="top" secondItem="lgN-rE-lgc" secondAttribute="top" constant="16" id="lVW-eY-loO"/>
