@@ -727,7 +727,7 @@
 "login_label_country" = "Pays";
 "login_label_phone" = "Téléphone";
 "login_label_code" = "Code";
-"login_button_change_phone" = "Changer de numéro de téléphone";
+"login_button_change_phone" = "J’ai changé de numéro de téléphone";
 
 "login_change_phone_title" = "Changement de numéro\nde téléphone";
 "login_change_phone_old_number" = "Ancien numéro";
