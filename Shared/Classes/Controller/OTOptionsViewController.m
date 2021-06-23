@@ -149,7 +149,7 @@
     
     button.frame = CGRectMake(x, y, BIG_BUTTON_SIDE, BIG_BUTTON_SIDE);
     button.layer.cornerRadius = button.frame.size.width / 2;
-    button.backgroundColor = [UIColor colorWithDisplayP3Red:245 / 255.0 green:95 / 255.0 blue:36 / 255.0 alpha:1.0];
+    button.backgroundColor = [UIColor appOrangeColor];
     [button setImage:[UIImage imageNamed:optionIcon] forState:UIControlStateNormal];
     [self.view addSubview:button];
     button.clipsToBounds = YES;

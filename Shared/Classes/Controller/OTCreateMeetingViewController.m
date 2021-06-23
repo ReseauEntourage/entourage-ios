@@ -57,12 +57,13 @@
     UIToolbar* messageToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50)];
     messageToolbar.barStyle = UIBarStyleBlack;
     messageToolbar.tintColor = UIColor.whiteColor;
-    messageToolbar.barTintColor = UIColor.appOrangeColor;
+    messageToolbar.barTintColor = UIColor.whiteColor;
     messageToolbar.items = [NSArray arrayWithObjects:
                                    [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                                    [[UIBarButtonItem alloc]initWithTitle:OTLocalizedString(@"close") style:UIBarButtonItemStyleDone target:self action:@selector(closeMessage)],
                                    nil];
     [messageToolbar sizeToFit];
+    self.nameTextField.inputAccessoryView = messageToolbar;
     self.messageTextView.textView.inputAccessoryView = messageToolbar;
     
     
@@ -77,10 +78,6 @@
         self.nameTextField.text = self.encounter.streetPersonName;
         self.messageTextView.textView.text = self.encounter.message;
     }
-    
-    [self setupCloseModalWithoutTintWithTint:UIColor.whiteColor];
-    
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController withMainColor:UIColor.appOrangeColor andSecondaryColor:UIColor.whiteColor];
     
     
 }
@@ -98,16 +95,16 @@
 #pragma mark - Private methods
 
 - (void)setupUI {
-    [self setupCloseModal];
-
-    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController];
+    [self setupCloseModalWithoutTintWithTint:UIColor.appOrangeColor];
+    
+    [OTAppConfiguration configureNavigationControllerAppearance:self.navigationController withMainColor:UIColor.whiteColor andSecondaryColor:UIColor.appOrangeColor];
     
     UIBarButtonItem *menuButton = [UIBarButtonItem createWithTitle:OTLocalizedString(@"validate")
                                                             withTarget:self
                                                              andAction:@selector(sendEncounter:)
                                                                andFont:@"SFUIText-Bold"
-                                                               colored:[ApplicationTheme shared].secondaryNavigationBarTintColor];
-        [self.navigationItem setRightBarButtonItem:menuButton];
+                                                               colored:[UIColor appOrangeColor]];
+    [self.navigationItem setRightBarButtonItem:menuButton];
     
     OTUser *currentUser = [[NSUserDefaults standardUserDefaults] currentUser];
     self.firstLabel.text = [NSString stringWithFormat:OTLocalizedString(@"formater_encounterAnd"), currentUser.displayName];
