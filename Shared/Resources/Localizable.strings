@@ -677,11 +677,11 @@
 "onboard_type_sub" = "Comment voulez-vous personnaliser l’application ?";
 "onboard_type_description" = "Entourage vous pose ces quelques questions pour vous accueillir et vous accompagner au mieux !\n(Cette information ne sera pas visible par les autres membres du réseau).";
 "onboard_type_description_italic" = "(Cette information ne sera pas visible par les autres membres du réseau).";
-"onboard_type_choice1" = "Pour aider les sans-abris et créer du lien dans votre quartier.";
+"onboard_type_choice1" = "Pour aider les personnes sans-abri et créer du lien dans votre quartier.";
 "onboard_type_choice2" = "Pour demander de l’aide et découvrir des lieux de solidarité.";
 "onboard_type_choice3" = "Pour parler au nom de votre structure.";
 "onboard_type_choice_title1" = "Voisin solidaire";
-"onboard_type_choice_title2" = "Personne SDF";
+"onboard_type_choice_title2" = "Personne isolée ou en précarité";
 "onboard_type_choice_title3" = "Association ou service public";
 "onboard_place_title" = "Quel est votre quartier ?";
 "onboard_place_description" = "Vous pourrez répondre aux demandes de personnes en difficulté et d’associations de votre quartier, et vous pourrez vous-même proposer des dons de votre temps ou matériels.";
@@ -727,7 +727,7 @@
 "login_label_country" = "Pays";
 "login_label_phone" = "Téléphone";
 "login_label_code" = "Code";
-"login_button_change_phone" = "Changer de numéro de téléphone";
+"login_button_change_phone" = "J’ai changé de numéro de téléphone";
 
 "login_change_phone_title" = "Changement de numéro\nde téléphone";
 "login_change_phone_old_number" = "Ancien numéro";

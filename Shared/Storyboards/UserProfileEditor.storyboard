@@ -1162,7 +1162,7 @@ Ligne 4</string>
                                                     <constraint firstAttribute="height" constant="46" id="j84-zQ-tCh"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les sans-abris, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5K-5D-gAq">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les personnes sans-abri, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5K-5D-gAq">
                                                 <rect key="frame" x="74" y="43.333333333333314" width="300" height="57.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -1199,14 +1199,14 @@ Ligne 4</string>
                                                     <constraint firstAttribute="width" constant="46" id="yxZ-0A-xAg"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les sans-abris, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACe-20-STX">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les personnes sans-abri, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACe-20-STX">
                                                 <rect key="frame" x="74" y="43.333333333333314" width="300" height="57.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voisin solidaire" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyr-xx-aQy">
-                                                <rect key="frame" x="74" y="15.999999999999998" width="111.33333333333331" height="19.333333333333329"/>
+                                                <rect key="frame" x="74" y="15.999999999999998" width="300" height="19.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1217,6 +1217,7 @@ Ligne 4</string>
                                             <constraint firstItem="ACe-20-STX" firstAttribute="top" secondItem="fyr-xx-aQy" secondAttribute="bottom" constant="8" id="5PQ-Nn-dO8"/>
                                             <constraint firstItem="fyr-xx-aQy" firstAttribute="top" secondItem="ptG-Qr-1bN" secondAttribute="top" constant="16" id="CW3-Jy-FeB"/>
                                             <constraint firstAttribute="trailing" secondItem="ACe-20-STX" secondAttribute="trailing" constant="8" id="FN2-eh-f0g"/>
+                                            <constraint firstAttribute="trailing" secondItem="fyr-xx-aQy" secondAttribute="trailing" constant="8" id="FW2-eh-f0g"/>
                                             <constraint firstItem="ACe-20-STX" firstAttribute="leading" secondItem="GUc-U3-dET" secondAttribute="trailing" constant="20" id="HCq-sn-3pT"/>
                                             <constraint firstItem="GUc-U3-dET" firstAttribute="top" secondItem="ptG-Qr-1bN" secondAttribute="top" constant="16" id="NdT-02-3zT"/>
                                             <constraint firstItem="GUc-U3-dET" firstAttribute="leading" secondItem="ptG-Qr-1bN" secondAttribute="leading" constant="8" id="ZlX-Eg-SRg"/>
@@ -1236,7 +1237,7 @@ Ligne 4</string>
                                                     <constraint firstAttribute="width" constant="46" id="MJl-h1-2US"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les sans-abris, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIX-zl-VH2">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour aider les personnes sans-abri, créer du lien dans votre quartier et participer à des événements solidaires." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIX-zl-VH2">
                                                 <rect key="frame" x="74" y="43.333333333333314" width="300" height="57.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
