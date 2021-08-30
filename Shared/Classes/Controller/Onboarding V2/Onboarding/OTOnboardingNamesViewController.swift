@@ -15,6 +15,7 @@ class OTOnboardingNamesViewController: UIViewController {
     @IBOutlet weak var ui_tf_firstname: OTCustomTextfield!
     @IBOutlet weak var ui_tf_lastname: OTCustomTextfield!
     @IBOutlet weak var ui_label_info: UILabel!
+    @IBOutlet weak var ui_label_error: UILabel!
     
     weak var delegate:OnboardV2Delegate? = nil
     var userFirstname:String? = nil
@@ -25,6 +26,8 @@ class OTOnboardingNamesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ui_label_error.text = ""
+        ui_label_error.isHidden = true
         ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_welcome_title")
         ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_welcome_sub")
         ui_label_info.attributedText = Utilitaires.formatStringItalicOnly(stringMessage: OTLocalisationService.getLocalizedValue(forKey: "onboard_welcome_info"), color: .appBlack30, fontSize: 11)
@@ -95,8 +98,17 @@ extension OTOnboardingNamesViewController: UITextFieldDelegate {
     
     func checkAndValidateInputs() -> Bool {
         if ui_tf_firstname.text?.count ?? 0 >= minimumCharacters && ui_tf_lastname.text?.count ?? 0 >= minimumCharacters {
+            ui_label_error.isHidden = true
             return true
         }
+        
+        if ui_tf_firstname.text?.count ?? 0 < minimumCharacters {
+            ui_label_error.text = OTLocalisationService.getLocalizedValue(forKey: "onboarding_error_firstname")
+        }
+        else {
+            ui_label_error.text = OTLocalisationService.getLocalizedValue(forKey: "onboarding_error_lastname")
+        }
+        ui_label_error.isHidden = false
         return false
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2im-Bg-aul">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2im-Bg-aul">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -178,6 +178,12 @@ Comment vous appelez-vous ?</string>
                                     <constraint firstAttribute="height" constant="1" id="FSv-UG-gAF"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le prénom doit comporter au moins 2 lettres." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23w-YB-rLr">
+                                <rect key="frame" x="16" y="279" width="343" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.93333333333333335" green="0.24313725490196078" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seule la première lettre sera visible par les autres membres." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6m-Wf-WFn">
                                 <rect key="frame" x="16" y="257.5" width="343" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -189,8 +195,10 @@ Comment vous appelez-vous ?</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="23w-YB-rLr" firstAttribute="leading" secondItem="Wws-wO-Pyj" secondAttribute="leading" constant="16" id="00Q-4V-hKO"/>
                             <constraint firstItem="aLP-fr-erQ" firstAttribute="trailing" secondItem="fNU-yr-6VQ" secondAttribute="trailing" id="2Xq-dx-Jz9"/>
                             <constraint firstItem="Bm5-qm-3pK" firstAttribute="trailing" secondItem="tb7-ZZ-IWU" secondAttribute="trailing" id="2hr-3P-mZB"/>
+                            <constraint firstItem="23w-YB-rLr" firstAttribute="top" secondItem="u6m-Wf-WFn" secondAttribute="bottom" constant="8" id="81z-Pl-RCr"/>
                             <constraint firstItem="u6m-Wf-WFn" firstAttribute="leading" secondItem="fNU-yr-6VQ" secondAttribute="leading" id="AL5-3d-hu6"/>
                             <constraint firstItem="fNU-yr-6VQ" firstAttribute="height" secondItem="tb7-ZZ-IWU" secondAttribute="height" id="AZc-l2-sHB"/>
                             <constraint firstItem="tb7-ZZ-IWU" firstAttribute="trailing" secondItem="X9Y-d0-peR" secondAttribute="trailingMargin" id="B6E-mM-0Oi"/>
@@ -208,6 +216,7 @@ Comment vous appelez-vous ?</string>
                             <constraint firstItem="u6m-Wf-WFn" firstAttribute="top" secondItem="fNU-yr-6VQ" secondAttribute="bottom" constant="5" id="dkm-du-aeQ"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="5gi-LX-Iv2" secondAttribute="trailing" id="eLc-s3-NZl"/>
                             <constraint firstItem="tb7-ZZ-IWU" firstAttribute="top" secondItem="5gi-LX-Iv2" secondAttribute="bottom" constant="30" id="eNO-iG-Vnp"/>
+                            <constraint firstItem="Wws-wO-Pyj" firstAttribute="trailing" secondItem="23w-YB-rLr" secondAttribute="trailing" constant="16" id="hyk-2b-C3I"/>
                             <constraint firstItem="aLP-fr-erQ" firstAttribute="bottom" secondItem="fNU-yr-6VQ" secondAttribute="bottom" id="tJg-Ns-G0a"/>
                             <constraint firstItem="5gi-LX-Iv2" firstAttribute="top" secondItem="myu-ek-WsL" secondAttribute="bottom" constant="8" id="xdO-qV-jFo"/>
                         </constraints>
@@ -217,6 +226,7 @@ Comment vous appelez-vous ?</string>
                     </view>
                     <connections>
                         <outlet property="ui_label_description" destination="5gi-LX-Iv2" id="4IV-HB-JWD"/>
+                        <outlet property="ui_label_error" destination="23w-YB-rLr" id="U1J-ot-bdZ"/>
                         <outlet property="ui_label_info" destination="u6m-Wf-WFn" id="ypj-jR-qQd"/>
                         <outlet property="ui_label_title" destination="myu-ek-WsL" id="BpU-54-HSQ"/>
                         <outlet property="ui_tf_firstname" destination="tb7-ZZ-IWU" id="r8N-gN-n6a"/>
@@ -288,6 +298,12 @@ Comment vous appelez-vous ?</string>
                                     <constraint firstAttribute="height" constant="1" id="lfq-7S-qOc"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le prénom doit comporter au moins 2 lettres." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLt-17-Njg">
+                                <rect key="frame" x="16" y="235" width="343" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.93333333330000001" green="0.24313725489999999" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On veut juste vérifier que vous n'êtes pas un robot, mais un humain au grand coeur !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vS9-2n-3oq">
                                 <rect key="frame" x="16" y="103.5" width="328" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
@@ -300,6 +316,7 @@ Comment vous appelez-vous ?</string>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="JLt-17-Njg" firstAttribute="top" secondItem="hYY-Ep-yNn" secondAttribute="bottom" constant="8" id="4Dd-DK-eoa"/>
                             <constraint firstItem="geX-xT-ciq" firstAttribute="leading" secondItem="HIF-El-YTW" secondAttribute="leadingMargin" id="AMv-8y-TYL"/>
                             <constraint firstItem="T1b-ju-ych" firstAttribute="bottom" secondItem="nxL-5f-oOM" secondAttribute="bottom" id="BRo-ch-kkN"/>
                             <constraint firstItem="hYY-Ep-yNn" firstAttribute="leading" secondItem="rvc-Gd-Rfd" secondAttribute="leading" id="LSB-u5-Nnk"/>
@@ -315,9 +332,11 @@ Comment vous appelez-vous ?</string>
                             <constraint firstItem="hYY-Ep-yNn" firstAttribute="bottom" secondItem="rvc-Gd-Rfd" secondAttribute="bottom" id="h85-ez-9d0"/>
                             <constraint firstItem="nxL-5f-oOM" firstAttribute="centerY" secondItem="rvc-Gd-Rfd" secondAttribute="centerY" id="hOn-1e-IpK"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="UM8-cR-eQ8" secondAttribute="trailing" id="igF-Ha-AKb"/>
+                            <constraint firstItem="JLt-17-Njg" firstAttribute="leading" secondItem="7rX-od-ZmD" secondAttribute="leading" constant="16" id="lqS-P2-rkU"/>
                             <constraint firstItem="vS9-2n-3oq" firstAttribute="leading" secondItem="UM8-cR-eQ8" secondAttribute="leading" id="nY3-Ul-wWa"/>
                             <constraint firstItem="geX-xT-ciq" firstAttribute="top" secondItem="HIF-El-YTW" secondAttribute="topMargin" id="ocC-FZ-heI"/>
                             <constraint firstItem="hYY-Ep-yNn" firstAttribute="trailing" secondItem="rvc-Gd-Rfd" secondAttribute="trailing" id="opn-HK-OEs"/>
+                            <constraint firstItem="7rX-od-ZmD" firstAttribute="trailing" secondItem="JLt-17-Njg" secondAttribute="trailing" constant="16" id="pVy-Hv-EFK"/>
                             <constraint firstItem="rvc-Gd-Rfd" firstAttribute="top" secondItem="vS9-2n-3oq" secondAttribute="bottom" constant="30" id="w5h-3G-iox"/>
                             <constraint firstItem="7rX-od-ZmD" firstAttribute="trailing" secondItem="nxL-5f-oOM" secondAttribute="trailing" constant="16" id="xtH-g8-Gnt"/>
                         </constraints>
@@ -327,6 +346,7 @@ Comment vous appelez-vous ?</string>
                     </view>
                     <connections>
                         <outlet property="ui_label_description" destination="UM8-cR-eQ8" id="KDN-Vm-3X3"/>
+                        <outlet property="ui_label_error" destination="JLt-17-Njg" id="4d4-Jc-Tve"/>
                         <outlet property="ui_label_info" destination="vS9-2n-3oq" id="2Ih-tc-2WB"/>
                         <outlet property="ui_label_title" destination="geX-xT-ciq" id="B3F-w0-voP"/>
                         <outlet property="ui_pickerView" destination="Tdk-jd-Mqk" id="f0A-Dz-HMl"/>
@@ -743,7 +763,7 @@ Ligne 4</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voisin solidaire" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMZ-rn-dLZ">
-                                                <rect key="frame" x="74" y="24" width="111.5" height="19.5"/>
+                                                <rect key="frame" x="74" y="24" width="261" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -989,6 +1009,13 @@ Ligne 4</string>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wm9-xJ-ynH">
+                                <rect key="frame" x="16" y="163" width="343" height="1"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Kya-U5-iFB"/>
+                                </constraints>
+                            </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v5f-b3-zDE" customClass="OTCustomTextfield" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="16" y="104" width="343" height="60"/>
                                 <constraints>
@@ -1001,17 +1028,16 @@ Ligne 4</string>
                                     <outlet property="delegate" destination="Rks-o1-nOQ" id="LGY-a5-IGJ"/>
                                 </connections>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wm9-xJ-ynH">
-                                <rect key="frame" x="16" y="163" width="343" height="1"/>
-                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="Kya-U5-iFB"/>
-                                </constraints>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inclure au moins 8 caractères." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoN-46-b3k">
                                 <rect key="frame" x="16" y="172" width="343" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le prénom doit comporter au moins 2 lettres." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh3-tN-jgz">
+                                <rect key="frame" x="16" y="194.5" width="343" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.93333333330000001" green="0.24313725489999999" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mot de passe" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WlB-TO-MZy" customClass="OTCustomTextfield" customModule="Ent_Beta" customModuleProvider="target">
@@ -1072,6 +1098,7 @@ Ligne 4</string>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="uYK-7v-YWK" secondAttribute="trailing" id="WGi-Kp-knD"/>
                             <constraint firstItem="v5f-b3-zDE" firstAttribute="leading" secondItem="Hgc-Ph-WVN" secondAttribute="leading" constant="16" id="Y2Z-WJ-567"/>
                             <constraint firstItem="oI8-PL-yyy" firstAttribute="trailing" secondItem="WlB-TO-MZy" secondAttribute="trailing" id="ZVI-n7-L1K"/>
+                            <constraint firstItem="Xh3-tN-jgz" firstAttribute="leading" secondItem="Hgc-Ph-WVN" secondAttribute="leading" constant="16" id="aIr-kK-nZE"/>
                             <constraint firstItem="hoN-46-b3k" firstAttribute="leading" secondItem="wm9-xJ-ynH" secondAttribute="leading" id="aJJ-vq-PsW"/>
                             <constraint firstItem="wm9-xJ-ynH" firstAttribute="leading" secondItem="v5f-b3-zDE" secondAttribute="leading" id="aU1-gV-hV3"/>
                             <constraint firstItem="v5f-b3-zDE" firstAttribute="top" secondItem="EMh-gT-dEC" secondAttribute="bottom" id="dRf-d3-Xpw"/>
@@ -1087,8 +1114,10 @@ Ligne 4</string>
                             <constraint firstItem="lil-RH-b1o" firstAttribute="trailing" secondItem="VCb-rY-j59" secondAttribute="trailing" id="sFn-p4-sLM"/>
                             <constraint firstItem="WlB-TO-MZy" firstAttribute="leading" secondItem="v5f-b3-zDE" secondAttribute="leading" id="sK9-Ku-Bto"/>
                             <constraint firstItem="hoN-46-b3k" firstAttribute="trailing" secondItem="wm9-xJ-ynH" secondAttribute="trailing" id="tRi-ZW-5IQ"/>
+                            <constraint firstItem="Xh3-tN-jgz" firstAttribute="top" secondItem="hoN-46-b3k" secondAttribute="bottom" constant="8" id="ucH-4W-mpw"/>
                             <constraint firstItem="AWX-sf-if1" firstAttribute="top" secondItem="WlB-TO-MZy" secondAttribute="bottom" constant="5" id="w1f-YT-KVt"/>
                             <constraint firstItem="hoN-46-b3k" firstAttribute="top" secondItem="wm9-xJ-ynH" secondAttribute="bottom" constant="8" id="w8v-6U-eXn"/>
+                            <constraint firstItem="Hgc-Ph-WVN" firstAttribute="trailing" secondItem="Xh3-tN-jgz" secondAttribute="trailing" constant="16" id="wGN-dS-NgW"/>
                             <constraint firstItem="EMh-gT-dEC" firstAttribute="top" secondItem="uYK-7v-YWK" secondAttribute="bottom" constant="30" id="xjm-XD-gSa"/>
                         </constraints>
                         <connections>
@@ -1097,6 +1126,7 @@ Ligne 4</string>
                     </view>
                     <connections>
                         <outlet property="ui_label_description" destination="uYK-7v-YWK" id="hc1-QU-fql"/>
+                        <outlet property="ui_label_error" destination="Xh3-tN-jgz" id="biC-wB-as9"/>
                         <outlet property="ui_label_info_mail" destination="hoN-46-b3k" id="QLS-OF-hIL"/>
                         <outlet property="ui_label_info_mail2" destination="EMh-gT-dEC" id="YEK-lE-dhn"/>
                         <outlet property="ui_label_info_pwd" destination="AWX-sf-if1" id="qki-Dx-oPl"/>
@@ -2392,7 +2422,7 @@ Ligne 4</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellSearch" id="rhq-Xx-ev5" customClass="OTAssoSearchTableViewCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="56.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="343" height="56.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rhq-Xx-ev5" id="TMk-L9-XW5">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="56.5"/>
