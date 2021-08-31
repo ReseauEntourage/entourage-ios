@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class OTMainTabbarViewController: UITabBarController {
 
@@ -43,6 +44,8 @@ class OTMainTabbarViewController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(showActions), name: NSNotification.Name(rawValue: "showAlls"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showEvents), name: NSNotification.Name(rawValue: "showEvents"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(tapProfilTab), name: NSNotification.Name(rawValue: "tapProfilTab"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showHome), name: NSNotification.Name(rawValue: "showHome"), object: nil)
     }
     
     @objc func showTooltip() {
@@ -182,6 +185,12 @@ class OTMainTabbarViewController: UITabBarController {
                 _vc.showAllActions()
             }
         }
+    }
+    
+    @objc func showHome() {
+        self.showHomeVC()
+        let isExpert = UserDefaults.standard.bool(forKey: "isExpertMode")
+        SVProgressHUD.showInfo(withStatus: isExpert ? "info_pop_switch_mode_neo_off".localized : "info_pop_switch_mode_neo_on".localized)
     }
 }
 

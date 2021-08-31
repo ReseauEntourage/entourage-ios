@@ -1087,3 +1087,13 @@
 "onboarding_error_lastname" = "Le nom doit comporter au moins 2 lettres.";
 "onboarding_error_email" = "L’adresse email est invalide.";
 "onboarding_error_phone" = "Le numéro doit comporter 9 ou 10 chiffres.";
+
+//Profile pop info switch mode
+"profile_pop_switch_mode_neo" = "Mode “Premier pas“";
+"profile_pop_switch_mode_expert" = "Mode “normal“";
+"profile_pop_switch_mode_title" = "Information";
+"profile_pop_switch_mode_message" = "Vous avez basculé en\n%@\n\nRedirection vers la nouvelle home ?";
+"profile_pop_switch_mode_button_no" = "Non";
+"profile_pop_switch_mode_button_yes" = "Oui";
+"info_pop_switch_mode_neo_on" = "Mode “Premier pas“ activé";
+"info_pop_switch_mode_neo_off" = "Mode “Premier pas“ désactivé";

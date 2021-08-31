@@ -154,15 +154,15 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         else {
             OTLogger.logEvent(Action_Switch_ExpertToNeo)
         }
-        
-        UserDefaults.standard.setValue(!sender.isOn, forKey: "isExpertMode")
+        delegate?.changeExpertMode(isExpert: !sender.isOn)
     }
 }
 
     //MARK: - TapMenuProfileDelegate -
-protocol TapMenuProfileDelegate:class {
+protocol TapMenuProfileDelegate:AnyObject {
     func showProfile()
     func editProfile()
     func showEvents()
     func showAll()
+    func changeExpertMode(isExpert:Bool)
 }
