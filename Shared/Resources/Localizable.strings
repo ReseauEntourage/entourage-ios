@@ -980,9 +980,9 @@
 "headlines_title_home" = "À la une";
 "outings_title_home" = "Événements";
 "entourages_title_home" = "Demandes et initiatives";
-"home_event_info_user" = "Invité par :";
-"home_action_info_user" = "Une demande de :";
-"home_action_contrib_info_user" = "Une contribution de :";
+"home_event_info_user" = "Invité par ";
+"home_action_info_user" = "Une demande de ";
+"home_action_contrib_info_user" = "Une contribution de ";
 
 "home_help_bt_1" = "Devenir reporter pour\nEntourage";
 "home_help_bt_2" = "Faire un don financier à\nEntourage";

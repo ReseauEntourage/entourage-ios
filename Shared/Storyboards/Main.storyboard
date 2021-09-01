@@ -1690,7 +1690,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="88.5" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number4_bg" translatesAutoresizingMaskIntoConstraints="NO" id="S74-pi-eEJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="S74-pi-eEJ" secondAttribute="height" multiplier="272:160" id="LXb-Nt-CYh"/>
                                                             </constraints>
@@ -1763,7 +1763,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="116.5" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number2_bg" translatesAutoresizingMaskIntoConstraints="NO" id="w6Z-ue-1Lh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="w6Z-ue-1Lh" secondAttribute="height" multiplier="272:160" id="YTZ-PJ-bdm"/>
                                                             </constraints>
@@ -2292,13 +2292,21 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J39-i5-hrf">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z15-nP-zPh">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                                            <state key="highlighted" backgroundImage="bg_selection"/>
+                                                            <connections>
+                                                                <action selector="action_show_detail:" destination="Grb-Bw-DJB" eventType="touchUpInside" id="jtt-fV-iPY"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J39-i5-hrf">
                                                             <rect key="frame" x="360" y="13" width="34" height="34"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="34" id="NpT-9G-6OB"/>
                                                                 <constraint firstAttribute="height" constant="34" id="V9V-1V-jPE"/>
                                                             </constraints>
                                                             <state key="normal" image="arrow_show"/>
+                                                            <state key="highlighted" image="arrow_show_grey"/>
                                                             <connections>
                                                                 <action selector="action_show_detail:" destination="Grb-Bw-DJB" eventType="touchUpInside" id="SU2-Ee-Qf5"/>
                                                             </connections>
@@ -2307,11 +2315,15 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="J39-i5-hrf" firstAttribute="centerY" secondItem="34X-mk-WMs" secondAttribute="centerY" id="Frh-zx-tMQ"/>
+                                                        <constraint firstItem="Z15-nP-zPh" firstAttribute="leading" secondItem="34X-mk-WMs" secondAttribute="leading" id="IhI-0O-Asg"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Z15-nP-zPh" secondAttribute="bottom" id="JQG-XB-UPp"/>
                                                         <constraint firstAttribute="height" constant="60" id="YAB-I3-2oX"/>
                                                         <constraint firstItem="38h-hs-aua" firstAttribute="centerY" secondItem="34X-mk-WMs" secondAttribute="centerY" id="Z1f-rL-hgU"/>
                                                         <constraint firstItem="38h-hs-aua" firstAttribute="leading" secondItem="34X-mk-WMs" secondAttribute="leading" constant="24" id="jPD-kb-g5K"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Z15-nP-zPh" secondAttribute="trailing" id="p8D-YT-6A1"/>
                                                         <constraint firstItem="J39-i5-hrf" firstAttribute="centerY" secondItem="38h-hs-aua" secondAttribute="centerY" id="pjb-jn-BB0"/>
                                                         <constraint firstAttribute="trailing" secondItem="J39-i5-hrf" secondAttribute="trailing" constant="20" symbolic="YES" id="xxX-an-ILS"/>
+                                                        <constraint firstItem="Z15-nP-zPh" firstAttribute="top" secondItem="34X-mk-WMs" secondAttribute="top" id="yem-Am-TL7"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -2953,13 +2965,21 @@ de demandes</string>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsi-qk-KlI">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykt-Be-fsa">
+                                                    <rect key="frame" x="0.0" y="4.5" width="414" height="40"/>
+                                                    <state key="highlighted" backgroundImage="bg_selection"/>
+                                                    <connections>
+                                                        <action selector="action_show_detail:" destination="iJz-cN-NqC" eventType="touchUpInside" id="I3u-66-31W"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dsi-qk-KlI">
                                                     <rect key="frame" x="360" y="7.5" width="34" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="34" id="V8l-xt-y0v"/>
                                                         <constraint firstAttribute="width" constant="34" id="s6Y-AA-dah"/>
                                                     </constraints>
                                                     <state key="normal" image="arrow_show"/>
+                                                    <state key="highlighted" image="arrow_show_grey"/>
                                                     <connections>
                                                         <action selector="action_show_detail:" destination="iJz-cN-NqC" eventType="touchUpInside" id="GEC-Gq-Y6p"/>
                                                     </connections>
@@ -2967,14 +2987,18 @@ de demandes</string>
                                             </subviews>
                                             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstItem="ykt-Be-fsa" firstAttribute="leading" secondItem="GWC-So-VDm" secondAttribute="leading" id="3gP-Mi-Sbs"/>
                                                 <constraint firstItem="6cw-KE-E9S" firstAttribute="top" secondItem="zMh-R0-lMV" secondAttribute="bottom" constant="7" id="8L2-pl-fUf"/>
                                                 <constraint firstAttribute="trailing" secondItem="dsi-qk-KlI" secondAttribute="trailing" constant="20" symbolic="YES" id="AXh-Q3-9CL"/>
                                                 <constraint firstAttribute="bottom" secondItem="6cw-KE-E9S" secondAttribute="bottom" constant="20" id="Aad-QT-ucO"/>
                                                 <constraint firstItem="dsi-qk-KlI" firstAttribute="centerY" secondItem="zMh-R0-lMV" secondAttribute="centerY" id="NKG-gq-2HI"/>
                                                 <constraint firstItem="zMh-R0-lMV" firstAttribute="leading" secondItem="GWC-So-VDm" secondAttribute="leading" constant="24" id="V3S-A6-ic6"/>
                                                 <constraint firstItem="6cw-KE-E9S" firstAttribute="leading" secondItem="GWC-So-VDm" secondAttribute="leading" id="ZdX-lE-R7o"/>
+                                                <constraint firstItem="ykt-Be-fsa" firstAttribute="centerY" secondItem="dsi-qk-KlI" secondAttribute="centerY" id="idg-yu-gIO"/>
                                                 <constraint firstAttribute="trailing" secondItem="6cw-KE-E9S" secondAttribute="trailing" id="iwn-nf-Yy1"/>
                                                 <constraint firstItem="zMh-R0-lMV" firstAttribute="top" secondItem="GWC-So-VDm" secondAttribute="top" constant="10" id="mg7-t3-bG1"/>
+                                                <constraint firstAttribute="trailing" secondItem="ykt-Be-fsa" secondAttribute="trailing" id="q36-iq-JZE"/>
+                                                <constraint firstItem="ykt-Be-fsa" firstAttribute="height" secondItem="dsi-qk-KlI" secondAttribute="height" multiplier="1.17647" id="tb1-We-DSR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -3296,13 +3320,23 @@ d’événements</string>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUK-yn-pcm">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mi7-sb-6r8">
+                                                    <rect key="frame" x="0.0" y="4.5" width="414" height="40"/>
+                                                    <state key="selected" backgroundImage="bg_selection"/>
+                                                    <state key="highlighted" backgroundImage="bg_selection"/>
+                                                    <connections>
+                                                        <action selector="action_show_detail:" destination="9Jt-00-g9x" eventType="touchUpInside" id="sAh-kW-Epd"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FUK-yn-pcm">
                                                     <rect key="frame" x="364" y="9.5" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="ozq-Wi-mim"/>
                                                         <constraint firstAttribute="height" constant="30" id="ybz-xP-T7U"/>
                                                     </constraints>
                                                     <state key="normal" image="arrow_show"/>
+                                                    <state key="selected" image="arrow_show_white"/>
+                                                    <state key="highlighted" image="arrow_show_grey"/>
                                                     <connections>
                                                         <action selector="action_show_detail:" destination="9Jt-00-g9x" eventType="touchUpInside" id="XSV-rL-dvt"/>
                                                     </connections>
@@ -3311,6 +3345,7 @@ d’événements</string>
                                             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="gK3-Pv-Zrg" firstAttribute="leading" secondItem="S3a-Fv-F9c" secondAttribute="leading" id="0fN-8z-gIZ"/>
+                                                <constraint firstItem="mi7-sb-6r8" firstAttribute="height" secondItem="FUK-yn-pcm" secondAttribute="height" multiplier="1.33333" id="5Kv-qm-nWa"/>
                                                 <constraint firstItem="wbf-Mn-cn3" firstAttribute="leading" secondItem="S3a-Fv-F9c" secondAttribute="leading" constant="24" id="9HX-n2-a80"/>
                                                 <constraint firstItem="FUK-yn-pcm" firstAttribute="centerY" secondItem="wbf-Mn-cn3" secondAttribute="centerY" id="DxT-YR-eFx"/>
                                                 <constraint firstAttribute="trailing" secondItem="gK3-Pv-Zrg" secondAttribute="trailing" id="Krq-Ii-mSw"/>
@@ -3318,6 +3353,9 @@ d’événements</string>
                                                 <constraint firstAttribute="trailing" secondItem="FUK-yn-pcm" secondAttribute="trailing" constant="20" symbolic="YES" id="Z5G-i7-QN1"/>
                                                 <constraint firstItem="gK3-Pv-Zrg" firstAttribute="top" secondItem="wbf-Mn-cn3" secondAttribute="bottom" constant="7" id="gkM-ED-xdD"/>
                                                 <constraint firstAttribute="bottom" secondItem="gK3-Pv-Zrg" secondAttribute="bottom" constant="20" id="hb7-jR-pyb"/>
+                                                <constraint firstItem="mi7-sb-6r8" firstAttribute="centerY" secondItem="FUK-yn-pcm" secondAttribute="centerY" id="iES-dY-xB4"/>
+                                                <constraint firstAttribute="trailing" secondItem="mi7-sb-6r8" secondAttribute="trailing" id="oU7-CS-o1c"/>
+                                                <constraint firstItem="mi7-sb-6r8" firstAttribute="leading" secondItem="S3a-Fv-F9c" secondAttribute="leading" id="qh2-FI-hcc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -3356,7 +3394,7 @@ d’événements</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXY-9T-Flo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-455" y="108"/>
+            <point key="canvasLocation" x="-455.07246376811599" y="107.8125"/>
         </scene>
         <!--Home Help View Controller-->
         <scene sceneID="gPS-uh-WJj">
@@ -3808,11 +3846,13 @@ Votre collaboration est précieuse, nous vous en remercions chaleureusement !</s
     <resources>
         <image name="arrowNewEntourages" width="12" height="22"/>
         <image name="arrow_show" width="29" height="20"/>
+        <image name="arrow_show_grey" width="29" height="20"/>
         <image name="arrow_show_orange" width="24" height="14"/>
         <image name="arrow_show_white" width="29" height="20"/>
         <image name="ask_for_help_event" width="24" height="24"/>
         <image name="bg_help_entourage" width="206" height="232"/>
         <image name="bg_mod_zone" width="211" height="219"/>
+        <image name="bg_selection" width="29" height="20"/>
         <image name="closeOptionNoShadow" width="61.5" height="61.5"/>
         <image name="closeOptionWithShadow" width="61.5" height="61.5"/>
         <image name="ic_circle_plus" width="24" height="24"/>
