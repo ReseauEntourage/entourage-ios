@@ -200,6 +200,9 @@
 #define Action_guideMap_SharePOI @"Action__GuideMap__SharePOI"
 #define Action_guideMap_CallPOI @"Action__GuideMap__CallPOI"
 
+#define Soliguide_Show_Poi @"Soligde__Show__%@_%@__Search_%@"
+#define Soliguide_Click @"Soligde__Click__%@_%@__Search_%@"
+
 //Start info
 #define View_Start_Feeds @"View__Start__Home"
 

@@ -133,6 +133,7 @@ extension OTGDSSearchViewController: UITableViewDataSource,UITableViewDelegate {
                 
                 if let _controller = navVc?.topViewController as? OTGuideDetailPoiViewController {
                     _controller.poi = poi
+                    _controller.filtersSelectedFromMap = "TXT"
                     self.present(navVc!, animated: true, completion: nil)
                 }
             }
