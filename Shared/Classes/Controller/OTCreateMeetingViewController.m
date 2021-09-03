@@ -156,14 +156,14 @@
         [self presentViewController:controller animated:YES completion:nil];
         return;
     }
-    else if(self.messageTextView.textView.text.length == 0) {
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@""
-                                                                            message:OTLocalizedString(@"encounter_fill_all_fields")
-                                                                     preferredStyle:UIAlertControllerStyleAlert];
-        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:nil]];
-        [self presentViewController:controller animated:YES completion:nil];
-        return;
-    }
+//    else if(self.messageTextView.textView.text.length == 0) {
+//        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@""
+//                                                                            message:OTLocalizedString(@"encounter_fill_all_fields")
+//                                                                     preferredStyle:UIAlertControllerStyleAlert];
+//        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:nil]];
+//        [self presentViewController:controller animated:YES completion:nil];
+//        return;
+//    }
     if(!self.encounter)
         [self createEncounter:sender];
     else
