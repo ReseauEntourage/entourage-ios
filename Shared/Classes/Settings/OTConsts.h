@@ -93,6 +93,7 @@
 
 #define PUBLIC_ENTOURAGE_CREATION_CHART @"https://blog.entourage.social/charte-ethique-grand-public/"
 #define PRO_ENTOURAGE_CREATION_CHART @"https://blog.entourage.social/charte-ethique-maraudeur"
+#define PUBLIC_ENTOURAGE_READ_CHARTER @"https://blog.entourage.social/charte-ethique-grand-public/"
 
 //Menu
 #define SCB_LINK_ID @"pedagogic-content"

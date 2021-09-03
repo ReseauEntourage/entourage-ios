@@ -144,13 +144,8 @@ class OTMenuProfileViewController: UIViewController {
     }
     @IBAction func action_tap_charte(_ sender: Any) {
         OTLogger.logEvent(Action_Profile_Ethic)
-        let token = self.currentUser.token!
-        let relativeUrl = String.init(format: API_URL_MENU_OPTIONS, CHARTE_LINK_ID,token)
-        if let _BaseUrl = OTHTTPRequestManager.sharedInstance()?.baseURL?.absoluteString {
-            let url = String.init(format: "%@%@",_BaseUrl ,relativeUrl)
-            
-            OTSafariService.launchInAppBrowser(withUrlString: url, viewController: self.navigationController)
-        }
+        let newUrl = PUBLIC_ENTOURAGE_READ_CHARTER
+        OTSafariService.launchInAppBrowser(withUrlString: newUrl, viewController: self.navigationController)
     }
     @IBAction func action_tap_help(_ sender: Any) {
         OTLogger.logEvent(Action_Profile_About)
