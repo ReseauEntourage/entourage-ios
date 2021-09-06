@@ -1078,6 +1078,11 @@
 "home_neo_pop_info_button_ok" = "OK";
 "home_neo_pop_info_button_profil" = "Voir profil";
 
+"home_neo_pop_goExpert_title" = "Envie de changer ?";
+"home_neo_pop_goExpert_message" = "Vous êtes actuellement sur le mode \"Premier pas\" de l'app.\nEssayez le mode normal pour accéder à plus de contenu";
+"home_neo_pop_goExpert_bt_ok" = "Ok";
+"home_neo_pop_goExpert_bt_cancel" = "Non merci";
+
 "setting_home_title" = "📱 MON COMPTE ENTOURAGE";
 "setting_home_description" = "Le mode “Premiers pas” vous guide pour découvrir les programmes Entourage.";
 "setting_home_button_type" = "Mode “Premiers pas”";
