@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PBj-UU-2Rc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PBj-UU-2Rc">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -42,7 +43,7 @@
                                                 <color key="textColor" red="0.64705884459999996" green="0.64705884459999996" blue="0.61176472900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRS-rw-QeT">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRS-rw-QeT">
                                                 <rect key="frame" x="130" y="0.0" width="229" height="48"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                 <state key="normal">
@@ -88,8 +89,14 @@
                                             <outlet property="delegate" destination="9XR-CR-1nQ" id="Req-JF-sL0"/>
                                         </connections>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLy-N8-qYd">
+                                        <rect key="frame" x="20" y="163" width="335" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="## se sont rencontrés ici, le &lt;date&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QST-Yp-mfw">
-                                        <rect key="frame" x="20" y="174" width="335" height="18"/>
+                                        <rect key="frame" x="20" y="178" width="335" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="ZTX-Sk-zBL"/>
                                         </constraints>
@@ -98,7 +105,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41k-PI-3Dz" customClass="OTTextWithCount">
-                                        <rect key="frame" x="0.0" y="207" width="375" height="184"/>
+                                        <rect key="frame" x="0.0" y="211" width="375" height="184"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="deviceRGB"/>
                                         <constraints>
@@ -118,12 +125,12 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="QST-Yp-mfw" secondAttribute="trailing" constant="20" id="5ZJ-B1-1L0"/>
                                     <constraint firstItem="i1A-KD-mHy" firstAttribute="centerX" secondItem="Qci-J9-QRW" secondAttribute="centerX" id="A0d-Y6-rYy"/>
+                                    <constraint firstAttribute="trailing" secondItem="qLy-N8-qYd" secondAttribute="trailing" constant="20" symbolic="YES" id="EcM-0B-xET"/>
                                     <constraint firstItem="QST-Yp-mfw" firstAttribute="leading" secondItem="Qci-J9-QRW" secondAttribute="leading" constant="20" id="Et5-4n-9P8"/>
                                     <constraint firstAttribute="trailing" secondItem="3tf-ul-mxV" secondAttribute="trailing" constant="20" id="FKV-m2-pnQ"/>
                                     <constraint firstItem="RRM-M1-LyP" firstAttribute="top" secondItem="Qci-J9-QRW" secondAttribute="top" constant="15" id="GcA-bX-xwS"/>
                                     <constraint firstAttribute="trailing" secondItem="41k-PI-3Dz" secondAttribute="trailing" id="Kpp-Sw-uSh"/>
                                     <constraint firstItem="3tf-ul-mxV" firstAttribute="leading" secondItem="Qci-J9-QRW" secondAttribute="leading" constant="20" id="LRV-9Y-vWP"/>
-                                    <constraint firstItem="QST-Yp-mfw" firstAttribute="top" secondItem="i1A-KD-mHy" secondAttribute="bottom" constant="15" id="Mgr-gl-P0w"/>
                                     <constraint firstItem="41k-PI-3Dz" firstAttribute="leading" secondItem="Qci-J9-QRW" secondAttribute="leading" id="OQ7-Wk-xzw"/>
                                     <constraint firstItem="QST-Yp-mfw" firstAttribute="centerX" secondItem="Qci-J9-QRW" secondAttribute="centerX" id="QJT-Pc-1fb"/>
                                     <constraint firstItem="i1A-KD-mHy" firstAttribute="top" secondItem="3tf-ul-mxV" secondAttribute="bottom" constant="15" id="Qco-RE-Ze9"/>
@@ -131,12 +138,15 @@
                                     <constraint firstAttribute="trailing" secondItem="i1A-KD-mHy" secondAttribute="trailing" id="Tw2-M4-7PY"/>
                                     <constraint firstItem="RRM-M1-LyP" firstAttribute="leading" secondItem="Qci-J9-QRW" secondAttribute="leading" id="Utt-sp-DZR"/>
                                     <constraint firstItem="41k-PI-3Dz" firstAttribute="top" secondItem="QST-Yp-mfw" secondAttribute="bottom" constant="15" id="WR8-cp-ZNf"/>
+                                    <constraint firstItem="qLy-N8-qYd" firstAttribute="top" secondItem="i1A-KD-mHy" secondAttribute="bottom" constant="4" id="amQ-fL-xFu"/>
                                     <constraint firstAttribute="trailing" secondItem="RRM-M1-LyP" secondAttribute="trailing" id="bVj-8A-R2g"/>
                                     <constraint firstItem="i1A-KD-mHy" firstAttribute="leading" secondItem="Qci-J9-QRW" secondAttribute="leading" id="fKx-vC-f1d"/>
                                     <constraint firstItem="41k-PI-3Dz" firstAttribute="centerX" secondItem="Qci-J9-QRW" secondAttribute="centerX" id="iSv-5x-AOb"/>
+                                    <constraint firstItem="qLy-N8-qYd" firstAttribute="leading" secondItem="Qci-J9-QRW" secondAttribute="leading" constant="20" symbolic="YES" id="meN-cc-f3a"/>
                                     <constraint firstAttribute="bottom" secondItem="RRM-M1-LyP" secondAttribute="bottom" priority="999" constant="278" id="mhP-Jv-Z22"/>
                                     <constraint firstItem="3tf-ul-mxV" firstAttribute="centerX" secondItem="Qci-J9-QRW" secondAttribute="centerX" id="mv8-Db-Q40"/>
                                     <constraint firstItem="3tf-ul-mxV" firstAttribute="top" secondItem="RRM-M1-LyP" secondAttribute="bottom" constant="15" id="vxs-3l-RbW"/>
+                                    <constraint firstItem="QST-Yp-mfw" firstAttribute="top" secondItem="qLy-N8-qYd" secondAttribute="bottom" constant="15" id="x7Z-0t-prr"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="nw4-Nj-KiA" appends="YES" id="a39-27-rsa"/>
@@ -160,6 +170,7 @@
                         <outlet property="locationButton" destination="QRS-rw-QeT" id="uAg-cQ-Mfz"/>
                         <outlet property="messageTextView" destination="41k-PI-3Dz" id="odL-bt-BYo"/>
                         <outlet property="nameTextField" destination="i1A-KD-mHy" id="LOp-xf-pvj"/>
+                        <outlet property="ui_label_error_name" destination="qLy-N8-qYd" id="f5Z-gv-Ryx"/>
                         <segue destination="ZG9-uu-R4U" kind="presentation" identifier="DisclaimerSegue" id="ULe-4a-8KK"/>
                     </connections>
                 </viewController>
@@ -221,5 +232,8 @@
     </scenes>
     <resources>
         <image name="location" width="22" height="22"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
