@@ -33,6 +33,14 @@ class OTHomeMainViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         
+        //To update badge unread messages
+        if let user = UserDefaults.standard.currentUser {
+            if let unreadCount = user.unreadCount {
+            let notifDict = [kNotificationTotalUnreadCountKey:unreadCount]
+            let notif = Notification(name: NSNotification.Name.updateTotalUnreadCount, object: notifDict, userInfo: nil)
+            NotificationCenter.default.post(notif)
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
