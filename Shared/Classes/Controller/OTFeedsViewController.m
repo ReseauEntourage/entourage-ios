@@ -487,6 +487,7 @@ OTHeatzonesCollectionViewDelegate
     self.mapView.pitchEnabled = NO;
     self.mapView.showsBuildings = NO;
     self.mapView.showsTraffic = NO;
+    self.mapView.scrollEnabled = YES;
     
     OTUser *currentUser = [NSUserDefaults standardUserDefaults].currentUser;
     CLLocationCoordinate2D mapCenter;

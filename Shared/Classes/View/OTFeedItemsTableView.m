@@ -201,7 +201,7 @@
     [headerView addSubview:showCurrentLocationButton];
     [headerView bringSubviewToFront:showCurrentLocationButton];
     [headerView sendSubviewToBack:mapView];
-    
+    mapView.scrollEnabled = YES;
     return headerView;
 }
 
