@@ -603,12 +603,31 @@ Comment vous appelez-vous ?</string>
                                     <action selector="action_nocode:" destination="LpO-YT-DN9" eventType="touchUpInside" id="RKf-ws-xRq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHh-My-hgK">
+                                <rect key="frame" x="76" y="325" width="223" height="38.5"/>
+                                <string key="text">Besoin d’aide ?
+Contacter l'équipe Entourage.</string>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                <color key="textColor" red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pas de code ? Réessayez dans 00:59" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0E-Rc-C9d">
                                 <rect key="frame" x="71.5" y="260.5" width="237" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                 <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkK-eI-gsA">
+                                <rect key="frame" x="76" y="325" width="223" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="tintColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="action_help:" destination="LpO-YT-DN9" eventType="touchUpInside" id="BFQ-Jd-vis"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPr-k7-29z">
                                 <rect key="frame" x="104.5" y="64" width="68" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -627,19 +646,25 @@ Comment vous appelez-vous ?</string>
                         <constraints>
                             <constraint firstItem="wPr-k7-29z" firstAttribute="leading" secondItem="hMp-Na-88A" secondAttribute="trailing" constant="8" id="4O5-Tc-h21"/>
                             <constraint firstItem="hMp-Na-88A" firstAttribute="leading" secondItem="K4l-oH-p14" secondAttribute="leading" id="59p-Q4-po9"/>
+                            <constraint firstItem="VkK-eI-gsA" firstAttribute="bottom" secondItem="bHh-My-hgK" secondAttribute="bottom" id="BXE-2v-cQF"/>
                             <constraint firstItem="C0E-Rc-C9d" firstAttribute="centerY" secondItem="Ok0-z1-M4n" secondAttribute="centerY" id="Bcy-HA-JAP"/>
+                            <constraint firstItem="bHh-My-hgK" firstAttribute="top" secondItem="C0E-Rc-C9d" secondAttribute="bottom" constant="47.5" id="DbE-M8-zRx"/>
                             <constraint firstItem="K4l-oH-p14" firstAttribute="top" secondItem="7GJ-Rd-KDQ" secondAttribute="bottom" constant="15" id="FeE-9R-pGO"/>
                             <constraint firstItem="7GJ-Rd-KDQ" firstAttribute="top" secondItem="kIi-Ec-vkp" secondAttribute="topMargin" id="Khp-kd-qv6"/>
+                            <constraint firstItem="VkK-eI-gsA" firstAttribute="trailing" secondItem="bHh-My-hgK" secondAttribute="trailing" id="Mzc-bO-3OG"/>
                             <constraint firstItem="tc4-Og-y9f" firstAttribute="top" secondItem="hMp-Na-88A" secondAttribute="bottom" constant="50" id="Xm4-r8-1d1"/>
                             <constraint firstItem="tc4-Og-y9f" firstAttribute="leading" secondItem="K4l-oH-p14" secondAttribute="leading" id="aYs-ur-Ovp"/>
                             <constraint firstItem="Ok0-z1-M4n" firstAttribute="centerX" secondItem="kIi-Ec-vkp" secondAttribute="centerX" id="cGD-es-eoO"/>
                             <constraint firstItem="C0E-Rc-C9d" firstAttribute="leading" secondItem="Ok0-z1-M4n" secondAttribute="leading" id="isJ-H0-t7W"/>
+                            <constraint firstItem="VkK-eI-gsA" firstAttribute="top" secondItem="bHh-My-hgK" secondAttribute="top" id="kGF-2r-jv8"/>
                             <constraint firstItem="K4l-oH-p14" firstAttribute="leading" secondItem="kIi-Ec-vkp" secondAttribute="leadingMargin" id="kHT-9z-og6"/>
                             <constraint firstItem="ySX-qe-Pmu" firstAttribute="trailing" secondItem="tc4-Og-y9f" secondAttribute="trailing" constant="16" id="nze-rP-Sda"/>
+                            <constraint firstItem="bHh-My-hgK" firstAttribute="centerX" secondItem="kIi-Ec-vkp" secondAttribute="centerX" id="qpd-wc-GmC"/>
                             <constraint firstItem="7GJ-Rd-KDQ" firstAttribute="leading" secondItem="kIi-Ec-vkp" secondAttribute="leadingMargin" id="rzQ-TP-rOb"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="K4l-oH-p14" secondAttribute="trailing" id="v4H-eI-XS5"/>
                             <constraint firstItem="hMp-Na-88A" firstAttribute="top" secondItem="K4l-oH-p14" secondAttribute="bottom" constant="8" id="vUb-vw-qr0"/>
                             <constraint firstItem="Ok0-z1-M4n" firstAttribute="top" secondItem="tc4-Og-y9f" secondAttribute="bottom" constant="50" id="wZu-qU-56E"/>
+                            <constraint firstItem="VkK-eI-gsA" firstAttribute="leading" secondItem="bHh-My-hgK" secondAttribute="leading" id="yEh-Fe-IKa"/>
                             <constraint firstItem="wPr-k7-29z" firstAttribute="centerY" secondItem="hMp-Na-88A" secondAttribute="centerY" id="z08-OF-EQd"/>
                         </constraints>
                         <connections>
@@ -651,6 +676,7 @@ Comment vous appelez-vous ?</string>
                         <outlet property="ui_bt_nocode" destination="Ok0-z1-M4n" id="QlW-69-jtY"/>
                         <outlet property="ui_label_countdown" destination="C0E-Rc-C9d" id="Ju3-Lq-kTZ"/>
                         <outlet property="ui_label_description" destination="K4l-oH-p14" id="Rlc-7K-qkq"/>
+                        <outlet property="ui_label_help" destination="bHh-My-hgK" id="5KV-SP-dl4"/>
                         <outlet property="ui_label_phoneNb" destination="hMp-Na-88A" id="2Ys-8D-cIr"/>
                         <outlet property="ui_label_title" destination="7GJ-Rd-KDQ" id="TxL-In-PwD"/>
                         <outlet property="ui_line_1" destination="ISw-w7-dDP" id="Mxs-Fi-5nd"/>
