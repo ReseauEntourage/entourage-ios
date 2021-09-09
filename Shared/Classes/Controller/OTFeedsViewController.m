@@ -153,6 +153,13 @@ OTHeatzonesCollectionViewDelegate
         [self.currentFilter setNeighbourFilters];
     }
     
+    if (self.isExpertArrowAsk) {
+        [self.currentFilter setNeighbourFilters];
+    }
+    if (self.isExpertArrowContrib) {
+        [self.currentFilter setAloneFilters];
+    }
+    
     
     self.newsFeedsSourceBehavior.currentFilter = self.currentFilter;
     

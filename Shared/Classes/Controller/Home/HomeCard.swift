@@ -12,12 +12,14 @@ import Foundation
 struct HomeCard {
     var titleSection = ""
     var type = HomeCardType.None
+    var subtype = HomeCardType.None
     var arrayCards = [Any]()
     
     static func parseHomeCard(array:[Any],name:String) -> HomeCard {
         var homeCard = HomeCard()
         homeCard.titleSection = OTLocalisationService.getLocalizedValue(forKey: name+"_title_home")
         homeCard.type = HomeCardType.getTypeFromName(name: name)
+        homeCard.subtype = HomeCardType.getSubTypeFromName(name: name)
         homeCard.arrayCards = [Any]()
         
         if homeCard.type == .Headlines {
@@ -97,16 +99,29 @@ enum HomeCardType {
     case Headlines
     case Events
     case Actions
+    case ActionsAsk
+    case ActionsContrib
     case None
     
     static func getTypeFromName(name:String) -> HomeCardType {
         switch name {
-        case "entourages":
+        case "entourages","entourage_ask_for_helps","entourage_contributions":
             return .Actions
         case "outings":
             return .Events
         case "headlines":
             return .Headlines
+        default:
+            return .None
+        }
+    }
+    
+    static func getSubTypeFromName(name:String) -> HomeCardType {
+        switch name {
+        case "entourage_ask_for_helps":
+            return .ActionsAsk
+        case "entourage_contributions":
+            return .ActionsContrib
         default:
             return .None
         }

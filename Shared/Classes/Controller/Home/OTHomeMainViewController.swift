@@ -138,7 +138,7 @@ class OTHomeMainViewController: UIViewController {
     }
     
     func showAllActions() {
-        homeExpertVC?.showAllActions()
+        homeExpertVC?.showAllActions(subtype: .None)
     }
     
     func createEncounterFromNav() {

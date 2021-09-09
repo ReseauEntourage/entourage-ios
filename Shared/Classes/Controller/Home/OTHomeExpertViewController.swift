@@ -288,7 +288,7 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
         OTLogger.logEvent(logString)
     }
     
-    func showDetail(type: HomeCardType,isFromArrow:Bool) {
+    func showDetail(type: HomeCardType,isFromArrow:Bool,subtype:HomeCardType) {
         var logString = ""
         switch type {
         case .Actions:
@@ -298,7 +298,7 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
             else {
                 logString = Action_expertFeed_MoreAction
             }
-            showAllActions()
+            showAllActions(subtype:subtype)
         case .Events:
             if isFromArrow {
                 logString = Action_expertFeed_MoreEventArrow
@@ -328,11 +328,19 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
         self.parent?.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func showAllActions() {
+    func showAllActions(subtype:HomeCardType) {
         let sb = UIStoryboard.init(name: "Main2", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "OTMain0") as! OTFeedsViewController
         vc.isFromEvent = false
         vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: "entourages_title_home")
+       
+        if subtype == .ActionsAsk || subtype == .ActionsContrib {
+            let strTitle = subtype == .ActionsAsk ? "entourage_ask_for_helps_title_home" : "entourage_contributions_title_home"
+            vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: strTitle)
+            vc.isExpertArrowAsk = subtype == .ActionsAsk ? true : false
+            vc.isExpertArrowContrib = subtype == .ActionsContrib ? true : false
+        }
+        
         self.parent?.navigationController?.pushViewController(vc, animated: true)
     }
     

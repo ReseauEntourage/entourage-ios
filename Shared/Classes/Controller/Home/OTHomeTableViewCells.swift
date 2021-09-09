@@ -9,7 +9,7 @@
 //MARK: - Protocol Clic from Cells -
 protocol CellClickDelegate: class {
     func selectCollectionViewCell(item: Any,type:HomeCardType,position:Int)
-    func showDetail(type:HomeCardType,isFromArrow:Bool)
+    func showDetail(type:HomeCardType,isFromArrow:Bool,subtype:HomeCardType)
     func showDetailUser(userId:NSNumber)
     func showModifyZone()
     func showHelpDistance()
@@ -28,7 +28,7 @@ class OTHomeCellTitleView: UITableViewCell {
     }
     
     @IBAction func action_show_detail(_ sender: Any) {
-        delegate?.showDetail(type: card.type,isFromArrow:true)
+        delegate?.showDetail(type: card.type,isFromArrow:true,subtype: card.subtype)
     }
 }
 
@@ -100,7 +100,7 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     }
     
     @IBAction func action_show_detail(_ sender: Any) {
-        delegate?.showDetail(type: cards.type,isFromArrow:true)
+        delegate?.showDetail(type: cards.type,isFromArrow:true,subtype: cards.subtype)
     }
 }
 
@@ -169,7 +169,16 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
         
         if indexPath.row == cards.arrayCards.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellEmpty", for: indexPath) as! OTHomeCellOther
-            cell.ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "home_button_show_more_actions")
+            if cards.subtype == .ActionsAsk {
+                cell.ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "home_button_show_more_actions_ask")
+            }
+            else if cards.subtype == .ActionsContrib {
+                cell.ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "home_button_show_more_actions_contrib")
+            }
+            else {
+                cell.ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "home_button_show_more_actions")
+            }
+            
             return cell
         }
         
@@ -199,7 +208,7 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
         }
         
         if indexPath.row == cards.arrayCards.count {
-            delegate?.showDetail(type: cards.type,isFromArrow:false)
+            delegate?.showDetail(type: cards.type,isFromArrow:false,subtype: cards.subtype)
             return
         }
         let item = cards.arrayCards[indexPath.row]

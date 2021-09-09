@@ -980,6 +980,8 @@
 "headlines_title_home" = "À la une";
 "outings_title_home" = "Événements";
 "entourages_title_home" = "Demandes et initiatives";
+"entourage_contributions_title_home" = "Dons";
+"entourage_ask_for_helps_title_home" = "Demandes";
 "home_event_info_user" = "Invité par ";
 "home_action_info_user" = "Une demande de ";
 "home_action_contrib_info_user" = "Une contribution de ";
@@ -997,6 +999,8 @@
 "home_button_helpEntourage" = "J’aide Entourage autrement";
 "home_button_show_more_actions" = "Afficher plus de demandes et d’initiatives";
 "home_button_show_more_events" = "Afficher plus d'événements";
+"home_button_show_more_actions_contrib" = "Voir tous les dons";
+"home_button_show_more_actions_ask" = "Voir toutes les demandes";
 
 //Home NEO
 "home_neo_title" = "Démarrez l’aventure humaine Entourage !";
