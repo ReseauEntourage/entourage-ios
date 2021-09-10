@@ -903,13 +903,14 @@
 "add_event_help_button" = "Quels événements diffuser ?";
 
 //Pop cloture action/event
-"pop_validate_action_title" = "Comment cela s’est passé ?";
-"pop_validate_action_description" = "En clôturant l’action solidaire, vous fermez la discussion et retirez l’action du fil d’actualités.\n\nDites-nous en plus avant de clôturer !";
+"pop_validate_action_title" = "Comment s’est déroulée votre action ?";
+"pop_validate_action_title2" = "Dites-nous en plus avant de clôturer.";
+"pop_validate_action_description" = "En clôturant l’action solidaire, vous fermez la discussion et retirez l’action du fil d’actualité.";
 "pop_validate_action_help" = "Mon action solidaire est bloquée.";
 "pop_validate_action_bt_validate" = "Mon action a réussi";
 "pop_validate_action_bt_fail" = "Mon action n'a pas abouti";
 "pop_validate_action_bt_help" = "Je demande de l'aide";
-"pop_validate_action_bt_cancel" = "Annuler";
+"pop_validate_action_bt_cancel" = "Quitter";
 
 "pop_validate_event_title" = "Comment cela s’est passé ?";
 "pop_validate_event_description" = "En clôturant l’événement, vous fermez la discussion et retirez l’événement du fil d’actualités. \n\nDites-nous en plus avant de clôturer !";
