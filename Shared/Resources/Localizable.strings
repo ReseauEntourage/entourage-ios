@@ -1110,3 +1110,6 @@
 "profile_pop_switch_mode_button_yes" = "Oui";
 "info_pop_switch_mode_neo_on" = "Mode “Premier pas“ activé";
 "info_pop_switch_mode_neo_off" = "Mode “Premier pas“ désactivé";
+
+"cell_info_demand_empty" = "C'est plutôt calme ici";
+"cell_info_demand_empty_button" = "Rechercher\nplus loin";

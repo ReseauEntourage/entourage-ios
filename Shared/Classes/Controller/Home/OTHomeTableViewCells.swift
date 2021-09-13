@@ -162,6 +162,11 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
         }
         
         if isSpecialCells && indexPath.row == cards.arrayCards.count {
+            if cards.subtype == .ActionsAsk {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellOther", for: indexPath) as! OTHomeCellOther
+                cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "cell_info_demand_empty"),buttonMoreTxt: OTLocalisationService.getLocalizedValue(forKey: "cell_info_demand_empty_button"))
+                return cell
+            }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellOther", for: indexPath) as! OTHomeCellOther
             cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_helpEntourage"), isShowZone: true)
             return cell
@@ -202,6 +207,10 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
                 delegate?.showModifyZone()
             }
             else {
+                if cards.subtype == .ActionsAsk {
+                    delegate?.showDetail(type: cards.type,isFromArrow:true,subtype: cards.subtype)
+                    return
+                }
                 delegate?.showHelpDistance()
             }
             return

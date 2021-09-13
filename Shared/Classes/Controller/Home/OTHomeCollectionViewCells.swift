@@ -220,6 +220,8 @@ class OTHomeImageCollectionViewCell: UICollectionViewCell {
 //MARK: - OTHomeCellOther -
 class OTHomeCellOther: UICollectionViewCell {
     @IBOutlet weak var ui_title: UILabel!
+    @IBOutlet weak var ui_image: UIImageView?
+    @IBOutlet weak var ui_label_more: UILabel!
     var isShowZone = false
     
     override func awakeFromNib() {
@@ -231,6 +233,13 @@ class OTHomeCellOther: UICollectionViewCell {
     func populateCell(title:String,isShowZone:Bool) {
         ui_title.text = title
         self.isShowZone = isShowZone
+    }
+    func populateCell(title:String,buttonMoreTxt:String) {
+        ui_title.text = title
+        self.isShowZone = false
+        self.contentView.backgroundColor = UIColor.appOrange()
+        ui_image?.image = UIImage.init(named: "picture_number5")
+        ui_label_more.text = buttonMoreTxt
     }
 }
 
