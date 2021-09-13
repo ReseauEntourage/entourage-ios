@@ -1104,6 +1104,8 @@
 "profile_pop_switch_mode_expert" = "Mode “normal“";
 "profile_pop_switch_mode_title" = "Information";
 "profile_pop_switch_mode_message" = "Vous avez basculé en\n%@\n\nRedirection vers la nouvelle home ?";
+"profile_pop_switch_mode_message_neo" = "Vous êtes sur le point d’activer le mode “Premiers pas” de l’application.\n\nEffectuer cette action ? ";
+"profile_pop_switch_mode_message_expert" = "Vous êtes sur le point de désactiver le mode “Premiers pas” de l’application.\n\nEffectuer cette action ? ";
 "profile_pop_switch_mode_button_no" = "Non";
 "profile_pop_switch_mode_button_yes" = "Oui";
 "info_pop_switch_mode_neo_on" = "Mode “Premier pas“ activé";

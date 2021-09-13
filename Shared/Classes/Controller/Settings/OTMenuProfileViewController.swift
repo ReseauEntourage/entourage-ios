@@ -300,12 +300,9 @@ extension OTMenuProfileViewController: TapMenuProfileDelegate {
     
     func changeExpertMode(isExpert: Bool) {
         UserDefaults.standard.setValue(isExpert, forKey: "isExpertMode")
-        let modeStr:String = !isExpert ? "profile_pop_switch_mode_neo".localized : "profile_pop_switch_mode_expert".localized
+        let modeStr:String = !isExpert ? "profile_pop_switch_mode_message_neo".localized : "profile_pop_switch_mode_message_expert".localized
         
-        let messageTxt:String = "profile_pop_switch_mode_message".localized
-        let message = String.init(format: messageTxt, modeStr)
-        
-        let alertVc = UIAlertController.init(title: "profile_pop_switch_mode_title".localized, message: message, preferredStyle: .alert)
+        let alertVc = UIAlertController.init(title: "profile_pop_switch_mode_title".localized, message: modeStr, preferredStyle: .alert)
         
         let buttonCancel = UIAlertAction.init(title: "profile_pop_switch_mode_button_no".localized, style: .cancel) { action in
             alertVc.dismiss(animated: true, completion: nil)
