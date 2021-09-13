@@ -1084,7 +1084,7 @@
 "home_neo_pop_info_button_profil" = "Voir profil";
 
 "home_neo_pop_goExpert_title" = " ";
-"home_neo_pop_goExpert_message" = "Vous êtes sur le mode “Premiers pas” de l’app.\nAccédez à plus de contenu en désactivant ce mode depuis votre page profil.";
+"home_neo_pop_goExpert_message" = "Vous êtes sur le mode “Premiers pas” de l’application.\nAccédez à plus de contenu en désactivant ce mode depuis votre page profil.";
 "home_neo_pop_goExpert_bt_ok" = "Ok";
 "home_neo_pop_goExpert_bt_cancel" = "Non merci";
 
