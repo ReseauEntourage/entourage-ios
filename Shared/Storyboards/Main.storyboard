@@ -1763,7 +1763,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="116.5" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number2_bg" translatesAutoresizingMaskIntoConstraints="NO" id="w6Z-ue-1Lh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="w6Z-ue-1Lh" secondAttribute="height" multiplier="272:160" id="YTZ-PJ-bdm"/>
                                                             </constraints>
@@ -2895,6 +2895,12 @@ de demandes</string>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_help_entourage" translatesAutoresizingMaskIntoConstraints="NO" id="mVS-dZ-xBd">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="232"/>
                                                                             </imageView>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perso_violet" translatesAutoresizingMaskIntoConstraints="NO" id="nZ8-UH-hWA">
+                                                                                <rect key="frame" x="83" y="152" width="101" height="80"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="80" id="cvi-We-EXP"/>
+                                                                                </constraints>
+                                                                            </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J’aide Entourage autrement" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iKb-b9-x7R">
                                                                                 <rect key="frame" x="16" y="16" width="168" height="48"/>
                                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -2931,6 +2937,8 @@ de demandes</string>
                                                                             </view>
                                                                         </subviews>
                                                                         <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="nZ8-UH-hWA" secondAttribute="bottom" id="2fB-mF-jgL"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="nZ8-UH-hWA" secondAttribute="trailing" constant="16" id="4AU-jR-d8z"/>
                                                                             <constraint firstAttribute="trailing" secondItem="mVS-dZ-xBd" secondAttribute="trailing" id="6UZ-5i-ddB"/>
                                                                             <constraint firstItem="mVS-dZ-xBd" firstAttribute="top" secondItem="SmG-J1-Kvm" secondAttribute="top" id="8gc-Hc-9d8"/>
                                                                             <constraint firstItem="gDp-0j-a8I" firstAttribute="top" secondItem="iKb-b9-x7R" secondAttribute="bottom" constant="16" id="AYq-Rz-od5"/>
@@ -2955,6 +2963,7 @@ de demandes</string>
                                                             <size key="customSize" width="200" height="232"/>
                                                             <connections>
                                                                 <outlet property="ui_image" destination="mVS-dZ-xBd" id="3qC-Dz-9BV"/>
+                                                                <outlet property="ui_image_bottom" destination="nZ8-UH-hWA" id="ZvM-ua-gV3"/>
                                                                 <outlet property="ui_label_more" destination="FVa-hP-yYO" id="Ryf-Rq-OeI"/>
                                                                 <outlet property="ui_title" destination="iKb-b9-x7R" id="tEK-Hj-7SW"/>
                                                             </connections>
@@ -3871,6 +3880,7 @@ Votre collaboration est précieuse, nous vous en remercions chaleureusement !</s
         <image name="map-placeholder-bg" width="1120" height="1694"/>
         <image name="newEntourages" width="180" height="39"/>
         <image name="pause" width="62" height="62"/>
+        <image name="perso_violet" width="101" height="109"/>
         <image name="picture_number1_bg" width="280" height="170"/>
         <image name="picture_number2_2" width="95" height="90"/>
         <image name="picture_number2_bg" width="280" height="168"/>
