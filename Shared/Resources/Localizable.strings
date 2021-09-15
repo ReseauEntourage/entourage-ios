@@ -164,6 +164,9 @@
 "ongoing" = "En cours";
 "cancelled_join_request" = "Demande annulée";
 "join_pending_new" = "Demandé";
+"info_action_private" = "Action privée";
+"info_event_private" = "Événement privé";
+"info_label_private_view" = "Votre demande de participation est en attente de validation.";
 
 "no_data_entourages" = "C'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant ! \n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur + en bas à droite";
 
@@ -959,6 +962,12 @@
 "detail_action_creator_gift" = "propose cette aide";
 
 "confirm_cancel_demand" = "Confirmez-vous vouloir retirer votre demande ?";
+
+"pop_info_follow_private_action_title" = "Demande de\nparticipation";
+"pop_info_follow_private_action_message" = "Pour participer à cette action privée, le créateur de cette action doit valider votre participation.\n\nUne fois votre demande acceptée, vous pourrez accéder à la conversation de groupe.";
+"pop_info_follow_private_event_message" = "Pour participer à cet événement privé, le créateur de cet événement doit valider votre participation.\n\nUne fois votre demande acceptée, vous pourrez accéder à la conversation de groupe.";
+"pop_info_follow_private_action_bt_ok" = "Confirmer";
+"pop_info_follow_private_action_bt_cancel" = "Annuler";
 
 //Pop info photo profile
 "info_photo_profile_title" = "Ajoutez votre photo de profil et inspirez encore plus confiance";

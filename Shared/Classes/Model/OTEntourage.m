@@ -146,5 +146,8 @@
 - (BOOL)isAskForHelp {
     return [self.entourage_type isEqualToString:ENTOURAGE_DEMANDE];
 }
+-(BOOL) isPublicEntourage {
+    return self.isPublic.boolValue;
+}
 
 @end

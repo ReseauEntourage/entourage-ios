@@ -23,6 +23,7 @@ class OTMainTabbarViewController: UITabBarController {
     var addEditEvent = false
     
     var tooltipView:UIView? = nil
+    var popview:OTPopInfoCustom? = nil
     
     var oldItemSelected = 0
     var currentItemSelected = 0
@@ -40,12 +41,27 @@ class OTMainTabbarViewController: UITabBarController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(showTooltip), name: NSNotification.Name(rawValue: "showToolTip"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideTooltip), name: NSNotification.Name(rawValue: "hideToolTip"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hidePopInfo), name: NSNotification.Name(rawValue: "hidePopView"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(showActions), name: NSNotification.Name(rawValue: "showAlls"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showEvents), name: NSNotification.Name(rawValue: "showEvents"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(tapProfilTab), name: NSNotification.Name(rawValue: "tapProfilTab"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(showHome), name: NSNotification.Name(rawValue: "showHome"), object: nil)
+    }
+    
+    func showPopInfo(delegate:OTPopInfoDelegate,title:String,message:String,buttonOkStr:String,buttonCancelStr:String) {
+        popview = OTPopInfoCustom.init(frame: view.frame,delegate: delegate,title: title,message: message,buttonOkStr: buttonOkStr,buttonCancelStr: buttonCancelStr)
+        
+        view.addSubview(popview!)
+        view.bringSubviewToFront(popview!)
+    }
+    
+    @objc func hidePopInfo() {
+        if let popview = popview {
+            popview.removeFromSuperview()
+            self.popview = nil
+        }
     }
     
     @objc func showTooltip() {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0205197526F1E41F003B277B /* Pop_Info_Custom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0205197426F1E41F003B277B /* Pop_Info_Custom.xib */; };
+		0205197726F1E49E003B277B /* OTPopInfoCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205197626F1E49E003B277B /* OTPopInfoCustom.swift */; };
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
 		2B0322092643F2A400A70007 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0322082643F2A400A70007 /* SwiftPackageProductDependency */; };
@@ -544,6 +546,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0205197426F1E41F003B277B /* Pop_Info_Custom.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Pop_Info_Custom.xib; sourceTree = "<group>"; };
+		0205197626F1E49E003B277B /* OTPopInfoCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPopInfoCustom.swift; sourceTree = "<group>"; };
 		0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		143551A9A6ED152DD5F655B3 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -2256,6 +2260,8 @@
 				A202E93B2085D2C50058F32C /* OTPublicFeedItemViewController.h */,
 				2B77B15925506642000DD474 /* OTDetailActionEventViewController.swift */,
 				2B5E699C25516BF800EDFA5B /* OTDetailActionEventTopCell.swift */,
+				0205197426F1E41F003B277B /* Pop_Info_Custom.xib */,
+				0205197626F1E49E003B277B /* OTPopInfoCustom.swift */,
 			);
 			path = PublicFeedItem;
 			sourceTree = "<group>";
@@ -3288,6 +3294,7 @@
 				A21D65BB2085FDAA00EF8E0E /* MapOptions.storyboard in Resources */,
 				A21D65AB2085FDAA00EF8E0E /* LocationSelection.storyboard in Resources */,
 				A202E91120E2313200992C09 /* AppConfigurations.plist in Resources */,
+				0205197526F1E41F003B277B /* Pop_Info_Custom.xib in Resources */,
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
 				A21D64AE2085E8B400EF8E0E /* Paris.gpx in Resources */,
@@ -3924,6 +3931,7 @@
 				A202ECB92085D2C80058F32C /* OTJoinBehavior.m in Sources */,
 				A202EAE12085D2C70058F32C /* OTCategory.m in Sources */,
 				A202EC712085D2C80058F32C /* OTCollectionSourceBehavior.m in Sources */,
+				0205197726F1E49E003B277B /* OTPopInfoCustom.swift in Sources */,
 				2B13BD8625FA5A7D00B0E071 /* OTHomeTableViewCells.swift in Sources */,
 				96B658BB209A5D2B00EB0398 /* UIKit+Stylable.swift in Sources */,
 				A202EBC12085D2C80058F32C /* OTActivityProvider.m in Sources */,

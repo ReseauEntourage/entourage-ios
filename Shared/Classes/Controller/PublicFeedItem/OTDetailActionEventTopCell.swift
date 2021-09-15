@@ -22,6 +22,11 @@ class OTDetailActionEventTopCell: UITableViewCell {
     
     @IBOutlet weak var ui_label_button_joined: UILabel?
     @IBOutlet weak var ui_view_button_joined: UIView?
+    @IBOutlet weak var ui_label_private: TTTAttributedLabel!
+    @IBOutlet weak var ui_view_private: UIView!
+    @IBOutlet weak var ui_constraint_height_view_private: NSLayoutConstraint!
+    let view_private_height:CGFloat = 44
+    
     weak var delegate:ActionCellTopDelegate? = nil
     var isJoinAccepted = false
     
@@ -33,6 +38,8 @@ class OTDetailActionEventTopCell: UITableViewCell {
         ui_view_button_share?.layer.cornerRadius = 8
         ui_view_button_joined?.layer.cornerRadius = 8
         ui_view_button_joined?.isHidden = true
+        ui_constraint_height_view_private.constant = 0
+        ui_view_private.isHidden = true
     }
     
     @objc func populate(feedItem:OTEntourage) {
@@ -56,6 +63,11 @@ class OTDetailActionEventTopCell: UITableViewCell {
             }
         }
         
+        if !feedItem.isPublicEntourage() {
+            ui_label_private.text = feedItem.isOuting() ? OTLocalisationService.getLocalizedValue(forKey: "info_event_private") : OTLocalisationService.getLocalizedValue(forKey: "info_action_private")
+            ui_constraint_height_view_private.constant = view_private_height
+            ui_view_private.isHidden = false
+        }
         
         ui_title.text = feedItem.title
         
@@ -68,8 +80,11 @@ class OTDetailActionEventTopCell: UITableViewCell {
             ui_view_button_joined?.isHidden = false
             
         case JOIN_PENDING:
-            title = OTLocalisationService.getLocalizedValue(forKey: "join_pending_new")
-            ui_image_button_action?.removeFromSuperview()
+            title = OTLocalisationService.getLocalizedValue(forKey: "join_pending")
+            
+            ui_image_button_action?.image = UIImage.init(named: "picto_wait")
+            ui_label_button_action?.textColor = UIColor.appOrange()
+            ui_view_button_join?.backgroundColor = UIColor(red: 254 / 255.0, green: 239 / 255.0, blue: 233 / 255.0, alpha: 1.0)
         default:
             title = OTLocalisationService.getLocalizedValue(forKey: "join_entourage2_btn")
             if feedItem.isOuting() {
@@ -97,7 +112,7 @@ class OTDetailActionEventTopCell: UITableViewCell {
 }
 
 //MARK: - ActionCellTopDelegate -
-protocol ActionCellTopDelegate: class {
+protocol ActionCellTopDelegate: AnyObject {
     func actionJoin()
     func actionShare()
 }
