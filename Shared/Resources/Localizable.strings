@@ -748,7 +748,12 @@
 "login_change_error_mail" = "Veuillez vérifier votre adresse Email";
 
 "login_change_error_return" = "Erreur";
-"login_change_error_return_detail" = "L’ancien numéro est inconnu ou supprimé.\nVeuillez vérifier.";
+
+"login_change_error_not_found" = "L’ancien numéro est inconnu.\nVeuillez vérifier.";
+"login_change_error_deleted" = "L’ancien numéro a été supprimé.\nVeuillez vérifier.";
+"login_change_error_blocked" = "L’ancien numéro a été bloqué.\nVeuillez vérifier.";
+"login_change_error_identical" = "Les deux numéros sont identiques.\nVeuillez vérifier le nouveau numéro.";
+"login_change_error_generic" = "L’ancien numéro est inconnu ou supprimé.\nVeuillez vérifier les numéros.";
 
 //Onboarding Assos
 "onboard_asso_start_title" = "Ça tombe bien !";
