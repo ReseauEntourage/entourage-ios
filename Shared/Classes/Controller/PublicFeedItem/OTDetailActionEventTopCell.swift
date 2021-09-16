@@ -232,6 +232,8 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
                 roleStr = "\(feedItem.author.partner_role_title!) -"
             }
             self.ui_label_role.text = roleStr;
+            self.ui_button_asso.isHidden = false
+            self.ui_label_asso.isHidden = false
             
             let titleButton = String.init(format:"%@ %@", feedItem.author.partner.name,OTLocalisationService.getLocalizedValue(forKey: "info_asso_user"));
             let coloredStr:String = OTLocalisationService.getLocalizedValue(forKey: "info_asso_user")
@@ -247,6 +249,7 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
             ui_constraint_bottom_username.constant = 0
             self.ui_label_role.isHidden = true
             self.ui_button_asso.isHidden = true
+            self.ui_label_asso.isHidden = true
         }
         
         self.ui_label_username.text = feedItem.author.displayName
