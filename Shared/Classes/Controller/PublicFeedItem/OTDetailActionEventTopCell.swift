@@ -123,7 +123,7 @@ class OTDetailActionEventDateCell: UITableViewCell {
     @IBOutlet weak var ui_picto: UIImageView!
     @IBOutlet weak var ui_label_event: TTTAttributedLabel!
     
-   @objc func populate(feedItem:OTFeedItem) {
+    @objc func populate(feedItem:OTFeedItem) {
         let _DateStr = Utils.eventInfoDescrioption(startDate: feedItem.startsAt, endDate: feedItem.endsAt)
         ui_label_event.text = _DateStr
     }
@@ -148,7 +148,7 @@ class OTDetailActionEventLocationCell: UITableViewCell, TTTAttributedLabelDelega
     }
     
     @objc func populate(feedItem:OTFeedItem) {
-       
+        
         if feedItem.isAction() {
             ui_postalCode.text = feedItem.postalCode
             if feedItem.postalCode.count == 0 {
@@ -202,6 +202,7 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
     @IBOutlet weak var ui_button_asso: UIButton!
     @IBOutlet weak var ui_label_information: UILabel!
     
+    @IBOutlet weak var ui_label_asso: UILabel!
     @IBOutlet weak var ui_constraint_bottom_username: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_top_username: NSLayoutConstraint!
     weak var delegate:ActionCellCreatorDelegate? = nil
@@ -231,7 +232,14 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
                 roleStr = "\(feedItem.author.partner_role_title!) -"
             }
             self.ui_label_role.text = roleStr;
-            self.ui_button_asso.setTitle(feedItem.author.partner.name, for: .normal)
+            
+            let titleButton = String.init(format:"%@ %@", feedItem.author.partner.name,OTLocalisationService.getLocalizedValue(forKey: "info_asso_user"));
+            let coloredStr:String = OTLocalisationService.getLocalizedValue(forKey: "info_asso_user")
+            
+            let attStr = Utilitaires.formatString(stringMessage: titleButton, coloredTxt: coloredStr, color: UIColor.appOrange(), colorHighlight: UIColor.appOrange(), fontSize: 15, fontWeight: .medium, fontColoredWeight: .bold)
+            
+            self.ui_label_asso.attributedText = attStr
+            
             self.ui_button_asso.tag = feedItem.author.partner.aid.intValue
         }
         else {
