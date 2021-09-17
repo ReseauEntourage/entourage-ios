@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_description_public;
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_description_private;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_title_alone;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_description_alone;
+
 @property(weak,nonatomic) id<OTAddEditEntourageDelegate> delegate;
 
 - (void)setActionDelegate:(id<OTAddEditEntourageDelegate>) delegate isPublic:(BOOL) isPublic;

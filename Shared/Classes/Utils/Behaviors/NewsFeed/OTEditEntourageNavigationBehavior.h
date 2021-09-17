@@ -34,4 +34,6 @@
 
 - (void)editEntouragePhotoFromGallery:(OTEntourage *)entourage;
 
+
+- (void)editActionConfidentiality:(OTEntourage *)entourage;
 @end

@@ -24,7 +24,8 @@
     EditDescriptionDelegate,
     CategorySelectionDelegate,
     OTGMSAutoCompleteViewControllerProtocol,
-    EditPhotoGalleryDelegate
+    EditPhotoGalleryDelegate,
+    EditPrivacyDelegate
 >
 
 @property (nonatomic, strong) OTEntourage *entourage;
@@ -81,6 +82,14 @@
         
         return YES;
     }
+    if ([segue.identifier isEqualToString:@"EditPublicPrivateAction"]) {
+        OTEditActionPublicPrivateViewController* controller = (OTEditActionPublicPrivateViewController*)destinationViewController;
+        controller.entourage = self.entourage;
+        controller.delegate = self;
+        
+        return YES;
+    }
+    
     return NO;
 }
 
@@ -177,6 +186,11 @@
     [self.owner performSegueWithIdentifier:@"EditPhotoGallery" sender:self];
 }
 
+- (void)editActionConfidentiality:(OTEntourage *)entourage {
+    self.entourage = entourage;
+    [self.owner performSegueWithIdentifier:@"EditPublicPrivateAction" sender:self];
+}
+
 #pragma mark - LocationSelectionDelegate
 
 - (void)didSelectLocation:(CLLocation *)selectedLocation {
@@ -212,6 +226,12 @@
 -(void)editingValidated:(NSString *)smallImageUrl andBigImage:(NSString *)bigImageUrl {
     self.entourage.entourage_event_url_image_portrait = smallImageUrl;
     self.entourage.entourage_event_url_image_landscape = bigImageUrl;
+    [self.editEntourageSource updateTexts];
+}
+
+#pragma mark - EditPrivacydelegate
+- (void)privacyEditedWithIsPublic:(BOOL) isPublic {
+    self.entourage.isPublic = [NSNumber numberWithBool:isPublic];
     [self.editEntourageSource updateTexts];
 }
 

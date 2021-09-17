@@ -620,8 +620,8 @@
 "agir_subtitle_event" = "à une date précise";
 "action_title_public" = "Public";
 "action_title_private" = "Privé";
-"action_description_public" = "Votre action solidaire est ouverte à tout membre du réseau souhaitant participer.";
-"action_description_private" = "Les membres d’Entourage vous demandent votre accord avant de participer.";
+"action_description_public" = "Votre action est publique, tout le monde peut y participer librement.";
+"action_description_private" = "Votre action est privée, vous aurez le choix  d’accepter ou de refuser toute personne demandant à y participer.";
 "action_title_pres_de" = "Près de";
 "addEventStartDate" = "Date de début *";
 "addEventEndDate" = "Date de fin";
