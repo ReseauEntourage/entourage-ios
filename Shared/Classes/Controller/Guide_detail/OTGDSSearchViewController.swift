@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import IQKeyboardManager
 
 class OTGDSSearchViewController: UIViewController {
     
@@ -32,6 +33,7 @@ class OTGDSSearchViewController: UIViewController {
         ui_tableview.tableFooterView = UIView(frame: CGRect.zero)
         
         ui_tf_search.becomeFirstResponder()
+        IQKeyboardManager.shared().isEnableAutoToolbar = false
         
         OTLogger.logEvent(Action_guide_searchStart)
     }
@@ -85,6 +87,10 @@ class OTGDSSearchViewController: UIViewController {
     
     @IBAction func action_back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    deinit {
+        IQKeyboardManager.shared().isEnableAutoToolbar = true
     }
 }
 

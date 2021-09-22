@@ -7,6 +7,7 @@
 
 import UIKit
 import SVProgressHUD
+import IQKeyboardManager
 
 class OTSearchEntouragesViewController: UIViewController {
 
@@ -30,6 +31,8 @@ class OTSearchEntouragesViewController: UIViewController {
         ui_tableview.tableFooterView = UIView(frame: CGRect.zero)
         
         ui_tf_search.becomeFirstResponder()
+        IQKeyboardManager.shared().isEnableAutoToolbar = false
+        
         
         OTLogger.logEvent(Action_guide_searchStart)
         
@@ -48,6 +51,7 @@ class OTSearchEntouragesViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        IQKeyboardManager.shared().isEnableAutoToolbar = true
     }
     
     @objc func showUserProfile(notification: Notification) {
