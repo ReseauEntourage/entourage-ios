@@ -88,10 +88,13 @@ class OTSearchEntouragesViewController: UIViewController {
             types = "cs,ce,cm,cr,ci,ck,co,ch"
         }
         
-        let newDict =  ["latitude":48.856614,
-                        "longitude":2.3522219,
-                        "q" : ui_tf_search.text!,
+        var newDict =  ["q" : ui_tf_search.text!,
                         "types" : types] as [String : Any]
+        
+        if let currentLocation = UserDefaults.standard.currentUser.addressPrimary?.location {
+            newDict["latitude"] = currentLocation.coordinate.latitude
+            newDict["longitude"] = currentLocation.coordinate.longitude
+        }
   
         OTFeedsService.init().getSearchEntourages(withParameters:newDict) { feeds, nextPageToken in
             Logger.print("***** return get feeds : \(feeds)")
