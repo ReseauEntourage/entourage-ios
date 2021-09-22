@@ -30,7 +30,7 @@ class OTMainTabbarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = UIColor.white
         UITabBar.appearance().tintColor = UIColor.appOrange()
         UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().isTranslucent = false

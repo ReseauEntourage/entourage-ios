@@ -27,5 +27,6 @@ extern NSString* const OTNewsFeedTableViewCellIdentifier;
 @property(nonatomic, weak) IBOutlet id<OTFeedItemsTableViewDelegate> tableViewDelegate;
 
 -(void)configureWith:(OTFeedItem *)item;
+- (void)configureLightWith:(OTFeedItem *) item;
 
 @end

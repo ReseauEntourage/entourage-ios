@@ -22,4 +22,8 @@
                         success:(void (^)(NSMutableArray *feeds))success
                         failure:(void (^)(NSError *error))failure;
 
+- (void)getSearchEntouragesWithParameters:(NSDictionary*)parameters
+                          success:(void (^)(NSMutableArray *feeds, NSString *pageToken))success
+                          failure:(void (^)(NSError *error))failure;
+
 @end

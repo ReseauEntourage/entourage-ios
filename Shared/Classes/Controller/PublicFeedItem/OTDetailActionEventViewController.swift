@@ -33,6 +33,9 @@ class OTDetailActionEventViewController: UIViewController {
     var arrayUsers = [OTFeedItemJoiner]()
     var numberOfCells = 6
     
+    var isFromSearch = false
+    var popview:OTPopInfoCustom? = nil
+    
     //MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -472,24 +475,45 @@ extension OTDetailActionEventViewController:ActionCellTopDelegate, InviteSourceD
     }
     
     func showPopInfo() {
+        var _message:String = OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_action_message")
+        if feedItem.isOuting() {
+            _message = OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_event_message")
+        }
+        let btnOk:String = OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_action_bt_ok")
+        let btnNok:String = OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_action_bt_cancel")
+        
         if let _tabVc = tabBarController as? OTMainTabbarViewController {
-            var _message:String = OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_action_message")
-            if feedItem.isOuting() {
-                _message = OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_event_message")
-            }
-            _tabVc.showPopInfo(delegate: self, title: OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_action_title"), message: _message, buttonOkStr: OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_action_bt_ok"), buttonCancelStr: OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_action_bt_cancel"))
+            _tabVc.showPopInfo(delegate: self, title: OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_action_title"), message: _message, buttonOkStr: btnOk, buttonCancelStr: btnNok)
+        }
+        else if let _navVc = self.navigationController {
+            self.showPopInfo(vc:_navVc, title: OTLocalisationService.getLocalizedValue(forKey: "pop_info_follow_private_action_title"), message: _message, buttonOkStr:btnOk, buttonCancelStr: btnNok)
         }
     }
 }
 
 //MARK: - OTPopInfoDelegate -
 extension OTDetailActionEventViewController: OTPopInfoDelegate {
+    func showPopInfo(vc:UIViewController, title:String,message:String,buttonOkStr:String,buttonCancelStr:String) {
+        popview = OTPopInfoCustom.init(frame: vc.view.frame,delegate: self,title: title,message: message,buttonOkStr: buttonOkStr,buttonCancelStr: buttonCancelStr)
+        
+        vc.view.addSubview(popview!)
+        vc.view.bringSubviewToFront(popview!)
+    }
+    
     func closePop() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidePopView"), object: nil)
+        if let popview = popview {
+            popview.removeFromSuperview()
+            self.popview = nil
+        }
     }
     func validatePop() {
         self.joiner.join(self.feedItem)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hidePopView"), object: nil)
+        if let popview = popview {
+            popview.removeFromSuperview()
+            self.popview = nil
+        }
     }
 }
 
@@ -502,9 +526,14 @@ extension OTDetailActionEventViewController: OTStatusChangedProtocol {
     }
     
     func stoppedFeedItem() {
-        OTAppState.popToRootCurrentTab()
+        if !self.isFromSearch {
+            OTAppState.popToRootCurrentTab()
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "stopped_item"))
+            if self.isFromSearch {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
@@ -529,18 +558,28 @@ extension OTDetailActionEventViewController: OTStatusChangedProtocol {
     }
     
     func quitedFeedItem() {
-        OTAppState.popToRootCurrentTab()
+        if !self.isFromSearch {
+            OTAppState.popToRootCurrentTab()
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             SVProgressHUD.showSuccess(withStatus: OTAppAppearance.quitFeedItemConformationTitle(self.feedItem))
             NotificationCenter.default.post(Notification.init(name: Notification.Name(rawValue: kNotificationReloadData)))
+            if self.isFromSearch {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
     func cancelledJoinRequest() {
-        OTAppState.popToRootCurrentTab()
+        if !self.isFromSearch {
+            OTAppState.popToRootCurrentTab()
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "cancelled_join_request"))
             NotificationCenter.default.post(Notification.init(name: Notification.Name(rawValue: kNotificationReloadData)))
+            if self.isFromSearch {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
 }

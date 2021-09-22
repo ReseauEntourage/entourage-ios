@@ -100,6 +100,34 @@
      }];
 }
 
+- (void)getSearchEntouragesWithParameters:(NSDictionary*)parameters
+                          success:(void (^)(NSMutableArray *feeds, NSString *pageToken))success
+                          failure:(void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:API_URL_SEARCH_ENTOURAGES, TOKEN];
+    [[OTHTTPRequestManager sharedInstance]
+         GETWithUrl:url
+         andParameters:parameters
+         andSuccess:^(id responseObject)
+         {
+             NSDictionary *data = responseObject;
+             NSMutableArray *feeds = [self entouragesItemsFromDictionary:data];
+             NSString *nextPageToken = [responseObject objectForKey:kWSKeyNextPageToken];
+
+        
+             if (success) {
+                 success(feeds, nextPageToken);
+             }
+         }
+         andFailure:^(NSError *error)
+         {
+             if (failure) {
+                 failure(error);
+             }
+         }
+     ];
+}
+
 #pragma mark - private methods
 
 - (NSMutableArray *)feedItemsFromDictionary:(NSDictionary *)dictionary {
@@ -117,6 +145,16 @@
             feedItem = [[OTAnnouncement alloc] initWithDictionary:feedItemDictionary];
         if(feedItem)
             [feedItems addObject:feedItem];
+    }
+    return feedItems;
+}
+
+- (NSMutableArray *)entouragesItemsFromDictionary:(NSDictionary *)dictionary {
+    NSMutableArray *feedItems = [[NSMutableArray alloc] init];
+    NSArray *feedsDictionaries = [dictionary objectForKey:@"entourages"];
+    for (NSDictionary *dictionary in feedsDictionaries) {
+        OTFeedItem * feedItem = [[OTEntourage alloc] initWithDictionary:dictionary];
+       [feedItems addObject:feedItem];
     }
     return feedItems;
 }

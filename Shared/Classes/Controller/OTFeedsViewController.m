@@ -348,10 +348,37 @@ OTHeatzonesCollectionViewDelegate
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:btnLeft];
     [self.navigationItem setLeftBarButtonItem:item];
     
+    UIButton * btnRight = [UIButton new];
+    [btnRight setImage:[UIImage imageNamed:@"search_new"] forState:UIControlStateNormal];
+    [btnRight addTarget:self action:@selector(goSearch) forControlEvents:UIControlEventTouchUpInside];
+    btnRight.frame = CGRectMake(0, 0, 34/2, 28/2);
+    
+    UIBarButtonItem *itemRight = [[UIBarButtonItem alloc]initWithCustomView:btnRight];
+    [self.navigationItem setRightBarButtonItem:itemRight];
 }
 
 -(void) onBack {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)goSearch {
+    UINavigationController *navVc = [[UIStoryboard storyboardWithName:@"Main2" bundle:nil] instantiateViewControllerWithIdentifier:@"SearchEntouragesNav"];
+    OTSearchEntouragesViewController *newVc = ( OTSearchEntouragesViewController *) navVc.topViewController;
+    if (self.isFromEvent) {
+        newVc.searchType = @"outing";
+    }
+    else {
+        if (self.isExpertArrowAsk) {
+            newVc.searchType = @"ask";
+        }
+        else {
+         newVc.searchType = @"contrib";
+        }
+    }
+    
+    navVc.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self.navigationController presentViewController:navVc animated:YES completion:nil];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

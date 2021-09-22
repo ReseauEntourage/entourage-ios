@@ -10,6 +10,7 @@
 		0205197526F1E41F003B277B /* Pop_Info_Custom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0205197426F1E41F003B277B /* Pop_Info_Custom.xib */; };
 		0205197726F1E49E003B277B /* OTPopInfoCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205197626F1E49E003B277B /* OTPopInfoCustom.swift */; };
 		022231FB26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */; };
+		022F04C926F8CEF2001769C4 /* OTSearchEntouragesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */; };
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
 		2B0322092643F2A400A70007 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0322082643F2A400A70007 /* SwiftPackageProductDependency */; };
@@ -550,6 +551,7 @@
 		0205197426F1E41F003B277B /* Pop_Info_Custom.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Pop_Info_Custom.xib; sourceTree = "<group>"; };
 		0205197626F1E49E003B277B /* OTPopInfoCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPopInfoCustom.swift; sourceTree = "<group>"; };
 		022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEditActionPublicPrivateViewController.swift; sourceTree = "<group>"; };
+		022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSearchEntouragesViewController.swift; sourceTree = "<group>"; };
 		0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		143551A9A6ED152DD5F655B3 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1973,6 +1975,7 @@
 				A202E91E2085D2C50058F32C /* OTMainViewController.m */,
 				2BE1F49D25DAE42800CE318E /* OTFeedsViewController.h */,
 				2BE1F49C25DAE42800CE318E /* OTFeedsViewController.m */,
+				022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */,
 				2B26962225DEAA1200D174DF /* OTFeedsViewController2.swift */,
 				2B0D49E325DC0E0C00DC92A6 /* OTFeedNewsViewController.swift */,
 				2BF1769F25DD5B8600B3C922 /* OTFeedToursViewController.h */,
@@ -3737,6 +3740,7 @@
 				A202EB492085D2C80058F32C /* OTChatCellBase.m in Sources */,
 				A202EB072085D2C70058F32C /* OTTour.m in Sources */,
 				2BCC339A247D4A7B007E3E94 /* OTAssoSearchTableViewCell.swift in Sources */,
+				022F04C926F8CEF2001769C4 /* OTSearchEntouragesViewController.swift in Sources */,
 				A202ECDD2085D2C80058F32C /* UITextField+indentation.m in Sources */,
 				A202EC5F2085D2C80058F32C /* OTEntourageDisclaimerBehavior.m in Sources */,
 				A202EB612085D2C80058F32C /* OTTutorial2ViewController.m in Sources */,
