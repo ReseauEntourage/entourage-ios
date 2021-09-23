@@ -293,5 +293,12 @@
 #define Action_Switch_NeoToExpert @"Action__Switch__NeoToExpert"
 #define Action_Switch_ExpertToNeo @"Action__Switch__ExpertToNeo"
 
+//Feed Search
+#define Action_feedSearch_start_ask @"Action__FeedSearch__Start_Ask"
+#define Action_feedSearch_start_contrib @"Action__FeedSearch__Start_Contrib"
+#define Action_feedSearch_start_event @"Action__FeedSearch__Start_Event"
+#define Action_feedSearch_show_detail @"Action__FeedSearch__Show_Detail"
+#define Action_feedSearch_show_profile @"Action__FeedSearch__Show_Profile"
+#define View_feedSearch_searchResults @"View__FeedSearch__SearchResults"
 
 #endif /* Analytics_keys_h */

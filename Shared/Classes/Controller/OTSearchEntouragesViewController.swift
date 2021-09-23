@@ -33,8 +33,17 @@ class OTSearchEntouragesViewController: UIViewController {
         ui_tf_search.becomeFirstResponder()
         IQKeyboardManager.shared().isEnableAutoToolbar = false
         
-        
-        OTLogger.logEvent(Action_guide_searchStart)
+        var tag = ""
+        if searchType == "outing" {
+            tag = Action_feedSearch_start_event
+        }
+        else if searchType == "ask" {
+            tag = Action_feedSearch_start_ask
+        }
+        else if searchType == "contrib" {
+            tag = Action_feedSearch_start_contrib
+        }
+        OTLogger.logEvent(tag)
         
         NotificationCenter.default.addObserver(self, selector: #selector(showUserProfile), name: NSNotification.Name("showUserProfileFromFeed"), object: nil)
     }
@@ -56,8 +65,7 @@ class OTSearchEntouragesViewController: UIViewController {
     
     @objc func showUserProfile(notification: Notification) {
         if let userId = notification.object as? NSNumber {
-            Logger.print("***** Show profile : --> number : \(userId)")
-            
+            OTLogger.logEvent(Action_feedSearch_show_profile)
             let sb = UIStoryboard.init(name: "UserProfile", bundle: nil)
             if let navVc = sb.instantiateInitialViewController() as? UINavigationController {
                 if let vc = navVc.topViewController as? OTUserViewController {
@@ -97,7 +105,7 @@ class OTSearchEntouragesViewController: UIViewController {
         }
   
         OTFeedsService.init().getSearchEntourages(withParameters:newDict) { feeds, nextPageToken in
-            Logger.print("***** return get feeds : \(feeds)")
+            OTLogger.logEvent(View_feedSearch_searchResults)
             if let feeds = feeds as? [OTFeedItem] {
                 self.items.removeAll()
                 self.items.append(contentsOf: feeds)
@@ -107,7 +115,6 @@ class OTSearchEntouragesViewController: UIViewController {
                 SVProgressHUD.dismiss()
             }
         } failure: { error in
-            Logger.print("***** return error get feeds : \(error?.localizedDescription)")
             self.items.removeAll()
             self.isFromSearch = false
             self.isAllreadyCall = false
@@ -162,7 +169,7 @@ extension OTSearchEntouragesViewController: UITableViewDataSource,UITableViewDel
             return
         }
         
-        
+        OTLogger.logEvent(Action_feedSearch_show_detail)
         let sb = UIStoryboard.init(name: "PublicFeedDetailNew", bundle: nil)
         if let vc = sb.instantiateInitialViewController() as? OTDetailActionEventViewController {
             vc.feedItem = items[indexPath.row]
