@@ -12,6 +12,10 @@ import TTTAttributedLabel
 //MARK: - OTDetailActionEventTopCell -
 class OTDetailActionEventTopCell: UITableViewCell {
     
+    @IBOutlet weak var ui_constraint_image_height: NSLayoutConstraint?
+    
+    @IBOutlet weak var ui_constraint_image_ratio: NSLayoutConstraint?
+    
     @IBOutlet weak var ui_image_top: UIImageView?
     
     @IBOutlet weak var ui_title: UILabel!
@@ -22,9 +26,9 @@ class OTDetailActionEventTopCell: UITableViewCell {
     
     @IBOutlet weak var ui_label_button_joined: UILabel?
     @IBOutlet weak var ui_view_button_joined: UIView?
-    @IBOutlet weak var ui_label_private: TTTAttributedLabel!
-    @IBOutlet weak var ui_view_private: UIView!
-    @IBOutlet weak var ui_constraint_height_view_private: NSLayoutConstraint!
+    @IBOutlet weak var ui_label_private: TTTAttributedLabel?
+    @IBOutlet weak var ui_view_private: UIView?
+    @IBOutlet weak var ui_constraint_height_view_private: NSLayoutConstraint?
     let view_private_height:CGFloat = 44
     
     weak var delegate:ActionCellTopDelegate? = nil
@@ -38,8 +42,8 @@ class OTDetailActionEventTopCell: UITableViewCell {
         ui_view_button_share?.layer.cornerRadius = 8
         ui_view_button_joined?.layer.cornerRadius = 8
         ui_view_button_joined?.isHidden = true
-        ui_constraint_height_view_private.constant = 0
-        ui_view_private.isHidden = true
+        ui_constraint_height_view_private?.constant = 0
+        ui_view_private?.isHidden = true
     }
     
     @objc func populate(feedItem:OTEntourage) {
@@ -64,9 +68,9 @@ class OTDetailActionEventTopCell: UITableViewCell {
         }
         
         if !feedItem.isPublicEntourage() {
-            ui_label_private.text = feedItem.isOuting() ? OTLocalisationService.getLocalizedValue(forKey: "info_event_private") : OTLocalisationService.getLocalizedValue(forKey: "info_action_private")
-            ui_constraint_height_view_private.constant = view_private_height
-            ui_view_private.isHidden = false
+            ui_label_private?.text = feedItem.isOuting() ? OTLocalisationService.getLocalizedValue(forKey: "info_event_private") : OTLocalisationService.getLocalizedValue(forKey: "info_action_private")
+            ui_constraint_height_view_private?.constant = view_private_height
+            ui_view_private?.isHidden = false
         }
         
         ui_title.text = feedItem.title
@@ -202,7 +206,7 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
     @IBOutlet weak var ui_button_asso: UIButton!
     @IBOutlet weak var ui_label_information: UILabel!
     
-    @IBOutlet weak var ui_label_asso: UILabel!
+    @IBOutlet weak var ui_label_asso: UILabel?
     @IBOutlet weak var ui_constraint_bottom_username: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_top_username: NSLayoutConstraint!
     weak var delegate:ActionCellCreatorDelegate? = nil
@@ -233,14 +237,14 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
             }
             self.ui_label_role.text = roleStr;
             self.ui_button_asso.isHidden = false
-            self.ui_label_asso.isHidden = false
+            self.ui_label_asso?.isHidden = false
             
             let titleButton = String.init(format:"%@ %@", feedItem.author.partner.name,OTLocalisationService.getLocalizedValue(forKey: "info_asso_user"));
             let coloredStr:String = OTLocalisationService.getLocalizedValue(forKey: "info_asso_user")
             
             let attStr = Utilitaires.formatString(stringMessage: titleButton, coloredTxt: coloredStr, color: UIColor.appOrange(), colorHighlight: UIColor.appOrange(), fontSize: 15, fontWeight: .medium, fontColoredWeight: .bold)
             
-            self.ui_label_asso.attributedText = attStr
+            self.ui_label_asso?.attributedText = attStr
             
             self.ui_button_asso.tag = feedItem.author.partner.aid.intValue
         }
@@ -249,7 +253,7 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
             ui_constraint_bottom_username.constant = 0
             self.ui_label_role.isHidden = true
             self.ui_button_asso.isHidden = true
-            self.ui_label_asso.isHidden = true
+            self.ui_label_asso?.isHidden = true
         }
         
         self.ui_label_username.text = feedItem.author.displayName
