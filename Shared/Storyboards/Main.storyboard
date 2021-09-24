@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="FkR-sv-GpE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="FkR-sv-GpE">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -122,7 +122,7 @@
                                 <color key="backgroundColor" red="0.93725490570068359" green="0.93725490570068359" blue="0.95686274766921997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="qvk-JK-pAd">
-                                    <rect key="frame" x="0.0" y="419.00000034679067" width="406" height="300"/>
+                                    <rect key="frame" x="0.0" y="437" width="406" height="300"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="RJW-gt-yID">
@@ -169,7 +169,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OTNewsFeedTableViewCellIdentifier" rowHeight="140" id="KgN-kr-NT6" customClass="OTNewsFeedCell">
-                                        <rect key="frame" x="0.0" y="24.5" width="406" height="140"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="406" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KgN-kr-NT6" id="pSt-IB-Y9T">
                                             <rect key="frame" x="0.0" y="0.0" width="406" height="140"/>
@@ -352,7 +352,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OTAnnouncementTableViewCellIdentifier" rowHeight="140" id="jhF-vm-O4y" customClass="OTAnnouncementCell">
-                                        <rect key="frame" x="0.0" y="164.5" width="406" height="140"/>
+                                        <rect key="frame" x="0.0" y="184.5" width="406" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jhF-vm-O4y" id="0Yc-Ce-Ysu">
                                             <rect key="frame" x="0.0" y="0.0" width="406" height="140"/>
@@ -444,7 +444,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="OTSolidarityGuideTableViewCellIdentifier" rowHeight="90" id="Rkl-sM-R4N" customClass="OTSolidarityGuideCell">
-                                        <rect key="frame" x="0.0" y="304.5" width="406" height="90"/>
+                                        <rect key="frame" x="0.0" y="324.5" width="406" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rkl-sM-R4N" id="PG3-14-YDK">
                                             <rect key="frame" x="0.0" y="0.0" width="406" height="90"/>
@@ -1480,7 +1480,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell1" id="gRu-ww-8wI" customClass="CellGeneric" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="339"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="339"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gRu-ww-8wI" id="rPQ-4J-bGG">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="339"/>
@@ -1533,7 +1533,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell2" id="Spd-kK-c40" customClass="CellGeneric" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="363.5" width="414" height="257.5"/>
+                                        <rect key="frame" x="0.0" y="383.5" width="414" height="257.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Spd-kK-c40" id="srm-io-Gik">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="257.5"/>
@@ -1587,7 +1587,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Ressources au cas par cas  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6C-Eh-3TG">
-                                                    <rect key="frame" x="24" y="12" width="193.5" height="18"/>
+                                                    <rect key="frame" x="24" y="12" width="194" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1619,7 +1619,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell3" id="G2r-1c-gY7" customClass="CellGeneric" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="621" width="414" height="343"/>
+                                        <rect key="frame" x="0.0" y="641" width="414" height="343"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G2r-1c-gY7" id="SI9-5Q-1dz">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="343"/>
@@ -1673,24 +1673,24 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell4" id="8MR-dO-fd4" customClass="CellGeneric" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="964" width="414" height="260.5"/>
+                                        <rect key="frame" x="0.0" y="984" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8MR-dO-fd4" id="szX-bG-l1k">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="260.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcB-eb-CZH">
-                                                    <rect key="frame" x="24" y="12" width="366" height="47"/>
+                                                    <rect key="frame" x="24" y="12" width="366" height="0.0"/>
                                                     <string key="text">Voisins solidaires, le Guide Simple Comme Bonjour et nos ateliers de sensibilisation vous aident à comprendre les situations et à dépasser les blocages pour créer des liens.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kqm-Pk-VhP">
-                                                    <rect key="frame" x="24" y="88.5" width="366" height="160"/>
+                                                    <rect key="frame" x="24" y="-128" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number4_bg" translatesAutoresizingMaskIntoConstraints="NO" id="S74-pi-eEJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="S74-pi-eEJ" secondAttribute="height" multiplier="272:160" id="LXb-Nt-CYh"/>
                                                             </constraints>
@@ -1753,14 +1753,14 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell5" id="uPK-bw-mJ3" customClass="CellGeneric" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1224.5" width="414" height="288.5"/>
+                                        <rect key="frame" x="0.0" y="1028" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uPK-bw-mJ3" id="113-6c-hcT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="288.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZw-Xu-EAL">
-                                                    <rect key="frame" x="24" y="116.5" width="366" height="160"/>
+                                                    <rect key="frame" x="24" y="-128" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number2_bg" translatesAutoresizingMaskIntoConstraints="NO" id="w6Z-ue-1Lh">
                                                             <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
@@ -1804,13 +1804,13 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Comment mobiliser le réseau ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmw-r3-dDp">
-                                                    <rect key="frame" x="24" y="12" width="216" height="18"/>
+                                                    <rect key="frame" x="24" y="12" width="216" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyB-cD-JT2">
-                                                    <rect key="frame" x="24" y="38" width="366" height="62.5"/>
+                                                    <rect key="frame" x="24" y="20" width="366" height="0.0"/>
                                                     <string key="text">L’application Entourage vous permet de vous mobiliser, entre voisins et associations locales, pour organiser des actions et événements solidaires. Pour tout comprendre, c’est par ici.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1934,7 +1934,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="OTSolidarityGuideTableViewCellIdentifier" id="VA5-5K-5gz" customClass="OTSolidarityGuideCell">
-                                        <rect key="frame" x="0.0" y="24.5" width="406" height="84.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="406" height="84.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VA5-5K-5gz" id="8X4-sU-4dY">
                                             <rect key="frame" x="0.0" y="0.0" width="406" height="84.5"/>
@@ -2277,7 +2277,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTitle" id="Grb-Bw-DJB" customClass="OTHomeCellTitleView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Grb-Bw-DJB" id="9vH-WP-LXs">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -2341,7 +2341,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCellAnnounces" rowHeight="330" id="xDk-mS-U6x" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="104.5" width="414" height="330"/>
+                                        <rect key="frame" x="0.0" y="124.5" width="414" height="330"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xDk-mS-U6x" id="iHJ-lp-XH4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="330"/>
@@ -2640,7 +2640,7 @@ L2</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCellActions" rowHeight="298" id="iJz-cN-NqC" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="434.5" width="414" height="298"/>
+                                        <rect key="frame" x="0.0" y="454.5" width="414" height="298"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iJz-cN-NqC" id="GWC-So-VDm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
@@ -3018,7 +3018,7 @@ de demandes</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="collectionCellEvents" rowHeight="280" id="9Jt-00-g9x" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="732.5" width="414" height="280"/>
+                                        <rect key="frame" x="0.0" y="752.5" width="414" height="280"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Jt-00-g9x" id="S3a-Fv-F9c">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="280"/>
@@ -3372,6 +3372,54 @@ d’événements</string>
                                         <connections>
                                             <outlet property="ui_collectionview" destination="gK3-Pv-Zrg" id="wq0-4Z-KzS"/>
                                             <outlet property="ui_title_section" destination="wbf-Mn-cn3" id="akq-6v-JBQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellInfo" id="g7M-eJ-Sg7" customClass="OTHomeInfoCell" customModule="Ent_Beta" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1032.5" width="414" height="93.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g7M-eJ-Sg7" id="BGT-wB-STB">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="93.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous êtes sur le mode Premiers pas." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-9T-BPf">
+                                                    <rect key="frame" x="40" y="11" width="334" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.54509803921568623" green="0.54509803921568623" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prêt à découvrir tous nos programmes ?  Désactivez le mode Premiers pas ici." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAe-Ci-4nH">
+                                                    <rect key="frame" x="20" y="44" width="374" height="33.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9H3-hl-BMp">
+                                                    <rect key="frame" x="20" y="44" width="374" height="33.5"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title=" "/>
+                                                    <connections>
+                                                        <action selector="action_show:" destination="g7M-eJ-Sg7" eventType="touchUpInside" id="OsI-sr-LpC"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="kAe-Ci-4nH" firstAttribute="top" secondItem="Zyi-9T-BPf" secondAttribute="bottom" constant="16" id="0oM-yo-fUv"/>
+                                                <constraint firstItem="9H3-hl-BMp" firstAttribute="leading" secondItem="kAe-Ci-4nH" secondAttribute="leading" id="2T3-xm-dSq"/>
+                                                <constraint firstItem="9H3-hl-BMp" firstAttribute="bottom" secondItem="kAe-Ci-4nH" secondAttribute="bottom" id="3lX-cO-9rN"/>
+                                                <constraint firstItem="9H3-hl-BMp" firstAttribute="trailing" secondItem="kAe-Ci-4nH" secondAttribute="trailing" id="9HW-jY-u0S"/>
+                                                <constraint firstItem="Zyi-9T-BPf" firstAttribute="leading" secondItem="BGT-wB-STB" secondAttribute="leadingMargin" constant="20" id="Lq9-NY-0Wl"/>
+                                                <constraint firstItem="9H3-hl-BMp" firstAttribute="top" secondItem="kAe-Ci-4nH" secondAttribute="top" id="PMP-5s-HcM"/>
+                                                <constraint firstAttribute="bottom" secondItem="kAe-Ci-4nH" secondAttribute="bottom" constant="16" id="R6J-Im-IN0"/>
+                                                <constraint firstItem="Zyi-9T-BPf" firstAttribute="top" secondItem="BGT-wB-STB" secondAttribute="topMargin" id="ZAg-Nf-qGE"/>
+                                                <constraint firstAttribute="trailing" secondItem="kAe-Ci-4nH" secondAttribute="trailing" constant="20" id="aed-Kq-ocB"/>
+                                                <constraint firstItem="kAe-Ci-4nH" firstAttribute="leading" secondItem="BGT-wB-STB" secondAttribute="leading" constant="20" id="eQV-tt-OIK"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Zyi-9T-BPf" secondAttribute="trailing" constant="20" id="fBx-be-I5b"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="ui_subtitle" destination="kAe-Ci-4nH" id="lUH-Cx-PZd"/>
+                                            <outlet property="ui_title" destination="Zyi-9T-BPf" id="Nuo-EC-zub"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

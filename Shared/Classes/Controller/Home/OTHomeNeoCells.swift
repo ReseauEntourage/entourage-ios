@@ -78,3 +78,28 @@ class OTHomeNeoCell: UITableViewCell {
         case Grey
     }
 }
+
+
+class OTHomeInfoCell: UITableViewCell {
+    
+    @IBOutlet weak var ui_title: UILabel!
+    @IBOutlet weak var ui_subtitle: UILabel!
+    
+    weak var delegate:HomeInfoDelegate? = nil
+    
+    func populate(isNeo:Bool, delegate:HomeInfoDelegate) {
+        let title = isNeo ? OTLocalisationService.getLocalizedValue(forKey: "home_neo_cell_info_title") : OTLocalisationService.getLocalizedValue(forKey: "home_expert_cell_info_title")
+        let subtitle = isNeo ? OTLocalisationService.getLocalizedValue(forKey: "home_neo_cell_info_subtitle") : OTLocalisationService.getLocalizedValue(forKey: "home_expert_cell_info_subtitle")
+        ui_title.text = title
+        ui_subtitle.text = subtitle
+        self.delegate = delegate
+    }
+    
+    @IBAction func action_show(_ sender: Any) {
+        delegate?.showProfile()
+    }
+}
+
+protocol HomeInfoDelegate:AnyObject {
+    func showProfile()
+}
