@@ -972,11 +972,11 @@ un autre mot-clé ?</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OTNewsFeedTableViewCellIdentifier" id="rfu-My-3JE" customClass="OTNewsFeedCell">
-                                        <rect key="frame" x="0.0" y="291.5" width="375" height="82"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OTNewsFeedTableViewCellIdentifier" id="rfu-My-3JE" customClass="OTNewsFeedCell">
+                                        <rect key="frame" x="0.0" y="291.5" width="375" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rfu-My-3JE" id="ZVy-7W-ATO">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IFI-OZ-Kqg">
@@ -1025,13 +1025,13 @@ un autre mot-clé ?</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="249" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6M2-hg-0nW">
-                                                    <rect key="frame" x="16" y="35.5" width="306" height="18"/>
+                                                    <rect key="frame" x="16" y="57.5" width="306" height="18"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="15"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" text="Time - distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbT-AJ-9y3">
-                                                    <rect key="frame" x="16" y="57.5" width="306" height="16"/>
+                                                    <rect key="frame" x="16" y="79.5" width="306" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="SEs-qj-pmU"/>
                                                     </constraints>
@@ -1039,16 +1039,24 @@ un autre mot-clé ?</string>
                                                     <color key="textColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="249" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-wq-Moz">
+                                                    <rect key="frame" x="16" y="36.5" width="75" height="17"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
+                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstItem="9rb-wq-Moz" firstAttribute="leading" secondItem="IFI-OZ-Kqg" secondAttribute="leading" id="0gD-fj-fJV"/>
                                                 <constraint firstAttribute="trailing" secondItem="aa2-nv-sbR" secondAttribute="trailing" constant="19" id="1zP-Ct-Xzg"/>
                                                 <constraint firstItem="aa2-nv-sbR" firstAttribute="top" secondItem="DZj-4r-3Jv" secondAttribute="bottom" constant="-1" id="5NC-4j-kmh"/>
-                                                <constraint firstItem="6M2-hg-0nW" firstAttribute="top" secondItem="DZj-4r-3Jv" secondAttribute="bottom" constant="4" id="9a7-6J-NP7"/>
                                                 <constraint firstItem="tW4-zQ-mrM" firstAttribute="bottom" secondItem="aa2-nv-sbR" secondAttribute="bottom" id="BmU-NX-7yP"/>
+                                                <constraint firstItem="aa2-nv-sbR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9rb-wq-Moz" secondAttribute="trailing" constant="8" id="Cbg-XR-Es2"/>
                                                 <constraint firstItem="DZj-4r-3Jv" firstAttribute="leading" secondItem="IFI-OZ-Kqg" secondAttribute="trailing" constant="8" id="Lq8-Ly-raF"/>
                                                 <constraint firstItem="IFI-OZ-Kqg" firstAttribute="leading" secondItem="ZVy-7W-ATO" secondAttribute="leadingMargin" id="Yuj-Bi-BoK"/>
                                                 <constraint firstItem="tW4-zQ-mrM" firstAttribute="trailing" secondItem="aa2-nv-sbR" secondAttribute="trailing" id="bGw-Xs-q21"/>
+                                                <constraint firstItem="9rb-wq-Moz" firstAttribute="top" secondItem="IFI-OZ-Kqg" secondAttribute="bottom" constant="4" id="bdY-Hj-PG4"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="RbT-AJ-9y3" secondAttribute="bottom" constant="8" id="bec-CL-aCo"/>
                                                 <constraint firstItem="6M2-hg-0nW" firstAttribute="leading" secondItem="ZVy-7W-ATO" secondAttribute="leadingMargin" id="blW-u9-ZZG"/>
                                                 <constraint firstItem="RbT-AJ-9y3" firstAttribute="trailing" secondItem="6M2-hg-0nW" secondAttribute="trailing" id="ews-js-JWX"/>
@@ -1056,6 +1064,7 @@ un autre mot-clé ?</string>
                                                 <constraint firstItem="DZj-4r-3Jv" firstAttribute="top" secondItem="ZVy-7W-ATO" secondAttribute="topMargin" id="nXw-3J-Vhf"/>
                                                 <constraint firstItem="RbT-AJ-9y3" firstAttribute="leading" secondItem="ZVy-7W-ATO" secondAttribute="leadingMargin" id="rpS-P6-7z1"/>
                                                 <constraint firstItem="RbT-AJ-9y3" firstAttribute="top" secondItem="6M2-hg-0nW" secondAttribute="bottom" constant="4" id="sH4-0y-llP"/>
+                                                <constraint firstItem="6M2-hg-0nW" firstAttribute="top" secondItem="9rb-wq-Moz" secondAttribute="bottom" constant="4" id="tMD-3k-h0x"/>
                                                 <constraint firstItem="aa2-nv-sbR" firstAttribute="leading" secondItem="6M2-hg-0nW" secondAttribute="trailing" constant="-1" id="tdC-Xx-h2w"/>
                                                 <constraint firstItem="IFI-OZ-Kqg" firstAttribute="centerY" secondItem="DZj-4r-3Jv" secondAttribute="centerY" id="w4U-5g-w9r"/>
                                             </constraints>
@@ -1069,6 +1078,7 @@ un autre mot-clé ?</string>
                                             <outlet property="tableViewDelegate" destination="vXZ-lx-hvc" id="VLq-1a-7aH"/>
                                             <outlet property="timeLocationLabel" destination="RbT-AJ-9y3" id="LgH-yq-Yrf"/>
                                             <outlet property="typeByNameLabel" destination="6M2-hg-0nW" id="4m0-K4-wc3"/>
+                                            <outlet property="ui_label_event" destination="9rb-wq-Moz" id="OYF-f9-ElV"/>
                                             <outlet property="userProfileImageButton" destination="aa2-nv-sbR" id="frw-00-HGW"/>
                                         </connections>
                                     </tableViewCell>

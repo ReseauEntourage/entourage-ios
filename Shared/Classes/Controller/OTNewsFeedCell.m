@@ -60,6 +60,8 @@ NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIde
     summaryBehavior.imgCategory = self.imgCategory;
     [summaryBehavior configureWith:item];
     
+    self.ui_label_event.text = @"";
+    
     id<OTUIDelegate> uiDelegate = [[OTFeedItemFactory createFor:item] getUI];
     
     BOOL isEntourage = [item class] == [OTEntourage class];
@@ -70,6 +72,10 @@ NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIde
     }
     else if(isEntourage) {
         self.typeByNameLabel.text = [NSString stringWithFormat:@"Par %@",((OTEntourage*)item).author.displayName ];
+        
+        if ([item isOuting]) {
+            self.ui_label_event.text = [self getEventDateInfos:(OTEntourage*)  item];
+        }
     }
     else {
         self.typeByNameLabel.text = @"*****";
@@ -85,6 +91,25 @@ NSString* const OTNewsFeedTableViewCellIdentifier = @"OTNewsFeedTableViewCellIde
     } else {
         self.userProfileImageButton.hidden = YES;
         self.imgAssociation.hidden = YES;
+    }
+}
+
+-(NSString*) getEventDateInfos:(OTEntourage*)item {
+    NSString *eventName = OTLocalizedString(@"event").capitalizedString;
+    
+    if (item.startsAt) {
+        NSString *_message = @"";
+        if ([[NSCalendar currentCalendar] isDate:item.startsAt inSameDayAsDate:item.endsAt]) {
+           _message = [NSString stringWithFormat:@"%@ %@", eventName, [NSString stringWithFormat:OTLocalizedString(@"le_"),[item.startsAt asStringWithFormat:@"EEEE dd/MM"]]];
+        }
+        else {
+            NSString *_dateStr = [NSString stringWithFormat:OTLocalizedString(@"du_au"), [item.startsAt asStringWithFormat:@"dd/MM"],[item.endsAt asStringWithFormat:@"dd/MM"]];
+            _message = [NSString stringWithFormat:@"%@ %@", eventName,_dateStr ];
+        }
+        
+        return _message;
+    } else {
+        return eventName;
     }
 }
 

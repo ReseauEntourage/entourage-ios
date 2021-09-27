@@ -27,6 +27,8 @@ class OTHomeExpertViewController: UIViewController {
     
     var isFromModifyZone = false
     
+    var isNeighbour = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -206,12 +208,23 @@ class OTHomeExpertViewController: UIViewController {
 extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource, CellClickDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayFeed.count + 1
+        self.isNeighbour = false
+        if let currentUser = UserDefaults.standard.currentUser {
+            let isNeighbour = currentUser.isUserTypeNeighbour()
+            if isNeighbour {
+                if currentUser.isEngaged {
+                    self.isNeighbour = true
+                }
+            }
+            
+        }
+        
+        return self.isNeighbour ? arrayFeed.count + 1 : arrayFeed.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == arrayFeed.count {
+        if indexPath.row == arrayFeed.count && self.isNeighbour {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellInfo", for: indexPath) as! OTHomeInfoCell
             
             cell.populate(isNeo: false, delegate: self)
@@ -236,7 +249,7 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == arrayFeed.count {
+        if indexPath.row == arrayFeed.count && self.isNeighbour {
             return UITableView.automaticDimension
         }
         

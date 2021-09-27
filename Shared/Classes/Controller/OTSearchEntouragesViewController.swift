@@ -85,7 +85,7 @@ class OTSearchEntouragesViewController: UIViewController {
         
         SVProgressHUD.show()
         
-        var types = ""
+        var types = "as,ae,am,ar,ai,ak,ao,ah"
         if searchType == "outing" {
             types = "ou"
         }

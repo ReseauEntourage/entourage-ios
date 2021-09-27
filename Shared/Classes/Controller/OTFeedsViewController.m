@@ -371,8 +371,8 @@ OTHeatzonesCollectionViewDelegate
         if (self.isExpertArrowAsk) {
             newVc.searchType = @"ask";
         }
-        else {
-         newVc.searchType = @"contrib";
+        else if (self.isExpertArrowContrib) {
+            newVc.searchType = @"contrib";
         }
     }
     
