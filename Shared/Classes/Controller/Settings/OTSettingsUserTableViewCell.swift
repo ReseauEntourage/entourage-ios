@@ -15,6 +15,10 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_image_user_badge: UIImageView!
     @IBOutlet weak var ui_label_name: UILabel!
     @IBOutlet weak var ui_label_mod_profile: UILabel!
+    @IBOutlet weak var ui_button_image_profile: UIButton!
+    @IBOutlet weak var ui_button_profile: UIButton!
+    
+    
     
     @IBOutlet weak var ui_view_events: UIView!
     @IBOutlet weak var ui_label_nb_events: UILabel!
@@ -40,6 +44,11 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        ui_button_profile.accessibilityLabel = "Modifier profil"
+        ui_button_image_profile.accessibilityLabel = "Afficher profil"
+        
+        
         ui_image_user.layer.cornerRadius = ui_image_user.frame.width / 2
         ui_label_mod_profile.text = OTLocalisationService.getLocalizedValue(forKey: "modMyProfile")
       //  ui_label_mod_profile.underline()

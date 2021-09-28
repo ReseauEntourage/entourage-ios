@@ -203,6 +203,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="ui_button" destination="tZN-VA-nJd" id="X3h-hU-8AR"/>
                                             <outlet property="ui_subtitle" destination="iZX-3x-N4e" id="3Mw-GA-iEa"/>
                                             <outlet property="ui_title" destination="2Ur-BS-XV9" id="wI0-0O-7jT"/>
                                         </connections>

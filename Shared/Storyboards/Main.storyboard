@@ -1543,7 +1543,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="85.5" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number2_bg" translatesAutoresizingMaskIntoConstraints="NO" id="rjq-dW-59d">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="rjq-dW-59d" secondAttribute="height" multiplier="272:160" id="QVg-27-Elb"/>
                                                             </constraints>
@@ -1763,7 +1763,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="-128" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number2_bg" translatesAutoresizingMaskIntoConstraints="NO" id="w6Z-ue-1Lh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="w6Z-ue-1Lh" secondAttribute="height" multiplier="272:160" id="YTZ-PJ-bdm"/>
                                                             </constraints>
@@ -2277,30 +2277,30 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTitle" id="Grb-Bw-DJB" customClass="OTHomeCellTitleView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Grb-Bw-DJB" id="9vH-WP-LXs">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34X-mk-WMs">
-                                                    <rect key="frame" x="0.0" y="10" width="414" height="24"/>
+                                                    <rect key="frame" x="0.0" y="10" width="414" height="60"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Home Page ;)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38h-hs-aua">
-                                                            <rect key="frame" x="24" y="-2.5" width="142" height="29"/>
+                                                            <rect key="frame" x="24" y="15.5" width="142" height="29"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z15-nP-zPh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="24"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                                             <state key="highlighted" backgroundImage="bg_selection"/>
                                                             <connections>
                                                                 <action selector="action_show_detail:" destination="Grb-Bw-DJB" eventType="touchUpInside" id="jtt-fV-iPY"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J39-i5-hrf">
-                                                            <rect key="frame" x="360" y="-5" width="34" height="34"/>
+                                                            <rect key="frame" x="360" y="13" width="34" height="34"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="34" id="NpT-9G-6OB"/>
                                                                 <constraint firstAttribute="height" constant="34" id="V9V-1V-jPE"/>
@@ -2337,11 +2337,12 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="ui_button_title" destination="Z15-nP-zPh" id="cxN-TU-ufA"/>
                                             <outlet property="ui_title_section" destination="38h-hs-aua" id="AjE-94-W9E"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCellAnnounces" rowHeight="330" id="xDk-mS-U6x" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="88.5" width="414" height="330"/>
+                                        <rect key="frame" x="0.0" y="124.5" width="414" height="330"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xDk-mS-U6x" id="iHJ-lp-XH4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="330"/>
@@ -2640,7 +2641,7 @@ L2</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCellActions" rowHeight="298" id="iJz-cN-NqC" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="418.5" width="414" height="298"/>
+                                        <rect key="frame" x="0.0" y="454.5" width="414" height="298"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iJz-cN-NqC" id="GWC-So-VDm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
@@ -3013,12 +3014,13 @@ de demandes</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="ui_button_title" destination="ykt-Be-fsa" id="iVd-b9-kLo"/>
                                             <outlet property="ui_collectionview" destination="6cw-KE-E9S" id="F14-gk-QSI"/>
                                             <outlet property="ui_title_section" destination="zMh-R0-lMV" id="I2h-xV-wg2"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="collectionCellEvents" rowHeight="280" id="9Jt-00-g9x" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="716.5" width="414" height="280"/>
+                                        <rect key="frame" x="0.0" y="752.5" width="414" height="280"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Jt-00-g9x" id="S3a-Fv-F9c">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="280"/>
@@ -3370,12 +3372,13 @@ d’événements</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="ui_button_title" destination="mi7-sb-6r8" id="y3z-q8-ZgK"/>
                                             <outlet property="ui_collectionview" destination="gK3-Pv-Zrg" id="wq0-4Z-KzS"/>
                                             <outlet property="ui_title_section" destination="wbf-Mn-cn3" id="akq-6v-JBQ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellInfo" id="g7M-eJ-Sg7" customClass="OTHomeInfoCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="996.5" width="414" height="93.5"/>
+                                        <rect key="frame" x="0.0" y="1032.5" width="414" height="93.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g7M-eJ-Sg7" id="BGT-wB-STB">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="93.5"/>
@@ -3419,6 +3422,7 @@ d’événements</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="ui_button" destination="9H3-hl-BMp" id="UkK-US-Cos"/>
                                             <outlet property="ui_subtitle" destination="kAe-Ci-4nH" id="lUH-Cx-PZd"/>
                                             <outlet property="ui_title" destination="Zyi-9T-BPf" id="Nuo-EC-zub"/>
                                         </connections>

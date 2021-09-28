@@ -85,7 +85,13 @@ class OTHomeInfoCell: UITableViewCell {
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_subtitle: UILabel!
     
+    @IBOutlet weak var ui_button: UIButton!
     weak var delegate:HomeInfoDelegate? = nil
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        ui_button.accessibilityLabel = "Vers profil"
+    }
     
     func populate(isNeo:Bool, delegate:HomeInfoDelegate) {
         let title = isNeo ? OTLocalisationService.getLocalizedValue(forKey: "home_neo_cell_info_title") : OTLocalisationService.getLocalizedValue(forKey: "home_expert_cell_info_title")

@@ -111,6 +111,7 @@ class OTMainTabbarViewController: UITabBarController {
         guideVC.tabBarItem.tag = 1
         
         plusVC.tabBarItem.title = ""
+        plusVC.tabBarItem.accessibilityLabel = "Action +"
         plusVC.tabBarItem.tag = 2
         plusVC.tabBarItem.image = UIImage.init(named: "ic_tab_plus_selected")?.withRenderingMode(.alwaysOriginal)
         plusVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_plus_selected")

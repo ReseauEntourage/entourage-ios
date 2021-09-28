@@ -6,6 +6,8 @@
 //  Copyright © 2021 Entourage. All rights reserved.
 //
 
+import UIKit
+
 //MARK: - Protocol Clic from Cells -
 protocol CellClickDelegate: class {
     func selectCollectionViewCell(item: Any,type:HomeCardType,position:Int)
@@ -18,6 +20,7 @@ protocol CellClickDelegate: class {
 //MARK: - OTHomeCellTitleView -
 class OTHomeCellTitleView: UITableViewCell {
     @IBOutlet weak var ui_title_section: UILabel!
+    @IBOutlet weak var ui_button_title: UIButton?
     weak var delegate:CellClickDelegate? = nil
     var card = HomeCard()
     
@@ -25,6 +28,7 @@ class OTHomeCellTitleView: UITableViewCell {
         self.delegate = clickDelegate
         self.card = card
         ui_title_section.text = card.titleSection
+        ui_button_title?.accessibilityLabel = card.titleSection
     }
     
     @IBAction func action_show_detail(_ sender: Any) {
@@ -38,6 +42,7 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     
     @IBOutlet weak var ui_collectionview: UICollectionView!
     @IBOutlet weak var ui_title_section: UILabel!
+    @IBOutlet weak var ui_button_title: UIButton?
     
     var cards = HomeCard()
     weak var delegate:CellClickDelegate? = nil
@@ -96,6 +101,7 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
         }
         ui_collectionview.reloadData()
         ui_title_section.text = card.titleSection
+        ui_button_title?.accessibilityLabel = card.titleSection
         changeFlowLayout()
     }
     
