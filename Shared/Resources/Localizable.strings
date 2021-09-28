@@ -818,8 +818,8 @@
 "profile_activities" = "Activité(s) : %@";
 "profile_activity_not_selected" = "Activité non sélectionnée";
 
-"profile_my_zones" = "Ma zone d'actions";
-"profile_my_zones_description" = "Soyez notifié.e des initiatives solidaires et besoins dans cette zone";
+"profile_my_zones" = "Mes zones d'actions";
+"profile_my_zones_description" = "Soyez notifié.e des initiatives solidaires et besoins dans ces zones";
 "profile_button_add2nd_zone" = "Ajouter une zone d'action";
 "profile_button_add2nd_zone_lite" = "Ajouter";
 "profile_button_add2nd_zone_lite2" = "Ajouter une zone";
