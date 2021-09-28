@@ -100,6 +100,22 @@ class OTHomeInfoCell: UITableViewCell {
     }
 }
 
+class OTHomeTopCell: UITableViewCell {
+    
+    @IBOutlet weak var ui_title: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let _message:String = OTLocalisationService.getLocalizedValue(forKey: "home_neo_title")
+        let _mess_Orange:String = OTLocalisationService.getLocalizedValue(forKey: "home_neo_title_bold")
+        let _title = Utilitaires.formatString(stringMessage: _message, coloredTxt: _mess_Orange, color: .black, colorHighlight: UIColor.appOrange(), fontSize: 24.0, fontWeight: .regular, fontColoredWeight: .regular)
+        
+        ui_title.attributedText = _title
+       
+    }
+}
+
 protocol HomeInfoDelegate:AnyObject {
     func showProfile()
 }

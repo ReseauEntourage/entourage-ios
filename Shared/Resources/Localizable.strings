@@ -1028,10 +1028,10 @@
 "home_neo_cell2_button" = "SE LANCER";
 
 "home_neo_cell_info_title" = "Vous êtes sur le mode Premiers pas.";
-"home_neo_cell_info_subtitle" = "Prêt à découvrir tous nos programmes ?\n\nDésactivez le mode Premiers pas ici.";
-"home_neo_title_neo" = "“Premiers pas”";
+"home_neo_cell_info_subtitle" = "Prêt à découvrir tous nos programmes ? Désactivez le mode Premiers pas ici.";
+"home_neo_title_neo" = "Premiers pas";
 "home_expert_cell_info_title" = "Vous êtes sur le mode normal de l’application.";
-"home_expert_cell_info_subtitle" = "Vous souhaitez être guidé pour débuter sur Entourage ?\n\nActivez le mode Premiers pas ici.";
+"home_expert_cell_info_subtitle" = "Vous souhaitez être guidé pour débuter sur Entourage ? Activez le mode Premiers pas ici.";
 
 //Neo help
 "home_neo_help_title" = "Entourage vous accompagne dans votre démarche";

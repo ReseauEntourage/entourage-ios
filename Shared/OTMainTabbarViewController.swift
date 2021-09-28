@@ -87,6 +87,11 @@ class OTMainTabbarViewController: UITabBarController {
         DispatchQueue.main.async {
             self.selectedIndex = 4
             self.boldSelectedItem()
+            //TO force scrolltoTop
+            if let vc = self.menuVC.topViewController as? OTMenuProfileViewController {
+                let indexPath = IndexPath(row: 0, section: 0)
+                vc.ui_tableview.scrollToRow(at: indexPath, at: .top, animated: true)
+            }
         }
     }
     

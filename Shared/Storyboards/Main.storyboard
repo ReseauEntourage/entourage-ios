@@ -1690,7 +1690,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="-128" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number4_bg" translatesAutoresizingMaskIntoConstraints="NO" id="S74-pi-eEJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="S74-pi-eEJ" secondAttribute="height" multiplier="272:160" id="LXb-Nt-CYh"/>
                                                             </constraints>
@@ -2277,30 +2277,30 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTitle" id="Grb-Bw-DJB" customClass="OTHomeCellTitleView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Grb-Bw-DJB" id="9vH-WP-LXs">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34X-mk-WMs">
-                                                    <rect key="frame" x="0.0" y="10" width="414" height="60"/>
+                                                    <rect key="frame" x="0.0" y="10" width="414" height="24"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Home Page ;)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38h-hs-aua">
-                                                            <rect key="frame" x="24" y="15.5" width="142" height="29"/>
+                                                            <rect key="frame" x="24" y="-2.5" width="142" height="29"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z15-nP-zPh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="24"/>
                                                             <state key="highlighted" backgroundImage="bg_selection"/>
                                                             <connections>
                                                                 <action selector="action_show_detail:" destination="Grb-Bw-DJB" eventType="touchUpInside" id="jtt-fV-iPY"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J39-i5-hrf">
-                                                            <rect key="frame" x="360" y="13" width="34" height="34"/>
+                                                            <rect key="frame" x="360" y="-5" width="34" height="34"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="34" id="NpT-9G-6OB"/>
                                                                 <constraint firstAttribute="height" constant="34" id="V9V-1V-jPE"/>
@@ -2341,7 +2341,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCellAnnounces" rowHeight="330" id="xDk-mS-U6x" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="124.5" width="414" height="330"/>
+                                        <rect key="frame" x="0.0" y="88.5" width="414" height="330"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xDk-mS-U6x" id="iHJ-lp-XH4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="330"/>
@@ -2640,7 +2640,7 @@ L2</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCellActions" rowHeight="298" id="iJz-cN-NqC" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="454.5" width="414" height="298"/>
+                                        <rect key="frame" x="0.0" y="418.5" width="414" height="298"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iJz-cN-NqC" id="GWC-So-VDm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
@@ -3018,7 +3018,7 @@ de demandes</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="collectionCellEvents" rowHeight="280" id="9Jt-00-g9x" customClass="OTHomeCellCollectionView" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="752.5" width="414" height="280"/>
+                                        <rect key="frame" x="0.0" y="716.5" width="414" height="280"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Jt-00-g9x" id="S3a-Fv-F9c">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="280"/>
@@ -3375,13 +3375,13 @@ d’événements</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellInfo" id="g7M-eJ-Sg7" customClass="OTHomeInfoCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1032.5" width="414" height="93.5"/>
+                                        <rect key="frame" x="0.0" y="996.5" width="414" height="93.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g7M-eJ-Sg7" id="BGT-wB-STB">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="93.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous êtes sur le mode Premiers pas." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-9T-BPf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Vous êtes sur le mode Premiers pas." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-9T-BPf">
                                                     <rect key="frame" x="40" y="11" width="334" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.54509803921568623" green="0.54509803921568623" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
@@ -3395,6 +3395,7 @@ d’événements</string>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9H3-hl-BMp">
                                                     <rect key="frame" x="20" y="44" width="374" height="33.5"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title=" "/>
                                                     <connections>
