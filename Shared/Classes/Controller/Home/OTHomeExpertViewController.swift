@@ -214,12 +214,12 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
             if isNeighbour {
                 if currentUser.isEngaged {
                     self.isNeighbour = true
+                    return arrayFeed.count > 0 ? arrayFeed.count + 1 : arrayFeed.count
                 }
             }
-            
         }
         
-        return self.isNeighbour ? arrayFeed.count + 1 : arrayFeed.count
+        return arrayFeed.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
