@@ -902,7 +902,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Organization name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsY-iQ-pKW">
-                                                    <rect key="frame" x="31" y="10" width="154.5" height="18"/>
+                                                    <rect key="frame" x="31" y="10" width="154.5" height="14"/>
                                                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                                                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -923,7 +923,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="49s-iZ-bYZ" secondAttribute="trailing" constant="8" id="1Uk-Zg-fMi"/>
                                                 <constraint firstItem="49s-iZ-bYZ" firstAttribute="top" secondItem="rSV-ou-4kZ" secondAttribute="bottom" constant="10" id="55x-K2-PU0"/>
-                                                <constraint firstItem="rSV-ou-4kZ" firstAttribute="top" secondItem="zsY-iQ-pKW" secondAttribute="bottom" id="73C-dw-keM"/>
+                                                <constraint firstItem="rSV-ou-4kZ" firstAttribute="top" secondItem="zsY-iQ-pKW" secondAttribute="bottom" constant="4" id="73C-dw-keM"/>
                                                 <constraint firstItem="rSV-ou-4kZ" firstAttribute="leading" secondItem="zsY-iQ-pKW" secondAttribute="leading" id="CMh-ll-Qc4"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="49s-iZ-bYZ" secondAttribute="bottomMargin" constant="15" id="Eee-NH-fwj"/>
                                                 <constraint firstItem="zsY-iQ-pKW" firstAttribute="leading" secondItem="4HC-JT-8Yo" secondAttribute="leadingMargin" constant="15" id="M3E-6x-fqg"/>
@@ -1009,6 +1009,12 @@ un autre mot-clé ?</string>
                                                         <action selector="doShowProfile" destination="rfu-My-3JE" eventType="touchUpInside" id="AuI-U4-8hS"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="249" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-wq-Moz">
+                                                    <rect key="frame" x="16" y="36.5" width="75" height="17"/>
+                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
+                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tW4-zQ-mrM">
                                                     <rect key="frame" x="336" y="45.5" width="20" height="20"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1039,24 +1045,18 @@ un autre mot-clé ?</string>
                                                     <color key="textColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" verticalHuggingPriority="249" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rb-wq-Moz">
-                                                    <rect key="frame" x="16" y="36.5" width="75" height="17"/>
-                                                    <fontDescription key="fontDescription" name="SFUIText-Light" family="SF UI Text" pointSize="14"/>
-                                                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="9rb-wq-Moz" firstAttribute="leading" secondItem="IFI-OZ-Kqg" secondAttribute="leading" id="0gD-fj-fJV"/>
                                                 <constraint firstAttribute="trailing" secondItem="aa2-nv-sbR" secondAttribute="trailing" constant="19" id="1zP-Ct-Xzg"/>
                                                 <constraint firstItem="aa2-nv-sbR" firstAttribute="top" secondItem="DZj-4r-3Jv" secondAttribute="bottom" constant="-1" id="5NC-4j-kmh"/>
+                                                <constraint firstItem="9rb-wq-Moz" firstAttribute="top" secondItem="DZj-4r-3Jv" secondAttribute="bottom" constant="5" id="Ar8-Fl-xRj"/>
                                                 <constraint firstItem="tW4-zQ-mrM" firstAttribute="bottom" secondItem="aa2-nv-sbR" secondAttribute="bottom" id="BmU-NX-7yP"/>
                                                 <constraint firstItem="aa2-nv-sbR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9rb-wq-Moz" secondAttribute="trailing" constant="8" id="Cbg-XR-Es2"/>
                                                 <constraint firstItem="DZj-4r-3Jv" firstAttribute="leading" secondItem="IFI-OZ-Kqg" secondAttribute="trailing" constant="8" id="Lq8-Ly-raF"/>
                                                 <constraint firstItem="IFI-OZ-Kqg" firstAttribute="leading" secondItem="ZVy-7W-ATO" secondAttribute="leadingMargin" id="Yuj-Bi-BoK"/>
                                                 <constraint firstItem="tW4-zQ-mrM" firstAttribute="trailing" secondItem="aa2-nv-sbR" secondAttribute="trailing" id="bGw-Xs-q21"/>
-                                                <constraint firstItem="9rb-wq-Moz" firstAttribute="top" secondItem="IFI-OZ-Kqg" secondAttribute="bottom" constant="4" id="bdY-Hj-PG4"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="RbT-AJ-9y3" secondAttribute="bottom" constant="8" id="bec-CL-aCo"/>
                                                 <constraint firstItem="6M2-hg-0nW" firstAttribute="leading" secondItem="ZVy-7W-ATO" secondAttribute="leadingMargin" id="blW-u9-ZZG"/>
                                                 <constraint firstItem="RbT-AJ-9y3" firstAttribute="trailing" secondItem="6M2-hg-0nW" secondAttribute="trailing" id="ews-js-JWX"/>
