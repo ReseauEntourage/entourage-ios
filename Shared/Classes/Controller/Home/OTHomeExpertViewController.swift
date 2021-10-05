@@ -212,10 +212,8 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
         if let currentUser = UserDefaults.standard.currentUser {
             let isNeighbour = currentUser.isUserTypeNeighbour()
             if isNeighbour {
-                if currentUser.isEngaged {
-                    self.isNeighbour = true
-                    return arrayFeed.count > 0 ? arrayFeed.count + 1 : arrayFeed.count
-                }
+                self.isNeighbour = true
+                return arrayFeed.count > 0 ? arrayFeed.count + 1 : arrayFeed.count
             }
         }
         
