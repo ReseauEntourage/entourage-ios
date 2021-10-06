@@ -239,8 +239,14 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
             self.ui_button_asso.isHidden = false
             self.ui_label_asso?.isHidden = false
             
-            let titleButton = String.init(format:"%@ %@", feedItem.author.partner.name,OTLocalisationService.getLocalizedValue(forKey: "info_asso_user"));
-            let coloredStr:String = OTLocalisationService.getLocalizedValue(forKey: "info_asso_user")
+            var keyJoined = "info_asso_user"
+            if feedItem.author.isPartnerWithCurrentUser {
+                keyJoined = "info_asso_user_joined"
+            }
+            
+            
+            let titleButton = String.init(format:"%@ %@", feedItem.author.partner.name,OTLocalisationService.getLocalizedValue(forKey: keyJoined));
+            let coloredStr:String = OTLocalisationService.getLocalizedValue(forKey: keyJoined)
             
             let attStr = Utilitaires.formatString(stringMessage: titleButton, coloredTxt: coloredStr, color: UIColor.appOrange(), colorHighlight: UIColor.appOrange(), fontSize: 15, fontWeight: .medium, fontColoredWeight: .bold)
             

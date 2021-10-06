@@ -14,6 +14,7 @@
 #define kWSAvatar_URL @"avatar_url"
 #define kWSPartner @"partner"
 #define kWSPartnerRoleTitle @"partner_role_title"
+#define kWSpartner_with_current_user @"partner_with_current_user"
 
 @implementation OTFeedItemAuthor
 
@@ -26,6 +27,7 @@
         self.avatarUrl = [dictionary stringForKey:kWSAvatar_URL];
         self.partner = [[OTAssociation alloc] initWithDictionary:[dictionary objectForKey:kWSPartner]];
         self.partner_role_title = [dictionary stringForKey:kWSPartnerRoleTitle];
+        self.isPartnerWithCurrentUser = [dictionary boolForKey:kWSpartner_with_current_user];
         
         if (self.partner != nil || (self.partner_role_title != nil  && self.partner_role_title.length > 0)) {
             self.hasToShowRoleAndPartner = YES;
@@ -44,7 +46,7 @@
     [encoder encodeObject:self.avatarUrl forKey:kWSAvatar_URL];
     [encoder encodeObject:self.partner forKey:kWSPartner];
     [encoder encodeObject:self.partner_role_title forKey:kWSPartnerRoleTitle];
-    
+    [encoder encodeBool:self.isPartnerWithCurrentUser forKey:kWSpartner_with_current_user];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -56,6 +58,7 @@
         self.avatarUrl = [decoder decodeObjectForKey:kWSAvatar_URL];
         self.partner = [decoder decodeObjectForKey:kWSPartner];
         self.partner_role_title = [decoder decodeObjectForKey:kWSPartnerRoleTitle];
+        self.isPartnerWithCurrentUser = [decoder decodeBoolForKey:kWSpartner_with_current_user];
     }
     return self;
 }
