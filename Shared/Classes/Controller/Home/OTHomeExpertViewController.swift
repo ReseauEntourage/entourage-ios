@@ -81,6 +81,8 @@ class OTHomeExpertViewController: UIViewController {
             isFromModifyZone = false
             getFeed()
         }
+        
+        self.ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
     }
     
     func createEmptyArray() {
