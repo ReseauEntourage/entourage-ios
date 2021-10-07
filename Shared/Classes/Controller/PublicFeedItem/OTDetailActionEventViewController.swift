@@ -50,6 +50,13 @@ class OTDetailActionEventViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateStatus), name: NSNotification.Name.init(kNotificationJoinRequestSent), object: nil)
         
         loadMembers()
+        
+        if feedItem.isOuting() {
+            OTLogger.logEvent(View_FeedDetail_Event)
+        }
+        else {
+            OTLogger.logEvent(View_FeedDetail_Action)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

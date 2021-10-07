@@ -164,6 +164,7 @@ extension OTHomeNeoActionViewController : EntourageEditorDelegate {
         let vc = sb.instantiateViewController(withIdentifier: "OTMain0")  as! OTFeedsViewController
         vc.isFromEvent = true
         vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: "outings_title_home")
+        OTLogger.logEvent(View_FeedView_Events)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -172,6 +173,7 @@ extension OTHomeNeoActionViewController : EntourageEditorDelegate {
         let vc = sb.instantiateViewController(withIdentifier: "OTMain0") as! OTFeedsViewController
         vc.isFromEvent = false
         vc.isFromNeoCourse = true
+        OTLogger.logEvent(View_FeedView_Asks)
         vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: "entourage_ask_for_helps_title_home")
         self.navigationController?.pushViewController(vc, animated: true)
     }

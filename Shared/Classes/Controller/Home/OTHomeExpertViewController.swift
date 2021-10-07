@@ -410,6 +410,7 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
         let vc = sb.instantiateViewController(withIdentifier: "OTMain0")  as! OTFeedsViewController
         vc.isFromEvent = true
         vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: "outings_title_home")
+        OTLogger.logEvent(View_FeedView_Events)
         self.parent?.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -424,6 +425,9 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
             vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: strTitle)
             vc.isExpertArrowAsk = subtype == .ActionsAsk ? true : false
             vc.isExpertArrowContrib = subtype == .ActionsContrib ? true : false
+            
+            let tag = subtype == .ActionsAsk ? View_FeedView_Asks : View_FeedView_Contribs
+            OTLogger.logEvent(tag)
         }
         
         self.parent?.navigationController?.pushViewController(vc, animated: true)

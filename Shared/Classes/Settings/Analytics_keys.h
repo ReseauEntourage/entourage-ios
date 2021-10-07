@@ -301,4 +301,12 @@
 #define Action_feedSearch_show_profile @"Action__FeedSearch__Show_Profile"
 #define View_feedSearch_searchResults @"View__FeedSearch__SearchResults"
 
+//Feed Detail
+#define View_FeedView_Events @"View__FeedView__Events"
+#define View_FeedView_Contribs @"View__FeedView__Contribs"
+#define View_FeedView_Asks @"View__FeedView__Asks"
+
+#define View_FeedDetail_Action @"View__FeedDetail__Action"
+#define View_FeedDetail_Event @"View__FeedDetail__Event"
+
 #endif /* Analytics_keys_h */
