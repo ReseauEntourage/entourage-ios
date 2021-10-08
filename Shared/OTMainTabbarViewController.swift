@@ -377,6 +377,7 @@ extension OTMainTabbarViewController: UITabBarControllerDelegate {
         
         if !isEditor {
             homeVC.popToRootViewController(animated: false)
+            (homeVC.topViewController as? OTHomeMainViewController)?.isFromProfile = true
         }
         //homeVC.popToRootViewController(animated: false)
         boldSelectedItem()

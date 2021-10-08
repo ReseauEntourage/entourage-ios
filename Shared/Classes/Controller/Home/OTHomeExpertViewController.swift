@@ -31,6 +31,8 @@ class OTHomeExpertViewController: UIViewController {
     
     var isNeighbour = false
     
+    var isFromProfile = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,8 +84,12 @@ class OTHomeExpertViewController: UIViewController {
             getFeed()
         }
         
-        self.ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
+        if self.isFromProfile {
+            self.ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
+            isFromProfile = false
+        }
     }
+        
     
     func createEmptyArray() {
         let card = OTFeedItem()
