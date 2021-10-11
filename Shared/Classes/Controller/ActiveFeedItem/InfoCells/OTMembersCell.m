@@ -31,8 +31,14 @@
         }
         self.ui_label_title_role.text = roleStr;
         
-        NSString *titleButton = [NSString stringWithFormat:@"%@ %@",item.partner.name,[OTLocalisationService getLocalizedValueForKey:@"info_asso_user"]];
-        NSString *coloredStr = [OTLocalisationService getLocalizedValueForKey:@"info_asso_user"];
+        NSString *keyJoined = @"info_asso_user";
+        if (item.feedItem.author.isPartnerWithCurrentUser) {
+            keyJoined = @"info_asso_user_joined";
+        }
+        
+        
+        NSString *titleButton = [NSString stringWithFormat:@"%@ %@",item.partner.name,[OTLocalisationService getLocalizedValueForKey:keyJoined]];
+        NSString *coloredStr = [OTLocalisationService getLocalizedValueForKey:keyJoined];
         NSAttributedString *attrStr = [Utilitaires formatStringWithStringMessage:titleButton coloredTxt:coloredStr color:[UIColor appOrangeColor] colorHighlight:[UIColor appOrangeColor] fontSize:15 fontWeight:UIFontWeightMedium fontColoredWeight:UIFontWeightBold];
         
         self.ui_label_asso.attributedText = attrStr;

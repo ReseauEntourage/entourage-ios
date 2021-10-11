@@ -64,6 +64,8 @@ class OTDetailActionEventViewController: UIViewController {
         OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.barTintColor = UIColor.white
+        
+        loadActionEvent()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,7 +86,7 @@ class OTDetailActionEventViewController: UIViewController {
         
         if segue.identifier == "UserProfileSegue" {
             if let navContr = segue.destination as? UINavigationController, let user = UserDefaults.standard.currentUser, let userId = sender as? Int {
-                
+                navContr.modalPresentationStyle = .fullScreen
                 let userVC = navContr.topViewController as! OTUserViewController
                 if !user.isAnonymous() && userId == user.sid.intValue {
                     userVC.user = user
@@ -130,6 +132,15 @@ class OTDetailActionEventViewController: UIViewController {
                 Logger.print("***** error get feed users : \(String(describing: error?.localizedDescription))")
             }
         }
+    }
+    
+    func loadActionEvent() {
+        OTEntourageService().getEntourageWithStringId(feedItem.uuid) { entourage in
+            if let _ent = entourage {
+                self.feedItem = _ent
+            }
+            self.loadMembers()
+        } failure: { error in }
     }
     
     func setupViewBottom() {
@@ -402,7 +413,7 @@ extension OTDetailActionEventViewController: ActionCellCreatorDelegate {
         
         let navVC = sb.instantiateInitialViewController() as! UINavigationController
         let vc = navVC.topViewController as! OTAssociationDetailViewController
-        
+        navVC.modalPresentationStyle = .fullScreen
         vc.associationId = assoId
         self.navigationController?.present(navVC, animated: true, completion: nil)
     }
