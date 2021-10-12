@@ -18,6 +18,11 @@ class OTDetailActionEventTopCell: UITableViewCell {
     
     @IBOutlet weak var ui_image_top: UIImageView?
     
+    @IBOutlet weak var ui_constraint_height_view_status: NSLayoutConstraint?
+    @IBOutlet weak var ui_label_status: UILabel!
+    
+    
+    
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_view_button_join: UIView?
     @IBOutlet weak var ui_view_button_share: UIView?
@@ -64,6 +69,16 @@ class OTDetailActionEventTopCell: UITableViewCell {
                 else {
                     self.ui_image_top?.image = UIImage.init(named: "ic_placeholder_event_horizontal")
                 }
+            }
+            
+            if feedItem.status == "full" {
+                ui_label_status.text = OTLocalisationService.getLocalizedValue(forKey: "info_event_closed").uppercased()
+                ui_constraint_height_view_status?.constant = 40
+                ui_label_status.isHidden = false
+            }
+            else {
+                ui_constraint_height_view_status?.constant = 0
+                ui_label_status.isHidden = true
             }
         }
         

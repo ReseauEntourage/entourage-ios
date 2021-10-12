@@ -1135,3 +1135,4 @@
 "cell_info_demand_empty_button" = "Rechercher\nplus loin";
 "info_asso_user" = "• S'abonner >";
 "info_asso_user_joined" = "• Abonné";
+"info_event_closed" = "événement complet";
