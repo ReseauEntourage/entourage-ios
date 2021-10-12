@@ -24,7 +24,6 @@
 @property (strong, nonatomic) OTAssociation *partner;
 
 @property(nonatomic) BOOL hasToShowRoleAndPartner;
-@property(nonatomic) BOOL isPartnerWithCurrentUser;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)arrayForWebservice:(NSArray *)joiners;

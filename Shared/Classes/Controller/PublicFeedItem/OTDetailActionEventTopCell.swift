@@ -255,7 +255,7 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
             self.ui_label_asso?.isHidden = false
             
             var keyJoined = "info_asso_user"
-            if feedItem.author.isPartnerWithCurrentUser {
+            if feedItem.author.partner.isFollowing {
                 keyJoined = "info_asso_user_joined"
             }
             

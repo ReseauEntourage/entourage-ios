@@ -16,7 +16,6 @@
 @property (strong, nonatomic) NSString *displayName,*partner_role_title;
 @property (strong, nonatomic) OTAssociation *partner;
 @property(nonatomic) BOOL hasToShowRoleAndPartner;
-@property(nonatomic) BOOL isPartnerWithCurrentUser;
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 
