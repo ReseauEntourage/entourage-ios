@@ -52,6 +52,7 @@
         else {
             self.hasToShowRoleAndPartner = NO;
         }
+        self.isPartnerWithCurrentUser = [dictionary boolForKey:@"partner_with_current_user"];
     }
     return self;
 }

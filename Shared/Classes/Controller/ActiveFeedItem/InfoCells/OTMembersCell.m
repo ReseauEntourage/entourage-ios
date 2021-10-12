@@ -32,7 +32,7 @@
         self.ui_label_title_role.text = roleStr;
         
         NSString *keyJoined = @"info_asso_user";
-        if (item.feedItem.author.isPartnerWithCurrentUser) {
+        if (item.isPartnerWithCurrentUser) {
             keyJoined = @"info_asso_user_joined";
         }
         
