@@ -309,4 +309,10 @@
 #define View_FeedDetail_Action @"View__FeedDetail__Action"
 #define View_FeedDetail_Event @"View__FeedDetail__Event"
 
+//List details
+#define View_ListActions_Show @"View__ListActions__Show"
+#define Action_ListActions_Switch_Ask @"Action__ListActions__Switch_Ask"
+#define Action_ListActions_Switch_Contrib @"Action__ListActions__Switch_Contrib"
+#define Action_ListActions_Show_Detail @"Action__ListActions__Show_Detail"
+
 #endif /* Analytics_keys_h */

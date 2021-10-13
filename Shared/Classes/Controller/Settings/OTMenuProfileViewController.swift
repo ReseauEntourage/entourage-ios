@@ -327,4 +327,11 @@ extension OTMenuProfileViewController: TapMenuProfileDelegate {
         
         self.present(alertVc, animated: true, completion: nil)
     }
+    
+    func showActions() {
+        let storyB = UIStoryboard.init(name: "Settings", bundle: nil)
+        let vc = storyB.instantiateViewController(withIdentifier: "myActionsVC")
+       
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

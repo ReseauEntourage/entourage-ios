@@ -19,6 +19,8 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_button_profile: UIButton!
     
     
+    @IBOutlet weak var ui_button_actions: UIButton!
+    @IBOutlet weak var ui_label_actions: UILabel!
     
     @IBOutlet weak var ui_view_events: UIView!
     @IBOutlet weak var ui_label_nb_events: UILabel!
@@ -44,6 +46,9 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        ui_button_actions.setTitle(" ", for: .normal)
+        ui_label_actions.text = OTLocalisationService.getLocalizedValue(forKey: "myActions")
         
         ui_button_profile.accessibilityLabel = "Modifier profil"
         ui_button_image_profile.accessibilityLabel = "Afficher profil"
@@ -165,6 +170,10 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         }
         delegate?.changeExpertMode(isExpert: !sender.isOn)
     }
+    
+    @IBAction func action_show_actions(_ sender: Any) {
+        delegate?.showActions()
+    }
 }
 
     //MARK: - TapMenuProfileDelegate -
@@ -174,4 +183,5 @@ protocol TapMenuProfileDelegate:AnyObject {
     func showEvents()
     func showAll()
     func changeExpertMode(isExpert:Bool)
+    func showActions()
 }

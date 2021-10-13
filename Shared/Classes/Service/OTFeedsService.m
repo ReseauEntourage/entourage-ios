@@ -128,6 +128,28 @@
      ];
 }
 
+- (void)getEntouragesOwnedWithsuccess:(void (^)(NSMutableArray *feeds))success
+                              failure:(void (^)(NSError *error))failure {
+    NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_OWNS, TOKEN];
+    [[OTHTTPRequestManager sharedInstance]
+     GETWithUrl:url
+     andParameters:nil
+     andSuccess:^(id responseObject) {
+        NSDictionary *data = responseObject;
+        NSMutableArray *feeds = [self entouragesItemsFromDictionary:data];
+        
+        if (success) {
+            success(feeds);
+        }
+    }
+     andFailure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }
+    ];
+}
+
 #pragma mark - private methods
 
 - (NSMutableArray *)feedItemsFromDictionary:(NSDictionary *)dictionary {

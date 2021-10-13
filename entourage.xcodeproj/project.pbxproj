@@ -11,6 +11,8 @@
 		0205197726F1E49E003B277B /* OTPopInfoCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205197626F1E49E003B277B /* OTPopInfoCustom.swift */; };
 		022231FB26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */; };
 		022F04C926F8CEF2001769C4 /* OTSearchEntouragesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */; };
+		02916A8A2716DA2B00A45AC5 /* OTMyActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */; };
+		02F805E72715D88100694BB6 /* OTMyActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */; };
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
 		2B0322092643F2A400A70007 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0322082643F2A400A70007 /* SwiftPackageProductDependency */; };
@@ -552,6 +554,8 @@
 		0205197626F1E49E003B277B /* OTPopInfoCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPopInfoCustom.swift; sourceTree = "<group>"; };
 		022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEditActionPublicPrivateViewController.swift; sourceTree = "<group>"; };
 		022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSearchEntouragesViewController.swift; sourceTree = "<group>"; };
+		02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyActionTableViewCell.swift; sourceTree = "<group>"; };
+		02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyActionsViewController.swift; sourceTree = "<group>"; };
 		0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		143551A9A6ED152DD5F655B3 /* Pods-entourageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourageTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-entourageTests/Pods-entourageTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1616,6 +1620,8 @@
 				2BE75F3024C84C3A00D4C856 /* OTSettingsUserTableViewCell.swift */,
 				2BE75F3224C84C4500D4C856 /* OTSettingsMenuTableViewCell.swift */,
 				2BE75F3424C84C5100D4C856 /* OTSettingsDebugTableViewCell.swift */,
+				02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */,
+				02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3633,6 +3639,7 @@
 				A202ECB52085D2C80058F32C /* OTStatusBehavior.m in Sources */,
 				A202ED232085D2C80058F32C /* NSString+Validators.m in Sources */,
 				A202EBBB2085D2C80058F32C /* OTAboutMeViewController.m in Sources */,
+				02916A8A2716DA2B00A45AC5 /* OTMyActionTableViewCell.swift in Sources */,
 				A202ECA52085D2C80058F32C /* OTMembersTableDataSource.m in Sources */,
 				A202ED092085D2C80058F32C /* OTTourMessaging.m in Sources */,
 				A202EB552085D2C80058F32C /* OTEntourageDisclaimerViewController.m in Sources */,
@@ -3959,6 +3966,7 @@
 				371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */,
 				2BEC86F72625A4BD000BD5C3 /* OTHomeNeoTourStartViewController.swift in Sources */,
 				A202EC852085D2C80058F32C /* OTFeedItemFiltersCellProvider.m in Sources */,
+				02F805E72715D88100694BB6 /* OTMyActionsViewController.swift in Sources */,
 				A202EBFD2085D2C80058F32C /* OTRequestOperationManager.m in Sources */,
 				A202ED192085D2C80058F32C /* OTTourMapHandler.m in Sources */,
 				A2CCF2FA2167444B00AD6237 /* OTAddActionSecondConsentViewController.m in Sources */,
