@@ -48,7 +48,7 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         ui_button_actions.setTitle(" ", for: .normal)
-        ui_label_actions.text = OTLocalisationService.getLocalizedValue(forKey: "myActions")
+        ui_label_actions.text = OTLocalisationService.getLocalizedValue(forKey: "myActionsCreated")
         
         ui_button_profile.accessibilityLabel = "Modifier profil"
         ui_button_image_profile.accessibilityLabel = "Afficher profil"
