@@ -24,7 +24,7 @@ class OTMyActionTableViewCell: UITableViewCell {
         ui_title.text = entourage.title
         
         let cat = getCat(type: entourage.type, category: entourage.category)
-        ui_label_info.text = cat.title
+        ui_label_info.text = cat.title_list
         
         if let pictoStr = OTAppAppearance.iconName(forEntourageItem: entourage, isAnnotation: false) {
             ui_image_info.image = UIImage.init(named: pictoStr)
@@ -65,5 +65,18 @@ class OTMyActionTableViewCell: UITableViewCell {
             }
         }
         return cat
+    }
+}
+
+class OTMyActionEmptyTableViewCell: UITableViewCell {
+    @IBOutlet weak var ui_title: UILabel!
+    
+    func populateCell(isContrib:Bool) {
+        if isContrib {
+            ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "MyActionEmptyContrib")
+        }
+        else {
+            ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "MyActionEmptyAsk")
+        }
     }
 }

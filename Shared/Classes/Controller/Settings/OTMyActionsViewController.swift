@@ -64,7 +64,9 @@ class OTMyActionsViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.ui_tableview.reloadData()
+            if self.arrayOwnedSelection.count > 0 {
             self.ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
+            }
         }
     }
     
@@ -98,10 +100,21 @@ class OTMyActionsViewController: UIViewController {
 //MARK: - uitableview Datasource / Delegate -
 extension OTMyActionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayOwnedSelection.count
+        
+        return arrayOwnedSelection.count > 0 ? arrayOwnedSelection.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if arrayOwnedSelection.count == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellEmpty", for: indexPath) as! OTMyActionEmptyTableViewCell
+            
+            let isContrib = self.ui_top_segmented.selectedSegmentIndex == 0
+            cell.populateCell(isContrib: isContrib)
+            
+            return cell
+        }
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OTMyActionTableViewCell
         
         cell.populateCell(entourage: arrayOwnedSelection[indexPath.row])
@@ -110,6 +123,8 @@ extension OTMyActionsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if arrayOwnedSelection.count == 0 { return }
+        
         let sb = UIStoryboard.init(name: "PublicFeedDetailNew", bundle: nil)
         if let vc = sb.instantiateInitialViewController() as? OTDetailActionEventViewController {
             vc.feedItem = arrayOwnedSelection[indexPath.row]

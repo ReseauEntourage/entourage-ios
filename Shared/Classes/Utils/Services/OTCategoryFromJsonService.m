@@ -44,6 +44,7 @@
             category.title = [object valueForKey:kWSKeyCategoryTitle];
             category.title_example = [object valueForKey:kWSKeyCategoryExampleTitle];
             category.description_example = [object valueForKey:kWSKeyCategoryExampleDescription];
+            category.title_list = [object valueForKey:kWSKeyCategoryTitleList];
             [categoryType.categories addObject:category];
         }
         [resultArray addObject:categoryType];

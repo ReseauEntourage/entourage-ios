@@ -1138,3 +1138,5 @@
 "info_event_closed" = "événement complet";
 "myActions" = "Mes actions solidaires";
 "myActionsCreated" = "Mes actions solidaires créées";
+"MyActionEmptyAsk" = "Actuellement vous n'avez pas de demandes publiées sur l'application ;)";
+"MyActionEmptyContrib" = "Actuellement vous n'avez pas de dons publiés sur l'application ;)";

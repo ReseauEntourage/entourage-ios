@@ -1728,6 +1728,33 @@ L2</string>
                                             <outlet property="ui_view_container" destination="by8-nf-oGW" id="GXZ-2e-qlR"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellEmpty" rowHeight="189" id="XMY-4k-whQ" customClass="OTMyActionEmptyTableViewCell" customModule="Ent_Beta" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="233.66666603088379" width="375" height="189"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XMY-4k-whQ" id="7TQ-lA-HUu">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actuellement, vous n'avez pas de demandes publiées sur l'application ;)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7o-jx-7i1">
+                                                    <rect key="frame" x="36" y="41" width="303" height="107"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="Z7o-jx-7i1" firstAttribute="leading" secondItem="7TQ-lA-HUu" secondAttribute="leadingMargin" constant="20" id="CTk-gi-eqL"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Z7o-jx-7i1" secondAttribute="bottom" constant="30" id="FJ9-21-Edi"/>
+                                                <constraint firstItem="Z7o-jx-7i1" firstAttribute="top" secondItem="7TQ-lA-HUu" secondAttribute="topMargin" constant="30" id="uBW-P0-Ren"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Z7o-jx-7i1" secondAttribute="trailing" constant="20" id="xVB-iH-XLp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="ui_title" destination="Z7o-jx-7i1" id="UBl-L2-d15"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="2wP-Iy-Bz2" id="IcA-Wd-705"/>
