@@ -17,6 +17,7 @@ class OTMyActionsViewController: UIViewController {
     var arrayOwnedSelection = [OTEntourage]()
     
     var isContrib = true
+    var isFirstLoad = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +76,7 @@ class OTMyActionsViewController: UIViewController {
     func getOwned() {
         OTFeedsService.init().getEntouragesOwnedWithsuccess { entourages in
             self.arrayOwned = [OTEntourage]()
+            self.isFirstLoad = false
             
             if let _entourages = entourages as? [OTEntourage] {
                 self.arrayOwned.append(contentsOf: _entourages)
@@ -102,7 +104,10 @@ class OTMyActionsViewController: UIViewController {
 //MARK: - uitableview Datasource / Delegate -
 extension OTMyActionsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        if isFirstLoad {
+            return 0
+        }
+            
         return arrayOwnedSelection.count > 0 ? arrayOwnedSelection.count : 1
     }
     
