@@ -49,6 +49,9 @@ NSString *const kKeyGoodWavesParticipate = @"good_waves_participation";
 NSString *const kKeyEngaged = @"engaged";
 NSString *const kKeyUnreadCount = @"unread_count";
 
+NSString *const kKeyContribCreationCount = @"contribution_creation_count";
+NSString *const kKeyAskCreationCount = @"ask_for_help_creation_count";
+
 @interface OTUser ()
 @property (nonatomic, readwrite) NSString *uuid;
 @property (nonatomic, readwrite) NSArray *memberships;
@@ -114,6 +117,9 @@ NSString *const kKeyUnreadCount = @"unread_count";
         
         _interests = [dictionary objectForKey:kInterests];
         _unreadCount = [dictionary numberForKey:kKeyUnreadCount defaultValue:@0];
+        
+        _contribCreationCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyContribCreationCount defaultValue:0];
+        _askCreactionCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyAskCreationCount defaultValue:0];
     }
     return self;
 }
@@ -180,6 +186,8 @@ NSString *const kKeyUnreadCount = @"unread_count";
     [encoder encodeObject:[NSNumber numberWithBool:self.isGoodWavesValidated] forKey:kKeyGoodWavesParticipate];
     [encoder encodeObject:[NSNumber numberWithBool:self.isEngaged] forKey:kKeyEngaged];
     [encoder encodeObject:self.unreadCount forKey:kKeyUnreadCount];
+    [encoder encodeObject:self.contribCreationCount forKey:kKeyContribCreationCount];
+    [encoder encodeObject:self.askCreactionCount forKey:kKeyAskCreationCount];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -217,6 +225,8 @@ NSString *const kKeyUnreadCount = @"unread_count";
         self.isGoodWavesValidated = [[decoder decodeObjectForKey:kKeyGoodWavesParticipate] boolValue];
         self.isEngaged = [[decoder decodeObjectForKey:kKeyEngaged] boolValue];
         self.unreadCount = [decoder decodeObjectForKey:kKeyUnreadCount];
+        self.contribCreationCount = [decoder decodeObjectForKey:kKeyContribCreationCount];
+        self.askCreactionCount = [decoder decodeObjectForKey:kKeyAskCreationCount];
     }
     return self;
 }

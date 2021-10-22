@@ -907,6 +907,10 @@
 "good_waves_member" = "Membre des bonnes ondes";
 "activity_title" = "Activité";
 
+"contrib_title" = "dons\ncrées";
+"ask_title" = "demandes\ncréées";
+"contrib_button_title" = "Voir la liste →";
+"ask_button_title" = "Voir la liste →";
 
 "add_event_help_button" = "Quels événements diffuser ?";
 

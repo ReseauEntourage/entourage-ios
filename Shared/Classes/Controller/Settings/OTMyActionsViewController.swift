@@ -16,9 +16,11 @@ class OTMyActionsViewController: UIViewController {
     var arrayOwned = [OTEntourage]()
     var arrayOwnedSelection = [OTEntourage]()
     
+    var isContrib = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        ui_top_segmented.selectedSegmentIndex = isContrib ? 0 : 1
         setupSegmentedControl()
         
         self.title = OTLocalisationService.getLocalizedValue(forKey: "myActions").uppercased()
