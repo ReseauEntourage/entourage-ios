@@ -27,7 +27,6 @@
 
 + (void)setupAnalyticsWithUser: (OTUser *)user {
     [FIRAnalytics setUserID:[user.sid stringValue]];
-    [FIRAnalytics setUserPropertyString:(user.email != nil ? user.email : @"") forName:@"$email"];
     [FIRAnalytics setUserPropertyString:(user.partner != nil ? user.partner.name : @"") forName:@"EntouragePartner"];
     if (user.type) {
         [FIRAnalytics setUserPropertyString:user.type forName:@"EntourageUserType"];
