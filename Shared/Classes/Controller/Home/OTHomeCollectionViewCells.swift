@@ -18,7 +18,7 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ui_title_location: UILabel!
     @IBOutlet weak var ui_picto_location: UIImageView!
     
-    @IBOutlet weak var ui_info_action_by: UILabel!
+    @IBOutlet weak var ui_info_action_by: UILabel?
     @IBOutlet weak var ui_button_profile: UIButton!
     @IBOutlet weak var ui_picto_check_profile: UIImageView!
     @IBOutlet weak var ui_title_profile: UILabel!
@@ -44,7 +44,7 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
             ui_title_action.text = OTLocalisationService.getLocalizedValue(forKey: item.groupType)
             ui_title_action.textColor = UIColor.appOrange()
             ui_info_show_more?.text = OTLocalisationService.getLocalizedValue(forKey: "show_more_event")
-            ui_info_action_by.text = OTLocalisationService.getLocalizedValue(forKey: "home_event_info_user")
+            ui_info_action_by?.text = OTLocalisationService.getLocalizedValue(forKey: "home_event_info_user")
         }
         else {
             ui_title_action.text = OTLocalisationService.getLocalizedValue(forKey: item.entourage_type)
@@ -52,11 +52,11 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
             
             if item.entourage_type == "contribution" {
                 ui_title_action.textColor = UIColor.appBlue()
-                ui_info_action_by.text = OTLocalisationService.getLocalizedValue(forKey: "home_action_contrib_info_user")
+                ui_info_action_by?.text = OTLocalisationService.getLocalizedValue(forKey: "home_action_contrib_info_user")
             }
             else {
                 ui_title_action.textColor = UIColor.appOrange()
-                ui_info_action_by.text = OTLocalisationService.getLocalizedValue(forKey: "home_action_info_user")
+                ui_info_action_by?.text = OTLocalisationService.getLocalizedValue(forKey: "home_action_info_user")
             }
         }
         
@@ -113,6 +113,77 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func updateCellVariant(item:OTEntourage,delegate:CellClickDelegate?) {
+        self.delegate = delegate
+        self.item = item
+        
+        let cat = getCat(type: item.type, category: item.category)
+        
+        ui_title_action.text = cat.title_list
+        ui_info_show_more?.text = OTLocalisationService.getLocalizedValue(forKey: "show_more")
+    
+        ui_title_description.text = item.title
+        ui_title_profile.text = item.author.displayName
+        
+        //Picto
+        if let pictoStr = OTAppAppearance.iconName(forEntourageItem: item, isAnnotation: false) {
+            ui_picto_action.image = UIImage.init(named: pictoStr)
+        }
+        
+        let distance = HomeCellUtils.getDistance(item: item)
+        var distanceStr = ""
+        
+        if distance < 1000000 {
+            distanceStr = HomeCellUtils.formattedItemDistance(distance: distance)
+            if distanceStr.count > 0 {
+                distanceStr = String.init(format: "%@ - ", distanceStr)
+            }
+        }
+        if item.postalCode.count == 0 && distanceStr.count == 0 {
+            distanceStr = " "
+        }
+        ui_title_location.text = String.init(format: "%@%@", distanceStr,item.postalCode)
+        
+        
+        if OTAppConfiguration.shouldShowCreatorImagesForNewsFeedItems() {
+            ui_button_profile.setupAsProfilePicture(fromUrl: item.author.avatarUrl)
+            ui_button_profile.isHidden = false
+            
+            if item.author.partner == nil {
+                ui_picto_check_profile.isHidden = true
+            }
+            else {
+                ui_picto_check_profile.isHidden = false
+                ui_picto_check_profile.setup(fromUrl: item.author.partner.smallLogoUrl, withPlaceholder: "badgeDefault")
+            }
+        }
+        else {
+            ui_button_profile.isHidden = true
+            ui_picto_check_profile.isHidden = true
+        }
+    }
+    
+    func getCat(type:String,category:String) -> OTCategory {
+        var cat = OTCategory.init()
+        if let _array = OTCategoryFromJsonService.getData() as? [OTCategoryType] {
+            
+            for item in _array {
+                if item.type == type {
+                    for _item2 in item.categories {
+                        if let _cat = _item2 as? OTCategory {
+                            if _cat.category == category {
+                                cat = _cat
+                                break
+                            }
+                        }
+                    }
+                    break
+                }
+            }
+        }
+        return cat
+    }
+    
     @IBAction func action_show_profile(_ sender: UIButton) {
         self.delegate?.showDetailUser(userId: item.author.uID)
     }
@@ -130,12 +201,14 @@ class OTHomeEventCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ui_picto_location: UIImageView!
     @IBOutlet weak var ui_title_nb_people: UILabel!
     
-    @IBOutlet weak var ui_info_show_more: UILabel!
+    @IBOutlet weak var ui_info_show_more: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.layer.cornerRadius = 8.0
         self.contentView.layer.masksToBounds = true
+        
+        ui_info_show_more?.text = OTLocalisationService.getLocalizedValue(forKey: "show_more")
     }
     
     func updateCell(item:OTEntourage) {
@@ -171,8 +244,8 @@ class OTHomeEventCollectionViewCell: UICollectionViewCell {
             ui_title_nb_people?.text = "\(nbPeople) \(OTLocalisationService.getLocalizedValue(forKey: "participants")!)"
         }
         
-        if let url = item.entourage_event_url_image_portrait {
-            ui_image_event.setup(fromUrl: url, withPlaceholder: "ic_placeholder_event_feed")
+        if let url = item.entourage_event_url_image_landscape {
+            ui_image_event.setup(fromUrl: url, withPlaceholder: "ic_placeholder_event_horizontal")
         }
     }
 }
@@ -237,7 +310,7 @@ class OTHomeCellOther: UICollectionViewCell {
         self.isShowZone = isShowZone
         self.ui_image_bottom?.isHidden = true
         self.ui_image?.isHidden = false
-        self.contentView.backgroundColor = UIColor.clear
+        self.contentView.backgroundColor = UIColor.appOrange()
     }
     func populateCell(title:String,buttonMoreTxt:String) {
         ui_title.text = title
