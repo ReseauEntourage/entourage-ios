@@ -52,8 +52,6 @@ extension OTHomeNeoActionViewController: UITableViewDataSource,UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        
-        
         if indexPath.row == 6 {
             if let url = OTSafariService.redirectUrl(withIdentifier: SLUG_ACTION_SCB) {
                 OTSafariService.launchInAppBrowser(with: url)
@@ -155,8 +153,16 @@ extension OTHomeNeoActionViewController : EntourageEditorDelegate {
     func didEdit(_ entourage: OTEntourage!) {
         temporaryNavController?.dismiss(animated: true, completion: {
             self.temporaryNavController = nil
-            self.showAllActions()
+            self.showDetailEntourage(entourage)
         })
+    }
+    
+    func showDetailEntourage(_ entourage: OTEntourage!) {
+        let sb = UIStoryboard.init(name: "PublicFeedDetailNew", bundle: nil)
+        if let vc = sb.instantiateInitialViewController() as? OTDetailActionEventViewController {
+            vc.feedItem = entourage
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func showAllEvents() {

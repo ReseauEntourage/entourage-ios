@@ -315,11 +315,10 @@
     [SVProgressHUD show];
     [[OTEncounterService new] sendEntourage:self.editTableSource.entourage
                                 withSuccess:^(OTEntourage *sentEntourage) {
-                                    self.entourage = sentEntourage;
-                                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageCreated object:nil];
-                                    [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
-                                    
-        
+        self.entourage = sentEntourage;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationEntourageCreated object:nil];
+        [SVProgressHUD dismiss];
+        //  [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
         
         if (self.isFromHomeNeo) {
             NSString * tag = [NSString stringWithFormat:Action_NeoFeedAct_Send_X,self.tagNameAnalytic];
@@ -328,23 +327,22 @@
         else {
             [OTLogger logEvent:@"CreateEntourageSuccess"];
         }
-                                    
-                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                        
-                                        if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {
-                                            [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
-                                            if (completion) {
-                                                completion();
-                                            }
-                                        }
-                                    });
-                                } failure:^(NSError *error) {
-                                    [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotCreated")];
-                                    sender.enabled = YES;
-                                    if (completion) {
-                                        completion();
-                                    }
-                                }];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {
+                [self.entourageEditorDelegate performSelector:@selector(didEditEntourage:) withObject:sentEntourage];
+                if (completion) {
+                    completion();
+                }
+            }
+        });
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:OTLocalizedString(@"entourageNotCreated")];
+        sender.enabled = YES;
+        if (completion) {
+            completion();
+        }
+    }];
 }
 
 - (void)updateEntourage:(UIButton *)sender completion:(void(^)(void))completion {

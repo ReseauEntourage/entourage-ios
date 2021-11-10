@@ -17,6 +17,8 @@
 		02659F562720421B009A3297 /* CellHomeExpertActionB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02659F552720421B009A3297 /* CellHomeExpertActionB.xib */; };
 		0281F16C271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */; };
 		02916A8A2716DA2B00A45AC5 /* OTMyActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */; };
+		02B1700A273AAB8200F1ED6F /* OTCustomInfoPop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B17009273AAB8200F1ED6F /* OTCustomInfoPop.xib */; };
+		02B1700C273AABA000F1ED6F /* OTCustomInfoPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B1700B273AABA000F1ED6F /* OTCustomInfoPop.swift */; };
 		02F805E72715D88100694BB6 /* OTMyActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */; };
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
@@ -564,6 +566,8 @@
 		02659F552720421B009A3297 /* CellHomeExpertActionB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertActionB.xib; sourceTree = "<group>"; };
 		0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
 		02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyActionTableViewCell.swift; sourceTree = "<group>"; };
+		02B17009273AAB8200F1ED6F /* OTCustomInfoPop.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTCustomInfoPop.xib; sourceTree = "<group>"; };
+		02B1700B273AABA000F1ED6F /* OTCustomInfoPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTCustomInfoPop.swift; sourceTree = "<group>"; };
 		02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyActionsViewController.swift; sourceTree = "<group>"; };
 		0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -2350,6 +2354,8 @@
 				373AAD7D23293558001D8CF3 /* OTThemedButton.m */,
 				2B7C488124B899FA0003C854 /* HomeToolTipsView.xib */,
 				2B7C488324B89A210003C854 /* OTHomeTooltipView.swift */,
+				02B17009273AAB8200F1ED6F /* OTCustomInfoPop.xib */,
+				02B1700B273AABA000F1ED6F /* OTCustomInfoPop.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3352,6 +3358,7 @@
 				A21D65C32085FDAA00EF8E0E /* Tutorial.storyboard in Resources */,
 				A21D65C42085FDAA00EF8E0E /* About.storyboard in Resources */,
 				37CD7F422281C81900D62537 /* OTModalPopup.xib in Resources */,
+				02B1700A273AAB8200F1ED6F /* OTCustomInfoPop.xib in Resources */,
 				A21D65A72085FDAA00EF8E0E /* FeedItemFilters.storyboard in Resources */,
 				A202E7F72085CFC40058F32C /* SF-UI-Text-Semibold.otf in Resources */,
 				A21D65AF2085FDAA00EF8E0E /* UserProfile.storyboard in Resources */,
@@ -3913,6 +3920,7 @@
 				A202EC672085D2C80058F32C /* OTTapViewBehavior.m in Sources */,
 				A202EBB92085D2C80058F32C /* OTMessageViewController.m in Sources */,
 				A202EC4F2085D2C80058F32C /* OTShareFeedItemBehavior.m in Sources */,
+				02B1700C273AABA000F1ED6F /* OTCustomInfoPop.swift in Sources */,
 				A202ED1D2085D2C80058F32C /* OTAnnouncementFactory.m in Sources */,
 				2B2EED172624953900566A90 /* OTHomeNeoStreetViewController.swift in Sources */,
 				2B1A8F79252768FD008419E6 /* OTGuideDetailPoiViewController.swift in Sources */,
