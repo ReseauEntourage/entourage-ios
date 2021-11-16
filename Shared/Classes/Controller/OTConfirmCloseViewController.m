@@ -14,6 +14,7 @@
 #import "OTConsts.h"
 #import "OTMailSenderBehavior.h"
 #import "OTCloseReason.h"
+#import "Analytics_keys.h"
 
 @interface OTConfirmCloseViewController ()
 
@@ -54,6 +55,8 @@
     }
     
     [self setupViews];
+    
+    [OTLogger logEvent:Show_Pop_Close];
 }
 
 -(void) setupViews {
@@ -87,12 +90,12 @@
 #pragma mark - User interaction
 
 - (IBAction)doSuccessfulClose {
-    [OTLogger logEvent:@"SuccessfulClosePopup"];
+    [OTLogger logEvent:Action_Pop_Close_Success];
     [self closeFeedItemWithReason:OTCloseReasonSuccesClose];
 }
 
 - (IBAction)doBlockedClose {
-    [OTLogger logEvent:@"BlockedClosePopup"];
+    [OTLogger logEvent:Action_Pop_Close_Failed];
     [self closeFeedItemWithReason:OTCloseReasonBlockedClose];
 }
 

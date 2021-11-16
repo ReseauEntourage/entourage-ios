@@ -315,4 +315,16 @@
 #define Action_ListActions_Switch_Contrib @"Action__ListActions__Switch_Contrib"
 #define Action_ListActions_Show_Detail @"Action__ListActions__Show_Detail"
 
+//POP Share / modify / close entourage
+#define Show_Pop_Share @"View__Pop_Share__Show"
+#define Action_Pop_Share_Link @"Action__Pop_Share__Link"
+#define Action_Pop_Share_Entourage @"Action__Pop_Share__On_Entourage"
+
+#define Show_Menu_Options @"View__Menu_Options__Show"
+#define Show_Modify_Entourage @"View__Modify_Entourage__Show"
+
+#define Show_Pop_Close @"View__Pop_Close_Entourage__Show"
+#define Action_Pop_Close_Success @"Action__Pop_Close_Entourage__Success"
+#define Action_Pop_Close_Failed @"Action__Pop_Close_Entourage__Fail"
+
 #endif /* Analytics_keys_h */

@@ -13,6 +13,7 @@
 #import "OTMainViewController.h"
 #import "OTCloseReason.h"
 #import "OTTour.h"
+#import "Analytics_keys.h"
 
 #define ACTION_DELAY 0.3f
 
@@ -29,7 +30,7 @@
 }
 
 - (IBAction)startChangeStatus {
-    [OTLogger logEvent:@"OpenEntourageOptionsOverlay"];
+    [OTLogger logEvent:Show_Menu_Options];
     [self.owner performSegueWithIdentifier:@"SegueChangeState" sender:self];
 }
 

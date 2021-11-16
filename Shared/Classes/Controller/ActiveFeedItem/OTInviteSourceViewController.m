@@ -16,6 +16,7 @@
     [super viewDidLoad];
    // [self updateUIElements];
     [self setupViews];
+    [OTLogger logEvent:Show_Pop_Share];
 }
 
 -(void) setupViews {
@@ -66,11 +67,15 @@
 }
 
 - (IBAction)action_share:(id)sender {
+    [OTLogger logEvent:Action_Pop_Share_Link];
+    
     if(self.delegate)
         [self.delegate share];
 }
 
 - (IBAction)action_share_entourage:(id)sender {
+    [OTLogger logEvent:Action_Pop_Share_Entourage];
+    
     if(self.delegate) {
        [self.delegate shareEntourage];
         [self dismissViewControllerAnimated:NO completion:nil];
