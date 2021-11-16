@@ -14,7 +14,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self updateUIElements];
+   // [self updateUIElements];
+    [self setupViews];
+}
+
+-(void) setupViews {
+    self.inviteSubtitleLabel.text = [OTAppAppearance inviteSubtitleText:self.feedItem];
+    
+    for (UIButton *button in self.buttons) {
+        button.layer.cornerRadius = 5;
+        button.layer.borderWidth = 1;
+        button.layer.borderColor = [[UIColor appOrangeColor] CGColor];
+    }
 }
 
 - (void)updateUIElements {
