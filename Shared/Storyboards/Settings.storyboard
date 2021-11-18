@@ -1578,23 +1578,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bq5-JK-IIq">
-                                <rect key="frame" x="24" y="52" width="327" height="47"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="mot-lp-YwT"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Mes dons"/>
-                                    <segment title="Mes demandes"/>
-                                </segments>
-                                <color key="selectedSegmentTintColor" red="0.99607843139999996" green="0.93725490199999995" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <connections>
-                                    <action selector="action_change_segment:" destination="2wP-Iy-Bz2" eventType="valueChanged" id="fhX-fh-vcT"/>
-                                </connections>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Igw-bc-qjA">
-                                <rect key="frame" x="0.0" y="118" width="375" height="660"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="718"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="189" id="kCU-yw-W0C" customClass="OTMyActionTableViewCell" customModule="Ent_Beta" customModuleProvider="target">
@@ -1725,18 +1710,14 @@ L2</string>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bq5-JK-IIq" firstAttribute="leading" secondItem="nwX-DW-au9" secondAttribute="leading" constant="24" id="02E-ta-Fr9"/>
                             <constraint firstAttribute="trailing" secondItem="Igw-bc-qjA" secondAttribute="trailing" id="2UE-Hm-ywh"/>
-                            <constraint firstItem="Igw-bc-qjA" firstAttribute="top" secondItem="bq5-JK-IIq" secondAttribute="bottom" constant="20" id="9dw-hb-eDm"/>
+                            <constraint firstItem="Igw-bc-qjA" firstAttribute="top" secondItem="d0x-hx-lwJ" secondAttribute="bottom" constant="16" id="6wu-ui-4H0"/>
                             <constraint firstItem="Cec-rg-XPP" firstAttribute="top" secondItem="Igw-bc-qjA" secondAttribute="bottom" id="FQo-kj-CXS"/>
                             <constraint firstItem="Igw-bc-qjA" firstAttribute="leading" secondItem="nwX-DW-au9" secondAttribute="leading" id="cYE-Ff-CSC"/>
-                            <constraint firstAttribute="trailing" secondItem="bq5-JK-IIq" secondAttribute="trailing" constant="24" id="q3y-77-WXt"/>
-                            <constraint firstItem="bq5-JK-IIq" firstAttribute="top" secondItem="d0x-hx-lwJ" secondAttribute="bottom" constant="8" symbolic="YES" id="wEu-Ri-CIR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="ui_tableview" destination="Igw-bc-qjA" id="ibl-Es-PXJ"/>
-                        <outlet property="ui_top_segmented" destination="bq5-JK-IIq" id="8iN-2d-Rbh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qi-Bq-06P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
