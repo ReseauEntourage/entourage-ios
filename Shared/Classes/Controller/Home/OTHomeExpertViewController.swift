@@ -89,7 +89,7 @@ class OTHomeExpertViewController: UIViewController {
             break
         }
         
-        let defaultDuration:TimeInterval = 0//60 * 60 * 24  //TODO -remettre les bonnes valuers après tests preprod-
+        let defaultDuration:TimeInterval = 60 * 60 * 24  //TODO: -remettre les bonnes valuers après tests preprod- sinon 0
         RemoteConfig.remoteConfig().fetch(withExpirationDuration: defaultDuration) { Status, error in
             if error == nil {
                 RemoteConfig.remoteConfig().activate { changed, error in

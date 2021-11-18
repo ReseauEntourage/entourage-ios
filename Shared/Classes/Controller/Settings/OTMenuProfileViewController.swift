@@ -11,7 +11,6 @@ import Firebase
 import SVProgressHUD
 
 class OTMenuProfileViewController: UIViewController {
-    @IBOutlet weak var ui_button_abtest: UIButton!
     @IBOutlet weak var ui_tableview: UITableView?
     var uuidInfo = "*****"
     
@@ -39,14 +38,6 @@ class OTMenuProfileViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUser), name: NSNotification.Name(rawValue: kNotificationProfilePictureUpdated), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateUser), name: NSNotification.Name(rawValue: kNotificationSupportedPartnerUpdated), object: nil)
-        
-        
-        ui_button_abtest.isHidden = true
-        if isStaging {
-            ui_button_abtest.isHidden = false
-           
-            
-        }
     }
     
     deinit {
@@ -235,11 +226,6 @@ class OTMenuProfileViewController: UIViewController {
         if let url = URL(string: ABOUT_TWITTER_URL) {
             UIApplication.shared.openURL(url)
         }
-    }
-    @IBAction func action_copy_token_abtest(_ sender: Any) {
-        let tokenABTest = UserDefaults.standard.string(forKey: "token_abtest")
-        UIPasteboard.general.string = tokenABTest
-        SVProgressHUD.showInfo(withStatus: "Information copiée dans le presse-papier")
     }
 }
 
