@@ -21,12 +21,12 @@ class OTHomeExpertViewController: UIViewController {
     
     let CELL_HEADLINES_HEIGHT:CGFloat = 330
     let CELL_EVENTS_HEIGHT_ORIGINAL:CGFloat = 280
-    let CELL_EVENTS_HEIGHT_VARIANT_B:CGFloat = 320
-    let CELL_EVENTS_HEIGHT_VARIANT_A:CGFloat = 360
+    let CELL_EVENTS_HEIGHT_VARIANT_A:CGFloat = 320
+    let CELL_EVENTS_HEIGHT_VARIANT_B:CGFloat = 284
     
     let CELL_ACTIONS_HEIGHT_ORIGINAL:CGFloat = 298
-    let CELL_ACTIONS_HEIGHT_VARIANT_A:CGFloat = 328
-    let CELL_ACTIONS_HEIGHT_VARIANT_B:CGFloat = 278
+    let CELL_ACTIONS_HEIGHT_VARIANT_A:CGFloat = 286
+    let CELL_ACTIONS_HEIGHT_VARIANT_B:CGFloat = 248
     
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_button_tour: UIButton!

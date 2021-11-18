@@ -215,7 +215,7 @@ class OTHomeEventCollectionViewCell: UICollectionViewCell {
         
         ui_title_description.text = item.title
         
-        ui_title_event_date.text = HomeCellUtils.formatEventDate(item: item)
+        ui_title_event_date.text = HomeCellUtils.formatEventDate(item: item).uppercased()
         
         if item.isOnline.boolValue {
             ui_title_location.text = OTLocalisationService.getLocalizedValue(forKey: "info_feed_item_event_online")

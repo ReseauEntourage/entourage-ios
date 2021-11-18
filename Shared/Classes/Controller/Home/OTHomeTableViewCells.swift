@@ -50,24 +50,24 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     let cell_headline_size = CGSize(width: 200, height: 264)
     
     let cell_event_size_Original = CGSize(width: 292, height: 214)
-    let cell_event_size_VariantB = CGSize(width: 230, height: 260)
-    let cell_event_size_VariantA = CGSize(width: 230, height: 300)
+    let cell_event_size_VariantA = CGSize(width: 200, height: 260)
+    let cell_event_size_VariantB = CGSize(width: 200, height: 224)
     
     let cell_event_zone_size_Original = CGSize(width: 200, height: 214)
-    let cell_event_zone_size_VariantB = CGSize(width: 200, height: 260)
-    let cell_event_zone_size_VariantA = CGSize(width: 200, height: 300)
+    let cell_event_zone_size_VariantA = CGSize(width: 200, height: 260)
+    let cell_event_zone_size_VariantB = CGSize(width: 200, height: 224)
     
     let cell_empty_event_size_Original = CGSize(width: 140, height: 214)
-    let cell_empty_event_size_VariantB = CGSize(width: 140, height: 260)
-    let cell_empty_event_size_VariantA = CGSize(width: 140, height: 300)
+    let cell_empty_event_size_VariantA = CGSize(width: 140, height: 260)
+    let cell_empty_event_size_VariantB = CGSize(width: 140, height: 224)
     
     let cell_action_size_Original = CGSize(width: 200, height: 232)
-    let cell_action_size_VariantA = CGSize(width: 230, height: 260)
-    let cell_action_size_VariantB = CGSize(width: 230, height: 210)
+    let cell_action_size_VariantA = CGSize(width: 200, height: 218)
+    let cell_action_size_VariantB = CGSize(width: 200, height: 180)
     
     let cell_empty_action_size_Original = CGSize(width: 140, height: 232)
-    let cell_empty_action_size_VariantA = CGSize(width: 140, height: 260)
-    let cell_empty_action_size_VariantB = CGSize(width: 140, height: 210)
+    let cell_empty_action_size_VariantA = CGSize(width: 140, height: 218)
+    let cell_empty_action_size_VariantB = CGSize(width: 140, height: 180)
     
     let cell_spacing:CGFloat = 15.0
     let minimumItemsToShowMore = 2
