@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRa-Z9-Gdy">
-                    <rect key="frame" x="24" y="334" width="366" height="228"/>
+                    <rect key="frame" x="24" y="354" width="366" height="188"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEu-sc-e0g">
                             <rect key="frame" x="312" y="8" width="46" height="46"/>
@@ -32,6 +32,7 @@
                                 <constraint firstAttribute="width" constant="46" id="3mF-fC-MMt"/>
                                 <constraint firstAttribute="height" constant="46" id="BMC-Qx-lJp"/>
                             </constraints>
+                            <color key="tintColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="close"/>
                             <connections>
@@ -66,7 +67,7 @@
                         <constraint firstItem="GnM-tI-KtG" firstAttribute="top" secondItem="YRa-Z9-Gdy" secondAttribute="top" constant="20" id="Awg-Ds-a61"/>
                         <constraint firstItem="iEu-sc-e0g" firstAttribute="top" secondItem="YRa-Z9-Gdy" secondAttribute="top" constant="8" id="JSE-xP-501"/>
                         <constraint firstItem="GnM-tI-KtG" firstAttribute="leading" secondItem="YRa-Z9-Gdy" secondAttribute="leading" constant="20" id="Lf7-gw-sbs"/>
-                        <constraint firstAttribute="height" constant="228" id="TDl-Wh-6Ij"/>
+                        <constraint firstAttribute="height" constant="188" id="TDl-Wh-6Ij"/>
                         <constraint firstAttribute="trailing" secondItem="iEu-sc-e0g" secondAttribute="trailing" constant="8" id="TXQ-7a-M3j"/>
                         <constraint firstItem="YHS-67-a8W" firstAttribute="top" secondItem="GnM-tI-KtG" secondAttribute="bottom" constant="20" id="UJ6-7N-BgU"/>
                         <constraint firstAttribute="trailing" secondItem="7ah-8u-hs3" secondAttribute="trailing" constant="20" id="huD-cR-EjF"/>
