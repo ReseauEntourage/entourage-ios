@@ -1153,3 +1153,8 @@
 "infoPopCreateContribTitle" = "Action solidaire\ncréée";
 "infoPopCreateAskTitle" = "Action solidaire\ncréée";
 "infoPopCreateEventTitle" = "Événement créé";
+
+//Search action/event placeholder
+"searchEventPlaceholder" = "Rechercher un événement";
+"searchAskPlaceholder" = "Rechercher une action";
+"searchContribPlaceholder" = "Rechercher une action";

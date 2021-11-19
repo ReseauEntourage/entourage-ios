@@ -349,7 +349,7 @@ OTHeatzonesCollectionViewDelegate
     [self.navigationItem setLeftBarButtonItem:item];
     
     UIButton * btnRight = [UIButton new];
-    [btnRight setImage:[UIImage imageNamed:@"search_new"] forState:UIControlStateNormal];
+    [btnRight setImage:[UIImage imageNamed:@"search_new_orange"] forState:UIControlStateNormal];
     [btnRight addTarget:self action:@selector(goSearch) forControlEvents:UIControlEventTouchUpInside];
     btnRight.frame = CGRectMake(0, 0, 34/2, 28/2);
     
