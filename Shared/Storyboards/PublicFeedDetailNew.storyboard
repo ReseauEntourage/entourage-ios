@@ -1060,6 +1060,14 @@
                                             <constraint firstAttribute="height" constant="100" id="xSo-9z-NFD"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qz-b6-Gbu">
+                                        <rect key="frame" x="111.5" y="100" width="97" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Close Feed"/>
+                                        <connections>
+                                            <action selector="action_show_close:" destination="Mnn-h6-fcr" eventType="touchUpInside" id="fNV-2b-XBd"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1074,6 +1082,8 @@
                                     <constraint firstItem="T1k-cz-N5K" firstAttribute="leading" secondItem="md5-mg-mlK" secondAttribute="leading" id="U58-9V-q7U"/>
                                     <constraint firstItem="YB6-l4-KpR" firstAttribute="leading" secondItem="md5-mg-mlK" secondAttribute="leading" id="ahV-gy-QYR"/>
                                     <constraint firstItem="T1k-cz-N5K" firstAttribute="top" secondItem="5Rp-0T-Mvh" secondAttribute="bottom" constant="-1" id="for-WS-KYF"/>
+                                    <constraint firstItem="1qz-b6-Gbu" firstAttribute="top" secondItem="md5-mg-mlK" secondAttribute="top" constant="100" id="kSn-fE-VXN"/>
+                                    <constraint firstItem="1qz-b6-Gbu" firstAttribute="centerX" secondItem="md5-mg-mlK" secondAttribute="centerX" id="qWt-XD-JK0"/>
                                     <constraint firstAttribute="trailing" secondItem="5Rp-0T-Mvh" secondAttribute="trailing" constant="15" id="qkT-23-Aeg"/>
                                     <constraint firstAttribute="trailing" secondItem="T1k-cz-N5K" secondAttribute="trailing" id="wYJ-40-j9f"/>
                                 </constraints>
@@ -1090,6 +1100,7 @@
                     </view>
                     <connections>
                         <outlet property="ui_button_bottom" destination="blX-zY-N4M" id="mId-ja-hiT"/>
+                        <outlet property="ui_button_close" destination="1qz-b6-Gbu" id="mSy-3s-KWU"/>
                         <outlet property="ui_constraint_bottomView_height" destination="RuD-Xr-OPX" id="NHY-3a-pAy"/>
                         <outlet property="ui_constraint_height_top_view_private" destination="xSo-9z-NFD" id="FhS-d1-bPF"/>
                         <outlet property="ui_label_bottom" destination="GxW-PW-Cxp" id="z5e-GY-GuT"/>

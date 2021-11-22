@@ -18,7 +18,7 @@ def sharedPods
     pod 'Firebase/Crashlytics', '~> 8.0.0'
     pod 'Firebase/RemoteConfig', '~> 8.0.0'
     pod 'SnapKit', '~> 4.0.0'
-    pod 'GooglePlaces', '~> 4.2.0'
+    pod 'GooglePlaces', '~> 5.1.0'
     pod 'TTTAttributedLabel'
 end
 

@@ -112,9 +112,7 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (~> 1.2)
-  - GoogleMaps/Base (4.2.0)
-  - GooglePlaces (4.2.0):
-    - GoogleMaps/Base (= 4.2.0)
+  - GooglePlaces (5.1.0)
   - GoogleUtilities/AppDelegateSwizzler (7.4.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -154,7 +152,7 @@ DEPENDENCIES:
   - Firebase/Crashlytics (~> 8.0.0)
   - Firebase/Messaging (~> 8.0.0)
   - Firebase/RemoteConfig (~> 8.0.0)
-  - GooglePlaces (~> 4.2.0)
+  - GooglePlaces (~> 5.1.0)
   - IQKeyboardManager (~> 6.5)
   - kingpin (= 0.3.1)
   - SimpleKeychain (~> 0.7)
@@ -178,7 +176,6 @@ SPEC REPOS:
     - FirebaseRemoteConfig
     - GoogleAppMeasurement
     - GoogleDataTransport
-    - GoogleMaps
     - GooglePlaces
     - GoogleUtilities
     - IQKeyboardManager
@@ -205,8 +202,7 @@ SPEC CHECKSUMS:
   FirebaseRemoteConfig: 055f6b5ba1751547596ded5032c4d5c6054ca501
   GoogleAppMeasurement: c6bbc9753d046b5456dd4f940057fbad2c28419e
   GoogleDataTransport: 11e3a5f2c190327df1a4a5d7e7ae3d4d5b9c9e4c
-  GoogleMaps: eb03e327edfd70b06de1e6e321653f73712df7ad
-  GooglePlaces: 196a9dd88580dcb3f3df46f415057703d0d2a310
+  GooglePlaces: c57cd5aa7e91d10fa5106c792de74f3bd6436260
   GoogleUtilities: f8a43108b38a68eebe8b3540e1f4f2d28843ce20
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   kingpin: 52bb578006bdeb881db225e6ff1a4228375cbfbf
@@ -217,6 +213,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: e1e3407446476639377a5dedc009a2b48fbc77d1
+PODFILE CHECKSUM: 3818d5fb374a3b793aa7bfc88cfc4ce8a4701254
 
 COCOAPODS: 1.11.2
