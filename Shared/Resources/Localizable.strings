@@ -342,6 +342,8 @@
 "item_cancel_join" = "Retirer ma demande";
 "request_to_join_popup_placeholder" = "Votre message…";
 "item_option_reopen" = "Rouvrir";
+"button_close_action" = "Clôturer mon action";
+"button_close_event" = "Clôturer mon événement";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";
@@ -907,10 +909,12 @@
 "good_waves_member" = "Membre des bonnes ondes";
 "activity_title" = "Activité";
 
-"contrib_title" = "dons\ncrées";
-"ask_title" = "demandes\ncréées";
+"contrib_title" = "dons\npubliés";
+"ask_title" = "demandes\npubliées";
 "contrib_button_title" = "Voir la liste →";
 "ask_button_title" = "Voir la liste →";
+"myContribs" = "Mes dons";
+"myDemands" = "Mes demandes";
 
 "add_event_help_button" = "Quels événements diffuser ?";
 
@@ -1151,3 +1155,8 @@
 "infoPopCreateContribTitle" = "Action solidaire\ncréée";
 "infoPopCreateAskTitle" = "Action solidaire\ncréée";
 "infoPopCreateEventTitle" = "Événement créé";
+
+//Search action/event placeholder
+"searchEventPlaceholder" = "Rechercher un événement";
+"searchAskPlaceholder" = "Rechercher une action";
+"searchContribPlaceholder" = "Rechercher une action";

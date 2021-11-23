@@ -15,6 +15,8 @@ class OTSearchEntouragesViewController: UIViewController {
     @IBOutlet weak var ui_tf_search: UITextField!
     @IBOutlet weak var ui_iv_clear: UIImageView!
     
+    @IBOutlet weak var ui_view_shadow: UIView!
+    
     let minChars = 3
     
     var isAllreadyCall = false
@@ -34,18 +36,34 @@ class OTSearchEntouragesViewController: UIViewController {
         IQKeyboardManager.shared().isEnableAutoToolbar = false
         
         var tag = ""
+        var placeholder = ""
         if searchType == "outing" {
             tag = Action_feedSearch_start_event
+            placeholder = OTLocalisationService.getLocalizedValue(forKey: "searchEventPlaceholder")
         }
         else if searchType == "ask" {
             tag = Action_feedSearch_start_ask
+            placeholder = OTLocalisationService.getLocalizedValue(forKey: "searchAskPlaceholder")
         }
         else if searchType == "contrib" {
             tag = Action_feedSearch_start_contrib
+            placeholder = OTLocalisationService.getLocalizedValue(forKey: "searchContribPlaceholder")
         }
         OTLogger.logEvent(tag)
         
+        ui_tf_search.placeholder = placeholder
+        
         NotificationCenter.default.addObserver(self, selector: #selector(showUserProfile), name: NSNotification.Name("showUserProfileFromFeed"), object: nil)
+        
+        //Shadow
+        self.ui_view_shadow.layer.shadowColor = UIColor.black.cgColor
+               self.ui_view_shadow.layer.shadowOpacity = 0.3
+               self.ui_view_shadow.layer.shadowRadius = 2.0
+               self.ui_view_shadow.layer.masksToBounds = false
+               
+               let _rect = CGRect(x: 0, y: self.ui_view_shadow.bounds.size.height , width: self.view.frame.size.width, height: self.ui_view_shadow.layer.shadowRadius)
+               let _shadowPath = UIBezierPath(rect: _rect).cgPath
+               self.ui_view_shadow.layer.shadowPath = _shadowPath
     }
     
     override func viewWillAppear(_ animated: Bool) {

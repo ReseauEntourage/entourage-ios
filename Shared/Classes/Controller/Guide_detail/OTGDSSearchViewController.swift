@@ -15,6 +15,7 @@ class OTGDSSearchViewController: UIViewController {
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_tf_search: UITextField!
     @IBOutlet weak var ui_iv_clear: UIImageView!
+    @IBOutlet weak var ui_view_shadow: UIView!
     
     let minChars = 3
     
@@ -36,6 +37,15 @@ class OTGDSSearchViewController: UIViewController {
         IQKeyboardManager.shared().isEnableAutoToolbar = false
         
         OTLogger.logEvent(Action_guide_searchStart)
+        
+        self.ui_view_shadow.layer.shadowColor = UIColor.black.cgColor
+        self.ui_view_shadow.layer.shadowOpacity = 0.3
+        self.ui_view_shadow.layer.shadowRadius = 2.0
+        self.ui_view_shadow.layer.masksToBounds = false
+        
+        let _rect = CGRect(x: 0, y: self.ui_view_shadow.bounds.size.height , width: self.view.frame.size.width, height: self.ui_view_shadow.layer.shadowRadius)
+        let _shadowPath = UIBezierPath(rect: _rect).cgPath
+        self.ui_view_shadow.layer.shadowPath = _shadowPath
     }
     
     func sendSearch(searchTxt:String) {

@@ -62,7 +62,7 @@ class OTMainGuideViewController: UIViewController {
             let navBarAppear = UINavigationBarAppearance()
             navBarAppear.configureWithOpaqueBackground()
             navBarAppear.backgroundColor = UIColor.white
-            navBarAppear.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.appOrange() as Any]
+            navBarAppear.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black as Any]
            
             navigationBar?.standardAppearance = navBarAppear
             navigationBar?.scrollEdgeAppearance = navBarAppear
@@ -70,7 +70,7 @@ class OTMainGuideViewController: UIViewController {
             navigationBar?.backgroundColor = UIColor.white
             navigationBar?.tintColor = UIColor.appOrange()
             navigationBar?.barTintColor = UIColor.white
-            navigationBar?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.appOrange() as Any]
+            navigationBar?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black as Any]
         }
         
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -138,7 +138,7 @@ class OTMainGuideViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = barButton
         
         let btnRightMenu: UIButton = UIButton()
-        btnRightMenu.setImage(UIImage(named: "search_new"), for: .normal)
+        btnRightMenu.setImage(UIImage(named: "search_new_orange"), for: .normal)
         btnRightMenu.addTarget(self, action: #selector(showSearch), for: .touchUpInside)
         btnRightMenu.frame = CGRect(x: 0, y: 0, width: 34, height: 34)
         let barButtonRight = UIBarButtonItem(customView: btnRightMenu)

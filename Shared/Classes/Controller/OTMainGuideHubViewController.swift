@@ -28,8 +28,8 @@ class OTMainGuideHubViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         
         self.ui_view_top.layer.shadowColor = UIColor.black.cgColor
-        self.ui_view_top.layer.shadowOpacity = 0.5
-        self.ui_view_top.layer.shadowRadius = 4.0
+        self.ui_view_top.layer.shadowOpacity = 0.3
+        self.ui_view_top.layer.shadowRadius = 2.0
         self.ui_view_top.layer.masksToBounds = false
         
         let _rect = CGRect(x: 0, y: self.ui_view_top.bounds.size.height , width: self.view.frame.size.width, height: self.ui_view_top.layer.shadowRadius)
