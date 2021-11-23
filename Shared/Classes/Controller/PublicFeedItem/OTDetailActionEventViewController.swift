@@ -22,7 +22,9 @@ class OTDetailActionEventViewController: UIViewController {
     @IBOutlet weak var ui_label_top_private: UILabel!
     @IBOutlet weak var ui_constraint_height_top_view_private: NSLayoutConstraint!
     
-    @IBOutlet weak var ui_button_close: UIButton!
+    @IBOutlet weak var ui_view_button_close: UIView!
+    @IBOutlet weak var ui_button_close: UILabel!
+    @IBOutlet weak var ui_constraint_view_button_close_height: NSLayoutConstraint!
     
     let private_view_height:CGFloat = 100
     
@@ -91,7 +93,21 @@ class OTDetailActionEventViewController: UIViewController {
             isShowCloseButton = false
         }
         
-        ui_button_close.isHidden = !isShowCloseButton
+        if !isShowCloseButton {
+            ui_constraint_view_button_close_height.constant = 0
+            ui_button_close.isHidden = true
+        }
+        else {
+            ui_button_close.isHidden = false
+            ui_constraint_view_button_close_height.constant = 50
+        }
+        
+        if self.feedItem.isAction() {
+            ui_button_close.text = OTLocalisationService.getLocalizedValue(forKey: "button_close_action")
+        }
+        else {
+            ui_button_close.text = OTLocalisationService.getLocalizedValue(forKey: "button_close_event")
+        }
     }
     
     func showClosepop() {
