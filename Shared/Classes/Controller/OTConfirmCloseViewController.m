@@ -27,14 +27,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_title_action2;
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_title2_action2;
 
-
-@property (weak, nonatomic) IBOutlet UIView *ui_view_events;
-@property (weak, nonatomic) IBOutlet UILabel *ui_label_description_event;
-@property (weak, nonatomic) IBOutlet UILabel *ui_label_title_event;
-@property (weak, nonatomic) IBOutlet UIButton *ui_bt_confirm_event;
-@property (weak, nonatomic) IBOutlet UIButton *ui_bt_cancel_event;
-
-
+@property (weak, nonatomic) IBOutlet UIView *ui_view_events2;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_description_event2;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_title_event2;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_bt_close_event2;
+@property (weak, nonatomic) IBOutlet UIButton *ui_bt_close_event2;
 
 @property (nonatomic, strong) IBOutlet OTMailSenderBehavior *sendMail;
 
@@ -46,11 +43,11 @@
     [super viewDidLoad];
     
     if ([self.feedItem isAction]) {
-        [self.ui_view_events setHidden:YES];
+        [self.ui_view_events2 setHidden:YES];
         [self.ui_view_actions2 setHidden:NO];
     }
     else {
-        [self.ui_view_events setHidden:NO];
+        [self.ui_view_events2 setHidden:NO];
         [self.ui_view_actions2 setHidden:YES];
     }
     
@@ -80,10 +77,10 @@
     [self.ui_view_actions2.layer setCornerRadius:10];
     
     //Events
-    self.ui_label_title_event.text = OTLocalizedString(@"pop_validate_event_title");
-    self.ui_label_description_event.text = OTLocalizedString(@"pop_validate_event_description");
-    [self.ui_bt_cancel_event setTitle:OTLocalizedString(@"pop_validate_event_bt_cancel") forState:UIControlStateNormal];
-    [self.ui_bt_confirm_event setTitle:OTLocalizedString(@"pop_validate_event_bt_validate") forState:UIControlStateNormal];
+    self.ui_label_title_event2.text = OTLocalizedString(@"pop_validate_event_title2");
+    self.ui_label_description_event2.text = OTLocalizedString(@"pop_validate_event_description2");
+
+    [self.ui_label_bt_close_event2 setText:OTLocalizedString(@"pop_validate_event_bt_validate2")];
 }
 
 

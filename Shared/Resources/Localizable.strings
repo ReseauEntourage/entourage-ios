@@ -343,7 +343,7 @@
 "request_to_join_popup_placeholder" = "Votre message…";
 "item_option_reopen" = "Rouvrir";
 "button_close_action" = "Clôturer mon action";
-"button_close_event" = "Clôturer mon événement";
+"button_close_event" = "Annuler mon événement";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";
@@ -937,6 +937,10 @@
 "Pop_info_web_alert_GDS_underline" = "Soliguide.fr";
 
 "info_share_sms_poi" = "Bonjour ! Voici l’adresse de %@ qui pourrait vous intéresser.\n%@\n%@\nPour plus d’infos sur ce lieu, et pour créer des liens entre voisins solidaires, je vous donne RDV sur le réseau Entourage %@";
+
+"pop_validate_event_title2" = "J'annule\nmon événement";
+"pop_validate_event_description2" = "En annulant l’événement, vous fermez la discussion et retirez l’événement du fil d’actualité.";
+"pop_validate_event_bt_validate2" = "ANNULER L’EVENEMENT";
 
 //New page hub GDS
 "title_new_gds" = "Lieux solidaires";

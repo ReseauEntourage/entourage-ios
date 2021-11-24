@@ -257,114 +257,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GEq-5d-ddC">
-                                <rect key="frame" x="16" y="130.5" width="343" height="406"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IA4-q4-Q82">
-                                        <rect key="frame" x="10" y="10" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="c1W-AL-fqK"/>
-                                            <constraint firstAttribute="height" constant="30" id="yla-tN-kWs"/>
-                                        </constraints>
-                                        <state key="normal" image="whiteClose"/>
-                                        <connections>
-                                            <action selector="doCancel" destination="eaO-Ez-K7B" eventType="touchUpInside" id="8YL-2a-aks"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjV-jM-Swv">
-                                        <rect key="frame" x="15" y="246" width="313" height="50"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="304" id="1St-rV-d19"/>
-                                            <constraint firstAttribute="width" constant="296" id="2aK-mA-gQz"/>
-                                            <constraint firstAttribute="width" constant="210" id="Uwu-pS-bAN"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="j3S-mZ-Wu8"/>
-                                            <constraint firstAttribute="height" constant="50" id="mvy-HR-Fb5"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Confirmer">
-                                            <color key="titleColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="1St-rV-d19"/>
-                                                <exclude reference="2aK-mA-gQz"/>
-                                                <exclude reference="Uwu-pS-bAN"/>
-                                                <exclude reference="j3S-mZ-Wu8"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="doSuccessfulClose" destination="eaO-Ez-K7B" eventType="touchUpInside" id="xCa-an-KLX"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRU-0S-tAB">
-                                        <rect key="frame" x="15" y="346" width="313" height="50"/>
-                                        <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="05U-2Q-Zc6"/>
-                                            <constraint firstAttribute="width" constant="210" id="3Vn-a1-q8y"/>
-                                            <constraint firstAttribute="width" constant="296" id="jM6-6U-gaZ"/>
-                                            <constraint firstAttribute="width" constant="304" id="ttu-yf-IuV"/>
-                                            <constraint firstAttribute="height" constant="50" id="wlz-vr-XwF"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <state key="normal" title="Annuler">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="05U-2Q-Zc6"/>
-                                                <exclude reference="3Vn-a1-q8y"/>
-                                                <exclude reference="jM6-6U-gaZ"/>
-                                                <exclude reference="ttu-yf-IuV"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="doCancel" destination="eaO-Ez-K7B" eventType="touchUpInside" id="mHV-uz-UhZ"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment cela s’est passé?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtL-Wh-TRt">
-                                        <rect key="frame" x="15" y="55" width="313" height="72"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="En clôturant l’événement, vous fermez la discussion et retirez l’action du fil d’actualités. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJD-RS-AFp">
-                                        <rect key="frame" x="15" y="135" width="313" height="61"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="deviceRGB"/>
-                                <constraints>
-                                    <constraint firstItem="oJD-RS-AFp" firstAttribute="leading" secondItem="GEq-5d-ddC" secondAttribute="leading" constant="15" id="0pQ-JO-zzW"/>
-                                    <constraint firstItem="JRU-0S-tAB" firstAttribute="leading" secondItem="GEq-5d-ddC" secondAttribute="leading" constant="15" id="24w-Xw-CXO"/>
-                                    <constraint firstAttribute="bottom" secondItem="JRU-0S-tAB" secondAttribute="bottom" constant="10" id="2Ic-GM-Owc"/>
-                                    <constraint firstAttribute="trailing" secondItem="oJD-RS-AFp" secondAttribute="trailing" constant="15" id="AMg-fL-HZR"/>
-                                    <constraint firstAttribute="trailing" secondItem="xtL-Wh-TRt" secondAttribute="trailing" constant="15" id="Hs6-nq-V54"/>
-                                    <constraint firstItem="xtL-Wh-TRt" firstAttribute="top" secondItem="IA4-q4-Q82" secondAttribute="bottom" constant="15" id="KLv-ef-kdp"/>
-                                    <constraint firstAttribute="trailing" secondItem="vjV-jM-Swv" secondAttribute="trailing" constant="15" id="Z3b-hk-Mxf"/>
-                                    <constraint firstItem="JRU-0S-tAB" firstAttribute="top" secondItem="vjV-jM-Swv" secondAttribute="bottom" constant="50" id="bMd-Li-692"/>
-                                    <constraint firstItem="xtL-Wh-TRt" firstAttribute="leading" secondItem="GEq-5d-ddC" secondAttribute="leading" constant="15" id="e4C-bK-aEy"/>
-                                    <constraint firstItem="vjV-jM-Swv" firstAttribute="top" secondItem="oJD-RS-AFp" secondAttribute="bottom" constant="50" id="eNE-rh-K1U"/>
-                                    <constraint firstItem="IA4-q4-Q82" firstAttribute="leading" secondItem="GEq-5d-ddC" secondAttribute="leading" constant="10" id="pOu-s7-oOk"/>
-                                    <constraint firstItem="oJD-RS-AFp" firstAttribute="top" secondItem="xtL-Wh-TRt" secondAttribute="bottom" constant="8" id="s4G-Kx-eHF"/>
-                                    <constraint firstItem="IA4-q4-Q82" firstAttribute="top" secondItem="GEq-5d-ddC" secondAttribute="top" constant="10" id="vb5-4E-8L4"/>
-                                    <constraint firstAttribute="trailing" secondItem="JRU-0S-tAB" secondAttribute="trailing" constant="15" id="wyE-E7-VZQ"/>
-                                    <constraint firstItem="vjV-jM-Swv" firstAttribute="leading" secondItem="GEq-5d-ddC" secondAttribute="leading" constant="15" id="xTW-mF-Ob9"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p6n-hM-9o4">
                                 <rect key="frame" x="24" y="84.5" width="327" height="498"/>
                                 <subviews>
@@ -512,31 +404,123 @@ de clôturer.</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EwP-qg-jY9">
+                                <rect key="frame" x="24" y="180" width="327" height="307"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3J-GK-7yM">
+                                        <rect key="frame" x="277" y="20" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="DOC-UK-7Hm"/>
+                                            <constraint firstAttribute="height" constant="30" id="bDV-BI-gVE"/>
+                                        </constraints>
+                                        <state key="normal" image="close"/>
+                                        <connections>
+                                            <action selector="doCancel" destination="eaO-Ez-K7B" eventType="touchUpInside" id="tRq-6S-TTa"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment s’est déroulée votre action ?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8B-PY-r9B">
+                                        <rect key="frame" x="20" y="20" width="193" height="100.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                        <color key="textColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="En clôturant l’action solidaire, vous fermez la discussion et retirez l’action du fil d’actualité." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qli-gk-1Pt">
+                                        <rect key="frame" x="20" y="152.5" width="287" height="64.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NwJ-Dq-zdz">
+                                        <rect key="frame" x="20" y="135.5" width="60" height="2"/>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="ZmP-FT-xEf"/>
+                                            <constraint firstAttribute="height" constant="2" id="il6-Q6-OXG"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCt-DQ-gl2">
+                                        <rect key="frame" x="20" y="237" width="287" height="50"/>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="odz-US-S6V"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="65" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="ANNULER L’EVENEMENT">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="plain" title=" ">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="doSuccessfulClose" destination="eaO-Ez-K7B" eventType="touchUpInside" id="DVm-Ez-SPc"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ANNULER L’EVENEMENT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDr-JV-L46">
+                                        <rect key="frame" x="20" y="252.5" width="287" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="aCt-DQ-gl2" firstAttribute="top" secondItem="qli-gk-1Pt" secondAttribute="bottom" constant="20" id="4AK-rf-niz"/>
+                                    <constraint firstAttribute="bottom" secondItem="aCt-DQ-gl2" secondAttribute="bottom" constant="20" id="96w-B3-QxD"/>
+                                    <constraint firstItem="qli-gk-1Pt" firstAttribute="leading" secondItem="EwP-qg-jY9" secondAttribute="leading" constant="20" id="9Zn-Wu-YuX"/>
+                                    <constraint firstAttribute="trailing" secondItem="j3J-GK-7yM" secondAttribute="trailing" constant="20" id="Gbt-i3-pum"/>
+                                    <constraint firstItem="BDr-JV-L46" firstAttribute="trailing" secondItem="aCt-DQ-gl2" secondAttribute="trailing" id="Rjp-SS-4gg"/>
+                                    <constraint firstAttribute="trailing" secondItem="qli-gk-1Pt" secondAttribute="trailing" constant="20" id="SHL-v4-gBM"/>
+                                    <constraint firstItem="F8B-PY-r9B" firstAttribute="top" secondItem="EwP-qg-jY9" secondAttribute="top" constant="20" id="V3y-pN-7uC"/>
+                                    <constraint firstItem="NwJ-Dq-zdz" firstAttribute="top" secondItem="F8B-PY-r9B" secondAttribute="bottom" constant="15" id="WYi-yz-dMe"/>
+                                    <constraint firstItem="qli-gk-1Pt" firstAttribute="top" secondItem="NwJ-Dq-zdz" secondAttribute="bottom" constant="15" id="coP-Up-xmX"/>
+                                    <constraint firstItem="aCt-DQ-gl2" firstAttribute="leading" secondItem="EwP-qg-jY9" secondAttribute="leading" constant="20" id="hgQ-Vy-G0m"/>
+                                    <constraint firstItem="BDr-JV-L46" firstAttribute="centerY" secondItem="aCt-DQ-gl2" secondAttribute="centerY" id="jOo-4Q-nZL"/>
+                                    <constraint firstAttribute="trailing" secondItem="aCt-DQ-gl2" secondAttribute="trailing" constant="20" id="q6U-Ha-KjB"/>
+                                    <constraint firstItem="BDr-JV-L46" firstAttribute="leading" secondItem="aCt-DQ-gl2" secondAttribute="leading" id="rDy-FP-boz"/>
+                                    <constraint firstItem="j3J-GK-7yM" firstAttribute="leading" secondItem="F8B-PY-r9B" secondAttribute="trailing" constant="64" id="vqU-mv-Zu6"/>
+                                    <constraint firstItem="j3J-GK-7yM" firstAttribute="top" secondItem="EwP-qg-jY9" secondAttribute="top" constant="20" id="x1e-td-DgF"/>
+                                    <constraint firstItem="F8B-PY-r9B" firstAttribute="leading" secondItem="EwP-qg-jY9" secondAttribute="leading" constant="20" id="xZg-gG-KAO"/>
+                                    <constraint firstItem="NwJ-Dq-zdz" firstAttribute="leading" secondItem="EwP-qg-jY9" secondAttribute="leading" constant="20" id="xcE-qn-U3x"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="GEq-5d-ddC" firstAttribute="centerY" secondItem="ENc-hN-N2O" secondAttribute="centerY" id="0n9-Ta-1YA"/>
                             <constraint firstItem="p6n-hM-9o4" firstAttribute="leading" secondItem="ENc-hN-N2O" secondAttribute="leading" constant="24" id="0sV-0A-Obh"/>
-                            <constraint firstAttribute="trailing" secondItem="GEq-5d-ddC" secondAttribute="trailing" constant="16" id="26T-R5-KHa"/>
                             <constraint firstItem="p6n-hM-9o4" firstAttribute="centerY" secondItem="ENc-hN-N2O" secondAttribute="centerY" id="FO9-Rr-lGE"/>
                             <constraint firstAttribute="trailing" secondItem="p6n-hM-9o4" secondAttribute="trailing" constant="24" id="I8W-cA-BwI"/>
-                            <constraint firstItem="GEq-5d-ddC" firstAttribute="leading" secondItem="ENc-hN-N2O" secondAttribute="leading" constant="16" id="qIp-np-aNE"/>
+                            <constraint firstItem="EwP-qg-jY9" firstAttribute="leading" secondItem="ENc-hN-N2O" secondAttribute="leading" constant="24" id="dcE-fu-JG5"/>
+                            <constraint firstItem="EwP-qg-jY9" firstAttribute="centerY" secondItem="ENc-hN-N2O" secondAttribute="centerY" id="hgp-T1-6ze"/>
+                            <constraint firstAttribute="trailing" secondItem="EwP-qg-jY9" secondAttribute="trailing" constant="24" id="kUv-rK-VJH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ywz-xh-Qld"/>
                     <connections>
                         <outlet property="ui_bt_cancel_action2" destination="fML-HW-UVt" id="74V-j2-dCg"/>
-                        <outlet property="ui_bt_cancel_event" destination="JRU-0S-tAB" id="Qqe-vh-WDq"/>
+                        <outlet property="ui_bt_close_event2" destination="aCt-DQ-gl2" id="Hjk-5U-7ZD"/>
                         <outlet property="ui_bt_confirm_action2" destination="8eh-Cm-09Y" id="jpo-Kf-XfM"/>
-                        <outlet property="ui_bt_confirm_event" destination="vjV-jM-Swv" id="zaK-SA-OEv"/>
                         <outlet property="ui_bt_fail_action2" destination="50J-BM-HjU" id="Feg-W3-4bq"/>
+                        <outlet property="ui_label_bt_close_event2" destination="BDr-JV-L46" id="d8i-ri-2Qd"/>
                         <outlet property="ui_label_description_action2" destination="OA3-gA-918" id="4Xg-4L-2M8"/>
-                        <outlet property="ui_label_description_event" destination="oJD-RS-AFp" id="8UM-lb-YVc"/>
+                        <outlet property="ui_label_description_event2" destination="qli-gk-1Pt" id="HTk-36-9jb"/>
                         <outlet property="ui_label_title2_action2" destination="I4n-px-lev" id="xXX-DQ-IpW"/>
                         <outlet property="ui_label_title_action2" destination="wEJ-lf-4ex" id="lqf-g6-Eer"/>
-                        <outlet property="ui_label_title_event" destination="xtL-Wh-TRt" id="WhM-mf-L4y"/>
+                        <outlet property="ui_label_title_event2" destination="F8B-PY-r9B" id="tsx-Fh-s4B"/>
                         <outlet property="ui_view_actions2" destination="p6n-hM-9o4" id="Gjw-jZ-A4d"/>
-                        <outlet property="ui_view_events" destination="GEq-5d-ddC" id="Qr9-zc-aEe"/>
+                        <outlet property="ui_view_events2" destination="EwP-qg-jY9" id="vX4-Mp-Jzd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hma-kV-s7P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -548,6 +532,5 @@ de clôturer.</string>
         <image name="close" width="22" height="22"/>
         <image name="contacts" width="22" height="22.5"/>
         <image name="face.smiling" catalog="system" width="128" height="121"/>
-        <image name="whiteClose" width="22" height="22"/>
     </resources>
 </document>
