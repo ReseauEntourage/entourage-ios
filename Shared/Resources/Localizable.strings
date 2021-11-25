@@ -942,6 +942,21 @@
 "pop_validate_event_description2" = "En annulant l’événement, vous fermez la discussion et retirez l’événement du fil d’actualité.";
 "pop_validate_event_bt_validate2" = "ANNULER L’EVENEMENT";
 
+//New UI + POP Close action
+"pop_validate_action_title_new" = "Je clôture mon\naction solidaire";
+"pop_validate_action_description_new" = "En clôturant l’action, vous fermez la discussion et retirez l’action du fil d’actualité.";
+"pop_validate_action_title2_new" = "Comment ça s’est passé ?";
+"pop_validate_action_bt_validate_new" = "Clôturer";
+
+"pop_validate_action_add_comment_title" = "Merci, votre action\nest clôturée !";
+"pop_validate_action_add_comment_desc" = "Voulez-vous laisser un commentaire à propos de votre action ?";
+"pop_validate_action_add_comment_yes" = "Oui";
+"pop_validate_action_add_comment_no" = "Non";
+
+"pop_validate_action_add_comment_send_title" = "Votre commentaire\nci-dessous";
+"pop_validate_action_add_comment_send_button" = "Envoyer";
+"pop_validate_action_add_comment_send_placeholder" = "Mon action s’est bien passée parce que...";
+
 //New page hub GDS
 "title_new_gds" = "Lieux solidaires";
 "hub_title" = "Guide solidaire";

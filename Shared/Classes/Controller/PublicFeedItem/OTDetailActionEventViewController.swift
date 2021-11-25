@@ -655,7 +655,7 @@ extension OTDetailActionEventViewController: OTStatusChangedProtocol {
 
 //MARK: - OTConfirmCloseProtocol
 extension OTDetailActionEventViewController: OTConfirmCloseProtocol {
-    func feedItemClosed(with reason: OTCloseReason) {
+    func feedItemClosed(with reason: OTCloseReason, andComment comment: String!) {
         
         OTLogger.logEvent("CloseEntourageConfirm")
         
@@ -668,7 +668,7 @@ extension OTDetailActionEventViewController: OTConfirmCloseProtocol {
         
         let stateTrans = OTFeedItemFactory.create(for: feedItem).getStateTransition?()
         
-        stateTrans?.close(withOutcome: outcome, success: { isTour in
+        stateTrans?.close(withOutcome: outcome, andComment: comment, success: { isTour in
             SVProgressHUD.dismiss()
             self.dismissOnClose(reason: reason)
         }, orFailure: { error in

@@ -189,12 +189,17 @@ extern NSString *kUsers;
 
 - (void)closeEntourage:(OTEntourage *)entourage
            withOutcome:(BOOL)outcome
+            andComment:(NSString *)comment
       success:(void (^)(OTEntourage *))success
           failure:(void (^)(NSError *))failure
 {
     NSString *url = [NSString stringWithFormat:API_URL_ENTOURAGE_UPDATE, entourage.uuid, TOKEN];
     NSMutableDictionary *parameters = [[OTHTTPRequestManager commonParameters] mutableCopy];
     NSMutableDictionary *entourageDictionary = [[NSMutableDictionary alloc] initWithDictionary:[entourage dictionaryForWebService]];
+    
+    if (comment.length > 0) {
+        entourageDictionary[@"close_message"] = comment;
+    }
     
     entourageDictionary[@"outcome"] = @{@"success": @(outcome)};
     parameters[@"entourage"] = entourageDictionary;

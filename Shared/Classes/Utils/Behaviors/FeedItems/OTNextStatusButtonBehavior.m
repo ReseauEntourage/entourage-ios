@@ -139,7 +139,7 @@
 
 - (void)doCloseFeedItemWithReason: (OTCloseReason)reason {
     if ([self.feedItem isKindOfClass:[OTTour class]]) {
-        [self feedItemClosedWithReason:reason];
+        [self feedItemClosedWithReason:reason andComment:@""];
     }
     else {
         [OTAppState showClosingConfirmationForFeedItem:self.feedItem
@@ -206,7 +206,7 @@
 
 #pragma mark - OTConfirmCloseProtocol
 
-- (void)feedItemClosedWithReason:(OTCloseReason)reason {
+- (void)feedItemClosedWithReason:(OTCloseReason)reason andComment:(NSString*) comment {
     [OTLogger logEvent:@"CloseEntourageConfirm"];
     
     if (reason == OTCloseReasonHelpClose) {
@@ -220,6 +220,7 @@
 
     id stateTransition = [[OTFeedItemFactory createFor:self.feedItem] getStateTransition];
     [stateTransition closeWithOutcome:outcome
+     andComment: comment
         success:^(BOOL isTour) {
             [SVProgressHUD dismiss];
             [self dismissOnClose:reason];

@@ -25,6 +25,7 @@
 }
 
 - (void)closeWithOutcome:(BOOL)outcome
+              andComment:(NSString *) comment
                  success:(void (^)(BOOL))success
                orFailure:(void (^)(NSError *))failure
 {

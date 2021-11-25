@@ -13,6 +13,9 @@
 + (UIColor *)appOrangeColor {
     return [UIColor colorWithRed: 245.0f/255.0f green:  95.0f/255.0f blue:   36.0f/255.0f alpha:1.0f];
 }
++ (UIColor *)appOrangeTransColor {
+    return [UIColor colorWithRed: 245.0f/255.0f green:  95.0f/255.0f blue:   36.0f/255.0f alpha:0.1f];
+}
 
 + (UIColor *)appTomatoColor {
     return [UIColor colorWithRed: 238.0f/255.0f green:  62.0f/255.0f blue:   58.0f/255.0f alpha:1.0f];
