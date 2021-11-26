@@ -198,7 +198,7 @@ extern NSString *kUsers;
     NSMutableDictionary *entourageDictionary = [[NSMutableDictionary alloc] initWithDictionary:[entourage dictionaryForWebService]];
     
     if (comment.length > 0) {
-        entourageDictionary[@"close_message"] = comment;
+        entourageDictionary[@"metadata"] = @{@"close_message":comment};
     }
     
     entourageDictionary[@"outcome"] = @{@"success": @(outcome)};
