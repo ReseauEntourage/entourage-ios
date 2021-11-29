@@ -80,4 +80,6 @@
 + (NSString*)entourageConfidentialityDescription:(OTEntourage*)entourage
                                         isPublic:(BOOL)isPublic;
 + (void)leftNavigationBarButtonItemForFeedItem:(OTFeedItem*)feedItem withBarItem:(void (^)(UIBarButtonItem*))completion;
+
++(void) showProfile;
 @end

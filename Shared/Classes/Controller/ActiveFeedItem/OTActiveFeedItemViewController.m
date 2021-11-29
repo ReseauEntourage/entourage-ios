@@ -106,6 +106,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateViewReport) name:@"updateViewReport" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUserProfile) name:@"showUserProfile" object:nil];
+    
     [self updateViewReport];
 }
 
