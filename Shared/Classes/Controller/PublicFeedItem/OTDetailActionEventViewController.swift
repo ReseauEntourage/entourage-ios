@@ -43,6 +43,8 @@ class OTDetailActionEventViewController: UIViewController {
     
     var isShowCloseButton = false
     
+    var authorUser:OTUser? = nil
+    
     //MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,6 +167,20 @@ class OTDetailActionEventViewController: UIViewController {
     }
     
     //MARK: - Setups -
+    func loadUserAuthor() {
+        if let userId = feedItem.author.uID {
+            OTAuthService().getDetailsForUser(userId.stringValue) { userAuthor in
+                self.authorUser = userAuthor
+                
+                DispatchQueue.main.async {
+                    self.ui_tableview.reloadData()
+                }
+            } failure: { error in
+                Logger.print("***** error get info author user : \(String(describing: error?.localizedDescription))")
+            }
+        }
+    }
+    
     func loadMembers() {
         if let feedItemFact = OTFeedItemFactory.create(for: feedItem) , let messaging = feedItemFact.getMessaging?() {
             messaging.getFeedItemUsers(withStatus: JOIN_ACCEPTED) { (items) in
@@ -187,6 +203,7 @@ class OTDetailActionEventViewController: UIViewController {
             }
             self.addButtonClose()
             self.loadMembers()
+            self.loadUserAuthor()
         } failure: { error in }
     }
     
@@ -418,7 +435,7 @@ extension OTDetailActionEventViewController: UITableViewDataSource, UITableViewD
             return cell
         case "cellCreator":
             let cell = ui_tableview.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! OTDetailActionEventCreatorCell
-            cell.populate(feedItem: feedItem,delegate: self)
+            cell.populate(feedItem: feedItem,authorUser:authorUser, delegate: self)
             return cell
         case "cellDescription","cellDescriptionEvent":
             let cell = ui_tableview.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! OTDetailActionEventDescriptionCell
