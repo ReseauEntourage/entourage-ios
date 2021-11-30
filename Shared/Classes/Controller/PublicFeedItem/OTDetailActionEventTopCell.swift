@@ -269,16 +269,14 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
             
             self.ui_button_asso.tag = feedItem.author.partner.aid.intValue
         }
-        else if let _autUser = authorUser, _autUser.roles.count > 0 {
-            if let roleName = _autUser.roles[0] as? String {
-                if let dict = OTAppConfiguration.community()["roles"] as? NSDictionary, let nameDict = dict[roleName] as? NSDictionary {
-                    if let title = nameDict["title"] as? String {
-                        let attStr = Utilitaires.formatString(stringMessage: " \(title) ", coloredTxt: title, color: UIColor.white, colorHighlight: UIColor.white, fontSize: 15, fontWeight: .medium, fontColoredWeight: .bold)
-                        self.ui_label_role?.layer.backgroundColor = UIColor.appOrange().cgColor
-                        self.ui_label_role?.layer.cornerRadius = 4
-                        self.ui_label_role?.attributedText = attStr
-                        self.ui_label_role?.isHidden = false
-                    }
+        else if let _autUser = authorUser, _autUser.roles.count > 0,let roleName = _autUser.roles[0] as? String, roleName == "ambassador" {
+            if let dict = OTAppConfiguration.community()["roles"] as? NSDictionary, let nameDict = dict[roleName] as? NSDictionary {
+                if let title = nameDict["title"] as? String {
+                    let attStr = Utilitaires.formatString(stringMessage: "  \(title)  ", coloredTxt: title, color: UIColor.white, colorHighlight: UIColor.white, fontSize: 14, fontWeight: .medium, fontColoredWeight: .bold)
+                    self.ui_label_role?.layer.backgroundColor = UIColor.appOrange().cgColor
+                    self.ui_label_role?.layer.cornerRadius = 4
+                    self.ui_label_role?.attributedText = attStr
+                    self.ui_label_role?.isHidden = false
                 }
             }
         }
