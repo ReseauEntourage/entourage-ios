@@ -19,7 +19,7 @@ class OTDetailActionEventTopCell: UITableViewCell {
     @IBOutlet weak var ui_image_top: UIImageView?
     
     @IBOutlet weak var ui_constraint_height_view_status: NSLayoutConstraint?
-    @IBOutlet weak var ui_label_status: UILabel!
+    @IBOutlet weak var ui_label_status: UILabel?
     
     
     
@@ -72,13 +72,13 @@ class OTDetailActionEventTopCell: UITableViewCell {
             }
             
             if feedItem.status == "full" {
-                ui_label_status.text = OTLocalisationService.getLocalizedValue(forKey: "info_event_closed").uppercased()
+                ui_label_status?.text = OTLocalisationService.getLocalizedValue(forKey: "info_event_closed").uppercased()
                 ui_constraint_height_view_status?.constant = 40
-                ui_label_status.isHidden = false
+                ui_label_status?.isHidden = false
             }
             else {
                 ui_constraint_height_view_status?.constant = 0
-                ui_label_status.isHidden = true
+                ui_label_status?.isHidden = true
             }
         }
         
@@ -254,6 +254,7 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
             self.ui_button_asso.isHidden = false
             self.ui_label_asso?.isHidden = false
             
+            self.ui_button_asso.setTitle(" ", for: .normal)
             var keyJoined = "info_asso_user"
             if feedItem.author.partner.isFollowing {
                 keyJoined = "info_asso_user_joined"
