@@ -137,7 +137,7 @@
     
     // handle the 'entourages/<extra>'
     NSString *key = [pathComponents objectAtIndex:0];
-    if ([key isEqualToString:@"entourages"]) {
+    if ([key isEqualToString:@"entourages"] || [key isEqualToString:@"actions"]) {
         [self handleDeepLinkWithKey:key pathComponents:pathComponents andQuery:nil];
     }
     else if ([key isEqualToString:@"deeplink"]) {
@@ -223,6 +223,11 @@
             [self showController:vc animated:YES];
         });
     }
+    else if ([key isEqualToString:@"actions"]) { //Use from share action/event link
+        if (pathComponents != nil && pathComponents.count >= 2) {
+            [self navigateToFeedWithStringId:pathComponents[1]];
+        }
+    }
 }
 
 - (void)openWithWebView: (NSURL *)url {
@@ -289,6 +294,7 @@
             UIStoryboard *publicFeedItemStorybard = [UIStoryboard storyboardWithName:@"PublicFeedDetailNew" bundle:nil];
             OTDetailActionEventViewController *publicFeedItemController = (OTDetailActionEventViewController *)[publicFeedItemStorybard instantiateInitialViewController];
             publicFeedItemController.feedItem = feedItem;
+            [mainViewController.navigationController pushViewController:publicFeedItemController animated:NO];
         }
     }
     else {
