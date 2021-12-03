@@ -224,6 +224,8 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
     @IBOutlet weak var ui_label_asso: UILabel?
     @IBOutlet weak var ui_constraint_bottom_username: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_top_username: NSLayoutConstraint!
+    @IBOutlet weak var ui_label_ambassador: UILabel?
+    
     weak var delegate:ActionCellCreatorDelegate? = nil
     
     @objc func populate(feedItem:OTFeedItem) {
@@ -232,6 +234,8 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
     
     @objc func populate(feedItem:OTFeedItem,authorUser:OTUser?, delegate:ActionCellCreatorDelegate?) {
         self.delegate = delegate
+        
+        ui_label_ambassador?.isHidden = true
         
         if feedItem.isNeighborhood() || feedItem.isPrivateCircle() {
             ui_bt_avatar.isHidden = true;
@@ -275,11 +279,12 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
                 if let roleName = role as? String, roleName == "ambassador" {
                     if let dict = OTAppConfiguration.community()["roles"] as? NSDictionary, let nameDict = dict[roleName] as? NSDictionary {
                         if let title = nameDict["title"] as? String {
-                            let attStr = Utilitaires.formatString(stringMessage: "  \(title)  ", coloredTxt: title, color: UIColor.white, colorHighlight: UIColor.white, fontSize: 14, fontWeight: .medium, fontColoredWeight: .bold)
-                            self.ui_label_role?.layer.backgroundColor = UIColor.appOrange().cgColor
-                            self.ui_label_role?.layer.cornerRadius = 4
-                            self.ui_label_role?.attributedText = attStr
-                            self.ui_label_role?.isHidden = false
+                            let attStr = Utilitaires.formatString(stringMessage: "  \(title)  ", coloredTxt: title, color: UIColor.white, colorHighlight: UIColor.white, fontSize: 13, fontWeight: .medium, fontColoredWeight: .bold)
+                            self.ui_label_ambassador?.layer.backgroundColor = UIColor.appOrange().cgColor
+                            self.ui_label_ambassador?.layer.cornerRadius = 4
+                            self.ui_label_ambassador?.attributedText = attStr
+                            self.ui_label_ambassador?.isHidden = false
+                            self.ui_label_role?.text = ""
                         }
                     }
                     break
