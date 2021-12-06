@@ -17,7 +17,7 @@ class OTMyActionTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ui_view_container.layer.cornerRadius = 4
+        ui_view_container.layer.cornerRadius = 8
     }
 
     func populateCell(entourage:OTEntourage) {
