@@ -1593,7 +1593,7 @@
                                                     <rect key="frame" x="24" y="0.0" width="327" height="130"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvE-GL-HUW">
-                                                            <rect key="frame" x="15" y="15" width="297" height="43"/>
+                                                            <rect key="frame" x="15" y="15" width="271" height="43"/>
                                                             <string key="text">Mode premiers pas
 L2 fjbfjsfsqjkgqjg</string>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -1624,7 +1624,7 @@ L2</string>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_show_orange" translatesAutoresizingMaskIntoConstraints="NO" id="3oH-Eh-3eh">
-                                                            <rect key="frame" x="271" y="52" width="26" height="26"/>
+                                                            <rect key="frame" x="286" y="52" width="26" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="26" id="DLv-Ou-iek"/>
                                                                 <constraint firstAttribute="width" constant="26" id="kDa-he-cjX"/>
@@ -1647,14 +1647,14 @@ L2</string>
                                                         <constraint firstItem="C8t-mA-oI3" firstAttribute="centerY" secondItem="svc-r7-smS" secondAttribute="centerY" id="OYM-tZ-cbL"/>
                                                         <constraint firstAttribute="bottom" secondItem="svc-r7-smS" secondAttribute="bottom" constant="14" id="SMP-4g-ZKy"/>
                                                         <constraint firstItem="svc-r7-smS" firstAttribute="top" secondItem="Z26-dW-u5D" secondAttribute="bottom" constant="4" id="Vet-Nm-sAE"/>
-                                                        <constraint firstAttribute="trailing" secondItem="JvE-GL-HUW" secondAttribute="trailing" constant="15" id="akS-hp-e83"/>
+                                                        <constraint firstItem="3oH-Eh-3eh" firstAttribute="leading" secondItem="JvE-GL-HUW" secondAttribute="trailing" id="Yy6-dF-Z0H"/>
                                                         <constraint firstItem="JvE-GL-HUW" firstAttribute="leading" secondItem="by8-nf-oGW" secondAttribute="leading" constant="15" id="dd6-bd-3q5"/>
                                                         <constraint firstItem="QvU-Rv-fgN" firstAttribute="leading" secondItem="Z26-dW-u5D" secondAttribute="trailing" constant="8" id="efe-GJ-rI9"/>
                                                         <constraint firstItem="QvU-Rv-fgN" firstAttribute="centerY" secondItem="Z26-dW-u5D" secondAttribute="centerY" id="kOf-JU-7hK"/>
                                                         <constraint firstItem="3oH-Eh-3eh" firstAttribute="centerY" secondItem="by8-nf-oGW" secondAttribute="centerY" id="l2O-8E-IJd"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QvU-Rv-fgN" secondAttribute="trailing" constant="32" id="plv-US-CU9"/>
                                                         <constraint firstItem="svc-r7-smS" firstAttribute="leading" secondItem="by8-nf-oGW" secondAttribute="leading" constant="15" id="vc0-Md-m80"/>
-                                                        <constraint firstAttribute="trailing" secondItem="3oH-Eh-3eh" secondAttribute="trailing" constant="30" id="wCZ-uX-E7S"/>
+                                                        <constraint firstAttribute="trailing" secondItem="3oH-Eh-3eh" secondAttribute="trailing" constant="15" id="wCZ-uX-E7S"/>
                                                         <constraint firstItem="Z26-dW-u5D" firstAttribute="leading" secondItem="by8-nf-oGW" secondAttribute="leading" constant="15" id="zeO-gn-tvn"/>
                                                     </constraints>
                                                 </view>
