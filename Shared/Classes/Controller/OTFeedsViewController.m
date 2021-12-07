@@ -274,6 +274,11 @@ OTHeatzonesCollectionViewDelegate
                                              selector:@selector(entourageUpdated:)
                                                  name:kNotificationEntourageChanged
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showUserProfileFromNotif:)
+                                                 name:@"showUserProfileFromFeed"
+                                               object:nil];
 }
 
 - (void)dealloc {
@@ -730,6 +735,21 @@ OTHeatzonesCollectionViewDelegate
     [OTLogger logEvent:Action_feed_showList];
     
     [self showFeedsList];
+}
+
+-(void) showUserProfileFromNotif:(NSNotification *)notification {
+    id userId = notification.object;
+    if ([userId isKindOfClass:[NSNumber class]]) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
+        id navVC = [sb instantiateInitialViewController];
+        if ([navVC isKindOfClass:[UINavigationController class]]) {
+            id vc = ((UINavigationController*)navVC).topViewController;
+            if ([vc isKindOfClass:[OTUserViewController class]]) {
+                ((OTUserViewController*) vc).userId = (NSNumber*) userId;
+                [self presentViewController:navVC animated:YES completion:nil];
+            }
+        }
+    }
 }
 
 #pragma mark - Location updates
