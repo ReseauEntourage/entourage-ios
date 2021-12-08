@@ -19,6 +19,7 @@ extern NSString* const OTNewsFeedTableViewCellIdentifier;
 @property (nonatomic, weak) IBOutlet UILabel *timeLocationLabel;
 @property (nonatomic, weak) IBOutlet UIButton *userProfileImageButton;
 @property (nonatomic, weak) IBOutlet UIImageView *imgAssociation;
+@property (weak, nonatomic) IBOutlet UIView *ui_view_container;
 
 @property (nonatomic, weak) IBOutlet UILabel *noPeopleLabel;
 @property (nonatomic, weak) IBOutlet UIButton *statusButton;
