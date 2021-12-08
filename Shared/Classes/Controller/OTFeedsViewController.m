@@ -149,10 +149,6 @@ OTHeatzonesCollectionViewDelegate
     self.currentFilter.isPro = NO;
     [self.currentFilter setVersionAlone];
     
-    if (self.isFromNeoCourse) {
-        [self.currentFilter setNeighbourFilters];
-    }
-    
     if (self.isExpertArrowAsk) {
         [self.currentFilter setNeighbourFilters];
     }

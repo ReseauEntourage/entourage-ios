@@ -355,7 +355,7 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
         if indexPath.row == arrayFeed.count && self.isNeighbour {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellInfo", for: indexPath) as! OTHomeInfoCell
             
-            cell.populate(isNeo: false, delegate: self)
+            cell.populate(delegate: self)
             return cell
         }
         

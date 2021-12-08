@@ -77,13 +77,7 @@
 }
 
 - (IBAction)disclaimerAccepted:(id)sender {
-    if (self.isFromHomeNeo) {
-        NSString * tag = [NSString stringWithFormat:Action_NeoFeedAct_AcceptCGU_X,self.tagNameAnalytic];
-        [OTLogger logEvent:tag];
-    }
-    else {
-        [OTLogger logEvent:@"AcceptEthicsChartClick"];
-    }
+    [OTLogger logEvent:@"AcceptEthicsChartClick"];
     
     if (self.switchAccept.isOn) {
         self.rejectDisclaimerButton.enabled = NO;
@@ -92,13 +86,7 @@
 }
 
 - (void)doRejectDisclaimer {
-    if (self.isFromHomeNeo) {
-        NSString * tag = [NSString stringWithFormat:Action_NeoFeedAct_CancelCGU_X,self.tagNameAnalytic];
-        [OTLogger logEvent:tag];
-    }
-    else {
-        [OTLogger logEvent:@"CloseEthicsPopupClick"];
-    }
+    [OTLogger logEvent:@"CloseEthicsPopupClick"];
     
     if ([self.disclaimerDelegate respondsToSelector:@selector(disclaimerWasRejected)])
         [self.disclaimerDelegate disclaimerWasRejected];

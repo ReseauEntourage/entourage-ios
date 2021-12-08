@@ -127,21 +127,12 @@
     
     [self.editTableSource configureWith:self.entourage];
     
-    if (self.isFromHomeNeo) {
-        [self.editNavBehavior setIsFromHomeNeo:YES];
-        self.editTableSource.isHomeNeo = YES;
-    }
-    
     if (!self.isEditingEvent && self.entourage.categoryObject == nil) {
         [self.editNavBehavior editCategory:self.entourage];
     }
 }
 
 - (void)dismissModal {
-    if (self.isFromHomeNeo) {
-        NSString * tag = [NSString stringWithFormat:Action_NeoFeedAct_Cancel_X,self.tagNameAnalytic];
-        [OTLogger logEvent:tag];
-    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -209,14 +200,6 @@
 }
 
 - (void)showAddActionUserConsentView:(UIButton*)sender {
-    
-    if (self.isFromHomeNeo) {
-        self.entourage.consentObtained = @(YES);
-        self.editTableSource.entourage.consentObtained = self.entourage.consentObtained;
-        [self createOrUpdateEntourage:sender
-                           completion:nil];
-        return;
-    }
     
     UIStoryboard *storyboard = [UIStoryboard entourageEditorStoryboard];
     OTAddActionFirstConsentViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"OTAddActionFirstConsentViewController"];
@@ -320,13 +303,7 @@
         [SVProgressHUD dismiss];
         //  [SVProgressHUD showSuccessWithStatus:OTLocalizedString(@"entourageCreated")];
         
-        if (self.isFromHomeNeo) {
-            NSString * tag = [NSString stringWithFormat:Action_NeoFeedAct_Send_X,self.tagNameAnalytic];
-            [OTLogger logEvent:tag];
-        }
-        else {
-            [OTLogger logEvent:@"CreateEntourageSuccess"];
-        }
+        [OTLogger logEvent:@"CreateEntourageSuccess"];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([self.entourageEditorDelegate respondsToSelector:@selector(didEditEntourage:)]) {

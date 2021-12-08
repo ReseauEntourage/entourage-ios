@@ -245,54 +245,6 @@
 #define Action_expertFeed_HelpAmbassador @"Action__ExpertFeed__Help_Ambassador"
 #define Action_expertFeed_HelpLinkedout @"Action__ExpertFeed__Help_Linkedout"
 
-/*************
- Feed Expert NEO
- *************/
-#define View_Start_NeoFeed @"View__Start__NeoFeed"
-
-//First step
-#define Action_NeoFeed_FirstStep @"Action__NeoFeed__FirstStep"
-
-#define Action_NeoFeedFirst_Training @"Action__NeoFeedFirst__Training"
-#define Action_NeoFeedFirst_OnlineTraining @"Action__NeoFeedFirst__OnlineTraining"
-#define Action_NeoFeedFirst_SCBonjour @"Action__NeoFeedFirst__SCBonjour"
-
-#define Action_NeoFeedFirst_Tour @"Action__NeoFeedFirst__Tour"
-#define Action_NeoFeedFirst_GoTour @"Action__NeoFeedFirst__GoTour"
-//#define Action_NeoFeedFirst_BackArrowFromTour @"Action__NeoFeedFirst__BackArrowFromTour"
-
-#define Action_NeoFeedFirst_TourCity @"Action__NeoFeedFirst__Tour%@" //***
-#define Action_NeoFeedFirst_Send_TourCity @"Action__NeoFeedFirst__Send_Tour%@" //***
-
-#define Action_NeoFeedFirst_Events @"Action__NeoFeedFirst__Events"
-
-//Act now
-#define Action_NeoFeed_ActNow @"Action__NeoFeed__ActNow"
-
-#define Action_NeoFeedAct_Needs @"Action__NeoFeedAct__Needs"
-#define Action_NeoFeedAct_Events @"Action__NeoFeedAct__Events"
-
-#define Action_NeoFeedAct_OfferMaterial @"Action__NeoFeedAct__OfferMaterial"
-#define Action_NeoFeedAct_OfferService @"Action__NeoFeedAct__OfferService"
-#define Action_NeoFeedAct_RelayNeed @"Action__NeoFeedAct__RelayNeed"
-#define Action_NeoFeedAct_Coffee @"Action__NeoFeedAct__Coffee"
-
-#define Action_NeoFeedAct_NameMaterial @"Material"
-#define Action_NeoFeedAct_NameService @"Service"
-#define Action_NeoFeedAct_NameNeeds @"Needs"
-#define Action_NeoFeedAct_NameCoffee @"Coffee"
-
-#define Action_NeoFeedAct_Send_X @"Action__NeoFeedAct__Send_%@"
-#define Action_NeoFeedAct_Cancel_X @"Action__NeoFeedAct__Cancel_%@"
-
-#define Action_NeoFeedAct_AcceptCGU_X @"Action__NeoFeedAct__AcceptCGU_%@"
-#define Action_NeoFeedAct_CancelCGU_X @"Action__NeoFeedAct__CancelCGU_%@"
-
-#define Action_NeoFeedAct_How1Step @"Action__NeoFeedAct__How1Step"
-
-#define Action_Switch_NeoToExpert @"Action__Switch__NeoToExpert"
-#define Action_Switch_ExpertToNeo @"Action__Switch__ExpertToNeo"
-
 //Feed Search
 #define Action_feedSearch_start_ask @"Action__FeedSearch__Start_Ask"
 #define Action_feedSearch_start_contrib @"Action__FeedSearch__Start_Contrib"
