@@ -1690,7 +1690,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="-128" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number4_bg" translatesAutoresizingMaskIntoConstraints="NO" id="S74-pi-eEJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="S74-pi-eEJ" secondAttribute="height" multiplier="272:160" id="LXb-Nt-CYh"/>
                                                             </constraints>
@@ -1763,7 +1763,7 @@ Vous aussi, vous pouvez créer un entourage: appuyez sur +</string>
                                                     <rect key="frame" x="24" y="-128" width="366" height="160"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture_number2_bg" translatesAutoresizingMaskIntoConstraints="NO" id="w6Z-ue-1Lh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="215.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="160"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="w6Z-ue-1Lh" secondAttribute="height" multiplier="272:160" id="YTZ-PJ-bdm"/>
                                                             </constraints>
@@ -4936,56 +4936,6 @@ d’événements</string>
                                             <outlet property="ui_button_title" destination="HWG-fv-tmk" id="lyv-Nq-A1v"/>
                                             <outlet property="ui_collectionview" destination="h7y-3i-hLE" id="Dj2-oe-uPr"/>
                                             <outlet property="ui_title_section" destination="86X-T6-v9y" id="h4z-zI-kBA"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellInfo" id="g7M-eJ-Sg7" customClass="OTHomeInfoCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="4180.5" width="414" height="93.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g7M-eJ-Sg7" id="BGT-wB-STB">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="93.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" ambiguous="YES" text="Vous êtes sur le mode Premiers pas." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyi-9T-BPf">
-                                                    <rect key="frame" x="40" y="11" width="334" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.54509803921568623" green="0.54509803921568623" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Prêt à découvrir tous nos programmes ?  Désactivez le mode Premiers pas ici." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAe-Ci-4nH">
-                                                    <rect key="frame" x="20" y="44" width="374" height="33.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.96078431369999995" green="0.37254901959999998" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9H3-hl-BMp">
-                                                    <rect key="frame" x="20" y="44" width="374" height="33.5"/>
-                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title=" "/>
-                                                    <connections>
-                                                        <action selector="action_show:" destination="g7M-eJ-Sg7" eventType="touchUpInside" id="OsI-sr-LpC"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstItem="kAe-Ci-4nH" firstAttribute="top" secondItem="Zyi-9T-BPf" secondAttribute="bottom" constant="16" id="0oM-yo-fUv"/>
-                                                <constraint firstItem="9H3-hl-BMp" firstAttribute="leading" secondItem="kAe-Ci-4nH" secondAttribute="leading" id="2T3-xm-dSq"/>
-                                                <constraint firstItem="9H3-hl-BMp" firstAttribute="bottom" secondItem="kAe-Ci-4nH" secondAttribute="bottom" id="3lX-cO-9rN"/>
-                                                <constraint firstItem="9H3-hl-BMp" firstAttribute="trailing" secondItem="kAe-Ci-4nH" secondAttribute="trailing" id="9HW-jY-u0S"/>
-                                                <constraint firstItem="Zyi-9T-BPf" firstAttribute="leading" secondItem="BGT-wB-STB" secondAttribute="leadingMargin" constant="20" id="Lq9-NY-0Wl"/>
-                                                <constraint firstItem="9H3-hl-BMp" firstAttribute="top" secondItem="kAe-Ci-4nH" secondAttribute="top" id="PMP-5s-HcM"/>
-                                                <constraint firstAttribute="bottom" secondItem="kAe-Ci-4nH" secondAttribute="bottom" constant="16" id="R6J-Im-IN0"/>
-                                                <constraint firstItem="Zyi-9T-BPf" firstAttribute="top" secondItem="BGT-wB-STB" secondAttribute="topMargin" id="ZAg-Nf-qGE"/>
-                                                <constraint firstAttribute="trailing" secondItem="kAe-Ci-4nH" secondAttribute="trailing" constant="20" id="aed-Kq-ocB"/>
-                                                <constraint firstItem="kAe-Ci-4nH" firstAttribute="leading" secondItem="BGT-wB-STB" secondAttribute="leading" constant="20" id="eQV-tt-OIK"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Zyi-9T-BPf" secondAttribute="trailing" constant="20" id="fBx-be-I5b"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="ui_button" destination="9H3-hl-BMp" id="UkK-US-Cos"/>
-                                            <outlet property="ui_subtitle" destination="kAe-Ci-4nH" id="lUH-Cx-PZd"/>
-                                            <outlet property="ui_title" destination="Zyi-9T-BPf" id="Nuo-EC-zub"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
