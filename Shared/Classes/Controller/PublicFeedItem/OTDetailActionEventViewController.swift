@@ -170,7 +170,7 @@ class OTDetailActionEventViewController: UIViewController {
     }
     
     @objc func startChangeStatus() {
-        OTLogger.logEvent("OpenEntourageOptionsOverlay")
+        OTLogger.logEvent(Show_Menu_Options)
         self.performSegue(withIdentifier: "SegueChangeState", sender: self)
     }
     

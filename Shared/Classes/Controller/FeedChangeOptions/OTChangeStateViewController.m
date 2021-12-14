@@ -109,7 +109,7 @@
 }
 
 - (IBAction)edit:(id)sender {
-    [OTLogger logEvent:@"EditEntourageConfirm"];
+    [OTLogger logEvent:Show_Modify_Entourage];
     [self prepareForClosing];
     
     [self dismissViewControllerAnimated:NO completion:^{

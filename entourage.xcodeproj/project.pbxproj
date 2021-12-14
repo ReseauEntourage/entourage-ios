@@ -9,9 +9,16 @@
 /* Begin PBXBuildFile section */
 		0205197526F1E41F003B277B /* Pop_Info_Custom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0205197426F1E41F003B277B /* Pop_Info_Custom.xib */; };
 		0205197726F1E49E003B277B /* OTPopInfoCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205197626F1E49E003B277B /* OTPopInfoCustom.swift */; };
+		020F46EF271EF92A0091B088 /* CellHomeExpertEventB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020F46EE271EF92A0091B088 /* CellHomeExpertEventB.xib */; };
+		020F46F3271EFDE00091B088 /* CellHomeExpertEventA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020F46F2271EFDE00091B088 /* CellHomeExpertEventA.xib */; };
 		022231FB26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */; };
 		022F04C926F8CEF2001769C4 /* OTSearchEntouragesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */; };
+		02659F5427204206009A3297 /* CellHomeExpertActionA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02659F5327204206009A3297 /* CellHomeExpertActionA.xib */; };
+		02659F562720421B009A3297 /* CellHomeExpertActionB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02659F552720421B009A3297 /* CellHomeExpertActionB.xib */; };
+		0281F16C271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */; };
 		02916A8A2716DA2B00A45AC5 /* OTMyActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */; };
+		02B1700A273AAB8200F1ED6F /* OTCustomInfoPop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B17009273AAB8200F1ED6F /* OTCustomInfoPop.xib */; };
+		02B1700C273AABA000F1ED6F /* OTCustomInfoPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B1700B273AABA000F1ED6F /* OTCustomInfoPop.swift */; };
 		02F805E72715D88100694BB6 /* OTMyActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */; };
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
@@ -515,7 +522,6 @@
 		A28F4362216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A28F4361216F88DD00A5EBEC /* OTAddActionConfidentialityViewController.m */; };
 		A296B90E2087218700F6AFBD /* Entourage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A296B90D2087218700F6AFBD /* Entourage.xcassets */; };
 		A296B91D2087A6F100F6AFBD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B91B2087A6F000F6AFBD /* GoogleService-Info.plist */; };
-		A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */; };
 		A296B92A2089DE4300F6AFBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B8EB20871FD800F6AFBD /* main.m */; };
 		A296B931208DFE8A00F6AFBD /* OTAppState.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B930208DFE8A00F6AFBD /* OTAppState.m */; };
 		A296B93B2091ABDD00F6AFBD /* OTLocalisationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A296B93A2091ABDD00F6AFBD /* OTLocalisationService.m */; };
@@ -552,9 +558,16 @@
 /* Begin PBXFileReference section */
 		0205197426F1E41F003B277B /* Pop_Info_Custom.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Pop_Info_Custom.xib; sourceTree = "<group>"; };
 		0205197626F1E49E003B277B /* OTPopInfoCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPopInfoCustom.swift; sourceTree = "<group>"; };
+		020F46EE271EF92A0091B088 /* CellHomeExpertEventB.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellHomeExpertEventB.xib; sourceTree = "<group>"; };
+		020F46F2271EFDE00091B088 /* CellHomeExpertEventA.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertEventA.xib; sourceTree = "<group>"; };
 		022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEditActionPublicPrivateViewController.swift; sourceTree = "<group>"; };
 		022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSearchEntouragesViewController.swift; sourceTree = "<group>"; };
+		02659F5327204206009A3297 /* CellHomeExpertActionA.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellHomeExpertActionA.xib; sourceTree = "<group>"; };
+		02659F552720421B009A3297 /* CellHomeExpertActionB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertActionB.xib; sourceTree = "<group>"; };
+		0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
 		02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyActionTableViewCell.swift; sourceTree = "<group>"; };
+		02B17009273AAB8200F1ED6F /* OTCustomInfoPop.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTCustomInfoPop.xib; sourceTree = "<group>"; };
+		02B1700B273AABA000F1ED6F /* OTCustomInfoPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTCustomInfoPop.swift; sourceTree = "<group>"; };
 		02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyActionsViewController.swift; sourceTree = "<group>"; };
 		0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1416,7 +1429,6 @@
 		A296B8EB20871FD800F6AFBD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A296B90D2087218700F6AFBD /* Entourage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Entourage.xcassets; sourceTree = "<group>"; };
 		A296B91B2087A6F000F6AFBD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
 		A296B92F208DFE8A00F6AFBD /* OTAppState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTAppState.h; sourceTree = "<group>"; };
 		A296B930208DFE8A00F6AFBD /* OTAppState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTAppState.m; sourceTree = "<group>"; };
 		A296B9392091ABDD00F6AFBD /* OTLocalisationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTLocalisationService.h; sourceTree = "<group>"; };
@@ -1488,6 +1500,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020F46F1271EFDC50091B088 /* Cells Xib */ = {
+			isa = PBXGroup;
+			children = (
+				020F46EE271EF92A0091B088 /* CellHomeExpertEventB.xib */,
+				020F46F2271EFDE00091B088 /* CellHomeExpertEventA.xib */,
+				02659F5327204206009A3297 /* CellHomeExpertActionA.xib */,
+				02659F552720421B009A3297 /* CellHomeExpertActionB.xib */,
+			);
+			path = "Cells Xib";
+			sourceTree = "<group>";
+		};
 		2B13BD8425FA59FE00B0E071 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -2331,6 +2354,8 @@
 				373AAD7D23293558001D8CF3 /* OTThemedButton.m */,
 				2B7C488124B899FA0003C854 /* HomeToolTipsView.xib */,
 				2B7C488324B89A210003C854 /* OTHomeTooltipView.swift */,
+				02B17009273AAB8200F1ED6F /* OTCustomInfoPop.xib */,
+				02B1700B273AABA000F1ED6F /* OTCustomInfoPop.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3047,7 +3072,7 @@
 			isa = PBXGroup;
 			children = (
 				A2E5FA06208629690099B989 /* Entourage-Bridging-Header.h */,
-				A296B91F2087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist */,
+				0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */,
 				A296B91B2087A6F000F6AFBD /* GoogleService-Info.plist */,
 			);
 			path = Environment;
@@ -3064,6 +3089,7 @@
 				A296B8EA20871FD800F6AFBD /* entourage-Prefix.pch */,
 				2BC579DC24B3751C00BB80C9 /* OTMainTabbarViewController.swift */,
 				A296B8EB20871FD800F6AFBD /* main.m */,
+				020F46F1271EFDC50091B088 /* Cells Xib */,
 				A21D65822085FDAA00EF8E0E /* Storyboards */,
 				A202E7BD2085CFC30058F32C /* Classes */,
 				A202E79E2085CFC20058F32C /* Resources */,
@@ -3309,10 +3335,12 @@
 				0205197526F1E41F003B277B /* Pop_Info_Custom.xib in Resources */,
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
+				02659F562720421B009A3297 /* CellHomeExpertActionB.xib in Resources */,
 				A21D64AE2085E8B400EF8E0E /* Paris.gpx in Resources */,
 				A21D65AE2085FDAA00EF8E0E /* MyEntourages.storyboard in Resources */,
 				A202E7EF2085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
 				A202E7E52085CFC40058F32C /* SF-UI-Text-UltrathinItalic.otf in Resources */,
+				0281F16C271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				2BB2E389244EFA84003011C9 /* Onboarding_V2.storyboard in Resources */,
 				A202E7D32085CFC40058F32C /* Entourage.clr in Resources */,
 				A21D65C02085FDAA00EF8E0E /* FeedChangeOptions.storyboard in Resources */,
@@ -3330,6 +3358,7 @@
 				A21D65C32085FDAA00EF8E0E /* Tutorial.storyboard in Resources */,
 				A21D65C42085FDAA00EF8E0E /* About.storyboard in Resources */,
 				37CD7F422281C81900D62537 /* OTModalPopup.xib in Resources */,
+				02B1700A273AAB8200F1ED6F /* OTCustomInfoPop.xib in Resources */,
 				A21D65A72085FDAA00EF8E0E /* FeedItemFilters.storyboard in Resources */,
 				A202E7F72085CFC40058F32C /* SF-UI-Text-Semibold.otf in Resources */,
 				A21D65AF2085FDAA00EF8E0E /* UserProfile.storyboard in Resources */,
@@ -3340,6 +3369,7 @@
 				A2048A002151421500064EB0 /* IntroPage4.xib in Resources */,
 				A21D65B82085FDAA00EF8E0E /* UserProfileEditor.storyboard in Resources */,
 				A21D65A82085FDAA00EF8E0E /* Disclaimer.storyboard in Resources */,
+				020F46F3271EFDE00091B088 /* CellHomeExpertEventA.xib in Resources */,
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
 				37339CD321FF01860048B6E1 /* OTPillLabelView.xib in Resources */,
 				2BE1F47825DAE16600CE318E /* Main2.storyboard in Resources */,
@@ -3358,11 +3388,12 @@
 				A202E7CF2085CFC40058F32C /* logo_black.png in Resources */,
 				A202E7F32085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */,
 				A296B91D2087A6F100F6AFBD /* GoogleService-Info.plist in Resources */,
+				02659F5427204206009A3297 /* CellHomeExpertActionA.xib in Resources */,
 				A21D65B02085FDAA00EF8E0E /* EntourageEditor.storyboard in Resources */,
 				A202E7F12085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */,
 				A202E7D72085CFC40058F32C /* SharedImages.xcassets in Resources */,
 				A2607686215577BC0068F65E /* OTFeedsTableFilterHeader.xib in Resources */,
-				A296B9202087A70D00F6AFBD /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
+				020F46EF271EF92A0091B088 /* CellHomeExpertEventB.xib in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
 				A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */,
 				A202E7D52085CFC40058F32C /* Localizable.strings in Resources */,
@@ -3446,11 +3477,13 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
@@ -3467,11 +3500,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
@@ -3517,11 +3552,13 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
@@ -3538,11 +3575,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
@@ -3881,6 +3920,7 @@
 				A202EC672085D2C80058F32C /* OTTapViewBehavior.m in Sources */,
 				A202EBB92085D2C80058F32C /* OTMessageViewController.m in Sources */,
 				A202EC4F2085D2C80058F32C /* OTShareFeedItemBehavior.m in Sources */,
+				02B1700C273AABA000F1ED6F /* OTCustomInfoPop.swift in Sources */,
 				A202ED1D2085D2C80058F32C /* OTAnnouncementFactory.m in Sources */,
 				2B2EED172624953900566A90 /* OTHomeNeoStreetViewController.swift in Sources */,
 				2B1A8F79252768FD008419E6 /* OTGuideDetailPoiViewController.swift in Sources */,

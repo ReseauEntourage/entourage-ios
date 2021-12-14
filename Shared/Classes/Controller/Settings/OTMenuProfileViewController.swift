@@ -11,7 +11,6 @@ import Firebase
 import SVProgressHUD
 
 class OTMenuProfileViewController: UIViewController {
-    
     @IBOutlet weak var ui_tableview: UITableView?
     var uuidInfo = "*****"
     

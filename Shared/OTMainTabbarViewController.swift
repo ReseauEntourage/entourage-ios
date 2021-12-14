@@ -335,7 +335,7 @@ extension OTMainTabbarViewController: EntourageEditorDelegate {
     func didEdit(_ entourage: OTEntourage!) {
         if let _vc = self.homeVC.children[0] as? OTHomeMainViewController {
             plusVC.dismiss(animated: true) {
-                _vc.showFeedInfo(feedItem: entourage)
+                _vc.showFeedInfoDetail(feedItem: entourage)
             }
         }
         else {
@@ -343,7 +343,7 @@ extension OTMainTabbarViewController: EntourageEditorDelegate {
             showHomeVC()
             plusVC.dismiss(animated: true) {
                 if let _vc = self.homeVC.children[0] as? OTHomeMainViewController {
-                    _vc.showFeedInfo(feedItem: entourage)
+                    _vc.showFeedInfoDetail(feedItem: entourage)
                 }
             }
         }

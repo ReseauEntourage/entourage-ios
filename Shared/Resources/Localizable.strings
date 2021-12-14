@@ -1144,3 +1144,10 @@
 "myActionsCreated" = "Mes actions solidaires créées";
 "MyActionEmptyAsk" = "Actuellement vous n'avez pas de demandes publiées sur l'application ;)";
 "MyActionEmptyContrib" = "Actuellement vous n'avez pas de dons publiés sur l'application ;)";
+
+"infoPopCreateContrib" = "Félicitations !\nVotre contribution a bien été créée.";
+"infoPopCreateAsk" = "Félicitations !\nVotre demande a bien été créée.";
+"infoPopCreateEvent" = "Félicitations !\nVotre événement a bien été créé.";
+"infoPopCreateContribTitle" = "Action solidaire\ncréée";
+"infoPopCreateAskTitle" = "Action solidaire\ncréée";
+"infoPopCreateEventTitle" = "Événement créé";

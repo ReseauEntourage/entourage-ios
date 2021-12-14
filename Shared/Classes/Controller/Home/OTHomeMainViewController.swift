@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class OTHomeMainViewController: UIViewController {
     
@@ -18,6 +19,11 @@ class OTHomeMainViewController: UIViewController {
     
     var isExpertMode = false
     var isFromProfile = false
+    
+    var timerClosePop:Timer?
+    let timerCount = 5 //seconds
+    var countdownClosePop = 5 //seconds
+    var alertPopInfo:OTCustomInfoPop?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,6 +186,49 @@ class OTHomeMainViewController: UIViewController {
         }
     }
     
+    func showFeedInfoDetail(feedItem:OTFeedItem) {
+        SVProgressHUD.dismiss()
+        if let tabvc = self.tabBarController {
+            alertPopInfo = OTCustomInfoPop(frame: tabvc.view.frame)
+            
+            var message = ""
+            var title = ""
+            if feedItem.isOuting() {
+                message = OTLocalisationService.getLocalizedValue(forKey: "infoPopCreateEvent")
+                title = OTLocalisationService.getLocalizedValue(forKey: "infoPopCreateEventTitle")
+            }
+            else {
+                if (feedItem as! OTEntourage).isAskForHelp() {
+                    message = OTLocalisationService.getLocalizedValue(forKey: "infoPopCreateAsk")
+                    title = OTLocalisationService.getLocalizedValue(forKey: "infoPopCreateAskTitle")
+                }
+                else {
+                    message = OTLocalisationService.getLocalizedValue(forKey: "infoPopCreateContrib")
+                    title = OTLocalisationService.getLocalizedValue(forKey: "infoPopCreateContribTitle")
+                }
+            }
+            
+            alertPopInfo?.setupTitle(title: title, subtitle: message)
+            alertPopInfo?.delegate = self
+            tabvc.view.addSubview(alertPopInfo!)
+            tabvc.view.bringSubviewToFront(alertPopInfo!)
+        }
+       
+        self.selectedFeedItem = feedItem
+        
+        countdownClosePop = timerCount
+        timerClosePop = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCountdown), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateCountdown() {
+        if countdownClosePop > 0 {
+            countdownClosePop = countdownClosePop - 1
+        }
+        else {
+            close()
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "ActiveFeedItemDetailsSegue" {
@@ -199,6 +248,18 @@ class OTHomeMainViewController: UIViewController {
             if let vc = segue.destination as? OTPublicFeedItemViewController {
                 vc.feedItem = self.selectedFeedItem
             }
+        }
+    }
+}
+
+//MARK: -  ClosepopDelegate -
+extension OTHomeMainViewController: ClosePopDelegate {
+    func close() {
+        alertPopInfo?.removeFromSuperview()
+        alertPopInfo = nil
+        timerClosePop?.invalidate()
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "pushDetailFeedNew", sender: self)
         }
     }
 }

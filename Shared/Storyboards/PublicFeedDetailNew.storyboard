@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mnn-h6-fcr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mnn-h6-fcr">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -447,7 +447,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="752" text="Action privée" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rdk-IW-6L0" customClass="TTTAttributedLabel">
-                                                            <rect key="frame" x="59" y="16" width="98" height="12"/>
+                                                            <rect key="frame" x="59" y="16" width="97.5" height="12"/>
                                                             <color key="tintColor" systemColor="systemOrangeColor"/>
                                                             <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="15"/>
                                                             <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1146,16 +1146,16 @@
     </scenes>
     <designables>
         <designable name="0zw-xz-jBa">
-            <size key="intrinsicContentSize" width="148.5" height="18"/>
+            <size key="intrinsicContentSize" width="164" height="34"/>
         </designable>
         <designable name="1EP-wn-FBn">
-            <size key="intrinsicContentSize" width="148.5" height="18"/>
+            <size key="intrinsicContentSize" width="164" height="34"/>
         </designable>
         <designable name="6QH-kd-co6">
-            <size key="intrinsicContentSize" width="98" height="18"/>
+            <size key="intrinsicContentSize" width="97.5" height="18"/>
         </designable>
         <designable name="Rdk-IW-6L0">
-            <size key="intrinsicContentSize" width="98" height="18"/>
+            <size key="intrinsicContentSize" width="97.5" height="18"/>
         </designable>
         <designable name="axE-KV-5Qm">
             <size key="intrinsicContentSize" width="46" height="18"/>
@@ -1164,7 +1164,7 @@
             <size key="intrinsicContentSize" width="46" height="18"/>
         </designable>
         <designable name="mIM-J5-TrH">
-            <size key="intrinsicContentSize" width="98" height="18"/>
+            <size key="intrinsicContentSize" width="97.5" height="18"/>
         </designable>
     </designables>
     <resources>

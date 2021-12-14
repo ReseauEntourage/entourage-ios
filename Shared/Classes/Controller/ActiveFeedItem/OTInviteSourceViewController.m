@@ -14,7 +14,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self updateUIElements];
+   // [self updateUIElements];
+    [self setupViews];
+    [OTLogger logEvent:Show_Pop_Share];
+}
+
+-(void) setupViews {
+    self.inviteSubtitleLabel.text = [OTAppAppearance inviteSubtitleText:self.feedItem];
+    
+    for (UIButton *button in self.buttons) {
+        button.layer.cornerRadius = 5;
+        button.layer.borderWidth = 1;
+        button.layer.borderColor = [[UIColor appOrangeColor] CGColor];
+    }
 }
 
 - (void)updateUIElements {
@@ -55,11 +67,15 @@
 }
 
 - (IBAction)action_share:(id)sender {
+    [OTLogger logEvent:Action_Pop_Share_Link];
+    
     if(self.delegate)
         [self.delegate share];
 }
 
 - (IBAction)action_share_entourage:(id)sender {
+    [OTLogger logEvent:Action_Pop_Share_Entourage];
+    
     if(self.delegate) {
        [self.delegate shareEntourage];
         [self dismissViewControllerAnimated:NO completion:nil];
