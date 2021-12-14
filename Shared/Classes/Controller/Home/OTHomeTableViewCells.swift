@@ -62,6 +62,8 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     var isSpecialCells = false
     let minimalCellForSpecialCell = 1
     
+    var isLoading = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -88,9 +90,10 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
         self.ui_collectionview.collectionViewLayout = flowLayout
     }
     
-    func populateCell(card:HomeCard,clickDelegate:CellClickDelegate) {
+    func populateCell(card:HomeCard,clickDelegate:CellClickDelegate, isLoading:Bool) {
         self.cards = card
         self.delegate = clickDelegate
+        self.isLoading = isLoading
         
         if card.type != .Headlines {
             self.isSpecialCells = cards.arrayCards.count <= minimalCellForSpecialCell
@@ -130,6 +133,11 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if cards.type == .Headlines {
+            if isLoading {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellColl", for: indexPath)
+                return cell
+            }
+            
             let item = cards.arrayCards[indexPath.row]
             if let item = item as? OTEntourage {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellColl", for: indexPath) as! OTHomeCollectionViewCell
@@ -144,6 +152,11 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
             }
         }
         else if cards.type == .Events {
+            
+            if isLoading {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellColl", for: indexPath)
+                return cell
+            }
             
             if isSpecialCells && indexPath.row == cards.arrayCards.count {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellOther", for: indexPath) as! OTHomeCellOther
@@ -164,6 +177,11 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
                 cell.updateCell(item: item)
             }
             
+            return cell
+        }
+        
+        if isLoading {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellColl", for: indexPath)
             return cell
         }
         

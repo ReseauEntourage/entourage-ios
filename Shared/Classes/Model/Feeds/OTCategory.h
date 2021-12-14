@@ -23,6 +23,7 @@ typedef enum {
 @property (nonatomic, strong) NSString *entourage_type;
 @property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *title_list;
 @property (nonatomic, strong) NSString *title_example;
 @property (nonatomic, strong) NSString *description_example;
 @property (nonatomic) BOOL isSelected;

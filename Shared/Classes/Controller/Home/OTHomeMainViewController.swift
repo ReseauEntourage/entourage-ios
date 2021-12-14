@@ -17,6 +17,7 @@ class OTHomeMainViewController: UIViewController {
     @IBOutlet weak var ui_view_container: UIView!
     
     var isExpertMode = false
+    var isFromProfile = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +55,7 @@ class OTHomeMainViewController: UIViewController {
         else {
             homeNeoVC?.view.frame = self.view.frame
         }
+        isFromProfile = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -101,6 +103,7 @@ class OTHomeMainViewController: UIViewController {
             if let _ = homeExpertVC {
                 addChild(homeExpertVC!)
                 homeExpertVC?.view.frame = self.view.frame
+                homeExpertVC?.isFromProfile = self.isFromProfile
                 ui_view_container.addSubview(homeExpertVC!.view)
                 homeExpertVC!.didMove(toParent: self)
             }

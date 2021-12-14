@@ -44,7 +44,6 @@
     [encoder encodeObject:self.avatarUrl forKey:kWSAvatar_URL];
     [encoder encodeObject:self.partner forKey:kWSPartner];
     [encoder encodeObject:self.partner_role_title forKey:kWSPartnerRoleTitle];
-    
 }
 
 - (id)initWithCoder:(NSCoder *)decoder

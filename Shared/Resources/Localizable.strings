@@ -907,6 +907,10 @@
 "good_waves_member" = "Membre des bonnes ondes";
 "activity_title" = "Activité";
 
+"contrib_title" = "dons\ncrées";
+"ask_title" = "demandes\ncréées";
+"contrib_button_title" = "Voir la liste →";
+"ask_button_title" = "Voir la liste →";
 
 "add_event_help_button" = "Quels événements diffuser ?";
 
@@ -1134,3 +1138,9 @@
 "cell_info_demand_empty" = "C'est plutôt calme ici";
 "cell_info_demand_empty_button" = "Rechercher\nplus loin";
 "info_asso_user" = "• S'abonner >";
+"info_asso_user_joined" = "• Abonné";
+"info_event_closed" = "événement complet";
+"myActions" = "Mes actions solidaires";
+"myActionsCreated" = "Mes actions solidaires créées";
+"MyActionEmptyAsk" = "Actuellement vous n'avez pas de demandes publiées sur l'application ;)";
+"MyActionEmptyContrib" = "Actuellement vous n'avez pas de dons publiés sur l'application ;)";

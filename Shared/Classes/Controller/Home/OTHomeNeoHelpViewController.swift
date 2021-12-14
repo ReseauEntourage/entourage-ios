@@ -71,6 +71,7 @@ extension OTHomeNeoHelpViewController: UITableViewDelegate, UITableViewDataSourc
             vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: "outings_title_home")
             self.navigationController?.pushViewController(vc, animated: true)
             OTLogger.logEvent(Action_NeoFeedFirst_Events)
+            OTLogger.logEvent(View_FeedView_Events)
         }
     }
 }

@@ -18,6 +18,11 @@ class OTDetailActionEventTopCell: UITableViewCell {
     
     @IBOutlet weak var ui_image_top: UIImageView?
     
+    @IBOutlet weak var ui_constraint_height_view_status: NSLayoutConstraint?
+    @IBOutlet weak var ui_label_status: UILabel!
+    
+    
+    
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_view_button_join: UIView?
     @IBOutlet weak var ui_view_button_share: UIView?
@@ -64,6 +69,16 @@ class OTDetailActionEventTopCell: UITableViewCell {
                 else {
                     self.ui_image_top?.image = UIImage.init(named: "ic_placeholder_event_horizontal")
                 }
+            }
+            
+            if feedItem.status == "full" {
+                ui_label_status.text = OTLocalisationService.getLocalizedValue(forKey: "info_event_closed").uppercased()
+                ui_constraint_height_view_status?.constant = 40
+                ui_label_status.isHidden = false
+            }
+            else {
+                ui_constraint_height_view_status?.constant = 0
+                ui_label_status.isHidden = true
             }
         }
         
@@ -239,8 +254,14 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
             self.ui_button_asso.isHidden = false
             self.ui_label_asso?.isHidden = false
             
-            let titleButton = String.init(format:"%@ %@", feedItem.author.partner.name,OTLocalisationService.getLocalizedValue(forKey: "info_asso_user"));
-            let coloredStr:String = OTLocalisationService.getLocalizedValue(forKey: "info_asso_user")
+            var keyJoined = "info_asso_user"
+            if feedItem.author.partner.isFollowing {
+                keyJoined = "info_asso_user_joined"
+            }
+            
+            
+            let titleButton = String.init(format:"%@ %@", feedItem.author.partner.name,OTLocalisationService.getLocalizedValue(forKey: keyJoined));
+            let coloredStr:String = OTLocalisationService.getLocalizedValue(forKey: keyJoined)
             
             let attStr = Utilitaires.formatString(stringMessage: titleButton, coloredTxt: coloredStr, color: UIColor.appOrange(), colorHighlight: UIColor.appOrange(), fontSize: 15, fontWeight: .medium, fontColoredWeight: .bold)
             

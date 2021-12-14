@@ -26,4 +26,6 @@
                           success:(void (^)(NSMutableArray *feeds, NSString *pageToken))success
                           failure:(void (^)(NSError *error))failure;
 
+- (void)getEntouragesOwnedWithsuccess:(void (^)(NSMutableArray *feeds))success
+                              failure:(void (^)(NSError *error))failure;
 @end

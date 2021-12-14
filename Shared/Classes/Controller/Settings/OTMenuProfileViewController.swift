@@ -295,16 +295,6 @@ extension OTMenuProfileViewController: TapMenuProfileDelegate {
         }
     }
     
-    func showEvents() {
-        OTLogger.logEvent(Action_Menu_EventsCount)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showEvents"), object: nil)
-    }
-    
-    func showAll() {
-        OTLogger.logEvent(Action_Menu_ActionsCount)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showAlls"), object: nil)
-    }
-    
     func changeExpertMode(isExpert: Bool) {
         
         let modeStr:String = !isExpert ? "profile_pop_switch_mode_message_neo".localized : "profile_pop_switch_mode_message_expert".localized
@@ -326,5 +316,24 @@ extension OTMenuProfileViewController: TapMenuProfileDelegate {
         alertVc.addAction(buttonGo)
         
         self.present(alertVc, animated: true, completion: nil)
+    }
+    
+    func showActions() {
+        self.showMyActionVC(isContrib: true)
+    }
+    
+    func showContribs() {
+        self.showMyActionVC(isContrib: true)
+    }
+    
+    func showAsks() {
+        self.showMyActionVC(isContrib: false)
+    }
+    
+    func showMyActionVC(isContrib:Bool) {
+        let storyB = UIStoryboard.init(name: "Settings", bundle: nil)
+        let vc = storyB.instantiateViewController(withIdentifier: "myActionsVC") as! OTMyActionsViewController
+        vc.isContrib = isContrib
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

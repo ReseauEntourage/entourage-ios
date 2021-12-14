@@ -65,3 +65,34 @@ extension UIViewController {
 @objc protocol ClosePopDelegate {
     func close()
 }
+
+//MARK: - Extension UISegmentedControl -
+extension UISegmentedControl {
+
+    func setTitleColor(_ color: UIColor, state: UIControl.State = .normal) {
+        var attributes = self.titleTextAttributes(for: state) ?? [:]
+        attributes[.foregroundColor] = color
+        self.setTitleTextAttributes(attributes, for: state)
+    }
+    
+    func setTitleFont(_ font: UIFont, state: UIControl.State = .normal) {
+        var attributes = self.titleTextAttributes(for: state) ?? [:]
+        attributes[.font] = font
+        self.setTitleTextAttributes(attributes, for: state)
+    }
+    
+    //MARK: Hack iOS 13+ bg color SegmentedControl #https://stackoverflow.com/a/59092590
+    func fixBackgroundColor() {
+        if #available(iOS 13.0, *) {
+            //just to be sure it is full loaded
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                for i in 0...(self.numberOfSegments-1)  {
+                    let backgroundSegmentView = self.subviews[i]
+                    //it is not enogh changing the background color. It has some kind of shadow layer
+                    backgroundSegmentView.isHidden = true
+                }
+            }
+        }
+    }
+
+}

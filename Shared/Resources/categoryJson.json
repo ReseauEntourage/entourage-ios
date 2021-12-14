@@ -4,55 +4,63 @@
   "display_category": "social",
   "display_category_title": "Des voisins pour entourer une personne",
   "title_example": "Rencontrez Tatiana ! ",
-  "description_example": "Tatiana sur les Champs Elysées est pleine d'humour ! Elle a besoin de produits d'hygiène (et d'une valise de billets me dit elle en riant). Entourez-la!\n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  "description_example": "Tatiana sur les Champs Elysées est pleine d'humour ! Elle a besoin de produits d'hygiène (et d'une valise de billets me dit elle en riant). Entourez-la!\n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes).",
+  "display_category_title_list": "Un repas ou un café"
   },
   {
   "entourage_type": "ask_for_help",
   "display_category": "mat_help",
   "display_category_title": "Un don matériel",
   "title_example": "Gilles a besoin d'une paire de gants",
-  "description_example": "Gilles passe la journée dehors la main tendue. Avec ce froid, il a les doigts tout engourdis. Qui aurait des gants à donner ? \n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  "description_example": "Gilles passe la journée dehors la main tendue. Avec ce froid, il a les doigts tout engourdis. Qui aurait des gants à donner ? \n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes).",
+  "display_category_title_list": "Demande de matériel"
   },
   {
   "entourage_type": "ask_for_help",
   "display_category": "resource",
   "display_category_title": "Un service",
   "title_example": "Nathalie aimerait l'aide d'un voisin pour laver et sécher ses vêtements.",
-  "description_example": "J'ai rencontré Nathalie à la Soupe Populaire. Elle tient à sa propreté. Le top serait de pouvoir lui donner votre contact pour qu'elle puisse laver ses vêtements.\n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  "description_example": "J'ai rencontré Nathalie à la Soupe Populaire. Elle tient à sa propreté. Le top serait de pouvoir lui donner votre contact pour qu'elle puisse laver ses vêtements.\n\n(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes).",
+  "display_category_title_list": "Un service"
   },
   {
   "entourage_type": "ask_for_help",
   "display_category": "other",
   "display_category_title": "Autre chose !",
   "title_example": "Sarah a besoin de faire garder son chien pendant un RDV administratif",
-  "description_example": "(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  "description_example": "(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes).",
+  "display_category_title_list": "Autre chose"
   },
   {
   "entourage_type": "contribution",
   "display_category": "social",
   "display_category_title": "Partager un repas ou un café",
   "title_example": "Qui peut me faire rencontrer une personne de la rue dans le quartier ? ",
-  "description_example": "Je ne suis jamais allé à la rencontre de personnes sans-abri. Qui peut me présenter à une personne qu'il connait bien ?"
+  "description_example": "Je ne suis jamais allé à la rencontre de personnes sans-abri. Qui peut me présenter à une personne qu'il connait bien ?",
+  "display_category_title_list": "Un repas ou un café"
   },
   {
   "entourage_type": "contribution",
   "display_category": "mat_help",
   "display_category_title": "Faire un don matériel",
   "title_example": "Je donne : 1 sac de couchage chaud",
-  "description_example": "J'ai 1 sac de couchage en bon état que je n'utilise pas. \nJe suis disponible pour le donner dans mon quartier, les soirs de semaine après 18h."
+  "description_example": "J'ai 1 sac de couchage en bon état que je n'utilise pas. \nJe suis disponible pour le donner dans mon quartier, les soirs de semaine après 18h.",
+  "display_category_title_list": "Don matériel"
   },
   {
   "entourage_type": "contribution",
   "display_category": "resource",
   "display_category_title": "Offrir un service",
   "title_example": "Je mets à disposition ma machine à laver et vous invite à ma table !",
-  "description_example": "Le temps d'une soirée, on est une colocation sympa vous permettant de vous mettre au chaud quelques heures. On serait heureux de partager un repas en ta compagnie. "
+  "description_example": "Le temps d'une soirée, on est une colocation sympa vous permettant de vous mettre au chaud quelques heures. On serait heureux de partager un repas en ta compagnie. ",
+  "display_category_title_list": "Un service"
   },
   {
   "entourage_type": "contribution",
   "display_category": "other",
   "display_category_title": "Aider à ma façon",
   "title_example": "Je souhaite devenir bénévole pour une association qui lutte contre l'exclusion.",
-  "description_example": "(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes)."
+  "description_example": "(Attention : ne mentionnez pas l'identité complète ni la localisation exacte des personnes).",
+  "display_category_title_list": "Aider à ma façon"
   }
   ]

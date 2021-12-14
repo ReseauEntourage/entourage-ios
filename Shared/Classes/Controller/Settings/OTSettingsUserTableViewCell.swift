@@ -18,19 +18,19 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_button_image_profile: UIButton!
     @IBOutlet weak var ui_button_profile: UIButton!
     
+    //View Contrib
+    @IBOutlet weak var ui_view_contribs: UIView!
+    @IBOutlet weak var ui_label_nb_contribs: UILabel!
+    @IBOutlet weak var ui_label_contribs_title: UILabel!
+    @IBOutlet weak var ui_view_button_contribs: UIView!
+    @IBOutlet weak var ui_label_button_contribs: UILabel!
     
-    
-    @IBOutlet weak var ui_view_events: UIView!
-    @IBOutlet weak var ui_label_nb_events: UILabel!
-    @IBOutlet weak var ui_label_events_title: UILabel!
-    @IBOutlet weak var ui_view_button_event: UIView!
-    @IBOutlet weak var ui_label_button_event: UILabel!
-    
-    @IBOutlet weak var ui_view_actions: UIView!
-    @IBOutlet weak var ui_label_nb_actions: UILabel!
-    @IBOutlet weak var ui_label_actions_title: UILabel!
-    @IBOutlet weak var ui_view_button_ection: UIView!
-    @IBOutlet weak var ui_label_button_action: UILabel!
+    //view Ask
+    @IBOutlet weak var ui_view_asks: UIView!
+    @IBOutlet weak var ui_label_nb_asks: UILabel!
+    @IBOutlet weak var ui_label_asks_title: UILabel!
+    @IBOutlet weak var ui_view_button_asks: UIView!
+    @IBOutlet weak var ui_label_button_asks: UILabel!
     
     @IBOutlet weak var ui_view_choice_mode: UIView!
     @IBOutlet weak var ui_title_home_mode: UILabel!
@@ -54,15 +54,15 @@ class OTSettingsUserTableViewCell: UITableViewCell {
       //  ui_label_mod_profile.underline()
         
         ui_title.text = OTLocalisationService.getLocalizedValue(forKey: "menu_info_title")
-        ui_label_events_title.text = OTLocalisationService.getLocalizedValue(forKey: "event_title")
-        ui_label_actions_title.text = OTLocalisationService.getLocalizedValue(forKey: "action_title")
-        ui_label_button_event.text = OTLocalisationService.getLocalizedValue(forKey: "event_button_title")
-        ui_label_button_action.text = OTLocalisationService.getLocalizedValue(forKey: "action_button_title")
+        ui_label_contribs_title.text = OTLocalisationService.getLocalizedValue(forKey: "contrib_title")
+        ui_label_asks_title.text = OTLocalisationService.getLocalizedValue(forKey: "ask_title")
+        ui_label_button_contribs.text = OTLocalisationService.getLocalizedValue(forKey: "contrib_button_title")
+        ui_label_button_asks.text = OTLocalisationService.getLocalizedValue(forKey: "ask_button_title")
         
-        roundPartielView(view: ui_view_events, isTop: true)
-        roundPartielView(view: ui_view_actions, isTop: true)
-        roundPartielView(view: ui_view_button_event, isTop: false)
-        roundPartielView(view: ui_view_button_ection, isTop: false)
+        roundPartielView(view: ui_view_contribs, isTop: true)
+        roundPartielView(view: ui_view_asks, isTop: true)
+        roundPartielView(view: ui_view_button_contribs, isTop: false)
+        roundPartielView(view: ui_view_button_asks, isTop: false)
         
         ui_label_mod_profile.layer.cornerRadius = 5
         ui_label_mod_profile.layer.borderWidth = 1
@@ -112,8 +112,8 @@ class OTSettingsUserTableViewCell: UITableViewCell {
             ui_image_user_badge.isHidden = true
         }
         
-        ui_label_nb_events.text = "\(currentUser.eventsCount)"
-        ui_label_nb_actions.text = "\(currentUser.actionsCount)"
+        ui_label_nb_contribs.text = "\(currentUser.contribCreationCount ?? 0)"
+        ui_label_nb_asks.text = "\(currentUser.askCreactionCount ?? 0)"
         
         
         var isExpertMode = false
@@ -148,12 +148,12 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         delegate?.editProfile()
     }
     
-    @IBAction func action_show_all(_ sender: Any) {
-        delegate?.showAll()
+    @IBAction func action_show_asks(_ sender: Any) {
+        delegate?.showAsks()
     }
     
-    @IBAction func action_show_events(_ sender: Any) {
-        delegate?.showEvents()
+    @IBAction func action_show_contribs(_ sender: Any) {
+        delegate?.showContribs()
     }
     
     @IBAction func action_change_home_mode(_ sender: UISwitch) {
@@ -165,13 +165,18 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         }
         delegate?.changeExpertMode(isExpert: !sender.isOn)
     }
+    
+    @IBAction func action_show_actions(_ sender: Any) {
+        delegate?.showActions()
+    }
 }
 
     //MARK: - TapMenuProfileDelegate -
 protocol TapMenuProfileDelegate:AnyObject {
     func showProfile()
     func editProfile()
-    func showEvents()
-    func showAll()
+    func showContribs()
+    func showAsks()
     func changeExpertMode(isExpert:Bool)
+    func showActions()
 }

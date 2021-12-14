@@ -90,3 +90,4 @@
 #import "OTCategoryType.h"
 #import "OTEntourageEditorViewController.h"
 #import "OTEditEntourageNavigationBehavior.h"
+#import "OTEntourageService.h"

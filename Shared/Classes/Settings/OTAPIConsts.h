@@ -81,6 +81,8 @@
 
 #define API_URL_DISABLE_REPORT_USER @"entourages/%@/report_prompt?token=%@"
 
+#define API_URL_ENTOURAGE_OWNS @"entourages/owned?token=%@"
+
 //Get Photo Gallery for event
 #define API_URL_ENTOURAGES_IMAGES    @"entourage_images?token=%@"
 

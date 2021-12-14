@@ -86,6 +86,8 @@ extern NSString *const kVisitedUserTag;
 
 @property (strong, nonatomic) NSNumber * _Nonnull actionsCount;
 @property (strong, nonatomic) NSNumber * _Nonnull eventsCount;
+@property (strong, nonatomic) NSNumber * _Nullable contribCreationCount;
+@property (strong, nonatomic) NSNumber * _Nullable askCreactionCount;
 @property (nonatomic) BOOL isGoodWavesValidated;
 @property (nonatomic) BOOL isEngaged;
 @end

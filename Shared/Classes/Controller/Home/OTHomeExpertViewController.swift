@@ -19,6 +19,8 @@ class OTHomeExpertViewController: UIViewController {
     @IBOutlet weak var ui_view_top: UIView!
     
     var arrayFeed = [HomeCard]()
+    var arrayFeedEmpty = [HomeCard]()
+    var isLoading = true
     
     let refreshControl = UIRefreshControl()
     
@@ -29,8 +31,12 @@ class OTHomeExpertViewController: UIViewController {
     
     var isNeighbour = false
     
+    var isFromProfile = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createEmptyArray()
         
         let currentUser = UserDefaults.standard.currentUser
         
@@ -77,6 +83,39 @@ class OTHomeExpertViewController: UIViewController {
             isFromModifyZone = false
             getFeed()
         }
+        
+        if self.isFromProfile {
+            self.ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
+            isFromProfile = false
+        }
+    }
+        
+    
+    func createEmptyArray() {
+        let card = OTFeedItem()
+        let cards = [card,card,card]
+        
+        var home1 = HomeCard()
+        home1.type = .Headlines
+        home1.titleSection = "xxxxxxxxxxxx xxx"
+        home1.arrayCards = [Any]()
+        home1.arrayCards.append(contentsOf: cards)
+        
+        var home2 = HomeCard()
+        home2.type = .Events
+        home2.titleSection = "xxxxxxxxxxxx xxx"
+        home2.arrayCards = [Any]()
+        home2.arrayCards.append(contentsOf: cards)
+        
+        var home3 = HomeCard()
+        home3.type = .Actions
+        home3.titleSection = "xxxxxxxxxxxx xxx"
+        home3.arrayCards = [Any]()
+        home3.arrayCards.append(contentsOf: cards)
+        
+        arrayFeedEmpty.append(home1)
+        arrayFeedEmpty.append(home2)
+        arrayFeedEmpty.append(home3)
     }
     
     //MARK: - Check profile + tuto
@@ -155,9 +194,10 @@ class OTHomeExpertViewController: UIViewController {
             params["latitude"] = currentLocation.coordinate.latitude
             params["longitude"] = currentLocation.coordinate.longitude
         }
-        
+        isLoading = true
         OTNewFeedsService.getFeed(withParams:params) { (_array, error) in
             self.refreshControl.endRefreshing()
+            self.isLoading = false
             if let _array = _array {
                 self.arrayFeed.removeAll()
                 self.arrayFeed.append(contentsOf: _array)
@@ -208,6 +248,10 @@ class OTHomeExpertViewController: UIViewController {
 extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource, CellClickDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isLoading {
+            return arrayFeedEmpty.count
+        }
+        
         self.isNeighbour = false
         if let currentUser = UserDefaults.standard.currentUser {
             let isNeighbour = currentUser.isUserTypeNeighbour()
@@ -221,6 +265,23 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if isLoading {
+            var cell = OTHomeCellCollectionView()
+            
+            if arrayFeedEmpty[indexPath.row].type == .Headlines {
+                cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCellAnnouncesEmpty", for: indexPath) as! OTHomeCellCollectionView
+            }
+            else if arrayFeedEmpty[indexPath.row].type == .Events {
+                cell = tableView.dequeueReusableCell(withIdentifier: "collectionCellEventsEmpty", for: indexPath) as! OTHomeCellCollectionView
+            }
+            else {
+                cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCellActionsEmpty", for: indexPath) as! OTHomeCellCollectionView
+            }
+            
+            cell.populateCell(card: arrayFeedEmpty[indexPath.row],clickDelegate: self, isLoading: isLoading)
+            return cell
+        }
         
         if indexPath.row == arrayFeed.count && self.isNeighbour {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellInfo", for: indexPath) as! OTHomeInfoCell
@@ -241,11 +302,21 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
             cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCellActions", for: indexPath) as! OTHomeCellCollectionView
         }
         
-        cell.populateCell(card: arrayFeed[indexPath.row],clickDelegate: self)
+        cell.populateCell(card: arrayFeed[indexPath.row],clickDelegate: self, isLoading: isLoading)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if isLoading {
+            if arrayFeedEmpty[indexPath.row].type == .Headlines {
+                return CELL_HEADLINES_HEIGHT
+            }
+            if arrayFeedEmpty[indexPath.row].type == .Events {
+                return CELL_EVENTS_HEIGHT
+            }
+            return CELL_ACTIONS_HEIGHT
+        }
         
         if indexPath.row == arrayFeed.count && self.isNeighbour {
             return UITableView.automaticDimension
@@ -347,6 +418,7 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
         let vc = sb.instantiateViewController(withIdentifier: "OTMain0")  as! OTFeedsViewController
         vc.isFromEvent = true
         vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: "outings_title_home")
+        OTLogger.logEvent(View_FeedView_Events)
         self.parent?.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -361,6 +433,9 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
             vc.titleFrom = OTLocalisationService.getLocalizedValue(forKey: strTitle)
             vc.isExpertArrowAsk = subtype == .ActionsAsk ? true : false
             vc.isExpertArrowContrib = subtype == .ActionsContrib ? true : false
+            
+            let tag = subtype == .ActionsAsk ? View_FeedView_Asks : View_FeedView_Contribs
+            OTLogger.logEvent(tag)
         }
         
         self.parent?.navigationController?.pushViewController(vc, animated: true)

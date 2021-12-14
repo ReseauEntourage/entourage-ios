@@ -40,7 +40,7 @@ workflows:
             ./Scripts/count_commit.sh
     - xcode-archive:
         inputs:
-        - export_method: app-store
+        - distribution_method: app-store
     - deploy-to-bitrise-io:
         inputs:
         - notify_user_groups: none
@@ -166,7 +166,7 @@ workflows:
             ./Scripts/count_commit.sh
     - xcode-archive:
         inputs:
-        - export_method: ad-hoc
+        - distribution_method: ad-hoc
     - deploy-to-bitrise-io: {}
     - post-jira-comment-with-build-details:
         inputs:

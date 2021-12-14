@@ -57,6 +57,7 @@
 #define kWSKeyCategoryTitle @"display_category_title"
 #define kWSKeyCategoryExampleTitle @"title_example"
 #define kWSKeyCategoryExampleDescription @"description_example"
+#define kWSKeyCategoryTitleList @"display_category_title_list"
 
 // Tour
 #define kWSKeyTour @"tour"
