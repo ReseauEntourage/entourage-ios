@@ -19,14 +19,13 @@ class OTLoginNextViewController: UIViewController {
     var temporaryGooglePlace:GMSPlace? = nil
     var temporaryLocation:CLLocation? = nil
     var temporaryAddressName:String? = nil
-    var temporaryEmail = ""
     var currentPosition = 0
     
     @objc var fromLink:URL? = nil
     
     var currentUser:OTUser? = nil
     
-    var nbOfSteps = 2
+    var nbOfSteps = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +47,7 @@ class OTLoginNextViewController: UIViewController {
     //MARK: - Methods
     
     func goNext() {
-        if let email = currentUser?.email, email.count > 0 {
-            goMain()
-        }
-        else {
-            currentPosition = 1
-            changeController()
-        }
+        goMain()
     }
     
     func goMain() {
@@ -85,12 +78,7 @@ class OTLoginNextViewController: UIViewController {
     }
     
     @IBAction func action_next(_ sender: Any) {
-        if currentPosition == 0 {
-            sendAddAddress()
-        }
-        else {
-            updateUserEmail()
-        }
+        sendAddAddress()
     }
     
     //MARK: - Network
@@ -114,58 +102,13 @@ class OTLoginNextViewController: UIViewController {
         }
     }
     
-    func updateUserEmail() {
-        var isValid = false
-        let message = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_error_email")
-        if temporaryEmail.isValidEmail {
-           isValid = true
-        }
-        
-        if !isValid {
-            let alertvc = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "error"), message: message, preferredStyle: .alert)
-            
-            let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey:"OK"), style: .default, handler: nil)
-            alertvc.addAction(action)
-            
-            self.present(alertvc, animated: true, completion: nil)
-            return
-        }
-        
-        SVProgressHUD.show()
-        let _currentUser = UserDefaults.standard.currentUser
-        _currentUser?.email = temporaryEmail
-        OTLogger.logEvent(Action_Login_Email_Submit)
-        OTAuthService().updateUserInformation(with: _currentUser, success: { (newUser) in
-            newUser?.phone = _currentUser?.phone
-            UserDefaults.standard.currentUser = newUser
-            DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
-                self.goMain()
-            }
-        }) { (error) in
-            OTLogger.logEvent(Error_Login_Email_Submit_Error)
-            DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
-                self.goMain()
-            }
-        }
-    }
-    
     //MARK: - Navigate
     func changeController() {
         ui_bt_next.isEnabled = false
         let _storyboard = UIStoryboard.init(name: "Intro", bundle: nil)
-        if currentPosition == 0 {
-            if  let vc = _storyboard.instantiateViewController(withIdentifier: "Login_place") as? OTLoginPlaceViewController {
-                vc.delegate = self
-                add(asChildViewController: vc)
-            }
-        }
-        else {
-            if let vc = _storyboard.instantiateViewController(withIdentifier: "Login_email") as? OTLoginEmailViewController {
-                vc.delegate = self
-                add(asChildViewController: vc)
-            }
+        if  let vc = _storyboard.instantiateViewController(withIdentifier: "Login_place") as? OTLoginPlaceViewController {
+            vc.delegate = self
+            add(asChildViewController: vc)
         }
         updateProgress()
     }
@@ -253,9 +196,6 @@ extension OTLoginNextViewController: LoginDelegate {
         }
     }
     
-    func updateEmail(email:String) {
-        self.temporaryEmail = email
-    }
     func updateButtonNext(isValid: Bool) {
         ui_bt_next.isEnabled = isValid
     }
@@ -264,6 +204,5 @@ extension OTLoginNextViewController: LoginDelegate {
 //MARK: - Protocol -
 protocol LoginDelegate:class {
     func updateNewAddress(googlePlace:GMSPlace?,gpsLocation:CLLocation?,addressName:String?)
-    func updateEmail(email:String)
     func updateButtonNext(isValid: Bool)
 }

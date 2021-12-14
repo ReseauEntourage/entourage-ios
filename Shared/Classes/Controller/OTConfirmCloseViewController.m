@@ -16,17 +16,15 @@
 #import "OTCloseReason.h"
 
 @interface OTConfirmCloseViewController ()
-@property (weak, nonatomic) IBOutlet UIView *ui_view_actions;
-@property (weak, nonatomic) IBOutlet UIButton *ui_bt_confirm_action;
-@property (weak, nonatomic) IBOutlet UIButton *ui_bt_fail_action;
-@property (weak, nonatomic) IBOutlet UIButton *ui_bt_help_action;
-@property (weak, nonatomic) IBOutlet UIButton *ui_bt_cancel_action;
-@property (weak, nonatomic) IBOutlet UILabel *ui_label_description_action;
-@property (weak, nonatomic) IBOutlet UILabel *ui_label_title_action;
-@property (weak, nonatomic) IBOutlet UILabel *ui_label_help_action;
 
+@property (weak, nonatomic) IBOutlet UIView *ui_view_actions2;
+@property (weak, nonatomic) IBOutlet UIButton *ui_bt_confirm_action2;
+@property (weak, nonatomic) IBOutlet UIButton *ui_bt_fail_action2;
 
-
+@property (weak, nonatomic) IBOutlet UIButton *ui_bt_cancel_action2;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_description_action2;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_title_action2;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_title2_action2;
 
 
 @property (weak, nonatomic) IBOutlet UIView *ui_view_events;
@@ -48,11 +46,11 @@
     
     if ([self.feedItem isAction]) {
         [self.ui_view_events setHidden:YES];
-        [self.ui_view_actions setHidden:NO];
+        [self.ui_view_actions2 setHidden:NO];
     }
     else {
         [self.ui_view_events setHidden:NO];
-        [self.ui_view_actions setHidden:YES];
+        [self.ui_view_actions2 setHidden:YES];
     }
     
     [self setupViews];
@@ -61,14 +59,22 @@
 -(void) setupViews {
     
     //Actions
-    self.ui_label_title_action.text = OTLocalizedString(@"pop_validate_action_title");
-    self.ui_label_description_action.text = OTLocalizedString(@"pop_validate_action_description");
-    self.ui_label_help_action.text = OTLocalizedString(@"pop_validate_action_help");
+    self.ui_label_title_action2.text = OTLocalizedString(@"pop_validate_action_title");
+    self.ui_label_description_action2.text = OTLocalizedString(@"pop_validate_action_description");
+    self.ui_label_title2_action2.text = OTLocalizedString(@"pop_validate_action_title2");
     
-    [self.ui_bt_cancel_action setTitle:OTLocalizedString(@"pop_validate_action_bt_cancel") forState:UIControlStateNormal];
-    [self.ui_bt_confirm_action setTitle:OTLocalizedString(@"pop_validate_action_bt_validate") forState:UIControlStateNormal];
-    [self.ui_bt_fail_action setTitle:OTLocalizedString(@"pop_validate_action_bt_fail") forState:UIControlStateNormal];
-    [self.ui_bt_help_action setTitle:OTLocalizedString(@"pop_validate_action_bt_help") forState:UIControlStateNormal];
+    [self.ui_bt_cancel_action2 setTitle:OTLocalizedString(@"pop_validate_action_bt_cancel") forState:UIControlStateNormal];
+    [self.ui_bt_confirm_action2 setTitle:OTLocalizedString(@"pop_validate_action_bt_validate") forState:UIControlStateNormal];
+    [self.ui_bt_fail_action2 setTitle:OTLocalizedString(@"pop_validate_action_bt_fail") forState:UIControlStateNormal];
+
+    [self.ui_bt_confirm_action2.layer setCornerRadius:5];
+    [self.ui_bt_confirm_action2.layer setBorderWidth:1];
+    [self.ui_bt_confirm_action2.layer setBorderColor:[[UIColor orangeColor] CGColor]];
+    [self.ui_bt_fail_action2.layer setCornerRadius:5];
+    [self.ui_bt_fail_action2.layer setBorderWidth:1];
+    [self.ui_bt_fail_action2.layer setBorderColor:[[UIColor orangeColor] CGColor]];
+    
+    [self.ui_view_actions2.layer setCornerRadius:10];
     
     //Events
     self.ui_label_title_event.text = OTLocalizedString(@"pop_validate_event_title");
@@ -88,11 +94,6 @@
 - (IBAction)doBlockedClose {
     [OTLogger logEvent:@"BlockedClosePopup"];
     [self closeFeedItemWithReason:OTCloseReasonBlockedClose];
-}
-
-- (IBAction)doHelpClose {
-    [OTLogger logEvent:@"HelpRequestOnClosePopup"];
-    [self closeFeedItemWithReason:OTCloseReasonHelpClose];
 }
 
 - (IBAction)doCancel {

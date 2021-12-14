@@ -13,6 +13,8 @@ class OTHomeNeoViewController: UIViewController {
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_title: UILabel!
     
+    var isAllreadyCheckCountNeo = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,6 +58,43 @@ class OTHomeNeoViewController: UIViewController {
                     alertVC.addAction(action)
                     
                     self.present(alertVC, animated: true, completion: nil)
+                }
+            }
+        }
+        else {
+            if isAllreadyCheckCountNeo {
+                return
+            }
+            isAllreadyCheckCountNeo = true
+            if let currentUser = UserDefaults.standard.currentUser {
+                if currentUser.isUserTypeNeighbour() && !currentUser.isEngaged {
+                    var countPop = UserDefaults.standard.integer(forKey: "countPopNeoMode")
+                    if countPop >= 2 {
+                        UserDefaults.standard.setValue(0, forKey: "countPopNeoMode")
+                        
+                        let message = OTLocalisationService.getLocalizedValue(forKey: "home_neo_pop_goExpert_message")
+                        
+                        let alertVC = UIAlertController.init(title: OTLocalisationService.getLocalizedValue(forKey: "home_neo_pop_goExpert_title"), message: message, preferredStyle: .alert)
+                        
+                        let action = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey: "home_neo_pop_goExpert_bt_ok"), style: .default) { (action) in
+                            
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "tapProfilTab"), object: nil)
+                            DispatchQueue.main.async {
+                                alertVC.dismiss(animated: false, completion: nil)
+                            }
+                        }
+                        
+                        let actionCancel = UIAlertAction.init(title: OTLocalisationService.getLocalizedValue(forKey: "home_neo_pop_goExpert_bt_cancel"), style: .default,handler: nil)
+                        
+                        alertVC.addAction(actionCancel)
+                        alertVC.addAction(action)
+                        
+                        self.present(alertVC, animated: true, completion: nil)
+                    }
+                    else {
+                        countPop = countPop + 1
+                        UserDefaults.standard.setValue(countPop, forKey: "countPopNeoMode")
+                    }
                 }
             }
         }

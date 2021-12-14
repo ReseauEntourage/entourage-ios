@@ -47,6 +47,7 @@ NSString *const kKeyEventsCount = @"events_count";
 NSString *const kKeyActionsCount = @"actions_count";
 NSString *const kKeyGoodWavesParticipate = @"good_waves_participation";
 NSString *const kKeyEngaged = @"engaged";
+NSString *const kKeyUnreadCount = @"unread_count";
 
 @interface OTUser ()
 @property (nonatomic, readwrite) NSString *uuid;
@@ -112,6 +113,7 @@ NSString *const kKeyEngaged = @"engaged";
         _memberships = userMemberships;
         
         _interests = [dictionary objectForKey:kInterests];
+        _unreadCount = [dictionary numberForKey:kKeyUnreadCount defaultValue:@0];
     }
     return self;
 }
@@ -177,6 +179,7 @@ NSString *const kKeyEngaged = @"engaged";
     [encoder encodeObject:self.actionsCount forKey:kKeyActionsCount];
     [encoder encodeObject:[NSNumber numberWithBool:self.isGoodWavesValidated] forKey:kKeyGoodWavesParticipate];
     [encoder encodeObject:[NSNumber numberWithBool:self.isEngaged] forKey:kKeyEngaged];
+    [encoder encodeObject:self.unreadCount forKey:kKeyUnreadCount];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -213,6 +216,7 @@ NSString *const kKeyEngaged = @"engaged";
         self.actionsCount = [decoder decodeObjectForKey:kKeyActionsCount];
         self.isGoodWavesValidated = [[decoder decodeObjectForKey:kKeyGoodWavesParticipate] boolValue];
         self.isEngaged = [[decoder decodeObjectForKey:kKeyEngaged] boolValue];
+        self.unreadCount = [decoder decodeObjectForKey:kKeyUnreadCount];
     }
     return self;
 }

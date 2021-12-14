@@ -16,6 +16,7 @@ class OTOnboardingPhoneViewController: UIViewController {
     @IBOutlet weak var ui_tf_phone_prefix: OTCustomTextfield!
     @IBOutlet weak var ui_tf_phone: OTCustomTextfield!
     @IBOutlet weak var ui_pickerView: UIPickerView!
+    @IBOutlet weak var ui_label_error: UILabel!
     
     var pickerDataSource: OTCountryCodePickerViewDataSource!
     
@@ -28,6 +29,8 @@ class OTOnboardingPhoneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ui_label_error.text = OTLocalisationService.getLocalizedValue(forKey: "onboarding_error_phone")
+        ui_label_error.isHidden = true
         pickerDataSource = OTCountryCodePickerViewDataSource.sharedInstance()
         
         ui_tf_phone.activateToolBarWithTitle(OTLocalisationService.getLocalizedValue(forKey: "close"))
@@ -88,10 +91,12 @@ extension OTOnboardingPhoneViewController: UITextFieldDelegate {
         if ui_tf_phone.text?.count ?? 0 >= minimumCharacters  {
             delegate?.updateButtonNext(isValid: true)
             delegate?.validatePhoneNumber(prefix: countryCode, phoneNumber:ui_tf_phone.text)
+            ui_label_error.isHidden = true
         }
         else {
             delegate?.updateButtonNext(isValid: false)
             delegate?.validatePhoneNumber(prefix: countryCode, phoneNumber: nil)
+            ui_label_error.isHidden = false
         }
         if view.frame.height <= 568 {
             view.frame.origin.y = view.frame.origin.y + 40

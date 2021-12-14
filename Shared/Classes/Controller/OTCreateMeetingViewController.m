@@ -44,6 +44,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet OTEncounterDisclaimerBehavior *disclaimer;
 @property (nonatomic, weak) IBOutlet UIButton *locationButton;
+@property (weak, nonatomic) IBOutlet UILabel *ui_label_error_name;
 
 @end
 
@@ -149,21 +150,11 @@
 - (IBAction)sendEncounter:(UIBarButtonItem*)sender {
     [OTLogger logEvent:@"ValidateEncounterClick"];
     if(self.nameTextField.text.length == 0) {
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@""
-                                                                            message:OTLocalizedString(@"encounter_enter_name_of_met_person")
-                                                                     preferredStyle:UIAlertControllerStyleAlert];
-        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:nil]];
-        [self presentViewController:controller animated:YES completion:nil];
+        
+        [self.ui_label_error_name setText:OTLocalizedString(@"encounter_enter_name_of_met_person")];
         return;
     }
-    else if(self.messageTextView.textView.text.length == 0) {
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@""
-                                                                            message:OTLocalizedString(@"encounter_fill_all_fields")
-                                                                     preferredStyle:UIAlertControllerStyleAlert];
-        [controller addAction:[UIAlertAction actionWithTitle:OTLocalizedString(@"tryAgain_short") style:UIAlertActionStyleDefault handler:nil]];
-        [self presentViewController:controller animated:YES completion:nil];
-        return;
-    }
+
     if(!self.encounter)
         [self createEncounter:sender];
     else

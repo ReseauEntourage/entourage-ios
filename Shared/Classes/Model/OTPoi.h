@@ -33,6 +33,7 @@ extern NSString *const kPOITransparentImagePrefix;
 @property(nonatomic, strong) NSString *languageTxt;
 @property(nonatomic, strong) NSString *uuid;
 @property(nonatomic, strong) NSString *soliguideUrl;
+@property(nonatomic, strong) NSNumber *soliguideId;
 /********************************************************************************/
 #pragma mark - Birth & Death
 

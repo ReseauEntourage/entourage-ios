@@ -66,7 +66,7 @@
 "parameters" = "Parameters";
 "menu_scb" = "Conseils pour oser la rencontre";
 "menu_chart" = "Charte éthique";
-"menu_read_chart" = "Consulter la Charte éthique";
+"menu_read_chart" = "Lire la Charte éthique";
 "menu_sign_chart" = "Signer la Charte éthique";
 
 "menu_guide" = "Guide de solidarité";
@@ -434,7 +434,7 @@
 
 "filter_timeframe_title" = "Mis à jour il y a moins de";
 
-"encounter_enter_name_of_met_person" = "Vous devez donner un titre à votre rencontre";
+"encounter_enter_name_of_met_person" = "Veuillez indiquer la ou les personnes rencontrées";
 "encounter_enter_message" = "Vous devez donner une description à votre rencontre";
 
 "encounter_fill_all_fields" = "Veuillez remplir ce champ";
@@ -903,13 +903,14 @@
 "add_event_help_button" = "Quels événements diffuser ?";
 
 //Pop cloture action/event
-"pop_validate_action_title" = "Comment cela s’est passé ?";
-"pop_validate_action_description" = "En clôturant l’action solidaire, vous fermez la discussion et retirez l’action du fil d’actualités.\n\nDites-nous en plus avant de clôturer !";
+"pop_validate_action_title" = "Comment s’est déroulée votre action ?";
+"pop_validate_action_title2" = "Dites-nous en plus avant de clôturer.";
+"pop_validate_action_description" = "En clôturant l’action solidaire, vous fermez la discussion et retirez l’action du fil d’actualité.";
 "pop_validate_action_help" = "Mon action solidaire est bloquée.";
 "pop_validate_action_bt_validate" = "Mon action a réussi";
 "pop_validate_action_bt_fail" = "Mon action n'a pas abouti";
 "pop_validate_action_bt_help" = "Je demande de l'aide";
-"pop_validate_action_bt_cancel" = "Annuler";
+"pop_validate_action_bt_cancel" = "Quitter";
 
 "pop_validate_event_title" = "Comment cela s’est passé ?";
 "pop_validate_event_description" = "En clôturant l’événement, vous fermez la discussion et retirez l’événement du fil d’actualités. \n\nDites-nous en plus avant de clôturer !";
@@ -980,9 +981,11 @@
 "headlines_title_home" = "À la une";
 "outings_title_home" = "Événements";
 "entourages_title_home" = "Demandes et initiatives";
-"home_event_info_user" = "Invité par :";
-"home_action_info_user" = "Une demande de :";
-"home_action_contrib_info_user" = "Une contribution de :";
+"entourage_contributions_title_home" = "Contributions";
+"entourage_ask_for_helps_title_home" = "Demandes";
+"home_event_info_user" = "Invité par ";
+"home_action_info_user" = "Une demande de ";
+"home_action_contrib_info_user" = "Une contribution de ";
 
 "home_help_bt_1" = "Devenir reporter pour\nEntourage";
 "home_help_bt_2" = "Faire un don financier à\nEntourage";
@@ -997,6 +1000,8 @@
 "home_button_helpEntourage" = "J’aide Entourage autrement";
 "home_button_show_more_actions" = "Afficher plus de demandes et d’initiatives";
 "home_button_show_more_events" = "Afficher plus d'événements";
+"home_button_show_more_actions_contrib" = "Voir tous les dons";
+"home_button_show_more_actions_ask" = "Voir toutes les demandes";
 
 //Home NEO
 "home_neo_title" = "Démarrez l’aventure humaine Entourage !";
@@ -1078,6 +1083,33 @@
 "home_neo_pop_info_button_ok" = "OK";
 "home_neo_pop_info_button_profil" = "Voir profil";
 
+"home_neo_pop_goExpert_title" = " ";
+"home_neo_pop_goExpert_message" = "Vous êtes sur le mode “Premiers pas” de l’application.\nAccédez à plus de contenu en désactivant ce mode depuis votre page profil.";
+"home_neo_pop_goExpert_bt_ok" = "Ok";
+"home_neo_pop_goExpert_bt_cancel" = "Non merci";
+
 "setting_home_title" = "📱 MON COMPTE ENTOURAGE";
 "setting_home_description" = "Le mode “Premiers pas” vous guide pour découvrir les programmes Entourage.";
 "setting_home_button_type" = "Mode “Premiers pas”";
+
+//Errors Onboarding
+"onboarding_error_firstname" = "Le prénom doit comporter au moins 2 lettres.";
+"onboarding_error_lastname" = "Le nom doit comporter au moins 2 lettres.";
+"onboarding_error_email" = "L’adresse email est invalide.";
+"onboarding_error_phone" = "Le numéro doit comporter 9 ou 10 chiffres.";
+"onboarding_help_label" = "Besoin d’aide ?\nContacter l'équipe Entourage.";
+
+//Profile pop info switch mode
+"profile_pop_switch_mode_neo" = "Mode “Premier pas“";
+"profile_pop_switch_mode_expert" = "Mode “normal“";
+"profile_pop_switch_mode_title" = "Information";
+"profile_pop_switch_mode_message" = "Vous avez basculé en\n%@\n\nRedirection vers la nouvelle home ?";
+"profile_pop_switch_mode_message_neo" = "Vous êtes sur le point d’activer le mode “Premiers pas” de l’application.\n\nEffectuer cette action ? ";
+"profile_pop_switch_mode_message_expert" = "Vous êtes sur le point de désactiver le mode “Premiers pas” de l’application.\n\nEffectuer cette action ? ";
+"profile_pop_switch_mode_button_no" = "Non";
+"profile_pop_switch_mode_button_yes" = "Oui";
+"info_pop_switch_mode_neo_on" = "Mode “Premier pas“ activé";
+"info_pop_switch_mode_neo_off" = "Mode “Premier pas“ désactivé";
+
+"cell_info_demand_empty" = "C'est plutôt calme ici";
+"cell_info_demand_empty_button" = "Rechercher\nplus loin";

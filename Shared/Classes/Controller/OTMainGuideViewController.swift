@@ -564,6 +564,13 @@ class OTMainGuideViewController: UIViewController {
                 
                 if let _controller = navVc?.topViewController as? OTGuideDetailPoiViewController {
                     _controller.poi = poi
+                    if self.solidarityFilter.isDefaultFilters() {
+                        _controller.filtersSelectedFromMap = "ALL"
+                    }
+                    else {
+                        _controller.filtersSelectedFromMap = self.solidarityFilter.getActiveFilters()
+                    }
+                    
                     self.present(navVc!, animated: true, completion: nil)
                 }
             }

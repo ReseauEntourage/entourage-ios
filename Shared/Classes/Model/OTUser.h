@@ -50,6 +50,7 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic) NSDictionary<NSString *, NSString *> *firebaseProperties;
 @property (strong, nonatomic,nullable) NSString *goal;
 @property (nonatomic,strong) NSArray * _Nullable interests;
+@property (nonatomic, strong) NSNumber *unreadCount;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;

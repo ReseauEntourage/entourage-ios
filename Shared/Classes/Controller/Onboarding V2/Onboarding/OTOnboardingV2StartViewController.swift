@@ -243,23 +243,27 @@ class OTOnboardingV2StartViewController: UIViewController {
             newUser?.phone = _currentUser?.phone
             UserDefaults.standard.currentUser = newUser
             //Set all types selected by default
-            if self.userTypeSelected == .alone {
-                self.updateAlone()
-            }
-            else if self.userTypeSelected == .neighbour {
-                self.updateNeighbour()
-            }
-            
-            DispatchQueue.main.async {
-                SVProgressHUD.dismiss()
-                self.showPopNotification()
-            }
+            self.updateInfosAndShowPop()
         }) { (error) in
             OTLogger.logEvent(Error_Onboarding_Email_Submit_Error)
             DispatchQueue.main.async {
                 SVProgressHUD.dismiss()
                 self.showPopNotification()
             }
+        }
+    }
+    
+    func updateInfosAndShowPop() {
+        if self.userTypeSelected == .alone {
+            self.updateAlone()
+        }
+        else if self.userTypeSelected == .neighbour {
+            self.updateNeighbour()
+        }
+        
+        DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+            self.showPopNotification()
         }
     }
     
@@ -562,6 +566,11 @@ class OTOnboardingV2StartViewController: UIViewController {
             OTLogger.logEvent(Action_Onboarding_Choose_Profile_Skip)
         }
         
+        if currentPosition == .emailPwd {
+            self.updateInfosAndShowPop()
+            return
+        }
+        
         action_next(sender)
     }
 }
@@ -725,7 +734,10 @@ extension OTOnboardingV2StartViewController {
             }
         case .place:
             ui_bt_previous.isHidden = false
-        case .phone,.passCode,.emailPwd:
+        case .emailPwd:
+            ui_bt_previous.isHidden = false
+            ui_bt_pass.isHidden = false
+        case .phone,.passCode:
             ui_bt_previous.isHidden = false
         }
     }

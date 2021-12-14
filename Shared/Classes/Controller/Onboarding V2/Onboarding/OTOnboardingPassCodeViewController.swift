@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class OTOnboardingPassCodeViewController: UIViewController {
     
@@ -29,6 +30,7 @@ class OTOnboardingPassCodeViewController: UIViewController {
     @IBOutlet weak var ui_label_phoneNb: UILabel!
     @IBOutlet weak var ui_label_countdown: UILabel!
     @IBOutlet weak var ui_bt_modify: UIButton!
+    @IBOutlet weak var ui_label_help: UILabel!
     
     weak var delegate:OnboardV2Delegate? = nil
     var tempPasscode = ""
@@ -89,6 +91,8 @@ class OTOnboardingPassCodeViewController: UIViewController {
         ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_title")
         ui_label_description.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_sms_sub")
         ui_label_phoneNb.text = tempPhone
+        
+        ui_label_help.text = OTLocalisationService.getLocalizedValue(forKey: "onboarding_help_label")
     }
     
     //MARK: - IBActions -
@@ -112,9 +116,27 @@ class OTOnboardingPassCodeViewController: UIViewController {
     }
     
     @IBAction func action_modify(_ sender: Any) {
-        //TODO: go back
-        Logger.print("Go back")
         delegate?.goPreviousManually()
+    }
+    
+    @IBAction func action_help(_ sender: Any) {
+        if let _email = OTLocalisationService.getLocalizedValue(forKey: "contact_email_adress"), MFMailComposeViewController.canSendMail()  {
+            
+            let controller = MFMailComposeViewController()
+            controller.setMessageBody("", isHTML: true)
+            controller.setToRecipients([_email])
+            controller.mailComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
+        else {
+            SVProgressHUD.showError(withStatus: OTLocalisationService.getLocalizedValue(forKey: "about_email_notavailable"))
+        }
+    }
+}
+
+extension OTOnboardingPassCodeViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

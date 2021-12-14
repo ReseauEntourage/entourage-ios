@@ -63,7 +63,7 @@ class OTSettingsMenuFirstTableViewCell: UITableViewCell {
     }
     
     func populateCell(hasSignedChart:Bool) {
-        ui_label_prog.text = hasSignedChart ? OTLocalisationService.getLocalizedValue(forKey: "menu_read_chart") : OTLocalisationService.getLocalizedValue(forKey: "menu_sign_chart")
+        ui_label_prog.text = OTLocalisationService.getLocalizedValue(forKey: "menu_read_chart")
     }
 }
 

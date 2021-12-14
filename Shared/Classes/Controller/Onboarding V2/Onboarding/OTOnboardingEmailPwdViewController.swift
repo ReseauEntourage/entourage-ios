@@ -20,6 +20,7 @@ class OTOnboardingEmailPwdViewController: UIViewController {
     
     @IBOutlet weak var ui_tf_pwd: OTCustomTextfield!
     @IBOutlet weak var ui_tf_pwd_confirm: OTCustomTextfield!
+    @IBOutlet weak var ui_label_error: UILabel!
     
     
     weak var delegate:OnboardV2Delegate? = nil
@@ -30,6 +31,8 @@ class OTOnboardingEmailPwdViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ui_label_error.text = OTLocalisationService.getLocalizedValue(forKey: "onboarding_error_email")
+        ui_label_error.isHidden = true
         ui_label_info_mail.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_email_info2")
         ui_label_info_mail2.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_email_info")
         ui_label_title.text = OTLocalisationService.getLocalizedValue(forKey: "onboard_email_pwd_title")
@@ -56,6 +59,17 @@ class OTOnboardingEmailPwdViewController: UIViewController {
         ui_tf_email.resignFirstResponder()
         ui_tf_pwd.resignFirstResponder()
         ui_tf_pwd_confirm.resignFirstResponder()
+        
+        checkEmail()
+    }
+    
+    func checkEmail() {
+        if ui_tf_email.text?.isValidEmail ?? false {
+            ui_label_error.isHidden = true
+        }
+        else {
+            ui_label_error.isHidden = false
+        }
     }
 }
 
@@ -81,6 +95,7 @@ extension OTOnboardingEmailPwdViewController: UITextFieldDelegate {
         if ui_tf_email.text?.isValidEmail ?? false {
             delegate?.goNextManually()
         }
+        checkEmail()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -95,6 +110,7 @@ extension OTOnboardingEmailPwdViewController: UITextFieldDelegate {
         //        else {
         //            textField.resignFirstResponder()
         //        }
+        checkEmail()
         return true
     }
     

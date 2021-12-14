@@ -29,6 +29,9 @@ import SVProgressHUD
     
     var isSoliguide = false
     
+    
+    var filtersSelectedFromMap = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,13 +83,22 @@ import SVProgressHUD
         }
         
         self.ui_tableview.reloadData()
+        
+        if isSoliguide, let _poiId = poi.soliguideId, let _poiUid = poi.uuid {
+            let _str = String.init(format: Soliguide_Show_Poi, _poiId,_poiUid,filtersSelectedFromMap)
+            OTLogger.logEvent(_str)
+        }
     }
     
     //MARK: - IBACTIONS -
     @IBAction func action_show_soliguide(_ sender: Any) {
         //TODO: - In App ou pas ?
-        if let _url = poi.soliguideUrl, let url = URL.init(string: _url) {
+        if let _url = poi.soliguideUrl, let url = URL.init(string: _url), let _poiUid = poi.uuid {
             UIApplication.shared.openURL(url)
+            if let _poiId = poi.soliguideId {
+                let _str = String.init(format:Soliguide_Click, _poiId,_poiUid,filtersSelectedFromMap)
+                OTLogger.logEvent(_str)
+            }
         }
     }
     

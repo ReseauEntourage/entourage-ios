@@ -504,7 +504,7 @@ typedef NS_ENUM(NSInteger) {
     button.layer.cornerRadius = 19;
     [button setTitle:OTLocalizedString(@"start_chat_conversation") forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont fontWithName:@"SFUIText-Bold" size:14]];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor appOrangeColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(startChatWithSelectedUser) forControlEvents:UIControlEventTouchUpInside];
     [footer addSubview:button];
     [button setExclusiveTouch:YES];

@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSString *titleFrom;
 @property (nonatomic) BOOL isFromNeoCourse;
 
+@property (nonatomic) BOOL isExpertArrowAsk;
+@property (nonatomic) BOOL isExpertArrowContrib;
 
 - (void)zoomToCurrentLocation:(id)sender;
 - (void)zoomMapToLocation:(CLLocation*)location;

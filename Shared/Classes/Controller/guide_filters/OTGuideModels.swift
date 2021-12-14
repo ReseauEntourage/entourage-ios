@@ -206,6 +206,17 @@ struct OTGuideFilters {
             break
         }
     }
+    
+    func getActiveFilters() -> String {
+        var activeStr = ""
+        for filter in self.arrayFilters {
+            if filter.active {
+                activeStr = activeStr + "_\(filter.key.rawValue)"
+            }
+        }
+        
+        return activeStr
+    }
 }
 
 @objc class OTGuideFilterItem:NSObject {

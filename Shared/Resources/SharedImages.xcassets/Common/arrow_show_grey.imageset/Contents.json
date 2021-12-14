@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "arrow_show_grey.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

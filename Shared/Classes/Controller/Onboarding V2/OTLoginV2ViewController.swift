@@ -235,7 +235,7 @@ class OTLoginV2ViewController: UIViewController {
                 UserDefaults.standard.set(false, forKey: "user_tours_only")
             }
             
-            if user?.addressPrimary == nil || user?.email?.count == 0 {
+            if user?.addressPrimary == nil {
                 self.goLoginNext(user:user)
             }
             else {

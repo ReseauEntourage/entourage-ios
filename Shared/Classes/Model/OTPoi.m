@@ -32,6 +32,8 @@ NSString *const kPOIHours = @"hours";
 NSString *const kPOILanguages = @"languages";
 NSString *const kPOISource = @"source";
 NSString *const kPOISourceUrl = @"source_url";
+NSString *const kPOISourceSoliguideId = @"source_category_id";
+
 @implementation OTPoi
 
 /**************************************************************************************************/
@@ -78,6 +80,8 @@ NSString *const kPOISourceUrl = @"source_url";
         poi.soliguideUrl = [dictionary stringForKey:kPOISourceUrl];
         NSString *source  = [dictionary stringForKey:kPOISource];
         poi.isSoliguide = [source isEqualToString:@"soliguide"];
+        
+        poi.soliguideId = [dictionary numberForKey:kPOISourceSoliguideId];
         
         if (poi.uuid.integerValue) {
             poi.sid = [NSNumber numberWithInteger:poi.uuid.integerValue];

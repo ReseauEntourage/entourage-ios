@@ -208,10 +208,6 @@ typedef NS_ENUM(NSInteger) {
     
     NSString *warning = nil;
     
-    if (![email isValidEmail]) {
-        warning = OTLocalizedString(@"invalidEmail");
-    }
-    
     if (lastName.length < 2) {
         warning =  OTLocalizedString(@"invalidLastName");
     }
@@ -230,7 +226,11 @@ typedef NS_ENUM(NSInteger) {
     
     self.user.firstName = firstName;
     self.user.lastName = lastName;
-    self.user.email = email;
+    
+    if (email.length > 0) {
+        self.user.email = email;
+    }
+    
     self.user.about = about;
     
     [SVProgressHUD showWithStatus:OTLocalizedString(@"user_edit_saving")];
