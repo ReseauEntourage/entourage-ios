@@ -13,6 +13,7 @@
 		020F46F3271EFDE00091B088 /* CellHomeExpertEventA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020F46F2271EFDE00091B088 /* CellHomeExpertEventA.xib */; };
 		022231FB26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */; };
 		022F04C926F8CEF2001769C4 /* OTSearchEntouragesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */; };
+		023283BE2768F10E009697AC /* OTUserPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = 023283BD2768F10E009697AC /* OTUserPermissions.m */; };
 		02659F5427204206009A3297 /* CellHomeExpertActionA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02659F5327204206009A3297 /* CellHomeExpertActionA.xib */; };
 		02659F562720421B009A3297 /* CellHomeExpertActionB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02659F552720421B009A3297 /* CellHomeExpertActionB.xib */; };
 		0281F16C271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */; };
@@ -552,6 +553,8 @@
 		020F46F2271EFDE00091B088 /* CellHomeExpertEventA.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertEventA.xib; sourceTree = "<group>"; };
 		022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEditActionPublicPrivateViewController.swift; sourceTree = "<group>"; };
 		022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSearchEntouragesViewController.swift; sourceTree = "<group>"; };
+		023283BD2768F10E009697AC /* OTUserPermissions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTUserPermissions.m; sourceTree = "<group>"; };
+		023283BF2768F11F009697AC /* OTUserPermissions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTUserPermissions.h; sourceTree = "<group>"; };
 		02659F5327204206009A3297 /* CellHomeExpertActionA.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellHomeExpertActionA.xib; sourceTree = "<group>"; };
 		02659F552720421B009A3297 /* CellHomeExpertActionB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertActionB.xib; sourceTree = "<group>"; };
 		0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
@@ -1889,6 +1892,8 @@
 				A202E84C2085D2C40058F32C /* OTTourPoint.m */,
 				A202E8112085D2C40058F32C /* OTUser.h */,
 				A202E83D2085D2C40058F32C /* OTUser.m */,
+				023283BF2768F11F009697AC /* OTUserPermissions.h */,
+				023283BD2768F10E009697AC /* OTUserPermissions.m */,
 				37191ADB220B55D700F789B8 /* OTRoleTag.h */,
 				37191ADC220B55D700F789B8 /* OTRoleTag.m */,
 				374E735F228DBBA500B36161 /* OTApiErrorDomain.m */,
@@ -3902,6 +3907,7 @@
 				A202EAF12085D2C70058F32C /* OTPoiCategory.m in Sources */,
 				2BB3BA3D2440E99D0080BBE5 /* Utilitaires.swift in Sources */,
 				A202EC992085D2C80058F32C /* OTMessageTableCellProviderBehavior.m in Sources */,
+				023283BE2768F10E009697AC /* OTUserPermissions.m in Sources */,
 				A202EAD72085D2C70058F32C /* OTPoi.m in Sources */,
 				A202EC872085D2C80058F32C /* OTContactsTableCellProviderBehavior.m in Sources */,
 				37AD8D072268C6E40045FF4E /* OTPlaceholderBackground.m in Sources */,
