@@ -90,7 +90,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    ((OTMyEntouragesFilter*)self.entouragesDataSource.currentFilter).isUnread = self.isMessagesOnly;
     if (!self.anonymousMode) {
         [self loadInvitations];
         [self.entouragesDataSource loadData];

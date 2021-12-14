@@ -16,7 +16,10 @@
 		02659F5427204206009A3297 /* CellHomeExpertActionA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02659F5327204206009A3297 /* CellHomeExpertActionA.xib */; };
 		02659F562720421B009A3297 /* CellHomeExpertActionB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02659F552720421B009A3297 /* CellHomeExpertActionB.xib */; };
 		0281F16C271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */; };
+		028B869C2767AA530060FFD1 /* OTEntourageMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B869B2767AA530060FFD1 /* OTEntourageMessageCell.swift */; };
 		02916A8A2716DA2B00A45AC5 /* OTMyActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */; };
+		02A0C702276369F400749135 /* OTMyEntourageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A0C701276369F400749135 /* OTMyEntourageMainViewController.swift */; };
+		02A0C7042763A10100749135 /* OTMyEntourageMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A0C7032763A10100749135 /* OTMyEntourageMessagesViewController.swift */; };
 		02B1700A273AAB8200F1ED6F /* OTCustomInfoPop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B17009273AAB8200F1ED6F /* OTCustomInfoPop.xib */; };
 		02B1700C273AABA000F1ED6F /* OTCustomInfoPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B1700B273AABA000F1ED6F /* OTCustomInfoPop.swift */; };
 		02F805E72715D88100694BB6 /* OTMyActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */; };
@@ -555,7 +558,10 @@
 		02659F5327204206009A3297 /* CellHomeExpertActionA.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellHomeExpertActionA.xib; sourceTree = "<group>"; };
 		02659F552720421B009A3297 /* CellHomeExpertActionB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertActionB.xib; sourceTree = "<group>"; };
 		0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
+		028B869B2767AA530060FFD1 /* OTEntourageMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEntourageMessageCell.swift; sourceTree = "<group>"; };
 		02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyActionTableViewCell.swift; sourceTree = "<group>"; };
+		02A0C701276369F400749135 /* OTMyEntourageMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyEntourageMainViewController.swift; sourceTree = "<group>"; };
+		02A0C7032763A10100749135 /* OTMyEntourageMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyEntourageMessagesViewController.swift; sourceTree = "<group>"; };
 		02B17009273AAB8200F1ED6F /* OTCustomInfoPop.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTCustomInfoPop.xib; sourceTree = "<group>"; };
 		02B1700B273AABA000F1ED6F /* OTCustomInfoPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTCustomInfoPop.swift; sourceTree = "<group>"; };
 		02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyActionsViewController.swift; sourceTree = "<group>"; };
@@ -2018,6 +2024,9 @@
 		A202E8582085D2C40058F32C /* MyEntourages */ = {
 			isa = PBXGroup;
 			children = (
+				02A0C701276369F400749135 /* OTMyEntourageMainViewController.swift */,
+				02A0C7032763A10100749135 /* OTMyEntourageMessagesViewController.swift */,
+				028B869B2767AA530060FFD1 /* OTEntourageMessageCell.swift */,
 				A202E8592085D2C40058F32C /* OTMyEntouragesViewController.h */,
 				A202E85A2085D2C40058F32C /* OTMyEntouragesOptionsViewController.m */,
 				A202E85B2085D2C40058F32C /* OTManageInvitationViewController.h */,
@@ -3655,6 +3664,7 @@
 				A2F50A1720EA295F009AB222 /* UIColor+Expanded.m in Sources */,
 				A202EC032085D2C80058F32C /* OTFeedsService.m in Sources */,
 				A202EC1F2085D2C80058F32C /* NSNotification+entourage.m in Sources */,
+				028B869C2767AA530060FFD1 /* OTEntourageMessageCell.swift in Sources */,
 				A202EC832085D2C80058F32C /* OTFeedItemsFiltersTableDataSource.m in Sources */,
 				A202EC2F2085D2C80058F32C /* UIStoryboard+entourage.m in Sources */,
 				A202EC192085D2C80058F32C /* OTPoiService.m in Sources */,
@@ -3670,6 +3680,7 @@
 				A2E5FA1020862E780099B989 /* UINavigationBar+Appearance.m in Sources */,
 				A202ECFF2085D2C80058F32C /* OTEntourageChangedHandler.m in Sources */,
 				A202EBEF2085D2C80058F32C /* OTMenuTableViewCell.m in Sources */,
+				02A0C7042763A10100749135 /* OTMyEntourageMessagesViewController.swift in Sources */,
 				A202EBCD2085D2C80058F32C /* OTUserEditPasswordViewController.m in Sources */,
 				2BB2E396244F45AA003011C9 /* OTOnboardingTypeViewController.swift in Sources */,
 				A202EB1F2085D2C70058F32C /* OTDescriptionCell.m in Sources */,
@@ -3933,6 +3944,7 @@
 				A202EB032085D2C70058F32C /* OTAssociation.m in Sources */,
 				374E7360228DBBA500B36161 /* OTApiErrorDomain.m in Sources */,
 				A202EC6D2085D2C80058F32C /* OTInvitationsCollectionSource.m in Sources */,
+				02A0C702276369F400749135 /* OTMyEntourageMainViewController.swift in Sources */,
 				2B13BD8A25FA5A9300B0E071 /* HomeCard.swift in Sources */,
 				A202EBC52085D2C80058F32C /* OTMainViewController.m in Sources */,
 				A202EAFF2085D2C70058F32C /* OTFeedItemMessage.m in Sources */,

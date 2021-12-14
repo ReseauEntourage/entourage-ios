@@ -216,7 +216,7 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     
     if (!options) return;
     
-    [[FIRConfiguration sharedInstance] setLoggerLevel:FIRLoggerLevelDebug];
+    [[FIRConfiguration sharedInstance] setLoggerLevel:FIRLoggerLevelMin];//FIRLoggerLevelDebug
     [FIRApp configureWithOptions:options];
     [FIRAnalytics setUserPropertyString:[OTAuthService currentUserAuthenticationLevel]
                                 forName:@"AuthenticationLevel"];

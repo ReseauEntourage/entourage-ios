@@ -12,5 +12,6 @@
 @interface OTMyEntouragesViewController : UIViewController
 
 @property (nonatomic, weak) id<OTOptionsDelegate> optionsDelegate;
-
+- (void)showUnread;
+@property(nonatomic) BOOL isMessagesOnly;
 @end

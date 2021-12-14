@@ -93,3 +93,6 @@
 #import "OTEntourageService.h"
 #import "OTNextStatusButtonBehavior.h"
 #import "OTConfirmCloseViewController.h"
+
+#import "OTEntouragesTableViewCell.h"
+#import "OTSummaryProviderBehavior.h"
