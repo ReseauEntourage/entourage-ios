@@ -27,6 +27,8 @@ class OTHomeExpertViewController: UIViewController {
     
     var isFromModifyZone = false
     
+    var isNeighbour = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -206,10 +208,26 @@ class OTHomeExpertViewController: UIViewController {
 extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource, CellClickDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.isNeighbour = false
+        if let currentUser = UserDefaults.standard.currentUser {
+            let isNeighbour = currentUser.isUserTypeNeighbour()
+            if isNeighbour {
+                self.isNeighbour = true
+                return arrayFeed.count > 0 ? arrayFeed.count + 1 : arrayFeed.count
+            }
+        }
+        
         return arrayFeed.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == arrayFeed.count && self.isNeighbour {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellInfo", for: indexPath) as! OTHomeInfoCell
+            
+            cell.populate(isNeo: false, delegate: self)
+            return cell
+        }
         
         var cell = OTHomeCellCollectionView()
         
@@ -228,6 +246,10 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == arrayFeed.count && self.isNeighbour {
+            return UITableView.automaticDimension
+        }
         
         if arrayFeed[indexPath.row].type == .Headlines {
             return CELL_HEADLINES_HEIGHT
@@ -359,5 +381,12 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
         let storyB = UIStoryboard.init(name: "Main", bundle: nil)
         let vc = storyB.instantiateViewController(withIdentifier: "HomeHelpVC")
         self.parent?.navigationController?.show(vc, sender: nil)
+    }
+}
+
+
+extension OTHomeExpertViewController : HomeInfoDelegate {
+    func showProfile() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "tapProfilTab"), object: nil)
     }
 }

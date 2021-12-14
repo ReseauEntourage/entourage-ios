@@ -38,6 +38,7 @@
 
 //New Feed
 #define API_URL_NEW_FEED    @"home?token=%@&split_entourages=true"
+#define API_URL_SEARCH_ENTOURAGES   @"entourages/search?token=%@"
 
 // Tours
 #define API_URL_TOUR_JOIN_REQUEST @"tours/%@/users?token=%@"

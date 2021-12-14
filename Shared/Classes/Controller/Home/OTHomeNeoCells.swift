@@ -78,3 +78,50 @@ class OTHomeNeoCell: UITableViewCell {
         case Grey
     }
 }
+
+
+class OTHomeInfoCell: UITableViewCell {
+    
+    @IBOutlet weak var ui_title: UILabel!
+    @IBOutlet weak var ui_subtitle: UILabel!
+    
+    @IBOutlet weak var ui_button: UIButton!
+    weak var delegate:HomeInfoDelegate? = nil
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        ui_button.accessibilityLabel = "Vers profil"
+    }
+    
+    func populate(isNeo:Bool, delegate:HomeInfoDelegate) {
+        let title = isNeo ? OTLocalisationService.getLocalizedValue(forKey: "home_neo_cell_info_title") : OTLocalisationService.getLocalizedValue(forKey: "home_expert_cell_info_title")
+        let subtitle = isNeo ? OTLocalisationService.getLocalizedValue(forKey: "home_neo_cell_info_subtitle") : OTLocalisationService.getLocalizedValue(forKey: "home_expert_cell_info_subtitle")
+        ui_title.text = title
+        ui_subtitle.text = subtitle
+        self.delegate = delegate
+    }
+    
+    @IBAction func action_show(_ sender: Any) {
+        delegate?.showProfile()
+    }
+}
+
+class OTHomeTopCell: UITableViewCell {
+    
+    @IBOutlet weak var ui_title: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let _message:String = OTLocalisationService.getLocalizedValue(forKey: "home_neo_title")
+        let _mess_Orange:String = OTLocalisationService.getLocalizedValue(forKey: "home_neo_title_bold")
+        let _title = Utilitaires.formatString(stringMessage: _message, coloredTxt: _mess_Orange, color: .black, colorHighlight: UIColor.appOrange(), fontSize: 24.0, fontWeight: .regular, fontColoredWeight: .regular)
+        
+        ui_title.attributedText = _title
+       
+    }
+}
+
+protocol HomeInfoDelegate:AnyObject {
+    func showProfile()
+}

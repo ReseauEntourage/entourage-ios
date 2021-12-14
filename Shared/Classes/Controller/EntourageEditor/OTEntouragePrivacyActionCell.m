@@ -44,6 +44,9 @@
         self.ui_label_public.font = [UIFont systemFontOfSize:15 weight:UIFontWeightRegular];
         self.ui_label_description_private.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
         self.ui_label_description_public.font = [UIFont systemFontOfSize:14 weight:UIFontWeightLight];
+        
+        [self.ui_label_title_alone setText:OTLocalizedString(@"action_title_private")];
+        [self.ui_label_description_alone setText:OTLocalizedString(@"action_description_private")];
     }
     else {
         [self.ui_image_circle_fill_private setHidden:YES];
@@ -53,6 +56,9 @@
         self.ui_label_public.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
         self.ui_label_description_private.font = [UIFont systemFontOfSize:14 weight:UIFontWeightLight];
         self.ui_label_description_public.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+        
+        [self.ui_label_title_alone setText:OTLocalizedString(@"action_title_public")];
+        [self.ui_label_description_alone setText:OTLocalizedString(@"action_description_public")];
     }
 }
 
@@ -64,6 +70,9 @@
     [self changeSelectionIsPublic:isPublic];
 }
 //MARK: - IBActions -
+- (IBAction)action_select_alone:(id)sender {
+    [self.delegate editEntourageActionPrivacy];
+}
 - (IBAction)action_select_public:(id)sender {
     [self changeSelectionIsPublic:YES];
     [self.delegate editEntourageActionChangePrivacyPublic:YES];

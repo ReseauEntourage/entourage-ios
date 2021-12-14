@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KRS-0L-Lvt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KRS-0L-Lvt">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -185,6 +185,7 @@
                         <outlet property="createTourLabel" destination="pVl-d3-s2f" id="sId-Va-G6O"/>
                         <outlet property="togglePOIButton" destination="e0k-nN-D8h" id="7s7-gu-7yp"/>
                         <outlet property="togglePOILabel" destination="tym-1e-o0T" id="WSY-f6-XqL"/>
+                        <outlet property="ui_button_close" destination="gL7-9X-HfF" id="Rao-rT-JSh"/>
                         <outlet property="ui_button_show_web" destination="shF-PN-TKW" id="R3Y-Ia-ZIH"/>
                         <outlet property="ui_constraint_image_height" destination="7NL-wW-b0p" id="Jru-Of-mJn"/>
                         <outlet property="ui_constraint_image_top" destination="lzv-3g-ieK" id="qz9-uC-HmH"/>

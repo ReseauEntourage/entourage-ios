@@ -91,12 +91,12 @@ class OTLoginChangePhoneViewController: UIViewController {
             email = _email
         }
         
-        OTLoginChangeService.postChangePhone(oldPhone: oldPhone, newPhone: newPhone, email: email) { isOk in
-            if isOk {
-                self.ui_view_send_ok.isHidden = false
+        OTLoginChangeService.postChangePhone(oldPhone: oldPhone, newPhone: newPhone, email: email) { errorStr in
+            if let errorStr = errorStr {
+                self.showError(title: OTLocalisationService.getLocalizedValue(forKey:"login_change_error_return"), message: errorStr)
             }
             else {
-                self.showError(title: OTLocalisationService.getLocalizedValue(forKey:"login_change_error_return"), message: OTLocalisationService.getLocalizedValue(forKey: "login_change_error_return_detail"))
+                self.ui_view_send_ok.isHidden = false
             }
         }
     }
@@ -132,7 +132,7 @@ extension OTLoginChangePhoneViewController: UITextFieldDelegate {
 
 //MARK: - Network OTLoginChangeService -
 struct OTLoginChangeService {
-    static func postChangePhone(oldPhone:String, newPhone:String,email:String?, completion: @escaping (_ isOk: Bool)->()) {
+    static func postChangePhone(oldPhone:String, newPhone:String,email:String?, completion: @escaping (_ error: String?)->()) {
         let manager = OTHTTPRequestManager.sharedInstance()
         
         let url = API_URL_SEND_CHANGE_CODE
@@ -147,10 +147,31 @@ struct OTLoginChangeService {
         }
         
         manager?.post(withUrl: url, andParameters: params, andSuccess: { (response) in
-            completion(true)
+            completion(nil)
         }, andFailure: { (error) in
-            Logger.print("***** return post Share error \(String(describing: error))")
-            completion(false)
+            completion(checkPhoneChangeError(error: error.debugDescription))
         })
+    }
+    
+    private static func checkPhoneChangeError(error:String) -> String {
+        var message = ""
+        
+        if error.contains("USER_NOT_FOUND") {
+            message = OTLocalisationService.getLocalizedValue(forKey:"login_change_error_not_found")
+        }
+        else if error.contains("USER_DELETED") {
+            message = OTLocalisationService.getLocalizedValue(forKey:"login_change_error_deleted")
+        }
+        else if error.contains("USER_BLOCKED") {
+            message = OTLocalisationService.getLocalizedValue(forKey:"login_change_error_blocked")
+        }
+        else if error.contains("IDENTICAL_PHONES") {
+            message = OTLocalisationService.getLocalizedValue(forKey:"login_change_error_identical")
+        }
+        else {
+            message = OTLocalisationService.getLocalizedValue(forKey:"login_change_error_generic")
+        }
+        
+        return message
     }
 }

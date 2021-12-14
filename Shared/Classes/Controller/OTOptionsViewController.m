@@ -159,6 +159,7 @@
     buttonBig.frame = CGRectMake(PADDING_HORIZONTAL, y, [UIScreen mainScreen].bounds.size.width - (PADDING_HORIZONTAL * 2), BIG_BUTTON_SIDE);
     buttonBig.backgroundColor = [UIColor colorWithDisplayP3Red:100 / 255.0 green:100 / 255.0 blue:100 / 255.0 alpha:0.0];
     [buttonBig addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    buttonBig.accessibilityLabel = optionName;
     [self.view addSubview:buttonBig];
 
     float diffForSub = optionSubtitle.length > 0 ? ACTION_LABEL_HEIGHT / 2 : 0;

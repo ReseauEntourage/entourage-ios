@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_title;
 @property (nonatomic, weak) IBOutlet UIButton *createTourButton;
+@property (weak, nonatomic) IBOutlet UIButton *ui_button_close;
 @property (nonatomic, weak) IBOutlet UILabel *createTourLabel;
 @property (weak, nonatomic) IBOutlet UIButton *ui_button_show_web;
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_title_button;
@@ -38,6 +39,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    _ui_button_close.accessibilityLabel = @"fermer";
     
     if (!CGPointEqualToPoint(self.fingerPoint, CGPointZero) &&
         [OTAppConfiguration supportsAddingActionsFromMapOnLongPress]) {
@@ -130,6 +132,7 @@
     }
     
     [self.ui_label_title_button setText:OTLocalizedString(buttonFaq)];
+    self.ui_button_show_web.accessibilityLabel = OTLocalizedString(buttonFaq);
     
     
     bool isUserHelp = [currentUser.goal.lowercaseString isEqualToString:@"ask_for_help"];

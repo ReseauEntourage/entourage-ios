@@ -11,6 +11,7 @@
 #import "OTTableDataSourceBehavior.h"
 #import "UIImageView+entourage.h"
 #import "OTPillLabelView.h"
+#import "entourage-Swift.h"
 
 @implementation OTMembersCell
 
@@ -23,13 +24,18 @@
     if (item.hasToShowRoleAndPartner) {
         [self.ui_label_title_role setHidden:NO];
         [self.ui_button_asso setHidden:NO];
+        [self.ui_label_asso setHidden:NO];
         NSString *roleStr = @"";
         if (item.partner_role_title.length > 0) {
             roleStr = [NSString stringWithFormat:@"%@ -",item.partner_role_title];
         }
         self.ui_label_title_role.text = roleStr;
         
-        [self.ui_button_asso setTitle:item.partner.name forState:UIControlStateNormal];
+        NSString *titleButton = [NSString stringWithFormat:@"%@ %@",item.partner.name,[OTLocalisationService getLocalizedValueForKey:@"info_asso_user"]];
+        NSString *coloredStr = [OTLocalisationService getLocalizedValueForKey:@"info_asso_user"];
+        NSAttributedString *attrStr = [Utilitaires formatStringWithStringMessage:titleButton coloredTxt:coloredStr color:[UIColor appOrangeColor] colorHighlight:[UIColor appOrangeColor] fontSize:15 fontWeight:UIFontWeightMedium fontColoredWeight:UIFontWeightBold];
+        
+        self.ui_label_asso.attributedText = attrStr;
         
         [self.ui_button_asso setTag:item.partner.aid.integerValue];
     }
@@ -38,6 +44,7 @@
         self.ui_constraint_top_margin.constant = 40;
         [self.ui_label_title_role setHidden:YES];
         [self.ui_button_asso setHidden:YES];
+        [self.ui_label_asso setHidden:YES];
     }
     
     [self.btnProfile setupAsProfilePictureFromUrl:item.avatarUrl];
@@ -51,7 +58,7 @@
             [roles addObject:role];
         }
     }
-
+    
     [self.rolesStackView.arrangedSubviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     for (NSString *role in roles) {
         OTRoleTag *tag = [[OTRoleTag alloc] initWithName:role];

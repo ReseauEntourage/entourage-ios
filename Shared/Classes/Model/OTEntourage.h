@@ -32,4 +32,5 @@
 
 @property (nonatomic, strong) NSString *entourage_event_url_image_portrait;
 @property (nonatomic, strong) NSString *entourage_event_url_image_landscape;
+-(BOOL) isPublicEntourage;
 @end

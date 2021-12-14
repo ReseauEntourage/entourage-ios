@@ -164,6 +164,9 @@
 "ongoing" = "En cours";
 "cancelled_join_request" = "Demande annulée";
 "join_pending_new" = "Demandé";
+"info_action_private" = "Action privée";
+"info_event_private" = "Événement privé";
+"info_label_private_view" = "Votre demande de participation est en attente de validation.";
 
 "no_data_entourages" = "C'est plutôt calme par ici !\n\nOn dirait bien qu'il n'y a aucune activité à proximité... pour l'instant ! \n\nVous aussi, vous pouvez créer une activité solidaire : appuyez sur + en bas à droite";
 
@@ -617,8 +620,8 @@
 "agir_subtitle_event" = "à une date précise";
 "action_title_public" = "Public";
 "action_title_private" = "Privé";
-"action_description_public" = "Votre action solidaire est ouverte à tout membre du réseau souhaitant participer.";
-"action_description_private" = "Les membres d’Entourage vous demandent votre accord avant de participer.";
+"action_description_public" = "Votre action est publique, tout le monde peut y participer librement.";
+"action_description_private" = "Votre action est privée, vous aurez le choix  d’accepter ou de refuser toute personne demandant à y participer.";
 "action_title_pres_de" = "Près de";
 "addEventStartDate" = "Date de début *";
 "addEventEndDate" = "Date de fin";
@@ -745,7 +748,12 @@
 "login_change_error_mail" = "Veuillez vérifier votre adresse Email";
 
 "login_change_error_return" = "Erreur";
-"login_change_error_return_detail" = "L’ancien numéro est inconnu ou supprimé.\nVeuillez vérifier.";
+
+"login_change_error_not_found" = "L’ancien numéro est inconnu.\nVeuillez vérifier.";
+"login_change_error_deleted" = "L’ancien numéro a été supprimé.\nVeuillez vérifier.";
+"login_change_error_blocked" = "L’ancien numéro a été bloqué.\nVeuillez vérifier.";
+"login_change_error_identical" = "Les deux numéros sont identiques.\nVeuillez vérifier le nouveau numéro.";
+"login_change_error_generic" = "L’ancien numéro est inconnu ou supprimé.\nVeuillez vérifier les numéros.";
 
 //Onboarding Assos
 "onboard_asso_start_title" = "Ça tombe bien !";
@@ -810,8 +818,8 @@
 "profile_activities" = "Activité(s) : %@";
 "profile_activity_not_selected" = "Activité non sélectionnée";
 
-"profile_my_zones" = "Ma zone d'actions";
-"profile_my_zones_description" = "Soyez notifié.e des initiatives solidaires et besoins dans cette zone";
+"profile_my_zones" = "Mes zones d'actions";
+"profile_my_zones_description" = "Soyez notifié.e des initiatives solidaires et besoins dans ces zones";
 "profile_button_add2nd_zone" = "Ajouter une zone d'action";
 "profile_button_add2nd_zone_lite" = "Ajouter";
 "profile_button_add2nd_zone_lite2" = "Ajouter une zone";
@@ -960,6 +968,12 @@
 
 "confirm_cancel_demand" = "Confirmez-vous vouloir retirer votre demande ?";
 
+"pop_info_follow_private_action_title" = "Demande de\nparticipation";
+"pop_info_follow_private_action_message" = "Pour participer à cette action privée, le créateur de cette action doit valider votre participation.\n\nUne fois votre demande acceptée, vous pourrez accéder à la conversation de groupe.";
+"pop_info_follow_private_event_message" = "Pour participer à cet événement privé, le créateur de cet événement doit valider votre participation.\n\nUne fois votre demande acceptée, vous pourrez accéder à la conversation de groupe.";
+"pop_info_follow_private_action_bt_ok" = "Confirmer";
+"pop_info_follow_private_action_bt_cancel" = "Annuler";
+
 //Pop info photo profile
 "info_photo_profile_title" = "Ajoutez votre photo de profil et inspirez encore plus confiance";
 "info_photo_profile_description" = "Vous n’avez pas encore de photo de profil. Les personnes découvrant votre action solidaire seront plus susceptibles de la rejoindre si vous en ajoutez une.";
@@ -1012,6 +1026,12 @@
 "home_neo_cell2_title" = "Agir maintenant";
 "home_neo_cell2_description" = "Passez à l’action en rejoignant les initiatives solidaires de votre quartier.";
 "home_neo_cell2_button" = "SE LANCER";
+
+"home_neo_cell_info_title" = "Vous êtes sur le mode Premiers pas.";
+"home_neo_cell_info_subtitle" = "Prêt à découvrir tous nos programmes ? Désactivez le mode Premiers pas ici.";
+"home_neo_title_neo" = "Premiers pas";
+"home_expert_cell_info_title" = "Vous êtes sur le mode normal de l’application.";
+"home_expert_cell_info_subtitle" = "Vous souhaitez être guidé pour débuter sur Entourage ? Activez le mode Premiers pas ici.";
 
 //Neo help
 "home_neo_help_title" = "Entourage vous accompagne dans votre démarche";
@@ -1113,3 +1133,4 @@
 
 "cell_info_demand_empty" = "C'est plutôt calme ici";
 "cell_info_demand_empty_button" = "Rechercher\nplus loin";
+"info_asso_user" = "• S'abonner >";

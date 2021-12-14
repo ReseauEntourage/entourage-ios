@@ -26,4 +26,5 @@
 - (void)updateEventStartDate:(NSDate*)date;
 - (void)updateEventEndDate:(NSDate*)date;
 @property (nonatomic) BOOL isHomeNeo;
+-(void)editEntourageActionPrivacy;
 @end

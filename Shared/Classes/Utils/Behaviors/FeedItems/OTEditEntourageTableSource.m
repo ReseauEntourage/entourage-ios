@@ -138,6 +138,11 @@
     self.entourage.isPublic = [NSNumber numberWithBool:isPublic];
 }
 
+-(void)editEntourageActionPrivacy {
+    [self.editEntourageNavigation editActionConfidentiality:self.entourage];
+    
+}
+
 - (void)editEntouragePhotoFromGallery {
     [self.editEntourageNavigation editEntouragePhotoFromGallery:self.entourage];
 }

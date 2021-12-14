@@ -12,7 +12,7 @@ import SVProgressHUD
 
 class OTMenuProfileViewController: UIViewController {
     
-    @IBOutlet weak var ui_tableview: UITableView!
+    @IBOutlet weak var ui_tableview: UITableView?
     var uuidInfo = "*****"
     
     var currentUser:OTUser!
@@ -32,7 +32,7 @@ class OTMenuProfileViewController: UIViewController {
             Messaging.messaging().token { token, error in
               if let _token = token, let _info = Bundle.fullCurrentVersion() {
                     self.uuidInfo = "v\(_info)\nFIId: \(_token)"
-                    self.ui_tableview.reloadData()
+                    self.ui_tableview?.reloadData()
                 }
             }
         }
@@ -50,12 +50,19 @@ class OTMenuProfileViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         OTLogger.logEvent("View_Profile_Menu")
         currentUser = UserDefaults.standard.currentUser
-        self.ui_tableview.reloadData()
+        self.ui_tableview?.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    func gotoTop() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        DispatchQueue.main.async {
+            self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
     }
     
     func loadUser() {
@@ -65,13 +72,13 @@ class OTMenuProfileViewController: UIViewController {
             if let _user = user {
                 self.currentUser = _user
                 DispatchQueue.main.async {
-                    self.ui_tableview.reloadData()
+                    self.ui_tableview?.reloadData()
                 }
             }
         }) { (error) in
             SVProgressHUD.showError(withStatus: OTLocalisationService.getLocalizedValue(forKey: "user_profile_error"))
             DispatchQueue.main.async {
-                self.ui_tableview.reloadData()
+                self.ui_tableview?.reloadData()
             }
         }
     }
@@ -80,7 +87,7 @@ class OTMenuProfileViewController: UIViewController {
     @objc func updateUser() {
         self.currentUser = UserDefaults.standard.currentUser
         let indexPath = IndexPath(row: 0, section: 0)
-        self.ui_tableview.reloadRows(at: [indexPath], with: .automatic)
+        self.ui_tableview?.reloadRows(at: [indexPath], with: .automatic)
     }
     
     //MARK: - IBActions -
@@ -306,7 +313,7 @@ extension OTMenuProfileViewController: TapMenuProfileDelegate {
         
         let buttonCancel = UIAlertAction.init(title: "profile_pop_switch_mode_button_no".localized, style: .cancel) { action in
             DispatchQueue.main.async {
-                self.ui_tableview.reloadData()
+                self.ui_tableview?.reloadData()
             }
             alertVc.dismiss(animated: true, completion: nil)
         }
