@@ -54,6 +54,7 @@ class OTMyEntourageMessagesViewController: UIViewController {
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         SVProgressHUD.dismiss()
+                        self.arrayITems.removeAll()
                         self.arrayITems.append(contentsOf: items)
                         self.ui_tableView.reloadData()
                     }
@@ -64,13 +65,11 @@ class OTMyEntourageMessagesViewController: UIViewController {
 
     func requestData(completion: @escaping (Any?, Error?) -> Void) {
         SVProgressHUD.show()
-        //Status -> all / active
-        let params:[String:Any] = ["per":LIMIT_PAGING,"entourage_types":"ask_for_help,contribution","status":"active","unread_only":"false","page":currentPage]
         
-        OTFeedsService().getMyFeeds(withParameters: params) { items in
-            completion(items,nil)
-        } failure: { error in
-            completion(nil,error)
+        let params:[String:Any] = ["per":LIMIT_PAGING,"page":currentPage]
+        
+        OTMessagesService.getMessagesOne2One(withParams: params) { items, error in
+            completion(items,error)
         }
     }
     

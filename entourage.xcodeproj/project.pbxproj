@@ -11,6 +11,7 @@
 		0205197726F1E49E003B277B /* OTPopInfoCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205197626F1E49E003B277B /* OTPopInfoCustom.swift */; };
 		020F46EF271EF92A0091B088 /* CellHomeExpertEventB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020F46EE271EF92A0091B088 /* CellHomeExpertEventB.xib */; };
 		020F46F3271EFDE00091B088 /* CellHomeExpertEventA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020F46F2271EFDE00091B088 /* CellHomeExpertEventA.xib */; };
+		021D1F8F276B500100F04E95 /* OTMessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021D1F8E276B500100F04E95 /* OTMessagesService.swift */; };
 		022231FB26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */; };
 		022F04C926F8CEF2001769C4 /* OTSearchEntouragesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */; };
 		023283BE2768F10E009697AC /* OTUserPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = 023283BD2768F10E009697AC /* OTUserPermissions.m */; };
@@ -554,6 +555,7 @@
 		0205197626F1E49E003B277B /* OTPopInfoCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPopInfoCustom.swift; sourceTree = "<group>"; };
 		020F46EE271EF92A0091B088 /* CellHomeExpertEventB.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellHomeExpertEventB.xib; sourceTree = "<group>"; };
 		020F46F2271EFDE00091B088 /* CellHomeExpertEventA.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertEventA.xib; sourceTree = "<group>"; };
+		021D1F8E276B500100F04E95 /* OTMessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMessagesService.swift; sourceTree = "<group>"; };
 		022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEditActionPublicPrivateViewController.swift; sourceTree = "<group>"; };
 		022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSearchEntouragesViewController.swift; sourceTree = "<group>"; };
 		023283BD2768F10E009697AC /* OTUserPermissions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTUserPermissions.m; sourceTree = "<group>"; };
@@ -2029,6 +2031,7 @@
 		A202E8582085D2C40058F32C /* MyEntourages */ = {
 			isa = PBXGroup;
 			children = (
+				021D1F8E276B500100F04E95 /* OTMessagesService.swift */,
 				02A0C701276369F400749135 /* OTMyEntourageMainViewController.swift */,
 				02A0C7032763A10100749135 /* OTMyEntourageMessagesViewController.swift */,
 				028B869B2767AA530060FFD1 /* OTEntourageMessageCell.swift */,
@@ -3924,6 +3927,7 @@
 				37AD8D072268C6E40045FF4E /* OTPlaceholderBackground.m in Sources */,
 				A202EB112085D2C70058F32C /* OTHeatZoneCollectionViewCell.m in Sources */,
 				A202EB452085D2C80058F32C /* OTJoinRequestedNotOwnerCell.m in Sources */,
+				021D1F8F276B500100F04E95 /* OTMessagesService.swift in Sources */,
 				A202EC8D2085D2C80058F32C /* OTDataSourceBehavior.m in Sources */,
 				A202ED052085D2C80058F32C /* OTEntourageMessaging.m in Sources */,
 				A202EAE32085D2C70058F32C /* OTUnreadMessageCount.m in Sources */,

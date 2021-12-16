@@ -14,4 +14,5 @@
 @property (nonatomic, weak) id<OTOptionsDelegate> optionsDelegate;
 - (void)showUnread;
 @property(nonatomic) BOOL isMessagesOnly;
+@property(nonatomic) BOOL isFirstLaunch;
 @end

@@ -30,7 +30,7 @@
 
 - (void)setTotalUnreadCount:(NSNumber *)count {
     NSDictionary* notificationInfo = @{kNotificationTotalUnreadCountKey:count};
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateTotalUnreadCountNotification object:notificationInfo];
+   // [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateTotalUnreadCountNotification object:notificationInfo];
 }
 
 - (void)setGroupUnreadMessagesCount:(NSNumber *)feedId stringId:(NSString*)stringId count:(NSNumber *)count {

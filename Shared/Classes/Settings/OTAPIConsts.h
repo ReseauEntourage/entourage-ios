@@ -112,4 +112,8 @@
 
 
 #define API_URL_SEND_CHANGE_CODE @"users/request_phone_change"
+
+//Message 1 to 1 / groups
+#define API_URL_MESSAGES_ONE2ONE    @"conversations/private?token=%@"
+#define API_URL_MESSAGES_GROUP    @"conversations/group?token=%@"
 #endif /* OTAPIConsts_h */

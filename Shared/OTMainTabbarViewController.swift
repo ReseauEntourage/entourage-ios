@@ -367,6 +367,12 @@ extension OTMainTabbarViewController: UITabBarControllerDelegate {
             oldItemSelected = currentItemSelected
             currentItemSelected = item.tag
             boldSelectedItem()
+            
+            if item.tag == 3 {
+                if let nav = messagesVC, let vc = nav.viewControllers[0] as? OTMyEntourageMainViewController {
+                    vc.setupVcsAfterTapTabbar()
+                }
+            }
         }
     }
 

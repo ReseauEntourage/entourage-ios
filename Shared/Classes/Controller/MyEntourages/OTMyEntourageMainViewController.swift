@@ -79,9 +79,10 @@ class OTMyEntourageMainViewController: UIViewController {
             
             if let _ = groupsVC {
                 addChild(groupsVC!)
+                (groupsVC as? OTMyEntouragesViewController)?.isFirstLaunch = true
                 groupsVC?.view.frame.size = self.ui_view_container.frame.size
                 ui_view_container.addSubview(groupsVC!.view)
-                (messagesVC as? OTMyEntouragesViewController)?.isMessagesOnly = false
+                (groupsVC as? OTMyEntouragesViewController)?.isMessagesOnly = false
                 groupsVC!.didMove(toParent: self)
             }
         }
@@ -106,6 +107,14 @@ class OTMyEntourageMainViewController: UIViewController {
         }
     }
 
+    func setupVcsAfterTapTabbar() {
+        if tabSelectedIndex == 0 {
+            (groupsVC as? OTMyEntouragesViewController)?.isFirstLaunch = true
+        }
+        else {
+            (messagesVC as? OTMyEntourageMessagesViewController)?.loadDatas()
+        }
+    }
     
     @IBAction func action_select_group(_ sender: Any) {
         changeButtons(newposition: 0)
