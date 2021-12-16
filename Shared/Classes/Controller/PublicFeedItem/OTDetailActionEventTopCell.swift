@@ -225,6 +225,7 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
     @IBOutlet weak var ui_constraint_bottom_username: NSLayoutConstraint!
     @IBOutlet weak var ui_constraint_top_username: NSLayoutConstraint!
     @IBOutlet weak var ui_label_ambassador: UILabel?
+    @IBOutlet weak var ui_label_ambassador2: UILabel?
     
     weak var delegate:ActionCellCreatorDelegate? = nil
     
@@ -236,6 +237,7 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
         self.delegate = delegate
         
         ui_label_ambassador?.isHidden = true
+        ui_label_ambassador2?.isHidden = true
         
         if feedItem.isNeighborhood() || feedItem.isPrivateCircle() {
             ui_bt_avatar.isHidden = true;
@@ -273,23 +275,14 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
             self.ui_label_asso?.attributedText = attStr
             
             self.ui_button_asso.tag = feedItem.author.partner.aid.intValue
+            
+            if let _autUser = authorUser, _autUser.roles.count > 0 {
+                self.updateAmbassadorLabel(ambassadorLabel: self.ui_label_ambassador2, authorUser: _autUser)
+            }
         }
         else if let _autUser = authorUser, _autUser.roles.count > 0 {
-            for role in _autUser.roles {
-                if let roleName = role as? String, roleName == "ambassador" {
-                    if let dict = OTAppConfiguration.community()["roles"] as? NSDictionary, let nameDict = dict[roleName] as? NSDictionary {
-                        if let title = nameDict["title"] as? String {
-                            let attStr = Utilitaires.formatString(stringMessage: "  \(title)  ", coloredTxt: title, color: UIColor.white, colorHighlight: UIColor.white, fontSize: 13, fontWeight: .medium, fontColoredWeight: .bold)
-                            self.ui_label_ambassador?.layer.backgroundColor = UIColor.appOrange().cgColor
-                            self.ui_label_ambassador?.layer.cornerRadius = 4
-                            self.ui_label_ambassador?.attributedText = attStr
-                            self.ui_label_ambassador?.isHidden = false
-                            self.ui_label_role?.text = ""
-                        }
-                    }
-                    break
-                }
-            }
+            self.updateAmbassadorLabel(ambassadorLabel: self.ui_label_ambassador, authorUser: _autUser)
+            self.ui_label_role?.text = ""
         }
         else {
             ui_constraint_top_username.constant = 30
@@ -314,6 +307,23 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
         }
     }
     
+    func updateAmbassadorLabel(ambassadorLabel:UILabel?,authorUser:OTUser) {
+        for role in authorUser.roles {
+            if let roleName = role as? String, roleName == "ambassador" {
+                if let dict = OTAppConfiguration.community()["roles"] as? NSDictionary, let nameDict = dict[roleName] as? NSDictionary {
+                    if let title = nameDict["title"] as? String {
+                        let attStr = Utilitaires.formatString(stringMessage: "  \(title)  ", coloredTxt: title, color: UIColor.white, colorHighlight: UIColor.white, fontSize: 13, fontWeight: .medium, fontColoredWeight: .bold)
+                        ambassadorLabel?.layer.backgroundColor = UIColor.appOrange().cgColor
+                        ambassadorLabel?.layer.cornerRadius = 4
+                        ambassadorLabel?.attributedText = attStr
+                        ambassadorLabel?.isHidden = false
+                    }
+                }
+                break
+            }
+        }
+    }
+    
     @IBAction func action_show_profile(_ sender: Any) {
         delegate?.actionShowUser()
     }
@@ -324,7 +334,7 @@ class OTDetailActionEventCreatorCell: UITableViewCell {
 }
 
 //MARK: - ActionCellCreatorDelegate -
-@objc protocol ActionCellCreatorDelegate: class {
+@objc protocol ActionCellCreatorDelegate: AnyObject {
     func actionshowPartner()
     func actionShowUser()
 }
