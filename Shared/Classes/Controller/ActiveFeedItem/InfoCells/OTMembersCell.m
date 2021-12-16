@@ -69,7 +69,7 @@
     for (NSString *role in roles) {
         OTRoleTag *tag = [[OTRoleTag alloc] initWithName:role];
         if (tag.visible) {
-            UIView *tagView = [OTPillLabelView createWithRoleTag:tag andFontSize:self.lblDisplayName.font.pointSize];
+            UIView *tagView = [OTPillLabelView createWithRoleTag:tag andFontSize:14];
             [self.rolesStackView addArrangedSubview:tagView];
         }
     }

@@ -309,6 +309,10 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
         if isLoading {
             var cell = OTHomeCellCollectionView()
             
+            if arrayFeedEmpty.count <= indexPath.row {
+                return cell
+            }
+            
             if arrayFeedEmpty[indexPath.row].type == .Headlines {
                 cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCellAnnouncesEmpty", for: indexPath) as! OTHomeCellCollectionView
             }

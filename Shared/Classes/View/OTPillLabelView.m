@@ -23,7 +23,7 @@
     self = [super initWithCoder:aDecoder];
     if (!self) return nil;
     
-    self.layer.cornerRadius = 3;
+    self.layer.cornerRadius = 4;
 
     return self;
 }

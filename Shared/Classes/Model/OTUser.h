@@ -12,6 +12,7 @@
 #import "OTUserMembership.h"
 #import "OTConversation.h"
 #import "OTAddress.h"
+#import "OTUserPermissions.h"
 
 extern NSString *const kKeyToken;
 extern NSString *const kCoordinatorUserTag;
@@ -51,6 +52,7 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic,nullable) NSString *goal;
 @property (nonatomic,strong) NSArray * _Nullable interests;
 @property (nonatomic, strong) NSNumber *unreadCount;
+@property (nonatomic,strong) OTUserPermissions *permissions;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)dictionaryForWebservice;
@@ -90,4 +92,5 @@ extern NSString *const kVisitedUserTag;
 @property (strong, nonatomic) NSNumber * _Nullable askCreactionCount;
 @property (nonatomic) BOOL isGoodWavesValidated;
 @property (nonatomic) BOOL isEngaged;
+-(BOOL)isCreateEventActive;
 @end

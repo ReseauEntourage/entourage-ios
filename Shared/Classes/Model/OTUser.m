@@ -52,6 +52,8 @@ NSString *const kKeyUnreadCount = @"unread_count";
 NSString *const kKeyContribCreationCount = @"contribution_creation_count";
 NSString *const kKeyAskCreationCount = @"ask_for_help_creation_count";
 
+NSString *const kKeyUserPermissions = @"permissions";
+
 @interface OTUser ()
 @property (nonatomic, readwrite) NSString *uuid;
 @property (nonatomic, readwrite) NSArray *memberships;
@@ -120,6 +122,9 @@ NSString *const kKeyAskCreationCount = @"ask_for_help_creation_count";
         
         _contribCreationCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyContribCreationCount defaultValue:0];
         _askCreactionCount = [[dictionary objectForKey:kKeyStats] numberForKey:kKeyAskCreationCount defaultValue:0];
+        
+        //Permissions
+        self.permissions = [[OTUserPermissions alloc] initWithDictionary: [dictionary objectForKey:kKeyUserPermissions]];
     }
     return self;
 }
@@ -188,6 +193,7 @@ NSString *const kKeyAskCreationCount = @"ask_for_help_creation_count";
     [encoder encodeObject:self.unreadCount forKey:kKeyUnreadCount];
     [encoder encodeObject:self.contribCreationCount forKey:kKeyContribCreationCount];
     [encoder encodeObject:self.askCreactionCount forKey:kKeyAskCreationCount];
+    [encoder encodeObject:self.permissions forKey:kKeyUserPermissions];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -227,6 +233,7 @@ NSString *const kKeyAskCreationCount = @"ask_for_help_creation_count";
         self.unreadCount = [decoder decodeObjectForKey:kKeyUnreadCount];
         self.contribCreationCount = [decoder decodeObjectForKey:kKeyContribCreationCount];
         self.askCreactionCount = [decoder decodeObjectForKey:kKeyAskCreationCount];
+        self.permissions = [decoder decodeObjectForKey:kKeyUserPermissions];
     }
     return self;
 }
@@ -365,6 +372,9 @@ NSString *const kKeyAskCreationCount = @"ask_for_help_creation_count";
     return isNeighbour;
 }
 
+-(BOOL)isCreateEventActive {
+    return self.permissions.isEventCreationActive;
+}
 
 
 @end
