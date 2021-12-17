@@ -68,7 +68,7 @@ class OTEntourageMessageCell: UITableViewCell {
     }
     
     func setupSubtitle(item:OTFeedItem) {
-        let lastMessage = getAuthorText(lastMEssage: item.lastMessage)
+        let lastMessage = getAuthorText(lastMessage: item.lastMessage)
         
         if lastMessage.count > 0 {
             summaryProvider?.lblDescription = self.lblLastMessage
@@ -79,23 +79,23 @@ class OTEntourageMessageCell: UITableViewCell {
         }
     }
     
-    func getAuthorText(lastMEssage:OTMyFeedMessage?) -> String {
+    func getAuthorText(lastMessage:OTMyFeedMessage?) -> String {
         var messageStr = ""
         let currentUSer = UserDefaults.standard.currentUser
-        let isMe = currentUSer?.sid == lastMEssage?.authorId
+        let isMe = currentUSer?.sid == lastMessage?.authorId
         
         if isMe {
             messageStr = "Vous"
         }
         else {
-            if let lastMsgName = lastMEssage?.displayName, lastMsgName.count > 0 {
+            if let lastMsgName = lastMessage?.displayName, lastMsgName.count > 0 {
                 messageStr = lastMsgName
             }
         }
         
         if messageStr.count > 0 {
             messageStr = messageStr + " : "
-            if let lastmsg = lastMEssage?.text {
+            if let lastmsg = lastMessage?.text {
                 messageStr = messageStr + lastmsg
             }
         }

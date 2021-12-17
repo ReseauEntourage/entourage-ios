@@ -17,7 +17,9 @@ class OTMyEntourageMessagesViewController: UIViewController {
     
     var firstLoading = true
     
-    @IBOutlet weak var ui_tableView: UITableView!
+    var isMessagesGroup = true
+    
+    @IBOutlet weak var ui_tableView: UITableView?
     
     var arrayITems = [OTFeedItem]()
     
@@ -35,7 +37,7 @@ class OTMyEntourageMessagesViewController: UIViewController {
     
     func loadDatas() {
         self.arrayITems.removeAll()
-        self.ui_tableView.reloadData()
+        self.ui_tableView?.reloadData()
         
         self.currentPage = 1
         requestData { items, error in
@@ -43,20 +45,20 @@ class OTMyEntourageMessagesViewController: UIViewController {
                 self.arrayITems.removeAll()
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
-                    self.ui_tableView.reloadData()
+                    self.ui_tableView?.reloadData()
                 }
             }
             else {
                 if let items = items as? [OTFeedItem] {
                     DispatchQueue.main.async {
                         self.arrayITems.removeAll()
-                        self.ui_tableView.reloadData()
+                        self.ui_tableView?.reloadData()
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         SVProgressHUD.dismiss()
                         self.arrayITems.removeAll()
                         self.arrayITems.append(contentsOf: items)
-                        self.ui_tableView.reloadData()
+                        self.ui_tableView?.reloadData()
                     }
                 }
             }
@@ -68,8 +70,15 @@ class OTMyEntourageMessagesViewController: UIViewController {
         
         let params:[String:Any] = ["per":LIMIT_PAGING,"page":currentPage]
         
-        OTMessagesService.getMessagesOne2One(withParams: params) { items, error in
-            completion(items,error)
+        if isMessagesGroup {
+            OTMessagesService.getMessagesGroup(withParams: params) { items, error in
+                completion(items,error)
+            }
+        }
+        else {
+            OTMessagesService.getMessagesOne2One(withParams: params) { items, error in
+                completion(items,error)
+            }
         }
     }
     
@@ -90,7 +99,7 @@ class OTMyEntourageMessagesViewController: UIViewController {
                         DispatchQueue.main.async {
                           //  self.ui_tableView.beginUpdates()
                             self.arrayITems.append(contentsOf: items)
-                            self.ui_tableView.reloadData()
+                            self.ui_tableView?.reloadData()
                          //   self.ui_tableView.endUpdates()
                         }
                     }

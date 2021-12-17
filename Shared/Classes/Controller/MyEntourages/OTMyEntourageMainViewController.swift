@@ -9,7 +9,7 @@
 import UIKit
 
 class OTMyEntourageMainViewController: UIViewController {
-
+    
     @IBOutlet weak var ui_view_selector_group: UIView!
     @IBOutlet weak var ui_view_selector_messages: UIView!
     @IBOutlet weak var ui_label_bt_messages: UILabel!
@@ -24,7 +24,7 @@ class OTMyEntourageMainViewController: UIViewController {
     var isAlreadyInitialized = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupVCs()
     }
     
@@ -49,10 +49,11 @@ class OTMyEntourageMainViewController: UIViewController {
     }
     
     func setupVCs() {
-        groupsVC = UIStoryboard.myEntourages()?.instantiateViewController(withIdentifier: "OTMyEntouragesViewController") as? OTMyEntouragesViewController
+        groupsVC = UIStoryboard.myEntourages()?.instantiateViewController(withIdentifier: "MyEntourageMessages") as? OTMyEntourageMessagesViewController
+        
         messagesVC = UIStoryboard.myEntourages()?.instantiateViewController(withIdentifier: "MyEntourageMessages") as? OTMyEntourageMessagesViewController
+        (messagesVC as? OTMyEntourageMessagesViewController)?.isMessagesGroup = false
     }
-    
     
     func changeVC() {
         if tabSelectedIndex == 1 {
@@ -79,10 +80,9 @@ class OTMyEntourageMainViewController: UIViewController {
             
             if let _ = groupsVC {
                 addChild(groupsVC!)
-                (groupsVC as? OTMyEntouragesViewController)?.isFirstLaunch = true
+                (groupsVC as? OTMyEntourageMessagesViewController)?.loadDatas()
                 groupsVC?.view.frame.size = self.ui_view_container.frame.size
                 ui_view_container.addSubview(groupsVC!.view)
-                (groupsVC as? OTMyEntouragesViewController)?.isMessagesOnly = false
                 groupsVC!.didMove(toParent: self)
             }
         }
@@ -106,10 +106,10 @@ class OTMyEntourageMainViewController: UIViewController {
             changeVC()
         }
     }
-
+    
     func setupVcsAfterTapTabbar() {
         if tabSelectedIndex == 0 {
-            (groupsVC as? OTMyEntouragesViewController)?.isFirstLaunch = true
+            (groupsVC as? OTMyEntourageMessagesViewController)?.loadDatas()
         }
         else {
             (messagesVC as? OTMyEntourageMessagesViewController)?.loadDatas()
@@ -123,6 +123,4 @@ class OTMyEntourageMainViewController: UIViewController {
     @IBAction func action_select_messages(_ sender: Any) {
         changeButtons(newposition: 1)
     }
-    
-    
 }

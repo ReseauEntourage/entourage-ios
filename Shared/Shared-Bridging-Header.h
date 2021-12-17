@@ -38,7 +38,6 @@
 #import "Analytics_keys.h"
 #import "UIViewController+menu.h"
 #import "UIImageView+entourage.h"
-#import "OTMyEntouragesViewController.h"
 #import "OTMapOptionsViewController.h"
 #import "OTHTTPRequestManager.h"
 #import "OTOngoingTourService.h"
