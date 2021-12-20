@@ -333,6 +333,7 @@
 // Feed Item details
 "item_option_close" = "Arrêter";
 "item_option_freeze" = "Clôturer";
+"item_option_cancel" = "Annuler l'événement";
 "item_option_quit" = "Quitter";
 "entourage_time_data" = "%@ - à %@";
 "entourage_distance" = "à %@";
@@ -939,7 +940,7 @@
 "info_share_sms_poi" = "Bonjour ! Voici l’adresse de %@ qui pourrait vous intéresser.\n%@\n%@\nPour plus d’infos sur ce lieu, et pour créer des liens entre voisins solidaires, je vous donne RDV sur le réseau Entourage %@";
 
 "pop_validate_event_title2" = "J'annule\nmon événement";
-"pop_validate_event_description2" = "En annulant l’événement, vous fermez la discussion et retirez l’événement du fil d’actualité.";
+"pop_validate_event_description2" = "En annulant l’événement, la discussion  sera fermée et l’événement n’apparaîtra plus dans le fil d’actualité.";
 "pop_validate_event_bt_validate2" = "ANNULER L’EVENEMENT";
 
 //New UI + POP Close action
