@@ -50,8 +50,15 @@
                 self.btnNextState.hidden = NO;
                 break;
             case FeedItemStateOpen:
-                title = OTLocalizedString(@"item_option_freeze");
+                
                 selector = @selector(doCloseFeedItemWithReason:);
+                if (self.feedItem.isOuting) {
+                    title = OTLocalizedString(@"item_option_cancel");
+                }
+                else {
+                    title = OTLocalizedString(@"item_option_freeze");
+                }
+               
                 self.btnNextState.hidden = NO;
                 break;
             case FeedItemStateClosed:

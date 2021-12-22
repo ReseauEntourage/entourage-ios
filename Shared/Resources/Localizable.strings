@@ -333,6 +333,7 @@
 // Feed Item details
 "item_option_close" = "Arrêter";
 "item_option_freeze" = "Clôturer";
+"item_option_cancel" = "Annuler l'événement";
 "item_option_quit" = "Quitter";
 "entourage_time_data" = "%@ - à %@";
 "entourage_distance" = "à %@";
@@ -939,21 +940,21 @@
 "info_share_sms_poi" = "Bonjour ! Voici l’adresse de %@ qui pourrait vous intéresser.\n%@\n%@\nPour plus d’infos sur ce lieu, et pour créer des liens entre voisins solidaires, je vous donne RDV sur le réseau Entourage %@";
 
 "pop_validate_event_title2" = "J'annule\nmon événement";
-"pop_validate_event_description2" = "En annulant l’événement, vous fermez la discussion et retirez l’événement du fil d’actualité.";
+"pop_validate_event_description2" = "En annulant l’événement, la discussion  sera fermée et l’événement n’apparaîtra plus dans le fil d’actualité.";
 "pop_validate_event_bt_validate2" = "ANNULER L’EVENEMENT";
 
 //New UI + POP Close action
 "pop_validate_action_title_new" = "Je clôture mon\naction solidaire";
-"pop_validate_action_description_new" = "En clôturant l’action, vous fermez la discussion et retirez l’action du fil d’actualité.";
+"pop_validate_action_description_new" = "En clôturant l’action, la discussion sera fermée et l’action n’apparaîtra plus dans le fil d’actualité.";
 "pop_validate_action_title2_new" = "Comment ça s’est passé ?";
 "pop_validate_action_bt_validate_new" = "Clôturer";
 
 "pop_validate_action_add_comment_title" = "Merci, votre action\nest clôturée !";
-"pop_validate_action_add_comment_desc" = "Voulez-vous laisser un commentaire à propos de votre action ?";
+"pop_validate_action_add_comment_desc" = "Voulez-vous écrire un commentaire à propos de votre action ?";
 "pop_validate_action_add_comment_yes" = "Oui";
 "pop_validate_action_add_comment_no" = "Non";
 
-"pop_validate_action_add_comment_send_title" = "Votre commentaire\nci-dessous";
+"pop_validate_action_add_comment_send_title" = "Dites-nous en plus,\ncomment s’est passée votre action solidaire ?";
 "pop_validate_action_add_comment_send_button" = "Envoyer";
 "pop_validate_action_add_comment_send_placeholder" = "Mon action s’est bien passée parce que...";
 
@@ -1056,16 +1057,6 @@
 "onboarding_help_label" = "Besoin d’aide ?\nContacter l'équipe Entourage.";
 
 //Profile pop info switch mode
-"profile_pop_switch_mode_neo" = "Mode “Premier pas“";
-"profile_pop_switch_mode_expert" = "Mode “normal“";
-"profile_pop_switch_mode_title" = "Information";
-"profile_pop_switch_mode_message" = "Vous avez basculé en\n%@\n\nRedirection vers la nouvelle home ?";
-"profile_pop_switch_mode_message_neo" = "Vous êtes sur le point d’activer le mode “Premiers pas” de l’application.\n\nEffectuer cette action ? ";
-"profile_pop_switch_mode_message_expert" = "Vous êtes sur le point de désactiver le mode “Premiers pas” de l’application.\n\nEffectuer cette action ? ";
-"profile_pop_switch_mode_button_no" = "Non";
-"profile_pop_switch_mode_button_yes" = "Oui";
-"info_pop_switch_mode_neo_on" = "Mode “Premier pas“ activé";
-"info_pop_switch_mode_neo_off" = "Mode “Premier pas“ désactivé";
 
 "cell_info_demand_empty" = "C'est plutôt calme ici";
 "cell_info_demand_empty_button" = "Rechercher\nplus loin";

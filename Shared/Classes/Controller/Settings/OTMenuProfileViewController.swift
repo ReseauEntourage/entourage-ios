@@ -48,8 +48,7 @@ class OTMenuProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         OTLogger.logEvent("View_Profile_Menu")
-        currentUser = UserDefaults.standard.currentUser
-        self.ui_tableview?.reloadData()
+        loadUser()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -70,6 +69,7 @@ class OTMenuProfileViewController: UIViewController {
             SVProgressHUD.dismiss()
             if let _user = user {
                 self.currentUser = _user
+                UserDefaults.standard.currentUser = _user
                 DispatchQueue.main.async {
                     self.ui_tableview?.reloadData()
                 }
