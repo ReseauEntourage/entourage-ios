@@ -10,18 +10,19 @@ import UIKit
 import SVProgressHUD
 
 class OTMyEntourageMessagesViewController: UIViewController {
-
+    
     let LOAD_MORE_DRAG_OFFSET:CGFloat = 50
-    let LIMIT_PAGING = 20
+    let LIMIT_PAGING = 10
     var currentPage = 1
     
     var firstLoading = true
     
     var isMessagesGroup = true
     
+    @IBOutlet weak var ui_view_no_data: UIView!
     @IBOutlet weak var ui_tableView: UITableView?
     
-    var arrayITems = [OTFeedItem]()
+    var arrayItems = [OTFeedItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,40 +32,51 @@ class OTMyEntourageMessagesViewController: UIViewController {
         super.viewDidAppear(animated)
         if firstLoading {
             firstLoading = false
-           loadDatas()
+            loadDatas()
         }
     }
     
     func loadDatas() {
-        self.arrayITems.removeAll()
+        self.arrayItems.removeAll()
         self.ui_tableView?.reloadData()
         
         self.currentPage = 1
         requestData { items, error in
             if let _ = error  {
-                self.arrayITems.removeAll()
+                self.arrayItems.removeAll()
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
                     self.ui_tableView?.reloadData()
+                    self.showEmptyView()
                 }
             }
             else {
                 if let items = items as? [OTFeedItem] {
                     DispatchQueue.main.async {
-                        self.arrayITems.removeAll()
+                        self.arrayItems.removeAll()
                         self.ui_tableView?.reloadData()
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         SVProgressHUD.dismiss()
-                        self.arrayITems.removeAll()
-                        self.arrayITems.append(contentsOf: items)
+                        self.arrayItems.removeAll()
+                        self.arrayItems.append(contentsOf: items)
                         self.ui_tableView?.reloadData()
+                        self.showEmptyView()
                     }
                 }
             }
         }
     }
-
+    
+    func showEmptyView() {
+        if arrayItems.count == 0 {
+            ui_view_no_data.isHidden = false
+        }
+        else {
+            ui_view_no_data.isHidden = true
+        }
+    }
+    
     func requestData(completion: @escaping (Any?, Error?) -> Void) {
         SVProgressHUD.show()
         
@@ -97,10 +109,8 @@ class OTMyEntourageMessagesViewController: UIViewController {
                     }
                     else {
                         DispatchQueue.main.async {
-                          //  self.ui_tableView.beginUpdates()
-                            self.arrayITems.append(contentsOf: items)
+                            self.arrayItems.append(contentsOf: items)
                             self.ui_tableView?.reloadData()
-                         //   self.ui_tableView.endUpdates()
                         }
                     }
                 }
@@ -112,25 +122,19 @@ class OTMyEntourageMessagesViewController: UIViewController {
 //MARK: - uitableview Datsource / delegate -
 extension OTMyEntourageMessagesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayITems.count
+        return arrayItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let item = arrayITems[indexPath.row]
-        
+        let item = arrayItems[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntourageCell", for: indexPath) as! OTEntourageMessageCell
-        
         cell.configureWith(feedItem: item)
         
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let feedItem = arrayITems[indexPath.row]
-        
+        let feedItem = arrayItems[indexPath.row]
         let sb = UIStoryboard.init(name: "ActiveFeedItem", bundle: nil)
         let vc = sb.instantiateInitialViewController() as! OTActiveFeedItemViewController
         vc.feedItem = feedItem
@@ -139,19 +143,15 @@ extension OTMyEntourageMessagesViewController: UITableViewDelegate, UITableViewD
         }
     }
     
-   
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
         let offset = scrollView.contentOffset
         let bounds = scrollView.bounds
         let size = scrollView.contentSize
         let inset = scrollView.contentInset
-        
         let y = offset.y + bounds.size.height - inset.bottom
         let h = size.height
         
         if y > h + LOAD_MORE_DRAG_OFFSET {
-            //Load next page
             loadNextPage()
         }
     }
