@@ -49,7 +49,7 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
         else {
             ui_title_action.text = OTLocalisationService.getLocalizedValue(forKey: item.entourage_type)
             ui_info_show_more?.text = OTLocalisationService.getLocalizedValue(forKey: "show_more")
-            
+
             if item.entourage_type == "contribution" {
                 ui_title_action.textColor = UIColor.appBlue()
                 ui_info_action_by?.text = OTLocalisationService.getLocalizedValue(forKey: "home_action_contrib_info_user")
@@ -59,22 +59,22 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
                 ui_info_action_by?.text = OTLocalisationService.getLocalizedValue(forKey: "home_action_info_user")
             }
         }
-        
+
         ui_title_description.text = item.title
         ui_title_profile.text = item.author.displayName
-        
+
         //Picto
         if let pictoStr = OTAppAppearance.iconName(forEntourageItem: item, isAnnotation: false) {
             ui_picto_action.image = UIImage.init(named: pictoStr)
         }
-        
+
         if item.isOnline.boolValue {
             ui_title_location.text = OTLocalisationService.getLocalizedValue(forKey: "info_feed_item_event_online")
         }
         else {
             let distance = HomeCellUtils.getDistance(item: item)
             var distanceStr = ""
-            
+
             if distance < 1000000 {
                 distanceStr = HomeCellUtils.formattedItemDistance(distance: distance)
                 if distanceStr.count > 0 {
@@ -86,11 +86,11 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
             }
             ui_title_location.text = String.init(format: "%@%@", distanceStr,item.postalCode)
         }
-        
+
         if OTAppConfiguration.shouldShowCreatorImagesForNewsFeedItems() {
             ui_button_profile.setupAsProfilePicture(fromUrl: item.author.avatarUrl)
             ui_button_profile.isHidden = false
-            
+
             if item.author.partner == nil {
                 ui_picto_check_profile.isHidden = true
             }
@@ -103,7 +103,7 @@ class OTHomeCollectionViewCell: UICollectionViewCell {
             ui_button_profile.isHidden = true
             ui_picto_check_profile.isHidden = true
         }
-        
+
         let nbPeople = item.noPeople.intValue
         if nbPeople == 1 {
             ui_title_nb_people?.text = "\(nbPeople) \(OTLocalisationService.getLocalizedValue(forKey: "participant")!)"

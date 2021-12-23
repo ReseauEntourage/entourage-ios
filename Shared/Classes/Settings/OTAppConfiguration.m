@@ -221,22 +221,6 @@ const CGFloat OTNavigationBarDefaultFontSize = 17.f;
     [FIRAnalytics setUserPropertyString:[OTAuthService currentUserAuthenticationLevel]
                                 forName:@"AuthenticationLevel"];
     [FIRMessaging messaging].delegate = (id<FIRMessagingDelegate>)[UIApplication sharedApplication].delegate;
-    
-    [self configureRemoteConfig];
-}
-
--(void) configureRemoteConfig {
-    [[FIRInstallations installations]  authTokenForcingRefresh:true
-                                                    completion:^(FIRInstallationsAuthTokenResult *result, NSError *error) {
-        if (error != nil) {
-            NSLog(@"Error fetching Installation token %@", error);
-            return;
-        }
-        [[NSUserDefaults standardUserDefaults]setObject:[result authToken] forKey:@"token_abtest"];
-    }];
-    
-    NSDictionary * defaultValues = @{@"cell_home_expert_type" : @0};
-    [[FIRRemoteConfig remoteConfig] setDefaults:defaultValues];
 }
 
 - (void)configureAnalyticsWithOptions:(NSDictionary *)launchOptions

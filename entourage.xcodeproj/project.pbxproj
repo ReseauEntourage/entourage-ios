@@ -9,14 +9,12 @@
 /* Begin PBXBuildFile section */
 		0205197526F1E41F003B277B /* Pop_Info_Custom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0205197426F1E41F003B277B /* Pop_Info_Custom.xib */; };
 		0205197726F1E49E003B277B /* OTPopInfoCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205197626F1E49E003B277B /* OTPopInfoCustom.swift */; };
-		020F46EF271EF92A0091B088 /* CellHomeExpertEventB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020F46EE271EF92A0091B088 /* CellHomeExpertEventB.xib */; };
-		020F46F3271EFDE00091B088 /* CellHomeExpertEventA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020F46F2271EFDE00091B088 /* CellHomeExpertEventA.xib */; };
+		020F46F3271EFDE00091B088 /* CellHomeExpertEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020F46F2271EFDE00091B088 /* CellHomeExpertEvent.xib */; };
 		021D1F8F276B500100F04E95 /* OTMessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021D1F8E276B500100F04E95 /* OTMessagesService.swift */; };
 		022231FB26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */; };
 		022F04C926F8CEF2001769C4 /* OTSearchEntouragesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */; };
 		023283BE2768F10E009697AC /* OTUserPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = 023283BD2768F10E009697AC /* OTUserPermissions.m */; };
-		02659F5427204206009A3297 /* CellHomeExpertActionA.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02659F5327204206009A3297 /* CellHomeExpertActionA.xib */; };
-		02659F562720421B009A3297 /* CellHomeExpertActionB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02659F552720421B009A3297 /* CellHomeExpertActionB.xib */; };
+		02659F5427204206009A3297 /* CellHomeExpertAction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02659F5327204206009A3297 /* CellHomeExpertAction.xib */; };
 		0281F16C271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */; };
 		028B869C2767AA530060FFD1 /* OTEntourageMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B869B2767AA530060FFD1 /* OTEntourageMessageCell.swift */; };
 		02916A8A2716DA2B00A45AC5 /* OTMyActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */; };
@@ -553,15 +551,13 @@
 /* Begin PBXFileReference section */
 		0205197426F1E41F003B277B /* Pop_Info_Custom.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Pop_Info_Custom.xib; sourceTree = "<group>"; };
 		0205197626F1E49E003B277B /* OTPopInfoCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPopInfoCustom.swift; sourceTree = "<group>"; };
-		020F46EE271EF92A0091B088 /* CellHomeExpertEventB.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellHomeExpertEventB.xib; sourceTree = "<group>"; };
-		020F46F2271EFDE00091B088 /* CellHomeExpertEventA.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertEventA.xib; sourceTree = "<group>"; };
+		020F46F2271EFDE00091B088 /* CellHomeExpertEvent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertEvent.xib; sourceTree = "<group>"; };
 		021D1F8E276B500100F04E95 /* OTMessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMessagesService.swift; sourceTree = "<group>"; };
 		022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEditActionPublicPrivateViewController.swift; sourceTree = "<group>"; };
 		022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSearchEntouragesViewController.swift; sourceTree = "<group>"; };
 		023283BD2768F10E009697AC /* OTUserPermissions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTUserPermissions.m; sourceTree = "<group>"; };
 		023283BF2768F11F009697AC /* OTUserPermissions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTUserPermissions.h; sourceTree = "<group>"; };
-		02659F5327204206009A3297 /* CellHomeExpertActionA.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellHomeExpertActionA.xib; sourceTree = "<group>"; };
-		02659F552720421B009A3297 /* CellHomeExpertActionB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertActionB.xib; sourceTree = "<group>"; };
+		02659F5327204206009A3297 /* CellHomeExpertAction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellHomeExpertAction.xib; sourceTree = "<group>"; };
 		0281F16B271D71130015F4A5 /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
 		028B869B2767AA530060FFD1 /* OTEntourageMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEntourageMessageCell.swift; sourceTree = "<group>"; };
 		02916A892716DA2B00A45AC5 /* OTMyActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMyActionTableViewCell.swift; sourceTree = "<group>"; };
@@ -1494,10 +1490,8 @@
 		020F46F1271EFDC50091B088 /* Cells Xib */ = {
 			isa = PBXGroup;
 			children = (
-				020F46EE271EF92A0091B088 /* CellHomeExpertEventB.xib */,
-				020F46F2271EFDE00091B088 /* CellHomeExpertEventA.xib */,
-				02659F5327204206009A3297 /* CellHomeExpertActionA.xib */,
-				02659F552720421B009A3297 /* CellHomeExpertActionB.xib */,
+				020F46F2271EFDE00091B088 /* CellHomeExpertEvent.xib */,
+				02659F5327204206009A3297 /* CellHomeExpertAction.xib */,
 			);
 			path = "Cells Xib";
 			sourceTree = "<group>";
@@ -3322,7 +3316,6 @@
 				0205197526F1E41F003B277B /* Pop_Info_Custom.xib in Resources */,
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
-				02659F562720421B009A3297 /* CellHomeExpertActionB.xib in Resources */,
 				A21D64AE2085E8B400EF8E0E /* Paris.gpx in Resources */,
 				A21D65AE2085FDAA00EF8E0E /* MyEntourages.storyboard in Resources */,
 				A202E7EF2085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
@@ -3356,7 +3349,7 @@
 				A2048A002151421500064EB0 /* IntroPage4.xib in Resources */,
 				A21D65B82085FDAA00EF8E0E /* UserProfileEditor.storyboard in Resources */,
 				A21D65A82085FDAA00EF8E0E /* Disclaimer.storyboard in Resources */,
-				020F46F3271EFDE00091B088 /* CellHomeExpertEventA.xib in Resources */,
+				020F46F3271EFDE00091B088 /* CellHomeExpertEvent.xib in Resources */,
 				A202E7ED2085CFC40058F32C /* SF-UI-Text-MediumItalic.otf in Resources */,
 				37339CD321FF01860048B6E1 /* OTPillLabelView.xib in Resources */,
 				2BE1F47825DAE16600CE318E /* Main2.storyboard in Resources */,
@@ -3374,12 +3367,11 @@
 				A202E7CF2085CFC40058F32C /* logo_black.png in Resources */,
 				A202E7F32085CFC40058F32C /* SF-UI-Text-Medium.otf in Resources */,
 				A296B91D2087A6F100F6AFBD /* GoogleService-Info.plist in Resources */,
-				02659F5427204206009A3297 /* CellHomeExpertActionA.xib in Resources */,
+				02659F5427204206009A3297 /* CellHomeExpertAction.xib in Resources */,
 				A21D65B02085FDAA00EF8E0E /* EntourageEditor.storyboard in Resources */,
 				A202E7F12085CFC40058F32C /* SF-UI-Text-LightItalic.otf in Resources */,
 				A202E7D72085CFC40058F32C /* SharedImages.xcassets in Resources */,
 				A2607686215577BC0068F65E /* OTFeedsTableFilterHeader.xib in Resources */,
-				020F46EF271EF92A0091B088 /* CellHomeExpertEventB.xib in Resources */,
 				A21D65B62085FDAA00EF8E0E /* Popup.storyboard in Resources */,
 				A21D65BE2085FDAA00EF8E0E /* EntourageLaunchScreen.storyboard in Resources */,
 				A202E7D52085CFC40058F32C /* Localizable.strings in Resources */,

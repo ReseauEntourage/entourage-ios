@@ -7,26 +7,14 @@
 //
 
 import UIKit
-import FirebaseRemoteConfig
 import AVFoundation
-
-enum VariantCell {
-    case Original
-    case VariantA
-    case VariantB
-}
 
 
 class OTHomeExpertViewController: UIViewController {
     
     let CELL_HEADLINES_HEIGHT:CGFloat = 330
-    let CELL_EVENTS_HEIGHT_ORIGINAL:CGFloat = 280
-    let CELL_EVENTS_HEIGHT_VARIANT_A:CGFloat = 320
-    let CELL_EVENTS_HEIGHT_VARIANT_B:CGFloat = 284
-    
-    let CELL_ACTIONS_HEIGHT_ORIGINAL:CGFloat = 298
-    let CELL_ACTIONS_HEIGHT_VARIANT_A:CGFloat = 286
-    let CELL_ACTIONS_HEIGHT_VARIANT_B:CGFloat = 248
+    let CELL_EVENTS_HEIGHT:CGFloat = 320
+    let CELL_ACTIONS_HEIGHT:CGFloat = 286
     
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_button_tour: UIButton!
@@ -44,8 +32,6 @@ class OTHomeExpertViewController: UIViewController {
     var isFromModifyZone = false
     
     var isFromProfile = false
-    
-    var variantType:VariantCell = .Original
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,42 +61,7 @@ class OTHomeExpertViewController: UIViewController {
         
         OTLogger.logEvent(View_Start_ExpertFeed)
         
-        let remoteValue = RemoteConfig.remoteConfig()["cell_home_expert_type"]
-        switch(remoteValue.numberValue) {
-        case 0:
-            self.variantType = .Original
-        case 1:
-            self.variantType = .VariantA
-        case 2 :
-            self.variantType = .VariantB
-        default:
-            break
-        }
-        
-        let defaultDuration:TimeInterval = 60 * 60 * 24  //TODO: -remettre les bonnes valuers après tests preprod- sinon 0
-        RemoteConfig.remoteConfig().fetch(withExpirationDuration: defaultDuration) { Status, error in
-            if error == nil {
-                RemoteConfig.remoteConfig().activate { changed, error in
-                    let remoteCell = RemoteConfig.remoteConfig()["cell_home_expert_type"]
-                   
-                    switch(remoteCell.numberValue) {
-                    case 0:
-                        self.variantType = .Original
-                    case 1:
-                        self.variantType = .VariantA
-                    case 2 :
-                        self.variantType = .VariantB
-                    default:
-                        break
-                    }
-                    
-                    self.getFeed()
-                }
-            }
-            else {
-                self.getFeed()
-            }
-        }
+        self.getFeed()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -317,31 +268,13 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
                 cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCellAnnouncesEmpty", for: indexPath) as! OTHomeCellCollectionView
             }
             else if arrayFeedEmpty[indexPath.row].type == .Events {
-                var identifierVariant = ""
-                switch self.variantType {
-                case .Original:
-                    identifierVariant = "collectionCellEventsEmpty"
-                case .VariantA:
-                    identifierVariant = "collectionCellEventsEmptyA"
-                case .VariantB:
-                    identifierVariant = "collectionCellEventsEmptyB"
-                }
-                cell = tableView.dequeueReusableCell(withIdentifier: identifierVariant, for: indexPath) as! OTHomeCellCollectionView
+                cell = tableView.dequeueReusableCell(withIdentifier: "collectionCellEventsEmptyA", for: indexPath) as! OTHomeCellCollectionView
             }
             else {
-                var identifierVariant = ""
-                switch self.variantType {
-                case .Original:
-                    identifierVariant = "CollectionCellActionsEmpty"
-                case .VariantA:
-                    identifierVariant = "CollectionCellActionsEmptyA"
-                case .VariantB:
-                    identifierVariant = "CollectionCellActionsEmptyB"
-                }
-                cell = tableView.dequeueReusableCell(withIdentifier: identifierVariant, for: indexPath) as! OTHomeCellCollectionView
+                cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCellActionsEmptyA", for: indexPath) as! OTHomeCellCollectionView
             }
             
-            cell.populateCell(card: arrayFeedEmpty[indexPath.row],clickDelegate: self, isLoading: isLoading,variantType:self.variantType)
+            cell.populateCell(card: arrayFeedEmpty[indexPath.row],clickDelegate: self, isLoading: isLoading)
             return cell
         }
         
@@ -351,32 +284,13 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
             cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCellAnnounces", for: indexPath) as! OTHomeCellCollectionView
         }
         else if arrayFeed[indexPath.row].type == .Events {
-            var identifierVariant = ""
-            switch self.variantType {
-            case .Original:
-                identifierVariant = "collectionCellEvents"
-            case .VariantA:
-                identifierVariant = "collectionCellEventsA"
-            case .VariantB:
-                identifierVariant = "collectionCellEventsB"
-            }
-            
-            cell = tableView.dequeueReusableCell(withIdentifier: identifierVariant, for: indexPath) as! OTHomeCellCollectionView
+            cell = tableView.dequeueReusableCell(withIdentifier: "collectionCellEventsA", for: indexPath) as! OTHomeCellCollectionView
         }
         else {
-            var identifierVariant = ""
-            switch self.variantType {
-            case .Original:
-                identifierVariant = "CollectionCellActions"
-            case .VariantA:
-                identifierVariant = "CollectionCellActionsA"
-            case .VariantB:
-                identifierVariant = "CollectionCellActionsB"
-            }
-            cell = tableView.dequeueReusableCell(withIdentifier: identifierVariant, for: indexPath) as! OTHomeCellCollectionView
+            cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCellActionsA", for: indexPath) as! OTHomeCellCollectionView
         }
         
-        cell.populateCell(card: arrayFeed[indexPath.row],clickDelegate: self, isLoading: isLoading,variantType:self.variantType)
+        cell.populateCell(card: arrayFeed[indexPath.row],clickDelegate: self, isLoading: isLoading)
         return cell
     }
     
@@ -387,55 +301,18 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
                 return CELL_HEADLINES_HEIGHT
             }
             if arrayFeedEmpty[indexPath.row].type == .Events {
-                var cell_height:CGFloat
-                switch self.variantType {
-                case .Original:
-                    cell_height = CELL_EVENTS_HEIGHT_ORIGINAL
-                case .VariantA:
-                    cell_height = CELL_EVENTS_HEIGHT_VARIANT_A
-                case .VariantB:
-                    cell_height = CELL_EVENTS_HEIGHT_VARIANT_B
-                }
-                return cell_height
+                return CELL_EVENTS_HEIGHT
             }
-            var cell_height:CGFloat
-            switch self.variantType {
-            case .Original:
-                cell_height = CELL_ACTIONS_HEIGHT_ORIGINAL
-            case .VariantA:
-                cell_height = CELL_ACTIONS_HEIGHT_VARIANT_A
-            case .VariantB:
-                cell_height = CELL_ACTIONS_HEIGHT_VARIANT_B
-            }
-            return cell_height
+            return CELL_ACTIONS_HEIGHT
         }
         
         if arrayFeed[indexPath.row].type == .Headlines {
             return CELL_HEADLINES_HEIGHT
         }
         if arrayFeed[indexPath.row].type == .Events {
-            var cell_height:CGFloat
-            switch self.variantType {
-            case .Original:
-                cell_height = CELL_EVENTS_HEIGHT_ORIGINAL
-            case .VariantA:
-                cell_height = CELL_EVENTS_HEIGHT_VARIANT_A
-            case .VariantB:
-                cell_height = CELL_EVENTS_HEIGHT_VARIANT_B
-            }
-            return cell_height
+            return CELL_EVENTS_HEIGHT
         }
-        
-        var cell_height:CGFloat
-        switch self.variantType {
-        case .Original:
-            cell_height = CELL_ACTIONS_HEIGHT_ORIGINAL
-        case .VariantA:
-            cell_height = CELL_ACTIONS_HEIGHT_VARIANT_A
-        case .VariantB:
-            cell_height = CELL_ACTIONS_HEIGHT_VARIANT_B
-        }
-        return cell_height
+        return CELL_ACTIONS_HEIGHT
     }
     
     //MARK: Delegate click Cells
@@ -450,19 +327,7 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
     func selectCollectionViewCell(item:Any,type:HomeCardType, position:Int) {
         let posStr = "\(position+1)"
         var logString = ""
-        
-        //MARK: Use for AB Testing precision variant Analytics
-        var tagAB = ""
-        switch self.variantType {
-        case .Original:
-            tagAB = "Action__ExpertFeed__Show_O"
-        case .VariantA:
-            tagAB = "Action__ExpertFeed__Show_A"
-        case .VariantB:
-            tagAB = "Action__ExpertFeed__Show_B"
-        }
-        
-        
+
         if let _item = item as? OTEntourage {
             if _item.groupType == "outing" {
                 if type == .Headlines {
@@ -470,8 +335,6 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
                 }
                 else {
                     logString = "\(Action_expertFeed_Event)\(posStr)"
-                    OTLogger.logEvent("Action__ExpertFeed__Show") //MARK: Use for AB Testing
-                    OTLogger.logEvent(tagAB) //MARK: Use for AB Testing precision variant Analytics
                 }
                 let sb = UIStoryboard.init(name: "PublicFeedDetailNew", bundle: nil)
                 let vc = sb.instantiateInitialViewController() as! OTDetailActionEventViewController
@@ -485,8 +348,6 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
                 }
                 else {
                     logString = "\(Action_expertFeed_Action)\(posStr)"
-                    OTLogger.logEvent("Action__ExpertFeed__Show") //MARK: Use for AB Testing
-                    OTLogger.logEvent(tagAB) //MARK: Use for AB Testing precision variant Analytics
                 }
                 let sb = UIStoryboard.init(name: "PublicFeedDetailNew", bundle: nil)
                 let vc = sb.instantiateInitialViewController() as! OTDetailActionEventViewController
