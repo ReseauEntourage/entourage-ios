@@ -307,13 +307,20 @@ class OTHomeCellOther: UICollectionViewCell {
         self.ui_image_bottom?.isHidden = true
     }
     
-    func populateCell(title:String,isShowZone:Bool) {
+    func populateCell(title:String,isShowZone:Bool, isAction:Bool) {
         ui_title.text = title
         self.isShowZone = isShowZone
         self.ui_image_bottom?.isHidden = true
         self.ui_image?.isHidden = false
-        self.contentView.backgroundColor = UIColor.appOrange()
+        
+        if !isAction {
+            self.contentView.backgroundColor = UIColor.appOrange()
+        }
+        else {
+            self.contentView.backgroundColor = UIColor.init(red: 158 / 255.0, green: 158 / 255.0, blue: 158 / 255.0, alpha: 1.0)
+        }
     }
+    
     func populateCell(title:String,buttonMoreTxt:String) {
         ui_title.text = title
         self.isShowZone = false

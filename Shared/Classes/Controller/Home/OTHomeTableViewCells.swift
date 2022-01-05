@@ -167,7 +167,7 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
             
             if isSpecialCells && indexPath.row == cards.arrayCards.count {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellOther", for: indexPath) as! OTHomeCellOther
-                cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_modZone") , isShowZone: true)
+                cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_modZone") , isShowZone: true,isAction: false)
                 return cell
             }
             
@@ -199,7 +199,7 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
                 return cell
             }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellOther", for: indexPath) as! OTHomeCellOther
-            cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_helpEntourage"), isShowZone: true)
+            cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_helpEntourage"), isShowZone: true, isAction: true)
             return cell
         }
         
