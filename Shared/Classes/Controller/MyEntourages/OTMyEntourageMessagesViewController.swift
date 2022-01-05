@@ -24,8 +24,19 @@ class OTMyEntourageMessagesViewController: UIViewController {
     
     var arrayItems = [OTFeedItem]()
     
+    let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refreshControl.addTarget(self, action: #selector(loadDatas), for: .valueChanged)
+        refreshControl.tintColor = UIColor.appOrange()
+        
+        if #available(iOS 10.0, *) {
+            ui_tableView?.refreshControl = refreshControl
+        } else {
+            ui_tableView?.addSubview(refreshControl)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,7 +47,7 @@ class OTMyEntourageMessagesViewController: UIViewController {
         }
     }
     
-    func loadDatas() {
+    @objc func loadDatas() {
         self.arrayItems.removeAll()
         self.ui_tableView?.reloadData()
         
@@ -46,6 +57,7 @@ class OTMyEntourageMessagesViewController: UIViewController {
                 self.arrayItems.removeAll()
                 DispatchQueue.main.async {
                     SVProgressHUD.dismiss()
+                    self.refreshControl.endRefreshing()
                     self.ui_tableView?.reloadData()
                     self.showEmptyView()
                 }
@@ -58,6 +70,7 @@ class OTMyEntourageMessagesViewController: UIViewController {
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         SVProgressHUD.dismiss()
+                        self.refreshControl.endRefreshing()
                         self.arrayItems.removeAll()
                         self.arrayItems.append(contentsOf: items)
                         self.ui_tableView?.reloadData()
@@ -134,12 +147,14 @@ extension OTMyEntourageMessagesViewController: UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        arrayItems[indexPath.row].unreadMessageCount = 0
         let feedItem = arrayItems[indexPath.row]
         let sb = UIStoryboard.init(name: "ActiveFeedItem", bundle: nil)
         let vc = sb.instantiateInitialViewController() as! OTActiveFeedItemViewController
         vc.feedItem = feedItem
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(vc, animated: true)
+            tableView.reloadRows(at: [indexPath], with: .none)
         }
     }
     
