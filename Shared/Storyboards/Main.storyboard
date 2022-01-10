@@ -2808,7 +2808,7 @@ de demandes</string>
                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m6v-36-Arc">
                                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="232"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_help_entourage" translatesAutoresizingMaskIntoConstraints="NO" id="0eH-cd-hgj">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_help_entourage" translatesAutoresizingMaskIntoConstraints="NO" id="0eH-cd-hgj">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="232"/>
                                                                             </imageView>
                                                                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perso_violet" translatesAutoresizingMaskIntoConstraints="NO" id="MmB-lO-k4p">
@@ -3136,7 +3136,7 @@ d’événements</string>
                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4M0-sB-hLp">
                                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="214"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_mod_zone" translatesAutoresizingMaskIntoConstraints="NO" id="Ec5-Kr-ISm">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="bg_mod_zone" translatesAutoresizingMaskIntoConstraints="NO" id="Ec5-Kr-ISm">
                                                                                 <rect key="frame" x="0.0" y="-5" width="200" height="219"/>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Je modifie ma zone d’action" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5T-Vw-ITj">
@@ -3187,7 +3187,6 @@ d’événements</string>
                                                                             <constraint firstItem="Ht5-jL-EBT" firstAttribute="leading" secondItem="l5T-Vw-ITj" secondAttribute="leading" id="ooJ-Mp-cvv"/>
                                                                             <constraint firstItem="l5T-Vw-ITj" firstAttribute="leading" secondItem="4M0-sB-hLp" secondAttribute="leading" constant="16" id="qsx-Fk-93M"/>
                                                                             <constraint firstAttribute="trailing" secondItem="Ec5-Kr-ISm" secondAttribute="trailing" id="tTm-QB-fR0"/>
-                                                                            <constraint firstItem="Ec5-Kr-ISm" firstAttribute="top" secondItem="4M0-sB-hLp" secondAttribute="top" priority="250" id="wCL-JI-8mv"/>
                                                                         </constraints>
                                                                     </view>
                                                                 </subviews>
