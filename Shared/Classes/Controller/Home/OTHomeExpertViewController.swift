@@ -88,6 +88,8 @@ class OTHomeExpertViewController: UIViewController {
             self.ui_tableview.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
             isFromProfile = false
         }
+        
+        loadUser()
     }
         
     
@@ -217,6 +219,21 @@ class OTHomeExpertViewController: UIViewController {
         let sb = UIStoryboard.init(name: "Main2", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "OTFeedTourVC") as! OTFeedToursViewController
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func loadUser() {
+        OTAuthService.init().getDetailsForUser(UserDefaults.standard.currentUser.uuid, success: { (user) in
+            if let _user = user {
+                UserDefaults.standard.currentUser = _user
+                DispatchQueue.main.async {
+                    if let unreadCount = _user.unreadCount {
+                        let notifDict = [kNotificationTotalUnreadCountKey:unreadCount]
+                        let notif = Notification(name: NSNotification.Name.updateTotalUnreadCount, object: notifDict, userInfo: nil)
+                        NotificationCenter.default.post(notif)
+                    }
+                }
+            }
+        }) { (error) in }
     }
     
     //MARK: - Methods Tours -

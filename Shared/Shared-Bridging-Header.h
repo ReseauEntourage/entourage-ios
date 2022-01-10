@@ -95,3 +95,8 @@
 
 #import "OTEntouragesTableViewCell.h"
 #import "OTSummaryProviderBehavior.h"
+
+#import "OTAutoGrowTextView.h"
+#import "OTUnreadMessagesService.h"
+#import "OTEntourageMessaging.h"
+#import "OTChatCellBase.h"

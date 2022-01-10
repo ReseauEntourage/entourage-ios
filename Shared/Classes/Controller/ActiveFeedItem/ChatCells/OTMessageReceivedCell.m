@@ -51,6 +51,10 @@
             self.ui_constraint_width_iv_link.constant = 0;
         }
     }
+    //Used for the new version of detailMessageVC
+    if ([timelinePoint isKindOfClass:[OTFeedItemMessage class]]) {
+        self.userMessageUID = ((OTFeedItemMessage*) timelinePoint).uID;
+    }
 }
 
 - (IBAction)showUserDetails:(id)sender {
@@ -58,6 +62,9 @@
     NSIndexPath *indexPath = [self.dataSource.tableView indexPathForCell:self];
     OTFeedItemMessage *message = [self.dataSource.tableDataSource getItemAtIndexPath:indexPath];
     [self.userProfile showProfile:message.uID];
+    
+    //Used for the new version of detailMessageVC
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showUserProfile" object:nil userInfo:@{@"userUID":self.userMessageUID}];
 }
 
 #pragma mark - private methods

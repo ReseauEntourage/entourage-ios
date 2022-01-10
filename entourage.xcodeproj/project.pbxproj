@@ -10,6 +10,8 @@
 		0205197526F1E41F003B277B /* Pop_Info_Custom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0205197426F1E41F003B277B /* Pop_Info_Custom.xib */; };
 		0205197726F1E49E003B277B /* OTPopInfoCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205197626F1E49E003B277B /* OTPopInfoCustom.swift */; };
 		020F46F3271EFDE00091B088 /* CellHomeExpertEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020F46F2271EFDE00091B088 /* CellHomeExpertEvent.xib */; };
+		021224A92786F36E009CC590 /* OTDetailMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021224A82786F36E009CC590 /* OTDetailMessageViewController.swift */; };
+		021224AB2786FD1D009CC590 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 021224AA2786FD1D009CC590 /* Messages.storyboard */; };
 		021D1F8F276B500100F04E95 /* OTMessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021D1F8E276B500100F04E95 /* OTMessagesService.swift */; };
 		022231FB26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */; };
 		022F04C926F8CEF2001769C4 /* OTSearchEntouragesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */; };
@@ -552,6 +554,8 @@
 		0205197426F1E41F003B277B /* Pop_Info_Custom.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Pop_Info_Custom.xib; sourceTree = "<group>"; };
 		0205197626F1E49E003B277B /* OTPopInfoCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPopInfoCustom.swift; sourceTree = "<group>"; };
 		020F46F2271EFDE00091B088 /* CellHomeExpertEvent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHomeExpertEvent.xib; sourceTree = "<group>"; };
+		021224A82786F36E009CC590 /* OTDetailMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTDetailMessageViewController.swift; sourceTree = "<group>"; };
+		021224AA2786FD1D009CC590 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		021D1F8E276B500100F04E95 /* OTMessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTMessagesService.swift; sourceTree = "<group>"; };
 		022231FA26F4929D000FCA9D /* OTEditActionPublicPrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTEditActionPublicPrivateViewController.swift; sourceTree = "<group>"; };
 		022F04C826F8CEF2001769C4 /* OTSearchEntouragesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTSearchEntouragesViewController.swift; sourceTree = "<group>"; };
@@ -2029,6 +2033,7 @@
 				02A0C701276369F400749135 /* OTMyEntourageMainViewController.swift */,
 				02A0C7032763A10100749135 /* OTMyEntourageMessagesViewController.swift */,
 				028B869B2767AA530060FFD1 /* OTEntourageMessageCell.swift */,
+				021224A82786F36E009CC590 /* OTDetailMessageViewController.swift */,
 				A202E8592085D2C40058F32C /* OTMyEntouragesViewController.h */,
 				A202E85A2085D2C40058F32C /* OTMyEntouragesOptionsViewController.m */,
 				A202E85B2085D2C40058F32C /* OTManageInvitationViewController.h */,
@@ -3036,6 +3041,7 @@
 				A21D65A22085FDAA00EF8E0E /* Tutorial.storyboard */,
 				A21D65A32085FDAA00EF8E0E /* About.storyboard */,
 				2B354583255311B900562062 /* PublicFeedDetailNew.storyboard */,
+				021224AA2786FD1D009CC590 /* Messages.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -3316,6 +3322,7 @@
 				0205197526F1E41F003B277B /* Pop_Info_Custom.xib in Resources */,
 				A21D65AD2085FDAA00EF8E0E /* TourConfirmation.storyboard in Resources */,
 				A21D65A92085FDAA00EF8E0E /* QuitFeedItem.storyboard in Resources */,
+				021224AB2786FD1D009CC590 /* Messages.storyboard in Resources */,
 				A21D64AE2085E8B400EF8E0E /* Paris.gpx in Resources */,
 				A21D65AE2085FDAA00EF8E0E /* MyEntourages.storyboard in Resources */,
 				A202E7EF2085CFC40058F32C /* SF-UI-Text-HeavyItalic.otf in Resources */,
@@ -4006,6 +4013,7 @@
 				A202ECBD2085D2C80058F32C /* OTMailTextCheckBehavior.m in Sources */,
 				A202ED1F2085D2C80058F32C /* UIScrollView+entourage.m in Sources */,
 				A202ED292085D2C80058F32C /* NSUserDefaults+OT.m in Sources */,
+				021224A92786F36E009CC590 /* OTDetailMessageViewController.swift in Sources */,
 				A202ED0B2085D2C80058F32C /* OTTourFactory.m in Sources */,
 				A202ED1B2085D2C80058F32C /* OTAnnouncementUI.m in Sources */,
 				2B62B02A247C229C00EE6D24 /* OTOnboardingAssoStartViewController.swift in Sources */,

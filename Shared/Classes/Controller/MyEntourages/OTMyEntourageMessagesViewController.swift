@@ -45,6 +45,7 @@ class OTMyEntourageMessagesViewController: UIViewController {
             firstLoading = false
             loadDatas()
         }
+        loadUserInfos()
     }
     
     @objc func loadDatas() {
@@ -130,6 +131,22 @@ class OTMyEntourageMessagesViewController: UIViewController {
             }
         }
     }
+    
+    func loadUserInfos() {
+        OTAuthService.init().getDetailsForUser(UserDefaults.standard.currentUser.uuid, success: { (user) in
+            SVProgressHUD.dismiss()
+            if let _user = user {
+                UserDefaults.standard.currentUser = _user
+                DispatchQueue.main.async {
+                    if let unreadCount = _user.unreadCount {
+                        let notifDict = [kNotificationTotalUnreadCountKey:unreadCount]
+                        let notif = Notification(name: NSNotification.Name.updateTotalUnreadCount, object: notifDict, userInfo: nil)
+                        NotificationCenter.default.post(notif)
+                    }
+                }
+            }
+        }) { (error) in }
+    }
 }
 
 //MARK: - uitableview Datsource / delegate -
@@ -149,9 +166,19 @@ extension OTMyEntourageMessagesViewController: UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         arrayItems[indexPath.row].unreadMessageCount = 0
         let feedItem = arrayItems[indexPath.row]
-        let sb = UIStoryboard.init(name: "ActiveFeedItem", bundle: nil)
-        let vc = sb.instantiateInitialViewController() as! OTActiveFeedItemViewController
-        vc.feedItem = feedItem
+        
+        var vc:UIViewController
+        if isMessagesGroup {
+            let sb = UIStoryboard.init(name: "ActiveFeedItem", bundle: nil)
+            vc = sb.instantiateInitialViewController() as! OTActiveFeedItemViewController
+            (vc as! OTActiveFeedItemViewController).feedItem = feedItem
+        }
+        else {
+            let sb = UIStoryboard.init(name: "Messages", bundle: nil)
+            vc = sb.instantiateViewController(withIdentifier: "messageDetailVC") as! OTDetailMessageViewController
+            (vc as! OTDetailMessageViewController).feedItem = feedItem
+        }
+       
         DispatchQueue.main.async {
             self.navigationController?.pushViewController(vc, animated: true)
             tableView.reloadRows(at: [indexPath], with: .none)
