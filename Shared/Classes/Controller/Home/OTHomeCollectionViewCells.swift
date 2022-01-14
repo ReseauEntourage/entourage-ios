@@ -313,12 +313,15 @@ class OTHomeCellOther: UICollectionViewCell {
         self.ui_image_bottom?.isHidden = true
         self.ui_image?.isHidden = false
         
+        var labelMore = OTLocalisationService.getLocalizedValue(forKey: "cell_info_demand_empty_button")
         if !isAction {
             self.contentView.backgroundColor = UIColor.appOrange()
         }
         else {
             self.contentView.backgroundColor = UIColor.init(red: 158 / 255.0, green: 158 / 255.0, blue: 158 / 255.0, alpha: 1.0)
+            labelMore = OTLocalisationService.getLocalizedValue(forKey: "cell_info_action_empty_button")
         }
+        self.ui_label_more.text = labelMore
     }
     
     func populateCell(title:String,buttonMoreTxt:String) {
