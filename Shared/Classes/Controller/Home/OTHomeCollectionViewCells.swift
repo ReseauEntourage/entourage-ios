@@ -296,7 +296,7 @@ class OTHomeImageCollectionViewCell: UICollectionViewCell {
 class OTHomeCellOther: UICollectionViewCell {
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_image: UIImageView?
-    @IBOutlet weak var ui_label_more: UILabel!
+    @IBOutlet weak var ui_label_more: UILabel?
     @IBOutlet weak var ui_image_bottom: UIImageView?
     var isShowZone = false
     
@@ -321,14 +321,14 @@ class OTHomeCellOther: UICollectionViewCell {
             self.contentView.backgroundColor = UIColor.init(red: 158 / 255.0, green: 158 / 255.0, blue: 158 / 255.0, alpha: 1.0)
             labelMore = OTLocalisationService.getLocalizedValue(forKey: "cell_info_action_empty_button")
         }
-        self.ui_label_more.text = labelMore
+        self.ui_label_more?.text = labelMore
     }
     
     func populateCell(title:String,buttonMoreTxt:String) {
         ui_title.text = title
         self.isShowZone = false
         self.contentView.backgroundColor = UIColor.appOrange()
-        ui_label_more.text = buttonMoreTxt
+        ui_label_more?.text = buttonMoreTxt
         self.ui_image?.isHidden = true
         self.ui_image_bottom?.isHidden = false
     }
