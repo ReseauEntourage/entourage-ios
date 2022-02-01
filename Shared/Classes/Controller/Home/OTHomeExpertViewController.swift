@@ -314,11 +314,13 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if isLoading {
-            if arrayFeedEmpty[indexPath.row].type == .Headlines {
+            if arrayFeedEmpty.count > indexPath.row {
+                if arrayFeedEmpty[indexPath.row].type == .Headlines {
                 return CELL_HEADLINES_HEIGHT
-            }
-            if arrayFeedEmpty[indexPath.row].type == .Events {
-                return CELL_EVENTS_HEIGHT
+                }
+                if arrayFeedEmpty[indexPath.row].type == .Events {
+                    return CELL_EVENTS_HEIGHT
+                }
             }
             return CELL_ACTIONS_HEIGHT
         }
