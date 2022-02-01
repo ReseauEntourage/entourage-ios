@@ -27,7 +27,7 @@
 		02F805E72715D88100694BB6 /* OTMyActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */; };
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
-		2B0322092643F2A400A70007 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0322082643F2A400A70007 /* SwiftPackageProductDependency */; };
+		2B0322092643F2A400A70007 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0322082643F2A400A70007 /* MBProgressHUD */; };
 		2B033793265524B7002ABCE6 /* OTEntourageEditorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B033792265524B7002ABCE6 /* OTEntourageEditorService.swift */; };
 		2B039CC1251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */; };
 		2B05CBCF25067F490065E8D3 /* OTShareEntourageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */; };
@@ -108,8 +108,8 @@
 		2BF2520D24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2520C24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift */; };
 		2BF958802451D78100C36863 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9587F2451D78100C36863 /* Extensions.swift */; };
 		2BFC5A89245AC32800AB75C4 /* OTPictureUploadS3Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC5A88245AC32800AB75C4 /* OTPictureUploadS3Service.swift */; };
-		2D902D5A25B9B7D8003157D1 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2D902D5925B9B7D8003157D1 /* SwiftPackageProductDependency */; };
-		2DAF5DE3253CD0B600662FD3 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2DAF5DE2253CD0B600662FD3 /* SwiftPackageProductDependency */; };
+		2D902D5A25B9B7D8003157D1 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2D902D5925B9B7D8003157D1 /* FacebookCore */; };
+		2DAF5DE3253CD0B600662FD3 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2DAF5DE2253CD0B600662FD3 /* SDWebImage */; };
 		371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
 		37191AD6220B3A6600F789B8 /* CommunityConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37191AD5220B3A6600F789B8 /* CommunityConfig.plist */; };
 		372174F22281BE1C00EFDF3A /* OTModalPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 372174F12281BE1C00EFDF3A /* OTModalPopup.m */; };
@@ -135,7 +135,7 @@
 		37D5D4BB22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */; };
 		37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37DC2581242A643100A2024F /* OTEntourageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC2580242A643100A2024F /* OTEntourageUITests.m */; };
-		6002577FD1E74DC775FAB826 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		6002577FD1E74DC775FAB826 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
@@ -1472,7 +1472,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D902D5A25B9B7D8003157D1 /* BuildFile in Frameworks */,
+				2D902D5A25B9B7D8003157D1 /* FacebookCore in Frameworks */,
 				0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */,
 				0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */,
 				A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */,
@@ -1481,9 +1481,9 @@
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
-				2B0322092643F2A400A70007 /* BuildFile in Frameworks */,
-				2DAF5DE3253CD0B600662FD3 /* BuildFile in Frameworks */,
-				6002577FD1E74DC775FAB826 /* BuildFile in Frameworks */,
+				2B0322092643F2A400A70007 /* MBProgressHUD in Frameworks */,
+				2DAF5DE3253CD0B600662FD3 /* SDWebImage in Frameworks */,
+				6002577FD1E74DC775FAB826 /* (null) in Frameworks */,
 				DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3222,9 +3222,9 @@
 			);
 			name = entourage;
 			packageProductDependencies = (
-				2DAF5DE2253CD0B600662FD3 /* SwiftPackageProductDependency */,
-				2D902D5925B9B7D8003157D1 /* SwiftPackageProductDependency */,
-				2B0322082643F2A400A70007 /* SwiftPackageProductDependency */,
+				2DAF5DE2253CD0B600662FD3 /* SDWebImage */,
+				2D902D5925B9B7D8003157D1 /* FacebookCore */,
+				2B0322082643F2A400A70007 /* MBProgressHUD */,
 			);
 			productName = entourage;
 			productReference = 6B92CA9E19A7461C004E8C9B /* Ent-Beta.app */;
@@ -3279,9 +3279,9 @@
 			);
 			mainGroup = 6B92CA9519A7461C004E8C9B;
 			packageReferences = (
-				2DAF5DE1253CD0B600662FD3 /* RemoteSwiftPackageReference */,
-				2D902D5825B9B7D8003157D1 /* RemoteSwiftPackageReference */,
-				2B90A654263815B5007621F0 /* RemoteSwiftPackageReference */,
+				2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				2D902D5825B9B7D8003157D1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				2B90A654263815B5007621F0 /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
 			);
 			productRefGroup = 6B92CA9F19A7461C004E8C9B /* Products */;
 			projectDirPath = "";
@@ -4386,7 +4386,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 45;
@@ -4418,7 +4418,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
+				PROVISIONING_PROFILE_SPECIFIER = "FP dev";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
@@ -4573,7 +4573,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "Bitrise iOS ad-hoc - (social.entourage.entourageios.beta)";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4619,7 +4619,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2B90A654263815B5007621F0 /* RemoteSwiftPackageReference */ = {
+		2B90A654263815B5007621F0 /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jdg/MBProgressHUD.git";
 			requirement = {
@@ -4627,7 +4627,7 @@
 				minimumVersion = 1.2.0;
 			};
 		};
-		2D902D5825B9B7D8003157D1 /* RemoteSwiftPackageReference */ = {
+		2D902D5825B9B7D8003157D1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
@@ -4635,7 +4635,7 @@
 				minimumVersion = 9.0.0;
 			};
 		};
-		2DAF5DE1253CD0B600662FD3 /* RemoteSwiftPackageReference */ = {
+		2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
@@ -4646,19 +4646,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2B0322082643F2A400A70007 /* SwiftPackageProductDependency */ = {
+		2B0322082643F2A400A70007 /* MBProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2B90A654263815B5007621F0 /* RemoteSwiftPackageReference */;
+			package = 2B90A654263815B5007621F0 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
 			productName = MBProgressHUD;
 		};
-		2D902D5925B9B7D8003157D1 /* SwiftPackageProductDependency */ = {
+		2D902D5925B9B7D8003157D1 /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2D902D5825B9B7D8003157D1 /* RemoteSwiftPackageReference */;
+			package = 2D902D5825B9B7D8003157D1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
 		};
-		2DAF5DE2253CD0B600662FD3 /* SwiftPackageProductDependency */ = {
+		2DAF5DE2253CD0B600662FD3 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2DAF5DE1253CD0B600662FD3 /* RemoteSwiftPackageReference */;
+			package = 2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
