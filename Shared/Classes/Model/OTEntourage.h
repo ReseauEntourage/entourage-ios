@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Ciprian Habuc on 13/05/16.
-//  Copyright © 2016 OCTO Technology. All rights reserved.
+//  Copyright © 2016 Entourage. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

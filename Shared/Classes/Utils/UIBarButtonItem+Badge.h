@@ -3,7 +3,7 @@
 //
 //
 //  Created by Veronica Gliga on 2016-10-11.
-//  Copyright © 2016 OCTO Technology. All rights reserved.
+//  Copyright © 2016 Entourage. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -2,7 +2,7 @@
 //  OTFeedItemJoiner.m
 //
 //  Created by Ciprian Habuc on 09/03/16.
-//  Copyright © 2016 OCTO Technology. All rights reserved.
+//  Copyright © 2016 Entourage. All rights reserved.
 //
 
 #import "OTFeedItemJoiner.h"

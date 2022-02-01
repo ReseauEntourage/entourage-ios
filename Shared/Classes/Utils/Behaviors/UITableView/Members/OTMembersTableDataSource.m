@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by sergiu buceac on 8/25/16.
-//  Copyright © 2016 OCTO Technology. All rights reserved.
+//  Copyright © 2016 Entourage. All rights reserved.
 //
 
 #import "OTMembersTableDataSource.h"

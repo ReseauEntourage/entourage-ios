@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by sergiu.buceac on 19/04/2017.
-//  Copyright © 2017 OCTO Technology. All rights reserved.
+//  Copyright © 2017 Entourage. All rights reserved.
 //
 
 #import "OTBehavior.h"

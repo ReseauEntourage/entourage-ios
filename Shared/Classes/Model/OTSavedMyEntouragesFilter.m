@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Mihai Ionescu on 19/12/2017.
-//  Copyright © 2017 OCTO Technology. All rights reserved.
+//  Copyright © 2017 Entourage. All rights reserved.
 //
 
 // TO-DO Find a better way to store filters

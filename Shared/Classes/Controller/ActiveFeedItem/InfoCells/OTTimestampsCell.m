@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Grégoire Clermont on 12/08/2019.
-//  Copyright © 2019 OCTO Technology. All rights reserved.
+//  Copyright © 2019 Entourage. All rights reserved.
 //
 
 #import "OTTimestampsCell.h"

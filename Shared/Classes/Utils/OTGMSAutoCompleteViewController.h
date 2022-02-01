@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Work on 27/11/2018.
-//  Copyright © 2018 OCTO Technology. All rights reserved.
+//  Copyright © 2018 Entourage. All rights reserved.
 //
 
 #import <GooglePlaces/GooglePlaces.h>

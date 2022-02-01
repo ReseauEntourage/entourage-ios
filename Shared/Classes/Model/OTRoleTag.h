@@ -2,7 +2,7 @@
 //  OTRoleTag.h
 //
 //  Created by Grégoire Clermont on 06/02/2019.
-//  Copyright © 2019 OCTO Technology. All rights reserved.
+//  Copyright © 2019 Entourage. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

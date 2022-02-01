@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by veronica.gliga on 08/12/2017.
-//  Copyright © 2017 OCTO Technology. All rights reserved.
+//  Copyright © 2017 Entourage. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

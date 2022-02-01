@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Jr on 08/06/2020.
-//  Copyright © 2020 OCTO Technology. All rights reserved.
+//  Copyright © 2020 Entourage. All rights reserved.
 //
 
 #ifndef Analytics_keys_h
