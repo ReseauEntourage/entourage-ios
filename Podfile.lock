@@ -29,7 +29,7 @@ DEPENDENCIES:
   - AFNetworking (~> 4.0)
   - AWSS3 (~> 2.19.0)
   - GooglePlaces (~> 5.1.0)
-  - IQKeyboardManager (~> 6.5)
+  - IQKeyboardManager (~> 6.5.9)
   - kingpin (= 0.3.1)
   - SimpleKeychain (~> 0.7)
   - SnapKit (~> 4.0.0)
@@ -61,6 +61,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: d1fdf57c2b2cad7a373d6d47805505b765c353a3
+PODFILE CHECKSUM: 99f172683c7402eb729285588e67c682424b75f6
 
 COCOAPODS: 1.11.2

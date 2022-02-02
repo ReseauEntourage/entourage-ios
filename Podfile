@@ -8,7 +8,7 @@ def sharedPods
     platform :ios, '11.0'
 
     pod 'AFNetworking', '~> 4.0'
-    pod 'IQKeyboardManager', '~> 6.5'
+    pod 'IQKeyboardManager', '~> 6.5.9'
     pod 'SVProgressHUD', '~> 2.2'
     pod 'SimpleKeychain', '~> 0.7'
     pod 'AWSS3', '~> 2.19.0'

@@ -19,6 +19,13 @@ Another option for uploading symbols is to use the [upload-symbols](https://gith
 chmod +x scripts/upload-symbols
 This script can be used to manually upload dSYM files. For usage notes and additional instructions for the script, run upload-symbols without any parameters.
 
+## Pod dependencies
+AWSS3: stuck to 2.19.X because:
+> AWS SDK for iOS 2.20.0
+> Breaking Changes
+> Removed deprecated clients AWS Mobile SDK for iOS has removed these deprecated clients (PR #3281):
+> AWSS3TransferManager - Use Amplify Storage for uploads and downloads with Amazon S3.
+
 ## Authors
 
 * **François Pellissier** - *Coordination* - [FrPellissier](https://github.com/FrPellissier)
