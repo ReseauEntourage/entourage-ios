@@ -9,6 +9,16 @@ Our goal is to create a local social network on smartphones to help the HOMELESS
 
 ...
 
+## Upload Symbols to Firebase
+
+Crashlytics requires you to upload debug symbols.
+You can use a run script build phase for Xcode to automatically upload debug symbols post-build. Find the run script here:
+${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run
+
+Another option for uploading symbols is to use the [upload-symbols](https://github.com/firebase/firebase-ios-sdk/raw/master/Crashlytics/upload-symbols) script. Place the script in a subdirectory of your project file (for example scripts/upload-symbols), then make sure that the script is executable:
+chmod +x scripts/upload-symbols
+This script can be used to manually upload dSYM files. For usage notes and additional instructions for the script, run upload-symbols without any parameters.
+
 ## Authors
 
 * **François Pellissier** - *Coordination* - [FrPellissier](https://github.com/FrPellissier)
