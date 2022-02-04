@@ -849,11 +849,6 @@ OTHeatzonesCollectionViewDelegate
     }
 }
 
-- (void)showEntourages {
-    [OTLogger logEvent:@"GoToMessages"];
-    [self performSegueWithIdentifier:@"MyEntouragesSegue" sender:self];
-}
-
 - (void)createQuickEncounter {
     
     // EMA-2138
@@ -1651,10 +1646,6 @@ OTHeatzonesCollectionViewDelegate
         controller.feedItem = self.selectedFeedItem;
         controller.inviteBehaviorTriggered = self.inviteBehaviorTriggered;
         self.inviteBehaviorTriggered = NO;
-    }
-    else if([segue.identifier isEqualToString:@"MyEntouragesSegue"]) {
-        OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
-        controller.optionsDelegate = self;
     }
     else if ([segue.identifier isEqualToString:@"OTWebViewSegue"]) {
         

@@ -31,6 +31,7 @@ import SVProgressHUD
     @objc var entourageId:String? = nil
     
     @objc var activeFeedVC:OTActiveFeedItemViewController? = nil
+    @objc var detailMessagesVC:OTDetailMessageViewController? = nil
     
     @objc init(labelString: NSMutableAttributedString, textFieldPlaceholder: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
@@ -98,11 +99,15 @@ import SVProgressHUD
         if let _ = activeFeedVC {
             SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "report_user"))
         }
+        else if let _ = detailMessagesVC {
+            SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "report_user"))
+        }
         else {
             SVProgressHUD.showSuccess(withStatus: OTLocalisationService.getLocalizedValue(forKey: "report_entourage"))
         }
         close(self)
         activeFeedVC?.validateReport()
+        detailMessagesVC?.validateReport()
     }
     
     private func showErrorMinTxt() {

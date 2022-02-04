@@ -24,4 +24,5 @@
 @property(nonatomic) BOOL isPOI;
 @property(nonatomic) NSNumber *poiId;
 @property(nonatomic) CGFloat widthPicto;
+@property(nonatomic) NSNumber *userMessageUID;//Used for the new version of detailMessageVC
 @end

@@ -97,18 +97,19 @@
 - (void)requestDataWithSuccess:(void(^)(NSArray *items))success orFailure:(void(^)(void))failure {
     [SVProgressHUD show];
     NSMutableDictionary *parameters = [self.currentFilter toDictionaryWithPageNumber:self.pageNumber andSize:DATA_PAGE_SIZE];
-    [[OTFeedsService new] getMyFeedsWithParameters:parameters success:^(NSArray *items) {
-        [self.items addObjectsFromArray:items];
-        
-        [self configureNoDataView];
-        
-        [SVProgressHUD dismiss];
-        success(items);
-        
-    } failure:^(NSError *error) {
-        [SVProgressHUD dismiss];
-        if(failure)
-            failure();
+    
+    [OTMessagesService getMessagesGroupWithParams:parameters andCompletion:^(NSArray<OTEntourage *> *items, NSError *error) {
+        if (error == nil) {
+            [self.items addObjectsFromArray:items];
+            [self configureNoDataView];
+            [SVProgressHUD dismiss];
+            success(items);
+        }
+        else {
+            [SVProgressHUD dismiss];
+            if(failure)
+                failure();
+        }
     }];
 }
 

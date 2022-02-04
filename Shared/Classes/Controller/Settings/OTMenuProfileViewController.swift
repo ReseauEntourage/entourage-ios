@@ -72,6 +72,12 @@ class OTMenuProfileViewController: UIViewController {
                 UserDefaults.standard.currentUser = _user
                 DispatchQueue.main.async {
                     self.ui_tableview?.reloadData()
+                    
+                    if let unreadCount = _user.unreadCount {
+                        let notifDict = [kNotificationTotalUnreadCountKey:unreadCount]
+                        let notif = Notification(name: NSNotification.Name.updateTotalUnreadCount, object: notifDict, userInfo: nil)
+                        NotificationCenter.default.post(notif)
+                    }
                 }
             }
         }) { (error) in

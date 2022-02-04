@@ -635,11 +635,6 @@ OTHeatzonesCollectionViewDelegate
     [self.newsFeedsSourceBehavior pause];
 }
 
-- (void)showEntourages {
-    [OTLogger logEvent:@"GoToMessages"];
-    [self performSegueWithIdentifier:@"MyEntouragesSegue" sender:self];
-}
-
 - (void)registerObserver {
     [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:NSLocalizedString(@"CURRENT_USER", @"") options:NSKeyValueObservingOptionNew context:nil];
 }
@@ -1226,10 +1221,6 @@ OTHeatzonesCollectionViewDelegate
         controller.feedItem = self.selectedFeedItem;
         controller.inviteBehaviorTriggered = self.inviteBehaviorTriggered;
         self.inviteBehaviorTriggered = NO;
-    }
-    else if([segue.identifier isEqualToString:@"MyEntouragesSegue"]) {
-        OTMyEntouragesViewController *controller = (OTMyEntouragesViewController *)destinationViewController;
-        controller.optionsDelegate = self;
     }
 }
 

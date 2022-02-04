@@ -51,7 +51,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.isFirstLaunch = YES;
     self.anonymousMode = IS_ANONYMOUS_USER;
 
     self.optionsButton.hidden = YES;
@@ -90,10 +90,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    if (!self.anonymousMode) {
+    ((OTMyEntouragesFilter*)self.entouragesDataSource.currentFilter).isUnread = self.isMessagesOnly;
+    if (!self.anonymousMode && self.isFirstLaunch) {
         [self loadInvitations];
         [self.entouragesDataSource loadData];
+        self.isFirstLaunch = NO;
     }
     [OTAppConfiguration updateAppearanceForMainTabBar];
 }

@@ -116,7 +116,9 @@ class OTMainTabbarViewController: UITabBarController {
         plusVC.tabBarItem.image = UIImage.init(named: "ic_tab_plus_selected")?.withRenderingMode(.alwaysOriginal)
         plusVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_plus_selected")
         
-        let _messagesVC = UIStoryboard.myEntourages()?.instantiateViewController(withIdentifier: "OTMyEntouragesViewController") as! OTMyEntouragesViewController
+//        let _messagesVC = UIStoryboard.myEntourages()?.instantiateViewController(withIdentifier: "OTMyEntouragesViewController") as! OTMyEntouragesViewController
+        let _messagesVC = UIStoryboard.myEntourages()?.instantiateViewController(withIdentifier: "MyEntourageMainVC") as! UIViewController
+
         messagesVC = UINavigationController.init(rootViewController: _messagesVC)
         messagesVC.tabBarItem.title = OTLocalisationService.getLocalizedValue(forKey:"tabbar_message")
         messagesVC.tabBarItem.image = UIImage.init(named: "ic_tab_message")?.withRenderingMode(.alwaysOriginal)
@@ -365,6 +367,12 @@ extension OTMainTabbarViewController: UITabBarControllerDelegate {
             oldItemSelected = currentItemSelected
             currentItemSelected = item.tag
             boldSelectedItem()
+            
+            if item.tag == 3 {
+                if let nav = messagesVC, let vc = nav.viewControllers[0] as? OTMyEntourageMainViewController {
+                    vc.setupVcsAfterTapTabbar()
+                }
+            }
         }
     }
 

@@ -44,6 +44,8 @@ class OTMainGuideHubViewController: UIViewController {
         isNeedHelp = user?.isUserTypeAlone() ?? false
         
         ui_tableview?.reloadData()
+        
+        loadUser()
     }
     
     func showGds() {
@@ -61,6 +63,21 @@ class OTMainGuideHubViewController: UIViewController {
             
             OTSafariService.launchInAppBrowser(withUrlString: url, viewController: self.navigationController)
         }
+    }
+    
+    func loadUser() {
+        OTAuthService.init().getDetailsForUser(UserDefaults.standard.currentUser.uuid, success: { (user) in
+            if let _user = user {
+                UserDefaults.standard.currentUser = _user
+                DispatchQueue.main.async {
+                    if let unreadCount = _user.unreadCount {
+                        let notifDict = [kNotificationTotalUnreadCountKey:unreadCount]
+                        let notif = Notification(name: NSNotification.Name.updateTotalUnreadCount, object: notifDict, userInfo: nil)
+                        NotificationCenter.default.post(notif)
+                    }
+                }
+            }
+        }) { (error) in }
     }
 }
 

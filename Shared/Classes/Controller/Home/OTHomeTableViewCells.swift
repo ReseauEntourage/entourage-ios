@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK: - Protocol Clic from Cells -
-protocol CellClickDelegate: class {
+protocol CellClickDelegate: AnyObject {
     func selectCollectionViewCell(item: Any,type:HomeCardType,position:Int)
     func showDetail(type:HomeCardType,isFromArrow:Bool,subtype:HomeCardType)
     func showDetailUser(userId:NSNumber)
@@ -48,26 +48,11 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     weak var delegate:CellClickDelegate? = nil
     
     let cell_headline_size = CGSize(width: 200, height: 264)
-    
-    let cell_event_size_Original = CGSize(width: 292, height: 214)
-    let cell_event_size_VariantA = CGSize(width: 200, height: 260)
-    let cell_event_size_VariantB = CGSize(width: 200, height: 224)
-    
-    let cell_event_zone_size_Original = CGSize(width: 200, height: 214)
-    let cell_event_zone_size_VariantA = CGSize(width: 200, height: 260)
-    let cell_event_zone_size_VariantB = CGSize(width: 200, height: 224)
-    
-    let cell_empty_event_size_Original = CGSize(width: 140, height: 214)
-    let cell_empty_event_size_VariantA = CGSize(width: 140, height: 260)
-    let cell_empty_event_size_VariantB = CGSize(width: 140, height: 224)
-    
-    let cell_action_size_Original = CGSize(width: 200, height: 232)
-    let cell_action_size_VariantA = CGSize(width: 200, height: 218)
-    let cell_action_size_VariantB = CGSize(width: 200, height: 180)
-    
-    let cell_empty_action_size_Original = CGSize(width: 140, height: 232)
-    let cell_empty_action_size_VariantA = CGSize(width: 140, height: 218)
-    let cell_empty_action_size_VariantB = CGSize(width: 140, height: 180)
+    let cell_event_size = CGSize(width: 200, height: 260)
+    let cell_event_zone_size = CGSize(width: 200, height: 260)
+    let cell_empty_event_size = CGSize(width: 140, height: 260)
+    let cell_action_size = CGSize(width: 200, height: 218)
+    let cell_empty_action_size = CGSize(width: 140, height: 218)
     
     let cell_spacing:CGFloat = 15.0
     let minimumItemsToShowMore = 2
@@ -80,8 +65,6 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
     
     var isLoading = false
     
-    var variantType:VariantCell = .Original
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -89,16 +72,11 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
         self.ui_collectionview.dataSource = self
         self.ui_collectionview.delegate = self
         
-        //MARK: Use for AB Testing
-        let nibA = UINib(nibName: "CellHomeExpertEventA", bundle: nil)
+        let nibA = UINib(nibName: "CellHomeExpertEvent", bundle: nil)
         ui_collectionview.register(nibA, forCellWithReuseIdentifier: "cellCollEventA")
-        let nibB = UINib(nibName: "CellHomeExpertEventB", bundle: nil)
-        ui_collectionview.register(nibB, forCellWithReuseIdentifier: "cellCollEventB")
         
-        let nibActionA = UINib(nibName: "CellHomeExpertActionA", bundle: nil)
+        let nibActionA = UINib(nibName: "CellHomeExpertAction", bundle: nil)
         ui_collectionview.register(nibActionA, forCellWithReuseIdentifier: "cellCollActionA")
-        let nibActionB = UINib(nibName: "CellHomeExpertActionB", bundle: nil)
-        ui_collectionview.register(nibActionB, forCellWithReuseIdentifier: "cellCollActionB")
     }
     
     func changeFlowLayout() {
@@ -108,28 +86,10 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
             flowLayout.itemSize = cell_headline_size
         }
         else if cards.type == .Events {
-            var _size:CGSize
-            switch self.variantType {
-            case .Original:
-                _size = cell_event_size_Original
-            case .VariantA:
-                _size = cell_event_size_VariantA
-            case .VariantB:
-                _size = cell_event_size_VariantB
-            }
-            flowLayout.itemSize = _size
+            flowLayout.itemSize = cell_event_size
         }
         else {
-            var _size:CGSize
-            switch self.variantType {
-            case .Original:
-                _size = cell_action_size_Original
-            case .VariantA:
-                _size = cell_action_size_VariantA
-            case .VariantB:
-                _size = cell_action_size_VariantB
-            }
-            flowLayout.itemSize = _size
+            flowLayout.itemSize = cell_action_size
         }
         
         flowLayout.minimumLineSpacing = cell_spacing
@@ -137,12 +97,10 @@ class OTHomeCellCollectionView: UITableViewCell,UICollectionViewDelegateFlowLayo
         self.ui_collectionview.collectionViewLayout = flowLayout
     }
     
-    func populateCell(card:HomeCard,clickDelegate:CellClickDelegate, isLoading:Bool, variantType:VariantCell) {
+    func populateCell(card:HomeCard,clickDelegate:CellClickDelegate, isLoading:Bool) {
         self.cards = card
         self.delegate = clickDelegate
         self.isLoading = isLoading
-        
-        self.variantType = variantType
         
         if card.type != .Headlines {
             self.isSpecialCells = cards.arrayCards.count <= minimalCellForSpecialCell
@@ -209,7 +167,7 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
             
             if isSpecialCells && indexPath.row == cards.arrayCards.count {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellOther", for: indexPath) as! OTHomeCellOther
-                cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_modZone") , isShowZone: true)
+                cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_modZone") , isShowZone: true,isAction: false)
                 return cell
             }
             
@@ -219,16 +177,7 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
                 return cell
             }
             
-            var cellName = ""
-            switch self.variantType {
-            case .Original:
-                cellName = "cellCollEvent"
-            case .VariantA:
-                cellName = "cellCollEventA"
-            case .VariantB:
-                cellName = "cellCollEventB"
-            }
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! OTHomeEventCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellCollEventA", for: indexPath) as! OTHomeEventCollectionViewCell
             
             let item = cards.arrayCards[indexPath.row]
             if let item = item as? OTEntourage {
@@ -250,7 +199,7 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
                 return cell
             }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellOther", for: indexPath) as! OTHomeCellOther
-            cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_helpEntourage"), isShowZone: true)
+            cell.populateCell(title: OTLocalisationService.getLocalizedValue(forKey: "home_button_helpEntourage"), isShowZone: true, isAction: true)
             return cell
         }
         
@@ -269,25 +218,10 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
             return cell
         }
         
-        var cellName = ""
-        switch self.variantType {
-        case .Original:
-            cellName = "cellCollAction"
-        case .VariantA:
-            cellName = "cellCollActionA"
-        case .VariantB:
-            cellName = "cellCollActionB"
-        }
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! OTHomeCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellCollActionA", for: indexPath) as! OTHomeCollectionViewCell
         
         if let _entourage = cards.arrayCards[indexPath.row] as? OTEntourage {
-            if self.variantType == .Original {
-                cell.updateCell(item: _entourage,delegate: delegate)
-            }
-            else {
-                cell.updateCellVariant(item: _entourage,delegate: delegate)
-            }
+            cell.updateCellVariant(item: _entourage,delegate: delegate)
         }
         
         return cell
@@ -327,62 +261,26 @@ extension OTHomeCellCollectionView: UICollectionViewDataSource,UICollectionViewD
             return cell_headline_size
         }
         else if cards.type == .Events {
-            var specialSize:CGSize
-            var emptySize:CGSize
-            var normalSize:CGSize
-            switch self.variantType {
-            case .Original:
-                specialSize = cell_event_zone_size_Original
-                emptySize = cell_empty_event_size_Original
-                normalSize = cell_event_size_Original
-            case .VariantA:
-                specialSize = cell_event_zone_size_VariantA
-                emptySize = cell_empty_event_size_VariantA
-                normalSize = cell_event_size_VariantA
-            case .VariantB:
-                specialSize = cell_event_zone_size_VariantB
-                emptySize = cell_empty_event_size_VariantB
-                normalSize = cell_event_size_VariantB
-            }
-            
             if isSpecialCells && indexPath.row == cards.arrayCards.count {
-                return specialSize
+                return cell_event_zone_size
             }
             
             if indexPath.row == cards.arrayCards.count {
-                return emptySize
+                return cell_empty_event_size
             }
             
-            return normalSize
+            return cell_event_size
         }
         else {
-            var specialSize:CGSize
-            var emptySize:CGSize
-            var normalSize:CGSize
-            switch self.variantType {
-            case .Original:
-                specialSize = cell_action_size_Original
-                emptySize = cell_empty_action_size_Original
-                normalSize = cell_action_size_Original
-            case .VariantA:
-                specialSize = cell_action_size_VariantA
-                emptySize = cell_empty_action_size_VariantA
-                normalSize = cell_action_size_VariantA
-            case .VariantB:
-                specialSize = cell_action_size_VariantB
-                emptySize = cell_empty_action_size_VariantB
-                normalSize = cell_action_size_VariantB
-            }
-            
             if isSpecialCells && indexPath.row == cards.arrayCards.count {
-                return specialSize
+                return cell_action_size
             }
             
             if indexPath.row == cards.arrayCards.count {
-                return emptySize
+                return cell_empty_action_size
             }
             
-            return normalSize
+            return cell_action_size
         }
     }
 }

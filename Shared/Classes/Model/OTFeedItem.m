@@ -81,6 +81,11 @@
         self.type = [dictionary stringForKey:kWSKeyType];
         self.updatedDate = [dictionary dateForKey:kWSUpdatedDate];
         self.unreadMessageCount = [dictionary numberForKey:kWSNoUnreadMessages];
+       
+        if (self.unreadMessageCount == nil) {
+            self.unreadMessageCount = @0;
+        }
+        
         self.shareUrl = [dictionary stringForKey:kWSKeyShareUrl];
         NSDictionary *outcomeDictionary = [dictionary objectForKey:kWSKeyOutcome];
         if (outcomeDictionary) {

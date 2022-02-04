@@ -129,7 +129,7 @@
     self.ui_tv_send_comment.layer.borderColor = [[UIColor colorWithRed:216 / 255.0 green:216 / 255.0 blue:216 / 255.0 alpha:1.0]CGColor];
     self.ui_tv_send_comment.layer.cornerRadius = 5;
     self.ui_label_send_comment_title.text = OTLocalizedString(@"pop_validate_action_add_comment_send_title");
-    [self.ui_bt_send_comment setTitle:OTLocalizedString(@"pop_validate_action_add_comment_send_button") forState:UIControlStateNormal];
+    [self.ui_bt_send_comment setTitle:OTLocalizedString(@"pop_validate_action_add_comment_send_button").uppercaseString forState:UIControlStateNormal];
     
     self.ui_tv_send_comment.text = OTLocalizedString(@"pop_validate_action_add_comment_send_placeholder");
     [self.ui_tv_send_comment setTextColor:[UIColor lightGrayColor]];

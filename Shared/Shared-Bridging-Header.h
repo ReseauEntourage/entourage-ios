@@ -38,7 +38,6 @@
 #import "Analytics_keys.h"
 #import "UIViewController+menu.h"
 #import "UIImageView+entourage.h"
-#import "OTMyEntouragesViewController.h"
 #import "OTMapOptionsViewController.h"
 #import "OTHTTPRequestManager.h"
 #import "OTOngoingTourService.h"
@@ -93,3 +92,11 @@
 #import "OTEntourageService.h"
 #import "OTNextStatusButtonBehavior.h"
 #import "OTConfirmCloseViewController.h"
+
+#import "OTEntouragesTableViewCell.h"
+#import "OTSummaryProviderBehavior.h"
+
+#import "OTAutoGrowTextView.h"
+#import "OTUnreadMessagesService.h"
+#import "OTEntourageMessaging.h"
+#import "OTChatCellBase.h"
