@@ -111,11 +111,12 @@ workflows:
             Branch|${BITRISE_GIT_BRANCH}
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
+    - cache-push:
+        is_always_run: true
     - firebase-dsym-upload:
         inputs:
         - fdu_logging: 'yes'
         - fdu_google_services_location: "./entourage/Settings/Environment/GoogleService-Info-social.entourage.ios.beta.plist"
-    - cache-push: {}
     envs:
     - opts:
         is_expand: false
@@ -183,19 +184,17 @@ workflows:
             Branch|${BITRISE_GIT_BRANCH}
             Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
-    - firebase-dsym-upload:
-        inputs:
-        - fdu_dsym_location: "$BITRISE_DEPLOY_DIR/Entourage.dSYM.zip"
-        - fdu_google_services_location: "./entourage/Settings/Environment/GoogleService-Info.plist"
-        is_always_run: true
-    - cache-push:
-        is_always_run: true
+    - cache-push: {}
     - xcode-build-version:
         inputs:
         - info_plist_path: "./entourage/entourage-Info.plist"
     - git-tag:
         inputs:
         - tag: Ent_TestFlight_$XBV_PROJECT_VERSION
+    - firebase-dsym-upload:
+        inputs:
+        - fdu_dsym_location: "$BITRISE_DEPLOY_DIR/Entourage.dSYM.zip"
+        - fdu_google_services_location: "./entourage/Settings/Environment/GoogleService-Info.plist"
 app:
   envs:
   - opts:
