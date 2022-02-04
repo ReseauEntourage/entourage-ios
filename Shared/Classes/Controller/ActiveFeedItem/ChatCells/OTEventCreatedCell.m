@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Smart Care on 03/08/2018.
-//  Copyright © 2018 OCTO Technology. All rights reserved.
+//  Copyright © 2018 Entourage. All rights reserved.
 //
 #define BUTTON_MARGIN 144
 

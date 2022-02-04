@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Ciprian Habuc on 16/05/16.
-//  Copyright © 2016 OCTO Technology. All rights reserved.
+//  Copyright © 2016 Entourage. All rights reserved.
 //
 
 #ifndef OTAPIConsts_h

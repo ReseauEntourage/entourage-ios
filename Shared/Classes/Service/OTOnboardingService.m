@@ -3,9 +3,9 @@
 //  entourage
 //
 //  Created by Ciprian Habuc on 07/07/16.
-//  Copyright © 2016 OCTO Technology. All rights reserved.
+//  Copyright © 2016 Entourage. All rights reserved.
 //
-#import <FBSDKCoreKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 @import FacebookCore;
 
 #import "OTOnboardingService.h"

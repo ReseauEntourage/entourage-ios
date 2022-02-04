@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by sergiu buceac on 1/17/17.
-//  Copyright © 2017 OCTO Technology. All rights reserved.
+//  Copyright © 2017 Entourage. All rights reserved.
 //
 
 #import "OTAssociationTableViewCell.h"

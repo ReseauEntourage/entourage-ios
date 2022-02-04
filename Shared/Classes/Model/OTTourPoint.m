@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Nicolas Telera on 27/08/2015.
-//  Copyright (c) 2015 OCTO Technology. All rights reserved.
+//  Copyright (c) 2015 Entourage. All rights reserved.
 //
 #import <CoreLocation/CoreLocation.h>
 

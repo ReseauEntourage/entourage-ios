@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Veronica on 14/04/2018.
-//  Copyright © 2018 OCTO Technology. All rights reserved.
+//  Copyright © 2018 Entourage. All rights reserved.
 //
 
 #import "OTUserService.h"

@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Nicolas Telera on 17/11/2015.
-//  Copyright © 2015 OCTO Technology. All rights reserved.
+//  Copyright © 2015 Entourage. All rights reserved.
 //
 
 #import <AFNetworking/UIButton+AFNetworking.h>

@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Mathieu Hausherr on 11/10/14.
-//  Copyright (c) 2014 OCTO Technology. All rights reserved.
+//  Copyright (c) 2014 Entourage. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

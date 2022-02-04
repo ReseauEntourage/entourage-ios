@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Ciprian Habuc on 17/02/16.
-//  Copyright © 2016 OCTO Technology. All rights reserved.
+//  Copyright © 2016 Entourage. All rights reserved.
 //
 
 #import "OTFeedItemAuthor.h"

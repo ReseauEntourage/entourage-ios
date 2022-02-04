@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Louis Davin on 22/08/2014.
-//  Copyright (c) 2014 OCTO Technology. All rights reserved.
+//  Copyright (c) 2014 Entourage. All rights reserved.
 //
 
 #import "OTPoi.h"

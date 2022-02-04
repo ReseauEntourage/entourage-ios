@@ -27,7 +27,7 @@
 		02F805E72715D88100694BB6 /* OTMyActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F805E62715D88100694BB6 /* OTMyActionsViewController.swift */; };
 		0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04B1C119B8000DBBE11 /* AVFoundation.framework */; };
 		0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA4C04D1C119B8E00DBBE11 /* AudioToolbox.framework */; };
-		2B0322092643F2A400A70007 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0322082643F2A400A70007 /* SwiftPackageProductDependency */; };
+		2B0322092643F2A400A70007 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0322082643F2A400A70007 /* MBProgressHUD */; };
 		2B033793265524B7002ABCE6 /* OTEntourageEditorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B033792265524B7002ABCE6 /* OTEntourageEditorService.swift */; };
 		2B039CC1251A0BAA0010A77A /* OTMainGuideHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B039CC0251A0BAA0010A77A /* OTMainGuideHubViewController.swift */; };
 		2B05CBCF25067F490065E8D3 /* OTShareEntourageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05CBCE25067F490065E8D3 /* OTShareEntourageViewController.swift */; };
@@ -108,8 +108,8 @@
 		2BF2520D24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2520C24C9C121000CD3BC /* OTUserDescriptionDetailTableViewCell.swift */; };
 		2BF958802451D78100C36863 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF9587F2451D78100C36863 /* Extensions.swift */; };
 		2BFC5A89245AC32800AB75C4 /* OTPictureUploadS3Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC5A88245AC32800AB75C4 /* OTPictureUploadS3Service.swift */; };
-		2D902D5A25B9B7D8003157D1 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2D902D5925B9B7D8003157D1 /* SwiftPackageProductDependency */; };
-		2DAF5DE3253CD0B600662FD3 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 2DAF5DE2253CD0B600662FD3 /* SwiftPackageProductDependency */; };
+		2D902D5A25B9B7D8003157D1 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2D902D5925B9B7D8003157D1 /* FacebookCore */; };
+		2DAF5DE3253CD0B600662FD3 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2DAF5DE2253CD0B600662FD3 /* SDWebImage */; };
 		371732EA2297FDF10005ED71 /* OTAnalyticsObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 371732E92297FDF10005ED71 /* OTAnalyticsObserver.m */; };
 		37191AD6220B3A6600F789B8 /* CommunityConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37191AD5220B3A6600F789B8 /* CommunityConfig.plist */; };
 		372174F22281BE1C00EFDF3A /* OTModalPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 372174F12281BE1C00EFDF3A /* OTModalPopup.m */; };
@@ -135,7 +135,7 @@
 		37D5D4BB22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D5D4BA22687F86009DFE1C /* MyEntouragesAnonymousPlaceholder.xib */; };
 		37D5D4BF2268AF5D009DFE1C /* OTRoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D5D4BE2268AF5D009DFE1C /* OTRoundedButton.m */; };
 		37DC2581242A643100A2024F /* OTEntourageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC2580242A643100A2024F /* OTEntourageUITests.m */; };
-		6002577FD1E74DC775FAB826 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		6002577FD1E74DC775FAB826 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B4930BD19A769EB00DA7EE0 /* MapKit.framework */; };
 		6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA119A7461C004E8C9B /* Foundation.framework */; };
 		6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B92CAA319A7461C004E8C9B /* CoreGraphics.framework */; };
@@ -536,6 +536,11 @@
 		A2FE6D5120A0783C0025842D /* OTAppAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = A2FE6D5020A0783C0025842D /* OTAppAppearance.m */; };
 		A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA619E9802400A45AC9 /* SystemConfiguration.framework */; };
 		A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A809BAA819E9803700A45AC9 /* Security.framework */; };
+		B3B7CCA927AA7F53006CBE22 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = B3B7CCA827AA7F53006CBE22 /* FirebasePerformance */; };
+		B3B7CCAB27AA7F53006CBE22 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B3B7CCAA27AA7F53006CBE22 /* FirebaseAnalytics */; };
+		B3B7CCAD27AA7F53006CBE22 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = B3B7CCAC27AA7F53006CBE22 /* FirebaseCrashlytics */; };
+		B3B7CCAF27AA7F53006CBE22 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = B3B7CCAE27AA7F53006CBE22 /* FirebaseMessaging */; };
+		B3B7CCB127AA7F53006CBE22 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = B3B7CCB027AA7F53006CBE22 /* FirebaseRemoteConfig */; };
 		DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7E197ECB4BF7DC5B2EDFAC /* Pods_entourage.framework */; };
 		E26723B7A7CE9F68D2D57A75 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC31EA67F1E1B3B3D67982A3 /* Pods_UnitTests.framework */; };
 /* End PBXBuildFile section */
@@ -1472,18 +1477,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D902D5A25B9B7D8003157D1 /* BuildFile in Frameworks */,
+				B3B7CCA927AA7F53006CBE22 /* FirebasePerformance in Frameworks */,
+				2D902D5A25B9B7D8003157D1 /* FacebookCore in Frameworks */,
 				0AA4C04E1C119B8E00DBBE11 /* AudioToolbox.framework in Frameworks */,
 				0AA4C04C1C119B8000DBBE11 /* AVFoundation.framework in Frameworks */,
 				A809BAA919E9803700A45AC9 /* Security.framework in Frameworks */,
 				A809BAA719E9802400A45AC9 /* SystemConfiguration.framework in Frameworks */,
 				6B4930BE19A769EB00DA7EE0 /* MapKit.framework in Frameworks */,
 				6B92CAA419A7461C004E8C9B /* CoreGraphics.framework in Frameworks */,
+				B3B7CCAB27AA7F53006CBE22 /* FirebaseAnalytics in Frameworks */,
+				B3B7CCB127AA7F53006CBE22 /* FirebaseRemoteConfig in Frameworks */,
+				B3B7CCAF27AA7F53006CBE22 /* FirebaseMessaging in Frameworks */,
 				6B92CAA619A7461C004E8C9B /* UIKit.framework in Frameworks */,
 				6B92CAA219A7461C004E8C9B /* Foundation.framework in Frameworks */,
-				2B0322092643F2A400A70007 /* BuildFile in Frameworks */,
-				2DAF5DE3253CD0B600662FD3 /* BuildFile in Frameworks */,
-				6002577FD1E74DC775FAB826 /* BuildFile in Frameworks */,
+				2B0322092643F2A400A70007 /* MBProgressHUD in Frameworks */,
+				2DAF5DE3253CD0B600662FD3 /* SDWebImage in Frameworks */,
+				B3B7CCAD27AA7F53006CBE22 /* FirebaseCrashlytics in Frameworks */,
+				6002577FD1E74DC775FAB826 /* (null) in Frameworks */,
 				DAA12504942E6A3D210E2175 /* Pods_entourage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3222,9 +3232,14 @@
 			);
 			name = entourage;
 			packageProductDependencies = (
-				2DAF5DE2253CD0B600662FD3 /* SwiftPackageProductDependency */,
-				2D902D5925B9B7D8003157D1 /* SwiftPackageProductDependency */,
-				2B0322082643F2A400A70007 /* SwiftPackageProductDependency */,
+				2DAF5DE2253CD0B600662FD3 /* SDWebImage */,
+				2D902D5925B9B7D8003157D1 /* FacebookCore */,
+				2B0322082643F2A400A70007 /* MBProgressHUD */,
+				B3B7CCA827AA7F53006CBE22 /* FirebasePerformance */,
+				B3B7CCAA27AA7F53006CBE22 /* FirebaseAnalytics */,
+				B3B7CCAC27AA7F53006CBE22 /* FirebaseCrashlytics */,
+				B3B7CCAE27AA7F53006CBE22 /* FirebaseMessaging */,
+				B3B7CCB027AA7F53006CBE22 /* FirebaseRemoteConfig */,
 			);
 			productName = entourage;
 			productReference = 6B92CA9E19A7461C004E8C9B /* Ent-Beta.app */;
@@ -3279,9 +3294,10 @@
 			);
 			mainGroup = 6B92CA9519A7461C004E8C9B;
 			packageReferences = (
-				2DAF5DE1253CD0B600662FD3 /* RemoteSwiftPackageReference */,
-				2D902D5825B9B7D8003157D1 /* RemoteSwiftPackageReference */,
-				2B90A654263815B5007621F0 /* RemoteSwiftPackageReference */,
+				2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				2D902D5825B9B7D8003157D1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				2B90A654263815B5007621F0 /* XCRemoteSwiftPackageReference "MBProgressHUD" */,
+				B3B7CCA727AA7F53006CBE22 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 6B92CA9F19A7461C004E8C9B /* Products */;
 			projectDirPath = "";
@@ -3462,46 +3478,24 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/kingpin/kingpin.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/kingpin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3537,46 +3531,24 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/kingpin/kingpin.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/kingpin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4386,7 +4358,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 45;
@@ -4418,7 +4390,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta Development";
+				PROVISIONING_PROFILE_SPECIFIER = "FP dev";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
@@ -4573,7 +4545,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios.beta AdHoc";
+				PROVISIONING_PROFILE_SPECIFIER = "Bitrise iOS ad-hoc - (social.entourage.entourageios.beta)";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4619,7 +4591,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2B90A654263815B5007621F0 /* RemoteSwiftPackageReference */ = {
+		2B90A654263815B5007621F0 /* XCRemoteSwiftPackageReference "MBProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jdg/MBProgressHUD.git";
 			requirement = {
@@ -4627,15 +4599,15 @@
 				minimumVersion = 1.2.0;
 			};
 		};
-		2D902D5825B9B7D8003157D1 /* RemoteSwiftPackageReference */ = {
+		2D902D5825B9B7D8003157D1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 12.0.0;
 			};
 		};
-		2DAF5DE1253CD0B600662FD3 /* RemoteSwiftPackageReference */ = {
+		2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
@@ -4643,23 +4615,56 @@
 				minimumVersion = 5.9.3;
 			};
 		};
+		B3B7CCA727AA7F53006CBE22 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2B0322082643F2A400A70007 /* SwiftPackageProductDependency */ = {
+		2B0322082643F2A400A70007 /* MBProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2B90A654263815B5007621F0 /* RemoteSwiftPackageReference */;
+			package = 2B90A654263815B5007621F0 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
 			productName = MBProgressHUD;
 		};
-		2D902D5925B9B7D8003157D1 /* SwiftPackageProductDependency */ = {
+		2D902D5925B9B7D8003157D1 /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2D902D5825B9B7D8003157D1 /* RemoteSwiftPackageReference */;
+			package = 2D902D5825B9B7D8003157D1 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
 		};
-		2DAF5DE2253CD0B600662FD3 /* SwiftPackageProductDependency */ = {
+		2DAF5DE2253CD0B600662FD3 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2DAF5DE1253CD0B600662FD3 /* RemoteSwiftPackageReference */;
+			package = 2DAF5DE1253CD0B600662FD3 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		B3B7CCA827AA7F53006CBE22 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3B7CCA727AA7F53006CBE22 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
+		};
+		B3B7CCAA27AA7F53006CBE22 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3B7CCA727AA7F53006CBE22 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		B3B7CCAC27AA7F53006CBE22 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3B7CCA727AA7F53006CBE22 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		B3B7CCAE27AA7F53006CBE22 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3B7CCA727AA7F53006CBE22 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		B3B7CCB027AA7F53006CBE22 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3B7CCA727AA7F53006CBE22 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

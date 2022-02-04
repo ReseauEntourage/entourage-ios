@@ -5,136 +5,6 @@ trigger_map:
 - push_branch: develop
   workflow: Entourage-Preprod
 workflows:
-  Entourage-UploadFirebaseDSYM:
-    steps:
-    - activate-ssh-key:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone: {}
-    - cache-pull: {}
-    - cocoapods-install: {}
-    - ios-auto-provision-appstoreconnect:
-        inputs:
-        - distribution_type: app-store
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-            echo "Download App credentials"
-
-            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
-
-            # download the files
-            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
-    - script:
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            # fail if any commands fails
-            set -ex
-
-            ./Scripts/count_commit.sh
-    - xcode-archive:
-        inputs:
-        - distribution_method: app-store
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_user_groups: none
-        - deploy_path: "$BITRISE_IPA_PATH"
-    - deploy-to-bitrise-io:
-        is_always_run: false
-        inputs:
-        - notify_user_groups: none
-    - firebase-dsym-upload:
-        inputs:
-        - fdu_dsym_location: "$BITRISE_DEPLOY_DIR/Entourage.dSYM.zip"
-        - fdu_google_services_location: "./entourage/Settings/Environment/GoogleService-Info.plist"
-        is_always_run: true
-    - xcode-build-version:
-        inputs:
-        - info_plist_path: "./entourage/entourage-Info.plist"
-  Entourage-TestFlight:
-    steps:
-    - activate-ssh-key:
-        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone: {}
-    - cache-pull: {}
-    - cocoapods-install: {}
-    - ios-auto-provision-appstoreconnect:
-        inputs:
-        - distribution_type: app-store
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # fail if any commands fails
-            set -e
-            # debug log
-            #set -x
-
-            echo "Download App credentials"
-
-            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
-
-            # download the files
-            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
-    - script:
-        inputs:
-        - content: |-
-            #!/usr/bin/env bash
-            # fail if any commands fails
-            set -ex
-
-            ./Scripts/count_commit.sh
-    - xcode-archive:
-        inputs:
-        - distribution_method: app-store
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_user_groups: none
-        - deploy_path: "$BITRISE_IPA_PATH"
-    - deploy-to-itunesconnect-application-loader:
-        inputs:
-        - password: "$FASTLANE_PASSWORD"
-        - itunescon_user: "$APPLE_ID"
-    - deploy-to-bitrise-io:
-        is_always_run: false
-        inputs:
-        - notify_user_groups: none
-    - slack:
-        inputs:
-        - channel: "#iosdev"
-        - from_username: Entourage-Beta
-        - from_username_on_error: Entourage-Beta
-        - message: |-
-            New *Entourage-Beta DEV* iOS build is available: $BITRISE_BUILD_NUMBER  here:
-            $BITRISE_APP_URL
-        - message_on_error: Oups, build has failed for Entourage iOS... @here
-        - pretext: "*Entourage-Beta Build Succeeded!*"
-        - pretext_on_error: "*Build Failed for Entourage Beta!*"
-        - api_token: "$SLACK_BOT_API_TOKEN"
-        - fields: |
-            App|${BITRISE_APP_TITLE}
-            Branch|${BITRISE_GIT_BRANCH}
-            Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
-            Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
-    - firebase-dsym-upload:
-        inputs:
-        - fdu_dsym_location: "$BITRISE_DEPLOY_DIR/Entourage.dSYM.zip"
-        - fdu_google_services_location: "./entourage/Settings/Environment/GoogleService-Info.plist"
-        is_always_run: true
-    - cache-push:
-        is_always_run: true
-    - xcode-build-version:
-        inputs:
-        - info_plist_path: "./entourage/entourage-Info.plist"
-    - git-tag:
-        inputs:
-        - tag: Ent_TestFlight_$XBV_PROJECT_VERSION
   Entourage-Preprod:
     steps:
     - activate-ssh-key:
@@ -194,10 +64,6 @@ workflows:
                 )
             end
         - gemfile_content: ''
-    - ios-auto-provision-appstoreconnect:
-        inputs:
-        - scheme: EntourageBeta
-        - distribution_type: ad-hoc
     - script:
         inputs:
         - content: |-
@@ -218,6 +84,8 @@ workflows:
             ./Scripts/count_commit.sh
     - xcode-archive:
         inputs:
+        - automatic_code_signing: api-key
+        - register_test_devices: 'yes'
         - distribution_method: ad-hoc
     - deploy-to-bitrise-io: {}
     - post-jira-comment-with-build-details:
@@ -245,19 +113,89 @@ workflows:
             Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
     - firebase-dsym-upload:
         inputs:
-        - fdu_dsym_location: $BITRISE_DSYM_PATH
+        - fdu_logging: 'yes'
         - fdu_google_services_location: "./entourage/Settings/Environment/GoogleService-Info-social.entourage.ios.beta.plist"
     - cache-push: {}
     envs:
     - opts:
         is_expand: false
       BITRISE_SCHEME: EntourageBeta
-  BETA:
+  Entourage-TestFlight:
     steps:
-    - trigger-bitrise-workflow:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone: {}
+    - cache-pull: {}
+    - cocoapods-install: {}
+    - script:
         inputs:
-        - api_token: "$BUILD_TRIGGER"
-        - workflow_id: Entourage-NoFastlane
+        - content: |-
+            #!/bin/bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            #set -x
+
+            echo "Download App credentials"
+
+            app_configurations_file=$BITRISE_SOURCE_DIR/AppConfigurations.plist
+
+            # download the files
+            wget -O "$app_configurations_file" "$BITRISEIO_APPCONFIGURATIONS_URL"
+    - script:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -ex
+
+            ./Scripts/count_commit.sh
+    - xcode-archive:
+        inputs:
+        - automatic_code_signing: api-key
+        - distribution_method: app-store
+    - deploy-to-bitrise-io:
+        inputs:
+        - notify_user_groups: none
+        - deploy_path: "$BITRISE_IPA_PATH"
+    - deploy-to-itunesconnect-application-loader:
+        inputs:
+        - password: "$FASTLANE_PASSWORD"
+        - itunescon_user: "$APPLE_ID"
+    - deploy-to-bitrise-io:
+        is_always_run: false
+        inputs:
+        - notify_user_groups: none
+    - slack:
+        inputs:
+        - channel: "#iosdev"
+        - from_username: Entourage-Beta
+        - from_username_on_error: Entourage-Beta
+        - message: |-
+            New *Entourage-Beta DEV* iOS build is available: $BITRISE_BUILD_NUMBER  here:
+            $BITRISE_APP_URL
+        - message_on_error: Oups, build has failed for Entourage iOS... @here
+        - pretext: "*Entourage-Beta Build Succeeded!*"
+        - pretext_on_error: "*Build Failed for Entourage Beta!*"
+        - api_token: "$SLACK_BOT_API_TOKEN"
+        - fields: |
+            App|${BITRISE_APP_TITLE}
+            Branch|${BITRISE_GIT_BRANCH}
+            Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
+            Jira|<${JIRA_BASE_URL}browse/${JIRA_ISSUE_KEYS}|${JIRA_ISSUE_KEYS}>
+    - firebase-dsym-upload:
+        inputs:
+        - fdu_dsym_location: "$BITRISE_DEPLOY_DIR/Entourage.dSYM.zip"
+        - fdu_google_services_location: "./entourage/Settings/Environment/GoogleService-Info.plist"
+        is_always_run: true
+    - cache-push:
+        is_always_run: true
+    - xcode-build-version:
+        inputs:
+        - info_plist_path: "./entourage/entourage-Info.plist"
+    - git-tag:
+        inputs:
+        - tag: Ent_TestFlight_$XBV_PROJECT_VERSION
 app:
   envs:
   - opts:

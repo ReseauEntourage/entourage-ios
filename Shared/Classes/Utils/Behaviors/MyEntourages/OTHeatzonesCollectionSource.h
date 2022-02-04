@@ -3,7 +3,7 @@
 //  entourage
 //
 //  Created by Veronica Gliga on 14/09/2017.
-//  Copyright © 2017 OCTO Technology. All rights reserved.
+//  Copyright © 2017 Entourage. All rights reserved.
 //
 
 #import "OTCollectionViewDataSourceBehavior.h"
