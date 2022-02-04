@@ -19,7 +19,6 @@
 @property (nonatomic, strong) OTFeedItem *selectedFeedItem;
 @property (nonatomic) BOOL isFromEvent;
 @property (nonatomic, strong) NSString *titleFrom;
-@property (nonatomic) BOOL isFromNeoCourse;
 
 @property (nonatomic) BOOL isExpertArrowAsk;
 @property (nonatomic) BOOL isExpertArrowContrib;

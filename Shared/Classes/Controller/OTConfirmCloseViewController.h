@@ -13,11 +13,11 @@
 
 @protocol OTConfirmCloseProtocol <NSObject>
 
-- (void)feedItemClosedWithReason: (OTCloseReason)reason;
+- (void)feedItemClosedWithReason: (OTCloseReason)reason andComment:(NSString*) comment ;
 
 @end
 
-@interface OTConfirmCloseViewController : UIViewController
+@interface OTConfirmCloseViewController : UIViewController <UITextViewDelegate>
 
 @property (nonatomic, strong) OTFeedItem *feedItem;
 @property (nonatomic, weak) id<OTConfirmCloseProtocol> closeDelegate;

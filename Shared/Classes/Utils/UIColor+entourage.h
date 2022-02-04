@@ -11,6 +11,7 @@
 @interface UIColor (entourage)
 
 + (UIColor *)appOrangeColor;
++ (UIColor *)appOrangeTransColor;
 + (UIColor *)appTomatoColor;
 + (UIColor *)appGreyishColor;
 + (UIColor *)brightBlue;

@@ -210,8 +210,6 @@ class OTMainTabbarViewController: UITabBarController {
     
     @objc func showHome() {
         self.showHomeVC()
-        let isExpert = UserDefaults.standard.bool(forKey: "isExpertMode")
-        SVProgressHUD.showInfo(withStatus: isExpert ? "info_pop_switch_mode_neo_off".localized : "info_pop_switch_mode_neo_on".localized)
     }
 }
 

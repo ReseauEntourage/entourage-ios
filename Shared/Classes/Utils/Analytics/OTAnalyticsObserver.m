@@ -86,22 +86,6 @@
     
     if(currentUser != nil) {
         [FIRAnalytics setUserPropertyString:(currentUser.isEngaged ? @"Yes" : @"No") forName:@"engaged_user"];
-        
-        if (currentUser.isUserTypeNeighbour) {
-            NSNumber *isExpert = [[NSUserDefaults standardUserDefaults]objectForKey:@"isExpertMode"];
-            if (isExpert == nil) {
-                BOOL isExpertMode = NO;
-                if (currentUser.isEngaged) {
-                    isExpertMode = YES;
-                }
-                [[NSUserDefaults standardUserDefaults] setBool:isExpertMode forKey:@"isExpertMode"];
-                [FIRAnalytics setUserPropertyString:(isExpertMode ? @"Expert" : @"Neo") forName:@"home_view_mode"];
-            }
-            else {
-                BOOL _isExp = isExpert.boolValue;
-                [FIRAnalytics setUserPropertyString:(_isExp ? @"Expert" : @"Neo") forName:@"home_view_mode"];
-            }
-        }
     }
 }
 

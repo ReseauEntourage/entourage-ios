@@ -14,7 +14,4 @@
 @property (nonatomic, weak) id<DisclaimerDelegate> disclaimerDelegate;
 @property (nonatomic) BOOL isForCreatingEvent;
 
-@property(nonatomic,retain) NSString *tagNameAnalytic;
-@property (nonatomic) BOOL isFromHomeNeo;
-
 @end

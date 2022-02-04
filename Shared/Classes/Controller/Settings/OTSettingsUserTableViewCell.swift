@@ -75,6 +75,9 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         ui_title_info_account.text = OTLocalisationService.getLocalizedValue(forKey: "setting_home_title")
         ui_title_home_mode.text = OTLocalisationService.getLocalizedValue(forKey: "setting_home_button_type")
         ui_description_info_account.text = OTLocalisationService.getLocalizedValue(forKey: "setting_home_description")
+        
+        ui_view_choice_mode.isHidden = true
+        ui_constraint_height_view_choice_mode.constant = 0
     }
     
     func roundPartielView(view:UIView,isTop:Bool) {
@@ -114,29 +117,6 @@ class OTSettingsUserTableViewCell: UITableViewCell {
         
         ui_label_nb_contribs.text = "\(currentUser.contribCreationCount ?? 0)"
         ui_label_nb_asks.text = "\(currentUser.askCreactionCount ?? 0)"
-        
-        
-        var isExpertMode = false
-        if let isExpertSettings = UserDefaults.standard.object(forKey: "isExpertMode") as? Bool {
-            isExpertMode = isExpertSettings
-        }
-        else {
-            if currentUser.isUserTypeNeighbour() {
-                isExpertMode = currentUser.isEngaged
-            }
-            UserDefaults.standard.setValue(isExpertMode, forKey: "isExpertMode")
-        }
-        
-        if currentUser.isUserTypeNeighbour() {
-            ui_view_choice_mode.isHidden = false
-            ui_constraint_height_view_choice_mode.constant = 188
-        }
-        else {
-            isExpertMode = true
-            ui_view_choice_mode.isHidden = true
-            ui_constraint_height_view_choice_mode.constant = 0
-        }
-        ui_switch_home_mode.isOn = !isExpertMode
     }
     
     //MARK: - IBActions -
@@ -157,13 +137,6 @@ class OTSettingsUserTableViewCell: UITableViewCell {
     }
     
     @IBAction func action_change_home_mode(_ sender: UISwitch) {
-        if !sender.isOn {
-            OTLogger.logEvent(Action_Switch_NeoToExpert)
-        }
-        else {
-            OTLogger.logEvent(Action_Switch_ExpertToNeo)
-        }
-        delegate?.changeExpertMode(isExpert: !sender.isOn)
     }
     
     @IBAction func action_show_actions(_ sender: Any) {
@@ -177,6 +150,5 @@ protocol TapMenuProfileDelegate:AnyObject {
     func editProfile()
     func showContribs()
     func showAsks()
-    func changeExpertMode(isExpert:Bool)
     func showActions()
 }

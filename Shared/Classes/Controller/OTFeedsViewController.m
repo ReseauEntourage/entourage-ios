@@ -149,10 +149,6 @@ OTHeatzonesCollectionViewDelegate
     self.currentFilter.isPro = NO;
     [self.currentFilter setVersionAlone];
     
-    if (self.isFromNeoCourse) {
-        [self.currentFilter setNeighbourFilters];
-    }
-    
     if (self.isExpertArrowAsk) {
         [self.currentFilter setNeighbourFilters];
     }
@@ -274,6 +270,11 @@ OTHeatzonesCollectionViewDelegate
                                              selector:@selector(entourageUpdated:)
                                                  name:kNotificationEntourageChanged
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showUserProfileFromNotif:)
+                                                 name:@"showUserProfileFromFeed"
+                                               object:nil];
 }
 
 - (void)dealloc {
@@ -349,7 +350,7 @@ OTHeatzonesCollectionViewDelegate
     [self.navigationItem setLeftBarButtonItem:item];
     
     UIButton * btnRight = [UIButton new];
-    [btnRight setImage:[UIImage imageNamed:@"search_new"] forState:UIControlStateNormal];
+    [btnRight setImage:[UIImage imageNamed:@"search_new_orange"] forState:UIControlStateNormal];
     [btnRight addTarget:self action:@selector(goSearch) forControlEvents:UIControlEventTouchUpInside];
     btnRight.frame = CGRectMake(0, 0, 34/2, 28/2);
     
@@ -730,6 +731,21 @@ OTHeatzonesCollectionViewDelegate
     [OTLogger logEvent:Action_feed_showList];
     
     [self showFeedsList];
+}
+
+-(void) showUserProfileFromNotif:(NSNotification *)notification {
+    id userId = notification.object;
+    if ([userId isKindOfClass:[NSNumber class]]) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"UserProfile" bundle:nil];
+        id navVC = [sb instantiateInitialViewController];
+        if ([navVC isKindOfClass:[UINavigationController class]]) {
+            id vc = ((UINavigationController*)navVC).topViewController;
+            if ([vc isKindOfClass:[OTUserViewController class]]) {
+                ((OTUserViewController*) vc).userId = (NSNumber*) userId;
+                [self presentViewController:navVC animated:YES completion:nil];
+            }
+        }
+    }
 }
 
 #pragma mark - Location updates

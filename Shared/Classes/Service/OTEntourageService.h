@@ -38,6 +38,7 @@
 
 - (void)closeEntourage:(OTEntourage *)entourage
            withOutcome:(BOOL)outcome
+            andComment:(NSString *) comment
                success:(void (^)(OTEntourage *))success
                failure:(void (^)(NSError *))failure;
 

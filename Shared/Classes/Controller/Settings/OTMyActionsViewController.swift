@@ -7,24 +7,29 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class OTMyActionsViewController: UIViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
-    @IBOutlet weak var ui_top_segmented: UISegmentedControl!
     
     var arrayOwned = [OTEntourage]()
     var arrayOwnedSelection = [OTEntourage]()
     
     var isContrib = true
     var isFirstLoad = true
+    var selectedSegmentIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ui_top_segmented.selectedSegmentIndex = isContrib ? 0 : 1
-        setupSegmentedControl()
+        selectedSegmentIndex = isContrib ? 0 : 1
         
-        self.title = OTLocalisationService.getLocalizedValue(forKey: "myActions").uppercased()
+        if selectedSegmentIndex == 0 {
+            self.title = OTLocalisationService.getLocalizedValue(forKey: "myContribs").uppercased()
+        }
+        else {
+            self.title = OTLocalisationService.getLocalizedValue(forKey: "myDemands").uppercased()
+        }
         
         OTLogger.logEvent(View_ListActions_Show)
     }
@@ -34,23 +39,11 @@ class OTMyActionsViewController: UIViewController {
         getOwned()
     }
     
-    func setupSegmentedControl() {
-        ui_top_segmented.setTitleColor(UIColor.appOrange(),state: .selected)
-        ui_top_segmented.setTitleColor(UIColor.black,state: .normal)
-        
-        ui_top_segmented.setTitleFont(UIFont.systemFont(ofSize: 16))
-        ui_top_segmented.layer.borderWidth = 2
-        ui_top_segmented.layer.borderColor = UIColor.white.cgColor
-        ui_top_segmented.layer.backgroundColor = UIColor.white.cgColor
-        
-        ui_top_segmented.fixBackgroundColor()
-    }
-    
     func changeSelectedOwned() {
         arrayOwnedSelection = [OTEntourage]()
         for _feed in self.arrayOwned {
             if !_feed.isOuting() {
-                switch self.ui_top_segmented.selectedSegmentIndex {
+                switch self.selectedSegmentIndex {
                 case 0:
                     if _feed.isContribution() {
                         self.arrayOwnedSelection.append(_feed)
@@ -74,16 +67,18 @@ class OTMyActionsViewController: UIViewController {
     }
     
     func getOwned() {
+        SVProgressHUD.show()
         OTFeedsService.init().getEntouragesOwnedWithsuccess { entourages in
             self.arrayOwned = [OTEntourage]()
             self.isFirstLoad = false
-            
+            SVProgressHUD.dismiss()
             if let _entourages = entourages as? [OTEntourage] {
                 self.arrayOwned.append(contentsOf: _entourages)
             }
             self.changeSelectedOwned()
             
         } failure: { error in
+            SVProgressHUD.dismiss()
             Logger.print("***** Error get owns : \(String(describing: error?.localizedDescription))")
         }
     }
@@ -115,7 +110,7 @@ extension OTMyActionsViewController: UITableViewDelegate, UITableViewDataSource 
         if arrayOwnedSelection.count == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellEmpty", for: indexPath) as! OTMyActionEmptyTableViewCell
             
-            let isContrib = self.ui_top_segmented.selectedSegmentIndex == 0
+            let isContrib = self.selectedSegmentIndex == 0
             cell.populateCell(isContrib: isContrib)
             
             return cell

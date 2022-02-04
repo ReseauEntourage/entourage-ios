@@ -398,6 +398,12 @@
     titleLabel.textColor = [ApplicationTheme shared].secondaryNavigationBarTintColor;
     titleLabel.numberOfLines = 1;
     
+    if ([feedItem isConversation]) {
+        titleLabel.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showProfile)];
+        [titleLabel addGestureRecognizer:tap];
+    }
+    
     return titleLabel;
 }
     
@@ -458,10 +464,13 @@
         UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, iconSize, iconSize)];
         iconView.backgroundColor = UIColor.whiteColor;
         iconView.layer.cornerRadius = iconSize / 2;
-        iconView.userInteractionEnabled = NO;
+        iconView.userInteractionEnabled = YES;
         iconView.clipsToBounds = YES;
         iconView.layer.masksToBounds = YES;
         iconView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showProfile)];
+        [iconView addGestureRecognizer:tap];
         
         UIImage *placeholder = [[UIImage imageNamed:@"user"] resizeTo:iconView.frame.size];
         NSString *urlPath = feedItem.author.avatarUrl;
@@ -469,8 +478,13 @@
             NSURL *url = [NSURL URLWithString:urlPath];
             
             [iconView sd_setImageWithURL:url completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                if (error != nil) {
+                    [iconView setImage:placeholder];
+                }
+                else {
+                    [iconView setImage:[image resizeTo:iconView.frame.size]];
+                }
                 
-                [iconView setImage:[image resizeTo:iconView.frame.size]];
                 UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:iconView];
                 completion(barButtonItem);
             }];
@@ -503,6 +517,10 @@
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:iconView];
     
     completion(barButtonItem);
+}
+
++(void) showProfile {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showUserProfile" object:nil];
 }
 
 + (NSString *)joinEntourageLabelTitleForFeedItem:(OTFeedItem*)feedItem {

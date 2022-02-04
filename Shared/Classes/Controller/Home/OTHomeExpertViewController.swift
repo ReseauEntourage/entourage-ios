@@ -43,8 +43,6 @@ class OTHomeExpertViewController: UIViewController {
     
     var isFromModifyZone = false
     
-    var isNeighbour = false
-    
     var isFromProfile = false
     
     var variantType:VariantCell = .Original
@@ -303,15 +301,6 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
             return arrayFeedEmpty.count
         }
         
-        self.isNeighbour = false
-        if let currentUser = UserDefaults.standard.currentUser {
-            let isNeighbour = currentUser.isUserTypeNeighbour()
-            if isNeighbour {
-                self.isNeighbour = true
-                return arrayFeed.count > 0 ? arrayFeed.count + 1 : arrayFeed.count
-            }
-        }
-        
         return arrayFeed.count
     }
     
@@ -319,6 +308,10 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
         
         if isLoading {
             var cell = OTHomeCellCollectionView()
+            
+            if arrayFeedEmpty.count <= indexPath.row {
+                return cell
+            }
             
             if arrayFeedEmpty[indexPath.row].type == .Headlines {
                 cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCellAnnouncesEmpty", for: indexPath) as! OTHomeCellCollectionView
@@ -349,13 +342,6 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
             }
             
             cell.populateCell(card: arrayFeedEmpty[indexPath.row],clickDelegate: self, isLoading: isLoading,variantType:self.variantType)
-            return cell
-        }
-        
-        if indexPath.row == arrayFeed.count && self.isNeighbour {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellInfo", for: indexPath) as! OTHomeInfoCell
-            
-            cell.populate(isNeo: false, delegate: self)
             return cell
         }
         
@@ -422,10 +408,6 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
                 cell_height = CELL_ACTIONS_HEIGHT_VARIANT_B
             }
             return cell_height
-        }
-        
-        if indexPath.row == arrayFeed.count && self.isNeighbour {
-            return UITableView.automaticDimension
         }
         
         if arrayFeed[indexPath.row].type == .Headlines {
@@ -598,12 +580,5 @@ extension OTHomeExpertViewController: UITableViewDelegate, UITableViewDataSource
         let storyB = UIStoryboard.init(name: "Main", bundle: nil)
         let vc = storyB.instantiateViewController(withIdentifier: "HomeHelpVC")
         self.parent?.navigationController?.show(vc, sender: nil)
-    }
-}
-
-
-extension OTHomeExpertViewController : HomeInfoDelegate {
-    func showProfile() {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "tapProfilTab"), object: nil)
     }
 }

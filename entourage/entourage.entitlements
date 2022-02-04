@@ -6,8 +6,10 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:www.entourage.social</string>
-		<string>applinks:entourage.social</string>
+        <string>applinks:www.entourage.social</string>
+        <string>applinks:entourage.social</string>
+        <string>applinks:app.entourage.social</string>
+        <string>applinks:entourage-webapp-preprod.herokuapp.com</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>

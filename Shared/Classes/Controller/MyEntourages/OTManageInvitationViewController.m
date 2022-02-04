@@ -144,7 +144,7 @@
    else if ([identifier isEqualToString:@"cellCreator"]) {
        OTDetailActionEventCreatorCell *cell = [self.ui_tableview dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
         
-        [cell populateWithFeedItem: feedItem delegate:self];
+        [cell populateWithFeedItem: feedItem authorUser:nil delegate:self];
         return cell;
     }
     else if ([identifier isEqualToString:@"cellDescription"] || [identifier isEqualToString:@"cellDescriptionEvent"]) {

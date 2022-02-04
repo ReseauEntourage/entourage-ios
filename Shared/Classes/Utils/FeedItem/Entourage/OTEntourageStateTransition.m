@@ -18,12 +18,14 @@
 }
 
 - (void)closeWithOutcome:(BOOL)outcome
+              andComment:(NSString *) comment
                  success:(void (^)(BOOL))success
                orFailure:(void (^)(NSError *))failure {
     NSString *oldState = self.entourage.status;
     self.entourage.status = FEEDITEM_STATUS_CLOSED;
     [[OTEntourageService new] closeEntourage:self.entourage
                                  withOutcome:outcome
+                                  andComment:comment
                                  success:^(OTEntourage *updatedEntourage) {
                                      NSLog(@"Closed entourage: %@", updatedEntourage.uid);
                                      success(NO);

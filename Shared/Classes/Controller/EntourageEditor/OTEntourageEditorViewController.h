@@ -23,6 +23,4 @@
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic) BOOL isEditingEvent;
 @property (nonatomic) BOOL isAskForHelp;
-@property (nonatomic) BOOL isFromHomeNeo;
-@property(nonatomic,retain) NSString *tagNameAnalytic;
 @end

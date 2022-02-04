@@ -20,7 +20,6 @@
 
 @property (nonatomic, weak) IBOutlet UIViewController *owner;
 @property (nonatomic, weak) IBOutlet OTEditEntourageTableSource *editEntourageSource;
-@property(nonatomic) BOOL isFromHomeNeo;
 
 - (BOOL)prepareSegue:(UIStoryboardSegue *)segue isAskForHelp:(BOOL) isAskForHelp;
 

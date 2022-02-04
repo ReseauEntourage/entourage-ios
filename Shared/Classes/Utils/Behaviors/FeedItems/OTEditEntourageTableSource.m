@@ -73,7 +73,7 @@
                              cellForRowAtIndexPath:indexPath
                                          entourage:self.entourage
                                       locationText:self.locationText
-                                          delegate:self isHomeNeo:self.isHomeNeo];
+                                          delegate:self];
 }
 
 #pragma mark - UITableViewDelegate

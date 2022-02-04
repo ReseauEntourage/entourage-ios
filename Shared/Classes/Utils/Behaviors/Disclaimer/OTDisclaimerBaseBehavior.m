@@ -51,12 +51,6 @@
             OTEntourageDisclaimerViewController *disclaimerViewController = (OTEntourageDisclaimerViewController *)destinationViewController;
             disclaimerViewController.disclaimerDelegate = self;
             disclaimerViewController.isForCreatingEvent = self.createsEvent;
-
-            if ([self.owner isKindOfClass:[OTEntourageEditorViewController class]]) {
-                BOOL isFromHomeNeo = ((OTEntourageEditorViewController*) self.owner).isFromHomeNeo;
-                disclaimerViewController.isFromHomeNeo = isFromHomeNeo;
-                disclaimerViewController.tagNameAnalytic = ((OTEntourageEditorViewController*) self.owner).tagNameAnalytic;
-            }
         }
     }
     else

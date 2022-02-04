@@ -265,6 +265,8 @@ class OTHomeImageCollectionViewCell: UICollectionViewCell {
         ui_view_trans.isHidden = true
         ui_view_show_more.isHidden = true
         ui_title.isHidden = true
+        
+        self.ui_image.layer.cornerRadius = 8
     }
     
     func updateCell(title:String, imageUrl:String) {

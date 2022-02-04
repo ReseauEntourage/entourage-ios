@@ -333,6 +333,7 @@
 // Feed Item details
 "item_option_close" = "Arrêter";
 "item_option_freeze" = "Clôturer";
+"item_option_cancel" = "Annuler l'événement";
 "item_option_quit" = "Quitter";
 "entourage_time_data" = "%@ - à %@";
 "entourage_distance" = "à %@";
@@ -342,6 +343,8 @@
 "item_cancel_join" = "Retirer ma demande";
 "request_to_join_popup_placeholder" = "Votre message…";
 "item_option_reopen" = "Rouvrir";
+"button_close_action" = "Clôturer mon action";
+"button_close_event" = "Annuler mon événement";
 
 // Tutorial
 "emailNotSent" = "Echec de la mise à jour de l'email";
@@ -907,10 +910,12 @@
 "good_waves_member" = "Membre des bonnes ondes";
 "activity_title" = "Activité";
 
-"contrib_title" = "dons\ncrées";
-"ask_title" = "demandes\ncréées";
+"contrib_title" = "dons\npubliés";
+"ask_title" = "demandes\npubliées";
 "contrib_button_title" = "Voir la liste →";
 "ask_button_title" = "Voir la liste →";
+"myContribs" = "Mes dons";
+"myDemands" = "Mes demandes";
 
 "add_event_help_button" = "Quels événements diffuser ?";
 
@@ -933,6 +938,25 @@
 "Pop_info_web_alert_GDS_underline" = "Soliguide.fr";
 
 "info_share_sms_poi" = "Bonjour ! Voici l’adresse de %@ qui pourrait vous intéresser.\n%@\n%@\nPour plus d’infos sur ce lieu, et pour créer des liens entre voisins solidaires, je vous donne RDV sur le réseau Entourage %@";
+
+"pop_validate_event_title2" = "J'annule\nmon événement";
+"pop_validate_event_description2" = "En annulant l’événement, la discussion  sera fermée et l’événement n’apparaîtra plus dans le fil d’actualité.";
+"pop_validate_event_bt_validate2" = "ANNULER L’EVENEMENT";
+
+//New UI + POP Close action
+"pop_validate_action_title_new" = "Je clôture mon\naction solidaire";
+"pop_validate_action_description_new" = "En clôturant l’action, la discussion sera fermée et l’action n’apparaîtra plus dans le fil d’actualité.";
+"pop_validate_action_title2_new" = "Comment ça s’est passé ?";
+"pop_validate_action_bt_validate_new" = "Clôturer";
+
+"pop_validate_action_add_comment_title" = "Merci, votre action\nest clôturée !";
+"pop_validate_action_add_comment_desc" = "Voulez-vous écrire un commentaire à propos de votre action ?";
+"pop_validate_action_add_comment_yes" = "Oui";
+"pop_validate_action_add_comment_no" = "Non";
+
+"pop_validate_action_add_comment_send_title" = "Dites-nous en plus,\ncomment s’est passée votre action solidaire ?";
+"pop_validate_action_add_comment_send_button" = "Envoyer";
+"pop_validate_action_add_comment_send_placeholder" = "Mon action s’est bien passée parce que...";
 
 //New page hub GDS
 "title_new_gds" = "Lieux solidaires";
@@ -1021,97 +1045,6 @@
 "home_button_show_more_actions_contrib" = "Voir tous les dons";
 "home_button_show_more_actions_ask" = "Voir toutes les demandes";
 
-//Home NEO
-"home_neo_title" = "Démarrez l’aventure humaine Entourage !";
-"home_neo_title_bold" = "Entourage !";
-"home_neo_cell1_title" = "Premiers pas chez Entourage";
-"home_neo_cell1_description" = "Vous souhaitez aider les personnes SDF mais vous ne savez pas comment ? Laissez-vous guider pour oser la rencontre.";
-"home_neo_cell1_button" = "DÉCOUVRIR";
-"home_neo_cell2_title" = "Agir maintenant";
-"home_neo_cell2_description" = "Passez à l’action en rejoignant les initiatives solidaires de votre quartier.";
-"home_neo_cell2_button" = "SE LANCER";
-
-"home_neo_cell_info_title" = "Vous êtes sur le mode Premiers pas.";
-"home_neo_cell_info_subtitle" = "Prêt à découvrir tous nos programmes ? Désactivez le mode Premiers pas ici.";
-"home_neo_title_neo" = "Premiers pas";
-"home_expert_cell_info_title" = "Vous êtes sur le mode normal de l’application.";
-"home_expert_cell_info_subtitle" = "Vous souhaitez être guidé pour débuter sur Entourage ? Activez le mode Premiers pas ici.";
-
-//Neo help
-"home_neo_help_title" = "Entourage vous accompagne dans votre démarche";
-"home_neo_help_title_bold" = "vous accompagne";
-"home_neo_help_cell1_title" = "Comprendre le monde de la rue";
-"home_neo_help_cell1_description" = "Faites le plein de conseils et de témoignages  pour gagner en confiance.";
-"home_neo_help_cell1_button" = "C’est parti !";
-
-"home_neo_help_cell2_title" = "Faire des rencontres dans la rue";
-"home_neo_help_cell2_description" = "Prenez part aux Rencontres Nomades avec des membres du réseau Entourage pour aller discuter avec des personnes SDF.";
-"home_neo_help_cell2_button" = "En savoir plus";
-
-"home_neo_help_cell3_title" = "Participer à un événement";
-"home_neo_help_cell3_description" = "Passez un moment entre voisins avec et sans domicile dans un cadre convivial : pique-nique, apéro, pétanque...";
-"home_neo_help_cell3_button" = "DÉCOUVRIR";
-
-//Neo Street
-
-"home_neo_street_title" = "Comprendre le monde de la rue";
-"home_neo_street_subtitle" = "Les formats proposés :";
-"home_neo_street_cell1_title" = "Atelier en ligne";
-"home_neo_street_cell1_description" = "1h de sensibilisation par l’équipe Entourage enrichie de témoignages de la rue pour poser toutes vos questions en direct.";
-"home_neo_street_cell1_button" = "S’inscrire";
-
-"home_neo_street_cell2_title" = "Simple Comme Bonjour";
-"home_neo_street_cell2_description" = "Des vidéos et un guide pédagogique pour déconstruire ses préjugés et oser la rencontre.";
-"home_neo_street_cell2_button" = "DÉCOUVRIR";
-
-//Neo Tour
-"home_neo_tour_start_top_title" = "Maraude en groupe";
-"home_neo_tour_start_title" = "Comment ça se passe ?";
-"home_neo_tour_start_info1" = "Les maraudes sociales sont proposées dans les villes où Entourage a une communauté active.";
-"home_neo_tour_start_info2" = "Avec un membre du réseau";
-"home_neo_tour_start_info3" = "Leur but est d’aller à la rencontre des personnes SDF.";
-"home_neo_tour_start_info4" = "Par groupe de 2 ou 3, toujours avec un membre de l’association.";
-"home_neo_tour_start_info5" = "L’organisation se fait par e-mail avec les équipes locales d’Entourage.";
-"home_neo_tour_start_button_title" = "Voir la liste";
-
-"home_neo_tour_areas_top_title" = "Maraude en groupe";
-"home_neo_tour_areas_title" = "Où voulez-vous participer à une maraude sociale ?";
-"home_neo_tour_areas_description" = "Sélectionnez une localisation parmi celles disponibles :";
-
-"home_neo_tour_send_top_title" = "Maraude en groupe";
-"home_neo_tour_send_title" = "Demande de renseignements pour %@";
-"home_neo_tour_send_description" = "Envoyez un message à l’équipe Entourage de %@ pour en savoir plus sur les modalités d’inscription et les prochaines dates de maraudes.\n\nL’équipe vous recontactera par email.";
-"home_neo_tour_send_button" = "J’envoie ma demande";
-
-"home_neo_tour_send_email" = "Plus qu’un pas !\nRenseignez votre email pour recevoir la réponse de l’équipe Entourage :";
-"home_neo_tour_send_email_placeholder" = "Adresse email";
-"home_neo_tour_send_ok" = "Votre demande \na bien été envoyée.";
-
-//Actions
-"home_neo_action_title" = "Les actions concrètes";
-"home_neo_action_title_top1" = "Participer";
-"home_neo_action_title1" = "Répondre à un besoin";
-"home_neo_action_title2" = "Événements Entourage";
-"home_neo_action_title_top3" = "Proposer";
-"home_neo_action_title3" = "Proposer du matériel";
-"home_neo_action_title4" = "Proposer un service";
-"home_neo_action_title5" = "Relayer un besoin";
-"home_neo_action_title6" = "Offrir un café solidaire";
-
-"home_neo_action_bottom_title" = "Comment franchir le pas ?";
-"home_neo_action_bottom_description" = "Des vidéos et un guide pédagogique pour déconstruire ses préjugés et se sentir prêt à oser la rencontre.";
-"home_neo_action_bottom_button" = "S’informer";
-
-"home_neo_pop_info_title" = "Nouveauté Entourage !";
-"home_neo_pop_info_message" = "Découvrez le mode d’affichage “Premiers pas” pour être guidé dans les programmes Entourage.\n\nVous pouvez changer de mode depuis votre page profil.";
-"home_neo_pop_info_button_ok" = "OK";
-"home_neo_pop_info_button_profil" = "Voir profil";
-
-"home_neo_pop_goExpert_title" = " ";
-"home_neo_pop_goExpert_message" = "Vous êtes sur le mode “Premiers pas” de l’application.\nAccédez à plus de contenu en désactivant ce mode depuis votre page profil.";
-"home_neo_pop_goExpert_bt_ok" = "Ok";
-"home_neo_pop_goExpert_bt_cancel" = "Non merci";
-
 "setting_home_title" = "📱 MON COMPTE ENTOURAGE";
 "setting_home_description" = "Le mode “Premiers pas” vous guide pour découvrir les programmes Entourage.";
 "setting_home_button_type" = "Mode “Premiers pas”";
@@ -1124,16 +1057,6 @@
 "onboarding_help_label" = "Besoin d’aide ?\nContacter l'équipe Entourage.";
 
 //Profile pop info switch mode
-"profile_pop_switch_mode_neo" = "Mode “Premier pas“";
-"profile_pop_switch_mode_expert" = "Mode “normal“";
-"profile_pop_switch_mode_title" = "Information";
-"profile_pop_switch_mode_message" = "Vous avez basculé en\n%@\n\nRedirection vers la nouvelle home ?";
-"profile_pop_switch_mode_message_neo" = "Vous êtes sur le point d’activer le mode “Premiers pas” de l’application.\n\nEffectuer cette action ? ";
-"profile_pop_switch_mode_message_expert" = "Vous êtes sur le point de désactiver le mode “Premiers pas” de l’application.\n\nEffectuer cette action ? ";
-"profile_pop_switch_mode_button_no" = "Non";
-"profile_pop_switch_mode_button_yes" = "Oui";
-"info_pop_switch_mode_neo_on" = "Mode “Premier pas“ activé";
-"info_pop_switch_mode_neo_off" = "Mode “Premier pas“ désactivé";
 
 "cell_info_demand_empty" = "C'est plutôt calme ici";
 "cell_info_demand_empty_button" = "Rechercher\nplus loin";
@@ -1151,3 +1074,8 @@
 "infoPopCreateContribTitle" = "Action solidaire\ncréée";
 "infoPopCreateAskTitle" = "Action solidaire\ncréée";
 "infoPopCreateEventTitle" = "Événement créé";
+
+//Search action/event placeholder
+"searchEventPlaceholder" = "Rechercher un événement";
+"searchAskPlaceholder" = "Rechercher une action";
+"searchContribPlaceholder" = "Rechercher une action";

@@ -21,6 +21,11 @@ class OTDetailActionEventViewController: UIViewController {
     @IBOutlet weak var ui_view_top_private: UIView!
     @IBOutlet weak var ui_label_top_private: UILabel!
     @IBOutlet weak var ui_constraint_height_top_view_private: NSLayoutConstraint!
+    
+    @IBOutlet weak var ui_view_button_close: UIView!
+    @IBOutlet weak var ui_button_close: UILabel!
+    @IBOutlet weak var ui_constraint_view_button_close_height: NSLayoutConstraint!
+    
     let private_view_height:CGFloat = 100
     
     @objc var feedItem = OTFeedItem()
@@ -35,6 +40,10 @@ class OTDetailActionEventViewController: UIViewController {
     
     var isFromSearch = false
     var popview:OTPopInfoCustom? = nil
+    
+    var isShowCloseButton = false
+    
+    var authorUser:OTUser? = nil
     
     //MARK: - Lifecycle -
     override func viewDidLoad() {
@@ -57,6 +66,7 @@ class OTDetailActionEventViewController: UIViewController {
         else {
             OTLogger.logEvent(View_FeedDetail_Action)
         }
+        addButtonClose()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +82,44 @@ class OTDetailActionEventViewController: UIViewController {
         super.viewDidAppear(animated)
         
         OTAppState.hideTabBar(true)
+    }
+    
+    func addButtonClose() {
+        let currentStateInfo = OTFeedItemFactory.create(for: self.feedItem).getStateInfo?()
+        let currentState = currentStateInfo?.getState()
+        
+        if OTAppConfiguration.supportsClosingFeedAction(self.feedItem) && currentState == FeedItemStateOpen && ((feedItem as? OTTour) == nil)  {
+            isShowCloseButton = true
+        }
+        else {
+            isShowCloseButton = false
+        }
+        
+        if !isShowCloseButton {
+            ui_constraint_view_button_close_height.constant = 0
+            ui_button_close.isHidden = true
+        }
+        else {
+            ui_button_close.isHidden = false
+            ui_constraint_view_button_close_height.constant = 50
+        }
+        
+        if self.feedItem.isAction() {
+            ui_button_close.text = OTLocalisationService.getLocalizedValue(forKey: "button_close_action")
+        }
+        else {
+            ui_button_close.text = OTLocalisationService.getLocalizedValue(forKey: "button_close_event")
+        }
+    }
+    
+    func showClosepop() {
+        let storyB = UIStoryboard.init(name: "FeedChangeOptions", bundle: nil)
+        if let vc = storyB.instantiateViewController(withIdentifier: "ConfirmCloseVC") as? OTConfirmCloseViewController {
+            vc.feedItem = self.feedItem;
+            vc.closeDelegate = self;
+            
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     //MARK: - Navigation
@@ -119,6 +167,20 @@ class OTDetailActionEventViewController: UIViewController {
     }
     
     //MARK: - Setups -
+    func loadUserAuthor() {
+        if let userId = feedItem.author.uID {
+            OTAuthService().getDetailsForUser(userId.stringValue) { userAuthor in
+                self.authorUser = userAuthor
+                
+                DispatchQueue.main.async {
+                    self.ui_tableview.reloadData()
+                }
+            } failure: { error in
+                Logger.print("***** error get info author user : \(String(describing: error?.localizedDescription))")
+            }
+        }
+    }
+    
     func loadMembers() {
         if let feedItemFact = OTFeedItemFactory.create(for: feedItem) , let messaging = feedItemFact.getMessaging?() {
             messaging.getFeedItemUsers(withStatus: JOIN_ACCEPTED) { (items) in
@@ -128,9 +190,9 @@ class OTDetailActionEventViewController: UIViewController {
                     self.ui_tableview.reloadData()
                 }
             }
-            failure: { (error) in
-                Logger.print("***** error get feed users : \(String(describing: error?.localizedDescription))")
-            }
+        failure: { (error) in
+            Logger.print("***** error get feed users : \(String(describing: error?.localizedDescription))")
+        }
         }
     }
     
@@ -139,7 +201,9 @@ class OTDetailActionEventViewController: UIViewController {
             if let _ent = entourage {
                 self.feedItem = _ent
             }
+            self.addButtonClose()
             self.loadMembers()
+            self.loadUserAuthor()
         } failure: { error in }
     }
     
@@ -153,7 +217,7 @@ class OTDetailActionEventViewController: UIViewController {
             ui_view_bottom.layer.shadowRadius = 4.0
             ui_view_bottom.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         }
-       
+        
     }
     
     func setupMoreButton() {
@@ -256,7 +320,7 @@ class OTDetailActionEventViewController: UIViewController {
         }
         
         ui_tableview.reloadData()
-    }    
+    }
     
     //MARK: - IBActions -
     @IBAction func action_button_bottom_join(_ sender: Any) {
@@ -281,6 +345,10 @@ class OTDetailActionEventViewController: UIViewController {
     @IBAction func action_close_view_private(_ sender: Any) {
         ui_view_top_private.isHidden = true
         ui_constraint_height_top_view_private.constant = 0
+    }
+    
+    @IBAction func action_show_close(_ sender: Any) {
+        showClosepop()
     }
 }
 
@@ -367,7 +435,7 @@ extension OTDetailActionEventViewController: UITableViewDataSource, UITableViewD
             return cell
         case "cellCreator":
             let cell = ui_tableview.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! OTDetailActionEventCreatorCell
-            cell.populate(feedItem: feedItem,delegate: self)
+            cell.populate(feedItem: feedItem,authorUser:authorUser, delegate: self)
             return cell
         case "cellDescription","cellDescriptionEvent":
             let cell = ui_tableview.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! OTDetailActionEventDescriptionCell
@@ -597,6 +665,51 @@ extension OTDetailActionEventViewController: OTStatusChangedProtocol {
             NotificationCenter.default.post(Notification.init(name: Notification.Name(rawValue: kNotificationReloadData)))
             if self.isFromSearch {
                 self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+}
+
+//MARK: - OTConfirmCloseProtocol
+extension OTDetailActionEventViewController: OTConfirmCloseProtocol {
+    func feedItemClosed(with reason: OTCloseReason, andComment comment: String!) {
+        
+        OTLogger.logEvent("CloseEntourageConfirm")
+        
+        if reason == OTCloseReasonHelpClose {
+            return
+        }
+        
+        let outcome = reason == OTCloseReasonSuccesClose ? true : false
+        SVProgressHUD.show()
+        
+        let stateTrans = OTFeedItemFactory.create(for: feedItem).getStateTransition?()
+        
+        stateTrans?.close(withOutcome: outcome, andComment: comment, success: { isTour in
+            SVProgressHUD.dismiss()
+            self.dismissOnClose(reason: reason)
+        }, orFailure: { error in
+            SVProgressHUD.showError(withStatus: OTLocalisationService.getLocalizedValue(forKey: "generic_error"))
+        })
+    }
+    
+    func dismissOnClose(reason:OTCloseReason) {
+        OTAppState.popToRootCurrentTab()
+        OTAppState.hideTabBar(false)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) { [weak self] in
+            if let feedItem = self?.feedItem, ((feedItem as? OTTour) == nil) {
+                let userInfo = [kNotificationSendReasonKey:reason,kNotificationFeedItemKey:feedItem] as [String : Any]
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationSendCloseMail), object: nil,userInfo: userInfo)
+                
+                if reason == OTCloseReasonHelpClose {
+                    return
+                }
+                
+                let title = OTAppAppearance.closeFeedItemConformationTitle(feedItem)
+                SVProgressHUD.showSuccess(withStatus:title)
+                
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationReloadData), object: nil)
             }
         }
     }
