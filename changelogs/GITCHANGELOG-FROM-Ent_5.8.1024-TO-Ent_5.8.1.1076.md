@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_5.8.1.1076
-##Previous tag: Ent_5.8.1024
+# Changelog
+## Latest tag: Ent_5.8.1.1076
+## Previous tag: Ent_5.8.1024
 * fix: EN-810 modification de l'adresse d'un event (2019-02-18) by <Grégoire Clermont>
 * fix: EN-805 récupération : masque le clavier lorsqu'on envoie le code (2019-02-18) by <Grégoire Clermont>
 * fix: EN-761 change l'icône des POI S'occuper de soi (2019-02-15) by <Grégoire Clermont>

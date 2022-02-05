@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Version_4.6.837
-##Previous tag: Version_4.5.819
+# Changelog
+## Latest tag: Version_4.6.837
+## Previous tag: Version_4.5.819
 * Reused instance of push notification service in order to avoid multiple notifications to be handled and crash the app (2018-04-17) by <Lazar Sidor>
 * Updated bridging headers to support separate inclusion for each target (2018-04-17) by <Lazar Sidor>
 * Added missing file references (2018-04-17) by <Lazar Sidor>

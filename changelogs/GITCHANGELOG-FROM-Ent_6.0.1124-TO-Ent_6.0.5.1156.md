@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_6.0.5.1155
-##Previous tag: Ent_6.0.1124
+# Changelog
+## Latest tag: Ent_6.0.5.1155
+## Previous tag: Ent_6.0.1124
 * feat: announcement cards placeholder (2019-07-15) by <Grégoire Clermont>
 * fix: les titres des cartes d'annonce EN-1335 (2019-07-15) by <Grégoire Clermont>
 * chore: bump version to 6.0.5 (2019-07-12) by <Grégoire Clermont>

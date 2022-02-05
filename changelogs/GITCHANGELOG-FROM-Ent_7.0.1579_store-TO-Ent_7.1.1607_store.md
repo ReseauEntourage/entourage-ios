@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_7.1.1607_store
-##Previous tag: Ent_7.0.1579_store
+# Changelog
+## Latest tag: Ent_7.1.1607_store
+## Previous tag: Ent_7.0.1579_store
 * bump version to 7.1 (2021-05-12) by <François Pellissier>
 * Change status bar -> Dark (2021-05-10) by <Jr>
 * [EN-3668] harmonize top bar colors (2021-05-07) by <Jr>

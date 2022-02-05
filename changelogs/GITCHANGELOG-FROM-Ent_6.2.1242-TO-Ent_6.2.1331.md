@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_6.2.1331
-##Previous tag: Ent_6.2.1242
+# Changelog
+## Latest tag: Ent_6.2.1331
+## Previous tag: Ent_6.2.1242
 * fix: reload messages tab when entering foreground (2020-04-17) by <gregclermont>
 * fix: décompte des messages non-lus, badges [EN-2129] [EN-1706] (2020-04-17) by <gregclermont>
 * [EN-2079] fix image size + boutons round (2020-04-16) by <Jr>

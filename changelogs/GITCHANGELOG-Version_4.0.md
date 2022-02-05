@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Version_4.0
-##Previous tag: Version_3.8
+# Changelog
+## Latest tag: Version_4.0
+## Previous tag: Version_3.8
 * small code changes. Refactor (2017-11-13) by <VeronicaGliga>
 * EMA-1632 redirect user to badge or feed page after login (2017-11-13) by <VeronicaGliga>
 * fixed the creation of an entourage after tappedLocation is set (2017-11-13) by <VeronicaGliga>

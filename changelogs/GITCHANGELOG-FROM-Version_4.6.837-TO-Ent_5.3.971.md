@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_5.3.971
-##Previous tag: Version_4.6.837
+# Changelog
+## Latest tag: Ent_5.3.971
+## Previous tag: Version_4.6.837
 * Fixed login flow (2018-08-10) by <Lazar Sidor>
 * Updated OTAppState (2018-08-10) by <Lazar Sidor>
 * Updated extend search parameter texts (2018-08-10) by <Lazar Sidor>

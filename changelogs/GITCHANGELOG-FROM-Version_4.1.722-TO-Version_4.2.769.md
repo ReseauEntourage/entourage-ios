@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Version_4.2.769
-##Previous tag: Version_4.1.722
+# Changelog
+## Latest tag: Version_4.2.769
+## Previous tag: Version_4.1.722
 
 * EMA-1274 fixed crash on Screen17.3 (2017-12-05) by <VeronicaGliga>
 * EMA-1274 fixed the difference between 32bit devices and 64bit devices (2017-12-05) by <VeronicaGliga>

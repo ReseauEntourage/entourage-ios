@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_5.7.1015
-##Previous tag: Ent_5.5.1002
+# Changelog
+## Latest tag: Ent_5.7.1015
+## Previous tag: Ent_5.5.1002
 * chore(version) update to 5.7 (version + api key) (2018-10-18) by <François Pellissier>
 * chore(version) removing useless files (2018-10-18) by <François Pellissier>
 * chore(version) update to 5.5.1 (2018-10-18) by <François Pellissier>

@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_6.0.1124
-##Previous tag: Ent_5.8.1.1076
+# Changelog
+## Latest tag: Ent_6.0.1124
+## Previous tag: Ent_5.8.1.1076
 * loginless: fix modal close button touch target (2019-06-04) by <Grégoire Clermont>
 * loginless: analytics wip (2019-06-04) by <Grégoire Clermont>
 * loginless: modal everywhere wip (2019-05-24) by <Grégoire Clermont>

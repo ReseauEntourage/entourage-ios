@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_7.2.1619
-##Previous tag: Ent_7.1.1607_store
+# Changelog
+## Latest tag: Ent_7.2.1619
+## Previous tag: Ent_7.1.1607_store
 * Bump to version 7.2 (2021-05-31) by <Jr>
 * Fix ui text align. (2021-05-31) by <Jr>
 * [EN-3728] Fix/Adjust (2021-05-31) by <Jr>

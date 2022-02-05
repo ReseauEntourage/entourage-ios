@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_6.3.1414
-##Previous tag: Ent_6.3.1348
+# Changelog
+## Latest tag: Ent_6.3.1414
+## Previous tag: Ent_6.3.1348
 * [EN-1407] add share button detail poi (2020-07-31) by <Jr>
 * [EN-2749] add banner on GDS for alert/info + link web (2020-07-30) by <Jr>
 * [EN-1386] Change wording on alert popup (action/event) (2020-07-30) by <Jr>

@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_6.7.1540
-##Previous tag: Ent_6.6.1497
+# Changelog
+## Latest tag: Ent_6.7.1540
+## Previous tag: Ent_6.6.1497
 * fix: crash when sharing POI [EN-3348] (2020-12-11) by <François Pellissier>
 * chore: fix typos for événement (2020-12-08) by <François Pellissier>
 * [EN-2107] update WS (2020-12-04) by <Jr>

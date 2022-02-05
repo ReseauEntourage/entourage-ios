@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_5.5.1002
-##Previous tag: Ent_5.4.1.990
+# Changelog
+## Latest tag: Ent_5.5.1002
+## Previous tag: Ent_5.4.1.990
 * Updated user defaults (2018-10-02) by <Lazar Sidor>
 * Updated code verification view (2018-10-02) by <Lazar Sidor>
 * Updated images for entourage actions (2018-10-01) by <Lazar Sidor>

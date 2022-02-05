@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Version_4.1.719
-##Previous tag: Version_4.0
+# Changelog
+## Latest tag: Version_4.1.719
+## Previous tag: Version_4.0
 * EMA-1274 added insets for separators and fix crash if user is not pro (2017-11-27) by <VeronicaGliga>
 * EMA-1274 added the new filters, design and code behind (2017-11-23) by <VeronicaGliga>
 * EMA-1274 first time the regular user installs the app, all category filters are on (2017-11-27) by <VeronicaGliga>

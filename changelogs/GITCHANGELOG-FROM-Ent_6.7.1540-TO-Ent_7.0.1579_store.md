@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_7.0.1579_store
-##Previous tag: Ent_6.7.1540
+# Changelog
+## Latest tag: Ent_7.0.1579_store
+## Previous tag: Ent_6.7.1540
 * Add deeplink show GDS map (2021-04-02) by <Jr>
 * Update Feed Expert Home (2021-03-25) by <Jr>
 * New home expert + new feed (2021-03-15) by <Jr>

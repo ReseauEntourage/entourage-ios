@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_6.6.1497
-##Previous tag: Ent_6.5.1433
+# Changelog
+## Latest tag: Ent_6.6.1497
+## Previous tag: Ent_6.5.1433
 * chore: configure Bitrise dSYM upload for TestFlight builds (2020-11-09) by <gregclermont>
 * chore: fix bitrise workflow to send DSYM (2020-11-09) by <François Pellissier>
 * Fix crash init Firebase twice when build release (2020-11-09) by <François Pellissier>

@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_6.3.1348
-##Previous tag: Ent_6.2.1331
+# Changelog
+## Latest tag: Ent_6.3.1348
+## Previous tag: Ent_6.2.1331
 * add automatic changelog for release 6.2.1342 (2020-05-14) by <François Pellissier>
 * Add new Login page (2020-05-14) by <Jr>
 * Add choose place new version from profile (2020-05-14) by <Jr>

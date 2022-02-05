@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_6.5.1433
-##Previous tag: Ent_6.3.1414
+# Changelog
+## Latest tag: Ent_6.5.1433
+## Previous tag: Ent_6.3.1414
 * [EN-2888] add 2nd button pop info first login (2020-09-11) by <Jr>
 * [EN-2776] change icon report (2020-09-11) by <Jr>
 * [EN-2784] category action add automatic validate (2020-09-11) by <Jr>

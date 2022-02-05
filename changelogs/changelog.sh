@@ -18,12 +18,13 @@ else
     build=`git rev-list HEAD --count`
     previous_tag="$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))"
 
-    previous_tag="Ent_7.2.1619"
+    previous_tag="Ent_7.9.1764"
+    #latest_tag="Ent_7.9.11780"
 
     filename="GITCHANGELOG-FROM-$previous_tag-TO-$latest_tag.md"
-    echo "#Changelog" > $filename
-    echo "##Latest tag: $latest_tag" >> $filename
-    echo "##Previous tag: $previous_tag" >> $filename
+    echo "# Changelog" > $filename
+    echo "## Latest tag: $latest_tag" >> $filename
+    echo "## Previous tag: $previous_tag" >> $filename
 
     # Get commit messages since previous tag
     changelog="$(git log --no-merges --pretty=format:"* %s (%cd) by <%cn>" --date=short $previous_tag...$latest_tag)"

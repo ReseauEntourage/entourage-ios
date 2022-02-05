@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Version_4.3.798
-##Previous tag: Version_4.2.769
+# Changelog
+## Latest tag: Version_4.3.798
+## Previous tag: Version_4.2.769
 * Merge branch 'develop' (2018-01-19) by <François Pellissier>
 * EMA-1737 fixed social tour code (2018-01-18) by <VeronicaGliga>
 * EMA-1737 tour tracking after loosing signal (2018-01-17) by <VeronicaGliga>

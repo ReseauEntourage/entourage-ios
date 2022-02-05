@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_6.2.1242
-##Previous tag: Ent_6.1.1.1228
+# Changelog
+## Latest tag: Ent_6.2.1242
+## Previous tag: Ent_6.1.1.1228
 * feat: EN-1327 handle Firebase notifications deeplinks like Mixpanel ones (2020-01-16) by <gregclermont>
 * feat(profil): role asso EN-1854 (2019-12-16) by <gregclermont>
 * fix: (tentative) EN-1760 prevent tour points API call with tour_id=null (2020-01-15) by <gregclermont>

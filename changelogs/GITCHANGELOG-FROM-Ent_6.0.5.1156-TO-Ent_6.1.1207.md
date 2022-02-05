@@ -1,6 +1,6 @@
-#Changelog
-##Latest tag: Ent_6.1.1207
-##Previous tag: Ent_6.0.5.1156
+# Changelog
+## Latest tag: Ent_6.1.1207
+## Previous tag: Ent_6.0.5.1156
 * feat setup backend tracking of notifications permissions (2019-09-19) by <gregclermont>
 * feat(gds): id du POI dans le sujet du mail de modification POI EN-1108 (2019-09-18) by <gregclermont>
 * feat(profil asso): le logo prend toute la place dans le rond EN-1285 (2019-09-17) by <gregclermont>
