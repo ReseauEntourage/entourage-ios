@@ -150,11 +150,11 @@
             atIndex:self.buttonIndex++ withIconWithoutBG:@"agir_icn_aide"
           andAction:@selector(doCreateActionHelp:) andSubtitle:@""];
     
-    NSString *subOndes = currentUser.isUserTypeAlone ? @"agir_bonnes_ondes_alone" : @"agir_bonnes_ondes_others";
+    /*NSString *subOndes = currentUser.isUserTypeAlone ? @"agir_bonnes_ondes_alone" : @"agir_bonnes_ondes_others";
      
     [self addOption:OTLocalizedString(@"agir_title_bonnes_ondes")
       atIndex:self.buttonIndex++ withIconWithoutBG:@"icn_agir_ondes"
-    andAction:@selector(doShowFormOndes:) andSubtitle:OTLocalizedString(subOndes)];
+    andAction:@selector(doShowFormOndes:) andSubtitle:OTLocalizedString(subOndes)];*/
 }
 
 //MARK: IBactions

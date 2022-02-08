@@ -40,7 +40,7 @@ class OTSettingsMenuTableViewCell: UITableViewCell {
             ui_view_goodWaves.isHidden = true
         }
         else {
-            ui_view_goodWaves.isHidden = false
+            ui_view_goodWaves.isHidden = true
         }
         
         ui_label_charte.text = hasSignedChart ? OTLocalisationService.getLocalizedValue(forKey: "menu_read_chart") : OTLocalisationService.getLocalizedValue(forKey: "menu_sign_chart")
@@ -90,7 +90,7 @@ class OTSettingsMenuSecondTableViewCell: UITableViewCell {
             ui_view_goodWaves.isHidden = true
         }
         else {
-            ui_view_goodWaves.isHidden = false
+            ui_view_goodWaves.isHidden = true
         }
     }
 }
