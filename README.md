@@ -19,6 +19,10 @@ Another option for uploading symbols is to use the [upload-symbols](https://gith
 chmod +x scripts/upload-symbols
 This script can be used to manually upload dSYM files. For usage notes and additional instructions for the script, run upload-symbols without any parameters.
 
+Commands:
+> git clone https://github.com/firebase/firebase-ios-sdk.git
+> ./firebase-ios-sdk/Crashlytics/upload-symbols -gsp GoogleService-Info.plist -p ios appDsyms7.9.2.zip
+
 ## Pod dependencies
 AWSS3: stuck to 2.19.X because:
 > AWS SDK for iOS 2.20.0
