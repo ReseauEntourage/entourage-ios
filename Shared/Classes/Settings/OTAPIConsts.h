@@ -116,4 +116,5 @@
 //Message 1 to 1 / groups
 #define API_URL_MESSAGES_ONE2ONE    @"conversations/private?token=%@"
 #define API_URL_MESSAGES_GROUP    @"conversations/group?token=%@"
+#define API_URL_MESSAGES_METADATA_COUNT    @"conversations/metadata?token=%@"
 #endif /* OTAPIConsts_h */
