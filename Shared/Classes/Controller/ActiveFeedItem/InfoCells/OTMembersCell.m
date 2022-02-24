@@ -12,6 +12,7 @@
 #import "UIImageView+entourage.h"
 #import "OTPillLabelView.h"
 #import "entourage-Swift.h"
+#import <SDWebImage/SDWebImage.h>
 
 @implementation OTMembersCell
 
@@ -53,7 +54,11 @@
         [self.ui_label_asso setHidden:YES];
     }
     
-    [self.btnProfile setupAsProfilePictureFromUrl:item.avatarUrl];
+    //[self.btnProfile setupAsProfilePictureFromUrl:item.avatarUrl];
+    
+    self.ui_iv_profile.layer.cornerRadius = self.ui_iv_profile.frame.size.height / 2;
+    self.ui_iv_profile.clipsToBounds = YES;
+    [self.ui_iv_profile sd_setImageWithURL:[NSURL URLWithString:item.avatarUrl] placeholderImage:[UIImage imageNamed:@"userSmall"]];
     
     NSMutableArray<NSString *> *roles = [NSMutableArray new];
     if (item.groupRole != nil) {

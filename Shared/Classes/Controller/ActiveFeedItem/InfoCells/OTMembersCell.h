@@ -26,5 +26,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *ui_label_asso;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ui_constraint_top_margin;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ui_constraint_bottom_margin;
+@property (weak, nonatomic) IBOutlet UIImageView *ui_iv_profile;
 
 @end
