@@ -1,0 +1,341 @@
+/* 
+  Localizable.strings
+  entourage
+
+  Created by Jerome on 12/01/2022.
+  
+*/
+
+//Divers
+"attention_pop_title" = "Attention";
+"close" = "Fermer";
+"error" = "Erreur";
+"generic_error" = "Une erreur s'est produite. Vérifiez votre connexion réseau et réessayez.";
+"connection_error" = "Echec de la connexion";
+"connection_imposible" = "Connexion impossible";
+"tryAgain" = "Veuillez réessayer";
+"tryAgain_short" = "Réessayer";
+"ok" = "OK";
+"OK" = "OK";
+"validate" = "Valider";
+"create" = "Créer";
+"edit" = "Editer";
+"modify" = "Modifier";
+"showAll" = "Voir tout";
+"searchForAddress" = "Rechercher une adresse";
+"cancel" = "Annuler";
+"refuseAlert" = "Refuser";
+"activate" = "Activer";
+"km" = "km";
+
+//PreOnboarding
+"next" = "Suivant";
+"connectMe" = "Me connecter";
+"preOnboard_start_title1" = "Bienvenue sur Entourage";
+"preOnboard_start_title1_colored" = "Entourage";
+"preOnboard_start_description1" = "Rejoignez la communauté solidaire Entourage, réseau d’entraide et de partage au coeur de votre quartier.";
+"preOnboard_start_title2" = "Voisins, faites un pas simple vers les autres";
+"preOnboard_start_title2_colored" = "simple";
+"preOnboard_start_description2" = "Proposez ou demandez de l’aide et rencontrez-vous entre voisins, avec et sans domicile, d’un même quartier.";
+"preOnboard_start_title3" = "Participez à des événements solidaires";
+"preOnboard_start_title3_colored" = "événements solidaires";
+"preOnboard_start_title4" = "Entourage vous accompagne";
+"preOnboard_start_title4_colored" = "accompagne";
+"preOnboard_start_description4" = "Aller vers l’autre devient plus facile : participez à des ateliers de sensibilisation ou formez-vous en ligne. L’association Entourage et ses Ambassadeurs sont là pour vous aider !";
+"preOnboard_choice_description" = "Le réseau de ceux qui n’ont pas de réseau";
+"preOnboard_choice_signup" = "Je m'inscris";
+"preOnboard_choice_login" = "J'ai déjà un compte";
+"preOnboard_choice_weblink" = "Qui est l’association Entourage ?";
+
+//Login
+"error_login_phone_length" = "Le numéro de téléphone doit faire au minimum %d chiffres";
+"error_login_code_lenght" = "Le code doit faire 6 chiffres";
+"error_login_resendCode_unknow" = "Numéro de téléphone inconnu, veuillez ressayer.";
+"error_login_phoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
+"error_login_phoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
+
+"login_title" = "Connectez-vous pour continuer";
+"login_phone_placeholder" = "Numéro de téléphone";
+"login_placeholder_code" = "Saisir votre code";
+"login_button_connect" = "Je me connecte";
+"login_button_resend_code" = "Redemander un code";
+"login_label_country" = "Pays";
+"login_label_phone" = "Téléphone";
+"login_label_code" = "Code";
+"login_button_change_phone" = "J’ai changé de numéro de téléphone";
+
+"login_change_phone_title" = "Changement de numéro\nde téléphone";
+"login_change_phone_old_number" = "Ancien numéro";
+"login_change_phone_new_number" = "Nouveau numéro";
+"login_change_phone_email" = "Email (optionnel)";
+"login_change_phone_bt_validate" = "Envoyer";
+"login_change_phone_old_number_placeholder" = "Ancien numéro";
+"login_change_phone_new_number_placeholder" = "Nouveau numéro";
+"login_change_phone_email_placeholder" = "Email";
+"login_change_send_ok" = "Votre demande a bien été envoyée.\n\n\nLe support Entourage vous informera lorsque le changement de numéro sera réalisé.";
+"login_change_bt_return" = "Retour";
+
+"login_change_warning_title" = "Attention";
+"login_change_error_phone" = "Veuillez verifier vos numéros de téléphone";
+"login_change_error_mail" = "Veuillez vérifier votre adresse Email";
+
+"login_change_error_return" = "Erreur";
+
+"login_change_error_not_found" = "L’ancien numéro est inconnu.\nVeuillez vérifier.";
+"login_change_error_deleted" = "L’ancien numéro a été supprimé.\nVeuillez vérifier.";
+"login_change_error_blocked" = "L’ancien numéro a été bloqué.\nVeuillez vérifier.";
+"login_change_error_identical" = "Les deux numéros sont identiques.\nVeuillez vérifier le nouveau numéro.";
+"login_change_error_generic" = "L’ancien numéro est inconnu ou supprimé.\nVeuillez vérifier les numéros.";
+
+//Login next
+"login_info_pop_action" = "Depuis votre Profil, vous pouvez personnaliser votre fil d’actus et les recommandations reçues. Choisissez en toute confidentialité si vous êtes actuellement : voisin solidaire, personne dans le besoin, association.";
+"login_pop_information" = "Nouveau ! Adaptez Entourage à vos envies et besoins !";
+"login_info_pop_validate" = "Compris !";
+"pop_info_entourage_custom_yes" = "Personnaliser";
+"pop_info_entourage_custom_no" = "Plus tard";
+"pop_info_entourage_custom_no_more" = "Ne plus me montrer";
+"login_email_pwd_title" = "Ok super !";
+"login_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
+
+//Onboarding
+"onboard_button_pass" = "Passer";
+"onboard_welcome_title" = "Bienvenue !";
+"onboard_welcome_sub" = "Tout d'abord...\nComment vous appelez-vous ?";
+"onboard_welcome_info" = "Seule la première lettre sera visible par les autres membres.";
+"onboard_welcome_placeholder_firstname" = "Votre prénom";
+"onboard_welcome_placeholder_lastname" = "Votre nom";
+"onboard_phone_title" = "Enchantés, %@.";
+"onboard_phone_sub" = "Quel est votre numéro de téléphone ?";
+"onboard_phone_info" = "Cette information restera confidentielle. Nous voulons juste vérifier que vous n’êtes pas un robot, mais un humain au grand coeur !";
+"onboard_phone_placeholder_phone" = "Téléphone";
+"onboard_sms_title" = "Entrez le code reçu par SMS";
+"onboard_sms_sub" = "Un SMS vient juste de vous être envoyé au :";
+"onboard_sms_modify" = "- Modifier";
+"onboard_sms_no_code" = "Pas de code ? Réessayez dans 1 min";
+"onboard_sms_wait_retry" = "Pas de code ? Réessayez dans %@";
+"onboard_sms_wait_retry_end" = "Renvoyer un code";
+"onboard_sms_no_pwd" = "Veuillez remplir le password";
+"attention_pop_title" = "Attention";
+"onboard_sms_pop_alert" = "Veuillez patienter encore %d sec avant de renouveller la demande.";
+"onboard_type_title" = "Enchantés, %@.";
+"onboard_type_sub" = "Comment voulez-vous personnaliser l’application ?";
+"onboard_type_description" = "Entourage vous pose ces quelques questions pour vous accueillir et vous accompagner au mieux !\n(Cette information ne sera pas visible par les autres membres du réseau).";
+"onboard_type_description_italic" = "(Cette information ne sera pas visible par les autres membres du réseau).";
+"onboard_type_choice1" = "Pour aider les personnes sans-abri et créer du lien dans votre quartier.";
+"onboard_type_choice2" = "Pour demander de l’aide et découvrir des lieux de solidarité.";
+"onboard_type_choice3" = "Pour parler au nom de votre structure.";
+"onboard_type_choice_title1" = "Voisin solidaire";
+"onboard_type_choice_title2" = "Personne isolée ou en précarité";
+"onboard_type_choice_title3" = "Association ou service public";
+"onboard_place_title" = "Quel est votre quartier ?";
+"onboard_place_description" = "Vous pourrez répondre aux demandes de personnes en difficulté et d’associations de votre quartier, et vous pourrez vous-même proposer des dons de votre temps ou matériels.";
+"onboard_place_title_sdf" = "Dans quel quartier avez vous vos habitudes ?";
+"onboard_place_description_sdf" = "Vous pourrez demander de l’aide à vos voisins et rencontrer de nouvelles personnes lors d’événements conviviaux du réseaux.";
+"onboard_place_info" = "Entourage ne communique pas cette adresse.";
+"onboard_place_placeholder" = "Ex : 35000";
+"onboard_email_pwd_title" = "Ok super !";
+"onboard_email_pwd_email_info" = "Laissez-nous votre mail pour recevoir des informations et des conseils de la part d'Entourage !";
+"onboard_email_pwd_email_info2" = "Entourage ne communique pas votre adresse e-mail.";
+"onboard_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
+"onboard_email_pwd_info_length" = "Inclure au moins 8 caractères.";
+"onboard_email_pwd_placeholder_email" = "E-mail";
+"onboard_email_pwd_placeholder_pwd" = "Mot de passe";
+"onboard_email_pwd_placeholder_confirm_pwd" = "Confirmer votre mot de passe";
+"onboard_email_pwd_error_email" = "Adresse e-mail invalide";
+"onboard_email_pwd_error_pwd_match" = "Les 2 mots de passes ne sont pas identiques";
+"onboard_photo_title" = "Merci, %@ !";
+"onboard_photo_description" = "La touche finale : vous pouvez ajouter votre photo. Les membres d’Entourage de votre quartier ont hâte de faire votre connaissance !";
+
+
+"onboard_email_pwd_placeholder_confirm_pwd" = "Confirmer votre mot de passe";
+"onboard_email_pwd_placeholder_email" = "E-mail";
+"onboard_email_pwd_placeholder_pwd" = "Mot de passe";
+"onboard_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
+"onboard_email_pwd_info_length" = "Inclure au moins 8 caractères.";
+"onboard_email_pwd_title" = "Ok super !";
+"onboard_email_pwd_email_info" = "Laissez-nous votre mail pour recevoir des informations et des conseils de la part d'Entourage !";
+"onboard_email_pwd_email_info2" = "Entourage ne communique pas votre adresse e-mail.";
+"onboard_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
+
+//Onboarding Assos
+"onboard_asso_start_title" = "Ça tombe bien !";
+"onboard_asso_start_description" = "Entourage est une association au service de vos activités.";
+"onboard_asso_start_description_bold" = "Entourage";
+"onboard_asso_start_description2" = "Quelques belles histoires qui montrent la valeur de la communauté Entourage.";
+"onboard_asso_info_title" = "Concrètement, dans l’app, des fonctionnalités vous sont dédiées";
+"onboard_asso_info_description" = "Soyez bien identifié.e sur le réseau et engagez votre communauté";
+"onboard_asso_info_1" = "Un profil vérifié pour chacun de vos membres: un gage de confiance pour vos voisins";
+"onboard_asso_info_1_bold" = "Un profil vérifié";
+"onboard_asso_info_2" = "Une page pour votre structure : pour informer localement de vos activités et besoins.";
+"onboard_asso_info_2_bold" = "Une page pour votre structure";
+"onboard_asso_info_3" = "L’envoi de notifications dans votre quartier et au-delà aux membres de la communauté.";
+"onboard_asso_info_3_bold" = "L’envoi de notifications";
+"onboard_asso_fill_title" = "Parlez-nous de votre structure";
+"onboard_asso_fill_description" = "Dites-nous en plus sur votre association, nous vous recontacterons pour vérifier votre profil et vous créer une page asso !";
+"onboard_asso_fill_name_placeholder" = "Nom de mon association";
+"onboard_asso_fill_cp_placeholder" = "Code postal de mon association";
+"onboard_asso_fill_function_placeholder" = "Ma fonction";
+"onboard_asso_fill_error" = "Veuillez renseigner tous les champs.\nMerci";
+"onboard_asso_search_creation" = "Création de : %@";
+"onboard_asso_activity_title" = "%@, quel est votre coeur d’activité ?";
+"onboard_asso_activity_description" = "Sélectionnez le ou les secteurs d’activité de votre structure, cela nous permettra de vous proposer la meilleure façon d’utiliser l’application et mobiliser la communauté Entourage.";
+"onboard_asso_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
+"onboard_asso_activity_choice_1" = "Aide aux\npersonnes";
+"onboard_asso_activity_choice_2" = "Initiatives culturelles\net sportives";
+"onboard_asso_activity_choice_3" = "Service\nPublic";
+"onboard_asso_activity_choice_4" = "Autres ?";
+"onboard_asso_search" = "Recherche";
+
+//Onboarding Sdf
+"onboard_sdf_activity_title" = "%@, que cherchez-vous ?";
+"onboard_sdf_activity_description" = "Plusieurs choix possibles.\nIl y a mille manières d'être entouré et aidé.";
+"onboard_sdf_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
+"onboard_sdf_activity_choice_1" = "Me faire un\ncercle d’amis";
+"onboard_sdf_activity_choice_2" = "Participer à des\névénements";
+"onboard_sdf_activity_choice_3" = "Poser des\nquestions";
+"onboard_sdf_activity_choice_4" = "Demander\nde l’aide";
+"onboard_sdf_activity_choice_5" = "M’orienter";
+"onboard_sdf_activity_choice_6" = "Trouver des\nassociations";
+
+//Onboarding Neighbour
+"onboard_neighbour_activity_title" = "%@, que souhaitez-vous faire dans votre quartier ?";
+"onboard_neighbour_activity_description" = "Plusieurs choix possibles.\nNous vous ferons des propositions adaptées.";
+"onboard_sneighbour_activity_error" = "Veuillez renseigner au minimum 1 centre d'intéret.\nMerci";
+"onboard_neighbour_activity_choice_1" = "M’informer";
+"onboard_neighbour_activity_choice_2" = "Participer à des\névénements";
+"onboard_neighbour_activity_choice_3" = "Entourer une\npersonne isolée";
+"onboard_neighbour_activity_choice_4" = "Faire des dons\nmatériels";
+"onboard_neighbour_activity_choice_5" = "M’investir dans\nl’associatif";
+
+
+//Onboarding Place tunnel SDF / Voisins
+"onboard_place_title2_sdf" = "Super !";
+"onboard_place_description2_sdf" = "Souhaitez-vous ajouter un autre quartier ?";
+"onboard_place_title2" = "Super !";
+"onboard_place_description2" = "Vous venez de rejoindre des membres de votre quartier. Voulez-vous rajouter un autre quartier dans lequel agir ?";
+
+//Pop inform notifications
+"pop_notification_title" = "Ne manquez rien !";
+"pop_notification_description" = "Sur Entourage, vous allez créer des liens entre voisins solidaires.\nActivez les notifications pour être alerté de vos nouveaux messages.";
+"pop_notification_bt_activate" = "Activer";
+"pop_notification_bt_cancel" = "Annuler";
+
+//Errors Onboarding
+"onboarding_error_firstname" = "Le prénom doit comporter au moins 2 lettres.";
+"onboarding_error_lastname" = "Le nom doit comporter au moins 2 lettres.";
+"onboarding_error_email" = "L’adresse email est invalide.";
+"onboarding_error_phone" = "Le numéro doit comporter 9 ou 10 chiffres.";
+"onboarding_help_label" = "Besoin d’aide ?\nContacter l'équipe Entourage.";
+"invalidCode" = "Code de vérification invalide";
+"invalidPhoneNumber" = "Numéro de téléphone invalide";
+"invalidPhoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
+"mustAddCode" = "Veuillez renseigner un code de vérification";
+"invalidPhoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
+"requestSent" = "Demande envoyée";
+"requestNotSent" = "Demande non envoyée";
+"alreadyRegisteredMessage" = "Le numéro est déjà enregistré. Vous avez dû recevoir le code par SMS.";
+"alreadyRegistereMessageGoBack" = "Le numéro est déjà enregistré, nous allons vous rediriger vers la page de connexion.";
+"onboarding_error_email" = "L’adresse email est invalide.";
+"about_email_notavailable" = "Email introuvable";
+
+
+/*******
+ Guide Map
+ */
+"info_share_sms_poi" = "Bonjour ! Voici l’adresse de %@ qui pourrait vous intéresser.\n%@\n%@\nPour plus d’infos sur ce lieu, et pour créer des liens entre voisins solidaires, je vous donne RDV sur le réseau Entourage %@";
+"title_new_gds" = "Lieux solidaires";
+"home_button_map" = "Carte";
+"home_button_list" = "Liste";
+"home_button_filters" = "Filtres";
+"home_button_filters_on" = "Filtres activés";
+//Solidarity Guide
+"button_reset_filters" = "Annuler Filtres";
+"filter_solidarity_guide_categories" = "Catégories";
+"guide_display_feed" = "Se nourrir";
+"guide_display_housing" = "Se loger";
+"guide_display_heal" = "Se soigner";
+"guide_display_refresh" = "Se rafraîchir";
+"guide_display_orientation" = "S’orienter";
+"guide_display_caring" = "Bien-être & activités";
+"guide_display_reinsertion" = "Se réinsérer";
+"guide_display_partners" = "Associations et services actifs sur Entourage";
+"partners_entourage" = "Organisme actif sur Entourage";
+"guide_display_donate" = "Recherchant des dons";
+"guide_display_volunteer" = "Recherchant des bénévoles";
+"guide_display_info_mutli" = "Lieux proposant des services de plusieurs catégories";
+
+"guide_display_toilettes" = "Toilettes";
+"guide_display_fontaines" = "Fontaines";
+"guide_display_laver" = "Douches";
+"guide_display_laverie" = "Laveries";
+
+"guide_display_vetements" = "Vêtements & matériels";
+"guide_display_boite" = "Boîtes à dons & lire";
+"guide_display_bagageries" = "Bagageries";
+
+"DetailPoiContact" = "Contact";
+"DetailPoiPublic" = "Public";
+"DetailPoiLanguage" = "Langues parlées";
+"DetailPoiOpenTime" = "Horaires";
+
+"info_soliguide_1" = "Les informations sur ce lieu sont fournies par Soliguide, la cartographie solidaire.";
+"info_soliguide_2" = "Pour des informations encore plus complètes et disponibles en plusieurs langues";
+"info_button_soliguide_consult" = "Consulter";
+"guideTitle" = "Guide de solidarité";
+
+//Association detail
+"title_association" = "Association";
+"title_asso_donation" = "Accepte les dons";
+"title_asso_volunteer" = "Cherche des bénévoles";
+"title_asso_information" = "Informations";
+"title_asso_needs" = "Besoins";
+"title_asso_accept_needs" = "Accepte des dons";
+"title_asso_accept_volunteers" = "Recherche des bénévoles";
+"title_asso_contact" = "Contact";
+"title_asso_phone" = "Numéro de téléphone";
+"title_asso_phone_light" = "Téléphone";
+"title_asso_website" = "Site Web";
+"title_asso_address" = "Adresse";
+//Pop follow/unfollow partner
+"buttonFollowOnPartner" = "Abonné.e";
+"buttonFollowOffPartner" = "S'abonner";
+"partnerFollowTitle" = "Se désabonner de %@ ?";
+"partnerFollowMessage" = "Vous ne recevrez plus de notification lorsque %@ lance de nouvelles initiatives solidaires.";
+"partnerFollowButtonValid" = "Se désabonner";
+"partnerFollowButtonCancel" = "Annuler";
+
+
+/**********
+ Profile
+ */
+"myProfileButton" = "Mon profil";
+"myParamsButton" = "Paramètres";
+"profile_title" = "Profil";
+"mainUserTitleActivity" = "Mon activité";
+"mainUserTitleActions" = "Contributions";
+"mainUserTitleEvents" = "Évènements";
+
+"mainUserBioPlaceholder" = "Placeholder pour la bio ?";
+"mainUserBirthPlaceholder" = "Placeholder pour la date ?";
+"mainUserEmailPlaceholder" = "Placeholder pour l'email ?";
+
+"mainUserTitleInfos" = "Mes informations";
+"mainUserTitleBirth" = "Date d'anniversaire";
+"mainUserTitlePhone" = "Téléphone";
+"mainUserTitleEmail" = "E-mail";
+"mainUserTitleCity" = "Ville";
+
+"mainUserTitleRadius" = "Dans un rayon de *";
+"mainUserDescRadius" = "* Votre zone d’action permet de définir à quelle distance vous pouvez agir et vous déplacer";
+
+// take photo profile
+"take_photo_title" = "Ajouter une photo ?";
+"take_photo_description" = "Avec une photo, c’est tout de suite plus sympa.\nMontrez-nous votre sourire le plus chaleureux.";
+"take_photo" = "Prendre une photo";
+"take_gallery" = "Importer depuis la galerie";
+"description_move_photo" = "Déplacer et zoomer pour ajuster la photo de profil.";
+
+
+//Location
+"ask_permission_location_recenter_map" = "Pour recentrer autour de vous, vous devez activer la géolocalisation";
+"no_location_recenter_map" = "La géolocalisation a rencontré une erreur.";

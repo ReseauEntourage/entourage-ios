@@ -1,0 +1,83 @@
+//
+//  Extensions_UIColor.swift
+//  entourage
+//
+//  Created by Jerome on 21/01/2022.
+//
+
+import Foundation
+
+//MARK: - Extensions UIColor -
+extension UIColor {
+    static var appBlack30: UIColor {
+        return UIColor(red: 30 / 255.0, green: 30 / 255.0, blue: 30 / 255.0, alpha: 1.0)
+    }
+    static var appWhite246: UIColor {
+        return UIColor(red: 246 / 255.0, green: 246 / 255.0, blue: 246 / 255.0, alpha: 1.0)
+    }
+    static var appGrey165: UIColor {
+        return UIColor(red: 165 / 255.0, green: 165 / 255.0, blue: 156 / 255.0, alpha: 1.0)
+    }
+    static var appGrey151: UIColor {
+        return UIColor(red: 151 / 255.0, green: 151 / 255.0, blue: 151 / 255.0, alpha: 1.0)
+    }
+    static var appGreyishBrown: UIColor {
+        return UIColor(red: 74 / 255.0, green: 74 / 255.0, blue: 74 / 255.0, alpha: 1.0)
+    }
+    
+    static var appPaleGrey: UIColor {
+        return UIColor(red: 239 / 255.0, green: 239 / 255.0, blue: 244 / 255.0, alpha: 1.0)
+    }
+    
+    //MARK: - POI colors -
+    static var poiCategory1: UIColor {
+        return UIColor(red: 255.0 / 255.0, green: 197.0 / 255.0, blue: 127.0 / 255.0, alpha: 1.0)
+    }
+    static var poiCategory2: UIColor {
+        return UIColor(red: 202.0 / 255.0, green: 167.0 / 255.0, blue: 234.0 / 255.0, alpha: 1.0)
+    }
+    static var poiCategory3: UIColor {
+        return UIColor(red: 255.0 / 255.0, green: 153.0 / 255.0, blue: 153.0 / 255.0, alpha: 1.0)
+    }
+    static var poiCategory4: UIColor {
+        return UIColor(red: 58.0 / 255.0, green: 215.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
+    }
+    static var poiCategory5: UIColor {
+        return UIColor(red: 191.0 / 255.0, green: 191.0 / 255.0, blue: 185.0 / 255.0, alpha: 1.0)
+    }
+    static var poiCategory6: UIColor {
+        return UIColor(red: 136.0 / 255.0, green: 192.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
+    }
+    static var poiCategory7: UIColor {
+        return UIColor(red: 151.0 / 255.0, green: 215.0 / 255.0, blue: 145.0 / 255.0, alpha: 1.0)
+    }
+    static var poiCategory8: UIColor {
+        return UIColor(red: 249.0 / 255.0, green: 159.0 / 255.0, blue: 124.0 / 255.0, alpha: 1.0)
+    }
+    static var poiCategory0: UIColor {
+        return UIColor.black
+    }
+    
+    //MARK: - New App version colors -
+    static var appBeigeClair: UIColor {
+        return UIColor(named: "BeigeClair") ?? .red
+    }
+    static var appBeige: UIColor {
+        return UIColor(named: "Beige") ?? .red
+    }
+    static var appBleu: UIColor {
+        return UIColor(named: "Bleu_2nd") ?? .red
+    }
+    static var appJaune: UIColor {
+        return UIColor(named: "Jaune_2nd") ?? .red
+    }
+    static var appOrange: UIColor {
+        return UIColor(named: "orange_app") ?? .red
+    }
+    static var appOrangeLight: UIColor {
+        return UIColor(named: "orange_light") ?? .red
+    }
+    static var appOrangeLight_50: UIColor {
+        return UIColor(named: "orange_light_a50") ?? .red
+    }
+}

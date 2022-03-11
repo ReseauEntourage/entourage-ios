@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1320"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6B92CA9D19A7461C004E8C9B"
+               BlueprintIdentifier = "025D8715278DD33600909101"
                BuildableName = "Entourage.app"
                BlueprintName = "entourage"
                ReferencedContainer = "container:entourage.xcodeproj">
@@ -27,36 +27,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6B92CA9D19A7461C004E8C9B"
-            BuildableName = "Entourage.app"
-            BlueprintName = "entourage"
-            ReferencedContainer = "container:entourage.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6B92CABE19A7461C004E8C9B"
-               BuildableName = "entourageTests.xctest"
-               BlueprintName = "entourageTests"
-               ReferencedContainer = "container:entourage.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "376F74D623EC6904008168DB"
-               BuildableName = "UnitTests.xctest"
-               BlueprintName = "UnitTests"
-               ReferencedContainer = "container:entourage.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -68,30 +39,19 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      enableGPUFrameCaptureMode = "3"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6B92CA9D19A7461C004E8C9B"
+            BlueprintIdentifier = "025D8715278DD33600909101"
             BuildableName = "Entourage.app"
             BlueprintName = "entourage"
             ReferencedContainer = "container:entourage.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-FIRDebugDisabled"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-noFIRAnalyticsDebugEnabled"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
       <LocationScenarioReference
-         identifier = "../Platinia.gpx"
+         identifier = "../testgps.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>
@@ -105,7 +65,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6B92CA9D19A7461C004E8C9B"
+            BlueprintIdentifier = "025D8715278DD33600909101"
             BuildableName = "Entourage.app"
             BlueprintName = "entourage"
             ReferencedContainer = "container:entourage.xcodeproj">
