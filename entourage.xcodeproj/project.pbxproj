@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,7 @@
 		025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 025D876A278DF43C00909101 /* Onboarding.xcassets */; };
 		025FFE0927DB980600783E8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0827DB980600783E8D /* Main.storyboard */; };
 		025FFE0B27DBAD5100783E8D /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0A27DBAD5100783E8D /* ApiKeys.plist */; };
+		025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0C27DBB18D00783E8D /* entourage-Info.plist */; };
 		0262997927905FB700D84A6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262997827905FB700D84A6A /* Constants.swift */; };
 		0262997B2790815000D84A6A /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262997A2790815000D84A6A /* APIKeys.swift */; };
 		0268194C278DF4A800A98A4A /* Onboarding_V2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0268194B278DF4A800A98A4A /* Onboarding_V2.storyboard */; };
@@ -150,6 +151,7 @@
 		025D876A278DF43C00909101 /* Onboarding.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Onboarding.xcassets; sourceTree = "<group>"; };
 		025FFE0827DB980600783E8D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		025FFE0A27DBAD5100783E8D /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
+		025FFE0C27DBB18D00783E8D /* entourage-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "entourage-Info.plist"; sourceTree = "<group>"; };
 		0262997827905FB700D84A6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0262997A2790815000D84A6A /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0268194B278DF4A800A98A4A /* Onboarding_V2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding_V2.storyboard; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 		025D8718278DD33600909101 /* entourage */ = {
 			isa = PBXGroup;
 			children = (
+				025FFE0C27DBB18D00783E8D /* entourage-Info.plist */,
 				025D8719278DD33600909101 /* AppDelegate.swift */,
 				02C91A26278F303100305E0B /* AppState.swift */,
 				02C91A28278F335000305E0B /* MainTabbarViewController.swift */,
@@ -677,7 +680,7 @@
 				};
 			};
 			buildConfigurationList = 025D8711278DD33600909101 /* Build configuration list for PBXProject "entourage" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -710,6 +713,7 @@
 				02CCE67527D78C7100D6976C /* Montserrat-Regular.ttf in Resources */,
 				029E307C27DB5EF300B12357 /* GoogleService-Info.plist in Resources */,
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
+				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
 				025D8726278DD33800909101 /* LaunchScreen.storyboard in Resources */,
 				02DB3BBA27A1496A004732C9 /* AssociationDetails.storyboard in Resources */,
 				025FFE0927DB980600783E8D /* Main.storyboard in Resources */,
@@ -960,8 +964,8 @@
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ent-Beta";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Pour réaliser votre photo de profil.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Pour envoyer des invitations au réseau Entourage";
@@ -1065,8 +1069,8 @@
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ent-Beta";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Pour réaliser votre photo de profil.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Pour envoyer des invitations au réseau Entourage";
@@ -1176,8 +1180,8 @@
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "entourage/entourage-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Ent-Beta";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Pour réaliser votre photo de profil.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Pour envoyer des invitations au réseau Entourage";
