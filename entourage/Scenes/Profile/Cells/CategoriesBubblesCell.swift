@@ -40,7 +40,12 @@ class CategoriesBubblesCell: UITableViewCell {
         
         ui_taglist_view.removeAllTags()
         for interest in interests {
-            ui_taglist_view.addTag(interest)
+            if let tagName = Metadatas.sharedInstance.tagsInterests?.getTagInterestName(key: interest) {
+                ui_taglist_view.addTag(tagName)
+            }
+            else {
+                ui_taglist_view.addTag(interest)
+            }
         }
         
         if interests.isEmpty {

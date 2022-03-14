@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-1577" y="-222"/>
         </scene>
-        <!--View Controller-->
+        <!--Main Home View Controller-->
         <scene sceneID="lwe-Ls-mvw">
             <objects>
-                <viewController storyboardIdentifier="mainHomeVC" id="1c8-0u-tyG" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainHomeVC" id="1c8-0u-tyG" customClass="MainHomeViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z7X-9U-BPh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

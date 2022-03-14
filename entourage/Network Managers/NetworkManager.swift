@@ -15,7 +15,7 @@ enum Result <T> {
 class NetworkManager {
     static let sharedInstance = NetworkManager()
     
-    init() {
+    private init() {
         session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
     }
     

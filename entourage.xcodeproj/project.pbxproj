@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318A827DF4E3100B0F1BD /* Metadatas.swift */; };
+		021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318AA27DF548600B0F1BD /* MetadatasService.swift */; };
+		021318AD27DF55D400B0F1BD /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318AC27DF55D400B0F1BD /* MainHomeViewController.swift */; };
 		021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */; };
 		021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */; };
 		021F084F2798113D00F32A34 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021F084E2798113D00F32A34 /* LocationManager.swift */; };
@@ -127,6 +130,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		021318A827DF4E3100B0F1BD /* Metadatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadatas.swift; sourceTree = "<group>"; };
+		021318AA27DF548600B0F1BD /* MetadatasService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadatasService.swift; sourceTree = "<group>"; };
+		021318AC27DF55D400B0F1BD /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewController.swift; sourceTree = "<group>"; };
 		021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesBubblesCell.swift; sourceTree = "<group>"; };
 		021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserActivitiesCell.swift; sourceTree = "<group>"; };
 		021F084E2798113D00F32A34 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -282,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				026819C2278E10D900A98A4A /* User.swift */,
+				021318A827DF4E3100B0F1BD /* Metadatas.swift */,
 				022744722795C0FB005600A1 /* Association.swift */,
 				02F5278227999AD700929431 /* MapPoi.swift */,
 				02F5278627999D8400929431 /* PoiCategory.swift */,
@@ -426,6 +433,7 @@
 				0288A8D327CCD8E1008D7011 /* Profile */,
 				02DB3BBD27A149B5004732C9 /* Asso_detail */,
 				02F527792799995900929431 /* Guide_detail */,
+				021318AC27DF55D400B0F1BD /* MainHomeViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -490,6 +498,7 @@
 				02C0A0E1278EDCC400B0C646 /* UserService.swift */,
 				022744702795BEC0005600A1 /* AuthService.swift */,
 				0227446E2795BE6F005600A1 /* AssociationService.swift */,
+				021318AA27DF548600B0F1BD /* MetadatasService.swift */,
 				02D64F4E2799D74F00F6C4BD /* PoiService.swift */,
 				02C91A22278F07D900305E0B /* Endpoints.swift */,
 				0262997A2790815000D84A6A /* APIKeys.swift */,
@@ -798,6 +807,7 @@
 				0227446F2795BE6F005600A1 /* AssociationService.swift in Sources */,
 				02C3ABF4279AB55D00817B82 /* Extensions_UIViewController.swift in Sources */,
 				02CCE68D27D7B8E700D6976C /* MainUserProfileViewController.swift in Sources */,
+				021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */,
 				02F5278127999A8C00929431 /* MainGuideViewController.swift in Sources */,
 				02E069E9279184B3006DB1B6 /* OTOnboardingAssoInfoViewController.swift in Sources */,
 				02E069E3279184B3006DB1B6 /* OTOnboardingEmailPwdViewController.swift in Sources */,
@@ -837,6 +847,7 @@
 				02E069DE279184B3006DB1B6 /* OTOnboardingV2StartViewController.swift in Sources */,
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,
+				021318AD27DF55D400B0F1BD /* MainHomeViewController.swift in Sources */,
 				02DB3BC327A149C3004732C9 /* AssociationDetailViewController.swift in Sources */,
 				02F5278727999D8400929431 /* PoiCategory.swift in Sources */,
 				02681981278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift in Sources */,
@@ -865,6 +876,7 @@
 				02C91A27278F303100305E0B /* AppState.swift in Sources */,
 				022744762795D1D8005600A1 /* NotificationManager.swift in Sources */,
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
+				021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */,
 				025D871A278DD33600909101 /* AppDelegate.swift in Sources */,
 				02CCE68827D7B51E00D6976C /* TagListView.swift in Sources */,
 				0268197F278DF72D00A98A4A /* OTCustomPageControl.swift in Sources */,
