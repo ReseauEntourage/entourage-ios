@@ -22,11 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
+        UNUserNotificationCenter.current().delegate = self
+        
         initEnvironmentConfigManager()
         configureGooglePlace()
         configureFirebase()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(goLogin), name: NSNotification.Name(NotificationTokenError), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(goLogin), name: NSNotification.Name(notificationLoginError), object: nil)
         
         if UserDefaults.currentUser == nil {
             AppState.navigateToStartupScreen()
@@ -47,8 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func initEnvironmentConfigManager() {
-        let identifier:String = Bundle.main.bundleIdentifier ?? ""
-        environmentConfigManager = EnvironmentConfigurationManager.init(bundleId: identifier)
+        environmentConfigManager = EnvironmentConfigurationManager.sharedInstance
     }
     
     private func configureGooglePlace() {

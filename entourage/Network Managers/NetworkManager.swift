@@ -23,8 +23,7 @@ class NetworkManager {
     private var session:URLSession
     
     private func envConfig() -> EnvironmentConfigurationManager {
-        let identifier:String = Bundle.main.bundleIdentifier ?? ""
-       let envConfigManager = EnvironmentConfigurationManager.init(bundleId: identifier)
+        let envConfigManager = EnvironmentConfigurationManager.sharedInstance
         return envConfigManager
     }
     
@@ -129,7 +128,7 @@ class NetworkManager {
                     return
                 }
                 else if resp.statusCode == 401 && endPoint != kAPILogin {
-                    NotificationCenter.default.post(name: NSNotification.Name(NotificationTokenError), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: nil)
                     return
                 }
                 else {

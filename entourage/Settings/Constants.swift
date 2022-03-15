@@ -12,9 +12,13 @@ let kFirebaseDebugPlist = "GoogleService-Info-social.entourage.ios.beta"
 let kFirebaseProdPlist = "GoogleService-Info"
 let kUserAuthenticationLevelAuthenticated = "authenticated"
 
-//Notifications
-let NotificationTokenError = "tokenError"
+//Notifications in app
+let notificationLoginError = "loginTokenError"
 
+
+
+
+//Constants
 let PARIS_LAT = 48.856578
 let PARIS_LON = 2.351828
 let MAPVIEW_REGION_SPAN_X_METERS = 5000

@@ -1,3 +1,12 @@
+//
+//  EnvironmentConfigurationManager.swift
+//  entourage
+//
+//  Use this manager to get private informations like keys and token for differents API services.
+//
+//  Mod by Jerome on 2022.
+//
+
 import Foundation
 
 
@@ -15,11 +24,16 @@ struct UserStorageKey {
     static let googlePlaceApiKey = "GooglePlaceApiKey"
 }
 
-@objc enum ApplicationType:Int {
-    case entourage = 0
-}
-
-@objc class EnvironmentConfigurationManager: NSObject {
+class EnvironmentConfigurationManager {
+    
+    static let sharedInstance = EnvironmentConfigurationManager()
+    
+    private init() {
+        guard let bundleId = Bundle.main.bundleIdentifier else { return }
+        self.config = EnvironmentConfigurationManager.plist(name: "AppConfigurations", bundleId: bundleId)
+        self.apiKeys = EnvironmentConfigurationManager.plist(name: "ApiKeys", bundleId: bundleId)
+        self.communityConfig = EnvironmentConfigurationManager.communityPlist()
+    }
     
     private var config: NSDictionary?
     private var apiKeys: NSDictionary?
@@ -27,65 +41,56 @@ struct UserStorageKey {
     private let stagingEnvironmentName: String = "staging"
     private let prodEnvironmentName: String = "prod"
     
-    @objc var applicationType: ApplicationType = ApplicationType.entourage
-    
     var configCopy: NSDictionary? {
         get { return config }
     }
     
-    @objc convenience init(bundleId:String) {
-        self.init()
-        self.config = EnvironmentConfigurationManager.plist(name: "AppConfigurations", bundleId: bundleId)
-        self.apiKeys = EnvironmentConfigurationManager.plist(name: "ApiKeys", bundleId: bundleId)
-        self.communityConfig = EnvironmentConfigurationManager.communityPlist()
-    }
-    
-    @objc var community: NSDictionary {
+    var community: NSDictionary {
         return self.communityConfig!
     }
     
-    @objc var amazonAccessKey: NSString {
+    var amazonAccessKey: NSString {
         return configuration(forKey: UserStorageKey.amazonAccessKey)
     }
     
-    @objc var amazonSecretKey: NSString {
+    var amazonSecretKey: NSString {
         return configuration(forKey: UserStorageKey.amazonSecretKey)
     }
     
-    @objc var amazonPictureFolder: NSString {
+    var amazonPictureFolder: NSString {
         return configuration(forKey: UserStorageKey.amazonPictureFolder)
     }
     
-    @objc var APIHostURL: NSString {
+    var APIHostURL: NSString {
         return configuration(forKey: UserStorageKey.APIHostURL)
     }
     
-    @objc var APIKey: NSString {
+    var APIKey: NSString {
         return apiKeysConfiguration(forKey: UserStorageKey.APIKey)
     }
     
-    @objc var MixpanelToken : NSString {
+    var MixpanelToken : NSString {
         return configuration(forKey: UserStorageKey.mixpanelToken)
     }
     
-    @objc var AwsPictureBucket : NSString {
+    var AwsPictureBucket : NSString {
         return configuration(forKey: UserStorageKey.awsPictureBucket)
     }
     
-    @objc var GooglePlaceApiKey : NSString {
+    var GooglePlaceApiKey : NSString {
         return configuration(forKey: UserStorageKey.googlePlaceApiKey)
     }
     
-    @objc var environmentName : NSString {
-        return configuration(forKey: UserStorageKey.environmentTypeKey)
+    var environmentName : String {
+        return configuration(forKey: UserStorageKey.environmentTypeKey) as String
     }
     
-    @objc var runsOnProduction: Bool {
-        return self.environmentName as String == prodEnvironmentName
+   var runsOnProduction: Bool {
+        return self.environmentName == prodEnvironmentName
     }
     
-    @objc var runsOnStaging: Bool {
-        return self.runsOnProduction == false
+    var runsOnStaging: Bool {
+        return self.environmentName == stagingEnvironmentName
     }
     
     private func configuration(forKey: String) -> NSString {

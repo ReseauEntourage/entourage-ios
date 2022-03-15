@@ -31,6 +31,9 @@ extension UserDefaults {
             if let newvalue = newValue {
                try? UserDefaults.standard.encode(newvalue, forKey: Keys.tempUser)
             }
+            else {
+                UserDefaults.standard.removeObject(forKey: Keys.tempUser)
+            }
         }
     }
     class var currentUser: User? {
@@ -40,6 +43,9 @@ extension UserDefaults {
         set {
             if let newvalue = newValue {
                 try? UserDefaults.standard.encode(newvalue, forKey: Keys.currentUser)
+            }
+            else {
+                UserDefaults.standard.removeObject(forKey: Keys.currentUser)
             }
         }
     }

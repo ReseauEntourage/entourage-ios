@@ -21,6 +21,13 @@ extension String {
     }
 }
 
+//MARK: - Bundle Extension -
+extension Bundle {
+    var versionName:String {
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0"
+    }
+}
+
 //MARK: - Network Query Helper -
 protocol URLQueryParameterStringConvertible {
     var queryParameters: String {get}
