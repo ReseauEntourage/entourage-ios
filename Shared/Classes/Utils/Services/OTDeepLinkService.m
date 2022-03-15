@@ -125,7 +125,7 @@
 
 + (BOOL)isUniversalLink:(NSURL *)url {
     return ([@[@"http", @"https"] containsObject:url.scheme] &&
-            [@[@"entourage.social", @"www.entourage.social"] containsObject:url.host]);
+            [@[@"entourage.social", @"www.entourage.social",@"app.entourage.social"] containsObject:url.host]);
 }
 
 - (void)handleUniversalLink:(NSURL *)url {
