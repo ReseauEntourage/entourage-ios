@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>8.0.buildNumberNotSet</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -15,13 +29,31 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>buildNumberNotSet</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Pour réaliser votre photo de profil.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Pour envoyer des invitations au réseau Entourage</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Pour afficher les initiatives solidaires à proximité</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Pour afficher les initiatives solidaires à proximité</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Pour vous montrer les actions de solidarité à proximité</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Pour saisir la description des entourages</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Pour afficher votre photo de profil.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>NunitoSans-Bold.ttf</string>
@@ -33,63 +65,31 @@
 		<string>Montserrat-Regular.ttf</string>
 		<string>Quicksand-Bold.ttf</string>
 	</array>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
 		<string>location</string>
 		<string>remote-notification</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDarkContent</string>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Pour afficher votre photo de profil.</string>
-	<key>CFBundleDisplayName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Pour vous montrer les actions de solidarité à proximité</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Pour réaliser votre photo de profil.</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Pour afficher les initiatives solidaires à proximité</string>
-	<key>CFBundlePackageType</key>
-	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Pour saisir la description des entourages</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>NSLocationUsageDescription</key>
-	<string>Pour afficher les initiatives solidaires à proximité</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
 	<key>UISupportedInterfaceOrientations~iphone</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-	<key>NSContactsUsageDescription</key>
-	<string>Pour envoyer des invitations au réseau Entourage</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
