@@ -27,46 +27,46 @@ struct ApplicationTheme {
     }
     
     //MARK: - Fonts with default color from Zeplin style guide -
-    static func getFontTitle(size:CGFloat = 24) -> (font:UIFont,color:UIColor) {
-        return (getFontQuickSandBold(size: size), UIColor.white)
+    static func getFontTitle(size:CGFloat = 24) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: UIColor.white)
     }
-    static func getFontTitleMontserrat(size:CGFloat = 20) -> (font:UIFont,color:UIColor) {
-        return (getFontMontSerratBold(size: size), UIColor.black)
+    static func getFontTitleMontserrat(size:CGFloat = 20) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontMontSerratBold(size: size), color: UIColor.black)
     }
-    static func getFontSubtitle(size:CGFloat = 20) -> (font:UIFont,color:UIColor) {
-        return (getFontNunitoSemiBold(size: size), UIColor.black)
+    static func getFontSubtitle(size:CGFloat = 20) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoSemiBold(size: size), color: UIColor.black)
     }
-    static func getFontSectionActif(size:CGFloat = 15) -> (font:UIFont,color:UIColor) {
-        return (getFontNunitoBold(size: size), UIColor.appOrange)
+    static func getFontSectionActif(size:CGFloat = 15, color:UIColor = .appOrange) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: color)
     }
-    static func getFontSectionInactif(size:CGFloat = 14) -> (font:UIFont,color:UIColor) {
-        return (getFontNunitoSemiBold(size: size), UIColor.appOrangeLight)
-    }
-    
-    static func getFontPopTitle(size:CGFloat = 15) -> (font:UIFont,color:UIColor) {
-        return (getFontNunitoBold(size: size), UIColor.black)
-    }
-    static func getFontTextItalic(size:CGFloat = 15) -> (font:UIFont,color:UIColor) {
-        return (getFontNunitoRegularItalic(size: size), UIColor.black)
-    }
-    static func getFontTextRegular(size:CGFloat = 15) -> (font:UIFont,color:UIColor) {
-        return (getFontNunitoRegular(size: size), UIColor.black)
+    static func getFontSectionInactif(size:CGFloat = 14) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoSemiBold(size: size), color: UIColor.appOrangeLight)
     }
     
-    static func getFontSportStyle(size:CGFloat = 14) -> (font:UIFont,color:UIColor) {
-        return (getFontNunitoBold(size: size), UIColor.appOrange)
+    static func getFontPopTitle(size:CGFloat = 15) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: UIColor.black)
     }
-    static func getFontMontserrat14(size:CGFloat = 14) -> (font:UIFont,color:UIColor) {
-        return (getFontMontSerrat(size: size), UIColor.black)
+    static func getFontTextItalic(size:CGFloat = 15) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoRegularItalic(size: size), color: UIColor.black)
     }
-    static func getFontH5(size:CGFloat = 13) -> (font:UIFont,color:UIColor) {
-        return (getFontNunitoRegular(size: size), UIColor.appOrange)
+    static func getFontTextRegular(size:CGFloat = 15) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: UIColor.black)
     }
-    static func getFontH6(size:CGFloat = 13) -> (font:UIFont,color:UIColor) {
-        return (getFontNunitoLight(size: size), UIColor.appOrange)
+    
+    static func getFontSportStyle(size:CGFloat = 14) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: UIColor.appOrange)
     }
-    static func getFontCategoryBubble(size:CGFloat = 13) -> (font:UIFont,color:UIColor) {
-        return (getFontNunitoSemiBold(size: size), UIColor.appOrangeLight_50)
+    static func getFontMontserrat14(size:CGFloat = 14) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontMontSerrat(size: size), color: UIColor.black)
+    }
+    static func getFontH5(size:CGFloat = 13) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: UIColor.appOrange)
+    }
+    static func getFontH6(size:CGFloat = 13) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoLight(size: size), color: UIColor.appOrange)
+    }
+    static func getFontCategoryBubble(size:CGFloat = 13) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoSemiBold(size: size), color: UIColor.appOrangeLight_50)
     }
     
     //MARK: - Custom Fonts only from Zeplin -
@@ -94,4 +94,10 @@ struct ApplicationTheme {
     static func getFontQuickSandBold(size:CGFloat) -> UIFont {
         return UIFont(name:"Quicksand-Bold", size: size) ?? UIFont.systemFont(ofSize: size)
     }
+}
+
+//MARK: - MJTextFontColor Style -
+struct MJTextFontColorStyle {
+    var font:UIFont
+    var color:UIColor
 }

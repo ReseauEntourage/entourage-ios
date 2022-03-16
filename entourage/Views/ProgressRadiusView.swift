@@ -17,7 +17,7 @@ class ProgressRadiusView: UIView {
     private let maxPercent:CGFloat = 80 //To avoid text position outside screen right
     
     override func draw(_ rect: CGRect) {
-        drawCellarBar(frame: rect, progress: progressPercent)
+        drawBar(frame: rect, progress: progressPercent)
     }
     
     func getPercentScreenPosition() -> CGFloat {
@@ -26,7 +26,7 @@ class ProgressRadiusView: UIView {
         return _progressCalculated
     }
     
-    private func drawCellarBar(frame: CGRect = CGRect(x: 0, y: 0, width: 240, height: 18), progress: CGFloat = 50) {
+    private func drawBar(frame: CGRect = CGRect(x: 0, y: 0, width: 240, height: 18), progress: CGFloat = 50) {
         // General Declarations
         let context = UIGraphicsGetCurrentContext()!
         // This non-generic function dramatically improves compilation times of complex expressions.

@@ -80,4 +80,11 @@ extension UIColor {
     static var appOrangeLight_50: UIColor {
         return UIColor(named: "orange_light_a50") ?? .red
     }
+    static var appOrangeLight_70: UIColor {
+        return UIColor(named: "orange_light_a70") ?? .red
+    }
+    static var appGreenLogout: UIColor {
+        return UIColor(named: "green_logout") ?? .red
+    }
+    
 }

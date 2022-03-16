@@ -27,6 +27,8 @@
 "refuseAlert" = "Refuser";
 "activate" = "Activer";
 "km" = "km";
+"Yes" = "Oui";
+"No" = "Non";
 
 //PreOnboarding
 "next" = "Suivant";
