@@ -264,7 +264,6 @@ extension GuideDetailPoiViewController: InviteSourceDelegate {
 }
 
 //MARK: - MFMailComposeViewControllerDelegate -
-//TODO: a faire
 extension GuideDetailPoiViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         self.dismiss(animated: true, completion: nil)

@@ -225,6 +225,21 @@ struct UserService {
         }
     }
     
+    static func deleteUserAccount(completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIDeleteUser
+        endpoint = String.init(format: endpoint, token)
+        
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
+            Logger.print("Response Delete User : \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error Delete User - \(error)")
+                DispatchQueue.main.async { completion( error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
     
     //MARK: - Parsing -
     static func parsingDataUser(data:Data) -> (user:User?,isFirstLogin:Bool) {

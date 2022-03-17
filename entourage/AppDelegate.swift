@@ -10,6 +10,7 @@ import UserNotifications
 import UserNotificationsUI
 import GooglePlaces
 import Firebase
+import FirebaseMessaging
 
 
 @main
@@ -62,11 +63,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let firebasePlistName = environmentConfigManager.runsOnStaging ? "GoogleService-Info-social.entourage.ios.beta" : "GoogleService-Info"
         
         guard let filePath = Bundle.main.path(forResource: firebasePlistName, ofType: "plist"), let firebaseOptions = FirebaseOptions(contentsOfFile: filePath) else { return  }
-        let appName: String = Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "Entourage"
         
         FirebaseConfiguration.init().setLoggerLevel(.min)
-        FirebaseApp.configure(name:appName, options: firebaseOptions)
+        FirebaseApp.configure(options: firebaseOptions)
         Analytics.setUserProperty(kUserAuthenticationLevelAuthenticated, forName: "AuthenticationLevel")
+        
+        FirebaseMessaging.Messaging.messaging().delegate = self
     }
     
     @objc func goLogin() {
@@ -103,3 +105,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 }
 
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        Logger.print("***** Messaging receive messaging token ? \(messaging) - \(fcmToken)")
+    }
+}

@@ -9,7 +9,6 @@ import UIKit
 
 class MainUserActivitiesCell: UITableViewCell {
     
-    
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_view_events: UIView!
     

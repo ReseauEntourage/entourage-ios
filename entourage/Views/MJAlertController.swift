@@ -20,7 +20,7 @@ class MJAlertController: UIViewController {
     @IBOutlet weak var ui_alert_view: UIView!
     
     weak var delegate:MJAlertControllerDelegate? = nil
-    var alertTagName = "first"
+    var alertTagName:MJAlertTAG = .None
     
     var buttonRightType = MJAlertButtonType(title: "Cancel".localized)
     var buttonLeftType:MJAlertButtonType? = MJAlertButtonType(title: "OK".localized)
@@ -135,6 +135,12 @@ class MJAlertController: UIViewController {
     }
 }
 
+enum MJAlertTAG {
+    case Suppress
+    case Logout
+    case None
+}
+
 //MARK: - MJAlertButtonType -
 struct MJAlertButtonType {
     var title:String = "button"
@@ -153,7 +159,7 @@ struct MJAlertButtonType {
 
 //MARK: - MJAlertControllerDelegate -
 protocol MJAlertControllerDelegate: AnyObject {
-    func validatePressed(alertTag:String)
-    func cancelPressed(alertTag:String)
-    func closePressed(alertTag:String)
+    func validatePressed(alertTag:MJAlertTAG)
+    func cancelPressed(alertTag:MJAlertTAG)
+    func closePressed(alertTag:MJAlertTAG)
 }

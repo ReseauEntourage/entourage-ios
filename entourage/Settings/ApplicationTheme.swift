@@ -26,6 +26,14 @@ struct ApplicationTheme {
         return topPadding ?? 0  > 20
     }
     
+    static func getDefaultBackgroundBarColor() -> UIColor {
+        return UIColor.white
+    }
+    
+    static func getDefaultTintBarColor() -> UIColor {
+        return UIColor.appOrange
+    }
+    
     //MARK: - Fonts with default color from Zeplin style guide -
     static func getFontTitle(size:CGFloat = 24) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: UIColor.white)

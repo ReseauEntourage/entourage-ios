@@ -58,8 +58,8 @@ struct SafariWebManager {
         }
         safariController.modalTransitionStyle = .coverVertical
         
-        safariController.preferredBarTintColor = UIColor.appOrange
-        safariController.preferredControlTintColor = UIColor.white
+        safariController.preferredBarTintColor = ApplicationTheme.getDefaultBackgroundBarColor()
+        safariController.preferredControlTintColor = ApplicationTheme.getDefaultTintBarColor()
         
         return safariController
     }

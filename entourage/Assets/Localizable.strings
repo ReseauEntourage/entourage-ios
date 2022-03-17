@@ -341,3 +341,27 @@
 //Location
 "ask_permission_location_recenter_map" = "Pour recentrer autour de vous, vous devez activer la géolocalisation";
 "no_location_recenter_map" = "La géolocalisation a rencontré une erreur.";
+
+//Settings
+"params_notifs" = "Notifications";
+"params_help" = "Aide et à propos";
+"params_unlock" = "Débloquer des membres";
+"params_share" = "Partager l’application";
+"params_logout" = "Se déconnecter";
+"params_suppress" = "Supprimer mon compte";
+"params_logout_pop_title" = "Déconnexion";
+"params_logout_pop_message" = "Voulez-vous vous déconnecter ?";
+"params_suppress_pop_title" = "Suppression du compte";
+"params_suppress_pop_message" = "Souhaitez-vous supprimer votre compte ?";
+"params_account_not_deleted" = "Compte non supprimé.\nErreur : %@";
+"params_account_deleted" = "Votre compte a bien été supprimé.";
+//Settings about menu
+"params_about_charte" = "Charte éthique Entourage";
+"params_about_rate_app" = "Noter l’application";
+"params_about_faq" = "Foire aux questions";
+"params_about_gift" = "Faire un don à Entourage";
+"params_about_ambassador" = "Devenir Ambassadeur bénévole";
+"params_about_cgu" = "Conditions générales d’utilisation";
+"params_about_privacy" = "Politique de Confidentialité";
+"params_about_email" = "Contactez entourage";
+"params_about_licences" = "Licence open-source";
