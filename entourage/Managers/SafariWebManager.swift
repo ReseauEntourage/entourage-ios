@@ -39,7 +39,6 @@ struct SafariWebManager {
                 if let _nav = navController as? UINavigationController, let _nav2 = _nav.topViewController {
                     _nav2.present(safariVC, animated: true, completion: nil)
                 }
-                
             } else if let _nav = rootVC as? UINavigationController {
                 _nav.present(safariVC, animated: true, completion: nil)
             }
@@ -52,9 +51,14 @@ struct SafariWebManager {
         config.entersReaderIfAvailable = false
         let safariController = SFSafariViewController(url: url,configuration: config)
         
-        safariController.modalPresentationStyle = .fullScreen
+        if #available(iOS 13.0, *) {
+            safariController.modalPresentationStyle = .automatic
+        } else {
+            safariController.modalPresentationStyle = .fullScreen
+        }
+        safariController.modalTransitionStyle = .coverVertical
         
-        safariController.preferredBarTintColor = UIColor.appOrange//[ApplicationTheme shared].backgroundThemeColor;
+        safariController.preferredBarTintColor = UIColor.appOrange
         safariController.preferredControlTintColor = UIColor.white
         
         return safariController

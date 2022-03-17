@@ -325,7 +325,7 @@ struct EntourageNetworkError {
     
     init(json:[String:AnyObject]) {
         code = json["code"] as! String
-        message = json["message"] as! String
+        message = json["message"] as? String ?? "Erreur \(code)"
         error = nil
     }
     init() {
