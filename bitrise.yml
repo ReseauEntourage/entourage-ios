@@ -24,6 +24,7 @@ workflows:
     - xcode-archive:
         inputs:
         - register_test_devices: "yes"
+        - automatic_code_signing: api-key
         - distribution_method: ad-hoc
     - deploy-to-bitrise-io: {}
     - ruby-script:
