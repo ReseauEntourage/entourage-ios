@@ -154,9 +154,9 @@ workflows:
         - verbose: "false"
     - file-downloader@1:
         inputs:
-        - destination: $BITRISEIO_APPCONFIGURATIONS_URL
+        - source: $BITRISEIO_APPCONFIGURATIONS_URL
         - file_permission: "600"
-        - source: $BITRISE_SOURCE_DIR/AppConfigurations.plist
+        - destination: $BITRISE_SOURCE_DIR/AppConfigurations.plist
     - script:
         inputs:
         - content: |-
