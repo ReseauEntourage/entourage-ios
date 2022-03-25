@@ -1,6 +1,7 @@
+---
 format_version: 1.3.0
-default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
-project_type: ""
+default_step_lib_source: 'https://github.com/bitrise-io/bitrise-steplib.git'
+project_type: ''
 app:
   envs:
   - BITRISE_PROJECT_PATH: entourage.xcworkspace
@@ -23,7 +24,7 @@ workflows:
     steps:
     - xcode-archive:
         inputs:
-        - register_test_devices: "yes"
+        - register_test_devices: 'yes'
         - automatic_code_signing: api-key
         - distribution_method: ad-hoc
     - deploy-to-bitrise-io: {}
@@ -73,7 +74,7 @@ workflows:
                 '--value', issue_keys
                 )
             end
-        - gemfile_content: ""
+        - gemfile_content: ''
     - post-jira-comment-with-build-details:
         inputs:
         - base_url: $JIRA_BASE_URL
@@ -85,10 +86,12 @@ workflows:
         - channel: '#iosdev'
         - from_username: Entourage-Beta
         - from_username_on_error: Entourage-Beta
-        - message: |-
-            New *Entourage-Beta DEV* iOS build is available: $BITRISE_BUILD_NUMBER  here:
+        - message: >-
+            New *Entourage-Beta DEV* iOS build is available:
+            $BITRISE_BUILD_NUMBER  here:
+
             $BITRISE_APP_URL
-        - message_on_error: Oups, build has failed for Entourage iOS... @here
+        - message_on_error: 'Oups, build has failed for Entourage iOS... @here'
         - pretext: '*Entourage-Beta Build Succeeded!*'
         - pretext_on_error: '*Build Failed for Entourage Beta!*'
         - api_token: $SLACK_BOT_API_TOKEN
@@ -130,10 +133,12 @@ workflows:
         - channel: '#iosdev'
         - from_username: Entourage-Beta
         - from_username_on_error: Entourage-Beta
-        - message: |-
-            New *Entourage-Beta DEV* iOS build is available: $BITRISE_BUILD_NUMBER  here:
+        - message: >-
+            New *Entourage-Beta DEV* iOS build is available:
+            $BITRISE_BUILD_NUMBER  here:
+
             $BITRISE_APP_URL
-        - message_on_error: Oups, build has failed for Entourage iOS... @here
+        - message_on_error: 'Oups, build has failed for Entourage iOS... @here'
         - pretext: '*Entourage-Beta Build Succeeded!*'
         - pretext_on_error: '*Build Failed for Entourage Beta!*'
         - api_token: $SLACK_BOT_API_TOKEN
@@ -147,16 +152,16 @@ workflows:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
     - git-clone:
         inputs:
-        - commit: ""
-        - tag: ""
+        - commit: ''
+        - tag: ''
     - cache-pull: {}
     - cocoapods-install:
         inputs:
-        - verbose: "false"
+        - verbose: 'false'
     - file-downloader@1:
         inputs:
         - source: $BITRISEIO_APPCONFIGURATIONS_URL
-        - file_permission: "600"
+        - file_permission: '600'
         - destination: $BITRISE_SOURCE_DIR/AppConfigurations.plist
     - script:
         inputs:
@@ -166,3 +171,6 @@ workflows:
             set -ex
 
             ./Scripts/count_commit.sh
+meta:
+  bitrise.io:
+    stack: osx-xcode-13.3.x
