@@ -13,7 +13,7 @@ class OTAssoSearchTableViewCell: UITableViewCell {
     @IBOutlet weak var ui_image_selected: UIImageView!
     @IBOutlet weak var ui_label_name: UILabel!
     
-    func populateCell(asso:Association,isSelected:Bool) {
+    func populateCell(asso:Partner,isSelected:Bool) {
         let assoName = asso.name.count > 0 ? asso.name : "Null"
         let name = asso.isCreation ?? false ? String.init(format:  "onboard_asso_search_creation".localized, assoName) : asso.name
         ui_label_name.text = name

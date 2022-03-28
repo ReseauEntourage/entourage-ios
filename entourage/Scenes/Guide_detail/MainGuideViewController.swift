@@ -78,7 +78,7 @@ class MainGuideViewController: UIViewController {
         changeBackbutton()
         
         if self.hasToShowTopInformationGDS {
-            let txt_underline = Utilitaires.formatStringUnderline(stringMessage: "Pop_info_web_alert_GDS".localized, underlineTxt: "Pop_info_web_alert_GDS_underline".localized, color: .white, colorHighlight: .white, fontSize: 14,fontWeight: .regular)
+            let txt_underline = Utils.formatStringUnderline(textString: "Pop_info_web_alert_GDS".localized, textUnderlineString: "Pop_info_web_alert_GDS_underline".localized, textColor: .white, underlinedColor: .white, fontSize: 14,fontWeight: .regular)
             
             self.ui_label_info_web_gds.attributedText = txt_underline
             self.ui_view_top_info_gds.isHidden = false
@@ -543,10 +543,10 @@ class MainGuideViewController: UIViewController {
     func showPoiDetails(_ poi: MapPoi!) {
 //        OTLogger.logEvent(Action_guideMap_POI)//TODO: a faire analytics
         if poi.partnerId != nil {
-            let navVc = UIStoryboard.init(name: "AssociationDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController
+            let navVc = UIStoryboard.init(name: "PartnerDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController
             
-            if let vc = navVc?.topViewController as? AssociationDetailViewController {
-                vc.associationId = poi.partnerId ?? 0
+            if let vc = navVc?.topViewController as? PartnerDetailViewController {
+                vc.partnerId = poi.partnerId ?? 0
                 DispatchQueue.main.async {
                     self.present(navVc!, animated: true, completion: nil)
                 }

@@ -17,8 +17,8 @@ class OTOnboardingSearchAssoViewController: UIViewController {
     
     weak var delegate:ValidateAssoDelegate? = nil
     
-    var arrayAssos = [Association]()
-    var arrayAssosFiltered = [Association]()
+    var arrayAssos = [Partner]()
+    var arrayAssosFiltered = [Partner]()
     
     var rowSelected = -1
     var isFiltered = false
@@ -125,7 +125,7 @@ extension OTOnboardingSearchAssoViewController: UITextFieldDelegate {
             return asso.name.lowercased().contains(_txt.lowercased())
         }
         if arrayAssosFiltered.count == 0 {
-            var asso = Association()
+            var asso = Partner()
             asso.name = _txt
             asso.isCreation = true
             arrayAssosFiltered.append(asso)
@@ -135,5 +135,5 @@ extension OTOnboardingSearchAssoViewController: UITextFieldDelegate {
 }
 //MARK: - Protocol -
 protocol ValidateAssoDelegate:AnyObject {
-    func validate(asso:Association)
+    func validate(asso:Partner)
 }

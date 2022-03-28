@@ -23,9 +23,9 @@ class OTOnboardingAssoInfoViewController: UIViewController {
        ui_label_title.text =  "onboard_asso_info_title".localized
        ui_label_description.text =  "onboard_asso_info_description".localized
        
-        ui_label_info_1.attributedText = Utilitaires.formatString(stringMessage:  "onboard_asso_info_1".localized, coloredTxt:  "onboard_asso_info_1_bold".localized, color: .appBlack30, colorHighlight: .appBlack30, fontSize: 14, fontWeight: .regular, fontColoredWeight: .bold)
-        ui_label_info_2.attributedText = Utilitaires.formatString(stringMessage:  "onboard_asso_info_2".localized, coloredTxt:  "onboard_asso_info_2_bold".localized, color: .appBlack30, colorHighlight: .appBlack30, fontSize: 14, fontWeight: .regular, fontColoredWeight: .bold)
-        ui_label_info_3.attributedText = Utilitaires.formatString(stringMessage:  "onboard_asso_info_3".localized, coloredTxt:  "onboard_asso_info_3_bold".localized, color: .appBlack30, colorHighlight: .appBlack30, fontSize: 14, fontWeight: .regular, fontColoredWeight: .bold)
+        ui_label_info_1.attributedText = Utils.formatString(stringMessage:  "onboard_asso_info_1".localized, coloredTxt:  "onboard_asso_info_1_bold".localized, color: .appBlack30, colorHighlight: .appBlack30, fontSize: 14, fontWeight: .regular, fontColoredWeight: .bold)
+        ui_label_info_2.attributedText = Utils.formatString(stringMessage:  "onboard_asso_info_2".localized, coloredTxt:  "onboard_asso_info_2_bold".localized, color: .appBlack30, colorHighlight: .appBlack30, fontSize: 14, fontWeight: .regular, fontColoredWeight: .bold)
+        ui_label_info_3.attributedText = Utils.formatString(stringMessage:  "onboard_asso_info_3".localized, coloredTxt:  "onboard_asso_info_3_bold".localized, color: .appBlack30, colorHighlight: .appBlack30, fontSize: 14, fontWeight: .regular, fontColoredWeight: .bold)
         
 //        OTLogger.logEvent(View_Onboarding_Pro_Features) //TODO:  Analytics
     }

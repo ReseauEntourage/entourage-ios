@@ -29,6 +29,7 @@
 "km" = "km";
 "Yes" = "Oui";
 "No" = "Non";
+"about_email_notavailable" = "Email introuvable";
 
 //PreOnboarding
 "next" = "Suivant";
@@ -238,8 +239,6 @@
 "alreadyRegisteredMessage" = "Le numéro est déjà enregistré. Vous avez dû recevoir le code par SMS.";
 "alreadyRegistereMessageGoBack" = "Le numéro est déjà enregistré, nous allons vous rediriger vers la page de connexion.";
 "onboarding_error_email" = "L’adresse email est invalide.";
-"about_email_notavailable" = "Email introuvable";
-
 
 /*******
  Guide Map
@@ -285,7 +284,9 @@
 "info_button_soliguide_consult" = "Consulter";
 "guideTitle" = "Guide de solidarité";
 
-//Association detail
+/*******
+//Partner detail
+****/
 "title_association" = "Association";
 "title_asso_donation" = "Accepte les dons";
 "title_asso_volunteer" = "Cherche des bénévoles";
@@ -298,6 +299,9 @@
 "title_asso_phone_light" = "Téléphone";
 "title_asso_website" = "Site Web";
 "title_asso_address" = "Adresse";
+"title_asso_address_big" = "Adresse postale";
+"title_asso_email_light" = "E-Mail";
+
 //Pop follow/unfollow partner
 "buttonFollowOnPartner" = "Abonné.e";
 "buttonFollowOffPartner" = "S'abonner";
@@ -325,10 +329,56 @@
 "mainUserTitleBirth" = "Date d'anniversaire";
 "mainUserTitlePhone" = "Téléphone";
 "mainUserTitleEmail" = "E-mail";
-"mainUserTitleCity" = "Ville";
+"mainUserTitleCity" = "Ville et zone d’action *";
 
 "mainUserTitleRadius" = "Dans un rayon de *";
 "mainUserDescRadius" = "* Votre zone d’action permet de définir à quelle distance vous pouvez agir et vous déplacer";
+
+/*******
+//Profile Edit
+ */
+"editUserProfileTitle" = "Modifier mes informations";
+"editUserBioPlaceholder" = "Placeholder pour la bio ?";
+"editUserModPhoto" = "Modifier ma photo";
+"editUserTitleFirstname" = "Prénom";
+"editUserTitleLastname" = "Nom";
+"editUserTitleBio" = "Description  (200 caractères max)";
+"editUserTitleBirthday" = "Date d’anniversaire";
+"editUserTitlePhone" = "Téléphone";
+"editUserTitleEmail" = "E-mail";
+"editUserTitleCity" = "Ville et zone d’action *";
+"editUserTitleRadius" = "Dans un rayon de *";
+"editUserDescRadius" = "* Votre zone d’action permet de définir à quelle distance vous pouvez agir et vous déplacer";
+
+"editUserPlaceholderFirstname" = "Prénom placeholder";
+"editUserPlaceholderLastname" = "Nom placeholder";
+"editUserPlaceholderBirthday" = "plaehoder anniversaire -> jj-mm";
+"editUserPlaceholderEMail" = "Mon E-mail placeholder";
+"editUserPlaceholderBio" = "Placeholder pour la bio ?";
+
+"editUserProfileValidate" = "Appliquer les modifications";
+
+//Profile Edit error
+"editUser_error_firstname" = "Le prénom doit comporter au moins 2 lettres.";
+"editUser_error_lastname" = "Le nom doit comporter au moins 2 lettres.";
+"editUser_error_bio" = "La bio doit comporter au moins 2 lettres.";
+"editUser_error_email" = "L’adresse email est invalide.";
+"editUser_error_birthday" = "Erreur, l'anniversaire est du type: jj-mm";
+"editUser_error_profile" = "Erreur lors de la modification du profil.";
+
+//Profile edit interests
+"editUserInterestsTitle" = "Modifier mes centres d’interêts";
+"editUserInterestsInfo" = "Séléctionnez une ou plusieurs catégories qui vous intéresse.";
+"editUserInterestsValidate" = "Appliquer les modifications";
+"editUserInterests_error" = "Veuillez selectionner une catégorie au minimum. Txt Error placeholder";
+//profile edit location
+"profileEditLocationTitle" = "Où souhaitez-vous agir ?";
+"profileEditLocationDescription" = "Entourage est un réseau local!\nDécouvrer les initiatives solidaires de votre quartier et tissez des liens avec vos voisins.";
+"profileEditLocationLegend*" = "Ajouter un lieu *";
+"profileEditLocationPlaceholder" = "Ville ou département";
+"profileEditLocationLegend" = "* Entourage ne communique pas cette adresse.";
+"profileEditLocationErrorAddress" = "Addresse invalide.";
+
 
 // take photo profile
 "take_photo_title" = "Ajouter une photo ?";
@@ -342,7 +392,9 @@
 "ask_permission_location_recenter_map" = "Pour recentrer autour de vous, vous devez activer la géolocalisation";
 "no_location_recenter_map" = "La géolocalisation a rencontré une erreur.";
 
+/*******
 //Settings
+ */
 "params_notifs" = "Notifications";
 "params_help" = "Aide et à propos";
 "params_unlock" = "Débloquer des membres";
@@ -355,6 +407,7 @@
 "params_suppress_pop_message" = "Souhaitez-vous supprimer votre compte ?";
 "params_account_not_deleted" = "Compte non supprimé.\nErreur : %@";
 "params_account_deleted" = "Votre compte a bien été supprimé.";
+
 //Settings about menu
 "params_about_charte" = "Charte éthique Entourage";
 "params_about_rate_app" = "Noter l’application";
@@ -365,3 +418,4 @@
 "params_about_privacy" = "Politique de Confidentialité";
 "params_about_email" = "Contactez entourage";
 "params_about_licences" = "Licence open-source";
+"params_about_title" = "Aide et à propos";

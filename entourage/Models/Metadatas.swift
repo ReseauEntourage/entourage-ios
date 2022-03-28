@@ -32,23 +32,89 @@ class Metadatas:Codable {
     }
 }
 
+//MARK: - TagsInterests -
 struct TagsInterests:Codable {
     fileprivate var interests = [Interest]()
     
+    //Use for bubble categories interests
     func getTagInterestName(key:String) -> String {
         if let tag = interests.first(where: {$0.tagKey == key }) {
             return tag.tagName
         }
         return key
     }
+    
+    func getInterests() -> [Interest] {
+        return interests
+    }
+    
+    mutating func checkUncheckInterestFrom(key:String, isCheck:Bool) {
+        if let pos = interests.firstIndex(where: {$0.tagKey == key }) {
+            self.interests[pos].isSelected = isCheck
+        }
+    }
+    
+    mutating func checkUncheckInterestFrom(position:Int, isCheck:Bool) {
+        if position < interests.count {
+            self.interests[position].isSelected = isCheck
+        }
+    }
+    
+    func getInterestsForWS() -> [String] {
+        var arrayForWS = [String]()
+        for interest in interests {
+            if interest.isSelected {
+                arrayForWS.append(interest.tagKey)
+            }
+        }
+        return arrayForWS
+    }
 }
-
+//MARK: - Interest -
 struct Interest:Codable {
     fileprivate var tagName:String
     fileprivate var tagKey:String
     
+    var tagImageName:String? {
+        get {
+            return InterestMappingImageHelper.getInterestImageNameFromKey(key: tagKey)
+        }
+    }
+    var name: String {
+        return tagName
+    }
+    var isSelected = false
+    
     init(keyName:String,keyValue:String) {
         tagName = keyValue
         tagKey = keyName
+    }
+}
+
+fileprivate struct InterestMappingImageHelper {
+    static func getInterestImageNameFromKey(key:String) -> String {
+        var imageName = "others"
+        
+        switch key {
+        case "activites":
+            imageName = "interest_activities"
+        case "animaux":
+            imageName = "interest_animals"
+        case "bien-etre":
+            imageName = "interest_wellness"
+        case "cuisine":
+            imageName = "interest_cooking"
+        case "culture":
+            imageName = "interest_art"
+        case "jeux":
+            imageName = "interest_game"
+        case "sport":
+            imageName = "interest_sport"
+        case "nature":
+            imageName = "interest_nature"
+        default:
+            imageName = "others"
+        }
+        return imageName
     }
 }

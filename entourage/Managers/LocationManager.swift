@@ -116,12 +116,9 @@ class LocationManger:NSObject {
 
 extension LocationManger:CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager,didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            let latitude = location.coordinate.latitude
-            let longitude = location.coordinate.longitude
-            // Handle location update
-        }
-        Logger.print("***** loc manager delegate : did update ")
+        let infos = [kNotificationLocationUpdatedInfoKey: locations]
+        let notif = Notification(name: NSNotification.Name(rawValue: kNotificationLocationUpdated), object: nil,userInfo: infos)
+        NotificationCenter.default.post(notif)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

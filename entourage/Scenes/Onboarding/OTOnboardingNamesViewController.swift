@@ -30,7 +30,7 @@ class OTOnboardingNamesViewController: UIViewController {
         ui_label_error.isHidden = true
         ui_label_title.text =  "onboard_welcome_title".localized
         ui_label_description.text =  "onboard_welcome_sub".localized
-        ui_label_info.attributedText = Utilitaires.formatStringItalicOnly(stringMessage:  "onboard_welcome_info".localized, color: .appBlack30, fontSize: 11)
+        ui_label_info.attributedText = Utils.formatStringItalicOnly(stringMessage:  "onboard_welcome_info".localized, color: .appBlack30, fontSize: 11)
         
         ui_tf_firstname.placeholder =  "onboard_welcome_placeholder_firstname".localized
         ui_tf_lastname.placeholder =  "onboard_welcome_placeholder_lastname".localized

@@ -11,8 +11,7 @@ import IHProgressHUD
 
 class ParamsAboutViewController: UIViewController {
     
-    @IBOutlet weak var ui_top_view: UIView!
-    @IBOutlet weak var ui_title: UILabel!
+    @IBOutlet weak var ui_top_view: MJNavBackView!
     @IBOutlet weak var ui_tableview: UITableView!
     
     //MARK: - Constants for menu -
@@ -31,12 +30,10 @@ class ParamsAboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ui_top_view.populateView(title: "params_about_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
+        
         self.ui_tableview.dataSource = self
         self.ui_tableview.delegate = self
-    }
-    
-    @IBAction func action_close(_ sender: Any) {
-        self.dismiss(animated: true)
     }
 }
 
@@ -106,3 +103,9 @@ extension ParamsAboutViewController: MFMailComposeViewControllerDelegate {
     }
 }
 
+//MARK: - MainUserProfileTopCellDelegate -
+extension ParamsAboutViewController: MJNavBackViewDelegate {
+    func goBack() {
+        self.dismiss(animated: true)
+    }
+}

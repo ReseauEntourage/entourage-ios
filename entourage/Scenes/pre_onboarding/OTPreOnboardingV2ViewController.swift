@@ -92,7 +92,7 @@ class OTPreOnboardingV2ViewController: UIViewController {
             break
         }
         
-        self.ui_label_title.attributedText = Utilitaires.formatString(stringMessage: title, coloredTxt: titleColored, color: UIColor.black, colorHighlight: UIColor.appOrange, fontSize: 28,fontWeight: .medium,fontColoredWeight: .medium)
+        self.ui_label_title.attributedText = Utils.formatString(stringMessage: title, coloredTxt: titleColored, color: UIColor.black, colorHighlight: UIColor.appOrange, fontSize: 28,fontWeight: .medium,fontColoredWeight: .medium)
         self.ui_label_description.text = description
     }
     

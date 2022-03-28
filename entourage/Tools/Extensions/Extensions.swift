@@ -19,6 +19,11 @@ extension String {
     var localized: String {
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
+    
+    func matchesRegEx(_ regex: String) -> Bool {
+        return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+    }
+    
 }
 
 //MARK: - Bundle Extension -
@@ -88,3 +93,4 @@ extension DefaultStringInterpolation {
     appendInterpolation(String(describing: optional))
   }
 }
+

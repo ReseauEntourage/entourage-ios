@@ -8,8 +8,8 @@
 import Foundation
 
 struct AssociationService {
-
-    static func getAllAssociations( completion: @escaping (_ associations:[Association]?, _ error:EntourageNetworkError?) -> Void) {
+    
+    static func getAllAssociations( completion: @escaping (_ associations:[Partner]?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIGetAllAssociations
@@ -27,7 +27,7 @@ struct AssociationService {
         }
     }
     
-    static func getAssociationDetail(id:Int, completion: @escaping (_ associations:Association?, _ error:EntourageNetworkError?) -> Void) {
+    static func getPartnerDetail(id:Int, completion: @escaping (_ associations:Partner?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIGetDetailAssociation
@@ -48,15 +48,15 @@ struct AssociationService {
     }
     
     //MARK: - Parsing Assos -
-    static func parseDataAssociations(data:Data) -> [Association] {
-        var associations = [Association]()
+    static func parseDataAssociations(data:Data) -> [Partner] {
+        var associations = [Partner]()
         
         do {
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let _jsonAssos = json["partners"] as? [[String:AnyObject]] {
                 let decoder = JSONDecoder()
                 for jsonAsso in _jsonAssos {
                     if let dataAsso = try? JSONSerialization.data(withJSONObject: jsonAsso) {
-                        let asso = try decoder.decode(Association.self, from:dataAsso)
+                        let asso = try decoder.decode(Partner.self, from:dataAsso)
                         associations.append(asso)
                     }
                 }
@@ -68,14 +68,14 @@ struct AssociationService {
         return associations
     }
     
-    static func parseDataAssociation(data:Data) -> Association {
-        var association = Association()
+    static func parseDataAssociation(data:Data) -> Partner {
+        var association = Partner()
         
         do {
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let jsonAsso = json["partner"] as? [String:AnyObject] {
                 let decoder = JSONDecoder()
                 if let dataAsso = try? JSONSerialization.data(withJSONObject: jsonAsso) {
-                    association = try decoder.decode(Association.self, from:dataAsso)
+                    association = try decoder.decode(Partner.self, from:dataAsso)
                 }
             }
         }

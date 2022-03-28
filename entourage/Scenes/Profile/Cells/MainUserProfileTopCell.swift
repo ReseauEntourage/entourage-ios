@@ -26,6 +26,8 @@ class MainUserProfileTopCell: UITableViewCell {
     
     let topConstraintStack:CGFloat = 16
     
+    weak var delegate:MainUserProfileTopCellDelegate? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         ui_view_role_bubble.layer.cornerRadius = ui_view_role_bubble.frame.height / 2
@@ -44,8 +46,10 @@ class MainUserProfileTopCell: UITableViewCell {
         
     }
     
-    func populateCell(username:String,role:String?,partner:Association?,bio:String?) {
+    func populateCell(username:String, role:String?, partner:Partner?, bio:String?, delegate:MainUserProfileTopCellDelegate? = nil) {
         ui_username.text = username
+        
+        self.delegate = delegate
         
         if let role = role {
             ui_view_role.isHidden = false
@@ -80,4 +84,13 @@ class MainUserProfileTopCell: UITableViewCell {
             ui_bio.text = "mainUserBioPlaceholder".localized
         }
     }
+    
+    @IBAction func action_show_partner(_ sender: Any) {
+        delegate?.showPartner()
+    }
+}
+
+//MARK: - Protocol MainUserProfileTopCellDelegate -
+protocol MainUserProfileTopCellDelegate: AnyObject {
+    func showPartner()
 }

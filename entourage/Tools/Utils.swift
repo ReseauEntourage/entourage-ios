@@ -9,7 +9,7 @@
 import UIKit
 
 
-@objc class Utilitaires : NSObject {
+@objc class Utils : NSObject {
     @objc static func formatString(stringMessage: String, coloredTxt:String,color: UIColor = UIColor.white,colorHighlight:UIColor = UIColor.appOrange,fontSize: CGFloat = 15, fontWeight:UIFont.Weight = .regular,fontColoredWeight:UIFont.Weight = .regular) -> NSAttributedString {
         let attributesNormal: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: fontSize, weight: fontWeight), NSAttributedString.Key.foregroundColor : color]
         let attributeColored: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font:  UIFont.systemFont(ofSize: fontSize, weight: fontColoredWeight),NSAttributedString.Key.foregroundColor : colorHighlight]
@@ -41,14 +41,20 @@ import UIKit
         return messageAttributed
     }
     
-   @objc static func formatStringUnderline(stringMessage: String,underlineTxt:String,color: UIColor, colorHighlight:UIColor, fontSize: CGFloat = 15, fontWeight:UIFont.Weight = .regular) -> NSAttributedString {
+    @objc static func formatStringUnderline(textString: String, textUnderlineString:String? = nil,textColor: UIColor, underlinedColor:UIColor? = nil, fontSize: CGFloat = 15, fontWeight:UIFont.Weight = .regular, font:UIFont? = nil) -> NSAttributedString {
         
-        let attributesNormal: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: fontSize, weight: fontWeight), NSAttributedString.Key.foregroundColor : color]
+        let underlineTxt = textUnderlineString ?? textString
         
-        let attributeItalic: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font:  UIFont.systemFont(ofSize: fontSize, weight: fontWeight),NSAttributedString.Key.foregroundColor : colorHighlight, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+        let colorUnderlined:UIColor = underlinedColor ?? textColor
         
-        let message = stringMessage as NSString
-        let messageAttributed = NSMutableAttributedString(string: stringMessage as String , attributes: attributesNormal)
+        let currentFont:UIFont = font ?? UIFont.systemFont(ofSize: fontSize, weight: fontWeight)
+        
+        let attributesNormal: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : currentFont, NSAttributedString.Key.foregroundColor : textColor]
+        
+        let attributeItalic: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font:  currentFont,NSAttributedString.Key.foregroundColor : colorUnderlined, NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+        
+        let message = textString as NSString
+        let messageAttributed = NSMutableAttributedString(string: textString , attributes: attributesNormal)
         messageAttributed.addAttributes(attributeItalic, range: message.range(of: underlineTxt))
         
         return messageAttributed
@@ -82,34 +88,34 @@ import UIKit
 }
 
 class ImageLoaderSwift {
-
-  private static let cache = NSCache<NSString, NSData>()
-
-  class func getImage(from urlString: String?, completionHandler: @escaping(_ image: UIImage?) -> ()) {
-
-    DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
-        guard let urlString = urlString else {
-            DispatchQueue.main.async { completionHandler(nil) }
-            return
-        }
+    
+    private static let cache = NSCache<NSString, NSData>()
+    
+    class func getImage(from urlString: String?, completionHandler: @escaping(_ image: UIImage?) -> ()) {
         
-        guard let url = URL.init(string: urlString) else {
-          DispatchQueue.main.async { completionHandler(nil) }
-          return
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+            guard let urlString = urlString else {
+                DispatchQueue.main.async { completionHandler(nil) }
+                return
+            }
+            
+            guard let url = URL.init(string: urlString) else {
+                DispatchQueue.main.async { completionHandler(nil) }
+                return
+            }
+            
+            if let data = self.cache.object(forKey: url.absoluteString as NSString) {
+                DispatchQueue.main.async { completionHandler(UIImage(data: data as Data)) }
+                return
+            }
+            
+            guard let data = NSData(contentsOf: url) else {
+                DispatchQueue.main.async { completionHandler(nil) }
+                return
+            }
+            
+            self.cache.setObject(data, forKey: url.absoluteString as NSString)
+            DispatchQueue.main.async { completionHandler(UIImage(data: data as Data)) }
         }
-        
-      if let data = self.cache.object(forKey: url.absoluteString as NSString) {
-        DispatchQueue.main.async { completionHandler(UIImage(data: data as Data)) }
-        return
-      }
-
-      guard let data = NSData(contentsOf: url) else {
-        DispatchQueue.main.async { completionHandler(nil) }
-        return
-      }
-
-      self.cache.setObject(data, forKey: url.absoluteString as NSString)
-      DispatchQueue.main.async { completionHandler(UIImage(data: data as Data)) }
     }
-  }
 }

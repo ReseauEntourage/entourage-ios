@@ -8,7 +8,6 @@
 import UIKit
 
 //MARK: - ProgressRadiusView -
-@IBDesignable
 class ProgressRadiusView: UIView {
     var progressPercent:CGFloat = 50
     private var currentPercentPosition:CGFloat = 0

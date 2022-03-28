@@ -20,7 +20,7 @@ class OTOnboardingAssoStartViewController: UIViewController {
 
         ui_label_title.text =  "onboard_asso_start_title".localized
         ui_label_description2.text =  "onboard_asso_start_description2".localized
-        ui_label_description.attributedText = Utilitaires.formatString(stringMessage:  "onboard_asso_start_description".localized, coloredTxt:  "onboard_asso_start_description_bold".localized, color: .appBlack30, colorHighlight: UIColor.appOrange, fontSize: 22, fontWeight: .light, fontColoredWeight: .bold)
+        ui_label_description.attributedText = Utils.formatString(stringMessage:  "onboard_asso_start_description".localized, coloredTxt:  "onboard_asso_start_description_bold".localized, color: .appBlack30, colorHighlight: UIColor.appOrange, fontSize: 22, fontWeight: .light, fontColoredWeight: .bold)
         
 //        OTLogger.logEvent(View_Onboarding_Pro_Stories) //TODO:  Analytics
     }

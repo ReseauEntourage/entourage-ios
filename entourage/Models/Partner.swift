@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Association:Codable {
+struct Partner:Codable {
     var name:String = ""
     var postalCode:String?
     var userRoleTitle:String?

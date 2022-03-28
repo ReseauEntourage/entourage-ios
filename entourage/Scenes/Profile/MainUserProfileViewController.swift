@@ -65,8 +65,7 @@ extension MainUserProfileViewController: UITableViewDelegate, UITableViewDataSou
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoTop", for: indexPath) as! MainUserProfileTopCell
-            
-            cell.populateCell(username: currentUser.displayName, role: currentUser.roles?.first, partner: currentUser.partner, bio: currentUser.about)
+            cell.populateCell(username: currentUser.displayName, role: currentUser.roles?.first, partner: currentUser.partner, bio: currentUser.about,delegate: self)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoCats", for: indexPath) as! CategoriesBubblesCell
@@ -91,5 +90,25 @@ extension MainUserProfileViewController: UITableViewDelegate, UITableViewDataSou
             return 0
         }
         return UITableView.automaticDimension
+    }
+}
+
+//MARK: - MainUserProfileTopCellDelegate -
+extension MainUserProfileViewController: MainUserProfileTopCellDelegate {
+    func showPartner() {
+        if let navVc = UIStoryboard.init(name: "PartnerDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController {
+            if let vc = navVc.topViewController as? PartnerDetailViewController {
+                if let id = currentUser.partner?.aid {
+                    vc.partnerId = id
+                }
+                else {
+                    vc.partner = currentUser.partner
+                }
+                
+                DispatchQueue.main.async {
+                    self.navigationController?.present(navVc, animated: true)
+                }
+            }
+        }
     }
 }

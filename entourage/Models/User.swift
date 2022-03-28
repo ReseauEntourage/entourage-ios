@@ -26,7 +26,7 @@ struct User: Codable {
     var stats:UserStats = UserStats()
     var about:String? = nil
     var organization:Organization? = nil
-    var partner:Association? = nil
+    var partner:Partner? = nil
     var conversation:Conversation? = nil
     var roles:[String]? = nil
     var memberships:[String]? = nil
@@ -40,7 +40,7 @@ struct User: Codable {
     var radiusDistance:Int = 0
     
     var isEngaged:Bool = false
-
+    
     enum CodingKeys: String, CodingKey {
         case uuid
         case email
@@ -103,6 +103,37 @@ struct User: Codable {
         return dict
     }
     
+    func dictionaryUserUpdateForWS() -> [String:Any] {
+        var dict = [String:Any]()
+        
+        if firstname.count > 0 {
+            dict["first_name"] = firstname
+        }
+        if lastname.count > 0 {
+            dict["last_name"] = lastname
+        }
+        if let about = about, about.count > 0 {
+            dict["about"] = about
+        }
+        if let email = email, email.count > 0 {
+            dict["email"] = email
+        }
+        if let password = password, password.count > 0 {
+            dict["sms_code"] = password
+        }
+        if let avatarKey = avatarKey, avatarKey.count > 0 {
+            dict["avatar_key"] = avatarKey
+        }
+        if let birthday = birthday, birthday.count > 0 {
+            dict["birthday"] = birthday
+        }
+        if radiusDistance > 0 {
+            dict["travel_distance"] = radiusDistance
+        }
+        
+        return dict
+    }
+    
     func hasActionZoneDefined() -> Bool {
         if let _ = addressPrimary {
             return true
@@ -118,7 +149,7 @@ struct User: Codable {
     }
 }
 
-
+//MARK: - UserAddress -
 struct UserAddress:Codable {
     var displayAddress:String
     var location:CLLocation? = nil
@@ -128,6 +159,7 @@ struct UserAddress:Codable {
     }
 }
 
+//MARK: - Organization -
 struct Organization:Codable {
     var name:String
     var description:String
@@ -136,9 +168,11 @@ struct Organization:Codable {
     var logo_url:String
 }
 
+//MARK: - Conversation - //TODO: à faire dans le futur ;)
 struct Conversation:Codable {
 }
 
+//MARK: - UserPermissions -
 struct UserPermissions:Codable {
     var isEventCreationActive = false
     
@@ -166,6 +200,7 @@ struct UserPermissions:Codable {
     }
 }
 
+//MARK: - UserStats -
 struct UserStats:Codable {
     var tourCount:Int = 0
     var entourageCount:Int = 0

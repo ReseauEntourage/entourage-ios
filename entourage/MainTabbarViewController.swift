@@ -118,7 +118,7 @@ class MainTabbarViewController: UITabBarController {
         menuVC.tabBarItem.image = UIImage.init(named: "ic_tab_menu")?.withRenderingMode(.alwaysTemplate)
         menuVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_menu_selected")
         menuVC.tabBarItem.tag = 4
-        viewControllers = [homeVC,guideVC,plusVC,messagesVC,menuVC]
+        viewControllers = [menuVC,homeVC,guideVC,plusVC,messagesVC]
         
         boldSelectedItem()
     }

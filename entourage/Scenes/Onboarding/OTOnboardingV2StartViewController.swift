@@ -39,7 +39,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     var temporaryEmail = ""
     var temporaryPassword = ""
     var temporaryPasswordConfirm = ""
-    var temporaryAssoInfo:Association? = nil
+    var temporaryAssoInfo:Partner? = nil
     var temporaryAssoActivities:AssoActivities? = nil
     var temporarySdfActivities:SdfNeighbourActivities? = nil
     var temporaryNeighbourActivities:SdfNeighbourActivities? = nil
@@ -301,7 +301,7 @@ class OTOnboardingV2StartViewController: UIViewController {
             IHProgressHUD.show()
 //            OTLogger.logEvent(Action_Onboarding_Pro_Mosaic)//TODO: a faire Analytics
             
-            UserService.updateUserInterests(activities: _activities.getArrayForWS()) { [weak self] user, error in
+            UserService.updateUserInterests(interests: _activities.getArrayForWS()) { [weak self] user, error in
                 IHProgressHUD.dismiss()
                 guard let self = self else { return }
                 self.currentPosition = ControllerType(rawValue: self.currentPosition.rawValue + 2)!
@@ -331,7 +331,7 @@ class OTOnboardingV2StartViewController: UIViewController {
     
     func updateActivities(activities:SdfNeighbourActivities?,isSdf:Bool) {
         if let _activities = activities, _activities.hasOneSelectionMin() {
-            UserService.updateUserInterests(activities: _activities.getArrayForWS()) { user, error in
+            UserService.updateUserInterests(interests: _activities.getArrayForWS()) { user, error in
                 if let user = user {
                     let _currentUser = UserDefaults.currentUser
                     var newUser = user
@@ -556,7 +556,7 @@ extension OTOnboardingV2StartViewController {
         let percent = (ui_progress.bounds.size.width / CGFloat(nbOfSteps)) * CGFloat(currentPosition.rawValue)
         ui_progress.progressPercent = percent
         ui_progress.setNeedsDisplay()
-        ui_label_position.attributedText = Utilitaires.formatString(stringMessage: "0\(currentPosition.rawValue) / 0\(nbOfSteps)", coloredTxt: "0\(nbOfSteps)", color: UIColor.appOrange, colorHighlight: UIColor.appGrey165, fontSize: 24, fontWeight: .bold, fontColoredWeight: .bold)
+        ui_label_position.attributedText = Utils.formatString(stringMessage: "0\(currentPosition.rawValue) / 0\(nbOfSteps)", coloredTxt: "0\(nbOfSteps)", color: UIColor.appOrange, colorHighlight: UIColor.appGrey165, fontSize: 24, fontWeight: .bold, fontColoredWeight: .bold)
         
         updatebuttons()
     }
@@ -757,7 +757,7 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
     
     func validatePhoneNumber(prefix: String, phoneNumber: String?) {
         if let _phone = phoneNumber {
-            self.temporaryUser.phone = Utilitaires.validatePhoneFormat(countryCode: prefix, phone: _phone)
+            self.temporaryUser.phone = Utils.validatePhoneFormat(countryCode: prefix, phone: _phone)
             self.temporaryPhone = _phone
             self.temporaryCountryCode = prefix
         }
@@ -810,7 +810,7 @@ extension OTOnboardingV2StartViewController: OnboardV2Delegate {
     }
     
     
-    func updateAssoInfos(asso:Association) {
+    func updateAssoInfos(asso:Partner) {
         self.temporaryAssoInfo = asso
     }
     
@@ -840,7 +840,7 @@ protocol OnboardV2Delegate:AnyObject {
     func updateUserType(userType:UserType)
     func updateEmailPwd(email:String,pwd:String,pwdConfirm:String)
     
-    func updateAssoInfos(asso:Association)
+    func updateAssoInfos(asso:Partner)
     func updateAssoActivities(assoActivities:AssoActivities)
     func updateSdfActivities(sdfActivities:SdfNeighbourActivities)
     func updateNeighbourActivities(neighbourActivities:SdfNeighbourActivities)

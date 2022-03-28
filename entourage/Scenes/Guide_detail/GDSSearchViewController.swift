@@ -136,9 +136,9 @@ extension GDSSearchViewController: UITableViewDataSource,UITableViewDelegate {
         let poi = pois[indexPath.row]
         if poi.partnerId != nil {
            
-            let navVc = UIStoryboard.init(name: "AssociationDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController
-            if let vc = navVc?.topViewController as? AssociationDetailViewController {
-                vc.associationId = poi.partnerId!
+            let navVc = UIStoryboard.init(name: "PartnerDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController
+            if let vc = navVc?.topViewController as? PartnerDetailViewController {
+                vc.partnerId = poi.partnerId!
                 DispatchQueue.main.async {
                     self.present(navVc!, animated: true, completion: nil)
                 }

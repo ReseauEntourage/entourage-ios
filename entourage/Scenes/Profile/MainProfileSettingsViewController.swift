@@ -42,6 +42,12 @@ class MainProfileSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //TODO: a supp apres mise en place nav pour le mettre dans le &er controller
+        MetadatasService.getMetadatas { error in
+            Logger.print("***** return get metadats ? \(error)")
+        }
+        
         setupVCs()
         setupTopViews()
         
@@ -114,7 +120,7 @@ class MainProfileSettingsViewController: UIViewController {
     
     @objc func updateUser() {
         if let user = UserDefaults.currentUser,let _url = user.avatarURL, let mainUrl = URL(string: _url) {
-            ui_image_user.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "user"))
+            ui_image_user.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
         }
         //To force update profile mainuserprofileVC when show main page
         (profileVC as? MainUserProfileViewController)?.updateUser()
@@ -122,7 +128,9 @@ class MainProfileSettingsViewController: UIViewController {
     
     //MARK: - IBActions -
     @IBAction func action_show_edit_profile(_ sender: Any) {
-        //TODO: todo ;)
+        let sb = UIStoryboard.init(name: "ProfileParams", bundle: nil)
+        let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav")
+        self.tabBarController?.present(navVC, animated: true)
     }
     
     @IBAction func action_profile(_ sender: Any) {

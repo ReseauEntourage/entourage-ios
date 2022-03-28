@@ -11,14 +11,14 @@ import Foundation
 struct UserService {
     
     //MARK: - Update User
-    static func updateUser(user:User?, completion: @escaping (_ user:User?, _ error:EntourageNetworkError?) -> Void) {
+    static func updateUser(user:User?, isOnboarding:Bool = true, completion: @escaping (_ user:User?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token, let user = user  else { completion(nil,nil)
             return
         }
         let endpoint = String.init(format: kAPIUpdateUser, token)
         
-        let parameters = ["user" : user.dictionaryForWS()]
+        let parameters = isOnboarding ? ["user" : user.dictionaryForWS()] : ["user" : user.dictionaryUserUpdateForWS()]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
         Logger.print("Datas passed update user \(parameters)")
@@ -62,6 +62,7 @@ struct UserService {
             }
             
             let newUser = self.parsingDataUser(data: data).user
+            Logger.print("***** update place id user: \(newUser?.addressPrimary?.displayAddress)")
             if newUser?.uuid != nil && newUser?.uuid.count ?? 0 > 0 {
                 UserDefaults.updateCurrentUser(newUser: newUser!)
             }
@@ -124,7 +125,7 @@ struct UserService {
     
     //MARK: - Updates infos for user -
     
-    static func updateUserAssociationInfo(association:Association,completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+    static func updateUserAssociationInfo(association:Partner,completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIUpdateUserPartner
         endpoint = String.init(format: endpoint, token)
@@ -179,17 +180,16 @@ struct UserService {
         }
     }
     
-    static func updateUserInterests(activities:[String],completion: @escaping (_ user:User?, _ error:EntourageNetworkError?) -> Void) {
+    static func updateUserInterests(interests:[String],completion: @escaping (_ user:User?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIUpdateUser
         endpoint = String.init(format: endpoint, token)
         
         var parameters:[String:Any] = ["token" : token]
-        parameters["user"] = ["interests" : activities]
+        parameters["user"] = ["interests" : interests]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
-        Logger.print("Datas passed update user interests \(parameters)")
         NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: bodyData) { data, resp, error in
             
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {

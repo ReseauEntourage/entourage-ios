@@ -139,7 +139,7 @@ class OTLoginV2ViewController: UIViewController {
         
         var phone = ""
         if let _phone = ui_tf_phone.text {
-            phone = Utilitaires.validatePhoneFormat(countryCode: countryCode, phone: _phone)
+            phone = Utils.validatePhoneFormat(countryCode: countryCode, phone: _phone)
         }
         
         if !isLoading {

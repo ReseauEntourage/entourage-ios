@@ -11,10 +11,14 @@ import IHProgressHUD
 
 class PicturePreviewResizeViewController: UIViewController {
     
+    @IBOutlet weak var ui_top_view: MJNavBackView!
+    @IBOutlet weak var ui_bt_valide_from_profile: UIButton!
+    
+    
     @IBOutlet weak var ui_label_description: UILabel!
     @IBOutlet weak var ui_bt_validate: UIButton!
     @IBOutlet weak var ui_bt_cancel: UIButton!
-    @IBOutlet weak var ui_bt_valide_from_profile: UIButton!
+    
     @IBOutlet weak var ui_scrollview: UIScrollView!
     @IBOutlet weak var ui_iv_preview: UIImageView!
     
@@ -28,10 +32,15 @@ class PicturePreviewResizeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ui_label_description.font = ApplicationTheme.getFontTextRegular().font
+        ui_label_description.textColor = ApplicationTheme.getFontTextRegular().color
         ui_label_description.text = "description_move_photo".localized
+        
         ui_bt_validate.setTitle("validate".localized, for: .normal)
         ui_bt_cancel.setTitle("cancel".localized, for: .normal)
         ui_bt_valide_from_profile.setTitle("validate".localized, for: .normal)
+        
+        ui_top_view.populateView(title: "", titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
         
         self.currentImage = currentImage?.toSquare()
         self.ui_iv_preview.image = self.currentImage
@@ -41,11 +50,20 @@ class PicturePreviewResizeViewController: UIViewController {
             ui_bt_cancel.isHidden = true
             ui_bt_validate.isHidden = true
             ui_bt_valide_from_profile.isHidden = false
+            ui_top_view.isHidden = false
+            
+            ui_bt_valide_from_profile.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
+            ui_bt_valide_from_profile.setTitleColor(.white, for: .normal)
+            ui_bt_valide_from_profile.tintColor = .white
+            ui_bt_valide_from_profile.backgroundColor = .appOrange
+            ui_bt_valide_from_profile.layer.cornerRadius = ui_bt_valide_from_profile.frame.height / 2
+            
         }
         else {
             ui_bt_cancel.isHidden = false
             ui_bt_validate.isHidden = false
             ui_bt_valide_from_profile.isHidden = true
+            ui_top_view.isHidden = true
         }
     }
     
@@ -87,7 +105,7 @@ class PicturePreviewResizeViewController: UIViewController {
     func updateUserPhoto() {
         if let _image = self.processImage() {
             IHProgressHUD.show()
-          //  OTLogger.logEvent(Action_Profile_Photo_Submit)
+            //  OTLogger.logEvent(Action_Profile_Photo_Submit)
             PictureUploadS3Service.prepareUploadWith(image: _image,completion: { [weak self] isOk in
                 if isOk, let self = self {
                     self.popToProfile()
@@ -116,15 +134,18 @@ class PicturePreviewResizeViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
-    @IBAction func action_cancel(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
 }
 
 //MARK: - UIScrollViewDelegate -
 extension PicturePreviewResizeViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.ui_iv_preview
+    }
+}
+
+//MARK: - MJNavBackViewDelegate -
+extension PicturePreviewResizeViewController: MJNavBackViewDelegate {
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

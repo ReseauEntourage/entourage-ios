@@ -45,7 +45,7 @@ class OTOnboardingPlaceViewController: UIViewController {
             ui_label_title.text =  "defineActionZoneTitle".localized
             
             ui_label_description.text =  "location_information_profile".localized
-            ui_label_info.attributedText = Utilitaires.formatStringItalicOnly(stringMessage:  "onboard_place_info".localized, color: .appBlack30, fontSize: 12)
+            ui_label_info.attributedText = Utils.formatStringItalicOnly(stringMessage:  "onboard_place_info".localized, color: .appBlack30, fontSize: 12)
         }
         else {
             if !isSecondaryAddress {
@@ -55,7 +55,7 @@ class OTOnboardingPlaceViewController: UIViewController {
                 ui_label_title.text =  _title.localized
                 ui_label_description.text =  _description.localized
                 
-                ui_label_info.attributedText = Utilitaires.formatStringItalicOnly(stringMessage:  "onboard_place_info".localized, color: .appBlack30, fontSize: 12)
+                ui_label_info.attributedText = Utils.formatStringItalicOnly(stringMessage:  "onboard_place_info".localized, color: .appBlack30, fontSize: 12)
                 
                 ui_tf_location.placeholder =  "onboard_place_placeholder".localized
             }
@@ -66,7 +66,7 @@ class OTOnboardingPlaceViewController: UIViewController {
                 ui_label_title.text =  _title.localized
                 ui_label_description.text =  _description.localized
                 
-                ui_label_info.attributedText = Utilitaires.formatStringItalicOnly(stringMessage:  "onboard_place_info".localized, color: .appBlack30, fontSize: 12)
+                ui_label_info.attributedText = Utils.formatStringItalicOnly(stringMessage:  "onboard_place_info".localized, color: .appBlack30, fontSize: 12)
                 
                 ui_tf_location.placeholder =  "onboard_place_placeholder".localized
             }

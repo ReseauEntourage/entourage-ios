@@ -17,7 +17,7 @@ class OTOnboardingAssoFillViewController: UIViewController {
     @IBOutlet weak var ui_tf_asso_cp: OTCustomTextfield!
     @IBOutlet weak var ui_tf_function: OTCustomTextfield!
     
-    var asso:Association? = nil
+    var asso:Partner? = nil
     weak var delegate:OnboardV2Delegate? = nil
     
     override func viewDidLoad() {
@@ -57,7 +57,7 @@ class OTOnboardingAssoFillViewController: UIViewController {
             delegate?.updateAssoInfos(asso: _asso)
         }
         else {
-            delegate?.updateAssoInfos(asso: Association())
+            delegate?.updateAssoInfos(asso: Partner())
         }
     }
     
@@ -92,14 +92,14 @@ extension OTOnboardingAssoFillViewController: UITextFieldDelegate {
         
         if textField == ui_tf_asso_cp {
             if asso == nil {
-                asso = Association()
+                asso = Partner()
             }
              asso?.postalCode = textField.text!
         }
         
         if textField == ui_tf_function {
             if asso == nil {
-                asso = Association()
+                asso = Partner()
             }
             asso?.userRoleTitle = textField.text!
         }
@@ -122,7 +122,7 @@ extension OTOnboardingAssoFillViewController: UITextFieldDelegate {
 
 //MARK: - ValidateAssoDelegate -
 extension OTOnboardingAssoFillViewController:ValidateAssoDelegate {    
-    func validate(asso:Association) {
+    func validate(asso:Partner) {
         if let _ = self.asso {
             self.asso?.name = asso.name
             self.asso?.postalCode = asso.postalCode
