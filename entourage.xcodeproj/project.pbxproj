@@ -4266,7 +4266,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4323,7 +4323,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -4354,9 +4354,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FACEBOOK_ID = 276507866203529;
@@ -4386,7 +4385,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = social.entourage.entourageios.beta;
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE_SPECIFIER = "FP dev";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
@@ -4406,9 +4405,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FACEBOOK_ID = 280727035774134;
@@ -4433,7 +4431,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = Entourage;
-				PROVISIONING_PROFILE_SPECIFIER = "social.entourage.entourageios AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4471,7 +4469,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				ENABLE_BITCODE = NO;
@@ -4509,9 +4507,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = entourage/entourage.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 45;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				FACEBOOK_ID = 280727035774134;
@@ -4541,7 +4538,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "social.entourage.entourageios${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "Ent-Beta";
-				PROVISIONING_PROFILE_SPECIFIER = "Bitrise iOS ad-hoc - (social.entourage.entourageios.beta)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "entourage/Settings/Environment/Entourage-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "entourage-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
