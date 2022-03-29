@@ -482,7 +482,7 @@ L3</string>
     <resources>
         <image name="ic_partner_share" width="22" height="22"/>
         <image name="my_profile_header" width="392" height="416"/>
-        <image name="partner_email" width="21" height="21"/>
+        <image name="partner_email" width="24" height="17"/>
         <image name="partner_phone" width="20" height="20"/>
         <image name="partner_postal" width="20" height="20"/>
         <image name="partner_web" width="21" height="21"/>

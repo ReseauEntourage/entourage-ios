@@ -29,6 +29,8 @@
 "km" = "km";
 "Yes" = "Oui";
 "No" = "Non";
+"yes" = "Oui";
+"no" = "Non";
 "about_email_notavailable" = "Email introuvable";
 
 //PreOnboarding
@@ -305,11 +307,8 @@
 //Pop follow/unfollow partner
 "buttonFollowOnPartner" = "Abonné.e";
 "buttonFollowOffPartner" = "S'abonner";
-"partnerFollowTitle" = "Se désabonner de %@ ?";
-"partnerFollowMessage" = "Vous ne recevrez plus de notification lorsque %@ lance de nouvelles initiatives solidaires.";
-"partnerFollowButtonValid" = "Se désabonner";
-"partnerFollowButtonCancel" = "Annuler";
-
+"partner_pop_unfollow_title" = "Voulez-vous vous désabonner ?";
+"partner_pop_unfollow_message" = "En vous désabonnant, vous ne recevrez plus les notifications, nouvelles, et les nouveaux évènements de cette association ";
 
 /**********
  Profile

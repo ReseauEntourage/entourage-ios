@@ -92,27 +92,6 @@ class PartnerDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func action_tap_follow(_ sender: Any) {
-        if partner?.isFollowing ?? false {
-            let title =  String.init(format: "partnerFollowTitle".localized, self.partner!.name)
-            let message = String.init(format: "partnerFollowMessage".localized, self.partner!.name)
-            let alertvc = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
-            
-            let actionOK = UIAlertAction.init(title:"partnerFollowButtonValid".localized, style: .default) { (action) in
-                self.updateFollowing(isFollowing: false)
-            }
-            let actionCancel = UIAlertAction.init(title:"partnerFollowButtonCancel".localized, style: .cancel) { (action) in
-                alertvc.dismiss(animated: true, completion: nil)
-            }
-            alertvc.addAction(actionCancel)
-            alertvc.addAction(actionOK)
-            self.present(alertvc, animated: true, completion: nil)
-        }
-        else {
-            self.updateFollowing(isFollowing: true)
-        }
-    }
-    
     @objc func close() {
         dismiss(animated: true, completion: nil)
     }
@@ -135,19 +114,15 @@ extension PartnerDetailViewController: UITableViewDataSource,UITableViewDelegate
 extension PartnerDetailViewController: PartnerDetailInfoCellDelegate {
     func followUnfollow() {
         if partner?.isFollowing ?? false {
-            let title =  String.init(format: "partnerFollowTitle".localized, self.partner!.name)
-            let message = String.init(format: "partnerFollowMessage".localized, self.partner!.name)
-            let alertvc = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+            let customAlert = MJAlertController()
+            let buttonAccept = MJAlertButtonType(title: "Yes".localized, titleStyle: ApplicationTheme.getFontSectionActif(color:.white), bgColor: .appOrange, cornerRadius: -1)
+            let buttonCancel = MJAlertButtonType(title: "No".localized, titleStyle: ApplicationTheme.getFontSectionActif(color: .appOrange), bgColor: .appOrangeLight_70, cornerRadius: -1)
             
-            let actionOK = UIAlertAction.init(title:"partnerFollowButtonValid".localized, style: .default) { (action) in
-                self.updateFollowing(isFollowing: false)
-            }
-            let actionCancel = UIAlertAction.init(title:"partnerFollowButtonCancel".localized, style: .cancel) { (action) in
-                alertvc.dismiss(animated: true, completion: nil)
-            }
-            alertvc.addAction(actionCancel)
-            alertvc.addAction(actionOK)
-            self.present(alertvc, animated: true, completion: nil)
+            customAlert.configureAlert(alertTitle: "partner_pop_unfollow_title".localized, message: "partner_pop_unfollow_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontSectionActif(), messageStyle: ApplicationTheme.getFontTextRegular(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true , parentVC: self.navigationController)
+            
+            customAlert.alertTagName = .None
+            customAlert.delegate = self
+            customAlert.show()
         }
         else {
             self.updateFollowing(isFollowing: true)
@@ -209,8 +184,19 @@ extension PartnerDetailViewController: MFMailComposeViewControllerDelegate {
         self.dismiss(animated: true, completion: nil)
     }
 }
+
+//MARK: - MJNavBackViewDelegate -
 extension PartnerDetailViewController: MJNavBackViewDelegate {
     func goBack() {
         self.dismiss(animated: true)
     }
+}
+
+//MARK: - MJAlertControllerDelegate -
+extension PartnerDetailViewController:MJAlertControllerDelegate {
+    func validateLeftButton(alertTag: MJAlertTAG) {
+        self.updateFollowing(isFollowing: false)
+    }
+    func validateRightButton(alertTag: MJAlertTAG) {}
+    func closePressed(alertTag: MJAlertTAG) {}
 }

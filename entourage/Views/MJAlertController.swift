@@ -34,6 +34,8 @@ class MJAlertController: UIViewController {
     var mainviewRadius:CGFloat = 35
     var isButtonCloseHidden = false
     
+    private var parentVC:UIViewController? = nil
+    
     init() {
         super.init(nibName: "MJAlertController", bundle: Bundle(for: MJAlertController.self))
         self.modalPresentationStyle = .overCurrentContext
@@ -51,6 +53,11 @@ class MJAlertController: UIViewController {
     }
     
     func show() {
+        if let parentVC = parentVC {
+            parentVC.present(self, animated: true, completion: nil)
+            return
+        }
+        
         if #available(iOS 13, *) {
             UIApplication.shared.windows.first?.rootViewController?.present(self, animated: true, completion: nil)
         } else {
@@ -58,7 +65,9 @@ class MJAlertController: UIViewController {
         }
     }
     
-    func configureAlert(alertTitle:String?, message:String?,buttonrightType:MJAlertButtonType,buttonLeftType:MJAlertButtonType?,titleStyle:MJTextFontColorStyle? = nil, messageStyle:MJTextFontColorStyle? = nil, mainviewBGColor:UIColor? = nil, mainviewRadius:CGFloat? = nil, isButtonCloseHidden:Bool? = false) {
+    func configureAlert(alertTitle:String?, message:String?,buttonrightType:MJAlertButtonType,buttonLeftType:MJAlertButtonType?,titleStyle:MJTextFontColorStyle? = nil, messageStyle:MJTextFontColorStyle? = nil, mainviewBGColor:UIColor? = nil, mainviewRadius:CGFloat? = nil, isButtonCloseHidden:Bool? = false, parentVC:UIViewController? = nil) {
+        
+        self.parentVC = parentVC
         
         self.titleStyle = titleStyle ?? self.titleStyle
         self.messageStyle = messageStyle ?? self.messageStyle
@@ -123,11 +132,11 @@ class MJAlertController: UIViewController {
     //MARK: - Actions -
     @IBAction func action_left_button(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        delegate?.validatePressed(alertTag:alertTagName)
+        delegate?.validateLeftButton(alertTag:alertTagName)
     }
     @IBAction func action_right_button(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        delegate?.cancelPressed(alertTag:alertTagName)
+        delegate?.validateRightButton(alertTag:alertTagName)
     }
     @IBAction func action_close_button(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -159,7 +168,7 @@ struct MJAlertButtonType {
 
 //MARK: - MJAlertControllerDelegate -
 protocol MJAlertControllerDelegate: AnyObject {
-    func validatePressed(alertTag:MJAlertTAG)
-    func cancelPressed(alertTag:MJAlertTAG)
+    func validateLeftButton(alertTag:MJAlertTAG)
+    func validateRightButton(alertTag:MJAlertTAG)
     func closePressed(alertTag:MJAlertTAG)
 }
