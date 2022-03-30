@@ -11,23 +11,46 @@ import Foundation
 class Metadatas:Codable {
     static let sharedInstance = Metadatas()
     var tagsInterests:TagsInterests? = nil
+    var tagsSignals:TagsSignals? = nil
+    
     
     private init() {}
     
-    func addTagsInterests(data:Data) {
+    func parseMetadatas(data:Data) {
         do {
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] {
-                if let _tags = json["tags"] as? [String:AnyObject], let _interests = _tags["interests"] as? [String:String] {
-                    tagsInterests = TagsInterests()
-                    
-                    for (_key,_value) in _interests {
-                        tagsInterests?.interests.append(Interest(keyName: _key, keyValue: _value))
-                    }
+                if let tags = json["tags"] as? [String:AnyObject] {
+                    addTagsInterests(json: tags)
+                    addTagsSignals(json: tags)
                 }
             }
         }
         catch {
             Logger.print("Error parsing \(error)")
+        }
+    }
+    
+    func addTagsInterests(json:[String: AnyObject] ) {
+        if let _interests = json["interests"] as? [[String:String]] {
+            tagsInterests = TagsInterests()
+            
+            for _interest in _interests {
+                if let interest = _interest.first {
+                    tagsInterests?.interests.append(Interest(keyName: interest.key, keyValue: interest.value))
+                }
+            }
+        }
+    }
+    
+    func addTagsSignals(json:[String: AnyObject] ) {
+        if let _signals = json["signals"] as? [[String:String]] {
+            tagsSignals = TagsSignals()
+            
+            for _signal  in _signals {
+                if let signal = _signal.first {
+                    tagsSignals?.signals.append(Signal(keyName: signal.key, keyValue: signal.value))
+                }
+            }
         }
     }
 }
@@ -116,5 +139,52 @@ fileprivate struct InterestMappingImageHelper {
             imageName = "others"
         }
         return imageName
+    }
+}
+
+//MARK: - Signals -
+struct TagsSignals:Codable {
+    fileprivate var signals = [Signal]()
+    
+    func getTagSignalName(key:String) -> String {
+        if let tag = signals.first(where: {$0.signalKey == key }) {
+            return tag.signalName
+        }
+        return key
+    }
+    
+    func getSignals() -> [Signal] {
+        return signals
+    }
+    
+    mutating func checkUncheckSignalFrom(position:Int, isCheck:Bool) {
+        if position < signals.count {
+            self.signals[position].isSelected = isCheck
+        }
+    }
+    
+    func getSignalsForWS() -> [String] {
+        var arrayForWS = [String]()
+        for signal in signals {
+            if signal.isSelected {
+                arrayForWS.append(signal.signalKey)
+            }
+        }
+        return arrayForWS
+    }
+}
+//MARK: - Signal -
+struct Signal:Codable {
+    fileprivate var signalName:String
+    fileprivate var signalKey:String
+    
+    var name: String {
+        return signalName
+    }
+    var isSelected = false
+    
+    init(keyName:String,keyValue:String) {
+        signalName = keyValue
+        signalKey = keyName
     }
 }
