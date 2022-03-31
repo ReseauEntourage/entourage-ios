@@ -79,15 +79,15 @@ class NetworkManager {
                 }
                 else {
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
-                        let entourageError = EntourageNetworkError(json: json["error"] as! [String:AnyObject])
-                        Logger.print("***** return resp GET error : \(json) - entourage Error : \(entourageError)")
-                        completionHandler(nil,response,entourageError)
-                        return
+                        if let _json = json["error"] as? [String:AnyObject] {
+                            let entourageError = EntourageNetworkError(json:_json)
+                            completionHandler(nil,response,entourageError)
+                            return
+                        }
                     }
-                    
-                    completionHandler(nil,response,nil)
                 }
             }
+            completionHandler(nil,response,nil)
         }
         
         task.resume()
@@ -117,7 +117,6 @@ class NetworkManager {
         }
         
         addRequiereHeaders(urlRequest: &urlRequest)
-        
         session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             
@@ -133,10 +132,11 @@ class NetworkManager {
                 }
                 else {
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
-                        let entourageError = EntourageNetworkError(json: json["error"] as! [String:AnyObject])
-                        Logger.print("***** return resp post error : \(json) - entourage Error : \(entourageError)")
-                        completionHandler(nil,response,entourageError)
-                        return
+                        if let _json = json["error"] as? [String:AnyObject] {
+                            let entourageError = EntourageNetworkError(json:_json)
+                            completionHandler(nil,response,entourageError)
+                            return
+                        }
                     }
                 }
             }
@@ -191,15 +191,15 @@ class NetworkManager {
                 }
                 else {
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
-                        let entourageError = EntourageNetworkError(json: json["error"] as! [String:AnyObject])
-                        Logger.print("***** return resp PATCH error : \(json) - entourage Error : \(entourageError)")
-                        completionHandler(nil,response,entourageError)
-                        return
+                        if let _json = json["error"] as? [String:AnyObject] {
+                            let entourageError = EntourageNetworkError(json:_json)
+                            completionHandler(nil,response,entourageError)
+                            return
+                        }
                     }
-                    
-                    completionHandler(nil,response,nil)
                 }
             }
+            completionHandler(nil,response,nil)
         }
         
         task.resume()
@@ -243,15 +243,15 @@ class NetworkManager {
                 }
                 else {
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
-                        let entourageError = EntourageNetworkError(json: json["error"] as! [String:AnyObject])
-                        Logger.print("***** return resp DELETE error : \(json) - entourage Error : \(entourageError)")
-                        completionHandler(nil,response,entourageError)
-                        return
+                        if let _json = json["error"] as? [String:AnyObject] {
+                            let entourageError = EntourageNetworkError(json:_json)
+                            completionHandler(nil,response,entourageError)
+                            return
+                        }
                     }
-                    
-                    completionHandler(nil,response,nil)
                 }
             }
+            completionHandler(nil,response,nil)
         }
         
         task.resume()
@@ -294,15 +294,15 @@ class NetworkManager {
                 }
                 else {
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
-                        let entourageError = EntourageNetworkError(json: json["error"] as! [String:AnyObject])
-                        Logger.print("***** return resp PUT error : \(json) - entourage Error : \(entourageError)")
-                        completionHandler(nil,response,entourageError)
-                        return
+                        if let _json = json["error"] as? [String:AnyObject] {
+                            let entourageError = EntourageNetworkError(json:_json)
+                            completionHandler(nil,response,entourageError)
+                            return
+                        }
                     }
-                    
-                    completionHandler(nil,response,nil)
                 }
             }
+            completionHandler(nil,response,nil)
         }
         
         task.resume()
@@ -310,8 +310,8 @@ class NetworkManager {
     }
     
     static func getUserToken() -> [String:String]? {
-        if let user = UserDefaults.currentUser {
-            return ["token":user.token]
+        if let token = UserDefaults.currentUser?.token {
+            return ["token":token]
         }
         return nil
     }

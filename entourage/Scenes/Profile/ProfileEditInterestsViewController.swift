@@ -16,7 +16,7 @@ class ProfileEditInterestsViewController: UIViewController {
     @IBOutlet weak var ui_tableview: UITableView!
     
     var currentUser:User? = nil
-    var tagsInterests:TagsInterests! = nil
+    var tagsInterests:Tags! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +42,9 @@ class ProfileEditInterestsViewController: UIViewController {
         if let interests = currentUser?.interests {
             for interest in interests {
                 Logger.print("***** inside prodiedit interests : \(interest)")
-                if let _ = tagsInterests?.getTagInterestName(key: interest) {
+                if let _ = tagsInterests?.getTagNameFrom(key: interest) {
                     Logger.print("***** inside prodiedit interests found: \(interest)")
-                    tagsInterests?.checkUncheckInterestFrom(key: interest, isCheck: true)
+                    tagsInterests?.checkUncheckTagFrom(key: interest, isCheck: true)
                 }
             }
         }
@@ -54,7 +54,7 @@ class ProfileEditInterestsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        guard let tagsInterests = tagsInterests, tagsInterests.getInterests().count > 0 else {
+        guard let tagsInterests = tagsInterests, tagsInterests.getTags().count > 0 else {
             self.dismiss(animated: true)
             return
         }
@@ -65,7 +65,7 @@ class ProfileEditInterestsViewController: UIViewController {
     @IBAction func action_validate(_ sender: Any) {
         var hasOneCheck = false
         
-        for interest in tagsInterests.getInterests() {
+        for interest in tagsInterests.getTags() {
             if interest.isSelected {
                 hasOneCheck = true
                 break
@@ -81,7 +81,7 @@ class ProfileEditInterestsViewController: UIViewController {
     }
     
     func updateInterests() {
-        UserService.updateUserInterests(interests: tagsInterests.getInterestsForWS()) { user, error in
+        UserService.updateUserInterests(interests: tagsInterests.getTagsForWS()) { user, error in
             Logger.print("Return update Interests : \(user)")
             if let err = error?.error {
                 self.showError(message: err.localizedDescription)
@@ -101,24 +101,24 @@ class ProfileEditInterestsViewController: UIViewController {
 //MARK: - UITableViewDataSource, UITableViewDelegate  -
 extension ProfileEditInterestsViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tagsInterests?.getInterests().count ?? 0
+        return tagsInterests?.getTags().count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellInterest", for: indexPath) as! EditProfileInterestCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellInterest", for: indexPath) as! SelectTagCell
         
-        let interest = tagsInterests?.getInterests()[indexPath.row]
+        let interest = tagsInterests?.getTags()[indexPath.row]
         
         
-        cell.populateCell(title: tagsInterests!.getTagInterestName(key: interest!.name) , isChecked: interest!.isSelected, imageName: interest!.tagImageName)
+        cell.populateCell(title: tagsInterests!.getTagNameFrom(key: interest!.name) , isChecked: interest!.isSelected, imageName: (interest! as! TagInterest).tagImageName)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let isCheck = tagsInterests!.getInterests()[indexPath.row].isSelected
+        let isCheck = tagsInterests!.getTags()[indexPath.row].isSelected
         
-        tagsInterests?.checkUncheckInterestFrom(position: indexPath.row, isCheck: !isCheck)
+        tagsInterests?.checkUncheckTagFrom(position: indexPath.row, isCheck: !isCheck)
         tableView.reloadData()
     }
 }

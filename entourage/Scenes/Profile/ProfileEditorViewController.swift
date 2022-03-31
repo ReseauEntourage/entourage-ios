@@ -136,6 +136,9 @@ class ProfileEditorViewController: UIViewController {
                 return
             }
         }
+        else {
+            newUser?.about = ""
+        }
         
         if email_new?.count ?? 0 > 0 {
             if email_new?.isValidEmail ?? false {
@@ -155,6 +158,9 @@ class ProfileEditorViewController: UIViewController {
                 showError(message: "editUser_error_birthday".localized)
                 return
             }
+        }
+        else {
+            newUser?.birthday = ""
         }
         
         if let radius_new = radius_new {
@@ -240,8 +246,8 @@ extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
-            if let vc = UIStoryboard.init(name: "ProfileParams", bundle: nil).instantiateViewController(withIdentifier: "editProfileInterestsVC") as? ProfileEditInterestsViewController, Metadatas.sharedInstance.tagsInterests?.getInterests().count ?? 0 > 0 {
-                vc.tagsInterests = Metadatas.sharedInstance.tagsInterests
+            if let vc = UIStoryboard.init(name: "ProfileParams", bundle: nil).instantiateViewController(withIdentifier: "editProfileInterestsVC") as? ProfileEditInterestsViewController, Metadatas.sharedInstance.tagsInterest?.getTags().count ?? 0 > 0 {
+                vc.tagsInterests = Metadatas.sharedInstance.tagsInterest
                 self.navigationController?.present(vc, animated: true)
             }
         }

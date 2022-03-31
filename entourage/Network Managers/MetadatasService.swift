@@ -23,12 +23,12 @@ struct MetadatasService {
                 return
             }
             
-            parseTagsInterests(data: data)
+            parseMetadatas(data: data)
             DispatchQueue.main.async { completion(nil) }
         }
     }
     
-    private static func parseTagsInterests(data:Data) {
-        Metadatas.sharedInstance.addTagsInterests(data: data)
+    private static func parseMetadatas(data:Data) {
+        Metadatas.sharedInstance.parseMetadatas(data: data)
     }
 }

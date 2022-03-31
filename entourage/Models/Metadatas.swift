@@ -6,15 +6,40 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 class Metadatas:Codable {
     static let sharedInstance = Metadatas()
-    var tagsInterests:TagsInterests? = nil
-    var tagsSignals:TagsSignals? = nil
+    private var _tagsInterests:Tags? = nil
+    private var _tagsSignals:Tags? = nil
     
     
     private init() {}
+    
+    var tagsInterest:Tags? {
+        get {
+            guard let tags = _tagsInterests?.tags else { return nil }
+            
+            for tag in tags {
+                tag.isSelected = false
+            }
+            self._tagsInterests?.tags = tags
+            return self._tagsInterests
+        }
+    }
+    
+    var tagsSignals:Tags? {
+        get {
+            guard let tags = _tagsSignals?.tags else { return nil }
+            
+            for tag in tags {
+                tag.isSelected = false
+            }
+            self._tagsSignals?.tags = tags
+            return self._tagsSignals
+        }
+    }
     
     func parseMetadatas(data:Data) {
         do {
@@ -32,60 +57,61 @@ class Metadatas:Codable {
     
     func addTagsInterests(json:[String: AnyObject] ) {
         if let _interests = json["interests"] as? [[String:String]] {
-            tagsInterests = TagsInterests()
+            _tagsInterests = Tags()
             
             for _interest in _interests {
-                if let interest = _interest.first {
-                    tagsInterests?.interests.append(Interest(keyName: interest.key, keyValue: interest.value))
+                if let _key:String = _interest["id"], let _value:String = _interest["name"] {
+                    _tagsInterests?.tags.append(TagInterest(keyName: _key, keyValue: _value))
                 }
+                
             }
         }
     }
     
     func addTagsSignals(json:[String: AnyObject] ) {
         if let _signals = json["signals"] as? [[String:String]] {
-            tagsSignals = TagsSignals()
+            _tagsSignals = Tags()
             
-            for _signal  in _signals {
-                if let signal = _signal.first {
-                    tagsSignals?.signals.append(Signal(keyName: signal.key, keyValue: signal.value))
+            for _signal in _signals {
+                if let _key:String = _signal["id"], let _value:String = _signal["name"] {
+                    _tagsSignals?.tags.append(Tag(keyName: _key, keyValue: _value))
                 }
+                
             }
         }
     }
 }
 
-//MARK: - TagsInterests -
-struct TagsInterests:Codable {
-    fileprivate var interests = [Interest]()
+//MARK: - Tags -
+struct Tags:Codable {
+    fileprivate var tags = [Tag]()
     
-    //Use for bubble categories interests
-    func getTagInterestName(key:String) -> String {
-        if let tag = interests.first(where: {$0.tagKey == key }) {
+    func getTagNameFrom(key:String) -> String {
+        if let tag = tags.first(where: {$0.tagKey == key }) {
             return tag.tagName
         }
         return key
     }
     
-    func getInterests() -> [Interest] {
-        return interests
+    func getTags() -> [Tag] {
+        return tags
     }
     
-    mutating func checkUncheckInterestFrom(key:String, isCheck:Bool) {
-        if let pos = interests.firstIndex(where: {$0.tagKey == key }) {
-            self.interests[pos].isSelected = isCheck
+    mutating func checkUncheckTagFrom(key:String, isCheck:Bool) {
+        if let pos = tags.firstIndex(where: {$0.tagKey == key }) {
+            self.tags[pos].isSelected = isCheck
         }
     }
     
-    mutating func checkUncheckInterestFrom(position:Int, isCheck:Bool) {
-        if position < interests.count {
-            self.interests[position].isSelected = isCheck
+    mutating func checkUncheckTagFrom(position:Int, isCheck:Bool) {
+        if position < tags.count {
+            self.tags[position].isSelected = isCheck
         }
     }
     
-    func getInterestsForWS() -> [String] {
+    func getTagsForWS() -> [String] {
         var arrayForWS = [String]()
-        for interest in interests {
+        for interest in tags {
             if interest.isSelected {
                 arrayForWS.append(interest.tagKey)
             }
@@ -93,16 +119,13 @@ struct TagsInterests:Codable {
         return arrayForWS
     }
 }
-//MARK: - Interest -
-struct Interest:Codable {
+
+//MARK: - Tag -
+class Tag:Codable {
     fileprivate var tagName:String
     fileprivate var tagKey:String
     
-    var tagImageName:String? {
-        get {
-            return InterestMappingImageHelper.getInterestImageNameFromKey(key: tagKey)
-        }
-    }
+    
     var name: String {
         return tagName
     }
@@ -111,6 +134,15 @@ struct Interest:Codable {
     init(keyName:String,keyValue:String) {
         tagName = keyValue
         tagKey = keyName
+    }
+}
+
+//MARK: - Tag interest -
+class TagInterest: Tag {
+    var tagImageName:String? {
+        get {
+            return InterestMappingImageHelper.getInterestImageNameFromKey(key: self.tagKey)
+        }
     }
 }
 
@@ -139,52 +171,5 @@ fileprivate struct InterestMappingImageHelper {
             imageName = "others"
         }
         return imageName
-    }
-}
-
-//MARK: - Signals -
-struct TagsSignals:Codable {
-    fileprivate var signals = [Signal]()
-    
-    func getTagSignalName(key:String) -> String {
-        if let tag = signals.first(where: {$0.signalKey == key }) {
-            return tag.signalName
-        }
-        return key
-    }
-    
-    func getSignals() -> [Signal] {
-        return signals
-    }
-    
-    mutating func checkUncheckSignalFrom(position:Int, isCheck:Bool) {
-        if position < signals.count {
-            self.signals[position].isSelected = isCheck
-        }
-    }
-    
-    func getSignalsForWS() -> [String] {
-        var arrayForWS = [String]()
-        for signal in signals {
-            if signal.isSelected {
-                arrayForWS.append(signal.signalKey)
-            }
-        }
-        return arrayForWS
-    }
-}
-//MARK: - Signal -
-struct Signal:Codable {
-    fileprivate var signalName:String
-    fileprivate var signalKey:String
-    
-    var name: String {
-        return signalName
-    }
-    var isSelected = false
-    
-    init(keyName:String,keyValue:String) {
-        signalName = keyValue
-        signalKey = keyName
     }
 }
