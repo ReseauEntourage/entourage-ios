@@ -105,7 +105,7 @@ extension MainParamsViewController:MainParamsMenuDelegate {
     func showPopLogout() {
         let customAlert = MJAlertController()
         let buttonAccept = MJAlertButtonType(title: "Yes".localized, titleStyle: ApplicationTheme.getFontSectionActif(color:.white), bgColor: .appOrange, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "Non".localized, titleStyle: ApplicationTheme.getFontSectionActif(color: .appOrange), bgColor: .appOrangeLight_70, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "No".localized, titleStyle: ApplicationTheme.getFontSectionActif(color: .appOrange), bgColor: .appOrangeLight_70, cornerRadius: -1)
         
         customAlert.configureAlert(alertTitle: "params_logout_pop_title".localized, message: "params_logout_pop_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontSectionActif(), messageStyle: ApplicationTheme.getFontTextRegular(), mainviewBGColor: .white, mainviewRadius: 35)
         
@@ -129,7 +129,7 @@ extension MainParamsViewController:MainParamsMenuDelegate {
 
 //MARK: - MJAlertControllerDelegate -
 extension MainParamsViewController: MJAlertControllerDelegate {
-    func validatePressed(alertTag:MJAlertTAG) {
+    func validateLeftButton(alertTag:MJAlertTAG) {
         switch alertTag {
         case .Suppress:
             UserService.deleteUserAccount { error in
@@ -148,6 +148,6 @@ extension MainParamsViewController: MJAlertControllerDelegate {
         }
     }
     
-    func cancelPressed(alertTag:MJAlertTAG) {}
+    func validateRightButton(alertTag:MJAlertTAG) {}
     func closePressed(alertTag:MJAlertTAG) {}
 }

@@ -63,7 +63,7 @@ struct UserService {
             
             let newUser = self.parsingDataUser(data: data).user
             Logger.print("***** update place id user: \(newUser?.addressPrimary?.displayAddress)")
-            if newUser?.uuid != nil && newUser?.uuid.count ?? 0 > 0 {
+            if newUser?.uuid != nil && newUser?.uuid?.count ?? 0 > 0 {
                 UserDefaults.updateCurrentUser(newUser: newUser!)
             }
             
@@ -93,7 +93,7 @@ struct UserService {
             }
             
             let newUser = self.parsingDataUser(data: data).user
-            if newUser?.uuid != nil && newUser?.uuid.count ?? 0 > 0 {
+            if newUser?.uuid != nil && newUser?.uuid?.count ?? 0 > 0 {
                 UserDefaults.updateCurrentUser(newUser: newUser!)
             }
             
@@ -234,6 +234,26 @@ struct UserService {
             Logger.print("Response Delete User : \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
             guard let _ = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 Logger.print("***** error Delete User - \(error)")
+                DispatchQueue.main.async { completion( error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
+    static func reportUser(userId:String, tags:[String],message:String,completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIReportUser
+        endpoint = String.init(format: endpoint,userId, token)
+        
+        let parameters:[String:Any] = ["user_report": ["message":message],"signals":tags] //TODO: Passer les tags
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+                
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response Post report User : \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error report User - \(error)")
                 DispatchQueue.main.async { completion( error) }
                 return
             }

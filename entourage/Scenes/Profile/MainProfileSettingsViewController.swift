@@ -107,7 +107,8 @@ class MainProfileSettingsViewController: UIViewController {
     
     //MARK: - Network User -
     func loadUser() {
-        UserService.getDetailsForUser(userId: currentUser.uuid) { [weak self] user, error in
+        guard let uuid = currentUser?.uuid else { return }
+        UserService.getDetailsForUser(userId: uuid) { [weak self] user, error in
             if let _user = user {
                 self?.currentUser = _user
                 UserDefaults.currentUser = _user

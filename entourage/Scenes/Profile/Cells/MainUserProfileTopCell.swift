@@ -24,6 +24,9 @@ class MainUserProfileTopCell: UITableViewCell {
     @IBOutlet weak var ui_label_partner: UILabel!
     @IBOutlet weak var ui_iv_partner: UIImageView!
     
+    @IBOutlet weak var ui_view_button_message: UIView?
+    @IBOutlet weak var ui_button_message: UIButton?
+   
     let topConstraintStack:CGFloat = 16
     
     weak var delegate:MainUserProfileTopCellDelegate? = nil
@@ -44,6 +47,12 @@ class MainUserProfileTopCell: UITableViewCell {
         ui_username.font = ApplicationTheme.getFontSubtitle().font
         ui_username.textColor = ApplicationTheme.getFontSubtitle().color
         
+        
+        ui_view_button_message?.layer.cornerRadius = (ui_view_button_message?.frame.height ?? 0 ) / 2
+        
+        ui_button_message?.setTitle("detail_user_send_message".localized, for: .normal)
+        ui_button_message?.setTitleColor(.white, for: .normal)
+        ui_button_message?.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 15)
     }
     
     func populateCell(username:String, role:String?, partner:Partner?, bio:String?, delegate:MainUserProfileTopCellDelegate? = nil) {
@@ -81,16 +90,21 @@ class MainUserProfileTopCell: UITableViewCell {
             ui_bio.text = "« \(bio) »"
         }
         else {
-            ui_bio.text = "mainUserBioPlaceholder".localized
+            ui_bio.text = ""//"mainUserBioPlaceholder".localized
         }
     }
     
     @IBAction func action_show_partner(_ sender: Any) {
         delegate?.showPartner()
     }
+    
+    @IBAction func action_send_message(_ sender: Any) {
+        delegate?.sendMessage()
+    }
 }
 
 //MARK: - Protocol MainUserProfileTopCellDelegate -
 protocol MainUserProfileTopCellDelegate: AnyObject {
     func showPartner()
+    func sendMessage()
 }

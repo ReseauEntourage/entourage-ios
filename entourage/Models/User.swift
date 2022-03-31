@@ -14,7 +14,7 @@ struct User: Codable {
     var firstname:String = ""
     var lastname:String = ""
     var sid:Int = 0
-    var uuid:String = ""
+    var uuid:String? = nil
     var type:String = ""
     var email:String? = nil
     var displayName:String = ""
@@ -22,7 +22,7 @@ struct User: Codable {
     var password:String? = nil
     var avatarURL:String? = nil
     var avatarKey:String? = nil
-    var token:String = ""
+    var token:String? = ""
     var stats:UserStats = UserStats()
     var about:String? = nil
     var organization:Organization? = nil
@@ -31,13 +31,13 @@ struct User: Codable {
     var roles:[String]? = nil
     var memberships:[String]? = nil
     
-    var firebaseProperties = [String:String]()
+    var firebaseProperties:[String:String]? = [String:String]()
     var interests:[String]? = nil
     var unreadCount:Int = 0
     var permissions:UserPermissions = UserPermissions()
     
     var birthday:String? = nil
-    var radiusDistance:Int = 0
+    var radiusDistance:Int? = 0
     
     var isEngaged:Bool = false
     
@@ -112,7 +112,7 @@ struct User: Codable {
         if lastname.count > 0 {
             dict["last_name"] = lastname
         }
-        if let about = about, about.count > 0 {
+        if let about = about, about.count >= 0 {
             dict["about"] = about
         }
         if let email = email, email.count > 0 {
@@ -124,10 +124,10 @@ struct User: Codable {
         if let avatarKey = avatarKey, avatarKey.count > 0 {
             dict["avatar_key"] = avatarKey
         }
-        if let birthday = birthday, birthday.count > 0 {
+        if let birthday = birthday, birthday.count >= 0 {
             dict["birthday"] = birthday
         }
-        if radiusDistance > 0 {
+        if radiusDistance ?? 0 >= 0 {
             dict["travel_distance"] = radiusDistance
         }
         

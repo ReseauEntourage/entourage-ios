@@ -40,9 +40,9 @@ class MainUserProfileViewController: UIViewController {
     }
     
     private func loadUser() {
-        guard let _ = currentUser else { return }
+        guard let uuid = currentUser?.uuid  else { return }
         
-        UserService.getDetailsForUser(userId: currentUser.uuid) { [weak self] user, error in
+        UserService.getDetailsForUser(userId: uuid) { [weak self] user, error in
             if let _user = user {
                 self?.currentUser = _user
                 UserDefaults.currentUser = _user
@@ -111,4 +111,5 @@ extension MainUserProfileViewController: MainUserProfileTopCellDelegate {
             }
         }
     }
+    func sendMessage() {}
 }

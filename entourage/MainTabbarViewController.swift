@@ -81,16 +81,16 @@ class MainTabbarViewController: UITabBarController {
         let  _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainHomeVC")
         
         homeVC = UINavigationController.init(rootViewController: _homeVC)
-        homeVC.tabBarItem.title = "home".localized
-        homeVC.tabBarItem.image = UIImage.init(named: "ic_tab_home")?.withRenderingMode(.alwaysOriginal)
-        homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_home_selected")
+        homeVC.tabBarItem.title = "Users".localized
+        homeVC.tabBarItem.image = UIImage.init(named: "ic_tab_users")?.withRenderingMode(.alwaysOriginal)
+        homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_users")
         homeVC.tabBarItem.tag = 0
         
         let _guideVC = UIStoryboard.init(name: "GuideSolidarity", bundle: nil).instantiateViewController(withIdentifier: "MainGuide")
         guideVC = UINavigationController.init(rootViewController: _guideVC)
         guideVC.tabBarItem.title = "guide".localized
         guideVC.tabBarItem.image = UIImage.init(named: "ic_tab_guide")?.withRenderingMode(.alwaysOriginal)
-        guideVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_guide_selected")
+        guideVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_guide")
         guideVC.tabBarItem.tag = 1
         
         let _plusVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main2VC")
@@ -115,8 +115,8 @@ class MainTabbarViewController: UITabBarController {
         menuVC = UINavigationController.init(rootViewController: _menuVC)
         menuVC.isNavigationBarHidden = true
         menuVC.tabBarItem.title = "profil".localized
-        menuVC.tabBarItem.image = UIImage.init(named: "ic_tab_menu")?.withRenderingMode(.alwaysTemplate)
-        menuVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_menu_selected")
+        menuVC.tabBarItem.image = UIImage.init(named: "ic_tab_profile")?.withRenderingMode(.alwaysTemplate)
+        menuVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_profile")
         menuVC.tabBarItem.tag = 4
         viewControllers = [menuVC,homeVC,guideVC,plusVC,messagesVC]
         

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="prs-aF-zhF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="prs-aF-zhF">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,18 +32,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8DH-sE-x01">
-                                <rect key="frame" x="184" y="437.5" width="46" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbu-6x-Jiu">
+                                <rect key="frame" x="20" y="144" width="195.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="User complet sans partner"/>
+                                <connections>
+                                    <action selector="show_user:" destination="1c8-0u-tyG" eventType="touchUpInside" id="tg3-Ws-PxK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2D-sE-kty">
+                                <rect key="frame" x="20" y="94" width="111" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="User complet"/>
+                                <connections>
+                                    <action selector="show_user:" destination="1c8-0u-tyG" eventType="touchUpInside" id="PZM-UR-f7d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ay1-cI-q7q">
+                                <rect key="frame" x="20" y="286" width="192" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="User sans centre d'interet"/>
+                                <connections>
+                                    <action selector="show_user:" destination="1c8-0u-tyG" eventType="touchUpInside" id="54f-PF-iO6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytA-Qf-4AA">
+                                <rect key="frame" x="20" y="215" width="112" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="User sans bio"/>
+                                <connections>
+                                    <action selector="show_user:" destination="1c8-0u-tyG" eventType="touchUpInside" id="XuW-wX-7dM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cKq-Yh-aMj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8DH-sE-x01" firstAttribute="centerY" secondItem="z7X-9U-BPh" secondAttribute="centerY" id="gIb-HF-LwM"/>
-                            <constraint firstItem="8DH-sE-x01" firstAttribute="centerX" secondItem="z7X-9U-BPh" secondAttribute="centerX" id="rX6-K5-8dt"/>
+                            <constraint firstItem="E2D-sE-kty" firstAttribute="top" secondItem="cKq-Yh-aMj" secondAttribute="top" constant="50" id="9TN-Vf-krq"/>
+                            <constraint firstItem="ytA-Qf-4AA" firstAttribute="top" secondItem="Mbu-6x-Jiu" secondAttribute="bottom" constant="40" id="GOV-7Z-wZA"/>
+                            <constraint firstItem="Ay1-cI-q7q" firstAttribute="top" secondItem="ytA-Qf-4AA" secondAttribute="bottom" constant="40" id="JTk-2m-S2a"/>
+                            <constraint firstItem="Mbu-6x-Jiu" firstAttribute="top" secondItem="cKq-Yh-aMj" secondAttribute="top" constant="100" id="Jnk-g7-mcj"/>
+                            <constraint firstItem="Mbu-6x-Jiu" firstAttribute="leading" secondItem="cKq-Yh-aMj" secondAttribute="leading" constant="20" id="Oq3-hi-HI1"/>
+                            <constraint firstItem="Ay1-cI-q7q" firstAttribute="leading" secondItem="ytA-Qf-4AA" secondAttribute="leading" id="TS7-9A-K7T"/>
+                            <constraint firstItem="ytA-Qf-4AA" firstAttribute="leading" secondItem="Mbu-6x-Jiu" secondAttribute="leading" id="UbK-7Z-iTB"/>
+                            <constraint firstItem="E2D-sE-kty" firstAttribute="leading" secondItem="Mbu-6x-Jiu" secondAttribute="leading" id="Uwt-j4-c8h"/>
                         </constraints>
                     </view>
                 </viewController>

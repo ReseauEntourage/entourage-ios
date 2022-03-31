@@ -63,7 +63,6 @@ class EditProfileInfosCell: UITableViewCell {
         ui_tv_edit_bio.isScrollEnabled = false
         ui_bio_count.text = "0/200"
         
-        
         ui_tf_firstname.delegate = self
         ui_tf_lastname.delegate = self
         ui_tf_birthday.delegate = self
@@ -151,7 +150,10 @@ class EditProfileInfosCell: UITableViewCell {
     @objc func closeKb(_ sender:UIBarButtonItem!) {
         let tag = sender.tag
         if tag == ui_tv_edit_bio.hashValue {
-            delegate?.updateBio(bio: ui_tv_edit_bio.text)
+            if let txtBio = ui_tv_edit_bio.text {
+                let _bio = txtBio == placeholderBioTxt ? "" : txtBio
+                delegate?.updateBio(bio: _bio)
+            }
             ui_tv_edit_bio.resignFirstResponder()
         }
     }

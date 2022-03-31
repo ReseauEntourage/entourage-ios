@@ -92,7 +92,7 @@ class MainUserInfosCell: UITableViewCell {
         ui_email_info.text = user.email ?? "mainUserEmailPlaceholder".localized
         ui_city_info.text = user.addressPrimary?.displayAddress
         
-        let currentRadius = user.radiusDistance 
+        let currentRadius = user.radiusDistance ?? 0
         let percentProgress = (Float(currentRadius) / Float(maxRadius)) * 100
         
         ui_radius_current.text = "\(currentRadius) \("km".localized)"

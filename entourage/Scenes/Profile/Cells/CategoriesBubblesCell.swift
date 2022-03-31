@@ -8,7 +8,7 @@
 import UIKit
 
 class CategoriesBubblesCell: UITableViewCell {
-    @IBOutlet weak var ui_constraint_top_margin: NSLayoutConstraint!
+    @IBOutlet weak var ui_constraint_top_margin: NSLayoutConstraint?
     @IBOutlet weak var ui_taglist_view: TagListView!
     
     let cornerRadiusTag:CGFloat = 15
@@ -34,7 +34,7 @@ class CategoriesBubblesCell: UITableViewCell {
     
     func populateCell(interests:[String]?) {
         guard let interests = interests else {
-            ui_constraint_top_margin.constant = 0
+            ui_constraint_top_margin?.constant = 0
             return
         }
         
@@ -49,10 +49,10 @@ class CategoriesBubblesCell: UITableViewCell {
         }
         
         if interests.isEmpty {
-            ui_constraint_top_margin.constant = 0
+            ui_constraint_top_margin?.constant = 0
         }
         else {
-            ui_constraint_top_margin.constant = topMarginConstraint
+            ui_constraint_top_margin?.constant = topMarginConstraint
         }
     }
 }
