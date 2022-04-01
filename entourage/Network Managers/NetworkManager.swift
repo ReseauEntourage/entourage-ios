@@ -72,10 +72,12 @@ class NetworkManager {
                 Logger.print("***** return resp GET : \(resp.statusCode)")
                 if resp.statusCode < 300 {
                     completionHandler(data,response,nil)
+                    return
                 }
                 else if resp.statusCode == 401 {
                     //TODO: Call Ask new token ?
                     completionHandler(nil,resp,nil)
+                    return
                 }
                 else {
                     if let data = data, let json = try? JSONSerialization.jsonObject(with: data) as? [String:AnyObject]  {
@@ -185,6 +187,7 @@ class NetworkManager {
                 Logger.print("***** return resp PATCH : \(resp.statusCode)")
                 if resp.statusCode < 300 {
                     completionHandler(data,response,nil)
+                    return
                 }
                 else if resp.statusCode == 401 {
                     //TODO: Call Ask new token ?
@@ -237,6 +240,7 @@ class NetworkManager {
                 Logger.print("***** return resp DELETE : \(resp.statusCode)")
                 if resp.statusCode < 300 {
                     completionHandler(data,response,nil)
+                    return
                 }
                 else if resp.statusCode == 401 {
                     //TODO: Call Ask new token ?
@@ -288,6 +292,7 @@ class NetworkManager {
                 Logger.print("***** return resp PUT : \(resp.statusCode)")
                 if resp.statusCode < 300 {
                     completionHandler(data,response,nil)
+                    return
                 }
                 else if resp.statusCode == 401 {
                     //TODO: Call Ask new token ?
