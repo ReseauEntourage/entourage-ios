@@ -418,3 +418,15 @@
 "params_about_email" = "Contactez entourage";
 "params_about_licences" = "Licence open-source";
 "params_about_title" = "Aide et à propos";
+
+
+
+//Detail user profile
+"detail_user_send_message" = "Écrire un message";
+"detail_user_his_activity" = "Son activité";
+"detail_user_his_interests" = "Ses centre d’interêts";
+"detail_user_button_signal" = "Signaler l’utilisateur";
+"report_user_title" = "Signaler le membre";
+"report_user_description" = "Dites nous la raison de votre signalement";
+"report_user_validate_button" = "Valider";
+"report_user_error" = "Veuillez selectionner au minimum une cause. Merci";
