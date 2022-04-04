@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController storyboardIdentifier="place_choose_vc" id="m2v-WU-2eB" customClass="BasePopViewController" customModule="Ent_Beta" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="HNI-QV-efA">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCJ-Dz-0zp">
+                        <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2X-aO-5Z6" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="YAu-BZ-CB4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="K2X-aO-5Z6" firstAttribute="top" secondItem="lCJ-Dz-0zp" secondAttribute="top" id="5Ra-Yu-OOK"/>
+                            <constraint firstAttribute="trailing" secondItem="K2X-aO-5Z6" secondAttribute="trailing" id="ggq-bs-wpN"/>
+                            <constraint firstItem="K2X-aO-5Z6" firstAttribute="leading" secondItem="lCJ-Dz-0zp" secondAttribute="leading" id="yBN-az-8kt"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <viewLayoutGuide key="safeArea" id="Ctd-EZ-9Yw"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="Ctd-EZ-9Yw" firstAttribute="bottom" secondItem="lCJ-Dz-0zp" secondAttribute="bottom" id="LTc-f2-QJt"/>
+                    <constraint firstAttribute="trailing" secondItem="lCJ-Dz-0zp" secondAttribute="trailing" id="T4H-gl-fLQ"/>
+                    <constraint firstItem="lCJ-Dz-0zp" firstAttribute="leading" secondItem="HNI-QV-efA" secondAttribute="leading" id="iC3-Pg-62Y"/>
+                    <constraint firstItem="lCJ-Dz-0zp" firstAttribute="top" secondItem="Ctd-EZ-9Yw" secondAttribute="top" id="v77-Dy-gSM"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="ui_top_view" destination="K2X-aO-5Z6" id="HIo-tB-UPP"/>
+                <outlet property="ui_view_container" destination="lCJ-Dz-0zp" id="ZDy-9k-qDI"/>
+            </connections>
+            <point key="canvasLocation" x="1673.913043478261" y="1479.9107142857142"/>
+        </viewController>
+    </objects>
+</document>

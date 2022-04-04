@@ -11,6 +11,8 @@ struct ApplicationTheme {
     static var backgroundThemeColor: UIColor = UIColor.appOrange
     static var labelNavBarColor: UIColor = UIColor.appGreyishBrown
     
+    static let bigCornerRadius:CGFloat = 35
+    static let topPopViewControllerSpacing:CGFloat = 30
     
     static func iPhoneHasNotch() -> Bool {
         var topPadding:CGFloat?

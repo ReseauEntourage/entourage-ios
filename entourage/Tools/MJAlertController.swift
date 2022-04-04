@@ -65,7 +65,7 @@ class MJAlertController: UIViewController {
         }
     }
     
-    func configureAlert(alertTitle:String?, message:String?,buttonrightType:MJAlertButtonType,buttonLeftType:MJAlertButtonType?,titleStyle:MJTextFontColorStyle? = nil, messageStyle:MJTextFontColorStyle? = nil, mainviewBGColor:UIColor? = nil, mainviewRadius:CGFloat? = nil, isButtonCloseHidden:Bool? = false, parentVC:UIViewController? = nil) {
+    func configureAlert(alertTitle:String?, message:String?,buttonrightType:MJAlertButtonType,buttonLeftType:MJAlertButtonType?,titleStyle:MJTextFontColorStyle? = nil, messageStyle:MJTextFontColorStyle? = nil, mainviewBGColor:UIColor? = nil, mainviewRadius:CGFloat? = nil, isButtonCloseHidden:Bool? = true, parentVC:UIViewController? = nil) {
         
         self.parentVC = parentVC
         

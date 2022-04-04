@@ -9,9 +9,8 @@ import UIKit
 import MessageUI
 import IHProgressHUD
 
-class ParamsAboutViewController: UIViewController {
+class ParamsAboutViewController: BasePopViewController {
     
-    @IBOutlet weak var ui_top_view: MJNavBackView!
     @IBOutlet weak var ui_tableview: UITableView!
     
     //MARK: - Constants for menu -

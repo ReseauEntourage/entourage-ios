@@ -23,8 +23,9 @@ class PartnerDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.modalPresentationStyle = .fullScreen
         if #available(iOS 13.0, *) {
-            self.isModalInPresentation = true
+            self.isModalInPresentation = false
         }
         
         setupPhotoUI()
@@ -69,7 +70,7 @@ class PartnerDetailViewController: UIViewController {
         
         ui_view_top_white.clipsToBounds = true
         ui_view_top_white.layer.cornerRadius = radius_main_view
-        ui_view_top_white.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        ui_view_top_white.layer.maskedCorners = .radiusTopOnly()
     }
     
     func updatePartner() {

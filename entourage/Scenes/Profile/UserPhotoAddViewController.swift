@@ -8,10 +8,8 @@
 
 import UIKit
 
-class UserPhotoAddViewController: UIViewController {
-    
-    @IBOutlet weak var ui_top_view: MJNavBackView!
-    
+class UserPhotoAddViewController: BasePopViewController {
+        
     @IBOutlet weak var ui_constraint_title_top: NSLayoutConstraint!
     @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_label_description: UILabel!

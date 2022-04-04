@@ -9,11 +9,9 @@
 import UIKit
 import IHProgressHUD
 
-class PicturePreviewResizeViewController: UIViewController {
+class PicturePreviewResizeViewController: BasePopViewController {
     
-    @IBOutlet weak var ui_top_view: MJNavBackView!
     @IBOutlet weak var ui_bt_valide_from_profile: UIButton!
-    
     
     @IBOutlet weak var ui_label_description: UILabel!
     @IBOutlet weak var ui_bt_validate: UIButton!

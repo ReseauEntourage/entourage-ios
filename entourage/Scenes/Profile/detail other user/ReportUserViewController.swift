@@ -7,12 +7,11 @@
 
 import UIKit
 
-class ReportUserViewController: UIViewController {
+class ReportUserViewController: BasePopViewController {
     
     @IBOutlet weak var ui_lbl_info: UILabel!
     @IBOutlet weak var ui_error_view: MJErrorInputView!
     @IBOutlet weak var ui_button_validate: UIButton!
-    @IBOutlet weak var ui_top_view: MJNavBackView!
     @IBOutlet weak var ui_tableview: UITableView!
     
     var user:User? = nil

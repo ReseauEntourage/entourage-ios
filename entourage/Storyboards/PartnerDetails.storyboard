@@ -18,7 +18,7 @@
         <!--Navigation Controller-->
         <scene sceneID="og7-Ml-kRE">
             <objects>
-                <navigationController navigationBarHidden="YES" id="AsY-WH-Ifv" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="AsY-WH-Ifv" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="JM2-GI-mxE">
                         <autoresizingMask key="autoresizingMask"/>
@@ -34,7 +34,7 @@
         <!--Partner Detail View Controller-->
         <scene sceneID="p4a-ho-mGv">
             <objects>
-                <viewController storyboardIdentifier="assoMainProfileVC" id="vSF-8V-EM4" customClass="PartnerDetailViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="assoMainProfileVC" modalPresentationStyle="fullScreen" id="vSF-8V-EM4" customClass="PartnerDetailViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8DL-zM-SIV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

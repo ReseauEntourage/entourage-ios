@@ -94,3 +94,14 @@ extension DefaultStringInterpolation {
   }
 }
 
+
+//MARK: - CACornerMask -
+extension CACornerMask {
+    static func radiusTopOnly() -> CACornerMask {
+        return [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+    }
+    
+    static func radiusBottomOnly() -> CACornerMask {
+        return [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+    }
+}

@@ -404,8 +404,12 @@
 "params_logout_pop_message" = "Voulez-vous vous déconnecter ?";
 "params_suppress_pop_title" = "Suppression du compte";
 "params_suppress_pop_message" = "Souhaitez-vous supprimer votre compte ?";
+"params_suppress_pop_suppress" = "Supprimer";
+"params_suppress_pop_cancel" = "Annuler";
 "params_account_not_deleted" = "Compte non supprimé.\nErreur : %@";
 "params_account_deleted" = "Votre compte a bien été supprimé.";
+"params_logout_pop_logout" = "Déconnexion";
+"params_logout_pop_cancel" = "Annuler";
 
 //Settings about menu
 "params_about_charte" = "Charte éthique Entourage";

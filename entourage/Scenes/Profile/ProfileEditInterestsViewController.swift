@@ -7,12 +7,11 @@
 
 import UIKit
 
-class ProfileEditInterestsViewController: UIViewController {
+class ProfileEditInterestsViewController: BasePopViewController {
     
     @IBOutlet weak var ui_lbl_info: UILabel!
     @IBOutlet weak var ui_error_view: MJErrorInputView!
     @IBOutlet weak var ui_button_validate: UIButton!
-    @IBOutlet weak var ui_top_view: MJNavBackView!
     @IBOutlet weak var ui_tableview: UITableView!
     
     var currentUser:User? = nil
@@ -25,6 +24,7 @@ class ProfileEditInterestsViewController: UIViewController {
         
         ui_top_view.populateView(title: "editUserInterestsTitle".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
         
+
         self.ui_lbl_info.font = ApplicationTheme.getFontTextRegular().font
         self.ui_lbl_info.textColor = ApplicationTheme.getFontTextRegular().color
         

@@ -27,7 +27,7 @@
         <!--Main Home View Controller-->
         <scene sceneID="lwe-Ls-mvw">
             <objects>
-                <viewController storyboardIdentifier="mainHomeVC" id="1c8-0u-tyG" customClass="MainHomeViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tempUsersVC" id="1c8-0u-tyG" customClass="MainHomeViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z7X-9U-BPh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,34 +81,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wxA-eh-hik" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-601" y="-222"/>
+            <point key="canvasLocation" x="-829" y="-276"/>
         </scene>
-        <!--View Controller-->
+        <!--Temp Group Main View Controller-->
         <scene sceneID="cKr-R9-6Oa">
             <objects>
-                <viewController storyboardIdentifier="main2VC" id="g5E-Hr-Pca" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tempGroupVC" id="g5E-Hr-Pca" customClass="TempGroupMainViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WXZ-mJ-s3W">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVc-SP-9cJ">
-                                <rect key="frame" x="202" y="437.5" width="10" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZ5-YR-2J4">
+                                <rect key="frame" x="32" y="144" width="91.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Add group"/>
+                                <connections>
+                                    <action selector="show:" destination="g5E-Hr-Pca" eventType="touchUpInside" id="M8W-JS-ZHf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="98v-0C-lBw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="eVc-SP-9cJ" firstAttribute="centerX" secondItem="WXZ-mJ-s3W" secondAttribute="centerX" id="TpB-eP-VLV"/>
-                            <constraint firstItem="eVc-SP-9cJ" firstAttribute="centerY" secondItem="WXZ-mJ-s3W" secondAttribute="centerY" id="pb5-15-L84"/>
+                            <constraint firstItem="iZ5-YR-2J4" firstAttribute="top" secondItem="98v-0C-lBw" secondAttribute="top" constant="100" id="6Zy-4D-CpP"/>
+                            <constraint firstItem="iZ5-YR-2J4" firstAttribute="leading" secondItem="98v-0C-lBw" secondAttribute="leading" constant="32" id="VLR-C9-sOf"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZCt-Pu-IqT" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733" y="-222"/>
+            <point key="canvasLocation" x="989.85507246376824" y="-222.32142857142856"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="lVk-av-R0J">

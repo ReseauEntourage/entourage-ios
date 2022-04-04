@@ -28,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKv-IQ-VQD">
-                    <rect key="frame" x="30" y="356.5" width="354" height="183.5"/>
+                    <rect key="frame" x="30" y="357" width="354" height="182.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csn-r1-VRl">
                             <rect key="frame" x="20" y="20" width="34.5" height="20.5"/>
@@ -59,17 +59,17 @@
                                 <action selector="action_close_button:" destination="-1" eventType="touchUpInside" id="IqD-8P-TOU"/>
                             </connections>
                         </button>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="rTO-N5-mwg">
-                            <rect key="frame" x="20" y="105.5" width="314" height="50"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xh-QP-Gnb">
+                            <rect key="frame" x="73" y="104.5" width="208" height="50"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7X9-VZ-e8l" userLabel="Btn_left">
-                                    <rect key="frame" x="0.0" y="0.0" width="120" height="50"/>
-                                    <color key="backgroundColor" name="orange_app"/>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7X9-VZ-e8l" userLabel="Btn_left">
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
+                                    <color key="backgroundColor" name="orange_light"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="4gj-fe-eLe"/>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="fGu-4a-5qG"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="pQI-He-fV3"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                     <state key="normal" title="OK">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
@@ -88,12 +88,16 @@
                                         <action selector="action_left_button:" destination="-1" eventType="touchUpInside" id="t60-Aw-Xq1"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDU-cA-j4O" userLabel="btn_right">
-                                    <rect key="frame" x="194" y="0.0" width="120" height="50"/>
-                                    <color key="backgroundColor" name="orange_light_a70"/>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDU-cA-j4O" userLabel="btn_right">
+                                    <rect key="frame" x="100" y="0.0" width="108" height="50"/>
+                                    <color key="backgroundColor" name="orange_app"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="LgO-7h-SA3"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                     <state key="normal" title="CANCEL">
-                                        <color key="titleColor" name="orange_app"/>
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
@@ -111,29 +115,37 @@
                                     </connections>
                                 </button>
                             </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="CDU-cA-j4O" firstAttribute="height" secondItem="7X9-VZ-e8l" secondAttribute="height" id="9T5-YM-0lv"/>
-                                <constraint firstItem="CDU-cA-j4O" firstAttribute="width" secondItem="7X9-VZ-e8l" secondAttribute="width" id="BaM-4r-edF"/>
+                                <constraint firstAttribute="bottom" secondItem="CDU-cA-j4O" secondAttribute="bottom" id="09i-zo-rMQ"/>
+                                <constraint firstAttribute="bottom" secondItem="7X9-VZ-e8l" secondAttribute="bottom" id="281-rP-NgF"/>
+                                <constraint firstItem="7X9-VZ-e8l" firstAttribute="leading" secondItem="4xh-QP-Gnb" secondAttribute="leading" id="FgG-M3-mfI"/>
+                                <constraint firstItem="CDU-cA-j4O" firstAttribute="leading" secondItem="7X9-VZ-e8l" secondAttribute="trailing" constant="20" id="XRh-DN-9YX"/>
+                                <constraint firstItem="7X9-VZ-e8l" firstAttribute="top" secondItem="4xh-QP-Gnb" secondAttribute="top" id="beM-Kq-mk1"/>
+                                <constraint firstAttribute="trailing" secondItem="CDU-cA-j4O" secondAttribute="trailing" id="gtB-hg-xUq"/>
+                                <constraint firstAttribute="height" constant="50" id="xtq-gP-8SK"/>
+                                <constraint firstItem="CDU-cA-j4O" firstAttribute="top" secondItem="4xh-QP-Gnb" secondAttribute="top" id="zgv-El-gRX"/>
                             </constraints>
-                        </stackView>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="rTO-N5-mwg" secondAttribute="bottom" constant="28" id="45P-Ki-kLm"/>
                         <constraint firstItem="csn-r1-VRl" firstAttribute="top" secondItem="IKv-IQ-VQD" secondAttribute="top" constant="20" id="4Ws-wq-GZr"/>
                         <constraint firstItem="Weu-kJ-AWA" firstAttribute="leading" secondItem="csn-r1-VRl" secondAttribute="leading" id="4ZM-bT-u3b"/>
                         <constraint firstItem="Weu-kJ-AWA" firstAttribute="top" secondItem="csn-r1-VRl" secondAttribute="bottom" constant="14.5" id="6X5-zg-9eI"/>
                         <constraint firstItem="ehc-OJ-ldJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="csn-r1-VRl" secondAttribute="trailing" constant="8" id="Esv-Uk-rqW"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="250" constant="190" id="FOd-Tp-LFl"/>
                         <constraint firstItem="2Bq-cr-d3J" firstAttribute="top" secondItem="IKv-IQ-VQD" secondAttribute="top" constant="20" id="KyY-xb-CMs"/>
+                        <constraint firstItem="4xh-QP-Gnb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IKv-IQ-VQD" secondAttribute="leading" constant="20" symbolic="YES" id="P0A-dh-cSj"/>
                         <constraint firstItem="2Bq-cr-d3J" firstAttribute="centerX" secondItem="ehc-OJ-ldJ" secondAttribute="centerX" id="RCa-DC-qpv"/>
                         <constraint firstItem="2Bq-cr-d3J" firstAttribute="centerY" secondItem="ehc-OJ-ldJ" secondAttribute="centerY" id="RHy-gX-81K"/>
                         <constraint firstAttribute="trailing" secondItem="2Bq-cr-d3J" secondAttribute="trailing" constant="20" id="VkR-pj-y8k"/>
-                        <constraint firstItem="rTO-N5-mwg" firstAttribute="leading" secondItem="csn-r1-VRl" secondAttribute="leading" id="XE2-M5-Cf9"/>
+                        <constraint firstItem="4xh-QP-Gnb" firstAttribute="centerX" secondItem="IKv-IQ-VQD" secondAttribute="centerX" id="Yly-5c-0gh"/>
+                        <constraint firstAttribute="bottom" secondItem="4xh-QP-Gnb" secondAttribute="bottom" constant="28" id="bOE-h3-aFM"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Weu-kJ-AWA" secondAttribute="trailing" constant="20" id="bWP-vw-82T"/>
+                        <constraint firstItem="4xh-QP-Gnb" firstAttribute="top" secondItem="Weu-kJ-AWA" secondAttribute="bottom" constant="29" id="cn4-yO-l7k"/>
                         <constraint firstItem="csn-r1-VRl" firstAttribute="leading" secondItem="IKv-IQ-VQD" secondAttribute="leading" constant="20" id="oP6-ep-l6z"/>
-                        <constraint firstItem="rTO-N5-mwg" firstAttribute="trailing" secondItem="2Bq-cr-d3J" secondAttribute="trailing" id="rZ4-8N-NTG"/>
-                        <constraint firstItem="rTO-N5-mwg" firstAttribute="top" secondItem="Weu-kJ-AWA" secondAttribute="bottom" constant="30" id="x2p-zv-EXL"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4xh-QP-Gnb" secondAttribute="trailing" id="yJK-25-f3i"/>
                     </constraints>
                 </view>
             </subviews>
@@ -145,7 +157,7 @@
                 <constraint firstItem="IKv-IQ-VQD" firstAttribute="centerY" secondItem="K7u-rl-Cif" secondAttribute="centerY" id="J1S-YF-FTm"/>
                 <constraint firstItem="IKv-IQ-VQD" firstAttribute="leading" secondItem="jox-pk-dul" secondAttribute="leading" constant="30" id="hvz-Z2-Opv"/>
             </constraints>
-            <point key="canvasLocation" x="129" y="95"/>
+            <point key="canvasLocation" x="128.98550724637681" y="94.419642857142847"/>
         </view>
     </objects>
     <resources>
@@ -153,8 +165,8 @@
         <namedColor name="orange_app">
             <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="orange_light_a70">
-            <color red="1" green="0.6119999885559082" blue="0.36500000953674316" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="orange_light">
+            <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

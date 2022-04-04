@@ -70,7 +70,7 @@ class UserProfileDetailViewController: UIViewController {
         
         ui_view_top_white.clipsToBounds = true
         ui_view_top_white.layer.cornerRadius = radius_main_view
-        ui_view_top_white.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        ui_view_top_white.layer.maskedCorners = .radiusTopOnly()
     }
     
     func updateUser() {

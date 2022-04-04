@@ -15,6 +15,8 @@
 		021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */; };
 		021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */; };
 		021F084F2798113D00F32A34 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021F084E2798113D00F32A34 /* LocationManager.swift */; };
+		0220580727FB003700531720 /* BasePopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0220580627FB003700531720 /* BasePopViewController.swift */; };
+		0220580927FB087F00531720 /* BaseFullScreenNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0220580827FB087F00531720 /* BaseFullScreenNavViewController.swift */; };
 		0227446F2795BE6F005600A1 /* AssociationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0227446E2795BE6F005600A1 /* AssociationService.swift */; };
 		022744712795BEC0005600A1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022744702795BEC0005600A1 /* AuthService.swift */; };
 		022744732795C0FB005600A1 /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022744722795C0FB005600A1 /* Partner.swift */; };
@@ -26,6 +28,7 @@
 		023D89BF27DFA351008C6A58 /* MainParamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89BE27DFA351008C6A58 /* MainParamsViewController.swift */; };
 		023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89C027DFA380008C6A58 /* ParamMenuCell.swift */; };
 		023D89C327DFA39A008C6A58 /* ParamsInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89C227DFA39A008C6A58 /* ParamsInfoCell.swift */; };
+		023EC27F27FB2D8D003A3051 /* BasePopViewController_Template.xib in Resources */ = {isa = PBXBuildFile; fileRef = 023EC27E27FB2D8D003A3051 /* BasePopViewController_Template.xib */; };
 		0246604D27D8A49E00FE1EF8 /* IHProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 0246604C27D8A49E00FE1EF8 /* IHProgressHUD */; };
 		02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02490DC427EA245E00E2577B /* MJErrorInputView.swift */; };
 		02490DC727EA246B00E2577B /* MJErrorInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02490DC627EA246B00E2577B /* MJErrorInputView.xib */; };
@@ -164,6 +167,8 @@
 		021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesBubblesCell.swift; sourceTree = "<group>"; };
 		021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserActivitiesCell.swift; sourceTree = "<group>"; };
 		021F084E2798113D00F32A34 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		0220580627FB003700531720 /* BasePopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopViewController.swift; sourceTree = "<group>"; };
+		0220580827FB087F00531720 /* BaseFullScreenNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFullScreenNavViewController.swift; sourceTree = "<group>"; };
 		0227446E2795BE6F005600A1 /* AssociationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationService.swift; sourceTree = "<group>"; };
 		022744702795BEC0005600A1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		022744722795C0FB005600A1 /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
@@ -175,6 +180,7 @@
 		023D89BE27DFA351008C6A58 /* MainParamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainParamsViewController.swift; sourceTree = "<group>"; };
 		023D89C027DFA380008C6A58 /* ParamMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamMenuCell.swift; sourceTree = "<group>"; };
 		023D89C227DFA39A008C6A58 /* ParamsInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsInfoCell.swift; sourceTree = "<group>"; };
+		023EC27E27FB2D8D003A3051 /* BasePopViewController_Template.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasePopViewController_Template.xib; sourceTree = "<group>"; };
 		02490DC427EA245E00E2577B /* MJErrorInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJErrorInputView.swift; sourceTree = "<group>"; };
 		02490DC627EA246B00E2577B /* MJErrorInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJErrorInputView.xib; sourceTree = "<group>"; };
 		02490DC827EA461700E2577B /* Extensions_UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIDevice.swift; sourceTree = "<group>"; };
@@ -361,6 +367,16 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		023EC28027FB3226003A3051 /* Base controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0220580627FB003700531720 /* BasePopViewController.swift */,
+				023EC27E27FB2D8D003A3051 /* BasePopViewController_Template.xib */,
+				0220580827FB087F00531720 /* BaseFullScreenNavViewController.swift */,
+			);
+			path = "Base controllers";
+			sourceTree = "<group>";
+		};
 		025D870D278DD33600909101 = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +434,9 @@
 		025D8762278DEB1A00909101 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				02F5FEC227E0CB6800A14313 /* MJAlertController.swift */,
+				02F5FEC327E0CB6800A14313 /* MJAlertController.xib */,
+				023EC28027FB3226003A3051 /* Base controllers */,
 				0209CC9527CF735800983135 /* Extensions */,
 				0288A8D827CCDA5C008D7011 /* PictureUploadS3Service.swift */,
 				0229376E27A43AA600206201 /* GMSAutoCompleteVC.swift */,
@@ -485,8 +504,6 @@
 				02CCE68B27D7B52900D6976C /* TagListView */,
 				0268194E278DF6AF00A98A4A /* Onboarding */,
 				02DDF1D627D9117700EE22DE /* ProgressRadiusView.swift */,
-				02F5FEC227E0CB6800A14313 /* MJAlertController.swift */,
-				02F5FEC327E0CB6800A14313 /* MJAlertController.xib */,
 				02490DC427EA245E00E2577B /* MJErrorInputView.swift */,
 				02490DC627EA246B00E2577B /* MJErrorInputView.xib */,
 				029BD4F427EDC44F00AE67AF /* MJNavBackView.swift */,
@@ -839,6 +856,7 @@
 				029BD4F727EDC45E00AE67AF /* MJNavBackView.xib in Resources */,
 				02856F6227DA334100988FF7 /* ProfileParams.storyboard in Resources */,
 				02CCE68027D78CAB00D6976C /* NunitoSans-Light.ttf in Resources */,
+				023EC27F27FB2D8D003A3051 /* BasePopViewController_Template.xib in Resources */,
 				02C91A2B278F47F300305E0B /* Localizable.strings in Resources */,
 				025D8723278DD33800909101 /* Assets.xcassets in Resources */,
 				0268194C278DF4A800A98A4A /* Onboarding_V2.storyboard in Resources */,
@@ -930,6 +948,7 @@
 				02D64F4B2799CA6800F6C4BD /* CustomAnnotation.swift in Sources */,
 				02681952278DF6CA00A98A4A /* OTCustomTextfield.swift in Sources */,
 				0262997927905FB700D84A6A /* Constants.swift in Sources */,
+				0220580727FB003700531720 /* BasePopViewController.swift in Sources */,
 				022744712795BEC0005600A1 /* AuthService.swift in Sources */,
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
 				02E069E0279184B3006DB1B6 /* OTOnboardingTypeViewController.swift in Sources */,
@@ -1004,6 +1023,7 @@
 				025D871A278DD33600909101 /* AppDelegate.swift in Sources */,
 				02846CBE27EC86F100D85ADA /* ProfileEditInterestsViewController.swift in Sources */,
 				02CCE68827D7B51E00D6976C /* TagListView.swift in Sources */,
+				0220580927FB087F00531720 /* BaseFullScreenNavViewController.swift in Sources */,
 				0268197F278DF72D00A98A4A /* OTCustomPageControl.swift in Sources */,
 				02C0A0E2278EDCC400B0C646 /* UserService.swift in Sources */,
 				02F527992799A1F300929431 /* GuideDelegates.swift in Sources */,
