@@ -431,6 +431,13 @@
 "detail_user_his_interests" = "Ses centre d’interêts";
 "detail_user_button_signal" = "Signaler l’utilisateur";
 "report_user_title" = "Signaler le membre";
+"report_user_mandatory" = "- obligatoire";
 "report_user_description" = "Dites nous la raison de votre signalement";
-"report_user_validate_button" = "Valider";
-"report_user_error" = "Veuillez selectionner au minimum une cause. Merci";
+"report_user_message_description" = "Dites nous la raison de votre signalement";
+"report_user_next_button" = "Suivant";
+"report_user_validate_button" = "Envoyer";
+"report_user_back_button" = "Retour";
+"report_user_placeholder" = "Décrivez rapidement l’objet de votre signalement.";
+"report_user_signal_error" = "Veuillez selectionner au minimum une cause. Merci";
+"report_user_message_error" = "Veuillez saisir votre message. Merci";
+"report_user_message_success" = "Utilisateur signalé";

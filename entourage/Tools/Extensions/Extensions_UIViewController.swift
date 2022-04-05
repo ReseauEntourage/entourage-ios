@@ -68,3 +68,19 @@ extension UIViewController {
         }
     }
 }
+
+
+extension UIPageViewController {
+    var isPagingEnabled: Bool {
+        get {
+            return scrollView?.isScrollEnabled ?? false
+        }
+        set {
+            scrollView?.isScrollEnabled = newValue
+        }
+    }
+
+    var scrollView: UIScrollView? {
+        return view.subviews.first(where: { $0 is UIScrollView }) as? UIScrollView
+    }
+}

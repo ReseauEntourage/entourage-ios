@@ -7,32 +7,36 @@
 
 import UIKit
 
-class ReportUserViewController: BasePopViewController {
+class ReportUserViewController: UIViewController {
     
     @IBOutlet weak var ui_lbl_info: UILabel!
+    @IBOutlet weak var ui_lbl_mandatory: UILabel!
     @IBOutlet weak var ui_error_view: MJErrorInputView!
     @IBOutlet weak var ui_button_validate: UIButton!
     @IBOutlet weak var ui_tableview: UITableView!
     
     var user:User? = nil
     var tagsignals:Tags! = nil
+    weak var pageDelegate:ReportUserPageDelegate? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tagsignals = Metadatas.sharedInstance.tagsSignals
         
-        ui_top_view.populateView(title: "report_user_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
-        
         self.ui_lbl_info.font = ApplicationTheme.getFontTextRegular().font
         self.ui_lbl_info.textColor = ApplicationTheme.getFontTextRegular().color
-        
         ui_lbl_info.text = "report_user_description".localized
+        
+        ui_lbl_mandatory.font = ApplicationTheme.getFontLegend().font
+        ui_lbl_mandatory.textColor = ApplicationTheme.getFontLegend().color
+        ui_lbl_mandatory.text = "report_user_mandatory".localized
         
         ui_button_validate.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
         ui_button_validate.titleLabel?.textColor = .white
         ui_button_validate.layer.cornerRadius = ui_button_validate.frame.height / 2
-        ui_button_validate.setTitle("report_user_validate_button".localized, for: .normal)
+        ui_button_validate.setTitle("report_user_next_button".localized, for: .normal)
+        ui_button_validate.backgroundColor = .appOrangeLight
         
         //TODO: on affiche le fond transparent pour l'alerte ou un fond blanc ?
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
@@ -52,6 +56,7 @@ class ReportUserViewController: BasePopViewController {
     }
     
     @IBAction func action_validate(_ sender: Any) {
+        
         var hasOneCheck = false
         for signal in tagsignals.getTags() {
             if signal.isSelected {
@@ -61,23 +66,10 @@ class ReportUserViewController: BasePopViewController {
         }
         
         if hasOneCheck {
-            reportUser()
+            pageDelegate?.goNext(tags: tagsignals)
         }
         else {
-            showError(message: "report_user_error".localized)
-        }
-    }
-    
-    func reportUser() {
-        let message = "Message" //TODO: avec les bonnes valeurs ;)
-        let tagsSignals = tagsignals.getTagsForWS()
-        guard let userId = user?.sid else { return }
-        UserService.reportUser(userId: "\(userId)", tags: tagsSignals, message: message) { error in
-            self.showError(message: "Utilisateur signalé", imageName: "ic_partner_follow_on")
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-                self.goBack()
-            }
+            showError(message: "report_user_signal_error".localized)
         }
     }
     
@@ -108,12 +100,5 @@ extension ReportUserViewController : UITableViewDataSource, UITableViewDelegate 
         
         tagsignals?.checkUncheckTagFrom(position: indexPath.row, isCheck: !isCheck)
         tableView.reloadData()
-    }
-}
-
-//MARK: - MJNavBackViewDelegate -
-extension ReportUserViewController: MJNavBackViewDelegate {
-    func goBack() {
-        self.dismiss(animated: true)
     }
 }

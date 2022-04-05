@@ -31,7 +31,7 @@ class EditProfileInfosCell: UITableViewCell {
     @IBOutlet weak var ui_tf_email: UITextField!
     
     @IBOutlet weak var ui_bio_count: UILabel!
-    @IBOutlet weak var ui_tv_edit_bio: UITextView!
+    @IBOutlet weak var ui_tv_edit_bio: MJTextViewPlaceholder!
     
     @IBOutlet weak var ui_title_city_cp: UILabel!
     @IBOutlet weak var ui_city_cp: UILabel!
@@ -69,8 +69,8 @@ class EditProfileInfosCell: UITableViewCell {
         ui_tf_email.delegate = self
         
         addToolBar(textview: ui_tv_edit_bio)
-        ui_tv_edit_bio.text = placeholderBioTxt
-        ui_tv_edit_bio.textColor = placeholderBioColor
+        ui_tv_edit_bio.placeholderText = placeholderBioTxt
+        ui_tv_edit_bio.placeholderColor = placeholderBioColor
         ui_tv_edit_bio.font = ApplicationTheme.getFontNunitoRegular(size: 13)
         
         ui_title_firstname.text = "editUserTitleFirstname".localized
@@ -130,8 +130,8 @@ class EditProfileInfosCell: UITableViewCell {
     }
     
     private func addToolBar(textview:UITextView? = nil, textfield:UITextField? = nil) {
-        let _widht = UIApplication.shared.delegate?.window??.frame.width ?? contentView.frame.size.width
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: _widht, height: 30))
+        let _width = UIApplication.shared.delegate?.window??.frame.width ?? contentView.frame.size.width
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: _width, height: 30))
         
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let buttonDone = UIBarButtonItem(title: "validate".localized, style: .plain, target: self, action: #selector(closeKb(_:)))
@@ -168,14 +168,13 @@ class EditProfileInfosCell: UITableViewCell {
         ui_city_cp.text = cityName
         ui_phone.text = phone
         
+        ui_tv_edit_bio.text = bio
+        
         if let bio = bio, bio.count > 0 {
-            ui_tv_edit_bio.text = bio
+            
             ui_bio_count.text = "\(ui_tv_edit_bio.text.count)\(maxCharsBioString)"
-            ui_tv_edit_bio.textColor = bioColor
         }
         else {
-            ui_tv_edit_bio.text = placeholderBioTxt
-            ui_tv_edit_bio.textColor = placeholderBioColor
             ui_bio_count.text = "0\(maxCharsBioString)"
         }
         
@@ -217,20 +216,6 @@ extension EditProfileInfosCell: UITextViewDelegate {
         ui_bio_count.text = "\(textView.text.count + text.count)\(maxCharsBioString)"
         
         return true
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == placeholderBioTxt {
-            textView.text = ""
-            textView.textColor = bioColor
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text == "" {
-            textView.text = placeholderBioTxt
-            textView.textColor = placeholderBioColor
-        }
     }
 }
 

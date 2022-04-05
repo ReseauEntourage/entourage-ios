@@ -6,11 +6,11 @@
 //
 
 import UIKit
+import IHProgressHUD
 
 class UserProfileDetailViewController: UIViewController {
     
-    let radius_main_view:CGFloat = 35
-    
+    @IBOutlet weak var ui_error_view: MJErrorInputView!
     @IBOutlet weak var ui_top_view: MJNavBackView!
     @IBOutlet weak var ui_view_top_white: UIView!
     @IBOutlet weak var ui_view_img_profile: UIView!
@@ -36,6 +36,10 @@ class UserProfileDetailViewController: UIViewController {
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         ui_tableview.estimatedRowHeight = 200
+        
+        //TODO: on affiche le fond transparent pour l'alerte ou un fond blanc ?
+        ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
+        ui_error_view.hide()
         
         loadUser()
     }
@@ -69,7 +73,7 @@ class UserProfileDetailViewController: UIViewController {
         ui_view_img_profile.layer.shouldRasterize = true
         
         ui_view_top_white.clipsToBounds = true
-        ui_view_top_white.layer.cornerRadius = radius_main_view
+        ui_view_top_white.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_view_top_white.layer.maskedCorners = .radiusTopOnly()
     }
     
@@ -81,16 +85,26 @@ class UserProfileDetailViewController: UIViewController {
     }
     
     @IBAction func action_signal_user(_ sender: Any) {
-        //TODO: show new VC
-        if let vc = UIStoryboard.init(name: "UserDetail", bundle: nil).instantiateViewController(withIdentifier: "reportUserVC") as? ReportUserViewController {
+        if let vc = UIStoryboard.init(name: "UserDetail", bundle: nil).instantiateViewController(withIdentifier: "reportUserMainVC") as? ReportUserMainViewController {
             vc.user = currentUser
-            
+            vc.parentDelegate = self
             DispatchQueue.main.async {
                 self.navigationController?.present(vc, animated: true)
             }
         }
     }
 }
+
+//MARK: - UserProfileDetailDelegate -
+extension UserProfileDetailViewController:UserProfileDetailDelegate {
+    func showMessage(message: String, imageName: String?) {
+        IHProgressHUD.showSuccesswithStatus(message)
+        //TODO: on garde cet affichage de message ?
+//        ui_error_view.changeTitleAndImage(title: message,imageName: imageName)
+//        ui_error_view.show()
+    }
+}
+
 //MARK: - UITableViewDataSource,UITableViewDelegate -
 extension UserProfileDetailViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -170,4 +184,9 @@ extension UserProfileDetailViewController: MJNavBackViewDelegate {
     func goBack() {
         self.dismiss(animated: true)
     }
+}
+
+//MARK: - Protocol UserProfileDetailDelegate -
+protocol UserProfileDetailDelegate: AnyObject {
+    func showMessage(message:String, imageName:String?)
 }
