@@ -69,6 +69,9 @@ struct ApplicationTheme {
     static func getFontMontserrat14(size:CGFloat = 14) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontMontSerrat(size: size), color: UIColor.black)
     }
+    static func getFontH2(size:CGFloat = 15) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: UIColor.black)
+    }
     static func getFontH5(size:CGFloat = 13) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: UIColor.appOrange)
     }

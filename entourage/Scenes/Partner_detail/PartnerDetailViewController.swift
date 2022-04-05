@@ -20,6 +20,8 @@ class PartnerDetailViewController: UIViewController {
     @IBOutlet weak var ui_image_partner: UIImageView!
     @IBOutlet weak var ui_tableview: UITableView!
     
+    var hasPartnerNeeds = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,10 +103,33 @@ class PartnerDetailViewController: UIViewController {
 //MARK: - UITableViewDataSource,UITableViewDelegate -
 extension PartnerDetailViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return partner == nil ? 0 : 1
+        
+        if partner == nil {
+            return 0
+        }
+        
+        if partner!.donations_needs?.isEmpty ?? true && partner!.volunteers_needs?.isEmpty ?? true {
+            hasPartnerNeeds = false
+            return 2
+        }
+        hasPartnerNeeds = true
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! PartnerDetailTopCell
+            cell.populateCell(partner:partner, delegate: self)
+            return cell
+        }
+        
+        if hasPartnerNeeds && indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellNeeds", for: indexPath) as! PartnerDetailNeedsCell
+            cell.populateCell(partner:partner)
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellInfo", for: indexPath) as! PartnerDetailInfoCell
         cell.populateCell(partner:partner, delegate: self)
         return cell

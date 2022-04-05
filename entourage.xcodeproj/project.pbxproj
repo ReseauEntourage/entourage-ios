@@ -90,6 +90,8 @@
 		02B57D9827FC4329005A567B /* ReportUserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9727FC4329005A567B /* ReportUserPageViewController.swift */; };
 		02B57D9A27FC433F005A567B /* ReportUserSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9927FC433F005A567B /* ReportUserSendViewController.swift */; };
 		02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */; };
+		02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9D27FC9748005A567B /* PartnerDetailTopCell.swift */; };
+		02B57DA027FC9757005A567B /* PartnerDetailNeedsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9F27FC9757005A567B /* PartnerDetailNeedsCell.swift */; };
 		02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */; };
 		02B7921E27F7385A003AFFB9 /* Neighborhood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7921D27F7385A003AFFB9 /* Neighborhood.swift */; };
 		02B7922127F73F6A003AFFB9 /* TempGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */; };
@@ -252,6 +254,8 @@
 		02B57D9727FC4329005A567B /* ReportUserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserPageViewController.swift; sourceTree = "<group>"; };
 		02B57D9927FC433F005A567B /* ReportUserSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserSendViewController.swift; sourceTree = "<group>"; };
 		02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJTextViewPlaceholder.swift; sourceTree = "<group>"; };
+		02B57D9D27FC9748005A567B /* PartnerDetailTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerDetailTopCell.swift; sourceTree = "<group>"; };
+		02B57D9F27FC9757005A567B /* PartnerDetailNeedsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerDetailNeedsCell.swift; sourceTree = "<group>"; };
 		02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodService.swift; sourceTree = "<group>"; };
 		02B7921D27F7385A003AFFB9 /* Neighborhood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neighborhood.swift; sourceTree = "<group>"; };
 		02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempGroupMainViewController.swift; sourceTree = "<group>"; };
@@ -700,6 +704,8 @@
 			children = (
 				02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */,
 				02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */,
+				02B57D9D27FC9748005A567B /* PartnerDetailTopCell.swift */,
+				02B57D9F27FC9757005A567B /* PartnerDetailNeedsCell.swift */,
 			);
 			path = Partner_detail;
 			sourceTree = "<group>";
@@ -991,6 +997,7 @@
 				022744712795BEC0005600A1 /* AuthService.swift in Sources */,
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
 				02E069E0279184B3006DB1B6 /* OTOnboardingTypeViewController.swift in Sources */,
+				02B57DA027FC9757005A567B /* PartnerDetailNeedsCell.swift in Sources */,
 				02B37828279B072C00B204EF /* SharingEntourageTableViewCell.swift in Sources */,
 				02F5278327999AD700929431 /* MapPoi.swift in Sources */,
 				0262997B2790815000D84A6A /* APIKeys.swift in Sources */,
@@ -1025,6 +1032,7 @@
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
 				02E0098927E33DD200BB23CA /* WebLinkManager.swift in Sources */,
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,
+				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
 				021318AD27DF55D400B0F1BD /* MainHomeViewController.swift in Sources */,
 				029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */,
 				02F5278727999D8400929431 /* PoiCategory.swift in Sources */,
