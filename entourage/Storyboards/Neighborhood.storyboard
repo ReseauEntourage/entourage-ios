@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Neighborhood Create Main View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="groupCreateVCMain" id="Y6W-OH-hqX" customClass="NeighborhoodCreateMainViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_profile_header" translatesAutoresizingMaskIntoConstraints="NO" id="TKc-nG-pgM">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="439.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TKc-nG-pgM" secondAttribute="height" multiplier="392:416" id="P4E-nb-6Fh"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ipk-aD-exb" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="68"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="Dk8-dO-Sfw"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="TKc-nG-pgM" secondAttribute="trailing" id="JOO-h4-94G"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Ipk-aD-exb" secondAttribute="trailing" id="bcZ-kx-Z5t"/>
+                            <constraint firstItem="TKc-nG-pgM" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="h98-3j-cvI"/>
+                            <constraint firstItem="TKc-nG-pgM" firstAttribute="width" secondItem="TKc-nG-pgM" secondAttribute="height" multiplier="392:416" id="hwL-Gq-AEf"/>
+                            <constraint firstItem="Ipk-aD-exb" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="mGD-Ov-tBk"/>
+                            <constraint firstItem="TKc-nG-pgM" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="p6f-Kj-0fM"/>
+                            <constraint firstItem="Ipk-aD-exb" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="sPb-qB-Kam"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="6Y6-tZ-a9C"/>
+                    <connections>
+                        <outlet property="ui_top_view" destination="Ipk-aD-exb" id="OJ8-bM-zsp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="892.75362318840587" y="59.598214285714285"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zYO-JJ-t3v">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="SOG-SK-Sev" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NoI-As-578">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="fqe-xT-24R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lkN-oy-ppF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-17.39130434782609" y="59.598214285714285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="my_profile_header" width="392" height="416"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

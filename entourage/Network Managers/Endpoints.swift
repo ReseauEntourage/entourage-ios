@@ -26,6 +26,12 @@ let kAPIGetDetailAssociation = "partners/%d?token=%@"
 let kAPIAppInfoPushToken = "applications?token=%@"
 let kAPIPois = "pois"
 let kAPIMetadatas = "home/metadata?token=%@"
+
+//group / neighborhood
+let kAPINeighborhoods = "neighborhoods?token=%@"
+let kAPIGetDetailNeighborhood = "neighborhoods/%@?token=%@"
+let kAPIUpdateNeighborhood = "neighborhoods/%@?token=%@"
+
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
 

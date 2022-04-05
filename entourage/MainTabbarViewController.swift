@@ -60,10 +60,10 @@ class MainTabbarViewController: UITabBarController {
 //        }
 //    }
     
-  
-    @objc func switchToHomeTab() {
-        showHomeVC()
-    }
+//
+//    @objc func switchToHomeTab() {
+//        showHomeVC()
+//    }
     
     @objc func tapProfilTab() {
         DispatchQueue.main.async {
@@ -78,7 +78,7 @@ class MainTabbarViewController: UITabBarController {
     }
     
     func setupVCs() {
-        let  _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainHomeVC")
+        let  _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempUsersVC")
         
         homeVC = UINavigationController.init(rootViewController: _homeVC)
         homeVC.tabBarItem.title = "Users".localized
@@ -93,14 +93,14 @@ class MainTabbarViewController: UITabBarController {
         guideVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_guide")
         guideVC.tabBarItem.tag = 1
         
-        let _plusVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main2VC")
+        let _plusVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempGroupVC")
 
         plusVC = UINavigationController.init(rootViewController: _plusVC)
-        plusVC.tabBarItem.title = "Tab+".localized
-        plusVC.tabBarItem.accessibilityLabel = "Action +"
+        plusVC.tabBarItem.title = "Group+".localized
+        plusVC.tabBarItem.accessibilityLabel = "Group +"
         plusVC.tabBarItem.tag = 2
-        plusVC.tabBarItem.image = UIImage.init(named: "ic_tab_plus_selected")?.withRenderingMode(.alwaysOriginal)
-        plusVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_plus_selected")
+        plusVC.tabBarItem.image = UIImage.init(named: "ic_tab_group")?.withRenderingMode(.alwaysOriginal)
+        plusVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_group")
         
 
         let _messagesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main3VC")
@@ -118,8 +118,7 @@ class MainTabbarViewController: UITabBarController {
         menuVC.tabBarItem.image = UIImage.init(named: "ic_tab_profile")?.withRenderingMode(.alwaysTemplate)
         menuVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_profile")
         menuVC.tabBarItem.tag = 4
-        viewControllers = [menuVC,homeVC,guideVC,plusVC,messagesVC]
-        
+        viewControllers = [plusVC,menuVC,homeVC,guideVC,messagesVC]
         boldSelectedItem()
     }
     
@@ -210,16 +209,16 @@ extension MainTabbarViewController: UITabBarControllerDelegate {
         }
     }
 
-    func showHomeVC(isEditor:Bool = false) {
-        if self.selectedIndex != 0 {
-            self.selectedIndex = 0
-        }
-        
-//        if !isEditor {
-//            homeVC.popToRootViewController(animated: false)
-//            (homeVC.topViewController as? OTHomeMainViewController)?.isFromProfile = true
+//    func showHomeVC(isEditor:Bool = false) {
+//        if self.selectedIndex != 0 {
+//            self.selectedIndex = 0
 //        }
-        //homeVC.popToRootViewController(animated: false)
-        boldSelectedItem()
-    }
+//
+////        if !isEditor {
+////            homeVC.popToRootViewController(animated: false)
+////            (homeVC.topViewController as? OTHomeMainViewController)?.isFromProfile = true
+////        }
+//        //homeVC.popToRootViewController(animated: false)
+//        boldSelectedItem()
+//    }
 }

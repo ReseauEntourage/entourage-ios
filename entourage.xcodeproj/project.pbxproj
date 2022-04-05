@@ -86,7 +86,15 @@
 		02B37825279B06F600B204EF /* Others.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B37824279B06F600B204EF /* Others.storyboard */; };
 		02B37828279B072C00B204EF /* SharingEntourageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B37826279B072C00B204EF /* SharingEntourageTableViewCell.swift */; };
 		02B37829279B072C00B204EF /* ShareEntourageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B37827279B072C00B204EF /* ShareEntourageViewController.swift */; };
+		02B57D9627FC430D005A567B /* ReportUserMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9527FC430D005A567B /* ReportUserMainViewController.swift */; };
+		02B57D9827FC4329005A567B /* ReportUserPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9727FC4329005A567B /* ReportUserPageViewController.swift */; };
+		02B57D9A27FC433F005A567B /* ReportUserSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9927FC433F005A567B /* ReportUserSendViewController.swift */; };
 		02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */; };
+		02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */; };
+		02B7921E27F7385A003AFFB9 /* Neighborhood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7921D27F7385A003AFFB9 /* Neighborhood.swift */; };
+		02B7922127F73F6A003AFFB9 /* TempGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */; };
+		02B7922527F74801003AFFB9 /* Neighborhood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B7922427F74801003AFFB9 /* Neighborhood.storyboard */; };
+		02B7922727F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7922627F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift */; };
 		02C0A0E2278EDCC400B0C646 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C0A0E1278EDCC400B0C646 /* UserService.swift */; };
 		02C0A0E7278EEC6B00B0C646 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */; };
 		02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3ABEF279AB50900817B82 /* Extensions_UIColor.swift */; };
@@ -240,7 +248,15 @@
 		02B37824279B06F600B204EF /* Others.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Others.storyboard; sourceTree = "<group>"; };
 		02B37826279B072C00B204EF /* SharingEntourageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingEntourageTableViewCell.swift; sourceTree = "<group>"; };
 		02B37827279B072C00B204EF /* ShareEntourageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEntourageViewController.swift; sourceTree = "<group>"; };
+		02B57D9527FC430D005A567B /* ReportUserMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserMainViewController.swift; sourceTree = "<group>"; };
+		02B57D9727FC4329005A567B /* ReportUserPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserPageViewController.swift; sourceTree = "<group>"; };
+		02B57D9927FC433F005A567B /* ReportUserSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserSendViewController.swift; sourceTree = "<group>"; };
 		02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJTextViewPlaceholder.swift; sourceTree = "<group>"; };
+		02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodService.swift; sourceTree = "<group>"; };
+		02B7921D27F7385A003AFFB9 /* Neighborhood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neighborhood.swift; sourceTree = "<group>"; };
+		02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempGroupMainViewController.swift; sourceTree = "<group>"; };
+		02B7922427F74801003AFFB9 /* Neighborhood.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neighborhood.storyboard; sourceTree = "<group>"; };
+		02B7922627F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreateMainViewController.swift; sourceTree = "<group>"; };
 		02C0A0E1278EDCC400B0C646 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		02C3ABEF279AB50900817B82 /* Extensions_UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIColor.swift; sourceTree = "<group>"; };
@@ -353,6 +369,7 @@
 				022744722795C0FB005600A1 /* Partner.swift */,
 				02F5278227999AD700929431 /* MapPoi.swift */,
 				02F5278627999D8400929431 /* PoiCategory.swift */,
+				02B7921D27F7385A003AFFB9 /* Neighborhood.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -477,6 +494,7 @@
 				02B37824279B06F600B204EF /* Others.storyboard */,
 				02856F6127DA334100988FF7 /* ProfileParams.storyboard */,
 				0207BF8427F2059400631914 /* UserDetail.storyboard */,
+				02B7922427F74801003AFFB9 /* Neighborhood.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -485,7 +503,10 @@
 			isa = PBXGroup;
 			children = (
 				0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */,
+				02B57D9527FC430D005A567B /* ReportUserMainViewController.swift */,
+				02B57D9727FC4329005A567B /* ReportUserPageViewController.swift */,
 				025E917327F3619300D4A7A8 /* ReportUserViewController.swift */,
+				02B57D9927FC433F005A567B /* ReportUserSendViewController.swift */,
 			);
 			path = "detail other user";
 			sourceTree = "<group>";
@@ -527,6 +548,7 @@
 		02681953278DF6E400A98A4A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				02B7921F27F73F34003AFFB9 /* Groups - Neighborhoods */,
 				02681977278DF72D00A98A4A /* pre_onboarding */,
 				02E069CB279184B3006DB1B6 /* Onboarding */,
 				026819B7278E105600A98A4A /* Login */,
@@ -599,10 +621,20 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		02B7921F27F73F34003AFFB9 /* Groups - Neighborhoods */ = {
+			isa = PBXGroup;
+			children = (
+				02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */,
+				02B7922627F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift */,
+			);
+			path = "Groups - Neighborhoods";
+			sourceTree = "<group>";
+		};
 		02C0A0E0278EDCA700B0C646 /* Network Managers */ = {
 			isa = PBXGroup;
 			children = (
 				02C0A0E1278EDCC400B0C646 /* UserService.swift */,
+				02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */,
 				022744702795BEC0005600A1 /* AuthService.swift */,
 				0227446E2795BE6F005600A1 /* AssociationService.swift */,
 				021318AA27DF548600B0F1BD /* MetadatasService.swift */,
@@ -865,6 +897,7 @@
 				0268194C278DF4A800A98A4A /* Onboarding_V2.storyboard in Resources */,
 				02B37825279B06F600B204EF /* Others.storyboard in Resources */,
 				02CCE67627D78C7500D6976C /* Quicksand-Bold.ttf in Resources */,
+				02B7922527F74801003AFFB9 /* Neighborhood.storyboard in Resources */,
 				023B07CC27D664F6007752AC /* Profile.xcassets in Resources */,
 				025D8768278DED3C00909101 /* AppConfigurations.plist in Resources */,
 				02CCE67C27D78CAB00D6976C /* NunitoSans-SemiBold.ttf in Resources */,
@@ -928,6 +961,7 @@
 				025D8764278DEB3A00909101 /* Logger.swift in Sources */,
 				0288A8D927CCDA5C008D7011 /* PictureUploadS3Service.swift in Sources */,
 				02E069E6279184B3006DB1B6 /* OTOnboardingAssoActivityViewController.swift in Sources */,
+				02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */,
 				02F5277E2799995900929431 /* GDSSearchViewController.swift in Sources */,
 				02E069E5279184B3006DB1B6 /* OTOnboardingPhoneViewController.swift in Sources */,
 				025E917427F3619300D4A7A8 /* ReportUserViewController.swift in Sources */,
@@ -942,6 +976,7 @@
 				02CCE68D27D7B8E700D6976C /* MainUserProfileViewController.swift in Sources */,
 				021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */,
 				02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */,
+				02B7922727F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift in Sources */,
 				02F5278127999A8C00929431 /* MainGuideViewController.swift in Sources */,
 				02E069E9279184B3006DB1B6 /* OTOnboardingAssoInfoViewController.swift in Sources */,
 				02E069E3279184B3006DB1B6 /* OTOnboardingEmailPwdViewController.swift in Sources */,
@@ -952,6 +987,7 @@
 				02681952278DF6CA00A98A4A /* OTCustomTextfield.swift in Sources */,
 				0262997927905FB700D84A6A /* Constants.swift in Sources */,
 				0220580727FB003700531720 /* BasePopViewController.swift in Sources */,
+				02B57D9A27FC433F005A567B /* ReportUserSendViewController.swift in Sources */,
 				022744712795BEC0005600A1 /* AuthService.swift in Sources */,
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
 				02E069E0279184B3006DB1B6 /* OTOnboardingTypeViewController.swift in Sources */,
@@ -962,6 +998,9 @@
 				0268197D278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift in Sources */,
 				02681950278DF6BD00A98A4A /* OTProgressBar.swift in Sources */,
 				0288A8E127CD09E5008D7011 /* NotificationsKeys.swift in Sources */,
+				02B7921E27F7385A003AFFB9 /* Neighborhood.swift in Sources */,
+				02B57D9627FC430D005A567B /* ReportUserMainViewController.swift in Sources */,
+				02B7922127F73F6A003AFFB9 /* TempGroupMainViewController.swift in Sources */,
 				02CCE68927D7B51E00D6976C /* TagView.swift in Sources */,
 				023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */,
 				02E069EA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift in Sources */,
@@ -971,6 +1010,7 @@
 				021F084F2798113D00F32A34 /* LocationManager.swift in Sources */,
 				02D64F4F2799D74F00F6C4BD /* PoiService.swift in Sources */,
 				02CCE68227D7968800D6976C /* MainProfileSettingsViewController.swift in Sources */,
+				02B57D9827FC4329005A567B /* ReportUserPageViewController.swift in Sources */,
 				026819C3278E10DA00A98A4A /* User.swift in Sources */,
 				0288A8D727CCD8F5008D7011 /* UserPhotoAddViewController.swift in Sources */,
 				0288A8DB27CD00FD008D7011 /* Extensions_UIImage.swift in Sources */,
