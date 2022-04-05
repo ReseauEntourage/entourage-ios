@@ -16,11 +16,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
             <connections>
-                <outlet property="ui_button_back" destination="LNG-wP-8YF" id="Lo7-rm-hRV"/>
                 <outlet property="ui_content_view" destination="iN0-l3-epB" id="4tT-kx-niu"/>
                 <outlet property="ui_image_back" destination="Fjg-oT-Srm" id="NzR-Iv-Mvy"/>
-                <outlet property="ui_title" destination="hAl-Jb-X6C" id="r76-u9-Awd"/>
-                <outlet property="ui_view_bottom_separator" destination="ASw-eC-AtQ" id="3aF-eV-RGh"/>
+                <outlet property="ui_image_close" destination="6zt-Xp-md9" id="Rh7-kg-7kM"/>
+                <outlet property="ui_view_back" destination="ryC-hl-R29" id="3CJ-01-dmy"/>
+                <outlet property="ui_view_close" destination="L7s-t9-hW5" id="tT2-kE-4wS"/>
+                <outletCollection property="ui_titles" destination="hAl-Jb-X6C" collectionClass="NSMutableArray" id="7fe-00-ZSK"/>
+                <outletCollection property="ui_titles" destination="KBv-Hy-Pxp" collectionClass="NSMutableArray" id="QgM-el-Lny"/>
+                <outletCollection property="ui_views_bottom_separator" destination="ASw-eC-AtQ" collectionClass="NSMutableArray" id="pnU-ga-O8k"/>
+                <outletCollection property="ui_views_bottom_separator" destination="YzJ-zl-zJ8" collectionClass="NSMutableArray" id="msU-Sy-jjV"/>
+                <outletCollection property="ui_buttons_close" destination="L9k-AA-soK" collectionClass="NSMutableArray" id="5sz-RN-cHt"/>
+                <outletCollection property="ui_buttons_close" destination="LNG-wP-8YF" collectionClass="NSMutableArray" id="DGr-Ub-GSh"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -76,6 +82,54 @@
                         <constraint firstItem="LNG-wP-8YF" firstAttribute="top" secondItem="ryC-hl-R29" secondAttribute="top" id="uIV-Yt-227"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7s-t9-hW5">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9k-AA-soK">
+                            <rect key="frame" x="353" y="0.0" width="61" height="67"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="61" id="aYT-na-DxF"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title=" "/>
+                        </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_close_orange_v8" translatesAutoresizingMaskIntoConstraints="NO" id="6zt-Xp-md9">
+                            <rect key="frame" x="362" y="24" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="2HW-rC-wNW"/>
+                            </constraints>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YzJ-zl-zJ8">
+                            <rect key="frame" x="32" y="67" width="350" height="1"/>
+                            <color key="backgroundColor" name="orange_app"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="DUr-Pr-1s4"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBv-Hy-Pxp">
+                            <rect key="frame" x="32" y="24.5" width="330" height="19.5"/>
+                            <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="14"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="6zt-Xp-md9" secondAttribute="trailing" constant="32" id="JZ2-5C-zW7"/>
+                        <constraint firstItem="YzJ-zl-zJ8" firstAttribute="leading" secondItem="L7s-t9-hW5" secondAttribute="leading" constant="32" id="MEN-S3-WXc"/>
+                        <constraint firstItem="KBv-Hy-Pxp" firstAttribute="leading" secondItem="L7s-t9-hW5" secondAttribute="leading" constant="32" id="MJ8-Oi-5v9"/>
+                        <constraint firstItem="YzJ-zl-zJ8" firstAttribute="top" secondItem="L9k-AA-soK" secondAttribute="bottom" id="R04-fl-voA"/>
+                        <constraint firstItem="6zt-Xp-md9" firstAttribute="centerY" secondItem="L7s-t9-hW5" secondAttribute="centerY" id="ZFK-0X-hUF"/>
+                        <constraint firstItem="6zt-Xp-md9" firstAttribute="leading" secondItem="KBv-Hy-Pxp" secondAttribute="trailing" id="bK7-ML-iZz"/>
+                        <constraint firstAttribute="height" constant="68" id="fe5-V6-pQb"/>
+                        <constraint firstAttribute="trailing" secondItem="YzJ-zl-zJ8" secondAttribute="trailing" constant="32" id="l1M-zP-uSK"/>
+                        <constraint firstAttribute="bottom" secondItem="YzJ-zl-zJ8" secondAttribute="bottom" id="v1s-kr-G0a"/>
+                        <constraint firstItem="L9k-AA-soK" firstAttribute="top" secondItem="L7s-t9-hW5" secondAttribute="top" id="v6u-ec-XFP"/>
+                        <constraint firstItem="KBv-Hy-Pxp" firstAttribute="centerY" secondItem="6zt-Xp-md9" secondAttribute="centerY" id="ySM-E2-tTw"/>
+                        <constraint firstAttribute="trailing" secondItem="L9k-AA-soK" secondAttribute="trailing" id="yhV-aL-3zw"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -84,6 +138,10 @@
                 <constraint firstAttribute="trailing" secondItem="ryC-hl-R29" secondAttribute="trailing" id="3Sl-GR-z1j"/>
                 <constraint firstItem="ryC-hl-R29" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="NZy-qX-UnQ"/>
                 <constraint firstItem="ryC-hl-R29" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="a6Q-PH-fO4"/>
+                <constraint firstItem="L7s-t9-hW5" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="acE-eG-Jlh"/>
+                <constraint firstItem="L7s-t9-hW5" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="hqM-Il-X4h"/>
+                <constraint firstItem="L7s-t9-hW5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hvm-ma-IpP"/>
+                <constraint firstItem="L7s-t9-hW5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nuf-bG-5YI"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -93,6 +151,7 @@
     </objects>
     <resources>
         <image name="back_button" width="20" height="22"/>
+        <image name="ic_close_orange_v8" width="20" height="20"/>
         <namedColor name="orange_app">
             <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

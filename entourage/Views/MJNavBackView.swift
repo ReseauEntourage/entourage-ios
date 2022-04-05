@@ -9,13 +9,21 @@ import UIKit
 
 @IBDesignable
 class MJNavBackView: UIView {
+    @IBOutlet weak var ui_view_back: UIView!
+    @IBOutlet weak var ui_view_close: UIView!
+    
+    
+    
+    
     @IBOutlet weak var ui_content_view: UIView!
     
-    @IBOutlet weak var ui_title: UILabel!
-    @IBOutlet weak var ui_button_back: UIButton!
+    @IBOutlet var ui_titles: [UILabel]!
+    @IBOutlet var ui_views_bottom_separator: [UIView]!
     
+    @IBOutlet var ui_buttons_close: [UIButton]!
     @IBOutlet weak var ui_image_back: UIImageView!
-    @IBOutlet weak var ui_view_bottom_separator: UIView!
+    
+    @IBOutlet weak var ui_image_close: UIImageView!
     
     weak var delegate:MJNavBackViewDelegate? = nil
     
@@ -34,14 +42,22 @@ class MJNavBackView: UIView {
         addSubview(ui_content_view)
         ui_content_view.frame = self.bounds
         
-        ui_button_back.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        for button in ui_buttons_close {
+            button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        }
+        ui_view_close.isHidden = true
     }
     
-    func populateView(title:String,titleFont:UIFont, titleColor:UIColor,delegate:MJNavBackViewDelegate,showSeparator:Bool = true,backgroundColor:UIColor? = nil,cornerRadius:CGFloat? = nil) {
-        ui_title.text = title
-        ui_title.font = titleFont
-        ui_title.textColor = titleColor
-        ui_view_bottom_separator.isHidden = !showSeparator
+    func populateView(title:String,titleFont:UIFont, titleColor:UIColor,delegate:MJNavBackViewDelegate,showSeparator:Bool = true,backgroundColor:UIColor? = nil,cornerRadius:CGFloat? = nil, isClose:Bool = false) {
+        for _uititle in ui_titles {
+            _uititle.text = title
+            _uititle.font = titleFont
+            _uititle.textColor = titleColor
+        }
+        
+        for _view in ui_views_bottom_separator {
+            _view.isHidden = !showSeparator
+        }
         
         if let backgroundColor = backgroundColor {
             ui_content_view.backgroundColor = backgroundColor
@@ -49,11 +65,16 @@ class MJNavBackView: UIView {
         
         self.delegate = delegate
         
+        ui_view_close.isHidden = !isClose
+        ui_view_back.isHidden = isClose
         
         addTopRadius(cornerRadius: cornerRadius)
     }
     
-    func populateCustom(title:String? = nil, titleFont:UIFont? = nil, titleColor:UIColor? = nil, imageName:String?, backgroundColor:UIColor?, delegate:MJNavBackViewDelegate, showSeparator:Bool = true, cornerRadius:CGFloat? = nil) {
+    func populateCustom(title:String? = nil, titleFont:UIFont? = nil, titleColor:UIColor? = nil, imageName:String?, backgroundColor:UIColor?, delegate:MJNavBackViewDelegate, showSeparator:Bool = true, cornerRadius:CGFloat? = nil, isClose:Bool = false) {
+        
+        ui_view_close.isHidden = !isClose
+        ui_view_back.isHidden = isClose
         
         if let imageName = imageName {
             ui_image_back.image = UIImage.init(named: imageName)
@@ -61,16 +82,20 @@ class MJNavBackView: UIView {
         if let backgroundColor = backgroundColor {
             ui_content_view.backgroundColor = backgroundColor
         }
-        
-        ui_title.text = title ?? ""
-        if let titleFont = titleFont {
-            ui_title.font = titleFont
+        for _uititle in ui_titles {
+            _uititle.text = title ?? ""
+            if let titleFont = titleFont {
+                _uititle.font = titleFont
+            }
+            if let titleColor = titleColor {
+                _uititle.textColor = titleColor
+            }
         }
-        if let titleColor = titleColor {
-            ui_title.textColor = titleColor
+        
+        for _view in ui_views_bottom_separator {
+            _view.isHidden = !showSeparator
         }
         
-        ui_view_bottom_separator.isHidden = !showSeparator
         addTopRadius(cornerRadius: cornerRadius)
         
         self.delegate = delegate

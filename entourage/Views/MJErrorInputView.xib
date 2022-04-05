@@ -28,7 +28,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjD-R2-nMo">
                     <rect key="frame" x="26" y="14" width="362" height="32"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgE-PR-NkI">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgE-PR-NkI">
                             <rect key="frame" x="38" y="8" width="316" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,7 +49,7 @@
                         <constraint firstAttribute="trailing" secondItem="QgE-PR-NkI" secondAttribute="trailing" constant="8" id="GKZ-f1-Q67"/>
                         <constraint firstItem="G24-0k-My8" firstAttribute="leading" secondItem="DjD-R2-nMo" secondAttribute="leading" constant="10" id="KQL-6l-Jtt"/>
                         <constraint firstItem="QgE-PR-NkI" firstAttribute="leading" secondItem="G24-0k-My8" secondAttribute="trailing" constant="8" id="THJ-WI-QiW"/>
-                        <constraint firstAttribute="height" constant="32" id="emu-ut-nv3"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="emu-ut-nv3"/>
                     </constraints>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="qXN-gO-YcF" appends="YES" id="NgT-OA-gU6"/>

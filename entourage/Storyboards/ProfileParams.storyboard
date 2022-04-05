@@ -1773,7 +1773,7 @@
                                                                     <color key="textColor" name="orange_app"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labor" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8K3-jO-8zF">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labor" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8K3-jO-8zF" customClass="MJTextViewPlaceholder" customModule="Ent_Beta" customModuleProvider="target">
                                                                     <rect key="frame" x="58" y="47" width="292" height="48"/>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <constraints>
@@ -2135,12 +2135,13 @@
                                 <rect key="frame" x="0.0" y="782" width="414" height="80"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6e-5m-SNd">
-                                        <rect key="frame" x="60" y="15" width="294" height="50"/>
+                                        <rect key="frame" x="76.5" y="15" width="261" height="50"/>
                                         <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="ZaS-l5-2ae"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="18"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Appliquer les modifications">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2154,8 +2155,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="4UA-Hr-SIa"/>
                                     <constraint firstItem="f6e-5m-SNd" firstAttribute="centerY" secondItem="hsD-Tj-4JP" secondAttribute="centerY" id="Gb7-56-DyR"/>
-                                    <constraint firstItem="f6e-5m-SNd" firstAttribute="leading" secondItem="hsD-Tj-4JP" secondAttribute="leading" constant="60" id="XjN-LY-gtj"/>
-                                    <constraint firstAttribute="trailing" secondItem="f6e-5m-SNd" secondAttribute="trailing" constant="60" id="YYJ-nS-o5m"/>
+                                    <constraint firstItem="f6e-5m-SNd" firstAttribute="centerX" secondItem="hsD-Tj-4JP" secondAttribute="centerX" id="QEH-wU-Edg"/>
+                                    <constraint firstItem="f6e-5m-SNd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hsD-Tj-4JP" secondAttribute="leading" constant="32" id="XjN-LY-gtj"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="f6e-5m-SNd" secondAttribute="trailing" constant="32" id="YYJ-nS-o5m"/>
                                 </constraints>
                             </view>
                             <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OB2-vz-pVO" customClass="MJErrorInputView" customModule="Ent_Beta" customModuleProvider="target">
@@ -2270,7 +2272,7 @@
                                                     <constraint firstAttribute="width" constant="56" id="iM8-cm-aD7"/>
                                                     <constraint firstAttribute="height" constant="40" id="kpG-fn-Ixq"/>
                                                 </constraints>
-                                                <state key="normal" image="onboard_picto_geoloc"/>
+                                                <state key="normal" image="ic_bt_location"/>
                                                 <connections>
                                                     <action selector="action_location:" destination="rXC-aO-CgB" eventType="touchUpInside" id="pUr-bM-H4I"/>
                                                 </connections>
@@ -2314,14 +2316,13 @@
                                         <rect key="frame" x="0.0" y="718" width="414" height="100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBM-3X-mhe">
-                                                <rect key="frame" x="162" y="25" width="90" height="50"/>
+                                                <rect key="frame" x="158.5" y="25" width="97" height="50"/>
                                                 <color key="backgroundColor" name="orange_app"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="3Qe-3Q-6NH"/>
                                                     <constraint firstAttribute="height" constant="50" id="iTD-XH-glm"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="18"/>
-                                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Valider">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2505,12 +2506,13 @@
                                         <rect key="frame" x="0.0" y="738" width="414" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tu5-f1-RC3">
-                                                <rect key="frame" x="60" y="15" width="294" height="50"/>
+                                                <rect key="frame" x="76.5" y="15" width="261" height="50"/>
                                                 <color key="backgroundColor" name="orange_app"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="9Ba-PV-LRQ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="18"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Appliquer les modifications">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2522,9 +2524,10 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="tu5-f1-RC3" firstAttribute="leading" secondItem="s9F-9V-nqS" secondAttribute="leading" constant="60" id="0H5-RL-gjh"/>
+                                            <constraint firstItem="tu5-f1-RC3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="s9F-9V-nqS" secondAttribute="leading" constant="32" id="0H5-RL-gjh"/>
                                             <constraint firstItem="tu5-f1-RC3" firstAttribute="centerY" secondItem="s9F-9V-nqS" secondAttribute="centerY" id="8Za-gM-iqh"/>
-                                            <constraint firstAttribute="trailing" secondItem="tu5-f1-RC3" secondAttribute="trailing" constant="60" id="JC1-jj-tYX"/>
+                                            <constraint firstItem="tu5-f1-RC3" firstAttribute="centerX" secondItem="s9F-9V-nqS" secondAttribute="centerX" id="GDs-bQ-ylN"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tu5-f1-RC3" secondAttribute="trailing" constant="32" id="JC1-jj-tYX"/>
                                             <constraint firstAttribute="height" constant="80" id="dcU-OY-CHZ"/>
                                         </constraints>
                                     </view>
@@ -2852,6 +2855,7 @@
     <resources>
         <image name="ic_action_profile" width="30" height="28"/>
         <image name="ic_birth" width="19" height="19"/>
+        <image name="ic_bt_location" width="46" height="29"/>
         <image name="ic_desc" width="19" height="20"/>
         <image name="ic_event_profile" width="33" height="34"/>
         <image name="ic_location" width="15" height="20"/>
@@ -2860,7 +2864,6 @@
         <image name="icn_edit_profile" width="27" height="27"/>
         <image name="layer_photo" width="350" height="350"/>
         <image name="my_profile_header" width="392" height="416"/>
-        <image name="onboard_picto_geoloc" width="56" height="40"/>
         <image name="params_block" width="20" height="20"/>
         <image name="params_help" width="21" height="21"/>
         <image name="params_logout" width="24" height="21"/>

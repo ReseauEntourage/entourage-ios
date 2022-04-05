@@ -79,6 +79,10 @@ struct ApplicationTheme {
         return MJTextFontColorStyle(font: getFontNunitoSemiBold(size: size), color: UIColor.appOrangeLight_50)
     }
     
+    static func getFontLegend(size:CGFloat = 13) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoLight(size: size), color: UIColor.black)
+    }
+    
     //MARK: - Custom Fonts only from Zeplin -
     static func getFontNunitoBold(size:CGFloat) -> UIFont {
         return UIFont(name:"NunitoSans-Bold", size: size) ?? UIFont.systemFont(ofSize: size)

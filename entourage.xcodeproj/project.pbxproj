@@ -86,6 +86,7 @@
 		02B37825279B06F600B204EF /* Others.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B37824279B06F600B204EF /* Others.storyboard */; };
 		02B37828279B072C00B204EF /* SharingEntourageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B37826279B072C00B204EF /* SharingEntourageTableViewCell.swift */; };
 		02B37829279B072C00B204EF /* ShareEntourageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B37827279B072C00B204EF /* ShareEntourageViewController.swift */; };
+		02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */; };
 		02C0A0E2278EDCC400B0C646 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C0A0E1278EDCC400B0C646 /* UserService.swift */; };
 		02C0A0E7278EEC6B00B0C646 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */; };
 		02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3ABEF279AB50900817B82 /* Extensions_UIColor.swift */; };
@@ -239,6 +240,7 @@
 		02B37824279B06F600B204EF /* Others.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Others.storyboard; sourceTree = "<group>"; };
 		02B37826279B072C00B204EF /* SharingEntourageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingEntourageTableViewCell.swift; sourceTree = "<group>"; };
 		02B37827279B072C00B204EF /* ShareEntourageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEntourageViewController.swift; sourceTree = "<group>"; };
+		02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJTextViewPlaceholder.swift; sourceTree = "<group>"; };
 		02C0A0E1278EDCC400B0C646 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		02C3ABEF279AB50900817B82 /* Extensions_UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIColor.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				02490DC627EA246B00E2577B /* MJErrorInputView.xib */,
 				029BD4F427EDC44F00AE67AF /* MJNavBackView.swift */,
 				029BD4F627EDC45E00AE67AF /* MJNavBackView.xib */,
+				02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -962,6 +965,7 @@
 				02CCE68927D7B51E00D6976C /* TagView.swift in Sources */,
 				023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */,
 				02E069EA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift in Sources */,
+				02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */,
 				02D64F4D2799D5E000F6C4BD /* InviteSourceViewController.swift in Sources */,
 				02C91A29278F335000305E0B /* MainTabbarViewController.swift in Sources */,
 				021F084F2798113D00F32A34 /* LocationManager.swift in Sources */,
