@@ -241,15 +241,16 @@ struct UserService {
         }
     }
     
-    static func reportUser(userId:String, tags:[String],message:String,completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+    static func reportUser(userId:String, tags:[String], message:String? ,completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIReportUser
         endpoint = String.init(format: endpoint,userId, token)
         
-        let parameters:[String:Any] = ["user_report": ["message":message],"signals":tags] //TODO: Passer les tags
+        let _msg:String = message != nil ? message! : ""
+        let parameters:[String:Any] = ["user_report":["message":_msg, "signals":tags]]
         
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
-                
+        
         NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
             Logger.print("Response Post report User : \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
             guard let _ = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {

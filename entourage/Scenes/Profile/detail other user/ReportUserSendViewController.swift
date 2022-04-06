@@ -41,7 +41,7 @@ class ReportUserSendViewController: UIViewController {
         
         ui_lbl_mandatory.font = ApplicationTheme.getFontLegend().font
         ui_lbl_mandatory.textColor = ApplicationTheme.getFontLegend().color
-        ui_lbl_mandatory.text = "report_user_mandatory".localized
+        ui_lbl_mandatory.text = "report_user_optional".localized
         
         ui_bt_send.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
         ui_bt_send.titleLabel?.textColor = .white
@@ -87,28 +87,7 @@ class ReportUserSendViewController: UIViewController {
     
     //MARK: - IBActions -
     @IBAction func action_validate(_ sender: Any) {
-        var hasOneCheck = false
-        for signal in tagsignals.getTags() {
-            if signal.isSelected {
-                hasOneCheck = true
-                break
-            }
-        }
-        
-        var message = ""
-        if let _message = ui_tv_message.text, _message.count > 0 {
-            message = _message
-        }
-        else {
-            hasOneCheck = false
-        }
-        
-        if hasOneCheck {
-            reportUser(message: message)
-        }
-        else {
-            showError(message: "report_user_message_error".localized)
-        }
+        reportUser(message: ui_tv_message.text)
     }
     
     @IBAction func action_back(_ sender: Any) {
@@ -116,7 +95,7 @@ class ReportUserSendViewController: UIViewController {
     }
     
     //MARK: - Network -
-    func reportUser(message:String) {
+    func reportUser(message:String?) {
         let tagsSignalsWS = tagsignals.getTagsForWS()
         guard let userId = user?.sid else { return }
         
