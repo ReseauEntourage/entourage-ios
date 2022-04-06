@@ -45,8 +45,8 @@ class Metadatas:Codable {
         do {
             if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] {
                 if let tags = json["tags"] as? [String:AnyObject] {
-                    addTagsInterests(json: tags)
-                    addTagsSignals(json: tags)
+                    addTags(json: tags, key: "interests", tags: &_tagsInterests)
+                    addTags(json: tags, key: "signals", tags: &_tagsSignals)
                 }
             }
         }
@@ -55,28 +55,13 @@ class Metadatas:Codable {
         }
     }
     
-    func addTagsInterests(json:[String: AnyObject] ) {
-        if let _interests = json["interests"] as? [[String:String]] {
-            _tagsInterests = Tags()
-            
+    func addTags(json:[String: AnyObject], key:String, tags:inout Tags? ) {
+        if let _interests = json[key] as? [[String:String]] {
+            tags = Tags()
             for _interest in _interests {
                 if let _key:String = _interest["id"], let _value:String = _interest["name"] {
-                    _tagsInterests?.tags.append(TagInterest(keyName: _key, keyValue: _value))
+                    tags?.tags.append(TagInterest(keyName: _key, keyValue: _value))
                 }
-                
-            }
-        }
-    }
-    
-    func addTagsSignals(json:[String: AnyObject] ) {
-        if let _signals = json["signals"] as? [[String:String]] {
-            _tagsSignals = Tags()
-            
-            for _signal in _signals {
-                if let _key:String = _signal["id"], let _value:String = _signal["name"] {
-                    _tagsSignals?.tags.append(Tag(keyName: _key, keyValue: _value))
-                }
-                
             }
         }
     }

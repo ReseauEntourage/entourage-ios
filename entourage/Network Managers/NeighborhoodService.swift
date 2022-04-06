@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NeighborhoodService {
+struct NeighborhoodService:ParsingDataCodable {
     
     static func getAllNeighborhoods( completion: @escaping (_ groups:[Neighborhood]?, _ error:EntourageNetworkError?) -> Void) {
         
@@ -22,8 +22,27 @@ struct NeighborhoodService {
                 return
             }
             
-            let group = self.parseDataNeighborhoods(data: data)
+            let group:[Neighborhood]? = self.parseDatas(data: data,key: "neighborhoods")
             DispatchQueue.main.async { completion(group,nil) }
+        }
+    }
+    
+    static func getNeighborhoodImages( completion: @escaping (_ images:[NeighborhoodImage]?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetneighborhoodImages
+        endpoint = String.init(format: endpoint, token)
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil,  error) }
+                return
+            }
+            
+            let images:[NeighborhoodImage]? = self.parseDatas(data: data,key: "neighborhood_images")
+            
+            DispatchQueue.main.async { completion(images,nil) }
         }
     }
     
@@ -42,7 +61,7 @@ struct NeighborhoodService {
                 return
             }
             
-            let group = self.parseDataNeighborhood(data: data)
+            let group:Neighborhood? = self.parseData(data: data,key: "neighborhood")
             DispatchQueue.main.async { completion(group,nil) }
         }
     }
@@ -67,7 +86,7 @@ struct NeighborhoodService {
                 return
             }
             
-            let group = self.parseDataNeighborhood(data: data)
+            let group:Neighborhood? = self.parseData(data: data,key: "neighborhood")
             DispatchQueue.main.async { completion(group, nil) }
         }
     }
@@ -91,47 +110,12 @@ struct NeighborhoodService {
                 return
             }
             
-            let group = self.parseDataNeighborhood(data: data)
+            let group:Neighborhood? = self.parseData(data: data,key: "neighborhood")
             DispatchQueue.main.async { completion(group, nil) }
         }
     }
     
     
-    //MARK: - Parsing Assos -
-    static func parseDataNeighborhoods(data:Data) -> [Neighborhood] {
-        var neighborhoods = [Neighborhood]()
-        
-        do {
-            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let _json = json["neighborhoods"] as? [[String:AnyObject]] {
-                let decoder = JSONDecoder()
-                for jsonGroup in _json {
-                    if let dataGroup = try? JSONSerialization.data(withJSONObject: jsonGroup) {
-                        let group = try decoder.decode(Neighborhood.self, from:dataGroup)
-                        neighborhoods.append(group)
-                    }
-                }
-            }
-        }
-        catch {
-            Logger.print("Error parsing Groups \(error)")
-        }
-        return neighborhoods
-    }
     
-    static func parseDataNeighborhood(data:Data) -> Neighborhood {
-        var group = Neighborhood()
-        
-        do {
-            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let jsonGroup = json["neighborhood"] as? [String:AnyObject] {
-                let decoder = JSONDecoder()
-                if let dataGroup = try? JSONSerialization.data(withJSONObject: jsonGroup) {
-                    group = try decoder.decode(Neighborhood.self, from:dataGroup)
-                }
-            }
-        }
-        catch {
-            Logger.print("Error parsing group \(error)")
-        }
-        return group
-    }
+    
 }

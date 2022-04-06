@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AssociationService {
+struct AssociationService:ParsingDataCodable {
     
     static func getAllAssociations( completion: @escaping (_ associations:[Partner]?, _ error:EntourageNetworkError?) -> Void) {
         
@@ -22,7 +22,7 @@ struct AssociationService {
                 return
             }
             
-            let associations = self.parseDataAssociations(data: data)
+            let associations:[Partner]? = self.parseDatas(data: data,key: "partners")
             DispatchQueue.main.async { completion(associations,nil) }
         }
     }
@@ -42,46 +42,8 @@ struct AssociationService {
                 return
             }
             
-            let association = self.parseDataAssociation(data: data)
+            let association:Partner? = self.parseData(data: data,key: "partner")
             DispatchQueue.main.async { completion(association,nil) }
         }
-    }
-    
-    //MARK: - Parsing Assos -
-    static func parseDataAssociations(data:Data) -> [Partner] {
-        var associations = [Partner]()
-        
-        do {
-            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let _jsonAssos = json["partners"] as? [[String:AnyObject]] {
-                let decoder = JSONDecoder()
-                for jsonAsso in _jsonAssos {
-                    if let dataAsso = try? JSONSerialization.data(withJSONObject: jsonAsso) {
-                        let asso = try decoder.decode(Partner.self, from:dataAsso)
-                        associations.append(asso)
-                    }
-                }
-            }
-        }
-        catch {
-            Logger.print("Error parsing Asso \(error)")
-        }
-        return associations
-    }
-    
-    static func parseDataAssociation(data:Data) -> Partner {
-        var association = Partner()
-        
-        do {
-            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let jsonAsso = json["partner"] as? [String:AnyObject] {
-                let decoder = JSONDecoder()
-                if let dataAsso = try? JSONSerialization.data(withJSONObject: jsonAsso) {
-                    association = try decoder.decode(Partner.self, from:dataAsso)
-                }
-            }
-        }
-        catch {
-            Logger.print("Error parsing Asso \(error)")
-        }
-        return association
     }
 }

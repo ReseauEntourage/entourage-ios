@@ -24,6 +24,8 @@ struct Neighborhood:Codable {
     var future_outings_count:Int = 0
     var has_ongoing_outing = false
     
+    var neighborhood_image_id:Int? = nil // Use to pass the image info from the gallery
+    
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case name
@@ -73,7 +75,24 @@ struct Neighborhood:Codable {
             dict["photo_url"] = photoUrl!
         }
         
+        if neighborhood_image_id != nil {
+            dict["neighborhood_image_id"] = neighborhood_image_id!
+        }
+        
         
         return dict
+    }
+}
+
+
+struct NeighborhoodImage:Codable {
+    var uid:Int
+    var title:String?
+    var imageUrl:String
+    
+    enum CodingKeys: String, CodingKey {
+        case uid = "id"
+        case title
+        case imageUrl = "image_url"
     }
 }

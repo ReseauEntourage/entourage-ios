@@ -270,10 +270,7 @@ struct UserService {
                 let decoder = JSONDecoder()
                 
                 if let _jsonUser = json["user"] as? [String:AnyObject], let dataUser = try? JSONSerialization.data(withJSONObject: _jsonUser) {
-                    Logger.print("***** json user ? \(_jsonUser)")
                     user = try decoder.decode(User.self, from: dataUser)
-                    Logger.print("***** json user role ? \(user?.roles)")
-                    Logger.print("***** json user interests ? \(user?.interests)")
                 }
                 isFirstLogin = json["first_sign_in"] as? Bool ?? false
             }

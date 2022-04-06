@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PoiService {
+struct PoiService:ParsingDataCodable {
 
     static func getPois(params:[String:String], completion: @escaping (_ pois:[MapPoi]?, _ error:EntourageNetworkError?) -> Void) {
         
@@ -24,7 +24,7 @@ struct PoiService {
                 return
             }
             
-            let pois = self.parseDataPois(data: data)
+            let pois:[MapPoi]? = self.parseDatas(data: data,key: "pois")
             DispatchQueue.main.async { completion(pois,nil) }
         }
     }
@@ -43,48 +43,8 @@ struct PoiService {
                 return
             }
             
-            let poi = self.parseDataPoi(data: data)
+            let poi:MapPoi? = self.parseData(data: data,key: "poi")
             DispatchQueue.main.async { completion(poi,nil) }
         }
-    }
-    
-    //MARK: - Parsing Assos -
-    static func parseDataPois(data:Data) -> [MapPoi] {
-        var pois = [MapPoi]()
-        
-        do {
-            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let _jsonPois = json["pois"] as? [[String:AnyObject]] {
-                let decoder = JSONDecoder()
-                for jsonPoi in _jsonPois {
-                    if let dataPoi = try? JSONSerialization.data(withJSONObject: jsonPoi) {
-                        let poi = try decoder.decode(MapPoi.self, from:dataPoi)
-                        pois.append(poi)
-                    }
-                }
-            }
-        }
-        catch {
-            Logger.print("Error parsing pois \(error)")
-        }
-        return pois
-    }
-    
-    static func parseDataPoi(data:Data) -> MapPoi {
-        var poi = MapPoi()
-        
-        do {
-            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let _jsonPoi = json["poi"] as? [String:AnyObject] {
-                let decoder = JSONDecoder()
-                
-                if let dataPoi = try? JSONSerialization.data(withJSONObject: _jsonPoi) {
-                    let _poi = try decoder.decode(MapPoi.self, from:dataPoi)
-                    poi = _poi
-                }
-            }
-        }
-        catch {
-            Logger.print("Error parsing pois \(error)")
-        }
-        return poi
     }
 }

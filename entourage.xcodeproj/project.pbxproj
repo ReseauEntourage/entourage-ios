@@ -92,6 +92,7 @@
 		02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */; };
 		02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9D27FC9748005A567B /* PartnerDetailTopCell.swift */; };
 		02B57DA027FC9757005A567B /* PartnerDetailNeedsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57D9F27FC9757005A567B /* PartnerDetailNeedsCell.swift */; };
+		02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57DA127FCB652005A567B /* ParsingDataCodable.swift */; };
 		02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */; };
 		02B7921E27F7385A003AFFB9 /* Neighborhood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7921D27F7385A003AFFB9 /* Neighborhood.swift */; };
 		02B7922127F73F6A003AFFB9 /* TempGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */; };
@@ -256,6 +257,7 @@
 		02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJTextViewPlaceholder.swift; sourceTree = "<group>"; };
 		02B57D9D27FC9748005A567B /* PartnerDetailTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerDetailTopCell.swift; sourceTree = "<group>"; };
 		02B57D9F27FC9757005A567B /* PartnerDetailNeedsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerDetailNeedsCell.swift; sourceTree = "<group>"; };
+		02B57DA127FCB652005A567B /* ParsingDataCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingDataCodable.swift; sourceTree = "<group>"; };
 		02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodService.swift; sourceTree = "<group>"; };
 		02B7921D27F7385A003AFFB9 /* Neighborhood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neighborhood.swift; sourceTree = "<group>"; };
 		02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempGroupMainViewController.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				02C91A22278F07D900305E0B /* Endpoints.swift */,
 				0262997A2790815000D84A6A /* APIKeys.swift */,
 				02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */,
+				02B57DA127FCB652005A567B /* ParsingDataCodable.swift */,
 			);
 			path = "Network Managers";
 			sourceTree = "<group>";
@@ -1032,6 +1035,7 @@
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
 				02E0098927E33DD200BB23CA /* WebLinkManager.swift in Sources */,
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,
+				02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */,
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
 				021318AD27DF55D400B0F1BD /* MainHomeViewController.swift in Sources */,
 				029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */,
