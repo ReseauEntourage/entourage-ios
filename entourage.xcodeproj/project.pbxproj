@@ -83,6 +83,7 @@
 		029E307C27DB5EF300B12357 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029E307A27DB5EF300B12357 /* GoogleService-Info.plist */; };
 		029E307F27DB60D300B12357 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 029E307E27DB60D300B12357 /* FirebaseAnalytics */; };
 		029F690E27D905F5003D1E39 /* MainUserInfosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F690D27D905F5003D1E39 /* MainUserInfosCell.swift */; };
+		02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3DD2E27FD92600060EC2E /* MJDayMonthPicker.swift */; };
 		02B37825279B06F600B204EF /* Others.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B37824279B06F600B204EF /* Others.storyboard */; };
 		02B37828279B072C00B204EF /* SharingEntourageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B37826279B072C00B204EF /* SharingEntourageTableViewCell.swift */; };
 		02B37829279B072C00B204EF /* ShareEntourageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B37827279B072C00B204EF /* ShareEntourageViewController.swift */; };
@@ -248,6 +249,7 @@
 		029E307927DB5EF300B12357 /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
 		029E307A27DB5EF300B12357 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		029F690D27D905F5003D1E39 /* MainUserInfosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserInfosCell.swift; sourceTree = "<group>"; };
+		02A3DD2E27FD92600060EC2E /* MJDayMonthPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJDayMonthPicker.swift; sourceTree = "<group>"; };
 		02B37824279B06F600B204EF /* Others.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Others.storyboard; sourceTree = "<group>"; };
 		02B37826279B072C00B204EF /* SharingEntourageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingEntourageTableViewCell.swift; sourceTree = "<group>"; };
 		02B37827279B072C00B204EF /* ShareEntourageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEntourageViewController.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 				029BD4F427EDC44F00AE67AF /* MJNavBackView.swift */,
 				029BD4F627EDC45E00AE67AF /* MJNavBackView.xib */,
 				02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */,
+				02A3DD2E27FD92600060EC2E /* MJDayMonthPicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1054,6 +1057,7 @@
 				02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */,
 				023D89C327DFA39A008C6A58 /* ParamsInfoCell.swift in Sources */,
 				02DDF1D727D9117700EE22DE /* ProgressRadiusView.swift in Sources */,
+				02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */,
 				021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */,
 				022744732795C0FB005600A1 /* Partner.swift in Sources */,
 				02E069EB279184B3006DB1B6 /* OTOnboardingAssoFillViewController.swift in Sources */,

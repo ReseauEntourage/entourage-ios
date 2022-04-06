@@ -56,6 +56,8 @@ class EditProfileInfosCell: UITableViewCell {
     let bioColor = UIColor.black
     let maxCharsBioString = "/200"
     
+    var pickerDayDateView = MJDayMonthPicker()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -93,7 +95,7 @@ class EditProfileInfosCell: UITableViewCell {
         ui_tf_lastname.placeholder = "editUserPlaceholderLastname".localized
         setupTextFieldStyle(ui_tf_lastname)
         ui_tf_birthday.placeholder = "editUserPlaceholderBirthday".localized
-        setupTextFieldStyle(ui_tf_birthday)
+        setupPickerDayMonthView()
         ui_tf_email.placeholder = "editUserPlaceholderEMail".localized
         setupTextFieldStyle(ui_tf_email)
         
@@ -185,6 +187,33 @@ class EditProfileInfosCell: UITableViewCell {
     @IBAction func action_change_location(_ sender: Any) {
         delegate?.showSelectLocation()
     }
+    
+    func setupPickerDayMonthView(){
+        let toolbar = UIToolbar();
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "validate".localized, style: .plain, target: self, action: #selector(donedatePicker));
+        doneButton.tintColor = .appOrange
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "cancel".localized, style: .plain, target: self, action: #selector(cancelDatePicker))
+        cancelButton.tintColor = .appOrangeLight
+        
+        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        toolbar.backgroundColor = .appWhite246
+        
+        ui_tf_birthday.inputAccessoryView = toolbar
+        ui_tf_birthday.inputView = pickerDayDateView
+    }
+    
+    @objc func donedatePicker(){
+        ui_tf_birthday.text = String.init(format: "%@-%@", pickerDayDateView.getDateSelected().day,pickerDayDateView.getDateSelected().month)
+        delegate?.updateBirthDate(birthdate: ui_tf_birthday.text)
+        self.contentView.endEditing(true)
+    }
+    
+    @objc func cancelDatePicker(){
+        delegate?.updateBirthDate(birthdate: ui_tf_birthday.text)
+        self.contentView.endEditing(true)
+    }
 }
 
 //MARK: - MJCustomSliderDelegate -
@@ -228,23 +257,11 @@ extension EditProfileInfosCell: UITextFieldDelegate {
             delegate?.updateFirstname(firstname: textField.text)
         case ui_tf_lastname:
             delegate?.updateLastname(lastname: textField.text)
-        case ui_tf_birthday:
-            delegate?.updateBirthDate(birthdate: textField.text)
         case ui_tf_email:
             delegate?.updateEmail(email: textField.text)
         default:
             break
         }
-        return true
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == ui_tf_birthday {
-            let charSet = NSCharacterSet(charactersIn:"0123456789-").inverted
-            let strValidation = string.rangeOfCharacter(from: charSet) == nil
-            return strValidation
-        }
-        
         return true
     }
 }

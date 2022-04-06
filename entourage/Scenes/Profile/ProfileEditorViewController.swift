@@ -159,7 +159,7 @@ class ProfileEditorViewController: UIViewController {
                 return
             }
         }
-        else {
+        else if !(currentUser?.birthday?.count ?? 0 > 0) {
             newUser?.birthday = ""
         }
         
