@@ -52,7 +52,7 @@
 		02681952278DF6CA00A98A4A /* OTCustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02681951278DF6CA00A98A4A /* OTCustomTextfield.swift */; };
 		0268197D278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02681978278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift */; };
 		0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02681979278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift */; };
-		0268197F278DF72D00A98A4A /* OTCustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268197A278DF72D00A98A4A /* OTCustomPageControl.swift */; };
+		0268197F278DF72D00A98A4A /* MJCustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268197A278DF72D00A98A4A /* MJCustomPageControl.swift */; };
 		02681980278DF72D00A98A4A /* OTCarrouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268197B278DF72D00A98A4A /* OTCarrouselLayout.swift */; };
 		02681981278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268197C278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift */; };
 		026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 026819A6278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m */; };
@@ -219,7 +219,7 @@
 		02681951278DF6CA00A98A4A /* OTCustomTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTCustomTextfield.swift; sourceTree = "<group>"; };
 		02681978278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPreOnboardingV2ChoiceViewController.swift; sourceTree = "<group>"; };
 		02681979278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPre_OnboardCollectionViewCell.swift; sourceTree = "<group>"; };
-		0268197A278DF72D00A98A4A /* OTCustomPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTCustomPageControl.swift; sourceTree = "<group>"; };
+		0268197A278DF72D00A98A4A /* MJCustomPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJCustomPageControl.swift; sourceTree = "<group>"; };
 		0268197B278DF72D00A98A4A /* OTCarrouselLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTCarrouselLayout.swift; sourceTree = "<group>"; };
 		0268197C278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPreOnboardingV2ViewController.swift; sourceTree = "<group>"; };
 		026819A5278DFB6100A98A4A /* entourage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "entourage-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -530,6 +530,7 @@
 		0268194D278DF6A700A98A4A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0268197A278DF72D00A98A4A /* MJCustomPageControl.swift */,
 				025E917727F36A6E00D4A7A8 /* Shared Cells */,
 				02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */,
 				02CCE68B27D7B52900D6976C /* TagListView */,
@@ -574,7 +575,6 @@
 			children = (
 				02681978278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift */,
 				02681979278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift */,
-				0268197A278DF72D00A98A4A /* OTCustomPageControl.swift */,
 				0268197B278DF72D00A98A4A /* OTCarrouselLayout.swift */,
 				0268197C278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift */,
 			);
@@ -1084,7 +1084,7 @@
 				02846CBE27EC86F100D85ADA /* ProfileEditInterestsViewController.swift in Sources */,
 				02CCE68827D7B51E00D6976C /* TagListView.swift in Sources */,
 				0220580927FB087F00531720 /* BaseFullScreenNavViewController.swift in Sources */,
-				0268197F278DF72D00A98A4A /* OTCustomPageControl.swift in Sources */,
+				0268197F278DF72D00A98A4A /* MJCustomPageControl.swift in Sources */,
 				02C0A0E2278EDCC400B0C646 /* UserService.swift in Sources */,
 				02F527992799A1F300929431 /* GuideDelegates.swift in Sources */,
 				02E069ED279184B3006DB1B6 /* OTOnboardingNamesViewController.swift in Sources */,

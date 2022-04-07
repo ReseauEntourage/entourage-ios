@@ -87,4 +87,12 @@ extension UIColor {
         return UIColor(named: "green_logout") ?? .red
     }
     
+    static var appGrisSombre: UIColor {
+        return UIColor(named: "gris_sombre") ?? .red
+    }
+    static var appGrisSombre40: UIColor {
+        return UIColor(named: "gris_sombre_40") ?? .red
+    }
+    
+    
 }

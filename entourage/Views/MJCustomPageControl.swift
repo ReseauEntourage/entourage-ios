@@ -9,10 +9,22 @@
 import UIKit
 
 @IBDesignable
-class OTCustomPageControl:  UIPageControl {
+class MJCustomPageControl:  UIPageControl {
     
     @IBInspectable var currentPageDotImage: UIImage?
     @IBInspectable var otherPageDotImage: UIImage?
+        
+    @IBInspectable private var currentColor:UIColor = .appOrange {
+        didSet {
+            updateDots()
+        }
+    }
+    
+    @IBInspectable private var otherColor:UIColor = .lightGray {
+        didSet {
+            updateDots()
+        }
+    }
     
     override var numberOfPages: Int {
         didSet {
@@ -28,14 +40,30 @@ class OTCustomPageControl:  UIPageControl {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        if #available(iOS 14.0, *) {
+            pageIndicatorTintColor = otherColor
+            currentPageIndicatorTintColor = currentColor
+            return
+        }
         pageIndicatorTintColor = .clear
         currentPageIndicatorTintColor = .clear
         clipsToBounds = false
     }
     
+    func setColorsDots(colorSelected:UIColor, colorUnselected:UIColor) {
+        currentColor = colorSelected
+        otherColor = colorUnselected
+    }
+    
     private func updateDots() {
+        var dotViews: [UIView] = subviews
+        if #available(iOS 14, *) {
+            let pageControl = dotViews[0]
+            let dotContainerView = pageControl.subviews[0]
+            dotViews = dotContainerView.subviews
+        }
         
-        for (index, subview) in subviews.enumerated() {
+        for (index, subview) in dotViews.enumerated() {
             let imageView: UIImageView
             if let existingImageview = getImageView(forSubview: subview) {
                 imageView = existingImageview
@@ -57,7 +85,7 @@ class OTCustomPageControl:  UIPageControl {
         else {
             let view = view.subviews.first { (view) -> Bool in
                 return view is UIImageView
-                } as? UIImageView
+            } as? UIImageView
             
             return view
         }

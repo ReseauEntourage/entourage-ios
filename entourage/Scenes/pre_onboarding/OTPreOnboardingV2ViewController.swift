@@ -10,7 +10,7 @@ import UIKit
 
 class OTPreOnboardingV2ViewController: UIViewController {
     
-    @IBOutlet weak var ui_customPAgeControl: OTCustomPageControl!
+    @IBOutlet weak var ui_customPAgeControl: MJCustomPageControl!
     @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_label_description: UILabel!
     @IBOutlet weak var ui_button_next: UIButton!
