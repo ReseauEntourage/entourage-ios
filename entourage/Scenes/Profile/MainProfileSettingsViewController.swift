@@ -76,10 +76,13 @@ class MainProfileSettingsViewController: UIViewController {
         ui_label_title.textColor = ApplicationTheme.getFontTitle().color
         
         ui_label_edit.text = "modify".localized
-        ui_label_edit.font = ApplicationTheme.getFontSectionActif().font
-        ui_label_edit.textColor = ApplicationTheme.getFontSectionActif().color
+        ui_label_edit.font = ApplicationTheme.getFontCourantBoldOrangeClair().font
+        ui_label_edit.textColor = ApplicationTheme.getFontCourantBoldOrange().color
         ui_view_button_edit_profile.layer.cornerRadius = radius_button_edit
         ui_view_button_edit_profile.backgroundColor = .white
+        
+        ui_label_profile.font = ApplicationTheme.getFontCourantBoldOrange().font
+        ui_label_profile.textColor = ApplicationTheme.getFontCourantBoldOrange().color
         
         ui_label_profile.text = "myProfileButton".localized
         ui_label_params.text = "myParamsButton".localized
@@ -147,14 +150,14 @@ class MainProfileSettingsViewController: UIViewController {
     //MARK: - tab bar
     func changeTabSelection() {
         if isProfileSelected {
-            ui_label_profile.font = ApplicationTheme.getFontSectionActif().font
-            ui_label_params.font = ApplicationTheme.getFontSectionInactif().font
+            ui_label_profile.font = ApplicationTheme.getFontCourantBoldOrange().font
+            ui_label_params.font = ApplicationTheme.getFontCourantBoldOrangeClair().font
             ui_view_indicator_profile.isHidden = false
             ui_view_indicator_params.isHidden = true
         }
         else {
-            ui_label_profile.font = ApplicationTheme.getFontSectionInactif().font
-            ui_label_params.font = ApplicationTheme.getFontSectionActif().font
+            ui_label_profile.font = ApplicationTheme.getFontCourantBoldOrangeClair().font
+            ui_label_params.font = ApplicationTheme.getFontCourantBoldOrange().font
             ui_view_indicator_profile.isHidden = true
             ui_view_indicator_params.isHidden = false
         }

@@ -15,7 +15,7 @@ extension UITextField {
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         //Custom font and color
         let fontColor = UIColor.appOrange
-        let fontName = ApplicationTheme.getFontTextRegular().font
+        let fontName = ApplicationTheme.getFontCourantRegularNoir().font
         buttonValidate.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: fontColor, NSAttributedString.Key.font: fontName], for: .normal)
         toolbar.setItems([flexSpace, buttonValidate], animated: false)
         toolbar.sizeToFit()
@@ -31,7 +31,7 @@ extension UITextView {
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         //Custom font and color
         let fontColor = UIColor.appOrange
-        let fontName = ApplicationTheme.getFontTextRegular().font
+        let fontName = ApplicationTheme.getFontCourantRegularNoir().font
         buttonValidate.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: fontColor, NSAttributedString.Key.font: fontName], for: .normal)
         toolbar.setItems([flexSpace, buttonValidate], animated: false)
         toolbar.sizeToFit()

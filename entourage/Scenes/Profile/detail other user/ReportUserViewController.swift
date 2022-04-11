@@ -24,8 +24,8 @@ class ReportUserViewController: UIViewController {
         
         tagsignals = Metadatas.sharedInstance.tagsSignals
         
-        self.ui_lbl_info.font = ApplicationTheme.getFontTextRegular().font
-        self.ui_lbl_info.textColor = ApplicationTheme.getFontTextRegular().color
+        self.ui_lbl_info.font = ApplicationTheme.getFontCourantRegularNoir().font
+        self.ui_lbl_info.textColor = ApplicationTheme.getFontCourantRegularNoir().color
         ui_lbl_info.text = "report_user_description".localized
         
         ui_lbl_mandatory.font = ApplicationTheme.getFontLegend().font

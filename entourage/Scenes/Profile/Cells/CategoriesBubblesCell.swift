@@ -18,8 +18,8 @@ class CategoriesBubblesCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        ui_title?.textColor = ApplicationTheme.getFontH2().color
-        ui_title?.font = ApplicationTheme.getFontH2().font
+        ui_title?.textColor = ApplicationTheme.getFontH2Noir().color
+        ui_title?.font = ApplicationTheme.getFontH2Noir().font
         ui_title?.text = "detail_user_his_interests".localized
         ui_taglist_view.backgroundColor = .white
         ui_taglist_view.tagBackgroundColor = ApplicationTheme.getFontCategoryBubble().color

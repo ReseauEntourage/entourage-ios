@@ -25,8 +25,8 @@ class ProfileEditInterestsViewController: BasePopViewController {
         ui_top_view.populateView(title: "editUserInterestsTitle".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
         
 
-        self.ui_lbl_info.font = ApplicationTheme.getFontTextRegular().font
-        self.ui_lbl_info.textColor = ApplicationTheme.getFontTextRegular().color
+        self.ui_lbl_info.font = ApplicationTheme.getFontCourantRegularNoir().font
+        self.ui_lbl_info.textColor = ApplicationTheme.getFontCourantRegularNoir().color
         
         ui_lbl_info.text = "editUserInterestsInfo".localized
         

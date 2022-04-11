@@ -28,8 +28,8 @@ class MJAlertController: UIViewController {
     var alertMessage:String? = nil
     
     //Custom UI
-    var titleStyle = ApplicationTheme.getFontSectionActif()
-    var messageStyle = ApplicationTheme.getFontTextRegular()
+    var titleStyle = ApplicationTheme.getFontCourantBoldOrange()
+    var messageStyle = ApplicationTheme.getFontCourantRegularNoir()
     var mainviewBGColor = UIColor.white
     var mainviewRadius:CGFloat = 35
     var isButtonCloseHidden = false

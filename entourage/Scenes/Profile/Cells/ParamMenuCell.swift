@@ -47,7 +47,7 @@ class ParamMenuCell: UITableViewCell {
         ui_title_logout.font = ApplicationTheme.getFontNunitoBold(size: 15)
         
         ui_title_suppress_account.textColor = .appOrange
-        ui_title_suppress_account.font = ApplicationTheme.getFontMontserrat14().font
+        ui_title_suppress_account.font = ApplicationTheme.getFontCourantBoldOrangeClair().font
         
         //MARK: - menu hidden for V8 -
         ui_view_notifs.isHidden = true
@@ -55,7 +55,7 @@ class ParamMenuCell: UITableViewCell {
     }
     
     private func setLabelTitle(label:UILabel) {
-        label.font = ApplicationTheme.getFontSportStyle().font
+        label.font = ApplicationTheme.getFontH2Noir().font
         label.textColor = .black
     }
     

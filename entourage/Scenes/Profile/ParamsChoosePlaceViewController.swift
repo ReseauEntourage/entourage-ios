@@ -43,23 +43,23 @@ class ParamsChoosePlaceViewController: BasePopViewController {
         ui_bt_address?.setTitle("profileEditLocationPlaceholder".localized, for: .normal)
         ui_label_info.text = "profileEditLocationLegend".localized
         
-        ui_label_description.font = ApplicationTheme.getFontTextRegular().font
-        ui_label_description.textColor = ApplicationTheme.getFontTextRegular().color
+        ui_label_description.font = ApplicationTheme.getFontCourantRegularNoir().font
+        ui_label_description.textColor = ApplicationTheme.getFontCourantRegularNoir().color
         
-        ui_title_add_place.font = ApplicationTheme.getFontSportStyle().font
-        ui_title_add_place.textColor = ApplicationTheme.getFontSportStyle().color
+        ui_title_add_place.font = ApplicationTheme.getFontQuickSandBold(size: 14)
+        ui_title_add_place.textColor = .appOrange
         
-        ui_label_info.font = ApplicationTheme.getFontH6().font
-        ui_label_info.textColor = ApplicationTheme.getFontH6().color
+        ui_label_info.font = ApplicationTheme.getFontLight13Orange().font
+        ui_label_info.textColor = ApplicationTheme.getFontLight13Orange().color
         
-        ui_bt_address.titleLabel?.font = ApplicationTheme.getFontTextRegular().font
-        ui_bt_address.titleLabel?.textColor = ApplicationTheme.getFontTextRegular().color
+        ui_bt_address.titleLabel?.font = ApplicationTheme.getFontCourantRegularNoir().font
+        ui_bt_address.titleLabel?.textColor = ApplicationTheme.getFontCourantRegularNoir().color
         
         
         ui_bt_validate.layer.cornerRadius = ui_bt_validate.frame.height / 2
         ui_bt_validate.setTitle("validate".localized, for: .normal)
-        ui_bt_validate.titleLabel?.font = ApplicationTheme.getFontTextRegular(size: 18).font
-        ui_bt_validate.titleLabel?.textColor = ApplicationTheme.getFontTextRegular().color
+        ui_bt_validate.titleLabel?.font = ApplicationTheme.getFontCourantRegularNoir(size: 18).font
+        ui_bt_validate.titleLabel?.textColor = ApplicationTheme.getFontCourantRegularNoir().color
         
         ui_view_error.hide()
         

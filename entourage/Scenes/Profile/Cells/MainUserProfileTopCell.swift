@@ -39,13 +39,16 @@ class MainUserProfileTopCell: UITableViewCell {
         ui_iv_partner.layer.borderWidth = 1
         ui_iv_partner.layer.borderColor = UIColor.appOrange.cgColor
         
-        ui_label_role.font = ApplicationTheme.getFontH5().font
-        ui_label_partner.font = ApplicationTheme.getFontH5().font
+        ui_label_role.font = ApplicationTheme.getFontRegular13Orange().font
+        ui_label_partner.font = ApplicationTheme.getFontRegular13Orange().font
+        ui_label_role.textColor = ApplicationTheme.getFontRegular13Orange().color
+        ui_label_partner.textColor = ApplicationTheme.getFontRegular13Orange().color
         
-        ui_bio.font = ApplicationTheme.getFontTextItalic().font
-        ui_bio.textColor = ApplicationTheme.getFontTextItalic().color
-        ui_username.font = ApplicationTheme.getFontSubtitle().font
-        ui_username.textColor = ApplicationTheme.getFontSubtitle().color
+        ui_bio.font = ApplicationTheme.getFontCourantItalicNoir().font
+        ui_bio.textColor = ApplicationTheme.getFontCourantItalicNoir().color
+        
+//        ui_username.font = ApplicationTheme.getFontSubtitle().font
+//        ui_username.textColor = ApplicationTheme.getFontSubtitle().color
         
         
         ui_view_button_message?.layer.cornerRadius = (ui_view_button_message?.frame.height ?? 0 ) / 2

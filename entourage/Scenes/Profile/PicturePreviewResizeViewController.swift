@@ -30,8 +30,8 @@ class PicturePreviewResizeViewController: BasePopViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ui_label_description.font = ApplicationTheme.getFontTextRegular().font
-        ui_label_description.textColor = ApplicationTheme.getFontTextRegular().color
+        ui_label_description.font = ApplicationTheme.getFontCourantRegularNoir().font
+        ui_label_description.textColor = ApplicationTheme.getFontCourantRegularNoir().color
         ui_label_description.text = "description_move_photo".localized
         
         ui_bt_validate.setTitle("validate".localized, for: .normal)

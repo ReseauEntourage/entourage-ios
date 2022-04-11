@@ -37,64 +37,78 @@ struct ApplicationTheme {
     }
     
     //MARK: - Fonts with default color from Zeplin style guide -
-    static func getFontTitle(size:CGFloat = 24) -> MJTextFontColorStyle {
-        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: UIColor.white)
-    }
-    static func getFontTitleMontserrat(size:CGFloat = 20) -> MJTextFontColorStyle {
-        return MJTextFontColorStyle(font: getFontMontSerratBold(size: size), color: UIColor.black)
-    }
-    static func getFontSubtitle(size:CGFloat = 20) -> MJTextFontColorStyle {
-        return MJTextFontColorStyle(font: getFontNunitoSemiBold(size: size), color: UIColor.black)
-    }
-    static func getFontSectionActif(size:CGFloat = 15, color:UIColor = .appOrange) -> MJTextFontColorStyle {
-        return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: color)
-    }
-    static func getFontSectionInactif(size:CGFloat = 14) -> MJTextFontColorStyle {
-        return MJTextFontColorStyle(font: getFontNunitoSemiBold(size: size), color: UIColor.appOrangeLight)
-    }
-    
-    static func getFontPopTitle(size:CGFloat = 15) -> MJTextFontColorStyle {
-        return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: UIColor.black)
-    }
-    static func getFontTextItalic(size:CGFloat = 15) -> MJTextFontColorStyle {
+    static func getFontCourantItalicNoir(size:CGFloat = 15) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegularItalic(size: size), color: UIColor.black)
     }
-    static func getFontTextRegular(size:CGFloat = 15,color:UIColor = .black) -> MJTextFontColorStyle {
+    static func getFontCourantRegularNoir(size:CGFloat = 15,color:UIColor = .black) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
     }
+    static func getFontCourantRegularOrange(size:CGFloat = 15,color:UIColor = .appOrange) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
+    }
+    static func getFontCourantBoldOrange(size:CGFloat = 15) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: .appOrange)
+    }
+    static func getFontCourantBoldOrangeClair(size:CGFloat = 15) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: .appOrangeLight)
+    }
+    static func getFontCourantBoldBlanc(size:CGFloat = 15) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: .white)
+    }
+    static func getFontCourantBoldNoir(size:CGFloat = 15) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: .black)
+    }
     
-    static func getFontSportStyle(size:CGFloat = 14) -> MJTextFontColorStyle {
-        return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: UIColor.appOrange)
+    
+    static func getFontH1Blanc(size:CGFloat = 24) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: .white)
     }
-    static func getFontMontserrat14(size:CGFloat = 14) -> MJTextFontColorStyle {
-        return MJTextFontColorStyle(font: getFontMontSerrat(size: size), color: UIColor.black)
+    static func getFontH1Noir(size:CGFloat = 24) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: .black)
     }
-    static func getFontH2(size:CGFloat = 15) -> MJTextFontColorStyle {
+    static func getFontH2Noir(size:CGFloat = 15) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: UIColor.black)
     }
-    static func getFontH5(size:CGFloat = 13) -> MJTextFontColorStyle {
+    
+    
+    static func getFontRegular13Orange(size:CGFloat = 13) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: UIColor.appOrange)
     }
-    static func getFontH6(size:CGFloat = 13) -> MJTextFontColorStyle {
+    static func getFontLight13Orange(size:CGFloat = 13) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoLight(size: size), color: UIColor.appOrange)
     }
     static func getFontCategoryBubble(size:CGFloat = 13) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoSemiBold(size: size), color: UIColor.appOrangeLight_50)
     }
+    static func getFontMessageErreur(size:CGFloat = 13) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoLight(size: size), color: .rougeErreur)
+    }
     
     static func getFontLegend(size:CGFloat = 13) -> MJTextFontColorStyle {
-        return MJTextFontColorStyle(font: getFontNunitoLight(size: size), color: UIColor.black)
+        return MJTextFontColorStyle(font: getFontNunitoLight(size: size), color: .black)
+    }
+    static func getFontLegendGris(size:CGFloat = 13) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoLight(size: size), color: .appGris112)
     }
     
     static func getFontChampDefault(size:CGFloat = 13, color:UIColor = .appGrisSombre40) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
     }
+    static func getFontChampInput(size:CGFloat = 13, color:UIColor = .black) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
+    }
     
+    static func getFontLien(size:CGFloat = 14,color:UIColor = .appOrange) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
+    }
+   
     static func getFontBoutonBlanc(size:CGFloat = 15, color:UIColor = .white) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: color)
     }
-    
     static func getFontBoutonOrange(size:CGFloat = 15, color:UIColor = .appOrange) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: color)
+    }
+    static func getFontBoutonOrange40(size:CGFloat = 15, color:UIColor = .appOrangeLight) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: color)
     }
     
@@ -114,12 +128,12 @@ struct ApplicationTheme {
     static func getFontNunitoRegularItalic(size:CGFloat) -> UIFont {
         return UIFont(name:"NunitoSans-Italic", size: size) ?? UIFont.systemFont(ofSize: size)
     }
-    static func getFontMontSerrat(size:CGFloat) -> UIFont {
-        return UIFont(name:"Montserrat-Regular", size: size) ?? UIFont.systemFont(ofSize: size)
-    }
-    static func getFontMontSerratBold(size:CGFloat) -> UIFont {
-        return UIFont(name:"Montserrat-Bold", size: size) ?? UIFont.systemFont(ofSize: size)
-    }
+//    static func getFontMontSerrat(size:CGFloat) -> UIFont {
+//        return UIFont(name:"Montserrat-Regular", size: size) ?? UIFont.systemFont(ofSize: size)
+//    }
+//    static func getFontMontSerratBold(size:CGFloat) -> UIFont {
+//        return UIFont(name:"Montserrat-Bold", size: size) ?? UIFont.systemFont(ofSize: size)
+//    }
     static func getFontQuickSandBold(size:CGFloat) -> UIFont {
         return UIFont(name:"Quicksand-Bold", size: size) ?? UIFont.systemFont(ofSize: size)
     }

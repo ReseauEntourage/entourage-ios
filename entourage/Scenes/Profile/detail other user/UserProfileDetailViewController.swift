@@ -149,9 +149,9 @@ extension UserProfileDetailViewController: MainUserProfileTopCellDelegate {
         //TODO: send message à faire
         
         let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "fermer".localized, titleStyle: ApplicationTheme.getFontSectionActif(color:.white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonAccept = MJAlertButtonType(title: "fermer".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "W I P".localized, message: "Pas encore implémenté ;)".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontSectionActif(), messageStyle: ApplicationTheme.getFontTextRegular(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: self.navigationController)
+        customAlert.configureAlert(alertTitle: "W I P".localized, message: "Pas encore implémenté ;)".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: self.navigationController)
         
         customAlert.alertTagName = .None
         //  customAlert.delegate = self

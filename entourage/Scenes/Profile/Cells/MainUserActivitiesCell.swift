@@ -29,12 +29,12 @@ class MainUserActivitiesCell: UITableViewCell {
         addShadowAndRadius(customView: ui_view_events)
         addShadowAndRadius(customView: ui_view_actions)
         
-        ui_title?.font = ApplicationTheme.getFontH2().font
-        ui_title?.textColor = ApplicationTheme.getFontH2().color
+        ui_title?.font = ApplicationTheme.getFontH2Noir().font
+        ui_title?.textColor = ApplicationTheme.getFontH2Noir().color
         ui_title?.text = "mainUserTitleActivity".localized
         
-        ui_title_other_user?.font = ApplicationTheme.getFontH2().font
-        ui_title_other_user?.textColor = ApplicationTheme.getFontH2().color
+        ui_title_other_user?.font = ApplicationTheme.getFontH2Noir().font
+        ui_title_other_user?.textColor = ApplicationTheme.getFontH2Noir().color
         ui_title_other_user?.text = "detail_user_his_activity".localized
         
         ui_actions_title.text = "mainUserTitleActions".localized

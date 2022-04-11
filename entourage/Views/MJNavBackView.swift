@@ -12,9 +12,6 @@ class MJNavBackView: UIView {
     @IBOutlet private weak var ui_view_back: UIView!
     @IBOutlet private weak var ui_view_close: UIView!
     
-    
-    
-    
     @IBOutlet private weak var ui_content_view: UIView!
     
     @IBOutlet private var ui_titles: [UILabel]!
@@ -24,6 +21,8 @@ class MJNavBackView: UIView {
     @IBOutlet private weak var ui_image_back: UIImageView!
     
     @IBOutlet private weak var ui_image_close: UIImageView!
+    
+    @IBOutlet private weak var ui_constraint_left_button_back: NSLayoutConstraint!
     
     weak var delegate:MJNavBackViewDelegate? = nil
     
@@ -49,29 +48,11 @@ class MJNavBackView: UIView {
     }
     
     func populateView(title:String,titleFont:UIFont, titleColor:UIColor,delegate:MJNavBackViewDelegate,showSeparator:Bool = true,backgroundColor:UIColor? = nil,cornerRadius:CGFloat? = nil, isClose:Bool = false) {
-        for _uititle in ui_titles {
-            _uititle.text = title
-            _uititle.font = titleFont
-            _uititle.textColor = titleColor
-        }
-        
-        for _view in ui_views_bottom_separator {
-            _view.isHidden = !showSeparator
-        }
-        
-        if let backgroundColor = backgroundColor {
-            ui_content_view.backgroundColor = backgroundColor
-        }
-        
-        self.delegate = delegate
-        
-        ui_view_close.isHidden = !isClose
-        ui_view_back.isHidden = isClose
-        
-        addTopRadius(cornerRadius: cornerRadius)
+             
+        self.populateCustom(title: title, titleFont: titleFont, titleColor: titleColor, imageName: nil, backgroundColor: backgroundColor, delegate: delegate, showSeparator: showSeparator, cornerRadius: cornerRadius, isClose: isClose)
     }
     
-    func populateCustom(title:String? = nil, titleFont:UIFont? = nil, titleColor:UIColor? = nil, imageName:String?, backgroundColor:UIColor?, delegate:MJNavBackViewDelegate, showSeparator:Bool = true, cornerRadius:CGFloat? = nil, isClose:Bool = false) {
+    func populateCustom(title:String? = nil, titleFont:UIFont? = nil, titleColor:UIColor? = nil, imageName:String?, backgroundColor:UIColor?, delegate:MJNavBackViewDelegate, showSeparator:Bool = true, cornerRadius:CGFloat? = nil, isClose:Bool = false, marginLeftButton:CGFloat? = nil) {
         
         ui_view_close.isHidden = !isClose
         ui_view_back.isHidden = isClose
@@ -79,9 +60,11 @@ class MJNavBackView: UIView {
         if let imageName = imageName {
             ui_image_back.image = UIImage.init(named: imageName)
         }
+        
         if let backgroundColor = backgroundColor {
             ui_content_view.backgroundColor = backgroundColor
         }
+        
         for _uititle in ui_titles {
             _uititle.text = title ?? ""
             if let titleFont = titleFont {
@@ -99,6 +82,10 @@ class MJNavBackView: UIView {
         addTopRadius(cornerRadius: cornerRadius)
         
         self.delegate = delegate
+        
+        if let marginLeftButton = marginLeftButton {
+            self.ui_constraint_left_button_back.constant = marginLeftButton
+        }
     }
     
     @objc private func goBack() {

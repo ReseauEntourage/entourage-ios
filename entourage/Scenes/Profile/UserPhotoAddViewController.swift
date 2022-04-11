@@ -70,8 +70,8 @@ class UserPhotoAddViewController: BasePopViewController {
             ui_bt_import_gallery.layer.borderWidth = 2
         }
         
-        ui_label_description.font = ApplicationTheme.getFontTextRegular().font
-        ui_label_description.textColor = ApplicationTheme.getFontTextRegular().color
+        ui_label_description.font = ApplicationTheme.getFontCourantRegularNoir().font
+        ui_label_description.textColor = ApplicationTheme.getFontCourantRegularNoir().color
         
         ui_bt_take_photo.setTitle("take_photo".localized, for: .normal)
         ui_bt_import_gallery.setTitle("take_gallery".localized, for: .normal)

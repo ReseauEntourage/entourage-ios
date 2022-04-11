@@ -43,8 +43,8 @@ class PartnerDetailInfoCell: UITableViewCell {
         ui_title_web.text = "title_asso_website".localized
         ui_title_postal.text = "title_asso_address_big".localized
         ui_title_infos.text = "title_asso_information".localized
-        ui_title_infos.font = ApplicationTheme.getFontH2().font
-        ui_title_infos.textColor = ApplicationTheme.getFontH2().color
+        ui_title_infos.font = ApplicationTheme.getFontH2Noir().font
+        ui_title_infos.textColor = ApplicationTheme.getFontH2Noir().color
         
         setupInfoLabel()
         setupTitleLabel()
@@ -59,8 +59,8 @@ class PartnerDetailInfoCell: UITableViewCell {
     
     private func setupInfoLabel() {
         for label in infos {
-            label.font = ApplicationTheme.getFontTextRegular().font
-            label.textColor = ApplicationTheme.getFontTextRegular().color
+            label.font = ApplicationTheme.getFontCourantRegularNoir().font
+            label.textColor = ApplicationTheme.getFontCourantRegularNoir().color
         }
     }
     

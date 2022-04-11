@@ -54,13 +54,13 @@ class MainUserInfosCell: UITableViewCell {
     }
     
     private func setupLabels() {
-        ui_title.font = ApplicationTheme.getFontH2().font
-        ui_title.textColor = ApplicationTheme.getFontH2().color
+        ui_title.font = ApplicationTheme.getFontH2Noir().font
+        ui_title.textColor = ApplicationTheme.getFontH2Noir().color
         
-        ui_radius_title.font = ApplicationTheme.getFontH6().font
-        ui_radius_title.textColor = ApplicationTheme.getFontH6().color
-        ui_radius_desc.font = ApplicationTheme.getFontH6().font
-        ui_radius_desc.textColor = ApplicationTheme.getFontH6().color
+        ui_radius_title.font = ApplicationTheme.getFontLight13Orange().font
+        ui_radius_title.textColor = ApplicationTheme.getFontLight13Orange().color
+        ui_radius_desc.font = ApplicationTheme.getFontLight13Orange().font
+        ui_radius_desc.textColor = ApplicationTheme.getFontLight13Orange().color
         
         setLabelTitle(label: ui_birth_title)
         setLabelTitle(label: ui_phone_title)
@@ -76,13 +76,13 @@ class MainUserInfosCell: UITableViewCell {
     }
     
     private func setLabelTitle(label:UILabel) {
-        label.font = ApplicationTheme.getFontH5().font
-        label.textColor = ApplicationTheme.getFontH5().color
+        label.font = ApplicationTheme.getFontRegular13Orange().font
+        label.textColor = ApplicationTheme.getFontRegular13Orange().color
     }
     
     private func setLabelInfo(label:UILabel) {
-        label.font = ApplicationTheme.getFontTextRegular().font
-        label.textColor = ApplicationTheme.getFontTextRegular().color
+        label.font = ApplicationTheme.getFontCourantRegularNoir().font
+        label.textColor = ApplicationTheme.getFontCourantRegularNoir().color
     }
     
     func populateCell(user:User) {

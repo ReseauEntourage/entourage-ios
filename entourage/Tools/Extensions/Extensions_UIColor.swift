@@ -93,6 +93,11 @@ extension UIColor {
     static var appGrisSombre40: UIColor {
         return UIColor(named: "gris_sombre_40") ?? .red
     }
-    
+    static var appGris112: UIColor {
+        return UIColor(named: "gris_112") ?? .red
+    }
+    static var rougeErreur: UIColor {
+        return UIColor(named: "rouge_erreur") ?? .red
+    }
     
 }

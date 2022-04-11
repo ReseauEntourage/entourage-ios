@@ -23,8 +23,8 @@ class PartnerDetailNeedsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        ui_title_needs.textColor = ApplicationTheme.getFontH2().color
-        ui_title_needs.font = ApplicationTheme.getFontH2().font
+        ui_title_needs.textColor = ApplicationTheme.getFontH2Noir().color
+        ui_title_needs.font = ApplicationTheme.getFontH2Noir().font
         ui_title_needs.text = "title_asso_needs".localized
         
         ui_title_needs_donation.font = ApplicationTheme.getFontNunitoRegular(size: 13)

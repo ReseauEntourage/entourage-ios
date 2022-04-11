@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
             <connections>
+                <outlet property="ui_constraint_left_button_back" destination="oCj-aD-Z9W" id="f3P-Fv-RQ8"/>
                 <outlet property="ui_content_view" destination="iN0-l3-epB" id="4tT-kx-niu"/>
                 <outlet property="ui_image_back" destination="Fjg-oT-Srm" id="NzR-Iv-Mvy"/>
                 <outlet property="ui_image_close" destination="6zt-Xp-md9" id="Rh7-kg-7kM"/>

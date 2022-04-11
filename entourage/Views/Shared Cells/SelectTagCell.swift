@@ -16,8 +16,8 @@ class SelectTagCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        ui_title.textColor = ApplicationTheme.getFontPopTitle().color
-        ui_title.font = ApplicationTheme.getFontPopTitle().font
+        ui_title.textColor = ApplicationTheme.getFontCourantBoldNoir().color
+        ui_title.font = ApplicationTheme.getFontCourantBoldNoir().font
     }
     
     func populateCell(title:String,isChecked:Bool,imageName:String? = nil) {

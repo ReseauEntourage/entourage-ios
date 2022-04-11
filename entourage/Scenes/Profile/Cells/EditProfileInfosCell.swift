@@ -103,11 +103,11 @@ class EditProfileInfosCell: UITableViewCell {
         setupTextFieldStyle(ui_tf_email)
         
         ui_radius_title.text = "editUserTitleRadius".localized
-        ui_radius_title.textColor = ApplicationTheme.getFontH6().color
-        ui_radius_title.font = ApplicationTheme.getFontH6().font
+        ui_radius_title.textColor = ApplicationTheme.getFontLight13Orange().color
+        ui_radius_title.font = ApplicationTheme.getFontLight13Orange().font
         ui_radius_info.text = "editUserDescRadius".localized
-        ui_radius_info.textColor = ApplicationTheme.getFontH6().color
-        ui_radius_info.font = ApplicationTheme.getFontH6().font
+        ui_radius_info.textColor = ApplicationTheme.getFontLight13Orange().color
+        ui_radius_info.font = ApplicationTheme.getFontLight13Orange().font
         
         ui_min_km.text = "\(Int(minRadius))km"
         ui_min_km.font = ApplicationTheme.getFontNunitoRegular(size: 13)
@@ -125,8 +125,8 @@ class EditProfileInfosCell: UITableViewCell {
     }
     
     private func setupTitleStyle(_ label:UILabel) {
-        label.font = ApplicationTheme.getFontH5().font
-        label.textColor = ApplicationTheme.getFontH5().color
+        label.font = ApplicationTheme.getFontRegular13Orange().font
+        label.textColor = ApplicationTheme.getFontRegular13Orange().color
     }
     
     private func setupTextFieldStyle(_ textfield:UITextField) {

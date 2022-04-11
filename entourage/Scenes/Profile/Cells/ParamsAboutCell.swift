@@ -14,8 +14,8 @@ class ParamsAboutCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ui_title.font = ApplicationTheme.getFontTextRegular().font
-        ui_title.textColor = ApplicationTheme.getFontTextRegular().color
+        ui_title.font = ApplicationTheme.getFontCourantRegularNoir().font
+        ui_title.textColor = ApplicationTheme.getFontCourantRegularNoir().color
     }
     
     func populateCell(title:String, isSeparatorHidden:Bool) {

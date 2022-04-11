@@ -27,8 +27,8 @@ class PartnerDetailTopCell: UITableViewCell {
         ui_lb_follow.font = ApplicationTheme.getFontBoutonBlanc().font
         ui_lb_follow.textColor = ApplicationTheme.getFontBoutonBlanc().color
         
-        ui_partner_description.textColor = ApplicationTheme.getFontTextItalic().color
-        ui_partner_description.font = ApplicationTheme.getFontTextItalic().font
+        ui_partner_description.textColor = ApplicationTheme.getFontCourantItalicNoir().color
+        ui_partner_description.font = ApplicationTheme.getFontCourantItalicNoir().font
         
         ui_partner_name.textColor = .black
         ui_partner_name.font = ApplicationTheme.getFontQuickSandBold(size: 18)

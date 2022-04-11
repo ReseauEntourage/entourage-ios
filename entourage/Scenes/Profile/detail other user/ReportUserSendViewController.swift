@@ -35,8 +35,8 @@ class ReportUserSendViewController: UIViewController {
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
         ui_error_view.hide()
         
-        ui_description.font = ApplicationTheme.getFontTextRegular().font
-        ui_description.textColor = ApplicationTheme.getFontTextRegular().color
+        ui_description.font = ApplicationTheme.getFontCourantRegularNoir().font
+        ui_description.textColor = ApplicationTheme.getFontCourantRegularNoir().color
         ui_description.text = "report_user_message_description".localized
         
         ui_lbl_mandatory.font = ApplicationTheme.getFontLegend().font
