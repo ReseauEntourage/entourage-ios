@@ -43,8 +43,8 @@ class ParamMenuCell: UITableViewCell {
         setLabelTitle(label: ui_title_unlock_members)
         setLabelTitle(label: ui_title_share)
         
-        ui_title_logout.textColor = .appGreenLogout
-        ui_title_logout.font = ApplicationTheme.getFontNunitoBold(size: 14)
+        ui_title_logout.textColor = .appOrange
+        ui_title_logout.font = ApplicationTheme.getFontNunitoBold(size: 15)
         
         ui_title_suppress_account.textColor = .appOrange
         ui_title_suppress_account.font = ApplicationTheme.getFontMontserrat14().font

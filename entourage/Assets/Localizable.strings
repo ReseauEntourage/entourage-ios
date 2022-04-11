@@ -168,7 +168,7 @@
 "onboard_asso_start_description_bold" = "Entourage";
 "onboard_asso_start_description2" = "Quelques belles histoires qui montrent la valeur de la communauté Entourage.";
 "onboard_asso_info_title" = "Concrètement, dans l’app, des fonctionnalités vous sont dédiées";
-"onboard_asso_info_description" = "Soyez bien identifié.e sur le réseau et engagez votre communauté";
+"onboard_asso_info_description" = "Soyez bien identifié sur le réseau et engagez votre communauté";
 "onboard_asso_info_1" = "Un profil vérifié pour chacun de vos membres: un gage de confiance pour vos voisins";
 "onboard_asso_info_1_bold" = "Un profil vérifié";
 "onboard_asso_info_2" = "Une page pour votre structure : pour informer localement de vos activités et besoins.";
@@ -305,7 +305,7 @@
 "title_asso_email_light" = "E-Mail";
 
 //Pop follow/unfollow partner
-"buttonFollowOnPartner" = "Abonné.e";
+"buttonFollowOnPartner" = "Abonné";
 "buttonFollowOffPartner" = "S'abonner";
 "partner_pop_unfollow_title" = "Voulez-vous vous désabonner ?";
 "partner_pop_unfollow_message" = "En vous désabonnant, vous ne recevrez plus les notifications, nouvelles, et les nouveaux évènements de cette association ";
@@ -348,6 +348,7 @@
 "editUserTitleCity" = "Ville et zone d’action *";
 "editUserTitleRadius" = "Dans un rayon de *";
 "editUserDescRadius" = "* Votre zone d’action permet de définir à quelle distance vous pouvez agir et vous déplacer";
+"editProfileInterest_title" = "Mes centres d’intérêt";
 
 "editUserPlaceholderFirstname" = "Prénom placeholder";
 "editUserPlaceholderLastname" = "Nom placeholder";
@@ -366,13 +367,14 @@
 "editUser_error_profile" = "Erreur lors de la modification du profil.";
 
 //Profile edit interests
-"editUserInterestsTitle" = "Modifier mes centres d’interêts";
+"editUserInterestsTitle" = "Modifier mes centres d’intérêt";
 "editUserInterestsInfo" = "Séléctionnez une ou plusieurs catégories qui vous intéresse.";
 "editUserInterestsValidate" = "Appliquer les modifications";
 "editUserInterests_error" = "Veuillez selectionner une catégorie au minimum. Txt Error placeholder";
+"interest_other_name" = "Autre";
 //profile edit location
 "profileEditLocationTitle" = "Où souhaitez-vous agir ?";
-"profileEditLocationDescription" = "Entourage est un réseau local!\nDécouvrer les initiatives solidaires de votre quartier et tissez des liens avec vos voisins.";
+"profileEditLocationDescription" = "Entourage est un réseau local !\nDécouvrez les initiatives solidaires de votre quartier et tissez des liens avec vos voisins.";
 "profileEditLocationLegend*" = "Ajouter un lieu *";
 "profileEditLocationPlaceholder" = "Ville ou département";
 "profileEditLocationLegend" = "* Entourage ne communique pas cette adresse.";
@@ -381,7 +383,7 @@
 
 // take photo profile
 "take_photo_title" = "Ajouter une photo ?";
-"take_photo_description" = "Avec une photo, c’est tout de suite plus sympa.\nMontrez-nous votre sourire le plus chaleureux.";
+"take_photo_description" = "Avec une photo, c’est tout de suite plus sympa. Montrez-nous votre sourire le plus chaleureux.";
 "take_photo" = "Prendre une photo";
 "take_gallery" = "Importer depuis la galerie";
 "description_move_photo" = "Déplacer et zoomer pour ajuster la photo de profil.";
@@ -419,7 +421,7 @@
 "params_about_ambassador" = "Devenir Ambassadeur bénévole";
 "params_about_cgu" = "Conditions générales d’utilisation";
 "params_about_privacy" = "Politique de Confidentialité";
-"params_about_email" = "Contactez entourage";
+"params_about_email" = "Contacter entourage";
 "params_about_licences" = "Licence open-source";
 "params_about_title" = "Aide et à propos";
 
@@ -428,12 +430,13 @@
 //Detail user profile
 "detail_user_send_message" = "Écrire un message";
 "detail_user_his_activity" = "Son activité";
-"detail_user_his_interests" = "Ses centre d’interêts";
+"detail_user_his_interests" = "Centre d’interêt";
 "detail_user_button_signal" = "Signaler l’utilisateur";
 "report_user_title" = "Signaler le membre";
 "report_user_mandatory" = "- obligatoire";
-"report_user_description" = "Dites nous la raison de votre signalement";
-"report_user_message_description" = "Dites nous la raison de votre signalement";
+"report_user_optional" = "- facultatif";
+"report_user_description" = "Dites-nous la raison de votre signalement";
+"report_user_message_description" = "Dites-nous la raison de votre signalement";
 "report_user_next_button" = "Suivant";
 "report_user_validate_button" = "Envoyer";
 "report_user_back_button" = "Retour";

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */; };
 		0207BF8527F2059400631914 /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0207BF8427F2059400631914 /* UserDetail.storyboard */; };
 		0207BF8727F20C1600631914 /* UserProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */; };
 		021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318A827DF4E3100B0F1BD /* Metadatas.swift */; };
@@ -17,6 +18,9 @@
 		021F084F2798113D00F32A34 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021F084E2798113D00F32A34 /* LocationManager.swift */; };
 		0220580727FB003700531720 /* BasePopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0220580627FB003700531720 /* BasePopViewController.swift */; };
 		0220580927FB087F00531720 /* BaseFullScreenNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0220580827FB087F00531720 /* BaseFullScreenNavViewController.swift */; };
+		0224596F27FF28FC00944DE4 /* MJErrorInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224596E27FF28FC00944DE4 /* MJErrorInputTextView.swift */; };
+		0224597127FF290900944DE4 /* MJErrorInputTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0224597027FF290900944DE4 /* MJErrorInputTextView.xib */; };
+		0224597A27FF454A00944DE4 /* Extensions_UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0224597927FF454A00944DE4 /* Extensions_UITextField.swift */; };
 		0227446F2795BE6F005600A1 /* AssociationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0227446E2795BE6F005600A1 /* AssociationService.swift */; };
 		022744712795BEC0005600A1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022744702795BEC0005600A1 /* AuthService.swift */; };
 		022744732795C0FB005600A1 /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022744722795C0FB005600A1 /* Partner.swift */; };
@@ -151,6 +155,7 @@
 		02E069EA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E069DA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift */; };
 		02E069EB279184B3006DB1B6 /* OTOnboardingAssoFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E069DB279184B3006DB1B6 /* OTOnboardingAssoFillViewController.swift */; };
 		02E069ED279184B3006DB1B6 /* OTOnboardingNamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E069DD279184B3006DB1B6 /* OTOnboardingNamesViewController.swift */; };
+		02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */; };
 		02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */; };
 		02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */; };
 		02EC7E4B27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4A27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift */; };
@@ -172,6 +177,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInterestCell.swift; sourceTree = "<group>"; };
 		0207BF8427F2059400631914 /* UserDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
 		0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDetailViewController.swift; sourceTree = "<group>"; };
 		021318A827DF4E3100B0F1BD /* Metadatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadatas.swift; sourceTree = "<group>"; };
@@ -182,6 +188,9 @@
 		021F084E2798113D00F32A34 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0220580627FB003700531720 /* BasePopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopViewController.swift; sourceTree = "<group>"; };
 		0220580827FB087F00531720 /* BaseFullScreenNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFullScreenNavViewController.swift; sourceTree = "<group>"; };
+		0224596E27FF28FC00944DE4 /* MJErrorInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJErrorInputTextView.swift; sourceTree = "<group>"; };
+		0224597027FF290900944DE4 /* MJErrorInputTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJErrorInputTextView.xib; sourceTree = "<group>"; };
+		0224597927FF454A00944DE4 /* Extensions_UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UITextField.swift; sourceTree = "<group>"; };
 		0227446E2795BE6F005600A1 /* AssociationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationService.swift; sourceTree = "<group>"; };
 		022744702795BEC0005600A1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		022744722795C0FB005600A1 /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
@@ -312,6 +321,7 @@
 		02E069DA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTOnboardingSearchAssoViewController.swift; sourceTree = "<group>"; };
 		02E069DB279184B3006DB1B6 /* OTOnboardingAssoFillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTOnboardingAssoFillViewController.swift; sourceTree = "<group>"; };
 		02E069DD279184B3006DB1B6 /* OTOnboardingNamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTOnboardingNamesViewController.swift; sourceTree = "<group>"; };
+		02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserSignalCell.swift; sourceTree = "<group>"; };
 		02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJCustomSlider.swift; sourceTree = "<group>"; };
 		02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePhotoCell.swift; sourceTree = "<group>"; };
 		02EC7E4A27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsChoosePlaceViewController.swift; sourceTree = "<group>"; };
@@ -365,6 +375,7 @@
 				02C3ABF1279AB53800817B82 /* Extensions_UserDefaults.swift */,
 				02C3ABF3279AB55D00817B82 /* Extensions_UIViewController.swift */,
 				0288A8DA27CD00FD008D7011 /* Extensions_UIImage.swift */,
+				0224597927FF454A00944DE4 /* Extensions_UITextField.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -511,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */,
+				02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */,
 				02B57D9527FC430D005A567B /* ReportUserMainViewController.swift */,
 				02B57D9727FC4329005A567B /* ReportUserPageViewController.swift */,
 				025E917327F3619300D4A7A8 /* ReportUserViewController.swift */,
@@ -542,6 +554,8 @@
 				029BD4F627EDC45E00AE67AF /* MJNavBackView.xib */,
 				02B57D9B27FC7141005A567B /* MJTextViewPlaceholder.swift */,
 				02A3DD2E27FD92600060EC2E /* MJDayMonthPicker.swift */,
+				0224596E27FF28FC00944DE4 /* MJErrorInputTextView.swift */,
+				0224597027FF290900944DE4 /* MJErrorInputTextView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -692,6 +706,7 @@
 				023D89C227DFA39A008C6A58 /* ParamsInfoCell.swift */,
 				02C9B4AB27E2377A0026450A /* ParamsAboutCell.swift */,
 				0295F2B827E4AE5B006AE255 /* EditProfileInfosCell.swift */,
+				0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */,
 				02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */,
 			);
 			path = Cells;
@@ -890,6 +905,7 @@
 				025FFE0B27DBAD5100783E8D /* ApiKeys.plist in Resources */,
 				02CCE67527D78C7100D6976C /* Montserrat-Regular.ttf in Resources */,
 				029E307C27DB5EF300B12357 /* GoogleService-Info.plist in Resources */,
+				0224597127FF290900944DE4 /* MJErrorInputTextView.xib in Resources */,
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
 				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
 				025D8726278DD33800909101 /* LaunchScreen.storyboard in Resources */,
@@ -974,6 +990,7 @@
 				0288A8D927CCDA5C008D7011 /* PictureUploadS3Service.swift in Sources */,
 				02E069E6279184B3006DB1B6 /* OTOnboardingAssoActivityViewController.swift in Sources */,
 				02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */,
+				0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */,
 				02F5277E2799995900929431 /* GDSSearchViewController.swift in Sources */,
 				02E069E5279184B3006DB1B6 /* OTOnboardingPhoneViewController.swift in Sources */,
 				025E917427F3619300D4A7A8 /* ReportUserViewController.swift in Sources */,
@@ -997,8 +1014,10 @@
 				02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */,
 				02D64F4B2799CA6800F6C4BD /* CustomAnnotation.swift in Sources */,
 				02681952278DF6CA00A98A4A /* OTCustomTextfield.swift in Sources */,
+				02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */,
 				0262997927905FB700D84A6A /* Constants.swift in Sources */,
 				0220580727FB003700531720 /* BasePopViewController.swift in Sources */,
+				0224597A27FF454A00944DE4 /* Extensions_UITextField.swift in Sources */,
 				02B57D9A27FC433F005A567B /* ReportUserSendViewController.swift in Sources */,
 				022744712795BEC0005600A1 /* AuthService.swift in Sources */,
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
@@ -1008,6 +1027,7 @@
 				02F5278327999AD700929431 /* MapPoi.swift in Sources */,
 				0262997B2790815000D84A6A /* APIKeys.swift in Sources */,
 				026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */,
+				0224596F27FF28FC00944DE4 /* MJErrorInputTextView.swift in Sources */,
 				0268197D278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift in Sources */,
 				02681950278DF6BD00A98A4A /* OTProgressBar.swift in Sources */,
 				0288A8E127CD09E5008D7011 /* NotificationsKeys.swift in Sources */,

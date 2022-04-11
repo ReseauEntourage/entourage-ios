@@ -17,7 +17,7 @@ class UserProfileDetailViewController: UIViewController {
     @IBOutlet weak var ui_image_user: UIImageView!
     @IBOutlet weak var ui_iv_logo: UIImageView!
     @IBOutlet weak var ui_tableview: UITableView!
-    @IBOutlet weak var ui_title_bt_signal: UILabel!
+    
     
     var currentUser:User? = nil
     
@@ -26,10 +26,6 @@ class UserProfileDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPhotoUI()
-        
-        ui_title_bt_signal.text = "detail_user_button_signal".localized
-        ui_title_bt_signal.font = ApplicationTheme.getFontNunitoBold(size: 15)
-        ui_title_bt_signal.textColor = .appOrangeLight
         
         ui_top_view.populateCustom(imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
         
@@ -110,9 +106,9 @@ extension UserProfileDetailViewController: UITableViewDataSource,UITableViewDele
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let currentUser = currentUser {
             if currentUser.interests?.count ?? 0 > 0  {
-                return 3
+                return 3 + 1
             }
-            return 2
+            return 2 + 1
         }
         return 0
     }
@@ -126,23 +122,24 @@ extension UserProfileDetailViewController: UITableViewDataSource,UITableViewDele
             return cell
         }
         
-        if currentUser.interests?.count ?? 0 == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoActivities", for: indexPath) as! MainUserActivitiesCell
+        switch indexPath.row {
+        case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoActivities", for: indexPath) as! MainUserActivitiesCell
             cell.populateCell(eventCount: currentUser.stats.eventsCount, actionsCount: currentUser.stats.actionsCount)
             return cell
-        }
-        
-        switch indexPath.row {
-        case 1:
+        case 2:
+            if currentUser.interests?.count ?? 0 == 0  {
+                break
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoCats", for: indexPath) as! CategoriesBubblesCell
-            cell.populateCell(interests: currentUser.interests)
+            cell.populateCell(interests: currentUser.interests,tagAlignment: .left)
             return cell
             
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoActivities", for: indexPath) as! MainUserActivitiesCell
-            cell.populateCell(eventCount: currentUser.stats.eventsCount, actionsCount: currentUser.stats.actionsCount)
-            return cell
+            break
         }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellSignal", for: indexPath)
+        return cell
     }
 }
 

@@ -103,36 +103,45 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BEA-t3-Toe">
-                                                                    <rect key="frame" x="123" y="147" width="152" height="50"/>
+                                                                    <rect key="frame" x="125" y="147" width="148" height="50"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2NZ-Q2-vpI">
-                                                                            <rect key="frame" x="20" y="0.0" width="82" height="50"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="148" height="50"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="50" id="cLz-JL-dE8"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="18"/>
                                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                            <state key="normal" title="S'abonner">
+                                                                            <state key="normal">
                                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             </state>
                                                                             <connections>
                                                                                 <action selector="action_follow_unfollow:" destination="YzX-pm-G09" eventType="touchUpInside" id="CaU-Yb-ICa"/>
                                                                             </connections>
                                                                         </button>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S'abonner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rE-HU-04u">
+                                                                            <rect key="frame" x="20" y="15" width="78" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_partner_follow_off" translatesAutoresizingMaskIntoConstraints="NO" id="IYe-WX-1uc">
-                                                                            <rect key="frame" x="110" y="14" width="22" height="22"/>
+                                                                            <rect key="frame" x="106" y="14" width="22" height="22"/>
                                                                         </imageView>
                                                                     </subviews>
                                                                     <color key="backgroundColor" name="orange_app"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="50" id="2H0-5f-bgD"/>
+                                                                        <constraint firstItem="9rE-HU-04u" firstAttribute="centerY" secondItem="BEA-t3-Toe" secondAttribute="centerY" id="ELh-QG-Zru"/>
                                                                         <constraint firstAttribute="trailing" secondItem="IYe-WX-1uc" secondAttribute="trailing" constant="20" id="FMX-9D-tg2"/>
                                                                         <constraint firstItem="IYe-WX-1uc" firstAttribute="centerY" secondItem="BEA-t3-Toe" secondAttribute="centerY" id="JYI-SD-zuR"/>
-                                                                        <constraint firstItem="IYe-WX-1uc" firstAttribute="leading" secondItem="2NZ-Q2-vpI" secondAttribute="trailing" constant="8" id="QOm-38-Bsr"/>
+                                                                        <constraint firstItem="IYe-WX-1uc" firstAttribute="leading" secondItem="9rE-HU-04u" secondAttribute="trailing" constant="8" id="OO3-Az-h4d"/>
+                                                                        <constraint firstItem="9rE-HU-04u" firstAttribute="leading" secondItem="BEA-t3-Toe" secondAttribute="leading" constant="20" id="fIX-ch-HMr"/>
                                                                         <constraint firstAttribute="bottom" secondItem="2NZ-Q2-vpI" secondAttribute="bottom" id="izq-wK-S9g"/>
                                                                         <constraint firstItem="2NZ-Q2-vpI" firstAttribute="top" secondItem="BEA-t3-Toe" secondAttribute="top" id="nIl-7K-RRt"/>
-                                                                        <constraint firstItem="2NZ-Q2-vpI" firstAttribute="leading" secondItem="BEA-t3-Toe" secondAttribute="leading" constant="20" id="o5S-FT-bIv"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="2NZ-Q2-vpI" secondAttribute="trailing" id="nSV-Zp-wgD"/>
+                                                                        <constraint firstItem="2NZ-Q2-vpI" firstAttribute="leading" secondItem="BEA-t3-Toe" secondAttribute="leading" id="o5S-FT-bIv"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
@@ -162,6 +171,7 @@
                                                 <connections>
                                                     <outlet property="ui_bt_follow" destination="2NZ-Q2-vpI" id="E2q-oI-44U"/>
                                                     <outlet property="ui_iv_bt_partner_follow" destination="IYe-WX-1uc" id="zcs-Ag-QxV"/>
+                                                    <outlet property="ui_lb_follow" destination="9rE-HU-04u" id="hmN-jv-uaZ"/>
                                                     <outlet property="ui_partner_description" destination="RHc-yR-moT" id="vWM-xv-cPV"/>
                                                     <outlet property="ui_partner_name" destination="LAO-ix-L1p" id="uKg-Gd-Hgx"/>
                                                     <outlet property="ui_view_bt_follow" destination="BEA-t3-Toe" id="FbA-BY-daW"/>

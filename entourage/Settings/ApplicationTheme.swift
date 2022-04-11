@@ -59,8 +59,8 @@ struct ApplicationTheme {
     static func getFontTextItalic(size:CGFloat = 15) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegularItalic(size: size), color: UIColor.black)
     }
-    static func getFontTextRegular(size:CGFloat = 15) -> MJTextFontColorStyle {
-        return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: UIColor.black)
+    static func getFontTextRegular(size:CGFloat = 15,color:UIColor = .black) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
     }
     
     static func getFontSportStyle(size:CGFloat = 14) -> MJTextFontColorStyle {
@@ -84,6 +84,18 @@ struct ApplicationTheme {
     
     static func getFontLegend(size:CGFloat = 13) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoLight(size: size), color: UIColor.black)
+    }
+    
+    static func getFontChampDefault(size:CGFloat = 13, color:UIColor = .appGrisSombre40) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
+    }
+    
+    static func getFontBoutonBlanc(size:CGFloat = 15, color:UIColor = .white) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: color)
+    }
+    
+    static func getFontBoutonOrange(size:CGFloat = 15, color:UIColor = .appOrange) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoBold(size: size), color: color)
     }
     
     //MARK: - Custom Fonts only from Zeplin -

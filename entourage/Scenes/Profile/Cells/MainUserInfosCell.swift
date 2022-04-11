@@ -54,8 +54,8 @@ class MainUserInfosCell: UITableViewCell {
     }
     
     private func setupLabels() {
-        ui_title.font = ApplicationTheme.getFontSportStyle().font
-        ui_title.textColor = ApplicationTheme.getFontSportStyle().color
+        ui_title.font = ApplicationTheme.getFontH2().font
+        ui_title.textColor = ApplicationTheme.getFontH2().color
         
         ui_radius_title.font = ApplicationTheme.getFontH6().font
         ui_radius_title.textColor = ApplicationTheme.getFontH6().color

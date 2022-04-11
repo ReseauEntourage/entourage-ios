@@ -10,6 +10,18 @@ import UIKit
 
 
 @objc class Utils : NSObject {
+    
+    static func formatString(messageTxt: String, messageTxtHighlight:String,fontColorType:MJTextFontColorStyle, fontColorTypeHighlight:MJTextFontColorStyle) -> NSAttributedString {
+        let attributesNormal: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : fontColorType.font, NSAttributedString.Key.foregroundColor : fontColorType.color]
+        let attributeColored: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font:  fontColorTypeHighlight.font,NSAttributedString.Key.foregroundColor : fontColorTypeHighlight.color]
+        
+        let message = messageTxt as NSString
+        let messageAttributed = NSMutableAttributedString(string: message as String , attributes: attributesNormal)
+        messageAttributed.addAttributes(attributeColored, range: message.range(of: messageTxtHighlight))
+        
+        return messageAttributed
+    }
+    
     @objc static func formatString(stringMessage: String, coloredTxt:String,color: UIColor = UIColor.white,colorHighlight:UIColor = UIColor.appOrange,fontSize: CGFloat = 15, fontWeight:UIFont.Weight = .regular,fontColoredWeight:UIFont.Weight = .regular) -> NSAttributedString {
         let attributesNormal: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: fontSize, weight: fontWeight), NSAttributedString.Key.foregroundColor : color]
         let attributeColored: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font:  UIFont.systemFont(ofSize: fontSize, weight: fontColoredWeight),NSAttributedString.Key.foregroundColor : colorHighlight]

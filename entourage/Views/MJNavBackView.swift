@@ -9,21 +9,21 @@ import UIKit
 
 @IBDesignable
 class MJNavBackView: UIView {
-    @IBOutlet weak var ui_view_back: UIView!
-    @IBOutlet weak var ui_view_close: UIView!
+    @IBOutlet private weak var ui_view_back: UIView!
+    @IBOutlet private weak var ui_view_close: UIView!
     
     
     
     
-    @IBOutlet weak var ui_content_view: UIView!
+    @IBOutlet private weak var ui_content_view: UIView!
     
-    @IBOutlet var ui_titles: [UILabel]!
-    @IBOutlet var ui_views_bottom_separator: [UIView]!
+    @IBOutlet private var ui_titles: [UILabel]!
+    @IBOutlet private var ui_views_bottom_separator: [UIView]!
     
-    @IBOutlet var ui_buttons_close: [UIButton]!
-    @IBOutlet weak var ui_image_back: UIImageView!
+    @IBOutlet private var ui_buttons_close: [UIButton]!
+    @IBOutlet private weak var ui_image_back: UIImageView!
     
-    @IBOutlet weak var ui_image_close: UIImageView!
+    @IBOutlet private weak var ui_image_close: UIImageView!
     
     weak var delegate:MJNavBackViewDelegate? = nil
     

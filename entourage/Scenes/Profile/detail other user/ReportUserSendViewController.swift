@@ -49,8 +49,8 @@ class ReportUserSendViewController: UIViewController {
         ui_bt_send.setTitle("report_user_validate_button".localized, for: .normal)
         ui_bt_send.backgroundColor = .appOrange
         
-        ui_bt_back.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 15)
-        ui_bt_back.titleLabel?.textColor = .appOrange
+        ui_bt_back.titleLabel?.font = ApplicationTheme.getFontBoutonOrange().font
+        ui_bt_back.titleLabel?.textColor = ApplicationTheme.getFontBoutonOrange().color
         ui_bt_back.layer.cornerRadius = ui_bt_back.frame.height / 2
         ui_bt_back.layer.borderColor = UIColor.appOrange.cgColor
         ui_bt_back.layer.borderWidth = 1
@@ -61,25 +61,11 @@ class ReportUserSendViewController: UIViewController {
         ui_tv_message.placeholderColor = placeholderBioColor
         
         ui_tv_message.delegate = self
-        addToolBar()
-    }
-    
-    private func addToolBar() {
-        let _width = UIApplication.shared.delegate?.window??.frame.width ?? view.frame.size.width
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: _width, height: 30))
-        
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let buttonDone = UIBarButtonItem(title: "validate".localized, style: .plain, target: self, action: #selector(closeKb))
-        buttonDone.tag = ui_tv_message.hashValue
-        //Custom font and color
-        let fontColor = UIColor.appOrange
-        let fontName = ApplicationTheme.getFontTextRegular().font
-        buttonDone.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: fontColor, NSAttributedString.Key.font: fontName], for: .normal)
-        toolbar.setItems([flexSpace, buttonDone], animated: false)
-        toolbar.sizeToFit()
-        
-        ui_tv_message.inputAccessoryView = toolbar
+        let _width = UIApplication.shared.delegate?.window??.frame.width ?? view.frame.size.width
+        ui_tv_message.addToolBar(width: _width, buttonValidate: buttonDone)
     }
+
     
     @objc func closeKb() {
         let _ = ui_tv_message.resignFirstResponder()

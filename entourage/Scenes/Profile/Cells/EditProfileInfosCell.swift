@@ -63,14 +63,17 @@ class EditProfileInfosCell: UITableViewCell {
         
         ui_tv_edit_bio.delegate = self
         ui_tv_edit_bio.isScrollEnabled = false
-        ui_bio_count.text = "0/200"
+        ui_bio_count.text = "0\(maxCharsBioString)"
         
         ui_tf_firstname.delegate = self
         ui_tf_lastname.delegate = self
         ui_tf_birthday.delegate = self
         ui_tf_email.delegate = self
         
-        addToolBar(textview: ui_tv_edit_bio)
+        let _width = UIApplication.shared.delegate?.window??.frame.width ?? contentView.frame.size.width
+        let buttonDone = UIBarButtonItem(title: "validate".localized, style: .plain, target: self, action: #selector(closeKb(_:)))
+        buttonDone.tag = ui_tv_edit_bio.hashValue
+        ui_tv_edit_bio.addToolBar(width: _width, buttonValidate: buttonDone)
         ui_tv_edit_bio.placeholderText = placeholderBioTxt
         ui_tv_edit_bio.placeholderColor = placeholderBioColor
         ui_tv_edit_bio.font = ApplicationTheme.getFontNunitoRegular(size: 13)
@@ -129,24 +132,6 @@ class EditProfileInfosCell: UITableViewCell {
     private func setupTextFieldStyle(_ textfield:UITextField) {
         textfield.font = ApplicationTheme.getFontNunitoRegular(size: 13)
         textfield.textColor = .black
-    }
-    
-    private func addToolBar(textview:UITextView? = nil, textfield:UITextField? = nil) {
-        let _width = UIApplication.shared.delegate?.window??.frame.width ?? contentView.frame.size.width
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: _width, height: 30))
-        
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let buttonDone = UIBarButtonItem(title: "validate".localized, style: .plain, target: self, action: #selector(closeKb(_:)))
-        buttonDone.tag = textview.hashValue
-        //Custom font and color
-        let fontColor = UIColor.appOrange
-        let fontName = ApplicationTheme.getFontTextRegular().font
-        buttonDone.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: fontColor, NSAttributedString.Key.font: fontName], for: .normal)
-        toolbar.setItems([flexSpace, buttonDone], animated: false)
-        toolbar.sizeToFit()
-        
-        textview?.inputAccessoryView = toolbar
-        textfield?.inputAccessoryView = toolbar
     }
     
     @objc func closeKb(_ sender:UIBarButtonItem!) {
@@ -223,7 +208,7 @@ extension EditProfileInfosCell: MJCustomSliderDelegate {
         ui_constraint_label_km_selected.constant = pos - (ui_label_km_selected.intrinsicContentSize.width / 2)
         ui_label_km_selected.text = "\(Int(ui_slider.value)) km"
         delegate?.updateRadius(radius: Int(ui_slider.value))
-    }
+    }//
 }
 
 //MARK: - UITextViewDelegate -

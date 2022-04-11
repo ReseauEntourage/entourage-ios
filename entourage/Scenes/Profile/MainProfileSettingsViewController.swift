@@ -75,7 +75,7 @@ class MainProfileSettingsViewController: UIViewController {
         ui_label_title.font = ApplicationTheme.getFontTitle().font
         ui_label_title.textColor = ApplicationTheme.getFontTitle().color
         
-        ui_label_edit.text = "edit".localized
+        ui_label_edit.text = "modify".localized
         ui_label_edit.font = ApplicationTheme.getFontSectionActif().font
         ui_label_edit.textColor = ApplicationTheme.getFontSectionActif().color
         ui_view_button_edit_profile.layer.cornerRadius = radius_button_edit
