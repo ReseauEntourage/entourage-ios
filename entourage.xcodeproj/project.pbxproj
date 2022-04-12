@@ -380,14 +380,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		0224597B27FF54E300944DE4 /* Create */ = {
-			isa = PBXGroup;
-			children = (
-				02B7922627F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift */,
-			);
-			path = Create;
-			sourceTree = "<group>";
-		};
 		022744742795C88E005600A1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
