@@ -57,7 +57,7 @@ class UserProfileDetailViewController: UIViewController {
         ui_image_user.layer.cornerRadius = ui_image_user.frame.height / 2
         
         ui_view_img_profile.layer.cornerRadius = ui_image_user.frame.height / 2
-        ui_view_img_profile.layer.borderColor = UIColor.white.cgColor
+        ui_view_img_profile.layer.borderColor = UIColor.appBeigeClair.cgColor
         ui_view_img_profile.layer.borderWidth = 1
         
         ui_view_img_profile.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor

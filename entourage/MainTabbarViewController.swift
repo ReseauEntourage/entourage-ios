@@ -96,8 +96,8 @@ class MainTabbarViewController: UITabBarController {
         let _plusVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempGroupVC")
 
         plusVC = UINavigationController.init(rootViewController: _plusVC)
-        plusVC.tabBarItem.title = "Group+".localized
-        plusVC.tabBarItem.accessibilityLabel = "Group +"
+        plusVC.tabBarItem.title = "Home+".localized
+        plusVC.tabBarItem.accessibilityLabel = "Home +"
         plusVC.tabBarItem.tag = 2
         plusVC.tabBarItem.image = UIImage.init(named: "ic_tab_group")?.withRenderingMode(.alwaysOriginal)
         plusVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_group")

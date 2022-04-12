@@ -47,8 +47,8 @@ class MainUserProfileTopCell: UITableViewCell {
         ui_bio.font = ApplicationTheme.getFontCourantItalicNoir().font
         ui_bio.textColor = ApplicationTheme.getFontCourantItalicNoir().color
         
-//        ui_username.font = ApplicationTheme.getFontSubtitle().font
-//        ui_username.textColor = ApplicationTheme.getFontSubtitle().color
+        ui_username?.font = ApplicationTheme.getFontH1Noir().font
+        ui_username?.textColor = ApplicationTheme.getFontH1Noir().color
         
         
         ui_view_button_message?.layer.cornerRadius = (ui_view_button_message?.frame.height ?? 0 ) / 2
@@ -59,7 +59,7 @@ class MainUserProfileTopCell: UITableViewCell {
     }
     
     func populateCell(username:String, role:String?, partner:Partner?, bio:String?, delegate:MainUserProfileTopCellDelegate? = nil) {
-        ui_username.text = username
+        ui_username?.text = username
         
         self.delegate = delegate
         

@@ -10,8 +10,6 @@ import SDWebImage
 
 class MainProfileSettingsViewController: UIViewController {
     
-    
-    @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_view_button_edit_profile: UIView!
     @IBOutlet weak var ui_label_edit: UILabel!
     
@@ -33,8 +31,9 @@ class MainProfileSettingsViewController: UIViewController {
     @IBOutlet weak var ui_view_top_white: UIView!
     @IBOutlet weak var ui_view_img_profile: UIView!
     @IBOutlet weak var ui_image_user: UIImageView!
-    @IBOutlet weak var ui_image_logo_asso: UIImageView!
     
+    @IBOutlet weak var ui_username: UILabel!
+    @IBOutlet weak var ui_view_nav: MJNavBackView!
     var currentUser:User!
     
     var profileVC:UIViewController? = nil
@@ -42,6 +41,8 @@ class MainProfileSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ui_view_nav.populateCustom(title:nil, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false,marginLeftButton: 24)
         
         //TODO: a supp apres mise en place nav pour le mettre dans le &er controller
         MetadatasService.getMetadatas { error in
@@ -62,6 +63,8 @@ class MainProfileSettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.hideTransparentNavigationBar()
+        
         loadUser()
     }
     
@@ -71,9 +74,9 @@ class MainProfileSettingsViewController: UIViewController {
     
     //MARK: - Custom UI -
     func setupTopViews() {
-        ui_label_title.text = "profile_title".localized
-        ui_label_title.font = ApplicationTheme.getFontTitle().font
-        ui_label_title.textColor = ApplicationTheme.getFontTitle().color
+        
+        ui_username.textColor = ApplicationTheme.getFontCourantBoldBlanc().color
+        ui_username.font = ApplicationTheme.getFontCourantBoldBlanc().font
         
         ui_label_edit.text = "modify".localized
         ui_label_edit.font = ApplicationTheme.getFontCourantBoldOrangeClair().font
@@ -128,6 +131,7 @@ class MainProfileSettingsViewController: UIViewController {
         }
         //To force update profile mainuserprofileVC when show main page
         (profileVC as? MainUserProfileViewController)?.updateUser()
+        ui_username.text = currentUser.displayName
     }
     
     //MARK: - IBActions -
@@ -201,5 +205,13 @@ class MainProfileSettingsViewController: UIViewController {
                 paramsVC!.didMove(toParent: self)
             }
         }
+    }
+}
+
+
+//MARK: - MJNavBackViewDelegate -
+extension MainProfileSettingsViewController: MJNavBackViewDelegate {
+    func goBack() {
+        self.navigationController?.dismiss(animated: true)
     }
 }

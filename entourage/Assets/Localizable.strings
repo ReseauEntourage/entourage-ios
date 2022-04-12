@@ -333,6 +333,8 @@
 "mainUserTitleRadius" = "Dans un rayon de *";
 "mainUserDescRadius" = "* Votre zone d’action permet de définir à quelle distance vous pouvez agir et vous déplacer";
 
+"mainUserCityRadius" = "Dans un rayon de %d km";
+"mainUserCityRadiusBold" = "%d km";
 /*******
 //Profile Edit
  */

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -99,12 +100,23 @@
                                     <action selector="show:" destination="g5E-Hr-Pca" eventType="touchUpInside" id="M8W-JS-ZHf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEl-VN-5sk">
+                                <rect key="frame" x="214" y="144" width="165" height="31"/>
+                                <color key="tintColor" name="orange_app"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Show Profile / Params"/>
+                                <connections>
+                                    <action selector="action_show_my_profile:" destination="g5E-Hr-Pca" eventType="touchUpInside" id="GXv-xl-usW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="98v-0C-lBw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="98v-0C-lBw" firstAttribute="trailing" secondItem="iEl-VN-5sk" secondAttribute="trailing" constant="35" id="1Mz-mY-hA7"/>
                             <constraint firstItem="iZ5-YR-2J4" firstAttribute="top" secondItem="98v-0C-lBw" secondAttribute="top" constant="100" id="6Zy-4D-CpP"/>
                             <constraint firstItem="iZ5-YR-2J4" firstAttribute="leading" secondItem="98v-0C-lBw" secondAttribute="leading" constant="32" id="VLR-C9-sOf"/>
+                            <constraint firstItem="iEl-VN-5sk" firstAttribute="top" secondItem="98v-0C-lBw" secondAttribute="top" constant="100" id="yo4-v0-f8I"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -168,6 +180,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="orange_app">
+            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

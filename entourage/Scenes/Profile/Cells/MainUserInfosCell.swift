@@ -23,18 +23,7 @@ class MainUserInfosCell: UITableViewCell {
     @IBOutlet weak var ui_city_title: UILabel!
     @IBOutlet weak var ui_city_info: UILabel!
     
-    @IBOutlet weak var ui_radius_title: UILabel!
-    @IBOutlet weak var ui_radius_desc: UILabel!
-    @IBOutlet weak var ui_radius_min: UILabel!
-    @IBOutlet weak var ui_radius_max: UILabel!
-    @IBOutlet weak var ui_radius_current: UILabel!
-    
-    
-    @IBOutlet weak var ui_constraint_current_km_leading: NSLayoutConstraint!
-    @IBOutlet weak var ui_view_progress: ProgressRadiusView!
-    
-    let minRadius = 1
-    let maxRadius = 200
+    @IBOutlet weak var ui_lb_radius: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,22 +34,12 @@ class MainUserInfosCell: UITableViewCell {
         ui_email_title.text = "mainUserTitleEmail".localized
         ui_city_title.text = "mainUserTitleCity".localized
         
-        ui_radius_title.text = "mainUserTitleRadius".localized
-        ui_radius_desc.text = "mainUserDescRadius".localized
-        ui_radius_min.text = "\(minRadius) \("km".localized)"
-        ui_radius_max.text = "\(maxRadius) \("km".localized)"
-        
         setupLabels()
     }
     
     private func setupLabels() {
         ui_title.font = ApplicationTheme.getFontH2Noir().font
         ui_title.textColor = ApplicationTheme.getFontH2Noir().color
-        
-        ui_radius_title.font = ApplicationTheme.getFontLight13Orange().font
-        ui_radius_title.textColor = ApplicationTheme.getFontLight13Orange().color
-        ui_radius_desc.font = ApplicationTheme.getFontLight13Orange().font
-        ui_radius_desc.textColor = ApplicationTheme.getFontLight13Orange().color
         
         setLabelTitle(label: ui_birth_title)
         setLabelTitle(label: ui_phone_title)
@@ -71,8 +50,6 @@ class MainUserInfosCell: UITableViewCell {
         setLabelInfo(label: ui_phone_info)
         setLabelInfo(label: ui_email_info)
         setLabelInfo(label: ui_city_info)
-        setLabelInfo(label: ui_radius_min)
-        setLabelInfo(label: ui_radius_max)
     }
     
     private func setLabelTitle(label:UILabel) {
@@ -93,13 +70,11 @@ class MainUserInfosCell: UITableViewCell {
         ui_city_info.text = user.addressPrimary?.displayAddress
         
         let currentRadius = user.radiusDistance ?? 0
-        let percentProgress = (Float(currentRadius) / Float(maxRadius)) * 100
+        let str = String.init(format: "mainUserCityRadius".localized, currentRadius)
+        let strBoldColor = String.init(format: "mainUserCityRadiusBold".localized, currentRadius)
         
-        ui_radius_current.text = "\(currentRadius) \("km".localized)"
-        ui_view_progress.progressPercent = CGFloat(percentProgress)
-        ui_view_progress.setNeedsDisplay()
-        let pos = ui_view_progress.getPercentScreenPosition()
+        let strAttr = Utils.formatString(messageTxt: str, messageTxtHighlight: strBoldColor, fontColorType: ApplicationTheme.getFontLegend(), fontColorTypeHighlight: ApplicationTheme.getFontBoutonOrange(size: 13))
         
-        ui_constraint_current_km_leading.constant = pos - (ui_radius_current.intrinsicContentSize.width / 2)
+        ui_lb_radius.attributedText = strAttr
     }
 }
