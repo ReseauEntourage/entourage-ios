@@ -57,7 +57,7 @@ class EditProfileInfosCell: UITableViewCell {
     let placeholderBioTxt = "editUserPlaceholderBio".localized
     let placeholderBioColor = UIColor.lightGray
     let bioColor = UIColor.black
-    let maxCharsBioString = "/200"
+    let maxCharsBioString = "/\(ApplicationTheme.maxCharsBio)"
     
     var pickerDayDateView = MJDayMonthPicker()
     
@@ -251,7 +251,7 @@ extension EditProfileInfosCell: UITextViewDelegate {
             return false
         }
         
-        if textView.text.count + text.count > 200 {
+        if textView.text.count + text.count > ApplicationTheme.maxCharsBio {
             return false
         }
         

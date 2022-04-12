@@ -16,6 +16,9 @@ struct ApplicationTheme {
     
     static let minfirstnameChars = 2
     static let minLastnameChars = 2
+    static let minOthersCatChars = 2
+    static let minGroupNameChars = 2
+    static let maxCharsBio = 200
     
     static func iPhoneHasNotch() -> Bool {
         var topPadding:CGFloat?

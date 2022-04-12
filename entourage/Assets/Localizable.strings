@@ -364,15 +364,15 @@
 "editUser_error_firstname" = "Le prénom doit comporter au moins 2 lettres.";
 "editUser_error_lastname" = "Le nom doit comporter au moins 2 lettres.";
 "editUser_error_bio" = "La bio doit comporter au moins 2 lettres.";
-"editUser_error_email" = "L’adresse email est invalide.";
-"editUser_error_birthday" = "Erreur, l'anniversaire est du type: jj-mm";
+"editUser_error_email" = "e-mail invalide.";
+"editUser_error_birthday" = "Date de naissance invalide.";
 "editUser_error_profile" = "Erreur lors de la modification du profil.";
 
 //Profile edit interests
 "editUserInterestsTitle" = "Modifier mes centres d’intérêt";
 "editUserInterestsInfo" = "Séléctionnez une ou plusieurs catégories qui vous intéresse.";
 "editUserInterestsValidate" = "Appliquer les modifications";
-"editUserInterests_error" = "Veuillez selectionner une catégorie au minimum. Txt Error placeholder";
+"editUserInterests_error" = "Veuillez choisir au moins une catégorie";
 "interest_other_name" = "Autre";
 //profile edit location
 "profileEditLocationTitle" = "Où souhaitez-vous agir ?";
@@ -443,6 +443,56 @@
 "report_user_validate_button" = "Envoyer";
 "report_user_back_button" = "Retour";
 "report_user_placeholder" = "Décrivez rapidement l’objet de votre signalement.";
-"report_user_signal_error" = "Veuillez selectionner au minimum une cause. Merci";
+"report_user_signal_error" = "Veuillez choisir au minimum une cause.";
 "report_user_message_error" = "Veuillez saisir votre message. Merci";
 "report_user_message_success" = "Utilisateur signalé";
+
+
+/********
+ GROUP
+ */
+
+//Create group
+"neighborhoodCreatePopCloseBackTitle" = "Attention";
+"neighborhoodCreatePopCloseBackMessage" = "Si vous quittez le formulaire de création d’un groupe, toutes les informations saisies seront perdues.";
+"neighborhoodCreatePopCloseBackQuit" = "Quitter";
+"neighborhoodCreatePopCloseBackCancel" = "Annuler";
+
+"neighborhood_create_group_bt_back" = "Précédent";
+"neighborhood_create_group_bt_next" = "Suivant";
+"neighborhood_create_group_bt_create" = "Créer";
+
+"neighborhood_create_group_title" = "Nouveau groupe";
+"neighborhood_create_title_phase" = "Étape";
+"neighborhood_create_title_phase_nb" = "0%d.";
+
+"neighborhoodCreateNameTitle" = "Nom du groupe - obligatoire";
+"neighborhoodCreateNamePlaceholderName" = "Donnez un nom explicite au groupe";
+"neighborhoodCreateNameSubtitle" = "- obligatoire";
+
+"neighborhoodCreateDescriptionTitle" = "Rédiger un descriptif";
+"neighborhoodCreateDescriptionSubtitle" = "facultatif (200 caractères max)";
+"neighborhoodCreateTitleDescriptionPlaceholder" = "Décrivez rapidement l’objectif de discussion principal de ce groupe";
+
+
+"neighborhoodCreatePlaceTitle" = "Ajouter un lieu - obligatoire";
+"neighborhoodCreatePlaceSubtitle" = "- obligatoire";
+"neighborhoodCreatePlaceDescription" = "Entourage ne communique pas cette adresse aux utilisateurs.";
+"neighborhoodCreatePlaceInfos" = "Adresse, ville ou département";
+
+//Error create group
+"neighborhoodCreateInputErrorMinCharName" = "Le nom du groupe doit contenir au minimum 2 caractères.";
+"neighborhoodCreatePhase1_error" = "Veuillez remplir tous les champs obligatoires";
+
+//Phase 2
+"neighborhoodCreateCatMessage" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de discussion du groupe. - obligatoire";
+"neighborhoodCreateCatMessageMandatory" = "- obligatoire";
+"neighborhoodCreateCatOtherTitle" = "Décrivez en un mot la catégorie de votre groupe";
+"neighborhoodCreateCatOtherPlaceholder" = "Veuillez saisir au maximum 80 caractère";
+
+"neighborhoodCreatePhase2_error" = "Veuillez choisir au moins une catégorie";
+"neighborhoodCreatePhase2_others_error" = "Veuillez préciser la catégorie divers";
+
+//Phase 3
+"neighborhoodCreatePhase3_error" = "Veuillez sélectionnez une image";
+
