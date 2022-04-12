@@ -13,8 +13,10 @@ struct Neighborhood:Codable {
     var welcomeMessage:String?
     var photoUrl:String?
     var membersCount:Int = 0
-    var latitude:Float = 0
-    var longitude:Float = 0
+    var latitude:Double = 0
+    var longitude:Double = 0
+    
+    var address:Address? = nil
     
     var interests:[String]? = nil
     var members:[User]? = nil
@@ -35,6 +37,8 @@ struct Neighborhood:Codable {
         case photoUrl = "photo_url"
         case aboutEthics = "ethics"
         
+        case address
+        
         case interests
         case members
         case past_outings_count
@@ -49,11 +53,15 @@ struct Neighborhood:Codable {
             dict["name"] = name
         }
         
-        if latitude > 0 {
-            dict["latitude"] = latitude
+        //TODO: avec la nouvelle version du WS de nico
+        if address?.displayAddress?.count ?? 0 > 0 {
+            dict["place_name"] = address!.displayAddress!
         }
-        if longitude > 0 {
-            dict["longitude"] = longitude
+        if address?.location?.coordinate.latitude ?? 0 > 0 {
+            dict["latitude"] = address!.location!.coordinate.latitude
+        }
+        if address?.location?.coordinate.longitude ?? 0 > 0 {
+            dict["longitude"] = address!.location!.coordinate.longitude
         }
         
         if !(aboutGroup?.isEmpty ?? true) {

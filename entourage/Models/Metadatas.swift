@@ -82,6 +82,10 @@ struct Tags:Codable {
         return tags
     }
     
+    mutating func addTag(tag:Tag) {
+        tags.append(tag)
+    }
+    
     mutating func checkUncheckTagFrom(key:String, isCheck:Bool) {
         if let pos = tags.firstIndex(where: {$0.tagKey == key }) {
             self.tags[pos].isSelected = isCheck
@@ -113,6 +117,9 @@ class Tag:Codable {
     
     var name: String {
         return tagName
+    }
+    var key: String {
+        return tagKey
     }
     var isSelected = false
     
@@ -153,7 +160,7 @@ fileprivate struct InterestMappingImageHelper {
         case "nature":
             imageName = "interest_nature"
         default:
-            imageName = "others"
+            imageName = "interest_others"
         }
         return imageName
     }

@@ -9,8 +9,8 @@ import CoreLocation
 
 struct User: Codable {
     var goal:String? = nil
-    var addressPrimary:UserAddress? = nil
-    var addressSecondary:UserAddress? = nil
+    var addressPrimary:Address? = nil
+    var addressSecondary:Address? = nil
     var firstname:String = ""
     var lastname:String = ""
     var sid:Int = 0
@@ -146,16 +146,6 @@ struct User: Codable {
             return false
         }
         return roles.contains("ambassador")
-    }
-}
-
-//MARK: - UserAddress -
-struct UserAddress:Codable {
-    var displayAddress:String
-    var location:CLLocation? = nil
-    
-    enum CodingKeys: String, CodingKey {
-        case displayAddress = "display_address"
     }
 }
 
