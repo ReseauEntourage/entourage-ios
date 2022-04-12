@@ -580,6 +580,7 @@
 				02DB3BBD27A149B5004732C9 /* Partner_detail */,
 				02F527792799995900929431 /* Guide_detail */,
 				021318AC27DF55D400B0F1BD /* MainHomeViewController.swift */,
+				02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -647,8 +648,7 @@
 		02B7921F27F73F34003AFFB9 /* Groups - Neighborhoods */ = {
 			isa = PBXGroup;
 			children = (
-				02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */,
-				02B7922627F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift */,
+				0224597B27FF54E300944DE4 /* Create */,
 			);
 			path = "Groups - Neighborhoods";
 			sourceTree = "<group>";
