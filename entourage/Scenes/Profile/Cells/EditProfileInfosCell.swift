@@ -15,21 +15,24 @@ class EditProfileInfosCell: UITableViewCell {
     @IBOutlet weak var ui_view_firstname: UIView!
     @IBOutlet weak var ui_tf_firstname: UITextField!
     @IBOutlet weak var ui_title_firstname: UILabel!
+    @IBOutlet weak var ui_view_error_firstname: MJErrorInputTextView!
     
     @IBOutlet weak var ui_title_lastname: UILabel!
     @IBOutlet weak var ui_tf_lastname: UITextField!
+    @IBOutlet weak var ui_view_error_lastname: MJErrorInputTextView!
     
     @IBOutlet weak var ui_title_phone: UILabel!
-    
-    @IBOutlet weak var ui_title_email: UILabel!
     @IBOutlet weak var ui_phone: UILabel!
     
-    @IBOutlet weak var ui_title_birthday: UILabel!
-    @IBOutlet weak var ui_title_bio: UILabel!
-    @IBOutlet weak var ui_tf_birthday: UITextField!
-    
+    @IBOutlet weak var ui_title_email: UILabel!
     @IBOutlet weak var ui_tf_email: UITextField!
+    @IBOutlet weak var ui_view_error_email: MJErrorInputTextView!
     
+    @IBOutlet weak var ui_title_birthday: UILabel!
+    @IBOutlet weak var ui_tf_birthday: UITextField!
+    @IBOutlet weak var ui_view_error_birthday: MJErrorInputTextView!
+    
+    @IBOutlet weak var ui_title_bio: UILabel!
     @IBOutlet weak var ui_bio_count: UILabel!
     @IBOutlet weak var ui_tv_edit_bio: MJTextViewPlaceholder!
     
@@ -58,6 +61,10 @@ class EditProfileInfosCell: UITableViewCell {
     
     var pickerDayDateView = MJDayMonthPicker()
     
+    var errorFirstname = false
+    var errorLastname = false
+    var errorEmail = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -69,6 +76,16 @@ class EditProfileInfosCell: UITableViewCell {
         ui_tf_lastname.delegate = self
         ui_tf_birthday.delegate = self
         ui_tf_email.delegate = self
+        
+        ui_view_error_firstname.isHidden = true
+        ui_view_error_lastname.isHidden = true
+        ui_view_error_birthday.isHidden = true
+        ui_view_error_email.isHidden = true
+        
+        ui_view_error_firstname.setupView(title: "editUser_error_firstname".localized, imageName: nil)
+        ui_view_error_lastname.setupView(title: "editUser_error_lastname".localized, imageName: nil)
+        ui_view_error_email.setupView(title: "editUser_error_email".localized, imageName: nil)
+        ui_view_error_birthday.setupView(title: "editUser_error_birthday".localized, imageName: nil)
         
         let _width = UIApplication.shared.delegate?.window??.frame.width ?? contentView.frame.size.width
         let buttonDone = UIBarButtonItem(title: "validate".localized, style: .plain, target: self, action: #selector(closeKb(_:)))
@@ -119,7 +136,7 @@ class EditProfileInfosCell: UITableViewCell {
         ui_label_km_selected.font = ApplicationTheme.getFontNunitoBold(size: 13)
         
         ui_phone.font = ApplicationTheme.getFontNunitoRegular(size: 13)
-        ui_phone.textColor = .black
+        ui_phone.textColor = .appGrisSombre40
         ui_city_cp.font = ApplicationTheme.getFontNunitoRegular(size: 13)
         ui_city_cp.textColor = .black
     }
@@ -141,7 +158,7 @@ class EditProfileInfosCell: UITableViewCell {
                 let _bio = txtBio == placeholderBioTxt ? "" : txtBio
                 delegate?.updateBio(bio: _bio)
             }
-            ui_tv_edit_bio.resignFirstResponder()
+            _ = ui_tv_edit_bio.resignFirstResponder()
         }
     }
     
@@ -167,12 +184,25 @@ class EditProfileInfosCell: UITableViewCell {
         
         ui_slider.setupSlider(delegate: self, imageThumb: UIImage.init(named: "thumb_orange"), minValue: minRadius, maxValue: maxRadius)
         ui_slider.value = Float(radius)
+        
+        checkError()
+    }
+    
+    func checkError() {
+        errorFirstname = ui_tf_firstname.text?.count ?? 0 >= ApplicationTheme.minfirstnameChars
+        errorLastname = ui_tf_lastname.text?.count ?? 0 >= ApplicationTheme.minLastnameChars
+        errorEmail = ui_tf_email.text?.isValidEmail ?? false
+        
+        ui_view_error_email.isHidden = errorEmail
+        ui_view_error_lastname.isHidden = errorLastname
+        ui_view_error_firstname.isHidden = errorFirstname
     }
     
     @IBAction func action_change_location(_ sender: Any) {
         delegate?.showSelectLocation()
     }
     
+    //MARK: Picker date -
     func setupPickerDayMonthView(){
         let toolbar = UIToolbar();
         toolbar.sizeToFit()
@@ -247,6 +277,7 @@ extension EditProfileInfosCell: UITextFieldDelegate {
         default:
             break
         }
+        self.checkError()
         return true
     }
 }

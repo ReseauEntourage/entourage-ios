@@ -30,9 +30,6 @@ class ProfileEditorViewController: UIViewController {
     var location_name_new:String? = nil
     var location_googlePlace_new:GMSPlace? = nil
     
-    let minfirstnameChars = 2
-    let minLastnameChars = 2
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,7 +105,7 @@ class ProfileEditorViewController: UIViewController {
         var newUser = currentUser
         
         if let firstname_new = firstname_new {
-            if firstname_new.count >= minfirstnameChars  {
+            if firstname_new.count >= ApplicationTheme.minfirstnameChars  {
                 newUser?.firstname = firstname_new
             }
             else {
@@ -118,7 +115,7 @@ class ProfileEditorViewController: UIViewController {
         }
         
         if let lastname_new = lastname_new {
-            if lastname_new.count >= minLastnameChars  {
+            if lastname_new.count >= ApplicationTheme.minLastnameChars  {
                 newUser?.lastname = lastname_new
             }
             else {
@@ -196,7 +193,8 @@ class ProfileEditorViewController: UIViewController {
         UserService.updateUser(user: newUser, isOnboarding: false) { user, error in
             IHProgressHUD.dismiss()
             if let _ = error?.error {
-                self.showError(message: "editUser_error_profile".localized)
+               // self.showError(message: "editUser_error_profile".localized)
+                self.ui_tableview.reloadData()
                 return
             }
             self.dismiss(animated: true)

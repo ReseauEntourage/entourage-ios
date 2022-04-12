@@ -138,7 +138,7 @@ class MainProfileSettingsViewController: UIViewController {
     @IBAction func action_show_edit_profile(_ sender: Any) {
         let sb = UIStoryboard.init(name: "ProfileParams", bundle: nil)
         let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav")
-        self.tabBarController?.present(navVC, animated: true)
+        self.navigationController?.present(navVC, animated: true)
     }
     
     @IBAction func action_profile(_ sender: Any) {

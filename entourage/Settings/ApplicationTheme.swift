@@ -14,6 +14,9 @@ struct ApplicationTheme {
     static let bigCornerRadius:CGFloat = 35
     static let topPopViewControllerSpacing:CGFloat = 30
     
+    static let minfirstnameChars = 2
+    static let minLastnameChars = 2
+    
     static func iPhoneHasNotch() -> Bool {
         var topPadding:CGFloat?
         
