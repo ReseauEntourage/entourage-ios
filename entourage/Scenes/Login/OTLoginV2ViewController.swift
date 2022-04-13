@@ -60,8 +60,8 @@ class OTLoginV2ViewController: UIViewController {
         setupViews()
 //        OTLogger.logEvent(View_Login_Login)
         //TODO: a Supprimer
-        ui_tf_phone.text = "0606060610"
-        ui_tf_code.text = "123456"
+//        ui_tf_phone.text = "0606060610"
+//        ui_tf_code.text = "123456"
     }
     
     override func viewWillLayoutSubviews() {
