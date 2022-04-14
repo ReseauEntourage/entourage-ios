@@ -69,7 +69,7 @@ extension NeighborhoodCreatePhase1ViewController: UITableViewDelegate, UITableVi
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupDescription", for: indexPath) as! NeighborhoodCreateDescriptionCell
-            cell.populateCell(delegate: self)
+            cell.populateCell(title: "neighborhoodCreateDescriptionTitle", description: "neighborhoodCreateDescriptionSubtitle", placeholder: "neighborhoodCreateTitleDescriptionPlaceholder", delegate: self)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupPlace", for: indexPath) as! NeighborhoodCreateLocationCell

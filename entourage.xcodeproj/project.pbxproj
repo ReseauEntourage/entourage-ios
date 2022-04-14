@@ -38,6 +38,8 @@
 		023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89C027DFA380008C6A58 /* ParamMenuCell.swift */; };
 		023D89C327DFA39A008C6A58 /* ParamsInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89C227DFA39A008C6A58 /* ParamsInfoCell.swift */; };
 		023EC27F27FB2D8D003A3051 /* BasePopViewController_Template.xib in Resources */ = {isa = PBXBuildFile; fileRef = 023EC27E27FB2D8D003A3051 /* BasePopViewController_Template.xib */; };
+		0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */; };
+		0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */; };
 		0246604D27D8A49E00FE1EF8 /* IHProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 0246604C27D8A49E00FE1EF8 /* IHProgressHUD */; };
 		02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02490DC427EA245E00E2577B /* MJErrorInputView.swift */; };
 		02490DC727EA246B00E2577B /* MJErrorInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02490DC627EA246B00E2577B /* MJErrorInputView.xib */; };
@@ -77,6 +79,7 @@
 		02846CC027EC921700D85ADA /* SelectTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02846CBF27EC921700D85ADA /* SelectTagCell.swift */; };
 		02846CC227ECBC2B00D85ADA /* Interests.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02846CC127ECBC2B00D85ADA /* Interests.xcassets */; };
 		02856F6227DA334100988FF7 /* ProfileParams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02856F6127DA334100988FF7 /* ProfileParams.storyboard */; };
+		0285AD832806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0285AD822806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift */; };
 		0288A8D627CCD8F5008D7011 /* PicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0288A8D427CCD8F4008D7011 /* PicturePreviewResizeViewController.swift */; };
 		0288A8D727CCD8F5008D7011 /* UserPhotoAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0288A8D527CCD8F4008D7011 /* UserPhotoAddViewController.swift */; };
 		0288A8D927CCDA5C008D7011 /* PictureUploadS3Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0288A8D827CCDA5C008D7011 /* PictureUploadS3Service.swift */; };
@@ -98,6 +101,7 @@
 		02A3DD3527FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3DD3427FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift */; };
 		02A3DD3727FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3DD3627FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift */; };
 		02A3DD3927FDC72C0060EC2E /* NeighborhoodCreatePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3DD3827FDC72C0060EC2E /* NeighborhoodCreatePageViewController.swift */; };
+		02ADAAB3280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADAAB2280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift */; };
 		02B37825279B06F600B204EF /* Others.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B37824279B06F600B204EF /* Others.storyboard */; };
 		02B37828279B072C00B204EF /* SharingEntourageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B37826279B072C00B204EF /* SharingEntourageTableViewCell.swift */; };
 		02B37829279B072C00B204EF /* ShareEntourageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B37827279B072C00B204EF /* ShareEntourageViewController.swift */; };
@@ -218,6 +222,8 @@
 		023D89C027DFA380008C6A58 /* ParamMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamMenuCell.swift; sourceTree = "<group>"; };
 		023D89C227DFA39A008C6A58 /* ParamsInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsInfoCell.swift; sourceTree = "<group>"; };
 		023EC27E27FB2D8D003A3051 /* BasePopViewController_Template.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasePopViewController_Template.xib; sourceTree = "<group>"; };
+		0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodChoosePictureViewController.swift; sourceTree = "<group>"; };
+		0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodChoosePhotoCell.swift; sourceTree = "<group>"; };
 		02490DC427EA245E00E2577B /* MJErrorInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJErrorInputView.swift; sourceTree = "<group>"; };
 		02490DC627EA246B00E2577B /* MJErrorInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJErrorInputView.xib; sourceTree = "<group>"; };
 		02490DC827EA461700E2577B /* Extensions_UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIDevice.swift; sourceTree = "<group>"; };
@@ -261,6 +267,7 @@
 		02846CBF27EC921700D85ADA /* SelectTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagCell.swift; sourceTree = "<group>"; };
 		02846CC127ECBC2B00D85ADA /* Interests.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Interests.xcassets; sourceTree = "<group>"; };
 		02856F6127DA334100988FF7 /* ProfileParams.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileParams.storyboard; sourceTree = "<group>"; };
+		0285AD822806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreatePhotoCell.swift; sourceTree = "<group>"; };
 		0288A8D427CCD8F4008D7011 /* PicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
 		0288A8D527CCD8F4008D7011 /* UserPhotoAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPhotoAddViewController.swift; sourceTree = "<group>"; };
 		0288A8D827CCDA5C008D7011 /* PictureUploadS3Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureUploadS3Service.swift; sourceTree = "<group>"; };
@@ -279,6 +286,7 @@
 		02A3DD3427FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreatePhase2ViewController.swift; sourceTree = "<group>"; };
 		02A3DD3627FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreatePhase3ViewController.swift; sourceTree = "<group>"; };
 		02A3DD3827FDC72C0060EC2E /* NeighborhoodCreatePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreatePageViewController.swift; sourceTree = "<group>"; };
+		02ADAAB2280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreateValidateViewController.swift; sourceTree = "<group>"; };
 		02B37824279B06F600B204EF /* Others.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Others.storyboard; sourceTree = "<group>"; };
 		02B37826279B072C00B204EF /* SharingEntourageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingEntourageTableViewCell.swift; sourceTree = "<group>"; };
 		02B37827279B072C00B204EF /* ShareEntourageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEntourageViewController.swift; sourceTree = "<group>"; };
@@ -407,6 +415,7 @@
 				0224597527FF327C00944DE4 /* NeighborhoodCreateDescriptionCell.swift */,
 				0224597627FF327C00944DE4 /* NeighborhoodCreateLocationCell.swift */,
 				0224597E28006ACF00944DE4 /* NeighborhoodCreateAddOtherCell.swift */,
+				0285AD822806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -419,6 +428,7 @@
 				02A3DD3227FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift */,
 				02A3DD3427FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift */,
 				02A3DD3627FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift */,
+				02ADAAB2280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift */,
 				0224597227FF31FC00944DE4 /* Cells */,
 			);
 			path = Create;
@@ -618,10 +628,10 @@
 		02681953278DF6E400A98A4A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				02B7921F27F73F34003AFFB9 /* Groups - Neighborhoods */,
 				02681977278DF72D00A98A4A /* pre_onboarding */,
 				02E069CB279184B3006DB1B6 /* Onboarding */,
 				026819B7278E105600A98A4A /* Login */,
+				02B7921F27F73F34003AFFB9 /* Groups - Neighborhoods */,
 				0288A8D327CCD8E1008D7011 /* Profile */,
 				02DB3BBD27A149B5004732C9 /* Partner_detail */,
 				02F527792799995900929431 /* Guide_detail */,
@@ -694,6 +704,8 @@
 		02B7921F27F73F34003AFFB9 /* Groups - Neighborhoods */ = {
 			isa = PBXGroup;
 			children = (
+				0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */,
+				0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */,
 				0224597B27FF54E300944DE4 /* Create */,
 			);
 			path = "Groups - Neighborhoods";
@@ -1085,6 +1097,7 @@
 				02B7922127F73F6A003AFFB9 /* TempGroupMainViewController.swift in Sources */,
 				02CCE68927D7B51E00D6976C /* TagView.swift in Sources */,
 				023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */,
+				0285AD832806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift in Sources */,
 				02E069EA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift in Sources */,
 				02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */,
 				02D64F4D2799D5E000F6C4BD /* InviteSourceViewController.swift in Sources */,
@@ -1095,6 +1108,7 @@
 				02CCE68227D7968800D6976C /* MainProfileSettingsViewController.swift in Sources */,
 				02B57D9827FC4329005A567B /* ReportUserPageViewController.swift in Sources */,
 				026819C3278E10DA00A98A4A /* User.swift in Sources */,
+				02ADAAB3280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift in Sources */,
 				0288A8D727CCD8F5008D7011 /* UserPhotoAddViewController.swift in Sources */,
 				0288A8DB27CD00FD008D7011 /* Extensions_UIImage.swift in Sources */,
 				02E069DF279184B3006DB1B6 /* OTOnboardingPassCodeViewController.swift in Sources */,
@@ -1133,11 +1147,13 @@
 				02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */,
 				02A3DD3727FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift in Sources */,
 				021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */,
+				0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */,
 				022744732795C0FB005600A1 /* Partner.swift in Sources */,
 				02E069EB279184B3006DB1B6 /* OTOnboardingAssoFillViewController.swift in Sources */,
 				02E0099527E3863D00BB23CA /* MenuItemInfos.swift in Sources */,
 				02C0A0E7278EEC6B00B0C646 /* NetworkManager.swift in Sources */,
 				02846CC027EC921700D85ADA /* SelectTagCell.swift in Sources */,
+				0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */,
 				0224597D28001B2500944DE4 /* Address.swift in Sources */,
 				02C9B4AA27E21BF70026450A /* ParamsAboutViewController.swift in Sources */,
 				02CCE69027D7B96700D6976C /* MainUserProfileTopCell.swift in Sources */,

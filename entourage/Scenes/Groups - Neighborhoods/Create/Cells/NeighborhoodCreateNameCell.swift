@@ -37,7 +37,7 @@ class NeighborhoodCreateNameCell: UITableViewCell, UITextFieldDelegate {
     
     func checkErrorInput() -> Bool {
         
-        if ui_textfield.text?.count ?? 0  == 0 || ui_textfield.text?.count ?? 0 >= ApplicationTheme.minGroupNameChars {
+        if  ui_textfield.text?.count ?? 0 >= ApplicationTheme.minGroupNameChars {
             self.ui_error_view.isHidden = true
         }
         else {
@@ -51,7 +51,13 @@ class NeighborhoodCreateNameCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return checkErrorInput()
+        ui_textfield.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        _ = checkErrorInput()
+        return true
     }
 }
 
@@ -59,4 +65,3 @@ class NeighborhoodCreateNameCell: UITableViewCell, UITextFieldDelegate {
 protocol NeighborhoodCreateNameCellDelegate:AnyObject {
     func updateFromTextfield(text:String?)
 }
-

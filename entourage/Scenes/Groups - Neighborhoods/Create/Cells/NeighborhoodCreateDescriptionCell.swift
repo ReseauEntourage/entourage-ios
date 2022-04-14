@@ -17,7 +17,7 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
     
     weak var delegate:NeighborhoodCreateDescriptionCellDelegate? = nil
     
-    let placeholderTxt = "neighborhoodCreateTitleDescriptionPlaceholder".localized
+    var placeholderTxt = "neighborhoodCreateTitleDescriptionPlaceholder".localized
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,8 +43,16 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
         ui_description.font = ApplicationTheme.getFontLegend(size: 13).font
     }
     
-    func populateCell(delegate:NeighborhoodCreateDescriptionCellDelegate) {
+    private func setupTitles(title:String,description:String,placeholder:String) {
+        ui_title_bio.text = title.localized
+        ui_description.text = description.localized
+        placeholderTxt = placeholder.localized
+        ui_tv_edit_bio.placeholderText = placeholderTxt
+    }
+    
+    func populateCell(title:String,description:String,placeholder:String, delegate:NeighborhoodCreateDescriptionCellDelegate) {
         self.delegate = delegate
+        setupTitles(title: title, description: description, placeholder: placeholder)
     }
     
     @objc func closeKb(_ sender:UIBarButtonItem!) {

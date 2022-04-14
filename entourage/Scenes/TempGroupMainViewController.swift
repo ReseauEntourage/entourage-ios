@@ -29,7 +29,8 @@ class TempGroupMainViewController: UIViewController {
     @IBAction func show(_ sender: Any) {
         Logger.print("***** show")
         
-        let  navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain")
+        let  navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
+        navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
         

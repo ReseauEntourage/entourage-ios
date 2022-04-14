@@ -8,22 +8,59 @@
 import UIKit
 
 class NeighborhoodCreatePhase3ViewController: UIViewController {
-
+    
+    @IBOutlet weak var ui_tableview: UITableView!
+    
+    weak var pageDelegate:NeighborhoodCreateMainDelegate? = nil
+    
+    var image:NeighborhoodImage? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
-        // Do any additional setup after loading the view.
+        
+        ui_tableview.delegate = self
+        ui_tableview.dataSource = self
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func action_show_choose_photos(_ sender: Any) {
+        pageDelegate?.showChoosePhotos(delegate: self)
     }
-    */
+}
 
+//MARK: - UITableView datasource / Delegate -
+extension NeighborhoodCreatePhase3ViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellMessage", for: indexPath) as! NeighborhoodCreateDescriptionCell
+            cell.populateCell(title: "addPhotoCreateDescriptionTitle", description: "addPhotoCreateDescriptionSubtitle", placeholder: "addPhotoCreateDescriptionPlaceholder", delegate: self)
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath)  as! NeighborhoodCreatePhotoCell
+        cell.populateCell(urlImg: image?.imageUrl)
+        return cell
+    }
+}
+
+//MARK: - ChoosePictureNeighborhoodDelegate -
+extension NeighborhoodCreatePhase3ViewController: ChoosePictureNeighborhoodDelegate {
+    func selectedPicture(image: NeighborhoodImage) {
+        Logger.print("***** image ? \(image)")
+        pageDelegate?.addGroupPhoto(image: image)
+        self.image = image
+        self.ui_tableview.reloadData()
+    }
+}
+
+//MARK: - NeighborhoodCreateDescriptionCellDelegate -
+extension NeighborhoodCreatePhase3ViewController:NeighborhoodCreateDescriptionCellDelegate {
+    func updateFromTextView(text: String?) {
+        pageDelegate?.addGroupWelcome(message: text)
+    }
 }

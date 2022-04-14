@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import GooglePlaces
+import IHProgressHUD
 
 class NeighborhoodCreateMainViewController: UIViewController {
     @IBOutlet weak var ui_page_control: MJCustomPageControl!
@@ -29,6 +30,8 @@ class NeighborhoodCreateMainViewController: UIViewController {
     var newTags:Tags? = nil
     
     var currentPhasePosition = 1
+    
+    weak var parentController:UIViewController? = nil // Use to open the ending screen
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,17 +67,19 @@ class NeighborhoodCreateMainViewController: UIViewController {
         ui_top_view.populateCustom(title: "neighborhood_create_group_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
     }
     
-    func showError(message:String) {
-        ui_error_view.changeTitleAndImage(title: message)
-        ui_error_view.show()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? NeighborhoodCreatePageViewController {
             self.pageViewController = vc
             self.pageViewController?.parentDelegate = self
         }
     }
+    
+    func showError(message:String) {
+        ui_error_view.changeTitleAndImage(title: message)
+        ui_error_view.show()
+    }
+    
+    //MARK: - Navigation -
     
     @IBAction func action_next(_ sender: Any) {
         let isValid = checkValidation()
@@ -94,6 +99,7 @@ class NeighborhoodCreateMainViewController: UIViewController {
         currentPhasePosition = currentPhasePosition + 1
         if currentPhasePosition > ui_page_control.numberOfPages {
             currentPhasePosition = ui_page_control.numberOfPages
+            self.createGroup()
         }
         updateViewsForPosition()
     }
@@ -140,23 +146,44 @@ class NeighborhoodCreateMainViewController: UIViewController {
             ui_bt_next.alpha = 0.4
         }
     }
+    
+    //MARK: - Network -
+    func createGroup() {
+        IHProgressHUD.show()
+        NeighborhoodService.createNeighborhood(group: newNeighborhood) { group, error in
+            Logger.print("***** groupe crée ? \(group) error: ? \(error)")
+            IHProgressHUD.dismiss()
+            if group != nil {
+                self.goEnd()
+            }
+            else {
+                IHProgressHUD.showError(withStatus: "Erreur lors de la création du groupe. PLACEHOLDER")
+            }
+        }
+    }
+    
+    private func goEnd() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "neighb_validateVC") {
+            vc.modalPresentationStyle = .fullScreen
+            self.dismiss(animated: false) {
+                self.parentController?.present(vc, animated: true)
+            }
+        }
+    }
 }
 
 //MARK: - NeighborhoodCreateMainDelegate -
 extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
     func addGroupName(_ title: String) {
-        Logger.print("***** add Name : \(title)")
         newNeighborhood.name = title
         _ = checkValidation()
     }
     
     func addGroupDescription(_ about: String?) {
-        Logger.print("***** add description : \(about)")
         newNeighborhood.aboutGroup = about
     }
     
     func addGroupPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
-        //TODO: Recup datas
         if let currentlocation = currentlocation {
             newNeighborhood.latitude = currentlocation.latitude
             newNeighborhood.longitude = currentlocation.longitude
@@ -167,14 +194,11 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
             let location = CLLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
             newNeighborhood.address = Address(displayAddress: googlePlace.name, location: location)
         }
-        
-        Logger.print("***** add place : \(currentLocationName) - \(googlePlace)")
         _ = checkValidation()
     }
     
     func addGroupInterests(tags:Tags?, messageOther:String?) {
         newInterestTagOtherMessage = messageOther
-        Logger.print("***** add group interest : \(tags) - Message ? \(messageOther)")
         guard let tags = tags else {
             _ = checkValidation()
             return
@@ -190,15 +214,11 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
     }
     
     func checkValidation() -> (isValid:Bool, message:String) {
-        //TODO: Check + update bouton suivant avec pos + titre mandatory
         var isValid = false
         var message = ""
         
         switch currentPhasePosition {
         case 1:
-            
-            isValid = false
-            
             if newNeighborhood.name.count >= 2 && (newNeighborhood.address?.location?.coordinate.latitude ?? 0 != 0)  {
                 isValid = true
             }
@@ -222,7 +242,6 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
                     }
                 }
             }
-            
         case 3:
             if newNeighborhood.neighborhood_image_id != nil {
                 isValid = true
@@ -235,6 +254,23 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
         
         return (isValid,message)
     }
+    
+    func showChoosePhotos(delegate:ChoosePictureNeighborhoodDelegate) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "neighborhoodChoosePhotoVC") as? NeighborhoodChoosePictureViewController {
+            
+            vc.delegate = delegate
+            self.present(vc, animated: true)
+        }
+    }
+    
+    func addGroupPhoto(image: NeighborhoodImage) {
+        newNeighborhood.neighborhood_image_id = image.uid
+        _ = checkValidation()
+    }
+    
+    func addGroupWelcome(message: String?) {
+        newNeighborhood.welcomeMessage = message
+    }
 }
 
 //MARK: - MJNavBackViewDelegate -
@@ -242,7 +278,7 @@ extension NeighborhoodCreateMainViewController: MJNavBackViewDelegate {
     func goBack() {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
         alertVC.configureAlert(alertTitle: "neighborhoodCreatePopCloseBackTitle".localized, message: "neighborhoodCreatePopCloseBackMessage".localized, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self)
         
         alertVC.delegate = self
@@ -258,7 +294,6 @@ extension NeighborhoodCreateMainViewController: MJAlertControllerDelegate {
     func validateRightButton(alertTag: MJAlertTAG) {}
 }
 
-
 //MARK: - Protocol NeighborhoodCreateMainDelegate -
 protocol NeighborhoodCreateMainDelegate: AnyObject {
     //Phase 1
@@ -268,5 +303,7 @@ protocol NeighborhoodCreateMainDelegate: AnyObject {
     //Phase 2
     func addGroupInterests(tags:Tags?, messageOther:String?)
     //Phase 3
-    
+    func showChoosePhotos(delegate:ChoosePictureNeighborhoodDelegate)
+    func addGroupPhoto(image:NeighborhoodImage)
+    func addGroupWelcome(message:String?)
 }

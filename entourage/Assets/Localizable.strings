@@ -494,5 +494,23 @@
 "neighborhoodCreatePhase2_others_error" = "Veuillez préciser la catégorie divers";
 
 //Phase 3
+"addPhotoCreateDescriptionTitle" = "Écrire un message de bienvenue";
+"addPhotoCreateDescriptionSubtitle" = "facultatif (200 caractères max)";
+"addPhotoCreateDescriptionPlaceholder" = "Souhaitez la bienvenue aux nouveaux membres ! Ils liront ce message dès qu’ils rejoindront le groupe.";
+"addPhotoCreateTitle" = "Ajouter une photo - obligatoire";
+"addPhotoCreateTitleHighlight" = "- obligatoire";
+"addPhotoCreateDescription" = " Vous pourrez la changer plus tard";
 "neighborhoodCreatePhase3_error" = "Veuillez sélectionnez une image";
+
+//Phase completed
+"neighborhoodCreateValidateTitle" = "Votre groupe à bien été créé !";
+"neighborhoodCreateValidateSubtitle" = "Félicitation, vous venez de créer un nouveau groupe. Pour le rendre plus actif n’hésitez pas à créer un premier post :p";
+
+"neighborhoodCreateValidatePostMessage" = "Poster un message";
+"neighborhoodCreateValidatePass" = "Passer";
+
+//Select Photo group
+"neighborhood_choosephoto_title" = "Sélectionner une photo";
+"neighborhood_choosephoto_validate" = "Valider";
+"neighborhood_choosephoto_error" = "Veuillez sélectionnez une image";
 

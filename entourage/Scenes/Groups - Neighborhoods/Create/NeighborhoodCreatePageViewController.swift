@@ -51,7 +51,7 @@ class NeighborhoodCreatePageViewController: UIPageViewController {
         case 3:
             if createPhase3VC == nil {
                 createPhase3VC = storyboard?.instantiateViewController(withIdentifier: "createPhase3") as? NeighborhoodCreatePhase3ViewController
-                // createPhase3VC?.pageDelegate = self
+                createPhase3VC?.pageDelegate = parentDelegate
             }
             return createPhase3VC
         default:
