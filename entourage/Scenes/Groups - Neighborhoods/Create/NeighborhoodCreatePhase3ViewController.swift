@@ -38,7 +38,7 @@ extension NeighborhoodCreatePhase3ViewController: UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellMessage", for: indexPath) as! NeighborhoodCreateDescriptionCell
-            cell.populateCell(title: "addPhotoCreateDescriptionTitle", description: "addPhotoCreateDescriptionSubtitle", placeholder: "addPhotoCreateDescriptionPlaceholder", delegate: self)
+            cell.populateCell(title: "addPhotoCreateDescriptionTitle", description: "addPhotoCreateDescriptionSubtitle", placeholder: "addPhotoCreateDescriptionPlaceholder", delegate: self,textInputType:.descriptionWelcome)
             return cell
         }
         
@@ -60,7 +60,7 @@ extension NeighborhoodCreatePhase3ViewController: ChoosePictureNeighborhoodDeleg
 
 //MARK: - NeighborhoodCreateDescriptionCellDelegate -
 extension NeighborhoodCreatePhase3ViewController:NeighborhoodCreateDescriptionCellDelegate {
-    func updateFromTextView(text: String?) {
+    func updateFromTextView(text: String?,textInputType:TextInputType) {
         pageDelegate?.addGroupWelcome(message: text)
     }
 }

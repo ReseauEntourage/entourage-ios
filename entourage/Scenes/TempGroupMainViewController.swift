@@ -37,4 +37,10 @@ class TempGroupMainViewController: UIViewController {
         
     }
 
+    @IBAction func action_edit_group(_ sender: Any) {
+        let  navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "editGroupVC")
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
+        
+    }
 }

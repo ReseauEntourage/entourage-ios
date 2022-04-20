@@ -39,6 +39,11 @@ class NeighborhoodCreateMainViewController: UIViewController {
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
         ui_error_view.hide()
         
+        ui_title_phase.font = ApplicationTheme.getFontNunitoBold(size: 24)
+        ui_title_phase.textColor = .black
+        ui_title_phase_nb.font = ApplicationTheme.getFontNunitoBold(size: 24)
+        ui_title_phase_nb.textColor = .appOrangeLight
+        
         ui_title_phase.text = "neighborhood_create_title_phase".localized
         ui_bt_previous.isHidden = true
         ui_page_control.numberOfPages = 3
@@ -185,8 +190,8 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
     
     func addGroupPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         if let currentlocation = currentlocation {
-            newNeighborhood.latitude = currentlocation.latitude
-            newNeighborhood.longitude = currentlocation.longitude
+//            newNeighborhood.latitude = currentlocation.latitude
+//            newNeighborhood.longitude = currentlocation.longitude
             let location = CLLocation(latitude: currentlocation.latitude, longitude: currentlocation.longitude)
             newNeighborhood.address = Address(displayAddress: currentLocationName, location: location)
         }
@@ -205,6 +210,7 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
         }
         newTags = tags
         newNeighborhood.interests = [String]()
+        newNeighborhood.tagOtherMessage = newInterestTagOtherMessage
         for tag in tags.getTags() {
             if tag.isSelected {
                 newNeighborhood.interests?.append(tag.key)
@@ -229,7 +235,7 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
                 isValid = true
                 if let _others = newTags?.getTags() {
                     for tag in _others {
-                        if tag.key == "others" && tag.isSelected {
+                        if tag.key == Tag.tagOther && tag.isSelected {
                             if self.newInterestTagOtherMessage?.count ?? 0 >= ApplicationTheme.minOthersCatChars {
                                 isValid = true
                             }

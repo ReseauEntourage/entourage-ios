@@ -11,13 +11,9 @@ struct Neighborhood:Codable {
     var name:String = ""
     var aboutGroup:String?
     var welcomeMessage:String?
-    var photoUrl:String?
     var membersCount:Int = 0
-    var latitude:Double = 0
-    var longitude:Double = 0
     
     var address:Address? = nil
-    
     var interests:[String]? = nil
     var members:[User]? = nil
     
@@ -26,7 +22,9 @@ struct Neighborhood:Codable {
     var future_outings_count:Int = 0
     var has_ongoing_outing = false
     
+    var image_url:String?
     var neighborhood_image_id:Int? = nil // Use to pass the image info from the gallery
+    var tagOtherMessage:String? = nil
     
     enum CodingKeys: String, CodingKey {
         case uid = "id"
@@ -34,7 +32,7 @@ struct Neighborhood:Codable {
         case aboutGroup = "description"
         case welcomeMessage = "welcome_message"
         case membersCount = "members_count"
-        case photoUrl = "photo_url"
+        case image_url = "image_url"
         case aboutEthics = "ethics"
         
         case address
@@ -79,20 +77,23 @@ struct Neighborhood:Codable {
             dict["interests"] = interests
         }
        
-        if !(photoUrl?.isEmpty ?? true) {
-            dict["photo_url"] = photoUrl!
+        if !(image_url?.isEmpty ?? true) {
+            dict["image_url"] = image_url!
         }
         
-        if neighborhood_image_id != nil {
-            dict["neighborhood_image_id"] = neighborhood_image_id!
+        if let neighborhood_image_id = neighborhood_image_id {
+            dict["neighborhood_image_id"] = neighborhood_image_id
         }
         
+        if let tagOtherMessage = tagOtherMessage {
+            dict["message"] = tagOtherMessage
+        }
         
         return dict
     }
 }
 
-
+//MARK: - NeighborhoodImage -
 struct NeighborhoodImage:Codable {
     var uid:Int
     var title:String?

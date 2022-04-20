@@ -19,6 +19,8 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
     
     var placeholderTxt = "neighborhoodCreateTitleDescriptionPlaceholder".localized
     
+    var textInputType:TextInputType = .none
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -50,7 +52,9 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
         ui_tv_edit_bio.placeholderText = placeholderTxt
     }
     
-    func populateCell(title:String,description:String,placeholder:String, delegate:NeighborhoodCreateDescriptionCellDelegate) {
+    func populateCell(title:String,description:String,placeholder:String, delegate:NeighborhoodCreateDescriptionCellDelegate, about:String? = nil, textInputType:TextInputType) {
+        self.textInputType = textInputType
+        self.ui_tv_edit_bio.text = about
         self.delegate = delegate
         setupTitles(title: title, description: description, placeholder: placeholder)
     }
@@ -58,7 +62,7 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
     @objc func closeKb(_ sender:UIBarButtonItem!) {
         if let txtBio = ui_tv_edit_bio.text {
             let _bio = txtBio == placeholderTxt ? "" : txtBio
-            delegate?.updateFromTextView(text: _bio)
+            delegate?.updateFromTextView(text: _bio,textInputType: textInputType)
         }
         _ = ui_tv_edit_bio.resignFirstResponder()
     }
@@ -69,7 +73,7 @@ extension NeighborhoodCreateDescriptionCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         //TODO: ON garde quel comportement? avec ou sans retour à la ligne ?
         if text == "\n" {
-            delegate?.updateFromTextView(text: textView.text)
+            delegate?.updateFromTextView(text: textView.text,textInputType: textInputType)
             textView.resignFirstResponder()
             return false
         }
@@ -86,5 +90,11 @@ extension NeighborhoodCreateDescriptionCell: UITextViewDelegate {
 
 //MARK: - NeighborhoodCreateDescriptionCellDelegate Protocol -
 protocol NeighborhoodCreateDescriptionCellDelegate:AnyObject {
-    func updateFromTextView(text:String?)
+    func updateFromTextView(text:String?, textInputType:TextInputType)
+}
+
+enum TextInputType {
+    case descriptionAbout
+    case descriptionWelcome
+    case none
 }

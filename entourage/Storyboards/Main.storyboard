@@ -109,6 +109,15 @@
                                     <action selector="action_show_my_profile:" destination="g5E-Hr-Pca" eventType="touchUpInside" id="GXv-xl-usW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfr-kh-rj5">
+                                <rect key="frame" x="33" y="221" width="91" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Edit group"/>
+                                <connections>
+                                    <action selector="action_edit_group:" destination="g5E-Hr-Pca" eventType="touchUpInside" id="eC6-Xy-xjZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="98v-0C-lBw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

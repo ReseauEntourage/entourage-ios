@@ -113,7 +113,7 @@ struct Tags:Codable {
 class Tag:Codable {
     fileprivate var tagName:String
     fileprivate var tagKey:String
-    
+    static let tagOther = "other"
     
     var name: String {
         return tagName
@@ -140,7 +140,7 @@ class TagInterest: Tag {
 
 fileprivate struct InterestMappingImageHelper {
     static func getInterestImageNameFromKey(key:String) -> String {
-        var imageName = "others"
+        var imageName = "interest_others"
         
         switch key {
         case "activites":

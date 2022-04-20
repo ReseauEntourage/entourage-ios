@@ -31,23 +31,24 @@ class NeighborhoodCreateNameCell: UITableViewCell, UITextFieldDelegate {
         self.ui_error_view.setupView(title: "neighborhoodCreateInputErrorMinCharName".localized)
     }
     
-    func populateCell(delegate:NeighborhoodCreateNameCellDelegate) {
+    func populateCell(delegate:NeighborhoodCreateNameCellDelegate, name:String? = nil) {
         self.delegate = delegate
+        self.ui_textfield.text = name
     }
     
     func checkErrorInput() -> Bool {
-        
+        var returnValidate = true
         if  ui_textfield.text?.count ?? 0 >= ApplicationTheme.minGroupNameChars {
             self.ui_error_view.isHidden = true
         }
         else {
             ui_error_view.isHidden = false
-            return false
+            returnValidate = false
         }
         
         ui_textfield.resignFirstResponder()
-        delegate?.updateFromTextfield(text: ui_textfield.text)
-        return true
+        delegate?.updateFromGroupNameTF(text: ui_textfield.text)
+        return returnValidate
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -63,5 +64,5 @@ class NeighborhoodCreateNameCell: UITableViewCell, UITextFieldDelegate {
 
 //MARK: - NeighborhoodCreateNameCellDelegate Protocol -
 protocol NeighborhoodCreateNameCellDelegate:AnyObject {
-    func updateFromTextfield(text:String?)
+    func updateFromGroupNameTF(text:String?)
 }

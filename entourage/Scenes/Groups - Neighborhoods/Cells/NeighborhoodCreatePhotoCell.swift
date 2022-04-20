@@ -28,12 +28,12 @@ class NeighborhoodCreatePhotoCell: UITableViewCell {
         
         ui_title.attributedText = attrStr
         
-        ui_description.textColor = ApplicationTheme.getFontLegend().color
-        ui_description.font = ApplicationTheme.getFontLegend().font
-        ui_description.text = "addPhotoCreateDescription".localized
+        ui_description?.textColor = ApplicationTheme.getFontLegend().color
+        ui_description?.font = ApplicationTheme.getFontLegend().font
+        ui_description?.text = "addPhotoCreateDescription".localized
     }
     
-    func populateCell(urlImg:String?) {
+    func populateCell(urlImg:String?, isEdit:Bool = false) {
         if let urlImg = urlImg, !urlImg.isEmpty, let mainUrl = URL(string: urlImg) {
             ui_photo.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_photo_group"))
             ui_picto_photo.isHidden = true
@@ -41,6 +41,10 @@ class NeighborhoodCreatePhotoCell: UITableViewCell {
         else {
             ui_photo.image = nil
             ui_picto_photo.isHidden = false
+        }
+        
+        if isEdit {
+            ui_title.text = "neighborhoodEditPhotoTitle".localized
         }
     }
 }

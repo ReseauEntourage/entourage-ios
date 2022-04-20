@@ -33,7 +33,6 @@ class NeighborhoodCreatePhase2ViewController: UIViewController {
         ui_error_view.hide()
         
         tagsInterests = Metadatas.sharedInstance.tagsInterest
-        tagsInterests .addTag(tag: TagInterest(keyName: "others", keyValue: "interest_other_name".localized))
         
         ui_tableview.dataSource = self
         ui_tableview.delegate = self

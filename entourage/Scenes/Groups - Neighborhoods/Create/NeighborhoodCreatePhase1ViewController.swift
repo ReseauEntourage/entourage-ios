@@ -69,7 +69,7 @@ extension NeighborhoodCreatePhase1ViewController: UITableViewDelegate, UITableVi
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupDescription", for: indexPath) as! NeighborhoodCreateDescriptionCell
-            cell.populateCell(title: "neighborhoodCreateDescriptionTitle", description: "neighborhoodCreateDescriptionSubtitle", placeholder: "neighborhoodCreateTitleDescriptionPlaceholder", delegate: self)
+            cell.populateCell(title: "neighborhoodCreateDescriptionTitle", description: "neighborhoodCreateDescriptionSubtitle", placeholder: "neighborhoodCreateTitleDescriptionPlaceholder", delegate: self,textInputType:.descriptionAbout)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupPlace", for: indexPath) as! NeighborhoodCreateLocationCell
@@ -95,7 +95,7 @@ extension NeighborhoodCreatePhase1ViewController: UITableViewDelegate, UITableVi
 
 //MARK: - NeighborhoodCreateDescriptionCellDelegate / NeighborhoodCreateLocationCellDelegate -
 extension NeighborhoodCreatePhase1ViewController: NeighborhoodCreateDescriptionCellDelegate, NeighborhoodCreateLocationCellDelegate, NeighborhoodCreateNameCellDelegate {
-    func updateFromTextView(text: String?) {
+    func updateFromTextView(text: String?,textInputType:TextInputType) {
         pageDelegate?.addGroupDescription(text)
     }
     
@@ -108,7 +108,7 @@ extension NeighborhoodCreatePhase1ViewController: NeighborhoodCreateDescriptionC
         }
     }
     
-    func updateFromTextfield(text: String?) {
+    func updateFromGroupNameTF(text: String?) {
         pageDelegate?.addGroupName(text!)
     }
 }

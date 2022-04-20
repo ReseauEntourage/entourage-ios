@@ -423,7 +423,7 @@
 "params_about_ambassador" = "Devenir Ambassadeur bénévole";
 "params_about_cgu" = "Conditions générales d’utilisation";
 "params_about_privacy" = "Politique de Confidentialité";
-"params_about_email" = "Contacter entourage";
+"params_about_email" = "Contacter Entourage";
 "params_about_licences" = "Licence open-source";
 "params_about_title" = "Aide et à propos";
 
@@ -514,3 +514,11 @@
 "neighborhood_choosephoto_validate" = "Valider";
 "neighborhood_choosephoto_error" = "Veuillez sélectionnez une image";
 
+/***
+* Edit group
+***/
+"neighborhoodEditPhotoTitle" = "Modifier la photo";
+"neighborhoodEditCatMessage" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de discussion du groupe. - obligatoire";
+"neighborhoodEditCatMessageHighlight" = "- obligatoire";
+"neighborhoodEdit_error" = "Veuillez remplir tous les champs obligatoires";
+"neighborhoodEditValidateTitle" = "Votre groupe à bien été modifié ! PLACEHOLDER";
