@@ -86,7 +86,7 @@ struct Neighborhood:Codable {
         }
         
         if let tagOtherMessage = tagOtherMessage {
-            dict["message"] = tagOtherMessage
+            dict["other_interest"] = tagOtherMessage
         }
         
         return dict
