@@ -488,7 +488,7 @@
 "neighborhoodCreateCatMessage" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de discussion du groupe. - obligatoire";
 "neighborhoodCreateCatMessageMandatory" = "- obligatoire";
 "neighborhoodCreateCatOtherTitle" = "Décrivez en un mot la catégorie de votre groupe";
-"neighborhoodCreateCatOtherPlaceholder" = "Veuillez saisir au maximum 80 caractère";
+"neighborhoodCreateCatOtherPlaceholder" = "Veuillez saisir au maximum 80 caractères";
 
 "neighborhoodCreatePhase2_error" = "Veuillez choisir au moins une catégorie";
 "neighborhoodCreatePhase2_others_error" = "Veuillez préciser la catégorie divers";

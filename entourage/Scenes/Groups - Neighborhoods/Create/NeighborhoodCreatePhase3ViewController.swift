@@ -14,6 +14,7 @@ class NeighborhoodCreatePhase3ViewController: UIViewController {
     weak var pageDelegate:NeighborhoodCreateMainDelegate? = nil
     
     var image:NeighborhoodImage? = nil
+    var group_welcome:String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ extension NeighborhoodCreatePhase3ViewController: UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellMessage", for: indexPath) as! NeighborhoodCreateDescriptionCell
-            cell.populateCell(title: "addPhotoCreateDescriptionTitle", description: "addPhotoCreateDescriptionSubtitle", placeholder: "addPhotoCreateDescriptionPlaceholder", delegate: self,textInputType:.descriptionWelcome)
+            cell.populateCell(title: "addPhotoCreateDescriptionTitle", description: "addPhotoCreateDescriptionSubtitle", placeholder: "addPhotoCreateDescriptionPlaceholder", delegate: self,about: group_welcome,textInputType:.descriptionWelcome)
             return cell
         }
         
@@ -61,6 +62,7 @@ extension NeighborhoodCreatePhase3ViewController: ChoosePictureNeighborhoodDeleg
 //MARK: - NeighborhoodCreateDescriptionCellDelegate -
 extension NeighborhoodCreatePhase3ViewController:NeighborhoodCreateDescriptionCellDelegate {
     func updateFromTextView(text: String?,textInputType:TextInputType) {
+        group_welcome = text
         pageDelegate?.addGroupWelcome(message: text)
     }
 }

@@ -16,6 +16,8 @@ class NeighborhoodCreatePhase1ViewController: UIViewController {
     var location_new:CLLocationCoordinate2D? = nil
     var location_name_new:String? = nil
     var location_googlePlace_new:GMSPlace? = nil
+    var group_name:String? = nil
+    var group_description:String? = nil
     
     var isFromPlaceSelection = false
     weak var pageDelegate:NeighborhoodCreateMainDelegate? = nil
@@ -65,11 +67,11 @@ extension NeighborhoodCreatePhase1ViewController: UITableViewDelegate, UITableVi
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupName", for: indexPath) as! NeighborhoodCreateNameCell
-            cell.populateCell(delegate: self )
+            cell.populateCell(delegate: self,name: group_name)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupDescription", for: indexPath) as! NeighborhoodCreateDescriptionCell
-            cell.populateCell(title: "neighborhoodCreateDescriptionTitle", description: "neighborhoodCreateDescriptionSubtitle", placeholder: "neighborhoodCreateTitleDescriptionPlaceholder", delegate: self,textInputType:.descriptionAbout)
+            cell.populateCell(title: "neighborhoodCreateDescriptionTitle", description: "neighborhoodCreateDescriptionSubtitle", placeholder: "neighborhoodCreateTitleDescriptionPlaceholder", delegate: self,about: group_description, textInputType:.descriptionAbout)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupPlace", for: indexPath) as! NeighborhoodCreateLocationCell
@@ -96,6 +98,7 @@ extension NeighborhoodCreatePhase1ViewController: UITableViewDelegate, UITableVi
 //MARK: - NeighborhoodCreateDescriptionCellDelegate / NeighborhoodCreateLocationCellDelegate -
 extension NeighborhoodCreatePhase1ViewController: NeighborhoodCreateDescriptionCellDelegate, NeighborhoodCreateLocationCellDelegate, NeighborhoodCreateNameCellDelegate {
     func updateFromTextView(text: String?,textInputType:TextInputType) {
+        self.group_description = text
         pageDelegate?.addGroupDescription(text)
     }
     
@@ -109,6 +112,7 @@ extension NeighborhoodCreatePhase1ViewController: NeighborhoodCreateDescriptionC
     }
     
     func updateFromGroupNameTF(text: String?) {
+        self.group_name = text
         pageDelegate?.addGroupName(text!)
     }
 }
