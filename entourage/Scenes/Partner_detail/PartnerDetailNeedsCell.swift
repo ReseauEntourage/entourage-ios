@@ -46,7 +46,6 @@ class PartnerDetailNeedsCell: UITableViewCell {
         if !(partner?.donations_needs?.isEmpty ?? true) {
             hasNeeds = true
             ui_view_needs_donation.isHidden = false
-            ui_title_needs_donation.text = "Donations"
             ui_description_needs_donation.text = partner?.donations_needs
         }
         else {
@@ -56,7 +55,6 @@ class PartnerDetailNeedsCell: UITableViewCell {
         if !(partner?.volunteers_needs?.isEmpty ?? true) {
             hasNeeds = true
             ui_view_needs_volunteer.isHidden = false
-            ui_title_needs_volunteer.text = "Volontaires"
             ui_description_needs_volunteer.text = partner?.volunteers_needs
         }
         else {
