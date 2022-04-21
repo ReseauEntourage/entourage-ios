@@ -432,7 +432,7 @@
 //Detail user profile
 "detail_user_send_message" = "Écrire un message";
 "detail_user_his_activity" = "Son activité";
-"detail_user_his_interests" = "Centre d’interêt";
+"detail_user_his_interests" = "Centres d’intérêt";
 "detail_user_button_signal" = "Signaler l’utilisateur";
 "report_user_title" = "Signaler le membre";
 "report_user_mandatory" = "- obligatoire";

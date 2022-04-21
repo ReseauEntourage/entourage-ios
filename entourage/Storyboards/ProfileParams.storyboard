@@ -847,7 +847,7 @@
         <!--Main Params View Controller-->
         <scene sceneID="jg3-JB-U4j">
             <objects>
-                <viewController storyboardIdentifier="mainParamVC" id="SIm-aP-hfl" customClass="MainParamsViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainParamVC" modalPresentationStyle="fullScreen" id="SIm-aP-hfl" customClass="MainParamsViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lMH-e0-SDn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1285,7 +1285,7 @@
         <!--Params About View Controller-->
         <scene sceneID="FMw-NI-RD1">
             <objects>
-                <viewController storyboardIdentifier="paramsHelpVC" id="XPl-Q2-DVs" customClass="ParamsAboutViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="paramsHelpVC" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overCurrentContext" id="XPl-Q2-DVs" customClass="ParamsAboutViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C9a-UI-dte">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1321,7 +1321,7 @@
                                                             <rect key="frame" x="32" y="0.0" width="350" height="65"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMu-gV-JnA">
-                                                                    <rect key="frame" x="0.0" y="22.5" width="350" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="24" width="350" height="17.5"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1362,7 +1362,7 @@
                                         </prototypes>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="TYB-Mt-rl9" firstAttribute="leading" secondItem="2Yg-gD-AGE" secondAttribute="leading" id="10k-h8-xgr"/>
@@ -1381,6 +1381,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="va3-Gt-735"/>
+                        <color key="backgroundColor" name="orange_light_a70"/>
                         <constraints>
                             <constraint firstItem="2Yg-gD-AGE" firstAttribute="top" secondItem="va3-Gt-735" secondAttribute="top" id="2YK-zB-Drn"/>
                             <constraint firstItem="2Yg-gD-AGE" firstAttribute="leading" secondItem="va3-Gt-735" secondAttribute="leading" id="WLp-fC-k34"/>
@@ -1398,25 +1399,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="56c-Ls-yJe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4086.9565217391309" y="580.58035714285711"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="E7c-Li-ZFE">
-            <objects>
-                <navigationController storyboardIdentifier="paramsHelpNavVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="jw7-3O-MzP" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5QZ-eO-wuN">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="XPl-Q2-DVs" kind="relationship" relationship="rootViewController" id="MY8-fu-1jD"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YeK-8s-jeH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3176.811594202899" y="580.58035714285711"/>
+            <point key="canvasLocation" x="3178" y="581"/>
         </scene>
         <!--Profile Editor View Controller-->
         <scene sceneID="21o-Kl-aYI">
@@ -2427,7 +2410,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KAi-KN-tzT">
-                                        <rect key="frame" x="0.0" y="144" width="414" height="534"/>
+                                        <rect key="frame" x="0.0" y="144" width="414" height="586"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellInterest" rowHeight="64" id="7Xf-yd-p35" customClass="SelectTagCell" customModule="Ent_Beta" customModuleProvider="target">
@@ -2550,7 +2533,7 @@
                                     <constraint firstItem="KAi-KN-tzT" firstAttribute="top" secondItem="bRb-MO-XE3" secondAttribute="bottom" constant="20" id="bAh-hc-kfd"/>
                                     <constraint firstItem="s9F-9V-nqS" firstAttribute="top" secondItem="sDc-Hg-Bfv" secondAttribute="bottom" id="bc1-Ci-CQ4"/>
                                     <constraint firstAttribute="trailing" secondItem="yyy-qe-twZ" secondAttribute="trailing" id="dXv-FO-eRV"/>
-                                    <constraint firstItem="sDc-Hg-Bfv" firstAttribute="top" secondItem="KAi-KN-tzT" secondAttribute="bottom" id="dcN-ld-04a"/>
+                                    <constraint firstItem="s9F-9V-nqS" firstAttribute="top" secondItem="KAi-KN-tzT" secondAttribute="bottom" constant="8" symbolic="YES" id="g2R-gm-gxD"/>
                                     <constraint firstItem="s9F-9V-nqS" firstAttribute="leading" secondItem="AQP-rL-VUX" secondAttribute="leading" id="j6e-Db-JSW"/>
                                     <constraint firstAttribute="trailing" secondItem="sDc-Hg-Bfv" secondAttribute="trailing" id="kIM-LD-hsc"/>
                                     <constraint firstAttribute="bottom" secondItem="s9F-9V-nqS" secondAttribute="bottom" id="kQr-Os-GEH"/>
@@ -2927,6 +2910,9 @@
         </namedColor>
         <namedColor name="orange_light_a50">
             <color red="1" green="0.6119999885559082" blue="0.36500000953674316" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_light_a70">
+            <color red="1" green="0.6119999885559082" blue="0.36500000953674316" alpha="0.69999998807907104" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

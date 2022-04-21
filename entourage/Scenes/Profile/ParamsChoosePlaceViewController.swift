@@ -36,7 +36,7 @@ class ParamsChoosePlaceViewController: BasePopViewController {
         }
         
         //                OTLogger.logEvent(View_Profile_Action_Zone)//TODO:  Analytics
-        ui_top_view.populateView(title: "profileEditLocationTitle".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
+        ui_top_view.populateView(title: "profileEditLocationTitle".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
                 
         ui_title_add_place.text = "profileEditLocationLegend*".localized
         ui_label_description.text =  "profileEditLocationDescription".localized

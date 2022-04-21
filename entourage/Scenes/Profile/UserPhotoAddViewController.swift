@@ -40,7 +40,7 @@ class UserPhotoAddViewController: BasePopViewController {
             let cancelBt = UIBarButtonItem(title: "cancel".localized, style: .plain, target: self, action: #selector(close))
             self.navigationItem.setLeftBarButton(cancelBt, animated: true)
             
-            ui_top_view.populateView(title: "take_photo_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
+            ui_top_view.populateView(title: "take_photo_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
             
             ui_bt_take_photo.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
             ui_bt_take_photo.setTitleColor(.white, for: .normal)

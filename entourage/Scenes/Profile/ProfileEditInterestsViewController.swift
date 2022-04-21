@@ -22,7 +22,7 @@ class ProfileEditInterestsViewController: BasePopViewController {
         
         currentUser = UserDefaults.currentUser
         
-        ui_top_view.populateView(title: "editUserInterestsTitle".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
+        ui_top_view.populateView(title: "editUserInterestsTitle".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
         
 
         self.ui_lbl_info.font = ApplicationTheme.getFontCourantRegularNoir().font
