@@ -20,6 +20,7 @@ class NeighborhoodEditViewController: UIViewController {
     @IBOutlet weak var ui_view_button: UIView!
     @IBOutlet weak var ui_button_validate: UIButton!
     
+    @IBOutlet weak var ui_bt_validate_bottom_constraint: NSLayoutConstraint!
     
     var location_new:CLLocationCoordinate2D? = nil
     var location_name_new:String? = nil
@@ -53,6 +54,8 @@ class NeighborhoodEditViewController: UIViewController {
         
         ui_view_error.hide()
         
+        ui_container_view.backgroundColor = .appBeigeClair
+        
         ui_view_button.layer.cornerRadius = ui_view_button.frame.height / 2
         ui_button_validate.layer.cornerRadius = ui_button_validate.frame.height / 2
         ui_button_validate.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
@@ -62,14 +65,20 @@ class NeighborhoodEditViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        ui_top_view.populateCustom(title: "neighborhood_create_group_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
+        ui_top_view.populateCustom(title: "neighborhood_edit_group_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
         
         ui_tableview.layer.cornerRadius = ApplicationTheme.bigCornerRadius
+        ui_tableview.layer.maskedCorners = CACornerMask.radiusTopOnly()
         ui_container_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
+        ui_container_view.layer.maskedCorners = CACornerMask.radiusTopOnly()
         
         tagsInterests = Metadatas.sharedInstance.tagsInterest
         
         getCurrentNeighBorhood()
+        
+        if ApplicationTheme.iPhoneHasNotch() {
+            ui_bt_validate_bottom_constraint.constant = 0
+        }
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {

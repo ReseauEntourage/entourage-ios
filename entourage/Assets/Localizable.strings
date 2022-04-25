@@ -33,6 +33,13 @@
 "no" = "Non";
 "about_email_notavailable" = "Email introuvable";
 
+//TABBAR
+"tabbar_home" = "Accueil";
+"tabbar_gifts" = "Dons";
+"tabbar_messages" = "Messages";
+"tabbar_groups" = "Groupes";
+"tabbar_events" = "Événements";
+
 //PreOnboarding
 "next" = "Suivant";
 "connectMe" = "Me connecter";
@@ -483,6 +490,7 @@
 //Error create group
 "neighborhoodCreateInputErrorMinCharName" = "Le nom du groupe doit contenir au minimum 2 caractères.";
 "neighborhoodCreatePhase1_error" = "Veuillez remplir tous les champs obligatoires";
+"neighborhoodCreatePhase2_error" = "Une catégorie doit être sélectionnée.";
 
 //Phase 2
 "neighborhoodCreateCatMessage" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de discussion du groupe. - obligatoire";
@@ -517,6 +525,7 @@
 /***
 * Edit group
 ***/
+"neighborhood_edit_group_title" = "Modifier le groupe";
 "neighborhoodEditPhotoTitle" = "Modifier la photo";
 "neighborhoodEditCatMessage" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de discussion du groupe. - obligatoire";
 "neighborhoodEditCatMessageHighlight" = "- obligatoire";

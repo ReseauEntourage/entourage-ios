@@ -109,9 +109,8 @@
                                     <action selector="action_show_my_profile:" destination="g5E-Hr-Pca" eventType="touchUpInside" id="GXv-xl-usW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfr-kh-rj5">
-                                <rect key="frame" x="33" y="221" width="91" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfr-kh-rj5">
+                                <rect key="frame" x="32" y="221" width="91" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Edit group"/>
                                 <connections>
@@ -124,7 +123,9 @@
                         <constraints>
                             <constraint firstItem="98v-0C-lBw" firstAttribute="trailing" secondItem="iEl-VN-5sk" secondAttribute="trailing" constant="35" id="1Mz-mY-hA7"/>
                             <constraint firstItem="iZ5-YR-2J4" firstAttribute="top" secondItem="98v-0C-lBw" secondAttribute="top" constant="100" id="6Zy-4D-CpP"/>
+                            <constraint firstItem="dfr-kh-rj5" firstAttribute="top" secondItem="iZ5-YR-2J4" secondAttribute="bottom" constant="46" id="Agu-3f-udP"/>
                             <constraint firstItem="iZ5-YR-2J4" firstAttribute="leading" secondItem="98v-0C-lBw" secondAttribute="leading" constant="32" id="VLR-C9-sOf"/>
+                            <constraint firstItem="dfr-kh-rj5" firstAttribute="leading" secondItem="iZ5-YR-2J4" secondAttribute="leading" id="gxx-9C-ouS"/>
                             <constraint firstItem="iEl-VN-5sk" firstAttribute="top" secondItem="98v-0C-lBw" secondAttribute="top" constant="100" id="yo4-v0-f8I"/>
                         </constraints>
                     </view>

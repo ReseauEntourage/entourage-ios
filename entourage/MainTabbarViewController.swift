@@ -11,10 +11,10 @@ import UIKit
 class MainTabbarViewController: UITabBarController {
 
     var homeVC:UINavigationController!
-    var guideVC:UINavigationController!
-    var plusVC:UINavigationController!
+    var giftsVC:UINavigationController!
     var messagesVC:UINavigationController!
-    var menuVC:UINavigationController!
+    var groupVC:UINavigationController!
+    var eventsVC:UINavigationController!
     
     var temporaryNavPop:UIViewController? = nil
     
@@ -78,64 +78,68 @@ class MainTabbarViewController: UITabBarController {
     }
     
     func setupVCs() {
-        let  _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempUsersVC")
         
+        let _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempGroupVC")
         homeVC = UINavigationController.init(rootViewController: _homeVC)
-        homeVC.tabBarItem.title = "Users".localized
-        homeVC.tabBarItem.image = UIImage.init(named: "ic_tab_users")?.withRenderingMode(.alwaysOriginal)
-        homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_users")
-        homeVC.tabBarItem.tag = 0
+        homeVC.isNavigationBarHidden = true
+        homeVC.tabBarItem.title = "tabbar_home".localized
+        homeVC.tabBarItem.accessibilityLabel = "Home"
+        homeVC.tabBarItem.tag = 0 //
+        homeVC.tabBarItem.image = UIImage.init(named: "ic_home_off")?.withRenderingMode(.alwaysOriginal)
+        homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_home_on")
         
-        let _guideVC = UIStoryboard.init(name: "GuideSolidarity", bundle: nil).instantiateViewController(withIdentifier: "MainGuide")
-        guideVC = UINavigationController.init(rootViewController: _guideVC)
-        guideVC.tabBarItem.title = "guide".localized
-        guideVC.tabBarItem.image = UIImage.init(named: "ic_tab_guide")?.withRenderingMode(.alwaysOriginal)
-        guideVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_guide")
-        guideVC.tabBarItem.tag = 1
         
-        let _plusVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempGroupVC")
-
-        plusVC = UINavigationController.init(rootViewController: _plusVC)
-        plusVC.tabBarItem.title = "Home+".localized
-        plusVC.tabBarItem.accessibilityLabel = "Home +"
-        plusVC.tabBarItem.tag = 2
-        plusVC.tabBarItem.image = UIImage.init(named: "ic_tab_group")?.withRenderingMode(.alwaysOriginal)
-        plusVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_group")
+        let _giftsVC = UIViewController() //UIStoryboard.init(name: "GuideSolidarity", bundle: nil).instantiateViewController(withIdentifier: "MainGuide")
+        giftsVC = UINavigationController.init(rootViewController: _giftsVC)
+        giftsVC.isNavigationBarHidden = true
+        giftsVC.tabBarItem.title = "tabbar_gifts".localized
+        giftsVC.tabBarItem.image = UIImage.init(named: "ic_gifts_off")?.withRenderingMode(.alwaysOriginal)
+        giftsVC.tabBarItem.selectedImage = UIImage.init(named: "ic_gifts_on")
+        giftsVC.tabBarItem.tag = 1
         
-
-        let _messagesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "main3VC")
-
-        messagesVC = UINavigationController.init(rootViewController: _messagesVC)
-        messagesVC.tabBarItem.title = "message".localized
-        messagesVC.tabBarItem.image = UIImage.init(named: "ic_tab_message")?.withRenderingMode(.alwaysOriginal)
-        messagesVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_message_selected")
-        messagesVC.tabBarItem.tag = 3
         
-        let _menuVC = UIStoryboard.init(name: "ProfileParams", bundle: nil).instantiateViewController(withIdentifier: "mainProfileParamsVC")
-        menuVC = UINavigationController.init(rootViewController: _menuVC)
-        menuVC.isNavigationBarHidden = true
-        menuVC.tabBarItem.title = "profil".localized
-        menuVC.tabBarItem.image = UIImage.init(named: "ic_tab_profile")?.withRenderingMode(.alwaysTemplate)
-        menuVC.tabBarItem.selectedImage = UIImage.init(named: "ic_tab_profile")
-        menuVC.tabBarItem.tag = 4
-        viewControllers = [plusVC,menuVC,homeVC,guideVC,messagesVC]
+        let  _msgVC = UIViewController() //UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempUsersVC")
+        messagesVC = UINavigationController.init(rootViewController: _msgVC)
+        messagesVC.isNavigationBarHidden = true
+        messagesVC.tabBarItem.title = "tabbar_messages".localized
+        messagesVC.tabBarItem.image = UIImage.init(named: "ic_message_off")?.withRenderingMode(.alwaysOriginal)
+        messagesVC.tabBarItem.selectedImage = UIImage.init(named: "ic_message_on")
+        messagesVC.tabBarItem.tag = 2
+        
+        
+        let _groupVC = UIViewController() // UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "home")
+        groupVC = UINavigationController.init(rootViewController: _groupVC)
+        groupVC.isNavigationBarHidden = true
+        groupVC.tabBarItem.title = "tabbar_groups".localized
+        groupVC.tabBarItem.image = UIImage.init(named: "ic_group_off")?.withRenderingMode(.alwaysOriginal)
+        groupVC.tabBarItem.selectedImage = UIImage.init(named: "ic_group_on")
+        groupVC.tabBarItem.tag = 3
+        
+        
+        let _eventsVC = UIViewController() //UIStoryboard.init(name: "ProfileParams", bundle: nil).instantiateViewController(withIdentifier: "mainProfileParamsVC")
+        eventsVC = UINavigationController.init(rootViewController: _eventsVC)
+        eventsVC.isNavigationBarHidden = true
+        eventsVC.tabBarItem.title = "tabbar_events".localized
+        eventsVC.tabBarItem.image = UIImage.init(named: "ic_event_off")?.withRenderingMode(.alwaysOriginal)
+        eventsVC.tabBarItem.selectedImage = UIImage.init(named: "ic_event_on")
+        eventsVC.tabBarItem.tag = 4
+        viewControllers = [homeVC,giftsVC,messagesVC,groupVC,eventsVC]
         boldSelectedItem()
     }
     
     @objc func boldSelectedItem() {
-        let regularFont = UIFont.systemFont(ofSize: 13, weight: .regular)
-       // let regularFont = UIFont.init(name: "SFUIText-Regular", size: 13)
-        let regularTextAttr:[NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor:UIColor.darkGray,NSAttributedString.Key.font:regularFont]
+        let regularFont = ApplicationTheme.getFontNunitoLight(size: 13)
+        let regularTextAttr:[NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor:UIColor.appOrangeLight,NSAttributedString.Key.font:regularFont]
         
         for item in tabBar.items! {
             item.setTitleTextAttributes(regularTextAttr as [NSAttributedString.Key : Any], for: .normal)
         }
-        let selectedFont = UIFont.systemFont(ofSize: 13, weight: .bold)
-       // let selectedFont = UIFont.init(name: "SFUIText-Bold", size: 13)
-               let selectionTextAttr:[NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor:UIColor.appOrange,NSAttributedString.Key.font:selectedFont]
         
-         tabBar.selectedItem?.setTitleTextAttributes(selectionTextAttr as [NSAttributedString.Key : Any], for: .normal)
-       
+        let selectedFont = ApplicationTheme.getFontNunitoLight(size: 13)
+        let selectionTextAttr:[NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor:UIColor.appOrange,NSAttributedString.Key.font:selectedFont]
+        
+        tabBar.selectedItem?.setTitleTextAttributes(selectionTextAttr as [NSAttributedString.Key : Any], for: .normal)
+        
        
         //Analytics
         if oldItemSelected == currentItemSelected {

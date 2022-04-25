@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import IHProgressHUD
 
 class NeighborhoodCreatePhase2ViewController: UIViewController {
     
     @IBOutlet weak var ui_lbl_info: UILabel!
     @IBOutlet weak var ui_tableview: UITableView!
-    @IBOutlet weak var ui_error_view: MJErrorInputView!
     var tagsInterests:Tags! = nil
     
+    @IBOutlet weak var ui_error_view: MJErrorInputTextView!
     weak var pageDelegate:NeighborhoodCreateMainDelegate? = nil
     
     var showEditOther = false
@@ -28,10 +29,6 @@ class NeighborhoodCreatePhase2ViewController: UIViewController {
         let stringAttr = Utils.formatString(messageTxt: "neighborhoodCreateCatMessage".localized, messageTxtHighlight: "neighborhoodCreateCatMessageMandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
         ui_lbl_info.attributedText = stringAttr
         
-        //TODO: on affiche le fond transparent pour l'alerte ou un fond blanc ?
-        ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
-        ui_error_view.hide()
-        
         tagsInterests = Metadatas.sharedInstance.tagsInterest
         
         ui_tableview.dataSource = self
@@ -39,6 +36,11 @@ class NeighborhoodCreatePhase2ViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showError), name: NSNotification.Name(kNotificationNeighborhoodCreatePhase2Error), object: nil)
+        
+        ui_error_view.isHidden = true
+        self.ui_error_view.setupView(title: "neighborhoodCreatePhase2_error".localized)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +48,7 @@ class NeighborhoodCreatePhase2ViewController: UIViewController {
             self.dismiss(animated: true)
             return
         }
-        
+        ui_error_view.isHidden = true
         super.viewWillAppear(animated)
     }
     
@@ -84,9 +86,10 @@ class NeighborhoodCreatePhase2ViewController: UIViewController {
         
         if hasOneCheck {
             updateInterests()
+            ui_error_view.isHidden = true
         }
         else {
-            showError(message: "editUserInterests_error".localized)
+            ui_error_view.isHidden = false
         }
     }
     
@@ -94,16 +97,22 @@ class NeighborhoodCreatePhase2ViewController: UIViewController {
         UserService.updateUserInterests(interests: tagsInterests.getTagsForWS()) { user, error in
             Logger.print("Return update Interests : \(user)")
             if let err = error?.error {
-                self.showError(message: err.localizedDescription)
+                IHProgressHUD.showError(withStatus: err.localizedDescription)
+                
                 return
             }
             self.dismiss(animated: true)
         }
     }
     
-    func showError(message:String) {
-        ui_error_view.changeTitleAndImage(title: message)
-        ui_error_view.show()
+    @objc func showError(notification:Notification) {
+        if let message = notification.userInfo?["error_message"] as? String {
+            ui_error_view.setupView(title: message, imageName: nil)
+            ui_error_view.isHidden = false
+        }
+        else {
+            ui_error_view.isHidden = true
+        }
     }
 }
 

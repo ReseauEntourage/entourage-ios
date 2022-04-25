@@ -9,3 +9,4 @@ import Foundation
 
 
 let kNotificationProfilePictureUpdated = "NotificationProfilePictureUpdated"
+let kNotificationNeighborhoodCreatePhase2Error = "NeighborhoodCreatePhase2Error"

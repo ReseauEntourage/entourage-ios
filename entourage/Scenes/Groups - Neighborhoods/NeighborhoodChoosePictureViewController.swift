@@ -24,6 +24,8 @@ class NeighborhoodChoosePictureViewController: BasePopViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ui_view_container.backgroundColor = .appBeigeClair
+        
         ui_bt_validate.layer.cornerRadius = ui_bt_validate.frame.height / 2
         ui_bt_validate.setTitleColor(.white, for: .normal)
         ui_bt_validate.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)

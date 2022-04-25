@@ -92,7 +92,12 @@ class NeighborhoodCreateMainViewController: UIViewController {
             goPageNext()
         }
         else {
-            showError(message: isValid.message)
+            if currentPhasePosition == 2 {
+                NotificationCenter.default.post(Notification(name: NSNotification.Name(kNotificationNeighborhoodCreatePhase2Error), object: nil, userInfo: ["error_message":isValid.message]))
+            }
+            else {
+                showError(message: isValid.message)
+            }
         }
     }
     
@@ -216,7 +221,11 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
                 newNeighborhood.interests?.append(tag.key)
             }
         }
-        _ = checkValidation()
+        let validation = checkValidation()
+        
+        if validation.isValid {
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(kNotificationNeighborhoodCreatePhase2Error), object: nil, userInfo:nil))
+        }
     }
     
     func checkValidation() -> (isValid:Bool, message:String) {

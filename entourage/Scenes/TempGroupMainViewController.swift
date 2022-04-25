@@ -29,7 +29,7 @@ class TempGroupMainViewController: UIViewController {
     @IBAction func show(_ sender: Any) {
         Logger.print("***** show")
         
-        let  navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
+        let  navVC = UIStoryboard.init(name: "Neighborhood_Create", bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
@@ -38,7 +38,7 @@ class TempGroupMainViewController: UIViewController {
     }
 
     @IBAction func action_edit_group(_ sender: Any) {
-        let  navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "editGroupVC")
+        let  navVC = UIStoryboard.init(name: "Neighborhood_Create", bundle: nil).instantiateViewController(withIdentifier: "editGroupVC")
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
         

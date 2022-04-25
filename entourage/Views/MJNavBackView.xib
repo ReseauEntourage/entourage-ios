@@ -60,7 +60,7 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAl-Jb-X6C">
-                            <rect key="frame" x="69" y="24.5" width="313" height="19.5"/>
+                            <rect key="frame" x="66" y="24.5" width="316" height="19.5"/>
                             <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="14"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                         <constraint firstItem="Fjg-oT-Srm" firstAttribute="centerY" secondItem="ryC-hl-R29" secondAttribute="centerY" id="1Ve-os-J9f"/>
                         <constraint firstItem="ASw-eC-AtQ" firstAttribute="top" secondItem="LNG-wP-8YF" secondAttribute="bottom" id="9wy-Ko-eTL"/>
                         <constraint firstAttribute="trailing" secondItem="ASw-eC-AtQ" secondAttribute="trailing" constant="32" id="Dp8-6Z-Aqw"/>
-                        <constraint firstItem="hAl-Jb-X6C" firstAttribute="leading" secondItem="Fjg-oT-Srm" secondAttribute="trailing" constant="17" id="MDp-Y3-FOm"/>
+                        <constraint firstItem="hAl-Jb-X6C" firstAttribute="leading" secondItem="Fjg-oT-Srm" secondAttribute="trailing" constant="14" id="MDp-Y3-FOm"/>
                         <constraint firstItem="LNG-wP-8YF" firstAttribute="leading" secondItem="ryC-hl-R29" secondAttribute="leading" id="SSK-bj-ZJW"/>
                         <constraint firstItem="ASw-eC-AtQ" firstAttribute="leading" secondItem="ryC-hl-R29" secondAttribute="leading" constant="32" id="dLm-B9-Ge3"/>
                         <constraint firstAttribute="height" constant="68" id="iZN-Dx-O4A"/>

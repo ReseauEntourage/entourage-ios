@@ -17,8 +17,8 @@ class SelectTagCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        ui_title.textColor = ApplicationTheme.getFontCourantBoldNoir().color
-        ui_title.font = ApplicationTheme.getFontCourantBoldNoir().font
+        ui_title.textColor = ApplicationTheme.getFontCourantRegularNoir().color
+        ui_title.font = ApplicationTheme.getFontCourantRegularNoir().font
     }
     
     func populateCell(title:String,isChecked:Bool,imageName:String? = nil, hideSeparator:Bool = false) {
@@ -32,5 +32,12 @@ class SelectTagCell: UITableViewCell {
         }
         
         ui_view_separator?.isHidden = hideSeparator
+        
+        if isChecked {
+            ui_title.font = ApplicationTheme.getFontCourantBoldNoir().font
+        }
+        else {
+            ui_title.font = ApplicationTheme.getFontCourantRegularNoir().font
+        }
     }
 }

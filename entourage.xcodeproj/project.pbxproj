@@ -115,7 +115,7 @@
 		02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */; };
 		02B7921E27F7385A003AFFB9 /* Neighborhood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7921D27F7385A003AFFB9 /* Neighborhood.swift */; };
 		02B7922127F73F6A003AFFB9 /* TempGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */; };
-		02B7922527F74801003AFFB9 /* Neighborhood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B7922427F74801003AFFB9 /* Neighborhood.storyboard */; };
+		02B7922527F74801003AFFB9 /* Neighborhood_Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B7922427F74801003AFFB9 /* Neighborhood_Create.storyboard */; };
 		02B7922727F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7922627F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift */; };
 		02C0A0E2278EDCC400B0C646 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C0A0E1278EDCC400B0C646 /* UserService.swift */; };
 		02C0A0E7278EEC6B00B0C646 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */; };
@@ -303,7 +303,7 @@
 		02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodService.swift; sourceTree = "<group>"; };
 		02B7921D27F7385A003AFFB9 /* Neighborhood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neighborhood.swift; sourceTree = "<group>"; };
 		02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempGroupMainViewController.swift; sourceTree = "<group>"; };
-		02B7922427F74801003AFFB9 /* Neighborhood.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neighborhood.storyboard; sourceTree = "<group>"; };
+		02B7922427F74801003AFFB9 /* Neighborhood_Create.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neighborhood_Create.storyboard; sourceTree = "<group>"; };
 		02B7922627F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreateMainViewController.swift; sourceTree = "<group>"; };
 		02C0A0E1278EDCC400B0C646 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -576,7 +576,7 @@
 				02B37824279B06F600B204EF /* Others.storyboard */,
 				02856F6127DA334100988FF7 /* ProfileParams.storyboard */,
 				0207BF8427F2059400631914 /* UserDetail.storyboard */,
-				02B7922427F74801003AFFB9 /* Neighborhood.storyboard */,
+				02B7922427F74801003AFFB9 /* Neighborhood_Create.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -993,7 +993,7 @@
 				0268194C278DF4A800A98A4A /* Onboarding_V2.storyboard in Resources */,
 				02B37825279B06F600B204EF /* Others.storyboard in Resources */,
 				02CCE67627D78C7500D6976C /* Quicksand-Bold.ttf in Resources */,
-				02B7922527F74801003AFFB9 /* Neighborhood.storyboard in Resources */,
+				02B7922527F74801003AFFB9 /* Neighborhood_Create.storyboard in Resources */,
 				023B07CC27D664F6007752AC /* Profile.xcassets in Resources */,
 				025D8768278DED3C00909101 /* AppConfigurations.plist in Resources */,
 				02CCE67C27D78CAB00D6976C /* NunitoSans-SemiBold.ttf in Resources */,
