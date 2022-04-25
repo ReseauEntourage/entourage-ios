@@ -9,12 +9,16 @@ import UIKit
 
 class MainHomeViewController: UIViewController {
 
+    @IBOutlet weak var ui_top_bar: MJNavBackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         MetadatasService.getMetadatas { error in
             Logger.print("***** return get metadats ? \(error)")
         }
+        
+        ui_top_bar.populateView(title: "HOME".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: false)
     }
     
     @IBAction func show_user(_ sender: UIButton) {
@@ -44,5 +48,12 @@ class MainHomeViewController: UIViewController {
             }
         }
         
+    }
+}
+
+//MARK: - MJNavBackViewDelegate -
+extension MainHomeViewController: MJNavBackViewDelegate {
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

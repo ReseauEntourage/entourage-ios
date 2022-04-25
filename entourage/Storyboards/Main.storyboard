@@ -33,24 +33,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbu-6x-Jiu">
-                                <rect key="frame" x="20" y="144" width="195.5" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="User complet sans partner"/>
-                                <connections>
-                                    <action selector="show_user:" destination="1c8-0u-tyG" eventType="touchUpInside" id="tg3-Ws-PxK"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2D-sE-kty">
-                                <rect key="frame" x="20" y="94" width="111" height="31"/>
+                                <rect key="frame" x="20" y="144" width="111" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="User complet"/>
                                 <connections>
                                     <action selector="show_user:" destination="1c8-0u-tyG" eventType="touchUpInside" id="PZM-UR-f7d"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbu-6x-Jiu">
+                                <rect key="frame" x="20" y="194" width="195.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="User complet sans partner"/>
+                                <connections>
+                                    <action selector="show_user:" destination="1c8-0u-tyG" eventType="touchUpInside" id="tg3-Ws-PxK"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ay1-cI-q7q">
-                                <rect key="frame" x="20" y="286" width="192" height="31"/>
+                                <rect key="frame" x="20" y="336" width="192" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="User sans centre d'interet"/>
                                 <connections>
@@ -58,27 +58,41 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytA-Qf-4AA">
-                                <rect key="frame" x="20" y="215" width="112" height="31"/>
+                                <rect key="frame" x="20" y="265" width="112" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="User sans bio"/>
                                 <connections>
                                     <action selector="show_user:" destination="1c8-0u-tyG" eventType="touchUpInside" id="XuW-wX-7dM"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ugu-Ob-mKy" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="68"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="a8J-TG-mLf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cKq-Yh-aMj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="E2D-sE-kty" firstAttribute="top" secondItem="cKq-Yh-aMj" secondAttribute="top" constant="50" id="9TN-Vf-krq"/>
+                            <constraint firstItem="cKq-Yh-aMj" firstAttribute="trailing" secondItem="Ugu-Ob-mKy" secondAttribute="trailing" id="GA3-YH-ZEV"/>
                             <constraint firstItem="ytA-Qf-4AA" firstAttribute="top" secondItem="Mbu-6x-Jiu" secondAttribute="bottom" constant="40" id="GOV-7Z-wZA"/>
                             <constraint firstItem="Ay1-cI-q7q" firstAttribute="top" secondItem="ytA-Qf-4AA" secondAttribute="bottom" constant="40" id="JTk-2m-S2a"/>
-                            <constraint firstItem="Mbu-6x-Jiu" firstAttribute="top" secondItem="cKq-Yh-aMj" secondAttribute="top" constant="100" id="Jnk-g7-mcj"/>
+                            <constraint firstItem="Ugu-Ob-mKy" firstAttribute="top" secondItem="cKq-Yh-aMj" secondAttribute="top" id="JmF-1b-Ai3"/>
+                            <constraint firstItem="Mbu-6x-Jiu" firstAttribute="top" secondItem="E2D-sE-kty" secondAttribute="bottom" constant="19" id="LZI-S1-fqk"/>
                             <constraint firstItem="Mbu-6x-Jiu" firstAttribute="leading" secondItem="cKq-Yh-aMj" secondAttribute="leading" constant="20" id="Oq3-hi-HI1"/>
                             <constraint firstItem="Ay1-cI-q7q" firstAttribute="leading" secondItem="ytA-Qf-4AA" secondAttribute="leading" id="TS7-9A-K7T"/>
                             <constraint firstItem="ytA-Qf-4AA" firstAttribute="leading" secondItem="Mbu-6x-Jiu" secondAttribute="leading" id="UbK-7Z-iTB"/>
                             <constraint firstItem="E2D-sE-kty" firstAttribute="leading" secondItem="Mbu-6x-Jiu" secondAttribute="leading" id="Uwt-j4-c8h"/>
+                            <constraint firstItem="E2D-sE-kty" firstAttribute="top" secondItem="Ugu-Ob-mKy" secondAttribute="bottom" constant="32" id="rGJ-Dj-Deh"/>
+                            <constraint firstItem="Ugu-Ob-mKy" firstAttribute="leading" secondItem="z7X-9U-BPh" secondAttribute="leading" id="rWe-gc-tkq"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="ui_top_bar" destination="Ugu-Ob-mKy" id="ZSG-O0-Uz7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wxA-eh-hik" sceneMemberID="firstResponder"/>
             </objects>
@@ -117,6 +131,14 @@
                                     <action selector="action_edit_group:" destination="g5E-Hr-Pca" eventType="touchUpInside" id="eC6-Xy-xjZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6C-yc-Rlf">
+                                <rect key="frame" x="32" y="301" width="110.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Voir les users"/>
+                                <connections>
+                                    <action selector="action_show_users:" destination="g5E-Hr-Pca" eventType="touchUpInside" id="xLI-q2-NqM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="98v-0C-lBw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -125,7 +147,9 @@
                             <constraint firstItem="iZ5-YR-2J4" firstAttribute="top" secondItem="98v-0C-lBw" secondAttribute="top" constant="100" id="6Zy-4D-CpP"/>
                             <constraint firstItem="dfr-kh-rj5" firstAttribute="top" secondItem="iZ5-YR-2J4" secondAttribute="bottom" constant="46" id="Agu-3f-udP"/>
                             <constraint firstItem="iZ5-YR-2J4" firstAttribute="leading" secondItem="98v-0C-lBw" secondAttribute="leading" constant="32" id="VLR-C9-sOf"/>
+                            <constraint firstItem="h6C-yc-Rlf" firstAttribute="top" secondItem="dfr-kh-rj5" secondAttribute="bottom" constant="49" id="e4e-kZ-C3e"/>
                             <constraint firstItem="dfr-kh-rj5" firstAttribute="leading" secondItem="iZ5-YR-2J4" secondAttribute="leading" id="gxx-9C-ouS"/>
+                            <constraint firstItem="h6C-yc-Rlf" firstAttribute="leading" secondItem="dfr-kh-rj5" secondAttribute="leading" id="tLp-GC-ek3"/>
                             <constraint firstItem="iEl-VN-5sk" firstAttribute="top" secondItem="98v-0C-lBw" secondAttribute="top" constant="100" id="yo4-v0-f8I"/>
                         </constraints>
                     </view>

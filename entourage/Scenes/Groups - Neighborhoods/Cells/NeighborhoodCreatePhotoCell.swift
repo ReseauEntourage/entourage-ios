@@ -14,6 +14,7 @@ class NeighborhoodCreatePhotoCell: UITableViewCell {
     
     @IBOutlet weak var ui_view_image: UIView!
     
+    @IBOutlet weak var ui_image_bottom_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_picto_photo: UIImageView!
     @IBOutlet weak var ui_photo: UIImageView!
     
@@ -31,6 +32,13 @@ class NeighborhoodCreatePhotoCell: UITableViewCell {
         ui_description?.textColor = ApplicationTheme.getFontLegend().color
         ui_description?.font = ApplicationTheme.getFontLegend().font
         ui_description?.text = "addPhotoCreateDescription".localized
+        
+        if ApplicationTheme.iPhoneHasNotch() {
+            ui_image_bottom_constraint?.constant = 80
+        }
+        else {
+            ui_image_bottom_constraint?.constant = 120
+        }
     }
     
     func populateCell(urlImg:String?, isEdit:Bool = false) {

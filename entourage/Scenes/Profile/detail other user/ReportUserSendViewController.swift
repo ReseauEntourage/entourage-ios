@@ -43,8 +43,8 @@ class ReportUserSendViewController: UIViewController {
         ui_lbl_mandatory.textColor = ApplicationTheme.getFontLegend().color
         ui_lbl_mandatory.text = "report_user_optional".localized
         
-        ui_bt_send.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
-        ui_bt_send.titleLabel?.textColor = .white
+        ui_bt_send.titleLabel?.font = ApplicationTheme.getFontBoutonBlanc().font
+        ui_bt_send.titleLabel?.textColor = ApplicationTheme.getFontBoutonBlanc().color
         ui_bt_send.layer.cornerRadius = ui_bt_send.frame.height / 2
         ui_bt_send.setTitle("report_user_validate_button".localized, for: .normal)
         ui_bt_send.backgroundColor = .appOrange
