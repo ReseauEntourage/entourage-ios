@@ -82,6 +82,18 @@ struct Tags:Codable {
         return tags
     }
     
+    func hasTagSelected() -> Bool {
+        var isValidTag = false
+        for tag in tags {
+            if tag.isSelected {
+                isValidTag = true
+                break
+            }
+        }
+        return isValidTag
+    }
+    
+    
     mutating func addTag(tag:Tag) {
         tags.append(tag)
     }

@@ -134,14 +134,7 @@ class NeighborhoodEditViewController: UIViewController {
             isValidated = false
         }
         else {
-            var isValidTag = false
-            for tag in tagsInterests.getTags() {
-                if tag.isSelected {
-                    isValidTag = true
-                    break
-                }
-            }
-            isValidated = isValidTag
+            isValidated = tagsInterests.hasTagSelected()
         }
         enableDisableButton(isEnable: isValidated)
     }
@@ -159,8 +152,8 @@ class NeighborhoodEditViewController: UIViewController {
     func checkValidation() {
         
         if !isValidationEnabled {
-            ui_view_error.changeTitleAndImage(title: "neighborhoodEdit_error".localized)
-            ui_view_error.show()
+//            ui_view_error.changeTitleAndImage(title: "neighborhoodEdit_error".localized)
+//            ui_view_error.show()
             return
         }
         
@@ -309,13 +302,13 @@ extension NeighborhoodEditViewController: UITableViewDelegate, UITableViewDataSo
             cell.populateCell(position: 2)
             return cell
         case 1:
-            let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellInterestTitle", for: indexPath) as! TitleOnlyCell
+            let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellInterestTitle", for: indexPath) as! NeighborhoodEditInterestTitleCell
             
             let style = ApplicationTheme.getFontH2Noir()
             let styleHighlight = ApplicationTheme.getFontLegend()
             let attrStr = Utils.formatString(messageTxt: "neighborhoodEditCatMessage".localized, messageTxtHighlight: "neighborhoodEditCatMessageHighlight".localized, fontColorType: style, fontColorTypeHighlight: styleHighlight)
             
-            cell.populateCell(attributedStr:attrStr)
+            cell.populateCell(attributedStr:attrStr, hasTagSelected: tagsInterests.hasTagSelected())
             return cell
         default:
             break

@@ -41,6 +41,7 @@
 		0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */; };
 		0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */; };
 		0246604D27D8A49E00FE1EF8 /* IHProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 0246604C27D8A49E00FE1EF8 /* IHProgressHUD */; };
+		0247AD0228193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247AD0128193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift */; };
 		02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02490DC427EA245E00E2577B /* MJErrorInputView.swift */; };
 		02490DC727EA246B00E2577B /* MJErrorInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02490DC627EA246B00E2577B /* MJErrorInputView.xib */; };
 		02490DC927EA461700E2577B /* Extensions_UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02490DC827EA461700E2577B /* Extensions_UIDevice.swift */; };
@@ -227,6 +228,7 @@
 		023EC27E27FB2D8D003A3051 /* BasePopViewController_Template.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasePopViewController_Template.xib; sourceTree = "<group>"; };
 		0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodChoosePictureViewController.swift; sourceTree = "<group>"; };
 		0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodChoosePhotoCell.swift; sourceTree = "<group>"; };
+		0247AD0128193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodEditInterestTitleCell.swift; sourceTree = "<group>"; };
 		02490DC427EA245E00E2577B /* MJErrorInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJErrorInputView.swift; sourceTree = "<group>"; };
 		02490DC627EA246B00E2577B /* MJErrorInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJErrorInputView.xib; sourceTree = "<group>"; };
 		02490DC827EA461700E2577B /* Extensions_UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIDevice.swift; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 				0224597E28006ACF00944DE4 /* NeighborhoodCreateAddOtherCell.swift */,
 				0285AD822806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift */,
 				02DD1E9228086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift */,
+				0247AD0128193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1065,6 +1068,7 @@
 				02E069E7279184B3006DB1B6 /* OTOnboardingAssoStartViewController.swift in Sources */,
 				0229376D27A434F500206201 /* ApplicationTheme.swift in Sources */,
 				02F5FEC427E0CB6800A14313 /* MJAlertController.swift in Sources */,
+				0247AD0228193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift in Sources */,
 				0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */,
 				0227446F2795BE6F005600A1 /* AssociationService.swift in Sources */,
 				02C3ABF4279AB55D00817B82 /* Extensions_UIViewController.swift in Sources */,
