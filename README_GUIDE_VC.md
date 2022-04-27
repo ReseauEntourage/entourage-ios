@@ -24,6 +24,8 @@ Les storyboards sont découpés en fonctionnalités / écrans
 *** Top bar ***
 Celle-ci est une view custom - MJNavBackView qui peut avoir un bouton à gauche pour la fermeture.
 Elle a un titre, une image pour le bouton, une view bottom pour le trait, et un délégate pour gérer le bouton back.
+Un bouton close à droite qui est masqué par défaut.
+Avec une methode custom qui permet de passer la typo + type de bouton (back ou close)........
 
 *** Pop alerte / info ***
 MJAlertController
