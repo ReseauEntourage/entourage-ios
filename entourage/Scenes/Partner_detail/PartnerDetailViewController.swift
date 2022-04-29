@@ -71,8 +71,7 @@ class PartnerDetailViewController: UIViewController {
         ui_view_img_profile.layer.shouldRasterize = true
         
         ui_view_top_white.clipsToBounds = true
-        ui_view_top_white.layer.cornerRadius = radius_main_view
-        ui_view_top_white.layer.maskedCorners = .radiusTopOnly()
+        ui_view_top_white.addRadiusTopOnly(radius: radius_main_view)
     }
     
     func updatePartner() {

@@ -98,8 +98,7 @@ class MJNavBackView: UIView {
         }
         
         ui_content_view.clipsToBounds = true
-        ui_content_view.layer.cornerRadius = cornerRadius
-        ui_content_view.layer.maskedCorners = .radiusTopOnly()
+        ui_content_view.addRadiusTopOnly(radius: cornerRadius)
     }
 }
 

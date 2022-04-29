@@ -95,6 +95,18 @@ extension DefaultStringInterpolation {
 }
 
 
+extension UIView {
+    func addRadiusTopOnly(radius:CGFloat = ApplicationTheme.bigCornerRadius) {
+        layer.cornerRadius = radius
+        layer.maskedCorners = .radiusTopOnly()
+    }
+    
+    func addRadiusBottomOnly(radius:CGFloat = ApplicationTheme.bigCornerRadius) {
+        layer.cornerRadius = radius
+        layer.maskedCorners = .radiusBottomOnly()
+    }
+}
+
 //MARK: - CACornerMask -
 extension CACornerMask {
     static func radiusTopOnly() -> CACornerMask {
@@ -103,5 +115,34 @@ extension CACornerMask {
     
     static func radiusBottomOnly() -> CACornerMask {
         return [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+    }
+}
+
+//MARK: - UILabel -
+
+extension UILabel {
+    func setupFontAndColor(style:MJTextFontColorStyle) {
+        font = style.font
+        textColor = style.color
+    }
+}
+
+extension UITextField {
+    func setupFontAndColor(style:MJTextFontColorStyle) {
+        font = style.font
+        textColor = style.color
+    }
+}
+extension UITextView {
+    func setupFontAndColor(style:MJTextFontColorStyle) {
+        font = style.font
+        textColor = style.color
+    }
+}
+
+extension UIButton {
+    func setupFontAndColor(style:MJTextFontColorStyle) {
+        titleLabel?.font = style.font
+        setTitleColor(style.color, for: .normal)
     }
 }

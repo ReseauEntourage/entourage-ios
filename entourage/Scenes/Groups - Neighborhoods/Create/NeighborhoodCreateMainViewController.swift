@@ -173,6 +173,7 @@ class NeighborhoodCreateMainViewController: UIViewController {
     }
     
     private func goEnd() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodCreateEnd), object: nil)
         if let vc = storyboard?.instantiateViewController(withIdentifier: "neighb_validateVC") {
             vc.modalPresentationStyle = .fullScreen
             self.dismiss(animated: false) {

@@ -531,3 +531,26 @@
 "neighborhoodEditCatMessageHighlight" = "- obligatoire";
 "neighborhoodEdit_error" = "Veuillez remplir tous les champs obligatoires";
 "neighborhoodEditValidateTitle" = "Votre groupe à bien été modifié ! PLACEHOLDER";
+
+/******
+ * Group / communauté
+ */
+"neighborhood_main_page_title" = "Communauté";
+"neighborhood_main_page_button_myGroups" = "Mes groupes";
+"neighborhood_main_page_button_discover" = "Découvrir";
+"neighborhoodInputSearch" = "Rechercher";
+"neighborhood_main_page_members" = "%d membres";
+"neighborhood_main_page_member" = "%d membre";
+"neighborhood_main_page_events_future_single" = "%d évènement prévu";
+"neighborhood_main_page_events_future_plural" = "%d évènements prévus";
+
+/*************
+ * Group detail
+ */
+
+"neighborhood_detail_button_join_member" = "Membre";
+"neighborhood_detail_button_join_join" = "Rejoindre";
+"neighborhood_detail_members" = "%d membres";
+"neighborhood_detail_member" = "%d membre";
+"neighborhood_detail_about_title" = "À savoir";
+"neighborhood_detail_event_title" = "Événements";

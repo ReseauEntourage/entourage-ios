@@ -19,8 +19,7 @@ class NeighborhoodCreatePageViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
-        view.layer.maskedCorners = .radiusBottomOnly()
+        view.addRadiusBottomOnly(radius: ApplicationTheme.bigCornerRadius)
         
         self.isPagingEnabled = false
         

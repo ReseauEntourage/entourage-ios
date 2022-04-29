@@ -107,7 +107,7 @@ class MainTabbarViewController: UITabBarController {
         messagesVC.tabBarItem.tag = 2
         
         
-        let _groupVC = UIViewController() // UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "home")
+        let _groupVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "home")
         groupVC = UINavigationController.init(rootViewController: _groupVC)
         groupVC.isNavigationBarHidden = true
         groupVC.tabBarItem.title = "tabbar_groups".localized

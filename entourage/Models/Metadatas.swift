@@ -148,6 +148,10 @@ class TagInterest: Tag {
             return InterestMappingImageHelper.getInterestImageNameFromKey(key: self.tagKey)
         }
     }
+    
+    static func getSmallImageTagFrom(tag:String) -> String {
+        return InterestMappingImageHelper.getInterestSmallImageNameFromKey(key: tag)
+    }
 }
 
 fileprivate struct InterestMappingImageHelper {
@@ -173,6 +177,32 @@ fileprivate struct InterestMappingImageHelper {
             imageName = "interest_nature"
         default:
             imageName = "interest_others"
+        }
+        return imageName
+    }
+    
+    static func getInterestSmallImageNameFromKey(key:String) -> String {
+        var imageName = "interest_small_others"
+        
+        switch key {
+        case "activites":
+            imageName = "interest_small_activities"
+        case "animaux":
+            imageName = "interest_small_animals"
+        case "bien-etre":
+            imageName = "interest_small_wellness"
+        case "cuisine":
+            imageName = "interest_small_cooking"
+        case "culture":
+            imageName = "interest_small_art"
+        case "jeux":
+            imageName = "interest_small_game"
+        case "sport":
+            imageName = "interest_small_sport"
+        case "nature":
+            imageName = "interest_small_nature"
+        default:
+            imageName = "interest_small_others"
         }
         return imageName
     }

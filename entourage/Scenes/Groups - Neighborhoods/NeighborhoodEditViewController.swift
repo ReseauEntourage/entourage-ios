@@ -67,10 +67,8 @@ class NeighborhoodEditViewController: UIViewController {
         
         ui_top_view.populateCustom(title: "neighborhood_edit_group_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
         
-        ui_tableview.layer.cornerRadius = ApplicationTheme.bigCornerRadius
-        ui_tableview.layer.maskedCorners = CACornerMask.radiusTopOnly()
-        ui_container_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
-        ui_container_view.layer.maskedCorners = CACornerMask.radiusTopOnly()
+        ui_tableview.addRadiusTopOnly(radius: ApplicationTheme.bigCornerRadius)
+        ui_container_view.addRadiusTopOnly(radius: ApplicationTheme.bigCornerRadius)
         
         tagsInterests = Metadatas.sharedInstance.tagsInterest
         

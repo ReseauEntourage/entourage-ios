@@ -18,8 +18,7 @@ class BasePopViewController: UIViewController {
         view.backgroundColor = .clear
         ui_top_view.backgroundColor = .clear
         ui_view_container.backgroundColor = .white
-        ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
-        ui_view_container.layer.maskedCorners = .radiusTopOnly()
+        ui_view_container.addRadiusTopOnly(radius: ApplicationTheme.bigCornerRadius)
         ui_top_view.addTopRadius(cornerRadius: ApplicationTheme.bigCornerRadius)
         
         ui_constraint_main_view_top?.constant = ApplicationTheme.topPopViewControllerSpacing

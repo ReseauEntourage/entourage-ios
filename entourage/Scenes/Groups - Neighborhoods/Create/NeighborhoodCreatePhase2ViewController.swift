@@ -23,8 +23,7 @@ class NeighborhoodCreatePhase2ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.ui_lbl_info.font = ApplicationTheme.getFontCourantRegularNoir().font
-        self.ui_lbl_info.textColor = ApplicationTheme.getFontCourantRegularNoir().color
+        self.ui_lbl_info.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
         let stringAttr = Utils.formatString(messageTxt: "neighborhoodCreateCatMessage".localized, messageTxtHighlight: "neighborhoodCreateCatMessageMandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
         ui_lbl_info.attributedText = stringAttr

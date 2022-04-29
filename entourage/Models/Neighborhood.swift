@@ -15,7 +15,7 @@ struct Neighborhood:Codable {
     
     var address:Address? = nil
     var interests:[String]? = nil
-    var members:[User]? = nil
+    var members:[NeighborhoodUserLight]? = nil
     
     var aboutEthics:String? = nil
     var past_outings_count:Int = 0
@@ -103,5 +103,18 @@ struct NeighborhoodImage:Codable {
         case uid = "id"
         case title
         case imageUrl = "image_url"
+    }
+}
+
+//MARK: - NeighborhoodUserLight -
+struct NeighborhoodUserLight:Codable {
+    var uid:Int
+    var username:String?
+    var imageUrl:String
+    
+    enum CodingKeys: String, CodingKey {
+        case uid = "id"
+        case username = "display_name"
+        case imageUrl = "avatar_url"
     }
 }

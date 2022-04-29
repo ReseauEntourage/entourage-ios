@@ -66,6 +66,46 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
+    static func getSuggestNeighborhoods(currentPage:Int, per:Int, completion: @escaping (_ groups:[Neighborhood]?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetSuggestNeighborhoods
+        endpoint = String.init(format: endpoint, token, currentPage, per)
+        getNeighborhoodsWithEndpoint(endpoint, completion)
+    }
+    
+    static func getNeighborhoodsForUserId(_ userId:String, currentPage:Int, per:Int, completion: @escaping (_ groups:[Neighborhood]?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetMyNeighborhoods
+        endpoint = String.init(format: endpoint, userId, token, currentPage, per)
+        
+        getNeighborhoodsWithEndpoint(endpoint, completion)
+    }
+    
+    
+    static func getSearchNeighborhoods(text:String, completion: @escaping (_ groups:[Neighborhood]?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPISearchNeighborhoods
+        endpoint = String.init(format: endpoint, token, text)
+        
+        getNeighborhoodsWithEndpoint(endpoint, completion)
+    }
+    
+    fileprivate static func getNeighborhoodsWithEndpoint(_ endpoint: String, _ completion: @escaping ([Neighborhood]?, EntourageNetworkError?) -> Void) {
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil,  error) }
+                return
+            }
+            
+            let group:[Neighborhood]? = self.parseDatas(data: data,key: "neighborhoods")
+            DispatchQueue.main.async { completion(group,nil) }
+        }
+    }
+    
     //MARK: - Create/update group -
     static func createNeighborhood(group:Neighborhood,completion: @escaping (_ group:Neighborhood?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}

@@ -69,8 +69,7 @@ class UserProfileDetailViewController: UIViewController {
         ui_view_img_profile.layer.shouldRasterize = true
         
         ui_view_top_white.clipsToBounds = true
-        ui_view_top_white.layer.cornerRadius = ApplicationTheme.bigCornerRadius
-        ui_view_top_white.layer.maskedCorners = .radiusTopOnly()
+        ui_view_top_white.addRadiusTopOnly(radius: ApplicationTheme.bigCornerRadius)
     }
     
     func updateUser() {

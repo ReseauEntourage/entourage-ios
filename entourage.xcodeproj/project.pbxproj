@@ -41,6 +41,7 @@
 		0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */; };
 		0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */; };
 		0246604D27D8A49E00FE1EF8 /* IHProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 0246604C27D8A49E00FE1EF8 /* IHProgressHUD */; };
+		0247AD002819348E008F915B /* NeighborhoodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247ACFF2819348E008F915B /* NeighborhoodDetailViewController.swift */; };
 		0247AD0228193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247AD0128193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift */; };
 		02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02490DC427EA245E00E2577B /* MJErrorInputView.swift */; };
 		02490DC727EA246B00E2577B /* MJErrorInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02490DC627EA246B00E2577B /* MJErrorInputView.xib */; };
@@ -175,6 +176,8 @@
 		02E069ED279184B3006DB1B6 /* OTOnboardingNamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E069DD279184B3006DB1B6 /* OTOnboardingNamesViewController.swift */; };
 		02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */; };
 		02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */; };
+		02E7845D2811A8DB00177F13 /* Neighborhood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02E7845C2811A8DB00177F13 /* Neighborhood.storyboard */; };
+		02E7845F2811A91900177F13 /* NeighborhoodHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E7845E2811A91900177F13 /* NeighborhoodHomeViewController.swift */; };
 		02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */; };
 		02EC7E4B27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4A27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift */; };
 		02F527782799990F00929431 /* GuideSolidarity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02F527772799990F00929431 /* GuideSolidarity.storyboard */; };
@@ -191,6 +194,9 @@
 		02F5279B2799A1F300929431 /* GuideCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F527952799A1F300929431 /* GuideCells.swift */; };
 		02F5FEC427E0CB6800A14313 /* MJAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5FEC227E0CB6800A14313 /* MJAlertController.swift */; };
 		02F5FEC527E0CB6800A14313 /* MJAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02F5FEC327E0CB6800A14313 /* MJAlertController.xib */; };
+		02FCB537281BDD2600682E61 /* NeighborhoodDetailTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCB536281BDD2600682E61 /* NeighborhoodDetailTopCell.swift */; };
+		02FCC3152812DD9200578407 /* NeighborhoodHomeSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCC3142812DD9200578407 /* NeighborhoodHomeSearchCell.swift */; };
+		02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */; };
 		7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */; };
 /* End PBXBuildFile section */
 
@@ -228,6 +234,7 @@
 		023EC27E27FB2D8D003A3051 /* BasePopViewController_Template.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasePopViewController_Template.xib; sourceTree = "<group>"; };
 		0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodChoosePictureViewController.swift; sourceTree = "<group>"; };
 		0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodChoosePhotoCell.swift; sourceTree = "<group>"; };
+		0247ACFF2819348E008F915B /* NeighborhoodDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodDetailViewController.swift; sourceTree = "<group>"; };
 		0247AD0128193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodEditInterestTitleCell.swift; sourceTree = "<group>"; };
 		02490DC427EA245E00E2577B /* MJErrorInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJErrorInputView.swift; sourceTree = "<group>"; };
 		02490DC627EA246B00E2577B /* MJErrorInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJErrorInputView.xib; sourceTree = "<group>"; };
@@ -359,6 +366,8 @@
 		02E069DD279184B3006DB1B6 /* OTOnboardingNamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTOnboardingNamesViewController.swift; sourceTree = "<group>"; };
 		02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserSignalCell.swift; sourceTree = "<group>"; };
 		02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJCustomSlider.swift; sourceTree = "<group>"; };
+		02E7845C2811A8DB00177F13 /* Neighborhood.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neighborhood.storyboard; sourceTree = "<group>"; };
+		02E7845E2811A91900177F13 /* NeighborhoodHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodHomeViewController.swift; sourceTree = "<group>"; };
 		02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePhotoCell.swift; sourceTree = "<group>"; };
 		02EC7E4A27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsChoosePlaceViewController.swift; sourceTree = "<group>"; };
 		02F527772799990F00929431 /* GuideSolidarity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuideSolidarity.storyboard; sourceTree = "<group>"; };
@@ -375,6 +384,9 @@
 		02F527952799A1F300929431 /* GuideCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideCells.swift; sourceTree = "<group>"; };
 		02F5FEC227E0CB6800A14313 /* MJAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJAlertController.swift; sourceTree = "<group>"; };
 		02F5FEC327E0CB6800A14313 /* MJAlertController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertController.xib; sourceTree = "<group>"; };
+		02FCB536281BDD2600682E61 /* NeighborhoodDetailTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodDetailTopCell.swift; sourceTree = "<group>"; };
+		02FCC3142812DD9200578407 /* NeighborhoodHomeSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodHomeSearchCell.swift; sourceTree = "<group>"; };
+		02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodHomeGroupCell.swift; sourceTree = "<group>"; };
 		1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
@@ -427,6 +439,9 @@
 				0285AD822806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift */,
 				02DD1E9228086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift */,
 				0247AD0128193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift */,
+				02FCC3142812DD9200578407 /* NeighborhoodHomeSearchCell.swift */,
+				02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */,
+				02FCB536281BDD2600682E61 /* NeighborhoodDetailTopCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -580,6 +595,7 @@
 				02856F6127DA334100988FF7 /* ProfileParams.storyboard */,
 				0207BF8427F2059400631914 /* UserDetail.storyboard */,
 				02B7922427F74801003AFFB9 /* Neighborhood_Create.storyboard */,
+				02E7845C2811A8DB00177F13 /* Neighborhood.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -715,8 +731,10 @@
 		02B7921F27F73F34003AFFB9 /* Groups - Neighborhoods */ = {
 			isa = PBXGroup;
 			children = (
+				02E7845E2811A91900177F13 /* NeighborhoodHomeViewController.swift */,
 				0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */,
 				02DD1E90280853CF00538EF4 /* NeighborhoodEditViewController.swift */,
+				0247ACFF2819348E008F915B /* NeighborhoodDetailViewController.swift */,
 				0224597B27FF54E300944DE4 /* Create */,
 				0224597227FF31FC00944DE4 /* Cells */,
 			);
@@ -979,6 +997,7 @@
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
 				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
 				025D8726278DD33800909101 /* LaunchScreen.storyboard in Resources */,
+				02E7845D2811A8DB00177F13 /* Neighborhood.storyboard in Resources */,
 				02DB3BBA27A1496A004732C9 /* PartnerDetails.storyboard in Resources */,
 				02A3DD3127FDC03B0060EC2E /* Neighborhood.xcassets in Resources */,
 				025FFE0927DB980600783E8D /* Main.storyboard in Resources */,
@@ -1096,9 +1115,12 @@
 				022744712795BEC0005600A1 /* AuthService.swift in Sources */,
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
 				0224597827FF327C00944DE4 /* NeighborhoodCreateLocationCell.swift in Sources */,
+				02FCC3152812DD9200578407 /* NeighborhoodHomeSearchCell.swift in Sources */,
 				02E069E0279184B3006DB1B6 /* OTOnboardingTypeViewController.swift in Sources */,
 				02B57DA027FC9757005A567B /* PartnerDetailNeedsCell.swift in Sources */,
 				02B37828279B072C00B204EF /* SharingEntourageTableViewCell.swift in Sources */,
+				02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */,
+				02FCB537281BDD2600682E61 /* NeighborhoodDetailTopCell.swift in Sources */,
 				02F5278327999AD700929431 /* MapPoi.swift in Sources */,
 				0262997B2790815000D84A6A /* APIKeys.swift in Sources */,
 				026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */,
@@ -1113,6 +1135,7 @@
 				023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */,
 				0285AD832806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift in Sources */,
 				02E069EA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift in Sources */,
+				0247AD002819348E008F915B /* NeighborhoodDetailViewController.swift in Sources */,
 				02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */,
 				02D64F4D2799D5E000F6C4BD /* InviteSourceViewController.swift in Sources */,
 				02C91A29278F335000305E0B /* MainTabbarViewController.swift in Sources */,
@@ -1177,6 +1200,7 @@
 				029F690E27D905F5003D1E39 /* MainUserInfosCell.swift in Sources */,
 				02E069E2279184B3006DB1B6 /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */,
 				026819AA278E00A200A98A4A /* Utils.swift in Sources */,
+				02E7845F2811A91900177F13 /* NeighborhoodHomeViewController.swift in Sources */,
 				02F5279A2799A1F300929431 /* GuideModels.swift in Sources */,
 				02B37829279B072C00B204EF /* ShareEntourageViewController.swift in Sources */,
 				0207BF8727F20C1600631914 /* UserProfileDetailViewController.swift in Sources */,

@@ -32,7 +32,9 @@ let kAPINeighborhoods = "neighborhoods?token=%@"
 let kAPIGetDetailNeighborhood = "neighborhoods/%@?token=%@"
 let kAPIUpdateNeighborhood = "neighborhoods/%@?token=%@"
 let kAPIGetneighborhoodImages = "neighborhood_images?token=%@"
-
+let kAPIGetMyNeighborhoods = "users/%@/neighborhoods?token=%@&page=%d&per=%d"
+let kAPISearchNeighborhoods = "neighborhoods?token=%@&q=%@"
+let kAPIGetSuggestNeighborhoods = "neighborhoods?token=%@&page=%d&per=%d"
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
 
