@@ -5,9 +5,6 @@
 //  Created by Ciprian Habuc on 07/07/16.
 //  Copyright © 2016 Entourage. All rights reserved.
 //
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-@import FacebookCore;
-
 #import "OTOnboardingService.h"
 #import "OTHTTPRequestManager.h"
 #import "OTAPIConsts.h"
@@ -36,11 +33,6 @@
              if (success) {
                  success(onboardedUser);
              }
-             // send a facebook event
-             NSDictionary *params = @{FBSDKAppEventParameterNameRegistrationMethod : @"entourage"};
-             [FBSDKAppEvents
-              logEvent:FBSDKAppEventNameCompletedRegistration
-              parameters:params];
          }
          andFailure:^(NSError *error) {
              if (failure) {
@@ -68,11 +60,6 @@
              if (success) {
                  success(onboardedUser);
              }
-             // send a facebook event
-             NSDictionary *params = @{FBSDKAppEventParameterNameRegistrationMethod : @"entourage"};
-             [FBSDKAppEvents
-              logEvent:FBSDKAppEventNameCompletedRegistration
-              parameters:params];
          }
          andFailure:^(NSError *error) {
              if (failure) {
