@@ -155,7 +155,90 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
+    //MARK: - Join / Leave group
     
     
+    static func joinGroup(groupId:Int,completion: @escaping (_ user:NeighborhoodUserLight?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIJoinNeighborhood
+        endpoint = String.init(format: endpoint,"\(groupId)", token)
+        
+        Logger.print("Endpoint passed update group \(endpoint)")
+                
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
+            Logger.print("Response update group: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error update group - \(error)")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            //let group:Neighborhood? = self.parseData(data: data,key: "neighborhood")
+            let user:NeighborhoodUserLight? = self.parseUser(data: data)
+            DispatchQueue.main.async { completion(user, nil) }
+        }
+    }
+    
+    static private func parseUser(data:Data) -> NeighborhoodUserLight? {
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let jsonGroup = json["user"] as? [String:AnyObject] {
+                let decoder = JSONDecoder()
+                if let dataGroup = try? JSONSerialization.data(withJSONObject: jsonGroup) {
+                  return try decoder.decode(NeighborhoodUserLight.self, from:dataGroup)
+                }
+            }
+        }
+        catch {
+            Logger.print("Error parsing Data \(error)")
+        }
+        return nil
+    }
+    
+    
+    static func leaveGroup(groupId:Int,userId:Int ,completion: @escaping (_ group:Neighborhood?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPILeaveNeighborhood
+        endpoint = String.init(format: endpoint,"\(groupId)","\(userId)", token)
+        
+        Logger.print("Endpoint passed delete from group \(endpoint)")
+                
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
+            Logger.print("Response delete from group: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error update group - \(error)")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let group:Neighborhood? = self.parseData(data: data,key: "neighborhood")
+            DispatchQueue.main.async { completion(group, nil) }
+        }
+    }
+    
+
+    //MARK: - Report GRoup -
+    static func reportGroup(groupId:Int,message:String?,tags:[String], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIReportNeighborhood
+        endpoint = String.init(format: endpoint,"\(groupId)", token)
+        
+        let _msg:String = message != nil ? message! : ""
+        let parameters:[String:Any] = ["report":["message":_msg, "signals":tags]]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Endpoint reportGroup \(endpoint) -- params : \(parameters)")
+                
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response reportGroup: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error reportGroup - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
     
 }

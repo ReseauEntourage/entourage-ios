@@ -554,3 +554,31 @@
 "neighborhood_detail_member" = "%d membre";
 "neighborhood_detail_about_title" = "À savoir";
 "neighborhood_detail_event_title" = "Événements";
+//Params
+"neighborhood_params_title" = "Paramètres du groupe";
+"neighborhood_params_cgu" = "Règlement du groupe";
+"neighborhood_params_edit" = "Modifier les informations du groupe";
+"neighborhood_params_signal" = "Signaler le groupe ";
+"neighborhood_params_cgu_title" = "Le réglement";
+"neighborhood_params_cgu_description" = "Règlement du groupe, à lire attentivement.";
+"neighborhood_params_participant" = "participant";
+"neighborhood_params_participants" = "participants";
+
+//CGU
+"neighborhood_CGU_1" = "Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.";
+"neighborhood_CGU_2" = "Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.  Praesent pharetra ac nisi quis finibus. Curabitur purus dui, aliquet cursus ";
+"neighborhood_CGU_3" = "Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.  Praesent pharetra ac nisi quis finibus. Curabitur purus dui, aliquet cursus, Praesent pharetra ac nisi quis finibus. Curabitur purus dui, aliquet cursus Praesent pharetra ac nisi quis finibus. Curabitur purus dui, aliquet cursus";
+"neighborhood_CGU_4" = "Praesent pharetra ac nisi quis finibus. Curabitur purus dui, aliquet cursus ";
+
+//Report Group / comment / publication
+"report_group_title" = "Signaler le groupe";
+"report_group_message_success" = "Groupe signalé";
+"report_group_description" = "Dites-nous la raison de votre signalement";
+"report_group_mandatory" = "- obligatoire";
+"report_group_next_button" = "Suivant";
+"report_group_signal_error" = "Veuillez choisir au minimum une cause.";
+"report_group_message_description" = "Dites-nous la raison de votre signalement";
+"report_group_optional" = "- facultatif";
+"report_group_validate_button" = "Envoyer";
+"report_group_back_button" = "Retour";
+"report_group_placeholder" = "Décrivez rapidement l’objet de votre signalement.";

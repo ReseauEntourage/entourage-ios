@@ -123,7 +123,7 @@
                                     <action selector="action_show_my_profile:" destination="g5E-Hr-Pca" eventType="touchUpInside" id="GXv-xl-usW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfr-kh-rj5">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfr-kh-rj5">
                                 <rect key="frame" x="32" y="221" width="91" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Edit group"/>

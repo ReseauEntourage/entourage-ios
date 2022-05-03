@@ -77,6 +77,8 @@
 		026819C3278E10DA00A98A4A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819C2278E10D900A98A4A /* User.swift */; };
 		02728DDB27F19A1000512DC0 /* PartnerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */; };
 		02728DDD27F19A3800512DC0 /* PartnerDetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */; };
+		0282637C282160B700B354F9 /* NeighborhoodCguCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282637B282160B700B354F9 /* NeighborhoodCguCell.swift */; };
+		028444CA282015A000AFC072 /* NeighborhoodParamsGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028444C9282015A000AFC072 /* NeighborhoodParamsGroupViewController.swift */; };
 		02846CBE27EC86F100D85ADA /* ProfileEditInterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02846CBD27EC86F100D85ADA /* ProfileEditInterestsViewController.swift */; };
 		02846CC027EC921700D85ADA /* SelectTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02846CBF27EC921700D85ADA /* SelectTagCell.swift */; };
 		02846CC227ECBC2B00D85ADA /* Interests.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02846CC127ECBC2B00D85ADA /* Interests.xcassets */; };
@@ -124,6 +126,14 @@
 		02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3ABEF279AB50900817B82 /* Extensions_UIColor.swift */; };
 		02C3ABF2279AB53800817B82 /* Extensions_UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3ABF1279AB53800817B82 /* Extensions_UserDefaults.swift */; };
 		02C3ABF4279AB55D00817B82 /* Extensions_UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3ABF3279AB55D00817B82 /* Extensions_UIViewController.swift */; };
+		02C6E86328203119009D4289 /* NeighborhoodParamTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6E86228203119009D4289 /* NeighborhoodParamTopCell.swift */; };
+		02C6E86528203127009D4289 /* NeighborhoodParamSignalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6E86428203127009D4289 /* NeighborhoodParamSignalCell.swift */; };
+		02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6E86628203141009D4289 /* NeighborhoodParamEditShowCell.swift */; };
+		02C6E86928203BF0009D4289 /* NeighBorhoodParamsCGUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6E86828203BF0009D4289 /* NeighBorhoodParamsCGUViewController.swift */; };
+		02C6E86F28203E1F009D4289 /* ReportGroupSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6E86B28203E1F009D4289 /* ReportGroupSendViewController.swift */; };
+		02C6E87028203E1F009D4289 /* ReportGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6E86C28203E1F009D4289 /* ReportGroupMainViewController.swift */; };
+		02C6E87128203E1F009D4289 /* ReportGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6E86D28203E1F009D4289 /* ReportGroupViewController.swift */; };
+		02C6E87228203E1F009D4289 /* ReportGroupPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C6E86E28203E1F009D4289 /* ReportGroupPageViewController.swift */; };
 		02C91A23278F07D900305E0B /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C91A22278F07D900305E0B /* Endpoints.swift */; };
 		02C91A25278F2B4F00305E0B /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02C91A24278F2B4F00305E0B /* Intro.storyboard */; };
 		02C91A27278F303100305E0B /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C91A26278F303100305E0B /* AppState.swift */; };
@@ -275,6 +285,8 @@
 		026819C2278E10D900A98A4A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerDetailViewController.swift; sourceTree = "<group>"; };
 		02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerDetailInfoCell.swift; sourceTree = "<group>"; };
+		0282637B282160B700B354F9 /* NeighborhoodCguCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCguCell.swift; sourceTree = "<group>"; };
+		028444C9282015A000AFC072 /* NeighborhoodParamsGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodParamsGroupViewController.swift; sourceTree = "<group>"; };
 		02846CBD27EC86F100D85ADA /* ProfileEditInterestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditInterestsViewController.swift; sourceTree = "<group>"; };
 		02846CBF27EC921700D85ADA /* SelectTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTagCell.swift; sourceTree = "<group>"; };
 		02846CC127ECBC2B00D85ADA /* Interests.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Interests.xcassets; sourceTree = "<group>"; };
@@ -319,6 +331,14 @@
 		02C3ABEF279AB50900817B82 /* Extensions_UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIColor.swift; sourceTree = "<group>"; };
 		02C3ABF1279AB53800817B82 /* Extensions_UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UserDefaults.swift; sourceTree = "<group>"; };
 		02C3ABF3279AB55D00817B82 /* Extensions_UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIViewController.swift; sourceTree = "<group>"; };
+		02C6E86228203119009D4289 /* NeighborhoodParamTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodParamTopCell.swift; sourceTree = "<group>"; };
+		02C6E86428203127009D4289 /* NeighborhoodParamSignalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodParamSignalCell.swift; sourceTree = "<group>"; };
+		02C6E86628203141009D4289 /* NeighborhoodParamEditShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodParamEditShowCell.swift; sourceTree = "<group>"; };
+		02C6E86828203BF0009D4289 /* NeighBorhoodParamsCGUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighBorhoodParamsCGUViewController.swift; sourceTree = "<group>"; };
+		02C6E86B28203E1F009D4289 /* ReportGroupSendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportGroupSendViewController.swift; sourceTree = "<group>"; };
+		02C6E86C28203E1F009D4289 /* ReportGroupMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportGroupMainViewController.swift; sourceTree = "<group>"; };
+		02C6E86D28203E1F009D4289 /* ReportGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportGroupViewController.swift; sourceTree = "<group>"; };
+		02C6E86E28203E1F009D4289 /* ReportGroupPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportGroupPageViewController.swift; sourceTree = "<group>"; };
 		02C91A22278F07D900305E0B /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		02C91A24278F2B4F00305E0B /* Intro.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
 		02C91A26278F303100305E0B /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -442,6 +462,8 @@
 				02FCC3142812DD9200578407 /* NeighborhoodHomeSearchCell.swift */,
 				02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */,
 				02FCB536281BDD2600682E61 /* NeighborhoodDetailTopCell.swift */,
+				0282637B282160B700B354F9 /* NeighborhoodCguCell.swift */,
+				0282637A28215FC100B354F9 /* Params */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -691,6 +713,16 @@
 			path = entourage/Scenes/Login;
 			sourceTree = SOURCE_ROOT;
 		};
+		0282637A28215FC100B354F9 /* Params */ = {
+			isa = PBXGroup;
+			children = (
+				02C6E86228203119009D4289 /* NeighborhoodParamTopCell.swift */,
+				02C6E86428203127009D4289 /* NeighborhoodParamSignalCell.swift */,
+				02C6E86628203141009D4289 /* NeighborhoodParamEditShowCell.swift */,
+			);
+			path = Params;
+			sourceTree = "<group>";
+		};
 		0288A8D327CCD8E1008D7011 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,6 +767,9 @@
 				0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */,
 				02DD1E90280853CF00538EF4 /* NeighborhoodEditViewController.swift */,
 				0247ACFF2819348E008F915B /* NeighborhoodDetailViewController.swift */,
+				028444C9282015A000AFC072 /* NeighborhoodParamsGroupViewController.swift */,
+				02C6E86828203BF0009D4289 /* NeighBorhoodParamsCGUViewController.swift */,
+				02C6E86A28203E1F009D4289 /* Signal */,
 				0224597B27FF54E300944DE4 /* Create */,
 				0224597227FF31FC00944DE4 /* Cells */,
 			);
@@ -756,6 +791,17 @@
 				02B57DA127FCB652005A567B /* ParsingDataCodable.swift */,
 			);
 			path = "Network Managers";
+			sourceTree = "<group>";
+		};
+		02C6E86A28203E1F009D4289 /* Signal */ = {
+			isa = PBXGroup;
+			children = (
+				02C6E86C28203E1F009D4289 /* ReportGroupMainViewController.swift */,
+				02C6E86E28203E1F009D4289 /* ReportGroupPageViewController.swift */,
+				02C6E86B28203E1F009D4289 /* ReportGroupSendViewController.swift */,
+				02C6E86D28203E1F009D4289 /* ReportGroupViewController.swift */,
+			);
+			path = Signal;
 			sourceTree = "<group>";
 		};
 		02CCE67027D78C2F00D6976C /* Fonts */ = {
@@ -1076,6 +1122,7 @@
 			files = (
 				02728DDB27F19A1000512DC0 /* PartnerDetailViewController.swift in Sources */,
 				0229376F27A43AA600206201 /* GMSAutoCompleteVC.swift in Sources */,
+				02C6E86928203BF0009D4289 /* NeighBorhoodParamsCGUViewController.swift in Sources */,
 				025D8764278DEB3A00909101 /* Logger.swift in Sources */,
 				0288A8D927CCDA5C008D7011 /* PictureUploadS3Service.swift in Sources */,
 				02E069E6279184B3006DB1B6 /* OTOnboardingAssoActivityViewController.swift in Sources */,
@@ -1087,6 +1134,7 @@
 				02E069E7279184B3006DB1B6 /* OTOnboardingAssoStartViewController.swift in Sources */,
 				0229376D27A434F500206201 /* ApplicationTheme.swift in Sources */,
 				02F5FEC427E0CB6800A14313 /* MJAlertController.swift in Sources */,
+				02C6E86528203127009D4289 /* NeighborhoodParamSignalCell.swift in Sources */,
 				0247AD0228193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift in Sources */,
 				0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */,
 				0227446F2795BE6F005600A1 /* AssociationService.swift in Sources */,
@@ -1109,11 +1157,13 @@
 				02681952278DF6CA00A98A4A /* OTCustomTextfield.swift in Sources */,
 				02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */,
 				0262997927905FB700D84A6A /* Constants.swift in Sources */,
+				028444CA282015A000AFC072 /* NeighborhoodParamsGroupViewController.swift in Sources */,
 				0220580727FB003700531720 /* BasePopViewController.swift in Sources */,
 				0224597A27FF454A00944DE4 /* Extensions_UITextField.swift in Sources */,
 				02B57D9A27FC433F005A567B /* ReportUserSendViewController.swift in Sources */,
 				022744712795BEC0005600A1 /* AuthService.swift in Sources */,
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
+				0282637C282160B700B354F9 /* NeighborhoodCguCell.swift in Sources */,
 				0224597827FF327C00944DE4 /* NeighborhoodCreateLocationCell.swift in Sources */,
 				02FCC3152812DD9200578407 /* NeighborhoodHomeSearchCell.swift in Sources */,
 				02E069E0279184B3006DB1B6 /* OTOnboardingTypeViewController.swift in Sources */,
@@ -1141,6 +1191,7 @@
 				02C91A29278F335000305E0B /* MainTabbarViewController.swift in Sources */,
 				02A3DD3927FDC72C0060EC2E /* NeighborhoodCreatePageViewController.swift in Sources */,
 				021F084F2798113D00F32A34 /* LocationManager.swift in Sources */,
+				02C6E87028203E1F009D4289 /* ReportGroupMainViewController.swift in Sources */,
 				02D64F4F2799D74F00F6C4BD /* PoiService.swift in Sources */,
 				02CCE68227D7968800D6976C /* MainProfileSettingsViewController.swift in Sources */,
 				02B57D9827FC4329005A567B /* ReportUserPageViewController.swift in Sources */,
@@ -1160,6 +1211,7 @@
 				02E0098927E33DD200BB23CA /* WebLinkManager.swift in Sources */,
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,
 				02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */,
+				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
 				021318AD27DF55D400B0F1BD /* MainHomeViewController.swift in Sources */,
 				029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */,
@@ -1174,12 +1226,15 @@
 				02F5278527999B8F00929431 /* SolidarityGuideCell.swift in Sources */,
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,
 				02A3DD3327FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift in Sources */,
+				02C6E86F28203E1F009D4289 /* ReportGroupSendViewController.swift in Sources */,
 				02C91A23278F07D900305E0B /* Endpoints.swift in Sources */,
 				0229376B27A4000800206201 /* SafariWebManager.swift in Sources */,
 				02EC7E4B27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift in Sources */,
 				02E069E8279184B3006DB1B6 /* OTAssoSearchTableViewCell.swift in Sources */,
+				02C6E87128203E1F009D4289 /* ReportGroupViewController.swift in Sources */,
 				023D89BF27DFA351008C6A58 /* MainParamsViewController.swift in Sources */,
 				02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */,
+				02C6E87228203E1F009D4289 /* ReportGroupPageViewController.swift in Sources */,
 				023D89C327DFA39A008C6A58 /* ParamsInfoCell.swift in Sources */,
 				02DDF1D727D9117700EE22DE /* ProgressRadiusView.swift in Sources */,
 				02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */,
@@ -1206,6 +1261,7 @@
 				0207BF8727F20C1600631914 /* UserProfileDetailViewController.swift in Sources */,
 				02C91A27278F303100305E0B /* AppState.swift in Sources */,
 				022744762795D1D8005600A1 /* NotificationManager.swift in Sources */,
+				02C6E86328203119009D4289 /* NeighborhoodParamTopCell.swift in Sources */,
 				0295F2B927E4AE5B006AE255 /* EditProfileInfosCell.swift in Sources */,
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
 				02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */,

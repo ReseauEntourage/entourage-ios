@@ -30,8 +30,6 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     
     @IBOutlet weak var ui_taglist_view: TagListView!
     
-    @IBOutlet weak var ui_lbl_events_title: UILabel!
-    
     weak var delegate:NeighborhoodDetailTopCellDelegate? = nil
     
     let topMarginConstraint:CGFloat = 24
@@ -47,13 +45,11 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         ui_lbl_about_title.text = "neighborhood_detail_about_title".localized
         ui_lbl_about_desc.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
-        ui_lbl_events_title.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
-        ui_lbl_events_title.text = "neighborhood_detail_event_title".localized
         ui_view_button_join.layer.cornerRadius = ui_view_button_join.frame.height / 2
         ui_view_button_join.layer.borderColor = UIColor.appOrange.cgColor
         ui_view_button_join.layer.borderWidth = 1
         
-        ui_taglist_view.backgroundColor = .white
+        ui_taglist_view.backgroundColor = .appBeigeClair
         ui_taglist_view.tagBackgroundColor = ApplicationTheme.getFontCategoryBubble().color
         ui_taglist_view.cornerRadius = cornerRadiusTag
         ui_taglist_view.textFont = ApplicationTheme.getFontCategoryBubble().font
@@ -84,18 +80,18 @@ class NeighborhoodDetailTopCell: UITableViewCell {
             return
         }
         
-        for i in 0..<(neighborhood.members?.count ?? 0) {
+        for i in 0..<neighborhood.members.count {
             if i > 2 { break }
             switch i {
             case 0:
                 ui_img_member_1.isHidden = false
-                updateImageUrl(image: ui_img_member_1, imageUrl: neighborhood.members?[i].imageUrl)
+                updateImageUrl(image: ui_img_member_1, imageUrl: neighborhood.members[i].imageUrl)
             case 1:
                 ui_img_member_2.isHidden = false
-                updateImageUrl(image: ui_img_member_2, imageUrl: neighborhood.members?[i].imageUrl)
+                updateImageUrl(image: ui_img_member_2, imageUrl: neighborhood.members[i].imageUrl)
             case 2:
                 ui_img_member_3.isHidden = false
-                updateImageUrl(image: ui_img_member_3, imageUrl: neighborhood.members?[i].imageUrl)
+                updateImageUrl(image: ui_img_member_3, imageUrl: neighborhood.members[i].imageUrl)
             default:
                 break
             }
@@ -106,20 +102,24 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         }
         
         ui_lbl_nb_members.text = ""
-        if let count = neighborhood.members?.count {
-            if count > 1 {
-                ui_lbl_nb_members.text = String.init(format: "neighborhood_detail_members".localized,neighborhood.membersCount)
-            }
-            else {
-                ui_lbl_nb_members.text = String.init(format: "neighborhood_detail_member".localized, neighborhood.membersCount)
-            }
+        var membersCount = ""
+        if neighborhood.members.count > 1 {
+            membersCount = String.init(format: "neighborhood_detail_members".localized,neighborhood.membersCount)
         }
+        else {
+            membersCount = String.init(format: "neighborhood_detail_member".localized, neighborhood.membersCount)
+        }
+        
+        let addressName:String = neighborhood.address?.displayAddress ?? "-"
+        membersCount = "\(membersCount) \(addressName)"
+        
+        ui_lbl_nb_members.text = membersCount
         
         ui_title.text = neighborhood.name
         ui_lbl_about_desc.text = neighborhood.aboutGroup
         
         let currentUserId = UserDefaults.currentUser?.sid
-        if let _ = neighborhood.members?.first(where: {$0.uid == currentUserId}) {
+        if let _ = neighborhood.members.first(where: {$0.uid == currentUserId}) {
             ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
             ui_view_button_join.backgroundColor = .clear
             ui_img_bt_join.image = UIImage.init(named: "ic_check_member_orange")

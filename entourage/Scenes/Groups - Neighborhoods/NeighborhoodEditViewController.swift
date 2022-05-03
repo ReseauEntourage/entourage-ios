@@ -41,7 +41,7 @@ class NeighborhoodEditViewController: UIViewController {
     var neighborhoodWelcome:String? = nil
     var image:NeighborhoodImage? = nil
     
-    var currentNeighborhoodId = 22 // TODO: a supprimer et mettre 0
+    var currentNeighborhoodId = 0
     var currentNeighborhood:Neighborhood? = nil
     var isValidationEnabled = true
     
@@ -199,9 +199,13 @@ class NeighborhoodEditViewController: UIViewController {
     
     func updateNeighborhood(_ newNeighborhood:Neighborhood) {
         NeighborhoodService.updateNeighborhood(group: newNeighborhood) { group, error in
-            Logger.print("***** return update NeighB : \(group) ----- error \(error)")
             //TODO: on fait quoi après on ferme la page ?
             IHProgressHUD.showSuccesswithStatus("neighborhoodEditValidateTitle".localized)
+            if let group = group {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil, userInfo: ["neighborhood":group])
+            }
+            
+            self.goBack()
         }
     }
     

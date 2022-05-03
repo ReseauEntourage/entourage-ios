@@ -44,6 +44,7 @@
                 </constraints>
             </view>
             <connections>
+                <outlet property="ui_constraint_main_view_top" destination="v77-Dy-gSM" id="L5J-Mc-wvz"/>
                 <outlet property="ui_top_view" destination="K2X-aO-5Z6" id="HIo-tB-UPP"/>
                 <outlet property="ui_view_container" destination="lCJ-Dz-0zp" id="ZDy-9k-qDI"/>
             </connections>

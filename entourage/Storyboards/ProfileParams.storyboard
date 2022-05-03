@@ -2491,7 +2491,7 @@
                                         <rect key="frame" x="0.0" y="738" width="414" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tu5-f1-RC3">
-                                                <rect key="frame" x="76.5" y="15" width="261" height="50"/>
+                                                <rect key="frame" x="77.5" y="15" width="259" height="50"/>
                                                 <color key="backgroundColor" name="orange_app"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="9Ba-PV-LRQ"/>

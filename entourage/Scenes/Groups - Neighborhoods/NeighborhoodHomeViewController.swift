@@ -83,7 +83,11 @@ class NeighborhoodHomeViewController: UIViewController {
         
         setupViews()
         
+        //Notif for updating when create new neighborhood
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreate), name: NSNotification.Name(rawValue: kNotificationNeighborhoodCreateEnd), object: nil)
+        
+        //Notif for updating neighborhood infos
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreate), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
     }
     
     @objc func updateFromCreate() {

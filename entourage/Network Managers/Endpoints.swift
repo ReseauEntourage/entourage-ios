@@ -35,6 +35,9 @@ let kAPIGetneighborhoodImages = "neighborhood_images?token=%@"
 let kAPIGetMyNeighborhoods = "users/%@/neighborhoods?token=%@&page=%d&per=%d"
 let kAPISearchNeighborhoods = "neighborhoods?token=%@&q=%@"
 let kAPIGetSuggestNeighborhoods = "neighborhoods?token=%@&page=%d&per=%d"
+let kAPIJoinNeighborhood = "neighborhoods/%@/users?token=%@"
+let kAPILeaveNeighborhood = "neighborhoods/%@/users/%@?token=%@"
+let kAPIReportNeighborhood = "neighborhoods/%@/report?token=%@"
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
 
