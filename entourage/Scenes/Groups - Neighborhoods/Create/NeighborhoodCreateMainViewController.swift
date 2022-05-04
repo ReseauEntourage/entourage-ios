@@ -235,7 +235,7 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
         
         switch currentPhasePosition {
         case 1:
-            if newNeighborhood.name.count >= 2 && (newNeighborhood.address?.location?.coordinate.latitude ?? 0 != 0)  {
+            if newNeighborhood.name.count >= 2 && ((newNeighborhood.address?.location?.coordinate.latitude ?? 0 != 0) || newNeighborhood.address?.google_place_id != nil)  {
                 isValid = true
             }
             message = "neighborhoodCreatePhase1_error".localized
