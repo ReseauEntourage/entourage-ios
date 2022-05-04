@@ -107,7 +107,7 @@ extension MainParamsViewController:MainParamsMenuDelegate {
         let buttonAccept = MJAlertButtonType(title: "params_logout_pop_logout".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         let buttonCancel = MJAlertButtonType(title: "params_logout_pop_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "params_logout_pop_title".localized, message: "params_logout_pop_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        customAlert.configureAlert(alertTitle: "params_logout_pop_title".localized, message: "params_logout_pop_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35,parentVC:self)
         
         customAlert.alertTagName = .Logout
         customAlert.delegate = self
@@ -119,7 +119,7 @@ extension MainParamsViewController:MainParamsMenuDelegate {
         let buttonAccept = MJAlertButtonType(title: "params_suppress_pop_suppress".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
         let buttonCancel = MJAlertButtonType(title: "params_suppress_pop_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "params_suppress_pop_title".localized, message: "params_suppress_pop_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        customAlert.configureAlert(alertTitle: "params_suppress_pop_title".localized, message: "params_suppress_pop_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35,parentVC:self)
         
         customAlert.alertTagName = .Suppress
         customAlert.delegate = self
