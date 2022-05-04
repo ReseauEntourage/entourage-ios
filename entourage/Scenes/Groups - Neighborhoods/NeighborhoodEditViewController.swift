@@ -171,9 +171,7 @@ class NeighborhoodEditViewController: UIViewController {
             newNeighborhood.address = Address(displayAddress: location_name_new, location: location)
         }
         else if let googlePlace = location_googlePlace_new {
-            let location = CLLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
-            newNeighborhood.address?.location = location
-            newNeighborhood.address = Address(displayAddress: googlePlace.name, location: location)
+            newNeighborhood.address = Address( google_place_id: googlePlace.placeID)
         }
         
         //Phase 2

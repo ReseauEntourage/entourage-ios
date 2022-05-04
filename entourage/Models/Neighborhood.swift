@@ -65,6 +65,9 @@ struct Neighborhood:Codable {
         if address?.location?.coordinate.longitude ?? 0 > 0 {
             dict["longitude"] = address!.location!.coordinate.longitude
         }
+        if address?.google_place_id?.count ?? 0 > 0 {
+            dict["google_place_id"] = address!.google_place_id!
+        }
         
         if !(aboutGroup?.isEmpty ?? true) {
             dict["description"] = aboutGroup!

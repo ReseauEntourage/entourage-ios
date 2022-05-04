@@ -56,7 +56,7 @@ class NeighborhoodParamsGroupViewController: BasePopViewController {
 //MARK: - Tableview Datasource/delegate -
 extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return isCreator ? 4 : 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

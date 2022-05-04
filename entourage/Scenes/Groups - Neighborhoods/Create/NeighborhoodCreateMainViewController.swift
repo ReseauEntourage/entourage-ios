@@ -202,8 +202,8 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
             newNeighborhood.address = Address(displayAddress: currentLocationName, location: location)
         }
         else if let googlePlace = googlePlace {
-            let location = CLLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
-            newNeighborhood.address = Address(displayAddress: googlePlace.name, location: location)
+          //  let location = CLLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
+            newNeighborhood.address = Address(displayAddress: googlePlace.name, location: nil, google_place_id: googlePlace.placeID)
         }
         _ = checkValidation()
     }
