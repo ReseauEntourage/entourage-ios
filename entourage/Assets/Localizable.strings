@@ -564,6 +564,9 @@
 "neighborhood_params_participant" = "participant";
 "neighborhood_params_participants" = "participants";
 
+"neighborhood_users_title" = "Voir les membres";
+"neighborhood_userInput_search" = "Rechercher un membre du groupe";
+
 //CGU
 "neighborhood_CGU_1" = "Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.";
 "neighborhood_CGU_2" = "Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.  Praesent pharetra ac nisi quis finibus. Curabitur purus dui, aliquet cursus ";

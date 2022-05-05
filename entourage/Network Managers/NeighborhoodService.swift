@@ -106,6 +106,29 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
+    
+    static func getNeighborhoodUsers(neighborhoodId:Int, completion: @escaping (_ users:[UserLightNeighborhood]?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetNeighborhoodUsers
+        endpoint = String.init(format: endpoint,"\(neighborhoodId)", token)
+        
+        Logger.print("***** url get group users : \(endpoint)")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            Logger.print("***** return get group users : \(error)")
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil,  error) }
+                return
+            }
+            Logger.print("***** return get group users : \(data)")
+            let users:[UserLightNeighborhood]? = self.parseDatas(data: data,key: "users")
+            DispatchQueue.main.async { completion(users,nil) }
+        }
+    }
+    
     //MARK: - Create/update group -
     static func createNeighborhood(group:Neighborhood,completion: @escaping (_ group:Neighborhood?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}

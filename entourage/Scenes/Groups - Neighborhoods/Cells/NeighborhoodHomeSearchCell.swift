@@ -26,10 +26,13 @@ class NeighborhoodHomeSearchCell: UITableViewCell {
         
     }
     
-    func populateCell(delegate:NeighborhoodHomeSearchDelegate, isSearch:Bool) {
+    func populateCell(delegate:NeighborhoodHomeSearchDelegate, isSearch:Bool, placeceholder:String? = nil) {
         self.delegate = delegate
         if !isSearch {
             ui_search_textfield.text = ""
+        }
+        if let placeceholder = placeceholder {
+            ui_search_textfield.placeholder = placeceholder
         }
     }
     

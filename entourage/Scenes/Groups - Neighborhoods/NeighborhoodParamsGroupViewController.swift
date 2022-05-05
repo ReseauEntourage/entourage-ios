@@ -114,7 +114,7 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
         }
         
         if let  vc = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
-            vc.modalPresentationStyle = .fullScreen
+            vc.modalPresentationStyle = .currentContext
             vc.group = neighborhood
             vc.parentDelegate = self
             vc.signalType = .group

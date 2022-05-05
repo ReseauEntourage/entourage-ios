@@ -149,6 +149,49 @@ struct User: Codable {
     }
 }
 
+struct UserLightNeighborhood: Codable {
+    var sid:Int = 0
+    var displayName:String = ""
+    var avatarURL:String? = nil
+    var partner:Partner? = nil
+    var partnerRoleTitle:String? = nil
+    var role:String? = nil
+    var groupRole:String? = nil
+    var communityRoles:[String]? = nil
+    var status:String? = nil
+    var message:String? = nil
+    
+    
+    enum CodingKeys: String, CodingKey {
+       
+        case partnerRoleTitle = "partner_role_title"
+        case status
+        case message
+        case partner
+        case role
+        case groupRole = "group_role"
+        case sid = "id"
+        case communityRoles = "community_roles"
+        
+        case displayName = "display_name"
+        case avatarURL = "avatar_url"
+    }
+    
+    func getCommunityRolesFormated() -> String? {
+        if let communityRoles = communityRoles {
+            var pos = 0
+            var roleStr = ""
+            for role in communityRoles {
+                roleStr = pos == 0 ? role : "\(roleStr) • \(role)"
+                pos = pos + 1
+            }
+            return roleStr
+        }
+        
+        return nil
+    }
+}
+
 //MARK: - Organization -
 struct Organization:Codable {
     var name:String

@@ -14,6 +14,7 @@ class NeighborhoodDetailViewController: UIViewController {
     @IBOutlet weak var ui_viewtop_white_round: UIView!
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_top_view: MJNavBackView!
+    @IBOutlet weak var ui_iv_neighborhood: UIImageView!
     
     var neighborhoodId:Int = 0
     var neighborhood:Neighborhood? = nil
@@ -49,6 +50,13 @@ class NeighborhoodDetailViewController: UIViewController {
             
             self.neighborhood = group
             self.ui_tableview.reloadData()
+            
+            if let _url = self.neighborhood?.image_url, let url = URL(string: _url) {
+                self.ui_iv_neighborhood.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_neighborhood"))
+            }
+            else {
+                self.ui_iv_neighborhood.image = UIImage.init(named: "placeholder_neighborhood")
+            }
         }
     }
     
@@ -113,7 +121,7 @@ class NeighborhoodDetailViewController: UIViewController {
 //MARK: - UITableViewDataSource / Delegate -
 extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,7 +132,12 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             
             return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellEvents", for: indexPath)
+        if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellEventEmpty", for: indexPath)
+            
+            return cell
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostEmpty", for: indexPath)
         
         return cell
     }
@@ -135,6 +148,11 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
     func showMembers() {
         //TODO: a faire
         Logger.print("***** show membres")
+        
+        if let navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodListUsersViewController {
+            vc.neighborhood = neighborhood
+            self.navigationController?.present(navVC, animated: true)
+        }
     }
     
     func joinLeave() {
