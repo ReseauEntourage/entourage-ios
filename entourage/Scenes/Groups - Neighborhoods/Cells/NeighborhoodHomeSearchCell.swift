@@ -11,6 +11,7 @@ class NeighborhoodHomeSearchCell: UITableViewCell {
     
     @IBOutlet weak var ui_search_textfield: UITextField!
     @IBOutlet weak var ui_view_search: UIView!
+    @IBOutlet weak var ui_bt_search: UIButton!
     
     weak var delegate:NeighborhoodHomeSearchDelegate? = nil
     
@@ -30,9 +31,11 @@ class NeighborhoodHomeSearchCell: UITableViewCell {
         self.delegate = delegate
         if !isSearch {
             ui_search_textfield.text = ""
+            ui_bt_search.isHidden = true
         }
         if let placeceholder = placeceholder {
             ui_search_textfield.placeholder = placeceholder
+            ui_bt_search.isHidden = false
         }
     }
     
@@ -41,6 +44,7 @@ class NeighborhoodHomeSearchCell: UITableViewCell {
         
         ui_search_textfield.text = ""
         delegate?.goSearch("")
+        ui_bt_search.isHidden = true
     }
     
     @IBAction func action_search_show(_ sender: Any) {
@@ -59,10 +63,27 @@ extension NeighborhoodHomeSearchCell: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text?.count == 0 {
             delegate?.showEmptySearch()
+            ui_bt_search.isHidden = true
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
                 self.ui_search_textfield.becomeFirstResponder()
             }
         }
+        else {
+            ui_bt_search.isHidden = false
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        var count = textField.text?.count ?? 0
+        count = count + (string.isEmpty ? -1 : 1)
+        if count > 0 {
+            ui_bt_search.isHidden = false
+        }
+        else {
+            ui_bt_search.isHidden = true
+        }
+        return true
     }
 }
 

@@ -38,6 +38,10 @@ class NeighborhoodHomeViewController: UIViewController {
     @IBOutlet weak var ui_lbl_empty_title_search: UILabel!
     @IBOutlet weak var ui_lbl_empty_subtitle_search: UILabel!
     
+    @IBOutlet weak var ui_view_empty_discover: UIView!
+    @IBOutlet weak var ui_lbl_empty_title_discover: UILabel!
+    @IBOutlet weak var ui_lbl_empty_subtitle_discover: UILabel!
+    
     var maxViewHeight:CGFloat = 138
     var minViewHeight:CGFloat = 108//108
     
@@ -247,6 +251,7 @@ class NeighborhoodHomeViewController: UIViewController {
         ui_view_empty.isHidden = true
         self.ui_view_empty_groups.isHidden = true
         self.ui_view_empty_search.isHidden = true
+        self.ui_view_empty_discover.isHidden = true
         
         if isGroupsSelected {
             ui_label_groups.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
@@ -328,6 +333,19 @@ class NeighborhoodHomeViewController: UIViewController {
         
         ui_lbl_empty_subtitle_search.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
+        ui_lbl_empty_title_discover.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
+        
+        ui_lbl_empty_subtitle_discover.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        
+        ui_bt_empty_group.setTitle("neighborhood_group_my_empty_button".localized, for: .normal)
+        ui_lbl_empty_group.text = "neighborhood_group_my_empty_title".localized
+        
+        ui_lbl_empty_title_search.text = "neighborhood_group_search_empty_title".localized
+        ui_lbl_empty_subtitle_search.text = "neighborhood_group_search_empty_subtitle".localized
+        
+        ui_lbl_empty_title_discover.text = "neighborhood_group_discover_empty_title".localized
+        ui_lbl_empty_subtitle_discover.text = "neighborhood_group_discover_empty_subtitle".localized
+        
         hideEmptyView()
     }
     
@@ -336,11 +354,21 @@ class NeighborhoodHomeViewController: UIViewController {
             self.ui_view_empty.isHidden = false
             self.ui_view_empty_groups.isHidden = false
             self.ui_view_empty_search.isHidden = true
+            self.ui_view_empty_discover.isHidden = true
         }
         else {
-            self.ui_view_empty.isHidden = false
-            self.ui_view_empty_groups.isHidden = true
-            self.ui_view_empty_search.isHidden = false
+            if isSearch {
+                self.ui_view_empty.isHidden = false
+                self.ui_view_empty_groups.isHidden = true
+                self.ui_view_empty_search.isHidden = false
+                self.ui_view_empty_discover.isHidden = true
+            }
+            else {
+                self.ui_view_empty.isHidden = false
+                self.ui_view_empty_groups.isHidden = true
+                self.ui_view_empty_search.isHidden = true
+                self.ui_view_empty_discover.isHidden = false
+            }
         }
     }
     
@@ -348,6 +376,7 @@ class NeighborhoodHomeViewController: UIViewController {
         ui_view_empty.isHidden = true
         ui_view_empty_groups.isHidden = true
         ui_view_empty_search.isHidden = true
+        ui_view_empty_discover.isHidden = true
     }
 }
 
@@ -355,7 +384,7 @@ class NeighborhoodHomeViewController: UIViewController {
 extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (isGroupsSelected && myNeighborhoods.isEmpty && !isfirstLoadingMyGroup) || (isSearch && neighborhoodsSearch.isEmpty && isSendedSearch) {
+        if (isGroupsSelected && myNeighborhoods.isEmpty && !isfirstLoadingMyGroup) || (isSearch && neighborhoodsSearch.isEmpty && isSendedSearch) || (!isGroupsSelected && neighborhoodsDiscovered.isEmpty) {
             showEmptyView()
         }
         else {
@@ -427,13 +456,20 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
     
     func scrollViewDidScroll( _ scrollView: UIScrollView) {
         UIView.animate(withDuration: 0) {
+            
+            let yImage = self.imageNormalHeight - (scrollView.contentOffset.y+self.imageNormalHeight)
+            let diffImage = (self.maxViewHeight - self.maxImageHeight)
+            let heightImage = min(max (yImage -  diffImage,self.minImageHeight),self.maxImageHeight)
+            
+            self.ui_image_constraint_height.constant = heightImage
+            
             let yView = self.viewNormalHeight - (scrollView.contentOffset.y + self.viewNormalHeight)
             let heightView = min(max (yView,self.minViewHeight),self.maxViewHeight)
             self.ui_view_height_constraint.constant = heightView
             
             //On évite de calculer et repositionner les vues inutiliement.
             if self.ui_view_height_constraint.constant <= self.minViewHeight {
-                self.ui_image.isHidden = true
+              //  self.ui_image.isHidden = true
                 self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
                 // self.ui_constraint_bottom_label.constant = self.minLabelBottomConstraint
                 return
@@ -449,11 +485,6 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
             let heightCalculated = (self.minLabelFont * yLabelFont) / self.minViewHeight
             let heightLabelFont = min(max (heightCalculated,self.minLabelFont),self.maxLabelFont)
             self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: heightLabelFont)
-            
-            let yImage = self.imageNormalHeight - (scrollView.contentOffset.y+self.imageNormalHeight)
-            let diffImage = (self.maxViewHeight - self.maxImageHeight)
-            let heightImage = min(max (yImage -  diffImage,self.minImageHeight),self.maxImageHeight)
-            self.ui_image_constraint_height.constant = heightImage
             
             self.view.layoutIfNeeded()
         }
