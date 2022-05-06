@@ -192,6 +192,7 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
     
     func addGroupDescription(_ about: String?) {
         newNeighborhood.aboutGroup = about
+        _ = checkValidation()
     }
     
     func addGroupPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
@@ -235,9 +236,10 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
         
         switch currentPhasePosition {
         case 1:
-            if newNeighborhood.name.count >= 2 && ((newNeighborhood.address?.location?.coordinate.latitude ?? 0 != 0) || newNeighborhood.address?.google_place_id != nil)  {
+            if newNeighborhood.name.count >= 2 && ((newNeighborhood.address?.location?.coordinate.latitude ?? 0 != 0) || newNeighborhood.address?.google_place_id != nil) && newNeighborhood.aboutGroup?.count ?? 0 > 0  {
                 isValid = true
             }
+            
             message = "neighborhoodCreatePhase1_error".localized
         case 2:
             message = "neighborhoodCreatePhase2_error".localized

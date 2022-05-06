@@ -478,7 +478,7 @@
 "neighborhoodCreateNameSubtitle" = "- obligatoire";
 
 "neighborhoodCreateDescriptionTitle" = "Rédiger un descriptif";
-"neighborhoodCreateDescriptionSubtitle" = "facultatif (200 caractères max)";
+"neighborhoodCreateDescriptionSubtitle" = "obligatoire (200 caractères max)";
 "neighborhoodCreateTitleDescriptionPlaceholder" = "Décrivez rapidement l’objectif de discussion principal de ce groupe";
 
 
@@ -491,6 +491,7 @@
 "neighborhoodCreateInputErrorMinCharName" = "Le nom du groupe doit contenir au minimum 2 caractères.";
 "neighborhoodCreatePhase1_error" = "Veuillez remplir tous les champs obligatoires";
 "neighborhoodCreatePhase2_error" = "Une catégorie doit être sélectionnée.";
+"neighborhoodCreateInputErrorMandatory" = "Champ à remplir";
 
 //Phase 2
 "neighborhoodCreateCatMessage" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de discussion du groupe. - obligatoire";

@@ -12,6 +12,7 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
     @IBOutlet weak var ui_title_bio: UILabel!
     @IBOutlet weak var ui_description: UILabel!
     
+    @IBOutlet weak var ui_view_error: MJErrorInputTextView?
     @IBOutlet weak var ui_bio_count: UILabel!
     @IBOutlet weak var ui_tv_edit_bio: MJTextViewPlaceholder!
     
@@ -43,6 +44,9 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
         ui_description.text = "neighborhoodCreateDescriptionSubtitle".localized
         ui_description.textColor = ApplicationTheme.getFontLegend().color
         ui_description.font = ApplicationTheme.getFontLegend(size: 13).font
+        
+        ui_view_error?.isHidden = true
+        self.ui_view_error?.setupView(title: "neighborhoodCreateInputErrorMandatory".localized)
     }
     
     private func setupTitles(title:String,description:String,placeholder:String) {
@@ -59,11 +63,12 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
         setupTitles(title: title, description: description, placeholder: placeholder)
     }
     
-    @objc func closeKb(_ sender:UIBarButtonItem!) {
+    @objc func closeKb(_ sender:UIBarButtonItem?) {
         if let txtBio = ui_tv_edit_bio.text {
             let _bio = txtBio == placeholderTxt ? "" : txtBio
             delegate?.updateFromTextView(text: _bio,textInputType: textInputType)
         }
+        ui_view_error?.isHidden = ui_tv_edit_bio.text?.isEmpty ?? true ? false : true
         _ = ui_tv_edit_bio.resignFirstResponder()
     }
 }
@@ -73,8 +78,7 @@ extension NeighborhoodCreateDescriptionCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         //TODO: ON garde quel comportement? avec ou sans retour à la ligne ?
         if text == "\n" {
-            delegate?.updateFromTextView(text: textView.text,textInputType: textInputType)
-            textView.resignFirstResponder()
+            self.closeKb(nil)
             return false
         }
         

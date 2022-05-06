@@ -127,8 +127,10 @@ class NeighborhoodEditViewController: UIViewController {
     
     func checkValidationInputs() {
         var isValidated = true
-        
         if neighborhoodName !=  nil && !(neighborhoodName?.count ?? 0 >= ApplicationTheme.minGroupNameChars)  {
+            isValidated = false
+        }
+        else if neighborhoodAbout != nil && !(neighborhoodAbout?.count ?? 0 > 0) {
             isValidated = false
         }
         else {
