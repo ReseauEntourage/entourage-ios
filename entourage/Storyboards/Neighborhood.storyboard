@@ -1983,6 +1983,7 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="ui_bt_search" destination="RHA-N7-61i" id="Ixy-TD-4Qf"/>
                                                     <outlet property="ui_search_textfield" destination="Odx-KY-2jM" id="Jii-oe-ocq"/>
                                                     <outlet property="ui_view_search" destination="jUa-MT-FBF" id="bYd-VQ-tRb"/>
                                                 </connections>

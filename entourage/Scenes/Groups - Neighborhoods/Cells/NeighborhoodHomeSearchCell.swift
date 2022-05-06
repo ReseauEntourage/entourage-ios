@@ -33,9 +33,20 @@ class NeighborhoodHomeSearchCell: UITableViewCell {
             ui_search_textfield.text = ""
             ui_bt_search.isHidden = true
         }
+        else {
+            ui_bt_search.isHidden = false
+        }
+        
+        if ui_search_textfield.text?.count ?? 0 > 0 {
+            ui_bt_search.isHidden = false
+        }
+        else {
+            ui_bt_search.isHidden = true
+        }
+        
         if let placeceholder = placeceholder {
             ui_search_textfield.placeholder = placeceholder
-            ui_bt_search.isHidden = false
+           // ui_bt_search.isHidden = false
         }
     }
     
