@@ -101,6 +101,7 @@
 		029E307C27DB5EF300B12357 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029E307A27DB5EF300B12357 /* GoogleService-Info.plist */; };
 		029E307F27DB60D300B12357 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 029E307E27DB60D300B12357 /* FirebaseAnalytics */; };
 		029F690E27D905F5003D1E39 /* MainUserInfosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029F690D27D905F5003D1E39 /* MainUserInfosCell.swift */; };
+		02A1D2242828FEF3004C3A3D /* MJTabbarCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1D2232828FEF3004C3A3D /* MJTabbarCustom.swift */; };
 		02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3DD2E27FD92600060EC2E /* MJDayMonthPicker.swift */; };
 		02A3DD3127FDC03B0060EC2E /* Neighborhood.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02A3DD3027FDC03B0060EC2E /* Neighborhood.xcassets */; };
 		02A3DD3327FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3DD3227FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift */; };
@@ -308,6 +309,7 @@
 		029E307927DB5EF300B12357 /* GoogleService-Info-social.entourage.ios.beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-social.entourage.ios.beta.plist"; sourceTree = "<group>"; };
 		029E307A27DB5EF300B12357 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		029F690D27D905F5003D1E39 /* MainUserInfosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserInfosCell.swift; sourceTree = "<group>"; };
+		02A1D2232828FEF3004C3A3D /* MJTabbarCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJTabbarCustom.swift; sourceTree = "<group>"; };
 		02A3DD2E27FD92600060EC2E /* MJDayMonthPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJDayMonthPicker.swift; sourceTree = "<group>"; };
 		02A3DD3027FDC03B0060EC2E /* Neighborhood.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Neighborhood.xcassets; sourceTree = "<group>"; };
 		02A3DD3227FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreatePhase1ViewController.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				025D8719278DD33600909101 /* AppDelegate.swift */,
 				02C91A26278F303100305E0B /* AppState.swift */,
 				02C91A28278F335000305E0B /* MainTabbarViewController.swift */,
+				02A1D2232828FEF3004C3A3D /* MJTabbarCustom.swift */,
 				0229377027A4449700206201 /* Managers */,
 				022744742795C88E005600A1 /* Models */,
 				02C0A0E0278EDCA700B0C646 /* Network Managers */,
@@ -1163,6 +1166,7 @@
 				02681952278DF6CA00A98A4A /* OTCustomTextfield.swift in Sources */,
 				02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */,
 				0262997927905FB700D84A6A /* Constants.swift in Sources */,
+				02A1D2242828FEF3004C3A3D /* MJTabbarCustom.swift in Sources */,
 				028444CA282015A000AFC072 /* NeighborhoodParamsGroupViewController.swift in Sources */,
 				0220580727FB003700531720 /* BasePopViewController.swift in Sources */,
 				0224597A27FF454A00944DE4 /* Extensions_UITextField.swift in Sources */,

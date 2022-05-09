@@ -63,7 +63,7 @@ struct AppState {
     }
     
     static func navigateToMainApp() {
-        let tabbar = MainTabbarViewController()
+        let tabbar = UIStoryboard.init(name: "Main", bundle: nil).instantiateInitialViewController() as! MainTabbarViewController // MainTabbarViewController()
         tabbar.selectedIndex = 0
         tabbar.boldSelectedItem()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
