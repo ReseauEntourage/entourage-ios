@@ -21,6 +21,10 @@ struct ApplicationTheme {
     static let maxCharsBio = 200
     
     static func iPhoneHasNotch() -> Bool {
+        return getTopIPhonePadding() > 20
+    }
+    
+    static func getTopIPhonePadding() -> CGFloat {
         var topPadding:CGFloat?
         
         if #available(iOS 13.0, *) {
@@ -31,7 +35,7 @@ struct ApplicationTheme {
             let window = UIApplication.shared.keyWindow
             topPadding = window?.safeAreaInsets.top
         }
-        return topPadding ?? 0  > 20
+        return topPadding ?? 0
     }
     
     static func getDefaultBackgroundBarColor() -> UIColor {

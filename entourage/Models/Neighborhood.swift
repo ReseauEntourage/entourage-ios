@@ -48,6 +48,11 @@ struct Neighborhood:Codable {
         case has_ongoing_outing
     }
     
+    func isFollowingGroup(myId:Int?) -> Bool {
+        let member = members.first(where: { $0.uid == myId })
+        return member != nil
+    }
+    
     func dictionaryForWS() -> [String:Any] {
         var dict = [String:Any]()
         

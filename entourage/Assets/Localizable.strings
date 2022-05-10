@@ -561,6 +561,16 @@
 "neighborhood_detail_member" = "%d membre";
 "neighborhood_detail_about_title" = "À savoir";
 "neighborhood_detail_event_title" = "Événements";
+"neighborhood_detail_button_more" = "En savoir plus";
+
+"neighborhood_event_group_section_title" = "Évènements du groupe";
+"neighborhood_post_group_section_title" = "Fil d’actualité";
+"neighborhood_empty_event_title" = "Pas encore d’évènements prévus dans ce
+groupe";
+"neighborhood_empty_event_subtitle" = "Cliquez sur « + » pour en créer un";
+"neighborhood_empty_post_title" = "Pas encore de publication sur ce groupe";
+"neighborhood_empty_post_subtitle" = "C’est l’occasion pour vous de partager la première nouvelle pour lancer la discussion ! ";
+
 //Params
 "neighborhood_params_title" = "Paramètres du groupe";
 "neighborhood_params_cgu" = "Règlement du groupe";

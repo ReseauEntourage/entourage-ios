@@ -41,27 +41,27 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
         ui_lbl_nb_members.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        ui_lbl_about_title.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
-        ui_lbl_about_title.text = "neighborhood_detail_about_title".localized
-        ui_lbl_about_desc.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_lbl_about_title?.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
+        ui_lbl_about_title?.text = "neighborhood_detail_about_title".localized
+        ui_lbl_about_desc?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_view_button_join.layer.cornerRadius = ui_view_button_join.frame.height / 2
         ui_view_button_join.layer.borderColor = UIColor.appOrange.cgColor
         ui_view_button_join.layer.borderWidth = 1
         
-        ui_taglist_view.backgroundColor = .appBeigeClair
-        ui_taglist_view.tagBackgroundColor = ApplicationTheme.getFontCategoryBubble().color
-        ui_taglist_view.cornerRadius = cornerRadiusTag
-        ui_taglist_view.textFont = ApplicationTheme.getFontCategoryBubble().font
-        ui_taglist_view.textColor = .appOrange
-        ui_taglist_view.alignment = .center
+        ui_taglist_view?.backgroundColor = .appBeigeClair
+        ui_taglist_view?.tagBackgroundColor = ApplicationTheme.getFontCategoryBubble().color
+        ui_taglist_view?.cornerRadius = cornerRadiusTag
+        ui_taglist_view?.textFont = ApplicationTheme.getFontCategoryBubble().font
+        ui_taglist_view?.textColor = .appOrange
+        ui_taglist_view?.alignment = .center
         
         //Values to align and padding tags
-        ui_taglist_view.marginY = 12
-        ui_taglist_view.marginX = 12
+        ui_taglist_view?.marginY = 12
+        ui_taglist_view?.marginX = 12
         
-        ui_taglist_view.paddingX = 15
-        ui_taglist_view.paddingY = 9
+        ui_taglist_view?.paddingX = 15
+        ui_taglist_view?.paddingY = 9
         
         ui_img_member_1.layer.cornerRadius = ui_img_member_1.frame.height / 2
         ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
@@ -116,10 +116,17 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         ui_lbl_nb_members.text = membersCount
         
         ui_title.text = neighborhood.name
-        ui_lbl_about_desc.text = neighborhood.aboutGroup
+        ui_lbl_about_desc?.text = neighborhood.aboutGroup
         
         let currentUserId = UserDefaults.currentUser?.sid
-        if let _ = neighborhood.members.first(where: {$0.uid == currentUserId}) {
+        if neighborhood.isFollowingGroup(myId: currentUserId) {
+            ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
+            ui_view_button_join.backgroundColor = .clear
+            ui_view_button_join.layer.borderWidth = 0
+            ui_img_bt_join.image = UIImage.init(named: "ic_next_orange")
+            ui_lbl_bt_join.attributedText = Utils.formatStringUnderline(textString: "neighborhood_detail_button_more".localized, textColor: .appOrange,font: ApplicationTheme.getFontH2Noir().font)
+        }
+        else if let _ = neighborhood.members.first(where: {$0.uid == currentUserId}) {
             ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
             ui_view_button_join.backgroundColor = .clear
             ui_img_bt_join.image = UIImage.init(named: "ic_check_member_orange")
@@ -133,13 +140,13 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         }
         
         if let _interests = neighborhood.interests {
-            ui_taglist_view.removeAllTags()
+            ui_taglist_view?.removeAllTags()
             for interest in _interests {
                 if let tagName = Metadatas.sharedInstance.tagsInterest?.getTagNameFrom(key: interest) {
-                    ui_taglist_view.addTag(tagName)
+                    ui_taglist_view?.addTag(tagName)
                 }
                 else {
-                    ui_taglist_view.addTag(interest)
+                    ui_taglist_view?.addTag(interest)
                 }
             }
             if _interests.isEmpty {

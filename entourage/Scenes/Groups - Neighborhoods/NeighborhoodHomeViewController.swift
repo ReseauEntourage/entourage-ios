@@ -451,7 +451,6 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
                 self.getNeighborhoodsSuggestions()
             }
         }
-        
     }
     
     func scrollViewDidScroll( _ scrollView: UIScrollView) {
@@ -461,7 +460,7 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
             let diffImage = (self.maxViewHeight - self.maxImageHeight)
             let heightImage = min(max (yImage -  diffImage,self.minImageHeight),self.maxImageHeight)
             
-            self.ui_image_constraint_height.constant = heightImage
+            self.ui_image.alpha = heightImage / self.maxImageHeight
             
             let yView = self.viewNormalHeight - (scrollView.contentOffset.y + self.viewNormalHeight)
             let heightView = min(max (yView,self.minViewHeight),self.maxViewHeight)

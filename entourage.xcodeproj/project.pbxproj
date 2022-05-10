@@ -46,6 +46,7 @@
 		02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02490DC427EA245E00E2577B /* MJErrorInputView.swift */; };
 		02490DC727EA246B00E2577B /* MJErrorInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02490DC627EA246B00E2577B /* MJErrorInputView.xib */; };
 		02490DC927EA461700E2577B /* Extensions_UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02490DC827EA461700E2577B /* Extensions_UIDevice.swift */; };
+		0258AFE0282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFDF282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift */; };
 		025D871A278DD33600909101 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D8719278DD33600909101 /* AppDelegate.swift */; };
 		025D8723278DD33800909101 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 025D8722278DD33800909101 /* Assets.xcassets */; };
 		025D8726278DD33800909101 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025D8724278DD33800909101 /* LaunchScreen.storyboard */; };
@@ -252,6 +253,7 @@
 		02490DC427EA245E00E2577B /* MJErrorInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJErrorInputView.swift; sourceTree = "<group>"; };
 		02490DC627EA246B00E2577B /* MJErrorInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJErrorInputView.xib; sourceTree = "<group>"; };
 		02490DC827EA461700E2577B /* Extensions_UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIDevice.swift; sourceTree = "<group>"; };
+		0258AFDF282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodEmptyCells.swift; sourceTree = "<group>"; };
 		025D8716278DD33600909101 /* Ent-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ent-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		025D8719278DD33600909101 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		025D8722278DD33800909101 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				02FCB536281BDD2600682E61 /* NeighborhoodDetailTopCell.swift */,
 				0282637B282160B700B354F9 /* NeighborhoodCguCell.swift */,
 				02833F9B2822B54D00000156 /* NeighborhoodUserCell.swift */,
+				0258AFDF282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift */,
 				0282637A28215FC100B354F9 /* Params */,
 			);
 			path = Cells;
@@ -1225,6 +1228,7 @@
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
 				021318AD27DF55D400B0F1BD /* MainHomeViewController.swift in Sources */,
+				0258AFE0282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift in Sources */,
 				029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */,
 				02F5278727999D8400929431 /* PoiCategory.swift in Sources */,
 				02681981278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift in Sources */,
