@@ -580,10 +580,22 @@ groupe";
 "neighborhood_params_cgu_description" = "Règlement du groupe, à lire attentivement.";
 "neighborhood_params_participant" = "participant";
 "neighborhood_params_participants" = "participants";
+"neighborhood_params_quit" = "Quitter le groupe";
+
+"neighborhood_params_notif_title" = "Me notifier de";
+"neighborhood_params_notif_all" = "Toute l'activité du groupe";
+"neighborhood_params_notif_new_events" = "Les nouveaux événements";
+"neighborhood_params_notif_new_messages" = "Les nouveaux messages";
+"neighborhood_params_notif_new_members" = "L'arrivée de nouveaux membres";
 
 "neighborhood_users_title" = "Voir les membres";
 "neighborhood_userInput_search" = "Rechercher un membre du groupe";
 
+//Pop leave group
+"params_leave_group_pop_title" = "Quitter le groupe";
+"params_leave_group_pop_message" = "Souhaitez-vous quitter le groupe ?";
+"params_leave_group_pop_bt_quit" = "Quitter";
+"params_leave_group_pop_bt_cancel" = "Annuler";
 //CGU
 "neighborhood_CGU_1" = "Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.";
 "neighborhood_CGU_2" = "Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.Je n’insulterai pas , pas d’incitation à la haine ni de harcèlement.  Praesent pharetra ac nisi quis finibus. Curabitur purus dui, aliquet cursus ";

@@ -23,6 +23,15 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
         ui_top_view.populateCustom(title: "neighborhood_about_group_title".localized, titleFont: ApplicationTheme.getFontCourantBoldNoir().font, titleColor: ApplicationTheme.getFontCourantBoldNoir().color, imageName: nil, backgroundColor: .appBeigeClair, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil)
         
         getNeighborhoodDetail()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
+    }
+    
+    @objc func updateNeighborhood() {
+        getNeighborhoodDetail()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func getNeighborhoodDetail() {

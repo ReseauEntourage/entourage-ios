@@ -48,6 +48,7 @@
 		02490DC927EA461700E2577B /* Extensions_UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02490DC827EA461700E2577B /* Extensions_UIDevice.swift */; };
 		0258AFE0282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFDF282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift */; };
 		0258AFE2282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFE1282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift */; };
+		0258AFE6282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFE5282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift */; };
 		025D871A278DD33600909101 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D8719278DD33600909101 /* AppDelegate.swift */; };
 		025D8723278DD33800909101 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 025D8722278DD33800909101 /* Assets.xcassets */; };
 		025D8726278DD33800909101 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025D8724278DD33800909101 /* LaunchScreen.storyboard */; };
@@ -256,6 +257,7 @@
 		02490DC827EA461700E2577B /* Extensions_UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIDevice.swift; sourceTree = "<group>"; };
 		0258AFDF282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodEmptyCells.swift; sourceTree = "<group>"; };
 		0258AFE1282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodDetailOnlyViewController.swift; sourceTree = "<group>"; };
+		0258AFE5282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodParamNotifsCell.swift; sourceTree = "<group>"; };
 		025D8716278DD33600909101 /* Ent-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ent-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		025D8719278DD33600909101 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		025D8722278DD33800909101 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 				02C6E86228203119009D4289 /* NeighborhoodParamTopCell.swift */,
 				02C6E86428203127009D4289 /* NeighborhoodParamSignalCell.swift */,
 				02C6E86628203141009D4289 /* NeighborhoodParamEditShowCell.swift */,
+				0258AFE5282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift */,
 			);
 			path = Params;
 			sourceTree = "<group>";
@@ -1267,6 +1270,7 @@
 				02C0A0E7278EEC6B00B0C646 /* NetworkManager.swift in Sources */,
 				02846CC027EC921700D85ADA /* SelectTagCell.swift in Sources */,
 				0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */,
+				0258AFE6282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift in Sources */,
 				0224597D28001B2500944DE4 /* Address.swift in Sources */,
 				02C9B4AA27E21BF70026450A /* ParamsAboutViewController.swift in Sources */,
 				02CCE69027D7B96700D6976C /* MainUserProfileTopCell.swift in Sources */,

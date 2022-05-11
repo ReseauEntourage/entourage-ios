@@ -14,12 +14,18 @@ class NeighborhoodParamEditShowCell: UITableViewCell {
     @IBOutlet weak var ui_image: UIImageView!
     @IBOutlet weak var ui_separator: UIView!
     
+    weak var delegate:NeighborhoodParamCellDelegate? = nil
+    
+    var isCGU = false
     override func awakeFromNib() {
         super.awakeFromNib()
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
     }
     
-    func populateCell(title:String,imageName:String? = nil,showArrow:Bool = true, showSeparator:Bool = true) {
+    func populateCell(title:String,imageName:String? = nil,showArrow:Bool = true, showSeparator:Bool = true, delegate:NeighborhoodParamCellDelegate, isCGU:Bool) {
+        self.delegate = delegate
+        self.isCGU = isCGU
+        
         ui_title.text = title
         if let imageName = imageName {
             ui_image.image = UIImage.init(named: imageName)
@@ -27,5 +33,14 @@ class NeighborhoodParamEditShowCell: UITableViewCell {
         
         ui_image_arrow.isHidden = !showArrow
         ui_separator.isHidden = !showSeparator
+    }
+    
+    @IBAction func action_show(_ sender: Any) {
+        if isCGU {
+            delegate?.showCGU()
+        }
+        else {
+            delegate?.editGroup()
+        }
     }
 }
