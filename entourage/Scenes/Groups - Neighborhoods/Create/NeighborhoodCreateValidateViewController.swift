@@ -15,6 +15,8 @@ class NeighborhoodCreateValidateViewController: UIViewController {
     @IBOutlet weak var ui_subtitle: UILabel!
     @IBOutlet weak var ui_title: UILabel!
     
+    var newNeighborhood:Neighborhood? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +47,8 @@ class NeighborhoodCreateValidateViewController: UIViewController {
     }
     
     @IBAction func action_pass(_ sender: Any) {
-        self.dismiss(animated: true)
+        self.dismiss(animated: true) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowNew), object: nil, userInfo: ["neighborhoodId":self.newNeighborhood?.uid as Any])
+        }
     }
 }

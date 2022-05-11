@@ -92,6 +92,15 @@ class NeighborhoodHomeViewController: UIViewController {
         
         //Notif for updating neighborhood infos
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreate), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
+        
+        //Notif for show new created group
+        NotificationCenter.default.addObserver(self, selector: #selector(showNewNeighborhood(_:)), name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowNew), object: nil)
+    }
+    
+    @objc func showNewNeighborhood(_ notification:Notification) {
+        if let neighId = notification.userInfo?["neighborhoodId"] as? Int {
+            self.showNeighborhood(neighborhoodId: neighId)
+        }
     }
     
     @objc func updateFromCreate() {
@@ -397,6 +406,14 @@ class NeighborhoodHomeViewController: UIViewController {
         ui_view_empty_search.isHidden = true
         ui_view_empty_discover.isHidden = true
     }
+    
+    func showNeighborhood(neighborhoodId:Int) {
+        let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
+        if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
+            vc.neighborhoodId = neighborhoodId
+            self.navigationController?.present(nav, animated: true)
+        }
+    }
 }
 
 //MARK: - TableView DataSource/ Delegate  -
@@ -447,11 +464,8 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
             neighborhood = isSearch ? neighborhoodsSearch[indexPath.row - 1] : neighborhoodsDiscovered[indexPath.row - 1]
         }
         
-        let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
-        if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
-            vc.neighborhoodId = neighborhood.uid
-            self.navigationController?.present(nav, animated: true)
-        }
+        self.showNeighborhood(neighborhoodId: neighborhood.uid)
+        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

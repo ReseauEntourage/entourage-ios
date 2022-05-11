@@ -164,7 +164,7 @@ class NeighborhoodCreateMainViewController: UIViewController {
             Logger.print("***** groupe crée ? \(group) error: ? \(error)")
             IHProgressHUD.dismiss()
             if group != nil {
-                self.goEnd()
+                self.goEnd(neighborhood: group!)
             }
             else {
                 IHProgressHUD.showError(withStatus: "Erreur lors de la création du groupe. PLACEHOLDER")
@@ -172,10 +172,11 @@ class NeighborhoodCreateMainViewController: UIViewController {
         }
     }
     
-    private func goEnd() {
+    private func goEnd(neighborhood:Neighborhood) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodCreateEnd), object: nil)
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "neighb_validateVC") {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "neighb_validateVC") as? NeighborhoodCreateValidateViewController {
             vc.modalPresentationStyle = .fullScreen
+            vc.newNeighborhood = neighborhood
             self.dismiss(animated: false) {
                 self.parentController?.present(vc, animated: true)
             }
