@@ -26,7 +26,7 @@ class NeighborhoodParamsGroupViewController: BasePopViewController {
             isCreator = false
         }
         
-        ui_top_view.populateView(title: "neighborhood_params_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
+        ui_top_view.populateView(title: "neighborhood_params_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self,backgroundColor: .appBeigeClair, isClose: true)
         
         //Notif for updating neighborhood infos
         NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood(_ :)), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)

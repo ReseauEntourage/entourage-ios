@@ -14,7 +14,7 @@ class NeighborhoodParamTopCell: UITableViewCell {
     @IBOutlet weak var ui_taglist: TagListView!
     @IBOutlet weak var ui_constraint_listview_top_margin: NSLayoutConstraint?
     
-    let topMarginConstraint:CGFloat = 24
+    let topMarginConstraint:CGFloat = 12
     let cornerRadiusTag:CGFloat = 15
     
     override func awakeFromNib() {
@@ -22,7 +22,7 @@ class NeighborhoodParamTopCell: UITableViewCell {
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
         ui_description.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
-        ui_taglist.backgroundColor = .white
+        ui_taglist.backgroundColor = .appBeigeClair
         ui_taglist.tagBackgroundColor = ApplicationTheme.getFontCategoryBubble().color
         ui_taglist.cornerRadius = cornerRadiusTag
         ui_taglist.textFont = ApplicationTheme.getFontCategoryBubble().font
