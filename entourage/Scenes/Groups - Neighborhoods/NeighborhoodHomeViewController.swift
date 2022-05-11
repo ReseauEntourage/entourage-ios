@@ -150,6 +150,12 @@ class NeighborhoodHomeViewController: UIViewController {
                     self.gotoTop()
                 }
             }
+            if self.myNeighborhoods.count == 0 {
+                self.showEmptyView()
+            }
+            else {
+                self.hideEmptyView()
+            }
             self.ui_tableview.reloadData()
             self.isLoading = false
         })
@@ -175,6 +181,12 @@ class NeighborhoodHomeViewController: UIViewController {
                     self.gotoTop()
                 }
             }
+            if self.neighborhoodsDiscovered.count == 0 {
+                self.showEmptyView()
+            }
+            else {
+                self.hideEmptyView()
+            }
             self.ui_tableview.reloadData()
             
             self.isLoading = false
@@ -199,6 +211,13 @@ class NeighborhoodHomeViewController: UIViewController {
                 self.neighborhoodsSearch = groups
                 self.ui_tableview.reloadData()
                 self.gotoTop()
+            }
+            
+            if self.neighborhoodsSearch.count == 0 {
+                self.showEmptyView()
+            }
+            else {
+                self.hideEmptyView()
             }
             self.ui_tableview.reloadData()
         })
@@ -385,7 +404,7 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (isGroupsSelected && myNeighborhoods.isEmpty && !isfirstLoadingMyGroup) || (isSearch && neighborhoodsSearch.isEmpty && isSendedSearch) || (!isGroupsSelected && neighborhoodsDiscovered.isEmpty) {
-            showEmptyView()
+          //  showEmptyView()
         }
         else {
             hideEmptyView()

@@ -33,7 +33,7 @@ class NeighborhoodDetailViewController: UIViewController {
         
         ui_top_view.backgroundColor = .clear
         ui_top_view.populateCustom(title: nil, titleFont: nil, titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: false, cornerRadius: nil, isClose: false, marginLeftButton: nil)
-        
+        ui_iv_neighborhood.image = nil
         getNeighborhoodDetail()
         
         //Notif for updating neighborhood infos
