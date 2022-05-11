@@ -175,18 +175,18 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let userId = UserDefaults.currentUser?.sid ?? 0
+            let userId = UserDefaults.currentUser?.sid
             if self.neighborhood!.isFollowingGroup(myId: userId) {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellTopMember", for: indexPath) as! NeighborhoodDetailTopCell
                 
-                cell.populateCell(neighborhood: self.neighborhood, delegate: self)
+                cell.populateCell(neighborhood: self.neighborhood,isFollowingGroup: true, delegate: self)
                 
                 return cell
             }
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! NeighborhoodDetailTopCell
                 
-                cell.populateCell(neighborhood: self.neighborhood, delegate: self)
+                cell.populateCell(neighborhood: self.neighborhood, isFollowingGroup: false, delegate: self)
                 
                 return cell
             }
@@ -215,6 +215,14 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
     
     func joinLeave() {
         joinLeaveGroup()
+    }
+    
+    func showDetailFull() {
+        let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
+        if let navvc = sb.instantiateViewController(withIdentifier: "neighborhoodDetailOnlyNav") as? UINavigationController, let vc = navvc.topViewController as? NeighborhoodDetailOnlyViewController {
+            vc.neighborhoodId = self.neighborhoodId
+            self.navigationController?.present(navvc, animated: true)
+        }
     }
 }
 

@@ -570,7 +570,7 @@ groupe";
 "neighborhood_empty_event_subtitle" = "Cliquez sur « + » pour en créer un";
 "neighborhood_empty_post_title" = "Pas encore de publication sur ce groupe";
 "neighborhood_empty_post_subtitle" = "C’est l’occasion pour vous de partager la première nouvelle pour lancer la discussion ! ";
-
+"neighborhood_about_group_title" = "À propos du groupe";
 //Params
 "neighborhood_params_title" = "Paramètres du groupe";
 "neighborhood_params_cgu" = "Règlement du groupe";

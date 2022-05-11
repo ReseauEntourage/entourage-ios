@@ -35,6 +35,8 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     let topMarginConstraint:CGFloat = 24
     let cornerRadiusTag:CGFloat = 15
     
+    var isFollowingGroup = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         ui_main_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
@@ -68,9 +70,10 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
     }
     
-    func populateCell(neighborhood:Neighborhood?, delegate:NeighborhoodDetailTopCellDelegate) {
+    func populateCell(neighborhood:Neighborhood?,isFollowingGroup:Bool, delegate:NeighborhoodDetailTopCellDelegate) {
         
         self.delegate = delegate
+        self.isFollowingGroup = isFollowingGroup
         ui_img_member_1.isHidden = true
         ui_img_member_2.isHidden = true
         ui_img_member_3.isHidden = true
@@ -119,7 +122,7 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         ui_lbl_about_desc?.text = neighborhood.aboutGroup
         
         let currentUserId = UserDefaults.currentUser?.sid
-        if neighborhood.isFollowingGroup(myId: currentUserId) {
+        if isFollowingGroup {
             ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
             ui_view_button_join.backgroundColor = .clear
             ui_view_button_join.layer.borderWidth = 0
@@ -176,7 +179,12 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     }
     
     @IBAction func action_join_leave(_ sender: Any) {
-        delegate?.joinLeave()
+        if isFollowingGroup {
+            delegate?.showDetailFull()
+        }
+        else {
+            delegate?.joinLeave()
+        }
     }
 }
 
@@ -184,4 +192,5 @@ class NeighborhoodDetailTopCell: UITableViewCell {
 protocol NeighborhoodDetailTopCellDelegate : AnyObject {
     func showMembers()
     func joinLeave()
+    func showDetailFull()
 }
