@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */; };
+		020429B5282E81B00030B035 /* NeighborhoodPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020429B4282E81B00030B035 /* NeighborhoodPostCell.swift */; };
+		020429B7282EAD520030B035 /* NeighborhoodPostHeadersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020429B6282EAD520030B035 /* NeighborhoodPostHeadersCell.swift */; };
 		0207BF8527F2059400631914 /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0207BF8427F2059400631914 /* UserDetail.storyboard */; };
 		0207BF8727F20C1600631914 /* UserProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */; };
 		021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318A827DF4E3100B0F1BD /* Metadatas.swift */; };
@@ -48,6 +50,7 @@
 		02490DC927EA461700E2577B /* Extensions_UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02490DC827EA461700E2577B /* Extensions_UIDevice.swift */; };
 		0258AFE0282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFDF282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift */; };
 		0258AFE2282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFE1282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift */; };
+		0258AFE4282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFE3282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift */; };
 		0258AFE6282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFE5282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift */; };
 		025D871A278DD33600909101 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D8719278DD33600909101 /* AppDelegate.swift */; };
 		025D8723278DD33800909101 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 025D8722278DD33800909101 /* Assets.xcassets */; };
@@ -192,6 +195,7 @@
 		02E069ED279184B3006DB1B6 /* OTOnboardingNamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E069DD279184B3006DB1B6 /* OTOnboardingNamesViewController.swift */; };
 		02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */; };
 		02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */; };
+		02E77B44282CF9CF00786E27 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E77B43282CF9CF00786E27 /* Event.swift */; };
 		02E7845D2811A8DB00177F13 /* Neighborhood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02E7845C2811A8DB00177F13 /* Neighborhood.storyboard */; };
 		02E7845F2811A91900177F13 /* NeighborhoodHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E7845E2811A91900177F13 /* NeighborhoodHomeViewController.swift */; };
 		02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */; };
@@ -218,6 +222,8 @@
 
 /* Begin PBXFileReference section */
 		0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInterestCell.swift; sourceTree = "<group>"; };
+		020429B4282E81B00030B035 /* NeighborhoodPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostCell.swift; sourceTree = "<group>"; };
+		020429B6282EAD520030B035 /* NeighborhoodPostHeadersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostHeadersCell.swift; sourceTree = "<group>"; };
 		0207BF8427F2059400631914 /* UserDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
 		0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDetailViewController.swift; sourceTree = "<group>"; };
 		021318A827DF4E3100B0F1BD /* Metadatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadatas.swift; sourceTree = "<group>"; };
@@ -257,6 +263,7 @@
 		02490DC827EA461700E2577B /* Extensions_UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIDevice.swift; sourceTree = "<group>"; };
 		0258AFDF282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodEmptyCells.swift; sourceTree = "<group>"; };
 		0258AFE1282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodDetailOnlyViewController.swift; sourceTree = "<group>"; };
+		0258AFE3282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodEventsTableviewCell.swift; sourceTree = "<group>"; };
 		0258AFE5282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodParamNotifsCell.swift; sourceTree = "<group>"; };
 		025D8716278DD33600909101 /* Ent-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ent-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		025D8719278DD33600909101 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -398,6 +405,7 @@
 		02E069DD279184B3006DB1B6 /* OTOnboardingNamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTOnboardingNamesViewController.swift; sourceTree = "<group>"; };
 		02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserSignalCell.swift; sourceTree = "<group>"; };
 		02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJCustomSlider.swift; sourceTree = "<group>"; };
+		02E77B43282CF9CF00786E27 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		02E7845C2811A8DB00177F13 /* Neighborhood.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neighborhood.storyboard; sourceTree = "<group>"; };
 		02E7845E2811A91900177F13 /* NeighborhoodHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodHomeViewController.swift; sourceTree = "<group>"; };
 		02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePhotoCell.swift; sourceTree = "<group>"; };
@@ -477,6 +485,9 @@
 				0282637B282160B700B354F9 /* NeighborhoodCguCell.swift */,
 				02833F9B2822B54D00000156 /* NeighborhoodUserCell.swift */,
 				0258AFDF282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift */,
+				020429B4282E81B00030B035 /* NeighborhoodPostCell.swift */,
+				020429B6282EAD520030B035 /* NeighborhoodPostHeadersCell.swift */,
+				0258AFE3282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift */,
 				0282637A28215FC100B354F9 /* Params */,
 			);
 			path = Cells;
@@ -505,6 +516,7 @@
 				02F5278227999AD700929431 /* MapPoi.swift */,
 				02F5278627999D8400929431 /* PoiCategory.swift */,
 				02B7921D27F7385A003AFFB9 /* Neighborhood.swift */,
+				02E77B43282CF9CF00786E27 /* Event.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1146,6 +1158,7 @@
 				02E069E6279184B3006DB1B6 /* OTOnboardingAssoActivityViewController.swift in Sources */,
 				02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */,
 				0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */,
+				0258AFE4282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift in Sources */,
 				02F5277E2799995900929431 /* GDSSearchViewController.swift in Sources */,
 				02E069E5279184B3006DB1B6 /* OTOnboardingPhoneViewController.swift in Sources */,
 				025E917427F3619300D4A7A8 /* ReportUserViewController.swift in Sources */,
@@ -1243,12 +1256,14 @@
 				0288A8D627CCD8F5008D7011 /* PicturePreviewResizeViewController.swift in Sources */,
 				0224597727FF327C00944DE4 /* NeighborhoodCreateDescriptionCell.swift in Sources */,
 				02C3ABF2279AB53800817B82 /* Extensions_UserDefaults.swift in Sources */,
+				020429B7282EAD520030B035 /* NeighborhoodPostHeadersCell.swift in Sources */,
 				02CCE68A27D7B51E00D6976C /* CloseButton.swift in Sources */,
 				0224597427FF323600944DE4 /* NeighborhoodCreateNameCell.swift in Sources */,
 				02F5278527999B8F00929431 /* SolidarityGuideCell.swift in Sources */,
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,
 				02A3DD3327FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift in Sources */,
 				02C6E86F28203E1F009D4289 /* ReportGroupSendViewController.swift in Sources */,
+				02E77B44282CF9CF00786E27 /* Event.swift in Sources */,
 				02833F9A2822A9F600000156 /* NeighBorhoodListUsersViewController.swift in Sources */,
 				02C91A23278F07D900305E0B /* Endpoints.swift in Sources */,
 				0229376B27A4000800206201 /* SafariWebManager.swift in Sources */,
@@ -1291,6 +1306,7 @@
 				02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */,
 				021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */,
 				025D871A278DD33600909101 /* AppDelegate.swift in Sources */,
+				020429B5282E81B00030B035 /* NeighborhoodPostCell.swift in Sources */,
 				02846CBE27EC86F100D85ADA /* ProfileEditInterestsViewController.swift in Sources */,
 				02CCE68827D7B51E00D6976C /* TagListView.swift in Sources */,
 				0220580927FB087F00531720 /* BaseFullScreenNavViewController.swift in Sources */,

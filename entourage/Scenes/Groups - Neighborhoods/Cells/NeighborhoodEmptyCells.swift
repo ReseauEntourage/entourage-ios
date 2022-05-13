@@ -39,14 +39,14 @@ class NeighborhoodEmptyPostCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
+        ui_view_container?.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         
-        ui_title_section.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
-        ui_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
-        ui_subtitle.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_title_section?.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
+        ui_title?.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
+        ui_subtitle?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
-        ui_title_section.text = "neighborhood_post_group_section_title".localized
-        ui_title.text = "neighborhood_empty_post_title".localized
-        ui_subtitle.text = "neighborhood_empty_post_subtitle".localized
+        ui_title_section?.text = "neighborhood_post_group_section_title".localized
+        ui_title?.text = "neighborhood_empty_post_title".localized
+        ui_subtitle?.text = "neighborhood_empty_post_subtitle".localized
     }
 }

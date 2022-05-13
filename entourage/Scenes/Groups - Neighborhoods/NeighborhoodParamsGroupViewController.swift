@@ -24,7 +24,7 @@ class NeighborhoodParamsGroupViewController: BasePopViewController {
             groupUserType = .Creator
         }
         else {
-            if let neighborhood = neighborhood, neighborhood.isFollowingGroup(myId: currentUserId) {
+            if let neighborhood = neighborhood, neighborhood.isMember {
                 groupUserType = .Member
             }
             else {

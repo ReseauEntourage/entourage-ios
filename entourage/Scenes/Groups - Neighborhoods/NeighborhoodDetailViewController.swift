@@ -28,6 +28,13 @@ class NeighborhoodDetailViewController: UIViewController {
     
     var viewNormalHeight:CGFloat = 0
     
+    var messagesNew = [PostMessage]()
+    var messagesOld = [PostMessage]()
+    
+    var hasNewAndOldSections = false
+    var currentPagingPage = 2 //Default 1 WS
+    let itemsPerPage = 25 //Default WS
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,6 +83,7 @@ class NeighborhoodDetailViewController: UIViewController {
             }
             
             self.neighborhood = group
+            self.splitMessages()
             self.ui_tableview.reloadData()
             
             if let _url = self.neighborhood?.image_url, let url = URL(string: _url) {
@@ -89,6 +97,28 @@ class NeighborhoodDetailViewController: UIViewController {
             
             self.ui_label_title_neighb.text = group?.name
         }
+    }
+    
+    func splitMessages() {
+        //TODO: split messages depuis les infos du WS
+        guard let messages = neighborhood?.messages else {
+            return
+        }
+
+        messagesNew.removeAll()
+        messagesOld.removeAll()
+        var i = 0
+        for post in messages {
+            if i % 2 == 0 {
+                messagesNew.append(post)
+            }
+            else {
+                messagesOld.append(post)
+            }
+            i = i + 1
+        }
+        
+        hasNewAndOldSections = messagesOld.count > 0 && messagesNew.count > 0
     }
     
     func addRemoveMember(isAdd:Bool) {
@@ -169,38 +199,147 @@ class NeighborhoodDetailViewController: UIViewController {
 
 //MARK: - UITableViewDataSource / Delegate -
 extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        let minimum = self.neighborhood != nil ? 2 : 0
+        let added = hasNewAndOldSections ? 1 : 0
+        return minimum + added
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.neighborhood != nil ? 3 : 0
+        if section == 0 { return 2 }
+        
+        if hasNewAndOldSections {
+            var count = 0
+            if section == 1 {
+                count = messagesNew.count + 2
+            }
+            else {
+                count = messagesOld.count + 1
+            }
+            return count
+        }
+        
+        
+        let messageCount:Int = (self.neighborhood?.messages?.count ?? 0) > 0 ? self.neighborhood!.messages!.count + 2 : 1
+        return  messageCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let userId = UserDefaults.currentUser?.sid
-            if self.neighborhood!.isFollowingGroup(myId: userId) {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellTopMember", for: indexPath) as! NeighborhoodDetailTopCell
-                
-                cell.populateCell(neighborhood: self.neighborhood,isFollowingGroup: true, delegate: self)
-                
-                return cell
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                if self.neighborhood!.isMember {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellTopMember", for: indexPath) as! NeighborhoodDetailTopCell
+                    
+                    cell.populateCell(neighborhood: self.neighborhood,isFollowingGroup: true, delegate: self)
+                    
+                    return cell
+                }
+                else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! NeighborhoodDetailTopCell
+                    
+                    cell.populateCell(neighborhood: self.neighborhood, isFollowingGroup: false, delegate: self)
+                    
+                    return cell
+                }
             }
             else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! NeighborhoodDetailTopCell
-                
-                cell.populateCell(neighborhood: self.neighborhood, isFollowingGroup: false, delegate: self)
+                if neighborhood?.futureEvents?.count ?? 0 > 0 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellEvents", for: indexPath) as! NeighborhoodEventsTableviewCell
+                    
+                    cell.populateCell(events:neighborhood!.futureEvents!, delegate: self)
+                    
+                    
+                    return cell
+                }
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellEventEmpty", for: indexPath)
                 
                 return cell
             }
         }
         
-        if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellEventEmpty", for: indexPath)
+        
+       
+        if self.neighborhood?.messages?.count ?? 0 == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostEmpty", for: indexPath)
             
             return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostEmpty", for: indexPath)
+        if hasNewAndOldSections && indexPath.section == 2 {
+            if indexPath.row == 0 {
+               //Todo: New / Old
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitleDate", for: indexPath) as! NeighborhoodPostHeadersCell
+                
+                cell.populateCell(title: "neighborhood_post_group_section_old_posts_title".localized, isTopHeader: false)
+                return cell
+            }
+            
+            let postmessage:PostMessage = messagesOld[indexPath.row - 1]
+           
+            //TODO: mettre le check de la cell avec l'image ou pas
+            if indexPath.row % 2 == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostText", for: indexPath) as! NeighborhoodPostCell
+                
+                cell.populateCell(message: postmessage)
+                return cell
+            }
+            
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostImage", for: indexPath) as! NeighborhoodPostCell
+            cell.populateCell(message: postmessage)
+            return cell
+            
+        }
         
+        if indexPath.row == 0 {
+           //TODO: Title
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitle", for: indexPath) as! NeighborhoodPostHeadersCell
+            cell.populateCell(title: "neighborhood_post_group_section_title".localized, isTopHeader: true)
+            return cell
+        }
+        
+        if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitleDate", for: indexPath) as! NeighborhoodPostHeadersCell
+            cell.populateCell(title: "neighborhood_post_group_section_new_posts_title".localized, isTopHeader: false)
+            return cell
+        }
+        
+        
+        
+        //TODO: voir si texte ou image
+//        if self.neighborhood?.messages?[indexPath.row - 2].messageType == "text" {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostText", for: indexPath) as! NeighborhoodPostCell
+//
+//            return cell
+//        }
+//        else {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostImage", for: indexPath) as! NeighborhoodPostCell
+//
+//            return cell
+//        }
+        let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - 2] : self.neighborhood!.messages![indexPath.row - 2]
+       
+        if indexPath.row % 2 == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostText", for: indexPath) as! NeighborhoodPostCell
+            
+            cell.populateCell(message: postmessage)
+            return cell
+        }
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostImage", for: indexPath) as! NeighborhoodPostCell
+        cell.populateCell(message: postmessage)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 && indexPath.row == 1 {
+            return 214
+        }
+        return UITableView.automaticDimension
     }
 }
 
@@ -223,6 +362,13 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
             vc.neighborhoodId = self.neighborhoodId
             self.navigationController?.present(navvc, animated: true)
         }
+    }
+}
+
+extension NeighborhoodDetailViewController:NeighborhoodEventsTableviewCellDelegate {
+    func showAll() {
+        //TODO: Show all events
+        Logger.print("***** show all events ;)")
     }
 }
 

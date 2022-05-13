@@ -97,6 +97,35 @@ import UIKit
         
         return correctPhone
     }
+    
+    static func getDateFromWSDateString(_ dateStr:String?) -> Date {
+        guard let dateStr = dateStr else {
+            return Date()
+        }
+
+        var date:Date?
+        
+        let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = dateFormat
+        
+        date = dateFormatter.date(from: dateStr)
+        
+        return date ?? Date()
+    }
+    
+    static func formatEventDate(date:Date?) -> String {
+        var dateString = ""
+        if date != nil {
+            let dateFormat = DateFormatter()
+            dateFormat.dateFormat = "dd/MM/YYYY"
+            dateString =  dateFormat.string(from: date!)
+        }
+        
+        return dateString
+    }
 }
 
 class ImageLoaderSwift {

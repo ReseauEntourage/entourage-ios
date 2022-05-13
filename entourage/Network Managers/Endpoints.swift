@@ -39,6 +39,10 @@ let kAPIJoinNeighborhood = "neighborhoods/%@/users?token=%@"
 let kAPILeaveNeighborhood = "neighborhoods/%@/users/%@?token=%@"
 let kAPIReportNeighborhood = "neighborhoods/%@/report?token=%@"
 let kAPIGetNeighborhoodUsers = "neighborhoods/%@/users?token=%@"
+
+let kAPIPostNeighborhoodPostMessage = "neighborhoods/%@/chat_messages?token=%@"
+
+
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
 

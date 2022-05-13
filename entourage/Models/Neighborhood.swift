@@ -28,6 +28,10 @@ struct Neighborhood:Codable {
     var neighborhood_image_id:Int? = nil // Use to pass the image info from the gallery
     var tagOtherMessage:String? = nil
     
+    var futureEvents:[Event]?
+    var messages:[PostMessage]? = nil
+    var isMember = false
+    
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case name
@@ -43,14 +47,14 @@ struct Neighborhood:Codable {
         
         case interests
         case members
+        
         case past_outings_count
         case future_outings_count
         case has_ongoing_outing
-    }
-    
-    func isFollowingGroup(myId:Int?) -> Bool {
-        let member = members.first(where: { $0.uid == myId })
-        return member != nil
+        
+        case isMember = "member"
+        case messages = "posts"
+        case futureEvents = "future_outings"
     }
     
     func dictionaryForWS() -> [String:Any] {
@@ -128,5 +132,40 @@ struct NeighborhoodUserLight:Codable {
         case uid = "id"
         case username = "display_name"
         case imageUrl = "avatar_url"
+    }
+}
+
+
+struct PostMessage:Codable {
+    var uid:Int
+    var content:String
+    
+    var createdDate:Date {
+        get {
+            return Utils.getDateFromWSDateString(createdDateString)
+        }
+    }
+    var createdDateFormatted:String {
+        get {
+            return Utils.formatEventDate(date:createdDate)
+        }
+    }
+    
+    var createdDateString:String
+    var messageType:String
+    var parentId:Int? = nil
+    var hasMessages:Bool? = false
+    var user:UserLightNeighborhood? = nil
+    var messagesCount:Int = 0
+    
+    enum CodingKeys: String, CodingKey {
+        case uid = "id"
+        case content
+        case user
+        case createdDateString = "created_at"
+        case messageType = "message_type"
+        case parentId = "parent_id"
+        case hasMessages = "has_children"
+        case messagesCount = "children_count"
     }
 }
