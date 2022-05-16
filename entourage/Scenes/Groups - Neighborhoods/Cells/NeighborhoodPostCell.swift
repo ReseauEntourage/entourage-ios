@@ -59,16 +59,16 @@ class NeighborhoodPostCell: UITableViewCell {
             ui_iv_user.image = UIImage.init(named: "placeholder_user")
         }
         
-        if message.messagesCount == 0 {
+        if message.commentsCount == 0 {
             ui_comments_nb.text = "neighborhood_post_noComment".localized
             
             ui_comments_nb.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 13), color: .appGrisSombre40))
 
         }
         else {
-            let msg:String = message.messagesCount == 1 ? "neighborhood_post_1Comment".localized : "neighborhood_post_XComments".localized
+            let msg:String = message.commentsCount == 1 ? "neighborhood_post_1Comment".localized : "neighborhood_post_XComments".localized
             
-            let attrStr = Utils.formatStringUnderline(textString: String.init(format: msg, message.messagesCount), textColor: .black, font: ApplicationTheme.getFontChampInput().font)
+            let attrStr = Utils.formatStringUnderline(textString: String.init(format: msg, message.commentsCount), textColor: .black, font: ApplicationTheme.getFontChampInput().font)
             ui_comments_nb.attributedText = attrStr
         }
     }

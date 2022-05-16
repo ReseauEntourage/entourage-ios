@@ -153,10 +153,11 @@ struct PostMessage:Codable {
     
     var createdDateString:String
     var messageType:String
-    var parentId:Int? = nil
-    var hasMessages:Bool? = false
+    var parentPostId:Int? = nil
+    var hasComments:Bool? = false
     var user:UserLightNeighborhood? = nil
-    var messagesCount:Int = 0
+    var commentsCount:Int = 0
+    var messageImageUrl:String? = nil
     
     enum CodingKeys: String, CodingKey {
         case uid = "id"
@@ -164,8 +165,9 @@ struct PostMessage:Codable {
         case user
         case createdDateString = "created_at"
         case messageType = "message_type"
-        case parentId = "parent_id"
-        case hasMessages = "has_children"
-        case messagesCount = "children_count"
+        case parentPostId = "post_id"
+        case hasComments = "has_comments"
+        case commentsCount = "comments_count"
+        case messageImageUrl = "image_url"
     }
 }
