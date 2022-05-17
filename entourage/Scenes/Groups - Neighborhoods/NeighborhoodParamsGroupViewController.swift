@@ -105,7 +105,7 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
         case .Creator:
             return 5 //TODO: on peut quitter le groupe ?
         case .Member:
-            return 4
+            return 5
         case .Viewer:
             return 3
         }
@@ -144,10 +144,14 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
         case .Member:
             switch indexPath.row {
             case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_notifs", for: indexPath) as! NeighborhoodParamNotifsCell
+                cell.populateCell(notif_all: true, notif_events: false, notif_messages: true, notif_members: true, delegate: self)
+                return cell
+            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
                 cell.populateCell(title: "neighborhood_params_cgu".localized,imageName: "ic_cgu_group", delegate: self, isCGU: true)
                 return cell
-            case 2:
+            case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! NeighborhoodParamSignalCell
                 cell.populateCell(isQuit: false,delegate: self)
                 return cell
