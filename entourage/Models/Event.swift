@@ -48,7 +48,7 @@ struct Event:Codable {
     
     var addressName:String {
         get {
-            return metadata?.place_name ?? "-"
+            return metadata?.display_address ?? "-"
         }
     }
     enum CodingKeys: String, CodingKey {
@@ -83,6 +83,7 @@ struct EventMetadata:Codable {
     var place_name:String
     var street_address:String
     var google_place_id:String
+    var display_address:String
 }
 
 struct EventAuthor:Codable {
