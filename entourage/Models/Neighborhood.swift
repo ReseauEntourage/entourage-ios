@@ -151,6 +151,18 @@ struct PostMessage:Codable {
         }
     }
     
+    var createdDateTimeFormatted:String {
+        get {
+            return Utils.formatEventDateTime(date:createdDate)
+        }
+    }
+    
+    var isPostImage:Bool {
+        get {
+            return messageImageUrl != nil
+        }
+    }
+    
     var createdDateString:String
     var messageType:String
     var parentPostId:Int? = nil
@@ -158,6 +170,7 @@ struct PostMessage:Codable {
     var user:UserLightNeighborhood? = nil
     var commentsCount:Int = 0
     var messageImageUrl:String? = nil
+    var isRead = false
     
     enum CodingKeys: String, CodingKey {
         case uid = "id"
@@ -169,5 +182,6 @@ struct PostMessage:Codable {
         case hasComments = "has_comments"
         case commentsCount = "comments_count"
         case messageImageUrl = "image_url"
+        case isRead = "read"
     }
 }

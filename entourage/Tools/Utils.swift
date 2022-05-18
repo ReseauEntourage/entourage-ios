@@ -126,6 +126,17 @@ import UIKit
         
         return dateString
     }
+    
+    static func formatEventDateTime(date:Date?) -> String {
+        var dateString = ""
+        if date != nil {
+            let dateFormat = DateFormatter()
+            dateFormat.dateFormat = "dd/MM/YYYY à HH:mm"
+            dateString =  dateFormat.string(from: date!)
+        }
+        
+        return dateString
+    }
 }
 
 class ImageLoaderSwift {

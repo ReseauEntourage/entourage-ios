@@ -92,7 +92,7 @@ class ReportGroupSendViewController: UIViewController {
             
             let tagsSignalsWS = tagsignals.getTagsForWS()
             
-            NeighborhoodService.reportGroup(groupId:group.uid, message: message, tags: tagsSignalsWS) { error in
+            NeighborhoodService.reportNeighborhood(groupId:group.uid, message: message, tags: tagsSignalsWS) { error in
                 Logger.print("***** error reportGroup ? \(error)")
                 DispatchQueue.main.async {
                     self.pageDelegate?.closeMain()

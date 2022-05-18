@@ -52,7 +52,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
         IHProgressHUD.show()
         
         if isAdd {
-            NeighborhoodService.joinGroup(groupId: neighborhood.uid) { user, error in
+            NeighborhoodService.joinNeighborhood(groupId: neighborhood.uid) { user, error in
                 IHProgressHUD.dismiss()
                 if let user = user {
                     let member = NeighborhoodUserLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
@@ -65,7 +65,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
             }
         }
         else {
-            NeighborhoodService.leaveGroup(groupId: neighborhood.uid, userId: UserDefaults.currentUser!.sid) { group, error in
+            NeighborhoodService.leaveNeighborhood(groupId: neighborhood.uid, userId: UserDefaults.currentUser!.sid) { group, error in
                 IHProgressHUD.dismiss()
                 if error == nil {
                     self.neighborhood?.members.removeAll(where: {$0.uid == UserDefaults.currentUser!.sid})

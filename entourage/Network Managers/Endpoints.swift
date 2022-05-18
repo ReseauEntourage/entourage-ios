@@ -39,8 +39,10 @@ let kAPIJoinNeighborhood = "neighborhoods/%@/users?token=%@"
 let kAPILeaveNeighborhood = "neighborhoods/%@/users/%@?token=%@"
 let kAPIReportNeighborhood = "neighborhoods/%@/report?token=%@"
 let kAPIGetNeighborhoodUsers = "neighborhoods/%@/users?token=%@"
+let kAPIGetNeighborhoodPostsMessage = "neighborhoods/%@/chat_messages?token=%@&page=%d&per=%d"
 
 let kAPIPostNeighborhoodPostMessage = "neighborhoods/%@/chat_messages?token=%@"
+let kAPIGetNeighborhoodMessages = "neighborhoods/%@/chat_messages/%@/comments?token=%@"
 
 
 //Amazon S3

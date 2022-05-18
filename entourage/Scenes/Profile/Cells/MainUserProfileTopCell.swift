@@ -30,6 +30,7 @@ class MainUserProfileTopCell: UITableViewCell {
     let topConstraintStack:CGFloat = 16
     
     weak var delegate:MainUserProfileTopCellDelegate? = nil
+    var isMe = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -58,7 +59,10 @@ class MainUserProfileTopCell: UITableViewCell {
         ui_button_message?.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 15)
     }
     
-    func populateCell(username:String, role:String?, partner:Partner?, bio:String?, delegate:MainUserProfileTopCellDelegate? = nil) {
+    func populateCell(isMe:Bool, username:String, role:String?, partner:Partner?, bio:String?, delegate:MainUserProfileTopCellDelegate? = nil) {
+        
+        self.isMe = isMe
+        
         ui_username?.text = username
         
         self.delegate = delegate
@@ -102,6 +106,7 @@ class MainUserProfileTopCell: UITableViewCell {
     }
     
     @IBAction func action_send_message(_ sender: Any) {
+        if isMe {return}
         delegate?.sendMessage()
     }
 }

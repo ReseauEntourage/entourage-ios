@@ -13,6 +13,7 @@ import UIKit
     @IBInspectable var placeholderColor: UIColor = UIColor(red: 199 / 255, green: 199 / 255, blue: 199 / 255, alpha: 1.0) // light grey default
     
     private var showingPlaceholder = true
+    var hasToCenterTextVerticaly = false
     
     override var text: String! {
         get {
@@ -52,6 +53,18 @@ import UIKit
             showPlaceholderText()
         }
         return super.resignFirstResponder()
+    }
+    
+    // Use to center verticaly text -
+    // https://stackoverflow.com/questions/12591192
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if hasToCenterTextVerticaly {
+            let rect = layoutManager.usedRect(for: textContainer)
+            let topInset = (bounds.size.height - rect.height) / 2.0
+            textContainerInset.top = max(0, topInset)
+        }
     }
     
     //MARK: - Private show / hide placeholder -

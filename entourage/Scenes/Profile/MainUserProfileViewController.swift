@@ -65,7 +65,7 @@ extension MainUserProfileViewController: UITableViewDelegate, UITableViewDataSou
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoTop", for: indexPath) as! MainUserProfileTopCell
-            cell.populateCell(username: currentUser.displayName, role: currentUser.roles?.first, partner: currentUser.partner, bio: currentUser.about,delegate: self)
+            cell.populateCell(isMe:true ,username: currentUser.displayName, role: currentUser.roles?.first, partner: currentUser.partner, bio: currentUser.about,delegate: self)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoCats", for: indexPath) as! CategoriesBubblesCell
@@ -73,7 +73,7 @@ extension MainUserProfileViewController: UITableViewDelegate, UITableViewDataSou
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoActivities", for: indexPath) as! MainUserActivitiesCell
-            cell.populateCell(eventCount: currentUser.stats.eventsCount, actionsCount: currentUser.stats.actionsCount)
+            cell.populateCell(isMe:true ,eventCount: currentUser.stats.eventsCount, actionsCount: currentUser.stats.actionsCount)
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfos", for: indexPath) as! MainUserInfosCell

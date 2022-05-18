@@ -48,7 +48,15 @@ class MainUserActivitiesCell: UITableViewCell {
         textColor(label: ui_actions_count, isEmpty: true, isCount: true)
     }
     
-    func populateCell(eventCount:Int,actionsCount:Int) {
+    func populateCell(isMe:Bool ,eventCount:Int,actionsCount:Int) {
+        
+        if isMe {
+            ui_title_other_user?.text = "mainUserTitleActivity".localized
+        }
+        else {
+            ui_title_other_user?.text = "detail_user_his_activity".localized
+        }
+        
         if eventCount == 0 {
             textColor(label: ui_events_title, isEmpty: true, isCount: false)
             textColor(label: ui_events_count, isEmpty: true, isCount: true)

@@ -37,6 +37,8 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     
     var isFollowingGroup = false
     
+    class var identifier:String {return String(describing: self) }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         ui_main_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
@@ -193,4 +195,9 @@ protocol NeighborhoodDetailTopCellDelegate : AnyObject {
     func showMembers()
     func joinLeave()
     func showDetailFull()
+}
+
+
+class NeighborhoodDetailTopMemberCell:NeighborhoodDetailTopCell {
+   
 }

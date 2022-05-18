@@ -18,8 +18,14 @@ class NeighborhoodEventsTableviewCell: UITableViewCell {
     var events = [Event]()
     weak var delegate:NeighborhoodEventsTableviewCellDelegate?
     
+    class var identifier: String {
+        return String(describing: self)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        ui_collectionview.register(UINib(nibName: NeighborhoodEventsCollectionviewCell.identifier, bundle: nil), forCellWithReuseIdentifier: NeighborhoodEventsCollectionviewCell.identifier)
+        
         ui_collectionview.dataSource = self
         ui_collectionview.delegate = self
         
@@ -48,21 +54,32 @@ extension NeighborhoodEventsTableviewCell: UICollectionViewDataSource, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellEvent", for: indexPath) as! NeighborhoodEventsCollectionviewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NeighborhoodEventsCollectionviewCell.identifier, for: indexPath) as! NeighborhoodEventsCollectionviewCell
         let event = events[indexPath.row]
         cell.populateCell(title: event.title, imageUrl: event.imageUrl, dateFormatted: event.startDateFormatted, addressName: event.addressName)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let event = events[indexPath.row]
+        delegate?.showEvent(eventId: event.uid)
     }
 }
 
 protocol NeighborhoodEventsTableviewCellDelegate:AnyObject {
     func showAll()
+    func showEvent(eventId:Int)
 }
+
 
 class NeighborhoodEventsCollectionviewCell: UICollectionViewCell {
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_date_location: UILabel!
     @IBOutlet weak var ui_image: UIImageView!
+    
+    class var identifier: String {
+        return String(describing: self)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -129,6 +129,27 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
+    
+    static func getNeighborhoodPostsPaging(id:Int, currentPage:Int, per:Int, completion: @escaping (_ post:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetNeighborhoodPostsMessage
+        endpoint = String.init(format: endpoint,"\(id)", token,currentPage,per)
+        
+        Logger.print("***** url get post message paging : \(endpoint)")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil,  error) }
+                return
+            }
+            
+            let posts:[PostMessage]? = self.parseDatas(data: data,key: "chat_messages")
+            DispatchQueue.main.async { completion(posts,nil) }
+        }
+    }
+    
     //MARK: - Create/update group -
     static func createNeighborhood(group:Neighborhood,completion: @escaping (_ group:Neighborhood?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
@@ -181,7 +202,7 @@ struct NeighborhoodService:ParsingDataCodable {
     //MARK: - Join / Leave group
     
     
-    static func joinGroup(groupId:Int,completion: @escaping (_ user:NeighborhoodUserLight?, _ error:EntourageNetworkError?) -> Void) {
+    static func joinNeighborhood(groupId:Int,completion: @escaping (_ user:NeighborhoodUserLight?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIJoinNeighborhood
         endpoint = String.init(format: endpoint,"\(groupId)", token)
@@ -218,7 +239,7 @@ struct NeighborhoodService:ParsingDataCodable {
     }
     
     
-    static func leaveGroup(groupId:Int,userId:Int ,completion: @escaping (_ group:Neighborhood?, _ error:EntourageNetworkError?) -> Void) {
+    static func leaveNeighborhood(groupId:Int,userId:Int ,completion: @escaping (_ group:Neighborhood?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPILeaveNeighborhood
         endpoint = String.init(format: endpoint,"\(groupId)","\(userId)", token)
@@ -240,12 +261,12 @@ struct NeighborhoodService:ParsingDataCodable {
     
 
     //MARK: - Report GRoup -
-    static func reportGroup(groupId:Int,message:String?,tags:[String], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+    static func reportNeighborhood(groupId:Int,message:String?,tags:[String], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIReportNeighborhood
         endpoint = String.init(format: endpoint,"\(groupId)", token)
         
-        let _msg:String = message != nil ? message! : ""
+        let _msg:String = message != nil ? (message!.isEmpty ? "." : message!) : "." //TODO: Supprimer lorsque nicolas aura fixé le WS
         let parameters:[String:Any] = ["report":["message":_msg, "signals":tags]]
         
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
@@ -263,5 +284,50 @@ struct NeighborhoodService:ParsingDataCodable {
             DispatchQueue.main.async { completion(nil) }
         }
     }
+    
+    //MARK: - Comments for Post -
+    
+    static func getCommentsFor(neighborhoodId:Int, parentPostId:Int, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetNeighborhoodMessages
+        endpoint = String.init(format: endpoint,"\(neighborhoodId)","\(parentPostId)", token)
+        
+        Logger.print("***** url get messages group : \(endpoint)")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            Logger.print("***** return get messages group  : \(error)")
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil,  error) }
+                return
+            }
+            let messages:[PostMessage]? = self.parseDatas(data: data,key: "chat_messages")
+            DispatchQueue.main.async { completion(messages,nil) }
+        }
+    }
+    
+    static func postCommentFor(neighborhoodId:Int, parentPostId:Int, message:String, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIPostNeighborhoodPostMessage
+        endpoint = String.init(format: endpoint, "\(neighborhoodId)", token)
+
+        let parameters = ["chat_message" : ["content":message,"parent_id":parentPostId]]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Datas passed send comment group Post \(parameters)")
+        
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
     
 }

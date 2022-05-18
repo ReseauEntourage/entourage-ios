@@ -11,6 +11,9 @@ class NeighBorhoodListUsersViewController: BasePopViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
     
+    @IBOutlet weak var ui_lb_no_result: UILabel!
+    @IBOutlet weak var ui_view_no_result: UIView!
+    
     var neighborhood:Neighborhood? = nil
     
     var users = [UserLightNeighborhood]()
@@ -23,6 +26,9 @@ class NeighBorhoodListUsersViewController: BasePopViewController {
         
         ui_top_view.populateView(title: "neighborhood_users_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
         
+        ui_lb_no_result.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
+        ui_lb_no_result.text = "neighborhood_group_search_empty_title".localized
+        ui_view_no_result.isHidden = true
         getusers()
     }
     
@@ -53,6 +59,12 @@ class NeighBorhoodListUsersViewController: BasePopViewController {
         usersSearch.removeAll()
         let _searched = users.filter({$0.displayName.lowercased().contains(text.lowercased())})
         usersSearch.append(contentsOf: _searched)
+        if usersSearch.count == 0 {
+            ui_view_no_result.isHidden = false
+        }
+        else {
+            ui_view_no_result.isHidden = true
+        }
         self.ui_tableview.reloadData()
     }
 }
@@ -123,6 +135,7 @@ extension NeighBorhoodListUsersViewController: NeighborhoodHomeSearchDelegate {
             self.usersSearch.removeAll()
             self.isAlreadyClearRows = false
             self.isSearch = false
+            ui_view_no_result.isHidden = true
             self.ui_tableview.reloadData()
         }
     }
@@ -136,6 +149,7 @@ extension NeighBorhoodListUsersViewController: NeighborhoodHomeSearchDelegate {
         else {
             isAlreadyClearRows = false
         }
+        ui_view_no_result.isHidden = true
     }
 }
 
@@ -144,6 +158,15 @@ extension NeighBorhoodListUsersViewController:NeighborhoodUserCellDelegate {
     func showUserForPosition(_ position: Int) {
         //TODO: a faire
         Logger.print("***** show message from user pos : \(position)")
+        
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "fermer".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        
+        customAlert.configureAlert(alertTitle: "W I P".localized, message: "Pas encore implémenté ;)".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: self.navigationController)
+        
+        customAlert.alertTagName = .None
+        //  customAlert.delegate = self
+        customAlert.show()
     }
 }
 

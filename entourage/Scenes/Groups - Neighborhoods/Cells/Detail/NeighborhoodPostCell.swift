@@ -26,6 +26,12 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_view_bt_send: UIView!
     @IBOutlet weak var ui_lb_chat: UILabel!
     
+    class var identifier: String {
+        return String(describing: self)
+    }
+    
+    weak var delegate:NeighborhoodPostCellDelegate? = nil
+    var postId:Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,10 +53,13 @@ class NeighborhoodPostCell: UITableViewCell {
         
     }
     
-    func populateCell(message:PostMessage) {
+    func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate) {
+        self.delegate = delegate
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
         ui_comment.text = message.content
+        
+        postId = message.uid
         
         if let _url = message.user?.avatarURL, let url = URL(string: _url) {
             ui_iv_user.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_user"))
@@ -71,6 +80,33 @@ class NeighborhoodPostCell: UITableViewCell {
             let attrStr = Utils.formatStringUnderline(textString: String.init(format: msg, message.commentsCount), textColor: .black, font: ApplicationTheme.getFontChampInput().font)
             ui_comments_nb.attributedText = attrStr
         }
+        
+        if let urlStr = message.messageImageUrl, let url = URL(string: urlStr) {
+            ui_image_post?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_post"))
+        }
+        else {
+            ui_image_post?.image = UIImage.init(named: "placeholder_post")
+        }
     }
 
+    @IBAction func action_show_comments(_ sender: Any) {
+        delegate?.showMessages(addComment: false,postId: postId)
+    }
+    
+    @IBAction func action_add_comments(_ sender: Any) {
+        delegate?.showMessages(addComment: true,postId: postId)
+    }
+}
+
+protocol NeighborhoodPostCellDelegate: AnyObject {
+    func showMessages(addComment:Bool, postId:Int)
+}
+
+
+class NeighborhoodPostTextCell: NeighborhoodPostCell {
+    //override class var identifier: String {return self.description()}
+}
+
+class NeighborhoodPostImageCell: NeighborhoodPostCell {
+   // override class var identifier: String {return self.description()}
 }

@@ -17,23 +17,25 @@ class NeighborhoodDetailViewController: UIViewController {
     @IBOutlet weak var ui_label_title_neighb: UILabel!
     @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
     
-    var neighborhoodId:Int = 0
-    var neighborhood:Neighborhood? = nil
-    
+    //Use to strech header
     var maxViewHeight:CGFloat = 150
     var minViewHeight:CGFloat = 70 + 19
-    
     var maxImageHeight:CGFloat = 73
     var minImageHeight:CGFloat = 0
-    
     var viewNormalHeight:CGFloat = 0
     
     var messagesNew = [PostMessage]()
     var messagesOld = [PostMessage]()
+    var neighborhoodId:Int = 0
+    var neighborhood:Neighborhood? = nil
     
     var hasNewAndOldSections = false
-    var currentPagingPage = 2 //Default 1 WS
+    var currentPagingPage = 1 //Default WS
     let itemsPerPage = 25 //Default WS
+    let nbOfItemsBeforePagingReload = 5
+    var isLoading = false
+    
+    var pullRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +43,25 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_top_view.backgroundColor = .clear
         ui_top_view.populateCustom(title: nil, titleFont: nil, titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: false, cornerRadius: nil, isClose: false, marginLeftButton: nil)
         ui_iv_neighborhood.image = nil
-        getNeighborhoodDetail()
         
+        registerCellsNib()
+
         //Notif for updating neighborhood infos
         NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
         
         setupViews()
+        
+        getNeighborhoodDetail()
+    }
+    
+    func registerCellsNib() {
+        ui_tableview.register(UINib(nibName: NeighborhoodPostTextCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTextCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostImageCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodDetailTopCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodDetailTopCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodDetailTopMemberCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodDetailTopMemberCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodEmptyEventCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyEventCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodEventsTableviewCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEventsTableviewCell.identifier)
     }
     
     func setupViews() {
@@ -66,6 +81,19 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_iv_neighborhood_mini.layer.cornerRadius = 8
         ui_iv_neighborhood_mini.layer.borderColor = UIColor.appOrangeLight.cgColor
         ui_iv_neighborhood_mini.layer.borderWidth = 1
+        
+        
+
+        pullRefreshControl.attributedTitle = NSAttributedString(string: "Loading".localized)
+        pullRefreshControl.tintColor = .appOrange
+        pullRefreshControl.addTarget(self, action: #selector(refreshNeighborhood), for: .valueChanged)
+        ui_tableview.refreshControl = pullRefreshControl
+       
+    }
+   
+    // Actions
+    @objc private func refreshNeighborhood() {
+        updateNeighborhood()
     }
     
     @objc func updateNeighborhood() {
@@ -76,8 +104,12 @@ class NeighborhoodDetailViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    //MARK: - Network -
     func getNeighborhoodDetail() {
+        self.currentPagingPage = 1
+        self.isLoading = true
         NeighborhoodService.getNeighborhoodDetail(id: neighborhoodId) { group, error in
+            self.pullRefreshControl.endRefreshing()
             if let _ = error {
                 self.goBack()
             }
@@ -85,37 +117,59 @@ class NeighborhoodDetailViewController: UIViewController {
             self.neighborhood = group
             self.splitMessages()
             self.ui_tableview.reloadData()
+            self.isLoading = false
             
+            let imageName = "placeholder_neighborhood"
             if let _url = self.neighborhood?.image_url, let url = URL(string: _url) {
-                self.ui_iv_neighborhood.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_neighborhood"))
-                self.ui_iv_neighborhood_mini.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_neighborhood"))
+                self.ui_iv_neighborhood.sd_setImage(with: url, placeholderImage: UIImage.init(named: imageName))
+                self.ui_iv_neighborhood_mini.sd_setImage(with: url, placeholderImage: UIImage.init(named: imageName))
             }
             else {
-                self.ui_iv_neighborhood.image = UIImage.init(named: "placeholder_neighborhood")
-                self.ui_iv_neighborhood_mini.image = UIImage.init(named: "placeholder_neighborhood")
+                self.ui_iv_neighborhood.image = UIImage.init(named: imageName)
+                self.ui_iv_neighborhood_mini.image = UIImage.init(named: imageName)
             }
             
             self.ui_label_title_neighb.text = group?.name
         }
     }
     
+    func getMorePosts() {
+        self.isLoading = true
+        NeighborhoodService.getNeighborhoodPostsPaging(id: neighborhoodId, currentPage: currentPagingPage, per: itemsPerPage) { post, error in
+            if let post = post {
+                self.neighborhood?.messages?.append(contentsOf: post)
+                self.splitMessages()
+                if self.hasNewAndOldSections {
+                    UIView.performWithoutAnimation {
+                        self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .none)
+                    }
+                }
+                else {
+                    UIView.performWithoutAnimation {
+                        self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .none)
+                    }
+                }
+                self.isLoading = false
+            }
+            //TODO: Error ?
+        }
+    }
+    
     func splitMessages() {
-        //TODO: split messages depuis les infos du WS
         guard let messages = neighborhood?.messages else {
             return
         }
 
         messagesNew.removeAll()
         messagesOld.removeAll()
-        var i = 0
+        
         for post in messages {
-            if i % 2 == 0 {
-                messagesNew.append(post)
-            }
-            else {
+            if post.isRead {
                 messagesOld.append(post)
             }
-            i = i + 1
+            else {
+                messagesNew.append(post)
+            }
         }
         
         hasNewAndOldSections = messagesOld.count > 0 && messagesNew.count > 0
@@ -129,7 +183,7 @@ class NeighborhoodDetailViewController: UIViewController {
         IHProgressHUD.show()
         
         if isAdd {
-            NeighborhoodService.joinGroup(groupId: neighborhood.uid) { user, error in
+            NeighborhoodService.joinNeighborhood(groupId: neighborhood.uid) { user, error in
                 IHProgressHUD.dismiss()
                 if let user = user {
                     let member = NeighborhoodUserLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
@@ -142,7 +196,7 @@ class NeighborhoodDetailViewController: UIViewController {
             }
         }
         else {
-            NeighborhoodService.leaveGroup(groupId: neighborhood.uid, userId: UserDefaults.currentUser!.sid) { group, error in
+            NeighborhoodService.leaveNeighborhood(groupId: neighborhood.uid, userId: UserDefaults.currentUser!.sid) { group, error in
                 IHProgressHUD.dismiss()
                 if error == nil {
                     self.neighborhood?.members.removeAll(where: {$0.uid == UserDefaults.currentUser!.sid})
@@ -169,6 +223,7 @@ class NeighborhoodDetailViewController: UIViewController {
         self.ui_tableview.reloadData()
     }
     
+    //MARK: - IBAction -
     @IBAction func action_show_params(_ sender: Any) {
         if let navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "params_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodParamsGroupViewController {
             vc.neighborhood = neighborhood
@@ -221,7 +276,6 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             return count
         }
         
-        
         let messageCount:Int = (self.neighborhood?.messages?.count ?? 0) > 0 ? self.neighborhood!.messages!.count + 2 : 1
         return  messageCount
     }
@@ -230,46 +284,34 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 if self.neighborhood!.isMember {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellTopMember", for: indexPath) as! NeighborhoodDetailTopCell
-                    
+                    let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodDetailTopMemberCell.identifier, for: indexPath) as! NeighborhoodDetailTopMemberCell
                     cell.populateCell(neighborhood: self.neighborhood,isFollowingGroup: true, delegate: self)
-                    
                     return cell
                 }
                 else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! NeighborhoodDetailTopCell
-                    
+                    let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodDetailTopCell.identifier, for: indexPath) as! NeighborhoodDetailTopCell
                     cell.populateCell(neighborhood: self.neighborhood, isFollowingGroup: false, delegate: self)
-                    
                     return cell
                 }
             }
             else {
                 if neighborhood?.futureEvents?.count ?? 0 > 0 {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: "cellEvents", for: indexPath) as! NeighborhoodEventsTableviewCell
-                    
+                    let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodEventsTableviewCell.identifier, for: indexPath) as! NeighborhoodEventsTableviewCell
                     cell.populateCell(events:neighborhood!.futureEvents!, delegate: self)
-                    
-                    
                     return cell
                 }
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellEventEmpty", for: indexPath)
-                
+                let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodEmptyEventCell.identifier, for: indexPath)
                 return cell
             }
         }
         
-        
-       
         if self.neighborhood?.messages?.count ?? 0 == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostEmpty", for: indexPath)
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodEmptyPostCell.identifier, for: indexPath)
             return cell
         }
         
         if hasNewAndOldSections && indexPath.section == 2 {
             if indexPath.row == 0 {
-               //Todo: New / Old
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitleDate", for: indexPath) as! NeighborhoodPostHeadersCell
                 
                 cell.populateCell(title: "neighborhood_post_group_section_old_posts_title".localized, isTopHeader: false)
@@ -277,61 +319,30 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             }
             
             let postmessage:PostMessage = messagesOld[indexPath.row - 1]
-           
-            //TODO: mettre le check de la cell avec l'image ou pas
-            if indexPath.row % 2 == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostText", for: indexPath) as! NeighborhoodPostCell
-                
-                cell.populateCell(message: postmessage)
-                return cell
-            }
-            
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostImage", for: indexPath) as! NeighborhoodPostCell
-            cell.populateCell(message: postmessage)
+            let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
+            cell.populateCell(message: postmessage,delegate: self)
             return cell
-            
         }
         
         if indexPath.row == 0 {
-           //TODO: Title
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitle", for: indexPath) as! NeighborhoodPostHeadersCell
             cell.populateCell(title: "neighborhood_post_group_section_title".localized, isTopHeader: true)
             return cell
         }
         
         if indexPath.row == 1 {
+            let titleSection = hasNewAndOldSections ? "neighborhood_post_group_section_new_posts_title".localized : "neighborhood_post_group_section_old_posts_title".localized
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitleDate", for: indexPath) as! NeighborhoodPostHeadersCell
-            cell.populateCell(title: "neighborhood_post_group_section_new_posts_title".localized, isTopHeader: false)
+            cell.populateCell(title: titleSection , isTopHeader: false)
             return cell
         }
         
-        
-        
-        //TODO: voir si texte ou image
-//        if self.neighborhood?.messages?[indexPath.row - 2].messageType == "text" {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostText", for: indexPath) as! NeighborhoodPostCell
-//
-//            return cell
-//        }
-//        else {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostImage", for: indexPath) as! NeighborhoodPostCell
-//
-//            return cell
-//        }
         let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - 2] : self.neighborhood!.messages![indexPath.row - 2]
-       
-        if indexPath.row % 2 == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostText", for: indexPath) as! NeighborhoodPostCell
-            
-            cell.populateCell(message: postmessage)
-            return cell
-        }
         
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostImage", for: indexPath) as! NeighborhoodPostCell
-        cell.populateCell(message: postmessage)
+        let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
+        cell.populateCell(message: postmessage,delegate: self)
         return cell
     }
     
@@ -340,6 +351,26 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             return 214
         }
         return UITableView.automaticDimension
+    }
+    
+    //Use to paging tableview ;)
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if isLoading { return }
+        
+        var realIndex:Int
+        
+        if hasNewAndOldSections {
+            realIndex = indexPath.row - 1
+        }
+        else {
+            realIndex = indexPath.row - 2
+        }
+        
+        let lastIndex = neighborhood!.messages!.count - nbOfItemsBeforePagingReload
+        if realIndex == lastIndex && neighborhood!.messages!.count >= itemsPerPage * currentPagingPage {
+            self.currentPagingPage = self.currentPagingPage + 1
+            self.getMorePosts()
+        }
     }
 }
 
@@ -365,10 +396,46 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
     }
 }
 
+//MARK: - NeighborhoodPostCellDelegate -
+extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
+    func showMessages(addComment: Bool, postId:Int) {
+       
+        let sb = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? NeighborhoodDetailMessagesViewController {
+            vc.modalPresentationStyle = .fullScreen
+            vc.parentCommentId = postId
+            vc.neighborhoodId = neighborhoodId
+            vc.neighborhoodName = neighborhood!.name
+            vc.isGroupMember = neighborhood!.isMember
+            vc.isStartEditing = addComment
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
+}
+
+//MARK: - NeighborhoodEventsTableviewCellDelegate -
 extension NeighborhoodDetailViewController:NeighborhoodEventsTableviewCellDelegate {
     func showAll() {
         //TODO: Show all events
         Logger.print("***** show all events ;)")
+        showWIP()
+    }
+    
+    func showEvent(eventId: Int) {
+        Logger.print("***** show event id : \(eventId)")
+        //TODO: a faire
+        showWIP()
+    }
+    
+    func showWIP() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "fermer".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        
+        customAlert.configureAlert(alertTitle: "W I P".localized, message: "Pas encore implémenté ;)".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: self)
+        
+        customAlert.alertTagName = .None
+        //  customAlert.delegate = self
+        customAlert.show()
     }
 }
 

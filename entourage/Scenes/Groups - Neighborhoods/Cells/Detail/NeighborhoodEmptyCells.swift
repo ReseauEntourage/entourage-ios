@@ -15,6 +15,10 @@ class NeighborhoodEmptyEventCell: UITableViewCell {
     
     @IBOutlet weak var ui_subtitle: UILabel!
     
+    class var identifier: String {
+        return String(describing: self)
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
@@ -36,6 +40,10 @@ class NeighborhoodEmptyPostCell: UITableViewCell {
     @IBOutlet weak var ui_title: UILabel!
     
     @IBOutlet weak var ui_subtitle: UILabel!
+    
+    class var identifier: String {
+        return String(describing: self)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

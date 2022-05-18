@@ -103,11 +103,12 @@ extension UserProfileDetailViewController:UserProfileDetailDelegate {
 //MARK: - UITableViewDataSource,UITableViewDelegate -
 extension UserProfileDetailViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let addSignal = currentUser?.sid == UserDefaults.currentUser?.sid ? 0 : 1
         if let currentUser = currentUser {
             if currentUser.interests?.count ?? 0 > 0  {
-                return 3 + 1
+                return 3 + addSignal
             }
-            return 2 + 1
+            return 2 + addSignal
         }
         return 0
     }
@@ -116,14 +117,17 @@ extension UserProfileDetailViewController: UITableViewDataSource,UITableViewDele
         guard let currentUser = currentUser else { return UITableViewCell() }
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoTop", for: indexPath) as! MainUserProfileTopCell
-            cell.populateCell(username: currentUser.displayName, role: currentUser.roles?.first, partner: currentUser.partner, bio: currentUser.about,delegate: self)
+            let isMe = UserDefaults.currentUser?.sid == currentUser.sid
+            let cellIdent = isMe ? "cellUserInfoMeTop" : "cellUserInfoTop"
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdent, for: indexPath) as! MainUserProfileTopCell
+            cell.populateCell(isMe:isMe ,username: currentUser.displayName, role: currentUser.roles?.first, partner: currentUser.partner, bio: currentUser.about,delegate: self)
             return cell
         }
         
         switch indexPath.row {
         case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoActivities", for: indexPath) as! MainUserActivitiesCell
-            cell.populateCell(eventCount: currentUser.stats.eventsCount, actionsCount: currentUser.stats.actionsCount)
+            let isMe = UserDefaults.currentUser?.sid == currentUser.sid
+            cell.populateCell(isMe:isMe ,eventCount: currentUser.stats.eventsCount, actionsCount: currentUser.stats.actionsCount)
             return cell
         case 2:
             if currentUser.interests?.count ?? 0 == 0  {
