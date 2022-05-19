@@ -2023,6 +2023,18 @@
                                     <outlet property="delegate" destination="pqB-Ol-icc" id="CcJ-pk-HJf"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BiC-jT-vUz">
+                                <rect key="frame" x="324" y="768" width="62" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="5Bf-ch-itS"/>
+                                    <constraint firstAttribute="width" constant="62" id="DJT-T9-Z8V"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="ic_button_plus_fill"/>
+                                <connections>
+                                    <action selector="action_create:" destination="pqB-Ol-icc" eventType="touchUpInside" id="5cd-bd-tIc"/>
+                                </connections>
+                            </button>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0V-qQ-sRK">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                 <subviews>
@@ -2088,16 +2100,19 @@
                             <constraint firstItem="RTc-MR-zdS" firstAttribute="leading" secondItem="8xv-J1-pVJ" secondAttribute="leading" constant="4" id="Qd5-6E-P5r"/>
                             <constraint firstItem="RTc-MR-zdS" firstAttribute="top" secondItem="XeJ-97-jwN" secondAttribute="top" id="URk-Oz-7Dr"/>
                             <constraint firstItem="T0V-qQ-sRK" firstAttribute="leading" secondItem="XeJ-97-jwN" secondAttribute="leading" id="Vej-WE-jIT"/>
+                            <constraint firstItem="8xv-J1-pVJ" firstAttribute="trailing" secondItem="BiC-jT-vUz" secondAttribute="trailing" constant="28" id="dPf-uQ-AOX"/>
                             <constraint firstItem="T0V-qQ-sRK" firstAttribute="top" secondItem="XeJ-97-jwN" secondAttribute="top" id="lq8-VZ-Dy3"/>
                             <constraint firstItem="lOk-y6-Xiv" firstAttribute="leading" secondItem="XeJ-97-jwN" secondAttribute="leading" id="qt5-Pq-dz0"/>
                             <constraint firstItem="8xv-J1-pVJ" firstAttribute="trailing" secondItem="RTc-MR-zdS" secondAttribute="trailing" constant="4" id="r4U-qr-Kxd"/>
                             <constraint firstAttribute="trailing" secondItem="T0V-qQ-sRK" secondAttribute="trailing" id="rYk-Cr-HLo"/>
                             <constraint firstItem="8xv-J1-pVJ" firstAttribute="trailing" secondItem="lOk-y6-Xiv" secondAttribute="trailing" id="rkG-gN-m6V"/>
                             <constraint firstItem="ojT-9N-YPQ" firstAttribute="centerY" secondItem="lOk-y6-Xiv" secondAttribute="centerY" id="ucQ-Wm-tTM"/>
+                            <constraint firstItem="8xv-J1-pVJ" firstAttribute="bottom" secondItem="BiC-jT-vUz" secondAttribute="bottom" constant="32" id="vUg-kd-IWf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qqL-Sc-CGg"/>
                     <connections>
+                        <outlet property="ui_button_add" destination="BiC-jT-vUz" id="gll-MT-UlL"/>
                         <outlet property="ui_iv_neighborhood" destination="AeR-wL-oht" id="JpL-bB-2DY"/>
                         <outlet property="ui_iv_neighborhood_mini" destination="TZq-iv-FPM" id="FaU-hJ-iB7"/>
                         <outlet property="ui_label_title_neighb" destination="Z2A-BB-MxT" id="bMT-hO-7yd"/>

@@ -534,6 +534,24 @@
 "neighborhoodEdit_error" = "Veuillez remplir tous les champs obligatoires";
 "neighborhoodEditValidateTitle" = "Votre groupe à bien été modifié ! PLACEHOLDER";
 
+/***
+ * Create Post group
+ */
+"neighborhood_menu_post_event" = "Créer un évènement sur le groupe";
+"neighborhood_menu_post_post" = "Créer une publication";
+
+"neighborhood_add_post_title" = "Créer une publication";
+"neighborhood_add_post_message_title" = "Écrire une description";
+"neighborhood_add_post_message_subtitle" = "- facultatif";
+"neighborhood_add_post_message_placeholder" = "Écrivez votre message…";
+"neighborhood_add_post_image_title" = "Ajouter une photo";
+"neighborhood_add_post_image_subtitle" = "- facultatif";
+"neighborhood_add_post_send_button" = "Partager";
+"neighborhood_add_post_title_image" = "Ajouter une image";
+"neighborhood_add_post_image_info_move" = "Déplacer et zoomer pour ajuster la photo. ";
+"neighborhood_add_post_image_bt_validate" = "Valider";
+"neighborhood_add_post_image_bt_cancel" = "Supprimer";
+"neighborhood_add_post_error" = "Erreur de publication, veuillez réessayer ";
 /******
  * Group / communauté
  */

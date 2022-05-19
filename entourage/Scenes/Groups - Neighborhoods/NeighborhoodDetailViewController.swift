@@ -17,6 +17,7 @@ class NeighborhoodDetailViewController: UIViewController {
     @IBOutlet weak var ui_label_title_neighb: UILabel!
     @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
     
+    @IBOutlet weak var ui_button_add: UIButton!
     //Use to strech header
     var maxViewHeight:CGFloat = 150
     var minViewHeight:CGFloat = 70 + 19
@@ -45,11 +46,13 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_iv_neighborhood.image = nil
         
         registerCellsNib()
-
+        
         //Notif for updating neighborhood infos
         NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
         
         setupViews()
+        
+        ui_button_add.isHidden = true
         
         getNeighborhoodDetail()
     }
@@ -82,15 +85,13 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_iv_neighborhood_mini.layer.borderColor = UIColor.appOrangeLight.cgColor
         ui_iv_neighborhood_mini.layer.borderWidth = 1
         
-        
-
         pullRefreshControl.attributedTitle = NSAttributedString(string: "Loading".localized)
         pullRefreshControl.tintColor = .appOrange
         pullRefreshControl.addTarget(self, action: #selector(refreshNeighborhood), for: .valueChanged)
         ui_tableview.refreshControl = pullRefreshControl
-       
+        
     }
-   
+    
     // Actions
     @objc private func refreshNeighborhood() {
         updateNeighborhood()
@@ -130,6 +131,8 @@ class NeighborhoodDetailViewController: UIViewController {
             }
             
             self.ui_label_title_neighb.text = group?.name
+            
+            self.ui_button_add.isHidden = self.neighborhood?.isMember ?? false ? false : true
         }
     }
     
@@ -159,7 +162,7 @@ class NeighborhoodDetailViewController: UIViewController {
         guard let messages = neighborhood?.messages else {
             return
         }
-
+        
         messagesNew.removeAll()
         messagesOld.removeAll()
         
@@ -231,6 +234,14 @@ class NeighborhoodDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func action_create(_ sender: Any) {
+        if let vc = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil).instantiateViewController(withIdentifier: "AddMenuVC") as? NeighborhoodAddMenuViewController {
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.neighborhoodId = self.neighborhoodId
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
+    
     //MARK: - Method uiscrollview delegate -
     func scrollViewDidScroll( _ scrollView: UIScrollView) {
         UIView.animate(withDuration: 0) {
@@ -276,7 +287,8 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             return count
         }
         
-        let messageCount:Int = (self.neighborhood?.messages?.count ?? 0) > 0 ? self.neighborhood!.messages!.count + 2 : 1
+        let countToAdd = self.neighborhood?.isMember ?? false ? 2 : 1 //If not member we dont' show new/old post header
+        let messageCount:Int = (self.neighborhood?.messages?.count ?? 0) > 0 ? self.neighborhood!.messages!.count + countToAdd : 1
         return  messageCount
     }
     
@@ -331,14 +343,18 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             return cell
         }
         
-        if indexPath.row == 1 {
-            let titleSection = hasNewAndOldSections ? "neighborhood_post_group_section_new_posts_title".localized : "neighborhood_post_group_section_old_posts_title".localized
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitleDate", for: indexPath) as! NeighborhoodPostHeadersCell
-            cell.populateCell(title: titleSection , isTopHeader: false)
-            return cell
+        //If not member we dont' show new/old post header
+        let countToAdd = self.neighborhood?.isMember ?? false ? 2 : 1
+        if countToAdd == 2 {
+            if indexPath.row == 1 {
+                let titleSection = hasNewAndOldSections ? "neighborhood_post_group_section_new_posts_title".localized : "neighborhood_post_group_section_old_posts_title".localized
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitleDate", for: indexPath) as! NeighborhoodPostHeadersCell
+                cell.populateCell(title: titleSection , isTopHeader: false)
+                return cell
+            }
         }
         
-        let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - 2] : self.neighborhood!.messages![indexPath.row - 2]
+        let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - countToAdd] : self.neighborhood!.messages![indexPath.row - countToAdd]
         
         let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
@@ -399,7 +415,7 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
 //MARK: - NeighborhoodPostCellDelegate -
 extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
     func showMessages(addComment: Bool, postId:Int) {
-       
+        
         let sb = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? NeighborhoodDetailMessagesViewController {
             vc.modalPresentationStyle = .fullScreen
@@ -418,24 +434,13 @@ extension NeighborhoodDetailViewController:NeighborhoodEventsTableviewCellDelega
     func showAll() {
         //TODO: Show all events
         Logger.print("***** show all events ;)")
-        showWIP()
+        showWIP(parentVC: self)
     }
     
     func showEvent(eventId: Int) {
         Logger.print("***** show event id : \(eventId)")
         //TODO: a faire
-        showWIP()
-    }
-    
-    func showWIP() {
-        let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "fermer".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        
-        customAlert.configureAlert(alertTitle: "W I P".localized, message: "Pas encore implémenté ;)".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: self)
-        
-        customAlert.alertTagName = .None
-        //  customAlert.delegate = self
-        customAlert.show()
+        showWIP(parentVC: self)
     }
 }
 

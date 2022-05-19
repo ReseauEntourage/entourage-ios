@@ -205,6 +205,10 @@
 		02E069ED279184B3006DB1B6 /* OTOnboardingNamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E069DD279184B3006DB1B6 /* OTOnboardingNamesViewController.swift */; };
 		02E21921283520A1002A1FCB /* NeighborhoodUploadPictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E21920283520A1002A1FCB /* NeighborhoodUploadPictureService.swift */; };
 		02E2192328352552002A1FCB /* Neighborhood_Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02E2192228352552002A1FCB /* Neighborhood_Message.storyboard */; };
+		02E2192528355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2192428355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift */; };
+		02E2192728355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2192628355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift */; };
+		02E21929283637E9002A1FCB /* NeighborhoodPostAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E21928283637E9002A1FCB /* NeighborhoodPostAddViewController.swift */; };
+		02E2192B28368552002A1FCB /* NeighborhoodAddMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2192A28368552002A1FCB /* NeighborhoodAddMenuViewController.swift */; };
 		02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */; };
 		02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */; };
 		02E77B44282CF9CF00786E27 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E77B43282CF9CF00786E27 /* Event.swift */; };
@@ -427,6 +431,10 @@
 		02E069DD279184B3006DB1B6 /* OTOnboardingNamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTOnboardingNamesViewController.swift; sourceTree = "<group>"; };
 		02E21920283520A1002A1FCB /* NeighborhoodUploadPictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodUploadPictureService.swift; sourceTree = "<group>"; };
 		02E2192228352552002A1FCB /* Neighborhood_Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neighborhood_Message.storyboard; sourceTree = "<group>"; };
+		02E2192428355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostAddPhotoViewController.swift; sourceTree = "<group>"; };
+		02E2192628355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
+		02E21928283637E9002A1FCB /* NeighborhoodPostAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostAddViewController.swift; sourceTree = "<group>"; };
+		02E2192A28368552002A1FCB /* NeighborhoodAddMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodAddMenuViewController.swift; sourceTree = "<group>"; };
 		02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserSignalCell.swift; sourceTree = "<group>"; };
 		02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJCustomSlider.swift; sourceTree = "<group>"; };
 		02E77B43282CF9CF00786E27 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -842,6 +850,10 @@
 				02C6E86828203BF0009D4289 /* NeighBorhoodParamsCGUViewController.swift */,
 				02833F992822A9F600000156 /* NeighBorhoodListUsersViewController.swift */,
 				024273EB283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift */,
+				02E2192A28368552002A1FCB /* NeighborhoodAddMenuViewController.swift */,
+				02E21928283637E9002A1FCB /* NeighborhoodPostAddViewController.swift */,
+				02E2192428355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift */,
+				02E2192628355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift */,
 				02C6E86A28203E1F009D4289 /* Signal */,
 				0224597B27FF54E300944DE4 /* Create */,
 				0224597227FF31FC00944DE4 /* Cells */,
@@ -1312,6 +1324,7 @@
 				02C3ABF2279AB53800817B82 /* Extensions_UserDefaults.swift in Sources */,
 				020429B7282EAD520030B035 /* NeighborhoodPostHeadersCell.swift in Sources */,
 				02CCE68A27D7B51E00D6976C /* CloseButton.swift in Sources */,
+				02E2192528355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift in Sources */,
 				0224597427FF323600944DE4 /* NeighborhoodCreateNameCell.swift in Sources */,
 				02F5278527999B8F00929431 /* SolidarityGuideCell.swift in Sources */,
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,
@@ -1328,6 +1341,7 @@
 				02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */,
 				02C6E87228203E1F009D4289 /* ReportGroupPageViewController.swift in Sources */,
 				023D89C327DFA39A008C6A58 /* ParamsInfoCell.swift in Sources */,
+				02E2192B28368552002A1FCB /* NeighborhoodAddMenuViewController.swift in Sources */,
 				02DDF1D727D9117700EE22DE /* ProgressRadiusView.swift in Sources */,
 				02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */,
 				02A3DD3727FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift in Sources */,
@@ -1346,6 +1360,7 @@
 				02F5279B2799A1F300929431 /* GuideCells.swift in Sources */,
 				026819C0278E105600A98A4A /* OTLoginChangePhoneViewController.swift in Sources */,
 				029F690E27D905F5003D1E39 /* MainUserInfosCell.swift in Sources */,
+				02E21929283637E9002A1FCB /* NeighborhoodPostAddViewController.swift in Sources */,
 				02E069E2279184B3006DB1B6 /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */,
 				026819AA278E00A200A98A4A /* Utils.swift in Sources */,
 				02E7845F2811A91900177F13 /* NeighborhoodHomeViewController.swift in Sources */,
@@ -1370,6 +1385,7 @@
 				02C0A0E2278EDCC400B0C646 /* UserService.swift in Sources */,
 				02F527992799A1F300929431 /* GuideDelegates.swift in Sources */,
 				0224597F28006ACF00944DE4 /* NeighborhoodCreateAddOtherCell.swift in Sources */,
+				02E2192728355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift in Sources */,
 				02DD1E91280853CF00538EF4 /* NeighborhoodEditViewController.swift in Sources */,
 				02E069ED279184B3006DB1B6 /* OTOnboardingNamesViewController.swift in Sources */,
 			);
