@@ -1,32 +1,30 @@
 //
-//  PictureUploadS3Service.swift
+//  NeighborhoodUploadPictureService.swift
 //  entourage
 //
-//  Created by Jr on 30/04/2020.
-//  Copyright © 2020 Entourage. All rights reserved.
+//  Created by Jerome on 18/05/2022.
 //
 
 import Foundation
 
-struct PictureUploadS3Service {
+struct NeighborhoodUploadPictureService {
     
     //First step Prepare
-    static func prepareUploadWith(image:UIImage, completion: @escaping (_ result: Bool)->()) {
+    static func prepareUploadWith(neighborhoodId:Int, image:UIImage, message:String? , completion: @escaping (_ result: Bool)->()) {
         
         guard let token = UserDefaults.token else {return}
-        var endpoint = API_URL_USER_PREPARE_AVATAR_UPLOAD
-        endpoint = String.init(format: endpoint, token)
+        var endpoint = API_URL_NEIGHBORHOOD_PREPARE_IMAGE_POST_UPLOAD
+        endpoint = String.init(format: endpoint,"\(neighborhoodId)", token)
         
         AuthService.prepareUploadPhotoS3(endpoint:endpoint) { json, error in
-            guard let _presigneUrl = json?["presigned_url"] as? String, let _avatarKey = json?["avatar_key"] as? String else {
+            guard let _presigneUrl = json?["presigned_url"] as? String, let _uploadKey = json?["upload_key"] as? String else {
                 completion(false)
                 return
             }
             
-            uploadtoS3(urlS3: _presigneUrl, avatar_key: _avatarKey
-                , image: image, completion: {isOk in
+            uploadtoS3(urlS3: _presigneUrl, image: image, completion: {isOk in
                     if isOk {
-                        updateUserWithAvatarKey(_avatarKey, completion: {isOk in
+                        postWithImageAndText(imageKey: _uploadKey, neighborhoodId: neighborhoodId, message: message, completion: {isOk in
                             completion(isOk)
                         })
                     }
@@ -38,7 +36,7 @@ struct PictureUploadS3Service {
     }
     
     //2nd step upload to Amazon
-    static func uploadtoS3(urlS3:String, avatar_key:String, image:UIImage,completion: @escaping (_ result: Bool)->()) {
+    static func uploadtoS3(urlS3:String, image:UIImage,completion: @escaping (_ result: Bool)->()) {
         guard let url = URL(string: urlS3), let data = image.jpegData(compressionQuality: 0.8) else {
             completion(false)
             return
@@ -66,18 +64,15 @@ struct PictureUploadS3Service {
     }
     
     //3nd step update user for avatarKey
-    static func updateUserWithAvatarKey(_ avatarKey:String, completion: @escaping (_ result: Bool)->()) {
-        var _currentUser = UserDefaults.currentUser
-        _currentUser?.avatarKey = avatarKey
-        UserService.updateUser(user: _currentUser) { user, error in
-            if let user = user {
-                var newUser = user
-                newUser.phone = _currentUser?.phone
-                UserDefaults.currentUser = newUser
-                completion(true)
+    static func postWithImageAndText(imageKey:String,neighborhoodId:Int, message:String?, completion: @escaping (_ result: Bool)->()) {
+        
+        NeighborhoodService.createPostMessage(groupId: neighborhoodId, message: message, urlImage: imageKey) { error in
+            Logger.print("***** error create post image ? \(error)")
+            if error != nil {
+                completion(false)
                 return
             }
-            completion(false)
+            completion(true)
         }
     }
 }

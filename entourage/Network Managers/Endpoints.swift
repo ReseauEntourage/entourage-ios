@@ -47,7 +47,7 @@ let kAPIGetNeighborhoodMessages = "neighborhoods/%@/chat_messages/%@/comments?to
 
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
-
+let API_URL_NEIGHBORHOOD_PREPARE_IMAGE_POST_UPLOAD = "neighborhoods/%@/chat_messages/presigned_upload?token=%@"
 
 //WebLink
 let emailContact = "contact@entourage.social"

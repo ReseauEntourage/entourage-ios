@@ -169,18 +169,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     }
     
     @IBAction func action_signal(_ sender: Any) {
-        showWIP()
-    }
-    
-    func showWIP() {
-        let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "fermer".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        
-        customAlert.configureAlert(alertTitle: "W I P".localized, message: "Pas encore implémenté ;)".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: self)
-        
-        customAlert.alertTagName = .None
-        //  customAlert.delegate = self
-        customAlert.show()
+        showWIP(parentVC: self)
     }
 }
 
@@ -246,6 +235,6 @@ extension NeighborhoodDetailMessagesViewController: UITextViewDelegate {
 extension NeighborhoodDetailMessagesViewController:NeighborhoodMessageCellDelegate {
     func signalMessage(messageId: Int) {
         Logger.print("***** signal message \(messageId)")
-        showWIP()
+        showWIP(parentVC: self)
     }
 }

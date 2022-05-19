@@ -37,13 +37,7 @@ class NeighborhoodCreateValidateViewController: UIViewController {
     }
     
     @IBAction func action_post_message(_ sender: Any) {
-        let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "fermer".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        
-        customAlert.configureAlert(alertTitle: "W I P".localized, message: "Pas encore implémenté.\nCliquer sur passer pour fermer ;)".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: self)
-        
-        customAlert.alertTagName = .None
-        customAlert.show()
+        showWIP(parentVC: self)
     }
     
     @IBAction func action_pass(_ sender: Any) {

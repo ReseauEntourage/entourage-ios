@@ -203,6 +203,7 @@
 		02E069EA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E069DA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift */; };
 		02E069EB279184B3006DB1B6 /* OTOnboardingAssoFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E069DB279184B3006DB1B6 /* OTOnboardingAssoFillViewController.swift */; };
 		02E069ED279184B3006DB1B6 /* OTOnboardingNamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E069DD279184B3006DB1B6 /* OTOnboardingNamesViewController.swift */; };
+		02E21921283520A1002A1FCB /* NeighborhoodUploadPictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E21920283520A1002A1FCB /* NeighborhoodUploadPictureService.swift */; };
 		02E2192328352552002A1FCB /* Neighborhood_Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02E2192228352552002A1FCB /* Neighborhood_Message.storyboard */; };
 		02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */; };
 		02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */; };
@@ -424,6 +425,7 @@
 		02E069DA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTOnboardingSearchAssoViewController.swift; sourceTree = "<group>"; };
 		02E069DB279184B3006DB1B6 /* OTOnboardingAssoFillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTOnboardingAssoFillViewController.swift; sourceTree = "<group>"; };
 		02E069DD279184B3006DB1B6 /* OTOnboardingNamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTOnboardingNamesViewController.swift; sourceTree = "<group>"; };
+		02E21920283520A1002A1FCB /* NeighborhoodUploadPictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodUploadPictureService.swift; sourceTree = "<group>"; };
 		02E2192228352552002A1FCB /* Neighborhood_Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neighborhood_Message.storyboard; sourceTree = "<group>"; };
 		02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserSignalCell.swift; sourceTree = "<group>"; };
 		02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJCustomSlider.swift; sourceTree = "<group>"; };
@@ -852,6 +854,7 @@
 			children = (
 				02C0A0E1278EDCC400B0C646 /* UserService.swift */,
 				02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */,
+				02E21920283520A1002A1FCB /* NeighborhoodUploadPictureService.swift */,
 				022744702795BEC0005600A1 /* AuthService.swift */,
 				0227446E2795BE6F005600A1 /* AssociationService.swift */,
 				021318AA27DF548600B0F1BD /* MetadatasService.swift */,
@@ -1263,6 +1266,7 @@
 				0288A8E127CD09E5008D7011 /* NotificationsKeys.swift in Sources */,
 				02B7921E27F7385A003AFFB9 /* Neighborhood.swift in Sources */,
 				02B57D9627FC430D005A567B /* ReportUserMainViewController.swift in Sources */,
+				02E21921283520A1002A1FCB /* NeighborhoodUploadPictureService.swift in Sources */,
 				02B7922127F73F6A003AFFB9 /* TempGroupMainViewController.swift in Sources */,
 				02CCE68927D7B51E00D6976C /* TagView.swift in Sources */,
 				023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */,

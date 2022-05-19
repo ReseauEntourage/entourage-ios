@@ -67,6 +67,17 @@ extension UIViewController {
             navBar?.barTintColor = mainColor
         }
     }
+    
+    func showWIP(parentVC:UIViewController?) {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "fermer".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        
+        customAlert.configureAlert(alertTitle: "W I P".localized, message: "Pas encore implémenté ;)".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: parentVC)
+        
+        customAlert.alertTagName = .None
+        //  customAlert.delegate = self
+        customAlert.show()
+    }
 }
 
 

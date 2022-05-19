@@ -285,6 +285,39 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
+    //MARK: - Create Post (chat_message)
+    
+    static func createPostMessage(groupId:Int,message:String?, urlImage:String? = nil ,completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIPostNeighborhoodPostMessage
+        endpoint = String.init(format: endpoint, "\(groupId)", token)
+
+        var content = [String:String]()
+       
+        if let message = message {
+            content["content"] = message
+        }
+        
+        if let urlImage = urlImage {
+            content["image_url"] = urlImage
+        }
+        
+        let parameters = ["chat_message" : content]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response Post group Post : \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error Post group Post - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
     //MARK: - Comments for Post -
     
     static func getCommentsFor(neighborhoodId:Int, parentPostId:Int, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {

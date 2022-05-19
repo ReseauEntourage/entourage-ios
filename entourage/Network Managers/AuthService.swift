@@ -99,12 +99,7 @@ struct AuthService {
     }
     
     //For Amazon S3 upload photo
-    static func prepareUploadPhotoS3( completion: @escaping (_ json:[String:AnyObject]?, _ error:EntourageNetworkError?) -> Void) {
-        
-        guard let token = UserDefaults.token else {return}
-        var endpoint = API_URL_USER_PREPARE_AVATAR_UPLOAD
-        endpoint = String.init(format: endpoint, token)
-
+    static func prepareUploadPhotoS3(endpoint:String, completion: @escaping (_ json:[String:AnyObject]?, _ error:EntourageNetworkError?) -> Void) {
         let parameters = ["content_type":"image/jpeg"]
         
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
