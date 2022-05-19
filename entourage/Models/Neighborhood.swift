@@ -170,7 +170,13 @@ struct PostMessage:Codable {
     var user:UserLightNeighborhood? = nil
     var commentsCount:Int = 0
     var messageImageUrl:String? = nil
-    var isRead = false
+    
+    private var read:Bool? = nil
+    var isRead:Bool {
+        get {
+            return read ?? false
+        }
+    }
     
     enum CodingKeys: String, CodingKey {
         case uid = "id"
@@ -182,6 +188,6 @@ struct PostMessage:Codable {
         case hasComments = "has_comments"
         case commentsCount = "comments_count"
         case messageImageUrl = "image_url"
-        case isRead = "read"
+        case read
     }
 }
