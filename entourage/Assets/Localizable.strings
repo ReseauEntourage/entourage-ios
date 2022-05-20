@@ -601,7 +601,7 @@ groupe";
 "neighborhood_comments_placeholder_discut" = "Discuter...";
 "neighborhood_comments_send" = "Envoyer";
 "neighborhood_no_messageComment" = "Pas encore de commentaire";
-"neighborhood_messageComment_notAuth" = "* Pour commenter cette publication, rejoingnez le groupe  « %@ » ! ";
+"neighborhood_messageComment_notAuth" = "Pour commenter cette publication, rejoignez le groupe “%@” !";
 //Params
 "neighborhood_params_title" = "Paramètres du groupe";
 "neighborhood_params_cgu" = "Règlement du groupe";
