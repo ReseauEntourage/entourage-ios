@@ -285,6 +285,30 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
+    static func reportNeighborhoodPost(groupId:Int,postId:Int,message:String?,tags:[String], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIReportPostNeighborhood
+        endpoint = String.init(format: endpoint,"\(groupId)","\(postId)", token)
+        
+        let _msg:String = message != nil ? (message!.isEmpty ? "." : message!) : "." //TODO: Supprimer lorsque nicolas aura fixé le WS
+        let parameters:[String:Any] = ["report":["message":_msg, "signals":tags]]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Endpoint report Group post \(endpoint) -- params : \(parameters)")
+                
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response report Group post: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error report Group post - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
     //MARK: - Create Post (chat_message)
     
     static func createPostMessage(groupId:Int,message:String?, urlImage:String? = nil ,completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
@@ -341,12 +365,14 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
-    static func postCommentFor(neighborhoodId:Int, parentPostId:Int, message:String, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+    static func postCommentFor(neighborhoodId:Int, parentPostId:Int, message:String, hasError:Bool = false, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIPostNeighborhoodPostMessage
         endpoint = String.init(format: endpoint, "\(neighborhoodId)", token)
 
-        let parameters = ["chat_message" : ["content":message,"parent_id":parentPostId]]
+        let contentStr = hasError ? "content0" : "content"
+        
+        let parameters = ["chat_message" : [contentStr:message,"parent_id":parentPostId]]
         
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IHProgressHUD
 
 class NeighborhoodDetailMessagesViewController: UIViewController {
     
@@ -32,10 +33,14 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     var messages = [PostMessage]()
     var meId:Int = 0
     
+    var messagesForRetry = [PostMessage]()
+    
     let placeholderTxt = "neighborhood_comments_placeholder_discut".localized
     
     var bottomConstraint:CGFloat = 0
     var isStartEditing = false
+    
+    var makeErrorForRetry = false //TODO: a supprimer après tests
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,16 +156,37 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         }
     }
     
-    func sendMessage(message:String) {
+    func sendMessage(message:String, isRetry:Bool, positionForRetry:Int = 0) {
         self.ui_textview_message.text = nil
         ui_iv_bt_send.image = UIImage.init(named: "ic_send_comment_off")
-        NeighborhoodService.postCommentFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId, message: message) { error in
+        NeighborhoodService.postCommentFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId, message: message,hasError: makeErrorForRetry) { error in
+            
             if error == nil {
-                
+                if isRetry {
+                    self.messagesForRetry.remove(at: positionForRetry)
+                }
                 self.getMessages()
                 return
             }
-            //TODO: Show Error post
+            else {
+                //Add custom post message for retry
+                if isRetry { return }
+                var postMsg = PostMessage()
+                postMsg.content = message
+                postMsg.user = UserLightNeighborhood()
+                postMsg.isRetryMsg = true
+                
+                if self.messagesForRetry.count == 0 {
+                    self.messagesForRetry.append(postMsg)
+                }
+                else {
+                    self.messagesForRetry.insert(postMsg, at: 0)
+                }
+                
+                self.ui_tableview.reloadData()
+                self.isStartEditing = false
+                self.ui_view_empty.isHidden = true
+            }
         }
     }
     
@@ -169,19 +195,43 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     }
     
     @IBAction func action_signal(_ sender: Any) {
-        showWIP(parentVC: self)
+        if let navvc = UIStoryboard.init(name: "Neighborhood_Report", bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
+            vc.groupId = neighborhoodId
+            vc.postId = parentCommentId
+            vc.parentDelegate = self
+            vc.signalType = .publication
+            self.present(navvc, animated: true)
+        }
+    }
+    //TODO: a supprimer après tests + mod WS
+    @IBAction func action_error(_ sender: UISwitch) {
+        if sender.isOn {
+            makeErrorForRetry = true
+        }
+        else {
+            makeErrorForRetry = false
+        }
     }
 }
 
 //MARK: - Tableview datasource/delegate -
 extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        return messages.count + messagesForRetry.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let message = messages[indexPath.row]
+        if messagesForRetry.count > 0 {
+            if indexPath.row < messagesForRetry.count {
+                let message = messagesForRetry[indexPath.row]
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe", for: indexPath) as! NeighborhoodMessageCell
+                cell.populateCell(isMe: true, message: message, isRetry: true, positionRetry: indexPath.row, delegate: self)
+                return cell
+            }
+        }
+        
+        let message = messages[indexPath.row - messagesForRetry.count]
         var cellId = "cellOther"
         var isMe = false
         if message.user?.sid == self.meId {
@@ -190,7 +240,7 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! NeighborhoodMessageCell
-        cell.populateCell(isMe: isMe, message: message, delegate: self)
+        cell.populateCell(isMe: isMe, message: message, isRetry: false, delegate: self)
         return cell
     }
 }
@@ -225,7 +275,7 @@ extension NeighborhoodDetailMessagesViewController: UITextViewDelegate {
     
     @objc func closeKb(_ sender:UIBarButtonItem?) {
         if let txt = ui_textview_message.text, txt != placeholderTxt, !txt.isEmpty {
-            self.sendMessage(message: txt)
+            self.sendMessage(message: txt, isRetry: false)
         }
         _ = ui_textview_message.resignFirstResponder()
     }
@@ -236,5 +286,18 @@ extension NeighborhoodDetailMessagesViewController:NeighborhoodMessageCellDelega
     func signalMessage(messageId: Int) {
         Logger.print("***** signal message \(messageId)")
         showWIP(parentVC: self)
+    }
+    
+    func retrySend(message: String,positionForRetry:Int) {
+        //TODO: a faire
+        self.sendMessage(message: message, isRetry: true, positionForRetry: positionForRetry)
+    }
+}
+
+//MARK: - GroupDetailDelegate -
+extension NeighborhoodDetailMessagesViewController:GroupDetailDelegate {
+    func showMessage(message: String, imageName: String?) {
+        //TODO: on affiche cette info ou une pop custom ?
+        IHProgressHUD.showSuccesswithStatus(message)
     }
 }

@@ -93,5 +93,12 @@ class NeighborhoodEventsCollectionviewCell: UICollectionViewCell {
     func populateCell(title:String,imageUrl:String?,dateFormatted:String, addressName:String) {
         ui_title.text = title
         ui_date_location.text = "\(dateFormatted)\n\(addressName)"
+        
+        if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
+            ui_image.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_detail_event"))
+        }
+        else {
+            ui_image.image = UIImage.init(named: "placeholder_detail_event")
+        }
     }
 }

@@ -197,7 +197,7 @@ extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
     }
     
     func signalGroup() {
-        if let  vc = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
+        if let  vc = UIStoryboard.init(name: "Neighborhood_Report", bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
             vc.modalPresentationStyle = .currentContext
             vc.group = neighborhood
             vc.parentDelegate = self

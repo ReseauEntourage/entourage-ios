@@ -71,7 +71,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                     <constraint firstAttribute="height" constant="16" id="vNZ-D1-GM8"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_detail_group" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-dD-e9j">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_photo_group" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-dD-e9j">
                                 <rect key="frame" x="28" y="202" width="374" height="184"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="184" id="tOZ-7N-3p2"/>
@@ -91,7 +91,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <rect key="frame" x="28" y="404" width="374" height="48"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agT-ek-9AZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="292" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Discuter…" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9K-Nf-KyW">
                                                 <rect key="frame" x="12" y="14" width="66" height="20.5"/>
@@ -107,18 +107,43 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnV-Yy-csW">
-                                        <rect key="frame" x="300" y="1" width="46" height="46"/>
+                                        <rect key="frame" x="328" y="1" width="46" height="46"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_plane_white" translatesAutoresizingMaskIntoConstraints="NO" id="OcC-WZ-d0f">
-                                                <rect key="frame" x="10.5" y="10.5" width="25" height="25"/>
-                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l0q-fA-Ouu">
+                                                <rect key="frame" x="-4" y="-4" width="54" height="54"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_send_comment" translatesAutoresizingMaskIntoConstraints="NO" id="8Pa-qh-Cs0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
+                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3e-HY-gu0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="8Pa-qh-Cs0" firstAttribute="top" secondItem="l0q-fA-Ouu" secondAttribute="top" id="C1H-lr-cXH"/>
+                                                    <constraint firstItem="S3e-HY-gu0" firstAttribute="top" secondItem="l0q-fA-Ouu" secondAttribute="top" id="HIs-KT-hge"/>
+                                                    <constraint firstAttribute="width" constant="54" id="SQX-hS-tBl"/>
+                                                    <constraint firstAttribute="height" constant="54" id="V6k-3Y-Swy"/>
+                                                    <constraint firstItem="S3e-HY-gu0" firstAttribute="leading" secondItem="l0q-fA-Ouu" secondAttribute="leading" id="VHd-mS-Ch3"/>
+                                                    <constraint firstItem="8Pa-qh-Cs0" firstAttribute="leading" secondItem="l0q-fA-Ouu" secondAttribute="leading" id="W08-1g-MAx"/>
+                                                    <constraint firstAttribute="bottom" secondItem="8Pa-qh-Cs0" secondAttribute="bottom" id="X5z-gq-tWW"/>
+                                                    <constraint firstAttribute="trailing" secondItem="8Pa-qh-Cs0" secondAttribute="trailing" id="dmH-W6-ojn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="S3e-HY-gu0" secondAttribute="trailing" id="neM-TG-sf9"/>
+                                                    <constraint firstAttribute="bottom" secondItem="S3e-HY-gu0" secondAttribute="bottom" id="yp0-FM-ji9"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="24"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                         </subviews>
-                                        <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="46" id="E4b-gL-T4J"/>
-                                            <constraint firstItem="OcC-WZ-d0f" firstAttribute="centerY" secondItem="dnV-Yy-csW" secondAttribute="centerY" id="X8x-qU-dWz"/>
+                                            <constraint firstItem="l0q-fA-Ouu" firstAttribute="centerY" secondItem="dnV-Yy-csW" secondAttribute="centerY" id="cYp-CZ-rgF"/>
                                             <constraint firstAttribute="height" constant="46" id="qgI-zc-f0G"/>
-                                            <constraint firstItem="OcC-WZ-d0f" firstAttribute="centerX" secondItem="dnV-Yy-csW" secondAttribute="centerX" id="zId-0P-QBj"/>
+                                            <constraint firstItem="l0q-fA-Ouu" firstAttribute="centerX" secondItem="dnV-Yy-csW" secondAttribute="centerX" id="vvG-A8-234"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -138,7 +163,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Fii-a9-N7Y"/>
                                     <constraint firstItem="dnV-Yy-csW" firstAttribute="leading" secondItem="agT-ek-9AZ" secondAttribute="trailing" constant="8" symbolic="YES" id="ISr-Q1-sv8"/>
-                                    <constraint firstAttribute="trailing" secondItem="dnV-Yy-csW" secondAttribute="trailing" constant="28" id="M6W-An-sSa"/>
+                                    <constraint firstAttribute="trailing" secondItem="dnV-Yy-csW" secondAttribute="trailing" id="M6W-An-sSa"/>
                                     <constraint firstItem="dnV-Yy-csW" firstAttribute="centerY" secondItem="20f-3G-Kdi" secondAttribute="centerY" id="O8I-Mz-pkh"/>
                                     <constraint firstAttribute="bottom" secondItem="agT-ek-9AZ" secondAttribute="bottom" id="RXx-Zl-1mA"/>
                                     <constraint firstItem="agT-ek-9AZ" firstAttribute="leading" secondItem="20f-3G-Kdi" secondAttribute="leading" id="RdA-J6-BgY"/>
@@ -209,9 +234,9 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bg_detail_group" width="392" height="286"/>
         <image name="ic_message_neighborhood" width="20" height="20"/>
-        <image name="ic_plane_white" width="25" height="25"/>
+        <image name="ic_send_comment" width="54" height="54"/>
+        <image name="placeholder_photo_group" width="391" height="110"/>
         <namedColor name="Beige">
             <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

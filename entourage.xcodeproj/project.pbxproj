@@ -209,6 +209,7 @@
 		02E2192728355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2192628355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift */; };
 		02E21929283637E9002A1FCB /* NeighborhoodPostAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E21928283637E9002A1FCB /* NeighborhoodPostAddViewController.swift */; };
 		02E2192B28368552002A1FCB /* NeighborhoodAddMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2192A28368552002A1FCB /* NeighborhoodAddMenuViewController.swift */; };
+		02E2192D2837A16F002A1FCB /* Neighborhood_Report.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02E2192C2837A16F002A1FCB /* Neighborhood_Report.storyboard */; };
 		02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */; };
 		02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */; };
 		02E77B44282CF9CF00786E27 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E77B43282CF9CF00786E27 /* Event.swift */; };
@@ -435,6 +436,7 @@
 		02E2192628355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
 		02E21928283637E9002A1FCB /* NeighborhoodPostAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostAddViewController.swift; sourceTree = "<group>"; };
 		02E2192A28368552002A1FCB /* NeighborhoodAddMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodAddMenuViewController.swift; sourceTree = "<group>"; };
+		02E2192C2837A16F002A1FCB /* Neighborhood_Report.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neighborhood_Report.storyboard; sourceTree = "<group>"; };
 		02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserSignalCell.swift; sourceTree = "<group>"; };
 		02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJCustomSlider.swift; sourceTree = "<group>"; };
 		02E77B43282CF9CF00786E27 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -694,6 +696,7 @@
 				0207BF8427F2059400631914 /* UserDetail.storyboard */,
 				02B7922427F74801003AFFB9 /* Neighborhood_Create.storyboard */,
 				02E7845C2811A8DB00177F13 /* Neighborhood.storyboard */,
+				02E2192C2837A16F002A1FCB /* Neighborhood_Report.storyboard */,
 				02E2192228352552002A1FCB /* Neighborhood_Message.storyboard */,
 			);
 			path = Storyboards;
@@ -1121,6 +1124,7 @@
 			files = (
 				025C92BE28340FD4000970D9 /* NeighborhoodEmptyEventCell.xib in Resources */,
 				02CCE67F27D78CAB00D6976C /* NunitoSans-Italic.ttf in Resources */,
+				02E2192D2837A16F002A1FCB /* Neighborhood_Report.storyboard in Resources */,
 				02490DC727EA246B00E2577B /* MJErrorInputView.xib in Resources */,
 				0207BF8527F2059400631914 /* UserDetail.storyboard in Resources */,
 				025FFE0B27DBAD5100783E8D /* ApiKeys.plist in Resources */,

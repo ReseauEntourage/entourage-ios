@@ -27,6 +27,9 @@ class ReportGroupSendViewController: UIViewController {
     var group:Neighborhood? = nil
     var signalType:GroupDetailSignalType = .group
     
+    var groupId:Int? = nil
+    var postId:Int? = nil
+    
     var tagsignals:Tags! = nil
     weak var pageDelegate:ReportGroupPageDelegate? = nil
     
@@ -94,6 +97,20 @@ class ReportGroupSendViewController: UIViewController {
             
             NeighborhoodService.reportNeighborhood(groupId:group.uid, message: message, tags: tagsSignalsWS) { error in
                 Logger.print("***** error reportGroup ? \(error)")
+                DispatchQueue.main.async {
+                    self.pageDelegate?.closeMain()
+                }
+            }
+        }
+        
+        if signalType == .publication {
+            guard let groupId = groupId, let postId = postId else {
+                return
+            }
+            
+            let tagsSignalsWS = tagsignals.getTagsForWS()
+            
+            NeighborhoodService.reportNeighborhoodPost(groupId:groupId, postId: postId, message: message, tags: tagsSignalsWS) { error in
                 DispatchQueue.main.async {
                     self.pageDelegate?.closeMain()
                 }

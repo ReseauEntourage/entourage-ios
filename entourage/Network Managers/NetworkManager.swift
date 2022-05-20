@@ -150,7 +150,7 @@ class NetworkManager {
                 completionHandler(nil,response,errorEntourage)
                 return
             }
-            completionHandler(nil,response,nil)
+            completionHandler(nil,response,EntourageNetworkError())
         }
         
         task.resume()

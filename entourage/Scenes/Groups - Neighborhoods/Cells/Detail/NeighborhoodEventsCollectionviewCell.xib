@@ -23,7 +23,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="136" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_detail_group" translatesAutoresizingMaskIntoConstraints="NO" id="DFe-Ah-zbi">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_detail_event" translatesAutoresizingMaskIntoConstraints="NO" id="DFe-Ah-zbi">
                         <rect key="frame" x="0.0" y="0.0" width="136" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="dwb-NO-LqP"/>
@@ -68,7 +68,7 @@ Location</string>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="bg_detail_group" width="392" height="286"/>
+        <image name="placeholder_detail_event" width="375" height="125"/>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

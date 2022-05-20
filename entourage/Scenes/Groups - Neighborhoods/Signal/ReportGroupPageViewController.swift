@@ -12,6 +12,9 @@ class ReportGroupPageViewController: UIPageViewController {
     var group:Neighborhood? = nil
     var signalType:GroupDetailSignalType = .group
     
+    var groupId:Int? = nil
+    var postId:Int? = nil
+    
     var reportVc:ReportGroupViewController? = nil
     weak var parentDelegate:GroupDetailDelegate? = nil
     
@@ -34,8 +37,6 @@ class ReportGroupPageViewController: UIPageViewController {
             if reportVc == nil {
                 reportVc = storyboard?.instantiateViewController(withIdentifier: "reportGroupSignalVC") as? ReportGroupViewController
                 reportVc?.pageDelegate = self
-                reportVc?.group = group
-                reportVc?.signalType = signalType
             }
             return reportVc
         }
@@ -54,6 +55,8 @@ extension ReportGroupPageViewController: ReportGroupPageDelegate {
             sendVc.pageDelegate = self
             sendVc.group = self.group
             sendVc.signalType = signalType
+            sendVc.postId = postId
+            sendVc.groupId = groupId
             setViewControllers([sendVc], direction: .forward, animated: true)
         }
     }
@@ -64,7 +67,16 @@ extension ReportGroupPageViewController: ReportGroupPageDelegate {
     }
     
     func closeMain() {
-        self.parentDelegate?.showMessage(message: "report_group_message_success".localized, imageName: "ic_partner_follow_on")
+        var message = ""
+        switch signalType {
+        case .group:
+            message = "report_group_message_success".localized
+        case .publication:
+            message = "report_publication_message_success".localized
+        case .comment:
+            message = "report_comment_message_success".localized
+        }
+        self.parentDelegate?.showMessage(message: message, imageName: "ic_partner_follow_on")
         self.parent?.dismiss(animated: true)
     }
 }

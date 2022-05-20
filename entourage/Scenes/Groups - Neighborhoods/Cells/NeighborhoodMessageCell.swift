@@ -18,8 +18,14 @@ class NeighborhoodMessageCell: UITableViewCell {
     
     @IBOutlet weak var ui_bt_signal_me: UIButton!
     
+    @IBOutlet weak var ui_lb_error: UILabel!
+    @IBOutlet weak var ui_view_error: UIView!
+    
+    
     let radius:CGFloat = 24
     var messageId:Int = 0
+    var messageForRetry = ""
+    var positionForRetry = 0
     
     weak var delegate:NeighborhoodMessageCellDelegate? = nil
     
@@ -32,9 +38,11 @@ class NeighborhoodMessageCell: UITableViewCell {
         ui_username.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 11), color: .black))
     }
     
-    func populateCell(isMe:Bool,message:PostMessage, delegate:NeighborhoodMessageCellDelegate) {
+    func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:NeighborhoodMessageCellDelegate) {
         messageId = message.uid
         self.delegate = delegate
+        self.messageForRetry = message.content
+        self.positionForRetry = positionRetry
         
         if isMe {
             ui_bt_signal_me?.isHidden = true
@@ -56,22 +64,36 @@ class NeighborhoodMessageCell: UITableViewCell {
         }
         
         ui_message.text = message.content
-        ui_date.text = " - le \(message.createdDateTimeFormatted)"
-        if let username = message.user?.displayName {
-            ui_username.text = "\(username)"
+        
+        if isRetry {
+            ui_view_error?.isHidden = false
+            ui_username.text = ""
+            ui_date.text = ""
         }
         else {
-            ui_username.text = "- !"
+            ui_view_error?.isHidden = true
+            
+            ui_date.text = " - le \(message.createdDateTimeFormatted)"
+            if let username = message.user?.displayName {
+                ui_username.text = "\(username)"
+            }
+            else {
+                ui_username.text = "- !"
+            }
         }
-        
     }
 
     @IBAction func action_signal_message(_ sender: Any) {
         //TODO: à faire
         delegate?.signalMessage(messageId: messageId)
     }
+    
+    @IBAction func action_retry(_ sender: Any) {
+        delegate?.retrySend(message: messageForRetry,positionForRetry:positionForRetry)
+    }
 }
 
 protocol NeighborhoodMessageCellDelegate:AnyObject {
     func signalMessage(messageId:Int)
+    func retrySend(message:String, positionForRetry:Int)
 }

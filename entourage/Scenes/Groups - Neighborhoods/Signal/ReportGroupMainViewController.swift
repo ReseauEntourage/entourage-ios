@@ -12,6 +12,9 @@ class ReportGroupMainViewController: BasePopViewController {
     var group:Neighborhood? = nil
     var signalType:GroupDetailSignalType = .group
     
+    var groupId:Int? = nil
+    var postId:Int? = nil
+    
     weak var parentDelegate:GroupDetailDelegate? = nil
     
     override func viewDidLoad() {
@@ -35,6 +38,8 @@ class ReportGroupMainViewController: BasePopViewController {
             vc.group = self.group
             vc.signalType = signalType
             vc.parentDelegate = parentDelegate
+            vc.groupId = groupId
+            vc.postId = postId
         }
     }
 }

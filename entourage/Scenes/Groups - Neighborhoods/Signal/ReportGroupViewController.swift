@@ -15,9 +15,6 @@ class ReportGroupViewController: UIViewController {
     @IBOutlet weak var ui_button_validate: UIButton!
     @IBOutlet weak var ui_tableview: UITableView!
     
-    var group:Neighborhood? = nil
-    var signalType:GroupDetailSignalType = .group
-    
     var tagsignals:Tags! = nil
     weak var pageDelegate:ReportGroupPageDelegate? = nil
     

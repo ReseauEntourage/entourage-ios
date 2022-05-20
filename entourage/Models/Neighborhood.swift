@@ -137,8 +137,8 @@ struct NeighborhoodUserLight:Codable {
 
 
 struct PostMessage:Codable {
-    var uid:Int
-    var content:String
+    var uid:Int = 0
+    var content:String = ""
     
     var createdDate:Date {
         get {
@@ -163,13 +163,15 @@ struct PostMessage:Codable {
         }
     }
     
-    var createdDateString:String
-    var messageType:String
+    var createdDateString:String = ""
+    var messageType:String = ""
     var parentPostId:Int? = nil
     var hasComments:Bool? = false
     var user:UserLightNeighborhood? = nil
     var commentsCount:Int = 0
     var messageImageUrl:String? = nil
+    
+    var isRetryMsg = false
     
     private var read:Bool? = nil
     var isRead:Bool {

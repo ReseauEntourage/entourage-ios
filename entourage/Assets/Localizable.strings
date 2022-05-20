@@ -635,7 +635,9 @@ groupe";
 
 //Report Group / comment / publication
 "report_group_title" = "Signaler le groupe";
+"report_publication_title" = "Signaler la publication";
 "report_group_message_success" = "Groupe signalé";
+"report_publication_message_success" = "Publication signalé";
 "report_group_description" = "Dites-nous la raison de votre signalement";
 "report_group_mandatory" = "- obligatoire";
 "report_group_next_button" = "Suivant";

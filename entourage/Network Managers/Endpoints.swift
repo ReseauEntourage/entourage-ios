@@ -43,7 +43,7 @@ let kAPIGetNeighborhoodPostsMessage = "neighborhoods/%@/chat_messages?token=%@&p
 
 let kAPIPostNeighborhoodPostMessage = "neighborhoods/%@/chat_messages?token=%@"
 let kAPIGetNeighborhoodMessages = "neighborhoods/%@/chat_messages/%@/comments?token=%@"
-
+let kAPIReportPostNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token=%@"
 
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
