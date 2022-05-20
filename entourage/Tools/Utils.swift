@@ -120,7 +120,7 @@ import UIKit
         var dateString = ""
         if date != nil {
             let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "dd/MM/YYYY"
+            dateFormat.dateFormat = "dd.MM.YYYY"
             dateString =  dateFormat.string(from: date!)
         }
         
@@ -131,7 +131,7 @@ import UIKit
         var dateString = ""
         if date != nil {
             let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "dd/MM/YYYY à HH:mm"
+            dateFormat.dateFormat = "dd.MM.YYYY à HH:mm"
             dateString =  dateFormat.string(from: date!)
         }
         

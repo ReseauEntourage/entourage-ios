@@ -316,7 +316,7 @@
 "buttonFollowOnPartner" = "Abonné";
 "buttonFollowOffPartner" = "S'abonner";
 "partner_pop_unfollow_title" = "Voulez-vous vous désabonner ?";
-"partner_pop_unfollow_message" = "En vous désabonnant, vous ne recevrez plus les notifications, nouvelles, et les nouveaux évènements de cette association ";
+"partner_pop_unfollow_message" = "En vous désabonnant, vous ne recevrez plus les notifications, nouvelles, et les nouveaux événements de cette association ";
 
 /**********
  Profile
@@ -326,7 +326,7 @@
 "profile_title" = "Profil";
 "mainUserTitleActivity" = "Mon activité";
 "mainUserTitleActions" = "Contributions";
-"mainUserTitleEvents" = "Évènements";
+"mainUserTitleEvents" = "Événements";
 
 "mainUserBioPlaceholder" = "Placeholder pour la bio ?";
 "mainUserBirthPlaceholder" = "Placeholder pour la date ?";
@@ -537,7 +537,7 @@
 /***
  * Create Post group
  */
-"neighborhood_menu_post_event" = "Créer un évènement sur le groupe";
+"neighborhood_menu_post_event" = "Créer un événement sur le groupe";
 "neighborhood_menu_post_post" = "Créer une publication";
 
 "neighborhood_add_post_title" = "Créer une publication";
@@ -561,8 +561,8 @@
 "neighborhoodInputSearch" = "Rechercher un groupe";
 "neighborhood_main_page_members" = "%d membres";
 "neighborhood_main_page_member" = "%d membre";
-"neighborhood_main_page_events_future_single" = "%d évènement prévu";
-"neighborhood_main_page_events_future_plural" = "%d évènements prévus";
+"neighborhood_main_page_events_future_single" = "%d événement prévu";
+"neighborhood_main_page_events_future_plural" = "%d événements prévus";
 
 "neighborhood_group_my_empty_title" = "Vous n’avez rejoint encore aucun groupe.";
 "neighborhood_group_my_empty_button" = "Découvrir les groupes";
@@ -582,18 +582,18 @@
 "neighborhood_detail_event_title" = "Événements";
 "neighborhood_detail_button_more" = "En savoir plus";
 
-"neighborhood_event_group_section_title" = "Évènements du groupe";
-"neighborhood_post_group_section_title" = "Fil d’actualité";
+"neighborhood_event_group_section_title" = "Tous les événements";
+"neighborhood_post_group_section_title" = "Fil d’actualités";
 "neighborhood_post_group_section_new_posts_title" = "Nouvelles publications";
 "neighborhood_post_group_section_old_posts_title" = "Anciennes publications";
-"neighborhood_empty_event_title" = "Pas encore d’évènements prévus dans ce
+"neighborhood_empty_event_title" = "Pas encore d’événements prévus dans ce
 groupe";
 "neighborhood_empty_event_subtitle" = "Cliquez sur « + » pour en créer un";
 "neighborhood_empty_post_title" = "Pas encore de publication sur ce groupe";
 "neighborhood_empty_post_subtitle" = "C’est l’occasion pour vous de partager la première nouvelle pour lancer la discussion ! ";
 "neighborhood_about_group_title" = "À propos du groupe";
 
-"neighborhood_post_noComment" = "Pas de commentaire";
+"neighborhood_post_noComment" = "Pas de commentaires";
 "neighborhood_post_1Comment" = "%d commentaire";
 "neighborhood_post_XComments" = "%d commentaires";
 

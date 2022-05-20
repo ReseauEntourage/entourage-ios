@@ -91,6 +91,7 @@
 		026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819BA278E105600A98A4A /* OTLoginNextViewController.swift */; };
 		026819C0278E105600A98A4A /* OTLoginChangePhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819BB278E105600A98A4A /* OTLoginChangePhoneViewController.swift */; };
 		026819C3278E10DA00A98A4A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819C2278E10D900A98A4A /* User.swift */; };
+		026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E54B12837F96200BE7993 /* MJShadowBottomView.swift */; };
 		02728DDB27F19A1000512DC0 /* PartnerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */; };
 		02728DDD27F19A3800512DC0 /* PartnerDetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */; };
 		0282637C282160B700B354F9 /* NeighborhoodCguCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282637B282160B700B354F9 /* NeighborhoodCguCell.swift */; };
@@ -326,6 +327,7 @@
 		026819BA278E105600A98A4A /* OTLoginNextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLoginNextViewController.swift; sourceTree = "<group>"; };
 		026819BB278E105600A98A4A /* OTLoginChangePhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLoginChangePhoneViewController.swift; sourceTree = "<group>"; };
 		026819C2278E10D900A98A4A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		026E54B12837F96200BE7993 /* MJShadowBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJShadowBottomView.swift; sourceTree = "<group>"; };
 		02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerDetailViewController.swift; sourceTree = "<group>"; };
 		02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerDetailInfoCell.swift; sourceTree = "<group>"; };
 		0282637B282160B700B354F9 /* NeighborhoodCguCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCguCell.swift; sourceTree = "<group>"; };
@@ -741,6 +743,7 @@
 				02A3DD2E27FD92600060EC2E /* MJDayMonthPicker.swift */,
 				0224596E27FF28FC00944DE4 /* MJErrorInputTextView.swift */,
 				0224597027FF290900944DE4 /* MJErrorInputTextView.xib */,
+				026E54B12837F96200BE7993 /* MJShadowBottomView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1313,6 +1316,7 @@
 				02E069DE279184B3006DB1B6 /* OTOnboardingV2StartViewController.swift in Sources */,
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
 				02E0098927E33DD200BB23CA /* WebLinkManager.swift in Sources */,
+				026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */,
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,
 				02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */,
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,

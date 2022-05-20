@@ -39,7 +39,7 @@ class NeighborhoodPostCell: UITableViewCell {
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
         ui_username.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoBold(size: 12), color: .black))
-        ui_date.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 9), color: .black))
+        ui_date.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoLight(size: 9), color: .black))
         ui_comment.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_comments_nb.setupFontAndColor(style: ApplicationTheme.getFontChampInput())
         

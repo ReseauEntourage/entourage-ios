@@ -116,7 +116,7 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         }
         
         let addressName:String = neighborhood.address?.displayAddress ?? "-"
-        membersCount = "\(membersCount) \(addressName)"
+        membersCount = "\(membersCount) . \(addressName)"
         
         ui_lbl_nb_members.text = membersCount
         
