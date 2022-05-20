@@ -37,6 +37,8 @@ class NeighborhoodPostPicturePreviewResizeViewController: BasePopViewController 
         self.ui_iv_preview.image = self.currentImage
         self.ui_scrollview.maximumZoomScale = 10
         self.ui_scrollview.layer.cornerRadius = cornerRadiusImage
+        self.ui_scrollview.layer.borderColor = UIColor.appOrangeLight.cgColor
+        self.ui_scrollview.layer.borderWidth = 2
         
         ui_bt_valide.isHidden = false
         ui_top_view.isHidden = false

@@ -541,10 +541,10 @@
 "neighborhood_menu_post_post" = "Créer une publication";
 
 "neighborhood_add_post_title" = "Créer une publication";
-"neighborhood_add_post_message_title" = "Écrire une description";
-"neighborhood_add_post_message_subtitle" = "- facultatif";
+"neighborhood_add_post_message_title" = "Écrire votre message";
+"neighborhood_add_post_message_subtitle" = "";
 "neighborhood_add_post_message_placeholder" = "Écrivez votre message…";
-"neighborhood_add_post_image_title" = "Ajouter une photo";
+"neighborhood_add_post_image_title" = "Ajouter une image";
 "neighborhood_add_post_image_subtitle" = "- facultatif";
 "neighborhood_add_post_send_button" = "Partager";
 "neighborhood_add_post_title_image" = "Ajouter une image";

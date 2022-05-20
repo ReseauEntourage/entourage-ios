@@ -856,7 +856,7 @@ L4</string>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B2J-zQ-FCg">
                                         <rect key="frame" x="28" y="86" width="358" height="202"/>
-                                        <color key="backgroundColor" name="orange_light_a50"/>
+                                        <color key="backgroundColor" name="Beige"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="B2J-zQ-FCg" secondAttribute="height" multiplier="326:184" id="Q4b-9i-oHa"/>
                                         </constraints>
@@ -865,15 +865,16 @@ L4</string>
                                         <rect key="frame" x="196.5" y="177" width="21" height="20"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ft4-iF-ZLf">
-                                        <rect key="frame" x="45" y="338" width="324" height="110"/>
+                                        <rect key="frame" x="45" y="338" width="324" height="124"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ino-if-6d2">
-                                                <rect key="frame" x="0.0" y="0.0" width="324" height="50"/>
+                                                <rect key="frame" x="41.5" y="0.0" width="241" height="50"/>
                                                 <color key="backgroundColor" name="orange_app"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="PSl-N7-SNb"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <inset key="contentEdgeInsets" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                                 <state key="normal" title="Importer depuis la gallerie">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -882,12 +883,13 @@ L4</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf3-k2-Z1K">
-                                                <rect key="frame" x="0.0" y="60" width="324" height="50"/>
+                                                <rect key="frame" x="68" y="74" width="188" height="50"/>
                                                 <color key="backgroundColor" name="orange_light_a50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="cP2-bn-NUc"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                <inset key="contentEdgeInsets" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                                 <state key="normal" title="Prendre une photo">
                                                     <color key="titleColor" name="orange_app"/>
                                                 </state>
@@ -898,17 +900,15 @@ L4</string>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="vf3-k2-Z1K" firstAttribute="centerX" secondItem="Ft4-iF-ZLf" secondAttribute="centerX" id="0je-MY-Gba"/>
                                             <constraint firstItem="Ino-if-6d2" firstAttribute="top" secondItem="Ft4-iF-ZLf" secondAttribute="top" id="0wA-zH-v9S"/>
-                                            <constraint firstItem="vf3-k2-Z1K" firstAttribute="top" secondItem="Ino-if-6d2" secondAttribute="bottom" constant="10" id="1lR-ay-guZ"/>
-                                            <constraint firstItem="vf3-k2-Z1K" firstAttribute="leading" secondItem="Ino-if-6d2" secondAttribute="leading" id="6xE-Xf-sgu"/>
+                                            <constraint firstItem="vf3-k2-Z1K" firstAttribute="top" secondItem="Ino-if-6d2" secondAttribute="bottom" constant="24" id="1lR-ay-guZ"/>
                                             <constraint firstAttribute="bottom" secondItem="vf3-k2-Z1K" secondAttribute="bottom" id="Ckp-j7-sgc"/>
-                                            <constraint firstItem="Ino-if-6d2" firstAttribute="leading" secondItem="Ft4-iF-ZLf" secondAttribute="leading" id="fRe-QX-vwS"/>
-                                            <constraint firstItem="vf3-k2-Z1K" firstAttribute="trailing" secondItem="Ino-if-6d2" secondAttribute="trailing" id="lAX-w2-45w"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ino-if-6d2" secondAttribute="trailing" id="ml9-yd-FX9"/>
+                                            <constraint firstItem="Ino-if-6d2" firstAttribute="centerX" secondItem="Ft4-iF-ZLf" secondAttribute="centerX" id="Ypq-MQ-dIw"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="BeigeClair"/>
                                 <constraints>
                                     <constraint firstItem="wNp-Dp-C2T" firstAttribute="centerY" secondItem="B2J-zQ-FCg" secondAttribute="centerY" id="3yj-qg-9L5"/>
                                     <constraint firstItem="Ft4-iF-ZLf" firstAttribute="leading" secondItem="L7Y-p3-7dD" secondAttribute="leading" constant="45" id="7Vc-l8-4jR"/>
@@ -1001,13 +1001,13 @@ L4</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zoy-0H-S9Q">
-                                        <rect key="frame" x="217.5" y="347" width="100" height="50"/>
+                                        <rect key="frame" x="244" y="347" width="92" height="50"/>
                                         <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="D39-CY-GcN"/>
                                             <constraint firstAttribute="height" constant="50" id="gvZ-sF-8H9"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                         <state key="normal" title="Valider">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -1024,13 +1024,13 @@ L4</string>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SiZ-qg-ybF">
-                                        <rect key="frame" x="96.5" y="347" width="100" height="50"/>
+                                        <rect key="frame" x="78" y="347" width="118" height="50"/>
                                         <color key="backgroundColor" name="orange_light_a50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="WIc-1V-EDV"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="vDy-SG-6Tn"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                         <state key="normal" title="Supprimer">
                                             <color key="titleColor" name="orange_app"/>
                                         </state>
@@ -1042,7 +1042,6 @@ L4</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="UuD-ZK-ja2" firstAttribute="top" secondItem="cdy-zb-FgO" secondAttribute="top" id="2Cj-Qa-hAB"/>
-                                    <constraint firstItem="zoy-0H-S9Q" firstAttribute="leading" secondItem="vCL-Rz-0No" secondAttribute="trailing" constant="10" id="3uH-HL-7tt"/>
                                     <constraint firstAttribute="trailing" secondItem="gTS-OW-WcN" secondAttribute="trailing" constant="24" id="4by-lV-Ijn"/>
                                     <constraint firstItem="vCL-Rz-0No" firstAttribute="centerX" secondItem="cdy-zb-FgO" secondAttribute="centerX" id="4gB-Ei-JRe"/>
                                     <constraint firstItem="HCu-Hr-hOE" firstAttribute="top" secondItem="gTS-OW-WcN" secondAttribute="bottom" constant="16" id="9J8-W6-Noy"/>
@@ -1054,10 +1053,11 @@ L4</string>
                                     <constraint firstItem="VBN-gg-p8F" firstAttribute="leading" secondItem="cdy-zb-FgO" secondAttribute="leading" constant="28" id="Ts6-ab-AuB"/>
                                     <constraint firstItem="gTS-OW-WcN" firstAttribute="leading" secondItem="cdy-zb-FgO" secondAttribute="leading" constant="24" id="TxO-Lr-aJn"/>
                                     <constraint firstAttribute="trailing" secondItem="HCu-Hr-hOE" secondAttribute="trailing" constant="28" id="aC0-js-30I"/>
+                                    <constraint firstItem="SiZ-qg-ybF" firstAttribute="leading" secondItem="cdy-zb-FgO" secondAttribute="leading" constant="78" id="beb-XT-BLz"/>
                                     <constraint firstItem="gTS-OW-WcN" firstAttribute="top" secondItem="UuD-ZK-ja2" secondAttribute="bottom" constant="8" id="gZH-t5-OvR"/>
                                     <constraint firstAttribute="trailing" secondItem="VBN-gg-p8F" secondAttribute="trailing" constant="28" id="mrn-7B-SHv"/>
-                                    <constraint firstItem="vCL-Rz-0No" firstAttribute="leading" secondItem="SiZ-qg-ybF" secondAttribute="trailing" constant="10" id="oxL-It-WIr"/>
                                     <constraint firstItem="VBN-gg-p8F" firstAttribute="top" secondItem="gTS-OW-WcN" secondAttribute="bottom" constant="16" id="tny-L6-aQT"/>
+                                    <constraint firstAttribute="trailing" secondItem="zoy-0H-S9Q" secondAttribute="trailing" constant="78" id="uhg-tV-lh6"/>
                                     <constraint firstAttribute="trailing" secondItem="UuD-ZK-ja2" secondAttribute="trailing" id="ukV-2f-P5U"/>
                                     <constraint firstItem="HCu-Hr-hOE" firstAttribute="centerX" secondItem="cdy-zb-FgO" secondAttribute="centerX" id="yQN-98-75q"/>
                                 </constraints>
