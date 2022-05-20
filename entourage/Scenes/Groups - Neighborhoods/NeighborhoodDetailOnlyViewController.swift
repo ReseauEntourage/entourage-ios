@@ -16,6 +16,8 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
     var neighborhoodId:Int = 0
     var neighborhood:Neighborhood? = nil
     
+    weak var delegate:NeighborhoodDetailViewControllerDelegate? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +63,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
                     
                     self.neighborhood?.membersCount = count
                     self.ui_tableview.reloadData()
+                    self.delegate?.refreshNeighborhoodModified()
                 }
             }
         }
@@ -74,6 +77,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
                     self.neighborhood?.membersCount = count
                     
                     self.ui_tableview.reloadData()
+                    self.delegate?.refreshNeighborhoodModified()
                 }
             }
         }

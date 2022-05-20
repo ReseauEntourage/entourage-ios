@@ -195,6 +195,7 @@ class NeighborhoodDetailViewController: UIViewController {
                     
                     self.neighborhood?.membersCount = count
                     self.ui_tableview.reloadData()
+                    self.getNeighborhoodDetail()
                 }
             }
         }
@@ -208,6 +209,7 @@ class NeighborhoodDetailViewController: UIViewController {
                     self.neighborhood?.membersCount = count
                     
                     self.ui_tableview.reloadData()
+                    self.getNeighborhoodDetail()
                 }
             }
         }
@@ -407,6 +409,7 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
         let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
         if let navvc = sb.instantiateViewController(withIdentifier: "neighborhoodDetailOnlyNav") as? UINavigationController, let vc = navvc.topViewController as? NeighborhoodDetailOnlyViewController {
             vc.neighborhoodId = self.neighborhoodId
+            vc.delegate = self
             self.navigationController?.present(navvc, animated: true)
         }
     }
@@ -449,4 +452,14 @@ extension NeighborhoodDetailViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.dismiss(animated: true)
     }
+}
+
+extension NeighborhoodDetailViewController:NeighborhoodDetailViewControllerDelegate {
+    func refreshNeighborhoodModified() {
+        self.getNeighborhoodDetail()
+    }
+}
+
+protocol NeighborhoodDetailViewControllerDelegate: AnyObject {
+    func refreshNeighborhoodModified()
 }
