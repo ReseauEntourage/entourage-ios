@@ -23,7 +23,7 @@ class NeighborhoodEmptyEventCell: UITableViewCell {
         super.awakeFromNib()
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         
-        ui_title_section.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
+        ui_title_section.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
         ui_subtitle.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange(size: 15, color: .appOrangeLight))
         

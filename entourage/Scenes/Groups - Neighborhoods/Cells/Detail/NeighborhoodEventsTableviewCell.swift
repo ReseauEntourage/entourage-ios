@@ -34,6 +34,11 @@ class NeighborhoodEventsTableviewCell: UITableViewCell {
         layout.scrollDirection = .horizontal
         
         ui_collectionview.setCollectionViewLayout(layout, animated: true)
+        ui_title_section.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
+        ui_title_section.text = "neighborhood_event_group_section_title".localized
+        
+       let bt_more = Utils.formatStringUnderline(textString: "neighborhood_event_group_section_title_more".localized, textColor: .appOrange,font: ApplicationTheme.getFontQuickSandBold(size: 14))
+        ui_bt_show_more.attributedText = bt_more
     }
 
     @IBAction func action_show_all(_ sender: Any) {

@@ -116,16 +116,16 @@
                                         <rect key="frame" x="0.0" y="738" width="414" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8y3-vk-GNC">
-                                                <rect key="frame" x="76.5" y="15" width="261" height="50"/>
-                                                <color key="backgroundColor" name="orange_app"/>
+                                                <rect key="frame" x="167.5" y="15" width="79" height="50"/>
+                                                <color key="backgroundColor" name="orange_light_a50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="LqF-0j-nTM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="18"/>
                                                 <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="Appliquer les modifications">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Next">
+                                                    <color key="titleColor" name="orange_app"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="action_validate:" destination="Vfi-Cm-o81" eventType="touchUpInside" id="a2o-1H-hAf"/>

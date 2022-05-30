@@ -32,10 +32,10 @@ class ReportGroupViewController: UIViewController {
         ui_lbl_mandatory.text = "report_group_mandatory".localized
         
         ui_button_validate.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
-        ui_button_validate.titleLabel?.textColor = .white
+        ui_button_validate.setTitleColor(.appOrange, for: .normal)
         ui_button_validate.layer.cornerRadius = ui_button_validate.frame.height / 2
         ui_button_validate.setTitle("report_group_next_button".localized, for: .normal)
-        ui_button_validate.backgroundColor = .appOrangeLight
+        ui_button_validate.backgroundColor = .appOrangeLight_50
         
         //TODO: on affiche le fond transparent pour l'alerte ou un fond blanc ?
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))

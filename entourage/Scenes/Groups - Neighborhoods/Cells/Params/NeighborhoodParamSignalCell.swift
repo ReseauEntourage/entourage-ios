@@ -11,9 +11,11 @@ class NeighborhoodParamSignalCell: UITableViewCell {
 
     @IBOutlet weak var ui_title: UILabel!
     
+    @IBOutlet weak var ui_constraint_title_bottom: NSLayoutConstraint!
     weak var delegate:NeighborhoodParamCellDelegate? = nil
     
     var isQuit = false
+    let marginBottom:CGFloat = 20
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +29,7 @@ class NeighborhoodParamSignalCell: UITableViewCell {
         
         if isQuit {
             ui_title.text = "neighborhood_params_quit".localized
+            ui_constraint_title_bottom.constant = marginBottom
         }
         else {
             ui_title.text = "neighborhood_params_signal".localized

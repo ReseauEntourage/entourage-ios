@@ -582,7 +582,8 @@
 "neighborhood_detail_event_title" = "Événements";
 "neighborhood_detail_button_more" = "En savoir plus";
 
-"neighborhood_event_group_section_title" = "Tous les événements";
+"neighborhood_event_group_section_title_more" = "Tous les événements";
+"neighborhood_event_group_section_title" = "Événements du groupe";
 "neighborhood_post_group_section_title" = "Fil d’actualités";
 "neighborhood_post_group_section_new_posts_title" = "Nouvelles publications";
 "neighborhood_post_group_section_old_posts_title" = "Anciennes publications";
