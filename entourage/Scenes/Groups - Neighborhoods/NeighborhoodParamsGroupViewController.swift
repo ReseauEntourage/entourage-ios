@@ -138,7 +138,7 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! NeighborhoodParamSignalCell
-                cell.populateCell(isQuit: false,delegate: self)
+                cell.populateCell(isQuit: false, hasQuit: false,delegate: self)
                 return cell
             }
         case .Member:
@@ -153,11 +153,11 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! NeighborhoodParamSignalCell
-                cell.populateCell(isQuit: false,delegate: self)
+                cell.populateCell(isQuit: false, hasQuit: true,delegate: self)
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! NeighborhoodParamSignalCell
-                cell.populateCell(isQuit: true,delegate: self)
+                cell.populateCell(isQuit: true, hasQuit: true,delegate: self)
                 return cell
             }
         case .Viewer:
@@ -168,7 +168,7 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! NeighborhoodParamSignalCell
-                cell.populateCell(isQuit: false,delegate: self)
+                cell.populateCell(isQuit: false, hasQuit: false,delegate: self)
                 return cell
             }
         }

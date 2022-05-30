@@ -37,7 +37,9 @@ class NeighborhoodCreateValidateViewController: UIViewController {
     }
     
     @IBAction func action_post_message(_ sender: Any) {
-        showWIP(parentVC: self)
+        self.dismiss(animated: true) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationCreatePostNewNeighborhood), object: nil, userInfo: ["neighborhoodId":self.newNeighborhood?.uid as Any])
+        }
     }
     
     @IBAction func action_pass(_ sender: Any) {

@@ -95,11 +95,20 @@ class NeighborhoodHomeViewController: UIViewController {
         
         //Notif for show new created group
         NotificationCenter.default.addObserver(self, selector: #selector(showNewNeighborhood(_:)), name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowNew), object: nil)
+        
+        //Notif for show create new post for newly created group
+        NotificationCenter.default.addObserver(self, selector: #selector(showCreatePostNewNeighborhood(_:)), name: NSNotification.Name(rawValue: kNotificationCreatePostNewNeighborhood), object: nil)
     }
     
     @objc func showNewNeighborhood(_ notification:Notification) {
         if let neighId = notification.userInfo?["neighborhoodId"] as? Int {
             self.showNeighborhood(neighborhoodId: neighId, isAfterCreation:true)
+        }
+    }
+    
+    @objc func showCreatePostNewNeighborhood(_ notification:Notification) {
+        if let neighId = notification.userInfo?["neighborhoodId"] as? Int {
+            self.showNeighborhood(neighborhoodId: neighId, isAfterCreation:true, isShowCreatePost:true)
         }
     }
     
@@ -407,11 +416,12 @@ class NeighborhoodHomeViewController: UIViewController {
         ui_view_empty_discover.isHidden = true
     }
     
-    func showNeighborhood(neighborhoodId:Int, isAfterCreation:Bool = false) {
+    func showNeighborhood(neighborhoodId:Int, isAfterCreation:Bool = false, isShowCreatePost:Bool = false) {
         let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
         if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
             vc.isAfterCreation = isAfterCreation
             vc.neighborhoodId = neighborhoodId
+            vc.isShowCreatePost = isShowCreatePost
             self.navigationController?.present(nav, animated: true)
         }
     }

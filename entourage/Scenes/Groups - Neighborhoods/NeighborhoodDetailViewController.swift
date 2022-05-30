@@ -36,6 +36,7 @@ class NeighborhoodDetailViewController: UIViewController {
     let nbOfItemsBeforePagingReload = 5
     var isLoading = false
     var isAfterCreation = true
+    var isShowCreatePost = false
     
     var pullRefreshControl = UIRefreshControl()
     
@@ -56,6 +57,14 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_button_add.isHidden = true
         
         getNeighborhoodDetail()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isShowCreatePost {
+            showCreatePost()
+            isShowCreatePost = false
+        }
     }
     
     func registerCellsNib() {
@@ -240,6 +249,14 @@ class NeighborhoodDetailViewController: UIViewController {
     @IBAction func action_create(_ sender: Any) {
         if let vc = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil).instantiateViewController(withIdentifier: "AddMenuVC") as? NeighborhoodAddMenuViewController {
             vc.modalPresentationStyle = .overCurrentContext
+            vc.neighborhoodId = self.neighborhoodId
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
+    
+    func showCreatePost() {
+        let sb = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController  {
             vc.neighborhoodId = self.neighborhoodId
             self.navigationController?.present(vc, animated: true)
         }

@@ -23,7 +23,7 @@ class NeighborhoodParamSignalCell: UITableViewCell {
         ui_title.text = ""
     }
     
-    func populateCell(isQuit:Bool,delegate:NeighborhoodParamCellDelegate) {
+    func populateCell(isQuit:Bool, hasQuit:Bool,delegate:NeighborhoodParamCellDelegate) {
         self.isQuit = isQuit
         self.delegate = delegate
         
@@ -32,6 +32,9 @@ class NeighborhoodParamSignalCell: UITableViewCell {
             ui_constraint_title_bottom.constant = marginBottom
         }
         else {
+            if !hasQuit {
+                ui_constraint_title_bottom.constant = marginBottom
+            }
             ui_title.text = "neighborhood_params_signal".localized
         }
     }
