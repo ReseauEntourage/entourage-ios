@@ -36,6 +36,10 @@ class NeighborhoodMessageCell: UITableViewCell {
         ui_message.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_date.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 11), color: .black))
         ui_username.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 11), color: .black))
+        
+        let alertTheme = MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoRegularItalic(size: 11), color: .red)
+        ui_lb_error?.setupFontAndColor(style: alertTheme)
+        ui_lb_error?.text = "neighborhood_error_messageSend".localized
     }
     
     func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:NeighborhoodMessageCellDelegate) {

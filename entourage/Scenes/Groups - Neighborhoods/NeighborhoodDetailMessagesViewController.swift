@@ -159,7 +159,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     func sendMessage(message:String, isRetry:Bool, positionForRetry:Int = 0) {
         self.ui_textview_message.text = nil
         ui_iv_bt_send.image = UIImage.init(named: "ic_send_comment_off")
-        NeighborhoodService.postCommentFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId, message: message,hasError: makeErrorForRetry) { error in
+        NeighborhoodService.postCommentFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId, message: message, hasError: makeErrorForRetry) { error in
             
             if error == nil {
                 if isRetry {
@@ -183,9 +183,18 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                     self.messagesForRetry.insert(postMsg, at: 0)
                 }
                 
-                self.ui_tableview.reloadData()
                 self.isStartEditing = false
                 self.ui_view_empty.isHidden = true
+                if self.messages.count + self.messagesForRetry.count > 1 {
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    DispatchQueue.main.async {
+                        self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: true)
+                        self.ui_tableview.reloadData()
+                    }
+                }
+                else {
+                    self.ui_tableview.reloadData()
+                }
             }
         }
     }
