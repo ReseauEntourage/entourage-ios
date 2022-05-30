@@ -35,6 +35,7 @@ class NeighborhoodDetailViewController: UIViewController {
     let itemsPerPage = 25 //Default WS
     let nbOfItemsBeforePagingReload = 5
     var isLoading = false
+    var isAfterCreation = true
     
     var pullRefreshControl = UIRefreshControl()
     
@@ -297,7 +298,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                if self.neighborhood!.isMember {
+                if self.neighborhood!.isMember && !isAfterCreation {
                     let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodDetailTopMemberCell.identifier, for: indexPath) as! NeighborhoodDetailTopMemberCell
                     cell.populateCell(neighborhood: self.neighborhood,isFollowingGroup: true, delegate: self)
                     return cell

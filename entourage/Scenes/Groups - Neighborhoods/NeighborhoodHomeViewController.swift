@@ -99,7 +99,7 @@ class NeighborhoodHomeViewController: UIViewController {
     
     @objc func showNewNeighborhood(_ notification:Notification) {
         if let neighId = notification.userInfo?["neighborhoodId"] as? Int {
-            self.showNeighborhood(neighborhoodId: neighId)
+            self.showNeighborhood(neighborhoodId: neighId, isAfterCreation:true)
         }
     }
     
@@ -407,9 +407,10 @@ class NeighborhoodHomeViewController: UIViewController {
         ui_view_empty_discover.isHidden = true
     }
     
-    func showNeighborhood(neighborhoodId:Int) {
+    func showNeighborhood(neighborhoodId:Int, isAfterCreation:Bool = false) {
         let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
         if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
+            vc.isAfterCreation = isAfterCreation
             vc.neighborhoodId = neighborhoodId
             self.navigationController?.present(nav, animated: true)
         }
