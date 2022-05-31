@@ -132,7 +132,7 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     //MARK: - Network -
-    func getNeighborhoodDetail() {
+    func getNeighborhoodDetail(hasToRefreshLists:Bool = false) {
         self.currentPagingPage = 1
         self.isLoading = true
         NeighborhoodService.getNeighborhoodDetail(id: neighborhoodId) { group, error in
@@ -147,6 +147,10 @@ class NeighborhoodDetailViewController: UIViewController {
             self.isLoading = false
             
             self.populateTopView()
+            
+            if hasToRefreshLists {
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
+            }
         }
     }
     
@@ -209,7 +213,7 @@ class NeighborhoodDetailViewController: UIViewController {
                     
                     self.neighborhood?.membersCount = count
                     self.ui_tableview.reloadData()
-                    self.getNeighborhoodDetail()
+                    self.getNeighborhoodDetail(hasToRefreshLists:true)
                 }
             }
         }
@@ -223,7 +227,7 @@ class NeighborhoodDetailViewController: UIViewController {
                     self.neighborhood?.membersCount = count
                     
                     self.ui_tableview.reloadData()
-                    self.getNeighborhoodDetail()
+                    self.getNeighborhoodDetail(hasToRefreshLists:true)
                 }
             }
         }
@@ -480,7 +484,7 @@ extension NeighborhoodDetailViewController: MJNavBackViewDelegate {
 
 extension NeighborhoodDetailViewController:NeighborhoodDetailViewControllerDelegate {
     func refreshNeighborhoodModified() {
-        self.getNeighborhoodDetail()
+        self.getNeighborhoodDetail(hasToRefreshLists:true)
     }
 }
 

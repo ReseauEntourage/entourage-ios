@@ -74,9 +74,12 @@ class NeighborhoodHomeViewController: UIViewController {
     var isLoading = false
     var isSendedSearch = false // Use to show empty search view only if we start search ;)
     
-    var currentPage = 1
+    var currentPageMy = 1
+    var currentPageDiscover = 1
     let numberOfItemsForWS = 20 // Arbitrary nb of items used for pagging
     let nbOfItemsBeforePagingReload = 5 // Arbitrary nb of items from the end of the list to send new call
+    
+    var pullRefreshControl = UIRefreshControl()
     
     //MARK: - Lifecycle -
     
@@ -98,6 +101,10 @@ class NeighborhoodHomeViewController: UIViewController {
         
         //Notif for show create new post for newly created group
         NotificationCenter.default.addObserver(self, selector: #selector(showCreatePostNewNeighborhood(_:)), name: NSNotification.Name(rawValue: kNotificationCreatePostNewNeighborhood), object: nil)
+        
+        //Notif for updating neighborhoods after tabbar selected
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationNeighborhoodsUpdate), object: nil)
+        
     }
     
     @objc func showNewNeighborhood(_ notification:Notification) {
@@ -112,13 +119,39 @@ class NeighborhoodHomeViewController: UIViewController {
         }
     }
     
-    @objc func updateFromCreate() {
-        currentPage = 1
+    @objc func refreshDatasFromTab() {
+        currentPageMy = 1
+        currentPageDiscover = 1
+        isSearch = false
+        
         if isGroupsSelected {
+            currentSelectedIsGroup = true
+            if self.myNeighborhoods.count > 0 {
+                self.gotoTop(isAnimated:false)
+            }
+            getNeighborhoods(reloadOther:true)
+        }
+        else {
+            currentSelectedIsGroup = false
+            if self.neighborhoodsDiscovered.count > 0 {
+                self.gotoTop(isAnimated:false)
+            }
+            getNeighborhoodsSuggestions(reloadOther:true)
+        }
+    }
+    
+    @objc func refreshDatas() {
+        updateFromCreate()
+    }
+    
+    @objc func updateFromCreate() {
+        if isGroupsSelected {
+            currentPageMy = 1
             currentSelectedIsGroup = true
             getNeighborhoods()
         }
         else {
+            currentPageDiscover = 1
             currentSelectedIsGroup = false
             getNeighborhoodsSuggestions()
         }
@@ -143,71 +176,91 @@ class NeighborhoodHomeViewController: UIViewController {
     }
     
     //MARK: - Network -
-    func getNeighborhoods() {
+    func getNeighborhoods(isReloadFromTab:Bool = false, reloadOther:Bool = false) {
         if self.isLoading { return }
         
         guard let token = UserDefaults.currentUser?.uuid else { return }
         if self.myNeighborhoods.isEmpty { self.ui_tableview.reloadData() }
         
-        IHProgressHUD.show()
+        if !isReloadFromTab {
+            IHProgressHUD.show()
+        }
+            
         self.isSearch = false
         self.isLoading = true
-        NeighborhoodService.getNeighborhoodsForUserId(token,currentPage: currentPage, per: numberOfItemsForWS, completion: { groups, error in
+        NeighborhoodService.getNeighborhoodsForUserId(token,currentPage: currentPageMy, per: numberOfItemsForWS, completion: { groups, error in
             IHProgressHUD.dismiss()
+            self.pullRefreshControl.endRefreshing()
             self.isfirstLoadingMyGroup = false
             if let groups = groups {
-                if self.currentPage > 1 {
+                if self.currentPageMy > 1 {
                     self.myNeighborhoods.append(contentsOf: groups)
                 }
                 else {
                     self.myNeighborhoods = groups
                 }
-                
-                self.ui_tableview.reloadData()
-                if self.myNeighborhoods.count > 0 && self.currentPage == 1 {
-                    self.gotoTop()
+                if !isReloadFromTab {
+                    self.ui_tableview.reloadData()
+                    if self.myNeighborhoods.count > 0 && self.currentPageMy == 1 {
+                        self.gotoTop()
+                    }
                 }
             }
-            if self.myNeighborhoods.count == 0 {
-                self.showEmptyView()
+            if !isReloadFromTab {
+                if self.myNeighborhoods.count == 0 {
+                    self.showEmptyView()
+                }
+                else {
+                    self.hideEmptyView()
+                }
+                
+                self.ui_tableview.reloadData()
             }
-            else {
-                self.hideEmptyView()
-            }
-            self.ui_tableview.reloadData()
             self.isLoading = false
+            if reloadOther {
+                self.getNeighborhoodsSuggestions(isReloadFromTab: true)
+            }
         })
     }
     
-    func getNeighborhoodsSuggestions() {
+    func getNeighborhoodsSuggestions(isReloadFromTab:Bool = false, reloadOther:Bool = false) {
         if self.isLoading { return }
-        IHProgressHUD.show()
+        
+        if !isReloadFromTab {
+            IHProgressHUD.show()
+        }
+        
         self.isSearch = false
         self.isLoading = true
-        NeighborhoodService.getSuggestNeighborhoods(currentPage: currentPage, per: numberOfItemsForWS) { groups, error in
+        NeighborhoodService.getSuggestNeighborhoods(currentPage: currentPageDiscover, per: numberOfItemsForWS) { groups, error in
             IHProgressHUD.dismiss()
-            
+            self.pullRefreshControl.endRefreshing()
             if let groups = groups {
-                if self.currentPage > 1 {
+                if self.currentPageDiscover > 1 {
                     self.neighborhoodsDiscovered.append(contentsOf: groups)
                 }
                 else {
                     self.neighborhoodsDiscovered = groups
                 }
                 // self.ui_tableview.reloadData()
-                if self.neighborhoodsDiscovered.count > 0 && self.currentPage == 1 {
+                if self.neighborhoodsDiscovered.count > 0 && self.currentPageDiscover == 1 && !isReloadFromTab {
                     self.gotoTop()
                 }
+                
             }
-            if self.neighborhoodsDiscovered.count == 0 {
-                self.showEmptyView()
+            if !isReloadFromTab {
+                if self.neighborhoodsDiscovered.count == 0 {
+                    self.showEmptyView()
+                }
+                else {
+                    self.hideEmptyView()
+                }
+                self.ui_tableview.reloadData()
             }
-            else {
-                self.hideEmptyView()
-            }
-            self.ui_tableview.reloadData()
-            
             self.isLoading = false
+            if reloadOther {
+                self.getNeighborhoods(isReloadFromTab: true)
+            }
         }
     }
     
@@ -222,6 +275,7 @@ class NeighborhoodHomeViewController: UIViewController {
         self.isLoading = true
         NeighborhoodService.getSearchNeighborhoods(text: text, completion: { groups, error in
             IHProgressHUD.dismiss()
+            self.pullRefreshControl.endRefreshing()
             self.isSearch = true
             self.isLoading = false
             self.isSendedSearch = true
@@ -245,8 +299,8 @@ class NeighborhoodHomeViewController: UIViewController {
     @IBAction func action_myGroups(_ sender: Any) {
         isGroupsSelected = true
         isfirstLoadingMyGroup = true
-        if isGroupsSelected != currentSelectedIsGroup {
-            currentPage = 1
+        if isGroupsSelected != currentSelectedIsGroup && myNeighborhoods.count == 0 {
+            currentPageMy = 1
             myNeighborhoods.removeAll()
             getNeighborhoods()
         }
@@ -256,13 +310,16 @@ class NeighborhoodHomeViewController: UIViewController {
         isSearch = false
         isLoading = false
         changeTabSelection()
+        if self.myNeighborhoods.count > 0 {
+            self.gotoTop()
+        }
     }
     
     @IBAction func action_discover(_ sender: Any) {
         isGroupsSelected = false
-        if isGroupsSelected != currentSelectedIsGroup {
-            currentPage = 1
-            self.neighborhoodsDiscovered .removeAll()
+        if isGroupsSelected != currentSelectedIsGroup && self.neighborhoodsDiscovered.count == 0 {
+            currentPageDiscover = 1
+            self.neighborhoodsDiscovered.removeAll()
             getNeighborhoodsSuggestions()
         }
         isSendedSearch = false
@@ -270,6 +327,9 @@ class NeighborhoodHomeViewController: UIViewController {
         isLoading = false
         isSearch = false
         changeTabSelection()
+        if self.neighborhoodsDiscovered.count > 0 {
+            self.gotoTop()
+        }
     }
     
     @IBAction func action_create_group(_ sender: Any) {
@@ -309,13 +369,13 @@ class NeighborhoodHomeViewController: UIViewController {
         self.ui_tableview.reloadData()
     }
     
-    func gotoTop() {
+    func gotoTop(isAnimated:Bool = true) {
         if isGroupsSelected && myNeighborhoods.count == 0 { return }
         else if neighborhoodsDiscovered.count == 0 { return }
         
         let indexPath = IndexPath(row: 0, section: 0)
         DispatchQueue.main.async {
-            self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: true)
+            self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: isAnimated)
         }
     }
     
@@ -357,6 +417,11 @@ class NeighborhoodHomeViewController: UIViewController {
         ui_tableview.scrollIndicatorInsets = UIEdgeInsets(top: viewNormalHeight ,left: 0,bottom: 0,right: 0)
         
         changeTabSelection()
+        
+        pullRefreshControl.attributedTitle = NSAttributedString(string: "Loading".localized)
+        pullRefreshControl.tintColor = .appOrange
+        pullRefreshControl.addTarget(self, action: #selector(refreshDatas), for: .valueChanged)
+        ui_tableview.refreshControl = pullRefreshControl
     }
     
     func setupEmptyViews() {
@@ -484,15 +549,15 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
         if isLoading { return }
         if isGroupsSelected {
             let lastIndex = myNeighborhoods.count - nbOfItemsBeforePagingReload
-            if indexPath.row == lastIndex && self.myNeighborhoods.count >= numberOfItemsForWS * currentPage {
-                self.currentPage = self.currentPage + 1
+            if indexPath.row == lastIndex && self.myNeighborhoods.count >= numberOfItemsForWS * currentPageMy {
+                self.currentPageMy = self.currentPageMy + 1
                 self.getNeighborhoods()
             }
         }
         else if !isSearch {
             let lastIndex = neighborhoodsDiscovered.count - nbOfItemsBeforePagingReload
-            if indexPath.row == lastIndex && self.neighborhoodsDiscovered.count >= numberOfItemsForWS * currentPage {
-                self.currentPage = self.currentPage + 1
+            if indexPath.row == lastIndex && self.neighborhoodsDiscovered.count >= numberOfItemsForWS * currentPageDiscover {
+                self.currentPageDiscover = self.currentPageDiscover + 1
                 self.getNeighborhoodsSuggestions()
             }
         }
@@ -544,7 +609,7 @@ extension NeighborhoodHomeViewController: NeighborhoodHomeSearchDelegate {
         else {
             self.neighborhoodsSearch.removeAll()
             self.isAlreadyClearRows = false
-            self.currentPage = 1
+            self.currentPageDiscover = 1
             self.isSendedSearch = false
             self.getNeighborhoodsSuggestions()
         }

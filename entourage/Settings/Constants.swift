@@ -12,8 +12,8 @@ let kFirebaseDebugPlist = "GoogleService-Info-social.entourage.ios.beta"
 let kFirebaseProdPlist = "GoogleService-Info"
 let kUserAuthenticationLevelAuthenticated = "authenticated"
 
-//Notifications in app
-let notificationLoginError = "loginTokenError"
+
+
 
 
 

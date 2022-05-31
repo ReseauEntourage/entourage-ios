@@ -206,10 +206,9 @@ extension MainTabbarViewController: UITabBarControllerDelegate {
         currentItemSelected = item.tag
         boldSelectedItem()
         
+        //TO force reload neighborhoods
         if item.tag == 3 {
-//                if let nav = messagesVC, let vc = nav.viewControllers[0] as? OTMyEntourageMainViewController {
-//                    vc.setupVcsAfterTapTabbar()
-//                }
+            NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
         }
     }
 
