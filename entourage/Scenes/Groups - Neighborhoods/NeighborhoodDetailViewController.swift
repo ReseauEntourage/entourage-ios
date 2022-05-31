@@ -45,7 +45,7 @@ class NeighborhoodDetailViewController: UIViewController {
         
         ui_top_view.backgroundColor = .clear
         ui_top_view.populateCustom(title: nil, titleFont: nil, titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: false, cornerRadius: nil, isClose: false, marginLeftButton: nil)
-        ui_iv_neighborhood.image = nil
+        ui_iv_neighborhood.image = UIImage.init(named: "placeholder_photo_group")
         
         registerCellsNib()
         
@@ -100,6 +100,22 @@ class NeighborhoodDetailViewController: UIViewController {
         pullRefreshControl.addTarget(self, action: #selector(refreshNeighborhood), for: .valueChanged)
         ui_tableview.refreshControl = pullRefreshControl
         
+        populateTopView()
+    }
+    
+    func populateTopView() {
+        let imageName = "placeholder_photo_group"
+        if let _url = self.neighborhood?.image_url, let url = URL(string: _url) {
+            self.ui_iv_neighborhood.sd_setImage(with: url, placeholderImage: UIImage.init(named: imageName))
+            self.ui_iv_neighborhood_mini.sd_setImage(with: url, placeholderImage: UIImage.init(named: imageName))
+        }
+        else {
+            self.ui_iv_neighborhood.image = UIImage.init(named: imageName)
+            self.ui_iv_neighborhood_mini.image = UIImage.init(named: imageName)
+        }
+        
+        self.ui_label_title_neighb.text = self.neighborhood?.name
+        self.ui_button_add.isHidden = self.neighborhood?.isMember ?? false ? false : true
     }
     
     // Actions
@@ -130,19 +146,7 @@ class NeighborhoodDetailViewController: UIViewController {
             self.ui_tableview.reloadData()
             self.isLoading = false
             
-            let imageName = "placeholder_neighborhood"
-            if let _url = self.neighborhood?.image_url, let url = URL(string: _url) {
-                self.ui_iv_neighborhood.sd_setImage(with: url, placeholderImage: UIImage.init(named: imageName))
-                self.ui_iv_neighborhood_mini.sd_setImage(with: url, placeholderImage: UIImage.init(named: imageName))
-            }
-            else {
-                self.ui_iv_neighborhood.image = UIImage.init(named: imageName)
-                self.ui_iv_neighborhood_mini.image = UIImage.init(named: imageName)
-            }
-            
-            self.ui_label_title_neighb.text = group?.name
-            
-            self.ui_button_add.isHidden = self.neighborhood?.isMember ?? false ? false : true
+            self.populateTopView()
         }
     }
     
@@ -402,8 +406,10 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             realIndex = indexPath.row - 2
         }
         
-        let lastIndex = neighborhood!.messages!.count - nbOfItemsBeforePagingReload
-        if realIndex == lastIndex && neighborhood!.messages!.count >= itemsPerPage * currentPagingPage {
+        let messageCount:Int = neighborhood?.messages?.count ?? 0
+        
+        let lastIndex = messageCount - nbOfItemsBeforePagingReload
+        if realIndex == lastIndex && messageCount >= itemsPerPage * currentPagingPage {
             self.currentPagingPage = self.currentPagingPage + 1
             self.getMorePosts()
         }

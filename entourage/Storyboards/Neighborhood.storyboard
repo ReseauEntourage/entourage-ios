@@ -1651,7 +1651,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_detail_group" translatesAutoresizingMaskIntoConstraints="NO" id="AeR-wL-oht">
+                                    <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_photo_group" translatesAutoresizingMaskIntoConstraints="NO" id="AeR-wL-oht">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                     </imageView>
                                 </subviews>
@@ -2055,6 +2055,7 @@
         <image name="interest_small_wellness" width="28" height="27"/>
         <image name="my_profile_header" width="392" height="416"/>
         <image name="params_next" width="9" height="13"/>
+        <image name="placeholder_photo_group" width="391" height="110"/>
         <image name="placeholder_user" width="100" height="100"/>
         <image name="search_v2_orange" width="18" height="18"/>
         <namedColor name="Beige">

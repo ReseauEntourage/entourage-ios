@@ -29,7 +29,7 @@ public struct Logger {
         if self.dateFormatter == nil {
             self.dateFormatter = DateFormatter()
             self.dateFormatter?.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale?
-            self.dateFormatter?.dateFormat = "HH:mm:ss"
+            self.dateFormatter?.dateFormat = "HH:mm:ss.SSSS"
         }
         
         guard let date = self.dateFormatter?.string(from: NSDate() as Date) else { return "" }

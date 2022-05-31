@@ -416,12 +416,13 @@ class NeighborhoodHomeViewController: UIViewController {
         ui_view_empty_discover.isHidden = true
     }
     
-    func showNeighborhood(neighborhoodId:Int, isAfterCreation:Bool = false, isShowCreatePost:Bool = false) {
+    func showNeighborhood(neighborhoodId:Int, isAfterCreation:Bool = false, isShowCreatePost:Bool = false, neighborhood:Neighborhood? = nil) {
         let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
         if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
             vc.isAfterCreation = isAfterCreation
             vc.neighborhoodId = neighborhoodId
             vc.isShowCreatePost = isShowCreatePost
+            vc.neighborhood = neighborhood
             self.navigationController?.present(nav, animated: true)
         }
     }
@@ -475,7 +476,7 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
             neighborhood = isSearch ? neighborhoodsSearch[indexPath.row - 1] : neighborhoodsDiscovered[indexPath.row - 1]
         }
         
-        self.showNeighborhood(neighborhoodId: neighborhood.uid)
+        self.showNeighborhood(neighborhoodId: neighborhood.uid,neighborhood:neighborhood)
         
     }
     
