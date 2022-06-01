@@ -696,8 +696,8 @@
 				02B37824279B06F600B204EF /* Others.storyboard */,
 				02856F6127DA334100988FF7 /* ProfileParams.storyboard */,
 				0207BF8427F2059400631914 /* UserDetail.storyboard */,
-				02B7922427F74801003AFFB9 /* Neighborhood_Create.storyboard */,
 				02E7845C2811A8DB00177F13 /* Neighborhood.storyboard */,
+				02B7922427F74801003AFFB9 /* Neighborhood_Create.storyboard */,
 				02E2192C2837A16F002A1FCB /* Neighborhood_Report.storyboard */,
 				02E2192228352552002A1FCB /* Neighborhood_Message.storyboard */,
 			);

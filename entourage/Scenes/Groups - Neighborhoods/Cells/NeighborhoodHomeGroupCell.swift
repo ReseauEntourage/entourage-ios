@@ -24,6 +24,7 @@ class NeighborhoodHomeGroupCell: UITableViewCell {
     @IBOutlet weak var ui_picto_8: UIImageView!
     @IBOutlet weak var ui_picto_9: UIImageView!
     
+    @IBOutlet weak var ui_label_admin: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +34,9 @@ class NeighborhoodHomeGroupCell: UITableViewCell {
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_members.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
         ui_events.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
+        
+        ui_label_admin?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
+        ui_label_admin?.text = "Admin".localized
         
         ui_image.layer.cornerRadius = 20
     }

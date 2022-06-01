@@ -190,6 +190,47 @@ struct UserLightNeighborhood: Codable {
         
         return nil
     }
+    
+    func getCommunityRoleWithPartnerFormated() -> String? {
+        if let communityRoles = communityRoles {
+            
+            var roleStr = ""
+            
+            if isAdmin() {
+                roleStr = "Admin".localized
+            }
+            
+            for role in communityRoles {
+                if roleStr.count > 0 {
+                    roleStr = "\(roleStr) • \(role)"
+                }
+                else {
+                    roleStr = role
+                }
+                
+                break
+            }
+            if let name = partner?.name {
+                if roleStr.count > 0 {
+                    roleStr = "\(roleStr) • \(name)"
+                }
+                else {
+                    roleStr = name
+                }
+            }
+            return roleStr
+        }
+        
+        return nil
+    }
+    
+    func isAdmin() -> Bool {
+        //TODO: a ajouter d'autre checks ?
+        if groupRole == "creator" {
+            return true
+        }
+        return false
+    }
 }
 
 //MARK: - Organization -

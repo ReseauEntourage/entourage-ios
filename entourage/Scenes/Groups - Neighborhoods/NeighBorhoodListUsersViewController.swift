@@ -100,7 +100,7 @@ extension NeighBorhoodListUsersViewController: UITableViewDataSource, UITableVie
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
         
-        cell.populateCell(isMe:isMe, username: user.displayName, role: user.getCommunityRolesFormated(), imageUrl: user.avatarURL, showBtMessage: true,delegate: self,position: position)
+        cell.populateCell(isMe:isMe, username: user.displayName, role: user.getCommunityRoleWithPartnerFormated(), imageUrl: user.avatarURL, showBtMessage: true,delegate: self,position: position)
         return cell
     }
     

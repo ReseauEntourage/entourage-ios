@@ -315,9 +315,14 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             return count
         }
         
-        let countToAdd = self.neighborhood?.isMember ?? false ? 2 : 1 //If not member we dont' show new/old post header
-        let messageCount:Int = (self.neighborhood?.messages?.count ?? 0) > 0 ? self.neighborhood!.messages!.count + countToAdd : 1
+        let messageCount:Int = (self.neighborhood?.messages?.count ?? 0) > 0 ? self.neighborhood!.messages!.count + countToAdd() : 1
         return  messageCount
+    }
+    
+    func countToAdd() -> Int {
+        //Is member + new posts
+        let countToAdd = (self.neighborhood?.isMember ?? false && self.messagesNew.count > 0) ? 2 : 1 //If not member or only old messages we dont' show new/old post header
+        return countToAdd
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -372,10 +377,11 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         }
         
         //If not member we dont' show new/old post header
-        let countToAdd = self.neighborhood?.isMember ?? false ? 2 : 1
+        let countToAdd = countToAdd()
         if countToAdd == 2 {
             if indexPath.row == 1 {
-                let titleSection = hasNewAndOldSections ? "neighborhood_post_group_section_new_posts_title".localized : "neighborhood_post_group_section_old_posts_title".localized
+                let titleSection = hasNewAndOldSections || self.messagesOld.count == 0 ? "neighborhood_post_group_section_new_posts_title".localized : "neighborhood_post_group_section_old_posts_title".localized
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitleDate", for: indexPath) as! NeighborhoodPostHeadersCell
                 cell.populateCell(title: titleSection , isTopHeader: false)
                 return cell

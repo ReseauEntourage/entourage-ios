@@ -138,7 +138,7 @@ struct NeighborhoodUserLight:Codable {
 
 struct PostMessage:Codable {
     var uid:Int = 0
-    var content:String = ""
+    var content:String? = ""
     
     var createdDate:Date {
         get {

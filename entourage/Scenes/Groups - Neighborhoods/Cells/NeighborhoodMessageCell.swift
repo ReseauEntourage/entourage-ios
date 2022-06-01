@@ -45,7 +45,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:NeighborhoodMessageCellDelegate) {
         messageId = message.uid
         self.delegate = delegate
-        self.messageForRetry = message.content
+        self.messageForRetry = message.content ?? ""
         self.positionForRetry = positionRetry
         
         if isMe {

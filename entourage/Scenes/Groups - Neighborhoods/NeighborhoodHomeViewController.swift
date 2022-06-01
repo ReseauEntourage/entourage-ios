@@ -509,8 +509,16 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isGroupsSelected {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroup", for: indexPath) as! NeighborhoodHomeGroupCell
             let neighborhood = myNeighborhoods[indexPath.row]
+            
+            var cellName = "cellGroup"
+            
+            if neighborhood.creator.uid == UserDefaults.currentUser?.sid {
+                cellName = "cellGroupMy"
+            }
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! NeighborhoodHomeGroupCell
+            
             cell.populateCell(neighborhood: neighborhood)
             
             return cell
