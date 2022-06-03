@@ -43,6 +43,7 @@ class NeighborhoodCreatePhase2ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        AnalyticsLoggerManager.logEvent(name: View_NewGroup_Step2)
         guard let tagsInterests = tagsInterests, tagsInterests.getTags().count > 0 else {
             self.dismiss(animated: true)
             return

@@ -77,6 +77,7 @@ class NeighborhoodEditViewController: UIViewController {
         if ApplicationTheme.iPhoneHasNotch() {
             ui_bt_validate_bottom_constraint.constant = 0
         }
+        AnalyticsLoggerManager.logEvent(name: View_GroupOption_Edition)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {

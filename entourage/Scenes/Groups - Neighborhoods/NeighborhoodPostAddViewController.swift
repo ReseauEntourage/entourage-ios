@@ -70,6 +70,8 @@ class NeighborhoodPostAddViewController: UIViewController {
         ui_tv_error.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegularItalic(size: 11), color: .rougeErreur))
         showButton(isAdd: true)
         changeButtonShare()
+        
+        AnalyticsLoggerManager.logEvent(name: View_GroupFeed_NewPost_Screen)
     }
     
     @objc func closeKb() {
@@ -107,6 +109,7 @@ class NeighborhoodPostAddViewController: UIViewController {
             changeButtonShare()
         }
         else {
+            AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewPost_AddPic)
             if let navvc = storyboard?.instantiateViewController(withIdentifier: "addPhotoNav") as? UINavigationController, let vc = navvc.topViewController as? NeighborhoodPostAddPhotoViewController {
                 vc.parentDelegate = self
                 self.present(navvc, animated: true)
@@ -124,6 +127,7 @@ class NeighborhoodPostAddViewController: UIViewController {
         else {
             sendImageText()
         }
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewPost_Validate)
     }
     
     //MARK: - Network -

@@ -30,6 +30,7 @@ class NeighBorhoodListUsersViewController: BasePopViewController {
         ui_lb_no_result.text = "neighborhood_group_search_empty_title".localized
         ui_view_no_result.isHidden = true
         getusers()
+        AnalyticsLoggerManager.logEvent(name: View_GroupMember_ShowList)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,7 +83,7 @@ extension NeighBorhoodListUsersViewController: UITableViewDataSource, UITableVie
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_search", for: indexPath) as! NeighborhoodHomeSearchCell
             
-            cell.populateCell(delegate: self, isSearch:isSearch,placeceholder:"neighborhood_userInput_search".localized)
+            cell.populateCell(delegate: self, isSearch:isSearch,placeceholder:"neighborhood_userInput_search".localized, isCellUserSearch: true)
             return cell
         }
         
@@ -109,9 +110,11 @@ extension NeighBorhoodListUsersViewController: UITableViewDataSource, UITableVie
         
         var user:UserLightNeighborhood
         if isSearch {
+            AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult)
             user = self.usersSearch[indexPath.row - 1]
         }
         else {
+            AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
             user = self.users[indexPath.row - 1]
         }
         
@@ -129,6 +132,7 @@ extension NeighBorhoodListUsersViewController: UITableViewDataSource, UITableVie
 extension NeighBorhoodListUsersViewController: NeighborhoodHomeSearchDelegate {
     func goSearch(_ text: String?) {
         if let text = text, !text.isEmpty {
+            AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_Validate)
             self.searchUser(text: text)
         }
         else {
@@ -155,10 +159,10 @@ extension NeighBorhoodListUsersViewController: NeighborhoodHomeSearchDelegate {
 
 //MARK: - NeighborhoodUserCellDelegate -
 extension NeighBorhoodListUsersViewController:NeighborhoodUserCellDelegate {
-    func showUserForPosition(_ position: Int) {
+    func showSendMessageToUserForPosition(_ position: Int) {
         //TODO: a faire
         Logger.print("***** show message from user pos : \(position)")
-        
+        AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member)
         showWIP(parentVC: self.navigationController)
     }
 }

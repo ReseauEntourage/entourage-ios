@@ -24,7 +24,13 @@ class NeighborhoodCreatePhase3ViewController: UIViewController {
         ui_tableview.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AnalyticsLoggerManager.logEvent(name: View_NewGroup_Step3)
+    }
+    
     @IBAction func action_show_choose_photos(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_Step3_AddPicture)
         pageDelegate?.showChoosePhotos(delegate: self)
     }
 }

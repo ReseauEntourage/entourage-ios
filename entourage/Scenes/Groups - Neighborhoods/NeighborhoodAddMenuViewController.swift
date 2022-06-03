@@ -22,18 +22,21 @@ class NeighborhoodAddMenuViewController: UIViewController {
         
         ui_lb_event.text = "neighborhood_menu_post_event".localized
         ui_lb_post.text = "neighborhood_menu_post_post".localized
-        
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Plus)
     }
     
     @IBAction func action_close(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Plus_Close)
         self.dismiss(animated: true)
     }
     
     @IBAction func action_create_event(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewEvent)
         showWIP(parentVC: self)
     }
     
     @IBAction func action_create_post(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewPost)
         let parentVC = presentingViewController
         dismiss(animated: false) {
             let sb = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil)

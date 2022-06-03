@@ -36,6 +36,8 @@ class NeighborhoodParamsGroupViewController: BasePopViewController {
         
         //Notif for updating neighborhood infos
         NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood(_ :)), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
+        
+        AnalyticsLoggerManager.logEvent(name: View_GroupOption_Show)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -193,10 +195,12 @@ extension NeighborhoodParamsGroupViewController: MJNavBackViewDelegate {
 //MARK: - NeighborhoodParamCellDelegate -
 extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
     func quitGroup() {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Quit)
         showPopLeave()
     }
     
     func signalGroup() {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Report)
         if let  vc = UIStoryboard.init(name: "Neighborhood_Report", bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
             vc.modalPresentationStyle = .currentContext
             vc.group = neighborhood
@@ -207,6 +211,7 @@ extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
     }
     
     func showCGU() {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Rules)
         if let  vc = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "params_CGU_VC") as? NeighBorhoodParamsCGUViewController {
             vc.modalPresentationStyle = .fullScreen
             
@@ -215,6 +220,7 @@ extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
     }
     
     func editGroup() {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupOption_EditGroup)
         if let  vc = UIStoryboard.init(name: "Neighborhood_Create", bundle: nil).instantiateViewController(withIdentifier: "editGroupVC") as? NeighborhoodEditViewController {
             vc.modalPresentationStyle = .fullScreen
             vc.currentNeighborhoodId = self.neighborhood!.uid
@@ -225,6 +231,16 @@ extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
     
     func editNotif(notifType:GroupUserNotifType,isOn:Bool) {
         //TODO: à faire
+        switch notifType {
+        case .All:
+            AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Notif_All)
+        case .Events:
+            AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Notif_Event)
+        case .Messages:
+            AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Notif_Message)
+        case .Members:
+            AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Notif_Member)
+        }
         Logger.print("***** edit notif : \(notifType) - Is on \(isOn)")
     }
 }

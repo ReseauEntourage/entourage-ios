@@ -54,11 +54,11 @@ class NeighborhoodUserCell: UITableViewCell {
     }
     
     @IBAction func action_send_message(_ sender: Any) {
-        delegate?.showUserForPosition(position)
+        delegate?.showSendMessageToUserForPosition(position)
     }
 }
 
 //MARK: - Protocol  -
 protocol NeighborhoodUserCellDelegate:AnyObject {
-    func showUserForPosition(_ position:Int)
+    func showSendMessageToUserForPosition(_ position:Int)
 }

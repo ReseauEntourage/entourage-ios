@@ -34,15 +34,19 @@ class NeighborhoodCreateValidateViewController: UIViewController {
         
         ui_title.text = "neighborhoodCreateValidateTitle".localized
         ui_subtitle.text = "neighborhoodCreateValidateSubtitle".localized
+        
+        AnalyticsLoggerManager.logEvent(name: View_NewGroup_Confirmation)
     }
     
     @IBAction func action_post_message(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_Confirmation_NewPost)
         self.dismiss(animated: true) {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationCreatePostNewNeighborhood), object: nil, userInfo: ["neighborhoodId":self.newNeighborhood?.uid as Any])
         }
     }
     
     @IBAction func action_pass(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_Confirmation_Skip)
         self.dismiss(animated: true) {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowNew), object: nil, userInfo: ["neighborhoodId":self.newNeighborhood?.uid as Any])
         }

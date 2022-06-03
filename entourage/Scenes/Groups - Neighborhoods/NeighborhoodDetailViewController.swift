@@ -57,6 +57,7 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_button_add.isHidden = true
         
         getNeighborhoodDetail()
+        AnalyticsLoggerManager.logEvent(name: View_GroupFeed__Show)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -248,6 +249,7 @@ class NeighborhoodDetailViewController: UIViewController {
     
     //MARK: - IBAction -
     @IBAction func action_show_params(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Option)
         if let navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "params_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodParamsGroupViewController {
             vc.neighborhood = neighborhood
             self.navigationController?.present(navVC, animated: true)
@@ -429,6 +431,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
 //MARK: - NeighborhoodDetailTopCellDelegate -
 extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
     func showMembers() {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_MoreMembers)
         if let navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodListUsersViewController {
             vc.neighborhood = neighborhood
             self.navigationController?.present(navVC, animated: true)
@@ -436,10 +439,12 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
     }
     
     func joinLeave() {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Join)
         joinLeaveGroup()
     }
     
     func showDetailFull() {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_MoreDescription)
         let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
         if let navvc = sb.instantiateViewController(withIdentifier: "neighborhoodDetailOnlyNav") as? UINavigationController, let vc = navvc.topViewController as? NeighborhoodDetailOnlyViewController {
             vc.neighborhoodId = self.neighborhoodId
@@ -471,11 +476,13 @@ extension NeighborhoodDetailViewController:NeighborhoodEventsTableviewCellDelega
     func showAll() {
         //TODO: Show all events
         Logger.print("***** show all events ;)")
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_MoreEvents)
         showWIP(parentVC: self)
     }
     
     func showEvent(eventId: Int) {
         Logger.print("***** show event id : \(eventId)")
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_OneEvent)
         //TODO: a faire
         showWIP(parentVC: self)
     }
@@ -484,6 +491,7 @@ extension NeighborhoodDetailViewController:NeighborhoodEventsTableviewCellDelega
 //MARK: - MJNavBackViewDelegate -
 extension NeighborhoodDetailViewController: MJNavBackViewDelegate {
     func goBack() {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_BackArrow)
         self.navigationController?.dismiss(animated: true)
     }
 }

@@ -14,6 +14,8 @@ class NeighborhoodHomeSearchCell: UITableViewCell {
     @IBOutlet weak var ui_bt_search: UIButton!
     
     weak var delegate:NeighborhoodHomeSearchDelegate? = nil
+    var isCellUserSearch = false
+    var hasAlreadySendAnalytic = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,8 +29,10 @@ class NeighborhoodHomeSearchCell: UITableViewCell {
         
     }
     
-    func populateCell(delegate:NeighborhoodHomeSearchDelegate, isSearch:Bool, placeceholder:String? = nil) {
+    func populateCell(delegate:NeighborhoodHomeSearchDelegate, isSearch:Bool, placeceholder:String? = nil, isCellUserSearch:Bool) {
         self.delegate = delegate
+        self.isCellUserSearch = isCellUserSearch
+        
         if !isSearch {
             ui_search_textfield.text = ""
             ui_bt_search.isHidden = true
@@ -56,6 +60,13 @@ class NeighborhoodHomeSearchCell: UITableViewCell {
         ui_search_textfield.text = ""
         delegate?.goSearch("")
         ui_bt_search.isHidden = true
+        
+        if isCellUserSearch {
+            AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_Delete)
+        }
+        else {
+            AnalyticsLoggerManager.logEvent(name: Action_Group_Search_Delete)
+        }
     }
     
     @IBAction func action_search_show(_ sender: Any) {
@@ -72,6 +83,19 @@ extension NeighborhoodHomeSearchCell: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        if !hasAlreadySendAnalytic {
+            hasAlreadySendAnalytic = true
+            if isCellUserSearch {
+                AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_Start)
+            }
+            else {
+                AnalyticsLoggerManager.logEvent(name: Action_Group_Search_Start)
+            }
+        }
+        else {
+            hasAlreadySendAnalytic = false
+        }
+        
         if textField.text?.count == 0 {
             delegate?.showEmptySearch()
             ui_bt_search.isHidden = true

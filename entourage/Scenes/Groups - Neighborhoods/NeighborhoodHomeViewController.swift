@@ -169,6 +169,14 @@ class NeighborhoodHomeViewController: UIViewController {
             currentSelectedIsGroup = false
             getNeighborhoodsSuggestions()
         }
+        
+        //Analytics
+        if isGroupsSelected {
+            AnalyticsLoggerManager.logEvent(name: View_Group_Show)
+        }
+        else {
+            AnalyticsLoggerManager.logEvent(name: View_Group_ShowDiscover)
+        }
     }
     
     deinit {
@@ -299,6 +307,12 @@ class NeighborhoodHomeViewController: UIViewController {
     @IBAction func action_myGroups(_ sender: Any) {
         isGroupsSelected = true
         isfirstLoadingMyGroup = true
+        
+        //Analytics
+        if isGroupsSelected != currentSelectedIsGroup {
+            AnalyticsLoggerManager.logEvent(name: Action_Group_MyGroup)
+        }
+        
         if isGroupsSelected != currentSelectedIsGroup && myNeighborhoods.count == 0 {
             currentPageMy = 1
             myNeighborhoods.removeAll()
@@ -317,6 +331,12 @@ class NeighborhoodHomeViewController: UIViewController {
     
     @IBAction func action_discover(_ sender: Any) {
         isGroupsSelected = false
+        
+        //Analytics
+        if isGroupsSelected != currentSelectedIsGroup {
+            AnalyticsLoggerManager.logEvent(name: Action_Group_Discover)
+        }
+        
         if isGroupsSelected != currentSelectedIsGroup && self.neighborhoodsDiscovered.count == 0 {
             currentPageDiscover = 1
             self.neighborhoodsDiscovered.removeAll()
@@ -333,7 +353,8 @@ class NeighborhoodHomeViewController: UIViewController {
     }
     
     @IBAction func action_create_group(_ sender: Any) {
-        let  navVC = UIStoryboard.init(name: "Neighborhood_Create", bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
+        AnalyticsLoggerManager.logEvent(name: Action_Group_Plus)
+        let navVC = UIStoryboard.init(name: "Neighborhood_Create", bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
@@ -527,7 +548,7 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellSearch", for: indexPath) as! NeighborhoodHomeSearchCell
             
-            cell.populateCell(delegate: self, isSearch:isSearch)
+            cell.populateCell(delegate: self, isSearch:isSearch,isCellUserSearch: false)
             
             return cell
         }
@@ -543,10 +564,18 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
         
         if isGroupsSelected {
             neighborhood = myNeighborhoods[indexPath.row]
+            AnalyticsLoggerManager.logEvent(name: Action_Group_MyGroup_Card)
         }
         else {
             if indexPath.row == 0 { return }
             neighborhood = isSearch ? neighborhoodsSearch[indexPath.row - 1] : neighborhoodsDiscovered[indexPath.row - 1]
+            
+            if isSearch {
+                AnalyticsLoggerManager.logEvent(name: Action_Group_Search_SeeResult)
+            }
+            else {
+                AnalyticsLoggerManager.logEvent(name: Action_Group_Discover_Card)
+            }
         }
         
         self.showNeighborhood(neighborhoodId: neighborhood.uid,neighborhood:neighborhood)
@@ -612,6 +641,7 @@ extension NeighborhoodHomeViewController: UITableViewDataSource, UITableViewDele
 extension NeighborhoodHomeViewController: NeighborhoodHomeSearchDelegate {
     func goSearch(_ text: String?) {
         if let text = text, !text.isEmpty {
+            AnalyticsLoggerManager.logEvent(name: Action_Group_Search_Validate)
             self.getNeighborhoodsSearch(text: text)
         }
         else {

@@ -26,6 +26,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
         
         getNeighborhoodDetail()
         NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
+        AnalyticsLoggerManager.logEvent(name: View_GroupFeed_FullDescription)
     }
     
     @objc func updateNeighborhood() {

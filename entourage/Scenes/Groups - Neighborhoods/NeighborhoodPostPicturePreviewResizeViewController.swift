@@ -109,7 +109,7 @@ class NeighborhoodPostPicturePreviewResizeViewController: BasePopViewController 
     }
     
     @IBAction func action_validate(_ sender: Any) {
-        
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewPost_ValidatePic)
         delegate?.updatePhoto(image: self.processImage())
         self.navigationController?.popViewController(animated: true)
     }

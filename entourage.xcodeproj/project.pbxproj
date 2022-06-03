@@ -35,6 +35,8 @@
 		0229376B27A4000800206201 /* SafariWebManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0229376A27A4000800206201 /* SafariWebManager.swift */; };
 		0229376D27A434F500206201 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0229376C27A434F500206201 /* ApplicationTheme.swift */; };
 		0229376F27A43AA600206201 /* GMSAutoCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0229376E27A43AA600206201 /* GMSAutoCompleteVC.swift */; };
+		022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DC3EC284790B000868760 /* AnalyticsLoggerManager.swift */; };
+		022DC3EF2847996D00868760 /* Analytics_Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DC3EE2847996D00868760 /* Analytics_Keys.swift */; };
 		023B07CC27D664F6007752AC /* Profile.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023B07CB27D664F6007752AC /* Profile.xcassets */; };
 		023D89BF27DFA351008C6A58 /* MainParamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89BE27DFA351008C6A58 /* MainParamsViewController.swift */; };
 		023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89C027DFA380008C6A58 /* ParamMenuCell.swift */; };
@@ -267,6 +269,8 @@
 		0229376A27A4000800206201 /* SafariWebManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebManager.swift; sourceTree = "<group>"; };
 		0229376C27A434F500206201 /* ApplicationTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
 		0229376E27A43AA600206201 /* GMSAutoCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMSAutoCompleteVC.swift; sourceTree = "<group>"; };
+		022DC3EC284790B000868760 /* AnalyticsLoggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsLoggerManager.swift; sourceTree = "<group>"; };
+		022DC3EE2847996D00868760 /* Analytics_Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics_Keys.swift; sourceTree = "<group>"; };
 		023B07CB27D664F6007752AC /* Profile.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Profile.xcassets; sourceTree = "<group>"; };
 		023D89BE27DFA351008C6A58 /* MainParamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainParamsViewController.swift; sourceTree = "<group>"; };
 		023D89C027DFA380008C6A58 /* ParamMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamMenuCell.swift; sourceTree = "<group>"; };
@@ -562,6 +566,7 @@
 				022744752795D1D8005600A1 /* NotificationManager.swift */,
 				021F084E2798113D00F32A34 /* LocationManager.swift */,
 				02E0098827E33DD200BB23CA /* WebLinkManager.swift */,
+				022DC3EC284790B000868760 /* AnalyticsLoggerManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -644,6 +649,7 @@
 				0262997827905FB700D84A6A /* Constants.swift */,
 				026819A5278DFB6100A98A4A /* entourage-Bridging-Header.h */,
 				0288A8E027CD09E5008D7011 /* NotificationsKeys.swift */,
+				022DC3EE2847996D00868760 /* Analytics_Keys.swift */,
 				029E307827DB5EF300B12357 /* Environment */,
 				0229376C27A434F500206201 /* ApplicationTheme.swift */,
 				025D873E278DDBEB00909101 /* entourage.entitlements */,
@@ -1314,11 +1320,13 @@
 				026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */,
 				025D8766278DEC2100909101 /* Extensions.swift in Sources */,
 				02E069DE279184B3006DB1B6 /* OTOnboardingV2StartViewController.swift in Sources */,
+				022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */,
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
 				02E0098927E33DD200BB23CA /* WebLinkManager.swift in Sources */,
 				026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */,
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,
 				02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */,
+				022DC3EF2847996D00868760 /* Analytics_Keys.swift in Sources */,
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
 				021318AD27DF55D400B0F1BD /* MainHomeViewController.swift in Sources */,

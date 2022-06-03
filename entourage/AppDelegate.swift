@@ -69,6 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Analytics.setUserProperty(kUserAuthenticationLevelAuthenticated, forName: "AuthenticationLevel")
         
         FirebaseMessaging.Messaging.messaging().delegate = self
+        
+        AnalyticsLoggerManager.updateAnalyticsWitUser()
     }
     
     @objc func goLogin() {

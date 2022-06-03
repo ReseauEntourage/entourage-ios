@@ -87,6 +87,7 @@ class NeighborhoodCreateMainViewController: UIViewController {
     //MARK: - Navigation -
     
     @IBAction func action_next(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_Next)
         let isValid = checkValidation()
         if isValid.isValid {
             goPageNext()
@@ -102,6 +103,7 @@ class NeighborhoodCreateMainViewController: UIViewController {
     }
     
     @IBAction func action_back(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_Previous)
         goPageBack()
     }
     
@@ -295,11 +297,12 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
 //MARK: - MJNavBackViewDelegate -
 extension NeighborhoodCreateMainViewController: MJNavBackViewDelegate {
     func goBack() {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_BackArrow)
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
         let buttonValidate = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
         alertVC.configureAlert(alertTitle: "neighborhoodCreatePopCloseBackTitle".localized, message: "neighborhoodCreatePopCloseBackMessage".localized, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self)
-        
+        AnalyticsLoggerManager.logEvent(name: View_NewGroup_CancelPop)
         alertVC.delegate = self
         alertVC.show()
     }
@@ -308,9 +311,12 @@ extension NeighborhoodCreateMainViewController: MJNavBackViewDelegate {
 //MARK: - MJAlertControllerDelegate -
 extension NeighborhoodCreateMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_CancelPop_Leave)
         self.dismiss(animated: true)
     }
-    func validateRightButton(alertTag: MJAlertTAG) {}
+    func validateRightButton(alertTag: MJAlertTAG) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_CancelPop_Cancel)
+    }
 }
 
 //MARK: - Protocol NeighborhoodCreateMainDelegate -

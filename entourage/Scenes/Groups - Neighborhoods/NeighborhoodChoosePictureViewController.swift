@@ -44,6 +44,7 @@ class NeighborhoodChoosePictureViewController: BasePopViewController {
         
         getImages()
         changeButtonSelection()
+        AnalyticsLoggerManager.logEvent(name: View_NewGroup_Step3_PicGallery)
     }
     
     func setupFlowLayout() {
@@ -78,9 +79,10 @@ class NeighborhoodChoosePictureViewController: BasePopViewController {
     }
     
     @IBAction func action_validate(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_Step3_PicGallery_Validate)
         if selectedImagePos >= 0 {
             delegate?.selectedPicture(image: images[selectedImagePos])
-            self.goBack()
+            self.dismiss(animated: true)
         }
         else {
             //TODO: error ?
@@ -128,6 +130,7 @@ extension NeighborhoodChoosePictureViewController: UICollectionViewDataSource, U
 //MARK: - MJNavBackViewDelegate -
 extension NeighborhoodChoosePictureViewController: MJNavBackViewDelegate {
     func goBack() {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_Step3_PicGallery_Close)
         self.dismiss(animated: true)
     }
 }

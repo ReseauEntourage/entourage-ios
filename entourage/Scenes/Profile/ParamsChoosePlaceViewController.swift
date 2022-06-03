@@ -29,7 +29,7 @@ class ParamsChoosePlaceViewController: BasePopViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        AnalyticsLoggerManager.logEvent(name: View_NewGroup_AddLocation_Screen)
         //Fix height for iPhone 5s / SE first Gen
         if UIDevice.current.deviceTypeScreen == .small {
             ui_constraint_add_place_top.constant = 40
@@ -147,11 +147,13 @@ class ParamsChoosePlaceViewController: BasePopViewController {
     
     //MARK: - IBActions -
     @IBAction func action_location(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_AddLocation_Geoloc)
         LocationManger.sharedInstance.startLocationUpdate()
         //                OTLogger.logEvent(Action_Profile_SetAction_Zone_Geoloc)//TODO:  Analytics
     }
     
     @IBAction func action_google_place(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_AddLocation_City)
         if let _vc = googleplaceVC {
             //                    OTLogger.logEvent(Action_Profile_SetAction_Zone_Search)//TODO:  Analytics
             
@@ -160,6 +162,7 @@ class ParamsChoosePlaceViewController: BasePopViewController {
     }
     
     @IBAction func action_validate(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_AddLocation_Validate)
         validateAddress()
     }
 }
@@ -188,6 +191,7 @@ extension ParamsChoosePlaceViewController:GMSAutocompleteViewControllerDelegate 
 //MARK: - MJNavBackViewDelegate -
 extension ParamsChoosePlaceViewController: MJNavBackViewDelegate {
     func goBack() {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_AddLocation_Close)
         self.dismiss(animated: true)
     }
 }

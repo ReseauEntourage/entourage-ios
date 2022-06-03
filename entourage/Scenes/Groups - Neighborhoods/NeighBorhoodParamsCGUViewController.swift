@@ -24,6 +24,8 @@ class NeighBorhoodParamsCGUViewController: UIViewController {
         ui_view_top.populateView(title: "neighborhood_params_cgu_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: false)
         ui_title.text = "neighborhood_params_cgu_description".localized
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
+        
+        AnalyticsLoggerManager.logEvent(name: View_GroupOption_Rules)
     }
 }
 

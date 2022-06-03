@@ -34,6 +34,11 @@ class NeighborhoodCreatePhase1ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AnalyticsLoggerManager.logEvent(name: View_NewGroup_Step1)
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         else {
@@ -103,6 +108,7 @@ extension NeighborhoodCreatePhase1ViewController: NeighborhoodCreateDescriptionC
     }
     
     func showSelectLocation() {
+        AnalyticsLoggerManager.logEvent(name: Action_NewGroup_AddLocation)
         let sb = UIStoryboard.init(name: "ProfileParams", bundle: nil)
         
         if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {

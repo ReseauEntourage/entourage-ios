@@ -37,6 +37,8 @@ class MainTabbarViewController: UITabBarController {
         
        setupVCs()
         
+        AnalyticsLoggerManager.updateAnalyticsWitUser()
+        
 //        NotificationCenter.default.addObserver(self, selector: #selector(hidePopInfo), name: NSNotification.Name(rawValue: "hidePopView"), object: nil)//TODO: a faire ?
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(showActions), name: NSNotification.Name(rawValue: "showAlls"), object: nil)
