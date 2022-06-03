@@ -67,16 +67,7 @@ extension ReportGroupPageViewController: ReportGroupPageDelegate {
     }
     
     func closeMain() {
-        var message = ""
-        switch signalType {
-        case .group:
-            message = "report_group_message_success".localized
-        case .publication:
-            message = "report_publication_message_success".localized
-        case .comment:
-            message = "report_comment_message_success".localized
-        }
-        self.parentDelegate?.showMessage(message: message, imageName: "ic_partner_follow_on")
+        self.parentDelegate?.showMessage(signalType: signalType)
         self.parent?.dismiss(animated: true)
     }
 }

@@ -53,7 +53,7 @@ extension ReportGroupMainViewController: MJNavBackViewDelegate {
 
 //MARK: - Protocol UserProfileDetailDelegate -
 protocol GroupDetailDelegate: AnyObject {
-    func showMessage(message:String, imageName:String?)
+    func showMessage(signalType:GroupDetailSignalType)
 }
 
 enum GroupDetailSignalType {

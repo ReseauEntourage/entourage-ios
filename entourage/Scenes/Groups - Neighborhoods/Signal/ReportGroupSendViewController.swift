@@ -87,30 +87,24 @@ class ReportGroupSendViewController: UIViewController {
     
     //MARK: - Network -
     func reportUser(message:String?) {
-        //TODO: a faire les autres call en fonction du ->signalType
-        if signalType == .group {
+        let tagsSignalsWS = tagsignals.getTagsForWS()
+        
+        switch signalType {
+        case .group:
             guard let group = group else {
                 return
             }
-            
-            let tagsSignalsWS = tagsignals.getTagsForWS()
-            
             NeighborhoodService.reportNeighborhood(groupId:group.uid, message: message, tags: tagsSignalsWS) { error in
-                Logger.print("***** error reportGroup ? \(error)")
                 DispatchQueue.main.async {
                     self.pageDelegate?.closeMain()
                 }
             }
-        }
-        
-        if signalType == .publication {
+        case .comment,.publication:
             guard let groupId = groupId, let postId = postId else {
                 return
             }
-            
-            let tagsSignalsWS = tagsignals.getTagsForWS()
-            
-            NeighborhoodService.reportNeighborhoodPost(groupId:groupId, postId: postId, message: message, tags: tagsSignalsWS) { error in
+            let isPost = signalType == .publication
+            NeighborhoodService.reportNeighborhoodPost(groupId:groupId, postId: postId, message: message, tags: tagsSignalsWS, isPost: isPost) { error in
                 DispatchQueue.main.async {
                     self.pageDelegate?.closeMain()
                 }

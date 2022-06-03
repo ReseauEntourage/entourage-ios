@@ -285,9 +285,9 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
-    static func reportNeighborhoodPost(groupId:Int,postId:Int,message:String?,tags:[String], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+    static func reportNeighborhoodPost(groupId:Int,postId:Int,message:String?,tags:[String], isPost:Bool, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
-        var endpoint = kAPIReportPostNeighborhood
+        var endpoint = isPost ? kAPIReportPostNeighborhood : kAPIReportPostCommentNeighborhood
         endpoint = String.init(format: endpoint,"\(groupId)","\(postId)", token)
         
         let _msg:String = message != nil ? (message!.isEmpty ? "." : message!) : "." //TODO: Supprimer lorsque nicolas aura fixé le WS
