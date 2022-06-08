@@ -8,7 +8,7 @@
 
 import UIKit
 import IHProgressHUD
-//import IQKeyboardManager
+import IQKeyboardManagerSwift
 import CoreLocation
 
 class GDSSearchViewController: UIViewController {
@@ -35,9 +35,9 @@ class GDSSearchViewController: UIViewController {
         ui_tableview.tableFooterView = UIView(frame: CGRect.zero)
         
         ui_tf_search.becomeFirstResponder()
-     //   IQKeyboardManager.shared().isEnableAutoToolbar = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
         
-      //  OTLogger.logEvent(Action_guide_searchStart)  //TODO: a faire analytics
+        AnalyticsLoggerManager.logEvent(name: Action_guide_searchStart)
         
         self.ui_view_shadow.layer.shadowColor = UIColor.black.cgColor
         self.ui_view_shadow.layer.shadowOpacity = 0.3
@@ -69,7 +69,7 @@ class GDSSearchViewController: UIViewController {
         
         
         PoiService.getPois(params: newDict) { [weak self] pois, error in
-//            OTLogger.logEvent(Action_guide_searchResults) //TODO: a faire Analytics
+            AnalyticsLoggerManager.logEvent(name: Action_guide_searchResults)
             IHProgressHUD.dismiss()
             if let _pois = pois {
                 self?.pois = _pois
@@ -101,7 +101,7 @@ class GDSSearchViewController: UIViewController {
     }
     
     deinit {
-       // IQKeyboardManager.shared().isEnableAutoToolbar = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
     }
 }
 

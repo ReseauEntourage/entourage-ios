@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="ar7-tr-3dW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="ar7-tr-3dW">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,7 +44,7 @@
         <!--GUIDE DE SOLIDARITE-->
         <scene sceneID="cHg-wQ-9Rj">
             <objects>
-                <viewController storyboardIdentifier="OTGuideDetailsViewController" id="IK0-TL-br7" customClass="GuideDetailPoiViewController" customModule="entourage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTGuideDetailsViewController" id="IK0-TL-br7" customClass="GuideDetailPoiViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QkU-Um-vRZ"/>
                         <viewControllerLayoutGuide type="bottom" id="KnA-bK-rlb"/>
@@ -57,35 +57,35 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="526"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTopSoliguide" id="8C4-rc-wIg" customClass="OTGuideDetailSoliguideTopTableViewCell" customModule="entourage" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTopSoliguide" id="8C4-rc-wIg" customClass="OTGuideDetailSoliguideTopTableViewCell" customModule="Ent_Beta" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="158.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8C4-rc-wIg" id="V7H-kd-nYi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="158.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Les informations 1" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpp-iU-ulf" userLabel="POI Name Label">
-                                                    <rect key="frame" x="16" y="16" width="343" height="0.0"/>
+                                                    <rect key="frame" x="16" y="16" width="343" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pour des informations encore plus complètes et disponibles ..." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="29i-5W-o6q" userLabel="POI Name Label">
-                                                    <rect key="frame" x="16" y="28" width="343" height="0.0"/>
+                                                    <rect key="frame" x="16" y="45" width="343" height="33.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="607-AO-ebt">
-                                                    <rect key="frame" x="82.5" y="-20" width="210.5" height="48"/>
+                                                    <rect key="frame" x="82.5" y="94.5" width="210.5" height="48"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="consulter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKW-0v-34o">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="consulter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKW-0v-34o">
                                                             <rect key="frame" x="16" y="15.5" width="62.5" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                             <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_soliguide" translatesAutoresizingMaskIntoConstraints="NO" id="jFD-da-9kH">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="logo_soliguide" translatesAutoresizingMaskIntoConstraints="NO" id="jFD-da-9kH">
                                                             <rect key="frame" x="94.5" y="9.5" width="100" height="29"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hW-WT-Dco">
@@ -133,21 +133,21 @@
                                             <outlet property="ui_view_button" destination="607-AO-ebt" id="8ti-ZH-XZc"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTop" id="i9N-IP-6KS" customClass="OTGuideDetailTopTableViewCell" customModule="entourage" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="88.5" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTop" id="i9N-IP-6KS" customClass="OTGuideDetailTopTableViewCell" customModule="Ent_Beta" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="203" width="375" height="133"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="i9N-IP-6KS" id="J8f-Q3-qau">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="133"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Titre" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qc-RX-PcO" userLabel="POI Name Label">
-                                                    <rect key="frame" x="16" y="16" width="36.5" height="0.0"/>
+                                                    <rect key="frame" x="16" y="16" width="36.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8o9-Q2-oCj">
-                                                    <rect key="frame" x="16" y="24" width="217" height="32"/>
+                                                    <rect key="frame" x="16" y="44.5" width="217" height="32"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_cat_filter-1" translatesAutoresizingMaskIntoConstraints="NO" id="dPz-wv-cJe">
                                                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -173,7 +173,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="lJX-gA-CYU">
-                                                    <rect key="frame" x="16" y="30" width="254" height="20"/>
+                                                    <rect key="frame" x="16" y="50.5" width="254" height="20"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picto_cat_filter-1" translatesAutoresizingMaskIntoConstraints="NO" id="UW3-aK-uLk">
                                                             <rect key="frame" x="0.0" y="0.0" width="32" height="20"/>
@@ -206,7 +206,7 @@
                                                     </connections>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titre" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m02-OV-h2y" userLabel="POI Name Label">
-                                                    <rect key="frame" x="16" y="24" width="343" height="0.0"/>
+                                                    <rect key="frame" x="16" y="92.5" width="343" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -243,8 +243,8 @@
                                             <outlet property="ui_title" destination="8Qc-RX-PcO" id="Nxx-6W-a8J"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellSoliguide" id="eAf-uH-Hun" customClass="OTGuideDetailSoliguideTableViewCell" customModule="entourage" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="132.5" width="375" height="246"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellSoliguide" id="eAf-uH-Hun" customClass="OTGuideDetailSoliguideTableViewCell" customModule="Ent_Beta" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="336" width="375" height="246"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eAf-uH-Hun" id="AaU-SG-Une">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="246"/>
@@ -353,21 +353,21 @@
                                             <outlet property="ui_view_public" destination="oHl-EN-gXH" id="Eg2-yR-tEu"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellPublic" id="YgP-JH-V8X" customClass="OTGuideDetailPublicTableViewCell" customModule="entourage" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="378.5" width="375" height="85"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellPublic" id="YgP-JH-V8X" customClass="OTGuideDetailPublicTableViewCell" customModule="Ent_Beta" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="582" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YgP-JH-V8X" id="xLf-cQ-r1Y">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Public" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxY-0s-Icd" userLabel="POI Name Label">
-                                                    <rect key="frame" x="16" y="16" width="48.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="48.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titre" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UD-5P-dcD" userLabel="POI Name Label">
-                                                    <rect key="frame" x="16" y="44.5" width="343" height="20.5"/>
+                                                    <rect key="frame" x="16" y="24" width="343" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -387,32 +387,32 @@
                                             <outlet property="ui_title" destination="pxY-0s-Icd" id="mko-rv-Wmy"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellContact" id="BoE-GC-edq" customClass="OTGuideDetailContactTableViewCell" customModule="entourage" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="463.5" width="375" height="231"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellContact" id="BoE-GC-edq" customClass="OTGuideDetailContactTableViewCell" customModule="Ent_Beta" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="626" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BoE-GC-edq" id="NcV-6W-X9T">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="231"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muO-Gm-VfC" userLabel="POI Name Label">
-                                                    <rect key="frame" x="16" y="16" width="62.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="62.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <color key="textColor" red="0.29019609089999998" green="0.29019609089999998" blue="0.29019609089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-PU-t4K">
-                                                    <rect key="frame" x="16" y="45" width="343" height="166"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-PU-t4K">
+                                                    <rect key="frame" x="16" y="45" width="343" height="0.0"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fwi-1r-eN5">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fwi-1r-eN5">
                                                             <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_detail_poi_phone" translatesAutoresizingMaskIntoConstraints="NO" id="7XO-L7-6Dr">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_detail_poi_phone" translatesAutoresizingMaskIntoConstraints="NO" id="7XO-L7-6Dr">
                                                                     <rect key="frame" x="0.0" y="11" width="40" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="40" id="HY3-uV-Ymw"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="2sf-HO-538" userLabel="POI Address Button">
+                                                                <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" ambiguous="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="2sf-HO-538" userLabel="POI Address Button">
                                                                     <rect key="frame" x="48" y="5" width="287" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="5wT-kl-MRJ"/>
@@ -436,16 +436,16 @@
                                                                 <constraint firstItem="2sf-HO-538" firstAttribute="centerY" secondItem="Fwi-1r-eN5" secondAttribute="centerY" id="xM5-Sq-v1S"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACp-71-KOI">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ACp-71-KOI">
                                                             <rect key="frame" x="0.0" y="42" width="343" height="40"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_detail_poi_mail" translatesAutoresizingMaskIntoConstraints="NO" id="vPP-Tv-vXO">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_detail_poi_mail" translatesAutoresizingMaskIntoConstraints="NO" id="vPP-Tv-vXO">
                                                                     <rect key="frame" x="0.0" y="10" width="40" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="40" id="sSI-jk-UIJ"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="zsN-2s-a1f" userLabel="POI Address Button">
+                                                                <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" ambiguous="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="zsN-2s-a1f" userLabel="POI Address Button">
                                                                     <rect key="frame" x="48" y="5" width="287" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="aGY-oZ-s6q"/>
@@ -468,16 +468,16 @@
                                                                 <constraint firstItem="vPP-Tv-vXO" firstAttribute="centerY" secondItem="ACp-71-KOI" secondAttribute="centerY" id="Wy6-oZ-YMz"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKD-DH-tSK">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dKD-DH-tSK">
                                                             <rect key="frame" x="0.0" y="84" width="343" height="40"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_detail_poi_web" translatesAutoresizingMaskIntoConstraints="NO" id="V6h-TO-tBv">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_detail_poi_web" translatesAutoresizingMaskIntoConstraints="NO" id="V6h-TO-tBv">
                                                                     <rect key="frame" x="0.0" y="15" width="40" height="10"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="40" id="Amj-vy-SIC"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="lED-oO-bwl" userLabel="POI Address Button">
+                                                                <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" ambiguous="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="lED-oO-bwl" userLabel="POI Address Button">
                                                                     <rect key="frame" x="48" y="5" width="287" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="7cp-jx-mYz"/>
@@ -500,16 +500,16 @@
                                                                 <constraint firstItem="V6h-TO-tBv" firstAttribute="leading" secondItem="dKD-DH-tSK" secondAttribute="leading" id="tuF-nq-kr6"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7I1-db-yPX">
-                                                            <rect key="frame" x="0.0" y="126" width="343" height="40"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7I1-db-yPX">
+                                                            <rect key="frame" x="0.0" y="-40" width="343" height="40"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_detail_poi_location" translatesAutoresizingMaskIntoConstraints="NO" id="Def-Rr-fUJ">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_detail_poi_location" translatesAutoresizingMaskIntoConstraints="NO" id="Def-Rr-fUJ">
                                                                     <rect key="frame" x="0.0" y="10" width="40" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="40" id="2a6-7u-Omk"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Tgo-dR-Bar" userLabel="POI Address Button">
+                                                                <button opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" ambiguous="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Tgo-dR-Bar" userLabel="POI Address Button">
                                                                     <rect key="frame" x="48" y="5" width="287" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="igc-er-Dro"/>
@@ -617,7 +617,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="627"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellFiter" rowHeight="44" id="b9Q-Sc-D4m" customClass="GuideFilterCell" customModule="entourage" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellFiter" rowHeight="44" id="b9Q-Sc-D4m" customClass="GuideFilterCell" customModule="Ent_Beta" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="44.5" width="335" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b9Q-Sc-D4m" id="oWb-Q7-fe6">
@@ -732,7 +732,7 @@
         <!--Invite Source-->
         <scene sceneID="Qa4-xp-ZiM">
             <objects>
-                <viewController storyboardIdentifier="shareVC" modalPresentationStyle="overCurrentContext" id="lY2-rt-Wu4" userLabel="Invite Source" customClass="InviteSourceViewController" customModule="entourage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="shareVC" modalPresentationStyle="overCurrentContext" id="lY2-rt-Wu4" userLabel="Invite Source" customClass="InviteSourceViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s1X-bY-sr7"/>
                         <viewControllerLayoutGuide type="bottom" id="c3g-lD-Fv1"/>
@@ -876,7 +876,7 @@
         <!--Search View Controller-->
         <scene sceneID="4hr-g8-adZ">
             <objects>
-                <viewController storyboardIdentifier="vcSearch" id="TBA-24-pk7" customClass="GDSSearchViewController" customModule="entourage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="vcSearch" id="TBA-24-pk7" customClass="GDSSearchViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qnA-g1-L4m"/>
                         <viewControllerLayoutGuide type="bottom" id="pn1-uG-OFA"/>
@@ -889,7 +889,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="90" id="BRh-qu-7nC" customClass="SolidarityGuideCell" customModule="entourage" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="90" id="BRh-qu-7nC" customClass="SolidarityGuideCell" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BRh-qu-7nC" id="ia7-CV-HQW">
@@ -1065,7 +1065,7 @@ un autre mot-clé ?</string>
         <!--Main-->
         <scene sceneID="cTl-29-NUE">
             <objects>
-                <viewController storyboardIdentifier="MainGuide" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" id="76l-Nb-Sfg" userLabel="Main" customClass="MainGuideViewController" customModule="entourage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainGuide" autoresizesArchivedViewToFullSize="NO" extendedLayoutIncludesOpaqueBars="YES" id="76l-Nb-Sfg" userLabel="Main" customClass="MainGuideViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dF2-SM-OS3"/>
                         <viewControllerLayoutGuide type="bottom" id="ZEo-vv-95Z"/>
@@ -1114,7 +1114,7 @@ un autre mot-clé ?</string>
                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="guideCell" id="CuF-rQ-Ied" customClass="SolidarityGuideCell" customModule="entourage" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="guideCell" id="CuF-rQ-Ied" customClass="SolidarityGuideCell" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="375" height="83.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CuF-rQ-Ied" id="gAf-NW-mW6">
@@ -1410,7 +1410,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
         <!--Guide Filters View Controller-->
         <scene sceneID="bOE-Vb-C73">
             <objects>
-                <viewController storyboardIdentifier="OTSolidarityGuideFiltersViewController" automaticallyAdjustsScrollViewInsets="NO" id="Uzu-6e-gTE" customClass="GuideFiltersViewController" customModule="entourage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OTSolidarityGuideFiltersViewController" automaticallyAdjustsScrollViewInsets="NO" id="Uzu-6e-gTE" customClass="GuideFiltersViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WYJ-Yd-qh4"/>
                         <viewControllerLayoutGuide type="bottom" id="aOv-L7-cUT"/>
@@ -1423,7 +1423,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                 <rect key="frame" x="-4" y="44" width="383" height="555"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FiltersTopCell" id="g12-WD-8Dg" customClass="GuideTopFilterCell" customModule="entourage" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FiltersTopCell" id="g12-WD-8Dg" customClass="GuideTopFilterCell" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="383" height="232"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g12-WD-8Dg" id="t7G-Xi-oif">
@@ -1601,7 +1601,7 @@ En tant que riverain, vous pouvez suggérer un lieu à une personne de la rue, m
                                             <outlet property="ui_view_volunteer" destination="izf-Nk-2h5" id="hbd-Uy-wnf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageFilterCell" rowHeight="44" id="h2u-zU-yUL" customClass="GuideFilterCell" customModule="entourage" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImageFilterCell" rowHeight="44" id="h2u-zU-yUL" customClass="GuideFilterCell" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="276.5" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h2u-zU-yUL" id="CqX-4j-OfZ">

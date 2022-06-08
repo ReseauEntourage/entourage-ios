@@ -1798,6 +1798,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.0;
+			};
+		};
 		02DB3BC627A14DFC004732C9 /* XCRemoteSwiftPackageReference "Nantes" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/instacart/Nantes";
@@ -1836,6 +1844,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
+		};
+		02B94C3F2850D4A2006059EF /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		02DB3BC727A14DFC004732C9 /* Nantes */ = {
 			isa = XCSwiftPackageProductDependency;

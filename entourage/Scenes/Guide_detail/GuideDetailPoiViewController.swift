@@ -19,7 +19,7 @@ import MessageUI
     @IBOutlet weak var ui_tableview_infos_poi: UITableView!
     
     @IBOutlet weak var ui_constraint_height_view_update: NSLayoutConstraint!
-    var poi:MapPoi!
+    var poi:MapPoi? = nil
     var isFromDeeplink = false
     
     var hasPublicRow = false
@@ -69,8 +69,9 @@ import MessageUI
     }
     
     func getDetailPoi() {
+        guard let poi = poi else { return  }
         //Actually WS return id and not uuid for entourage poi 
-        let uuid = (self.poi.uuid?.count ?? 0 > 0) ? self.poi.uuid! : "\(self.poi.sid)"
+        let uuid = (poi.uuid?.count ?? 0 > 0) ? poi.uuid! : "\(poi.sid)"
         
         PoiService.getDetailPoiWith(poiId: uuid) { [weak self] poi, error in
             if let _poi = poi {
@@ -82,7 +83,7 @@ import MessageUI
     }
     
     func setupUI() {
-        if self.poi.audience?.count ?? 0 > 0 {
+        if self.poi?.audience?.count ?? 0 > 0 {
             hasPublicRow = true
         }
         else {
@@ -95,29 +96,29 @@ import MessageUI
         
         self.ui_tableview.reloadData()
         
-        //TODO: a faire Analytics
-//        if isSoliguide, let _poiId = poi.soliguideId, let _poiUid = poi.uuid {
-//           // let _str = String.init(format: Soliguide_Show_Poi, _poiId,_poiUid,filtersSelectedFromMap)
-//           // OTLogger.logEvent(_str)
-//        }
+        if isSoliguide, let _poiId = poi?.soliguideId, let _poiUid = poi?.uuid {
+            let _str = String.init(format: Soliguide_Show_Poi, _poiId,_poiUid,filtersSelectedFromMap)
+            AnalyticsLoggerManager.logEvent(name: _str)
+        }
     }
     
     //MARK: - IBACTIONS -
     @IBAction func action_show_soliguide(_ sender: Any) {
         //TODO: - In App ou pas ?
-        if let _url = poi.soliguideUrl, let url = URL.init(string: _url), let _poiUid = poi.uuid {
+        if let _url = poi?.soliguideUrl, let url = URL.init(string: _url), let _poiUid = poi?.uuid {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            //TODO: a faire Analytics
-//            if let _poiId = poi.soliguideId {
-//                let _str = String.init(format:Soliguide_Click, _poiId,_poiUid,filtersSelectedFromMap)
-//                OTLogger.logEvent(_str)
-//            }
+            
+            if let _poiId = poi?.soliguideId {
+                let _str = String.init(format:Soliguide_Click, _poiId,_poiUid,filtersSelectedFromMap)
+                AnalyticsLoggerManager.logEvent(name: _str)
+            }
         }
     }
     
     @IBAction func action_phone(_ sender: Any) {
+        guard let poi = poi else { return  }
         var component = URLComponents.init()
-        component.path = self.poi.phone!
+        component.path = poi.phone!
         component.scheme = "tel"
         if let _url = component.url {
             UIApplication.shared.open(_url, options: [:], completionHandler: nil)
@@ -125,7 +126,7 @@ import MessageUI
     }
     
     @IBAction func action_mail(_ sender: Any) {
-        
+        guard let poi = poi else { return  }
         if !MFMailComposeViewController.canSendMail() {
             IHProgressHUD.showError(withStatus: "about_email_notavailable".localized)
             return
@@ -134,7 +135,7 @@ import MessageUI
 //       //TODO: a faire mail OTAppConfiguration.configureNavigationControllerAppearance(self.navigationController)
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
-        composeVC.setToRecipients([self.poi.email!])
+        composeVC.setToRecipients([poi.email!])
         composeVC.setSubject("")
         composeVC.setMessageBody("", isHTML: true)
 
@@ -145,7 +146,7 @@ import MessageUI
     
     @IBAction func action_web(_ sender: Any) {
         var urlReal = ""
-        if let url = self.poi.website {
+        if let url = self.poi?.website {
             urlReal = url
             if !url.contains("http") {
                 urlReal = String.init(format: "http://%@", url)
@@ -157,7 +158,7 @@ import MessageUI
     }
     
     @IBAction func action_location(_ sender: Any) {
-        if let _address = self.poi.address?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+        if let _address = self.poi?.address?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             let mapString = String.init(format: "http://maps.apple.com/?address=%@", _address)
             
             if let url = URL(string: mapString) {
@@ -167,14 +168,14 @@ import MessageUI
     }
     
     @IBAction func action_send_update_poi(_ sender: Any) {
-
+        guard let poi = poi else { return  }
         if !MFMailComposeViewController.canSendMail() {
             IHProgressHUD.showError(withStatus: "about_email_notavailable".localized)
             return
         }
 
-        let uuid : String! = (self.poi.uuid != nil && self.poi.uuid!.count > 0) ? self.poi.uuid! : "\(self.poi.sid!)"
-        let subject = String.init(format: "structure_subject".localized, self.poi.name,uuid)
+        let uuid : String! = (poi.uuid != nil && poi.uuid!.count > 0) ? poi.uuid! : "\(poi.sid!)"
+        let subject = String.init(format: "structure_subject".localized, poi.name,uuid)
 
         let composeVC = MFMailComposeViewController()
         composeVC.mailComposeDelegate = self
@@ -242,15 +243,16 @@ extension GuideDetailPoiViewController: InviteSourceDelegate {
     }
 
     func share() {
+        guard let poi = poi else { return  }
         popupViewController?.dismiss(animated: false, completion: {
             self.popupViewController = nil
         })
 
-//        OTLogger.logEvent(Action_guideMap_SharePOI) //TODO: A faire anayltics
+        AnalyticsLoggerManager.logEvent(name: Action_guideMap_SharePOI)
 
-        let name = self.poi.name.count == 0 ? "" : self.poi.name
-        let address = (self.poi.address == nil || self.poi.address?.count ?? 0 == 0) ? "" : "Adresse: \(self.poi.address!)"
-        let phone = (self.poi.phone == nil  || self.poi.phone?.count ?? 0 == 0) ? "" : "Tel: \(self.poi.phone!)"
+        let name = poi.name.count == 0 ? "" : poi.name
+        let address = (poi.address == nil || poi.address?.count ?? 0 == 0) ? "" : "Adresse: \(poi.address!)"
+        let phone = (poi.phone == nil  || poi.phone?.count ?? 0 == 0) ? "" : "Tel: \(poi.phone!)"
 
         let url = ENTOURAGE_BITLY_LINK
         let message = String.init(format: "info_share_sms_poi".localized, name,address,phone,url)
@@ -277,6 +279,8 @@ extension GuideDetailPoiViewController: UITableViewDataSource,UITableViewDelegat
         if tableView == ui_tableview_infos_poi {
             return filters.arrayFilters.count
         }
+        
+        if self.poi == nil { return 0 }
         
         if isSoliguide {
             return 4
@@ -310,7 +314,7 @@ extension GuideDetailPoiViewController: UITableViewDataSource,UITableViewDelegat
             case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellSoliguide", for: indexPath) as! OTGuideDetailSoliguideTableViewCell
                 
-                cell.populateCell(publicTxt: poi.audience, openTimeTxt: poi.openTimeTxt, languageTxt: poi.languageTxt)
+                cell.populateCell(publicTxt: poi!.audience, openTimeTxt: poi!.openTimeTxt, languageTxt: poi!.languageTxt)
                 
                 return cell
             default:
@@ -325,7 +329,7 @@ extension GuideDetailPoiViewController: UITableViewDataSource,UITableViewDelegat
         if index == 1 && hasPublicRow {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPublic", for: indexPath) as! OTGuideDetailPublicTableViewCell
             
-            cell.populateCell(description: poi.audience ?? "")
+            cell.populateCell(description: poi?.audience ?? "")
             return cell
         }
         
@@ -335,7 +339,7 @@ extension GuideDetailPoiViewController: UITableViewDataSource,UITableViewDelegat
     func setupContactCell(indexPath:IndexPath) -> UITableViewCell {
         let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellContact", for: indexPath) as! OTGuideDetailContactTableViewCell
         
-        cell.populateCell(poi: poi)
+        cell.populateCell(poi: poi!)
         
         return cell
     }
@@ -343,7 +347,7 @@ extension GuideDetailPoiViewController: UITableViewDataSource,UITableViewDelegat
     func setupTopCell(indexPath:IndexPath) -> UITableViewCell {
         let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellTop", for: indexPath) as! OTGuideDetailTopTableViewCell
         
-        cell.populateCell(poi: poi)
+        cell.populateCell(poi: poi!)
         return cell
     }
 }

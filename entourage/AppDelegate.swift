@@ -11,7 +11,7 @@ import UserNotificationsUI
 import GooglePlaces
 import Firebase
 import FirebaseMessaging
-
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         UNUserNotificationCenter.current().delegate = self
+        
+        IQKeyboardManager.shared.enable = true
         
         initEnvironmentConfigManager()
         configureGooglePlace()

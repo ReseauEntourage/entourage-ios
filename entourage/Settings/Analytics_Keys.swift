@@ -7,6 +7,30 @@
 
 import Foundation
 
+/*
+ V7 Tags
+ */
+
+//Guide
+let Action_guide_showMap = "Action__GuideMap__ShowMap"
+let Action_guide_showList = "Action__GuideMap__ShowList"
+let Action_guide_showFilters = "Action__GuideMap__ShowFilters"
+let Action_guideMap_POI = "Action__GuideMap__POI"
+
+let Action_guide_searchStart = "Action__GuideMap__SearchStart"
+let Action_guide_searchResults = "Action__GuideMap__SearchResults"
+
+let Action_guideMap_SubmitFilters = "Action__GuideMap__SubmitFilters"
+let Action_guideMap_SharePOI = "Action__GuideMap__SharePOI"
+let Action_guideMap_CallPOI = "Action__GuideMap__CallPOI"
+
+let Soliguide_Show_Poi = "Soligde__Show__%@_%@__Search_%@"
+let Soliguide_Click = "Soligde__Click__%@_%@__Search_%@"
+
+let Action_guide_searchFilter_organiz = "Action__GuideMap__OrganizationsFilter"
+let Action_guide_searchFilter_Volunt = "Action__GuideMap__Volunteers"
+let Action_guide_searchFilter_Donat = "Action__GuideMap__Donations"
+
 //Groups / Neighborhoods
 /** Home **/
 let View_Group_Show = "View__Group__Show"

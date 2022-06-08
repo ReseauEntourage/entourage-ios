@@ -52,7 +52,7 @@ class GuideFiltersViewController: UIViewController, ClosePopDelegate {
     }
     
     @IBAction func action_validate_filters(_ sender: Any) {
-       // OTLogger.logEvent(Action_guideMap_SubmitFilters)
+        AnalyticsLoggerManager.logEvent(name:Action_guideMap_SubmitFilters)
         var currentFilter = self.filters
         
         for i in currentFilter.arrayFilters.indices {
@@ -69,7 +69,7 @@ class GuideFiltersViewController: UIViewController, ClosePopDelegate {
     }
     
     @objc func saveFilters() {
-     //   OTLogger.logEvent(Action_guideMap_SubmitFilters) //TODO: a faire analytics
+        AnalyticsLoggerManager.logEvent(name:Action_guideMap_SubmitFilters)
         var currentFilter = self.filters
         
         for i in currentFilter.arrayFilters.indices {
@@ -159,7 +159,7 @@ extension GuideFiltersViewController: UITableViewDelegate,UITableViewDataSource,
     func changeTop(_ position:Int) {
         switch position {
         case 1:
-          //  OTLogger.logEvent(Action_guide_searchFilter_organiz) //TODO: a faire analytics
+            AnalyticsLoggerManager.logEvent(name:Action_guide_searchFilter_organiz)
             if self.filters.showPartners && !filters.isDefaultFiltersNew() {
                 self.filters.setAllFiltersOn()
             }
@@ -167,7 +167,7 @@ extension GuideFiltersViewController: UITableViewDelegate,UITableViewDataSource,
                 self.filters.setAllFiltersOff(position: -1)
             }
         case 2:
-          //  OTLogger.logEvent(Action_guide_searchFilter_Donat) //TODO: a faire analytics
+            AnalyticsLoggerManager.logEvent(name:Action_guide_searchFilter_Donat)
             if self.filters.showDonated && !filters.isDefaultFiltersNew() {
                 self.filters.setAllFiltersOn()
             }
@@ -175,7 +175,7 @@ extension GuideFiltersViewController: UITableViewDelegate,UITableViewDataSource,
                 self.filters.setAllFiltersOff(position: -2)
             }
         case 3:
-           // OTLogger.logEvent(Action_guide_searchFilter_Volunt) //TODO: a faire analytics
+            AnalyticsLoggerManager.logEvent(name:Action_guide_searchFilter_Volunt)
             if self.filters.showVolunteer && !filters.isDefaultFiltersNew()  {
                 self.filters.setAllFiltersOn()
             }

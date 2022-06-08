@@ -189,7 +189,7 @@ class MainGuideViewController: UIViewController {
     //MARK: - Notification Methods -
     
     @objc func showCurrentLocation() {
-     //   OTLogger.logEvent("RecenterMapClick") //TODO: a faire Analytcs
+        AnalyticsLoggerManager.logEvent(name:"RecenterMapClick")
         
         if LocationManger.sharedInstance.getAuthorizationStatus() != .authorizedAlways && LocationManger.sharedInstance.getAuthorizationStatus() != .authorizedWhenInUse {
             LocationManger.sharedInstance.showGeolocationNotAllowedMessage(message: "ask_permission_location_recenter_map".localized)
@@ -429,7 +429,7 @@ class MainGuideViewController: UIViewController {
     }
     
     func showMap(animated:Bool) {
-//        OTLogger.logEvent(Action_guide_showMap)//TODO: a faire analytics
+        AnalyticsLoggerManager.logEvent(name:Action_guide_showMap)
         self.ui_tableView?.isScrollEnabled = false
         self.mapView.isScrollEnabled = true
         
@@ -451,7 +451,7 @@ class MainGuideViewController: UIViewController {
     }
     
     func showList(animated:Bool) {
-//        OTLogger.logEvent(Action_guide_showList)//TODO: a faire analytics
+        AnalyticsLoggerManager.logEvent(name:Action_guide_showList)
         
         self.ui_tableView?.isScrollEnabled = true
         self.mapView.isScrollEnabled = false
@@ -499,7 +499,7 @@ class MainGuideViewController: UIViewController {
     }
     
     @IBAction func action_filters(_ sender:Any) {
-//        OTLogger.logEvent(Action_guide_showFilters)//TODO: a faire analytics
+        AnalyticsLoggerManager.logEvent(name:Action_guide_showFilters)
         let navVC = storyboard?.instantiateViewController(withIdentifier: "SolidarityGuideFiltersNav") as! UINavigationController
         let vc = navVC.topViewController as! GuideFiltersViewController
         vc.filterDelegate = self
@@ -541,7 +541,7 @@ class MainGuideViewController: UIViewController {
     }
     
     func showPoiDetails(_ poi: MapPoi!) {
-//        OTLogger.logEvent(Action_guideMap_POI)//TODO: a faire analytics
+        AnalyticsLoggerManager.logEvent(name: Action_guideMap_POI)
         if poi.partnerId != nil {
             let navVc = UIStoryboard.init(name: "PartnerDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController
             
