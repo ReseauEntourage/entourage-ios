@@ -50,6 +50,9 @@ let kAPIReportPostCommentNeighborhood = "neighborhoods/%@/chat_messages/%@/repor
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
 let API_URL_NEIGHBORHOOD_PREPARE_IMAGE_POST_UPLOAD = "neighborhoods/%@/chat_messages/presigned_upload?token=%@"
 
+//Home
+let kAPIHomeSummary = "home/summary?token=%@"
+
 //WebLink
 let emailContact = "contact@entourage.social"
 let GDS_INFO_ALERT_WEB_LINK = "https://soliguide.fr"

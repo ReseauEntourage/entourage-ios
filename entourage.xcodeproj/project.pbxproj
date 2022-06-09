@@ -14,7 +14,6 @@
 		0207BF8727F20C1600631914 /* UserProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */; };
 		021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318A827DF4E3100B0F1BD /* Metadatas.swift */; };
 		021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318AA27DF548600B0F1BD /* MetadatasService.swift */; };
-		021318AD27DF55D400B0F1BD /* MainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318AC27DF55D400B0F1BD /* MainHomeViewController.swift */; };
 		021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */; };
 		021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */; };
 		021F084F2798113D00F32A34 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021F084E2798113D00F32A34 /* LocationManager.swift */; };
@@ -140,9 +139,25 @@
 		02B57DA227FCB652005A567B /* ParsingDataCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B57DA127FCB652005A567B /* ParsingDataCodable.swift */; };
 		02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */; };
 		02B7921E27F7385A003AFFB9 /* Neighborhood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7921D27F7385A003AFFB9 /* Neighborhood.swift */; };
-		02B7922127F73F6A003AFFB9 /* TempGroupMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */; };
 		02B7922527F74801003AFFB9 /* Neighborhood_Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B7922427F74801003AFFB9 /* Neighborhood_Create.storyboard */; };
 		02B7922727F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B7922627F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift */; };
+		02B94C1A284F508B006059EF /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C19284F508B006059EF /* HomeService.swift */; };
+		02B94C1C284F50D8006059EF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C1B284F50D8006059EF /* Home.swift */; };
+		02B94C1E284F55D9006059EF /* Home.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02B94C1D284F55D9006059EF /* Home.xcassets */; };
+		02B94C21284F5838006059EF /* HomeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C20284F5838006059EF /* HomeMainViewController.swift */; };
+		02B94C23284F594A006059EF /* HomeMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C22284F594A006059EF /* HomeMainViewModel.swift */; };
+		02B94C27284F63AB006059EF /* HomeContribCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C25284F63AB006059EF /* HomeContribCell.swift */; };
+		02B94C28284F63AB006059EF /* HomeContribCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B94C26284F63AB006059EF /* HomeContribCell.xib */; };
+		02B94C2B284F8F0C006059EF /* HomeActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C29284F8F0C006059EF /* HomeActionCell.swift */; };
+		02B94C2C284F8F0C006059EF /* HomeActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B94C2A284F8F0C006059EF /* HomeActionCell.xib */; };
+		02B94C2F284F9277006059EF /* HomeSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C2D284F9277006059EF /* HomeSectionCell.swift */; };
+		02B94C30284F9277006059EF /* HomeSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B94C2E284F9277006059EF /* HomeSectionCell.xib */; };
+		02B94C33284F92AD006059EF /* HomeActionTeachCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C31284F92AD006059EF /* HomeActionTeachCell.swift */; };
+		02B94C34284F92AD006059EF /* HomeActionTeachCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B94C32284F92AD006059EF /* HomeActionTeachCell.xib */; };
+		02B94C37284F9FB3006059EF /* HomeHelpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C35284F9FB3006059EF /* HomeHelpCell.swift */; };
+		02B94C38284F9FB3006059EF /* HomeHelpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B94C36284F9FB3006059EF /* HomeHelpCell.xib */; };
+		02B94C402850D4A2006059EF /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02B94C3F2850D4A2006059EF /* IQKeyboardManagerSwift */; };
+		02B94C422851FEB1006059EF /* HomeMainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C412851FEB1006059EF /* HomeMainProtocols.swift */; };
 		02C0A0E2278EDCC400B0C646 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C0A0E1278EDCC400B0C646 /* UserService.swift */; };
 		02C0A0E7278EEC6B00B0C646 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */; };
 		02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3ABEF279AB50900817B82 /* Extensions_UIColor.swift */; };
@@ -248,7 +263,6 @@
 		0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDetailViewController.swift; sourceTree = "<group>"; };
 		021318A827DF4E3100B0F1BD /* Metadatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadatas.swift; sourceTree = "<group>"; };
 		021318AA27DF548600B0F1BD /* MetadatasService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadatasService.swift; sourceTree = "<group>"; };
-		021318AC27DF55D400B0F1BD /* MainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHomeViewController.swift; sourceTree = "<group>"; };
 		021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesBubblesCell.swift; sourceTree = "<group>"; };
 		021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserActivitiesCell.swift; sourceTree = "<group>"; };
 		021F084E2798113D00F32A34 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -375,9 +389,24 @@
 		02B57DA127FCB652005A567B /* ParsingDataCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingDataCodable.swift; sourceTree = "<group>"; };
 		02B7921B27F737CB003AFFB9 /* NeighborhoodService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodService.swift; sourceTree = "<group>"; };
 		02B7921D27F7385A003AFFB9 /* Neighborhood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neighborhood.swift; sourceTree = "<group>"; };
-		02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempGroupMainViewController.swift; sourceTree = "<group>"; };
 		02B7922427F74801003AFFB9 /* Neighborhood_Create.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neighborhood_Create.storyboard; sourceTree = "<group>"; };
 		02B7922627F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreateMainViewController.swift; sourceTree = "<group>"; };
+		02B94C19284F508B006059EF /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		02B94C1B284F50D8006059EF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		02B94C1D284F55D9006059EF /* Home.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Home.xcassets; sourceTree = "<group>"; };
+		02B94C20284F5838006059EF /* HomeMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainViewController.swift; sourceTree = "<group>"; };
+		02B94C22284F594A006059EF /* HomeMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainViewModel.swift; sourceTree = "<group>"; };
+		02B94C25284F63AB006059EF /* HomeContribCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContribCell.swift; sourceTree = "<group>"; };
+		02B94C26284F63AB006059EF /* HomeContribCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeContribCell.xib; sourceTree = "<group>"; };
+		02B94C29284F8F0C006059EF /* HomeActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActionCell.swift; sourceTree = "<group>"; };
+		02B94C2A284F8F0C006059EF /* HomeActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeActionCell.xib; sourceTree = "<group>"; };
+		02B94C2D284F9277006059EF /* HomeSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionCell.swift; sourceTree = "<group>"; };
+		02B94C2E284F9277006059EF /* HomeSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeSectionCell.xib; sourceTree = "<group>"; };
+		02B94C31284F92AD006059EF /* HomeActionTeachCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActionTeachCell.swift; sourceTree = "<group>"; };
+		02B94C32284F92AD006059EF /* HomeActionTeachCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeActionTeachCell.xib; sourceTree = "<group>"; };
+		02B94C35284F9FB3006059EF /* HomeHelpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHelpCell.swift; sourceTree = "<group>"; };
+		02B94C36284F9FB3006059EF /* HomeHelpCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHelpCell.xib; sourceTree = "<group>"; };
+		02B94C412851FEB1006059EF /* HomeMainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainProtocols.swift; sourceTree = "<group>"; };
 		02C0A0E1278EDCC400B0C646 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		02C3ABEF279AB50900817B82 /* Extensions_UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIColor.swift; sourceTree = "<group>"; };
@@ -487,6 +516,7 @@
 				0288A8E627CD11E9008D7011 /* SDWebImageMapKit in Frameworks */,
 				02DB3BC827A14DFC004732C9 /* Nantes in Frameworks */,
 				02E0099227E37B1100BB23CA /* FirebaseRemoteConfig in Frameworks */,
+				02B94C402850D4A2006059EF /* IQKeyboardManagerSwift in Frameworks */,
 				7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,6 +584,7 @@
 				02F5278627999D8400929431 /* PoiCategory.swift */,
 				02B7921D27F7385A003AFFB9 /* Neighborhood.swift */,
 				02E77B43282CF9CF00786E27 /* Event.swift */,
+				02B94C1B284F50D8006059EF /* Home.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -686,6 +717,7 @@
 				023B07CB27D664F6007752AC /* Profile.xcassets */,
 				02846CC127ECBC2B00D85ADA /* Interests.xcassets */,
 				02A3DD3027FDC03B0060EC2E /* Neighborhood.xcassets */,
+				02B94C1D284F55D9006059EF /* Home.xcassets */,
 				02C91A2A278F47F300305E0B /* Localizable.strings */,
 			);
 			path = Assets;
@@ -773,8 +805,7 @@
 				0288A8D327CCD8E1008D7011 /* Profile */,
 				02DB3BBD27A149B5004732C9 /* Partner_detail */,
 				02F527792799995900929431 /* Guide_detail */,
-				021318AC27DF55D400B0F1BD /* MainHomeViewController.swift */,
-				02B7922027F73F6A003AFFB9 /* TempGroupMainViewController.swift */,
+				02B94C1F284F5816006059EF /* Home */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -873,6 +904,34 @@
 			path = "Groups - Neighborhoods";
 			sourceTree = "<group>";
 		};
+		02B94C1F284F5816006059EF /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				02B94C24284F635D006059EF /* Cells */,
+				02B94C20284F5838006059EF /* HomeMainViewController.swift */,
+				02B94C22284F594A006059EF /* HomeMainViewModel.swift */,
+				02B94C412851FEB1006059EF /* HomeMainProtocols.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		02B94C24284F635D006059EF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				02B94C25284F63AB006059EF /* HomeContribCell.swift */,
+				02B94C26284F63AB006059EF /* HomeContribCell.xib */,
+				02B94C29284F8F0C006059EF /* HomeActionCell.swift */,
+				02B94C2A284F8F0C006059EF /* HomeActionCell.xib */,
+				02B94C2D284F9277006059EF /* HomeSectionCell.swift */,
+				02B94C2E284F9277006059EF /* HomeSectionCell.xib */,
+				02B94C31284F92AD006059EF /* HomeActionTeachCell.swift */,
+				02B94C32284F92AD006059EF /* HomeActionTeachCell.xib */,
+				02B94C35284F9FB3006059EF /* HomeHelpCell.swift */,
+				02B94C36284F9FB3006059EF /* HomeHelpCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		02C0A0E0278EDCA700B0C646 /* Network Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -883,6 +942,7 @@
 				0227446E2795BE6F005600A1 /* AssociationService.swift */,
 				021318AA27DF548600B0F1BD /* MetadatasService.swift */,
 				02D64F4E2799D74F00F6C4BD /* PoiService.swift */,
+				02B94C19284F508B006059EF /* HomeService.swift */,
 				02C91A22278F07D900305E0B /* Endpoints.swift */,
 				0262997A2790815000D84A6A /* APIKeys.swift */,
 				02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */,
@@ -1080,6 +1140,7 @@
 				02E0098D27E37B1100BB23CA /* FirebaseCrashlytics */,
 				02E0098F27E37B1100BB23CA /* FirebaseMessaging */,
 				02E0099127E37B1100BB23CA /* FirebaseRemoteConfig */,
+				02B94C3F2850D4A2006059EF /* IQKeyboardManagerSwift */,
 			);
 			productName = entourageios;
 			productReference = 025D8716278DD33600909101 /* Ent-Beta.app */;
@@ -1116,6 +1177,7 @@
 				0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */,
 				029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				02E0098A27E37B1100BB23CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 025D8717278DD33600909101 /* Products */;
 			projectDirPath = "";
@@ -1133,6 +1195,7 @@
 			files = (
 				025C92BE28340FD4000970D9 /* NeighborhoodEmptyEventCell.xib in Resources */,
 				02CCE67F27D78CAB00D6976C /* NunitoSans-Italic.ttf in Resources */,
+				02B94C34284F92AD006059EF /* HomeActionTeachCell.xib in Resources */,
 				02E2192D2837A16F002A1FCB /* Neighborhood_Report.storyboard in Resources */,
 				02490DC727EA246B00E2577B /* MJErrorInputView.xib in Resources */,
 				0207BF8527F2059400631914 /* UserDetail.storyboard in Resources */,
@@ -1144,9 +1207,11 @@
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
 				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
 				025D8726278DD33800909101 /* LaunchScreen.storyboard in Resources */,
+				02B94C38284F9FB3006059EF /* HomeHelpCell.xib in Resources */,
 				02E7845D2811A8DB00177F13 /* Neighborhood.storyboard in Resources */,
 				02DB3BBA27A1496A004732C9 /* PartnerDetails.storyboard in Resources */,
 				02A3DD3127FDC03B0060EC2E /* Neighborhood.xcassets in Resources */,
+				02B94C30284F9277006059EF /* HomeSectionCell.xib in Resources */,
 				025FFE0927DB980600783E8D /* Main.storyboard in Resources */,
 				029E307B27DB5EF300B12357 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				02846CC227ECBC2B00D85ADA /* Interests.xcassets in Resources */,
@@ -1155,13 +1220,16 @@
 				02CCE67427D78C7100D6976C /* Montserrat-Bold.ttf in Resources */,
 				02CCE67E27D78CAB00D6976C /* NunitoSans-Regular.ttf in Resources */,
 				029BD4F727EDC45E00AE67AF /* MJNavBackView.xib in Resources */,
+				02B94C1E284F55D9006059EF /* Home.xcassets in Resources */,
 				025C92BA28340F10000970D9 /* NeighborhoodDetailTopMemberCell.xib in Resources */,
+				02B94C2C284F8F0C006059EF /* HomeActionCell.xib in Resources */,
 				02856F6227DA334100988FF7 /* ProfileParams.storyboard in Resources */,
 				02CCE68027D78CAB00D6976C /* NunitoSans-Light.ttf in Resources */,
 				023EC27F27FB2D8D003A3051 /* BasePopViewController_Template.xib in Resources */,
 				02C91A2B278F47F300305E0B /* Localizable.strings in Resources */,
 				025D8723278DD33800909101 /* Assets.xcassets in Resources */,
 				0268194C278DF4A800A98A4A /* Onboarding_V2.storyboard in Resources */,
+				02B94C28284F63AB006059EF /* HomeContribCell.xib in Resources */,
 				02B37825279B06F600B204EF /* Others.storyboard in Resources */,
 				025C92C528341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib in Resources */,
 				02CCE67627D78C7500D6976C /* Quicksand-Bold.ttf in Resources */,
@@ -1242,7 +1310,10 @@
 				025E917427F3619300D4A7A8 /* ReportUserViewController.swift in Sources */,
 				02E069E7279184B3006DB1B6 /* OTOnboardingAssoStartViewController.swift in Sources */,
 				0229376D27A434F500206201 /* ApplicationTheme.swift in Sources */,
+				02B94C21284F5838006059EF /* HomeMainViewController.swift in Sources */,
 				02F5FEC427E0CB6800A14313 /* MJAlertController.swift in Sources */,
+				02B94C1A284F508B006059EF /* HomeService.swift in Sources */,
+				02B94C1C284F50D8006059EF /* Home.swift in Sources */,
 				02C6E86528203127009D4289 /* NeighborhoodParamSignalCell.swift in Sources */,
 				0247AD0228193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift in Sources */,
 				0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */,
@@ -1285,6 +1356,7 @@
 				02F5278327999AD700929431 /* MapPoi.swift in Sources */,
 				0262997B2790815000D84A6A /* APIKeys.swift in Sources */,
 				026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */,
+				02B94C23284F594A006059EF /* HomeMainViewModel.swift in Sources */,
 				0224596F27FF28FC00944DE4 /* MJErrorInputTextView.swift in Sources */,
 				0268197D278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift in Sources */,
 				02681950278DF6BD00A98A4A /* OTProgressBar.swift in Sources */,
@@ -1292,7 +1364,6 @@
 				02B7921E27F7385A003AFFB9 /* Neighborhood.swift in Sources */,
 				02B57D9627FC430D005A567B /* ReportUserMainViewController.swift in Sources */,
 				02E21921283520A1002A1FCB /* NeighborhoodUploadPictureService.swift in Sources */,
-				02B7922127F73F6A003AFFB9 /* TempGroupMainViewController.swift in Sources */,
 				02CCE68927D7B51E00D6976C /* TagView.swift in Sources */,
 				023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */,
 				0285AD832806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift in Sources */,
@@ -1329,7 +1400,6 @@
 				022DC3EF2847996D00868760 /* Analytics_Keys.swift in Sources */,
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
-				021318AD27DF55D400B0F1BD /* MainHomeViewController.swift in Sources */,
 				0258AFE0282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift in Sources */,
 				029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */,
 				02F5278727999D8400929431 /* PoiCategory.swift in Sources */,
@@ -1344,7 +1414,9 @@
 				0224597427FF323600944DE4 /* NeighborhoodCreateNameCell.swift in Sources */,
 				02F5278527999B8F00929431 /* SolidarityGuideCell.swift in Sources */,
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,
+				02B94C33284F92AD006059EF /* HomeActionTeachCell.swift in Sources */,
 				02A3DD3327FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift in Sources */,
+				02B94C37284F9FB3006059EF /* HomeHelpCell.swift in Sources */,
 				02C6E86F28203E1F009D4289 /* ReportGroupSendViewController.swift in Sources */,
 				02E77B44282CF9CF00786E27 /* Event.swift in Sources */,
 				02833F9A2822A9F600000156 /* NeighBorhoodListUsersViewController.swift in Sources */,
@@ -1356,6 +1428,7 @@
 				023D89BF27DFA351008C6A58 /* MainParamsViewController.swift in Sources */,
 				02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */,
 				02C6E87228203E1F009D4289 /* ReportGroupPageViewController.swift in Sources */,
+				02B94C2B284F8F0C006059EF /* HomeActionCell.swift in Sources */,
 				023D89C327DFA39A008C6A58 /* ParamsInfoCell.swift in Sources */,
 				02E2192B28368552002A1FCB /* NeighborhoodAddMenuViewController.swift in Sources */,
 				02DDF1D727D9117700EE22DE /* ProgressRadiusView.swift in Sources */,
@@ -1375,12 +1448,14 @@
 				02CCE69027D7B96700D6976C /* MainUserProfileTopCell.swift in Sources */,
 				02F5279B2799A1F300929431 /* GuideCells.swift in Sources */,
 				026819C0278E105600A98A4A /* OTLoginChangePhoneViewController.swift in Sources */,
+				02B94C2F284F9277006059EF /* HomeSectionCell.swift in Sources */,
 				029F690E27D905F5003D1E39 /* MainUserInfosCell.swift in Sources */,
 				02E21929283637E9002A1FCB /* NeighborhoodPostAddViewController.swift in Sources */,
 				02E069E2279184B3006DB1B6 /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */,
 				026819AA278E00A200A98A4A /* Utils.swift in Sources */,
 				02E7845F2811A91900177F13 /* NeighborhoodHomeViewController.swift in Sources */,
 				02F5279A2799A1F300929431 /* GuideModels.swift in Sources */,
+				02B94C422851FEB1006059EF /* HomeMainProtocols.swift in Sources */,
 				02B37829279B072C00B204EF /* ShareEntourageViewController.swift in Sources */,
 				0207BF8727F20C1600631914 /* UserProfileDetailViewController.swift in Sources */,
 				02C91A27278F303100305E0B /* AppState.swift in Sources */,
@@ -1401,6 +1476,7 @@
 				02C0A0E2278EDCC400B0C646 /* UserService.swift in Sources */,
 				02F527992799A1F300929431 /* GuideDelegates.swift in Sources */,
 				0224597F28006ACF00944DE4 /* NeighborhoodCreateAddOtherCell.swift in Sources */,
+				02B94C27284F63AB006059EF /* HomeContribCell.swift in Sources */,
 				02E2192728355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift in Sources */,
 				02DD1E91280853CF00538EF4 /* NeighborhoodEditViewController.swift in Sources */,
 				02E069ED279184B3006DB1B6 /* OTOnboardingNamesViewController.swift in Sources */,

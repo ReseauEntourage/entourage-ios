@@ -131,12 +131,14 @@ class MainGuideViewController: UIViewController {
     }
     
     func changeBackbutton() {
-//        let btnLeftMenu: UIButton = UIButton()
-//        btnLeftMenu.setImage(UIImage(named: "backItem"), for: .normal)
-//        btnLeftMenu.addTarget(self, action: #selector(onBack), for: .touchUpInside)
-//        btnLeftMenu.frame = CGRect(x: 0, y: 0, width: 34/2, height: 28/2)
-//        let barButton = UIBarButtonItem(customView: btnLeftMenu)
-//        self.navigationItem.leftBarButtonItem = barButton
+        if isFromDeeplink {
+            let btnLeftMenu: UIButton = UIButton()
+            btnLeftMenu.setImage(UIImage(named: "backItem"), for: .normal)
+            btnLeftMenu.addTarget(self, action: #selector(onBack), for: .touchUpInside)
+            btnLeftMenu.frame = CGRect(x: 0, y: 0, width: 34/2, height: 28/2)
+            let barButton = UIBarButtonItem(customView: btnLeftMenu)
+            self.navigationItem.leftBarButtonItem = barButton
+        }
         
         let btnRightMenu: UIButton = UIButton()
         btnRightMenu.setImage(UIImage(named: "search_new_orange"), for: .normal)
@@ -147,6 +149,10 @@ class MainGuideViewController: UIViewController {
     }
 
     @objc func onBack() {
+        if isFromDeeplink {
+            self.navigationController?.dismiss(animated: true)
+            return
+        }
         _ = self.navigationController?.popViewController(animated: true)
     }
     

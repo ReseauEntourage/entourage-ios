@@ -99,5 +99,8 @@ extension UIColor {
     static var rougeErreur: UIColor {
         return UIColor(named: "rouge_erreur") ?? .red
     }
+    static var orangeMedium: UIColor {
+        return UIColor.init(named: "orange_medium") ?? .red
+    }
     
 }

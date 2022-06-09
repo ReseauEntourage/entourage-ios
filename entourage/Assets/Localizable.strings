@@ -650,3 +650,20 @@ groupe";
 "report_group_validate_button" = "Envoyer";
 "report_group_back_button" = "Retour";
 "report_group_placeholder" = "Décrivez rapidement l’objet de votre signalement.";
+
+/** Home*/
+"home_title_welcome" = "Bienvenue %@";
+"home_contrib_title" = "Vos contributions au réseau entourage :";
+"home_meeting_title" = "Belles rencontres Entourage";
+"home_no_meeting_title" = "Pas encore de rencontres Entourage";
+"home_messages_title" = "Messages envoyés";
+"home_events_title" = "Participations à des événements";
+"home_groups_title" = "Groupes rejoints";
+"home_no_message_title" = "Pas encore de\nmessages\nenvoyés";
+"home_no_event_title" = "Pas d’évènements\nauquels vous avez\nparticipé";
+"home_no_group_title" = "Vous n’avez pas\nencore rejoint de\ngroupe de voisins";
+
+"home_actions_title" = "Envie d’agir ? ";
+"home_help_title" = "À vos côtés";
+"home_help_subtitle" = "Votre guide dans l’app";
+"home_cell_pedago" = "Me former pour passer à l’action";

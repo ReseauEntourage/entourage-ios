@@ -67,9 +67,9 @@ class NeighborhoodHomeViewController: UIViewController {
     var isSearch = false
     var isAlreadyClearRows = false //Use to prevent reload tableview when click on close searchview
     
-    var isGroupsSelected = true
-    var currentSelectedIsGroup = false // Use to prevent reloading tabs on view appears + Tap selection bar
-    var isfirstLoadingMyGroup = true
+    private var isGroupsSelected = true
+    private var currentSelectedIsGroup = false // Use to prevent reloading tabs on view appears + Tap selection bar
+    private var isfirstLoadingMyGroup = true
     
     var isLoading = false
     var isSendedSearch = false // Use to show empty search view only if we start search ;)
@@ -181,6 +181,11 @@ class NeighborhoodHomeViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    func setDiscoverFirst() {
+        self.isGroupsSelected = false
+        self.currentSelectedIsGroup = true
     }
     
     //MARK: - Network -
@@ -304,7 +309,7 @@ class NeighborhoodHomeViewController: UIViewController {
     }
     
     //MARK: - IBActions -
-    @IBAction func action_myGroups(_ sender: Any) {
+    @IBAction func action_myGroups(_ sender: Any?) {
         isGroupsSelected = true
         isfirstLoadingMyGroup = true
         
@@ -329,7 +334,7 @@ class NeighborhoodHomeViewController: UIViewController {
         }
     }
     
-    @IBAction func action_discover(_ sender: Any) {
+    @IBAction func action_discover(_ sender: Any?) {
         isGroupsSelected = false
         
         //Analytics

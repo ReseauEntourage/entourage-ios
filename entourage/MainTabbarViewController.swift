@@ -46,6 +46,17 @@ class MainTabbarViewController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(tapProfilTab), name: NSNotification.Name(rawValue: "tapProfilTab"), object: nil)
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(showHome), name: NSNotification.Name(rawValue: "showHome"), object: nil)
+        //Notif for changing neighborhood list to discover and select tab
+        NotificationCenter.default.addObserver(self, selector: #selector(showDiscoverNeighborhoods), name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowDiscover), object: nil)
+        
+    }
+    
+    @objc func showDiscoverNeighborhoods() {
+        if let vc = groupVC.topViewController as? NeighborhoodHomeViewController {
+            vc.setDiscoverFirst()
+        }
+        self.selectedIndex = 3
+        Logger.print("***** discover group : \(groupVC.topViewController)")
     }
     
 //    func showPopInfo(delegate:OTPopInfoDelegate,title:String,message:String,buttonOkStr:String,buttonCancelStr:String) {
@@ -81,7 +92,7 @@ class MainTabbarViewController: UITabBarController {
     
     func setupVCs() {
         
-        let _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempGroupVC")
+        let _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC")
         homeVC = UINavigationController.init(rootViewController: _homeVC)
         homeVC.isNavigationBarHidden = true
         homeVC.tabBarItem.title = "tabbar_home".localized
