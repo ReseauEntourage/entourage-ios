@@ -102,7 +102,7 @@ class MainTabbarViewController: UITabBarController {
         homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_home_on")
         
         
-        let _giftsVC = UIViewController() //UIStoryboard.init(name: "GuideSolidarity", bundle: nil).instantiateViewController(withIdentifier: "MainGuide")
+        let _giftsVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "home_gift_vc")
         giftsVC = UINavigationController.init(rootViewController: _giftsVC)
         giftsVC.isNavigationBarHidden = true
         giftsVC.tabBarItem.title = "tabbar_gifts".localized
@@ -111,7 +111,7 @@ class MainTabbarViewController: UITabBarController {
         giftsVC.tabBarItem.tag = 1
         
         
-        let  _msgVC = UIViewController() //UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempUsersVC")
+        let  _msgVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "home_messanger_vc")
         messagesVC = UINavigationController.init(rootViewController: _msgVC)
         messagesVC.isNavigationBarHidden = true
         messagesVC.tabBarItem.title = "tabbar_messages".localized
@@ -129,7 +129,7 @@ class MainTabbarViewController: UITabBarController {
         groupVC.tabBarItem.tag = 3
         
         
-        let _eventsVC = UIViewController() //UIStoryboard.init(name: "ProfileParams", bundle: nil).instantiateViewController(withIdentifier: "mainProfileParamsVC")
+        let _eventsVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "home_events_vc")
         eventsVC = UINavigationController.init(rootViewController: _eventsVC)
         eventsVC.isNavigationBarHidden = true
         eventsVC.tabBarItem.title = "tabbar_events".localized

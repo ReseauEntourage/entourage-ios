@@ -52,6 +52,8 @@ let API_URL_NEIGHBORHOOD_PREPARE_IMAGE_POST_UPLOAD = "neighborhoods/%@/chat_mess
 
 //Home
 let kAPIHomeSummary = "home/summary?token=%@"
+let kAPIHomeResources = "resources?token=%@"
+let kAPIHomeResourceRead = "resources/%d/users?token=%@"
 
 //WebLink
 let emailContact = "contact@entourage.social"

@@ -95,6 +95,7 @@
 		026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E54B12837F96200BE7993 /* MJShadowBottomView.swift */; };
 		02728DDB27F19A1000512DC0 /* PartnerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */; };
 		02728DDD27F19A3800512DC0 /* PartnerDetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */; };
+		0279680A2852472400311D8E /* PedagogicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027968092852472400311D8E /* PedagogicViewModel.swift */; };
 		0282637C282160B700B354F9 /* NeighborhoodCguCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282637B282160B700B354F9 /* NeighborhoodCguCell.swift */; };
 		02833F9A2822A9F600000156 /* NeighBorhoodListUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02833F992822A9F600000156 /* NeighBorhoodListUsersViewController.swift */; };
 		02833F9C2822B54D00000156 /* NeighborhoodUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02833F9B2822B54D00000156 /* NeighborhoodUserCell.swift */; };
@@ -158,6 +159,11 @@
 		02B94C38284F9FB3006059EF /* HomeHelpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02B94C36284F9FB3006059EF /* HomeHelpCell.xib */; };
 		02B94C402850D4A2006059EF /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 02B94C3F2850D4A2006059EF /* IQKeyboardManagerSwift */; };
 		02B94C422851FEB1006059EF /* HomeMainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C412851FEB1006059EF /* HomeMainProtocols.swift */; };
+		02B94C4528521F82006059EF /* PedagogicResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C4428521F82006059EF /* PedagogicResource.swift */; };
+		02B94C47285223A4006059EF /* PedagogicListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C46285223A4006059EF /* PedagogicListViewController.swift */; };
+		02B94C49285223B6006059EF /* PedagogicDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C48285223B6006059EF /* PedagogicDetailViewController.swift */; };
+		02B94C4B28522BA5006059EF /* PedagogicSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C4A28522BA5006059EF /* PedagogicSectionCell.swift */; };
+		02B94C4D28522BB8006059EF /* PedagogicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B94C4C28522BB8006059EF /* PedagogicCell.swift */; };
 		02C0A0E2278EDCC400B0C646 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C0A0E1278EDCC400B0C646 /* UserService.swift */; };
 		02C0A0E7278EEC6B00B0C646 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */; };
 		02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C3ABEF279AB50900817B82 /* Extensions_UIColor.swift */; };
@@ -348,6 +354,7 @@
 		026E54B12837F96200BE7993 /* MJShadowBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJShadowBottomView.swift; sourceTree = "<group>"; };
 		02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerDetailViewController.swift; sourceTree = "<group>"; };
 		02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerDetailInfoCell.swift; sourceTree = "<group>"; };
+		027968092852472400311D8E /* PedagogicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedagogicViewModel.swift; sourceTree = "<group>"; };
 		0282637B282160B700B354F9 /* NeighborhoodCguCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCguCell.swift; sourceTree = "<group>"; };
 		02833F992822A9F600000156 /* NeighBorhoodListUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighBorhoodListUsersViewController.swift; sourceTree = "<group>"; };
 		02833F9B2822B54D00000156 /* NeighborhoodUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodUserCell.swift; sourceTree = "<group>"; };
@@ -407,6 +414,11 @@
 		02B94C35284F9FB3006059EF /* HomeHelpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHelpCell.swift; sourceTree = "<group>"; };
 		02B94C36284F9FB3006059EF /* HomeHelpCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHelpCell.xib; sourceTree = "<group>"; };
 		02B94C412851FEB1006059EF /* HomeMainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainProtocols.swift; sourceTree = "<group>"; };
+		02B94C4428521F82006059EF /* PedagogicResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedagogicResource.swift; sourceTree = "<group>"; };
+		02B94C46285223A4006059EF /* PedagogicListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedagogicListViewController.swift; sourceTree = "<group>"; };
+		02B94C48285223B6006059EF /* PedagogicDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedagogicDetailViewController.swift; sourceTree = "<group>"; };
+		02B94C4A28522BA5006059EF /* PedagogicSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedagogicSectionCell.swift; sourceTree = "<group>"; };
+		02B94C4C28522BB8006059EF /* PedagogicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedagogicCell.swift; sourceTree = "<group>"; };
 		02C0A0E1278EDCC400B0C646 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		02C3ABEF279AB50900817B82 /* Extensions_UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions_UIColor.swift; sourceTree = "<group>"; };
@@ -585,6 +597,7 @@
 				02B7921D27F7385A003AFFB9 /* Neighborhood.swift */,
 				02E77B43282CF9CF00786E27 /* Event.swift */,
 				02B94C1B284F50D8006059EF /* Home.swift */,
+				02B94C4428521F82006059EF /* PedagogicResource.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -833,6 +846,15 @@
 			path = entourage/Scenes/Login;
 			sourceTree = SOURCE_ROOT;
 		};
+		026CFFC42853735B00CFAF9F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				02B94C4A28522BA5006059EF /* PedagogicSectionCell.swift */,
+				02B94C4C28522BB8006059EF /* PedagogicCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		0282637A28215FC100B354F9 /* Params */ = {
 			isa = PBXGroup;
 			children = (
@@ -907,6 +929,7 @@
 		02B94C1F284F5816006059EF /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				02B94C4328521F1F006059EF /* Pedagogic */,
 				02B94C24284F635D006059EF /* Cells */,
 				02B94C20284F5838006059EF /* HomeMainViewController.swift */,
 				02B94C22284F594A006059EF /* HomeMainViewModel.swift */,
@@ -930,6 +953,17 @@
 				02B94C36284F9FB3006059EF /* HomeHelpCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		02B94C4328521F1F006059EF /* Pedagogic */ = {
+			isa = PBXGroup;
+			children = (
+				02B94C46285223A4006059EF /* PedagogicListViewController.swift */,
+				027968092852472400311D8E /* PedagogicViewModel.swift */,
+				02B94C48285223B6006059EF /* PedagogicDetailViewController.swift */,
+				026CFFC42853735B00CFAF9F /* Cells */,
+			);
+			path = Pedagogic;
 			sourceTree = "<group>";
 		};
 		02C0A0E0278EDCA700B0C646 /* Network Managers */ = {
@@ -1303,6 +1337,7 @@
 				0288A8D927CCDA5C008D7011 /* PictureUploadS3Service.swift in Sources */,
 				02E069E6279184B3006DB1B6 /* OTOnboardingAssoActivityViewController.swift in Sources */,
 				02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */,
+				02B94C49285223B6006059EF /* PedagogicDetailViewController.swift in Sources */,
 				0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */,
 				0258AFE4282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift in Sources */,
 				02F5277E2799995900929431 /* GDSSearchViewController.swift in Sources */,
@@ -1316,6 +1351,7 @@
 				02B94C1C284F50D8006059EF /* Home.swift in Sources */,
 				02C6E86528203127009D4289 /* NeighborhoodParamSignalCell.swift in Sources */,
 				0247AD0228193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift in Sources */,
+				02B94C47285223A4006059EF /* PedagogicListViewController.swift in Sources */,
 				0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */,
 				0227446F2795BE6F005600A1 /* AssociationService.swift in Sources */,
 				02C3ABF4279AB55D00817B82 /* Extensions_UIViewController.swift in Sources */,
@@ -1342,6 +1378,7 @@
 				028444CA282015A000AFC072 /* NeighborhoodParamsGroupViewController.swift in Sources */,
 				0220580727FB003700531720 /* BasePopViewController.swift in Sources */,
 				0224597A27FF454A00944DE4 /* Extensions_UITextField.swift in Sources */,
+				02B94C4528521F82006059EF /* PedagogicResource.swift in Sources */,
 				02B57D9A27FC433F005A567B /* ReportUserSendViewController.swift in Sources */,
 				022744712795BEC0005600A1 /* AuthService.swift in Sources */,
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
@@ -1366,6 +1403,7 @@
 				02E21921283520A1002A1FCB /* NeighborhoodUploadPictureService.swift in Sources */,
 				02CCE68927D7B51E00D6976C /* TagView.swift in Sources */,
 				023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */,
+				02B94C4D28522BB8006059EF /* PedagogicCell.swift in Sources */,
 				0285AD832806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift in Sources */,
 				02E069EA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift in Sources */,
 				0247AD002819348E008F915B /* NeighborhoodDetailViewController.swift in Sources */,
@@ -1400,6 +1438,7 @@
 				022DC3EF2847996D00868760 /* Analytics_Keys.swift in Sources */,
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
+				0279680A2852472400311D8E /* PedagogicViewModel.swift in Sources */,
 				0258AFE0282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift in Sources */,
 				029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */,
 				02F5278727999D8400929431 /* PoiCategory.swift in Sources */,
@@ -1450,6 +1489,7 @@
 				026819C0278E105600A98A4A /* OTLoginChangePhoneViewController.swift in Sources */,
 				02B94C2F284F9277006059EF /* HomeSectionCell.swift in Sources */,
 				029F690E27D905F5003D1E39 /* MainUserInfosCell.swift in Sources */,
+				02B94C4B28522BA5006059EF /* PedagogicSectionCell.swift in Sources */,
 				02E21929283637E9002A1FCB /* NeighborhoodPostAddViewController.swift in Sources */,
 				02E069E2279184B3006DB1B6 /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */,
 				026819AA278E00A200A98A4A /* Utils.swift in Sources */,

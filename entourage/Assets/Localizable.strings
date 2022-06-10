@@ -667,3 +667,15 @@ groupe";
 "home_help_title" = "À vos côtés";
 "home_help_subtitle" = "Votre guide dans l’app";
 "home_cell_pedago" = "Me former pour passer à l’action";
+
+"home_resources_title" = "Tout le contenu pédagogique";
+"home_resource_title" = "Contenu pédagogique";
+
+"resource_all" = "Tout";
+"resource_understand" = "Comprendre";
+"resource_act" = "Agir";
+"resource_inspire" = "S'inspirer";
+
+"resource_title_understand" = "Comprendre";
+"resource_title_act" = "Agir";
+"resource_title_inspire" = "S'inspirer";

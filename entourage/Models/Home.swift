@@ -16,7 +16,8 @@ struct UserHome:Codable {
     var outingParticipationsCount: Int = 0
     var neighborhoodParticipationsCount: Int = 0
     var actions = HomeActions()
-    var moderator = User()
+    var moderatorName:String = ""
+    var moderatorId:Int = 0
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -78,6 +79,8 @@ struct HomeAction:Codable {
             return .poi
         case "webview":
             return .webview
+        case "user":
+            return .user
         default:
             return .none
         }
@@ -119,6 +122,7 @@ enum HomeAction_TypeAction {
 }
 
 enum HomeActionType {
+    case user
     case profile
     case neighborhood
     case outing

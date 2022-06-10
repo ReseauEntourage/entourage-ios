@@ -151,7 +151,7 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeHelpCell.identifier, for: indexPath) as! HomeHelpCell
             
             //TODO: add moderator username
-            cell.populateCell(name: "C'est moi ;)", subtitle: "home_help_subtitle".localized)
+            cell.populateCell(name: self.homeViewModel.moderatorName, subtitle: "home_help_subtitle".localized)
             
             return cell
             
@@ -174,8 +174,8 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 || indexPath.section == 0 { return }
         
         if indexPath.section == 2 {
-            //TODO: show moderator user
-            self.showWIP(parentVC: self)
+            showUserProfile(id: self.homeViewModel.moderatorId)
+            return
         }
         
         if indexPath.section == 1 && indexPath.row != homeViewModel.actions.count + 1 {
@@ -260,9 +260,11 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     
     func showResources() {
-        //TODO: show pedago
-        self.showWIP(parentVC: self)
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "listPedagoNav") {
+            self.navigationController?.present(vc, animated: true)
+        }
     }
+    
     func showResource(id:Int) {
         //TODO: show pedago
         self.showWIP(parentVC: self)
