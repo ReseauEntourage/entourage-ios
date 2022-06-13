@@ -1285,7 +1285,7 @@
         <!--Params About View Controller-->
         <scene sceneID="FMw-NI-RD1">
             <objects>
-                <viewController storyboardIdentifier="paramsHelpVC" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="overCurrentContext" id="XPl-Q2-DVs" customClass="ParamsAboutViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="paramsHelpVC" id="XPl-Q2-DVs" customClass="ParamsAboutViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C9a-UI-dte">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2491,7 +2491,7 @@
                                         <rect key="frame" x="0.0" y="738" width="414" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tu5-f1-RC3">
-                                                <rect key="frame" x="77.5" y="15" width="259" height="50"/>
+                                                <rect key="frame" x="76.5" y="15" width="261" height="50"/>
                                                 <color key="backgroundColor" name="orange_app"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="9Ba-PV-LRQ"/>
@@ -2909,7 +2909,7 @@
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_light_a50">
-            <color red="1" green="0.6119999885559082" blue="0.36500000953674316" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_light_a70">
             <color red="1" green="0.6119999885559082" blue="0.36500000953674316" alpha="0.69999998807907104" colorSpace="custom" customColorSpace="sRGB"/>

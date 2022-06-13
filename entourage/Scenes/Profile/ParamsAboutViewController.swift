@@ -28,7 +28,6 @@ class ParamsAboutViewController: BasePopViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .darkGray.withAlphaComponent(0.5)
         ui_top_view.populateView(title: "params_about_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
         
         self.ui_tableview.dataSource = self
