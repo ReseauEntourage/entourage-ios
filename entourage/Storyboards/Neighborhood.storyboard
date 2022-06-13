@@ -573,7 +573,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ubz-qQ-dq5">
-                                        <rect key="frame" x="32" y="32" width="64.5" height="30"/>
+                                        <rect key="frame" x="32" y="42" width="64.5" height="30"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -706,9 +706,9 @@
                                     <constraint firstItem="Iez-lm-a7b" firstAttribute="top" secondItem="A5n-g5-1t4" secondAttribute="top" constant="15" id="eyq-NY-hFR"/>
                                     <constraint firstItem="Anf-HD-Atq" firstAttribute="top" secondItem="A5n-g5-1t4" secondAttribute="top" id="nss-Xq-M1Y"/>
                                     <constraint firstItem="Anf-HD-Atq" firstAttribute="leading" secondItem="A5n-g5-1t4" secondAttribute="leading" id="tOf-6O-eLP"/>
-                                    <constraint firstItem="qJh-dc-ZFj" firstAttribute="top" secondItem="Ubz-qQ-dq5" secondAttribute="bottom" constant="20" id="yEN-7H-DEK"/>
+                                    <constraint firstItem="qJh-dc-ZFj" firstAttribute="top" secondItem="Ubz-qQ-dq5" secondAttribute="bottom" constant="10" id="yEN-7H-DEK"/>
                                     <constraint firstItem="Ubz-qQ-dq5" firstAttribute="leading" secondItem="A5n-g5-1t4" secondAttribute="leading" constant="32" id="yc0-co-1NV"/>
-                                    <constraint firstItem="Ubz-qQ-dq5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="A5n-g5-1t4" secondAttribute="top" constant="20" id="zHh-XW-3EH"/>
+                                    <constraint firstItem="Ubz-qQ-dq5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="A5n-g5-1t4" secondAttribute="top" constant="8" id="zHh-XW-3EH"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="big_arrow_show" translatesAutoresizingMaskIntoConstraints="NO" id="icy-G9-pTH">

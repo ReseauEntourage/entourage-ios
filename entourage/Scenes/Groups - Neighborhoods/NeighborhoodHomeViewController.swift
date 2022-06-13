@@ -44,13 +44,13 @@ class NeighborhoodHomeViewController: UIViewController {
     @IBOutlet weak var ui_lbl_empty_title_discover: UILabel!
     @IBOutlet weak var ui_lbl_empty_subtitle_discover: UILabel!
     
-    var maxViewHeight:CGFloat = 138
-    var minViewHeight:CGFloat = 108//108
+    var maxViewHeight:CGFloat = 134
+    var minViewHeight:CGFloat = 92//108
     
     var minLabelBottomConstraint:CGFloat = 9
     var maxLabelBottomConstraint:CGFloat = 20
     
-    var minLabelFont:CGFloat = 18
+    var minLabelFont:CGFloat = 16//18
     var maxLabelFont:CGFloat = 24
     
     var minImageHeight:CGFloat = 0
