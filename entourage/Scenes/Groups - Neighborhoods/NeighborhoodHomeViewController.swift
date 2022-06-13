@@ -327,10 +327,11 @@ class NeighborhoodHomeViewController: UIViewController {
             myNeighborhoods.removeAll()
             getNeighborhoods()
         }
-        neighborhoodsSearch.removeAll()
         currentSelectedIsGroup = true
         isSendedSearch = false
-        isSearch = false
+        if neighborhoodsSearch.count == 0 {
+            isSearch = false
+        }
         isLoading = false
         changeTabSelection()
         if self.myNeighborhoods.count > 0 {
@@ -354,7 +355,6 @@ class NeighborhoodHomeViewController: UIViewController {
         isSendedSearch = false
         currentSelectedIsGroup = false
         isLoading = false
-        isSearch = false
         changeTabSelection()
         if self.neighborhoodsDiscovered.count > 0 {
             self.gotoTop()
