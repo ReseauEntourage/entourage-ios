@@ -19,7 +19,7 @@ class NeighborhoodHomeSearchCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ui_view_search.layer.cornerRadius = ui_view_search.frame.height / 2
+        ui_view_search.layer.cornerRadius = 20//ui_view_search.frame.height / 2
         ui_view_search.layer.borderColor = UIColor.appOrange.cgColor
         ui_view_search.layer.borderWidth = 1
         

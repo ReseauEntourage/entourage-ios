@@ -22,7 +22,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     @IBOutlet weak var ui_view_error: UIView!
     
     
-    let radius:CGFloat = 24
+    let radius:CGFloat = 22
     var messageId:Int = 0
     var messageForRetry = ""
     var positionForRetry = 0

@@ -7,6 +7,7 @@
 
 import UIKit
 import IHProgressHUD
+import IQKeyboardManagerSwift
 
 class NeighborhoodDetailMessagesViewController: UIViewController {
     
@@ -44,7 +45,8 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ui_top_view.populateView(title: "neighborhood_comments_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: false)
+        IQKeyboardManager.shared.enable = false
+        ui_top_view.populateView(title: "neighborhood_comments_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self,backgroundColor: .appBeigeClair, isClose: false)
         
         ui_title_empty.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_title_empty.text = "neighborhood_no_messageComment".localized
@@ -84,8 +86,12 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         bottomConstraint = ui_constraint_bottom_view_Tf.constant
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if isGroupMember && isStartEditing {
+            isStartEditing = false
             _ = ui_textview_message.becomeFirstResponder()
         }
     }

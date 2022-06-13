@@ -9,6 +9,7 @@ import UIKit
 
 class NeighborhoodParamNotifsCell: UITableViewCell {
 
+    @IBOutlet weak var ui_title_notif: UILabel!
     @IBOutlet weak var ui_lb_all: UILabel!
     @IBOutlet weak var ui_lb_events: UILabel!
     @IBOutlet weak var ui_lb_messages: UILabel!
@@ -24,11 +25,13 @@ class NeighborhoodParamNotifsCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        ui_title_notif.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_lb_all.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_lb_events.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_lb_members.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_lb_messages.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
+        ui_title_notif.text = "neighborhood_params_notif_title".localized
         ui_lb_all.text = "neighborhood_params_notif_all".localized
         ui_lb_events.text = "neighborhood_params_notif_new_events".localized
         ui_lb_messages.text = "neighborhood_params_notif_new_messages".localized

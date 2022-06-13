@@ -7,6 +7,7 @@
 
 import UIKit
 import IHProgressHUD
+import IQKeyboardManagerSwift
 
 class NeighborhoodHomeViewController: UIViewController {
     
@@ -38,6 +39,7 @@ class NeighborhoodHomeViewController: UIViewController {
     @IBOutlet weak var ui_lbl_empty_title_search: UILabel!
     @IBOutlet weak var ui_lbl_empty_subtitle_search: UILabel!
     
+    @IBOutlet weak var ui_arrow_show_empty: UIImageView!
     @IBOutlet weak var ui_view_empty_discover: UIView!
     @IBOutlet weak var ui_lbl_empty_title_discover: UILabel!
     @IBOutlet weak var ui_lbl_empty_subtitle_discover: UILabel!
@@ -85,6 +87,8 @@ class NeighborhoodHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        IQKeyboardManager.shared.enable = false
         
         setupEmptyViews()
         
@@ -372,6 +376,7 @@ class NeighborhoodHomeViewController: UIViewController {
     //MARK: - Methods -
     func changeTabSelection() {
         ui_view_empty.isHidden = true
+        ui_arrow_show_empty.isHidden = true
         self.ui_view_empty_groups.isHidden = true
         self.ui_view_empty_search.isHidden = true
         self.ui_view_empty_discover.isHidden = true
@@ -480,6 +485,7 @@ class NeighborhoodHomeViewController: UIViewController {
     func showEmptyView() {
         if isGroupsSelected {
             self.ui_view_empty.isHidden = false
+            ui_arrow_show_empty.isHidden = false
             self.ui_view_empty_groups.isHidden = false
             self.ui_view_empty_search.isHidden = true
             self.ui_view_empty_discover.isHidden = true
@@ -490,18 +496,21 @@ class NeighborhoodHomeViewController: UIViewController {
                 self.ui_view_empty_groups.isHidden = true
                 self.ui_view_empty_search.isHidden = false
                 self.ui_view_empty_discover.isHidden = true
+                ui_arrow_show_empty.isHidden = false
             }
             else {
                 self.ui_view_empty.isHidden = false
                 self.ui_view_empty_groups.isHidden = true
                 self.ui_view_empty_search.isHidden = true
                 self.ui_view_empty_discover.isHidden = false
+                ui_arrow_show_empty.isHidden = false
             }
         }
     }
     
     func hideEmptyView() {
         ui_view_empty.isHidden = true
+        ui_arrow_show_empty.isHidden = true
         ui_view_empty_groups.isHidden = true
         ui_view_empty_search.isHidden = true
         ui_view_empty_discover.isHidden = true

@@ -52,9 +52,8 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
             return
         }
         
-        IHProgressHUD.show()
-        
         if isAdd {
+            IHProgressHUD.show()
             NeighborhoodService.joinNeighborhood(groupId: neighborhood.uid) { user, error in
                 IHProgressHUD.dismiss()
                 if let user = user {
@@ -69,18 +68,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
             }
         }
         else {
-            NeighborhoodService.leaveNeighborhood(groupId: neighborhood.uid, userId: UserDefaults.currentUser!.sid) { group, error in
-                IHProgressHUD.dismiss()
-                if error == nil {
-                    self.neighborhood?.members.removeAll(where: {$0.uid == UserDefaults.currentUser!.sid})
-                    let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount - 1 : 0
-                    
-                    self.neighborhood?.membersCount = count
-                    
-                    self.ui_tableview.reloadData()
-                    self.delegate?.refreshNeighborhoodModified()
-                }
-            }
+            showPopLeave()
         }
     }
     
@@ -97,12 +85,55 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
         self.ui_tableview.reloadData()
     }
     
+    func showPopLeave() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "params_leave_group_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_leave_group_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        
+        customAlert.configureAlert(alertTitle: "params_leave_group_pop_title".localized, message: "params_leave_group_pop_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35,parentVC:self)
+        
+        customAlert.alertTagName = .None
+        customAlert.delegate = self
+        customAlert.show()
+    }
+    
+    func sendLeaveGroup() {
+        guard let neighborhood = neighborhood else {
+            return
+        }
+        IHProgressHUD.show()
+        NeighborhoodService.leaveNeighborhood(groupId: neighborhood.uid, userId: UserDefaults.currentUser!.sid) { group, error in
+            IHProgressHUD.dismiss()
+            if error == nil {
+                self.neighborhood?.members.removeAll(where: {$0.uid == UserDefaults.currentUser!.sid})
+                let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount - 1 : 0
+                
+                self.neighborhood?.membersCount = count
+                
+                self.ui_tableview.reloadData()
+                self.delegate?.refreshNeighborhoodModified()
+            }
+        }
+    }
+    
     @IBAction func action_show_params(_ sender: Any) {
         if let navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "params_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodParamsGroupViewController {
             vc.neighborhood = neighborhood
             self.navigationController?.present(navVC, animated: true)
         }
     }
+}
+
+//MARK: - MJAlertControllerDelegate -
+extension NeighborhoodDetailOnlyViewController: MJAlertControllerDelegate {
+    func validateLeftButton(alertTag:MJAlertTAG) {
+        if alertTag == .None {
+            self.sendLeaveGroup()
+        }
+    }
+    
+    func validateRightButton(alertTag:MJAlertTAG) {}
+    func closePressed(alertTag:MJAlertTAG) {}
 }
 
 //MARK: - UITableViewDataSource / Delegate -
