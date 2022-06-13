@@ -18,6 +18,7 @@ class HomeViewModel {
     
     init(delegate:HomeMainViewsActionsDelegate) {
         self.delegate = delegate
+        self.loadMetadatas()
     }
     
     var moderatorName:String {
@@ -183,5 +184,11 @@ class HomeViewModel {
         }
     }
     
+    
+    private func loadMetadatas() {
+        MetadatasService.getMetadatas { error in
+            Logger.print("***** return get metadats ? \(error)")
+        }
+    }
     
 }

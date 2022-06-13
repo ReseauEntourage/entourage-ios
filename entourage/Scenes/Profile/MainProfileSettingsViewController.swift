@@ -44,11 +44,6 @@ class MainProfileSettingsViewController: UIViewController {
         
         ui_view_nav.populateCustom(title:nil, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false,marginLeftButton: 24)
         
-        //TODO: a supp apres mise en place nav pour le mettre dans le &er controller
-        MetadatasService.getMetadatas { error in
-            Logger.print("***** return get metadats ? \(error)")
-        }
-        
         setupVCs()
         setupTopViews()
         

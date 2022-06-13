@@ -292,12 +292,22 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
     func addGroupWelcome(message: String?) {
         newNeighborhood.welcomeMessage = message
     }
+    
+    func hasNoInput() -> Bool {
+        return newNeighborhood.name.count == 0 && newNeighborhood.aboutGroup?.count ?? 0 == 0 && newNeighborhood.address == nil
+    }
 }
 
 //MARK: - MJNavBackViewDelegate -
 extension NeighborhoodCreateMainViewController: MJNavBackViewDelegate {
     func goBack() {
         AnalyticsLoggerManager.logEvent(name: Action_NewGroup_BackArrow)
+        
+        if hasNoInput() {
+            self.dismiss(animated: true)
+            return
+        }
+        
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
         let buttonValidate = MJAlertButtonType(title: "neighborhoodCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
