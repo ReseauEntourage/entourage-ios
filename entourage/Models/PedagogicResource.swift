@@ -21,6 +21,7 @@ struct PedagogicResource: Codable {
     var imageUrl:String? = nil
     var url:String? = nil
     var isRead = false
+    var bodyHtml:String? = nil
     
     var tag:PedagogicTag {
         get {
@@ -46,6 +47,7 @@ struct PedagogicResource: Codable {
         case imageUrl = "image_url"
         case url
         case isRead = "watched"
+        case bodyHtml = "html"
     }
 }
 

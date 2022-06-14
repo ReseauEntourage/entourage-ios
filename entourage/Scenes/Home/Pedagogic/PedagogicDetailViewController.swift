@@ -16,6 +16,11 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
     var urlWebview:String? = ""
     var resourceId:Int? = nil
     var isRead = false
+    var htmlBody:String? = nil
+    
+    
+    
+
     
     weak var delegate:PedagogicReadDelegate? = nil
     
@@ -26,15 +31,12 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
         ui_indicator.color = .appOrange
         ui_top_view.backgroundColor = .clear
         ui_top_view.populateCustom(title: "home_resource_title".localized, titleFont: nil, titleColor: nil, imageName: nil, backgroundColor: .appBeigeClair, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil)
-        
-        guard let urlWebview = urlWebview, let url = URL(string: urlWebview) else {
-            goBack()
-            return
-        }
+
+        guard let htmlBody = htmlBody else { return }
         
         ui_webview.uiDelegate = self
         ui_webview.navigationDelegate = self
-        ui_webview.load(URLRequest(url: url))
+        ui_webview.loadHTMLString(htmlBody, baseURL: nil)
         
         if let id = resourceId, !isRead {
             ui_indicator.startAnimating()

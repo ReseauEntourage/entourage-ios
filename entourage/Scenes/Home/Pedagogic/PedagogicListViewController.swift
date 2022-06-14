@@ -210,6 +210,7 @@ extension PedagogicListViewController: UITableViewDataSource, UITableViewDelegat
             vc.resourceId = pedagogic.id
             vc.delegate = self
             vc.isRead = pedagogic.isRead
+            vc.htmlBody = pedagogic.bodyHtml
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
