@@ -41,6 +41,10 @@
 "tabbar_groups" = "Groupes";
 "tabbar_events" = "Événements";
 
+"errorSettings" = "Pas d'autorisation";
+"toSettings" = "Réglages";
+"authCameraSettings" = "Veuillez autoriser l'accès à l'appareil photo.";
+
 //PreOnboarding
 "next" = "Suivant";
 "connectMe" = "Me connecter";

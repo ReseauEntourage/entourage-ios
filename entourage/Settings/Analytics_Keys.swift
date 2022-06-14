@@ -31,6 +31,15 @@ let Action_guide_searchFilter_organiz = "Action__GuideMap__OrganizationsFilter"
 let Action_guide_searchFilter_Volunt = "Action__GuideMap__Volunteers"
 let Action_guide_searchFilter_Donat = "Action__GuideMap__Donations"
 
+//Photo
+let Action_Profile_Take_Photo = "Action__Profile__TakePhoto"
+let Action_Profile_Upload_Photo = "Action__Profile__UploadPhoto"
+let View_Profile_Choose_Photo = "View__Profile__ChoosePhoto"
+
+/*
+ V8 Tags
+ */
+
 //Groups / Neighborhoods
 /** Home **/
 let View_Group_Show = "View__Group__Show"

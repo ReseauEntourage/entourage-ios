@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class UserPhotoAddViewController: BasePopViewController {
         
@@ -31,7 +32,7 @@ class UserPhotoAddViewController: BasePopViewController {
         super.viewDidLoad()
         
         if isFromProfile {
-            //OTLogger.logEvent(View_Profile_Choose_Photo)
+            AnalyticsLoggerManager.logEvent(name: View_Profile_Choose_Photo)
             ui_constraint_title_top.constant = 0
             ui_label_title.isHidden = true
             ui_label_title.text = ""
@@ -131,26 +132,62 @@ class UserPhotoAddViewController: BasePopViewController {
     
     @IBAction func action_take_photo(_ sender: Any) {
         if isFromProfile {
-            //  OTLogger.logEvent(Action_Profile_Take_Photo)
+            AnalyticsLoggerManager.logEvent(name: Action_Profile_Take_Photo)
         }
-        else {
-            //  OTLogger.logEvent(Action_Onboarding_Take_Photo)
+        checkCameraAccess()
+    }
+    
+    func checkCameraAccess() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .denied,.restricted:
+            presentCameraSettings()
+        case .authorized:
+            showPicker(sourceType: .camera)
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { success in
+                if success {
+                    self.showPicker(sourceType: .camera)
+                } else {
+                    DispatchQueue.main.async {
+                        self.presentCameraSettings()
+                    }
+                }
+            }
+        @unknown default:
+            break
         }
+    }
+    
+    func presentCameraSettings() {
         
-        showPicker(sourceType: .camera)
+        let alertVC = MJAlertController()
+        let buttonCancel = MJAlertButtonType(title: "cancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "toSettings".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "authCameraSettings".localized, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self)
+        
+        alertVC.delegate = self
+        alertVC.show()
     }
     
     @IBAction func action_take_from_gallery(_ sender: Any) {
         if isFromProfile {
-            //  OTLogger.logEvent(Action_Profile_Upload_Photo)
-        }
-        else {
-            // OTLogger.logEvent(Action_Onboarding_Upload_Photo)
+            AnalyticsLoggerManager.logEvent(name: Action_Profile_Upload_Photo)
         }
         
         showPicker(sourceType: .photoLibrary)
     }
 }
+
+//MARK: - MJAlertControllerDelegate -
+extension UserPhotoAddViewController: MJAlertControllerDelegate {
+    func validateLeftButton(alertTag: MJAlertTAG) {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    func validateRightButton(alertTag: MJAlertTAG) {}
+}
+   
 
 //MARK: - PickerVC Delegate -
 extension UserPhotoAddViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {

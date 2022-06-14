@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class NeighborhoodPostAddPhotoViewController: BasePopViewController {
     
@@ -83,12 +84,54 @@ class NeighborhoodPostAddPhotoViewController: BasePopViewController {
     
     //MARK: - IBActions -
     @IBAction func action_take_photo(_ sender: Any) {
-        showPicker(sourceType: .camera)
+        checkCameraAccess()
     }
     
     @IBAction func action_take_from_gallery(_ sender: Any) {
         showPicker(sourceType: .photoLibrary)
     }
+    
+    func checkCameraAccess() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .denied,.restricted:
+            presentCameraSettings()
+        case .authorized:
+            showPicker(sourceType: .camera)
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { success in
+                if success {
+                    self.showPicker(sourceType: .camera)
+                } else {
+                    DispatchQueue.main.async {
+                        self.presentCameraSettings()
+                    }
+                }
+            }
+        @unknown default:
+            break
+        }
+    }
+    
+    func presentCameraSettings() {
+        
+        let alertVC = MJAlertController()
+        let buttonCancel = MJAlertButtonType(title: "cancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "toSettings".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "authCameraSettings".localized, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self)
+        
+        alertVC.delegate = self
+        alertVC.show()
+    }
+}
+
+//MARK: - MJAlertControllerDelegate -
+extension NeighborhoodPostAddPhotoViewController: MJAlertControllerDelegate {
+    func validateLeftButton(alertTag: MJAlertTAG) {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    func validateRightButton(alertTag: MJAlertTAG) {}
 }
 
 //MARK: - PickerVC Delegate -
