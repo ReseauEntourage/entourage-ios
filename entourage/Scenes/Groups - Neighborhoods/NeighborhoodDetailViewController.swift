@@ -432,7 +432,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 1 {
-            return 214
+           // return 214
         }
         return UITableView.automaticDimension
     }

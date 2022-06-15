@@ -591,8 +591,7 @@
 "neighborhood_post_group_section_title" = "Fil d’actualités";
 "neighborhood_post_group_section_new_posts_title" = "Nouvelles publications";
 "neighborhood_post_group_section_old_posts_title" = "Anciennes publications";
-"neighborhood_empty_event_title" = "Pas encore d’événements prévus dans ce
-groupe";
+"neighborhood_empty_event_title" = "Pas encore d’événements prévus dans ce groupe";
 "neighborhood_empty_event_subtitle" = "Cliquez sur « + » pour en créer un";
 "neighborhood_empty_post_title" = "Pas encore de publication sur ce groupe";
 "neighborhood_empty_post_subtitle" = "C’est l’occasion pour vous de partager la première nouvelle pour lancer la discussion ! ";
