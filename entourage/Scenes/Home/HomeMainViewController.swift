@@ -46,10 +46,9 @@ class HomeMainViewController: UIViewController {
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
         ui_view_user.layer.cornerRadius = ui_view_user.frame.height / 2
-        ui_view_user.layer.borderColor = UIColor.white.cgColor
-        ui_view_user.layer.borderWidth = 1
+        ui_view_user.layer.borderWidth = 0
         
-        ui_view_user.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
+        ui_view_user.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
         ui_view_user.layer.shadowOpacity = 1
         ui_view_user.layer.shadowOffset = CGSize.init(width: 1, height: 1)
         ui_view_user.layer.shadowRadius = 2
@@ -74,7 +73,7 @@ class HomeMainViewController: UIViewController {
     func updateTopView() {
         ui_username.text = String.init(format: "home_title_welcome".localized, homeViewModel.userHome.displayName)
         
-        if let url = URL(string: homeViewModel.userHome.avatarURL) {
+        if let _urlstr = homeViewModel.userHome.avatarURL,  let url = URL(string: _urlstr) {
             ui_iv_user.sd_setImage(with: url,placeholderImage: UIImage.init(named: "placeholder_user"))
         }
         else {

@@ -44,6 +44,9 @@ class EditProfilePhotoCell: UITableViewCell {
         if let user = UserDefaults.currentUser,let _url = user.avatarURL, let mainUrl = URL(string: _url) {
             ui_image_user.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
         }
+        else {
+            ui_image_user.image = UIImage.init(named: "placeholder_user")
+        }
     }
     
     @IBAction func action_take_photo(_ sender: Any) {

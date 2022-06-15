@@ -10,7 +10,7 @@ import Foundation
 struct UserHome:Codable {
     var id: Int = 0
     var displayName: String = ""
-    var avatarURL: String = ""
+    var avatarURL: String? = nil
     var meetingsCount = 0
     var chatMessagesCount: Int = 0
     var outingParticipationsCount: Int = 0

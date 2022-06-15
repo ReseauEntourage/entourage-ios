@@ -123,6 +123,9 @@ class MainProfileSettingsViewController: UIViewController {
         if let user = UserDefaults.currentUser,let _url = user.avatarURL, let mainUrl = URL(string: _url) {
             ui_image_user.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
         }
+        else {
+            ui_image_user.image = UIImage.init(named: "placeholder_user")
+        }
         //To force update profile mainuserprofileVC when show main page
         (profileVC as? MainUserProfileViewController)?.updateUser()
         ui_username.text = currentUser.displayName

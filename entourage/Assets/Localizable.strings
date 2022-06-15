@@ -656,7 +656,7 @@ groupe";
 "report_group_placeholder" = "Décrivez rapidement l’objet de votre signalement.";
 
 /** Home*/
-"home_title_welcome" = "Bienvenue %@";
+"home_title_welcome" = "Bienvenue %@ !";
 "home_contrib_title" = "Vos contributions au réseau entourage :";
 "home_meeting_title" = "Belles rencontres Entourage";
 "home_no_meeting_title" = "Pas encore de rencontres Entourage";
