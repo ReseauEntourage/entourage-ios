@@ -59,8 +59,8 @@
                                 <constraint firstAttribute="height" constant="1" id="8Ph-8G-Tcc"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAl-Jb-X6C">
-                            <rect key="frame" x="66" y="24.5" width="316" height="19.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAl-Jb-X6C">
+                            <rect key="frame" x="66" y="26.5" width="316" height="19.5"/>
                             <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="14"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -69,7 +69,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <gestureRecognizers/>
                     <constraints>
-                        <constraint firstItem="hAl-Jb-X6C" firstAttribute="centerY" secondItem="Fjg-oT-Srm" secondAttribute="centerY" id="17I-x6-nqc"/>
+                        <constraint firstItem="hAl-Jb-X6C" firstAttribute="centerY" secondItem="Fjg-oT-Srm" secondAttribute="centerY" constant="2" id="17I-x6-nqc"/>
                         <constraint firstItem="Fjg-oT-Srm" firstAttribute="centerY" secondItem="ryC-hl-R29" secondAttribute="centerY" id="1Ve-os-J9f"/>
                         <constraint firstItem="ASw-eC-AtQ" firstAttribute="top" secondItem="LNG-wP-8YF" secondAttribute="bottom" id="9wy-Ko-eTL"/>
                         <constraint firstAttribute="trailing" secondItem="ASw-eC-AtQ" secondAttribute="trailing" constant="32" id="Dp8-6Z-Aqw"/>
@@ -106,7 +106,7 @@
                                 <constraint firstAttribute="height" constant="1" id="DUr-Pr-1s4"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBv-Hy-Pxp">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBv-Hy-Pxp">
                             <rect key="frame" x="32" y="24.5" width="330" height="19.5"/>
                             <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="14"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -31,6 +31,8 @@ class PedagogicCell: UITableViewCell {
         
         ui_view_test?.layer.rasterizationScale = UIScreen.main.scale
         ui_view_test?.layer.shouldRasterize = true
+        
+        ui_image.layer.cornerRadius = 8
     }
     
     func populateCell(title:String,imageUrl:String?, isRead:Bool) {
@@ -49,7 +51,7 @@ class PedagogicCell: UITableViewCell {
     
     func setBackgroundView(isRead:Bool) {
         if isRead {
-            ui_container.layer.borderColor = UIColor.appOrange.cgColor
+            ui_container.layer.borderColor = UIColor.appOrangeLight_50.cgColor
             ui_container.layer.borderWidth = 1
             ui_container.backgroundColor = .white
             ui_picto_check.isHidden = false
