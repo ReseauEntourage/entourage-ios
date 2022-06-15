@@ -51,7 +51,7 @@ class NeighborhoodHomeViewController: UIViewController {
     var maxLabelBottomConstraint:CGFloat = 20
     
     var minLabelFont:CGFloat = 16//18
-    var maxLabelFont:CGFloat = 24
+    var maxLabelFont:CGFloat = 23
     
     var minImageHeight:CGFloat = 0
     var maxImageHeight:CGFloat = 73
