@@ -266,7 +266,7 @@ struct NeighborhoodService:ParsingDataCodable {
         var endpoint = kAPIReportNeighborhood
         endpoint = String.init(format: endpoint,"\(groupId)", token)
         
-        let _msg:String = message != nil ? (message!.isEmpty ? "." : message!) : "." //TODO: Supprimer lorsque nicolas aura fixé le WS
+        let _msg:String = message != nil ? (message!.isEmpty ? "" : message!) : ""
         let parameters:[String:Any] = ["report":["message":_msg, "signals":tags]]
         
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
@@ -290,7 +290,7 @@ struct NeighborhoodService:ParsingDataCodable {
         var endpoint = isPost ? kAPIReportPostNeighborhood : kAPIReportPostCommentNeighborhood
         endpoint = String.init(format: endpoint,"\(groupId)","\(postId)", token)
         
-        let _msg:String = message != nil ? (message!.isEmpty ? "." : message!) : "." //TODO: Supprimer lorsque nicolas aura fixé le WS
+        let _msg:String = message != nil ? (message!.isEmpty ? "" : message!) : ""
         let parameters:[String:Any] = ["report":["message":_msg, "signals":tags]]
         
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
