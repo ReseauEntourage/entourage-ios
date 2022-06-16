@@ -597,23 +597,23 @@
                                         </constraints>
                                     </view>
                                     <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPq-Rf-FjF">
-                                        <rect key="frame" x="0.0" y="68" width="414" height="784"/>
+                                        <rect key="frame" x="32" y="68" width="350" height="784"/>
                                         <color key="backgroundColor" name="BeigeClair"/>
                                         <wkWebViewConfiguration key="configuration">
                                             <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                             <wkPreferences key="preferences"/>
                                         </wkWebViewConfiguration>
                                     </wkWebView>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="kOB-DE-0iU">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="kOB-DE-0iU">
                                         <rect key="frame" x="188.5" y="407.5" width="37" height="37"/>
                                         <color key="tintColor" name="orange_app"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" name="BeigeClair"/>
                                 <constraints>
-                                    <constraint firstItem="YPq-Rf-FjF" firstAttribute="leading" secondItem="9zR-eh-CTc" secondAttribute="leading" id="1yQ-U1-5GG"/>
+                                    <constraint firstItem="YPq-Rf-FjF" firstAttribute="leading" secondItem="9zR-eh-CTc" secondAttribute="leading" constant="32" id="1yQ-U1-5GG"/>
                                     <constraint firstItem="YPq-Rf-FjF" firstAttribute="top" secondItem="eCk-iB-z6j" secondAttribute="bottom" id="3U8-U4-eBC"/>
-                                    <constraint firstAttribute="trailing" secondItem="YPq-Rf-FjF" secondAttribute="trailing" id="Bef-n6-KSK"/>
+                                    <constraint firstAttribute="trailing" secondItem="YPq-Rf-FjF" secondAttribute="trailing" constant="32" id="Bef-n6-KSK"/>
                                     <constraint firstAttribute="bottom" secondItem="YPq-Rf-FjF" secondAttribute="bottom" id="MNA-Ao-i72"/>
                                     <constraint firstItem="kOB-DE-0iU" firstAttribute="centerY" secondItem="9zR-eh-CTc" secondAttribute="centerY" id="WbY-BE-8xW"/>
                                     <constraint firstItem="eCk-iB-z6j" firstAttribute="leading" secondItem="9zR-eh-CTc" secondAttribute="leading" id="X4F-5z-ltS"/>

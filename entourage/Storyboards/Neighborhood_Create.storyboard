@@ -198,7 +198,7 @@
         <!--Navigation Controller-->
         <scene sceneID="zYO-JJ-t3v">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="SOG-SK-Sev" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="groupCreateNavvc" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="SOG-SK-Sev" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -1199,7 +1199,7 @@ L4</string>
         <!--Navigation Controller-->
         <scene sceneID="rnw-Db-SwA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xFw-m1-iqO" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="neighb_validateNavVC" automaticallyAdjustsScrollViewInsets="NO" id="xFw-m1-iqO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oYX-4M-N2T">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1702,16 +1702,16 @@ L4</string>
                                                     <rect key="frame" x="0.0" y="0.0" width="406" height="81"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgM-VH-9cb">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgM-VH-9cb">
                                                             <rect key="frame" x="0.0" y="0.0" width="406" height="65"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="Décrivez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaH-hA-WGr">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Décrivez" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaH-hA-WGr">
                                                                     <rect key="frame" x="28" y="14" width="350" height="18"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Exemple ?" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YhW-E4-bET">
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Exemple ?" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YhW-E4-bET">
                                                                     <rect key="frame" x="28" y="36" width="350" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="24" id="YDL-xB-AX7"/>
@@ -1720,7 +1720,7 @@ L4</string>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                                                 </textField>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Fy-Is-1Kv">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Fy-Is-1Kv">
                                                                     <rect key="frame" x="28" y="64" width="350" height="1"/>
                                                                     <color key="backgroundColor" name="orange_light_a50"/>
                                                                     <constraints>
@@ -1756,28 +1756,28 @@ L4</string>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellMessage" rowHeight="299" id="5vd-Yg-tA6" customClass="NeighborhoodCreateDescriptionCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="883.5" width="406" height="299"/>
+                                                <rect key="frame" x="0.0" y="846.5" width="406" height="299"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5vd-Yg-tA6" id="dpr-Xn-Ghi">
                                                     <rect key="frame" x="0.0" y="0.0" width="406" height="299"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sEP-oG-BwR">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEP-oG-BwR">
                                                             <rect key="frame" x="0.0" y="20" width="406" height="279"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" ambiguous="YES" text="Rédiger un descriptif" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9MO-0U-hS0">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" text="Rédiger un descriptif" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9MO-0U-hS0">
                                                                     <rect key="frame" x="28" y="0.0" width="152" height="19"/>
                                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" ambiguous="YES" text="Facultatif (200 caractères max)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F6D-uG-wc8">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Facultatif (200 caractères max)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F6D-uG-wc8">
                                                                     <rect key="frame" x="28" y="19" width="177" height="18"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ayw-BX-w4L" customClass="MJTextViewPlaceholder" customModule="Ent_Beta" customModuleProvider="target">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="752" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ayw-BX-w4L" customClass="MJTextViewPlaceholder" customModule="Ent_Beta" customModuleProvider="target">
                                                                     <rect key="frame" x="28" y="45" width="350" height="209"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="bCU-Em-xrp"/>
@@ -1790,14 +1790,14 @@ L4</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                                                 </textView>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qRq-KI-3h1">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qRq-KI-3h1">
                                                                     <rect key="frame" x="28" y="258" width="350" height="1"/>
                                                                     <color key="backgroundColor" name="orange_light_a50"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="1" id="Vao-FR-g8D"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" ambiguous="YES" text="xxx/200" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cc7-1x-uVW">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="xxx/200" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cc7-1x-uVW">
                                                                     <rect key="frame" x="341" y="265" width="37" height="14"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="10"/>
                                                                     <color key="textColor" name="orange_app"/>
@@ -1840,31 +1840,31 @@ L4</string>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellPhoto" rowHeight="429" id="pov-Fa-z8e" customClass="NeighborhoodCreatePhotoCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1182.5" width="406" height="429"/>
+                                                <rect key="frame" x="0.0" y="1145.5" width="406" height="429"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pov-Fa-z8e" id="hQC-6t-Nap">
                                                     <rect key="frame" x="0.0" y="0.0" width="406" height="429"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="254" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="751" ambiguous="YES" text="Rédiger un descriptif" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmS-KM-SQX">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="254" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="751" text="Rédiger un descriptif" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmS-KM-SQX">
                                                             <rect key="frame" x="28" y="40" width="152" height="19"/>
                                                             <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" verticalCompressionResistancePriority="753" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tDT-8d-MTc">
+                                                        <view contentMode="scaleToFill" verticalCompressionResistancePriority="753" translatesAutoresizingMaskIntoConstraints="NO" id="tDT-8d-MTc">
                                                             <rect key="frame" x="26" y="71" width="354" height="180"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ye1-2w-Rph">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ye1-2w-Rph">
                                                                     <rect key="frame" x="0.0" y="0.0" width="354" height="180"/>
                                                                 </imageView>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_neighb_photo" translatesAutoresizingMaskIntoConstraints="NO" id="NaZ-vm-y0J">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_neighb_photo" translatesAutoresizingMaskIntoConstraints="NO" id="NaZ-vm-y0J">
                                                                     <rect key="frame" x="131.5" y="57" width="91" height="66"/>
                                                                 </imageView>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_neighb_download" translatesAutoresizingMaskIntoConstraints="NO" id="Ce7-JQ-vfE">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_neighb_download" translatesAutoresizingMaskIntoConstraints="NO" id="Ce7-JQ-vfE">
                                                                     <rect key="frame" x="315" y="20" width="19" height="19"/>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZw-0d-6Fn">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZw-0d-6Fn">
                                                                     <rect key="frame" x="0.0" y="0.0" width="354" height="180"/>
                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                     <connections>
@@ -1896,7 +1896,7 @@ L4</string>
                                                         <constraint firstItem="tDT-8d-MTc" firstAttribute="top" secondItem="RmS-KM-SQX" secondAttribute="bottom" constant="12" id="2xA-Wb-qCw"/>
                                                         <constraint firstItem="tDT-8d-MTc" firstAttribute="leading" secondItem="hQC-6t-Nap" secondAttribute="leading" constant="26" id="Bh6-gn-Muz"/>
                                                         <constraint firstItem="RmS-KM-SQX" firstAttribute="leading" secondItem="hQC-6t-Nap" secondAttribute="leading" constant="28" id="KcY-wb-nVS"/>
-                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tDT-8d-MTc" secondAttribute="bottom" constant="100" id="WUa-N7-J3N"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tDT-8d-MTc" secondAttribute="bottom" priority="750" constant="100" id="WUa-N7-J3N"/>
                                                         <constraint firstItem="RmS-KM-SQX" firstAttribute="top" secondItem="hQC-6t-Nap" secondAttribute="top" constant="40" id="eeF-Fb-uhB"/>
                                                         <constraint firstAttribute="trailing" secondItem="tDT-8d-MTc" secondAttribute="trailing" constant="26" id="lx8-88-HWb"/>
                                                     </constraints>
@@ -1996,7 +1996,7 @@ L4</string>
         <!--Navigation Controller-->
         <scene sceneID="6Kg-Pw-kMg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="m5X-iv-qIX" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="editGroupNavVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="m5X-iv-qIX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>

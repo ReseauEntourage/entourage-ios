@@ -34,7 +34,6 @@ struct PedagogicResource: Codable {
                 return .Inspire
             default:
                 return .None
-                break
             }
         }
     }

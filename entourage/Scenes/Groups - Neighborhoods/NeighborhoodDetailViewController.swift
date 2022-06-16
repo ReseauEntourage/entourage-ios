@@ -17,7 +17,8 @@ class NeighborhoodDetailViewController: UIViewController {
     @IBOutlet weak var ui_label_title_neighb: UILabel!
     @IBOutlet weak var ui_view_height_constraint: NSLayoutConstraint!
     
-    @IBOutlet weak var ui_button_add: UIButton!
+    @IBOutlet weak var ui_floaty_button: Floaty!
+    
     //Use to strech header
     var maxViewHeight:CGFloat = 150
     var minViewHeight:CGFloat = 75//70 + 19
@@ -54,10 +55,12 @@ class NeighborhoodDetailViewController: UIViewController {
         
         setupViews()
         
-        ui_button_add.isHidden = true
+        ui_floaty_button.isHidden = true
         
         getNeighborhoodDetail()
         AnalyticsLoggerManager.logEvent(name: View_GroupFeed__Show)
+        
+       setupFloatingButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -116,7 +119,26 @@ class NeighborhoodDetailViewController: UIViewController {
         }
         
         self.ui_label_title_neighb.text = self.neighborhood?.name
-        self.ui_button_add.isHidden = self.neighborhood?.isMember ?? false ? false : true
+        self.ui_floaty_button?.isHidden = self.neighborhood?.isMember ?? false ? false : true
+    }
+    
+    func setupFloatingButton() {
+        let floatItem1 = createButtonItem(title: "neighborhood_menu_post_event".localized, iconName: "ic_menu_button_create_event") { item in
+            self.showCreateEvent()
+        }
+        
+        let floatItem2 = createButtonItem(title: "neighborhood_menu_post_post".localized, iconName: "ic_menu_button_create_post") { item in
+            AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewPost)
+            self.showCreatePost()
+        }
+        
+        ui_floaty_button.overlayColor = .white.withAlphaComponent(0.10)
+        ui_floaty_button.addBlurOverlay = true
+        ui_floaty_button.itemSpace = 24
+        ui_floaty_button.addItem(item: floatItem2)
+        ui_floaty_button.addItem(item: floatItem1)
+        
+        ui_floaty_button.fabDelegate = self
     }
     
     // Actions
@@ -276,22 +298,6 @@ class NeighborhoodDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func action_create(_ sender: Any) {
-        if let vc = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil).instantiateViewController(withIdentifier: "AddMenuVC") as? NeighborhoodAddMenuViewController {
-            vc.modalPresentationStyle = .overCurrentContext
-            vc.neighborhoodId = self.neighborhoodId
-            self.navigationController?.present(vc, animated: true)
-        }
-    }
-    
-    func showCreatePost() {
-        let sb = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil)
-        if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController  {
-            vc.neighborhoodId = self.neighborhoodId
-            self.navigationController?.present(vc, animated: true)
-        }
-    }
-    
     //MARK: - Method uiscrollview delegate -
     func scrollViewDidScroll( _ scrollView: UIScrollView) {
         UIView.animate(withDuration: 0) {
@@ -310,6 +316,21 @@ class NeighborhoodDetailViewController: UIViewController {
             
             self.view.layoutIfNeeded()
         }
+    }
+    
+    //MARK: - Nav VCs-
+    func showCreatePost() {
+        let sb = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController  {
+            vc.neighborhoodId = self.neighborhoodId
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
+    
+    func showCreateEvent() {
+        //TODO: a faire lien vers la créa d'event
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewEvent)
+        self.showWIP(parentVC: self)
     }
 }
 
@@ -517,6 +538,25 @@ extension NeighborhoodDetailViewController:NeighborhoodEventsTableviewCellDelega
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_OneEvent)
         //TODO: a faire
         showWIP(parentVC: self)
+    }
+}
+
+//MARK: - FloatyDelegate -
+extension NeighborhoodDetailViewController:FloatyDelegate {
+    func floatyWillOpen(_ floaty: Floaty) {
+        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Plus)
+    }
+    
+    private func createButtonItem(title:String, iconName:String, handler:@escaping ((FloatyItem) -> Void)) -> FloatyItem {
+        let floatyItem = FloatyItem()
+        floatyItem.buttonColor = .clear
+        floatyItem.icon = UIImage(named: iconName)
+        floatyItem.titleLabel.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
+        floatyItem.titleShadowColor = .clear
+        floatyItem.title = title
+        floatyItem.imageSize = CGSize(width: 62, height: 62)
+        floatyItem.handler = handler
+        return floatyItem
     }
 }
 

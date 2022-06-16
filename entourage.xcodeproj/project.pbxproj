@@ -92,6 +92,13 @@
 		026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819BA278E105600A98A4A /* OTLoginNextViewController.swift */; };
 		026819C0278E105600A98A4A /* OTLoginChangePhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819BB278E105600A98A4A /* OTLoginChangePhoneViewController.swift */; };
 		026819C3278E10DA00A98A4A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819C2278E10D900A98A4A /* User.swift */; };
+		0268C24F285A2B1400294055 /* FloatyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268C248285A2B1400294055 /* FloatyWindow.swift */; };
+		0268C250285A2B1400294055 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268C249285A2B1400294055 /* FloatyManager.swift */; };
+		0268C251285A2B1400294055 /* FloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268C24A285A2B1400294055 /* FloatyItem.swift */; };
+		0268C252285A2B1400294055 /* UIView+Draggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268C24B285A2B1400294055 /* UIView+Draggable.swift */; };
+		0268C253285A2B1400294055 /* FloatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268C24C285A2B1400294055 /* FloatyViewController.swift */; };
+		0268C254285A2B1400294055 /* Floaty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268C24D285A2B1400294055 /* Floaty.swift */; };
+		0268C255285A2B1400294055 /* FloatyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268C24E285A2B1400294055 /* FloatyDelegate.swift */; };
 		026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E54B12837F96200BE7993 /* MJShadowBottomView.swift */; };
 		02728DDB27F19A1000512DC0 /* PartnerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */; };
 		02728DDD27F19A3800512DC0 /* PartnerDetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */; };
@@ -232,7 +239,6 @@
 		02E2192528355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2192428355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift */; };
 		02E2192728355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2192628355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift */; };
 		02E21929283637E9002A1FCB /* NeighborhoodPostAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E21928283637E9002A1FCB /* NeighborhoodPostAddViewController.swift */; };
-		02E2192B28368552002A1FCB /* NeighborhoodAddMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2192A28368552002A1FCB /* NeighborhoodAddMenuViewController.swift */; };
 		02E2192D2837A16F002A1FCB /* Neighborhood_Report.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02E2192C2837A16F002A1FCB /* Neighborhood_Report.storyboard */; };
 		02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */; };
 		02E6789C27EB703F00AF5998 /* MJCustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */; };
@@ -351,6 +357,14 @@
 		026819BA278E105600A98A4A /* OTLoginNextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLoginNextViewController.swift; sourceTree = "<group>"; };
 		026819BB278E105600A98A4A /* OTLoginChangePhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTLoginChangePhoneViewController.swift; sourceTree = "<group>"; };
 		026819C2278E10D900A98A4A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0268C247285A2B1400294055 /* Floaty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Floaty.h; sourceTree = "<group>"; };
+		0268C248285A2B1400294055 /* FloatyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyWindow.swift; sourceTree = "<group>"; };
+		0268C249285A2B1400294055 /* FloatyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyManager.swift; sourceTree = "<group>"; };
+		0268C24A285A2B1400294055 /* FloatyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyItem.swift; sourceTree = "<group>"; };
+		0268C24B285A2B1400294055 /* UIView+Draggable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Draggable.swift"; sourceTree = "<group>"; };
+		0268C24C285A2B1400294055 /* FloatyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyViewController.swift; sourceTree = "<group>"; };
+		0268C24D285A2B1400294055 /* Floaty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Floaty.swift; sourceTree = "<group>"; };
+		0268C24E285A2B1400294055 /* FloatyDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyDelegate.swift; sourceTree = "<group>"; };
 		026E54B12837F96200BE7993 /* MJShadowBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJShadowBottomView.swift; sourceTree = "<group>"; };
 		02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerDetailViewController.swift; sourceTree = "<group>"; };
 		02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerDetailInfoCell.swift; sourceTree = "<group>"; };
@@ -482,7 +496,6 @@
 		02E2192428355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostAddPhotoViewController.swift; sourceTree = "<group>"; };
 		02E2192628355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
 		02E21928283637E9002A1FCB /* NeighborhoodPostAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostAddViewController.swift; sourceTree = "<group>"; };
-		02E2192A28368552002A1FCB /* NeighborhoodAddMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodAddMenuViewController.swift; sourceTree = "<group>"; };
 		02E2192C2837A16F002A1FCB /* Neighborhood_Report.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Neighborhood_Report.storyboard; sourceTree = "<group>"; };
 		02E2F83628042F14003B7C63 /* OtherUserSignalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherUserSignalCell.swift; sourceTree = "<group>"; };
 		02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJCustomSlider.swift; sourceTree = "<group>"; };
@@ -636,8 +649,8 @@
 				025C92B928340F10000970D9 /* NeighborhoodDetailTopMemberCell.xib */,
 				025C92BB28340F7D000970D9 /* NeighborhoodDetailTopCell.xib */,
 				0258AFDF282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift */,
-				025C92BD28340FD4000970D9 /* NeighborhoodEmptyEventCell.xib */,
 				025C92BF28341007000970D9 /* NeighborhoodEmptyPostCell.xib */,
+				025C92BD28340FD4000970D9 /* NeighborhoodEmptyEventCell.xib */,
 				0258AFE3282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift */,
 				025C92C22834149B000970D9 /* NeighborhoodEventsTableviewCell.xib */,
 				025C92C428341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib */,
@@ -779,6 +792,7 @@
 		0268194D278DF6A700A98A4A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0268C246285A2B1400294055 /* Floaty */,
 				02D5689A2809A5B50092C7A4 /* TitleOnlyCell.swift */,
 				0268197A278DF72D00A98A4A /* MJCustomPageControl.swift */,
 				025E917727F36A6E00D4A7A8 /* Shared Cells */,
@@ -845,6 +859,21 @@
 			name = Login;
 			path = entourage/Scenes/Login;
 			sourceTree = SOURCE_ROOT;
+		};
+		0268C246285A2B1400294055 /* Floaty */ = {
+			isa = PBXGroup;
+			children = (
+				0268C247285A2B1400294055 /* Floaty.h */,
+				0268C248285A2B1400294055 /* FloatyWindow.swift */,
+				0268C249285A2B1400294055 /* FloatyManager.swift */,
+				0268C24A285A2B1400294055 /* FloatyItem.swift */,
+				0268C24B285A2B1400294055 /* UIView+Draggable.swift */,
+				0268C24C285A2B1400294055 /* FloatyViewController.swift */,
+				0268C24D285A2B1400294055 /* Floaty.swift */,
+				0268C24E285A2B1400294055 /* FloatyDelegate.swift */,
+			);
+			path = Floaty;
+			sourceTree = "<group>";
 		};
 		026CFFC42853735B00CFAF9F /* Cells */ = {
 			isa = PBXGroup;
@@ -915,7 +944,6 @@
 				02C6E86828203BF0009D4289 /* NeighBorhoodParamsCGUViewController.swift */,
 				02833F992822A9F600000156 /* NeighBorhoodListUsersViewController.swift */,
 				024273EB283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift */,
-				02E2192A28368552002A1FCB /* NeighborhoodAddMenuViewController.swift */,
 				02E21928283637E9002A1FCB /* NeighborhoodPostAddViewController.swift */,
 				02E2192428355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift */,
 				02E2192628355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift */,
@@ -1341,6 +1369,7 @@
 				0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */,
 				0258AFE4282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift in Sources */,
 				02F5277E2799995900929431 /* GDSSearchViewController.swift in Sources */,
+				0268C251285A2B1400294055 /* FloatyItem.swift in Sources */,
 				02E069E5279184B3006DB1B6 /* OTOnboardingPhoneViewController.swift in Sources */,
 				025E917427F3619300D4A7A8 /* ReportUserViewController.swift in Sources */,
 				02E069E7279184B3006DB1B6 /* OTOnboardingAssoStartViewController.swift in Sources */,
@@ -1354,6 +1383,7 @@
 				02B94C47285223A4006059EF /* PedagogicListViewController.swift in Sources */,
 				0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */,
 				0227446F2795BE6F005600A1 /* AssociationService.swift in Sources */,
+				0268C250285A2B1400294055 /* FloatyManager.swift in Sources */,
 				02C3ABF4279AB55D00817B82 /* Extensions_UIViewController.swift in Sources */,
 				0295F2B727E497D0006AE255 /* ProfileEditorViewController.swift in Sources */,
 				02490DC927EA461700E2577B /* Extensions_UIDevice.swift in Sources */,
@@ -1370,6 +1400,7 @@
 				02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */,
 				02A3DD3527FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift in Sources */,
 				02D64F4B2799CA6800F6C4BD /* CustomAnnotation.swift in Sources */,
+				0268C24F285A2B1400294055 /* FloatyWindow.swift in Sources */,
 				02681952278DF6CA00A98A4A /* OTCustomTextfield.swift in Sources */,
 				02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */,
 				0262997927905FB700D84A6A /* Constants.swift in Sources */,
@@ -1416,6 +1447,7 @@
 				02C6E87028203E1F009D4289 /* ReportGroupMainViewController.swift in Sources */,
 				02D64F4F2799D74F00F6C4BD /* PoiService.swift in Sources */,
 				02CCE68227D7968800D6976C /* MainProfileSettingsViewController.swift in Sources */,
+				0268C255285A2B1400294055 /* FloatyDelegate.swift in Sources */,
 				02B57D9827FC4329005A567B /* ReportUserPageViewController.swift in Sources */,
 				026819C3278E10DA00A98A4A /* User.swift in Sources */,
 				02ADAAB3280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift in Sources */,
@@ -1455,6 +1487,7 @@
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,
 				02B94C33284F92AD006059EF /* HomeActionTeachCell.swift in Sources */,
 				02A3DD3327FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift in Sources */,
+				0268C253285A2B1400294055 /* FloatyViewController.swift in Sources */,
 				02B94C37284F9FB3006059EF /* HomeHelpCell.swift in Sources */,
 				02C6E86F28203E1F009D4289 /* ReportGroupSendViewController.swift in Sources */,
 				02E77B44282CF9CF00786E27 /* Event.swift in Sources */,
@@ -1469,9 +1502,9 @@
 				02C6E87228203E1F009D4289 /* ReportGroupPageViewController.swift in Sources */,
 				02B94C2B284F8F0C006059EF /* HomeActionCell.swift in Sources */,
 				023D89C327DFA39A008C6A58 /* ParamsInfoCell.swift in Sources */,
-				02E2192B28368552002A1FCB /* NeighborhoodAddMenuViewController.swift in Sources */,
 				02DDF1D727D9117700EE22DE /* ProgressRadiusView.swift in Sources */,
 				02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */,
+				0268C254285A2B1400294055 /* Floaty.swift in Sources */,
 				02A3DD3727FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift in Sources */,
 				021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */,
 				0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */,
@@ -1511,6 +1544,7 @@
 				024273EC283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift in Sources */,
 				02846CBE27EC86F100D85ADA /* ProfileEditInterestsViewController.swift in Sources */,
 				02CCE68827D7B51E00D6976C /* TagListView.swift in Sources */,
+				0268C252285A2B1400294055 /* UIView+Draggable.swift in Sources */,
 				0220580927FB087F00531720 /* BaseFullScreenNavViewController.swift in Sources */,
 				0268197F278DF72D00A98A4A /* MJCustomPageControl.swift in Sources */,
 				02C0A0E2278EDCC400B0C646 /* UserService.swift in Sources */,
