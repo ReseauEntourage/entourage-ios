@@ -45,19 +45,6 @@
                                             <constraint firstAttribute="height" constant="68" id="0jg-Wp-WLY"/>
                                         </constraints>
                                     </view>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="F0O-o7-MGO">
-                                        <rect key="frame" x="132.5" y="0.0" width="51" height="31"/>
-                                        <color key="thumbTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="action_error:" destination="uR9-9t-4at" eventType="valueChanged" id="UgH-YO-M6L"/>
-                                        </connections>
-                                    </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provoquer une erreur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="we3-GQ-EWn">
-                                        <rect key="frame" x="181.5" y="7.5" width="128.5" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dgc-Z3-CyI">
                                         <rect key="frame" x="356" y="14" width="40" height="40"/>
                                         <constraints>
@@ -417,7 +404,6 @@
                                     <constraint firstItem="vmG-pn-VWc" firstAttribute="top" secondItem="dQM-RZ-lxJ" secondAttribute="top" id="7H7-Ak-3Ip"/>
                                     <constraint firstItem="ePm-CU-0cn" firstAttribute="bottom" secondItem="o5s-SK-ErZ" secondAttribute="bottom" id="7tQ-XS-eUn"/>
                                     <constraint firstItem="Dgc-Z3-CyI" firstAttribute="centerY" secondItem="vmG-pn-VWc" secondAttribute="centerY" id="8kf-7R-b3G"/>
-                                    <constraint firstItem="we3-GQ-EWn" firstAttribute="leading" secondItem="F0O-o7-MGO" secondAttribute="trailing" id="EAa-Ka-3Tj"/>
                                     <constraint firstItem="e6f-PY-TWq" firstAttribute="centerY" secondItem="dQM-RZ-lxJ" secondAttribute="centerY" id="FQl-oi-5PX"/>
                                     <constraint firstItem="ePm-CU-0cn" firstAttribute="trailing" secondItem="o5s-SK-ErZ" secondAttribute="trailing" id="HRj-8k-QA9"/>
                                     <constraint firstItem="e6f-PY-TWq" firstAttribute="centerX" secondItem="dQM-RZ-lxJ" secondAttribute="centerX" id="HmY-ru-v6l"/>
@@ -426,14 +412,11 @@
                                     <constraint firstAttribute="trailing" secondItem="vmG-pn-VWc" secondAttribute="trailing" id="QaE-e4-bhc"/>
                                     <constraint firstItem="o5s-SK-ErZ" firstAttribute="leading" secondItem="dQM-RZ-lxJ" secondAttribute="leading" id="eal-Mj-Iua"/>
                                     <constraint firstItem="Dgc-Z3-CyI" firstAttribute="trailing" secondItem="vmG-pn-VWc" secondAttribute="trailing" constant="-18" id="iAl-Jh-9Cc"/>
-                                    <constraint firstItem="F0O-o7-MGO" firstAttribute="centerX" secondItem="dQM-RZ-lxJ" secondAttribute="centerX" constant="-50" id="jHF-8Y-RzW"/>
                                     <constraint firstAttribute="trailing" secondItem="o5s-SK-ErZ" secondAttribute="trailing" id="o5P-2J-41h"/>
                                     <constraint firstAttribute="trailing" secondItem="JZj-i6-yz3" secondAttribute="trailing" id="qLM-Rc-2SG"/>
-                                    <constraint firstItem="we3-GQ-EWn" firstAttribute="centerY" secondItem="F0O-o7-MGO" secondAttribute="centerY" id="rIE-zi-DaC"/>
                                     <constraint firstItem="ePm-CU-0cn" firstAttribute="top" secondItem="o5s-SK-ErZ" secondAttribute="top" id="rjG-Z6-ev3"/>
                                     <constraint firstItem="JZj-i6-yz3" firstAttribute="top" secondItem="vmG-pn-VWc" secondAttribute="bottom" id="vD8-0m-A2O"/>
                                     <constraint firstAttribute="bottom" secondItem="o5s-SK-ErZ" secondAttribute="bottom" constant="42" id="ynC-Jo-DRv"/>
-                                    <constraint firstItem="F0O-o7-MGO" firstAttribute="top" secondItem="dQM-RZ-lxJ" secondAttribute="top" id="z0o-cG-IQq"/>
                                 </constraints>
                             </view>
                         </subviews>

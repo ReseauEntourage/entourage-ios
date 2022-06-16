@@ -365,12 +365,12 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
-    static func postCommentFor(neighborhoodId:Int, parentPostId:Int, message:String, hasError:Bool = false, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+    static func postCommentFor(neighborhoodId:Int, parentPostId:Int, message:String, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIPostNeighborhoodPostMessage
         endpoint = String.init(format: endpoint, "\(neighborhoodId)", token)
 
-        let contentStr = hasError ? "content0" : "content"
+        let contentStr = "content"
         
         let parameters = ["chat_message" : [contentStr:message,"parent_id":parentPostId]]
         

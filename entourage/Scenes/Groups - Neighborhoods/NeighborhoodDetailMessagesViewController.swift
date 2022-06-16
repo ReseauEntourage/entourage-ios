@@ -41,8 +41,6 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     var bottomConstraint:CGFloat = 0
     var isStartEditing = false
     
-    var makeErrorForRetry = false //TODO: a supprimer après tests
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         IQKeyboardManager.shared.enable = false
@@ -165,7 +163,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     func sendMessage(message:String, isRetry:Bool, positionForRetry:Int = 0) {
         self.ui_textview_message.text = nil
         ui_iv_bt_send.image = UIImage.init(named: "ic_send_comment_off")
-        NeighborhoodService.postCommentFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId, message: message, hasError: makeErrorForRetry) { error in
+        NeighborhoodService.postCommentFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId, message: message) { error in
             
             if error == nil {
                 if isRetry {
@@ -216,15 +214,6 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             vc.parentDelegate = self
             vc.signalType = .publication
             self.present(navvc, animated: true)
-        }
-    }
-    //TODO: a supprimer après tests + mod WS
-    @IBAction func action_error(_ sender: UISwitch) {
-        if sender.isOn {
-            makeErrorForRetry = true
-        }
-        else {
-            makeErrorForRetry = false
         }
     }
 }
