@@ -45,6 +45,7 @@
 "toSettings" = "Réglages";
 "authCameraSettings" = "Veuillez autoriser l'accès à l'appareil photo.";
 
+"WIP" = "Prochainement";
 //PreOnboarding
 "next" = "Suivant";
 "connectMe" = "Me connecter";
@@ -364,11 +365,11 @@
 "editUserDescRadius" = "* Votre zone d’action permet de définir à quelle distance vous pouvez agir et vous déplacer";
 "editProfileInterest_title" = "Mes centres d’intérêt";
 
-"editUserPlaceholderFirstname" = "Prénom placeholder";
-"editUserPlaceholderLastname" = "Nom placeholder";
-"editUserPlaceholderBirthday" = "plaehoder anniversaire -> jj-mm";
-"editUserPlaceholderEMail" = "Mon E-mail placeholder";
-"editUserPlaceholderBio" = "Placeholder pour la bio ?";
+"editUserPlaceholderFirstname" = "Pierre";
+"editUserPlaceholderLastname" = "Dupont";
+"editUserPlaceholderBirthday" = "01-03";
+"editUserPlaceholderEMail" = "pierre@gmail.com";
+"editUserPlaceholderBio" = "Pierre, 42 ans, hâte de vous rencontrer :)";
 
 "editUserProfileValidate" = "Appliquer les modifications";
 

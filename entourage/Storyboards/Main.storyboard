@@ -654,18 +654,24 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AjC-wN-z6Y">
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvU-ma-6cX">
-                                        <rect key="frame" x="138.5" y="395" width="137" height="62.5"/>
-                                        <string key="text">Messagerie
-W I P</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messagerie" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YvU-ma-6cX">
+                                        <rect key="frame" x="138.5" y="410.5" width="137" height="31.5"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="25"/>
+                                        <color key="textColor" name="orange_light"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prochainement" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPc-le-1Tv">
+                                        <rect key="frame" x="148.5" y="450" width="117" height="20"/>
+                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="16"/>
                                         <color key="textColor" name="orange_light"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="SPc-le-1Tv" firstAttribute="top" secondItem="YvU-ma-6cX" secondAttribute="bottom" constant="8" id="4Wv-83-Xbm"/>
                                     <constraint firstItem="YvU-ma-6cX" firstAttribute="centerY" secondItem="AjC-wN-z6Y" secondAttribute="centerY" id="6tO-Wg-sIs"/>
+                                    <constraint firstItem="SPc-le-1Tv" firstAttribute="centerX" secondItem="YvU-ma-6cX" secondAttribute="centerX" id="CwI-wC-VJN"/>
                                     <constraint firstItem="YvU-ma-6cX" firstAttribute="centerX" secondItem="AjC-wN-z6Y" secondAttribute="centerX" id="xR2-KM-uRz"/>
                                 </constraints>
                             </view>
@@ -696,17 +702,23 @@ W I P</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="45G-wq-x6t">
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vo6-it-rtr">
-                                        <rect key="frame" x="133" y="395" width="148.5" height="62.5"/>
-                                        <string key="text">Événements
-W I P</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Événements" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vo6-it-rtr">
+                                        <rect key="frame" x="133" y="410.5" width="148.5" height="31.5"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="25"/>
+                                        <color key="textColor" name="orange_light"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prochainement" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLS-Qc-NHA">
+                                        <rect key="frame" x="148.5" y="450" width="117" height="20"/>
+                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="16"/>
                                         <color key="textColor" name="orange_light"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="wLS-Qc-NHA" firstAttribute="top" secondItem="Vo6-it-rtr" secondAttribute="bottom" constant="8" id="6Rh-g3-jL0"/>
+                                    <constraint firstItem="wLS-Qc-NHA" firstAttribute="centerX" secondItem="Vo6-it-rtr" secondAttribute="centerX" id="EYw-ax-9q6"/>
                                     <constraint firstItem="Vo6-it-rtr" firstAttribute="centerX" secondItem="45G-wq-x6t" secondAttribute="centerX" id="tXS-SR-WHQ"/>
                                     <constraint firstItem="Vo6-it-rtr" firstAttribute="centerY" secondItem="45G-wq-x6t" secondAttribute="centerY" id="wQU-o6-fHg"/>
                                 </constraints>
@@ -738,18 +750,24 @@ W I P</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEF-iv-qet">
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yL0-6K-ENy">
-                                        <rect key="frame" x="98" y="395" width="218" height="62.5"/>
-                                        <string key="text">Dons / Demandes
-W I P</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dons / Demandes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yL0-6K-ENy">
+                                        <rect key="frame" x="98" y="410.5" width="218" height="31.5"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="25"/>
+                                        <color key="textColor" name="orange_light"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prochainement" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P0B-bY-gN2">
+                                        <rect key="frame" x="148.5" y="450" width="117" height="20"/>
+                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="16"/>
                                         <color key="textColor" name="orange_light"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="P0B-bY-gN2" firstAttribute="top" secondItem="yL0-6K-ENy" secondAttribute="bottom" constant="8" id="3Ir-uA-7eK"/>
                                     <constraint firstItem="yL0-6K-ENy" firstAttribute="centerX" secondItem="sEF-iv-qet" secondAttribute="centerX" id="AjC-ai-xjg"/>
+                                    <constraint firstItem="P0B-bY-gN2" firstAttribute="centerX" secondItem="yL0-6K-ENy" secondAttribute="centerX" id="eSH-TD-TqI"/>
                                     <constraint firstItem="yL0-6K-ENy" firstAttribute="centerY" secondItem="sEF-iv-qet" secondAttribute="centerY" id="nrJ-bh-sfV"/>
                                 </constraints>
                             </view>
