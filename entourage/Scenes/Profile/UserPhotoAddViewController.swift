@@ -58,6 +58,9 @@ class UserPhotoAddViewController: BasePopViewController {
             if let user = UserDefaults.currentUser, let _url = user.avatarURL, let mainUrl = URL(string: _url) {
                 ui_iv_profile.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
             }
+            else {
+                ui_iv_profile.image = UIImage.init(named: "placeholder_user")
+            }
         }
         else {
             //  OTLogger.logEvent(View_Onboarding_Choose_Photo)

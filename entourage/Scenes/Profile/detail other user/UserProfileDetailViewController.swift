@@ -75,8 +75,11 @@ class UserProfileDetailViewController: UIViewController {
     func updateUser() {
         if let user = currentUser,let _url = user.avatarURL, let mainUrl = URL(string: _url) {
             ui_image_user.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
-            self.ui_tableview.reloadData()
         }
+        else {
+            ui_image_user.image = UIImage.init(named: "placeholder_user")
+        }
+        self.ui_tableview.reloadData()
     }
     
     @IBAction func action_signal_user(_ sender: Any) {
