@@ -61,9 +61,9 @@ class EditProfileInfosCell: UITableViewCell {
     
     var pickerDayDateView = MJDayMonthPicker()
     
-    var errorFirstname = false
-    var errorLastname = false
-    var errorEmail = false
+    var hasNoErrorFirstname = false
+    var hasNoErrorLastname = false
+    var hasNoErrorEmail = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -189,13 +189,19 @@ class EditProfileInfosCell: UITableViewCell {
     }
     
     func checkError() {
-        errorFirstname = ui_tf_firstname.text?.count ?? 0 >= ApplicationTheme.minfirstnameChars
-        errorLastname = ui_tf_lastname.text?.count ?? 0 >= ApplicationTheme.minLastnameChars
-        errorEmail = ui_tf_email.text?.isValidEmail ?? false
+        hasNoErrorFirstname = ui_tf_firstname.text?.count ?? 0 >= ApplicationTheme.minfirstnameChars
+        hasNoErrorLastname = ui_tf_lastname.text?.count ?? 0 >= ApplicationTheme.minLastnameChars
         
-        ui_view_error_email.isHidden = errorEmail
-        ui_view_error_lastname.isHidden = errorLastname
-        ui_view_error_firstname.isHidden = errorFirstname
+        if ui_tf_email.text?.count ?? 0 == 0 {
+            hasNoErrorEmail = true
+        }
+        else {
+            hasNoErrorEmail = ui_tf_email.text?.isValidEmail ?? false
+        }
+        
+        ui_view_error_email.isHidden = hasNoErrorEmail
+        ui_view_error_lastname.isHidden = hasNoErrorLastname
+        ui_view_error_firstname.isHidden = hasNoErrorFirstname
     }
     
     @IBAction func action_change_location(_ sender: Any) {
