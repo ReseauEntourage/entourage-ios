@@ -107,8 +107,10 @@ class PedagogicListViewController: UIViewController {
     }
     
     func setColors(view:UIView,text:UILabel, isOn:Bool) {
-        view.backgroundColor = isOn ? .appOrange : .appOrangeLight.withAlphaComponent(0.25)
-        text.textColor = isOn ? .white : .appOrange.withAlphaComponent(0.5)
+        view.layer.borderColor = UIColor.appOrange.cgColor
+        view.layer.borderWidth = 1
+        view.backgroundColor = isOn ? .appOrange : .white//.appOrangeLight.withAlphaComponent(0.25)
+        text.textColor = isOn ? .white : .appOrange
     }
     
     enum FilterSelector {
