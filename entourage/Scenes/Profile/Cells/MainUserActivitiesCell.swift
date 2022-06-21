@@ -23,11 +23,20 @@ class MainUserActivitiesCell: UITableViewCell {
     @IBOutlet weak var ui_actions_count: UILabel!
     @IBOutlet weak var ui_actions_title: UILabel!
     
+    @IBOutlet weak var ui_view_member: UIView!
+    @IBOutlet weak var ui_member_title: UILabel!
+    @IBOutlet weak var ui_member_date: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        addShadowAndRadius(customView: ui_view_member)
         addShadowAndRadius(customView: ui_view_events)
         addShadowAndRadius(customView: ui_view_actions)
+        
+        ui_member_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .black))
+        ui_member_date.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
+        ui_member_title.text = "memberSince".localized
         
         ui_title?.font = ApplicationTheme.getFontH2Noir().font
         ui_title?.textColor = ApplicationTheme.getFontH2Noir().color

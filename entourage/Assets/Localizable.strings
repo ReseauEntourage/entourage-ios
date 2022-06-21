@@ -348,6 +348,9 @@
 
 "mainUserCityRadius" = "Dans un rayon de %d km";
 "mainUserCityRadiusBold" = "%d km";
+
+"memberSince" = "Membre Entourage depuis";
+
 /*******
 //Profile Edit
  */
