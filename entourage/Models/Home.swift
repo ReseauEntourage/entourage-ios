@@ -31,6 +31,7 @@ struct UserHome:Codable {
     }
 }
 
+typealias HomeActions = [HomeAction]
 struct HomeAction:Codable {
     var name:String = ""
     var action_url:String? = nil
@@ -100,7 +101,6 @@ struct HomeAction:Codable {
     }
     
 }
-typealias HomeActions = [HomeAction]
 
 struct HomeActionParams:Codable {
     var id:Int?

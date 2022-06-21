@@ -687,3 +687,8 @@
 "resource_title_understand" = "Comprendre";
 "resource_title_act" = "Agir";
 "resource_title_inspire" = "S'inspirer";
+
+/** Home popup congratulation */
+"home_congrat_title_single" = "Bravo ! Vous avez réalisé %d nouvelle action !";
+"home_congrat_title_plural" = "Bravo ! Vous avez réalisé %d nouvelles actions !";
+"home_congrat_title_next" = "Super, de nouvelles actions se présentent sur la homepage !";
