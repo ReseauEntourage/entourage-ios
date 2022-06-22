@@ -21,7 +21,7 @@ class NeighborhoodDetailViewController: UIViewController {
     
     //Use to strech header
     var maxViewHeight:CGFloat = 150
-    var minViewHeight:CGFloat = 75//70 + 19
+    var minViewHeight:CGFloat = 80//70 + 19
     var maxImageHeight:CGFloat = 73
     var minImageHeight:CGFloat = 0
     var viewNormalHeight:CGFloat = 0

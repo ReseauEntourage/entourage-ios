@@ -69,9 +69,9 @@ class HomeMainViewController: UIViewController {
             self.updateTopView()
             
             //TODO: get WS new infos
-            if self.homeViewModel.userHome.actions.count > 0 {
-                self.addTimerShowPop()
-            }
+//            if self.homeViewModel.userHome.actions.count > 0 {
+//                self.addTimerShowPop()
+//            }
         }
     }
     

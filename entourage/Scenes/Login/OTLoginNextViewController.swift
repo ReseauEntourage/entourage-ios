@@ -37,22 +37,22 @@ class OTLoginNextViewController: UIViewController {
     //MARK: - Methods
     
     func goMain() {
-        if currentUser?.goal == nil || currentUser?.goal?.count == 0 {
-            let message =  "login_info_pop_action".localized
-            let alertvc = UIAlertController.init(title:  "login_pop_information".localized, message: message, preferredStyle: .alert)
-            
-            let action = UIAlertAction.init(title: "login_info_pop_validate".localized, style: .default, handler: { (action) in
-                self.goalRealMain()
-            })
-            
-            alertvc.addAction(action)
-            
-            DispatchQueue.main.async {
-                self.present(alertvc, animated: true, completion: nil)
-            }
-           
-            return
-        }
+//        if currentUser?.goal == nil || currentUser?.goal?.count == 0 {
+//            let message =  "login_info_pop_action".localized
+//            let alertvc = UIAlertController.init(title:  "login_pop_information".localized, message: message, preferredStyle: .alert)
+//            
+//            let action = UIAlertAction.init(title: "login_info_pop_validate".localized, style: .default, handler: { (action) in
+//                self.goalRealMain()
+//            })
+//            
+//            alertvc.addAction(action)
+//            
+//            DispatchQueue.main.async {
+//                self.present(alertvc, animated: true, completion: nil)
+//            }
+//           
+//            return
+//        }
         
         goalRealMain()
     }
