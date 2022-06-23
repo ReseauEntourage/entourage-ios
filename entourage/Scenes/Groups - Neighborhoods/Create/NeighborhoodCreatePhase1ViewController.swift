@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import GooglePlaces
+import IQKeyboardManagerSwift
 
 class NeighborhoodCreatePhase1ViewController: UIViewController {
     
@@ -22,6 +23,9 @@ class NeighborhoodCreatePhase1ViewController: UIViewController {
     var isFromPlaceSelection = false
     weak var pageDelegate:NeighborhoodCreateMainDelegate? = nil
     
+    //Use for growing Textview
+    var realViewFrame:CGRect = .zero
+    var hasGrowingTV = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +34,10 @@ class NeighborhoodCreatePhase1ViewController: UIViewController {
         ui_tableview.rowHeight = UITableView.automaticDimension
         ui_tableview.estimatedRowHeight = 50
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        IQKeyboardManager.shared.enable = true
+        //Use for growing Textview
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(moveFromGrow), name: Notification.Name(kNotifGrowTextview), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,22 +45,37 @@ class NeighborhoodCreatePhase1ViewController: UIViewController {
         AnalyticsLoggerManager.logEvent(name: View_NewGroup_Step1)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-        else {
-            // if keyboard size is not available for some reason, dont do anything
-            return
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if realViewFrame == .zero {
+            realViewFrame = self.view.frame
         }
-        
-        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height , right: 0.0)
-        ui_tableview.contentInset = contentInsets
-        ui_tableview.scrollIndicatorInsets = contentInsets
+    }
+    
+    //Use for growing Textview
+    @objc func moveFromGrow(notification: NSNotification) {
+        guard let isUp = notification.userInfo?[kNotifGrowTextviewKeyISUP] as? Bool else {return}
+        hasGrowingTV = true
+        animateViewMoving(isUp, moveValue: 18)
+    }
+    
+    func animateViewMoving (_ up:Bool, moveValue :CGFloat){
+        let movementDuration:TimeInterval = 0.3
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = self.view.frame.offsetBy(dx: 0,  dy: movement)
+        UIView.commitAnimations()
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-        ui_tableview.contentInset = contentInsets
-        ui_tableview.scrollIndicatorInsets = contentInsets
+        if hasGrowingTV {
+            UIView.beginAnimations( "animateView", context: nil)
+            self.view.frame.origin.y = 0
+            UIView.commitAnimations()
+            hasGrowingTV = false
+        }
     }
     
     deinit {

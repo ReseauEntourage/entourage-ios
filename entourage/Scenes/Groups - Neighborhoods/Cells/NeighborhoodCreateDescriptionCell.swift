@@ -16,26 +16,44 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
     @IBOutlet weak var ui_bio_count: UILabel!
     @IBOutlet weak var ui_tv_edit_bio: MJTextViewPlaceholder!
     
+    @IBOutlet weak var ui_tv_growing: GrowingTextView!
+    
     weak var delegate:NeighborhoodCreateDescriptionCellDelegate? = nil
     
     var placeholderTxt = "neighborhoodCreateTitleDescriptionPlaceholder".localized
     
     var textInputType:TextInputType = .none
     
+    var originalGrowingTf:CGFloat = 0
+    var lastGrowingTf:CGFloat = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        ui_tv_edit_bio.delegate = self
-        ui_tv_edit_bio.isScrollEnabled = false
-        ui_bio_count.text = "0/\(ApplicationTheme.maxCharsBio)"
-        
-        ui_tv_edit_bio.placeholderText = placeholderTxt
-        ui_tv_edit_bio.placeholderColor = ApplicationTheme.getFontChampDefault().color
-        
         let _width = UIApplication.shared.delegate?.window??.frame.width ?? contentView.frame.size.width
         let buttonDone = UIBarButtonItem(title: "validate".localized, style: .plain, target: self, action: #selector(closeKb(_:)))
-        ui_tv_edit_bio.addToolBar(width: _width, buttonValidate: buttonDone)
-        ui_tv_edit_bio.font = ApplicationTheme.getFontChampDefault().font
+        
+        if let _ = ui_tv_growing {
+            ui_tv_growing.delegate = self
+            ui_tv_growing.trimWhiteSpaceWhenEndEditing = false
+            ui_tv_growing.font = ApplicationTheme.getFontChampDefault().font
+            ui_tv_growing.placeholder = placeholderTxt
+            ui_tv_growing.placeholderColor = ApplicationTheme.getFontChampDefault().color
+            ui_tv_growing.addToolBar(width: _width, buttonValidate: buttonDone)
+            
+            ui_tv_growing.maxHeight = 80
+        }
+        
+        if let _ = ui_tv_edit_bio {
+            ui_tv_edit_bio.delegate = self
+            ui_tv_edit_bio.isScrollEnabled = false
+            ui_tv_edit_bio.placeholderText = placeholderTxt
+            ui_tv_edit_bio.placeholderColor = ApplicationTheme.getFontChampDefault().color
+            ui_tv_edit_bio.addToolBar(width: _width, buttonValidate: buttonDone)
+            ui_tv_edit_bio.font = ApplicationTheme.getFontChampDefault().font
+        }
+        
+        ui_bio_count.text = "0/\(ApplicationTheme.maxCharsDescription)"
         
         ui_title_bio.text = "neighborhoodCreateDescriptionTitle".localized
         ui_title_bio.textColor = ApplicationTheme.getFontH2Noir().color
@@ -53,23 +71,54 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
         ui_title_bio.text = title.localized
         ui_description.text = description.localized
         placeholderTxt = placeholder.localized
-        ui_tv_edit_bio.placeholderText = placeholderTxt
+        ui_tv_edit_bio?.placeholderText = placeholderTxt
+        ui_tv_growing?.placeholder = placeholderTxt
     }
     
     func populateCell(title:String,description:String,placeholder:String, delegate:NeighborhoodCreateDescriptionCellDelegate, about:String? = nil, textInputType:TextInputType) {
         self.textInputType = textInputType
-        self.ui_tv_edit_bio.text = about
+        self.ui_tv_edit_bio?.text = about
+        self.ui_tv_growing?.text = about
         self.delegate = delegate
         setupTitles(title: title, description: description, placeholder: placeholder)
     }
     
     @objc func closeKb(_ sender:UIBarButtonItem?) {
-        if let txtBio = ui_tv_edit_bio.text {
+        if let txtBio = ui_tv_edit_bio?.text {
             let _bio = txtBio == placeholderTxt ? "" : txtBio
             delegate?.updateFromTextView(text: _bio,textInputType: textInputType)
         }
-        ui_view_error?.isHidden = ui_tv_edit_bio.text?.isEmpty ?? true ? false : true
-        _ = ui_tv_edit_bio.resignFirstResponder()
+        else if let txtBio = ui_tv_growing?.text {
+            let _bio = txtBio == placeholderTxt ? "" : txtBio
+            delegate?.updateFromTextView(text: _bio,textInputType: textInputType)
+        }
+        
+        if ui_tv_growing != nil {
+            ui_view_error?.isHidden = ui_tv_growing.text?.isEmpty ?? true ? false : true
+            _ = ui_tv_growing.resignFirstResponder()
+        }
+        else {
+            ui_view_error?.isHidden = ui_tv_edit_bio.text?.isEmpty ?? true ? false : true
+            _ = ui_tv_edit_bio.resignFirstResponder()
+        }
+    }
+}
+
+//MARK: - Growing delegate
+extension NeighborhoodCreateDescriptionCell: GrowingTextViewDelegate {
+    func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
+        if originalGrowingTf == 0 {
+            originalGrowingTf = height
+            return
+        }
+        
+        if height >= originalGrowingTf {
+            let oldHeight = lastGrowingTf
+            lastGrowingTf = height
+            let isUp = lastGrowingTf > oldHeight
+            let notif = Notification(name: Notification.Name(kNotifGrowTextview), object: nil, userInfo: [kNotifGrowTextviewKeyISUP:isUp])
+            NotificationCenter.default.post(notif)
+        }
     }
 }
 
@@ -77,18 +126,22 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
 extension NeighborhoodCreateDescriptionCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         //TODO: ON garde quel comportement? avec ou sans retour à la ligne ?
-        if text == "\n" {
-            self.closeKb(nil)
+//        if text == "\n" {
+//            self.closeKb(nil)
+//            return false
+//        }
+        
+        if textView.text.count + text.count > ApplicationTheme.maxCharsDescription {
             return false
         }
         
-        if textView.text.count + text.count > ApplicationTheme.maxCharsBio {
-            return false
-        }
-        
-        ui_bio_count.text = "\(textView.text.count + text.count)/\(ApplicationTheme.maxCharsBio)"
+        ui_bio_count.text = "\(textView.text.count + text.count)/\(ApplicationTheme.maxCharsDescription)"
         
         return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        lastGrowingTf = 0
     }
 }
 

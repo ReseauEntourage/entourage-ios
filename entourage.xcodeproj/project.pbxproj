@@ -45,6 +45,7 @@
 		023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89C027DFA380008C6A58 /* ParamMenuCell.swift */; };
 		023D89C327DFA39A008C6A58 /* ParamsInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89C227DFA39A008C6A58 /* ParamsInfoCell.swift */; };
 		023EC27F27FB2D8D003A3051 /* BasePopViewController_Template.xib in Resources */ = {isa = PBXBuildFile; fileRef = 023EC27E27FB2D8D003A3051 /* BasePopViewController_Template.xib */; };
+		024131DD2863622600561FB4 /* GrowingTextview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024131DC2863622600561FB4 /* GrowingTextview.swift */; };
 		024273EC283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024273EB283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift */; };
 		024273EE283291C2009A4EB8 /* NeighborhoodMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024273ED283291C2009A4EB8 /* NeighborhoodMessageCell.swift */; };
 		0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */; };
@@ -309,6 +310,7 @@
 		023D89C027DFA380008C6A58 /* ParamMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamMenuCell.swift; sourceTree = "<group>"; };
 		023D89C227DFA39A008C6A58 /* ParamsInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsInfoCell.swift; sourceTree = "<group>"; };
 		023EC27E27FB2D8D003A3051 /* BasePopViewController_Template.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasePopViewController_Template.xib; sourceTree = "<group>"; };
+		024131DC2863622600561FB4 /* GrowingTextview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingTextview.swift; sourceTree = "<group>"; };
 		024273EB283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodDetailMessagesViewController.swift; sourceTree = "<group>"; };
 		024273ED283291C2009A4EB8 /* NeighborhoodMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodMessageCell.swift; sourceTree = "<group>"; };
 		0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodChoosePictureViewController.swift; sourceTree = "<group>"; };
@@ -804,6 +806,7 @@
 				0268C246285A2B1400294055 /* Floaty */,
 				02D5689A2809A5B50092C7A4 /* TitleOnlyCell.swift */,
 				0268197A278DF72D00A98A4A /* MJCustomPageControl.swift */,
+				024131DC2863622600561FB4 /* GrowingTextview.swift */,
 				025E917727F36A6E00D4A7A8 /* Shared Cells */,
 				02E6789B27EB703F00AF5998 /* MJCustomSlider.swift */,
 				02CCE68B27D7B52900D6976C /* TagListView */,
@@ -1408,6 +1411,7 @@
 				02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */,
 				02B7922727F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift in Sources */,
 				02F5278127999A8C00929431 /* MainGuideViewController.swift in Sources */,
+				024131DD2863622600561FB4 /* GrowingTextview.swift in Sources */,
 				02E069E9279184B3006DB1B6 /* OTOnboardingAssoInfoViewController.swift in Sources */,
 				02E069E3279184B3006DB1B6 /* OTOnboardingEmailPwdViewController.swift in Sources */,
 				02681980278DF72D00A98A4A /* OTCarrouselLayout.swift in Sources */,
