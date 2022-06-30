@@ -24,7 +24,6 @@ class NeighborhoodCreatePhase1ViewController: UIViewController {
     weak var pageDelegate:NeighborhoodCreateMainDelegate? = nil
     
     //Use for growing Textview
-    var realViewFrame:CGRect = .zero
     var hasGrowingTV = false
     
     override func viewDidLoad() {
@@ -38,18 +37,14 @@ class NeighborhoodCreatePhase1ViewController: UIViewController {
         //Use for growing Textview
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(moveFromGrow), name: Notification.Name(kNotifGrowTextview), object: nil)
+        
+        ui_tableview.register(UINib(nibName: AddDescriptionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDescriptionTableViewCell.identifier)
+        ui_tableview.register(UINib(nibName: AddDescriptionFixedTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDescriptionFixedTableViewCell.identifier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AnalyticsLoggerManager.logEvent(name: View_NewGroup_Step1)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if realViewFrame == .zero {
-            realViewFrame = self.view.frame
-        }
     }
     
     //Use for growing Textview
@@ -93,11 +88,11 @@ extension NeighborhoodCreatePhase1ViewController: UITableViewDelegate, UITableVi
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupName", for: indexPath) as! NeighborhoodCreateNameCell
-            cell.populateCell(delegate: self,name: group_name)
+            cell.populateCell(delegate: self,name: group_name, isEvent: false)
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupDescription", for: indexPath) as! NeighborhoodCreateDescriptionCell
-            cell.populateCell(title: "neighborhoodCreateDescriptionTitle", description: "neighborhoodCreateDescriptionSubtitle", placeholder: "neighborhoodCreateTitleDescriptionPlaceholder", delegate: self,about: group_description, textInputType:.descriptionAbout)
+            let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionTableViewCell.identifier, for: indexPath) as! AddDescriptionTableViewCell
+            cell.populateCell(title: "neighborhoodCreateDescriptionTitle".localized, description: "neighborhoodCreateDescriptionSubtitle".localized, placeholder: "neighborhoodCreateTitleDescriptionPlaceholder".localized, delegate: self,about: group_description, textInputType:.descriptionAbout)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupPlace", for: indexPath) as! NeighborhoodCreateLocationCell
@@ -121,8 +116,8 @@ extension NeighborhoodCreatePhase1ViewController: UITableViewDelegate, UITableVi
     }
 }
 
-//MARK: - NeighborhoodCreateDescriptionCellDelegate / NeighborhoodCreateLocationCellDelegate -
-extension NeighborhoodCreatePhase1ViewController: NeighborhoodCreateDescriptionCellDelegate, NeighborhoodCreateLocationCellDelegate, NeighborhoodCreateNameCellDelegate {
+//MARK: - AddDescriptionCellDelegate / NeighborhoodCreateLocationCellDelegate -
+extension NeighborhoodCreatePhase1ViewController: AddDescriptionCellDelegate, NeighborhoodCreateLocationCellDelegate, NeighborhoodCreateNameCellDelegate {
     func updateFromTextView(text: String?,textInputType:TextInputType) {
         self.group_description = text
         pageDelegate?.addGroupDescription(text)

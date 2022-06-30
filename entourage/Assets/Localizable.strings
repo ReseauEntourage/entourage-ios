@@ -508,7 +508,6 @@
 "neighborhoodCreateCatOtherTitle" = "Décrivez en un mot la catégorie de votre groupe";
 "neighborhoodCreateCatOtherPlaceholder" = "Veuillez saisir au maximum 80 caractères";
 
-"neighborhoodCreatePhase2_error" = "Veuillez choisir au moins une catégorie";
 "neighborhoodCreatePhase2_others_error" = "Veuillez préciser la catégorie divers";
 
 //Phase 3
@@ -695,3 +694,79 @@
 "home_congrat_title_single" = "Bravo ! Vous avez réalisé %d nouvelle action !";
 "home_congrat_title_plural" = "Bravo ! Vous avez réalisé %d nouvelles actions !";
 "home_congrat_title_next" = "Super, de nouvelles actions se présentent sur la homepage !";
+
+/** Events*/
+//Create
+
+"eventCreatePopCloseBackTitle" = "Attention";
+"eventCreatePopCloseBackMessage" = "Si vous quittez le formulaire de création d’un événement, toutes les informations saisies seront perdues.";
+"eventCreatePopCloseBackQuit" = "Quitter";
+"eventCreatePopCloseBackCancel" = "Annuler";
+
+"event_create_group_bt_back" = "Précédent";
+"event_create_group_bt_next" = "Suivant";
+"event_create_group_bt_create" = "Créer";
+"eventCreateInputErrorMandatory" = "Champ à remplir";
+
+
+"event_create_title" = "Nouvel évènement";
+"event_create_title_phase" = "Étape";
+"event_create_title_phase_nb" = "0%d.";
+
+"event_create_phase_1_name" = "Nom de l’évènement - obligatoire";
+"event_create_phase_1_name_placeholder" = "Nom PLACEHOLDER";
+"event_create_phase_1_name_error" = "Le nom de l'événement doit contenir au minimum 2 caractères.";
+"event_create_phase_1_desc" = "Description - obligatoire";
+"event_create_phase_1_desc_placeholder" = "Description PLACEHOLDER";
+"event_create_phase_1_desc_subtitle" = "(400 caractères max)";
+"event_create_phase_1_photo" = "Photo - obligatoire";
+"event_create_phase_1_photo_desc" = " Vous pourrez la changer plus tard";
+
+"event_create_mandatory" = "- obligatoire";
+
+"event_create_phase2_date" = "Date - obligatoire";
+"event_create_phase2_date_placeholder" = "jj/mm/aaaa";
+"event_create_phase2_time_start" = "Heure de début";
+"event_create_phase2_time_start" = "hh-mm";
+"event_create_phase2_time_end" = "Heure de fin";
+"event_create_phase2_time_end_placeholder" = "hh-mm";
+
+"event_create_phase2_recurrence" = "Récurrence - obligatoire";
+"recurrence_once" = "Juste une fois";
+"recurrence_week" = "Toutes les semaines";
+"recurrence_every2Weeks" = "Une semaine sur deux";
+"recurrence_month" = "Une fois par mois";
+"eventCreateInputErrorTimeStart" = "Choisir date avant";
+"eventCreateInputErrorTimeEnd" = "Choisir heure début avant";
+
+"event_create_phase3_title" = "Lieu - obligatoire";
+"event_create_phase3_title_place" = "Ajouter un lieu - obligatoire";
+"event_create_phase3_title_online" = "Ajouter une url - obligatoire";
+
+"event_create_phase3_presentiel" = "En présentiel";
+"event_create_phase3_online" = "En ligne";
+"event_create_phase3_placeholder_place" = "Adresse, ville ...";
+"event_create_phase3_placeholder_online" = "Adresse web";
+
+"event_create_phase3_title_limit" = "L’évènement a-t-il un nombre de places limité ? - obligatoire";
+"event_create_phase3_title_nb_places" = "Nombre de places disponibles - obligatoire";
+"event_create_phase3_title_nb_places_placeholder" = "Nombre de places";
+"event_create_phase3_limit_yes" = "Oui";
+"event_create_phase3_limit_no" = "Non";
+
+"event_create_phase4_title" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de l’évènement. - obligatoire";
+
+"event_create_phase5_title" = "Partager l'événement dans vos groupes\n- obligatoire";
+"event_create_phase5_desc" = "Vous ne pouvez partager l’évènement seulement aux groupes dont vous êtes membre. Votre événement sera alors visible dans le(s) groupe(s) sélectionné(s) et tous les membres d'un groupe pourront y participer.";
+"createEventNotShare" = "Ne partager dans aucun groupe";
+"createEventShare" = "Partager dans un ou plusieurs groupes";
+
+"eventCreateEnd_button_show" = "Voir mon événement";
+"eventCreateEnd_title" = "Votre évènement à bien été créé !";
+"eventCreateEnd_subtitle" = "Félicitation, vous venez de créer un nouvel évènement. Pour le rendre plus visible parlez-en sur vos groupes !";
+
+"eventCreatePhase1_error" = "Veuillez remplir tous les champs obligatoires";
+"eventCreatePhase2_error" = "Veuillez remplir tous les champs obligatoires";
+"eventCreatePhase3_error" = "Veuillez remplir tous les champs obligatoires";
+"eventCreatePhase4_error" = "Une catégorie doit être sélectionnée.";
+"eventCreatePhase5_error" = "Un groupe au minimum doit être sélectionné.";

@@ -31,9 +31,16 @@ class NeighborhoodCreateNameCell: UITableViewCell, UITextFieldDelegate {
         self.ui_error_view.setupView(title: "neighborhoodCreateInputErrorMinCharName".localized)
     }
     
-    func populateCell(delegate:NeighborhoodCreateNameCellDelegate, name:String? = nil) {
+    func populateCell(delegate:NeighborhoodCreateNameCellDelegate, name:String? = nil, isEvent:Bool) {
         self.delegate = delegate
         self.ui_textfield.text = name
+        
+        if isEvent {
+            let stringAttr = Utils.formatString(messageTxt: "event_create_phase_1_name".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
+            ui_title.attributedText = stringAttr
+            ui_textfield.placeholder = "event_create_phase_1_name_placeholder".localized
+            self.ui_error_view.setupView(title: "event_create_phase_1_name_error".localized)
+        }
     }
     
     func checkErrorInput() -> Bool {

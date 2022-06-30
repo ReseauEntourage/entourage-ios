@@ -20,6 +20,9 @@ class NeighborhoodCreatePhase3ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
         
+        ui_tableview.register(UINib(nibName: AddDescriptionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDescriptionTableViewCell.identifier)
+        ui_tableview.register(UINib(nibName: AddDescriptionFixedTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDescriptionFixedTableViewCell.identifier)
+        
         ui_tableview.delegate = self
         ui_tableview.dataSource = self
     }
@@ -44,8 +47,8 @@ extension NeighborhoodCreatePhase3ViewController: UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellMessage", for: indexPath) as! NeighborhoodCreateDescriptionCell
-            cell.populateCell(title: "addPhotoCreateDescriptionTitle", description: "addPhotoCreateDescriptionSubtitle", placeholder: "addPhotoCreateDescriptionPlaceholder", delegate: self,about: group_welcome,textInputType:.descriptionWelcome)
+            let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionFixedTableViewCell.identifier, for: indexPath) as! AddDescriptionFixedTableViewCell
+            cell.populateCell(title: "addPhotoCreateDescriptionTitle".localized, description: "addPhotoCreateDescriptionSubtitle".localized, placeholder: "addPhotoCreateDescriptionPlaceholder".localized, delegate: self,about: group_welcome,textInputType:.descriptionWelcome, charMaxLimit: ApplicationTheme.maxCharsDescription200, showError: false)
             return cell
         }
         
@@ -65,8 +68,8 @@ extension NeighborhoodCreatePhase3ViewController: ChoosePictureNeighborhoodDeleg
     }
 }
 
-//MARK: - NeighborhoodCreateDescriptionCellDelegate -
-extension NeighborhoodCreatePhase3ViewController:NeighborhoodCreateDescriptionCellDelegate {
+//MARK: - AddDescriptionCellDelegate -
+extension NeighborhoodCreatePhase3ViewController:AddDescriptionCellDelegate {
     func updateFromTextView(text: String?,textInputType:TextInputType) {
         group_welcome = text
         pageDelegate?.addGroupWelcome(message: text)

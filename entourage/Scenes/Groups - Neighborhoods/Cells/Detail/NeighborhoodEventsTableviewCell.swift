@@ -61,7 +61,9 @@ extension NeighborhoodEventsTableviewCell: UICollectionViewDataSource, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NeighborhoodEventsCollectionviewCell.identifier, for: indexPath) as! NeighborhoodEventsCollectionviewCell
         let event = events[indexPath.row]
-        cell.populateCell(title: event.title, imageUrl: event.imageUrl, dateFormatted: event.startDateFormatted, addressName: event.addressName)
+        Logger.print("***** Event future : \(event)")
+        let _addressName = event.addressName ?? ""
+        cell.populateCell(title: event.title, imageUrl: event.imageUrl, dateFormatted: event.startDateFormatted, addressName: _addressName)
         return cell
     }
     

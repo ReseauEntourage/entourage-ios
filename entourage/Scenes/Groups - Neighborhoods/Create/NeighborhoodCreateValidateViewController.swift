@@ -26,7 +26,7 @@ class NeighborhoodCreateValidateViewController: UIViewController {
         
         ui_bt_pass.setTitle("neighborhoodCreateValidatePass".localized, for: .normal)
         
-        ui_bt_post.layer.cornerRadius = ui_bt_pass.frame.height / 2
+        ui_bt_post.layer.cornerRadius = ui_bt_post.frame.height / 2
         ui_bt_post.backgroundColor = .appOrange
         ui_bt_post.setTitle("neighborhoodCreateValidatePostMessage".localized, for: .normal)
         

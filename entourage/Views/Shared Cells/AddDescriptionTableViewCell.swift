@@ -1,31 +1,38 @@
 //
-//  NeighborhoodInputTextviewTableViewCell.swift
+//  AddDescriptionTableViewCell.swift
 //  entourage
 //
-//  Created by Jerome on 07/04/2022.
+//  Created by Jerome on 23/06/2022.
 //
 
 import UIKit
 
-class NeighborhoodCreateDescriptionCell: UITableViewCell {
+class AddDescriptionTableViewCell: UITableViewCell {
+
+    class var identifier: String {
+        return String(describing: self)
+    }
     
-    @IBOutlet weak var ui_title_bio: UILabel!
+    @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_description: UILabel!
     
     @IBOutlet weak var ui_view_error: MJErrorInputTextView?
-    @IBOutlet weak var ui_bio_count: UILabel!
-    @IBOutlet weak var ui_tv_edit_bio: MJTextViewPlaceholder!
+    @IBOutlet weak var ui_tv_count: UILabel!
+    @IBOutlet weak var ui_tv_edit: MJTextViewPlaceholder!
     
     @IBOutlet weak var ui_tv_growing: GrowingTextView!
     
-    weak var delegate:NeighborhoodCreateDescriptionCellDelegate? = nil
+    weak var delegate:AddDescriptionCellDelegate? = nil
     
-    var placeholderTxt = "neighborhoodCreateTitleDescriptionPlaceholder".localized
+    var placeholderTxt = ""
     
     var textInputType:TextInputType = .none
     
     var originalGrowingTf:CGFloat = 0
     var lastGrowingTf:CGFloat = 0
+    
+    var maxCharsLimit = ApplicationTheme.maxCharsDescription
+    var showError:Bool = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,20 +51,20 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
             ui_tv_growing.maxHeight = 80
         }
         
-        if let _ = ui_tv_edit_bio {
-            ui_tv_edit_bio.delegate = self
-            ui_tv_edit_bio.isScrollEnabled = false
-            ui_tv_edit_bio.placeholderText = placeholderTxt
-            ui_tv_edit_bio.placeholderColor = ApplicationTheme.getFontChampDefault().color
-            ui_tv_edit_bio.addToolBar(width: _width, buttonValidate: buttonDone)
-            ui_tv_edit_bio.font = ApplicationTheme.getFontChampDefault().font
+        if let _ = ui_tv_edit {
+            ui_tv_edit.delegate = self
+            ui_tv_edit.isScrollEnabled = true
+            ui_tv_edit.placeholderText = placeholderTxt
+            ui_tv_edit.placeholderColor = ApplicationTheme.getFontChampDefault().color
+            ui_tv_edit.addToolBar(width: _width, buttonValidate: buttonDone)
+            ui_tv_edit.font = ApplicationTheme.getFontChampDefault().font
         }
         
-        ui_bio_count.text = "0/\(ApplicationTheme.maxCharsDescription)"
+        ui_tv_count.text = "0/\(maxCharsLimit)"
         
-        ui_title_bio.text = "neighborhoodCreateDescriptionTitle".localized
-        ui_title_bio.textColor = ApplicationTheme.getFontH2Noir().color
-        ui_title_bio.font = ApplicationTheme.getFontH2Noir(size: 15).font
+        ui_title.text = "neighborhoodCreateDescriptionTitle".localized
+        ui_title.textColor = ApplicationTheme.getFontH2Noir().color
+        ui_title.font = ApplicationTheme.getFontH2Noir(size: 15).font
         
         ui_description.text = "neighborhoodCreateDescriptionSubtitle".localized
         ui_description.textColor = ApplicationTheme.getFontLegend().color
@@ -67,24 +74,32 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
         self.ui_view_error?.setupView(title: "neighborhoodCreateInputErrorMandatory".localized)
     }
     
-    private func setupTitles(title:String,description:String,placeholder:String) {
-        ui_title_bio.text = title.localized
-        ui_description.text = description.localized
-        placeholderTxt = placeholder.localized
-        ui_tv_edit_bio?.placeholderText = placeholderTxt
+    func populateCell(title:String,titleAttributted:NSAttributedString? = nil, description:String, placeholder:String, delegate:AddDescriptionCellDelegate, about:String? = nil, textInputType:TextInputType, charMaxLimit:Int = ApplicationTheme.maxCharsDescription, showError:Bool = true) {
+        self.maxCharsLimit = charMaxLimit
+        self.textInputType = textInputType
+        let _about = about?.count ?? 0 > 0 ? about! : ""
+        self.ui_tv_edit?.text = _about
+        self.ui_tv_growing?.text = _about
+        self.delegate = delegate
+        
+        self.showError = showError
+        
+        ui_tv_count.text = "0/\(maxCharsLimit)"
+        
+        if let titleAttributted = titleAttributted {
+            ui_title.attributedText = titleAttributted
+        }
+        else {
+            ui_title.text = title
+        }
+        ui_description.text = description
+        placeholderTxt = placeholder
+        ui_tv_edit?.placeholderText = placeholderTxt
         ui_tv_growing?.placeholder = placeholderTxt
     }
     
-    func populateCell(title:String,description:String,placeholder:String, delegate:NeighborhoodCreateDescriptionCellDelegate, about:String? = nil, textInputType:TextInputType) {
-        self.textInputType = textInputType
-        self.ui_tv_edit_bio?.text = about
-        self.ui_tv_growing?.text = about
-        self.delegate = delegate
-        setupTitles(title: title, description: description, placeholder: placeholder)
-    }
-    
     @objc func closeKb(_ sender:UIBarButtonItem?) {
-        if let txtBio = ui_tv_edit_bio?.text {
+        if let txtBio = ui_tv_edit?.text {
             let _bio = txtBio == placeholderTxt ? "" : txtBio
             delegate?.updateFromTextView(text: _bio,textInputType: textInputType)
         }
@@ -93,19 +108,30 @@ class NeighborhoodCreateDescriptionCell: UITableViewCell {
             delegate?.updateFromTextView(text: _bio,textInputType: textInputType)
         }
         
-        if ui_tv_growing != nil {
-            ui_view_error?.isHidden = ui_tv_growing.text?.isEmpty ?? true ? false : true
-            _ = ui_tv_growing.resignFirstResponder()
+        if showError {
+            if ui_tv_growing != nil {
+                ui_view_error?.isHidden = ui_tv_growing.text?.isEmpty ?? true ? false : true
+                _ = ui_tv_growing.resignFirstResponder()
+            }
+            else {
+                ui_view_error?.isHidden = ui_tv_edit.text?.isEmpty ?? true ? false : true
+                _ = ui_tv_edit.resignFirstResponder()
+            }
         }
         else {
-            ui_view_error?.isHidden = ui_tv_edit_bio.text?.isEmpty ?? true ? false : true
-            _ = ui_tv_edit_bio.resignFirstResponder()
+            if ui_tv_growing != nil {
+                _ = ui_tv_growing.resignFirstResponder()
+            }
+            else {
+                _ = ui_tv_edit.resignFirstResponder()
+            }
+            ui_view_error?.isHidden = true
         }
     }
 }
 
 //MARK: - Growing delegate
-extension NeighborhoodCreateDescriptionCell: GrowingTextViewDelegate {
+extension AddDescriptionTableViewCell: GrowingTextViewDelegate {
     func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
         if originalGrowingTf == 0 {
             originalGrowingTf = height
@@ -123,7 +149,7 @@ extension NeighborhoodCreateDescriptionCell: GrowingTextViewDelegate {
 }
 
 //MARK: - UITextViewDelegate -
-extension NeighborhoodCreateDescriptionCell: UITextViewDelegate {
+extension AddDescriptionTableViewCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         //TODO: ON garde quel comportement? avec ou sans retour à la ligne ?
 //        if text == "\n" {
@@ -131,11 +157,11 @@ extension NeighborhoodCreateDescriptionCell: UITextViewDelegate {
 //            return false
 //        }
         
-        if textView.text.count + text.count > ApplicationTheme.maxCharsDescription {
+        if textView.text.count + text.count > maxCharsLimit {
             return false
         }
         
-        ui_bio_count.text = "\(textView.text.count + text.count)/\(ApplicationTheme.maxCharsDescription)"
+        ui_tv_count.text = "\(textView.text.count + text.count)/\(maxCharsLimit)"
         
         return true
     }
@@ -145,8 +171,8 @@ extension NeighborhoodCreateDescriptionCell: UITextViewDelegate {
     }
 }
 
-//MARK: - NeighborhoodCreateDescriptionCellDelegate Protocol -
-protocol NeighborhoodCreateDescriptionCellDelegate:AnyObject {
+//MARK: - AddDescriptionCellDelegate Protocol -
+protocol AddDescriptionCellDelegate:AnyObject {
     func updateFromTextView(text:String?, textInputType:TextInputType)
 }
 
@@ -155,3 +181,6 @@ enum TextInputType {
     case descriptionWelcome
     case none
 }
+
+
+class AddDescriptionFixedTableViewCell:AddDescriptionTableViewCell {}

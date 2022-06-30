@@ -47,6 +47,10 @@ class NeighborhoodEditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ui_tableview.register(UINib(nibName: AddDescriptionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDescriptionTableViewCell.identifier)
+        ui_tableview.register(UINib(nibName: AddDescriptionFixedTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDescriptionFixedTableViewCell.identifier)
+        
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         ui_tableview.rowHeight = UITableView.automaticDimension
@@ -264,13 +268,13 @@ extension NeighborhoodEditViewController: UITableViewDelegate, UITableViewDataSo
         case 1:
             let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellGroupName", for: indexPath) as! NeighborhoodCreateNameCell
             let _name = neighborhoodName == nil ? currentNeighborhood?.name : neighborhoodName
-            cell.populateCell(delegate: self, name: _name)
+            cell.populateCell(delegate: self, name: _name, isEvent: false)
             return cell
         case 2:
-            let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellGroupDescription", for: indexPath) as! NeighborhoodCreateDescriptionCell
+            let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: AddDescriptionFixedTableViewCell.identifier, for: indexPath) as! AddDescriptionFixedTableViewCell
             let msgAbout = neighborhoodAbout == nil ? currentNeighborhood?.aboutGroup : neighborhoodAbout
             
-            cell.populateCell(title: "neighborhoodCreateDescriptionTitle", description: "neighborhoodCreateDescriptionSubtitle", placeholder: "neighborhoodCreateTitleDescriptionPlaceholder", delegate: self, about: msgAbout ,textInputType:.descriptionAbout)
+            cell.populateCell(title: "neighborhoodCreateDescriptionTitle".localized, description: "neighborhoodCreateDescriptionSubtitle".localized, placeholder: "neighborhoodCreateTitleDescriptionPlaceholder".localized, delegate: self, about: msgAbout ,textInputType:.descriptionAbout)
             return cell
         default:
             //TODO: voir lorsque le WS sera ok pour la location
@@ -342,10 +346,10 @@ extension NeighborhoodEditViewController: UITableViewDelegate, UITableViewDataSo
             cell.populateCell(position: 3)
             return cell
         case 1:
-            let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellMessage", for: indexPath) as! NeighborhoodCreateDescriptionCell
+            let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: AddDescriptionFixedTableViewCell.identifier, for: indexPath) as! AddDescriptionFixedTableViewCell
             let msgWelcome = neighborhoodWelcome == nil ? currentNeighborhood?.welcomeMessage : neighborhoodWelcome
             
-            cell.populateCell(title: "addPhotoCreateDescriptionTitle", description: "addPhotoCreateDescriptionSubtitle", placeholder: "addPhotoCreateDescriptionPlaceholder", delegate: self,about: msgWelcome,textInputType:.descriptionWelcome)
+            cell.populateCell(title: "addPhotoCreateDescriptionTitle".localized, description: "addPhotoCreateDescriptionSubtitle".localized, placeholder: "addPhotoCreateDescriptionPlaceholder".localized, delegate: self,about: msgWelcome,textInputType:.descriptionWelcome, charMaxLimit: ApplicationTheme.maxCharsDescription200, showError: false)
             return cell
         default:
             let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath)  as! NeighborhoodCreatePhotoCell
@@ -392,8 +396,8 @@ extension NeighborhoodEditViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
-//MARK: - NeighborhoodCreateDescriptionCellDelegate / NeighborhoodCreateLocationCellDelegate -
-extension NeighborhoodEditViewController: NeighborhoodCreateDescriptionCellDelegate, NeighborhoodCreateLocationCellDelegate, NeighborhoodCreateNameCellDelegate {
+//MARK: - AddDescriptionCellDelegate / NeighborhoodCreateLocationCellDelegate -
+extension NeighborhoodEditViewController: AddDescriptionCellDelegate, NeighborhoodCreateLocationCellDelegate, NeighborhoodCreateNameCellDelegate {
     func updateFromTextView(text: String?,textInputType:TextInputType) {
         switch textInputType {
         case .descriptionAbout:

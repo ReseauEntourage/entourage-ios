@@ -41,7 +41,7 @@ class NeighborhoodCreatePhotoCell: UITableViewCell {
         }
     }
     
-    func populateCell(urlImg:String?, isEdit:Bool = false) {
+    func populateCell(urlImg:String?, isEdit:Bool = false, isEvent:Bool = false) {
         if let urlImg = urlImg, !urlImg.isEmpty, let mainUrl = URL(string: urlImg) {
             ui_photo.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_photo_group"))
             ui_picto_photo.isHidden = true
@@ -53,6 +53,14 @@ class NeighborhoodCreatePhotoCell: UITableViewCell {
         
         if isEdit {
             ui_title.text = "neighborhoodEditPhotoTitle".localized
+        }
+        
+        if isEvent {
+            let style = ApplicationTheme.getFontH2Noir()
+            let styleHighlight = ApplicationTheme.getFontLegend()
+            let attrStr = Utils.formatString(messageTxt: "event_create_phase_1_photo".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: style, fontColorTypeHighlight: styleHighlight)
+            ui_title.attributedText = attrStr
+            ui_description?.text = "event_create_phase_1_photo_desc".localized
         }
     }
 }

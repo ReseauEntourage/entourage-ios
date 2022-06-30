@@ -26,6 +26,29 @@ extension String {
     
 }
 
+//MARK: - Date -
+extension Date {
+    func setStartOfDay() -> Date? {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
+        components.minute = 0
+        components.second = 0
+        components.hour = 0
+        
+        return calendar.date(from: components)
+    }
+    
+    func setEndOfDay() -> Date? {
+        let calendar = Calendar.current
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
+        components.minute = 59
+        components.second = 59
+        components.hour = 23
+        
+        return calendar.date(from: components)
+    }
+}
+
 //MARK: - Bundle Extension -
 extension Bundle {
     var versionName:String {

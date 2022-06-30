@@ -32,6 +32,8 @@ struct Neighborhood:Codable {
     var messages:[PostMessage]? = nil
     var isMember = false
     
+    var isSelected = false
+    
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case name

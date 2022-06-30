@@ -55,6 +55,13 @@ let kAPIHomeSummary = "home/summary?token=%@"
 let kAPIHomeResources = "resources?token=%@"
 let kAPIHomeResourceRead = "resources/%d/users?token=%@"
 
+
+//Event
+let kAPIEventImages = "entourage_images?token=%@"
+let kAPIEventDetail = "outings/%d?token=%@"
+let kAPIEventCreate = "outings?token=%@"
+let kAPIEventGetAllForUser = "users/%@/outings?token=%@"
+
 //WebLink
 let emailContact = "contact@entourage.social"
 let GDS_INFO_ALERT_WEB_LINK = "https://soliguide.fr"
