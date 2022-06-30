@@ -96,6 +96,7 @@ extension EventCreatePhase3ViewController:PlaceViewControllerDelegate, EventCrea
         }
         
         self.location_googlePlace = googlePlace
+        pageDelegate?.addOnline(url: nil)
         pageDelegate?.addPlaceType(isOnline: false)
         pageDelegate?.addPlace(currentlocation: currentlocation, currentLocationName: currentLocationName, googlePlace: googlePlace)
         
@@ -110,12 +111,16 @@ extension EventCreatePhase3ViewController:PlaceViewControllerDelegate, EventCrea
         self.placeName = nil
         self.place = nil
         self.location_googlePlace = nil
+        pageDelegate?.addPlace(currentlocation: nil, currentLocationName: nil, googlePlace: nil)
+        pageDelegate?.addOnline(url: nil)
+        pageDelegate?.addPlaceType(isOnline: isOnline)
         self.ui_tableview.reloadData()
     }
     
     func addOnlineUrl(urlOnline:String?) {
         self.onlineUrl = urlOnline
         Logger.print("***** add online url : \(onlineUrl)")
+        pageDelegate?.addPlace(currentlocation: nil, currentLocationName: nil, googlePlace: nil)
         pageDelegate?.addOnline(url: urlOnline)
         pageDelegate?.addPlaceType(isOnline: true)
     }

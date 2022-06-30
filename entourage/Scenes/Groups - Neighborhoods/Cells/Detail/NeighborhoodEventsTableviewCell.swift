@@ -63,7 +63,7 @@ extension NeighborhoodEventsTableviewCell: UICollectionViewDataSource, UICollect
         let event = events[indexPath.row]
         Logger.print("***** Event future : \(event)")
         let _addressName = event.addressName ?? ""
-        cell.populateCell(title: event.title, imageUrl: event.imageUrl, dateFormatted: event.startDateFormatted, addressName: _addressName)
+        cell.populateCell(title: event.title, imageUrl: event.getCurrentImageUrl, dateFormatted: event.startDateFormatted, addressName: _addressName)
         return cell
     }
     

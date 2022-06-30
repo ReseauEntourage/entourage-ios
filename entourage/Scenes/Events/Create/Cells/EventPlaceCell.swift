@@ -52,7 +52,7 @@ class EventPlaceCell: UITableViewCell {
         ui_place_label.text = "event_create_phase3_placeholder_place".localized
         ui_place_label.setupFontAndColor(style:  ApplicationTheme.getFontChampDefault(size: 13))
         
-        ui_online_tf.setupFontAndColor(style: ApplicationTheme.getFontChampDefault(size: 13))
+        ui_online_tf.setupFontAndColor(style: ApplicationTheme.getFontChampInput(size: 13, color: .black))
         ui_online_tf.placeholder = "event_create_phase3_placeholder_online".localized
         
         ui_view_place_error.isHidden = true
@@ -73,6 +73,7 @@ class EventPlaceCell: UITableViewCell {
             ui_place_label.textColor = .black
         }
         else {
+            ui_place_label.text = "event_create_phase3_placeholder_place".localized
             ui_place_label.textColor = .appGrisSombre40
         }
         
@@ -85,13 +86,11 @@ class EventPlaceCell: UITableViewCell {
         
         selectedItem = sender.tag
        
-        let isOnline = selectedItem == 1
+        let isOnline = selectedItem == 2
         
         delegate?.resetPlaceOnlineSelection(isOnline: isOnline)
         
         changeSelection()
-        
-       // sendRecurrenceSelected(pos: sender.tag)
     }
 
     @IBAction func action_show_place(_ sender: Any) {
@@ -135,7 +134,7 @@ class EventPlaceCell: UITableViewCell {
 extension EventPlaceCell: UITextFieldDelegate {
     func checkErrorInput() -> Bool {
         var returnValidate = true
-        if  ui_online_tf.text?.count ?? 0 >= ApplicationTheme.minGroupNameChars {
+        if  ui_online_tf.text?.count ?? 0 >= ApplicationTheme.minHttpChars {
             self.ui_view_online_error.isHidden = true
         }
         else {

@@ -18,6 +18,7 @@ struct ApplicationTheme {
     static let minLastnameChars = 2
     static let minOthersCatChars = 2
     static let minGroupNameChars = 2
+    static let minHttpChars = 6
     static let maxCharsBio = 200
     static let maxCharsDescription = 400
     static let maxCharsDescription200 = 200

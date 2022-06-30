@@ -14,7 +14,7 @@ struct Event:Codable {
     var descriptionEvent:String? = nil
     
     var shareUrl:String? = nil
-  //  var imageUrl:String? = nil
+    var imageUrl:String? = nil
     var imageId:Int? = nil
     
     var isOnline:Bool? = false
@@ -87,7 +87,7 @@ struct Event:Codable {
         }
     }
     
-    var imageUrl:String? {
+    var getCurrentImageUrl:String? {
         get {
             if metadata?.portrait_url != nil {
                 return metadata?.portrait_url
@@ -102,7 +102,7 @@ struct Event:Codable {
         case title
         case descriptionEvent = "description"
         case shareUrl = "share_url"
-       // case imageUrl = "image_url"
+        case imageUrl = "image_url"
         case isOnline = "online"
         case onlineEventUrl = "event_url"
         
