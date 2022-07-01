@@ -61,7 +61,7 @@ let kAPIEventImages = "entourage_images?token=%@"
 let kAPIEventDetail = "outings/%d?token=%@"
 let kAPIEventCreate = "outings?token=%@"
 let kAPIEventGetAllForUser = "users/%@/outings?token=%@"
-
+let kAPIEventEdit = "outings/%d?token=%@"
 //WebLink
 let emailContact = "contact@entourage.social"
 let GDS_INFO_ALERT_WEB_LINK = "https://soliguide.fr"

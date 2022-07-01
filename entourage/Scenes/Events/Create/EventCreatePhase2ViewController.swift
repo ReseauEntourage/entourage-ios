@@ -17,12 +17,18 @@ class EventCreatePhase2ViewController: UIViewController {
     var endDateSelected:Date? = nil
     var recurrenceSelected:EventRecurrence = .once
     
+    var currentEvent:Event? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         ui_tableview.rowHeight = UITableView.automaticDimension
         ui_tableview.estimatedRowHeight = 50
+        
+        if pageDelegate?.isEdit() ?? false {
+            currentEvent = pageDelegate?.getCurrentEvent()
+        }
     }
 }
 
@@ -36,13 +42,18 @@ extension EventCreatePhase2ViewController:UITableViewDataSource, UITableViewDele
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellDate", for: indexPath) as! EventDatesCell
             
-            cell.populateCell(startDate:startDateSelected, endDate:endDateSelected, delegate: self)
+            let startD = startDateSelected != nil ? startDateSelected : currentEvent?.getStartEndDate().startDate
+            let endD = endDateSelected != nil ? endDateSelected : currentEvent?.getStartEndDate().endDate
+            
+            cell.populateCell(startDate:startD, endDate:endD, delegate: self)
             
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellSelector", for: indexPath) as! EventRecurrenceCell
-        cell.populateCell(recurrence:recurrenceSelected, delegate: self)
+        let recur = currentEvent != nil ? currentEvent!.recurrence : recurrenceSelected
+        
+        cell.populateCell(recurrence:recur, delegate: self)
         return cell
     }
 }
@@ -62,5 +73,9 @@ extension EventCreatePhase2ViewController: EventCreateDateCellDelegate {
     func addRecurrence(recurrence: EventRecurrence) {
         recurrenceSelected = recurrence
         pageDelegate?.addRecurrence(recurrence: recurrence)
+    }
+    
+    func setDateChanged() {
+        pageDelegate?.setDateChanged()
     }
 }

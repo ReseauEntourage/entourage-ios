@@ -52,12 +52,12 @@ class EventPlaceLimitCell: UITableViewCell {
         
         selectedItem = hasPlaceLimit ? 1 : 2
         
+        changeSelection()
+        
         ui_limit_tf.text = ""
         if limitNb > 0 {
             ui_limit_tf.text = "\(limitNb)"
         }
-        
-        changeSelection()
     }
     
     @IBAction func action_select(_ sender: UIButton) {

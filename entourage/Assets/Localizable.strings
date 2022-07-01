@@ -707,8 +707,9 @@
 "event_create_group_bt_next" = "Suivant";
 "event_create_group_bt_create" = "Créer";
 "eventCreateInputErrorMandatory" = "Champ à remplir";
+"event_mod_group_bt_mod" = "Modifier";
 
-
+"event_mod_title" = "Modifier mon événement";
 "event_create_title" = "Nouvel évènement";
 "event_create_title_phase" = "Étape";
 "event_create_title_phase_nb" = "0%d.";
@@ -770,3 +771,8 @@
 "eventCreatePhase3_error" = "Veuillez remplir tous les champs obligatoires";
 "eventCreatePhase4_error" = "Une catégorie doit être sélectionnée.";
 "eventCreatePhase5_error" = "Un groupe au minimum doit être sélectionné.";
+
+"eventModPopCloseBackTitle" = "Attention";
+"eventModPopCloseBackMessage" = "Si vous quittez le formulaire de modification d’un événement, toutes les informations saisies seront perdues.";
+"eventModPopCloseBackQuit" = "Quitter";
+"eventModPopCloseBackCancel" = "Annuler";

@@ -15,7 +15,7 @@ class EventCreatePhase3ViewController: UIViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
     
-    var isOnline = false
+    var isOnline:Bool? = nil
     var onlineUrl:String? = nil
     var place:EventLocation? = nil
     var placeName:String? = nil
@@ -26,12 +26,18 @@ class EventCreatePhase3ViewController: UIViewController {
     
     var isFromPlaceSelection = false
     
+    var currentEvent:Event? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         ui_tableview.rowHeight = UITableView.automaticDimension
         ui_tableview.estimatedRowHeight = 50
+
+        if pageDelegate?.isEdit() ?? false {
+            currentEvent = pageDelegate?.getCurrentEvent()
+        }
     }
 }
 //MARK: - UITableView datasource / Delegate -
@@ -56,14 +62,24 @@ extension EventCreatePhase3ViewController:UITableViewDataSource, UITableViewDele
                 }
                 showError = cityName == nil
             }
+            else {
+                cityName = (currentEvent?.addressName != nil && isOnline == nil) ? currentEvent?.addressName : nil
+            }
             
-            cell.populateCell(delegate: self, showError:showError, cityName: cityName, urlOnline: onlineUrl, isOnline: isOnline)
+            let _isOnline = (currentEvent?.isOnline != nil && isOnline == nil) ? currentEvent!.isOnline! : isOnline ?? false
+            let _onlineUrl = (currentEvent?.onlineEventUrl != nil  && isOnline == nil) ? currentEvent!.onlineEventUrl : onlineUrl
+        
+            cell.populateCell(delegate: self, showError:showError, cityName: cityName, urlOnline: _onlineUrl, isOnline: _isOnline)
             
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellLimit", for: indexPath) as! EventPlaceLimitCell
-        cell.populateCell(delegate: self,hasPlaceLimit: hasplaceLimit, limitNb: nbPlaceLimit)
+        
+        let _hasplaceLimit = currentEvent?.metadata?.hasPlaceLimit != nil ? currentEvent!.metadata!.hasPlaceLimit! : hasplaceLimit
+        let _nbplaceLimit = currentEvent?.metadata?.place_limit != nil ? currentEvent!.metadata!.place_limit! : nbPlaceLimit
+        
+        cell.populateCell(delegate: self,hasPlaceLimit: _hasplaceLimit, limitNb: _nbplaceLimit)
         return cell
     }
 }

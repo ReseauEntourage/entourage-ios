@@ -726,12 +726,22 @@
                                             <action selector="action_add_event:" destination="NfL-x1-731" eventType="touchUpInside" id="DTc-L8-EmJ"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcI-o2-BKn">
+                                        <rect key="frame" x="8" y="729" width="130" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Edit N° : 123290"/>
+                                        <connections>
+                                            <action selector="action_edit_event:" destination="NfL-x1-731" eventType="touchUpInside" id="AaX-Kj-X91"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="wLS-Qc-NHA" firstAttribute="top" secondItem="Vo6-it-rtr" secondAttribute="bottom" constant="8" id="6Rh-g3-jL0"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="MOO-vU-cJK" secondAttribute="bottom" constant="26" id="DDR-GZ-q0e"/>
                                     <constraint firstItem="wLS-Qc-NHA" firstAttribute="centerX" secondItem="Vo6-it-rtr" secondAttribute="centerX" id="EYw-ax-9q6"/>
+                                    <constraint firstItem="dcI-o2-BKn" firstAttribute="leading" secondItem="45G-wq-x6t" secondAttribute="leading" constant="8" id="WSd-np-Mka"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="dcI-o2-BKn" secondAttribute="bottom" constant="50" id="dX0-Lt-2qv"/>
                                     <constraint firstAttribute="trailing" secondItem="MOO-vU-cJK" secondAttribute="trailing" constant="16" id="sGC-fx-CIP"/>
                                     <constraint firstItem="Vo6-it-rtr" firstAttribute="centerX" secondItem="45G-wq-x6t" secondAttribute="centerX" id="tXS-SR-WHQ"/>
                                     <constraint firstItem="Vo6-it-rtr" firstAttribute="centerY" secondItem="45G-wq-x6t" secondAttribute="centerY" id="wQU-o6-fHg"/>
@@ -748,6 +758,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1Av-6L-yyv"/>
+                    <connections>
+                        <outlet property="ui_bt_event_edit" destination="dcI-o2-BKn" id="Yud-gt-7oT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khd-eS-pjP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

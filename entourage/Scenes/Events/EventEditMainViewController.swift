@@ -1,8 +1,8 @@
 //
-//  EventCreateMainViewController.swift
+//  EventEditViewController.swift
 //  entourage
 //
-//  Created by Jerome on 21/06/2022.
+//  Created by Jerome on 30/06/2022.
 //
 
 import UIKit
@@ -10,7 +10,8 @@ import CoreLocation
 import GooglePlaces
 import IHProgressHUD
 
-class EventCreateMainViewController: UIViewController {
+class EventEditMainViewController: UIViewController {
+    
     @IBOutlet weak var ui_page_control: MJCustomPageControl!
     
     @IBOutlet weak var ui_error_view: MJErrorInputView!
@@ -25,19 +26,40 @@ class EventCreateMainViewController: UIViewController {
     
     var pageViewController:EventCreatePageViewController? = nil
     
-    var newEvent = Event()
+    var eventId:Int = 0
+    
+    var newTitle:String? = nil
+    var newDescription:String? = nil
+    var newImageId:Int? = nil
+    
+    var newDateChanged:Bool? = nil
+    var newStartDate:Date? = nil
+    var newEndDate:Date? = nil
+    var newRecurrence:EventRecurrence? = nil
+    
+    var newIsOnline:Bool? = nil
+    var newOnlineEventUrl:String? = nil
+    var newLocation:EventLocation? = nil
+    var newAddressName:String? = nil
+    var newGoogle_place_id:String? = nil
+    var newHasPlaceLimit:Bool? = nil
+    var newPlace_limit:Int? = nil
+    
+    var newInterests:[String]? = nil
+    var newNeiborhoodIds:[Int]? = nil
+    
     var newInterestTagOtherMessage:String? = nil
     var newTags:Tags? = nil
-    var isGroupSharing = false
+    var isGroupSharing:Bool? = nil
     
     var currentPhasePosition = 1
+    
+    var currentEvent:Event? = nil
     
     weak var parentController:UIViewController? = nil // Use to open the ending screen
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        newEvent.metadata = EventMetadata()
         
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
         ui_error_view.hide()
@@ -72,7 +94,9 @@ class EventCreateMainViewController: UIViewController {
         
         self.modalPresentationStyle = .fullScreen
         
-        ui_top_view.populateCustom(title: "event_create_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
+        ui_top_view.populateCustom(title: "event_mod_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
+        
+        getEvent()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -91,6 +115,7 @@ class EventCreateMainViewController: UIViewController {
     
     @IBAction func action_next(_ sender: Any) {
         let isValid = checkValidation()
+        
         if isValid.isValid {
             goPageNext()
         }
@@ -151,7 +176,7 @@ class EventCreateMainViewController: UIViewController {
         case 5:
             ui_bt_previous.isHidden = false
             ui_bt_next.isHidden = false
-            ui_bt_next.setTitle("event_create_group_bt_create".localized, for: .normal)
+            ui_bt_next.setTitle("event_mod_group_bt_mod".localized, for: .normal)
         default:
             break
         }
@@ -168,10 +193,26 @@ class EventCreateMainViewController: UIViewController {
     }
     
     //MARK: - Network -
+    private func getEvent() {
+        EventService.getEventWithId(eventId) { event, error in
+            self.currentEvent = event
+            Logger.print("***** return new Event ;) \(event)")
+            NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventEditLoadedEvent), object: nil)
+            _ = self.checkValidation()
+        }
+    }
+    
     private func createEvent() {
+        if hasNoInput() {
+            IHProgressHUD.showSuccesswithStatus("Événement modifié PLACEHOLDER")
+            self.goEnd(event: nil)
+            return
+        }
+        
+        let newEvent = populateNewEvent()
         IHProgressHUD.show()
         Logger.print("***** createEvent \(newEvent.dictionaryForWS())")
-        EventService.createEvent(event: newEvent) { event, error in
+        EventService.updateEvent(event: newEvent) { event, error in
             IHProgressHUD.dismiss()
             if event != nil {
                 self.goEnd(event: event!)
@@ -181,33 +222,56 @@ class EventCreateMainViewController: UIViewController {
         }
     }
     
-    private func goEnd(event:Event) {
+    private func goEnd(event:Event?) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "event_validateVC") as? EventCreateValidateViewController {
-            vc.modalPresentationStyle = .fullScreen
-            vc.eventId = event.uid
-            self.dismiss(animated: false) {
-                self.parentController?.present(vc, animated: true)
-            }
+        
+        DispatchQueue.main.async {
+            self.dismiss(animated: true)
         }
+    }
+    
+    func populateNewEvent() -> EventEditing {
+        
+        var newEvent = EventEditing()
+        newEvent.metadata = EventMetadataEditing()
+        newEvent.uid = eventId
+        
+        newEvent.title = newTitle
+        newEvent.descriptionEvent = newDescription
+        newEvent.imageId = newImageId
+        
+        newEvent.recurrence = newRecurrence
+        newEvent.isOnline = newIsOnline
+        newEvent.onlineEventUrl = newOnlineEventUrl
+        newEvent.location = newLocation
+        
+        newEvent.metadata?.place_name = newAddressName
+        newEvent.metadata?.google_place_id = newGoogle_place_id
+        newEvent.metadata?.place_limit = newPlace_limit
+        newEvent.startDate = newStartDate
+        newEvent.endDate = newEndDate
+        
+        newEvent.interests = newInterests
+        newEvent.neiborhoodIds = newNeiborhoodIds
+        newEvent.tagOtherMessage = newInterestTagOtherMessage
+        
+        return newEvent
     }
 }
 
 //MARK: - EventCreateMainDelegate -
-extension EventCreateMainViewController: EventCreateMainDelegate {
+extension EventEditMainViewController: EventCreateMainDelegate {
     //Phase 1
     func addTitle(_ title: String) {
-        newEvent.title = title
+        newTitle = title
         _ = checkValidation()
     }
-    
     func addDescription(_ about: String?) {
-        newEvent.descriptionEvent = about
+        newDescription = about
         _ = checkValidation()
     }
-    
     func addPhoto(image: EventImage) {
-        newEvent.imageId = image.id
+        newImageId = image.id
         _ = checkValidation()
     }
     
@@ -221,45 +285,51 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
     
     //Phase 2
     func addDateStart(dateStart:Date?) {
-        newEvent.startDate = dateStart
+        newStartDate = dateStart
         _ = checkValidation()
     }
     func addDateEnd(dateEnd:Date?) {
-        newEvent.endDate = dateEnd
+        newEndDate = dateEnd
         _ = checkValidation()
     }
     func addRecurrence(recurrence:EventRecurrence) {
-        newEvent.recurrence = recurrence
+        newRecurrence = recurrence
+        _ = checkValidation()
+    }
+    func setDateChanged() {
+        newDateChanged = true
         _ = checkValidation()
     }
     
     //Phase 3
     func addPlaceType(isOnline:Bool) {
-        newEvent.isOnline = isOnline
+        newIsOnline = isOnline
         _ = checkValidation()
     }
     func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
-        newEvent.onlineEventUrl = nil
+        newOnlineEventUrl = nil
         if let currentlocation = currentlocation {
-            newEvent.location = EventLocation(latitude: currentlocation.latitude, longitude: currentlocation.longitude)
-            newEvent.addressName = currentLocationName
+            newLocation = EventLocation(latitude: currentlocation.latitude, longitude: currentlocation.longitude)
+            newAddressName = currentLocationName
         }
         else if let googlePlace = googlePlace {
-            newEvent.addressName = googlePlace.name
-            newEvent.metadata?.google_place_id = googlePlace.placeID
+            newAddressName = googlePlace.name
+            newGoogle_place_id = googlePlace.placeID
+        }
+        else {
+            newLocation = nil
+            newGoogle_place_id = nil
+            newAddressName = nil
         }
         _ = checkValidation()
     }
-    
     func addOnline(url:String?) {
-        newEvent.onlineEventUrl = url
+        newOnlineEventUrl = url
         _ = checkValidation()
     }
     func addPlaceLimit(hasLimit:Bool, nbPlaces:Int) {
-        if newEvent.metadata == nil {
-            newEvent.metadata = EventMetadata()
-        }
-        newEvent.metadata?.place_limit = nbPlaces
+        newHasPlaceLimit = hasLimit
+        newPlace_limit = nbPlaces
         _ = checkValidation()
     }
     
@@ -271,11 +341,10 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
             return
         }
         newTags = tags
-        newEvent.interests = [String]()
-        newEvent.tagOtherMessage = newInterestTagOtherMessage
+        newInterests = [String]()
         for tag in tags.getTags() {
             if tag.isSelected {
-                newEvent.interests?.append(tag.key)
+                newInterests?.append(tag.key)
             }
         }
         let validation = checkValidation()
@@ -292,49 +361,54 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
     }
     func addShareGroups(groupIds:[Int]?) {
         if let groupIds = groupIds {
-            newEvent.neiborhoodIds = [Int]()
-            newEvent.neiborhoodIds?.append(contentsOf: groupIds)
+            newNeiborhoodIds = [Int]()
+            newNeiborhoodIds?.append(contentsOf: groupIds)
         }
         else {
-            newEvent.neiborhoodIds = [Int]()
+            newNeiborhoodIds = nil
         }
         _ = checkValidation()
     }
-
-    //Non used here
-    func isEdit() -> Bool { return false }
-    func getCurrentEvent() -> Event? { return nil }
-    func setDateChanged() { }
+    
+    func isEdit() -> Bool {
+        return true
+    }
+    func getCurrentEvent() -> Event? {
+        return currentEvent
+    }
     
     //MARK: - Checks -
     func checkValidation() -> (isValid:Bool, message:String) {
-        var isValid = false
+        var isValid = true
         var message = ""
         
         switch currentPhasePosition {
         case 1:
-            //Check name / desc + img
-            if newEvent.title.count >= 2 && newEvent.descriptionEvent?.count ?? 0 > 2 && newEvent.imageId != nil {
-                isValid = true
+            //Check name / desc
+            if newTitle?.count ?? 2 < 2 || newDescription?.count ?? 3 <= 2 {
+                isValid = false
             }
             message = "eventCreatePhase1_error".localized
         case 2: //check date start/end
             message = "eventCreatePhase2_error".localized
-            
-            if newEvent.startDate != nil && newEvent.endDate != nil {
-                isValid = true
-            }
-        case 3: //Check online + url || !online + address + limit place + nb
-            if newEvent.isOnline ?? false {
-                if newEvent.onlineEventUrl != nil {
+            if newDateChanged ?? false {
+                isValid = false
+                if newStartDate != nil && newEndDate != nil {
                     isValid = true
                 }
             }
-            else {
-                if let meta = newEvent.metadata {
+        case 3: //Check online + url || !online + address + limit place + nb
+            if newIsOnline != nil {
+                isValid = false
+                if newIsOnline ?? false {
+                    if newOnlineEventUrl?.count ?? 0 > ApplicationTheme.minHttpChars {
+                        isValid = true
+                    }
+                }
+                else {
                     var isValidFromLimit = false
-                    if meta.hasPlaceLimit ?? false {
-                        if meta.place_limit ?? 0 > 0 {
+                    if newHasPlaceLimit ?? false {
+                        if newPlace_limit ?? 0 > 0 {
                             isValidFromLimit = true
                         }
                     }
@@ -342,41 +416,32 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
                         isValidFromLimit = true
                     }
                     
-                    if ((newEvent.location?.latitude ?? 0 != 0) || meta.google_place_id != nil) && isValidFromLimit {
+                    if ((newLocation?.latitude ?? 0 != 0) || newGoogle_place_id?.count ?? 0 > 0) && isValidFromLimit {
                         isValid = true
                     }
                 }
             }
             message = "eventCreatePhase3_error".localized
         case 4: //Check interests
-            if newEvent.interests?.count ?? 0 > 0 {
-                isValid = true
-                if let _others = newTags?.getTags() {
-                    for tag in _others {
-                        if tag.key == Tag.tagOther && tag.isSelected {
-                            if self.newInterestTagOtherMessage?.count ?? 0 >= ApplicationTheme.minOthersCatChars {
-                                isValid = true
-                            }
-                            else {
-                                isValid = false
-                            }
-                            break
-                        }
-                    }
+            if newInterests != nil {
+                isValid = false
+                if newInterests?.count ?? 0 > 0 {
+                    isValid = true
                 }
             }
             message = "eventCreatePhase4_error".localized
         case 5:
-            if isGroupSharing {
-                
-                if newEvent.neiborhoodIds?.count ?? 0 > 0 {
+            if isGroupSharing != nil {
+                isValid = false
+                if isGroupSharing ?? false {
+                    if newNeiborhoodIds?.count ?? 0 > 0 {
+                        isValid = true
+                    }
+                }
+                else {
                     isValid = true
                 }
             }
-            else {
-                isValid = true
-            }
-            
             message = "eventCreatePhase5_error".localized
         default:
             break
@@ -387,12 +452,12 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
     }
     
     func hasNoInput() -> Bool {
-        return newEvent.title.count == 0 && newEvent.descriptionEvent?.count ?? 0 == 0 && newEvent.imageId == nil
+        return populateNewEvent().dictionaryForWS().count == 0
     }
 }
 
 //MARK: - MJNavBackViewDelegate -
-extension EventCreateMainViewController: MJNavBackViewDelegate {
+extension EventEditMainViewController: MJNavBackViewDelegate {
     func goBack() {
         
         if hasNoInput() {
@@ -401,54 +466,19 @@ extension EventCreateMainViewController: MJNavBackViewDelegate {
         }
         
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "eventCreatePopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
-        alertVC.configureAlert(alertTitle: "eventCreatePopCloseBackTitle".localized, message: "eventCreatePopCloseBackMessage".localized, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self)
+        let buttonCancel = MJAlertButtonType(title: "eventModPopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "eventModPopCloseBackQuit".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        alertVC.configureAlert(alertTitle: "eventModPopCloseBackTitle".localized, message: "eventModPopCloseBackMessage".localized, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self)
         alertVC.delegate = self
         alertVC.show()
     }
 }
 
 //MARK: - MJAlertControllerDelegate -
-extension EventCreateMainViewController: MJAlertControllerDelegate {
+extension EventEditMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
         self.dismiss(animated: true)
     }
     func validateRightButton(alertTag: MJAlertTAG) {
     }
 }
-
-//MARK: - Protocol EventCreateMainDelegate -
-protocol EventCreateMainDelegate: AnyObject {
-    //Phase 1
-    func addTitle(_ title:String)
-    func addDescription(_ about:String?)
-    func addPhoto(image:EventImage)
-    
-    func showChooseImage(delegate:ChoosePictureEventDelegate)
-    //Phase 2
-    func addDateStart(dateStart:Date?)
-    func addDateEnd(dateEnd:Date?)
-    func addRecurrence(recurrence:EventRecurrence)
-    func setDateChanged()
-    
-    //Phase 3
-    func addPlaceType(isOnline:Bool)
-    func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?)
-    func addOnline(url:String?)
-    func addPlaceLimit(hasLimit:Bool, nbPlaces:Int)
-    
-    //Phase 4
-    func addInterests(tags:Tags?, messageOther:String?)
-    
-    //Phase 5
-    func addShare(_ isSharing:Bool)
-    func addShareGroups(groupIds:[Int]?)
-    
-    
-    func isEdit() -> Bool
-    func getCurrentEvent() -> Event?
-}
-
-
-

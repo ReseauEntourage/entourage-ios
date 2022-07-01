@@ -68,6 +68,8 @@ class EventPlaceCell: UITableViewCell {
         ui_view_place_error.isHidden = !showError
         ui_view_online_error.isHidden = !showError
         
+        selectedItem = isOnline ? 2 : 1
+        
         if let cityName = cityName {
             ui_place_label.text = cityName
             ui_place_label.textColor = .black
@@ -79,6 +81,7 @@ class EventPlaceCell: UITableViewCell {
         
         ui_online_tf.text = urlOnline
         
+        changeSelection()
     }
     
     @IBAction func action_select(_ sender: UIButton) {

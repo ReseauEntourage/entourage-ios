@@ -119,6 +119,7 @@ class EventDatesCell: UITableViewCell {
         self.contentView.endEditing(true)
         selectedDate = pickerDateView.date
         
+        delegate?.setDateChanged()
         selectedTimeStart = nil
         ui_tf_time_start.text = ""
         delegate?.addDateStart(dateStart: nil)
@@ -228,4 +229,5 @@ protocol EventCreateDateCellDelegate:AnyObject {
     func addDateStart(dateStart: Date?)
     func addDateEnd(dateEnd: Date?)
     func addRecurrence(recurrence: EventRecurrence)
+    func setDateChanged()
 }

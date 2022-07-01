@@ -20,6 +20,8 @@ class EventCreatePhase1ViewController: UIViewController {
     var event_title:String? = nil
     var event_description:String? = nil
     
+    var currentEvent:Event? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCellsNib()
@@ -32,8 +34,19 @@ class EventCreatePhase1ViewController: UIViewController {
         ui_tableview.delegate = self
         ui_tableview.rowHeight = UITableView.automaticDimension
         ui_tableview.estimatedRowHeight = 50
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateWithNewEvent), name: Notification.Name(kNotificationEventEditLoadedEvent), object: nil)
     }
     
+    @objc func updateWithNewEvent() {
+        if pageDelegate?.isEdit() ?? false && pageDelegate?.getCurrentEvent() != nil {
+            self.currentEvent = pageDelegate?.getCurrentEvent()
+
+            DispatchQueue.main.async {
+                self.ui_tableview.reloadData()
+            }
+        }
+    }
     
     //Use for growing Textview
     @objc func moveFromGrow(notification: NSNotification) {
@@ -85,24 +98,31 @@ extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataS
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupName", for: indexPath) as! NeighborhoodCreateNameCell
-            cell.populateCell(delegate: self,name: event_title, isEvent: true)
+            let title = event_title != nil ? event_title : self.currentEvent?.title
+            cell.populateCell(delegate: self,name: title, isEvent: true)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionTableViewCell.identifier, for: indexPath) as! AddDescriptionTableViewCell
             
             let titleAttributted = Utils.formatString(messageTxt: "event_create_phase_1_desc".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(), fontColorTypeHighlight: ApplicationTheme.getFontLegend())
+            let _about = event_description != nil ? event_description : self.currentEvent?.descriptionEvent
             
-            cell.populateCell(title: "",titleAttributted: titleAttributted, description: "event_create_phase_1_desc_subtitle".localized, placeholder: "event_create_phase_1_desc_placeholder".localized, delegate: self,about: event_description, textInputType:.descriptionAbout)
+            cell.populateCell(title: "",titleAttributted: titleAttributted, description: "event_create_phase_1_desc_subtitle".localized, placeholder: "event_create_phase_1_desc_placeholder".localized, delegate: self,about: _about, textInputType:.descriptionAbout)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath) as! NeighborhoodCreatePhotoCell
             
             var imgUrl:String?
-            if let img = image?.url_image_portrait {
-                imgUrl = img
+            if image != nil {
+                if let img = image?.url_image_portrait {
+                    imgUrl = img
+                }
+                else if let img = image?.url_image_landscape {
+                    imgUrl = img
+                }
             }
-            else if let img = image?.url_image_landscape {
-                imgUrl = img
+            else {
+                imgUrl = self.currentEvent?.getCurrentImageUrl
             }
             
             cell.populateCell(urlImg: imgUrl,isEvent: true)

@@ -31,7 +31,27 @@ struct Event:Codable {
     
     var neiborhoodIds:[Int]? = nil
     
-    var recurrence:EventRecurrence = .once
+    private var recurrency:Int? = nil
+    private var _recurrence:EventRecurrence = .once
+    var recurrence:EventRecurrence {
+        get {
+            if let recurrency = recurrency {
+                switch recurrency {
+                case 7: return .week
+                case 14: return .every2Weeks
+                case 31: return .month
+                default:
+                    return .once
+                }
+            }
+            else {
+                return _recurrence
+            }
+        }
+        set {
+            _recurrence = newValue
+        }
+    }
     
     private var _startDate:Date? = nil
     var startDate:Date? {
@@ -83,7 +103,7 @@ struct Event:Codable {
     var addressName:String? {
         set { metadata?.display_address = newValue }
         get {
-            return metadata?.display_address ?? "-"
+            return metadata?.display_address ?? ""
         }
     }
     
@@ -113,6 +133,8 @@ struct Event:Codable {
         case interests
         case neiborhoodIds = "neighborhood_ids"
         case imageId = "entourage_image_id"
+        
+        case recurrency
     }
     
     func dictionaryForWS() -> [String:Any] {
@@ -166,6 +188,17 @@ struct Event:Codable {
         
         if let neiborhoodIds = neiborhoodIds, neiborhoodIds.count > 0 {
             dict["neighborhood_ids"] = neiborhoodIds
+        }
+        
+        switch recurrence {
+        case .once:
+            break
+        case .week:
+            dict["recurrency"] = 7
+        case .every2Weeks:
+            dict["recurrency"] = 14
+        case .month:
+            dict["recurrency"] = 31
         }
         
         //MEtadatas
@@ -236,7 +269,14 @@ struct EventMetadata:Codable {
     var portrait_url:String? = nil
     var landscape_url:String? = nil
     
-    var hasPlaceLimit:Bool = false
+    var hasPlaceLimit:Bool? {
+        get {
+            if place_limit == nil {
+                return nil
+            }
+            return place_limit ?? 0 > 0
+        }
+    }
     
     enum CodingKeys: String, CodingKey {
         case starts_at
@@ -265,7 +305,7 @@ struct EventAuthor:Codable {
     }
 }
 
-//MARK: - NeighborhoodImage -
+//MARK: - EventImage -
 struct EventImage:Codable {
     var id:Int
     var title:String?
@@ -290,4 +330,155 @@ enum EventRecurrence: Int {
     case week = 2
     case every2Weeks = 3
     case month = 4
+}
+
+//MARK: - Event for editing -
+struct EventEditing {
+    var uid:Int = 0
+    var title:String? = nil
+    var descriptionEvent:String? = nil
+    var imageId:Int? = nil
+    
+    var isOnline:Bool? = nil
+    var onlineEventUrl:String? = nil
+    
+    var location:EventLocation? = nil
+    
+    var metadata:EventMetadataEditing? = nil
+    
+    var interests:[String]? = nil
+    var tagOtherMessage:String? = nil
+    
+    var neiborhoodIds:[Int]? = nil
+    
+    var recurrence:EventRecurrence? = nil
+    
+    private var _startDate:Date? = nil
+    var startDate:Date? {
+        set {
+            _startDate = newValue
+            
+            if let _value = newValue {
+                metadata?.starts_at = "\(_value)"
+            }
+            else {
+                metadata?.starts_at = nil
+            }
+        }
+        get {
+            return _startDate
+        }
+    }
+    
+    private var _endDate:Date? = nil
+    var endDate:Date? {
+        set {
+            _endDate = newValue
+            if let _value = newValue {
+                metadata?.ends_at = "\(_value)"
+            }
+            else {
+                metadata?.ends_at = nil
+            }
+        }
+        get { return _endDate }
+    }
+    
+    func dictionaryForWS() -> [String:Any] {
+        var dict = [String:Any]()
+        
+        if let title = title {
+            dict["title"] = title
+        }
+        if let descriptionEvent = descriptionEvent {
+            dict["description"] = descriptionEvent
+        }
+        if let imageId = imageId {
+            dict["entourage_image_id"] = imageId
+        }
+        
+        if location?.latitude ?? 0 > 0 {
+            dict["latitude"] = location!.latitude
+        }
+        if location?.longitude ?? 0 > 0 {
+            dict["longitude"] = location!.longitude
+        }
+        
+        if let interests = interests {
+            dict["interests"] = interests
+        }
+        
+        if let neiborhoodIds = neiborhoodIds {
+            dict["neighborhood_ids"] = neiborhoodIds
+        }
+
+        if let tagOtherMessage = tagOtherMessage {
+            dict["other_interest"] = tagOtherMessage
+        }
+        if let isOnline = isOnline {
+            dict["online"] = isOnline
+        }
+        
+        if let onlineEventUrl = onlineEventUrl {
+            dict["event_url"] = onlineEventUrl
+        }
+        
+        if let recurrence = recurrence {
+            //TODO: ajouter la récurrence quand ce sera prêt au niveau WS
+            switch recurrence {
+            case .once:
+                dict["recurrency"] = 0
+            case .week:
+                dict["recurrency"] = 7
+            case .every2Weeks:
+                dict["recurrency"] = 14
+            case .month:
+                dict["recurrency"] = 31
+            }
+        }
+        
+        var metadatas = [String:Any]()
+        if let newStartDate = metadata?.starts_at {
+            metadatas["starts_at"] = newStartDate
+        }
+        
+        if let newEndDate = metadata?.ends_at {
+            metadatas["ends_at"] = newEndDate
+        }
+
+        if let place_name = metadata?.place_name {
+            metadatas["place_name"] = place_name
+        }
+        
+        if let newGoogle_place_id = metadata?.google_place_id {
+            metadatas["google_place_id"] = newGoogle_place_id
+        }
+        
+        if let place = metadata?.place_limit  {
+            metadatas["place_limit"] = place
+        }
+       
+        if metadatas.count > 0 {
+            dict["metadata"] = metadatas
+        }
+        
+        return dict
+    }
+}
+
+
+struct EventMetadataEditing {
+    var starts_at:String? = nil
+    var ends_at:String? = nil
+    var place_name:String? = nil
+    var google_place_id:String? = nil
+    var place_limit:Int? = 0
+    var hasPlaceLimit:Bool? {
+        get {
+            if place_limit == nil {
+                return nil
+            }
+            return place_limit ?? 0 > 0
+        }
+    }
 }

@@ -19,6 +19,8 @@ class EventCreatePhase5ViewController: UIViewController {
     
     var isSharing = false
     
+    var currentEvent:Event? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let stringAttr = Utils.formatString(messageTxt: "event_create_phase5_title".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
@@ -31,10 +33,12 @@ class EventCreatePhase5ViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(showError), name: NSNotification.Name(kNotificationEventCreatePhase5Error), object: nil)
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        if pageDelegate?.isEdit() ?? false {
+            currentEvent = pageDelegate?.getCurrentEvent()
+            if currentEvent?.neiborhoodIds?.count ?? 0 > 0 {
+                isSharing = true
+            }
+        }
         getMyGroups()
     }
     
@@ -53,6 +57,20 @@ class EventCreatePhase5ViewController: UIViewController {
         NeighborhoodService.getNeighborhoodsForUserId("\(me.sid)", currentPage: 1, per: 100) { groups, error in
             if let groups = groups {
                 self.groups = groups
+                
+                if let _groups = self.currentEvent?.neiborhoodIds {
+                    for _groupId in _groups {
+                        var  i = 0
+                        for groupNew in self.groups {
+                            if groupNew.uid == _groupId {
+                                self.groups[i].isSelected = true
+                                break
+                            }
+                            i = i + 1
+                        }
+                    }
+                }
+                
                 DispatchQueue.main.async {
                     self.ui_tableview.reloadData()
                 }
@@ -98,6 +116,7 @@ extension EventCreatePhase5ViewController: UITableViewDelegate, UITableViewDataS
         }
         if groupsId.count > 0 {
             ui_error_view.isHidden = true
+            pageDelegate?.addShare(isSharing)
         }
         
         pageDelegate?.addShareGroups(groupIds: groupsId)
@@ -116,7 +135,7 @@ extension EventCreatePhase5ViewController: EventShareCellDelegate {
             groups[$0].isSelected = false
         }
         pageDelegate?.addShare(isSharing)
-        pageDelegate?.addShareGroups(groupIds: [Int]())
+        pageDelegate?.addShareGroups(groupIds: nil)
         
         self.ui_tableview.reloadData()
     }

@@ -19,6 +19,7 @@ class EventCreatePhase4ViewController: UIViewController {
     var showEditOther = false
     var messageOther:String? = nil
     
+    var currentEvent:Event? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,18 @@ class EventCreatePhase4ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showError), name: NSNotification.Name(kNotificationEventCreatePhase4Error), object: nil)
         ui_error_view.isHidden = true
         self.ui_error_view.setupView(title: "eventCreatePhase4_error".localized)
+        
+        if pageDelegate?.isEdit() ?? false {
+            currentEvent = pageDelegate?.getCurrentEvent()
+            
+            if let interests = currentEvent?.interests {
+                for interest in interests {
+                    if let _ = tagsInterests?.getTagNameFrom(key: interest) {
+                        tagsInterests?.checkUncheckTagFrom(key: interest, isCheck: true)
+                    }
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,6 +103,13 @@ extension EventCreatePhase4ViewController : UITableViewDataSource, UITableViewDe
         let isCheck = tagsInterests!.getTags()[indexPath.row].isSelected
         
         tagsInterests?.checkUncheckTagFrom(position: indexPath.row, isCheck: !isCheck)
+        
+        if pageDelegate?.isEdit() ?? false {
+            tableView.reloadData()
+            messageOther = nil
+            self.pageDelegate?.addInterests(tags: tagsInterests,messageOther: messageOther)
+            return
+        }
         
         if indexPath.row == tagsInterests.getTags().count - 1 {
             //Ajout une ligne +

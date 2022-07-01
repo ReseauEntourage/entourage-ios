@@ -9,6 +9,9 @@ import UIKit
 
 class EventMainHomeViewController: UIViewController {
 
+    @IBOutlet weak var ui_bt_event_edit: UIButton!
+    var newEventId = 123293
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +21,7 @@ class EventMainHomeViewController: UIViewController {
         
         //Notif for showing new created event
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
+        ui_bt_event_edit.setTitle("Edit event N° : \(newEventId)", for: .normal)
     }
     
     @objc func updateFromCreate() {
@@ -27,6 +31,14 @@ class EventMainHomeViewController: UIViewController {
     @IBAction func action_add_event(_ sender: Any) {
         let navVC = UIStoryboard.init(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
         navVC.parentController = self.tabBarController
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
+    }
+    @IBAction func action_edit_event(_ sender: Any) {
+        
+        let navVC = UIStoryboard.init(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "eventEditVCMain") as! EventEditMainViewController
+        navVC.parentController = self.tabBarController
+        navVC.eventId = newEventId
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
@@ -43,6 +55,8 @@ class EventMainHomeViewController: UIViewController {
 
     
     func showEvent(eventId:Int, isAfterCreation:Bool = false, event:Event? = nil) {
+        newEventId = eventId
+        ui_bt_event_edit.setTitle("Edit event N° : \(newEventId)", for: .normal)
         //TODO: a faire lorsque l'on aura le détail d'un event ;)
 //        let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
 //        if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
