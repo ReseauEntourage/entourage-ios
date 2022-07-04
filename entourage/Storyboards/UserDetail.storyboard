@@ -952,7 +952,7 @@
                                         <rect key="frame" x="0.0" y="738" width="414" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cnu-4U-DVA">
-                                                <rect key="frame" x="76.5" y="15" width="261" height="50"/>
+                                                <rect key="frame" x="113" y="15" width="261" height="50"/>
                                                 <color key="backgroundColor" name="orange_app"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="kxL-Mw-b6I"/>
@@ -972,9 +972,7 @@
                                         <constraints>
                                             <constraint firstItem="Cnu-4U-DVA" firstAttribute="centerY" secondItem="KT3-BG-2ys" secondAttribute="centerY" id="g4O-z6-OIB"/>
                                             <constraint firstAttribute="height" constant="80" id="ioh-0R-B4T"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Cnu-4U-DVA" secondAttribute="trailing" constant="60" id="o8Z-lD-Gih"/>
-                                            <constraint firstItem="Cnu-4U-DVA" firstAttribute="centerX" secondItem="KT3-BG-2ys" secondAttribute="centerX" id="pB8-CR-7fw"/>
-                                            <constraint firstItem="Cnu-4U-DVA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KT3-BG-2ys" secondAttribute="leading" constant="60" id="qub-0T-hLJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="Cnu-4U-DVA" secondAttribute="trailing" constant="40" id="o8Z-lD-Gih"/>
                                         </constraints>
                                     </view>
                                     <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kh2-Gk-hFa" customClass="MJErrorInputView" customModule="Ent_Beta" customModuleProvider="target">

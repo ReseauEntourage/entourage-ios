@@ -116,7 +116,7 @@
                                         <rect key="frame" x="0.0" y="738" width="414" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8y3-vk-GNC">
-                                                <rect key="frame" x="167.5" y="15" width="79" height="50"/>
+                                                <rect key="frame" x="295" y="15" width="79" height="50"/>
                                                 <color key="backgroundColor" name="orange_light_a50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="LqF-0j-nTM"/>
@@ -135,10 +135,8 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="8y3-vk-GNC" firstAttribute="centerY" secondItem="wa0-VU-gKX" secondAttribute="centerY" id="BUX-3y-Mke"/>
-                                            <constraint firstItem="8y3-vk-GNC" firstAttribute="centerX" secondItem="wa0-VU-gKX" secondAttribute="centerX" id="JKz-w0-ptP"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8y3-vk-GNC" secondAttribute="trailing" constant="60" id="bBB-yu-e2N"/>
+                                            <constraint firstAttribute="trailing" secondItem="8y3-vk-GNC" secondAttribute="trailing" constant="40" id="bBB-yu-e2N"/>
                                             <constraint firstAttribute="height" constant="80" id="jjY-iR-o5a"/>
-                                            <constraint firstItem="8y3-vk-GNC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wa0-VU-gKX" secondAttribute="leading" constant="60" id="udM-pK-TPV"/>
                                         </constraints>
                                     </view>
                                     <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7F-bI-sps" customClass="MJErrorInputView" customModule="Ent_Beta" customModuleProvider="target">
