@@ -282,8 +282,10 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     
     func showResource(id:Int) {
-        //TODO: show pedago
-        self.showWIP(parentVC: self)
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {
+            vc.resourceId = id
+            self.navigationController?.present(vc, animated: true)
+        }
     }
     
     func showConversation(uuid:String) {

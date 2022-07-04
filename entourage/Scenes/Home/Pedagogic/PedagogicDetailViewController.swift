@@ -18,10 +18,6 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
     var isRead = false
     var htmlBody:String? = nil
     
-    
-    
-
-    
     weak var delegate:PedagogicReadDelegate? = nil
     
     override func viewDidLoad() {
@@ -32,10 +28,14 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
         ui_top_view.backgroundColor = .clear
         ui_top_view.populateCustom(title: "home_resource_title".localized, titleFont: nil, titleColor: nil, imageName: nil, backgroundColor: .appBeigeClair, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil)
 
-        guard let htmlBody = htmlBody else { return }
-        
         ui_webview.uiDelegate = self
         ui_webview.navigationDelegate = self
+        
+        guard let htmlBody = htmlBody else {
+            self.getDetailResource()
+            return
+        }
+       
         ui_webview.loadHTMLString(htmlBody, baseURL: nil)
         
         if let id = resourceId, !isRead {
@@ -43,6 +43,20 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
             HomeService.postResourceRead(resourceId: id) { [weak self] error in
                 if error == nil {
                     self?.delegate?.markReadPedogicResource(id: id)
+                }
+            }
+        }
+    }
+    
+    func getDetailResource() {
+        guard let resourceId = resourceId else {
+            return
+        }
+
+        HomeService.getResourceWithId(resourceId) { resource, error in
+            if let htmlBody = resource?.bodyHtml {
+                DispatchQueue.main.async {
+                    self.ui_webview.loadHTMLString(htmlBody, baseURL: nil)
                 }
             }
         }
@@ -67,6 +81,12 @@ protocol PedagogicReadDelegate:AnyObject {
 //MARK: - MJNavBackViewDelegate -
 extension PedagogicDetailViewController: MJNavBackViewDelegate {
     func goBack() {
-        self.navigationController?.popViewController(animated: true)
+        if let navigationController = navigationController {
+            navigationController.popViewController(animated: true)
+        }
+        else {
+            self.dismiss(animated: true)
+        }
+        
     }
 }

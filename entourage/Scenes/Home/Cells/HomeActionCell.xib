@@ -40,8 +40,11 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_next_orange" translatesAutoresizingMaskIntoConstraints="NO" id="wg5-lY-xkl">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_next_orange" translatesAutoresizingMaskIntoConstraints="NO" id="wg5-lY-xkl">
                                 <rect key="frame" x="485" y="27.5" width="9" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="13" id="cY1-V1-oNK"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
