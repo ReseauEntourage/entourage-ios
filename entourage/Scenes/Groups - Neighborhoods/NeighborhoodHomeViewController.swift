@@ -192,6 +192,11 @@ class NeighborhoodHomeViewController: UIViewController {
         self.currentSelectedIsGroup = true
     }
     
+    func setMyFirst() {
+        self.isGroupsSelected = true
+        self.currentSelectedIsGroup = false
+    }
+    
     //MARK: - Network -
     func getNeighborhoods(isReloadFromTab:Bool = false, reloadOther:Bool = false) {
         if self.isLoading { return }

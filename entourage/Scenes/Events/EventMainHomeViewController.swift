@@ -24,6 +24,17 @@ class EventMainHomeViewController: UIViewController {
         ui_bt_event_edit.setTitle("Edit event N° : \(newEventId)", for: .normal)
     }
     
+    
+    func setDiscoverFirst() {
+        //TODO: a faire lorsque la page sera OP
+        Logger.print("***** Show Discover events *****")
+    }
+    
+    func setMyFirst() {
+        //TODO: a faire lorsque la page sera OP
+        Logger.print("***** Show My events *****")
+    }
+    
     @objc func updateFromCreate() {
         //TODO: a faire le refresh de la tableview quand ce sera OP
     }

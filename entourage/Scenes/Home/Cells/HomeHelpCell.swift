@@ -9,6 +9,7 @@ import UIKit
 
 class HomeHelpCell: UITableViewCell {
 
+    @IBOutlet weak var ui_constraint_bottom_margin: NSLayoutConstraint!
     @IBOutlet weak var ui_view_container: UIView!
     
     @IBOutlet weak var ui_image: UIImageView!
@@ -40,9 +41,13 @@ class HomeHelpCell: UITableViewCell {
         customView.layer.shouldRasterize = true
     }
 
-    func populateCell(name:String, subtitle:String) {
+    func populateCell(name:String, subtitle:String, bottomMargin:CGFloat? = nil) {
         ui_title.text = name
         ui_subtitle.text = subtitle
+        
+        if let bottomMargin = bottomMargin {
+            ui_constraint_bottom_margin.constant = bottomMargin
+        }
     }
     
 }

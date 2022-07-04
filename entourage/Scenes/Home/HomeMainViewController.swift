@@ -20,6 +20,10 @@ class HomeMainViewController: UIViewController {
     
     var homeViewModel:HomeViewModel!
     
+    let section_agir = 0
+    let section_contribs = 1
+    let section_help = 2
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -125,29 +129,31 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case section_contribs:
             return 1 + 1 //Header
-        }
-        
-        if section == 1 {
+        case section_agir:
             return homeViewModel.actions.count + 2 //Cell Mandatory
+        case section_help:
+            return 1 + 2 //Header
+        default:
+            return 0
         }
-        
-        return 1 + 1 //Header
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
             var title = ""
             switch indexPath.section {
-            case 0:
+            case section_contribs:
                 title = "home_contrib_title".localized
-            case 1:
+            case section_agir:
                 title = "home_actions_title".localized
-            default:
+            case section_help:
                 title = "home_help_title".localized
+            default:
+                break
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeSectionCell.identifier, for: indexPath) as! HomeSectionCell
             
@@ -155,22 +161,29 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         }
         
-        if indexPath.section == 0 {
+        if indexPath.section == section_contribs {
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeContribCell.identifier,for: indexPath) as! HomeContribCell
             
-            cell.populateCell(userHome: self.homeViewModel.userHome)
+            cell.populateCell(userHome: self.homeViewModel.userHome, delegate: self)
             
             return cell
         }
         
-        if indexPath.section == 2 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: HomeHelpCell.identifier, for: indexPath) as! HomeHelpCell
-            
-            //TODO: add moderator username
-            cell.populateCell(name: self.homeViewModel.moderatorName, subtitle: "home_help_subtitle".localized)
-            
-            return cell
-            
+        if indexPath.section == section_help {
+            if indexPath.row == 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: HomeHelpCell.identifier, for: indexPath) as! HomeHelpCell
+                
+                //TODO: add moderator username
+                cell.populateCell(name: self.homeViewModel.moderatorName, subtitle: "home_help_subtitle".localized, bottomMargin: 10)
+                
+                return cell
+            }
+            else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionTeachCell.identifier, for: indexPath) as! HomeActionTeachCell
+                
+                cell.populateCell(title: "home_cell_map".localized, imageIdentifier: "pict_map", bottomMargin: 32)
+                return cell
+            }
         }
         
         if indexPath.row == homeViewModel.actions.count + 1 { //Action madatory resources
@@ -187,20 +200,52 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 || indexPath.section == 0 { return }
+        if indexPath.row == 0 || indexPath.section == section_contribs { return }
         
-        if indexPath.section == 2 {
-            showUserProfile(id: self.homeViewModel.moderatorId)
+        if indexPath.section == section_help {
+            if indexPath.row == 1 {
+                showUserProfile(id: self.homeViewModel.moderatorId)
+            }
+            else {
+                showAllPois()
+            }
             return
         }
         
-        if indexPath.section == 1 && indexPath.row != homeViewModel.actions.count + 1 {
+        if indexPath.section == section_agir && indexPath.row != homeViewModel.actions.count + 1 {
             let action = homeViewModel.actions[indexPath.row - 1]
             
             homeViewModel.getEventFromAction(action)
         }
         else {
             showResources()
+        }
+    }
+}
+
+//MARK: - HomeContribDelegate -
+extension HomeMainViewController:HomeContribDelegate {
+    func showEncounterInfo() {
+        let popup = MJPopupViewController()
+        popup.setupAlertInfos(parentVC: self.tabBarController, title: "home_info_encounter_pop_title".localized, subtitile: "home_info_encounter_pop_subtitle".localized, imageName: "img_pop_info_encouter")
+        popup.show()
+    }
+    
+    func showNeighborhoodTab() {
+        if self.homeViewModel.userHome.neighborhoodParticipationsCount > 0 {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowMy), object: nil)
+        }
+        else {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowDiscover), object: nil)
+        }
+    }
+    
+    func showEventTab() {
+        if self.homeViewModel.userHome.outingParticipationsCount > 0 {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventShowMy), object: nil)
+        }
+        else {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventShowDiscover), object: nil)
         }
     }
 }
@@ -262,7 +307,7 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
         if let vc = sb.instantiateViewController(withIdentifier: "MainGuide") as? MainGuideViewController {
             vc.isFromDeeplink = true
             let navVc = UINavigationController()
-            
+            navVc.modalPresentationStyle = .fullScreen
             navVc.addChild(vc)
             self.navigationController?.present(navVc, animated: true)
         }

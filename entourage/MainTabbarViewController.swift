@@ -48,7 +48,11 @@ class MainTabbarViewController: UITabBarController {
 //        NotificationCenter.default.addObserver(self, selector: #selector(showHome), name: NSNotification.Name(rawValue: "showHome"), object: nil)
         //Notif for changing neighborhood list to discover and select tab
         NotificationCenter.default.addObserver(self, selector: #selector(showDiscoverNeighborhoods), name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowDiscover), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showMyNeighborhoods), name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowMy), object: nil)
         
+        //Show Events from home tab clicks
+        NotificationCenter.default.addObserver(self, selector: #selector(showDiscoverEvents), name: NSNotification.Name(rawValue: kNotificationEventShowDiscover), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showMyEvents), name: NSNotification.Name(rawValue: kNotificationEventShowMy), object: nil)
     }
     
     @objc func showDiscoverNeighborhoods() {
@@ -57,6 +61,29 @@ class MainTabbarViewController: UITabBarController {
         }
         self.selectedIndex = 3
         Logger.print("***** discover group : \(groupVC.topViewController)")
+    }
+    @objc func showMyNeighborhoods() {
+        if let vc = groupVC.topViewController as? NeighborhoodHomeViewController {
+            vc.setMyFirst()
+        }
+        self.selectedIndex = 3
+        Logger.print("***** My group : \(groupVC.topViewController)")
+    }
+    
+    @objc func showDiscoverEvents() {
+        if let vc = eventsVC.topViewController as? EventMainHomeViewController {
+            vc.setDiscoverFirst()
+        }
+        self.selectedIndex = 4
+        Logger.print("***** discover Events ")
+    }
+    
+    @objc func showMyEvents() {
+        if let vc = eventsVC.topViewController as? EventMainHomeViewController {
+            vc.setMyFirst()
+        }
+        self.selectedIndex = 4
+        Logger.print("***** My Events ")
     }
     
 //    func showPopInfo(delegate:OTPopInfoDelegate,title:String,message:String,buttonOkStr:String,buttonCancelStr:String) {

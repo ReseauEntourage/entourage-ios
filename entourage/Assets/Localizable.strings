@@ -674,13 +674,14 @@
 "home_no_group_title" = "Vous n’avez pas\nencore rejoint de\ngroupe de voisins";
 
 "home_actions_title" = "Envie d’agir ? ";
-"home_help_title" = "À vos côtés";
+"home_help_title" = "Besoin d’aide ?";
 "home_help_subtitle" = "Votre guide dans l’app";
 "home_cell_pedago" = "Me former pour passer à l’action";
+"home_cell_map" = "Carte des lieux solidaires";
 
 "home_resources_title" = "Tout le contenu pédagogique";
 "home_resource_title" = "Contenu pédagogique";
-
+"pedagogic_read" = "Lu !";
 "resource_all" = "Tout";
 "resource_understand" = "Comprendre";
 "resource_act" = "Agir";
@@ -695,6 +696,9 @@
 "home_congrat_title_plural" = "Bravo ! Vous avez réalisé %d nouvelles actions !";
 "home_congrat_title_next" = "Super, de nouvelles actions se présentent sur la homepage !";
 
+//Home popup info encouters
+"home_info_encounter_pop_title" = "Créez des rencontres !";
+"home_info_encounter_pop_subtitle" = "Participez à des événements et des actions solidaires pour augmenter votre compteur de rencontres Entourage";
 /** Events*/
 //Create
 

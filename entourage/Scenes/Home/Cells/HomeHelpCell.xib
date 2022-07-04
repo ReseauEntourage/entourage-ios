@@ -81,6 +81,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="ui_constraint_bottom_margin" destination="WBA-jf-Ek8" id="5Mk-2g-kOu"/>
                 <outlet property="ui_image" destination="C1m-vc-hYc" id="e9T-Dg-mKh"/>
                 <outlet property="ui_subtitle" destination="1nV-f1-fFC" id="jiH-CL-Ozo"/>
                 <outlet property="ui_title" destination="Dtf-dZ-awV" id="hzf-sL-n1v"/>

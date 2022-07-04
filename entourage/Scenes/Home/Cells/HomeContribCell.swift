@@ -14,14 +14,6 @@ class HomeContribCell: UITableViewCell {
     @IBOutlet weak var ui_meetings_count: UILabel!
     @IBOutlet weak var ui_meetings_title: UILabel!
     
-    
-    @IBOutlet weak var ui_view_messages: UIView!
-    @IBOutlet weak var ui_messages_count: UILabel!
-    @IBOutlet weak var ui_message_title: UILabel!
-    
-    @IBOutlet weak var ui_view_no_messages: UIView!
-    @IBOutlet weak var ui_no_message_title: UILabel!
-    
     @IBOutlet weak var ui_view_events: UIView!
     @IBOutlet weak var ui_events_count: UILabel!
     @IBOutlet weak var ui_events_title: UILabel!
@@ -36,6 +28,7 @@ class HomeContribCell: UITableViewCell {
     @IBOutlet weak var ui_view_no_groups: UIView!
     @IBOutlet weak var ui_no_group_title: UILabel!
     
+    weak var delegate:HomeContribDelegate? = nil
     
     class var identifier: String {
         return String(describing: self)
@@ -49,12 +42,8 @@ class HomeContribCell: UITableViewCell {
         setRadiusView(view: ui_view_no_events)
         setRadiusView(view: ui_view_groups)
         setRadiusView(view: ui_view_no_groups)
-        setRadiusView(view: ui_view_messages)
-        setRadiusView(view: ui_view_no_messages)
         
         ui_meetings_title.text = "home_meeting_title".localized
-        ui_message_title.text = "home_messages_title".localized
-        ui_no_message_title.text = "home_no_message_title".localized
         ui_groups_title.text = "home_groups_title".localized
         ui_no_group_title.text = "home_no_group_title".localized
         ui_events_title.text = "home_events_title".localized
@@ -64,17 +53,14 @@ class HomeContribCell: UITableViewCell {
     }
     
     private func setStyle() {
-        ui_messages_count.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_events_count.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_groups_count.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_meetings_count.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoBold(size: 30), color: .black))
         
-        ui_message_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
-        ui_message_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+       
         ui_events_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_groups_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
-        ui_no_message_title.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoLight(size: 10), color: .appGris112))
         ui_no_group_title.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoLight(size: 10), color: .appGris112))
         ui_no_events_title.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoLight(size: 10), color: .appGris112))
         
@@ -95,7 +81,8 @@ class HomeContribCell: UITableViewCell {
         customView.layer.shouldRasterize = true
     }
     
-    func populateCell(userHome:UserHome) {
+    func populateCell(userHome:UserHome, delegate:HomeContribDelegate) {
+        self.delegate = delegate
         if userHome.meetingsCount == 0 {
             ui_iv_meetings.image = UIImage.init(named: "ic_heart_grey")
             ui_meetings_title.text = "home_no_meeting_title".localized
@@ -104,16 +91,6 @@ class HomeContribCell: UITableViewCell {
             ui_iv_meetings.image = UIImage.init(named: "ic_heart_orange")
             ui_meetings_title.text = "home_meeting_title".localized
             ui_meetings_count.text = "\(userHome.meetingsCount)"
-        }
-        
-        if userHome.chatMessagesCount == 0 {
-            ui_view_no_messages.isHidden = false
-            ui_view_messages.isHidden = true
-        }
-        else {
-            ui_view_no_messages.isHidden = true
-            ui_view_messages.isHidden = false
-            ui_messages_count.text = "\(userHome.chatMessagesCount)"
         }
         
         if userHome.outingParticipationsCount == 0 {
@@ -137,4 +114,21 @@ class HomeContribCell: UITableViewCell {
         }
     }
     
+    //MARK: - IBActions -
+    @IBAction func action_encounter(_ sender: Any) {
+        delegate?.showEncounterInfo()
+    }
+    @IBAction func action_group(_ sender: Any) {
+        delegate?.showNeighborhoodTab()
+    }
+    @IBAction func action_event(_ sender: Any) {
+        delegate?.showEventTab()
+    }
+}
+
+//MARK: - Delegate -
+protocol HomeContribDelegate:AnyObject {
+    func showEncounterInfo()
+    func showNeighborhoodTab()
+    func showEventTab()
 }

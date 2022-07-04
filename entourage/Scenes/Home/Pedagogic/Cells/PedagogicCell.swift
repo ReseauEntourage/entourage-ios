@@ -13,6 +13,7 @@ class PedagogicCell: UITableViewCell {
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_image: UIImageView!
 
+    @IBOutlet weak var ui_check_title: UILabel!
     @IBOutlet weak var ui_picto_check: UIImageView!
     @IBOutlet weak var ui_view_test: UIView!
     var isAlreadyRead = false
@@ -33,6 +34,9 @@ class PedagogicCell: UITableViewCell {
         ui_view_test?.layer.shouldRasterize = true
         
         ui_image.layer.cornerRadius = 8
+        
+        ui_check_title?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 11, color: .appOrange))
+        ui_check_title?.text = "pedagogic_read".localized
     }
     
     func populateCell(title:String,imageUrl:String?, isRead:Bool) {
@@ -55,11 +59,13 @@ class PedagogicCell: UITableViewCell {
             ui_container.layer.borderWidth = 1
             ui_container.backgroundColor = .white
             ui_picto_check.isHidden = false
+            ui_check_title.isHidden = false
         }
         else {
             ui_container.layer.borderWidth = 0
             ui_container.backgroundColor = .appBeige
             ui_picto_check.isHidden = true
+            ui_check_title.isHidden = true
         }
     }
 }

@@ -229,6 +229,8 @@
 		02CCE68A27D7B51E00D6976C /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCE68727D7B51E00D6976C /* CloseButton.swift */; };
 		02CCE68D27D7B8E700D6976C /* MainUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCE68C27D7B8E700D6976C /* MainUserProfileViewController.swift */; };
 		02CCE69027D7B96700D6976C /* MainUserProfileTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCE68F27D7B96600D6976C /* MainUserProfileTopCell.swift */; };
+		02D10D8B2873236500ACC267 /* MJPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D10D892873236500ACC267 /* MJPopupViewController.swift */; };
+		02D10D8C2873236500ACC267 /* MJPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02D10D8A2873236500ACC267 /* MJPopupViewController.xib */; };
 		02D5689B2809A5B50092C7A4 /* TitleOnlyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5689A2809A5B50092C7A4 /* TitleOnlyCell.swift */; };
 		02D64F4B2799CA6800F6C4BD /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D64F4A2799CA6800F6C4BD /* CustomAnnotation.swift */; };
 		02D64F4D2799D5E000F6C4BD /* InviteSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D64F4C2799D5E000F6C4BD /* InviteSourceViewController.swift */; };
@@ -517,6 +519,8 @@
 		02CCE68727D7B51E00D6976C /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		02CCE68C27D7B8E700D6976C /* MainUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserProfileViewController.swift; sourceTree = "<group>"; };
 		02CCE68F27D7B96600D6976C /* MainUserProfileTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserProfileTopCell.swift; sourceTree = "<group>"; };
+		02D10D892873236500ACC267 /* MJPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJPopupViewController.swift; sourceTree = "<group>"; };
+		02D10D8A2873236500ACC267 /* MJPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJPopupViewController.xib; sourceTree = "<group>"; };
 		02D5689A2809A5B50092C7A4 /* TitleOnlyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleOnlyCell.swift; sourceTree = "<group>"; };
 		02D64F4A2799CA6800F6C4BD /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		02D64F4C2799D5E000F6C4BD /* InviteSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteSourceViewController.swift; sourceTree = "<group>"; };
@@ -878,6 +882,8 @@
 		0268194D278DF6A700A98A4A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				02D10D892873236500ACC267 /* MJPopupViewController.swift */,
+				02D10D8A2873236500ACC267 /* MJPopupViewController.xib */,
 				0268C246285A2B1400294055 /* Floaty */,
 				02D5689A2809A5B50092C7A4 /* TitleOnlyCell.swift */,
 				0268197A278DF72D00A98A4A /* MJCustomPageControl.swift */,
@@ -1407,6 +1413,7 @@
 				025C92C528341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib in Resources */,
 				024131C72862019500561FB4 /* Events.storyboard in Resources */,
 				02CCE67627D78C7500D6976C /* Quicksand-Bold.ttf in Resources */,
+				02D10D8C2873236500ACC267 /* MJPopupViewController.xib in Resources */,
 				02B7922527F74801003AFFB9 /* Neighborhood_Create.storyboard in Resources */,
 				02E2192328352552002A1FCB /* Neighborhood_Message.storyboard in Resources */,
 				025C92B828340CFC000970D9 /* NeighborhoodPostImageCell.xib in Resources */,
@@ -1655,6 +1662,7 @@
 				02E21929283637E9002A1FCB /* NeighborhoodPostAddViewController.swift in Sources */,
 				02E069E2279184B3006DB1B6 /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */,
 				026819AA278E00A200A98A4A /* Utils.swift in Sources */,
+				02D10D8B2873236500ACC267 /* MJPopupViewController.swift in Sources */,
 				02E7845F2811A91900177F13 /* NeighborhoodHomeViewController.swift in Sources */,
 				02F5279A2799A1F300929431 /* GuideModels.swift in Sources */,
 				02B94C422851FEB1006059EF /* HomeMainProtocols.swift in Sources */,
