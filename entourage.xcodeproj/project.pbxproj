@@ -21,6 +21,9 @@
 		021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */; };
 		021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */; };
 		021F084F2798113D00F32A34 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021F084E2798113D00F32A34 /* LocationManager.swift */; };
+		021FD96028743EFF00D3AA54 /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FD95E28743EFF00D3AA54 /* EventListCell.swift */; };
+		021FD96128743EFF00D3AA54 /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021FD95F28743EFF00D3AA54 /* EventListCell.xib */; };
+		021FD963287442C700D3AA54 /* NeighborhoodListEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FD962287442C700D3AA54 /* NeighborhoodListEventsViewController.swift */; };
 		0220580727FB003700531720 /* BasePopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0220580627FB003700531720 /* BasePopViewController.swift */; };
 		0220580927FB087F00531720 /* BaseFullScreenNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0220580827FB087F00531720 /* BaseFullScreenNavViewController.swift */; };
 		0223E5142864A4B200E7556E /* AddDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0223E5122864A4B200E7556E /* AddDescriptionTableViewCell.swift */; };
@@ -310,6 +313,9 @@
 		021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesBubblesCell.swift; sourceTree = "<group>"; };
 		021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserActivitiesCell.swift; sourceTree = "<group>"; };
 		021F084E2798113D00F32A34 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		021FD95E28743EFF00D3AA54 /* EventListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
+		021FD95F28743EFF00D3AA54 /* EventListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
+		021FD962287442C700D3AA54 /* NeighborhoodListEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodListEventsViewController.swift; sourceTree = "<group>"; };
 		0220580627FB003700531720 /* BasePopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopViewController.swift; sourceTree = "<group>"; };
 		0220580827FB087F00531720 /* BaseFullScreenNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFullScreenNavViewController.swift; sourceTree = "<group>"; };
 		0223E5122864A4B200E7556E /* AddDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDescriptionTableViewCell.swift; sourceTree = "<group>"; };
@@ -701,6 +707,8 @@
 				024131C92862020B00561FB4 /* Create */,
 				024131D8286207D100561FB4 /* EventMainHomeViewController.swift */,
 				0241FE0B286DDB700065E560 /* EventEditMainViewController.swift */,
+				021FD95E28743EFF00D3AA54 /* EventListCell.swift */,
+				021FD95F28743EFF00D3AA54 /* EventListCell.xib */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -1054,6 +1062,7 @@
 				02E21928283637E9002A1FCB /* NeighborhoodPostAddViewController.swift */,
 				02E2192428355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift */,
 				02E2192628355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift */,
+				021FD962287442C700D3AA54 /* NeighborhoodListEventsViewController.swift */,
 				02C6E86A28203E1F009D4289 /* Signal */,
 				0224597B27FF54E300944DE4 /* Create */,
 				0224597227FF31FC00944DE4 /* Cells */,
@@ -1381,6 +1390,7 @@
 				0224597127FF290900944DE4 /* MJErrorInputTextView.xib in Resources */,
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
 				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
+				021FD96128743EFF00D3AA54 /* EventListCell.xib in Resources */,
 				025D8726278DD33800909101 /* LaunchScreen.storyboard in Resources */,
 				02B94C38284F9FB3006059EF /* HomeHelpCell.xib in Resources */,
 				02E7845D2811A8DB00177F13 /* Neighborhood.storyboard in Resources */,
@@ -1491,6 +1501,7 @@
 				029638F5286C801A00E10EFB /* EventCreateValidateViewController.swift in Sources */,
 				02F5277E2799995900929431 /* GDSSearchViewController.swift in Sources */,
 				0268C251285A2B1400294055 /* FloatyItem.swift in Sources */,
+				021FD96028743EFF00D3AA54 /* EventListCell.swift in Sources */,
 				02E069E5279184B3006DB1B6 /* OTOnboardingPhoneViewController.swift in Sources */,
 				025E917427F3619300D4A7A8 /* ReportUserViewController.swift in Sources */,
 				02E069E7279184B3006DB1B6 /* OTOnboardingAssoStartViewController.swift in Sources */,
@@ -1593,6 +1604,7 @@
 				022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */,
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
 				029638F12869E76600E10EFB /* EventPlaceLimitCell.swift in Sources */,
+				021FD963287442C700D3AA54 /* NeighborhoodListEventsViewController.swift in Sources */,
 				02E0098927E33DD200BB23CA /* WebLinkManager.swift in Sources */,
 				026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */,
 				02F527962799A1F300929431 /* GuideFiltersViewController.swift in Sources */,

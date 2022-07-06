@@ -49,6 +49,16 @@ extension Date {
     }
 }
 
+//MARK: - Locale -
+extension Locale {
+   static func getPreferredLocale() -> Locale {
+        guard let preferredIdentifier = Locale.preferredLanguages.first else {
+            return Locale.current
+        }
+        return Locale(identifier: preferredIdentifier)
+    }
+}
+
 //MARK: - Bundle Extension -
 extension Bundle {
     var versionName:String {

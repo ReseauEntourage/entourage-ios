@@ -12,17 +12,21 @@ class MJNavBackView: UIView {
     @IBOutlet private weak var ui_view_back: UIView!
     @IBOutlet private weak var ui_view_close: UIView!
     
+    @IBOutlet weak var ui_view_back_with_subtitle: UIView!
     @IBOutlet private weak var ui_content_view: UIView!
     
+    @IBOutlet weak var ui_subtitle: UILabel!
     @IBOutlet private var ui_titles: [UILabel]!
     @IBOutlet private var ui_views_bottom_separator: [UIView]!
     
     @IBOutlet private var ui_buttons_close: [UIButton]!
     @IBOutlet private weak var ui_image_back: UIImageView!
+    @IBOutlet private weak var ui_image_back_sub: UIImageView!
     
     @IBOutlet private weak var ui_image_close: UIImageView!
     
     @IBOutlet private weak var ui_constraint_left_button_back: NSLayoutConstraint!
+    @IBOutlet private weak var ui_constraint_left_button_back_sub: NSLayoutConstraint!
     
     weak var delegate:MJNavBackViewDelegate? = nil
     
@@ -45,6 +49,8 @@ class MJNavBackView: UIView {
             button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         }
         ui_view_close.isHidden = true
+        ui_view_back_with_subtitle.isHidden = true
+        ui_subtitle.setupFontAndColor(style: ApplicationTheme.getFontCourantItalicNoir(size: 15))
     }
     
     func populateView(title:String,titleFont:UIFont, titleColor:UIColor,delegate:MJNavBackViewDelegate,showSeparator:Bool = true,backgroundColor:UIColor? = nil,cornerRadius:CGFloat? = nil, isClose:Bool = false) {
@@ -52,13 +58,24 @@ class MJNavBackView: UIView {
         self.populateCustom(title: title, titleFont: titleFont, titleColor: titleColor, imageName: nil, backgroundColor: backgroundColor, delegate: delegate, showSeparator: showSeparator, cornerRadius: cornerRadius, isClose: isClose)
     }
     
-    func populateCustom(title:String? = nil, titleFont:UIFont? = nil, titleColor:UIColor? = nil, imageName:String?, backgroundColor:UIColor?, delegate:MJNavBackViewDelegate, showSeparator:Bool = true, cornerRadius:CGFloat? = nil, isClose:Bool = false, marginLeftButton:CGFloat? = nil) {
+    func populateCustom(title:String? = nil, titleFont:UIFont? = nil, titleColor:UIColor? = nil, imageName:String?, backgroundColor:UIColor?, delegate:MJNavBackViewDelegate, showSeparator:Bool = true, cornerRadius:CGFloat? = nil, isClose:Bool = false, marginLeftButton:CGFloat? = nil, subtitle:String? = nil) {
         
         ui_view_close.isHidden = !isClose
         ui_view_back.isHidden = isClose
         
+        if let subtitle = subtitle {
+            ui_view_close.isHidden = true
+            ui_view_back.isHidden = true
+            ui_view_back_with_subtitle.isHidden = false
+            ui_subtitle.text = subtitle
+        }
+        else {
+            ui_view_back_with_subtitle.isHidden = true
+        }
+        
         if let imageName = imageName {
             ui_image_back.image = UIImage.init(named: imageName)
+            ui_image_back_sub.image = UIImage.init(named: imageName)
         }
         
         if let backgroundColor = backgroundColor {
@@ -85,6 +102,7 @@ class MJNavBackView: UIView {
         
         if let marginLeftButton = marginLeftButton {
             self.ui_constraint_left_button_back.constant = marginLeftButton
+            self.ui_constraint_left_button_back_sub.constant = marginLeftButton
         }
     }
     

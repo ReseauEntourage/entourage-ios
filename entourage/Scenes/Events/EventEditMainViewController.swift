@@ -377,6 +377,8 @@ extension EventEditMainViewController: EventCreateMainDelegate {
         return currentEvent
     }
     
+    func getNeighborhoodId() -> Int? { return nil }
+    
     //MARK: - Checks -
     func checkValidation() -> (isValid:Bool, message:String) {
         var isValid = true

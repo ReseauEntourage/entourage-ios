@@ -31,6 +31,8 @@ struct Event:Codable {
     
     var neiborhoodIds:[Int]? = nil
     
+    var membersCount:Int? = 0
+    
     private var recurrency:Int? = nil
     private var _recurrence:EventRecurrence = .once
     var recurrence:EventRecurrence {
@@ -73,6 +75,12 @@ struct Event:Codable {
     var startDateFormatted:String {
         get {
             return Utils.formatEventDate(date:Utils.getDateFromWSDateString(metadata?.starts_at))
+        }
+    }
+    
+    var startDateTimeFormatted:String {
+        get {
+            return  Utils.formatEventDateTimeFull(date: Utils.getDateFromWSDateString(metadata?.starts_at))
         }
     }
     
@@ -135,6 +143,7 @@ struct Event:Codable {
         case imageId = "entourage_image_id"
         
         case recurrency
+        case membersCount = "members_count"
     }
     
     func dictionaryForWS() -> [String:Any] {

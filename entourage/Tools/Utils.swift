@@ -120,6 +120,7 @@ import UIKit
         var dateString = ""
         if date != nil {
             let dateFormat = DateFormatter()
+            dateFormat.locale = Locale.getPreferredLocale()
             dateFormat.dateFormat = "dd.MM.YYYY"
             dateString =  dateFormat.string(from: date!)
         }
@@ -131,7 +132,20 @@ import UIKit
         var dateString = ""
         if date != nil {
             let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "dd.MM.YYYY à HH:mm"
+            dateFormat.locale = Locale.getPreferredLocale()
+            dateFormat.dateFormat = "dd.MM.YYYY à HH'h'mm"
+            dateString =  dateFormat.string(from: date!)
+        }
+        
+        return dateString
+    }
+    
+    static func formatEventDateTimeFull(date:Date?) -> String {
+        var dateString = ""
+        if date != nil {
+            let dateFormat = DateFormatter()
+            dateFormat.locale = Locale.getPreferredLocale()
+            dateFormat.dateFormat = "dd MMMM YYYY à HH'h'mm"
             dateString =  dateFormat.string(from: date!)
         }
         

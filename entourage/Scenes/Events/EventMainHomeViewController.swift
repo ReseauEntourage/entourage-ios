@@ -56,7 +56,7 @@ class EventMainHomeViewController: UIViewController {
     
     
     @objc func showNewEvent(_ notification:Notification) {
-        if let eventId = notification.userInfo?["eventId"] as? Int {
+        if let eventId = notification.userInfo?[kNotificationEventShowId] as? Int {
             Logger.print("***** ShowNewEvent  : \(eventId)")
             DispatchQueue.main.async {
                 self.showEvent(eventId: eventId, isAfterCreation: true)

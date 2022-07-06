@@ -110,4 +110,21 @@ struct EventService:ParsingDataCodable {
             DispatchQueue.main.async { completion(events, nil) }
         }
     }
+    
+    static func getAllEventsForNeighborhoodId(_ groupId:Int, completion: @escaping (_ events:[Event]?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIEventGetAllForNeighborhood
+        endpoint = String.init(format: endpoint, groupId, token)
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let events:[Event]? = self.parseDatas(data: data, key: "outings")
+            DispatchQueue.main.async { completion(events, nil) }
+        }
+    }
 }

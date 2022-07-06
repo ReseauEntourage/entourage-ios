@@ -50,9 +50,6 @@ class NeighborhoodDetailViewController: UIViewController {
         
         registerCellsNib()
         
-        //Notif for updating neighborhood infos
-        NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
-        
         setupViews()
         
         ui_floaty_button.isHidden = true
@@ -69,6 +66,17 @@ class NeighborhoodDetailViewController: UIViewController {
             showCreatePost()
             isShowCreatePost = false
         }
+        //Notif for updating neighborhood infos
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
+        
+        //Notif for updating when create new Event + Show Detail event
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreateEvent), name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func registerCellsNib() {
@@ -143,6 +151,20 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     // Actions
+    @objc func showNewEvent(_ notification:Notification) {
+        if let eventId = notification.userInfo?[kNotificationEventShowId] as? Int {
+            Logger.print("***** ShowNewEvent  : \(eventId)")
+            DispatchQueue.main.async {
+                //TODO: afficher détail de
+                self.showEvent(eventId: eventId, isAfterCreation: true)
+            }
+        }
+    }
+    
+    @objc private func updateFromCreateEvent() {
+        updateNeighborhood()
+    }
+    
     @objc private func refreshNeighborhood() {
         updateNeighborhood()
     }
@@ -331,7 +353,12 @@ class NeighborhoodDetailViewController: UIViewController {
     func showCreateEvent() {
         //TODO: a faire lien vers la créa d'event
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewEvent)
-        self.showWIP(parentVC: self)
+        let vc = UIStoryboard.init(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
+        vc.parentController = self.navigationController
+        vc.modalPresentationStyle = .fullScreen
+        vc.isFromNeighborhood = true
+        vc.currentNeighborhoodId = neighborhood?.uid
+        self.navigationController?.present(vc, animated: true)
     }
 }
 
@@ -528,13 +555,16 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
 //MARK: - NeighborhoodEventsTableviewCellDelegate -
 extension NeighborhoodDetailViewController:NeighborhoodEventsTableviewCellDelegate {
     func showAll() {
-        //TODO: Show all events
-        Logger.print("***** show all events ;)")
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_MoreEvents)
-        showWIP(parentVC: self)
+        
+        if let navVC = storyboard?.instantiateViewController(withIdentifier: "navListEvents") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodListEventsViewController  {
+            vc.neighborhood = neighborhood
+            navVC.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(navVC, animated: true)
+        }
     }
     
-    func showEvent(eventId: Int) {
+    func showEvent(eventId: Int, isAfterCreation:Bool) {
         Logger.print("***** show event id : \(eventId)")
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_OneEvent)
         //TODO: a faire

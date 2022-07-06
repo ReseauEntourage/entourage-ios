@@ -780,3 +780,8 @@
 "eventModPopCloseBackMessage" = "Si vous quittez le formulaire de modification d’un événement, toutes les informations saisies seront perdues.";
 "eventModPopCloseBackQuit" = "Quitter";
 "eventModPopCloseBackCancel" = "Annuler";
+
+//Event group list
+"event_members_cell_list" = "%d participants";
+"event_member_cell_list" = "%d participant";
+"event_group_title_list" = "Événements du groupe";

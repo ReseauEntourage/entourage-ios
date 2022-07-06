@@ -31,7 +31,7 @@ class EventDatesCell: UITableViewCell {
     var selectedTimeStart:Date? = nil
     var selectedTimeEnd:Date? = nil
     
-    let currentLocale = Locale.init(identifier: "fr-FR")
+    let currentLocale = Locale.getPreferredLocale()
     
     weak var delegate:EventCreateDateCellDelegate? = nil
     

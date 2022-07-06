@@ -21,6 +21,8 @@ class EventCreatePhase5ViewController: UIViewController {
     
     var currentEvent:Event? = nil
     
+    var currentNeighborhoodId:Int? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let stringAttr = Utils.formatString(messageTxt: "event_create_phase5_title".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
@@ -32,6 +34,8 @@ class EventCreatePhase5ViewController: UIViewController {
         ui_tableview.dataSource = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(showError), name: NSNotification.Name(kNotificationEventCreatePhase5Error), object: nil)
+        
+        currentNeighborhoodId = pageDelegate?.getNeighborhoodId()
         
         if pageDelegate?.isEdit() ?? false {
             currentEvent = pageDelegate?.getCurrentEvent()
@@ -70,12 +74,39 @@ class EventCreatePhase5ViewController: UIViewController {
                         }
                     }
                 }
+                else if let currentNeighborhoodId = self.currentNeighborhoodId {
+                    self.isSharing = true
+                    var i = 0
+                    for groupNew in self.groups {
+                        if groupNew.uid == currentNeighborhoodId {
+                            self.groups[i].isSelected = true
+                            break
+                        }
+                        i = i + 1
+                    }
+                    self.updateNeighborhoodSelection()
+                }
                 
                 DispatchQueue.main.async {
                     self.ui_tableview.reloadData()
                 }
             }
         }
+    }
+    
+    func updateNeighborhoodSelection() {
+        var groupsId = [Int]()
+        groups.forEach { group in
+            if group.isSelected {
+                groupsId.append(group.uid)
+            }
+        }
+        if groupsId.count > 0 {
+            ui_error_view.isHidden = true
+            pageDelegate?.addShare(isSharing)
+        }
+        
+        pageDelegate?.addShareGroups(groupIds: groupsId)
     }
 }
 //MARK: - UITableView datasource / Delegate -
@@ -108,18 +139,7 @@ extension EventCreatePhase5ViewController: UITableViewDelegate, UITableViewDataS
         if indexPath.section == 0 { return }
         groups[indexPath.row].isSelected = !groups[indexPath.row].isSelected
         
-        var groupsId = [Int]()
-        groups.forEach { group in
-            if group.isSelected {
-                groupsId.append(group.uid)
-            }
-        }
-        if groupsId.count > 0 {
-            ui_error_view.isHidden = true
-            pageDelegate?.addShare(isSharing)
-        }
-        
-        pageDelegate?.addShareGroups(groupIds: groupsId)
+        updateNeighborhoodSelection()
         
         tableView.reloadData()
     }

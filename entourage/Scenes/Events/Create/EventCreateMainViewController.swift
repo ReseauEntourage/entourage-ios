@@ -32,6 +32,8 @@ class EventCreateMainViewController: UIViewController {
     
     var currentPhasePosition = 1
     
+    var currentNeighborhoodId:Int? = nil
+    
     weak var parentController:UIViewController? = nil // Use to open the ending screen
     
     override func viewDidLoad() {
@@ -301,6 +303,10 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
         _ = checkValidation()
     }
 
+    func getNeighborhoodId() -> Int? {
+        return currentNeighborhoodId
+    }
+    
     //Non used here
     func isEdit() -> Bool { return false }
     func getCurrentEvent() -> Event? { return nil }
@@ -445,7 +451,8 @@ protocol EventCreateMainDelegate: AnyObject {
     func addShare(_ isSharing:Bool)
     func addShareGroups(groupIds:[Int]?)
     
-    
+    func getNeighborhoodId() -> Int?
+    //Use for edition
     func isEdit() -> Bool
     func getCurrentEvent() -> Event?
 }

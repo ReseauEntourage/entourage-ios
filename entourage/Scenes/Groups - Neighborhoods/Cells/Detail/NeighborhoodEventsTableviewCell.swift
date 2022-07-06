@@ -69,13 +69,13 @@ extension NeighborhoodEventsTableviewCell: UICollectionViewDataSource, UICollect
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let event = events[indexPath.row]
-        delegate?.showEvent(eventId: event.uid)
+        delegate?.showEvent(eventId: event.uid, isAfterCreation: false)
     }
 }
 
 protocol NeighborhoodEventsTableviewCellDelegate:AnyObject {
     func showAll()
-    func showEvent(eventId:Int)
+    func showEvent(eventId:Int, isAfterCreation:Bool)
 }
 
 

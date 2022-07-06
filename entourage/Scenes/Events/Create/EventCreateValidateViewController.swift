@@ -31,7 +31,7 @@ class EventCreateValidateViewController: UIViewController {
     
     @IBAction func action_show_event(_ sender: Any) {
         self.dismiss(animated: true) {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil, userInfo: ["eventId":self.eventId])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil, userInfo: [kNotificationEventShowId:self.eventId])
         }
     }
     
