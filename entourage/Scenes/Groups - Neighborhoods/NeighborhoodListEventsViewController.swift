@@ -9,6 +9,7 @@ import UIKit
 
 struct MonthYearKey:Hashable {
     var monthId:Int = 0
+    var date:Date? = nil
     var dateString:String = ""
 }
 
@@ -30,6 +31,7 @@ class NeighborhoodListEventsViewController: UIViewController {
         
         
         ui_tableview.register(UINib(nibName: EventListCell.identifier, bundle: nil), forCellReuseIdentifier: EventListCell.identifier)
+        ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.identifier)
         
         if neighborhood?.isMember ?? false {
             ui_button_add.isHidden = false
@@ -72,21 +74,8 @@ class NeighborhoodListEventsViewController: UIViewController {
         }
         EventService.getAllEventsForNeighborhoodId(neighborhood.uid) { events, error in
             if let events = events {
-                let groupDic = Dictionary(grouping: events.sorted(by: {$0.getStartEndDate().startDate < $1.getStartEndDate().startDate})) { (event) -> MonthYearKey in
-                    
-                    let date = Calendar.current.dateComponents([.year, .month], from: (event.getStartEndDate().startDate))
-                    
-                    guard let month = date.month, let year = date.year else { return MonthYearKey(monthId: 0, dateString: "-")}
-                    
-                    let df = DateFormatter()
-                    df.locale = Locale.getPreferredLocale()
-                    let monthLiterral = df.standaloneMonthSymbols[month - 1].localizedCapitalized
-                    
-                    return MonthYearKey(monthId: month, dateString: "\(monthLiterral) \(year)")
-                }
-                
                 self.eventsSorted.removeAll()
-                self.eventsSorted = groupDic.sorted { $0.key.monthId < $1.key.monthId}
+                self.eventsSorted = Event.getArrayOfDateSorted(events: events, isAscendant:true)
                 
                 self.ui_tableview.reloadData()
             }
@@ -115,7 +104,7 @@ extension NeighborhoodListEventsViewController: UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitleDate", for: indexPath) as! NeighborhoodPostHeadersCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
             
             cell.populateCell(title: eventsSorted[indexPath.section].key.dateString, isTopHeader: false)
             

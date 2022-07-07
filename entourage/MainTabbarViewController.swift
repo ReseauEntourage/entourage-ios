@@ -250,6 +250,11 @@ extension MainTabbarViewController: UITabBarControllerDelegate {
         if item.tag == 3 {
             NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
         }
+        
+        //To force reload events
+        if item.tag == 4 {
+            NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventsUpdate), object: nil)
+        }
     }
 
 //    func showHomeVC(isEditor:Bool = false) {

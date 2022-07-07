@@ -1,14 +1,20 @@
 //
-//  NeighborhoodPostHeadersCell.swift
+//  EventListSectionCell.swift
 //  entourage
 //
-//  Created by Jerome on 13/05/2022.
+//  Created by Jerome on 07/07/2022.
 //
 
 import UIKit
 
-class NeighborhoodPostHeadersCell: UITableViewCell {
+class EventListSectionCell: UITableViewCell {
 
+    static let neighborhoodHeaderIdentifier = "NeighborhoodListHeaderCell"
+    
+    class var identifier: String {
+        return String(describing: self)
+    }
+    
     @IBOutlet weak var ui_title: UILabel!
     
     func populateCell(title:String,isTopHeader:Bool) {
@@ -20,4 +26,5 @@ class NeighborhoodPostHeadersCell: UITableViewCell {
         }
         ui_title.text = title
     }
+    
 }

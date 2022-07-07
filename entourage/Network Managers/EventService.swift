@@ -94,11 +94,19 @@ struct EventService:ParsingDataCodable {
         }
     }
     
-    static func getAllEventsForUser(userId:Int, completion: @escaping (_ events:[Event]?, _ error:EntourageNetworkError?) -> Void) {
+    static func getAllEventsForUser(userId:Int? = nil,currentPage:Int, per:Int, completion: @escaping (_ events:[Event]?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
-        var endpoint = kAPIEventGetAllForUser
-        endpoint = String.init(format: endpoint, "\(userId)", token)
         
+        var endpoint:String
+        if let userId = userId {
+            endpoint = kAPIEventGetAllForUser
+            endpoint = String.init(format: endpoint, "\(userId)", token, currentPage, per)
+        }
+        else {
+            endpoint = kAPIEventGetAllForMe
+            endpoint = String.init(format: endpoint, token, currentPage, per)
+        }
+       
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
@@ -115,6 +123,23 @@ struct EventService:ParsingDataCodable {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIEventGetAllForNeighborhood
         endpoint = String.init(format: endpoint, groupId, token)
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let events:[Event]? = self.parseDatas(data: data, key: "outings")
+            DispatchQueue.main.async { completion(events, nil) }
+        }
+    }
+    
+    static func getAllEventsDiscover(currentPage:Int, per:Int, completion: @escaping (_ events:[Event]?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIEventGetAllDiscover
+        endpoint = String.init(format: endpoint, token, currentPage, per)
         
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             

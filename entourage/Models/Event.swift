@@ -255,6 +255,31 @@ struct Event:Codable {
         
         return dict
     }
+    
+    //Use to sort events in months Dicts
+    static func getArrayOfDateSorted(events:[Event], isAscendant:Bool) -> [Dictionary<MonthYearKey, [Event]>.Element] {
+       let dict = Dictionary(grouping: events.sorted(by: {$0.getStartEndDate().startDate < $1.getStartEndDate().startDate})) { (event) -> MonthYearKey in
+            
+            let date = Calendar.current.dateComponents([.year, .month], from: (event.getStartEndDate().startDate))
+            
+            guard let month = date.month, let year = date.year else { return MonthYearKey(monthId: 0, dateString: "-")}
+            
+            let df = DateFormatter()
+            df.locale = Locale.getPreferredLocale()
+            let monthLiterral = df.standaloneMonthSymbols[month - 1].localizedCapitalized
+            
+            let newCalendar = Calendar(identifier: .gregorian)
+            let comp = DateComponents(year: year, month: month, day: 0, hour: 0, minute: 0, second: 0)
+           
+            let newDate = newCalendar.date(from: comp)!
+            
+            return MonthYearKey(monthId: month, date:newDate, dateString: "\(monthLiterral) \(year)")
+        }
+        if isAscendant {
+            return dict.sorted { $0.key.date ?? Date() < $1.key.date ?? Date() }
+        }
+        return dict.sorted { $0.key.date ?? Date() > $1.key.date ?? Date() }
+    }
 }
 
 struct EventLocation:Codable {

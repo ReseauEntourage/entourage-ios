@@ -45,7 +45,8 @@
 "toSettings" = "Réglages";
 "authCameraSettings" = "Veuillez autoriser l'accès à l'appareil photo.";
 
-"WIP" = "Prochainement";
+"WIP" = "Bientôt";
+"notImplemented" = "Prochainement disponible ;)";
 //PreOnboarding
 "next" = "Suivant";
 "connectMe" = "Me connecter";
@@ -699,6 +700,7 @@
 //Home popup info encouters
 "home_info_encounter_pop_title" = "Créez des rencontres !";
 "home_info_encounter_pop_subtitle" = "Participez à des événements et des actions solidaires pour augmenter votre compteur de rencontres Entourage";
+
 /** Events*/
 //Create
 
@@ -785,3 +787,13 @@
 "event_members_cell_list" = "%d participants";
 "event_member_cell_list" = "%d participant";
 "event_group_title_list" = "Événements du groupe";
+
+/* Home Event*/
+"event_main_page_title" = "Événements";
+"event_main_page_button_myEvents" = "Mes événements";
+"event_main_page_button_discover" = "Découvrir";
+"event_event_my_empty_title" = "Vous n’avez pas encore rejoint d’évènement";
+"event_event_my_empty_subtitle" = "Allez sur l’onglet découvir, et si aucun ne vous convient c’est l’occasion de créer un nouvel évènement ! ";
+"event_event_discover_empty_title" = "Allez sur l’onglet découvir, et si aucun ne vous convient c’est l’occasion de créer un nouvel évènement ! ";
+"event_event_discover_empty_subtitle" = "Si aucun évènement de ce type n’existe, vous pouvez en créer un ! Ou élarigir votre zone de recherche ";
+

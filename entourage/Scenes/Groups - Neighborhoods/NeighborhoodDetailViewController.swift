@@ -87,6 +87,9 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyEventCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyEventCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEventsTableviewCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEventsTableviewCell.identifier)
+        ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.identifier)
+        ui_tableview.register(UINib(nibName: EventListSectionCell.neighborhoodHeaderIdentifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier)
+        
     }
     
     func setupViews() {
@@ -439,7 +442,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         
         if hasNewAndOldSections && indexPath.section == 2 {
             if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitleDate", for: indexPath) as! NeighborhoodPostHeadersCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
                 
                 cell.populateCell(title: "neighborhood_post_group_section_old_posts_title".localized, isTopHeader: false)
                 return cell
@@ -453,7 +456,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         }
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitle", for: indexPath) as! NeighborhoodPostHeadersCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier, for: indexPath) as! EventListSectionCell
             cell.populateCell(title: "neighborhood_post_group_section_title".localized, isTopHeader: true)
             return cell
         }
@@ -464,7 +467,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             if indexPath.row == 1 {
                 let titleSection = hasNewAndOldSections || self.messagesOld.count == 0 ? "neighborhood_post_group_section_new_posts_title".localized : "neighborhood_post_group_section_old_posts_title".localized
                 
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cellPostTitleDate", for: indexPath) as! NeighborhoodPostHeadersCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
                 cell.populateCell(title: titleSection , isTopHeader: false)
                 return cell
             }

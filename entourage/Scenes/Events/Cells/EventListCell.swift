@@ -9,12 +9,16 @@ import UIKit
 
 class EventListCell: UITableViewCell {
 
+    static let EventlistMeIdentifier = "EventListMeCell"
+    
     @IBOutlet weak var ui_image: UIImageView!
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_date: UILabel!
     @IBOutlet weak var ui_location: UILabel!
     @IBOutlet weak var ui_members: UILabel!
     @IBOutlet weak var ui_view_separator: UIView!
+    
+    @IBOutlet weak var ui_label_admin: UILabel?
     
     class var identifier: String {
         return String(describing: self)
@@ -29,12 +33,15 @@ class EventListCell: UITableViewCell {
         ui_members.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
         
         ui_image.layer.cornerRadius = 20
+        
+        ui_label_admin?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
+        ui_label_admin?.text = "Admin".localized
     }
     
     func populateCell(event:Event, hideSeparator:Bool) {
         ui_title.text = event.title
         
-        if let imageUrl = event.imageUrl, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
+        if let imageUrl = event.metadata?.portrait_url, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
             ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "ic_placeholder_event"))
         }
         else {
