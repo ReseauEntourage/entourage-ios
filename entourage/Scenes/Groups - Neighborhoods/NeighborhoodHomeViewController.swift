@@ -173,7 +173,7 @@ class NeighborhoodHomeViewController: UIViewController {
             currentSelectedIsGroup = false
             getNeighborhoodsSuggestions()
         }
-        
+        changeTabSelection()
         //Analytics
         if isGroupsSelected {
             AnalyticsLoggerManager.logEvent(name: View_Group_Show)
@@ -187,11 +187,12 @@ class NeighborhoodHomeViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    //Use to change tab selection from other place
     func setDiscoverFirst() {
         self.isGroupsSelected = false
         self.currentSelectedIsGroup = true
     }
-    
+    //Use to change tab selection from other place
     func setMyFirst() {
         self.isGroupsSelected = true
         self.currentSelectedIsGroup = false
@@ -368,7 +369,7 @@ class NeighborhoodHomeViewController: UIViewController {
     
     @IBAction func action_create_group(_ sender: Any) {
         AnalyticsLoggerManager.logEvent(name: Action_Group_Plus)
-        let navVC = UIStoryboard.init(name: "Neighborhood_Create", bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
+        let navVC = UIStoryboard.init(name: StoryboardName.neighborhoodCreate, bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
@@ -522,7 +523,7 @@ class NeighborhoodHomeViewController: UIViewController {
     }
     
     func showNeighborhood(neighborhoodId:Int, isAfterCreation:Bool = false, isShowCreatePost:Bool = false, neighborhood:Neighborhood? = nil) {
-        let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
         if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
             vc.isAfterCreation = isAfterCreation
             vc.neighborhoodId = neighborhoodId

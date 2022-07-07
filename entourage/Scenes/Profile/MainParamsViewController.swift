@@ -85,7 +85,7 @@ extension MainParamsViewController:MainParamsMenuDelegate {
             //TODO: V2
             Logger.print("\(type)")
         case .Help:
-            let sb = UIStoryboard.init(name: "ProfileParams", bundle: nil)
+            let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "paramsHelpVC")
             self.navigationController?.present(vc, animated: true, completion: nil)
         case .Unlock:

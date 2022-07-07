@@ -157,7 +157,7 @@ class MainGuideViewController: UIViewController {
     }
     
     @objc func showSearch() {
-        let sb = UIStoryboard.init(name: "GuideSolidarity", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "vcSearch") as! GDSSearchViewController
         vc.modalPresentationStyle = .fullScreen
         vc.distance = getMapHeight()
@@ -549,7 +549,7 @@ class MainGuideViewController: UIViewController {
     func showPoiDetails(_ poi: MapPoi!) {
         AnalyticsLoggerManager.logEvent(name: Action_guideMap_POI)
         if poi.partnerId != nil {
-            let navVc = UIStoryboard.init(name: "PartnerDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController
+            let navVc = UIStoryboard.init(name: StoryboardName.partnerDetails, bundle: nil).instantiateInitialViewController() as? UINavigationController
             
             if let vc = navVc?.topViewController as? PartnerDetailViewController {
                 vc.partnerId = poi.partnerId ?? 0
@@ -560,7 +560,7 @@ class MainGuideViewController: UIViewController {
         }
         else {
             DispatchQueue.main.async {
-                let navVc = UIStoryboard.init(name: "GuideSolidarity", bundle: nil).instantiateInitialViewController() as? UINavigationController
+                let navVc = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil).instantiateInitialViewController() as? UINavigationController
                 
                 if let _controller = navVc?.topViewController as? GuideDetailPoiViewController {
                     _controller.poi = poi

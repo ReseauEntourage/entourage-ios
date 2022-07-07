@@ -244,7 +244,7 @@ extension ProfileEditorViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
-            if let vc = UIStoryboard.init(name: "ProfileParams", bundle: nil).instantiateViewController(withIdentifier: "editProfileInterestsVC") as? ProfileEditInterestsViewController, Metadatas.sharedInstance.tagsInterest?.getTags().count ?? 0 > 0 {
+            if let vc = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "editProfileInterestsVC") as? ProfileEditInterestsViewController, Metadatas.sharedInstance.tagsInterest?.getTags().count ?? 0 > 0 {
                 vc.tagsInterests = Metadatas.sharedInstance.tagsInterest
                 self.navigationController?.present(vc, animated: true)
             }
@@ -282,7 +282,7 @@ extension ProfileEditorViewController:CellTextDelegate {
     }
     
     func showSelectLocation() {
-        let sb = UIStoryboard.init(name: "ProfileParams", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         
         if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {
             vc.placeVCDelegate = self
@@ -310,7 +310,7 @@ extension ProfileEditorViewController: PlaceViewControllerDelegate {
 //MARK: - EditProfilePhotoDelegate -
 extension ProfileEditorViewController:EditProfilePhotoDelegate {
     func takeUserPhoto() {
-        let sb = UIStoryboard(name: "ProfileParams", bundle: nil)
+        let sb = UIStoryboard(name: StoryboardName.profileParams, bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "editProfilePhotoNav")
         self.navigationController?.present(vc, animated: true, completion: nil)
     }

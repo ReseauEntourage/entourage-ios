@@ -125,7 +125,7 @@ extension NeighborhoodCreatePhase1ViewController: AddDescriptionCellDelegate, Ne
     
     func showSelectLocation() {
         AnalyticsLoggerManager.logEvent(name: Action_NewGroup_AddLocation)
-        let sb = UIStoryboard.init(name: "ProfileParams", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         
         if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {
             vc.placeVCDelegate = self

@@ -91,7 +91,7 @@ class OTLoginNextViewController: UIViewController {
     //MARK: - Navigate
     func changeController() {
         ui_bt_next.isEnabled = false
-        let _storyboard = UIStoryboard.init(name: "Intro", bundle: nil)
+        let _storyboard = UIStoryboard.init(name: StoryboardName.intro, bundle: nil)
         if  let vc = _storyboard.instantiateViewController(withIdentifier: "Login_place") as? OTLoginPlaceViewController {
             vc.delegate = self
             add(asChildViewController: vc)

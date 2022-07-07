@@ -208,7 +208,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     }
     
     @IBAction func action_signal(_ sender: Any) {
-        if let navvc = UIStoryboard.init(name: "Neighborhood_Report", bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
+        if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.groupId = neighborhoodId
             vc.postId = parentCommentId
             vc.parentDelegate = self
@@ -288,7 +288,7 @@ extension NeighborhoodDetailMessagesViewController: UITextViewDelegate {
 //MARK: - NeighborhoodMessageCellDelegate -
 extension NeighborhoodDetailMessagesViewController:NeighborhoodMessageCellDelegate {
     func signalMessage(messageId: Int) {
-        if let navvc = UIStoryboard.init(name: "Neighborhood_Report", bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
+        if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.groupId = neighborhoodId
             vc.postId = messageId
             vc.parentDelegate = self

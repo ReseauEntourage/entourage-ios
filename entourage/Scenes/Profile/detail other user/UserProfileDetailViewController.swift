@@ -83,7 +83,7 @@ class UserProfileDetailViewController: UIViewController {
     }
     
     @IBAction func action_signal_user(_ sender: Any) {
-        if let vc = UIStoryboard.init(name: "UserDetail", bundle: nil).instantiateViewController(withIdentifier: "reportUserMainVC") as? ReportUserMainViewController {
+        if let vc = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "reportUserMainVC") as? ReportUserMainViewController {
             vc.user = currentUser
             vc.parentDelegate = self
             DispatchQueue.main.async {
@@ -158,7 +158,7 @@ extension UserProfileDetailViewController: MainUserProfileTopCellDelegate {
     }
     
     func showPartner() {
-        if let navVc = UIStoryboard.init(name: "PartnerDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController {
+        if let navVc = UIStoryboard.init(name:StoryboardName.partnerDetails, bundle: nil).instantiateInitialViewController() as? UINavigationController {
             if let vc = navVc.topViewController as? PartnerDetailViewController {
                 if let id = currentUser?.partner?.aid {
                     vc.partnerId = id

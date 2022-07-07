@@ -116,7 +116,7 @@ class HomeMainViewController: UIViewController {
     }
     
     @IBAction func action_show_profile(_ sender: Any) {
-        let navVC = UIStoryboard.init(name: "ProfileParams", bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
+        let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
@@ -253,7 +253,7 @@ extension HomeMainViewController:HomeContribDelegate {
 //MARK: - HomeMainViewsActionsDelegate -
 extension HomeMainViewController: HomeMainViewsActionsDelegate {
     func showUserProfile(id:Int) {
-        if let  navVC = UIStoryboard.init(name: "UserDetail", bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
+        if let  navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
             if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
                 _homeVC.currentUserId = "\(id)"
                 
@@ -263,13 +263,13 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     
     func editMyProfile() {
-        let sb = UIStoryboard.init(name: "ProfileParams", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav")
         self.navigationController?.present(navVC, animated: true)
     }
     
     func showNeighborhoodDetail(id:Int) {
-        let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
         if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
             vc.isAfterCreation = false
             vc.neighborhoodId = id
@@ -284,14 +284,14 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     
     func createNeighborhood() {
-        let navVC = UIStoryboard.init(name: "Neighborhood_Create", bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
+        let navVC = UIStoryboard.init(name: StoryboardName.neighborhoodCreate, bundle: nil).instantiateViewController(withIdentifier: "groupCreateVCMain") as! NeighborhoodCreateMainViewController
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
     
     func showPoi(id:Int) {
-        let navVc = UIStoryboard.init(name: "GuideSolidarity", bundle: nil).instantiateInitialViewController() as? UINavigationController
+        let navVc = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil).instantiateInitialViewController() as? UINavigationController
         
         if let _controller = navVc?.topViewController as? GuideDetailPoiViewController {
             var poi = MapPoi()
@@ -303,7 +303,7 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     
     func showAllPois() {
-        let sb = UIStoryboard.init(name: "GuideSolidarity", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "MainGuide") as? MainGuideViewController {
             vc.isFromDeeplink = true
             let navVc = UINavigationController()

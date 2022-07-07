@@ -133,7 +133,7 @@ class MainProfileSettingsViewController: UIViewController {
     
     //MARK: - IBActions -
     @IBAction func action_show_edit_profile(_ sender: Any) {
-        let sb = UIStoryboard.init(name: "ProfileParams", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav")
         self.navigationController?.present(navVC, animated: true)
     }
@@ -166,9 +166,9 @@ class MainProfileSettingsViewController: UIViewController {
     }
     
     func setupVCs() {
-        profileVC = UIStoryboard.init(name: "ProfileParams", bundle: nil).instantiateViewController(withIdentifier: "mainUserProfileVC") as? MainUserProfileViewController
+        profileVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainUserProfileVC") as? MainUserProfileViewController
         
-        paramsVC = UIStoryboard.init(name: "ProfileParams", bundle: nil).instantiateViewController(withIdentifier: "mainParamVC")
+        paramsVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainParamVC")
     }
     
     func changeVC() {

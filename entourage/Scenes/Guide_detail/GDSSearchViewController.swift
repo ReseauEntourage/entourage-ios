@@ -136,7 +136,7 @@ extension GDSSearchViewController: UITableViewDataSource,UITableViewDelegate {
         let poi = pois[indexPath.row]
         if poi.partnerId != nil {
            
-            let navVc = UIStoryboard.init(name: "PartnerDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController
+            let navVc = UIStoryboard.init(name: StoryboardName.partnerDetails, bundle: nil).instantiateInitialViewController() as? UINavigationController
             if let vc = navVc?.topViewController as? PartnerDetailViewController {
                 vc.partnerId = poi.partnerId!
                 DispatchQueue.main.async {
@@ -146,7 +146,7 @@ extension GDSSearchViewController: UITableViewDataSource,UITableViewDelegate {
         }
         else {
             DispatchQueue.main.async {
-                let navVc = UIStoryboard.init(name: "GuideSolidarity", bundle: nil).instantiateInitialViewController() as? UINavigationController
+                let navVc = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil).instantiateInitialViewController() as? UINavigationController
                 
                 if let _controller = navVc?.topViewController as? GuideDetailPoiViewController {
                     _controller.poi = poi

@@ -94,10 +94,9 @@ class NeighborhoodListEventsViewController: UIViewController {
     }
     
     @IBAction func action_create_event(_ sender: Any) {
-        let vc = UIStoryboard.init(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
+        let vc = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
         vc.parentController = self.navigationController
         vc.modalPresentationStyle = .fullScreen
-        vc.isFromNeighborhood = true
         vc.currentNeighborhoodId = neighborhood?.uid
         self.navigationController?.present(vc, animated: true)
     }

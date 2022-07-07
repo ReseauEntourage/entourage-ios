@@ -117,7 +117,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
     }
     
     @IBAction func action_show_params(_ sender: Any) {
-        if let navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "params_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodParamsGroupViewController {
+        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "params_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodParamsGroupViewController {
             vc.neighborhood = neighborhood
             self.navigationController?.present(navVC, animated: true)
         }
@@ -152,7 +152,7 @@ extension NeighborhoodDetailOnlyViewController: UITableViewDataSource, UITableVi
 //MARK: - NeighborhoodDetailTopCellDelegate -
 extension NeighborhoodDetailOnlyViewController: NeighborhoodDetailTopCellDelegate {
     func showMembers() {
-        if let navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodListUsersViewController {
+        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodListUsersViewController {
             vc.neighborhood = neighborhood
             self.navigationController?.present(navVC, animated: true)
         }

@@ -315,7 +315,7 @@ class NeighborhoodDetailViewController: UIViewController {
     //MARK: - IBAction -
     @IBAction func action_show_params(_ sender: Any) {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_Option)
-        if let navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "params_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodParamsGroupViewController {
+        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "params_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodParamsGroupViewController {
             vc.neighborhood = neighborhood
             self.navigationController?.present(navVC, animated: true)
         }
@@ -343,7 +343,7 @@ class NeighborhoodDetailViewController: UIViewController {
     
     //MARK: - Nav VCs-
     func showCreatePost() {
-        let sb = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController  {
             vc.neighborhoodId = self.neighborhoodId
             self.navigationController?.present(vc, animated: true)
@@ -353,10 +353,9 @@ class NeighborhoodDetailViewController: UIViewController {
     func showCreateEvent() {
         //TODO: a faire lien vers la créa d'event
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewEvent)
-        let vc = UIStoryboard.init(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
+        let vc = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
         vc.parentController = self.navigationController
         vc.modalPresentationStyle = .fullScreen
-        vc.isFromNeighborhood = true
         vc.currentNeighborhoodId = neighborhood?.uid
         self.navigationController?.present(vc, animated: true)
     }
@@ -513,7 +512,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
 extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
     func showMembers() {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_MoreMembers)
-        if let navVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodListUsersViewController {
+        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodListUsersViewController {
             vc.neighborhood = neighborhood
             self.navigationController?.present(navVC, animated: true)
         }
@@ -526,7 +525,7 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
     
     func showDetailFull() {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_MoreDescription)
-        let sb = UIStoryboard.init(name: "Neighborhood", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
         if let navvc = sb.instantiateViewController(withIdentifier: "neighborhoodDetailOnlyNav") as? UINavigationController, let vc = navvc.topViewController as? NeighborhoodDetailOnlyViewController {
             vc.neighborhoodId = self.neighborhoodId
             vc.delegate = self
@@ -539,7 +538,7 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
 extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
     func showMessages(addComment: Bool, postId:Int) {
         
-        let sb = UIStoryboard.init(name: "Neighborhood_Message", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? NeighborhoodDetailMessagesViewController {
             vc.modalPresentationStyle = .fullScreen
             vc.parentCommentId = postId

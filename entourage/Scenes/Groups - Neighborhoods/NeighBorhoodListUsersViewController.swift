@@ -118,7 +118,7 @@ extension NeighBorhoodListUsersViewController: UITableViewDataSource, UITableVie
             user = self.users[indexPath.row - 1]
         }
         
-        if let navVC = UIStoryboard.init(name: "UserDetail", bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
+        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
             if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
                 _homeVC.currentUserId = "\(user.sid)"
                 

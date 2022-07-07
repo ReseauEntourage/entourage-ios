@@ -97,7 +97,7 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     @IBAction func action_login(_ sender: Any) {
 //        OTLogger.logEvent(Action_Start_LoginStart)//TODO: - a faire
         
-        let vc = UIStoryboard(name: "Intro", bundle: nil).instantiateViewController(withIdentifier: "LoginV2VC")
+        let vc = UIStoryboard(name: StoryboardName.intro, bundle: nil).instantiateViewController(withIdentifier: "LoginV2VC")
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

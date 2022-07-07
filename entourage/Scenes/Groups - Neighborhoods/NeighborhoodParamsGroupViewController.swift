@@ -207,7 +207,7 @@ extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
     
     func signalGroup() {
         AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Report)
-        if let  vc = UIStoryboard.init(name: "Neighborhood_Report", bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
+        if let  vc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
             vc.modalPresentationStyle = .currentContext
             vc.group = neighborhood
             vc.parentDelegate = self
@@ -218,7 +218,7 @@ extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
     
     func showCGU() {
         AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Rules)
-        if let  vc = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "params_CGU_VC") as? NeighBorhoodParamsCGUViewController {
+        if let  vc = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "params_CGU_VC") as? NeighBorhoodParamsCGUViewController {
             vc.modalPresentationStyle = .fullScreen
             
             self.navigationController?.present(vc, animated: true)
@@ -227,7 +227,7 @@ extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
     
     func editGroup() {
         AnalyticsLoggerManager.logEvent(name: Action_GroupOption_EditGroup)
-        if let  vc = UIStoryboard.init(name: "Neighborhood_Create", bundle: nil).instantiateViewController(withIdentifier: "editGroupVC") as? NeighborhoodEditViewController {
+        if let  vc = UIStoryboard.init(name: StoryboardName.neighborhoodCreate, bundle: nil).instantiateViewController(withIdentifier: "editGroupVC") as? NeighborhoodEditViewController {
             vc.modalPresentationStyle = .fullScreen
             vc.currentNeighborhoodId = self.neighborhood!.uid
             

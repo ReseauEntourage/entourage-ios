@@ -119,7 +119,7 @@ class MainTabbarViewController: UITabBarController {
     
     func setupVCs() {
         
-        let _homeVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC")
+        let _homeVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "homeVC")
         homeVC = UINavigationController.init(rootViewController: _homeVC)
         homeVC.isNavigationBarHidden = true
         homeVC.tabBarItem.title = "tabbar_home".localized
@@ -129,7 +129,7 @@ class MainTabbarViewController: UITabBarController {
         homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_home_on")
         
         
-        let _giftsVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "home_gift_vc")
+        let _giftsVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "home_gift_vc")
         giftsVC = UINavigationController.init(rootViewController: _giftsVC)
         giftsVC.isNavigationBarHidden = true
         giftsVC.tabBarItem.title = "tabbar_gifts".localized
@@ -138,7 +138,7 @@ class MainTabbarViewController: UITabBarController {
         giftsVC.tabBarItem.tag = 1
         
         
-        let  _msgVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "home_messanger_vc")
+        let  _msgVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "home_messanger_vc")
         messagesVC = UINavigationController.init(rootViewController: _msgVC)
         messagesVC.isNavigationBarHidden = true
         messagesVC.tabBarItem.title = "tabbar_messages".localized
@@ -147,7 +147,7 @@ class MainTabbarViewController: UITabBarController {
         messagesVC.tabBarItem.tag = 2
         
         
-        let _groupVC = UIStoryboard.init(name: "Neighborhood", bundle: nil).instantiateViewController(withIdentifier: "home")
+        let _groupVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "home")
         groupVC = UINavigationController.init(rootViewController: _groupVC)
         groupVC.isNavigationBarHidden = true
         groupVC.tabBarItem.title = "tabbar_groups".localized
@@ -156,7 +156,7 @@ class MainTabbarViewController: UITabBarController {
         groupVC.tabBarItem.tag = 3
         
         
-        let _eventsVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "home_events_vc")
+        let _eventsVC = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "home_events_vc")
         eventsVC = UINavigationController.init(rootViewController: _eventsVC)
         eventsVC.isNavigationBarHidden = true
         eventsVC.tabBarItem.title = "tabbar_events".localized

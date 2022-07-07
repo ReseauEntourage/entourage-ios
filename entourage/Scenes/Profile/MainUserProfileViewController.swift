@@ -96,7 +96,7 @@ extension MainUserProfileViewController: UITableViewDelegate, UITableViewDataSou
 //MARK: - MainUserProfileTopCellDelegate -
 extension MainUserProfileViewController: MainUserProfileTopCellDelegate {
     func showPartner() {
-        if let navVc = UIStoryboard.init(name: "PartnerDetails", bundle: nil).instantiateInitialViewController() as? UINavigationController {
+        if let navVc = UIStoryboard.init(name: StoryboardName.partnerDetails, bundle: nil).instantiateInitialViewController() as? UINavigationController {
             if let vc = navVc.topViewController as? PartnerDetailViewController {
                 if let id = currentUser.partner?.aid {
                     vc.partnerId = id

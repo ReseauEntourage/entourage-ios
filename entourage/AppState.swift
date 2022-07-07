@@ -55,7 +55,7 @@ struct AppState {
     }
     
     static func navigateToStartupScreen() {
-        let sb = UIStoryboard.init(name: "Intro", bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.intro, bundle: nil)
         let vc = sb.instantiateInitialViewController()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.window?.rootViewController = vc
@@ -63,7 +63,7 @@ struct AppState {
     }
     
     static func navigateToMainApp() {
-        let tabbar = UIStoryboard.init(name: "Main", bundle: nil).instantiateInitialViewController() as! MainTabbarViewController // MainTabbarViewController()
+        let tabbar = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateInitialViewController() as! MainTabbarViewController // MainTabbarViewController()
         tabbar.selectedIndex = 0
         tabbar.boldSelectedItem()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -95,7 +95,7 @@ struct AppState {
     
     static func navigateToLoginScreen(deeplink:NSURL, senderController:UIViewController) {
         
-        let loginVc = UIStoryboard.init(name: "Intro", bundle: nil).instantiateViewController(withIdentifier: "LoginV2VC") as! OTLoginV2ViewController
+        let loginVc = UIStoryboard.init(name: StoryboardName.intro, bundle: nil).instantiateViewController(withIdentifier: "LoginV2VC") as! OTLoginV2ViewController
         loginVc.deeplink = deeplink as URL;
         
         getTopViewController()?.show(loginVc, sender: self)
