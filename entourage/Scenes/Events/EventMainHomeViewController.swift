@@ -345,6 +345,10 @@ class EventMainHomeViewController: UIViewController {
         self.tabBarController?.present(navVC, animated: true)
     }
     
+    @IBAction func action_show_filters(_ sender: Any) {
+        self.showWIP(parentVC: tabBarController)
+    }
+    
     //MARK: - Methods -
     func changeTabSelection() {
         ui_view_empty.isHidden = true
@@ -368,7 +372,7 @@ class EventMainHomeViewController: UIViewController {
             
             ui_view_indicator_events.isHidden = true
             ui_view_indicator_discover.isHidden = false
-            self.showHideFilterView(isHidden: true)
+            self.showHideFilterView(isHidden: false)
         }
         self.ui_tableview.reloadData()
     }
@@ -532,6 +536,17 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
         if isEventSelected {
             if let _event = myEventsExtracted.events[indexPath.row] as? Event {
                 event = _event
+                //TODO: show edit Et suppress apres tests
+                if event?.author?.uid == UserDefaults.currentUser?.sid {
+                   
+                    if let vc = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventEditVCMain") as? EventEditMainViewController {
+                        vc.eventId = _event.uid
+                        vc.currentEvent = _event
+                        vc.modalPresentationStyle = .fullScreen
+                        self.tabBarController?.present(vc, animated: true, completion: nil)
+                        return
+                    }
+                }
             }
         }
         else {
