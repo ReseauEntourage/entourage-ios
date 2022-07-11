@@ -151,6 +151,30 @@ import UIKit
         
         return dateString
     }
+    
+    static func formatEventTime(date:Date?) -> String {
+        var dateString = ""
+        if date != nil {
+            let dateFormat = DateFormatter()
+            dateFormat.locale = Locale.getPreferredLocale()
+            dateFormat.dateFormat = "HH'h'mm"
+            dateString =  dateFormat.string(from: date!)
+        }
+        
+        return dateString
+    }
+    
+    static func formatEventDateName(date:Date?) -> String {
+        var dateString = ""
+        if date != nil {
+            let dateFormat = DateFormatter()
+            dateFormat.locale = Locale.getPreferredLocale()
+            dateFormat.dateFormat = "dd MMMM YYYY"
+            dateString =  dateFormat.string(from: date!)
+        }
+        
+        return dateString
+    }
 }
 
 class ImageLoaderSwift {

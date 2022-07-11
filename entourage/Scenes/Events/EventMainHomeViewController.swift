@@ -111,17 +111,26 @@ class EventMainHomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        changeTabSelection()
+        
         if isEventSelected {
             if !currentSelectedIsEvent {
                 currentSelectedIsEvent = true
                 getEvents()
             }
+            else if myEventsExtracted.events.count == 0 {
+                showEmptyView()
+            }
         }
-        else if currentSelectedIsEvent {
-            currentSelectedIsEvent = false
-            getEventsDiscovered()
+        else {
+            if currentSelectedIsEvent {
+                currentSelectedIsEvent = false
+                getEventsDiscovered()
+            }
+            else if eventsDiscoveredExtracted.events.count == 0 {
+                showEmptyView()
+            }
         }
-        changeTabSelection()
     }
     
     deinit {
@@ -146,14 +155,14 @@ class EventMainHomeViewController: UIViewController {
         
         if isEventSelected {
             currentSelectedIsEvent = true
-            if self.myEvents.count > 0 {
+            if self.myEventsExtracted.events.count > 0 {
                 self.gotoTop(isAnimated:false)
             }
             getEvents(reloadOther:true)
         }
         else {
             currentSelectedIsEvent = false
-            if self.eventsDiscovered.count > 0 {
+            if self.eventsDiscoveredExtracted.events.count > 0 {
                 self.gotoTop(isAnimated:false)
             }
             getEventsDiscovered(reloadOther:true)
@@ -190,7 +199,7 @@ class EventMainHomeViewController: UIViewController {
     func getEvents(isReloadFromTab:Bool = false, reloadOther:Bool = false) {
         if self.isLoading { return }
         
-        if self.myEvents.isEmpty { self.ui_tableview.reloadData() }
+        if self.myEventsExtracted.events.isEmpty { self.ui_tableview.reloadData() }
         
         if !isReloadFromTab {
             IHProgressHUD.show()
@@ -211,18 +220,18 @@ class EventMainHomeViewController: UIViewController {
                     self.myEvents = events
                 }
                 
-                self.extractDict()
+                self.extractDict(isEventSelection: true)
                 
                 if !isReloadFromTab {
                     self.ui_tableview.reloadData()
-                    if self.myEvents.count > 0 && self.currentPageMy == 1 {
+                    if self.myEventsExtracted.events.count > 0 && self.currentPageMy == 1 {
                         self.gotoTop()
                     }
                 }
             }
             
             if !isReloadFromTab {
-                if self.myEvents.count == 0 {
+                if self.myEventsExtracted.events.count == 0 {
                     self.showEmptyView()
                 }
                 else {
@@ -259,14 +268,15 @@ class EventMainHomeViewController: UIViewController {
                     self.eventsDiscovered = events
                 }
                 
-                self.extractDict()
+                self.extractDict(isEventSelection: false)
                 
-                if self.eventsDiscovered.count > 0 && self.currentPageDiscover == 1 && !isReloadFromTab {
+                if self.eventsDiscoveredExtracted.events.count > 0 && self.currentPageDiscover == 1 && !isReloadFromTab {
                     self.gotoTop()
                 }
             }
+            
             if !isReloadFromTab {
-                if self.eventsDiscovered.count == 0 {
+                if self.eventsDiscoveredExtracted.events.count == 0 {
                     self.showEmptyView()
                 }
                 else {
@@ -282,8 +292,8 @@ class EventMainHomeViewController: UIViewController {
     }
     
     //To transform array -> array with dict date sections
-    func extractDict() {
-        let _events = isEventSelected ? myEvents : eventsDiscovered
+    func extractDict(isEventSelection:Bool) {
+        let _events = isEventSelection ? myEvents : eventsDiscovered
         let newEventsSorted = Event.getArrayOfDateSorted(events: _events, isAscendant:true)
         
         var newEvents = [Any]()
@@ -293,13 +303,14 @@ class EventMainHomeViewController: UIViewController {
                 newEvents.append(_event)
             }
         }
-        
         let eventsSorted = EventsSorted(events: newEvents, datesSections: newEventsSorted.count)
         
-        if isEventSelected {
+        if isEventSelection {
+            self.myEventsExtracted.events.removeAll()
             self.myEventsExtracted = eventsSorted
         }
         else {
+            self.eventsDiscoveredExtracted.events.removeAll()
             self.eventsDiscoveredExtracted = eventsSorted
         }
     }
@@ -309,31 +320,36 @@ class EventMainHomeViewController: UIViewController {
         isEventSelected = true
         isfirstLoadingMyEvents = true
         
-        if isEventSelected != currentSelectedIsEvent && myEvents.count == 0 {
+        if isEventSelected != currentSelectedIsEvent && myEventsExtracted.events.count == 0 {
             currentPageMy = 1
-            myEvents.removeAll()
+            myEventsExtracted.events.removeAll()
             getEvents()
         }
         currentSelectedIsEvent = true
         isLoading = false
         changeTabSelection()
-        if self.myEvents.count > 0 {
+        self.ui_tableview.reloadData()
+        
+        if self.myEventsExtracted.events.count > 0 {
             self.gotoTop()
         }
     }
     
     @IBAction func action_discover(_ sender: Any?) {
         isEventSelected = false
+       
         
-        if isEventSelected != currentSelectedIsEvent && self.eventsDiscovered.count == 0 {
+        if isEventSelected != currentSelectedIsEvent && self.eventsDiscoveredExtracted.events.count == 0 {
             currentPageDiscover = 1
-            self.eventsDiscovered.removeAll()
+            self.eventsDiscoveredExtracted.events.removeAll()
             getEventsDiscovered()
         }
         currentSelectedIsEvent = false
         isLoading = false
         changeTabSelection()
-        if self.eventsDiscovered.count > 0 {
+        self.ui_tableview.reloadData()
+        
+        if self.eventsDiscoveredExtracted.events.count > 0 {
             self.gotoTop()
         }
     }
@@ -390,9 +406,9 @@ class EventMainHomeViewController: UIViewController {
     }
     
     func gotoTop(isAnimated:Bool = true) {
-        if isEventSelected && myEvents.count == 0 { return }
-        else if eventsDiscovered.count == 0 { return }
-        
+        if isEventSelected && myEventsExtracted.events.count == 0 { return }
+        else if eventsDiscoveredExtracted.events.count == 0 { return }
+        Logger.print("***** event Discovered hzereeeee: \(self.eventsDiscoveredExtracted.events.count)")
         let indexPath = IndexPath(row: 0, section: 0)
         DispatchQueue.main.async {
             self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: isAnimated)
@@ -485,18 +501,21 @@ class EventMainHomeViewController: UIViewController {
     }
     
     func showEvent(eventId:Int, isAfterCreation:Bool = false, event:Event? = nil) {
-        
-        Logger.print("**** Show event : \(event)")
-        self.showWIP(parentVC: self)
-        
-        //TODO: a faire lorsque l'on aura le détail d'un event ;)
+        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+            vc.eventId = eventId
+            vc.event = event
+            vc.isAfterCreation = isAfterCreation
+            vc.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(navVc, animated: true, completion: nil)
+            return
+        }
     }
 }
 
 //MARK: - Tableview datasource / delegate -
 extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (isEventSelected && myEvents.isEmpty && !isfirstLoadingMyEvents) || (!isEventSelected && eventsDiscovered.isEmpty) {
+        if (isEventSelected && myEventsExtracted.events.isEmpty && !isfirstLoadingMyEvents) || (!isEventSelected && eventsDiscoveredExtracted.events.isEmpty) {
             //  showEmptyView()
         }
         else {
@@ -536,17 +555,6 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
         if isEventSelected {
             if let _event = myEventsExtracted.events[indexPath.row] as? Event {
                 event = _event
-                //TODO: show edit Et suppress apres tests
-                if event?.author?.uid == UserDefaults.currentUser?.sid {
-                   
-                    if let vc = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventEditVCMain") as? EventEditMainViewController {
-                        vc.eventId = _event.uid
-                        vc.currentEvent = _event
-                        vc.modalPresentationStyle = .fullScreen
-                        self.tabBarController?.present(vc, animated: true, completion: nil)
-                        return
-                    }
-                }
             }
         }
         else {
@@ -566,10 +574,9 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
         if isLoading { return }
         if isEventSelected {
             let lastIndex = myEventsExtracted.events.count - nbOfItemsBeforePagingReload
-            Logger.print("***** Last index = \(lastIndex)")
+            
             if indexPath.row == lastIndex && (self.myEventsExtracted.events.count - myEventsExtracted.datesSections) >= (numberOfItemsForWS * currentPageMy) {
                 self.currentPageMy = self.currentPageMy + 1
-                Logger.print("***** on lance le reload \(indexPath.row)")
                 self.getEvents()
             }
         }

@@ -31,7 +31,13 @@ struct Event:Codable {
     
     var neiborhoodIds:[Int]? = nil
     
-    var membersCount:Int? = 0
+    var membersCount:Int? = nil
+    
+    var isMember:Bool? = false
+    var messages:[PostMessage]? = nil
+    var members:[NeighborhoodUserLight]? = nil
+    
+    var status = ""
     
     private var recurrency:Int? = nil
     private var _recurrence:EventRecurrence = .once
@@ -78,9 +84,21 @@ struct Event:Codable {
         }
     }
     
+    var startDateNameFormatted:String {
+        get {
+            return Utils.formatEventDateName(date:Utils.getDateFromWSDateString(metadata?.starts_at))
+        }
+    }
+    
     var startDateTimeFormatted:String {
         get {
             return  Utils.formatEventDateTimeFull(date: Utils.getDateFromWSDateString(metadata?.starts_at))
+        }
+    }
+    
+    var startTimeFormatted:String {
+        get {
+            return  Utils.formatEventTime(date: Utils.getDateFromWSDateString(metadata?.starts_at))
         }
     }
     
@@ -144,6 +162,9 @@ struct Event:Codable {
         
         case recurrency
         case membersCount = "members_count"
+        case members
+        case isMember = "member"
+        case status
     }
     
     func dictionaryForWS() -> [String:Any] {

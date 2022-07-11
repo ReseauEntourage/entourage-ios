@@ -15,6 +15,8 @@ class NeighBorhoodListUsersViewController: BasePopViewController {
     @IBOutlet weak var ui_view_no_result: UIView!
     
     var neighborhood:Neighborhood? = nil
+    var event:Event? = nil
+    var isEvent = false
     
     var users = [UserLightNeighborhood]()
     var usersSearch = [UserLightNeighborhood]()
@@ -24,13 +26,22 @@ class NeighBorhoodListUsersViewController: BasePopViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ui_top_view.populateView(title: "neighborhood_users_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
+        let title = isEvent ? "event_users_title".localized : "neighborhood_users_title".localized
+        let txtSearch = "neighborhood_group_search_empty_title".localized
+        
+        ui_top_view.populateView(title: title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
         
         ui_lb_no_result.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
-        ui_lb_no_result.text = "neighborhood_group_search_empty_title".localized
+        ui_lb_no_result.text = txtSearch
         ui_view_no_result.isHidden = true
-        getusers()
-        AnalyticsLoggerManager.logEvent(name: View_GroupMember_ShowList)
+        if isEvent {
+            getEventusers()
+        }
+        else {
+            getNeighborhoodUsers()
+            AnalyticsLoggerManager.logEvent(name: View_GroupMember_ShowList)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,12 +50,28 @@ class NeighBorhoodListUsersViewController: BasePopViewController {
     }
     
     
-    func getusers() {
+    func getNeighborhoodUsers() {
         guard let neighborhood = neighborhood else {
             return
         }
         
         NeighborhoodService.getNeighborhoodUsers(neighborhoodId: neighborhood.uid, completion: { users, error in
+            if let _ = error {
+                self.goBack()
+            }
+            if let users = users {
+                self.users = users
+            }
+            self.ui_tableview.reloadData()
+        })
+    }
+    
+    func getEventusers() {
+        guard let event = event else {
+            return
+        }
+        
+        EventService.getEventUsers(eventId: event.uid, completion: { users, error in
             if let _ = error {
                 self.goBack()
             }
@@ -82,8 +109,8 @@ extension NeighBorhoodListUsersViewController: UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_search", for: indexPath) as! NeighborhoodHomeSearchCell
-            
-            cell.populateCell(delegate: self, isSearch:isSearch,placeceholder:"neighborhood_userInput_search".localized, isCellUserSearch: true)
+            let title = isEvent ? "event_userInput_search".localized : "neighborhood_userInput_search".localized
+            cell.populateCell(delegate: self, isSearch:isSearch,placeceholder:title, isCellUserSearch: true)
             return cell
         }
         
@@ -110,11 +137,15 @@ extension NeighBorhoodListUsersViewController: UITableViewDataSource, UITableVie
         
         var user:UserLightNeighborhood
         if isSearch {
-            AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult)
+            if !isEvent {
+                AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_SeeResult)
+            }
             user = self.usersSearch[indexPath.row - 1]
         }
         else {
-            AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
+            if !isEvent {
+                AnalyticsLoggerManager.logEvent(name: Action_GroupMember_See1Member)
+            }
             user = self.users[indexPath.row - 1]
         }
         
@@ -132,7 +163,9 @@ extension NeighBorhoodListUsersViewController: UITableViewDataSource, UITableVie
 extension NeighBorhoodListUsersViewController: NeighborhoodHomeSearchDelegate {
     func goSearch(_ text: String?) {
         if let text = text, !text.isEmpty {
-            AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_Validate)
+            if !isEvent {
+                AnalyticsLoggerManager.logEvent(name: Action_GroupMember_Search_Validate)
+            }
             self.searchUser(text: text)
         }
         else {
@@ -162,7 +195,9 @@ extension NeighBorhoodListUsersViewController:NeighborhoodUserCellDelegate {
     func showSendMessageToUserForPosition(_ position: Int) {
         //TODO: a faire
         Logger.print("***** show message from user pos : \(position)")
-        AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member)
+        if !isEvent {
+            AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member)
+        }
         showWIP(parentVC: self.navigationController)
     }
 }

@@ -11,10 +11,10 @@ struct WebLinkManager {
     
     static func openUrl(url:URL?, openInApp:Bool, presenterViewController:UIViewController?) {
         if openInApp {
-            openUrlInApp(url: url, presenterViewController: presenterViewController)
+            openUrlInApp(url: url?.checkAndAddScheme, presenterViewController: presenterViewController)
         }
         else {
-            openUrl(url: url)
+            openUrl(url: url?.checkAndAddScheme)
         }
     }
 

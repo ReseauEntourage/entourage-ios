@@ -101,6 +101,16 @@ extension URL {
         let URLString : String = String(format: "%@?%@", self.absoluteString, parametersDictionary.queryParameters)
         return URL(string: URLString)!
     }
+    
+    var checkAndAddScheme: URL {
+        if var components = URLComponents(url: self, resolvingAgainstBaseURL: false) {
+            if components.scheme == nil {
+                components.scheme = "http"
+            }
+            return components.url ?? self
+        }
+        return self
+    }
 }
 
 

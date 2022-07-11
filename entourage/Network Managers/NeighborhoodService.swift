@@ -217,27 +217,10 @@ struct NeighborhoodService:ParsingDataCodable {
                 return
             }
             
-            //let group:Neighborhood? = self.parseData(data: data,key: "neighborhood")
-            let user:NeighborhoodUserLight? = self.parseUser(data: data)
+            let user:NeighborhoodUserLight? = self.parseData(data: data,key: "user")
             DispatchQueue.main.async { completion(user, nil) }
         }
     }
-    
-    static private func parseUser(data:Data) -> NeighborhoodUserLight? {
-        do {
-            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let jsonGroup = json["user"] as? [String:AnyObject] {
-                let decoder = JSONDecoder()
-                if let dataGroup = try? JSONSerialization.data(withJSONObject: jsonGroup) {
-                  return try decoder.decode(NeighborhoodUserLight.self, from:dataGroup)
-                }
-            }
-        }
-        catch {
-            Logger.print("Error parsing Data \(error)")
-        }
-        return nil
-    }
-    
     
     static func leaveNeighborhood(groupId:Int,userId:Int ,completion: @escaping (_ group:Neighborhood?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
