@@ -34,8 +34,8 @@ struct Event:Codable {
     var membersCount:Int? = nil
     
     var isMember:Bool? = false
-    var messages:[PostMessage]? = nil
-    var members:[NeighborhoodUserLight]? = nil
+    var posts:[PostMessage]? = nil
+    var members:[MemberLight]? = nil
     
     var status = ""
     
@@ -165,6 +165,7 @@ struct Event:Codable {
         case members
         case isMember = "member"
         case status
+        case posts
     }
     
     func dictionaryForWS() -> [String:Any] {

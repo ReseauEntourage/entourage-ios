@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NeighBorhoodListUsersViewController: BasePopViewController {
+class NeighBorhoodEventListUsersViewController: BasePopViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
     
@@ -98,7 +98,7 @@ class NeighBorhoodListUsersViewController: BasePopViewController {
 }
 
 //MARK: - Tableview Datasource/delegate -
-extension NeighBorhoodListUsersViewController: UITableViewDataSource, UITableViewDelegate {
+extension NeighBorhoodEventListUsersViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSearch {
             return usersSearch.count + 1
@@ -160,7 +160,7 @@ extension NeighBorhoodListUsersViewController: UITableViewDataSource, UITableVie
 }
 
 //MARK: - NeighborhoodHomeSearchDelegate  -
-extension NeighBorhoodListUsersViewController: NeighborhoodHomeSearchDelegate {
+extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelegate {
     func goSearch(_ text: String?) {
         if let text = text, !text.isEmpty {
             if !isEvent {
@@ -191,7 +191,7 @@ extension NeighBorhoodListUsersViewController: NeighborhoodHomeSearchDelegate {
 }
 
 //MARK: - NeighborhoodUserCellDelegate -
-extension NeighBorhoodListUsersViewController:NeighborhoodUserCellDelegate {
+extension NeighBorhoodEventListUsersViewController:NeighborhoodUserCellDelegate {
     func showSendMessageToUserForPosition(_ position: Int) {
         //TODO: a faire
         Logger.print("***** show message from user pos : \(position)")
@@ -203,7 +203,7 @@ extension NeighBorhoodListUsersViewController:NeighborhoodUserCellDelegate {
 }
 
 //MARK: - MJNavBackViewDelegate -
-extension NeighBorhoodListUsersViewController: MJNavBackViewDelegate {
+extension NeighBorhoodEventListUsersViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.dismiss(animated: true)
     }

@@ -152,4 +152,87 @@ struct EventService:ParsingDataCodable {
             DispatchQueue.main.async { completion(events, nil) }
         }
     }
+    
+    static func getEventPostsPaging(id:Int, currentPage:Int, per:Int, completion: @escaping (_ post:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetEventPostsMessage
+        endpoint = String.init(format: endpoint,"\(id)", token, currentPage, per)
+        
+        Logger.print("***** url get post event message paging : \(endpoint)")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil,  error) }
+                return
+            }
+            
+            let posts:[PostMessage]? = self.parseDatas(data: data,key: "chat_messages")
+            DispatchQueue.main.async { completion(posts,nil) }
+        }
+    }
+    
+    static func getEventUsers(eventId:Int, completion: @escaping (_ users:[UserLightNeighborhood]?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetEventUsers
+        endpoint = String.init(format: endpoint,"\(eventId)", token)
+        
+        Logger.print("***** url get group event users : \(endpoint)")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            Logger.print("***** return get group event users : \(error)")
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil,  error) }
+                return
+            }
+            Logger.print("***** return get group event users : \(data)")
+            let users:[UserLightNeighborhood]? = self.parseDatas(data: data,key: "users")
+            DispatchQueue.main.async { completion(users,nil) }
+        }
+    }
+    
+    //MARK: - Join / Leave group
+    
+    static func joinEvent(eventId:Int,completion: @escaping (_ user:MemberLight?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIJoinEvent
+        endpoint = String.init(format: endpoint,"\(eventId)", token)
+        
+        Logger.print("Endpoint passed update event \(endpoint)")
+                
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
+            Logger.print("Response update event: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error update event - \(error)")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let user:MemberLight? = self.parseData(data: data,key: "user")
+            DispatchQueue.main.async { completion(user, nil) }
+        }
+    }
+    
+    static func leaveEvent(eventId:Int,userId:Int ,completion: @escaping (_ event:Event?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPILeaveEvent
+        endpoint = String.init(format: endpoint,"\(eventId)","\(userId)", token)
+        
+        Logger.print("Endpoint passed delete from event \(endpoint)")
+                
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
+            Logger.print("Response delete from event: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error update event - \(error)")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let event:Event? = self.parseData(data: data,key: "outing")
+            DispatchQueue.main.async { completion(event, nil) }
+        }
+    }
 }

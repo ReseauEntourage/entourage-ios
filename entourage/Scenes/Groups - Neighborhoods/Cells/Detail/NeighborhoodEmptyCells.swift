@@ -57,4 +57,12 @@ class NeighborhoodEmptyPostCell: UITableViewCell {
         ui_title?.text = "neighborhood_empty_post_title".localized
         ui_subtitle?.text = "neighborhood_empty_post_subtitle".localized
     }
+    
+    func populateCell(isEvent:Bool) {
+        if isEvent {
+            ui_title_section?.text = "event_detail_post_section_title".localized
+            ui_title?.text = "event_empty_post_title".localized
+            ui_subtitle?.text = "event_empty_post_subtitle".localized
+        }
+    }
 }

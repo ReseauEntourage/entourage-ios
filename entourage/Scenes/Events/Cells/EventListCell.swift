@@ -52,6 +52,6 @@ class EventListCell: UITableViewCell {
         
         ui_date.text = event.startDateTimeFormatted
         ui_location.text = event.addressName
-        ui_members?.text = event.membersCount ?? 1 > 1 ? String.init(format: "event_members_cell_list".localized, event.membersCount!) : String.init(format: "event_member_cell_list".localized, event.membersCount!)
+        ui_members?.text = event.membersCount ?? 0 > 1 ? String.init(format: "event_members_cell_list".localized, event.membersCount!) : String.init(format: "event_member_cell_list".localized, event.membersCount!)
     }
 }

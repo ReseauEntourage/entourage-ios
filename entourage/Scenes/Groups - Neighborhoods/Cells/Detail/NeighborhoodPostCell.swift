@@ -75,9 +75,9 @@ class NeighborhoodPostCell: UITableViewCell {
 
         }
         else {
-            let msg:String = message.commentsCount == 1 ? "neighborhood_post_1Comment".localized : "neighborhood_post_XComments".localized
+            let msg:String = message.commentsCount ?? 0 <= 1 ? "neighborhood_post_1Comment".localized : "neighborhood_post_XComments".localized
             
-            let attrStr = Utils.formatStringUnderline(textString: String.init(format: msg, message.commentsCount), textColor: .black, font: ApplicationTheme.getFontChampInput().font)
+            let attrStr = Utils.formatStringUnderline(textString: String.init(format: msg, message.commentsCount ?? 0), textColor: .black, font: ApplicationTheme.getFontChampInput().font)
             ui_comments_nb.attributedText = attrStr
         }
         

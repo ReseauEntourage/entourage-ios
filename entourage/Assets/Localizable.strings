@@ -787,6 +787,7 @@
 "event_members_cell_list" = "%d participants";
 "event_member_cell_list" = "%d participant";
 "event_group_title_list" = "Événements du groupe";
+"event_places_detail" = "%d places";
 
 /* Home Event*/
 "event_main_page_title" = "Événements";
@@ -797,3 +798,21 @@
 "event_event_discover_empty_title" = "Allez sur l’onglet découvir, et si aucun ne vous convient c’est l’occasion de créer un nouvel évènement ! ";
 "event_event_discover_empty_subtitle" = "Si aucun évènement de ce type n’existe, vous pouvez en créer un ! Ou élarigir votre zone de recherche ";
 
+"event_detail_button_participe_ON" = "Participe";
+"event_detail_button_participe_OFF" = "Participer";
+"event_detail_about_title" = "À savoir";
+"event_detail_post_section_title" = "Fil d’actualité";
+"event_detail_post_section_new_posts_title" = "Nouvelles publications";
+"event_detail_post_section_old_posts_title" = "Anciennes publications";
+
+"event_empty_post_title" = "Pas encore de publication sur cet événement";
+"event_empty_post_subtitle" = "C’est l’occasion pour vous de partager la première nouvelle pour lancer la discussion ! ";
+
+"event_users_title" = "Voir les participants";
+"event_userInput_search" = "Rechercher un participant de l'événement";
+
+//Pop leave event
+"params_leave_event_pop_title" = "Quitter l'événement'";
+"params_leave_event_pop_message" = "Souhaitez-vous quitter l'événement ?";
+"params_leave_event_pop_bt_quit" = "Quitter";
+"params_leave_event_pop_bt_cancel" = "Annuler";

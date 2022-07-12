@@ -202,7 +202,7 @@ struct NeighborhoodService:ParsingDataCodable {
     //MARK: - Join / Leave group
     
     
-    static func joinNeighborhood(groupId:Int,completion: @escaping (_ user:NeighborhoodUserLight?, _ error:EntourageNetworkError?) -> Void) {
+    static func joinNeighborhood(groupId:Int,completion: @escaping (_ user:MemberLight?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIJoinNeighborhood
         endpoint = String.init(format: endpoint,"\(groupId)", token)
@@ -217,7 +217,7 @@ struct NeighborhoodService:ParsingDataCodable {
                 return
             }
             
-            let user:NeighborhoodUserLight? = self.parseData(data: data,key: "user")
+            let user:MemberLight? = self.parseData(data: data,key: "user")
             DispatchQueue.main.async { completion(user, nil) }
         }
     }

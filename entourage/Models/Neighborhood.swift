@@ -15,9 +15,9 @@ struct Neighborhood:Codable {
     
     var address:Address? = nil
     var interests:[String]? = nil
-    var members:[NeighborhoodUserLight] = [NeighborhoodUserLight]()
+    var members:[MemberLight] = [MemberLight]()
     
-    var creator:NeighborhoodUserLight = NeighborhoodUserLight(uid: 0)
+    var creator:MemberLight = MemberLight(uid: 0)
     
     var aboutEthics:String? = nil
     var past_outings_count:Int = 0
@@ -121,77 +121,5 @@ struct NeighborhoodImage:Codable {
         case uid = "id"
         case title
         case imageUrl = "image_url"
-    }
-}
-
-//MARK: - NeighborhoodUserLight -
-struct NeighborhoodUserLight:Codable {
-    var uid:Int
-    var username:String?
-    var imageUrl:String?
-    
-    enum CodingKeys: String, CodingKey {
-        case uid = "id"
-        case username = "display_name"
-        case imageUrl = "avatar_url"
-    }
-}
-
-
-struct PostMessage:Codable {
-    var uid:Int = 0
-    var content:String? = ""
-    
-    var createdDate:Date {
-        get {
-            return Utils.getDateFromWSDateString(createdDateString)
-        }
-    }
-    var createdDateFormatted:String {
-        get {
-            return Utils.formatEventDate(date:createdDate)
-        }
-    }
-    
-    var createdDateTimeFormatted:String {
-        get {
-            return Utils.formatEventDateTime(date:createdDate)
-        }
-    }
-    
-    var isPostImage:Bool {
-        get {
-            return messageImageUrl != nil
-        }
-    }
-    
-    var createdDateString:String = ""
-    var messageType:String = ""
-    var parentPostId:Int? = nil
-    var hasComments:Bool? = false
-    var user:UserLightNeighborhood? = nil
-    var commentsCount:Int = 0
-    var messageImageUrl:String? = nil
-    
-    var isRetryMsg = false
-    
-    private var read:Bool? = nil
-    var isRead:Bool {
-        get {
-            return read ?? false
-        }
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case uid = "id"
-        case content
-        case user
-        case createdDateString = "created_at"
-        case messageType = "message_type"
-        case parentPostId = "post_id"
-        case hasComments = "has_comments"
-        case commentsCount = "comments_count"
-        case messageImageUrl = "image_url"
-        case read
     }
 }

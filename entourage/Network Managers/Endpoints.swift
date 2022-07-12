@@ -66,6 +66,10 @@ let kAPIEventGetAllForUser = "users/%@/outings?token=%@&page=%d&per=%d"
 let kAPIEventGetAllForMe = "users/me/outings?token=%@&page=%d&per=%d"
 let kAPIEventEdit = "outings/%d?token=%@"
 let kAPIEventGetAllForNeighborhood = "neighborhoods/%d/outings?token=%@"
+let kAPIGetEventPostsMessage = "outings/%@/chat_messages?token=%@&page=%d&per=%d"
+let kAPIJoinEvent = "outings/%@/users?token=%@"
+let kAPILeaveEvent = "outings/%@/users/%@?token=%@"
+let kAPIGetEventUsers = "outings/%@/users?token=%@"
 
 //WebLink
 let emailContact = "contact@entourage.social"

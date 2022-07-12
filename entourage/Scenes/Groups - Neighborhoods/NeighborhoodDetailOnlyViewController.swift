@@ -57,7 +57,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
             NeighborhoodService.joinNeighborhood(groupId: neighborhood.uid) { user, error in
                 IHProgressHUD.dismiss()
                 if let user = user {
-                    let member = NeighborhoodUserLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
+                    let member = MemberLight.init(uid: user.uid, username: user.username, imageUrl: user.imageUrl)
                     self.neighborhood?.members.append(member)
                     let count:Int = self.neighborhood?.membersCount != nil ? self.neighborhood!.membersCount + 1 : 1
                     
@@ -152,7 +152,7 @@ extension NeighborhoodDetailOnlyViewController: UITableViewDataSource, UITableVi
 //MARK: - NeighborhoodDetailTopCellDelegate -
 extension NeighborhoodDetailOnlyViewController: NeighborhoodDetailTopCellDelegate {
     func showMembers() {
-        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodListUsersViewController {
+        if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
             vc.neighborhood = neighborhood
             self.navigationController?.present(navVC, animated: true)
         }
