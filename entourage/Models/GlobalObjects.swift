@@ -37,7 +37,6 @@ struct PostMessage:Codable {
     }
     
     var createdDateString:String = ""
-    var messageType:String = ""
     var parentPostId:Int? = nil
     var hasComments:Bool? = false
     var user:UserLightNeighborhood? = nil
@@ -58,7 +57,6 @@ struct PostMessage:Codable {
         case content
         case user
         case createdDateString = "created_at"
-        case messageType = "message_type"
         case parentPostId = "post_id"
         case hasComments = "has_comments"
         case commentsCount = "comments_count"
