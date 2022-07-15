@@ -560,7 +560,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZZc-qk-rcm">
-                                <rect key="frame" x="4" y="0.0" width="406" height="896"/>
+                                <rect key="frame" x="4" y="112" width="406" height="784"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AAo-uy-Crg" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
@@ -576,22 +576,23 @@
                         <color key="backgroundColor" name="BeigeClair"/>
                         <constraints>
                             <constraint firstItem="ZZc-qk-rcm" firstAttribute="leading" secondItem="GUx-hO-AQy" secondAttribute="leading" constant="4" id="EVn-Ne-Q7s"/>
+                            <constraint firstItem="ZZc-qk-rcm" firstAttribute="top" secondItem="AAo-uy-Crg" secondAttribute="bottom" id="FSx-od-Uag"/>
                             <constraint firstItem="GUx-hO-AQy" firstAttribute="trailing" secondItem="AAo-uy-Crg" secondAttribute="trailing" id="Kre-VI-8Tm"/>
                             <constraint firstItem="ZZc-qk-rcm" firstAttribute="bottom" secondItem="FPv-Hh-wy2" secondAttribute="bottom" id="W15-Ml-IQy"/>
                             <constraint firstItem="AAo-uy-Crg" firstAttribute="leading" secondItem="FPv-Hh-wy2" secondAttribute="leading" id="bNY-92-erc"/>
                             <constraint firstItem="GUx-hO-AQy" firstAttribute="trailing" secondItem="ZZc-qk-rcm" secondAttribute="trailing" constant="4" id="lby-La-avi"/>
-                            <constraint firstItem="ZZc-qk-rcm" firstAttribute="top" secondItem="FPv-Hh-wy2" secondAttribute="top" id="m1Q-GH-4pQ"/>
                             <constraint firstItem="AAo-uy-Crg" firstAttribute="top" secondItem="GUx-hO-AQy" secondAttribute="top" id="mlC-AZ-77c"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ge5-gB-ofa"/>
                     <connections>
+                        <outlet property="ui_tableview" destination="ZZc-qk-rcm" id="4ef-w2-nhQ"/>
                         <outlet property="ui_top_view" destination="AAo-uy-Crg" id="s9w-Nl-Rtv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIz-7n-Miu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="987" y="702"/>
+            <point key="canvasLocation" x="986.95652173913049" y="701.78571428571422"/>
         </scene>
         <!--Base Full Screen Nav View Controller-->
         <scene sceneID="UPH-y8-OLW">

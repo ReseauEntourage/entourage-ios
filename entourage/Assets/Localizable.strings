@@ -805,14 +805,26 @@
 "event_detail_post_section_new_posts_title" = "Nouvelles publications";
 "event_detail_post_section_old_posts_title" = "Anciennes publications";
 
+"event_time_detail_full" = "De %@ à %@";
+"event_places_detail_full" = "Nombre de places limitées : %d";
+"event_created_full" = "Crée le %@";
+"event_updated_full" = "Modifié le %@";
+
 "event_empty_post_title" = "Pas encore de publication sur cet événement";
 "event_empty_post_subtitle" = "C’est l’occasion pour vous de partager la première nouvelle pour lancer la discussion ! ";
 
 "event_users_title" = "Voir les participants";
 "event_userInput_search" = "Rechercher un participant de l'événement";
 
+"event_detail_full_title" = "À propos de l'événement";
+
+"event_detail_groups_title" = "Groupes associés :";
+"event_detail_group_title" = "Groupe associé :";
+"event_detail_cats_title" = "Catégories :";
+"event_detail_cat_title" = "Catégorie :";
+
 //Pop leave event
-"params_leave_event_pop_title" = "Quitter l'événement'";
+"params_leave_event_pop_title" = "Quitter l'événement";
 "params_leave_event_pop_message" = "Souhaitez-vous quitter l'événement ?";
 "params_leave_event_pop_bt_quit" = "Quitter";
 "params_leave_event_pop_bt_cancel" = "Annuler";

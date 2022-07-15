@@ -1050,7 +1050,7 @@
                                                                             </constraints>
                                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
-                                                                            <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="name"/>
+                                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="done" smartQuotesType="no" textContentType="url"/>
                                                                         </textField>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqf-kP-Shs">
                                                                             <rect key="frame" x="28" y="68" width="291" height="1"/>

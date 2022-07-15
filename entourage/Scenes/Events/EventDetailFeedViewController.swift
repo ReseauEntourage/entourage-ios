@@ -75,13 +75,8 @@ class EventDetailFeedViewController: UIViewController {
             showCreatePost()
             isShowCreatePost = false
         }
-        //Notif for updating neighborhood infos
+        //Notif for updating event infos
         NotificationCenter.default.addObserver(self, selector: #selector(updateEvent), name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
     }
     
     func registerCellsNib() {
@@ -155,7 +150,7 @@ class EventDetailFeedViewController: UIViewController {
     }
     
     @objc func updateEvent() {
-        getEventDetail()
+        getEventDetail(hasToRefreshLists: true)
     }
     
     deinit {
@@ -164,7 +159,7 @@ class EventDetailFeedViewController: UIViewController {
     
     
     //MARK: -Network
-    func getEventDetail(hasToRefreshLists:Bool = false) {
+    @objc func getEventDetail(hasToRefreshLists:Bool = false) {
         self.currentPagingPage = 1
         self.isLoading = true
         EventService.getEventWithId(eventId) { event, error in

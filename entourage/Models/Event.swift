@@ -38,6 +38,23 @@ struct Event:Codable {
     var members:[MemberLight]? = nil
     
     var status = ""
+    private var createdAt:String? = nil
+    private var updatedAt:String? = nil
+    
+    func getCreateUpdateDate() -> (dateStr:String,isCreated:Bool) {
+        var date:Date? = nil
+        var isCreated = true
+        
+        let createdDate = Utils.getDateFromWSDateString(createdAt)
+        let updateDate = Utils.getDateFromWSDateString(updatedAt)
+        
+        isCreated = createdDate == updateDate
+        date = isCreated ?  createdDate : updateDate
+        
+        let dateStr = Utils.formatEventDateName(date: date)
+        
+        return (dateStr,isCreated)
+    }
     
     private var recurrency:Int? = nil
     private var _recurrence:EventRecurrence = .once
@@ -99,6 +116,12 @@ struct Event:Codable {
     var startTimeFormatted:String {
         get {
             return  Utils.formatEventTime(date: Utils.getDateFromWSDateString(metadata?.starts_at))
+        }
+    }
+    
+    var endTimeFormatted:String {
+        get {
+            return  Utils.formatEventTime(date: Utils.getDateFromWSDateString(metadata?.ends_at))
         }
     }
     
@@ -166,6 +189,8 @@ struct Event:Codable {
         case isMember = "member"
         case status
         case posts
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
     
     func dictionaryForWS() -> [String:Any] {
@@ -386,6 +411,19 @@ enum EventRecurrence: Int {
     case week = 2
     case every2Weeks = 3
     case month = 4
+    
+    func getDescription() -> String {
+        switch self {
+        case .once:
+            return "recurrence_once".localized
+        case .week:
+            return "recurrence_week".localized
+        case .every2Weeks:
+            return "recurrence_every2Weeks".localized
+        case .month:
+            return "recurrence_month".localized
+        }
+    }
 }
 
 //MARK: - Event for editing -

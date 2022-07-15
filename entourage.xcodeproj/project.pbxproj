@@ -304,6 +304,14 @@
 		02F5FEC527E0CB6800A14313 /* MJAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02F5FEC327E0CB6800A14313 /* MJAlertController.xib */; };
 		02FB543D287D74B800E4B9FA /* GlobalObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB543C287D74B800E4B9FA /* GlobalObjects.swift */; };
 		02FB543F287DAE4C00E4B9FA /* EventDetailFullFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB543E287DAE4C00E4B9FA /* EventDetailFullFeedViewController.swift */; };
+		02FB5444287DC01200E4B9FA /* EventDetailFullCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB5442287DC01200E4B9FA /* EventDetailFullCell.swift */; };
+		02FB5445287DC01200E4B9FA /* EventDetailFullCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FB5443287DC01200E4B9FA /* EventDetailFullCell.xib */; };
+		02FB5448287DC11100E4B9FA /* EventDetailFullGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB5446287DC11100E4B9FA /* EventDetailFullGroupCell.swift */; };
+		02FB5449287DC11100E4B9FA /* EventDetailFullGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FB5447287DC11100E4B9FA /* EventDetailFullGroupCell.xib */; };
+		02FB544E287DC14000E4B9FA /* EventDetailFullInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB544C287DC14000E4B9FA /* EventDetailFullInterestCell.swift */; };
+		02FB544F287DC14000E4B9FA /* EventDetailFullInterestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FB544D287DC14000E4B9FA /* EventDetailFullInterestCell.xib */; };
+		02FB5454287DC38300E4B9FA /* EventDetailFullGroupTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB5452287DC38300E4B9FA /* EventDetailFullGroupTitleCell.swift */; };
+		02FB5455287DC38300E4B9FA /* EventDetailFullGroupTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FB5453287DC38300E4B9FA /* EventDetailFullGroupTitleCell.xib */; };
 		02FCB537281BDD2600682E61 /* NeighborhoodDetailTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCB536281BDD2600682E61 /* NeighborhoodDetailTopCell.swift */; };
 		02FCC3152812DD9200578407 /* NeighborhoodHomeSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCC3142812DD9200578407 /* NeighborhoodHomeSearchCell.swift */; };
 		02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */; };
@@ -603,6 +611,14 @@
 		02F5FEC327E0CB6800A14313 /* MJAlertController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertController.xib; sourceTree = "<group>"; };
 		02FB543C287D74B800E4B9FA /* GlobalObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalObjects.swift; sourceTree = "<group>"; };
 		02FB543E287DAE4C00E4B9FA /* EventDetailFullFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailFullFeedViewController.swift; sourceTree = "<group>"; };
+		02FB5442287DC01200E4B9FA /* EventDetailFullCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailFullCell.swift; sourceTree = "<group>"; };
+		02FB5443287DC01200E4B9FA /* EventDetailFullCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailFullCell.xib; sourceTree = "<group>"; };
+		02FB5446287DC11100E4B9FA /* EventDetailFullGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailFullGroupCell.swift; sourceTree = "<group>"; };
+		02FB5447287DC11100E4B9FA /* EventDetailFullGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailFullGroupCell.xib; sourceTree = "<group>"; };
+		02FB544C287DC14000E4B9FA /* EventDetailFullInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailFullInterestCell.swift; sourceTree = "<group>"; };
+		02FB544D287DC14000E4B9FA /* EventDetailFullInterestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailFullInterestCell.xib; sourceTree = "<group>"; };
+		02FB5452287DC38300E4B9FA /* EventDetailFullGroupTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailFullGroupTitleCell.swift; sourceTree = "<group>"; };
+		02FB5453287DC38300E4B9FA /* EventDetailFullGroupTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDetailFullGroupTitleCell.xib; sourceTree = "<group>"; };
 		02FCB536281BDD2600682E61 /* NeighborhoodDetailTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodDetailTopCell.swift; sourceTree = "<group>"; };
 		02FCC3142812DD9200578407 /* NeighborhoodHomeSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodHomeSearchCell.swift; sourceTree = "<group>"; };
 		02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodHomeGroupCell.swift; sourceTree = "<group>"; };
@@ -1295,6 +1311,14 @@
 				02E0EFA228787082009B2C65 /* EventDetailTopFullCell.xib */,
 				02E0EFA52878709D009B2C65 /* EventDetailTopLightCell.swift */,
 				02E0EFA62878709D009B2C65 /* EventDetailTopLightCell.xib */,
+				02FB5442287DC01200E4B9FA /* EventDetailFullCell.swift */,
+				02FB5443287DC01200E4B9FA /* EventDetailFullCell.xib */,
+				02FB5446287DC11100E4B9FA /* EventDetailFullGroupCell.swift */,
+				02FB5447287DC11100E4B9FA /* EventDetailFullGroupCell.xib */,
+				02FB544C287DC14000E4B9FA /* EventDetailFullInterestCell.swift */,
+				02FB544D287DC14000E4B9FA /* EventDetailFullInterestCell.xib */,
+				02FB5452287DC38300E4B9FA /* EventDetailFullGroupTitleCell.swift */,
+				02FB5453287DC38300E4B9FA /* EventDetailFullGroupTitleCell.xib */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1425,6 +1449,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02FB5455287DC38300E4B9FA /* EventDetailFullGroupTitleCell.xib in Resources */,
 				025C92BE28340FD4000970D9 /* NeighborhoodEmptyEventCell.xib in Resources */,
 				02CCE67F27D78CAB00D6976C /* NunitoSans-Italic.ttf in Resources */,
 				02B94C34284F92AD006059EF /* HomeActionTeachCell.xib in Resources */,
@@ -1449,11 +1474,14 @@
 				02A3DD3127FDC03B0060EC2E /* Neighborhood.xcassets in Resources */,
 				02B94C30284F9277006059EF /* HomeSectionCell.xib in Resources */,
 				025FFE0927DB980600783E8D /* Main.storyboard in Resources */,
+				02FB5445287DC01200E4B9FA /* EventDetailFullCell.xib in Resources */,
 				029E307B27DB5EF300B12357 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
+				02FB544F287DC14000E4B9FA /* EventDetailFullInterestCell.xib in Resources */,
 				020AF5E92860B10C0012AE60 /* HomeCongratPopupViewController.xib in Resources */,
 				02846CC227ECBC2B00D85ADA /* Interests.xcassets in Resources */,
 				02C91A25278F2B4F00305E0B /* Intro.storyboard in Resources */,
 				025C92BC28340F7D000970D9 /* NeighborhoodDetailTopCell.xib in Resources */,
+				02FB5449287DC11100E4B9FA /* EventDetailFullGroupCell.xib in Resources */,
 				02CCE67427D78C7100D6976C /* Montserrat-Bold.ttf in Resources */,
 				02CCE67E27D78CAB00D6976C /* NunitoSans-Regular.ttf in Resources */,
 				029BD4F727EDC45E00AE67AF /* MJNavBackView.xib in Resources */,
@@ -1587,6 +1615,7 @@
 				02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */,
 				02B7922727F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift in Sources */,
 				02F5278127999A8C00929431 /* MainGuideViewController.swift in Sources */,
+				02FB5454287DC38300E4B9FA /* EventDetailFullGroupTitleCell.swift in Sources */,
 				024131DD2863622600561FB4 /* GrowingTextview.swift in Sources */,
 				02E069E9279184B3006DB1B6 /* OTOnboardingAssoInfoViewController.swift in Sources */,
 				02E069E3279184B3006DB1B6 /* OTOnboardingEmailPwdViewController.swift in Sources */,
@@ -1594,6 +1623,7 @@
 				02728DDD27F19A3800512DC0 /* PartnerDetailInfoCell.swift in Sources */,
 				02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */,
 				02A3DD3527FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift in Sources */,
+				02FB5448287DC11100E4B9FA /* EventDetailFullGroupCell.swift in Sources */,
 				02D64F4B2799CA6800F6C4BD /* CustomAnnotation.swift in Sources */,
 				0268C24F285A2B1400294055 /* FloatyWindow.swift in Sources */,
 				02681952278DF6CA00A98A4A /* OTCustomTextfield.swift in Sources */,
@@ -1658,6 +1688,7 @@
 				021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */,
 				02E069E1279184B3006DB1B6 /* OTOnboardingPlaceViewController.swift in Sources */,
 				026819BF278E105600A98A4A /* OTLoginNextViewController.swift in Sources */,
+				02FB5444287DC01200E4B9FA /* EventDetailFullCell.swift in Sources */,
 				025D8766278DEC2100909101 /* Extensions.swift in Sources */,
 				02E069DE279184B3006DB1B6 /* OTOnboardingV2StartViewController.swift in Sources */,
 				022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */,
@@ -1695,6 +1726,7 @@
 				02B94C37284F9FB3006059EF /* HomeHelpCell.swift in Sources */,
 				02C6E86F28203E1F009D4289 /* ReportGroupSendViewController.swift in Sources */,
 				02E77B44282CF9CF00786E27 /* Event.swift in Sources */,
+				02FB544E287DC14000E4B9FA /* EventDetailFullInterestCell.swift in Sources */,
 				02833F9A2822A9F600000156 /* NeighBorhoodEventListUsersViewController.swift in Sources */,
 				029638F3286C58D900E10EFB /* EventShareCell.swift in Sources */,
 				02E854502865C60A0012D941 /* EventService.swift in Sources */,
