@@ -23,6 +23,12 @@ class EventDetailFeedViewController: UIViewController {
     @IBOutlet weak var ui_view_button_settings: UIView!
     @IBOutlet weak var ui_floaty_button: UIButton!
     
+    //To show/hide button join on scroll
+    @IBOutlet weak var ui_title_bt_join: UILabel!
+    @IBOutlet weak var ui_bt_floating_join: UIView!
+    let addHeight:CGFloat = ApplicationTheme.iPhoneHasNotch() ? 0 : 20
+    var minTopScrollHeight:CGFloat = 120
+    
     //Use to strech header
     let maxViewHeight:CGFloat = 150
     var minViewHeight:CGFloat = 80//70 + 19
@@ -51,6 +57,8 @@ class EventDetailFeedViewController: UIViewController {
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         
+        minTopScrollHeight = minTopScrollHeight + addHeight
+        
         self.addShadowAndRadius(customView: ui_view_button_settings)
         self.addShadowAndRadius(customView: ui_view_button_back)
         
@@ -65,7 +73,8 @@ class EventDetailFeedViewController: UIViewController {
         setupViews()
         
         ui_floaty_button.isHidden = true
-        
+        ui_bt_floating_join.isHidden = true
+
         getEventDetail()
     }
     
@@ -122,6 +131,10 @@ class EventDetailFeedViewController: UIViewController {
         pullRefreshControl.addTarget(self, action: #selector(refreshEvent), for: .valueChanged)
         ui_tableview.refreshControl = pullRefreshControl
         
+        ui_bt_floating_join.layer.cornerRadius = ui_bt_floating_join.frame.height / 2
+        ui_title_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
+        ui_title_bt_join.text = "event_detail_button_participe_OFF".localized
+        
         populateTopView()
     }
     
@@ -140,6 +153,8 @@ class EventDetailFeedViewController: UIViewController {
         
         self.ui_label_title_event.text = self.event?.title
         self.ui_floaty_button?.isHidden = self.event?.isMember ?? false ? false : true
+        
+        self.ui_bt_floating_join.isHidden = true
     }
     
     
@@ -307,6 +322,10 @@ class EventDetailFeedViewController: UIViewController {
         }
     }
     
+    @IBAction func action_join(_ sender: Any) {
+        joinLeaveEvent()
+    }
+    
     @IBAction func action_create_post(_ sender: Any) {
         showCreatePost()
     }
@@ -459,6 +478,16 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             let yView = self.viewNormalHeight - (scrollView.contentOffset.y + self.viewNormalHeight)
             let heightView = min(max (yView,self.minViewHeight),self.maxViewHeight)
             self.ui_view_height_constraint.constant = heightView
+            
+            //To show/hide button join on scroll
+            if !(self.event!.isMember ?? false) {
+                if scrollView.contentOffset.y >= self.minTopScrollHeight {
+                    self.ui_bt_floating_join.isHidden = false
+                }
+                else {
+                    self.ui_bt_floating_join.isHidden = true
+                }
+            }
             
             self.view.layoutIfNeeded()
         }

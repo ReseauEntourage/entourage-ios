@@ -10,6 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="NunitoSans-Bold.ttf">
+            <string>NunitoSans-Bold</string>
+        </array>
         <array key="NunitoSans-Regular.ttf">
             <string>NunitoSans-Regular</string>
         </array>
@@ -502,6 +505,49 @@
                                     <action selector="action_create_post:" destination="1Sc-VH-DcS" eventType="touchUpInside" id="yVs-cu-cl5"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0g5-JR-O6f">
+                                <rect key="frame" x="137" y="778" width="140" height="44"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="754" image="ic_plus_white" translatesAutoresizingMaskIntoConstraints="NO" id="UFe-mo-njg">
+                                        <rect key="frame" x="101" y="12.5" width="19" height="19"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Participer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dU6-tE-a8d">
+                                        <rect key="frame" x="20" y="12" width="73" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xkn-j7-mUh">
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="ttx-hJ-AUe"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="18"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="action_join:" destination="1Sc-VH-DcS" eventType="touchUpInside" id="wNe-xl-9Vs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="orange_app"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="8aN-Y8-j3s"/>
+                                    <constraint firstAttribute="trailing" secondItem="UFe-mo-njg" secondAttribute="trailing" constant="20" id="9F7-A8-xgR"/>
+                                    <constraint firstAttribute="height" constant="44" id="CO1-xk-4GS"/>
+                                    <constraint firstItem="UFe-mo-njg" firstAttribute="leading" secondItem="dU6-tE-a8d" secondAttribute="trailing" constant="8" id="Gl5-kF-FB4"/>
+                                    <constraint firstItem="Xkn-j7-mUh" firstAttribute="leading" secondItem="0g5-JR-O6f" secondAttribute="leading" id="PCf-gc-Hdn"/>
+                                    <constraint firstItem="Xkn-j7-mUh" firstAttribute="top" secondItem="0g5-JR-O6f" secondAttribute="top" id="PDe-XP-Fwh"/>
+                                    <constraint firstAttribute="bottom" secondItem="Xkn-j7-mUh" secondAttribute="bottom" id="PXO-Zc-a1R"/>
+                                    <constraint firstItem="UFe-mo-njg" firstAttribute="centerY" secondItem="0g5-JR-O6f" secondAttribute="centerY" id="aRe-H8-TCN"/>
+                                    <constraint firstItem="dU6-tE-a8d" firstAttribute="leading" secondItem="0g5-JR-O6f" secondAttribute="leading" constant="20" id="gkd-YO-TZC"/>
+                                    <constraint firstItem="dU6-tE-a8d" firstAttribute="centerY" secondItem="0g5-JR-O6f" secondAttribute="centerY" id="tt3-de-arY"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xkn-j7-mUh" secondAttribute="trailing" id="uZ2-sZ-RzJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h8q-3a-IrB"/>
                         <color key="backgroundColor" name="Beige"/>
@@ -517,7 +563,9 @@
                             <constraint firstItem="h8q-3a-IrB" firstAttribute="trailing" secondItem="vYp-09-kV0" secondAttribute="trailing" constant="4" id="K8q-fv-P3z"/>
                             <constraint firstItem="keO-la-aOU" firstAttribute="top" secondItem="h8q-3a-IrB" secondAttribute="top" id="RRc-gM-NYG"/>
                             <constraint firstItem="s64-Vk-nq7" firstAttribute="bottom" secondItem="tG7-Gh-1Qg" secondAttribute="bottom" id="UPK-1g-gcY"/>
+                            <constraint firstItem="h8q-3a-IrB" firstAttribute="bottom" secondItem="0g5-JR-O6f" secondAttribute="bottom" constant="40" id="WJE-V1-T0K"/>
                             <constraint firstItem="b8a-81-v78" firstAttribute="leading" secondItem="2TO-pb-TzV" secondAttribute="leading" constant="21" id="WrQ-ua-Bzj"/>
+                            <constraint firstItem="0g5-JR-O6f" firstAttribute="centerX" secondItem="2TO-pb-TzV" secondAttribute="centerX" id="b8G-KI-3hA"/>
                             <constraint firstItem="WNs-CT-aUo" firstAttribute="top" secondItem="2TO-pb-TzV" secondAttribute="top" id="bEg-Qk-XII"/>
                             <constraint firstItem="vYp-09-kV0" firstAttribute="bottom" secondItem="2TO-pb-TzV" secondAttribute="bottom" id="bcf-xO-HES"/>
                             <constraint firstItem="vYp-09-kV0" firstAttribute="top" secondItem="2TO-pb-TzV" secondAttribute="top" id="dcN-gZ-9Wr"/>
@@ -534,12 +582,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="kgh-xa-f0g"/>
                     <connections>
+                        <outlet property="ui_bt_floating_join" destination="0g5-JR-O6f" id="xp6-EQ-Cft"/>
                         <outlet property="ui_floaty_button" destination="ztL-RH-rC0" id="gHn-Jm-g8s"/>
                         <outlet property="ui_iv_event" destination="CUf-aQ-xDD" id="y0o-sI-jB0"/>
                         <outlet property="ui_iv_event2" destination="WNs-CT-aUo" id="pq6-8v-dIN"/>
                         <outlet property="ui_iv_event_mini" destination="cq7-SG-lLc" id="6ne-7u-nzz"/>
                         <outlet property="ui_label_title_event" destination="ZjM-xa-6I3" id="S2D-BO-7as"/>
                         <outlet property="ui_tableview" destination="vYp-09-kV0" id="JcX-cO-8yN"/>
+                        <outlet property="ui_title_bt_join" destination="dU6-tE-a8d" id="u8b-Dc-OhY"/>
                         <outlet property="ui_top_view" destination="keO-la-aOU" id="DvQ-Fl-zDo"/>
                         <outlet property="ui_view_button_back" destination="b8a-81-v78" id="BBI-5w-v4X"/>
                         <outlet property="ui_view_button_settings" destination="s64-Vk-nq7" id="16m-Dx-c8f"/>
@@ -638,6 +688,7 @@
         <image name="ic_button_plus_fill" width="70" height="70"/>
         <image name="ic_event_top_mini" width="130" height="126"/>
         <image name="ic_location_white" width="14" height="14"/>
+        <image name="ic_plus_white" width="19" height="19"/>
         <image name="ic_settings" width="33" height="33"/>
         <image name="img_neighb_valid_group" width="23" height="19"/>
         <image name="my_profile_header" width="392" height="416"/>
