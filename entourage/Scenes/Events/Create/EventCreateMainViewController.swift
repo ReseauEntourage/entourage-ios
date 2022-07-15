@@ -292,13 +292,13 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
         self.isGroupSharing = isSharing
         _ = checkValidation()
     }
-    func addShareGroups(groupIds:[Int]?) {
-        if let groupIds = groupIds {
-            newEvent.neiborhoodIds = [Int]()
-            newEvent.neiborhoodIds?.append(contentsOf: groupIds)
+    func addShareGroups(groups:[EventNeighborhood]?) {
+        if let groups = groups {
+            newEvent.neighborhoods = [EventNeighborhood]()
+            newEvent.neighborhoods?.append(contentsOf: groups)
         }
         else {
-            newEvent.neiborhoodIds = [Int]()
+            newEvent.neighborhoods = [EventNeighborhood]()
         }
         _ = checkValidation()
     }
@@ -375,7 +375,7 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
         case 5:
             if isGroupSharing {
                 
-                if newEvent.neiborhoodIds?.count ?? 0 > 0 {
+                if newEvent.neighborhoods?.count ?? 0 > 0 {
                     isValid = true
                 }
             }
@@ -449,7 +449,7 @@ protocol EventCreateMainDelegate: AnyObject {
     
     //Phase 5
     func addShare(_ isSharing:Bool)
-    func addShareGroups(groupIds:[Int]?)
+    func addShareGroups(groups:[EventNeighborhood]?)
     
     func getNeighborhoodId() -> Int?
     //Use for edition

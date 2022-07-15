@@ -29,7 +29,7 @@ struct Event:Codable {
     var interests:[String]? = nil
     var tagOtherMessage:String? = nil
     
-    var neiborhoodIds:[Int]? = nil
+    var neighborhoods:[EventNeighborhood]? = nil
     
     var membersCount:Int? = nil
     
@@ -180,7 +180,7 @@ struct Event:Codable {
         case metadata
         
         case interests
-        case neiborhoodIds = "neighborhood_ids"
+        case neighborhoods
         case imageId = "entourage_image_id"
         
         case recurrency
@@ -242,8 +242,12 @@ struct Event:Codable {
             dict["online"] = false
         }
         
-        if let neiborhoodIds = neiborhoodIds, neiborhoodIds.count > 0 {
-            dict["neighborhood_ids"] = neiborhoodIds
+        if let neighborhoods = neighborhoods, neighborhoods.count > 0 {
+            var _ids = [Int]()
+            for neighborhood in neighborhoods {
+                _ids.append(neighborhood.id)
+            }
+            dict["neighborhood_ids"] = _ids
         }
         
         switch recurrence {
@@ -426,6 +430,16 @@ enum EventRecurrence: Int {
     }
 }
 
+struct EventNeighborhood:Codable {
+    var id:Int
+    var name:String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+    }
+}
+
 //MARK: - Event for editing -
 struct EventEditing {
     var uid:Int = 0
@@ -443,7 +457,7 @@ struct EventEditing {
     var interests:[String]? = nil
     var tagOtherMessage:String? = nil
     
-    var neiborhoodIds:[Int]? = nil
+    var neighborhoods:[EventNeighborhood]? = nil
     
     var recurrence:EventRecurrence? = nil
     
@@ -502,8 +516,12 @@ struct EventEditing {
             dict["interests"] = interests
         }
         
-        if let neiborhoodIds = neiborhoodIds {
-            dict["neighborhood_ids"] = neiborhoodIds
+        if let neighborhoods = neighborhoods, neighborhoods.count > 0 {
+            var _ids = [Int]()
+            for neighborhood in neighborhoods {
+                _ids.append(neighborhood.id)
+            }
+            dict["neighborhood_ids"] = _ids
         }
 
         if let tagOtherMessage = tagOtherMessage {

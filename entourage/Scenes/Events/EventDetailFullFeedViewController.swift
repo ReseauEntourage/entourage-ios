@@ -29,7 +29,7 @@ class EventDetailFullFeedViewController: UIViewController {
         
         registerCellsNib()
         
-        if event?.neiborhoodIds?.count ?? 0 > 0 {
+        if event?.neighborhoods?.count ?? 0 > 0 {
             hasGroup = true
         }
     }
@@ -81,7 +81,7 @@ extension EventDetailFullFeedViewController: UITableViewDataSource, UITableViewD
             case 0,2:
                 return 1
             default:
-                return event!.neiborhoodIds!.count + 1
+                return event!.neighborhoods!.count + 1
             }
         }
         return 1
@@ -99,13 +99,13 @@ extension EventDetailFullFeedViewController: UITableViewDataSource, UITableViewD
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailFullGroupTitleCell.identifier, for: indexPath) as! EventDetailFullGroupTitleCell
                 
-                cell.populate(nbOfGroups: event?.neiborhoodIds?.count ?? 1)
+                cell.populate(nbOfGroups: event?.neighborhoods?.count ?? 1)
                 
                 return cell
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailFullGroupCell.identifier, for: indexPath) as! EventDetailFullGroupCell
             
-            cell.populateCell(title: "\(event!.neiborhoodIds![indexPath.row - 1])")
+            cell.populateCell(title: event!.neighborhoods![indexPath.row - 1].name)
             
             return cell
         }
@@ -117,7 +117,7 @@ extension EventDetailFullFeedViewController: UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if hasGroup && indexPath.section == 1 && indexPath.row > 0 {
-            let neighId = event!.neiborhoodIds![indexPath.row - 1]
+            let neighId = event!.neighborhoods![indexPath.row - 1].id
             let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
             if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
                 vc.isAfterCreation = false

@@ -39,7 +39,7 @@ class EventCreatePhase5ViewController: UIViewController {
         
         if pageDelegate?.isEdit() ?? false {
             currentEvent = pageDelegate?.getCurrentEvent()
-            if currentEvent?.neiborhoodIds?.count ?? 0 > 0 {
+            if currentEvent?.neighborhoods?.count ?? 0 > 0 {
                 isSharing = true
             }
         }
@@ -62,11 +62,11 @@ class EventCreatePhase5ViewController: UIViewController {
             if let groups = groups {
                 self.groups = groups
                 
-                if let _groups = self.currentEvent?.neiborhoodIds {
-                    for _groupId in _groups {
+                if let _groups = self.currentEvent?.neighborhoods {
+                    for _group in _groups {
                         var  i = 0
                         for groupNew in self.groups {
-                            if groupNew.uid == _groupId {
+                            if groupNew.uid == _group.id {
                                 self.groups[i].isSelected = true
                                 break
                             }
@@ -95,10 +95,10 @@ class EventCreatePhase5ViewController: UIViewController {
     }
     
     func updateNeighborhoodSelection() {
-        var groupsId = [Int]()
+        var groupsId = [EventNeighborhood]()
         groups.forEach { group in
             if group.isSelected {
-                groupsId.append(group.uid)
+                groupsId.append(EventNeighborhood(id: group.uid, name: "-"))
             }
         }
         if groupsId.count > 0 {
@@ -106,7 +106,7 @@ class EventCreatePhase5ViewController: UIViewController {
             pageDelegate?.addShare(isSharing)
         }
         
-        pageDelegate?.addShareGroups(groupIds: groupsId)
+        pageDelegate?.addShareGroups(groups: groupsId)
     }
 }
 //MARK: - UITableView datasource / Delegate -
@@ -155,7 +155,7 @@ extension EventCreatePhase5ViewController: EventShareCellDelegate {
             groups[$0].isSelected = false
         }
         pageDelegate?.addShare(isSharing)
-        pageDelegate?.addShareGroups(groupIds: nil)
+        pageDelegate?.addShareGroups(groups: nil)
         
         self.ui_tableview.reloadData()
     }

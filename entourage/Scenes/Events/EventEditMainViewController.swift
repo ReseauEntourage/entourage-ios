@@ -46,7 +46,7 @@ class EventEditMainViewController: UIViewController {
     var newPlace_limit:Int? = nil
     
     var newInterests:[String]? = nil
-    var newNeiborhoodIds:[Int]? = nil
+    var newNeighborhoods:[EventNeighborhood]? = nil
     
     var newInterestTagOtherMessage:String? = nil
     var newTags:Tags? = nil
@@ -252,7 +252,7 @@ class EventEditMainViewController: UIViewController {
         newEvent.endDate = newEndDate
         
         newEvent.interests = newInterests
-        newEvent.neiborhoodIds = newNeiborhoodIds
+        newEvent.neighborhoods = newNeighborhoods
         newEvent.tagOtherMessage = newInterestTagOtherMessage
         
         return newEvent
@@ -359,13 +359,13 @@ extension EventEditMainViewController: EventCreateMainDelegate {
         self.isGroupSharing = isSharing
         _ = checkValidation()
     }
-    func addShareGroups(groupIds:[Int]?) {
-        if let groupIds = groupIds {
-            newNeiborhoodIds = [Int]()
-            newNeiborhoodIds?.append(contentsOf: groupIds)
+    func addShareGroups(groups:[EventNeighborhood]?) {
+        if let groups = groups {
+            newNeighborhoods = [EventNeighborhood]()
+            newNeighborhoods?.append(contentsOf: groups)
         }
         else {
-            newNeiborhoodIds = nil
+            newNeighborhoods = nil
         }
         _ = checkValidation()
     }
@@ -436,7 +436,7 @@ extension EventEditMainViewController: EventCreateMainDelegate {
             if isGroupSharing != nil {
                 isValid = false
                 if isGroupSharing ?? false {
-                    if newNeiborhoodIds?.count ?? 0 > 0 {
+                    if newNeighborhoods?.count ?? 0 > 0 {
                         isValid = true
                     }
                 }
