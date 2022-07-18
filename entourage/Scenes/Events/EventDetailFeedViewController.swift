@@ -480,7 +480,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             self.ui_view_height_constraint.constant = heightView
             
             //To show/hide button join on scroll
-            if !(self.event!.isMember ?? false) {
+            if !(self.event?.isMember ?? false) {
                 if scrollView.contentOffset.y >= self.minTopScrollHeight {
                     self.ui_bt_floating_join.isHidden = false
                 }

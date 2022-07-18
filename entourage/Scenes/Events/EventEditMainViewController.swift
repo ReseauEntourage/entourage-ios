@@ -313,8 +313,9 @@ extension EventEditMainViewController: EventCreateMainDelegate {
             newAddressName = currentLocationName
         }
         else if let googlePlace = googlePlace {
-            newAddressName = googlePlace.name
             newGoogle_place_id = googlePlace.placeID
+            newAddressName = googlePlace.name
+            newLocation = EventLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
         }
         else {
             newLocation = nil
