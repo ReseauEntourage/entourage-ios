@@ -16,7 +16,7 @@ class GMSAutoCompleteVC : GMSAutocompleteViewController {
         let filter = GMSAutocompleteFilter()
         filter.type = filterType
         filter.locationBias = GMSPlaceRectangularLocationOption(neBoundsCorner, swBoundsCorner)
-        
+        filter.country = "fr"
         let fields = GMSPlaceField(arrayLiteral: [GMSPlaceField.name,GMSPlaceField.placeID,GMSPlaceField.formattedAddress,GMSPlaceField.coordinate])
         self.autocompleteFilter = filter
         self.placeFields = fields
