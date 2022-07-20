@@ -136,10 +136,13 @@ struct EventService:ParsingDataCodable {
         }
     }
     
-    static func getAllEventsDiscover(currentPage:Int, per:Int, completion: @escaping (_ events:[Event]?, _ error:EntourageNetworkError?) -> Void) {
+    static func getAllEventsDiscover(currentPage:Int, per:Int, filters:String?, completion: @escaping (_ events:[Event]?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIEventGetAllDiscover
         endpoint = String.init(format: endpoint, token, currentPage, per)
+        if let filters = filters {
+            endpoint = "\(endpoint)&\(filters)"
+        }
         
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
