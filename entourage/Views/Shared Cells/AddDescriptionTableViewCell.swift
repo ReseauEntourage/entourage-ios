@@ -169,6 +169,9 @@ extension AddDescriptionTableViewCell: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         lastGrowingTf = 0
     }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        delegate?.updateFromTextView(text: textView.text,textInputType: textInputType)
+    }
 }
 
 //MARK: - AddDescriptionCellDelegate Protocol -

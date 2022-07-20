@@ -35,7 +35,7 @@ class NeighborhoodHomeGroupCell: UITableViewCell {
         ui_members.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
         ui_events.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
         
-        ui_label_admin?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
+        ui_label_admin?.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 15), color: .appOrangeLight))
         ui_label_admin?.text = "Admin".localized
         
         ui_image.layer.cornerRadius = 20

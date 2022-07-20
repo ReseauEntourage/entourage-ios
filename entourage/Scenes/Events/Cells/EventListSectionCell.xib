@@ -23,8 +23,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="avo-LN-p3U">
-                        <rect key="frame" x="32" y="32.5" width="104" height="1"/>
-                        <color key="backgroundColor" name="orange_app"/>
+                        <rect key="frame" x="32" y="32.5" width="80" height="1"/>
+                        <color key="backgroundColor" name="orange_light"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="9oA-oy-hXF"/>
                         </constraints>
@@ -36,16 +36,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFm-8G-igQ">
-                        <rect key="frame" x="270" y="32.5" width="104" height="1"/>
-                        <color key="backgroundColor" name="orange_app"/>
+                        <rect key="frame" x="294" y="32.5" width="80" height="1"/>
+                        <color key="backgroundColor" name="orange_light"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="a0p-9w-dBo"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="XFm-8G-igQ" firstAttribute="leading" secondItem="Fyp-J9-Sa9" secondAttribute="trailing" constant="8" id="4M9-cr-Sez"/>
-                    <constraint firstItem="Fyp-J9-Sa9" firstAttribute="leading" secondItem="avo-LN-p3U" secondAttribute="trailing" constant="8" id="4gj-Hd-yaA"/>
+                    <constraint firstItem="XFm-8G-igQ" firstAttribute="leading" secondItem="Fyp-J9-Sa9" secondAttribute="trailing" constant="32" id="4M9-cr-Sez"/>
+                    <constraint firstItem="Fyp-J9-Sa9" firstAttribute="leading" secondItem="avo-LN-p3U" secondAttribute="trailing" constant="32" id="4gj-Hd-yaA"/>
                     <constraint firstItem="XFm-8G-igQ" firstAttribute="centerY" secondItem="Fyp-J9-Sa9" secondAttribute="centerY" id="5Pb-W2-jME"/>
                     <constraint firstItem="avo-LN-p3U" firstAttribute="leading" secondItem="XCl-0f-wEp" secondAttribute="leading" constant="32" id="8G0-fS-FAy"/>
                     <constraint firstItem="Fyp-J9-Sa9" firstAttribute="top" secondItem="XCl-0f-wEp" secondAttribute="top" constant="8" id="T1R-ue-WXB"/>
@@ -63,8 +63,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="orange_app">
-            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="orange_light">
+            <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

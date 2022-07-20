@@ -55,6 +55,9 @@ class EventPlaceCell: UITableViewCell {
         ui_online_tf.setupFontAndColor(style: ApplicationTheme.getFontChampInput(size: 13, color: .black))
         ui_online_tf.placeholder = "event_create_phase3_placeholder_online".localized
         
+        ui_view_online_error.setupView(title: "event_create_phase3_online_error".localized, imageName: nil)
+        ui_view_place_error.setupView(title: "event_create_phase3_online_error".localized, imageName: nil)
+        
         ui_view_place_error.isHidden = true
         ui_view_online_error.isHidden = true
         

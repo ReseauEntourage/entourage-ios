@@ -25,7 +25,7 @@ class EventDetailFullFeedViewController: UIViewController {
         ui_tableview.delegate = self
         
         ui_top_view.backgroundColor = .appBeigeClair
-        ui_top_view.populateCustom(title: "event_detail_full_title".localized, titleFont: nil, titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil)
+        ui_top_view.populateCustom(title: "event_detail_full_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil)
         
         registerCellsNib()
         
@@ -47,10 +47,10 @@ class EventDetailFullFeedViewController: UIViewController {
         if event?.author?.uid == currentUserId { return }
         
         let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "params_leave_event_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "params_leave_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonAccept = MJAlertButtonType(title: "params_leave_event_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_leave_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "params_leave_event_pop_title".localized, message: "params_leave_event_pop_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35,parentVC:self)
+        customAlert.configureAlert(alertTitle: "params_leave_event_pop_title".localized, message: "params_leave_event_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35,parentVC:self)
         
         customAlert.alertTagName = .None
         customAlert.delegate = self
@@ -164,12 +164,19 @@ extension EventDetailFullFeedViewController: EventDetailFullDelegate {
 //MARK: - MJAlertControllerDelegate -
 extension EventDetailFullFeedViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag:MJAlertTAG) {
+        if alertTag == .AcceptSettings {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:],completionHandler:nil)
+            }
+        }
+    }
+    
+    func validateRightButton(alertTag:MJAlertTAG) {
         if alertTag == .None {
             self.sendLeaveGroup()
         }
     }
     
-    func validateRightButton(alertTag:MJAlertTAG) {}
     func closePressed(alertTag:MJAlertTAG) {}
 }
 

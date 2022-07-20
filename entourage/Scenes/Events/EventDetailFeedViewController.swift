@@ -7,6 +7,7 @@
 
 import UIKit
 import IHProgressHUD
+import SDWebImage
 
 class EventDetailFeedViewController: UIViewController {
     
@@ -66,11 +67,11 @@ class EventDetailFeedViewController: UIViewController {
         ui_top_view.populateCustom(title: nil, titleFont: nil, titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: false, cornerRadius: nil, isClose: false, marginLeftButton: nil)
         ui_view_top_bg.alpha = 1
         ui_iv_event.alpha = 0
-        ui_iv_event.image = UIImage.init(named: "placeholder_photo_group")
-        ui_iv_event2.image = UIImage.init(named: "placeholder_photo_group")
         registerCellsNib()
         
         setupViews()
+        
+        populateTopView(isAfterLoading: false)
         
         ui_floaty_button.isHidden = true
         ui_bt_floating_join.isHidden = true
@@ -134,18 +135,29 @@ class EventDetailFeedViewController: UIViewController {
         ui_bt_floating_join.layer.cornerRadius = ui_bt_floating_join.frame.height / 2
         ui_title_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_title_bt_join.text = "event_detail_button_participe_OFF".localized
-        
-        populateTopView()
     }
     
-    func populateTopView() {
+    func populateTopView(isAfterLoading:Bool) {
         let imageName = "placeholder_photo_group"
         if let _url = self.event?.metadata?.landscape_url, let url = URL(string: _url) {
-            self.ui_iv_event.sd_setImage(with: url, placeholderImage: UIImage.init(named: imageName))
-            self.ui_iv_event_mini.sd_setImage(with: url, placeholderImage: UIImage.init(named: imageName))
-            self.ui_iv_event2.sd_setImage(with: url, placeholderImage: UIImage.init(named: imageName))
+            self.ui_iv_event.sd_setImage(with: url, placeholderImage: nil, completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+                if error != nil {
+                    self?.ui_iv_event.image = UIImage.init(named: imageName)
+                }
+            })
+            
+            self.ui_iv_event_mini.sd_setImage(with: url, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+                if error != nil {
+                    self?.ui_iv_event_mini.image = UIImage.init(named: imageName)
+                }
+            })
+            self.ui_iv_event2.sd_setImage(with: url, placeholderImage: nil, completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+                if error != nil {
+                    self?.ui_iv_event2.image = UIImage.init(named: imageName)
+                }
+            })
         }
-        else {
+        else if isAfterLoading {
             self.ui_iv_event.image = UIImage.init(named: imageName)
             self.ui_iv_event_mini.image = UIImage.init(named: imageName)
             self.ui_iv_event2.image = UIImage.init(named: imageName)
@@ -182,14 +194,15 @@ class EventDetailFeedViewController: UIViewController {
             if let _ = error {
                 self.goBack()
             }
-            
+            let currentImg = self.event?.getCurrentImageUrl != nil
             self.event = event
             self.splitMessages()
             self.ui_tableview.reloadData()
             self.isLoading = false
             
-            self.populateTopView()
-            
+            if !currentImg {
+                self.populateTopView(isAfterLoading: true)
+            }
             if hasToRefreshLists {
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventsUpdate), object: nil)
             }
@@ -240,6 +253,7 @@ class EventDetailFeedViewController: UIViewController {
     }
     
     func addRemoveMember(isAdd:Bool) {
+        self.ui_tableview.reloadData()
         if isAdd {
             IHProgressHUD.show()
             EventService.joinEvent(eventId: eventId) { user, error in
@@ -251,7 +265,6 @@ class EventDetailFeedViewController: UIViewController {
                     
                     self.isAfterCreation = true
                     self.event?.membersCount = count
-                    self.ui_tableview.reloadData()
                     self.getEventDetail(hasToRefreshLists:true)
                 }
             }
@@ -263,10 +276,10 @@ class EventDetailFeedViewController: UIViewController {
     
     func showPopLeave() {
         let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "params_leave_event_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "params_leave_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonAccept = MJAlertButtonType(title: "params_leave_event_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_leave_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "params_leave_event_pop_title".localized, message: "params_leave_event_pop_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35,parentVC:self)
+        customAlert.configureAlert(alertTitle: "params_leave_event_pop_title".localized, message: "params_leave_event_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35,parentVC:self)
         
         customAlert.alertTagName = .None
         customAlert.delegate = self
@@ -299,7 +312,6 @@ class EventDetailFeedViewController: UIViewController {
         else {
             addRemoveMember(isAdd: true)
         }
-        self.ui_tableview.reloadData()
     }
     
     //MARK: - IBAction -
@@ -496,13 +508,13 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
 
 //MARK: - MJAlertControllerDelegate -
 extension EventDetailFeedViewController: MJAlertControllerDelegate {
-    func validateLeftButton(alertTag:MJAlertTAG) {
+    func validateLeftButton(alertTag:MJAlertTAG) {}
+    
+    func validateRightButton(alertTag:MJAlertTAG) {
         if alertTag == .None {
             self.sendLeaveGroup()
         }
     }
-    
-    func validateRightButton(alertTag:MJAlertTAG) {}
     func closePressed(alertTag:MJAlertTAG) {}
 }
 

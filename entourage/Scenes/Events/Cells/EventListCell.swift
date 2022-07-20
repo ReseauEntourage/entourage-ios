@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class EventListCell: UITableViewCell {
 
@@ -34,7 +35,7 @@ class EventListCell: UITableViewCell {
         
         ui_image.layer.cornerRadius = 20
         
-        ui_label_admin?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
+        ui_label_admin?.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 15), color: .appOrangeLight))
         ui_label_admin?.text = "Admin".localized
     }
     
@@ -42,7 +43,11 @@ class EventListCell: UITableViewCell {
         ui_title.text = event.title
         
         if let imageUrl = event.metadata?.portrait_url, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
-            ui_image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "ic_placeholder_event"))
+            ui_image.sd_setImage(with: mainUrl, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+                if error != nil {
+                    self?.ui_image.image = UIImage.init(named: "ic_placeholder_event")
+                }
+            })
         }
         else {
             ui_image.image = UIImage.init(named: "ic_placeholder_event")

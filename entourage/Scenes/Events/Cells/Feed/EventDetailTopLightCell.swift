@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class EventDetailTopLightCell: UITableViewCell {
     
@@ -44,6 +45,8 @@ class EventDetailTopLightCell: UITableViewCell {
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
         ui_lbl_nb_members.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
+        ui_lbl_bt_more.attributedText = Utils.formatStringUnderline(textString: "event_detail_button_more".localized, textColor: .appOrange,font: ApplicationTheme.getFontH2Noir().font)
+
         
         ui_img_member_1.layer.cornerRadius = ui_img_member_1.frame.height / 2
         ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
@@ -55,6 +58,9 @@ class EventDetailTopLightCell: UITableViewCell {
         ui_img_member_1.isHidden = true
         ui_img_member_2.isHidden = true
         ui_img_member_3.isHidden = true
+        ui_img_member_1.image = nil
+        ui_img_member_2.image = nil
+        ui_img_member_3.image = nil
         ui_view_members_more.isHidden = true
         
         guard let event = event else {
@@ -122,7 +128,11 @@ class EventDetailTopLightCell: UITableViewCell {
     
     private func updateImageUrl(image:UIImageView, imageUrl:String?) {
         if let imageUrl = imageUrl, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
-            image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
+            image.sd_setImage(with: mainUrl, placeholderImage: nil, completed: { (_image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+                if error != nil {
+                    image.image = UIImage.init(named: "placeholder_user")
+                }
+            })
         }
         else {
             image.image = UIImage.init(named: "placeholder_user")

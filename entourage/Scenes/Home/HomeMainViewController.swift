@@ -365,11 +365,16 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     
     func showAllOutings() {
-        //TODO: show events
         self.tabBarController?.selectedIndex = 4
     }
     func showOuting(id:Int) {
-        //TODO: show event
-        self.showWIP(parentVC: self)
+        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+            vc.eventId = id
+            vc.event = nil
+            vc.isAfterCreation = false
+            vc.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(navVc, animated: true, completion: nil)
+            return
+        }
     }
 }

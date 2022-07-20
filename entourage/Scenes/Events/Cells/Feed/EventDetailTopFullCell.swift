@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class EventDetailTopFullCell: UITableViewCell {
     
@@ -36,6 +37,7 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_view_place_limit: UIView!
     @IBOutlet weak var ui_place_limit_nb: UILabel!
     
+    @IBOutlet weak var ui_iv_location: UIImageView!
     @IBOutlet weak var ui_location_name: UILabel!
     
     weak var delegate:EventDetailTopCellDelegate? = nil
@@ -64,7 +66,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_taglist_view?.cornerRadius = cornerRadiusTag
         ui_taglist_view?.textFont = ApplicationTheme.getFontCategoryBubble().font
         ui_taglist_view?.textColor = .appOrange
-        ui_taglist_view?.alignment = .center
+        ui_taglist_view?.alignment = .left
         
         //Values to align and padding tags
         ui_taglist_view?.marginY = 12
@@ -76,19 +78,24 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_img_member_1.layer.cornerRadius = ui_img_member_1.frame.height / 2
         ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
+        ui_view_place_limit.isHidden = true
     }
     
     func populateCell(event:Event?, delegate:EventDetailTopCellDelegate) {
         self.delegate = delegate
-        ui_img_member_1.isHidden = true
-        ui_img_member_2.isHidden = true
-        ui_img_member_3.isHidden = true
+//        ui_img_member_1.isHidden = true
+//        ui_img_member_2.isHidden = true
+//        ui_img_member_3.isHidden = true
+        ui_img_member_1.image = nil
+        ui_img_member_2.image = nil
+        ui_img_member_3.image = nil
         ui_view_members_more.isHidden = true
         
         guard let event = event else {
             return
         }
         if let _members = event.members {
+            Logger.print("***** call Load url users")
             for i in 0..<_members.count {
                 if i > 2 { break }
                 switch i {
@@ -141,9 +148,11 @@ class EventDetailTopFullCell: UITableViewCell {
         var _addressName = ""
         if event.isOnline ?? false {
             _addressName = event.onlineEventUrl ?? "-"
+            ui_iv_location.image = UIImage.init(named: "ic_web")
         }
         else {
             _addressName = event.addressName ?? "-"
+            ui_iv_location.image = UIImage.init(named: "ic_location")
         }
         
         ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
@@ -186,7 +195,11 @@ class EventDetailTopFullCell: UITableViewCell {
     
     private func updateImageUrl(image:UIImageView, imageUrl:String?) {
         if let imageUrl = imageUrl, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
-            image.sd_setImage(with: mainUrl, placeholderImage: UIImage.init(named: "placeholder_user"))
+            image.sd_setImage(with: mainUrl, placeholderImage: nil, completed: { (_image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+                if error != nil {
+                    image.image = UIImage.init(named: "placeholder_user")
+                }
+            })
         }
         else {
             image.image = UIImage.init(named: "placeholder_user")

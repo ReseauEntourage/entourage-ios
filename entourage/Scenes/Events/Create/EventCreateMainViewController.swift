@@ -29,6 +29,7 @@ class EventCreateMainViewController: UIViewController {
     var newInterestTagOtherMessage:String? = nil
     var newTags:Tags? = nil
     var isGroupSharing = false
+    var hasPlaceLimit = false
     
     var currentPhasePosition = 1
     
@@ -64,7 +65,7 @@ class EventCreateMainViewController: UIViewController {
         
         ui_bt_next.layer.cornerRadius = ui_bt_next.frame.height / 2
         ui_bt_next.backgroundColor = .appOrangeLight
-        ui_bt_next.setTitleColor(.white, for: .normal)
+        ui_bt_next.setTitleColor(.appOrange, for: .normal)
         ui_bt_next.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 15)
         ui_bt_next.setTitle("event_create_group_bt_next".localized, for: .normal)
         
@@ -262,6 +263,7 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
         if newEvent.metadata == nil {
             newEvent.metadata = EventMetadata()
         }
+        hasPlaceLimit = hasLimit
         newEvent.metadata?.place_limit = nbPlaces
         _ = checkValidation()
     }
@@ -338,9 +340,10 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
                 }
             }
             else {
+                Logger.print("***** Event create not online \(newEvent.metadata)")
                 if let meta = newEvent.metadata {
                     var isValidFromLimit = false
-                    if meta.hasPlaceLimit ?? false {
+                    if hasPlaceLimit ?? false {
                         if meta.place_limit ?? 0 > 0 {
                             isValidFromLimit = true
                         }

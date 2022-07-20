@@ -671,9 +671,9 @@
 "home_messages_title" = "Messages envoyés";
 "home_events_title" = "Participations à des événements";
 "home_groups_title" = "Groupes rejoints";
-"home_no_message_title" = "Pas encore de\nmessages\nenvoyés";
-"home_no_event_title" = "Pas d’évènements\nauquels vous avez\nparticipé";
-"home_no_group_title" = "Vous n’avez pas\nencore rejoint de\ngroupe de voisins";
+"home_no_message_title" = "Pas encore de messages envoyés";
+"home_no_event_title" = "Pas d’événements auquels vous avez participé";
+"home_no_group_title" = "Vous n’avez pas encore rejoint de groupe de voisins";
 
 "home_actions_title" = "Envie d’agir ? ";
 "home_help_title" = "Besoin d’aide ?";
@@ -712,20 +712,20 @@
 
 "event_create_group_bt_back" = "Précédent";
 "event_create_group_bt_next" = "Suivant";
-"event_create_group_bt_create" = "Créer";
+"event_create_group_bt_create" = "Valider";
 "eventCreateInputErrorMandatory" = "Champ à remplir";
 "event_mod_group_bt_mod" = "Modifier";
 
 "event_mod_title" = "Modifier mon événement";
-"event_create_title" = "Nouvel évènement";
+"event_create_title" = "Nouvel événement";
 "event_create_title_phase" = "Étape";
 "event_create_title_phase_nb" = "0%d.";
 
-"event_create_phase_1_name" = "Nom de l’évènement - obligatoire";
-"event_create_phase_1_name_placeholder" = "Nom PLACEHOLDER";
+"event_create_phase_1_name" = "Nom de l’événement - obligatoire";
+"event_create_phase_1_name_placeholder" = "Donnez un nom explicite à l'événement";
 "event_create_phase_1_name_error" = "Le nom de l'événement doit contenir au minimum 2 caractères.";
 "event_create_phase_1_desc" = "Description - obligatoire";
-"event_create_phase_1_desc_placeholder" = "Description PLACEHOLDER";
+"event_create_phase_1_desc_placeholder" = "Présentez rapidement ce qu’il va se passer";
 "event_create_phase_1_desc_subtitle" = "(400 caractères max)";
 "event_create_phase_1_photo" = "Photo - obligatoire";
 "event_create_phase_1_photo_desc" = " Vous pourrez la changer plus tard";
@@ -753,25 +753,27 @@
 
 "event_create_phase3_presentiel" = "En présentiel";
 "event_create_phase3_online" = "En ligne";
+"event_create_phase3_online_error" = "Champ obligatoire";
 "event_create_phase3_placeholder_place" = "Adresse, ville ...";
 "event_create_phase3_placeholder_online" = "Adresse web";
 
-"event_create_phase3_title_limit" = "L’évènement a-t-il un nombre de places limité ? - obligatoire";
+"event_create_phase3_title_limit" = "L’événement a-t-il un nombre de places limité ? - obligatoire";
 "event_create_phase3_title_nb_places" = "Nombre de places disponibles - obligatoire";
 "event_create_phase3_title_nb_places_placeholder" = "Nombre de places";
 "event_create_phase3_limit_yes" = "Oui";
 "event_create_phase3_limit_no" = "Non";
+"event_create_phase3_limit_error" = "Champ obligatoire";
 
-"event_create_phase4_title" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de l’évènement. - obligatoire";
+"event_create_phase4_title" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de l’événement. - obligatoire";
 
 "event_create_phase5_title" = "Partager l'événement dans vos groupes\n- obligatoire";
-"event_create_phase5_desc" = "Vous ne pouvez partager l’évènement seulement aux groupes dont vous êtes membre. Votre événement sera alors visible dans le(s) groupe(s) sélectionné(s) et tous les membres d'un groupe pourront y participer.";
+"event_create_phase5_desc" = "Vous ne pouvez partager l’événement seulement aux groupes dont vous êtes membre. Votre événement sera alors visible dans le(s) groupe(s) sélectionné(s) et tous les membres d'un groupe pourront y participer.";
 "createEventNotShare" = "Ne partager dans aucun groupe";
 "createEventShare" = "Partager dans un ou plusieurs groupes";
 
 "eventCreateEnd_button_show" = "Voir mon événement";
-"eventCreateEnd_title" = "Votre évènement à bien été créé !";
-"eventCreateEnd_subtitle" = "Félicitation, vous venez de créer un nouvel évènement. Pour le rendre plus visible parlez-en sur vos groupes !";
+"eventCreateEnd_title" = "Votre événement à bien été créé !";
+"eventCreateEnd_subtitle" = "Félicitation, vous venez de créer un nouvel événement. Pour le rendre plus visible parlez-en sur vos groupes !";
 
 "eventCreatePhase1_error" = "Veuillez remplir tous les champs obligatoires";
 "eventCreatePhase2_error" = "Veuillez remplir tous les champs obligatoires";
@@ -794,10 +796,14 @@
 "event_main_page_title" = "Événements";
 "event_main_page_button_myEvents" = "Mes événements";
 "event_main_page_button_discover" = "Découvrir";
-"event_event_my_empty_title" = "Vous n’avez pas encore rejoint d’évènement";
-"event_event_my_empty_subtitle" = "Allez sur l’onglet découvir, et si aucun ne vous convient c’est l’occasion de créer un nouvel évènement ! ";
-"event_event_discover_empty_title" = "Allez sur l’onglet découvir, et si aucun ne vous convient c’est l’occasion de créer un nouvel évènement ! ";
-"event_event_discover_empty_subtitle" = "Si aucun évènement de ce type n’existe, vous pouvez en créer un ! Ou élarigir votre zone de recherche ";
+"event_event_my_empty_title" = "Vous n’avez pas encore rejoint d’événement";
+"event_event_my_empty_subtitle" = "Allez sur l’onglet découvrir, et si aucun événement ne vous convient, c’est l’occasion d’en créer un !";
+"event_event_discover_empty_title" = "Oups, aucun événement autour de vous";
+"event_event_discover_empty_subtitle" = "Si aucun événement ne se trouve près de vous, vous pouvez élargir votre zone de recherche.";
+"event_event_discover_clear_filters" = "Réinitialiser les filtres";
+"event_event_discover_empty_search_title" =  "Oups, aucun résultat ne correspond à votre sélection ! ";
+"event_event_discover_empty_search_subtitle" = "Si aucun événement de ce type n'existe, vous pouvez élargir votre zone de recherche, ou créer un nouvel événement !";
+"event_detail_button_more" = "En savoir plus";
 
 "event_detail_button_participe_ON" = "Participe";
 "event_detail_button_participe_OFF" = "Participer";
@@ -808,7 +814,7 @@
 
 "event_time_detail_full" = "De %@ à %@";
 "event_places_detail_full" = "Nombre de places limitées : %d";
-"event_created_full" = "Crée le %@";
+"event_created_full" = "Créé le %@";
 "event_updated_full" = "Modifié le %@";
 
 "event_empty_post_title" = "Pas encore de publication sur cet événement";

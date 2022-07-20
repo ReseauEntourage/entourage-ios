@@ -37,6 +37,10 @@ class EventDetailFullCell: UITableViewCell {
     @IBOutlet weak var ui_lbl_about_title: UILabel!
     @IBOutlet weak var ui_lbl_about_desc: UILabel!
     
+    @IBOutlet weak var ui_iv_location: UIImageView!
+    @IBOutlet weak var ui_label_distance: UILabel!
+    @IBOutlet weak var ui_view_distance: UIView!
+    
     class var identifier:String {return String(describing: self) }
     
     let regionRadius: CLLocationDistance = 500
@@ -95,6 +99,8 @@ class EventDetailFullCell: UITableViewCell {
         ui_view_map.isHidden = event.isOnline ?? true
         
         if !(event.isOnline ?? true) {
+            ui_iv_location.image = UIImage.init(named: "ic_location")
+            ui_view_distance.isHidden = false
             if let _location = event.location, let _lat = _location.latitude, let _long = _location.longitude {
                 let _locAnnot = CLLocation(latitude: _lat, longitude: _long)
                 
@@ -102,6 +108,10 @@ class EventDetailFullCell: UITableViewCell {
                 ui_mapview.addAnnotation(annot)
                 centerMapOnLocation(_locAnnot)
             }
+        }
+        else {
+            ui_iv_location.image = UIImage.init(named: "ic_web")
+            ui_view_distance.isHidden = true
         }
         
         ui_title.text = event.title

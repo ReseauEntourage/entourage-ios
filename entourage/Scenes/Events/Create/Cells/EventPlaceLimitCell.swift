@@ -35,6 +35,7 @@ class EventPlaceLimitCell: UITableViewCell {
         ui_title_buttons[0].text = "event_create_phase3_limit_yes".localized
         ui_title_buttons[1].text = "event_create_phase3_limit_no".localized
         ui_view_error.isHidden = true
+        ui_view_error.setupView(title: "event_create_phase3_limit_error".localized, imageName: nil)
         
         ui_limit_tf.setupFontAndColor(style: ApplicationTheme.getFontChampDefault(size: 13,color: .black))
         ui_limit_tf.placeholder = "event_create_phase3_title_nb_places_placeholder".localized

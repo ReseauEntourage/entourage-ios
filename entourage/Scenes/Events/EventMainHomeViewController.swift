@@ -48,6 +48,9 @@ class EventMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_lbl_empty_subtitle_discover: UILabel!
     
     @IBOutlet weak var ui_location_filter: UILabel!
+    @IBOutlet weak var ui_view_bt_clear_filters: UIView!
+    @IBOutlet weak var ui_title_bt_clear_filters: UILabel!
+    
     
     var currentFilter = EventFilters()
     
@@ -377,6 +380,12 @@ class EventMainHomeViewController: UIViewController {
         }
     }
     
+    @IBAction func action_clear_filters(_ sender: Any) {
+        self.currentFilter.resetToDefault()
+        self.ui_location_filter.text = currentFilter.getFilterButtonString()
+        self.getEventsDiscovered(isReloadFromTab: false, reloadOther: false)
+    }
+    
     //MARK: - Methods -
     func changeTabSelection() {
         ui_view_empty.isHidden = true
@@ -488,6 +497,10 @@ class EventMainHomeViewController: UIViewController {
         ui_lbl_empty_title_discover.text = "event_event_discover_empty_title".localized
         ui_lbl_empty_subtitle_discover.text = "event_event_discover_empty_subtitle".localized
         
+        ui_view_bt_clear_filters.layer.cornerRadius = ui_view_bt_clear_filters.frame.height / 2
+        ui_title_bt_clear_filters.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
+        ui_title_bt_clear_filters.text = "event_event_discover_clear_filters".localized
+        
         hideEmptyView()
     }
     
@@ -503,7 +516,20 @@ class EventMainHomeViewController: UIViewController {
             self.ui_view_empty.isHidden = false
             self.ui_view_empty_events.isHidden = true
             self.ui_view_empty_discover.isHidden = false
-            ui_arrow_show_empty.isHidden = false
+            ui_arrow_show_empty.isHidden = true
+            
+            //TODO: check search
+            
+            if currentFilter.filterType != .profile || currentFilter.radius != UserDefaults.currentUser?.radiusDistance {
+                ui_view_bt_clear_filters.isHidden = false
+                ui_lbl_empty_title_discover.text = "event_event_discover_empty_search_title".localized
+                ui_lbl_empty_subtitle_discover.text = "event_event_discover_empty_search_subtitle".localized
+            }
+            else {
+                ui_view_bt_clear_filters.isHidden = true
+                ui_lbl_empty_title_discover.text = "event_event_discover_empty_title".localized
+                ui_lbl_empty_subtitle_discover.text = "event_event_discover_empty_subtitle".localized
+            }
         }
     }
     

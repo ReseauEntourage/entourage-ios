@@ -79,7 +79,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="253" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="754" text="Dansons ensemble sous le pont d’Avignon" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8f-16-bZy">
-                                                    <rect key="frame" x="114" y="16" width="209.5" height="37.5"/>
+                                                    <rect key="frame" x="114" y="16" width="194" height="37.5"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -151,7 +151,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="b2Y-7a-J8R">
-                                                    <rect key="frame" x="331.5" y="16" width="58.5" height="20.5"/>
+                                                    <rect key="frame" x="316" y="16" width="58.5" height="20.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_star_empty" translatesAutoresizingMaskIntoConstraints="NO" id="NCX-RK-t95">
                                                             <rect key="frame" x="0.0" y="0.0" width="12" height="20.5"/>
@@ -163,7 +163,6 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="NCX-RK-t95" firstAttribute="leading" secondItem="b2Y-7a-J8R" secondAttribute="leading" id="959-v8-PV0"/>
                                                         <constraint firstAttribute="trailing" secondItem="PLJ-vp-5lI" secondAttribute="trailing" id="9b7-8T-MJ6"/>
@@ -178,7 +177,7 @@
                                             <color key="backgroundColor" name="BeigeClair"/>
                                             <constraints>
                                                 <constraint firstItem="JqO-tj-5Bc" firstAttribute="leading" secondItem="8Cw-2e-p2C" secondAttribute="leading" id="2sN-YX-Ljd"/>
-                                                <constraint firstAttribute="trailing" secondItem="b2Y-7a-J8R" secondAttribute="trailing" constant="16" id="8Hz-BK-sUD"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="b2Y-7a-J8R" secondAttribute="trailing" constant="16" id="8Hz-BK-sUD"/>
                                                 <constraint firstAttribute="trailing" secondItem="JqO-tj-5Bc" secondAttribute="trailing" id="B26-GS-1sp"/>
                                                 <constraint firstItem="b2Y-7a-J8R" firstAttribute="leading" secondItem="c8f-16-bZy" secondAttribute="trailing" constant="8" id="Ce3-ET-2Nd"/>
                                                 <constraint firstItem="U9c-Vg-mzT" firstAttribute="top" secondItem="8Cw-2e-p2C" secondAttribute="top" constant="18" id="DLG-JH-vv0"/>

@@ -111,11 +111,11 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxR-dy-Owz">
                         <rect key="frame" x="28" y="104" width="350" height="20"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="WKD-TM-zaI">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="WKD-TM-zaI">
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n8b-KZ-OHc">
-                                        <rect key="frame" x="0.0" y="0.0" width="179.5" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="226" height="20"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_event_date" translatesAutoresizingMaskIntoConstraints="NO" id="uWV-jG-Iea">
                                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -125,7 +125,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="31 juin 2022" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNO-3W-e8V">
-                                                <rect key="frame" x="28" y="1" width="151.5" height="18"/>
+                                                <rect key="frame" x="28" y="1" width="198" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -141,7 +141,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8TA-y7-TCS">
-                                        <rect key="frame" x="186.5" y="0.0" width="52.5" height="20"/>
+                                        <rect key="frame" x="236" y="0.0" width="48.5" height="20"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_event_time" translatesAutoresizingMaskIntoConstraints="NO" id="8FB-EP-uas">
                                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -151,7 +151,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="21h" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMG-Nk-Fe3">
-                                                <rect key="frame" x="28" y="1" width="24.5" height="18"/>
+                                                <rect key="frame" x="24" y="1" width="24.5" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -162,12 +162,12 @@
                                             <constraint firstItem="8FB-EP-uas" firstAttribute="top" secondItem="8TA-y7-TCS" secondAttribute="top" id="JAG-fN-TwH"/>
                                             <constraint firstItem="vMG-Nk-Fe3" firstAttribute="centerY" secondItem="8TA-y7-TCS" secondAttribute="centerY" id="XPT-YJ-cIL"/>
                                             <constraint firstAttribute="trailing" secondItem="vMG-Nk-Fe3" secondAttribute="trailing" id="YBs-UZ-QgE"/>
-                                            <constraint firstItem="vMG-Nk-Fe3" firstAttribute="leading" secondItem="8FB-EP-uas" secondAttribute="trailing" constant="8" symbolic="YES" id="pR9-yh-uzf"/>
+                                            <constraint firstItem="vMG-Nk-Fe3" firstAttribute="leading" secondItem="8FB-EP-uas" secondAttribute="trailing" constant="4" id="pR9-yh-uzf"/>
                                             <constraint firstItem="8FB-EP-uas" firstAttribute="leading" secondItem="8TA-y7-TCS" secondAttribute="leading" id="uD6-HY-Exw"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLQ-hv-Eb2">
-                                        <rect key="frame" x="246" y="0.0" width="104" height="20"/>
+                                        <rect key="frame" x="294.5" y="0.0" width="55.5" height="20"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_event_group_clear" translatesAutoresizingMaskIntoConstraints="NO" id="t6W-st-U3u">
                                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -177,7 +177,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="200 places" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGf-gD-ocr">
-                                                <rect key="frame" x="28" y="1" width="76" height="18"/>
+                                                <rect key="frame" x="24" y="-17" width="31.5" height="54"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -188,7 +188,7 @@
                                             <constraint firstItem="t6W-st-U3u" firstAttribute="top" secondItem="YLQ-hv-Eb2" secondAttribute="top" id="PAW-0k-yEK"/>
                                             <constraint firstItem="t6W-st-U3u" firstAttribute="leading" secondItem="YLQ-hv-Eb2" secondAttribute="leading" id="ZZy-4Y-Eic"/>
                                             <constraint firstAttribute="trailing" secondItem="VGf-gD-ocr" secondAttribute="trailing" id="cfm-8x-osv"/>
-                                            <constraint firstItem="VGf-gD-ocr" firstAttribute="leading" secondItem="t6W-st-U3u" secondAttribute="trailing" constant="8" symbolic="YES" id="fMc-hK-IhV"/>
+                                            <constraint firstItem="VGf-gD-ocr" firstAttribute="leading" secondItem="t6W-st-U3u" secondAttribute="trailing" constant="4" id="fMc-hK-IhV"/>
                                             <constraint firstAttribute="bottom" secondItem="t6W-st-U3u" secondAttribute="bottom" id="kMx-g8-K7D"/>
                                         </constraints>
                                     </view>
@@ -354,6 +354,7 @@
                 <outlet property="ui_img_member_1" destination="2x2-3v-72B" id="SOR-qC-Iu0"/>
                 <outlet property="ui_img_member_2" destination="qF7-zU-eSK" id="MdC-vq-GWM"/>
                 <outlet property="ui_img_member_3" destination="WUw-jW-n8n" id="6yh-4s-Pnl"/>
+                <outlet property="ui_iv_location" destination="hRO-vl-syO" id="bHT-Zi-TQH"/>
                 <outlet property="ui_lbl_about_desc" destination="CsR-kO-usD" id="7Sx-ME-uSy"/>
                 <outlet property="ui_lbl_about_title" destination="UXs-ZL-Ra7" id="x09-MN-3FL"/>
                 <outlet property="ui_lbl_bt_join" destination="sl0-vJ-26e" id="lgf-RV-Ktk"/>
