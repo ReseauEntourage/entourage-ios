@@ -70,11 +70,11 @@ struct Neighborhood:Codable {
         if address?.displayAddress?.count ?? 0 > 0 {
             dict["place_name"] = address!.displayAddress!
         }
-        if address?.location?.coordinate.latitude ?? 0 > 0 {
-            dict["latitude"] = address!.location!.coordinate.latitude
+        if address?.latitude ?? 0 > 0 {
+            dict["latitude"] = address!.latitude
         }
-        if address?.location?.coordinate.longitude ?? 0 > 0 {
-            dict["longitude"] = address!.location!.coordinate.longitude
+        if address?.longitude ?? 0 > 0 {
+            dict["longitude"] = address!.longitude
         }
         if address?.google_place_id?.count ?? 0 > 0 {
             dict["google_place_id"] = address!.google_place_id!

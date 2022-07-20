@@ -145,6 +145,7 @@ class MJAlertController: UIViewController {
 }
 
 enum MJAlertTAG {
+    case AcceptSettings
     case Suppress
     case Logout
     case None

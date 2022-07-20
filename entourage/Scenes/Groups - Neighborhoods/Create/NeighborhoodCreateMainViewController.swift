@@ -200,14 +200,11 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
     
     func addGroupPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?) {
         if let currentlocation = currentlocation {
-//            newNeighborhood.latitude = currentlocation.latitude
-//            newNeighborhood.longitude = currentlocation.longitude
-            let location = CLLocation(latitude: currentlocation.latitude, longitude: currentlocation.longitude)
-            newNeighborhood.address = Address(displayAddress: currentLocationName, location: location)
+            newNeighborhood.address = Address(displayAddress: currentLocationName, latitude: currentlocation.latitude,longitude: currentlocation.longitude)
         }
         else if let googlePlace = googlePlace {
           //  let location = CLLocation(latitude: googlePlace.coordinate.latitude, longitude: googlePlace.coordinate.longitude)
-            newNeighborhood.address = Address(displayAddress: googlePlace.name, location: nil, google_place_id: googlePlace.placeID)
+            newNeighborhood.address = Address(displayAddress: googlePlace.name, google_place_id: googlePlace.placeID)
         }
         _ = checkValidation()
     }
@@ -239,7 +236,7 @@ extension NeighborhoodCreateMainViewController: NeighborhoodCreateMainDelegate {
         
         switch currentPhasePosition {
         case 1:
-            if newNeighborhood.name.count >= 2 && ((newNeighborhood.address?.location?.coordinate.latitude ?? 0 != 0) || newNeighborhood.address?.google_place_id != nil) && newNeighborhood.aboutGroup?.count ?? 0 > 0  {
+            if newNeighborhood.name.count >= 2 && ((newNeighborhood.address?.latitude ?? 0 != 0) || newNeighborhood.address?.google_place_id != nil) && newNeighborhood.aboutGroup?.count ?? 0 > 0  {
                 isValid = true
             }
             

@@ -44,6 +44,7 @@
 "errorSettings" = "Pas d'autorisation";
 "toSettings" = "Réglages";
 "authCameraSettings" = "Veuillez autoriser l'accès à l'appareil photo.";
+"authGpsSettings" = "Veuillez autoriser l'accès au GPS.";
 
 "WIP" = "Bientôt";
 "notImplemented" = "Prochainement disponible ;)";
@@ -823,8 +824,24 @@
 "event_detail_cats_title" = "Catégories :";
 "event_detail_cat_title" = "Catégorie :";
 
+//Event filters
+"event_filter_title" = "Evénements - Filtres de recherche";
+"event_filter_profile" = "À l'adresse renseignée dans mon profil";
+"event_filter_google" = "À une nouvelle adresse";
+"event_filter_gps" = "Autour de ma position actuelle";
+"event_filter_search" = "Rechercher : ";
+"event_filter_radius_radius" = "Dans un rayon de :";
+"event_filter_error_place" = "Veuillez sélectionnez une adresse";
+"event_filter_google_placeholder" = "Choisir une adresse";
+"event_filter_position_placeholder" = "Ma position";
+
 //Pop leave event
 "params_leave_event_pop_title" = "Quitter l'événement";
 "params_leave_event_pop_message" = "Souhaitez-vous quitter l'événement ?";
 "params_leave_event_pop_bt_quit" = "Quitter";
 "params_leave_event_pop_bt_cancel" = "Annuler";
+
+//Contacts pop add
+"event_add_contact_error" = "Pour ajouter l'événement dans votre calendrier, vous devez activer l'accès au calendrier";
+"event_add_contact_refuse" = "Refuser";
+"event_add_contact_activate" = "Activer";

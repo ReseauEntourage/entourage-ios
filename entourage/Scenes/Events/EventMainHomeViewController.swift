@@ -47,6 +47,10 @@ class EventMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_lbl_empty_title_discover: UILabel!
     @IBOutlet weak var ui_lbl_empty_subtitle_discover: UILabel!
     
+    @IBOutlet weak var ui_location_filter: UILabel!
+    
+    var currentFilter = EventFilters()
+    
     var maxViewHeight:CGFloat = 134
     var minViewHeight:CGFloat = 92//108
     
@@ -150,6 +154,9 @@ class EventMainHomeViewController: UIViewController {
     
     //MARK: - Call from Notifications -
     @objc func refreshDatasFromTab() {
+        currentFilter.resetToDefault()
+        ui_location_filter.text = currentFilter.getFilterButtonString()
+        
         currentPageMy = 1
         currentPageDiscover = 1
         
@@ -256,7 +263,7 @@ class EventMainHomeViewController: UIViewController {
         
         self.isLoading = true
         
-        EventService.getAllEventsDiscover(currentPage: currentPageDiscover, per: numberOfItemsForWS) { events, error in
+        EventService.getAllEventsDiscover(currentPage: currentPageDiscover, per: numberOfItemsForWS, filters: currentFilter.getfiltersForWS()) { events, error in
             IHProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             
@@ -337,7 +344,7 @@ class EventMainHomeViewController: UIViewController {
     
     @IBAction func action_discover(_ sender: Any?) {
         isEventSelected = false
-       
+        
         
         if isEventSelected != currentSelectedIsEvent && self.eventsDiscoveredExtracted.events.count == 0 {
             currentPageDiscover = 1
@@ -362,7 +369,12 @@ class EventMainHomeViewController: UIViewController {
     }
     
     @IBAction func action_show_filters(_ sender: Any) {
-        self.showWIP(parentVC: tabBarController)
+        if let vc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
+            vc.currentFilter = self.currentFilter
+            vc.modalPresentationStyle = .fullScreen
+            vc.delegate = self
+            self.navigationController?.present(vc, animated: true)
+        }
     }
     
     //MARK: - Methods -
@@ -416,6 +428,8 @@ class EventMainHomeViewController: UIViewController {
     }
     
     func setupViews() {
+        ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))
+        ui_location_filter.text = currentFilter.getFilterButtonString()
         ui_label_title.text = "event_main_page_title".localized
         ui_label_events.text = "event_main_page_button_myEvents".localized
         ui_label_discover.text = "event_main_page_button_discover".localized
@@ -621,5 +635,18 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
             
             self.view.layoutIfNeeded()
         }
+    }
+}
+
+//MARK: - EventFiltersDelegate -
+extension EventMainHomeViewController:EventFiltersDelegate {
+    func updateFilters(_ filters: EventFilters) {
+        self.currentFilter = filters
+        
+        ui_location_filter.text = currentFilter.getFilterButtonString()
+        if self.eventsDiscoveredExtracted.events.count > 0 {
+            self.gotoTop(isAnimated:false)
+        }
+        getEventsDiscovered(reloadOther:false)
     }
 }

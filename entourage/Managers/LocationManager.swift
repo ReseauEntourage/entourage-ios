@@ -64,6 +64,7 @@ class LocationManger:NSObject {
     }
     
     private func startUpdate() {
+        stopUpdate()
         locationManager.startUpdatingLocation()
         updateStatus(manager: locationManager)
     }
@@ -72,27 +73,17 @@ class LocationManger:NSObject {
         locationManager.stopUpdatingLocation()
     }
     
-    func showGeolocationNotAllowedMessage(message:String) {
-        let rootVC = AppState.getTopViewController()
-        let alertVC = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+    func showGeolocationNotAllowedMessage(message:String? = nil, presenterVC:UIViewController? = nil) {
         
-        let actionCancel = UIAlertAction(title: "refuseAlert".localized, style: .cancel, handler: nil)
+        let rootVC = presenterVC != nil ? presenterVC : AppState.getTopViewController()
+        let message = message != nil ? message : "authGpsSettings".localized
+        let alertVC = MJAlertController()
+        let buttonCancel = MJAlertButtonType(title: "refuseAlert".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "toSettings".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        alertVC.configureAlert(alertTitle: "errorSettings".localized, message: message, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: rootVC)
         
-        let actionSettings = UIAlertAction(title: "activate".localized, style: .default) { [weak self] action in
-            
-            if self?.status == .denied {
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    UIApplication.shared.open(url, options: [:],completionHandler:nil)
-                }
-            }
-            else {
-                self?.startLocationUpdate()
-            }
-        }
-        
-        alertVC.addAction(actionCancel)
-        alertVC.addAction(actionSettings)
-        rootVC?.present(alertVC, animated: true, completion: nil)
+        alertVC.delegate = self
+        alertVC.show()
     }
     
     func showGeolocationNotFound(message:String) {
@@ -112,6 +103,25 @@ class LocationManger:NSObject {
         }
         rootVC?.present(alertVC, animated: true, completion: nil)
     }
+    
+    func isAuthorized() -> Bool {
+       return (LocationManger.sharedInstance.getAuthorizationStatus() == .authorizedAlways || LocationManger.sharedInstance.getAuthorizationStatus() == .authorizedWhenInUse)
+    }
+}
+
+//MARK: - MJAlertControllerDelegate -
+extension LocationManger: MJAlertControllerDelegate {
+    func validateLeftButton(alertTag: MJAlertTAG) {
+        if self.status == .denied {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:],completionHandler:nil)
+            }
+        }
+        else {
+            self.startLocationUpdate()
+        }
+    }
+    func validateRightButton(alertTag: MJAlertTAG) {}
 }
 
 extension LocationManger:CLLocationManagerDelegate {
@@ -124,6 +134,8 @@ extension LocationManger:CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         Logger.print("***** loc manager delegate : did fail error : \(error.localizedDescription) ")
         // Handle failure to get a user’s location
+        let notif = Notification(name: NSNotification.Name(rawValue: kNotificationLocationUpdated), object: nil,userInfo: nil)
+        NotificationCenter.default.post(notif)
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

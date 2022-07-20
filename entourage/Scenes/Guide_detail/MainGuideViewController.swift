@@ -198,7 +198,7 @@ class MainGuideViewController: UIViewController {
         AnalyticsLoggerManager.logEvent(name:"RecenterMapClick")
         
         if LocationManger.sharedInstance.getAuthorizationStatus() != .authorizedAlways && LocationManger.sharedInstance.getAuthorizationStatus() != .authorizedWhenInUse {
-            LocationManger.sharedInstance.showGeolocationNotAllowedMessage(message: "ask_permission_location_recenter_map".localized)
+            LocationManger.sharedInstance.showGeolocationNotAllowedMessage(message: "ask_permission_location_recenter_map".localized,presenterVC: self)
         }
         else if LocationManger.sharedInstance.getCurrentLocation() == nil {
             LocationManger.sharedInstance.showGeolocationNotFound(message: "no_location_recenter_map".localized)

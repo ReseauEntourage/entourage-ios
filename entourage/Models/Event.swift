@@ -95,6 +95,13 @@ struct Event:Codable {
         }
     }
     
+    func getMetadateStartDate() -> Date {
+        return Utils.getDateFromWSDateString(metadata?.starts_at)
+    }
+    func getMetadateEndDate() -> Date {
+        return Utils.getDateFromWSDateString(metadata?.ends_at)
+    }
+    
     var startDateFormatted:String {
         get {
             return Utils.formatEventDate(date:Utils.getDateFromWSDateString(metadata?.starts_at))
