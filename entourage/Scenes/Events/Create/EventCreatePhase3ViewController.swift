@@ -92,6 +92,7 @@ extension EventCreatePhase3ViewController:PlaceViewControllerDelegate, EventCrea
         
         if let vc = sb.instantiateViewController(withIdentifier: "place_choose_vc") as? ParamsChoosePlaceViewController {
             vc.placeVCDelegate = self
+            vc.isFromEvent = true
             self.present(vc, animated: true)
         }
     }

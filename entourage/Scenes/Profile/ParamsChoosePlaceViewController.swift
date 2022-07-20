@@ -27,6 +27,8 @@ class ParamsChoosePlaceViewController: BasePopViewController {
     
     weak var placeVCDelegate:PlaceViewControllerDelegate? = nil
     
+    var isFromEvent = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         AnalyticsLoggerManager.logEvent(name: View_NewGroup_AddLocation_Screen)
@@ -37,7 +39,12 @@ class ParamsChoosePlaceViewController: BasePopViewController {
         
         //                OTLogger.logEvent(View_Profile_Action_Zone)//TODO:  Analytics
         ui_top_view.populateView(title: "profileEditLocationTitle".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
-                
+               
+        if isFromEvent {
+            ui_label_info.isHidden = true
+            ui_title_add_place.text = "profileEditLocationLegend".localized
+        }
+        
         ui_title_add_place.text = "profileEditLocationLegend*".localized
         ui_label_description.text =  "profileEditLocationDescription".localized
         ui_bt_address?.setTitle("profileEditLocationPlaceholder".localized, for: .normal)

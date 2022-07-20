@@ -66,7 +66,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_taglist_view?.cornerRadius = cornerRadiusTag
         ui_taglist_view?.textFont = ApplicationTheme.getFontCategoryBubble().font
         ui_taglist_view?.textColor = .appOrange
-        ui_taglist_view?.alignment = .left
+        ui_taglist_view?.alignment = .center
         
         //Values to align and padding tags
         ui_taglist_view?.marginY = 12
