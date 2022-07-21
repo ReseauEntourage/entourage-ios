@@ -64,7 +64,7 @@ class EventDetailFeedViewController: UIViewController {
         self.addShadowAndRadius(customView: ui_view_button_back)
         
         ui_top_view.backgroundColor = .clear
-        ui_top_view.populateCustom(title: nil, titleFont: nil, titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: false, cornerRadius: nil, isClose: false, marginLeftButton: nil)
+        ui_top_view.populateCustom(title: nil, titleFont: nil, titleColor: nil, imageName: "ic_return_mini", backgroundColor: .clear, delegate: self, showSeparator: false, cornerRadius: nil, isClose: false, marginLeftButton: nil)
         ui_view_top_bg.alpha = 1
         ui_iv_event.alpha = 0
         registerCellsNib()

@@ -163,9 +163,11 @@ class EventCreateMainViewController: UIViewController {
     
     private func enableDisableNextButton(isEnable:Bool) {
         if isEnable {
+            ui_bt_next.backgroundColor = .appOrangeLight.withAlphaComponent(0.5)
             ui_bt_next.alpha = 1.0
         }
         else {
+            ui_bt_next.backgroundColor = .appOrangeLight
             ui_bt_next.alpha = 0.4
         }
     }

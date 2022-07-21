@@ -121,6 +121,19 @@ extension NeighborhoodListEventsViewController: UITableViewDelegate, UITableView
         cell.populateCell(event: eventsSorted[indexPath.section].value[indexPath.row - 1], hideSeparator: hideSeparator)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0  { return }
+        let event = eventsSorted[indexPath.section].value[indexPath.row - 1]
+        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+            vc.eventId = event.uid
+            vc.event = event
+            vc.isAfterCreation = false
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(navVc, animated: true, completion: nil)
+            return
+        }
+    }
 }
 
 //MARK: - MJNavBackViewDelegate -

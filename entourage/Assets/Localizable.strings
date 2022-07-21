@@ -396,7 +396,7 @@
 "profileEditLocationTitle" = "Où souhaitez-vous agir ?";
 "profileEditLocationDescription" = "Entourage est un réseau local !\nDécouvrez les initiatives solidaires de votre quartier et tissez des liens avec vos voisins.";
 "profileEditLocationLegend*" = "Ajouter un lieu *";
-"profileEditLocationLegend" = "Ajouter un lieu";
+"profileEditLocationLegend_" = "Ajouter un lieu";
 "profileEditLocationPlaceholder" = "Ville ou département";
 "profileEditLocationLegend" = "* Entourage ne communique pas cette adresse.";
 "profileEditLocationErrorAddress" = "Addresse invalide.";

@@ -569,8 +569,14 @@ extension NeighborhoodDetailViewController:NeighborhoodEventsTableviewCellDelega
     func showEvent(eventId: Int, isAfterCreation:Bool) {
         Logger.print("***** show event id : \(eventId)")
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_OneEvent)
-        //TODO: a faire
-        showWIP(parentVC: self)
+        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+            vc.eventId = eventId
+            vc.event = nil
+            vc.isAfterCreation = isAfterCreation
+            vc.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(navVc, animated: true, completion: nil)
+            return
+        }
     }
 }
 

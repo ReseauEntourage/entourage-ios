@@ -14,6 +14,7 @@ class EventDetailTopLightCell: UITableViewCell {
     
     @IBOutlet weak var ui_title: UILabel!
     
+    @IBOutlet weak var ui_iv_location: UIImageView!
     @IBOutlet weak var ui_lbl_nb_members: UILabel!
     @IBOutlet weak var ui_img_member_1: UIImageView!
     @IBOutlet weak var ui_img_member_2: UIImageView!
@@ -51,6 +52,7 @@ class EventDetailTopLightCell: UITableViewCell {
         ui_img_member_1.layer.cornerRadius = ui_img_member_1.frame.height / 2
         ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
+        ui_view_place_limit.isHidden = true
     }
     
     func populateCell(event:Event?, delegate:EventDetailTopCellDelegate) {
@@ -118,10 +120,13 @@ class EventDetailTopLightCell: UITableViewCell {
         var _addressName = ""
         if event.isOnline ?? false {
             _addressName = event.onlineEventUrl ?? "-"
+            ui_iv_location.image = UIImage.init(named: "ic_web")
         }
         else {
             _addressName = event.addressName ?? "-"
+            ui_iv_location.image = UIImage.init(named: "ic_location")
         }
+
         
         ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
     }

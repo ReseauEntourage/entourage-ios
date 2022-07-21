@@ -536,7 +536,7 @@
                                 </constraints>
                                 <color key="tintColor" name="orange_app"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="ic_settings"/>
+                                <state key="normal" image="ic_setting_mini"/>
                                 <connections>
                                     <action selector="action_show_params:" destination="1Sc-VH-DcS" eventType="touchUpInside" id="2mn-Sb-9N8"/>
                                 </connections>
@@ -1157,7 +1157,7 @@
         <image name="ic_retry" width="22" height="22"/>
         <image name="ic_selector_off" width="20" height="20"/>
         <image name="ic_selector_on" width="20" height="20"/>
-        <image name="ic_settings" width="33" height="33"/>
+        <image name="ic_setting_mini" width="14" height="15"/>
         <image name="img_neighb_valid_group" width="23" height="19"/>
         <image name="my_profile_header" width="392" height="416"/>
         <namedColor name="Beige">
