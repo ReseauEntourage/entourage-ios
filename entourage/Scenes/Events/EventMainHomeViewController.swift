@@ -333,12 +333,14 @@ class EventMainHomeViewController: UIViewController {
         if isEventSelected != currentSelectedIsEvent && myEventsExtracted.events.count == 0 {
             currentPageMy = 1
             myEventsExtracted.events.removeAll()
+            self.ui_tableview.reloadData()
             getEvents()
         }
         currentSelectedIsEvent = true
         isLoading = false
-        changeTabSelection()
+       
         self.ui_tableview.reloadData()
+        changeTabSelection()
         
         if self.myEventsExtracted.events.count > 0 {
             self.gotoTop()
