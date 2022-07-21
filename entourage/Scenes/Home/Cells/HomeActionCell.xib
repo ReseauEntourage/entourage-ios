@@ -70,6 +70,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" name="Beige"/>
             <connections>
+                <outlet property="ui_constraint_bottom_margin" destination="Vq1-oa-joY" id="chj-fB-OUo"/>
+                <outlet property="ui_constraint_width_iv" destination="xF0-h2-azO" id="1Bs-0C-Xl6"/>
                 <outlet property="ui_image" destination="3mn-Os-dkt" id="NBz-7m-vh9"/>
                 <outlet property="ui_title" destination="Dny-4l-DKk" id="g9o-AV-8xW"/>
                 <outlet property="ui_view_container" destination="9ec-od-olC" id="2Ic-b1-1CG"/>

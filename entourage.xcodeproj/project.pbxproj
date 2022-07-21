@@ -674,8 +674,8 @@
 			children = (
 				021FD95E28743EFF00D3AA54 /* EventListCell.swift */,
 				021FD95F28743EFF00D3AA54 /* EventListCell.xib */,
-				021FD9662875F4ED00D3AA54 /* EventListMeCell.xib */,
 				021FD96B2876F12E00D3AA54 /* EventListSectionCell.swift */,
+				021FD9662875F4ED00D3AA54 /* EventListMeCell.xib */,
 				021FD96C2876F12E00D3AA54 /* EventListSectionCell.xib */,
 				02E0EFA9287870CA009B2C65 /* Feed */,
 			);

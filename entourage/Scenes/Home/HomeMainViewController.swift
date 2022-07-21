@@ -179,9 +179,9 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
                 return cell
             }
             else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionTeachCell.identifier, for: indexPath) as! HomeActionTeachCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionCell.identifier, for: indexPath) as! HomeActionCell
                 
-                cell.populateCell(title: "home_cell_map".localized, imageIdentifier: "pict_map", bottomMargin: 32)
+                cell.populateCell(title: "home_cell_map".localized,imageUrl: nil, imageIdentifier: "ic_home_sol", bottomMargin: 32)
                 return cell
             }
         }
@@ -195,7 +195,7 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionCell.identifier, for: indexPath) as! HomeActionCell
         let action = homeViewModel.actions[indexPath.row - 1]
-        cell.populateCell(title: "\(action.name)", imageUrl: action.action_url)
+        cell.populateCell(title: "\(action.name)", imageUrl: action.action_url,imageIdentifier: nil)
         return cell
     }
     

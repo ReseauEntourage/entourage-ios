@@ -33,7 +33,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kzo-9T-lpu">
-                        <rect key="frame" x="28" y="11" width="304" height="116"/>
+                        <rect key="frame" x="28" y="0.0" width="304" height="116"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="253" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" image="img_neighb_empty_group" translatesAutoresizingMaskIntoConstraints="NO" id="aeL-Ft-oXH">
                                 <rect key="frame" x="142" y="9" width="154" height="123"/>
@@ -88,7 +88,7 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="nh3-xR-hO2">
-                        <rect key="frame" x="28" y="144" width="304" height="78"/>
+                        <rect key="frame" x="28" y="133" width="304" height="78"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="189-Wv-gbq">
                                 <rect key="frame" x="0.0" y="0.0" width="146" height="78"/>
@@ -254,7 +254,7 @@ rejoints</string>
                 <color key="backgroundColor" name="Beige"/>
                 <constraints>
                     <constraint firstItem="Kzo-9T-lpu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="37J-i9-ktL"/>
-                    <constraint firstItem="Kzo-9T-lpu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="OQI-3R-o2h"/>
+                    <constraint firstItem="Kzo-9T-lpu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="OQI-3R-o2h"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nh3-xR-hO2" secondAttribute="bottom" id="Rcf-Bc-Roi"/>
                     <constraint firstItem="nh3-xR-hO2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="Vhc-6W-ZBE"/>
                     <constraint firstItem="nh3-xR-hO2" firstAttribute="top" secondItem="Kzo-9T-lpu" secondAttribute="bottom" constant="17" id="jyr-DY-K1a"/>
