@@ -200,7 +200,7 @@
         <!--Navigation Controller-->
         <scene sceneID="eds-ho-3eE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="tYP-lH-Vmb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navEventCreateVCMain" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="tYP-lH-Vmb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -2236,7 +2236,7 @@ L2</string>
         <!--Navigation Controller-->
         <scene sceneID="YWm-Oe-Rgf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="btn-cn-slv" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navEventEditVCMain" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="btn-cn-slv" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>

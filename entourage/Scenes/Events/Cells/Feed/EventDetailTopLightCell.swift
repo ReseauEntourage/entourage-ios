@@ -53,6 +53,7 @@ class EventDetailTopLightCell: UITableViewCell {
         ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
         ui_view_place_limit.isHidden = true
+        ui_view_members_more.isHidden = true
     }
     
     func populateCell(event:Event?, delegate:EventDetailTopCellDelegate) {

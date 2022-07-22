@@ -849,6 +849,13 @@
 "params_leave_event_pop_bt_cancel" = "Annuler";
 
 //Contacts pop add
+"event_add_contact_accept" = "Ajouter";
+"event_add_contact_cancel" = "Annuler";
+"event_add_contact_title" = "Ajouter l’évènement à votre\nagenda personnel ? ";
+"event_add_contact_description" = "Vous pouvez ajouter cet évènement à votre calendrier personnel avec l’ensemble des informations (lieu, heure…)\nVous serez rappelé un jour avant.";
+
+"event_add_contact_places_title" = "Événement à places limitées";
+"event_add_contact_places_description" = "Attention, cet événement est à places limitées, votre inscription n’est pas garantie. L’administrateur de l’événement reviendra vers vous pour vous confirmer la réservation de votre place.";
 "event_add_contact_error" = "Pour ajouter l'événement dans votre calendrier, vous devez activer l'accès au calendrier";
 "event_add_contact_refuse" = "Refuser";
 "event_add_contact_activate" = "Activer";

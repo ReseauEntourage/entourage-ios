@@ -7,6 +7,8 @@
 
 import UIKit
 import IHProgressHUD
+import EventKit
+import EventKitUI
 
 class EventDetailFullFeedViewController: UIViewController {
     
@@ -156,34 +158,105 @@ extension EventDetailFullFeedViewController: EventDetailFullDelegate {
         showPopLeave()
     }
     
+    //MARK: - Calendar -
     func addToCalendar() {
-        self.showWIP(parentVC: self.navigationController)
+        let store = EKEventStore()
+        store.requestAccess(to: .event, completion: {(granted,error) in
+            if granted && error == nil {
+                self.showPopCalendar()
+            }
+            else {
+                DispatchQueue.main.async {
+                    let alertVC = MJAlertController()
+                    alertVC.alertTagName = .AcceptSettings
+                    let buttonCancel = MJAlertButtonType(title: "event_add_contact_refuse".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .appOrange), bgColor: .appOrangeLight_50, cornerRadius: -1)
+                    let buttonValidate = MJAlertButtonType(title: "event_add_contact_activate".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrange, cornerRadius: -1)
+                    alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "event_add_contact_error".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self.navigationController)
+                    
+                    alertVC.delegate = self
+                    alertVC.show()
+                }
+            }
+        })
+    }
+    
+    func showPopCalendar() {
+        DispatchQueue.main.async {
+            let alertVC = MJAlertController()
+            alertVC.alertTagName = .AcceptAdd
+            let buttonCancel = MJAlertButtonType(title: "event_add_contact_cancel".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .appOrange), bgColor: .appOrangeLight_50, cornerRadius: -1)
+            let buttonValidate = MJAlertButtonType(title: "event_add_contact_accept".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrange, cornerRadius: -1)
+            alertVC.configureAlert(alertTitle: "event_add_contact_title".localized, message: "event_add_contact_description".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self.navigationController)
+            
+            alertVC.delegate = self
+            alertVC.show()
+        }
+    }
+    
+    func showAddCalendar() {
+        let store = EKEventStore()
+        store.requestAccess(to: .event, completion: {(granted,error) in
+            if granted && error == nil {
+                let ekEvent = EKEvent(eventStore: store)
+                ekEvent.title = self.event?.title
+                ekEvent.startDate = self.event?.getMetadateStartDate()
+                ekEvent.endDate = self.event?.getMetadateEndDate()
+                
+                if let _url = self.event?.onlineEventUrl, let url = URL.init(string: _url) {
+                    ekEvent.url = url
+                }
+                else if let _lat = self.event?.location?.latitude, let _long = self.event?.location?.longitude {
+                    let _structLovation = EKStructuredLocation()
+                    _structLovation.geoLocation = CLLocation(latitude: _lat, longitude: _long)
+                    _structLovation.title = self.event?.addressName
+                    ekEvent.structuredLocation = _structLovation
+                    ekEvent.location = self.event?.addressName
+                }
+                
+                DispatchQueue.main.async {
+                    let vc = EKEventEditViewController()
+                    vc.editViewDelegate = self
+                    vc.event = ekEvent
+                    vc.eventStore = store
+                    self.present(vc, animated: true, completion: nil)
+                }
+            }
+        })
     }
 }
 
 //MARK: - MJAlertControllerDelegate -
 extension EventDetailFullFeedViewController: MJAlertControllerDelegate {
-    func validateLeftButton(alertTag:MJAlertTAG) {
+    func validateLeftButton(alertTag:MJAlertTAG) {}
+    
+    func validateRightButton(alertTag:MJAlertTAG) {
+        if alertTag == .None {
+            self.sendLeaveGroup()
+        }
+        
         if alertTag == .AcceptSettings {
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url, options: [:],completionHandler:nil)
             }
         }
-    }
-    
-    func validateRightButton(alertTag:MJAlertTAG) {
-        if alertTag == .None {
-            self.sendLeaveGroup()
+        if alertTag == .AcceptAdd {
+            self.showAddCalendar()
         }
     }
     
     func closePressed(alertTag:MJAlertTAG) {}
 }
 
-
 //MARK: - MJNavBackViewDelegate -
 extension EventDetailFullFeedViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.dismiss(animated: true)
+    }
+}
+
+//MARK: - EKEVENT Delegate -
+extension EventDetailFullFeedViewController: EKEventEditViewDelegate {
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

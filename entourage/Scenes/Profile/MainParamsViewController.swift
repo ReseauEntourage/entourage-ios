@@ -143,7 +143,7 @@ extension MainParamsViewController: MJAlertControllerDelegate {
             }
         case .Logout:
             NotificationCenter.default.post(name: NSNotification.Name(notificationLoginError), object: self)
-        case .None,.AcceptSettings:
+        case .None,.AcceptSettings,.AcceptAdd:
             break
         }
     }

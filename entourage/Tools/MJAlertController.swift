@@ -149,6 +149,7 @@ enum MJAlertTAG {
     case Suppress
     case Logout
     case None
+    case AcceptAdd
 }
 
 //MARK: - MJAlertButtonType -
