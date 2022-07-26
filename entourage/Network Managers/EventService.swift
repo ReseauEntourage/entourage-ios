@@ -238,4 +238,74 @@ struct EventService:ParsingDataCodable {
             DispatchQueue.main.async { completion(event, nil) }
         }
     }
+    
+    static func cancelEvent(eventId:Int, completion: @escaping (_ event:Event?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIEventCancel
+        endpoint = String.init(format: endpoint,eventId, token)
+        
+        Logger.print("Endpoint passed cancel event \(endpoint)")
+                
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
+            Logger.print("Response cancel event: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error cancel event - \(error)")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let event:Event? = self.parseData(data: data,key: "outing")
+            DispatchQueue.main.async { completion(event, nil) }
+        }
+    }
+    
+    
+    //MARK: - Report Event + Post -
+    static func reportEvent(eventId:Int,message:String?,tags:[String], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIReportEvent
+        endpoint = String.init(format: endpoint,"\(eventId)", token)
+        
+        let _msg:String = message != nil ? (message!.isEmpty ? "" : message!) : ""
+        let parameters:[String:Any] = ["report":["message":_msg, "signals":tags]]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Endpoint reportEvent \(endpoint) -- params : \(parameters)")
+                
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response reportEvent: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error reportEvent - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
+    static func reportEventPost(eventId:Int,postId:Int,message:String?,tags:[String], isPost:Bool, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = isPost ? kAPIReportPostEvent : kAPIReportPostCommentEvent
+        endpoint = String.init(format: endpoint,"\(eventId)","\(postId)", token)
+        
+        let _msg:String = message != nil ? (message!.isEmpty ? "" : message!) : ""
+        let parameters:[String:Any] = ["report":["message":_msg, "signals":tags]]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Endpoint report Event post \(endpoint) -- params : \(parameters)")
+                
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response report Event post: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error report Event post - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
 }

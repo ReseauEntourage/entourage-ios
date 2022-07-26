@@ -327,21 +327,13 @@ class EventDetailFeedViewController: UIViewController {
     
     //MARK: - IBAction -
     @IBAction func action_show_params(_ sender: Any) {
-        //TODO: a faire
-        
-        //TODO: show edit Et suppress apres tests
-        if event?.author?.uid == UserDefaults.currentUser?.sid, let _event = event {
-            
-            if let vc = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventEditVCMain") as? EventEditMainViewController {
-                vc.eventId = _event.uid
-                vc.currentEvent = _event
+        if let _event = event {
+            if let navvc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "params_eventNav") as? UINavigationController, let vc = navvc.topViewController as? EventParamsViewController {
+                vc.event = _event
                 vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true, completion: nil)
+                self.present(navvc, animated: true, completion: nil)
                 return
             }
-        }
-        else {
-            self.showWIP(parentVC: self)
         }
     }
     

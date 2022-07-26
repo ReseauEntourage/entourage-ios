@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0203685127FEE55A00FABCBB /* EditProfileInterestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */; };
+		02040CF2288E8C2E00AB1FBB /* EventParamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CF1288E8C2E00AB1FBB /* EventParamsViewController.swift */; };
+		02040CF5288E97E000AB1FBB /* EventParamTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CF4288E97E000AB1FBB /* EventParamTopCell.swift */; };
+		02040CF7288E97F600AB1FBB /* EventParamSignalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CF6288E97F600AB1FBB /* EventParamSignalCell.swift */; };
+		02040CF9288E980C00AB1FBB /* EventParamEditShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CF8288E980C00AB1FBB /* EventParamEditShow.swift */; };
+		02040CFB288E981800AB1FBB /* EventParamNotifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CFA288E981800AB1FBB /* EventParamNotifCell.swift */; };
+		02040CFD288ED75100AB1FBB /* EventParamsCGUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02040CFC288ED75100AB1FBB /* EventParamsCGUViewController.swift */; };
 		020429B5282E81B00030B035 /* NeighborhoodPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020429B4282E81B00030B035 /* NeighborhoodPostCell.swift */; };
 		0207BF8527F2059400631914 /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0207BF8427F2059400631914 /* UserDetail.storyboard */; };
 		0207BF8727F20C1600631914 /* UserProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */; };
@@ -322,6 +328,12 @@
 
 /* Begin PBXFileReference section */
 		0203685027FEE55A00FABCBB /* EditProfileInterestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileInterestCell.swift; sourceTree = "<group>"; };
+		02040CF1288E8C2E00AB1FBB /* EventParamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamsViewController.swift; sourceTree = "<group>"; };
+		02040CF4288E97E000AB1FBB /* EventParamTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamTopCell.swift; sourceTree = "<group>"; };
+		02040CF6288E97F600AB1FBB /* EventParamSignalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamSignalCell.swift; sourceTree = "<group>"; };
+		02040CF8288E980C00AB1FBB /* EventParamEditShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamEditShow.swift; sourceTree = "<group>"; };
+		02040CFA288E981800AB1FBB /* EventParamNotifCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamNotifCell.swift; sourceTree = "<group>"; };
+		02040CFC288ED75100AB1FBB /* EventParamsCGUViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventParamsCGUViewController.swift; sourceTree = "<group>"; };
 		020429B4282E81B00030B035 /* NeighborhoodPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostCell.swift; sourceTree = "<group>"; };
 		0207BF8427F2059400631914 /* UserDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
 		0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDetailViewController.swift; sourceTree = "<group>"; };
@@ -655,6 +667,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02040CF3288E97B700AB1FBB /* Params */ = {
+			isa = PBXGroup;
+			children = (
+				02040CF4288E97E000AB1FBB /* EventParamTopCell.swift */,
+				02040CF6288E97F600AB1FBB /* EventParamSignalCell.swift */,
+				02040CF8288E980C00AB1FBB /* EventParamEditShow.swift */,
+				02040CFA288E981800AB1FBB /* EventParamNotifCell.swift */,
+			);
+			path = Params;
+			sourceTree = "<group>";
+		};
 		0209CC9527CF735800983135 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -677,6 +700,7 @@
 				021FD96B2876F12E00D3AA54 /* EventListSectionCell.swift */,
 				021FD9662875F4ED00D3AA54 /* EventListMeCell.xib */,
 				021FD96C2876F12E00D3AA54 /* EventListSectionCell.xib */,
+				02040CF3288E97B700AB1FBB /* Params */,
 				02E0EFA9287870CA009B2C65 /* Feed */,
 			);
 			path = Cells;
@@ -765,6 +789,8 @@
 				02C54ADE2885BD4A00754222 /* EventFiltersViewController.swift */,
 				02E0EF9F28783900009B2C65 /* EventDetailFeedViewController.swift */,
 				02FB543E287DAE4C00E4B9FA /* EventDetailFullFeedViewController.swift */,
+				02040CF1288E8C2E00AB1FBB /* EventParamsViewController.swift */,
+				02040CFC288ED75100AB1FBB /* EventParamsCGUViewController.swift */,
 				024131C92862020B00561FB4 /* Create */,
 				0241FE0B286DDB700065E560 /* EventEditMainViewController.swift */,
 				021FD9682876CD8500D3AA54 /* Cells */,
@@ -1606,6 +1632,7 @@
 				0247AD0228193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift in Sources */,
 				02B94C47285223A4006059EF /* PedagogicListViewController.swift in Sources */,
 				02FB543F287DAE4C00E4B9FA /* EventDetailFullFeedViewController.swift in Sources */,
+				02040CF5288E97E000AB1FBB /* EventParamTopCell.swift in Sources */,
 				024131CF2862026500561FB4 /* EventCreatePhase1ViewController.swift in Sources */,
 				0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */,
 				02FB543D287D74B800E4B9FA /* GlobalObjects.swift in Sources */,
@@ -1676,6 +1703,7 @@
 				02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */,
 				02D64F4D2799D5E000F6C4BD /* InviteSourceViewController.swift in Sources */,
 				02C91A29278F335000305E0B /* MainTabbarViewController.swift in Sources */,
+				02040CFD288ED75100AB1FBB /* EventParamsCGUViewController.swift in Sources */,
 				02A3DD3927FDC72C0060EC2E /* NeighborhoodCreatePageViewController.swift in Sources */,
 				02833F9C2822B54D00000156 /* NeighborhoodUserCell.swift in Sources */,
 				021F084F2798113D00F32A34 /* LocationManager.swift in Sources */,
@@ -1701,6 +1729,7 @@
 				022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */,
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
 				029638F12869E76600E10EFB /* EventPlaceLimitCell.swift in Sources */,
+				02040CF9288E980C00AB1FBB /* EventParamEditShow.swift in Sources */,
 				021FD963287442C700D3AA54 /* NeighborhoodListEventsViewController.swift in Sources */,
 				02E0098927E33DD200BB23CA /* WebLinkManager.swift in Sources */,
 				026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */,
@@ -1760,6 +1789,8 @@
 				02E0099527E3863D00BB23CA /* MenuItemInfos.swift in Sources */,
 				02C0A0E7278EEC6B00B0C646 /* NetworkManager.swift in Sources */,
 				02846CC027EC921700D85ADA /* SelectTagCell.swift in Sources */,
+				02040CF7288E97F600AB1FBB /* EventParamSignalCell.swift in Sources */,
+				02040CF2288E8C2E00AB1FBB /* EventParamsViewController.swift in Sources */,
 				0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */,
 				0258AFE6282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift in Sources */,
 				0224597D28001B2500944DE4 /* Address.swift in Sources */,
@@ -1769,6 +1800,7 @@
 				026819C0278E105600A98A4A /* OTLoginChangePhoneViewController.swift in Sources */,
 				02B94C2F284F9277006059EF /* HomeSectionCell.swift in Sources */,
 				029F690E27D905F5003D1E39 /* MainUserInfosCell.swift in Sources */,
+				02040CFB288E981800AB1FBB /* EventParamNotifCell.swift in Sources */,
 				02B94C4B28522BA5006059EF /* PedagogicSectionCell.swift in Sources */,
 				02E21929283637E9002A1FCB /* NeighborhoodPostAddViewController.swift in Sources */,
 				02E069E2279184B3006DB1B6 /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */,

@@ -11,6 +11,7 @@ struct ApplicationTheme {
     static var backgroundThemeColor: UIColor = UIColor.appOrange
     static var labelNavBarColor: UIColor = UIColor.appGreyishBrown
     
+    static let marginDefault:CGFloat = 28
     static let bigCornerRadius:CGFloat = 35
     static let topPopViewControllerSpacing:CGFloat = 30
     

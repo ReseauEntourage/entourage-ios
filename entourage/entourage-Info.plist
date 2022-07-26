@@ -40,6 +40,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Pour ajouter des événements à votre calendrier</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Pour réaliser votre photo de profil.</string>
 	<key>NSContactsUsageDescription</key>

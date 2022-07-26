@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import IHProgressHUD
 
 class NeighborhoodParamsGroupViewController: BasePopViewController {
     
@@ -66,7 +65,6 @@ class NeighborhoodParamsGroupViewController: BasePopViewController {
         }
         
         NeighborhoodService.leaveNeighborhood(groupId: neighborhood.uid, userId: UserDefaults.currentUser!.sid) { group, error in
-            IHProgressHUD.dismiss()
             if error == nil {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
                 self.goBack()

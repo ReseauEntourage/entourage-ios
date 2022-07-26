@@ -70,7 +70,11 @@ let kAPIGetEventPostsMessage = "outings/%@/chat_messages?token=%@&page=%d&per=%d
 let kAPIJoinEvent = "outings/%@/users?token=%@"
 let kAPILeaveEvent = "outings/%@/users/%@?token=%@"
 let kAPIGetEventUsers = "outings/%@/users?token=%@"
+let kAPIEventCancel = "outings/%d?token=%@"
 
+let kAPIReportEvent = "outings/%@/report?token=%@"
+let kAPIReportPostEvent = "outings/%@/chat_messages/%@/report?token=%@"
+let kAPIReportPostCommentEvent = "outings/%@/chat_messages/%@/report?token=%@"
 //WebLink
 let emailContact = "contact@entourage.social"
 let GDS_INFO_ALERT_WEB_LINK = "https://soliguide.fr"

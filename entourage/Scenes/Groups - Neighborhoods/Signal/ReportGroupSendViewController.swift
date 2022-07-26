@@ -23,10 +23,11 @@ class ReportGroupSendViewController: UIViewController {
     let placeholderBioColor = UIColor.lightGray
     let bioColor = UIColor.black
     
-    
+    var event:Event? = nil
     var group:Neighborhood? = nil
     var signalType:GroupDetailSignalType = .group
     
+    var eventId:Int? = nil
     var groupId:Int? = nil
     var postId:Int? = nil
     
@@ -99,14 +100,36 @@ class ReportGroupSendViewController: UIViewController {
                     self.pageDelegate?.closeMain()
                 }
             }
-        case .comment,.publication:
-            guard let groupId = groupId, let postId = postId else {
+        case .event:
+            guard let event = event else {
                 return
             }
-            let isPost = signalType == .publication
-            NeighborhoodService.reportNeighborhoodPost(groupId:groupId, postId: postId, message: message, tags: tagsSignalsWS, isPost: isPost) { error in
+            EventService.reportEvent(eventId: event.uid, message: message, tags: tagsSignalsWS) { error in
                 DispatchQueue.main.async {
                     self.pageDelegate?.closeMain()
+                }
+            }
+        case .comment,.publication:
+            let isPost = signalType == .publication
+            
+            if eventId != nil {
+                guard let eventId = eventId, let postId = postId else {
+                    return
+                }
+                EventService.reportEventPost(eventId: eventId, postId: postId, message: message, tags: tagsSignalsWS, isPost: isPost) { error in
+                    DispatchQueue.main.async {
+                        self.pageDelegate?.closeMain()
+                    }
+                }
+            }
+            else {
+                guard let groupId = groupId, let postId = postId else {
+                    return
+                }
+                NeighborhoodService.reportNeighborhoodPost(groupId:groupId, postId: postId, message: message, tags: tagsSignalsWS, isPost: isPost) { error in
+                    DispatchQueue.main.async {
+                        self.pageDelegate?.closeMain()
+                    }
                 }
             }
         }

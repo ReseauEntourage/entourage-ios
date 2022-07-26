@@ -9,9 +9,11 @@ import UIKit
 
 class ReportGroupPageViewController: UIPageViewController {
     
+    var event:Event? = nil
     var group:Neighborhood? = nil
     var signalType:GroupDetailSignalType = .group
     
+    var eventId:Int? = nil
     var groupId:Int? = nil
     var postId:Int? = nil
     
@@ -54,9 +56,11 @@ extension ReportGroupPageViewController: ReportGroupPageDelegate {
             sendVc.tagsignals = tags
             sendVc.pageDelegate = self
             sendVc.group = self.group
+            sendVc.event = self.event
             sendVc.signalType = signalType
             sendVc.postId = postId
             sendVc.groupId = groupId
+            sendVc.eventId = self.eventId
             setViewControllers([sendVc], direction: .forward, animated: true)
         }
     }

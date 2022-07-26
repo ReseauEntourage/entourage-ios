@@ -650,6 +650,7 @@
 "neighborhood_CGU_4" = "Je m’engage à ne faire aucune distinction de race, de couleur, de sexe, de langue, de religion, d’opinion politique, de fortune, de naissance ou de toute autre situation.";
 
 //Report Group / comment / publication
+"report_event_title" = "Signaler l'événement";
 "report_group_title" = "Signaler le groupe";
 "report_publication_title" = "Signaler la publication";
 "report_comment_title" = "Signaler le commentaire";
@@ -842,11 +843,16 @@
 "event_filter_google_placeholder" = "Choisir une adresse";
 "event_filter_position_placeholder" = "Ma position";
 
-//Pop leave event
+//Pop leave/cancel event
 "params_leave_event_pop_title" = "Quitter l'événement";
 "params_leave_event_pop_message" = "Souhaitez-vous quitter l'événement ?";
 "params_leave_event_pop_bt_quit" = "Quitter";
 "params_leave_event_pop_bt_cancel" = "Annuler";
+
+"params_cancel_event_pop_bt_delete" = "Annuler";
+"params_cancel_event_pop_bt_cancel" = "Fermer";
+"params_cancel_event_pop_title" = "Annuler l'événement";
+"params_cancel_event_pop_message" = "Souhaitez-vous Annuler l'événement ?";
 
 //Contacts pop add
 "event_add_contact_accept" = "Ajouter";
@@ -859,3 +865,31 @@
 "event_add_contact_error" = "Pour ajouter l'événement dans votre calendrier, vous devez activer l'accès au calendrier";
 "event_add_contact_refuse" = "Refuser";
 "event_add_contact_activate" = "Activer";
+
+//Event settings
+"event_params_title" = "Paramètres de l’événement";
+"event_params_cgu" = "Règlement de l’événement";
+"event_params_edit" = "Modifier l’événement";
+"event_params_recurrency" = "Modifier la récurrence";
+"event_params_signal" = "Signaler l’événement ";
+"event_params_cgu_title" = "Le réglement";
+"event_params_cgu_description" = "Règlement de l’événement, à lire attentivement.";
+"event_params_participant" = "participant";
+"event_params_participants" = "participants";
+"event_params_quit" = "Quitter l’événement";
+"event_params_cancel" = "Annuler l'événement";
+
+"event_params_notif_title" = "Me notifier de";
+"event_params_notif_all" = "Toute l'activité de l’événement";
+"event_params_notif_new_publications" = "Les nouvelles publications";
+"event_params_notif_new_members" = "L'arrivée de nouveaux participants";
+
+//CGU
+"event_CGU_1_title" = "Être bienveillant";
+"event_CGU_1" = "J’utilise l’application à des fins d’entraide en faveur des personnes en situation de grande précarité ou d’exclusion.";
+"event_CGU_2_title" = "Recueillir l’accord";
+"event_CGU_2" = "Je m’assure du consentement des personnes concernées avant de créer une action.";
+"event_CGU_3_title" = "Assurer la protection des personnes";
+"event_CGU_3" = "Je garantie de ne pas communiquer de données personnelles sensibles (médicales, judiciaires…), ou permettant d’identifier ou de localiser précisément les personnes.";
+"event_CGU_4_title" = "Être solidaire, sans distinction";
+"event_CGU_4" = "Je m’engage à ne faire aucune distinction de race, de couleur, de sexe, de langue, de religion, d’opinion politique, de fortune, de naissance ou de toute autre situation.";
