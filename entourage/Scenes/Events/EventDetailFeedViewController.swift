@@ -13,6 +13,8 @@ import EventKitUI
 
 class EventDetailFeedViewController: UIViewController {
     
+    @IBOutlet weak var ui_lbl_canceled: UILabel!
+    @IBOutlet weak var ui_view_canceled: UIView!
     @IBOutlet weak var ui_view_top_bg: UIView!
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_top_view: MJNavBackView!
@@ -79,6 +81,7 @@ class EventDetailFeedViewController: UIViewController {
         ui_bt_floating_join.isHidden = true
 
         getEventDetail()
+        ui_view_canceled.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -137,6 +140,10 @@ class EventDetailFeedViewController: UIViewController {
         ui_bt_floating_join.layer.cornerRadius = ui_bt_floating_join.frame.height / 2
         ui_title_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_title_bt_join.text = "event_detail_button_participe_OFF".localized
+        
+        ui_view_canceled.layer.cornerRadius = 8
+        ui_lbl_canceled.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldBlanc(size: 15))
+        ui_lbl_canceled.text = "event_canceled".localized.uppercased()
     }
     
     func populateTopView(isAfterLoading:Bool) {
@@ -201,6 +208,13 @@ class EventDetailFeedViewController: UIViewController {
             self.splitMessages()
             self.ui_tableview.reloadData()
             self.isLoading = false
+            
+            if event?.isCanceled() ?? false {
+                self.ui_view_canceled.isHidden = false
+            }
+            else {
+                self.ui_view_canceled.isHidden = true
+            }
             
             if !currentImg {
                 self.populateTopView(isAfterLoading: true)
@@ -636,6 +650,8 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
     }
     
     func showPlace() {
+        if event?.isCanceled() ?? false { return }
+        
         if event?.isOnline ?? false, let urlStr = event?.onlineEventUrl {
             WebLinkManager.openUrl(url: URL(string: urlStr), openInApp: false, presenterViewController: self)
         }

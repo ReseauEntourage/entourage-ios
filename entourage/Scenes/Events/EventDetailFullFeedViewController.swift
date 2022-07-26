@@ -143,6 +143,8 @@ extension EventDetailFullFeedViewController: EventDetailFullDelegate {
     }
     
     func showLocation() {
+        if event?.isCanceled() ?? false { return }
+        
         if event?.isOnline ?? false, let urlStr = event?.onlineEventUrl {
             WebLinkManager.openUrl(url: URL(string: urlStr), openInApp: false, presenterViewController: self)
         }

@@ -73,17 +73,25 @@
                         <color key="textColor" name="gris_112"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_event_canceled" translatesAutoresizingMaskIntoConstraints="NO" id="GXp-iK-TW2">
+                        <rect key="frame" x="118" y="5" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="2NI-2Z-rxp"/>
+                            <constraint firstAttribute="height" constant="20" id="q6c-Ws-sxj"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
                     <constraint firstItem="xft-PW-a9b" firstAttribute="leading" secondItem="VxJ-kc-bBP" secondAttribute="trailing" constant="10" id="2NI-HV-4zE"/>
                     <constraint firstItem="cMP-w6-HKs" firstAttribute="top" secondItem="AEp-eM-B3w" secondAttribute="bottom" constant="10" id="2gq-MB-JZa"/>
-                    <constraint firstItem="AEp-eM-B3w" firstAttribute="leading" secondItem="xft-PW-a9b" secondAttribute="leading" id="2sm-Hd-L1f"/>
                     <constraint firstAttribute="bottom" secondItem="V4x-sb-dCg" secondAttribute="bottom" id="7Lg-G6-aPB"/>
                     <constraint firstItem="VxJ-kc-bBP" firstAttribute="leading" secondItem="q6g-Fy-0d4" secondAttribute="leading" constant="16" id="8VA-bP-f8R"/>
+                    <constraint firstItem="GXp-iK-TW2" firstAttribute="top" secondItem="VxJ-kc-bBP" secondAttribute="top" constant="-3" id="9xS-Ze-KwW"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="19i-WM-5eN" secondAttribute="trailing" constant="8" id="AG1-Yg-hWj"/>
                     <constraint firstItem="cMP-w6-HKs" firstAttribute="leading" secondItem="AEp-eM-B3w" secondAttribute="leading" id="AYw-Iv-zb1"/>
                     <constraint firstItem="h1L-Fy-qUf" firstAttribute="centerY" secondItem="cMP-w6-HKs" secondAttribute="centerY" id="GnX-eE-UkI"/>
+                    <constraint firstItem="GXp-iK-TW2" firstAttribute="leading" secondItem="VxJ-kc-bBP" secondAttribute="trailing" constant="8" symbolic="YES" id="Paw-eG-bmf"/>
                     <constraint firstItem="V4x-sb-dCg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VxJ-kc-bBP" secondAttribute="bottom" constant="8" id="R4M-nz-OZx"/>
                     <constraint firstItem="AEp-eM-B3w" firstAttribute="top" secondItem="xft-PW-a9b" secondAttribute="bottom" constant="8" id="TPm-09-I2w"/>
                     <constraint firstItem="rU3-kg-lsr" firstAttribute="centerY" secondItem="AEp-eM-B3w" secondAttribute="centerY" id="UnS-5f-XpM"/>
@@ -91,6 +99,7 @@
                     <constraint firstItem="ck9-si-3WR" firstAttribute="leading" secondItem="cMP-w6-HKs" secondAttribute="leading" id="dZe-k3-Vmb"/>
                     <constraint firstItem="rU3-kg-lsr" firstAttribute="leading" secondItem="AEp-eM-B3w" secondAttribute="trailing" constant="8" id="ioe-w2-fmf"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xft-PW-a9b" secondAttribute="trailing" constant="16" id="jcS-qA-tts"/>
+                    <constraint firstItem="AEp-eM-B3w" firstAttribute="leading" secondItem="VxJ-kc-bBP" secondAttribute="trailing" constant="10" id="mKM-1P-TCw"/>
                     <constraint firstItem="h1L-Fy-qUf" firstAttribute="leading" secondItem="cMP-w6-HKs" secondAttribute="trailing" constant="8" symbolic="YES" id="mjR-4d-Mom"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h1L-Fy-qUf" secondAttribute="trailing" constant="16" id="nce-ac-iOJ"/>
                     <constraint firstItem="ck9-si-3WR" firstAttribute="top" secondItem="cMP-w6-HKs" secondAttribute="bottom" constant="10" id="qkz-B2-fy3"/>
@@ -105,8 +114,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ui_constraint_left_title" destination="2NI-HV-4zE" id="RUJ-rb-qvZ"/>
                 <outlet property="ui_date" destination="rU3-kg-lsr" id="uI1-Cg-sTY"/>
                 <outlet property="ui_image" destination="VxJ-kc-bBP" id="WKd-pA-zdp"/>
+                <outlet property="ui_iv_canceled" destination="GXp-iK-TW2" id="9M4-Es-hjd"/>
                 <outlet property="ui_location" destination="h1L-Fy-qUf" id="3YU-IA-INS"/>
                 <outlet property="ui_members" destination="19i-WM-5eN" id="N2D-eE-Cgc"/>
                 <outlet property="ui_title" destination="xft-PW-a9b" id="ESW-IL-XdU"/>
@@ -116,6 +127,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ic_event_canceled" width="20" height="20"/>
         <image name="ic_event_list_date" width="10" height="10"/>
         <image name="ic_event_list_loc" width="11" height="10"/>
         <image name="ic_event_list_user" width="10" height="10"/>

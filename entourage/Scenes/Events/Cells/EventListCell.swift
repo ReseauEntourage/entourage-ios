@@ -12,6 +12,8 @@ class EventListCell: UITableViewCell {
 
     static let EventlistMeIdentifier = "EventListMeCell"
     
+    @IBOutlet weak var ui_iv_canceled: UIImageView!
+    @IBOutlet weak var ui_constraint_left_title: NSLayoutConstraint!
     @IBOutlet weak var ui_image: UIImageView!
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_date: UILabel!
@@ -40,7 +42,19 @@ class EventListCell: UITableViewCell {
     }
     
     func populateCell(event:Event, hideSeparator:Bool) {
-        ui_title.text = event.title
+        
+        if event.isCanceled() {
+            ui_iv_canceled.isHidden = false
+            ui_constraint_left_title.constant = 38
+            let str = "\(event.title) - \("event_cancel_list".localized)"
+            let attrStr = Utils.formatString(messageTxt: str, messageTxtHighlight: "- \("event_cancel_list".localized)", fontColorType: MJTextFontColorStyle(font: ApplicationTheme.getFontQuickSandBold(size: 15), color: .appGris112), fontColorTypeHighlight: ApplicationTheme.getFontLegendGris(size: 13))
+            ui_title.attributedText = attrStr
+        }
+        else {
+            ui_constraint_left_title.constant = 10
+            ui_title.text = event.title
+            ui_iv_canceled.isHidden = true
+        }
         
         if let imageUrl = event.metadata?.portrait_url, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
             ui_image.sd_setImage(with: mainUrl, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in

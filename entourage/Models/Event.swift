@@ -38,8 +38,13 @@ struct Event:Codable {
     var members:[MemberLight]? = nil
     
     var status = ""
+    private var statusChangedAt:String? = nil
     private var createdAt:String? = nil
     private var updatedAt:String? = nil
+    
+    func getChangedStatusDate() -> Date? {
+        return statusChangedAt == nil ? nil : Utils.getDateFromWSDateString(statusChangedAt)
+    }
     
     func getCreateUpdateDate() -> (dateStr:String,isCreated:Bool) {
         var date:Date? = nil
@@ -172,6 +177,10 @@ struct Event:Codable {
         }
     }
     
+    func isCanceled() -> Bool {
+        return status == "closed"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case uuid
@@ -198,6 +207,7 @@ struct Event:Codable {
         case posts
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case statusChangedAt = "status_changed_at"
     }
     
     func dictionaryForWS() -> [String:Any] {

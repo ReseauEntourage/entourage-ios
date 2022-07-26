@@ -17,12 +17,19 @@ class EventParamsViewController: BasePopViewController {
     
     var hasRecurrency = false
     
+    var isCanceled = false
+    var isRealAuthor = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         hasRecurrency = event?.recurrence == .once ? false : true
         let currentUserId = UserDefaults.currentUser?.sid
-        if event?.author?.uid == currentUserId {
+        
+        isCanceled = event?.isCanceled() ?? false
+        isRealAuthor = event?.author?.uid == currentUserId
+        
+        if isRealAuthor && !isCanceled {
             eventUserType = .Creator
         }
         else {
@@ -135,7 +142,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
         case .Creator:
             return hasRecurrency ? 7 : 6
         case .Member:
-            return 5
+            return isRealAuthor ? 4 : 5
         case .Viewer:
             return 3
         }

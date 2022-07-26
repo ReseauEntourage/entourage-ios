@@ -10,6 +10,10 @@ import SDWebImage
 
 class EventDetailTopLightCell: UITableViewCell {
     
+    @IBOutlet weak var ui_iv_date: UIImageView!
+    @IBOutlet weak var ui_iv_time: UIImageView!
+    @IBOutlet weak var ui_iv_place: UIImageView!
+    
     @IBOutlet weak var ui_main_view: UIView!
     
     @IBOutlet weak var ui_title: UILabel!
@@ -21,6 +25,7 @@ class EventDetailTopLightCell: UITableViewCell {
     @IBOutlet weak var ui_img_member_3: UIImageView!
     @IBOutlet weak var ui_view_members_more: UIView!
     
+    @IBOutlet weak var ui_view_start_date: UIView!
     @IBOutlet weak var ui_start_time: UILabel!
     @IBOutlet weak var ui_start_date: UILabel!
     
@@ -44,6 +49,8 @@ class EventDetailTopLightCell: UITableViewCell {
         ui_main_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
+        ui_start_date.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_start_time.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_lbl_nb_members.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
         ui_lbl_bt_more.attributedText = Utils.formatStringUnderline(textString: "event_detail_button_more".localized, textColor: .appOrange,font: ApplicationTheme.getFontH2Noir().font)
@@ -105,6 +112,27 @@ class EventDetailTopLightCell: UITableViewCell {
         
         ui_lbl_nb_members.text = membersCount
         
+        if event.isCanceled() {
+            ui_title.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontQuickSandBold(size: 24), color: .appGris112))
+            ui_start_date.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 15), color: .appGris112))
+            ui_start_time.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 15), color: .appGris112))
+            locationTxtColor = .appGris112
+            ui_location_name.textColor = .appGris112
+            
+            ui_iv_place.image = UIImage.init(named: "ic_event_group_grey")
+            ui_iv_date.image = UIImage.init(named: "ic_event_date_grey")
+            ui_iv_time.image = UIImage.init(named: "ic_event_time_grey")
+            ui_place_limit_nb.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 15), color: .appGris112))
+        }
+        else {
+            ui_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
+            ui_start_date.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+            ui_start_time.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+            ui_place_limit_nb.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+            ui_iv_place.image = UIImage.init(named: "ic_event_group_clear")
+            ui_iv_date.image = UIImage.init(named: "ic_event_date")
+            ui_iv_time.image = UIImage.init(named: "ic_event_time")
+        }
         ui_title.text = event.title
         
         if let placeLimit = event.metadata?.place_limit, placeLimit > 0 {
@@ -121,15 +149,19 @@ class EventDetailTopLightCell: UITableViewCell {
         var _addressName = ""
         if event.isOnline ?? false {
             _addressName = event.onlineEventUrl ?? "-"
-            ui_iv_location.image = UIImage.init(named: "ic_web")
+            ui_iv_location.image = event.isCanceled() ? UIImage.init(named: "ic_web_grey") : UIImage.init(named: "ic_web")
         }
         else {
             _addressName = event.addressName ?? "-"
-            ui_iv_location.image = UIImage.init(named: "ic_location")
+            ui_iv_location.image = event.isCanceled() ? UIImage.init(named: "ic_location_grey") : UIImage.init(named: "ic_location")
         }
-
         
-        ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
+        if event.isCanceled() {
+            ui_location_name.text = _addressName
+        }
+        else {
+            ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
+        }
     }
     
     private func updateImageUrl(image:UIImageView, imageUrl:String?) {

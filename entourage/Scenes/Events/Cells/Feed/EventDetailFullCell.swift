@@ -10,6 +10,15 @@ import MapKit
 
 class EventDetailFullCell: UITableViewCell {
 
+    @IBOutlet weak var ui_bt_map: UIButton!
+    @IBOutlet weak var ui_view_buttons: UIView!
+    @IBOutlet weak var ui_view_cancel: UIView!
+    @IBOutlet weak var ui_lbl_cancel: UILabel!
+    
+    @IBOutlet weak var ui_iv_date: UIImageView!
+    @IBOutlet weak var ui_iv_time: UIImageView!
+    @IBOutlet weak var ui_iv_place: UIImageView!
+    
     @IBOutlet weak var ui_title: UILabel!
     
     @IBOutlet weak var ui_create_mod: UILabel!
@@ -29,6 +38,7 @@ class EventDetailFullCell: UITableViewCell {
     
     @IBOutlet weak var ui_title_bt_join: UILabel!
     @IBOutlet weak var ui_iv_plus: UIImageView!
+    @IBOutlet weak var ui_iv_plus_icon: UIImageView!
     @IBOutlet weak var ui_view_button_join: UIView!
     @IBOutlet weak var ui_view_add_calendar: UIView!
     @IBOutlet weak var ui_view_map: UIView!
@@ -49,9 +59,14 @@ class EventDetailFullCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        ui_view_cancel.isHidden = true
+        ui_view_cancel.layer.cornerRadius = 8
+        ui_lbl_cancel.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldBlanc(size: 15))
+        ui_lbl_cancel.text = "event_canceled".localized.uppercased()
+        
         ui_mapview.delegate = self
         ui_mapview.layer.cornerRadius = 20
+        ui_bt_map.layer.cornerRadius = 20
         
         ui_view_add_calendar.layer.cornerRadius = ui_view_add_calendar.frame.height / 2
         ui_view_add_calendar.layer.borderColor = UIColor.appOrange.cgColor
@@ -64,7 +79,6 @@ class EventDetailFullCell: UITableViewCell {
         ui_iv_plus.layer.cornerRadius = ui_iv_plus.frame.height / 2
         
         ui_create_mod.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
-        ui_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
         ui_lbl_nb_members.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_lbl_about_title?.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
         ui_lbl_about_title?.text = "event_detail_about_title".localized
@@ -77,14 +91,21 @@ class EventDetailFullCell: UITableViewCell {
         ui_view_button_join.layer.borderColor = UIColor.appOrange.cgColor
         ui_view_button_join.layer.borderWidth = 1
         
-        
         ui_img_member_1.layer.cornerRadius = ui_img_member_1.frame.height / 2
         ui_img_member_2.layer.cornerRadius = ui_img_member_2.frame.height / 2
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
         
-        ui_start_time.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        ui_start_date.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        ui_place_limit_nb.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        changeLabelsColors(newColor: .black)
+    }
+    
+    private func changeLabelsColors(newColor:UIColor) {
+        ui_title.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontQuickSandBold(size: 24), color: newColor))
+        self.ui_start_date.setupFontAndColor(style: MJTextFontColorStyle(font:ApplicationTheme.getFontNunitoRegular(size: 15), color: newColor))
+        self.ui_start_time.setupFontAndColor(style: MJTextFontColorStyle(font:ApplicationTheme.getFontNunitoRegular(size: 15), color: newColor))
+        self.ui_place_limit_nb.setupFontAndColor(style:MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 15), color: newColor))
+        self.ui_location_name.setupFontAndColor(style: MJTextFontColorStyle(font:ApplicationTheme.getFontNunitoRegular(size: 15), color: newColor))
+        self.ui_lbl_about_title.setupFontAndColor(style: MJTextFontColorStyle(font:ApplicationTheme.getFontQuickSandBold(size: 15), color: newColor))
+        self.ui_lbl_about_desc.setupFontAndColor(style: MJTextFontColorStyle(font:ApplicationTheme.getFontNunitoRegular(size: 15), color: newColor))
     }
     
     func populateCell(event:Event, delegate:EventDetailFullDelegate) {
@@ -99,7 +120,7 @@ class EventDetailFullCell: UITableViewCell {
         ui_view_map.isHidden = event.isOnline ?? true
         
         if !(event.isOnline ?? true) {
-            ui_iv_location.image = UIImage.init(named: "ic_location")
+            ui_iv_location.image = event.isCanceled() ? UIImage.init(named: "ic_location_grey") : UIImage.init(named: "ic_location")
             ui_view_distance.isHidden = false
             if let _location = event.location, let _lat = _location.latitude, let _long = _location.longitude {
                 let _locAnnot = CLLocation(latitude: _lat, longitude: _long)
@@ -110,20 +131,61 @@ class EventDetailFullCell: UITableViewCell {
             }
         }
         else {
-            ui_iv_location.image = UIImage.init(named: "ic_web")
+            ui_iv_location.image = event.isCanceled() ? UIImage.init(named: "ic_web_grey") : UIImage.init(named: "ic_web")
             ui_view_distance.isHidden = true
         }
         
-        ui_title.text = event.title
-        
-        let createUpdate = event.getCreateUpdateDate()
-        
-        if createUpdate.isCreated {
-            ui_create_mod.text = String.init(format: "event_created_full".localized, createUpdate.dateStr)
+        var _addressName = ""
+        if event.isOnline ?? false {
+            _addressName = event.onlineEventUrl ?? "-"
         }
         else {
-            ui_create_mod.text = String.init(format: "event_updated_full".localized, createUpdate.dateStr)
+            _addressName = event.addressName ?? "-"
         }
+
+        if event.isCanceled() {
+            ui_bt_map.backgroundColor = .white.withAlphaComponent(0.3)
+            self.ui_view_buttons.isHidden = true
+            ui_iv_plus_icon.isHidden = true
+            ui_iv_plus.isHidden = true
+            self.ui_view_cancel.isHidden = false
+            self.changeLabelsColors(newColor: .appGris112)
+            
+            if let date = event.getChangedStatusDate() {
+            let dateStr = Utils.formatEventDateName(date: date)
+                ui_create_mod.text = String.init(format: "event_canceled_full".localized, dateStr)
+            }
+            else {
+                ui_create_mod.text = "event_cancel_alone".localized
+            }
+            
+            ui_location_name.text = _addressName
+            ui_iv_place.image = UIImage.init(named: "ic_event_group_grey")
+            ui_iv_date.image = UIImage.init(named: "ic_event_date_grey")
+            ui_iv_time.image = UIImage.init(named: "ic_event_time_grey")
+        }
+        else {
+            ui_bt_map.backgroundColor = .clear
+            self.ui_view_buttons.isHidden = false
+            ui_iv_plus_icon.isHidden = false
+            ui_iv_plus.isHidden = false
+            self.changeLabelsColors(newColor: .black)
+            self.ui_view_cancel.isHidden = true
+            let createUpdate = event.getCreateUpdateDate()
+            
+            if createUpdate.isCreated {
+                ui_create_mod.text = String.init(format: "event_created_full".localized, createUpdate.dateStr)
+            }
+            else {
+                ui_create_mod.text = String.init(format: "event_updated_full".localized, createUpdate.dateStr)
+            }
+            ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
+            ui_iv_place.image = UIImage.init(named: "ic_event_group_clear")
+            ui_iv_date.image = UIImage.init(named: "ic_event_date")
+            ui_iv_time.image = UIImage.init(named: "ic_event_time")
+        }
+        
+        ui_title.text = event.title
         
         if let _members = event.members {
             for i in 0..<_members.count {
@@ -182,16 +244,6 @@ class EventDetailFullCell: UITableViewCell {
         
         ui_start_time.text = String.init(format: "event_time_detail_full".localized, event.startTimeFormatted,event.endTimeFormatted)
         
-        var _addressName = ""
-        if event.isOnline ?? false {
-            _addressName = event.onlineEventUrl ?? "-"
-        }
-        else {
-            _addressName = event.addressName ?? "-"
-        }
-        
-        ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
-        
         let currentUserId = UserDefaults.currentUser?.sid
         if let _ = event.members?.first(where: {$0.uid == currentUserId}) {
             ui_title_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
@@ -203,7 +255,6 @@ class EventDetailFullCell: UITableViewCell {
             ui_view_button_join.backgroundColor = .appOrange
             ui_title_bt_join.text = "event_detail_button_participe_OFF".localized
         }
-        
     }
     
     @IBAction func action_show_members(_ sender: Any) {

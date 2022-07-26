@@ -10,6 +10,10 @@ import SDWebImage
 
 class EventDetailTopFullCell: UITableViewCell {
     
+    @IBOutlet weak var ui_iv_date: UIImageView!
+    @IBOutlet weak var ui_iv_time: UIImageView!
+    @IBOutlet weak var ui_iv_place: UIImageView!
+    
     @IBOutlet weak var ui_constraint_listview_top_margin: NSLayoutConstraint?
     
     @IBOutlet weak var ui_main_view: UIView!
@@ -149,14 +153,19 @@ class EventDetailTopFullCell: UITableViewCell {
         var _addressName = ""
         if event.isOnline ?? false {
             _addressName = event.onlineEventUrl ?? "-"
-            ui_iv_location.image = UIImage.init(named: "ic_web")
+            ui_iv_location.image = event.isCanceled() ? UIImage.init(named: "ic_web_grey") : UIImage.init(named: "ic_web")
         }
         else {
             _addressName = event.addressName ?? "-"
-            ui_iv_location.image = UIImage.init(named: "ic_location")
+            ui_iv_location.image = event.isCanceled() ? UIImage.init(named: "ic_location_grey") : UIImage.init(named: "ic_location")
         }
         
-        ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
+        if event.isCanceled() {
+            ui_location_name.text = _addressName
+        }
+        else {
+            ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
+        }
         
         let currentUserId = UserDefaults.currentUser?.sid
         if let _ = event.members?.first(where: {$0.uid == currentUserId}) {

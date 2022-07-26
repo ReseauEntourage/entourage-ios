@@ -355,7 +355,10 @@
                 <outlet property="ui_img_member_1" destination="2x2-3v-72B" id="SOR-qC-Iu0"/>
                 <outlet property="ui_img_member_2" destination="qF7-zU-eSK" id="MdC-vq-GWM"/>
                 <outlet property="ui_img_member_3" destination="WUw-jW-n8n" id="6yh-4s-Pnl"/>
+                <outlet property="ui_iv_date" destination="uWV-jG-Iea" id="TAl-lw-AIH"/>
                 <outlet property="ui_iv_location" destination="hRO-vl-syO" id="bHT-Zi-TQH"/>
+                <outlet property="ui_iv_place" destination="t6W-st-U3u" id="DDI-IJ-YXD"/>
+                <outlet property="ui_iv_time" destination="8FB-EP-uas" id="klW-yk-GPu"/>
                 <outlet property="ui_lbl_about_desc" destination="CsR-kO-usD" id="7Sx-ME-uSy"/>
                 <outlet property="ui_lbl_about_title" destination="UXs-ZL-Ra7" id="x09-MN-3FL"/>
                 <outlet property="ui_lbl_bt_join" destination="sl0-vJ-26e" id="lgf-RV-Ktk"/>

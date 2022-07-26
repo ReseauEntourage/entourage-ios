@@ -223,7 +223,7 @@ class EventEditMainViewController: UIViewController {
     }
     
     private func goEnd(event:Event?) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
         
         DispatchQueue.main.async {
             self.dismiss(animated: true)

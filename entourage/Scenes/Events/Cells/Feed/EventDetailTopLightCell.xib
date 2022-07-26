@@ -308,7 +308,10 @@
                 <outlet property="ui_img_member_1" destination="pLh-mz-1Nw" id="2P9-Cv-95K"/>
                 <outlet property="ui_img_member_2" destination="zwv-1s-Dm7" id="6ap-LQ-hqf"/>
                 <outlet property="ui_img_member_3" destination="sns-GF-9nX" id="TFc-AY-lJC"/>
+                <outlet property="ui_iv_date" destination="kUN-NR-ePt" id="InM-bd-laN"/>
                 <outlet property="ui_iv_location" destination="mvY-Uf-Ugx" id="tVi-kS-6V8"/>
+                <outlet property="ui_iv_place" destination="6LP-lZ-GYF" id="ctR-hz-gi0"/>
+                <outlet property="ui_iv_time" destination="qgJ-mW-mLf" id="UTL-WP-Lcc"/>
                 <outlet property="ui_lbl_bt_more" destination="duS-bK-vrp" id="D3A-UP-lpK"/>
                 <outlet property="ui_lbl_nb_members" destination="duP-pc-ifi" id="dk1-4L-t71"/>
                 <outlet property="ui_location_name" destination="MgL-xG-nZP" id="DeR-04-zgk"/>
@@ -320,6 +323,7 @@
                 <outlet property="ui_view_button_more" destination="dmm-HF-Jdz" id="dvX-s6-5zN"/>
                 <outlet property="ui_view_members_more" destination="wG0-Dh-rGj" id="fpJ-my-Ymi"/>
                 <outlet property="ui_view_place_limit" destination="Z0B-1x-6rG" id="jQt-ax-l44"/>
+                <outlet property="ui_view_start_date" destination="A1j-7d-ers" id="VHe-2K-qFp"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="74.665178571428569"/>
         </tableViewCell>

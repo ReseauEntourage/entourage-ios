@@ -818,6 +818,8 @@
 "event_places_detail_full" = "Nombre de places limitées : %d";
 "event_created_full" = "Créé le %@";
 "event_updated_full" = "Modifié le %@";
+"event_canceled_full" = "Annulé le %@";
+"event_cancel_alone" = "Annulé";
 
 "event_empty_post_title" = "Pas encore de publication sur cet événement";
 "event_empty_post_subtitle" = "C’est l’occasion pour vous de partager la première nouvelle pour lancer la discussion ! ";
@@ -831,9 +833,11 @@
 "event_detail_group_title" = "Groupe associé :";
 "event_detail_cats_title" = "Catégories :";
 "event_detail_cat_title" = "Catégorie :";
+"event_cancel_list" = "Annulé";
+"event_canceled" = "Événement annulé";
 
 //Event filters
-"event_filter_title" = "Evénements - Filtres de recherche";
+"event_filter_title" = "Événements - Filtres de recherche";
 "event_filter_profile" = "À l'adresse renseignée dans mon profil";
 "event_filter_google" = "À une nouvelle adresse";
 "event_filter_gps" = "Autour de ma position actuelle";
