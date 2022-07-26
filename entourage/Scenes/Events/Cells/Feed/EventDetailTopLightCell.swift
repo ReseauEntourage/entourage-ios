@@ -116,7 +116,6 @@ class EventDetailTopLightCell: UITableViewCell {
             ui_title.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontQuickSandBold(size: 24), color: .appGris112))
             ui_start_date.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 15), color: .appGris112))
             ui_start_time.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoRegular(size: 15), color: .appGris112))
-            locationTxtColor = .appGris112
             ui_location_name.textColor = .appGris112
             
             ui_iv_place.image = UIImage.init(named: "ic_event_group_grey")
