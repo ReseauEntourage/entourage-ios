@@ -212,7 +212,7 @@ class EventEditMainViewController: UIViewController {
         let newEvent = populateNewEvent()
         IHProgressHUD.show()
         Logger.print("***** createEvent \(newEvent.dictionaryForWS())")
-        EventService.updateEvent(event: newEvent) { event, error in
+        EventService.updateEvent(event: newEvent,isWithRecurrency: false) { event, error in
             IHProgressHUD.dismiss()
             if event != nil {
                 self.goEnd(event: event!)

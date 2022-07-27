@@ -70,9 +70,9 @@ struct EventService:ParsingDataCodable {
         }
     }
     
-    static func updateEvent(event:EventEditing ,completion: @escaping (_ event:Event?, _ error:EntourageNetworkError?) -> Void) {
+    static func updateEvent(event:EventEditing, isWithRecurrency:Bool, completion: @escaping (_ event:Event?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
-        var endpoint = kAPIEventEdit
+        var endpoint = isWithRecurrency ? kAPIEventEditWithRecurrency : kAPIEventEdit
         endpoint = String.init(format: endpoint,event.uid, token)
         
         let parameters = ["outing" : event.dictionaryForWS()]
@@ -260,6 +260,29 @@ struct EventService:ParsingDataCodable {
     }
     
     
+    static func cancelEventWithRecurrency(eventId:Int, completion: @escaping (_ event:Event?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIEventCancelWithRecurrency
+        endpoint = String.init(format: endpoint,eventId, token)
+        
+        let parameters = ["outing" : ["status":"closed","recurrency":0]]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Datas passed cancel event alls \(parameters)")
+        
+        NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response Put cancel event alls: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error Put cancel event alls - \(error)")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let event:Event? = self.parseData(data: data,key: "outing")
+            DispatchQueue.main.async { completion(event, nil) }
+        }
+    }
     //MARK: - Report Event + Post -
     static func reportEvent(eventId:Int,message:String?,tags:[String], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}

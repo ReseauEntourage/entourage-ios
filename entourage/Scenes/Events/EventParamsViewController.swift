@@ -20,6 +20,8 @@ class EventParamsViewController: BasePopViewController {
     var isCanceled = false
     var isRealAuthor = false
     
+    var selectedRecurrencyPosition = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,6 +96,20 @@ class EventParamsViewController: BasePopViewController {
         }
     }
     
+    func sendCancelEventRecurrency() {
+        guard let event = event else {
+            return
+        }
+
+        EventService.cancelEventWithRecurrency(eventId: event.uid) { event, error in
+            if error == nil {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+                //TODO: On ferme la page ?
+                self.goBack()
+            }
+        }
+    }
+    
     func showPopLeave() {
         let customAlert = MJAlertController()
         let buttonAccept = MJAlertButtonType(title: "params_leave_event_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
@@ -117,6 +133,18 @@ class EventParamsViewController: BasePopViewController {
         customAlert.delegate = self
         customAlert.show()
     }
+    
+    func showPopCancelRecurrency() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "params_cancel_event_pop_bt_delete".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_cancel_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        
+        customAlert.configurePopWithChoice(alertTitle: "params_cancel_event_recurrency_title".localized, choice1: "params_cancel_event_recurrency_choice1".localized, choice2: "params_cancel_event_recurrency_choice2".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), choiceStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: self)
+        
+        customAlert.alertTagName = .Suppress
+        customAlert.delegate = self
+        customAlert.show()
+    }
 }
 
 //MARK: - MJAlertControllerDelegate -
@@ -129,10 +157,19 @@ extension EventParamsViewController: MJAlertControllerDelegate {
         }
         
         if alertTag == .Suppress {
-            self.sendCancelEvent()
+            if selectedRecurrencyPosition == 1 {
+                self.sendCancelEventRecurrency()
+            }
+            else {
+                self.sendCancelEvent()
+            }
         }
     }
     func closePressed(alertTag:MJAlertTAG) {}
+    
+    func selectedChoice(position: Int) {
+        selectedRecurrencyPosition = position
+    }
 }
 
 //MARK: - Tableview Datasource/delegate -
@@ -274,7 +311,12 @@ extension EventParamsViewController: EventParamCellDelegate {
     func quitEvent() {
         let currentUserId = UserDefaults.currentUser?.sid
         if event?.author?.uid == currentUserId {
-            showPopCancel()
+            if hasRecurrency {
+                showPopCancelRecurrency()
+            }
+            else {
+                showPopCancel()
+            }
         }
         else {
             showPopLeave()

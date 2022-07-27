@@ -854,9 +854,12 @@
 "params_leave_event_pop_bt_cancel" = "Annuler";
 
 "params_cancel_event_pop_bt_delete" = "Annuler";
-"params_cancel_event_pop_bt_cancel" = "Fermer";
+"params_cancel_event_pop_bt_cancel" = "Retour";
 "params_cancel_event_pop_title" = "Annuler l'événement";
-"params_cancel_event_pop_message" = "Souhaitez-vous Annuler l'événement ?";
+"params_cancel_event_pop_message" = "Souhaitez-vous annuler l’événement ? Tous les particpants seront prévenus de l’annulation.";
+"params_cancel_event_recurrency_title" = "Annuler un événement récurrent";
+"params_cancel_event_recurrency_choice1" = "Cet événement";
+"params_cancel_event_recurrency_choice2" = "Cet événement et tous les suivants";
 
 //Contacts pop add
 "event_add_contact_accept" = "Ajouter";

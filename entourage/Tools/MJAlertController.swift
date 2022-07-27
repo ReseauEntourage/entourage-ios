@@ -9,6 +9,12 @@ import UIKit
 
 class MJAlertController: UIViewController {
 
+    @IBOutlet var ui_titles_choice: [UILabel]!
+    @IBOutlet var ui_iv_choice: [UIImageView]!
+    @IBOutlet weak var ui_view_stack_choice: UIStackView!
+    @IBOutlet weak var ui_title_choice_1: UILabel!
+    @IBOutlet weak var ui_title_choice_2: UILabel!
+    
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_message: UILabel!
     @IBOutlet weak var ui_button_left: UIButton!
@@ -27,9 +33,14 @@ class MJAlertController: UIViewController {
     var alertTitle:String? = nil
     var alertMessage:String? = nil
     
+    var choice1:String? = nil
+    var choice2:String? = nil
+    var hasChoice = false
+    
     //Custom UI
     var titleStyle = ApplicationTheme.getFontCourantBoldOrange()
     var messageStyle = ApplicationTheme.getFontCourantRegularNoir()
+    var choiceStyle = ApplicationTheme.getFontCourantRegularNoir()
     var mainviewBGColor = UIColor.white
     var mainviewRadius:CGFloat = 35
     var isButtonCloseHidden = false
@@ -49,7 +60,12 @@ class MJAlertController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupAlert()
+        if hasChoice {
+            setupChoice()
+        }
+        else {
+            setupAlert()
+        }
     }
     
     func show() {
@@ -86,6 +102,48 @@ class MJAlertController: UIViewController {
         setupAlert()
     }
     
+    func configurePopWithChoice(alertTitle:String?,choice1:String,choice2:String,buttonrightType:MJAlertButtonType,buttonLeftType:MJAlertButtonType?,titleStyle:MJTextFontColorStyle? = nil,choiceStyle:MJTextFontColorStyle? = nil, mainviewBGColor:UIColor? = nil, mainviewRadius:CGFloat? = nil, parentVC:UIViewController? = nil) {
+        
+        self.parentVC = parentVC
+        
+        self.titleStyle = titleStyle ?? self.titleStyle
+        self.choiceStyle = choiceStyle ?? self.choiceStyle
+        
+        self.mainviewRadius = mainviewRadius ?? self.mainviewRadius
+        self.mainviewBGColor = mainviewBGColor ?? self.mainviewBGColor
+        
+        self.alertTitle = alertTitle
+        self.choice1 = choice1
+        self.choice2 = choice2
+        
+        self.buttonLeftType = buttonLeftType
+        self.buttonRightType = buttonrightType
+        
+        self.isButtonCloseHidden = true
+        
+        hasChoice = true
+        setupChoice()
+    }
+    private func setupChoice() {
+        guard let ui_title = ui_title,let ui_message = ui_message, let ui_alert_view = ui_alert_view, let ui_view_stack_choice = ui_view_stack_choice, let ui_title_choice_1 = ui_title_choice_1, let ui_title_choice_2 = ui_title_choice_2 else { return }
+        ui_title.text = alertTitle
+        ui_title.setupFontAndColor(style: self.titleStyle)
+        
+        ui_message.isHidden = true
+        ui_view_stack_choice.isHidden = false
+        
+        ui_title_choice_1.setupFontAndColor(style: self.choiceStyle)
+        ui_title_choice_2.setupFontAndColor(style: self.choiceStyle)
+        ui_title_choice_1.text = choice1
+        ui_title_choice_2.text = choice2
+        
+        ui_alert_view.layer.cornerRadius = self.mainviewRadius
+        ui_alert_view.backgroundColor = self.mainviewBGColor
+        
+        changeChoiceView(position: 0)
+        setupButton()
+    }
+    
     //MARK: - Private methods -
     private func setupAlert() {
         guard let ui_title = ui_title,let ui_message = ui_message, let ui_alert_view = ui_alert_view else { return }
@@ -99,10 +157,11 @@ class MJAlertController: UIViewController {
         ui_message.font = messageStyle.font
        
         ui_alert_view.layer.cornerRadius = mainviewRadius
-        ui_title.backgroundColor = mainviewBGColor
+        ui_alert_view.backgroundColor = mainviewBGColor
         
         ui_iv_close?.isHidden = isButtonCloseHidden
         ui_button_close?.isHidden = isButtonCloseHidden
+        ui_view_stack_choice.isHidden = true
         
         setupButton()
     }
@@ -142,6 +201,35 @@ class MJAlertController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         delegate?.closePressed(alertTag:alertTagName)
     }
+    
+    @IBAction func action_select_choice(_ sender: UIButton) {
+        delegate?.selectedChoice(position: sender.tag)
+        changeChoiceView(position: sender.tag)
+    }
+    
+    func changeChoiceView(position:Int) {
+        var i = 0
+        for title in ui_titles_choice {
+            if i == position {
+                title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
+            }
+            else {
+                title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+            }
+            i = i + 1
+        }
+        
+        i = 0
+        for button in ui_iv_choice {
+            if i == position {
+                button.image = UIImage.init(named: "ic_selector_on")
+            }
+            else {
+                button.image = UIImage.init(named: "ic_selector_off")
+            }
+            i = i + 1
+        }
+    }
 }
 
 enum MJAlertTAG {
@@ -173,8 +261,10 @@ protocol MJAlertControllerDelegate: AnyObject {
     func validateLeftButton(alertTag:MJAlertTAG)
     func validateRightButton(alertTag:MJAlertTAG)
     func closePressed(alertTag:MJAlertTAG)
+    func selectedChoice(position:Int)
 }
 //MARK: - To make closePressed optional function -
 extension MJAlertControllerDelegate {
     func closePressed(alertTag:MJAlertTAG) {}
+    func selectedChoice(position:Int) {}
 }
