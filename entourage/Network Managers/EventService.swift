@@ -94,6 +94,30 @@ struct EventService:ParsingDataCodable {
         }
     }
     
+    static func updateEventRecurrency(eventId:Int, recurrency:Int, completion: @escaping (_ event:Event?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIEventEdit
+        endpoint = String.init(format: endpoint,eventId, token)
+        
+        let parameters = ["outing" : ["recurrency":recurrency]]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Datas passed Put event recurrency \(parameters)")
+        
+        NetworkManager.sharedInstance.requestPut(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response Put event recurrency: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error Put event recurrency - \(error)")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let event:Event? = self.parseData(data: data,key: "outing")
+            DispatchQueue.main.async { completion(event, nil) }
+        }
+    }
+    
     static func getAllEventsForUser(userId:Int? = nil,currentPage:Int, per:Int, completion: @escaping (_ events:[Event]?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         

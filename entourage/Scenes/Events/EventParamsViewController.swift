@@ -345,17 +345,15 @@ extension EventParamsViewController: EventParamCellDelegate {
             vc.modalPresentationStyle = .fullScreen
             vc.currentEvent = self.event
             vc.eventId = self.event?.uid ?? -1
-            
+            vc.hasRecurrency = hasRecurrency
             self.navigationController?.present(vc, animated: true)
         }
     }
     
     func editRecurrency() {
-        //TODO: a faire
-        if let  vc = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventEditVCMain") as? EventEditMainViewController {
+        if let  vc = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventEditRecurrencyVC") as? EventEditRecurrencyViewController {
             vc.modalPresentationStyle = .fullScreen
-            vc.currentEvent = self.event
-            vc.eventId = self.event?.uid ?? -1
+            vc.event = self.event
             
             self.navigationController?.present(vc, animated: true)
         }

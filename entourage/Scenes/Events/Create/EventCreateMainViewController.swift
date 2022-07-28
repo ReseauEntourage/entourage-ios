@@ -181,7 +181,7 @@ class EventCreateMainViewController: UIViewController {
             if event != nil {
                 self.goEnd(event: event!)
             }else {
-                IHProgressHUD.showError(withStatus: "Erreur lors de la création de l'event. PLACEHOLDER")
+                IHProgressHUD.showError(withStatus: "event_create_ok".localized)
             }
         }
     }
@@ -316,6 +316,7 @@ extension EventCreateMainViewController: EventCreateMainDelegate {
     func isEdit() -> Bool { return false }
     func getCurrentEvent() -> Event? { return nil }
     func setDateChanged() { }
+    func hasCurrentRecurrency() -> Bool {return false}
     
     //MARK: - Checks -
     func checkValidation() -> (isValid:Bool, message:String) {
@@ -461,6 +462,7 @@ protocol EventCreateMainDelegate: AnyObject {
     //Use for edition
     func isEdit() -> Bool
     func getCurrentEvent() -> Event?
+    func hasCurrentRecurrency() -> Bool
 }
 
 

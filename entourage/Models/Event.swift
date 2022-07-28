@@ -553,7 +553,6 @@ struct EventEditing {
         }
         
         if let recurrence = recurrence {
-            //TODO: ajouter la récurrence quand ce sera prêt au niveau WS
             switch recurrence {
             case .once:
                 dict["recurrency"] = 0

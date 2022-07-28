@@ -120,10 +120,13 @@ class MJAlertController: UIViewController {
         self.buttonRightType = buttonrightType
         
         self.isButtonCloseHidden = true
+        self.ui_iv_close?.isHidden = true
+        self.ui_button_close?.isHidden = true
         
         hasChoice = true
         setupChoice()
     }
+    
     private func setupChoice() {
         guard let ui_title = ui_title,let ui_message = ui_message, let ui_alert_view = ui_alert_view, let ui_view_stack_choice = ui_view_stack_choice, let ui_title_choice_1 = ui_title_choice_1, let ui_title_choice_2 = ui_title_choice_2 else { return }
         ui_title.text = alertTitle
@@ -211,7 +214,7 @@ class MJAlertController: UIViewController {
         var i = 0
         for title in ui_titles_choice {
             if i == position {
-                title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
+                title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 14))
             }
             else {
                 title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())

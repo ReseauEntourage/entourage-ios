@@ -1,5 +1,5 @@
 //
-//  EventCreatePhase1ViewController.swift
+//  EventCreatePhase2ViewController.swift
 //  entourage
 //
 //  Created by Jerome on 21/06/2022.
@@ -19,6 +19,8 @@ class EventCreatePhase2ViewController: UIViewController {
     
     var currentEvent:Event? = nil
     
+    var hasCurrentRecurrency = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_tableview.dataSource = self
@@ -28,6 +30,7 @@ class EventCreatePhase2ViewController: UIViewController {
         
         if pageDelegate?.isEdit() ?? false {
             currentEvent = pageDelegate?.getCurrentEvent()
+            hasCurrentRecurrency = pageDelegate?.hasCurrentRecurrency() ?? false
         }
     }
 }
@@ -35,7 +38,7 @@ class EventCreatePhase2ViewController: UIViewController {
 //MARK: - UITableView datasource / Delegate -
 extension EventCreatePhase2ViewController:UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return hasCurrentRecurrency ? 1 : 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,7 +48,7 @@ extension EventCreatePhase2ViewController:UITableViewDataSource, UITableViewDele
             let startD = startDateSelected != nil ? startDateSelected : currentEvent?.getStartEndDate().startDate
             let endD = endDateSelected != nil ? endDateSelected : currentEvent?.getStartEndDate().endDate
             
-            cell.populateCell(startDate:startD, endDate:endD, delegate: self)
+            cell.populateCell(startDate:startD, endDate:endD, delegate: self, hasRecurrency: hasCurrentRecurrency,recurrency: currentEvent?.recurrence)
             
             return cell
         }

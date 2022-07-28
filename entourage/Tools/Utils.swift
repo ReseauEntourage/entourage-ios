@@ -164,13 +164,23 @@ import UIKit
         return dateString
     }
     
-    static func formatEventDateName(date:Date?) -> String {
+    static func formatEventDateName(date:Date?, withDayName:Bool = false) -> String {
         var dateString = ""
         if date != nil {
             let dateFormat = DateFormatter()
             dateFormat.locale = Locale.getPreferredLocale()
-            dateFormat.dateFormat = "dd MMMM YYYY"
-            dateString =  dateFormat.string(from: date!)
+            if withDayName {
+                let dfName = DateFormatter()
+                dfName.locale = Locale.getPreferredLocale()
+                dfName.dateFormat = "EEEE"
+                dateFormat.dateFormat = "dd MMMM YYYY"
+                dateString =  "\(dfName.string(from: date!).capitalized) \(dateFormat.string(from: date!))"
+            }
+            else {
+                dateFormat.dateFormat = "dd MMMM YYYY"
+                dateString =  dateFormat.string(from: date!)
+            }
+            
         }
         
         return dateString

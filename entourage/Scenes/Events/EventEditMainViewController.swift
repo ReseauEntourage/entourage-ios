@@ -56,6 +56,9 @@ class EventEditMainViewController: UIViewController {
     
     var currentEvent:Event? = nil
     
+    var hasRecurrency = false
+    var selectedRecurrencyPosition = 0
+    
     weak var parentController:UIViewController? = nil // Use to open the ending screen
     
     override func viewDidLoad() {
@@ -140,7 +143,12 @@ class EventEditMainViewController: UIViewController {
         currentPhasePosition = currentPhasePosition + 1
         if currentPhasePosition > ui_page_control.numberOfPages {
             currentPhasePosition = ui_page_control.numberOfPages
-            self.createEvent()
+            if hasRecurrency {
+                self.showPopRecurrency()
+            }
+            else {
+                self.createEvent()
+            }
         }
         updateViewsForPosition()
     }
@@ -202,27 +210,39 @@ class EventEditMainViewController: UIViewController {
         }
     }
     
-    private func createEvent() {
+    private func createEvent(applyToAll:Bool = false) {
         if hasNoInput() {
-            IHProgressHUD.showSuccesswithStatus("Événement modifié PLACEHOLDER")
-            self.goEnd(event: nil)
+            IHProgressHUD.showSuccesswithStatus("event_mod_ok".localized)
+            self.goEnd()
             return
         }
         
         let newEvent = populateNewEvent()
         IHProgressHUD.show()
         Logger.print("***** createEvent \(newEvent.dictionaryForWS())")
-        EventService.updateEvent(event: newEvent,isWithRecurrency: false) { event, error in
+        EventService.updateEvent(event: newEvent,isWithRecurrency: applyToAll) { event, error in
             IHProgressHUD.dismiss()
-            if event != nil {
-                self.goEnd(event: event!)
-            }else {
-                IHProgressHUD.showError(withStatus: "Erreur lors de la création de l'event. PLACEHOLDER")
+            if error != nil {
+                IHProgressHUD.showError(withStatus: "event_mod_nok".localized)
+            }
+            else {
+                self.goEnd()
             }
         }
     }
     
-    private func goEnd(event:Event?) {
+    private func showPopRecurrency() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "event_mod_pop_validate_bt".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        
+        customAlert.configurePopWithChoice(alertTitle: "event_mod_pop_title".localized, choice1: "params_cancel_event_recurrency_choice1".localized, choice2: "params_cancel_event_recurrency_choice2".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), choiceStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: self)
+        
+        customAlert.alertTagName = .Suppress
+        customAlert.delegate = self
+        customAlert.show()
+    }
+    
+    private func goEnd() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
         
         DispatchQueue.main.async {
@@ -378,6 +398,10 @@ extension EventEditMainViewController: EventCreateMainDelegate {
         return currentEvent
     }
     
+    func hasCurrentRecurrency() -> Bool {
+        return hasRecurrency
+    }
+    
     func getNeighborhoodId() -> Int? { return nil }
     
     //MARK: - Checks -
@@ -483,5 +507,13 @@ extension EventEditMainViewController: MJAlertControllerDelegate {
         self.dismiss(animated: true)
     }
     func validateRightButton(alertTag: MJAlertTAG) {
+        if alertTag == .Suppress {
+            let isAll = selectedRecurrencyPosition == 1
+            self.createEvent(applyToAll:isAll)
+        }
+    }
+    
+    func selectedChoice(position: Int) {
+        self.selectedRecurrencyPosition = position
     }
 }

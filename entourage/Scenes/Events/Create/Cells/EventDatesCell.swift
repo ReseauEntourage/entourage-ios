@@ -78,7 +78,7 @@ class EventDatesCell: UITableViewCell {
         ui_view_time_start_error.isHidden = true
     }
     
-    func populateCell(startDate:Date?, endDate:Date?,delegate:EventCreateDateCellDelegate?) {
+    func populateCell(startDate:Date?, endDate:Date?,delegate:EventCreateDateCellDelegate?,hasRecurrency:Bool, recurrency:EventRecurrence? = nil) {
         self.delegate = delegate
         self.selectedDate = startDate
         self.selectedTimeStart = startDate
@@ -93,6 +93,23 @@ class EventDatesCell: UITableViewCell {
         }
         if let endDate = endDate {
             ui_tf_time_end.text = timeFormatter.string(from: endDate)
+        }
+        
+        if hasRecurrency {
+            
+            let days:Int = recurrency == .week ? 6 : recurrency == .every2Weeks ? 13 : 0
+            var minDate:Date?
+            var maxDate:Date?
+            if let currentD = selectedDate, let date = Calendar.current.date(byAdding: .day, value: -days, to: currentD) {
+               minDate = date
+            }
+            
+            if let currentD = selectedDate, let date = Calendar.current.date(byAdding: .day, value: days, to: currentD) {
+               maxDate = date
+            }
+            
+            pickerDateView.minimumDate = minDate
+            pickerDateView.maximumDate = maxDate
         }
     }
     

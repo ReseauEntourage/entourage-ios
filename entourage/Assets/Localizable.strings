@@ -861,11 +861,16 @@
 "params_cancel_event_recurrency_choice1" = "Cet événement";
 "params_cancel_event_recurrency_choice2" = "Cet événement et tous les suivants";
 
+"event_mod_pop_title" = "Modifier un événement récurrent";
+"event_mod_pop_validate_bt" = "Valider";
+"event_mod_ok" = "Événement modifié PLACEHOLDER";
+"event_mod_nok" = "Erreur lors de la modification de l'événement. PLACEHOLDER";
+"event_create_ok" = "Erreur lors de la création de l'événement. PLACEHOLDER";
 //Contacts pop add
 "event_add_contact_accept" = "Ajouter";
 "event_add_contact_cancel" = "Annuler";
-"event_add_contact_title" = "Ajouter l’évènement à votre\nagenda personnel ? ";
-"event_add_contact_description" = "Vous pouvez ajouter cet évènement à votre calendrier personnel avec l’ensemble des informations (lieu, heure…)\nVous serez rappelé un jour avant.";
+"event_add_contact_title" = "Ajouter l’événement à votre\nagenda personnel ? ";
+"event_add_contact_description" = "Vous pouvez ajouter cet événement à votre calendrier personnel avec l’ensemble des informations (lieu, heure…)\nVous serez rappelé un jour avant.";
 
 "event_add_contact_places_title" = "Événement à places limitées";
 "event_add_contact_places_description" = "Attention, cet événement est à places limitées, votre inscription n’est pas garantie. L’administrateur de l’événement reviendra vers vous pour vous confirmer la réservation de votre place.";
@@ -890,6 +895,11 @@
 "event_params_notif_all" = "Toute l'activité de l’événement";
 "event_params_notif_new_publications" = "Les nouvelles publications";
 "event_params_notif_new_members" = "L'arrivée de nouveaux participants";
+
+"event_edit_recurrency_title" = "Récurrence";
+"event_edit_recurrency_date" = "Date de l’événement";
+"event_edit_recurrency_back" = "Annuler";
+"event_edit_recurrency_next" = "Valider";
 
 //CGU
 "event_CGU_1_title" = "Être bienveillant";

@@ -9,6 +9,10 @@ import UIKit
 
 class EventRecurrenceCell: UITableViewCell {
 
+    
+    @IBOutlet weak var ui_date: UILabel?
+    @IBOutlet weak var ui_title_date: UILabel?
+    
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet var ui_titles: [UILabel]!
     @IBOutlet var ui_image_buttons: [UIImageView]!
@@ -41,12 +45,25 @@ class EventRecurrenceCell: UITableViewCell {
         }
         let stringAttr = Utils.formatString(messageTxt: "event_create_phase2_recurrence".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
         ui_title.attributedText = stringAttr
+        
+        ui_date?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_date?.text = ""
+        ui_title_date?.text = "event_edit_recurrency_date".localized
+        ui_title_date?.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
     }
 
-    func populateCell(recurrence:EventRecurrence, delegate:EventCreateDateCellDelegate?) {
+    func populateCell(recurrence:EventRecurrence, delegate:EventCreateDateCellDelegate?, isEditRecurrency:Bool = false, date:Date? = nil) {
         self.delegate = delegate
         self.selectedItem = recurrence.rawValue
         changeSelection()
+        
+        if isEditRecurrency {
+            ui_title.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
+            ui_title.text = "event_edit_recurrency_title".localized
+            
+            ui_date?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+            ui_date?.text = Utils.formatEventDateName(date: date,withDayName: true)
+        }
     }
     
     @IBAction func action_select(_ sender: UIButton) {
