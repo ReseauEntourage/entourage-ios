@@ -49,6 +49,7 @@ let kAPIReportPostCommentNeighborhood = "neighborhoods/%@/chat_messages/%@/repor
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
 let API_URL_NEIGHBORHOOD_PREPARE_IMAGE_POST_UPLOAD = "neighborhoods/%@/chat_messages/presigned_upload?token=%@"
+let API_URL_EVENT_PREPARE_IMAGE_POST_UPLOAD = "outings/%@/chat_messages/presigned_upload?token=%@"
 
 //Home
 let kAPIHomeSummary = "home/summary?token=%@"
@@ -77,6 +78,9 @@ let kAPIEventCancelWithRecurrency = "outings/%d/batch_update?token=%@"
 let kAPIReportEvent = "outings/%@/report?token=%@"
 let kAPIReportPostEvent = "outings/%@/chat_messages/%@/report?token=%@"
 let kAPIReportPostCommentEvent = "outings/%@/chat_messages/%@/report?token=%@"
+let kAPIPostOutingPostMessage = "outings/%@/chat_messages?token=%@"
+let kAPIGetOutingMessages = "outings/%@/chat_messages/%@/comments?token=%@"
+
 //WebLink
 let emailContact = "contact@entourage.social"
 let GDS_INFO_ALERT_WEB_LINK = "https://soliguide.fr"

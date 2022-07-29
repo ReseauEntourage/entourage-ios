@@ -217,11 +217,6 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstAttribute="trailing" secondItem="h0R-dD-e9j" secondAttribute="trailing" constant="28" id="uTW-2v-2Cv"/>
                             <constraint firstItem="YJs-gC-gEm" firstAttribute="leading" secondItem="qPp-vp-wdq" secondAttribute="leading" id="zbl-9z-k4H"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="35"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <color key="backgroundColor" name="Beige"/>

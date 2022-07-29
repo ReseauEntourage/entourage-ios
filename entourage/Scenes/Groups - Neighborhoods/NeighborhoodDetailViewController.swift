@@ -451,7 +451,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             let postmessage:PostMessage = messagesOld[indexPath.row - 1]
             let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-            cell.populateCell(message: postmessage,delegate: self)
+            cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath)
             return cell
         }
         
@@ -477,7 +477,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         
         let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-        cell.populateCell(message: postmessage,delegate: self)
+        cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath)
         return cell
     }
     
@@ -539,7 +539,7 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
-    func showMessages(addComment: Bool, postId:Int) {
+    func showMessages(addComment: Bool, postId:Int, indexPathSelected: IndexPath?) {
         
         let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? NeighborhoodDetailMessagesViewController {
@@ -549,6 +549,8 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
             vc.neighborhoodName = neighborhood!.name
             vc.isGroupMember = neighborhood!.isMember
             vc.isStartEditing = addComment
+            vc.selectedIndexPath = indexPathSelected
+            vc.parentDelegate = self
             self.navigationController?.present(vc, animated: true)
         }
     }
@@ -576,6 +578,28 @@ extension NeighborhoodDetailViewController:NeighborhoodEventsTableviewCellDelega
             vc.modalPresentationStyle = .fullScreen
             self.navigationController?.present(navVc, animated: true, completion: nil)
             return
+        }
+    }
+}
+
+//MARK: - UpdateEventCommentDelegate -
+extension NeighborhoodDetailViewController:UpdateCommentCountDelegate {
+    func updateCommentCount(parentCommentId: Int, nbComments: Int, currentIndexPathSelected:IndexPath?) {
+        guard let _ = neighborhood?.messages else {return}
+        
+        var i = 0
+        for _post in neighborhood!.messages! {
+            if _post.uid == parentCommentId {
+                neighborhood!.messages![i].commentsCount = nbComments
+                break
+            }
+            i = i + 1
+        }
+        self.splitMessages()
+        if let currentIndexPathSelected = currentIndexPathSelected {
+            self.ui_tableview.reloadRows(at: [currentIndexPathSelected], with: .none)
+        } else {
+            self.ui_tableview.reloadData()
         }
     }
 }

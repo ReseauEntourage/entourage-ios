@@ -32,6 +32,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     weak var delegate:NeighborhoodPostCellDelegate? = nil
     var postId:Int = 0
+    var currentIndexPath:IndexPath? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,12 +54,12 @@ class NeighborhoodPostCell: UITableViewCell {
         
     }
     
-    func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate) {
+    func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?) {
         self.delegate = delegate
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
         ui_comment.text = message.content
-        
+        self.currentIndexPath = currentIndexPath
         postId = message.uid
         
         if let _url = message.user?.avatarURL, let url = URL(string: _url) {
@@ -90,16 +91,16 @@ class NeighborhoodPostCell: UITableViewCell {
     }
 
     @IBAction func action_show_comments(_ sender: Any) {
-        delegate?.showMessages(addComment: false,postId: postId)
+        delegate?.showMessages(addComment: false,postId: postId, indexPathSelected: currentIndexPath)
     }
     
     @IBAction func action_add_comments(_ sender: Any) {
-        delegate?.showMessages(addComment: true,postId: postId)
+        delegate?.showMessages(addComment: true,postId: postId, indexPathSelected: currentIndexPath)
     }
 }
 
 protocol NeighborhoodPostCellDelegate: AnyObject {
-    func showMessages(addComment:Bool, postId:Int)
+    func showMessages(addComment:Bool, postId:Int, indexPathSelected:IndexPath?)
 }
 
 

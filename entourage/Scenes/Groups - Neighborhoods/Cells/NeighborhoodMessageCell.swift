@@ -27,7 +27,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     var messageForRetry = ""
     var positionForRetry = 0
     
-    weak var delegate:NeighborhoodMessageCellDelegate? = nil
+    weak var delegate:MessageCellSignalDelegate? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,7 +42,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         ui_lb_error?.text = "neighborhood_error_messageSend".localized
     }
     
-    func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:NeighborhoodMessageCellDelegate) {
+    func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:MessageCellSignalDelegate) {
         messageId = message.uid
         self.delegate = delegate
         self.messageForRetry = message.content ?? ""
@@ -97,7 +97,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     }
 }
 
-protocol NeighborhoodMessageCellDelegate:AnyObject {
+protocol MessageCellSignalDelegate:AnyObject {
     func signalMessage(messageId:Int)
     func retrySend(message:String, positionForRetry:Int)
 }

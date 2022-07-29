@@ -28,7 +28,7 @@ class MJAlertController: UIViewController {
     weak var delegate:MJAlertControllerDelegate? = nil
     var alertTagName:MJAlertTAG = .None
     
-    var buttonRightType = MJAlertButtonType(title: "Cancel".localized)
+    var buttonRightType = MJAlertButtonType(title: "cancel".localized)
     var buttonLeftType:MJAlertButtonType? = MJAlertButtonType(title: "OK".localized)
     var alertTitle:String? = nil
     var alertMessage:String? = nil

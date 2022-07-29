@@ -79,7 +79,7 @@ class EventDetailFeedViewController: UIViewController {
         
         ui_floaty_button.isHidden = true
         ui_bt_floating_join.isHidden = true
-
+        
         getEventDetail()
         ui_view_canceled.isHidden = true
     }
@@ -203,7 +203,7 @@ class EventDetailFeedViewController: UIViewController {
             if let _ = error {
                 self.goBack()
             }
-            let currentImg = self.event?.getCurrentImageUrl != nil
+            
             self.event = event
             self.splitMessages()
             self.ui_tableview.reloadData()
@@ -216,9 +216,8 @@ class EventDetailFeedViewController: UIViewController {
                 self.ui_view_canceled.isHidden = true
             }
             
-            if !currentImg {
-                self.populateTopView(isAfterLoading: true)
-            }
+            self.populateTopView(isAfterLoading: true)
+            
             if hasToRefreshLists {
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventsUpdate), object: nil)
             }
@@ -361,8 +360,12 @@ class EventDetailFeedViewController: UIViewController {
     
     //MARK: - Nav VCs-
     func showCreatePost() {
-        //TODO: a faire
-        self.showWIP(parentVC: self)
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "addPostVC") as? NeighborhoodPostAddViewController  {
+            vc.eventId = self.eventId
+            vc.isNeighborhood = false
+            self.navigationController?.present(vc, animated: true)
+        }
     }
     
     func showPopInfoPlaces() {
@@ -509,7 +512,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             let postmessage:PostMessage = messagesOld[indexPath.row - 1]
             let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-            cell.populateCell(message: postmessage,delegate: self)
+            cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath)
             return cell
         }
         
@@ -535,7 +538,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         
         let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-        cell.populateCell(message: postmessage,delegate: self)
+        cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath)
         return cell
     }
     
@@ -581,7 +584,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             self.ui_view_top_bg.alpha = 1 - (heightImage / self.maxImageHeight)
             self.ui_iv_event_mini.alpha = 1 - (heightImage / self.maxImageHeight)
             self.ui_label_title_event.alpha = 1 - (heightImage / self.maxImageHeight)
-            
+            self.ui_view_canceled.alpha = heightImage / self.maxImageHeight
             let yView = self.viewNormalHeight - (scrollView.contentOffset.y + self.viewNormalHeight)
             let heightView = min(max (yView,self.minViewHeight),self.maxViewHeight)
             self.ui_view_height_constraint.constant = heightView
@@ -666,9 +669,41 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
-    func showMessages(addComment:Bool, postId:Int) {
-        //TODO: à faire
-        self.showWIP(parentVC: self)
+    func showMessages(addComment:Bool, postId:Int, indexPathSelected: IndexPath?) {
+        let sb = UIStoryboard.init(name: StoryboardName.eventMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? EventDetailMessagesViewController {
+            vc.modalPresentationStyle = .fullScreen
+            vc.parentCommentId = postId
+            vc.eventId = eventId
+            vc.eventName = event!.title
+            vc.isGroupMember = event?.isMember ?? false
+            vc.isStartEditing = addComment
+            vc.parentDelegate = self
+            vc.selectedIndexPath = indexPathSelected
+            self.navigationController?.present(vc, animated: true)
+        }
+    }
+}
+
+//MARK: - UpdateEventCommentDelegate -
+extension EventDetailFeedViewController:UpdateCommentCountDelegate {
+    func updateCommentCount(parentCommentId: Int, nbComments: Int, currentIndexPathSelected:IndexPath?) {
+        guard let _ = event?.posts else {return}
+        
+        var i = 0
+        for _post in event!.posts! {
+            if _post.uid == parentCommentId {
+                event!.posts![i].commentsCount = nbComments
+                break
+            }
+            i = i + 1
+        }
+        self.splitMessages()
+        if let currentIndexPathSelected = currentIndexPathSelected {
+            self.ui_tableview.reloadRows(at: [currentIndexPathSelected], with: .none)
+        } else {
+            self.ui_tableview.reloadData()
+        }
     }
 }
 

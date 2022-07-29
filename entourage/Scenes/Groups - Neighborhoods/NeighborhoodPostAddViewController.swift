@@ -35,6 +35,9 @@ class NeighborhoodPostAddViewController: UIViewController {
     var isValid = false
     
     var neighborhoodId:Int = 0
+    var eventId:Int = 0
+    
+    var isNeighborhood = true
     
     var isLoading = false
     
@@ -71,7 +74,9 @@ class NeighborhoodPostAddViewController: UIViewController {
         showButton(isAdd: true)
         changeButtonShare()
         
-        AnalyticsLoggerManager.logEvent(name: View_GroupFeed_NewPost_Screen)
+        if isNeighborhood {
+            AnalyticsLoggerManager.logEvent(name: View_GroupFeed_NewPost_Screen)
+        }
     }
     
     @objc func closeKb() {
@@ -109,7 +114,10 @@ class NeighborhoodPostAddViewController: UIViewController {
             changeButtonShare()
         }
         else {
-            AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewPost_AddPic)
+            if isNeighborhood {
+                AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewPost_AddPic)
+            }
+            
             if let navvc = storyboard?.instantiateViewController(withIdentifier: "addPhotoNav") as? UINavigationController, let vc = navvc.topViewController as? NeighborhoodPostAddPhotoViewController {
                 vc.parentDelegate = self
                 self.present(navvc, animated: true)
@@ -127,7 +135,9 @@ class NeighborhoodPostAddViewController: UIViewController {
         else {
             sendImageText()
         }
-        AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewPost_Validate)
+        if isNeighborhood {
+            AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_NewPost_Validate)
+        }
     }
     
     //MARK: - Network -
@@ -135,16 +145,32 @@ class NeighborhoodPostAddViewController: UIViewController {
         isLoading = true
         IHProgressHUD.show()
         let message = ui_tv_message.text!
-        NeighborhoodService.createPostMessage(groupId: neighborhoodId, message: message) { error in
-            self.isLoading = false
-            IHProgressHUD.dismiss()
-            
-            if error != nil {
-                self.ui_view_error.isHidden = false
+        if isNeighborhood {
+            NeighborhoodService.createPostMessage(groupId: neighborhoodId, message: message) { error in
+                self.isLoading = false
+                IHProgressHUD.dismiss()
+                
+                if error != nil {
+                    self.ui_view_error.isHidden = false
+                }
+                else {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
+                    self.goBack()
+                }
             }
-            else {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
-                self.goBack()
+        }
+        else {
+            EventService.createPostMessage(eventId: eventId, message: message) { error in
+                self.isLoading = false
+                IHProgressHUD.dismiss()
+                
+                if error != nil {
+                    self.ui_view_error.isHidden = false
+                }
+                else {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+                    self.goBack()
+                }
             }
         }
     }
@@ -152,16 +178,32 @@ class NeighborhoodPostAddViewController: UIViewController {
     func sendImageText() {
         self.isLoading = true
         IHProgressHUD.show()
-        NeighborhoodUploadPictureService.prepareUploadWith(neighborhoodId: neighborhoodId, image: currentImage!, message: ui_tv_message.text) { isOk in
-            IHProgressHUD.dismiss()
-            self.isLoading = false
-            
-            if !isOk {
-                self.ui_view_error.isHidden = false
+        if isNeighborhood {
+            NeighborhoodUploadPictureService.prepareUploadWith(neighborhoodId: neighborhoodId, image: currentImage!, message: ui_tv_message.text) { isOk in
+                IHProgressHUD.dismiss()
+                self.isLoading = false
+                
+                if !isOk {
+                    self.ui_view_error.isHidden = false
+                }
+                else {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
+                    self.goBack()
+                }
             }
-            else {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
-                self.goBack()
+        }
+        else {
+            EventUploadPictureService.prepareUploadWith(eventId: eventId, image: currentImage!, message: ui_tv_message.text) { isOk in
+                IHProgressHUD.dismiss()
+                self.isLoading = false
+                
+                if !isOk {
+                    self.ui_view_error.isHidden = false
+                }
+                else {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+                    self.goBack()
+                }
             }
         }
     }

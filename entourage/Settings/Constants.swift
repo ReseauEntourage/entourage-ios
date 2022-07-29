@@ -33,6 +33,7 @@ struct StoryboardName {
     static let partnerDetails = "PartnerDetails"
     static let event = "Event"
     static let eventCreate = "Event_Create"
+    static let eventMessage = "Event_Message"
     static let neighborhood = "Neighborhood"
     static let neighborhoodCreate = "Neighborhood_Create"
     static let neighborhoodReport = "Neighborhood_Report"

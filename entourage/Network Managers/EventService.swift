@@ -355,4 +355,83 @@ struct EventService:ParsingDataCodable {
             DispatchQueue.main.async { completion(nil) }
         }
     }
+    
+    //MARK: - Create Post (chat_message)
+    
+    static func createPostMessage(eventId:Int,message:String?, urlImage:String? = nil ,completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIPostOutingPostMessage
+        endpoint = String.init(format: endpoint, "\(eventId)", token)
+
+        var content = [String:String]()
+       
+        if let message = message {
+            content["content"] = message
+        }
+        
+        if let urlImage = urlImage {
+            content["image_url"] = urlImage
+        }
+        
+        let parameters = ["chat_message" : content]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response Post event Post : \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error Post event Post - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
+    //MARK: - Comments for Post -
+    
+    static func getCommentsFor(eventId:Int, parentPostId:Int, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetOutingMessages
+        endpoint = String.init(format: endpoint,"\(eventId)","\(parentPostId)", token)
+        
+        Logger.print("***** url get messages event : \(endpoint)")
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            Logger.print("***** return get messages event  : \(error)")
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil,  error) }
+                return
+            }
+            let messages:[PostMessage]? = self.parseDatas(data: data,key: "chat_messages")
+            DispatchQueue.main.async { completion(messages,nil) }
+        }
+    }
+    
+    static func postCommentFor(eventId:Int, parentPostId:Int, message:String, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIPostOutingPostMessage
+        endpoint = String.init(format: endpoint, "\(eventId)", token)
+
+        let contentStr = "content"
+        
+        let parameters = ["chat_message" : [contentStr:message,"parent_id":parentPostId]]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Datas passed send comment event Post \(parameters)")
+        
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
 }

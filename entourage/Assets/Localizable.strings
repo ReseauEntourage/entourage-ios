@@ -901,6 +901,12 @@
 "event_edit_recurrency_back" = "Annuler";
 "event_edit_recurrency_next" = "Valider";
 
+//Event MEssages
+"event_comments_title" = "Commentaires de la publication";
+"event_comments_placeholder_discut" = "Discuter...";
+"event_comments_send" = "Envoyer";
+"event_no_messageComment" = "Pas encore de commentaire";
+"event_messageComment_notAuth" = "Pour commenter cette publication, rejoignez l'événement “%@” !";
 //CGU
 "event_CGU_1_title" = "Être bienveillant";
 "event_CGU_1" = "J’utilise l’application à des fins d’entraide en faveur des personnes en situation de grande précarité ou d’exclusion.";

@@ -1,15 +1,14 @@
 //
-//  NeighborhoodDetailMessagesViewController.swift
+//  EventPostAddViewController.swift
 //  entourage
 //
-//  Created by Jerome on 16/05/2022.
+//  Created by Jerome on 28/07/2022.
 //
 
 import UIKit
-import IHProgressHUD
 import IQKeyboardManagerSwift
 
-class NeighborhoodDetailMessagesViewController: UIViewController {
+class EventDetailMessagesViewController: UIViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_top_view: MJNavBackView!
@@ -26,9 +25,9 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     @IBOutlet weak var ui_view_empty: UIView!
     @IBOutlet weak var ui_title_empty: UILabel!
     
-    var neighborhoodId:Int = 0
+    var eventId:Int = 0
     var parentCommentId:Int = 0
-    var neighborhoodName = ""
+    var eventName = ""
     var isGroupMember = false
     
     var messages = [PostMessage]()
@@ -36,7 +35,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     
     var messagesForRetry = [PostMessage]()
     
-    let placeholderTxt = "neighborhood_comments_placeholder_discut".localized
+    let placeholderTxt = "event_comments_placeholder_discut".localized
     
     var bottomConstraint:CGFloat = 0
     var isStartEditing = false
@@ -47,14 +46,14 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         IQKeyboardManager.shared.enable = false
-        ui_top_view.populateView(title: "neighborhood_comments_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self,backgroundColor: .appBeigeClair, isClose: false)
+        ui_top_view.populateView(title: "event_comments_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self,backgroundColor: .appBeigeClair, isClose: false)
         
         ui_title_empty.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
-        ui_title_empty.text = "neighborhood_no_messageComment".localized
+        ui_title_empty.text = "event_no_messageComment".localized
         ui_view_empty.isHidden = true
         
         ui_title_not_auth.setupFontAndColor(style: ApplicationTheme.getFontLegend())
-        ui_title_not_auth.text = String.init(format: "neighborhood_messageComment_notAuth".localized, neighborhoodName)
+        ui_title_not_auth.text = String.init(format: "event_messageComment_notAuth".localized, eventName)
         ui_view_not_auth.isHidden = isGroupMember
         
         ui_view_txtview.layer.borderWidth = 1
@@ -69,7 +68,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         
         
         let _width = UIApplication.shared.delegate?.window??.frame.width ?? view.frame.size.width
-        let buttonDone = UIBarButtonItem(title: "neighborhood_comments_send".localized, style: .plain, target: self, action: #selector(closeKb(_:)))
+        let buttonDone = UIBarButtonItem(title: "event_comments_send".localized, style: .plain, target: self, action: #selector(closeKb(_:)))
         ui_textview_message.addToolBar(width: _width, buttonValidate: buttonDone)
         ui_textview_message.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
@@ -127,8 +126,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     
     //MARK: - Network -
     func getMessages() {
-        NeighborhoodService.getCommentsFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId) { messages, error in
-            Logger.print("***** Messages ? \(messages) - Error: \(error?.message)")
+        EventService.getCommentsFor(eventId: eventId, parentPostId: parentCommentId) { messages, error in
             if let messages = messages {
                 self.messages = messages.reversed() //TODO: a supprimer après retour "normal" du WS
                 self.ui_view_empty.isHidden = self.messages.count > 0
@@ -147,7 +145,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     func sendMessage(message:String, isRetry:Bool, positionForRetry:Int = 0) {
         self.ui_textview_message.text = nil
         ui_iv_bt_send.image = UIImage.init(named: "ic_send_comment_off")
-        NeighborhoodService.postCommentFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId, message: message) { error in
+        EventService.postCommentFor(eventId: eventId, parentPostId: parentCommentId, message: message) { error in
             
             if error == nil {
                 if isRetry {
@@ -180,13 +178,18 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         }
     }
     
+    //MARK: - IBActions -
+    @IBAction func action_tap_view(_ sender: Any) {
+        _ = ui_textview_message.resignFirstResponder()
+    }
+    
     @IBAction func action_send_message(_ sender: Any) {
         self.closeKb(nil)
     }
     
     @IBAction func action_signal(_ sender: Any) {
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
-            vc.groupId = neighborhoodId
+            vc.eventId = eventId
             vc.postId = parentCommentId
             vc.parentDelegate = self
             vc.signalType = .publication
@@ -196,7 +199,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
 }
 
 //MARK: - Tableview datasource/delegate -
-extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate {
+extension EventDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count + messagesForRetry.count
     }
@@ -227,7 +230,7 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
 }
 
 //MARK: - MJNavBackViewDelegate -
-extension NeighborhoodDetailMessagesViewController: MJNavBackViewDelegate {
+extension EventDetailMessagesViewController: MJNavBackViewDelegate {
     func goBack() {
         self.parentDelegate?.updateCommentCount(parentCommentId: parentCommentId, nbComments: messages.count,currentIndexPathSelected: selectedIndexPath)
         self.dismiss(animated: true)
@@ -236,7 +239,7 @@ extension NeighborhoodDetailMessagesViewController: MJNavBackViewDelegate {
 }
 
 //MARK: - UITextViewDelegate -
-extension NeighborhoodDetailMessagesViewController: UITextViewDelegate {
+extension EventDetailMessagesViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         if textView.text.count == 0 && text.count == 1 {
@@ -264,10 +267,10 @@ extension NeighborhoodDetailMessagesViewController: UITextViewDelegate {
 }
 
 //MARK: - NeighborhoodMessageCellDelegate -
-extension NeighborhoodDetailMessagesViewController:MessageCellSignalDelegate {
+extension EventDetailMessagesViewController:MessageCellSignalDelegate {
     func signalMessage(messageId: Int) {
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
-            vc.groupId = neighborhoodId
+            vc.eventId = eventId
             vc.postId = messageId
             vc.parentDelegate = self
             vc.signalType = .comment
@@ -281,7 +284,7 @@ extension NeighborhoodDetailMessagesViewController:MessageCellSignalDelegate {
 }
 
 //MARK: - GroupDetailDelegate -
-extension NeighborhoodDetailMessagesViewController:GroupDetailDelegate {
+extension EventDetailMessagesViewController:GroupDetailDelegate {
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
@@ -293,4 +296,9 @@ extension NeighborhoodDetailMessagesViewController:GroupDetailDelegate {
             alertVC.show()
         }
     }
+}
+
+//MARK: - Protocol -
+protocol UpdateCommentCountDelegate:AnyObject {
+    func updateCommentCount(parentCommentId:Int,nbComments:Int, currentIndexPathSelected:IndexPath?)
 }

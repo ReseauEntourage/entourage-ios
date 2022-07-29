@@ -27,6 +27,7 @@
 		021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */; };
 		021E804328916FF500C891DC /* EventEditRecurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E804228916FF500C891DC /* EventEditRecurrencyViewController.swift */; };
 		021F084F2798113D00F32A34 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021F084E2798113D00F32A34 /* LocationManager.swift */; };
+		021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FBF9128856DC600710584 /* EventUploadPictureService.swift */; };
 		021FD96028743EFF00D3AA54 /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FD95E28743EFF00D3AA54 /* EventListCell.swift */; };
 		021FD96128743EFF00D3AA54 /* EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 021FD95F28743EFF00D3AA54 /* EventListCell.xib */; };
 		021FD963287442C700D3AA54 /* NeighborhoodListEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FD962287442C700D3AA54 /* NeighborhoodListEventsViewController.swift */; };
@@ -295,6 +296,8 @@
 		02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02E8544D2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib */; };
 		02E854502865C60A0012D941 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8544F2865C60A0012D941 /* EventService.swift */; };
 		02E854522865CA090012D941 /* EventChoosePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E854512865CA090012D941 /* EventChoosePictureViewController.swift */; };
+		02EB4B522892B77100CC977E /* Event_Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02EB4B512892B77100CC977E /* Event_Message.storyboard */; };
+		02EB4B542892B9C400CC977E /* EventDetailMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EB4B532892B9C400CC977E /* EventDetailMessagesViewController.swift */; };
 		02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */; };
 		02EC7E4B27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4A27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift */; };
 		02F527782799990F00929431 /* GuideSolidarity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02F527772799990F00929431 /* GuideSolidarity.storyboard */; };
@@ -347,6 +350,7 @@
 		021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserActivitiesCell.swift; sourceTree = "<group>"; };
 		021E804228916FF500C891DC /* EventEditRecurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditRecurrencyViewController.swift; sourceTree = "<group>"; };
 		021F084E2798113D00F32A34 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		021FBF9128856DC600710584 /* EventUploadPictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventUploadPictureService.swift; sourceTree = "<group>"; };
 		021FD95E28743EFF00D3AA54 /* EventListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
 		021FD95F28743EFF00D3AA54 /* EventListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventListCell.xib; sourceTree = "<group>"; };
 		021FD962287442C700D3AA54 /* NeighborhoodListEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodListEventsViewController.swift; sourceTree = "<group>"; };
@@ -611,6 +615,8 @@
 		02E8544D2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddDescriptionFixedTableViewCell.xib; sourceTree = "<group>"; };
 		02E8544F2865C60A0012D941 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		02E854512865CA090012D941 /* EventChoosePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventChoosePictureViewController.swift; sourceTree = "<group>"; };
+		02EB4B512892B77100CC977E /* Event_Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Event_Message.storyboard; sourceTree = "<group>"; };
+		02EB4B532892B9C400CC977E /* EventDetailMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailMessagesViewController.swift; sourceTree = "<group>"; };
 		02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePhotoCell.swift; sourceTree = "<group>"; };
 		02EC7E4A27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsChoosePlaceViewController.swift; sourceTree = "<group>"; };
 		02F527772799990F00929431 /* GuideSolidarity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuideSolidarity.storyboard; sourceTree = "<group>"; };
@@ -793,6 +799,7 @@
 				02FB543E287DAE4C00E4B9FA /* EventDetailFullFeedViewController.swift */,
 				02040CF1288E8C2E00AB1FBB /* EventParamsViewController.swift */,
 				02040CFC288ED75100AB1FBB /* EventParamsCGUViewController.swift */,
+				02EB4B532892B9C400CC977E /* EventDetailMessagesViewController.swift */,
 				024131C92862020B00561FB4 /* Create */,
 				0241FE0B286DDB700065E560 /* EventEditMainViewController.swift */,
 				021E804228916FF500C891DC /* EventEditRecurrencyViewController.swift */,
@@ -948,6 +955,7 @@
 				02E2192228352552002A1FCB /* Neighborhood_Message.storyboard */,
 				021FD9642875BEAC00D3AA54 /* Event.storyboard */,
 				024131C62862019500561FB4 /* Event_Create.storyboard */,
+				02EB4B512892B77100CC977E /* Event_Message.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1213,6 +1221,7 @@
 				02D64F4E2799D74F00F6C4BD /* PoiService.swift */,
 				02B94C19284F508B006059EF /* HomeService.swift */,
 				02E8544F2865C60A0012D941 /* EventService.swift */,
+				021FBF9128856DC600710584 /* EventUploadPictureService.swift */,
 				02C91A22278F07D900305E0B /* Endpoints.swift */,
 				0262997A2790815000D84A6A /* APIKeys.swift */,
 				02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */,
@@ -1541,6 +1550,7 @@
 				025C92C528341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib in Resources */,
 				024131C72862019500561FB4 /* Event_Create.storyboard in Resources */,
 				02CCE67627D78C7500D6976C /* Quicksand-Bold.ttf in Resources */,
+				02EB4B522892B77100CC977E /* Event_Message.storyboard in Resources */,
 				02D10D8C2873236500ACC267 /* MJPopupViewController.xib in Resources */,
 				02B7922527F74801003AFFB9 /* Neighborhood_Create.storyboard in Resources */,
 				02E2192328352552002A1FCB /* Neighborhood_Message.storyboard in Resources */,
@@ -1709,6 +1719,7 @@
 				02C91A29278F335000305E0B /* MainTabbarViewController.swift in Sources */,
 				02040CFD288ED75100AB1FBB /* EventParamsCGUViewController.swift in Sources */,
 				02A3DD3927FDC72C0060EC2E /* NeighborhoodCreatePageViewController.swift in Sources */,
+				02EB4B542892B9C400CC977E /* EventDetailMessagesViewController.swift in Sources */,
 				02833F9C2822B54D00000156 /* NeighborhoodUserCell.swift in Sources */,
 				021F084F2798113D00F32A34 /* LocationManager.swift in Sources */,
 				02C6E87028203E1F009D4289 /* ReportGroupMainViewController.swift in Sources */,
@@ -1840,6 +1851,7 @@
 				0224597F28006ACF00944DE4 /* NeighborhoodCreateAddOtherCell.swift in Sources */,
 				02B94C27284F63AB006059EF /* HomeContribCell.swift in Sources */,
 				02E2192728355C11002A1FCB /* NeighborhoodPostPicturePreviewResizeViewController.swift in Sources */,
+				021FBF9228856DC600710584 /* EventUploadPictureService.swift in Sources */,
 				02DD1E91280853CF00538EF4 /* NeighborhoodEditViewController.swift in Sources */,
 				02E069ED279184B3006DB1B6 /* OTOnboardingNamesViewController.swift in Sources */,
 			);
