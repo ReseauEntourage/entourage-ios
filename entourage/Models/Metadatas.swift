@@ -6,16 +6,27 @@
 //
 
 import Foundation
-import SwiftUI
 
 
 class Metadatas:Codable {
     static let sharedInstance = Metadatas()
     private var _tagsInterests:Tags? = nil
     private var _tagsSignals:Tags? = nil
-    
+    private var _tagsSections:Sections? = nil
     
     private init() {}
+    
+    var tagsSections:Sections? {
+        get {
+            guard let tags = _tagsSections?.sections else { return nil }
+            
+            for tag in tags {
+                tag.isSelected = false
+            }
+            self._tagsSections?.sections = tags
+            return self._tagsSections
+        }
+    }
     
     var tagsInterest:Tags? {
         get {
@@ -47,6 +58,7 @@ class Metadatas:Codable {
                 if let tags = json["tags"] as? [String:AnyObject] {
                     addTags(json: tags, key: "interests", tags: &_tagsInterests)
                     addTags(json: tags, key: "signals", tags: &_tagsSignals)
+                    addSections(json: tags, key: "sections", tags: &_tagsSections)
                 }
             }
         }
@@ -61,6 +73,17 @@ class Metadatas:Codable {
             for _interest in _interests {
                 if let _key:String = _interest["id"], let _value:String = _interest["name"] {
                     tags?.tags.append(TagInterest(keyName: _key, keyValue: _value))
+                }
+            }
+        }
+    }
+    
+    func addSections(json:[String:AnyObject], key:String, tags:inout Sections?) {
+        if let _interests = json[key] as? [[String:String]] {
+            tags = Sections()
+            for _interest in _interests {
+                if let _key:String = _interest["id"], let _name:String = _interest["name"], let _subtitle:String = _interest["subname"] {
+                    tags?.sections.append(Section(keyName: _key, keyValue: _name, keySubtitle: _subtitle))
                 }
             }
         }
@@ -205,5 +228,94 @@ fileprivate struct InterestMappingImageHelper {
             imageName = "interest_small_others"
         }
         return imageName
+    }
+}
+
+
+//MARK: - Sections -
+struct Sections:Codable {
+    fileprivate var sections = [Section]()
+    
+    func getSectionNameFrom(key:String) -> (name:String,subtitle:String) {
+        if let cat = sections.first(where: {$0.catKey == key }) {
+            return (cat.catName, cat.catSubtitle)
+        }
+        return (key,key)
+    }
+    
+    func getSections() -> [Section] {
+        return sections
+    }
+    
+    func hasSectionSelected() -> Bool {
+        var isValidTag = false
+        for tag in sections {
+            if tag.isSelected {
+                isValidTag = true
+                break
+            }
+        }
+        return isValidTag
+    }
+    
+    mutating func setSectionSelected(key:String) {
+        var i = 0
+        for _ in sections {
+            sections[i].isSelected = false
+            i = i + 1
+        }
+        
+        if let pos = sections.firstIndex(where: {$0.catKey == key }) {
+            self.sections[pos].isSelected = true
+        }
+    }
+    
+    func getSectionForWS() -> String {
+        var key = ""
+        if let cat = sections.first(where: {$0.isSelected == true }) {
+            key = cat.catKey
+        }
+        return  key
+    }
+}
+
+//MARK: - Section -
+class Section:Codable {
+    fileprivate var catName:String
+    fileprivate var catSubtitle:String
+    fileprivate var catKey:String
+    
+    var name: String {
+        return catName
+    }
+    var subtitle:String {
+        return catSubtitle
+    }
+    var key: String {
+        return catKey
+    }
+    var isSelected = false
+    
+    init(keyName:String,keyValue:String, keySubtitle:String) {
+        catName = keyValue
+        catKey = keyName
+        catSubtitle = keySubtitle
+    }
+    
+    func getImageName() -> String {
+        switch catKey {
+        case "social":
+            return "ic_action_social"
+        case "clothes":
+            return "ic_action_clothes"
+        case "equipment":
+            return "ic_action_equipment"
+        case "hygiene":
+            return "ic_action_hygiene"
+        case "services":
+            return "ic_action_services"
+        default:
+            return ""
+        }
     }
 }

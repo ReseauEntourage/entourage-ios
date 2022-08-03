@@ -50,6 +50,7 @@ let kAPIReportPostCommentNeighborhood = "neighborhoods/%@/chat_messages/%@/repor
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
 let API_URL_NEIGHBORHOOD_PREPARE_IMAGE_POST_UPLOAD = "neighborhoods/%@/chat_messages/presigned_upload?token=%@"
 let API_URL_EVENT_PREPARE_IMAGE_POST_UPLOAD = "outings/%@/chat_messages/presigned_upload?token=%@"
+let API_URL_CONTRIB_PREPARE_IMAGE_UPLOAD = "contributions/presigned_upload?token=%@"
 
 //Home
 let kAPIHomeSummary = "home/summary?token=%@"
@@ -80,6 +81,12 @@ let kAPIReportPostEvent = "outings/%@/chat_messages/%@/report?token=%@"
 let kAPIReportPostCommentEvent = "outings/%@/chat_messages/%@/report?token=%@"
 let kAPIPostOutingPostMessage = "outings/%@/chat_messages?token=%@"
 let kAPIGetOutingMessages = "outings/%@/chat_messages/%@/comments?token=%@"
+
+//Actions
+let kAPIContribCreate = "contributions?token=%@"
+let kAPISolicitationCreate = "solicitations?token=%@"
+let kAPIContribUpdate = "contributions/%d?token=%@"
+let kAPISolicitationUpdate = "solicitations/%d?token=%@"
 
 //WebLink
 let emailContact = "contact@entourage.social"

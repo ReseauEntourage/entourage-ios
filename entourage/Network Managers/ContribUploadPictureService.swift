@@ -1,35 +1,34 @@
 //
-//  EventUploadPictureService.swift
+//  ContribUploadPictureService.swift
 //  entourage
 //
-//  Created by Jerome on 25/07/2022.
+//  Created by Jerome on 02/08/2022.
 //
 
 import Foundation
-
-struct EventUploadPictureService {
+struct ContribUploadPictureService {
     
     //First step Prepare
-    static func prepareUploadWith(eventId:Int, image:UIImage, message:String? , completion: @escaping (_ result: Bool)->()) {
+    static func prepareUploadWith(image:UIImage, action:Action, isUpdate:Bool , completion: @escaping (_ action:Action?, _ isOk: Bool)->()) {
         
         guard let token = UserDefaults.token else {return}
-        var endpoint = API_URL_EVENT_PREPARE_IMAGE_POST_UPLOAD
-        endpoint = String.init(format: endpoint,"\(eventId)", token)
+        var endpoint = API_URL_CONTRIB_PREPARE_IMAGE_UPLOAD
+        endpoint = String.init(format: endpoint, token)
         
         AuthService.prepareUploadPhotoS3(endpoint:endpoint) { json, error in
             guard let _presigneUrl = json?["presigned_url"] as? String, let _uploadKey = json?["upload_key"] as? String else {
-                completion(false)
+                completion(nil, false)
                 return
             }
             
             uploadtoS3(urlS3: _presigneUrl, image: image, completion: {isOk in
                 if isOk {
-                    postWithImageAndText(imageKey: _uploadKey, eventId: eventId, message: message, completion: {isOk in
-                        completion(isOk)
+                    postWithImageAndText(imageKey: _uploadKey,action: action,isUpadte: isUpdate, completion: { action, isOk in
+                        completion(action, isOk)
                     })
                 }
                 else {
-                    completion(false)
+                    completion(nil, false)
                 }
             })
         }
@@ -63,14 +62,29 @@ struct EventUploadPictureService {
         session.finishTasksAndInvalidate()
     }
     
-    //3nd step update user for avatarKey
-    private static func postWithImageAndText(imageKey:String,eventId:Int, message:String?, completion: @escaping (_ result: Bool)->()) {
-        EventService.createPostMessage(eventId: eventId, message: message, urlImage: imageKey) { error in
-            if error != nil {
-                completion(false)
-                return
+    //3nd step create contrib with key
+    private static func postWithImageAndText(imageKey:String, action:Action,isUpadte:Bool, completion: @escaping (_ action:Action?,_ isOk: Bool)->()) {
+        Logger.print("***** image key ? \(imageKey)")
+        var newAction = action
+        newAction.keyImage = imageKey
+        if isUpadte {
+            ActionsService.updateAction(isContrib: true, action: newAction) { action, error in
+                if error != nil {
+                    completion(nil,false)
+                    return
+                }
+                completion(action, true)
             }
-            completion(true)
+        }
+        else {
+            ActionsService.createAction(isContrib: true, action: newAction) { action, error in
+                if error != nil {
+                    completion(nil,false)
+                    return
+                }
+                completion(action, true)
+            }
         }
     }
 }
+

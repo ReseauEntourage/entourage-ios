@@ -23,6 +23,7 @@
 		020AF5E92860B10C0012AE60 /* HomeCongratPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020AF5E72860B10C0012AE60 /* HomeCongratPopupViewController.xib */; };
 		021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318A827DF4E3100B0F1BD /* Metadatas.swift */; };
 		021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318AA27DF548600B0F1BD /* MetadatasService.swift */; };
+		021D2F3B289969460034D855 /* ActionCreateValidateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021D2F3A289969460034D855 /* ActionCreateValidateViewController.swift */; };
 		021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */; };
 		021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */; };
 		021E804328916FF500C891DC /* EventEditRecurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E804228916FF500C891DC /* EventEditRecurrencyViewController.swift */; };
@@ -88,6 +89,8 @@
 		0258AFE2282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFE1282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift */; };
 		0258AFE4282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFE3282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift */; };
 		0258AFE6282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258AFE5282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift */; };
+		0258E4F9288AAF1A000F107B /* ActionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258E4F8288AAF1A000F107B /* ActionsService.swift */; };
+		0258E4FB288AAF47000F107B /* ContribUploadPictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0258E4FA288AAF47000F107B /* ContribUploadPictureService.swift */; };
 		025C92B028340787000970D9 /* NeighborhoodPostTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025C92AF28340787000970D9 /* NeighborhoodPostTextCell.xib */; };
 		025C92B828340CFC000970D9 /* NeighborhoodPostImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025C92B728340CFC000970D9 /* NeighborhoodPostImageCell.xib */; };
 		025C92BA28340F10000970D9 /* NeighborhoodDetailTopMemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 025C92B928340F10000970D9 /* NeighborhoodDetailTopMemberCell.xib */; };
@@ -174,6 +177,19 @@
 		02A3DD3527FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3DD3427FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift */; };
 		02A3DD3727FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3DD3627FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift */; };
 		02A3DD3927FDC72C0060EC2E /* NeighborhoodCreatePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3DD3827FDC72C0060EC2E /* NeighborhoodCreatePageViewController.swift */; };
+		02A92C182897D0F7000DFF95 /* Actions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02A92C172897D0F7000DFF95 /* Actions.storyboard */; };
+		02A92C1B2897D2C2000DFF95 /* ActionsMainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C1A2897D2C2000DFF95 /* ActionsMainHomeViewController.swift */; };
+		02A92C1E2897D347000DFF95 /* ActionCreateMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C1D2897D347000DFF95 /* ActionCreateMainViewController.swift */; };
+		02A92C202897D374000DFF95 /* ActionCreatePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C1F2897D374000DFF95 /* ActionCreatePageViewController.swift */; };
+		02A92C222897E68B000DFF95 /* ActionCreatePhase1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C212897E68B000DFF95 /* ActionCreatePhase1ViewController.swift */; };
+		02A92C242897E695000DFF95 /* ActionCreatePhase2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C232897E695000DFF95 /* ActionCreatePhase2ViewController.swift */; };
+		02A92C262897E6A9000DFF95 /* ActionCreatePhase3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C252897E6A9000DFF95 /* ActionCreatePhase3ViewController.swift */; };
+		02A92C2828980F8C000DFF95 /* ActionAddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C2728980F8C000DFF95 /* ActionAddPhotoViewController.swift */; };
+		02A92C2A28980FCF000DFF95 /* ActionPicturePreviewResizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C2928980FCF000DFF95 /* ActionPicturePreviewResizeViewController.swift */; };
+		02A92C2C2898116B000DFF95 /* ActionCreatePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C2B2898116B000DFF95 /* ActionCreatePhotoCell.swift */; };
+		02A92C2E289816C8000DFF95 /* Actions.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02A92C2D289816C8000DFF95 /* Actions.xcassets */; };
+		02A92C3028981884000DFF95 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C2F28981884000DFF95 /* Action.swift */; };
+		02A92C3228982D57000DFF95 /* ActionTagInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A92C3128982D57000DFF95 /* ActionTagInfoCell.swift */; };
 		02ADAAB3280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ADAAB2280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift */; };
 		02B37825279B06F600B204EF /* Others.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02B37824279B06F600B204EF /* Others.storyboard */; };
 		02B37828279B072C00B204EF /* SharingEntourageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B37826279B072C00B204EF /* SharingEntourageTableViewCell.swift */; };
@@ -346,6 +362,7 @@
 		020AF5E72860B10C0012AE60 /* HomeCongratPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCongratPopupViewController.xib; sourceTree = "<group>"; };
 		021318A827DF4E3100B0F1BD /* Metadatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadatas.swift; sourceTree = "<group>"; };
 		021318AA27DF548600B0F1BD /* MetadatasService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadatasService.swift; sourceTree = "<group>"; };
+		021D2F3A289969460034D855 /* ActionCreateValidateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCreateValidateViewController.swift; sourceTree = "<group>"; };
 		021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesBubblesCell.swift; sourceTree = "<group>"; };
 		021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserActivitiesCell.swift; sourceTree = "<group>"; };
 		021E804228916FF500C891DC /* EventEditRecurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditRecurrencyViewController.swift; sourceTree = "<group>"; };
@@ -410,6 +427,8 @@
 		0258AFE1282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodDetailOnlyViewController.swift; sourceTree = "<group>"; };
 		0258AFE3282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodEventsTableviewCell.swift; sourceTree = "<group>"; };
 		0258AFE5282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodParamNotifsCell.swift; sourceTree = "<group>"; };
+		0258E4F8288AAF1A000F107B /* ActionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsService.swift; sourceTree = "<group>"; };
+		0258E4FA288AAF47000F107B /* ContribUploadPictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContribUploadPictureService.swift; sourceTree = "<group>"; };
 		025C92AF28340787000970D9 /* NeighborhoodPostTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostTextCell.xib; sourceTree = "<group>"; };
 		025C92B728340CFC000970D9 /* NeighborhoodPostImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostImageCell.xib; sourceTree = "<group>"; };
 		025C92B928340F10000970D9 /* NeighborhoodDetailTopMemberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodDetailTopMemberCell.xib; sourceTree = "<group>"; };
@@ -499,6 +518,19 @@
 		02A3DD3427FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreatePhase2ViewController.swift; sourceTree = "<group>"; };
 		02A3DD3627FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreatePhase3ViewController.swift; sourceTree = "<group>"; };
 		02A3DD3827FDC72C0060EC2E /* NeighborhoodCreatePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreatePageViewController.swift; sourceTree = "<group>"; };
+		02A92C172897D0F7000DFF95 /* Actions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Actions.storyboard; sourceTree = "<group>"; };
+		02A92C1A2897D2C2000DFF95 /* ActionsMainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsMainHomeViewController.swift; sourceTree = "<group>"; };
+		02A92C1D2897D347000DFF95 /* ActionCreateMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCreateMainViewController.swift; sourceTree = "<group>"; };
+		02A92C1F2897D374000DFF95 /* ActionCreatePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCreatePageViewController.swift; sourceTree = "<group>"; };
+		02A92C212897E68B000DFF95 /* ActionCreatePhase1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCreatePhase1ViewController.swift; sourceTree = "<group>"; };
+		02A92C232897E695000DFF95 /* ActionCreatePhase2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCreatePhase2ViewController.swift; sourceTree = "<group>"; };
+		02A92C252897E6A9000DFF95 /* ActionCreatePhase3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCreatePhase3ViewController.swift; sourceTree = "<group>"; };
+		02A92C2728980F8C000DFF95 /* ActionAddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionAddPhotoViewController.swift; sourceTree = "<group>"; };
+		02A92C2928980FCF000DFF95 /* ActionPicturePreviewResizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPicturePreviewResizeViewController.swift; sourceTree = "<group>"; };
+		02A92C2B2898116B000DFF95 /* ActionCreatePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCreatePhotoCell.swift; sourceTree = "<group>"; };
+		02A92C2D289816C8000DFF95 /* Actions.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Actions.xcassets; sourceTree = "<group>"; };
+		02A92C2F28981884000DFF95 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		02A92C3128982D57000DFF95 /* ActionTagInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTagInfoCell.swift; sourceTree = "<group>"; };
 		02ADAAB2280706D0006FDC6D /* NeighborhoodCreateValidateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodCreateValidateViewController.swift; sourceTree = "<group>"; };
 		02B37824279B06F600B204EF /* Others.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Others.storyboard; sourceTree = "<group>"; };
 		02B37826279B072C00B204EF /* SharingEntourageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingEntourageTableViewCell.swift; sourceTree = "<group>"; };
@@ -763,6 +795,7 @@
 				02B94C1B284F50D8006059EF /* Home.swift */,
 				02B94C4428521F82006059EF /* PedagogicResource.swift */,
 				02FB543C287D74B800E4B9FA /* GlobalObjects.swift */,
+				02A92C2F28981884000DFF95 /* Action.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -933,6 +966,7 @@
 				02A3DD3027FDC03B0060EC2E /* Neighborhood.xcassets */,
 				02B94C1D284F55D9006059EF /* Home.xcassets */,
 				024131DA2862126B00561FB4 /* Events.xcassets */,
+				02A92C2D289816C8000DFF95 /* Actions.xcassets */,
 				02C91A2A278F47F300305E0B /* Localizable.strings */,
 			);
 			path = Assets;
@@ -956,6 +990,7 @@
 				021FD9642875BEAC00D3AA54 /* Event.storyboard */,
 				024131C62862019500561FB4 /* Event_Create.storyboard */,
 				02EB4B512892B77100CC977E /* Event_Message.storyboard */,
+				02A92C172897D0F7000DFF95 /* Actions.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1029,6 +1064,7 @@
 				026819B7278E105600A98A4A /* Login */,
 				02B7921F27F73F34003AFFB9 /* Groups - Neighborhoods */,
 				024131C8286201FB00561FB4 /* Events */,
+				02A92C192897D286000DFF95 /* Actions */,
 				0288A8D327CCD8E1008D7011 /* Profile */,
 				02DB3BBD27A149B5004732C9 /* Partner_detail */,
 				02F527792799995900929431 /* Guide_detail */,
@@ -1084,6 +1120,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		026FF208289A71F700640572 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				02A92C2B2898116B000DFF95 /* ActionCreatePhotoCell.swift */,
+				02A92C3128982D57000DFF95 /* ActionTagInfoCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		0282637A28215FC100B354F9 /* Params */ = {
 			isa = PBXGroup;
 			children = (
@@ -1133,6 +1178,31 @@
 				029E307A27DB5EF300B12357 /* GoogleService-Info.plist */,
 			);
 			path = Environment;
+			sourceTree = "<group>";
+		};
+		02A92C192897D286000DFF95 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				02A92C1A2897D2C2000DFF95 /* ActionsMainHomeViewController.swift */,
+				02A92C1C2897D330000DFF95 /* Create */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		02A92C1C2897D330000DFF95 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				02A92C1D2897D347000DFF95 /* ActionCreateMainViewController.swift */,
+				02A92C1F2897D374000DFF95 /* ActionCreatePageViewController.swift */,
+				02A92C212897E68B000DFF95 /* ActionCreatePhase1ViewController.swift */,
+				02A92C232897E695000DFF95 /* ActionCreatePhase2ViewController.swift */,
+				02A92C252897E6A9000DFF95 /* ActionCreatePhase3ViewController.swift */,
+				021D2F3A289969460034D855 /* ActionCreateValidateViewController.swift */,
+				02A92C2728980F8C000DFF95 /* ActionAddPhotoViewController.swift */,
+				02A92C2928980FCF000DFF95 /* ActionPicturePreviewResizeViewController.swift */,
+				026FF208289A71F700640572 /* Cells */,
+			);
+			path = Create;
 			sourceTree = "<group>";
 		};
 		02B3782A279B073500B204EF /* Share */ = {
@@ -1222,6 +1292,8 @@
 				02B94C19284F508B006059EF /* HomeService.swift */,
 				02E8544F2865C60A0012D941 /* EventService.swift */,
 				021FBF9128856DC600710584 /* EventUploadPictureService.swift */,
+				0258E4F8288AAF1A000F107B /* ActionsService.swift */,
+				0258E4FA288AAF47000F107B /* ContribUploadPictureService.swift */,
 				02C91A22278F07D900305E0B /* Endpoints.swift */,
 				0262997A2790815000D84A6A /* APIKeys.swift */,
 				02C0A0E6278EEC6B00B0C646 /* NetworkManager.swift */,
@@ -1506,6 +1578,7 @@
 				02CCE67527D78C7100D6976C /* Montserrat-Regular.ttf in Resources */,
 				021FD9702876F55A00D3AA54 /* NeighborhoodListHeaderCell.xib in Resources */,
 				029E307C27DB5EF300B12357 /* GoogleService-Info.plist in Resources */,
+				02A92C2E289816C8000DFF95 /* Actions.xcassets in Resources */,
 				0224597127FF290900944DE4 /* MJErrorInputTextView.xib in Resources */,
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
 				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
@@ -1547,6 +1620,7 @@
 				020AF5E528607EFE0012AE60 /* congrat_short_anim.json in Resources */,
 				02B94C28284F63AB006059EF /* HomeContribCell.xib in Resources */,
 				02B37825279B06F600B204EF /* Others.storyboard in Resources */,
+				02A92C182897D0F7000DFF95 /* Actions.storyboard in Resources */,
 				025C92C528341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib in Resources */,
 				024131C72862019500561FB4 /* Event_Create.storyboard in Resources */,
 				02CCE67627D78C7500D6976C /* Quicksand-Bold.ttf in Resources */,
@@ -1619,8 +1693,10 @@
 				0229376F27A43AA600206201 /* GMSAutoCompleteVC.swift in Sources */,
 				02C6E86928203BF0009D4289 /* NeighBorhoodParamsCGUViewController.swift in Sources */,
 				025D8764278DEB3A00909101 /* Logger.swift in Sources */,
+				02A92C3228982D57000DFF95 /* ActionTagInfoCell.swift in Sources */,
 				0288A8D927CCDA5C008D7011 /* PictureUploadS3Service.swift in Sources */,
 				02E069E6279184B3006DB1B6 /* OTOnboardingAssoActivityViewController.swift in Sources */,
+				02A92C1B2897D2C2000DFF95 /* ActionsMainHomeViewController.swift in Sources */,
 				02B7921C27F737CB003AFFB9 /* NeighborhoodService.swift in Sources */,
 				0241FE0C286DDB700065E560 /* EventEditMainViewController.swift in Sources */,
 				021FD96D2876F12E00D3AA54 /* EventListSectionCell.swift in Sources */,
@@ -1667,6 +1743,7 @@
 				02E069E3279184B3006DB1B6 /* OTOnboardingEmailPwdViewController.swift in Sources */,
 				02681980278DF72D00A98A4A /* OTCarrouselLayout.swift in Sources */,
 				02728DDD27F19A3800512DC0 /* PartnerDetailInfoCell.swift in Sources */,
+				02A92C1E2897D347000DFF95 /* ActionCreateMainViewController.swift in Sources */,
 				02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */,
 				02A3DD3527FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift in Sources */,
 				02FB5448287DC11100E4B9FA /* EventDetailFullGroupCell.swift in Sources */,
@@ -1698,9 +1775,11 @@
 				02FCB537281BDD2600682E61 /* NeighborhoodDetailTopCell.swift in Sources */,
 				02F5278327999AD700929431 /* MapPoi.swift in Sources */,
 				0262997B2790815000D84A6A /* APIKeys.swift in Sources */,
+				02A92C202897D374000DFF95 /* ActionCreatePageViewController.swift in Sources */,
 				026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */,
 				02B94C23284F594A006059EF /* HomeMainViewModel.swift in Sources */,
 				02E0EFA328787082009B2C65 /* EventDetailTopFullCell.swift in Sources */,
+				02A92C222897E68B000DFF95 /* ActionCreatePhase1ViewController.swift in Sources */,
 				0224596F27FF28FC00944DE4 /* MJErrorInputTextView.swift in Sources */,
 				0268197D278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift in Sources */,
 				02681950278DF6BD00A98A4A /* OTProgressBar.swift in Sources */,
@@ -1725,6 +1804,7 @@
 				02C6E87028203E1F009D4289 /* ReportGroupMainViewController.swift in Sources */,
 				02D64F4F2799D74F00F6C4BD /* PoiService.swift in Sources */,
 				02CCE68227D7968800D6976C /* MainProfileSettingsViewController.swift in Sources */,
+				021D2F3B289969460034D855 /* ActionCreateValidateViewController.swift in Sources */,
 				0268C255285A2B1400294055 /* FloatyDelegate.swift in Sources */,
 				02B57D9827FC4329005A567B /* ReportUserPageViewController.swift in Sources */,
 				026819C3278E10DA00A98A4A /* User.swift in Sources */,
@@ -1741,6 +1821,7 @@
 				02FB5444287DC01200E4B9FA /* EventDetailFullCell.swift in Sources */,
 				025D8766278DEC2100909101 /* Extensions.swift in Sources */,
 				02E069DE279184B3006DB1B6 /* OTOnboardingV2StartViewController.swift in Sources */,
+				02A92C2A28980FCF000DFF95 /* ActionPicturePreviewResizeViewController.swift in Sources */,
 				022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */,
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
 				029638F12869E76600E10EFB /* EventPlaceLimitCell.swift in Sources */,
@@ -1756,6 +1837,7 @@
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
 				024131CB2862022100561FB4 /* EventCreateMainViewController.swift in Sources */,
 				02C54ADF2885BD4A00754222 /* EventFiltersViewController.swift in Sources */,
+				02A92C2828980F8C000DFF95 /* ActionAddPhotoViewController.swift in Sources */,
 				0279680A2852472400311D8E /* PedagogicViewModel.swift in Sources */,
 				0258AFE0282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift in Sources */,
 				029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */,
@@ -1765,6 +1847,7 @@
 				024131CD2862024A00561FB4 /* EventCreatePageViewController.swift in Sources */,
 				0288A8D627CCD8F5008D7011 /* PicturePreviewResizeViewController.swift in Sources */,
 				029638EF2869E71500E10EFB /* EventPlaceCell.swift in Sources */,
+				0258E4F9288AAF1A000F107B /* ActionsService.swift in Sources */,
 				02C3ABF2279AB53800817B82 /* Extensions_UserDefaults.swift in Sources */,
 				02CCE68A27D7B51E00D6976C /* CloseButton.swift in Sources */,
 				02E2192528355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift in Sources */,
@@ -1772,12 +1855,15 @@
 				02F5278527999B8F00929431 /* SolidarityGuideCell.swift in Sources */,
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,
 				02B94C33284F92AD006059EF /* HomeActionTeachCell.swift in Sources */,
+				02A92C2C2898116B000DFF95 /* ActionCreatePhotoCell.swift in Sources */,
 				02A3DD3327FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift in Sources */,
 				0268C253285A2B1400294055 /* FloatyViewController.swift in Sources */,
+				02A92C262897E6A9000DFF95 /* ActionCreatePhase3ViewController.swift in Sources */,
 				02E0EFA028783900009B2C65 /* EventDetailFeedViewController.swift in Sources */,
 				02B94C37284F9FB3006059EF /* HomeHelpCell.swift in Sources */,
 				02C6E86F28203E1F009D4289 /* ReportGroupSendViewController.swift in Sources */,
 				02E77B44282CF9CF00786E27 /* Event.swift in Sources */,
+				02A92C3028981884000DFF95 /* Action.swift in Sources */,
 				02FB544E287DC14000E4B9FA /* EventDetailFullInterestCell.swift in Sources */,
 				02833F9A2822A9F600000156 /* NeighBorhoodEventListUsersViewController.swift in Sources */,
 				029638F3286C58D900E10EFB /* EventShareCell.swift in Sources */,
@@ -1806,6 +1892,7 @@
 				02846CC027EC921700D85ADA /* SelectTagCell.swift in Sources */,
 				02040CF7288E97F600AB1FBB /* EventParamSignalCell.swift in Sources */,
 				02040CF2288E8C2E00AB1FBB /* EventParamsViewController.swift in Sources */,
+				0258E4FB288AAF47000F107B /* ContribUploadPictureService.swift in Sources */,
 				0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */,
 				0258AFE6282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift in Sources */,
 				0224597D28001B2500944DE4 /* Address.swift in Sources */,
@@ -1828,6 +1915,7 @@
 				024131D52862030A00561FB4 /* EventCreatePhase3ViewController.swift in Sources */,
 				02B37829279B072C00B204EF /* ShareEntourageViewController.swift in Sources */,
 				029D25352865FA7B00147F77 /* EventRecurrenceCell.swift in Sources */,
+				02A92C242897E695000DFF95 /* ActionCreatePhase2ViewController.swift in Sources */,
 				0207BF8727F20C1600631914 /* UserProfileDetailViewController.swift in Sources */,
 				02C91A27278F303100305E0B /* AppState.swift in Sources */,
 				022744762795D1D8005600A1 /* NotificationManager.swift in Sources */,

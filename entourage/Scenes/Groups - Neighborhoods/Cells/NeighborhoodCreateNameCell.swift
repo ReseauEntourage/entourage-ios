@@ -11,6 +11,7 @@ class NeighborhoodCreateNameCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_textfield: UITextField!
+    @IBOutlet weak var ui_subtitle: UILabel?
     
     @IBOutlet weak var ui_error_view: MJErrorInputTextView!
     
@@ -27,11 +28,13 @@ class NeighborhoodCreateNameCell: UITableViewCell, UITextFieldDelegate {
         ui_textfield.font = ApplicationTheme.getFontChampDefault().font
         ui_textfield.textColor = .black
         
+        ui_subtitle?.setupFontAndColor(style: ApplicationTheme.getFontLegend())
+        
         ui_error_view.isHidden = true
         self.ui_error_view.setupView(title: "neighborhoodCreateInputErrorMinCharName".localized)
     }
     
-    func populateCell(delegate:NeighborhoodCreateNameCellDelegate, name:String? = nil, isEvent:Bool) {
+    func populateCell(delegate:NeighborhoodCreateNameCellDelegate, name:String? = nil, isEvent:Bool, isAction:Bool = false, isContrib:Bool = false) {
         self.delegate = delegate
         self.ui_textfield.text = name
         
@@ -40,6 +43,20 @@ class NeighborhoodCreateNameCell: UITableViewCell, UITextFieldDelegate {
             ui_title.attributedText = stringAttr
             ui_textfield.placeholder = "event_create_phase_1_name_placeholder".localized
             self.ui_error_view.setupView(title: "event_create_phase_1_name_error".localized)
+        }
+        
+        if isAction {
+            let stringAttr = Utils.formatString(messageTxt: "action_create_phase_1_name".localized, messageTxtHighlight: "action_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(size: 15), fontColorTypeHighlight: ApplicationTheme.getFontLegend(size: 13))
+            ui_title.attributedText = stringAttr
+            
+            let _placeh = String.init(format: "action_create_phase_1_name_placeholder".localized, isContrib ? "action_contrib".localized : "action_solicitation".localized)
+            ui_textfield.placeholder = _placeh
+            
+            let _err = String.init(format: "action_create_phase_1_name_error".localized, isContrib ? "action_contrib".localized : "action_solicitation".localized)
+            self.ui_error_view.setupView(title: _err)
+            
+            let _subt = String.init(format: "action_create_phase_1_name_subtitle".localized, isContrib ? "action_contrib".localized : "action_solicitation".localized)
+            ui_subtitle?.text = _subt
         }
     }
     

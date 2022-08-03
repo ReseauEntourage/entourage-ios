@@ -148,7 +148,7 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_floaty_button.itemSpace = 24
         ui_floaty_button.addItem(item: floatItem2)
         ui_floaty_button.addItem(item: floatItem1)
-        
+        ui_floaty_button.sticky = true
         ui_floaty_button.animationSpeed = 0.3
         ui_floaty_button.fabDelegate = self
     }

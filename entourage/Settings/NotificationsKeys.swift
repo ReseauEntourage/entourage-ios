@@ -30,3 +30,7 @@ let kNotificationEventShowDiscover = "EventShowDiscover"
 let kNotificationEventShowMy = "EventShowMy"
 let kNotificationEventShowId = "eventId"
 let kNotificationEventsUpdate = "EventsUpdate"
+
+let kNotificationCreateShowNewAction = "actionCreateShowNew"
+let kNotificationActionCreateEnd = "kNotificationActionCreateEnd"
+let kNotificationActionShowId = "actionId"

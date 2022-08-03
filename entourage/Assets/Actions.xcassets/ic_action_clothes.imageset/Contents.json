@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_action_clothes.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

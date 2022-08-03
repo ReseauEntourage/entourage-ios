@@ -33,8 +33,17 @@ class NeighborhoodCreateLocationCell: UITableViewCell {
         ui_view_error.isHidden = true
     }
     
-    func populateCell(delegate:NeighborhoodCreateLocationCellDelegate, showError:Bool, cityName:String?) {
+    func populateCell(delegate:NeighborhoodCreateLocationCellDelegate, showError:Bool, cityName:String?, title:String? = nil, description:String? = nil) {
         self.delegate = delegate
+        
+        if let title = title {
+            ui_title.text = title
+        }
+        
+        if let description = description {
+            ui_description.text = description
+        }
+        
         ui_view_error.isHidden = !showError
         if let cityName = cityName {
             ui_info.text = cityName

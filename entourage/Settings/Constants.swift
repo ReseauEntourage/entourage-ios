@@ -38,6 +38,7 @@ struct StoryboardName {
     static let neighborhoodCreate = "Neighborhood_Create"
     static let neighborhoodReport = "Neighborhood_Report"
     static let neighborhoodMessage = "Neighborhood_Message"
+    static let actions = "Actions"
     
     static let solidarity = "GuideSolidarity"
     static let others = "Others"

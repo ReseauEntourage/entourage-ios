@@ -53,6 +53,12 @@ class MJNavBackView: UIView {
         ui_subtitle.setupFontAndColor(style: ApplicationTheme.getFontCourantItalicNoir(size: 15))
     }
     
+    func updateTitle(title:String) {
+        for _uititle in ui_titles {
+            _uititle.text = title
+        }
+    }
+    
     func populateView(title:String,titleFont:UIFont, titleColor:UIColor,delegate:MJNavBackViewDelegate,showSeparator:Bool = true,backgroundColor:UIColor? = nil,cornerRadius:CGFloat? = nil, isClose:Bool = false) {
              
         self.populateCustom(title: title, titleFont: titleFont, titleColor: titleColor, imageName: nil, backgroundColor: backgroundColor, delegate: delegate, showSeparator: showSeparator, cornerRadius: cornerRadius, isClose: isClose)

@@ -28,6 +28,8 @@ class ParamsChoosePlaceViewController: BasePopViewController {
     weak var placeVCDelegate:PlaceViewControllerDelegate? = nil
     
     var isFromEvent = false
+    var isFromActions = false
+    var isContrib = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,17 +40,28 @@ class ParamsChoosePlaceViewController: BasePopViewController {
         }
         
         //                OTLogger.logEvent(View_Profile_Action_Zone)//TODO:  Analytics
-        ui_top_view.populateView(title: "profileEditLocationTitle".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
-               
-        if isFromEvent {
+        
+        var title = "profileEditLocationTitle".localized
+        if isFromActions {
+            ui_label_info.isHidden = true
+            ui_title_add_place.text = "actionEditLocationLegend".localized
+            ui_label_description.text =  "actionEditLocationDescription".localized
+            let _title = String.init(format: "actionEditLocationTitle".localized, isContrib ? "action_contrib".localized : "action_solicitation".localized)
+
+            title = _title
+        }
+        else if isFromEvent {
             ui_label_info.isHidden = true
             ui_title_add_place.text = "profileEditLocationLegend_".localized
+            ui_label_description.text =  "profileEditLocationDescription".localized
         }
         else {
             ui_title_add_place.text = "profileEditLocationLegend*".localized
+            ui_label_description.text =  "profileEditLocationDescription".localized
         }
         
-        ui_label_description.text =  "profileEditLocationDescription".localized
+        ui_top_view.populateView(title: title , titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
+        
         ui_bt_address?.setTitle("profileEditLocationPlaceholder".localized, for: .normal)
         ui_label_info.text = "profileEditLocationLegend".localized
         
