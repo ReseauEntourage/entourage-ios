@@ -88,6 +88,9 @@ let kAPISolicitationCreate = "solicitations?token=%@"
 let kAPIContribUpdate = "contributions/%d?token=%@"
 let kAPISolicitationUpdate = "solicitations/%d?token=%@"
 
+let kAPIActionGetAllContribs = "contributions?token=%@&page=%d&per=%d"
+let kAPIActionGetAllSolicitations = "solicitations?token=%@&page=%d&per=%d"
+
 //WebLink
 let emailContact = "contact@entourage.social"
 let GDS_INFO_ALERT_WEB_LINK = "https://soliguide.fr"

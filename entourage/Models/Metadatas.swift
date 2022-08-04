@@ -243,6 +243,13 @@ struct Sections:Codable {
         return (key,key)
     }
     
+    func getSectionFrom(key:String) -> Section? {
+        if let cat = sections.first(where: {$0.catKey == key }) {
+            return cat
+        }
+        return nil
+    }
+    
     func getSections() -> [Section] {
         return sections
     }

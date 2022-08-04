@@ -185,6 +185,29 @@ import UIKit
         
         return dateString
     }
+    
+    static func formatActionDateName(date:Date?) -> String {
+        var dateString = "-"
+        guard let date = date else {
+            return dateString
+        }
+
+        if Calendar.current.isDateInToday(date) {
+            return "today".localized
+        }
+        else if Calendar.current.isDateInYesterday(date) {
+            return "yesterday".localized
+        }
+        
+        let dateFormat = DateFormatter()
+        dateFormat.locale = Locale.getPreferredLocale()
+        dateFormat.dateFormat = "dd MMMM YYYY"
+        dateString =  dateFormat.string(from: date)
+        
+        dateString = "Le \(dateString)"
+        
+        return dateString
+    }
 }
 
 class ImageLoaderSwift {

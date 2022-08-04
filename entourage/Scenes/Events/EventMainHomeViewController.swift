@@ -430,7 +430,7 @@ class EventMainHomeViewController: UIViewController {
     
     func gotoTop(isAnimated:Bool = true) {
         if isEventSelected && myEventsExtracted.events.count == 0 { return }
-        else if eventsDiscoveredExtracted.events.count == 0 { return }
+        else if !isEventSelected && eventsDiscoveredExtracted.events.count == 0 { return }
         Logger.print("***** event Discovered hzereeeee: \(self.eventsDiscoveredExtracted.events.count)")
         let indexPath = IndexPath(row: 0, section: 0)
         DispatchQueue.main.async {

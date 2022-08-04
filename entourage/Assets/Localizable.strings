@@ -48,6 +48,8 @@
 
 "WIP" = "Bientôt";
 "notImplemented" = "Prochainement disponible ;)";
+"today" = "Ajourd'hui";
+"yesterday" = "Hier";
 //PreOnboarding
 "next" = "Suivant";
 "connectMe" = "Me connecter";
@@ -993,3 +995,13 @@
 "contribCreateEnd_subtitle" = "Félicitation, vous venez de créer une nouvelle contribution. Pour la rendre plus visible parlez-en sur vos groupes ! ";
 "solicitationCreateEnd_title" = "Votre demande à bien été créée !";
 "solicitationCreateEnd_subtitle" = "Félicitation, vous venez de créer une nouvelle demande. Pour la rendre plus visible parlez-en sur vos groupes ! ";
+
+
+//Home Actions
+"actions_main_page_title" = "Entraide";
+"actions_main_page_button_contribs" = "Contributions";
+"actions_main_page_button_solicitations" = "Demandes";
+"action_contrib_empty_title" = "Aucune contribution ne correspond à votre zone de recherche";
+"action_contrib_empty_subtitle" = "Vous pouvez élargir votre champ de recherche ou créer une contribution";
+"action_solicitation_empty_title" = "Aucune demande ne correspond à votre zone de recherche";
+"action_solicitation_empty_subtitle" = "Vous pouvez élargir votre champ de recherche ou créer une demande";

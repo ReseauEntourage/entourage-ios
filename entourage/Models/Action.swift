@@ -22,6 +22,7 @@ struct Action:Codable {
     var location:EventLocation? = nil
     
     var keyImage:String? = nil
+    var metadata:ActionMetadata? = nil
     
     private var statusChangedAt:String? = nil
     private var createdAt:String? = nil
@@ -31,19 +32,14 @@ struct Action:Codable {
         return statusChangedAt == nil ? nil : Utils.getDateFromWSDateString(statusChangedAt)
     }
     
-    func getCreateUpdateDate() -> (dateStr:String,isCreated:Bool) {
+    func getCreatedDate() -> String {
         var date:Date? = nil
-        var isCreated = true
         
         let createdDate = Utils.getDateFromWSDateString(createdAt)
-        let updateDate = Utils.getDateFromWSDateString(updatedAt)
         
-        isCreated = createdDate == updateDate
-        date = isCreated ?  createdDate : updateDate
+        let dateStr = Utils.formatActionDateName(date: createdDate)
         
-        let dateStr = Utils.formatEventDateName(date: date)
-        
-        return (dateStr,isCreated)
+        return dateStr
     }
     
     enum CodingKeys: String, CodingKey {
@@ -57,6 +53,7 @@ struct Action:Codable {
         
         case author
         case location
+        case metadata
         
         case createdAt = "created_at"
         case updatedAt = "updated_at"
@@ -102,5 +99,16 @@ struct Action:Codable {
         }
         
         return dict
+    }
+}
+
+
+struct ActionMetadata:Codable {
+    var city:String? = nil
+    var displayAddress:String? = nil
+    
+    enum CodingKeys: String, CodingKey {
+        case city
+        case displayAddress = "display_address"
     }
 }

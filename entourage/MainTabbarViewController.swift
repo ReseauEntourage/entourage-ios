@@ -247,6 +247,11 @@ extension MainTabbarViewController: UITabBarControllerDelegate {
         boldSelectedItem()
         
         //TO force reload neighborhoods
+        if item.tag == 1 {
+            NotificationCenter.default.post(name: NSNotification.Name(kNotificationActionsUpdate), object: nil)
+        }
+        
+        //TO force reload neighborhoods
         if item.tag == 3 {
             NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
         }
