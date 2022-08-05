@@ -10,6 +10,7 @@ import SDWebImage
 
 class ActionContribDetailHomeCell: UITableViewCell {
 
+    @IBOutlet weak var ui_placeholder: UIImageView!
     @IBOutlet weak var ui_image: UIImageView!
     @IBOutlet weak var ui_title: UILabel!
     @IBOutlet weak var ui_date: UILabel!
@@ -36,16 +37,18 @@ class ActionContribDetailHomeCell: UITableViewCell {
         
         ui_title.text = action.title
         
-        
+        self.ui_placeholder.image = nil
         if let imageUrl = action.imageUrl, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
-            ui_image.sd_setImage(with: mainUrl, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+            ui_image?.sd_setImage(with: mainUrl, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
                 if error != nil {
-                    self?.ui_image.image = UIImage.init(named: "ic_placeholder_action")
+                    self?.ui_image.image = nil
+                    self?.ui_placeholder.image = UIImage.init(named: "ic_placeholder_action")
                 }
             })
         }
         else {
-            ui_image.image = UIImage.init(named: "ic_placeholder_action")
+            self.ui_image.image = nil
+            self.ui_placeholder.image = UIImage.init(named: "ic_placeholder_action")
         }
     
         ui_view_separator.isHidden = hideSeparator

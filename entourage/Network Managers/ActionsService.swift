@@ -83,4 +83,21 @@ struct ActionsService:ParsingDataCodable {
             DispatchQueue.main.async { completion(actions, nil) }
         }
     }
+    
+    static func getAllMyActions(currentPage:Int, per:Int, completion: @escaping (_ actions:[Action]?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        
+        let endpoint = String.init(format: kAPIActionGetAllForMe, token, currentPage, per)
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            let actions:[Action]? = self.parseDatas(data: data, key: "actions")
+            DispatchQueue.main.async { completion(actions, nil) }
+        }
+    }
 }

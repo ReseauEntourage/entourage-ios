@@ -316,6 +316,9 @@
 		02EB4B542892B9C400CC977E /* EventDetailMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EB4B532892B9C400CC977E /* EventDetailMessagesViewController.swift */; };
 		02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */; };
 		02EC7E4B27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4A27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift */; };
+		02EFE47A289BFC0D00D70C68 /* Action_Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02EFE479289BFC0D00D70C68 /* Action_Create.storyboard */; };
+		02EFE47C289BFD2A00D70C68 /* ActionsMyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EFE47B289BFD2A00D70C68 /* ActionsMyListViewController.swift */; };
+		02EFE47E289C056B00D70C68 /* ActionMineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EFE47D289C056B00D70C68 /* ActionMineCell.swift */; };
 		02F527782799990F00929431 /* GuideSolidarity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02F527772799990F00929431 /* GuideSolidarity.storyboard */; };
 		02F5277D2799995900929431 /* GuideDetailTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5277A2799995900929431 /* GuideDetailTableViewCells.swift */; };
 		02F5277E2799995900929431 /* GDSSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5277B2799995900929431 /* GDSSearchViewController.swift */; };
@@ -655,6 +658,9 @@
 		02EB4B532892B9C400CC977E /* EventDetailMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailMessagesViewController.swift; sourceTree = "<group>"; };
 		02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePhotoCell.swift; sourceTree = "<group>"; };
 		02EC7E4A27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsChoosePlaceViewController.swift; sourceTree = "<group>"; };
+		02EFE479289BFC0D00D70C68 /* Action_Create.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Action_Create.storyboard; sourceTree = "<group>"; };
+		02EFE47B289BFD2A00D70C68 /* ActionsMyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsMyListViewController.swift; sourceTree = "<group>"; };
+		02EFE47D289C056B00D70C68 /* ActionMineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMineCell.swift; sourceTree = "<group>"; };
 		02F527772799990F00929431 /* GuideSolidarity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuideSolidarity.storyboard; sourceTree = "<group>"; };
 		02F5277A2799995900929431 /* GuideDetailTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideDetailTableViewCells.swift; sourceTree = "<group>"; };
 		02F5277B2799995900929431 /* GDSSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDSSearchViewController.swift; sourceTree = "<group>"; };
@@ -999,6 +1005,7 @@
 				024131C62862019500561FB4 /* Event_Create.storyboard */,
 				02EB4B512892B77100CC977E /* Event_Message.storyboard */,
 				02A92C172897D0F7000DFF95 /* Actions.storyboard */,
+				02EFE479289BFC0D00D70C68 /* Action_Create.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1194,6 +1201,7 @@
 				02A92C1A2897D2C2000DFF95 /* ActionsMainHomeViewController.swift */,
 				02F578D3289AD47E0040685C /* cells */,
 				02A92C1C2897D330000DFF95 /* Create */,
+				02EFE47B289BFD2A00D70C68 /* ActionsMyListViewController.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -1480,6 +1488,7 @@
 				02F578CC289AD4060040685C /* ActionContribDetailHomeCell.xib */,
 				02F578CF289AD4180040685C /* ActionSolicitationDetailHomeCell.swift */,
 				02F578D0289AD4180040685C /* ActionSolicitationDetailHomeCell.xib */,
+				02EFE47D289C056B00D70C68 /* ActionMineCell.swift */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -1638,6 +1647,7 @@
 				02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */,
 				0268194C278DF4A800A98A4A /* Onboarding_V2.storyboard in Resources */,
 				021FD9652875BEAC00D3AA54 /* Event.storyboard in Resources */,
+				02EFE47A289BFC0D00D70C68 /* Action_Create.storyboard in Resources */,
 				020AF5E528607EFE0012AE60 /* congrat_short_anim.json in Resources */,
 				02B94C28284F63AB006059EF /* HomeContribCell.xib in Resources */,
 				02B37825279B06F600B204EF /* Others.storyboard in Resources */,
@@ -1785,6 +1795,7 @@
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
 				0282637C282160B700B354F9 /* NeighborhoodCguCell.swift in Sources */,
 				0224597827FF327C00944DE4 /* NeighborhoodCreateLocationCell.swift in Sources */,
+				02EFE47C289BFD2A00D70C68 /* ActionsMyListViewController.swift in Sources */,
 				024131D42862030A00561FB4 /* EventCreatePhase2ViewController.swift in Sources */,
 				02FCC3152812DD9200578407 /* NeighborhoodHomeSearchCell.swift in Sources */,
 				02E069E0279184B3006DB1B6 /* OTOnboardingTypeViewController.swift in Sources */,
@@ -1917,6 +1928,7 @@
 				02040CF7288E97F600AB1FBB /* EventParamSignalCell.swift in Sources */,
 				02040CF2288E8C2E00AB1FBB /* EventParamsViewController.swift in Sources */,
 				0258E4FB288AAF47000F107B /* ContribUploadPictureService.swift in Sources */,
+				02EFE47E289C056B00D70C68 /* ActionMineCell.swift in Sources */,
 				0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */,
 				0258AFE6282BF11400E7B4AA /* NeighborhoodParamNotifsCell.swift in Sources */,
 				0224597D28001B2500944DE4 /* Address.swift in Sources */,

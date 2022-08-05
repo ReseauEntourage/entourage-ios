@@ -169,7 +169,7 @@ class ActionsMainHomeViewController: UIViewController {
     }
 
     func createAction(isContrib:Bool) {
-        let sb = UIStoryboard.init(name: StoryboardName.actions, bundle: nil)
+        let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
             vc.modalPresentationStyle = .fullScreen
             vc.isContrib = isContrib
@@ -383,7 +383,9 @@ class ActionsMainHomeViewController: UIViewController {
     
     @IBAction func action_show_my_actions(_ sender: Any) {
         //TODO: Show my actions
-        showWIP(parentVC: self.tabBarController)
+        if let navvc = storyboard?.instantiateViewController(withIdentifier: "action_myNav") {
+            self.tabBarController?.present(navvc, animated: true)
+        }
     }
     
     //MARK: - Methods -

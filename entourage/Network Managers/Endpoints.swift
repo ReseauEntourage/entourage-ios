@@ -90,6 +90,7 @@ let kAPISolicitationUpdate = "solicitations/%d?token=%@"
 
 let kAPIActionGetAllContribs = "contributions?token=%@&page=%d&per=%d"
 let kAPIActionGetAllSolicitations = "solicitations?token=%@&page=%d&per=%d"
+let kAPIActionGetAllForMe = "users/me/actions?token=%@&page=%d&per=%d"
 
 //WebLink
 let emailContact = "contact@entourage.social"
