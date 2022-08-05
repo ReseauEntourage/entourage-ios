@@ -8,10 +8,10 @@
 import UIKit
 import IHProgressHUD
 
-class ActionsMyListViewController: BasePopViewController {
+class ActionsMyListViewController: UIViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
-    
+    @IBOutlet weak var ui_top_view: MJNavBackView!
     @IBOutlet weak var ui_lb_no_result_subtitle: UILabel!
     @IBOutlet weak var ui_lb_no_result: UILabel!
     @IBOutlet weak var ui_view_no_result: UIView!

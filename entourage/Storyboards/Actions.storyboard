@@ -661,7 +661,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="BeigeClair"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="oDO-mB-up0" secondAttribute="trailing" id="4gc-PX-VLt"/>
                                     <constraint firstAttribute="trailing" secondItem="9h5-4h-POn" secondAttribute="trailing" id="ESi-gU-Z0c"/>
@@ -677,7 +677,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZNc-ZT-ddU"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="BeigeClair"/>
                         <constraints>
                             <constraint firstItem="ZRF-on-ACG" firstAttribute="leading" secondItem="Ne1-sm-7hu" secondAttribute="leading" id="1qG-zb-BkN"/>
                             <constraint firstItem="ZRF-on-ACG" firstAttribute="top" secondItem="ZNc-ZT-ddU" secondAttribute="top" id="58A-mV-LFJ"/>
@@ -687,12 +687,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="H66-jH-1X4"/>
                     <connections>
-                        <outlet property="ui_constraint_main_view_top" destination="58A-mV-LFJ" id="klk-be-QKP"/>
                         <outlet property="ui_lb_no_result" destination="SAF-in-WqE" id="S55-AS-JYq"/>
                         <outlet property="ui_lb_no_result_subtitle" destination="y4l-h2-pz3" id="Ezu-My-nOC"/>
                         <outlet property="ui_tableview" destination="oDO-mB-up0" id="6Fp-sb-P9W"/>
                         <outlet property="ui_top_view" destination="S93-Ma-IaQ" id="h6L-cY-WPP"/>
-                        <outlet property="ui_view_container" destination="ZRF-on-ACG" id="Lpu-ZU-DpR"/>
                         <outlet property="ui_view_no_result" destination="9h5-4h-POn" id="ssc-sz-hBl"/>
                     </connections>
                 </viewController>
@@ -700,10 +698,10 @@
             </objects>
             <point key="canvasLocation" x="1002.8985507246377" y="-657.58928571428567"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Base Full Screen Nav View Controller-->
         <scene sceneID="qTA-vh-tHq">
             <objects>
-                <navigationController storyboardIdentifier="action_myNav" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="GjU-1k-Kai" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="action_myNav" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="GjU-1k-Kai" customClass="BaseFullScreenNavViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XC9-D1-I19">
