@@ -41,7 +41,7 @@ class ActionSolicitationDetailHomeCell: UITableViewCell {
         ui_date.text = action.getCreatedDate()
         
         let displayAddress = action.metadata?.displayAddress ?? ""
-        ui_location.text = "\("À xx km".localized) - \(displayAddress)"
+        ui_location.text = "\(String.init(format: "AtKm".localized, "xx")) - \(displayAddress)"
     
         ui_view_separator.isHidden = hideSeparator
         

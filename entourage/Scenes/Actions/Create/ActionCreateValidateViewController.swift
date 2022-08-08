@@ -45,7 +45,7 @@ class ActionCreateValidateViewController: UIViewController {
     
     @IBAction func action_show_action(_ sender: Any) {
         self.dismiss(animated: true) {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationCreateShowNewAction), object: nil, userInfo: [kNotificationActionShowId:self.actionId])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationCreateShowNewAction), object: nil, userInfo: [kNotificationActionShowId:self.actionId,kNotificationActionIsContrib:self.isContrib])
         }
     }
 }

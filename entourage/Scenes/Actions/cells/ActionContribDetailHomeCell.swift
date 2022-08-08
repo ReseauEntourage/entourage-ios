@@ -55,7 +55,7 @@ class ActionContribDetailHomeCell: UITableViewCell {
         
         ui_date.text = action.getCreatedDate()
         ui_location.text = action.metadata?.displayAddress
-        ui_distance?.text = "À xx km".localized
+        ui_distance?.text = String.init(format: "AtKm".localized, "xx") //TODO: a changer plus tard
     }
     
 }

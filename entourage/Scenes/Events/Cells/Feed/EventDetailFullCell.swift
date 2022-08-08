@@ -59,6 +59,7 @@ class EventDetailFullCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         ui_view_cancel.isHidden = true
         ui_view_cancel.layer.cornerRadius = 8
         ui_lbl_cancel.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldBlanc(size: 15))
@@ -75,6 +76,8 @@ class EventDetailFullCell: UITableViewCell {
         ui_view_button_join.layer.cornerRadius = ui_view_button_join.frame.height / 2
         ui_view_button_join.layer.borderColor = UIColor.appOrange.cgColor
         ui_view_button_join.layer.borderWidth = 1
+        
+        ui_label_distance.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoLight(size: 13), color: .appGris112))
         
         ui_iv_plus.layer.cornerRadius = ui_iv_plus.frame.height / 2
         
@@ -129,8 +132,10 @@ class EventDetailFullCell: UITableViewCell {
                 ui_mapview.addAnnotation(annot)
                 centerMapOnLocation(_locAnnot)
             }
+            ui_label_distance.text = String.init(format: "AtKm".localized, "xx") //TODO: a changer plus tard ;)
         }
         else {
+            ui_label_distance.text = ""
             ui_iv_location.image = event.isCanceled() ? UIImage.init(named: "ic_web_grey") : UIImage.init(named: "ic_web")
             ui_view_distance.isHidden = true
         }

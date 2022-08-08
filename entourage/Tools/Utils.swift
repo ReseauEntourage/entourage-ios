@@ -186,17 +186,17 @@ import UIKit
         return dateString
     }
     
-    static func formatActionDateName(date:Date?) -> String {
+    static func formatActionDateName(date:Date?,capitalizeFirst:Bool) -> String {
         var dateString = "-"
         guard let date = date else {
             return dateString
         }
 
         if Calendar.current.isDateInToday(date) {
-            return "today".localized
+            return capitalizeFirst ? "Today".localized : "today".localized
         }
         else if Calendar.current.isDateInYesterday(date) {
-            return "yesterday".localized
+            return capitalizeFirst ? "Yesterday".localized: "yesterday".localized
         }
         
         let dateFormat = DateFormatter()
@@ -204,7 +204,7 @@ import UIKit
         dateFormat.dateFormat = "dd MMMM YYYY"
         dateString =  dateFormat.string(from: date)
         
-        dateString = "Le \(dateString)"
+        dateString = capitalizeFirst ? "\("The".localized) \(dateString)" : "\("the".localized) \(dateString)"
         
         return dateString
     }

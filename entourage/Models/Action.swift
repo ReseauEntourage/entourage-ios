@@ -24,6 +24,8 @@ struct Action:Codable {
     var keyImage:String? = nil
     var metadata:ActionMetadata? = nil
     
+    private var actionType:String? = nil
+    
     private var statusChangedAt:String? = nil
     private var createdAt:String? = nil
     private var updatedAt:String? = nil
@@ -32,14 +34,30 @@ struct Action:Codable {
         return statusChangedAt == nil ? nil : Utils.getDateFromWSDateString(statusChangedAt)
     }
     
-    func getCreatedDate() -> String {
-        var date:Date? = nil
-        
+    func getCreatedDate(capitalizeFirst:Bool = true) -> String {
         let createdDate = Utils.getDateFromWSDateString(createdAt)
         
-        let dateStr = Utils.formatActionDateName(date: createdDate)
+        let dateStr = Utils.formatActionDateName(date: createdDate, capitalizeFirst: capitalizeFirst)
         
         return dateStr
+    }
+    
+    func isCanceled() -> Bool {
+        return status == "closed"
+    }
+    mutating func setCancel() {
+        status = "closed"
+    }
+    
+    func isContrib() -> Bool {
+        return actionType == "contribution"
+    }
+    
+    func isMine() -> Bool {
+        if let _userId = UserDefaults.currentUser?.sid {
+            return _userId == author?.uid
+        }
+        return false
     }
     
     enum CodingKeys: String, CodingKey {
@@ -58,6 +76,7 @@ struct Action:Codable {
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case statusChangedAt = "status_changed_at"
+        case actionType = "action_type"
     }
     
     func dictionaryForWS() -> [String:Any] {

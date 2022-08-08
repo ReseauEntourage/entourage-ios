@@ -37,6 +37,8 @@ class ActionMineCell: UITableViewCell {
     func populateCell(action:Action) {
         
         ui_title.text = action.title
+        ui_picto.image = nil
+        ui_image.image = nil
         
         if let imageUrl = action.imageUrl, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
             ui_image.sd_setImage(with: mainUrl, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in

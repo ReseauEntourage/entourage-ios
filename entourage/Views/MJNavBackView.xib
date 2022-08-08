@@ -38,6 +38,8 @@
                 <outletCollection property="ui_titles" destination="eub-f1-5fK" collectionClass="NSMutableArray" id="S4Z-BM-2J8"/>
                 <outletCollection property="ui_views_bottom_separator" destination="jzY-yl-TjX" collectionClass="NSMutableArray" id="Rta-SL-Hmj"/>
                 <outletCollection property="ui_buttons_close" destination="vds-Zy-ypn" collectionClass="NSMutableArray" id="beg-Dl-e6a"/>
+                <outletCollection property="ui_constraint_title_right_margins" destination="lij-jY-NOm" collectionClass="NSMutableArray" id="c3J-Df-pA5"/>
+                <outletCollection property="ui_constraint_title_right_margins" destination="l3v-GM-dRm" collectionClass="NSMutableArray" id="8m0-yo-JSs"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

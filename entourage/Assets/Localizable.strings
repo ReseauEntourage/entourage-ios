@@ -48,8 +48,12 @@
 
 "WIP" = "Bientôt";
 "notImplemented" = "Prochainement disponible ;)";
-"today" = "Ajourd'hui";
-"yesterday" = "Hier";
+"today" = "aujourd'hui";
+"yesterday" = "hier";
+"Today" = "Aujourd'hui";
+"Yesterday" = "Hier";
+"the" = "le";
+"The" = "Le";
 //PreOnboarding
 "next" = "Suivant";
 "connectMe" = "Me connecter";
@@ -621,7 +625,7 @@
 "neighborhood_params_cgu" = "Règlement du groupe";
 "neighborhood_params_edit" = "Modifier les informations du groupe";
 "neighborhood_params_signal" = "Signaler le groupe ";
-"neighborhood_params_cgu_title" = "Le réglement";
+"neighborhood_params_cgu_title" = "Le règlement";
 "neighborhood_params_cgu_description" = "Règlement du groupe, à lire attentivement.";
 "neighborhood_params_participant" = "participant";
 "neighborhood_params_participants" = "participants";
@@ -886,7 +890,7 @@
 "event_params_edit" = "Modifier l’événement";
 "event_params_recurrency" = "Modifier la récurrence";
 "event_params_signal" = "Signaler l’événement ";
-"event_params_cgu_title" = "Le réglement";
+"event_params_cgu_title" = "Le règlement";
 "event_params_cgu_description" = "Règlement de l’événement, à lire attentivement.";
 "event_params_participant" = "participant";
 "event_params_participants" = "participants";
@@ -1007,4 +1011,27 @@
 "action_solicitation_empty_subtitle" = "Vous pouvez élargir votre champ de recherche ou créer une demande";
 
 //detail my actions
+"action_your" = "Votre action";
 "actions_my_title" = "Mes annonces";
+"action_detail_title_location" = "Localisation";
+"atKm" = "à %@ km de moi";
+"AtKm" = "À %@ km de moi";
+"action_created_at" = "Créée %@ par";
+"action_member_since" = "Membre depuis %@";
+"action_cancel" = "Annonce supprimée";
+
+"params_cancel_action_pop_bt_delete" = "Annuler";
+"params_cancel_action_pop_bt_cancel" = "Retour";
+"params_cancel_action_pop_title" = "Annuler l'action";
+"params_cancel_action_pop_message" = "Souhaitez-vous annuler l'action ?";
+//CGU
+"action_params_cgu_title" = "Le règlement";
+"action_params_cgu_description" = "Règlement d'une action, à lire attentivement.";
+"action_CGU_1_title" = "XXXXXXXX";
+"action_CGU_1" = "xxxxxxxxxxx\xxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxx";
+"action_CGU_2_title" = "XXXXXXXX";
+"action_CGU_2" = "xxxxxxxxxxx\xxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxx";
+"action_CGU_3_title" = "XXXXXXXX";
+"action_CGU_3" = "xxxxxxxxxxx\xxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxx";
+"action_CGU_4_title" = "XXXXXXXX";
+"action_CGU_4" = "xxxxxxxxxxx\xxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxx";

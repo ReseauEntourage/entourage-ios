@@ -28,6 +28,9 @@ class MJNavBackView: UIView {
     @IBOutlet private weak var ui_constraint_left_button_back: NSLayoutConstraint!
     @IBOutlet private weak var ui_constraint_left_button_back_sub: NSLayoutConstraint!
     
+    
+    @IBOutlet var ui_constraint_title_right_margins: [NSLayoutConstraint]!
+    
     weak var delegate:MJNavBackViewDelegate? = nil
     
     override init(frame: CGRect) {
@@ -64,7 +67,13 @@ class MJNavBackView: UIView {
         self.populateCustom(title: title, titleFont: titleFont, titleColor: titleColor, imageName: nil, backgroundColor: backgroundColor, delegate: delegate, showSeparator: showSeparator, cornerRadius: cornerRadius, isClose: isClose)
     }
     
-    func populateCustom(title:String? = nil, titleFont:UIFont? = nil, titleColor:UIColor? = nil, imageName:String?, backgroundColor:UIColor?, delegate:MJNavBackViewDelegate, showSeparator:Bool = true, cornerRadius:CGFloat? = nil, isClose:Bool = false, marginLeftButton:CGFloat? = nil, subtitle:String? = nil) {
+    func populateCustom(title:String? = nil, titleFont:UIFont? = nil, titleColor:UIColor? = nil, imageName:String?, backgroundColor:UIColor?, delegate:MJNavBackViewDelegate, showSeparator:Bool = true, cornerRadius:CGFloat? = nil, isClose:Bool = false, marginLeftButton:CGFloat? = nil, subtitle:String? = nil, doubleRightMargin:Bool = false) {
+        
+        if doubleRightMargin {
+            for _constraint in ui_constraint_title_right_margins {
+                _constraint.constant = _constraint.constant * 2
+            }
+        }
         
         ui_view_close.isHidden = !isClose
         ui_view_back.isHidden = isClose

@@ -93,8 +93,13 @@ extension ActionsMyListViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        showWIP(parentVC: self) //TODO: Show Detail
+        let action = actions[indexPath.row]
+        if let navvc = storyboard?.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navvc.topViewController as? ActionDetailFullViewController {
+            vc.actionId = action.id
+            vc.action = action
+            vc.isContrib = action.isContrib()
+            self.navigationController?.present(navvc, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

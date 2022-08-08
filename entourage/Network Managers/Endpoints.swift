@@ -83,6 +83,8 @@ let kAPIPostOutingPostMessage = "outings/%@/chat_messages?token=%@"
 let kAPIGetOutingMessages = "outings/%@/chat_messages/%@/comments?token=%@"
 
 //Actions
+let kAPIGetContrib = "contributions/%d?token=%@"
+let kAPIGetSolicitation = "solicitations/%d?token=%@"
 let kAPIContribCreate = "contributions?token=%@"
 let kAPISolicitationCreate = "solicitations?token=%@"
 let kAPIContribUpdate = "contributions/%d?token=%@"

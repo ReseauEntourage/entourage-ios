@@ -10,7 +10,7 @@ import IQKeyboardManagerSwift
 import IHProgressHUD
 
 class ActionsMainHomeViewController: UIViewController {
-
+    
     
     @IBOutlet weak var ui_view_selector: UIView!
     @IBOutlet weak var ui_image_inside_top_constraint: NSLayoutConstraint!
@@ -99,7 +99,7 @@ class ActionsMainHomeViewController: UIViewController {
         setupEmptyViews()
         
         setupViews()
-
+        
         //Notif for updating when create new action
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreate), name: NSNotification.Name(rawValue: kNotificationActionCreateEnd), object: nil)
         
@@ -167,7 +167,7 @@ class ActionsMainHomeViewController: UIViewController {
         ui_floaty_button.animationSpeed = 0.3
         ui_floaty_button.fabDelegate = self
     }
-
+    
     func createAction(isContrib:Bool) {
         let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
@@ -218,9 +218,9 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     @objc func showNewAction(_ notification:Notification) {
-        if let actionId = notification.userInfo?[kNotificationActionShowId] as? Int {
+        if let actionId = notification.userInfo?[kNotificationActionShowId] as? Int, let isContrib = notification.userInfo?[kNotificationActionIsContrib] as? Bool {
             DispatchQueue.main.async {
-                self.showAction(actionId: actionId, isAfterCreation: true)
+                self.showAction(actionId: actionId, isContrib:isContrib, isAfterCreation: true)
             }
         }
     }
@@ -329,7 +329,7 @@ class ActionsMainHomeViewController: UIViewController {
         }
         currentSelectedIsContribs = true
         isLoading = false
-       
+        
         self.ui_tableview.reloadData()
         changeTabSelection()
         
@@ -356,7 +356,7 @@ class ActionsMainHomeViewController: UIViewController {
             self.gotoTop()
         }
     }
- 
+    
     @IBAction func action_show_filters_categories(_ sender: Any) {
         //TODO: Filters
         showWIP(parentVC: self.tabBarController)
@@ -365,20 +365,20 @@ class ActionsMainHomeViewController: UIViewController {
     @IBAction func action_show_filters_location(_ sender: Any) {
         //TODO: Filters
         showWIP(parentVC: self.tabBarController)
-//        if let vc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
-//            vc.currentFilter = self.currentFilter
-//            vc.modalPresentationStyle = .fullScreen
-//            vc.delegate = self
-//            self.navigationController?.present(vc, animated: true)
-//        }
+        //        if let vc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
+        //            vc.currentFilter = self.currentFilter
+        //            vc.modalPresentationStyle = .fullScreen
+        //            vc.delegate = self
+        //            self.navigationController?.present(vc, animated: true)
+        //        }
     }
     
     @IBAction func action_clear_filters(_ sender: Any) {
         //TODO: Filters
         showWIP(parentVC: self.tabBarController)
-//        self.currentFilter.resetToDefault()
-//        self.ui_location_filter.text = currentFilter.getFilterButtonString()
-//        self.getEventsDiscovered(isReloadFromTab: false, reloadOther: false)
+        //        self.currentFilter.resetToDefault()
+        //        self.ui_location_filter.text = currentFilter.getFilterButtonString()
+        //        self.getEventsDiscovered(isReloadFromTab: false, reloadOther: false)
     }
     
     @IBAction func action_show_my_actions(_ sender: Any) {
@@ -506,16 +506,16 @@ class ActionsMainHomeViewController: UIViewController {
         
         //TODO: check search
         
-//        if currentFilter.filterType != .profile || currentFilter.radius != UserDefaults.currentUser?.radiusDistance {
-//            ui_view_bt_clear_filters.isHidden = false
-//            ui_lbl_empty_title_discover.text = "event_event_discover_empty_search_title".localized
-//            ui_lbl_empty_subtitle_discover.text = "event_event_discover_empty_search_subtitle".localized
-//        }
-//        else {
-//            ui_view_bt_clear_filters.isHidden = true
-//            ui_lbl_empty_title_discover.text = "event_event_discover_empty_title".localized
-//            ui_lbl_empty_subtitle_discover.text = "event_event_discover_empty_subtitle".localized
-//        }
+        //        if currentFilter.filterType != .profile || currentFilter.radius != UserDefaults.currentUser?.radiusDistance {
+        //            ui_view_bt_clear_filters.isHidden = false
+        //            ui_lbl_empty_title_discover.text = "event_event_discover_empty_search_title".localized
+        //            ui_lbl_empty_subtitle_discover.text = "event_event_discover_empty_search_subtitle".localized
+        //        }
+        //        else {
+        //            ui_view_bt_clear_filters.isHidden = true
+        //            ui_lbl_empty_title_discover.text = "event_event_discover_empty_title".localized
+        //            ui_lbl_empty_subtitle_discover.text = "event_event_discover_empty_subtitle".localized
+        //        }
     }
     
     func hideEmptyView() {
@@ -524,8 +524,13 @@ class ActionsMainHomeViewController: UIViewController {
         ui_view_empty_discover.isHidden = true
     }
     
-    func showAction(actionId:Int, isAfterCreation:Bool = false, action:Action? = nil) {
-        showWIP(parentVC: self.tabBarController)
+    func showAction(actionId:Int,isContrib:Bool, isAfterCreation:Bool = false, action:Action? = nil) {
+        if let navvc = storyboard?.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navvc.topViewController as? ActionDetailFullViewController {
+            vc.actionId = actionId
+            vc.action = action
+            vc.isContrib = isContrib
+            self.tabBarController?.present(navvc, animated: true)
+        }
     }
 }
 
@@ -571,7 +576,7 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
             return
         }
         
-        self.showAction(actionId: action.id,action: action)
+        self.showAction(actionId: action.id, isContrib: isContribSelected, action: action)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -632,13 +637,13 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
 extension ActionsMainHomeViewController:EventFiltersDelegate {
     func updateFilters(_ filters: EventFilters) {
         //TODO: Update filters
-//        self.currentFilter = filters
-//
-//        ui_location_filter.text = currentFilter.getFilterButtonString()
-//        if self.solicitations.count > 0 {
-//            self.gotoTop(isAnimated:false)
-//        }
-//        getEventsDiscovered(reloadOther:false)
+        //        self.currentFilter = filters
+        //
+        //        ui_location_filter.text = currentFilter.getFilterButtonString()
+        //        if self.solicitations.count > 0 {
+        //            self.gotoTop(isAnimated:false)
+        //        }
+        //        getEventsDiscovered(reloadOther:false)
     }
 }
 
