@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ActionCreatePhotoCell: UITableViewCell {
     
@@ -41,16 +42,29 @@ class ActionCreatePhotoCell: UITableViewCell {
         }
     }
     
-    func populateCell(image:UIImage?) {
+    func populateCell(image:UIImage?, imageUrl:String?) {
         
         self.ui_photo.image = image
         
         if image != nil {
             self.ui_picto_photo.isHidden = true
+            return
         }
-        else {
-            self.ui_photo.backgroundColor = .appBeige
-            self.ui_picto_photo.isHidden = false
+        
+        if imageUrl != nil {
+            self.ui_picto_photo.isHidden = true
+            
+            if let imageUrl = imageUrl, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
+                ui_photo.sd_setImage(with: mainUrl, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+                    if error != nil {
+                        self?.ui_photo.backgroundColor = .appBeige
+                        self?.ui_picto_photo.isHidden = false
+                    }
+                })
+                return
+            }
         }
+        self.ui_photo.backgroundColor = .appBeige
+        self.ui_picto_photo.isHidden = false
     }
 }

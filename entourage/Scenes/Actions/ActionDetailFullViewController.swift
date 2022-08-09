@@ -42,6 +42,18 @@ class ActionDetailFullViewController: UIViewController {
         
         ui_view_contact.isHidden = true
         ui_view_my.isHidden = true
+        
+        
+        //Notif for updating action infos
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAction), name: NSNotification.Name(rawValue: kNotificationActionUpdate), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func updateAction() {
+        getAction()
     }
     
     func getAction() {
@@ -98,7 +110,18 @@ class ActionDetailFullViewController: UIViewController {
         showPopCancel()
     }
     @IBAction func action_edit(_ sender: Any) {
-        showWIP(parentVC: self)
+        guard let action = action else {
+            return
+        }
+
+        let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "actionEditVCMain") as? ActionEditMainViewController {
+            vc.modalPresentationStyle = .fullScreen
+            vc.isContrib = isContrib
+            vc.parentController = self
+            vc.currentAction = action
+            self.present(vc, animated: true)
+        }
     }
     @IBAction func action_contact(_ sender: Any) {
         showWIP(parentVC: self)

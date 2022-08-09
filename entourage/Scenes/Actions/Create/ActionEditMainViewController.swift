@@ -1,16 +1,17 @@
 //
-//  ActionCreateMainViewController.swift
+//  ActionEditMainViewController.swift
 //  entourage
 //
-//  Created by Jerome on 01/08/2022.
+//  Created by Jerome on 08/08/2022.
 //
 
 import UIKit
-import CoreLocation
-import GooglePlaces
 import IHProgressHUD
+import GooglePlaces
+import CoreLocation
 
-class ActionCreateMainViewController: UIViewController {
+class ActionEditMainViewController: UIViewController {
+    
     
     @IBOutlet weak var ui_page_control: MJCustomPageControl!
     
@@ -37,6 +38,8 @@ class ActionCreateMainViewController: UIViewController {
     
     var isContrib:Bool = false
     
+    var currentAction = Action()
+    
     var newAction = Action()
     var newImage:UIImage? = nil
     var newSection:Section? = nil
@@ -46,7 +49,7 @@ class ActionCreateMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        actionTitle = isContrib ? "action_create_title_contrib".localized : "action_create_title_solicitation".localized
+        actionTitle = isContrib ? "edit_edit_contrib_title".localized : "edit_edit_solicitation_title".localized
         
         ui_error_view.populateView(backgroundColor: .white.withAlphaComponent(0.6))
         ui_error_view.hide()
@@ -102,46 +105,51 @@ class ActionCreateMainViewController: UIViewController {
         ui_tableview_charte.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_tableview_charte.delegate = self
         ui_tableview_charte.dataSource = self
+        
+        _ = checkValidation()
     }
     
     //MARK: - Network -
-    func createAction() {
-        newAction.sectionName = newSection?.key
+    func getAction() {
         IHProgressHUD.show()
-        
-        if isContrib {
-            if let newImage = newImage {
-                ContribUploadPictureService.prepareUploadWith(image: newImage, action: newAction, isUpdate: false) { action, isOk in
-                    IHProgressHUD.dismiss()
-                    if let action = action {
-                        self.goEnd(action: action)
-                    }
-                    else {
-                        self.showError()
-                    }
-                }
-            }
-            else {
-                ActionsService.createAction(isContrib: true, action: newAction) { action, error in
-                    IHProgressHUD.dismiss()
-                    if let action = action {
-                        self.goEnd(action: action)
-                    }
-                    else {
-                        self.showError()
-                    }
-                }
+        ActionsService.getDetailAction(isContrib: isContrib, actionId: currentAction.id) { action, error in
+            IHProgressHUD.dismiss()
+            if let action = action {
+                self.currentAction = action
             }
         }
-        else {
-            ActionsService.createAction(isContrib: false, action: newAction) { action, error in
+    }
+    
+    func updateAction() {
+        
+        newAction.sectionName = newSection?.key
+        
+        if newAction.dictionaryForWS().count > 0 || newImage != nil || newSection != nil {
+            newAction.id = currentAction.id
+        }
+        
+        IHProgressHUD.show()
+        
+        if isContrib, let newImage = newImage {
+            ContribUploadPictureService.prepareUploadWith(image: newImage, action: newAction, isUpdate: true) { action, isOk in
                 IHProgressHUD.dismiss()
-                if let action = action {
-                    self.goEnd(action: action)
+                if let _ = action {
+                    self.goEnd()
                 }
                 else {
                     self.showError()
                 }
+            }
+            return
+        }
+        
+        ActionsService.updateAction(isContrib: isContrib, action: newAction) { action, error in
+            IHProgressHUD.dismiss()
+            if let _ = action {
+                self.goEnd()
+            }
+            else {
+                self.showError()
             }
         }
     }
@@ -185,7 +193,7 @@ class ActionCreateMainViewController: UIViewController {
         currentPhasePosition = currentPhasePosition + 1
         if currentPhasePosition > ui_page_control.numberOfPages {
             currentPhasePosition = ui_page_control.numberOfPages
-            self.createAction()
+            self.updateAction()
         }
         updateViewsForPosition()
     }
@@ -211,40 +219,34 @@ class ActionCreateMainViewController: UIViewController {
         ui_error_view.show()
     }
     
-    private func goEnd(action:Action) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionCreateEnd), object: nil)
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "action_validateVC") as? ActionCreateValidateViewController {
-            vc.modalPresentationStyle = .fullScreen
-            vc.actionId = action.id
-            vc.isContrib = isContrib
-            self.dismiss(animated: false) {
-                self.parentController?.present(vc, animated: true)
-            }
+    private func goEnd() {
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionUpdate), object: nil)
+        
+        DispatchQueue.main.async {
+            self.dismiss(animated: true)
         }
     }
     
     //MARK: - Checks -
     func checkValidation() -> (isValid:Bool, message:String) {
-        var isValid = false
+        var isValid = true
         var message = ""
         
         switch currentPhasePosition {
         case 1:
             //Check name / desc
-            if newAction.title?.count ?? 0 >= 2 && newAction.description?.count ?? 0 > 2 {
-                isValid = true
+            if newAction.title?.count ?? 2 < 2 && newAction.description?.count ?? 3 <= 2 {
+                isValid = false
             }
             
             message = "actionCreatePhase1_error".localized
-        case 2: //Check interests
-            if let _ = newSection {
-                isValid = true
-            }
-            message = "actionCreatePhase2_error".localized
         case 3: //address
-            
-            if newAction.location?.latitude ?? 0 != 0 {
-                isValid = true
+            if newAction.location != nil {
+                isValid = false
+                if newAction.location?.latitude ?? 0 != 0 {
+                    isValid = true
+                }
             }
             message = "actionCreatePhase3_error".localized
             
@@ -291,12 +293,12 @@ class ActionCreateMainViewController: UIViewController {
     }
     
     func hasNoInput() -> Bool {
-        return newAction.title?.count ?? 0 == 0 && newAction.description?.count ?? 0 == 0 //&& newImage == nil
+        return newAction.title?.count ?? 0 == 0 && newAction.description?.count ?? 0 == 0 && newAction.location == nil && newImage == nil
     }
 }
 
 //MARK: - ActionCreateMainDelegate -
-extension ActionCreateMainViewController: ActionCreateMainDelegate {
+extension ActionEditMainViewController: ActionCreateMainDelegate {
     //Phase 1
     func addTitle(_ title:String) {
         newAction.title = title
@@ -332,12 +334,12 @@ extension ActionCreateMainViewController: ActionCreateMainDelegate {
         return isContrib
     }
     
-    func isEdit() -> Bool { return false }
-    func getCurrentAction() -> Action? { return nil }
+    func isEdit() -> Bool { return true }
+    func getCurrentAction() -> Action? { return currentAction }
 }
 
 //MARK: - MJNavBackViewDelegate -
-extension ActionCreateMainViewController: MJNavBackViewDelegate {
+extension ActionEditMainViewController: MJNavBackViewDelegate {
     func goBack() {
         
         if hasNoInput() {
@@ -356,7 +358,7 @@ extension ActionCreateMainViewController: MJNavBackViewDelegate {
 }
 
 //MARK: - MJAlertControllerDelegate -
-extension ActionCreateMainViewController: MJAlertControllerDelegate {
+extension ActionEditMainViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
         self.dismiss(animated: true)
     }
@@ -364,7 +366,7 @@ extension ActionCreateMainViewController: MJAlertControllerDelegate {
 }
 
 //MARK: - Protocol TableView DataSource/delegate -
-extension ActionCreateMainViewController: UITableViewDataSource, UITableViewDelegate {
+extension ActionEditMainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrayDesc.count
     }
@@ -376,21 +378,4 @@ extension ActionCreateMainViewController: UITableViewDataSource, UITableViewDele
         
         return cell
     }
-}
-
-//MARK: - Protocol EventCreateMainDelegate -
-protocol ActionCreateMainDelegate: AnyObject {
-    
-    func addTitle(_ title:String)
-    func addDescription(_ about:String?)
-    func addPhoto(image:UIImage?)
-    
-    func addInterest(section:Section)
-    
-    func addPlace(currentlocation: CLLocationCoordinate2D?, currentLocationName: String?, googlePlace: GMSPlace?)
-    
-    func isContribution() -> Bool
-    
-    func isEdit() -> Bool
-    func getCurrentAction() -> Action?
 }

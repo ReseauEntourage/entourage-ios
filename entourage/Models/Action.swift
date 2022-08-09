@@ -93,7 +93,7 @@ struct Action:Codable {
             dict["section"] = sectionName!
         }
         
-        dict["recipient_consent_obtained"] = true
+       
         
         
         
@@ -105,16 +105,13 @@ struct Action:Codable {
             locationDict["longitude"] = location?.longitude
             dict["location"] = locationDict
         }
-        else {
-            var locationDict = [String:Double]()
-            
-            locationDict["latitude"] = 0
-            locationDict["longitude"] = 0
-            dict["location"] = locationDict
-        }
         
         if let keyImage = keyImage {
             dict["image_url"] = keyImage
+        }
+        
+        if dict.count > 0 {
+            dict["recipient_consent_obtained"] = true
         }
         
         return dict

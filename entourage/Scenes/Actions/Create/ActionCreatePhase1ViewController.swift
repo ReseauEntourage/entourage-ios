@@ -20,6 +20,8 @@ class ActionCreatePhase1ViewController: UIViewController {
     var action_description:String? = nil
     var action_image:UIImage? = nil
     
+    var currentAction:Action? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +35,10 @@ class ActionCreatePhase1ViewController: UIViewController {
         
         ui_tableview.register(UINib(nibName: AddDescriptionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDescriptionTableViewCell.identifier)
         ui_tableview.register(UINib(nibName: AddDescriptionFixedTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: AddDescriptionFixedTableViewCell.identifier)
+        
+        if pageDelegate?.isEdit() ?? false {
+            currentAction = pageDelegate?.getCurrentAction()
+        }
     }
     
     //Use for growing Textview
@@ -76,7 +82,8 @@ extension ActionCreatePhase1ViewController: UITableViewDataSource, UITableViewDe
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupName", for: indexPath) as! NeighborhoodCreateNameCell
-            cell.populateCell(delegate: self,name: action_description, isEvent: false, isAction: true, isContrib: pageDelegate?.isContribution() ?? false)
+            let _title = action_title != nil ? action_title : currentAction?.title
+            cell.populateCell(delegate: self,name: _title, isEvent: false, isAction: true, isContrib: pageDelegate?.isContribution() ?? false)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionTableViewCell.identifier, for: indexPath) as! AddDescriptionTableViewCell
@@ -86,11 +93,13 @@ extension ActionCreatePhase1ViewController: UITableViewDataSource, UITableViewDe
             let _placeh = String.init(format: "action_create_phase_1_desc_placeholder".localized, pageDelegate?.isContribution() ?? false ? "action_contrib".localized : "action_solicitation".localized)
             let _desc = String.init(format: "action_create_phase_1_desc_subtitle".localized, pageDelegate?.isContribution() ?? false ? "action_contrib".localized : "action_solicitation".localized)
             
-            cell.populateCell(title: "action_create_phase_1_desc".localized,titleAttributted:stringAttr , description: _desc, placeholder: _placeh, delegate: self,about: action_description, textInputType:.descriptionAbout)
+            let _about = action_description != nil ? action_description : currentAction?.description
+            cell.populateCell(title: "action_create_phase_1_desc".localized,titleAttributted:stringAttr , description: _desc, placeholder: _placeh, delegate: self,about: _about, textInputType:.descriptionAbout)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath) as! ActionCreatePhotoCell
-            cell.populateCell(image: action_image)
+            
+            cell.populateCell(image: action_image, imageUrl: currentAction?.imageUrl)
             return cell
         }
     }

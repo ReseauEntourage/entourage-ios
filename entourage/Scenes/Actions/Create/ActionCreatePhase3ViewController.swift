@@ -21,6 +21,8 @@ class ActionCreatePhase3ViewController: UIViewController {
     
     var isFromPlaceSelection = false
     
+    var currentAction:Action? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +30,10 @@ class ActionCreatePhase3ViewController: UIViewController {
         ui_tableview.delegate = self
         ui_tableview.rowHeight = UITableView.automaticDimension
         ui_tableview.estimatedRowHeight = 50
+        
+        if pageDelegate?.isEdit() ?? false {
+            currentAction = pageDelegate?.getCurrentAction()
+        }
     }
 }
 
@@ -52,6 +58,9 @@ extension ActionCreatePhase3ViewController: UITableViewDataSource, UITableViewDe
                 cityName = _gplace
             }
             showError = cityName == nil
+        }
+        else {
+            cityName = (currentAction?.metadata?.displayAddress != nil && self.location_name_new == nil) ? currentAction?.metadata?.displayAddress : location_name_new
         }
         let _title = String.init(format: "actionCellLocationTitle".localized, pageDelegate?.isContribution() ?? false ? "action_contrib".localized : "action_solicitation".localized)
         

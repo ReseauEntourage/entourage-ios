@@ -1035,3 +1035,6 @@
 "action_CGU_3" = "xxxxxxxxxxx\xxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxx";
 "action_CGU_4_title" = "XXXXXXXX";
 "action_CGU_4" = "xxxxxxxxxxx\xxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxx";
+
+"edit_edit_contrib_title" = "Modifier la contribution";
+"edit_edit_solicitation_title" = "Modifier la demande";

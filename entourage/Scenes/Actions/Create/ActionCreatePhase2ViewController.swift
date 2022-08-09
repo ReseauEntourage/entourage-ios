@@ -17,6 +17,8 @@ class ActionCreatePhase2ViewController: UIViewController {
     
     var tagsSections:Sections! = nil
     
+    var currentAction:Action? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +36,14 @@ class ActionCreatePhase2ViewController: UIViewController {
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
         tagsSections = Metadatas.sharedInstance.tagsSections
+        
+        if pageDelegate?.isEdit() ?? false {
+            currentAction = pageDelegate?.getCurrentAction()
+            
+            if let _sectionName = currentAction?.sectionName {
+                tagsSections.getSectionFrom(key: _sectionName)?.isSelected = true
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

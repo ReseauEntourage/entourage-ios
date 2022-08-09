@@ -35,6 +35,18 @@ class ActionsMyListViewController: UIViewController {
         ui_view_no_result.isHidden = true
         
         getMyActions()
+        //Notif for updating action infos
+        NotificationCenter.default.addObserver(self, selector: #selector(updateAction), name: NSNotification.Name(rawValue: kNotificationActionUpdate), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func updateAction() {
+        currentPage = 1
+        
+        getMyActions()
     }
     
     override func viewWillAppear(_ animated: Bool) {

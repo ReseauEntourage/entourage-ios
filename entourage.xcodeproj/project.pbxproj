@@ -324,6 +324,7 @@
 		02EFE47A289BFC0D00D70C68 /* Action_Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02EFE479289BFC0D00D70C68 /* Action_Create.storyboard */; };
 		02EFE47C289BFD2A00D70C68 /* ActionsMyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EFE47B289BFD2A00D70C68 /* ActionsMyListViewController.swift */; };
 		02EFE47E289C056B00D70C68 /* ActionMineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EFE47D289C056B00D70C68 /* ActionMineCell.swift */; };
+		02F50E1C28A1608E00011FE6 /* ActionEditMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F50E1B28A1608E00011FE6 /* ActionEditMainViewController.swift */; };
 		02F527782799990F00929431 /* GuideSolidarity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02F527772799990F00929431 /* GuideSolidarity.storyboard */; };
 		02F5277D2799995900929431 /* GuideDetailTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5277A2799995900929431 /* GuideDetailTableViewCells.swift */; };
 		02F5277E2799995900929431 /* GDSSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5277B2799995900929431 /* GDSSearchViewController.swift */; };
@@ -671,6 +672,7 @@
 		02EFE479289BFC0D00D70C68 /* Action_Create.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Action_Create.storyboard; sourceTree = "<group>"; };
 		02EFE47B289BFD2A00D70C68 /* ActionsMyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsMyListViewController.swift; sourceTree = "<group>"; };
 		02EFE47D289C056B00D70C68 /* ActionMineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMineCell.swift; sourceTree = "<group>"; };
+		02F50E1B28A1608E00011FE6 /* ActionEditMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionEditMainViewController.swift; sourceTree = "<group>"; };
 		02F527772799990F00929431 /* GuideSolidarity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuideSolidarity.storyboard; sourceTree = "<group>"; };
 		02F5277A2799995900929431 /* GuideDetailTableViewCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideDetailTableViewCells.swift; sourceTree = "<group>"; };
 		02F5277B2799995900929431 /* GDSSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDSSearchViewController.swift; sourceTree = "<group>"; };
@@ -1230,6 +1232,7 @@
 				02A92C2728980F8C000DFF95 /* ActionAddPhotoViewController.swift */,
 				02A92C2928980FCF000DFF95 /* ActionPicturePreviewResizeViewController.swift */,
 				026FF208289A71F700640572 /* Cells */,
+				02F50E1B28A1608E00011FE6 /* ActionEditMainViewController.swift */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -1910,6 +1913,7 @@
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,
 				02B94C33284F92AD006059EF /* HomeActionTeachCell.swift in Sources */,
 				02A92C2C2898116B000DFF95 /* ActionCreatePhotoCell.swift in Sources */,
+				02F50E1C28A1608E00011FE6 /* ActionEditMainViewController.swift in Sources */,
 				02A3DD3327FDC6200060EC2E /* NeighborhoodCreatePhase1ViewController.swift in Sources */,
 				0268C253285A2B1400294055 /* FloatyViewController.swift in Sources */,
 				02A92C262897E6A9000DFF95 /* ActionCreatePhase3ViewController.swift in Sources */,
