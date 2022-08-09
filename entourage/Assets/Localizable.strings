@@ -1027,14 +1027,16 @@
 //CGU
 "action_params_cgu_title" = "Le règlement";
 "action_params_cgu_description" = "Règlement d'une action, à lire attentivement.";
-"action_CGU_1_title" = "XXXXXXXX";
-"action_CGU_1" = "xxxxxxxxxxx\xxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxx";
-"action_CGU_2_title" = "XXXXXXXX";
-"action_CGU_2" = "xxxxxxxxxxx\xxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxx";
-"action_CGU_3_title" = "XXXXXXXX";
-"action_CGU_3" = "xxxxxxxxxxx\xxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxx";
-"action_CGU_4_title" = "XXXXXXXX";
-"action_CGU_4" = "xxxxxxxxxxx\xxxxxxxxxxx\nxxxxxxxxxxxxxxxxxxxxxx\nxxxxxxxxxxx";
+"action_CGU_1_title" = "Entraide";
+"action_CGU_1" = "L’application permet de créer de nouvelles rencontres entre voisins et de favoriser des temps d’échanges. Les aides à distance (drive, livraison, bon cadeau, cagnotte…) ne sont pas autorisées.";
+"action_CGU_2_title" = "Contributions & demandes";
+"action_CGU_2" = "Je peux demander ou proposer des biens matériels (équipement, vêtement…), des services (lessive, impression de documents…) et des temps de partage (café, activité…). Je ne peux pas demander ou proposer une aide financière, un hébergement ou une aide alimentaire. Mais si c’est mon besoin, je peux contacter le modérateur qui m’orientera.";
+"action_CGU_3_title" = "Consentement";
+"action_CGU_3" = "Lorsque je publie une demande pour une tierce personne, je m’assure d’obtenir son accord au préalable. ";
+"action_CGU_4_title" = "Non discrimination";
+"action_CGU_4" = "Je m’engage à entrer en relation avec les personnes sans discrimination (race, religion, orientation sexuelle, opinion politique..).";
+"action_CGU_5_title" = "Protection des personnes";
+"action_CGU_5" = "Je garantie que mes actions ne contiennent aucune donnée personnelle (nom de famille, téléphone, adresse précise…), permettant d’identifier et de localiser précisément une personne, ni aucune donnée sensible (médicale, judiciaire…). ";
 
-"edit_edit_contrib_title" = "Modifier la contribution";
-"edit_edit_solicitation_title" = "Modifier la demande";
+"edit_edit_contrib_title" = "Modifier\nla contribution";
+"edit_edit_solicitation_title" = "Modifier\nla demande";

@@ -20,10 +20,10 @@ class ActionParamsCGUViewController: UIViewController {
         super.viewDidLoad()
         
         arrayDesc = ["action_CGU_1".localized,"action_CGU_2".localized,
-                     "action_CGU_3".localized,"action_CGU_4".localized]
+                     "action_CGU_3".localized,"action_CGU_4".localized,"action_CGU_5".localized]
         
         arrayTitle = ["action_CGU_1_title".localized,"action_CGU_2_title".localized,
-                      "action_CGU_3_title".localized,"action_CGU_4_title".localized]
+                      "action_CGU_3_title".localized,"action_CGU_4_title".localized,"action_CGU_5_title".localized]
         
         ui_view_top.populateView(title: "action_params_cgu_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: false)
         ui_title.text = "action_params_cgu_description".localized

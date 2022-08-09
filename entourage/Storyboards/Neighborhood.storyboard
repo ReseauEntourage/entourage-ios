@@ -813,19 +813,19 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pb4-QX-VFh">
-                                                            <rect key="frame" x="26" y="18" width="362" height="17.5"/>
+                                                            <rect key="frame" x="26" y="18" width="362" height="19"/>
                                                             <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                             <color key="textColor" name="orange_app"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KG6-zX-tDu">
-                                                            <rect key="frame" x="26" y="39.5" width="362" height="17.5"/>
+                                                            <rect key="frame" x="26" y="41" width="362" height="20.5"/>
                                                             <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="oyJ-bf-PjB" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
-                                                            <rect key="frame" x="26" y="69" width="362" height="71"/>
+                                                            <rect key="frame" x="26" y="73.5" width="362" height="66.5"/>
                                                             <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" id="1KA-q8-mYs"/>
@@ -1142,23 +1142,23 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell_signal" id="pTJ-eY-oKY" customClass="NeighborhoodParamSignalCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="537.5" width="414" height="37.5"/>
+                                                <rect key="frame" x="0.0" y="537.5" width="414" height="39"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pTJ-eY-oKY" id="VCa-O0-xqi">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gr9-ko-a8w">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Signaler le groupe" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bl-OR-LPK">
-                                                                    <rect key="frame" x="28" y="20" width="358" height="17.5"/>
+                                                                    <rect key="frame" x="28" y="20" width="358" height="19"/>
                                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                                     <color key="textColor" name="orange_app"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KN1-W0-gho">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                     <connections>
                                                                         <action selector="action_signal:" destination="pTJ-eY-oKY" eventType="touchUpInside" id="zrS-oT-f20"/>
@@ -1301,13 +1301,13 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Règlement du groupe" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MnO-YW-30A">
-                                                                    <rect key="frame" x="74" y="23.5" width="157" height="27"/>
+                                                                    <rect key="frame" x="74" y="26.5" width="157" height="21"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cy9-Vw-Kdu">
-                                                                    <rect key="frame" x="32" y="58.5" width="350" height="17.5"/>
+                                                                    <rect key="frame" x="32" y="55.5" width="350" height="20.5"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1541,7 +1541,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rôle" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5W-Oe-KGs">
-                                                                    <rect key="frame" x="114" y="50" width="268" height="13"/>
+                                                                    <rect key="frame" x="114" y="50" width="268" height="15.5"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="11"/>
                                                                     <color key="textColor" name="orange_app"/>
                                                                     <nil key="highlightedColor"/>
@@ -1591,10 +1591,10 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9h-vF-R4Q">
-                                        <rect key="frame" x="0.0" y="303.5" width="414" height="245"/>
+                                        <rect key="frame" x="0.0" y="286.5" width="414" height="279"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oups, aucun résultat ne correspond à votre recherche ! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUu-JM-Yek">
-                                                <rect key="frame" x="32" y="189" width="350" height="56"/>
+                                                <rect key="frame" x="32" y="189" width="350" height="90"/>
                                                 <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="24"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1939,7 +1939,7 @@
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Rejoindre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTC-Vg-fqi">
-                                                            <rect key="frame" x="20" y="13.5" width="73" height="17.5"/>
+                                                            <rect key="frame" x="20" y="12" width="73" height="20.5"/>
                                                             <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -1975,19 +1975,19 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTC-fT-9Za">
-                                                    <rect key="frame" x="28" y="183" width="350" height="17.5"/>
+                                                    <rect key="frame" x="28" y="183" width="350" height="19"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW0-ZT-oQz">
-                                                    <rect key="frame" x="28" y="204.5" width="350" height="17.5"/>
+                                                    <rect key="frame" x="28" y="206" width="350" height="20.5"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgx-5d-gDq" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
-                                                    <rect key="frame" x="28" y="246" width="350" height="229"/>
+                                                    <rect key="frame" x="28" y="250.5" width="350" height="224.5"/>
                                                     <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" id="FDc-Ka-865"/>
