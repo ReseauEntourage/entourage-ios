@@ -238,7 +238,7 @@ class ActionsMainHomeViewController: UIViewController {
         
         self.isLoading = true
         
-        ActionsService.getAllActions(isContrib: isContribSelected, currentPage: currentPageContribs, per: numberOfItemsForWS) { actions, error in
+        ActionsService.getAllActions(isContrib: true, currentPage: currentPageContribs, per: numberOfItemsForWS) { actions, error in
             IHProgressHUD.dismiss()
             self.isfirstLoadingContrib = false
             self.pullRefreshControl.endRefreshing()
@@ -282,8 +282,7 @@ class ActionsMainHomeViewController: UIViewController {
         }
         
         self.isLoading = true
-        
-        ActionsService.getAllActions(isContrib: isContribSelected, currentPage: currentPageSolicitations, per: numberOfItemsForWS) { actions, error in
+        ActionsService.getAllActions(isContrib: false, currentPage: currentPageSolicitations, per: numberOfItemsForWS) { actions, error in
             IHProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             
@@ -330,12 +329,13 @@ class ActionsMainHomeViewController: UIViewController {
         currentSelectedIsContribs = true
         isLoading = false
         
-        self.ui_tableview.reloadData()
+        
         changeTabSelection()
         
         if self.contribs.count > 0 {
             self.gotoTop()
         }
+        self.ui_tableview.reloadData()
     }
     
     @IBAction func action_solicitations(_ sender: Any?) {
@@ -410,13 +410,14 @@ class ActionsMainHomeViewController: UIViewController {
             ui_view_indicator_contribs.isHidden = true
             ui_view_indicator_solicitations.isHidden = false
         }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
         self.ui_tableview.reloadData()
+        })
     }
     
     func gotoTop(isAnimated:Bool = true) {
         if isContribSelected && contribs.count == 0 { return }
         else if !isContribSelected && solicitations.count == 0 { return }
-        Logger.print("***** event Discovered hzereeeee: \(self.solicitations.count)")
         let indexPath = IndexPath(row: 0, section: 0)
         DispatchQueue.main.async {
             self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: isAnimated)

@@ -31,23 +31,31 @@ class ActionContribDetailHomeCell: UITableViewCell {
         ui_distance.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
         
         ui_image.layer.cornerRadius = 20
+        ui_placeholder.image = nil
+        ui_placeholder.isHidden = true
     }
     
     func populateCell(action:Action, hideSeparator:Bool) {
         
         ui_title.text = action.title
+        self.ui_image.image = UIImage()
+        ui_placeholder.isHidden = true
         
-        self.ui_placeholder.image = nil
         if let imageUrl = action.imageUrl, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
             ui_image?.sd_setImage(with: mainUrl, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
-                if error != nil {
-                    self?.ui_image.image = nil
+                if let _err = error as? SDWebImageError, _err.errorCode != SDWebImageError.cancelled.rawValue {
+                    self?.ui_image.image = UIImage()
                     self?.ui_placeholder.image = UIImage.init(named: "ic_placeholder_action")
+                    self?.ui_placeholder.isHidden = false
+                }
+                else {
+                    self?.ui_placeholder.isHidden = true
                 }
             })
         }
         else {
-            self.ui_image.image = nil
+            self.ui_placeholder.isHidden = false
+            self.ui_image.image = UIImage()
             self.ui_placeholder.image = UIImage.init(named: "ic_placeholder_action")
         }
     
