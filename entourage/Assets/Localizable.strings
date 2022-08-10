@@ -341,6 +341,11 @@
 "mainUserTitleActions" = "Contributions";
 "mainUserTitleEvents" = "Événements";
 
+"mainUserTitleGroup" = "Groupe\nrejoint";
+"mainUserTitleGroups" = "Groupes\nrejoints";
+"mainUserTitleOuting" = "Participation à\nun événement";
+"mainUserTitleOutings" = "Participations à\ndes événements";
+
 "mainUserBioPlaceholder" = "Placeholder pour la bio ?";
 "mainUserBirthPlaceholder" = "Placeholder pour la date ?";
 "mainUserEmailPlaceholder" = "Placeholder pour l'email ?";

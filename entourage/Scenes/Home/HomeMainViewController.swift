@@ -173,7 +173,6 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
             if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: HomeHelpCell.identifier, for: indexPath) as! HomeHelpCell
                 
-                //TODO: add moderator username
                 cell.populateCell(name: self.homeViewModel.moderatorName, subtitle: "home_help_subtitle".localized, bottomMargin: 10)
                 
                 return cell
@@ -335,37 +334,51 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     
     func showConversation(uuid:String) {
         //TODO: show conversation
-        self.showWIP(parentVC: self)
+        self.showWIP(parentVC: self.tabBarController)
     }
     
     func showAskForHelpDetail(id:Int) {
-        //TODO: show demande
-        self.showWIP(parentVC: self)
+        self.showAction(id: id, isContrib: false)
     }
     func showAllAskForHelp() {
-        //TODO: show demandes
-        self.tabBarController?.selectedIndex = 1
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowSolicitation), object: nil)
     }
     func createAskForHelp() {
-        //TODO: create demande
-        self.showWIP(parentVC: self)
+        self.createAction(isContrib: false)
     }
     
     func showContribution(id:Int) {
-        //TODO: show contribution
-        self.showWIP(parentVC: self)
+        self.showAction(id: id, isContrib: true)
     }
     func showAllContributions() {
-        //TODO: show contributions
-        self.tabBarController?.selectedIndex = 1
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowContrib), object: nil)
     }
     func createContribution() {
-        //TODO: create contribution
-        self.showWIP(parentVC: self)
+        self.createAction(isContrib: true)
+    }
+    
+    private func showAction(id:Int,isContrib:Bool) {
+        let sb = UIStoryboard.init(name: StoryboardName.actions, bundle: nil)
+        if let navvc = sb.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navvc.topViewController as? ActionDetailFullViewController {
+            vc.actionId = id
+            vc.action = nil
+            vc.isContrib = isContrib
+            self.tabBarController?.present(navvc, animated: true)
+        }
+    }
+    
+    private func createAction(isContrib:Bool) {
+        let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
+            vc.modalPresentationStyle = .fullScreen
+            vc.isContrib = isContrib
+            vc.parentController = self
+            self.tabBarController?.present(vc, animated: true)
+        }
     }
     
     func showAllOutings() {
-        self.tabBarController?.selectedIndex = 4
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventShowDiscover), object: nil)
     }
     func showOuting(id:Int) {
         if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {

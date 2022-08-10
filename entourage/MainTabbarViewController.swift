@@ -11,7 +11,7 @@ import UIKit
 class MainTabbarViewController: UITabBarController {
 
     var homeVC:UINavigationController!
-    var giftsVC:UINavigationController!
+    var actionsVC:UINavigationController!
     var messagesVC:UINavigationController!
     var groupVC:UINavigationController!
     var eventsVC:UINavigationController!
@@ -53,6 +53,10 @@ class MainTabbarViewController: UITabBarController {
         //Show Events from home tab clicks
         NotificationCenter.default.addObserver(self, selector: #selector(showDiscoverEvents), name: NSNotification.Name(rawValue: kNotificationEventShowDiscover), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showMyEvents), name: NSNotification.Name(rawValue: kNotificationEventShowMy), object: nil)
+        
+        //Notif for changing contrig / solicitation
+        NotificationCenter.default.addObserver(self, selector: #selector(showActionsSolicitations), name: NSNotification.Name(rawValue: kNotificationActionShowSolicitation), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showActionsContrib), name: NSNotification.Name(rawValue: kNotificationActionShowContrib), object: nil)
     }
     
     @objc func showDiscoverNeighborhoods() {
@@ -84,6 +88,20 @@ class MainTabbarViewController: UITabBarController {
         }
         self.selectedIndex = 4
         Logger.print("***** My Events ")
+    }
+    
+    @objc func showActionsContrib() {
+        if let vc = actionsVC.topViewController as? ActionsMainHomeViewController {
+            vc.setContributionsFirst()
+        }
+        self.selectedIndex = 1
+    }
+    
+    @objc func showActionsSolicitations() {
+        if let vc = actionsVC.topViewController as? ActionsMainHomeViewController {
+            vc.setSolicitationsFirst()
+        }
+        self.selectedIndex = 1
     }
     
 //    func showPopInfo(delegate:OTPopInfoDelegate,title:String,message:String,buttonOkStr:String,buttonCancelStr:String) {
@@ -130,12 +148,12 @@ class MainTabbarViewController: UITabBarController {
         
         
         let _giftsVC = UIStoryboard.init(name: StoryboardName.actions, bundle: nil).instantiateViewController(withIdentifier: "home_actions_vc")
-        giftsVC = UINavigationController.init(rootViewController: _giftsVC)
-        giftsVC.isNavigationBarHidden = true
-        giftsVC.tabBarItem.title = "tabbar_gifts".localized
-        giftsVC.tabBarItem.image = UIImage.init(named: "ic_gifts_off")?.withRenderingMode(.alwaysOriginal)
-        giftsVC.tabBarItem.selectedImage = UIImage.init(named: "ic_gifts_on")
-        giftsVC.tabBarItem.tag = 1
+        actionsVC = UINavigationController.init(rootViewController: _giftsVC)
+        actionsVC.isNavigationBarHidden = true
+        actionsVC.tabBarItem.title = "tabbar_gifts".localized
+        actionsVC.tabBarItem.image = UIImage.init(named: "ic_gifts_off")?.withRenderingMode(.alwaysOriginal)
+        actionsVC.tabBarItem.selectedImage = UIImage.init(named: "ic_gifts_on")
+        actionsVC.tabBarItem.tag = 1
         
         
         let  _msgVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "home_messanger_vc")
@@ -163,7 +181,7 @@ class MainTabbarViewController: UITabBarController {
         eventsVC.tabBarItem.image = UIImage.init(named: "ic_event_off")?.withRenderingMode(.alwaysOriginal)
         eventsVC.tabBarItem.selectedImage = UIImage.init(named: "ic_event_on")
         eventsVC.tabBarItem.tag = 4
-        viewControllers = [homeVC,giftsVC,messagesVC,groupVC,eventsVC]
+        viewControllers = [homeVC,actionsVC,messagesVC,groupVC,eventsVC]
         boldSelectedItem()
     }
     

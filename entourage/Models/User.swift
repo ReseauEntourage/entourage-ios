@@ -41,6 +41,14 @@ struct User: Codable {
     
     var isEngaged:Bool = false
     
+    private var creationDateString:String? = nil
+    
+    var creationDate:Date {
+        get {
+            return Utils.getDateFromWSDateString(creationDateString)
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case uuid
         case email
@@ -74,6 +82,7 @@ struct User: Codable {
         case unreadCount = "unread_count"
         case radiusDistance = "travel_distance"
         case birthday
+        case creationDateString = "created_at"
     }
     
     func dictionaryForWS() -> [String:Any] {
@@ -284,6 +293,8 @@ struct UserStats:Codable {
     var contribCreationCount:Int = 0
     var askCreactionCount:Int = 0
     var isGoodWavesValidated:Bool = false
+    var neighborhoodsCount:Int = 0
+    var outingsCount:Int? = 0
     
     enum CodingKeys: String, CodingKey {
         case tourCount = "tour_count"
@@ -294,5 +305,7 @@ struct UserStats:Codable {
         case contribCreationCount = "contribution_creation_count"
         case askCreactionCount = "ask_for_help_creation_count"
         case isGoodWavesValidated = "good_waves_participation"
+        case neighborhoodsCount = "neighborhoods_count"
+        case outingsCount = "outings_count"
     }
 }

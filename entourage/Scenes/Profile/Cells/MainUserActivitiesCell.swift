@@ -11,17 +11,16 @@ class MainUserActivitiesCell: UITableViewCell {
     
     @IBOutlet weak var ui_title_other_user: UILabel!
     @IBOutlet weak var ui_title: UILabel!
-    @IBOutlet weak var ui_view_events: UIView!
+    @IBOutlet weak var ui_view_groups: UIView!
+    @IBOutlet weak var ui_view_outings: UIView!
     
-    @IBOutlet weak var ui_view_actions: UIView!
+    @IBOutlet weak var ui_iv_groups: UIImageView!
+    @IBOutlet weak var ui_groups_count: UILabel!
+    @IBOutlet weak var ui_groups_title: UILabel!
     
-    @IBOutlet weak var ui_iv_events: UIImageView!
-    @IBOutlet weak var ui_events_count: UILabel!
-    @IBOutlet weak var ui_events_title: UILabel!
-    
-    @IBOutlet weak var ui_iv_actions: UIImageView!
-    @IBOutlet weak var ui_actions_count: UILabel!
-    @IBOutlet weak var ui_actions_title: UILabel!
+    @IBOutlet weak var ui_iv_outings: UIImageView!
+    @IBOutlet weak var ui_outings_count: UILabel!
+    @IBOutlet weak var ui_outings_title: UILabel!
     
     @IBOutlet weak var ui_view_member: UIView!
     @IBOutlet weak var ui_member_title: UILabel!
@@ -31,8 +30,8 @@ class MainUserActivitiesCell: UITableViewCell {
         super.awakeFromNib()
         
         addShadowAndRadius(customView: ui_view_member)
-        addShadowAndRadius(customView: ui_view_events)
-        addShadowAndRadius(customView: ui_view_actions)
+        addShadowAndRadius(customView: ui_view_groups)
+        addShadowAndRadius(customView: ui_view_outings)
         
         ui_member_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .black))
         ui_member_date.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
@@ -46,18 +45,18 @@ class MainUserActivitiesCell: UITableViewCell {
         ui_title_other_user?.textColor = ApplicationTheme.getFontH2Noir().color
         ui_title_other_user?.text = "detail_user_his_activity".localized
         
-        ui_actions_title.text = "mainUserTitleActions".localized
-        textColor(label: ui_actions_title, isEmpty: true, isCount: false)
+        ui_outings_title.text = "mainUserTitleOutings".localized
+        textColor(label: ui_outings_title, isEmpty: true, isCount: false)
         
-        ui_events_title.text = "mainUserTitleEvents".localized
-        textColor(label: ui_events_title, isEmpty: true, isCount: false)
-        ui_events_count.text = "0"
-        textColor(label: ui_events_count, isEmpty: true, isCount: true)
-        ui_actions_count.text = "0"
-        textColor(label: ui_actions_count, isEmpty: true, isCount: true)
+        ui_groups_title.text = "mainUserTitleGroups".localized
+        textColor(label: ui_groups_title, isEmpty: true, isCount: false)
+        ui_groups_count.text = "0"
+        textColor(label: ui_groups_count, isEmpty: true, isCount: true)
+        ui_outings_count.text = "0"
+        textColor(label: ui_outings_count, isEmpty: true, isCount: true)
     }
     
-    func populateCell(isMe:Bool ,eventCount:Int,actionsCount:Int) {
+    func populateCell(isMe:Bool ,neighborhoodsCount:Int,outingsCount:Int,myDate:Date) {
         
         if isMe {
             ui_title_other_user?.text = "mainUserTitleActivity".localized
@@ -66,26 +65,34 @@ class MainUserActivitiesCell: UITableViewCell {
             ui_title_other_user?.text = "detail_user_his_activity".localized
         }
         
-        if eventCount == 0 {
-            textColor(label: ui_events_title, isEmpty: true, isCount: false)
-            textColor(label: ui_events_count, isEmpty: true, isCount: true)
+        ui_outings_title.text = outingsCount <= 1 ? "mainUserTitleOuting".localized : "mainUserTitleOutings".localized
+        ui_groups_title.text = neighborhoodsCount <= 1 ? "mainUserTitleGroup".localized : "mainUserTitleGroups".localized
+        
+        if neighborhoodsCount == 0 {
+            textColor(label: ui_groups_title, isEmpty: true, isCount: false)
+            textColor(label: ui_groups_count, isEmpty: true, isCount: true)
         }
         else {
-            textColor(label: ui_events_title, isEmpty: false, isCount: false)
-            textColor(label: ui_events_count, isEmpty: false, isCount: true)
+            textColor(label: ui_groups_title, isEmpty: false, isCount: false)
+            textColor(label: ui_groups_count, isEmpty: false, isCount: true)
         }
         
-        if actionsCount == 0 {
-            textColor(label: ui_actions_title, isEmpty: true, isCount: false)
-            textColor(label: ui_actions_count, isEmpty: true, isCount: true)
+        if outingsCount == 0 {
+            textColor(label: ui_outings_title, isEmpty: true, isCount: false)
+            textColor(label: ui_outings_count, isEmpty: true, isCount: true)
         }
         else {
-            textColor(label: ui_actions_title, isEmpty: false, isCount: false)
-            textColor(label: ui_actions_count, isEmpty: false, isCount: true)
+            textColor(label: ui_outings_title, isEmpty: false, isCount: false)
+            textColor(label: ui_outings_count, isEmpty: false, isCount: true)
         }
         
-        ui_events_count.text = "\(eventCount)"
-        ui_actions_count.text = "\(actionsCount)"
+        ui_groups_count.text = "\(neighborhoodsCount)"
+        ui_outings_count.text = "\(outingsCount)"
+        
+        let dateFormat = DateFormatter()
+        dateFormat.locale = Locale.getPreferredLocale()
+        dateFormat.dateFormat = "MM/YYYY"
+        ui_member_date.text = dateFormat.string(from: myDate)
     }
     
     private func addShadowAndRadius(customView:UIView) {

@@ -23,18 +23,12 @@ class HomeViewModel {
     
     var moderatorName:String {
         get {
-            //TODO: a Supprimer après TEsts
-            _userHome.moderatorName = "Jane/John Doe"
-            
-            return _userHome.moderatorName
+            return _userHome.moderator?.displayName ?? "-"
         }
     }
     var moderatorId:Int {
         get {
-            //TODO: a Supprimer après TEsts
-            _userHome.moderatorId = 22166
-            
-            return _userHome.moderatorId
+            return _userHome.moderator?.id ?? 0
         }
     }
     

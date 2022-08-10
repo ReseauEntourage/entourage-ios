@@ -139,12 +139,12 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     //Use to change tab selection from other place
-    func setDiscoverFirst() {
+    func setSolicitationsFirst() {
         self.isContribSelected = false
         self.currentSelectedIsContribs = true
     }
     //Use to change tab selection from other place
-    func setMyFirst() {
+    func setContributionsFirst() {
         self.isContribSelected = true
         self.currentSelectedIsContribs = false
     }

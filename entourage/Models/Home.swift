@@ -16,8 +16,7 @@ struct UserHome:Codable {
     var outingParticipationsCount: Int = 0
     var neighborhoodParticipationsCount: Int = 0
     var actions = HomeActions()
-    var moderatorName:String = ""
-    var moderatorId:Int = 0
+    var moderator:HomeModerator? = nil
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,6 +27,7 @@ struct UserHome:Codable {
         case outingParticipationsCount = "outing_participations_count"
         case neighborhoodParticipationsCount = "neighborhood_participations_count"
         case actions = "recommandations"
+        case moderator
     }
 }
 
@@ -111,6 +111,18 @@ struct HomeActionParams:Codable {
         case id
         case uuid
         case url
+    }
+}
+
+struct HomeModerator:Codable {
+    var id:Int?
+    var displayName:String?
+    var imgUrl:String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case displayName = "display_name"
+        case imgUrl = "avatar_url"
     }
 }
 
