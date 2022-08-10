@@ -660,6 +660,8 @@
 "report_group_title" = "Signaler le groupe";
 "report_publication_title" = "Signaler la publication";
 "report_comment_title" = "Signaler le commentaire";
+"report_contrib_title" = "Signaler la contribution";
+"report_solicitation_title" = "Signaler la demande";
 "report_group_message_success" = "Votre demande a bien été envoyée. Elle sera traitée au plus vite par notre équipe.";
 "report_group_description" = "Dites-nous la raison de votre signalement";
 "report_group_mandatory" = "- obligatoire";

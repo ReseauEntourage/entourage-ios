@@ -16,6 +16,7 @@ class ReportGroupMainViewController: BasePopViewController {
     var eventId:Int? = nil
     var groupId:Int? = nil
     var postId:Int? = nil
+    var actionId:Int? = nil
     
     weak var parentDelegate:GroupDetailDelegate? = nil
     
@@ -32,6 +33,10 @@ class ReportGroupMainViewController: BasePopViewController {
             _title = "report_publication_title".localized
         case .event:
             _title = "report_event_title".localized
+        case .actionContrib:
+            _title = "report_contrib_title".localized
+        case .actionSolicitation:
+            _title = "report_solicitation_title".localized
         }
         
         ui_top_view.populateView(title: _title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
@@ -46,6 +51,7 @@ class ReportGroupMainViewController: BasePopViewController {
             vc.groupId = groupId
             vc.postId = postId
             vc.eventId = eventId
+            vc.actionId = actionId
         }
     }
 }
@@ -67,4 +73,6 @@ enum GroupDetailSignalType {
     case comment
     case publication
     case event
+    case actionContrib
+    case actionSolicitation
 }

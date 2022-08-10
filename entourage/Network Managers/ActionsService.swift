@@ -82,6 +82,30 @@ struct ActionsService:ParsingDataCodable {
         }
     }
     
+    static func reportActionPost(isContrib:Bool, actionId:Int,message:String?,tags:[String], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = isContrib ? kAPIReportContrib : kAPIReportSolicitation
+        endpoint = String.init(format: endpoint,"\(actionId)", token)
+        
+        let _msg:String = message != nil ? (message!.isEmpty ? "" : message!) : ""
+        let parameters:[String:Any] = ["report":["message":_msg, "signals":tags]]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Endpoint report Action post \(endpoint) -- params : \(parameters)")
+                
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response report Action post: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error report Action post - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
     static func getAllActions(isContrib:Bool,currentPage:Int, per:Int, completion: @escaping (_ actions:[Action]?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         

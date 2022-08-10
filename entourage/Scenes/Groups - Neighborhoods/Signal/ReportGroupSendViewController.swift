@@ -30,6 +30,7 @@ class ReportGroupSendViewController: UIViewController {
     var eventId:Int? = nil
     var groupId:Int? = nil
     var postId:Int? = nil
+    var actionId:Int? = nil
     
     var tagsignals:Tags! = nil
     weak var pageDelegate:ReportGroupPageDelegate? = nil
@@ -130,6 +131,16 @@ class ReportGroupSendViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.pageDelegate?.closeMain()
                     }
+                }
+            }
+        case .actionContrib,.actionSolicitation:
+            guard let actionId = actionId else {
+                return
+            }
+            let isContrib = signalType == .actionContrib
+            ActionsService.reportActionPost(isContrib: isContrib, actionId: actionId, message: message, tags: tagsSignalsWS) { error in
+                DispatchQueue.main.async {
+                    self.pageDelegate?.closeMain()
                 }
             }
         }
