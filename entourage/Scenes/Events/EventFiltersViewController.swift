@@ -38,7 +38,7 @@ class EventFiltersViewController: UIViewController {
     
     private var selectedItem = 1
     
-    var currentFilter = EventFilters()
+    var currentFilter = EventActionLocationFilters()
     
     var currentRadius = 0
     
@@ -151,14 +151,14 @@ class EventFiltersViewController: UIViewController {
     }
     
     @IBAction func action_select(_ sender: UIButton) {
-        var _type = EventFilters.EventFilterType.profile
+        var _type = EventActionLocationFilters.EventFilterType.profile
         switch sender.tag {
         case 1:
-            _type = EventFilters.EventFilterType.profile
+            _type = EventActionLocationFilters.EventFilterType.profile
         case 2:
-            _type = EventFilters.EventFilterType.google
+            _type = EventActionLocationFilters.EventFilterType.google
         case 3:
-            _type = EventFilters.EventFilterType.gps
+            _type = EventActionLocationFilters.EventFilterType.gps
         default:
             break
         }
@@ -326,5 +326,5 @@ extension EventFiltersViewController:GMSAutocompleteViewControllerDelegate {
 
 //MARK: - Protocol Event Filter
 protocol EventFiltersDelegate:AnyObject {
-    func updateFilters(_ filters:EventFilters)
+    func updateFilters(_ filters:EventActionLocationFilters)
 }

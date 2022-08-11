@@ -106,7 +106,7 @@ struct ActionsService:ParsingDataCodable {
         }
     }
     
-    static func getAllActions(isContrib:Bool,currentPage:Int, per:Int, completion: @escaping (_ actions:[Action]?, _ error:EntourageNetworkError?) -> Void) {
+    static func getAllActions(isContrib:Bool,currentPage:Int, per:Int,filtersLocation:String?, filtersSections:String?, completion: @escaping (_ actions:[Action]?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         
         var endpoint:String
@@ -118,6 +118,14 @@ struct ActionsService:ParsingDataCodable {
         }
         endpoint = String.init(format: endpoint, token, currentPage, per)
         
+        if let filtersLocation = filtersLocation {
+            endpoint = "\(endpoint)&\(filtersLocation)"
+        }
+        if let filtersSections = filtersSections {
+            endpoint = "\(endpoint)&sections[]=\(filtersSections)"
+        }
+        
+        Logger.print("***** getAll Actions : \(endpoint)")
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {

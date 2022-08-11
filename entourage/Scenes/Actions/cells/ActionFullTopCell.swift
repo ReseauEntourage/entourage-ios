@@ -92,11 +92,11 @@ class ActionFullTopCell: UITableViewCell {
         }
         
         for _t in ui_title_tags {
-            _t.text = Metadatas.sharedInstance.tagsSections?.getSectionNameFrom(key:sectionName).name
+            _t.text = Metadatas.sharedInstance.getTagSectionName(key: sectionName)?.name
         }
         
         for _iv in ui_img_tags {
-            if let imgStr = Metadatas.sharedInstance.tagsSections?.getSectionFrom(key: sectionName)?.getImageName() {
+            if let imgStr = Metadatas.sharedInstance.getTagSectionImageName(key: sectionName) {
                 _iv.image = UIImage.init(named: imgStr)
             }
             else {

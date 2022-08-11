@@ -28,6 +28,8 @@
 		020AF5E92860B10C0012AE60 /* HomeCongratPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 020AF5E72860B10C0012AE60 /* HomeCongratPopupViewController.xib */; };
 		021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318A827DF4E3100B0F1BD /* Metadatas.swift */; };
 		021318AB27DF548600B0F1BD /* MetadatasService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021318AA27DF548600B0F1BD /* MetadatasService.swift */; };
+		02166C0928A53DE8004D3FF8 /* ActionSectionFiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02166C0828A53DE8004D3FF8 /* ActionSectionFiltersViewController.swift */; };
+		02166C0B28A54568004D3FF8 /* ActionFilterValidateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02166C0A28A54568004D3FF8 /* ActionFilterValidateCell.swift */; };
 		021D2F3B289969460034D855 /* ActionCreateValidateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021D2F3A289969460034D855 /* ActionCreateValidateViewController.swift */; };
 		021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */; };
 		021E03D027D8EE2B003745DE /* MainUserActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */; };
@@ -62,7 +64,7 @@
 		0229376F27A43AA600206201 /* GMSAutoCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0229376E27A43AA600206201 /* GMSAutoCompleteVC.swift */; };
 		022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DC3EC284790B000868760 /* AnalyticsLoggerManager.swift */; };
 		022DC3EF2847996D00868760 /* Analytics_Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DC3EE2847996D00868760 /* Analytics_Keys.swift */; };
-		0232A6D62888126700A47828 /* EventFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0232A6D52888126700A47828 /* EventFilters.swift */; };
+		0232A6D62888126700A47828 /* EventActionLocationFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0232A6D52888126700A47828 /* EventActionLocationFilters.swift */; };
 		023B07CC27D664F6007752AC /* Profile.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023B07CB27D664F6007752AC /* Profile.xcassets */; };
 		023D89BF27DFA351008C6A58 /* MainParamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89BE27DFA351008C6A58 /* MainParamsViewController.swift */; };
 		023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89C027DFA380008C6A58 /* ParamMenuCell.swift */; };
@@ -380,6 +382,8 @@
 		020AF5E72860B10C0012AE60 /* HomeCongratPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCongratPopupViewController.xib; sourceTree = "<group>"; };
 		021318A827DF4E3100B0F1BD /* Metadatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metadatas.swift; sourceTree = "<group>"; };
 		021318AA27DF548600B0F1BD /* MetadatasService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadatasService.swift; sourceTree = "<group>"; };
+		02166C0828A53DE8004D3FF8 /* ActionSectionFiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSectionFiltersViewController.swift; sourceTree = "<group>"; };
+		02166C0A28A54568004D3FF8 /* ActionFilterValidateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFilterValidateCell.swift; sourceTree = "<group>"; };
 		021D2F3A289969460034D855 /* ActionCreateValidateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCreateValidateViewController.swift; sourceTree = "<group>"; };
 		021E03CD27D8B4D1003745DE /* CategoriesBubblesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesBubblesCell.swift; sourceTree = "<group>"; };
 		021E03CF27D8EE2B003745DE /* MainUserActivitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainUserActivitiesCell.swift; sourceTree = "<group>"; };
@@ -414,7 +418,7 @@
 		0229376E27A43AA600206201 /* GMSAutoCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMSAutoCompleteVC.swift; sourceTree = "<group>"; };
 		022DC3EC284790B000868760 /* AnalyticsLoggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsLoggerManager.swift; sourceTree = "<group>"; };
 		022DC3EE2847996D00868760 /* Analytics_Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics_Keys.swift; sourceTree = "<group>"; };
-		0232A6D52888126700A47828 /* EventFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilters.swift; sourceTree = "<group>"; };
+		0232A6D52888126700A47828 /* EventActionLocationFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventActionLocationFilters.swift; sourceTree = "<group>"; };
 		023B07CB27D664F6007752AC /* Profile.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Profile.xcassets; sourceTree = "<group>"; };
 		023D89BE27DFA351008C6A58 /* MainParamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainParamsViewController.swift; sourceTree = "<group>"; };
 		023D89C027DFA380008C6A58 /* ParamMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamMenuCell.swift; sourceTree = "<group>"; };
@@ -817,7 +821,7 @@
 				02F5278627999D8400929431 /* PoiCategory.swift */,
 				02B7921D27F7385A003AFFB9 /* Neighborhood.swift */,
 				02E77B43282CF9CF00786E27 /* Event.swift */,
-				0232A6D52888126700A47828 /* EventFilters.swift */,
+				0232A6D52888126700A47828 /* EventActionLocationFilters.swift */,
 				02B94C1B284F50D8006059EF /* Home.swift */,
 				02B94C4428521F82006059EF /* PedagogicResource.swift */,
 				02FB543C287D74B800E4B9FA /* GlobalObjects.swift */,
@@ -1216,6 +1220,7 @@
 				02EFE47B289BFD2A00D70C68 /* ActionsMyListViewController.swift */,
 				0208B0C4289D23E1009A7A58 /* ActionDetailFullViewController.swift */,
 				0208B0CC289D6F28009A7A58 /* ActionParamsCGUViewController.swift */,
+				02166C0828A53DE8004D3FF8 /* ActionSectionFiltersViewController.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -1507,6 +1512,7 @@
 				0208B0C6289D2E63009A7A58 /* ActionFullMapCell.swift */,
 				0208B0C8289D2E9D009A7A58 /* ActionFullTopCell.swift */,
 				0208B0CA289D2EAB009A7A58 /* ActionFullAuthorCell.swift */,
+				02166C0A28A54568004D3FF8 /* ActionFilterValidateCell.swift */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -1824,7 +1830,7 @@
 				021E804328916FF500C891DC /* EventEditRecurrencyViewController.swift in Sources */,
 				02B57DA027FC9757005A567B /* PartnerDetailNeedsCell.swift in Sources */,
 				02B37828279B072C00B204EF /* SharingEntourageTableViewCell.swift in Sources */,
-				0232A6D62888126700A47828 /* EventFilters.swift in Sources */,
+				0232A6D62888126700A47828 /* EventActionLocationFilters.swift in Sources */,
 				02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */,
 				02FCB537281BDD2600682E61 /* NeighborhoodDetailTopCell.swift in Sources */,
 				02F5278327999AD700929431 /* MapPoi.swift in Sources */,
@@ -1837,6 +1843,7 @@
 				0224596F27FF28FC00944DE4 /* MJErrorInputTextView.swift in Sources */,
 				0268197D278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift in Sources */,
 				02681950278DF6BD00A98A4A /* OTProgressBar.swift in Sources */,
+				02166C0B28A54568004D3FF8 /* ActionFilterValidateCell.swift in Sources */,
 				0288A8E127CD09E5008D7011 /* NotificationsKeys.swift in Sources */,
 				02B7921E27F7385A003AFFB9 /* Neighborhood.swift in Sources */,
 				02B57D9627FC430D005A567B /* ReportUserMainViewController.swift in Sources */,
@@ -1937,6 +1944,7 @@
 				024131D72862030A00561FB4 /* EventCreatePhase5ViewController.swift in Sources */,
 				02B94C2B284F8F0C006059EF /* HomeActionCell.swift in Sources */,
 				023D89C327DFA39A008C6A58 /* ParamsInfoCell.swift in Sources */,
+				02166C0928A53DE8004D3FF8 /* ActionSectionFiltersViewController.swift in Sources */,
 				02DDF1D727D9117700EE22DE /* ProgressRadiusView.swift in Sources */,
 				02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */,
 				0268C254285A2B1400294055 /* Floaty.swift in Sources */,

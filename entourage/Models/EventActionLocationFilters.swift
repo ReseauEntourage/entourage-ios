@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: - Structure Event Filter -
-struct EventFilters {
+struct EventActionLocationFilters {
     private var radius_distance:Int? = nil
     private var eventLocation:EventLocation? = nil
     private var shortname:String? = nil

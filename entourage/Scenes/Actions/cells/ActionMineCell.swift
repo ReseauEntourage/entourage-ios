@@ -55,7 +55,7 @@ class ActionMineCell: UITableViewCell {
     }
     
     private func addActionType(sectionName:String?) {
-        if let sectionName = sectionName, let imgStr = Metadatas.sharedInstance.tagsSections?.getSectionFrom(key: sectionName)?.getImageName() {
+        if let sectionName = sectionName, let imgStr = Metadatas.sharedInstance.getTagSectionImageName(key: sectionName) {
             ui_constraint_picto_width.constant = sizePicto
             ui_picto.image = UIImage.init(named: imgStr)
             ui_image.image = nil

@@ -64,9 +64,9 @@ class ActionSolicitationDetailHomeCell: UITableViewCell {
             return
         }
         
-        ui_section.text = Metadatas.sharedInstance.tagsSections?.getSectionNameFrom(key:sectionName).name
+        ui_section.text = Metadatas.sharedInstance.getTagSectionName(key: sectionName)?.name
         
-        if let imgStr = Metadatas.sharedInstance.tagsSections?.getSectionFrom(key: sectionName)?.getImageName() {
+        if let imgStr = Metadatas.sharedInstance.getTagSectionImageName(key: sectionName) {
             ui_iv_section.image = UIImage.init(named: imgStr)?.sd_tintedImage(with: .appOrangeLight)
         }
         else {

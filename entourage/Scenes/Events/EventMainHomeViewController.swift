@@ -52,7 +52,7 @@ class EventMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_title_bt_clear_filters: UILabel!
     
     
-    var currentFilter = EventFilters()
+    var currentFilter = EventActionLocationFilters()
     
     var maxViewHeight:CGFloat = 134
     var minViewHeight:CGFloat = 92//108
@@ -668,7 +668,7 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
 
 //MARK: - EventFiltersDelegate -
 extension EventMainHomeViewController:EventFiltersDelegate {
-    func updateFilters(_ filters: EventFilters) {
+    func updateFilters(_ filters: EventActionLocationFilters) {
         self.currentFilter = filters
         
         ui_location_filter.text = currentFilter.getFilterButtonString()

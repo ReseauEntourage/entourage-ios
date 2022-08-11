@@ -1016,7 +1016,8 @@
 "action_contrib_empty_subtitle" = "Vous pouvez élargir votre champ de recherche ou créer une contribution";
 "action_solicitation_empty_title" = "Aucune demande ne correspond à votre zone de recherche";
 "action_solicitation_empty_subtitle" = "Vous pouvez élargir votre champ de recherche ou créer une demande";
-
+"action_filter_category" = "Catégorie";
+"action_filter_categories" = "Catégories";
 //detail my actions
 "action_your" = "Votre action";
 "actions_my_title" = "Mes annonces";

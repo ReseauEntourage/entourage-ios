@@ -28,6 +28,15 @@ class Metadatas:Codable {
         }
     }
     
+    func getTagSectionName(key:String) -> (name:String,subtitle:String)? {
+      return _tagsSections?.getSectionNameFrom(key: key)
+    }
+    
+    func getTagSectionImageName(key:String) -> String? {
+        return _tagsSections?.getSectionFrom(key: key)?.getImageName()
+    }
+    
+    
     var tagsInterest:Tags? {
         get {
             guard let tags = _tagsInterests?.tags else { return nil }
@@ -283,6 +292,37 @@ struct Sections:Codable {
             key = cat.catKey
         }
         return  key
+    }
+    
+    func getnumberSectionsSelected() -> Int {
+        var count = 0
+        
+        for tag in sections {
+            if tag.isSelected {
+                count = count + 1
+            }
+        }
+        return count
+    }
+    
+    func getallSectionforWS() -> String? {
+        var _values = ""
+        
+        for tag in sections {
+            if tag.isSelected {
+                let _coma = _values.count > 0 ? "," : ""
+                _values = _values + _coma + tag.catKey
+            }
+        }
+        return _values.count > 0 ? _values : nil
+    }
+    
+    mutating func resetToDefault() {
+        var i = 0
+        for _ in sections {
+            sections[i].isSelected = false
+            i = i + 1
+        }
     }
 }
 

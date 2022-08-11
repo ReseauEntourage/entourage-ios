@@ -35,6 +35,7 @@ class ActionsMainHomeViewController: UIViewController {
     
     @IBOutlet weak var ui_categories_filter: UILabel!
     @IBOutlet weak var ui_view_bt_categories: UIView!
+    @IBOutlet weak var ui_label_nb_cat_filter: UILabel!
     
     @IBOutlet weak var ui_floaty_button: Floaty!
     
@@ -47,6 +48,8 @@ class ActionsMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_lbl_empty_subtitle_discover: UILabel!
     @IBOutlet weak var ui_view_bt_clear_filters: UIView!
     @IBOutlet weak var ui_title_bt_clear_filters: UILabel!
+    
+    @IBOutlet weak var ui_constraint_bt_location_width: NSLayoutConstraint!
     
     var maxViewHeight:CGFloat = 134
     var minViewHeight:CGFloat = 92//108
@@ -84,8 +87,15 @@ class ActionsMainHomeViewController: UIViewController {
     var contribs = [Action]()
     var solicitations = [Action]()
     
+    var currentLocationFilter = EventActionLocationFilters()
+    var currentSectionsFilter:Sections = Sections()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let _sections = Metadatas.sharedInstance.tagsSections {
+            currentSectionsFilter = _sections
+        }
         
         IQKeyboardManager.shared.enable = false
         setupFloatingButton()
@@ -112,6 +122,8 @@ class ActionsMainHomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        changeSectionFiltersCount()
         changeTabSelection()
         
         if isContribSelected {
@@ -180,7 +192,11 @@ class ActionsMainHomeViewController: UIViewController {
     
     //MARK: - Call from Notifications -
     @objc func refreshDatasFromTab() {
-        //TODO: reset filters + title
+        currentLocationFilter.resetToDefault()
+        ui_location_filter.text = currentLocationFilter.getFilterButtonString()
+        
+        currentSectionsFilter.resetToDefault()
+        changeSectionFiltersCount()
         
         currentPageContribs = 1
         currentPageSolicitations = 1
@@ -226,7 +242,6 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     //MARK: - Network -
-    
     func getActions(isReloadFromTab:Bool = false, reloadOther:Bool = false) {
         if self.isLoading { return }
         
@@ -238,7 +253,7 @@ class ActionsMainHomeViewController: UIViewController {
         
         self.isLoading = true
         
-        ActionsService.getAllActions(isContrib: true, currentPage: currentPageContribs, per: numberOfItemsForWS) { actions, error in
+        ActionsService.getAllActions(isContrib: true, currentPage: currentPageContribs, per: numberOfItemsForWS, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
             IHProgressHUD.dismiss()
             self.isfirstLoadingContrib = false
             self.pullRefreshControl.endRefreshing()
@@ -282,7 +297,7 @@ class ActionsMainHomeViewController: UIViewController {
         }
         
         self.isLoading = true
-        ActionsService.getAllActions(isContrib: false, currentPage: currentPageSolicitations, per: numberOfItemsForWS) { actions, error in
+        ActionsService.getAllActions(isContrib: false, currentPage: currentPageSolicitations, per: numberOfItemsForWS, filtersLocation: currentLocationFilter.getfiltersForWS(), filtersSections: currentSectionsFilter.getallSectionforWS()) { actions, error in
             IHProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             
@@ -341,7 +356,6 @@ class ActionsMainHomeViewController: UIViewController {
     @IBAction func action_solicitations(_ sender: Any?) {
         isContribSelected = false
         
-        
         if isContribSelected != currentSelectedIsContribs && self.solicitations.count == 0 {
             currentPageSolicitations = 1
             self.solicitations.removeAll()
@@ -358,31 +372,38 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     @IBAction func action_show_filters_categories(_ sender: Any) {
-        //TODO: Filters
-        showWIP(parentVC: self.tabBarController)
+        if let vc = UIStoryboard.init(name: StoryboardName.actions, bundle: nil).instantiateViewController(withIdentifier: "action_cat_filters") as? ActionSectionFiltersViewController {
+            vc.sectionFilters = currentSectionsFilter
+            vc.modalPresentationStyle = .fullScreen
+            vc.delegate = self
+            self.navigationController?.present(vc, animated: true)
+        }
     }
     
     @IBAction func action_show_filters_location(_ sender: Any) {
-        //TODO: Filters
-        showWIP(parentVC: self.tabBarController)
-        //        if let vc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
-        //            vc.currentFilter = self.currentFilter
-        //            vc.modalPresentationStyle = .fullScreen
-        //            vc.delegate = self
-        //            self.navigationController?.present(vc, animated: true)
-        //        }
+        if let vc = UIStoryboard.init(name: StoryboardName.actions, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
+            vc.currentFilter = self.currentLocationFilter
+            vc.modalPresentationStyle = .fullScreen
+            vc.delegate = self
+            self.navigationController?.present(vc, animated: true)
+        }
     }
     
     @IBAction func action_clear_filters(_ sender: Any) {
-        //TODO: Filters
-        showWIP(parentVC: self.tabBarController)
-        //        self.currentFilter.resetToDefault()
-        //        self.ui_location_filter.text = currentFilter.getFilterButtonString()
-        //        self.getEventsDiscovered(isReloadFromTab: false, reloadOther: false)
+        self.currentLocationFilter.resetToDefault()
+        self.ui_location_filter.text = currentLocationFilter.getFilterButtonString()
+        
+        currentPageContribs = 1
+        currentPageSolicitations = 1
+        if isContribSelected {
+            self.getActions(reloadOther:true)
+        }
+        else {
+            self.getSolicitations(reloadOther:true)
+        }
     }
     
     @IBAction func action_show_my_actions(_ sender: Any) {
-        //TODO: Show my actions
         if let navvc = storyboard?.instantiateViewController(withIdentifier: "action_myNav") {
             self.tabBarController?.present(navvc, animated: true)
         }
@@ -411,7 +432,7 @@ class ActionsMainHomeViewController: UIViewController {
             ui_view_indicator_solicitations.isHidden = false
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-        self.ui_tableview.reloadData()
+            self.ui_tableview.reloadData()
         })
     }
     
@@ -425,8 +446,17 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     func setupViews() {
-        //TODO: setup filters title
         ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))
+        ui_location_filter.text = currentLocationFilter.getFilterButtonString()
+        
+        ui_categories_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))
+        ui_categories_filter.text = "action_filter_category".localized
+        
+        ui_constraint_bt_location_width.constant = view.frame.width / 1.7
+        
+        ui_label_nb_cat_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoBold(size: 12), color: .appOrange))
+        ui_label_nb_cat_filter.layer.cornerRadius = ui_label_nb_cat_filter.frame.height / 2
+        ui_label_nb_cat_filter.isHidden = true
         
         ui_label_title.text = "actions_main_page_title".localized
         ui_label_contribs.text = "actions_main_page_button_contribs".localized
@@ -470,6 +500,19 @@ class ActionsMainHomeViewController: UIViewController {
         pullRefreshControl.tintColor = .appOrange
         pullRefreshControl.addTarget(self, action: #selector(refreshDatas), for: .valueChanged)
         ui_tableview.refreshControl = pullRefreshControl
+        
+        changeSectionFiltersCount()
+    }
+    
+    func changeSectionFiltersCount() {
+        if currentSectionsFilter.getnumberSectionsSelected() > 0 {
+            ui_label_nb_cat_filter.isHidden = false
+            ui_label_nb_cat_filter.text = "\(currentSectionsFilter.getnumberSectionsSelected())"
+            ui_categories_filter.text = currentSectionsFilter.getnumberSectionsSelected() > 1 ? "action_filter_categories".localized : "action_filter_category".localized
+        }
+        else {
+            ui_label_nb_cat_filter.isHidden = true
+        }
     }
     
     func setupEmptyViews() {
@@ -636,23 +679,36 @@ extension ActionsMainHomeViewController: UITableViewDataSource, UITableViewDeleg
 
 //MARK: - EventFiltersDelegate -
 extension ActionsMainHomeViewController:EventFiltersDelegate {
-    func updateFilters(_ filters: EventFilters) {
-        //TODO: Update filters
-        //        self.currentFilter = filters
-        //
-        //        ui_location_filter.text = currentFilter.getFilterButtonString()
-        //        if self.solicitations.count > 0 {
-        //            self.gotoTop(isAnimated:false)
-        //        }
-        //        getEventsDiscovered(reloadOther:false)
+    func updateFilters(_ filters: EventActionLocationFilters) {
+        self.currentLocationFilter = filters
+        
+        ui_location_filter.text = currentLocationFilter.getFilterButtonString()
+        
+        goReloadAll()
+    }
+    
+    func goReloadAll() {
+        currentPageContribs = 1
+        currentPageSolicitations = 1
+        
+        if isContribSelected {
+            if self.contribs.count > 0 {
+                self.gotoTop(isAnimated:false)
+            }
+            getActions(reloadOther:true)
+        }
+        else {
+            if self.solicitations.count > 0 {
+                self.gotoTop(isAnimated:false)
+            }
+            getSolicitations(reloadOther:true)
+        }
     }
 }
 
 //MARK: - FloatyDelegate -
 extension ActionsMainHomeViewController:FloatyDelegate {
-    func floatyWillOpen(_ floaty: Floaty) {
-        
-    }
+    func floatyWillOpen(_ floaty: Floaty) {}
     
     private func createButtonItem(title:String, iconName:String, handler:@escaping ((FloatyItem) -> Void)) -> FloatyItem {
         let floatyItem = FloatyItem()
@@ -664,5 +720,15 @@ extension ActionsMainHomeViewController:FloatyDelegate {
         floatyItem.imageSize = CGSize(width: 62, height: 62)
         floatyItem.handler = handler
         return floatyItem
+    }
+}
+
+extension ActionsMainHomeViewController:EventSectionFiltersDelegate {
+    func updateSectionFilters(_ filters:Sections) {
+        self.currentSectionsFilter = filters
+        
+        changeSectionFiltersCount()
+        
+        goReloadAll()
     }
 }
