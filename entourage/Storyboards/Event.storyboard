@@ -1640,20 +1640,14 @@
                                                                         <constraint firstAttribute="width" constant="34" id="mZh-Yb-hOK"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0p-cS-kbh">
-                                                                    <rect key="frame" x="32" y="28" width="34" height="18"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Règlement du groupe" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Osp-VO-0tz">
-                                                                    <rect key="frame" x="74" y="26.5" width="157" height="21"/>
+                                                                    <rect key="frame" x="40" y="26.5" width="157" height="21"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMu-5i-nXT">
-                                                                    <rect key="frame" x="32" y="55.5" width="350" height="20.5"/>
+                                                                    <rect key="frame" x="40" y="55.5" width="342" height="20.5"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1671,16 +1665,13 @@
                                                                 <constraint firstItem="3pi-9V-LTb" firstAttribute="leading" secondItem="Qpz-Ad-hsU" secondAttribute="leading" constant="26" id="0zQ-VK-ebp"/>
                                                                 <constraint firstItem="832-Ld-dSu" firstAttribute="leading" secondItem="Qpz-Ad-hsU" secondAttribute="leading" constant="32" id="5fH-Ld-Dus"/>
                                                                 <constraint firstAttribute="trailing" secondItem="xMu-5i-nXT" secondAttribute="trailing" constant="32" id="7DO-40-e72"/>
+                                                                <constraint firstItem="Osp-VO-0tz" firstAttribute="leading" secondItem="832-Ld-dSu" secondAttribute="leading" constant="8" id="BwM-CV-dLT"/>
                                                                 <constraint firstItem="xMu-5i-nXT" firstAttribute="top" secondItem="Osp-VO-0tz" secondAttribute="bottom" constant="8" symbolic="YES" id="C2L-AA-3wL"/>
                                                                 <constraint firstAttribute="bottom" secondItem="3pi-9V-LTb" secondAttribute="bottom" id="EYP-13-OiV"/>
-                                                                <constraint firstItem="f0p-cS-kbh" firstAttribute="trailing" secondItem="832-Ld-dSu" secondAttribute="trailing" id="Ez5-QP-6pt"/>
                                                                 <constraint firstItem="832-Ld-dSu" firstAttribute="top" secondItem="Qpz-Ad-hsU" secondAttribute="top" constant="20" id="PI4-JE-4K2"/>
-                                                                <constraint firstItem="f0p-cS-kbh" firstAttribute="leading" secondItem="832-Ld-dSu" secondAttribute="leading" id="R7g-3z-ag9"/>
-                                                                <constraint firstItem="Osp-VO-0tz" firstAttribute="leading" secondItem="832-Ld-dSu" secondAttribute="trailing" constant="8" id="ThR-RR-dQV"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Osp-VO-0tz" secondAttribute="trailing" constant="32" id="VRi-v4-CDa"/>
-                                                                <constraint firstItem="xMu-5i-nXT" firstAttribute="leading" secondItem="832-Ld-dSu" secondAttribute="leading" id="VbZ-qW-WUM"/>
+                                                                <constraint firstItem="xMu-5i-nXT" firstAttribute="leading" secondItem="832-Ld-dSu" secondAttribute="leading" constant="8" id="VbZ-qW-WUM"/>
                                                                 <constraint firstItem="Osp-VO-0tz" firstAttribute="centerY" secondItem="832-Ld-dSu" secondAttribute="centerY" id="YvG-c8-SmM"/>
-                                                                <constraint firstItem="f0p-cS-kbh" firstAttribute="centerY" secondItem="832-Ld-dSu" secondAttribute="centerY" id="a1i-EX-rzo"/>
                                                                 <constraint firstAttribute="trailing" secondItem="3pi-9V-LTb" secondAttribute="trailing" constant="26" id="h6S-pC-dqA"/>
                                                                 <constraint firstItem="3pi-9V-LTb" firstAttribute="top" secondItem="xMu-5i-nXT" secondAttribute="bottom" constant="16" id="uJx-oL-1fz"/>
                                                             </constraints>
@@ -1695,7 +1686,6 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="ui_description" destination="xMu-5i-nXT" id="X2J-wV-7yb"/>
-                                                    <outlet property="ui_number" destination="f0p-cS-kbh" id="Cke-m7-mjE"/>
                                                     <outlet property="ui_separator" destination="3pi-9V-LTb" id="vxS-po-UUB"/>
                                                     <outlet property="ui_title" destination="Osp-VO-0tz" id="uiO-Xw-Oaa"/>
                                                 </connections>

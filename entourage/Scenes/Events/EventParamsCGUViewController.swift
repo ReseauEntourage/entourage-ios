@@ -41,7 +41,7 @@ extension EventParamsCGUViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodCguCell
         
-        cell.populateCell(title: arrayTitle[indexPath.row], description: arrayDesc[indexPath.row], position: indexPath.row + 1)
+        cell.populateCell(title: arrayTitle[indexPath.row], description: arrayDesc[indexPath.row])
         
         return cell
     }

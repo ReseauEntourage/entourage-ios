@@ -79,19 +79,19 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="253" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="754" text="Dansons ensemble sous le pont d’Avignon" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8f-16-bZy">
-                                                    <rect key="frame" x="114" y="16" width="184" height="35"/>
+                                                    <rect key="frame" x="114" y="16" width="194" height="37.5"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cpw-r7-HRX">
-                                                    <rect key="frame" x="114" y="55" width="32" height="6.5"/>
+                                                    <rect key="frame" x="114" y="57.5" width="32" height="1.5"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                                                     <color key="textColor" name="gris_112"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQy-St-4vF">
-                                                    <rect key="frame" x="114" y="63.5" width="32" height="15.5"/>
+                                                    <rect key="frame" x="114" y="61" width="32" height="18"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                                                     <color key="textColor" name="gris_112"/>
                                                     <nil key="highlightedColor"/>
@@ -151,13 +151,13 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="b2Y-7a-J8R">
-                                                    <rect key="frame" x="306" y="16" width="57.5" height="17.5"/>
+                                                    <rect key="frame" x="316" y="16" width="58.5" height="20.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_star_empty" translatesAutoresizingMaskIntoConstraints="NO" id="NCX-RK-t95">
-                                                            <rect key="frame" x="0.0" y="0.0" width="12" height="17.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="12" height="20.5"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Admin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLJ-vp-5lI">
-                                                            <rect key="frame" x="14" y="0.0" width="43.5" height="17.5"/>
+                                                            <rect key="frame" x="14" y="0.0" width="44.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                             <color key="textColor" name="orange_light"/>
                                                             <nil key="highlightedColor"/>
@@ -230,19 +230,19 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="754" text="Dansons ensemble sous le pont d’Avignon" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gu8-TH-n7N">
-                                                    <rect key="frame" x="114" y="16" width="184" height="35"/>
+                                                    <rect key="frame" x="114" y="16" width="194" height="37.5"/>
                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcw-kd-kX1">
-                                                    <rect key="frame" x="114" y="55" width="32" height="6.5"/>
+                                                    <rect key="frame" x="114" y="57.5" width="32" height="1.5"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                                                     <color key="textColor" name="gris_112"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAs-cS-laT">
-                                                    <rect key="frame" x="114" y="63.5" width="32" height="15.5"/>
+                                                    <rect key="frame" x="114" y="61" width="32" height="18"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                                                     <color key="textColor" name="gris_112"/>
                                                     <nil key="highlightedColor"/>
@@ -470,7 +470,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5JL-d0-GA1">
-                                        <rect key="frame" x="0.0" y="97" width="406" height="350"/>
+                                        <rect key="frame" x="0.0" y="94" width="406" height="356"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oups, aucun résultat ne correspond à votre recherche ! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLP-xH-IkH">
                                                 <rect key="frame" x="32" y="189" width="342" height="106"/>
@@ -479,7 +479,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Si aucun groupe n’existe sur ce sujet, vous pouvez en créer un ! " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KzK-rs-51M">
-                                                <rect key="frame" x="32" y="315" width="310" height="35"/>
+                                                <rect key="frame" x="32" y="315" width="310" height="41"/>
                                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -508,7 +508,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CoY-CS-9LX">
-                                        <rect key="frame" x="0.0" y="97" width="406" height="350"/>
+                                        <rect key="frame" x="0.0" y="94" width="406" height="356"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oups, aucun résultat ne correspond à votre recherche ! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYZ-TL-Nlf">
                                                 <rect key="frame" x="32" y="189" width="342" height="106"/>
@@ -517,7 +517,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Si aucun groupe n’existe sur ce sujet, vous pouvez en créer un ! " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZT-kj-NCl">
-                                                <rect key="frame" x="32" y="315" width="310" height="35"/>
+                                                <rect key="frame" x="32" y="315" width="310" height="41"/>
                                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -572,7 +572,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ubz-qQ-dq5">
-                                        <rect key="frame" x="32" y="44" width="59" height="28"/>
+                                        <rect key="frame" x="32" y="42" width="64.5" height="30"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1294,20 +1294,14 @@
                                                                         <constraint firstAttribute="height" constant="34" id="z4c-BS-mbO"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEh-Qh-D28">
-                                                                    <rect key="frame" x="32" y="28" width="34" height="18"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Règlement du groupe" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MnO-YW-30A">
-                                                                    <rect key="frame" x="74" y="26.5" width="157" height="21"/>
+                                                                    <rect key="frame" x="40" y="26.5" width="157" height="21"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cy9-Vw-Kdu">
-                                                                    <rect key="frame" x="32" y="55.5" width="350" height="20.5"/>
+                                                                    <rect key="frame" x="40" y="55.5" width="342" height="20.5"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1324,19 +1318,16 @@
                                                             <constraints>
                                                                 <constraint firstItem="MnO-YW-30A" firstAttribute="centerY" secondItem="y7Z-fV-TiT" secondAttribute="centerY" id="0at-Qh-gsA"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Cy9-Vw-Kdu" secondAttribute="trailing" constant="32" id="Al1-Ax-lUI"/>
-                                                                <constraint firstItem="Cy9-Vw-Kdu" firstAttribute="leading" secondItem="y7Z-fV-TiT" secondAttribute="leading" id="GV9-6H-H9V"/>
+                                                                <constraint firstItem="Cy9-Vw-Kdu" firstAttribute="leading" secondItem="y7Z-fV-TiT" secondAttribute="leading" constant="8" id="GV9-6H-H9V"/>
                                                                 <constraint firstItem="6K3-hg-HvC" firstAttribute="top" secondItem="Cy9-Vw-Kdu" secondAttribute="bottom" constant="16" id="MVu-ZB-X2x"/>
                                                                 <constraint firstItem="Cy9-Vw-Kdu" firstAttribute="top" secondItem="MnO-YW-30A" secondAttribute="bottom" constant="8" symbolic="YES" id="OOA-PT-K3k"/>
                                                                 <constraint firstItem="y7Z-fV-TiT" firstAttribute="leading" secondItem="qf0-6Z-mxr" secondAttribute="leading" constant="32" id="PNN-gy-R5l"/>
                                                                 <constraint firstItem="6K3-hg-HvC" firstAttribute="leading" secondItem="qf0-6Z-mxr" secondAttribute="leading" constant="26" id="Xv9-fJ-WH7"/>
-                                                                <constraint firstItem="aEh-Qh-D28" firstAttribute="centerY" secondItem="y7Z-fV-TiT" secondAttribute="centerY" id="YCn-YG-Vzk"/>
-                                                                <constraint firstItem="aEh-Qh-D28" firstAttribute="trailing" secondItem="y7Z-fV-TiT" secondAttribute="trailing" id="dCh-i3-pq1"/>
                                                                 <constraint firstItem="y7Z-fV-TiT" firstAttribute="top" secondItem="qf0-6Z-mxr" secondAttribute="top" constant="20" id="ofP-hl-U2m"/>
                                                                 <constraint firstAttribute="bottom" secondItem="6K3-hg-HvC" secondAttribute="bottom" id="pIc-6d-wUD"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MnO-YW-30A" secondAttribute="trailing" constant="32" id="qFK-5b-Cv4"/>
                                                                 <constraint firstAttribute="trailing" secondItem="6K3-hg-HvC" secondAttribute="trailing" constant="26" id="ucX-mo-Oxm"/>
-                                                                <constraint firstItem="MnO-YW-30A" firstAttribute="leading" secondItem="y7Z-fV-TiT" secondAttribute="trailing" constant="8" id="yTM-Oo-nYo"/>
-                                                                <constraint firstItem="aEh-Qh-D28" firstAttribute="leading" secondItem="y7Z-fV-TiT" secondAttribute="leading" id="z4B-9W-9RF"/>
+                                                                <constraint firstItem="MnO-YW-30A" firstAttribute="leading" secondItem="y7Z-fV-TiT" secondAttribute="leading" constant="8" id="xj9-IN-Hcp"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -1349,7 +1340,6 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="ui_description" destination="Cy9-Vw-Kdu" id="RUZ-Gj-wvO"/>
-                                                    <outlet property="ui_number" destination="aEh-Qh-D28" id="VM8-us-d36"/>
                                                     <outlet property="ui_separator" destination="6K3-hg-HvC" id="6Ao-tg-IRC"/>
                                                     <outlet property="ui_title" destination="MnO-YW-30A" id="In5-sF-nXL"/>
                                                 </connections>

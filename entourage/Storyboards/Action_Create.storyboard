@@ -175,20 +175,14 @@
                                                                         <constraint firstAttribute="height" constant="34" id="BF8-lT-mAh"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esR-23-yAN">
-                                                                    <rect key="frame" x="32" y="28" width="34" height="18"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Règlement du groupe" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flt-RX-A0V">
-                                                                    <rect key="frame" x="74" y="26.5" width="157" height="21"/>
+                                                                    <rect key="frame" x="40" y="26.5" width="157" height="21"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgx-7I-Rox">
-                                                                    <rect key="frame" x="32" y="55.5" width="334" height="20.5"/>
+                                                                    <rect key="frame" x="40" y="55.5" width="326" height="20.5"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -206,16 +200,13 @@
                                                                 <constraint firstItem="RqQ-2h-iUb" firstAttribute="top" secondItem="Qgx-7I-Rox" secondAttribute="bottom" constant="16" id="06v-j4-aql"/>
                                                                 <constraint firstItem="Qgx-7I-Rox" firstAttribute="top" secondItem="flt-RX-A0V" secondAttribute="bottom" constant="8" symbolic="YES" id="4s4-yv-h6a"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Qgx-7I-Rox" secondAttribute="trailing" constant="32" id="7tI-Sp-uWe"/>
-                                                                <constraint firstItem="flt-RX-A0V" firstAttribute="leading" secondItem="bEQ-lg-3Mg" secondAttribute="trailing" constant="8" id="Ajh-Nb-rvH"/>
                                                                 <constraint firstItem="flt-RX-A0V" firstAttribute="centerY" secondItem="bEQ-lg-3Mg" secondAttribute="centerY" id="Cll-Lt-EAt"/>
                                                                 <constraint firstItem="bEQ-lg-3Mg" firstAttribute="leading" secondItem="peo-I7-Ryr" secondAttribute="leading" constant="32" id="Jv7-Ul-ncG"/>
-                                                                <constraint firstItem="Qgx-7I-Rox" firstAttribute="leading" secondItem="bEQ-lg-3Mg" secondAttribute="leading" id="PDx-Vy-CnH"/>
+                                                                <constraint firstItem="Qgx-7I-Rox" firstAttribute="leading" secondItem="bEQ-lg-3Mg" secondAttribute="leading" constant="8" id="PDx-Vy-CnH"/>
                                                                 <constraint firstAttribute="bottom" secondItem="RqQ-2h-iUb" secondAttribute="bottom" id="WbW-RJ-fil"/>
-                                                                <constraint firstItem="esR-23-yAN" firstAttribute="trailing" secondItem="bEQ-lg-3Mg" secondAttribute="trailing" id="Z72-Xn-tNC"/>
+                                                                <constraint firstItem="flt-RX-A0V" firstAttribute="leading" secondItem="bEQ-lg-3Mg" secondAttribute="leading" constant="8" id="ZSu-zN-vg2"/>
                                                                 <constraint firstAttribute="trailing" secondItem="RqQ-2h-iUb" secondAttribute="trailing" constant="26" id="asg-D8-08g"/>
-                                                                <constraint firstItem="esR-23-yAN" firstAttribute="leading" secondItem="bEQ-lg-3Mg" secondAttribute="leading" id="iw0-Oi-mA7"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="flt-RX-A0V" secondAttribute="trailing" constant="32" id="kjb-34-ESM"/>
-                                                                <constraint firstItem="esR-23-yAN" firstAttribute="centerY" secondItem="bEQ-lg-3Mg" secondAttribute="centerY" id="nfj-eK-CZA"/>
                                                                 <constraint firstItem="bEQ-lg-3Mg" firstAttribute="top" secondItem="peo-I7-Ryr" secondAttribute="top" constant="20" id="t0d-po-irL"/>
                                                                 <constraint firstItem="RqQ-2h-iUb" firstAttribute="leading" secondItem="peo-I7-Ryr" secondAttribute="leading" constant="26" id="vud-Xb-SeU"/>
                                                             </constraints>
@@ -230,7 +221,6 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="ui_description" destination="Qgx-7I-Rox" id="tJ2-J3-2oL"/>
-                                                    <outlet property="ui_number" destination="esR-23-yAN" id="E4Y-AZ-lqC"/>
                                                     <outlet property="ui_separator" destination="RqQ-2h-iUb" id="0BK-OI-j2T"/>
                                                     <outlet property="ui_title" destination="flt-RX-A0V" id="1cy-ly-h1Q"/>
                                                 </connections>
@@ -1401,20 +1391,14 @@ ok</string>
                                                                         <constraint firstAttribute="height" constant="34" id="W4L-uW-XfG"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ng9-aE-WFm">
-                                                                    <rect key="frame" x="32" y="28" width="34" height="18"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Règlement du groupe" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zU7-Sf-Gvh">
-                                                                    <rect key="frame" x="74" y="26.5" width="157" height="21"/>
+                                                                    <rect key="frame" x="40" y="26.5" width="157" height="21"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEw-oz-oGo">
-                                                                    <rect key="frame" x="32" y="55.5" width="334" height="20.5"/>
+                                                                    <rect key="frame" x="40" y="55.5" width="326" height="20.5"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1431,19 +1415,16 @@ ok</string>
                                                             <constraints>
                                                                 <constraint firstItem="FEw-oz-oGo" firstAttribute="top" secondItem="zU7-Sf-Gvh" secondAttribute="bottom" constant="8" symbolic="YES" id="13C-aA-nSR"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zU7-Sf-Gvh" secondAttribute="trailing" constant="32" id="3UA-sz-gkB"/>
+                                                                <constraint firstItem="zU7-Sf-Gvh" firstAttribute="leading" secondItem="Qfz-Wn-mke" secondAttribute="leading" constant="8" id="3na-b2-Qu6"/>
                                                                 <constraint firstItem="Qfz-Wn-mke" firstAttribute="leading" secondItem="Nh0-a4-glo" secondAttribute="leading" constant="32" id="54i-M3-jn2"/>
                                                                 <constraint firstAttribute="trailing" secondItem="FEw-oz-oGo" secondAttribute="trailing" constant="32" id="5o3-4G-hEi"/>
                                                                 <constraint firstItem="zU7-Sf-Gvh" firstAttribute="centerY" secondItem="Qfz-Wn-mke" secondAttribute="centerY" id="7LV-ED-48u"/>
-                                                                <constraint firstItem="zU7-Sf-Gvh" firstAttribute="leading" secondItem="Qfz-Wn-mke" secondAttribute="trailing" constant="8" id="9u0-xQ-m1p"/>
-                                                                <constraint firstItem="ng9-aE-WFm" firstAttribute="leading" secondItem="Qfz-Wn-mke" secondAttribute="leading" id="J1k-Jx-gpR"/>
                                                                 <constraint firstItem="Qfz-Wn-mke" firstAttribute="top" secondItem="Nh0-a4-glo" secondAttribute="top" constant="20" id="Xda-6f-2I3"/>
-                                                                <constraint firstItem="ng9-aE-WFm" firstAttribute="trailing" secondItem="Qfz-Wn-mke" secondAttribute="trailing" id="ZfT-eW-BEo"/>
                                                                 <constraint firstAttribute="trailing" secondItem="FEI-Zw-2au" secondAttribute="trailing" constant="26" id="bum-hv-NK3"/>
-                                                                <constraint firstItem="ng9-aE-WFm" firstAttribute="centerY" secondItem="Qfz-Wn-mke" secondAttribute="centerY" id="i8h-GK-wKg"/>
                                                                 <constraint firstItem="FEI-Zw-2au" firstAttribute="leading" secondItem="Nh0-a4-glo" secondAttribute="leading" constant="26" id="kwk-ry-Lrc"/>
                                                                 <constraint firstAttribute="bottom" secondItem="FEI-Zw-2au" secondAttribute="bottom" id="lqn-Lw-2wN"/>
                                                                 <constraint firstItem="FEI-Zw-2au" firstAttribute="top" secondItem="FEw-oz-oGo" secondAttribute="bottom" constant="16" id="mN0-vw-f6K"/>
-                                                                <constraint firstItem="FEw-oz-oGo" firstAttribute="leading" secondItem="Qfz-Wn-mke" secondAttribute="leading" id="vyy-FQ-FB2"/>
+                                                                <constraint firstItem="FEw-oz-oGo" firstAttribute="leading" secondItem="Qfz-Wn-mke" secondAttribute="leading" constant="8" id="vyy-FQ-FB2"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -1456,7 +1437,6 @@ ok</string>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="ui_description" destination="FEw-oz-oGo" id="PGs-Sa-dbA"/>
-                                                    <outlet property="ui_number" destination="ng9-aE-WFm" id="YGB-WK-pdA"/>
                                                     <outlet property="ui_separator" destination="FEI-Zw-2au" id="lj1-mS-jUx"/>
                                                     <outlet property="ui_title" destination="zU7-Sf-Gvh" id="mry-EF-3Zo"/>
                                                 </connections>

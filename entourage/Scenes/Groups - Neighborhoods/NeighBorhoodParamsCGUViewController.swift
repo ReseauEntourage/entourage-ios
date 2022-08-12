@@ -20,10 +20,10 @@ class NeighBorhoodParamsCGUViewController: UIViewController {
         super.viewDidLoad()
         
         arrayDesc = ["neighborhood_CGU_1".localized,"neighborhood_CGU_2".localized,
-                     "neighborhood_CGU_3".localized,"neighborhood_CGU_4".localized]
+                     "neighborhood_CGU_3".localized,"neighborhood_CGU_4".localized,"neighborhood_CGU_5".localized]
         
         arrayTitle = ["neighborhood_CGU_1_title".localized,"neighborhood_CGU_2_title".localized,
-                      "neighborhood_CGU_3_title".localized,"neighborhood_CGU_4_title".localized]
+                      "neighborhood_CGU_3_title".localized,"neighborhood_CGU_4_title".localized,"neighborhood_CGU_5_title".localized]
         
         ui_view_top.populateView(title: "neighborhood_params_cgu_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: false)
         ui_title.text = "neighborhood_params_cgu_description".localized
@@ -41,7 +41,7 @@ extension NeighBorhoodParamsCGUViewController: UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodCguCell
         
-        cell.populateCell(title: arrayTitle[indexPath.row], description: arrayDesc[indexPath.row], position: indexPath.row + 1)
+        cell.populateCell(title: arrayTitle[indexPath.row], description: arrayDesc[indexPath.row])
         
         return cell
     }

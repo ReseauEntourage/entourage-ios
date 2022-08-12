@@ -1366,20 +1366,14 @@
                                                                         <constraint firstAttribute="height" constant="34" id="wO8-tp-TmQ"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSy-o3-VZe">
-                                                                    <rect key="frame" x="32" y="28" width="34" height="18"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Règlement du groupe" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xn9-DA-DMQ">
-                                                                    <rect key="frame" x="74" y="26.5" width="157" height="21"/>
+                                                                    <rect key="frame" x="40" y="26.5" width="157" height="21"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hia-mp-5t2">
-                                                                    <rect key="frame" x="32" y="55.5" width="350" height="20.5"/>
+                                                                    <rect key="frame" x="40" y="55.5" width="342" height="20.5"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1397,16 +1391,13 @@
                                                                 <constraint firstAttribute="trailing" secondItem="hia-mp-5t2" secondAttribute="trailing" constant="32" id="8lD-5f-Nwg"/>
                                                                 <constraint firstItem="HLV-my-y1g" firstAttribute="top" secondItem="KIt-py-E2L" secondAttribute="top" constant="20" id="F6n-8T-SpP"/>
                                                                 <constraint firstItem="xn9-DA-DMQ" firstAttribute="centerY" secondItem="HLV-my-y1g" secondAttribute="centerY" id="NN3-2g-SWy"/>
-                                                                <constraint firstItem="nSy-o3-VZe" firstAttribute="centerY" secondItem="HLV-my-y1g" secondAttribute="centerY" id="Tor-So-8g9"/>
-                                                                <constraint firstItem="nSy-o3-VZe" firstAttribute="trailing" secondItem="HLV-my-y1g" secondAttribute="trailing" id="Wbt-pD-WFu"/>
-                                                                <constraint firstItem="xn9-DA-DMQ" firstAttribute="leading" secondItem="HLV-my-y1g" secondAttribute="trailing" constant="8" id="XEn-xl-VSg"/>
-                                                                <constraint firstItem="hia-mp-5t2" firstAttribute="leading" secondItem="HLV-my-y1g" secondAttribute="leading" id="Y3Y-kN-mkm"/>
+                                                                <constraint firstItem="hia-mp-5t2" firstAttribute="leading" secondItem="HLV-my-y1g" secondAttribute="leading" constant="8" id="Y3Y-kN-mkm"/>
                                                                 <constraint firstAttribute="trailing" secondItem="P36-5A-ihK" secondAttribute="trailing" constant="26" id="YDA-gQ-uU2"/>
                                                                 <constraint firstItem="P36-5A-ihK" firstAttribute="top" secondItem="hia-mp-5t2" secondAttribute="bottom" constant="16" id="ZBP-ZO-mYW"/>
                                                                 <constraint firstItem="hia-mp-5t2" firstAttribute="top" secondItem="xn9-DA-DMQ" secondAttribute="bottom" constant="8" symbolic="YES" id="ee2-5x-U0E"/>
                                                                 <constraint firstItem="HLV-my-y1g" firstAttribute="leading" secondItem="KIt-py-E2L" secondAttribute="leading" constant="32" id="fCp-D9-X0X"/>
-                                                                <constraint firstItem="nSy-o3-VZe" firstAttribute="leading" secondItem="HLV-my-y1g" secondAttribute="leading" id="gbo-bI-aub"/>
                                                                 <constraint firstAttribute="bottom" secondItem="P36-5A-ihK" secondAttribute="bottom" id="h53-7R-bZJ"/>
+                                                                <constraint firstItem="xn9-DA-DMQ" firstAttribute="leading" secondItem="HLV-my-y1g" secondAttribute="leading" constant="8" id="mkL-qV-6k2"/>
                                                                 <constraint firstItem="P36-5A-ihK" firstAttribute="leading" secondItem="KIt-py-E2L" secondAttribute="leading" constant="26" id="uou-N6-3RW"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xn9-DA-DMQ" secondAttribute="trailing" constant="32" id="x7M-7I-kO0"/>
                                                             </constraints>
@@ -1421,7 +1412,6 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="ui_description" destination="hia-mp-5t2" id="peK-jZ-MHD"/>
-                                                    <outlet property="ui_number" destination="nSy-o3-VZe" id="2X1-Z7-hAT"/>
                                                     <outlet property="ui_separator" destination="P36-5A-ihK" id="RoA-V5-TGv"/>
                                                     <outlet property="ui_title" destination="xn9-DA-DMQ" id="Pgb-Nv-A3c"/>
                                                 </connections>
