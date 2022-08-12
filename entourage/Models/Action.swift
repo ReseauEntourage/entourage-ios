@@ -93,12 +93,7 @@ struct Action:Codable {
             dict["section"] = sectionName!
         }
         
-       
-        
-        
-        
-        
-        if location?.latitude ?? 0 > 0 && location?.longitude ?? 0 > 0 {
+        if location?.latitude ?? 0 != 0 && location?.longitude ?? 0 != 0 {
             var locationDict = [String:Double]()
             
             locationDict["latitude"] = location?.latitude

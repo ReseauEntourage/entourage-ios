@@ -70,10 +70,10 @@ struct Neighborhood:Codable {
         if address?.displayAddress?.count ?? 0 > 0 {
             dict["place_name"] = address!.displayAddress!
         }
-        if address?.latitude ?? 0 > 0 {
+        if address?.latitude ?? 0 != 0 {
             dict["latitude"] = address!.latitude
         }
-        if address?.longitude ?? 0 > 0 {
+        if address?.longitude ?? 0 != 0 {
             dict["longitude"] = address!.longitude
         }
         if address?.google_place_id?.count ?? 0 > 0 {

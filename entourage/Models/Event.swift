@@ -225,14 +225,14 @@ struct Event:Codable {
             dict["entourage_image_id"] = imageId
         }
         
-        if location?.latitude ?? 0 > 0 {
+        if location?.latitude ?? 0 != 0 {
             dict["latitude"] = location!.latitude
         }
         else {
             dict["latitude"] = 0
         }
         
-        if location?.longitude ?? 0 > 0 {
+        if location?.longitude ?? 0 != 0 {
             dict["longitude"] = location!.longitude
         }
         else {
@@ -522,10 +522,10 @@ struct EventEditing {
             dict["entourage_image_id"] = imageId
         }
         
-        if location?.latitude ?? 0 > 0 {
+        if location?.latitude ?? 0 != 0 {
             dict["latitude"] = location!.latitude
         }
-        if location?.longitude ?? 0 > 0 {
+        if location?.longitude ?? 0 != 0 {
             dict["longitude"] = location!.longitude
         }
         
