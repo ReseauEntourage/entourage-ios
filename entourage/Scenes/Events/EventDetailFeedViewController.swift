@@ -35,7 +35,7 @@ class EventDetailFeedViewController: UIViewController {
     var minTopScrollHeight:CGFloat = 120
     
     //Use to strech header
-    let maxViewHeight:CGFloat = 150
+    var maxViewHeight:CGFloat = 150
     var minViewHeight:CGFloat = 80//70 + 19
     var maxImageHeight:CGFloat = 73
     var minImageHeight:CGFloat = 0
@@ -63,6 +63,10 @@ class EventDetailFeedViewController: UIViewController {
         ui_tableview.delegate = self
         
         minTopScrollHeight = minTopScrollHeight + addHeight
+        
+        if !ApplicationTheme.iPhoneHasNotch() {
+            maxViewHeight = maxViewHeight - 20
+        }
         
         self.addShadowAndRadius(customView: ui_view_button_settings)
         self.addShadowAndRadius(customView: ui_view_button_back)
