@@ -47,6 +47,8 @@ class EventFiltersViewController: UIViewController {
     
     weak var delegate:EventFiltersDelegate? = nil
     
+    var isFromSettings = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,6 +99,16 @@ class EventFiltersViewController: UIViewController {
         setupGooglePlaceViewController()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updatePosition), name: NSNotification.Name(rawValue: kNotificationLocationUpdated), object: nil)
+        //Notifs for Gps location activation + retry
+        NotificationCenter.default.addObserver(self, selector: #selector(setShowSettings), name: NSNotification.Name(rawValue: kNotificationLocationManagerShowSettings), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(cancelLocation), name: NSNotification.Name(rawValue: kNotificationLocationManagerRefuseShowSettings), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground),
+                                                   name: UIApplication.willEnterForegroundNotification,
+                                                   object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK: - From notif -
@@ -131,6 +143,22 @@ class EventFiltersViewController: UIViewController {
                 LocationManger.sharedInstance.showGeolocationNotAllowedMessage(presenterVC: self)
             }
         }
+    }
+    @objc func setShowSettings() {
+        self.isFromSettings = true
+    }
+    
+    @objc func willEnterForeground() {
+        if isFromSettings && selectedItem == 3 {
+            isFromSettings = false
+            LocationManger.sharedInstance.startLocationUpdate()
+        }
+    }
+    
+    @objc func cancelLocation() {
+        let _bt = UIButton()
+        _bt.tag = 1
+        self.action_select(_bt)
     }
     
     //MARK: - IBAction -
@@ -256,7 +284,8 @@ class EventFiltersViewController: UIViewController {
                     LocationManger.sharedInstance.startLocationUpdate()
                 }
                 else {
-                    LocationManger.sharedInstance.showGeolocationNotAllowedMessage(presenterVC: self)                }
+                    LocationManger.sharedInstance.showGeolocationNotAllowedMessage(presenterVC: self)
+                }
             }
         default:
             break

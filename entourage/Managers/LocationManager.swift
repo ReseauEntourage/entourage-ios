@@ -13,6 +13,8 @@ let kNotificationLocationUpdatedInfoKey = "NotificationLocationUpdatedInfoKey"
 let kNotificationLocationAuthorizationChanged = "NotificationLocationAuthorizationChanged"
 let kNotificationLocationAuthorizationChangedKey = "NotificationLocationAuthorizationChangedKey"
 
+let kNotificationLocationManagerShowSettings = "kNotifLocationShowSettings"
+let kNotificationLocationManagerRefuseShowSettings = "kNotifLocationRefuseShowSettings"
 
 class LocationManger:NSObject {
     private var locationManager:CLLocationManager!
@@ -114,6 +116,8 @@ extension LocationManger: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
         if self.status == .denied {
             if let url = URL(string: UIApplication.openSettingsURLString) {
+                let notif = Notification(name: NSNotification.Name(rawValue: kNotificationLocationManagerShowSettings), object: nil,userInfo: nil)
+                NotificationCenter.default.post(notif)
                 UIApplication.shared.open(url, options: [:],completionHandler:nil)
             }
         }
@@ -121,7 +125,10 @@ extension LocationManger: MJAlertControllerDelegate {
             self.startLocationUpdate()
         }
     }
-    func validateRightButton(alertTag: MJAlertTAG) {}
+    func validateRightButton(alertTag: MJAlertTAG) {
+        let notif = Notification(name: NSNotification.Name(rawValue: kNotificationLocationManagerRefuseShowSettings), object: nil,userInfo: nil)
+        NotificationCenter.default.post(notif)
+    }
 }
 
 extension LocationManger:CLLocationManagerDelegate {
