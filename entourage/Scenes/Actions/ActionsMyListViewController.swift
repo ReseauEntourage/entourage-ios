@@ -110,6 +110,7 @@ extension ActionsMyListViewController: UITableViewDataSource, UITableViewDelegat
             vc.actionId = action.id
             vc.action = action
             vc.isContrib = action.isContrib()
+            vc.parentVC = self.navigationController
             self.navigationController?.present(navvc, animated: true)
         }
     }

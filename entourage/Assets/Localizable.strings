@@ -1034,6 +1034,24 @@
 "params_cancel_action_pop_bt_cancel" = "Retour";
 "params_cancel_action_pop_title" = "Annuler l'action";
 "params_cancel_action_pop_message" = "Souhaitez-vous annuler l'action ?";
+
+"params_cancel_action_pop_bt_yes" = "Oui";
+"params_cancel_action_pop_bt_no" = "Non";
+"params_cancel_action_pop_bt_valid" = "Envoyer";
+"params_cancel_action_pop_title" = "Supprimer la %@";
+"params_cancel_action_pop_subtitle" = "Votre %@ a-t-elle aboutie ?";
+
+"params_cancel_action_pop_comment" = "Dites nous en plus sur votre expérience - facultatif";
+"action_optional" = "- facultatif";
+"params_cancel_action_pop_comment_placeholder" = "Racontez nous votre expérience !";
+
+"action_view_canceled_title" = "L’annonce a été supprimée… ";
+"action_view_canceled_contrib_subtitle" = "Vous pouvez rechercher d'autres contributions suceptibles de vous intéresser ou publier une annonce.";
+"action_view_canceled_demand_subtitle" = "Vous pouvez rechercher d'autres demandes suceptibles de vous intéresser ou publier une annonce.";
+"action_view_canceled_demand_button" = "Liste des demandes";
+"action_view_canceled_contrib_button" = "Liste des contributions";
+
+
 //CGU
 "action_params_cgu_title" = "Le règlement";
 "action_params_cgu_description" = "Règlement d'une action, à lire attentivement.";

@@ -64,11 +64,11 @@ struct ActionsService:ParsingDataCodable {
         }
     }
     
-    static func cancelAction(isContrib:Bool, actionId:Int, completion: @escaping (_ action:Action?, _ error:EntourageNetworkError?) -> Void) {
+    static func cancelAction(isContrib:Bool, actionId:Int, isClosedOk:Bool, message:String?, completion: @escaping (_ action:Action?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = isContrib ? kAPIContribUpdate : kAPISolicitationUpdate
         endpoint = String.init(format: endpoint, actionId, token)
-        
+        //TODO: a ajouter les 2 params
         NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
             Logger.print("Response delete action: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
             guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {

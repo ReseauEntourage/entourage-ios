@@ -121,6 +121,12 @@ class MJNavBackView: UIView {
         }
     }
     
+    func changeTitleColor(titleColor:UIColor) {
+        for _uititle in ui_titles {
+            _uititle.textColor = titleColor
+        }
+    }
+    
     @objc private func goBack() {
         delegate?.goBack()
     }

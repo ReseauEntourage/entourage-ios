@@ -17,6 +17,9 @@
 		020429B5282E81B00030B035 /* NeighborhoodPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020429B4282E81B00030B035 /* NeighborhoodPostCell.swift */; };
 		0207BF8527F2059400631914 /* UserDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0207BF8427F2059400631914 /* UserDetail.storyboard */; };
 		0207BF8727F20C1600631914 /* UserProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */; };
+		0208267C28A67E90004B1222 /* larochelle.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 0208267B28A67E90004B1222 /* larochelle.gpx */; };
+		0208267F28A68447004B1222 /* ActionDeletePopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208267D28A68447004B1222 /* ActionDeletePopsViewController.swift */; };
+		0208268028A68447004B1222 /* ActionDeletePopsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0208267E28A68447004B1222 /* ActionDeletePopsViewController.xib */; };
 		0208B0C5289D23E1009A7A58 /* ActionDetailFullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208B0C4289D23E1009A7A58 /* ActionDetailFullViewController.swift */; };
 		0208B0C7289D2E63009A7A58 /* ActionFullMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208B0C6289D2E63009A7A58 /* ActionFullMapCell.swift */; };
 		0208B0C9289D2E9D009A7A58 /* ActionFullTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208B0C8289D2E9D009A7A58 /* ActionFullTopCell.swift */; };
@@ -372,6 +375,9 @@
 		020429B4282E81B00030B035 /* NeighborhoodPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodPostCell.swift; sourceTree = "<group>"; };
 		0207BF8427F2059400631914 /* UserDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserDetail.storyboard; sourceTree = "<group>"; };
 		0207BF8627F20C1600631914 /* UserProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDetailViewController.swift; sourceTree = "<group>"; };
+		0208267B28A67E90004B1222 /* larochelle.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = larochelle.gpx; sourceTree = "<group>"; };
+		0208267D28A68447004B1222 /* ActionDeletePopsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDeletePopsViewController.swift; sourceTree = "<group>"; };
+		0208267E28A68447004B1222 /* ActionDeletePopsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActionDeletePopsViewController.xib; sourceTree = "<group>"; };
 		0208B0C4289D23E1009A7A58 /* ActionDetailFullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDetailFullViewController.swift; sourceTree = "<group>"; };
 		0208B0C6289D2E63009A7A58 /* ActionFullMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFullMapCell.swift; sourceTree = "<group>"; };
 		0208B0C8289D2E9D009A7A58 /* ActionFullTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFullTopCell.swift; sourceTree = "<group>"; };
@@ -912,6 +918,7 @@
 			isa = PBXGroup;
 			children = (
 				025D8769278DEDCF00909101 /* testgps.gpx */,
+				0208267B28A67E90004B1222 /* larochelle.gpx */,
 				025FFE0A27DBAD5100783E8D /* ApiKeys.plist */,
 				025D8767278DED3C00909101 /* AppConfigurations.plist */,
 				025D8718278DD33600909101 /* entourage */,
@@ -1215,6 +1222,8 @@
 			isa = PBXGroup;
 			children = (
 				02A92C1A2897D2C2000DFF95 /* ActionsMainHomeViewController.swift */,
+				0208267D28A68447004B1222 /* ActionDeletePopsViewController.swift */,
+				0208267E28A68447004B1222 /* ActionDeletePopsViewController.xib */,
 				02F578D3289AD47E0040685C /* cells */,
 				02A92C1C2897D330000DFF95 /* Create */,
 				02EFE47B289BFD2A00D70C68 /* ActionsMyListViewController.swift */,
@@ -1648,6 +1657,7 @@
 				02FB5445287DC01200E4B9FA /* EventDetailFullCell.xib in Resources */,
 				029E307B27DB5EF300B12357 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				02FB544F287DC14000E4B9FA /* EventDetailFullInterestCell.xib in Resources */,
+				0208267C28A67E90004B1222 /* larochelle.gpx in Resources */,
 				020AF5E92860B10C0012AE60 /* HomeCongratPopupViewController.xib in Resources */,
 				02846CC227ECBC2B00D85ADA /* Interests.xcassets in Resources */,
 				02C91A25278F2B4F00305E0B /* Intro.storyboard in Resources */,
@@ -1670,6 +1680,7 @@
 				025D8723278DD33800909101 /* Assets.xcassets in Resources */,
 				02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */,
 				0268194C278DF4A800A98A4A /* Onboarding_V2.storyboard in Resources */,
+				0208268028A68447004B1222 /* ActionDeletePopsViewController.xib in Resources */,
 				021FD9652875BEAC00D3AA54 /* Event.storyboard in Resources */,
 				02EFE47A289BFC0D00D70C68 /* Action_Create.storyboard in Resources */,
 				020AF5E528607EFE0012AE60 /* congrat_short_anim.json in Resources */,
@@ -1980,6 +1991,7 @@
 				02E0EFA72878709D009B2C65 /* EventDetailTopLightCell.swift in Sources */,
 				02B94C422851FEB1006059EF /* HomeMainProtocols.swift in Sources */,
 				024131D52862030A00561FB4 /* EventCreatePhase3ViewController.swift in Sources */,
+				0208267F28A68447004B1222 /* ActionDeletePopsViewController.swift in Sources */,
 				02B37829279B072C00B204EF /* ShareEntourageViewController.swift in Sources */,
 				029D25352865FA7B00147F77 /* EventRecurrenceCell.swift in Sources */,
 				02A92C242897E695000DFF95 /* ActionCreatePhase2ViewController.swift in Sources */,

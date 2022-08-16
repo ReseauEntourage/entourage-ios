@@ -23,9 +23,19 @@ class ActionDetailFullViewController: UIViewController {
     @IBOutlet weak var ui_view_cancel: UIView!
     @IBOutlet weak var ui_view_edit: UIView!
     
+    
+    @IBOutlet weak var ui_button_signal: UIButton!
+    @IBOutlet weak var ui_cancel_button: UIButton!
+    @IBOutlet weak var ui_cancel_subtitle: UILabel!
+    @IBOutlet weak var ui_cancel_title: UILabel!
+    @IBOutlet weak var ui_view_empty: UIView!
+    
+    
     var action:Action? = nil
     var actionId = 0
     var isContrib = false
+    
+    var parentVC:UIViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +49,8 @@ class ActionDetailFullViewController: UIViewController {
        
         getAction()
         setupBottomViews()
-        
+        setupCancelView()
+        ui_view_empty.isHidden = true
         ui_view_contact.isHidden = true
         ui_view_my.isHidden = true
         
@@ -67,22 +78,19 @@ class ActionDetailFullViewController: UIViewController {
         }
     }
     
-    func sendCancelAction() {
-        IHProgressHUD.show()
-        ActionsService.cancelAction(isContrib: isContrib, actionId: actionId) { action, error in
-            IHProgressHUD.dismiss()
-            if error == nil {
-                self.action?.setCancel()
-                self.showHideBottomViews()
-                self.ui_tableview.reloadData()
-            }
-        }
-    }
-    
     func showHideBottomViews() {
         if action?.isCanceled() ?? false {
             ui_view_contact.isHidden = true
             ui_view_my.isHidden = true
+            
+            ui_view_empty.isHidden = false
+            
+            ui_cancel_subtitle.text = action?.isContrib() ?? false ? "action_view_canceled_contrib_subtitle".localized : "action_view_canceled_demand_subtitle".localized
+            let _btTitle = action?.isContrib() ?? false ? "action_view_canceled_contrib_button".localized : "action_view_canceled_demand_button".localized
+            ui_cancel_button.setTitle(_btTitle, for: .normal)
+            
+            ui_top_view.changeTitleColor(titleColor: .appGris112)
+            ui_button_signal.isHidden = true
         }
         else if action?.isMine() ?? false {
             ui_view_contact.isHidden = true
@@ -106,9 +114,31 @@ class ActionDetailFullViewController: UIViewController {
         ui_title_delete.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
     }
     
+    func setupCancelView() {
+        ui_cancel_title.setupFontAndColor(style: ApplicationTheme.getFontH1Noir())
+        ui_cancel_subtitle.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_cancel_button.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
+        ui_cancel_title.text = "action_view_canceled_title".localized
+        ui_cancel_button.layer.cornerRadius = ui_cancel_button.frame.height / 2
+    }
+    
+    @IBAction func action_show_actions(_ sender: Any) {
+        self.navigationController?.dismiss(animated: true) {
+            self.parentVC?.dismiss(animated: true)
+            if self.action?.isContrib() ?? false {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowContrib), object: nil)
+            }
+            else {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowSolicitation), object: nil)
+            }
+            NotificationCenter.default.post(name: NSNotification.Name(kNotificationActionsUpdate), object: nil)
+        }
+    }
+    
     @IBAction func action_cancel(_ sender: Any) {
         showPopCancel()
     }
+    
     @IBAction func action_edit(_ sender: Any) {
         guard let action = action else {
             return
@@ -123,6 +153,7 @@ class ActionDetailFullViewController: UIViewController {
             self.present(vc, animated: true)
         }
     }
+    
     @IBAction func action_contact(_ sender: Any) {
         showWIP(parentVC: self)
     }
@@ -137,15 +168,9 @@ class ActionDetailFullViewController: UIViewController {
     }
     
     func showPopCancel() {
-        let customAlert = MJAlertController()
-        let buttonAccept = MJAlertButtonType(title: "params_cancel_action_pop_bt_delete".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
-        let buttonCancel = MJAlertButtonType(title: "params_cancel_action_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
-        
-        customAlert.configureAlert(alertTitle: "params_cancel_action_pop_title".localized, message: "params_cancel_action_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35,parentVC:self)
-        
-        customAlert.alertTagName = .Suppress
-        customAlert.delegate = self
-        customAlert.show()
+        let homeVC = ActionDeletePopsViewController()
+        homeVC.configureCongrat( parentVC: self.navigationController, isContrib: isContrib, actionId: actionId, delegate: self)
+        homeVC.show()
     }
 }
 
@@ -153,7 +178,7 @@ class ActionDetailFullViewController: UIViewController {
 extension ActionDetailFullViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let _ = action {
+        if let action = action, !action.isCanceled() {
             return 3
         }
         return 0
@@ -206,19 +231,15 @@ extension ActionDetailFullViewController: GroupDetailDelegate {
     }
 }
 
-//MARK: - MJAlertControllerDelegate -
-extension ActionDetailFullViewController: MJAlertControllerDelegate {
-    
-    
-    func validateRightButton(alertTag:MJAlertTAG) {
-        if alertTag == .Suppress {
-            self.sendCancelAction()
+//MARK: - ActionDeletePopDelegate -
+extension ActionDetailFullViewController: ActionDeletePopDelegate {
+    func canceledAction(isCancel: Bool) {
+        if isCancel {
+            self.action?.setCancel()
+            self.showHideBottomViews()
+            self.ui_tableview.reloadData()
         }
     }
-    
-    func validateLeftButton(alertTag:MJAlertTAG) {}
-    func closePressed(alertTag:MJAlertTAG) {}
-    func selectedChoice(position: Int) {}
 }
 
 //MARK: - ActionFullAuthorCellDelegate -
