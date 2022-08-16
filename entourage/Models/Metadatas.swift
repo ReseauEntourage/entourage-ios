@@ -207,6 +207,8 @@ fileprivate struct InterestMappingImageHelper {
             imageName = "interest_sport"
         case "nature":
             imageName = "interest_nature"
+        case "marauding":
+            imageName = "interest_nomad"
         default:
             imageName = "interest_others"
         }
@@ -233,6 +235,8 @@ fileprivate struct InterestMappingImageHelper {
             imageName = "interest_small_sport"
         case "nature":
             imageName = "interest_small_nature"
+        case "marauding":
+            imageName = "interest_small_nomad"
         default:
             imageName = "interest_small_others"
         }

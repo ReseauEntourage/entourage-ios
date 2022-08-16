@@ -10,7 +10,7 @@ import UIKit
 class EditProfileInfosCell: UITableViewCell {
     
     let minRadius:Float = 1
-    let maxRadius:Float = 200
+    let maxRadius:Float = 100
     
     @IBOutlet weak var ui_view_firstname: UIView!
     @IBOutlet weak var ui_tf_firstname: UITextField!

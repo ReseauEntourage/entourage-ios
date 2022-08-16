@@ -36,7 +36,7 @@
 "Admin" = "Admin";
 //TABBAR
 "tabbar_home" = "Accueil";
-"tabbar_gifts" = "Dons";
+"tabbar_gifts" = "Entraide";
 "tabbar_messages" = "Messages";
 "tabbar_groups" = "Groupes";
 "tabbar_events" = "Événements";

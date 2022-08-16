@@ -97,7 +97,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8kT-H8-ZHM">
-                                                    <rect key="frame" x="112" y="83" width="252" height="28"/>
+                                                    <rect key="frame" x="112" y="83" width="280" height="28"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_small_sport" translatesAutoresizingMaskIntoConstraints="NO" id="J9R-te-O4a">
                                                             <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
@@ -129,6 +129,9 @@
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_small_cooking" translatesAutoresizingMaskIntoConstraints="NO" id="aBY-hx-jVj">
                                                             <rect key="frame" x="224" y="0.0" width="28" height="28"/>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_small_nomad" translatesAutoresizingMaskIntoConstraints="NO" id="cTN-63-RPt">
+                                                            <rect key="frame" x="252" y="0.0" width="28" height="28"/>
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
@@ -204,6 +207,7 @@
                                             <outlet property="ui_label_admin" destination="PLJ-vp-5lI" id="RX5-fD-I1j"/>
                                             <outlet property="ui_members" destination="Cpw-r7-HRX" id="GM8-2z-ILY"/>
                                             <outlet property="ui_picto_1" destination="J9R-te-O4a" id="1jd-9z-QZD"/>
+                                            <outlet property="ui_picto_10" destination="cTN-63-RPt" id="Lcw-qA-9Uh"/>
                                             <outlet property="ui_picto_2" destination="EA0-RG-GGo" id="MLS-wx-RvE"/>
                                             <outlet property="ui_picto_3" destination="22W-pD-i0k" id="cr4-wd-Et9"/>
                                             <outlet property="ui_picto_4" destination="ScE-od-bDC" id="ar8-L0-A5d"/>
@@ -248,7 +252,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vVK-Us-XiG">
-                                                    <rect key="frame" x="112" y="83" width="252" height="28"/>
+                                                    <rect key="frame" x="112" y="83" width="280" height="28"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_small_sport" translatesAutoresizingMaskIntoConstraints="NO" id="98T-aA-szU">
                                                             <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
@@ -280,6 +284,9 @@
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_small_cooking" translatesAutoresizingMaskIntoConstraints="NO" id="axc-xL-tWO">
                                                             <rect key="frame" x="224" y="0.0" width="28" height="28"/>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interest_small_nomad" translatesAutoresizingMaskIntoConstraints="NO" id="dRm-IH-bqk">
+                                                            <rect key="frame" x="252" y="0.0" width="28" height="28"/>
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
@@ -329,6 +336,7 @@
                                             <outlet property="ui_image" destination="gge-p9-B2t" id="NXl-Sp-fLy"/>
                                             <outlet property="ui_members" destination="Kcw-kd-kX1" id="BxU-No-a0r"/>
                                             <outlet property="ui_picto_1" destination="98T-aA-szU" id="8JA-cj-8Jy"/>
+                                            <outlet property="ui_picto_10" destination="dRm-IH-bqk" id="8Zg-S8-Ff2"/>
                                             <outlet property="ui_picto_2" destination="Daf-Oi-4ZG" id="izg-jQ-Oms"/>
                                             <outlet property="ui_picto_3" destination="Qzd-pU-wy4" id="P8p-uB-wfM"/>
                                             <outlet property="ui_picto_4" destination="0wC-R5-IpM" id="AnG-eB-CoG"/>
@@ -2210,6 +2218,7 @@
         <image name="interest_small_cooking" width="28" height="28"/>
         <image name="interest_small_game" width="28" height="27"/>
         <image name="interest_small_nature" width="28" height="27"/>
+        <image name="interest_small_nomad" width="28" height="27"/>
         <image name="interest_small_others" width="28" height="27"/>
         <image name="interest_small_sport" width="28" height="27"/>
         <image name="interest_small_wellness" width="28" height="27"/>

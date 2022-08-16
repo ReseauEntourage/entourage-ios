@@ -23,6 +23,7 @@ class NeighborhoodHomeGroupCell: UITableViewCell {
     @IBOutlet weak var ui_picto_7: UIImageView!
     @IBOutlet weak var ui_picto_8: UIImageView!
     @IBOutlet weak var ui_picto_9: UIImageView!
+    @IBOutlet weak var ui_picto_10: UIImageView!
     
     @IBOutlet weak var ui_label_admin: UILabel?
     
@@ -88,6 +89,8 @@ class NeighborhoodHomeGroupCell: UITableViewCell {
                     ui_picto_8.isHidden = false
                 case "cuisine":
                     ui_picto_9.isHidden = false
+                case "marauding":
+                    ui_picto_10.isHidden = false
                 default:
                     break
                 }
@@ -105,6 +108,7 @@ class NeighborhoodHomeGroupCell: UITableViewCell {
         ui_picto_7.isHidden = true
         ui_picto_8.isHidden = true
         ui_picto_9.isHidden = true
+        ui_picto_10.isHidden = true
     }
     
 }
