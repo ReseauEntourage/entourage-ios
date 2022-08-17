@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -45,13 +44,11 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="753" verticalCompressionResistancePriority="752" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="V2D-xN-OXq" customClass="GrowingTextView" customModule="Ent_Beta" customModuleProvider="target">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" showsHorizontalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="V2D-xN-OXq" customClass="GrowingTextView" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="28" y="45" width="499" height="29"/>
                                 <color key="backgroundColor" name="BeigeClair"/>
-                                <string key="text">L1
-LS</string>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qoa-ul-caT">
@@ -93,7 +90,7 @@ LS</string>
                             <constraint firstItem="uDl-mt-xQ1" firstAttribute="trailing" secondItem="Qoa-ul-caT" secondAttribute="trailing" id="YU7-gi-IE9"/>
                             <constraint firstItem="Qoa-ul-caT" firstAttribute="leading" secondItem="V2D-xN-OXq" secondAttribute="leading" id="YZv-im-CUa"/>
                             <constraint firstItem="V2D-xN-OXq" firstAttribute="top" secondItem="O7r-ek-71I" secondAttribute="top" constant="45" id="ZEO-9A-W8L"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="da6-BN-Z9H" secondAttribute="bottom" id="f0j-Rd-dDd"/>
+                            <constraint firstAttribute="bottom" secondItem="da6-BN-Z9H" secondAttribute="bottom" id="f0j-Rd-dDd"/>
                             <constraint firstItem="rcT-mY-8DJ" firstAttribute="top" secondItem="O7r-ek-71I" secondAttribute="top" id="frj-eR-Erb"/>
                             <constraint firstItem="uDl-mt-xQ1" firstAttribute="leading" secondItem="da6-BN-Z9H" secondAttribute="trailing" constant="8" id="jf3-ky-EaF"/>
                             <constraint firstItem="Vd7-uQ-hA1" firstAttribute="top" secondItem="rcT-mY-8DJ" secondAttribute="bottom" id="llZ-kP-yJo"/>
@@ -117,7 +114,6 @@ LS</string>
                 <outlet property="ui_description" destination="Vd7-uQ-hA1" id="ZWx-F6-G81"/>
                 <outlet property="ui_title" destination="rcT-mY-8DJ" id="ysV-R3-bSq"/>
                 <outlet property="ui_tv_count" destination="uDl-mt-xQ1" id="E7a-hY-0L7"/>
-                <outlet property="ui_tv_growing" destination="V2D-xN-OXq" id="itB-ll-ddw"/>
                 <outlet property="ui_view_error" destination="da6-BN-Z9H" id="Rpl-eY-Ah6"/>
             </connections>
             <point key="canvasLocation" x="302.17391304347831" y="143.97321428571428"/>
@@ -133,8 +129,5 @@ LS</string>
         <namedColor name="orange_light_a50">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

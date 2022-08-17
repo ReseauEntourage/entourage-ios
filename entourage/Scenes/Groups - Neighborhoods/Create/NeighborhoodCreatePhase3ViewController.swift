@@ -47,8 +47,8 @@ extension NeighborhoodCreatePhase3ViewController: UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionFixedTableViewCell.identifier, for: indexPath) as! AddDescriptionFixedTableViewCell
-            cell.populateCell(title: "addPhotoCreateDescriptionTitle".localized, description: "addPhotoCreateDescriptionSubtitle".localized, placeholder: "addPhotoCreateDescriptionPlaceholder".localized, delegate: self,about: group_welcome,textInputType:.descriptionWelcome, charMaxLimit: ApplicationTheme.maxCharsDescription200, showError: false)
+            let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionTableViewCell.identifier, for: indexPath) as! AddDescriptionTableViewCell
+            cell.populateCell(title: "addPhotoCreateDescriptionTitle".localized, description: "addPhotoCreateDescriptionSubtitle".localized, placeholder: "addPhotoCreateDescriptionPlaceholder".localized, delegate: self,about: group_welcome,textInputType:.descriptionWelcome, charMaxLimit: ApplicationTheme.maxCharsDescription200, showError: false, tableview: ui_tableview)
             return cell
         }
         

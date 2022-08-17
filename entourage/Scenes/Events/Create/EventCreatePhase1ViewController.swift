@@ -107,7 +107,7 @@ extension EventCreatePhase1ViewController: UITableViewDelegate, UITableViewDataS
             let titleAttributted = Utils.formatString(messageTxt: "event_create_phase_1_desc".localized, messageTxtHighlight: "event_create_mandatory".localized, fontColorType: ApplicationTheme.getFontH2Noir(), fontColorTypeHighlight: ApplicationTheme.getFontLegend())
             let _about = event_description != nil ? event_description : self.currentEvent?.descriptionEvent
             
-            cell.populateCell(title: "",titleAttributted: titleAttributted, description: "event_create_phase_1_desc_subtitle".localized, placeholder: "event_create_phase_1_desc_placeholder".localized, delegate: self,about: _about, textInputType:.descriptionAbout)
+            cell.populateCell(title: "",titleAttributted: titleAttributted, description: "event_create_phase_1_desc_subtitle".localized, placeholder: "event_create_phase_1_desc_placeholder".localized, delegate: self,about: _about, textInputType:.descriptionAbout, tableview: ui_tableview)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath) as! NeighborhoodCreatePhotoCell

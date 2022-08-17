@@ -34,6 +34,8 @@ class AddDescriptionTableViewCell: UITableViewCell {
     var maxCharsLimit = ApplicationTheme.maxCharsDescription
     var showError:Bool = true
     
+    weak var tableView: UITableView?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -48,7 +50,8 @@ class AddDescriptionTableViewCell: UITableViewCell {
             ui_tv_growing.placeholderColor = ApplicationTheme.getFontChampDefault().color
             ui_tv_growing.addToolBar(width: _width, buttonValidate: buttonDone)
             
-            ui_tv_growing.maxHeight = 80
+            ui_tv_growing.maxHeight = 140
+            
         }
         
         if let _ = ui_tv_edit {
@@ -74,7 +77,7 @@ class AddDescriptionTableViewCell: UITableViewCell {
         self.ui_view_error?.setupView(title: "neighborhoodCreateInputErrorMandatory".localized)
     }
     
-    func populateCell(title:String,titleAttributted:NSAttributedString? = nil, description:String, placeholder:String, delegate:AddDescriptionCellDelegate, about:String? = nil, textInputType:TextInputType, charMaxLimit:Int = ApplicationTheme.maxCharsDescription, showError:Bool = true) {
+    func populateCell(title:String,titleAttributted:NSAttributedString? = nil, description:String, placeholder:String, delegate:AddDescriptionCellDelegate, about:String? = nil, textInputType:TextInputType, charMaxLimit:Int = ApplicationTheme.maxCharsDescription, showError:Bool = true, tableview:UITableView? = nil) {
         self.maxCharsLimit = charMaxLimit
         self.textInputType = textInputType
         let _about = about?.count ?? 0 > 0 ? about! : ""
@@ -96,6 +99,7 @@ class AddDescriptionTableViewCell: UITableViewCell {
         placeholderTxt = placeholder
         ui_tv_edit?.placeholderText = placeholderTxt
         ui_tv_growing?.placeholder = placeholderTxt
+        self.tableView = tableview
     }
     
     @objc func closeKb(_ sender:UIBarButtonItem?) {
@@ -133,10 +137,17 @@ class AddDescriptionTableViewCell: UITableViewCell {
 //MARK: - Growing delegate
 extension AddDescriptionTableViewCell: GrowingTextViewDelegate {
     func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
+        
         if originalGrowingTf == 0 {
             originalGrowingTf = height
             return
         }
+        
+        //To force refresh cell
+        UIView.setAnimationsEnabled(false)
+        tableView?.beginUpdates()
+        tableView?.endUpdates()
+        UIView.setAnimationsEnabled(true)
         
         if height >= originalGrowingTf {
             let oldHeight = lastGrowingTf

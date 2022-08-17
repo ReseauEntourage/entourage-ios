@@ -92,7 +92,7 @@ extension NeighborhoodCreatePhase1ViewController: UITableViewDelegate, UITableVi
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: AddDescriptionTableViewCell.identifier, for: indexPath) as! AddDescriptionTableViewCell
-            cell.populateCell(title: "neighborhoodCreateDescriptionTitle".localized, description: "neighborhoodCreateDescriptionSubtitle".localized, placeholder: "neighborhoodCreateTitleDescriptionPlaceholder".localized, delegate: self,about: group_description, textInputType:.descriptionAbout)
+            cell.populateCell(title: "neighborhoodCreateDescriptionTitle".localized, description: "neighborhoodCreateDescriptionSubtitle".localized, placeholder: "neighborhoodCreateTitleDescriptionPlaceholder".localized, delegate: self,about: group_description, textInputType:.descriptionAbout, tableview: ui_tableview)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupPlace", for: indexPath) as! NeighborhoodCreateLocationCell

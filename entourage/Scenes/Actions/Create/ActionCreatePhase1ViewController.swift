@@ -94,7 +94,7 @@ extension ActionCreatePhase1ViewController: UITableViewDataSource, UITableViewDe
             let _desc = String.init(format: "action_create_phase_1_desc_subtitle".localized, pageDelegate?.isContribution() ?? false ? "action_contrib".localized : "action_solicitation".localized)
             
             let _about = action_description != nil ? action_description : currentAction?.description
-            cell.populateCell(title: "action_create_phase_1_desc".localized,titleAttributted:stringAttr , description: _desc, placeholder: _placeh, delegate: self,about: _about, textInputType:.descriptionAbout)
+            cell.populateCell(title: "action_create_phase_1_desc".localized,titleAttributted:stringAttr , description: _desc, placeholder: _placeh, delegate: self,about: _about, textInputType:.descriptionAbout, tableview: ui_tableview)
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellPhoto", for: indexPath) as! ActionCreatePhotoCell
