@@ -67,6 +67,13 @@
                                     <constraint firstItem="DD4-YG-5Re" firstAttribute="leading" secondItem="AUs-SL-7c2" secondAttribute="leading" id="zO9-Wr-eTg"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCY-h8-DtF">
+                                <rect key="frame" x="28" y="20" width="107.5" height="25"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="action_show_user:" destination="Quf-te-xTQ" eventType="touchUpInside" id="4di-iz-OqO"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cU0-C4-PYr">
                                 <rect key="frame" x="28" y="70" width="292" height="11"/>
                                 <string key="text">Bienvenue à toi cher danseur !
@@ -191,9 +198,13 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="cgH-Es-Ip4" firstAttribute="leading" secondItem="Bwk-s7-QRd" secondAttribute="leading" id="3GY-y9-rVU"/>
                             <constraint firstItem="VzS-Pe-ffM" firstAttribute="leading" secondItem="ygl-BQ-bh6" secondAttribute="leading" constant="28" id="3U6-P1-GLl"/>
                             <constraint firstItem="VzS-Pe-ffM" firstAttribute="top" secondItem="Bwk-s7-QRd" secondAttribute="bottom" constant="18" id="4ep-Vb-dB4"/>
+                            <constraint firstItem="JCY-h8-DtF" firstAttribute="leading" secondItem="qg8-dq-Kwr" secondAttribute="leading" id="4s3-fU-Rn2"/>
+                            <constraint firstItem="JCY-h8-DtF" firstAttribute="top" secondItem="qg8-dq-Kwr" secondAttribute="top" id="7N0-0N-vVr"/>
                             <constraint firstItem="qg8-dq-Kwr" firstAttribute="leading" secondItem="ygl-BQ-bh6" secondAttribute="leading" constant="28" id="9gb-6w-B8W"/>
                             <constraint firstAttribute="bottom" secondItem="VzS-Pe-ffM" secondAttribute="bottom" constant="26" id="Beb-Ph-gmZ"/>
+                            <constraint firstItem="JCY-h8-DtF" firstAttribute="bottom" secondItem="qg8-dq-Kwr" secondAttribute="bottom" id="E7x-gC-Bni"/>
                             <constraint firstItem="Bwk-s7-QRd" firstAttribute="top" secondItem="cU0-C4-PYr" secondAttribute="bottom" constant="18" id="I71-Qe-OmA"/>
+                            <constraint firstItem="JCY-h8-DtF" firstAttribute="trailing" secondItem="AUs-SL-7c2" secondAttribute="trailing" id="JHQ-UW-Z93"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cU0-C4-PYr" secondAttribute="trailing" constant="28" id="Ozj-v9-cJb"/>
                             <constraint firstItem="cgH-Es-Ip4" firstAttribute="centerY" secondItem="Bwk-s7-QRd" secondAttribute="centerY" id="Y40-RJ-UVb"/>
                             <constraint firstItem="cU0-C4-PYr" firstAttribute="top" secondItem="qg8-dq-Kwr" secondAttribute="bottom" constant="25" id="Zi5-DI-PJm"/>

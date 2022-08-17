@@ -278,6 +278,19 @@ extension NeighborhoodDetailMessagesViewController:MessageCellSignalDelegate {
     func retrySend(message: String,positionForRetry:Int) {
         self.sendMessage(message: message, isRetry: true, positionForRetry: positionForRetry)
     }
+    
+    func showUser(userId:Int?) {
+        guard let userId = userId else {
+            return
+        }
+        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
+            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
+                _homeVC.currentUserId = "\(userId)"
+                
+                self.present(navVC, animated: true)
+            }
+        }
+    }
 }
 
 //MARK: - GroupDetailDelegate -

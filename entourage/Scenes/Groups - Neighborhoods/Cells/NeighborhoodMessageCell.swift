@@ -26,6 +26,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     var messageId:Int = 0
     var messageForRetry = ""
     var positionForRetry = 0
+    var userId:Int? = nil
     
     weak var delegate:MessageCellSignalDelegate? = nil
     
@@ -44,6 +45,8 @@ class NeighborhoodMessageCell: UITableViewCell {
     
     func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:MessageCellSignalDelegate) {
         messageId = message.uid
+        userId = message.user?.sid
+        
         self.delegate = delegate
         self.messageForRetry = message.content ?? ""
         self.positionForRetry = positionRetry
@@ -88,16 +91,21 @@ class NeighborhoodMessageCell: UITableViewCell {
     }
 
     @IBAction func action_signal_message(_ sender: Any) {
-        //TODO: à faire
         delegate?.signalMessage(messageId: messageId)
     }
     
     @IBAction func action_retry(_ sender: Any) {
         delegate?.retrySend(message: messageForRetry,positionForRetry:positionForRetry)
     }
+    
+    @IBAction func action_show_user(_ sender: Any) {
+        Logger.print("***** action show : \(userId)")
+        delegate?.showUser(userId: userId)
+    }
 }
 
 protocol MessageCellSignalDelegate:AnyObject {
     func signalMessage(messageId:Int)
     func retrySend(message:String, positionForRetry:Int)
+    func showUser(userId:Int?)
 }

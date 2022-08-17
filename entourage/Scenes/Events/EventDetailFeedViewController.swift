@@ -516,7 +516,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             let postmessage:PostMessage = messagesOld[indexPath.row - 1]
             let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-            cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath)
+            cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell
         }
         
@@ -542,7 +542,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         
         let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-        cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath)
+        cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
         return cell
     }
     
@@ -686,6 +686,24 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
             vc.selectedIndexPath = indexPathSelected
             self.navigationController?.present(vc, animated: true)
         }
+    }
+    
+    func showUser(userId:Int?) {
+        guard let userId = userId else {
+            return
+        }
+
+        if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
+            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
+                _homeVC.currentUserId = "\(userId)"
+                
+                self.navigationController?.present(navVC, animated: true)
+            }
+        }
+    }
+    
+    func showImage(indexPathSelected:IndexPath?) {
+        self.showWIP(parentVC: self)
     }
 }
 

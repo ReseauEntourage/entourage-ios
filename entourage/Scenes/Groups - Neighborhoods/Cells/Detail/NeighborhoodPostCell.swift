@@ -33,6 +33,7 @@ class NeighborhoodPostCell: UITableViewCell {
     weak var delegate:NeighborhoodPostCellDelegate? = nil
     var postId:Int = 0
     var currentIndexPath:IndexPath? = nil
+    var userId:Int? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,13 +55,14 @@ class NeighborhoodPostCell: UITableViewCell {
         
     }
     
-    func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?) {
+    func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
         self.delegate = delegate
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
         ui_comment.text = message.content
         self.currentIndexPath = currentIndexPath
         postId = message.uid
+        self.userId = userId
         
         if let _url = message.user?.avatarURL, let url = URL(string: _url) {
             ui_iv_user.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_user"))
@@ -97,10 +99,20 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBAction func action_add_comments(_ sender: Any) {
         delegate?.showMessages(addComment: true,postId: postId, indexPathSelected: currentIndexPath)
     }
+    
+    @IBAction func action_show_user(_ sender: Any) {
+        delegate?.showUser(userId: userId)
+    }
+    
+    @IBAction func action_show_image(_ sender: Any) {
+        delegate?.showImage(indexPathSelected: currentIndexPath)
+    }
 }
 
 protocol NeighborhoodPostCellDelegate: AnyObject {
     func showMessages(addComment:Bool, postId:Int, indexPathSelected:IndexPath?)
+    func showUser(userId:Int?)
+    func showImage(indexPathSelected:IndexPath?)
 }
 
 
