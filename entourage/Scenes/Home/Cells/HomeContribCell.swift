@@ -52,7 +52,7 @@ class HomeContribCell: UITableViewCell {
         setStyle()
     }
     
-    private func setStyle() {
+    private func setStyle() {//
         ui_events_count.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_groups_count.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_meetings_count.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoBold(size: 30), color: .black))
@@ -101,6 +101,8 @@ class HomeContribCell: UITableViewCell {
             ui_view_no_events.isHidden = true
             ui_view_events.isHidden = false
             ui_events_count.text = "\(userHome.outingParticipationsCount)"
+            
+            ui_events_title.text = userHome.outingParticipationsCount > 1 ? "home_events_title".localized : "home_event_title".localized
         }
         
         if userHome.neighborhoodParticipationsCount == 0 {
@@ -111,6 +113,7 @@ class HomeContribCell: UITableViewCell {
             ui_view_no_groups.isHidden = true
             ui_view_groups.isHidden = false
             ui_groups_count.text = "\(userHome.neighborhoodParticipationsCount)"
+            ui_groups_title.text = userHome.neighborhoodParticipationsCount > 1 ? "home_groups_title".localized : "home_group_title".localized
         }
     }
     

@@ -688,6 +688,8 @@
 "home_messages_title" = "Messages envoyés";
 "home_events_title" = "Participations à des événements";
 "home_groups_title" = "Groupes rejoints";
+"home_event_title" = "Participation à un événement";
+"home_group_title" = "Groupe rejoint";
 "home_no_message_title" = "Pas encore de messages envoyés";
 "home_no_event_title" = "Pas d’événements auquels vous avez participé";
 "home_no_group_title" = "Vous n’avez pas encore rejoint de groupe de voisins";
