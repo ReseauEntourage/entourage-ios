@@ -47,6 +47,9 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" showsHorizontalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="V2D-xN-OXq" customClass="GrowingTextView" customModule="Ent_Beta" customModuleProvider="target">
                                 <rect key="frame" x="28" y="45" width="499" height="29"/>
                                 <color key="backgroundColor" name="BeigeClair"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="29" id="FI4-Y9-AHf"/>
+                                </constraints>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
@@ -114,6 +117,7 @@
                 <outlet property="ui_description" destination="Vd7-uQ-hA1" id="ZWx-F6-G81"/>
                 <outlet property="ui_title" destination="rcT-mY-8DJ" id="ysV-R3-bSq"/>
                 <outlet property="ui_tv_count" destination="uDl-mt-xQ1" id="E7a-hY-0L7"/>
+                <outlet property="ui_tv_growing" destination="V2D-xN-OXq" id="qGR-zd-beg"/>
                 <outlet property="ui_view_error" destination="da6-BN-Z9H" id="Rpl-eY-Ah6"/>
             </connections>
             <point key="canvasLocation" x="302.17391304347831" y="143.97321428571428"/>

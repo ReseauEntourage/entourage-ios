@@ -80,6 +80,12 @@
                             <constraint firstAttribute="height" constant="20" id="q6c-Ws-sxj"/>
                         </constraints>
                     </imageView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="753" text="- Annulé" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xts-IW-R3I">
+                        <rect key="frame" x="339.5" y="6" width="50.5" height="18"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
+                        <color key="textColor" name="gris_112"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
@@ -98,10 +104,11 @@
                     <constraint firstItem="VxJ-kc-bBP" firstAttribute="top" secondItem="q6g-Fy-0d4" secondAttribute="top" constant="8" id="b3u-dy-hoI"/>
                     <constraint firstItem="ck9-si-3WR" firstAttribute="leading" secondItem="cMP-w6-HKs" secondAttribute="leading" id="dZe-k3-Vmb"/>
                     <constraint firstItem="rU3-kg-lsr" firstAttribute="leading" secondItem="AEp-eM-B3w" secondAttribute="trailing" constant="8" id="ioe-w2-fmf"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xft-PW-a9b" secondAttribute="trailing" constant="16" id="jcS-qA-tts"/>
                     <constraint firstItem="AEp-eM-B3w" firstAttribute="leading" secondItem="VxJ-kc-bBP" secondAttribute="trailing" constant="10" id="mKM-1P-TCw"/>
                     <constraint firstItem="h1L-Fy-qUf" firstAttribute="leading" secondItem="cMP-w6-HKs" secondAttribute="trailing" constant="8" symbolic="YES" id="mjR-4d-Mom"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h1L-Fy-qUf" secondAttribute="trailing" constant="16" id="nce-ac-iOJ"/>
+                    <constraint firstItem="Xts-IW-R3I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xft-PW-a9b" secondAttribute="trailing" id="pDf-uk-XlH"/>
+                    <constraint firstAttribute="trailing" secondItem="Xts-IW-R3I" secondAttribute="trailing" constant="16" id="pjM-Zw-Jt6"/>
                     <constraint firstItem="ck9-si-3WR" firstAttribute="top" secondItem="cMP-w6-HKs" secondAttribute="bottom" constant="10" id="qkz-B2-fy3"/>
                     <constraint firstItem="V4x-sb-dCg" firstAttribute="leading" secondItem="q6g-Fy-0d4" secondAttribute="leading" id="syo-il-dtG"/>
                     <constraint firstItem="rU3-kg-lsr" firstAttribute="top" secondItem="xft-PW-a9b" secondAttribute="bottom" constant="4" id="tiR-PH-H2m"/>
@@ -110,6 +117,7 @@
                     <constraint firstAttribute="trailing" secondItem="V4x-sb-dCg" secondAttribute="trailing" id="vOI-nI-Luk"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rU3-kg-lsr" secondAttribute="trailing" constant="16" id="xJ0-xo-sh0"/>
                     <constraint firstItem="19i-WM-5eN" firstAttribute="centerY" secondItem="ck9-si-3WR" secondAttribute="centerY" id="xpk-M1-9y0"/>
+                    <constraint firstItem="Xts-IW-R3I" firstAttribute="top" secondItem="xft-PW-a9b" secondAttribute="top" id="zTR-70-KSm"/>
                     <constraint firstItem="xft-PW-a9b" firstAttribute="top" secondItem="q6g-Fy-0d4" secondAttribute="top" constant="6" id="zeg-xx-Se2"/>
                 </constraints>
             </tableViewCellContentView>
@@ -118,6 +126,7 @@
                 <outlet property="ui_date" destination="rU3-kg-lsr" id="uI1-Cg-sTY"/>
                 <outlet property="ui_image" destination="VxJ-kc-bBP" id="WKd-pA-zdp"/>
                 <outlet property="ui_iv_canceled" destination="GXp-iK-TW2" id="9M4-Es-hjd"/>
+                <outlet property="ui_label_canceled" destination="Xts-IW-R3I" id="8Bk-Pe-9YV"/>
                 <outlet property="ui_location" destination="h1L-Fy-qUf" id="3YU-IA-INS"/>
                 <outlet property="ui_members" destination="19i-WM-5eN" id="N2D-eE-Cgc"/>
                 <outlet property="ui_title" destination="xft-PW-a9b" id="ESW-IL-XdU"/>
