@@ -19,6 +19,10 @@ class NeighborhoodDetailViewController: UIViewController {
     
     @IBOutlet weak var ui_floaty_button: Floaty!
     
+    @IBOutlet weak var ui_view_full_image: UIView!
+    @IBOutlet weak var ui_scrollview: UIScrollView!
+    @IBOutlet weak var ui_iv_preview: UIImageView!
+    
     //Use to strech header
     var maxViewHeight:CGFloat = 150
     var minViewHeight:CGFloat = 80//70 + 19
@@ -57,7 +61,11 @@ class NeighborhoodDetailViewController: UIViewController {
         getNeighborhoodDetail()
         AnalyticsLoggerManager.logEvent(name: View_GroupFeed__Show)
         
-       setupFloatingButton()
+        setupFloatingButton()
+        
+        self.ui_view_full_image.isHidden = true
+        self.ui_scrollview.delegate = self
+        self.ui_scrollview.maximumZoomScale = 10
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -324,6 +332,10 @@ class NeighborhoodDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func action_tap_close_full_image(_ sender: Any) {
+        ui_view_full_image.isHidden = true
+    }
+    
     //MARK: - Method uiscrollview delegate -
     func scrollViewDidScroll( _ scrollView: UIScrollView) {
         UIView.animate(withDuration: 0) {
@@ -483,7 +495,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 && indexPath.row == 1 {
-           // return 214
+            // return 214
         }
         return UITableView.automaticDimension
     }
@@ -568,8 +580,21 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
         }
     }
     
-    func showImage(indexPathSelected:IndexPath?) {
-        self.showWIP(parentVC: self)
+    func showImage(imageUrl:URL?) {
+        guard let imageUrl = imageUrl else {
+            return
+        }
+        
+        ui_scrollview.zoomScale = 1.0
+        
+        ui_iv_preview.sd_setImage(with: imageUrl, placeholderImage: nil, options: .refreshCached) { _image, _error, _type, _ur in
+            if _error != nil {
+                self.ui_view_full_image.isHidden = true
+            }
+            else {
+                self.ui_view_full_image.isHidden = false
+            }
+        }
     }
 }
 
@@ -653,6 +678,14 @@ extension NeighborhoodDetailViewController:NeighborhoodDetailViewControllerDeleg
         self.getNeighborhoodDetail(hasToRefreshLists:true)
     }
 }
+
+//MARK: - UIScrollViewDelegate -
+extension NeighborhoodDetailViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.ui_iv_preview
+    }
+}
+
 
 protocol NeighborhoodDetailViewControllerDelegate: AnyObject {
     func refreshNeighborhoodModified()

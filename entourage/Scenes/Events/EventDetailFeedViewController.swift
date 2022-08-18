@@ -28,6 +28,11 @@ class EventDetailFeedViewController: UIViewController {
     @IBOutlet weak var ui_view_button_settings: UIView!
     @IBOutlet weak var ui_floaty_button: UIButton!
     
+    
+    @IBOutlet weak var ui_view_full_image: UIView!
+    @IBOutlet weak var ui_scrollview: UIScrollView!
+    @IBOutlet weak var ui_iv_preview: UIImageView!
+    
     //To show/hide button join on scroll
     @IBOutlet weak var ui_title_bt_join: UILabel!
     @IBOutlet weak var ui_bt_floating_join: UIView!
@@ -86,6 +91,11 @@ class EventDetailFeedViewController: UIViewController {
         
         getEventDetail()
         ui_view_canceled.isHidden = true
+        
+        self.ui_view_full_image.isHidden = true
+        self.ui_scrollview.delegate = self
+        self.ui_scrollview.maximumZoomScale = 10
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -360,6 +370,9 @@ class EventDetailFeedViewController: UIViewController {
     
     @IBAction func action_create_post(_ sender: Any) {
         showCreatePost()
+    }
+    @IBAction func action_tap_close_full_image(_ sender: Any) {
+        ui_view_full_image.isHidden = true
     }
     
     //MARK: - Nav VCs-
@@ -702,8 +715,21 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
         }
     }
     
-    func showImage(indexPathSelected:IndexPath?) {
-        self.showWIP(parentVC: self)
+    func showImage(imageUrl:URL?) {
+        guard let imageUrl = imageUrl else {
+            return
+        }
+        
+        ui_scrollview.zoomScale = 1.0
+        
+        ui_iv_preview.sd_setImage(with: imageUrl, placeholderImage: nil, options: .refreshCached) { _image, _error, _type, _ur in
+            if _error != nil {
+                self.ui_view_full_image.isHidden = true
+            }
+            else {
+                self.ui_view_full_image.isHidden = false
+            }
+        }
     }
 }
 
@@ -733,5 +759,12 @@ extension EventDetailFeedViewController:UpdateCommentCountDelegate {
 extension EventDetailFeedViewController: EKEventEditViewDelegate {
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+//MARK: - UIScrollViewDelegate -
+extension EventDetailFeedViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.ui_iv_preview
     }
 }

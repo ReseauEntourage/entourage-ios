@@ -34,6 +34,7 @@ class NeighborhoodPostCell: UITableViewCell {
     var postId:Int = 0
     var currentIndexPath:IndexPath? = nil
     var userId:Int? = nil
+    var imageUrl:URL? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -86,6 +87,7 @@ class NeighborhoodPostCell: UITableViewCell {
         
         if let urlStr = message.messageImageUrl, let url = URL(string: urlStr) {
             ui_image_post?.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_post"))
+            imageUrl = url
         }
         else {
             ui_image_post?.image = UIImage.init(named: "placeholder_post")
@@ -105,14 +107,14 @@ class NeighborhoodPostCell: UITableViewCell {
     }
     
     @IBAction func action_show_image(_ sender: Any) {
-        delegate?.showImage(indexPathSelected: currentIndexPath)
+        delegate?.showImage(imageUrl: imageUrl)
     }
 }
 
 protocol NeighborhoodPostCellDelegate: AnyObject {
     func showMessages(addComment:Bool, postId:Int, indexPathSelected:IndexPath?)
     func showUser(userId:Int?)
-    func showImage(indexPathSelected:IndexPath?)
+    func showImage(imageUrl:URL?)
 }
 
 

@@ -1775,6 +1775,42 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lci-11-I6L">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="255" verticalCompressionResistancePriority="758" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="JFP-CP-d0O">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_user" translatesAutoresizingMaskIntoConstraints="NO" id="omX-Jx-1qI">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                            </imageView>
+                                        </subviews>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="omX-Jx-1qI" secondAttribute="bottom" id="09c-Iv-OCr"/>
+                                            <constraint firstAttribute="trailing" secondItem="omX-Jx-1qI" secondAttribute="trailing" id="HBA-TC-DyR"/>
+                                            <constraint firstItem="omX-Jx-1qI" firstAttribute="leading" secondItem="JFP-CP-d0O" secondAttribute="leading" id="K74-HB-P0f"/>
+                                            <constraint firstItem="omX-Jx-1qI" firstAttribute="centerY" secondItem="JFP-CP-d0O" secondAttribute="centerY" id="n9n-gl-feb"/>
+                                            <constraint firstItem="omX-Jx-1qI" firstAttribute="top" secondItem="JFP-CP-d0O" secondAttribute="top" id="qhQ-cc-uTZ"/>
+                                            <constraint firstItem="omX-Jx-1qI" firstAttribute="centerX" secondItem="JFP-CP-d0O" secondAttribute="centerX" id="vij-MT-Tf2"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="LKY-S3-HpS" appends="YES" id="Fd9-J1-EBF"/>
+                                        </connections>
+                                    </scrollView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_button_close_white_round" translatesAutoresizingMaskIntoConstraints="NO" id="MMH-Pz-yRy">
+                                        <rect key="frame" x="350" y="60" width="32" height="32"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="JFP-CP-d0O" firstAttribute="top" secondItem="Lci-11-I6L" secondAttribute="top" id="5gw-Kp-y0p"/>
+                                    <constraint firstAttribute="bottom" secondItem="JFP-CP-d0O" secondAttribute="bottom" id="5rz-Ia-h4O"/>
+                                    <constraint firstItem="JFP-CP-d0O" firstAttribute="leading" secondItem="Lci-11-I6L" secondAttribute="leading" id="8AM-fX-SY6"/>
+                                    <constraint firstAttribute="trailing" secondItem="JFP-CP-d0O" secondAttribute="trailing" id="B8F-u6-0FA"/>
+                                    <constraint firstAttribute="trailing" secondItem="MMH-Pz-yRy" secondAttribute="trailing" constant="32" id="xgQ-Pk-JOY"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8xv-J1-pVJ"/>
                         <color key="backgroundColor" name="Beige"/>
@@ -1784,15 +1820,20 @@
                             <constraint firstItem="ojT-9N-YPQ" firstAttribute="trailing" secondItem="lOk-y6-Xiv" secondAttribute="trailing" constant="-32" id="8D4-1m-nSZ"/>
                             <constraint firstItem="8xv-J1-pVJ" firstAttribute="trailing" secondItem="qVD-wp-3mj" secondAttribute="trailing" constant="28" id="CIh-AY-apW"/>
                             <constraint firstItem="lOk-y6-Xiv" firstAttribute="top" secondItem="8xv-J1-pVJ" secondAttribute="top" id="Eqs-8i-icY"/>
+                            <constraint firstItem="MMH-Pz-yRy" firstAttribute="top" secondItem="8xv-J1-pVJ" secondAttribute="top" constant="16" id="JzM-CO-72T"/>
                             <constraint firstItem="RTc-MR-zdS" firstAttribute="leading" secondItem="8xv-J1-pVJ" secondAttribute="leading" constant="4" id="Qd5-6E-P5r"/>
+                            <constraint firstAttribute="bottom" secondItem="Lci-11-I6L" secondAttribute="bottom" id="RMr-tT-Ejd"/>
                             <constraint firstItem="RTc-MR-zdS" firstAttribute="top" secondItem="XeJ-97-jwN" secondAttribute="top" id="URk-Oz-7Dr"/>
                             <constraint firstItem="T0V-qQ-sRK" firstAttribute="leading" secondItem="XeJ-97-jwN" secondAttribute="leading" id="Vej-WE-jIT"/>
+                            <constraint firstItem="Lci-11-I6L" firstAttribute="top" secondItem="XeJ-97-jwN" secondAttribute="top" id="aoz-83-1Yf"/>
+                            <constraint firstItem="Lci-11-I6L" firstAttribute="leading" secondItem="8xv-J1-pVJ" secondAttribute="leading" id="grE-Ni-zqE"/>
                             <constraint firstItem="T0V-qQ-sRK" firstAttribute="top" secondItem="XeJ-97-jwN" secondAttribute="top" id="lq8-VZ-Dy3"/>
                             <constraint firstItem="lOk-y6-Xiv" firstAttribute="leading" secondItem="XeJ-97-jwN" secondAttribute="leading" id="qt5-Pq-dz0"/>
                             <constraint firstItem="8xv-J1-pVJ" firstAttribute="trailing" secondItem="RTc-MR-zdS" secondAttribute="trailing" constant="4" id="r4U-qr-Kxd"/>
                             <constraint firstItem="8xv-J1-pVJ" firstAttribute="bottom" secondItem="qVD-wp-3mj" secondAttribute="bottom" constant="32" id="rPx-wx-fr0"/>
                             <constraint firstAttribute="trailing" secondItem="T0V-qQ-sRK" secondAttribute="trailing" id="rYk-Cr-HLo"/>
                             <constraint firstItem="8xv-J1-pVJ" firstAttribute="trailing" secondItem="lOk-y6-Xiv" secondAttribute="trailing" id="rkG-gN-m6V"/>
+                            <constraint firstItem="Lci-11-I6L" firstAttribute="trailing" secondItem="8xv-J1-pVJ" secondAttribute="trailing" id="sJd-kb-U9s"/>
                             <constraint firstItem="ojT-9N-YPQ" firstAttribute="centerY" secondItem="lOk-y6-Xiv" secondAttribute="centerY" id="ucQ-Wm-tTM"/>
                         </constraints>
                     </view>
@@ -1801,13 +1842,21 @@
                         <outlet property="ui_floaty_button" destination="qVD-wp-3mj" id="pg6-nA-okL"/>
                         <outlet property="ui_iv_neighborhood" destination="AeR-wL-oht" id="JpL-bB-2DY"/>
                         <outlet property="ui_iv_neighborhood_mini" destination="TZq-iv-FPM" id="FaU-hJ-iB7"/>
+                        <outlet property="ui_iv_preview" destination="omX-Jx-1qI" id="MO3-Qt-U4g"/>
                         <outlet property="ui_label_title_neighb" destination="Z2A-BB-MxT" id="bMT-hO-7yd"/>
+                        <outlet property="ui_scrollview" destination="JFP-CP-d0O" id="j8v-MK-HZN"/>
                         <outlet property="ui_tableview" destination="RTc-MR-zdS" id="FRk-4T-rMH"/>
                         <outlet property="ui_top_view" destination="lOk-y6-Xiv" id="Vfp-0U-Sga"/>
+                        <outlet property="ui_view_full_image" destination="Lci-11-I6L" id="CoY-C3-RqI"/>
                         <outlet property="ui_view_height_constraint" destination="NJb-7h-hTu" id="0GS-87-Viq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zKe-Oj-B5g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="LKY-S3-HpS">
+                    <connections>
+                        <action selector="action_tap_close_full_image:" destination="pqB-Ol-icc" id="CM1-IJ-Nfz"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="986.95652173913049" y="54.910714285714285"/>
         </scene>
@@ -2200,6 +2249,7 @@
     <resources>
         <image name="bg_detail_group" width="392" height="286"/>
         <image name="big_arrow_show" width="63" height="45"/>
+        <image name="ic_button_close_white_round" width="32" height="32"/>
         <image name="ic_button_plus_fill" width="70" height="70"/>
         <image name="ic_cgu_bubble" width="35" height="35"/>
         <image name="ic_cgu_group" width="25" height="25"/>
@@ -2218,7 +2268,7 @@
         <image name="interest_small_cooking" width="28" height="28"/>
         <image name="interest_small_game" width="28" height="27"/>
         <image name="interest_small_nature" width="28" height="27"/>
-        <image name="interest_small_nomad" width="28" height="27"/>
+        <image name="interest_small_nomad" width="28" height="28"/>
         <image name="interest_small_others" width="28" height="27"/>
         <image name="interest_small_sport" width="28" height="27"/>
         <image name="interest_small_wellness" width="28" height="27"/>

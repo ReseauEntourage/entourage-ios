@@ -618,12 +618,49 @@
                                     <constraint firstAttribute="trailing" secondItem="Xkn-j7-mUh" secondAttribute="trailing" id="uZ2-sZ-RzJ"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96a-eR-4eP">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="255" verticalCompressionResistancePriority="758" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="wpq-TL-rnB">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_user" translatesAutoresizingMaskIntoConstraints="NO" id="njp-Cx-lM0">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                            </imageView>
+                                        </subviews>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="njp-Cx-lM0" firstAttribute="top" secondItem="wpq-TL-rnB" secondAttribute="top" id="Jtf-R7-Z8W"/>
+                                            <constraint firstAttribute="bottom" secondItem="njp-Cx-lM0" secondAttribute="bottom" id="NaD-eL-lOa"/>
+                                            <constraint firstAttribute="trailing" secondItem="njp-Cx-lM0" secondAttribute="trailing" id="WTj-4o-req"/>
+                                            <constraint firstItem="njp-Cx-lM0" firstAttribute="centerY" secondItem="wpq-TL-rnB" secondAttribute="centerY" id="bPb-5v-Lee"/>
+                                            <constraint firstItem="njp-Cx-lM0" firstAttribute="centerX" secondItem="wpq-TL-rnB" secondAttribute="centerX" id="izP-gv-XgM"/>
+                                            <constraint firstItem="njp-Cx-lM0" firstAttribute="leading" secondItem="wpq-TL-rnB" secondAttribute="leading" id="k4o-Gn-VVy"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="qQX-is-0gW" appends="YES" id="N7s-rj-iPD"/>
+                                        </connections>
+                                    </scrollView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_button_close_white_round" translatesAutoresizingMaskIntoConstraints="NO" id="ndW-m2-Mjh">
+                                        <rect key="frame" x="359" y="60" width="32" height="32"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ndW-m2-Mjh" secondAttribute="trailing" constant="23" id="Ff6-mA-npX"/>
+                                    <constraint firstAttribute="trailing" secondItem="wpq-TL-rnB" secondAttribute="trailing" id="SJ0-Lq-iI4"/>
+                                    <constraint firstAttribute="bottom" secondItem="wpq-TL-rnB" secondAttribute="bottom" id="dcN-61-IOq"/>
+                                    <constraint firstItem="wpq-TL-rnB" firstAttribute="top" secondItem="96a-eR-4eP" secondAttribute="top" id="eP2-se-g5W"/>
+                                    <constraint firstItem="wpq-TL-rnB" firstAttribute="leading" secondItem="96a-eR-4eP" secondAttribute="leading" id="fBb-9z-BSc"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h8q-3a-IrB"/>
                         <color key="backgroundColor" name="Beige"/>
                         <constraints>
                             <constraint firstItem="tG7-Gh-1Qg" firstAttribute="trailing" secondItem="keO-la-aOU" secondAttribute="trailing" constant="-32" id="7aL-Dj-2Gi"/>
                             <constraint firstItem="WNs-CT-aUo" firstAttribute="trailing" secondItem="h8q-3a-IrB" secondAttribute="trailing" id="7ls-5s-mwR"/>
+                            <constraint firstAttribute="trailing" secondItem="96a-eR-4eP" secondAttribute="trailing" id="AKM-9r-Tm6"/>
                             <constraint firstItem="0En-it-5CA" firstAttribute="top" secondItem="2TO-pb-TzV" secondAttribute="top" id="B6F-ni-lEg"/>
                             <constraint firstItem="s64-Vk-nq7" firstAttribute="trailing" secondItem="tG7-Gh-1Qg" secondAttribute="trailing" id="C2W-id-OO3"/>
                             <constraint firstItem="tG7-Gh-1Qg" firstAttribute="centerY" secondItem="keO-la-aOU" secondAttribute="centerY" id="D5P-dE-LrY"/>
@@ -641,16 +678,20 @@
                             <constraint firstItem="0g5-JR-O6f" firstAttribute="centerX" secondItem="2TO-pb-TzV" secondAttribute="centerX" id="b8G-KI-3hA"/>
                             <constraint firstItem="WNs-CT-aUo" firstAttribute="top" secondItem="2TO-pb-TzV" secondAttribute="top" id="bEg-Qk-XII"/>
                             <constraint firstItem="vYp-09-kV0" firstAttribute="bottom" secondItem="2TO-pb-TzV" secondAttribute="bottom" id="bcf-xO-HES"/>
+                            <constraint firstItem="96a-eR-4eP" firstAttribute="top" secondItem="2TO-pb-TzV" secondAttribute="top" id="d6N-UW-ug3"/>
                             <constraint firstItem="vYp-09-kV0" firstAttribute="top" secondItem="2TO-pb-TzV" secondAttribute="top" id="dcN-gZ-9Wr"/>
                             <constraint firstItem="s64-Vk-nq7" firstAttribute="leading" secondItem="tG7-Gh-1Qg" secondAttribute="leading" id="eOW-ul-O7k"/>
                             <constraint firstItem="b8a-81-v78" firstAttribute="centerY" secondItem="tG7-Gh-1Qg" secondAttribute="centerY" id="ftD-Ge-jkq"/>
                             <constraint firstItem="s64-Vk-nq7" firstAttribute="top" secondItem="tG7-Gh-1Qg" secondAttribute="top" id="hHd-tT-o9T"/>
                             <constraint firstItem="h8q-3a-IrB" firstAttribute="trailing" secondItem="ztL-RH-rC0" secondAttribute="trailing" constant="28" id="hMq-MO-VB6"/>
+                            <constraint firstItem="96a-eR-4eP" firstAttribute="leading" secondItem="h8q-3a-IrB" secondAttribute="leading" id="iOy-38-hyl"/>
+                            <constraint firstAttribute="bottom" secondItem="96a-eR-4eP" secondAttribute="bottom" id="m1U-9J-Mfd"/>
                             <constraint firstAttribute="trailing" secondItem="0En-it-5CA" secondAttribute="trailing" id="oyk-oX-5n6"/>
                             <constraint firstItem="keO-la-aOU" firstAttribute="leading" secondItem="2TO-pb-TzV" secondAttribute="leading" id="rP1-qd-4j6"/>
                             <constraint firstItem="h8q-3a-IrB" firstAttribute="trailing" secondItem="keO-la-aOU" secondAttribute="trailing" id="s2f-lo-Api"/>
                             <constraint firstItem="h8q-3a-IrB" firstAttribute="bottom" secondItem="ztL-RH-rC0" secondAttribute="bottom" constant="32" id="tbY-M0-xLv"/>
                             <constraint firstItem="cq7-SG-lLc" firstAttribute="centerY" secondItem="keO-la-aOU" secondAttribute="centerY" id="uja-PY-jvx"/>
+                            <constraint firstItem="ndW-m2-Mjh" firstAttribute="top" secondItem="h8q-3a-IrB" secondAttribute="top" constant="16" id="xOj-xQ-01W"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kgh-xa-f0g"/>
@@ -660,19 +701,27 @@
                         <outlet property="ui_iv_event" destination="CUf-aQ-xDD" id="y0o-sI-jB0"/>
                         <outlet property="ui_iv_event2" destination="WNs-CT-aUo" id="pq6-8v-dIN"/>
                         <outlet property="ui_iv_event_mini" destination="cq7-SG-lLc" id="6ne-7u-nzz"/>
+                        <outlet property="ui_iv_preview" destination="njp-Cx-lM0" id="mgR-1M-OwG"/>
                         <outlet property="ui_label_title_event" destination="ZjM-xa-6I3" id="S2D-BO-7as"/>
                         <outlet property="ui_lbl_canceled" destination="AS7-WL-ijF" id="o8c-DD-AsM"/>
+                        <outlet property="ui_scrollview" destination="wpq-TL-rnB" id="kQT-VK-u7n"/>
                         <outlet property="ui_tableview" destination="vYp-09-kV0" id="JcX-cO-8yN"/>
                         <outlet property="ui_title_bt_join" destination="dU6-tE-a8d" id="u8b-Dc-OhY"/>
                         <outlet property="ui_top_view" destination="keO-la-aOU" id="DvQ-Fl-zDo"/>
                         <outlet property="ui_view_button_back" destination="b8a-81-v78" id="BBI-5w-v4X"/>
                         <outlet property="ui_view_button_settings" destination="s64-Vk-nq7" id="16m-Dx-c8f"/>
                         <outlet property="ui_view_canceled" destination="zD4-yh-EWb" id="YcB-OI-TiJ"/>
+                        <outlet property="ui_view_full_image" destination="96a-eR-4eP" id="EoY-Ox-lgc"/>
                         <outlet property="ui_view_height_constraint" destination="gE9-Dv-TuC" id="gE4-lk-NXE"/>
                         <outlet property="ui_view_top_bg" destination="0En-it-5CA" id="dWX-Sx-yFk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wY0-q0-4cY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="qQX-is-0gW">
+                    <connections>
+                        <action selector="action_tap_close_full_image:" destination="1Sc-VH-DcS" id="Id5-co-0uV"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="986.95652173913049" y="54.910714285714285"/>
         </scene>
@@ -1741,6 +1790,7 @@
     <resources>
         <image name="big_arrow_show" width="63" height="45"/>
         <image name="ic_big_event_empty" width="215" height="106"/>
+        <image name="ic_button_close_white_round" width="32" height="32"/>
         <image name="ic_button_plus_fill" width="70" height="70"/>
         <image name="ic_cgu_bubble" width="35" height="35"/>
         <image name="ic_cgu_group" width="25" height="25"/>
@@ -1756,6 +1806,7 @@
         <image name="img_neighb_valid_group" width="23" height="19"/>
         <image name="my_profile_header" width="392" height="416"/>
         <image name="params_next" width="9" height="13"/>
+        <image name="placeholder_user" width="124" height="124"/>
         <namedColor name="Beige">
             <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
