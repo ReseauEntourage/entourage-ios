@@ -897,12 +897,12 @@
 
 //Event settings
 "event_params_title" = "Paramètres de l’événement";
-"event_params_cgu" = "Règlement de l’événement";
+"event_params_cgu" = "Charte des événements";
 "event_params_edit" = "Modifier l’événement";
 "event_params_recurrency" = "Modifier la récurrence";
 "event_params_signal" = "Signaler l’événement ";
-"event_params_cgu_title" = "Le règlement";
-"event_params_cgu_description" = "Règlement de l’événement, à lire attentivement.";
+"event_params_cgu_title" = "Charte des événements";
+"event_params_cgu_description" = "Charte des événements, à lire attentivement.";
 "event_params_participant" = "participant";
 "event_params_participants" = "participants";
 "event_params_quit" = "Quitter l’événement";
