@@ -41,7 +41,7 @@
 "tabbar_groups" = "Groupes";
 "tabbar_events" = "Événements";
 
-"errorSettings" = "Pas d'autorisation";
+"errorSettings" = "Autorisation requise";
 "toSettings" = "Réglages";
 "authCameraSettings" = "Veuillez autoriser l'accès à l'appareil photo.";
 "authGpsSettings" = "Veuillez autoriser l'accès au GPS.";
@@ -887,7 +887,7 @@
 "event_add_contact_accept" = "Ajouter";
 "event_add_contact_cancel" = "Annuler";
 "event_add_contact_title" = "Ajouter l’événement à votre\nagenda personnel ? ";
-"event_add_contact_description" = "Vous pouvez ajouter cet événement à votre calendrier personnel avec l’ensemble des informations (lieu, heure…)\nVous serez rappelé un jour avant.";
+"event_add_contact_description" = "Vous pouvez ajouter cet événement à votre calendrier personnel avec l’ensemble des informations (lieu, heure…).";
 
 "event_add_contact_places_title" = "Événement à places limitées";
 "event_add_contact_places_description" = "Attention, cet événement est à places limitées, votre inscription n’est pas garantie. L’administrateur de l’événement reviendra vers vous pour vous confirmer la réservation de votre place.";
