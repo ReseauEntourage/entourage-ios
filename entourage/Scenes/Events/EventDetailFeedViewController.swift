@@ -317,7 +317,7 @@ class EventDetailFeedViewController: UIViewController {
         let buttonAccept = MJAlertButtonType(title: "params_leave_event_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         let buttonCancel = MJAlertButtonType(title: "params_leave_event_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "params_leave_event_pop_title".localized, message: "params_leave_event_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35,parentVC:self)
+        customAlert.configureAlert(alertTitle: "params_leave_event_pop_title".localized, message: "params_leave_event_pop_message".localized, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
         
         customAlert.alertTagName = .None
         customAlert.delegate = self
@@ -389,7 +389,7 @@ class EventDetailFeedViewController: UIViewController {
         let customAlert = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle: ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "event_add_contact_places_title".localized, message: "event_add_contact_places_description".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35,parentVC:self)
+        customAlert.configureAlert(alertTitle: "event_add_contact_places_title".localized, message: "event_add_contact_places_description".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
         
         customAlert.alertTagName = .Suppress
         customAlert.delegate = self
@@ -410,7 +410,7 @@ class EventDetailFeedViewController: UIViewController {
                     alertVC.alertTagName = .AcceptSettings
                     let buttonCancel = MJAlertButtonType(title: "event_add_contact_refuse".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .appOrange), bgColor: .appOrangeLight_50, cornerRadius: -1)
                     let buttonValidate = MJAlertButtonType(title: "event_add_contact_activate".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrange, cornerRadius: -1)
-                    alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "event_add_contact_error".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self.navigationController)
+                    alertVC.configureAlert(alertTitle: "errorSettings".localized, message: "event_add_contact_error".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
                     
                     alertVC.delegate = self
                     alertVC.show()
@@ -425,7 +425,7 @@ class EventDetailFeedViewController: UIViewController {
             alertVC.alertTagName = .AcceptAdd
             let buttonCancel = MJAlertButtonType(title: "event_add_contact_cancel".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .appOrange), bgColor: .appOrangeLight_50, cornerRadius: -1)
             let buttonValidate = MJAlertButtonType(title: "event_add_contact_accept".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrange, cornerRadius: -1)
-            alertVC.configureAlert(alertTitle: "event_add_contact_title".localized, message: "event_add_contact_description".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self.navigationController)
+            alertVC.configureAlert(alertTitle: "event_add_contact_title".localized, message: "event_add_contact_description".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
             
             alertVC.delegate = self
             alertVC.show()

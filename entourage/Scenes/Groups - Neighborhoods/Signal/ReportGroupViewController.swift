@@ -31,7 +31,7 @@ class ReportGroupViewController: UIViewController {
         ui_lbl_mandatory.textColor = ApplicationTheme.getFontLegend().color
         ui_lbl_mandatory.text = "report_group_mandatory".localized
         
-        ui_button_validate.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
+        ui_button_validate.titleLabel?.font = ApplicationTheme.getFontNunitoBold(size: 15)
         ui_button_validate.setTitleColor(.appOrange, for: .normal)
         ui_button_validate.layer.cornerRadius = ui_button_validate.frame.height / 2
         ui_button_validate.setTitle("report_group_next_button".localized, for: .normal)

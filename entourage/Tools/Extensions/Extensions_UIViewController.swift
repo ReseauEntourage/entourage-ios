@@ -72,7 +72,7 @@ extension UIViewController {
         let customAlert = MJAlertController()
         let buttonAccept = MJAlertButtonType(title: "close".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
         
-        customAlert.configureAlert(alertTitle: "WIP".localized, message: "notImplemented".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, parentVC: parentVC)
+        customAlert.configureAlert(alertTitle: "WIP".localized, message: "notImplemented".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
         
         customAlert.alertTagName = .None
         //  customAlert.delegate = self

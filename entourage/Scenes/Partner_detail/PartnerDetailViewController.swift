@@ -143,7 +143,7 @@ extension PartnerDetailViewController: PartnerDetailInfoCellDelegate {
             let buttonAccept = MJAlertButtonType(title: "Yes".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight_70, cornerRadius: -1)
             let buttonCancel = MJAlertButtonType(title: "No".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
             
-            customAlert.configureAlert(alertTitle: "partner_pop_unfollow_title".localized, message: "partner_pop_unfollow_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true , parentVC: self.navigationController)
+            customAlert.configureAlert(alertTitle: "partner_pop_unfollow_title".localized, message: "partner_pop_unfollow_message".localized, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
             
             customAlert.alertTagName = .None
             customAlert.delegate = self

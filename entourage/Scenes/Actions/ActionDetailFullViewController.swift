@@ -223,7 +223,7 @@ extension ActionDetailFullViewController: GroupDetailDelegate {
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
         
         let _title = isContrib ? "report_contrib_title".localized : "report_solicitation_title".localized
-        alertVC.configureAlert(alertTitle: _title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true, parentVC: self)
+        alertVC.configureAlert(alertTitle: _title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
             alertVC.show()

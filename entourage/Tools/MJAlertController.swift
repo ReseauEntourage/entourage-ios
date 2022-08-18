@@ -45,7 +45,8 @@ class MJAlertController: UIViewController {
     var mainviewRadius:CGFloat = 35
     var isButtonCloseHidden = false
     
-    private var parentVC:UIViewController? = nil
+    private var window:UIWindow? = nil
+
     
     init() {
         super.init(nibName: "MJAlertController", bundle: Bundle(for: MJAlertController.self))
@@ -68,22 +69,25 @@ class MJAlertController: UIViewController {
         }
     }
     
-    func show() {
-        if let parentVC = parentVC {
-            parentVC.present(self, animated: true, completion: nil)
-            return
-        }
-        
-        if #available(iOS 13, *) {
-            UIApplication.shared.windows.first?.rootViewController?.present(self, animated: true, completion: nil)
-        } else {
-            UIApplication.shared.keyWindow?.rootViewController!.present(self, animated: true, completion: nil)
-        }
+    private func revertWindow() {
+        window?.resignKey()
+        window?.isHidden = true
+        window?.removeFromSuperview()
+        window?.windowLevel = UIWindow.Level.alert - 1
+        window?.setNeedsLayout()
     }
     
-    func configureAlert(alertTitle:String?, message:String?,buttonrightType:MJAlertButtonType,buttonLeftType:MJAlertButtonType?,titleStyle:MJTextFontColorStyle? = nil, messageStyle:MJTextFontColorStyle? = nil, mainviewBGColor:UIColor? = nil, mainviewRadius:CGFloat? = nil, isButtonCloseHidden:Bool? = true, parentVC:UIViewController? = nil) {
+    func show() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = UIViewController()
         
-        self.parentVC = parentVC
+        window?.windowLevel = UIWindow.Level.alert + 1
+        window?.makeKeyAndVisible()
+
+        window?.rootViewController?.present(self, animated: true, completion: nil)
+    }
+    
+    func configureAlert(alertTitle:String?, message:String?,buttonrightType:MJAlertButtonType,buttonLeftType:MJAlertButtonType?,titleStyle:MJTextFontColorStyle? = nil, messageStyle:MJTextFontColorStyle? = nil, mainviewBGColor:UIColor? = nil, mainviewRadius:CGFloat? = nil, isButtonCloseHidden:Bool? = true) {
         
         self.titleStyle = titleStyle ?? self.titleStyle
         self.messageStyle = messageStyle ?? self.messageStyle
@@ -102,9 +106,7 @@ class MJAlertController: UIViewController {
         setupAlert()
     }
     
-    func configurePopWithChoice(alertTitle:String?,choice1:String,choice2:String,buttonrightType:MJAlertButtonType,buttonLeftType:MJAlertButtonType?,titleStyle:MJTextFontColorStyle? = nil,choiceStyle:MJTextFontColorStyle? = nil, mainviewBGColor:UIColor? = nil, mainviewRadius:CGFloat? = nil, parentVC:UIViewController? = nil) {
-        
-        self.parentVC = parentVC
+    func configurePopWithChoice(alertTitle:String?,choice1:String,choice2:String,buttonrightType:MJAlertButtonType,buttonLeftType:MJAlertButtonType?,titleStyle:MJTextFontColorStyle? = nil,choiceStyle:MJTextFontColorStyle? = nil, mainviewBGColor:UIColor? = nil, mainviewRadius:CGFloat? = nil) {
         
         self.titleStyle = titleStyle ?? self.titleStyle
         self.choiceStyle = choiceStyle ?? self.choiceStyle
@@ -195,14 +197,17 @@ class MJAlertController: UIViewController {
     @IBAction func action_left_button(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         delegate?.validateLeftButton(alertTag:alertTagName)
+        revertWindow()
     }
     @IBAction func action_right_button(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         delegate?.validateRightButton(alertTag:alertTagName)
+        revertWindow()
     }
     @IBAction func action_close_button(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         delegate?.closePressed(alertTag:alertTagName)
+        revertWindow()
     }
     
     @IBAction func action_select_choice(_ sender: UIButton) {
