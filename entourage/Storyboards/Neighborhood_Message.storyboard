@@ -480,7 +480,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Oo-Yg-gJN">
-                                        <rect key="frame" x="0.0" y="96" width="414" height="134"/>
+                                        <rect key="frame" x="0.0" y="96" width="414" height="194"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="252" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="752" text="Rédiger un descriptif" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QK7-wL-hNt">
                                                 <rect key="frame" x="28" y="0.0" width="152" height="19"/>
@@ -495,21 +495,25 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="755" verticalCompressionResistancePriority="755" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QgK-R3-p3Y" customClass="MJTextViewPlaceholder" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="28" y="49" width="358" height="80"/>
+                                                <rect key="frame" x="28" y="49" width="358" height="140"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="ghr-O1-0JN"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="140" id="ghr-O1-0JN"/>
                                                     <constraint firstAttribute="height" priority="250" constant="80" id="mbc-SR-LYA"/>
                                                 </constraints>
                                                 <string key="text">L1
 L2
 L3
-L4</string>
+L4
+L5
+L6
+L7
+L8</string>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <view contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="FKc-J6-AD5">
-                                                <rect key="frame" x="28" y="133" width="358" height="1"/>
+                                                <rect key="frame" x="28" y="193" width="358" height="1"/>
                                                 <color key="backgroundColor" name="orange_light_a50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="5gz-6e-2aj"/>
@@ -533,7 +537,7 @@ L4</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8I-Yq-J1N">
-                                        <rect key="frame" x="0.0" y="260" width="414" height="211"/>
+                                        <rect key="frame" x="0.0" y="320" width="414" height="211"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="252" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="752" text="Rédiger un descriptif" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8d-QZ-h4N">
                                                 <rect key="frame" x="28" y="0.0" width="152" height="19"/>
@@ -590,7 +594,7 @@ L4</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Wm-bs-FdB">
-                                        <rect key="frame" x="137" y="504.5" width="140" height="44"/>
+                                        <rect key="frame" x="137" y="564.5" width="140" height="44"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="754" image="ic_send_white" translatesAutoresizingMaskIntoConstraints="NO" id="eTx-sf-APK">
                                                 <rect key="frame" x="98" y="11" width="22" height="22"/>
@@ -633,7 +637,7 @@ L4</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CuG-Ja-TKW">
-                                        <rect key="frame" x="99.5" y="471" width="215.5" height="21.5"/>
+                                        <rect key="frame" x="99.5" y="531" width="215.5" height="21.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Erreur de publication, veuillez réessayer " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7A-Ht-Yix">
                                                 <rect key="frame" x="17" y="3" width="198.5" height="15.5"/>
