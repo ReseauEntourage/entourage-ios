@@ -87,7 +87,7 @@ class AddDescriptionTableViewCell: UITableViewCell {
         
         self.showError = showError
         
-        ui_tv_count.text = "0/\(maxCharsLimit)"
+        ui_tv_count.text = "\(_about.count)/\(maxCharsLimit)"
         
         if let titleAttributted = titleAttributted {
             ui_title.attributedText = titleAttributted
