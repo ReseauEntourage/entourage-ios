@@ -128,7 +128,7 @@ class EventDetailMessagesViewController: UIViewController {
     func getMessages() {
         EventService.getCommentsFor(eventId: eventId, parentPostId: parentCommentId) { messages, error in
             if let messages = messages {
-                self.messages = messages.reversed() //TODO: a supprimer après retour "normal" du WS
+                self.messages = messages
                 self.ui_view_empty.isHidden = self.messages.count > 0
                 
                 self.ui_tableview.reloadData()

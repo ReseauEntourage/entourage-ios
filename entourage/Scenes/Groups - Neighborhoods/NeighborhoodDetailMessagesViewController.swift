@@ -130,7 +130,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         NeighborhoodService.getCommentsFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId) { messages, error in
             Logger.print("***** Messages ? \(messages) - Error: \(error?.message)")
             if let messages = messages {
-                self.messages = messages.reversed() //TODO: a supprimer après retour "normal" du WS
+                self.messages = messages
                 self.ui_view_empty.isHidden = self.messages.count > 0
                 
                 self.ui_tableview.reloadData()
