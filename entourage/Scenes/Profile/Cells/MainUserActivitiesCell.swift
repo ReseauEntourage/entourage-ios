@@ -46,14 +46,14 @@ class MainUserActivitiesCell: UITableViewCell {
         ui_title_other_user?.text = "detail_user_his_activity".localized
         
         ui_outings_title.text = "mainUserTitleOutings".localized
-        textColor(label: ui_outings_title, isEmpty: true, isCount: false)
+        textColor(label: ui_outings_title, isCount: false)
         
         ui_groups_title.text = "mainUserTitleGroups".localized
-        textColor(label: ui_groups_title, isEmpty: true, isCount: false)
+        textColor(label: ui_groups_title, isCount: false)
         ui_groups_count.text = "0"
-        textColor(label: ui_groups_count, isEmpty: true, isCount: true)
+        textColor(label: ui_groups_count, isCount: true)
         ui_outings_count.text = "0"
-        textColor(label: ui_outings_count, isEmpty: true, isCount: true)
+        textColor(label: ui_outings_count, isCount: true)
     }
     
     func populateCell(isMe:Bool ,neighborhoodsCount:Int,outingsCount:Int,myDate:Date) {
@@ -69,21 +69,21 @@ class MainUserActivitiesCell: UITableViewCell {
         ui_groups_title.text = neighborhoodsCount <= 1 ? "mainUserTitleGroup".localized : "mainUserTitleGroups".localized
         
         if neighborhoodsCount == 0 {
-            textColor(label: ui_groups_title, isEmpty: true, isCount: false)
-            textColor(label: ui_groups_count, isEmpty: true, isCount: true)
+            textColor(label: ui_groups_title, isCount: false)
+            textColor(label: ui_groups_count, isCount: true)
         }
         else {
-            textColor(label: ui_groups_title, isEmpty: false, isCount: false)
-            textColor(label: ui_groups_count, isEmpty: false, isCount: true)
+            textColor(label: ui_groups_title,  isCount: false)
+            textColor(label: ui_groups_count,  isCount: true)
         }
         
         if outingsCount == 0 {
-            textColor(label: ui_outings_title, isEmpty: true, isCount: false)
-            textColor(label: ui_outings_count, isEmpty: true, isCount: true)
+            textColor(label: ui_outings_title, isCount: false)
+            textColor(label: ui_outings_count, isCount: true)
         }
         else {
-            textColor(label: ui_outings_title, isEmpty: false, isCount: false)
-            textColor(label: ui_outings_count, isEmpty: false, isCount: true)
+            textColor(label: ui_outings_title, isCount: false)
+            textColor(label: ui_outings_count, isCount: true)
         }
         
         ui_groups_count.text = "\(neighborhoodsCount)"
@@ -106,13 +106,9 @@ class MainUserActivitiesCell: UITableViewCell {
         customView.layer.shouldRasterize = true
     }
     
-    private func textColor(label:UILabel, isEmpty:Bool,isCount:Bool) {
-        if isEmpty {
-            label.textColor = .appOrangeLight
-        }
-        else {
-            label.textColor = .black
-        }
+    private func textColor(label:UILabel,isCount:Bool) {
+
+        label.textColor = .black
         
         if isCount {
             label.font = ApplicationTheme.getFontQuickSandBold(size: 16)
