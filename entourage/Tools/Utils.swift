@@ -208,6 +208,33 @@ import UIKit
         
         return dateString
     }
+    
+    static func formatMessageListDateName(date:Date?) -> String {
+        var dateString = "-"
+        guard let date = date else {
+            return dateString
+        }
+        
+        if Calendar.current.isDateInYesterday(date) {
+            return "Yesterday".localized
+        }
+        
+        if Calendar.current.isDateInToday(date) {
+            let dateFormat = DateFormatter()
+            dateFormat.locale = Locale.getPreferredLocale()
+            dateFormat.dateFormat = "HH'h'mm"
+            dateString =  dateFormat.string(from: date)
+            
+            return dateString
+        }
+        
+        let dateFormat = DateFormatter()
+        dateFormat.locale = Locale.getPreferredLocale()
+        dateFormat.dateFormat = "dd MMM"
+        dateString =  dateFormat.string(from: date)
+        
+        return dateString
+    }
 }
 
 class ImageLoaderSwift {

@@ -46,4 +46,6 @@ struct StoryboardName {
     static let profileParams = "ProfileParams"
     static let userDetail = "UserDetail"
     
+    static let messages = "Messages"
+    
 }

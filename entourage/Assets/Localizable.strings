@@ -1070,3 +1070,8 @@
 
 "edit_edit_contrib_title" = "Modifier\nla contribution";
 "edit_edit_solicitation_title" = "Modifier\nla demande";
+
+/*
+ Messages
+ */
+"Messages_title" = "Messages";

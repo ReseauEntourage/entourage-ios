@@ -156,7 +156,7 @@ class MainTabbarViewController: UITabBarController {
         actionsVC.tabBarItem.tag = 1
         
         
-        let  _msgVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "home_messanger_vc")
+        let  _msgVC = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "home_messages_vc")
         messagesVC = UINavigationController.init(rootViewController: _msgVC)
         messagesVC.isNavigationBarHidden = true
         messagesVC.tabBarItem.title = "tabbar_messages".localized
@@ -264,12 +264,17 @@ extension MainTabbarViewController: UITabBarControllerDelegate {
         currentItemSelected = item.tag
         boldSelectedItem()
         
-        //TO force reload neighborhoods
+        //To force reload messages
+        if item.tag == 2 {
+            NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdate), object: nil)
+        }
+        
+        //To force reload actions
         if item.tag == 1 {
             NotificationCenter.default.post(name: NSNotification.Name(kNotificationActionsUpdate), object: nil)
         }
         
-        //TO force reload neighborhoods
+        //To force reload neighborhoods
         if item.tag == 3 {
             NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
         }
