@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IHProgressHUD
 
 class NeighBorhoodEventListUsersViewController: BasePopViewController {
     
@@ -193,12 +194,40 @@ extension NeighBorhoodEventListUsersViewController: NeighborhoodHomeSearchDelega
 //MARK: - NeighborhoodUserCellDelegate -
 extension NeighBorhoodEventListUsersViewController:NeighborhoodUserCellDelegate {
     func showSendMessageToUserForPosition(_ position: Int) {
-        //TODO: a faire
-        Logger.print("***** show message from user pos : \(position)")
+        
         if !isEvent {
             AnalyticsLoggerManager.logEvent(name: Action_GroupMember_WriteTo1Member)
         }
-        showWIP(parentVC: self.navigationController)
+        
+        let user = isSearch ? usersSearch[position] : users[position]
+        
+        IHProgressHUD.show()
+        MessagingService.createOrGetConversation(userId: "\(user.sid)") { conversation, error in
+            IHProgressHUD.dismiss()
+            
+            if let conversation = conversation {
+                self.showConversation(conversation: conversation, username: user.displayName)
+                return
+            }
+            var errorMsg = "message_error_create_conversation".localized
+            if let error = error {
+                errorMsg = error.message
+            }
+            IHProgressHUD.showError(withStatus: errorMsg)
+        }
+    }
+    
+    private func showConversation(conversation:Conversation?, username:String) {
+        DispatchQueue.main.async {
+            if let convId = conversation?.uid {
+                let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                    vc.setupFromOtherVC(conversationId: convId, title: username, isOneToOne: true, conversation: conversation)
+
+                    self.present(vc, animated: true)
+                }
+            }
+        }
     }
 }
 

@@ -27,4 +27,9 @@ class EventListSectionCell: UITableViewCell {
         ui_title.text = title
     }
     
+    func populateMessageSectionCell(title:String) {
+        ui_title.setupFontAndColor(style: ApplicationTheme.getFontChampDefault())
+        ui_title.text = title
+    }
+    
 }

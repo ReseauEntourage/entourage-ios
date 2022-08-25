@@ -1,5 +1,5 @@
 //
-//  Messaging.swift
+//  Conversation.swift
 //  entourage
 //
 //  Created by Jerome on 23/08/2022.
@@ -8,17 +8,24 @@
 import Foundation
 
 
-struct MessagingMessage:Codable {
+struct Conversation:Codable {
     var uid:Int = 0
     var type:String? = nil
     var title:String? = nil
     private var lastMessage:LastMessage? = nil
     var numberUnreadMessages:Int? = 0
     var section:String? = nil
-    var user:MemberMessaging? = nil
+    var user:MemberConversation? = nil
+    
+    var messages:[PostMessage]? = nil
+    private var hasPersonalPost:Bool? = nil
     
     func isOneToOne() -> Bool {
         return type == "private"
+    }
+    
+    func hasToShowFirstMessage() -> Bool {
+        return numberUnreadMessages ?? 0 > 0 && !(hasPersonalPost ?? true)
     }
     
     func getPictoTypeFromSection() -> String {
@@ -99,7 +106,8 @@ struct MessagingMessage:Codable {
         case numberUnreadMessages = "number_of_unread_messages"
         case section
         case user
-        
+        case messages = "chat_messages"
+        case hasPersonalPost = "has_personal_post"
     }
 }
 
@@ -112,7 +120,7 @@ struct LastMessage:Codable {
     }
 }
 
-struct MemberMessaging:Codable {
+struct MemberConversation:Codable {
     var uid:Int
     var displayName:String?
     var imageUrl:String?

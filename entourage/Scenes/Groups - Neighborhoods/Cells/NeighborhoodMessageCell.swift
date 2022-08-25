@@ -16,7 +16,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     @IBOutlet weak var ui_date: UILabel!
     @IBOutlet weak var ui_username: UILabel!
     
-    @IBOutlet weak var ui_bt_signal_me: UIButton!
+    @IBOutlet weak var ui_bt_signal_me: UIButton?
     
     @IBOutlet weak var ui_lb_error: UILabel!
     @IBOutlet weak var ui_view_error: UIView!
@@ -86,6 +86,62 @@ class NeighborhoodMessageCell: UITableViewCell {
             }
             else {
                 ui_username.text = "- !"
+            }
+        }
+    }
+    
+    func populateCellConversation(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, isOne2One:Bool, delegate:MessageCellSignalDelegate) {
+        messageId = message.uid
+        userId = message.user?.sid
+        
+        self.delegate = delegate
+        self.messageForRetry = message.content ?? ""
+        self.positionForRetry = positionRetry
+        
+        ui_date.textColor = .appOrangeLight
+        ui_username.textColor = .appOrangeLight
+        
+        if isMe {
+            ui_view_message.backgroundColor = .appOrangeLight_50
+        }
+        else {
+            ui_view_message.backgroundColor = .appBeige
+        }
+        
+        if let _url = message.user?.avatarURL, let url = URL(string: _url) {
+            ui_image_user.sd_setImage(with: url, placeholderImage: UIImage.init(named: "placeholder_user"))
+        }
+        else {
+            ui_image_user.image = UIImage.init(named: "placeholder_user")
+        }
+        
+        ui_message.text = message.content
+        
+        if isRetry {
+            ui_view_error?.isHidden = false
+            ui_username.text = ""
+            ui_date.text = ""
+        }
+        else {
+            ui_view_error?.isHidden = true
+            if isOne2One {
+                ui_date.text = "\(message.createdTimeFormatted)"
+                ui_username.text = " "
+            }
+            else {
+                if isMe {
+                    ui_date.text = "\(message.createdTimeFormatted)"
+                    ui_username.text = ""
+                }
+                else {
+                    ui_date.text = " à \(message.createdTimeFormatted)"
+                    if let username = message.user?.displayName {
+                        ui_username.text = "\(username)"
+                    }
+                    else {
+                        ui_username.text = "- !"
+                    }
+                }
             }
         }
     }

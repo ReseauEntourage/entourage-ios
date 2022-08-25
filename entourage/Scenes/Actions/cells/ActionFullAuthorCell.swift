@@ -41,7 +41,17 @@ class ActionFullAuthorCell: UITableViewCell {
         }
         
         ui_title.text = String.init(format: "action_created_at".localized, action.getCreatedDate(capitalizeFirst: false))
-        ui_subtitle.text = String.init(format: "action_member_since".localized, "xxx") //TODO: mettre la date
+        if let date = action.author?.creationDate {
+            let dateFormat = DateFormatter()
+            dateFormat.locale = Locale.getPreferredLocale()
+            dateFormat.dateFormat = "MM/YYYY"
+            let dateFormated = dateFormat.string(from: date)
+            ui_subtitle.text = String.init(format: "action_member_since".localized, dateFormated)
+        }
+        else {
+            ui_subtitle.text = String.init(format: "action_member_since".localized, "")
+        }
+        
     }
 
     @IBAction func action_show_charte(_ sender: Any) {

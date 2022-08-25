@@ -399,11 +399,19 @@ struct EventAuthor:Codable {
     var avatarURL:String? = nil
     var partner:Partner? = nil
     
+    private var createdAt:String? = nil
+    var creationDate:Date {
+        get {
+            return Utils.getDateFromWSDateString(createdAt)
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case displayName = "display_name"
         case avatarURL = "avatar_url"
         case partner
+        case createdAt = "created_at"
     }
 }
 

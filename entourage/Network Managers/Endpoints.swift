@@ -98,8 +98,10 @@ let kAPIReportContrib = "contributions/%@/report?token=%@"
 let kAPIReportSolicitation = "solicitations/%@/report?token=%@"
 
 //Messaging
-let kAPIMessagingGetAllMessages = "conversations?token=%@&page=%d&per=%d"
-
+let kAPIConversationGetAllConversations = "conversations?token=%@&page=%d&per=%d"
+let kAPIGetConversationDetailMessages = "conversations/%@/chat_messages?token=%@&page=%d&per=%d"
+let kAPIPostConversationMessage = "conversations/%@/chat_messages?token=%@"
+let kAPIConversationPostCreateConversation = "conversations?token=%@"
 
 //WebLink
 let emailContact = "contact@entourage.social"

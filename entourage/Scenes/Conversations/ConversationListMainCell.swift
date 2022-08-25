@@ -1,5 +1,5 @@
 //
-//  MessageListMainCell.swift
+//  ConversationListMainCell.swift
 //  entourage
 //
 //  Created by Jerome on 22/08/2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MessageListMainCell: UITableViewCell {
+class ConversationListMainCell: UITableViewCell {
     
     
     @IBOutlet weak var ui_image: UIImageView!
@@ -22,7 +22,7 @@ class MessageListMainCell: UITableViewCell {
     
     @IBOutlet weak var ui_nb_unread: UILabel!
     var position = 0
-    weak var delegate: MessageListMainCellDelegate? = nil
+    weak var delegate: ConversationListMainCellDelegate? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,7 +42,7 @@ class MessageListMainCell: UITableViewCell {
         ui_picto_cat.isHidden = true
     }
     
-    func populateCell(message:MessagingMessage, delegate:MessageListMainCellDelegate, position:Int) {
+    func populateCell(message:Conversation, delegate:ConversationListMainCellDelegate, position:Int) {
         ui_username.text = message.title
         ui_role.text = message.getRolesWithPartnerFormated()
         ui_detail_message.text = message.getLastMessage
@@ -92,7 +92,7 @@ class MessageListMainCell: UITableViewCell {
 }
 
 //MARK: - Protocol  -
-protocol MessageListMainCellDelegate:AnyObject {
+protocol ConversationListMainCellDelegate:AnyObject {
     func showUserDetail(_ position:Int)
 }
 

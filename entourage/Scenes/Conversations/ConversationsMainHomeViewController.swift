@@ -1,5 +1,5 @@
 //
-//  MessagesMainHomeViewController.swift
+//  ConversationsMainHomeViewController.swift
 //  entourage
 //
 //  Created by Jerome on 19/08/2022.
@@ -8,7 +8,7 @@
 import UIKit
 import IHProgressHUD
 
-class MessagesMainHomeViewController: UIViewController {
+class ConversationsMainHomeViewController: UIViewController {
     
     @IBOutlet weak var ui_image_inside_top_constraint: NSLayoutConstraint!
     @IBOutlet weak var ui_image_constraint_height: NSLayoutConstraint!
@@ -49,7 +49,7 @@ class MessagesMainHomeViewController: UIViewController {
     let nbOfItemsBeforePagingReload = 10 // Arbitrary nb of items from the end of the list to send new call
     var isLoading = false
     
-    var messages = [MessagingMessage]()
+    var messages = [Conversation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,7 +129,7 @@ class MessagesMainHomeViewController: UIViewController {
         
         self.isLoading = true
         
-        MessagingService.getAllMessages(currentPage: currentPage, per: numberOfItemsForWS) { messages, error in
+        MessagingService.getAllConversations(currentPage: currentPage, per: numberOfItemsForWS) { messages, error in
             IHProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             if let messages = messages {
@@ -155,14 +155,14 @@ class MessagesMainHomeViewController: UIViewController {
 }
 
 //MARK: - Tableview datasource / delegate -
-extension MessagesMainHomeViewController: UITableViewDataSource, UITableViewDelegate {
+extension ConversationsMainHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! MessageListMainCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! ConversationListMainCell
         
         let message = messages[indexPath.row]
         
@@ -172,8 +172,10 @@ extension MessagesMainHomeViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //TODO: à faire
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+            let conv = messages[indexPath.row]
+            vc.setupFromOtherVC(conversationId: conv.uid, title: conv.title, isOneToOne: conv.isOneToOne(), conversation: conv, delegate: self,selectedIndexPath: indexPath)
+            
             self.present(vc, animated: true)
         }
     }
@@ -228,7 +230,8 @@ extension MessagesMainHomeViewController: UITableViewDataSource, UITableViewDele
     }
 }
 
-extension MessagesMainHomeViewController: MessageListMainCellDelegate {
+//MARK: - ConversationListMainCellDelegate -
+extension ConversationsMainHomeViewController: ConversationListMainCellDelegate {
     func showUserDetail(_ position: Int) {
         //TODO: not use actually ;)
         
@@ -244,5 +247,17 @@ extension MessagesMainHomeViewController: MessageListMainCellDelegate {
                 self.present(navVC, animated: true)
             }
         }
+    }
+}
+
+//MARK: - UpdateUnreadCountDelegate -
+extension ConversationsMainHomeViewController:UpdateUnreadCountDelegate {
+    func updateUnreadCount(conversationId: Int, currentIndexPathSelected: IndexPath?) {
+        guard let currentIndexPathSelected = currentIndexPathSelected else {
+            return
+        }
+        
+        messages[currentIndexPathSelected.row].numberUnreadMessages = 0
+        self.ui_tableview.reloadRows(at: [currentIndexPathSelected], with: .none)
     }
 }

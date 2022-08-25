@@ -30,6 +30,12 @@ struct PostMessage:Codable {
         }
     }
     
+    var createdTimeFormatted:String {
+        get {
+            return Utils.formatEventTime(date:createdDate)
+        }
+    }
+    
     var isPostImage:Bool {
         get {
             return messageImageUrl != nil
@@ -63,8 +69,43 @@ struct PostMessage:Codable {
         case messageImageUrl = "image_url"
         case read
     }
+    
+    //Use to sort messages in days Dicts
+    static func getArrayOfDateSorted(messages:[PostMessage], isAscendant:Bool) -> [Dictionary<DayMonthYearKey, [PostMessage]>.Element] {
+        let dict = Dictionary(grouping: messages.sorted(by: {$0.createdDate < $1.createdDate})) { (message) -> DayMonthYearKey in
+            
+            let date = Calendar.current.dateComponents([.year, .month,.day], from: (message.createdDate))
+            
+            guard let month = date.month, let year = date.year, let day = date.day else { return DayMonthYearKey(dayId:0, monthId: 0, dateString: "-")}
+            
+           
+            
+            let newCalendar = Calendar(identifier: .gregorian)
+            let comp = DateComponents(year: year, month: month, day: day, hour: 0, minute: 0, second: 0)
+            
+            let newDate = newCalendar.date(from: comp)!
+            
+            let df = DateFormatter()
+            df.locale = Locale.getPreferredLocale()
+            let monthLiterral = df.standaloneMonthSymbols[month - 1]
+            let dayLitteral:String = message.createdDate.dayNameOfWeek()?.localizedCapitalized ?? "-"
+            
+            return DayMonthYearKey(dayId:day, monthId: month, date:newDate, dateString: "\(dayLitteral) \(day) \(monthLiterral) \(year)")
+        }
+        
+        if isAscendant {
+            return dict.sorted { $0.key.date ?? Date() < $1.key.date ?? Date() }
+        }
+        return dict.sorted { $0.key.date ?? Date() > $1.key.date ?? Date() }
+    }
 }
 
+struct DayMonthYearKey:Hashable {
+    var dayId:Int = 0
+    var monthId:Int = 0
+    var date:Date? = nil
+    var dateString:String = ""
+}
 
 //MARK: -MemberLight use on feed -> Event/neighborhood -
 struct MemberLight:Codable {

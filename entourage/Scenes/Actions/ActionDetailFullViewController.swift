@@ -155,7 +155,35 @@ class ActionDetailFullViewController: UIViewController {
     }
     
     @IBAction func action_contact(_ sender: Any) {
-        showWIP(parentVC: self)
+        guard let user = action?.author else {return}
+        
+        IHProgressHUD.show()
+        MessagingService.createOrGetConversation(userId: "\(user.uid)") { conversation, error in
+            IHProgressHUD.dismiss()
+            
+            if let conversation = conversation {
+                self.showConversation(conversation: conversation, username: user.displayName)
+                return
+            }
+            var errorMsg = "message_error_create_conversation".localized
+            if let error = error {
+                errorMsg = error.message
+            }
+            IHProgressHUD.showError(withStatus: errorMsg)
+        }
+    }
+    
+    private func showConversation(conversation:Conversation?, username:String) {
+        DispatchQueue.main.async {
+            if let convId = conversation?.uid {
+                let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                    vc.setupFromOtherVC(conversationId: convId, title: username, isOneToOne: true, conversation: conversation)
+
+                    self.present(vc, animated: true)
+                }
+            }
+        }
     }
     
     @IBAction func action_signal(_ sender: Any) {
@@ -172,6 +200,7 @@ class ActionDetailFullViewController: UIViewController {
         homeVC.configureCongrat( parentVC: self.navigationController, isContrib: isContrib, actionId: actionId, delegate: self)
         homeVC.show()
     }
+    
 }
 
 //MARK: - Tableview Datasource/delegate -

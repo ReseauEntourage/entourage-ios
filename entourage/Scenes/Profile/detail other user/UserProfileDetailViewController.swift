@@ -152,9 +152,33 @@ extension UserProfileDetailViewController: UITableViewDataSource,UITableViewDele
 //MARK: - MainUserProfileTopCellDelegate -
 extension UserProfileDetailViewController: MainUserProfileTopCellDelegate {
     func sendMessage() {
-        //TODO: send message à faire
-        
-        showWIP(parentVC: self.navigationController)
+        guard let currentUserId = currentUserId else {return}
+        IHProgressHUD.show()
+        MessagingService.createOrGetConversation(userId: currentUserId) { conversation, error in
+            IHProgressHUD.dismiss()
+            
+            if let conversation = conversation {
+                self.showConversation(conversation: conversation)
+                return
+            }
+            var errorMsg = "message_error_create_conversation".localized
+            if let error = error {
+                errorMsg = error.message
+            }
+            IHProgressHUD.showError(withStatus: errorMsg)
+        }
+    }
+    
+    private func showConversation(conversation:Conversation?) {
+        DispatchQueue.main.async {
+            if let convId = conversation?.uid {
+                let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+                    vc.setupFromOtherVC(conversationId: convId, title: self.currentUser?.displayName, isOneToOne: true, conversation: conversation)
+                    self.present(vc, animated: true)
+                }
+            }
+        }
     }
     
     func showPartner() {

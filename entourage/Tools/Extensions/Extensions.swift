@@ -47,6 +47,12 @@ extension Date {
         
         return calendar.date(from: components)
     }
+    
+    func dayNameOfWeek() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: self)
+    }
 }
 
 //MARK: - Locale -

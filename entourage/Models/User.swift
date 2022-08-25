@@ -27,7 +27,7 @@ struct User: Codable {
     var about:String? = nil
     var organization:Organization? = nil
     var partner:Partner? = nil
-    var conversation:Conversation? = nil
+   // var conversation:Conversation? = nil
     var roles:[String]? = nil
     var memberships:[String]? = nil
     
@@ -61,7 +61,7 @@ struct User: Codable {
         
         case organization
         case partner
-        case conversation
+        //case conversation
         case roles
         case memberships
         case interests
@@ -249,10 +249,6 @@ struct Organization:Codable {
     var phone:String
     var address:String
     var logo_url:String
-}
-
-//MARK: - Conversation - //TODO: à faire dans le futur ;)
-struct Conversation:Codable {
 }
 
 //MARK: - UserPermissions -

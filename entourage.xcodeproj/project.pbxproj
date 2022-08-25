@@ -88,7 +88,7 @@
 		024273EC283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024273EB283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift */; };
 		024273EE283291C2009A4EB8 /* NeighborhoodMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024273ED283291C2009A4EB8 /* NeighborhoodMessageCell.swift */; };
 		0243DCC828AF832D00273679 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0243DCC728AF832D00273679 /* Messages.storyboard */; };
-		0243DCCB28AF8D3300273679 /* MessagesMainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243DCCA28AF8D3300273679 /* MessagesMainHomeViewController.swift */; };
+		0243DCCB28AF8D3300273679 /* ConversationsMainHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243DCCA28AF8D3300273679 /* ConversationsMainHomeViewController.swift */; };
 		0243DCCD28AF8DEF00273679 /* Messages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0243DCCC28AF8DEF00273679 /* Messages.xcassets */; };
 		0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */; };
 		0243E71A2806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */; };
@@ -126,8 +126,9 @@
 		025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0C27DBB18D00783E8D /* entourage-Info.plist */; };
 		0262997927905FB700D84A6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262997827905FB700D84A6A /* Constants.swift */; };
 		0262997B2790815000D84A6A /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262997A2790815000D84A6A /* APIKeys.swift */; };
-		0264C5D628B4E51B001EA654 /* Messaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0264C5D528B4E51B001EA654 /* Messaging.swift */; };
+		0264C5D628B4E51B001EA654 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0264C5D528B4E51B001EA654 /* Conversation.swift */; };
 		0264C5D828B4FEC1001EA654 /* MessagingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0264C5D728B4FEC1001EA654 /* MessagingService.swift */; };
+		0264C5DA28B5154E001EA654 /* ConversationDetailMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0264C5D928B5154E001EA654 /* ConversationDetailMessagesViewController.swift */; };
 		0268194C278DF4A800A98A4A /* Onboarding_V2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0268194B278DF4A800A98A4A /* Onboarding_V2.storyboard */; };
 		02681950278DF6BD00A98A4A /* OTProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268194F278DF6BD00A98A4A /* OTProgressBar.swift */; };
 		02681952278DF6CA00A98A4A /* OTCustomTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02681951278DF6CA00A98A4A /* OTCustomTextfield.swift */; };
@@ -150,7 +151,7 @@
 		0268C253285A2B1400294055 /* FloatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268C24C285A2B1400294055 /* FloatyViewController.swift */; };
 		0268C254285A2B1400294055 /* Floaty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268C24D285A2B1400294055 /* Floaty.swift */; };
 		0268C255285A2B1400294055 /* FloatyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268C24E285A2B1400294055 /* FloatyDelegate.swift */; };
-		026DAC4F28B37D67007517F6 /* MessageListMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026DAC4E28B37D67007517F6 /* MessageListMainCell.swift */; };
+		026DAC4F28B37D67007517F6 /* ConversationListMainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026DAC4E28B37D67007517F6 /* ConversationListMainCell.swift */; };
 		026E54B22837F96200BE7993 /* MJShadowBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E54B12837F96200BE7993 /* MJShadowBottomView.swift */; };
 		02728DDB27F19A1000512DC0 /* PartnerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */; };
 		02728DDD27F19A3800512DC0 /* PartnerDetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */; };
@@ -451,7 +452,7 @@
 		024273EB283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodDetailMessagesViewController.swift; sourceTree = "<group>"; };
 		024273ED283291C2009A4EB8 /* NeighborhoodMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodMessageCell.swift; sourceTree = "<group>"; };
 		0243DCC728AF832D00273679 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
-		0243DCCA28AF8D3300273679 /* MessagesMainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesMainHomeViewController.swift; sourceTree = "<group>"; };
+		0243DCCA28AF8D3300273679 /* ConversationsMainHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsMainHomeViewController.swift; sourceTree = "<group>"; };
 		0243DCCC28AF8DEF00273679 /* Messages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Messages.xcassets; sourceTree = "<group>"; };
 		0243E7172806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodChoosePictureViewController.swift; sourceTree = "<group>"; };
 		0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodChoosePhotoCell.swift; sourceTree = "<group>"; };
@@ -491,8 +492,9 @@
 		025FFE0C27DBB18D00783E8D /* entourage-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "entourage-Info.plist"; sourceTree = "<group>"; };
 		0262997827905FB700D84A6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0262997A2790815000D84A6A /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
-		0264C5D528B4E51B001EA654 /* Messaging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messaging.swift; sourceTree = "<group>"; };
+		0264C5D528B4E51B001EA654 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		0264C5D728B4FEC1001EA654 /* MessagingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingService.swift; sourceTree = "<group>"; };
+		0264C5D928B5154E001EA654 /* ConversationDetailMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetailMessagesViewController.swift; sourceTree = "<group>"; };
 		0268194B278DF4A800A98A4A /* Onboarding_V2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding_V2.storyboard; sourceTree = "<group>"; };
 		0268194F278DF6BD00A98A4A /* OTProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTProgressBar.swift; sourceTree = "<group>"; };
 		02681951278DF6CA00A98A4A /* OTCustomTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTCustomTextfield.swift; sourceTree = "<group>"; };
@@ -518,7 +520,7 @@
 		0268C24C285A2B1400294055 /* FloatyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyViewController.swift; sourceTree = "<group>"; };
 		0268C24D285A2B1400294055 /* Floaty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Floaty.swift; sourceTree = "<group>"; };
 		0268C24E285A2B1400294055 /* FloatyDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyDelegate.swift; sourceTree = "<group>"; };
-		026DAC4E28B37D67007517F6 /* MessageListMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListMainCell.swift; sourceTree = "<group>"; };
+		026DAC4E28B37D67007517F6 /* ConversationListMainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListMainCell.swift; sourceTree = "<group>"; };
 		026E54B12837F96200BE7993 /* MJShadowBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJShadowBottomView.swift; sourceTree = "<group>"; };
 		02728DDA27F19A1000512DC0 /* PartnerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerDetailViewController.swift; sourceTree = "<group>"; };
 		02728DDC27F19A3800512DC0 /* PartnerDetailInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerDetailInfoCell.swift; sourceTree = "<group>"; };
@@ -844,7 +846,7 @@
 				02B94C4428521F82006059EF /* PedagogicResource.swift */,
 				02FB543C287D74B800E4B9FA /* GlobalObjects.swift */,
 				02A92C2F28981884000DFF95 /* Action.swift */,
-				0264C5D528B4E51B001EA654 /* Messaging.swift */,
+				0264C5D528B4E51B001EA654 /* Conversation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -907,13 +909,14 @@
 			path = Create;
 			sourceTree = "<group>";
 		};
-		0243DCC928AF8D0800273679 /* Messages */ = {
+		0243DCC928AF8D0800273679 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
-				0243DCCA28AF8D3300273679 /* MessagesMainHomeViewController.swift */,
-				026DAC4E28B37D67007517F6 /* MessageListMainCell.swift */,
+				0243DCCA28AF8D3300273679 /* ConversationsMainHomeViewController.swift */,
+				026DAC4E28B37D67007517F6 /* ConversationListMainCell.swift */,
+				0264C5D928B5154E001EA654 /* ConversationDetailMessagesViewController.swift */,
 			);
-			path = Messages;
+			path = Conversations;
 			sourceTree = "<group>";
 		};
 		025C92C128341429000970D9 /* Detail */ = {
@@ -1127,7 +1130,7 @@
 				02B7921F27F73F34003AFFB9 /* Groups - Neighborhoods */,
 				024131C8286201FB00561FB4 /* Events */,
 				02A92C192897D286000DFF95 /* Actions */,
-				0243DCC928AF8D0800273679 /* Messages */,
+				0243DCC928AF8D0800273679 /* Conversations */,
 				0288A8D327CCD8E1008D7011 /* Profile */,
 				02DB3BBD27A149B5004732C9 /* Partner_detail */,
 				02F527792799995900929431 /* Guide_detail */,
@@ -1852,7 +1855,7 @@
 				0262997927905FB700D84A6A /* Constants.swift in Sources */,
 				0258AFE2282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift in Sources */,
 				02A1D2242828FEF3004C3A3D /* MJTabbarCustom.swift in Sources */,
-				0243DCCB28AF8D3300273679 /* MessagesMainHomeViewController.swift in Sources */,
+				0243DCCB28AF8D3300273679 /* ConversationsMainHomeViewController.swift in Sources */,
 				028444CA282015A000AFC072 /* NeighborhoodParamsGroupViewController.swift in Sources */,
 				0220580727FB003700531720 /* BasePopViewController.swift in Sources */,
 				0224597A27FF454A00944DE4 /* Extensions_UITextField.swift in Sources */,
@@ -1866,7 +1869,7 @@
 				024131D42862030A00561FB4 /* EventCreatePhase2ViewController.swift in Sources */,
 				02FCC3152812DD9200578407 /* NeighborhoodHomeSearchCell.swift in Sources */,
 				02E069E0279184B3006DB1B6 /* OTOnboardingTypeViewController.swift in Sources */,
-				026DAC4F28B37D67007517F6 /* MessageListMainCell.swift in Sources */,
+				026DAC4F28B37D67007517F6 /* ConversationListMainCell.swift in Sources */,
 				029D253728660C4500147F77 /* MJTimePickerView.swift in Sources */,
 				021E804328916FF500C891DC /* EventEditRecurrencyViewController.swift in Sources */,
 				02B57DA027FC9757005A567B /* PartnerDetailNeedsCell.swift in Sources */,
@@ -1998,6 +2001,7 @@
 				02E0099527E3863D00BB23CA /* MenuItemInfos.swift in Sources */,
 				02C0A0E7278EEC6B00B0C646 /* NetworkManager.swift in Sources */,
 				02846CC027EC921700D85ADA /* SelectTagCell.swift in Sources */,
+				0264C5DA28B5154E001EA654 /* ConversationDetailMessagesViewController.swift in Sources */,
 				02040CF7288E97F600AB1FBB /* EventParamSignalCell.swift in Sources */,
 				02040CF2288E8C2E00AB1FBB /* EventParamsViewController.swift in Sources */,
 				0258E4FB288AAF47000F107B /* ContribUploadPictureService.swift in Sources */,
@@ -2014,7 +2018,7 @@
 				02040CFB288E981800AB1FBB /* EventParamNotifCell.swift in Sources */,
 				02B94C4B28522BA5006059EF /* PedagogicSectionCell.swift in Sources */,
 				02E21929283637E9002A1FCB /* NeighborhoodPostAddViewController.swift in Sources */,
-				0264C5D628B4E51B001EA654 /* Messaging.swift in Sources */,
+				0264C5D628B4E51B001EA654 /* Conversation.swift in Sources */,
 				02E069E2279184B3006DB1B6 /* OTOnboardingSDFNeighbourActivityViewController.swift in Sources */,
 				026819AA278E00A200A98A4A /* Utils.swift in Sources */,
 				02D10D8B2873236500ACC267 /* MJPopupViewController.swift in Sources */,
