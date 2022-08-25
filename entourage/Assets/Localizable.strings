@@ -1028,7 +1028,7 @@
 "action_detail_title_location" = "Localisation";
 "atKm" = "à %@ km de moi";
 "AtKm" = "À %@ km de moi";
-"action_created_at" = "Créée %@ par";
+"action_created_at" = "Créé %@ par";
 "action_member_since" = "Membre depuis %@";
 "action_cancel" = "Annonce supprimée";
 
@@ -1055,8 +1055,8 @@
 
 
 //CGU
-"action_params_cgu_title" = "Le règlement";
-"action_params_cgu_description" = "Règlement d'une action, à lire attentivement.";
+"action_params_cgu_title" = "Charte éthique";
+"action_params_cgu_description" = "";
 "action_CGU_1_title" = "Entraide";
 "action_CGU_1" = "L’application permet de créer de nouvelles rencontres entre voisins et de favoriser des temps d’échanges. Les aides à distance (drive, livraison, bon cadeau, cagnotte…) ne sont pas autorisées.";
 "action_CGU_2_title" = "Contributions & demandes";
