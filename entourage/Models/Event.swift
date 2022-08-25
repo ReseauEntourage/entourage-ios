@@ -548,6 +548,9 @@ struct EventEditing {
             }
             dict["neighborhood_ids"] = _ids
         }
+        else {
+            dict["neighborhood_ids"] = [Int]()
+        }
 
         if let tagOtherMessage = tagOtherMessage {
             dict["other_interest"] = tagOtherMessage
