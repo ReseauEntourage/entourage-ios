@@ -329,6 +329,9 @@
 		02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02E8544D2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib */; };
 		02E854502865C60A0012D941 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8544F2865C60A0012D941 /* EventService.swift */; };
 		02E854522865CA090012D941 /* EventChoosePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E854512865CA090012D941 /* EventChoosePictureViewController.swift */; };
+		02EAB5A628B8F2710060557D /* ConversationParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAB5A528B8F2710060557D /* ConversationParametersViewController.swift */; };
+		02EAB5A828B8F7A90060557D /* ConversationParamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAB5A728B8F7A90060557D /* ConversationParamCell.swift */; };
+		02EAB5AA28B908400060557D /* ConversationListMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAB5A928B908400060557D /* ConversationListMembersViewController.swift */; };
 		02EB4B522892B77100CC977E /* Event_Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02EB4B512892B77100CC977E /* Event_Message.storyboard */; };
 		02EB4B542892B9C400CC977E /* EventDetailMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EB4B532892B9C400CC977E /* EventDetailMessagesViewController.swift */; };
 		02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */; };
@@ -689,6 +692,9 @@
 		02E8544D2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddDescriptionFixedTableViewCell.xib; sourceTree = "<group>"; };
 		02E8544F2865C60A0012D941 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		02E854512865CA090012D941 /* EventChoosePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventChoosePictureViewController.swift; sourceTree = "<group>"; };
+		02EAB5A528B8F2710060557D /* ConversationParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationParametersViewController.swift; sourceTree = "<group>"; };
+		02EAB5A728B8F7A90060557D /* ConversationParamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationParamCell.swift; sourceTree = "<group>"; };
+		02EAB5A928B908400060557D /* ConversationListMembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListMembersViewController.swift; sourceTree = "<group>"; };
 		02EB4B512892B77100CC977E /* Event_Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Event_Message.storyboard; sourceTree = "<group>"; };
 		02EB4B532892B9C400CC977E /* EventDetailMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailMessagesViewController.swift; sourceTree = "<group>"; };
 		02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePhotoCell.swift; sourceTree = "<group>"; };
@@ -915,6 +921,9 @@
 				0243DCCA28AF8D3300273679 /* ConversationsMainHomeViewController.swift */,
 				026DAC4E28B37D67007517F6 /* ConversationListMainCell.swift */,
 				0264C5D928B5154E001EA654 /* ConversationDetailMessagesViewController.swift */,
+				02EAB5A528B8F2710060557D /* ConversationParametersViewController.swift */,
+				02EAB5A728B8F7A90060557D /* ConversationParamCell.swift */,
+				02EAB5A928B908400060557D /* ConversationListMembersViewController.swift */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -1787,6 +1796,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02EAB5A828B8F7A90060557D /* ConversationParamCell.swift in Sources */,
 				02728DDB27F19A1000512DC0 /* PartnerDetailViewController.swift in Sources */,
 				0229376F27A43AA600206201 /* GMSAutoCompleteVC.swift in Sources */,
 				02C6E86928203BF0009D4289 /* NeighBorhoodParamsCGUViewController.swift in Sources */,
@@ -2035,6 +2045,7 @@
 				02C91A27278F303100305E0B /* AppState.swift in Sources */,
 				022744762795D1D8005600A1 /* NotificationManager.swift in Sources */,
 				02C6E86328203119009D4289 /* NeighborhoodParamTopCell.swift in Sources */,
+				02EAB5AA28B908400060557D /* ConversationListMembersViewController.swift in Sources */,
 				0295F2B927E4AE5B006AE255 /* EditProfileInfosCell.swift in Sources */,
 				02F5277F2799995900929431 /* GuideDetailPoiViewController.swift in Sources */,
 				02490DC527EA245E00E2577B /* MJErrorInputView.swift in Sources */,
@@ -2046,6 +2057,7 @@
 				020AF5E82860B10C0012AE60 /* HomeCongratPopupViewController.swift in Sources */,
 				02846CBE27EC86F100D85ADA /* ProfileEditInterestsViewController.swift in Sources */,
 				02CCE68827D7B51E00D6976C /* TagListView.swift in Sources */,
+				02EAB5A628B8F2710060557D /* ConversationParametersViewController.swift in Sources */,
 				0268C252285A2B1400294055 /* UIView+Draggable.swift in Sources */,
 				0208B0C7289D2E63009A7A58 /* ActionFullMapCell.swift in Sources */,
 				0220580927FB087F00531720 /* BaseFullScreenNavViewController.swift in Sources */,

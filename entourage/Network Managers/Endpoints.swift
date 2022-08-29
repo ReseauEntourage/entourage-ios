@@ -102,6 +102,9 @@ let kAPIConversationGetAllConversations = "conversations?token=%@&page=%d&per=%d
 let kAPIGetConversationDetailMessages = "conversations/%@/chat_messages?token=%@&page=%d&per=%d"
 let kAPIPostConversationMessage = "conversations/%@/chat_messages?token=%@"
 let kAPIConversationPostCreateConversation = "conversations?token=%@"
+let kAPIConversationReportConversation = "conversations/%@/report?token=%@"
+let kAPIConversationQuitConversation = "conversations/%@/users?token=%@"
+let kAPIConversationGetDetailConversation = "conversations/%@?token=%@"
 
 //WebLink
 let emailContact = "contact@entourage.social"

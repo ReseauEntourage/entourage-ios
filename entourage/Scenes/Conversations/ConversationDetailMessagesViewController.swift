@@ -63,6 +63,8 @@ class ConversationDetailMessagesViewController: UIViewController {
     let nbOfItemsBeforePagingReload = 5 // Arbitrary nb of items from the top of the list to send new call
     var isLoading = false
     
+    var paramVC:UIViewController? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         IQKeyboardManager.shared.enable = false
@@ -114,6 +116,9 @@ class ConversationDetailMessagesViewController: UIViewController {
         ui_subtitle_new_conv.text = "message_subtitle_new_conv".localized
         
         hideViewNew()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(closeFromParams), name: NSNotification.Name(rawValue: kNotificationMessagesUpdate), object: nil)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -186,6 +191,11 @@ class ConversationDetailMessagesViewController: UIViewController {
         if messagesExtracted.messages.count == 0 {
             ui_view_empty.isHidden = false
         }
+    }
+    
+    @objc func closeFromParams() {
+        self.paramVC?.dismiss(animated: false)
+        self.goBack()
     }
     
     deinit {
@@ -313,10 +323,17 @@ class ConversationDetailMessagesViewController: UIViewController {
     @IBAction func action_send_message(_ sender: Any) {
         self.closeKb(nil)
     }
-    
+   
     @IBAction func action_show_params(_ sender: Any) {
-        //TODO: à faire
-        self.showWIP(parentVC: self)
+        if let navvc = storyboard?.instantiateViewController(withIdentifier: "params_nav") as? UINavigationController, let vc = navvc.topViewController as? ConversationParametersViewController {
+            vc.modalPresentationStyle = .fullScreen
+            vc.userId = currentUserId
+            vc.conversationId = conversationId
+            vc.isOneToOne = isOneToOne
+            self.paramVC = vc
+            self.present(navvc, animated: true, completion: nil)
+            return
+        }
     }
     
     @IBAction func action_show_user(_ sender: Any) {

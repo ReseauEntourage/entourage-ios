@@ -17,6 +17,7 @@ class ReportGroupPageViewController: UIPageViewController {
     var groupId:Int? = nil
     var postId:Int? = nil
     var actionId:Int? = nil
+    var conversationId:Int? = nil
     
     var reportVc:ReportGroupViewController? = nil
     weak var parentDelegate:GroupDetailDelegate? = nil
@@ -63,6 +64,7 @@ extension ReportGroupPageViewController: ReportGroupPageDelegate {
             sendVc.groupId = groupId
             sendVc.eventId = self.eventId
             sendVc.actionId = self.actionId
+            sendVc.conversationId = self.conversationId
             setViewControllers([sendVc], direction: .forward, animated: true)
         }
     }

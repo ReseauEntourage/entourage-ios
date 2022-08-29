@@ -669,6 +669,7 @@
 "report_comment_title" = "Signaler le commentaire";
 "report_contrib_title" = "Signaler la contribution";
 "report_solicitation_title" = "Signaler la demande";
+"report_conversation_title" = "Signaler la conversation";
 "report_group_message_success" = "Votre demande a bien été envoyée. Elle sera traitée au plus vite par notre équipe.";
 "report_group_description" = "Dites-nous la raison de votre signalement";
 "report_group_mandatory" = "- obligatoire";
@@ -1083,3 +1084,22 @@
 "message_title_new_conv" = "Nouvelle conversation";
 "message_subtitle_new_conv" = "Vous n’avez pas encore échangé avec cet utilisateur. En cas de problème, vous pouvez signaler la conversation dans les paramètres.";
 "message_error_create_conversation" = "Erreur lors de la création de la conversation";
+
+"conversation_params_title" = "Paramètres de la conversation";
+"conv_param_title_profil" = "Voir le profil";
+"conv_param_title_signal" = "Signaler";
+"conv_param_subtitle_signal" = "Signalez cette conversation à l'équipe Entourage.";
+"conv_param_title_members" = "Membres de la conversation";
+"conv_param_title_signal_action" = "Signaler";
+"conv_param_subtitle_signal_action" = "Signalez cette conversation à l'équipe Entourage.";
+"conv_param_qui_action" = "Quitter la conversation";
+
+//Pop leave conversation
+"params_leave_conv_pop_title" = "Quitter la conversation";
+"params_leave_conv_pop_message" = "Souhaitez-vous quitter la conversation ?";
+"params_leave_conv_pop_bt_quit" = "Quitter";
+"params_leave_conv_pop_bt_cancel" = "Annuler";
+
+"conversation_users_title" = "Membres de la conversation ";
+"conversation_userInput_search" = "Rechercher un membre de la conversation";
+"conversation_search_empty_title" = "Oups, aucun résultat ne correspond à votre recherche ! ";
