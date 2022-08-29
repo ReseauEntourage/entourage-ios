@@ -8,6 +8,7 @@
 
 import UIKit
 import IHProgressHUD
+import IQKeyboardManagerSwift
 
 class OTLoginV2ViewController: UIViewController {
     
@@ -59,9 +60,8 @@ class OTLoginV2ViewController: UIViewController {
         
         setupViews()
 //        OTLogger.logEvent(View_Login_Login)
-        //TODO: a Supprimer
-//        ui_tf_phone.text = "0606060610"
-//        ui_tf_code.text = "123456"
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -71,6 +71,11 @@ class OTLoginV2ViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         stopTimer()
+    }
+    
+    deinit {
+        IQKeyboardManager.shared.enable = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
     }
     
     //MARK: - Methods -
@@ -84,7 +89,7 @@ class OTLoginV2ViewController: UIViewController {
         roundView(textfield: ui_tf_code)
         roundView(textfield: ui_tf_phone)
         roundView(textfield: ui_tf_country)
-        ui_tf_code.hasDoneButton = true
+        //ui_tf_code.hasDoneButton = true
         
         if view.frame.height <= 667 {
             ui_constraint_height_logo.constant = 140
