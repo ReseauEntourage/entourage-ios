@@ -24,7 +24,7 @@ protocol HomeMainViewsActionsDelegate: AnyObject {
     func showResources()
     func showResource(id:Int)
     
-    func showConversation(uuid:String)
+    func showConversation(conversationId:Int)
     
     
     func showAskForHelpDetail(id:Int)

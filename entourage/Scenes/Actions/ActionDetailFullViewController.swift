@@ -75,6 +75,9 @@ class ActionDetailFullViewController: UIViewController {
                 self.ui_tableview.reloadData()
                 self.ui_top_view.updateTitle(title: action.title ?? "action_your".localized)
             }
+            else {
+                self.goBack()
+            }
         }
     }
     

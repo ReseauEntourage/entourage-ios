@@ -332,9 +332,11 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
         }
     }
     
-    func showConversation(uuid:String) {
-        //TODO: show conversation
-        self.showWIP(parentVC: self.tabBarController)
+    func showConversation(conversationId:Int) {
+        if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+            vc.setupFromOtherVC(conversationId: conversationId, title: nil, isOneToOne: true)
+            self.present(vc, animated: true)
+        }
     }
     
     func showAskForHelpDetail(id:Int) {

@@ -130,7 +130,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     }
     
     //MARK: setup variables from other VC ;)
-    func setupFromOtherVC(conversationId:Int,title:String?,isOneToOne:Bool,conversation:Conversation?,delegate:UpdateUnreadCountDelegate? = nil, selectedIndexPath:IndexPath? = nil) {
+    func setupFromOtherVC(conversationId:Int,title:String?,isOneToOne:Bool,conversation:Conversation? = nil, delegate:UpdateUnreadCountDelegate? = nil, selectedIndexPath:IndexPath? = nil) {
         self.parentDelegate = delegate
         self.selectedIndexPath = selectedIndexPath
         
@@ -235,10 +235,25 @@ class ConversationDetailMessagesViewController: UIViewController {
                 }
                 
                 self.parentDelegate?.updateUnreadCount(conversationId: self.conversationId, currentIndexPathSelected: self.selectedIndexPath)
+                if self.isOneToOne && self.currentMessageTitle == nil {
+                    self.getDetailConversation()
+                }
             }
             self.setLoadingFalse()
         }
     }
+    
+    func getDetailConversation() {
+        MessagingService.getDetailConversation(conversationId: conversationId) { conversation, error in
+            if let conversation = conversation {
+                self.currentMessageTitle = conversation.members?.first(where: {$0.uid != self.meId})?.username
+                
+                let _title = self.currentMessageTitle ?? "messaging_message_title".localized
+                self.ui_top_view.updateTitle(title: _title)
+            }
+        }
+    }
+    
     
     //To transform array -> array with dict date sections
     func extractDict() {

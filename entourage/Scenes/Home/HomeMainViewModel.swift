@@ -109,11 +109,8 @@ class HomeViewModel {
         case .conversation:
             switch action.action {
             case .show:
-                if let uid = action.params.uuid {
-                    delegate?.showConversation(uuid: uid)
-                }
-                else if let id = action.params.id {
-                    delegate?.showConversation(uuid: "\(id)")
+                if let id = action.params.id {
+                    delegate?.showConversation(conversationId: id)
                 }
             default:
                 break
