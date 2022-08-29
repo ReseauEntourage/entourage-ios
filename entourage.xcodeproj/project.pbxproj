@@ -20,6 +20,8 @@
 		0208267C28A67E90004B1222 /* larochelle.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 0208267B28A67E90004B1222 /* larochelle.gpx */; };
 		0208267F28A68447004B1222 /* ActionDeletePopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208267D28A68447004B1222 /* ActionDeletePopsViewController.swift */; };
 		0208268028A68447004B1222 /* ActionDeletePopsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0208267E28A68447004B1222 /* ActionDeletePopsViewController.xib */; };
+		0208937B28BCFDBC00160F1E /* DeeplinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208937A28BCFDBC00160F1E /* DeeplinkManager.swift */; };
+		0208937D28BCFE3100160F1E /* NotificationPushData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208937C28BCFE3100160F1E /* NotificationPushData.swift */; };
 		0208B0C5289D23E1009A7A58 /* ActionDetailFullViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208B0C4289D23E1009A7A58 /* ActionDetailFullViewController.swift */; };
 		0208B0C7289D2E63009A7A58 /* ActionFullMapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208B0C6289D2E63009A7A58 /* ActionFullMapCell.swift */; };
 		0208B0C9289D2E9D009A7A58 /* ActionFullTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208B0C8289D2E9D009A7A58 /* ActionFullTopCell.swift */; };
@@ -388,6 +390,8 @@
 		0208267B28A67E90004B1222 /* larochelle.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = larochelle.gpx; sourceTree = "<group>"; };
 		0208267D28A68447004B1222 /* ActionDeletePopsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDeletePopsViewController.swift; sourceTree = "<group>"; };
 		0208267E28A68447004B1222 /* ActionDeletePopsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActionDeletePopsViewController.xib; sourceTree = "<group>"; };
+		0208937A28BCFDBC00160F1E /* DeeplinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkManager.swift; sourceTree = "<group>"; };
+		0208937C28BCFE3100160F1E /* NotificationPushData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPushData.swift; sourceTree = "<group>"; };
 		0208B0C4289D23E1009A7A58 /* ActionDetailFullViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDetailFullViewController.swift; sourceTree = "<group>"; };
 		0208B0C6289D2E63009A7A58 /* ActionFullMapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFullMapCell.swift; sourceTree = "<group>"; };
 		0208B0C8289D2E9D009A7A58 /* ActionFullTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFullTopCell.swift; sourceTree = "<group>"; };
@@ -853,6 +857,7 @@
 				02FB543C287D74B800E4B9FA /* GlobalObjects.swift */,
 				02A92C2F28981884000DFF95 /* Action.swift */,
 				0264C5D528B4E51B001EA654 /* Conversation.swift */,
+				0208937C28BCFE3100160F1E /* NotificationPushData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -861,6 +866,7 @@
 			isa = PBXGroup;
 			children = (
 				025D872D278DD42100909101 /* EnvironmentConfigurationManager.swift */,
+				0208937A28BCFDBC00160F1E /* DeeplinkManager.swift */,
 				0229376A27A4000800206201 /* SafariWebManager.swift */,
 				022744752795D1D8005600A1 /* NotificationManager.swift */,
 				021F084E2798113D00F32A34 /* LocationManager.swift */,
@@ -1842,6 +1848,7 @@
 				0295F2B727E497D0006AE255 /* ProfileEditorViewController.swift in Sources */,
 				02490DC927EA461700E2577B /* Extensions_UIDevice.swift in Sources */,
 				02D5689B2809A5B50092C7A4 /* TitleOnlyCell.swift in Sources */,
+				0208937D28BCFE3100160F1E /* NotificationPushData.swift in Sources */,
 				02CCE68D27D7B8E700D6976C /* MainUserProfileViewController.swift in Sources */,
 				021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */,
 				02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */,
@@ -2004,6 +2011,7 @@
 				02A3DD2F27FD92600060EC2E /* MJDayMonthPicker.swift in Sources */,
 				0268C254285A2B1400294055 /* Floaty.swift in Sources */,
 				02A3DD3727FDC68C0060EC2E /* NeighborhoodCreatePhase3ViewController.swift in Sources */,
+				0208937B28BCFDBC00160F1E /* DeeplinkManager.swift in Sources */,
 				021E03CE27D8B4D1003745DE /* CategoriesBubblesCell.swift in Sources */,
 				0243E7182806CE7600208DC7 /* NeighborhoodChoosePictureViewController.swift in Sources */,
 				022744732795C0FB005600A1 /* Partner.swift in Sources */,

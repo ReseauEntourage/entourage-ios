@@ -84,12 +84,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func handleAppLaunchFromNotificationCenter(userInfos:[String:Any]) {
-        //TODO: parse notif - redirect vers le bon endroit ?
+        self.handleNotification(userInfos: userInfos, isFromBackground: true, isFromStart: true)
+        
         AppState.checkNotifcationsAndGoMainScreen()
     }
     
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+    }
+    
+    func handleNotification(userInfos:[String:Any]?, isFromBackground:Bool, isFromStart:Bool) {
+        Logger.print("***** handle notifs \(userInfos)")
+        Logger.print("***** isFrom BG : \(isFromBackground)")
+        Logger.print("***** isFrom Start : \(isFromStart)")
+        
+        guard let userInfos = userInfos,let content = userInfos["content"] as? [String:Any], let extras = content["extra"] as? [String:Any],let instance = extras["instance"] as? String, let instanceId = extras["id"] as? Int else {
+            return
+        }
+        Logger.print("***** extras : \(extras) ")
+        Logger.print("***** Instance : \(instance) - id : \(instanceId)")
+        
+        let notifData = NotificationPushData(instanceName: instance, instanceId: instanceId)
+        
+        if isFromBackground {
+            //TODO: go Page
+            Logger.print("***** NotifData : \(notifData) ")
+            
+            DeepLinkManager.presentAction(notification: notifData)
+        }
+        else if isFromStart {
+            //TODO: Go page ?
+        }
+        else {
+            Logger.print("***** \(userInfos["aps"])")
+            //TODO: update count tabbar
+            if let _aps = userInfos["aps"] as? [String:Any], let _badge = _aps["badge"] as? Int {
+                Logger.print("***** Show Badge count : \(_badge)")
+            }
+        }
     }
 }
 
@@ -101,12 +133,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        //TODO: à faire
+        let dictNotif = response.notification.request.content.userInfo as? [String:Any]
+        self.handleNotification(userInfos: dictNotif, isFromBackground: true,isFromStart: false)
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        //TODO: à faire
+        let dictNotif = notification.request.content.userInfo as? [String:Any]
+        self.handleNotification(userInfos: dictNotif, isFromBackground: false,isFromStart: false)
     }
 }
 

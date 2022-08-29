@@ -73,7 +73,7 @@ class ConversationDetailMessagesViewController: UIViewController {
         
         let _title = currentMessageTitle ?? "messaging_message_title".localized
         
-        ui_top_view.populateView(title: _title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self,backgroundColor: .appBeigeClair, isClose: false)
+        ui_top_view.populateView(title: _title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self,backgroundColor: .appBeigeClair, isClose: false,doubleRightMargin:true)
         
         ui_title_empty.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_title_empty.text = "messaging_message_no_message".localized

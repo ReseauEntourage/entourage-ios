@@ -72,19 +72,7 @@ struct AppState {
     }
     
     static func getTopViewController() -> UIViewController? {
-        let appDelegate = UIApplication.shared.delegate
-        let window = appDelegate?.window
-        if let tabController = window??.rootViewController as? UITabBarController {
-            let navController = tabController.selectedViewController as! UINavigationController
-            return navController
-        }
-        
-        if let navController = window??.rootViewController as? UINavigationController {
-            return navController
-        }
-        
-        return window??.rootViewController
-        
+        return UIApplication.shared.topFrontViewController
     }
     
     static func continueFromLoginVC() {

@@ -78,6 +78,22 @@ extension UIViewController {
         //  customAlert.delegate = self
         customAlert.show()
     }
+    
+    var topFrontViewController : UIViewController {
+        
+        if let presented = self.presentedViewController {
+            return presented.topFrontViewController
+        }
+        
+        if let navigation = self as? UINavigationController {
+            return navigation.visibleViewController?.topFrontViewController ?? navigation
+        }
+        
+        if let tab = self as? UITabBarController {
+            return tab.selectedViewController?.topFrontViewController ?? tab
+        }
+        return self
+    }
 }
 
 
@@ -94,4 +110,11 @@ extension UIPageViewController {
     var scrollView: UIScrollView? {
         return view.subviews.first(where: { $0 is UIScrollView }) as? UIScrollView
     }
+}
+
+
+extension UIApplication {
+ var topFrontViewController : UIViewController? {
+     return self.keyWindow?.rootViewController?.topFrontViewController
+ }
 }
