@@ -115,17 +115,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else if isFromStart {
             //TODO: Go page ?
         }
-        else {
-            Logger.print("***** \(userInfos["aps"])")
-            //TODO: update count tabbar
-            if let _aps = userInfos["aps"] as? [String:Any], let _badge = _aps["badge"] as? Int {
-                Logger.print("***** Show Badge count : \(_badge)")
-            }
+        //Update badge count
+        
+        if let _aps = userInfos["aps"] as? [String:Any], let _badge = _aps["badge"] as? Int {
+            UserDefaults.badgeCount = _badge
+            NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
         }
     }
 }
 
-//MARK: - Notifications - A faire
+//MARK: - Notifications
 extension AppDelegate: UNUserNotificationCenterDelegate {
     //MARK: - Push -
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

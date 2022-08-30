@@ -144,6 +144,7 @@ class ActionsMainHomeViewController: UIViewController {
                 showEmptyView()
             }
         }
+        getUserInfo()
     }
     
     deinit {
@@ -214,10 +215,12 @@ class ActionsMainHomeViewController: UIViewController {
             }
             getSolicitations(reloadOther:true)
         }
+        getUserInfo()
     }
     
     @objc func refreshDatas() {
         updateFromCreate()
+        getUserInfo()
     }
     
     @objc func updateFromCreate() {
@@ -326,6 +329,16 @@ class ActionsMainHomeViewController: UIViewController {
             self.isLoading = false
             if reloadOther {
                 self.getActions(isReloadFromTab: true)
+            }
+        }
+    }
+    
+    func getUserInfo() {
+        guard let _userid = UserDefaults.currentUser?.uuid else {return}
+        UserService.getDetailsForUser(userId:_userid) { user, error in
+            if let user = user {
+                UserDefaults.badgeCount = user.unreadCount
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
             }
         }
     }

@@ -57,6 +57,9 @@ class MainTabbarViewController: UITabBarController {
         //Notif for changing contrig / solicitation
         NotificationCenter.default.addObserver(self, selector: #selector(showActionsSolicitations), name: NSNotification.Name(rawValue: kNotificationActionShowSolicitation), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showActionsContrib), name: NSNotification.Name(rawValue: kNotificationActionShowContrib), object: nil)
+        
+        //Update message badge count
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBadgeCount(_:)), name: NSNotification.Name(rawValue: kNotificationMessagesUpdateCount), object: nil)
     }
     
     @objc func showDiscoverNeighborhoods() {
@@ -102,6 +105,17 @@ class MainTabbarViewController: UITabBarController {
             vc.setSolicitationsFirst()
         }
         self.selectedIndex = 1
+    }
+    
+    @objc func updateBadgeCount(_ notification:Notification) {
+        if let badge = UserDefaults.badgeCount, badge > 0 {
+            messagesVC.tabBarItem.badgeValue = "\(badge)"
+            UIApplication.shared.applicationIconBadgeNumber = badge
+        }
+        else {
+            messagesVC.tabBarItem.badgeValue = nil
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        }
     }
     
 //    func showPopInfo(delegate:OTPopInfoDelegate,title:String,message:String,buttonOkStr:String,buttonCancelStr:String) {
@@ -163,6 +177,7 @@ class MainTabbarViewController: UITabBarController {
         messagesVC.tabBarItem.image = UIImage.init(named: "ic_message_off")?.withRenderingMode(.alwaysOriginal)
         messagesVC.tabBarItem.selectedImage = UIImage.init(named: "ic_message_on")
         messagesVC.tabBarItem.tag = 2
+        messagesVC.tabBarItem.badgeColor = .appOrangeLight
         
         
         let _groupVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "home")
@@ -264,24 +279,20 @@ extension MainTabbarViewController: UITabBarControllerDelegate {
         currentItemSelected = item.tag
         boldSelectedItem()
         
-        //To force reload messages
-        if item.tag == 2 {
-            NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdate), object: nil)
-        }
         
-        //To force reload actions
-        if item.tag == 1 {
+        switch item.tag {
+        case 0://Home
+            NotificationCenter.default.post(name: NSNotification.Name(kNotificationHomeUpdate), object: nil)
+        case 1: //actions
             NotificationCenter.default.post(name: NSNotification.Name(kNotificationActionsUpdate), object: nil)
-        }
-        
-        //To force reload neighborhoods
-        if item.tag == 3 {
+        case 2://Messages
+            NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdate), object: nil)
+        case 3://Neighborhoods
             NotificationCenter.default.post(name: NSNotification.Name(kNotificationNeighborhoodsUpdate), object: nil)
-        }
-        
-        //To force reload events
-        if item.tag == 4 {
+        case 4://events
             NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventsUpdate), object: nil)
+        default:
+            break
         }
     }
 

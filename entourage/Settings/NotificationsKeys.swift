@@ -41,3 +41,6 @@ let kNotificationActionShowSolicitation = "actionShowSolicitations"
 let kNotificationActionShowContrib = "actionShowContrib"
 
 let kNotificationMessagesUpdate = "MessagesUpdate"
+let kNotificationMessagesUpdateCount = "MessagesUpdateCount"
+
+let kNotificationHomeUpdate = "HomeUpdate"

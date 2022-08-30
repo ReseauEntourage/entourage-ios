@@ -114,6 +114,7 @@ class EventMainHomeViewController: UIViewController {
         
         //Notif for updating events after tabbar selected
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationEventsUpdate), object: nil)
+        getUserInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -177,10 +178,12 @@ class EventMainHomeViewController: UIViewController {
             }
             getEventsDiscovered(reloadOther:true)
         }
+        getUserInfo()
     }
     
     @objc func refreshDatas() {
         updateFromCreate()
+        getUserInfo()
     }
     
     @objc func updateFromCreate() {
@@ -297,6 +300,16 @@ class EventMainHomeViewController: UIViewController {
             self.isLoading = false
             if reloadOther {
                 self.getEvents(isReloadFromTab: true)
+            }
+        }
+    }
+    
+    func getUserInfo() {
+        guard let _userid = UserDefaults.currentUser?.uuid else {return}
+        UserService.getDetailsForUser(userId:_userid) { user, error in
+            if let user = user {
+                UserDefaults.badgeCount = user.unreadCount
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
             }
         }
     }

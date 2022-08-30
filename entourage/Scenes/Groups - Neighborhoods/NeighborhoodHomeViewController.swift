@@ -108,7 +108,7 @@ class NeighborhoodHomeViewController: UIViewController {
         
         //Notif for updating neighborhoods after tabbar selected
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationNeighborhoodsUpdate), object: nil)
-        
+        getUserInfo()
     }
     
     @objc func showNewNeighborhood(_ notification:Notification) {
@@ -142,10 +142,12 @@ class NeighborhoodHomeViewController: UIViewController {
             }
             getNeighborhoodsSuggestions(reloadOther:true)
         }
+        getUserInfo()
     }
     
     @objc func refreshDatas() {
         updateFromCreate()
+        getUserInfo()
     }
     
     @objc func updateFromCreate() {
@@ -316,6 +318,16 @@ class NeighborhoodHomeViewController: UIViewController {
             }
             self.ui_tableview.reloadData()
         })
+    }
+    
+    func getUserInfo() {
+        guard let _userid = UserDefaults.currentUser?.uuid else {return}
+        UserService.getDetailsForUser(userId:_userid) { user, error in
+            if let user = user {
+                UserDefaults.badgeCount = user.unreadCount
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
+            }
+        }
     }
     
     //MARK: - IBActions -

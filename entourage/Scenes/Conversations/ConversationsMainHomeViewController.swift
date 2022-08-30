@@ -64,6 +64,11 @@ class ConversationsMainHomeViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationMessagesUpdate), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getUserInfo()
+    }
+    
     //MARK: - Call from Notifications -
     @objc func refreshDatasFromTab() {
         if self.messages.count > 0 {
@@ -142,6 +147,17 @@ class ConversationsMainHomeViewController: UIViewController {
             }
             self.isLoading = false
             self.ui_tableview.reloadData()
+            self.getUserInfo()
+        }
+    }
+    
+    func getUserInfo() {
+        guard let _userid = UserDefaults.currentUser?.uuid else {return}
+        UserService.getDetailsForUser(userId:_userid) { user, error in
+            if let user = user {
+                UserDefaults.badgeCount = user.unreadCount
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
+            }
         }
     }
     

@@ -35,11 +35,19 @@ class HomeMainViewController: UIViewController {
         
         ui_tableview.delegate = self
         ui_tableview.dataSource = self
+        
+        //Notif for updating actions after tabbar selected
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationHomeUpdate), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        refreshDatasFromTab()
+    }
+    
+    @objc func refreshDatasFromTab() {
         getHomeUser()
+        getUserInfo()
     }
     
     func setupViews() {
@@ -76,6 +84,16 @@ class HomeMainViewController: UIViewController {
 //            if self.homeViewModel.userHome.actions.count > 0 {
 //                self.addTimerShowPop()
 //            }
+        }
+    }
+    
+    func getUserInfo() {
+        guard let _userid = UserDefaults.currentUser?.uuid else {return}
+        UserService.getDetailsForUser(userId:_userid) { user, error in
+            if let user = user {
+                UserDefaults.badgeCount = user.unreadCount
+                NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
+            }
         }
     }
     

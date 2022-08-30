@@ -21,6 +21,7 @@ extension UserDefaults {
         static let tempUser = "tempUser"
         static let currentUser = "currentUser"
         static let pushToken = "pushToken"
+        static let badge = "badge"
     }
     
     class var temporaryUser: User? {
@@ -68,6 +69,15 @@ extension UserDefaults {
     class var token: String? {
         get {
             return try? UserDefaults.standard.decode(User.self,forKey: Keys.currentUser).token
+        }
+    }
+    
+    class var badgeCount:Int? {
+        get {
+            return UserDefaults.standard.integer(forKey: Keys.badge)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.badge)
         }
     }
 }
