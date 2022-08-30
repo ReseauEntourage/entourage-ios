@@ -49,6 +49,7 @@ class UserProfileDetailViewController: UIViewController {
             else {
                 Logger.print("***** erreur recup detail user \(error?.error?.localizedDescription)")
                 //TODO: afficher erruer ?
+                self.goBack()
             }
         }
     }

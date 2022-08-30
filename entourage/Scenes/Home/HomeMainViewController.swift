@@ -270,13 +270,7 @@ extension HomeMainViewController:HomeContribDelegate {
 //MARK: - HomeMainViewsActionsDelegate -
 extension HomeMainViewController: HomeMainViewsActionsDelegate {
     func showUserProfile(id:Int) {
-        if let  navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
-            if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
-                _homeVC.currentUserId = "\(id)"
-                
-                self.navigationController?.present(navVC, animated: true)
-            }
-        }
+        DeepLinkManager.showUser(userId: id)
     }
     
     func editMyProfile() {
@@ -286,14 +280,7 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     
     func showNeighborhoodDetail(id:Int) {
-        let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
-        if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
-            vc.isAfterCreation = false
-            vc.neighborhoodId = id
-            vc.isShowCreatePost = false
-            vc.neighborhood = nil
-            self.navigationController?.present(nav, animated: true)
-        }
+        DeepLinkManager.showNeighborhoodDetail(id: id)
     }
     
     func showAllNeighborhoods() {
@@ -308,15 +295,7 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     
     func showPoi(id:Int) {
-        let navVc = UIStoryboard.init(name: StoryboardName.solidarity, bundle: nil).instantiateInitialViewController() as? UINavigationController
-        
-        if let _controller = navVc?.topViewController as? GuideDetailPoiViewController {
-            var poi = MapPoi()
-            poi.uuid = "\(id)"
-            _controller.poi = poi
-            
-            self.present(navVc!, animated: true, completion: nil)
-        }
+        DeepLinkManager.showPoi(id: id)
     }
     
     func showAllPois() {
@@ -344,21 +323,15 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     
     func showResource(id:Int) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {
-            vc.resourceId = id
-            self.navigationController?.present(vc, animated: true)
-        }
+        DeepLinkManager.showResource(id: id)
     }
     
     func showConversation(conversationId:Int) {
-        if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
-            vc.setupFromOtherVC(conversationId: conversationId, title: nil, isOneToOne: true)
-            self.present(vc, animated: true)
-        }
+        DeepLinkManager.showConversation(conversationId: conversationId)
     }
     
     func showAskForHelpDetail(id:Int) {
-        self.showAction(id: id, isContrib: false)
+        DeepLinkManager.showAction(id: id, isContrib: false)
     }
     func showAllAskForHelp() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowSolicitation), object: nil)
@@ -368,23 +341,13 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     
     func showContribution(id:Int) {
-        self.showAction(id: id, isContrib: true)
+        DeepLinkManager.showAction(id: id, isContrib: true)
     }
     func showAllContributions() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowContrib), object: nil)
     }
     func createContribution() {
         self.createAction(isContrib: true)
-    }
-    
-    private func showAction(id:Int,isContrib:Bool) {
-        let sb = UIStoryboard.init(name: StoryboardName.actions, bundle: nil)
-        if let navvc = sb.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navvc.topViewController as? ActionDetailFullViewController {
-            vc.actionId = id
-            vc.action = nil
-            vc.isContrib = isContrib
-            self.tabBarController?.present(navvc, animated: true)
-        }
     }
     
     private func createAction(isContrib:Bool) {
@@ -401,13 +364,6 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventShowDiscover), object: nil)
     }
     func showOuting(id:Int) {
-        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
-            vc.eventId = id
-            vc.event = nil
-            vc.isAfterCreation = false
-            vc.modalPresentationStyle = .fullScreen
-            self.tabBarController?.present(navVc, animated: true, completion: nil)
-            return
-        }
+        DeepLinkManager.showOuting(id: id)
     }
 }
