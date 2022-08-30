@@ -103,9 +103,9 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch groupUserType {
         case .Creator:
-            return 5 //TODO: on peut quitter le groupe ?
+            return 4 //TODO: on peut quitter le groupe ? //Return 4 hide notif now
         case .Member:
-            return 5
+            return 4  //Return 4 hide notif now
         case .Viewer:
             return 3
         }
@@ -125,14 +125,10 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
         case .Creator:
             switch indexPath.row {
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_notifs", for: indexPath) as! NeighborhoodParamNotifsCell
-                cell.populateCell(notif_all: true, notif_events: false, notif_messages: true, notif_members: true, delegate: self)
-                return cell
-            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
                 cell.populateCell(title: "neighborhood_params_edit".localized,imageName: "ic_edit_group", delegate: self, isCGU: false)
                 return cell
-            case 3:
+            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
                 cell.populateCell(title: "neighborhood_params_cgu".localized,imageName: "ic_cgu_group", delegate: self, isCGU: true)
                 return cell
@@ -144,14 +140,10 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
         case .Member:
             switch indexPath.row {
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_notifs", for: indexPath) as! NeighborhoodParamNotifsCell
-                cell.populateCell(notif_all: true, notif_events: false, notif_messages: true, notif_members: true, delegate: self)
-                return cell
-            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
                 cell.populateCell(title: "neighborhood_params_cgu".localized,imageName: "ic_cgu_group", delegate: self, isCGU: true)
                 return cell
-            case 3:
+            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! NeighborhoodParamSignalCell
                 cell.populateCell(isQuit: false, hasQuit: true,delegate: self)
                 return cell

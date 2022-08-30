@@ -177,9 +177,9 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch eventUserType {
         case .Creator:
-            return hasRecurrency ? 7 : 6
+            return hasRecurrency ? 6 : 5 // minus 1 remove notifs for now
         case .Member:
-            return isRealAuthor ? 4 : 5
+            return isRealAuthor ? 3 : 4 // minus 1 remove notifs for now
         case .Viewer:
             return 3
         }
@@ -199,14 +199,10 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
         case .Creator:
             switch indexPath.row {
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_notifs", for: indexPath) as! EventParamNotifCell
-                cell.populateCell(notif_all: true, notif_publications: true, notif_members: true, delegate: self)
-                return cell
-            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(title: "event_params_edit".localized, imageName: "ic_edit_group", delegate: self, type: .EditEvent)
                 return cell
-            case 3:
+            case 2:
                 if hasRecurrency {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                     cell.populateCell(title: "event_params_recurrency".localized, imageName: "ic_edit_group", delegate: self, type: .EditRecurrency)
@@ -218,7 +214,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     cell.populateCell(title: "event_params_cgu".localized, imageName: "ic_cgu_group", delegate: self, type: .CGU)
                     return cell
                 }
-            case 4:
+            case 3:
                 if hasRecurrency {
                     //CGU
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
@@ -231,7 +227,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     cell.populateCell(isQuit: false, hasCellBottom: true,delegate: self,isCancelEvent: false)
                     return cell
                 }
-            case 5:
+            case 4:
                 if hasRecurrency {
                     //Signal
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! EventParamSignalCell
@@ -254,14 +250,10 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
         case .Member:
             switch indexPath.row {
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_notifs", for: indexPath) as! EventParamNotifCell
-                cell.populateCell(notif_all: true, notif_publications: true, notif_members: true, delegate: self)
-                return cell
-            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(title: "event_params_cgu".localized, imageName: "ic_cgu_group", delegate: self, type: .CGU)
                 return cell
-            case 3:
+            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! EventParamSignalCell
                 cell.populateCell(isQuit: false, hasCellBottom: true,delegate: self,isCancelEvent: false)
                 return cell
