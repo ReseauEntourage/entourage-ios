@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class NeighborhoodMessageCell: UITableViewCell {
 
@@ -80,12 +81,18 @@ class NeighborhoodMessageCell: UITableViewCell {
         else {
             ui_view_error?.isHidden = true
             
-            ui_date.text = " - le \(message.createdDateTimeFormatted)"
+            ui_date.text = "le \(message.createdDateTimeFormatted)"
+            
+            if !isMe {
             if let username = message.user?.displayName {
-                ui_username.text = "\(username)"
+                ui_username.text = "\(username) - "
             }
             else {
                 ui_username.text = "- !"
+            }
+            }
+            else {
+                ui_username.text = ""
             }
         }
     }
