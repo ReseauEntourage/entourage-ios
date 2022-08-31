@@ -27,6 +27,8 @@ let kAPIAppInfoPushToken = "applications?token=%@"
 let kAPIPois = "pois"
 let kAPIMetadatas = "home/metadata?token=%@"
 
+let kAPIUnreadCount = "users/unread?token=%@"
+
 //group / neighborhood
 let kAPINeighborhoods = "neighborhoods?token=%@"
 let kAPIGetDetailNeighborhood = "neighborhoods/%@?token=%@"

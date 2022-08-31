@@ -262,25 +262,41 @@ struct UserService {
         }
     }
     
-    static func getUnreadCountForUser(userId:String, completion: @escaping (_ unreadCount:Int?, _ error:EntourageNetworkError?) -> Void) {
+    static func getUnreadCountForUser(completion: @escaping (_ unreadCount:Int?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
-        var endpoint = kAPIGetDetailUser
-        endpoint = String.init(format: endpoint,userId, token)
+        var endpoint = kAPIUnreadCount
+        endpoint = String.init(format: endpoint, token)
         
-        Logger.print("***** get details user : \(endpoint)")
+        Logger.print("***** get kAPIUnreadCount : \(endpoint)")
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
-                Logger.print("***** error update User interests - \(error)")
+                Logger.print("***** error kAPIUnreadCount - \(error)")
                 DispatchQueue.main.async { completion(nil,  error) }
                 return
             }
             
-            let userParsed = self.parsingDataUser(data: data).user
+            let unreadCount = self.parsingUnreadCount(data: data)
             
-            DispatchQueue.main.async { completion(userParsed?.unreadCount,nil) }
+            DispatchQueue.main.async { completion(unreadCount,nil) }
         }
+    }
+    
+    static func parsingUnreadCount(data:Data) -> (Int) {
+        var unreadCount = 0
+        
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] {
+                if let _jsonUser = json["user"] as? [String:AnyObject], let dataUser = try? JSONSerialization.data(withJSONObject: _jsonUser) {
+                    unreadCount = _jsonUser["unread_count"] as! Int
+                }
+            }
+        }
+        catch {
+            Logger.print("Error parsing \(error)")
+        }
+        return (unreadCount)
     }
     
     //MARK: - Parsing -

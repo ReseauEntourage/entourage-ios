@@ -153,7 +153,7 @@ class ConversationsMainHomeViewController: UIViewController {
     
     func getUserInfo() {
         guard let _userid = UserDefaults.currentUser?.uuid else {return}
-        UserService.getUnreadCountForUser(userId:_userid) { unreadCount, error in
+        UserService.getUnreadCountForUser { unreadCount, error in
             if let unreadCount = unreadCount {
                 UserDefaults.badgeCount = unreadCount
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
