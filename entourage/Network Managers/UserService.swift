@@ -262,6 +262,27 @@ struct UserService {
         }
     }
     
+    static func getUnreadCountForUser(userId:String, completion: @escaping (_ unreadCount:Int?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetDetailUser
+        endpoint = String.init(format: endpoint,userId, token)
+        
+        Logger.print("***** get details user : \(endpoint)")
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error update User interests - \(error)")
+                DispatchQueue.main.async { completion(nil,  error) }
+                return
+            }
+            
+            let userParsed = self.parsingDataUser(data: data).user
+            
+            DispatchQueue.main.async { completion(userParsed?.unreadCount,nil) }
+        }
+    }
+    
     //MARK: - Parsing -
     static func parsingDataUser(data:Data) -> (user:User?,isFirstLogin:Bool) {
         var user:User? = nil

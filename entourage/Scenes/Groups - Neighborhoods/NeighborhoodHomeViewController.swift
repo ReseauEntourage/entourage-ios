@@ -322,9 +322,9 @@ class NeighborhoodHomeViewController: UIViewController {
     
     func getUserInfo() {
         guard let _userid = UserDefaults.currentUser?.uuid else {return}
-        UserService.getDetailsForUser(userId:_userid) { user, error in
-            if let user = user {
-                UserDefaults.badgeCount = user.unreadCount
+        UserService.getUnreadCountForUser(userId:_userid) { unreadCount, error in
+            if let unreadCount = unreadCount {
+                UserDefaults.badgeCount = unreadCount
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationMessagesUpdateCount), object: nil)
             }
         }

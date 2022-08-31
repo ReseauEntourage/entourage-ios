@@ -107,13 +107,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notifData = NotificationPushData(instanceName: instance, instanceId: instanceId)
         
         if isFromBackground {
-            //TODO: go Page
-            Logger.print("***** NotifData : \(notifData) ")
-            
             DeepLinkManager.presentAction(notification: notifData)
         }
         else if isFromStart {
-            //TODO: Go page ?
+            DeepLinkManager.presentAction(notification: notifData)
         }
         //Update badge count
         
