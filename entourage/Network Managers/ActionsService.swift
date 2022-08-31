@@ -69,7 +69,18 @@ struct ActionsService:ParsingDataCodable {
         var endpoint = isContrib ? kAPIContribUpdate : kAPISolicitationUpdate
         endpoint = String.init(format: endpoint, actionId, token)
         //TODO: a ajouter les 2 params
-        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { (data, resp, error) in
+        
+        var parameters: [String:Any] = ["outcome" : isClosedOk]
+        if let message = message {
+            parameters["close_message"] = message
+        }
+        
+        let params = isContrib ? [_contribution : parameters] : [_solicitation : parameters]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: params, options: [])
+        
+        Logger.print("***** Params delete Action : \(params)")
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
             Logger.print("Response delete action: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
             guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 Logger.print("***** error delete action - \(error)")
