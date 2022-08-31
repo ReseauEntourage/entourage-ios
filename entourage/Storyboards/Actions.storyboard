@@ -1986,7 +1986,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="proposer un café..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fpg-oa-9gm">
-                                                                    <rect key="frame" x="82" y="33.5" width="272" height="13.5"/>
+                                                                    <rect key="frame" x="82" y="37.5" width="272" height="13.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -2009,7 +2009,7 @@
                                                             <constraints>
                                                                 <constraint firstItem="Nig-6b-aYG" firstAttribute="leading" secondItem="LM1-Cq-7pK" secondAttribute="trailing" constant="16" id="1wv-od-I4g"/>
                                                                 <constraint firstItem="8ku-E9-TgL" firstAttribute="leading" secondItem="Fpg-oa-9gm" secondAttribute="trailing" constant="8" id="4vU-1U-cYs"/>
-                                                                <constraint firstItem="ONj-Wi-LAq" firstAttribute="top" secondItem="Fpg-oa-9gm" secondAttribute="bottom" constant="16" id="8UY-QX-9au"/>
+                                                                <constraint firstItem="ONj-Wi-LAq" firstAttribute="top" secondItem="Fpg-oa-9gm" secondAttribute="bottom" constant="12" id="8UY-QX-9au"/>
                                                                 <constraint firstItem="LM1-Cq-7pK" firstAttribute="leading" secondItem="E89-Hq-b9H" secondAttribute="leading" constant="32" id="8bn-UR-KKd"/>
                                                                 <constraint firstAttribute="trailing" secondItem="8ku-E9-TgL" secondAttribute="trailing" constant="32" id="Buq-i8-se6"/>
                                                                 <constraint firstAttribute="height" constant="64" id="I6G-XU-2mi"/>
@@ -2069,6 +2069,7 @@
                                                         <constraint firstItem="RId-UH-Q3L" firstAttribute="centerX" secondItem="7C3-eV-tPd" secondAttribute="centerX" id="lLs-BW-XxZ"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" name="BeigeClair"/>
                                                 <connections>
                                                     <outlet property="ui_bt_validate" destination="RId-UH-Q3L" id="rR7-TB-jrv"/>
                                                 </connections>

@@ -39,6 +39,7 @@ class ActionsMyListViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateAction), name: NSNotification.Name(rawValue: kNotificationActionUpdate), object: nil)
     }
     
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -52,6 +53,7 @@ class ActionsMyListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.hideTransparentNavigationBar()
+        getMyActions()
     }
     
     func getMyActions() {

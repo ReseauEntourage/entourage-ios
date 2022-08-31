@@ -27,7 +27,7 @@ class ActionSectionFiltersViewController: UIViewController {
         ui_tableview.delegate = self
         ui_tableview.dataSource = self
         
-        ui_top_view.populateView(title: "event_filter_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
+        ui_top_view.populateView(title: "action_filter_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
     }
     
     //MARK: - IBAction -
