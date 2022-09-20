@@ -110,8 +110,6 @@
                                     <constraint firstAttribute="width" constant="200" id="kwi-Of-9Of"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="currentPageImage" value="ic_neighborhood_dot_selected"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="otherPagesImage" value="ic_neighborhood_dot_unselected"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="currentPageDotImage" value="ic_neighborhood_dot_selected"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="otherPageDotImage" value="ic_neighborhood_dot_unselected"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="currentColor">
@@ -1326,8 +1324,6 @@ ok</string>
                                     <constraint firstAttribute="height" constant="12" id="k1E-lA-ezF"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="currentPageImage" value="ic_neighborhood_dot_selected"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="otherPagesImage" value="ic_neighborhood_dot_unselected"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="currentPageDotImage" value="ic_neighborhood_dot_selected"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="otherPageDotImage" value="ic_neighborhood_dot_unselected"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="currentColor">

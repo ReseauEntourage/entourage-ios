@@ -113,8 +113,6 @@
                                     <constraint firstAttribute="height" constant="12" id="wSU-NK-sEM"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="currentPageImage" value="ic_neighborhood_dot_selected"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="otherPagesImage" value="ic_neighborhood_dot_unselected"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="currentPageDotImage" value="ic_neighborhood_dot_selected"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="otherPageDotImage" value="ic_neighborhood_dot_unselected"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="currentColor">
@@ -2149,8 +2147,6 @@ L2</string>
                                     <constraint firstAttribute="height" constant="12" id="sRQ-fL-YSz"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="currentPageImage" value="ic_neighborhood_dot_selected"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="otherPagesImage" value="ic_neighborhood_dot_unselected"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="currentPageDotImage" value="ic_neighborhood_dot_selected"/>
                                     <userDefinedRuntimeAttribute type="image" keyPath="otherPageDotImage" value="ic_neighborhood_dot_unselected"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="currentColor">
