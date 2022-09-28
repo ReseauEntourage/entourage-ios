@@ -135,16 +135,16 @@ class HomeViewModel {
             default:
                 break
             }
-        case .ask_for_help:
+        case .solicitation:
             switch action.action {
             case .new:
-                delegate?.createAskForHelp()
+                delegate?.createSolicitation()
             case .show:
                 if let id = action.params.id {
-                    delegate?.showAskForHelpDetail(id: id)
+                    delegate?.showSolicitationDetail(id: id)
                 }
             case .index:
-                delegate?.showAllAskForHelp()
+                delegate?.showAllSolicitations()
             default:
                 break
             }

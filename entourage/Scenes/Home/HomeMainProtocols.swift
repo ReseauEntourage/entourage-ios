@@ -27,9 +27,9 @@ protocol HomeMainViewsActionsDelegate: AnyObject {
     func showConversation(conversationId:Int)
     
     
-    func showAskForHelpDetail(id:Int)
-    func showAllAskForHelp()
-    func createAskForHelp()
+    func showSolicitationDetail(id:Int)
+    func showAllSolicitations()
+    func createSolicitation()
     
     func showContribution(id:Int)
     func showAllContributions()

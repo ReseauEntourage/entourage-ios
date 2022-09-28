@@ -74,8 +74,8 @@ struct HomeAction:Codable {
             return .conversation
         case "contribution":
             return .contribution
-        case "ask_for_help":
-            return .ask_for_help
+        case "solicitation":
+            return .solicitation
         case "poi":
             return .poi
         case "webview":
@@ -139,7 +139,7 @@ enum HomeActionType {
     case neighborhood
     case outing
     case contribution
-    case ask_for_help
+    case solicitation
     case conversation
     case resource
     case webview

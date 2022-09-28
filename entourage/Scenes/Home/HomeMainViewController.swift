@@ -330,13 +330,13 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
         DeepLinkManager.showConversation(conversationId: conversationId)
     }
     
-    func showAskForHelpDetail(id:Int) {
+    func showSolicitationDetail(id:Int) {
         DeepLinkManager.showAction(id: id, isContrib: false)
     }
-    func showAllAskForHelp() {
+    func showAllSolicitations() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationActionShowSolicitation), object: nil)
     }
-    func createAskForHelp() {
+    func createSolicitation() {
         self.createAction(isContrib: false)
     }
     
