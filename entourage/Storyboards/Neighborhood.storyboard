@@ -839,9 +839,6 @@
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" id="1KA-q8-mYs"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                                    <color key="value" name="orange_app"/>
-                                                                </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                                     <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </userDefinedRuntimeAttribute>
@@ -2006,7 +2003,6 @@
                                                             </connections>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" name="orange_app"/>
                                                     <constraints>
                                                         <constraint firstItem="GGi-Rj-Vjz" firstAttribute="leading" secondItem="kTC-Vg-fqi" secondAttribute="trailing" constant="8" id="7hg-ha-zHd"/>
                                                         <constraint firstItem="BHf-Ft-ogy" firstAttribute="leading" secondItem="76n-OO-PU5" secondAttribute="leading" id="IhE-jp-1xB"/>
@@ -2040,9 +2036,6 @@
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" id="FDc-Ka-865"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                            <color key="value" name="orange_app"/>
-                                                        </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                             <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
@@ -2262,16 +2255,16 @@
         <image name="ic_star_empty" width="12" height="12"/>
         <image name="img_neighb_valid" width="208" height="165"/>
         <image name="img_neighb_valid_group" width="23" height="19"/>
-        <image name="interest_small_activities" width="28" height="27"/>
-        <image name="interest_small_animals" width="28" height="27"/>
-        <image name="interest_small_art" width="28" height="27"/>
+        <image name="interest_small_activities" width="28" height="28"/>
+        <image name="interest_small_animals" width="28" height="28"/>
+        <image name="interest_small_art" width="28" height="28"/>
         <image name="interest_small_cooking" width="28" height="28"/>
-        <image name="interest_small_game" width="28" height="27"/>
-        <image name="interest_small_nature" width="28" height="27"/>
+        <image name="interest_small_game" width="28" height="28"/>
+        <image name="interest_small_nature" width="28" height="28"/>
         <image name="interest_small_nomad" width="28" height="28"/>
-        <image name="interest_small_others" width="28" height="27"/>
-        <image name="interest_small_sport" width="28" height="27"/>
-        <image name="interest_small_wellness" width="28" height="27"/>
+        <image name="interest_small_others" width="28" height="28"/>
+        <image name="interest_small_sport" width="28" height="28"/>
+        <image name="interest_small_wellness" width="28" height="28"/>
         <image name="my_profile_header" width="392" height="416"/>
         <image name="params_next" width="9" height="13"/>
         <image name="placeholder_photo_group" width="391" height="110"/>

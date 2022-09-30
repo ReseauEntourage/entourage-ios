@@ -69,7 +69,7 @@ class NetworkManager {
         session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             if let resp = response as? HTTPURLResponse {
-                Logger.print("***** return resp GET : \(resp.statusCode)")
+                Logger.print("***** return resp GET : \(resp.statusCode) - \(endPoint)")
                 if resp.statusCode < 300 {
                     completionHandler(data,response,nil)
                     return

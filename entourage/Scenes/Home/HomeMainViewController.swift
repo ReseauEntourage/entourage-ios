@@ -24,6 +24,7 @@ class HomeMainViewController: UIViewController {
     let section_contribs = 1
     let section_help = 2
     
+    var isLoadingFromNotif = true
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,10 +43,17 @@ class HomeMainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        refreshDatasFromTab()
+        if !isLoadingFromNotif {
+            refreshDatasFromTab()
+        }
+        else {
+            isLoadingFromNotif = false
+            getUserInfo()
+        }
     }
     
     @objc func refreshDatasFromTab() {
+        isLoadingFromNotif = true
         getHomeUser()
         getUserInfo()
     }
