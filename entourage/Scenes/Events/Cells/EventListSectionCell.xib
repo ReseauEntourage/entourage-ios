@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NunitoSans-Regular.ttf">
+            <string>NunitoSans-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="EventListSectionCell" rowHeight="66" id="OEa-P4-H0Q" customClass="EventListSectionCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="406" height="66"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OEa-P4-H0Q" id="XCl-0f-wEp">
+                <rect key="frame" x="0.0" y="0.0" width="406" height="66"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="avo-LN-p3U">
+                        <rect key="frame" x="32" y="32.5" width="80" height="1"/>
+                        <color key="backgroundColor" name="orange_light"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="9oA-oy-hXF"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date publications" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fyp-J9-Sa9">
+                        <rect key="frame" x="144" y="8" width="118" height="50"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFm-8G-igQ">
+                        <rect key="frame" x="294" y="32.5" width="80" height="1"/>
+                        <color key="backgroundColor" name="orange_light"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="a0p-9w-dBo"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="XFm-8G-igQ" firstAttribute="leading" secondItem="Fyp-J9-Sa9" secondAttribute="trailing" constant="32" id="4M9-cr-Sez"/>
+                    <constraint firstItem="Fyp-J9-Sa9" firstAttribute="leading" secondItem="avo-LN-p3U" secondAttribute="trailing" constant="32" id="4gj-Hd-yaA"/>
+                    <constraint firstItem="XFm-8G-igQ" firstAttribute="centerY" secondItem="Fyp-J9-Sa9" secondAttribute="centerY" id="5Pb-W2-jME"/>
+                    <constraint firstItem="avo-LN-p3U" firstAttribute="leading" secondItem="XCl-0f-wEp" secondAttribute="leading" constant="32" id="8G0-fS-FAy"/>
+                    <constraint firstItem="Fyp-J9-Sa9" firstAttribute="top" secondItem="XCl-0f-wEp" secondAttribute="top" constant="8" id="T1R-ue-WXB"/>
+                    <constraint firstAttribute="trailing" secondItem="XFm-8G-igQ" secondAttribute="trailing" constant="32" id="a49-ch-CNm"/>
+                    <constraint firstItem="Fyp-J9-Sa9" firstAttribute="centerX" secondItem="XCl-0f-wEp" secondAttribute="centerX" id="jpK-Cm-R1e"/>
+                    <constraint firstItem="avo-LN-p3U" firstAttribute="centerY" secondItem="Fyp-J9-Sa9" secondAttribute="centerY" id="lE3-xD-lz1"/>
+                    <constraint firstAttribute="bottom" secondItem="Fyp-J9-Sa9" secondAttribute="bottom" constant="8" id="ydn-R6-VWC"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="ui_title" destination="Fyp-J9-Sa9" id="XUF-jQ-qtM"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="104"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="orange_light">
+            <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

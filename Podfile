@@ -1,27 +1,15 @@
-source 'https://github.com/CocoaPods/Specs.git'
-
-inhibit_all_warnings!
-use_frameworks!
+# Uncomment the next line to define a global platform for your project
 platform :ios, '11.0'
 
-def sharedPods
-    platform :ios, '11.0'
+target 'entourage' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
 
-    pod 'AFNetworking', '~> 4.0'
-    pod 'IQKeyboardManager', '~> 6.5.9'
-    pod 'SVProgressHUD', '~> 2.2'
-    pod 'SimpleKeychain', '~> 0.7'
-    pod 'AWSS3', '~> 2.19.0'
-    pod 'kingpin', '0.3.1'
-    pod 'SnapKit', '~> 4.0.0'
-    pod 'GooglePlaces', '~> 5.1.0'
-    pod 'TTTAttributedLabel'
+  pod 'GooglePlaces'
 end
 
-target "entourage" do
-    sharedPods
-end
-
-target "UnitTests" do
-    sharedPods
-end
+ post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+  end
+  end

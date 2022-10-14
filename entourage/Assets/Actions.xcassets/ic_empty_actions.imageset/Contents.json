@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_empty_actions.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

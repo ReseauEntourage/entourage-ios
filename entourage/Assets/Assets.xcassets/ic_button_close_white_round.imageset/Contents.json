@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_button_close_white_round.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

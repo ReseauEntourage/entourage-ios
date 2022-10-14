@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_return_mini.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

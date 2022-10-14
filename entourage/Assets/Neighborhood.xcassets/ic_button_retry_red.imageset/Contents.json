@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_button_retry_red.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
