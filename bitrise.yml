@@ -11,7 +11,7 @@ app:
       is_expand: false
 meta:
   bitrise.io:
-    stack: osx-xcode-13.3.x
+    stack: osx-xcode-14.1.x
 trigger_map:
 - push_branch: develop
   workflow: Entourage-Preprod
