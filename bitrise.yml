@@ -15,8 +15,6 @@ meta:
 trigger_map:
 - push_branch: develop
   workflow: Entourage-Preprod
-- push_branch: V8
-  workflow: Entourage-Preprod
 workflows:
   Entourage-Preprod:
     before_run:
