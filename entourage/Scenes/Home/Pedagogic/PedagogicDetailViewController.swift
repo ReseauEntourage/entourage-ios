@@ -31,28 +31,17 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
         ui_webview.uiDelegate = self
         ui_webview.navigationDelegate = self
         
-        guard let htmlBody = htmlBody else {
-            self.getDetailResource()
-            return
+        if let htmlBody = htmlBody {
+            ui_webview.loadHTMLString(htmlBody, baseURL: nil)
         }
-       
-        ui_webview.loadHTMLString(htmlBody, baseURL: nil)
-        
-        if let id = resourceId, !isRead {
-            ui_indicator.startAnimating()
-            HomeService.postResourceRead(resourceId: id) { [weak self] error in
-                if error == nil {
-                    self?.delegate?.markReadPedogicResource(id: id)
-                }
-            }
-        }
+        self.getDetailResource()
     }
     
     func getDetailResource() {
         guard let resourceId = resourceId else {
             return
         }
-
+        delegate?.markReadPedogicResource(id: resourceId)
         HomeService.getResourceWithId(resourceId) { resource, error in
             if let htmlBody = resource?.bodyHtml {
                 DispatchQueue.main.async {
