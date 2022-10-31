@@ -124,7 +124,7 @@ class EventFiltersViewController: UIViewController {
                             _address = _zipCode
                         }
                         if let _city = _placemark.locality {
-                            _address = "\(_address) \(_city)"
+                            _address = "\(_city), \(_address)"
                         }
                         
                         self?.ui_address_gps?.text = _address
@@ -342,10 +342,15 @@ extension EventFiltersViewController:GMSAutocompleteViewControllerDelegate {
                 }
             }
             
-            let shortAddress = "\(postCode) \(city)"
-            ui_bt_google?.setTitle(_address, for: .normal)
+            var _newAddress = _address
+            if let _indx = _address.lastIndex(of: ",") {
+                _newAddress = _address.substring(to: _indx)
+            }
+        
+            let shortAddress = "\(city), \(postCode)"
+            ui_bt_google?.setTitle(_newAddress, for: .normal)
             let eventLocation = EventLocation(latitude: selectedPlace?.coordinate.latitude, longitude: selectedPlace?.coordinate.longitude)
-            currentFilter.modifyFilter(name: _address,shortname: shortAddress, eventLocation: eventLocation, radius_distance: currentRadius, type: .google)
+            currentFilter.modifyFilter(name: _newAddress,shortname: shortAddress, eventLocation: eventLocation, radius_distance: currentRadius, type: .google)
         }
         else {
             self.ui_bt_google?.setTitle("profileEditLocationPlaceholder".localized, for: .normal)
