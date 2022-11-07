@@ -305,7 +305,7 @@
 "info_soliguide_1" = "Les informations sur ce lieu sont fournies par Soliguide, la cartographie solidaire.";
 "info_soliguide_2" = "Pour des informations encore plus complètes et disponibles en plusieurs langues";
 "info_button_soliguide_consult" = "Consulter";
-"guideTitle" = "Guide de solidarité";
+"guideTitle" = "Guide de la solidarité";
 
 /*******
 //Partner detail
@@ -343,8 +343,8 @@
 
 "mainUserTitleGroup" = "Groupe\nrejoint";
 "mainUserTitleGroups" = "Groupes\nrejoints";
-"mainUserTitleOuting" = "Participation à\nun événement";
-"mainUserTitleOutings" = "Participations à\ndes événements";
+"mainUserTitleOuting" = "Événement";
+"mainUserTitleOutings" = "Événements";
 
 "mainUserBioPlaceholder" = "Placeholder pour la bio ?";
 "mainUserBirthPlaceholder" = "Placeholder pour la date ?";
@@ -405,7 +405,7 @@
 "interest_other_name" = "Autre";
 //profile edit location
 "profileEditLocationTitle" = "Où souhaitez-vous agir ?";
-"profileEditLocationDescription" = "Entourage est un réseau local !\nDécouvrez les initiatives solidaires de votre quartier et tissez des liens avec vos voisins.";
+"profileEditLocationDescription" = "Entourage est un réseau social !\nDécouvrez les initiatives de votre quartier et tissez des liens avec vos voisins.";
 "profileEditLocationLegend*" = "Ajouter un lieu *";
 "profileEditLocationLegend_" = "Ajouter un lieu";
 "profileEditLocationPlaceholder" = "Ville ou département";
@@ -497,12 +497,12 @@
 "neighborhood_create_title_phase_nb" = "0%d.";
 
 "neighborhoodCreateNameTitle" = "Nom du groupe - obligatoire";
-"neighborhoodCreateNamePlaceholderName" = "Donnez un nom explicite au groupe";
+"neighborhoodCreateNamePlaceholderName" = "\"Atelier Ping pong\"";
 "neighborhoodCreateNameSubtitle" = "- obligatoire";
 
 "neighborhoodCreateDescriptionTitle" = "Rédiger un descriptif";
 "neighborhoodCreateDescriptionSubtitle" = "obligatoire (400 caractères max)";
-"neighborhoodCreateTitleDescriptionPlaceholder" = "Décrivez rapidement l’objectif de discussion principal de ce groupe";
+"neighborhoodCreateTitleDescriptionPlaceholder" = "\"Pour se rencontrer entre voisins du 18e\"";
 
 
 "neighborhoodCreatePlaceTitle" = "Ajouter un lieu - obligatoire";
@@ -534,8 +534,8 @@
 "neighborhoodCreatePhase3_error" = "Veuillez sélectionnez une image";
 
 //Phase completed
-"neighborhoodCreateValidateTitle" = "Votre groupe à bien été créé !";
-"neighborhoodCreateValidateSubtitle" = "Félicitation, vous venez de créer un nouveau groupe. Pour le rendre plus actif n’hésitez pas à créer un premier post :p";
+"neighborhoodCreateValidateTitle" = "Votre groupe est en ligne !";
+"neighborhoodCreateValidateSubtitle" = "Félicitations, vous venez de créer un nouveau groupe. Pour le rendre plus actif, créez la première publication.";
 
 "neighborhoodCreateValidatePostMessage" = "Poster un message";
 "neighborhoodCreateValidatePass" = "Passer";
@@ -585,10 +585,10 @@
 "neighborhood_main_page_events_future_single" = "%d événement prévu";
 "neighborhood_main_page_events_future_plural" = "%d événements prévus";
 
-"neighborhood_group_my_empty_title" = "Vous n’avez rejoint encore aucun groupe.";
+"neighborhood_group_my_empty_title" = "Vous n'avez pas encore rejoint de groupe.";
 "neighborhood_group_my_empty_button" = "Découvrir les groupes";
-"neighborhood_group_search_empty_title" = "Oups, aucun résultat ne correspond à votre recherche ! ";
-"neighborhood_group_search_empty_subtitle" = "Si aucun groupe n’existe sur ce sujet, vous pouvez en créer un ! ";
+"neighborhood_group_search_empty_title" = "Oups, aucun résultat ne correspond à votre recherche.";
+"neighborhood_group_search_empty_subtitle" = "Si aucun groupe n'existe sur ce sujet, créez-en un !";
 "neighborhood_group_discover_empty_title" = "Oups, il n'y a pas encore d'autres groupes autour de vous.";
 "neighborhood_group_discover_empty_subtitle" = "N'hésitez pas à créer de nouveaux groupes de voisins !";
 /*************
@@ -683,20 +683,20 @@
 
 /** Home*/
 "home_title_welcome" = "Bienvenue %@ !";
-"home_contrib_title" = "Vos contributions au réseau entourage :";
+"home_contrib_title" = "Mes actions au sein du réseau :";
 "home_meeting_title" = "Belles rencontres Entourage";
 "home_no_meeting_title" = "Pas encore de rencontres Entourage";
 "home_messages_title" = "Messages envoyés";
 "home_events_title" = "Participations à des événements";
-"home_groups_title" = "Groupes rejoints";
+"home_groups_title" = "Groupes de voisins";
 "home_event_title" = "Participation à un événement";
-"home_group_title" = "Groupe rejoint";
+"home_group_title" = "Groupe de voisins";
 "home_no_message_title" = "Pas encore de messages envoyés";
-"home_no_event_title" = "Pas d’événements auquels vous avez participé";
-"home_no_group_title" = "Vous n’avez pas encore rejoint de groupe de voisins";
+"home_no_event_title" = "Participez à votre premier événement";
+"home_no_group_title" = "N'attendez plus pour rejoindre un groupe de voisin !";
 
-"home_actions_title" = "Envie d’agir ? ";
-"home_help_title" = "Besoin d’aide ?";
+"home_actions_title" = "Je commence simplement :";
+"home_help_title" = "Besoin d’aide sur l'app ?";
 "home_help_subtitle" = "Votre guide dans l’app";
 "home_cell_pedago" = "Me former pour passer à l’action";
 "home_cell_map" = "Carte des lieux solidaires";
@@ -716,11 +716,11 @@
 /** Home popup congratulation */
 "home_congrat_title_single" = "Bravo ! Vous avez réalisé %d nouvelle action !";
 "home_congrat_title_plural" = "Bravo ! Vous avez réalisé %d nouvelles actions !";
-"home_congrat_title_next" = "Super, de nouvelles actions se présentent sur la homepage !";
+"home_congrat_title_next" = "Super, il y a du nouveau sur l'accueil !";
 
 //Home popup info encouters
-"home_info_encounter_pop_title" = "Créez des rencontres !";
-"home_info_encounter_pop_subtitle" = "Participez à des événements et des actions solidaires pour augmenter votre compteur de rencontres Entourage";
+"home_info_encounter_pop_title" = "Comment rencontrer d'autres membres ?";
+"home_info_encounter_pop_subtitle" = "Pour cela, rien de plus simple ! Participez à des événements et rejoignez des actions.";
 
 /** Events*/
 //Create
@@ -792,8 +792,9 @@
 "createEventShare" = "Partager dans un ou plusieurs groupes";
 
 "eventCreateEnd_button_show" = "Voir mon événement";
-"eventCreateEnd_title" = "Votre événement à bien été créé !";
-"eventCreateEnd_subtitle" = "Félicitation, vous venez de créer un nouvel événement. Pour le rendre plus visible parlez-en sur vos groupes !";
+"eventCreateEnd_title" = "Votre événement est en ligne !";
+"eventCreateEnd_subtitle" = "Félicitations, vous venez de créer un nouvel événement. Pour le rendre plus actif, parlez-en sur vos groupes !
+";
 
 "eventCreatePhase1_error" = "Veuillez remplir tous les champs obligatoires";
 "eventCreatePhase2_error" = "Veuillez remplir tous les champs obligatoires";
@@ -817,12 +818,12 @@
 "event_main_page_button_myEvents" = "Mes événements";
 "event_main_page_button_discover" = "Découvrir";
 "event_event_my_empty_title" = "Vous n’avez pas encore rejoint d’événement";
-"event_event_my_empty_subtitle" = "Allez sur l’onglet découvrir, et si aucun événement ne vous convient, c’est l’occasion d’en créer un !";
+"event_event_my_empty_subtitle" = "C'est l'occasion de découvrir ce qu'il se passe près de chez vous, ou de créer un nouvel événement !";
 "event_event_discover_empty_title" = "Oups, aucun événement autour de vous";
 "event_event_discover_empty_subtitle" = "Si aucun événement ne se trouve près de vous, vous pouvez élargir votre zone de recherche.";
 "event_event_discover_clear_filters" = "Réinitialiser les filtres";
-"event_event_discover_empty_search_title" =  "Oups, aucun résultat ne correspond à votre sélection ! ";
-"event_event_discover_empty_search_subtitle" = "Si aucun événement de ce type n'existe, vous pouvez élargir votre zone de recherche, ou créer un nouvel événement !";
+"event_event_discover_empty_search_title" =  "Mince, aucun résultat ne correspond à votre recherche !";
+"event_event_discover_empty_search_subtitle" = "Vous ne trouvez pas l'événement de vos rêves ? N'attendez plus pour le créer ou élargissez votre zone de recherche.";
 "event_detail_button_more" = "En savoir plus";
 
 "event_detail_button_participe_ON" = "Participe";
@@ -839,8 +840,8 @@
 "event_canceled_full" = "Annulé le %@";
 "event_cancel_alone" = "Annulé";
 
-"event_empty_post_title" = "Pas encore de publication sur cet événement";
-"event_empty_post_subtitle" = "C’est l’occasion pour vous de partager la première nouvelle pour lancer la discussion ! ";
+"event_empty_post_title" = "Il n'y a pas (encore) de publication sur cet événement";
+"event_empty_post_subtitle" = "Pourquoi ne pas lancer la discussion avec vos voisins ?";
 
 "event_users_title" = "Voir les participants";
 "event_userInput_search" = "Rechercher un participant de l'événement";
@@ -955,10 +956,12 @@
 "action_create_title_contrib" = "Nouvelle contribution";
 "action_create_title_solicitation" = "Nouvelle demande";
 "action_charte_title" = "Charte éthique";
-"action_create_info_contrib" = "Si vous cherchez à proposer une contribution qui ne semble pas entrer dans une catégorie c’est que la contribution n’a pas sa place ici. \nVous pouvez en savoir plus ici.";
-"action_create_info_contrib_underline" = "en savoir plus ici.";
-"action_create_info_demand" = "Si vous cherchez à proposer une demande qui ne semble pas entrer dans une catégorie c’est que la demande n’a pas sa place ici. \nVous pouvez en savoir plus ici.";
-"action_create_info_demand_underline" = "en savoir plus ici.";
+"action_create_info_contrib" = "Vous cherchez à proposer une contribution qui ne rentre pas dans l'une de ces catégories ?
+Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
+"action_create_info_contrib_underline" = "en savoir plus par ici.";
+"action_create_info_demand" = "Vous cherchez à proposer une demande qui ne rentre pas dans l'une de ces catégories ?
+Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours en savoir plus par ici.";
+"action_create_info_demand_underline" = "en savoir plus par ici.";
 
 "action_create_mandatory" = "- obligatoire";
 "action_create_phase_1_name" = "Titre de l’action - obligatoire";
@@ -1080,7 +1083,7 @@
 "messaging_message_placeholder_discut" = "Écrire un message…";
 "messaging_message_title" = "Conversation";
 "messaging_message_send" = "Envoyer";
-"messaging_message_no_message" = "Pas encore de message";
+"messaging_message_no_message" = "0encore de message";
 
 "message_title_new_conv" = "Nouvelle conversation";
 "message_subtitle_new_conv" = "Vous n’avez pas encore échangé avec cet utilisateur. En cas de problème, vous pouvez signaler la conversation dans les paramètres.";
