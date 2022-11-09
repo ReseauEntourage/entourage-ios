@@ -319,7 +319,9 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     
     func showWebview(url:String) {
         if let realUrl = URL(string: url) {
+            HomeService.markRecoWebUrlRead(webUrl: url) { error in }
             SafariWebManager.launchUrlInApp(url: realUrl, viewController: self)
+            refreshDatasFromTab()
             return
         }
     }
@@ -373,5 +375,12 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     }
     func showOuting(id:Int) {
         DeepLinkManager.showOuting(id: id)
+    }
+    
+    func createOuting() {
+        let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
+        navVC.parentController = self.tabBarController
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
     }
 }

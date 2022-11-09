@@ -82,7 +82,7 @@ class HomeViewModel {
             }
         case .neighborhood:
             switch action.action {
-            case .new:
+            case .create:
                 delegate?.createNeighborhood()
             case .show:
                 if let id = action.params.id {
@@ -95,7 +95,7 @@ class HomeViewModel {
             }
         case .contribution:
             switch action.action {
-            case .new:
+            case .create:
                 delegate?.createContribution()
             case .show:
                 if let id = action.params.id {
@@ -137,7 +137,7 @@ class HomeViewModel {
             }
         case .solicitation:
             switch action.action {
-            case .new:
+            case .create:
                 delegate?.createSolicitation()
             case .show:
                 if let id = action.params.id {
@@ -156,6 +156,8 @@ class HomeViewModel {
                 }
             case .index:
                 delegate?.showAllOutings()
+            case .create:
+                delegate?.createOuting()
             default:
                 break
             }

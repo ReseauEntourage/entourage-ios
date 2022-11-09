@@ -91,8 +91,8 @@ struct HomeAction:Codable {
         switch key {
         case "show":
             return .show
-        case "new":
-            return .new
+        case "create":
+            return .create
         case "index":
             return .index
         default:
@@ -128,7 +128,7 @@ struct HomeModerator:Codable {
 
 enum HomeAction_TypeAction {
     case show
-    case new
+    case create
     case index
     case none
 }

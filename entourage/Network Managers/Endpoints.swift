@@ -59,7 +59,7 @@ let kAPIHomeSummary = "home/summary?token=%@"
 let kAPIHomeResources = "resources?token=%@"
 let kAPIHomeGetResource = "resources/%d?token=%@"
 let kAPIHomeResourceRead = "resources/%d/users?token=%@"
-
+let kAPIHomeWebRecoRead = "webviews/url?token=%@&url=%@"
 
 //Event
 let kAPIEventImages = "entourage_images?token=%@"

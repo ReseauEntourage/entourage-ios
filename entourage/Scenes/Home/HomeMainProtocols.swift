@@ -37,4 +37,5 @@ protocol HomeMainViewsActionsDelegate: AnyObject {
     
     func showAllOutings()
     func showOuting(id:Int)
+    func createOuting()
 }

@@ -79,4 +79,20 @@ struct HomeService:ParsingDataCodable {
             DispatchQueue.main.async { completion(nil) }
         }
     }
+    
+    static func markRecoWebUrlRead( webUrl:String, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIHomeWebRecoRead
+        endpoint = String.init(format: endpoint, token,webUrl)
+        
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
+            guard let _ = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
 }
