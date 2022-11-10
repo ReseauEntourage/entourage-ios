@@ -63,11 +63,10 @@ class EventListCell: UITableViewCell {
         ui_title.text = event.title
         
         if let imageUrl = event.metadata?.portrait_url, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
-            ui_image.sd_setImage(with: mainUrl, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
-                if error != nil {
-                    self?.ui_image.image = UIImage.init(named: "ic_placeholder_event")
-                }
-            })
+            self.updateImage(mainUrl: mainUrl)
+        }
+        else  if let imageUrl = event.metadata?.landscape_url, !imageUrl.isEmpty, let mainUrl = URL(string: imageUrl) {
+            self.updateImage(mainUrl: mainUrl)
         }
         else {
             ui_image.image = UIImage.init(named: "ic_placeholder_event")
@@ -78,5 +77,13 @@ class EventListCell: UITableViewCell {
         ui_date.text = event.startDateTimeFormatted
         ui_location.text = event.addressName
         ui_members?.text = event.membersCount ?? 0 > 1 ? String.init(format: "event_members_cell_list".localized, event.membersCount!) : String.init(format: "event_member_cell_list".localized, event.membersCount!)
+    }
+    
+    private func updateImage(mainUrl:URL) {
+        ui_image.sd_setImage(with: mainUrl, placeholderImage: nil, options:SDWebImageOptions(rawValue: SDWebImageOptions.progressiveLoad.rawValue), completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, url: URL?) in
+            if error != nil {
+                self?.ui_image.image = UIImage.init(named: "ic_placeholder_event")
+            }
+        })
     }
 }
