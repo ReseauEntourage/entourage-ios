@@ -87,11 +87,10 @@ class HomeMainViewController: UIViewController {
     func getHomeUser() {
         homeViewModel.getHomeDetail { isOk in
             self.updateTopView()
-            
-            //TODO: get WS new infos
-//            if self.homeViewModel.userHome.actions.count > 0 {
-//                self.addTimerShowPop()
-//            }
+
+            if self.homeViewModel.userHome.congratulations.count > 0 {
+                self.addTimerShowPop()
+            }
         }
     }
     
@@ -113,7 +112,7 @@ class HomeMainViewController: UIViewController {
         
     @objc private func showCongratPopup() {
         let homeVC = HomeCongratPopupViewController()
-        homeVC.configureCongrat(actions: homeViewModel.userHome.actions, parentVC: self.tabBarController)
+        homeVC.configureCongrat(actions: homeViewModel.userHome.congratulations, parentVC: self.tabBarController)
         homeVC.show()
     }
     

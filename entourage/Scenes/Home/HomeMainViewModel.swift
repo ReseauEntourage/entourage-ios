@@ -12,7 +12,7 @@ class HomeViewModel {
     
     private var delegate:HomeMainViewsActionsDelegate?
     
-    private var _userHome:UserHome = UserHome()
+    var _userHome:UserHome = UserHome()
     
     private var notificationCount = 0
     

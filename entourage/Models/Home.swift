@@ -18,6 +18,8 @@ struct UserHome:Codable {
     var actions = HomeActions()
     var moderator:HomeModerator? = nil
     
+    var congratulations = HomeActions()
+    
     enum CodingKeys: String, CodingKey {
         case id
         case displayName = "display_name"
@@ -28,6 +30,7 @@ struct UserHome:Codable {
         case neighborhoodParticipationsCount = "neighborhood_participations_count"
         case actions = "recommandations"
         case moderator
+        case congratulations
     }
 }
 
