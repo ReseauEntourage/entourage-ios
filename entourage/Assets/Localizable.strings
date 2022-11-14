@@ -497,12 +497,12 @@
 "neighborhood_create_title_phase_nb" = "0%d.";
 
 "neighborhoodCreateNameTitle" = "Nom du groupe - obligatoire";
-"neighborhoodCreateNamePlaceholderName" = "\"Atelier Ping pong\"";
+"neighborhoodCreateNamePlaceholderName" = "Les voisins de Paris 18";
 "neighborhoodCreateNameSubtitle" = "- obligatoire";
 
 "neighborhoodCreateDescriptionTitle" = "Rédiger un descriptif";
 "neighborhoodCreateDescriptionSubtitle" = "obligatoire (400 caractères max)";
-"neighborhoodCreateTitleDescriptionPlaceholder" = "\"Pour se rencontrer entre voisins du 18e\"";
+"neighborhoodCreateTitleDescriptionPlaceholder" = "Pour se rencontrer entre voisins du 18e";
 
 
 "neighborhoodCreatePlaceTitle" = "Ajouter un lieu - obligatoire";
@@ -599,7 +599,7 @@
 "neighborhood_detail_button_join_join" = "Rejoindre";
 "neighborhood_detail_members" = "%d membres";
 "neighborhood_detail_member" = "%d membre";
-"neighborhood_detail_about_title" = "À savoir";
+"neighborhood_detail_about_title" = "À propos du groupe";
 "neighborhood_detail_event_title" = "Événements";
 "neighborhood_detail_button_more" = "En savoir plus";
 
@@ -610,8 +610,8 @@
 "neighborhood_post_group_section_old_posts_title" = "Anciennes publications";
 "neighborhood_empty_event_title" = "Pas encore d’événements prévus dans ce groupe";
 "neighborhood_empty_event_subtitle" = "Cliquez sur « + » pour en créer un";
-"neighborhood_empty_post_title" = "Pas encore de publication sur ce groupe";
-"neighborhood_empty_post_subtitle" = "C’est l’occasion pour vous de partager la première nouvelle pour lancer la discussion ! ";
+"neighborhood_empty_post_title" = "Il n'y a pas (encore) de publication sur ce groupe";
+"neighborhood_empty_post_subtitle" = "Hey ! C'est l'occasion de partager la première nouvelle pour lancer la discussion !";
 "neighborhood_about_group_title" = "À propos du groupe";
 
 "neighborhood_post_noComment" = "Pas de commentaires";
@@ -687,18 +687,18 @@
 "home_meeting_title" = "Belles rencontres Entourage";
 "home_no_meeting_title" = "Pas encore de rencontres Entourage";
 "home_messages_title" = "Messages envoyés";
-"home_events_title" = "Participations à des événements";
+"home_events_title" = "Événements";
 "home_groups_title" = "Groupes de voisins";
 "home_event_title" = "Participation à un événement";
 "home_group_title" = "Groupe de voisins";
 "home_no_message_title" = "Pas encore de messages envoyés";
 "home_no_event_title" = "Participez à votre premier événement";
-"home_no_group_title" = "N'attendez plus pour rejoindre un groupe de voisin !";
+"home_no_group_title" = "N'attendez plus pour rejoindre un groupe de voisins !";
 
 "home_actions_title" = "Je commence simplement :";
 "home_help_title" = "Besoin d’aide sur l'app ?";
 "home_help_subtitle" = "Votre guide dans l’app";
-"home_cell_pedago" = "Me former pour passer à l’action";
+"home_cell_pedago" = "Découvrir les astuces pour passer à l'action";
 "home_cell_map" = "Carte des lieux solidaires";
 
 "home_resources_title" = "Tout le contenu pédagogique";
@@ -810,7 +810,7 @@
 //Event group list
 "event_members_cell_list" = "%d participants";
 "event_member_cell_list" = "%d participant";
-"event_group_title_list" = "Événements du groupe";
+"event_group_title_list" = "Le groupe organise aussi :";
 "event_places_detail" = "%d places";
 
 /* Home Event*/
@@ -1011,9 +1011,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 //Create action end
 "action_create_close_button" = "Terminer";
 "contribCreateEnd_title" = "Votre contribution à bien été créée !";
-"contribCreateEnd_subtitle" = "Félicitation, vous venez de créer une nouvelle contribution. Pour la rendre plus visible parlez-en sur vos groupes ! ";
+"contribCreateEnd_subtitle" = "Félicitations, vous venez de créer une nouvelle contribution. Pour la rendre plus visible parlez-en sur vos groupes ! ";
 "solicitationCreateEnd_title" = "Votre demande à bien été créée !";
-"solicitationCreateEnd_subtitle" = "Félicitation, vous venez de créer une nouvelle demande. Pour la rendre plus visible parlez-en sur vos groupes ! ";
+"solicitationCreateEnd_subtitle" = "Félicitations, vous venez de créer une nouvelle demande. Pour la rendre plus visible parlez-en sur vos groupes ! ";
 
 
 //Home Actions
@@ -1080,7 +1080,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
  Messages
  */
 "Messages_title" = "Messages";
-"messaging_message_placeholder_discut" = "Écrire un message…";
+"messaging_message_placeholder_discut" = "Nouveau message";
 "messaging_message_title" = "Conversation";
 "messaging_message_send" = "Envoyer";
 "messaging_message_no_message" = "0encore de message";
