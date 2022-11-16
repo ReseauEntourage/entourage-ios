@@ -84,7 +84,8 @@ struct HomeService:ParsingDataCodable {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIHomeWebRecoRead
-        endpoint = String.init(format: endpoint, token,webUrl)
+        guard let _url = webUrl.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed ) else {return}
+        endpoint = String.init(format: endpoint,_url,token)
         
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             guard let _ = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {

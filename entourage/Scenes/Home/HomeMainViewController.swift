@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class HomeMainViewController: UIViewController {
     
@@ -319,8 +320,7 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     func showWebview(url:String) {
         if let realUrl = URL(string: url) {
             HomeService.markRecoWebUrlRead(webUrl: url) { error in }
-            SafariWebManager.launchUrlInApp(url: realUrl, viewController: self)
-            refreshDatasFromTab()
+            SafariWebManager.launchUrlInApp(url: realUrl, viewController: self, safariDelegate: self)
             return
         }
     }
@@ -381,5 +381,12 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
+    }
+}
+
+
+extension HomeMainViewController:SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        refreshDatasFromTab()
     }
 }

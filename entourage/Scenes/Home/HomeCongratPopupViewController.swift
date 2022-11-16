@@ -17,7 +17,7 @@ class HomeCongratPopupViewController: UIViewController {
     
     
     @IBOutlet weak var ui_title_1: UILabel!
-    @IBOutlet weak var ui_anim_lottie: AnimationView!
+    @IBOutlet weak var ui_anim_lottie: LottieAnimationView!
     
     @IBOutlet weak var ui_title_2: UILabel!
     
@@ -58,7 +58,7 @@ class HomeCongratPopupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let starAnimation = Animation.named("congrat_short_anim")
+        let starAnimation = LottieAnimation.named("congrat_short_anim")
         ui_anim_lottie.animation = starAnimation
         ui_anim_lottie.loopMode = .playOnce
         

@@ -9,7 +9,7 @@ import Foundation
 import SafariServices
 
 struct SafariWebManager {
-    static func launchUrlInApp(url:URL, viewController:UIViewController?) {
+    static func launchUrlInApp(url:URL, viewController:UIViewController?, safariDelegate:SFSafariViewControllerDelegate? = nil) {
         
         let set = NSCharacterSet(charactersIn: "/")
         var urlParh = url.absoluteString.trimmingCharacters(in: set as CharacterSet)
@@ -24,7 +24,7 @@ struct SafariWebManager {
             return
         }
         
-        let safariVC = SafariWebManager.getSafariViewController(url:launchUrl)
+        let safariVC = SafariWebManager.getSafariViewController(url:launchUrl,safariDelegate: safariDelegate)
         
         if let vc = viewController {
             vc.present(safariVC, animated: true, completion: nil)
@@ -45,7 +45,7 @@ struct SafariWebManager {
         }
     }
     
-    private static func getSafariViewController(url:URL) -> SFSafariViewController {
+    private static func getSafariViewController(url:URL,safariDelegate:SFSafariViewControllerDelegate?) -> SFSafariViewController {
         
         let config = SFSafariViewController.Configuration()
         config.entersReaderIfAvailable = false
@@ -61,6 +61,7 @@ struct SafariWebManager {
         safariController.preferredBarTintColor = ApplicationTheme.getDefaultBackgroundBarColor()
         safariController.preferredControlTintColor = ApplicationTheme.getDefaultTintBarColor()
         
+        safariController.delegate = safariDelegate
         return safariController
     }
 }

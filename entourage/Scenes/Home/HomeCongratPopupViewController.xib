@@ -42,7 +42,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcG-H0-tea">
                             <rect key="frame" x="16" y="52" width="322" height="170"/>
                             <subviews>
-                                <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="4ad-R4-O4g" customClass="AnimationView" customModule="Lottie">
+                                <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="4ad-R4-O4g" customClass="LottieAnimationView" customModule="Lottie">
                                     <rect key="frame" x="81" y="0.0" width="160" height="70"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>

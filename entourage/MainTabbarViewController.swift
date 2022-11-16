@@ -109,7 +109,8 @@ class MainTabbarViewController: UITabBarController {
     
     @objc func updateBadgeCount(_ notification:Notification) {
         if let badge = UserDefaults.badgeCount, badge > 0 {
-            messagesVC.tabBarItem.badgeValue = "\(badge)"
+            let newValue = badge > 9 ? "9+" : "\(badge)"
+            messagesVC.tabBarItem.badgeValue = newValue
             UIApplication.shared.applicationIconBadgeNumber = badge
         }
         else {
