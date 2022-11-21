@@ -35,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_profile_header" translatesAutoresizingMaskIntoConstraints="NO" id="2Q1-ML-TDn">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_image_create" translatesAutoresizingMaskIntoConstraints="NO" id="2Q1-ML-TDn">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="439.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2Q1-ML-TDn" secondAttribute="height" multiplier="392:416" id="Tlg-ph-Sth"/>
@@ -52,7 +52,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVL-Dz-byA">
                                 <rect key="frame" x="0.0" y="48" width="414" height="134"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_profile_header" translatesAutoresizingMaskIntoConstraints="NO" id="ewZ-RA-Xqt">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_image_create" translatesAutoresizingMaskIntoConstraints="NO" id="ewZ-RA-Xqt">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="439.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ewZ-RA-Xqt" secondAttribute="height" multiplier="392:416" id="A3J-tt-1hw"/>
@@ -2117,6 +2117,7 @@
     <resources>
         <image name="big_arrow_show" width="63" height="45"/>
         <image name="checkbox_unchecked" width="20" height="20"/>
+        <image name="header_image_create" width="392" height="416"/>
         <image name="ic_action_clothes" width="34" height="34"/>
         <image name="ic_actions_top_bg" width="184" height="110"/>
         <image name="ic_button_plus_fill" width="70" height="70"/>
@@ -2141,7 +2142,6 @@
         <image name="ic_tag_actions" width="14" height="14"/>
         <image name="ic_trash_orange" width="22" height="22"/>
         <image name="img_neighb_valid_group" width="23" height="19"/>
-        <image name="my_profile_header" width="392" height="416"/>
         <image name="placeholder_user" width="124" height="124"/>
         <namedColor name="Beige">
             <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
