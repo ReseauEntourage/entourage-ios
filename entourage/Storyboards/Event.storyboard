@@ -29,7 +29,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_image_create" translatesAutoresizingMaskIntoConstraints="NO" id="X6h-K5-75C">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="X6h-K5-75C">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="439.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="X6h-K5-75C" secondAttribute="height" multiplier="392:416" id="Me6-Bu-7AK"/>
@@ -179,7 +179,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vAV-22-rBh">
                                 <rect key="frame" x="0.0" y="48" width="414" height="134"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_image_create" translatesAutoresizingMaskIntoConstraints="NO" id="lTo-WT-dWm">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="lTo-WT-dWm">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="439.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="lTo-WT-dWm" secondAttribute="height" multiplier="392:416" id="EDT-FV-9mh"/>
@@ -1786,7 +1786,7 @@
     </designables>
     <resources>
         <image name="big_arrow_show" width="63" height="45"/>
-        <image name="header_image_create" width="390" height="400"/>
+        <image name="header_yellow" width="392" height="416"/>
         <image name="ic_big_event_empty" width="215" height="106"/>
         <image name="ic_button_close_white_round" width="32" height="32"/>
         <image name="ic_button_plus_fill" width="70" height="70"/>

@@ -32,7 +32,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_image_create" translatesAutoresizingMaskIntoConstraints="NO" id="F5s-Jz-tgY">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_orange_dark" translatesAutoresizingMaskIntoConstraints="NO" id="F5s-Jz-tgY">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="439.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="F5s-Jz-tgY" secondAttribute="height" multiplier="392:416" id="Adh-Bb-ADg"/>
@@ -573,7 +573,7 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A5n-g5-1t4">
                                 <rect key="frame" x="0.0" y="48" width="414" height="134"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_image_create" translatesAutoresizingMaskIntoConstraints="NO" id="Anf-HD-Atq">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_orange_dark" translatesAutoresizingMaskIntoConstraints="NO" id="Anf-HD-Atq">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="439.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Anf-HD-Atq" secondAttribute="height" multiplier="392:416" id="kCL-h7-Dwi"/>
@@ -2242,7 +2242,7 @@
     <resources>
         <image name="bg_detail_group" width="392" height="286"/>
         <image name="big_arrow_show" width="63" height="45"/>
-        <image name="header_image_create" width="390" height="400"/>
+        <image name="header_orange_dark" width="392" height="416"/>
         <image name="ic_button_close_white_round" width="32" height="32"/>
         <image name="ic_button_plus_fill" width="70" height="70"/>
         <image name="ic_cgu_bubble" width="35" height="35"/>
