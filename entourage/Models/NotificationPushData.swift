@@ -33,13 +33,13 @@ enum InstanceType:String {
     static func getFromString(key:String) -> InstanceType {
         switch key {
         case "pois": return .pois
-        case "users": return .users
-        case "neighborhoods": return .neighborhoods
+        case "users","user": return .users
+        case "neighborhoods","neighborhood": return .neighborhoods
         case "resources": return .resources
-        case "outings": return .outings
-        case "contributions": return .contributions
-        case "solicitations": return .solicitations
-        case "conversations": return .conversations
+        case "outings","outing": return .outings
+        case "contributions","contribution": return .contributions
+        case "solicitations", "solicitation": return .solicitations
+        case "conversations","conversation": return .conversations
         case "partners": return .partners
         default: return .none
         }

@@ -126,3 +126,10 @@ let MENU_ABOUT_SLUG_GIFT = "donation"
 let MENU_ABOUT_SLUG_CGU = "terms"
 let MENU_ABOUT_SLUG_PRIVACY = "privacy-policy"
 
+//Notifs in app
+let kAPINotifsGetCount = "inapp_notifications/count?token=%@"
+let kAPINotifsGetNotifs = "inapp_notifications?token=%@&page=%d&per=%d"
+let kAPINotifsMarkRead = "inapp_notifications/%d?token=%@"
+let kAPINotifsGetPermissions = "notification_permissions?token=%@"
+let kAPINotifsPostPermissions = "notification_permissions?token=%@"
+

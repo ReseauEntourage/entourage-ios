@@ -184,4 +184,12 @@ class HomeViewModel {
         }
     }
     
+    func getNotifsCount(completion: @escaping (_ isOk:Bool) -> Void) {
+        HomeService.getNotificationsCount { count, error in
+            self.notificationCount = count ?? 0
+            
+            completion(true)
+        }
+    }
+    
 }

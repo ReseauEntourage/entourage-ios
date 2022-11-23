@@ -30,6 +30,18 @@ extension ParsingDataCodable {
         return nil
     }
     
+    static func parseSingleValueData<T: Codable>(data:Data,key:String) -> T? {
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject] , let jsonValue = json[key] {
+                return jsonValue as? T
+            }
+        }
+        catch {
+            Logger.print("Error parsing Data \(error)")
+        }
+        return nil
+    }
+    
     //MARK: - Parsing Array objects -
     static func parseDatas<T: Codable>(data:Data,key:String) -> [T] {
         var array = [T]()

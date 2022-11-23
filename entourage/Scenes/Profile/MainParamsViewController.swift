@@ -82,8 +82,9 @@ extension MainParamsViewController:MainParamsMenuDelegate {
     func actionMenu(type: MainParamsMenuType) {
         switch type {
         case .Notifs:
-            //TODO: V2
-            Logger.print("\(type)")
+            let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "paramsNotifsVC")
+            self.navigationController?.present(vc, animated: true, completion: nil)
         case .Help:
             let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "paramsHelpVC")

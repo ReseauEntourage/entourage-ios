@@ -64,6 +64,9 @@
 		022744712795BEC0005600A1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022744702795BEC0005600A1 /* AuthService.swift */; };
 		022744732795C0FB005600A1 /* Partner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022744722795C0FB005600A1 /* Partner.swift */; };
 		022744762795D1D8005600A1 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022744752795D1D8005600A1 /* NotificationManager.swift */; };
+		0227EC4F292CE8320049168E /* NotifInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0227EC4E292CE8320049168E /* NotifInApp.swift */; };
+		0227EC51292D05FB0049168E /* NotificationsInAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0227EC50292D05FB0049168E /* NotificationsInAppViewController.swift */; };
+		0227EC53292D20070049168E /* NotifInAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0227EC52292D20070049168E /* NotifInAppCell.swift */; };
 		0229376B27A4000800206201 /* SafariWebManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0229376A27A4000800206201 /* SafariWebManager.swift */; };
 		0229376D27A434F500206201 /* ApplicationTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0229376C27A434F500206201 /* ApplicationTheme.swift */; };
 		0229376F27A43AA600206201 /* GMSAutoCompleteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0229376E27A43AA600206201 /* GMSAutoCompleteVC.swift */; };
@@ -334,6 +337,7 @@
 		02EAB5A628B8F2710060557D /* ConversationParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAB5A528B8F2710060557D /* ConversationParametersViewController.swift */; };
 		02EAB5A828B8F7A90060557D /* ConversationParamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAB5A728B8F7A90060557D /* ConversationParamCell.swift */; };
 		02EAB5AA28B908400060557D /* ConversationListMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAB5A928B908400060557D /* ConversationListMembersViewController.swift */; };
+		02EB0B46292E1F3100CEB739 /* ParamsNotifsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EB0B45292E1F3100CEB739 /* ParamsNotifsViewController.swift */; };
 		02EB4B522892B77100CC977E /* Event_Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02EB4B512892B77100CC977E /* Event_Message.storyboard */; };
 		02EB4B542892B9C400CC977E /* EventDetailMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EB4B532892B9C400CC977E /* EventDetailMessagesViewController.swift */; };
 		02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */; };
@@ -433,6 +437,9 @@
 		022744702795BEC0005600A1 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		022744722795C0FB005600A1 /* Partner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Partner.swift; sourceTree = "<group>"; };
 		022744752795D1D8005600A1 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		0227EC4E292CE8320049168E /* NotifInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifInApp.swift; sourceTree = "<group>"; };
+		0227EC50292D05FB0049168E /* NotificationsInAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsInAppViewController.swift; sourceTree = "<group>"; };
+		0227EC52292D20070049168E /* NotifInAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifInAppCell.swift; sourceTree = "<group>"; };
 		0229376A27A4000800206201 /* SafariWebManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebManager.swift; sourceTree = "<group>"; };
 		0229376C27A434F500206201 /* ApplicationTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationTheme.swift; sourceTree = "<group>"; };
 		0229376E27A43AA600206201 /* GMSAutoCompleteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMSAutoCompleteVC.swift; sourceTree = "<group>"; };
@@ -699,6 +706,7 @@
 		02EAB5A528B8F2710060557D /* ConversationParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationParametersViewController.swift; sourceTree = "<group>"; };
 		02EAB5A728B8F7A90060557D /* ConversationParamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationParamCell.swift; sourceTree = "<group>"; };
 		02EAB5A928B908400060557D /* ConversationListMembersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListMembersViewController.swift; sourceTree = "<group>"; };
+		02EB0B45292E1F3100CEB739 /* ParamsNotifsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamsNotifsViewController.swift; sourceTree = "<group>"; };
 		02EB4B512892B77100CC977E /* Event_Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Event_Message.storyboard; sourceTree = "<group>"; };
 		02EB4B532892B9C400CC977E /* EventDetailMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailMessagesViewController.swift; sourceTree = "<group>"; };
 		02EC7E4827E87DD400C1110A /* EditProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePhotoCell.swift; sourceTree = "<group>"; };
@@ -858,6 +866,7 @@
 				02A92C2F28981884000DFF95 /* Action.swift */,
 				0264C5D528B4E51B001EA654 /* Conversation.swift */,
 				0208937C28BCFE3100160F1E /* NotificationPushData.swift */,
+				0227EC4E292CE8320049168E /* NotifInApp.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1231,6 +1240,7 @@
 				02CCE68C27D7B8E700D6976C /* MainUserProfileViewController.swift */,
 				023D89BE27DFA351008C6A58 /* MainParamsViewController.swift */,
 				02C9B4A927E21BF70026450A /* ParamsAboutViewController.swift */,
+				02EB0B45292E1F3100CEB739 /* ParamsNotifsViewController.swift */,
 				0295F2B627E497D0006AE255 /* ProfileEditorViewController.swift */,
 				02EC7E4A27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift */,
 				02846CBD27EC86F100D85ADA /* ProfileEditInterestsViewController.swift */,
@@ -1336,6 +1346,8 @@
 				02B94C412851FEB1006059EF /* HomeMainProtocols.swift */,
 				020AF5E62860B10C0012AE60 /* HomeCongratPopupViewController.swift */,
 				020AF5E72860B10C0012AE60 /* HomeCongratPopupViewController.xib */,
+				0227EC50292D05FB0049168E /* NotificationsInAppViewController.swift */,
+				0227EC52292D20070049168E /* NotifInAppCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1913,6 +1925,7 @@
 				023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */,
 				02B94C4D28522BB8006059EF /* PedagogicCell.swift in Sources */,
 				0285AD832806F95E0081B304 /* NeighborhoodCreatePhotoCell.swift in Sources */,
+				0227EC53292D20070049168E /* NotifInAppCell.swift in Sources */,
 				02E069EA279184B3006DB1B6 /* OTOnboardingSearchAssoViewController.swift in Sources */,
 				0247AD002819348E008F915B /* NeighborhoodDetailViewController.swift in Sources */,
 				02B57D9C27FC7141005A567B /* MJTextViewPlaceholder.swift in Sources */,
@@ -1944,6 +1957,7 @@
 				025D8766278DEC2100909101 /* Extensions.swift in Sources */,
 				02E069DE279184B3006DB1B6 /* OTOnboardingV2StartViewController.swift in Sources */,
 				02A92C2A28980FCF000DFF95 /* ActionPicturePreviewResizeViewController.swift in Sources */,
+				0227EC51292D05FB0049168E /* NotificationsInAppViewController.swift in Sources */,
 				022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */,
 				025D872E278DD42100909101 /* EnvironmentConfigurationManager.swift in Sources */,
 				029638F12869E76600E10EFB /* EventPlaceLimitCell.swift in Sources */,
@@ -1970,6 +1984,7 @@
 				024131CD2862024A00561FB4 /* EventCreatePageViewController.swift in Sources */,
 				0288A8D627CCD8F5008D7011 /* PicturePreviewResizeViewController.swift in Sources */,
 				02F578CD289AD4060040685C /* ActionContribDetailHomeCell.swift in Sources */,
+				02EB0B46292E1F3100CEB739 /* ParamsNotifsViewController.swift in Sources */,
 				029638EF2869E71500E10EFB /* EventPlaceCell.swift in Sources */,
 				0258E4F9288AAF1A000F107B /* ActionsService.swift in Sources */,
 				02C3ABF2279AB53800817B82 /* Extensions_UserDefaults.swift in Sources */,
@@ -2064,6 +2079,7 @@
 				024273EC283259B7009A4EB8 /* NeighborhoodDetailMessagesViewController.swift in Sources */,
 				020AF5E82860B10C0012AE60 /* HomeCongratPopupViewController.swift in Sources */,
 				02846CBE27EC86F100D85ADA /* ProfileEditInterestsViewController.swift in Sources */,
+				0227EC4F292CE8320049168E /* NotifInApp.swift in Sources */,
 				02CCE68827D7B51E00D6976C /* TagListView.swift in Sources */,
 				02EAB5A628B8F2710060557D /* ConversationParametersViewController.swift in Sources */,
 				0268C252285A2B1400294055 /* UIView+Draggable.swift in Sources */,

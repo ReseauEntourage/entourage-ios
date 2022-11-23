@@ -34,12 +34,14 @@ class HomeMainViewController: UIViewController {
         setupViews()
         updateTopView()
         getHomeUser()
+        getNotifsCount()
         
         ui_tableview.delegate = self
         ui_tableview.dataSource = self
         
         //Notif for updating actions after tabbar selected
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationHomeUpdate), object: nil)
+        self.ui_view_notif_nb.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +59,7 @@ class HomeMainViewController: UIViewController {
         isLoadingFromNotif = true
         getHomeUser()
         getUserInfo()
+        getNotifsCount()
     }
     
     func setupViews() {
@@ -105,6 +108,12 @@ class HomeMainViewController: UIViewController {
         }
     }
     
+    func getNotifsCount() {
+        homeViewModel.getNotifsCount { isOk in
+            self.updateTopView()
+        }
+    }
+    
     private func addTimerShowPop() {
         let timer = Timer(fireAt: Date().addingTimeInterval(1), interval: 0, target: self, selector: #selector(self.showCongratPopup), userInfo: nil, repeats: false)
               
@@ -131,14 +140,12 @@ class HomeMainViewController: UIViewController {
         ui_view_notif_nb.isHidden = homeViewModel.notifCount == 0
         
         ui_tableview.reloadData()
-        
-        //TODO: a supprimer lorsque l'on aura les valeurs des notifs
-        ui_view_notif_nb.isHidden = true
-        ui_view_notif.isHidden = true
     }
     
     @IBAction func action_show_notifs(_ sender: Any) {
-        showWIP(parentVC: self)
+        let navVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "notifsNav")
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
     }
     
     @IBAction func action_show_profile(_ sender: Any) {

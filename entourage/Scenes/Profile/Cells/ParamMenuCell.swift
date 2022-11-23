@@ -50,7 +50,6 @@ class ParamMenuCell: UITableViewCell {
         ui_title_suppress_account.font = ApplicationTheme.getFontCourantBoldOrangeClair().font
         
         //MARK: - menu hidden for V8 -
-        ui_view_notifs.isHidden = true
         ui_view_unlock_members.isHidden = true
     }
     

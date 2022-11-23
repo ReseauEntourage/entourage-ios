@@ -457,7 +457,14 @@
 "params_about_licences" = "Licence open-source";
 "params_about_title" = "Aide et à propos";
 
-
+//Settings Notifs
+"params_notifs_title" = "Gestion des notifications";
+"param_notifs_switch_notifs" = "Notifications";
+"param_notifs_switch_messages" = "Notifications message";
+"param_notifs_switch_groups" = "Notifications groupe";
+"param_notifs_switch_events" = "Notifications évènement";
+"param_notifs_switch_actions" = "Notifications dons & service";
+"param_notifs_validate" = "Appliquer les modifications";
 
 //Detail user profile
 "detail_user_send_message" = "Écrire un message";
@@ -1107,3 +1114,5 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "conversation_users_title" = "Membres de la conversation ";
 "conversation_userInput_search" = "Rechercher un membre de la conversation";
 "conversation_search_empty_title" = "Oups, aucun résultat ne correspond à votre recherche ! ";
+
+"notifs_title" = "Notifications";
