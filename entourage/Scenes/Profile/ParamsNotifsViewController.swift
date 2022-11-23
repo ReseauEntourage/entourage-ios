@@ -38,10 +38,10 @@ class ParamsNotifsViewController: BasePopViewController {
         ui_title_actions.text = "param_notifs_switch_actions".localized
         
         ui_title_notifs.setupFontAndColor(style:ApplicationTheme.getFontCourantBoldOrange(size: 16))
-        ui_title_messages.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
-        ui_title_groups.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
-        ui_title_events.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
-        ui_title_actions.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
+        ui_title_messages.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_title_groups.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_title_events.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_title_actions.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         
         ui_bt_validate.titleLabel?.font = ApplicationTheme.getFontNunitoRegular(size: 18)
         ui_bt_validate.titleLabel?.textColor = .white

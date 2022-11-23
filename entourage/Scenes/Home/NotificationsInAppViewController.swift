@@ -103,12 +103,13 @@ extension NotificationsInAppViewController: UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let notif = self.notifications[indexPath.row]
-        
-        HomeService.markReadNotif(notifId: notif.uid) { notif, error in
-            if let notif = notif {
-                self.notifications[indexPath.row].completedAt = notif.completedAt
-                self.ui_tableview.reloadData()
-                self.checkHasUnread()
+        if notif.completedAt == nil {
+            HomeService.markReadNotif(notifId: notif.uid) { notif, error in
+                if let notif = notif {
+                    self.notifications[indexPath.row].completedAt = notif.completedAt
+                    self.ui_tableview.reloadData()
+                    self.checkHasUnread()
+                }
             }
         }
         
