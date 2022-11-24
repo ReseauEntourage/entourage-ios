@@ -431,13 +431,13 @@ class ActionsMainHomeViewController: UIViewController {
         if isContribSelected {
             ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             
-            ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeClair())
+            ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             
             ui_view_indicator_contribs.isHidden = false
             ui_view_indicator_solicitations.isHidden = true
         }
         else {
-            ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeClair())
+            ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             
             ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             

@@ -102,5 +102,7 @@ extension UIColor {
     static var orangeMedium: UIColor {
         return UIColor.init(named: "orange_medium") ?? .red
     }
-    
+    static var appGreyOff: UIColor {
+        return UIColor(named: "grey_off") ?? .red
+    }
 }

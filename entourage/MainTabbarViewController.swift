@@ -203,7 +203,7 @@ class MainTabbarViewController: UITabBarController {
     
     @objc func boldSelectedItem() {
         let regularFont = ApplicationTheme.getFontNunitoLight(size: 13)
-        let regularTextAttr:[NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor:UIColor.appOrangeLight,NSAttributedString.Key.font:regularFont]
+        let regularTextAttr:[NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor:UIColor.appGris112,NSAttributedString.Key.font:regularFont]
         
         for item in tabBar.items! {
             item.setTitleTextAttributes(regularTextAttr as [NSAttributedString.Key : Any], for: .normal)

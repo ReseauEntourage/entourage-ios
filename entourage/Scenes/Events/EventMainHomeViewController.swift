@@ -411,14 +411,14 @@ class EventMainHomeViewController: UIViewController {
         if isEventSelected {
             ui_label_events.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             
-            ui_label_discover.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeClair())
+            ui_label_discover.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             
             ui_view_indicator_events.isHidden = false
             ui_view_indicator_discover.isHidden = true
             self.showHideFilterView(isHidden: true)
         }
         else {
-            ui_label_events.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeClair())
+            ui_label_events.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             
             ui_label_discover.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             

@@ -402,13 +402,13 @@ class NeighborhoodHomeViewController: UIViewController {
         if isGroupsSelected {
             ui_label_groups.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             
-            ui_label_discover.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeClair())
+            ui_label_discover.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             
             ui_view_indicator_groups.isHidden = false
             ui_view_indicator_discover.isHidden = true
         }
         else {
-            ui_label_groups.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeClair())
+            ui_label_groups.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             
             ui_label_discover.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             
