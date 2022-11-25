@@ -1034,6 +1034,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_filter_category" = "Catégorie";
 "action_filter_categories" = "Catégories";
 "action_filter_title" = "Filtrer par catégories";
+"action_filter_location_title" = "Filtrer par localisation";
 //detail my actions
 "action_your" = "Votre action";
 "actions_my_title" = "Mes annonces";

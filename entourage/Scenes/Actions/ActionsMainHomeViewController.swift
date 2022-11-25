@@ -163,11 +163,11 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     func setupFloatingButton() {
-        let floatItem2 = createButtonItem(title: "action_menu_demand".localized, iconName: "ic_menu_button_create_solicitation") { item in
+        let floatItem2 = createButtonItem(title: "\("action_menu_demand".localized)  ", iconName: "ic_menu_button_create_solicitation") { item in
             self.createAction(isContrib:false)
         }
         
-        let floatItem1 = createButtonItem(title: "action_menu_contrib".localized, iconName: "ic_menu_button_create_contrib") { item in
+        let floatItem1 = createButtonItem(title: "\("action_menu_contrib".localized)  ", iconName: "ic_menu_button_create_contrib") { item in
             self.createAction(isContrib:true)
         }
         
@@ -398,6 +398,7 @@ class ActionsMainHomeViewController: UIViewController {
             vc.currentFilter = self.currentLocationFilter
             vc.modalPresentationStyle = .fullScreen
             vc.delegate = self
+            vc.isAction = true
             self.navigationController?.present(vc, animated: true)
         }
     }

@@ -48,6 +48,7 @@ class EventFiltersViewController: UIViewController {
     weak var delegate:EventFiltersDelegate? = nil
     
     var isFromSettings = false
+    var isAction = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +76,11 @@ class EventFiltersViewController: UIViewController {
         ui_titles[1].text = "event_filter_google".localized
         ui_titles[2].text = "event_filter_gps".localized
         
-        ui_top_view.populateView(title: "event_filter_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
+        var _titleStr = "event_filter_title".localized
+        if isAction {
+            _titleStr = "action_filter_location_title".localized
+        }
+        ui_top_view.populateView(title: _titleStr, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self)
         
         currentRadius = currentFilter.radius
         currentRadius = currentRadius > Int(maxRadius) ? Int(maxRadius) : currentRadius
