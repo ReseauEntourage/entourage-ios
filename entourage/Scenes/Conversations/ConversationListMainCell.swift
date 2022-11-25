@@ -84,6 +84,11 @@ class ConversationListMainCell: UITableViewCell {
             ui_nb_unread.isHidden = true
             ui_detail_message.setupFontAndColor(style: ApplicationTheme.getFontChampDefault(size: 13, color: .appGrisSombre40))
         }
+        
+        if message.imBlocker() {
+            ui_detail_message.text = "message_user_blocked_by_me_list".localized
+            ui_detail_message.setupFontAndColor(style: ApplicationTheme.getFontChampDefault(size: 13, color: .rougeErreur))
+        }
     }
     
     @IBAction func action_send_message(_ sender: Any) {

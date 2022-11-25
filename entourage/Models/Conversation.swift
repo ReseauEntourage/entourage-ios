@@ -18,6 +18,7 @@ struct Conversation:Codable {
     var user:MemberConversation? = nil
     var members:[MemberLight]? = nil
     var isCreator:Bool? = nil
+    private var blockers:[String]? = nil
     
     var messages:[PostMessage]? = nil
     private var hasPersonalPost:Bool? = nil
@@ -45,6 +46,22 @@ struct Conversation:Codable {
         default:
             return "ic_action_other"
         }
+    }
+    
+    func imBlocker() -> Bool {
+        let _return = blockers?.contains(where: {$0 == "me"})
+                                         
+        return _return ?? false
+    }
+    
+    func isTheBlocker() -> Bool {
+        let _return = blockers?.contains(where: {$0 == "participant"})
+                                         
+        return _return ?? false
+    }
+    
+    func hasBlocker() -> Bool {
+        return blockers?.count ?? 0 > 0
     }
     
     var createdDate:Date? {
@@ -112,6 +129,7 @@ struct Conversation:Codable {
         case hasPersonalPost = "has_personal_post"
         case members
         case isCreator = "creator"
+        case blockers
     }
 }
 
@@ -139,5 +157,32 @@ struct MemberConversation:Codable {
         case roles
         case partnerRoleTitle = "partner_role_title"
         case partner
+    }
+}
+
+struct UserBlocked:Codable {
+    var blockedUser:BlockedUser
+    var user:BlockedUser
+    
+    var isChecked = false
+    
+    enum CodingKeys: String, CodingKey {
+        case user = "user"
+        case blockedUser = "blocked_user"
+    }
+    
+    func imBlocker() -> Bool {
+        return user.uid == UserDefaults.currentUser?.sid
+    }
+}
+struct BlockedUser:Codable {
+    var uid:Int
+    var displayName:String?
+    var avatarUrl:String?
+    
+    enum CodingKeys: String, CodingKey {
+        case uid = "id"
+        case displayName = "display_name"
+        case avatarUrl = "avatar_url"
     }
 }

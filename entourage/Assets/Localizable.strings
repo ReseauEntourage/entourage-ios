@@ -430,7 +430,7 @@
  */
 "params_notifs" = "Notifications";
 "params_help" = "Aide et à propos";
-"params_unlock" = "Débloquer des membres";
+"params_unlock" = "Débloquer des contacts";
 "params_share" = "Partager l’application";
 "params_logout" = "Se déconnecter";
 "params_suppress" = "Supprimer mon compte";
@@ -1104,12 +1104,43 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "conv_param_title_signal_action" = "Signaler";
 "conv_param_subtitle_signal_action" = "Signalez cette conversation à l'équipe Entourage.";
 "conv_param_qui_action" = "Quitter la conversation";
+"conv_param_title_block" = "Bloquer";
+"conv_param_subtitle_block" = "%@ ne pourra plus vous écrire.";
 
 //Pop leave conversation
 "params_leave_conv_pop_title" = "Quitter la conversation";
 "params_leave_conv_pop_message" = "Souhaitez-vous quitter la conversation ?";
 "params_leave_conv_pop_bt_quit" = "Quitter";
 "params_leave_conv_pop_bt_cancel" = "Annuler";
+
+//Pop block user inside conversation
+"params_block_user_conv_pop_title" = "Bloquer l’utilisateur";
+"params_block_user_conv_pop_message" = "Souhaitez vous bloquer %@ ?\nCet utilisateur ne pourra plus vous envoyer de message et la conversation sera supprimée. Vous pourrez déploquer l’utilisateur à tout moment depuis votre profil.";
+"params_block_user_conv_pop_bt_quit" = "Bloquer";
+"params_block_user_conv_pop_bt_cancel" = "Annuler";
+
+"params_block_user_conv_pop_validate_title" = "Bloquer %@";
+"params_block_user_conv_pop_validate_subtitle" = "Ce contact a bien été bloqué.";
+"params_block_user_conv_pop_validate_bt" = "Ok";
+
+"message_user_blocked_by_me_list" = "Vous avez bloqué ce contact";
+"message_user_blocked_by_me" = "Vous avez bloqué %@ . Vous ne pouvez plus lui envoyer de message.";
+"message_user_blocked_by_other" = "Vous ne pouvez plus envoyer de message à %@ . Cette conversation a été bloquée.";
+
+"settingsUnblockUserInfo" = "Séléctionnez un ou plusieurs contact à débloquer.";
+"settingsUnblockBT" = "Débloquer";
+"settingsUnblockUser_error" = "Veuillez choisir au moins un contact";
+
+"params_unblock_user_pop_title" = "Débloquer le contact";
+"params_unblock_users_pop_title" = "Débloquer les contacts";
+"params_unblock_user_pop_message" = "Souhaitez-vous débloquer %@ ?\nVous pourrez à nouveau vous envoyer des messages.";
+"params_unblock_user_pop_bt_unblock" = "Débloquer";
+"params_unblock_user_pop_bt_cancel" = "Annuler";
+
+"params_unblock_user_pop_validate_title" = "Débloquer %@";
+"params_unblock_user_pop_validate_subtitle" = "Ce contact vient d'être débloqué, vous pouvez à nouveau vous écrire.";
+"params_unblock_users_pop_validate_subtitle" = "Ces contacts viennent d'être débloqués, vous pouvez à nouveau vous écrire.";
+"params_unblock_user_pop_validate_bt" = "Ok";
 
 "conversation_users_title" = "Membres de la conversation ";
 "conversation_userInput_search" = "Rechercher un membre de la conversation";

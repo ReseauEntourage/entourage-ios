@@ -107,6 +107,12 @@ let kAPIConversationPostCreateConversation = "conversations?token=%@"
 let kAPIConversationReportConversation = "conversations/%@/report?token=%@"
 let kAPIConversationQuitConversation = "conversations/%@/users?token=%@"
 let kAPIConversationGetDetailConversation = "conversations/%@?token=%@"
+//Block / unblock user
+let kAPIBlockUser = "user_blocked_users/?token=%@"
+let kAPIUnBlockUsers = "user_blocked_users/?token=%@"
+let kAPIGetBlockedUsers = "user_blocked_users?token=%@"
+let kAPIGetIsBlockedUser = "user_blocked_users/%d?token=%@"
+
 
 //WebLink
 let emailContact = "contact@entourage.social"

@@ -12,9 +12,11 @@ class ConversationParametersViewController: BasePopViewController {
     @IBOutlet weak var ui_tableview: UITableView!
     
     var isOneToOne = true
+    var imBlocker = false
     var userId:Int? = nil
     var conversationId:Int? = nil
     var isCreator = false
+    var username:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +66,15 @@ class ConversationParametersViewController: BasePopViewController {
         }
     }
     
+    func sendBlockUser() {
+        MessagingService.blockUser(userId: userId!) { error in
+            if error == nil {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationMessagesUpdateUserBlocked), object: nil)
+            }
+            self.showPopValideBlock()
+        }
+    }
+    
     func showPopLeave() {
         let customAlert = MJAlertController()
         let buttonAccept = MJAlertButtonType(title: "params_leave_conv_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
@@ -106,6 +117,32 @@ class ConversationParametersViewController: BasePopViewController {
             self.navigationController?.present(vc, animated: true)
         }
     }
+    
+    func showPopBlockUser() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "params_block_user_conv_pop_bt_quit".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        let buttonCancel = MJAlertButtonType(title: "params_block_user_conv_pop_bt_cancel".localized, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), bgColor: .appOrangeLight_50, cornerRadius: -1)
+        
+        let desc = String.init(format: "params_block_user_conv_pop_message".localized, username)
+        customAlert.configureAlert(alertTitle: "params_block_user_conv_pop_title".localized, message:desc, buttonrightType: buttonAccept, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        
+        customAlert.alertTagName = .Suppress
+        customAlert.delegate = self
+        customAlert.show()
+    }
+    
+    func showPopValideBlock() {
+        let customAlert = MJAlertController()
+        let buttonAccept = MJAlertButtonType(title: "params_block_user_conv_pop_validate_bt".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+        
+        let _title = String.init(format: "params_block_user_conv_pop_validate_title".localized, username)
+        customAlert.configureAlert(alertTitle: _title , message: "params_block_user_conv_pop_validate_subtitle".localized, buttonrightType: buttonAccept, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+        
+        customAlert.alertTagName = .None
+        customAlert.show()
+        
+        //TODO: refresh 
+    }
 }
 
 //MARK: - MJAlertControllerDelegate -
@@ -116,6 +153,9 @@ extension ConversationParametersViewController: MJAlertControllerDelegate {
         if alertTag == .None {
             self.sendLeaveConversation()
         }
+        if alertTag == .Suppress {
+            self.sendBlockUser()
+        }
     }
     func closePressed(alertTag:MJAlertTAG) {}
     
@@ -125,7 +165,7 @@ extension ConversationParametersViewController: MJAlertControllerDelegate {
 //MARK: - Tableview Datasource/delegate -
 extension ConversationParametersViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isOneToOne ? 2 : isCreator ? 2 : 3
+        return isOneToOne ? (imBlocker ? 2 : 3) : (isCreator ? 2 : 3)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -141,7 +181,15 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
             //One2one -> signal /  Signal
             cell.populateCell(title: isOneToOne ? "conv_param_title_signal".localized : "conv_param_title_signal_action".localized, subtitle: isOneToOne ? "conv_param_subtitle_signal".localized : "conv_param_subtitle_signal_action".localized, isTitleOrange: true, pictoStr: "ic_signal_orange")
             return cell
+            
         default:
+            if isOneToOne {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_subtitle", for: indexPath) as! ConversationParamCell
+                //quit conv
+                let subtitle = String.init(format: "conv_param_subtitle_block".localized, username)
+                cell.populateCell(title: "conv_param_title_block".localized , subtitle: subtitle, isTitleOrange: true, pictoStr: "ic_user_block")
+                return cell
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell_alone", for: indexPath) as! ConversationParamCell
             //quit conv
             cell.populateCell(title: "conv_param_qui_action".localized, subtitle: nil,isTitleOrange: true, pictoStr: "ic_leave_conv", hideSeparator: true)
@@ -161,6 +209,10 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
         case 1:
             self.signalConversation()
         default:
+            if isOneToOne {
+                showPopBlockUser()
+                return
+            }
             showPopLeave()
         }
     }

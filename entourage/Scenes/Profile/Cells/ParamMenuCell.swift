@@ -48,9 +48,6 @@ class ParamMenuCell: UITableViewCell {
         
         ui_title_suppress_account.textColor = .appOrange
         ui_title_suppress_account.font = ApplicationTheme.getFontCourantBoldOrangeClair().font
-        
-        //MARK: - menu hidden for V8 -
-        ui_view_unlock_members.isHidden = true
     }
     
     private func setLabelTitle(label:UILabel) {

@@ -45,6 +45,10 @@ class ConversationDetailMessagesViewController: UIViewController {
     private var selectedIndexPath:IndexPath? = nil
     private weak var parentDelegate:UpdateUnreadCountDelegate? = nil
     
+    
+    @IBOutlet weak var ui_view_block: UIView!
+    @IBOutlet weak var ui_title_block: UILabel!
+    
     var messages = [PostMessage]()
     var messagesExtracted = MessagesSorted()
     var meId:Int = 0
@@ -64,6 +68,8 @@ class ConversationDetailMessagesViewController: UIViewController {
     var isLoading = false
     
     var paramVC:UIViewController? = nil
+    
+    var currentConversation:Conversation? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +95,12 @@ class ConversationDetailMessagesViewController: UIViewController {
         ui_view_button_send.backgroundColor = .clear
         ui_iv_bt_send.image = UIImage.init(named: "ic_send_comment_off")
         
+        
+        ui_view_block.layer.borderWidth = 1
+        ui_view_block.layer.borderColor = UIColor.appGris112.cgColor
+        ui_view_block.layer.cornerRadius = ui_view_block.frame.height / 2
+        ui_title_block.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appGris112))
+        ui_view_block.isHidden = true
         
         let _width = UIApplication.shared.delegate?.window??.frame.width ?? view.frame.size.width
         let buttonDone = UIBarButtonItem(title: "messaging_message_send".localized, style: .plain, target: self, action: #selector(closeKb(_:)))
@@ -118,7 +130,9 @@ class ConversationDetailMessagesViewController: UIViewController {
         hideViewNew()
         
         NotificationCenter.default.addObserver(self, selector: #selector(closeFromParams), name: NSNotification.Name(rawValue: kNotificationMessagesUpdate), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(userBlockedFromParams), name: NSNotification.Name(rawValue: kNotificationMessagesUpdateUserBlocked), object: nil)
 
+        self.getDetailConversation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -198,6 +212,11 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.goBack()
     }
     
+    @objc func userBlockedFromParams() {
+        self.paramVC?.dismiss(animated: false)
+        self.getDetailConversation()
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -230,14 +249,11 @@ class ConversationDetailMessagesViewController: UIViewController {
                 if self.currentPage == 1 && self.messagesExtracted.messages.count + self.messagesForRetry.count > 0 {
                     DispatchQueue.main.async {
                         let indexPath = IndexPath(row: self.messagesExtracted.messages.count + self.messagesForRetry.count - 1, section: 0)
-                        self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                        self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: false)
                     }
                 }
                 
                 self.parentDelegate?.updateUnreadCount(conversationId: self.conversationId, currentIndexPathSelected: self.selectedIndexPath)
-                if self.isOneToOne && self.currentMessageTitle == nil {
-                    self.getDetailConversation()
-                }
             }
             self.setLoadingFalse()
         }
@@ -250,10 +266,29 @@ class ConversationDetailMessagesViewController: UIViewController {
                 
                 let _title = self.currentMessageTitle ?? "messaging_message_title".localized
                 self.ui_top_view.updateTitle(title: _title)
+                self.currentConversation = conversation
+                
+                self.updateInputInfos()
             }
         }
     }
     
+    func updateInputInfos() {
+        if currentConversation?.hasBlocker() ?? false {
+            ui_view_block.isHidden = false
+        }
+        else {
+            ui_view_block.isHidden = true
+        }
+        
+        let _name = currentMessageTitle ?? ""
+        if currentConversation?.imBlocker() ?? false {
+            ui_title_block.text = String.init(format: "message_user_blocked_by_me".localized, _name)
+        }
+        else {
+            ui_title_block.text = String.init(format: "message_user_blocked_by_other".localized, _name)
+        }
+    }
     
     //To transform array -> array with dict date sections
     func extractDict() {
@@ -345,6 +380,8 @@ class ConversationDetailMessagesViewController: UIViewController {
             vc.userId = currentUserId
             vc.conversationId = conversationId
             vc.isOneToOne = isOneToOne
+            vc.username = currentMessageTitle ?? "-"
+            vc.imBlocker = currentConversation?.imBlocker() ?? false
             self.paramVC = vc
             self.present(navvc, animated: true, completion: nil)
             return

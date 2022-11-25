@@ -90,8 +90,9 @@ extension MainParamsViewController:MainParamsMenuDelegate {
             let vc = sb.instantiateViewController(withIdentifier: "paramsHelpVC")
             self.navigationController?.present(vc, animated: true, completion: nil)
         case .Unlock:
-            //TODO:V2
-            Logger.print("\(type)")
+            let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "editBlockedVC")
+            self.navigationController?.present(vc, animated: true, completion: nil)
         case .Share:
             let textShare = String.init(format: "menu_info_text_share".localized, ENTOURAGE_BITLY_LINK)
             let activityVC = UIActivityViewController.init(activityItems: [textShare], applicationActivities: nil)

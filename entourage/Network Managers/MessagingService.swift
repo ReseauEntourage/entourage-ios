@@ -156,4 +156,90 @@ struct MessagingService:ParsingDataCodable {
     }
     
     
+    //Block / Unbloc User
+    static func blockUser(userId:Int, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIBlockUser
+        endpoint = String.init(format: endpoint, token)
+        
+        let parameters:[String:Any] = ["blocked_user_id":userId]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Endpoint report block user \(endpoint) -- params : \(parameters)")
+                
+        NetworkManager.sharedInstance.requestPost(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response report block user: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error report block user - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
+    static func unblockUser(usersID:[Int], completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIUnBlockUsers
+        endpoint = String.init(format: endpoint, token)
+                
+        Logger.print("Endpoint report unblock user \(endpoint)")
+        
+        let parameters:[String:Any] = ["blocked_user_ids":usersID]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+                
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response report unblock user: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error report unblock user - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
+    static func getUsersBlocked(completion: @escaping (_ users:[UserBlocked]?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetBlockedUsers
+        endpoint = String.init(format: endpoint, token)
+        
+        Logger.print("Endpoint report get block users \(endpoint) ")
+                
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { (data, resp, error) in
+            Logger.print("Response report get block users: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error get report block users - \(error)")
+                DispatchQueue.main.async { completion(nil,error) }
+                return
+            }
+            let users:[UserBlocked]? = self.parseDatas(data: data, key: "user_blocked_users")
+            
+            DispatchQueue.main.async { completion(users, nil) }
+        }
+    }
+    
+    static func isUserBlocked(userId:Int,completion: @escaping (_ usersBlocked:UserBlocked?, _ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIGetIsBlockedUser
+        endpoint = String.init(format: endpoint, userId, token)
+        
+        Logger.print("Endpoint report get block user \(endpoint) ")
+                
+        NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { (data, resp, error) in
+            Logger.print("Response report get block user: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error get report block user - \(error)")
+                DispatchQueue.main.async { completion(nil,error) }
+                return
+            }
+            
+            let user:UserBlocked? = self.parseData(data: data, key: "user_blocked_user")
+            DispatchQueue.main.async { completion(user, nil) }
+        }
+    }
+    
 }

@@ -152,12 +152,12 @@ class MainProfileSettingsViewController: UIViewController {
     func changeTabSelection() {
         if isProfileSelected {
             ui_label_profile.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
-            ui_label_params.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeClair())
+            ui_label_params.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             ui_view_indicator_profile.isHidden = false
             ui_view_indicator_params.isHidden = true
         }
         else {
-            ui_label_profile.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrangeClair())
+            ui_label_profile.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             ui_label_params.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             ui_view_indicator_profile.isHidden = true
             ui_view_indicator_params.isHidden = false

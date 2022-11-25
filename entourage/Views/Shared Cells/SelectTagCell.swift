@@ -24,7 +24,7 @@ class SelectTagCell: UITableViewCell {
         ui_subtitle?.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 11, color: .black))
     }
     
-    func populateCell(title:String,isChecked:Bool,imageName:String? = nil, hideSeparator:Bool = false, subtitle:String? = nil, isSingleSelection:Bool = false) {
+    func populateCell(title:String,isChecked:Bool,imageName:String? = nil, hideSeparator:Bool = false, subtitle:String? = nil, isSingleSelection:Bool = false, imageUrl:String? = nil, isUser:Bool = false) {
         ui_title.text = title
         ui_subtitle?.text = subtitle
         
@@ -40,6 +40,16 @@ class SelectTagCell: UITableViewCell {
         }
         else {
             ui_picto?.image = UIImage.init(named: "others")
+        }
+        if isUser {
+            ui_picto?.layer.cornerRadius = (ui_picto?.frame.height ?? 0) / 2
+            let placeholder = UIImage.init(named: "placeholder_user")
+            if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
+                ui_picto?.sd_setImage(with: url, placeholderImage: placeholder)
+            }
+            else {
+                ui_picto?.image = placeholder
+            }
         }
         
         ui_view_separator?.isHidden = hideSeparator
