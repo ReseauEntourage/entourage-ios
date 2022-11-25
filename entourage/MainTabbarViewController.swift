@@ -41,11 +41,6 @@ class MainTabbarViewController: UITabBarController {
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(hidePopInfo), name: NSNotification.Name(rawValue: "hidePopView"), object: nil)//TODO: a faire ?
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(showActions), name: NSNotification.Name(rawValue: "showAlls"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(showEvents), name: NSNotification.Name(rawValue: "showEvents"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(tapProfilTab), name: NSNotification.Name(rawValue: "tapProfilTab"), object: nil)
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(showHome), name: NSNotification.Name(rawValue: "showHome"), object: nil)
         //Notif for changing neighborhood list to discover and select tab
         NotificationCenter.default.addObserver(self, selector: #selector(showDiscoverNeighborhoods), name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowDiscover), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showMyNeighborhoods), name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowMy), object: nil)
@@ -67,6 +62,7 @@ class MainTabbarViewController: UITabBarController {
             vc.setDiscoverFirst()
         }
         self.selectedIndex = 3
+        self.boldSelectedItem()
         Logger.print("***** discover group : \(groupVC.topViewController)")
     }
     @objc func showMyNeighborhoods() {
@@ -74,6 +70,7 @@ class MainTabbarViewController: UITabBarController {
             vc.setMyFirst()
         }
         self.selectedIndex = 3
+        self.boldSelectedItem()
         Logger.print("***** My group : \(groupVC.topViewController)")
     }
     
@@ -82,6 +79,7 @@ class MainTabbarViewController: UITabBarController {
             vc.setDiscoverFirst()
         }
         self.selectedIndex = 4
+        self.boldSelectedItem()
         Logger.print("***** discover Events ")
     }
     
@@ -90,6 +88,7 @@ class MainTabbarViewController: UITabBarController {
             vc.setMyFirst()
         }
         self.selectedIndex = 4
+        self.boldSelectedItem()
         Logger.print("***** My Events ")
     }
     
@@ -98,6 +97,7 @@ class MainTabbarViewController: UITabBarController {
             vc.setContributionsFirst()
         }
         self.selectedIndex = 1
+        self.boldSelectedItem()
     }
     
     @objc func showActionsSolicitations() {
@@ -105,6 +105,7 @@ class MainTabbarViewController: UITabBarController {
             vc.setSolicitationsFirst()
         }
         self.selectedIndex = 1
+        self.boldSelectedItem()
     }
     
     @objc func updateBadgeCount(_ notification:Notification) {
@@ -137,18 +138,6 @@ class MainTabbarViewController: UITabBarController {
 //    @objc func switchToHomeTab() {
 //        showHomeVC()
 //    }
-    
-    @objc func tapProfilTab() {
-        DispatchQueue.main.async {
-            self.selectedIndex = 4
-            self.boldSelectedItem()
-            //TO force scrolltoTop
-            //TODO: a faire ?
-//            if let vc = self.menuVC.topViewController as? OTMenuProfileViewController {
-//                vc.gotoTop()
-//            }
-        }
-    }
     
     func setupVCs() {
         

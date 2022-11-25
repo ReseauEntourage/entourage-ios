@@ -11,8 +11,7 @@ import SafariServices
 class HomeMainViewController: UIViewController {
     
     
-    @IBOutlet weak var ui_notif_count: UILabel!
-    @IBOutlet weak var ui_view_notif_nb: UIView!
+    @IBOutlet weak var ui_notif_bell: UIImageView!
     @IBOutlet weak var ui_view_notif: UIView!
     @IBOutlet weak var ui_username: UILabel!
     @IBOutlet weak var ui_view_user: UIView!
@@ -41,7 +40,8 @@ class HomeMainViewController: UIViewController {
         
         //Notif for updating actions after tabbar selected
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationHomeUpdate), object: nil)
-        self.ui_view_notif_nb.isHidden = true
+
+        self.ui_notif_bell.image = UIImage.init(named: "ic_notif_off")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,8 +64,6 @@ class HomeMainViewController: UIViewController {
     
     func setupViews() {
         ui_username.setupFontAndColor(style: ApplicationTheme.getFontH2Noir())
-        ui_notif_count.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoBold(size: 12), color: .white))
-        ui_view_notif_nb.layer.cornerRadius = ui_view_notif_nb.frame.height / 2
         ui_view_notif.layer.cornerRadius = ui_view_notif.frame.height / 2
         ui_iv_user.layer.cornerRadius = ui_iv_user.frame.height / 2
         
@@ -136,8 +134,12 @@ class HomeMainViewController: UIViewController {
             ui_iv_user.image = UIImage.init(named: "placeholder_user")
         }
         
-        ui_notif_count.text = "\(homeViewModel.notifCount)"
-        ui_view_notif_nb.isHidden = homeViewModel.notifCount == 0
+        if homeViewModel.notifCount == 0 {
+            self.ui_notif_bell.image = UIImage.init(named: "ic_notif_off")
+        }
+        else {
+            self.ui_notif_bell.image = UIImage.init(named: "ic_notif_on")
+        }
         
         ui_tableview.reloadData()
     }

@@ -10,9 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="NunitoSans-Bold.ttf">
-            <string>NunitoSans-Bold</string>
-        </array>
         <array key="NunitoSans-Light.ttf">
             <string>NunitoSans-Light</string>
         </array>
@@ -65,8 +62,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHJ-2B-vMN">
                                         <rect key="frame" x="274" y="4" width="36" height="36"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_notif_bell_orange" translatesAutoresizingMaskIntoConstraints="NO" id="Jdy-io-8Dq">
-                                                <rect key="frame" x="5" y="6" width="26" height="24"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_notif_off" translatesAutoresizingMaskIntoConstraints="NO" id="Jdy-io-8Dq">
+                                                <rect key="frame" x="6.5" y="7" width="23" height="22"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vf6-WX-mbP">
                                                 <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
@@ -86,24 +83,6 @@
                                             <constraint firstItem="Jdy-io-8Dq" firstAttribute="centerY" secondItem="dHJ-2B-vMN" secondAttribute="centerY" id="WJl-mO-a6g"/>
                                             <constraint firstAttribute="width" constant="36" id="YC6-PT-adD"/>
                                             <constraint firstItem="vf6-WX-mbP" firstAttribute="leading" secondItem="dHJ-2B-vMN" secondAttribute="leading" id="eMN-9M-JiQ"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="voQ-X9-X1Z">
-                                        <rect key="frame" x="268" y="-1" width="17" height="17"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxU-y8-er8">
-                                                <rect key="frame" x="5" y="0.5" width="7" height="16.5"/>
-                                                <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="12"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" name="orange_app"/>
-                                        <constraints>
-                                            <constraint firstItem="mxU-y8-er8" firstAttribute="centerX" secondItem="voQ-X9-X1Z" secondAttribute="centerX" id="3HQ-xE-pxS"/>
-                                            <constraint firstAttribute="height" constant="17" id="4z8-VB-I11"/>
-                                            <constraint firstAttribute="width" constant="17" id="qWe-hx-z0o"/>
-                                            <constraint firstItem="mxU-y8-er8" firstAttribute="centerY" secondItem="voQ-X9-X1Z" secondAttribute="centerY" id="sx8-Zq-EEv"/>
                                         </constraints>
                                     </view>
                                     <view opaque="NO" tag="10" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="6gJ-Uy-3Vq" userLabel="userProfileView">
@@ -145,10 +124,8 @@
                                     <constraint firstAttribute="height" constant="44" id="RXd-hb-gfr"/>
                                     <constraint firstItem="h1F-5c-LAD" firstAttribute="leading" secondItem="JNg-3V-Tot" secondAttribute="leading" id="ZrG-Jy-J8A"/>
                                     <constraint firstAttribute="trailing" secondItem="6gJ-Uy-3Vq" secondAttribute="trailing" constant="4" id="fLu-mS-4TP"/>
-                                    <constraint firstItem="Jdy-io-8Dq" firstAttribute="leading" secondItem="voQ-X9-X1Z" secondAttribute="trailing" constant="-6" id="kKN-4b-5H8"/>
                                     <constraint firstItem="2EW-fj-kOG" firstAttribute="leading" secondItem="h1F-5c-LAD" secondAttribute="trailing" constant="16" id="ncM-El-Ii6"/>
                                     <constraint firstItem="2EW-fj-kOG" firstAttribute="bottom" secondItem="h1F-5c-LAD" secondAttribute="bottom" constant="-2" id="tD6-70-hRQ"/>
-                                    <constraint firstItem="Jdy-io-8Dq" firstAttribute="top" secondItem="voQ-X9-X1Z" secondAttribute="bottom" constant="-6" id="yuU-qG-9FG"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="12B-Cd-JZS">
@@ -170,11 +147,10 @@
                     </view>
                     <connections>
                         <outlet property="ui_iv_user" destination="84h-s6-aAZ" id="3rk-CU-euE"/>
-                        <outlet property="ui_notif_count" destination="mxU-y8-er8" id="z4s-Ej-qB3"/>
+                        <outlet property="ui_notif_bell" destination="Jdy-io-8Dq" id="Usy-bg-fbT"/>
                         <outlet property="ui_tableview" destination="12B-Cd-JZS" id="JFZ-Wa-ivC"/>
                         <outlet property="ui_username" destination="2EW-fj-kOG" id="5CP-nP-2Pi"/>
                         <outlet property="ui_view_notif" destination="dHJ-2B-vMN" id="Ssg-3M-r7l"/>
-                        <outlet property="ui_view_notif_nb" destination="voQ-X9-X1Z" id="puk-vh-JMo"/>
                         <outlet property="ui_view_user" destination="6gJ-Uy-3Vq" id="sg5-XB-oAe"/>
                     </connections>
                 </viewController>
@@ -881,6 +857,7 @@ Ligne 2</string>
         <image name="24HSelected" width="23" height="23"/>
         <image name="ic_next_orange" width="9" height="13"/>
         <image name="ic_notif_bell_orange" width="26" height="24"/>
+        <image name="ic_notif_off" width="23" height="22"/>
         <image name="logo_entourage" width="60" height="60"/>
         <image name="placeholder_action" width="88" height="71"/>
         <namedColor name="Beige">

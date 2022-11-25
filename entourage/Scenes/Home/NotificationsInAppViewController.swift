@@ -64,19 +64,21 @@ class NotificationsInAppViewController: UIViewController {
             
             self.ui_tableview.reloadData()
             
-            self.checkHasUnread()
+            self.showOrNotBellOn()
+            
         }
     }
     
-    func checkHasUnread() {
-        let hasUnread = self.notifications.contains(where: {$0.isRead() == false})
-        
-        if hasUnread {
+    func showOrNotBellOn() {
+        if self.notifications.contains(where: {$0.isRead() == false}) {
             self.ic_notif_bell.image = UIImage.init(named: "ic_notif_on")
+            let timer = Timer(fireAt: Date().addingTimeInterval(2), interval: 0, target: self, selector: #selector(self.passBellOff), userInfo: nil, repeats: false)
+                  
+            RunLoop.current.add(timer, forMode: .common)
         }
-        else {
-            self.ic_notif_bell.image = UIImage.init(named: "ic_notif_off")
-        }
+    }
+    @objc func passBellOff() {
+        self.ic_notif_bell.image = UIImage.init(named: "ic_notif_off")
     }
 }
 
@@ -108,7 +110,6 @@ extension NotificationsInAppViewController: UITableViewDataSource, UITableViewDe
                 if let notif = notif {
                     self.notifications[indexPath.row].completedAt = notif.completedAt
                     self.ui_tableview.reloadData()
-                    self.checkHasUnread()
                 }
             }
         }
