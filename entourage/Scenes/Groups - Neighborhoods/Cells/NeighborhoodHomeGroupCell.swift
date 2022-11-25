@@ -68,34 +68,34 @@ class NeighborhoodHomeGroupCell: UITableViewCell {
         
         hidePictos()
         
-        if let interests = neighborhood.interests {
-            for interest in interests {
-                switch interest {
-                case "activites":
-                    ui_picto_3.isHidden = false
-                case "animaux":
-                    ui_picto_6.isHidden = false
-                case "bien-etre":
-                    ui_picto_2.isHidden = false
-                case "other":
-                    ui_picto_7.isHidden = false
-                case "culture":
-                    ui_picto_5.isHidden = false
-                case "jeux":
-                    ui_picto_4.isHidden = false
-                case "sport":
-                    ui_picto_1.isHidden = false
-                case "nature":
-                    ui_picto_8.isHidden = false
-                case "cuisine":
-                    ui_picto_9.isHidden = false
-                case "marauding":
-                    ui_picto_10.isHidden = false
-                default:
-                    break
-                }
-            }
-        }
+//        if let interests = neighborhood.interests {
+//            for interest in interests {
+//                switch interest {
+//                case "activites":
+//                    ui_picto_3.isHidden = false
+//                case "animaux":
+//                    ui_picto_6.isHidden = false
+//                case "bien-etre":
+//                    ui_picto_2.isHidden = false
+//                case "other":
+//                    ui_picto_7.isHidden = false
+//                case "culture":
+//                    ui_picto_5.isHidden = false
+//                case "jeux":
+//                    ui_picto_4.isHidden = false
+//                case "sport":
+//                    ui_picto_1.isHidden = false
+//                case "nature":
+//                    ui_picto_8.isHidden = false
+//                case "cuisine":
+//                    ui_picto_9.isHidden = false
+//                case "marauding":
+//                    ui_picto_10.isHidden = false
+//                default:
+//                    break
+//                }
+//            }
+//        }
     }
 
     func hidePictos() {
