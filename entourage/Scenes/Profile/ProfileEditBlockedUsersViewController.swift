@@ -38,6 +38,7 @@ class ProfileEditBlockedUsersViewController: BasePopViewController {
         ui_error_view.hide()
         
         ui_title_empty.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
+        ui_title_empty.text = "param_empty_blocked_user".localized
         ui_view_empty.isHidden = true
         
         ui_tableview.dataSource = self
@@ -129,7 +130,17 @@ class ProfileEditBlockedUsersViewController: BasePopViewController {
 //MARK: - UITableViewDataSource, UITableViewDelegate  -
 extension ProfileEditBlockedUsersViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        ui_view_empty.isHidden = userBlocked.count == 0 ? false : true
+       
+        if userBlocked.count == 0 {
+            ui_view_empty.isHidden = false
+            ui_button_validate.isEnabled = false
+            ui_button_validate.alpha = 0.3
+        }
+        else {
+            ui_view_empty.isHidden = true
+            ui_button_validate.isEnabled = true
+            ui_button_validate.alpha = 1
+        }
         return userBlocked.count
     }
     

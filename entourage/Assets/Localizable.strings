@@ -1143,6 +1143,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "params_unblock_users_pop_validate_subtitle" = "Ces contacts viennent d'être débloqués, vous pouvez à nouveau vous écrire.";
 "params_unblock_user_pop_validate_bt" = "Ok";
 
+"param_empty_blocked_user" = "Vous n'avez bloqué aucun contact.";
+
 "conversation_users_title" = "Membres de la conversation ";
 "conversation_userInput_search" = "Rechercher un membre de la conversation";
 "conversation_search_empty_title" = "Oups, aucun résultat ne correspond à votre recherche ! ";
