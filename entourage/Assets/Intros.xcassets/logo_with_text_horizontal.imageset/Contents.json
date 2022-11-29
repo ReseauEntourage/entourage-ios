@@ -5,12 +5,11 @@
       "scale" : "1x"
     },
     {
-      "filename" : "pre_onboard_4@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "pre_onboard_4@3x.jpg",
+      "filename" : "logo_with_text_horizontal.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

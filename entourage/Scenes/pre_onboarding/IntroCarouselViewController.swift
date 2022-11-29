@@ -1,98 +1,96 @@
 //
-//  OTPreOnboardingV2ViewController.swift
+//  IntroCarouselViewController.swift
 //  entourage
 //
-//  Created by Jr on 10/04/2020.
-//  Copyright © 2020 Entourage. All rights reserved.
+//  Created by You on 29/11/2022.
+//  Copyright © 2022 Entourage. All rights reserved.
 //
 
 import UIKit
 
-class OTPreOnboardingV2ViewController: UIViewController {
+class IntroCarouselViewController: UIViewController {
     
-    @IBOutlet weak var ui_customPAgeControl: MJCustomPageControl!
+    @IBOutlet weak var ui_logo_entourage: UIImageView!
+    @IBOutlet weak var ui_customPageControl: MJCustomPageControl!
     @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_label_description: UILabel!
     @IBOutlet weak var ui_button_next: UIButton!
-    @IBOutlet weak var ui_image_pre_3: UIImageView!
     @IBOutlet weak var ui_collectionView: UICollectionView!
     @IBOutlet weak var ui_bt_connect: UIButton!
     
-    @IBOutlet weak var ui_constraint_logo_top: NSLayoutConstraint!
+    @IBOutlet weak var ui_button_previous: UIButton!
     @IBOutlet weak var ui_constraint_carrousel_top: NSLayoutConstraint!
-    @IBOutlet weak var ui_constraint_carrousel_bottom: NSLayoutConstraint!
     @IBOutlet weak var ui_bt_next_constraint_height: NSLayoutConstraint!
     
     var currentPosition = 0
     var itemWidth:CGFloat = 0.0
     
-    let cellHeight:CGFloat = 267
-    let widthSpacingForCell:CGFloat = 127 // Margin left/right + spacing
+    let cellHeight:CGFloat = 348
     let cornerRadiusImage:CGFloat = 8
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        itemWidth = view.frame.width - widthSpacingForCell
+        itemWidth = view.frame.width
+        
+        ui_label_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange(size: 24))
+        ui_label_description.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 17))
+        ui_bt_connect.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
+        ui_button_next.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
+        ui_button_previous.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
         
         self.ui_collectionView.collectionViewLayout = OTCarrouselLayout(cellWidth: itemWidth , cellHeight: cellHeight)
         
         self.ui_button_next.layer.cornerRadius = cornerRadiusImage
-        
-        self.ui_customPAgeControl.currentPage = currentPosition
+        ui_customPageControl.numberOfPages = 3
+        self.ui_customPageControl.currentPage = currentPosition
         updateViewsAtPosition()
         
-        self.ui_button_next.setTitle( "next".localized.uppercased(), for: .normal)
-        self.ui_bt_connect.setTitle( "connectMe".localized.uppercased(), for: .normal)
+        self.ui_button_next.setTitle( "next".localized, for: .normal)
+        self.ui_button_previous.setTitle( "previous".localized, for: .normal)
+        
+        ui_button_next.layer.cornerRadius = ui_button_next.frame.height / 2
+        ui_button_previous.layer.cornerRadius = ui_button_previous.frame.height / 2
+        
+        self.ui_bt_connect.setTitle( "bt_pass".localized, for: .normal)
         
         //Check iPhone 6/7/8 < / iPhone 5s/SE
         if view.frame.height <= 667 {
-            ui_constraint_logo_top.constant = 16
-            ui_constraint_carrousel_top.constant = 16
-            ui_constraint_carrousel_bottom.constant = 16
+            ui_constraint_carrousel_top.constant = 0
             
             if view.frame.height <= 568 {
                 ui_label_description.isHidden = true
-                ui_bt_next_constraint_height.constant = 40
+                ui_bt_next_constraint_height.constant = 0
             }
             self.view.layoutIfNeeded()
         }
-        
-//        OTLogger.logEvent(View_Start_Carrousel1)
     }
     
     func updateViewsAtPosition() {
-        self.ui_customPAgeControl.currentPage = currentPosition
+        self.ui_customPageControl.currentPage = currentPosition
         var title = ""
-        var titleColored = ""
         var description = ""
-        self.ui_image_pre_3.isHidden = true
+        ui_logo_entourage.isHidden = true
+        ui_button_previous.isHidden = false
+        ui_bt_connect.isHidden = false
         switch currentPosition {
         case 0:
-            title =  "preOnboard_start_title1".localized
-            titleColored =  "preOnboard_start_title1_colored".localized
-            description =  "preOnboard_start_description1".localized
+            title =  "intro_title_1".localized
+            description =  "intro_subtitle_1".localized
+            ui_logo_entourage.isHidden = false
+            ui_button_previous.isHidden = true
         case 1:
-            title =  "preOnboard_start_title2".localized
-            titleColored =  "preOnboard_start_title2_colored".localized
-            description =  "preOnboard_start_description2".localized
-           // OTLogger.logEvent(View_Start_Carrousel2)
+            title =  "intro_title_2".localized
+            description =  "intro_subtitle_2".localized
         case 2:
-            title =  "preOnboard_start_title3".localized
-            titleColored =  "preOnboard_start_title3_colored".localized
-            description = ""
-            ui_image_pre_3.isHidden = view.frame.height <= 568 ? true : false
-          //  OTLogger.logEvent(View_Start_Carrousel3)
-        case 3:
-            title =  "preOnboard_start_title4".localized
-            titleColored =  "preOnboard_start_title4_colored".localized
-            description =  "preOnboard_start_description4".localized
-            //OTLogger.logEvent(View_Start_Carrousel4)
+            title =  "intro_title_3".localized
+            description = "intro_subtitle_3".localized
+            ui_bt_connect.isHidden = true
         default:
             break
         }
         
-        self.ui_label_title.attributedText = Utils.formatString(stringMessage: title, coloredTxt: titleColored, color: UIColor.black, colorHighlight: UIColor.appOrange, fontSize: 28,fontWeight: .medium,fontColoredWeight: .medium)
+        self.ui_label_title.text = title
         self.ui_label_description.text = description
     }
     
@@ -100,8 +98,16 @@ class OTPreOnboardingV2ViewController: UIViewController {
         self.showChoice()
     }
     
+    @IBAction func action_previous(_ sender: Any) {
+        currentPosition = currentPosition - 1
+        let indexPath = IndexPath(item: currentPosition, section: 0)
+        
+        ui_collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        self.updateViewsAtPosition()
+    }
+    
     @IBAction func action_next_end(_ sender: Any) {
-        if currentPosition < 3 {
+        if currentPosition < 2 {
             currentPosition = currentPosition + 1
             let indexPath = IndexPath(item: currentPosition, section: 0)
             
@@ -120,10 +126,10 @@ class OTPreOnboardingV2ViewController: UIViewController {
     }
 }
 
-extension OTPreOnboardingV2ViewController: UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
+extension IntroCarouselViewController: UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -131,13 +137,11 @@ extension OTPreOnboardingV2ViewController: UICollectionViewDataSource,UICollecti
         
         switch indexPath.row {
         case 0:
-            cell.populateCell(imageName: "pre_onboard_1", width: self.view.frame.width - widthSpacingForCell)
+            cell.populateCell(imageName: "carousel_onboarding 1", width: self.view.frame.width)
         case 1:
-            cell.populateCell(imageName: "pre_onboard_2", width: self.view.frame.width - widthSpacingForCell)
+            cell.populateCell(imageName: "carousel_onboarding 2", width: self.view.frame.width)
         case 2:
-            cell.populateCell(imageName: "pre_onboard_3", width: self.view.frame.width - widthSpacingForCell)
-        case 3:
-            cell.populateCell(imageName: "pre_onboard_4", width: self.view.frame.width - widthSpacingForCell)
+            cell.populateCell(imageName: "carousel_onboarding 3", width: self.view.frame.width)
         default:
             break
         }

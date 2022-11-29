@@ -129,6 +129,8 @@
 		025FFE0927DB980600783E8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0827DB980600783E8D /* Main.storyboard */; };
 		025FFE0B27DBAD5100783E8D /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0A27DBAD5100783E8D /* ApiKeys.plist */; };
 		025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025FFE0C27DBB18D00783E8D /* entourage-Info.plist */; };
+		0260E9D62936402100242A89 /* Intros.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0260E9D52936402100242A89 /* Intros.xcassets */; };
+		0260E9D82936434000242A89 /* IntroCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0260E9D72936434000242A89 /* IntroCarouselViewController.swift */; };
 		0262997927905FB700D84A6A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262997827905FB700D84A6A /* Constants.swift */; };
 		0262997B2790815000D84A6A /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262997A2790815000D84A6A /* APIKeys.swift */; };
 		0264C5D628B4E51B001EA654 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0264C5D528B4E51B001EA654 /* Conversation.swift */; };
@@ -141,7 +143,6 @@
 		0268197E278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02681979278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift */; };
 		0268197F278DF72D00A98A4A /* MJCustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268197A278DF72D00A98A4A /* MJCustomPageControl.swift */; };
 		02681980278DF72D00A98A4A /* OTCarrouselLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268197B278DF72D00A98A4A /* OTCarrouselLayout.swift */; };
-		02681981278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0268197C278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift */; };
 		026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 026819A6278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m */; };
 		026819AA278E00A200A98A4A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819A9278E00A200A98A4A /* Utils.swift */; };
 		026819BD278E105600A98A4A /* OTLoginV2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026819B8278E105600A98A4A /* OTLoginV2ViewController.swift */; };
@@ -505,6 +506,8 @@
 		025FFE0827DB980600783E8D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		025FFE0A27DBAD5100783E8D /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		025FFE0C27DBB18D00783E8D /* entourage-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "entourage-Info.plist"; sourceTree = "<group>"; };
+		0260E9D52936402100242A89 /* Intros.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Intros.xcassets; sourceTree = "<group>"; };
+		0260E9D72936434000242A89 /* IntroCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCarouselViewController.swift; sourceTree = "<group>"; };
 		0262997827905FB700D84A6A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0262997A2790815000D84A6A /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0264C5D528B4E51B001EA654 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
@@ -517,7 +520,6 @@
 		02681979278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPre_OnboardCollectionViewCell.swift; sourceTree = "<group>"; };
 		0268197A278DF72D00A98A4A /* MJCustomPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJCustomPageControl.swift; sourceTree = "<group>"; };
 		0268197B278DF72D00A98A4A /* OTCarrouselLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTCarrouselLayout.swift; sourceTree = "<group>"; };
-		0268197C278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPreOnboardingV2ViewController.swift; sourceTree = "<group>"; };
 		026819A5278DFB6100A98A4A /* entourage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "entourage-Bridging-Header.h"; sourceTree = "<group>"; };
 		026819A6278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCountryCodePickerViewDataSource.m; sourceTree = "<group>"; };
 		026819A7278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCountryCodePickerViewDataSource.h; sourceTree = "<group>"; };
@@ -1056,6 +1058,7 @@
 				024131DA2862126B00561FB4 /* Events.xcassets */,
 				02A92C2D289816C8000DFF95 /* Actions.xcassets */,
 				0243DCCC28AF8DEF00273679 /* Messages.xcassets */,
+				0260E9D52936402100242A89 /* Intros.xcassets */,
 				02C91A2A278F47F300305E0B /* Localizable.strings */,
 			);
 			path = Assets;
@@ -1171,7 +1174,7 @@
 				02681978278DF72D00A98A4A /* OTPreOnboardingV2ChoiceViewController.swift */,
 				02681979278DF72D00A98A4A /* OTPre_OnboardCollectionViewCell.swift */,
 				0268197B278DF72D00A98A4A /* OTCarrouselLayout.swift */,
-				0268197C278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift */,
+				0260E9D72936434000242A89 /* IntroCarouselViewController.swift */,
 			);
 			path = pre_onboarding;
 			sourceTree = "<group>";
@@ -1728,6 +1731,7 @@
 				02CCE67E27D78CAB00D6976C /* NunitoSans-Regular.ttf in Resources */,
 				029BD4F727EDC45E00AE67AF /* MJNavBackView.xib in Resources */,
 				02B94C1E284F55D9006059EF /* Home.xcassets in Resources */,
+				0260E9D62936402100242A89 /* Intros.xcassets in Resources */,
 				021FD9672875F4ED00D3AA54 /* EventListMeCell.xib in Resources */,
 				025C92BA28340F10000970D9 /* NeighborhoodDetailTopMemberCell.xib in Resources */,
 				02B94C2C284F8F0C006059EF /* HomeActionCell.xib in Resources */,
@@ -1884,6 +1888,7 @@
 				0268C24F285A2B1400294055 /* FloatyWindow.swift in Sources */,
 				02681952278DF6CA00A98A4A /* OTCustomTextfield.swift in Sources */,
 				02E2F83728042F14003B7C63 /* OtherUserSignalCell.swift in Sources */,
+				0260E9D82936434000242A89 /* IntroCarouselViewController.swift in Sources */,
 				0262997927905FB700D84A6A /* Constants.swift in Sources */,
 				0258AFE2282ABF2800E7B4AA /* NeighborhoodDetailOnlyViewController.swift in Sources */,
 				02A1D2242828FEF3004C3A3D /* MJTabbarCustom.swift in Sources */,
@@ -1982,7 +1987,6 @@
 				0258AFE0282AAF0600E7B4AA /* NeighborhoodEmptyCells.swift in Sources */,
 				029BD4F527EDC44F00AE67AF /* MJNavBackView.swift in Sources */,
 				02F5278727999D8400929431 /* PoiCategory.swift in Sources */,
-				02681981278DF72D00A98A4A /* OTPreOnboardingV2ViewController.swift in Sources */,
 				02F5277D2799995900929431 /* GuideDetailTableViewCells.swift in Sources */,
 				024131CD2862024A00561FB4 /* EventCreatePageViewController.swift in Sources */,
 				0288A8D627CCD8F5008D7011 /* PicturePreviewResizeViewController.swift in Sources */,

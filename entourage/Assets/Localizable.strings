@@ -57,17 +57,16 @@
 //PreOnboarding
 "next" = "Suivant";
 "connectMe" = "Me connecter";
-"preOnboard_start_title1" = "Bienvenue sur Entourage";
-"preOnboard_start_title1_colored" = "Entourage";
-"preOnboard_start_description1" = "Rejoignez la communauté solidaire Entourage, réseau d’entraide et de partage au coeur de votre quartier.";
-"preOnboard_start_title2" = "Voisins, faites un pas simple vers les autres";
-"preOnboard_start_title2_colored" = "simple";
-"preOnboard_start_description2" = "Proposez ou demandez de l’aide et rencontrez-vous entre voisins, avec et sans domicile, d’un même quartier.";
-"preOnboard_start_title3" = "Participez à des événements solidaires";
-"preOnboard_start_title3_colored" = "événements solidaires";
-"preOnboard_start_title4" = "Entourage vous accompagne";
-"preOnboard_start_title4_colored" = "accompagne";
-"preOnboard_start_description4" = "Aller vers l’autre devient plus facile : participez à des ateliers de sensibilisation ou formez-vous en ligne. L’association Entourage et ses Ambassadeurs sont là pour vous aider !";
+"previous" = "Précédent";
+"bt_pass" = "Passer";
+
+"intro_title_1" = "Le réseau social, vraiment social.";
+"intro_subtitle_1" = "Notre mission : mobiliser et outiller les citoyens pour entourer les plus exclus.";
+"intro_title_2" = "Sur l'app Entourage :";
+"intro_subtitle_2" = "Rencontrez les voisins qui vous ressemblent lors d'événements et échangez autour d'actions de solidarité.";
+"intro_title_3" = "Entourage avec vous !";
+"intro_subtitle_3" = "Les équipes d'ambassadeurs, de bénévoles et de modérateurs d'Entourage vous accompagnent et vous orientent au quotidien.";
+
 "preOnboard_choice_description" = "Le réseau de ceux qui n’ont pas de réseau";
 "preOnboard_choice_signup" = "Je m'inscris";
 "preOnboard_choice_login" = "J'ai déjà un compte";
