@@ -262,10 +262,12 @@ class ConversationDetailMessagesViewController: UIViewController {
     func getDetailConversation() {
         MessagingService.getDetailConversation(conversationId: conversationId) { conversation, error in
             if let conversation = conversation {
-                self.currentMessageTitle = conversation.members?.first(where: {$0.uid != self.meId})?.username
-                
-                let _title = self.currentMessageTitle ?? "messaging_message_title".localized
-                self.ui_top_view.updateTitle(title: _title)
+                if self.isOneToOne {
+                    self.currentMessageTitle = conversation.members?.first(where: {$0.uid != self.meId})?.username
+                    
+                    let _title = self.currentMessageTitle ?? "messaging_message_title".localized
+                    self.ui_top_view.updateTitle(title: _title)
+                }
                 self.currentConversation = conversation
                 
                 self.updateInputInfos()
