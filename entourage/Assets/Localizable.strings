@@ -67,7 +67,7 @@
 "intro_title_3" = "Entourage avec vous !";
 "intro_subtitle_3" = "Les équipes d'ambassadeurs, de bénévoles et de modérateurs d'Entourage vous accompagnent et vous orientent au quotidien.";
 
-"preOnboard_choice_description" = "Le réseau de ceux qui n’ont pas de réseau";
+"preOnboard_choice_description" = "Le réseau social, vraiment social.";
 "preOnboard_choice_signup" = "Je m'inscris";
 "preOnboard_choice_login" = "J'ai déjà un compte";
 "preOnboard_choice_weblink" = "Qui est l’association Entourage ?";
@@ -79,7 +79,7 @@
 "error_login_phoneNumberOrCode" = "Le numéro de téléphone et ce code d’accès ne correspondent pas.";
 "error_login_phoneNumberFormat" = "Erreur de connexion. Votre téléphone doit être au format:\n+33, 06 ou 07";
 
-"login_title" = "Connectez-vous pour continuer";
+"login_title" = "Connexion";
 "login_phone_placeholder" = "Numéro de téléphone";
 "login_placeholder_code" = "Saisir votre code";
 "login_button_connect" = "Je me connecte";
@@ -89,7 +89,7 @@
 "login_label_code" = "Code";
 "login_button_change_phone" = "J’ai changé de numéro de téléphone";
 
-"login_change_phone_title" = "Changement de numéro\nde téléphone";
+"login_change_phone_title" = "Nouveau numéro";
 "login_change_phone_old_number" = "Ancien numéro";
 "login_change_phone_new_number" = "Nouveau numéro";
 "login_change_phone_email" = "Email (optionnel)";

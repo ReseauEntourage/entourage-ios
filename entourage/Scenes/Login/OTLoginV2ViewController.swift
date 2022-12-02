@@ -12,10 +12,6 @@ import IQKeyboardManagerSwift
 
 class OTLoginV2ViewController: UIViewController {
     
-    @IBOutlet weak var ui_constraint_top: NSLayoutConstraint!
-    @IBOutlet weak var ui_constraint_height_logo: NSLayoutConstraint!
-    @IBOutlet weak var ui_view_container: UIView!
-    @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_label_country: UILabel!
     @IBOutlet weak var ui_label_phone: UILabel!
     @IBOutlet weak var ui_label_code: UILabel!
@@ -28,11 +24,15 @@ class OTLoginV2ViewController: UIViewController {
     @IBOutlet weak var ui_tf_code: OTCustomTextfield!
     @IBOutlet weak var ui_pickerView: UIPickerView!
     
+    @IBOutlet weak var ui_main_container_view: UIView!
+    @IBOutlet weak var ui_top_view: MJNavBackView!
+    
     @IBOutlet weak var ui_button_change_phone: UIButton!
     var deeplink:URL? = nil
     
-    var pickerDataSource: OTCountryCodePickerViewDataSource!
-    var countryCode = "+33"
+    let pickerDatas:[CountryCode] = [CountryCode(country: "France",code: "+33",flag:"🇫🇷"),CountryCode(country: "Belgique",code: "+32",flag: "🇧🇪")]
+    
+    var countryCode:CountryCode = defaultCountryCode
     var tempPhone = ""
     let minimumCharacters = 9
     
@@ -45,23 +45,22 @@ class OTLoginV2ViewController: UIViewController {
     //MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
-        pickerDataSource = OTCountryCodePickerViewDataSource.sharedInstance()
         
+        ui_main_container_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
+        ui_top_view.populateCustom(title: "login_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
+        
+        ui_tf_phone.activateToolBarWithTitle( "close".localized)
+        ui_tf_code.activateToolBarWithTitle( "close".localized)
         ui_tf_country.activateToolBarWithTitle()
-        ui_tf_country.text = countryCode
+        ui_tf_country.text = countryCode.flag
         ui_tf_country.inputView = ui_pickerView
         
-        for i in 0...pickerDataSource.count() {
-            if pickerDataSource.getCountryCode(forRow: i) == countryCode {
-                ui_pickerView.selectRow(i, inComponent: 0, animated: false)
-                break
-            }
-        }
-        
         setupViews()
-//        OTLogger.logEvent(View_Login_Login)
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableAutoToolbar = true
+        
+        IQKeyboardManager.shared.enable = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        
+        selectPickerCountry()
     }
     
     override func viewWillLayoutSubviews() {
@@ -80,44 +79,48 @@ class OTLoginV2ViewController: UIViewController {
     
     //MARK: - Methods -
     
-    func setupViews() {
-        ui_bt_validate.layer.cornerRadius = 8
-        ui_view_container.layer.cornerRadius = 8
-        ui_view_container.layer.borderWidth = 1
-        ui_view_container.layer.borderColor = UIColor.init(red: 245 / 255.0, green: 95 / 255.0, blue: 36 / 255.0, alpha: 1.0).cgColor
-        
-        roundView(textfield: ui_tf_code)
-        roundView(textfield: ui_tf_phone)
-        roundView(textfield: ui_tf_country)
-        //ui_tf_code.hasDoneButton = true
-        
-        if view.frame.height <= 667 {
-            ui_constraint_height_logo.constant = 140
-            
-            if view.frame.height <= 568 {
-                ui_constraint_top.constant = 20
-                ui_constraint_height_logo.constant = 80
+    private func selectPickerCountry() {
+        for i in 0...pickerDatas.count {
+            if pickerDatas[i].code == countryCode.code {
+                ui_pickerView.selectRow(i, inComponent: 0, animated: false)
+                break
             }
-            self.view.layoutIfNeeded()
         }
+    }
+    
+    func setupViews() {
+        ui_bt_validate.layer.cornerRadius = ui_bt_validate.frame.height / 2
+        ui_bt_validate.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc(size: 15))
         
         ui_tf_phone.placeholder =  "login_phone_placeholder".localized
         ui_tf_code.placeholder =  "login_placeholder_code".localized
-        ui_bt_validate.setTitle( "login_button_connect".localized.uppercased(), for: .normal)
+        ui_bt_validate.setTitle( "login_button_connect".localized, for: .normal)
         ui_bt_demand_code.setTitle( "login_button_resend_code".localized, for: .normal)
-        ui_label_title.text =  "login_title".localized
+
         ui_label_country.text =  "login_label_country".localized
         ui_label_phone.text =  "login_label_phone".localized
         ui_label_code.text =  "login_label_code".localized
         
         ui_button_change_phone.setTitle( "login_button_change_phone".localized, for: .normal)
-    }
-    
-    func roundView(textfield: UITextField) {
-        textfield.backgroundColor = UIColor.white
-        textfield.layer.cornerRadius = 4
-        textfield.layer.borderWidth = 1
-        textfield.layer.borderColor = UIColor.init(red: 225 / 255.0, green: 228 / 255.0, blue: 232 / 255.0, alpha: 1).cgColor
+        
+        ui_bt_demand_code.layer.cornerRadius = ui_bt_demand_code.frame.height / 2
+        ui_bt_demand_code.layer.borderWidth = 1
+        ui_bt_demand_code.layer.borderColor = UIColor.appOrange.cgColor
+        
+        ui_button_change_phone.layer.cornerRadius = ui_button_change_phone.frame.height / 2
+        ui_button_change_phone.layer.borderWidth = 1
+        ui_button_change_phone.layer.borderColor = UIColor.appGris112.cgColor
+        
+        ui_tf_country.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
+        ui_tf_phone.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
+        ui_tf_code.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
+        
+        ui_label_country.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
+        ui_label_phone.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
+        ui_label_code.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
+        
+        ui_bt_demand_code.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange(size: 14))
+        ui_button_change_phone.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appGrisSombre40))
     }
     
     func checkAndValidate() {
@@ -144,7 +147,7 @@ class OTLoginV2ViewController: UIViewController {
         
         var phone = ""
         if let _phone = ui_tf_phone.text {
-            phone = Utils.validatePhoneFormat(countryCode: countryCode, phone: _phone)
+            phone = Utils.validatePhoneFormat(countryCode: countryCode.code, phone: _phone)
         }
         
         if !isLoading {
@@ -218,7 +221,6 @@ class OTLoginV2ViewController: UIViewController {
     func login(phone:String, code:String) {
         
         IHProgressHUD.show()
-//        OTLogger.logEvent(Action_Login_Submit)//TODO: a faire
         
         AuthService.postLogin(phone: phone, password: code) { [weak self] (user, error, isFirstLogin) in
             IHProgressHUD.dismiss()
@@ -241,8 +243,6 @@ class OTLoginV2ViewController: UIViewController {
                 newUser?.phone = phone
                 UserDefaults.currentUser = newUser
                 UserDefaults.temporaryUser = nil
-                //TODO: a voir
-                //            OTLogger.logEvent(Action_Login_Success)
                 
                 self?.goalRealMain()
             }
@@ -258,22 +258,16 @@ class OTLoginV2ViewController: UIViewController {
             alertTitle =  "tryAgain".localized
             alertText =  "error_login_phoneNumberOrCode".localized
             buttonTitle =  "tryAgain_short".localized
-            
-            //                    OTLogger.logEvent(Error_Login_Fail)
         }
         else if  error.code.contains("INVALID_PHONE_FORMAT") {
             alertTitle =  "tryAgain".localized
             alertText =  "error_login_phoneNumberFormat".localized
             buttonTitle =  "tryAgain_short".localized
-            
-            //                    OTLogger.logEvent(Error_Login_Phone)
         }
         else if let errorCode = error.error as NSError?, errorCode.code == NSURLErrorNotConnectedToInternet {
             alertTitle =  "tryAgain".localized
             alertText = errorCode.localizedDescription
             buttonTitle =  "tryAgain_short".localized
-            
-            //                    OTLogger.logEvent(Error_Login_Error)
         }
         
         let alertvc = UIAlertController.init(title: alertTitle, message: alertText, preferredStyle: .alert)
@@ -287,7 +281,6 @@ class OTLoginV2ViewController: UIViewController {
     
     func resendCode(phone:String) {
         IHProgressHUD.show()
-        //        OTLogger.logEvent(Action_Login_SMS)
         
         AuthService.regenerateSecretCode(phone: phone) { [weak self] error in
             Logger.print("***** return resned code ;) error? \(error)")
@@ -328,15 +321,11 @@ class OTLoginV2ViewController: UIViewController {
         checkAndResendCode()
     }
     
-    @IBAction func action_back(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
     @IBAction func action_show_change_phone(_ sender: UIButton) {
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "ChangePhoneVC") {
         self.navigationController?.pushViewController(vc, animated: true)
         }
-        
     }
 }
 
@@ -355,7 +344,7 @@ extension OTLoginV2ViewController: UITextFieldDelegate {
 extension OTLoginV2ViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerDataSource.count()
+        return pickerDatas.count
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -363,18 +352,25 @@ extension OTLoginV2ViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerDataSource.getTitleForRow(row)
+        return "\(pickerDatas[row].flag) \(pickerDatas[row].country)"
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let title = self.pickerDataSource.getTitleForRow(row)!
+        let title = "\(pickerDatas[row].flag) \(pickerDatas[row].country)"
         let attrString = NSAttributedString.init(string: title, attributes: [NSAttributedString.Key.foregroundColor:UIColor.black])
         return attrString
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        ui_tf_country.text = pickerDataSource.getCountryCode(forRow: row)
-        countryCode = pickerDataSource.getCountryCode(forRow: row)
+        ui_tf_country.text = pickerDatas[row].flag
+        countryCode = pickerDatas[row]
+    }
+}
+
+//MARK: - MJNavBackViewDelegate -
+extension OTLoginV2ViewController: MJNavBackViewDelegate {
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
     }
 }

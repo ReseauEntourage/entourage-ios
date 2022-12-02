@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 class OnboardingPhase1ViewController: UIViewController {
 
@@ -21,6 +22,17 @@ class OnboardingPhase1ViewController: UIViewController {
     var phone:String? = nil
     var email:String? = nil
     var hasConsent = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+    }
+    
+    deinit {
+        IQKeyboardManager.shared.enable = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
+    }
 
     func updateValidate() {
         pageDelegate?.addUserInfos(firstname: userFirstname, lastname: userLastname,countryCode:countryCode, phone: phone, email: email, consentEmail: hasConsent)

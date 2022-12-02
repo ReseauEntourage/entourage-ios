@@ -10,7 +10,6 @@ import UIKit
 
 class OTLoginChangePhoneViewController: UIViewController {
 
-    @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_label_old_number: UILabel!
     @IBOutlet weak var ui_label_new_number: UILabel!
     @IBOutlet weak var ui_label_email: UILabel!
@@ -25,9 +24,14 @@ class OTLoginChangePhoneViewController: UIViewController {
     @IBOutlet weak var ui_label_info_send: UILabel!
     @IBOutlet weak var ui_view_send_ok: UIView!
     
+    @IBOutlet weak var ui_top_view: MJNavBackView!
+    @IBOutlet weak var ui_main_container_view: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        ui_label_title.text =  "login_change_phone_title".localized
+        ui_main_container_view.layer.cornerRadius = ApplicationTheme.bigCornerRadius
+
+        ui_top_view.populateCustom(title: "login_change_phone_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 24), titleColor: .white, imageName: "back_button_white", backgroundColor: .clear, delegate: self, showSeparator: false)
         ui_label_old_number.text =  "login_change_phone_old_number".localized
         ui_label_new_number.text =  "login_change_phone_new_number".localized
         ui_label_email.text =  "login_change_phone_email".localized
@@ -37,28 +41,32 @@ class OTLoginChangePhoneViewController: UIViewController {
         ui_tf_new_phone.placeholder =  "login_change_phone_new_number_placeholder".localized
         ui_tf_email.placeholder =  "login_change_phone_email_placeholder".localized
         
-        ui_button_validate.setTitle( "login_change_phone_bt_validate".localized.uppercased(), for: .normal)
-        ui_button_back.setTitle( "login_change_bt_return".localized.uppercased(), for: .normal)
-        
+        ui_button_validate.setTitle( "login_change_phone_bt_validate".localized, for: .normal)
+        ui_button_back.setTitle( "login_change_bt_return".localized, for: .normal)
         
         ui_view_send_ok.isHidden = true
-        ui_button_validate.layer.cornerRadius = 8
+        ui_button_validate.layer.cornerRadius = ui_button_validate.frame.height / 2
         
         ui_button_back.layer.cornerRadius = 8
         ui_button_back.layer.borderWidth = 1
         ui_button_back.layer.borderColor = UIColor.appOrange.cgColor
         
-        roundView(textfield: ui_tf_old_phone)
-        roundView(textfield: ui_tf_new_phone)
-        roundView(textfield: ui_tf_email)
         ui_tf_email.hasDoneButton = true
-    }
-    
-    func roundView(textfield: UITextField) {
-        textfield.backgroundColor = UIColor.white
-        textfield.layer.cornerRadius = 4
-        textfield.layer.borderWidth = 1
-        textfield.layer.borderColor = UIColor.init(red: 225 / 255.0, green: 228 / 255.0, blue: 232 / 255.0, alpha: 1).cgColor
+        ui_tf_old_phone.hasDoneButton = true
+        ui_tf_new_phone.hasDoneButton = true
+        
+        ui_label_info_send.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
+        
+        ui_label_old_number.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
+        ui_label_new_number.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
+        ui_label_email.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
+        
+        ui_tf_new_phone.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
+        ui_tf_old_phone.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
+        ui_tf_email.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
+        
+        ui_button_validate.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc(size: 15))
+
     }
     
     func checkAndSend() {
@@ -97,6 +105,7 @@ class OTLoginChangePhoneViewController: UIViewController {
             }
             else {
                 self?.ui_view_send_ok.isHidden = false
+                self?.ui_button_validate.isHidden = true
             }
         }
     }
@@ -177,5 +186,12 @@ struct OTLoginChangeService {
         }
         
         return message
+    }
+}
+
+//MARK: - MJNavBackViewDelegate -
+extension OTLoginChangePhoneViewController: MJNavBackViewDelegate {
+    func goBack() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
