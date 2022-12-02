@@ -1,54 +1,73 @@
 //
-//  OTOnboardingPassCodeViewController.swift
+//  OnboardingPhase2ViewController.swift
 //  entourage
 //
-//  Created by Jr on 21/04/2020.
-//  Copyright © 2020 Entourage. All rights reserved.
+//  Created by You on 30/11/2022.
 //
 
 import UIKit
 import MessageUI
 import IHProgressHUD
 
-class OTOnboardingPassCodeViewController: UIViewController {
-    
-    @IBOutlet weak var ui_label_title: UILabel!
+class OnboardingPhase2ViewController: UIViewController {
+
     @IBOutlet weak var ui_label_description: UILabel!
     
-    @IBOutlet weak var ui_line_6: UIView!
-    @IBOutlet weak var ui_line_5: UIView!
-    @IBOutlet weak var ui_line_4: UIView!
-    @IBOutlet weak var ui_line_3: UIView!
-    @IBOutlet weak var ui_line_2: UIView!
-    @IBOutlet weak var ui_line_1: UIView!
-    @IBOutlet weak var ui_tf_number1: UITextField!
-    @IBOutlet weak var ui_tf_number2: UITextField!
-    @IBOutlet weak var ui_tf_number3: UITextField!
-    @IBOutlet weak var ui_tf_number4: UITextField!
-    @IBOutlet weak var ui_tf_number5: UITextField!
-    @IBOutlet weak var ui_tf_number6: UITextField!
+    @IBOutlet weak var ui_tf_code: OTCustomTextfield!
     @IBOutlet weak var ui_bt_nocode: UIButton!
     @IBOutlet weak var ui_label_phoneNb: UILabel!
     @IBOutlet weak var ui_label_countdown: UILabel!
     @IBOutlet weak var ui_bt_modify: UIButton!
     @IBOutlet weak var ui_label_help: UILabel!
     
-    weak var delegate:OnboardV2Delegate? = nil
-    var tempPasscode = ""
-    var tempPhone = ""
+    @IBOutlet weak var ui_view_bt_help: UIView!
     
+    var tempCode:String? = nil
+    var tempPhone = ""
+    let timeoutInfo = 60
     var timeOut = 60
     var countDownTimer:Timer? = nil
     
+    weak var pageDelegate:OnboardingDelegate? = nil
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        ui_tf_code.activateToolBarWithTitle( "close".localized)
+        ui_tf_code.delegate = self
+        ui_tf_code.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 13))
         
+        ui_label_description.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
+        ui_label_phoneNb.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 15))
+        ui_bt_modify.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15,color: .appOrangeLight))
+        
+        ui_bt_nocode.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appOrange))
+        ui_label_help.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appOrange))
+        ui_label_countdown.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appGris112))
+        
+        ui_view_bt_help.layer.cornerRadius = ui_view_bt_help.frame.height / 2
+        ui_view_bt_help.layer.borderColor = UIColor.appOrange.cgColor
+        ui_view_bt_help.layer.borderWidth = 1
+        
+        ui_bt_nocode.layer.cornerRadius = ui_bt_nocode.frame.height / 2
+        ui_bt_nocode.layer.borderColor = UIColor.appOrange.cgColor
+        ui_bt_nocode.layer.borderWidth = 1
+        
+        timeOut = timeoutInfo
         countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        
-        populateViews()
-//        OTLogger.logEvent(View_Onboarding_Passcode)//TODO:  Analytics
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if timeOut == 0 || !((countDownTimer?.isValid) != nil)  {
+            timeOut = timeOut == 0 ? timeoutInfo : timeOut
+            self.ui_label_countdown.isHidden = false
+            countDownTimer?.invalidate()
+            countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        }
+        
+        populateViews()
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         countDownTimer?.invalidate()
@@ -83,18 +102,19 @@ class OTOnboardingPassCodeViewController: UIViewController {
          
         self.ui_bt_nocode.isHidden = true
         
-        let _retyTxt = String.init(format:  "onboard_sms_wait_retry".localized , "00:\(timeOut)".localized)
+        let _time = timeOut < 10 ? "00:0\(timeOut)" : "00:\(timeOut)"
+        let _retyTxt = String.init(format:  "onboard_sms_wait_retry".localized , "00:\(_time)".localized)
         ui_label_countdown.text = _retyTxt
         
         ui_bt_modify.setTitle( "onboard_sms_modify".localized, for: .normal)
         ui_bt_modify.isHidden = true
         
-        ui_label_title.text =  "onboard_sms_title".localized
         ui_label_description.text =  "onboard_sms_sub".localized
         ui_label_phoneNb.text = tempPhone
         
         ui_label_help.text =  "onboarding_help_label".localized
     }
+    
     
     //MARK: - IBActions -
     @IBAction func action_nocode(_ sender: Any) {
@@ -107,17 +127,16 @@ class OTOnboardingPassCodeViewController: UIViewController {
             self.navigationController?.present(alertvc, animated: true, completion: nil)
         }
         else {
-            delegate?.requestNewcode()
+            pageDelegate?.requestNewcode()
         }
     }
     
     @IBAction func tap_background(_ sender: Any) {
-        _ = [ui_tf_number1, ui_tf_number2, ui_tf_number3,
-             ui_tf_number4, ui_tf_number5, ui_tf_number6].map() { $0.resignFirstResponder() }
+        ui_tf_code.resignFirstResponder()
     }
     
     @IBAction func action_modify(_ sender: Any) {
-        delegate?.goPreviousManually()
+        pageDelegate?.goMain()
     }
     
     @IBAction func action_help(_ sender: Any) {
@@ -133,61 +152,27 @@ class OTOnboardingPassCodeViewController: UIViewController {
             IHProgressHUD.showError(withStatus:  "about_email_notavailable".localized)
         }
     }
+
 }
 
-extension OTOnboardingPassCodeViewController: MFMailComposeViewControllerDelegate {
+
+extension OnboardingPhase2ViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
 //MARK: - UITextfieldDelegate -
-extension OTOnboardingPassCodeViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.text = ""
+extension OnboardingPhase2ViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.tempCode = textField.text
+        
+        pageDelegate?.sendCode(code: self.tempCode ?? "")
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if range.location == 0 {
-            changeTextfield(fromTextField: textField,string:string)
-            return true
-        }
-        return false
-    }
-    
-    func changeTextfield(fromTextField:UITextField,string:String) {
-        switch fromTextField {
-        case ui_tf_number1:
-            ui_tf_number1.text = string
-            ui_tf_number2.becomeFirstResponder()
-            ui_line_2.backgroundColor = UIColor.appOrange
-        case ui_tf_number2:
-            ui_tf_number2.text = string
-            ui_tf_number3.becomeFirstResponder()
-            ui_line_3.backgroundColor = UIColor.appOrange
-        case ui_tf_number3:
-            ui_tf_number3.text = string
-            ui_tf_number4.becomeFirstResponder()
-            ui_line_4.backgroundColor = UIColor.appOrange
-        case ui_tf_number4:
-            ui_tf_number4.text = string
-            ui_tf_number5.becomeFirstResponder()
-            ui_line_5.backgroundColor = UIColor.appOrange
-        case ui_tf_number5:
-            ui_tf_number5.text = string
-            ui_tf_number6.becomeFirstResponder()
-            ui_line_6.backgroundColor = UIColor.appOrange
-        case ui_tf_number6:
-            ui_tf_number6.text = string
-            ui_tf_number6.resignFirstResponder()
-            
-            self.tempPasscode = "\(ui_tf_number1.text!)\(ui_tf_number2.text!)\(ui_tf_number3.text!)\(ui_tf_number4.text!)\(ui_tf_number5.text!)\(ui_tf_number6.text!)"
-            
-            delegate?.updateButtonNext(isValid: true)
-            delegate?.validatePasscode(password: self.tempPasscode)
-            
-        default:
-            break
-        }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pageDelegate?.sendCode(code: self.tempCode ?? "")
+        textField.resignFirstResponder()
+        return true
     }
 }

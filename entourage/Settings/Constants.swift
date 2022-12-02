@@ -48,4 +48,6 @@ struct StoryboardName {
     
     static let messages = "Messages"
     
+    static let onboarding = "Onboarding"
+    
 }

@@ -131,7 +131,8 @@ extension UserProfileDetailViewController: UITableViewDataSource,UITableViewDele
         switch indexPath.row {
         case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoActivities", for: indexPath) as! MainUserActivitiesCell
             let isMe = UserDefaults.currentUser?.sid == currentUser.sid
-            cell.populateCell(isMe:isMe ,neighborhoodsCount: currentUser.stats.neighborhoodsCount, outingsCount: currentUser.stats.outingsCount ?? -1, myDate:currentUser.creationDate)
+            let stats:UserStats = currentUser.stats ?? UserStats()
+            cell.populateCell(isMe:isMe ,neighborhoodsCount: stats.neighborhoodsCount, outingsCount: stats.outingsCount ?? -1, myDate:currentUser.creationDate)
             return cell
         case 2:
             if currentUser.interests?.count ?? 0 == 0  {

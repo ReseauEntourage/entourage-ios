@@ -204,15 +204,6 @@ class OTLoginV2ViewController: UIViewController {
         countDownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
-    func goLoginNext(user:User?) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "LoginNextVC") as! OTLoginNextViewController
-        vc.currentUser = user
-        if let appDelegate = UIApplication.shared.delegate, let window = appDelegate.window {
-            window?.rootViewController = vc
-            window?.makeKeyAndVisible()
-        }
-    }
-    
     func goalRealMain() {
         AppState.continueFromLoginVC()
         
@@ -253,12 +244,7 @@ class OTLoginV2ViewController: UIViewController {
                 //TODO: a voir
                 //            OTLogger.logEvent(Action_Login_Success)
                 
-                if user?.addressPrimary == nil {
-                    self?.goLoginNext(user:newUser)
-                }
-                else {
-                    self?.goalRealMain()
-                }
+                self?.goalRealMain()
             }
         }
     }

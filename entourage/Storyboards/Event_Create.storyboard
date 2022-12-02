@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -235,7 +235,7 @@
                                 <color key="backgroundColor" name="BeigeClair"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellGroupName" rowHeight="113" id="5Gg-3Z-XRM" customClass="NeighborhoodCreateNameCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="113"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Gg-3Z-XRM" id="4vf-Id-Nq6">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
@@ -305,7 +305,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellPhoto" rowHeight="354" id="dDA-95-KdS" customClass="NeighborhoodCreatePhotoCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="157.5" width="375" height="354"/>
+                                        <rect key="frame" x="0.0" y="163" width="375" height="354"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dDA-95-KdS" id="b4K-kH-fWz">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="354"/>
@@ -414,7 +414,7 @@
                                 <color key="backgroundColor" name="BeigeClair"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellDate" rowHeight="306" id="qPr-e9-j0O" customClass="EventDatesCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="306"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="306"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qPr-e9-j0O" id="Zpf-Oa-ePC">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="306"/>
@@ -625,7 +625,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellSelector" rowHeight="306" id="lFu-Rf-axG" customClass="EventRecurrenceCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="350.5" width="375" height="306"/>
+                                        <rect key="frame" x="0.0" y="356" width="375" height="306"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lFu-Rf-axG" id="w2U-ZF-uDy">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="306"/>
@@ -852,7 +852,7 @@
                                 <color key="backgroundColor" name="BeigeClair"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellPlace" rowHeight="422" id="ciJ-TI-flp" customClass="EventPlaceCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="422"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ciJ-TI-flp" id="SSr-0P-icv">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="422"/>
@@ -1132,7 +1132,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellLimit" rowHeight="254" id="Qf7-1m-U3I" customClass="EventPlaceLimitCell" customModule="Ent_Beta" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="466.5" width="375" height="254"/>
+                                        <rect key="frame" x="0.0" y="472" width="375" height="254"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qf7-1m-U3I" id="rGR-Rg-0fS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="254"/>
@@ -1377,7 +1377,7 @@
                                         <color key="backgroundColor" name="BeigeClair"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellOther" id="RBg-gA-j8t" customClass="NeighborhoodCreateAddOtherCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="81"/>
+                                                <rect key="frame" x="0.0" y="50" width="375" height="81"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RBg-gA-j8t" id="nE0-2N-Kxt">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
@@ -1438,7 +1438,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellInterest" rowHeight="64" id="XUL-AO-dtQ" customClass="SelectTagCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="125.5" width="375" height="64"/>
+                                                <rect key="frame" x="0.0" y="131" width="375" height="64"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XUL-AO-dtQ" id="EpB-DC-648">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -1584,7 +1584,7 @@
                                         <color key="backgroundColor" name="BeigeClair"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellTop" rowHeight="169" id="tw5-Jo-Lx6" customClass="EventShareCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="375" height="169"/>
+                                                <rect key="frame" x="0.0" y="50" width="375" height="169"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tw5-Jo-Lx6" id="gTG-cm-KIP">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
@@ -1725,7 +1725,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellGroup" rowHeight="57" id="5vA-wE-bM8" customClass="SelectTagCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="213.5" width="375" height="57"/>
+                                                <rect key="frame" x="0.0" y="219" width="375" height="57"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5vA-wE-bM8" id="c6d-SY-il8">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
@@ -2294,7 +2294,7 @@ L2</string>
                                         <color key="backgroundColor" name="BeigeClair"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellSelector" rowHeight="306" id="eDd-EO-Q66" customClass="EventRecurrenceCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="359" height="306"/>
+                                                <rect key="frame" x="0.0" y="50" width="359" height="306"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eDd-EO-Q66" id="IBN-86-1fP">
                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="306"/>
@@ -2590,7 +2590,7 @@ L2</string>
         <image name="event_congrat_end" width="227" height="122"/>
         <image name="event_group_end" width="388" height="392"/>
         <image name="event_placeholder_image" width="96" height="96"/>
-        <image name="header_image_create" width="391" height="415"/>
+        <image name="header_image_create" width="392" height="416"/>
         <image name="ic_event_date" width="20" height="20"/>
         <image name="ic_event_home_big" width="64" height="56"/>
         <image name="ic_event_time" width="20" height="20"/>

@@ -19,8 +19,6 @@ class UserPhotoAddViewController: BasePopViewController {
     @IBOutlet weak var ui_bt_take_photo: UIButton!
     @IBOutlet weak var ui_bt_import_gallery: UIButton!
     
-    weak var delegate:OnboardV2Delegate? = nil
-    
     var pickerViewController:UIImagePickerController? = nil
     var selectedImage:UIImage? = nil
     var currentUserFirstname = ""
@@ -222,13 +220,6 @@ extension UserPhotoAddViewController: MJNavBackViewDelegate {
 extension UserPhotoAddViewController:TakePhotoDelegate {
     func updatePhoto(image: UIImage?) {
         self.ui_iv_profile.image = image
-        
-        if let _ = image {
-            delegate?.updateButtonNext(isValid: true)
-        }
-        else {
-            delegate?.updateButtonNext(isValid: false)
-        }
     }
 }
 

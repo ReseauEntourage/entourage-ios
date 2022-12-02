@@ -62,6 +62,15 @@ class MJNavBackView: UIView {
         }
     }
     
+    func hideButtonBackForUnboarding(hide:Bool) {
+        ui_view_close.isHidden = !hide
+        ui_view_back.isHidden = hide
+        ui_image_close.isHidden = hide
+        for button in ui_buttons_close {
+            button.isHidden = hide
+        }
+    }
+    
     func populateView(title:String,titleFont:UIFont, titleColor:UIColor,delegate:MJNavBackViewDelegate,showSeparator:Bool = true,backgroundColor:UIColor? = nil,cornerRadius:CGFloat? = nil, isClose:Bool = false, doubleRightMargin:Bool = false) {
              
         self.populateCustom(title: title, titleFont: titleFont, titleColor: titleColor, imageName: nil, backgroundColor: backgroundColor, delegate: delegate, showSeparator: showSeparator, cornerRadius: cornerRadius, isClose: isClose,doubleRightMargin: doubleRightMargin)

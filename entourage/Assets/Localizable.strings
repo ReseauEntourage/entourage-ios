@@ -123,22 +123,67 @@
 "login_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
 
 //Onboarding
-"onboard_button_pass" = "Passer";
+"onboard_bt_create" = "Créer";
+"onboard_bt_back" = "Précédent";
+"onboard_bt_next" = "Suivant";
+//Phase 1
 "onboard_welcome_title" = "Bienvenue !";
-"onboard_welcome_sub" = "Tout d'abord...\nComment vous appelez-vous ?";
-"onboard_welcome_info" = "Seule la première lettre sera visible par les autres membres.";
+"onboard_welcome_info" = "Seule la première lettre sera visible.";
+"onboard_welcome_firstname" = "Prénom*";
 "onboard_welcome_placeholder_firstname" = "Votre prénom";
+"onboard_welcome_lastname" = "Nom*";
 "onboard_welcome_placeholder_lastname" = "Votre nom";
-"onboard_phone_title" = "Enchantés, %@.";
-"onboard_phone_sub" = "Quel est votre numéro de téléphone ?";
-"onboard_phone_info" = "Cette information restera confidentielle. Nous voulons juste vérifier que vous n’êtes pas un robot, mais un humain au grand coeur !";
-"onboard_phone_placeholder_phone" = "Téléphone";
+"onboard_welcome_country" = "Pays*";
+"onboard_welcome_phone" = "Téléphone*";
+"onboard_welcome_mail" = "E-mail";
+"onboard_welcome_placeholder_mail" = "votreadresse@mail.com";
+"onboard_welcome_consent" = "Je souhaite recevoir des informations et des conseils de la part d’Entourage ";
+"onboard_welcome_info_mandatory" = "*Champs obligatoire. Vos informations resteront confidentielles et ne seront jamais communiquées à des tiers.";
+
+//Phase2
 "onboard_sms_title" = "Entrez le code reçu par SMS";
 "onboard_sms_sub" = "Un SMS vient juste de vous être envoyé au :";
 "onboard_sms_modify" = "- Modifier";
 "onboard_sms_no_code" = "Pas de code ? Réessayez dans 1 min";
 "onboard_sms_wait_retry" = "Pas de code ? Réessayez dans %@";
-"onboard_sms_wait_retry_end" = "Renvoyer un code";
+"onboard_sms_wait_retry_end" = "Redemander un code";
+
+//Phase 3
+"onboard_phone_title" = "Enchantés, %@ !";
+
+"onboard_phase3_title" = "En plus de faire des rencontres humaines, comment souhaitez-vous contribuer au sein de la Communauté Entourage ?";
+"onboard_title_entour" = "Entourer";
+"onboard_subtitle_entour" = "Proposer de l’aide …";
+"onboard_title_beentour" = "Être entouré";
+"onboard_subtitle_beentour" = "Demander de l’aide, trouver les structures sociales autour de moi …";
+"onboard_place_title_new" = "Quel est votre quartier ?";
+"onboard_place_desc" = "* L’adresse est confidentielle et ne sera jamais communiquée ";
+"onboard_place_infos_placeholder" = "Adresse, ville ou département";
+"onboard_info_asso" = "Je suis une association";
+
+//Phase End
+"onboard_end_title" = "Bienvenue dans la Communauté Entourage ";
+"onboard_end_subtitle" = "Félicitations, vous voilà membre de l’application Entourage !";
+"onboard_end_button" = "Commencer l’aventure humaine";
+
+//Onboard errors
+"onboard_error_Usertype" = "Veuillez sélectionner une contribution au minimum";
+"onboard_error_place" = "Veuillez Choisir une adresse";
+"onboard_error_firstname" = "Le prénom doit comporter au moins 2 lettres.";
+"onboard_error_lastname" = "Le nom doit comporter au moins 2 lettres.";
+"onboard_error_email" = "L’adresse email est invalide.";
+"onboard_error_phone" = "Le numéro doit comporter 9 ou 10 chiffres.";
+//A supp
+"onboard_button_pass" = "Passer";
+
+"onboard_welcome_sub" = "Tout d'abord...\nComment vous appelez-vous ?";
+
+
+
+"onboard_phone_sub" = "Quel est votre numéro de téléphone ?";
+"onboard_phone_info" = "Cette information restera confidentielle. Nous voulons juste vérifier que vous n’êtes pas un robot, mais un humain au grand coeur !";
+"onboard_phone_placeholder_phone" = "Téléphone";
+
 "onboard_sms_no_pwd" = "Veuillez remplir le password";
 "attention_pop_title" = "Attention";
 "onboard_sms_pop_alert" = "Veuillez patienter encore %d sec avant de renouveller la demande.";
@@ -181,6 +226,8 @@
 "onboard_email_pwd_email_info" = "Laissez-nous votre mail pour recevoir des informations et des conseils de la part d'Entourage !";
 "onboard_email_pwd_email_info2" = "Entourage ne communique pas votre adresse e-mail.";
 "onboard_email_pwd_description" = "Maintenant, finalisons la création de votre compte !";
+//Fin supp
+
 
 //Onboarding Assos
 "onboard_asso_start_title" = "Ça tombe bien !";

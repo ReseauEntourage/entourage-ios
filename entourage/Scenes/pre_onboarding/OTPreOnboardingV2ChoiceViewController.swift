@@ -87,9 +87,9 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     }
     
     @IBAction func action_signUp(_ sender: Any) {
-//        OTLogger.logEvent(Action_Start_SignUpStart)
-        let _storyboard = UIStoryboard.init(name: "Onboarding_V2", bundle: nil)
-        let vc = _storyboard.instantiateViewController(withIdentifier: "startOnboardVC") as! OTOnboardingV2StartViewController
+        
+        let sb = UIStoryboard.init(name: StoryboardName.onboarding, bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "onboardingStart") as! OnboardingStartViewController
         vc.parentDelegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }

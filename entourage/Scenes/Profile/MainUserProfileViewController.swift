@@ -73,7 +73,8 @@ extension MainUserProfileViewController: UITableViewDelegate, UITableViewDataSou
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfoActivities", for: indexPath) as! MainUserActivitiesCell
-            cell.populateCell(isMe:true ,neighborhoodsCount: currentUser.stats.neighborhoodsCount, outingsCount: currentUser.stats.outingsCount ?? -1, myDate:currentUser.creationDate)
+            let stats:UserStats = currentUser.stats ?? UserStats()
+            cell.populateCell(isMe:true ,neighborhoodsCount: stats.neighborhoodsCount, outingsCount: stats.outingsCount ?? -1, myDate:currentUser.creationDate)
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellUserInfos", for: indexPath) as! MainUserInfosCell

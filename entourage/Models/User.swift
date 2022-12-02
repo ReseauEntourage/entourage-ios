@@ -23,7 +23,7 @@ struct User: Codable {
     var avatarURL:String? = nil
     var avatarKey:String? = nil
     var token:String? = ""
-    var stats:UserStats = UserStats()
+    var stats:UserStats? = UserStats()
     var about:String? = nil
     var organization:Organization? = nil
     var partner:Partner? = nil

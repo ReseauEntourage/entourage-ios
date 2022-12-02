@@ -18,7 +18,7 @@ class OTCustomTextfield: UITextField {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = UIColor.appWhite246
+        //self.backgroundColor = UIColor.appWhite246
     }
     
     required init?(coder aDecoder: NSCoder) {
