@@ -213,7 +213,7 @@ class EventFiltersViewController: UIViewController {
         self.googleplaceVC?.delegate = self
         
         let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.formattedAddress.rawValue) |
-                                                  UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.addressComponents.rawValue))
+                                                  UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.addressComponents.rawValue) | UInt(GMSPlaceField.coordinate.rawValue))
         self.googleplaceVC?.placeFields = fields
     }
     
