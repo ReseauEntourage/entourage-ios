@@ -629,7 +629,7 @@
 /******
  * Group / communauté
  */
-"neighborhood_main_page_title" = "Communauté";
+"neighborhood_main_page_title" = "Groupes";
 "neighborhood_main_page_button_myGroups" = "Mes groupes";
 "neighborhood_main_page_button_discover" = "Découvrir";
 "neighborhoodInputSearch" = "Rechercher un groupe";
@@ -1133,7 +1133,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 /*
  Messages
  */
-"Messages_title" = "Messages";
+"Messages_title" = "Discussions";
 "messaging_message_placeholder_discut" = "Nouveau message";
 "messaging_message_title" = "Conversation";
 "messaging_message_send" = "Envoyer";
