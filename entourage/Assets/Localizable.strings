@@ -1162,7 +1162,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 //Pop block user inside conversation
 "params_block_user_conv_pop_title" = "Bloquer l’utilisateur";
-"params_block_user_conv_pop_message" = "Souhaitez vous bloquer %@ ?\nCet utilisateur ne pourra plus vous envoyer de message et la conversation sera supprimée. Vous pourrez déploquer l’utilisateur à tout moment depuis votre profil.";
+"params_block_user_conv_pop_message" = "Souhaitez vous bloquer %@ ?\nCet utilisateur ne pourra plus vous envoyer de message. Vous pourrez débloquer l’utilisateur à tout moment depuis les paramètres de votre profil.";
 "params_block_user_conv_pop_bt_quit" = "Bloquer";
 "params_block_user_conv_pop_bt_cancel" = "Annuler";
 
@@ -1174,7 +1174,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "message_user_blocked_by_me" = "Vous avez bloqué %@ . Vous ne pouvez plus lui envoyer de message.";
 "message_user_blocked_by_other" = "Vous ne pouvez plus envoyer de message à %@ . Cette conversation a été bloquée.";
 
-"settingsUnblockUserInfo" = "Séléctionnez un ou plusieurs contact à débloquer.";
+"settingsUnblockUserInfo" = "Sélectionnez un ou plusieurs contacts à débloquer.";
 "settingsUnblockBT" = "Débloquer";
 "settingsUnblockUser_error" = "Veuillez choisir au moins un contact";
 
