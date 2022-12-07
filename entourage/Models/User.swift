@@ -41,6 +41,8 @@ struct User: Codable {
     
     var isEngaged:Bool = false
     
+    var hasConsent:Bool? = nil
+    
     private var creationDateString:String? = nil
     
     var creationDate:Date {
@@ -108,6 +110,10 @@ struct User: Codable {
         }
         if let goal = goal, goal.count > 0 {
             dict["goal"] = goal
+        }
+        
+        if let hasConsent = hasConsent {
+            dict["newsletter_subscription"] = hasConsent
         }
         return dict
     }

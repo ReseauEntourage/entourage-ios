@@ -1000,7 +1000,7 @@ Contacter l'équipe Entourage.</string>
                                                             <rect key="frame" x="0.0" y="364.66666666666669" width="346" height="110.66666666666669"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="254" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="753" text="Ajouter un lieu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuT-m7-eZ6">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="19"/>
+                                                                    <rect key="frame" x="28" y="0.0" width="105" height="19"/>
                                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -1054,6 +1054,7 @@ Contacter l'équipe Entourage.</string>
                                                             <constraints>
                                                                 <constraint firstItem="sm8-qB-Zdt" firstAttribute="leading" secondItem="ysa-am-mnR" secondAttribute="trailing" id="1nw-p8-Z0f"/>
                                                                 <constraint firstAttribute="bottom" secondItem="XN3-gq-t2N" secondAttribute="bottom" constant="5" id="2EL-mY-Goc"/>
+                                                                <constraint firstItem="VuT-m7-eZ6" firstAttribute="leading" secondItem="DXR-bl-HTQ" secondAttribute="trailing" constant="8" id="5Dt-4L-nDY"/>
                                                                 <constraint firstItem="nT3-dz-ZYA" firstAttribute="trailing" secondItem="ysa-am-mnR" secondAttribute="trailing" id="5Sq-Jw-erW"/>
                                                                 <constraint firstItem="nT3-dz-ZYA" firstAttribute="top" secondItem="ysa-am-mnR" secondAttribute="bottom" constant="4" id="8Te-sc-w3D"/>
                                                                 <constraint firstItem="ysa-am-mnR" firstAttribute="leading" secondItem="DXR-bl-HTQ" secondAttribute="trailing" constant="8" id="9Mz-P1-riY"/>
@@ -1070,7 +1071,6 @@ Contacter l'équipe Entourage.</string>
                                                                 <constraint firstItem="sm8-qB-Zdt" firstAttribute="centerY" secondItem="ysa-am-mnR" secondAttribute="centerY" id="nta-Ou-kDU"/>
                                                                 <constraint firstItem="DXR-bl-HTQ" firstAttribute="leading" secondItem="UUJ-Yc-Fyp" secondAttribute="leading" id="on3-CP-Oxb"/>
                                                                 <constraint firstItem="ysa-am-mnR" firstAttribute="top" secondItem="VuT-m7-eZ6" secondAttribute="bottom" constant="6" id="rLZ-AU-asU"/>
-                                                                <constraint firstItem="VuT-m7-eZ6" firstAttribute="leading" secondItem="UUJ-Yc-Fyp" secondAttribute="leading" id="rXz-jb-0QT"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xd-zQ-Yzl">

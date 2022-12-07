@@ -318,6 +318,8 @@ class OnboardingStartViewController: UIViewController {
             _currentUser?.email = email
         }
         
+        _currentUser?.hasConsent = hasConsent
+        
         UserService.updateUser(user: _currentUser) { [weak self] user, error in
             IHProgressHUD.dismiss()
             
