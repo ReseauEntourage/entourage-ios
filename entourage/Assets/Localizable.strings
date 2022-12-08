@@ -736,7 +736,7 @@
 
 /** Home*/
 "home_title_welcome" = "Bienvenue %@ !";
-"home_contrib_title" = "Mes actions au sein du réseau :";
+"home_contrib_title" = "Mes actions au sein du réseau";
 "home_meeting_title" = "Belles rencontres Entourage";
 "home_no_meeting_title" = "Pas encore de rencontres Entourage";
 "home_messages_title" = "Messages envoyés";
@@ -748,11 +748,12 @@
 "home_no_event_title" = "Participez à votre premier événement";
 "home_no_group_title" = "N'attendez plus pour rejoindre un groupe de voisins !";
 
-"home_actions_title" = "Je commence simplement :";
-"home_help_title" = "Besoin d’aide sur l'app ?";
+"home_actions_title" = "Je commence simplement";
+"home_help_title" = "Besoin d’aide sur l'app";
 "home_help_subtitle" = "Votre guide dans l’app";
 "home_cell_pedago" = "Découvrir les astuces pour passer à l'action";
 "home_cell_map" = "Carte des lieux solidaires";
+"home_cell_map_subtitle" = "Accueils de jour, bagageries…";
 
 "home_resources_title" = "Tout le contenu pédagogique";
 "home_resource_title" = "Contenu pédagogique";

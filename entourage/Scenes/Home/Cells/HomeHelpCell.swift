@@ -41,12 +41,20 @@ class HomeHelpCell: UITableViewCell {
         customView.layer.shouldRasterize = true
     }
 
-    func populateCell(name:String, subtitle:String, bottomMargin:CGFloat? = nil) {
+    func populateCell(name:String, subtitle:String, imageUrl:String?, imagenamePicto:String?, bottomMargin:CGFloat? = nil) {
         ui_title.text = name
         ui_subtitle.text = subtitle
         
         if let bottomMargin = bottomMargin {
             ui_constraint_bottom_margin.constant = bottomMargin
+        }
+        
+        if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
+            ui_image.sd_setImage(with: url, placeholderImage:UIImage(named: "placeholder_user"))
+        }
+        
+        if let imagenamePicto = imagenamePicto {
+            ui_image.image = UIImage.init(named: imagenamePicto)
         }
     }
     

@@ -20,9 +20,9 @@ class HomeMainViewController: UIViewController {
     
     var homeViewModel:HomeViewModel!
     
-    let section_agir = 0
-    let section_contribs = 1
-    let section_help = 2
+    let section_agir = 2//0
+    let section_contribs = 0//1
+    let section_help = 1//2
     
     var isLoadingFromNotif = true
     override func viewDidLoad() {
@@ -113,6 +113,9 @@ class HomeMainViewController: UIViewController {
     }
     
     private func addTimerShowPop() {
+        //TODO: Disable for mvp
+        return;
+        
         let timer = Timer(fireAt: Date().addingTimeInterval(1), interval: 0, target: self, selector: #selector(self.showCongratPopup), userInfo: nil, repeats: false)
               
         RunLoop.current.add(timer, forMode: .common)
@@ -208,19 +211,19 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
             if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: HomeHelpCell.identifier, for: indexPath) as! HomeHelpCell
                 
-                cell.populateCell(name: self.homeViewModel.moderatorName, subtitle: "home_help_subtitle".localized, bottomMargin: 10)
-                
+                cell.populateCell(name: "home_cell_map".localized, subtitle: "home_cell_map_subtitle".localized, imageUrl: nil,imagenamePicto: "ic_home_sol", bottomMargin: 10)
                 return cell
             }
             else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionCell.identifier, for: indexPath) as! HomeActionCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: HomeHelpCell.identifier, for: indexPath) as! HomeHelpCell
                 
-                cell.populateCell(title: "home_cell_map".localized,imageUrl: nil, imageIdentifier: "ic_home_sol", bottomMargin: 32)
+                cell.populateCell(name: self.homeViewModel.moderatorName, subtitle: "home_help_subtitle".localized, imageUrl: self.homeViewModel.moderatorUrl,imagenamePicto: nil, bottomMargin: 0)
+                
                 return cell
             }
         }
         
-        if indexPath.row == homeViewModel.actions.count + 1 { //Action madatory resources
+        if indexPath.row == 1 { //Action madatory resources
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionTeachCell.identifier, for: indexPath) as! HomeActionTeachCell
             
             cell.populateCell(title: "home_cell_pedago".localized)
@@ -228,7 +231,7 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionCell.identifier, for: indexPath) as! HomeActionCell
-        let action = homeViewModel.actions[indexPath.row - 1]
+        let action = homeViewModel.actions[indexPath.row - 2]
         cell.populateCell(title: "\(action.name)", imageUrl: action.action_url,imageIdentifier: nil)
         return cell
     }
@@ -238,21 +241,22 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.section == section_help {
             if indexPath.row == 1 {
-                showUserProfile(id: self.homeViewModel.moderatorId)
+                showAllPois()
             }
             else {
-                showAllPois()
+                showUserProfile(id: self.homeViewModel.moderatorId)
             }
             return
         }
         
-        if indexPath.section == section_agir && indexPath.row != homeViewModel.actions.count + 1 {
-            let action = homeViewModel.actions[indexPath.row - 1]
+        if indexPath.section == section_agir {
+            if indexPath.row == 1 {
+                showResources()
+                return
+            }
+            let action = homeViewModel.actions[indexPath.row - 2]
             
             homeViewModel.getEventFromAction(action)
-        }
-        else {
-            showResources()
         }
     }
 }

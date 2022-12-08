@@ -26,6 +26,11 @@ class HomeViewModel {
             return _userHome.moderator?.displayName ?? "-"
         }
     }
+    var moderatorUrl:String? {
+        get {
+            return _userHome.moderator?.imgUrl
+        }
+    }
     var moderatorId:Int {
         get {
             return _userHome.moderator?.id ?? 0
