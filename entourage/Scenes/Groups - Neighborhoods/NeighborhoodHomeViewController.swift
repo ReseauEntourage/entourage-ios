@@ -69,8 +69,8 @@ class NeighborhoodHomeViewController: UIViewController {
     var isSearch = false
     var isAlreadyClearRows = false //Use to prevent reload tableview when click on close searchview
     
-    private var isGroupsSelected = true
-    private var currentSelectedIsGroup = false // Use to prevent reloading tabs on view appears + Tap selection bar
+    private var isGroupsSelected = false//true
+    private var currentSelectedIsGroup = true//false // Use to prevent reloading tabs on view appears + Tap selection bar
     private var isfirstLoadingMyGroup = true
     
     var isLoading = false

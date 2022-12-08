@@ -78,8 +78,8 @@ class EventMainHomeViewController: UIViewController {
     var eventsDiscovered = [Event]()
     var eventsDiscoveredExtracted = EventsSorted()
     
-    private var isEventSelected = true
-    private var currentSelectedIsEvent = false // Use to prevent reloading tabs on view appears + Tap selection bar
+    private var isEventSelected = false //true
+    private var currentSelectedIsEvent = true//false // Use to prevent reloading tabs on view appears + Tap selection bar
     private var isfirstLoadingMyEvents = true
     
     var isLoading = false
