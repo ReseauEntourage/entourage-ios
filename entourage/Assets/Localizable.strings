@@ -490,7 +490,8 @@
 "params_account_deleted" = "Votre compte a bien été supprimé.";
 "params_logout_pop_logout" = "Déconnexion";
 "params_logout_pop_cancel" = "Annuler";
-
+"params_suggest" = "Une suggestion sur l’application ?";
+"menu_info_text_share" = "Bonjour ! Grâce au réseau Entourage, je participe à des actions solidaires entre voisins avec et sans domicile. Rejoins-moi : %@";
 //Settings about menu
 "params_about_charte" = "Charte éthique Entourage";
 "params_about_rate_app" = "Noter l’application";

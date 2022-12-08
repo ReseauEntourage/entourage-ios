@@ -18,6 +18,9 @@ class ParamMenuCell: UITableViewCell {
     @IBOutlet weak var ui_view_unlock_members: UIView!
     @IBOutlet weak var ui_title_unlock_members: UILabel!
     
+    @IBOutlet weak var ui_view_suggest: UIView!
+    @IBOutlet weak var ui_title_suggest: UILabel!
+    
     @IBOutlet weak var ui_view_share: UIView!
     @IBOutlet weak var ui_title_share: UILabel!
     
@@ -38,10 +41,13 @@ class ParamMenuCell: UITableViewCell {
         ui_title_logout.text = "params_logout".localized
         ui_title_suppress_account.text = "params_suppress".localized
         
+        ui_title_suggest.text = "params_suggest".localized
+        
         setLabelTitle(label: ui_title_notifs)
         setLabelTitle(label: ui_title_help)
         setLabelTitle(label: ui_title_unlock_members)
         setLabelTitle(label: ui_title_share)
+        setLabelTitle(label: ui_title_suggest)
         
         ui_title_logout.textColor = .appOrange
         ui_title_logout.font = ApplicationTheme.getFontNunitoBold(size: 15)
@@ -78,6 +84,9 @@ class ParamMenuCell: UITableViewCell {
     @IBAction func action_suppress_account(_ sender: Any) {
         delegate?.actionMenu(type: .Suppress)
     }
+    @IBAction func action_suggest(_ sender: Any) {
+        delegate?.actionMenu(type: .Suggest)
+    }
 }
 
 //MARK: - MainParamsMenuType -
@@ -88,6 +97,7 @@ enum MainParamsMenuType {
     case Share
     case Logout
     case Suppress
+    case Suggest
 }
 
 //MARK: - MainParamsMenuDelegate -

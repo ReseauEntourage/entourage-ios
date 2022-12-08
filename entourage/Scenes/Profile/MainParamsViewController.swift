@@ -101,6 +101,10 @@ extension MainParamsViewController:MainParamsMenuDelegate {
             showPopLogout()
         case .Suppress:
             showPopSuppress()
+        case .Suggest:
+            if let url = URL(string: MENU_SUGGEST_URL) {
+                SafariWebManager.launchUrlInApp(url: url, viewController: self.navigationController)
+            }
         }
     }
     
