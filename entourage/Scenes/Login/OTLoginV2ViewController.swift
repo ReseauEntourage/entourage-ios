@@ -95,21 +95,15 @@ class OTLoginV2ViewController: UIViewController {
         ui_tf_phone.placeholder =  "login_phone_placeholder".localized
         ui_tf_code.placeholder =  "login_placeholder_code".localized
         ui_bt_validate.setTitle( "login_button_connect".localized, for: .normal)
-        ui_bt_demand_code.setTitle( "login_button_resend_code".localized, for: .normal)
+        
+        ui_bt_demand_code.setAttributedTitle(Utils.formatStringUnderline(textString: "login_button_resend_code".localized, textColor: .appOrange,font: ApplicationTheme.getFontNunitoRegular(size: 14)), for: .normal)
 
         ui_label_country.text =  "login_label_country".localized
         ui_label_phone.text =  "login_label_phone".localized
         ui_label_code.text =  "login_label_code".localized
+
+        ui_button_change_phone.setAttributedTitle(Utils.formatStringUnderline(textString: "login_button_change_phone".localized, textColor: .appGrisSombre40, font: ApplicationTheme.getFontNunitoRegular(size: 14)), for: .normal)
         
-        ui_button_change_phone.setTitle( "login_button_change_phone".localized, for: .normal)
-        
-        ui_bt_demand_code.layer.cornerRadius = ui_bt_demand_code.frame.height / 2
-        ui_bt_demand_code.layer.borderWidth = 1
-        ui_bt_demand_code.layer.borderColor = UIColor.appOrange.cgColor
-        
-        ui_button_change_phone.layer.cornerRadius = ui_button_change_phone.frame.height / 2
-        ui_button_change_phone.layer.borderWidth = 1
-        ui_button_change_phone.layer.borderColor = UIColor.appGris112.cgColor
         
         ui_tf_country.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
         ui_tf_phone.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15))
@@ -118,9 +112,6 @@ class OTLoginV2ViewController: UIViewController {
         ui_label_country.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
         ui_label_phone.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
         ui_label_code.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir(size: 17))
-        
-        ui_bt_demand_code.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange(size: 14))
-        ui_button_change_phone.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appGrisSombre40))
     }
     
     func checkAndValidate() {
@@ -183,7 +174,7 @@ class OTLoginV2ViewController: UIViewController {
                 if !phone.hasPrefix("+") && phone.hasPrefix("0") {
                     phone.remove(at: .init(encodedOffset: 0))
                 }
-                phone = "\(countryCode)\(phone)"
+                phone = "\(countryCode.code)\(phone)"
             }
             resendCode(phone: phone)
         }

@@ -104,8 +104,10 @@ class OTLoginChangePhoneViewController: UIViewController {
                 self?.showError(title: "login_change_error_return".localized, message: errorStr)
             }
             else {
-                self?.ui_view_send_ok.isHidden = false
-                self?.ui_button_validate.isHidden = true
+                DispatchQueue.main.async {
+                    self?.ui_view_send_ok.isHidden = false
+                    self?.ui_button_validate.isHidden = true
+                }
             }
         }
     }

@@ -26,7 +26,6 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
         super.viewDidLoad()
         
         ui_label_description.text =  "preOnboard_choice_description".localized
-        ui_bt_link.setTitle( "preOnboard_choice_weblink".localized, for: .normal)
         ui_bt_login.setTitle( "preOnboard_choice_login".localized, for: .normal)
         ui_bt_signup.setTitle( "preOnboard_choice_signup".localized, for: .normal)
         
@@ -38,7 +37,8 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
         
         ui_bt_signup.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc(size: 15))
         ui_bt_login.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange(size: 15))
-        ui_bt_link.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange(size: 15))
+        
+        ui_bt_link.setAttributedTitle(Utils.formatStringUnderline(textString: "preOnboard_choice_weblink".localized, textColor: .appOrange, font: ApplicationTheme.getFontNunitoBold(size: 15)), for: .normal)
         
         if view.frame.height <= 568 {
             ui_constraint_top_image.constant = -50

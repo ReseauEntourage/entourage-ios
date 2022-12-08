@@ -285,7 +285,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9H-6G-sf9">
-                                <rect key="frame" x="20" y="115" width="350" height="597"/>
+                                <rect key="frame" x="20" y="131" width="350" height="565"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GwH-yu-zwb">
                                         <rect key="frame" x="0.0" y="60" width="350" height="165"/>
@@ -362,14 +362,14 @@ sera réalisé.</string>
                             <constraint firstItem="36j-Zr-ZpH" firstAttribute="top" secondItem="7qK-hk-fSm" secondAttribute="top" constant="68" id="OIV-d8-jnJ"/>
                             <constraint firstItem="U9Q-Aa-muj" firstAttribute="top" secondItem="7qK-hk-fSm" secondAttribute="top" id="PzG-Pu-BO1"/>
                             <constraint firstItem="U9Q-Aa-muj" firstAttribute="leading" secondItem="7qK-hk-fSm" secondAttribute="leading" id="QO1-di-Bvx"/>
-                            <constraint firstItem="q9H-6G-sf9" firstAttribute="bottom" secondItem="36j-Zr-ZpH" secondAttribute="bottom" id="UMw-k0-lhm"/>
+                            <constraint firstItem="q9H-6G-sf9" firstAttribute="bottom" secondItem="36j-Zr-ZpH" secondAttribute="bottom" constant="-16" id="UMw-k0-lhm"/>
                             <constraint firstItem="voQ-5H-H9B" firstAttribute="leading" secondItem="7qK-hk-fSm" secondAttribute="leading" id="bYn-wU-O3K"/>
                             <constraint firstItem="7qK-hk-fSm" firstAttribute="trailing" secondItem="36j-Zr-ZpH" secondAttribute="trailing" constant="8" id="eBc-sn-uKG"/>
                             <constraint firstItem="voQ-5H-H9B" firstAttribute="top" secondItem="Adx-nN-lFb" secondAttribute="top" id="eVr-M1-a2c"/>
                             <constraint firstItem="7qK-hk-fSm" firstAttribute="bottom" secondItem="Ngh-vo-MiO" secondAttribute="bottom" constant="28" id="hPC-11-Xg7"/>
                             <constraint firstItem="Ngh-vo-MiO" firstAttribute="top" secondItem="36j-Zr-ZpH" secondAttribute="bottom" constant="20" id="hyo-Dy-Lrc"/>
                             <constraint firstItem="voQ-5H-H9B" firstAttribute="width" secondItem="voQ-5H-H9B" secondAttribute="height" multiplier="392:416" id="lzM-g7-nle"/>
-                            <constraint firstItem="q9H-6G-sf9" firstAttribute="top" secondItem="36j-Zr-ZpH" secondAttribute="top" id="qcJ-eZ-xlX"/>
+                            <constraint firstItem="q9H-6G-sf9" firstAttribute="top" secondItem="36j-Zr-ZpH" secondAttribute="top" constant="16" id="qcJ-eZ-xlX"/>
                             <constraint firstItem="7qK-hk-fSm" firstAttribute="trailing" secondItem="voQ-5H-H9B" secondAttribute="trailing" id="sef-Xy-LId"/>
                         </constraints>
                     </view>
