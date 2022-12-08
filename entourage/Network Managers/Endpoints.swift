@@ -115,7 +115,7 @@ let kAPIGetIsBlockedUser = "user_blocked_users/%d?token=%@"
 
 
 //WebLink
-let emailContact = "contact@entourage.social"
+let emailContact = "app@entourage.social"
 let GDS_INFO_ALERT_WEB_LINK = "https://soliguide.fr"
 let ENTOURAGE_BITLY_LINK = "https://bit.ly/applientourage"
 let PROPOSE_STRUCTURE_URL = "%@links/propose-poi/redirect?token=%@"

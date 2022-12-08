@@ -224,7 +224,7 @@ class OnboardingStartViewController: UIViewController {
     func sendPhone() {
         IHProgressHUD.show()
         
-        AuthService.createAccountWith(user: self.temporaryUser) { [weak self] user, error in
+        AuthService.createAccountWith(user: self.temporaryUser) { [weak self] phone, error in
             IHProgressHUD.dismiss()
             if let error = error {
                 var showErrorHud = true
@@ -251,10 +251,9 @@ class OnboardingStartViewController: UIViewController {
                 }
             }
             else {
-                var newUser = user
-                newUser?.phone = self?.temporaryUser.phone
+                var newUser = User()
+                newUser.phone = phone
                 UserDefaults.temporaryUser = newUser
-                
                 self?.goNextStep()
             }
         }

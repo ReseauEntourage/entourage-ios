@@ -417,7 +417,7 @@
                                                             <rect key="frame" x="0.0" y="283" width="390" height="123"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xa5-qY-844">
-                                                                    <rect key="frame" x="64" y="48" width="45.666666666666657" height="25"/>
+                                                                    <rect key="frame" x="64" y="40" width="45.666666666666657" height="33"/>
                                                                     <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -461,7 +461,7 @@
                                                                 <constraint firstAttribute="height" constant="123" id="LLx-lY-NR5"/>
                                                                 <constraint firstItem="dZe-hH-ahq" firstAttribute="top" secondItem="TVh-TK-kL1" secondAttribute="bottom" id="Tor-D6-mQa"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xa5-qY-844" secondAttribute="trailing" constant="28" id="UNj-FF-VUt"/>
-                                                                <constraint firstItem="Xa5-qY-844" firstAttribute="top" secondItem="fQL-yU-yug" secondAttribute="top" constant="48" id="WZt-27-IYk"/>
+                                                                <constraint firstItem="Xa5-qY-844" firstAttribute="top" secondItem="fQL-yU-yug" secondAttribute="top" constant="40" id="WZt-27-IYk"/>
                                                                 <constraint firstItem="Xa5-qY-844" firstAttribute="leading" secondItem="fQL-yU-yug" secondAttribute="leading" constant="64" id="aiK-4w-nR8"/>
                                                                 <constraint firstItem="TVh-TK-kL1" firstAttribute="trailing" secondItem="3zg-5S-XCm" secondAttribute="trailing" id="ctw-Fl-11l"/>
                                                                 <constraint firstItem="shs-7p-1L5" firstAttribute="leading" secondItem="fQL-yU-yug" secondAttribute="leading" constant="28" id="hNT-Uh-oUH"/>
@@ -482,7 +482,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je souhaite recevoir des informations et des conseils de la part d’Entourage " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkj-AQ-DaG">
-                                                                    <rect key="frame" x="91.999999999999986" y="15.999999999999996" width="255.66666666666663" height="33.666666666666657"/>
+                                                                    <rect key="frame" x="91.999999999999986" y="9.9999999999999964" width="255.66666666666663" height="45.666666666666657"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -499,12 +499,12 @@
                                                                 <constraint firstItem="9vF-MC-czP" firstAttribute="centerY" secondItem="fkj-AQ-DaG" secondAttribute="centerY" id="4HJ-E4-AFw"/>
                                                                 <constraint firstItem="k8j-85-zsZ" firstAttribute="top" secondItem="Fbi-Jc-kba" secondAttribute="top" id="5sy-cU-HPq"/>
                                                                 <constraint firstItem="k8j-85-zsZ" firstAttribute="leading" secondItem="Fbi-Jc-kba" secondAttribute="leading" id="IMt-Cc-EIh"/>
-                                                                <constraint firstItem="fkj-AQ-DaG" firstAttribute="top" secondItem="Fbi-Jc-kba" secondAttribute="top" constant="16" id="SGb-b9-7oS"/>
+                                                                <constraint firstItem="fkj-AQ-DaG" firstAttribute="top" secondItem="Fbi-Jc-kba" secondAttribute="top" constant="10" id="SGb-b9-7oS"/>
                                                                 <constraint firstAttribute="trailing" secondItem="k8j-85-zsZ" secondAttribute="trailing" id="Wzi-kK-UD8"/>
                                                                 <constraint firstItem="fkj-AQ-DaG" firstAttribute="leading" secondItem="9vF-MC-czP" secondAttribute="trailing" constant="8" symbolic="YES" id="Ym6-u5-C9t"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fkj-AQ-DaG" secondAttribute="trailing" constant="28" id="exO-Xq-Wmk"/>
                                                                 <constraint firstAttribute="bottom" secondItem="k8j-85-zsZ" secondAttribute="bottom" id="gA2-fh-smU"/>
-                                                                <constraint firstAttribute="bottom" secondItem="fkj-AQ-DaG" secondAttribute="bottom" constant="16" id="vlu-Us-gcn"/>
+                                                                <constraint firstAttribute="bottom" secondItem="fkj-AQ-DaG" secondAttribute="bottom" constant="10" id="vlu-Us-gcn"/>
                                                                 <constraint firstItem="9vF-MC-czP" firstAttribute="leading" secondItem="Fbi-Jc-kba" secondAttribute="leading" constant="64" id="xZp-1L-yz8"/>
                                                             </constraints>
                                                         </view>

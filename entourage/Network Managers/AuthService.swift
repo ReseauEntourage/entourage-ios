@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct AuthService {
+struct AuthService: ParsingDataCodable {
     //MARK: - Create user account -
     
-    static func createAccountWith(user:User,completion: @escaping (_ user:User?, _ error:EntourageNetworkError?) -> Void) {
+    static func createAccountWith(user:User,completion: @escaping (_ phone:String?, _ error:EntourageNetworkError?) -> Void) {
         
         let parameters = ["user" : ["phone": user.phone , "first_name": user.firstname, "last_name": user.lastname]]
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
@@ -28,9 +28,10 @@ struct AuthService {
                 return
             }
             
-            let newUser = UserService.parsingDataUser(data: data).user
+            let userLight:[String:String]? = self.parseData(data: data, key: "user")
+            let phone:String? = userLight?["phone"] as? String
             
-            DispatchQueue.main.async { completion(newUser,nil) }
+            DispatchQueue.main.async { completion(phone,nil) }
         }
         
     }

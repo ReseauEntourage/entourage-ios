@@ -138,7 +138,7 @@
 "onboard_welcome_mail" = "E-mail";
 "onboard_welcome_placeholder_mail" = "votreadresse@mail.com";
 "onboard_welcome_consent" = "Je souhaite recevoir des informations et des conseils de la part d’Entourage ";
-"onboard_welcome_info_mandatory" = "*Champs obligatoire. Vos informations resteront confidentielles et ne seront jamais communiquées à des tiers.";
+"onboard_welcome_info_mandatory" = "*Champs obligatoires. Vos informations resteront confidentielles et ne seront jamais communiquées à des tiers.";
 
 //Phase2
 "onboard_sms_title" = "Entrez le code reçu par SMS";
@@ -163,7 +163,7 @@
 
 //Phase End
 "onboard_end_title" = "Bienvenue dans la Communauté Entourage ";
-"onboard_end_subtitle" = "Félicitations, vous voilà membre de l’application Entourage !";
+"onboard_end_subtitle" = "Félicitations, vous voilà prêt à faire vivre la solidarité autour de vous.";
 "onboard_end_button" = "Commencer l’aventure humaine";
 
 //Onboard errors

@@ -42,12 +42,8 @@ class OnboardingPhase2ViewController: UIViewController {
         ui_bt_modify.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 15,color: .appOrangeLight))
         
         ui_bt_nocode.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appOrange))
-        ui_label_help.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appOrange))
         ui_label_countdown.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir(size: 14,color: .appGris112))
-        
-        ui_view_bt_help.layer.cornerRadius = ui_view_bt_help.frame.height / 2
-        ui_view_bt_help.layer.borderColor = UIColor.appOrange.cgColor
-        ui_view_bt_help.layer.borderWidth = 1
+
         
         ui_bt_nocode.layer.cornerRadius = ui_bt_nocode.frame.height / 2
         ui_bt_nocode.layer.borderColor = UIColor.appOrange.cgColor
@@ -112,7 +108,7 @@ class OnboardingPhase2ViewController: UIViewController {
         ui_label_description.text =  "onboard_sms_sub".localized
         ui_label_phoneNb.text = tempPhone
         
-        ui_label_help.text =  "onboarding_help_label".localized
+        ui_label_help.attributedText = Utils.formatStringUnderline(textString: "onboarding_help_label".localized, textColor: .appOrange, font: ApplicationTheme.getFontNunitoRegular(size: 14))
     }
     
     
@@ -144,7 +140,7 @@ class OnboardingPhase2ViewController: UIViewController {
             
             let controller = MFMailComposeViewController()
             controller.setMessageBody("", isHTML: true)
-            controller.setToRecipients(["contact_email_adress".localized])
+            controller.setToRecipients([emailContact])
             controller.mailComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
         }

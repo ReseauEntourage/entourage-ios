@@ -34,7 +34,7 @@ struct User: Codable {
     var firebaseProperties:[String:String]? = [String:String]()
     var interests:[String]? = nil
     var unreadCount:Int = 0
-    var permissions:UserPermissions = UserPermissions()
+    var permissions:UserPermissions? = UserPermissions()
     
     var birthday:String? = nil
     var radiusDistance:Int? = 0
