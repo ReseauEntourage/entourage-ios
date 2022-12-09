@@ -679,6 +679,7 @@
 "neighborhood_messageComment_notAuth" = "Pour commenter cette publication, rejoignez le groupe “%@” !";
 
 "neighborhood_error_messageSend" = "Erreur de publication, réessayez";
+"comment_post" = "Commenter...";
 //Params
 "neighborhood_params_title" = "Paramètres du groupe";
 "neighborhood_params_cgu" = "Règlement du groupe";

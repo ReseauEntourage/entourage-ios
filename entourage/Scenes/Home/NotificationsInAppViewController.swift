@@ -21,6 +21,7 @@ class NotificationsInAppViewController: UIViewController {
     var isLoading = false
     let nbOfItemsBeforePagingReload = 5 // Arbitrary nb of items from the end of the list to send new call
 
+    var hasToShowDot = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,8 @@ class NotificationsInAppViewController: UIViewController {
         self.ic_notif_bell.image = UIImage.init(named: "ic_notif_off")
         getNotifications()
         AnalyticsLoggerManager.logEvent(name: Home_view_notif)
+        
+        self.showOrNotBellOn()
     }
     
     @objc func refreshDatas() {
@@ -64,14 +67,11 @@ class NotificationsInAppViewController: UIViewController {
             }
             
             self.ui_tableview.reloadData()
-            
-            self.showOrNotBellOn()
-            
         }
     }
     
     func showOrNotBellOn() {
-        if self.notifications.contains(where: {$0.isRead() == false}) {
+        if hasToShowDot {
             self.ic_notif_bell.image = UIImage.init(named: "ic_notif_on")
             let timer = Timer(fireAt: Date().addingTimeInterval(2), interval: 0, target: self, selector: #selector(self.passBellOff), userInfo: nil, repeats: false)
                   
@@ -79,6 +79,7 @@ class NotificationsInAppViewController: UIViewController {
         }
     }
     @objc func passBellOff() {
+        hasToShowDot = false
         self.ic_notif_bell.image = UIImage.init(named: "ic_notif_off")
     }
 }

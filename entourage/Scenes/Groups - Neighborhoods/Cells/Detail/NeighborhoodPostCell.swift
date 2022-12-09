@@ -54,6 +54,8 @@ class NeighborhoodPostCell: UITableViewCell {
         ui_view_comment.layer.borderWidth = 1
         ui_lb_chat.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
         
+        ui_lb_chat.text = "comment_post".localized
+        
     }
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {

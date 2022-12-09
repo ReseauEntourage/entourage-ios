@@ -151,9 +151,13 @@ class HomeMainViewController: UIViewController {
     
     @IBAction func action_show_notifs(_ sender: Any) {
         AnalyticsLoggerManager.logEvent(name: Home_action_notif)
-        let navVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "notifsNav")
-        navVC.modalPresentationStyle = .fullScreen
-        self.tabBarController?.present(navVC, animated: true)
+        if let navVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "notifsNav") as? UINavigationController {
+            navVC.modalPresentationStyle = .fullScreen
+            if let vc = navVC.topViewController as? NotificationsInAppViewController {
+                vc.hasToShowDot =  homeViewModel.notifCount > 0
+            }
+            self.tabBarController?.present(navVC, animated: true)
+        }
     }
     
     @IBAction func action_show_profile(_ sender: Any) {
