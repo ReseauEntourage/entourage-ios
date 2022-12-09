@@ -40,18 +40,21 @@ class OnboardingPageViewController: UIPageViewController {
                 createPhase1VC = storyboard?.instantiateViewController(withIdentifier: "onboardPhase1") as? OnboardingPhase1ViewController
                 createPhase1VC?.pageDelegate = parentDelegate
             }
+            AnalyticsLoggerManager.logEvent(name: Onboard_name)
             return createPhase1VC
         case 2:
             if createPhase2VC == nil {
                 createPhase2VC = storyboard?.instantiateViewController(withIdentifier: "onboardPhase2") as? OnboardingPhase2ViewController
                 createPhase2VC?.pageDelegate = parentDelegate
             }
+            AnalyticsLoggerManager.logEvent(name: Onboard_code)
             return createPhase2VC
         case 3:
             if createPhase3VC == nil {
                 createPhase3VC = storyboard?.instantiateViewController(withIdentifier: "onboardPhase3") as? OnboardingPhase3ViewController
                 createPhase3VC?.pageDelegate = parentDelegate
             }
+            AnalyticsLoggerManager.logEvent(name: Onboard_profile)
             return createPhase3VC
             
         default:

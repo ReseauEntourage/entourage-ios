@@ -79,13 +79,16 @@ class IntroCarouselViewController: UIViewController {
             description =  "intro_subtitle_1".localized
             ui_logo_entourage.isHidden = false
             ui_button_previous.isHidden = true
+            AnalyticsLoggerManager.logEvent(name: PreOnboard_car1)
         case 1:
             title =  "intro_title_2".localized
             description =  "intro_subtitle_2".localized
+            AnalyticsLoggerManager.logEvent(name: PreOnboard_car2)
         case 2:
             title =  "intro_title_3".localized
             description = "intro_subtitle_3".localized
             ui_bt_connect.isHidden = true
+            AnalyticsLoggerManager.logEvent(name: PreOnboard_car3)
         default:
             break
         }

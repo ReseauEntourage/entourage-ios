@@ -21,8 +21,6 @@ class MainTabbarViewController: UITabBarController {
     var isAskForHelp = false
     var addEditEvent = false
     
-//    var popview:OTPopInfoCustom? = nil//TODO: a faire ?
-    
     var oldItemSelected = 0
     var currentItemSelected = 0
     
@@ -38,8 +36,6 @@ class MainTabbarViewController: UITabBarController {
        setupVCs()
         
         AnalyticsLoggerManager.updateAnalyticsWitUser()
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(hidePopInfo), name: NSNotification.Name(rawValue: "hidePopView"), object: nil)//TODO: a faire ?
         
         //Notif for changing neighborhood list to discover and select tab
         NotificationCenter.default.addObserver(self, selector: #selector(showDiscoverNeighborhoods), name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowDiscover), object: nil)
@@ -120,25 +116,6 @@ class MainTabbarViewController: UITabBarController {
         }
     }
     
-//    func showPopInfo(delegate:OTPopInfoDelegate,title:String,message:String,buttonOkStr:String,buttonCancelStr:String) {
-//        popview = OTPopInfoCustom.init(frame: view.frame,delegate: delegate,title: title,message: message,buttonOkStr: buttonOkStr,buttonCancelStr: buttonCancelStr)
-//
-//        view.addSubview(popview!)
-//        view.bringSubviewToFront(popview!)
-//    }
-    
-//    @objc func hidePopInfo() {
-//        if let popview = popview {
-//            popview.removeFromSuperview()
-//            self.popview = nil
-//        }
-//    }
-    
-//
-//    @objc func switchToHomeTab() {
-//        showHomeVC()
-//    }
-    
     func setupVCs() {
         
         let _homeVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "homeVC")
@@ -209,46 +186,21 @@ class MainTabbarViewController: UITabBarController {
             return
         }
         
-        //TODO: a faire Analytics
-//        switch currentItemSelected {
-//        case 0:
-//            OTLogger.logEvent(Action_Tab_Feeds)
-//        case 1:
-//            OTLogger.logEvent(Action_Tab_Gds)
-//        case 2:
-//            OTLogger.logEvent(Action_Tab_Plus)
-//        case 3:
-//            OTLogger.logEvent(Action_Tab_Messages)
-//        case 4:
-//            OTLogger.logEvent(Action_Tab_Profil)
-//        default:
-//            break
-//        }
+        switch currentItemSelected {
+        case 0:
+            AnalyticsLoggerManager.logEvent(name: Action_Tabbar_home)
+        case 1:
+            AnalyticsLoggerManager.logEvent(name: Action_Tabbar_help)
+        case 2:
+            AnalyticsLoggerManager.logEvent(name: Action_Tabbar_messages)
+        case 3:
+            AnalyticsLoggerManager.logEvent(name: Action_Tabbar_groups)
+        case 4:
+            AnalyticsLoggerManager.logEvent(name: Action_Tabbar_events)
+        default:
+            break
+        }
     }
-    
-    
-//    @objc func showEvents() {
-//        self.showHomeVC()
-//        if let _vc = homeVC.topViewController as? OTHomeMainViewController {
-//            let delayInSeconds = 0.1
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-//                _vc.showAllEvents()
-//            }
-//        }
-//    }
-//    @objc func showActions() {
-//        self.showHomeVC()
-//        if let _vc = homeVC.topViewController as? OTHomeMainViewController {
-//            let delayInSeconds = 0.1
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-//                _vc.showAllActions()
-//            }
-//        }
-//    }
-//
-//    @objc func showHome() {
-//        self.showHomeVC()
-//    }
 }
 
 
@@ -256,11 +208,6 @@ class MainTabbarViewController: UITabBarController {
 extension MainTabbarViewController: UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-//        if viewController.tabBarItem.tag == 2 {
-//            self.showMapOption()
-//
-//            return false
-//        }
         return true
     }
     
@@ -285,17 +232,4 @@ extension MainTabbarViewController: UITabBarControllerDelegate {
             break
         }
     }
-
-//    func showHomeVC(isEditor:Bool = false) {
-//        if self.selectedIndex != 0 {
-//            self.selectedIndex = 0
-//        }
-//
-////        if !isEditor {
-////            homeVC.popToRootViewController(animated: false)
-////            (homeVC.topViewController as? OTHomeMainViewController)?.isFromProfile = true
-////        }
-//        //homeVC.popToRootViewController(animated: false)
-//        boldSelectedItem()
-//    }
 }

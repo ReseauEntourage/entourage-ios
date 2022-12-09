@@ -42,7 +42,7 @@ let View_Profile_Choose_Photo = "View__Profile__ChoosePhoto"
 
 //Groups / Neighborhoods
 /** Home **/
-let View_Group_Show = "View__Group__Show"
+let View_Group_Show = "View__Group__MyGroups"
 let View_Group_ShowDiscover = "View__Group__ShowDiscover"
 let Action_Group_MyGroup = "Action__Group__MyGroup"
 let Action_Group_Discover = "Action__Group__Discover"
@@ -130,3 +130,98 @@ let Action_GroupOption_Notif_All = "Action__GroupOption__Notif_All"
 let Action_GroupOption_Notif_Event = "Action__GroupOption__Notif_Event"
 let Action_GroupOption_Notif_Message = "Action__GroupOption__Notif_Message"
 let Action_GroupOption_Notif_Member = "Action__GroupOption__Notif_Member"
+
+
+//Tab bar
+let Action_Tabbar_home = "Action__Tab__Feeds"
+let Action_Tabbar_help = "Action__Tab__Aid"
+let Action_Tabbar_messages = "Action__Tab__Messages"
+let Action_Tabbar_groups = "Action__Tab__Group"
+let Action_Tabbar_events = "Action__Tab__Event"
+
+//Home:
+let Home_view_home = "View__Home"
+let Home_action_notif = "Action__Home__Notif"
+let Home_action_profile = "Action__Tab__Profil"
+let Home_action_pedago = "Action__Home__Pedago"
+let Home_action_meetcount = "Action__Home__MeetCounter"
+let Home_action_groupcount = "Action__Home__GroupCounter"
+let Home_action_eventcount = "Action__Home__EventCounter"
+let Home_action_moderator = "Action__Home__Moderator"
+let Home_action_map = "Action__Home__Map"
+let Home_view_notif = "View__Notif"
+
+
+//Profile
+let Profile_view_profile = "View__Profile"
+let Profile_action_modify = "Clic__Profile__Modify"
+let Profile_view_param = "View__Profile__Param"
+
+//Help
+let Help_view_contrib = "View__Aid"
+let Help_view_demand = "View__Aid__DemandList"
+let Help_view_myactions = "View__Aid__MyAds"
+let Help_action_filters = "Action__Aid__CategoryFilter"
+let Help_action_location = "Action__Aid__LocationFilter"
+let Help_action_create = "Action__Aid__New"
+
+//Help detail
+let Help_view_contrib_detail = "View__Contrib__Detail"
+let Help_view_demand_detail = "View__Demand__Detail"
+let Help_action_contrib_contact = "Action__Contrib__Contact"
+let Help_action_demand_contact = "Action__Demand__Contact"
+
+//Help create
+let Help_create_demand_chart = "View__NewDemand__Chart"
+let Help_create_demand_1 = "View__NewDemand__Step1"
+let Help_create_demand_2 = "View__NewDemand__Step2"
+let Help_create_demand_3 = "View__NewDemand__Step3"
+let Help_create_demand_end = "View__NewDemand__Confirmation"
+
+let Help_create_contrib_chart = "View__NewContrib__Chart"
+let Help_create_contrib_1 = "View__NewContrib__Step1"
+let Help_create_contrib_2 = "View__NewContrib__Step2"
+let Help_create_contrib_3 = "View__NewContrib__Step3"
+let Help_create_contrib_end = "View__NewContrib__Confirmation"
+
+//Messages
+let Message_view = "View__Discussion__List"
+let Message_view_detail = "View__Discussion__Detail"
+let Message_action_param = "Action__Discussion__Param"
+
+//Events
+let Event_view_discover = "View__Event__List"
+let Event_view_my = "View__Event__MyEvents"
+let Event_action_filter = "Action__Event__LocationFilter"
+let Event_action_create = "Action__Event__New"
+
+//Event Create
+let Event_create_1 = "View__NewEvent__Step1"
+let Event_create_2 = "View__NewEvent__Step2"
+let Event_create_3 = "View__NewEvent__Step3"
+let Event_create_4 = "View__NewEvent__Step4"
+let Event_create_5 = "View__NewEvent__Step5"
+let Event_create_end = "View__NewEvent__Confirmation"
+
+//Event detail
+let Event_detail_main = "View__EventFeed__Show"
+let Event_detail_full = "View__EventFeed__About"
+let Event_detail_action_participate = "Action__EventFeed__Participate"
+let Event_detail_action_param = "Action__EventFeed__Param"
+let Event_detail_action_post = "Action__EventFeed__NewPost"
+
+
+//PreOnboarding
+let PreOnboard_car1 = "View__Start__Carrousel1"
+let PreOnboard_car2 = "View__Start__Carrousel2"
+let PreOnboard_car3 = "View__Start__Carrousel3"
+
+let PreOnboard_view_choice = "View__Start__SignUpOrLoginPage"
+let PreOnboard_action_signup = "Action__Onboarding__SignUpStart"
+let PreOnboard_action_signin = "Action__Login__LoginStart"
+
+//Onboarding
+let Onboard_name = "View__Onboarding__InputNames"
+let Onboard_code = "View__Onboarding__InputCode"
+let Onboard_profile = "View__Onboarding__InputProfile"
+let Onboard_end = "View__Onboarding__Confirmation"

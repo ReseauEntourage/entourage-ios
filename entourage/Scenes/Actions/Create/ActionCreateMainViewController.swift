@@ -102,6 +102,13 @@ class ActionCreateMainViewController: UIViewController {
         ui_tableview_charte.layer.cornerRadius = ApplicationTheme.bigCornerRadius
         ui_tableview_charte.delegate = self
         ui_tableview_charte.dataSource = self
+        
+        if isContrib {
+            AnalyticsLoggerManager.logEvent(name: Help_create_contrib_chart)
+        }
+        else {
+            AnalyticsLoggerManager.logEvent(name: Help_create_demand_chart)
+        }
     }
     
     //MARK: - Network -
@@ -203,6 +210,7 @@ class ActionCreateMainViewController: UIViewController {
         if let vc = segue.destination as? ActionCreatePageViewController {
             self.pageViewController = vc
             self.pageViewController?.parentDelegate = self
+            self.pageViewController?.isContrib = isContrib
         }
     }
     
@@ -217,6 +225,12 @@ class ActionCreateMainViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             vc.actionId = action.id
             vc.isContrib = isContrib
+            if isContrib {
+                AnalyticsLoggerManager.logEvent(name: Help_create_contrib_end)
+            }
+            else {
+                AnalyticsLoggerManager.logEvent(name: Help_create_demand_end)
+            }
             self.dismiss(animated: false) {
                 self.parentController?.present(vc, animated: true)
             }

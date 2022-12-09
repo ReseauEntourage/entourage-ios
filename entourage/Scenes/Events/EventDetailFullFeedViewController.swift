@@ -34,6 +34,8 @@ class EventDetailFullFeedViewController: UIViewController {
         if event?.neighborhoods?.count ?? 0 > 0 {
             hasGroup = true
         }
+        
+        AnalyticsLoggerManager.logEvent(name: Event_detail_full)
     }
     
     func registerCellsNib() {

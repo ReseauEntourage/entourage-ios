@@ -20,6 +20,8 @@ class EventCreatePageViewController: UIPageViewController {
     
     var currentPhasePosition = 1
     
+    var isCreating = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addRadiusBottomOnly(radius: ApplicationTheme.bigCornerRadius)
@@ -43,30 +45,35 @@ class EventCreatePageViewController: UIPageViewController {
                 createPhase1VC = storyboard?.instantiateViewController(withIdentifier: "createPhase1") as? EventCreatePhase1ViewController
                 createPhase1VC?.pageDelegate = parentDelegate
             }
+            if isCreating { AnalyticsLoggerManager.logEvent(name: Event_create_1)}
             return createPhase1VC
         case 2:
             if createPhase2VC == nil {
                 createPhase2VC = storyboard?.instantiateViewController(withIdentifier: "createPhase2") as? EventCreatePhase2ViewController
                 createPhase2VC?.pageDelegate = parentDelegate
             }
+            if isCreating { AnalyticsLoggerManager.logEvent(name: Event_create_2)}
             return createPhase2VC
         case 3:
             if createPhase3VC == nil {
                 createPhase3VC = storyboard?.instantiateViewController(withIdentifier: "createPhase3") as? EventCreatePhase3ViewController
                 createPhase3VC?.pageDelegate = parentDelegate
             }
+            if isCreating { AnalyticsLoggerManager.logEvent(name: Event_create_3)}
             return createPhase3VC
         case 4:
             if createPhase4VC == nil {
                 createPhase4VC = storyboard?.instantiateViewController(withIdentifier: "createPhase4") as? EventCreatePhase4ViewController
                 createPhase4VC?.pageDelegate = parentDelegate
             }
+            if isCreating { AnalyticsLoggerManager.logEvent(name: Event_create_4)}
             return createPhase4VC
         case 5:
             if createPhase5VC == nil {
                 createPhase5VC = storyboard?.instantiateViewController(withIdentifier: "createPhase5") as? EventCreatePhase5ViewController
                 createPhase5VC?.pageDelegate = parentDelegate
             }
+            if isCreating { AnalyticsLoggerManager.logEvent(name: Event_create_5)}
             return createPhase5VC
         default:
             return nil

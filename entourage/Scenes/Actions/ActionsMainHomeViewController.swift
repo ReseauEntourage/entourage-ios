@@ -386,6 +386,7 @@ class ActionsMainHomeViewController: UIViewController {
     
     @IBAction func action_show_filters_categories(_ sender: Any) {
         if let vc = UIStoryboard.init(name: StoryboardName.actions, bundle: nil).instantiateViewController(withIdentifier: "action_cat_filters") as? ActionSectionFiltersViewController {
+            AnalyticsLoggerManager.logEvent(name: Help_action_filters)
             vc.sectionFilters = currentSectionsFilter
             vc.modalPresentationStyle = .fullScreen
             vc.delegate = self
@@ -395,6 +396,7 @@ class ActionsMainHomeViewController: UIViewController {
     
     @IBAction func action_show_filters_location(_ sender: Any) {
         if let vc = UIStoryboard.init(name: StoryboardName.actions, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
+            AnalyticsLoggerManager.logEvent(name: Help_action_location)
             vc.currentFilter = self.currentLocationFilter
             vc.modalPresentationStyle = .fullScreen
             vc.delegate = self
@@ -419,6 +421,7 @@ class ActionsMainHomeViewController: UIViewController {
     
     @IBAction func action_show_my_actions(_ sender: Any) {
         if let navvc = storyboard?.instantiateViewController(withIdentifier: "action_myNav") {
+            AnalyticsLoggerManager.logEvent(name: Help_view_myactions)
             self.tabBarController?.present(navvc, animated: true)
         }
     }
@@ -430,6 +433,7 @@ class ActionsMainHomeViewController: UIViewController {
         self.ui_view_empty_discover.isHidden = true
         
         if isContribSelected {
+            AnalyticsLoggerManager.logEvent(name: Help_view_contrib)
             ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             
             ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
@@ -438,6 +442,7 @@ class ActionsMainHomeViewController: UIViewController {
             ui_view_indicator_solicitations.isHidden = true
         }
         else {
+            AnalyticsLoggerManager.logEvent(name: Help_view_demand)
             ui_label_contribs.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             
             ui_label_solicitations.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
@@ -722,7 +727,9 @@ extension ActionsMainHomeViewController:EventFiltersDelegate {
 
 //MARK: - FloatyDelegate -
 extension ActionsMainHomeViewController:FloatyDelegate {
-    func floatyWillOpen(_ floaty: Floaty) {}
+    func floatyWillOpen(_ floaty: Floaty) {
+        AnalyticsLoggerManager.logEvent(name: Help_action_create)
+    }
     
     private func createButtonItem(title:String, iconName:String, handler:@escaping ((FloatyItem) -> Void)) -> FloatyItem {
         let floatyItem = FloatyItem()

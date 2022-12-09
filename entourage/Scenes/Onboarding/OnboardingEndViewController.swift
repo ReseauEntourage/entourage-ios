@@ -27,6 +27,7 @@ class OnboardingEndViewController: UIViewController {
         ui_title.text = "onboard_end_title".localized
         ui_desc.text = "onboard_end_subtitle".localized
         ui_bt_go.setTitle("onboard_end_button".localized, for: .normal)
+        AnalyticsLoggerManager.logEvent(name: Onboard_end)
     }
     
     override func viewWillLayoutSubviews() {

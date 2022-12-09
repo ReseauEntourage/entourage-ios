@@ -82,6 +82,7 @@ class EventCreateMainViewController: UIViewController {
         if let vc = segue.destination as? EventCreatePageViewController {
             self.pageViewController = vc
             self.pageViewController?.parentDelegate = self
+            self.pageViewController?.isCreating = true
         }
     }
     
@@ -189,6 +190,7 @@ class EventCreateMainViewController: UIViewController {
     private func goEnd(event:Event) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
         if let vc = storyboard?.instantiateViewController(withIdentifier: "event_validateVC") as? EventCreateValidateViewController {
+            AnalyticsLoggerManager.logEvent(name: Event_create_end)
             vc.modalPresentationStyle = .fullScreen
             vc.eventId = event.uid
             self.dismiss(animated: false) {

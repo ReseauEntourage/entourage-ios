@@ -54,6 +54,8 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
             self.isFromOnboarding = false
             self.action_login(self)
         }
+        
+        AnalyticsLoggerManager.logEvent(name: PreOnboard_view_choice)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,6 +71,7 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     }
     
     @IBAction func action_signUp(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: PreOnboard_action_signup)
         let sb = UIStoryboard.init(name: StoryboardName.onboarding, bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "onboardingStart") as! OnboardingStartViewController
         vc.parentDelegate = self
@@ -76,6 +79,7 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     }
     
     @IBAction func action_login(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: PreOnboard_action_signin)
         let vc = UIStoryboard(name: StoryboardName.intro, bundle: nil).instantiateViewController(withIdentifier: "LoginV2VC")
         self.navigationController?.pushViewController(vc, animated: true)
     }

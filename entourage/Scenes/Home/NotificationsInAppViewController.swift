@@ -37,6 +37,7 @@ class NotificationsInAppViewController: UIViewController {
         ui_tableview.refreshControl = pullRefreshControl
         self.ic_notif_bell.image = UIImage.init(named: "ic_notif_off")
         getNotifications()
+        AnalyticsLoggerManager.logEvent(name: Home_view_notif)
     }
     
     @objc func refreshDatas() {

@@ -122,6 +122,7 @@ class EventMainHomeViewController: UIViewController {
         changeTabSelection()
         
         if isEventSelected {
+            AnalyticsLoggerManager.logEvent(name: Event_view_my)
             if !currentSelectedIsEvent {
                 currentSelectedIsEvent = true
                 getEvents()
@@ -131,6 +132,7 @@ class EventMainHomeViewController: UIViewController {
             }
         }
         else {
+            AnalyticsLoggerManager.logEvent(name: Event_view_discover)
             if currentSelectedIsEvent {
                 currentSelectedIsEvent = false
                 getEventsDiscovered()
@@ -380,6 +382,7 @@ class EventMainHomeViewController: UIViewController {
     }
     
     @IBAction func action_create_event(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Event_action_create)
         let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
         navVC.parentController = self.tabBarController
         navVC.modalPresentationStyle = .fullScreen
@@ -388,6 +391,7 @@ class EventMainHomeViewController: UIViewController {
     
     @IBAction func action_show_filters(_ sender: Any) {
         if let vc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "event_filters") as? EventFiltersViewController {
+            AnalyticsLoggerManager.logEvent(name: Event_action_filter)
             vc.currentFilter = self.currentFilter
             vc.modalPresentationStyle = .fullScreen
             vc.delegate = self

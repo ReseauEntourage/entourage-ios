@@ -133,6 +133,7 @@ class MainProfileSettingsViewController: UIViewController {
     
     //MARK: - IBActions -
     @IBAction func action_show_edit_profile(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Profile_action_modify)
         let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
         let navVC = sb.instantiateViewController(withIdentifier: "editProfileMainNav")
         self.navigationController?.present(navVC, animated: true)
@@ -151,12 +152,14 @@ class MainProfileSettingsViewController: UIViewController {
     //MARK: - tab bar
     func changeTabSelection() {
         if isProfileSelected {
+            AnalyticsLoggerManager.logEvent(name: Profile_view_profile)
             ui_label_profile.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             ui_label_params.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             ui_view_indicator_profile.isHidden = false
             ui_view_indicator_params.isHidden = true
         }
         else {
+            AnalyticsLoggerManager.logEvent(name: Profile_view_param)
             ui_label_profile.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldGreyOff())
             ui_label_params.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldOrange())
             ui_view_indicator_profile.isHidden = true

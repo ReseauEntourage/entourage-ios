@@ -95,7 +95,7 @@ class EventDetailFeedViewController: UIViewController {
         self.ui_view_full_image.isHidden = true
         self.ui_scrollview.delegate = self
         self.ui_scrollview.maximumZoomScale = 10
-        
+        AnalyticsLoggerManager.logEvent(name: Event_detail_main)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -356,6 +356,7 @@ class EventDetailFeedViewController: UIViewController {
     @IBAction func action_show_params(_ sender: Any) {
         if let _event = event {
             if let navvc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "params_eventNav") as? UINavigationController, let vc = navvc.topViewController as? EventParamsViewController {
+                AnalyticsLoggerManager.logEvent(name: Event_detail_action_param)
                 vc.event = _event
                 vc.modalPresentationStyle = .fullScreen
                 self.present(navvc, animated: true, completion: nil)
@@ -365,10 +366,12 @@ class EventDetailFeedViewController: UIViewController {
     }
     
     @IBAction func action_join(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Event_detail_action_participate)
         joinLeaveEvent()
     }
     
     @IBAction func action_create_post(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Event_detail_action_post)
         showCreatePost()
     }
     @IBAction func action_tap_close_full_image(_ sender: Any) {

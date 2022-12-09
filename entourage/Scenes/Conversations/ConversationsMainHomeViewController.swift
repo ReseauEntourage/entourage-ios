@@ -67,6 +67,7 @@ class ConversationsMainHomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getUserInfo()
+        AnalyticsLoggerManager.logEvent(name: Message_view)
     }
     
     //MARK: - Call from Notifications -

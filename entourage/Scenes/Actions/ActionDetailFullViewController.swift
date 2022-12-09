@@ -74,6 +74,14 @@ class ActionDetailFullViewController: UIViewController {
                 self.showHideBottomViews()
                 self.ui_tableview.reloadData()
                 self.ui_top_view.updateTitle(title: action.title ?? "action_your".localized)
+                
+                if action.isContrib() {
+                    AnalyticsLoggerManager.logEvent(name: Help_view_contrib_detail)
+                }
+                else {
+                    AnalyticsLoggerManager.logEvent(name: Help_view_demand_detail)
+                }
+                
             }
             else {
                 self.goBack()
@@ -159,6 +167,13 @@ class ActionDetailFullViewController: UIViewController {
     
     @IBAction func action_contact(_ sender: Any) {
         guard let user = action?.author else {return}
+        
+        if action?.isContrib() ?? false {
+            AnalyticsLoggerManager.logEvent(name: Help_action_contrib_contact)
+        }
+        else {
+            AnalyticsLoggerManager.logEvent(name: Help_action_demand_contact)
+        }
         
         IHProgressHUD.show()
         MessagingService.createOrGetConversation(userId: "\(user.uid)") { conversation, error in

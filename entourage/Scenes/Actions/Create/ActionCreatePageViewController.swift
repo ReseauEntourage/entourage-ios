@@ -18,6 +18,8 @@ class ActionCreatePageViewController: UIPageViewController {
     
     var currentPhasePosition = 1
     
+    var isContrib = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addRadiusBottomOnly(radius: ApplicationTheme.bigCornerRadius)
@@ -41,14 +43,32 @@ class ActionCreatePageViewController: UIPageViewController {
                 createPhase1VC = storyboard?.instantiateViewController(withIdentifier: "createPhase1") as? ActionCreatePhase1ViewController
                 createPhase1VC?.pageDelegate = parentDelegate
             }
+            if isContrib {
+                AnalyticsLoggerManager.logEvent(name: Help_create_contrib_1)
+            }
+            else {
+                AnalyticsLoggerManager.logEvent(name: Help_create_demand_1)
+            }
             return createPhase1VC
         case 2:
             if createPhase2VC == nil {
                 createPhase2VC = storyboard?.instantiateViewController(withIdentifier: "createPhase2") as? ActionCreatePhase2ViewController
                 createPhase2VC?.pageDelegate = parentDelegate
             }
+            if isContrib {
+                AnalyticsLoggerManager.logEvent(name: Help_create_contrib_2)
+            }
+            else {
+                AnalyticsLoggerManager.logEvent(name: Help_create_demand_2)
+            }
             return createPhase2VC
         case 3:
+            if isContrib {
+                AnalyticsLoggerManager.logEvent(name: Help_create_contrib_3)
+            }
+            else {
+                AnalyticsLoggerManager.logEvent(name: Help_create_demand_3)
+            }
             if createPhase3VC == nil {
                 createPhase3VC = storyboard?.instantiateViewController(withIdentifier: "createPhase3") as? ActionCreatePhase3ViewController
                 createPhase3VC?.pageDelegate = parentDelegate

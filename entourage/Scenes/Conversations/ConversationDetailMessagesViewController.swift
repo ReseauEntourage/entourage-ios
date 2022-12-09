@@ -133,6 +133,8 @@ class ConversationDetailMessagesViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(userBlockedFromParams), name: NSNotification.Name(rawValue: kNotificationMessagesUpdateUserBlocked), object: nil)
 
         self.getDetailConversation()
+        
+        AnalyticsLoggerManager.logEvent(name: Message_view_detail)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -378,6 +380,7 @@ class ConversationDetailMessagesViewController: UIViewController {
    
     @IBAction func action_show_params(_ sender: Any) {
         if let navvc = storyboard?.instantiateViewController(withIdentifier: "params_nav") as? UINavigationController, let vc = navvc.topViewController as? ConversationParametersViewController {
+            AnalyticsLoggerManager.logEvent(name: Message_action_param)
             vc.modalPresentationStyle = .fullScreen
             vc.userId = currentUserId
             vc.conversationId = conversationId

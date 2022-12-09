@@ -53,6 +53,8 @@ class HomeMainViewController: UIViewController {
             isLoadingFromNotif = false
             getUserInfo()
         }
+        
+        AnalyticsLoggerManager.logEvent(name: Home_view_home)
     }
     
     @objc func refreshDatasFromTab() {
@@ -148,12 +150,14 @@ class HomeMainViewController: UIViewController {
     }
     
     @IBAction func action_show_notifs(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Home_action_notif)
         let navVC = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "notifsNav")
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
     }
     
     @IBAction func action_show_profile(_ sender: Any) {
+        AnalyticsLoggerManager.logEvent(name: Home_action_profile)
         let navVC = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil).instantiateViewController(withIdentifier: "mainNavProfile")
         navVC.modalPresentationStyle = .fullScreen
         self.tabBarController?.present(navVC, animated: true)
@@ -241,9 +245,11 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.section == section_help {
             if indexPath.row == 1 {
+                AnalyticsLoggerManager.logEvent(name: Home_action_map)
                 showAllPois()
             }
             else {
+                AnalyticsLoggerManager.logEvent(name: Home_action_moderator)
                 showUserProfile(id: self.homeViewModel.moderatorId)
             }
             return
@@ -251,6 +257,7 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.section == section_agir {
             if indexPath.row == 1 {
+                AnalyticsLoggerManager.logEvent(name: Home_action_pedago)
                 showResources()
                 return
             }
@@ -264,12 +271,14 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
 //MARK: - HomeContribDelegate -
 extension HomeMainViewController:HomeContribDelegate {
     func showEncounterInfo() {
+        AnalyticsLoggerManager.logEvent(name: Home_action_meetcount)
         let popup = MJPopupViewController()
         popup.setupAlertInfos(parentVC: self.tabBarController, title: "home_info_encounter_pop_title".localized, subtitile: "home_info_encounter_pop_subtitle".localized, imageName: "img_pop_info_encouter")
         popup.show()
     }
     
     func showNeighborhoodTab() {
+        AnalyticsLoggerManager.logEvent(name: Home_action_groupcount)
         if self.homeViewModel.userHome.neighborhoodParticipationsCount > 0 {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationNeighborhoodShowMy), object: nil)
         }
@@ -279,6 +288,7 @@ extension HomeMainViewController:HomeContribDelegate {
     }
     
     func showEventTab() {
+        AnalyticsLoggerManager.logEvent(name: Home_action_eventcount)
         if self.homeViewModel.userHome.outingParticipationsCount > 0 {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: kNotificationEventShowMy), object: nil)
         }
