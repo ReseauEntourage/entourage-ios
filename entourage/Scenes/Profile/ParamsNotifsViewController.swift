@@ -63,8 +63,11 @@ class ParamsNotifsViewController: BasePopViewController {
             ui_switch_groups.setOn(notifPermissions.neighborhood, animated: true)
             ui_switch_events.setOn(notifPermissions.outing, animated: true)
             ui_switch_actions.setOn(notifPermissions.action, animated: true)
+            ui_switch_notifs.setOn( notifPermissions.allNotifsOn(), animated: true)
         }
         else {
+            
+            ui_switch_notifs.setOn(true, animated: true)
             setAllSwitch(isOn: true)
         }
     }
@@ -87,6 +90,15 @@ class ParamsNotifsViewController: BasePopViewController {
         setAllSwitch(isOn: sender.isOn)
     }
     
+    @IBAction func action_switch(_ sender: Any) {
+        var notifPermissions = NotifInAppPermission()
+        notifPermissions.action = ui_switch_actions.isOn
+        notifPermissions.neighborhood = ui_switch_groups.isOn
+        notifPermissions.outing = ui_switch_events.isOn
+        notifPermissions.chat_message = ui_switch_messages.isOn
+        
+        ui_switch_notifs.setOn( notifPermissions.allNotifsOn(), animated: true)
+    }
     
     func setAllSwitch(isOn:Bool) {
         ui_switch_messages.setOn(isOn, animated: true)

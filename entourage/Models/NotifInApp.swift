@@ -95,6 +95,10 @@ struct NotifInAppPermission:Codable {
         
     }
     
+    func allNotifsOn() -> Bool {
+        return chat_message && neighborhood && outing && action
+    }
+    
     func getDatasForWS() -> [String:Bool] {
         var datas = [String:Bool]()
         datas["neighborhood"] = neighborhood

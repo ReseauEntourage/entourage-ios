@@ -1447,7 +1447,7 @@
                                                             <rect key="frame" x="32" y="0.0" width="350" height="65"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMu-gV-JnA">
-                                                                    <rect key="frame" x="0.0" y="22.5" width="350" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="22.5" width="350" height="20"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -3076,6 +3076,9 @@
                                                         <rect key="frame" x="333" y="15.5" width="51" height="31"/>
                                                         <color key="tintColor" name="orange_app"/>
                                                         <color key="onTintColor" name="orange_app"/>
+                                                        <connections>
+                                                            <action selector="action_switch:" destination="d5M-ud-tor" eventType="valueChanged" id="nLW-vb-K3I"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3110,6 +3113,9 @@
                                                         <rect key="frame" x="333" y="15.5" width="51" height="31"/>
                                                         <color key="tintColor" name="orange_app"/>
                                                         <color key="onTintColor" name="orange_app"/>
+                                                        <connections>
+                                                            <action selector="action_switch:" destination="d5M-ud-tor" eventType="valueChanged" id="lVC-Ic-OZl"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3144,6 +3150,9 @@
                                                         <rect key="frame" x="333" y="15.5" width="51" height="31"/>
                                                         <color key="tintColor" name="orange_app"/>
                                                         <color key="onTintColor" name="orange_app"/>
+                                                        <connections>
+                                                            <action selector="action_switch:" destination="d5M-ud-tor" eventType="valueChanged" id="9an-10-hxh"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3178,6 +3187,9 @@
                                                         <rect key="frame" x="333" y="15.5" width="51" height="31"/>
                                                         <color key="tintColor" name="orange_app"/>
                                                         <color key="onTintColor" name="orange_app"/>
+                                                        <connections>
+                                                            <action selector="action_switch:" destination="d5M-ud-tor" eventType="valueChanged" id="9F1-JC-VhP"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
