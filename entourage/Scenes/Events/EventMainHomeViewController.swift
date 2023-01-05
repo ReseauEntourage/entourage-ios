@@ -320,9 +320,6 @@ class EventMainHomeViewController: UIViewController {
     func extractDict(isEventSelection:Bool) {
         let _events = isEventSelection ? myEvents : eventsDiscovered
         let newEventsSorted = Event.getArrayOfDateSorted(events: _events, isAscendant:true)
-        
-        print("eho " , newEventsSorted)
-        
         var newEvents = [Any]()
         for (k,v) in newEventsSorted {
             newEvents.append(k.dateString)

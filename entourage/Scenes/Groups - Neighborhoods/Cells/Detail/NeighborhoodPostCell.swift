@@ -26,6 +26,8 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_view_bt_send: UIView!
     @IBOutlet weak var ui_lb_chat: UILabel!
     
+    @IBOutlet weak var ui_btn_signal_post: UIButton!
+    
     class var identifier: String {
         return String(describing: self)
     }
@@ -56,6 +58,12 @@ class NeighborhoodPostCell: UITableViewCell {
         
         ui_lb_chat.text = "comment_post".localized
         
+        ui_btn_signal_post.addTarget(self, action: #selector(signalClicked), for: .touchUpInside)
+        
+    }
+    
+    @objc func signalClicked(){
+        self.delegate?.signalPost(postId: self.postId)
     }
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
@@ -117,6 +125,7 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func showMessages(addComment:Bool, postId:Int, indexPathSelected:IndexPath?)
     func showUser(userId:Int?)
     func showImage(imageUrl:URL?)
+    func signalPost(postId:Int)
 }
 
 

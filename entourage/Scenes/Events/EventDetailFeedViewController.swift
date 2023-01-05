@@ -689,6 +689,10 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
+    func signalPost(postId: Int) {
+        //TODO CHECK THIS
+    }
+    
     func showMessages(addComment:Bool, postId:Int, indexPathSelected: IndexPath?) {
         let sb = UIStoryboard.init(name: StoryboardName.eventMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? EventDetailMessagesViewController {
