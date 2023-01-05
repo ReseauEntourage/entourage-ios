@@ -51,6 +51,8 @@ class HomeHelpCell: UITableViewCell {
         
         if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
             ui_image.sd_setImage(with: url, placeholderImage:UIImage(named: "placeholder_user"))
+        }else{
+            ui_image.image = UIImage.init(named: "placeholder_user")
         }
         
         if let imagenamePicto = imagenamePicto {

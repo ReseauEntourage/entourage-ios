@@ -621,3 +621,25 @@ struct EventMetadataEditing {
         }
     }
 }
+
+
+extension Event {
+    
+    //Function to see if event is passed or not 
+    func checkIsEventPassed()-> Bool{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        guard let date = dateFormatter.date(from: self.endDateFormatted) else {
+            print("Error: Invalid date")
+            return false
+        }
+
+        if date < Date() {
+            return true
+        } else {
+            return false
+        }
+        return false
+    }
+    
+}

@@ -321,6 +321,8 @@ class EventMainHomeViewController: UIViewController {
         let _events = isEventSelection ? myEvents : eventsDiscovered
         let newEventsSorted = Event.getArrayOfDateSorted(events: _events, isAscendant:true)
         
+        print("eho " , newEventsSorted)
+        
         var newEvents = [Any]()
         for (k,v) in newEventsSorted {
             newEvents.append(k.dateString)
@@ -589,9 +591,7 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
         
         if let txt = _value as? String {
             let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
-            
             cell.populateCell(title: txt, isTopHeader: false)
-            
             return cell
         }
         
@@ -605,6 +605,11 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! EventListCell
         cell.populateCell(event: event, hideSeparator: true)
+        if event.checkIsEventPassed(){
+            cell.setPassed()
+        }else{
+            cell.setIncoming()
+        }
         return cell
     }
     

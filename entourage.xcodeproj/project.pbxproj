@@ -1015,6 +1015,7 @@
 		025D8762278DEB1A00909101 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				268FCA282965E6A000159C34 /* AlertWithImage */,
 				02F5FEC227E0CB6800A14313 /* MJAlertController.swift */,
 				02F5FEC327E0CB6800A14313 /* MJAlertController.xib */,
 				023EC28027FB3226003A3051 /* Base controllers */,
@@ -1552,6 +1553,13 @@
 				02166C0A28A54568004D3FF8 /* ActionFilterValidateCell.swift */,
 			);
 			path = cells;
+			sourceTree = "<group>";
+		};
+		268FCA282965E6A000159C34 /* AlertWithImage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AlertWithImage;
 			sourceTree = "<group>";
 		};
 		466EAB21AD4207C796A4EC64 /* Frameworks */ = {

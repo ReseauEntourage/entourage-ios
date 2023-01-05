@@ -179,9 +179,9 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         case section_contribs:
             return 1 + 1 //Header
         case section_agir:
-            return homeViewModel.actions.count + 2 //Cell Mandatory
+            return homeViewModel.actions.count + 1 //Cell Mandatory
         case section_help:
-            return 1 + 2 //Header
+            return 1 + 3 //Header
         default:
             return 0
         }
@@ -216,7 +216,13 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if indexPath.section == section_help {
-            if indexPath.row == 1 {
+            if indexPath.row == 1 { //Action madatory resources
+                let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionTeachCell.identifier, for: indexPath) as! HomeActionTeachCell
+                
+                cell.populateCell(title: "home_cell_pedago".localized)
+                return cell
+            }
+            if indexPath.row == 2 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: HomeHelpCell.identifier, for: indexPath) as! HomeHelpCell
                 
                 cell.populateCell(name: "home_cell_map".localized, subtitle: "home_cell_map_subtitle".localized, imageUrl: nil,imagenamePicto: "ic_home_sol", bottomMargin: 10)
@@ -231,15 +237,15 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
-        if indexPath.row == 1 { //Action madatory resources
-            let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionTeachCell.identifier, for: indexPath) as! HomeActionTeachCell
-            
-            cell.populateCell(title: "home_cell_pedago".localized)
-            return cell
-        }
+//        if indexPath.row == 1 { //Action madatory resources
+//            let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionTeachCell.identifier, for: indexPath) as! HomeActionTeachCell
+//
+//            cell.populateCell(title: "home_cell_pedago".localized)
+//            return cell
+//        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionCell.identifier, for: indexPath) as! HomeActionCell
-        let action = homeViewModel.actions[indexPath.row - 2]
+        let action = homeViewModel.actions[indexPath.row - 1]
         cell.populateCell(title: "\(action.name)", imageUrl: action.action_url,imageIdentifier: nil)
         return cell
     }
@@ -249,6 +255,11 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.section == section_help {
             if indexPath.row == 1 {
+                AnalyticsLoggerManager.logEvent(name: Home_action_pedago)
+                showResources()
+                return
+            }
+            else if indexPath.row == 2 {
                 AnalyticsLoggerManager.logEvent(name: Home_action_map)
                 showAllPois()
             }
