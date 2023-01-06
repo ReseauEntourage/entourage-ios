@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import SimpleKeychain
 
 struct AppState {
     
@@ -55,6 +55,7 @@ struct AppState {
     }
     
     static func navigateToStartupScreen() {
+        clearDatas()
         let sb = UIStoryboard.init(name: StoryboardName.intro, bundle: nil)
         let vc = sb.instantiateInitialViewController()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -94,5 +95,8 @@ struct AppState {
         UserDefaults.currentUser = nil
         UserDefaults.temporaryUser = nil
         UserDefaults.pushToken = nil
+        
+        SimpleKeychain.A0SimpleKeychain().deleteEntry(forKey: kKeychainPhone)
+        SimpleKeychain.A0SimpleKeychain().deleteEntry(forKey: kKeychainPassword)
     }
 }

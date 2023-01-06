@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SimpleKeychain
 
 struct AuthService: ParsingDataCodable {
     //MARK: - Create user account -
@@ -53,6 +54,9 @@ struct AuthService: ParsingDataCodable {
                 DispatchQueue.main.async { completion(nil, error, false) }
                 return
             }
+            
+            A0SimpleKeychain().setString(phone, forKey: kKeychainPhone)
+            A0SimpleKeychain().setString(password, forKey: kKeychainPassword)
             
             let dataParsed = UserService.parsingDataUser(data: data)
             
