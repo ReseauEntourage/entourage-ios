@@ -20,6 +20,8 @@ class ConversationListMembersViewController: BasePopViewController {
     var isAlreadyClearRows = false
     var isSearch = false
     
+    var userCreatorId:Int? = nil
+    
     var conversationId:Int? = nil
     
     override func viewDidLoad() {
@@ -46,6 +48,7 @@ class ConversationListMembersViewController: BasePopViewController {
         MessagingService.getDetailConversation(conversationId: conversationId) { conversation, error in
             if let conversation = conversation,let members = conversation.members {
                 self.users = members
+                self.userCreatorId = conversation.author?.id
             }
             
             self.ui_tableview.reloadData()
@@ -97,7 +100,9 @@ extension ConversationListMembersViewController: UITableViewDataSource, UITableV
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
         
-        cell.populateCell(isMe:isMe, username: user.username ?? "-", role: "", imageUrl: user.imageUrl, showBtMessage: true,delegate: self,position: position)
+        let isAuthor = user.uid == userCreatorId
+        
+        cell.populateCell(isMe:isMe, username: user.username ?? "-", role: isAuthor ? "Admin".localized : "", imageUrl: user.imageUrl, showBtMessage: true,delegate: self,position: position)
         return cell
     }
     

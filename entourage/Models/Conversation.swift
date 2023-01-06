@@ -23,6 +23,8 @@ struct Conversation:Codable {
     var messages:[PostMessage]? = nil
     private var hasPersonalPost:Bool? = nil
     
+    var author:ConversationAuthor? = nil
+    
     func isOneToOne() -> Bool {
         return type == "private"
     }
@@ -130,6 +132,7 @@ struct Conversation:Codable {
         case members
         case isCreator = "creator"
         case blockers
+        case author
     }
 }
 
@@ -184,5 +187,15 @@ struct BlockedUser:Codable {
         case uid = "id"
         case displayName = "display_name"
         case avatarUrl = "avatar_url"
+    }
+}
+
+struct ConversationAuthor:Codable {
+    var id = 0
+    var username:String? = nil
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case username = "display_name"
     }
 }
