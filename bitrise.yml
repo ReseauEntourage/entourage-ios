@@ -28,6 +28,8 @@ workflows:
         inputs:
         - register_test_devices: "yes"
         - automatic_code_signing: api-key
+        - upload_bitcode: 'no'
+        - compile_bitcode: 'no'
         - distribution_method: ad-hoc
     - deploy-to-bitrise-io: {}
     - ruby-script:
@@ -108,6 +110,8 @@ workflows:
     - xcode-archive:
         inputs:
         - automatic_code_signing: api-key
+        - upload_bitcode: 'no'
+        - compile_bitcode: 'no'
         - distribution_method: app-store
     - deploy-to-bitrise-io:
         inputs:
