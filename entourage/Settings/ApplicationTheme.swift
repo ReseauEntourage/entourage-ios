@@ -21,7 +21,7 @@ struct ApplicationTheme {
     static let minGroupNameChars = 2
     static let minHttpChars = 6
     static let maxCharsBio = 200
-    static let maxCharsDescription = 400
+    static let maxCharsDescription = 150
     static let maxCharsDescription200 = 200
     
     static func iPhoneHasNotch() -> Bool {

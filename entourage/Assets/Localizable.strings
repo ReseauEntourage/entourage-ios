@@ -555,7 +555,7 @@
 "neighborhoodCreateNameSubtitle" = "- obligatoire";
 
 "neighborhoodCreateDescriptionTitle" = "Rédiger un descriptif";
-"neighborhoodCreateDescriptionSubtitle" = "obligatoire (400 caractères max)";
+"neighborhoodCreateDescriptionSubtitle" = "obligatoire (150 caractères max)";
 "neighborhoodCreateTitleDescriptionPlaceholder" = "Pour se rencontrer entre voisins du 18e";
 
 
@@ -869,6 +869,8 @@
 "event_member_cell_list" = "%d participant";
 "event_group_title_list" = "Le groupe organise aussi :";
 "event_places_detail" = "%d places";
+"event_places_distance" = "%@ à %@ km";
+
 
 /* Home Event*/
 "event_main_page_title" = "Événements";

@@ -212,7 +212,9 @@ class EventDetailFeedViewController: UIViewController {
     @objc func getEventDetail(hasToRefreshLists:Bool = false) {
         self.currentPagingPage = 1
         self.isLoading = true
+        print("eho " ,event?.distance)
         EventService.getEventWithId(eventId) { event, error in
+            print("eho " ,event?.distance)
             self.pullRefreshControl.endRefreshing()
             if let _ = error {
                 self.goBack()

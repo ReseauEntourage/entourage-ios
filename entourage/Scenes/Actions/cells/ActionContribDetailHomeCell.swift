@@ -63,7 +63,13 @@ class ActionContribDetailHomeCell: UITableViewCell {
         
         ui_date.text = action.getCreatedDate()
         ui_location.text = action.metadata?.displayAddress
-        ui_distance?.text = String.init(format: "AtKm".localized, "xx") //TODO: a changer plus tard
+        if let _distance = action.distance {
+            let distString = String(_distance.rounded())
+            ui_distance?.text = String.init(format: "AtKm".localized, distString) //TODO: a changer plus tard
+        }else{
+            ui_distance?.text = String.init(format: "AtKm".localized, "xx") //TODO: a changer plus tard
+        }
+        
     }
     
 }

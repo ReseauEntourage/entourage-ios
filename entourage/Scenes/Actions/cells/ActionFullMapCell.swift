@@ -54,8 +54,16 @@ class ActionFullMapCell: UITableViewCell {
             centerMapOnLocation(_locAnnot)
         }
         let _address = action.metadata?.displayAddress ?? "-"
-        let _km = String.init(format: "atKm".localized, "xx") //TODO: mettre la bonne distance plus tard
-        ui_lbl_about_desc?.text = "\(_address) \(_km)"
+        if let _distance = action.distance {
+            let distString = String(_distance.rounded())
+            let _km = String.init(format: "atKm".localized, distString)
+            ui_lbl_about_desc?.text = "\(_address) \(_km)"
+            
+        }else{
+            let _km = String.init(format: "atKm".localized, "xx")
+            ui_lbl_about_desc?.text = "\(_address) \(_km)"
+        }
+
     }
     
     //MARK: center + zoom on map

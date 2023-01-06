@@ -3503,6 +3503,9 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="AiL-Og-92z">
+            <size key="intrinsicContentSize" width="362" height="12"/>
+        </designable>
         <designable name="sz5-r6-TfZ">
             <size key="intrinsicContentSize" width="-1" height="30"/>
         </designable>

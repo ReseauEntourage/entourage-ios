@@ -588,6 +588,7 @@ class ActionsMainHomeViewController: UIViewController {
     }
     
     func showAction(actionId:Int,isContrib:Bool, isAfterCreation:Bool = false, action:Action? = nil) {
+        print("eho ", action?.distance)
         if let navvc = storyboard?.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navvc.topViewController as? ActionDetailFullViewController {
             vc.actionId = actionId
             vc.action = action
