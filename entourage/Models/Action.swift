@@ -20,6 +20,7 @@ struct Action:Codable {
     
     var sectionName:String? = nil
     var location:EventLocation? = nil
+    var distance:Double? = 0.0
     
     var keyImage:String? = nil
     var metadata:ActionMetadata? = nil
@@ -68,6 +69,7 @@ struct Action:Codable {
         case description
         case imageUrl = "image_url"
         case sectionName = "section"
+        case distance
         
         case author
         case location
@@ -99,6 +101,10 @@ struct Action:Codable {
             locationDict["latitude"] = location?.latitude
             locationDict["longitude"] = location?.longitude
             dict["location"] = locationDict
+        }
+        
+        if distance != 0.0 {
+            dict["distance"] = distance
         }
         
         if let keyImage = keyImage {

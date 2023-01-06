@@ -23,6 +23,7 @@ struct Event:Codable {
     var author:EventAuthor? = nil
     
     var location:EventLocation? = nil
+    var distance:Double? = 0.0
     
     var metadata:EventMetadata? = nil
     
@@ -190,7 +191,7 @@ struct Event:Codable {
         case imageUrl = "image_url"
         case isOnline = "online"
         case onlineEventUrl = "event_url"
-        
+        case distance
         case author
         case location
         case metadata
@@ -231,6 +232,11 @@ struct Event:Codable {
         else {
             dict["latitude"] = 0
         }
+        if distance ?? 0 != 0 {
+            dict["distance"] = distance
+        }else {
+            dict["distance"] = 0
+        }
         
         if location?.longitude ?? 0 != 0 {
             dict["longitude"] = location!.longitude
@@ -238,6 +244,8 @@ struct Event:Codable {
         else {
             dict["longitude"] = 0
         }
+        
+        
         
         //Interests
         if let interests = interests, interests.count > 0 {
@@ -620,4 +628,26 @@ struct EventMetadataEditing {
             return place_limit ?? 0 > 0
         }
     }
+}
+
+
+extension Event {
+    
+    //Function to see if event is passed or not 
+    func checkIsEventPassed()-> Bool{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        guard let date = dateFormatter.date(from: self.endDateFormatted) else {
+            print("Error: Invalid date")
+            return false
+        }
+
+        if date < Date() {
+            return true
+        } else {
+            return false
+        }
+        return false
+    }
+    
 }

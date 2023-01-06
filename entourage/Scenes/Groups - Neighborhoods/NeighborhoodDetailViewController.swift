@@ -9,6 +9,8 @@ import UIKit
 import IHProgressHUD
 
 class NeighborhoodDetailViewController: UIViewController {
+
+    
     
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_top_view: MJNavBackView!
@@ -546,6 +548,17 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
+    func signalPost(postId: Int) {
+        if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
+            vc.groupId = neighborhoodId
+            vc.postId = postId
+            vc.parentDelegate = self
+            vc.signalType = .publication
+            self.present(navvc, animated: true)
+        }
+        
+    }
+    
     func showMessages(addComment: Bool, postId:Int, indexPathSelected: IndexPath?) {
         
         let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
@@ -680,8 +693,22 @@ extension NeighborhoodDetailViewController: UIScrollViewDelegate {
         return self.ui_iv_preview
     }
 }
+extension NeighborhoodDetailViewController:GroupDetailDelegate{
+    func showMessage(signalType:GroupDetailSignalType) {
+        let alertVC = MJAlertController()
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
+        
+        alertVC.configureAlert(alertTitle: title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            alertVC.show()
+        }
+    }
+}
 
 
 protocol NeighborhoodDetailViewControllerDelegate: AnyObject {
     func refreshNeighborhoodModified()
 }
+

@@ -40,8 +40,15 @@ class ActionSolicitationDetailHomeCell: UITableViewCell {
         ui_title.text = action.title
         ui_date.text = action.getCreatedDate()
         
-        let displayAddress = action.metadata?.displayAddress ?? ""
-        ui_location.text = "\(String.init(format: "AtKm".localized, "xx")) - \(displayAddress)"
+        if let _distance = action.distance {
+            var distString = String(_distance.rounded())
+            distString.removeLast(2)
+            let displayAddress = action.metadata?.displayAddress ?? ""
+            ui_location.text = "\(String.init(format: "AtKm".localized, distString)) - \(displayAddress)"
+        }else{
+            let displayAddress = action.metadata?.displayAddress ?? ""
+            ui_location.text = "\(String.init(format: "AtKm".localized, "xx")) - \(displayAddress)"
+        }
     
         ui_view_separator.isHidden = hideSeparator
         

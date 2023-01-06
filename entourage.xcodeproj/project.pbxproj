@@ -375,6 +375,8 @@
 		02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */; };
 		02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B42939F6020076F57A /* OnboardingEndCell.swift */; };
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
+		268FCA2A2967281100159C34 /* MJAlertWithImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FCA292967281100159C34 /* MJAlertWithImageController.swift */; };
+		268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */; };
 		7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */; };
 /* End PBXBuildFile section */
 
@@ -742,6 +744,8 @@
 		02FE55B42939F6020076F57A /* OnboardingEndCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndCell.swift; sourceTree = "<group>"; };
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
 		1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		268FCA292967281100159C34 /* MJAlertWithImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJAlertWithImageController.swift; sourceTree = "<group>"; };
+		268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertWithImageController.xib; sourceTree = "<group>"; };
 		6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		EF9863871BD660A314749193 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
@@ -1019,6 +1023,7 @@
 		025D8762278DEB1A00909101 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				268FCA282965E6A000159C34 /* AlertWithImage */,
 				02F5FEC227E0CB6800A14313 /* MJAlertController.swift */,
 				02F5FEC327E0CB6800A14313 /* MJAlertController.xib */,
 				023EC28027FB3226003A3051 /* Base controllers */,
@@ -1559,6 +1564,15 @@
 			path = cells;
 			sourceTree = "<group>";
 		};
+		268FCA282965E6A000159C34 /* AlertWithImage */ = {
+			isa = PBXGroup;
+			children = (
+				268FCA292967281100159C34 /* MJAlertWithImageController.swift */,
+				268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */,
+			);
+			path = AlertWithImage;
+			sourceTree = "<group>";
+		};
 		466EAB21AD4207C796A4EC64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1722,6 +1736,7 @@
 				021FD9652875BEAC00D3AA54 /* Event.storyboard in Resources */,
 				02EFE47A289BFC0D00D70C68 /* Action_Create.storyboard in Resources */,
 				020AF5E528607EFE0012AE60 /* congrat_short_anim.json in Resources */,
+				268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */,
 				02B94C28284F63AB006059EF /* HomeContribCell.xib in Resources */,
 				02B37825279B06F600B204EF /* Others.storyboard in Resources */,
 				02A92C182897D0F7000DFF95 /* Actions.storyboard in Resources */,
@@ -2022,6 +2037,7 @@
 				02CCE69027D7B96700D6976C /* MainUserProfileTopCell.swift in Sources */,
 				02F5279B2799A1F300929431 /* GuideCells.swift in Sources */,
 				026819C0278E105600A98A4A /* OTLoginChangePhoneViewController.swift in Sources */,
+				268FCA2A2967281100159C34 /* MJAlertWithImageController.swift in Sources */,
 				02B94C2F284F9277006059EF /* HomeSectionCell.swift in Sources */,
 				029F690E27D905F5003D1E39 /* MainUserInfosCell.swift in Sources */,
 				02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */,

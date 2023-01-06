@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -86,11 +86,18 @@
                         <color key="textColor" name="gris_112"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHr-6A-1Ud">
+                        <rect key="frame" x="16" y="7" width="94" height="96"/>
+                        <color key="backgroundColor" name="noir_alpha_50"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
+                    <constraint firstItem="wHr-6A-1Ud" firstAttribute="centerY" secondItem="VxJ-kc-bBP" secondAttribute="centerY" id="02b-Fw-172"/>
                     <constraint firstItem="xft-PW-a9b" firstAttribute="leading" secondItem="VxJ-kc-bBP" secondAttribute="trailing" constant="10" id="2NI-HV-4zE"/>
                     <constraint firstItem="cMP-w6-HKs" firstAttribute="top" secondItem="AEp-eM-B3w" secondAttribute="bottom" constant="10" id="2gq-MB-JZa"/>
+                    <constraint firstItem="wHr-6A-1Ud" firstAttribute="width" secondItem="VxJ-kc-bBP" secondAttribute="width" id="3a8-cE-c04"/>
+                    <constraint firstItem="wHr-6A-1Ud" firstAttribute="height" secondItem="VxJ-kc-bBP" secondAttribute="height" multiplier="1.02128" id="4hQ-rE-gMq"/>
                     <constraint firstAttribute="bottom" secondItem="V4x-sb-dCg" secondAttribute="bottom" id="7Lg-G6-aPB"/>
                     <constraint firstItem="VxJ-kc-bBP" firstAttribute="leading" secondItem="q6g-Fy-0d4" secondAttribute="leading" constant="16" id="8VA-bP-f8R"/>
                     <constraint firstItem="GXp-iK-TW2" firstAttribute="top" secondItem="VxJ-kc-bBP" secondAttribute="top" constant="-3" id="9xS-Ze-KwW"/>
@@ -103,6 +110,7 @@
                     <constraint firstItem="rU3-kg-lsr" firstAttribute="centerY" secondItem="AEp-eM-B3w" secondAttribute="centerY" id="UnS-5f-XpM"/>
                     <constraint firstItem="VxJ-kc-bBP" firstAttribute="top" secondItem="q6g-Fy-0d4" secondAttribute="top" constant="8" id="b3u-dy-hoI"/>
                     <constraint firstItem="ck9-si-3WR" firstAttribute="leading" secondItem="cMP-w6-HKs" secondAttribute="leading" id="dZe-k3-Vmb"/>
+                    <constraint firstItem="wHr-6A-1Ud" firstAttribute="centerX" secondItem="VxJ-kc-bBP" secondAttribute="centerX" id="feb-CB-WKK"/>
                     <constraint firstItem="rU3-kg-lsr" firstAttribute="leading" secondItem="AEp-eM-B3w" secondAttribute="trailing" constant="8" id="ioe-w2-fmf"/>
                     <constraint firstItem="AEp-eM-B3w" firstAttribute="leading" secondItem="VxJ-kc-bBP" secondAttribute="trailing" constant="10" id="mKM-1P-TCw"/>
                     <constraint firstItem="h1L-Fy-qUf" firstAttribute="leading" secondItem="cMP-w6-HKs" secondAttribute="trailing" constant="8" symbolic="YES" id="mjR-4d-Mom"/>
@@ -122,6 +130,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ui_alpha_view" destination="wHr-6A-1Ud" id="Hrr-Mq-QIF"/>
                 <outlet property="ui_constraint_left_title" destination="2NI-HV-4zE" id="RUJ-rb-qvZ"/>
                 <outlet property="ui_date" destination="rU3-kg-lsr" id="uI1-Cg-sTY"/>
                 <outlet property="ui_image" destination="VxJ-kc-bBP" id="WKd-pA-zdp"/>
@@ -132,7 +141,7 @@
                 <outlet property="ui_title" destination="xft-PW-a9b" id="ESW-IL-XdU"/>
                 <outlet property="ui_view_separator" destination="V4x-sb-dCg" id="fuU-W0-jYf"/>
             </connections>
-            <point key="canvasLocation" x="132" y="33"/>
+            <point key="canvasLocation" x="131.8840579710145" y="32.8125"/>
         </tableViewCell>
     </objects>
     <resources>
@@ -149,6 +158,9 @@
         </namedColor>
         <namedColor name="gris_112">
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="noir_alpha_50">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.52000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

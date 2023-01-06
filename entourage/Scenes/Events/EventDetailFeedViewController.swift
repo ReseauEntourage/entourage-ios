@@ -212,7 +212,9 @@ class EventDetailFeedViewController: UIViewController {
     @objc func getEventDetail(hasToRefreshLists:Bool = false) {
         self.currentPagingPage = 1
         self.isLoading = true
+        print("eho " ,event?.distance)
         EventService.getEventWithId(eventId) { event, error in
+            print("eho " ,event?.distance)
             self.pullRefreshControl.endRefreshing()
             if let _ = error {
                 self.goBack()
@@ -689,6 +691,10 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
+    func signalPost(postId: Int) {
+        //TODO CHECK THIS
+    }
+    
     func showMessages(addComment:Bool, postId:Int, indexPathSelected: IndexPath?) {
         let sb = UIStoryboard.init(name: StoryboardName.eventMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? EventDetailMessagesViewController {

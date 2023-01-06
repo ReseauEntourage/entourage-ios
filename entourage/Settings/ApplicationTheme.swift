@@ -21,7 +21,7 @@ struct ApplicationTheme {
     static let minGroupNameChars = 2
     static let minHttpChars = 6
     static let maxCharsBio = 200
-    static let maxCharsDescription = 400
+    static let maxCharsDescription = 150
     static let maxCharsDescription200 = 200
     
     static func iPhoneHasNotch() -> Bool {
@@ -57,6 +57,9 @@ struct ApplicationTheme {
     static func getFontCourantRegularNoir(size:CGFloat = 15,color:UIColor = .black) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
     }
+    static func getFontCourantRegularGris(size:CGFloat = 15,color:UIColor = .appGris112) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
+    }
     static func getFontCourantRegularOrange(size:CGFloat = 15,color:UIColor = .appOrange) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontNunitoRegular(size: size), color: color)
     }
@@ -76,6 +79,9 @@ struct ApplicationTheme {
         return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: .black)
     }
     
+    static func getFontCourantBoldGris(size:CGFloat = 15) -> MJTextFontColorStyle {
+        return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: .appGris112)
+    }
     
     static func getFontH1Blanc(size:CGFloat = 24) -> MJTextFontColorStyle {
         return MJTextFontColorStyle(font: getFontQuickSandBold(size: size), color: .white)

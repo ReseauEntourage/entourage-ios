@@ -185,6 +185,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     }
     
     @IBAction func action_signal(_ sender: Any) {
+        //TODO TO GET IT FROM OTHER PAGE
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.groupId = neighborhoodId
             vc.postId = parentCommentId

@@ -390,11 +390,11 @@
 "mainUserTitleGroup" = "Groupe\nrejoint";
 "mainUserTitleGroups" = "Groupes\nrejoints";
 "mainUserTitleOuting" = "Événement";
-"mainUserTitleOutings" = "Événements";
+"mainUserTitleOutings" = "Événements\n";
 
 "mainUserBioPlaceholder" = "Placeholder pour la bio ?";
-"mainUserBirthPlaceholder" = "Placeholder pour la date ?";
-"mainUserEmailPlaceholder" = "Placeholder pour l'email ?";
+"mainUserBirthPlaceholder" = "01-03";
+"mainUserEmailPlaceholder" = "email@gmail.com";
 
 "mainUserTitleInfos" = "Mes informations";
 "mainUserTitleBirth" = "Date d'anniversaire";
@@ -555,7 +555,7 @@
 "neighborhoodCreateNameSubtitle" = "- obligatoire";
 
 "neighborhoodCreateDescriptionTitle" = "Rédiger un descriptif";
-"neighborhoodCreateDescriptionSubtitle" = "obligatoire (400 caractères max)";
+"neighborhoodCreateDescriptionSubtitle" = "obligatoire (150 caractères max)";
 "neighborhoodCreateTitleDescriptionPlaceholder" = "Pour se rencontrer entre voisins du 18e";
 
 
@@ -779,6 +779,7 @@
 "home_info_encounter_pop_subtitle" = "Pour cela, rien de plus simple ! Participez à des événements et rejoignez des actions.";
 
 /** Events*/
+"passed_event" = "Événements passés";
 //Create
 
 "eventCreatePopCloseBackTitle" = "Attention";
@@ -868,6 +869,8 @@
 "event_member_cell_list" = "%d participant";
 "event_group_title_list" = "Le groupe organise aussi :";
 "event_places_detail" = "%d places";
+"event_places_distance" = "%@ à %@ km";
+
 
 /* Home Event*/
 "event_main_page_title" = "Événements";
@@ -944,8 +947,8 @@
 //Contacts pop add
 "event_add_contact_accept" = "Ajouter";
 "event_add_contact_cancel" = "Annuler";
-"event_add_contact_title" = "Ajouter l’événement à votre\nagenda personnel ? ";
-"event_add_contact_description" = "Vous pouvez ajouter cet événement à votre calendrier personnel avec l’ensemble des informations (lieu, heure…).";
+"event_add_contact_title" = "Votre inscription est prise en compte !";
+"event_add_contact_description" = "Voulez-vous ajouter cet énévement à votre agenda personnel ?";
 
 "event_add_contact_places_title" = "Événement à places limitées";
 "event_add_contact_places_description" = "Attention, cet événement est à places limitées, votre inscription n’est pas garantie. L’administrateur de l’événement reviendra vers vous pour vous confirmer la réservation de votre place.";

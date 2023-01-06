@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -205,6 +205,18 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1C-Y9-g4k">
+                                <rect key="frame" x="382" y="13" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Bxf-DD-kpQ"/>
+                                    <constraint firstAttribute="width" constant="20" id="nrU-US-GaS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="...">
+                                    <color key="titleColor" name="gris_112"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="BeigeClair"/>
                         <constraints>
@@ -226,6 +238,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="koJ-PJ-1CY" firstAttribute="trailing" secondItem="JBT-Y6-NRe" secondAttribute="trailing" id="RAA-ZP-XrC"/>
                             <constraint firstItem="koJ-PJ-1CY" firstAttribute="bottom" secondItem="qPp-vp-wdq" secondAttribute="bottom" id="Tqx-7m-HsJ"/>
                             <constraint firstItem="qPp-vp-wdq" firstAttribute="top" secondItem="k8l-eW-UxZ" secondAttribute="top" constant="20" id="VrB-cz-vhn"/>
+                            <constraint firstItem="m1C-Y9-g4k" firstAttribute="top" secondItem="koJ-PJ-1CY" secondAttribute="top" constant="-7" id="WBJ-Ov-GyR"/>
                             <constraint firstItem="E8Y-4D-rfb" firstAttribute="trailing" secondItem="kLZ-kX-Eih" secondAttribute="trailing" id="XAu-Ab-Brj"/>
                             <constraint firstItem="kLZ-kX-Eih" firstAttribute="leading" secondItem="9eH-ug-ufT" secondAttribute="trailing" constant="4" id="YJI-l5-ba4"/>
                             <constraint firstItem="JBT-Y6-NRe" firstAttribute="centerY" secondItem="qPp-vp-wdq" secondAttribute="centerY" id="dA8-FC-Qq1"/>
@@ -234,6 +247,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="YJs-gC-gEm" firstAttribute="top" secondItem="qPp-vp-wdq" secondAttribute="bottom" constant="25" id="f2r-za-QR3"/>
                             <constraint firstAttribute="trailing" secondItem="20f-3G-Kdi" secondAttribute="trailing" constant="28" id="hkE-eG-auU"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="20f-3G-Kdi" secondAttribute="bottom" constant="26" id="jCH-WG-C26"/>
+                            <constraint firstAttribute="trailing" secondItem="m1C-Y9-g4k" secondAttribute="trailing" constant="24" id="oo5-Wm-rM3"/>
                             <constraint firstItem="E8Y-4D-rfb" firstAttribute="leading" secondItem="9eH-ug-ufT" secondAttribute="leading" id="q6o-cG-b4O"/>
                             <constraint firstAttribute="trailing" secondItem="h0R-dD-e9j" secondAttribute="trailing" constant="28" id="uTW-2v-2Cv"/>
                             <constraint firstItem="jsH-FQ-hzp" firstAttribute="top" secondItem="h0R-dD-e9j" secondAttribute="top" id="vbx-af-tIc"/>
@@ -252,6 +266,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="ui_btn_signal_post" destination="m1C-Y9-g4k" id="nxH-V9-pJC"/>
                 <outlet property="ui_comment" destination="YJs-gC-gEm" id="dW1-WH-PuZ"/>
                 <outlet property="ui_comments_nb" destination="kLZ-kX-Eih" id="Cmy-cG-KCN"/>
                 <outlet property="ui_date" destination="ZBP-ld-rgY" id="fOU-Zf-CL0"/>
@@ -275,6 +290,9 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
         </namedColor>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gris_112">
+            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_app">
             <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -155,12 +155,26 @@ class EventDetailTopLightCell: UITableViewCell {
             ui_iv_location.image = event.isCanceled() ? UIImage.init(named: "ic_location_grey") : UIImage.init(named: "ic_location")
         }
         
-        if event.isCanceled() {
-            ui_location_name.text = _addressName
+        
+        if let _distance = event.distance {
+            var distString = String(_distance.rounded())
+            distString.removeLast(2)
+            let  _addressNameWithDistance = String.init(format: "event_places_distance".localized,_addressName, distString)
+            if event.isCanceled() {
+                ui_location_name.text = _addressNameWithDistance
+            }
+            else {
+                ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressNameWithDistance, textColor: .black)
+            }
+        }else{
+            if event.isCanceled() {
+                ui_location_name.text = _addressName
+            }
+            else {
+                ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
+            }
         }
-        else {
-            ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
-        }
+
     }
     
     private func updateImageUrl(image:UIImageView, imageUrl:String?) {

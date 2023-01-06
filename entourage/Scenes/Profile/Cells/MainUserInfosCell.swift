@@ -64,9 +64,25 @@ class MainUserInfosCell: UITableViewCell {
     
     func populateCell(user:User) {
         
-        ui_birth_info.text = user.birthday ?? "mainUserBirthPlaceholder".localized
+        //Set placholder if !birthday
+        if let _birthday = user.birthday {
+            ui_birth_info.text = _birthday
+        }else{
+            ui_birth_info.text = "mainUserBirthPlaceholder".localized
+            ui_birth_info.textColor = ApplicationTheme.getFontCourantRegularGris().color
+        }
+        
+        //set placeholder if !email
+        if let _email = user.email {
+            ui_email_info.text = _email
+        }else{
+            ui_email_info.text = "mainUserEmailPlaceholder".localized
+            ui_email_info.textColor = ApplicationTheme.getFontCourantRegularGris().color
+        }
+        
+//        ui_birth_info.text = user.birthday ?? "mainUserBirthPlaceholder".localized
+//        ui_email_info.text = user.email ?? "mainUserEmailPlaceholder".localized
         ui_phone_info.text = user.phone
-        ui_email_info.text = user.email ?? "mainUserEmailPlaceholder".localized
         ui_city_info.text = user.addressPrimary?.displayAddress
         
         let currentRadius = user.radiusDistance ?? 0
