@@ -30,6 +30,9 @@ class ParamMenuCell: UITableViewCell {
     @IBOutlet weak var ui_view_suppress_account: UIView!
     @IBOutlet weak var ui_title_suppress_account: UILabel!
     
+    @IBOutlet weak var ui_view_change_pwd: UIView!
+    @IBOutlet weak var ui_title_change_pwd: UILabel!
+    
     weak var delegate:MainParamsMenuDelegate? = nil
     
     override func awakeFromNib() {
@@ -40,6 +43,8 @@ class ParamMenuCell: UITableViewCell {
         ui_title_share.text = "params_share".localized
         ui_title_logout.text = "params_logout".localized
         ui_title_suppress_account.text = "params_suppress".localized
+        ui_title_change_pwd.text = "param_title_change_pwd".localized
+        
         
         ui_title_suggest.text = "params_suggest".localized
         
@@ -48,6 +53,7 @@ class ParamMenuCell: UITableViewCell {
         setLabelTitle(label: ui_title_unlock_members)
         setLabelTitle(label: ui_title_share)
         setLabelTitle(label: ui_title_suggest)
+        setLabelTitle(label: ui_title_change_pwd)
         
         ui_title_logout.textColor = .appOrange
         ui_title_logout.font = ApplicationTheme.getFontNunitoBold(size: 15)
@@ -87,6 +93,9 @@ class ParamMenuCell: UITableViewCell {
     @IBAction func action_suggest(_ sender: Any) {
         delegate?.actionMenu(type: .Suggest)
     }
+    @IBAction func action_pwd(_ sender: Any) {
+        delegate?.actionMenu(type: .Password)
+    }
 }
 
 //MARK: - MainParamsMenuType -
@@ -98,6 +107,7 @@ enum MainParamsMenuType {
     case Logout
     case Suppress
     case Suggest
+    case Password
 }
 
 //MARK: - MainParamsMenuDelegate -

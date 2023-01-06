@@ -12,6 +12,7 @@ import GooglePlaces
 import Firebase
 import FirebaseMessaging
 import IQKeyboardManagerSwift
+import SimpleKeychain
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(goLogin), name: NSNotification.Name(notificationLoginError), object: nil)
         
-        if UserDefaults.currentUser == nil {
+        if UserDefaults.currentUser == nil || A0SimpleKeychain().string(forKey:kKeychainPassword) == nil {
             AppState.navigateToStartupScreen()
             return true
         }

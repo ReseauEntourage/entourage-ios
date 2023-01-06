@@ -12,8 +12,9 @@ let kFirebaseDebugPlist = "GoogleService-Info-social.entourage.ios.beta"
 let kFirebaseProdPlist = "GoogleService-Info"
 let kUserAuthenticationLevelAuthenticated = "authenticated"
 
-
-
+//Use for keychain storage
+let kKeychainPhone = "entourage_user_phone"
+let kKeychainPassword = "entourage_user_password"
 
 
 

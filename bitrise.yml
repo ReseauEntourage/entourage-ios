@@ -148,7 +148,7 @@ workflows:
     steps:
     - activate-ssh-key:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone:
+    - git-clone@6:
         inputs:
         - commit: ""
         - tag: ""

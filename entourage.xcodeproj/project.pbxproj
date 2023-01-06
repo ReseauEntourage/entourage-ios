@@ -299,6 +299,7 @@
 		02D64F4F2799D74F00F6C4BD /* PoiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D64F4E2799D74F00F6C4BD /* PoiService.swift */; };
 		02DB3BBA27A1496A004732C9 /* PartnerDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02DB3BB927A1496A004732C9 /* PartnerDetails.storyboard */; };
 		02DB3BC827A14DFC004732C9 /* Nantes in Frameworks */ = {isa = PBXBuildFile; productRef = 02DB3BC727A14DFC004732C9 /* Nantes */; };
+		02DB43BF2967366B003C4FF8 /* ProfileEditPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB43BE2967366B003C4FF8 /* ProfileEditPasswordViewController.swift */; };
 		02DD1E91280853CF00538EF4 /* NeighborhoodEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD1E90280853CF00538EF4 /* NeighborhoodEditViewController.swift */; };
 		02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD1E9228086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift */; };
 		02DDF1D727D9117700EE22DE /* ProgressRadiusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DDF1D627D9117700EE22DE /* ProgressRadiusView.swift */; };
@@ -358,6 +359,7 @@
 		02F578D2289AD4180040685C /* ActionSolicitationDetailHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02F578D0289AD4180040685C /* ActionSolicitationDetailHomeCell.xib */; };
 		02F5FEC427E0CB6800A14313 /* MJAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5FEC227E0CB6800A14313 /* MJAlertController.swift */; };
 		02F5FEC527E0CB6800A14313 /* MJAlertController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02F5FEC327E0CB6800A14313 /* MJAlertController.xib */; };
+		02F827712967287B000CA150 /* SimpleKeychain in Frameworks */ = {isa = PBXBuildFile; productRef = 02F827702967287B000CA150 /* SimpleKeychain */; };
 		02FB543D287D74B800E4B9FA /* GlobalObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB543C287D74B800E4B9FA /* GlobalObjects.swift */; };
 		02FB543F287DAE4C00E4B9FA /* EventDetailFullFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB543E287DAE4C00E4B9FA /* EventDetailFullFeedViewController.swift */; };
 		02FB5444287DC01200E4B9FA /* EventDetailFullCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB5442287DC01200E4B9FA /* EventDetailFullCell.swift */; };
@@ -670,6 +672,7 @@
 		02D64F4C2799D5E000F6C4BD /* InviteSourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteSourceViewController.swift; sourceTree = "<group>"; };
 		02D64F4E2799D74F00F6C4BD /* PoiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoiService.swift; sourceTree = "<group>"; };
 		02DB3BB927A1496A004732C9 /* PartnerDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PartnerDetails.storyboard; sourceTree = "<group>"; };
+		02DB43BE2967366B003C4FF8 /* ProfileEditPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditPasswordViewController.swift; sourceTree = "<group>"; };
 		02DD1E90280853CF00538EF4 /* NeighborhoodEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodEditViewController.swift; sourceTree = "<group>"; };
 		02DD1E9228086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodEditHeaderCell.swift; sourceTree = "<group>"; };
 		02DDF1D627D9117700EE22DE /* ProgressRadiusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRadiusView.swift; sourceTree = "<group>"; };
@@ -760,6 +763,7 @@
 				0246604D27D8A49E00FE1EF8 /* IHProgressHUD in Frameworks */,
 				02E0098E27E37B1100BB23CA /* FirebaseCrashlytics in Frameworks */,
 				0288A8E627CD11E9008D7011 /* SDWebImageMapKit in Frameworks */,
+				02F827712967287B000CA150 /* SimpleKeychain in Frameworks */,
 				02DB3BC827A14DFC004732C9 /* Nantes in Frameworks */,
 				02E0099227E37B1100BB23CA /* FirebaseRemoteConfig in Frameworks */,
 				02B94C402850D4A2006059EF /* IQKeyboardManagerSwift in Frameworks */,
@@ -1243,6 +1247,7 @@
 				02EC7E4A27E8DFB900C1110A /* ParamsChoosePlaceViewController.swift */,
 				02846CBD27EC86F100D85ADA /* ProfileEditInterestsViewController.swift */,
 				02E2A9A4292FDDAD0037BA53 /* ProfileEditBlockedUsersViewController.swift */,
+				02DB43BE2967366B003C4FF8 /* ProfileEditPasswordViewController.swift */,
 				02CCE68E27D7B93E00D6976C /* Cells */,
 				025E917227F3617500D4A7A8 /* detail other user */,
 			);
@@ -1616,6 +1621,7 @@
 				02E0099127E37B1100BB23CA /* FirebaseRemoteConfig */,
 				02B94C3F2850D4A2006059EF /* IQKeyboardManagerSwift */,
 				020AF5DD286064AC0012AE60 /* Lottie */,
+				02F827702967287B000CA150 /* SimpleKeychain */,
 			);
 			productName = entourageios;
 			productReference = 025D8716278DD33600909101 /* Ent-Beta.app */;
@@ -1654,6 +1660,7 @@
 				02E0098A27E37B1100BB23CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
 			);
 			productRefGroup = 025D8717278DD33600909101 /* Products */;
 			projectDirPath = "";
@@ -1969,6 +1976,7 @@
 				0258E4F9288AAF1A000F107B /* ActionsService.swift in Sources */,
 				02C3ABF2279AB53800817B82 /* Extensions_UserDefaults.swift in Sources */,
 				02E2A9A5292FDDAD0037BA53 /* ProfileEditBlockedUsersViewController.swift in Sources */,
+				02DB43BF2967366B003C4FF8 /* ProfileEditPasswordViewController.swift in Sources */,
 				02CCE68A27D7B51E00D6976C /* CloseButton.swift in Sources */,
 				02E2192528355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift in Sources */,
 				02F578D1289AD4180040685C /* ActionSolicitationDetailHomeCell.swift in Sources */,
@@ -2170,6 +2178,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "entourage/entourage-Info.plist";
@@ -2387,6 +2396,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = buildNumberNotSet;
 				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = RT7X9LLTN6;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -2506,6 +2516,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/SimpleKeychain";
+			requirement = {
+				kind = exactVersion;
+				version = 0.12.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2563,6 +2581,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		02F827702967287B000CA150 /* SimpleKeychain */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */;
+			productName = SimpleKeychain;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

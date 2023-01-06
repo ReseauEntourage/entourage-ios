@@ -97,7 +97,7 @@ extension ConversationListMembersViewController: UITableViewDataSource, UITableV
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_user", for: indexPath) as! NeighborhoodUserCell
         
-        cell.populateCell(isMe:isMe, username: user.username!, role: "", imageUrl: user.imageUrl, showBtMessage: true,delegate: self,position: position)
+        cell.populateCell(isMe:isMe, username: user.username ?? "-", role: "", imageUrl: user.imageUrl, showBtMessage: true,delegate: self,position: position)
         return cell
     }
     

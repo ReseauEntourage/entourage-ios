@@ -11,13 +11,13 @@ struct User: Codable {
     var goal:String? = nil
     var addressPrimary:Address? = nil
     var addressSecondary:Address? = nil
-    var firstname:String = ""
-    var lastname:String = ""
+    private var _firstname:String? = nil
+    private var _lastname:String? = nil
     var sid:Int = 0
     var uuid:String? = nil
     var type:String = ""
     var email:String? = nil
-    var displayName:String = ""
+    private var _displayName:String? = nil
     var phone:String? = nil
     var password:String? = nil
     var avatarURL:String? = nil
@@ -51,6 +51,33 @@ struct User: Codable {
         }
     }
     
+    var firstname:String {
+        get {
+            return _firstname ?? "-"
+        }
+        set(newName) {
+            _firstname = newName
+        }
+    }
+    
+    var lastname:String {
+        get {
+            return _lastname ?? "-"
+        }
+        set(newName) {
+            _lastname = newName
+        }
+    }
+    
+    var displayName:String {
+        get {
+            return _displayName ?? "-"
+        }
+        set(newName) {
+            _displayName = newName
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case uuid
         case email
@@ -68,12 +95,12 @@ struct User: Codable {
         case memberships
         case interests
         
-        case firstname = "first_name"
-        case lastname = "last_name"
+        case _firstname = "first_name"
+        case _lastname = "last_name"
         case sid = "id"
         
         case type = "user_type"
-        case displayName = "display_name"
+        case _displayName = "display_name"
         case password = "sms_code"
         case avatarURL = "avatar_url"
         case avatarKey = "avatar_key"

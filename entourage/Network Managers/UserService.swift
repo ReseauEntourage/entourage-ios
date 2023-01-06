@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import SimpleKeychain
 
 struct UserService {
     
@@ -33,6 +33,33 @@ struct UserService {
                 return
             }
             
+            let userParsed = self.parsingDataUser(data: data).user
+            
+            DispatchQueue.main.async { completion(userParsed,nil) }
+        }
+    }
+    
+    static func updateUserPassword(pwd:String, completion: @escaping (_ user:User?, _ error:EntourageNetworkError?) -> Void) {
+        
+        guard let token = UserDefaults.token else { completion(nil,nil)
+            return
+        }
+        let endpoint = String.init(format: kAPIUpdateUser, token)
+        
+        let parameters = ["user" : ["sms_code":pwd]]
+        let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        Logger.print("Datas passed update user pwd \(parameters)")
+        
+        NetworkManager.sharedInstance.requestPatch(endPoint: endpoint, headers: nil, body: bodyData) { (data, resp, error) in
+            Logger.print("Response  Patch userpwd: \(String(describing: (resp as? HTTPURLResponse)?.statusCode)) -- \(String(describing: (resp as? HTTPURLResponse)))")
+            guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error  Patch userpwd - \(error)")
+                DispatchQueue.main.async { completion(nil, error) }
+                return
+            }
+            
+            A0SimpleKeychain().setString(pwd, forKey: kKeychainPassword)
             let userParsed = self.parsingDataUser(data: data).user
             
             DispatchQueue.main.async { completion(userParsed,nil) }

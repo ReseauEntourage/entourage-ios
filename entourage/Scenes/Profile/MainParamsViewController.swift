@@ -105,6 +105,10 @@ extension MainParamsViewController:MainParamsMenuDelegate {
             if let url = URL(string: MENU_SUGGEST_URL) {
                 SafariWebManager.launchUrlInApp(url: url, viewController: self.navigationController)
             }
+        case .Password:
+            let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+            let navvc = sb.instantiateViewController(withIdentifier: "editpwdNav")
+            self.navigationController?.present(navvc, animated: true, completion: nil)
         }
     }
     

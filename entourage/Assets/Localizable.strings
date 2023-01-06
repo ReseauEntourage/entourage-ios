@@ -1202,3 +1202,16 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "conversation_search_empty_title" = "Oups, aucun résultat ne correspond à votre recherche ! ";
 
 "notifs_title" = "Notifications";
+
+//Pwd change
+"param_title_change_pwd" = "Changer de mot de passe";
+"param_change_pwd_title" = "Mot de passe";
+"placeholder_changePwd" = "Saisir le code";
+"oldCode" = "Ancien code d’accès";
+"newCode" = "Nouveau code d’accès";
+"confirmCode" = "Confirmer le code";
+"pwdError" = "Mot de passe incorrect";
+"pwdShort" = "Le nouveau mot de passe est trop court";
+"pwdDiff" = "Les mots de passe ne coïncident pas";
+"pwdUpdated" = "Mise à jour du mot de passe";
+"pwdUpdatedErr" = "Erreur de mise à jour";
