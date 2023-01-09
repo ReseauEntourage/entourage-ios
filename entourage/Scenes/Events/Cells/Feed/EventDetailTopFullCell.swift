@@ -230,9 +230,6 @@ class EventDetailTopFullCell: UITableViewCell {
             self.ui_img_bt_join.heightAnchor.constraint(equalToConstant: 0).isActive = true
             self.ui_lbl_bt_join.heightAnchor.constraint(equalToConstant: 0).isActive = true
             self.ui_view_button_join.heightAnchor.constraint(equalToConstant: 0).isActive = true
-
-
-
         }
         
     }

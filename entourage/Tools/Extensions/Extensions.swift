@@ -24,6 +24,16 @@ extension String {
         return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
     
+    func urlFromString() -> String {
+        var urlString = ""
+        do {
+            try urlString = self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            return urlString
+        }catch {
+            return ""
+        }
+    }
+    
 }
 
 //MARK: - Date -

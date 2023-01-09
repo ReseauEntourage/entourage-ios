@@ -298,7 +298,9 @@ class NeighborhoodHomeViewController: UIViewController {
         
         isAlreadyClearRows = false
         self.isLoading = true
-        NeighborhoodService.getSearchNeighborhoods(text: text, completion: { groups, error in
+        //var testText = text.replacingOccurrences(of: " ", with: "%20")
+        let encodedString = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        NeighborhoodService.getSearchNeighborhoods(text: encodedString, completion: { groups, error in
             IHProgressHUD.dismiss()
             self.pullRefreshControl.endRefreshing()
             self.isSearch = true
