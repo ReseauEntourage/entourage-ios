@@ -55,9 +55,7 @@ class ActionFullMapCell: UITableViewCell {
         }
         let _address = action.metadata?.displayAddress ?? "-"
         if let _distance = action.distance {
-            var distString = String(_distance.rounded())
-            distString.removeLast(2)
-            let _km = String.init(format: "atKm".localized, distString)
+            let _km = _distance.displayDistance()
             ui_lbl_about_desc?.text = "\(_address) \(_km)"
             
         }else{

@@ -195,3 +195,38 @@ extension UIButton {
         setTitleColor(style.color, for: .normal)
     }
 }
+
+extension Double {
+    
+    func displayDistance() -> String {
+        var distString = ""
+        if self < 1 {
+            let distance_in_meter = 100 * self
+            distString = String.init(format: "Atm".localized, distance_in_meter.rounded())
+            return distString
+        }else{
+            return String.init(format: "AtKm".localized, self.rounded())
+        }
+    }
+    
+    func displayBaseStringDistance()-> String {
+        var distString = ""
+        if self < 1 {
+            let distance_in_meter = 100 * self
+            distString = String(format: "%.0f m", distance_in_meter.rounded())
+            return distString
+        }else{
+            distString = String(format: "%.0f km", self.rounded())
+            return distString
+        }
+    }
+
+}
+
+
+extension UIView {
+    func setVisibilityGone(){
+        self.isHidden = true
+        self.heightAnchor.constraint(equalToConstant: 0).isActive = true
+    }
+}

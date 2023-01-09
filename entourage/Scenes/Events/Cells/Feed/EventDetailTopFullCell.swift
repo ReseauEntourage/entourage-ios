@@ -44,6 +44,8 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_iv_location: UIImageView!
     @IBOutlet weak var ui_location_name: UILabel!
     
+    @IBOutlet weak var ib_btn_participate: UIButton!
+    
     weak var delegate:EventDetailTopCellDelegate? = nil
     
     let topMarginConstraint:CGFloat = 24
@@ -161,24 +163,14 @@ class EventDetailTopFullCell: UITableViewCell {
         }
         
         if let _distance = event.distance {
-            var distString = String(_distance.rounded())
-            distString.removeLast(2)
-
-//            if _distance < 0 {
-//                let entireDistString = String(_distance).prefix(5)
-//                let subs = entireDistString.split(separator: ".")
-//                distString = String(subs[1])
-//
-//            }
-            
-            
-            let  _addressNameWithDistance = String.init(format: "event_places_distance".localized,_addressName, distString)
+            let  _addressNameWithDistance = String.init(format: "event_places_distance".localized,_addressName, _distance.displayBaseStringDistance())
             if event.isCanceled() {
                 ui_location_name.text = _addressNameWithDistance
             }
             else {
                 ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressNameWithDistance, textColor: .black)
             }
+            
         }else{
             if event.isCanceled() {
                 ui_location_name.text = _addressName
@@ -222,6 +214,27 @@ class EventDetailTopFullCell: UITableViewCell {
         else {
             ui_constraint_listview_top_margin?.constant = topMarginConstraint
         }
+        self.disableButtonIfCancelOrPast(event: event)
+    }
+    
+    private func disableButtonIfCancelOrPast(event:Event){
+        if event.checkIsEventPassed(){
+            //HIDE VIEW
+            self.ib_btn_participate.isUserInteractionEnabled = false
+            self.ib_btn_participate.isHidden = true
+            self.ui_img_bt_join.isHidden = true
+            self.ui_lbl_bt_join.isHidden = true
+            self.ui_view_button_join.isHidden = true
+            //CONSTRAINT 0
+            self.ib_btn_participate.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            self.ui_img_bt_join.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            self.ui_lbl_bt_join.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            self.ui_view_button_join.heightAnchor.constraint(equalToConstant: 0).isActive = true
+
+
+
+        }
+        
     }
     
     private func updateImageUrl(image:UIImageView, imageUrl:String?) {

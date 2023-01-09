@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,13 +28,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="406" height="503"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitreE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klB-o1-C0m">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="TitreE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klB-o1-C0m">
                         <rect key="frame" x="28" y="28" width="350" height="29"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfw-W1-dO7">
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nfw-W1-dO7">
                         <rect key="frame" x="28" y="63" width="350" height="25"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="CF5-px-Uga">
@@ -108,7 +108,7 @@
                             <constraint firstAttribute="bottom" secondItem="Ih3-Zq-7lY" secondAttribute="bottom" id="ulb-JV-QRE"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxR-dy-Owz">
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GxR-dy-Owz">
                         <rect key="frame" x="28" y="104" width="350" height="52"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="abz-tt-vMF">
@@ -246,7 +246,7 @@
                             <constraint firstItem="abz-tt-vMF" firstAttribute="top" secondItem="GxR-dy-Owz" secondAttribute="top" id="rR1-He-gyy"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGK-wr-qH0">
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oGK-wr-qH0">
                         <rect key="frame" x="28" y="172" width="140" height="44"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="754" image="ic_plus_white" translatesAutoresizingMaskIntoConstraints="NO" id="2TX-DT-6v1">
@@ -289,20 +289,20 @@
                             <constraint firstAttribute="trailing" secondItem="L6a-xt-M59" secondAttribute="trailing" id="z2p-ys-BFj"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXs-ZL-Ra7">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXs-ZL-Ra7">
                         <rect key="frame" x="28" y="236" width="350" height="19"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsR-kO-usD">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsR-kO-usD">
                         <rect key="frame" x="28" y="259" width="350" height="20.5"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="fuU-Rj-r2w" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
-                        <rect key="frame" x="28" y="303.5" width="350" height="171.5"/>
+                        <rect key="frame" x="28" y="463" width="350" height="12"/>
                         <color key="backgroundColor" red="1" green="0.61176470589999998" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" id="Vug-5H-gmT"/>
@@ -347,6 +347,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="ib_btn_participate" destination="L6a-xt-M59" id="GDy-CA-wt6"/>
                 <outlet property="ui_constraint_listview_top_margin" destination="At5-0v-xFn" id="CGo-JX-gSb"/>
                 <outlet property="ui_img_bt_join" destination="2TX-DT-6v1" id="sPm-OX-Woy"/>
                 <outlet property="ui_img_member_1" destination="2x2-3v-72B" id="SOR-qC-Iu0"/>
@@ -374,6 +375,11 @@
             <point key="canvasLocation" x="131.8840579710145" y="74.665178571428569"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="fuU-Rj-r2w">
+            <size key="intrinsicContentSize" width="350" height="12"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ic_event_date" width="20" height="20"/>
         <image name="ic_event_group_clear" width="21" height="20"/>

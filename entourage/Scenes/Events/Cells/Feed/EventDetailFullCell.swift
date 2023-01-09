@@ -132,6 +132,9 @@ class EventDetailFullCell: UITableViewCell {
                 ui_mapview.addAnnotation(annot)
                 centerMapOnLocation(_locAnnot)
             }
+            if let _distance = event.distance{
+                ui_label_distance.text = _distance.displayDistance()
+            }
             ui_label_distance.text = String.init(format: "AtKm".localized, "xx") //TODO: a changer plus tard ;)
         }
         else {
