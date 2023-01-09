@@ -163,6 +163,15 @@ class EventDetailTopFullCell: UITableViewCell {
         if let _distance = event.distance {
             var distString = String(_distance.rounded())
             distString.removeLast(2)
+
+//            if _distance < 0 {
+//                let entireDistString = String(_distance).prefix(5)
+//                let subs = entireDistString.split(separator: ".")
+//                distString = String(subs[1])
+//
+//            }
+            
+            
             let  _addressNameWithDistance = String.init(format: "event_places_distance".localized,_addressName, distString)
             if event.isCanceled() {
                 ui_location_name.text = _addressNameWithDistance
