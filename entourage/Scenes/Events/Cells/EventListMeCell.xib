@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -115,6 +115,10 @@
                             <constraint firstAttribute="width" constant="20" id="urX-hN-Grv"/>
                         </constraints>
                     </imageView>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVZ-83-nPG">
+                        <rect key="frame" x="16" y="7" width="94" height="96"/>
+                        <color key="backgroundColor" name="noir_alpha_50"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
@@ -124,6 +128,7 @@
                     <constraint firstItem="xMQ-Kp-fIs" firstAttribute="leading" secondItem="Bbo-7r-tac" secondAttribute="leading" id="5sZ-ho-xcA"/>
                     <constraint firstItem="Bbo-7r-tac" firstAttribute="leading" secondItem="Ddw-iV-zxO" secondAttribute="trailing" constant="8" id="65p-Hs-Ju8"/>
                     <constraint firstItem="k9e-Qr-QG0" firstAttribute="leading" secondItem="82U-dF-zGm" secondAttribute="leading" constant="16" id="7Vv-x2-9QY"/>
+                    <constraint firstItem="KVZ-83-nPG" firstAttribute="width" secondItem="k9e-Qr-QG0" secondAttribute="width" id="Az2-tI-smc"/>
                     <constraint firstItem="k9e-Qr-QG0" firstAttribute="top" secondItem="82U-dF-zGm" secondAttribute="top" constant="8" id="CNf-gz-jX4"/>
                     <constraint firstItem="bse-gh-zaV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="k9e-Qr-QG0" secondAttribute="bottom" constant="8" id="L54-Qg-1wG"/>
                     <constraint firstItem="Ddw-iV-zxO" firstAttribute="top" secondItem="p8n-8C-KZj" secondAttribute="bottom" constant="8" id="MdT-mR-Zpo"/>
@@ -131,6 +136,7 @@
                     <constraint firstItem="p8n-8C-KZj" firstAttribute="top" secondItem="82U-dF-zGm" secondAttribute="top" constant="6" id="Ngd-Rb-mO8"/>
                     <constraint firstItem="p8n-8C-KZj" firstAttribute="leading" secondItem="k9e-Qr-QG0" secondAttribute="trailing" constant="10" id="OEB-QJ-9L8"/>
                     <constraint firstItem="YM3-fA-dbi" firstAttribute="top" secondItem="0e4-01-5mW" secondAttribute="bottom" id="POw-5C-3fw"/>
+                    <constraint firstItem="KVZ-83-nPG" firstAttribute="height" secondItem="k9e-Qr-QG0" secondAttribute="height" multiplier="1.02128" id="PXp-bb-yvX"/>
                     <constraint firstItem="bse-gh-zaV" firstAttribute="leading" secondItem="82U-dF-zGm" secondAttribute="leading" id="Pcy-A1-e3S"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0F5-nI-vtf" secondAttribute="trailing" constant="8" id="Pm4-BX-r1D"/>
                     <constraint firstItem="9c2-Zy-aix" firstAttribute="top" secondItem="k9e-Qr-QG0" secondAttribute="top" constant="-3" id="SQz-Jm-Dyg"/>
@@ -140,6 +146,7 @@
                     <constraint firstItem="GN5-7x-NeM" firstAttribute="top" secondItem="ybB-hv-91K" secondAttribute="bottom" constant="10" id="UEE-T6-aUY"/>
                     <constraint firstItem="YM3-fA-dbi" firstAttribute="leading" secondItem="0e4-01-5mW" secondAttribute="leading" id="UlB-FT-j8X"/>
                     <constraint firstItem="ybB-hv-91K" firstAttribute="top" secondItem="Ddw-iV-zxO" secondAttribute="bottom" constant="10" id="W5d-gl-PLG"/>
+                    <constraint firstItem="KVZ-83-nPG" firstAttribute="centerY" secondItem="k9e-Qr-QG0" secondAttribute="centerY" id="XyD-u7-UuT"/>
                     <constraint firstItem="0e4-01-5mW" firstAttribute="leading" secondItem="p8n-8C-KZj" secondAttribute="trailing" constant="8" id="c17-4r-BTx"/>
                     <constraint firstItem="Bbo-7r-tac" firstAttribute="top" secondItem="p8n-8C-KZj" secondAttribute="bottom" constant="4" id="d7g-FY-RZN"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xMQ-Kp-fIs" secondAttribute="trailing" constant="16" id="ggk-EL-p1s"/>
@@ -149,10 +156,12 @@
                     <constraint firstAttribute="bottom" secondItem="bse-gh-zaV" secondAttribute="bottom" id="n6G-l0-Ho1"/>
                     <constraint firstItem="xMQ-Kp-fIs" firstAttribute="leading" secondItem="ybB-hv-91K" secondAttribute="trailing" constant="8" symbolic="YES" id="nYq-5H-a6h"/>
                     <constraint firstItem="ybB-hv-91K" firstAttribute="leading" secondItem="Ddw-iV-zxO" secondAttribute="leading" id="p9l-D3-TdA"/>
+                    <constraint firstItem="KVZ-83-nPG" firstAttribute="centerX" secondItem="k9e-Qr-QG0" secondAttribute="centerX" id="rR6-cU-26o"/>
                     <constraint firstItem="Bbo-7r-tac" firstAttribute="centerY" secondItem="Ddw-iV-zxO" secondAttribute="centerY" id="t9M-Mw-14R"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ui_alpha_view" destination="KVZ-83-nPG" id="4bi-2x-MXk"/>
                 <outlet property="ui_constraint_left_title" destination="OEB-QJ-9L8" id="twc-RG-FAq"/>
                 <outlet property="ui_date" destination="Bbo-7r-tac" id="EhA-S2-ihO"/>
                 <outlet property="ui_image" destination="k9e-Qr-QG0" id="3KN-g2-Dyy"/>
@@ -182,6 +191,9 @@
         </namedColor>
         <namedColor name="gris_112">
             <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="noir_alpha_50">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.51999998092651367" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_light">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
