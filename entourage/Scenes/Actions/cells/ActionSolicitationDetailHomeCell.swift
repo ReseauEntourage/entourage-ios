@@ -41,10 +41,7 @@ class ActionSolicitationDetailHomeCell: UITableViewCell {
         ui_date.text = action.getCreatedDate()
         
         if let _distance = action.distance {
-            var distString = String(_distance.rounded())
-            distString.removeLast(2)
-            let displayAddress = action.metadata?.displayAddress ?? ""
-            ui_location.text = "\(String.init(format: "AtKm".localized, distString)) - \(displayAddress)"
+            ui_location.text = _distance.displayDistance()
         }else{
             let displayAddress = action.metadata?.displayAddress ?? ""
             ui_location.text = "\(String.init(format: "AtKm".localized, "xx")) - \(displayAddress)"

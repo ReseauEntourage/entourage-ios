@@ -157,15 +157,14 @@ class EventDetailTopLightCell: UITableViewCell {
         
         
         if let _distance = event.distance {
-            var distString = String(_distance.rounded())
-            distString.removeLast(2)
-            let  _addressNameWithDistance = String.init(format: "event_places_distance".localized,_addressName, distString)
+            let  _addressNameWithDistance = String.init(format: "event_places_distance".localized,_addressName, _distance.displayBaseStringDistance())
             if event.isCanceled() {
                 ui_location_name.text = _addressNameWithDistance
             }
             else {
                 ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressNameWithDistance, textColor: .black)
             }
+            
         }else{
             if event.isCanceled() {
                 ui_location_name.text = _addressName

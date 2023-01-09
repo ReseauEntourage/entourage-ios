@@ -869,7 +869,9 @@
 "event_member_cell_list" = "%d participant";
 "event_group_title_list" = "Le groupe organise aussi :";
 "event_places_detail" = "%d places";
-"event_places_distance" = "%@ à %@ km";
+"event_places_distance" = "%@ à %@";
+
+
 
 
 /* Home Event*/
@@ -1091,8 +1093,11 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "action_your" = "Votre action";
 "actions_my_title" = "Mes annonces";
 "action_detail_title_location" = "Localisation";
-"atKm" = "à %@ km de moi";
-"AtKm" = "À %@ km de moi";
+"atKm" = "à %.0f km de moi";
+"AtKm" = "À %.0f km de moi";
+"Atm" = "À %.0f m de moi";
+"atm" = "À %.0f m de moi";
+
 "action_created_at" = "Créé %@ par";
 "action_member_since" = "Membre depuis %@";
 "action_cancel" = "Annonce supprimée";
