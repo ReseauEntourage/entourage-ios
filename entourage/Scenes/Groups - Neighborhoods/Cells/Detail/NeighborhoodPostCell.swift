@@ -38,6 +38,8 @@ class NeighborhoodPostCell: UITableViewCell {
     var userId:Int? = nil
     var imageUrl:URL? = nil
     
+    var postMessage:PostMessage!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         ui_view_container.layer.cornerRadius = ApplicationTheme.bigCornerRadius
@@ -67,6 +69,7 @@ class NeighborhoodPostCell: UITableViewCell {
     }
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
+        self.postMessage = message
         self.delegate = delegate
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
@@ -105,11 +108,11 @@ class NeighborhoodPostCell: UITableViewCell {
     }
 
     @IBAction func action_show_comments(_ sender: Any) {
-        delegate?.showMessages(addComment: false,postId: postId, indexPathSelected: currentIndexPath)
+        delegate?.showMessages(addComment: false,postId: postId, indexPathSelected: currentIndexPath,postMessage:postMessage)
     }
     
     @IBAction func action_add_comments(_ sender: Any) {
-        delegate?.showMessages(addComment: true,postId: postId, indexPathSelected: currentIndexPath)
+        delegate?.showMessages(addComment: true,postId: postId, indexPathSelected: currentIndexPath,postMessage: postMessage)
     }
     
     @IBAction func action_show_user(_ sender: Any) {
@@ -122,7 +125,7 @@ class NeighborhoodPostCell: UITableViewCell {
 }
 
 protocol NeighborhoodPostCellDelegate: AnyObject {
-    func showMessages(addComment:Bool, postId:Int, indexPathSelected:IndexPath?)
+    func showMessages(addComment:Bool, postId:Int, indexPathSelected:IndexPath?, postMessage:PostMessage?)
     func showUser(userId:Int?)
     func showImage(imageUrl:URL?)
     func signalPost(postId:Int)

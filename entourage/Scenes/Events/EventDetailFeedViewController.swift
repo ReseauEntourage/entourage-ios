@@ -695,7 +695,7 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
         //TODO CHECK THIS
     }
     
-    func showMessages(addComment:Bool, postId:Int, indexPathSelected: IndexPath?) {
+    func showMessages(addComment:Bool, postId:Int, indexPathSelected: IndexPath?,postMessage:PostMessage?) {
         let sb = UIStoryboard.init(name: StoryboardName.eventMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? EventDetailMessagesViewController {
             vc.modalPresentationStyle = .fullScreen
@@ -706,6 +706,7 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
             vc.isStartEditing = addComment
             vc.parentDelegate = self
             vc.selectedIndexPath = indexPathSelected
+            vc.postMessage = postMessage
             self.navigationController?.present(vc, animated: true)
         }
     }

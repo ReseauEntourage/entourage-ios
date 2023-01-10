@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -237,13 +237,13 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="username - Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4z-SX-L2g">
-                                                            <rect key="frame" x="61" y="98.5" width="88" height="13.5"/>
+                                                            <rect key="frame" x="61" y="98.5" width="88" height="13"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="username - Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hae-qM-Vnu">
-                                                            <rect key="frame" x="149" y="98.5" width="88" height="13.5"/>
+                                                            <rect key="frame" x="149" y="98.5" width="88" height="13"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -299,7 +299,7 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6f-PY-TWq">
-                                        <rect key="frame" x="0.0" y="342.5" width="414" height="163"/>
+                                        <rect key="frame" x="0.0" y="525" width="414" height="163"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_no_message_neighborhood" translatesAutoresizingMaskIntoConstraints="NO" id="3uA-kF-wSV">
                                                 <rect key="frame" x="32" y="0.0" width="350" height="144"/>
@@ -417,7 +417,7 @@
                                     <constraint firstItem="vmG-pn-VWc" firstAttribute="top" secondItem="dQM-RZ-lxJ" secondAttribute="top" id="7H7-Ak-3Ip"/>
                                     <constraint firstItem="ePm-CU-0cn" firstAttribute="bottom" secondItem="o5s-SK-ErZ" secondAttribute="bottom" id="7tQ-XS-eUn"/>
                                     <constraint firstItem="Dgc-Z3-CyI" firstAttribute="centerY" secondItem="vmG-pn-VWc" secondAttribute="centerY" id="8kf-7R-b3G"/>
-                                    <constraint firstItem="e6f-PY-TWq" firstAttribute="centerY" secondItem="dQM-RZ-lxJ" secondAttribute="centerY" id="FQl-oi-5PX"/>
+                                    <constraint firstItem="o5s-SK-ErZ" firstAttribute="top" secondItem="e6f-PY-TWq" secondAttribute="bottom" constant="64" id="9Aj-lZ-dHF"/>
                                     <constraint firstItem="ePm-CU-0cn" firstAttribute="trailing" secondItem="o5s-SK-ErZ" secondAttribute="trailing" id="HRj-8k-QA9"/>
                                     <constraint firstItem="e6f-PY-TWq" firstAttribute="centerX" secondItem="dQM-RZ-lxJ" secondAttribute="centerX" id="HmY-ru-v6l"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="o5s-SK-ErZ" secondAttribute="bottom" id="I4T-Lm-Ou6"/>
@@ -637,10 +637,10 @@ L8</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CuG-Ja-TKW">
-                                        <rect key="frame" x="99.5" y="531" width="215.5" height="21.5"/>
+                                        <rect key="frame" x="99.5" y="531" width="215" height="21.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Erreur de publication, veuillez réessayer " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7A-Ht-Yix">
-                                                <rect key="frame" x="17" y="3" width="198.5" height="15.5"/>
+                                                <rect key="frame" x="17" y="3" width="198" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="NunitoSans-Italic" family="Nunito Sans" pointSize="11"/>
                                                 <color key="textColor" name="rouge_erreur"/>
                                                 <nil key="highlightedColor"/>

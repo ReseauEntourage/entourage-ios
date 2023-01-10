@@ -47,6 +47,7 @@ let kAPIPostNeighborhoodPostMessage = "neighborhoods/%@/chat_messages?token=%@"
 let kAPIGetNeighborhoodMessages = "neighborhoods/%@/chat_messages/%@/comments?token=%@"
 let kAPIReportPostNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token=%@"
 let kAPIReportPostCommentNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token=%@"
+let kAPIGetNeighborhoodPostMessage = "neighborhoods/%@/chat_messages/%@?token=%@"
 
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
@@ -83,6 +84,7 @@ let kAPIReportPostEvent = "outings/%@/chat_messages/%@/report?token=%@"
 let kAPIReportPostCommentEvent = "outings/%@/chat_messages/%@/report?token=%@"
 let kAPIPostOutingPostMessage = "outings/%@/chat_messages?token=%@"
 let kAPIGetOutingMessages = "outings/%@/chat_messages/%@/comments?token=%@"
+let kAPIGetOutingPostMessage = "outings/%@/chat_messages/%@?token=%@"
 
 //Actions
 let kAPIGetContrib = "contributions/%d?token=%@"
