@@ -559,7 +559,7 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
         
     }
     
-    func showMessages(addComment: Bool, postId:Int, indexPathSelected: IndexPath?) {
+    func showMessages(addComment: Bool, postId:Int, indexPathSelected: IndexPath?,postMessage:PostMessage?) {
         
         let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? NeighborhoodDetailMessagesViewController {
@@ -571,6 +571,7 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
             vc.isStartEditing = addComment
             vc.selectedIndexPath = indexPathSelected
             vc.parentDelegate = self
+            vc.postMessage = postMessage
             self.navigationController?.present(vc, animated: true)
         }
     }

@@ -44,6 +44,8 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     var selectedIndexPath:IndexPath? = nil
     weak var parentDelegate:UpdateCommentCountDelegate? = nil
     
+    var postMessage:PostMessage? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         IQKeyboardManager.shared.enable = false
@@ -80,6 +82,8 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             return goBack()
         }
         meId = me.sid
+        
+        registerCellsNib()
         
         getMessages()
         
@@ -125,6 +129,11 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    func registerCellsNib() {
+        ui_tableview.register(UINib(nibName: DetailMessageTopPostImageCell.identifier, bundle: nil), forCellReuseIdentifier: DetailMessageTopPostImageCell.identifier)
+        ui_tableview.register(UINib(nibName: DetailMessageTopPostTextCell.identifier, bundle: nil),forCellReuseIdentifier: DetailMessageTopPostTextCell.identifier)
+    }
+    
     //MARK: - Network -
     func getMessages() {
         NeighborhoodService.getCommentsFor(neighborhoodId: neighborhoodId, parentPostId: parentCommentId) { messages, error in
@@ -134,6 +143,12 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
                 self.ui_view_empty.isHidden = self.messages.count > 0
                 
                 self.ui_tableview.reloadData()
+                
+                if self.postMessage == nil {
+                    self.getDetailPost()
+                    return
+                }
+                
                 if self.messages.count + self.messagesForRetry.count > 0 {
                     DispatchQueue.main.async {
                         let indexPath = IndexPath(row: self.messages.count + self.messagesForRetry.count - 1, section: 0)
@@ -180,6 +195,21 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         }
     }
     
+    func getDetailPost() {
+        NeighborhoodService.getDetailPostMessage(neighborhoodId: neighborhoodId, parentPostId: parentCommentId) { message, error in
+            
+            self.postMessage = message
+            
+            self.ui_tableview.reloadData()
+            if self.messages.count + self.messagesForRetry.count > 0 {
+                DispatchQueue.main.async {
+                    let indexPath = IndexPath(row: self.messages.count + self.messagesForRetry.count - 1, section: 0)
+                    self.ui_tableview.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                }
+            }
+        }
+    }
+    
     @IBAction func action_send_message(_ sender: Any) {
         self.closeKb(nil)
     }
@@ -199,21 +229,33 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
 //MARK: - Tableview datasource/delegate -
 extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count + messagesForRetry.count
+        let hasTop = postMessage != nil ? 1 : 0
+        return messages.count + messagesForRetry.count + hasTop
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if indexPath.row == 0 && postMessage != nil {
+            let identifier = postMessage!.isPostImage ? DetailMessageTopPostImageCell.identifier : DetailMessageTopPostTextCell.identifier
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! DetailMessageTopPostCell
+            cell.populateCell(message: postMessage!)
+            
+            return cell
+        }
+        
+        let realIndexPath = postMessage == nil ? indexPath.row : indexPath.row - 1
+        
         if messagesForRetry.count > 0 {
-            if indexPath.row >= messages.count {
-                let message = messagesForRetry[indexPath.row - messages.count]
+            if realIndexPath >= messages.count {
+                let message = messagesForRetry[realIndexPath - messages.count]
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellMe", for: indexPath) as! NeighborhoodMessageCell
-                cell.populateCell(isMe: true, message: message, isRetry: true, positionRetry: indexPath.row - messages.count, delegate: self)
+                cell.populateCell(isMe: true, message: message, isRetry: true, positionRetry: realIndexPath - messages.count, delegate: self)
                 return cell
             }
         }
         
-        let message = messages[indexPath.row]
+        let message = messages[realIndexPath]
         var cellId = "cellOther"
         var isMe = false
         if message.user?.sid == self.meId {

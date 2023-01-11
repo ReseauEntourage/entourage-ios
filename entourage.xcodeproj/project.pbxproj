@@ -73,6 +73,9 @@
 		022DC3ED284790B000868760 /* AnalyticsLoggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DC3EC284790B000868760 /* AnalyticsLoggerManager.swift */; };
 		022DC3EF2847996D00868760 /* Analytics_Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DC3EE2847996D00868760 /* Analytics_Keys.swift */; };
 		0232A6D62888126700A47828 /* EventActionLocationFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0232A6D52888126700A47828 /* EventActionLocationFilters.swift */; };
+		02369719296D9F6A00E2CACC /* DetailMessageTopPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02369716296D9F6A00E2CACC /* DetailMessageTopPostCell.swift */; };
+		0236971A296D9F6A00E2CACC /* DetailMessageTopPostImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02369717296D9F6A00E2CACC /* DetailMessageTopPostImageCell.xib */; };
+		0236971B296D9F6A00E2CACC /* DetailMessageTopPostTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02369718296D9F6A00E2CACC /* DetailMessageTopPostTextCell.xib */; };
 		023B07CC27D664F6007752AC /* Profile.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023B07CB27D664F6007752AC /* Profile.xcassets */; };
 		023D89BF27DFA351008C6A58 /* MainParamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89BE27DFA351008C6A58 /* MainParamsViewController.swift */; };
 		023D89C127DFA380008C6A58 /* ParamMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023D89C027DFA380008C6A58 /* ParamMenuCell.swift */; };
@@ -446,6 +449,9 @@
 		022DC3EC284790B000868760 /* AnalyticsLoggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsLoggerManager.swift; sourceTree = "<group>"; };
 		022DC3EE2847996D00868760 /* Analytics_Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics_Keys.swift; sourceTree = "<group>"; };
 		0232A6D52888126700A47828 /* EventActionLocationFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventActionLocationFilters.swift; sourceTree = "<group>"; };
+		02369716296D9F6A00E2CACC /* DetailMessageTopPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMessageTopPostCell.swift; sourceTree = "<group>"; };
+		02369717296D9F6A00E2CACC /* DetailMessageTopPostImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailMessageTopPostImageCell.xib; sourceTree = "<group>"; };
+		02369718296D9F6A00E2CACC /* DetailMessageTopPostTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailMessageTopPostTextCell.xib; sourceTree = "<group>"; };
 		023B07CB27D664F6007752AC /* Profile.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Profile.xcassets; sourceTree = "<group>"; };
 		023D89BE27DFA351008C6A58 /* MainParamsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainParamsViewController.swift; sourceTree = "<group>"; };
 		023D89C027DFA380008C6A58 /* ParamMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamMenuCell.swift; sourceTree = "<group>"; };
@@ -817,6 +823,7 @@
 		0224597227FF31FC00944DE4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				02369715296D9F6A00E2CACC /* Message top cell */,
 				0243E7192806D95000208DC7 /* NeighborhoodChoosePhotoCell.swift */,
 				0224597327FF323600944DE4 /* NeighborhoodCreateNameCell.swift */,
 				0224597627FF327C00944DE4 /* NeighborhoodCreateLocationCell.swift */,
@@ -883,6 +890,16 @@
 				022DC3EC284790B000868760 /* AnalyticsLoggerManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		02369715296D9F6A00E2CACC /* Message top cell */ = {
+			isa = PBXGroup;
+			children = (
+				02369716296D9F6A00E2CACC /* DetailMessageTopPostCell.swift */,
+				02369717296D9F6A00E2CACC /* DetailMessageTopPostImageCell.xib */,
+				02369718296D9F6A00E2CACC /* DetailMessageTopPostTextCell.xib */,
+			);
+			path = "Message top cell";
 			sourceTree = "<group>";
 		};
 		023EC28027FB3226003A3051 /* Base controllers */ = {
@@ -1741,6 +1758,7 @@
 				02B37825279B06F600B204EF /* Others.storyboard in Resources */,
 				02A92C182897D0F7000DFF95 /* Actions.storyboard in Resources */,
 				025C92C528341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib in Resources */,
+				0236971B296D9F6A00E2CACC /* DetailMessageTopPostTextCell.xib in Resources */,
 				02F578CE289AD4060040685C /* ActionContribDetailHomeCell.xib in Resources */,
 				024131C72862019500561FB4 /* Event_Create.storyboard in Resources */,
 				02CCE67627D78C7500D6976C /* Quicksand-Bold.ttf in Resources */,
@@ -1748,6 +1766,7 @@
 				02D10D8C2873236500ACC267 /* MJPopupViewController.xib in Resources */,
 				02B7922527F74801003AFFB9 /* Neighborhood_Create.storyboard in Resources */,
 				02E2192328352552002A1FCB /* Neighborhood_Message.storyboard in Resources */,
+				0236971A296D9F6A00E2CACC /* DetailMessageTopPostImageCell.xib in Resources */,
 				025C92B828340CFC000970D9 /* NeighborhoodPostImageCell.xib in Resources */,
 				025C92C32834149B000970D9 /* NeighborhoodEventsTableviewCell.xib in Resources */,
 				023B07CC27D664F6007752AC /* Profile.xcassets in Resources */,
@@ -1859,6 +1878,7 @@
 				0208B0C5289D23E1009A7A58 /* ActionDetailFullViewController.swift in Sources */,
 				02B7922727F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift in Sources */,
 				02F5278127999A8C00929431 /* MainGuideViewController.swift in Sources */,
+				02369719296D9F6A00E2CACC /* DetailMessageTopPostCell.swift in Sources */,
 				02FB5454287DC38300E4B9FA /* EventDetailFullGroupTitleCell.swift in Sources */,
 				024131DD2863622600561FB4 /* GrowingTextview.swift in Sources */,
 				02681980278DF72D00A98A4A /* OTCarrouselLayout.swift in Sources */,

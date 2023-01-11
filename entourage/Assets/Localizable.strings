@@ -873,6 +873,9 @@
 
 
 
+//Event pop choose location
+"event_location_title" = "Localisez votre événement";
+"event_location_detail" = "L’adresse sera ajoutée à la description détaillée de votre événement.";
 
 /* Home Event*/
 "event_main_page_title" = "Événements";

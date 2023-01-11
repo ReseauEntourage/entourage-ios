@@ -53,7 +53,8 @@ class ParamsChoosePlaceViewController: BasePopViewController {
         else if isFromEvent {
             ui_label_info.isHidden = true
             ui_title_add_place.text = "profileEditLocationLegend_".localized
-            ui_label_description.text =  "profileEditLocationDescription".localized
+            ui_label_description.text =  "event_location_detail".localized
+            title = "event_location_title".localized
         }
         else {
             ui_title_add_place.text = "profileEditLocationLegend*".localized

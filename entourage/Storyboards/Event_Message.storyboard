@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -243,10 +243,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL1-IT-2V8">
-                                                            <rect key="frame" x="161" y="47" width="50" height="50"/>
+                                                            <rect key="frame" x="161" y="52" width="40" height="40"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="50" id="3XP-G4-12p"/>
-                                                                <constraint firstAttribute="width" constant="50" id="SbX-s1-aow"/>
+                                                                <constraint firstAttribute="height" constant="40" id="3XP-G4-12p"/>
+                                                                <constraint firstAttribute="width" constant="40" id="SbX-s1-aow"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -294,7 +294,7 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuY-am-eXk">
-                                        <rect key="frame" x="0.0" y="342.5" width="414" height="163"/>
+                                        <rect key="frame" x="0.0" y="525" width="414" height="163"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_no_message_neighborhood" translatesAutoresizingMaskIntoConstraints="NO" id="h7j-Uy-aug">
                                                 <rect key="frame" x="32" y="0.0" width="350" height="144"/>
@@ -413,11 +413,11 @@
                                     <constraint firstItem="1Dm-8d-1zY" firstAttribute="top" secondItem="U5j-RF-83Z" secondAttribute="top" id="GkI-UA-myE"/>
                                     <constraint firstAttribute="trailing" secondItem="VW0-1h-Cdi" secondAttribute="trailing" id="HQL-Op-a1T"/>
                                     <constraint firstItem="VW0-1h-Cdi" firstAttribute="leading" secondItem="99n-gN-Aeo" secondAttribute="leading" id="K3E-R1-rqR"/>
+                                    <constraint firstItem="U5j-RF-83Z" firstAttribute="top" secondItem="yuY-am-eXk" secondAttribute="bottom" constant="64" id="KOP-6X-AEp"/>
                                     <constraint firstAttribute="bottom" secondItem="U5j-RF-83Z" secondAttribute="bottom" constant="42" id="OQk-mF-zxr"/>
                                     <constraint firstItem="1Dm-8d-1zY" firstAttribute="bottom" secondItem="U5j-RF-83Z" secondAttribute="bottom" id="QMi-j4-6IX"/>
                                     <constraint firstItem="1Dm-8d-1zY" firstAttribute="trailing" secondItem="U5j-RF-83Z" secondAttribute="trailing" id="Qtz-hq-2tv"/>
                                     <constraint firstItem="1Dm-8d-1zY" firstAttribute="leading" secondItem="U5j-RF-83Z" secondAttribute="leading" id="ZjF-Ht-Oge"/>
-                                    <constraint firstItem="yuY-am-eXk" firstAttribute="centerY" secondItem="99n-gN-Aeo" secondAttribute="centerY" id="b4S-zG-FlP"/>
                                     <constraint firstItem="yuY-am-eXk" firstAttribute="leading" secondItem="99n-gN-Aeo" secondAttribute="leading" id="ere-3F-vLH"/>
                                     <constraint firstItem="U5j-RF-83Z" firstAttribute="leading" secondItem="99n-gN-Aeo" secondAttribute="leading" id="glt-Rh-HY8"/>
                                     <constraint firstAttribute="trailing" secondItem="Qhr-gf-0fZ" secondAttribute="trailing" id="mWz-d5-c5M"/>
