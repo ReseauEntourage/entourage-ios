@@ -286,10 +286,10 @@ struct UserLightNeighborhood: Codable {
 //MARK: - Organization -
 struct Organization:Codable {
     var name:String
-    var description:String
-    var phone:String
-    var address:String
-    var logo_url:String
+    var description:String? = nil
+    var phone:String? = nil
+    var address:String? = nil
+    var logo_url:String? = nil
 }
 
 //MARK: - UserPermissions -
