@@ -9,7 +9,7 @@ import Foundation
 
 struct UserHome:Codable {
     var id: Int = 0
-    var displayName: String = ""
+    private var _displayName: String? = nil
     var avatarURL: String? = nil
     var meetingsCount = 0
     var chatMessagesCount: Int = 0
@@ -20,9 +20,18 @@ struct UserHome:Codable {
     
     var congratulations = HomeActions()
     
+    var displayName:String {
+        get {
+            return _displayName ?? "-"
+        }
+        set(newName) {
+            _displayName = newName
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
-        case displayName = "display_name"
+        case _displayName = "display_name"
         case avatarURL = "avatar_url"
         case meetingsCount = "meetings_count"
         case chatMessagesCount = "chat_messages_count"

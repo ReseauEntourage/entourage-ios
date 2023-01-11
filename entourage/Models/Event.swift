@@ -403,9 +403,18 @@ struct EventMetadata:Codable {
 
 struct EventAuthor:Codable {
     var uid:Int
-    var displayName:String
+    private var _displayName:String? = nil
     var avatarURL:String? = nil
     var partner:Partner? = nil
+    
+    var displayName:String {
+        get {
+            return _displayName ?? "-"
+        }
+        set(newName) {
+            _displayName = newName
+        }
+    }
     
     private var createdAt:String? = nil
     var creationDate:Date {
@@ -416,7 +425,7 @@ struct EventAuthor:Codable {
     
     enum CodingKeys: String, CodingKey {
         case uid = "id"
-        case displayName = "display_name"
+        case _displayName = "display_name"
         case avatarURL = "avatar_url"
         case partner
         case createdAt = "created_at"
