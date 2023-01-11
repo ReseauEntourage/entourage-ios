@@ -22,12 +22,11 @@ class HomeActionTeachCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        
+        ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_view_container.layer.cornerRadius = 20
         ui_image.layer.cornerRadius = 8
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        ui_image.image = UIImage(named: "ic_action_pedago")
+        ui_image.image = UIImage(named: "ic_card_pedago")
     }
     
     func populateCell(title:String, imageIdentifier:String? = nil, bottomMargin:CGFloat? = nil ) {

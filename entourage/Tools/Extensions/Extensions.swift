@@ -230,7 +230,6 @@ extension Double {
             return distString
         }
     }
-
 }
 
 

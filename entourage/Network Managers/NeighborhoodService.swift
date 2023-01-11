@@ -95,10 +95,6 @@ struct NeighborhoodService:ParsingDataCodable {
     
     fileprivate static func getNeighborhoodsWithEndpoint(_ endpoint: String, _ completion: @escaping ([Neighborhood]?, EntourageNetworkError?) -> Void) {
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
-            print("eho " , error?.message)
-            if let _response = resp as? HTTPURLResponse {
-                print("eho " , _response.statusCode)
-            }
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 DispatchQueue.main.async { completion(nil,  error) }
                 return

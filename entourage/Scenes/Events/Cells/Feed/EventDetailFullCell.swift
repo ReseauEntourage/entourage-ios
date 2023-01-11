@@ -134,8 +134,9 @@ class EventDetailFullCell: UITableViewCell {
             }
             if let _distance = event.distance{
                 ui_label_distance.text = _distance.displayDistance()
+            }else {
+                ui_label_distance.text = String.init(format: "AtKm".localized, "xx")
             }
-            ui_label_distance.text = String.init(format: "AtKm".localized, "xx") //TODO: a changer plus tard ;)
         }
         else {
             ui_label_distance.text = ""

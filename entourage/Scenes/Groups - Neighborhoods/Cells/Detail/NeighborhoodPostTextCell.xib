@@ -193,10 +193,10 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mm9-25-CFc">
-                                <rect key="frame" x="358" y="13" width="20" height="20"/>
+                                <rect key="frame" x="328" y="-2.5" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="4DV-jy-uCh"/>
-                                    <constraint firstAttribute="width" constant="20" id="RmX-jG-WcF"/>
+                                    <constraint firstAttribute="height" constant="50" id="4DV-jy-uCh"/>
+                                    <constraint firstAttribute="width" constant="50" id="RmX-jG-WcF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -225,7 +225,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="AUs-SL-7c2" firstAttribute="centerY" secondItem="qg8-dq-Kwr" secondAttribute="centerY" id="mw6-13-TPO"/>
                             <constraint firstItem="AUs-SL-7c2" firstAttribute="leading" secondItem="qg8-dq-Kwr" secondAttribute="trailing" constant="8" symbolic="YES" id="p3N-db-0wc"/>
                             <constraint firstItem="cgH-Es-Ip4" firstAttribute="trailing" secondItem="dwy-yw-Hbe" secondAttribute="trailing" id="qOV-UT-iCT"/>
-                            <constraint firstItem="Mm9-25-CFc" firstAttribute="top" secondItem="JCY-h8-DtF" secondAttribute="top" constant="-7" id="rMs-VN-3gd"/>
+                            <constraint firstItem="Mm9-25-CFc" firstAttribute="centerY" secondItem="JCY-h8-DtF" secondAttribute="centerY" constant="-10" id="qdH-Iw-kM6"/>
                             <constraint firstAttribute="trailing" secondItem="VzS-Pe-ffM" secondAttribute="trailing" constant="28" id="uCI-tz-1Q9"/>
                             <constraint firstItem="Bwk-s7-QRd" firstAttribute="centerY" secondItem="dwy-yw-Hbe" secondAttribute="centerY" id="uYZ-ie-uK4"/>
                             <constraint firstAttribute="trailing" secondItem="dwy-yw-Hbe" secondAttribute="trailing" constant="28" id="uzg-yL-Oh1"/>

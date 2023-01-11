@@ -212,14 +212,11 @@ class EventDetailFeedViewController: UIViewController {
     @objc func getEventDetail(hasToRefreshLists:Bool = false) {
         self.currentPagingPage = 1
         self.isLoading = true
-        print("eho " ,event?.distance)
         EventService.getEventWithId(eventId) { event, error in
-            print("eho " ,event?.distance)
             self.pullRefreshControl.endRefreshing()
             if let _ = error {
                 self.goBack()
             }
-            
             self.event = event
             self.splitMessages()
             self.ui_tableview.reloadData()
@@ -692,7 +689,13 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
 //MARK: - NeighborhoodPostCellDelegate -
 extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
     func signalPost(postId: Int) {
-        //TODO CHECK THIS
+        if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
+            vc.eventId = eventId
+            vc.postId = postId
+            vc.parentDelegate = self
+            vc.signalType = .publication
+            self.present(navvc, animated: true)
+        }
     }
     
     func showMessages(addComment:Bool, postId:Int, indexPathSelected: IndexPath?) {
@@ -776,4 +779,19 @@ extension EventDetailFeedViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.ui_iv_preview
     }
+}
+
+extension EventDetailFeedViewController:GroupDetailDelegate{
+    func showMessage(signalType:GroupDetailSignalType) {
+        let alertVC = MJAlertController()
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
+        
+        alertVC.configureAlert(alertTitle: title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            alertVC.show()
+        }
+    }
+    
 }

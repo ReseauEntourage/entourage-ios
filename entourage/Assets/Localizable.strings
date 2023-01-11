@@ -387,9 +387,9 @@
 "mainUserTitleActions" = "Contributions";
 "mainUserTitleEvents" = "Événements";
 
-"mainUserTitleGroup" = "Groupe\nrejoint";
-"mainUserTitleGroups" = "Groupes\nrejoints";
-"mainUserTitleOuting" = "Événement";
+"mainUserTitleGroup" = "Groupe\nde voisins";
+"mainUserTitleGroups" = "Groupes\nde voisins";
+"mainUserTitleOuting" = "Événement\n";
 "mainUserTitleOutings" = "Événements\n";
 
 "mainUserBioPlaceholder" = "Placeholder pour la bio ?";
@@ -742,7 +742,7 @@
 "home_meeting_title" = "Belles rencontres Entourage";
 "home_no_meeting_title" = "Pas encore de rencontres Entourage";
 "home_messages_title" = "Messages envoyés";
-"home_events_title" = "Événements";
+"home_events_title" = "Événements\n";
 "home_groups_title" = "Groupes de voisins";
 "home_event_title" = "Participation à un événement";
 "home_group_title" = "Groupe de voisins";
@@ -753,7 +753,7 @@
 "home_actions_title" = "Je commence simplement";
 "home_help_title" = "Besoin d’aide sur l'app";
 "home_help_subtitle" = "Votre guide dans l’app";
-"home_cell_pedago" = "Découvrir les astuces pour passer à l'action";
+"home_cell_pedago" = "Tout savoir pour passer à l'action";
 "home_cell_map" = "Carte des lieux solidaires";
 "home_cell_map_subtitle" = "Accueils de jour, bagageries…";
 
@@ -775,8 +775,8 @@
 "home_congrat_title_next" = "Super, il y a du nouveau sur l'accueil !";
 
 //Home popup info encouters
-"home_info_encounter_pop_title" = "Comment rencontrer d'autres membres ?";
-"home_info_encounter_pop_subtitle" = "Pour cela, rien de plus simple ! Participez à des événements et rejoignez des actions.";
+"home_info_encounter_pop_title" = "Pour créer une belle rencontre,\n rien de plus simple !";
+"home_info_encounter_pop_subtitle" = "Votre compteur augmente à chaque participation à un événement et à chaque nouvelle contribution ou demande réalisée.";
 
 /** Events*/
 "passed_event" = "Événements passés";

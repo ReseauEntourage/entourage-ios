@@ -218,7 +218,6 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == section_help {
             if indexPath.row == 1 { //Action madatory resources
                 let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionTeachCell.identifier, for: indexPath) as! HomeActionTeachCell
-                
                 cell.populateCell(title: "home_cell_pedago".localized)
                 return cell
             }

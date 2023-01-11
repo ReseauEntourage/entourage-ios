@@ -298,7 +298,6 @@ class NeighborhoodHomeViewController: UIViewController {
         
         isAlreadyClearRows = false
         self.isLoading = true
-        //var testText = text.replacingOccurrences(of: " ", with: "%20")
         let encodedString = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         NeighborhoodService.getSearchNeighborhoods(text: encodedString, completion: { groups, error in
             IHProgressHUD.dismiss()

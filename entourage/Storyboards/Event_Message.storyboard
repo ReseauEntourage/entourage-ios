@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,7 +29,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99n-gN-Aeo">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="848"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VW0-1h-Cdi" customClass="MJNavBackView" customModule="Ent_Beta" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
@@ -51,12 +51,12 @@
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Qhr-gf-0fZ">
-                                        <rect key="frame" x="0.0" y="68" width="414" height="670"/>
+                                        <rect key="frame" x="0.0" y="68" width="414" height="666"/>
                                         <color key="backgroundColor" name="BeigeClair"/>
                                         <gestureRecognizers/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellMe" rowHeight="144" id="6Xy-Dh-wxA" customClass="NeighborhoodMessageCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="414" height="144"/>
+                                                <rect key="frame" x="0.0" y="50" width="414" height="144"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6Xy-Dh-wxA" id="hzX-xJ-B2w">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="144"/>
@@ -186,7 +186,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellOther" rowHeight="144" id="44A-kT-P73" customClass="NeighborhoodMessageCell" customModule="Ent_Beta" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="188.5" width="414" height="144"/>
+                                                <rect key="frame" x="0.0" y="194" width="414" height="144"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="44A-kT-P73" id="qhe-1f-7B6">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="144"/>
@@ -243,10 +243,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL1-IT-2V8">
-                                                            <rect key="frame" x="161" y="52" width="40" height="40"/>
+                                                            <rect key="frame" x="161" y="47" width="50" height="50"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="40" id="3XP-G4-12p"/>
-                                                                <constraint firstAttribute="width" constant="40" id="SbX-s1-aow"/>
+                                                                <constraint firstAttribute="height" constant="50" id="3XP-G4-12p"/>
+                                                                <constraint firstAttribute="width" constant="50" id="SbX-s1-aow"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -294,7 +294,7 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuY-am-eXk">
-                                        <rect key="frame" x="0.0" y="344.5" width="414" height="163"/>
+                                        <rect key="frame" x="0.0" y="342.5" width="414" height="163"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_no_message_neighborhood" translatesAutoresizingMaskIntoConstraints="NO" id="h7j-Uy-aug">
                                                 <rect key="frame" x="32" y="0.0" width="350" height="144"/>
@@ -319,7 +319,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U5j-RF-83Z">
-                                        <rect key="frame" x="0.0" y="756" width="414" height="54"/>
+                                        <rect key="frame" x="0.0" y="752" width="414" height="54"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rh3-wL-zrn">
                                                 <rect key="frame" x="28" y="0.0" width="296" height="54"/>
@@ -385,7 +385,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Dm-8d-1zY">
-                                        <rect key="frame" x="0.0" y="756" width="414" height="54"/>
+                                        <rect key="frame" x="0.0" y="752" width="414" height="54"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* Pour commenter cette publication, rejoingnez le groupe  « Dansons ensemble » ! " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ab-Vs-Ugv">
                                                 <rect key="frame" x="32" y="9.5" width="350" height="35.5"/>

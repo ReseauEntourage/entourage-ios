@@ -11,6 +11,32 @@ import UIKit
 
 @objc class Utils : NSObject {
     
+        
+    static func displayDistance(distance:Double) -> String {
+        var distString = ""
+        if distance < 1 {
+            let distance_in_meter = 100 * distance
+            distString = String.init(format: "Atm".localized, distance_in_meter.rounded())
+            return distString
+        }else{
+            return String.init(format: "AtKm".localized, distance.rounded())
+        }
+    }
+    
+    static func displayBaseStringDistance(distance:Double)-> String {
+        var distString = ""
+        if distance < 1 {
+            let distance_in_meter = 100 * distance
+            distString = String(format: "%.0f m", distance_in_meter.rounded())
+            return distString
+        }else{
+            distString = String(format: "%.0f km", distance.rounded())
+            return distString
+        }
+    }
+
+    
+    
     static func formatString(messageTxt: String, messageTxtHighlight:String,fontColorType:MJTextFontColorStyle, fontColorTypeHighlight:MJTextFontColorStyle) -> NSAttributedString {
         let attributesNormal: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : fontColorType.font, NSAttributedString.Key.foregroundColor : fontColorType.color]
         let attributeColored: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font:  fontColorTypeHighlight.font,NSAttributedString.Key.foregroundColor : fontColorTypeHighlight.color]

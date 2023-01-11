@@ -602,11 +602,14 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! EventListCell
         cell.populateCell(event: event, hideSeparator: true)
-        if event.checkIsEventPassed(){
-            cell.setPassed()
-        }else{
-            cell.setIncoming()
+        if isEventSelected {
+            if event.checkIsEventPassed(){
+                cell.setPassed()
+            }else{
+                cell.setIncoming()
+            }
         }
+       
         return cell
     }
     

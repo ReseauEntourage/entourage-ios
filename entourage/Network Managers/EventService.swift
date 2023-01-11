@@ -130,7 +130,7 @@ struct EventService:ParsingDataCodable {
             endpoint = kAPIEventGetAllForMe
             endpoint = String.init(format: endpoint, token, currentPage, per)
         }
-       
+
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
@@ -167,7 +167,6 @@ struct EventService:ParsingDataCodable {
         if let filters = filters {
             endpoint = "\(endpoint)&\(filters)"
         }
-        
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
@@ -188,7 +187,6 @@ struct EventService:ParsingDataCodable {
         Logger.print("***** url get post event message paging : \(endpoint)")
         
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
-            print("eho endpoint is " , endpoint)
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 DispatchQueue.main.async { completion(nil,  error) }
                 return
