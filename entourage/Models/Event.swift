@@ -642,7 +642,7 @@ struct EventMetadataEditing {
 
 extension Event {
     
-    //Function to see if event is passed or not 
+    //Function to see if event is passed or not
     func checkIsEventPassed()-> Bool{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
@@ -650,13 +650,13 @@ extension Event {
             print("Error: Invalid date")
             return false
         }
-
-        if date < Date() {
+        // get tomorrow's date
+        let tomorrow = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        if date < tomorrow {
             return true
         } else {
             return false
         }
-        return false
     }
     
 }
