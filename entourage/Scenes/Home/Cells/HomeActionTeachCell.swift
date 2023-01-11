@@ -25,7 +25,6 @@ class HomeActionTeachCell: UITableViewCell {
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantBoldNoir())
         ui_view_container.layer.cornerRadius = 20
         ui_image.layer.cornerRadius = 8
-        ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
         ui_image.image = UIImage(named: "ic_card_pedago")
     }
     
