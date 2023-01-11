@@ -193,7 +193,7 @@ struct User: Codable {
 
 struct UserLightNeighborhood: Codable {
     var sid:Int = 0
-    var displayName:String = ""
+    private var _displayName:String? = nil
     var avatarURL:String? = nil
     var partner:Partner? = nil
     var partnerRoleTitle:String? = nil
@@ -203,6 +203,14 @@ struct UserLightNeighborhood: Codable {
     var status:String? = nil
     var message:String? = nil
     
+    var displayName:String {
+        get {
+            return _displayName ?? "-"
+        }
+        set(newName) {
+            _displayName = newName
+        }
+    }
     
     enum CodingKeys: String, CodingKey {
        
@@ -215,7 +223,7 @@ struct UserLightNeighborhood: Codable {
         case sid = "id"
         case communityRoles = "community_roles"
         
-        case displayName = "display_name"
+        case _displayName = "display_name"
         case avatarURL = "avatar_url"
     }
     
@@ -278,10 +286,10 @@ struct UserLightNeighborhood: Codable {
 //MARK: - Organization -
 struct Organization:Codable {
     var name:String
-    var description:String
-    var phone:String
-    var address:String
-    var logo_url:String
+    var description:String? = nil
+    var phone:String? = nil
+    var address:String? = nil
+    var logo_url:String? = nil
 }
 
 //MARK: - UserPermissions -
