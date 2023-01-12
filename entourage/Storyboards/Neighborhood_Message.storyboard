@@ -60,6 +60,7 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JZj-i6-yz3">
                                         <rect key="frame" x="0.0" y="68" width="414" height="666"/>
                                         <color key="backgroundColor" name="BeigeClair"/>
+                                        <gestureRecognizers/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cellMe" rowHeight="144" id="Uma-l2-rzP" customClass="NeighborhoodMessageCell" customModule="Ent_Beta" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="50" width="414" height="144"/>
@@ -78,7 +79,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DCY-nA-QXP">
                                                             <rect key="frame" x="273" y="20" width="80" height="104"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzZ-QM-8aX">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzZ-QM-8aX" customClass="ActiveLabel" customModule="ActiveLabel">
                                                                     <rect key="frame" x="12" y="12" width="56" height="80"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -208,7 +209,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDa-Mw-1rp">
                                                             <rect key="frame" x="61" y="50" width="100" height="44.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1z-cB-Nh4">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1z-cB-Nh4" customClass="ActiveLabel" customModule="ActiveLabel">
                                                                     <rect key="frame" x="12" y="12" width="76" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -296,6 +297,7 @@
                                         <connections>
                                             <outlet property="dataSource" destination="uR9-9t-4at" id="ulH-MD-BmV"/>
                                             <outlet property="delegate" destination="uR9-9t-4at" id="4L8-sd-fPa"/>
+                                            <outletCollection property="gestureRecognizers" destination="Iav-2j-R1z" appends="YES" id="cPf-GN-aEU"/>
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6f-PY-TWq">
@@ -447,6 +449,7 @@
                         <outlet property="ui_constraint_bottom_view_Tf" destination="ynC-Jo-DRv" id="1bf-4M-RQS"/>
                         <outlet property="ui_iv_bt_send" destination="G8D-vG-DVg" id="SGJ-OU-3hP"/>
                         <outlet property="ui_tableview" destination="JZj-i6-yz3" id="DsH-1Q-Nbv"/>
+                        <outlet property="ui_tap_gesture" destination="Iav-2j-R1z" id="zH3-SR-b5j"/>
                         <outlet property="ui_textview_message" destination="BdV-52-4CQ" id="f7w-wM-cXj"/>
                         <outlet property="ui_title_empty" destination="nf3-AY-YZh" id="Zdm-yD-BJI"/>
                         <outlet property="ui_title_not_auth" destination="j10-Sc-73v" id="qXe-x5-Kly"/>
@@ -458,6 +461,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K9j-3w-4dg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Iav-2j-R1z">
+                    <connections>
+                        <action selector="action_tap_view:" destination="uR9-9t-4at" id="bhG-bi-lUn"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1927.5362318840582" y="-599.33035714285711"/>
         </scene>

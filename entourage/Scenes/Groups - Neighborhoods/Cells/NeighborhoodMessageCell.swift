@@ -7,13 +7,14 @@
 
 import UIKit
 import CloudKit
+import ActiveLabel
 
 class NeighborhoodMessageCell: UITableViewCell {
 
     @IBOutlet weak var ui_image_user: UIImageView!
    
     @IBOutlet weak var ui_view_message: UIView!
-    @IBOutlet weak var ui_message: UILabel!
+    @IBOutlet weak var ui_message: ActiveLabel!
     @IBOutlet weak var ui_date: UILabel!
     @IBOutlet weak var ui_username: UILabel!
     
@@ -42,6 +43,14 @@ class NeighborhoodMessageCell: UITableViewCell {
         let alertTheme = MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoRegularItalic(size: 11), color: .red)
         ui_lb_error?.setupFontAndColor(style: alertTheme)
         ui_lb_error?.text = "neighborhood_error_messageSend".localized
+        
+        ui_message.customize { label in
+            label.enabledTypes = [.url]
+            label.URLColor = .blue
+            label.handleURLTap { [weak self] url in
+                self?.delegate?.showWebUrl(url: url)
+            }
+        }
     }
     
     func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:MessageCellSignalDelegate) {
@@ -171,4 +180,5 @@ protocol MessageCellSignalDelegate:AnyObject {
     func signalMessage(messageId:Int)
     func retrySend(message:String, positionForRetry:Int)
     func showUser(userId:Int?)
+    func showWebUrl(url:URL)
 }

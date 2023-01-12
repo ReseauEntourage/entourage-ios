@@ -46,6 +46,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     private weak var parentDelegate:UpdateUnreadCountDelegate? = nil
     
     
+    @IBOutlet var ui_tap_gesture: UITapGestureRecognizer!
     @IBOutlet weak var ui_view_block: UIView!
     @IBOutlet weak var ui_title_block: UILabel!
     
@@ -73,6 +74,8 @@ class ConversationDetailMessagesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ui_tap_gesture.cancelsTouchesInView = false
+        
         IQKeyboardManager.shared.enable = false
         
         ui_bt_title_user.isHidden = !isOneToOne
@@ -510,6 +513,10 @@ extension ConversationDetailMessagesViewController:MessageCellSignalDelegate {
                 self.present(navVC, animated: true)
             }
         }
+    }
+    
+    func showWebUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }
 }
 
