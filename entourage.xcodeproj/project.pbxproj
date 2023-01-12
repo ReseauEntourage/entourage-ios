@@ -332,6 +332,7 @@
 		02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02E8544D2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib */; };
 		02E854502865C60A0012D941 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E8544F2865C60A0012D941 /* EventService.swift */; };
 		02E854522865CA090012D941 /* EventChoosePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E854512865CA090012D941 /* EventChoosePictureViewController.swift */; };
+		02E9D6C22970124900F9625D /* ActiveLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 02E9D6C12970124900F9625D /* ActiveLabel */; };
 		02EAB5A628B8F2710060557D /* ConversationParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAB5A528B8F2710060557D /* ConversationParametersViewController.swift */; };
 		02EAB5A828B8F7A90060557D /* ConversationParamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAB5A728B8F7A90060557D /* ConversationParamCell.swift */; };
 		02EAB5AA28B908400060557D /* ConversationListMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAB5A928B908400060557D /* ConversationListMembersViewController.swift */; };
@@ -773,6 +774,7 @@
 				02DB3BC827A14DFC004732C9 /* Nantes in Frameworks */,
 				02E0099227E37B1100BB23CA /* FirebaseRemoteConfig in Frameworks */,
 				02B94C402850D4A2006059EF /* IQKeyboardManagerSwift in Frameworks */,
+				02E9D6C22970124900F9625D /* ActiveLabel in Frameworks */,
 				7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */,
 				020AF5DE286064AC0012AE60 /* Lottie in Frameworks */,
 			);
@@ -1639,6 +1641,7 @@
 				02B94C3F2850D4A2006059EF /* IQKeyboardManagerSwift */,
 				020AF5DD286064AC0012AE60 /* Lottie */,
 				02F827702967287B000CA150 /* SimpleKeychain */,
+				02E9D6C12970124900F9625D /* ActiveLabel */,
 			);
 			productName = entourageios;
 			productReference = 025D8716278DD33600909101 /* Ent-Beta.app */;
@@ -1678,6 +1681,7 @@
 				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
+				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */,
 			);
 			productRefGroup = 025D8717278DD33600909101 /* Products */;
 			projectDirPath = "";
@@ -2536,6 +2540,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/optonaut/ActiveLabel.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/auth0/SimpleKeychain";
@@ -2601,6 +2613,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		02E9D6C12970124900F9625D /* ActiveLabel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */;
+			productName = ActiveLabel;
 		};
 		02F827702967287B000CA150 /* SimpleKeychain */ = {
 			isa = XCSwiftPackageProductDependency;

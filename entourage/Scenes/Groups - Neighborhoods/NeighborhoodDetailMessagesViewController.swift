@@ -25,6 +25,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     
     @IBOutlet weak var ui_view_empty: UIView!
     @IBOutlet weak var ui_title_empty: UILabel!
+    @IBOutlet var ui_tap_gesture: UITapGestureRecognizer!
     
     var neighborhoodId:Int = 0
     var parentCommentId:Int = 0
@@ -48,6 +49,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ui_tap_gesture.cancelsTouchesInView = false
         IQKeyboardManager.shared.enable = false
         ui_top_view.populateView(title: "neighborhood_comments_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self,backgroundColor: .appBeigeClair, isClose: false)
         
@@ -210,6 +212,11 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         }
     }
     
+    //MARK: - IBActions -
+    @IBAction func action_tap_view(_ sender: Any) {
+        _ = ui_textview_message.resignFirstResponder()
+    }
+    
     @IBAction func action_send_message(_ sender: Any) {
         self.closeKb(nil)
     }
@@ -333,6 +340,10 @@ extension NeighborhoodDetailMessagesViewController:MessageCellSignalDelegate {
                 self.present(navVC, animated: true)
             }
         }
+    }
+    
+    func showWebUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }
 }
 

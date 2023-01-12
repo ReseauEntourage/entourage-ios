@@ -24,6 +24,7 @@ class EventDetailMessagesViewController: UIViewController {
     
     @IBOutlet weak var ui_view_empty: UIView!
     @IBOutlet weak var ui_title_empty: UILabel!
+    @IBOutlet var ui_tap_gesture: UITapGestureRecognizer!
     
     var eventId:Int = 0
     var parentCommentId:Int = 0
@@ -47,6 +48,7 @@ class EventDetailMessagesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ui_tap_gesture.cancelsTouchesInView = false
         IQKeyboardManager.shared.enable = false
         ui_top_view.populateView(title: "event_comments_title".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self,backgroundColor: .appBeigeClair, isClose: false)
         
@@ -337,6 +339,10 @@ extension EventDetailMessagesViewController:MessageCellSignalDelegate {
                 self.present(navVC, animated: true)
             }
         }
+    }
+    
+    func showWebUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }
 }
 
