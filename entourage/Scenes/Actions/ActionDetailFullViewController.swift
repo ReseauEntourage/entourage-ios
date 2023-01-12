@@ -44,7 +44,7 @@ class ActionDetailFullViewController: UIViewController {
         ui_tableview.delegate = self
         
         ui_top_view.backgroundColor = .appBeigeClair
-        let _title = action?.title ?? "action"
+        let _title = isContrib ? "Contrib".localized : "Demand".localized
         ui_top_view.populateCustom(title: _title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil,doubleRightMargin: true)
        
         getAction()
@@ -73,7 +73,6 @@ class ActionDetailFullViewController: UIViewController {
                 self.action = action
                 self.showHideBottomViews()
                 self.ui_tableview.reloadData()
-                self.ui_top_view.updateTitle(title: action.title ?? "action_your".localized)
                 
                 if action.isContrib() {
                     AnalyticsLoggerManager.logEvent(name: Help_view_contrib_detail)

@@ -21,6 +21,8 @@ class ActionFullTopCell: UITableViewCell {
     
     @IBOutlet weak var ui_img_contrib: UIImageView!
     
+    @IBOutlet weak var ui_title_main: UILabel!
+    
     @IBOutlet var ui_view_tags: [UIView]!
     @IBOutlet var ui_title_tags: [UILabel]!
     @IBOutlet var ui_img_tags: [UIImageView]!
@@ -49,6 +51,8 @@ class ActionFullTopCell: UITableViewCell {
         for _t in ui_title_tags {
             _t.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .appOrange))
         }
+        
+        ui_title_main.setupFontAndColor(style: MJTextFontColorStyle(font:ApplicationTheme.getFontQuickSandBold(size: 15), color: .black))
     }
     
     func populateCell(action:Action) {
@@ -60,6 +64,8 @@ class ActionFullTopCell: UITableViewCell {
             ui_view_cancel.isHidden = true
             ui_view_cancel_opacity.isHidden = true
         }
+        
+        ui_title_main.text = action.title
         
         ui_description.text = action.description
         if action.isContrib() {
