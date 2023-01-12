@@ -149,7 +149,9 @@ enum HomeActionType {
     case user
     case profile
     case neighborhood
+    case neighborhoodPost
     case outing
+    case outingPost
     case contribution
     case solicitation
     case conversation
@@ -157,7 +159,6 @@ enum HomeActionType {
     case webview
     case poi
     case none
-    //TODO: crea formulaire de création d’une publication, sur un groupe donné
-    //TODO: share groupe/don/demande ????
+
 }
 

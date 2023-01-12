@@ -84,7 +84,8 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         meId = me.sid
         
         registerCellsNib()
-        
+        print("eho postid" , self.parentCommentId)
+
         getMessages()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -199,7 +200,6 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         NeighborhoodService.getDetailPostMessage(neighborhoodId: neighborhoodId, parentPostId: parentCommentId) { message, error in
             
             self.postMessage = message
-            
             self.ui_tableview.reloadData()
             if self.messages.count + self.messagesForRetry.count > 0 {
                 DispatchQueue.main.async {

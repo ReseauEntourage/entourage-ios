@@ -13,6 +13,7 @@ struct NotifInApp:Codable {
     private var instanceString:String
     var content:String? = nil
     var imageUrl:String? = nil
+    var postId:Int? = nil
     
     private var createdAt:String? = nil
     var completedAt:String? = nil
@@ -27,13 +28,14 @@ struct NotifInApp:Codable {
     
     
     func getNotificationPushData() -> NotificationPushData {
-        return NotificationPushData(instanceName: instanceString, instanceId: instanceId ?? 0)
+        return NotificationPushData(instanceName: instanceString, instanceId: instanceId ?? 0, postId:postId)
     }
     
     
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case instanceId = "instance_id"
+        case postId = "post_id"
         case instanceString = "instance"
         case content
         case createdAt = "created_at"
@@ -47,6 +49,10 @@ struct NotifInApp:Codable {
             return .profile
         case "neighborhood":
             return .neighborhood
+        case "neighborhood_post":
+            return .neighborhoodPost
+        case "outing_post":
+            return .outingPost
         case "outing":
             return .outing
         case "resource":

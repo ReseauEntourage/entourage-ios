@@ -60,6 +60,7 @@ class NotificationsInAppViewController: UIViewController {
                 if self.currentPage == 1 {
                     self.notifications.removeAll()
                     self.notifications.append(contentsOf: notifs)
+                    
                 }
                 else {
                     self.notifications.append(contentsOf: notifs)

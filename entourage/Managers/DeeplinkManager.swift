@@ -30,8 +30,21 @@ struct DeepLinkManager {
             showAction(id: notification.instanceId, isContrib: true)
         case .solicitations:
             showAction(id: notification.instanceId, isContrib: false)
+        case .neighborhood_post:
+            if let _postId = notification.postId{
+                showNeighborhoodDetailMessage(instanceId: notification.instanceId, postId: _postId)
+            }else{
+                showNeighborhoodDetail(id: notification.instanceId)
+            }
+        case .outing_post:
+            if let _postId = notification.postId{
+                showEventDetailMessage(instanceId: notification.instanceId, postId: _postId)
+            }else{
+                showOuting(id: notification.instanceId)
+            }
         case .none:
             break
+
         }
     }
     
@@ -109,4 +122,32 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(navVc, animated: true)
         }
     }
+    
+    
+    //TODO : display message from group
+    static func showNeighborhoodDetailMessage(instanceId:Int, postId:Int) {
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? NeighborhoodDetailMessagesViewController {
+            vc.parentCommentId = postId
+            vc.neighborhoodId = instanceId
+            vc.isStartEditing = false
+            vc.isGroupMember = true
+        AppState.getTopViewController()?.present(vc, animated: true)
+        
+        }
+    }
+    
+
+    
+    static func showEventDetailMessage(instanceId:Int, postId:Int) {
+        let sb = UIStoryboard.init(name: StoryboardName.eventMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? EventDetailMessagesViewController {
+            vc.parentCommentId = postId
+            vc.eventId = instanceId
+            vc.isStartEditing = false
+            vc.isGroupMember = true
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+    
 }
