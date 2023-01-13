@@ -99,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Logger.print("***** isFrom BG : \(isFromBackground)")
         Logger.print("***** isFrom Start : \(isFromStart)")
         
-        guard let userInfos = userInfos,let content = userInfos["content"] as? [String:Any], let extras = content["extra"] as? [String:Any],let instance = extras["instance"] as? String, let instanceId = extras["id"] as? Int  else {
+        guard let userInfos = userInfos,let content = userInfos["content"] as? [String:Any], let extras = content["extra"] as? [String:Any],let instance = extras["instance"] as? String, let instanceId = extras["instance_id"] as? Int  else {
             return
         }
         Logger.print("***** extras : \(extras) ")
