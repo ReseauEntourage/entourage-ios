@@ -55,7 +55,7 @@ struct AppState {
     }
     
     static func navigateToStartupScreen() {
-        clearDatas()
+        clearDatas(withKeychain: false)
         let sb = UIStoryboard.init(name: StoryboardName.intro, bundle: nil)
         let vc = sb.instantiateInitialViewController()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -90,13 +90,15 @@ struct AppState {
         getTopViewController()?.show(loginVc, sender: self)
     }
     
-    static func clearDatas() {
+    static func clearDatas(withKeychain:Bool) {
         
         UserDefaults.currentUser = nil
         UserDefaults.temporaryUser = nil
         UserDefaults.pushToken = nil
         
-        SimpleKeychain.A0SimpleKeychain().deleteEntry(forKey: kKeychainPhone)
-        SimpleKeychain.A0SimpleKeychain().deleteEntry(forKey: kKeychainPassword)
+        if withKeychain {
+            SimpleKeychain.A0SimpleKeychain().deleteEntry(forKey: kKeychainPhone)
+            SimpleKeychain.A0SimpleKeychain().deleteEntry(forKey: kKeychainPassword)
+        }
     }
 }

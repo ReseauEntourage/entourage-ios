@@ -11,5 +11,9 @@
 		<string>applinks:app.entourage.social</string>
 		<string>applinks:entourage-webapp-preprod.herokuapp.com</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)social.entourage.entourageios</string>
+	</array>
 </dict>
 </plist>

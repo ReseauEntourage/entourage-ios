@@ -1102,6 +1102,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "AtKm" = "À %.0f km de moi";
 "Atm" = "À %.0f m de moi";
 "atm" = "À %.0f m de moi";
+"Contrib" = "Contribution";
+"Demand" = "Demande";
 
 "action_created_at" = "Créé %@ par";
 "action_member_since" = "Membre depuis %@";

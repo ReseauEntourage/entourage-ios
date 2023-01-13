@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SimpleKeychain
 
 class OTPreOnboardingV2ChoiceViewController: UIViewController {
     @IBOutlet weak var ui_bt_signup_constraint_height: NSLayoutConstraint!
@@ -21,6 +22,7 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
     @IBOutlet weak var ui_constraint_top_image: NSLayoutConstraint!
     
     var isFromOnboarding = false
+    var hasKeychainInfos = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,19 +45,32 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
         if view.frame.height <= 568 {
             ui_constraint_top_image.constant = -50
         }
+                
+        let phone = A0SimpleKeychain().string(forKey:kKeychainPhone)
+        let pwd = A0SimpleKeychain().string(forKey:kKeychainPassword)
+        
+        if let _ = phone, let _ = pwd {
+            hasKeychainInfos = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.hideTransparentNavigationBar()
         UserDefaults.temporaryUser = nil
-        
+        AnalyticsLoggerManager.logEvent(name: PreOnboard_view_choice)
         if isFromOnboarding {
             self.isFromOnboarding = false
-            self.action_login(self)
+            self.action_login(nil)
+            return
         }
         
-        AnalyticsLoggerManager.logEvent(name: PreOnboard_view_choice)
+        if hasKeychainInfos {
+            hasKeychainInfos = false
+            let vc = UIStoryboard(name: StoryboardName.intro, bundle: nil).instantiateViewController(withIdentifier: "LoginV2VC") as! OTLoginV2ViewController
+            vc.hasKeychain = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -78,7 +93,7 @@ class OTPreOnboardingV2ChoiceViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func action_login(_ sender: Any) {
+    @IBAction func action_login(_ sender: Any?) {
         AnalyticsLoggerManager.logEvent(name: PreOnboard_action_signin)
         let vc = UIStoryboard(name: StoryboardName.intro, bundle: nil).instantiateViewController(withIdentifier: "LoginV2VC")
         self.navigationController?.pushViewController(vc, animated: true)

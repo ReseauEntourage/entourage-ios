@@ -9,6 +9,7 @@
 import UIKit
 import IHProgressHUD
 import IQKeyboardManagerSwift
+import SimpleKeychain
 
 class OTLoginV2ViewController: UIViewController {
     
@@ -42,6 +43,8 @@ class OTLoginV2ViewController: UIViewController {
     var timeOut = 60
     var countDownTimer:Timer? = nil
     
+    var hasKeychain = false
+    
     //MARK: - Lifecycle -
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +64,16 @@ class OTLoginV2ViewController: UIViewController {
         IQKeyboardManager.shared.enableAutoToolbar = false
         
         selectPickerCountry()
+        
+        if hasKeychain {
+            let phone = A0SimpleKeychain().string(forKey:kKeychainPhone)
+            let pwd = A0SimpleKeychain().string(forKey:kKeychainPassword)
+            
+            if let phone = phone, let pwd = pwd {
+                ui_tf_phone.text = phone
+                ui_tf_code.text = pwd
+            }
+        }
     }
     
     override func viewWillLayoutSubviews() {
