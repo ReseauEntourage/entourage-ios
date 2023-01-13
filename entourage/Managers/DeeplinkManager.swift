@@ -44,7 +44,6 @@ struct DeepLinkManager {
             }
         case .none:
             break
-
         }
     }
     
@@ -65,7 +64,6 @@ struct DeepLinkManager {
             var poi = MapPoi()
             poi.uuid = "\(id)"
             _controller.poi = poi
-            
             AppState.getTopViewController()?.present(navVc, animated: true)
         }
     }

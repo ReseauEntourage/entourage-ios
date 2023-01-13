@@ -952,6 +952,8 @@
 //Contacts pop add
 "event_add_contact_accept" = "Ajouter";
 "event_add_contact_cancel" = "Annuler";
+"event_add_contact_yes" = "Oui";
+"event_add_contact_no" = "Non";
 "event_add_contact_title" = "Votre inscription est prise en compte !";
 "event_add_contact_description" = "Voulez-vous ajouter cet énévement à votre agenda personnel ?";
 

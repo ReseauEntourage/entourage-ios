@@ -75,7 +75,6 @@ struct UserService {
         
         
         let parameters = [kWSKeyAddress : [kWSKeyGooglePlaceId: placeId]]
-        
         let bodyData = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
         Logger.print("Datas passed update address placeId \(parameters)")

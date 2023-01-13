@@ -104,8 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         Logger.print("***** extras : \(extras) ")
         Logger.print("***** Instance : \(instance) - id : \(instanceId)")
-       
-        
         let postId = extras["post_id"] as? Int
         Logger.print("***** post id : \(postId) ")
         

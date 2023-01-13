@@ -425,8 +425,10 @@ class EventDetailFeedViewController: UIViewController {
         DispatchQueue.main.async {
             let alertVC = MJAlertController()
             alertVC.alertTagName = .AcceptAdd
-            let buttonCancel = MJAlertButtonType(title: "event_add_contact_cancel".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .appOrange), bgColor: .appOrangeLight_50, cornerRadius: -1)
-            let buttonValidate = MJAlertButtonType(title: "event_add_contact_accept".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrange, cornerRadius: -1)
+            let buttonCancel = MJAlertButtonType(title: "event_add_contact_no".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .appOrange), bgColor: .appOrangeLight_50, cornerRadius: -1)
+            
+            
+            let buttonValidate = MJAlertButtonType(title: "event_add_contact_yes".localized, titleStyle:MJTextFontColorStyle.init(font: ApplicationTheme.getFontNunitoBold(size: 15), color: .white), bgColor: .appOrange, cornerRadius: -1)
             alertVC.configureAlert(alertTitle: "event_add_contact_title".localized, message: "event_add_contact_description".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
             
             alertVC.delegate = self

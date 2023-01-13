@@ -236,12 +236,6 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
-//        if indexPath.row == 1 { //Action madatory resources
-//            let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionTeachCell.identifier, for: indexPath) as! HomeActionTeachCell
-//
-//            cell.populateCell(title: "home_cell_pedago".localized)
-//            return cell
-//        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeActionCell.identifier, for: indexPath) as! HomeActionCell
         let action = homeViewModel.actions[indexPath.row - 1]
@@ -270,13 +264,7 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if indexPath.section == section_agir {
-            if indexPath.row == 1 {
-                AnalyticsLoggerManager.logEvent(name: Home_action_pedago)
-                showResources()
-                return
-            }
-            let action = homeViewModel.actions[indexPath.row - 2]
-            
+            let action = homeViewModel.actions[indexPath.row - 1]
             homeViewModel.getEventFromAction(action)
         }
     }
