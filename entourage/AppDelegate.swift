@@ -79,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc func goLogin() {
         DispatchQueue.main.async {
-            AppState.clearDatas()
+            AppState.clearDatas(withKeychain: true)
             AppState.navigateToStartupScreen()
         }
     }
