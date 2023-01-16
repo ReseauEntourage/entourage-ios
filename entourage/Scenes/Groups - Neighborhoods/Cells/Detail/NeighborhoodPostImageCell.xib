@@ -206,10 +206,10 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1C-Y9-g4k">
-                                <rect key="frame" x="382" y="13" width="20" height="20"/>
+                                <rect key="frame" x="362" y="13" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Bxf-DD-kpQ"/>
-                                    <constraint firstAttribute="width" constant="20" id="nrU-US-GaS"/>
+                                    <constraint firstAttribute="height" constant="40" id="Bxf-DD-kpQ"/>
+                                    <constraint firstAttribute="width" constant="40" id="nrU-US-GaS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
