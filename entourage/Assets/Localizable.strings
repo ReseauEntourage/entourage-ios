@@ -751,7 +751,7 @@
 "home_no_group_title" = "N'attendez plus pour rejoindre un groupe de voisins !";
 
 "home_actions_title" = "Je commence simplement";
-"home_help_title" = "Besoin d’aide sur l'app";
+"home_help_title" = "Besoin d’aide";
 "home_help_subtitle" = "Votre guide dans l’app";
 "home_cell_pedago" = "Tout savoir pour passer à l'action";
 "home_cell_map" = "Carte des lieux solidaires";
@@ -955,7 +955,7 @@
 "event_add_contact_yes" = "Oui";
 "event_add_contact_no" = "Non";
 "event_add_contact_title" = "Votre inscription est prise en compte !";
-"event_add_contact_description" = "Voulez-vous ajouter cet énévement à votre agenda personnel ?";
+"event_add_contact_description" = "Voulez-vous ajouter cet événement à votre agenda personnel ?";
 
 "event_add_contact_places_title" = "Événement à places limitées";
 "event_add_contact_places_description" = "Attention, cet événement est à places limitées, votre inscription n’est pas garantie. L’administrateur de l’événement reviendra vers vous pour vous confirmer la réservation de votre place.";
