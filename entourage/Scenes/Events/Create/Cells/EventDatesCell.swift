@@ -50,6 +50,7 @@ class EventDatesCell: UITableViewCell {
         pickerDateView.datePickerMode = .date
         pickerDateView.locale = currentLocale
         
+        
         if #available(iOS 13.4, *) {
             pickerDateView.preferredDatePickerStyle = .wheels
         }
