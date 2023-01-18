@@ -268,12 +268,38 @@ class NeighborhoodDetailViewController: UIViewController {
                     self.neighborhood?.membersCount = count
                     self.ui_tableview.reloadData()
                     self.getNeighborhoodDetail(hasToRefreshLists:true)
+                    self.showWelcomeMessage()
                 }
             }
         }
         else {
             showPopLeave()
         }
+    }
+    
+    func showWelcomeMessage(){
+        let title = "welcome_message_title".localized
+        let btnTitle = "neighborhood_detail_button_join_join".localized
+        var message = "welcome_message_placeholder".localized
+        if self.neighborhood?.welcomeMessage != nil
+            && self.neighborhood?.welcomeMessage != ""
+            && neighborhood != nil
+        {
+            message = (neighborhood?.welcomeMessage)!
+        }
+        
+        let alertVC = MJAlertController()
+        let buttonWelcome = MJAlertButtonType(title: btnTitle, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        alertVC.alertTagName = .welcomeMessage
+        
+        alertVC.configureAlert(alertTitle: title, message: message, buttonrightType: buttonWelcome, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: false)
+        alertVC.delegate = self
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            alertVC.show()
+        }
+        
+        
     }
     
     func showPopLeave() {
@@ -381,7 +407,12 @@ extension NeighborhoodDetailViewController: MJAlertControllerDelegate {
         }
     }
     
-    func validateRightButton(alertTag:MJAlertTAG) {}
+    func validateRightButton(alertTag:MJAlertTAG) {
+        if alertTag == .welcomeMessage{
+            showCreatePost()
+        }
+        
+    }
     func closePressed(alertTag:MJAlertTAG) {}
 }
 
