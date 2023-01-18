@@ -651,8 +651,8 @@
 
 "neighborhood_detail_button_join_member" = "Membre";
 "neighborhood_detail_button_join_join" = "Rejoindre";
-"welcome_message_placeholder" = "N’hésitez pas à envoyer un premier message pour vous présenter";
-"welcome_message_title" = "Félicitations, vous êtes membre du groupe";
+"welcome_message_placeholder" = "N’hésitez pas à envoyer un premier message pour vous présenter.";
+"welcome_message_title" = "Félicitations, vous êtes membre du groupe !";
 "welcome_message_btn_title" = "Je me présente";
 
 "neighborhood_detail_members" = "%d membres";

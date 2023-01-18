@@ -279,7 +279,7 @@ class NeighborhoodDetailViewController: UIViewController {
     
     func showWelcomeMessage(){
         let title = "welcome_message_title".localized
-        let btnTitle = "neighborhood_detail_button_join_join".localized
+        let btnTitle = "welcome_message_btn_title".localized
         var message = "welcome_message_placeholder".localized
         if self.neighborhood?.welcomeMessage != nil
             && self.neighborhood?.welcomeMessage != ""
@@ -289,10 +289,10 @@ class NeighborhoodDetailViewController: UIViewController {
         }
         
         let alertVC = MJAlertController()
-        let buttonWelcome = MJAlertButtonType(title: btnTitle, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonWelcome = MJAlertButtonType(title: btnTitle, titleStyle:ApplicationTheme.getFontCourantBoldOrange(size: 18), bgColor: .appOrangeLight, cornerRadius: -1)
         alertVC.alertTagName = .welcomeMessage
         
-        alertVC.configureAlert(alertTitle: title, message: message, buttonrightType: buttonWelcome, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: false)
+        alertVC.configureAlert(alertTitle: title, message: message, buttonrightType: buttonWelcome, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrangeClair(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: false)
         alertVC.delegate = self
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
