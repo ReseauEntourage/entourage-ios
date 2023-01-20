@@ -108,7 +108,7 @@ import UIKit
         let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
         
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         dateFormatter.dateFormat = dateFormat
         
         date = dateFormatter.date(from: dateStr)
