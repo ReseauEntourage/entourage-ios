@@ -18,7 +18,7 @@ else
     build=`git rev-list HEAD --count`
     previous_tag="$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))"
 
-    previous_tag="Ent_7.9.1860"
+    previous_tag="Ent_8.0.2038"
     #latest_tag="Ent_7.9.1785"
 
     filename="GITCHANGELOG-FROM-$previous_tag-TO-$latest_tag.md"
