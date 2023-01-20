@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_profile_tags.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

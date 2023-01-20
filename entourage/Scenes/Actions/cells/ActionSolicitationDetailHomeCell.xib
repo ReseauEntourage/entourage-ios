@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NunitoSans-Light.ttf">
+            <string>NunitoSans-Light</string>
+        </array>
+        <array key="Quicksand-Bold.ttf">
+            <string>Quicksand-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="118" id="nuH-fG-zic" customClass="ActionSolicitationDetailHomeCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="406" height="118"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nuH-fG-zic" id="0VX-fh-6zp">
+                <rect key="frame" x="0.0" y="0.0" width="406" height="118"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="754" text="Dansons ensemble" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzK-Ox-prj">
+                        <rect key="frame" x="28" y="6" width="136" height="19"/>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWu-25-phf">
+                        <rect key="frame" x="28" y="29" width="32" height="18"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
+                        <color key="textColor" name="orange_light"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idi-rg-bLL">
+                        <rect key="frame" x="56" y="72" width="32" height="18"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
+                        <color key="textColor" name="gris_112"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qP7-uU-HyM">
+                        <rect key="frame" x="0.0" y="117" width="406" height="1"/>
+                        <color key="backgroundColor" name="Beige"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="CN5-fz-gGa"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_event_list_loc" translatesAutoresizingMaskIntoConstraints="NO" id="hRm-ow-Ifx">
+                        <rect key="frame" x="32.5" y="77" width="11" height="8"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_event_list_loc" translatesAutoresizingMaskIntoConstraints="NO" id="7e7-3u-2i5">
+                        <rect key="frame" x="64" y="32" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="8R3-yL-ybg"/>
+                            <constraint firstAttribute="height" constant="12" id="MKd-ZJ-yO8"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" image="ic_event_list_date" translatesAutoresizingMaskIntoConstraints="NO" id="NzG-KC-9Ct">
+                        <rect key="frame" x="32.5" y="95" width="10" height="10"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVk-hR-Vo3">
+                        <rect key="frame" x="56" y="91" width="32" height="18"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
+                        <color key="textColor" name="gris_112"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bgi-pi-WQk">
+                        <rect key="frame" x="28" y="51" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="AUN-Hm-5Rt"/>
+                            <constraint firstAttribute="height" constant="20" id="qJI-pn-fAW"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="753" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy8-dt-2CD">
+                        <rect key="frame" x="56" y="52" width="32" height="18"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" name="BeigeClair"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="qP7-uU-HyM" secondAttribute="trailing" id="02N-Ez-f1f"/>
+                    <constraint firstItem="7e7-3u-2i5" firstAttribute="leading" secondItem="TWu-25-phf" secondAttribute="trailing" constant="4" id="0Sv-sV-8bR"/>
+                    <constraint firstItem="jVk-hR-Vo3" firstAttribute="leading" secondItem="idi-rg-bLL" secondAttribute="leading" id="0hF-qJ-lpo"/>
+                    <constraint firstAttribute="bottom" secondItem="qP7-uU-HyM" secondAttribute="bottom" id="14K-54-mhk"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7e7-3u-2i5" secondAttribute="trailing" constant="8" id="4Ki-bB-7yP"/>
+                    <constraint firstItem="gzK-Ox-prj" firstAttribute="leading" secondItem="0VX-fh-6zp" secondAttribute="leading" constant="28" id="9y0-ZP-x0S"/>
+                    <constraint firstItem="Gy8-dt-2CD" firstAttribute="leading" secondItem="bgi-pi-WQk" secondAttribute="trailing" constant="8" id="Fcx-45-ln7"/>
+                    <constraint firstItem="TWu-25-phf" firstAttribute="top" secondItem="gzK-Ox-prj" secondAttribute="bottom" constant="4" id="GTE-f8-8Oa"/>
+                    <constraint firstItem="hRm-ow-Ifx" firstAttribute="top" secondItem="bgi-pi-WQk" secondAttribute="bottom" constant="6" id="Jo1-Ki-7AQ"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gzK-Ox-prj" secondAttribute="trailing" constant="16" id="O1M-b3-DPY"/>
+                    <constraint firstItem="qP7-uU-HyM" firstAttribute="leading" secondItem="0VX-fh-6zp" secondAttribute="leading" id="QBq-Fi-K1j"/>
+                    <constraint firstItem="gzK-Ox-prj" firstAttribute="top" secondItem="0VX-fh-6zp" secondAttribute="top" constant="6" id="QJD-F2-Mx0"/>
+                    <constraint firstItem="idi-rg-bLL" firstAttribute="leading" secondItem="Gy8-dt-2CD" secondAttribute="leading" id="TVz-Pi-dOz"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Gy8-dt-2CD" secondAttribute="trailing" constant="8" id="UqP-zY-RdP"/>
+                    <constraint firstItem="NzG-KC-9Ct" firstAttribute="leading" secondItem="hRm-ow-Ifx" secondAttribute="leading" id="W3y-jy-ev0"/>
+                    <constraint firstItem="qP7-uU-HyM" firstAttribute="top" secondItem="jVk-hR-Vo3" secondAttribute="bottom" constant="8" id="W4E-oF-hHR"/>
+                    <constraint firstItem="Gy8-dt-2CD" firstAttribute="centerY" secondItem="bgi-pi-WQk" secondAttribute="centerY" id="WSh-8t-aJ1"/>
+                    <constraint firstItem="NzG-KC-9Ct" firstAttribute="top" secondItem="hRm-ow-Ifx" secondAttribute="bottom" constant="10" id="b1Y-AA-cDV"/>
+                    <constraint firstItem="idi-rg-bLL" firstAttribute="centerY" secondItem="hRm-ow-Ifx" secondAttribute="centerY" id="bGo-nj-5Wk"/>
+                    <constraint firstItem="jVk-hR-Vo3" firstAttribute="centerY" secondItem="NzG-KC-9Ct" secondAttribute="centerY" id="c8P-RD-ATe"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="idi-rg-bLL" secondAttribute="trailing" constant="16" id="d0t-10-Co1"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jVk-hR-Vo3" secondAttribute="trailing" constant="8" id="gLU-nM-lCP"/>
+                    <constraint firstItem="7e7-3u-2i5" firstAttribute="centerY" secondItem="TWu-25-phf" secondAttribute="centerY" id="gRJ-ET-D0C"/>
+                    <constraint firstItem="TWu-25-phf" firstAttribute="leading" secondItem="0VX-fh-6zp" secondAttribute="leading" constant="28" id="grO-8X-hDm"/>
+                    <constraint firstItem="hRm-ow-Ifx" firstAttribute="centerX" secondItem="bgi-pi-WQk" secondAttribute="centerX" id="izS-uQ-QeH"/>
+                    <constraint firstItem="bgi-pi-WQk" firstAttribute="leading" secondItem="0VX-fh-6zp" secondAttribute="leading" constant="28" id="kNo-vj-u12"/>
+                    <constraint firstItem="bgi-pi-WQk" firstAttribute="top" secondItem="TWu-25-phf" secondAttribute="bottom" constant="4" id="yx1-Ep-Xnk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ui_date" destination="jVk-hR-Vo3" id="Qdi-uO-QM9"/>
+                <outlet property="ui_iv_section" destination="7e7-3u-2i5" id="YLG-V1-1Ml"/>
+                <outlet property="ui_iv_user" destination="bgi-pi-WQk" id="k1f-Rh-cXk"/>
+                <outlet property="ui_location" destination="idi-rg-bLL" id="gNI-rH-f4m"/>
+                <outlet property="ui_section" destination="TWu-25-phf" id="d0s-8e-H6m"/>
+                <outlet property="ui_title" destination="gzK-Ox-prj" id="wnM-w5-rTY"/>
+                <outlet property="ui_username" destination="Gy8-dt-2CD" id="vZA-sM-Qtw"/>
+                <outlet property="ui_view_separator" destination="qP7-uU-HyM" id="zcv-NX-CUb"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="33.482142857142854"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_event_list_date" width="10" height="10"/>
+        <image name="ic_event_list_loc" width="11" height="10"/>
+        <namedColor name="Beige">
+            <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BeigeClair">
+            <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gris_112">
+            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_light">
+            <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

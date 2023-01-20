@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_user_action.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

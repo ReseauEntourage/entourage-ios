@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Mox-3X-rtL">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPw-uA-pWf">
+                    <rect key="frame" x="30" y="300" width="333" height="252"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_alert_add_event" translatesAutoresizingMaskIntoConstraints="NO" id="BO5-X9-iEi">
+                            <rect key="frame" x="141.66666666666666" y="24" width="50" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="5KI-tk-Wpf"/>
+                                <constraint firstAttribute="width" constant="50" id="zgY-J8-194"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Votre inscription est prise en compte !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IL4-e4-F1a">
+                            <rect key="frame" x="86.666666666666686" y="74" width="160" height="31.333333333333329"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="160" id="Xma-DH-msz"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" name="orange_app"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F9F-Ox-J44">
+                            <rect key="frame" x="18" y="120.33333333333331" width="297" height="1"/>
+                            <color key="backgroundColor" name="grey_off"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="O4I-Y4-6Ll"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voulez-vous ajouter cet énévement à votre agenda personnel ?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCb-fo-Mad">
+                            <rect key="frame" x="18" y="136.33333333333331" width="297" height="31.333333333333343"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" name="gris_112"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="FCb-fo-Mad" secondAttribute="trailing" constant="18" id="1jm-7g-oKX"/>
+                        <constraint firstItem="F9F-Ox-J44" firstAttribute="top" secondItem="IL4-e4-F1a" secondAttribute="bottom" constant="15" id="CIA-gZ-iAQ"/>
+                        <constraint firstItem="IL4-e4-F1a" firstAttribute="top" secondItem="BO5-X9-iEi" secondAttribute="bottom" constant="10" id="Cuh-4h-8mq"/>
+                        <constraint firstItem="FCb-fo-Mad" firstAttribute="leading" secondItem="cPw-uA-pWf" secondAttribute="leading" constant="18" id="Dzl-yl-YzH"/>
+                        <constraint firstAttribute="trailing" secondItem="F9F-Ox-J44" secondAttribute="trailing" constant="18" id="FLs-ST-Z5O"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="252" id="HXe-EA-5gn"/>
+                        <constraint firstItem="IL4-e4-F1a" firstAttribute="centerX" secondItem="BO5-X9-iEi" secondAttribute="centerX" id="UD1-yJ-SA0"/>
+                        <constraint firstItem="BO5-X9-iEi" firstAttribute="top" secondItem="cPw-uA-pWf" secondAttribute="top" constant="24" id="WqX-Vo-mIh"/>
+                        <constraint firstItem="F9F-Ox-J44" firstAttribute="leading" secondItem="cPw-uA-pWf" secondAttribute="leading" constant="18" id="dj3-PC-hbD"/>
+                        <constraint firstItem="FCb-fo-Mad" firstAttribute="top" secondItem="F9F-Ox-J44" secondAttribute="bottom" constant="15" id="qJw-uW-i1l"/>
+                        <constraint firstItem="BO5-X9-iEi" firstAttribute="centerX" secondItem="cPw-uA-pWf" secondAttribute="centerX" id="rf4-Fp-ieE"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="CPg-4v-aKM"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59622579229999995" colorSpace="custom" customColorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="cPw-uA-pWf" firstAttribute="centerX" secondItem="Mox-3X-rtL" secondAttribute="centerX" id="Bgy-Hz-bhx"/>
+                <constraint firstItem="CPg-4v-aKM" firstAttribute="trailing" secondItem="cPw-uA-pWf" secondAttribute="trailing" constant="30" id="Dqx-uu-N5F"/>
+                <constraint firstItem="CPg-4v-aKM" firstAttribute="bottom" secondItem="cPw-uA-pWf" secondAttribute="bottom" constant="266" id="Np8-Q8-PtH"/>
+                <constraint firstItem="cPw-uA-pWf" firstAttribute="centerY" secondItem="Mox-3X-rtL" secondAttribute="centerY" id="hSF-VZ-YOD"/>
+                <constraint firstItem="cPw-uA-pWf" firstAttribute="centerX" secondItem="CPg-4v-aKM" secondAttribute="centerX" id="kgE-UL-8sz"/>
+                <constraint firstItem="cPw-uA-pWf" firstAttribute="leading" secondItem="CPg-4v-aKM" secondAttribute="leading" constant="30" id="mSs-m3-J8b"/>
+            </constraints>
+            <point key="canvasLocation" x="127.48091603053435" y="94.366197183098592"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_alert_add_event" width="103" height="91"/>
+        <namedColor name="grey_off">
+            <color red="0.79600000381469727" green="0.79600000381469727" blue="0.79600000381469727" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="gris_112">
+            <color red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_app">
+            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

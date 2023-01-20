@@ -3,83 +3,36 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>fr_FR</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleGetInfoString</key>
-	<string></string>
+	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>7.9.buildNumberNotSet</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>8.0.buildNumberNotSet</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>prefs</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>social.entourage.entourageios</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>entourage-staging</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb276507866203529</string>
+				<string>$(APP_URL_SCHEME)</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>buildNumberNotSet</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>2eca3faf46139913c216b9ee9cf8bee49e70fe20</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
-	<key>FacebookAppID</key>
-	<string>${FACEBOOK_ID}</string>
-	<key>FacebookDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -87,12 +40,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Pour ajouter des événements à votre calendrier</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Pour réaliser votre photo de profil.</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Pour envoyer des invitations au réseau Entourage</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Pour afficher les initiatives solidaires à proximité</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Pour afficher les initiatives solidaires à proximité</string>
 	<key>NSLocationUsageDescription</key>
@@ -105,21 +58,17 @@
 	<string>Pour afficher votre photo de profil.</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>SF-UI-Text-Bold.otf</string>
-		<string>SF-UI-Text-BoldItalic.otf</string>
-		<string>SF-UI-Text-Heavy.otf</string>
-		<string>SF-UI-Text-HeavyItalic.otf</string>
-		<string>SF-UI-Text-Light.otf</string>
-		<string>SF-UI-Text-LightItalic.otf</string>
-		<string>SF-UI-Text-Medium.otf</string>
-		<string>SF-UI-Text-MediumItalic.otf</string>
-		<string>SF-UI-Text-Regular.otf</string>
-		<string>SF-UI-Text-RegularItalic.otf</string>
-		<string>SF-UI-Text-Semibold.otf</string>
-		<string>SF-UI-Text-SemiboldItalic.otf</string>
-		<string>SF-UI-Text-Ultrathin.otf</string>
-		<string>SF-UI-Text-UltrathinItalic.otf</string>
+		<string>NunitoSans-Bold.ttf</string>
+		<string>NunitoSans-Italic.ttf</string>
+		<string>NunitoSans-Light.ttf</string>
+		<string>NunitoSans-Regular.ttf</string>
+		<string>NunitoSans-SemiBold.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Quicksand-Bold.ttf</string>
 	</array>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -127,16 +76,16 @@
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>EntourageLaunchScreen</string>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDarkContent</string>
 	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~iphone</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>

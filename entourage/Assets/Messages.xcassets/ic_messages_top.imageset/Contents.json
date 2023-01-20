@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_messages_top.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

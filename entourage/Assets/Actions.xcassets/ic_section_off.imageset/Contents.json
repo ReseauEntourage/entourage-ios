@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_section_off.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_error_mini.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
