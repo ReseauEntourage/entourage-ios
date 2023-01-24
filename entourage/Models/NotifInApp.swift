@@ -78,6 +78,10 @@ struct NotifInApp:Codable {
         
         return (dateStr)
     }
+    
+    func getDurationFromNow() -> String {
+        return (Utils.formatDateAgo(date: Utils.getDateFromWSDateString(createdAt)))
+    }
 }
 
 

@@ -98,6 +98,33 @@ import UIKit
         return correctPhone
     }
     
+    static func formatDateAgo(date: Date) -> String {
+        
+        let now = Date()
+        let duration = now.timeIntervalSince(date)
+        let minutes = Int(duration / 60)
+        let hours = minutes / 60
+        let days = hours / 24
+        let weeks = days/7
+        let months = weeks/4
+
+        switch true {
+        case months > 0:
+            return String(format:"duration_month".localized,months)
+        case weeks > 0:
+            return String(format:"duration_weeks".localized,weeks)
+        case days > 0:
+            return String(format:"duration_days".localized,days)
+        case hours > 0:
+            return String(format:"duration_hours".localized,hours)
+        case minutes > 0:
+            return String(format:"duration_minutes".localized,minutes)
+        default:
+            return "il y a quelques secondes"
+        }
+    }
+
+    
     static func getDateFromWSDateString(_ dateStr:String?) -> Date {
         guard let dateStr = dateStr else {
             return Date()
