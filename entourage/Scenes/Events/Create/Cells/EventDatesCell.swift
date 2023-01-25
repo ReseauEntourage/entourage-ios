@@ -61,6 +61,7 @@ class EventDatesCell: UITableViewCell {
         if #available(iOS 13.4, *) {
             pickerTimeStartView.preferredDatePickerStyle = .wheels
         }
+        pickerDateView.minimumDate = Date()
         
         setupPickerDayMonthView(textView: ui_tf_time_start, validateSelector: #selector(validateTimeStart), cancelSelector: #selector(cancelTimeStart), datePicker: pickerTimeStartView)
         ui_tf_time_start.delegate = self
