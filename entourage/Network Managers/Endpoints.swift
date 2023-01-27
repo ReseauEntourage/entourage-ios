@@ -41,13 +41,13 @@ let kAPIJoinNeighborhood = "neighborhoods/%@/users?token=%@"
 let kAPILeaveNeighborhood = "neighborhoods/%@/users/%@?token=%@"
 let kAPIReportNeighborhood = "neighborhoods/%@/report?token=%@"
 let kAPIGetNeighborhoodUsers = "neighborhoods/%@/users?token=%@"
-let kAPIGetNeighborhoodPostsMessage = "neighborhoods/%@/chat_messages?token=%@&page=%d&per=%d"
+let kAPIGetNeighborhoodPostsMessage = "neighborhoods/%@/chat_messages?token=%@&page=%d&per=%d&image_size=high"
 
 let kAPIPostNeighborhoodPostMessage = "neighborhoods/%@/chat_messages?token=%@"
 let kAPIGetNeighborhoodMessages = "neighborhoods/%@/chat_messages/%@/comments?token=%@"
 let kAPIReportPostNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token=%@"
 let kAPIReportPostCommentNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token=%@"
-let kAPIGetNeighborhoodPostMessage = "neighborhoods/%@/chat_messages/%@?token=%@"
+let kAPIGetNeighborhoodPostMessage = "neighborhoods/%@/chat_messages/%@?token=%@&image_size=high"
 
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
@@ -84,7 +84,7 @@ let kAPIReportPostEvent = "outings/%@/chat_messages/%@/report?token=%@"
 let kAPIReportPostCommentEvent = "outings/%@/chat_messages/%@/report?token=%@"
 let kAPIPostOutingPostMessage = "outings/%@/chat_messages?token=%@"
 let kAPIGetOutingMessages = "outings/%@/chat_messages/%@/comments?token=%@"
-let kAPIGetOutingPostMessage = "outings/%@/chat_messages/%@?token=%@"
+let kAPIGetOutingPostMessage = "outings/%@/chat_messages/%@?token=%@&image_size=high"
 
 //Actions
 let kAPIGetContrib = "contributions/%d?token=%@"

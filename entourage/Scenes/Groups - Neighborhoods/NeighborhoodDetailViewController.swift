@@ -579,6 +579,10 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
+    func showImage(imageUrl: URL?, postId: Int) {
+        getDetailPost(neighborhoodId: self.neighborhoodId, parentPostId: postId)
+    }
+    
     func signalPost(postId: Int) {
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.groupId = neighborhoodId
@@ -620,22 +624,6 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
         }
     }
     
-    func showImage(imageUrl:URL?) {
-        guard let imageUrl = imageUrl else {
-            return
-        }
-        
-        ui_scrollview.zoomScale = 1.0
-        
-        ui_iv_preview.sd_setImage(with: imageUrl, placeholderImage: nil, options: .refreshCached) { _image, _error, _type, _ur in
-            if _error != nil {
-                self.ui_view_full_image.isHidden = true
-            }
-            else {
-                self.ui_view_full_image.isHidden = false
-            }
-        }
-    }
 }
 
 //MARK: - NeighborhoodEventsTableviewCellDelegate -
@@ -744,3 +732,31 @@ protocol NeighborhoodDetailViewControllerDelegate: AnyObject {
     func refreshNeighborhoodModified()
 }
 
+extension NeighborhoodDetailViewController{
+    func getDetailPost(neighborhoodId:Int, parentPostId:Int){
+        NeighborhoodService.getDetailPostMessage(neighborhoodId: neighborhoodId, parentPostId: parentPostId) { message, error in
+            if let _message = message {
+                self.setImageForView(message: _message)
+            }
+        }
+    }
+    func setImageForView(message:PostMessage){
+        guard let urlString = message.messageImageUrl else {
+            return
+        }
+        guard let imageUrl = URL(string: urlString) else {
+            return
+        }
+        
+        ui_scrollview.zoomScale = 1.0
+        
+        ui_iv_preview.sd_setImage(with: imageUrl, placeholderImage: nil, options: .refreshCached) { _image, _error, _type, _ur in
+            if _error != nil {
+                self.ui_view_full_image.isHidden = true
+            }
+            else {
+                self.ui_view_full_image.isHidden = false
+            }
+        }
+    }
+}
