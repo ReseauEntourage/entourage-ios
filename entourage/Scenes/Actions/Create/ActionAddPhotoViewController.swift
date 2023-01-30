@@ -84,12 +84,15 @@ class ActionAddPhotoViewController: BasePopViewController {
     
     //MARK: - IBActions -
     @IBAction func action_take_photo(_ sender: Any) {
-        checkCameraAccess()
+        DispatchQueue.main.async {
+            self.checkCameraAccess()
+        }
     }
     
     @IBAction func action_take_from_gallery(_ sender: Any) {
         showPicker(sourceType: .photoLibrary)
     }
+    
     
     func checkCameraAccess() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
