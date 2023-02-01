@@ -120,7 +120,7 @@ workflows:
     - deploy-to-bitrise-io:
         inputs:
         - notify_user_groups: none
-        - deploy_path: BITRISE_DSYM_PATH
+        - deploy_path: $BITRISE_DSYM_PATH
     - deploy-to-itunesconnect-application-loader:
         inputs:
         - password: $FASTLANE_PASSWORD
