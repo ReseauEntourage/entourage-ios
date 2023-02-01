@@ -44,7 +44,6 @@ class HomeHelpCell: UITableViewCell {
     func populateCell(name:String, subtitle:String, imageUrl:String?, imagenamePicto:String?, bottomMargin:CGFloat? = nil) {
         ui_title.text = name
         ui_subtitle.text = subtitle
-        
         if let bottomMargin = bottomMargin {
             ui_constraint_bottom_margin.constant = bottomMargin
         }
