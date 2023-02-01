@@ -123,6 +123,7 @@ workflows:
         - itunescon_user: $APPLE_ID
     - firebase-dsym-upload@2:
         inputs:
+        - fdu_fabric_location: ${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols
         - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
     - deploy-to-bitrise-io:
         is_always_run: false
