@@ -130,13 +130,16 @@ workflows:
         - fdu_fabric_location: ${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols
         - fdu_logging: "yes"
         - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
-    - cache-push: {}
+    - cache-push:
+        is_always_run: true
     - xcode-build-version:
         inputs:
         - info_plist_path: ./entourage/entourage-Info.plist
+        is_always_run: true
     - git-tag:
         inputs:
         - tag: Ent_TestFlight_$XBV_PROJECT_VERSION
+        is_always_run: true
     - slack:
         inputs:
         - channel: '#iosdev'
