@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import ActiveLabel
+
+extension UILabel{
+    
+    func makeClickable(withTarget target: Any?, andAction action: Selector?) {
+            self.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: target, action: action)
+            self.addGestureRecognizer(tapGesture)
+        }
+    
+}

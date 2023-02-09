@@ -34,6 +34,17 @@ extension String {
         }
     }
     
+    func extractUrlFromChain()-> URL?{
+        let chains = self.split(separator: " ")
+        for chain in chains{
+            if chain.contains("https"){
+                if let url = URL(string: String(chain)){
+                    return url
+                }
+            }
+        }
+        return nil
+    }
 }
 
 //MARK: - Date -

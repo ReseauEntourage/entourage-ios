@@ -151,6 +151,16 @@ extension NeighborhoodDetailOnlyViewController: UITableViewDataSource, UITableVi
 
 //MARK: - NeighborhoodDetailTopCellDelegate -
 extension NeighborhoodDetailOnlyViewController: NeighborhoodDetailTopCellDelegate {
+    func showWebUrl(urlString: String) {
+        if let url = urlString.extractUrlFromChain(){
+            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+        }
+    }
+    
+    func showWebUrl(urlString: URL) {
+        WebLinkManager.openUrl(url: urlString, openInApp: true, presenterViewController: self)
+    }
+    
     func showMembers() {
         if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
             vc.neighborhood = neighborhood

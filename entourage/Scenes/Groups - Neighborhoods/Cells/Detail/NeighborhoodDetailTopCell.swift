@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class NeighborhoodDetailTopCell: UITableViewCell {
     
@@ -26,7 +27,7 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     @IBOutlet weak var ui_lbl_bt_join: UILabel!
     
     @IBOutlet weak var ui_lbl_about_title: UILabel!
-    @IBOutlet weak var ui_lbl_about_desc: UILabel!
+    @IBOutlet weak var ui_lbl_about_desc: ActiveLabel!
     
     @IBOutlet weak var ui_taglist_view: TagListView!
     
@@ -122,7 +123,8 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         
         ui_title.text = neighborhood.name
         ui_lbl_about_desc?.text = neighborhood.aboutGroup
-        
+        ui_lbl_about_desc?.makeClickable(withTarget: self, andAction: #selector(clickedLabel))
+
         let currentUserId = UserDefaults.currentUser?.sid
         if isFollowingGroup {
             ui_lbl_bt_join.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
@@ -175,6 +177,9 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         }
     }
     
+    @objc func clickedLabel(){
+        self.delegate?.showWebUrl(urlString: ui_lbl_about_desc.text!)
+    }
     
     @IBAction func action_show_members(_ sender: Any) {
         delegate?.showMembers()
@@ -195,6 +200,7 @@ protocol NeighborhoodDetailTopCellDelegate : AnyObject {
     func showMembers()
     func joinLeave()
     func showDetailFull()
+    func showWebUrl(urlString:String)
 }
 
 

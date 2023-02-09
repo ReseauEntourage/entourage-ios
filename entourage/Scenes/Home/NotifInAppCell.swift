@@ -25,11 +25,11 @@ class NotifInAppCell: UITableViewCell {
         ui_image.layer.cornerRadius = ui_image.frame.width / 2
     }
 
-    func populateCell(title:String? ,date:String ,imageUrl:String?, isUnread:Bool) {
+    func populateCell(title:String? ,date:String ,imageUrl:String?, isUnread:Bool, instanceString : InstanceType) {
         ui_title.text = title
         ui_date.text = date
         if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
-            ui_image.sd_setImage(with: url, placeholderImage:UIImage(named: "ic_notif_placeholder"))
+            ui_image.sd_setImage(with: url, placeholderImage:UIImage(named: DeepLinkManager.setImage(notificationInstanceType: instanceString)))
         }
         else {
             ui_image.image = UIImage(named: "ic_notif_placeholder")
