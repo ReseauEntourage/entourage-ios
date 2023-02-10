@@ -139,7 +139,12 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_lbl_nb_members.text = membersCount
         
         ui_title.text = event.title
-        ui_lbl_about_desc?.text = event.descriptionEvent
+        if let _desc = event.descriptionEvent {
+            ui_lbl_about_desc?.setTextWithLinksDetected(_desc, andLinkHandler: { url in
+                delegate.showWebUrl(url: url)
+            })
+        }
+
         
         if let placeLimit = event.metadata?.place_limit, placeLimit > 0 {
             ui_view_place_limit.isHidden = false
@@ -256,4 +261,5 @@ protocol EventDetailTopCellDelegate : AnyObject {
     func joinLeave()
     func showDetailFull()
     func showPlace()
+    func showWebUrl(url:URL)
 }

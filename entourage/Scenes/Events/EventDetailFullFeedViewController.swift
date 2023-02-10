@@ -136,6 +136,10 @@ extension EventDetailFullFeedViewController: UITableViewDataSource, UITableViewD
 
 //MARK: - EventDetailFullDelegate -
 extension EventDetailFullFeedViewController: EventDetailFullDelegate {
+    func showWebviewUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+    }
+    
     func showMembers() {
         if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
             vc.event = event

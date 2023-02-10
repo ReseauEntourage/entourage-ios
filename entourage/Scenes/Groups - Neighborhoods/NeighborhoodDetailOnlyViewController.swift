@@ -157,8 +157,8 @@ extension NeighborhoodDetailOnlyViewController: NeighborhoodDetailTopCellDelegat
         }
     }
     
-    func showWebUrl(urlString: URL) {
-        WebLinkManager.openUrl(url: urlString, openInApp: true, presenterViewController: self)
+    func showWebUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }
     
     func showMembers() {

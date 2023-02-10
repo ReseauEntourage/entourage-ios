@@ -554,10 +554,8 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
 
 //MARK: - NeighborhoodDetailTopCellDelegate -
 extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
-    func showWebUrl(urlString: String) {
-        if let url = urlString.extractUrlFromChain(){
-            WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
-        }
+    func showWebUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }
     
     func showMembers() {
@@ -586,6 +584,10 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
+    func showWebviewUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+    }
+    
     func showImage(imageUrl: URL?, postId: Int) {
         getDetailPost(neighborhoodId: self.neighborhoodId, parentPostId: postId)
     }

@@ -74,7 +74,6 @@ struct DeepLinkManager {
         case .none:
             return "ic_notif_placeholder"
         }
-        return "ic_notif_placeholder"
     }
     
     

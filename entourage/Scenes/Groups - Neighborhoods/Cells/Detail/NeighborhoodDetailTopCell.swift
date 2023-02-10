@@ -122,8 +122,13 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         ui_lbl_nb_members.text = membersCount
         
         ui_title.text = neighborhood.name
-        ui_lbl_about_desc?.text = neighborhood.aboutGroup
-        ui_lbl_about_desc?.makeClickable(withTarget: self, andAction: #selector(clickedLabel))
+        //ui_lbl_about_desc?.text = neighborhood.aboutGroup
+        if let _desc = neighborhood.aboutGroup{
+            ui_lbl_about_desc?.setTextWithLinksDetected(_desc, andLinkHandler: { url in
+                delegate.showWebUrl(url: url)
+            })
+
+        }
 
         let currentUserId = UserDefaults.currentUser?.sid
         if isFollowingGroup {
@@ -177,9 +182,6 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         }
     }
     
-    @objc func clickedLabel(){
-        self.delegate?.showWebUrl(urlString: ui_lbl_about_desc.text!)
-    }
     
     @IBAction func action_show_members(_ sender: Any) {
         delegate?.showMembers()
@@ -200,7 +202,7 @@ protocol NeighborhoodDetailTopCellDelegate : AnyObject {
     func showMembers()
     func joinLeave()
     func showDetailFull()
-    func showWebUrl(urlString:String)
+    func showWebUrl(url:URL)
 }
 
 

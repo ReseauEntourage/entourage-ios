@@ -655,6 +655,10 @@ extension EventDetailFeedViewController: MJNavBackViewDelegate {
 
 //MARK: - EventDetailTopCellDelegate -
 extension EventDetailFeedViewController:EventDetailTopCellDelegate {
+    func showWebUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+    }
+    
     func showMembers() {
         if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
             vc.event = event
@@ -690,6 +694,10 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
+    func showWebviewUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+    }
+    
     func showImage(imageUrl: URL?, postId: Int) {
         self.getDetailPost(eventId: self.eventId, parentPostId: postId)
     }

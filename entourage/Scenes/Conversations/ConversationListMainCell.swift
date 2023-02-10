@@ -45,6 +45,11 @@ class ConversationListMainCell: UITableViewCell {
     func populateCell(message:Conversation, delegate:ConversationListMainCellDelegate, position:Int) {
         ui_username.text = message.title
         ui_role.text = message.getRolesWithPartnerFormated()
+        if let _message = message.getLastMessage {
+            ui_detail_message.setTextWithLinksDetected(_message) { url in
+                delegate.showWebUrl(url:url)
+            }
+        }
         ui_detail_message.text = message.getLastMessage
         ui_date.text = message.createdDateFormatted
         
@@ -99,5 +104,6 @@ class ConversationListMainCell: UITableViewCell {
 //MARK: - Protocol  -
 protocol ConversationListMainCellDelegate:AnyObject {
     func showUserDetail(_ position:Int)
+    func showWebUrl(url:URL)
 }
 

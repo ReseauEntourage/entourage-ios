@@ -232,8 +232,11 @@ class EventDetailFullCell: UITableViewCell {
         
         ui_lbl_nb_members.text = membersCount
         
-        
-        ui_lbl_about_desc?.text = event.descriptionEvent
+        if let _desc = event.descriptionEvent {
+            ui_lbl_about_desc.setTextWithLinksDetected(_desc) { url in
+                delegate.showWebviewUrl(url:url)
+            }
+        }
         
         if let placeLimit = event.metadata?.place_limit, placeLimit > 0 {
             ui_view_place_limit.isHidden = false
@@ -367,4 +370,5 @@ protocol EventDetailFullDelegate:AnyObject {
     func showLocation()
     func leaveEvent()
     func addToCalendar()
+    func showWebviewUrl(url:URL)
 }
