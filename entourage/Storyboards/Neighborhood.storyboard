@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -585,7 +585,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_neighb_home" translatesAutoresizingMaskIntoConstraints="NO" id="Iez-lm-a7b">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_neighb_valid" translatesAutoresizingMaskIntoConstraints="NO" id="Iez-lm-a7b">
                                         <rect key="frame" x="290" y="15" width="92" height="73"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="92" id="D0O-AN-OXe"/>
@@ -2249,7 +2249,6 @@
         <image name="ic_cgu_group" width="25" height="25"/>
         <image name="ic_close_orange_v8" width="20" height="20"/>
         <image name="ic_header_create" width="82" height="73"/>
-        <image name="ic_neighb_home" width="91" height="66"/>
         <image name="ic_plus_white" width="19" height="19"/>
         <image name="ic_send_msg" width="18" height="19"/>
         <image name="ic_settings" width="33" height="33"/>
