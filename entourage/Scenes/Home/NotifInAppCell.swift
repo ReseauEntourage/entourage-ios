@@ -30,6 +30,8 @@ class NotifInAppCell: UITableViewCell {
         ui_date.text = date
         if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
             ui_image.sd_setImage(with: url, placeholderImage:UIImage(named: DeepLinkManager.setImage(notificationInstanceType: instanceString)))
+        }else{
+            ui_image.image = UIImage(named: DeepLinkManager.setImage(notificationInstanceType: instanceString))
         }
         
         if !isUnread {

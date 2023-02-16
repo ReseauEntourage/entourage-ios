@@ -655,6 +655,10 @@ extension EventDetailFeedViewController: MJNavBackViewDelegate {
 
 //MARK: - EventDetailTopCellDelegate -
 extension EventDetailFeedViewController:EventDetailTopCellDelegate {
+    func showUser() {
+        
+    }
+    
     func showWebUrl(url: URL) {
         WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }

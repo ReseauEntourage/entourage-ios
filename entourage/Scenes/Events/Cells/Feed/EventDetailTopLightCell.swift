@@ -38,8 +38,11 @@ class EventDetailTopLightCell: UITableViewCell {
     @IBOutlet weak var ui_img_bt_more: UIImageView!
     @IBOutlet weak var ui_lbl_bt_more: UILabel!
     
+    @IBOutlet weak var ui_view_organised_by: UIView!
     weak var delegate:EventDetailTopCellDelegate? = nil
     
+    @IBOutlet weak var ui_label_organised_by: UILabel!
+    @IBOutlet weak var ui_btn_organisez_by: UIButton!
     let cornerRadiusTag:CGFloat = 15
     
     class var identifier:String {return String(describing: self) }
@@ -161,23 +164,12 @@ class EventDetailTopLightCell: UITableViewCell {
             ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
         }
         
-//        if let _distance = event.distance {
-//            let  _addressNameWithDistance = String.init(format: "event_places_distance".localized,_addressName, _distance.displayBaseStringDistance())
-//            if event.isCanceled() {
-//                ui_location_name.text = _addressNameWithDistance
-//            }
-//            else {
-//                ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressNameWithDistance, textColor: .black)
-//            }
-//
-//        }else{
-//            if event.isCanceled() {
-//                ui_location_name.text = _addressName
-//            }
-//            else {
-//                ui_location_name.attributedText = Utils.formatStringUnderline(textString: _addressName, textColor: .black)
-//            }
-//        }
+        if let _author = event.author {
+            ui_label_organised_by.text = "event_top_cell_organised_by".localized + _author.displayName
+            ui_view_organised_by.isHidden = false
+        }else {
+            ui_view_organised_by.isHidden = true
+        }
 
     }
     
@@ -192,6 +184,11 @@ class EventDetailTopLightCell: UITableViewCell {
         else {
             image.image = UIImage.init(named: "placeholder_user")
         }
+    }
+    
+
+    @IBAction func action_show_user(_ sender: Any) {
+        delegate?.showUser()
     }
     
     @IBAction func action_show_members(_ sender: Any) {

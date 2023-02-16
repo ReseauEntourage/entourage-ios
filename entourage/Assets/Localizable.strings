@@ -789,6 +789,11 @@
 
 /** Events*/
 "passed_event" = "Événements passés";
+
+
+//EVENT TOP Cell
+"event_top_cell_organised_by" = "Organisé par "; 
+
 //Create
 
 "eventCreatePopCloseBackTitle" = "Attention";

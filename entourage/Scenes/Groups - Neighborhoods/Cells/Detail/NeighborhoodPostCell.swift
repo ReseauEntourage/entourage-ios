@@ -70,6 +70,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
         self.postMessage = message
+        print("eho " , self.postMessage.user?.partner?.name)
         self.delegate = delegate
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
