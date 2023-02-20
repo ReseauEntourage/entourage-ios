@@ -33,14 +33,14 @@
                         <rect key="frame" x="2" y="16" width="426" height="475"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qPp-vp-wdq">
-                                <rect key="frame" x="28" y="20" width="25" height="25"/>
+                                <rect key="frame" x="28" y="20" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="K8z-Gr-I6I"/>
-                                    <constraint firstAttribute="width" constant="25" id="rXb-7v-ZSh"/>
+                                    <constraint firstAttribute="height" constant="30" id="K8z-Gr-I6I"/>
+                                    <constraint firstAttribute="width" constant="30" id="rXb-7v-ZSh"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBT-Y6-NRe">
-                                <rect key="frame" x="61" y="16" width="74.5" height="33.5"/>
+                                <rect key="frame" x="66" y="12.5" width="74.5" height="45.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Username" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kif-wy-n4F">
                                         <rect key="frame" x="0.0" y="0.0" width="74.5" height="19"/>
@@ -48,8 +48,14 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBP-ld-rgY">
-                                        <rect key="frame" x="0.0" y="21" width="74.5" height="12.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Ambassadeur" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mR-hh-flM">
+                                        <rect key="frame" x="0.0" y="19" width="74.5" height="14"/>
+                                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="10"/>
+                                        <color key="textColor" name="orange_app"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" misplaced="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBP-ld-rgY">
+                                        <rect key="frame" x="0.0" y="21" width="75" height="27"/>
                                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="9"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -57,25 +63,28 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="1mR-hh-flM" firstAttribute="leading" secondItem="kif-wy-n4F" secondAttribute="leading" id="3Ny-Vq-2hF"/>
                                     <constraint firstItem="kif-wy-n4F" firstAttribute="leading" secondItem="JBT-Y6-NRe" secondAttribute="leading" id="87G-mi-bHu"/>
                                     <constraint firstAttribute="bottom" secondItem="ZBP-ld-rgY" secondAttribute="bottom" id="9J0-U3-jmf"/>
                                     <constraint firstItem="ZBP-ld-rgY" firstAttribute="leading" secondItem="kif-wy-n4F" secondAttribute="leading" id="9VP-W3-3Zz"/>
                                     <constraint firstAttribute="trailing" secondItem="ZBP-ld-rgY" secondAttribute="trailing" id="C5a-bR-t53"/>
                                     <constraint firstItem="kif-wy-n4F" firstAttribute="top" secondItem="JBT-Y6-NRe" secondAttribute="top" id="IKp-W6-bLK"/>
-                                    <constraint firstItem="ZBP-ld-rgY" firstAttribute="top" secondItem="kif-wy-n4F" secondAttribute="bottom" constant="2" id="KDb-Ch-mUJ"/>
+                                    <constraint firstItem="1mR-hh-flM" firstAttribute="trailing" secondItem="kif-wy-n4F" secondAttribute="trailing" id="LxK-tV-MmK"/>
+                                    <constraint firstItem="1mR-hh-flM" firstAttribute="top" secondItem="kif-wy-n4F" secondAttribute="bottom" id="OLg-zp-3YA"/>
                                     <constraint firstItem="ZBP-ld-rgY" firstAttribute="leading" secondItem="JBT-Y6-NRe" secondAttribute="leading" id="ogW-ej-01M"/>
+                                    <constraint firstItem="ZBP-ld-rgY" firstAttribute="top" secondItem="1mR-hh-flM" secondAttribute="bottom" id="p50-2B-sx7"/>
                                     <constraint firstAttribute="trailing" secondItem="kif-wy-n4F" secondAttribute="trailing" id="qMs-eJ-1uc"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koJ-PJ-1CY">
-                                <rect key="frame" x="28" y="20" width="107.5" height="25"/>
+                                <rect key="frame" x="28" y="20" width="112.5" height="30"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="action_show_user:" destination="bPP-EV-zW9" eventType="touchUpInside" id="dgD-gX-cMQ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="753" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJs-gC-gEm">
-                                <rect key="frame" x="28" y="70" width="292" height="41"/>
+                                <rect key="frame" x="28" y="75" width="292" height="41"/>
                                 <string key="text">Bienvenue à toi cher danseur !
 Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
@@ -83,20 +92,20 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_photo_group" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-dD-e9j">
-                                <rect key="frame" x="28" y="127" width="370" height="184"/>
+                                <rect key="frame" x="28" y="132" width="370" height="184"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="184" id="tOZ-7N-3p2"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jsH-FQ-hzp">
-                                <rect key="frame" x="28" y="127" width="370" height="184"/>
+                                <rect key="frame" x="28" y="132" width="370" height="184"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="action_show_image:" destination="bPP-EV-zW9" eventType="touchUpInside" id="bvD-nJ-xD6"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="20f-3G-Kdi">
-                                <rect key="frame" x="28" y="365" width="370" height="48"/>
+                                <rect key="frame" x="28" y="370" width="370" height="48"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agT-ek-9AZ">
                                         <rect key="frame" x="0.0" y="0.0" width="316" height="48"/>
@@ -183,14 +192,14 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_message_neighborhood" translatesAutoresizingMaskIntoConstraints="NO" id="9eH-ug-ufT">
-                                <rect key="frame" x="285.5" y="332" width="16" height="16"/>
+                                <rect key="frame" x="285.5" y="337" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="Go9-6D-fdD"/>
                                     <constraint firstAttribute="height" constant="16" id="uSB-oZ-jr9"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E8Y-4D-rfb">
-                                <rect key="frame" x="285.5" y="324.5" width="112.5" height="31"/>
+                                <rect key="frame" x="285.5" y="329.5" width="112.5" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="gzd-0c-Mg2"/>
                                 </constraints>
@@ -200,7 +209,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="x commentaires" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLZ-kX-Eih">
-                                <rect key="frame" x="305.5" y="331" width="92.5" height="18"/>
+                                <rect key="frame" x="305.5" y="336" width="92.5" height="18"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -272,6 +281,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_date" destination="ZBP-ld-rgY" id="fOU-Zf-CL0"/>
                 <outlet property="ui_image_post" destination="h0R-dD-e9j" id="CJc-X3-miT"/>
                 <outlet property="ui_iv_user" destination="qPp-vp-wdq" id="zZW-qn-gUr"/>
+                <outlet property="ui_label_ambassador" destination="1mR-hh-flM" id="2iE-y4-JlW"/>
                 <outlet property="ui_lb_chat" destination="n9K-Nf-KyW" id="KNq-Tf-k6w"/>
                 <outlet property="ui_username" destination="kif-wy-n4F" id="Nf0-v5-8Gu"/>
                 <outlet property="ui_view_bt_send" destination="dnV-Yy-csW" id="YZY-Xy-qBa"/>

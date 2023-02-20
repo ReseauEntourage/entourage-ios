@@ -197,6 +197,30 @@ extension UILabel {
     }
 }
 
+extension UIView {
+    @IBInspectable var cradius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+    }
+}
+
+extension UILabel {
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+    }
+}
+
 extension UITextField {
     func setupFontAndColor(style:MJTextFontColorStyle) {
         font = style.font
@@ -248,5 +272,9 @@ extension UIView {
     func setVisibilityGone(){
         self.isHidden = true
         self.heightAnchor.constraint(equalToConstant: 0).isActive = true
+    }
+    func setVisibilityVisible(height:CGFloat) {
+        self.isHidden = false
+        self.heightAnchor.constraint(equalToConstant: height).isActive = true
     }
 }

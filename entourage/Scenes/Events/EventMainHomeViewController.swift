@@ -453,6 +453,7 @@ class EventMainHomeViewController: UIViewController {
     }
     
     func setupViews() {
+        self.setMyFirst()
         ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))
         ui_location_filter.text = currentFilter.getFilterButtonString()
         ui_label_title.text = "event_main_page_title".localized

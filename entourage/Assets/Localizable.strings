@@ -653,6 +653,8 @@
 /*************
  * Group detail
  */
+"title_is_ambassador" = "Ambassadeur •" ;
+"title_is_admin" = "Administrateur •" ;
 
 "neighborhood_detail_button_join_member" = "Membre";
 "neighborhood_detail_button_join_join" = "Rejoindre";
@@ -789,6 +791,12 @@
 
 /** Events*/
 "passed_event" = "Événements passés";
+
+
+//EVENT TOP Cell
+"event_top_cell_organised_by" = "Organisé par ";
+"event_top_cell_asso" = "Événement %@" ;
+
 //Create
 
 "eventCreatePopCloseBackTitle" = "Attention";

@@ -40,7 +40,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AUs-SL-7c2">
-                                <rect key="frame" x="61" y="16" width="74.5" height="33.5"/>
+                                <rect key="frame" x="61" y="10.5" width="74.5" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Username" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvS-4j-hdk">
                                         <rect key="frame" x="0.0" y="0.0" width="74.5" height="19"/>
@@ -49,9 +49,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DD4-YG-5Re">
-                                        <rect key="frame" x="0.0" y="21" width="74.5" height="12.5"/>
+                                        <rect key="frame" x="0.0" y="31.5" width="74.5" height="12.5"/>
                                         <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="9"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" text="Ambassadeur" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIX-yH-rSG">
+                                        <rect key="frame" x="0.0" y="19" width="74.5" height="12.5"/>
+                                        <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="9"/>
+                                        <color key="textColor" name="orange_app"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -60,10 +66,11 @@
                                     <constraint firstAttribute="bottom" secondItem="DD4-YG-5Re" secondAttribute="bottom" id="8Cz-sR-adz"/>
                                     <constraint firstAttribute="trailing" secondItem="jvS-4j-hdk" secondAttribute="trailing" id="9OY-15-M5b"/>
                                     <constraint firstItem="DD4-YG-5Re" firstAttribute="leading" secondItem="jvS-4j-hdk" secondAttribute="leading" id="9tq-1L-sq5"/>
+                                    <constraint firstItem="dIX-yH-rSG" firstAttribute="top" secondItem="jvS-4j-hdk" secondAttribute="bottom" id="RhX-9W-4N0"/>
                                     <constraint firstItem="jvS-4j-hdk" firstAttribute="top" secondItem="AUs-SL-7c2" secondAttribute="top" id="eTP-zu-GNH"/>
                                     <constraint firstItem="jvS-4j-hdk" firstAttribute="leading" secondItem="AUs-SL-7c2" secondAttribute="leading" id="gRx-uh-jCV"/>
-                                    <constraint firstItem="DD4-YG-5Re" firstAttribute="top" secondItem="jvS-4j-hdk" secondAttribute="bottom" constant="2" id="gzV-L6-leC"/>
                                     <constraint firstAttribute="trailing" secondItem="DD4-YG-5Re" secondAttribute="trailing" id="kdp-d3-SCY"/>
+                                    <constraint firstItem="DD4-YG-5Re" firstAttribute="top" secondItem="dIX-yH-rSG" secondAttribute="bottom" id="wjH-C0-tVF"/>
                                     <constraint firstItem="DD4-YG-5Re" firstAttribute="leading" secondItem="AUs-SL-7c2" secondAttribute="leading" id="zO9-Wr-eTg"/>
                                 </constraints>
                             </view>
@@ -255,6 +262,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_comments_nb" destination="dwy-yw-Hbe" id="TEU-yM-3Dq"/>
                 <outlet property="ui_date" destination="DD4-YG-5Re" id="yRH-ox-ru9"/>
                 <outlet property="ui_iv_user" destination="qg8-dq-Kwr" id="anK-3t-kNL"/>
+                <outlet property="ui_label_ambassador" destination="dIX-yH-rSG" id="Iz2-Pq-i0l"/>
                 <outlet property="ui_lb_chat" destination="Fmr-ET-TCV" id="T9y-bE-vjB"/>
                 <outlet property="ui_username" destination="jvS-4j-hdk" id="n5b-AX-E7F"/>
                 <outlet property="ui_view_bt_send" destination="7ah-Rf-RzG" id="2I0-Kq-Lz1"/>
