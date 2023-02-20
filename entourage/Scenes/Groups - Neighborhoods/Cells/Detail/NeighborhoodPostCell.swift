@@ -26,6 +26,8 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_view_bt_send: UIView!
     @IBOutlet weak var ui_lb_chat: UILabel!
     
+    @IBOutlet weak var ui_label_ambassador: UILabel!
+    
     @IBOutlet weak var ui_btn_signal_post: UIButton!
     
     class var identifier: String {
@@ -70,7 +72,6 @@ class NeighborhoodPostCell: UITableViewCell {
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
         self.postMessage = message
-        print("eho " , self.postMessage.user?.partner?.name)
         self.delegate = delegate
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
@@ -110,6 +111,26 @@ class NeighborhoodPostCell: UITableViewCell {
         }
         else {
             ui_image_post?.image = UIImage.init(named: "placeholder_post")
+        }
+        
+        var tagString = ""
+        if let _user = message.user {
+            if _user.isAdmin() {
+                tagString = tagString + "title_is_admin".localized
+            }else if _user.isAmbassador() {
+                tagString = tagString + "title_is_ambassador".localized
+            }else if let _partner = _user.partner {
+                tagString = tagString + _partner.name
+            }
+        }
+        if tagString.isEmpty {
+            ui_label_ambassador.isHidden = true
+        }else{
+            if tagString.last == "•" {
+                tagString.removeLast()
+            }
+            ui_label_ambassador.isHidden = false
+            ui_label_ambassador.text = tagString
         }
     }
 

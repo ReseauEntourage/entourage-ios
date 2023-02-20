@@ -41,6 +41,11 @@ class EventDetailTopLightCell: UITableViewCell {
     @IBOutlet weak var ui_view_organised_by: UIView!
     weak var delegate:EventDetailTopCellDelegate? = nil
     
+    @IBOutlet weak var ui_view_association: UIView!
+    
+    @IBOutlet weak var ui_label_association: UILabel!
+    
+    
     @IBOutlet weak var ui_label_organised_by: UILabel!
     @IBOutlet weak var ui_btn_organisez_by: UIButton!
     let cornerRadiusTag:CGFloat = 15
@@ -167,8 +172,16 @@ class EventDetailTopLightCell: UITableViewCell {
         if let _author = event.author {
             ui_label_organised_by.text = "event_top_cell_organised_by".localized + _author.displayName
             ui_view_organised_by.isHidden = false
+            if let _asso = _author.partner {
+                ui_view_association.isHidden = false
+                ui_label_association.text = String(format: "event_top_cell_asso".localized, _asso.name)
+            }else{
+                ui_view_association.isHidden = true
+            }
+            
         }else {
             ui_view_organised_by.isHidden = true
+            ui_view_association.isHidden = true
         }
 
     }
