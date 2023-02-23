@@ -116,11 +116,13 @@ class NeighborhoodPostCell: UITableViewCell {
         var tagString = ""
         if let _user = message.user {
             if _user.isAdmin() {
-                tagString = tagString + "title_is_admin".localized
-            }else if _user.isAmbassador() {
-                tagString = tagString + "title_is_ambassador".localized
-            }else if let _partner = _user.partner {
-                tagString = tagString + _partner.name
+                tagString = tagString + "title_is_admin".localized + " •"
+            }
+            if _user.isAmbassador() {
+                tagString = tagString + "title_is_ambassador".localized + " •"
+            }
+            if let _partner = _user.partner {
+                tagString = tagString + _partner.name + " •"
             }
         }
         if tagString.isEmpty {

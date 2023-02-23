@@ -288,8 +288,8 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Association name and maybe tag" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpy-nI-lMl">
-                                                <rect key="frame" x="8" y="0.0" width="334" height="20"/>
-                                                <color key="backgroundColor" name="orange_medium"/>
+                                                <rect key="frame" x="28" y="0.0" width="314" height="20"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" name="orange_app"/>
                                                 <nil key="highlightedColor"/>
@@ -300,14 +300,14 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" name="orange_medium"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Tpy-nI-lMl" firstAttribute="top" secondItem="DwY-20-5TL" secondAttribute="top" id="C1C-DY-Reo"/>
                                             <constraint firstAttribute="bottom" secondItem="Tpy-nI-lMl" secondAttribute="bottom" id="CKV-u8-hbZ"/>
                                             <constraint firstAttribute="bottom" secondItem="IcL-ha-FmW" secondAttribute="bottom" id="SLP-rJ-eLi"/>
                                             <constraint firstItem="IcL-ha-FmW" firstAttribute="top" secondItem="DwY-20-5TL" secondAttribute="top" id="fDb-n1-6YX"/>
                                             <constraint firstAttribute="trailing" secondItem="Tpy-nI-lMl" secondAttribute="trailing" constant="8" id="mA7-CG-irp"/>
-                                            <constraint firstItem="Tpy-nI-lMl" firstAttribute="leading" secondItem="DwY-20-5TL" secondAttribute="leading" constant="8" id="nBd-vn-dPH"/>
+                                            <constraint firstItem="Tpy-nI-lMl" firstAttribute="leading" secondItem="DwY-20-5TL" secondAttribute="leading" constant="28" id="nBd-vn-dPH"/>
                                             <constraint firstItem="IcL-ha-FmW" firstAttribute="leading" secondItem="DwY-20-5TL" secondAttribute="leading" id="uTN-OV-PhH"/>
                                             <constraint firstAttribute="trailing" secondItem="IcL-ha-FmW" secondAttribute="trailing" id="vkz-ca-KHI"/>
                                             <constraint firstAttribute="height" constant="20" id="vrz-jm-FWg"/>
@@ -488,9 +488,6 @@
         </namedColor>
         <namedColor name="orange_light_a50">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="orange_medium">
-            <color red="1" green="0.79607843137254897" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -636,7 +636,7 @@
  * Group / communauté
  */
 "neighborhood_main_page_title" = "Groupes";
-"neighborhood_main_page_button_myGroups" = "Je participe";
+"neighborhood_main_page_button_myGroups" = "Mes groupes";
 "neighborhood_main_page_button_discover" = "Je découvre";
 "neighborhoodInputSearch" = "Rechercher un groupe";
 "neighborhood_main_page_members" = "%d membres";

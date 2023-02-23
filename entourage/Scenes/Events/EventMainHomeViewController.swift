@@ -42,6 +42,7 @@ class EventMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_lbl_empty_subtitle_event: UILabel!
     @IBOutlet weak var ui_lbl_empty_title_event: UILabel!
     
+    @IBOutlet weak var uiBtnDiscover: UIButton!
     @IBOutlet weak var ui_arrow_show_empty: UIImageView!
     @IBOutlet weak var ui_view_empty_discover: UIView!
     @IBOutlet weak var ui_lbl_empty_title_discover: UILabel!
@@ -396,11 +397,11 @@ class EventMainHomeViewController: UIViewController {
         }
     }
     
-    @IBAction func action_clear_filters(_ sender: Any) {
-        self.currentFilter.resetToDefault()
-        self.ui_location_filter.text = currentFilter.getFilterButtonString()
-        self.getEventsDiscovered(isReloadFromTab: false, reloadOther: false)
-    }
+//    @IBAction func action_clear_filters(_ sender: Any) {
+//        self.currentFilter.resetToDefault()
+//        self.ui_location_filter.text = currentFilter.getFilterButtonString()
+//        self.getEventsDiscovered(isReloadFromTab: false, reloadOther: false)
+//    }
     
     //MARK: - Methods -
     func changeTabSelection() {

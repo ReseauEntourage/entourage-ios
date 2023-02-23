@@ -195,7 +195,6 @@ class EventDetailTopFullCell: UITableViewCell {
             ui_img_bt_join.image = UIImage.init(named: "ic_plus_white")
             ui_lbl_bt_join.text = "event_detail_button_participe_OFF".localized
         }
-        
         if let _author = event.author {
             ui_label_organised_by.text = "event_top_cell_organised_by".localized + _author.displayName
             ui_view_organised_by.isHidden = false

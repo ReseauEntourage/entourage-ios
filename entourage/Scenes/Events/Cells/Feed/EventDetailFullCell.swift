@@ -47,6 +47,11 @@ class EventDetailFullCell: UITableViewCell {
     @IBOutlet weak var ui_lbl_about_title: UILabel!
     @IBOutlet weak var ui_lbl_about_desc: UILabel!
     
+    @IBOutlet weak var ui_view_organised_by: UIView!
+    
+    @IBOutlet weak var ui_label_association: UILabel!
+    @IBOutlet weak var ui_view_association: UIView!
+    @IBOutlet weak var ui_label_organised_by: UILabel!
     @IBOutlet weak var ui_iv_location: UIImageView!
     @IBOutlet weak var ui_label_distance: UILabel!
     @IBOutlet weak var ui_view_distance: UIView!
@@ -267,6 +272,22 @@ class EventDetailFullCell: UITableViewCell {
             ui_view_button_join.backgroundColor = .appOrange
             ui_title_bt_join.text = "event_detail_button_participe_OFF".localized
         }
+        
+        if let _author = event.author {
+            ui_label_organised_by.text = "event_top_cell_organised_by".localized + _author.displayName
+            ui_view_organised_by.isHidden = false
+            if let _asso = _author.partner {
+                ui_view_association.isHidden = false
+                ui_label_association.text = String(format: "event_top_cell_asso".localized, _asso.name)
+            }else{
+                ui_view_association.isHidden = true
+            }
+            
+        }else {
+            ui_view_organised_by.isHidden = true
+            ui_view_association.isHidden = true
+        }
+        
     }
     
     @IBAction func action_show_members(_ sender: Any) {
