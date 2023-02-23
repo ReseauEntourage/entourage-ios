@@ -522,15 +522,53 @@ class EventMainHomeViewController: UIViewController {
         hideEmptyView()
     }
     
+    func configureEmptyViewButton(){
+        self.uiBtnDiscover.titleEdgeInsets = UIEdgeInsets(top:4,left:8,bottom:4,right:8)
+        self.uiBtnDiscover.addTarget(self, action: #selector(onEmptyButtonClick), for: .touchUpInside)
+        if isEventSelected {
+            self.uiBtnDiscover.isHidden = false
+            self.uiBtnDiscover.setTitle("event_title_btn_discover_event".localized, for: .normal)
+        }else{
+            self.uiBtnDiscover.isHidden = false
+            self.uiBtnDiscover.setTitle("event_title_btn_create_event".localized, for: .normal)
+        }
+    }
+    
+    @objc func onEmptyButtonClick(){
+        if isEventSelected{
+            isEventSelected = false
+            if isEventSelected != currentSelectedIsEvent && self.eventsDiscoveredExtracted.events.count == 0 {
+                currentPageDiscover = 1
+                self.eventsDiscoveredExtracted.events.removeAll()
+                getEventsDiscovered()
+            }
+            currentSelectedIsEvent = false
+            isLoading = false
+            changeTabSelection()
+            self.ui_tableview.reloadData()
+            
+            if self.eventsDiscoveredExtracted.events.count > 0 {
+                self.gotoTop()
+            }
+        }else{
+            AnalyticsLoggerManager.logEvent(name: Event_action_create)
+            let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
+            navVC.parentController = self.tabBarController
+            navVC.modalPresentationStyle = .fullScreen
+            self.tabBarController?.present(navVC, animated: true)
+        }
+    }
+    
     func showEmptyView() {
         if isEventSelected {
+            configureEmptyViewButton()
             self.ui_view_empty.isHidden = false
             ui_arrow_show_empty.isHidden = false
             self.ui_view_empty_events.isHidden = false
             self.ui_view_empty_discover.isHidden = true
         }
         else {
-            
+            configureEmptyViewButton()
             self.ui_view_empty.isHidden = false
             self.ui_view_empty_events.isHidden = true
             self.ui_view_empty_discover.isHidden = false
@@ -539,7 +577,7 @@ class EventMainHomeViewController: UIViewController {
             //TODO: check search
             
             if currentFilter.filterType != .profile || currentFilter.radius != UserDefaults.currentUser?.radiusDistance {
-                ui_view_bt_clear_filters.isHidden = false
+                ui_view_bt_clear_filters.isHidden = true//false
                 ui_lbl_empty_title_discover.text = "event_event_discover_empty_search_title".localized
                 ui_lbl_empty_subtitle_discover.text = "event_event_discover_empty_search_subtitle".localized
             }

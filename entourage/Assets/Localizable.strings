@@ -903,6 +903,8 @@
 "event_event_discover_empty_title" = "Oups, aucun événement autour de vous";
 "event_event_discover_empty_subtitle" = "Si aucun événement ne se trouve près de vous, vous pouvez élargir votre zone de recherche.";
 "event_event_discover_clear_filters" = "Réinitialiser les filtres";
+"event_title_btn_discover_event" = "Découvrir les évènements";
+"event_title_btn_create_event" = "Créer un évènement";
 "event_event_discover_empty_search_title" =  "Mince, aucun résultat ne correspond à votre recherche !";
 "event_event_discover_empty_search_subtitle" = "Vous ne trouvez pas l'événement de vos rêves ? N'attendez plus pour le créer ou élargissez votre zone de recherche.";
 "event_detail_button_more" = "En savoir plus";

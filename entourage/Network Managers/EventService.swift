@@ -33,7 +33,6 @@ struct EventService:ParsingDataCodable {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIEventDetail
         endpoint = String.init(format: endpoint, eventId, token)
-        
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
