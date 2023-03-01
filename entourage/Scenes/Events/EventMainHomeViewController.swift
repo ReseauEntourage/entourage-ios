@@ -363,8 +363,6 @@ class EventMainHomeViewController: UIViewController {
     
     @IBAction func action_discover(_ sender: Any?) {
         isEventSelected = false
-        
-        
         if isEventSelected != currentSelectedIsEvent && self.eventsDiscoveredExtracted.events.count == 0 {
             currentPageDiscover = 1
             self.eventsDiscoveredExtracted.events.removeAll()
@@ -602,14 +600,11 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellName, for: indexPath) as! EventListCell
         cell.populateCell(event: event, hideSeparator: true)
-        if isEventSelected {
-            if event.checkIsEventPassed(){
-                cell.setPassed()
-            }else{
-                cell.setIncoming()
-            }
+        if event.checkIsEventPassed(){
+            cell.setPassed()
+        }else{
+            cell.setIncoming()
         }
-       
         return cell
     }
     

@@ -74,6 +74,11 @@ class NeighborhoodPostCell: UITableViewCell {
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
         ui_comment.text = message.content
+        if let _content = message.content {
+            ui_comment.setTextWithLinksDetected(_content) { url in
+                delegate.showWebviewUrl(url: url)
+            }
+        }
         self.currentIndexPath = currentIndexPath
         postId = message.uid
         self.userId = userId
@@ -129,6 +134,7 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func showUser(userId:Int?)
     func showImage(imageUrl:URL?, postId:Int)
     func signalPost(postId:Int)
+    func showWebviewUrl(url:URL)
 }
 
 

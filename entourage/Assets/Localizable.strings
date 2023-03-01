@@ -812,7 +812,7 @@
 "event_create_phase_1_name_error" = "Le nom de l'événement doit contenir au minimum 2 caractères.";
 "event_create_phase_1_desc" = "Description - obligatoire";
 "event_create_phase_1_desc_placeholder" = "Présentez rapidement ce qu’il va se passer";
-"event_create_phase_1_desc_subtitle" = "(400 caractères max)";
+"event_create_phase_1_desc_subtitle" = "(900 caractères max)";
 "event_create_phase_1_photo" = "Photo - obligatoire";
 "event_create_phase_1_photo_desc" = " Vous pourrez la changer plus tard";
 

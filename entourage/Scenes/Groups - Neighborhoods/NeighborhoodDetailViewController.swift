@@ -123,6 +123,7 @@ class NeighborhoodDetailViewController: UIViewController {
         populateTopView()
     }
     
+    
     func populateTopView() {
         let imageName = "placeholder_photo_group"
         if let _url = self.neighborhood?.image_url, let url = URL(string: _url) {
@@ -553,6 +554,10 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
 
 //MARK: - NeighborhoodDetailTopCellDelegate -
 extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
+    func showWebUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+    }
+    
     func showMembers() {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_MoreMembers)
         if let navVC = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil).instantiateViewController(withIdentifier: "users_groupNav") as? UINavigationController, let vc = navVC.topViewController as? NeighBorhoodEventListUsersViewController {
@@ -579,6 +584,10 @@ extension NeighborhoodDetailViewController: NeighborhoodDetailTopCellDelegate {
 
 //MARK: - NeighborhoodPostCellDelegate -
 extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
+    func showWebviewUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+    }
+    
     func showImage(imageUrl: URL?, postId: Int) {
         getDetailPost(neighborhoodId: self.neighborhoodId, parentPostId: postId)
     }

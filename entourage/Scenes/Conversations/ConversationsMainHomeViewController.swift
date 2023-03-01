@@ -249,6 +249,10 @@ extension ConversationsMainHomeViewController: UITableViewDataSource, UITableVie
 
 //MARK: - ConversationListMainCellDelegate -
 extension ConversationsMainHomeViewController: ConversationListMainCellDelegate {
+    func showWebUrl(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
+    }
+    
     func showUserDetail(_ position: Int) {
         //TODO: not use actually ;)
         

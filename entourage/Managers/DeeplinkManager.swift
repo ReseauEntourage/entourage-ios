@@ -47,6 +47,37 @@ struct DeepLinkManager {
         }
     }
     
+    static func setImage(notificationInstanceType:InstanceType) -> String {
+        switch notificationInstanceType {
+        case .users:
+            return "placeholder_user"
+        case .pois:
+            return "ic_notif_placeholder"
+        case .conversations:
+            return "placeholder_user"
+        case .neighborhoods:
+            return "placeholder_user"
+        case .outings:
+            return "placeholder_user"
+        case .partners:
+            return "ic_notif_placeholder"
+        case .resources:
+            return "placeholder_user"
+        case .contributions:
+            return "placeholder_user"
+        case .solicitations:
+            return "placeholder_user"
+        case .neighborhood_post:
+            return "placeholder_user"
+        case .outing_post:
+            return "placeholder_user"
+        case .none:
+            return "ic_notif_placeholder"
+        }
+    }
+    
+    
+    
     
     //MARK: - Navigation Actions -
     static func showUser(userId:Int) {
