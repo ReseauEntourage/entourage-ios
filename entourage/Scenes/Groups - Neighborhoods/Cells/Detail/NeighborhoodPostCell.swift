@@ -120,14 +120,14 @@ class NeighborhoodPostCell: UITableViewCell {
     }
     
     @IBAction func action_show_image(_ sender: Any) {
-        delegate?.showImage(imageUrl: imageUrl)
+        delegate?.showImage(imageUrl: imageUrl, postId: self.postId)
     }
 }
 
 protocol NeighborhoodPostCellDelegate: AnyObject {
     func showMessages(addComment:Bool, postId:Int, indexPathSelected:IndexPath?, postMessage:PostMessage?)
     func showUser(userId:Int?)
-    func showImage(imageUrl:URL?)
+    func showImage(imageUrl:URL?, postId:Int)
     func signalPost(postId:Int)
 }
 

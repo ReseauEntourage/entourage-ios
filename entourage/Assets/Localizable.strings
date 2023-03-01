@@ -84,6 +84,11 @@
 "login_placeholder_code" = "Saisir votre code";
 "login_button_connect" = "Je me connecte";
 "login_button_resend_code" = "Redemander un code";
+"login_resend_code_title" = "Redemander un code";
+"login_resend_code_button_yes" = "Demander";
+"login_resend_code_button_no" = "Annuler";
+"login_resend_code_title" = "Redemander un code";
+"login_resend_code_message" = "Voulez-vous redemander un codep pour votre numéro de téléphone : ";
 "login_label_country" = "Pays";
 "login_label_phone" = "Téléphone";
 "login_label_code" = "Code";
@@ -1218,6 +1223,13 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "conversation_search_empty_title" = "Oups, aucun résultat ne correspond à votre recherche ! ";
 
 "notifs_title" = "Notifications";
+"duration_month" = "%d mois";
+"duration_weeks" = "%d sem";
+"duration_days" = "%d j";
+"duration_hours" = "%d h";
+"duration_minutes" = "%d min";
+"duration_secondes" = "à l'instant";
+
 
 //Pwd change
 "param_title_change_pwd" = "Changer de mot de passe";

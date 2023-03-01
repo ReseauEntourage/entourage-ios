@@ -36,6 +36,7 @@ class OTLoginV2ViewController: UIViewController {
     var countryCode:CountryCode = defaultCountryCode
     var tempPhone = ""
     let minimumCharacters = 9
+    var phoneNumberString = ""
     
     var isLoading = false
     
@@ -189,7 +190,8 @@ class OTLoginV2ViewController: UIViewController {
                 }
                 phone = "\(countryCode.code)\(phone)"
             }
-            resendCode(phone: phone)
+            phoneNumberString = phone
+            alertForResent()
         }
     }
     
@@ -281,6 +283,17 @@ class OTLoginV2ViewController: UIViewController {
         DispatchQueue.main.async {
             self.navigationController?.present(alertvc, animated: true, completion: nil)
         }
+    }
+    
+    func alertForResent(){
+        let message = "login_resend_code_message".localized + phoneNumberString
+        let alertVC = MJAlertController()
+        let buttonCancel = MJAlertButtonType(title: "login_resend_code_button_no".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "login_resend_code_button_yes".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 15, color: .white), bgColor: .appOrangeLight, cornerRadius: -1)
+        alertVC.configureAlert(alertTitle: "login_resend_code_title".localized, message: message, buttonrightType: buttonCancel, buttonLeftType: buttonValidate, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        
+        alertVC.delegate = self
+        alertVC.show()
     }
     
     func resendCode(phone:String) {
@@ -377,4 +390,16 @@ extension OTLoginV2ViewController: MJNavBackViewDelegate {
     func goBack() {
         self.navigationController?.popViewController(animated: true)
     }
+}
+
+extension OTLoginV2ViewController:MJAlertControllerDelegate{
+    func validateLeftButton(alertTag: MJAlertTAG) {
+        resendCode(phone: phoneNumberString)
+    }
+    
+    func validateRightButton(alertTag: MJAlertTAG) {
+        self.dismiss(animated: true)
+    }
+    
+    
 }

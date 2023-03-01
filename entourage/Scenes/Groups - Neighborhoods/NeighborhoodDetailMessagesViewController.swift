@@ -86,8 +86,6 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
         meId = me.sid
         
         registerCellsNib()
-        print("eho postid" , self.parentCommentId)
-
         getMessages()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
