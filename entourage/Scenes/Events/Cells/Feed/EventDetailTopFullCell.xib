@@ -28,14 +28,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="406" height="503"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="TitreE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klB-o1-C0m">
-                        <rect key="frame" x="28" y="28" width="350" height="29"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitreE" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="klB-o1-C0m">
+                        <rect key="frame" x="28" y="28" width="350" height="124.5"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nfw-W1-dO7">
-                        <rect key="frame" x="28" y="63" width="350" height="25"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfw-W1-dO7">
+                        <rect key="frame" x="28" y="158.5" width="350" height="25"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="CF5-px-Uga">
                                 <rect key="frame" x="0.0" y="0.0" width="81" height="25"/>
@@ -108,8 +108,8 @@
                             <constraint firstAttribute="bottom" secondItem="Ih3-Zq-7lY" secondAttribute="bottom" id="ulb-JV-QRE"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GxR-dy-Owz">
-                        <rect key="frame" x="28" y="104" width="350" height="84"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GxR-dy-Owz">
+                        <rect key="frame" x="28" y="199.5" width="350" height="116"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="abz-tt-vMF">
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="116"/>
@@ -288,7 +288,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Association name and maybe tag" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpy-nI-lMl">
-                                                <rect key="frame" x="28" y="0.0" width="314" height="20"/>
+                                                <rect key="frame" x="28" y="-16" width="314" height="36"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" name="orange_app"/>
@@ -302,7 +302,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="Tpy-nI-lMl" firstAttribute="top" secondItem="DwY-20-5TL" secondAttribute="top" id="C1C-DY-Reo"/>
+                                            <constraint firstItem="Tpy-nI-lMl" firstAttribute="top" secondItem="DwY-20-5TL" secondAttribute="top" constant="-16" id="C1C-DY-Reo"/>
                                             <constraint firstAttribute="bottom" secondItem="Tpy-nI-lMl" secondAttribute="bottom" id="CKV-u8-hbZ"/>
                                             <constraint firstAttribute="bottom" secondItem="IcL-ha-FmW" secondAttribute="bottom" id="SLP-rJ-eLi"/>
                                             <constraint firstItem="IcL-ha-FmW" firstAttribute="top" secondItem="DwY-20-5TL" secondAttribute="top" id="fDb-n1-6YX"/>
@@ -328,8 +328,8 @@
                             <constraint firstItem="abz-tt-vMF" firstAttribute="top" secondItem="GxR-dy-Owz" secondAttribute="top" id="rR1-He-gyy"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oGK-wr-qH0">
-                        <rect key="frame" x="28" y="204" width="140" height="44"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGK-wr-qH0">
+                        <rect key="frame" x="28" y="331.5" width="140" height="44"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="754" image="ic_plus_white" translatesAutoresizingMaskIntoConstraints="NO" id="2TX-DT-6v1">
                                 <rect key="frame" x="101" y="12.5" width="19" height="19"/>
@@ -375,14 +375,14 @@
                             <constraint firstAttribute="trailing" secondItem="L6a-xt-M59" secondAttribute="trailing" id="z2p-ys-BFj"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXs-ZL-Ra7">
-                        <rect key="frame" x="28" y="268" width="350" height="19"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXs-ZL-Ra7">
+                        <rect key="frame" x="28" y="395.5" width="350" height="19"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsR-kO-usD">
-                        <rect key="frame" x="28" y="291" width="350" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsR-kO-usD">
+                        <rect key="frame" x="28" y="418.5" width="350" height="20.5"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>

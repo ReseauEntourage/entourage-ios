@@ -48,6 +48,8 @@ let kAPIGetNeighborhoodMessages = "neighborhoods/%@/chat_messages/%@/comments?to
 let kAPIReportPostNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token=%@"
 let kAPIReportPostCommentNeighborhood = "neighborhoods/%@/chat_messages/%@/report?token=%@"
 let kAPIGetNeighborhoodPostMessage = "neighborhoods/%@/chat_messages/%@?token=%@&image_size=high"
+let kAPIDeleteNeigborhoodPostMessage = "neighborhoods/%d/chat_messages/%d?token=%@"
+
 
 //Amazon S3
 let API_URL_USER_PREPARE_AVATAR_UPLOAD = "users/me/presigned_avatar_upload.json?token=%@"
@@ -85,6 +87,7 @@ let kAPIReportPostCommentEvent = "outings/%@/chat_messages/%@/report?token=%@"
 let kAPIPostOutingPostMessage = "outings/%@/chat_messages?token=%@"
 let kAPIGetOutingMessages = "outings/%@/chat_messages/%@/comments?token=%@"
 let kAPIGetOutingPostMessage = "outings/%@/chat_messages/%@?token=%@&image_size=high"
+let kAPIDeleteEventPostMessage = "outings/%d/chat_messages/%d?token=%@"
 
 //Actions
 let kAPIGetContrib = "contributions/%d?token=%@"
@@ -114,6 +117,7 @@ let kAPIBlockUser = "user_blocked_users/?token=%@"
 let kAPIUnBlockUsers = "user_blocked_users/?token=%@"
 let kAPIGetBlockedUsers = "user_blocked_users?token=%@"
 let kAPIGetIsBlockedUser = "user_blocked_users/%d?token=%@"
+let kAPIGetDeleteMessageInConv = "conversations/%d/chat_messages/%d"
 
 
 //WebLink

@@ -348,6 +348,10 @@ extension EventDetailMessagesViewController:MessageCellSignalDelegate {
 
 //MARK: - GroupDetailDelegate -
 extension EventDetailMessagesViewController:GroupDetailDelegate {
+    func publicationDeleted() {
+        getMessages()
+    }
+    
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)

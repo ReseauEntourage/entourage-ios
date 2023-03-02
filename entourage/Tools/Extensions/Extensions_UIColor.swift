@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 //MARK: - Extensions UIColor -
 extension UIColor {

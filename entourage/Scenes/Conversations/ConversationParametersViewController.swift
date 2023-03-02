@@ -220,6 +220,12 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
 
 //MARK: - GroupDetailDelegate -
 extension ConversationParametersViewController: GroupDetailDelegate {
+    func publicationDeleted() {
+        if !isOneToOne {
+            getConversation()
+        }
+    }
+    
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)

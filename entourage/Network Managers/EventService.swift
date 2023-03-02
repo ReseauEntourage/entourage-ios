@@ -405,6 +405,24 @@ struct EventService:ParsingDataCodable {
         }
     }
     
+    //MARK DELETE EVENT POST
+    static func deletePostMessage(eventId:Int,messageId:Int, urlImage:String? = nil ,completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIDeleteEventPostMessage
+        endpoint = String.init(format: endpoint, eventId, messageId, token)
+        
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error delete event delete - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
+    
+    
     //MARK: - Comments for Post -
     
     static func getCommentsFor(eventId:Int, parentPostId:Int, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {

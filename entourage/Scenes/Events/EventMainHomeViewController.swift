@@ -120,6 +120,10 @@ class EventMainHomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        setupEmptyViews()
+        setupViews()
+        
         changeTabSelection()
         
         if isEventSelected {
@@ -142,6 +146,7 @@ class EventMainHomeViewController: UIViewController {
                 showEmptyView()
             }
         }
+        ui_tableview.reloadData()
     }
     
     deinit {
@@ -262,6 +267,31 @@ class EventMainHomeViewController: UIViewController {
             }
         }
     }
+    
+    func getEventsDiscoveredForMyEvent(isReloadFromTab:Bool = false, reloadOther:Bool = false) {
+        
+        EventService.getAllEventsDiscover(currentPage: currentPageDiscover, per: numberOfItemsForWS, filters: currentFilter.getfiltersForWS()) { events, error in
+            IHProgressHUD.dismiss()
+            self.pullRefreshControl.endRefreshing()
+            
+            DispatchQueue.main.async {
+                if let events = events , events.count > 0 {
+                    self.uiBtnDiscover.isHidden = false
+                    self.ui_lbl_empty_subtitle_event.text = "event_no_event_but_discover".localized
+                    self.uiBtnDiscover.setTitle("event_title_btn_discover_event".localized, for: .normal)
+                    self.uiBtnDiscover.addTarget(self, action: #selector(self.onGoDiscover), for: .touchUpInside)
+                }else{
+                    self.uiBtnDiscover.isHidden = false
+                    self.ui_lbl_empty_subtitle_event.text = "event_no_event_go_create".localized
+                    self.uiBtnDiscover.setTitle("event_title_btn_create_event".localized, for: .normal)
+                    self.uiBtnDiscover.addTarget(self, action: #selector(self.onClickCreate), for: .touchUpInside)
+
+                }
+            }
+
+        }
+    }
+    
     
     func getEventsDiscovered(isReloadFromTab:Bool = false, reloadOther:Bool = false) {
         if self.isLoading { return }
@@ -519,43 +549,37 @@ class EventMainHomeViewController: UIViewController {
         ui_title_bt_clear_filters.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_title_bt_clear_filters.text = "event_event_discover_clear_filters".localized
         
+        getEventsDiscoveredForMyEvent()
+
         hideEmptyView()
     }
     
     func configureEmptyViewButton(){
         self.uiBtnDiscover.titleEdgeInsets = UIEdgeInsets(top:4,left:8,bottom:4,right:8)
-        self.uiBtnDiscover.addTarget(self, action: #selector(onEmptyButtonClick), for: .touchUpInside)
-        if isEventSelected {
-            self.uiBtnDiscover.isHidden = false
-            self.uiBtnDiscover.setTitle("event_title_btn_discover_event".localized, for: .normal)
-        }else{
-            self.uiBtnDiscover.isHidden = false
-            self.uiBtnDiscover.setTitle("event_title_btn_create_event".localized, for: .normal)
-        }
     }
     
-    @objc func onEmptyButtonClick(){
-        if isEventSelected{
-            isEventSelected = false
-            if isEventSelected != currentSelectedIsEvent && self.eventsDiscoveredExtracted.events.count == 0 {
-                currentPageDiscover = 1
-                self.eventsDiscoveredExtracted.events.removeAll()
-                getEventsDiscovered()
-            }
-            currentSelectedIsEvent = false
-            isLoading = false
-            changeTabSelection()
-            self.ui_tableview.reloadData()
-            
-            if self.eventsDiscoveredExtracted.events.count > 0 {
-                self.gotoTop()
-            }
-        }else{
-            AnalyticsLoggerManager.logEvent(name: Event_action_create)
-            let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
-            navVC.parentController = self.tabBarController
-            navVC.modalPresentationStyle = .fullScreen
-            self.tabBarController?.present(navVC, animated: true)
+    @objc func onClickCreate(){
+        AnalyticsLoggerManager.logEvent(name: Event_action_create)
+        let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
+        navVC.parentController = self.tabBarController
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
+        
+    }
+    @objc func onGoDiscover(){
+        isEventSelected = false
+        if isEventSelected != currentSelectedIsEvent && self.eventsDiscoveredExtracted.events.count == 0 {
+            currentPageDiscover = 1
+            self.eventsDiscoveredExtracted.events.removeAll()
+            getEventsDiscovered()
+        }
+        currentSelectedIsEvent = false
+        isLoading = false
+        changeTabSelection()
+        self.ui_tableview.reloadData()
+        
+        if self.eventsDiscoveredExtracted.events.count > 0 {
+            self.gotoTop()
         }
     }
     
@@ -563,7 +587,7 @@ class EventMainHomeViewController: UIViewController {
         if isEventSelected {
             configureEmptyViewButton()
             self.ui_view_empty.isHidden = false
-            ui_arrow_show_empty.isHidden = false
+            ui_arrow_show_empty.isHidden = true//false
             self.ui_view_empty_events.isHidden = false
             self.ui_view_empty_discover.isHidden = true
         }

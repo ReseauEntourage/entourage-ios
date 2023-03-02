@@ -281,7 +281,7 @@
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Association name and maybe tag" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q27-xz-i3R">
-                                                <rect key="frame" x="28" y="0.0" width="314" height="20"/>
+                                                <rect key="frame" x="28" y="-8" width="314" height="28"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" name="orange_app"/>
@@ -298,7 +298,7 @@
                                             <constraint firstAttribute="bottom" secondItem="Y8T-I4-R7K" secondAttribute="bottom" id="7JK-R7-ZnL"/>
                                             <constraint firstItem="Y8T-I4-R7K" firstAttribute="leading" secondItem="hzW-lu-iYK" secondAttribute="leading" id="EE6-i7-wcR"/>
                                             <constraint firstAttribute="trailing" secondItem="Q27-xz-i3R" secondAttribute="trailing" constant="8" id="KRL-0V-nkc"/>
-                                            <constraint firstItem="Q27-xz-i3R" firstAttribute="top" secondItem="hzW-lu-iYK" secondAttribute="top" id="QUX-8A-thc"/>
+                                            <constraint firstItem="Q27-xz-i3R" firstAttribute="top" secondItem="hzW-lu-iYK" secondAttribute="top" constant="-8" id="QUX-8A-thc"/>
                                             <constraint firstItem="Q27-xz-i3R" firstAttribute="leading" secondItem="hzW-lu-iYK" secondAttribute="leading" constant="28" id="Rg7-FS-mDt"/>
                                             <constraint firstItem="Y8T-I4-R7K" firstAttribute="top" secondItem="hzW-lu-iYK" secondAttribute="top" id="e5j-1i-G7g"/>
                                             <constraint firstAttribute="trailing" secondItem="Y8T-I4-R7K" secondAttribute="trailing" id="j5k-cs-2Vm"/>

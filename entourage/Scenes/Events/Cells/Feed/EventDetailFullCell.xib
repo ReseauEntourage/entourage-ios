@@ -248,7 +248,7 @@
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Association name and maybe tag" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fez-cU-VSl">
-                                                <rect key="frame" x="28" y="0.0" width="314" height="20"/>
+                                                <rect key="frame" x="28" y="-8" width="314" height="28"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" name="orange_app"/>
@@ -267,7 +267,7 @@
                                             <constraint firstAttribute="trailing" secondItem="fez-cU-VSl" secondAttribute="trailing" constant="8" id="LNS-zb-KE1"/>
                                             <constraint firstAttribute="bottom" secondItem="fez-cU-VSl" secondAttribute="bottom" id="Tcl-2x-VtW"/>
                                             <constraint firstAttribute="bottom" secondItem="Fyg-JN-awn" secondAttribute="bottom" id="VXn-lg-IVY"/>
-                                            <constraint firstItem="fez-cU-VSl" firstAttribute="top" secondItem="vYv-ea-g1h" secondAttribute="top" id="W1J-wC-frp"/>
+                                            <constraint firstItem="fez-cU-VSl" firstAttribute="top" secondItem="vYv-ea-g1h" secondAttribute="top" constant="-8" id="W1J-wC-frp"/>
                                             <constraint firstAttribute="height" constant="20" id="Xqi-xs-yM2"/>
                                             <constraint firstItem="fez-cU-VSl" firstAttribute="leading" secondItem="vYv-ea-g1h" secondAttribute="leading" constant="28" id="lI4-tL-SEt"/>
                                             <constraint firstItem="Fyg-JN-awn" firstAttribute="leading" secondItem="vYv-ea-g1h" secondAttribute="leading" id="xhb-cH-260"/>
@@ -502,14 +502,14 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_action_plus" translatesAutoresizingMaskIntoConstraints="NO" id="J4Y-dv-XCN">
                         <rect key="frame" x="216" y="567" width="10" height="10"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="A savoir" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2O-CD-RDW">
-                        <rect key="frame" x="28" y="606" width="350" height="0.0"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A savoir" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2O-CD-RDW">
+                        <rect key="frame" x="28" y="622" width="350" height="0.0"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gsf-dy-SH5">
-                        <rect key="frame" x="28" y="610" width="350" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gsf-dy-SH5">
+                        <rect key="frame" x="28" y="626" width="350" height="0.0"/>
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>

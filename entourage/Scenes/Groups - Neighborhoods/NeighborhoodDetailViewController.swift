@@ -723,6 +723,10 @@ extension NeighborhoodDetailViewController: UIScrollViewDelegate {
     }
 }
 extension NeighborhoodDetailViewController:GroupDetailDelegate{
+    func publicationDeleted() {
+        getNeighborhoodDetail()
+    }
+    
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)

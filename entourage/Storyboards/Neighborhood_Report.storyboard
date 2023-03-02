@@ -222,7 +222,7 @@
         <!--Report Group Choose Page View Controller-->
         <scene sceneID="plP-wj-kBu">
             <objects>
-                <viewController id="okP-mo-V7E" customClass="ReportGroupChoosePageViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="reportChooseGroupVC" id="okP-mo-V7E" customClass="ReportGroupChoosePageViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Goz-bo-dM6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

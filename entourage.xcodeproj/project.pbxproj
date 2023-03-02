@@ -381,6 +381,10 @@
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
 		261174FE29A670CB00735E9A /* ReportGroupChoosePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */; };
 		2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */; };
+		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
+		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
+		264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF929AF52820083F83E /* HeaderReportView.xib */; };
+		264C1AFC29AF5BED0083F83E /* HeaderReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */; };
 		268FCA2A2967281100159C34 /* MJAlertWithImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FCA292967281100159C34 /* MJAlertWithImageController.swift */; };
 		268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */; };
 		7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */; };
@@ -755,6 +759,10 @@
 		1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGroupChoosePageViewController.swift; sourceTree = "<group>"; };
 		2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UILabel.swift; sourceTree = "<group>"; };
+		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
+		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
+		264C1AF929AF52820083F83E /* HeaderReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderReportView.xib; sourceTree = "<group>"; };
+		264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderReportView.swift; sourceTree = "<group>"; };
 		268FCA292967281100159C34 /* MJAlertWithImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJAlertWithImageController.swift; sourceTree = "<group>"; };
 		268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertWithImageController.xib; sourceTree = "<group>"; };
 		6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
@@ -1593,6 +1601,10 @@
 		261174FF29A6718D00735E9A /* reportChooseCells */ = {
 			isa = PBXGroup;
 			children = (
+				264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */,
+				264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */,
+				264C1AF929AF52820083F83E /* HeaderReportView.xib */,
+				264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */,
 			);
 			path = reportChooseCells;
 			sourceTree = "<group>";
@@ -1756,6 +1768,7 @@
 				028D4F52293795B700A0BDD3 /* Onboarding.storyboard in Resources */,
 				0260E9D62936402100242A89 /* Intros.xcassets in Resources */,
 				021FD9672875F4ED00D3AA54 /* EventListMeCell.xib in Resources */,
+				264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */,
 				025C92BA28340F10000970D9 /* NeighborhoodDetailTopMemberCell.xib in Resources */,
 				02B94C2C284F8F0C006059EF /* HomeActionCell.xib in Resources */,
 				02856F6227DA334100988FF7 /* ProfileParams.storyboard in Resources */,
@@ -1768,6 +1781,7 @@
 				025D8723278DD33800909101 /* Assets.xcassets in Resources */,
 				02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */,
 				0208268028A68447004B1222 /* ActionDeletePopsViewController.xib in Resources */,
+				264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */,
 				021FD9652875BEAC00D3AA54 /* Event.storyboard in Resources */,
 				02EFE47A289BFC0D00D70C68 /* Action_Create.storyboard in Resources */,
 				020AF5E528607EFE0012AE60 /* congrat_short_anim.json in Resources */,
@@ -1893,6 +1907,7 @@
 				02CCE68D27D7B8E700D6976C /* MainUserProfileViewController.swift in Sources */,
 				021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */,
 				02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */,
+				264C1AFC29AF5BED0083F83E /* HeaderReportView.swift in Sources */,
 				0208B0C5289D23E1009A7A58 /* ActionDetailFullViewController.swift in Sources */,
 				02B7922727F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift in Sources */,
 				02F5278127999A8C00929431 /* MainGuideViewController.swift in Sources */,
@@ -1923,6 +1938,7 @@
 				022744712795BEC0005600A1 /* AuthService.swift in Sources */,
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
 				0282637C282160B700B354F9 /* NeighborhoodCguCell.swift in Sources */,
+				264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */,
 				0224597827FF327C00944DE4 /* NeighborhoodCreateLocationCell.swift in Sources */,
 				02EFE47C289BFD2A00D70C68 /* ActionsMyListViewController.swift in Sources */,
 				024131D42862030A00561FB4 /* EventCreatePhase2ViewController.swift in Sources */,

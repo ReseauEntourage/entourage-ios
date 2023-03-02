@@ -859,7 +859,7 @@ Ligne 2</string>
         <image name="ic_notif_bell_orange" width="26" height="24"/>
         <image name="ic_notif_off" width="23" height="22"/>
         <image name="logo_entourage" width="60" height="60"/>
-        <image name="placeholder_action" width="88" height="71"/>
+        <image name="placeholder_action" width="85" height="39.5"/>
         <namedColor name="Beige">
             <color red="1" green="0.91764705882352937" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

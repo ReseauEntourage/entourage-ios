@@ -81,6 +81,11 @@ class NeighborhoodPostCell: UITableViewCell {
                 delegate.showWebviewUrl(url: url)
             }
         }
+        if let _status = message.status {
+            if _status == "deleted" {
+                ui_comment.text = "deleted_post_text".localized
+            }
+        }
         self.currentIndexPath = currentIndexPath
         postId = message.uid
         self.userId = userId
@@ -134,6 +139,7 @@ class NeighborhoodPostCell: UITableViewCell {
             ui_label_ambassador.isHidden = false
             ui_label_ambassador.text = tagString
         }
+        
     }
 
     @IBAction func action_show_comments(_ sender: Any) {

@@ -785,6 +785,10 @@ extension EventDetailFeedViewController: UIScrollViewDelegate {
 }
 
 extension EventDetailFeedViewController:GroupDetailDelegate{
+    func publicationDeleted() {
+        getEventDetail()
+    }
+    
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)

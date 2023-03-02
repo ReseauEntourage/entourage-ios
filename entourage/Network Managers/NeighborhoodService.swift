@@ -330,7 +330,7 @@ struct NeighborhoodService:ParsingDataCodable {
         var endpoint = kAPIGetNeighborhoodPostMessage
         endpoint = String.init(format: endpoint,"\(neighborhoodId)","\(parentPostId)", token)
         
-        Logger.print("***** url get PostMessage : \(endpoint)")
+        Logger.print("***** url eho get PostMessage : \(endpoint)")
         
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
@@ -342,6 +342,26 @@ struct NeighborhoodService:ParsingDataCodable {
             DispatchQueue.main.async { completion(message,nil) }
         }
     }
+    
+    //MARK: DELETE POST
+    static func deletePostMessage(groupId:Int,messageId:Int, urlImage:String? = nil ,completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIDeleteNeigborhoodPostMessage
+        endpoint = String.init(format: endpoint, groupId, messageId, token)
+        
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
+            print("eho " , endpoint )
+            print("eho " , resp )
+            guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                Logger.print("***** error DELETE event DELETE - \(error)")
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
+    
     
     //MARK: - Comments for Post -
     
