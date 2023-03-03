@@ -47,7 +47,7 @@
                                 <rect key="frame" x="4" y="262" width="406" height="520"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kFS-LV-2to">
-                                        <rect key="frame" x="0.0" y="124.5" width="406" height="271.5"/>
+                                        <rect key="frame" x="0.0" y="10" width="406" height="271.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="754" text="Vous n’avez pas encore rejoint d’évènement" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11O-oX-JRu">
                                                 <rect key="frame" x="32" y="130" width="342" height="60"/>
@@ -84,7 +84,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D8Y-BT-Vot">
-                                        <rect key="frame" x="0.0" y="91.5" width="406" height="337.5"/>
+                                        <rect key="frame" x="0.0" y="10" width="406" height="337.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oups, aucun résultat ne correspond à votre sélection ! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggD-G4-adY">
                                                 <rect key="frame" x="32" y="106" width="342" height="90"/>
@@ -112,7 +112,7 @@
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Réinitialiser les filtres" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbB-sz-GjB">
-                                                        <rect key="frame" x="20" y="11.5" width="151.5" height="20.5"/>
+                                                        <rect key="frame" x="20" y="12" width="151.5" height="20.5"/>
                                                         <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -165,7 +165,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UvO-2u-qWB">
-                                        <rect key="frame" x="92.5" y="449" width="221.5" height="40"/>
+                                        <rect key="frame" x="92.5" y="367.5" width="221.5" height="40"/>
                                         <color key="backgroundColor" name="orange_medium"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="0fg-6D-RbN"/>
@@ -185,14 +185,14 @@
                                 <constraints>
                                     <constraint firstItem="UvO-2u-qWB" firstAttribute="trailing" secondItem="WhV-dk-rq7" secondAttribute="trailing" id="7mU-SW-JTJ"/>
                                     <constraint firstAttribute="trailing" secondItem="D8Y-BT-Vot" secondAttribute="trailing" id="D9Z-5O-mKf"/>
-                                    <constraint firstItem="D8Y-BT-Vot" firstAttribute="centerY" secondItem="IyD-cH-rAK" secondAttribute="centerY" id="WJu-Z4-W6j"/>
                                     <constraint firstItem="UvO-2u-qWB" firstAttribute="top" secondItem="D8Y-BT-Vot" secondAttribute="bottom" constant="20" id="Xul-6w-SfM"/>
                                     <constraint firstItem="UvO-2u-qWB" firstAttribute="centerX" secondItem="D8Y-BT-Vot" secondAttribute="centerX" id="ZvW-lx-Bw8"/>
-                                    <constraint firstItem="kFS-LV-2to" firstAttribute="centerY" secondItem="IyD-cH-rAK" secondAttribute="centerY" id="a6q-Nx-UVM"/>
                                     <constraint firstItem="D8Y-BT-Vot" firstAttribute="centerX" secondItem="IyD-cH-rAK" secondAttribute="centerX" id="aXu-gI-Knr"/>
+                                    <constraint firstItem="D8Y-BT-Vot" firstAttribute="top" secondItem="IyD-cH-rAK" secondAttribute="top" constant="10" id="eq1-sj-Riu"/>
                                     <constraint firstAttribute="trailing" secondItem="kFS-LV-2to" secondAttribute="trailing" id="f2S-gm-cDV"/>
                                     <constraint firstItem="D8Y-BT-Vot" firstAttribute="leading" secondItem="IyD-cH-rAK" secondAttribute="leading" id="mq1-6e-xyb"/>
                                     <constraint firstItem="kFS-LV-2to" firstAttribute="leading" secondItem="IyD-cH-rAK" secondAttribute="leading" id="oNA-Nw-6wI"/>
+                                    <constraint firstItem="kFS-LV-2to" firstAttribute="top" secondItem="IyD-cH-rAK" secondAttribute="top" constant="10" id="rm3-fg-fL1"/>
                                     <constraint firstItem="UvO-2u-qWB" firstAttribute="leading" secondItem="WhV-dk-rq7" secondAttribute="leading" id="vzY-kj-GHu"/>
                                 </constraints>
                             </view>

@@ -352,6 +352,7 @@ extension NeighborhoodDetailMessagesViewController:MessageCellSignalDelegate {
 extension NeighborhoodDetailMessagesViewController:GroupDetailDelegate {
     func publicationDeleted() {
         getMessages()
+        self.ui_tableview.reloadData()
     }
     
     func showMessage(signalType:GroupDetailSignalType) {

@@ -224,6 +224,7 @@ extension ConversationParametersViewController: GroupDetailDelegate {
         if !isOneToOne {
             getConversation()
         }
+        self.ui_tableview.reloadData()
     }
     
     func showMessage(signalType:GroupDetailSignalType) {

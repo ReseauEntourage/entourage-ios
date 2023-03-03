@@ -539,7 +539,7 @@
 "supress_button_title" = "Supprimer";
 "supress_alert_title" = "Supprimer la publication";
 "supress_alert_text" = "Souhaitez-vous suppprimer cette publication";
-"deleted_post_text" = "Supprimé par l'utilisateur";
+"deleted_post_text" = "Cette publication a été supprimée";
 
 //REPORT AND SUPPRESS POPUP
 "report_post_cell_title" = "Signaler";
@@ -913,8 +913,8 @@
 "event_event_my_empty_subtitle" = "C'est l'occasion de découvrir ce qu'il se passe près de chez vous, ou de créer un nouvel événement !";
 "event_event_discover_empty_title" = "Oups, aucun événement autour de vous";
 "event_event_discover_empty_subtitle" = "Si aucun événement ne se trouve près de vous, vous pouvez élargir votre zone de recherche.";
-"event_no_event_but_discover" = "C'est l'occasion de découvrir ce qu'il se passe près de chez nous, ou de créer un nouvel événement";
-"event_no_event_go_create" = "Aucun évènement autour de vous. N'hésitez pas à en créer un";
+"event_no_event_but_discover" = "C'est l'occasion de découvrir ce qu'il se passe près de chez nous, ou de créer un nouvel événement !";
+"event_no_event_go_create" = "Aucun évènement autour de vous. N'hésitez pas à en créer un !";
 "event_event_discover_clear_filters" = "Réinitialiser les filtres";
 "event_title_btn_discover_event" = "Découvrir les évènements";
 "event_title_btn_create_event" = "Créer un évènement";

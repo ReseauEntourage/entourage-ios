@@ -727,6 +727,7 @@ extension NeighborhoodDetailViewController: UIScrollViewDelegate {
 extension NeighborhoodDetailViewController:GroupDetailDelegate{
     func publicationDeleted() {
         getNeighborhoodDetail()
+        self.ui_tableview.reloadData()
     }
     
     func showMessage(signalType:GroupDetailSignalType) {

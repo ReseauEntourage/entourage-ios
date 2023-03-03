@@ -352,6 +352,7 @@ extension EventDetailMessagesViewController:MessageCellSignalDelegate {
 extension EventDetailMessagesViewController:GroupDetailDelegate {
     func publicationDeleted() {
         getMessages()
+        self.ui_tableview.reloadData()
     }
     
     func showMessage(signalType:GroupDetailSignalType) {

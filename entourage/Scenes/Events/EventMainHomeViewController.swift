@@ -102,11 +102,9 @@ class EventMainHomeViewController: UIViewController {
         ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.identifier)
         ui_tableview.register(UINib(nibName: EventListCell.identifier, bundle: nil), forCellReuseIdentifier: EventListCell.identifier)
         ui_tableview.register(UINib(nibName: EventListCell.EventlistMeIdentifier, bundle: nil), forCellReuseIdentifier: EventListCell.EventlistMeIdentifier)
-        
+        setMyFirst()
         setupEmptyViews()
-        
         setupViews()
-        
         //Notif for updating when create new Event
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreate), name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
         
@@ -279,14 +277,16 @@ class EventMainHomeViewController: UIViewController {
                     self.uiBtnDiscover.isHidden = false
                     self.ui_lbl_empty_subtitle_event.text = "event_no_event_but_discover".localized
                     self.uiBtnDiscover.setTitle("event_title_btn_discover_event".localized, for: .normal)
+                    self.uiBtnDiscover.removeTarget(self, action: #selector(self.onClickCreate), for: .touchUpInside)
                     self.uiBtnDiscover.addTarget(self, action: #selector(self.onGoDiscover), for: .touchUpInside)
                 }else{
                     self.uiBtnDiscover.isHidden = false
                     self.ui_lbl_empty_subtitle_event.text = "event_no_event_go_create".localized
                     self.uiBtnDiscover.setTitle("event_title_btn_create_event".localized, for: .normal)
+                    self.uiBtnDiscover.removeTarget(self, action: #selector(self.onGoDiscover), for: .touchUpInside)
                     self.uiBtnDiscover.addTarget(self, action: #selector(self.onClickCreate), for: .touchUpInside)
-
                 }
+
             }
 
         }
@@ -374,6 +374,8 @@ class EventMainHomeViewController: UIViewController {
     @IBAction func action_myEvents(_ sender: Any?) {
         isEventSelected = true
         isfirstLoadingMyEvents = true
+        self.uiBtnDiscover.isHidden = false
+
         
         if isEventSelected != currentSelectedIsEvent && myEventsExtracted.events.count == 0 {
             currentPageMy = 1
@@ -394,6 +396,7 @@ class EventMainHomeViewController: UIViewController {
     
     @IBAction func action_discover(_ sender: Any?) {
         isEventSelected = false
+        self.uiBtnDiscover.isHidden = true
         if isEventSelected != currentSelectedIsEvent && self.eventsDiscoveredExtracted.events.count == 0 {
             currentPageDiscover = 1
             self.eventsDiscoveredExtracted.events.removeAll()
@@ -484,7 +487,7 @@ class EventMainHomeViewController: UIViewController {
     }
     
     func setupViews() {
-        self.setMyFirst()
+        
         ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))
         ui_location_filter.text = currentFilter.getFilterButtonString()
         ui_label_title.text = "event_main_page_title".localized

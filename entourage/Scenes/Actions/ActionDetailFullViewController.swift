@@ -267,6 +267,7 @@ extension ActionDetailFullViewController: UITableViewDataSource, UITableViewDele
 extension ActionDetailFullViewController: GroupDetailDelegate {
     func publicationDeleted() {
         getAction()
+        self.ui_tableview.reloadData()
     }
     
     func showMessage(signalType:GroupDetailSignalType) {

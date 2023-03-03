@@ -789,6 +789,7 @@ extension EventDetailFeedViewController: UIScrollViewDelegate {
 extension EventDetailFeedViewController:GroupDetailDelegate{
     func publicationDeleted() {
         getEventDetail()
+        self.ui_tableview.reloadData()
     }
     
     func showMessage(signalType:GroupDetailSignalType) {

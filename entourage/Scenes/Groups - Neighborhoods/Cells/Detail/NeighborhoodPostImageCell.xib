@@ -286,6 +286,8 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_username" destination="kif-wy-n4F" id="Nf0-v5-8Gu"/>
                 <outlet property="ui_view_bt_send" destination="dnV-Yy-csW" id="YZY-Xy-qBa"/>
                 <outlet property="ui_view_comment" destination="agT-ek-9AZ" id="Idb-QW-tzl"/>
+                <outlet property="ui_view_comment_post" destination="20f-3G-Kdi" id="M0A-kd-kog"/>
+                <outlet property="ui_view_comment_post_constraint_bottom" destination="jCH-WG-C26" id="rS5-l8-pxM"/>
                 <outlet property="ui_view_container" destination="k8l-eW-UxZ" id="rJa-sI-nWK"/>
             </connections>
             <point key="canvasLocation" x="149.27536231884059" y="112.5"/>
