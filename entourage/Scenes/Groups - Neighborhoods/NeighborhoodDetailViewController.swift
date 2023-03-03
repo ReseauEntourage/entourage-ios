@@ -598,7 +598,7 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
             vc.groupId = neighborhoodId
             vc.postId = postId
             vc.parentDelegate = self
-            //vc.userId = userId
+            vc.userId = userId
             vc.signalType = .publication
             self.present(navvc, animated: true)
         }

@@ -237,6 +237,7 @@
                                             <constraint firstAttribute="trailing" secondItem="60d-Ta-PzI" secondAttribute="trailing" id="AqI-MB-z9n"/>
                                             <constraint firstItem="Z34-5f-mhI" firstAttribute="top" secondItem="Bbk-f6-1uD" secondAttribute="top" id="Mpr-M8-qhV"/>
                                             <constraint firstAttribute="bottom" secondItem="Z34-5f-mhI" secondAttribute="bottom" id="Znt-N2-P94"/>
+                                            <constraint firstAttribute="height" constant="60" id="apz-5N-vXF"/>
                                             <constraint firstItem="60d-Ta-PzI" firstAttribute="centerY" secondItem="Bbk-f6-1uD" secondAttribute="centerY" id="hUD-Zh-hXh"/>
                                         </constraints>
                                     </view>

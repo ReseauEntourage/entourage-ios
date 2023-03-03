@@ -288,7 +288,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Association name and maybe tag" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpy-nI-lMl">
-                                                <rect key="frame" x="28" y="-16" width="314" height="36"/>
+                                                <rect key="frame" x="28" y="2" width="314" height="18"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" name="orange_app"/>
@@ -302,7 +302,6 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="Tpy-nI-lMl" firstAttribute="top" secondItem="DwY-20-5TL" secondAttribute="top" constant="-16" id="C1C-DY-Reo"/>
                                             <constraint firstAttribute="bottom" secondItem="Tpy-nI-lMl" secondAttribute="bottom" id="CKV-u8-hbZ"/>
                                             <constraint firstAttribute="bottom" secondItem="IcL-ha-FmW" secondAttribute="bottom" id="SLP-rJ-eLi"/>
                                             <constraint firstItem="IcL-ha-FmW" firstAttribute="top" secondItem="DwY-20-5TL" secondAttribute="top" id="fDb-n1-6YX"/>

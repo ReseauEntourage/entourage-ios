@@ -712,6 +712,7 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
             vc.eventId = eventId
             vc.postId = postId
             vc.parentDelegate = self
+            vc.userId = userId
             vc.signalType = .publication
             self.present(navvc, animated: true)
         }
