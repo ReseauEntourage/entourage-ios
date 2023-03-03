@@ -350,8 +350,7 @@ struct NeighborhoodService:ParsingDataCodable {
         endpoint = String.init(format: endpoint, groupId, messageId, token)
         
         NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
-            print("eho " , endpoint )
-            print("eho " , resp )
+
             guard let _ = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 Logger.print("***** error DELETE event DELETE - \(error)")
                 DispatchQueue.main.async { completion(error) }

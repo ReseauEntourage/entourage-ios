@@ -205,6 +205,7 @@ class ActionDetailFullViewController: UIViewController {
     
     @IBAction func action_signal(_ sender: Any) {
         if let  vc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
+            print("eho 8")
             vc.actionId = actionId
             vc.parentDelegate = self
             vc.signalType = isContrib ? .actionContrib : .actionSolicitation

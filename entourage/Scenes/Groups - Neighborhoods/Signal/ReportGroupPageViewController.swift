@@ -17,6 +17,7 @@ class ReportGroupPageViewController: UIPageViewController {
     var groupId:Int? = nil
     var postId:Int? = nil
     var actionId:Int? = nil
+    var userId:Int? = nil
     var conversationId:Int? = nil
     var haveChosen = false
     var titleDelegate:TitleDelegate? = nil
@@ -39,6 +40,9 @@ class ReportGroupPageViewController: UIPageViewController {
         chooseVc?.postId = postId
         chooseVc?.groupId = groupId
         chooseVc?.eventId = self.eventId
+        if let _userid = self.userId {
+            chooseVc?.userId = _userid
+        }
         setViewControllers([chooseVc!], direction: .forward, animated: true)
     }
     

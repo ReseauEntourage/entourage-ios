@@ -67,7 +67,7 @@ class NeighborhoodPostCell: UITableViewCell {
     }
     
     @objc func signalClicked(){
-        self.delegate?.signalPost(postId: self.postId)
+        self.delegate?.signalPost(postId: self.postId, userId: self.userId!)
     }
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
@@ -163,7 +163,7 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func showMessages(addComment:Bool, postId:Int, indexPathSelected:IndexPath?, postMessage:PostMessage?)
     func showUser(userId:Int?)
     func showImage(imageUrl:URL?, postId:Int)
-    func signalPost(postId:Int)
+    func signalPost(postId:Int, userId:Int)
     func showWebviewUrl(url:URL)
 }
 

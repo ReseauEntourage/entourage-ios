@@ -225,3 +225,8 @@ let Onboard_name = "View__Onboarding__InputNames"
 let Onboard_code = "View__Onboarding__InputCode"
 let Onboard_profile = "View__Onboarding__InputProfile"
 let Onboard_end = "View__Onboarding__Confirmation"
+
+//Suppress post
+let Delete_post = "View__DeletePostPop"
+let Click_delete_post = "Clic__DeletePostPop__Delete"
+ 

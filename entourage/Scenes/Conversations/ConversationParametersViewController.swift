@@ -95,7 +95,6 @@ class ConversationParametersViewController: BasePopViewController {
         if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
             if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
                 _homeVC.currentUserId = "\(userId)"
-                
                 self.present(navVC, animated: true)
             }
         }
@@ -110,6 +109,7 @@ class ConversationParametersViewController: BasePopViewController {
     
     func signalConversation() {
         if let  vc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
+            print("eho 9")
             vc.modalPresentationStyle = .currentContext
             vc.parentDelegate = self
             vc.signalType = .conversation

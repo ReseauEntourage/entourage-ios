@@ -220,12 +220,14 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     }
     
     @IBAction func action_signal(_ sender: Any) {
+        print("eho 3")
         //TODO TO GET IT FROM OTHER PAGE
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.groupId = neighborhoodId
             vc.postId = parentCommentId
             vc.parentDelegate = self
             vc.signalType = .publication
+            
             self.present(navvc, animated: true)
         }
     }
@@ -314,6 +316,7 @@ extension NeighborhoodDetailMessagesViewController: UITextViewDelegate {
 //MARK: - NeighborhoodMessageCellDelegate -
 extension NeighborhoodDetailMessagesViewController:MessageCellSignalDelegate {
     func signalMessage(messageId: Int) {
+        print("eho 4")
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.groupId = neighborhoodId
             vc.postId = messageId

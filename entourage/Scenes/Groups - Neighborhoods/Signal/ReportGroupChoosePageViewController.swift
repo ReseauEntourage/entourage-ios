@@ -23,7 +23,7 @@ class ReportGroupChoosePageViewController:UIViewController {
     var postId:Int? = nil
     var actionId:Int? = nil
     var conversationId:Int? = nil
-    
+    var userId:Int = 0
     
     
     var reportVc:ReportGroupViewController? = nil
@@ -40,11 +40,22 @@ class ReportGroupChoosePageViewController:UIViewController {
     
     func loadDTO(){
         table_dto.append(.report)
-        table_dto.append(.suppress)
+        if checkIsMe() {
+            table_dto.append(.suppress)
+        }
         ui_tableview.reloadData()
     }
-    
-    
+    func checkIsMe() -> Bool{
+        if let _myId = UserDefaults.currentUser?.uuid{
+            if _myId == String(self.userId) {
+                return true
+            }else{
+                return false
+            }
+        }else{
+            return false
+        }
+    }
 }
 
 extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDataSource {
@@ -82,6 +93,7 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
     }
     
     func showAlert(){
+        AnalyticsLoggerManager.logEvent(name: Click_delete_post)
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrangeLight_50, cornerRadius: -1)
         let buttonValidate = MJAlertButtonType(title: "supress_button_title".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
@@ -95,6 +107,7 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
 
 extension ReportGroupChoosePageViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
+        AnalyticsLoggerManager.logEvent(name: Delete_post)
         guard let _postId = postId else {
             return
         }

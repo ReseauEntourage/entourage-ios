@@ -17,6 +17,7 @@ class ReportGroupMainViewController: BasePopViewController {
     var groupId:Int? = nil
     var postId:Int? = nil
     var actionId:Int? = nil
+    var userId:Int? = 0
     var conversationId:Int? = nil
     
     weak var parentDelegate:GroupDetailDelegate? = nil
@@ -37,6 +38,7 @@ class ReportGroupMainViewController: BasePopViewController {
             vc.groupId = groupId
             vc.postId = postId
             vc.eventId = eventId
+            vc.userId = userId
             vc.actionId = actionId
             vc.conversationId = conversationId
             vc.titleDelegate = self
@@ -92,6 +94,5 @@ extension ReportGroupMainViewController : TitleDelegate{
             _title = "report_conversation_title".localized
         }
         ui_top_view.populateView(title: _title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
-
     }
 }

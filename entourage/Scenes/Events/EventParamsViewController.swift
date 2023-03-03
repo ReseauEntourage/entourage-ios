@@ -320,6 +320,7 @@ extension EventParamsViewController: EventParamCellDelegate {
     }
     
     func signalEvent() {
+        print("eho 5")
         if let  vc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
             vc.modalPresentationStyle = .currentContext
             vc.event = event

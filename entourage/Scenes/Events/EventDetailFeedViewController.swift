@@ -706,7 +706,8 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
         self.getDetailPost(eventId: self.eventId, parentPostId: postId)
     }
     
-    func signalPost(postId: Int) {
+    func signalPost(postId: Int, userId:Int) {
+        print("eho 4")
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.eventId = eventId
             vc.postId = postId
