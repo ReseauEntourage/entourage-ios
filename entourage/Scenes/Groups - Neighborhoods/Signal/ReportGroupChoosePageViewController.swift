@@ -39,9 +39,10 @@ class ReportGroupChoosePageViewController:UIViewController {
     }
     
     func loadDTO(){
-        table_dto.append(.report)
         if checkIsMe() {
             table_dto.append(.suppress)
+        }else{
+            table_dto.append(.report)
         }
         ui_tableview.reloadData()
     }
