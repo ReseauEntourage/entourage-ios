@@ -438,6 +438,7 @@ class EventMainHomeViewController: UIViewController {
     
     //MARK: - Methods -
     func changeTabSelection() {
+        getEventsDiscoveredForMyEvent()
         ui_view_empty.isHidden = true
         ui_arrow_show_empty.isHidden = true
         self.ui_view_empty_events.isHidden = true
