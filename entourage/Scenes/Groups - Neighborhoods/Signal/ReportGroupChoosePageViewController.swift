@@ -8,6 +8,12 @@
 import Foundation
 import UIKit
 
+enum ParamSupressType {
+    case message
+    case commment
+    case publication
+}
+
 class ReportGroupChoosePageViewController:UIViewController {
     
     @IBOutlet weak var ui_tableview: UITableView!
@@ -24,6 +30,7 @@ class ReportGroupChoosePageViewController:UIViewController {
     var actionId:Int? = nil
     var conversationId:Int? = nil
     var userId:Int = 0
+    var chatMessageId:Int? = nil
     
     
     var reportVc:ReportGroupViewController? = nil
@@ -57,6 +64,17 @@ class ReportGroupChoosePageViewController:UIViewController {
             return false
         }
     }
+    
+    func checkparameterType() -> ParamSupressType{
+        if (groupId != nil || eventId != nil) && chatMessageId != nil {
+            return .commment
+        }else if chatMessageId != nil && groupId == nil && eventId == nil{
+            return.message
+        }else{
+            return .publication
+        }
+        return .publication
+    }
 }
 
 extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDataSource {
@@ -70,14 +88,14 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
         case .report:
             if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "ReportChooseViewCell", for: indexPath ) as? ReportChooseViewCell {
                 cell.selectionStyle = .none
-                cell.populate(type: table_dto[indexPath.row])
+                cell.populate(type: table_dto[indexPath.row], paramType: checkparameterType())
                 return cell
             }
             
         case .suppress:
             if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "ReportChooseViewCell", for: indexPath ) as? ReportChooseViewCell {
                 cell.selectionStyle = .none
-                cell.populate(type: table_dto[indexPath.row])
+                cell.populate(type: table_dto[indexPath.row], paramType: checkparameterType())
                 return cell
             }
         }
@@ -94,37 +112,56 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
     }
     
     func showAlert(){
+        var alerteTitle = ""
+        var alerteText = ""
+        switch(checkparameterType()){
+        case .message:
+            alerteTitle = "supress_alert_title_message".localized
+            alerteText = "supress_alert_text_message".localized
+        case .commment:
+            alerteTitle = "supress_alert_title_comment".localized
+            alerteText = "supress_alert_text_comment".localized
+        case .publication:
+            alerteTitle = "supress_alert_title_publi".localized
+            alerteText = "supress_alert_text_publi".localized
+        }
+        
         AnalyticsLoggerManager.logEvent(name: Click_delete_post)
         let alertVC = MJAlertController()
-        let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontBoutonBlanc(size: 15, color: .orange), bgColor: .appOrangeLight_70, cornerRadius: -1)
-        let buttonValidate = MJAlertButtonType(title: "supress_button_title".localized, titleStyle:ApplicationTheme.getFontBoutonBlanc(size: 15, color: .white), bgColor: .appOrange, cornerRadius: -1)
-        alertVC.configureAlert(alertTitle: "supress_alert_title".localized, message: "supress_alert_text".localized, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .orange), bgColor: .appOrangeLight_70, cornerRadius: -1)
+        let buttonValidate = MJAlertButtonType(title: "supress_button_title".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        alertVC.configureAlert(alertTitle: alerteTitle, message: alerteText, buttonrightType: buttonValidate, buttonLeftType: buttonCancel, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
         alertVC.delegate = self
         alertVC.show()
     }
-    
     
 }
 
 extension ReportGroupChoosePageViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        
+        print("eho")
     }
     func validateRightButton(alertTag: MJAlertTAG) {
         AnalyticsLoggerManager.logEvent(name: Delete_post)
-        guard let _postId = postId else {
-            return
-        }
-        if let _groupId = groupId {
+        
+        if let _groupId = groupId, let _postId = postId {
             NeighborhoodService.deletePostMessage(groupId: _groupId, messageId: _postId) { error in
                 if error == nil {
                     self.delegate?.closeMainForDelete()
                 }
             }
         }
-        if let _eventId = eventId {
+        if let _eventId = eventId , let _postId = postId{
             EventService.deletePostMessage(eventId: _eventId, messageId: _postId) { error in
                 self.delegate?.closeMainForDelete()
+            }
+        }
+        if let _chatmessageId = chatMessageId {
+            MessagingService.deletetCommentFor(chatMessageId: _chatmessageId) { error in
+                print("eho passed")
+                if error != nil {
+                    print("eho error")
+                }
             }
         }
     }

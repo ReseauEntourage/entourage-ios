@@ -19,18 +19,29 @@ class ReportGroupMainViewController: BasePopViewController {
     var actionId:Int? = nil
     var userId:Int? = 0
     var conversationId:Int? = nil
+    var messageId:Int? = nil
     
     weak var parentDelegate:GroupDetailDelegate? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
-        ui_top_view.populateView(title: "parameter_publication".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
+        if (groupId != nil || eventId != nil) && messageId != nil {
+            ui_top_view.populateView(title: "parameter_comment".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
+        }else if messageId != nil && groupId == nil && eventId == nil{
+            ui_top_view.populateView(title: "parameter_message".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
+        }else{
+            ui_top_view.populateView(title: "parameter_publication".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
+        }
+        
+        
 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ReportGroupPageViewController {
+
             vc.group = self.group
             vc.event = event
             vc.signalType = signalType
@@ -40,6 +51,7 @@ class ReportGroupMainViewController: BasePopViewController {
             vc.eventId = eventId
             vc.userId = userId
             vc.actionId = actionId
+            vc.messageId = messageId
             vc.conversationId = conversationId
             vc.titleDelegate = self
         }

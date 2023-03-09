@@ -495,7 +495,17 @@ extension ConversationDetailMessagesViewController: UITextViewDelegate {
 
 //MARK: - MessageCellSignalDelegate -
 extension ConversationDetailMessagesViewController:MessageCellSignalDelegate {
-    func signalMessage(messageId: Int) {}
+    func signalMessage(messageId: Int, userId:Int) {
+        if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
+            vc.parentDelegate = self
+            vc.messageId = messageId
+            vc.signalType = .comment
+            vc.userId = userId
+            vc.conversationId = conversationId
+            self.present(navvc, animated: true)
+        }
+        
+    }
     
     func retrySend(message: String,positionForRetry:Int) {
         self.sendMessage(messageStr: message, isRetry: true, positionForRetry: positionForRetry)
@@ -523,4 +533,26 @@ extension ConversationDetailMessagesViewController:MessageCellSignalDelegate {
 //MARK: - Protocol -
 protocol UpdateUnreadCountDelegate:AnyObject {
     func updateUnreadCount(conversationId:Int, currentIndexPathSelected:IndexPath?)
+}
+
+extension ConversationDetailMessagesViewController:GroupDetailDelegate{
+    func showMessage(signalType: GroupDetailSignalType) {
+        let alertVC = MJAlertController()
+        let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
+        let title = signalType == .comment ? "report_comment_title".localized : "report_publication_title".localized
+        
+        alertVC.configureAlert(alertTitle: title, message: "report_group_message_success".localized, buttonrightType: buttonCancel, buttonLeftType: nil, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35, isButtonCloseHidden: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+            alertVC.show()
+        }
+    }
+    
+    func publicationDeleted() {
+        DispatchQueue.main.async {
+            self.getMessages()
+        }
+    }
+    
+    
 }

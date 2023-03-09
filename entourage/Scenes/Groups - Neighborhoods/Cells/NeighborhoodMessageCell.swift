@@ -19,6 +19,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     @IBOutlet weak var ui_username: UILabel!
     
     @IBOutlet weak var ui_bt_signal_me: UIButton?
+    @IBOutlet weak var ui_button_signal_other: UIButton!
     
     @IBOutlet weak var ui_lb_error: UILabel!
     @IBOutlet weak var ui_view_error: UIView!
@@ -62,7 +63,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         self.positionForRetry = positionRetry
         
         if isMe {
-            ui_bt_signal_me?.isHidden = true
+            ui_bt_signal_me?.isHidden = false
             ui_view_message.backgroundColor = .appOrangeLight_50
             ui_date.textColor = .appOrangeLight
             ui_username.textColor = .appOrangeLight
@@ -80,7 +81,7 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_image_user.image = UIImage.init(named: "placeholder_user")
         }
         
-        ui_message.text = message.content
+        
         
         if isRetry {
             ui_view_error?.isHidden = false
@@ -104,11 +105,22 @@ class NeighborhoodMessageCell: UITableViewCell {
                 ui_username.text = ""
             }
         }
+        if let _status = message.status {
+            if _status == "deleted" {
+                ui_message.text = "deleted_comment".localized
+            }else{
+                ui_message.text = message.content
+            }
+        }
     }
     
     func populateCellConversation(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, isOne2One:Bool, delegate:MessageCellSignalDelegate) {
         messageId = message.uid
         userId = message.user?.sid
+        ui_bt_signal_me?.isHidden = false
+        ui_button_signal_other?.isHidden = false
+        ui_bt_signal_me?.addTarget(self, action: #selector(action_signal_conversation), for: .touchUpInside)
+        ui_button_signal_other?.addTarget(self, action: #selector(action_signal_conversation), for: .touchUpInside)
         
         self.delegate = delegate
         self.messageForRetry = message.content ?? ""
@@ -131,7 +143,13 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_image_user.image = UIImage.init(named: "placeholder_user")
         }
         
-        ui_message.text = message.content
+        if let _status = message.status {
+            if _status == "deleted" {
+                ui_message.text = "deleted_message".localized
+            }else{
+                ui_message.text = message.content
+            }
+        }
         
         if isRetry {
             ui_view_error?.isHidden = false
@@ -161,9 +179,13 @@ class NeighborhoodMessageCell: UITableViewCell {
             }
         }
     }
+    
+    @objc func action_signal_conversation(){
+        delegate?.signalMessage(messageId: messageId,userId: userId!)
+    }
 
     @IBAction func action_signal_message(_ sender: Any) {
-        delegate?.signalMessage(messageId: messageId)
+        delegate?.signalMessage(messageId: messageId,userId: userId!)
     }
     
     @IBAction func action_retry(_ sender: Any) {
@@ -177,7 +199,7 @@ class NeighborhoodMessageCell: UITableViewCell {
 }
 
 protocol MessageCellSignalDelegate:AnyObject {
-    func signalMessage(messageId:Int)
+    func signalMessage(messageId:Int,userId:Int)
     func retrySend(message:String, positionForRetry:Int)
     func showUser(userId:Int?)
     func showWebUrl(url:URL)
