@@ -31,6 +31,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @IBOutlet weak var ui_btn_signal_post: UIButton!
     
+    
     class var identifier: String {
         return String(describing: self)
     }
@@ -68,6 +69,11 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @objc func signalClicked(){
         self.delegate?.signalPost(postId: self.postId, userId: self.userId!)
+    }
+    
+    func removeButton() {
+        ui_view_comment_post.removeFromSuperview()
+        ui_btn_signal_post.removeFromSuperview()
     }
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {

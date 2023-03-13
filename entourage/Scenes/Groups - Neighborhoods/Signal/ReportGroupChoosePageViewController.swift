@@ -139,7 +139,6 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
 
 extension ReportGroupChoosePageViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
-        print("eho")
     }
     func validateRightButton(alertTag: MJAlertTAG) {
         AnalyticsLoggerManager.logEvent(name: Delete_post)
@@ -158,9 +157,7 @@ extension ReportGroupChoosePageViewController: MJAlertControllerDelegate {
         }
         if let _chatmessageId = chatMessageId {
             MessagingService.deletetCommentFor(chatMessageId: _chatmessageId) { error in
-                print("eho passed")
                 if error != nil {
-                    print("eho error")
                 }
             }
         }
