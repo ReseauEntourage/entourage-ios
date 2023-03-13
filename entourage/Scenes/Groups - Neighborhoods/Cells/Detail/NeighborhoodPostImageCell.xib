@@ -255,7 +255,6 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="h0R-dD-e9j" firstAttribute="leading" secondItem="k8l-eW-UxZ" secondAttribute="leading" constant="28" id="ef5-su-QRP"/>
                             <constraint firstItem="YJs-gC-gEm" firstAttribute="top" secondItem="qPp-vp-wdq" secondAttribute="bottom" constant="25" id="f2r-za-QR3"/>
                             <constraint firstAttribute="trailing" secondItem="20f-3G-Kdi" secondAttribute="trailing" constant="28" id="hkE-eG-auU"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="20f-3G-Kdi" secondAttribute="bottom" constant="26" id="jCH-WG-C26"/>
                             <constraint firstAttribute="trailing" secondItem="m1C-Y9-g4k" secondAttribute="trailing" constant="24" id="oo5-Wm-rM3"/>
                             <constraint firstItem="E8Y-4D-rfb" firstAttribute="leading" secondItem="9eH-ug-ufT" secondAttribute="leading" id="q6o-cG-b4O"/>
                             <constraint firstAttribute="trailing" secondItem="h0R-dD-e9j" secondAttribute="trailing" constant="28" id="uTW-2v-2Cv"/>
@@ -287,7 +286,6 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_view_bt_send" destination="dnV-Yy-csW" id="YZY-Xy-qBa"/>
                 <outlet property="ui_view_comment" destination="agT-ek-9AZ" id="Idb-QW-tzl"/>
                 <outlet property="ui_view_comment_post" destination="20f-3G-Kdi" id="M0A-kd-kog"/>
-                <outlet property="ui_view_comment_post_constraint_bottom" destination="jCH-WG-C26" id="rS5-l8-pxM"/>
                 <outlet property="ui_view_container" destination="k8l-eW-UxZ" id="rJa-sI-nWK"/>
             </connections>
             <point key="canvasLocation" x="149.27536231884059" y="112.5"/>

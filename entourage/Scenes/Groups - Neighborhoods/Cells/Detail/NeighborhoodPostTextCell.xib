@@ -22,15 +22,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="226" id="Quf-te-xTQ" customClass="NeighborhoodPostTextCell" customModule="Ent_Beta" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="406" height="226"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="246" id="Quf-te-xTQ" customClass="NeighborhoodPostTextCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="406" height="246"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Quf-te-xTQ" id="n1c-Lk-8QR">
-                <rect key="frame" x="0.0" y="0.0" width="406" height="226"/>
+                <rect key="frame" x="0.0" y="0.0" width="406" height="246"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ygl-BQ-bh6" customClass="MJShadowBottomView" customModule="Ent_Beta" customModuleProvider="target">
-                        <rect key="frame" x="2" y="16" width="402" height="207"/>
+                        <rect key="frame" x="2" y="16" width="402" height="227"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qg8-dq-Kwr">
                                 <rect key="frame" x="28" y="20" width="25" height="25"/>
@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cU0-C4-PYr">
-                                <rect key="frame" x="28" y="70" width="292" height="11"/>
+                                <rect key="frame" x="28" y="70" width="292" height="41"/>
                                 <string key="text">Bienvenue à toi cher danseur !
 Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
@@ -90,20 +90,20 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="x commentaires" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwy-yw-Hbe">
-                                <rect key="frame" x="281.5" y="98" width="92.5" height="18"/>
+                                <rect key="frame" x="281.5" y="128" width="92.5" height="18"/>
                                 <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="13"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_message_neighborhood" translatesAutoresizingMaskIntoConstraints="NO" id="Bwk-s7-QRd">
-                                <rect key="frame" x="261.5" y="99" width="16" height="16"/>
+                                <rect key="frame" x="261.5" y="129" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="LAu-DC-a5y"/>
                                     <constraint firstAttribute="width" constant="16" id="Luk-IN-HdR"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cgH-Es-Ip4">
-                                <rect key="frame" x="261.5" y="91.5" width="112.5" height="31"/>
+                                <rect key="frame" x="261.5" y="121.5" width="112.5" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="36c-6v-cBU"/>
                                 </constraints>
@@ -113,7 +113,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VzS-Pe-ffM">
-                                <rect key="frame" x="28" y="133" width="346" height="48"/>
+                                <rect key="frame" x="28" y="163" width="346" height="48"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0p6-nk-sij">
                                         <rect key="frame" x="0.0" y="0.0" width="292" height="48"/>
@@ -221,7 +221,6 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="JCY-h8-DtF" firstAttribute="top" secondItem="qg8-dq-Kwr" secondAttribute="top" id="7N0-0N-vVr"/>
                             <constraint firstAttribute="trailing" secondItem="Mm9-25-CFc" secondAttribute="trailing" constant="24" id="8j3-Em-gRq"/>
                             <constraint firstItem="qg8-dq-Kwr" firstAttribute="leading" secondItem="ygl-BQ-bh6" secondAttribute="leading" constant="28" id="9gb-6w-B8W"/>
-                            <constraint firstAttribute="bottom" secondItem="VzS-Pe-ffM" secondAttribute="bottom" constant="26" id="Beb-Ph-gmZ"/>
                             <constraint firstItem="JCY-h8-DtF" firstAttribute="bottom" secondItem="qg8-dq-Kwr" secondAttribute="bottom" id="E7x-gC-Bni"/>
                             <constraint firstItem="Bwk-s7-QRd" firstAttribute="top" secondItem="cU0-C4-PYr" secondAttribute="bottom" constant="18" id="I71-Qe-OmA"/>
                             <constraint firstItem="JCY-h8-DtF" firstAttribute="trailing" secondItem="AUs-SL-7c2" secondAttribute="trailing" id="JHQ-UW-Z93"/>
@@ -268,10 +267,9 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                 <outlet property="ui_view_bt_send" destination="7ah-Rf-RzG" id="2I0-Kq-Lz1"/>
                 <outlet property="ui_view_comment" destination="0p6-nk-sij" id="Yh8-vf-aOd"/>
                 <outlet property="ui_view_comment_post" destination="VzS-Pe-ffM" id="I0T-6i-6iM"/>
-                <outlet property="ui_view_comment_post_constraint_bottom" destination="Beb-Ph-gmZ" id="iTX-Sk-hbc"/>
                 <outlet property="ui_view_container" destination="ygl-BQ-bh6" id="I2q-dv-HKt"/>
             </connections>
-            <point key="canvasLocation" x="131.8840579710145" y="75"/>
+            <point key="canvasLocation" x="131.8840579710145" y="81.696428571428569"/>
         </tableViewCell>
     </objects>
     <resources>

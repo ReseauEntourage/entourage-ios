@@ -24,7 +24,6 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_view_comment_post: UIView!
     @IBOutlet weak var ui_view_comment: UIView!
     
-    @IBOutlet weak var ui_view_comment_post_constraint_bottom: NSLayoutConstraint!
     @IBOutlet weak var ui_view_bt_send: UIView!
     @IBOutlet weak var ui_lb_chat: UILabel!
     
@@ -87,14 +86,12 @@ class NeighborhoodPostCell: UITableViewCell {
             if _status == "deleted" {
                 ui_comment.text = "deleted_post_text".localized
                 ui_comment.textColor = UIColor.appGrey151
-                ui_view_comment_post.setVisibilityGone()
-                ui_view_comment_post_constraint_bottom.constant = 0
+                ui_view_comment_post.isHidden = true
                 ui_btn_signal_post.isHidden = true
             }else{
                 ui_comment.text = message.content
                 ui_comment.textColor = .black
-                ui_view_comment_post.setVisibilityVisible(height: 50)
-                ui_view_comment_post_constraint_bottom.constant = 50
+                ui_view_comment_post.isHidden = false
                 ui_btn_signal_post.isHidden = false
             }
         }

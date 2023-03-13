@@ -45,6 +45,13 @@ class NeighborhoodDetailViewController: UIViewController {
     var isAfterCreation = true
     var isShowCreatePost = false
     
+    let DELETED_POST_CELL_SIZE = 165.0
+    let TEXT_POST_CELL_SIZE = 240.0
+    let IMAGE_POST_CELL_SIZE = 450.0
+    //226 deleted message
+    //470 text post message
+    //165 image post message
+    
     var pullRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -523,8 +530,26 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 && indexPath.row == 1 {
-            // return 214
+
+        if indexPath.section  == 1 && indexPath.row > 0 {
+            let _message = messagesOld[indexPath.row - 1]
+            if _message.isPostImage {
+                let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+               commentLabel.numberOfLines = 0
+               commentLabel.text = _message.content
+               commentLabel.sizeToFit()
+               let height = commentLabel.frame.height
+               return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
+            } else if _message.status == "deleted"{
+                return DELETED_POST_CELL_SIZE
+            }else{
+                let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+               commentLabel.numberOfLines = 0
+               commentLabel.text = _message.content
+               commentLabel.sizeToFit()
+               let height = commentLabel.frame.height
+               return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
+            }
         }
         return UITableView.automaticDimension
     }
