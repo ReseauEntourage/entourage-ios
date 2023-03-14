@@ -46,8 +46,8 @@ class NeighborhoodDetailViewController: UIViewController {
     var isShowCreatePost = false
     
     let DELETED_POST_CELL_SIZE = 165.0
-    let TEXT_POST_CELL_SIZE = 240.0
-    let IMAGE_POST_CELL_SIZE = 450.0
+    let TEXT_POST_CELL_SIZE = 220.0
+    let IMAGE_POST_CELL_SIZE = 430.0
     //226 deleted message
     //470 text post message
     //165 image post message
