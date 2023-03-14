@@ -31,6 +31,7 @@ class ReportGroupChoosePageViewController:UIViewController {
     var conversationId:Int? = nil
     var userId:Int = 0
     var chatMessageId:Int? = nil
+    var analyticsClickName = ""
     
     
     var reportVc:ReportGroupViewController? = nil
@@ -114,19 +115,27 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
     func showAlert(){
         var alerteTitle = ""
         var alerteText = ""
+        var analyticsName = ""
         switch(checkparameterType()){
         case .message:
             alerteTitle = "supress_alert_title_message".localized
             alerteText = "supress_alert_text_message".localized
+            analyticsName = Click_delete_mess
+            self.analyticsClickName = Delete_mess
         case .commment:
             alerteTitle = "supress_alert_title_comment".localized
             alerteText = "supress_alert_text_comment".localized
+            analyticsName = Click_delete_comm
+            self.analyticsClickName = Delete_comm
         case .publication:
             alerteTitle = "supress_alert_title_publi".localized
             alerteText = "supress_alert_text_publi".localized
+            analyticsName = Click_delete_post
+            self.analyticsClickName = Delete_post
+
         }
         
-        AnalyticsLoggerManager.logEvent(name: Click_delete_post)
+        AnalyticsLoggerManager.logEvent(name: analyticsName)
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .orange), bgColor: .appOrangeLight_70, cornerRadius: -1)
         let buttonValidate = MJAlertButtonType(title: "supress_button_title".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
@@ -141,8 +150,7 @@ extension ReportGroupChoosePageViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag: MJAlertTAG) {
     }
     func validateRightButton(alertTag: MJAlertTAG) {
-        AnalyticsLoggerManager.logEvent(name: Delete_post)
-        
+        AnalyticsLoggerManager.logEvent(name: self.analyticsClickName)
         if let _groupId = groupId, let _postId = postId {
             NeighborhoodService.deletePostMessage(groupId: _groupId, messageId: _postId) { error in
                 if error == nil {

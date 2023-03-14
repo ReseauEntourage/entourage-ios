@@ -52,6 +52,13 @@ class NeighborhoodMessageCell: UITableViewCell {
                 self?.delegate?.showWebUrl(url: url)
             }
         }
+        
+    }
+    
+    @objc func handleLongPressGesture(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            delegate?.signalMessage(messageId: messageId,userId: userId!)
+        }
     }
     
     func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:MessageCellSignalDelegate) {
@@ -112,6 +119,8 @@ class NeighborhoodMessageCell: UITableViewCell {
                 ui_message.text = message.content
             }
         }
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        self.ui_message.addGestureRecognizer(longPressGesture)
     }
     
     func populateCellConversation(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, isOne2One:Bool, delegate:MessageCellSignalDelegate) {

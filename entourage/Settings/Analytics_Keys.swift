@@ -229,4 +229,8 @@ let Onboard_end = "View__Onboarding__Confirmation"
 //Suppress post
 let Delete_post = "View__DeletePostPop"
 let Click_delete_post = "Clic__DeletePostPop__Delete"
+let Click_delete_comm = "Clic__DeleteCommPop__Delete"
+let Delete_comm = "View__DeleteCommPop"
+let Click_delete_mess = "Clic_DeleteMessagePop_Delete"
+let Delete_mess = "View__DeleteMessagePop"
  
