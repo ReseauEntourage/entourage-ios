@@ -288,6 +288,9 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     func showWelcomeMessage(){
+        //I_present_view_pop
+        AnalyticsLoggerManager.logEvent(name: I_present_view_pop)
+
         let title = "welcome_message_title".localized
         let btnTitle = "welcome_message_btn_title".localized
         var message = "welcome_message_placeholder".localized
@@ -413,12 +416,14 @@ class NeighborhoodDetailViewController: UIViewController {
 extension NeighborhoodDetailViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag:MJAlertTAG) {
         if alertTag == .None {
+            AnalyticsLoggerManager.logEvent(name: i_present_close_pop)
             self.sendLeaveGroup()
         }
     }
     
     func validateRightButton(alertTag:MJAlertTAG) {
         if alertTag == .welcomeMessage{
+            AnalyticsLoggerManager.logEvent(name: I_present_click_i_post)
             showCreatePost()
         }
         

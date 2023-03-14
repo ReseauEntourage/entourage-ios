@@ -234,3 +234,7 @@ let Delete_comm = "View__DeleteCommPop"
 let Click_delete_mess = "Clic_DeleteMessagePop_Delete"
 let Delete_mess = "View__DeleteMessagePop"
  
+//Group Present Pop
+let I_present_view_pop = "View__Group__Pop"
+let I_present_click_i_post = "Action__Group__Pop_Ipost"
+let i_present_close_pop = "Action__Group__Pop_Iclose"
