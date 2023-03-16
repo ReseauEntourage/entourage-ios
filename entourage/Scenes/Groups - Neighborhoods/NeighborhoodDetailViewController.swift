@@ -530,16 +530,48 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        var sectionTOStartwith = 1
-        if hasNewAndOldSections{
-            sectionTOStartwith = 2
-        }
+        // Three case possible = new and old, only old , only new
+        var allMessages = [PostMessage]()
+        var arrayTypeOfCell:TableIsOldAndNewPost = .newAndOld
         if hasNewAndOldSections {
+            arrayTypeOfCell = .newAndOld
+        }else if messagesOld.count > 0 && messagesNew.count == 0{
+            arrayTypeOfCell = .onlyOld
+        }else if messagesNew.count > 0 && messagesOld.count == 0{
+            arrayTypeOfCell = .onlyNew
+        }
+
+        switch arrayTypeOfCell {
+            
+        case .onlyOld:
+            if indexPath.section == 1 && indexPath.row > 1{
+                allMessages.append(contentsOf: messagesOld)
+                let _message = allMessages[indexPath.row - 1]
+                if _message.isPostImage {
+                    let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                   commentLabel.numberOfLines = 0
+                   commentLabel.text = _message.content
+                   commentLabel.sizeToFit()
+                   let height = commentLabel.frame.height
+                   return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
+                } else if _message.status == "deleted"{
+                    return DELETED_POST_CELL_SIZE
+                }else{
+                    let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                   commentLabel.numberOfLines = 0
+                   commentLabel.text = _message.content
+                   commentLabel.sizeToFit()
+                   let height = commentLabel.frame.height
+                   return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
+                }
+            }else{
+                return UITableView.automaticDimension
+            }
+        case .newAndOld:
             if indexPath.section == 1{
                 if indexPath.row == 0 || indexPath.row == 1 {
                     return UITableView.automaticDimension
                 }else{
-                    var allMessages = [PostMessage]()
                     allMessages.append(contentsOf: messagesNew)
                     let _message = allMessages[indexPath.row - 2]
                     if _message.isPostImage {
@@ -560,14 +592,9 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                        return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
                     }
                 }
-            }
-        }
-        
-        
-        if indexPath.section  >= sectionTOStartwith && indexPath.row > 0 {
-            var allMessages = [PostMessage]()
-            allMessages.append(contentsOf: messagesOld)
-            if allMessages.count > 0 {
+                
+            }else if indexPath.section == 2 && indexPath.row > 1 {
+                allMessages.append(contentsOf: messagesOld)
                 let _message = allMessages[indexPath.row - 1]
                 if _message.isPostImage {
                     let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
@@ -586,6 +613,36 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
                    let height = commentLabel.frame.height
                    return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
                 }
+            }else{
+                return UITableView.automaticDimension
+            }
+        case .onlyNew:
+            if indexPath.section == 1{
+                if indexPath.row == 0 || indexPath.row == 1 {
+                    return UITableView.automaticDimension
+                }else{
+                    allMessages.append(contentsOf: messagesNew)
+                    let _message = allMessages[indexPath.row - 2]
+                    if _message.isPostImage {
+                        let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                       commentLabel.numberOfLines = 0
+                       commentLabel.text = _message.content
+                       commentLabel.sizeToFit()
+                       let height = commentLabel.frame.height
+                       return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
+                    } else if _message.status == "deleted"{
+                        return DELETED_POST_CELL_SIZE
+                    }else{
+                        let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                       commentLabel.numberOfLines = 0
+                       commentLabel.text = _message.content
+                       commentLabel.sizeToFit()
+                       let height = commentLabel.frame.height
+                       return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
+                    }
+                }
+            }else{
+                return UITableView.automaticDimension
             }
         }
         return UITableView.automaticDimension
