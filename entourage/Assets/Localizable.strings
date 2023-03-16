@@ -540,13 +540,13 @@
 "parameter_comment" = "Paramètres du commentaire";
 "supress_button_title" = "Supprimer";
 "supress_alert_title_publi" = "Supprimer la publication";
-"supress_alert_text_publi" = "Souhaitez-vous suppprimer cette publication";
+"supress_alert_text_publi" = "Souhaitez-vous supprimer cette publication ?";
 
 "supress_alert_title_message" = "Supprimer le message";
-"supress_alert_text_message" = "Souhaitez-vous suppprimer ce message ?";
+"supress_alert_text_message" = "Souhaitez-vous supprimer ce message ?";
 
 "supress_alert_title_comment" = "Supprimer le commentaire";
-"supress_alert_text_comment" = "Souhaitez-vous suppprimer ce commentaire?";
+"supress_alert_text_comment" = "Souhaitez-vous supprimer ce commentaire ?";
 
 
 "deleted_post_text" = "Cette publication a été supprimée";

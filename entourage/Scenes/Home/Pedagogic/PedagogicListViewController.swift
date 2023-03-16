@@ -41,7 +41,8 @@ class PedagogicListViewController: UIViewController {
         pedagogicViewModel.getResources { isOk in
             self.ui_tableview.reloadData()
         }
-        
+        AnalyticsLoggerManager.logEvent(name: Pedago_View)
+
         setupTabview()
     }
     
@@ -198,12 +199,16 @@ extension PedagogicListViewController: UITableViewDataSource, UITableViewDelegat
         var pedagogic:PedagogicResource
         switch filterSelected {
         case .Understand:
+            AnalyticsLoggerManager.logEvent(name: Pedago_View_understand_tag)
             pedagogic = pedagogicViewModel.understandResources.resources[indexPath.row - 1]
         case .Act:
+            AnalyticsLoggerManager.logEvent(name: Pedago_View_act_tag)
             pedagogic = pedagogicViewModel.actResources.resources[indexPath.row - 1]
         case .Inspire:
+            AnalyticsLoggerManager.logEvent(name: Pedago_View_inspire_tag)
             pedagogic = pedagogicViewModel.inspireResources.resources[indexPath.row - 1]
         case .All:
+            AnalyticsLoggerManager.logEvent(name: Pedago_View_all_tag)
             pedagogic = pedagogicViewModel.allResources[indexPath.section].resources[indexPath.row - 1]
         }
         
@@ -213,6 +218,7 @@ extension PedagogicListViewController: UITableViewDataSource, UITableViewDelegat
             vc.delegate = self
             vc.isRead = pedagogic.isRead
             vc.htmlBody = pedagogic.bodyHtml
+            AnalyticsLoggerManager.logEvent(name: Pedago_View_card)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

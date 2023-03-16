@@ -67,6 +67,7 @@ class NeighborhoodDetailViewController: UIViewController {
         
         ui_floaty_button.isHidden = true
         
+        getNeighborhoodDetail()
         AnalyticsLoggerManager.logEvent(name: View_GroupFeed__Show)
         
         setupFloatingButton()
@@ -83,19 +84,16 @@ class NeighborhoodDetailViewController: UIViewController {
             isShowCreatePost = false
         }
         //Notif for updating neighborhood infos
-        //NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
         
         //Notif for updating when create new Event + Show Detail event
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreateEvent), name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
-        getNeighborhoodDetail()
-
     }
     
     func registerCellsNib() {
         ui_tableview.register(UINib(nibName: NeighborhoodPostTextCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTextCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodPostImageCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageCell.identifier)
-        ui_tableview.register(UINib(nibName: NeighborhoodPostDeletedCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostDeletedCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodDetailTopCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodDetailTopCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodDetailTopMemberCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodDetailTopMemberCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
@@ -438,12 +436,13 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         
         let minimum = self.neighborhood != nil ? 2 : 0
         let added = hasNewAndOldSections ? 1 : 0
+
+
         return minimum + added
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 { return 2 }
-        
         if hasNewAndOldSections {
             var count = 0
             if section == 1 {
@@ -504,10 +503,7 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             }
             
             let postmessage:PostMessage = messagesOld[indexPath.row - 1]
-            var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-            if postmessage.status == "deleted" {
-                identifier = NeighborhoodPostDeletedCell.identifier
-            }
+            let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell
@@ -533,16 +529,70 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         
         let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - countToAdd] : self.neighborhood!.messages![indexPath.row - countToAdd]
         
-        var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-        if postmessage.status == "deleted" {
-            identifier = NeighborhoodPostDeletedCell.identifier
-        }
+        let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
         cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var sectionTOStartwith = 1
+        if hasNewAndOldSections{
+            sectionTOStartwith = 2
+        }
+        if hasNewAndOldSections {
+            if indexPath.section == 1{
+                if indexPath.row == 0 || indexPath.row == 1 {
+                    return UITableView.automaticDimension
+                }else{
+                    var allMessages = [PostMessage]()
+                    allMessages.append(contentsOf: messagesNew)
+                    let _message = allMessages[indexPath.row - 2]
+                    if _message.isPostImage {
+                        let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                       commentLabel.numberOfLines = 0
+                       commentLabel.text = _message.content
+                       commentLabel.sizeToFit()
+                       let height = commentLabel.frame.height
+                       return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
+                    } else if _message.status == "deleted"{
+                        return DELETED_POST_CELL_SIZE
+                    }else{
+                        let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                       commentLabel.numberOfLines = 0
+                       commentLabel.text = _message.content
+                       commentLabel.sizeToFit()
+                       let height = commentLabel.frame.height
+                       return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
+                    }
+                }
+            }
+        }
+        
+        
+        if indexPath.section  >= sectionTOStartwith && indexPath.row > 0 {
+            var allMessages = [PostMessage]()
+            allMessages.append(contentsOf: messagesOld)
+            
+            let _message = allMessages[indexPath.row - 1]
+            if _message.isPostImage {
+                let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+               commentLabel.numberOfLines = 0
+               commentLabel.text = _message.content
+               commentLabel.sizeToFit()
+               let height = commentLabel.frame.height
+               return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
+            } else if _message.status == "deleted"{
+                return DELETED_POST_CELL_SIZE
+            }else{
+                let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+               commentLabel.numberOfLines = 0
+               commentLabel.text = _message.content
+               commentLabel.sizeToFit()
+               let height = commentLabel.frame.height
+               return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
+            }
+        }
         return UITableView.automaticDimension
     }
     

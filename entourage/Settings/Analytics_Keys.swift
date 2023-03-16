@@ -238,3 +238,16 @@ let Delete_mess = "View__DeleteMessagePop"
 let I_present_view_pop = "View__Group__Pop"
 let I_present_click_i_post = "Action__Group__Pop_Ipost"
 let i_present_close_pop = "Action__Group__Pop_Iclose"
+
+//PedagoList
+let Pedago_View = "View__PedagoList"
+
+let Pedago_View_all_tag = "Action__PedagoAllTag"
+
+let Pedago_View_understand_tag = "Action__PedagoUnderstandTag"
+
+let Pedago_View_act_tag = "Action__PedagoActTag"
+
+let Pedago_View_inspire_tag = "Action__PedagoInspireTag"
+
+let Pedago_View_card = "Action__PedagoCard"
