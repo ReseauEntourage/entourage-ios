@@ -567,7 +567,10 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // Three case possible = new and old, only old , only new
+        /* Three case possible = new and old, only old , only new. Also, we have three type of cells : Image and text cell, text cell,  deleted cell (with no comment)
+         For each one , we gonna create a virtual Label to detect size taken by the text part of the publication, then we gonna add it to initial cell size. For image, the size is constant so no need for additionnal calculation*/
+        
+        
         var allMessages = [PostMessage]()
         var arrayTypeOfCell:TableIsOldAndNewPost = .newAndOld
         if hasNewAndOldSections {
