@@ -538,7 +538,7 @@
 "parameter_publication" = "Paramètres de la publication";
 "supress_button_title" = "Supprimer";
 "supress_alert_title" = "Supprimer la publication";
-"supress_alert_text" = "Souhaitez-vous suppprimer cette publication";
+"supress_alert_text" = "Souhaitez-vous supprimer cette publication ?";
 "deleted_post_text" = "Cette publication a été supprimée";
 
 //REPORT AND SUPPRESS POPUP
