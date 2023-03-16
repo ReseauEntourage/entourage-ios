@@ -567,24 +567,25 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         if indexPath.section  >= sectionTOStartwith && indexPath.row > 0 {
             var allMessages = [PostMessage]()
             allMessages.append(contentsOf: messagesOld)
-            
-            let _message = allMessages[indexPath.row - 1]
-            if _message.isPostImage {
-                let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-               commentLabel.numberOfLines = 0
-               commentLabel.text = _message.content
-               commentLabel.sizeToFit()
-               let height = commentLabel.frame.height
-               return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
-            } else if _message.status == "deleted"{
-                return DELETED_POST_CELL_SIZE
-            }else{
-                let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-               commentLabel.numberOfLines = 0
-               commentLabel.text = _message.content
-               commentLabel.sizeToFit()
-               let height = commentLabel.frame.height
-               return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
+            if allMessages.count > 0 {
+                let _message = allMessages[indexPath.row - 1]
+                if _message.isPostImage {
+                    let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                   commentLabel.numberOfLines = 0
+                   commentLabel.text = _message.content
+                   commentLabel.sizeToFit()
+                   let height = commentLabel.frame.height
+                   return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
+                } else if _message.status == "deleted"{
+                    return DELETED_POST_CELL_SIZE
+                }else{
+                    let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                   commentLabel.numberOfLines = 0
+                   commentLabel.text = _message.content
+                   commentLabel.sizeToFit()
+                   let height = commentLabel.frame.height
+                   return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
+                }
             }
         }
         return UITableView.automaticDimension
@@ -654,7 +655,6 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
     }
     
     func signalPost(postId: Int, userId:Int) {
-        print("eho 1")
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.groupId = neighborhoodId
             vc.postId = postId

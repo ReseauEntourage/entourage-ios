@@ -58,6 +58,9 @@ class EventDetailFeedViewController: UIViewController {
     var isLoading = false
     var isAfterCreation = false
     var isShowCreatePost = false
+    let DELETED_POST_CELL_SIZE = 165.0
+    let TEXT_POST_CELL_SIZE = 220.0
+    let IMAGE_POST_CELL_SIZE = 430.0
     
     var pullRefreshControl = UIRefreshControl()
     
@@ -564,8 +567,62 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 && indexPath.row == 1 {
-            // return 214
+        var sectionTOStartwith = 1
+        if hasNewAndOldSections{
+            sectionTOStartwith = 2
+        }
+        if hasNewAndOldSections {
+            if indexPath.section == 1{
+                if indexPath.row == 0 || indexPath.row == 1 {
+                    return UITableView.automaticDimension
+                }else{
+                    var allMessages = [PostMessage]()
+                    allMessages.append(contentsOf: messagesNew)
+                    let _message = allMessages[indexPath.row - 2]
+                    if _message.isPostImage {
+                        let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                       commentLabel.numberOfLines = 0
+                       commentLabel.text = _message.content
+                       commentLabel.sizeToFit()
+                       let height = commentLabel.frame.height
+                       return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
+                    } else if _message.status == "deleted"{
+                        return DELETED_POST_CELL_SIZE
+                    }else{
+                        let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                       commentLabel.numberOfLines = 0
+                       commentLabel.text = _message.content
+                       commentLabel.sizeToFit()
+                       let height = commentLabel.frame.height
+                       return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
+                    }
+                }
+            }
+        }
+        
+        if indexPath.section  >= sectionTOStartwith && indexPath.row > 0 {
+            var allMessages = [PostMessage]()
+            allMessages.append(contentsOf: messagesOld)
+            if allMessages.count > 0 {
+                let _message = allMessages[indexPath.row - 1]
+                if _message.isPostImage {
+                    let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                   commentLabel.numberOfLines = 0
+                   commentLabel.text = _message.content
+                   commentLabel.sizeToFit()
+                   let height = commentLabel.frame.height
+                   return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
+                } else if _message.status == "deleted"{
+                    return DELETED_POST_CELL_SIZE
+                }else{
+                    let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+                   commentLabel.numberOfLines = 0
+                   commentLabel.text = _message.content
+                   commentLabel.sizeToFit()
+                   let height = commentLabel.frame.height
+                   return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
+                }
+            }
         }
         return UITableView.automaticDimension
     }
@@ -707,7 +764,6 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
     }
     
     func signalPost(postId: Int, userId:Int) {
-        print("eho 4")
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.eventId = eventId
             vc.postId = postId

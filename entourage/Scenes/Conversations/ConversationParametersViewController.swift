@@ -109,7 +109,6 @@ class ConversationParametersViewController: BasePopViewController {
     
     func signalConversation() {
         if let  vc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
-            print("eho 9")
             vc.modalPresentationStyle = .currentContext
             vc.parentDelegate = self
             vc.signalType = .conversation

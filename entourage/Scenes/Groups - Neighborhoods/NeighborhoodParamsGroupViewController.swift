@@ -200,7 +200,6 @@ extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
     }
     
     func signalGroup() {
-        print("eho 2")
         AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Report)
         if let  vc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
             vc.modalPresentationStyle = .currentContext

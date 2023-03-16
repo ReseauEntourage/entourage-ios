@@ -220,7 +220,6 @@ class EventDetailMessagesViewController: UIViewController {
     }
     
     @IBAction func action_signal(_ sender: Any) {
-        print("eho 6")
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.eventId = eventId
             vc.postId = parentCommentId
@@ -315,7 +314,6 @@ extension EventDetailMessagesViewController: UITextViewDelegate {
 //MARK: - NeighborhoodMessageCellDelegate -
 extension EventDetailMessagesViewController:MessageCellSignalDelegate {
     func signalMessage(messageId: Int) {
-        print("eho 7")
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.eventId = eventId
             vc.postId = messageId
