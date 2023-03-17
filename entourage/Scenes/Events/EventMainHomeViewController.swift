@@ -118,10 +118,6 @@ class EventMainHomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setupEmptyViews()
-        setupViews()
-        
         changeTabSelection()
         
         if isEventSelected {
@@ -716,36 +712,33 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
         }
     }
     
-    func scrollViewDidScroll( _ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yImage = imageNormalHeight - (scrollView.contentOffset.y + imageNormalHeight)
+        let diffImage = maxViewHeight - maxImageHeight
+        let heightImage = min(max(yImage - diffImage, minImageHeight), maxImageHeight)
+        ui_image.alpha = heightImage / maxImageHeight
+        
+        let yView = viewNormalHeight - (scrollView.contentOffset.y + viewNormalHeight)
+        let heightView = min(max(yView, minViewHeight), maxViewHeight)
+        ui_view_height_constraint.constant = heightView
+        
+        // Éviter de calculer et repositionner les vues inutilement.
+        if heightView <= minViewHeight {
+            ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: minLabelFont)
+            return
+        }
+        
+        ui_image.isHidden = false
+        
+        let yLabel = labelNormalConstraintBottom - (scrollView.contentOffset.y + labelNormalConstraintBottom)
+        let heightLabel = min(max(yLabel, minLabelBottomConstraint), maxLabelBottomConstraint)
+        ui_constraint_bottom_label.constant = heightLabel
+        
+        let yLabelFont = labelNormalFontHeight - (scrollView.contentOffset.y + labelNormalFontHeight)
+        let heightLabelFont = min(max((minLabelFont * yLabelFont) / minViewHeight, minLabelFont), maxLabelFont)
+        ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: heightLabelFont)
+        
         UIView.animate(withDuration: 0) {
-            
-            let yImage = self.imageNormalHeight - (scrollView.contentOffset.y+self.imageNormalHeight)
-            let diffImage = (self.maxViewHeight - self.maxImageHeight)
-            let heightImage = min(max (yImage -  diffImage,self.minImageHeight),self.maxImageHeight)
-            
-            self.ui_image.alpha = heightImage / self.maxImageHeight
-            
-            let yView = self.viewNormalHeight - (scrollView.contentOffset.y + self.viewNormalHeight)
-            let heightView = min(max (yView,self.minViewHeight),self.maxViewHeight)
-            self.ui_view_height_constraint.constant = heightView
-            
-            //On évite de calculer et repositionner les vues inutiliement.
-            if self.ui_view_height_constraint.constant <= self.minViewHeight {
-                self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
-                return
-            }
-            
-            self.ui_image.isHidden = false
-            
-            let yLabel = self.labelNormalConstraintBottom - (scrollView.contentOffset.y + self.labelNormalConstraintBottom)
-            let heightLabel = min(max (yLabel,self.minLabelBottomConstraint),self.maxLabelBottomConstraint)
-            self.ui_constraint_bottom_label.constant = heightLabel
-            
-            let yLabelFont = self.labelNormalFontHeight - (scrollView.contentOffset.y + self.labelNormalFontHeight)
-            let heightCalculated = (self.minLabelFont * yLabelFont) / self.minViewHeight
-            let heightLabelFont = min(max (heightCalculated,self.minLabelFont),self.maxLabelFont)
-            self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: heightLabelFont)
-            
             self.view.layoutIfNeeded()
         }
     }

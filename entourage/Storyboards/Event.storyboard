@@ -330,9 +330,11 @@
                                 <color key="backgroundColor" name="BeigeClair"/>
                                 <constraints>
                                     <constraint firstItem="lTo-WT-dWm" firstAttribute="leading" secondItem="vAV-22-rBh" secondAttribute="leading" id="8Lc-Nf-Yco"/>
+                                    <constraint firstAttribute="trailing" secondItem="lTo-WT-dWm" secondAttribute="trailing" id="Al0-MA-Xl1"/>
                                     <constraint firstItem="w6M-9S-Paw" firstAttribute="leading" secondItem="vAV-22-rBh" secondAttribute="leading" constant="3" id="D2W-Nv-WVh"/>
                                     <constraint firstItem="lTo-WT-dWm" firstAttribute="top" secondItem="vAV-22-rBh" secondAttribute="top" id="Dvh-Ni-ALt"/>
                                     <constraint firstItem="w6M-9S-Paw" firstAttribute="top" secondItem="K5K-y1-tIQ" secondAttribute="bottom" constant="10" id="FJN-jg-PAX"/>
+                                    <constraint firstItem="lTo-WT-dWm" firstAttribute="leading" secondItem="vAV-22-rBh" secondAttribute="leading" id="HEI-OF-DhE"/>
                                     <constraint firstAttribute="trailing" secondItem="3aR-7w-b6Q" secondAttribute="trailing" id="Khv-Ri-f5L"/>
                                     <constraint firstAttribute="trailing" secondItem="w6M-9S-Paw" secondAttribute="trailing" constant="3" id="PgW-KV-H3S"/>
                                     <constraint firstAttribute="trailing" secondItem="lTo-WT-dWm" secondAttribute="trailing" id="Q3c-d5-D4p"/>
