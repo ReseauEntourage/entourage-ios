@@ -85,9 +85,12 @@ class NeighborhoodPostCell: UITableViewCell {
             if _status == "deleted" {
                 ui_comment.text = "deleted_post_text".localized
                 ui_comment.textColor = UIColor.appGrey151
+                ui_btn_signal_post.isHidden = true
             }else{
                 ui_comment.text = message.content
                 ui_comment.textColor = .black
+                ui_btn_signal_post.isHidden = false
+
             }
         }
         
