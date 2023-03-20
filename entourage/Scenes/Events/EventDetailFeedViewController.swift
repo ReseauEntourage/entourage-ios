@@ -242,7 +242,6 @@ class EventDetailFeedViewController: UIViewController {
     }
     
     func getMorePosts() {
-        //TODO: a tester
         self.isLoading = true
         EventService.getEventPostsPaging(id: eventId, currentPage: currentPagingPage, per: itemsPerPage) { post, error in
             if let post = post {
@@ -260,7 +259,6 @@ class EventDetailFeedViewController: UIViewController {
                 }
                 self.isLoading = false
             }
-            //TODO: Error ?
         }
     }
     
@@ -268,7 +266,6 @@ class EventDetailFeedViewController: UIViewController {
         guard let messages = event?.posts else {
             return
         }
-        
         messagesNew.removeAll()
         messagesOld.removeAll()
         
@@ -280,8 +277,7 @@ class EventDetailFeedViewController: UIViewController {
                 messagesNew.append(post)
             }
         }
-        print("eho " , messagesOld.count)
-        print("eho " , messagesNew.count)
+
         hasNewAndOldSections = messagesOld.count > 0 && messagesNew.count > 0
     }
     
@@ -715,7 +711,6 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
     }
     
     func signalPost(postId: Int, userId:Int) {
-        print("eho 4")
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.eventId = eventId
             vc.postId = postId
@@ -762,7 +757,6 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
 extension EventDetailFeedViewController:UpdateCommentCountDelegate {
     func updateCommentCount(parentCommentId: Int, nbComments: Int, currentIndexPathSelected:IndexPath?) {
         guard let _ = event?.posts else {return}
-        
         var i = 0
         for _post in event!.posts! {
             if _post.uid == parentCommentId {
