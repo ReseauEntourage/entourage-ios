@@ -228,6 +228,7 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             <constraint firstItem="cgH-Es-Ip4" firstAttribute="centerY" secondItem="Bwk-s7-QRd" secondAttribute="centerY" id="Y40-RJ-UVb"/>
                             <constraint firstItem="cU0-C4-PYr" firstAttribute="top" secondItem="qg8-dq-Kwr" secondAttribute="bottom" constant="25" id="Zi5-DI-PJm"/>
                             <constraint firstItem="dwy-yw-Hbe" firstAttribute="leading" secondItem="Bwk-s7-QRd" secondAttribute="trailing" constant="4" id="dmS-oq-qZ6"/>
+                            <constraint firstAttribute="bottom" secondItem="VzS-Pe-ffM" secondAttribute="bottom" constant="16" id="e8W-kd-jVt"/>
                             <constraint firstItem="AUs-SL-7c2" firstAttribute="centerY" secondItem="qg8-dq-Kwr" secondAttribute="centerY" id="mw6-13-TPO"/>
                             <constraint firstItem="AUs-SL-7c2" firstAttribute="leading" secondItem="qg8-dq-Kwr" secondAttribute="trailing" constant="8" symbolic="YES" id="p3N-db-0wc"/>
                             <constraint firstItem="cgH-Es-Ip4" firstAttribute="trailing" secondItem="dwy-yw-Hbe" secondAttribute="trailing" id="qOV-UT-iCT"/>

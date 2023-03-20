@@ -387,6 +387,7 @@
 		264C1AFC29AF5BED0083F83E /* HeaderReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */; };
 		268FCA2A2967281100159C34 /* MJAlertWithImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FCA292967281100159C34 /* MJAlertWithImageController.swift */; };
 		268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */; };
+		26BC119929C88CD700F204BB /* NeighborhoodPostDeletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */; };
 		7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */; };
 /* End PBXBuildFile section */
 
@@ -765,6 +766,7 @@
 		264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderReportView.swift; sourceTree = "<group>"; };
 		268FCA292967281100159C34 /* MJAlertWithImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJAlertWithImageController.swift; sourceTree = "<group>"; };
 		268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertWithImageController.xib; sourceTree = "<group>"; };
+		26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostDeletedCell.xib; sourceTree = "<group>"; };
 		6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		EF9863871BD660A314749193 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
@@ -991,6 +993,7 @@
 				0258AFE3282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift */,
 				025C92C22834149B000970D9 /* NeighborhoodEventsTableviewCell.xib */,
 				025C92C428341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib */,
+				26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1804,6 +1807,7 @@
 				023B07CC27D664F6007752AC /* Profile.xcassets in Resources */,
 				025D8768278DED3C00909101 /* AppConfigurations.plist in Resources */,
 				025C92B028340787000970D9 /* NeighborhoodPostTextCell.xib in Resources */,
+				26BC119929C88CD700F204BB /* NeighborhoodPostDeletedCell.xib in Resources */,
 				02CCE67C27D78CAB00D6976C /* NunitoSans-SemiBold.ttf in Resources */,
 				02CCE67D27D78CAB00D6976C /* NunitoSans-Bold.ttf in Resources */,
 				02F5FEC527E0CB6800A14313 /* MJAlertController.xib in Resources */,

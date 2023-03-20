@@ -114,6 +114,7 @@ class EventDetailFeedViewController: UIViewController {
     func registerCellsNib() {
         ui_tableview.register(UINib(nibName: NeighborhoodPostTextCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTextCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodPostImageCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostDeletedCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostDeletedCell.identifier)
         ui_tableview.register(UINib(nibName: EventDetailTopFullCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopFullCell.identifier)
         ui_tableview.register(UINib(nibName: EventDetailTopLightCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopLightCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
@@ -535,7 +536,10 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             }
             
             let postmessage:PostMessage = messagesOld[indexPath.row - 1]
-            let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            if postmessage.status == "deleted" {
+                identifier = NeighborhoodPostDeletedCell.identifier
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell
@@ -561,131 +565,16 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         
         let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - countToAdd] : self.event!.posts![indexPath.row - countToAdd]
         
-        let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        if postmessage.status == "deleted" {
+            identifier = NeighborhoodPostDeletedCell.identifier
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
         cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        /* Three case possible = new and old, only old , only new. Also, we have three type of cells : Image and text cell, text cell,  deleted cell (with no comment)
-         For each one , we gonna create a virtual Label to detect size taken by the text part of the publication, then we gonna add it to initial cell size. For image, the size is constant so no need for additionnal calculation*/
-        
-        
-        var allMessages = [PostMessage]()
-        var arrayTypeOfCell:TableIsOldAndNewPost = .newAndOld
-        if hasNewAndOldSections {
-            arrayTypeOfCell = .newAndOld
-        }else if messagesOld.count > 0 && messagesNew.count == 0{
-            arrayTypeOfCell = .onlyOld
-        }else if messagesNew.count > 0 && messagesOld.count == 0{
-            arrayTypeOfCell = .onlyNew
-        }
-
-        switch arrayTypeOfCell {
-            
-        case .onlyOld:
-            if indexPath.section == 1 && indexPath.row > 0{
-                allMessages.append(contentsOf: messagesOld)
-                let _message = allMessages[indexPath.row - 1]
-                if _message.isPostImage {
-                    let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-                   commentLabel.numberOfLines = 0
-                   commentLabel.text = _message.content
-                   commentLabel.sizeToFit()
-                   let height = commentLabel.frame.height
-                   return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
-                } else if _message.status == "deleted"{
-                    return DELETED_POST_CELL_SIZE
-                }else{
-                    let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-                   commentLabel.numberOfLines = 0
-                   commentLabel.text = _message.content
-                   commentLabel.sizeToFit()
-                   let height = commentLabel.frame.height
-                   return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
-                }
-            }else{
-                return UITableView.automaticDimension
-            }
-        case .newAndOld:
-            if indexPath.section == 1{
-                if indexPath.row == 0 || indexPath.row == 1 {
-                    return UITableView.automaticDimension
-                }else{
-                    allMessages.append(contentsOf: messagesNew)
-                    let _message = allMessages[indexPath.row - 2]
-                    if _message.isPostImage {
-                        let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-                       commentLabel.numberOfLines = 0
-                       commentLabel.text = _message.content
-                       commentLabel.sizeToFit()
-                       let height = commentLabel.frame.height
-                       return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
-                    } else if _message.status == "deleted"{
-                        return DELETED_POST_CELL_SIZE
-                    }else{
-                        let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-                       commentLabel.numberOfLines = 0
-                       commentLabel.text = _message.content
-                       commentLabel.sizeToFit()
-                       let height = commentLabel.frame.height
-                       return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
-                    }
-                }
-                
-            }else if indexPath.section == 2 && indexPath.row > 1 {
-                allMessages.append(contentsOf: messagesOld)
-                let _message = allMessages[indexPath.row - 1]
-                if _message.isPostImage {
-                    let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-                   commentLabel.numberOfLines = 0
-                   commentLabel.text = _message.content
-                   commentLabel.sizeToFit()
-                   let height = commentLabel.frame.height
-                   return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
-                } else if _message.status == "deleted"{
-                    return DELETED_POST_CELL_SIZE
-                }else{
-                    let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-                   commentLabel.numberOfLines = 0
-                   commentLabel.text = _message.content
-                   commentLabel.sizeToFit()
-                   let height = commentLabel.frame.height
-                   return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
-                }
-            }else{
-                return UITableView.automaticDimension
-            }
-        case .onlyNew:
-            if indexPath.section == 1{
-                if indexPath.row == 0 || indexPath.row == 1 {
-                    return UITableView.automaticDimension
-                }else{
-                    allMessages.append(contentsOf: messagesNew)
-                    let _message = allMessages[indexPath.row - 2]
-                    if _message.isPostImage {
-                        let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-                       commentLabel.numberOfLines = 0
-                       commentLabel.text = _message.content
-                       commentLabel.sizeToFit()
-                       let height = commentLabel.frame.height
-                       return max(height + IMAGE_POST_CELL_SIZE, IMAGE_POST_CELL_SIZE)
-                    } else if _message.status == "deleted"{
-                        return DELETED_POST_CELL_SIZE
-                    }else{
-                        let commentLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-                       commentLabel.numberOfLines = 0
-                       commentLabel.text = _message.content
-                       commentLabel.sizeToFit()
-                       let height = commentLabel.frame.height
-                       return max(height + TEXT_POST_CELL_SIZE, TEXT_POST_CELL_SIZE)
-                    }
-                }
-            }else{
-                return UITableView.automaticDimension
-            }
-        }
         return UITableView.automaticDimension
     }
     

@@ -54,17 +54,16 @@ class NeighborhoodPostCell: UITableViewCell {
         ui_comments_nb.setupFontAndColor(style: ApplicationTheme.getFontChampInput())
         
         ui_image_post?.layer.cornerRadius = 8
-        
-        ui_view_bt_send.layer.cornerRadius = ui_view_bt_send.frame.height / 2
-        ui_view_comment.layer.cornerRadius = ui_view_comment.frame.height / 2
-        ui_view_comment.layer.borderColor = UIColor.appOrange.cgColor
-        ui_view_comment.layer.borderWidth = 1
-        ui_lb_chat.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
-        
-        ui_lb_chat.text = "comment_post".localized
-        
-        ui_btn_signal_post.addTarget(self, action: #selector(signalClicked), for: .touchUpInside)
-        
+        if ui_view_comment != nil {
+            ui_view_bt_send.layer.cornerRadius = ui_view_bt_send.frame.height / 2
+            ui_view_comment.layer.cornerRadius = ui_view_comment.frame.height / 2
+            ui_view_comment.layer.borderColor = UIColor.appOrange.cgColor
+            ui_view_comment.layer.borderWidth = 1
+            ui_lb_chat.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
+            ui_lb_chat.text = "comment_post".localized
+            ui_btn_signal_post.addTarget(self, action: #selector(signalClicked), for: .touchUpInside)
+        }
+
     }
     
     @objc func signalClicked(){
@@ -86,13 +85,9 @@ class NeighborhoodPostCell: UITableViewCell {
             if _status == "deleted" {
                 ui_comment.text = "deleted_post_text".localized
                 ui_comment.textColor = UIColor.appGrey151
-                ui_view_comment_post.isHidden = true
-                ui_btn_signal_post.isHidden = true
             }else{
                 ui_comment.text = message.content
                 ui_comment.textColor = .black
-                ui_view_comment_post.isHidden = false
-                ui_btn_signal_post.isHidden = false
             }
         }
         
@@ -184,4 +179,7 @@ class NeighborhoodPostTextCell: NeighborhoodPostCell {
 
 class NeighborhoodPostImageCell: NeighborhoodPostCell {
    // override class var identifier: String {return self.description()}
+}
+class NeighborhoodPostDeletedCell:NeighborhoodPostCell{
+    
 }
