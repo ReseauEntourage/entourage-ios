@@ -279,7 +279,8 @@ class EventDetailFeedViewController: UIViewController {
                 messagesNew.append(post)
             }
         }
-        
+        print("eho " , messagesOld.count)
+        print("eho " , messagesNew.count)
         hasNewAndOldSections = messagesOld.count > 0 && messagesNew.count > 0
     }
     
@@ -584,7 +585,7 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         switch arrayTypeOfCell {
             
         case .onlyOld:
-            if indexPath.section == 1 && indexPath.row > 1{
+            if indexPath.section == 1 && indexPath.row > 0{
                 allMessages.append(contentsOf: messagesOld)
                 let _message = allMessages[indexPath.row - 1]
                 if _message.isPostImage {
