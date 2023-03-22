@@ -423,9 +423,15 @@ class NeighborhoodHomeViewController: UIViewController {
         if isGroupsSelected && myNeighborhoods.count == 0 { return }
         else if neighborhoodsDiscovered.count == 0 { return }
         
-        let indexPath = IndexPath(row: 0, section: 0)
-        DispatchQueue.main.async {
-            self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: isAnimated)
+        let section = 0
+        let numberOfRows = self.ui_tableview?.numberOfRows(inSection: section) ?? 0
+        if numberOfRows > 0 {
+            let indexPath = IndexPath(row: 0, section: section)
+            DispatchQueue.main.async {
+                self.ui_tableview?.scrollToRow(at: indexPath, at: .top, animated: isAnimated)
+            }
+        } else {
+            // La section est vide, traiter en conséquence
         }
     }
     
