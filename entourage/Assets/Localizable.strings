@@ -543,7 +543,7 @@
 "supress_alert_text_publi" = "Souhaitez-vous supprimer cette publication ?";
 
 "supress_alert_title_message" = "Supprimer le message";
-"supress_alert_text_message" = "Souhaitez-vous supprimer ce message ?";
+"supress_alert_text_message" = "Souhaitez-vous supprimer ce message de la conversation ?";
 
 "supress_alert_title_comment" = "Supprimer le commentaire";
 "supress_alert_text_comment" = "Souhaitez-vous supprimer ce commentaire ?";
@@ -569,8 +569,8 @@
 "suppress_message_cell_subtitle" = "";
 "suppress_comment_cell_subtitle" = "";
 
-"deleted_message" = "Ce message a été supprimé";
-"deleted_comment" = "Ce commentaire a été supprimé";
+"deleted_message" = "      Ce message a été supprimé";
+"deleted_comment" = "      Ce commentaire a été supprimé";
 
 /********
  GROUP

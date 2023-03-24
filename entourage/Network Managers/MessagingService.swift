@@ -97,7 +97,6 @@ struct MessagingService:ParsingDataCodable {
         var endpoint = kAPIChatMessageDelete
         endpoint = String.init(format: endpoint, chatMessageId, token)
         
-        Logger.print("passed here")
         NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
             guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
                 DispatchQueue.main.async { completion(error) }

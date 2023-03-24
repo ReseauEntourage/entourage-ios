@@ -165,8 +165,7 @@ extension ReportGroupChoosePageViewController: MJAlertControllerDelegate {
         }
         if let _chatmessageId = chatMessageId {
             MessagingService.deletetCommentFor(chatMessageId: _chatmessageId) { error in
-                if error != nil {
-                }
+                self.delegate?.closeMainForDelete()
             }
         }
     }
