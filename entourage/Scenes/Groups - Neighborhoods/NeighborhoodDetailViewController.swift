@@ -186,7 +186,6 @@ class NeighborhoodDetailViewController: UIViewController {
     
     @objc func updateNeighborhood() {
         getNeighborhoodDetail()
-        print("eho from  updateNeigborhood")
     }
     
     deinit {
@@ -195,7 +194,6 @@ class NeighborhoodDetailViewController: UIViewController {
     
     //MARK: - Network -
     func getNeighborhoodDetail(hasToRefreshLists:Bool = false) {
-        print("eho from  innerfunction groupDetailVC Calling")
 
         self.currentPagingPage = 1
         self.isLoading = true
@@ -277,7 +275,6 @@ class NeighborhoodDetailViewController: UIViewController {
                     self.isAfterCreation = true
                     self.neighborhood?.membersCount = count
                     self.ui_tableview.reloadData()
-                    print("eho from  add remove member")
                     self.getNeighborhoodDetail(hasToRefreshLists:true)
                     self.showWelcomeMessage()
                 }
@@ -343,7 +340,6 @@ class NeighborhoodDetailViewController: UIViewController {
                 
                 self.ui_tableview.reloadData()
                 self.getNeighborhoodDetail(hasToRefreshLists:true)
-                print("eho from  sendleavegroup")
 
             }
         }
@@ -735,7 +731,6 @@ extension NeighborhoodDetailViewController: MJNavBackViewDelegate {
 extension NeighborhoodDetailViewController:NeighborhoodDetailViewControllerDelegate {
     func refreshNeighborhoodModified() {
         self.getNeighborhoodDetail(hasToRefreshLists:true)
-        print("eho from  refreshneigborhoodmodified")
 
     }
 }
@@ -749,7 +744,6 @@ extension NeighborhoodDetailViewController: UIScrollViewDelegate {
 extension NeighborhoodDetailViewController:GroupDetailDelegate{
     func publicationDeleted() {
         getNeighborhoodDetail()
-        print("eho from  publi deleted")
         self.ui_tableview.reloadData()
     }
     

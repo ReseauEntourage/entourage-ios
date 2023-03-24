@@ -107,38 +107,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if components.host == "entourage-webapp-preprod.herokuapp.com" {
             print("eho pathComponents " , pathComponents)
             if pathComponents.contains("outings") && pathComponents.contains("chat_messages"){
-                print("eho outings message")
             }
             if pathComponents.contains("neighborhoods") && pathComponents.contains("chat_messages"){
-                print("eho neighborhoods message")
 
             }
             if pathComponents.contains("conversations") && pathComponents.contains("chat_messages"){
-                print("eho conversations message")
 
             }
             if pathComponents.contains("outings") {
-                print("eho outings ")
 
             }
             if pathComponents.contains("neighborhoods") {
-                print("neighborhoods outings ")
 
             }
             if pathComponents.contains("conversations") {
-                print("eho conversations ")
 
             }
             if pathComponents.contains("solicitations") {
-                print("eho solicitations ")
 
             }
             if pathComponents.contains("contributions") {
-                print("eho contributions ")
 
             }
             if pathComponents.contains("resources") {
-                print("eho resources ")
 
             }
             
