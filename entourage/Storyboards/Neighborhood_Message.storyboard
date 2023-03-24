@@ -144,7 +144,7 @@
                                                                 <constraint firstItem="588-O7-Q3o" firstAttribute="leading" secondItem="4qK-jT-vin" secondAttribute="trailing" constant="8" id="xVl-eY-ScE"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMk-JM-s2o">
+                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMk-JM-s2o">
                                                             <rect key="frame" x="233" y="52" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="Yd1-6N-ukR"/>

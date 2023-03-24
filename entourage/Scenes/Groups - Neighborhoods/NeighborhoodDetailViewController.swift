@@ -64,10 +64,7 @@ class NeighborhoodDetailViewController: UIViewController {
         registerCellsNib()
         
         setupViews()
-        
         ui_floaty_button.isHidden = true
-        
-        getNeighborhoodDetail()
         AnalyticsLoggerManager.logEvent(name: View_GroupFeed__Show)
         
         setupFloatingButton()
@@ -83,9 +80,9 @@ class NeighborhoodDetailViewController: UIViewController {
             showCreatePost()
             isShowCreatePost = false
         }
+        getNeighborhoodDetail()
         //Notif for updating neighborhood infos
-        NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
-        
+        //NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
         //Notif for updating when create new Event + Show Detail event
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreateEvent), name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
@@ -189,6 +186,7 @@ class NeighborhoodDetailViewController: UIViewController {
     
     @objc func updateNeighborhood() {
         getNeighborhoodDetail()
+        print("eho from  updateNeigborhood")
     }
     
     deinit {
@@ -197,6 +195,8 @@ class NeighborhoodDetailViewController: UIViewController {
     
     //MARK: - Network -
     func getNeighborhoodDetail(hasToRefreshLists:Bool = false) {
+        print("eho from  innerfunction groupDetailVC Calling")
+
         self.currentPagingPage = 1
         self.isLoading = true
         NeighborhoodService.getNeighborhoodDetail(id: neighborhoodId) { group, error in
@@ -277,6 +277,7 @@ class NeighborhoodDetailViewController: UIViewController {
                     self.isAfterCreation = true
                     self.neighborhood?.membersCount = count
                     self.ui_tableview.reloadData()
+                    print("eho from  add remove member")
                     self.getNeighborhoodDetail(hasToRefreshLists:true)
                     self.showWelcomeMessage()
                 }
@@ -342,6 +343,8 @@ class NeighborhoodDetailViewController: UIViewController {
                 
                 self.ui_tableview.reloadData()
                 self.getNeighborhoodDetail(hasToRefreshLists:true)
+                print("eho from  sendleavegroup")
+
             }
         }
     }
@@ -732,6 +735,8 @@ extension NeighborhoodDetailViewController: MJNavBackViewDelegate {
 extension NeighborhoodDetailViewController:NeighborhoodDetailViewControllerDelegate {
     func refreshNeighborhoodModified() {
         self.getNeighborhoodDetail(hasToRefreshLists:true)
+        print("eho from  refreshneigborhoodmodified")
+
     }
 }
 
@@ -744,6 +749,7 @@ extension NeighborhoodDetailViewController: UIScrollViewDelegate {
 extension NeighborhoodDetailViewController:GroupDetailDelegate{
     func publicationDeleted() {
         getNeighborhoodDetail()
+        print("eho from  publi deleted")
         self.ui_tableview.reloadData()
     }
     

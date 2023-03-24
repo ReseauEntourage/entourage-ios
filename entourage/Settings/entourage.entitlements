@@ -10,6 +10,8 @@
 		<string>applinks:entourage.social</string>
 		<string>applinks:app.entourage.social</string>
 		<string>applinks:entourage-webapp-preprod.herokuapp.com</string>
+		<string>webcredentials:example.com</string>
+		<string>applinks:api-preprod.entourage.social</string>
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
