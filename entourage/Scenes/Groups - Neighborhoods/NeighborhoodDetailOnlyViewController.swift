@@ -25,14 +25,12 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
         ui_top_view.populateCustom(title: "neighborhood_about_group_title".localized, titleFont: ApplicationTheme.getFontCourantBoldNoir().font, titleColor: ApplicationTheme.getFontCourantBoldNoir().color, imageName: nil, backgroundColor: .appBeigeClair, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil)
         
         getNeighborhoodDetail()
-        print("eho from  groupOnyDetailVC")
         NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
         AnalyticsLoggerManager.logEvent(name: View_GroupFeed_FullDescription)
     }
     
     @objc func updateNeighborhood() {
         getNeighborhoodDetail()
-        print("eho from  onlyDetailVC updateNeighborhood")
 
     }
     
@@ -41,7 +39,6 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
     }
     
     func getNeighborhoodDetail() {
-        print("eho from  OnlyDetailVC inner get group")
         NeighborhoodService.getNeighborhoodDetail(id: neighborhoodId) { group, error in
             if let _ = error {
                 self.goBack()

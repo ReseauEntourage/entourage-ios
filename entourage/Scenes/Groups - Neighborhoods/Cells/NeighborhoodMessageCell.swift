@@ -19,7 +19,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     @IBOutlet weak var ui_username: UILabel!
     
     @IBOutlet weak var ui_bt_signal_me: UIButton?
-    @IBOutlet weak var ui_button_signal_other: UIButton!
+    @IBOutlet weak var ui_button_signal_other: UIButton?
     
     @IBOutlet weak var ui_lb_error: UILabel!
     @IBOutlet weak var ui_view_error: UIView!
@@ -146,12 +146,11 @@ class NeighborhoodMessageCell: UITableViewCell {
     
     func populateCellConversation(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, isOne2One:Bool, delegate:MessageCellSignalDelegate) {
         
-        
         messageId = message.uid
         userId = message.user?.sid
         //change this line to mke three point appear
         ui_bt_signal_me?.isHidden = true
-        ui_button_signal_other?.isHidden = false
+        ui_button_signal_other?.isHidden = true
         ui_bt_signal_me?.addTarget(self, action: #selector(action_signal_conversation), for: .touchUpInside)
         ui_button_signal_other?.addTarget(self, action: #selector(action_signal_conversation), for: .touchUpInside)
         
@@ -187,8 +186,10 @@ class NeighborhoodMessageCell: UITableViewCell {
                 layoutIfNeeded()
                 
             } else {
-                let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
-                self.ui_message.addGestureRecognizer(longPressGesture)
+                if isMe {
+                    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+                    self.ui_message.addGestureRecognizer(longPressGesture)
+                }
                 ui_message.text = message.content
                 ui_message.textColor = UIColor.black // Changer la couleur du texte
                 ui_view_message.backgroundColor = UIColor.appBeige // Changer la couleur de fond
