@@ -95,7 +95,6 @@ class ConversationParametersViewController: BasePopViewController {
         if let navVC = UIStoryboard.init(name: StoryboardName.userDetail, bundle: nil).instantiateViewController(withIdentifier: "userProfileNavVC") as? UINavigationController {
             if let _homeVC = navVC.topViewController as? UserProfileDetailViewController {
                 _homeVC.currentUserId = "\(userId)"
-                
                 self.present(navVC, animated: true)
             }
         }
@@ -220,6 +219,13 @@ extension ConversationParametersViewController: UITableViewDataSource, UITableVi
 
 //MARK: - GroupDetailDelegate -
 extension ConversationParametersViewController: GroupDetailDelegate {
+    func publicationDeleted() {
+        if !isOneToOne {
+            getConversation()
+        }
+        self.ui_tableview.reloadData()
+    }
+    
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)

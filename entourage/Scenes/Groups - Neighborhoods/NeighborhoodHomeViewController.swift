@@ -430,6 +430,7 @@ class NeighborhoodHomeViewController: UIViewController {
     }
     
     func setupViews() {
+        self.setMyFirst()
         ui_label_title.text = "neighborhood_main_page_title".localized
         ui_label_groups.text = "neighborhood_main_page_button_myGroups".localized
         ui_label_discover.text = "neighborhood_main_page_button_discover".localized

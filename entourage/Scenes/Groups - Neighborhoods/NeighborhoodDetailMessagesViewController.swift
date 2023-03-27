@@ -226,6 +226,7 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             vc.postId = parentCommentId
             vc.parentDelegate = self
             vc.signalType = .publication
+            
             self.present(navvc, animated: true)
         }
     }
@@ -347,6 +348,11 @@ extension NeighborhoodDetailMessagesViewController:MessageCellSignalDelegate {
 
 //MARK: - GroupDetailDelegate -
 extension NeighborhoodDetailMessagesViewController:GroupDetailDelegate {
+    func publicationDeleted() {
+        getMessages()
+        self.ui_tableview.reloadData()
+    }
+    
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)

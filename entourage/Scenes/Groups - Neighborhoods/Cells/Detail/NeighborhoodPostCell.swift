@@ -21,10 +21,13 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @IBOutlet weak var ui_image_post: UIImageView!
     
+    @IBOutlet weak var ui_view_comment_post: UIView!
     @IBOutlet weak var ui_view_comment: UIView!
     
     @IBOutlet weak var ui_view_bt_send: UIView!
     @IBOutlet weak var ui_lb_chat: UILabel!
+    
+    @IBOutlet weak var ui_label_ambassador: UILabel!
     
     @IBOutlet weak var ui_btn_signal_post: UIButton!
     
@@ -51,21 +54,20 @@ class NeighborhoodPostCell: UITableViewCell {
         ui_comments_nb.setupFontAndColor(style: ApplicationTheme.getFontChampInput())
         
         ui_image_post?.layer.cornerRadius = 8
-        
-        ui_view_bt_send.layer.cornerRadius = ui_view_bt_send.frame.height / 2
-        ui_view_comment.layer.cornerRadius = ui_view_comment.frame.height / 2
-        ui_view_comment.layer.borderColor = UIColor.appOrange.cgColor
-        ui_view_comment.layer.borderWidth = 1
-        ui_lb_chat.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
-        
-        ui_lb_chat.text = "comment_post".localized
-        
-        ui_btn_signal_post.addTarget(self, action: #selector(signalClicked), for: .touchUpInside)
-        
+        if ui_view_comment != nil {
+            ui_view_bt_send.layer.cornerRadius = ui_view_bt_send.frame.height / 2
+            ui_view_comment.layer.cornerRadius = ui_view_comment.frame.height / 2
+            ui_view_comment.layer.borderColor = UIColor.appOrange.cgColor
+            ui_view_comment.layer.borderWidth = 1
+            ui_lb_chat.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularOrange())
+            ui_lb_chat.text = "comment_post".localized
+            ui_btn_signal_post.addTarget(self, action: #selector(signalClicked), for: .touchUpInside)
+        }
+
     }
     
     @objc func signalClicked(){
-        self.delegate?.signalPost(postId: self.postId)
+        self.delegate?.signalPost(postId: self.postId, userId: self.userId!)
     }
     
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
@@ -79,6 +81,19 @@ class NeighborhoodPostCell: UITableViewCell {
                 delegate.showWebviewUrl(url: url)
             }
         }
+        if let _status = message.status {
+            if _status == "deleted" {
+                ui_comment.text = "deleted_post_text".localized
+                ui_comment.textColor = UIColor.appGrey151
+                ui_btn_signal_post.isHidden = true
+            }else{
+                ui_comment.text = message.content
+                ui_comment.textColor = .black
+                ui_btn_signal_post.isHidden = false
+
+            }
+        }
+        
         self.currentIndexPath = currentIndexPath
         postId = message.uid
         self.userId = userId
@@ -110,6 +125,29 @@ class NeighborhoodPostCell: UITableViewCell {
         else {
             ui_image_post?.image = UIImage.init(named: "placeholder_post")
         }
+        
+        var tagString = ""
+        if let _user = message.user {
+            if _user.isAdmin() {
+                tagString = tagString + "title_is_admin".localized + " •"
+            }
+            if _user.isAmbassador() {
+                tagString = tagString + "title_is_ambassador".localized + " •"
+            }
+            if let _partner = _user.partner {
+                tagString = tagString + _partner.name + " •"
+            }
+        }
+        if tagString.isEmpty {
+            ui_label_ambassador.isHidden = true
+        }else{
+            if tagString.last == "•" {
+                tagString.removeLast()
+            }
+            ui_label_ambassador.isHidden = false
+            ui_label_ambassador.text = tagString
+        }
+        
     }
 
     @IBAction func action_show_comments(_ sender: Any) {
@@ -133,7 +171,7 @@ protocol NeighborhoodPostCellDelegate: AnyObject {
     func showMessages(addComment:Bool, postId:Int, indexPathSelected:IndexPath?, postMessage:PostMessage?)
     func showUser(userId:Int?)
     func showImage(imageUrl:URL?, postId:Int)
-    func signalPost(postId:Int)
+    func signalPost(postId:Int, userId:Int)
     func showWebviewUrl(url:URL)
 }
 
@@ -144,4 +182,7 @@ class NeighborhoodPostTextCell: NeighborhoodPostCell {
 
 class NeighborhoodPostImageCell: NeighborhoodPostCell {
    // override class var identifier: String {return self.description()}
+}
+class NeighborhoodPostDeletedCell:NeighborhoodPostCell{
+    
 }

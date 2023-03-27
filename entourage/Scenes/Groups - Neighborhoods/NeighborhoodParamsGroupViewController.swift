@@ -169,6 +169,10 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
 
 //MARK: - GroupDetailDelegate -
 extension NeighborhoodParamsGroupViewController: GroupDetailDelegate {
+    func publicationDeleted() {
+        self.ui_tableview.reloadData()
+    }
+    
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)

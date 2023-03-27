@@ -45,6 +45,13 @@ class NeighborhoodDetailViewController: UIViewController {
     var isAfterCreation = true
     var isShowCreatePost = false
     
+    let DELETED_POST_CELL_SIZE = 165.0
+    let TEXT_POST_CELL_SIZE = 220.0
+    let IMAGE_POST_CELL_SIZE = 430.0
+    //226 deleted message
+    //470 text post message
+    //165 image post message
+    
     var pullRefreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -87,6 +94,7 @@ class NeighborhoodDetailViewController: UIViewController {
     func registerCellsNib() {
         ui_tableview.register(UINib(nibName: NeighborhoodPostTextCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTextCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodPostImageCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostDeletedCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostDeletedCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodDetailTopCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodDetailTopCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodDetailTopMemberCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodDetailTopMemberCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
@@ -490,7 +498,10 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             }
             
             let postmessage:PostMessage = messagesOld[indexPath.row - 1]
-            let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            if postmessage.status == "deleted" {
+                identifier = NeighborhoodPostDeletedCell.identifier
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell
@@ -516,16 +527,16 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         
         let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - countToAdd] : self.neighborhood!.messages![indexPath.row - countToAdd]
         
-        let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        if postmessage.status == "deleted" {
+            identifier = NeighborhoodPostDeletedCell.identifier
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
         cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 && indexPath.row == 1 {
-            // return 214
-        }
         return UITableView.automaticDimension
     }
     
@@ -592,11 +603,12 @@ extension NeighborhoodDetailViewController:NeighborhoodPostCellDelegate {
         getDetailPost(neighborhoodId: self.neighborhoodId, parentPostId: postId)
     }
     
-    func signalPost(postId: Int) {
+    func signalPost(postId: Int, userId:Int) {
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.groupId = neighborhoodId
             vc.postId = postId
             vc.parentDelegate = self
+            vc.userId = userId
             vc.signalType = .publication
             self.present(navvc, animated: true)
         }
@@ -723,6 +735,11 @@ extension NeighborhoodDetailViewController: UIScrollViewDelegate {
     }
 }
 extension NeighborhoodDetailViewController:GroupDetailDelegate{
+    func publicationDeleted() {
+        getNeighborhoodDetail()
+        self.ui_tableview.reloadData()
+    }
+    
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)

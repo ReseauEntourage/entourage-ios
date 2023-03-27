@@ -281,6 +281,12 @@ struct UserLightNeighborhood: Codable {
         }
         return false
     }
+    func isAmbassador() -> Bool {
+        guard let role = role else {
+            return false
+        }
+        return role.contains("ambassador")
+    }
 }
 
 //MARK: - Organization -

@@ -42,6 +42,7 @@ class EventMainHomeViewController: UIViewController {
     @IBOutlet weak var ui_lbl_empty_subtitle_event: UILabel!
     @IBOutlet weak var ui_lbl_empty_title_event: UILabel!
     
+    @IBOutlet weak var uiBtnDiscover: UIButton!
     @IBOutlet weak var ui_arrow_show_empty: UIImageView!
     @IBOutlet weak var ui_view_empty_discover: UIView!
     @IBOutlet weak var ui_lbl_empty_title_discover: UILabel!
@@ -101,11 +102,9 @@ class EventMainHomeViewController: UIViewController {
         ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.identifier)
         ui_tableview.register(UINib(nibName: EventListCell.identifier, bundle: nil), forCellReuseIdentifier: EventListCell.identifier)
         ui_tableview.register(UINib(nibName: EventListCell.EventlistMeIdentifier, bundle: nil), forCellReuseIdentifier: EventListCell.EventlistMeIdentifier)
-        
+        setMyFirst()
         setupEmptyViews()
-        
         setupViews()
-        
         //Notif for updating when create new Event
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreate), name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
         
@@ -141,6 +140,7 @@ class EventMainHomeViewController: UIViewController {
                 showEmptyView()
             }
         }
+        ui_tableview.reloadData()
     }
     
     deinit {
@@ -262,6 +262,33 @@ class EventMainHomeViewController: UIViewController {
         }
     }
     
+    func getEventsDiscoveredForMyEvent(isReloadFromTab:Bool = false, reloadOther:Bool = false) {
+        
+        EventService.getAllEventsDiscover(currentPage: currentPageDiscover, per: numberOfItemsForWS, filters: currentFilter.getfiltersForWS()) { events, error in
+            IHProgressHUD.dismiss()
+            self.pullRefreshControl.endRefreshing()
+            
+            DispatchQueue.main.async {
+                if let events = events , events.count > 0 {
+                    self.uiBtnDiscover.isHidden = false
+                    self.ui_lbl_empty_subtitle_event.text = "event_no_event_but_discover".localized
+                    self.uiBtnDiscover.setTitle("event_title_btn_discover_event".localized, for: .normal)
+                    self.uiBtnDiscover.removeTarget(self, action: #selector(self.onClickCreate), for: .touchUpInside)
+                    self.uiBtnDiscover.addTarget(self, action: #selector(self.onGoDiscover), for: .touchUpInside)
+                }else{
+                    self.uiBtnDiscover.isHidden = false
+                    self.ui_lbl_empty_subtitle_event.text = "event_no_event_go_create".localized
+                    self.uiBtnDiscover.setTitle("event_title_btn_create_event".localized, for: .normal)
+                    self.uiBtnDiscover.removeTarget(self, action: #selector(self.onGoDiscover), for: .touchUpInside)
+                    self.uiBtnDiscover.addTarget(self, action: #selector(self.onClickCreate), for: .touchUpInside)
+                }
+
+            }
+
+        }
+    }
+    
+    
     func getEventsDiscovered(isReloadFromTab:Bool = false, reloadOther:Bool = false) {
         if self.isLoading { return }
         
@@ -343,6 +370,8 @@ class EventMainHomeViewController: UIViewController {
     @IBAction func action_myEvents(_ sender: Any?) {
         isEventSelected = true
         isfirstLoadingMyEvents = true
+        self.uiBtnDiscover.isHidden = false
+
         
         if isEventSelected != currentSelectedIsEvent && myEventsExtracted.events.count == 0 {
             currentPageMy = 1
@@ -363,6 +392,7 @@ class EventMainHomeViewController: UIViewController {
     
     @IBAction func action_discover(_ sender: Any?) {
         isEventSelected = false
+        self.uiBtnDiscover.isHidden = true
         if isEventSelected != currentSelectedIsEvent && self.eventsDiscoveredExtracted.events.count == 0 {
             currentPageDiscover = 1
             self.eventsDiscoveredExtracted.events.removeAll()
@@ -396,14 +426,15 @@ class EventMainHomeViewController: UIViewController {
         }
     }
     
-    @IBAction func action_clear_filters(_ sender: Any) {
-        self.currentFilter.resetToDefault()
-        self.ui_location_filter.text = currentFilter.getFilterButtonString()
-        self.getEventsDiscovered(isReloadFromTab: false, reloadOther: false)
-    }
+//    @IBAction func action_clear_filters(_ sender: Any) {
+//        self.currentFilter.resetToDefault()
+//        self.ui_location_filter.text = currentFilter.getFilterButtonString()
+//        self.getEventsDiscovered(isReloadFromTab: false, reloadOther: false)
+//    }
     
     //MARK: - Methods -
     func changeTabSelection() {
+        getEventsDiscoveredForMyEvent()
         ui_view_empty.isHidden = true
         ui_arrow_show_empty.isHidden = true
         self.ui_view_empty_events.isHidden = true
@@ -453,6 +484,7 @@ class EventMainHomeViewController: UIViewController {
     }
     
     func setupViews() {
+        
         ui_location_filter.setupFontAndColor(style: MJTextFontColorStyle(font: ApplicationTheme.getFontNunitoSemiBold(size: 13), color: .white))
         ui_location_filter.text = currentFilter.getFilterButtonString()
         ui_label_title.text = "event_main_page_title".localized
@@ -517,18 +549,50 @@ class EventMainHomeViewController: UIViewController {
         ui_title_bt_clear_filters.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_title_bt_clear_filters.text = "event_event_discover_clear_filters".localized
         
+        getEventsDiscoveredForMyEvent()
+
         hideEmptyView()
+    }
+    
+    func configureEmptyViewButton(){
+        self.uiBtnDiscover.titleEdgeInsets = UIEdgeInsets(top:4,left:8,bottom:4,right:8)
+    }
+    
+    @objc func onClickCreate(){
+        AnalyticsLoggerManager.logEvent(name: Event_action_create)
+        let navVC = UIStoryboard.init(name: StoryboardName.eventCreate, bundle: nil).instantiateViewController(withIdentifier: "eventCreateVCMain") as! EventCreateMainViewController
+        navVC.parentController = self.tabBarController
+        navVC.modalPresentationStyle = .fullScreen
+        self.tabBarController?.present(navVC, animated: true)
+        
+    }
+    @objc func onGoDiscover(){
+        isEventSelected = false
+        if isEventSelected != currentSelectedIsEvent && self.eventsDiscoveredExtracted.events.count == 0 {
+            currentPageDiscover = 1
+            self.eventsDiscoveredExtracted.events.removeAll()
+            getEventsDiscovered()
+        }
+        currentSelectedIsEvent = false
+        isLoading = false
+        changeTabSelection()
+        self.ui_tableview.reloadData()
+        
+        if self.eventsDiscoveredExtracted.events.count > 0 {
+            self.gotoTop()
+        }
     }
     
     func showEmptyView() {
         if isEventSelected {
+            configureEmptyViewButton()
             self.ui_view_empty.isHidden = false
-            ui_arrow_show_empty.isHidden = false
+            ui_arrow_show_empty.isHidden = true//false
             self.ui_view_empty_events.isHidden = false
             self.ui_view_empty_discover.isHidden = true
         }
         else {
-            
+            configureEmptyViewButton()
             self.ui_view_empty.isHidden = false
             self.ui_view_empty_events.isHidden = true
             self.ui_view_empty_discover.isHidden = false
@@ -537,7 +601,7 @@ class EventMainHomeViewController: UIViewController {
             //TODO: check search
             
             if currentFilter.filterType != .profile || currentFilter.radius != UserDefaults.currentUser?.radiusDistance {
-                ui_view_bt_clear_filters.isHidden = false
+                ui_view_bt_clear_filters.isHidden = true//false
                 ui_lbl_empty_title_discover.text = "event_event_discover_empty_search_title".localized
                 ui_lbl_empty_subtitle_discover.text = "event_event_discover_empty_search_subtitle".localized
             }
@@ -648,36 +712,33 @@ extension EventMainHomeViewController: UITableViewDataSource, UITableViewDelegat
         }
     }
     
-    func scrollViewDidScroll( _ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yImage = imageNormalHeight - (scrollView.contentOffset.y + imageNormalHeight)
+        let diffImage = maxViewHeight - maxImageHeight
+        let heightImage = min(max(yImage - diffImage, minImageHeight), maxImageHeight)
+        ui_image.alpha = heightImage / maxImageHeight
+        
+        let yView = viewNormalHeight - (scrollView.contentOffset.y + viewNormalHeight)
+        let heightView = min(max(yView, minViewHeight), maxViewHeight)
+        ui_view_height_constraint.constant = heightView
+        
+        // Éviter de calculer et repositionner les vues inutilement.
+        if heightView <= minViewHeight {
+            ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: minLabelFont)
+            return
+        }
+        
+        ui_image.isHidden = false
+        
+        let yLabel = labelNormalConstraintBottom - (scrollView.contentOffset.y + labelNormalConstraintBottom)
+        let heightLabel = min(max(yLabel, minLabelBottomConstraint), maxLabelBottomConstraint)
+        ui_constraint_bottom_label.constant = heightLabel
+        
+        let yLabelFont = labelNormalFontHeight - (scrollView.contentOffset.y + labelNormalFontHeight)
+        let heightLabelFont = min(max((minLabelFont * yLabelFont) / minViewHeight, minLabelFont), maxLabelFont)
+        ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: heightLabelFont)
+        
         UIView.animate(withDuration: 0) {
-            
-            let yImage = self.imageNormalHeight - (scrollView.contentOffset.y+self.imageNormalHeight)
-            let diffImage = (self.maxViewHeight - self.maxImageHeight)
-            let heightImage = min(max (yImage -  diffImage,self.minImageHeight),self.maxImageHeight)
-            
-            self.ui_image.alpha = heightImage / self.maxImageHeight
-            
-            let yView = self.viewNormalHeight - (scrollView.contentOffset.y + self.viewNormalHeight)
-            let heightView = min(max (yView,self.minViewHeight),self.maxViewHeight)
-            self.ui_view_height_constraint.constant = heightView
-            
-            //On évite de calculer et repositionner les vues inutiliement.
-            if self.ui_view_height_constraint.constant <= self.minViewHeight {
-                self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: self.minLabelFont)
-                return
-            }
-            
-            self.ui_image.isHidden = false
-            
-            let yLabel = self.labelNormalConstraintBottom - (scrollView.contentOffset.y + self.labelNormalConstraintBottom)
-            let heightLabel = min(max (yLabel,self.minLabelBottomConstraint),self.maxLabelBottomConstraint)
-            self.ui_constraint_bottom_label.constant = heightLabel
-            
-            let yLabelFont = self.labelNormalFontHeight - (scrollView.contentOffset.y + self.labelNormalFontHeight)
-            let heightCalculated = (self.minLabelFont * yLabelFont) / self.minViewHeight
-            let heightLabelFont = min(max (heightCalculated,self.minLabelFont),self.maxLabelFont)
-            self.ui_label_title.font = ApplicationTheme.getFontQuickSandBold(size: heightLabelFont)
-            
             self.view.layoutIfNeeded()
         }
     }

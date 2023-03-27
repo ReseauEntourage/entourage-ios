@@ -58,6 +58,9 @@ class EventDetailFeedViewController: UIViewController {
     var isLoading = false
     var isAfterCreation = false
     var isShowCreatePost = false
+    let DELETED_POST_CELL_SIZE = 165.0
+    let TEXT_POST_CELL_SIZE = 220.0
+    let IMAGE_POST_CELL_SIZE = 430.0
     
     var pullRefreshControl = UIRefreshControl()
     
@@ -111,6 +114,7 @@ class EventDetailFeedViewController: UIViewController {
     func registerCellsNib() {
         ui_tableview.register(UINib(nibName: NeighborhoodPostTextCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTextCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodPostImageCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageCell.identifier)
+        ui_tableview.register(UINib(nibName: NeighborhoodPostDeletedCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostDeletedCell.identifier)
         ui_tableview.register(UINib(nibName: EventDetailTopFullCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopFullCell.identifier)
         ui_tableview.register(UINib(nibName: EventDetailTopLightCell.identifier, bundle: nil), forCellReuseIdentifier: EventDetailTopLightCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
@@ -238,7 +242,6 @@ class EventDetailFeedViewController: UIViewController {
     }
     
     func getMorePosts() {
-        //TODO: a tester
         self.isLoading = true
         EventService.getEventPostsPaging(id: eventId, currentPage: currentPagingPage, per: itemsPerPage) { post, error in
             if let post = post {
@@ -256,7 +259,6 @@ class EventDetailFeedViewController: UIViewController {
                 }
                 self.isLoading = false
             }
-            //TODO: Error ?
         }
     }
     
@@ -264,7 +266,6 @@ class EventDetailFeedViewController: UIViewController {
         guard let messages = event?.posts else {
             return
         }
-        
         messagesNew.removeAll()
         messagesOld.removeAll()
         
@@ -276,7 +277,7 @@ class EventDetailFeedViewController: UIViewController {
                 messagesNew.append(post)
             }
         }
-        
+
         hasNewAndOldSections = messagesOld.count > 0 && messagesNew.count > 0
     }
     
@@ -531,7 +532,10 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
             }
             
             let postmessage:PostMessage = messagesOld[indexPath.row - 1]
-            let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+            if postmessage.status == "deleted" {
+                identifier = NeighborhoodPostDeletedCell.identifier
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell
@@ -557,16 +561,16 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         
         let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - countToAdd] : self.event!.posts![indexPath.row - countToAdd]
         
-        let identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+        if postmessage.status == "deleted" {
+            identifier = NeighborhoodPostDeletedCell.identifier
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
         cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 && indexPath.row == 1 {
-            // return 214
-        }
         return UITableView.automaticDimension
     }
     
@@ -655,6 +659,10 @@ extension EventDetailFeedViewController: MJNavBackViewDelegate {
 
 //MARK: - EventDetailTopCellDelegate -
 extension EventDetailFeedViewController:EventDetailTopCellDelegate {
+    func showUser() {
+        
+    }
+    
     func showWebUrl(url: URL) {
         WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }
@@ -702,11 +710,12 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
         self.getDetailPost(eventId: self.eventId, parentPostId: postId)
     }
     
-    func signalPost(postId: Int) {
+    func signalPost(postId: Int, userId:Int) {
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.eventId = eventId
             vc.postId = postId
             vc.parentDelegate = self
+            vc.userId = userId
             vc.signalType = .publication
             self.present(navvc, animated: true)
         }
@@ -748,7 +757,6 @@ extension EventDetailFeedViewController:NeighborhoodPostCellDelegate {
 extension EventDetailFeedViewController:UpdateCommentCountDelegate {
     func updateCommentCount(parentCommentId: Int, nbComments: Int, currentIndexPathSelected:IndexPath?) {
         guard let _ = event?.posts else {return}
-        
         var i = 0
         for _post in event!.posts! {
             if _post.uid == parentCommentId {
@@ -781,6 +789,11 @@ extension EventDetailFeedViewController: UIScrollViewDelegate {
 }
 
 extension EventDetailFeedViewController:GroupDetailDelegate{
+    func publicationDeleted() {
+        getEventDetail()
+        self.ui_tableview.reloadData()
+    }
+    
     func showMessage(signalType:GroupDetailSignalType) {
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "OK".localized, titleStyle:ApplicationTheme.getFontCourantRegularNoir(size: 18, color: .white), bgColor: .appOrange, cornerRadius: -1)
@@ -823,4 +836,11 @@ extension EventDetailFeedViewController{
             }
         }
     }
+}
+
+
+enum TableIsOldAndNewPost {
+    case onlyOld
+    case newAndOld
+    case onlyNew
 }

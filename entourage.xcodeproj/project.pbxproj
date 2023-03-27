@@ -379,9 +379,15 @@
 		02FCC3172812DDA500578407 /* NeighborhoodHomeGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCC3162812DDA500578407 /* NeighborhoodHomeGroupCell.swift */; };
 		02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B42939F6020076F57A /* OnboardingEndCell.swift */; };
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
+		261174FE29A670CB00735E9A /* ReportGroupChoosePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */; };
 		2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */; };
+		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
+		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
+		264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF929AF52820083F83E /* HeaderReportView.xib */; };
+		264C1AFC29AF5BED0083F83E /* HeaderReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */; };
 		268FCA2A2967281100159C34 /* MJAlertWithImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FCA292967281100159C34 /* MJAlertWithImageController.swift */; };
 		268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */; };
+		26BC119929C88CD700F204BB /* NeighborhoodPostDeletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */; };
 		7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */; };
 /* End PBXBuildFile section */
 
@@ -752,9 +758,15 @@
 		02FE55B42939F6020076F57A /* OnboardingEndCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndCell.swift; sourceTree = "<group>"; };
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
 		1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGroupChoosePageViewController.swift; sourceTree = "<group>"; };
 		2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UILabel.swift; sourceTree = "<group>"; };
+		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
+		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
+		264C1AF929AF52820083F83E /* HeaderReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderReportView.xib; sourceTree = "<group>"; };
+		264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderReportView.swift; sourceTree = "<group>"; };
 		268FCA292967281100159C34 /* MJAlertWithImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJAlertWithImageController.swift; sourceTree = "<group>"; };
 		268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertWithImageController.xib; sourceTree = "<group>"; };
+		26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostDeletedCell.xib; sourceTree = "<group>"; };
 		6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		EF9863871BD660A314749193 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
@@ -981,6 +993,7 @@
 				0258AFE3282AD3BD00E7B4AA /* NeighborhoodEventsTableviewCell.swift */,
 				025C92C22834149B000970D9 /* NeighborhoodEventsTableviewCell.xib */,
 				025C92C428341611000970D9 /* NeighborhoodEventsCollectionviewCell.xib */,
+				26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1433,10 +1446,12 @@
 		02C6E86A28203E1F009D4289 /* Signal */ = {
 			isa = PBXGroup;
 			children = (
+				261174FF29A6718D00735E9A /* reportChooseCells */,
 				02C6E86C28203E1F009D4289 /* ReportGroupMainViewController.swift */,
 				02C6E86E28203E1F009D4289 /* ReportGroupPageViewController.swift */,
 				02C6E86B28203E1F009D4289 /* ReportGroupSendViewController.swift */,
 				02C6E86D28203E1F009D4289 /* ReportGroupViewController.swift */,
+				261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */,
 			);
 			path = Signal;
 			sourceTree = "<group>";
@@ -1584,6 +1599,17 @@
 				02166C0A28A54568004D3FF8 /* ActionFilterValidateCell.swift */,
 			);
 			path = cells;
+			sourceTree = "<group>";
+		};
+		261174FF29A6718D00735E9A /* reportChooseCells */ = {
+			isa = PBXGroup;
+			children = (
+				264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */,
+				264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */,
+				264C1AF929AF52820083F83E /* HeaderReportView.xib */,
+				264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */,
+			);
+			path = reportChooseCells;
 			sourceTree = "<group>";
 		};
 		268FCA282965E6A000159C34 /* AlertWithImage */ = {
@@ -1745,6 +1771,7 @@
 				028D4F52293795B700A0BDD3 /* Onboarding.storyboard in Resources */,
 				0260E9D62936402100242A89 /* Intros.xcassets in Resources */,
 				021FD9672875F4ED00D3AA54 /* EventListMeCell.xib in Resources */,
+				264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */,
 				025C92BA28340F10000970D9 /* NeighborhoodDetailTopMemberCell.xib in Resources */,
 				02B94C2C284F8F0C006059EF /* HomeActionCell.xib in Resources */,
 				02856F6227DA334100988FF7 /* ProfileParams.storyboard in Resources */,
@@ -1757,6 +1784,7 @@
 				025D8723278DD33800909101 /* Assets.xcassets in Resources */,
 				02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */,
 				0208268028A68447004B1222 /* ActionDeletePopsViewController.xib in Resources */,
+				264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */,
 				021FD9652875BEAC00D3AA54 /* Event.storyboard in Resources */,
 				02EFE47A289BFC0D00D70C68 /* Action_Create.storyboard in Resources */,
 				020AF5E528607EFE0012AE60 /* congrat_short_anim.json in Resources */,
@@ -1779,6 +1807,7 @@
 				023B07CC27D664F6007752AC /* Profile.xcassets in Resources */,
 				025D8768278DED3C00909101 /* AppConfigurations.plist in Resources */,
 				025C92B028340787000970D9 /* NeighborhoodPostTextCell.xib in Resources */,
+				26BC119929C88CD700F204BB /* NeighborhoodPostDeletedCell.xib in Resources */,
 				02CCE67C27D78CAB00D6976C /* NunitoSans-SemiBold.ttf in Resources */,
 				02CCE67D27D78CAB00D6976C /* NunitoSans-Bold.ttf in Resources */,
 				02F5FEC527E0CB6800A14313 /* MJAlertController.xib in Resources */,
@@ -1882,6 +1911,7 @@
 				02CCE68D27D7B8E700D6976C /* MainUserProfileViewController.swift in Sources */,
 				021318A927DF4E3100B0F1BD /* Metadatas.swift in Sources */,
 				02EC7E4927E87DD400C1110A /* EditProfilePhotoCell.swift in Sources */,
+				264C1AFC29AF5BED0083F83E /* HeaderReportView.swift in Sources */,
 				0208B0C5289D23E1009A7A58 /* ActionDetailFullViewController.swift in Sources */,
 				02B7922727F74CCB003AFFB9 /* NeighborhoodCreateMainViewController.swift in Sources */,
 				02F5278127999A8C00929431 /* MainGuideViewController.swift in Sources */,
@@ -1912,6 +1942,7 @@
 				022744712795BEC0005600A1 /* AuthService.swift in Sources */,
 				02C9B4AC27E2377A0026450A /* ParamsAboutCell.swift in Sources */,
 				0282637C282160B700B354F9 /* NeighborhoodCguCell.swift in Sources */,
+				264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */,
 				0224597827FF327C00944DE4 /* NeighborhoodCreateLocationCell.swift in Sources */,
 				02EFE47C289BFD2A00D70C68 /* ActionsMyListViewController.swift in Sources */,
 				024131D42862030A00561FB4 /* EventCreatePhase2ViewController.swift in Sources */,
@@ -1989,6 +2020,7 @@
 				02C6E86728203141009D4289 /* NeighborhoodParamEditShowCell.swift in Sources */,
 				02B57D9E27FC9748005A567B /* PartnerDetailTopCell.swift in Sources */,
 				024131CB2862022100561FB4 /* EventCreateMainViewController.swift in Sources */,
+				261174FE29A670CB00735E9A /* ReportGroupChoosePageViewController.swift in Sources */,
 				02C54ADF2885BD4A00754222 /* EventFiltersViewController.swift in Sources */,
 				02A92C2828980F8C000DFF95 /* ActionAddPhotoViewController.swift in Sources */,
 				0279680A2852472400311D8E /* PedagogicViewModel.swift in Sources */,
