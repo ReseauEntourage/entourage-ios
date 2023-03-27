@@ -57,8 +57,9 @@ class NeighborhoodMessageCell: UITableViewCell {
         
         deletedImage = UIImage(named: "ic_deleted_comment")
         deletedImageView = UIImageView(image: deletedImage)
-        deletedImageView?.frame = CGRect(x: 10, y: 12, width: 20, height: 20) // Définir la taille de l'image
+        deletedImageView?.frame = CGRect(x: 15, y: 15, width: 15, height: 15) // Définir la taille de l'image
         deletedImageView?.tintColor = UIColor.gray // Changer la couleur de l'image en gris
+        
         
     }
     
@@ -96,8 +97,6 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_image_user.image = UIImage.init(named: "placeholder_user")
         }
         
-        
-        
         if isRetry {
             ui_view_error?.isHidden = false
             ui_username.text = ""
@@ -105,7 +104,6 @@ class NeighborhoodMessageCell: UITableViewCell {
         }
         else {
             ui_view_error?.isHidden = true
-            
             ui_date.text = "le \(message.createdDateTimeFormatted)"
             
             if !isMe {
@@ -122,26 +120,29 @@ class NeighborhoodMessageCell: UITableViewCell {
         }
         if let _status = message.status {
             if _status == "deleted" {
-                ui_message.text = "deleted_comment".localized
+                ui_message.text = "deleted_message".localized
                 ui_message.textColor = UIColor.appGreyTextDeleted // Changer la couleur du texte
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
-                ui_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
                 ui_message.superview?.addSubview(deletedImageView!) // Ajouter l'image à la vue parente de ActiveLabel
-                layoutIfNeeded()
                 
             } else {
-                let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
-                self.ui_message.addGestureRecognizer(longPressGesture)
-                ui_message.text = message.content
-                ui_message.textColor = UIColor.black // Changer la couleur du texte
-                ui_view_message.backgroundColor = UIColor.appBeige // Changer la couleur de fond
-                ui_message.backgroundColor = UIColor.appBeige // Changer la couleur de fond
                 if ((ui_message.superview?.subviews.contains(deletedImageView!)) != nil) {
                     deletedImageView?.removeFromSuperview()
                 }
-                layoutIfNeeded()
+                if isMe {
+                    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+                    self.ui_message.addGestureRecognizer(longPressGesture)
+                    ui_message.text = message.content
+                    ui_message.textColor = UIColor.black // Changer la couleur du texte
+                    ui_view_message.backgroundColor = UIColor.appOrangeLight_50 // Changer la couleur de fond
+                }else{
+                    ui_message.text = message.content
+                    ui_message.textColor = UIColor.black // Changer la couleur du texte
+                    ui_view_message.backgroundColor = UIColor.appBeige // Changer la couleur de fond
+                }
             }
         }
+        layoutIfNeeded()
     }
     
     func populateCellConversation(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, isOne2One:Bool, delegate:MessageCellSignalDelegate) {
@@ -180,27 +181,25 @@ class NeighborhoodMessageCell: UITableViewCell {
                 ui_message.text = "deleted_message".localized
                 ui_message.textColor = UIColor.appGreyTextDeleted // Changer la couleur du texte
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
-                ui_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
-                
                 ui_message.superview?.addSubview(deletedImageView!) // Ajouter l'image à la vue parente de ActiveLabel
-                layoutIfNeeded()
-                
             } else {
-                if isMe {
-                    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
-                    self.ui_message.addGestureRecognizer(longPressGesture)
-                }
-                ui_message.text = message.content
-                ui_message.textColor = UIColor.black // Changer la couleur du texte
-                ui_view_message.backgroundColor = UIColor.appBeige // Changer la couleur de fond
-                ui_message.backgroundColor = UIColor.appBeige // Changer la couleur de fond
                 if ((ui_message.superview?.subviews.contains(deletedImageView!)) != nil) {
                     deletedImageView?.removeFromSuperview()
                 }
-                layoutIfNeeded()
+                if isMe {
+                    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+                    self.ui_message.addGestureRecognizer(longPressGesture)
+                    ui_message.text = message.content
+                    ui_message.textColor = UIColor.black // Changer la couleur du texte
+                    ui_view_message.backgroundColor = UIColor.appOrangeLight_50 // Changer la couleur de fond
+                }else{
+                    ui_message.text = message.content
+                    ui_message.textColor = UIColor.black // Changer la couleur du texte
+                    ui_view_message.backgroundColor = UIColor.appBeige // Changer la couleur de fond
+                }
             }
         }
-        
+
         if isRetry {
             ui_view_error?.isHidden = false
             ui_username.text = ""
@@ -228,6 +227,7 @@ class NeighborhoodMessageCell: UITableViewCell {
                 }
             }
         }
+        layoutIfNeeded()
     }
     
     @objc func action_signal_conversation(){
