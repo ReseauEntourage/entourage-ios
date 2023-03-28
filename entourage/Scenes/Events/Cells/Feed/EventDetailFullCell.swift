@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import ActiveLabel
 
 class EventDetailFullCell: UITableViewCell {
 
@@ -45,7 +46,7 @@ class EventDetailFullCell: UITableViewCell {
     @IBOutlet weak var ui_mapview: MKMapView!
     
     @IBOutlet weak var ui_lbl_about_title: UILabel!
-    @IBOutlet weak var ui_lbl_about_desc: UILabel!
+    @IBOutlet weak var ui_lbl_about_desc: ActiveLabel!
     
     @IBOutlet weak var ui_view_organised_by: UIView!
     
@@ -238,8 +239,9 @@ class EventDetailFullCell: UITableViewCell {
         ui_lbl_nb_members.text = membersCount
         
         if let _desc = event.descriptionEvent {
-            ui_lbl_about_desc.setTextWithLinksDetected(_desc) { url in
-                delegate.showWebviewUrl(url:url)
+            ui_lbl_about_desc.text = _desc
+            ui_lbl_about_desc.handleURLTap { url in
+                delegate.showWebviewUrl(url: url)
             }
         }
         

@@ -159,11 +159,19 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N82-O7-OMh">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="&quot; Bio bio bio &quot;" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N82-O7-OMh" customClass="ActiveLabel" customModule="ActiveLabel">
                         <rect key="frame" x="28" y="195" width="350" height="20.5"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" link="YES" staticText="YES"/>
+                        </accessibility>
                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="URLColor">
+                                <color key="value" name="orange_app"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </label>
                     <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="WJR-9r-zef" customClass="TagListView" customModule="Ent_Beta" customModuleProvider="target">
                         <rect key="frame" x="28" y="463" width="350" height="12"/>
@@ -216,7 +224,7 @@
                 <outlet property="ui_img_member_1" destination="kgu-jq-UzZ" id="YI6-09-eXm"/>
                 <outlet property="ui_img_member_2" destination="U06-G4-gRW" id="F2o-uc-rPI"/>
                 <outlet property="ui_img_member_3" destination="201-cp-giC" id="vIJ-aY-qBC"/>
-                <outlet property="ui_lbl_about_desc" destination="N82-O7-OMh" id="t3B-2C-nco"/>
+                <outlet property="ui_lbl_about_desc" destination="N82-O7-OMh" id="uFH-ar-9Rp"/>
                 <outlet property="ui_lbl_about_title" destination="H48-1Z-fiF" id="jg4-V8-fzC"/>
                 <outlet property="ui_lbl_bt_join" destination="RpC-Az-CBT" id="PTd-WV-lg5"/>
                 <outlet property="ui_lbl_nb_members" destination="gft-nF-t80" id="HP0-US-cHX"/>

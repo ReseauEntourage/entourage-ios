@@ -57,7 +57,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         
         deletedImage = UIImage(named: "ic_deleted_comment")
         deletedImageView = UIImageView(image: deletedImage)
-        deletedImageView?.frame = CGRect(x: 15, y: 15, width: 15, height: 15) // Définir la taille de l'image
+        deletedImageView?.frame = CGRect(x: 16, y: 16, width: 15, height: 15) // Définir la taille de l'image
         deletedImageView?.tintColor = UIColor.gray // Changer la couleur de l'image en gris
         
         
