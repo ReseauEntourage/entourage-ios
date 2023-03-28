@@ -120,7 +120,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         }
         if let _status = message.status {
             if _status == "deleted" {
-                ui_message.text = "deleted_message".localized
+                ui_message.text = "deleted_comment".localized
                 ui_message.textColor = UIColor.appGreyTextDeleted // Changer la couleur du texte
                 ui_view_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
                 ui_message.superview?.addSubview(deletedImageView!) // Ajouter l'image à la vue parente de ActiveLabel
