@@ -107,6 +107,7 @@ extension NotificationsInAppViewController: UITableViewDataSource, UITableViewDe
         if let _content = notif.content {
             notifContent = _content
         }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NotifInAppCell
     
         cell.populateCell(title: notifTitle, content: notifContent, date: notif.getDurationFromNow(), imageUrl: notif.imageUrl, isUnread: notif.isRead(), instanceString: notif.getNotificationPushData().instanceType)
