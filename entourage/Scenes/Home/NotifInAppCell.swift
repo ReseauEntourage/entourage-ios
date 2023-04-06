@@ -33,6 +33,7 @@ class NotifInAppCell: UITableViewCell {
             titleText = "notif_contrib_title".localized
             contentText = title
         }else if instanceString == .solicitations{
+            titleText = "notif_solicitation_title".localized
             contentText = title
         }
 
@@ -41,7 +42,7 @@ class NotifInAppCell: UITableViewCell {
 
         // Définit le style du texte en gras
         let boldAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.boldSystemFont(ofSize: 15)
+            .font: ApplicationTheme.getFontQuickSandBold(size:15)
         ]
 
         // Applique le style gras à la plage de texte sélectionnée
