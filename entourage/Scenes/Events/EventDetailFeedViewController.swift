@@ -49,6 +49,7 @@ class EventDetailFeedViewController: UIViewController {
     var messagesNew = [PostMessage]()
     var messagesOld = [PostMessage]()
     var eventId:Int = 0
+    var hashedEventId:String = ""
     var event:Event? = nil
     
     var hasNewAndOldSections = false

@@ -25,8 +25,34 @@ class NotifInAppCell: UITableViewCell {
         ui_image.layer.cornerRadius = ui_image.frame.width / 2
     }
 
-    func populateCell(title:String? ,date:String ,imageUrl:String?, isUnread:Bool, instanceString : InstanceType) {
-        ui_title.text = title
+    func populateCell(title:String ,content:String ,date:String ,imageUrl:String?, isUnread:Bool, instanceString : InstanceType) {
+         
+        var titleText = title
+        let contentText = content
+        if instanceString == .contributions {
+            titleText = "notif_contrib_title".localized
+        }else if instanceString == .solicitations{
+            titleText = "notif_solicitation_title".localized
+        }else if true {
+            //HERE CHANGE TITRE NOTIF BY NOTIF TITLE
+        }
+
+        // Crée un objet NSMutableAttributedString pour construire le texte final
+        let attributedString = NSMutableAttributedString(string: "\(titleText) \(contentText)")
+
+        // Définit le style du texte en gras
+        let boldAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.boldSystemFont(ofSize: 15)
+        ]
+
+        // Applique le style gras à la plage de texte sélectionnée
+        attributedString.addAttributes(boldAttributes, range: NSRange(location: 0, length: titleText.count))
+       
+        let finalAttributedString = NSAttributedString(attributedString: attributedString)
+
+        // Affiche le texte dans le UILabel
+        ui_title.attributedText = attributedString
+        //ui_title.text = title
         ui_date.text = date
         if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
             ui_image.sd_setImage(with: url, placeholderImage:UIImage(named: DeepLinkManager.setImage(notificationInstanceType: instanceString)))

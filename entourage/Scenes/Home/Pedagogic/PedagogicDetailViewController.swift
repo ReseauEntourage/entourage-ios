@@ -15,6 +15,7 @@ class PedagogicDetailViewController: UIViewController, WKUIDelegate {
     @IBOutlet weak var ui_indicator: UIActivityIndicatorView!
     var urlWebview:String? = ""
     var resourceId:Int? = nil
+    var hashdResourceId:String? = ""
     var isRead = false
     var htmlBody:String? = nil
     

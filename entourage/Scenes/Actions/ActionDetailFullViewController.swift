@@ -33,6 +33,7 @@ class ActionDetailFullViewController: UIViewController {
     
     var action:Action? = nil
     var actionId = 0
+    var hashedActionId = ""
     var isContrib = false
     
     var parentVC:UIViewController? = nil

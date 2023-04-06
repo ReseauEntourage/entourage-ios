@@ -16,6 +16,7 @@ class ParamsAboutViewController: BasePopViewController {
     //MARK: - Constants for menu -
     let arrayMenuItems = [
         MenuItemInfos(title:"params_about_charte",url:CHARTE_URL),
+        MenuItemInfos(title:"params_about_partner",url:PARTNER_URL, openInApp: false),
         MenuItemInfos(title:"params_about_faq",slug:MENU_ABOUT_SLUG_FAQ),
         MenuItemInfos(title:"params_about_email",email:emailContact),
         MenuItemInfos(title:"params_about_gift",slug:MENU_ABOUT_SLUG_GIFT),
@@ -24,6 +25,8 @@ class ParamsAboutViewController: BasePopViewController {
         MenuItemInfos(title:"params_about_cgu",slug:MENU_ABOUT_SLUG_CGU),
         MenuItemInfos(title: "params_about_privacy",slug: MENU_ABOUT_SLUG_PRIVACY),
         MenuItemInfos(title:"params_about_licences",url:MENU_LICENSES_URL, openInApp: false)
+        
+        
     ]
     
     override func viewDidLoad() {

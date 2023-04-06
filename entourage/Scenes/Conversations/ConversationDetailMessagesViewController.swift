@@ -38,6 +38,7 @@ class ConversationDetailMessagesViewController: UIViewController {
     
     
     private var conversationId:Int = 0
+    private var hashedConversationId:String = ""
     private var currentMessageTitle:String? = nil
     private var currentUserId:Int = 0
     private var hasToShowFirstMessage = false
@@ -154,6 +155,19 @@ class ConversationDetailMessagesViewController: UIViewController {
         self.selectedIndexPath = selectedIndexPath
         
         self.conversationId = conversationId
+        self.currentMessageTitle = title
+        
+        self.isOneToOne = isOneToOne
+        self.hasToShowFirstMessage = conversation?.hasToShowFirstMessage() ?? false
+        self.currentUserId = conversation?.user?.uid ?? 0
+        
+    }
+    
+    func setupFromOtherVCWithHash(conversationId:String,title:String?,isOneToOne:Bool,conversation:Conversation? = nil, delegate:UpdateUnreadCountDelegate? = nil, selectedIndexPath:IndexPath? = nil) {
+        self.parentDelegate = delegate
+        self.selectedIndexPath = selectedIndexPath
+        
+        self.hashedConversationId = conversationId
         self.currentMessageTitle = title
         
         self.isOneToOne = isOneToOne

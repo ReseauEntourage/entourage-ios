@@ -134,6 +134,7 @@ let APPSTORE_URL = "https://apps.apple.com/fr/app/entourage-reseau-solidaire/id1
 let AMBASSADOR_URL = "https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
 let CHARTE_URL = "https://blog.entourage.social/charte-ethique-grand-public/"
 let MENU_LICENSES_URL = "https://www.entourage.social"
+let PARTNER_URL = "https://www.entourage.social/mecenes-et-partenaires/"
 let MENU_SUGGEST_URL = "https://entourage-asso.typeform.com/to/NRhT8vmj"
 
 //Menu Links

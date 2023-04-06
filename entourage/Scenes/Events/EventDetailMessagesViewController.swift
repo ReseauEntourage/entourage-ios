@@ -27,7 +27,9 @@ class EventDetailMessagesViewController: UIViewController {
     @IBOutlet var ui_tap_gesture: UITapGestureRecognizer!
     
     var eventId:Int = 0
+    var hashedEventId:String = ""
     var parentCommentId:Int = 0
+    var hashedCommentId:String = ""
     var eventName = ""
     var isGroupMember = false
     

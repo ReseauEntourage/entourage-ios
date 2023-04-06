@@ -35,6 +35,7 @@ class NeighborhoodDetailViewController: UIViewController {
     var messagesNew = [PostMessage]()
     var messagesOld = [PostMessage]()
     var neighborhoodId:Int = 0
+    var hashedNeighborhoodId:String = ""
     var neighborhood:Neighborhood? = nil
     
     var hasNewAndOldSections = false
