@@ -729,7 +729,7 @@
                                                             <rect key="frame" x="32" y="0.0" width="350" height="72"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_action" translatesAutoresizingMaskIntoConstraints="NO" id="iyC-Mi-bhj">
-                                                                    <rect key="frame" x="0.0" y="16" width="40" height="40"/>
+                                                                    <rect key="frame" x="0.0" y="8" width="40" height="40"/>
                                                                     <color key="backgroundColor" name="Beige"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="40" id="OYb-D1-r2B"/>
@@ -737,7 +737,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tf-FU-3xQ">
-                                                                    <rect key="frame" x="48" y="5.5" width="271" height="41"/>
+                                                                    <rect key="frame" x="48" y="8" width="271" height="41"/>
                                                                     <string key="text">Label
 Ligne 2</string>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
@@ -751,7 +751,7 @@ Ligne 2</string>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CzK-PB-dJi">
-                                                                    <rect key="frame" x="48" y="48.5" width="32" height="18"/>
+                                                                    <rect key="frame" x="48" y="51" width="32" height="18"/>
                                                                     <fontDescription key="fontDescription" name="NunitoSans-Light" family="Nunito Sans" pointSize="13"/>
                                                                     <color key="textColor" name="gris_112"/>
                                                                     <nil key="highlightedColor"/>
@@ -761,13 +761,13 @@ Ligne 2</string>
                                                                 <constraint firstItem="CzK-PB-dJi" firstAttribute="leading" secondItem="8Tf-FU-3xQ" secondAttribute="leading" id="1Cc-IW-gRJ"/>
                                                                 <constraint firstItem="WNy-ch-7Qw" firstAttribute="centerY" secondItem="nxV-t6-Q8L" secondAttribute="centerY" constant="-5" id="5ps-tm-bih"/>
                                                                 <constraint firstItem="WNy-ch-7Qw" firstAttribute="leading" secondItem="8Tf-FU-3xQ" secondAttribute="trailing" constant="8" id="75W-xM-etR"/>
-                                                                <constraint firstItem="iyC-Mi-bhj" firstAttribute="centerY" secondItem="nxV-t6-Q8L" secondAttribute="centerY" id="Px4-Ba-qGC"/>
                                                                 <constraint firstAttribute="trailing" secondItem="WNy-ch-7Qw" secondAttribute="trailing" id="Qen-NV-Ipl"/>
                                                                 <constraint firstItem="CzK-PB-dJi" firstAttribute="top" secondItem="8Tf-FU-3xQ" secondAttribute="bottom" constant="2" id="fLR-uI-6wh"/>
+                                                                <constraint firstItem="iyC-Mi-bhj" firstAttribute="top" secondItem="nxV-t6-Q8L" secondAttribute="top" constant="8" id="hLt-Nn-1ba"/>
                                                                 <constraint firstItem="8Tf-FU-3xQ" firstAttribute="leading" secondItem="iyC-Mi-bhj" secondAttribute="trailing" constant="8" symbolic="YES" id="ise-lU-FbQ"/>
                                                                 <constraint firstItem="iyC-Mi-bhj" firstAttribute="leading" secondItem="nxV-t6-Q8L" secondAttribute="leading" id="mTi-m5-IJf"/>
-                                                                <constraint firstItem="8Tf-FU-3xQ" firstAttribute="centerY" secondItem="iyC-Mi-bhj" secondAttribute="centerY" constant="-10" id="oKQ-u3-KBg"/>
-                                                                <constraint firstAttribute="height" constant="80" id="paE-jt-82K"/>
+                                                                <constraint firstAttribute="height" constant="85" id="paE-jt-82K"/>
+                                                                <constraint firstItem="8Tf-FU-3xQ" firstAttribute="top" secondItem="nxV-t6-Q8L" secondAttribute="top" constant="8" id="zkQ-bm-Ymy"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IqU-wi-XVK">
