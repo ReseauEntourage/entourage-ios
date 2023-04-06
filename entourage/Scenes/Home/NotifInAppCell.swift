@@ -19,7 +19,7 @@ class NotifInAppCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         ui_title.setupFontAndColor(style: ApplicationTheme.getFontCourantRegularNoir())
-        ui_title.numberOfLines = 2
+        ui_title.numberOfLines = 3
         ui_date.numberOfLines = 2
         ui_date.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
         ui_image.layer.cornerRadius = ui_image.frame.width / 2
