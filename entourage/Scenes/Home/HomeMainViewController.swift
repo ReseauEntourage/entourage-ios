@@ -140,10 +140,11 @@ class HomeMainViewController: UIViewController {
         }
         
         if homeViewModel.notifCount == 0 {
-            self.ui_notif_bell.image = UIImage.init(named: "ic_notif_off")
-        }
-        else {
-            self.ui_notif_bell.image = UIImage.init(named: "ic_notif_on")
+            self.ui_notif_bell.image = UIImage(named: "ic_notif_off")
+            self.ui_view_notif.backgroundColor = UIColor.white // Remplacez "partner_logo_background" par le nom de la couleur dans votre fichier Assets.xcassets.
+        } else {
+            self.ui_notif_bell.image = UIImage(named: "ic_notif_on") // Assurez-vous que l'image "ic_white_notif_on" est disponible dans votre projet.
+            self.ui_view_notif.backgroundColor = UIColor.appOrange // Utilisez la couleur orange que vous avez ajoutée précédemment.
         }
         
         ui_tableview.reloadData()
