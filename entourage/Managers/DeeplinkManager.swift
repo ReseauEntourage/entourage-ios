@@ -255,6 +255,31 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(navVc, animated: true)
         }
     }
+    static func showActionNewUniversalLink(isContrib:Bool) {
+        let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
+            vc.modalPresentationStyle = .fullScreen
+            vc.isContrib = isContrib
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+    static func showActionListUniversalLink(id:String,isContrib:Bool) {
+        let sb = UIStoryboard.init(name: StoryboardName.actions, bundle: nil)
+        if let navVc = sb.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navVc.topViewController as? ActionDetailFullViewController {
+            vc.hashedActionId = id
+            vc.action = nil
+            vc.isContrib = isContrib
+            AppState.getTopViewController()?.present(navVc, animated: true)
+        }
+    }
+    
+    static func showOutingListUniversalLink() {
+        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showMyEvents()
+            }
+        }
+    }
     
     static func showOutingUniversalLink(id:String) {
         if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {

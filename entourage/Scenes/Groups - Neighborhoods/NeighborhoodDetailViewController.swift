@@ -198,7 +198,14 @@ class NeighborhoodDetailViewController: UIViewController {
 
         self.currentPagingPage = 1
         self.isLoading = true
-        NeighborhoodService.getNeighborhoodDetail(id: neighborhoodId) { group, error in
+        var _groupId = ""
+        if neighborhoodId != 0 {
+            _groupId = String(neighborhoodId)
+        }else if hashedNeighborhoodId != "" {
+            _groupId = hashedNeighborhoodId
+        }
+        
+        NeighborhoodService.getNeighborhoodDetail(id: _groupId) { group, error in
             self.pullRefreshControl.endRefreshing()
             if let _ = error {
                 self.goBack()
@@ -208,7 +215,6 @@ class NeighborhoodDetailViewController: UIViewController {
             self.splitMessages()
             self.ui_tableview.reloadData()
             self.isLoading = false
-            
             self.populateTopView()
             
             if hasToRefreshLists {

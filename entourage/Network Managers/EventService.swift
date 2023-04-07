@@ -28,7 +28,7 @@ struct EventService:ParsingDataCodable {
         }
     }
     
-    static func getEventWithId(_ eventId:Int, completion: @escaping (_ event:Event?, _ error:EntourageNetworkError?) -> Void) {
+    static func getEventWithId(_ eventId:String, completion: @escaping (_ event:Event?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIEventDetail
@@ -425,7 +425,7 @@ struct EventService:ParsingDataCodable {
     
     //MARK: - Comments for Post -
     
-    static func getCommentsFor(eventId:Int, parentPostId:Int, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
+    static func getCommentsFor(eventId:String, parentPostId:String, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIGetOutingMessages

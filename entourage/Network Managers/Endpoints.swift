@@ -60,13 +60,13 @@ let API_URL_CONTRIB_PREPARE_IMAGE_UPLOAD = "contributions/presigned_upload?token
 //Home
 let kAPIHomeSummary = "home/summary?token=%@"
 let kAPIHomeResources = "resources?token=%@"
-let kAPIHomeGetResource = "resources/%d?token=%@"
+let kAPIHomeGetResource = "resources/%@?token=%@"
 let kAPIHomeResourceRead = "resources/%d/users?token=%@"
 let kAPIHomeWebRecoRead = "webviews/url?url=%@&token=%@"
 
 //Event
 let kAPIEventImages = "entourage_images?token=%@"
-let kAPIEventDetail = "outings/%d?token=%@"
+let kAPIEventDetail = "outings/%@?token=%@"
 let kAPIEventCreate = "outings?token=%@"
 let kAPIEventGetAllDiscover = "outings?token=%@&page=%d&per=%d&period=future"
 let kAPIEventGetAllForUser = "users/%@/outings?token=%@&page=%d&per=%d"

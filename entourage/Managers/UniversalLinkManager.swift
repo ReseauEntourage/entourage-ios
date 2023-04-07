@@ -8,6 +8,10 @@
 import Foundation
 
 struct UniversalLinkManager {
+    static let prodURL = "app.entourage.social"
+    static let stagingURL = "entourage-webapp-preprod.herokuapp.com"
+    
+    
     static func handleUniversalLink(components:URLComponents){
         
         let pathComponents = components.path.components(separatedBy: "/")
@@ -18,41 +22,48 @@ struct UniversalLinkManager {
            }
         
         // check if the incoming URL matches any of the URLs you want to handle
-        if components.host == "entourage-webapp-preprod.herokuapp.com" {
+        if components.host == stagingURL || components.host == prodURL {
             print("eho pathComponents " , pathComponents)
             
             if pathComponents.contains("outings") && pathComponents.contains("chat_messages"){
-                DeepLinkManager.showEventDetailMessageUniversalLink(instanceId: "AAAAA", postId: "AAAAA")
-            }
-            if pathComponents.contains("neighborhoods") && pathComponents.contains("chat_messages"){
+                if pathComponents.count > 3 , let _eventhashId = pathComponents[2] as? String, let _posthashId = pathComponents[3] as? String {
+                    DeepLinkManager.showEventDetailMessageUniversalLink(instanceId: _eventhashId, postId: _posthashId)
+                }
+            }else if pathComponents.contains("neighborhoods") && pathComponents.contains("chat_messages"){
                 DeepLinkManager.showNeighborhoodDetailMessageUniversalLink(instanceId: "AAAAA", postId: "AAAAA")
 
-            }
-            if pathComponents.contains("conversations") && pathComponents.contains("chat_messages"){
+            }else if pathComponents.contains("conversations") && pathComponents.contains("chat_messages"){
                 DeepLinkManager.showConversationUniversalLink(conversationId: "AAAAA")
 
-            }
-            if pathComponents.contains("outings") {
-                DeepLinkManager.showOutingUniversalLink(id: "AAAAA")
+            }else if pathComponents.contains("outings") {
+                if pathComponents.count > 2 , let _hashId = pathComponents[2] as? String{
+                    DeepLinkManager.showOutingUniversalLink(id: _hashId)
+                }else{
+                    DeepLinkManager.showOutingListUniversalLink()
+                }
+            }else if pathComponents.contains("neighborhoods") || pathComponents.contains("groups") {
+                if pathComponents.count > 2 , let _hashId = pathComponents[2] as? String{
+                    DeepLinkManager.showNeighborhoodDetailUniversalLink(id: _hashId)
+                }
 
-            }
-            if pathComponents.contains("neighborhoods") {
-                DeepLinkManager.showNeighborhoodDetailUniversalLink(id: "AAAAA")
-
-            }
-            if pathComponents.contains("conversations") {
+            }else if pathComponents.contains("conversations") || pathComponents.contains("messages") {
                 DeepLinkManager.showConversationUniversalLink(conversationId: "AAAAA")
 
-            }
-            if pathComponents.contains("solicitations") {
-                DeepLinkManager.showActionUniversalLink(id: "AAAAA", isContrib: false)
+            }else if pathComponents.contains("solicitations") {
+                if pathComponents.contains("new"){
+                    DeepLinkManager.showActionNewUniversalLink(isContrib: false)
+                }else{
+                    DeepLinkManager.showActionUniversalLink(id: "AAAAA", isContrib: false)
 
-            }
-            if pathComponents.contains("contributions") {
-                DeepLinkManager.showActionUniversalLink(id: "AAAAA", isContrib: true)
-
-            }
-            if pathComponents.contains("resources") {
+                }
+                
+            }else if pathComponents.contains("contributions") {
+                if pathComponents.contains("new"){
+                    DeepLinkManager.showActionNewUniversalLink(isContrib: true)
+                }else{
+                    DeepLinkManager.showActionUniversalLink(id: "AAAAA", isContrib: true)
+                }
+            }else if pathComponents.contains("resources") {
                 DeepLinkManager.showResourceUniversalLink(id: "AAAAA")
 
             }
