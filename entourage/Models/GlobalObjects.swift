@@ -13,11 +13,15 @@ struct PostMessage:Codable {
     var uid:Int = 0
     var content:String? = ""
     
-    var createdDate:Date {
+    var createdDate: Date? {
         get {
-            return Utils.getDateFromWSDateString(createdDateString)
+            guard let date = Utils.getDateFromWSDateString(createdDateString) else {
+                return nil
+            }
+            return date
         }
     }
+    
     var createdDateFormatted:String {
         get {
             return Utils.formatEventDate(date:createdDate)
@@ -74,31 +78,25 @@ struct PostMessage:Codable {
     
     //Use to sort messages in days Dicts
     static func getArrayOfDateSorted(messages:[PostMessage], isAscendant:Bool) -> [Dictionary<DayMonthYearKey, [PostMessage]>.Element] {
-        let dict = Dictionary(grouping: messages.sorted(by: {$0.createdDate < $1.createdDate})) { (message) -> DayMonthYearKey in
-            
-            let date = Calendar.current.dateComponents([.year, .month,.day], from: (message.createdDate))
-            
-            guard let month = date.month, let year = date.year, let day = date.day else { return DayMonthYearKey(dayId:0, monthId: 0, dateString: "-")}
-            
-           
-            
-            let newCalendar = Calendar(identifier: .gregorian)
-            let comp = DateComponents(year: year, month: month, day: day, hour: 0, minute: 0, second: 0)
-            
-            let newDate = newCalendar.date(from: comp)!
-            
+        let dict = Dictionary(grouping: messages) { (message) -> DayMonthYearKey in
+            let date = message.createdDate ?? Date() // utilise une date par défaut si createdDate est nulle
+            let calendar = Calendar(identifier: .gregorian)
+            let components = calendar.dateComponents([.year, .month, .day], from: date)
+            let day = components.day ?? 0
+            let month = components.month ?? 0
+            let year = components.year ?? 0
+
             let df = DateFormatter()
             df.locale = Locale.getPreferredLocale()
             let monthLiterral = df.standaloneMonthSymbols[month - 1]
-            let dayLitteral:String = message.createdDate.dayNameOfWeek()?.localizedCapitalized ?? "-"
-            
-            return DayMonthYearKey(dayId:day, monthId: month, date:newDate, dateString: "\(dayLitteral) \(day) \(monthLiterral) \(year)")
+            let dayLitteral:String = date.dayNameOfWeek()?.localizedCapitalized ?? "-"
+
+            return DayMonthYearKey(dayId: day, monthId: month, date: date, dateString: "\(dayLitteral) \(day) \(monthLiterral) \(year)")
         }
         
-        if isAscendant {
-            return dict.sorted { $0.key.date ?? Date() < $1.key.date ?? Date() }
-        }
-        return dict.sorted { $0.key.date ?? Date() > $1.key.date ?? Date() }
+        let sortedDict = isAscendant ? dict.sorted { $0.key.date ?? Date() < $1.key.date ?? Date() } : dict.sorted { $0.key.date ?? Date() > $1.key.date ?? Date() }
+        
+        return sortedDict
     }
 }
 

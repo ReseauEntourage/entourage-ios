@@ -45,7 +45,7 @@ struct User: Codable {
     
     private var creationDateString:String? = nil
     
-    var creationDate:Date {
+    var creationDate: Date? {
         get {
             return Utils.getDateFromWSDateString(creationDateString)
         }

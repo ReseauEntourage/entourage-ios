@@ -73,7 +73,7 @@ class NotificationsInAppViewController: UIViewController {
     
     func showOrNotBellOn() {
         if hasToShowDot {
-            self.ic_notif_bell.image = UIImage.init(named: "ic_notif_on")
+            self.ic_notif_bell.image = UIImage.init(named: "ic_notif_on_anim")
             let timer = Timer(fireAt: Date().addingTimeInterval(2), interval: 0, target: self, selector: #selector(self.passBellOff), userInfo: nil, repeats: false)
                   
             RunLoop.current.add(timer, forMode: .common)

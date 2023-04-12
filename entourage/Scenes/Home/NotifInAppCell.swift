@@ -28,14 +28,7 @@ class NotifInAppCell: UITableViewCell {
     func populateCell(title:String ,content:String ,date:String ,imageUrl:String?, isUnread:Bool, instanceString : InstanceType) {
          
         var titleText = title
-        var contentText = content
-        if instanceString == .contributions {
-            titleText = "notif_contrib_title".localized
-            contentText = title
-        }else if instanceString == .solicitations{
-            titleText = "notif_solicitation_title".localized
-            contentText = title
-        }
+        var contentText = "\"\(content)\""
 
         // Crée un objet NSMutableAttributedString pour construire le texte final
         let attributedString = NSMutableAttributedString(string: "\(titleText) \(contentText)")
