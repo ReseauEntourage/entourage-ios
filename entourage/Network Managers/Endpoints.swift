@@ -90,8 +90,8 @@ let kAPIGetOutingPostMessage = "outings/%@/chat_messages/%@?token=%@&image_size=
 let kAPIDeleteEventPostMessage = "outings/%d/chat_messages/%d?token=%@"
 
 //Actions
-let kAPIGetContrib = "contributions/%d?token=%@"
-let kAPIGetSolicitation = "solicitations/%d?token=%@"
+let kAPIGetContrib = "contributions/%@?token=%@"
+let kAPIGetSolicitation = "solicitations/%@?token=%@"
 let kAPIContribCreate = "contributions?token=%@"
 let kAPISolicitationCreate = "solicitations?token=%@"
 let kAPIContribUpdate = "contributions/%d?token=%@"

@@ -166,7 +166,7 @@ struct ActionsService:ParsingDataCodable {
         }
     }
     
-    static func getDetailAction(isContrib:Bool,actionId:Int, completion: @escaping (_ action:Action?, _ error:EntourageNetworkError?) -> Void) {
+    static func getDetailAction(isContrib:Bool,actionId:String, completion: @escaping (_ action:Action?, _ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint:String
         if isContrib {

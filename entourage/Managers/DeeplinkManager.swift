@@ -273,6 +273,21 @@ struct DeepLinkManager {
         }
     }
     
+    static func showContribListUniversalLink() {
+        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showActionsContrib()
+            }
+        }
+    }
+    static func showSolicitationListUniversalLink() {
+        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showActionsSolicitations()
+            }
+        }
+    }
+    
     static func showOutingListUniversalLink() {
         if let vc = AppState.getTopViewController() as? HomeMainViewController{
             if let _tabbar = vc.tabBarController as? MainTabbarViewController {
@@ -300,6 +315,13 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(navVC, animated: true)
         }
     }
+    static func showNeiborhoodListUniversalLink() {
+        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showMyNeighborhoods()
+            }
+        }
+    }
     
     static func showResourceUniversalLink(id:String) {
         if let vc = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {
@@ -307,6 +329,12 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
+    
+    static func showRessourceListUniversalLink() {
+         let vc = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "listPedagoNav")
+            AppState.getTopViewController()?.present(vc, animated: true)
+    }
+    
     static func showConversationUniversalLink(conversationId:String) {
         if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
             vc.setupFromOtherVCWithHash(conversationId: conversationId, title: nil, isOneToOne: true)

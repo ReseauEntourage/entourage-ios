@@ -294,7 +294,7 @@ class NeighborhoodDetailViewController: UIViewController {
     
     func showWelcomeMessage(){
         //I_present_view_pop
-        AnalyticsLoggerManager.logEvent(name: I_present_view_pop)
+        AnalyticsLoggerManager.logEvent(name: I_present_view_pop_ios)
 
         let title = "welcome_message_title".localized
         let btnTitle = "welcome_message_btn_title".localized

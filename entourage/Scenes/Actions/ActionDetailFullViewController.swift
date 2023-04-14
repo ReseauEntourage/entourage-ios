@@ -69,7 +69,13 @@ class ActionDetailFullViewController: UIViewController {
     }
     
     func getAction() {
-        ActionsService.getDetailAction(isContrib: isContrib, actionId: actionId) { action, error in
+        var _actionId = ""
+        if actionId != 0 {
+            _actionId = String(actionId)
+        }else if hashedActionId != "" {
+            _actionId = hashedActionId
+        }
+        ActionsService.getDetailAction(isContrib: isContrib, actionId: _actionId) { action, error in
             if let action = action {
                 self.action = action
                 self.showHideBottomViews()
