@@ -101,9 +101,9 @@ struct DeepLinkManager {
         case .resources:
             return "placeholder_user"
         case .contributions:
-            return "placeholder_user"
+            return "ic_notif_placeholder"
         case .solicitations:
-            return "placeholder_user"
+            return "ic_notif_placeholder"
         case .neighborhood_post:
             return "placeholder_user"
         case .outing_post:

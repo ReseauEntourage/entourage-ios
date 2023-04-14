@@ -8,8 +8,8 @@
 import Foundation
 
 struct UniversalLinkManager {
-    static let prodURL = "app.entourage.social"
-    static let stagingURL = "preprod.entourage.socil"
+    static let prodURL = "www.entourage.social"
+    static let stagingURL = "preprod.entourage.social"
     
     
     static func handleUniversalLink(components:URLComponents){
