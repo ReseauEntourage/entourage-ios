@@ -49,7 +49,8 @@ struct HomeService:ParsingDataCodable {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIHomeGetResource
-        endpoint = String.init(format: endpoint, id, token)
+        let stringId = String(id)
+        endpoint = String.init(format: endpoint, stringId, token)
         
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
