@@ -99,7 +99,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         guard let incomingURL = userActivity.webpageURL else { return false }
         guard let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: false) else { return false }
-        print("hello " , components)
         UniversalLinkManager.handleUniversalLink(components:components)
         return true
     }
@@ -111,7 +110,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func handleDeepLink(url: URL) {
-        print("eho opened deeplink")
         guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
               let pathComponents = components.path?.split(separator: "/") else { return }
         

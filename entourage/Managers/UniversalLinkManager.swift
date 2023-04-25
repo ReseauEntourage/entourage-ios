@@ -13,12 +13,10 @@ struct UniversalLinkManager {
     
     
     static func handleUniversalLink(components:URLComponents){
-        print("eho ",  components.path)
         let pathComponents = components.path.components(separatedBy: "/")
         
         // check if the incoming URL matches any of the URLs you want to handle
         if components.host == stagingURL || components.host == prodURL {
-            print("eho pathComponents " , pathComponents)
             
             if pathComponents.contains("outings") && pathComponents.contains("chat_messages"){
                 if pathComponents.count > 3 , let _eventhashId = pathComponents[2] as? String, let _posthashId = pathComponents[3] as? String {
@@ -58,7 +56,6 @@ struct UniversalLinkManager {
                 }
                 
             }else if pathComponents.contains("contributions") {
-                print("eho coucou")
                 if pathComponents.contains("new"){
                     DeepLinkManager.showActionNewUniversalLink(isContrib: true)
                 }else  if pathComponents.count > 2 , let _hashId = pathComponents[2] as? String{
