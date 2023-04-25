@@ -98,8 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
         guard let incomingURL = userActivity.webpageURL else { return false }
-        guard let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else { return false }
-        
+        guard let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: false) else { return false }
+        print("hello " , components)
         UniversalLinkManager.handleUniversalLink(components:components)
         return true
     }

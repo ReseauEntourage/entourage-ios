@@ -42,6 +42,7 @@ class HomeMainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationHomeUpdate), object: nil)
 
         self.ui_notif_bell.image = UIImage.init(named: "ic_notif_off")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +56,45 @@ class HomeMainViewController: UIViewController {
         }
         
         AnalyticsLoggerManager.logEvent(name: Home_view_home)
+        let redirection:EntourageLink = .OUTING
+//
+//        switch redirection {
+//
+//        case .HOME:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        case .GROUP:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        case .OUTING:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        case .OUTINGS_LIST:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        case .MESSAGE:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        case .NEW_CONTRIBUTION:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        case .NEW_SOLICITATION:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        case .CONTRIBUTIONS_LIST:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        case .SOLICITATIONS_LIST:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        case .CONTRIBUTION_DETAIL:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        case .SOLICITATION_DETAIL:
+//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
+//        }
+        
+    }
+    
+    func extrctURLComponent(urlString:String) -> URLComponents{
+        let urlString = EntourageLink.HOME.rawValue
+        guard let url = URL(string: urlString) else {
+            return URLComponents()
+        }
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else{
+            return URLComponents()
+        }
+        return components
     }
     
     @objc func refreshDatasFromTab() {
@@ -415,4 +455,18 @@ extension HomeMainViewController:SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         refreshDatasFromTab()
     }
+}
+
+enum EntourageLink: String {
+    case HOME = "https://preprod.entourage.social/app/"
+    case GROUP = "https://preprod.entourage.social/app/groups/bb8c3e77aa95"
+    case OUTING = "https://preprod.entourage.social/app/outings/ebJUCN-woYgM"
+    case OUTINGS_LIST = "https://preprod.entourage.social/app/outings"
+    case MESSAGE = "https://preprod.entourage.social/app/messages/er2BVAa5Vb4U"
+    case NEW_CONTRIBUTION = "https://preprod.entourage.social/app/contributions/new"
+    case NEW_SOLICITATION = "https://preprod.entourage.social/app/solicitations/new"
+    case CONTRIBUTIONS_LIST = "https://preprod.entourage.social/app/contributions"
+    case SOLICITATIONS_LIST = "https://preprod.entourage.social/app/solicitations"
+    case CONTRIBUTION_DETAIL = "https://preprod.entourage.social/app/contributions/er2BVAa5Vb4U"
+    case SOLICITATION_DETAIL = "https://preprod.entourage.social/app/solicitations/eibewY3GW-ek"
 }

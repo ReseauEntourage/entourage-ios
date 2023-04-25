@@ -8,18 +8,13 @@
 import Foundation
 
 struct UniversalLinkManager {
-    static let prodURL = "www.entourage.social"
-    static let stagingURL = "preprod.entourage.social"
+    static let prodURL = "app.entourage.social"
+    static let stagingURL = "entourage-webapp-preprod.herokuapp.com"
     
     
     static func handleUniversalLink(components:URLComponents){
-        
+        print("eho ",  components.path)
         let pathComponents = components.path.components(separatedBy: "/")
-        if let queryItems = components.queryItems {
-               for queryItem in queryItems {
-                   print("eho" + "\(queryItem.name): \(queryItem.value ?? "")")
-               }
-           }
         
         // check if the incoming URL matches any of the URLs you want to handle
         if components.host == stagingURL || components.host == prodURL {
@@ -63,6 +58,7 @@ struct UniversalLinkManager {
                 }
                 
             }else if pathComponents.contains("contributions") {
+                print("eho coucou")
                 if pathComponents.contains("new"){
                     DeepLinkManager.showActionNewUniversalLink(isContrib: true)
                 }else  if pathComponents.count > 2 , let _hashId = pathComponents[2] as? String{
