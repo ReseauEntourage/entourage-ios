@@ -117,7 +117,7 @@ class EventDetailFullCell: UITableViewCell {
         self.ui_lbl_about_desc.setupFontAndColor(style: MJTextFontColorStyle(font:ApplicationTheme.getFontNunitoRegular(size: 15), color: newColor))
     }
     
-    func populateCell(event:Event, delegate:EventDetailFullDelegate) {
+    func populateCell(event:Event, delegate:EventDetailFullDelegate, isEntourageEvent:Bool) {
         
         self.delegate = delegate
         
@@ -289,7 +289,10 @@ class EventDetailFullCell: UITableViewCell {
             ui_view_organised_by.isHidden = true
             ui_view_association.isHidden = true
         }
-        
+        if isEntourageEvent {
+            ui_label_association.text = String(format: "event_top_cell_asso".localized, "Entourage")
+            ui_view_association.isHidden = false
+        }
     }
     
     @IBAction func action_show_members(_ sender: Any) {

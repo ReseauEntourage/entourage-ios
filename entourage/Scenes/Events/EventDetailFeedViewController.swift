@@ -51,7 +51,7 @@ class EventDetailFeedViewController: UIViewController {
     var eventId:Int = 0
     var hashedEventId:String = ""
     var event:Event? = nil
-    
+    var isUserAmbassador = false
     var hasNewAndOldSections = false
     var currentPagingPage = 1 //Default WS
     let itemsPerPage = 25 //Default WS
@@ -212,7 +212,29 @@ class EventDetailFeedViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+    func getEventusers() {
+        guard let event = event else {
+            return
+        }
+        
+        EventService.getEventUsers(eventId: event.uid, completion: { users, error in
+            if let _ = error {
+                self.goBack()
+            }
+            if let _users = users {
+                for _user in _users {
+                    if _user.sid == event.author?.uid{
+                        if let _roles = _user.communityRoles{
+                            if _roles.contains("Modérateur") || _roles.contains("Ambassadeur"){
+                                self.isUserAmbassador = true
+                            }
+                        }
+                    }
+                }
+            }
+            self.ui_tableview.reloadData()
+        })
+    }
     
     //MARK: -Network
     @objc func getEventDetail(hasToRefreshLists:Bool = false) {
@@ -247,6 +269,7 @@ class EventDetailFeedViewController: UIViewController {
             }
             self.ui_tableview.reloadData()
         }
+        getEventusers()
     }
     
     func getMorePosts() {
@@ -515,12 +538,12 @@ extension EventDetailFeedViewController: UITableViewDataSource, UITableViewDeleg
         if indexPath.section == 0 {
             if (self.event!.isMember ?? false) && !isAfterCreation {
                 let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailTopLightCell.identifier, for: indexPath) as! EventDetailTopLightCell
-                cell.populateCell(event: self.event, delegate: self)
+                cell.populateCell(event: self.event, delegate: self,isEntourageEvent: isUserAmbassador)
                 return cell
             }
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailTopFullCell.identifier, for: indexPath) as! EventDetailTopFullCell
-                cell.populateCell(event: self.event, delegate: self)
+                cell.populateCell(event: self.event, delegate: self, isEntourageEvent: isUserAmbassador)
                 return cell
             }
         }
