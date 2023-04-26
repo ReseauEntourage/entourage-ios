@@ -225,7 +225,7 @@ class EventDetailFeedViewController: UIViewController {
                 for _user in _users {
                     if _user.sid == event.author?.uid{
                         if let _roles = _user.communityRoles{
-                            if _roles.contains("Modérateur") || _roles.contains("Ambassadeur"){
+                            if _roles.contains("Équipe Entourage") || _roles.contains("Ambassadeur"){
                                 self.isUserAmbassador = true
                             }
                         }
