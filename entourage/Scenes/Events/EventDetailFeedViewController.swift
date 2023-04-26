@@ -712,6 +712,7 @@ extension EventDetailFeedViewController:EventDetailTopCellDelegate {
         if let navVC = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailFullNav") as? UINavigationController, let vc = navVC.topViewController as? EventDetailFullFeedViewController {
             vc.eventId = eventId
             vc.event = event
+            vc.isEntourageEvent = isUserAmbassador
             self.navigationController?.present(navVC, animated: true)
         }
     }

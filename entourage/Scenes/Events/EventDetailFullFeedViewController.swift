@@ -23,6 +23,7 @@ class EventDetailFullFeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("eho")
         
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
