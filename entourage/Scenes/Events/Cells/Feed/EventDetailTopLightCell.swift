@@ -45,6 +45,7 @@ class EventDetailTopLightCell: UITableViewCell {
     
     @IBOutlet weak var ui_label_association: UILabel!
     
+    @IBOutlet weak var ui_btn_share: UIButton!
     
     @IBOutlet weak var ui_label_organised_by: UILabel!
     @IBOutlet weak var ui_btn_organisez_by: UIButton!

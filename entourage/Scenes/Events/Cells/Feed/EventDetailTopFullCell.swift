@@ -53,6 +53,7 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_view_association: UIView!
     @IBOutlet weak var ui_label_association: UILabel!
     
+    @IBOutlet weak var ui_btn_share: UIButton!
     
     weak var delegate:EventDetailTopCellDelegate? = nil
     

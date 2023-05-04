@@ -56,33 +56,6 @@ class HomeMainViewController: UIViewController {
         }
         
         AnalyticsLoggerManager.logEvent(name: Home_view_home)
-        let redirection:EntourageLink = .OUTING
-//
-//        switch redirection {
-//
-//        case .HOME:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        case .GROUP:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        case .OUTING:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        case .OUTINGS_LIST:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        case .MESSAGE:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        case .NEW_CONTRIBUTION:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        case .NEW_SOLICITATION:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        case .CONTRIBUTIONS_LIST:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        case .SOLICITATIONS_LIST:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        case .CONTRIBUTION_DETAIL:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        case .SOLICITATION_DETAIL:
-//            UniversalLinkManager.handleUniversalLink(components: extrctURLComponent(urlString: redirection.rawValue))
-//        }
         
     }
     

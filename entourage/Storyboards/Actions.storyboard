@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1054,6 +1054,17 @@
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NkM-Qq-P3D">
+                                                    <rect key="frame" x="28" y="134" width="160" height="5"/>
+                                                    <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="Je signale un problème">
+                                                        <color key="titleColor" name="orange_app"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="action_signal:" destination="Jsf-HO-cVG" eventType="touchUpInside" id="wMH-BG-DG6"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" name="BeigeClair"/>
                                             <constraints>
@@ -1061,10 +1072,13 @@
                                                 <constraint firstItem="Wgg-EZ-OcT" firstAttribute="top" secondItem="VrS-HT-erg" secondAttribute="bottom" id="1S1-gB-gcS"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aS1-wI-iWa" secondAttribute="bottom" constant="64" id="5r5-g5-ijs"/>
                                                 <constraint firstItem="z1m-4G-HBd" firstAttribute="leading" secondItem="axi-zn-PD2" secondAttribute="leading" constant="28" id="91b-da-KVF"/>
+                                                <constraint firstItem="NkM-Qq-P3D" firstAttribute="leading" secondItem="aS1-wI-iWa" secondAttribute="leading" id="E0V-uy-95t"/>
                                                 <constraint firstItem="aS1-wI-iWa" firstAttribute="leading" secondItem="axi-zn-PD2" secondAttribute="leading" constant="28" id="GGE-DE-kBA"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="NkM-Qq-P3D" secondAttribute="bottom" constant="40" id="GhQ-oo-nrL"/>
                                                 <constraint firstItem="z1m-4G-HBd" firstAttribute="top" secondItem="rV2-Rk-4Fp" secondAttribute="bottom" constant="12" id="Jpb-wp-Qah"/>
                                                 <constraint firstItem="rV2-Rk-4Fp" firstAttribute="top" secondItem="axi-zn-PD2" secondAttribute="top" constant="32" id="QpX-gC-H47"/>
                                                 <constraint firstItem="aS1-wI-iWa" firstAttribute="top" secondItem="z1m-4G-HBd" secondAttribute="bottom" constant="16" id="Y9g-Xa-ShV"/>
+                                                <constraint firstItem="NkM-Qq-P3D" firstAttribute="top" secondItem="aS1-wI-iWa" secondAttribute="bottom" constant="8" symbolic="YES" id="a5x-WB-voi"/>
                                                 <constraint firstItem="rV2-Rk-4Fp" firstAttribute="leading" secondItem="axi-zn-PD2" secondAttribute="leading" constant="28" id="geh-TR-NT9"/>
                                                 <constraint firstItem="Wgg-EZ-OcT" firstAttribute="leading" secondItem="VrS-HT-erg" secondAttribute="leading" id="hRj-7G-PdJ"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Wgg-EZ-OcT" secondAttribute="trailing" constant="8" id="jVf-3N-ZUy"/>
@@ -1319,15 +1333,17 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hY-1F-DSo">
-                                <rect key="frame" x="356" y="62" width="40" height="40"/>
+                                <rect key="frame" x="361" y="64.5" width="35" height="35"/>
+                                <color key="backgroundColor" name="orange_app"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="Zrg-6w-lwz"/>
-                                    <constraint firstAttribute="height" constant="40" id="fbI-dO-w1b"/>
+                                    <constraint firstAttribute="width" constant="35" id="Zrg-6w-lwz"/>
+                                    <constraint firstAttribute="height" constant="35" id="fbI-dO-w1b"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="ic_signal_post_message"/>
+                                <state key="normal" image="ic_share"/>
                                 <connections>
-                                    <action selector="action_signal:" destination="8gT-bk-ikX" eventType="touchUpInside" id="8Of-cg-S8g"/>
+                                    <action selector="action_share:" destination="8gT-bk-ikX" eventType="touchUpInside" id="27V-AN-yqN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1356,7 +1372,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="RbK-5x-x3y"/>
                     <connections>
-                        <outlet property="ui_button_signal" destination="6hY-1F-DSo" id="JrV-BT-kBI"/>
+                        <outlet property="ui_button_share" destination="6hY-1F-DSo" id="OpX-99-V2k"/>
                         <outlet property="ui_cancel_button" destination="wOJ-Qp-5Ow" id="KqS-Io-TZI"/>
                         <outlet property="ui_cancel_subtitle" destination="GQO-c1-1zV" id="Uy0-7D-21C"/>
                         <outlet property="ui_cancel_title" destination="cBo-eY-yB8" id="Kaf-DR-Vrm"/>
@@ -2139,7 +2155,7 @@
         <image name="ic_selector_off" width="20" height="20"/>
         <image name="ic_selector_on" width="20" height="20"/>
         <image name="ic_send_white_bold" width="22" height="22"/>
-        <image name="ic_signal_post_message" width="23" height="24"/>
+        <image name="ic_share" width="20" height="20"/>
         <image name="ic_tag_actions" width="14" height="14"/>
         <image name="ic_trash_orange" width="22" height="22"/>
         <image name="img_neighb_valid_group" width="23" height="19"/>

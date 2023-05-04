@@ -836,6 +836,14 @@
 "event_top_cell_organised_by" = "Organisé par ";
 "event_top_cell_asso" = "Événement %@" ;
 
+
+//SHARE
+"share_solicitation" = "Cette demande pourrait vous intéresser." ;
+"share_contribution" = "Cette contribution pourrait vous intéresser." ;
+"share_event" = "Cet événement Entourage pourrait vous intéresser." ;
+
+
+
 //Create
 
 "eventCreatePopCloseBackTitle" = "Attention";

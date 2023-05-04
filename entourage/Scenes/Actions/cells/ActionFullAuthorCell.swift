@@ -57,8 +57,14 @@ class ActionFullAuthorCell: UITableViewCell {
     @IBAction func action_show_charte(_ sender: Any) {
         delegate?.showCharte()
     }
+    
+    @IBAction func action_signal(_ sender: Any) {
+        delegate?.goSignal()
+    }
+    
 }
 
 protocol ActionFullAuthorCellDelegate:AnyObject {
     func showCharte()
+    func goSignal()
 }

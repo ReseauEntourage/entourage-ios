@@ -14,7 +14,7 @@ struct UniversalLinkManager {
     
     static func handleUniversalLink(components:URLComponents){
         let pathComponents = components.path.components(separatedBy: "/")
-        
+        print("eho pathComponent " , pathComponents)
         // check if the incoming URL matches any of the URLs you want to handle
         if components.host == stagingURL || components.host == prodURL {
             

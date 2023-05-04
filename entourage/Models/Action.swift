@@ -11,6 +11,7 @@ import Foundation
 struct Action:Codable {
     var id:Int = 0
     var uuid:String = ""
+    var uuid_v2:String = ""
     var status:String = ""
     
     var title:String? = nil
@@ -64,6 +65,7 @@ struct Action:Codable {
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case uuid
+        case uuid_v2
         case status
         case title
         case description
