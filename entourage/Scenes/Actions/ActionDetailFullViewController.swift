@@ -90,6 +90,10 @@ class ActionDetailFullViewController: UIViewController {
                 
             }
             else {
+                let alertController = UIAlertController(title: "Attention", message: "Cette action a été supprimée", preferredStyle: .alert)
+                let closeAction = UIAlertAction(title: "Fermer", style: .default, handler: nil)
+                alertController.addAction(closeAction)
+                self.present(alertController, animated: true, completion: nil)
                 self.goBack()
             }
         }
