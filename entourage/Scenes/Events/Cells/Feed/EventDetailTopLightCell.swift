@@ -70,6 +70,12 @@ class EventDetailTopLightCell: UITableViewCell {
         ui_img_member_3.layer.cornerRadius = ui_img_member_3.frame.height / 2
         ui_view_place_limit.isHidden = true
         ui_view_members_more.isHidden = true
+        ui_btn_share.addTarget(self, action: #selector(onShareBtnClick), for: .touchUpInside)
+
+    }
+    
+    @objc func onShareBtnClick(){
+        delegate?.share()
     }
     
     func populateCell(event:Event?, delegate:EventDetailTopCellDelegate, isEntourageEvent:Bool) {

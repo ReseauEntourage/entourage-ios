@@ -27,7 +27,9 @@ class EventParamEditShow: UITableViewCell {
     func populateCell(title:String,imageName:String? = nil,showArrow:Bool = true, showSeparator:Bool = true, delegate:EventParamCellDelegate, type:EventCellEditType) {
         self.delegate = delegate
         self.cellType = type
-        
+        if cellType == .share {
+            ui_image.tintColor = UIColor.appOrange
+        }
         ui_title.text = title
         if let imageName = imageName {
             ui_image.image = UIImage.init(named: imageName)
@@ -45,6 +47,8 @@ class EventParamEditShow: UITableViewCell {
             delegate?.editEvent()
         case .EditRecurrency:
             delegate?.editRecurrency()
+        case .share:
+            delegate?.share()
         }
     }
 }

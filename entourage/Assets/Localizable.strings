@@ -908,6 +908,7 @@
 "event_create_phase4_title" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de l’événement. - obligatoire";
 
 "event_create_phase5_title" = "Partager l'événement dans vos groupes\n- obligatoire";
+"event_share_option" = "Partager l'événement";
 "event_create_phase5_desc" = "Vous ne pouvez partager l’événement seulement aux groupes dont vous êtes membre. Votre événement sera alors visible dans le(s) groupe(s) sélectionné(s) et tous les membres d'un groupe pourront y participer.";
 "createEventNotShare" = "Ne partager dans aucun groupe";
 "createEventShare" = "Partager dans un ou plusieurs groupes";

@@ -152,10 +152,14 @@ class ActionDetailFullViewController: UIViewController {
         if let _action = action {
             if _action.isContrib(){
                 stringUrl = stringUrl + "contributions/" + _action.uuid_v2
-                title = "share_contribution".localized
+                title = "share_contribution".localized + "\n" + _action.title! + ": "
+                AnalyticsLoggerManager.logEvent(name: contrib_share)
+
             }else{
                 stringUrl = stringUrl + "solicitations/" + _action.uuid_v2
-                title = "share_solicitation".localized
+                title = "share_solicitation".localized + "\n" + _action.title! + ": "
+                AnalyticsLoggerManager.logEvent(name: demand_share)
+
             }
         }
         let url = URL(string: stringUrl)!

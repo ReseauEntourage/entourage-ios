@@ -151,6 +151,12 @@ let Home_action_moderator = "Action__Home__Moderator"
 let Home_action_map = "Action__Home__Map"
 let Home_view_notif = "View__Notif"
 
+//SHARE ACTION
+let contrib_share = "Action__Contrib__Share"
+let demand_share = "Action__Demand__Share"
+let event_share = "Action__EventFeed__Share"
+let event_option_share = "Action__EventOption__Share"
+
 
 //Profile
 let Profile_view_profile = "View__Profile"
@@ -231,7 +237,7 @@ let Delete_post = "View__DeletePostPop"
 let Click_delete_post = "Clic__DeletePostPop__Delete"
 let Click_delete_comm = "Clic__DeleteCommPop__Delete"
 let Delete_comm = "View__DeleteCommPop"
-let Click_delete_mess = "Clic_DeleteMessagePop_Delete"
+let Click_delete_mess = "Clic__DeleteMessagePop__Delete"
 let Delete_mess = "View__DeleteMessagePop"
  
 //Group Present Pop

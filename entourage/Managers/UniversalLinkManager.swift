@@ -18,6 +18,11 @@ struct UniversalLinkManager {
         // check if the incoming URL matches any of the URLs you want to handle
         if components.host == stagingURL || components.host == prodURL {
             
+            if pathComponents[0] == "" && pathComponents[1] == "" {
+                DeepLinkManager.showHomeUniversalLink()
+                print("eho here")
+            }
+                
             if pathComponents.contains("outings") && pathComponents.contains("chat_messages"){
                 if pathComponents.count > 3 , let _eventhashId = pathComponents[2] as? String, let _posthashId = pathComponents[3] as? String {
                     DeepLinkManager.showEventDetailMessageUniversalLink(instanceId: _eventhashId, postId: _posthashId)

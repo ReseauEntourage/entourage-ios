@@ -690,6 +690,30 @@ extension EventDetailFeedViewController: MJNavBackViewDelegate {
 
 //MARK: - EventDetailTopCellDelegate -
 extension EventDetailFeedViewController:EventDetailTopCellDelegate {
+    func share() {
+        var stringUrl = "https://"
+        var title = ""
+        if NetworkManager.sharedInstance.getBaseUrl().contains("preprod"){
+            stringUrl = stringUrl + "preprod.entourage.social/app/"
+        }else{
+            stringUrl = stringUrl + "www.entourage.social/app/"
+        }
+        if let _event = event {
+            stringUrl = stringUrl + "outings/" + _event.uuid_v2
+            title = "share_event".localized + "\n" + _event.title + ": "
+
+        }
+        let url = URL(string: stringUrl)!
+        let shareText = "\(title)\n\n\(stringUrl)"
+        
+        let activityViewController = UIActivityViewController(activityItems: [title, url], applicationActivities: nil)
+          // Présenter l’UIActivityViewController
+        let viewController = self
+          viewController.present(activityViewController, animated: true, completion: nil)
+        AnalyticsLoggerManager.logEvent(name: event_share)
+
+    }
+    
     func showUser() {
         
     }

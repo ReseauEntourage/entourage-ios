@@ -177,11 +177,11 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch eventUserType {
         case .Creator:
-            return hasRecurrency ? 6 : 5 // minus 1 remove notifs for now
+            return hasRecurrency ? 7 : 6 // minus 1 remove notifs for now
         case .Member:
-            return isRealAuthor ? 3 : 4 // minus 1 remove notifs for now
+            return isRealAuthor ? 4 : 5 // minus 1 remove notifs for now
         case .Viewer:
-            return 3
+            return 4
         }
     }
     
@@ -198,11 +198,15 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
         switch eventUserType {
         case .Creator:
             switch indexPath.row {
-            case 1:
+            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(title: "event_params_edit".localized, imageName: "ic_edit_group", delegate: self, type: .EditEvent)
                 return cell
-            case 2:
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
+                cell.populateCell(title: "event_share_option".localized, imageName: "ic_share", delegate: self, type: .share)
+                return cell
+            case 3:
                 if hasRecurrency {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                     cell.populateCell(title: "event_params_recurrency".localized, imageName: "ic_edit_group", delegate: self, type: .EditRecurrency)
@@ -214,7 +218,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     cell.populateCell(title: "event_params_cgu".localized, imageName: "ic_cgu_group", delegate: self, type: .CGU)
                     return cell
                 }
-            case 3:
+            case 4:
                 if hasRecurrency {
                     //CGU
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
@@ -227,7 +231,7 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
                     cell.populateCell(isQuit: false, hasCellBottom: true,delegate: self,isCancelEvent: false)
                     return cell
                 }
-            case 4:
+            case 5:
                 if hasRecurrency {
                     //Signal
                     let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! EventParamSignalCell
@@ -249,11 +253,16 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
             }
         case .Member:
             switch indexPath.row {
-            case 1:
+            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(title: "event_params_cgu".localized, imageName: "ic_cgu_group", delegate: self, type: .CGU)
                 return cell
-            case 2:
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
+                cell.populateCell(title: "event_share_option".localized, imageName: "ic_share", delegate: self, type: .share)
+                return cell
+                
+            case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! EventParamSignalCell
                 cell.populateCell(isQuit: false, hasCellBottom: true,delegate: self,isCancelEvent: false)
                 return cell
@@ -264,9 +273,13 @@ extension EventParamsViewController: UITableViewDataSource, UITableViewDelegate 
             }
         case .Viewer:
             switch indexPath.row {
-            case 1:
+            case 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
                 cell.populateCell(title: "event_params_cgu".localized, imageName: "ic_cgu_group", delegate: self, type: .CGU)
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! EventParamEditShow
+                cell.populateCell(title: "event_share_option".localized, imageName: "ic_share", delegate: self, type: .share)
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! EventParamSignalCell
@@ -304,6 +317,29 @@ extension EventParamsViewController: MJNavBackViewDelegate {
 
 //MARK: - NeighborhoodParamCellDelegate -
 extension EventParamsViewController: EventParamCellDelegate {
+    func share() {
+        var stringUrl = "https://"
+        var title = ""
+        if NetworkManager.sharedInstance.getBaseUrl().contains("preprod"){
+            stringUrl = stringUrl + "preprod.entourage.social/app/"
+        }else{
+            stringUrl = stringUrl + "www.entourage.social/app/"
+        }
+        if let _event = event {
+            stringUrl = stringUrl + "outings/" + _event.uuid_v2
+            title = "share_event".localized + "\n" + _event.title + ": "
+
+        }
+        let url = URL(string: stringUrl)!
+        let shareText = "\(title)\n\n\(stringUrl)"
+        
+        let activityViewController = UIActivityViewController(activityItems: [title, url], applicationActivities: nil)
+          // Présenter l’UIActivityViewController
+        let viewController = self
+          viewController.present(activityViewController, animated: true, completion: nil)
+        AnalyticsLoggerManager.logEvent(name: event_option_share)
+    }
+    
     func quitEvent() {
         let currentUserId = UserDefaults.currentUser?.sid
         if event?.author?.uid == currentUserId {
@@ -370,6 +406,7 @@ protocol EventParamCellDelegate:AnyObject {
     func editEvent()
     func editRecurrency()
     func editNotif(notifType:EventUserNotifType,isOn:Bool)
+    func share()
 }
 
 //MARK: - Enums -
@@ -389,4 +426,5 @@ enum EventCellEditType {
     case CGU
     case EditEvent
     case EditRecurrency
+    case share
 }
