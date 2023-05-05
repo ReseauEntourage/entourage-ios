@@ -210,7 +210,14 @@ class NeighborhoodDetailViewController: UIViewController {
             if let _ = error {
                 self.goBack()
             }
-            
+            if group == nil {
+                let alertController = UIAlertController(title: "Attention", message: "Ce groupe a été supprimé", preferredStyle: .alert)
+                let closeAction = UIAlertAction(title: "Fermer", style: .default, handler: nil)
+                alertController.addAction(closeAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+            }
+        
             self.neighborhood = group
             self.splitMessages()
             self.ui_tableview.reloadData()
@@ -732,6 +739,7 @@ extension NeighborhoodDetailViewController: MJNavBackViewDelegate {
     func goBack() {
         AnalyticsLoggerManager.logEvent(name: Action_GroupFeed_BackArrow)
         self.navigationController?.dismiss(animated: true)
+        
     }
 }
 

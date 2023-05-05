@@ -251,6 +251,13 @@ class EventDetailFeedViewController: UIViewController {
             if let _ = error {
                 self.goBack()
             }
+            if event == nil {
+                    let alertController = UIAlertController(title: "Attention", message: "Cet événement a été supprimé", preferredStyle: .alert)
+                    let closeAction = UIAlertAction(title: "Fermer", style: .default, handler: nil)
+                    alertController.addAction(closeAction)
+                    self.present(alertController, animated: true, completion: nil)
+                     
+            }
             self.event = event
             self.splitMessages()
             self.isLoading = false
