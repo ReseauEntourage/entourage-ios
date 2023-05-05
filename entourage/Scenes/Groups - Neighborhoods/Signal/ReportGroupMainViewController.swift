@@ -31,11 +31,11 @@ class ReportGroupMainViewController: BasePopViewController {
             ui_top_view.populateView(title: "parameter_comment".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
         }else if messageId != nil && groupId == nil && eventId == nil{
             ui_top_view.populateView(title: "parameter_message".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
+        }else if actionId != nil {
+            ui_top_view.populateView(title: "parameter_action".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
         }else{
             ui_top_view.populateView(title: "parameter_publication".localized, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: .black, delegate: self, isClose: true)
         }
-        
-        
 
     }
     

@@ -541,6 +541,7 @@
 "report_user_message_success" = "Utilisateur signalé";
 "parameter_publication" = "Paramètres de la publication";
 "parameter_message" = "Paramètres du message";
+"parameter_action" = "Signaler un problème";
 "parameter_comment" = "Paramètres du commentaire";
 "supress_button_title" = "Supprimer";
 "supress_alert_title_publi" = "Supprimer la publication";
@@ -559,6 +560,7 @@
 "report_post_cell_title" = "Signaler";
 "suppress_post_cell_title" = "Supprimer ma publication";
 "report_post_cell_subtitle" = "Signaler cette publication à l'équipe Entourage";
+"report_action_cell_subtitle" = "Signaler cette entraide à l'équipe Entourage";
 
 "report_comment_cell_title" = "Signaler";
 "suppress_comment_cell_title" = "Supprimer mon commentaire";

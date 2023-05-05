@@ -1055,10 +1055,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NkM-Qq-P3D">
-                                                    <rect key="frame" x="28" y="134" width="160" height="5"/>
+                                                    <rect key="frame" x="28" y="134" width="151" height="5"/>
                                                     <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Je signale un problème">
+                                                    <state key="normal" title="Signaler un problème">
                                                         <color key="titleColor" name="orange_app"/>
                                                     </state>
                                                     <connections>
@@ -1088,6 +1088,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="ibBtnSignalProblem" destination="NkM-Qq-P3D" id="0pz-a8-pX4"/>
                                             <outlet property="ui_image" destination="z1m-4G-HBd" id="6Ab-Mx-yjs"/>
                                             <outlet property="ui_subtitle" destination="Wgg-EZ-OcT" id="NI0-Xk-ML9"/>
                                             <outlet property="ui_title" destination="rV2-Rk-4Fp" id="AsB-sY-PCu"/>

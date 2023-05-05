@@ -14,6 +14,7 @@ class ActionFullAuthorCell: UITableViewCell {
     @IBOutlet weak var ui_subtitle: UILabel!
     @IBOutlet weak var ui_image: UIImageView!
     
+    @IBOutlet weak var ibBtnSignalProblem: UIButton!
     @IBOutlet weak var ui_title_charte: UILabel!
     weak var delegate:ActionFullAuthorCellDelegate? = nil
     
@@ -50,6 +51,9 @@ class ActionFullAuthorCell: UITableViewCell {
         }
         else {
             ui_subtitle.text = String.init(format: "action_member_since".localized, "")
+        }
+        if(action.isMine()){
+            ibBtnSignalProblem.setVisibilityGone()
         }
         
     }
