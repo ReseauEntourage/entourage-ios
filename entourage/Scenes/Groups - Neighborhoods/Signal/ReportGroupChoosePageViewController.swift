@@ -107,14 +107,13 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
                 return cell
             }
         }
+        
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch table_dto[indexPath.row]{
         case .report:
-            delegate?.chooseReport()
-        case .action:
             delegate?.chooseReport()
         case .suppress:
             showAlert()
