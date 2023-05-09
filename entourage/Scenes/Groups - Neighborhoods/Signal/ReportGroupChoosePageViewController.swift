@@ -149,7 +149,6 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
             self.analyticsClickName = Delete_post
         }
         
-        
         AnalyticsLoggerManager.logEvent(name: analyticsName)
         let alertVC = MJAlertController()
         let buttonCancel = MJAlertButtonType(title: "eventCreatePopCloseBackCancel".localized, titleStyle:ApplicationTheme.getFontBoutonBlanc(size: 15, color: .orange), bgColor: .appOrangeLight_70, cornerRadius: -1)
