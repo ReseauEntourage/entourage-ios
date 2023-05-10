@@ -156,7 +156,8 @@ let contrib_share = "Action__Contrib__Share"
 let demand_share = "Action__Demand__Share"
 let event_share = "Action__EventFeed__Share"
 let event_option_share = "Action__EventOption__Share"
-
+let action_event_report = "Action__EventOption__Report"
+let action_eventoption_report = "Action__EventOption__ReportConfirmation"
 
 //Profile
 let Profile_view_profile = "View__Profile"
@@ -257,3 +258,16 @@ let Pedago_View_act_tag = "Action__PedagoActTag"
 let Pedago_View_inspire_tag = "Action__PedagoInspireTag"
 
 let Pedago_View_card = "Action__PedagoCard"
+
+let action_contrib_share = "Action__Contrib__Share"
+
+let action_demand_share = "Action__Demand__Share"
+
+let action_report_contrib = "Action__Contrib__Report"
+
+let action_demand_report  = "Action__Demand__Report"
+
+let action_contrib_report_confirm = "Action__Contrib__Report_Confirmation"
+
+let action_demand_report_confim = "Action__Demand__Report_Confirmation"
+

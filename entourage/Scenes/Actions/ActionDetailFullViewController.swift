@@ -173,6 +173,12 @@ class ActionDetailFullViewController: UIViewController {
           // Présenter l’UIActivityViewController
         let viewController = self
           viewController.present(activityViewController, animated: true, completion: nil)
+        
+        if ((action?.isContrib()) != nil) {
+            AnalyticsLoggerManager.logEvent(name: action_contrib_share)
+        }else{
+            AnalyticsLoggerManager.logEvent(name: action_demand_share)
+        }
     }
     
     
@@ -337,6 +343,11 @@ extension ActionDetailFullViewController: ActionDeletePopDelegate {
 //MARK: - ActionFullAuthorCellDelegate -
 extension ActionDetailFullViewController:ActionFullAuthorCellDelegate {
     func goSignal() {
+        if ((action?.isContrib()) != nil){
+            AnalyticsLoggerManager.logEvent(name: action_report_contrib)
+        }else{
+            AnalyticsLoggerManager.logEvent(name: action_demand_report)
+        }
         if let vc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
              vc.actionId = actionId
              vc.parentDelegate = self

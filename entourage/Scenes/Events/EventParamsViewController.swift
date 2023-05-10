@@ -356,6 +356,7 @@ extension EventParamsViewController: EventParamCellDelegate {
     }
     
     func signalEvent() {
+        AnalyticsLoggerManager.logEvent(name: action_event_report)
         if let  vc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
             vc.modalPresentationStyle = .currentContext
             vc.event = event
