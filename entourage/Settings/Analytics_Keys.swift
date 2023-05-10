@@ -248,26 +248,15 @@ let i_present_close_pop = "Action__Group__Pop_Iclose"
 
 //PedagoList
 let Pedago_View = "View__PedagoList"
-
 let Pedago_View_all_tag = "Action__PedagoAllTag"
-
 let Pedago_View_understand_tag = "Action__PedagoUnderstandTag"
-
 let Pedago_View_act_tag = "Action__PedagoActTag"
-
 let Pedago_View_inspire_tag = "Action__PedagoInspireTag"
-
 let Pedago_View_card = "Action__PedagoCard"
-
 let action_contrib_share = "Action__Contrib__Share"
-
 let action_demand_share = "Action__Demand__Share"
-
 let action_report_contrib = "Action__Contrib__Report"
-
 let action_demand_report  = "Action__Demand__Report"
-
 let action_contrib_report_confirm = "Action__Contrib__Report_Confirmation"
-
 let action_demand_report_confim = "Action__Demand__Report_Confirmation"
 
