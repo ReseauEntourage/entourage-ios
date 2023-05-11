@@ -123,11 +123,11 @@ workflows:
         - deploy_path: $BITRISE_DSYM_PATH
     - deploy-to-itunesconnect-application-loader:
         inputs:
-        - password: $FASTLANE_PASSWORD
+        - password: $APPLESTORE_PASSWORD
         - itunescon_user: $APPLE_ID
-    - firebase-dsym-upload@2:
+    - firebase-dsym-upload:
         inputs:
-        - fdu_fabric_location: ${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols
+        - fdu_fabric_location: ./firebase_tools/upload-symbols
         - fdu_logging: "yes"
         - fdu_google_services_location: ./entourage/Settings/Environment/GoogleService-Info.plist
     - cache-push:
