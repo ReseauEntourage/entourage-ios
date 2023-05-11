@@ -8,6 +8,7 @@
 import Foundation
 struct Neighborhood:Codable {
     var uid:Int = 0
+    var uuid_v2:String = ""
     var name:String = ""
     var aboutGroup:String?
     var welcomeMessage:String?
@@ -36,6 +37,7 @@ struct Neighborhood:Codable {
     
     enum CodingKeys: String, CodingKey {
         case uid = "id"
+        case uuid_v2 = "uuid_v2"
         case name
         case aboutGroup = "description"
         case welcomeMessage = "welcome_message"

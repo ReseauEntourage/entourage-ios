@@ -85,7 +85,6 @@ class MainTabbarViewController: UITabBarController {
         if let vc = eventsVC.topViewController as? EventMainHomeViewController {
             vc.setMyFirst()
         }
-        print("eho")
         self.selectedIndex = 4
         self.boldSelectedItem()
         Logger.print("***** My Events ")

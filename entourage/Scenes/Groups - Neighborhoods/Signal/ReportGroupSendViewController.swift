@@ -99,6 +99,7 @@ class ReportGroupSendViewController: UIViewController {
             }
             NeighborhoodService.reportNeighborhood(groupId:group.uid, message: message, tags: tagsSignalsWS) { error in
                 DispatchQueue.main.async {
+                    AnalyticsLoggerManager.logEvent(name: group_option_report)
                     self.pageDelegate?.closeMain()
                 }
             }
@@ -114,7 +115,6 @@ class ReportGroupSendViewController: UIViewController {
             }
         case .comment,.publication:
             let isPost = signalType == .publication
-            
             if eventId != nil {
                 guard let eventId = eventId, let postId = postId else {
                     return
@@ -132,6 +132,7 @@ class ReportGroupSendViewController: UIViewController {
                 }
                 NeighborhoodService.reportNeighborhoodPost(groupId:groupId, postId: postId, message: message, tags: tagsSignalsWS, isPost: isPost) { error in
                     DispatchQueue.main.async {
+                        AnalyticsLoggerManager.logEvent(name: group_option_report)
                         self.pageDelegate?.closeMain()
                     }
                 }
