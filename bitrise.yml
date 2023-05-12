@@ -183,4 +183,6 @@ workflows:
             # fail if any commands fails
             set -ex
 
+            chmod +x ./firebase_tools/upload-symbols
+
             ./Scripts/count_commit.sh
