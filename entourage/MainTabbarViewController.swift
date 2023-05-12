@@ -132,8 +132,6 @@ class MainTabbarViewController: UITabBarController {
         homeVC.tabBarItem.tag = 0 //
         homeVC.tabBarItem.image = UIImage.init(named: "ic_home_off")?.withRenderingMode(.alwaysOriginal)
         homeVC.tabBarItem.selectedImage = UIImage.init(named: "ic_home_on")
-        
-        
         let _giftsVC = UIStoryboard.init(name: StoryboardName.actions, bundle: nil).instantiateViewController(withIdentifier: "home_actions_vc")
         actionsVC = UINavigationController.init(rootViewController: _giftsVC)
         actionsVC.isNavigationBarHidden = true
