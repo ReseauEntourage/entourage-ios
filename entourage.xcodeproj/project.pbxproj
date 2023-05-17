@@ -381,6 +381,7 @@
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
 		261174FE29A670CB00735E9A /* ReportGroupChoosePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */; };
 		2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */; };
+		2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */; };
 		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
 		264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF929AF52820083F83E /* HeaderReportView.xib */; };
@@ -761,6 +762,7 @@
 		1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGroupChoosePageViewController.swift; sourceTree = "<group>"; };
 		2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UILabel.swift; sourceTree = "<group>"; };
+		2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
 		264C1AF929AF52820083F83E /* HeaderReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderReportView.xib; sourceTree = "<group>"; };
@@ -1188,6 +1190,7 @@
 		02681953278DF6E400A98A4A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2645C1CC2A14FD9000AE8953 /* Welcome */,
 				02681977278DF72D00A98A4A /* pre_onboarding */,
 				02E069CB279184B3006DB1B6 /* Onboarding */,
 				026819B7278E105600A98A4A /* Login */,
@@ -1615,6 +1618,22 @@
 			path = reportChooseCells;
 			sourceTree = "<group>";
 		};
+		2645C1CC2A14FD9000AE8953 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				2645C1CD2A14FDDE00AE8953 /* welcomecells */,
+				2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		2645C1CD2A14FDDE00AE8953 /* welcomecells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = welcomecells;
+			sourceTree = "<group>";
+		};
 		268FCA282965E6A000159C34 /* AlertWithImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1892,6 +1911,7 @@
 				0229376D27A434F500206201 /* ApplicationTheme.swift in Sources */,
 				02B94C21284F5838006059EF /* HomeMainViewController.swift in Sources */,
 				02F5FEC427E0CB6800A14313 /* MJAlertController.swift in Sources */,
+				2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */,
 				02B94C1A284F508B006059EF /* HomeService.swift in Sources */,
 				02B94C1C284F50D8006059EF /* Home.swift in Sources */,
 				0223E5142864A4B200E7556E /* AddDescriptionTableViewCell.swift in Sources */,

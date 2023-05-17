@@ -343,7 +343,8 @@ extension ActionDetailFullViewController: ActionDeletePopDelegate {
 //MARK: - ActionFullAuthorCellDelegate -
 extension ActionDetailFullViewController:ActionFullAuthorCellDelegate {
     func goSignal() {
-        if ((action?.isContrib()) != nil){
+        let isAContrib = action?.isContrib()
+        if (isAContrib!){
             AnalyticsLoggerManager.logEvent(name: action_report_contrib)
         }else{
             AnalyticsLoggerManager.logEvent(name: action_demand_report)
