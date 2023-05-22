@@ -30,7 +30,7 @@ class NeighborhoodDetailTopCell: UITableViewCell {
     @IBOutlet weak var ui_lbl_about_desc: ActiveLabel!
     
     @IBOutlet weak var ui_taglist_view: TagListView!
-    @IBOutlet weak var ui_btn_share: UIButton!
+    @IBOutlet weak var ui_btn_share: UIButton?
     
     weak var delegate:NeighborhoodDetailTopCellDelegate? = nil
     
@@ -171,7 +171,7 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         else {
             ui_constraint_listview_top_margin?.constant = topMarginConstraint
         }
-        ui_btn_share.addTarget(self, action: #selector(onBtnShareClicked), for: .touchUpInside)
+        ui_btn_share?.addTarget(self, action: #selector(onBtnShareClicked), for: .touchUpInside)
     }
     
     private func updateImageUrl(image:UIImageView, imageUrl:String?) {
