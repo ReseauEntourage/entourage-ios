@@ -17,12 +17,19 @@ class WelcomeViewController:UIViewController {
     // MACHINE VAR
     
     
-    
     override func viewDidLoad() {
         
     }
     
+}
+
+extension WelcomeViewController:UITableViewDelegate,UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
     
-    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
     
 }

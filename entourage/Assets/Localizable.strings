@@ -1307,3 +1307,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "pwdDiff" = "Les mots de passe ne coïncident pas";
 "pwdUpdated" = "Mise à jour du mot de passe";
 "pwdUpdatedErr" = "Erreur de mise à jour";
+
+
+//WELCOME STRINGS
+
+"welcomeone_title" = "Bienvenue sur le réseau social vraiment social";
+"welcomeone_content" = "Retrouvez nos contenus de sensibilisation içi";
