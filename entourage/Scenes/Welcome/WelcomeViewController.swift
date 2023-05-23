@@ -44,6 +44,7 @@ class WelcomeViewController:UIViewController {
         ui_tableview.register(UINib(nibName: WelcomeOneContentMain.identifier, bundle: nil), forCellReuseIdentifier: WelcomeOneContentMain.identifier)
         
         //REINIT
+        
         self.ui_tableview.reloadData()
     }
     
