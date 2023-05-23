@@ -141,9 +141,25 @@ class HomeMainViewController: UIViewController {
         homeVC.configureCongrat(actions: homeViewModel.userHome.congratulations, parentVC: self.tabBarController)
         homeVC.show()
     }
+    @objc func testWelcomeNotif() {
+        let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            //TODO HERE ASOLULETY CHANGE IN CASE OF PUSH
+            if let welcomeViewController = storyboard?.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {
+              // Remplacez “WelcomeViewController” par l’identifiant de votre WelcomeViewController dans le storyboard
+              welcomeViewController.modalPresentationStyle = .fullScreen
+              welcomeViewController.delegate = self
+              // Présentez le WelcomeViewController
+              self.present(welcomeViewController, animated: true, completion: nil)
+            }
+    }
     
     func updateTopView() {
         ui_username.text = String.init(format: "home_title_welcome".localized, homeViewModel.userHome.displayName)
+        
+        ui_username.isUserInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
+        ui_username.addGestureRecognizer(tapGestureRecognizer)
+        
         
         if let _urlstr = homeViewModel.userHome.avatarURL,  let url = URL(string: _urlstr) {
             ui_iv_user.sd_setImage(with: url,placeholderImage: UIImage.init(named: "placeholder_user"))
@@ -428,6 +444,15 @@ extension HomeMainViewController:SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         refreshDatasFromTab()
     }
+}
+
+extension HomeMainViewController:WelcomeOneDelegate{
+    func onClickedLink() {
+        AnalyticsLoggerManager.logEvent(name: Action_WelcomeOfferHelp_Day1)
+        showResources()
+    }
+    
+    
 }
 
 enum EntourageLink: String {

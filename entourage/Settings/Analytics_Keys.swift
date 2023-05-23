@@ -230,6 +230,10 @@ let PreOnboard_view_choice = "View__Start__SignUpOrLoginPage"
 let PreOnboard_action_signup = "Action__Onboarding__SignUpStart"
 let PreOnboard_action_signin = "Action__Login__LoginStart"
 
+//WELCOME PUSH
+let View_WelcomeOfferHelp_Day1 = "View_WelcomeOfferHelp_Day1"
+let Action_WelcomeOfferHelp_Day1 = "Action_WelcomeOfferHelp_Day1"
+
 //Onboarding
 let Onboard_name = "View__Onboarding__InputNames"
 let Onboard_code = "View__Onboarding__InputCode"

@@ -690,12 +690,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g12-tO-39V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-871" y="466"/>
+            <point key="canvasLocation" x="-871" y="465"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="07m-aH-7WX">
             <objects>
-                <viewController id="ESM-bn-XNe" customClass="WelcomeViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="welcomeonevc" id="ESM-bn-XNe" customClass="WelcomeViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PMz-WE-ree">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -703,15 +703,21 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_backgrnd_welcome" translatesAutoresizingMaskIntoConstraints="NO" id="EkC-8S-2no">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="376"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dWj-Qr-5P8">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dWj-Qr-5P8">
                                 <rect key="frame" x="10" y="198" width="388" height="698"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_other_welcome" translatesAutoresizingMaskIntoConstraints="NO" id="2zC-gr-Hp7">
-                                <rect key="frame" x="-381" y="62" width="1170" height="136"/>
+                                <rect key="frame" x="-381" y="28" width="1170" height="170"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kVI-YD-cRc">
-                                <rect key="frame" x="379" y="15" width="20" height="20"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_cross" translatesAutoresizingMaskIntoConstraints="NO" id="kVI-YD-cRc">
+                                <rect key="frame" x="364" y="30" width="20" height="20"/>
+                                <color key="tintColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="6rC-Lu-ftQ"/>
                                     <constraint firstAttribute="height" constant="20" id="WjT-jQ-QVi"/>
@@ -721,21 +727,22 @@
                         <viewLayoutGuide key="safeArea" id="Vve-tp-HTF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Vve-tp-HTF" firstAttribute="trailing" secondItem="kVI-YD-cRc" secondAttribute="trailing" constant="15" id="29G-NJ-OV2"/>
+                            <constraint firstItem="Vve-tp-HTF" firstAttribute="trailing" secondItem="kVI-YD-cRc" secondAttribute="trailing" constant="30" id="29G-NJ-OV2"/>
                             <constraint firstItem="dWj-Qr-5P8" firstAttribute="top" secondItem="2zC-gr-Hp7" secondAttribute="bottom" id="7XJ-Te-S9K"/>
                             <constraint firstItem="Vve-tp-HTF" firstAttribute="trailing" secondItem="EkC-8S-2no" secondAttribute="trailing" id="Aif-Rr-lUF"/>
                             <constraint firstItem="dWj-Qr-5P8" firstAttribute="top" secondItem="Vve-tp-HTF" secondAttribute="top" constant="150" id="CsY-xw-qIn"/>
                             <constraint firstItem="EkC-8S-2no" firstAttribute="top" secondItem="PMz-WE-ree" secondAttribute="top" id="E5Z-XT-ZmZ"/>
-                            <constraint firstItem="2zC-gr-Hp7" firstAttribute="top" secondItem="Vve-tp-HTF" secondAttribute="top" constant="14" id="NfD-A4-hvK"/>
+                            <constraint firstItem="2zC-gr-Hp7" firstAttribute="top" secondItem="Vve-tp-HTF" secondAttribute="top" constant="-20" id="NfD-A4-hvK"/>
                             <constraint firstItem="2zC-gr-Hp7" firstAttribute="centerX" secondItem="dWj-Qr-5P8" secondAttribute="centerX" id="W3y-Gt-WYL"/>
                             <constraint firstItem="dWj-Qr-5P8" firstAttribute="leading" secondItem="Vve-tp-HTF" secondAttribute="leading" constant="10" id="a0Z-n9-Fk1"/>
-                            <constraint firstItem="kVI-YD-cRc" firstAttribute="top" secondItem="PMz-WE-ree" secondAttribute="top" constant="15" id="bvK-bF-b2N"/>
+                            <constraint firstItem="kVI-YD-cRc" firstAttribute="top" secondItem="PMz-WE-ree" secondAttribute="top" constant="30" id="bvK-bF-b2N"/>
                             <constraint firstAttribute="bottom" secondItem="dWj-Qr-5P8" secondAttribute="bottom" id="pgh-jL-uzK"/>
                             <constraint firstItem="Vve-tp-HTF" firstAttribute="trailing" secondItem="dWj-Qr-5P8" secondAttribute="trailing" constant="16" id="tNi-yx-OfM"/>
                             <constraint firstItem="EkC-8S-2no" firstAttribute="leading" secondItem="Vve-tp-HTF" secondAttribute="leading" id="txN-qC-wFp"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btn_close" destination="kVI-YD-cRc" id="IC3-ew-vfg"/>
                         <outlet property="ui_imagebtn_back" destination="kVI-YD-cRc" id="pow-lC-PjF"/>
                         <outlet property="ui_tableview" destination="dWj-Qr-5P8" id="xVy-ey-HqL"/>
                     </connections>
@@ -912,6 +919,7 @@ Ligne 2</string>
     <resources>
         <image name="24HSelected" width="23" height="23"/>
         <image name="ic_backgrnd_welcome" width="375" height="376"/>
+        <image name="ic_cross" width="20" height="21"/>
         <image name="ic_next_orange" width="9" height="13"/>
         <image name="ic_notif_bell_orange" width="26" height="24"/>
         <image name="ic_notif_off" width="23" height="22"/>
@@ -933,6 +941,9 @@ Ligne 2</string>
         <namedColor name="orange_light">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

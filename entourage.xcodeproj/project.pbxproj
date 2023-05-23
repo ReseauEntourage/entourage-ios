@@ -393,6 +393,11 @@
 		26F03C912A1B4E3100450A61 /* WelcomeOneTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */; };
 		26F03C932A1B4E5900450A61 /* WelcomeOneTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */; };
 		26F03C952A1B813C00450A61 /* WelcomeOneContentMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C942A1B813C00450A61 /* WelcomeOneContentMain.swift */; };
+		26F03C972A1B850C00450A61 /* WelcomeOneContentMain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C962A1B850C00450A61 /* WelcomeOneContentMain.xib */; };
+		26F03C992A1B8B8200450A61 /* WelcomeOneContentLast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C982A1B8B8200450A61 /* WelcomeOneContentLast.swift */; };
+		26F03C9B2A1B8BAB00450A61 /* WelcomeOneContentLast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C9A2A1B8BAB00450A61 /* WelcomeOneContentLast.xib */; };
+		26F03C9D2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C9C2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift */; };
+		26F03C9F2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C9E2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib */; };
 		7E5BAEB3A1FAD453D344F4AE /* Pods_entourage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */; };
 /* End PBXBuildFile section */
 
@@ -777,6 +782,11 @@
 		26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneTitleCell.swift; sourceTree = "<group>"; };
 		26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneTitleCell.xib; sourceTree = "<group>"; };
 		26F03C942A1B813C00450A61 /* WelcomeOneContentMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneContentMain.swift; sourceTree = "<group>"; };
+		26F03C962A1B850C00450A61 /* WelcomeOneContentMain.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneContentMain.xib; sourceTree = "<group>"; };
+		26F03C982A1B8B8200450A61 /* WelcomeOneContentLast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneContentLast.swift; sourceTree = "<group>"; };
+		26F03C9A2A1B8BAB00450A61 /* WelcomeOneContentLast.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneContentLast.xib; sourceTree = "<group>"; };
+		26F03C9C2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneWebViewCell.swift; sourceTree = "<group>"; };
+		26F03C9E2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneWebViewCell.xib; sourceTree = "<group>"; };
 		6E0C250CECA46B36DA7AE8CC /* Pods-entourage.store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.store.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.store.xcconfig"; sourceTree = "<group>"; };
 		BFFEEE559B5D831168F2302C /* Pods-entourage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.debug.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.debug.xcconfig"; sourceTree = "<group>"; };
 		EF9863871BD660A314749193 /* Pods-entourage.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-entourage.beta.xcconfig"; path = "Target Support Files/Pods-entourage/Pods-entourage.beta.xcconfig"; sourceTree = "<group>"; };
@@ -1639,6 +1649,11 @@
 				26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */,
 				26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */,
 				26F03C942A1B813C00450A61 /* WelcomeOneContentMain.swift */,
+				26F03C962A1B850C00450A61 /* WelcomeOneContentMain.xib */,
+				26F03C982A1B8B8200450A61 /* WelcomeOneContentLast.swift */,
+				26F03C9A2A1B8BAB00450A61 /* WelcomeOneContentLast.xib */,
+				26F03C9C2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift */,
+				26F03C9E2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib */,
 			);
 			path = welcomecells;
 			sourceTree = "<group>";
@@ -1773,6 +1788,7 @@
 				029E307C27DB5EF300B12357 /* GoogleService-Info.plist in Resources */,
 				02A92C2E289816C8000DFF95 /* Actions.xcassets in Resources */,
 				0224597127FF290900944DE4 /* MJErrorInputTextView.xib in Resources */,
+				26F03C972A1B850C00450A61 /* WelcomeOneContentMain.xib in Resources */,
 				025D876B278DF43C00909101 /* Onboarding.xcassets in Resources */,
 				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
 				021FD96E2876F12E00D3AA54 /* EventListSectionCell.xib in Resources */,
@@ -1787,6 +1803,7 @@
 				02F578D2289AD4180040685C /* ActionSolicitationDetailHomeCell.xib in Resources */,
 				025FFE0927DB980600783E8D /* Main.storyboard in Resources */,
 				02FB5445287DC01200E4B9FA /* EventDetailFullCell.xib in Resources */,
+				26F03C9B2A1B8BAB00450A61 /* WelcomeOneContentLast.xib in Resources */,
 				029E307B27DB5EF300B12357 /* GoogleService-Info-social.entourage.ios.beta.plist in Resources */,
 				02FB544F287DC14000E4B9FA /* EventDetailFullInterestCell.xib in Resources */,
 				0208267C28A67E90004B1222 /* larochelle.gpx in Resources */,
@@ -1812,6 +1829,7 @@
 				02E0EFA82878709D009B2C65 /* EventDetailTopLightCell.xib in Resources */,
 				02C91A2B278F47F300305E0B /* Localizable.strings in Resources */,
 				024131DB2862126B00561FB4 /* Events.xcassets in Resources */,
+				26F03C9F2A1B8C7F00450A61 /* WelcomeOneWebViewCell.xib in Resources */,
 				26F03C932A1B4E5900450A61 /* WelcomeOneTitleCell.xib in Resources */,
 				025D8723278DD33800909101 /* Assets.xcassets in Resources */,
 				02E8544E2864AD2C0012D941 /* AddDescriptionFixedTableViewCell.xib in Resources */,
@@ -1925,6 +1943,7 @@
 				02B94C1A284F508B006059EF /* HomeService.swift in Sources */,
 				02B94C1C284F50D8006059EF /* Home.swift in Sources */,
 				0223E5142864A4B200E7556E /* AddDescriptionTableViewCell.swift in Sources */,
+				26F03C9D2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift in Sources */,
 				02C6E86528203127009D4289 /* NeighborhoodParamSignalCell.swift in Sources */,
 				0247AD0228193A8D008F915B /* NeighborhoodEditInterestTitleCell.swift in Sources */,
 				02B94C47285223A4006059EF /* PedagogicListViewController.swift in Sources */,
@@ -2169,6 +2188,7 @@
 				02846CBE27EC86F100D85ADA /* ProfileEditInterestsViewController.swift in Sources */,
 				0227EC4F292CE8320049168E /* NotifInApp.swift in Sources */,
 				02CCE68827D7B51E00D6976C /* TagListView.swift in Sources */,
+				26F03C992A1B8B8200450A61 /* WelcomeOneContentLast.swift in Sources */,
 				02EAB5A628B8F2710060557D /* ConversationParametersViewController.swift in Sources */,
 				0268C252285A2B1400294055 /* UIView+Draggable.swift in Sources */,
 				0208B0C7289D2E63009A7A58 /* ActionFullMapCell.swift in Sources */,

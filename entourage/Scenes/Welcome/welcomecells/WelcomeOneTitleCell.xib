@@ -16,18 +16,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="611" height="236"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COK-9c-Ex8">
-                        <rect key="frame" x="40" y="21" width="531" height="194"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COK-9c-Ex8">
+                        <rect key="frame" x="35" y="42" width="556" height="164"/>
                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="COK-9c-Ex8" secondAttribute="bottom" constant="10" id="1TG-84-E2o"/>
-                    <constraint firstItem="COK-9c-Ex8" firstAttribute="leading" secondItem="FRR-w3-U4K" secondAttribute="leadingMargin" constant="20" id="BJd-By-lID"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="COK-9c-Ex8" secondAttribute="trailing" constant="20" id="C9U-AY-hFl"/>
-                    <constraint firstItem="COK-9c-Ex8" firstAttribute="top" secondItem="FRR-w3-U4K" secondAttribute="topMargin" constant="10" id="t7R-NW-ak9"/>
+                    <constraint firstItem="COK-9c-Ex8" firstAttribute="leading" secondItem="FRR-w3-U4K" secondAttribute="leadingMargin" constant="15" id="BJd-By-lID"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="COK-9c-Ex8" secondAttribute="trailing" id="C9U-AY-hFl"/>
+                    <constraint firstItem="COK-9c-Ex8" firstAttribute="top" secondItem="FRR-w3-U4K" secondAttribute="top" constant="42" id="jiG-Oj-uoQ"/>
+                    <constraint firstAttribute="bottom" secondItem="COK-9c-Ex8" secondAttribute="bottom" constant="30" id="sqG-Ia-arb"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
