@@ -13,6 +13,7 @@ enum WelcomeOneDTO {
     case contentMain
     case youtubecontainer
     case contentbottom
+    case emptycell
 }
 
 protocol WelcomeOneDelegate {
@@ -65,6 +66,9 @@ class WelcomeViewController:UIViewController {
         tableDTO.append(.contentMain)
         tableDTO.append(.youtubecontainer)
         tableDTO.append(.contentbottom)
+        tableDTO.append(.emptycell)
+        tableDTO.append(.emptycell)
+
     }
     
 }
@@ -89,6 +93,8 @@ extension WelcomeViewController:UITableViewDelegate,UITableViewDataSource{
             let cell = self.ui_tableview.dequeueReusableCell(withIdentifier: "WelcomeOneContentLast", for: indexPath) as! WelcomeOneContentLast
             cell.delegate = self
             return cell
+        case .emptycell:
+            return UITableViewCell()
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -101,6 +107,8 @@ extension WelcomeViewController:UITableViewDelegate,UITableViewDataSource{
             return 200
         case .contentbottom:
             return UITableView.automaticDimension
+        case .emptycell:
+            return 70
         }
     }
 }
