@@ -11,7 +11,8 @@ app:
       is_expand: false
 meta:
   bitrise.io:
-    stack: osx-xcode-14.1.x-ventura
+    stack: osx-xcode-14.2.x-ventura
+    machine_type_id: g2-m1.4core
 trigger_map:
 - push_branch: develop
   workflow: Entourage-Preprod
@@ -160,7 +161,7 @@ workflows:
     steps:
     - set-java-version@1:
         inputs:
-        - set_java_version: '17'
+        - set_java_version: "17"
     - activate-ssh-key:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
     - git-clone@6:
