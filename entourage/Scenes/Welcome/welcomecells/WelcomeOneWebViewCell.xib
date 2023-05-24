@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,18 +25,31 @@
                             <wkPreferences key="preferences"/>
                         </wkWebViewConfiguration>
                     </wkWebView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="o5P-mw-yGv">
+                        <rect key="frame" x="226" y="79.666666666666671" width="20" height="20"/>
+                        <color key="tintColor" name="orange_app"/>
+                        <color key="color" name="orange_app"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="o5P-mw-yGv" firstAttribute="centerX" secondItem="jAW-fu-lSQ" secondAttribute="centerX" id="6Nb-Oc-55A"/>
                     <constraint firstItem="5ar-Q7-nJp" firstAttribute="top" secondItem="jAW-fu-lSQ" secondAttribute="top" id="7A3-Zm-kGl"/>
                     <constraint firstAttribute="bottom" secondItem="5ar-Q7-nJp" secondAttribute="bottom" constant="30" id="I0w-Yi-MPp"/>
                     <constraint firstItem="5ar-Q7-nJp" firstAttribute="leading" secondItem="jAW-fu-lSQ" secondAttribute="leading" constant="16" id="Sfz-uz-s6R"/>
                     <constraint firstAttribute="trailing" secondItem="5ar-Q7-nJp" secondAttribute="trailing" constant="16" id="Zen-q6-t1e"/>
+                    <constraint firstItem="o5P-mw-yGv" firstAttribute="centerY" secondItem="5ar-Q7-nJp" secondAttribute="centerY" id="wWy-SD-MdZ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="ui_spinner" destination="o5P-mw-yGv" id="HTN-uz-pxb"/>
                 <outlet property="ui_webview" destination="5ar-Q7-nJp" id="tEJ-mr-I4k"/>
             </connections>
             <point key="canvasLocation" x="225.95419847328245" y="8.8028169014084519"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="orange_app">
+            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

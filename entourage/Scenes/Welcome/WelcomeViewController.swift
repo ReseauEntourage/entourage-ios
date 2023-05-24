@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import WebKit
 
 enum WelcomeOneDTO {
     case titleWelcome
@@ -110,3 +111,5 @@ extension WelcomeViewController:WelcomeOneLastCellDelegate{
         self.delegate?.onClickedLink()
     }
 }
+
+
