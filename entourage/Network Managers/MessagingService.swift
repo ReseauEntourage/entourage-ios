@@ -92,6 +92,20 @@ struct MessagingService:ParsingDataCodable {
         }
     }
     
+    static func deletetCommentFor(chatMessageId:Int, completion: @escaping (_ error:EntourageNetworkError?) -> Void) {
+        guard let token = UserDefaults.token else {return}
+        var endpoint = kAPIChatMessageDelete
+        endpoint = String.init(format: endpoint, chatMessageId, token)
+        
+        NetworkManager.sharedInstance.requestDelete(endPoint: endpoint, headers: nil, body: nil) { data, resp, error in
+            guard let data = data, error == nil, let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
+                DispatchQueue.main.async { completion(error) }
+                return
+            }
+            DispatchQueue.main.async { completion(nil) }
+        }
+    }
+    
     static func createOrGetConversation(userId:String, completion: @escaping (_ conversation:Conversation?,_ error:EntourageNetworkError?) -> Void) {
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIConversationPostCreateConversation

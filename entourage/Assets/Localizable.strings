@@ -536,17 +536,41 @@
 "report_user_message_error" = "Veuillez saisir votre message. Merci";
 "report_user_message_success" = "Utilisateur signalé";
 "parameter_publication" = "Paramètres de la publication";
+"parameter_message" = "Paramètres du message";
+"parameter_comment" = "Paramètres du commentaire";
 "supress_button_title" = "Supprimer";
-"supress_alert_title" = "Supprimer la publication";
-"supress_alert_text" = "Souhaitez-vous supprimer cette publication ?";
+"supress_alert_title_publi" = "Supprimer la publication";
+"supress_alert_text_publi" = "Souhaitez-vous supprimer cette publication ?";
+
+"supress_alert_title_message" = "Supprimer le message";
+"supress_alert_text_message" = "Souhaitez-vous supprimer ce message de la conversation ?";
+
+"supress_alert_title_comment" = "Supprimer le commentaire";
+"supress_alert_text_comment" = "Souhaitez-vous supprimer ce commentaire ?";
+
+
 "deleted_post_text" = "Cette publication a été supprimée";
 
 //REPORT AND SUPPRESS POPUP
 "report_post_cell_title" = "Signaler";
 "suppress_post_cell_title" = "Supprimer ma publication";
 "report_post_cell_subtitle" = "Signaler cette publication à l'équipe Entourage";
-"suppress_post_cell_subtitle" = "";
 
+"report_comment_cell_title" = "Signaler";
+"suppress_comment_cell_title" = "Supprimer mon commentaire";
+"report_comment_cell_subtitle" = "Signaler ce commentaire à l'équipe Entourage";
+
+"report_message_cell_title" = "Signaler";
+"suppress_message_cell_title" = "Supprimer mon message";
+"report_message_cell_subtitle" = "Signaler ce message à l'équipe Entourage";
+
+
+"suppress_post_cell_subtitle" = "";
+"suppress_message_cell_subtitle" = "";
+"suppress_comment_cell_subtitle" = "";
+
+"deleted_message" = "      Ce message a été supprimé";
+"deleted_comment" = "      Ce commentaire a été supprimé";
 
 /********
  GROUP

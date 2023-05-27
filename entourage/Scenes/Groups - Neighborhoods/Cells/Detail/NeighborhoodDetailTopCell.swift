@@ -122,12 +122,9 @@ class NeighborhoodDetailTopCell: UITableViewCell {
         ui_lbl_nb_members.text = membersCount
         
         ui_title.text = neighborhood.name
-        //ui_lbl_about_desc?.text = neighborhood.aboutGroup
-        if let _desc = neighborhood.aboutGroup{
-            ui_lbl_about_desc?.setTextWithLinksDetected(_desc, andLinkHandler: { url in
-                delegate.showWebUrl(url: url)
-            })
-
+        ui_lbl_about_desc?.text = neighborhood.aboutGroup
+        ui_lbl_about_desc?.handleURLTap { url in
+            delegate.showWebUrl(url: url)
         }
 
         let currentUserId = UserDefaults.currentUser?.sid

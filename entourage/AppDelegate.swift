@@ -94,6 +94,89 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
     }
     
+    //Universal links
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
+        guard let incomingURL = userActivity.webpageURL else { return false }
+        guard let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else { return false }
+        
+        // extract the path components from the incoming URL
+        let pathComponents = components.path.components(separatedBy: "/")
+        
+        // check if the incoming URL matches any of the URLs you want to handle
+        if components.host == "entourage-webapp-preprod.herokuapp.com" {
+            print("eho pathComponents " , pathComponents)
+            if pathComponents.contains("outings") && pathComponents.contains("chat_messages"){
+            }
+            if pathComponents.contains("neighborhoods") && pathComponents.contains("chat_messages"){
+
+            }
+            if pathComponents.contains("conversations") && pathComponents.contains("chat_messages"){
+
+            }
+            if pathComponents.contains("outings") {
+
+            }
+            if pathComponents.contains("neighborhoods") {
+
+            }
+            if pathComponents.contains("conversations") {
+
+            }
+            if pathComponents.contains("solicitations") {
+
+            }
+            if pathComponents.contains("contributions") {
+
+            }
+            if pathComponents.contains("resources") {
+
+            }
+            
+        }
+        return true
+    }
+    
+    //Deeplinks
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        handleDeepLink(url: url)
+        return true
+    }
+
+    private func handleDeepLink(url: URL) {
+        print("eho opened deeplink")
+        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+              let pathComponents = components.path?.split(separator: "/") else { return }
+        
+        var pathIterator = pathComponents.makeIterator()
+        
+        while let pathComponent = pathIterator.next() {
+            switch pathComponent {
+            case "outings":
+                guard let outingUUID = pathIterator.next() else { break }
+                // Handle outings
+            case "neighborhoods":
+                guard let neighborhoodUUID = pathIterator.next() else { break }
+                // Handle neighborhoods
+            case "conversations":
+                guard let conversationUUID = pathIterator.next() else { break }
+                // Handle conversations
+            case "solicitations":
+                guard let solicitationUUID = pathIterator.next() else { break }
+                // Handle solicitations
+            case "contributions":
+                guard let contributionUUID = pathIterator.next() else { break }
+                // Handle contributions
+            case "resources":
+                guard let resourceUUID = pathIterator.next() else { break }
+                // Handle resources
+            default:
+                break
+            }
+        }
+    }
+
+    
     func handleNotification(userInfos:[String:Any]?, isFromBackground:Bool, isFromStart:Bool) {
         Logger.print("***** handle notifs \(userInfos)")
         Logger.print("***** isFrom BG : \(isFromBackground)")

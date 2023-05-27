@@ -19,6 +19,7 @@ class NeighborhoodMessageCell: UITableViewCell {
     @IBOutlet weak var ui_username: UILabel!
     
     @IBOutlet weak var ui_bt_signal_me: UIButton?
+    @IBOutlet weak var ui_button_signal_other: UIButton?
     
     @IBOutlet weak var ui_lb_error: UILabel!
     @IBOutlet weak var ui_view_error: UIView!
@@ -29,6 +30,8 @@ class NeighborhoodMessageCell: UITableViewCell {
     var messageForRetry = ""
     var positionForRetry = 0
     var userId:Int? = nil
+    var deletedImage:UIImage? = nil
+    var deletedImageView:UIImageView? = nil
     
     weak var delegate:MessageCellSignalDelegate? = nil
     
@@ -51,6 +54,19 @@ class NeighborhoodMessageCell: UITableViewCell {
                 self?.delegate?.showWebUrl(url: url)
             }
         }
+        
+        deletedImage = UIImage(named: "ic_deleted_comment")
+        deletedImageView = UIImageView(image: deletedImage)
+        deletedImageView?.frame = CGRect(x: 16, y: 16, width: 15, height: 15) // Définir la taille de l'image
+        deletedImageView?.tintColor = UIColor.gray // Changer la couleur de l'image en gris
+        
+        
+    }
+    
+    @objc func handleLongPressGesture(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            delegate?.signalMessage(messageId: messageId,userId: userId!)
+        }
     }
     
     func populateCell(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, delegate:MessageCellSignalDelegate) {
@@ -62,6 +78,7 @@ class NeighborhoodMessageCell: UITableViewCell {
         self.positionForRetry = positionRetry
         
         if isMe {
+            //Chnge this line to make threepoint appear
             ui_bt_signal_me?.isHidden = true
             ui_view_message.backgroundColor = .appOrangeLight_50
             ui_date.textColor = .appOrangeLight
@@ -80,8 +97,6 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_image_user.image = UIImage.init(named: "placeholder_user")
         }
         
-        ui_message.text = message.content
-        
         if isRetry {
             ui_view_error?.isHidden = false
             ui_username.text = ""
@@ -89,7 +104,6 @@ class NeighborhoodMessageCell: UITableViewCell {
         }
         else {
             ui_view_error?.isHidden = true
-            
             ui_date.text = "le \(message.createdDateTimeFormatted)"
             
             if !isMe {
@@ -104,11 +118,42 @@ class NeighborhoodMessageCell: UITableViewCell {
                 ui_username.text = ""
             }
         }
+        if let _status = message.status {
+            if _status == "deleted" {
+                ui_message.text = "deleted_comment".localized
+                ui_message.textColor = UIColor.appGreyTextDeleted // Changer la couleur du texte
+                ui_view_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
+                ui_message.superview?.addSubview(deletedImageView!) // Ajouter l'image à la vue parente de ActiveLabel
+                
+            } else {
+                if ((ui_message.superview?.subviews.contains(deletedImageView!)) != nil) {
+                    deletedImageView?.removeFromSuperview()
+                }
+                if isMe {
+                    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+                    self.ui_message.addGestureRecognizer(longPressGesture)
+                    ui_message.text = message.content
+                    ui_message.textColor = UIColor.black // Changer la couleur du texte
+                    ui_view_message.backgroundColor = UIColor.appOrangeLight_50 // Changer la couleur de fond
+                }else{
+                    ui_message.text = message.content
+                    ui_message.textColor = UIColor.black // Changer la couleur du texte
+                    ui_view_message.backgroundColor = UIColor.appBeige // Changer la couleur de fond
+                }
+            }
+        }
+        layoutIfNeeded()
     }
     
     func populateCellConversation(isMe:Bool,message:PostMessage,isRetry:Bool, positionRetry:Int = 0, isOne2One:Bool, delegate:MessageCellSignalDelegate) {
+        
         messageId = message.uid
         userId = message.user?.sid
+        //change this line to mke three point appear
+        ui_bt_signal_me?.isHidden = true
+        ui_button_signal_other?.isHidden = true
+        ui_bt_signal_me?.addTarget(self, action: #selector(action_signal_conversation), for: .touchUpInside)
+        ui_button_signal_other?.addTarget(self, action: #selector(action_signal_conversation), for: .touchUpInside)
         
         self.delegate = delegate
         self.messageForRetry = message.content ?? ""
@@ -131,8 +176,30 @@ class NeighborhoodMessageCell: UITableViewCell {
             ui_image_user.image = UIImage.init(named: "placeholder_user")
         }
         
-        ui_message.text = message.content
-        
+        if let _status = message.status {
+            if _status == "deleted" {
+                ui_message.text = "deleted_message".localized
+                ui_message.textColor = UIColor.appGreyTextDeleted // Changer la couleur du texte
+                ui_view_message.backgroundColor = UIColor.appGreyCellDeleted // Changer la couleur de fond
+                ui_message.superview?.addSubview(deletedImageView!) // Ajouter l'image à la vue parente de ActiveLabel
+            } else {
+                if ((ui_message.superview?.subviews.contains(deletedImageView!)) != nil) {
+                    deletedImageView?.removeFromSuperview()
+                }
+                if isMe {
+                    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+                    self.ui_message.addGestureRecognizer(longPressGesture)
+                    ui_message.text = message.content
+                    ui_message.textColor = UIColor.black // Changer la couleur du texte
+                    ui_view_message.backgroundColor = UIColor.appOrangeLight_50 // Changer la couleur de fond
+                }else{
+                    ui_message.text = message.content
+                    ui_message.textColor = UIColor.black // Changer la couleur du texte
+                    ui_view_message.backgroundColor = UIColor.appBeige // Changer la couleur de fond
+                }
+            }
+        }
+
         if isRetry {
             ui_view_error?.isHidden = false
             ui_username.text = ""
@@ -160,10 +227,15 @@ class NeighborhoodMessageCell: UITableViewCell {
                 }
             }
         }
+        layoutIfNeeded()
+    }
+    
+    @objc func action_signal_conversation(){
+        delegate?.signalMessage(messageId: messageId,userId: userId!)
     }
 
     @IBAction func action_signal_message(_ sender: Any) {
-        delegate?.signalMessage(messageId: messageId)
+        delegate?.signalMessage(messageId: messageId,userId: userId!)
     }
     
     @IBAction func action_retry(_ sender: Any) {
@@ -177,7 +249,7 @@ class NeighborhoodMessageCell: UITableViewCell {
 }
 
 protocol MessageCellSignalDelegate:AnyObject {
-    func signalMessage(messageId:Int)
+    func signalMessage(messageId:Int,userId:Int)
     func retrySend(message:String, positionForRetry:Int)
     func showUser(userId:Int?)
     func showWebUrl(url:URL)

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_view_container: UIView!
@@ -15,7 +16,7 @@ class NeighborhoodPostCell: UITableViewCell {
     
     @IBOutlet weak var ui_date: UILabel!
     
-    @IBOutlet weak var ui_comment: UILabel!
+    @IBOutlet weak var ui_comment: ActiveLabel!
     
     @IBOutlet weak var ui_comments_nb: UILabel!
     
@@ -30,6 +31,7 @@ class NeighborhoodPostCell: UITableViewCell {
     @IBOutlet weak var ui_label_ambassador: UILabel!
     
     @IBOutlet weak var ui_btn_signal_post: UIButton!
+    
     
     class var identifier: String {
         return String(describing: self)
@@ -70,27 +72,31 @@ class NeighborhoodPostCell: UITableViewCell {
         self.delegate?.signalPost(postId: self.postId, userId: self.userId!)
     }
     
+    func removeButton() {
+        ui_view_comment_post.removeFromSuperview()
+        ui_btn_signal_post.removeFromSuperview()
+    }
+    
     func populateCell(message:PostMessage, delegate:NeighborhoodPostCellDelegate, currentIndexPath:IndexPath?, userId:Int?) {
         self.postMessage = message
         self.delegate = delegate
         ui_username.text = message.user?.displayName
         ui_date.text = message.createdDateFormatted
         ui_comment.text = message.content
-        if let _content = message.content {
-            ui_comment.setTextWithLinksDetected(_content) { url in
-                delegate.showWebviewUrl(url: url)
-            }
+        ui_comment.handleURLTap { url in
+            // Ouvrez le lien dans Safari, par exemple
+            delegate.showWebviewUrl(url: url)
         }
+        
         if let _status = message.status {
             if _status == "deleted" {
                 ui_comment.text = "deleted_post_text".localized
                 ui_comment.textColor = UIColor.appGrey151
                 ui_btn_signal_post.isHidden = true
             }else{
-                ui_comment.text = message.content
                 ui_comment.textColor = .black
                 ui_btn_signal_post.isHidden = false
-
+                ui_comment.text = message.content
             }
         }
         

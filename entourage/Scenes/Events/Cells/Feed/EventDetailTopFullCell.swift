@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import ActiveLabel
 
 class EventDetailTopFullCell: UITableViewCell {
     
@@ -31,7 +32,7 @@ class EventDetailTopFullCell: UITableViewCell {
     @IBOutlet weak var ui_lbl_bt_join: UILabel!
     
     @IBOutlet weak var ui_lbl_about_title: UILabel!
-    @IBOutlet weak var ui_lbl_about_desc: UILabel!
+    @IBOutlet weak var ui_lbl_about_desc: ActiveLabel!
     
     @IBOutlet weak var ui_taglist_view: TagListView!
     
@@ -147,7 +148,8 @@ class EventDetailTopFullCell: UITableViewCell {
         
         ui_title.text = event.title
         if let _desc = event.descriptionEvent {
-            ui_lbl_about_desc?.setTextWithLinksDetected(_desc, andLinkHandler: { url in
+            ui_lbl_about_desc.text = _desc
+            ui_lbl_about_desc?.handleURLTap({ url in
                 delegate.showWebUrl(url: url)
             })
         }

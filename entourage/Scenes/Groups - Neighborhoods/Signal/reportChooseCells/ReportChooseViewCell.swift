@@ -20,6 +20,7 @@ class ReportChooseViewCell:UITableViewCell {
     @IBOutlet weak var ui_subtitle: UILabel?
     //VARIABLE
     var type:ReportCellType = .report
+    var paramType:ParamSupressType = .publication
     
     static var nib: UINib {
         return UINib(nibName: "ReportChooseViewCell", bundle: nil)
@@ -32,24 +33,38 @@ class ReportChooseViewCell:UITableViewCell {
         ui_subtitle?.text = "report_post_cell_subtitle".localized
     }
     
-    func populate(type:ReportCellType){
+    func populate(type:ReportCellType, paramType:ParamSupressType){
         self.type = type
+        self.paramType = paramType
+        var title = ""
+        var subtitle = ""
+        var reportsubtitle = ""
+        switch(paramType){
+        case .message:
+            title = "suppress_message_cell_title".localized
+            subtitle = "suppress_message_cell_subtitle".localized
+            reportsubtitle = "report_message_cell_subtitle".localized
+
+        case .commment:
+            title = "suppress_comment_cell_title".localized
+            subtitle = "suppress_comment_cell_subtitle".localized
+            reportsubtitle = "report_comment_cell_subtitle".localized
+
+        case .publication:
+            title = "suppress_post_cell_title".localized
+            subtitle = "suppress_post_cell_subtitle".localized
+            reportsubtitle = "report_post_cell_subtitle".localized
+        }
+        
         switch(type) {
         case .report:
             ui_image?.image = UIImage(named: "ic_report")
             ui_title?.text = "report_post_cell_title".localized
-            ui_subtitle?.text = "report_post_cell_subtitle".localized
+            ui_subtitle?.text = reportsubtitle
         case .suppress:
             ui_image?.image = UIImage(named: "ic_supress")
-            ui_title?.text = "suppress_post_cell_title".localized
-            ui_subtitle?.text = "suppress_post_cell_subtitle".localized
+            ui_title?.text = title
+            ui_subtitle?.text = subtitle
         }
     }
-    
-    func populateForTest(){
-        ui_image?.image = UIImage(named: "ic_supress")
-        ui_title?.text = "suppress_post_cell_title".localized
-        ui_subtitle?.text = "suppress_post_cell_subtitle".localized
-    }
-    
 }

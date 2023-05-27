@@ -226,7 +226,6 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
             vc.postId = parentCommentId
             vc.parentDelegate = self
             vc.signalType = .publication
-            
             self.present(navvc, animated: true)
         }
     }
@@ -314,12 +313,14 @@ extension NeighborhoodDetailMessagesViewController: UITextViewDelegate {
 
 //MARK: - NeighborhoodMessageCellDelegate -
 extension NeighborhoodDetailMessagesViewController:MessageCellSignalDelegate {
-    func signalMessage(messageId: Int) {
+    func signalMessage(messageId: Int, userId : Int) {
         if let navvc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportNavVC") as? UINavigationController, let vc = navvc.topViewController as? ReportGroupMainViewController {
             vc.groupId = neighborhoodId
             vc.postId = messageId
             vc.parentDelegate = self
             vc.signalType = .comment
+            vc.userId = userId
+            vc.messageId = messageId
             self.present(navvc, animated: true)
         }
     }

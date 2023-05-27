@@ -47,6 +47,43 @@ struct DeepLinkManager {
         }
     }
     
+    static func presentActionFromDeeplink(notification:NotificationPushData) {
+        switch notification.instanceType {
+        case .users:
+            showUser(userId: notification.instanceId)
+        case .pois:
+            showPoi(id: notification.instanceId)
+        case .conversations:
+            showConversation(conversationId: notification.instanceId)
+        case .neighborhoods:
+            showNeighborhoodDetail(id: notification.instanceId)
+        case .outings:
+            showOuting(id: notification.instanceId)
+        case .partners:
+            showPartner(partnerId: notification.instanceId)
+        case .resources:
+            showResource(id: notification.instanceId)
+        case .contributions:
+            showAction(id: notification.instanceId, isContrib: true)
+        case .solicitations:
+            showAction(id: notification.instanceId, isContrib: false)
+        case .neighborhood_post:
+            if let _postId = notification.postId{
+                showNeighborhoodDetailMessage(instanceId: notification.instanceId, postId: _postId)
+            }else{
+                showNeighborhoodDetail(id: notification.instanceId)
+            }
+        case .outing_post:
+            if let _postId = notification.postId{
+                showEventDetailMessage(instanceId: notification.instanceId, postId: _postId)
+            }else{
+                showOuting(id: notification.instanceId)
+            }
+        case .none:
+            break
+        }
+    }
+    
     static func setImage(notificationInstanceType:InstanceType) -> String {
         switch notificationInstanceType {
         case .users:
@@ -179,4 +216,14 @@ struct DeepLinkManager {
         }
     }
     
+}
+
+enum RedirectionType {
+    case outingsChatMessage(chatMessageId:Int, outingsId:Int)
+    case outings(outingsId:Int)
+    case neighborhoodsChatMessage(chatMessageId:Int, groupId:Int)
+    case neighborhood(groupId:Int)
+    case solicitation(id:Int)
+    case contributions(id:Int)
+    case conversation(id:Int)
 }

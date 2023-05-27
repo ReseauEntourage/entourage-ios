@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class ConversationListMainCell: UITableViewCell {
     
     
     @IBOutlet weak var ui_image: UIImageView!
     @IBOutlet weak var ui_username: UILabel!
-    @IBOutlet weak var ui_detail_message: UILabel!
+    @IBOutlet weak var ui_detail_message: ActiveLabel!
     @IBOutlet weak var ui_role: UILabel!
     @IBOutlet weak var ui_view_separator: UIView!
     
@@ -46,8 +47,9 @@ class ConversationListMainCell: UITableViewCell {
         ui_username.text = message.title
         ui_role.text = message.getRolesWithPartnerFormated()
         if let _message = message.getLastMessage {
-            ui_detail_message.setTextWithLinksDetected(_message) { url in
-                delegate.showWebUrl(url:url)
+            ui_detail_message.text = _message
+            ui_detail_message.handleURLTap { url in
+                delegate.showWebUrl(url: url)
             }
         }
         ui_detail_message.text = message.getLastMessage

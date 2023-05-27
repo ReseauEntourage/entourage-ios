@@ -97,6 +97,13 @@ extension UIColor {
     static var appGris112: UIColor {
         return UIColor(named: "gris_112") ?? .red
     }
+    static var appGreyCellDeleted: UIColor {
+        return UIColor(named: "grey_cell_deleted") ?? .red
+    }
+    static var appGreyTextDeleted: UIColor {
+        return UIColor(named: "grey_text_deleted") ?? .red
+    }
+    
     static var rougeErreur: UIColor {
         return UIColor(named: "rouge_erreur") ?? .red
     }

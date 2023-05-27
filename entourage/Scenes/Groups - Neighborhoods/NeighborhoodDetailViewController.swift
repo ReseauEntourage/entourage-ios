@@ -64,10 +64,7 @@ class NeighborhoodDetailViewController: UIViewController {
         registerCellsNib()
         
         setupViews()
-        
         ui_floaty_button.isHidden = true
-        
-        getNeighborhoodDetail()
         AnalyticsLoggerManager.logEvent(name: View_GroupFeed__Show)
         
         setupFloatingButton()
@@ -83,9 +80,9 @@ class NeighborhoodDetailViewController: UIViewController {
             showCreatePost()
             isShowCreatePost = false
         }
+        getNeighborhoodDetail()
         //Notif for updating neighborhood infos
-        NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
-        
+        //NotificationCenter.default.addObserver(self, selector: #selector(updateNeighborhood), name: NSNotification.Name(rawValue: kNotificationNeighborhoodUpdate), object: nil)
         //Notif for updating when create new Event + Show Detail event
         NotificationCenter.default.addObserver(self, selector: #selector(updateFromCreateEvent), name: NSNotification.Name(rawValue: kNotificationEventCreateEnd), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showNewEvent(_:)), name: NSNotification.Name(rawValue: kNotificationCreateShowNewEvent), object: nil)
@@ -95,6 +92,7 @@ class NeighborhoodDetailViewController: UIViewController {
         ui_tableview.register(UINib(nibName: NeighborhoodPostTextCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostTextCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodPostImageCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostImageCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodPostDeletedCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodPostDeletedCell.identifier)
+
         ui_tableview.register(UINib(nibName: NeighborhoodDetailTopCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodDetailTopCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodDetailTopMemberCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodDetailTopMemberCell.identifier)
         ui_tableview.register(UINib(nibName: NeighborhoodEmptyPostCell.identifier, bundle: nil), forCellReuseIdentifier: NeighborhoodEmptyPostCell.identifier)
@@ -196,6 +194,7 @@ class NeighborhoodDetailViewController: UIViewController {
     
     //MARK: - Network -
     func getNeighborhoodDetail(hasToRefreshLists:Bool = false) {
+
         self.currentPagingPage = 1
         self.isLoading = true
         NeighborhoodService.getNeighborhoodDetail(id: neighborhoodId) { group, error in
@@ -287,6 +286,9 @@ class NeighborhoodDetailViewController: UIViewController {
     }
     
     func showWelcomeMessage(){
+        //I_present_view_pop
+        AnalyticsLoggerManager.logEvent(name: I_present_view_pop)
+
         let title = "welcome_message_title".localized
         let btnTitle = "welcome_message_btn_title".localized
         var message = "welcome_message_placeholder".localized
@@ -338,6 +340,7 @@ class NeighborhoodDetailViewController: UIViewController {
                 
                 self.ui_tableview.reloadData()
                 self.getNeighborhoodDetail(hasToRefreshLists:true)
+
             }
         }
     }
@@ -412,12 +415,14 @@ class NeighborhoodDetailViewController: UIViewController {
 extension NeighborhoodDetailViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag:MJAlertTAG) {
         if alertTag == .None {
+            AnalyticsLoggerManager.logEvent(name: i_present_close_pop)
             self.sendLeaveGroup()
         }
     }
     
     func validateRightButton(alertTag:MJAlertTAG) {
         if alertTag == .welcomeMessage{
+            AnalyticsLoggerManager.logEvent(name: I_present_click_i_post)
             showCreatePost()
         }
         
@@ -432,12 +437,13 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
         
         let minimum = self.neighborhood != nil ? 2 : 0
         let added = hasNewAndOldSections ? 1 : 0
+
+
         return minimum + added
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 { return 2 }
-        
         if hasNewAndOldSections {
             var count = 0
             if section == 1 {
@@ -725,6 +731,7 @@ extension NeighborhoodDetailViewController: MJNavBackViewDelegate {
 extension NeighborhoodDetailViewController:NeighborhoodDetailViewControllerDelegate {
     func refreshNeighborhoodModified() {
         self.getNeighborhoodDetail(hasToRefreshLists:true)
+
     }
 }
 

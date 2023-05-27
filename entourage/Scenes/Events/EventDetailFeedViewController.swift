@@ -92,7 +92,6 @@ class EventDetailFeedViewController: UIViewController {
         ui_floaty_button.isHidden = true
         ui_bt_floating_join.isHidden = true
         
-        getEventDetail()
         ui_view_canceled.isHidden = true
         
         self.ui_view_full_image.isHidden = true
@@ -108,7 +107,9 @@ class EventDetailFeedViewController: UIViewController {
             isShowCreatePost = false
         }
         //Notif for updating event infos
-        NotificationCenter.default.addObserver(self, selector: #selector(updateEvent), name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(updateEvent), name: NSNotification.Name(rawValue: kNotificationEventUpdate), object: nil)
+        getEventDetail()
+
     }
     
     func registerCellsNib() {
@@ -223,7 +224,6 @@ class EventDetailFeedViewController: UIViewController {
             }
             self.event = event
             self.splitMessages()
-            self.ui_tableview.reloadData()
             self.isLoading = false
             
             if event?.isCanceled() ?? false {
@@ -238,6 +238,7 @@ class EventDetailFeedViewController: UIViewController {
             if hasToRefreshLists {
                 NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventsUpdate), object: nil)
             }
+            self.ui_tableview.reloadData()
         }
     }
     

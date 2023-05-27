@@ -31,6 +31,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
     
     @objc func updateNeighborhood() {
         getNeighborhoodDetail()
+
     }
     
     deinit {

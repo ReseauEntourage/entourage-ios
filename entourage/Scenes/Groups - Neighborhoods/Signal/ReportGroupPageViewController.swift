@@ -21,6 +21,7 @@ class ReportGroupPageViewController: UIPageViewController {
     var conversationId:Int? = nil
     var haveChosen = false
     var titleDelegate:TitleDelegate? = nil
+    var messageId:Int? = nil
     
     var reportVc:ReportGroupViewController? = nil
     var chooseVc:ReportGroupChoosePageViewController? = nil
@@ -40,6 +41,8 @@ class ReportGroupPageViewController: UIPageViewController {
         chooseVc?.postId = postId
         chooseVc?.groupId = groupId
         chooseVc?.eventId = self.eventId
+        chooseVc?.chatMessageId = messageId
+        chooseVc?.conversationId = conversationId
         if let _userid = self.userId {
             chooseVc?.userId = _userid
         }

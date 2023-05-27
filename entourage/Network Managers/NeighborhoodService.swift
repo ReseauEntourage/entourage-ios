@@ -53,7 +53,6 @@ struct NeighborhoodService:ParsingDataCodable {
         endpoint = String.init(format: endpoint,"\(id)", token)
         
         Logger.print("***** url get detail group : \(endpoint)")
-        
         NetworkManager.sharedInstance.requestGet(endPoint: endpoint, headers: nil, params: nil) { data, resp, error in
             
             guard let data = data,error == nil,let _response = resp as? HTTPURLResponse, _response.statusCode < 300 else {
