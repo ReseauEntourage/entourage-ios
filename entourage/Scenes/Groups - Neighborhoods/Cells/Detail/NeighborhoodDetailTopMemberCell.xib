@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -149,6 +149,27 @@
                             <constraint firstAttribute="trailing" secondItem="JtD-Nt-K3R" secondAttribute="trailing" id="knX-9d-06g"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DKr-02-Npa">
+                        <rect key="frame" x="256" y="81.5" width="130" height="35"/>
+                        <color key="backgroundColor" name="orange_medium"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="130" id="9ch-K5-Wb9"/>
+                            <constraint firstAttribute="height" constant="35" id="Ebk-Bh-eN6"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                        <color key="tintColor" name="orange_app"/>
+                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="14" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="Partager" image="ic_share">
+                            <color key="titleColor" name="orange_app"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                <real key="value" value="16"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
@@ -156,7 +177,9 @@
                     <constraint firstItem="t4x-kl-MXJ" firstAttribute="top" secondItem="6Kn-hT-bfH" secondAttribute="bottom" constant="8" id="6BF-I1-6uB"/>
                     <constraint firstItem="6Kn-hT-bfH" firstAttribute="top" secondItem="wcv-Uy-lhO" secondAttribute="bottom" constant="6" id="Ax8-oj-h7o"/>
                     <constraint firstAttribute="trailing" secondItem="6Kn-hT-bfH" secondAttribute="trailing" constant="28" id="NPT-Ww-RUr"/>
+                    <constraint firstItem="DKr-02-Npa" firstAttribute="centerY" secondItem="H3p-cq-cVf" secondAttribute="centerY" id="QqK-l3-odP"/>
                     <constraint firstItem="t4x-kl-MXJ" firstAttribute="leading" secondItem="6Kn-hT-bfH" secondAttribute="leading" id="RBE-OY-i7F"/>
+                    <constraint firstAttribute="trailing" secondItem="DKr-02-Npa" secondAttribute="trailing" constant="20" id="aht-jj-wXV"/>
                     <constraint firstItem="6Kn-hT-bfH" firstAttribute="leading" secondItem="wcv-Uy-lhO" secondAttribute="leading" id="b9N-Fd-gwy"/>
                     <constraint firstAttribute="trailing" secondItem="wcv-Uy-lhO" secondAttribute="trailing" constant="28" id="jfb-7W-02e"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="t4x-kl-MXJ" secondAttribute="bottom" id="vGE-Dx-EqT"/>
@@ -165,6 +188,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="ui_btn_share" destination="DKr-02-Npa" id="Rtr-AK-Loi"/>
                 <outlet property="ui_img_bt_join" destination="JtD-Nt-K3R" id="Sqg-pK-sIe"/>
                 <outlet property="ui_img_member_1" destination="9ft-KD-xiZ" id="pbe-Ge-q8w"/>
                 <outlet property="ui_img_member_2" destination="0fH-xO-ouj" id="o4i-ya-uLc"/>
@@ -181,11 +205,15 @@
     </objects>
     <resources>
         <image name="ic_next_orange" width="9" height="13"/>
+        <image name="ic_share" width="20" height="20"/>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_app">
             <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_medium">
+            <color red="1" green="0.79607843137254897" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

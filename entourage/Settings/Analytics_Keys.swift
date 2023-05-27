@@ -158,6 +158,9 @@ let event_share = "Action__EventFeed__Share"
 let event_option_share = "Action__EventOption__Share"
 let action_event_report = "Action__EventOption__Report"
 let action_eventoption_report = "Action__EventOption__ReportConfirmation"
+let group_share = "Action__GroupFeed__Share"
+let group_option_share = "Action__GroupOption__Share"
+let group_option_report = "Action__GroupOption__Report_Confirmation"
 
 //Profile
 let Profile_view_profile = "View__Profile"

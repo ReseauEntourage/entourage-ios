@@ -152,6 +152,29 @@ extension NeighborhoodDetailOnlyViewController: UITableViewDataSource, UITableVi
 
 //MARK: - NeighborhoodDetailTopCellDelegate -
 extension NeighborhoodDetailOnlyViewController: NeighborhoodDetailTopCellDelegate {
+    func shareGroup() {
+        var stringUrl = "https://"
+        var title = ""
+        if NetworkManager.sharedInstance.getBaseUrl().contains("preprod"){
+            stringUrl = stringUrl + "preprod.entourage.social/app/"
+        }else{
+            stringUrl = stringUrl + "www.entourage.social/app/"
+        }
+        if let _group = neighborhood {
+            stringUrl = stringUrl + "neighborhoods/" + _group.uuid_v2
+            title = "share_group".localized + "\n" + _group.name + ": "
+
+        }
+        let url = URL(string: stringUrl)!
+        let shareText = "\(title)\n\n\(stringUrl)"
+        
+        let activityViewController = UIActivityViewController(activityItems: [title, url], applicationActivities: nil)
+          // Présenter l’UIActivityViewController
+        let viewController = self
+          viewController.present(activityViewController, animated: true, completion: nil)
+        AnalyticsLoggerManager.logEvent(name: group_share)
+    }
+    
     func showWebUrl(urlString: String) {
         if let url = urlString.extractUrlFromChain(){
             WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)

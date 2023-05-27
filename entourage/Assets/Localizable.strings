@@ -735,6 +735,7 @@
 //Params
 "neighborhood_params_title" = "Paramètres du groupe";
 "neighborhood_params_cgu" = "Règlement du groupe";
+"neighborhood_params_share" = "Partager le groupe";
 "neighborhood_params_edit" = "Modifier les informations du groupe";
 "neighborhood_params_signal" = "Signaler le groupe ";
 "neighborhood_params_cgu_title" = "Le règlement";
@@ -843,6 +844,7 @@
 "share_solicitation" = "Cette demande pourrait vous intéresser." ;
 "share_contribution" = "Cette contribution pourrait vous intéresser." ;
 "share_event" = "Cet événement Entourage pourrait vous intéresser." ;
+"share_group" = "Ce groupe de voisins Entourage pourrait vous intéresser." ;
 
 
 
@@ -1305,3 +1307,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "pwdDiff" = "Les mots de passe ne coïncident pas";
 "pwdUpdated" = "Mise à jour du mot de passe";
 "pwdUpdatedErr" = "Erreur de mise à jour";
+
+
+//WELCOME STRINGS
+
+"welcomeone_title" = "Bienvenue sur le réseau social vraiment social";
+"welcomeone_content" = "Retrouvez nos contenus de sensibilisation içi";

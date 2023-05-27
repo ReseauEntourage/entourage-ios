@@ -11,7 +11,6 @@ import SimpleKeychain
 struct AppState {
     
     static func checkNotifcationsAndGoMainScreen() {
-        print("eho")
         let center = UNUserNotificationCenter.current()
         center.getNotificationSettings { settings in
             var status = settings.authorizationStatus

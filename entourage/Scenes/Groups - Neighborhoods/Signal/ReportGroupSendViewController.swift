@@ -99,6 +99,7 @@ class ReportGroupSendViewController: UIViewController {
             }
             NeighborhoodService.reportNeighborhood(groupId:group.uid, message: message, tags: tagsSignalsWS) { error in
                 DispatchQueue.main.async {
+                    AnalyticsLoggerManager.logEvent(name: group_option_report)
                     self.pageDelegate?.closeMain()
                 }
             }
@@ -114,14 +115,12 @@ class ReportGroupSendViewController: UIViewController {
             }
         case .comment,.publication:
             let isPost = signalType == .publication
-            
             if eventId != nil {
                 guard let eventId = eventId, let postId = postId else {
                     return
                 }
                 EventService.reportEventPost(eventId: eventId, postId: postId, message: message, tags: tagsSignalsWS, isPost: isPost) { error in
                     DispatchQueue.main.async {
-                        AnalyticsLoggerManager.logEvent(name: action_eventoption_report)
                         self.pageDelegate?.closeMain()
                     }
                 }
@@ -132,6 +131,7 @@ class ReportGroupSendViewController: UIViewController {
                 }
                 NeighborhoodService.reportNeighborhoodPost(groupId:groupId, postId: postId, message: message, tags: tagsSignalsWS, isPost: isPost) { error in
                     DispatchQueue.main.async {
+                        AnalyticsLoggerManager.logEvent(name: group_option_report)
                         self.pageDelegate?.closeMain()
                     }
                 }
@@ -143,6 +143,11 @@ class ReportGroupSendViewController: UIViewController {
             let isContrib = signalType == .actionContrib
             ActionsService.reportActionPost(isContrib: isContrib, actionId: actionId, message: message, tags: tagsSignalsWS) { error in
                 DispatchQueue.main.async {
+                    if self.signalType == .actionContrib{
+                        AnalyticsLoggerManager.logEvent(name: action_contrib_report_confirm)
+                    }else{
+                        AnalyticsLoggerManager.logEvent(name: action_demand_report_confim)
+                    }
                     self.pageDelegate?.closeMain()
                 }
             }

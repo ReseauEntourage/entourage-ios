@@ -17,7 +17,6 @@ class NeighborhoodParamsGroupViewController: BasePopViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let currentUserId = UserDefaults.currentUser?.sid
         if neighborhood?.creator.uid == currentUserId {
             groupUserType = .Creator
@@ -103,11 +102,11 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch groupUserType {
         case .Creator:
-            return 4 //TODO: on peut quitter le groupe ? //Return 4 hide notif now
+            return 5 //TODO: on peut quitter le groupe ? //Return 4 hide notif now
         case .Member:
-            return 4  //Return 4 hide notif now
+            return 5  //Return 4 hide notif now
         case .Viewer:
-            return 3
+            return 4
         }
     }
     
@@ -126,11 +125,15 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
             switch indexPath.row {
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
-                cell.populateCell(title: "neighborhood_params_edit".localized,imageName: "ic_edit_group", delegate: self, isCGU: false)
+                cell.populateCell(title: "neighborhood_params_edit".localized,imageName: "ic_edit_group", delegate: self, isCGU: false, isShare: false)
                 return cell
-            case 2:
+            case 2: /*here change for share*/
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
-                cell.populateCell(title: "neighborhood_params_cgu".localized,imageName: "ic_cgu_group", delegate: self, isCGU: true)
+                cell.populateCell(title: "neighborhood_params_share".localized,imageName: "ic_share", delegate: self, isCGU: false, isShare: true)
+                return cell
+            case 3:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
+                cell.populateCell(title: "neighborhood_params_cgu".localized,imageName: "ic_cgu_group", delegate: self, isCGU: true, isShare: false)
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! NeighborhoodParamSignalCell
@@ -139,11 +142,15 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
             }
         case .Member:
             switch indexPath.row {
-            case 1:
+            case 1: /*here change for share**/
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
-                cell.populateCell(title: "neighborhood_params_cgu".localized,imageName: "ic_cgu_group", delegate: self, isCGU: true)
+                cell.populateCell(title: "neighborhood_params_share".localized,imageName: "ic_share", delegate: self, isCGU: false, isShare: true)
                 return cell
             case 2:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
+                cell.populateCell(title: "neighborhood_params_cgu".localized,imageName: "ic_cgu_group", delegate: self, isCGU: true, isShare: false)
+                return cell
+            case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! NeighborhoodParamSignalCell
                 cell.populateCell(isQuit: false, hasQuit: true,delegate: self)
                 return cell
@@ -154,9 +161,13 @@ extension NeighborhoodParamsGroupViewController: UITableViewDataSource, UITableV
             }
         case .Viewer:
             switch indexPath.row {
-            case 1:
+            case 1: /*here change for share**/
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
-                cell.populateCell(title: "neighborhood_params_cgu".localized,imageName: "ic_cgu_group", delegate: self, isCGU: true)
+                cell.populateCell(title: "neighborhood_params_share".localized,imageName: "ic_share", delegate: self, isCGU: false, isShare: true)
+                return cell
+            case 2:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell_cgu", for: indexPath) as! NeighborhoodParamEditShowCell
+                cell.populateCell(title: "neighborhood_params_cgu".localized,imageName: "ic_cgu_group", delegate: self, isCGU: true, isShare: false)
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cell_signal", for: indexPath) as! NeighborhoodParamSignalCell
@@ -194,6 +205,29 @@ extension NeighborhoodParamsGroupViewController: MJNavBackViewDelegate {
 
 //MARK: - NeighborhoodParamCellDelegate -
 extension NeighborhoodParamsGroupViewController: NeighborhoodParamCellDelegate {
+    func shareGroup() {
+        var stringUrl = "https://"
+        var title = ""
+        if NetworkManager.sharedInstance.getBaseUrl().contains("preprod"){
+            stringUrl = stringUrl + "preprod.entourage.social/app/"
+        }else{
+            stringUrl = stringUrl + "www.entourage.social/app/"
+        }
+        if let _group = neighborhood {
+            stringUrl = stringUrl + "neighborhoods/" + _group.uuid_v2
+            title = "share_group".localized + "\n" + _group.name + ": "
+
+        }
+        let url = URL(string: stringUrl)!
+        let shareText = "\(title)\n\n\(stringUrl)"
+        
+        let activityViewController = UIActivityViewController(activityItems: [title, url], applicationActivities: nil)
+          // Présenter l’UIActivityViewController
+        let viewController = self
+          viewController.present(activityViewController, animated: true, completion: nil)
+        AnalyticsLoggerManager.logEvent(name: group_option_share)
+    }
+    
     func quitGroup() {
         AnalyticsLoggerManager.logEvent(name: Action_GroupOption_Quit)
         showPopLeave()
@@ -253,6 +287,7 @@ protocol NeighborhoodParamCellDelegate:AnyObject {
     func showCGU()
     func editGroup()
     func editNotif(notifType:GroupUserNotifType,isOn:Bool)
+    func shareGroup()
 }
 
 //MARK: - Enums -

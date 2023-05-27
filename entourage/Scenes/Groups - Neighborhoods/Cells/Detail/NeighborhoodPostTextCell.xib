@@ -278,6 +278,11 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
             <point key="canvasLocation" x="131.8840579710145" y="81.696428571428569"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="cU0-C4-PYr">
+            <size key="intrinsicContentSize" width="292" height="41"/>
+        </designable>
+    </designables>
     <resources>
         <image name="ic_message_neighborhood" width="20" height="20"/>
         <image name="ic_send_comment" width="54" height="54"/>
