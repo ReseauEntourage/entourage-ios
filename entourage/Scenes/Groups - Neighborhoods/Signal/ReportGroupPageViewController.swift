@@ -43,6 +43,7 @@ class ReportGroupPageViewController: UIPageViewController {
         chooseVc?.eventId = self.eventId
         chooseVc?.chatMessageId = messageId
         chooseVc?.conversationId = conversationId
+        chooseVc?.actionId = actionId
         if let _userid = self.userId {
             chooseVc?.userId = _userid
         }

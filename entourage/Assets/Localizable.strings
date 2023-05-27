@@ -541,6 +541,7 @@
 "report_user_message_success" = "Utilisateur signalé";
 "parameter_publication" = "Paramètres de la publication";
 "parameter_message" = "Paramètres du message";
+"parameter_action" = "Signaler un problème";
 "parameter_comment" = "Paramètres du commentaire";
 "supress_button_title" = "Supprimer";
 "supress_alert_title_publi" = "Supprimer la publication";
@@ -559,6 +560,7 @@
 "report_post_cell_title" = "Signaler";
 "suppress_post_cell_title" = "Supprimer ma publication";
 "report_post_cell_subtitle" = "Signaler cette publication à l'équipe Entourage";
+"report_action_cell_subtitle" = "Signaler cette entraide à l'équipe Entourage";
 
 "report_comment_cell_title" = "Signaler";
 "suppress_comment_cell_title" = "Supprimer mon commentaire";
@@ -836,6 +838,14 @@
 "event_top_cell_organised_by" = "Organisé par ";
 "event_top_cell_asso" = "Événement %@" ;
 
+
+//SHARE
+"share_solicitation" = "Cette demande pourrait vous intéresser." ;
+"share_contribution" = "Cette contribution pourrait vous intéresser." ;
+"share_event" = "Cet événement Entourage pourrait vous intéresser." ;
+
+
+
 //Create
 
 "eventCreatePopCloseBackTitle" = "Attention";
@@ -900,6 +910,7 @@
 "event_create_phase4_title" = "Sélectionnez la ou les catégories qui décrivent le mieux le sujet de l’événement. - obligatoire";
 
 "event_create_phase5_title" = "Partager l'événement dans vos groupes\n- obligatoire";
+"event_share_option" = "Partager l'événement";
 "event_create_phase5_desc" = "Vous ne pouvez partager l’événement seulement aux groupes dont vous êtes membre. Votre événement sera alors visible dans le(s) groupe(s) sélectionné(s) et tous les membres d'un groupe pourront y participer.";
 "createEventNotShare" = "Ne partager dans aucun groupe";
 "createEventShare" = "Partager dans un ou plusieurs groupes";

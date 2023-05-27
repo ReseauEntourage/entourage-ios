@@ -412,12 +412,34 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgR-Y6-WWf">
+                        <rect key="frame" x="248" y="331.5" width="130" height="44"/>
+                        <color key="backgroundColor" name="orange_medium"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="130" id="T91-U2-U6I"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                        <color key="tintColor" name="orange_app"/>
+                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="Partager" image="ic_share">
+                            <color key="titleColor" name="orange_app"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                <real key="value" value="22"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" name="BeigeClair"/>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="lgR-Y6-WWf" secondAttribute="trailing" constant="28" id="4Rt-ec-0SQ"/>
                     <constraint firstAttribute="trailing" secondItem="Nfw-W1-dO7" secondAttribute="trailing" constant="28" id="5jS-dB-laQ"/>
                     <constraint firstItem="fuU-Rj-r2w" firstAttribute="top" secondItem="CsR-kO-usD" secondAttribute="bottom" constant="24" id="At5-0v-xFn"/>
                     <constraint firstItem="fuU-Rj-r2w" firstAttribute="leading" secondItem="CsR-kO-usD" secondAttribute="leading" id="FRM-kF-rtM"/>
+                    <constraint firstItem="lgR-Y6-WWf" firstAttribute="top" secondItem="L6a-xt-M59" secondAttribute="top" id="FqV-d8-o8d"/>
                     <constraint firstItem="GxR-dy-Owz" firstAttribute="top" secondItem="Nfw-W1-dO7" secondAttribute="bottom" constant="16" id="Ggf-Ol-fWh"/>
                     <constraint firstItem="Nfw-W1-dO7" firstAttribute="leading" secondItem="klB-o1-C0m" secondAttribute="leading" id="H0K-5a-a4q"/>
                     <constraint firstAttribute="trailing" secondItem="GxR-dy-Owz" secondAttribute="trailing" constant="28" id="H5r-RL-hLC"/>
@@ -434,6 +456,7 @@
                     <constraint firstItem="L6a-xt-M59" firstAttribute="top" secondItem="GxR-dy-Owz" secondAttribute="bottom" constant="16" id="mqw-Ao-NR7"/>
                     <constraint firstAttribute="trailing" secondItem="CsR-kO-usD" secondAttribute="trailing" constant="28" id="n7J-Wl-s1L"/>
                     <constraint firstItem="oGK-wr-qH0" firstAttribute="leading" secondItem="Nfw-W1-dO7" secondAttribute="leading" id="sc0-fr-137"/>
+                    <constraint firstItem="lgR-Y6-WWf" firstAttribute="bottom" secondItem="L6a-xt-M59" secondAttribute="bottom" id="wJX-cG-pBw"/>
                     <constraint firstItem="klB-o1-C0m" firstAttribute="top" secondItem="3q6-vS-dBw" secondAttribute="top" constant="28" id="yC2-ZV-76o"/>
                     <constraint firstAttribute="trailing" secondItem="UXs-ZL-Ra7" secondAttribute="trailing" constant="28" id="yGN-4g-yQG"/>
                 </constraints>
@@ -441,6 +464,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="ib_btn_participate" destination="L6a-xt-M59" id="GDy-CA-wt6"/>
+                <outlet property="ui_btn_share" destination="lgR-Y6-WWf" id="Lqp-Ta-LcQ"/>
                 <outlet property="ui_constraint_listview_top_margin" destination="At5-0v-xFn" id="CGo-JX-gSb"/>
                 <outlet property="ui_img_bt_join" destination="2TX-DT-6v1" id="sPm-OX-Woy"/>
                 <outlet property="ui_img_member_1" destination="2x2-3v-72B" id="SOR-qC-Iu0"/>
@@ -469,10 +493,13 @@
                 <outlet property="ui_view_organised_by" destination="BfH-VT-nZB" id="E5B-Jh-TwT"/>
                 <outlet property="ui_view_place_limit" destination="YLQ-hv-Eb2" id="ght-bZ-LHL"/>
             </connections>
-            <point key="canvasLocation" x="126" y="69"/>
+            <point key="canvasLocation" x="124.6376811594203" y="68.638392857142847"/>
         </tableViewCell>
     </objects>
     <designables>
+        <designable name="CsR-kO-usD">
+            <size key="intrinsicContentSize" width="90.5" height="20.5"/>
+        </designable>
         <designable name="fuU-Rj-r2w">
             <size key="intrinsicContentSize" width="350" height="12"/>
         </designable>
@@ -484,6 +511,7 @@
         <image name="ic_event_time" width="20" height="20"/>
         <image name="ic_location" width="20" height="20"/>
         <image name="ic_plus_white" width="19" height="19"/>
+        <image name="ic_share" width="20" height="20"/>
         <namedColor name="BeigeClair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -492,6 +520,9 @@
         </namedColor>
         <namedColor name="orange_light_a50">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_medium">
+            <color red="1" green="0.79607843137254897" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

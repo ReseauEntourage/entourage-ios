@@ -12,6 +12,7 @@ enum ParamSupressType {
     case message
     case commment
     case publication
+    case action
 }
 
 class ReportGroupChoosePageViewController:UIViewController {
@@ -84,7 +85,13 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        if actionId != nil {
+            if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "ReportChooseViewCell", for: indexPath ) as? ReportChooseViewCell {
+                cell.selectionStyle = .none
+                cell.populate(type: table_dto[indexPath.row], paramType: .action)
+                return cell
+            }
+        }
         switch(table_dto[indexPath.row]){
         case .report:
             if let cell = ui_tableview.dequeueReusableCell(withIdentifier: "ReportChooseViewCell", for: indexPath ) as? ReportChooseViewCell {
@@ -100,6 +107,7 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
                 return cell
             }
         }
+        
         return UITableViewCell()
     }
     
@@ -133,6 +141,11 @@ extension ReportGroupChoosePageViewController:UITableViewDelegate,UITableViewDat
             analyticsName = Click_delete_post
             self.analyticsClickName = Delete_post
 
+        case .action:
+            alerteTitle = "supress_alert_title_publi".localized
+            alerteText = "supress_alert_text_publi".localized
+            analyticsName = Click_delete_post
+            self.analyticsClickName = Delete_post
         }
         
         AnalyticsLoggerManager.logEvent(name: analyticsName)

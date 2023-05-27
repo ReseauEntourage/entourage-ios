@@ -34,6 +34,7 @@ class ReportChooseViewCell:UITableViewCell {
     }
     
     func populate(type:ReportCellType, paramType:ParamSupressType){
+        print(paramType)
         self.type = type
         self.paramType = paramType
         var title = ""
@@ -54,7 +55,12 @@ class ReportChooseViewCell:UITableViewCell {
             title = "suppress_post_cell_title".localized
             subtitle = "suppress_post_cell_subtitle".localized
             reportsubtitle = "report_post_cell_subtitle".localized
+        case .action:
+            title = "suppress_post_cell_title".localized
+            subtitle = "report_action_cell_subtitle".localized
+            reportsubtitle = "report_action_cell_subtitle".localized
         }
+        
         
         switch(type) {
         case .report:

@@ -70,6 +70,8 @@ class MainTabbarViewController: UITabBarController {
         Logger.print("***** My group : \(groupVC.topViewController)")
     }
     
+    
+    
     @objc func showDiscoverEvents() {
         if let vc = eventsVC.topViewController as? EventMainHomeViewController {
             vc.setDiscoverFirst()
@@ -83,6 +85,7 @@ class MainTabbarViewController: UITabBarController {
         if let vc = eventsVC.topViewController as? EventMainHomeViewController {
             vc.setMyFirst()
         }
+        print("eho")
         self.selectedIndex = 4
         self.boldSelectedItem()
         Logger.print("***** My Events ")
@@ -93,6 +96,10 @@ class MainTabbarViewController: UITabBarController {
             vc.setContributionsFirst()
         }
         self.selectedIndex = 1
+        self.boldSelectedItem()
+    }
+    @objc func showHome() {
+        self.selectedIndex = 0
         self.boldSelectedItem()
     }
     

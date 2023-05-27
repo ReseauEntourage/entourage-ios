@@ -10,6 +10,7 @@ import Foundation
 struct Event:Codable {
     var uid:Int = 0
     var uuid:String = ""
+    var uuid_v2:String = ""
     var title:String = ""
     var descriptionEvent:String? = nil
     
@@ -186,6 +187,7 @@ struct Event:Codable {
     enum CodingKeys: String, CodingKey {
         case uid = "id"
         case uuid
+        case uuid_v2
         case title
         case descriptionEvent = "description"
         case shareUrl = "share_url"

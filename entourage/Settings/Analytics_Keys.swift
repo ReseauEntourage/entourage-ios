@@ -151,6 +151,13 @@ let Home_action_moderator = "Action__Home__Moderator"
 let Home_action_map = "Action__Home__Map"
 let Home_view_notif = "View__Notif"
 
+//SHARE ACTION
+let contrib_share = "Action__Contrib__Share"
+let demand_share = "Action__Demand__Share"
+let event_share = "Action__EventFeed__Share"
+let event_option_share = "Action__EventOption__Share"
+let action_event_report = "Action__EventOption__Report"
+let action_eventoption_report = "Action__EventOption__ReportConfirmation"
 
 //Profile
 let Profile_view_profile = "View__Profile"
@@ -231,7 +238,7 @@ let Delete_post = "View__DeletePostPop"
 let Click_delete_post = "Clic__DeletePostPop__Delete"
 let Click_delete_comm = "Clic__DeleteCommPop__Delete"
 let Delete_comm = "View__DeleteCommPop"
-let Click_delete_mess = "Clic_DeleteMessagePop_Delete"
+let Click_delete_mess = "Clic__DeleteMessagePop__Delete"
 let Delete_mess = "View__DeleteMessagePop"
  
 //Group Present Pop
@@ -241,13 +248,15 @@ let i_present_close_pop = "Action__Group__Pop_Iclose"
 
 //PedagoList
 let Pedago_View = "View__PedagoList"
-
 let Pedago_View_all_tag = "Action__PedagoAllTag"
-
 let Pedago_View_understand_tag = "Action__PedagoUnderstandTag"
-
 let Pedago_View_act_tag = "Action__PedagoActTag"
-
 let Pedago_View_inspire_tag = "Action__PedagoInspireTag"
-
 let Pedago_View_card = "Action__PedagoCard"
+let action_contrib_share = "Action__Contrib__Share"
+let action_demand_share = "Action__Demand__Share"
+let action_report_contrib = "Action__Contrib__Report"
+let action_demand_report  = "Action__Demand__Report"
+let action_contrib_report_confirm = "Action__Contrib__Report_Confirmation"
+let action_demand_report_confim = "Action__Demand__Report_Confirmation"
+

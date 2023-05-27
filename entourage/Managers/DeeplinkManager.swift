@@ -273,15 +273,23 @@ struct DeepLinkManager {
         }
     }
     
+    static func showHomeUniversalLink() {
+        if let vc = AppState.getTopViewController() {
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showHome()
+            }
+        }
+    }
+    
     static func showContribListUniversalLink() {
-        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+        if let vc = AppState.getTopViewController(){
             if let _tabbar = vc.tabBarController as? MainTabbarViewController {
                 _tabbar.showActionsContrib()
             }
         }
     }
     static func showSolicitationListUniversalLink() {
-        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+        if let vc = AppState.getTopViewController(){
             if let _tabbar = vc.tabBarController as? MainTabbarViewController {
                 _tabbar.showActionsSolicitations()
             }
@@ -289,7 +297,7 @@ struct DeepLinkManager {
     }
     
     static func showOutingListUniversalLink() {
-        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+        if let vc = AppState.getTopViewController(){
             if let _tabbar = vc.tabBarController as? MainTabbarViewController {
                 _tabbar.showMyEvents()
             }

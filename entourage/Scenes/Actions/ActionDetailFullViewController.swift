@@ -9,7 +9,7 @@ import UIKit
 import IHProgressHUD
 
 class ActionDetailFullViewController: UIViewController {
-
+    
     @IBOutlet weak var ui_tableview: UITableView!
     @IBOutlet weak var ui_top_view: MJNavBackView!
     
@@ -24,11 +24,11 @@ class ActionDetailFullViewController: UIViewController {
     @IBOutlet weak var ui_view_edit: UIView!
     
     
-    @IBOutlet weak var ui_button_signal: UIButton!
     @IBOutlet weak var ui_cancel_button: UIButton!
     @IBOutlet weak var ui_cancel_subtitle: UILabel!
     @IBOutlet weak var ui_cancel_title: UILabel!
     @IBOutlet weak var ui_view_empty: UIView!
+    @IBOutlet weak var ui_button_share: UIButton!
     
     
     var action:Action? = nil
@@ -47,7 +47,7 @@ class ActionDetailFullViewController: UIViewController {
         ui_top_view.backgroundColor = .appBeigeClair
         let _title = isContrib ? "Contrib".localized : "Demand".localized
         ui_top_view.populateCustom(title: _title, titleFont: ApplicationTheme.getFontQuickSandBold(size: 15), titleColor: nil, imageName: nil, backgroundColor: .clear, delegate: self, showSeparator: true, cornerRadius: nil, isClose: false, marginLeftButton: nil,doubleRightMargin: true)
-       
+        
         getAction()
         setupBottomViews()
         setupCancelView()
@@ -90,6 +90,10 @@ class ActionDetailFullViewController: UIViewController {
                 
             }
             else {
+                let alertController = UIAlertController(title: "Attention", message: "Cette action a été supprimée", preferredStyle: .alert)
+                let closeAction = UIAlertAction(title: "Fermer", style: .default, handler: nil)
+                alertController.addAction(closeAction)
+                self.present(alertController, animated: true, completion: nil)
                 self.goBack()
             }
         }
@@ -107,7 +111,7 @@ class ActionDetailFullViewController: UIViewController {
             ui_cancel_button.setTitle(_btTitle, for: .normal)
             
             ui_top_view.changeTitleColor(titleColor: .appGris112)
-            ui_button_signal.isHidden = true
+            ui_button_share.isHidden = true
         }
         else if action?.isMine() ?? false {
             ui_view_contact.isHidden = true
@@ -129,6 +133,7 @@ class ActionDetailFullViewController: UIViewController {
         ui_title_edit.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_title_contact.setupFontAndColor(style: ApplicationTheme.getFontBoutonBlanc())
         ui_title_delete.setupFontAndColor(style: ApplicationTheme.getFontBoutonOrange())
+        ui_button_share.layer.cornerRadius = 17
     }
     
     func setupCancelView() {
@@ -138,6 +143,46 @@ class ActionDetailFullViewController: UIViewController {
         ui_cancel_title.text = "action_view_canceled_title".localized
         ui_cancel_button.layer.cornerRadius = ui_cancel_button.frame.height / 2
     }
+    
+    
+    @IBAction func action_share(_ sender: Any) {
+        var stringUrl = "https://"
+        var title = ""
+        if NetworkManager.sharedInstance.getBaseUrl().contains("preprod"){
+            stringUrl = stringUrl + "preprod.entourage.social/app/"
+        }else{
+            stringUrl = stringUrl + "www.entourage.social/app/"
+        }
+        if let _action = action {
+            if _action.isContrib(){
+                stringUrl = stringUrl + "contributions/" + _action.uuid_v2
+                title = "share_contribution".localized + "\n" + _action.title! + ": "
+                AnalyticsLoggerManager.logEvent(name: contrib_share)
+
+            }else{
+                stringUrl = stringUrl + "solicitations/" + _action.uuid_v2
+                title = "share_solicitation".localized + "\n" + _action.title! + ": "
+                AnalyticsLoggerManager.logEvent(name: demand_share)
+
+            }
+        }
+        let url = URL(string: stringUrl)!
+        let shareText = "\(title)\n\n\(stringUrl)"
+        
+        let activityViewController = UIActivityViewController(activityItems: [title, url], applicationActivities: nil)
+          // Présenter l’UIActivityViewController
+        let viewController = self
+          viewController.present(activityViewController, animated: true, completion: nil)
+        
+        if ((action?.isContrib()) != nil) {
+            AnalyticsLoggerManager.logEvent(name: action_contrib_share)
+        }else{
+            AnalyticsLoggerManager.logEvent(name: action_demand_share)
+        }
+    }
+    
+    
+    
     
     @IBAction func action_show_actions(_ sender: Any) {
         self.navigationController?.dismiss(animated: true) {
@@ -160,7 +205,7 @@ class ActionDetailFullViewController: UIViewController {
         guard let action = action else {
             return
         }
-
+        
         let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "actionEditVCMain") as? ActionEditMainViewController {
             vc.modalPresentationStyle = .fullScreen
@@ -203,21 +248,16 @@ class ActionDetailFullViewController: UIViewController {
                 let sb = UIStoryboard.init(name: StoryboardName.messages, bundle: nil)
                 if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
                     vc.setupFromOtherVC(conversationId: convId, title: username, isOneToOne: true, conversation: conversation)
-
+                    
                     self.present(vc, animated: true)
                 }
             }
         }
     }
     
-    @IBAction func action_signal(_ sender: Any) {
-        if let  vc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
-            vc.actionId = actionId
-            vc.parentDelegate = self
-            vc.signalType = isContrib ? .actionContrib : .actionSolicitation
-            self.present(vc, animated: true)
-        }
-    }
+
+    
+    
     
     func showPopCancel() {
         let homeVC = ActionDeletePopsViewController()
@@ -302,6 +342,20 @@ extension ActionDetailFullViewController: ActionDeletePopDelegate {
 
 //MARK: - ActionFullAuthorCellDelegate -
 extension ActionDetailFullViewController:ActionFullAuthorCellDelegate {
+    func goSignal() {
+        if ((action?.isContrib()) != nil){
+            AnalyticsLoggerManager.logEvent(name: action_report_contrib)
+        }else{
+            AnalyticsLoggerManager.logEvent(name: action_demand_report)
+        }
+        if let vc = UIStoryboard.init(name: StoryboardName.neighborhoodReport, bundle: nil).instantiateViewController(withIdentifier: "reportGroupMainVC") as? ReportGroupMainViewController {
+             vc.actionId = actionId
+             vc.parentDelegate = self
+             vc.signalType = isContrib ? .actionContrib : .actionSolicitation
+             self.present(vc, animated: true)
+           }
+    }
+    
     func showCharte() {
         if let  vc = UIStoryboard.init(name: StoryboardName.actions, bundle: nil).instantiateViewController(withIdentifier: "params_CGU_VC") as? ActionParamsCGUViewController {
             vc.modalPresentationStyle = .fullScreen

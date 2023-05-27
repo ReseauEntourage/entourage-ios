@@ -108,6 +108,7 @@ class ReportGroupSendViewController: UIViewController {
             }
             EventService.reportEvent(eventId: event.uid, message: message, tags: tagsSignalsWS) { error in
                 DispatchQueue.main.async {
+                    AnalyticsLoggerManager.logEvent(name: action_eventoption_report)
                     self.pageDelegate?.closeMain()
                 }
             }
@@ -120,6 +121,7 @@ class ReportGroupSendViewController: UIViewController {
                 }
                 EventService.reportEventPost(eventId: eventId, postId: postId, message: message, tags: tagsSignalsWS, isPost: isPost) { error in
                     DispatchQueue.main.async {
+                        AnalyticsLoggerManager.logEvent(name: action_eventoption_report)
                         self.pageDelegate?.closeMain()
                     }
                 }

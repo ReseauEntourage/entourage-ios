@@ -251,6 +251,13 @@ class EventDetailFeedViewController: UIViewController {
             if let _ = error {
                 self.goBack()
             }
+            if event == nil {
+                    let alertController = UIAlertController(title: "Attention", message: "Cet événement a été supprimé", preferredStyle: .alert)
+                    let closeAction = UIAlertAction(title: "Fermer", style: .default, handler: nil)
+                    alertController.addAction(closeAction)
+                    self.present(alertController, animated: true, completion: nil)
+                     
+            }
             self.event = event
             self.splitMessages()
             self.isLoading = false
@@ -690,6 +697,30 @@ extension EventDetailFeedViewController: MJNavBackViewDelegate {
 
 //MARK: - EventDetailTopCellDelegate -
 extension EventDetailFeedViewController:EventDetailTopCellDelegate {
+    func share() {
+        var stringUrl = "https://"
+        var title = ""
+        if NetworkManager.sharedInstance.getBaseUrl().contains("preprod"){
+            stringUrl = stringUrl + "preprod.entourage.social/app/"
+        }else{
+            stringUrl = stringUrl + "www.entourage.social/app/"
+        }
+        if let _event = event {
+            stringUrl = stringUrl + "outings/" + _event.uuid_v2
+            title = "share_event".localized + "\n" + _event.title + ": "
+
+        }
+        let url = URL(string: stringUrl)!
+        let shareText = "\(title)\n\n\(stringUrl)"
+        
+        let activityViewController = UIActivityViewController(activityItems: [title, url], applicationActivities: nil)
+          // Présenter l’UIActivityViewController
+        let viewController = self
+          viewController.present(activityViewController, animated: true, completion: nil)
+        AnalyticsLoggerManager.logEvent(name: event_share)
+
+    }
+    
     func showUser() {
         
     }
