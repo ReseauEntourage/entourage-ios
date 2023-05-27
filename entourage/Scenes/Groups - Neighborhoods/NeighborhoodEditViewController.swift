@@ -111,7 +111,7 @@ class NeighborhoodEditViewController: UIViewController {
     }
     
     func getCurrentNeighBorhood() {
-        NeighborhoodService.getNeighborhoodDetail(id: currentNeighborhoodId) { group, error in
+        NeighborhoodService.getNeighborhoodDetail(id: String(currentNeighborhoodId)) { group, error in
             if let _ = error {
                 //TODO: afficher erreur ?
                 self.goBack()

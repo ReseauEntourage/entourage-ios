@@ -39,7 +39,7 @@ class NeighborhoodDetailOnlyViewController: UIViewController {
     }
     
     func getNeighborhoodDetail() {
-        NeighborhoodService.getNeighborhoodDetail(id: neighborhoodId) { group, error in
+        NeighborhoodService.getNeighborhoodDetail(id: String(neighborhoodId)) { group, error in
             if let _ = error {
                 self.goBack()
             }

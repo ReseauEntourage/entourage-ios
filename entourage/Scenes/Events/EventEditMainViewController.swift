@@ -202,7 +202,7 @@ class EventEditMainViewController: UIViewController {
     
     //MARK: - Network -
     private func getEvent() {
-        EventService.getEventWithId(eventId) { event, error in
+        EventService.getEventWithId(String(eventId)) { event, error in
             self.currentEvent = event
             Logger.print("***** return new Event ;) \(event)")
             NotificationCenter.default.post(name: NSNotification.Name(kNotificationEventEditLoadedEvent), object: nil)

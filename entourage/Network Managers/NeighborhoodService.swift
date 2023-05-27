@@ -46,7 +46,7 @@ struct NeighborhoodService:ParsingDataCodable {
         }
     }
     
-    static func getNeighborhoodDetail(id:Int, completion: @escaping (_ group:Neighborhood?, _ error:EntourageNetworkError?) -> Void) {
+    static func getNeighborhoodDetail(id:String, completion: @escaping (_ group:Neighborhood?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}
         var endpoint = kAPIGetDetailNeighborhood
@@ -362,7 +362,7 @@ struct NeighborhoodService:ParsingDataCodable {
     
     
     //MARK: - Comments for Post -
-    
+    //MARK:ID CAN BE HASHED
     static func getCommentsFor(neighborhoodId:Int, parentPostId:Int, completion: @escaping (_ messages:[PostMessage]?, _ error:EntourageNetworkError?) -> Void) {
         
         guard let token = UserDefaults.token else {return}

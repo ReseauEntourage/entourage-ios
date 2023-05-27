@@ -72,6 +72,7 @@ struct AppState {
         appDelegate.window?.makeKeyAndVisible()
     }
     
+    
     static func getTopViewController() -> UIViewController? {
         return UIApplication.shared.topFrontViewController
     }

@@ -507,6 +507,7 @@
 "params_about_privacy" = "Politique de Confidentialité";
 "params_about_email" = "Contacter Entourage";
 "params_about_licences" = "Licence open-source";
+"params_about_partner" = "Nos mécènes et partenaires";
 "params_about_title" = "Aide et à propos";
 
 //Settings Notifs
@@ -518,6 +519,9 @@
 "param_notifs_switch_actions" = "Notifications dons & service";
 "param_notifs_validate" = "Appliquer les modifications";
 
+//NOTIF
+"notif_contrib_title" = "Un voisin propose une nouvelle entraide. Peut-être que cela pourrait vous intéresser ?";
+"notif_solicitation_title" = "Un voisin recherche un équipement. Peut-être que vous pourriez l’aider ?";
 //Detail user profile
 "detail_user_send_message" = "Écrire un message";
 "detail_user_his_activity" = "Son activité";

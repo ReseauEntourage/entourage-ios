@@ -60,13 +60,13 @@ let API_URL_CONTRIB_PREPARE_IMAGE_UPLOAD = "contributions/presigned_upload?token
 //Home
 let kAPIHomeSummary = "home/summary?token=%@"
 let kAPIHomeResources = "resources?token=%@"
-let kAPIHomeGetResource = "resources/%d?token=%@"
+let kAPIHomeGetResource = "resources/%@?token=%@"
 let kAPIHomeResourceRead = "resources/%d/users?token=%@"
 let kAPIHomeWebRecoRead = "webviews/url?url=%@&token=%@"
 
 //Event
 let kAPIEventImages = "entourage_images?token=%@"
-let kAPIEventDetail = "outings/%d?token=%@"
+let kAPIEventDetail = "outings/%@?token=%@"
 let kAPIEventCreate = "outings?token=%@"
 let kAPIEventGetAllDiscover = "outings?token=%@&page=%d&per=%d&period=future"
 let kAPIEventGetAllForUser = "users/%@/outings?token=%@&page=%d&per=%d"
@@ -90,8 +90,8 @@ let kAPIGetOutingPostMessage = "outings/%@/chat_messages/%@?token=%@&image_size=
 let kAPIDeleteEventPostMessage = "outings/%d/chat_messages/%d?token=%@"
 
 //Actions
-let kAPIGetContrib = "contributions/%d?token=%@"
-let kAPIGetSolicitation = "solicitations/%d?token=%@"
+let kAPIGetContrib = "contributions/%@?token=%@"
+let kAPIGetSolicitation = "solicitations/%@?token=%@"
 let kAPIContribCreate = "contributions?token=%@"
 let kAPISolicitationCreate = "solicitations?token=%@"
 let kAPIContribUpdate = "contributions/%d?token=%@"
@@ -134,6 +134,7 @@ let APPSTORE_URL = "https://apps.apple.com/fr/app/entourage-reseau-solidaire/id1
 let AMBASSADOR_URL = "https://www.entourage.social/devenir-ambassadeur/?utm_source=app&utm_medium=app"
 let CHARTE_URL = "https://blog.entourage.social/charte-ethique-grand-public/"
 let MENU_LICENSES_URL = "https://www.entourage.social"
+let PARTNER_URL = "https://www.entourage.social/mecenes-et-partenaires/"
 let MENU_SUGGEST_URL = "https://entourage-asso.typeform.com/to/NRhT8vmj"
 
 //Menu Links

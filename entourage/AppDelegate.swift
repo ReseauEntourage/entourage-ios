@@ -98,42 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
         guard let incomingURL = userActivity.webpageURL else { return false }
-        guard let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else { return false }
-        
-        // extract the path components from the incoming URL
-        let pathComponents = components.path.components(separatedBy: "/")
-        
-        // check if the incoming URL matches any of the URLs you want to handle
-        if components.host == "entourage-webapp-preprod.herokuapp.com" {
-            print("eho pathComponents " , pathComponents)
-            if pathComponents.contains("outings") && pathComponents.contains("chat_messages"){
-            }
-            if pathComponents.contains("neighborhoods") && pathComponents.contains("chat_messages"){
-
-            }
-            if pathComponents.contains("conversations") && pathComponents.contains("chat_messages"){
-
-            }
-            if pathComponents.contains("outings") {
-
-            }
-            if pathComponents.contains("neighborhoods") {
-
-            }
-            if pathComponents.contains("conversations") {
-
-            }
-            if pathComponents.contains("solicitations") {
-
-            }
-            if pathComponents.contains("contributions") {
-
-            }
-            if pathComponents.contains("resources") {
-
-            }
-            
-        }
+        guard let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: false) else { return false }
+        UniversalLinkManager.handleUniversalLink(components:components)
         return true
     }
     
@@ -144,7 +110,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func handleDeepLink(url: URL) {
-        print("eho opened deeplink")
         guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
               let pathComponents = components.path?.split(separator: "/") else { return }
         

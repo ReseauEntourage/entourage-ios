@@ -27,7 +27,9 @@ class EventDetailMessagesViewController: UIViewController {
     @IBOutlet var ui_tap_gesture: UITapGestureRecognizer!
     
     var eventId:Int = 0
+    var hashedEventId:String = ""
     var parentCommentId:Int = 0
+    var hashedCommentId:String = ""
     var eventName = ""
     var isGroupMember = false
     
@@ -137,7 +139,17 @@ class EventDetailMessagesViewController: UIViewController {
     
     //MARK: - Network -
     func getMessages() {
-        EventService.getCommentsFor(eventId: eventId, parentPostId: parentCommentId) { messages, error in
+        var _eventId = ""
+        var _postId = ""
+        if self.eventId != 0 , self.parentCommentId != 0 {
+            _eventId = String(eventId)
+            _postId = String(parentCommentId)
+        }else{
+            _eventId = self.hashedEventId
+            _postId = self.hashedCommentId
+        }
+        
+        EventService.getCommentsFor(eventId: _eventId, parentPostId: _postId) { messages, error in
             if let messages = messages {
                 self.messages = messages
                 self.ui_view_empty.isHidden = self.messages.count > 0

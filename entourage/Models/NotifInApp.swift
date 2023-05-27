@@ -12,6 +12,7 @@ struct NotifInApp:Codable {
     var instanceId:Int? = nil
     private var instanceString:String
     var content:String? = nil
+    var title:String? = nil
     var imageUrl:String? = nil
     var postId:Int? = nil
     
@@ -38,6 +39,7 @@ struct NotifInApp:Codable {
         case postId = "post_id"
         case instanceString = "instance"
         case content
+        case title
         case createdAt = "created_at"
         case completedAt = "completed_at"
         case imageUrl = "image_url"
@@ -86,7 +88,11 @@ struct NotifInApp:Codable {
     }
     
     func getDurationFromNow() -> String {
-        return (Utils.formatDateAgo(date: Utils.getDateFromWSDateString(createdAt)))
+        if let date = Utils.getDateFromWSDateString(createdAt) {
+            return Utils.formatDateAgo(date: date)
+        } else {
+            return ""
+        }
     }
 }
 

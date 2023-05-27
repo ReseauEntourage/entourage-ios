@@ -151,22 +151,16 @@ import UIKit
     }
 
     
-    static func getDateFromWSDateString(_ dateStr:String?) -> Date {
+    static func getDateFromWSDateString(_ dateStr:String?) -> Date? {
         guard let dateStr = dateStr else {
-            return Date()
+            return nil
         }
 
-        var date:Date?
-        
         let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
-        
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         dateFormatter.dateFormat = dateFormat
-        
-        date = dateFormatter.date(from: dateStr)
-        
-        return date ?? Date()
+        return dateFormatter.date(from: dateStr)
     }
     
     static func formatEventDate(date:Date?) -> String {

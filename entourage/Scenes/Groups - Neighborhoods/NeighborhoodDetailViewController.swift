@@ -35,6 +35,7 @@ class NeighborhoodDetailViewController: UIViewController {
     var messagesNew = [PostMessage]()
     var messagesOld = [PostMessage]()
     var neighborhoodId:Int = 0
+    var hashedNeighborhoodId:String = ""
     var neighborhood:Neighborhood? = nil
     
     var hasNewAndOldSections = false
@@ -197,7 +198,14 @@ class NeighborhoodDetailViewController: UIViewController {
 
         self.currentPagingPage = 1
         self.isLoading = true
-        NeighborhoodService.getNeighborhoodDetail(id: neighborhoodId) { group, error in
+        var _groupId = ""
+        if neighborhoodId != 0 {
+            _groupId = String(neighborhoodId)
+        }else if hashedNeighborhoodId != "" {
+            _groupId = hashedNeighborhoodId
+        }
+        
+        NeighborhoodService.getNeighborhoodDetail(id: _groupId) { group, error in
             self.pullRefreshControl.endRefreshing()
             if let _ = error {
                 self.goBack()
@@ -207,7 +215,6 @@ class NeighborhoodDetailViewController: UIViewController {
             self.splitMessages()
             self.ui_tableview.reloadData()
             self.isLoading = false
-            
             self.populateTopView()
             
             if hasToRefreshLists {
@@ -414,10 +421,7 @@ class NeighborhoodDetailViewController: UIViewController {
 //MARK: - MJAlertControllerDelegate -
 extension NeighborhoodDetailViewController: MJAlertControllerDelegate {
     func validateLeftButton(alertTag:MJAlertTAG) {
-        if alertTag == .None {
-            AnalyticsLoggerManager.logEvent(name: i_present_close_pop)
-            self.sendLeaveGroup()
-        }
+        AnalyticsLoggerManager.logEvent(name: i_present_close_pop)
     }
     
     func validateRightButton(alertTag:MJAlertTAG) {
@@ -427,7 +431,10 @@ extension NeighborhoodDetailViewController: MJAlertControllerDelegate {
         }
         
     }
-    func closePressed(alertTag:MJAlertTAG) {}
+    func closePressed(alertTag:MJAlertTAG) {
+        AnalyticsLoggerManager.logEvent(name: I_present_click_i_post)
+
+    }
 }
 
 //MARK: - UITableViewDataSource / Delegate -

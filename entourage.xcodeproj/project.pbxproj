@@ -385,6 +385,7 @@
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
 		264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF929AF52820083F83E /* HeaderReportView.xib */; };
 		264C1AFC29AF5BED0083F83E /* HeaderReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */; };
+		2684542C29DAC63700C944EA /* UniversalLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2684542B29DAC63700C944EA /* UniversalLinkManager.swift */; };
 		268FCA2A2967281100159C34 /* MJAlertWithImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FCA292967281100159C34 /* MJAlertWithImageController.swift */; };
 		268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */; };
 		26BC119929C88CD700F204BB /* NeighborhoodPostDeletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */; };
@@ -764,6 +765,7 @@
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
 		264C1AF929AF52820083F83E /* HeaderReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderReportView.xib; sourceTree = "<group>"; };
 		264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderReportView.swift; sourceTree = "<group>"; };
+		2684542B29DAC63700C944EA /* UniversalLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkManager.swift; sourceTree = "<group>"; };
 		268FCA292967281100159C34 /* MJAlertWithImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJAlertWithImageController.swift; sourceTree = "<group>"; };
 		268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertWithImageController.xib; sourceTree = "<group>"; };
 		26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostDeletedCell.xib; sourceTree = "<group>"; };
@@ -905,6 +907,7 @@
 				021F084E2798113D00F32A34 /* LocationManager.swift */,
 				02E0098827E33DD200BB23CA /* WebLinkManager.swift */,
 				022DC3EC284790B000868760 /* AnalyticsLoggerManager.swift */,
+				2684542B29DAC63700C944EA /* UniversalLinkManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2040,6 +2043,7 @@
 				02CCE68A27D7B51E00D6976C /* CloseButton.swift in Sources */,
 				02E2192528355086002A1FCB /* NeighborhoodPostAddPhotoViewController.swift in Sources */,
 				02F578D1289AD4180040685C /* ActionSolicitationDetailHomeCell.swift in Sources */,
+				2684542C29DAC63700C944EA /* UniversalLinkManager.swift in Sources */,
 				0224597427FF323600944DE4 /* NeighborhoodCreateNameCell.swift in Sources */,
 				02F5278527999B8F00929431 /* SolidarityGuideCell.swift in Sources */,
 				02DD1E9328086E6B00538EF4 /* NeighborhoodEditHeaderCell.swift in Sources */,

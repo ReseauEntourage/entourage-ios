@@ -17,11 +17,13 @@ class EventDetailFullFeedViewController: UIViewController {
     
     var event:Event? = nil
     var eventId = 0
+    var isEntourageEvent = false
     
     var hasGroup = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("eho")
         
         ui_tableview.dataSource = self
         ui_tableview.delegate = self
@@ -95,7 +97,7 @@ extension EventDetailFullFeedViewController: UITableViewDataSource, UITableViewD
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: EventDetailFullCell.identifier, for: indexPath) as! EventDetailFullCell
             
-            cell.populateCell(event: event!, delegate: self)
+            cell.populateCell(event: event!, delegate: self, isEntourageEvent: isEntourageEvent)
             
             return cell
         }

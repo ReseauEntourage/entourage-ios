@@ -101,10 +101,11 @@ struct Event:Codable {
         }
     }
     
-    func getMetadateStartDate() -> Date {
+    func getMetadateStartDate() -> Date? {
         return Utils.getDateFromWSDateString(metadata?.starts_at)
     }
-    func getMetadateEndDate() -> Date {
+
+    func getMetadateEndDate() -> Date? {
         return Utils.getDateFromWSDateString(metadata?.ends_at)
     }
     
@@ -152,7 +153,7 @@ struct Event:Codable {
         get { return _endDate }
     }
     
-    func getStartEndDate() -> (startDate:Date,endDate:Date) {
+    func getStartEndDate() -> (startDate:Date?,endDate:Date?) {
         return (Utils.getDateFromWSDateString(metadata?.starts_at),Utils.getDateFromWSDateString(metadata?.ends_at))
     }
     
@@ -334,11 +335,11 @@ struct Event:Codable {
     
     //Use to sort events in months Dicts
     static func getArrayOfDateSorted(events:[Event], isAscendant:Bool) -> [Dictionary<MonthYearKey, [Event]>.Element] {
-       let dict = Dictionary(grouping: events.sorted(by: {$0.getStartEndDate().startDate < $1.getStartEndDate().startDate})) { (event) -> MonthYearKey in
+        let dict = Dictionary(grouping: events.filter { $0.getStartEndDate().startDate != nil }.sorted(by: {$0.getStartEndDate().startDate! < $1.getStartEndDate().startDate! })) { (event) -> MonthYearKey in
+            guard let startDate = event.getStartEndDate().startDate else { return MonthYearKey(monthId: 0, dateString: "-") }
             
-            let date = Calendar.current.dateComponents([.year, .month], from: (event.getStartEndDate().startDate))
-            
-            guard let month = date.month, let year = date.year else { return MonthYearKey(monthId: 0, dateString: "-")}
+            let date = Calendar.current.dateComponents([.year, .month], from: startDate)
+            guard let month = date.month, let year = date.year else { return MonthYearKey(monthId: 0, dateString: "-") }
             
             let df = DateFormatter()
             df.locale = Locale.getPreferredLocale()
@@ -349,11 +350,13 @@ struct Event:Codable {
            
             let newDate = newCalendar.date(from: comp)!
             
-            return MonthYearKey(monthId: month, date:newDate, dateString: "\(monthLiterral) \(year)")
+            return MonthYearKey(monthId: month, date: newDate, dateString: "\(monthLiterral) \(year)")
         }
+        
         if isAscendant {
             return dict.sorted { $0.key.date ?? Date() < $1.key.date ?? Date() }
         }
+        
         return dict.sorted { $0.key.date ?? Date() > $1.key.date ?? Date() }
     }
 }
@@ -417,7 +420,7 @@ struct EventAuthor:Codable {
     }
     
     private var createdAt:String? = nil
-    var creationDate:Date {
+    var creationDate: Date? {
         get {
             return Utils.getDateFromWSDateString(createdAt)
         }

@@ -10,13 +10,16 @@ import GooglePlaces
 
 class GMSAutoCompleteVC : GMSAutocompleteViewController {
     func setup(filterType:GMSPlacesAutocompleteTypeFilter) {
-        let neBoundsCorner = CLLocationCoordinate2D(latitude: 50.77, longitude: 6.04)
-        let swBoundsCorner = CLLocationCoordinate2D(latitude: 43.57, longitude: -1.97)
+        //let neBoundsCorner = CLLocationCoordinate2D(latitude: 50.77, longitude: 6.04)
+        //let swBoundsCorner = CLLocationCoordinate2D(latitude: 43.57, longitude: -1.97)
+        
+        let neBoundsCorner = CLLocationCoordinate2D(latitude: 51.51, longitude: 6.40)
+        let swBoundsCorner = CLLocationCoordinate2D(latitude: 42.35, longitude: -5.14)
         
         let filter = GMSAutocompleteFilter()
         filter.type = filterType
         filter.locationBias = GMSPlaceRectangularLocationOption(neBoundsCorner, swBoundsCorner)
-        filter.country = "fr"
+        //filter.country = "fr"
         let fields = GMSPlaceField(arrayLiteral: [GMSPlaceField.name,GMSPlaceField.placeID,GMSPlaceField.formattedAddress,GMSPlaceField.coordinate])
         self.autocompleteFilter = filter
         self.placeFields = fields

@@ -27,7 +27,9 @@ class NeighborhoodDetailMessagesViewController: UIViewController {
     @IBOutlet weak var ui_title_empty: UILabel!
     @IBOutlet var ui_tap_gesture: UITapGestureRecognizer!
     
+    var hashedNeighborhoodId:String = ""
     var neighborhoodId:Int = 0
+    var hashedParentCommentId:String = ""
     var parentCommentId:Int = 0
     var neighborhoodName = ""
     var isGroupMember = false

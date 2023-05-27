@@ -56,7 +56,7 @@ class MainUserActivitiesCell: UITableViewCell {
         textColor(label: ui_outings_count, isCount: true)
     }
     
-    func populateCell(isMe:Bool ,neighborhoodsCount:Int,outingsCount:Int,myDate:Date) {
+    func populateCell(isMe:Bool ,neighborhoodsCount:Int,outingsCount:Int,myDate:Date?) {
         
         if isMe {
             ui_title_other_user?.text = "mainUserTitleActivity".localized
@@ -92,7 +92,11 @@ class MainUserActivitiesCell: UITableViewCell {
         let dateFormat = DateFormatter()
         dateFormat.locale = Locale.getPreferredLocale()
         dateFormat.dateFormat = "MM/YYYY"
-        ui_member_date.text = dateFormat.string(from: myDate)
+        if let _date = myDate {
+            ui_member_date.text = dateFormat.string(from: _date)
+        }else{
+            ui_member_date.text = ""
+        }
     }
     
     private func addShadowAndRadius(customView:UIView) {

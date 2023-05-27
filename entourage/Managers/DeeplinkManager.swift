@@ -101,9 +101,9 @@ struct DeepLinkManager {
         case .resources:
             return "placeholder_user"
         case .contributions:
-            return "placeholder_user"
+            return "ic_notif_placeholder"
         case .solicitations:
-            return "placeholder_user"
+            return "ic_notif_placeholder"
         case .neighborhood_post:
             return "placeholder_user"
         case .outing_post:
@@ -143,12 +143,15 @@ struct DeepLinkManager {
         }
     }
     
+
+    
     static func showResource(id:Int) {
         if let vc = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {
             vc.resourceId = id
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }
+
     
     static func showPartner(partnerId:Int) {
         if let navVc = UIStoryboard.init(name:StoryboardName.partnerDetails, bundle: nil).instantiateInitialViewController() as? UINavigationController, let vc = navVc.topViewController as? PartnerDetailViewController {
@@ -168,6 +171,7 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(navVC, animated: true)
         }
     }
+
     
     static func showOuting(id:Int) {
         if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
@@ -178,6 +182,7 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(navVc, animated: true)
         }
     }
+
     
     static func showAction(id:Int,isContrib:Bool) {
         let sb = UIStoryboard.init(name: StoryboardName.actions, bundle: nil)
@@ -188,7 +193,7 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(navVc, animated: true)
         }
     }
-    
+
     
     //TODO : display message from group
     static func showNeighborhoodDetailMessage(instanceId:Int, postId:Int) {
@@ -203,8 +208,6 @@ struct DeepLinkManager {
         }
     }
     
-
-    
     static func showEventDetailMessage(instanceId:Int, postId:Int) {
         let sb = UIStoryboard.init(name: StoryboardName.eventMessage, bundle: nil)
         if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? EventDetailMessagesViewController {
@@ -212,6 +215,129 @@ struct DeepLinkManager {
             vc.eventId = instanceId
             vc.isStartEditing = false
             vc.isGroupMember = true
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+    
+
+    
+    //MARK: UNIVERSAL LINK REDIRECTION
+    
+    
+    static func showEventDetailMessageUniversalLink(instanceId:String, postId:String) {
+        let sb = UIStoryboard.init(name: StoryboardName.eventMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? EventDetailMessagesViewController {
+            vc.hashedEventId = postId
+            vc.hashedEventId = instanceId
+            vc.isStartEditing = false
+            vc.isGroupMember = true
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+    static func showNeighborhoodDetailMessageUniversalLink(instanceId:String, postId:String) {
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "detailMessagesVC") as? NeighborhoodDetailMessagesViewController {
+            vc.hashedParentCommentId = postId
+            vc.hashedNeighborhoodId = instanceId
+            vc.isStartEditing = false
+            vc.isGroupMember = true
+        AppState.getTopViewController()?.present(vc, animated: true)
+        
+        }
+    }
+    
+    static func showActionUniversalLink(id:String,isContrib:Bool) {
+        let sb = UIStoryboard.init(name: StoryboardName.actions, bundle: nil)
+        if let navVc = sb.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navVc.topViewController as? ActionDetailFullViewController {
+            vc.hashedActionId = id
+            vc.action = nil
+            vc.isContrib = isContrib
+            AppState.getTopViewController()?.present(navVc, animated: true)
+        }
+    }
+    static func showActionNewUniversalLink(isContrib:Bool) {
+        let sb = UIStoryboard.init(name: StoryboardName.actionCreate, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "actionCreateVCMain") as? ActionCreateMainViewController {
+            vc.modalPresentationStyle = .fullScreen
+            vc.isContrib = isContrib
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+    static func showActionListUniversalLink(id:String,isContrib:Bool) {
+        let sb = UIStoryboard.init(name: StoryboardName.actions, bundle: nil)
+        if let navVc = sb.instantiateViewController(withIdentifier: "actionDetailFullNav") as? UINavigationController, let vc = navVc.topViewController as? ActionDetailFullViewController {
+            vc.hashedActionId = id
+            vc.action = nil
+            vc.isContrib = isContrib
+            AppState.getTopViewController()?.present(navVc, animated: true)
+        }
+    }
+    
+    static func showContribListUniversalLink() {
+        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showActionsContrib()
+            }
+        }
+    }
+    static func showSolicitationListUniversalLink() {
+        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showActionsSolicitations()
+            }
+        }
+    }
+    
+    static func showOutingListUniversalLink() {
+        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showMyEvents()
+            }
+        }
+    }
+    
+    static func showOutingUniversalLink(id:String) {
+        if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {
+            vc.hashedEventId = id
+            vc.event = nil
+            vc.isAfterCreation = false
+            vc.modalPresentationStyle = .fullScreen
+            AppState.getTopViewController()?.present(navVc, animated: true)
+        }
+    }
+    static func showNeighborhoodDetailUniversalLink(id:String) {
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
+        if let navVC = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodDetailViewController {
+            vc.isAfterCreation = false
+            vc.hashedNeighborhoodId = id
+            vc.isShowCreatePost = false
+            vc.neighborhood = nil
+            AppState.getTopViewController()?.present(navVC, animated: true)
+        }
+    }
+    static func showNeiborhoodListUniversalLink() {
+        if let vc = AppState.getTopViewController() as? HomeMainViewController{
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showMyNeighborhoods()
+            }
+        }
+    }
+    
+    static func showResourceUniversalLink(id:String) {
+        if let vc = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "pedagoDetailVC") as? PedagogicDetailViewController {
+            vc.hashdResourceId = id
+            AppState.getTopViewController()?.present(vc, animated: true)
+        }
+    }
+    
+    static func showRessourceListUniversalLink() {
+         let vc = UIStoryboard.init(name: StoryboardName.main, bundle: nil).instantiateViewController(withIdentifier: "listPedagoNav")
+            AppState.getTopViewController()?.present(vc, animated: true)
+    }
+    
+    static func showConversationUniversalLink(conversationId:String) {
+        if let vc = UIStoryboard.init(name: StoryboardName.messages, bundle: nil).instantiateViewController(withIdentifier: "detailMessagesVC") as? ConversationDetailMessagesViewController {
+            vc.setupFromOtherVCWithHash(conversationId: conversationId, title: nil, isOneToOne: true)
             AppState.getTopViewController()?.present(vc, animated: true)
         }
     }

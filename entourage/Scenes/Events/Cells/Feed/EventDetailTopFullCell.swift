@@ -96,7 +96,7 @@ class EventDetailTopFullCell: UITableViewCell {
         ui_view_members_more.isHidden = true
     }
     
-    func populateCell(event:Event?, delegate:EventDetailTopCellDelegate) {
+    func populateCell(event:Event?, delegate:EventDetailTopCellDelegate , isEntourageEvent:Bool) {
         self.delegate = delegate
         ui_img_member_1.isHidden = true
         ui_img_member_2.isHidden = true
@@ -211,7 +211,10 @@ class EventDetailTopFullCell: UITableViewCell {
             ui_view_organised_by.isHidden = true
             ui_view_association.isHidden = true
         }
-        
+        if isEntourageEvent {
+            ui_label_association.text = String(format: "event_top_cell_asso".localized, "Entourage")
+            ui_view_association.isHidden = false
+        }
         
         
         if let _interests = event.interests {

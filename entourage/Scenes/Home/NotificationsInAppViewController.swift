@@ -73,7 +73,7 @@ class NotificationsInAppViewController: UIViewController {
     
     func showOrNotBellOn() {
         if hasToShowDot {
-            self.ic_notif_bell.image = UIImage.init(named: "ic_notif_on")
+            self.ic_notif_bell.image = UIImage.init(named: "ic_notif_on_anim")
             let timer = Timer(fireAt: Date().addingTimeInterval(2), interval: 0, target: self, selector: #selector(self.passBellOff), userInfo: nil, repeats: false)
                   
             RunLoop.current.add(timer, forMode: .common)
@@ -99,10 +99,20 @@ extension NotificationsInAppViewController: UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         let notif = self.notifications[indexPath.row]
+        var notifTitle = ""
+        var notifContent = ""
+        if let _title = notif.title {
+            notifTitle = _title
+        }
+        if let _content = notif.content {
+            notifContent = _content
+        }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NotifInAppCell
-        cell.populateCell(title: notif.content, date: notif.getDurationFromNow(), imageUrl: notif.imageUrl, isUnread: notif.isRead(), instanceString: notif.getNotificationPushData().instanceType)
-        
+    
+        cell.populateCell(title: notifTitle, content: notifContent, date: notif.getDurationFromNow(), imageUrl: notif.imageUrl, isUnread: notif.isRead(), instanceString: notif.getNotificationPushData().instanceType)
+    
+
         return cell
     }
     

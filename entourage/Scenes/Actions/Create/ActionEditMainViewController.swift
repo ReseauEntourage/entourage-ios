@@ -112,7 +112,7 @@ class ActionEditMainViewController: UIViewController {
     //MARK: - Network -
     func getAction() {
         IHProgressHUD.show()
-        ActionsService.getDetailAction(isContrib: isContrib, actionId: currentAction.id) { action, error in
+        ActionsService.getDetailAction(isContrib: isContrib, actionId: String(currentAction.id)) { action, error in
             IHProgressHUD.dismiss()
             if let action = action {
                 self.currentAction = action
