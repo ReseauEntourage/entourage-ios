@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NunitoSans-Bold.ttf">
+            <string>NunitoSans-Bold</string>
+        </array>
+        <array key="NunitoSans-Regular.ttf">
+            <string>NunitoSans-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="247" id="V3c-Gz-R0W" customClass="WelcomeTwoDescribingCell" customModule="Ent_Beta" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="661" height="247"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V3c-Gz-R0W" id="3GO-Be-dst">
+                <rect key="frame" x="0.0" y="0.0" width="661" height="247"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_party" translatesAutoresizingMaskIntoConstraints="NO" id="FxA-fT-wUK">
+                        <rect key="frame" x="20" y="4" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="TbR-tf-7lQ"/>
+                            <constraint firstAttribute="height" constant="20" id="qsX-VV-ncq"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C'est le moment de se lancer !" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPq-79-jaI">
+                        <rect key="frame" x="36" y="10" width="605" height="33"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="24"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Un réseau social, c'est mieux à plusieurs ! Présentez-vous auprès de votre groupe de voisins de Paris." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9a-80-NCk">
+                        <rect key="frame" x="20" y="51" width="621" height="41"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quelques conseils pour faire connaissance :" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paL-H2-cwH">
+                        <rect key="frame" x="20" y="100" width="621" height="20.666666666666671"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                        <color key="textColor" name="orange_app"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3G-cw-yUx">
+                        <rect key="frame" x="20" y="135.66666666666666" width="621" height="61.666666666666657"/>
+                        <attributedString key="attributedText">
+                            <fragment content="•">
+                                <attributes>
+                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="NSColor" red="0.12549020350000001" green="0.1294117719" blue="0.13333334029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="14" name="Helvetica"/>
+                                    <real key="NSKern" value="0.0"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                        <tabStops/>
+                                    </paragraphStyle>
+                                    <color key="NSStrokeColor" red="0.12549020350000001" green="0.1294117719" blue="0.13333334029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <real key="NSStrokeWidth" value="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content=" ">
+                                <attributes>
+                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="15" name="NunitoSans-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                        <tabStops/>
+                                    </paragraphStyle>
+                                </attributes>
+                            </fragment>
+                            <fragment>
+                                <string key="content">Donnez votre prénom, vote ville
+</string>
+                                <attributes>
+                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="15" name="NunitoSans-Regular"/>
+                                    <real key="NSKern" value="0.0"/>
+                                    <integer key="NSLigature" value="1"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                        <tabStops/>
+                                    </paragraphStyle>
+                                    <color key="NSStrokeColor" red="0.81960785390000002" green="0.82352942230000004" blue="0.82745099070000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <real key="NSStrokeWidth" value="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="•">
+                                <attributes>
+                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="NSColor" red="0.12549020350000001" green="0.1294117719" blue="0.13333334029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="14" name="Helvetica"/>
+                                    <real key="NSKern" value="0.0"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" headIndent="36" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                        <tabStops>
+                                            <textTab alignment="left" location="11">
+                                                <options/>
+                                            </textTab>
+                                            <textTab alignment="natural" location="36">
+                                                <options/>
+                                            </textTab>
+                                        </tabStops>
+                                    </paragraphStyle>
+                                    <color key="NSStrokeColor" red="0.12549020350000001" green="0.1294117719" blue="0.13333334029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <real key="NSStrokeWidth" value="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content=" ">
+                                <attributes>
+                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="15" name="NunitoSans-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" headIndent="36" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                        <tabStops>
+                                            <textTab alignment="left" location="11">
+                                                <options/>
+                                            </textTab>
+                                            <textTab alignment="natural" location="36">
+                                                <options/>
+                                            </textTab>
+                                        </tabStops>
+                                    </paragraphStyle>
+                                </attributes>
+                            </fragment>
+                            <fragment>
+                                <string key="content">Parlez de vos passions
+</string>
+                                <attributes>
+                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="15" name="NunitoSans-Regular"/>
+                                    <real key="NSKern" value="0.0"/>
+                                    <integer key="NSLigature" value="1"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" headIndent="36" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                        <tabStops>
+                                            <textTab alignment="left" location="11">
+                                                <options/>
+                                            </textTab>
+                                            <textTab alignment="natural" location="36">
+                                                <options/>
+                                            </textTab>
+                                        </tabStops>
+                                    </paragraphStyle>
+                                    <color key="NSStrokeColor" red="0.81960785390000002" green="0.82352942230000004" blue="0.82745099070000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <real key="NSStrokeWidth" value="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content="•">
+                                <attributes>
+                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="NSColor" red="0.12549020350000001" green="0.1294117719" blue="0.13333334029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="14" name="Helvetica"/>
+                                    <real key="NSKern" value="0.0"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" headIndent="36" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                        <tabStops>
+                                            <textTab alignment="left" location="11">
+                                                <options/>
+                                            </textTab>
+                                            <textTab alignment="natural" location="36">
+                                                <options/>
+                                            </textTab>
+                                        </tabStops>
+                                    </paragraphStyle>
+                                    <color key="NSStrokeColor" red="0.12549020350000001" green="0.1294117719" blue="0.13333334029999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <real key="NSStrokeWidth" value="0.0"/>
+                                </attributes>
+                            </fragment>
+                            <fragment content=" ">
+                                <attributes>
+                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="15" name="NunitoSans-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" headIndent="36" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                        <tabStops>
+                                            <textTab alignment="left" location="11">
+                                                <options/>
+                                            </textTab>
+                                            <textTab alignment="natural" location="36">
+                                                <options/>
+                                            </textTab>
+                                        </tabStops>
+                                    </paragraphStyle>
+                                </attributes>
+                            </fragment>
+                            <fragment content="Mettez en avant vos besoins et vos envies">
+                                <attributes>
+                                    <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <font key="NSFont" size="15" name="NunitoSans-Regular"/>
+                                    <real key="NSKern" value="0.0"/>
+                                    <integer key="NSLigature" value="1"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" headIndent="36" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                        <tabStops>
+                                            <textTab alignment="left" location="11">
+                                                <options/>
+                                            </textTab>
+                                            <textTab alignment="natural" location="36">
+                                                <options/>
+                                            </textTab>
+                                        </tabStops>
+                                    </paragraphStyle>
+                                    <color key="NSStrokeColor" red="0.81960785390000002" green="0.82352942230000004" blue="0.82745099070000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <real key="NSStrokeWidth" value="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Besoin d'inspiration ?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTQ-oz-PLt">
+                        <rect key="frame" x="20" y="212.33333333333334" width="601" height="20.666666666666657"/>
+                        <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                        <color key="textColor" name="orange_app"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" name="orange_tres_tres_clair"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="OPq-79-jaI" secondAttribute="trailing" constant="20" id="4d4-ZV-Woe"/>
+                    <constraint firstAttribute="trailing" secondItem="n9a-80-NCk" secondAttribute="trailing" constant="20" symbolic="YES" id="8Ie-Ig-29K"/>
+                    <constraint firstItem="FxA-fT-wUK" firstAttribute="top" secondItem="3GO-Be-dst" secondAttribute="top" constant="4" id="AlS-48-8fd"/>
+                    <constraint firstItem="kTQ-oz-PLt" firstAttribute="leading" secondItem="3GO-Be-dst" secondAttribute="leadingMargin" id="Bbm-03-key"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="W3G-cw-yUx" secondAttribute="trailing" id="D1Z-bL-gyc"/>
+                    <constraint firstItem="OPq-79-jaI" firstAttribute="top" secondItem="3GO-Be-dst" secondAttribute="top" constant="10" id="Osv-tX-cS0"/>
+                    <constraint firstItem="FxA-fT-wUK" firstAttribute="leading" secondItem="3GO-Be-dst" secondAttribute="leading" constant="20" id="Pe2-vQ-02j"/>
+                    <constraint firstItem="n9a-80-NCk" firstAttribute="top" secondItem="OPq-79-jaI" secondAttribute="bottom" constant="8" symbolic="YES" id="QXa-Ml-cZG"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="paL-H2-cwH" secondAttribute="trailing" id="T2Z-sF-fib"/>
+                    <constraint firstItem="W3G-cw-yUx" firstAttribute="leading" secondItem="3GO-Be-dst" secondAttribute="leadingMargin" id="UNO-W2-SHY"/>
+                    <constraint firstItem="OPq-79-jaI" firstAttribute="leading" secondItem="FxA-fT-wUK" secondAttribute="trailing" constant="-4" id="b5m-YD-jQL"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="kTQ-oz-PLt" secondAttribute="trailing" constant="20" id="jZ7-zC-Chm"/>
+                    <constraint firstItem="W3G-cw-yUx" firstAttribute="top" secondItem="paL-H2-cwH" secondAttribute="bottom" constant="15" id="lhg-21-Zfh"/>
+                    <constraint firstAttribute="bottom" secondItem="kTQ-oz-PLt" secondAttribute="bottom" constant="14" id="lrv-61-elx"/>
+                    <constraint firstItem="paL-H2-cwH" firstAttribute="leading" secondItem="3GO-Be-dst" secondAttribute="leadingMargin" id="nKQ-rd-4AB"/>
+                    <constraint firstItem="n9a-80-NCk" firstAttribute="leading" secondItem="3GO-Be-dst" secondAttribute="leading" constant="20" symbolic="YES" id="tZ5-Ir-Kji"/>
+                    <constraint firstItem="kTQ-oz-PLt" firstAttribute="top" secondItem="W3G-cw-yUx" secondAttribute="bottom" constant="15" id="xNu-EH-T4H"/>
+                    <constraint firstItem="paL-H2-cwH" firstAttribute="top" secondItem="n9a-80-NCk" secondAttribute="bottom" constant="8" symbolic="YES" id="yoP-xi-adM"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" name="orange_tres_tres_clair"/>
+            <connections>
+                <outlet property="ui_title_group" destination="n9a-80-NCk" id="ouC-qm-N6a"/>
+            </connections>
+            <point key="canvasLocation" x="127" y="45"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_party" width="21" height="17"/>
+        <namedColor name="orange_app">
+            <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_tres_tres_clair">
+            <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

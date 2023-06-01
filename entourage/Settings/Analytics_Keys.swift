@@ -150,6 +150,7 @@ let Home_action_eventcount = "Action__Home__EventCounter"
 let Home_action_moderator = "Action__Home__Moderator"
 let Home_action_map = "Action__Home__Map"
 let Home_view_notif = "View__Notif"
+let Home_to_begin = "Action__Home__HowToStart"
 
 //SHARE ACTION
 let contrib_share = "Action__Contrib__Share"
@@ -233,6 +234,8 @@ let PreOnboard_action_signin = "Action__Login__LoginStart"
 //WELCOME PUSH
 let View_WelcomeOfferHelp_Day1 = "View_WelcomeOfferHelp_Day1"
 let Action_WelcomeOfferHelp_Day1 = "Action_WelcomeOfferHelp_Day1"
+let View_WelcomeOfferHelp_Day2 = "View_WelcomeOfferHelp_Day2"
+let Action_WelcomeOfferHelp_Day2 = "Action_WelcomeOfferHelp_Day2"
 
 //Onboarding
 let Onboard_name = "View__Onboarding__InputNames"

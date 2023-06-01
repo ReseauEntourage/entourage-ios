@@ -171,6 +171,18 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(navVC, animated: true)
         }
     }
+    
+    static func showNeighborhoodDetailWithCreatePost(id:Int,group:Neighborhood) {
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
+        if let navVC = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = navVC.topViewController as? NeighborhoodDetailViewController {
+            vc.isAfterCreation = false
+            vc.neighborhoodId = id
+            vc.isShowCreatePost = true
+            vc.neighborhood = group
+            AppState.getTopViewController()?.present(navVC, animated: true)
+        }
+    }
+
 
     
     static func showOuting(id:Int) {

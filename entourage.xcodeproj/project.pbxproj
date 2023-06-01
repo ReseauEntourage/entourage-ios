@@ -380,6 +380,11 @@
 		02FE55B52939F6020076F57A /* OnboardingEndCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B42939F6020076F57A /* OnboardingEndCell.swift */; };
 		02FE55B7293A20030076F57A /* OnboardingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */; };
 		261174FE29A670CB00735E9A /* ReportGroupChoosePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */; };
+		2619E1432A261C93000BD574 /* WelcomeTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619E1422A261C93000BD574 /* WelcomeTwoViewController.swift */; };
+		2619E1452A262AC6000BD574 /* WelcomeTwoDescribingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2619E1442A262AC6000BD574 /* WelcomeTwoDescribingCell.xib */; };
+		2619E1472A262AD8000BD574 /* WelcomeTwoGroupExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2619E1462A262AD8000BD574 /* WelcomeTwoGroupExampleCell.xib */; };
+		2619E1492A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619E1482A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift */; };
+		2619E14B2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2619E14A2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift */; };
 		2628A0F2298AAA9400F1BF1D /* Extension_UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */; };
 		2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */; };
 		264C1AF629AD0E3C0083F83E /* ReportChooseViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */; };
@@ -769,6 +774,11 @@
 		02FE55B6293A20030076F57A /* OnboardingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingEndViewController.swift; sourceTree = "<group>"; };
 		1E625F1010BF498EB31E0DB1 /* Pods_entourage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_entourage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		261174FD29A670CB00735E9A /* ReportGroupChoosePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGroupChoosePageViewController.swift; sourceTree = "<group>"; };
+		2619E1422A261C93000BD574 /* WelcomeTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTwoViewController.swift; sourceTree = "<group>"; };
+		2619E1442A262AC6000BD574 /* WelcomeTwoDescribingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeTwoDescribingCell.xib; sourceTree = "<group>"; };
+		2619E1462A262AD8000BD574 /* WelcomeTwoGroupExampleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeTwoGroupExampleCell.xib; sourceTree = "<group>"; };
+		2619E1482A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTwoGroupExampleCell.swift; sourceTree = "<group>"; };
+		2619E14A2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeTwoDescribingCell.swift; sourceTree = "<group>"; };
 		2628A0F1298AAA9400F1BF1D /* Extension_UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_UILabel.swift; sourceTree = "<group>"; };
 		2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		264C1AF529AD0E3C0083F83E /* ReportChooseViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportChooseViewCell.swift; sourceTree = "<group>"; };
@@ -1634,11 +1644,24 @@
 			path = reportChooseCells;
 			sourceTree = "<group>";
 		};
+		2619E1412A261C78000BD574 /* welcome2cells */ = {
+			isa = PBXGroup;
+			children = (
+				2619E1442A262AC6000BD574 /* WelcomeTwoDescribingCell.xib */,
+				2619E1462A262AD8000BD574 /* WelcomeTwoGroupExampleCell.xib */,
+				2619E1482A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift */,
+				2619E14A2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift */,
+			);
+			path = welcome2cells;
+			sourceTree = "<group>";
+		};
 		2645C1CC2A14FD9000AE8953 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
+				2619E1412A261C78000BD574 /* welcome2cells */,
 				2645C1CD2A14FDDE00AE8953 /* welcomecells */,
 				2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */,
+				2619E1422A261C93000BD574 /* WelcomeTwoViewController.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -1786,6 +1809,7 @@
 				02CCE67527D78C7100D6976C /* Montserrat-Regular.ttf in Resources */,
 				021FD9702876F55A00D3AA54 /* NeighborhoodListHeaderCell.xib in Resources */,
 				029E307C27DB5EF300B12357 /* GoogleService-Info.plist in Resources */,
+				2619E1472A262AD8000BD574 /* WelcomeTwoGroupExampleCell.xib in Resources */,
 				02A92C2E289816C8000DFF95 /* Actions.xcassets in Resources */,
 				0224597127FF290900944DE4 /* MJErrorInputTextView.xib in Resources */,
 				26F03C972A1B850C00450A61 /* WelcomeOneContentMain.xib in Resources */,
@@ -1794,6 +1818,7 @@
 				021FD96E2876F12E00D3AA54 /* EventListSectionCell.xib in Resources */,
 				0243DCC828AF832D00273679 /* Messages.storyboard in Resources */,
 				021FD96128743EFF00D3AA54 /* EventListCell.xib in Resources */,
+				2619E1452A262AC6000BD574 /* WelcomeTwoDescribingCell.xib in Resources */,
 				025D8726278DD33800909101 /* LaunchScreen.storyboard in Resources */,
 				02B94C38284F9FB3006059EF /* HomeHelpCell.xib in Resources */,
 				02E7845D2811A8DB00177F13 /* Neighborhood.storyboard in Resources */,
@@ -1942,6 +1967,7 @@
 				2645C1D12A150FD300AE8953 /* WelcomeViewController.swift in Sources */,
 				02B94C1A284F508B006059EF /* HomeService.swift in Sources */,
 				02B94C1C284F50D8006059EF /* Home.swift in Sources */,
+				2619E1492A262C57000BD574 /* WelcomeTwoGroupExampleCell.swift in Sources */,
 				0223E5142864A4B200E7556E /* AddDescriptionTableViewCell.swift in Sources */,
 				26F03C9D2A1B8C6700450A61 /* WelcomeOneWebViewCell.swift in Sources */,
 				02C6E86528203127009D4289 /* NeighborhoodParamSignalCell.swift in Sources */,
@@ -2013,6 +2039,7 @@
 				02A92C202897D374000DFF95 /* ActionCreatePageViewController.swift in Sources */,
 				026819A8278DFB6100A98A4A /* OTCountryCodePickerViewDataSource.m in Sources */,
 				02B94C23284F594A006059EF /* HomeMainViewModel.swift in Sources */,
+				2619E1432A261C93000BD574 /* WelcomeTwoViewController.swift in Sources */,
 				02E0EFA328787082009B2C65 /* EventDetailTopFullCell.swift in Sources */,
 				02A92C222897E68B000DFF95 /* ActionCreatePhase1ViewController.swift in Sources */,
 				0224596F27FF28FC00944DE4 /* MJErrorInputTextView.swift in Sources */,
@@ -2083,6 +2110,7 @@
 				02F5277D2799995900929431 /* GuideDetailTableViewCells.swift in Sources */,
 				024131CD2862024A00561FB4 /* EventCreatePageViewController.swift in Sources */,
 				0288A8D627CCD8F5008D7011 /* PicturePreviewResizeViewController.swift in Sources */,
+				2619E14B2A262C7D000BD574 /* WelcomeTwoDescribingCell.swift in Sources */,
 				02F578CD289AD4060040685C /* ActionContribDetailHomeCell.swift in Sources */,
 				02EB0B46292E1F3100CEB739 /* ParamsNotifsViewController.swift in Sources */,
 				029638EF2869E71500E10EFB /* EventPlaceCell.swift in Sources */,

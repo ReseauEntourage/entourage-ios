@@ -915,6 +915,81 @@ Ligne 2</string>
             </objects>
             <point key="canvasLocation" x="-1775" y="1164"/>
         </scene>
+        <!--Welcme Two View Controller-->
+        <scene sceneID="s0w-zX-ecn">
+            <objects>
+                <viewController storyboardIdentifier="welcometwovc" id="6Pg-qd-Vkp" customClass="WelcmeTwoViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GLQ-ja-Mft">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_backgrnd_welcome" translatesAutoresizingMaskIntoConstraints="NO" id="9rr-uZ-u3j">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="376"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZyI-ub-3Ke">
+                                <rect key="frame" x="10" y="108" width="388" height="823"/>
+                                <color key="backgroundColor" name="orange_tres_tres_clair"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="35"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_cross" translatesAutoresizingMaskIntoConstraints="NO" id="ESa-ru-O3D">
+                                <rect key="frame" x="364" y="30" width="20" height="20"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="IfU-Zx-uTu"/>
+                                    <constraint firstAttribute="width" constant="20" id="jTn-wM-Rkb"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="id6-MU-TlQ">
+                                <rect key="frame" x="60" y="817" width="294" height="44"/>
+                                <color key="backgroundColor" name="orange_app"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="SoL-NQ-Ssx"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Dire bonjour à mes voisins">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="actionGoVoisin:" destination="6Pg-qd-Vkp" eventType="touchUpInside" id="e2f-jg-VYK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ozi-Ru-ajN"/>
+                        <color key="backgroundColor" name="Beige"/>
+                        <constraints>
+                            <constraint firstItem="ozi-Ru-ajN" firstAttribute="trailing" secondItem="ESa-ru-O3D" secondAttribute="trailing" constant="30" id="Nvq-pJ-keX"/>
+                            <constraint firstAttribute="bottom" secondItem="ZyI-ub-3Ke" secondAttribute="bottom" constant="-35" id="RdN-5N-UGu"/>
+                            <constraint firstItem="9rr-uZ-u3j" firstAttribute="leading" secondItem="ozi-Ru-ajN" secondAttribute="leading" id="ToV-1G-a2w"/>
+                            <constraint firstItem="id6-MU-TlQ" firstAttribute="bottom" secondItem="ZyI-ub-3Ke" secondAttribute="bottom" constant="-70" id="Ucl-OA-kke"/>
+                            <constraint firstItem="id6-MU-TlQ" firstAttribute="leading" secondItem="ozi-Ru-ajN" secondAttribute="leading" constant="60" id="WgL-U2-NI1"/>
+                            <constraint firstItem="9rr-uZ-u3j" firstAttribute="top" secondItem="GLQ-ja-Mft" secondAttribute="top" id="dqi-r3-rWz"/>
+                            <constraint firstItem="ZyI-ub-3Ke" firstAttribute="top" secondItem="ozi-Ru-ajN" secondAttribute="top" constant="60" id="kMi-7G-Ek2"/>
+                            <constraint firstItem="ZyI-ub-3Ke" firstAttribute="leading" secondItem="ozi-Ru-ajN" secondAttribute="leading" constant="10" id="nG0-bH-bdn"/>
+                            <constraint firstItem="ozi-Ru-ajN" firstAttribute="trailing" secondItem="id6-MU-TlQ" secondAttribute="trailing" constant="60" id="pFW-Br-csE"/>
+                            <constraint firstItem="ESa-ru-O3D" firstAttribute="top" secondItem="GLQ-ja-Mft" secondAttribute="top" constant="30" id="qqd-Lx-ORq"/>
+                            <constraint firstItem="ozi-Ru-ajN" firstAttribute="trailing" secondItem="9rr-uZ-u3j" secondAttribute="trailing" id="rvs-SF-wnR"/>
+                            <constraint firstItem="ozi-Ru-ajN" firstAttribute="trailing" secondItem="ZyI-ub-3Ke" secondAttribute="trailing" constant="16" id="xzp-m0-JYI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ui_button_close" destination="ESa-ru-O3D" id="dqE-3q-GE7"/>
+                        <outlet property="ui_table_view" destination="ZyI-ub-3Ke" id="Nd2-uq-DJb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eLW-ds-a2z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="610" y="465"/>
+        </scene>
     </scenes>
     <resources>
         <image name="24HSelected" width="23" height="23"/>

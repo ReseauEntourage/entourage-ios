@@ -144,11 +144,11 @@ class HomeMainViewController: UIViewController {
     @objc func testWelcomeNotif() {
         let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             //TODO HERE ASOLULETY CHANGE IN CASE OF PUSH
-            if let welcomeViewController = storyboard?.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {
+            if let welcomeViewController = storyboard?.instantiateViewController(withIdentifier: "welcometwovc") as? WelcmeTwoViewController {
               // Remplacez “WelcomeViewController” par l’identifiant de votre WelcomeViewController dans le storyboard
               welcomeViewController.modalPresentationStyle = .fullScreen
-              welcomeViewController.delegate = self
               // Présentez le WelcomeViewController
+                welcomeViewController.delegate = self
               self.present(welcomeViewController, animated: true, completion: nil)
             }
     }
@@ -294,6 +294,7 @@ extension HomeMainViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if indexPath.section == section_agir {
+            AnalyticsLoggerManager.logEvent(name: Home_to_begin)
             let action = homeViewModel.actions[indexPath.row - 1]
             homeViewModel.getEventFromAction(action)
         }
@@ -344,6 +345,10 @@ extension HomeMainViewController: HomeMainViewsActionsDelegate {
     
     func showNeighborhoodDetail(id:Int) {
         DeepLinkManager.showNeighborhoodDetail(id: id)
+    }
+    
+    func showNeighborhoodDetailWithCreatePost(id:Int,group:Neighborhood) {
+        DeepLinkManager.showNeighborhoodDetailWithCreatePost(id: id, group:group)
     }
     
     func showAllNeighborhoods() {
@@ -453,6 +458,16 @@ extension HomeMainViewController:WelcomeOneDelegate{
     }
     
     
+}
+
+extension HomeMainViewController:WelcomeTwoDelegate {
+    func goMyGroup(id: Int, group: Neighborhood) {
+        showNeighborhoodDetailWithCreatePost(id: id,group:group)
+
+    }
+    func goGroupList() {
+        self.showAllNeighborhoods()
+    }
 }
 
 enum EntourageLink: String {

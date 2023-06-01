@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COK-9c-Ex8">
-                        <rect key="frame" x="35" y="42" width="556" height="164"/>
+                        <rect key="frame" x="31" y="42" width="564" height="164"/>
                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -42,7 +42,7 @@
             <connections>
                 <outlet property="ui_label_title" destination="COK-9c-Ex8" id="SIL-pq-fcJ"/>
             </connections>
-            <point key="canvasLocation" x="45.038167938931295" y="73.943661971830991"/>
+            <point key="canvasLocation" x="210" y="75"/>
         </tableViewCell>
     </objects>
     <resources>
