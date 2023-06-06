@@ -102,10 +102,10 @@ class ActionAddPhotoViewController: BasePopViewController {
             showPicker(sourceType: .camera)
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { success in
-                if success {
-                    self.showPicker(sourceType: .camera)
-                } else {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    if success {
+                        self.showPicker(sourceType: .camera)
+                    } else {
                         self.presentCameraSettings()
                     }
                 }

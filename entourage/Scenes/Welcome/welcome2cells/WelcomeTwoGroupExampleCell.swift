@@ -24,7 +24,7 @@ class WelcomeTwoGroupExampleCell:UITableViewCell{
         tvTag.setVisibilityGone()
         tvUserCell.text = "Eric D."
         tvDate.text = "12.01.22"
-        tv_desc_cell.text = "Bonjour les voisins parisiens. Je m'appelle Eric, et j'ai hâte de vous rencontrer autour des évènements du r&seau entourage"
+        tv_desc_cell.text = "Bonjour les voisins parisiens. Je m'appelle Eric, et j'ai hâte de vous rencontrer autour des évènements du réseau entourage."
     }
     
 }
