@@ -15,7 +15,7 @@ class WelcomeTwoGroupExampleCell:UITableViewCell{
     @IBOutlet weak var tvTag: UILabel!
     @IBOutlet weak var tvDate: UILabel!
     @IBOutlet weak var tv_desc_cell: ActiveLabel!
-    
+
     class var identifier: String {
         return String(describing: self)
     }

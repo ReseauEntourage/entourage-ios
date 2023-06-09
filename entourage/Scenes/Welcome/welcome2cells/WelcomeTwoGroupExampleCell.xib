@@ -95,6 +95,11 @@ Nous sommes prêt pour les beaux jours ! :-)</string>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome2_group_example" translatesAutoresizingMaskIntoConstraints="NO" id="fog-Wj-DLl">
                                 <rect key="frame" x="28" y="155" width="334" height="150"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riO-Wo-fgO">
                                 <rect key="frame" x="28" y="155" width="334" height="150"/>

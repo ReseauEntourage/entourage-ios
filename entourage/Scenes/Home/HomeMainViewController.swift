@@ -40,7 +40,7 @@ class HomeMainViewController: UIViewController {
         
         //Notif for updating actions after tabbar selected
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDatasFromTab), name: NSNotification.Name(rawValue: kNotificationHomeUpdate), object: nil)
-
+        
         self.ui_notif_bell.image = UIImage.init(named: "ic_notif_off")
         
     }
@@ -104,7 +104,7 @@ class HomeMainViewController: UIViewController {
     func getHomeUser() {
         homeViewModel.getHomeDetail { isOk in
             self.updateTopView()
-
+            
             if self.homeViewModel.userHome.congratulations.count > 0 {
                 self.addTimerShowPop()
             }
@@ -132,10 +132,10 @@ class HomeMainViewController: UIViewController {
         return;
         
         let timer = Timer(fireAt: Date().addingTimeInterval(1), interval: 0, target: self, selector: #selector(self.showCongratPopup), userInfo: nil, repeats: false)
-              
+        
         RunLoop.current.add(timer, forMode: .common)
     }
-        
+    
     @objc private func showCongratPopup() {
         let homeVC = HomeCongratPopupViewController()
         homeVC.configureCongrat(actions: homeViewModel.userHome.congratulations, parentVC: self.tabBarController)
@@ -143,14 +143,14 @@ class HomeMainViewController: UIViewController {
     }
     @objc func testWelcomeNotif() {
         let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
-            //TODO HERE ASOLULETY CHANGE IN CASE OF PUSH
-            if let welcomeViewController = storyboard?.instantiateViewController(withIdentifier: "welcometwovc") as? WelcmeTwoViewController {
-              // Remplacez “WelcomeViewController” par l’identifiant de votre WelcomeViewController dans le storyboard
-              welcomeViewController.modalPresentationStyle = .fullScreen
-              // Présentez le WelcomeViewController
-                welcomeViewController.delegate = self
-              self.present(welcomeViewController, animated: true, completion: nil)
-            }
+        //TODO HERE ASOLULETY CHANGE IN CASE OF PUSH
+        if let welcomeViewController = storyboard?.instantiateViewController(withIdentifier: "welcometwovc") as? WelcmeTwoViewController {
+            // Remplacez “WelcomeViewController” par l’identifiant de votre WelcomeViewController dans le storyboard
+            welcomeViewController.modalPresentationStyle = .fullScreen
+            // Présentez le WelcomeViewController
+            welcomeViewController.delegate = self
+            self.present(welcomeViewController, animated: true, completion: nil)
+        }
     }
     
     func updateTopView() {
@@ -463,11 +463,15 @@ extension HomeMainViewController:WelcomeOneDelegate{
 extension HomeMainViewController:WelcomeTwoDelegate {
     func goMyGroup(id: Int, group: Neighborhood) {
         showNeighborhoodDetailWithCreatePost(id: id,group:group)
-
+        
     }
     func goGroupList() {
         self.showAllNeighborhoods()
     }
+}
+
+extension HomeMainViewController:WelcomeThreeDelegate{
+    
 }
 
 enum EntourageLink: String {

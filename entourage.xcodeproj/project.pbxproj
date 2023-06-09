@@ -395,6 +395,7 @@
 		268FCA2A2967281100159C34 /* MJAlertWithImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268FCA292967281100159C34 /* MJAlertWithImageController.swift */; };
 		268FCA2C2967288100159C34 /* MJAlertWithImageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */; };
 		26BC119929C88CD700F204BB /* NeighborhoodPostDeletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */; };
+		26CC9F7A2A331CF5005F7408 /* WelcomeThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */; };
 		26F03C912A1B4E3100450A61 /* WelcomeOneTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */; };
 		26F03C932A1B4E5900450A61 /* WelcomeOneTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */; };
 		26F03C952A1B813C00450A61 /* WelcomeOneContentMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F03C942A1B813C00450A61 /* WelcomeOneContentMain.swift */; };
@@ -789,6 +790,7 @@
 		268FCA292967281100159C34 /* MJAlertWithImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MJAlertWithImageController.swift; sourceTree = "<group>"; };
 		268FCA2B2967288100159C34 /* MJAlertWithImageController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MJAlertWithImageController.xib; sourceTree = "<group>"; };
 		26BC119829C88CD700F204BB /* NeighborhoodPostDeletedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NeighborhoodPostDeletedCell.xib; sourceTree = "<group>"; };
+		26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeThreeViewController.swift; sourceTree = "<group>"; };
 		26F03C902A1B4E3100450A61 /* WelcomeOneTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneTitleCell.swift; sourceTree = "<group>"; };
 		26F03C922A1B4E5900450A61 /* WelcomeOneTitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeOneTitleCell.xib; sourceTree = "<group>"; };
 		26F03C942A1B813C00450A61 /* WelcomeOneContentMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOneContentMain.swift; sourceTree = "<group>"; };
@@ -1662,6 +1664,7 @@
 				2645C1CD2A14FDDE00AE8953 /* welcomecells */,
 				2645C1D02A150FD300AE8953 /* WelcomeViewController.swift */,
 				2619E1422A261C93000BD574 /* WelcomeTwoViewController.swift */,
+				26CC9F792A331CF5005F7408 /* WelcomeThreeViewController.swift */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -1999,6 +2002,7 @@
 				024131DD2863622600561FB4 /* GrowingTextview.swift in Sources */,
 				02681980278DF72D00A98A4A /* OTCarrouselLayout.swift in Sources */,
 				02728DDD27F19A3800512DC0 /* PartnerDetailInfoCell.swift in Sources */,
+				26CC9F7A2A331CF5005F7408 /* WelcomeThreeViewController.swift in Sources */,
 				02A92C1E2897D347000DFF95 /* ActionCreateMainViewController.swift in Sources */,
 				02C3ABF0279AB50900817B82 /* Extensions_UIColor.swift in Sources */,
 				02A3DD3527FDC6310060EC2E /* NeighborhoodCreatePhase2ViewController.swift in Sources */,
