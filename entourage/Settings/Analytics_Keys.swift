@@ -286,3 +286,6 @@ let View_WelcomeOfferHelp_Day5C = "View_WelcomeOfferHelp_Day5C"
 
 let Action_WelcomeOfferHelp_Day5C = "Action_WelcomeOfferHelp_Day5C"
 
+//WELCOME FOUR
+let View_WelcomeOfferHelp_Day8 = "View_WelcomeOfferHelp_Day8"
+let Action_WelcomeOfferHelp_Day8 = "Action_WelcomeOfferHelp_Day8"

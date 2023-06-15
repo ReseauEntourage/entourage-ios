@@ -26,6 +26,8 @@ class WelcomeFourViewController:UIViewController {
     var tableDTO = [WelcomeFourDTO]()
     
     override func viewDidLoad() {
+        AnalyticsLoggerManager.logEvent(name: View_WelcomeOfferHelp_Day8)
+
         ui_table_view.backgroundColor = UIColor(named: "orange_tres_tres_clair")
         initButton()
         initTableView()
@@ -68,13 +70,13 @@ class WelcomeFourViewController:UIViewController {
     }
     
     @objc func mainTapped() {
+        AnalyticsLoggerManager.logEvent(name: Action_WelcomeOfferHelp_Day8)
         self.dismiss(animated: true) {
-            if let _url = URL(string: "/https://kahoot.it/challenge/45371e80-fe50-4be5-afec-b37e3d50ede2_1683299255475"){
+            if let _url = URL(string: "https://kahoot.it/challenge/45371e80-fe50-4be5-afec-b37e3d50ede2_1683299255475"){
                 WebLinkManager.openUrl(url: _url, openInApp: true, presenterViewController: AppState.getTopViewController())
             }
         }
     }
-    
 }
 
 extension WelcomeFourViewController:UITableViewDelegate,UITableViewDataSource{
