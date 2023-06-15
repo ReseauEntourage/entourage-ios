@@ -334,7 +334,7 @@ extension WelcomeThreeViewController {
     func getEventsDiscovered() {
         EventService.getAllEventsDiscover(currentPage: 1,per: 4, filters: currentFilter.getfiltersForWS()) { events, error in
             if let _events = events {
-                if _events.count == 0{
+                if _events.count > 0{
                     AnalyticsLoggerManager.logEvent(name: View_WelcomeOfferHelp_Day5A)
                     self.currentevents.append(contentsOf: _events)
                     self.haveEvents = true

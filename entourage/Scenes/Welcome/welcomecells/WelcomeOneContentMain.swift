@@ -16,7 +16,7 @@ class WelcomeOneContentMain:UITableViewCell {
     }
     
     override func awakeFromNib() {
-        ui_label_content_main.font = ApplicationTheme.getFontNunitoRegular(size: 15)
+        ui_label_content_main.font = ApplicationTheme.getFontNunitoBold(size: 15)
         ui_label_content_main.text = "welcomeone_content_main".localized
         
     }
@@ -34,6 +34,10 @@ class WelcomeOneContentMain:UITableViewCell {
     }
     func initForWelcomeFour(){
         ui_label_content_main.text = "welcome_four_main_text".localized
+    }
+    
+    func initForWelcomeFive(){
+        ui_label_content_main.text = "welcome_five_main_text_title".localized
     }
     
 }

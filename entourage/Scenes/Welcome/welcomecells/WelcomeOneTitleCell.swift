@@ -49,4 +49,8 @@ class WelcomeOneTitleCell:UITableViewCell{
         self.ui_label_title.text = "welcome_four_title".localized
     }
     
+    func initForWelcomeFive(){
+        self.ui_label_title.text = "welcome_five_title".localized
+    }
+    
 }

@@ -1153,6 +1153,92 @@ Ligne 2</string>
             </objects>
             <point key="canvasLocation" x="1933" y="465"/>
         </scene>
+        <!--Welcome Five View Controller-->
+        <scene sceneID="Dfr-GH-HgX">
+            <objects>
+                <viewController storyboardIdentifier="welcomefivevc" id="OBh-qc-lLn" customClass="WelcomeFiveViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TLT-j7-ZOd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_backgrnd_welcome" translatesAutoresizingMaskIntoConstraints="NO" id="afM-ai-tuc">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="376"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="abk-CF-bDV">
+                                <rect key="frame" x="10" y="128" width="388" height="618"/>
+                                <color key="backgroundColor" name="orange_tres_tres_clair"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="35"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_cross" translatesAutoresizingMaskIntoConstraints="NO" id="v2X-0u-DC8">
+                                <rect key="frame" x="364" y="30" width="20" height="20"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="Wui-Xu-iKy"/>
+                                    <constraint firstAttribute="height" constant="20" id="ZGN-KP-iyV"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAu-LV-aFz">
+                                <rect key="frame" x="60" y="656" width="294" height="44"/>
+                                <color key="backgroundColor" name="orange_app"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="CPJ-r9-28t"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Partagez l'application">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_welcome_five_bottom_image" translatesAutoresizingMaskIntoConstraints="NO" id="TMK-5h-yn6">
+                                <rect key="frame" x="0.0" y="746" width="414" height="150"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_welcome_five_top_image" translatesAutoresizingMaskIntoConstraints="NO" id="9L1-HC-OMK">
+                                <rect key="frame" x="0.0" y="0.0" width="269" height="135"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xDf-bG-dt5"/>
+                        <color key="backgroundColor" name="Beige"/>
+                        <constraints>
+                            <constraint firstItem="xDf-bG-dt5" firstAttribute="trailing" secondItem="abk-CF-bDV" secondAttribute="trailing" constant="16" id="2wv-qn-dbD"/>
+                            <constraint firstItem="9L1-HC-OMK" firstAttribute="top" secondItem="TLT-j7-ZOd" secondAttribute="top" id="5xb-Ae-KL8"/>
+                            <constraint firstItem="abk-CF-bDV" firstAttribute="leading" secondItem="xDf-bG-dt5" secondAttribute="leading" constant="10" id="CQe-Zu-jno"/>
+                            <constraint firstItem="xDf-bG-dt5" firstAttribute="trailing" secondItem="v2X-0u-DC8" secondAttribute="trailing" constant="30" id="Edl-cL-av0"/>
+                            <constraint firstItem="afM-ai-tuc" firstAttribute="top" secondItem="TLT-j7-ZOd" secondAttribute="top" id="M2g-Bt-jrW"/>
+                            <constraint firstItem="xDf-bG-dt5" firstAttribute="trailing" secondItem="TMK-5h-yn6" secondAttribute="trailing" id="QSj-jX-MoC"/>
+                            <constraint firstItem="TMK-5h-yn6" firstAttribute="leading" secondItem="xDf-bG-dt5" secondAttribute="leading" id="R1A-tO-XEk"/>
+                            <constraint firstItem="JAu-LV-aFz" firstAttribute="leading" secondItem="xDf-bG-dt5" secondAttribute="leading" constant="60" id="ROj-dr-E48"/>
+                            <constraint firstItem="v2X-0u-DC8" firstAttribute="top" secondItem="TLT-j7-ZOd" secondAttribute="top" constant="30" id="TB2-cy-lPg"/>
+                            <constraint firstItem="JAu-LV-aFz" firstAttribute="top" secondItem="abk-CF-bDV" secondAttribute="bottom" constant="-90" id="VPQ-N7-D0N"/>
+                            <constraint firstItem="9L1-HC-OMK" firstAttribute="leading" secondItem="xDf-bG-dt5" secondAttribute="leading" id="an3-nL-IaZ"/>
+                            <constraint firstItem="abk-CF-bDV" firstAttribute="top" secondItem="xDf-bG-dt5" secondAttribute="top" constant="80" id="iJP-PN-YlS"/>
+                            <constraint firstAttribute="bottom" secondItem="abk-CF-bDV" secondAttribute="bottom" constant="150" id="kTx-aQ-y0q"/>
+                            <constraint firstItem="xDf-bG-dt5" firstAttribute="trailing" secondItem="JAu-LV-aFz" secondAttribute="trailing" constant="60" id="ltG-VK-0mm"/>
+                            <constraint firstItem="afM-ai-tuc" firstAttribute="leading" secondItem="xDf-bG-dt5" secondAttribute="leading" id="nP3-eY-XDH"/>
+                            <constraint firstItem="xDf-bG-dt5" firstAttribute="trailing" secondItem="afM-ai-tuc" secondAttribute="trailing" id="qZg-If-b4K"/>
+                            <constraint firstItem="TMK-5h-yn6" firstAttribute="top" secondItem="abk-CF-bDV" secondAttribute="bottom" id="rbS-tp-YOU"/>
+                            <constraint firstAttribute="bottom" secondItem="TMK-5h-yn6" secondAttribute="bottom" id="tZe-E1-kVr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ic_btn_close" destination="v2X-0u-DC8" id="ff5-7P-8vP"/>
+                        <outlet property="ic_button" destination="JAu-LV-aFz" id="Spe-5N-3fO"/>
+                        <outlet property="ui_table_view" destination="abk-CF-bDV" id="rd0-sq-LCV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TWp-i4-wEQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2618.840579710145" y="464.73214285714283"/>
+        </scene>
     </scenes>
     <resources>
         <image name="24HSelected" width="23" height="23"/>
@@ -1163,6 +1249,8 @@ Ligne 2</string>
         <image name="ic_notif_bell_orange" width="26" height="24"/>
         <image name="ic_notif_off" width="23" height="22"/>
         <image name="ic_other_welcome" width="1170" height="460.20001220703125"/>
+        <image name="ic_welcome_five_bottom_image" width="375" height="147"/>
+        <image name="ic_welcome_five_top_image" width="269" height="135"/>
         <image name="logo_entourage" width="60" height="60"/>
         <image name="placeholder_action" width="85" height="39.5"/>
         <namedColor name="Beige">

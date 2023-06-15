@@ -191,8 +191,15 @@ class HomeMainViewController: UIViewController {
                 self.present(welcomeViewController, animated: true, completion: nil)
             }
         }
-        let action5 = UIAlertAction(title: "Bouton 5", style: .default) { _ in
-            // Code à exécuter lorsque le bouton 5 est pressé
+        let action5 = UIAlertAction(title: "Welcome day 11", style: .default) { _ in
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            //TODO HERE ASOLULETY CHANGE IN CASE OF PUSH
+            if let welcomeViewController = self.storyboard?.instantiateViewController(withIdentifier: "welcomefivevc") as? WelcomeFiveViewController {
+                // Remplacez “WelcomeViewController” par l’identifiant de votre WelcomeViewController dans le storyboard
+                welcomeViewController.modalPresentationStyle = .fullScreen
+                // Présentez le WelcomeViewController
+                self.present(welcomeViewController, animated: true, completion: nil)
+            }
         }
         // Ajouter les actions à l'alerte
         alertController.addAction(action1)
