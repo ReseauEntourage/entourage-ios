@@ -29,10 +29,18 @@ class ActionContribDetailHomeCell: UITableViewCell {
         ui_date.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
         ui_location.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
         ui_distance.setupFontAndColor(style: ApplicationTheme.getFontLegendGris())
-        
         ui_image.layer.cornerRadius = 20
         ui_placeholder.image = nil
         ui_placeholder.isHidden = true
+    }
+    
+    func populateCellForExample(image:UIImage, name:String, date:String, location:String, distance:String){
+        self.ui_image.image = image
+        self.ui_date.text = date
+        self.ui_title.text = name
+        self.ui_location.text = location
+        self.ui_distance.text = distance
+        
     }
     
     func populateCell(action:Action, hideSeparator:Bool) {
@@ -70,5 +78,4 @@ class ActionContribDetailHomeCell: UITableViewCell {
         }
         
     }
-    
 }

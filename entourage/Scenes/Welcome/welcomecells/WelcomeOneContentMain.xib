@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,6 +24,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" name="orange_tres_tres_clair"/>
                 <constraints>
                     <constraint firstItem="Vkp-sX-JzO" firstAttribute="top" secondItem="B4I-zK-lry" secondAttribute="top" id="6E1-YQ-IVf"/>
                     <constraint firstAttribute="bottom" secondItem="Vkp-sX-JzO" secondAttribute="bottom" constant="30" id="SJ8-1N-WcU"/>
@@ -36,4 +38,9 @@
             <point key="canvasLocation" x="-187.78625954198472" y="45.422535211267608"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="orange_tres_tres_clair">
+            <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

@@ -142,15 +142,66 @@ class HomeMainViewController: UIViewController {
         homeVC.show()
     }
     @objc func testWelcomeNotif() {
-        let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
-        //TODO HERE ASOLULETY CHANGE IN CASE OF PUSH
-        if let welcomeViewController = storyboard?.instantiateViewController(withIdentifier: "welcometwovc") as? WelcmeTwoViewController {
-            // Remplacez “WelcomeViewController” par l’identifiant de votre WelcomeViewController dans le storyboard
-            welcomeViewController.modalPresentationStyle = .fullScreen
-            // Présentez le WelcomeViewController
-            welcomeViewController.delegate = self
-            self.present(welcomeViewController, animated: true, completion: nil)
+
+        let alertController = UIAlertController(title: "Bonjour testeur", message: "Choisi un jour", preferredStyle: .alert)
+        // Créer les actions pour les boutons
+        let action1 = UIAlertAction(title: "Welcome H1", style: .default) { _ in
+            
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            //TODO HERE ASOLULETY CHANGE IN CASE OF PUSH
+            if let welcomeViewController = self.storyboard?.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {
+                // Remplacez “WelcomeViewController” par l’identifiant de votre WelcomeViewController dans le storyboard
+                welcomeViewController.modalPresentationStyle = .fullScreen
+                // Présentez le WelcomeViewController
+                welcomeViewController.delegate = self
+                self.present(welcomeViewController, animated: true, completion: nil)
+            }
         }
+        let action2 = UIAlertAction(title: "Welcome day 2", style: .default) { _ in
+            
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            //TODO HERE ASOLULETY CHANGE IN CASE OF PUSH
+            if let welcomeViewController = self.storyboard?.instantiateViewController(withIdentifier: "welcometwovc") as? WelcmeTwoViewController {
+                // Remplacez “WelcomeViewController” par l’identifiant de votre WelcomeViewController dans le storyboard
+                welcomeViewController.modalPresentationStyle = .fullScreen
+                // Présentez le WelcomeViewController
+                welcomeViewController.delegate = self
+                self.present(welcomeViewController, animated: true, completion: nil)
+            }
+        }
+        let action3 = UIAlertAction(title: "Welcome day 5", style: .default) { _ in
+            
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            //TODO HERE ASOLULETY CHANGE IN CASE OF PUSH
+            if let welcomeViewController = self.storyboard?.instantiateViewController(withIdentifier: "welcomethreevc") as? WelcomeThreeViewController {
+                // Remplacez “WelcomeViewController” par l’identifiant de votre WelcomeViewController dans le storyboard
+                welcomeViewController.modalPresentationStyle = .fullScreen
+                // Présentez le WelcomeViewController
+                welcomeViewController.delegate = self
+                self.present(welcomeViewController, animated: true, completion: nil)
+            }
+        }
+        let action4 = UIAlertAction(title: "Welcome day 8", style: .default) { _ in
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+            //TODO HERE ASOLULETY CHANGE IN CASE OF PUSH
+            if let welcomeViewController = self.storyboard?.instantiateViewController(withIdentifier: "welcomefourvc") as? WelcomeFourViewController {
+                // Remplacez “WelcomeViewController” par l’identifiant de votre WelcomeViewController dans le storyboard
+                welcomeViewController.modalPresentationStyle = .fullScreen
+                // Présentez le WelcomeViewController
+                self.present(welcomeViewController, animated: true, completion: nil)
+            }
+        }
+        let action5 = UIAlertAction(title: "Bouton 5", style: .default) { _ in
+            // Code à exécuter lorsque le bouton 5 est pressé
+        }
+        // Ajouter les actions à l'alerte
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        alertController.addAction(action3)
+        alertController.addAction(action4)
+        alertController.addAction(action5)
+        // Afficher l'alerte
+        present(alertController, animated: true, completion: nil)
     }
     
     func updateTopView() {

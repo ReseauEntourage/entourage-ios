@@ -6,3 +6,23 @@
 //
 
 import Foundation
+import UIKit
+
+class SecondaryTextWelcomeCell:UITableViewCell{
+    
+    @IBOutlet weak var ui_label: UILabel!
+    
+    
+    class var identifier: String {
+        return String(describing: self)
+    }
+    
+    override func awakeFromNib() {
+        
+    }
+    
+    func initForWelcomeFour(){
+        ui_label.text = "welcome_four_main_text".localized
+    }
+    
+}

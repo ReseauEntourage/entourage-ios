@@ -270,3 +270,19 @@ let action_demand_report  = "Action__Demand__Report"
 let action_contrib_report_confirm = "Action__Contrib__Report_Confirmation"
 let action_demand_report_confim = "Action__Demand__Report_Confirmation"
 
+let View_WelcomeOfferHelp_Day5A = "View_WelcomeOfferHelp_Day5A"
+
+let Action_WelcomeOfferHelp_Day5A = "Action_WelcomeOfferHelp_Day5A"
+
+let Action_WelcomeOfferHelp_Day5ACard = "Action_WelcomeOfferHelp_Day5ACard"
+
+let View_WelcomeOfferHelp_Day5B = "View_WelcomeOfferHelp_Day5B"
+
+let Action_WelcomeOfferHelp_Day5B = "Action_WelcomeOfferHelp_Day5B"
+
+let Action_WelcomeOfferHelp_Day5BCard = "Action_WelcomeOfferHelp_Day5BCard"
+
+let View_WelcomeOfferHelp_Day5C = "View_WelcomeOfferHelp_Day5C"
+
+let Action_WelcomeOfferHelp_Day5C = "Action_WelcomeOfferHelp_Day5C"
+

@@ -35,6 +35,7 @@ class WelcmeTwoViewController:UIViewController{
     var delegate:WelcomeTwoDelegate?
     
     override func viewDidLoad() {
+        ui_table_view.backgroundColor = UIColor(named: "orange_tres_tres_clair")
         fillTableDTO()
         initButton()
         ui_table_view.delegate = self
@@ -129,7 +130,10 @@ extension WelcmeTwoViewController:UITableViewDelegate,UITableViewDataSource{
             cell.selectionStyle = .none
             return cell
         case .emptycell:
-            return UITableViewCell()
+            let cell = UITableViewCell()
+            cell.selectionStyle = .none
+            cell.backgroundColor = UIColor(named: "orange_tres_tres_clair")
+            return cell
         }
     }
     

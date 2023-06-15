@@ -33,6 +33,7 @@ class WelcomeViewController:UIViewController {
     var delegate:WelcomeOneDelegate?
     
     override func viewDidLoad() {
+        ui_tableview.backgroundColor = UIColor(named: "orange_tres_tres_clair")
         loadDTO()
         initButton()
         AnalyticsLoggerManager.logEvent(name: View_WelcomeOfferHelp_Day1)
@@ -94,7 +95,10 @@ extension WelcomeViewController:UITableViewDelegate,UITableViewDataSource{
             cell.delegate = self
             return cell
         case .emptycell:
-            return UITableViewCell()
+            let cell = UITableViewCell()
+            cell.selectionStyle = .none
+            cell.backgroundColor = UIColor(named: "orange_tres_tres_clair")
+            return cell
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

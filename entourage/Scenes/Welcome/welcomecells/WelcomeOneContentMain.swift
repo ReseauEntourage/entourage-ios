@@ -21,4 +21,19 @@ class WelcomeOneContentMain:UITableViewCell {
         
     }
     
+    func initForWelcomeThreeIfEvent(){
+        ui_label_content_main.text = "welcome_three_maintext_event".localized
+    }
+    
+    func initForWelcomeThreeIfDemand(){
+        ui_label_content_main.text = "welcome_three_maintext_demand".localized
+    }
+    
+    func initForWelcomeThreeIfContrib(){
+        ui_label_content_main.text = "welcome_three_maintext_contrib".localized
+    }
+    func initForWelcomeFour(){
+        ui_label_content_main.text = "welcome_four_main_text".localized
+    }
+    
 }

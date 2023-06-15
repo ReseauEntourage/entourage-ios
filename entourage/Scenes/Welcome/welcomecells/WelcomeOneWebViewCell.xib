@@ -31,6 +31,7 @@
                         <color key="color" name="orange_app"/>
                     </activityIndicatorView>
                 </subviews>
+                <color key="backgroundColor" name="orange_tres_tres_clair"/>
                 <constraints>
                     <constraint firstItem="o5P-mw-yGv" firstAttribute="centerX" secondItem="jAW-fu-lSQ" secondAttribute="centerX" id="6Nb-Oc-55A"/>
                     <constraint firstItem="5ar-Q7-nJp" firstAttribute="top" secondItem="jAW-fu-lSQ" secondAttribute="top" id="7A3-Zm-kGl"/>
@@ -50,6 +51,9 @@
     <resources>
         <namedColor name="orange_app">
             <color red="0.96078431372549022" green="0.37254901960784315" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_tres_tres_clair">
+            <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -31,4 +31,22 @@ class WelcomeOneTitleCell:UITableViewCell{
         ui_label_title.attributedText = attributedString
     }
     
+    func initForWelcomeThreeIfEvent(){
+        self.ui_label_title.text = "welcome_three_title_event".localized
+    }
+    
+    func initForWelcomeThreeIfDemand(){
+        self.ui_label_title.text = "welcome_three_title_demand".localized
+
+    }
+    
+    func initForWelcomeThreeIfContrib(){
+        self.ui_label_title.text = "welcome_three_title_contrib".localized
+
+    }
+    
+    func initForWelcomeFour(){
+        self.ui_label_title.text = "welcome_four_title".localized
+    }
+    
 }

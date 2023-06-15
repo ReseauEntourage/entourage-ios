@@ -1006,13 +1006,13 @@ Ligne 2</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="376"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_cafe_welcome_three" translatesAutoresizingMaskIntoConstraints="NO" id="Clp-tw-pGA">
-                                <rect key="frame" x="150" y="48" width="204" height="116"/>
+                                <rect key="frame" x="150" y="68" width="204" height="116"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="204" id="bF0-mV-Ipq"/>
                                     <constraint firstAttribute="height" constant="116" id="esY-EH-PCb"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GxD-WN-JKz">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GxD-WN-JKz">
                                 <rect key="frame" x="10" y="108" width="388" height="823"/>
                                 <color key="backgroundColor" name="orange_tres_tres_clair"/>
                                 <userDefinedRuntimeAttributes>
@@ -1038,7 +1038,7 @@ Ligne 2</string>
                                 <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Dire bonjour à mes voisins">
+                                <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1055,7 +1055,7 @@ Ligne 2</string>
                             <constraint firstItem="EWg-f9-AfZ" firstAttribute="trailing" secondItem="xli-pA-dXC" secondAttribute="trailing" constant="30" id="CHL-7s-2Ky"/>
                             <constraint firstAttribute="bottom" secondItem="GxD-WN-JKz" secondAttribute="bottom" constant="-35" id="IVv-Be-mV2"/>
                             <constraint firstItem="Ra6-74-4f1" firstAttribute="bottom" secondItem="GxD-WN-JKz" secondAttribute="bottom" constant="-70" id="JtU-QB-IiX"/>
-                            <constraint firstItem="Clp-tw-pGA" firstAttribute="top" secondItem="EWg-f9-AfZ" secondAttribute="top" id="KCA-v4-0Y5"/>
+                            <constraint firstItem="Clp-tw-pGA" firstAttribute="top" secondItem="EWg-f9-AfZ" secondAttribute="top" constant="20" id="KCA-v4-0Y5"/>
                             <constraint firstItem="EWg-f9-AfZ" firstAttribute="trailing" secondItem="GxD-WN-JKz" secondAttribute="trailing" constant="16" id="Lxm-gP-WTU"/>
                             <constraint firstItem="GxD-WN-JKz" firstAttribute="leading" secondItem="EWg-f9-AfZ" secondAttribute="leading" constant="10" id="RDt-xz-erC"/>
                             <constraint firstItem="GxD-WN-JKz" firstAttribute="top" secondItem="EWg-f9-AfZ" secondAttribute="top" constant="60" id="YLX-wb-3A2"/>
@@ -1078,6 +1078,80 @@ Ligne 2</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szo-Jo-shd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1271.0144927536232" y="464.73214285714283"/>
+        </scene>
+        <!--Welcome Four View Controller-->
+        <scene sceneID="tMd-1m-iac">
+            <objects>
+                <viewController storyboardIdentifier="welcomefourvc" id="QX5-vC-pVD" customClass="WelcomeFourViewController" customModule="Ent_Beta" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zTg-ym-eoM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_backgrnd_welcome" translatesAutoresizingMaskIntoConstraints="NO" id="8DU-fN-MPi">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="376"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1gr-HS-EII">
+                                <rect key="frame" x="10" y="108" width="388" height="823"/>
+                                <color key="backgroundColor" name="orange_tres_tres_clair"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="35"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_cross" translatesAutoresizingMaskIntoConstraints="NO" id="8IQ-dw-VOG">
+                                <rect key="frame" x="364" y="30" width="20" height="20"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="PUP-rl-ICK"/>
+                                    <constraint firstAttribute="height" constant="20" id="Tue-8b-E2y"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZED-La-t9X">
+                                <rect key="frame" x="60" y="817" width="294" height="44"/>
+                                <color key="backgroundColor" name="orange_app"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Cdi-Go-ZCN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NunitoSans-Bold" family="Nunito Sans" pointSize="15"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Dire bonjour à mes voisins">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cradius">
+                                        <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eKi-B3-Yfl"/>
+                        <color key="backgroundColor" name="Beige"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="1gr-HS-EII" secondAttribute="bottom" constant="-35" id="3dI-89-Fud"/>
+                            <constraint firstItem="ZED-La-t9X" firstAttribute="leading" secondItem="eKi-B3-Yfl" secondAttribute="leading" constant="60" id="5iE-UK-9Hz"/>
+                            <constraint firstItem="1gr-HS-EII" firstAttribute="leading" secondItem="eKi-B3-Yfl" secondAttribute="leading" constant="10" id="7do-dD-iOy"/>
+                            <constraint firstItem="eKi-B3-Yfl" firstAttribute="trailing" secondItem="8DU-fN-MPi" secondAttribute="trailing" id="HNh-LD-VLC"/>
+                            <constraint firstItem="eKi-B3-Yfl" firstAttribute="trailing" secondItem="8IQ-dw-VOG" secondAttribute="trailing" constant="30" id="IT8-5A-6Ce"/>
+                            <constraint firstItem="1gr-HS-EII" firstAttribute="top" secondItem="eKi-B3-Yfl" secondAttribute="top" constant="60" id="Ky9-Ic-l4V"/>
+                            <constraint firstItem="eKi-B3-Yfl" firstAttribute="trailing" secondItem="ZED-La-t9X" secondAttribute="trailing" constant="60" id="M9a-Ts-qOF"/>
+                            <constraint firstItem="eKi-B3-Yfl" firstAttribute="trailing" secondItem="1gr-HS-EII" secondAttribute="trailing" constant="16" id="VIf-WE-2t1"/>
+                            <constraint firstItem="8DU-fN-MPi" firstAttribute="top" secondItem="zTg-ym-eoM" secondAttribute="top" id="kt5-TW-U13"/>
+                            <constraint firstItem="8DU-fN-MPi" firstAttribute="leading" secondItem="eKi-B3-Yfl" secondAttribute="leading" id="vcY-YX-GDd"/>
+                            <constraint firstItem="8IQ-dw-VOG" firstAttribute="top" secondItem="zTg-ym-eoM" secondAttribute="top" constant="30" id="yEV-hN-xCx"/>
+                            <constraint firstItem="ZED-La-t9X" firstAttribute="bottom" secondItem="1gr-HS-EII" secondAttribute="bottom" constant="-70" id="z0B-yH-JP1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ui_btn_close" destination="8IQ-dw-VOG" id="B2K-ol-AG4"/>
+                        <outlet property="ui_main_button" destination="ZED-La-t9X" id="Ot4-N0-gRy"/>
+                        <outlet property="ui_table_view" destination="1gr-HS-EII" id="VhZ-Nj-Fea"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FNC-N2-F1z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1933" y="465"/>
         </scene>
     </scenes>
     <resources>

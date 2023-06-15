@@ -13,6 +13,7 @@ enum WelcomeFourDTO{
     case mainTextCell
     case secondTextCell
     case imageCell
+    case blanckCell
      
 }
 
@@ -25,8 +26,10 @@ class WelcomeFourViewController:UIViewController {
     var tableDTO = [WelcomeFourDTO]()
     
     override func viewDidLoad() {
+        ui_table_view.backgroundColor = UIColor(named: "orange_tres_tres_clair")
         initButton()
         initTableView()
+        registerCells()
         loadDTO()
     }
     
@@ -53,7 +56,7 @@ class WelcomeFourViewController:UIViewController {
     }
     
     func initButton(){
-        ui_main_button.titleLabel?.text = "welcome_four_main_button_title".localized
+        ui_main_button.setTitle("welcome_four_main_button_title".localized, for: .normal)
         ui_main_button.addTarget(self, action: #selector(mainTapped), for: .touchUpInside)
         ui_btn_close.isUserInteractionEnabled = true
          let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeTapped))
@@ -65,7 +68,11 @@ class WelcomeFourViewController:UIViewController {
     }
     
     @objc func mainTapped() {
-        
+        self.dismiss(animated: true) {
+            if let _url = URL(string: "/https://kahoot.it/challenge/45371e80-fe50-4be5-afec-b37e3d50ede2_1683299255475"){
+                WebLinkManager.openUrl(url: _url, openInApp: true, presenterViewController: AppState.getTopViewController())
+            }
+        }
     }
     
 }
@@ -79,15 +86,34 @@ extension WelcomeFourViewController:UITableViewDelegate,UITableViewDataSource{
         switch(tableDTO[indexPath.row]){
             
         case .titleCell:
-            return UITableViewCell()
+            let cell = self.ui_table_view.dequeueReusableCell(withIdentifier: "WelcomeOneTitleCell", for: indexPath) as! WelcomeOneTitleCell
+            cell.initForWelcomeFour()
+            cell.selectionStyle = .none
+            return cell
         case .mainTextCell:
-            return UITableViewCell()
+            let cell = self.ui_table_view.dequeueReusableCell(withIdentifier: "WelcomeOneContentMain", for: indexPath) as! WelcomeOneContentMain
+            cell.initForWelcomeFour()
+            cell.selectionStyle = .none
+            return cell
         case .secondTextCell:
-            return UITableViewCell()
+            let cell = self.ui_table_view.dequeueReusableCell(withIdentifier: "SecondaryTextWelcomeCell", for: indexPath) as! SecondaryTextWelcomeCell
+            cell.initForWelcomeFour()
+            cell.selectionStyle = .none
+            return cell
         case .imageCell:
-            return UITableViewCell()
+            let cell = self.ui_table_view.dequeueReusableCell(withIdentifier: "WelcomeFourImageCell", for: indexPath) as! WelcomeFourImageCell
+            cell.selectionStyle = .none
+            return cell
+        case .blanckCell:
+            let cell = UITableViewCell()
+            cell.selectionStyle = .none
+            cell.backgroundColor = UIColor(named: "orange_tres_tres_clair")
+            return cell
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     
 }
