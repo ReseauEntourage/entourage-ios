@@ -391,6 +391,7 @@
 		264C1AF829AD22AB0083F83E /* ReportChooseViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */; };
 		264C1AFA29AF52820083F83E /* HeaderReportView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 264C1AF929AF52820083F83E /* HeaderReportView.xib */; };
 		264C1AFC29AF5BED0083F83E /* HeaderReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */; };
+		265565F22A3C9DB700CEFB3D /* explosion.json in Resources */ = {isa = PBXBuildFile; fileRef = 265565F12A3C9DB700CEFB3D /* explosion.json */; };
 		2684542C29DAC63700C944EA /* UniversalLinkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2684542B29DAC63700C944EA /* UniversalLinkManager.swift */; };
 		2689F3B42A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2689F3B32A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib */; };
 		2689F3B62A3B6D3E0009920D /* WelcomeFiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */; };
@@ -794,6 +795,7 @@
 		264C1AF729AD22AB0083F83E /* ReportChooseViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportChooseViewCell.xib; sourceTree = "<group>"; };
 		264C1AF929AF52820083F83E /* HeaderReportView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderReportView.xib; sourceTree = "<group>"; };
 		264C1AFB29AF5BED0083F83E /* HeaderReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderReportView.swift; sourceTree = "<group>"; };
+		265565F12A3C9DB700CEFB3D /* explosion.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = explosion.json; sourceTree = "<group>"; };
 		2684542B29DAC63700C944EA /* UniversalLinkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalLinkManager.swift; sourceTree = "<group>"; };
 		2689F3B32A3B3DA60009920D /* WelcomeThreeDemandExampleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeThreeDemandExampleCell.xib; sourceTree = "<group>"; };
 		2689F3B52A3B6D3E0009920D /* WelcomeFiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeFiveViewController.swift; sourceTree = "<group>"; };
@@ -1127,6 +1129,7 @@
 		025D876C278DF44800909101 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				265565F12A3C9DB700CEFB3D /* explosion.json */,
 				020AF5E428607EFE0012AE60 /* congrat_short_anim.json */,
 				02CCE67027D78C2F00D6976C /* Fonts */,
 				025D8724278DD33800909101 /* LaunchScreen.storyboard */,
@@ -1861,6 +1864,7 @@
 				025FFE0D27DBB18E00783E8D /* entourage-Info.plist in Resources */,
 				021FD96E2876F12E00D3AA54 /* EventListSectionCell.xib in Resources */,
 				0243DCC828AF832D00273679 /* Messages.storyboard in Resources */,
+				265565F22A3C9DB700CEFB3D /* explosion.json in Resources */,
 				021FD96128743EFF00D3AA54 /* EventListCell.xib in Resources */,
 				2619E1452A262AC6000BD574 /* WelcomeTwoDescribingCell.xib in Resources */,
 				025D8726278DD33800909101 /* LaunchScreen.storyboard in Resources */,
