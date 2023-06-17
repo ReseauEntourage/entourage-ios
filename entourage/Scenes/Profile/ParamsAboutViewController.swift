@@ -47,7 +47,7 @@ class ParamsAboutViewController: BasePopViewController {
           print("eho" , user.uuid)
           if user.uuid == "125302" || user.uuid == "2" || user.uuid == "4210" {
             UIView.animate(withDuration: 0.3) {
-                self.view.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+                self.view.transform = CGAffineTransform(scaleX: -1, y: 1)//rotationAngle: CGFloat.pi/2)
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
               let animationView = AnimationView(name: "explosion")
