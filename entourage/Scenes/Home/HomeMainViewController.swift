@@ -142,8 +142,24 @@ class HomeMainViewController: UIViewController {
         homeVC.show()
     }
     
+    @objc func testWelcomeNotif() {
+        let sb = UIStoryboard.init(name: StoryboardName.profileParams, bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "paramsHelpVC") as! ParamsAboutViewController
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
+    
     func updateTopView() {
         ui_username.text = String.init(format: "home_title_welcome".localized, homeViewModel.userHome.displayName)
+        
+//        ui_username.isUserInteractionEnabled = true
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
+//        ui_username.addGestureRecognizer(tapGestureRecognizer)
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
+            ui_username.isUserInteractionEnabled = true
+            ui_username.addGestureRecognizer(longPressRecognizer)
+            ui_view_user.isUserInteractionEnabled = true
+            ui_view_user.addGestureRecognizer(longPressRecognizer)
+        
         
         if let _urlstr = homeViewModel.userHome.avatarURL,  let url = URL(string: _urlstr) {
             ui_iv_user.sd_setImage(with: url,placeholderImage: UIImage.init(named: "placeholder_user"))
