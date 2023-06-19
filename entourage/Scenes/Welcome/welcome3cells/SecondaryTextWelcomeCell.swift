@@ -22,7 +22,7 @@ class SecondaryTextWelcomeCell:UITableViewCell{
     }
     
     func initForWelcomeFour(){
-        ui_label.text = "welcome_four_main_text".localized
+        ui_label.text = "welcome_four_second_text".localized
     }
     
 }

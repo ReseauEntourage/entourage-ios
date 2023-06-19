@@ -315,6 +315,13 @@ struct DeepLinkManager {
             }
         }
     }
+    static func showDiscoverOutingListUniversalLink() {
+        if let vc = AppState.getTopViewController(){
+            if let _tabbar = vc.tabBarController as? MainTabbarViewController {
+                _tabbar.showDiscoverEvents()
+            }
+        }
+    }
     
     static func showOutingUniversalLink(id:String) {
         if let navVc = UIStoryboard.init(name: StoryboardName.event, bundle: nil).instantiateViewController(withIdentifier: "eventDetailNav") as? UINavigationController, let vc = navVc.topViewController as? EventDetailFeedViewController  {

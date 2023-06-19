@@ -1315,13 +1315,13 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcomeone_content_main" = "Pour beaucoup, la rue est un lieu de passage.\nPour certains, c'est un quotidien.\nAlors pour commencer, rencontrez celles et\nceux qui la vivent tous les jours.";
 "welcomeone_content" = "Retrouvez nos contenus de sensibilisation içi";
 
-"welcome_three_title_event" = "6000 personnes se sont faits de nouveaux amis lors d'un évènement Entourage";
+"welcome_three_title_event" = "6000 personnes se sont fait de nouveaux amis lors d'un évènement Entourage";
 "welcome_three_title_demand" = "Donnez un coup de pouce à vos voisins";
 "welcome_three_title_contrib" = "Pas d'entraide autour de vous ? Créez-la !";
 
 "welcome_three_maintext_event" = "Trouvez l'événement qui vous intéresse et venez profiter d'un moment convivial";
-"welcome_three_maintext_demand" = "Jetez un oeil auxdemandes publiées près de chez vous :";
-"welcome_three_maintext_contrib" = "Un bon moyen de créer du lien entre voisins , c'est de partager vos centres d'intérêt, vos passions ou juste un cf pour faire connaissance";
+"welcome_three_maintext_demand" = "Jetez un oeil aux demandes publiées près de chez vous :";
+"welcome_three_maintext_contrib" = "Un bon moyen de créer du lien entre voisins , c'est de partager vos centres d'intérêt, vos passions ou juste un café pour faire connaissance.";
 
 "welcome_three_mainbutton_event" = "Découvrir les événements" ;
 "welcome_three_mainbutton_demand" = "Découvrir les demandes" ;
@@ -1337,7 +1337,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_three_contrib_example_two_loca" = "Paris (75010)";
 "welcome_three_contrib_example_two_date" = "le 21 juin 2022 à 12h";
 
-"welcome_four_main_button_title" = "Démarrer le quizz";
+"welcome_four_main_button_title" = "Démarrer le quiz";
 "welcome_four_title" = "A vous de jouer";
 "welcome_four_main_text" = "Que diriez-vous d'un petit quiz pour déconstruire les préjugés sur le monde de la rue ?";
 "welcome_four_second_text" = "A votre avis, quel est le pourcentage de personnes sans domicile fixe qui disposent d'un téléphone portable";

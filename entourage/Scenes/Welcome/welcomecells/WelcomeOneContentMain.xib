@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vkp-sX-JzO">
-                        <rect key="frame" x="20" y="0.0" width="504" height="179"/>
+                        <rect key="frame" x="20" y="0.0" width="504" height="194"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -27,7 +27,7 @@
                 <color key="backgroundColor" name="orange_tres_tres_clair"/>
                 <constraints>
                     <constraint firstItem="Vkp-sX-JzO" firstAttribute="top" secondItem="B4I-zK-lry" secondAttribute="top" id="6E1-YQ-IVf"/>
-                    <constraint firstAttribute="bottom" secondItem="Vkp-sX-JzO" secondAttribute="bottom" constant="30" id="SJ8-1N-WcU"/>
+                    <constraint firstAttribute="bottom" secondItem="Vkp-sX-JzO" secondAttribute="bottom" constant="15" id="SJ8-1N-WcU"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Vkp-sX-JzO" secondAttribute="trailing" id="ccg-sd-dkd"/>
                     <constraint firstItem="Vkp-sX-JzO" firstAttribute="leading" secondItem="B4I-zK-lry" secondAttribute="leadingMargin" id="wZk-4w-uGe"/>
                 </constraints>

@@ -139,7 +139,7 @@ class WelcomeThreeViewController:UIViewController{
     @objc func onWithEventBtnClick(){
         AnalyticsLoggerManager.logEvent(name: Action_WelcomeOfferHelp_Day5A)
         self.dismiss(animated: true) {
-            DeepLinkManager.showOutingListUniversalLink()
+            DeepLinkManager.showDiscoverOutingListUniversalLink()
         }
         
     }
@@ -233,10 +233,10 @@ extension WelcomeThreeViewController:UITableViewDelegate,UITableViewDataSource{
                 cell.populateCell(event: self.currentevents[0], hideSeparator: true)
             }
             if indexPath.row == 3{
-                cell.populateCell(event: self.currentevents[2], hideSeparator: true)
+                cell.populateCell(event: self.currentevents[1], hideSeparator: true)
             }
             if indexPath.row == 4 {
-                cell.populateCell(event: self.currentevents[3], hideSeparator: true)
+                cell.populateCell(event: self.currentevents[2], hideSeparator: true)
             }
             cell.selectionStyle = .none
             return cell
@@ -334,7 +334,7 @@ extension WelcomeThreeViewController {
     func getEventsDiscovered() {
         EventService.getAllEventsDiscover(currentPage: 1,per: 4, filters: currentFilter.getfiltersForWS()) { events, error in
             if let _events = events {
-                if _events.count > 0{
+                if _events.count == 0{
                     AnalyticsLoggerManager.logEvent(name: View_WelcomeOfferHelp_Day5A)
                     self.currentevents.append(contentsOf: _events)
                     self.haveEvents = true
