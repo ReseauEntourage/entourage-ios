@@ -67,7 +67,7 @@ class WelcomeFiveViewController:UIViewController{
     @objc func mainTapped() {
         AnalyticsLoggerManager.logEvent(name: Action_WelcomeOfferHelp_Day11)
         self.dismiss(animated: true) {
-            let activityViewController = UIActivityViewController(activityItems: ["https://apps.apple.com/app/id1072244410"], applicationActivities: nil)
+            let activityViewController = UIActivityViewController(activityItems: ["https://s3-eu-west-1.amazonaws.com/entourage-ressources/store_redirection.html"], applicationActivities: nil)
             AppState.getTopViewController()!.present(activityViewController, animated: true, completion: nil)
         }
     }
