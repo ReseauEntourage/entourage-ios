@@ -25,7 +25,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COK-9c-Ex8">
-                        <rect key="frame" x="37" y="35" width="574" height="34"/>
+                        <rect key="frame" x="37" y="33" width="574" height="36"/>
                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -33,7 +33,7 @@
                 </subviews>
                 <color key="backgroundColor" name="orange_tres_tres_clair"/>
                 <constraints>
-                    <constraint firstItem="COK-9c-Ex8" firstAttribute="top" secondItem="Z4I-jk-ai7" secondAttribute="bottom" constant="-5" id="EI6-4P-Tag"/>
+                    <constraint firstItem="COK-9c-Ex8" firstAttribute="top" secondItem="Z4I-jk-ai7" secondAttribute="bottom" constant="-7" id="EI6-4P-Tag"/>
                     <constraint firstAttribute="trailing" secondItem="COK-9c-Ex8" secondAttribute="trailing" id="HMT-47-2tI"/>
                     <constraint firstItem="Z4I-jk-ai7" firstAttribute="leading" secondItem="FRR-w3-U4K" secondAttribute="leading" constant="20" id="QJ5-sb-OQ8"/>
                     <constraint firstAttribute="bottom" secondItem="COK-9c-Ex8" secondAttribute="bottom" constant="20" id="btJ-ag-c2l"/>

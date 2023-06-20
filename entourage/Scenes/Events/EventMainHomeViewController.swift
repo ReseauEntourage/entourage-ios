@@ -79,7 +79,7 @@ class EventMainHomeViewController: UIViewController {
     var eventsDiscovered = [Event]()
     var eventsDiscoveredExtracted = EventsSorted()
     
-    private var isEventSelected = false //true
+    private var isEventSelected = true //true
     private var currentSelectedIsEvent = true//false // Use to prevent reloading tabs on view appears + Tap selection bar
     private var isfirstLoadingMyEvents = true
     
@@ -102,7 +102,9 @@ class EventMainHomeViewController: UIViewController {
         ui_tableview.register(UINib(nibName: EventListSectionCell.identifier, bundle: nil), forCellReuseIdentifier: EventListSectionCell.identifier)
         ui_tableview.register(UINib(nibName: EventListCell.identifier, bundle: nil), forCellReuseIdentifier: EventListCell.identifier)
         ui_tableview.register(UINib(nibName: EventListCell.EventlistMeIdentifier, bundle: nil), forCellReuseIdentifier: EventListCell.EventlistMeIdentifier)
-        setMyFirst()
+        if self.isEventSelected {
+            setMyFirst()
+        }
         setupEmptyViews()
         setupViews()
         //Notif for updating when create new Event
@@ -118,6 +120,7 @@ class EventMainHomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         changeTabSelection()
         
         if isEventSelected {

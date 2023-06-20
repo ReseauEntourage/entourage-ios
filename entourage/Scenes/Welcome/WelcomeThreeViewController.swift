@@ -267,6 +267,7 @@ extension WelcomeThreeViewController:UITableViewDelegate,UITableViewDataSource{
             if indexPath.row == 4 {
                 cell.populateCellForExample(image: UIImage(named: "ic_welcome_three_clothes")!, name: "welcome_three_contrib_example_two_title".localized, date: "welcome_three_contrib_example_two_date".localized, location: "welcome_three_contrib_example_two_loca".localized, distance: "welcome_three_contrib_example_two_distance".localized)
             }
+            cell.hideSeparator()
             cell.selectionStyle = .none
             return cell
         case .blanckCell:
@@ -334,7 +335,7 @@ extension WelcomeThreeViewController {
     func getEventsDiscovered() {
         EventService.getAllEventsDiscover(currentPage: 1,per: 4, filters: currentFilter.getfiltersForWS()) { events, error in
             if let _events = events {
-                if _events.count == 0{
+                if _events.count > 0{
                     AnalyticsLoggerManager.logEvent(name: View_WelcomeOfferHelp_Day5A)
                     self.currentevents.append(contentsOf: _events)
                     self.haveEvents = true

@@ -43,6 +43,10 @@ class ActionContribDetailHomeCell: UITableViewCell {
         
     }
     
+    func hideSeparator(){
+        self.ui_view_separator.isHidden = true
+    }
+    
     func populateCell(action:Action, hideSeparator:Bool) {
         
         ui_title.text = action.title
