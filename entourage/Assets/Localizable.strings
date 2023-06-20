@@ -1321,19 +1321,19 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 
 "welcome_three_maintext_event" = "Trouvez l'événement qui vous intéresse et venez profiter d'un moment convivial";
 "welcome_three_maintext_demand" = "Jetez un oeil aux demandes publiées près de chez vous :";
-"welcome_three_maintext_contrib" = "Un bon moyen de créer du lien entre voisins , c'est de partager vos centres d'intérêt, vos passions ou juste un café pour faire connaissance.";
+"welcome_three_maintext_contrib" = "Un bon moyen de créer du lien entre voisins, c'est de partager vos centres d'intérêt, vos passions ou juste un café pour faire connaissance.";
 
 "welcome_three_mainbutton_event" = "Découvrir les événements" ;
 "welcome_three_mainbutton_demand" = "Découvrir les demandes" ;
 "welcome_three_mainbutton_contrib" = "Créer une contribution" ;
 
 "welcome_three_contrib_example_one_title" = "Echanger autour d'un café";
-"welcome_three_contrib_example_one_distance" = "à 10m de moi";
+"welcome_three_contrib_example_one_distance" = "à 10 m de moi";
 "welcome_three_contrib_example_one_loca" = "Paris (75010)";
 "welcome_three_contrib_example_one_date" = "le 21 juin 2022 à 12h";
 
-"welcome_three_contrib_example_two_title" = "Don de vêtemnt por femme";
-"welcome_three_contrib_example_two_distance" = "à 10m de moi";
+"welcome_three_contrib_example_two_title" = "Don de vêtemnt pour femme";
+"welcome_three_contrib_example_two_distance" = "à 10 m de moi";
 "welcome_three_contrib_example_two_loca" = "Paris (75010)";
 "welcome_three_contrib_example_two_date" = "le 21 juin 2022 à 12h";
 
