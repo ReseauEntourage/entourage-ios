@@ -1332,7 +1332,7 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_three_contrib_example_one_loca" = "Paris (75010)";
 "welcome_three_contrib_example_one_date" = "le 21 juin 2022 à 12h";
 
-"welcome_three_contrib_example_two_title" = "Don de vêtemnt pour femme";
+"welcome_three_contrib_example_two_title" = "Don de vêtement pour femme";
 "welcome_three_contrib_example_two_distance" = "à 10 m de moi";
 "welcome_three_contrib_example_two_loca" = "Paris (75010)";
 "welcome_three_contrib_example_two_date" = "le 21 juin 2022 à 12h";
@@ -1340,9 +1340,9 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_four_main_button_title" = "Démarrer le quiz";
 "welcome_four_title" = "A vous de jouer";
 "welcome_four_main_text" = "Que diriez-vous d'un petit quiz pour déconstruire les préjugés sur le monde de la rue ?";
-"welcome_four_second_text" = "A votre avis, quel est le pourcentage de personnes sans domicile fixe qui disposent d'un téléphone portable";
+"welcome_four_second_text" = "A votre avis, quel est le pourcentage de personnes sans domicile fixe qui disposent d'un téléphone portable ?";
 
-"welcome_five_title" = "Déjà 10 jours: bienvenue dans la famille !";
+"welcome_five_title" = "Déjà 10 jours : bienvenue dans la famille !";
 "welcome_five_main_text_title" = "C'est fou comme le temps passe vite quand on est en bonne compagnie.\n\nMaintenant, aidez-nous à faire grandir le réseau Entourage : faites venir le vôtre !";
-"welcome_five_main_button_title" = "Partager l'appliction";
+"welcome_five_main_button_title" = "Partager l'application";
 
