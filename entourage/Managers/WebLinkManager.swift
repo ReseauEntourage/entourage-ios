@@ -11,11 +11,12 @@ import SafariServices
 struct WebLinkManager {
     static let prodURL = "app.entourage.social"
     static let prodURL2 = "www.entourage.social"
+    static let stagingURL2 = "preprod.entourage.social"
     static let stagingURL = "entourage-webapp-preprod.herokuapp.com"
     
     static func openUrl(url:URL?, openInApp:Bool, presenterViewController:UIViewController?, safariDelegate:SFSafariViewControllerDelegate? = nil) {
         if let _url = url {
-            let isOurPattern = _url.absoluteString.contains(prodURL) || _url.absoluteString.contains(prodURL2) || _url.absoluteString.contains(stagingURL)
+            let isOurPattern = _url.absoluteString.contains(prodURL) || _url.absoluteString.contains(prodURL2) || _url.absoluteString.contains(stagingURL) || _url.absoluteString.contains(stagingURL2)
             if isOurPattern {
                 let components = URLComponents(url: _url, resolvingAgainstBaseURL: false)!
                 UniversalLinkManager.handleUniversalLink(components:components)
