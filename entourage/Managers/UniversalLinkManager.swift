@@ -11,14 +11,15 @@ struct UniversalLinkManager {
     static let prodURL = "app.entourage.social"
     static let prodURL2 = "www.entourage.social"
     static let stagingURL = "entourage-webapp-preprod.herokuapp.com"
-    
+    static let stagingURL2 = "preprod.entourage.social"
+
     
     static func handleUniversalLink(components:URLComponents){
         let pathComponents = components.path.components(separatedBy: "/")
         print("eho pathComponent " , pathComponents)
         print("eho ")
         // check if the incoming URL matches any of the URLs you want to handle
-        if components.host == stagingURL || components.host == prodURL || components.host == prodURL2 {
+        if components.host == stagingURL || components.host == prodURL || components.host == prodURL2 || components.host == stagingURL2  {
             
             if pathComponents[0] == "" && pathComponents[1] == "" {
                 DeepLinkManager.showHomeUniversalLink()
