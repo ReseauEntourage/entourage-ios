@@ -98,6 +98,9 @@ class WelcmeTwoViewController:UIViewController{
                     self.titleGroup = "Un réseau social, c'est mieux à plusieurs ! Présentez-vous auprès de votre groupe " + group!.name
                 }
             }
+            if(self.isGroupSuppressed){
+                self.titleGroup = "welcome_two_no_group".localized
+            }
             
             //self.neighborhood = group
             self.ui_table_view.reloadData()

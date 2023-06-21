@@ -1319,6 +1319,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_three_title_demand" = "Donnez un coup de pouce à vos voisins";
 "welcome_three_title_contrib" = "Pas d'entraide autour de vous ? Créez-la !";
 
+"welcome_two_no_group" = "Présentez-vous auprès de votre groupe de voisins";
+
 "welcome_three_maintext_event" = "Trouvez l'événement qui vous intéresse et venez profiter d'un moment convivial";
 "welcome_three_maintext_demand" = "Jetez un oeil aux demandes publiées près de chez vous :";
 "welcome_three_maintext_contrib" = "Un bon moyen de créer du lien entre voisins, c'est de partager vos centres d'intérêt, vos passions ou juste un café pour faire connaissance.";

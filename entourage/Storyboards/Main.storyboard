@@ -57,7 +57,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EW-fj-kOG">
-                                        <rect key="frame" x="47" y="4" width="40.5" height="34"/>
+                                        <rect key="frame" x="47" y="12.5" width="255" height="19"/>
                                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -125,13 +125,13 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="h1F-5c-LAD" secondAttribute="bottom" constant="4" id="FtF-Ge-WhN"/>
                                     <constraint firstItem="6gJ-Uy-3Vq" firstAttribute="bottom" secondItem="h1F-5c-LAD" secondAttribute="bottom" id="IaL-eZ-w7F"/>
-                                    <constraint firstItem="2EW-fj-kOG" firstAttribute="top" secondItem="cAu-pn-nNR" secondAttribute="top" id="J7N-NZ-tgd"/>
                                     <constraint firstAttribute="trailing" secondItem="dHJ-2B-vMN" secondAttribute="trailing" id="OLa-da-Q4l"/>
                                     <constraint firstItem="dHJ-2B-vMN" firstAttribute="bottom" secondItem="h1F-5c-LAD" secondAttribute="bottom" id="Qdt-5H-Wb0"/>
                                     <constraint firstAttribute="height" constant="44" id="RXd-hb-gfr"/>
                                     <constraint firstItem="h1F-5c-LAD" firstAttribute="leading" secondItem="JNg-3V-Tot" secondAttribute="leading" id="ZrG-Jy-J8A"/>
+                                    <constraint firstItem="2EW-fj-kOG" firstAttribute="centerY" secondItem="cAu-pn-nNR" secondAttribute="centerY" id="liG-aL-Qly"/>
                                     <constraint firstItem="2EW-fj-kOG" firstAttribute="leading" secondItem="h1F-5c-LAD" secondAttribute="trailing" constant="22" id="ncM-El-Ii6"/>
-                                    <constraint firstItem="2EW-fj-kOG" firstAttribute="bottom" secondItem="h1F-5c-LAD" secondAttribute="bottom" constant="-2" id="tD6-70-hRQ"/>
+                                    <constraint firstItem="dHJ-2B-vMN" firstAttribute="leading" secondItem="2EW-fj-kOG" secondAttribute="trailing" constant="20" id="sSC-ci-XhM"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="12B-Cd-JZS">

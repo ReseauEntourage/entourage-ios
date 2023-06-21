@@ -672,6 +672,7 @@ L8</string>
                                 <constraints>
                                     <constraint firstItem="CuG-Ja-TKW" firstAttribute="top" secondItem="X8I-Yq-J1N" secondAttribute="bottom" id="2LY-OC-ZFU"/>
                                     <constraint firstItem="TAf-33-WDB" firstAttribute="leading" secondItem="BKo-zr-HHt" secondAttribute="leading" id="A38-UR-Tkc"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4Wm-bs-FdB" secondAttribute="bottom" id="Acv-4R-bRn"/>
                                     <constraint firstItem="5Oo-Yg-gJN" firstAttribute="top" secondItem="TAf-33-WDB" secondAttribute="bottom" constant="28" id="BFA-zK-B9y"/>
                                     <constraint firstItem="4Wm-bs-FdB" firstAttribute="centerX" secondItem="BKo-zr-HHt" secondAttribute="centerX" id="Ceq-ak-r5A"/>
                                     <constraint firstItem="CuG-Ja-TKW" firstAttribute="centerX" secondItem="BKo-zr-HHt" secondAttribute="centerX" id="Qtx-6V-dNA"/>
@@ -679,7 +680,7 @@ L8</string>
                                     <constraint firstAttribute="trailing" secondItem="5Oo-Yg-gJN" secondAttribute="trailing" id="VCq-gg-nOv"/>
                                     <constraint firstAttribute="trailing" secondItem="X8I-Yq-J1N" secondAttribute="trailing" id="Xdb-O8-h3h"/>
                                     <constraint firstItem="TAf-33-WDB" firstAttribute="top" secondItem="BKo-zr-HHt" secondAttribute="top" id="YvM-4B-wue"/>
-                                    <constraint firstItem="4Wm-bs-FdB" firstAttribute="top" secondItem="x7A-Ht-Yix" secondAttribute="bottom" constant="15" id="ZU5-GG-qny"/>
+                                    <constraint firstItem="4Wm-bs-FdB" firstAttribute="top" secondItem="x7A-Ht-Yix" secondAttribute="bottom" priority="999" constant="15" id="ZU5-GG-qny"/>
                                     <constraint firstItem="X8I-Yq-J1N" firstAttribute="top" secondItem="5Oo-Yg-gJN" secondAttribute="bottom" constant="30" id="fST-FP-gUQ"/>
                                     <constraint firstAttribute="trailing" secondItem="TAf-33-WDB" secondAttribute="trailing" id="oIw-tF-CqP"/>
                                     <constraint firstItem="X8I-Yq-J1N" firstAttribute="leading" secondItem="BKo-zr-HHt" secondAttribute="leading" id="wZu-N0-5NQ"/>

@@ -151,6 +151,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let userInfos = userInfos,let content = userInfos["content"] as? [String:Any], let extras = content["extra"] as? [String:Any],let instance = extras["instance"] as? String, let instanceId = extras["instance_id"] as? Int  else {
             return
         }
+        if let stage = extras["stage"] as? [String:Any] {
+            print("eho stage ",stage)
+        }
+        
+        
         Logger.print("***** extras : \(extras) ")
         Logger.print("***** Instance : \(instance) - id : \(instanceId)")
         let postId = extras["post_id"] as? Int
