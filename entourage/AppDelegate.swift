@@ -162,37 +162,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        if let stage = extras["stage"] as? String {
-            if stage == "h1" {
-                DeepLinkManager.showWelcomeOne()
-                return
-            }
-            if stage == "j2" {
-                DeepLinkManager.showWelcomeTwo()
-                return
-            }
-            if stage == "j5" {
-                DeepLinkManager.showWelcomeThree()
-                return
-            }
-            if stage == "j8" {
-                DeepLinkManager.showWelcomeFour()
-                return
-            }
-            if stage == "j11" {
-                DeepLinkManager.showWelcomeFive()
-                return
-            }
+        let alertController = UIAlertController(title: "Bonjour testeur", message: extras["stage"] as! String, preferredStyle: .alert)
+        // Créer les actions pour les boutons
+        let action1 = UIAlertAction(title: "Welcome H1", style: .default) { _ in
             
         }
+
+        // Ajouter les actions à l'alerte
+        alertController.addAction(action1)
+
+        // Afficher l'alerte
+        getTopViewController()!.present(alertController, animated: true, completion: nil)
         
+//        if let stage = extras["stage"] as? String {
+//            if stage == "h1" {
+//                DeepLinkManager.showWelcomeOne()
+//                return
+//            }
+//            if stage == "j2" {
+//                DeepLinkManager.showWelcomeTwo()
+//                return
+//            }
+//            if stage == "j5" {
+//                DeepLinkManager.showWelcomeThree()
+//                return
+//            }
+//            if stage == "j8" {
+//                DeepLinkManager.showWelcomeFour()
+//                return
+//            }
+//            if stage == "j11" {
+//                DeepLinkManager.showWelcomeFive()
+//                return
+//            }
+//            
+//        }
+//        
         
         Logger.print("***** extras : \(extras) ")
         Logger.print("***** Instance : \(instance) - id : \(instanceId)")
         let postId = extras["post_id"] as? Int
         Logger.print("***** post id : \(postId) ")
-        
-        let notifData = NotificationPushData(instanceName: instance, instanceId: instanceId, postId: postId)
+        let stage = extras["stage"]
+        let notifData = NotificationPushData(instanceName: instance, instanceId: instanceId, postId: postId, stage: stage as! String)
         
         if isFromBackground {
             DeepLinkManager.presentAction(notification: notifData)
