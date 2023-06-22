@@ -24,6 +24,8 @@ class MainParamsViewController: UIViewController {
         ui_tableview?.dataSource = self
         ui_tableview?.delegate = self
         
+        
+        
         isStaging = EnvironmentConfigurationManager.sharedInstance.runsOnStaging
         
         if isStaging {
@@ -73,6 +75,16 @@ extension MainParamsViewController: UITableViewDelegate, UITableViewDataSource {
             else {
                 IHProgressHUD.showInfowithStatus("pas de token")
             }
+            guard let token = UserDefaults.token else {return}
+            let alertController = UIAlertController(title: "Bonjour testeur", message: "Choisi un jour", preferredStyle: .alert)
+            // Créer les actions pour les boutons
+            let action1 = UIAlertAction(title: "Copier token", style: .default) { _ in
+                UIPasteboard.general.string = token
+
+            }
+            alertController.addAction(action1)
+            present(alertController, animated: true, completion: nil)
+
         }
     }
 }
