@@ -141,6 +141,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func getTopViewController() -> UIViewController? {
+        if var topController = UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            return topController
+        }
+        return nil
+    }
 
     
     func handleNotification(userInfos:[String:Any]?, isFromBackground:Bool, isFromStart:Bool) {
@@ -154,23 +164,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let stage = extras["stage"] as? String {
             if stage == "h1" {
                 DeepLinkManager.showWelcomeOne()
-                return
+                
             }
             if stage == "j2" {
                 DeepLinkManager.showWelcomeTwo()
-                return
+                
             }
             if stage == "j5" {
                 DeepLinkManager.showWelcomeThree()
-                return
+                
             }
             if stage == "j8" {
-                DeepLinkManager.showWelcomeFour()
-                return
+                let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
+                if let vc = sb.instantiateViewController(withIdentifier: "welcomefourvc") as? WelcomeFourViewController {
+                    let vct = getTopViewController()
+                    vct!.present(vc,animated: true)
+                }
+                
             }
             if stage == "j11" {
                 DeepLinkManager.showWelcomeFive()
-                return
+                
             }
             
         }
