@@ -161,30 +161,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let userInfos = userInfos,let content = userInfos["content"] as? [String:Any], let extras = content["extra"] as? [String:Any],let instance = extras["instance"] as? String, let instanceId = extras["instance_id"] as? Int  else {
             return
         }
+        
         if let stage = extras["stage"] as? String {
             if stage == "h1" {
                 DeepLinkManager.showWelcomeOne()
-                
+                return
             }
             if stage == "j2" {
                 DeepLinkManager.showWelcomeTwo()
-                
+                return
             }
             if stage == "j5" {
                 DeepLinkManager.showWelcomeThree()
-                
+                return
             }
             if stage == "j8" {
-                let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
-                if let vc = sb.instantiateViewController(withIdentifier: "welcomefourvc") as? WelcomeFourViewController {
-                    let vct = getTopViewController()
-                    vct!.present(vc,animated: true)
-                }
-                
+                DeepLinkManager.showWelcomeFour()
+                return
             }
             if stage == "j11" {
                 DeepLinkManager.showWelcomeFive()
-                
+                return
             }
             
         }

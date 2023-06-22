@@ -43,6 +43,21 @@ struct DeepLinkManager {
                 showOuting(id: notification.instanceId)
             }
         case .none:
+            if notification.stage == "h1" {
+                showWelcomeOne()
+            }
+            if notification.stage == "j2" {
+                showWelcomeTwo()
+            }
+            if notification.stage == "j5" {
+                showWelcomeThree()
+            }
+            if notification.stage == "j8" {
+                showWelcomeFour()
+            }
+            if notification.stage == "j11" {
+                showWelcomeFive()
+            }
             break
         }
     }
