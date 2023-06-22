@@ -85,9 +85,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func handleAppLaunchFromNotificationCenter(userInfos:[String:Any]) {
+        AppState.checkNotifcationsAndGoMainScreen()
         self.handleNotification(userInfos: userInfos, isFromBackground: true, isFromStart: true)
         
-        AppState.checkNotifcationsAndGoMainScreen()
     }
     
     
@@ -174,30 +174,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Afficher l'alerte
         getTopViewController()!.present(alertController, animated: true, completion: nil)
         
-//        if let stage = extras["stage"] as? String {
-//            if stage == "h1" {
-//                DeepLinkManager.showWelcomeOne()
-//                return
-//            }
-//            if stage == "j2" {
-//                DeepLinkManager.showWelcomeTwo()
-//                return
-//            }
-//            if stage == "j5" {
-//                DeepLinkManager.showWelcomeThree()
-//                return
-//            }
-//            if stage == "j8" {
-//                DeepLinkManager.showWelcomeFour()
-//                return
-//            }
-//            if stage == "j11" {
-//                DeepLinkManager.showWelcomeFive()
-//                return
-//            }
-//            
-//        }
-//        
+        if let stage = extras["stage"] as? String {
+            if stage == "h1" {
+                DeepLinkManager.showWelcomeOne()
+                return
+            }
+            if stage == "j2" {
+                DeepLinkManager.showWelcomeTwo()
+                return
+            }
+            if stage == "j5" {
+                DeepLinkManager.showWelcomeThree()
+                return
+            }
+            if stage == "j8" {
+                DeepLinkManager.showWelcomeFour()
+                return
+            }
+            if stage == "j11" {
+                DeepLinkManager.showWelcomeFive()
+                return
+            }
+            
+        }
+        
         
         Logger.print("***** extras : \(extras) ")
         Logger.print("***** Instance : \(instance) - id : \(instanceId)")
