@@ -85,8 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func handleAppLaunchFromNotificationCenter(userInfos:[String:Any]) {
-        AppState.checkNotifcationsAndGoMainScreen()
         self.handleNotification(userInfos: userInfos, isFromBackground: true, isFromStart: true)
+        AppState.checkNotifcationsAndGoMainScreen()
         
     }
     
