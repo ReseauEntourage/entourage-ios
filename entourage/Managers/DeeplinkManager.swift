@@ -246,7 +246,9 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomefourvc") as? WelcomeFourViewController {
-                AppState.getTopViewController()!.present(vc,animated: true)
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    currentVc.present(vc, animated: true)
+                }
             }
         }
         
@@ -255,7 +257,9 @@ struct DeepLinkManager {
         DispatchQueue.main.async {
             let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomefivevc") as? WelcomeFiveViewController {
-                AppState.getTopViewController()!.present(vc,animated: true)
+                if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                    currentVc.present(vc, animated: true)
+                }
             }
         }
     }
