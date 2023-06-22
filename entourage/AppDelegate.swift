@@ -158,23 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Logger.print("***** isFrom BG : \(isFromBackground)")
         Logger.print("***** isFrom Start : \(isFromStart)")
         
-        guard let userInfos = userInfos,let content = userInfos["content"] as? [String:Any], let extras = content["extra"] as? [String:Any],let instance = extras["instance"] as? String, let instanceId = extras["instance_id"] as? Int  else {
-            return
-        }
-        
-        let alertController = UIAlertController(title: "Bonjour testeur", message: extras["stage"] as! String, preferredStyle: .alert)
-        // Créer les actions pour les boutons
-        let action1 = UIAlertAction(title: "Welcome H1", style: .default) { _ in
-            
-        }
-
-        // Ajouter les actions à l'alerte
-        alertController.addAction(action1)
-
-        // Afficher l'alerte
-        getTopViewController()!.present(alertController, animated: true, completion: nil)
-        
-        if let stage = extras["stage"] as? String {
+        if let userInfos = userInfos, let content = userInfos["content"] as? [String:Any],let extras = content["extra"] as? [String:Any], let stage = extras["stage"] as? String {
             if stage == "h1" {
                 DeepLinkManager.showWelcomeOne()
                 return
@@ -196,6 +180,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
             
+        }
+        
+        guard let userInfos = userInfos,let content = userInfos["content"] as? [String:Any], let extras = content["extra"] as? [String:Any],let instance = extras["instance"] as? String, let instanceId = extras["instance_id"] as? Int  else {
+            return
         }
         
         
