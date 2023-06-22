@@ -244,11 +244,11 @@ struct DeepLinkManager {
     }
     static func showWelcomeFour(){
         DispatchQueue.main.async {
+            let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
             if let vc = sb.instantiateViewController(withIdentifier: "welcomefourvc") as? WelcomeFourViewController {
                 AppState.getTopViewController()!.present(vc,animated: true)
             }
         }
-        let sb = UIStoryboard.init(name: StoryboardName.main, bundle: nil)
         
     }
     static func showWelcomeFive(){
