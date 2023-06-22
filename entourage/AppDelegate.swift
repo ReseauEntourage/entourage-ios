@@ -151,8 +151,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let userInfos = userInfos,let content = userInfos["content"] as? [String:Any], let extras = content["extra"] as? [String:Any],let instance = extras["instance"] as? String, let instanceId = extras["instance_id"] as? Int  else {
             return
         }
-        if let stage = extras["stage"] as? [String:Any] {
-            print("eho stage ",stage)
+        if let stage = extras["stage"] as? String {
+            if stage == "h1" {
+                DeepLinkManager.showWelcomeOne()
+            }
+            if stage == "j2" {
+                DeepLinkManager.showWelcomeTwo()
+            }
+            if stage == "j5" {
+                DeepLinkManager.showWelcomeThree()
+            }
+            if stage == "j8" {
+                DeepLinkManager.showWelcomeFour()
+            }
+            if stage == "j11" {
+                DeepLinkManager.showWelcomeFive()
+            }
+            
         }
         
         

@@ -205,6 +205,55 @@ struct DeepLinkManager {
             AppState.getTopViewController()?.present(navVc, animated: true)
         }
     }
+    
+    static func showWelcomeOne(){
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "welcomeonevc") as? WelcomeViewController {
+            if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                vc.delegate = currentVc.self
+                currentVc.present(vc, animated: true)
+            }
+            
+        }
+    }
+    static func showWelcomeTwo(){
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "welcometwovc") as? WelcmeTwoViewController {
+            if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                vc.delegate = currentVc.self
+                currentVc.present(vc, animated: true)
+            }
+            
+        }
+    }
+    static func showWelcomeThree(){
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "welcomethreevc") as? WelcomeThreeViewController {
+            if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                vc.delegate = currentVc.self
+                currentVc.present(vc, animated: true)
+            }
+            
+        }
+    }
+    static func showWelcomeFour(){
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "welcomefourvc") as? WelcomeFourViewController {
+            if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                currentVc.present(vc, animated: true)
+            }
+            
+        }
+    }
+    static func showWelcomeFive(){
+        let sb = UIStoryboard.init(name: StoryboardName.neighborhoodMessage, bundle: nil)
+        if let vc = sb.instantiateViewController(withIdentifier: "welcomefivevc") as? WelcomeFiveViewController {
+            if let currentVc = AppState.getTopViewController() as? HomeMainViewController{
+                currentVc.present(vc, animated: true)
+            }
+            
+        }
+    }
 
     
     //TODO : display message from group
