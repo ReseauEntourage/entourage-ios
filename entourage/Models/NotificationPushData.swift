@@ -14,15 +14,13 @@ struct NotificationPushData {
     var postId:Int? = nil
     var welcome: Bool? = false
     //value = h1, j2, j8, j11
-    var stage: String? = nil
     var url: String? = nil
+    var stage:String? = nil
     
-    
-    init(instanceName:String, instanceId:Int, postId:Int?, stage:String?) {
+    init(instanceName:String, instanceId:Int, postId:Int?) {
         self.instanceType = InstanceType.getFromString(key: instanceName)
         self.instanceId = instanceId
         self.postId = postId
-        self.stage = stage
     }
 }
 

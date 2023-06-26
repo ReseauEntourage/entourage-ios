@@ -191,8 +191,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Logger.print("***** Instance : \(instance) - id : \(instanceId)")
         let postId = extras["post_id"] as? Int
         Logger.print("***** post id : \(postId) ")
-        let stage = extras["stage"]
-        let notifData = NotificationPushData(instanceName: instance, instanceId: instanceId, postId: postId, stage: stage as! String)
+        let notifData = NotificationPushData(instanceName: instance, instanceId: instanceId, postId: postId)
         
         if isFromBackground {
             DeepLinkManager.presentAction(notification: notifData)

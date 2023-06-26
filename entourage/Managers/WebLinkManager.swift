@@ -16,14 +16,16 @@ struct WebLinkManager {
     
     static func openUrl(url:URL?, openInApp:Bool, presenterViewController:UIViewController?, safariDelegate:SFSafariViewControllerDelegate? = nil) {
         if let _url = url {
-            let isOurPattern = _url.absoluteString.contains(prodURL) || _url.absoluteString.contains(prodURL2) || _url.absoluteString.contains(stagingURL) || _url.absoluteString.contains(stagingURL2)
+            var isOurPattern = _url.absoluteString.contains(prodURL) || _url.absoluteString.contains(prodURL2) || _url.absoluteString.contains(stagingURL) || _url.absoluteString.contains(stagingURL2)
+            if _url.absoluteString.contains("action"){
+               isOurPattern = false
+            }
             if isOurPattern {
                 let components = URLComponents(url: _url, resolvingAgainstBaseURL: false)!
                 UniversalLinkManager.handleUniversalLink(components:components)
                 return
             }
         }
-        
         if openInApp {
             openUrlInApp(url: url?.checkAndAddScheme, presenterViewController: presenterViewController,safariDelegate: safariDelegate)
             return
