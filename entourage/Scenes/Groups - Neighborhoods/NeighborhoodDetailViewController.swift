@@ -482,44 +482,90 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let neighborhood = self.neighborhood else {
+            return UITableViewCell()
+        }
+
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                if self.neighborhood!.isMember && !isAfterCreation {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodDetailTopMemberCell.identifier, for: indexPath) as! NeighborhoodDetailTopMemberCell
-                    cell.populateCell(neighborhood: self.neighborhood,isFollowingGroup: true, delegate: self)
-                    return cell
+                let isMember = neighborhood.isMember && !isAfterCreation
+                let identifier = isMember ? NeighborhoodDetailTopMemberCell.identifier : NeighborhoodDetailTopCell.identifier
+                let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+                if isMember, let memberCell = cell as? NeighborhoodDetailTopMemberCell {
+                    memberCell.populateCell(neighborhood: neighborhood, isFollowingGroup: true, delegate: self)
+                } else if let topCell = cell as? NeighborhoodDetailTopCell {
+                    topCell.populateCell(neighborhood: neighborhood, isFollowingGroup: false, delegate: self)
                 }
-                else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodDetailTopCell.identifier, for: indexPath) as! NeighborhoodDetailTopCell
-                    cell.populateCell(neighborhood: self.neighborhood, isFollowingGroup: false, delegate: self)
-                    return cell
+                return cell
+            } else {
+                let events = neighborhood.futureEvents ?? []
+                let identifier = events.count > 0 ? NeighborhoodEventsTableviewCell.identifier : NeighborhoodEmptyEventCell.identifier
+                let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+                if events.count > 0, let eventsCell = cell as? NeighborhoodEventsTableviewCell {
+                    eventsCell.populateCell(events: events, delegate: self)
                 }
-            }
-            else {
-                if neighborhood?.futureEvents?.count ?? 0 > 0 {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodEventsTableviewCell.identifier, for: indexPath) as! NeighborhoodEventsTableviewCell
-                    cell.populateCell(events:neighborhood!.futureEvents!, delegate: self)
-                    return cell
-                }
-                let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodEmptyEventCell.identifier, for: indexPath)
                 return cell
             }
         }
-        
-        if self.neighborhood?.messages?.count ?? 0 == 0 {
+
+        if neighborhood.messages?.count ?? 0 == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: NeighborhoodEmptyPostCell.identifier, for: indexPath)
             return cell
         }
-        
+
         if hasNewAndOldSections && indexPath.section == 2 {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
-                
                 cell.populateCell(title: "neighborhood_post_group_section_old_posts_title".localized, isTopHeader: false)
                 return cell
             }
             
-            let postmessage:PostMessage = messagesOld[indexPath.row - 1]
+            if indexPath.row - 1 < messagesOld.count {
+                let postmessage = messagesOld[indexPath.row - 1]
+                var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+                if postmessage.status == "deleted" {
+                    identifier = NeighborhoodPostDeletedCell.identifier
+                }
+                let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
+                cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
+                return cell
+            } else {
+                return UITableViewCell()
+            }
+        }
+
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier, for: indexPath) as! EventListSectionCell
+            cell.populateCell(title: "neighborhood_post_group_section_title".localized, isTopHeader: true)
+            return cell
+        }
+
+        let countToAdd = countToAdd()
+        if countToAdd == 2 && indexPath.row == 1 {
+            let titleSection = hasNewAndOldSections || self.messagesOld.count == 0 ? "neighborhood_post_group_section_new_posts_title".localized : "neighborhood_post_group_section_old_posts_title".localized
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
+            cell.populateCell(title: titleSection , isTopHeader: false)
+            return cell
+        }
+
+        if hasNewAndOldSections {
+            if indexPath.row - countToAdd < self.messagesNew.count {
+                let postmessage = self.messagesNew[indexPath.row - countToAdd]
+                var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
+                if postmessage.status == "deleted" {
+                    identifier = NeighborhoodPostDeletedCell.identifier
+                }
+                let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
+                cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
+                return cell
+            } else {
+                return UITableViewCell()
+            }
+        }
+
+        if let messages = neighborhood.messages, indexPath.row - countToAdd < messages.count {
+            let postmessage = messages[indexPath.row - countToAdd]
             var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
             if postmessage.status == "deleted" {
                 identifier = NeighborhoodPostDeletedCell.identifier
@@ -528,34 +574,8 @@ extension NeighborhoodDetailViewController: UITableViewDataSource, UITableViewDe
             cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
             return cell
         }
-        
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.neighborhoodHeaderIdentifier, for: indexPath) as! EventListSectionCell
-            cell.populateCell(title: "neighborhood_post_group_section_title".localized, isTopHeader: true)
-            return cell
-        }
-        
-        //If not member we dont' show new/old post header
-        let countToAdd = countToAdd()
-        if countToAdd == 2 {
-            if indexPath.row == 1 {
-                let titleSection = hasNewAndOldSections || self.messagesOld.count == 0 ? "neighborhood_post_group_section_new_posts_title".localized : "neighborhood_post_group_section_old_posts_title".localized
-                
-                let cell = tableView.dequeueReusableCell(withIdentifier: EventListSectionCell.identifier, for: indexPath) as! EventListSectionCell
-                cell.populateCell(title: titleSection , isTopHeader: false)
-                return cell
-            }
-        }
-        
-        let postmessage:PostMessage = hasNewAndOldSections ? self.messagesNew[indexPath.row - countToAdd] : self.neighborhood!.messages![indexPath.row - countToAdd]
-        
-        var identifier = postmessage.isPostImage ? NeighborhoodPostImageCell.identifier : NeighborhoodPostTextCell.identifier
-        if postmessage.status == "deleted" {
-            identifier = NeighborhoodPostDeletedCell.identifier
-        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! NeighborhoodPostCell
-        cell.populateCell(message: postmessage,delegate: self,currentIndexPath: indexPath, userId: postmessage.user?.sid)
-        return cell
+
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
