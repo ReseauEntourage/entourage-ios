@@ -1348,3 +1348,16 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "welcome_five_main_text_title" = "C'est fou comme le temps passe vite quand on est en bonne compagnie.\n\nMaintenant, aidez-nous à faire grandir le réseau Entourage : faites venir le vôtre !";
 "welcome_five_main_button_title" = "Partager l'application";
 
+"custom_dialog_action_title_one_contrib" = "Où en est votre contribution ?";
+"custom_dialog_action_title_one_demand" = "Où en est votre demande ?";
+"custom_dialog_action_title_two" = "Merci pour votre patience";
+"custom_dialog_action_title_three" = "Bonne nouvelle !";
+
+"custom_dialog_action_content_one_contrib" = "Votre action \"%@\" est-elle terminée ?";
+"custom_dialog_action_content_one_demande" = "%@\n\nAvez-vous trouvé ce que vous cherchiez ?";
+"custom_dialog_action_content_two_contrib" = "Astuce : Regardez les contributions. Un voisin pourrait proposer ce que vous cherchez";
+"custom_dialog_action_content_two_demande" = "Astuce : Regardez les demandes près de chez vous. Un voisin pourrait être intéressé";
+"custom_dialog_action_content_three_contrib" = "Un grand merci pour votre engagement. Nous allons pouvoir supprimer votre contribution.";
+"custom_dialog_action_content_three_demande" = "Un grand merci pour votre engagement. Nous allons pouvoir supprimer votre demande.";
+"custom_dialog_action_two_button_contrib" = "Voir les contributions";
+"custom_dialog_action_two_button_demand" = "Voir les demandes";

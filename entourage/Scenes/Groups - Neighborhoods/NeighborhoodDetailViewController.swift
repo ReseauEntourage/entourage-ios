@@ -238,14 +238,19 @@ class NeighborhoodDetailViewController: UIViewController {
             if let post = post {
                 self.neighborhood?.messages?.append(contentsOf: post)
                 self.splitMessages()
-                if self.hasNewAndOldSections {
+                let totalSections = self.numberOfSections(in: self.ui_tableview)
+                if self.hasNewAndOldSections && totalSections > 2 {
                     UIView.performWithoutAnimation {
+                        self.ui_tableview.beginUpdates()
                         self.ui_tableview.reloadSections(IndexSet(integer: 2), with: .none)
+                        self.ui_tableview.endUpdates()
                     }
                 }
-                else {
+                else if totalSections > 1 {
                     UIView.performWithoutAnimation {
+                        self.ui_tableview.beginUpdates()
                         self.ui_tableview.reloadSections(IndexSet(integer: 1), with: .none)
+                        self.ui_tableview.endUpdates()
                     }
                 }
                 self.isLoading = false
@@ -253,6 +258,7 @@ class NeighborhoodDetailViewController: UIViewController {
             //TODO: Error ?
         }
     }
+
     
     func splitMessages() {
         guard let messages = neighborhood?.messages else {
