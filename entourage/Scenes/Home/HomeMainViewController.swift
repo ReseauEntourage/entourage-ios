@@ -56,6 +56,7 @@ class HomeMainViewController: UIViewController {
         }
         
         AnalyticsLoggerManager.logEvent(name: Home_view_home)
+    
         
     }
     
