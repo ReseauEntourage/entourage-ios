@@ -56,8 +56,35 @@ class HomeMainViewController: UIViewController {
         }
         
         AnalyticsLoggerManager.logEvent(name: Home_view_home)
-    
+        //TODO here reconnect 
+        //showPopLeave(actionType: "contribution", title: "my contrib")
+        //showPopLeave(actionType: "solicitation", title: "my demand")
+        checkDateAndShowPopUp()
         
+    }
+    
+    func checkDateAndShowPopUp() {
+        let currentDate = Date()
+        var calendar = Calendar.current
+        
+        // Mettre à zéro les heures, minutes et secondes
+        calendar.timeZone = NSTimeZone(abbreviation: "UTC")! as TimeZone
+        
+        let currentDateComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
+        let currentDateWithoutTime = calendar.date(from: currentDateComponents)
+
+        var targetDateComponents = DateComponents()
+        targetDateComponents.year = 2023
+        targetDateComponents.month = 8
+        targetDateComponents.day = 3
+        let targetDateWithoutTime = calendar.date(from: targetDateComponents)
+        
+        if currentDateWithoutTime == targetDateWithoutTime {
+            if let rugbySpecialPopUpVC = self.storyboard?.instantiateViewController(withIdentifier: "RugbySpecialPopUpVC") {
+                        rugbySpecialPopUpVC.modalPresentationStyle = .overCurrentContext
+                        self.present(rugbySpecialPopUpVC, animated: true, completion: nil)
+                    }
+        }
     }
     
     func extrctURLComponent(urlString:String) -> URLComponents{
@@ -102,12 +129,43 @@ class HomeMainViewController: UIViewController {
         
     }
     
+    func showPopLeave(actionType:String, title:String) {
+        if actionType == "solicitation"{
+            let contentString = String(format: "custom_dialog_action_content_one_demande".localized, title)
+            let customAlert = MJAlertController()
+            let buttonAccept = MJAlertButtonType(title: "No".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+            let buttonCancel = MJAlertButtonType(title: "Yes".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+            
+            customAlert.configureAlert(alertTitle: "custom_dialog_action_title_one_demand".localized, message: contentString, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+            
+            customAlert.alertTagName = .None
+            customAlert.delegate = self
+            customAlert.show()
+        }else if actionType == "contribution" {
+            let contentString = String(format: "custom_dialog_action_content_one_contrib".localized, title)
+
+            let customAlert = MJAlertController()
+            let buttonAccept = MJAlertButtonType(title: "No".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
+            let buttonCancel = MJAlertButtonType(title: "Yes".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
+            
+            customAlert.configureAlert(alertTitle: "custom_dialog_action_title_one_contrib".localized, message: contentString, buttonrightType: buttonCancel, buttonLeftType: buttonAccept, titleStyle: ApplicationTheme.getFontCourantBoldOrange(), messageStyle: ApplicationTheme.getFontCourantRegularNoir(), mainviewBGColor: .white, mainviewRadius: 35)
+            
+            customAlert.alertTagName = .None
+            customAlert.delegate = self
+            customAlert.show()
+        }
+
+    }
+    
     func getHomeUser() {
         homeViewModel.getHomeDetail { isOk in
             self.updateTopView()
             
             if self.homeViewModel.userHome.congratulations.count > 0 {
                 self.addTimerShowPop()
+            }
+            if self.homeViewModel.userHome.unclosedAction != nil {
+                self.showPopLeave(actionType: (self.homeViewModel.userHome.unclosedAction?.actionType)!, title: (self.homeViewModel.userHome.unclosedAction?.title)!)
             }
         }
     }
@@ -467,6 +525,18 @@ extension HomeMainViewController:WelcomeTwoDelegate {
 }
 
 extension HomeMainViewController:WelcomeThreeDelegate{
+    
+}
+
+extension HomeMainViewController:MJAlertControllerDelegate{
+    func validateLeftButton(alertTag: MJAlertTAG) {
+        //Here launch one
+    }
+    
+    func validateRightButton(alertTag: MJAlertTAG) {
+        //Here launch two
+    }
+    
     
 }
 

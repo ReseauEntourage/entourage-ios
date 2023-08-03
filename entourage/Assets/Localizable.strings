@@ -1361,3 +1361,8 @@ Il semble qu'elle n'ait pas sa place sur le réseau,\nmais vous pouvez toujours 
 "custom_dialog_action_content_three_demande" = "Un grand merci pour votre engagement. Nous allons pouvoir supprimer votre demande.";
 "custom_dialog_action_two_button_contrib" = "Voir les contributions";
 "custom_dialog_action_two_button_demand" = "Voir les demandes";
+
+"pop_up_rugby_france_title" = "Envie de rugby ?";
+"pop_up_rugby_france_content" = "Participez avec entourage à l\'entraînement de l\'équipe de France en rejoignant le groupe Entourage Sport !";
+
+
