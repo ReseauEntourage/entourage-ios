@@ -1424,7 +1424,7 @@ Ligne 2</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CsR-4K-o89">
-                                <rect key="frame" x="20" y="295" width="374" height="320"/>
+                                <rect key="frame" x="20" y="255" width="374" height="400"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_close_orange_v8" translatesAutoresizingMaskIntoConstraints="NO" id="P0u-Zc-Q1T">
                                         <rect key="frame" x="324" y="20" width="30" height="30"/>
@@ -1434,27 +1434,20 @@ Ligne 2</string>
                                             <constraint firstAttribute="width" constant="30" id="hlf-R0-cAo"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Envie de rugby ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XEP-RO-dHx">
-                                        <rect key="frame" x="20" y="25" width="334" height="19"/>
-                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Envie de rugby ?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XEP-RO-dHx">
+                                        <rect key="frame" x="20" y="52" width="304" height="31.5"/>
+                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="25"/>
                                         <color key="textColor" name="orange_light"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participez avec Entourage à l'entraînement de l'équipe de France" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFw-ID-FVB">
-                                        <rect key="frame" x="20" y="74" width="334" height="41"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Participez avec Entourage à l'entraînement de l'équipe de France" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFw-ID-FVB">
+                                        <rect key="frame" x="20" y="291" width="334" height="41"/>
                                         <fontDescription key="fontDescription" name="NunitoSans-Regular" family="Nunito Sans" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTo-B0-YVi" customClass="LottieAnimationView" customModule="Lottie">
-                                        <rect key="frame" x="20" y="178" width="334" height="122"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="anim_rugby"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebB-us-L2b">
-                                        <rect key="frame" x="202" y="130" width="90" height="40"/>
+                                        <rect key="frame" x="202" y="340" width="90" height="40"/>
                                         <color key="backgroundColor" name="orange_app"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="KS7-cj-sPY"/>
@@ -1473,8 +1466,8 @@ Ligne 2</string>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KM-XV-l0D">
-                                        <rect key="frame" x="82" y="130" width="90" height="40"/>
-                                        <color key="backgroundColor" name="orange_light"/>
+                                        <rect key="frame" x="82" y="340" width="90" height="40"/>
+                                        <color key="backgroundColor" name="orange_medium"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="1La-hS-BJe"/>
                                             <constraint firstAttribute="height" constant="40" id="gxN-XH-g8d"/>
@@ -1483,7 +1476,7 @@ Ligne 2</string>
                                         <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Annuler">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="titleColor" name="orange_app"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cradius">
@@ -1491,24 +1484,34 @@ Ligne 2</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTo-B0-YVi" customClass="LottieAnimationView" customModule="Lottie">
+                                        <rect key="frame" x="20" y="103.5" width="334" height="179.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="anim_rugby"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="7KM-XV-l0D" firstAttribute="top" secondItem="gFw-ID-FVB" secondAttribute="bottom" constant="15" id="4uq-ge-25y"/>
-                                    <constraint firstItem="P0u-Zc-Q1T" firstAttribute="top" secondItem="CsR-4K-o89" secondAttribute="top" constant="20" id="5Gp-cU-rKR"/>
-                                    <constraint firstItem="gFw-ID-FVB" firstAttribute="top" secondItem="XEP-RO-dHx" secondAttribute="bottom" constant="30" id="Fmp-YT-x0l"/>
+                                    <constraint firstAttribute="bottom" secondItem="7KM-XV-l0D" secondAttribute="bottom" constant="20" symbolic="YES" id="22e-qV-Sou"/>
+                                    <constraint firstAttribute="trailing" secondItem="uTo-B0-YVi" secondAttribute="trailing" constant="20" symbolic="YES" id="2dZ-oe-Juz"/>
+                                    <constraint firstItem="P0u-Zc-Q1T" firstAttribute="top" secondItem="CsR-4K-o89" secondAttribute="top" constant="20" symbolic="YES" id="5Gp-cU-rKR"/>
+                                    <constraint firstItem="uTo-B0-YVi" firstAttribute="leading" secondItem="CsR-4K-o89" secondAttribute="leading" constant="20" symbolic="YES" id="81W-Iv-hIr"/>
+                                    <constraint firstAttribute="bottom" secondItem="ebB-us-L2b" secondAttribute="bottom" constant="20" symbolic="YES" id="GjC-k3-N3f"/>
                                     <constraint firstItem="uTo-B0-YVi" firstAttribute="leading" secondItem="CsR-4K-o89" secondAttribute="leading" constant="20" symbolic="YES" id="I2x-sT-MP8"/>
+                                    <constraint firstItem="gFw-ID-FVB" firstAttribute="top" secondItem="uTo-B0-YVi" secondAttribute="bottom" constant="8" symbolic="YES" id="LtK-yy-c6t"/>
+                                    <constraint firstItem="XEP-RO-dHx" firstAttribute="top" secondItem="P0u-Zc-Q1T" secondAttribute="bottom" constant="2" id="MQ5-0s-t40"/>
                                     <constraint firstAttribute="trailing" secondItem="gFw-ID-FVB" secondAttribute="trailing" constant="20" id="PVb-F3-tbf"/>
-                                    <constraint firstAttribute="height" constant="320" id="UwD-LG-ims"/>
+                                    <constraint firstItem="uTo-B0-YVi" firstAttribute="top" secondItem="XEP-RO-dHx" secondAttribute="bottom" constant="20" id="SsC-BS-RbJ"/>
+                                    <constraint firstItem="7KM-XV-l0D" firstAttribute="top" secondItem="gFw-ID-FVB" secondAttribute="bottom" constant="8" symbolic="YES" id="SuF-fC-dyC"/>
+                                    <constraint firstAttribute="height" constant="400" id="UwD-LG-ims"/>
                                     <constraint firstAttribute="trailing" secondItem="uTo-B0-YVi" secondAttribute="trailing" constant="20" symbolic="YES" id="Vvy-0Z-XlQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="XEP-RO-dHx" secondAttribute="trailing" constant="20" id="e2u-vY-o1D"/>
+                                    <constraint firstItem="P0u-Zc-Q1T" firstAttribute="leading" secondItem="XEP-RO-dHx" secondAttribute="trailing" id="bHV-Ll-pTF"/>
                                     <constraint firstItem="ebB-us-L2b" firstAttribute="centerX" secondItem="CsR-4K-o89" secondAttribute="centerX" constant="60" id="ebi-3d-0mC"/>
-                                    <constraint firstItem="uTo-B0-YVi" firstAttribute="top" secondItem="ebB-us-L2b" secondAttribute="bottom" constant="8" symbolic="YES" id="epk-x6-Ijt"/>
-                                    <constraint firstItem="XEP-RO-dHx" firstAttribute="top" secondItem="P0u-Zc-Q1T" secondAttribute="bottom" constant="-25" id="l4P-WR-uGt"/>
+                                    <constraint firstItem="ebB-us-L2b" firstAttribute="top" secondItem="gFw-ID-FVB" secondAttribute="bottom" constant="8" symbolic="YES" id="gJw-qK-rdX"/>
                                     <constraint firstItem="gFw-ID-FVB" firstAttribute="leading" secondItem="CsR-4K-o89" secondAttribute="leading" constant="20" id="luU-Xa-Qnp"/>
-                                    <constraint firstItem="ebB-us-L2b" firstAttribute="top" secondItem="gFw-ID-FVB" secondAttribute="bottom" constant="15" id="mW7-fT-cwz"/>
                                     <constraint firstItem="7KM-XV-l0D" firstAttribute="centerX" secondItem="CsR-4K-o89" secondAttribute="centerX" constant="-60" id="qh8-5o-b5c"/>
-                                    <constraint firstAttribute="bottom" secondItem="uTo-B0-YVi" secondAttribute="bottom" constant="20" symbolic="YES" id="wYy-GV-3DS"/>
                                     <constraint firstAttribute="trailing" secondItem="P0u-Zc-Q1T" secondAttribute="trailing" constant="20" id="xFd-7D-vSf"/>
                                     <constraint firstItem="XEP-RO-dHx" firstAttribute="leading" secondItem="CsR-4K-o89" secondAttribute="leading" constant="20" id="xwD-DL-xRA"/>
                                 </constraints>
@@ -1575,6 +1578,9 @@ Ligne 2</string>
         </namedColor>
         <namedColor name="orange_light">
             <color red="1" green="0.61176470588235299" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="orange_medium">
+            <color red="1" green="0.79607843137254897" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="orange_tres_tres_clair">
             <color red="1" green="0.9882352941176471" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
