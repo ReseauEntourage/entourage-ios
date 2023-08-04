@@ -56,7 +56,7 @@ class HomeMainViewController: UIViewController {
         }
         
         AnalyticsLoggerManager.logEvent(name: Home_view_home)
-        //TODO here reconnect 
+        //TODO here reconnect
         //showPopLeave(actionType: "contribution", title: "my contrib")
         //showPopLeave(actionType: "solicitation", title: "my demand")
         checkDateAndShowPopUp()
@@ -72,18 +72,21 @@ class HomeMainViewController: UIViewController {
         
         let currentDateComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
         let currentDateWithoutTime = calendar.date(from: currentDateComponents)
-
+        
         var targetDateComponents = DateComponents()
         targetDateComponents.year = 2023
         targetDateComponents.month = 8
-        targetDateComponents.day = 3
+        targetDateComponents.day = 4
         let targetDateWithoutTime = calendar.date(from: targetDateComponents)
         
         if currentDateWithoutTime == targetDateWithoutTime {
-            if let rugbySpecialPopUpVC = self.storyboard?.instantiateViewController(withIdentifier: "RugbySpecialPopUpVC") {
-                        rugbySpecialPopUpVC.modalPresentationStyle = .overCurrentContext
-                        self.present(rugbySpecialPopUpVC, animated: true, completion: nil)
-                    }
+            //Call to participate
+            NeighborhoodService.joinNeighborhood(groupId: 465) { user, error in
+                if let rugbySpecialPopUpVC = self.storyboard?.instantiateViewController(withIdentifier: "RugbySpecialPopUpVC") {
+                    rugbySpecialPopUpVC.modalPresentationStyle = .overCurrentContext
+                    self.present(rugbySpecialPopUpVC, animated: true, completion: nil)
+                }
+            }
         }
     }
     
@@ -143,7 +146,7 @@ class HomeMainViewController: UIViewController {
             customAlert.show()
         }else if actionType == "contribution" {
             let contentString = String(format: "custom_dialog_action_content_one_contrib".localized, title)
-
+            
             let customAlert = MJAlertController()
             let buttonAccept = MJAlertButtonType(title: "No".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrangeLight, cornerRadius: -1)
             let buttonCancel = MJAlertButtonType(title: "Yes".localized, titleStyle: ApplicationTheme.getFontCourantBoldBlanc(), bgColor: .appOrange, cornerRadius: -1)
@@ -154,7 +157,7 @@ class HomeMainViewController: UIViewController {
             customAlert.delegate = self
             customAlert.show()
         }
-
+        
     }
     
     func getHomeUser() {
@@ -200,19 +203,19 @@ class HomeMainViewController: UIViewController {
         homeVC.configureCongrat(actions: homeViewModel.userHome.congratulations, parentVC: self.tabBarController)
         homeVC.show()
     }
-
+    
     
     func updateTopView() {
         ui_username.text = String.init(format: "home_title_welcome".localized, homeViewModel.userHome.displayName)
         
-////        ui_username.isUserInteractionEnabled = true
-////        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
-////        ui_username.addGestureRecognizer(tapGestureRecognizer)
-//        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
-//            ui_username.isUserInteractionEnabled = true
-//            ui_username.addGestureRecognizer(longPressRecognizer)
-//            ui_view_user.isUserInteractionEnabled = true
-//            ui_view_user.addGestureRecognizer(longPressRecognizer)
+        ////        ui_username.isUserInteractionEnabled = true
+        ////        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
+        ////        ui_username.addGestureRecognizer(tapGestureRecognizer)
+        //        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(testWelcomeNotif))
+        //            ui_username.isUserInteractionEnabled = true
+        //            ui_username.addGestureRecognizer(longPressRecognizer)
+        //            ui_view_user.isUserInteractionEnabled = true
+        //            ui_view_user.addGestureRecognizer(longPressRecognizer)
         
         
         if let _urlstr = homeViewModel.userHome.avatarURL,  let url = URL(string: _urlstr) {

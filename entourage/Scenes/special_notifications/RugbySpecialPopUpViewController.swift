@@ -49,7 +49,7 @@ class RugbySpecialPopUpViewController:UIViewController{
         self.dismiss(animated: true) {
             let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
             if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
-                vc.hashedNeighborhoodId = "190790afcb18"
+                vc.neighborhoodId = 465
                 AppState.getTopViewController()?.navigationController?.present(nav, animated: true)
             }
         }
