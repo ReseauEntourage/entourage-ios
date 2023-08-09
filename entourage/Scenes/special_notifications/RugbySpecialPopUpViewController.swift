@@ -6,26 +6,19 @@
 //
 
 import Foundation
-import Lottie
 
 class RugbySpecialPopUpViewController:UIViewController{
     
     @IBOutlet weak var ui_label_title: UILabel!
     @IBOutlet weak var ui_label_content: UILabel!
     @IBOutlet weak var ui_image_cross: UIImageView!
-    @IBOutlet weak var lottieView: LottieAnimationView!
     @IBOutlet weak var btn_cancel: UIButton!
     @IBOutlet weak var btn_join: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         ui_label_title.text = "pop_up_rugby_france_title".localized
         ui_label_content.text = "pop_up_rugby_france_content".localized
-        
-        lottieView.contentMode = .scaleAspectFit
-        lottieView.loopMode = .loop
-        lottieView.animationSpeed = 0.5
-        lottieView.play()
-        
         ui_image_cross.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCrossClicked(tapGestureRecognizer:)))
         ui_image_cross.addGestureRecognizer(tapGestureRecognizer)
@@ -49,7 +42,7 @@ class RugbySpecialPopUpViewController:UIViewController{
         self.dismiss(animated: true) {
             let sb = UIStoryboard.init(name: StoryboardName.neighborhood, bundle: nil)
             if let nav = sb.instantiateViewController(withIdentifier: "neighborhoodDetailNav") as? UINavigationController, let vc = nav.topViewController as? NeighborhoodDetailViewController {
-                vc.neighborhoodId = 465
+                vc.neighborhoodId = 44
                 AppState.getTopViewController()?.navigationController?.present(nav, animated: true)
             }
         }
