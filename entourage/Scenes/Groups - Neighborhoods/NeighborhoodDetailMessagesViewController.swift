@@ -253,7 +253,7 @@ extension NeighborhoodDetailMessagesViewController: UITableViewDataSource, UITab
             
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! DetailMessageTopPostCell
             cell.populateCell(message: postMessage!)
-            
+            cell.delegate = self
             return cell
         }
         
@@ -372,5 +372,11 @@ extension NeighborhoodDetailMessagesViewController:GroupDetailDelegate {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
             alertVC.show()
         }
+    }
+}
+
+extension NeighborhoodDetailMessagesViewController:DetailMessageTopCellDelegate{
+    func showWebView(url: URL) {
+        WebLinkManager.openUrl(url: url, openInApp: true, presenterViewController: self)
     }
 }

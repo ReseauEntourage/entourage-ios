@@ -6,6 +6,7 @@ target 'entourage' do
   use_frameworks!
 
   pod 'GooglePlaces'
+
 end
 
  post_install do |installer|

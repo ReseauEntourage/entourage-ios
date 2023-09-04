@@ -1852,14 +1852,14 @@
 			mainGroup = 025D870D278DD33600909101;
 			packageReferences = (
 				02DB3BC627A14DFC004732C9 /* XCRemoteSwiftPackageReference "Nantes" */,
-				0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */,
+				0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */,
+				0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */,
 				029E307D27DB60D300B12357 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				02E0098A27E37B1100BB23CA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */,
+				020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */,
 				02F8276F2967287B000CA150 /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
-				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */,
+				02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */,
 			);
 			productRefGroup = 025D8717278DD33600909101 /* Products */;
 			projectDirPath = "";
@@ -2700,7 +2700,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+		020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
@@ -2708,7 +2708,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */ = {
+		0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Swiftify-Corp/IHProgressHUD.git";
 			requirement = {
@@ -2716,7 +2716,7 @@
 				minimumVersion = 0.1.8;
 			};
 		};
-		0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
@@ -2732,7 +2732,7 @@
 				minimumVersion = 8.0.0;
 			};
 		};
-		02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -2756,7 +2756,7 @@
 				minimumVersion = 8.0.0;
 			};
 		};
-		02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */ = {
+		02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/optonaut/ActiveLabel.swift.git";
 			requirement = {
@@ -2777,22 +2777,22 @@
 /* Begin XCSwiftPackageProductDependency section */
 		020AF5DD286064AC0012AE60 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			package = 020AF5DC286064AC0012AE60 /* XCRemoteSwiftPackageReference "lottie-ios.git" */;
 			productName = Lottie;
 		};
 		0246604C27D8A49E00FE1EF8 /* IHProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD" */;
+			package = 0246604B27D8A49E00FE1EF8 /* XCRemoteSwiftPackageReference "IHProgressHUD.git" */;
 			productName = IHProgressHUD;
 		};
 		0288A8E327CD11E9008D7011 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */;
 			productName = SDWebImage;
 		};
 		0288A8E527CD11E9008D7011 /* SDWebImageMapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 0288A8E227CD11E9008D7011 /* XCRemoteSwiftPackageReference "SDWebImage.git" */;
 			productName = SDWebImageMapKit;
 		};
 		029E307E27DB60D300B12357 /* FirebaseAnalytics */ = {
@@ -2802,7 +2802,7 @@
 		};
 		02B94C3F2850D4A2006059EF /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			package = 02B94C3E2850D4A2006059EF /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */;
 			productName = IQKeyboardManagerSwift;
 		};
 		02DB3BC727A14DFC004732C9 /* Nantes */ = {
@@ -2832,7 +2832,7 @@
 		};
 		02E9D6C12970124900F9625D /* ActiveLabel */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift" */;
+			package = 02E9D6C02970124800F9625D /* XCRemoteSwiftPackageReference "ActiveLabel.swift.git" */;
 			productName = ActiveLabel;
 		};
 		02F827702967287B000CA150 /* SimpleKeychain */ = {
